@@ -1,0 +1,33 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 797f94e8346404bcb977137d69169040, type: 3}
+  m_Name: FanCardDetentProfile
+  m_EditorClassIdentifier: Assembly-CSharp::FidgetingApp.FanCard.FanCardDetentProfile
+  detentCount: 4
+  maximumRelativeAngleDegrees: 45
+  breakawayLoad: 0.067
+  handSpring: 52
+  handDamping: 8.7
+  magneticForcePeak: 7.8
+  railFriction: 0.72
+  captureSpring: 92
+  captureDamping: 13.6
+  breakawayImpulse: 0.72
+  capturePredictionSeconds: 0.055
+  visiblePreloadScale: 0.28
+  heldCapturePositionError: 0.004
+  heldCaptureSpeed: 0.065
+  heldTargetError: 0.026
+  releaseCapturePositionError: 0.0012
+  releaseCaptureSpeed: 0.018
+  maximumSubstepSeconds: 0.004166667
+  maximumFrameStepSeconds: 0.05

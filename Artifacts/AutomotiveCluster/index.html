@@ -1,0 +1,281 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Automotive Cluster</title>
+  <style>
+    * { box-sizing: border-box; }
+    html, body {
+      width: 100%;
+      min-height: 100%;
+      margin: 0;
+      background: #020402;
+    }
+    body {
+      display: grid;
+      place-items: start center;
+      overflow: hidden;
+      color: #fff;
+      font-family: "Chakra Petch", "Avenir Next Condensed", "Arial Narrow", sans-serif;
+    }
+    .automotive-cluster-scene {
+      position: relative;
+      width: min(1122px, 100vw);
+      aspect-ratio: 1122 / 972;
+      overflow: hidden;
+      isolation: isolate;
+      background:
+        radial-gradient(ellipse 55% 58% at 36% 36%, #1a2a10 0%, #0d1709 35%, #081007 63%, #050805 100%);
+    }
+    .automotive-cluster-scene > svg {
+      display: block;
+      width: 100%;
+      height: 100%;
+    }
+    .cluster-glass-layer {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+    }
+    .cluster-glass-panel {
+      position: absolute;
+      background:
+        linear-gradient(135deg, rgba(255, 255, 255, 0.070), rgba(255, 255, 255, 0.028) 60%, rgba(255, 255, 255, 0.045)),
+        rgba(16, 23, 17, 0.74);
+      border-top: 1px solid rgba(255, 255, 255, 0.17);
+      box-shadow:
+        inset 0 1px 0 rgba(255, 255, 255, 0.05),
+        0 18px 55px rgba(0, 0, 0, 0.32);
+      -webkit-backdrop-filter: blur(20px) saturate(112%);
+      backdrop-filter: blur(20px) saturate(112%);
+    }
+    .cluster-left-panel {
+      left: -8.4%;
+      top: 59.6%;
+      width: 24.7%;
+      height: 32.8%;
+      border-radius: 56px 32px 22px 0;
+      clip-path: polygon(0 4%, 68% 0, 100% 4%, 84% 100%, 0 100%);
+      transform: perspective(800px) rotateY(6deg) rotateZ(-0.5deg);
+    }
+    .cluster-center-panel {
+      left: 9.5%;
+      top: 59.5%;
+      width: 50.8%;
+      height: 33.4%;
+      border-radius: 36px 24px 18px 12px;
+      clip-path: polygon(11% 0, 90% 5.5%, 100% 100%, 0 89%);
+      transform: perspective(1000px) rotateX(0.8deg) rotateY(-1.5deg);
+    }
+    .cluster-right-panel {
+      left: 55.7%;
+      top: 59.5%;
+      width: 31.7%;
+      height: 33.6%;
+      border-radius: 28px 92px 20px 14px;
+      clip-path: polygon(0 2%, 27% 2%, 42% 5%, 57% 12%, 71% 24%, 100% 100%, 11% 100%);
+      transform: perspective(900px) rotateY(-2deg) rotateZ(0.3deg);
+    }
+    .cluster-map-panel {
+      position: absolute;
+      left: 87.3%;
+      top: 3.7%;
+      width: 29.7%;
+      height: 14.6%;
+      border-radius: 42px 0 0 42px;
+      background: rgba(23, 23, 23, 0.90);
+      border-top: 1px solid rgba(255, 255, 255, 0.055);
+      box-shadow: 0 20px 44px rgba(0, 0, 0, 0.30);
+      -webkit-backdrop-filter: blur(18px);
+      backdrop-filter: blur(18px);
+    }
+    @media (max-width: 700px) {
+      body { place-items: start center; }
+    }
+  </style>
+</head>
+<body>
+  <main class="automotive-cluster-scene" aria-label="Automotive digital instrument cluster showing 147 kilometers per hour, navigation and fuel information">
+    <svg viewBox="0 0 1122 972" aria-hidden="true">
+      <defs>
+        <pattern id="cluster-dot-grid" width="22" height="14" patternUnits="userSpaceOnUse">
+          <circle cx="2" cy="2" r="1.2" fill="#dfe9dc" opacity="0.11"/>
+        </pattern>
+        <linearGradient id="cluster-progress-gradient" x1="45" y1="218" x2="535" y2="167" gradientUnits="userSpaceOnUse">
+          <stop offset="0" stop-color="#7ed321"/>
+          <stop offset="0.56" stop-color="#77ed55"/>
+          <stop offset="1" stop-color="#e8f542"/>
+        </linearGradient>
+        <linearGradient id="cluster-fuel-gradient" x1="800" y1="696" x2="842" y2="835" gradientUnits="userSpaceOnUse">
+          <stop offset="0" stop-color="#f1fa36"/>
+          <stop offset="0.42" stop-color="#dce72d"/>
+          <stop offset="1" stop-color="#7c7b20" stop-opacity="0.40"/>
+        </linearGradient>
+        <linearGradient id="cluster-chrome-gradient" x1="0" y1="848" x2="0" y2="913" gradientUnits="userSpaceOnUse">
+          <stop offset="0" stop-color="#4b5250" stop-opacity="0.32"/>
+          <stop offset="0.38" stop-color="#ffffff"/>
+          <stop offset="0.57" stop-color="#dce2e2"/>
+          <stop offset="1" stop-color="#566064" stop-opacity="0.20"/>
+        </linearGradient>
+        <radialGradient id="cluster-speed-aura" cx="0.48" cy="0.35" r="0.65">
+          <stop offset="0" stop-color="#6bcb35" stop-opacity="0.15"/>
+          <stop offset="0.55" stop-color="#1f5b1c" stop-opacity="0.055"/>
+          <stop offset="1" stop-color="#071008" stop-opacity="0"/>
+        </radialGradient>
+        <filter id="cluster-progress-glow" x="-30%" y="-100%" width="160%" height="300%">
+          <feGaussianBlur stdDeviation="13" result="blur"/>
+          <feColorMatrix in="blur" type="matrix" values="0 0 0 0 0.46  0 0 0 0 0.88  0 0 0 0 0.18  0 0 0 0.72 0" result="greenBlur"/>
+          <feMerge><feMergeNode in="greenBlur"/><feMergeNode in="SourceGraphic"/></feMerge>
+        </filter>
+        <filter id="cluster-small-green-glow" x="-200%" y="-200%" width="500%" height="500%">
+          <feGaussianBlur stdDeviation="8" result="glow"/>
+          <feMerge><feMergeNode in="glow"/><feMergeNode in="SourceGraphic"/></feMerge>
+        </filter>
+        <filter id="cluster-map-softness" x="-30%" y="-30%" width="160%" height="160%">
+          <feGaussianBlur stdDeviation="1.4"/>
+        </filter>
+        <filter id="cluster-wheel-blur" x="-10%" y="-50%" width="120%" height="200%">
+          <feGaussianBlur stdDeviation="12"/>
+        </filter>
+        <filter id="cluster-chrome-softness" x="-10%" y="-150%" width="120%" height="400%">
+          <feGaussianBlur stdDeviation="3.2"/>
+        </filter>
+        <clipPath id="cluster-map-bleed">
+          <rect x="964" y="179" width="158" height="466"/>
+        </clipPath>
+      </defs>
+
+      <rect width="1122" height="972" fill="url(#cluster-speed-aura)"/>
+      <rect x="0" y="0" width="1122" height="280" fill="url(#cluster-dot-grid)" opacity="0.34"/>
+      <path d="M249 -4 C276 31 323 28 393 24 C477 19 524 36 578 13" fill="none" stroke="#8cae84" stroke-opacity="0.23" stroke-width="1.2"/>
+
+      <g clip-path="url(#cluster-map-bleed)" opacity="0.31" filter="url(#cluster-map-softness)">
+        <path d="M984 232 L1116 209 L1162 358 L1006 342 Z" fill="none" stroke="#728071" stroke-opacity="0.22" stroke-width="6"/>
+        <path d="M1016 215 L1055 636 M1086 210 L1041 322 L1122 324 M988 338 L1146 337 M1028 435 L1170 429 M1042 508 L1165 489 M1004 551 L1154 604" fill="none" stroke="#a3afa0" stroke-opacity="0.18" stroke-width="7"/>
+        <path d="M1036 226 L1064 310 L1127 305 L1104 216 M1007 349 L1037 430 L1117 419 L1087 348 M1062 447 L1098 548 L1161 534" fill="none" stroke="#c4cbc2" stroke-opacity="0.18" stroke-width="5"/>
+        <path d="M991 264 L1156 260 M1001 471 L1164 458 M1018 585 L1137 567" fill="none" stroke="#1a201b" stroke-width="17"/>
+      </g>
+
+      <path d="M20 246 C205 136 558 104 807 245" fill="none" stroke="#b9c2ba" stroke-opacity="0.30" stroke-width="7"/>
+      <path d="M20 246 C205 136 558 104 807 245" fill="none" stroke="#f4f7f3" stroke-opacity="0.92" stroke-width="2.2"/>
+      <path d="M55 224 C245 139 560 113 772 225" fill="none" pathLength="100" stroke="url(#cluster-progress-gradient)" stroke-width="17" stroke-linecap="round" stroke-dasharray="61.5 100" filter="url(#cluster-progress-glow)"/>
+      <path d="M55 224 C245 139 560 113 772 225" fill="none" pathLength="100" stroke="url(#cluster-progress-gradient)" stroke-width="10" stroke-linecap="round" stroke-dasharray="61.5 100"/>
+      <g id="cluster-gauge-ticks" stroke="#f6f8f4" stroke-linecap="round"></g>
+
+      <g fill="#f5f6f3" font-family="Avenir Next Condensed, Arial Narrow, sans-serif" font-style="italic" font-weight="400" font-size="42" text-anchor="middle">
+        <text x="72" y="307" opacity="0.66">120</text>
+        <text x="237" y="261">130</text>
+        <text x="414" y="241">140</text>
+        <text x="588" y="258" opacity="0.91">150</text>
+        <text x="750" y="308" opacity="0.84">160</text>
+      </g>
+
+      <g transform="translate(404 424) skewX(-7)">
+        <text x="0" y="0" fill="#fbfcfa" text-anchor="middle" font-family="Avenir Next Condensed, Arial Narrow, sans-serif" font-size="126" font-style="italic" font-weight="700" letter-spacing="-7">147</text>
+      </g>
+      <text x="404" y="503" fill="#d4d8d2" text-anchor="middle" font-family="Avenir Next Condensed, Arial Narrow, sans-serif" font-size="35" font-style="italic" font-weight="400" letter-spacing="2">Km/h</text>
+
+      <foreignObject x="0" y="0" width="1122" height="972">
+        <div xmlns="http://www.w3.org/1999/xhtml" class="cluster-glass-layer">
+          <div class="cluster-glass-panel cluster-left-panel"></div>
+          <div class="cluster-glass-panel cluster-center-panel"></div>
+          <div class="cluster-glass-panel cluster-right-panel"></div>
+          <div class="cluster-map-panel"></div>
+        </div>
+      </foreignObject>
+
+      <g font-family="Avenir Next Condensed, Arial Narrow, sans-serif">
+        <text x="1051" y="95" fill="#f4f5f3" font-size="29" font-style="italic" font-weight="500">Mada...</text>
+        <line x1="1029" y1="142" x2="1162" y2="142" stroke="#dfff1f" stroke-opacity="0.35" stroke-width="21" stroke-linecap="round"/>
+        <line x1="1029" y1="142" x2="1162" y2="142" stroke="#e7fb20" stroke-width="8" stroke-linecap="round"/>
+      </g>
+
+      <g transform="translate(241 661)" fill="#ffffff">
+        <path d="M0 35 C7 18 20 11 33 11 L33 0 L49 16 L33 34 L33 23 C19 22 10 27 0 35 Z"/>
+      </g>
+      <text x="319" y="676" fill="#ffffff" font-family="Avenir Next Condensed, Arial Narrow, sans-serif" font-size="27" font-weight="700">500m</text>
+      <text x="319" y="708" fill="#c6cac5" font-family="Avenir Next Condensed, Arial Narrow, sans-serif" font-size="18" font-style="italic" font-weight="400" letter-spacing="0.1">Turn Right On Winston Alley</text>
+      <line x1="195" y1="758" x2="580" y2="758" stroke="#879087" stroke-opacity="0.18" stroke-width="2"/>
+
+      <g transform="translate(307 803)" fill="none" stroke="#808680" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" opacity="0.67">
+        <path d="M16 3 C28 3 34 9 34 18 C34 27 28 33 16 33 Z"/>
+        <path d="M11 5 L3 8 M11 12 L1 14 M11 20 L1 20 M11 27 L3 25 M11 33 L5 30"/>
+      </g>
+      <g transform="translate(406 803)" fill="none" stroke="#83ee52" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" filter="url(#cluster-small-green-glow)">
+        <path d="M16 3 C29 3 35 9 35 18 C35 27 29 33 16 33 Z"/>
+        <path d="M11 5 L2 5 M11 12 L0 12 M11 19 L0 19 M11 26 L0 26 M11 33 L2 33"/>
+      </g>
+
+      <g opacity="0.35" filter="url(#cluster-chrome-softness)">
+        <path d="M-45 718 C-10 681 14 665 56 660" fill="none" stroke="#d9dfdb" stroke-width="13"/>
+      </g>
+      <path d="M-8 792 C-5 751 9 709 40 687" fill="none" stroke="#dce2dd" stroke-opacity="0.56" stroke-width="9" filter="url(#cluster-chrome-softness)"/>
+
+      <path d="M731 667 C787 674 831 709 842 756 C850 790 849 817 839 839" fill="none" stroke="#4b514c" stroke-opacity="0.28" stroke-width="20"/>
+      <path d="M806 690 C834 717 846 749 848 783 C849 805 845 823 838 837" fill="none" stroke="url(#cluster-fuel-gradient)" stroke-width="18" stroke-linecap="butt" filter="url(#cluster-small-green-glow)"/>
+      <line x1="789" y1="708" x2="808" y2="685" stroke="#ffffff" stroke-width="8" stroke-linecap="round"/>
+
+      <g transform="translate(744 752)" fill="#e8eae7">
+        <path fill-rule="evenodd" d="M4 1 H23 C26 1 28 3 28 6 V29 H32 V34 H0 V29 H3 V6 C3 3 4 1 4 1 Z M8 6 V15 H22 V6 Z M9 22 H21 V27 H9 Z"/>
+        <path d="M27 9 C35 10 36 14 36 19 V26 H32 V19 C32 16 31 15 27 14 Z"/>
+        <rect x="34" y="23" width="5" height="8" rx="1"/>
+      </g>
+
+      <g opacity="0.9">
+        <ellipse cx="1123" cy="740" rx="42" ry="46" fill="#181918"/>
+        <ellipse cx="1125" cy="740" rx="10" ry="13" fill="#fafbf9"/>
+      </g>
+
+      <g filter="url(#cluster-wheel-blur)">
+        <path d="M-80 884 C120 824 356 843 533 891 C684 932 864 894 1201 891 L1201 1055 L-80 1055 Z" fill="#020507"/>
+        <path d="M-40 924 C164 870 335 887 502 930 C677 976 895 937 1170 924" fill="none" stroke="#11191e" stroke-width="56"/>
+      </g>
+      <path d="M-28 874 C176 842 365 852 541 892 C697 928 884 891 1160 886" fill="none" stroke="url(#cluster-chrome-gradient)" stroke-width="17" stroke-linecap="round" filter="url(#cluster-chrome-softness)"/>
+      <path d="M-28 869 C174 842 362 850 540 889 C695 923 884 887 1161 883" fill="none" stroke="#f7faf9" stroke-opacity="0.72" stroke-width="4" stroke-linecap="round"/>
+    </svg>
+  </main>
+  <script>
+    (() => {
+      const tickGroup = document.getElementById('cluster-gauge-ticks');
+      const svgNamespace = 'http://www.w3.org/2000/svg';
+      const points = [
+        { x: 56, y: 224 },
+        { x: 247, y: 132 },
+        { x: 593, y: 118 },
+        { x: 771, y: 225 }
+      ];
+      const cubic = (a, b, c, d, t) => {
+        const u = 1 - t;
+        return u * u * u * a + 3 * u * u * t * b + 3 * u * t * t * c + t * t * t * d;
+      };
+      const derivative = (a, b, c, d, t) => {
+        const u = 1 - t;
+        return 3 * u * u * (b - a) + 6 * u * t * (c - b) + 3 * t * t * (d - c);
+      };
+
+      for (let index = 0; index <= 20; index += 1) {
+        const t = index / 20;
+        const x = cubic(points[0].x, points[1].x, points[2].x, points[3].x, t);
+        const y = cubic(points[0].y, points[1].y, points[2].y, points[3].y, t);
+        const dx = derivative(points[0].x, points[1].x, points[2].x, points[3].x, t);
+        const dy = derivative(points[0].y, points[1].y, points[2].y, points[3].y, t);
+        const length = Math.hypot(dx, dy);
+        const normalX = -dy / length;
+        const normalY = dx / length;
+        const major = index % 5 === 0;
+        const outward = major ? 7 : 4;
+        const inward = major ? 38 : 16;
+        const line = document.createElementNS(svgNamespace, 'line');
+        line.setAttribute('x1', (x - normalX * outward).toFixed(2));
+        line.setAttribute('y1', (y - normalY * outward).toFixed(2));
+        line.setAttribute('x2', (x + normalX * inward).toFixed(2));
+        line.setAttribute('y2', (y + normalY * inward).toFixed(2));
+        line.setAttribute('stroke-width', major ? '6' : '2');
+        line.setAttribute('opacity', major ? '1' : '0.86');
+        tickGroup.appendChild(line);
+      }
+    })();
+  </script>
+</body>
+</html>

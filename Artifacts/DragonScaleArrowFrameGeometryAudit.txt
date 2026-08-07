@@ -1,0 +1,30 @@
+Dragon Scale EDC arrow-frame geometry audit
+Generated: 2026-08-07
+
+RotorBody_OnePiece
+vertices: 4164
+edges: 12492
+faces: 8328
+boundary edges: 0
+non-manifold edges: 0
+zero-area faces (<= 1e-10 m^2): 0
+
+Export statistics
+planar diameter: 0.08403843268752098 m
+assembled depth: 0.01688000001013279 m
+estimated triangles: 36028
+visual meshes: 29
+
+Polish pass
+outer profile samples per half: 40
+carrier/blade construction: exact boolean union with 0.5 mm root-depth overlap
+internal intersecting faces at blade roots: removed
+
+Circular polish pass
+primary visible circles (finger caps, brushed faces, crown): 128 radial samples
+accent rings: 96 radial samples
+secondary bearing/washer rings: 72 radial samples
+primary ring bevel: 3 segments
+finger-cap bevel: 4 segments
+all visible circular meshes: smooth-by-angle plus area-weighted normals
+Unity radial cap normal strength: 0.10 (previously 0.18)

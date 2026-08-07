@@ -1,0 +1,39 @@
+{
+  "error" : {
+    "code" : 2,
+    "domain" : "ArgumentParserInternal.ExitCode",
+    "userInfo" : {
+
+    }
+  },
+  "info" : {
+    "arguments" : [
+      "devicectl",
+      "device",
+      "process",
+      "launch",
+      "--device",
+      "556E86BF-7295-5622-AA58-02DF84A8E93F",
+      "--environment-variables",
+      "{\"EDC_OPT_TIER\":\"750000\",\"EDC_OPT_SHORT_AUDIT\":\"1\"}",
+      "--terminate-existing",
+      "--console",
+      "--timeout",
+      "85",
+      "--log-output",
+      "/Users/jiawei.zhou/Documents/Fidgeting app/Artifacts/EDC/OptimizationValidation/iPhoneAB-20260805-unlocked/750000-console.log",
+      "--json-output",
+      "/Users/jiawei.zhou/Documents/Fidgeting app/Artifacts/EDC/OptimizationValidation/iPhoneAB-20260805-unlocked/750000-launch.json",
+      "com.jiaweizhou.fidgetspinner.codex",
+      "--edc-opt-short-audit"
+    ],
+    "commandType" : "devicectl.device.process.launch",
+    "details" : "Exceeded command timeout",
+    "environment" : {
+      "TERM" : "dumb"
+    },
+    "jsonVersion" : 3,
+    "outcome" : "timeout",
+    "version" : "518.27"
+  }
+}

@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="utf-8"?>
+<test-run id="2" testcasecount="17" result="Passed" total="17" passed="17" failed="0" inconclusive="0" skipped="0" asserts="0" engine-version="3.5.0.0" clr-version="4.0.30319.42000" start-time="2026-08-07 10:48:37Z" end-time="2026-08-07 10:48:43Z" duration="6.2830453">
+  <test-suite type="TestSuite" id="1000" name="Fidget Spinner" fullname="Fidget Spinner" runstate="Runnable" testcasecount="175" result="Passed" start-time="2026-08-07 10:48:37Z" end-time="2026-08-07 10:48:43Z" duration="6.283045" total="17" passed="17" failed="0" inconclusive="0" skipped="0" asserts="0">
+    <properties>
+      <property name="platform" value="EditMode" />
+    </properties>
+    <test-suite type="Assembly" id="1195" name="Assembly-CSharp-Editor.dll" fullname="/Users/jiawei.zhou/Documents/Fidgeting app/unity/FidgetingApp/Library/ScriptAssemblies/Assembly-CSharp-Editor.dll" runstate="Runnable" testcasecount="175" result="Passed" start-time="2026-08-07 10:48:37Z" end-time="2026-08-07 10:48:43Z" duration="6.275840" total="17" passed="17" failed="0" inconclusive="0" skipped="0" asserts="0">
+      <properties>
+        <property name="_PID" value="59895" />
+        <property name="_APPDOMAIN" value="Unity Child Domain" />
+        <property name="platform" value="EditMode" />
+        <property name="EditorOnly" value="True" />
+      </properties>
+      <test-suite type="TestSuite" id="1196" name="ThreeBladeEDC" fullname="ThreeBladeEDC" runstate="Runnable" testcasecount="62" result="Passed" start-time="2026-08-07 10:48:37Z" end-time="2026-08-07 10:48:43Z" duration="6.273878" total="17" passed="17" failed="0" inconclusive="0" skipped="0" asserts="0">
+        <properties />
+        <test-suite type="TestSuite" id="1197" name="Tests" fullname="ThreeBladeEDC.Tests" runstate="Runnable" testcasecount="62" result="Passed" start-time="2026-08-07 10:48:37Z" end-time="2026-08-07 10:48:43Z" duration="6.273337" total="17" passed="17" failed="0" inconclusive="0" skipped="0" asserts="0">
+          <properties />
+          <test-suite type="TestSuite" id="1198" name="Editor" fullname="ThreeBladeEDC.Tests.Editor" runstate="Runnable" testcasecount="62" result="Passed" start-time="2026-08-07 10:48:37Z" end-time="2026-08-07 10:48:43Z" duration="6.273065" total="17" passed="17" failed="0" inconclusive="0" skipped="0" asserts="0">
+            <properties />
+            <test-suite type="TestFixture" id="1001" name="BlenderDragonScaleAssetTests" fullname="ThreeBladeEDC.Tests.Editor.BlenderDragonScaleAssetTests" classname="ThreeBladeEDC.Tests.Editor.BlenderDragonScaleAssetTests" runstate="Runnable" testcasecount="4" result="Passed" start-time="2026-08-07 10:48:37Z" end-time="2026-08-07 10:48:38Z" duration="1.112466" total="4" passed="4" failed="0" inconclusive="0" skipped="0" asserts="0">
+              <properties />
+              <test-case id="1004" name="CollisionAsset_ContainsThreeDragonBladesAndHub" fullname="ThreeBladeEDC.Tests.Editor.BlenderDragonScaleAssetTests.CollisionAsset_ContainsThreeDragonBladesAndHub" methodname="CollisionAsset_ContainsThreeDragonBladesAndHub" classname="ThreeBladeEDC.Tests.Editor.BlenderDragonScaleAssetTests" runstate="Runnable" seed="881926677" result="Passed" start-time="2026-08-07 10:48:37Z" end-time="2026-08-07 10:48:37Z" duration="0.031860" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1002" name="DeliveryScene_UsesSelectedOnePieceDragonScaleVisualAndExplodedOrder" fullname="ThreeBladeEDC.Tests.Editor.BlenderDragonScaleAssetTests.DeliveryScene_UsesSelectedOnePieceDragonScaleVisualAndExplodedOrder" methodname="DeliveryScene_UsesSelectedOnePieceDragonScaleVisualAndExplodedOrder" classname="ThreeBladeEDC.Tests.Editor.BlenderDragonScaleAssetTests" runstate="Runnable" seed="624966852" result="Passed" start-time="2026-08-07 10:48:37Z" end-time="2026-08-07 10:48:38Z" duration="0.935069" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1005" name="FbxImporters_UseCanonicalScaleAndNoDccRuntimeData" fullname="ThreeBladeEDC.Tests.Editor.BlenderDragonScaleAssetTests.FbxImporters_UseCanonicalScaleAndNoDccRuntimeData" methodname="FbxImporters_UseCanonicalScaleAndNoDccRuntimeData" classname="ThreeBladeEDC.Tests.Editor.BlenderDragonScaleAssetTests" runstate="Runnable" seed="322121647" result="Passed" start-time="2026-08-07 10:48:38Z" end-time="2026-08-07 10:48:38Z" duration="0.002854" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1003" name="VisualAsset_PreservesReferenceHierarchyAndRealScale" fullname="ThreeBladeEDC.Tests.Editor.BlenderDragonScaleAssetTests.VisualAsset_PreservesReferenceHierarchyAndRealScale" methodname="VisualAsset_PreservesReferenceHierarchyAndRealScale" classname="ThreeBladeEDC.Tests.Editor.BlenderDragonScaleAssetTests" runstate="Runnable" seed="687270286" result="Passed" start-time="2026-08-07 10:48:38Z" end-time="2026-08-07 10:48:38Z" duration="0.123151" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+            </test-suite>
+            <test-suite type="TestFixture" id="1058" name="ThreeBladeStaticAcceptanceTests" fullname="ThreeBladeEDC.Tests.Editor.ThreeBladeStaticAcceptanceTests" classname="ThreeBladeEDC.Tests.Editor.ThreeBladeStaticAcceptanceTests" runstate="Runnable" testcasecount="13" result="Passed" start-time="2026-08-07 10:48:38Z" end-time="2026-08-07 10:48:43Z" duration="5.147022" total="13" passed="13" failed="0" inconclusive="0" skipped="0" asserts="0">
+              <properties />
+              <test-case id="1061" name="BearingAndRotor_HaveIndependentPhysicalOwnership" fullname="ThreeBladeEDC.Tests.Editor.ThreeBladeStaticAcceptanceTests.BearingAndRotor_HaveIndependentPhysicalOwnership" methodname="BearingAndRotor_HaveIndependentPhysicalOwnership" classname="ThreeBladeEDC.Tests.Editor.ThreeBladeStaticAcceptanceTests" runstate="Runnable" seed="184458373" result="Passed" start-time="2026-08-07 10:48:38Z" end-time="2026-08-07 10:48:39Z" duration="0.344610" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1067" name="BladeGroove_ReusesTheExistingPolishedSubmesh" fullname="ThreeBladeEDC.Tests.Editor.ThreeBladeStaticAcceptanceTests.BladeGroove_ReusesTheExistingPolishedSubmesh" methodname="BladeGroove_ReusesTheExistingPolishedSubmesh" classname="ThreeBladeEDC.Tests.Editor.ThreeBladeStaticAcceptanceTests" runstate="Runnable" seed="589103509" result="Passed" start-time="2026-08-07 10:48:39Z" end-time="2026-08-07 10:48:39Z" duration="0.320776" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1071" name="IOSDeliverySettings_AreDeviceReady" fullname="ThreeBladeEDC.Tests.Editor.ThreeBladeStaticAcceptanceTests.IOSDeliverySettings_AreDeviceReady" methodname="IOSDeliverySettings_AreDeviceReady" classname="ThreeBladeEDC.Tests.Editor.ThreeBladeStaticAcceptanceTests" runstate="Runnable" seed="653836772" result="Passed" start-time="2026-08-07 10:48:39Z" end-time="2026-08-07 10:48:39Z" duration="0.309851" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1063" name="MobileDelivery_UsesOneGestureOwnerSafeAreaAndStudioStage" fullname="ThreeBladeEDC.Tests.Editor.ThreeBladeStaticAcceptanceTests.MobileDelivery_UsesOneGestureOwnerSafeAreaAndStudioStage" methodname="MobileDelivery_UsesOneGestureOwnerSafeAreaAndStudioStage" classname="ThreeBladeEDC.Tests.Editor.ThreeBladeStaticAcceptanceTests" runstate="Runnable" seed="789626640" result="Passed" start-time="2026-08-07 10:48:39Z" end-time="2026-08-07 10:48:40Z" duration="0.315704" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1065" name="MobileMeshes_StayInsideTriangleBudgetAndProvidePbrChannels" fullname="ThreeBladeEDC.Tests.Editor.ThreeBladeStaticAcceptanceTests.MobileMeshes_StayInsideTriangleBudgetAndProvidePbrChannels" methodname="MobileMeshes_StayInsideTriangleBudgetAndProvidePbrChannels" classname="ThreeBladeEDC.Tests.Editor.ThreeBladeStaticAcceptanceTests" runstate="Runnable" seed="127597453" result="Passed" start-time="2026-08-07 10:48:40Z" end-time="2026-08-07 10:48:40Z" duration="0.456675" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1066" name="MobileRenderers_StayInsideDrawCallAndMaterialBudgets" fullname="ThreeBladeEDC.Tests.Editor.ThreeBladeStaticAcceptanceTests.MobileRenderers_StayInsideDrawCallAndMaterialBudgets" methodname="MobileRenderers_StayInsideDrawCallAndMaterialBudgets" classname="ThreeBladeEDC.Tests.Editor.ThreeBladeStaticAcceptanceTests" runstate="Runnable" seed="734504216" result="Passed" start-time="2026-08-07 10:48:40Z" end-time="2026-08-07 10:48:40Z" duration="0.339253" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1064" name="RatchetAudio_UsesFiveAtomicVariantsTwelveVoicesAndOneListener" fullname="ThreeBladeEDC.Tests.Editor.ThreeBladeStaticAcceptanceTests.RatchetAudio_UsesFiveAtomicVariantsTwelveVoicesAndOneListener" methodname="RatchetAudio_UsesFiveAtomicVariantsTwelveVoicesAndOneListener" classname="ThreeBladeEDC.Tests.Editor.ThreeBladeStaticAcceptanceTests" runstate="Runnable" seed="914356923" result="Passed" start-time="2026-08-07 10:48:40Z" end-time="2026-08-07 10:48:41Z" duration="0.322319" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1068" name="ReferenceProportions_CenterCapIsAboutHalfTheFrameWidth" fullname="ThreeBladeEDC.Tests.Editor.ThreeBladeStaticAcceptanceTests.ReferenceProportions_CenterCapIsAboutHalfTheFrameWidth" methodname="ReferenceProportions_CenterCapIsAboutHalfTheFrameWidth" classname="ThreeBladeEDC.Tests.Editor.ThreeBladeStaticAcceptanceTests" runstate="Runnable" seed="833976193" result="Passed" start-time="2026-08-07 10:48:41Z" end-time="2026-08-07 10:48:41Z" duration="0.439655" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1060" name="RenderMeshes_HaveFiniteGeometryAndValidTriangleIndices" fullname="ThreeBladeEDC.Tests.Editor.ThreeBladeStaticAcceptanceTests.RenderMeshes_HaveFiniteGeometryAndValidTriangleIndices" methodname="RenderMeshes_HaveFiniteGeometryAndValidTriangleIndices" classname="ThreeBladeEDC.Tests.Editor.ThreeBladeStaticAcceptanceTests" runstate="Runnable" seed="1864603304" result="Passed" start-time="2026-08-07 10:48:41Z" end-time="2026-08-07 10:48:42Z" duration="0.654473" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1059" name="Rotor_HasExactlyThreeEqualBladesAtOneHundredTwentyDegrees" fullname="ThreeBladeEDC.Tests.Editor.ThreeBladeStaticAcceptanceTests.Rotor_HasExactlyThreeEqualBladesAtOneHundredTwentyDegrees" methodname="Rotor_HasExactlyThreeEqualBladesAtOneHundredTwentyDegrees" classname="ThreeBladeEDC.Tests.Editor.ThreeBladeStaticAcceptanceTests" runstate="Runnable" seed="690705080" result="Passed" start-time="2026-08-07 10:48:42Z" end-time="2026-08-07 10:48:42Z" duration="0.321745" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1070" name="RoundMetalParts_UseDenseButMobileSafePerimeters" fullname="ThreeBladeEDC.Tests.Editor.ThreeBladeStaticAcceptanceTests.RoundMetalParts_UseDenseButMobileSafePerimeters" methodname="RoundMetalParts_UseDenseButMobileSafePerimeters" classname="ThreeBladeEDC.Tests.Editor.ThreeBladeStaticAcceptanceTests" runstate="Runnable" seed="9100820" result="Passed" start-time="2026-08-07 10:48:42Z" end-time="2026-08-07 10:48:42Z" duration="0.306306" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1069" name="TopCap_HasTwentyFourWaveTeethAndUsesSimplifiedCollision" fullname="ThreeBladeEDC.Tests.Editor.ThreeBladeStaticAcceptanceTests.TopCap_HasTwentyFourWaveTeethAndUsesSimplifiedCollision" methodname="TopCap_HasTwentyFourWaveTeethAndUsesSimplifiedCollision" classname="ThreeBladeEDC.Tests.Editor.ThreeBladeStaticAcceptanceTests" runstate="Runnable" seed="783821829" result="Passed" start-time="2026-08-07 10:48:42Z" end-time="2026-08-07 10:48:43Z" duration="0.312487" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1062" name="VisibleRotorAxisPoint_RemainsAtViewportCenterAcrossRepresentativeAngles" fullname="ThreeBladeEDC.Tests.Editor.ThreeBladeStaticAcceptanceTests.VisibleRotorAxisPoint_RemainsAtViewportCenterAcrossRepresentativeAngles" methodname="VisibleRotorAxisPoint_RemainsAtViewportCenterAcrossRepresentativeAngles" classname="ThreeBladeEDC.Tests.Editor.ThreeBladeStaticAcceptanceTests" runstate="Runnable" seed="220941109" result="Passed" start-time="2026-08-07 10:48:43Z" end-time="2026-08-07 10:48:43Z" duration="0.695689" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+                <output><![CDATA[Saving results to: /Users/jiawei.zhou/Library/Application Support/DefaultCompany/Fidget Spinner/TestResults.xml
+]]></output>
+              </test-case>
+            </test-suite>
+          </test-suite>
+        </test-suite>
+      </test-suite>
+    </test-suite>
+  </test-suite>
+</test-run>

@@ -1,0 +1,72 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6975e78f3cf304a65a8d41fd6867cf4e, type: 3}
+  m_Name: LinearMagneticDetentProfile
+  m_EditorClassIdentifier: Assembly-CSharp::FidgetingApp.EDC.LinearMagneticDetentProfile
+  detentPositionsMeters:
+  - 0
+  - 0.0136
+  - 0.0272
+  - 0.0408
+  - 0.0544
+  - 0.068
+  defaultDetentIndex: 2
+  movingMassKilograms: 0.055
+  handSpringNewtonsPerMeter: 100
+  handDampingNewtonSecondsPerMeter: 5
+  breakawayForceNewtons: 0.44
+  magneticPeakForceNewtons: 0.42
+  railFrictionNewtons: 0.085
+  railDampingNewtonSecondsPerMeter: 0.3
+  captureSpringNewtonsPerMeter: 150
+  captureDampingNewtonSecondsPerMeter: 5.8
+  maximumVisiblePreloadMeters: 0.0009
+  captureRadiusMeters: 0.004
+  captureEntrySpeedMetersPerSecond: 0.045
+  lockPositionErrorMeters: 0.0001
+  lockSpeedMetersPerSecond: 0.0045
+  releasePredictionSeconds: 0.05
+  barrierHysteresisMeters: 0.0002
+  maximumIntegrationStepSeconds: 0.004166667
+  maximumSubstepsPerFrame: 8
+  fingerVelocityHalfLifeSeconds: 0.03
+  slowIntentEnterSpeedMetersPerSecond: 0.025
+  slowIntentExitSpeedMetersPerSecond: 0.04
+  slowIntentEnterDurationSeconds: 0.08
+  slowIntentExitDurationSeconds: 0.04
+  stationarySpeedMetersPerSecond: 0.0008
+  stationaryDurationSeconds: 0.045
+  edgeGovernorStartProgress: 0.55
+  edgeGovernorEndProgress: 0.95
+  edgeGovernorStartSpeedMetersPerSecond: 0.022
+  edgeGovernorEndSpeedMetersPerSecond: 0.0055
+  edgeProbeLoads:
+  - 0.72
+  - 0.84
+  - 0.94
+  edgeProbeRearmLoad: 0.55
+  edgeProbeMinimumIntensity: 0.08
+  edgeProbeMaximumIntensity: 0.14
+  edgeProbeMinimumSharpness: 0.14
+  edgeProbeMaximumSharpness: 0.22
+  edgeProbePulseDurationSeconds: 0.012
+  detentHapticIntensity: 0.28
+  detentHapticSharpness: 0.46
+  detentHapticSecondaryIntensity: 0.14
+  detentHapticSecondarySharpness: 0.28
+  detentHapticPulseIntervalSeconds: 0.03
+  crossingRailAmplitudeMeters: 0.00018
+  crossingHeightAmplitudeMeters: 0.00005
+  crossingAngleAmplitudeDegrees: 0.08
+  crossingFrequencyHertz: 24
+  crossingHalfLifeSeconds: 0.024
+  crossingMaximumDurationSeconds: 0.08

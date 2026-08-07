@@ -1,0 +1,240 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#090b0d">
+  <title>Alloy Tone Lab · 合金声实验台</title>
+  <script>
+    if (window.location.protocol === "file:") {
+      window.location.replace("http://127.0.0.1:8877/");
+    }
+  </script>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="app-shell">
+    <header class="topbar">
+      <div>
+        <p class="kicker">FIDGETING AUDIO PROTOTYPE</p>
+        <h1>Alloy Tone Lab</h1>
+        <p class="subtitle">先从完整音效里选一条，再查看它的首段、主段、尾段并逐项微调。</p>
+      </div>
+      <div class="status-cluster" aria-live="polite">
+        <span class="status-dot" id="status-dot"></span>
+        <span id="audio-status">等待首次播放</span>
+      </div>
+    </header>
+
+    <section class="effect-picker" aria-labelledby="effect-picker-title">
+      <div class="section-heading">
+        <div>
+          <p class="section-label">STEP 1 · CHOOSE A SOUND</p>
+          <h2 id="effect-picker-title">先选一个完整音效</h2>
+        </div>
+        <p class="library-count">14 条完整音效</p>
+      </div>
+      <p class="picker-guide">每张卡都是已经组合好的完整声音。点击一张会立即试听，并在下方显示它的首段、主段和尾段。</p>
+      <div class="effect-grid" id="effect-grid" aria-live="polite"></div>
+    </section>
+
+    <main class="workspace">
+      <div class="main-column">
+        <section class="sound-stage" aria-labelledby="stage-title">
+          <div class="stage-heading">
+            <div>
+              <p class="section-label">STEP 2 · SPLIT THE SELECTED SOUND</p>
+              <h2 id="stage-title"><span id="selected-effect-name">产品合金 01</span> · 首段 → 主段 → 尾段</h2>
+              <p class="selected-effect-description" id="selected-effect-description">平衡、厚实、清脆</p>
+            </div>
+            <button type="button" class="text-button" id="reset-button">恢复这条音效</button>
+          </div>
+
+          <p class="stage-guide">点击任意一段，可以把这一段单独拿出来听。完整声音只会有第一下 Click，主段和尾段是一股连续的金属鸣响。</p>
+
+          <div class="segment-map" role="group" aria-label="声音的三个时间段">
+            <button type="button" class="segment-card segment-head" data-preview-segment="head">
+              <span class="segment-index">01 · 首段</span>
+              <strong>第一下 Click</strong>
+              <small id="head-segment-summary">55 ms · 0.0 半音</small>
+              <span class="segment-action">只听首段 ▶</span>
+            </button>
+            <button type="button" class="segment-card segment-body" data-preview-segment="body">
+              <span class="segment-index">02 · 主段</span>
+              <strong>合金鸣响</strong>
+              <small id="body-segment-summary">620 Hz · 38% 响度</small>
+              <span class="segment-action">只听主段 ▶</span>
+            </button>
+            <button type="button" class="segment-card segment-tail" data-preview-segment="tail">
+              <span class="segment-index">03 · 尾段</span>
+              <strong>自然消散</strong>
+              <small id="tail-segment-summary">1.10 秒 · 无第二下</small>
+              <span class="segment-action">只听尾段 ▶</span>
+            </button>
+          </div>
+
+          <canvas id="scope" width="1200" height="280" role="img" aria-label="当前声音的实时波形与衰减包络"></canvas>
+
+          <div class="transport" aria-label="试听控制">
+            <button type="button" class="primary-button" id="play-button">试听完整声音</button>
+            <button type="button" class="secondary-button" id="play-head-button">只听首段</button>
+            <button type="button" class="secondary-button" id="play-body-button">只听主段</button>
+            <button type="button" class="secondary-button" id="play-tail-button">只听尾段</button>
+            <button type="button" class="secondary-button" id="stop-button">停止</button>
+          </div>
+        </section>
+
+      </div>
+
+      <aside class="control-panel" aria-label="声音参数控制面板">
+        <div class="control-intro">
+          <p class="section-label">STEP 3 · ADJUST</p>
+          <h2>调整刚才选中的音效</h2>
+          <p>下面所有参数都只作用于顶部当前选中的那条声音。</p>
+        </div>
+
+        <section class="control-section">
+          <div class="control-heading">
+            <div>
+              <span class="step-number">首</span>
+              <h2>首段</h2>
+            </div>
+            <span class="control-hint">第一下 · 很短</span>
+          </div>
+
+          <p class="control-explanation">手指触发时最先听到的一下，决定声音是否清脆、扎实。它只发生一次。</p>
+
+          <label class="field-label" for="source-select">首段素材</label>
+          <select id="source-select"></select>
+
+          <label class="range-label" for="pitch-control">
+            <span>首段音高</span>
+            <output id="pitch-value">0.0 半音</output>
+          </label>
+          <input type="range" id="pitch-control" min="-12" max="12" step="0.1" value="0">
+          <div class="range-cues" aria-hidden="true"><span>更低沉</span><span>更尖亮</span></div>
+
+          <label class="range-label" for="click-length-control">
+            <span>首段长度</span>
+            <output id="click-length-value">55 ms</output>
+          </label>
+          <input type="range" id="click-length-control" min="20" max="240" step="1" value="55">
+          <div class="range-cues" aria-hidden="true"><span>短促</span><span>更有延伸</span></div>
+
+          <div class="split-controls">
+            <div>
+              <label class="range-label" for="body-control">
+                <span>厚重度</span>
+                <output id="body-value">64%</output>
+              </label>
+              <input type="range" id="body-control" min="0" max="100" step="1" value="64">
+            </div>
+            <div>
+              <label class="range-label" for="crisp-control">
+                <span>清脆度</span>
+                <output id="crisp-value">72%</output>
+              </label>
+              <input type="range" id="crisp-control" min="0" max="100" step="1" value="72">
+            </div>
+          </div>
+        </section>
+
+        <section class="control-section">
+          <div class="control-heading">
+            <div>
+              <span class="step-number">中</span>
+              <h2>主段</h2>
+            </div>
+            <span class="control-hint">紧跟首段</span>
+          </div>
+
+          <p class="control-explanation">第一下之后立刻出现的合金鸣响，决定物件像小钢件、厚合金还是黄铜。</p>
+
+          <label class="field-label" for="resonance-select">主段音色</label>
+          <select id="resonance-select"></select>
+
+          <label class="range-label" for="frequency-control">
+            <span>主段音高（频率）</span>
+            <output id="frequency-value">620 Hz</output>
+          </label>
+          <input type="range" id="frequency-control" min="160" max="1600" step="1" value="620">
+          <div class="range-cues" aria-hidden="true"><span>低 · 厚重</span><span>高 · 清亮</span></div>
+
+          <label class="range-label" for="mix-control">
+            <span>主段响度</span>
+            <output id="mix-value">38%</output>
+          </label>
+          <input type="range" id="mix-control" min="0" max="100" step="1" value="38">
+          <div class="range-cues" aria-hidden="true"><span>藏在首段后面</span><span>更明显</span></div>
+
+          <label class="range-label" for="partials-control">
+            <span>金属复杂度</span>
+            <output id="partials-value">34%</output>
+          </label>
+          <input type="range" id="partials-control" min="0" max="100" step="1" value="34">
+          <div class="range-cues" aria-hidden="true"><span>纯净</span><span>复杂金属</span></div>
+        </section>
+
+        <section class="control-section">
+          <div class="control-heading">
+            <div>
+              <span class="step-number">尾</span>
+              <h2>尾段</h2>
+            </div>
+            <span class="control-hint">只是慢慢消失</span>
+          </div>
+
+          <p class="control-explanation">尾段不是新的声音，而是主段继续衰减。这里仅决定它要拖多久，不会增加第二下 Click。</p>
+
+          <label class="range-label" for="decay-control">
+            <span>消散时长</span>
+            <output id="decay-value">1.10 s</output>
+          </label>
+          <input type="range" id="decay-control" min="0.10" max="4" step="0.01" value="1.10">
+          <div class="range-cues" aria-hidden="true"><span>短促结束</span><span>悠长消散</span></div>
+        </section>
+
+        <section class="control-section compact-section">
+          <div class="control-heading">
+            <div>
+              <span class="step-number">保存</span>
+              <h2>保存与导出</h2>
+            </div>
+          </div>
+
+          <div class="ab-grid">
+            <div class="ab-slot">
+              <span>A</span>
+              <button type="button" data-save-slot="A">保存当前</button>
+              <button type="button" data-play-slot="A" disabled>试听 A</button>
+            </div>
+            <div class="ab-slot">
+              <span>B</span>
+              <button type="button" data-save-slot="B">保存当前</button>
+              <button type="button" data-play-slot="B" disabled>试听 B</button>
+            </div>
+          </div>
+
+          <label class="range-label" for="output-control">
+            <span>输出音量</span>
+            <output id="output-value">−3.0 dB</output>
+          </label>
+          <input type="range" id="output-control" min="-18" max="0" step="0.5" value="-3">
+
+          <div class="export-row">
+            <button type="button" class="secondary-button" id="export-wav-button">导出 WAV</button>
+            <button type="button" class="secondary-button" id="export-json-button">导出参数</button>
+          </div>
+        </section>
+      </aside>
+    </main>
+
+    <footer>
+      <span>研究工具 · 不修改 Unity 运行时</span>
+      <a href="SOURCES.md" target="_blank" rel="noopener">素材与授权</a>
+    </footer>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>

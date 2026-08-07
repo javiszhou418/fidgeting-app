@@ -1,0 +1,31 @@
+{
+  "error" : {
+    "code" : 1,
+    "domain" : "com.apple.coredevice.devicectl",
+    "userInfo" : {
+      "NSLocalizedDescription" : {
+        "string" : "Timed out waiting for CoreDeviceService to fully initialize. This is likely a bug in CoreDevice. Please file a bug report against CoreDevice | X."
+      }
+    }
+  },
+  "info" : {
+    "arguments" : [
+      "devicectl",
+      "list",
+      "devices",
+      "--filter",
+      "hardwareProperties.platform == 'iOS'",
+      "--json-output",
+      "/Users/jiawei.zhou/Documents/Fidgeting app/Artifacts/EDC/OptimizationValidation/iPhoneAB-20260805-unlocked/device-list-reconnect-retry.json",
+      "--timeout",
+      "30"
+    ],
+    "commandType" : "devicectl.list.devices",
+    "environment" : {
+      "TERM" : "dumb"
+    },
+    "jsonVersion" : 3,
+    "outcome" : "failed",
+    "version" : "518.27"
+  }
+}

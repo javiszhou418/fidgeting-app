@@ -1,0 +1,107 @@
+{
+  "notes": [
+    "GPU mesh estimate assumes float32 position+normal+tangent+UV0 (48 B/vertex) and UInt32 indices (12 B/triangle); excludes alignment/driver overhead.",
+    "Boundary edge count includes intentional UV seams and manual height-cut layer boundaries, so it is comparative rather than watertightness proof.",
+    "Transient validator recalculated normals/tangents after loading each reduced topology."
+  ],
+  "tiers": [
+    {
+      "tier": "baseline_1994857",
+      "vertices": 1346692,
+      "triangles": 1994857,
+      "objMiB": 250.68,
+      "estimatedGpuMeshMiB_posNormalTangentUv32Index": 84.48,
+      "degenerateTriangles": 0,
+      "boundaryEdges_uvAndCutsIncluded": 634613,
+      "nonmanifoldEdges": 0,
+      "invalidUvScalars": 0,
+      "invalidNormalScalars": 0,
+      "maxPivotShiftMm": 0.0,
+      "maxBoundsSizeDeltaMm": 0.0
+    },
+    {
+      "tier": "qem_a1_t1000000",
+      "vertices": 733297,
+      "triangles": 1000000,
+      "objMiB": 131.89,
+      "estimatedGpuMeshMiB_posNormalTangentUv32Index": 45.01,
+      "degenerateTriangles": 3,
+      "boundaryEdges_uvAndCutsIncluded": 395793,
+      "nonmanifoldEdges": 46,
+      "invalidUvScalars": 0,
+      "invalidNormalScalars": 0,
+      "maxPivotShiftMm": 0.08769,
+      "maxBoundsSizeDeltaMm": 0.53693
+    },
+    {
+      "tier": "qem_a1_t750000",
+      "vertices": 572694,
+      "triangles": 749999,
+      "objMiB": 100.46,
+      "estimatedGpuMeshMiB_posNormalTangentUv32Index": 34.8,
+      "degenerateTriangles": 2,
+      "boundaryEdges_uvAndCutsIncluded": 325648,
+      "nonmanifoldEdges": 67,
+      "invalidUvScalars": 0,
+      "invalidNormalScalars": 0,
+      "maxPivotShiftMm": 0.1408,
+      "maxBoundsSizeDeltaMm": 0.89624
+    },
+    {
+      "tier": "qem_a1_t500000",
+      "vertices": 411300,
+      "triangles": 500000,
+      "objMiB": 68.92,
+      "estimatedGpuMeshMiB_posNormalTangentUv32Index": 24.55,
+      "degenerateTriangles": 2,
+      "boundaryEdges_uvAndCutsIncluded": 255327,
+      "nonmanifoldEdges": 43,
+      "invalidUvScalars": 0,
+      "invalidNormalScalars": 0,
+      "maxPivotShiftMm": 0.21801,
+      "maxBoundsSizeDeltaMm": 1.38072
+    },
+    {
+      "tier": "qem_a1_t350000",
+      "vertices": 314435,
+      "triangles": 349999,
+      "objMiB": 50.5,
+      "estimatedGpuMeshMiB_posNormalTangentUv32Index": 18.4,
+      "degenerateTriangles": 1,
+      "boundaryEdges_uvAndCutsIncluded": 212250,
+      "nonmanifoldEdges": 26,
+      "invalidUvScalars": 0,
+      "invalidNormalScalars": 0,
+      "maxPivotShiftMm": 0.372,
+      "maxBoundsSizeDeltaMm": 1.50262
+    },
+    {
+      "tier": "qem_a1_t250000",
+      "vertices": 246911,
+      "triangles": 250000,
+      "objMiB": 38.03,
+      "estimatedGpuMeshMiB_posNormalTangentUv32Index": 14.16,
+      "degenerateTriangles": 0,
+      "boundaryEdges_uvAndCutsIncluded": 177193,
+      "nonmanifoldEdges": 17,
+      "invalidUvScalars": 0,
+      "invalidNormalScalars": 0,
+      "maxPivotShiftMm": 0.4299,
+      "maxBoundsSizeDeltaMm": 1.59283
+    },
+    {
+      "tier": "qem_a1_t180000",
+      "vertices": 200597,
+      "triangles": 180000,
+      "objMiB": 29.62,
+      "estimatedGpuMeshMiB_posNormalTangentUv32Index": 11.24,
+      "degenerateTriangles": 0,
+      "boundaryEdges_uvAndCutsIncluded": 154650,
+      "nonmanifoldEdges": 13,
+      "invalidUvScalars": 0,
+      "invalidNormalScalars": 0,
+      "maxPivotShiftMm": 0.43561,
+      "maxBoundsSizeDeltaMm": 1.82604
+    }
+  ]
+}

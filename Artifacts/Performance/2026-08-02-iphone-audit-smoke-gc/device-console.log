@@ -1,0 +1,95 @@
+Failed to load provisioning paramter list due to error: Error Domain=com.apple.dt.CoreDeviceError Code=1002 "No provider was found." UserInfo={NSLocalizedDescription=No provider was found.}.
+`devicectl manage create` may support a reduced set of arguments.
+23:40:17  Acquired tunnel connection to device.
+23:40:17  Enabling developer disk image services.
+23:40:17  Acquired usage assertion.
+Launched application with com.jiaweizhou.fidgetspinner.codex bundle identifier.
+Waiting for the application to terminate…
+2026-08-02 23:40:19.930 FidgetSpinner[822:38392] Built from '6000.5/staging' branch, Version '6000.5.6f1 (0e0577a1a2ac)', Build type 'Release', Scripting Backend 'il2cpp'
+[UnityMemory] Configuration Parameters - Can be set up in boot.config
+    "memorysetup-temp-allocator-size-nav-mesh-worker=65536"
+    "memorysetup-temp-allocator-size-cloud-worker=32768"
+    "memorysetup-temp-allocator-size-audio-worker=65536"
+    "memorysetup-allocator-temp-initial-block-size-main=262144"
+    "memorysetup-allocator-temp-initial-block-size-worker=262144"
+2026-08-02 23:40:19.932 FidgetSpinner[822:38392] MemoryManager: Using 'Default' Allocator.
+    "memorysetup-temp-allocator-size-preload-manager=262144"
+    "memorysetup-temp-allocator-size-gfx=262144"
+    "memorysetup-temp-allocator-size-background-worker=32768"
+    "memorysetup-temp-allocator-size-job-worker=262144"
+    "memorysetup-bucket-allocator-granularity=16"
+    "memorysetup-bucket-allocator-bucket-count=8"
+    "memorysetup-bucket-allocator-block-size=4194304"
+    "memorysetup-bucket-allocator-block-count=1"
+    "memorysetup-main-allocator-block-size=16777216"
+    "memorysetup-thread-allocator-block-size=16777216"
+    "memorysetup-main-allocator-mimalloc-enabled=0"
+    "memorysetup-gfx-main-allocator-block-size=16777216"
+    "memorysetup-gfx-thread-allocator-block-size=16777216"
+    "memorysetup-cache-allocator-block-size=4194304"
+    "memorysetup-typetree-allocator-block-size=2097152"
+    "memorysetup-profiler-bucket-allocator-granularity=16"
+    "memorysetup-profiler-bucket-allocator-bucket-count=8"
+    "memorysetup-profiler-bucket-allocator-block-size=4194304"
+    "memorysetup-profiler-bucket-allocator-block-count=1"
+    "memorysetup-profiler-allocator-block-size=16777216"
+    "memorysetup-profiler-editor-allocator-block-size=1048576"
+    "memorysetup-temp-allocator-size-main=4194304"
+    "memorysetup-job-temp-allocator-block-size=2097152"
+    "memorysetup-job-temp-allocator-block-size-background=1048576"
+    "memorysetup-job-temp-allocator-reduction-small-platforms=262144"
+-> applicationDidFinishLaunching()
+-> sceneWillEnterForeground()
+CodeReloadManager initialized
+Input System module state changed to: Initialized.
+[Physics::Module] Initialized fallback backend.
+[Physics::Module] Id: 0xdecafbad
+[Subsystems] Discovering subsystems at path /private/var/containers/Bundle/Application/A58D87D9-4726-47B6-AA84-C1D2EFF6988D/FidgetSpinner.app/Data/UnitySubsystems
+GfxDevice: creating device client; kGfxThreadingModeThreaded
+Initializing Metal device caps: Apple A17 Pro GPU
+Apple GPU Family: 9
+MSL Version: 3.0
+Has Float MSAA: 1
+Has Float Filtering: 1
+ReadWrite Texture Tier: 2
+Initialize engine version: 6000.5.6f1 (0e0577a1a2ac)
+[Physics::Module] Selected backend.
+[Physics::Module] Name: PhysX
+[Physics::Module] Id: 0xf2b8ea05
+[Physics::Module] SDK Version: 4.1.2
+[Physics::Module] Integration Version: 1.0.0
+[Physics::Module] Threading Mode: Multi-Threaded
+CADisplayLink created
+Player Setting 'Adjust iOS FPS based on thermal state' is OFF
+thermalStateDidChange: Nominal
+-> applicationWillEnterForeground()
+-> sceneDidBecomeActive()
+-> applicationDidBecomeActive()
+UnloadTime: 1.740333 ms
+FIDGET_PERF_AUDIT_START {"warmupSec":10,"auditSec":1800,"targetFps":60}
+UnityEngine.DebugLogHandler:Internal_Log(LogType, LogOption, String, Object)
+UnityEngine.GameObject:Internal_AddComponentWithType(Type)
+UnityEngine.GameObject:AddComponent()
+
+Unloading 5 Unused Serialized files (Serialized files now loaded: 0)
+UnloadTime: 1.465667 ms
+Unloading 9 unused Assets to reduce memory usage. Loaded Objects now: 2991.
+Total: 0.998750 ms (FindLiveObjects: 0.059209 ms CreateObjectMapping: 0.169834 ms MarkObjects: 0.735417 ms  DeleteObjects: 0.034208 ms)
+
+-> sceneWillResignActive()
+-> applicationWillResignActive()
+FIDGET_PERF_SUMMARY {"reason":"backgrounded","passed":false,"durationPassed":false,"timingCoveragePassed":false,"gcCounterAvailable":false,"gcPassed":false,"framePassed":false,"memoryPassed":true,"thermalPassed":true,"stabilityPassed":false,"frames":413,"cpuMainAvgMs":1.831,"cpuMainP95Ms":3.007,"cpuMainP99Ms":3.390,"gpuAvgMs":2.042,"gpuP95Ms":3.024,"gpuP99Ms":5.014,"frameP95Ms":21.774,"frameP99Ms":22.778,"missedFramePercent":0.7264,"consecutiveLongFramePairs":0,"gcAllocatedAvgBytes":0.000,"gcAllocatedPeakBytes":0,"gcAllocatedNonzeroPercent":100.0000,"physPeakMiB":320.1,"physGateMiB":350.0,"availableMinMiB":3055.9,"availableHeadroomMinPercent":90.5,"unityAllocatedPeakMiB":79.4,"thermalInitial":0,"thermalMax":0,"fairLongestSec":0,"seriousSamples":0,"criticalSamples":0,"cpuLastVsFirstPercent":100.00,"gpuLastVsFirstPercent":100.00,"fpsDegradationPercent":100.00,"gcCollections":[3,3,3]}
+UnityEngine.DebugLogHandler:Internal_Log(LogType, LogOption, String, Object)
+ThreeBladeEDC.Diagnostics.IPhonePerformanceAudit:WriteSummary(String)
+ThreeBladeEDC.Diagnostics.IPhonePerformanceAudit:OnApplicationPause(Boolean)
+
+-> sceneDidEnterBackground()
+-> applicationDidEnterBackground()
+-> applicationWillTerminate()
+[Physics::Module] Cleanup current backend.
+[Physics::Module] Id: 0xf2b8ea05
+Input System module state changed to: ShutdownInProgress.
+Input Polling Thread exited.
+Input System module state changed to: Shutdown.
+CodeReloadManager destroyed
+The app terminated with the exit code 0.

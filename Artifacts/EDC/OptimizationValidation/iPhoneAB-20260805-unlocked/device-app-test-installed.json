@@ -1,0 +1,48 @@
+{
+  "info" : {
+    "arguments" : [
+      "devicectl",
+      "device",
+      "info",
+      "apps",
+      "--device",
+      "556E86BF-7295-5622-AA58-02DF84A8E93F",
+      "--bundle-id",
+      "com.jiaweizhou.fidgetspinner.codex",
+      "--timeout",
+      "30",
+      "--json-output",
+      "Artifacts/EDC/OptimizationValidation/iPhoneAB-20260805-unlocked/device-app-test-installed.json"
+    ],
+    "commandType" : "devicectl.device.info.apps",
+    "environment" : {
+      "TERM" : "dumb"
+    },
+    "jsonVersion" : 3,
+    "outcome" : "success",
+    "version" : "518.27"
+  },
+  "result" : {
+    "apps" : [
+      {
+        "appClip" : false,
+        "builtByDeveloper" : true,
+        "bundleIdentifier" : "com.jiaweizhou.fidgetspinner.codex",
+        "bundleVersion" : "1",
+        "defaultApp" : false,
+        "hidden" : false,
+        "internalApp" : false,
+        "name" : "Fidget Spinner",
+        "removable" : true,
+        "url" : "file:///private/var/containers/Bundle/Application/7CD3AA5F-007E-42B3-80E2-3875FCE0CD9E/FidgetSpinner.app/",
+        "version" : "0.1.0"
+      }
+    ],
+    "defaultAppsIncluded" : false,
+    "deviceIdentifier" : "556E86BF-7295-5622-AA58-02DF84A8E93F",
+    "hiddenAppsIncluded" : false,
+    "internalAppsIncluded" : false,
+    "matchingBundleIdentifier" : "com.jiaweizhou.fidgetspinner.codex",
+    "removableAppsIncluded" : true
+  }
+}

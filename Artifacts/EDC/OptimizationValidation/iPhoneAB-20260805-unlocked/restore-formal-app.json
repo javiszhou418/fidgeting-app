@@ -1,0 +1,39 @@
+{
+  "info" : {
+    "arguments" : [
+      "devicectl",
+      "device",
+      "install",
+      "app",
+      "--device",
+      "556E86BF-7295-5622-AA58-02DF84A8E93F",
+      "/Users/jiawei.zhou/Documents/Fidgeting app/unity/FidgetingApp/Builds/iOS/DerivedData/Build/Products/Release-iphoneos/FidgetSpinner.app",
+      "--timeout",
+      "180",
+      "--json-output",
+      "/Users/jiawei.zhou/Documents/Fidgeting app/Artifacts/EDC/OptimizationValidation/iPhoneAB-20260805-unlocked/restore-formal-app.json"
+    ],
+    "commandType" : "devicectl.device.install.app",
+    "environment" : {
+      "TERM" : "dumb"
+    },
+    "jsonVersion" : 3,
+    "outcome" : "success",
+    "version" : "518.27"
+  },
+  "result" : {
+    "deviceIdentifier" : "556E86BF-7295-5622-AA58-02DF84A8E93F",
+    "installedApplications" : [
+      {
+        "bundleID" : "com.jiaweizhou.fidgetspinner.codex",
+        "databaseSequenceNumber" : 3456,
+        "databaseUUID" : "DD289073-9195-4847-A70C-38418B04F03B",
+        "installationURL" : "file:///private/var/containers/Bundle/Application/2499D611-7A16-4E56-B566-31C9EE8FA7DA/FidgetSpinner.app/",
+        "launchServicesIdentifier" : "unknown",
+        "options" : {
+
+        }
+      }
+    ]
+  }
+}

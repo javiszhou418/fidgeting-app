@@ -1,0 +1,39 @@
+{
+  "info" : {
+    "arguments" : [
+      "devicectl",
+      "device",
+      "install",
+      "app",
+      "--device",
+      "556E86BF-7295-5622-AA58-02DF84A8E93F",
+      "/Users/jiawei.zhou/Documents/Fidgeting app/unity/FidgetingApp/Builds/iOS/EDCOptimizationValidation-20260805-012005-DerivedData/Build/Products/Release-iphoneos/EDCOptimizationValidation.app",
+      "--timeout",
+      "180",
+      "--json-output",
+      "/Users/jiawei.zhou/Documents/Fidgeting app/Artifacts/EDC/OptimizationValidation/iPhoneAB-20260805-unlocked/install-test-root-session.json"
+    ],
+    "commandType" : "devicectl.device.install.app",
+    "environment" : {
+      "TERM" : "dumb"
+    },
+    "jsonVersion" : 3,
+    "outcome" : "success",
+    "version" : "518.27"
+  },
+  "result" : {
+    "deviceIdentifier" : "556E86BF-7295-5622-AA58-02DF84A8E93F",
+    "installedApplications" : [
+      {
+        "bundleID" : "com.jiaweizhou.fidgetspinner.codex",
+        "databaseSequenceNumber" : 3448,
+        "databaseUUID" : "DD289073-9195-4847-A70C-38418B04F03B",
+        "installationURL" : "file:///private/var/containers/Bundle/Application/43AB983D-3919-42B4-87D1-64008F403947/EDCOptimizationValidation.app/",
+        "launchServicesIdentifier" : "unknown",
+        "options" : {
+
+        }
+      }
+    ]
+  }
+}

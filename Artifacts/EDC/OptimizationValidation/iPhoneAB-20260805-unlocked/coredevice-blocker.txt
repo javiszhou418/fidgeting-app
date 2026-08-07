@@ -1,0 +1,35 @@
+EDC iPhone A/B preflight blocker
+Date: 2026-08-05 Asia/Shanghai
+Device: iPhone 15 Pro Max / iOS 26.6
+CoreDevice ID: 556E86BF-7295-5622-AA58-02DF84A8E93F
+UDID: 00008130-001A00361EE0001C
+
+Safety boundary:
+- Overlay install only; no uninstall.
+- Stop after two consecutive CoreDevice timeouts.
+
+Previously verified artifacts:
+- Test app: EDCOptimizationValidation.app
+- Main bundle: com.jiaweizhou.fidgetspinner.codex
+- Test version: 0.1.1 (1)
+- UnityFramework bundle: com.unity3d.framework
+- codesign --verify --deep --strict: PASS
+- TeamIdentifier: 2RJ2CW6NK5
+- Restore app: FidgetSpinner.app, 0.1.0 (1), signature verified
+
+Reconnect attempt 1:
+xcrun devicectl list devices --filter "hardwareProperties.platform == 'iOS'" --json-output device-list-reconnect.json --timeout 30
+
+Reconnect attempt 2:
+xcrun devicectl list devices --filter "hardwareProperties.platform == 'iOS'" --json-output device-list-reconnect-retry.json --timeout 30
+
+Both attempts returned:
+Failed to load provisioning paramter list due to error: XPCError(errorCode: 1001, errorUserInfo: ["XPCConnectionDescription": "<SystemXPCPeerConnection ... name = com.apple.CoreDevice.CoreDeviceService ...>", "NSLocalizedDescription": "The connection was invalidated."]).
+`devicectl manage create` may support a reduced set of arguments.
+ERROR: Timed out waiting for CoreDeviceService to fully initialize. This is likely a bug in CoreDevice. Please file a bug report against CoreDevice | X. (com.apple.coredevice.devicectl error 1 (0x01))
+
+Result:
+- Device details and lockState could not be re-read.
+- Test app was not installed.
+- 750k / 500k samples were not run.
+- Shipping 0.1.0 (1) was not overwritten or uninstalled.

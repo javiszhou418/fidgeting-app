@@ -1,0 +1,149 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Push-card canonical parametric views</title>
+  <style>
+    :root {
+      color-scheme: light;
+      font-family: Inter, "SF Pro Display", "PingFang SC", system-ui, sans-serif;
+      background: #0a1117;
+      color: #e9f0f4;
+    }
+    * { box-sizing: border-box; }
+    html, body { width: 100%; height: 100%; margin: 0; overflow: hidden; }
+    body {
+      background: #0a1117;
+    }
+    header {
+      position: absolute;
+      inset: 0 0 auto 0;
+      height: 84px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 42px;
+      border-bottom: 1px solid rgba(89, 187, 225, .28);
+      background: rgba(7, 13, 18, .91);
+      backdrop-filter: blur(10px);
+      z-index: 4;
+    }
+    .title-block { display: flex; align-items: center; gap: 16px; }
+    .accent { width: 5px; height: 46px; border-radius: 3px; background: #eb762c; }
+    h1 { margin: 0; font-size: 26px; letter-spacing: .025em; font-weight: 720; }
+    .sub { margin-top: 4px; font-size: 13px; color: #81939f; letter-spacing: .08em; }
+    .view-badge {
+      padding: 10px 15px;
+      border: 1px solid #3f768d;
+      border-radius: 8px;
+      background: rgba(10,21,28,.78);
+      font: 700 14px/1 ui-monospace, SFMono-Regular, Menlo, monospace;
+      letter-spacing: .07em;
+      color: #61caf1;
+    }
+    #stage {
+      position: absolute;
+      inset: 84px 0 52px 0;
+      background-color: #0b141b;
+      background-image:
+        linear-gradient(rgba(89,170,203,.075) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(89,170,203,.075) 1px, transparent 1px),
+        linear-gradient(rgba(89,170,203,.025) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(89,170,203,.025) 1px, transparent 1px),
+        radial-gradient(circle at 48% 40%, rgba(32,57,69,.56), rgba(7,13,18,.15) 55%, rgba(4,8,11,.7));
+      background-size: 80px 80px, 80px 80px, 16px 16px, 16px 16px, 100% 100%;
+    }
+    canvas { width: 100%; height: 100%; display: block; }
+    footer {
+      position: absolute;
+      inset: auto 0 0 0;
+      height: 52px;
+      padding: 0 42px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-top: 1px solid rgba(89, 187, 225, .22);
+      background: rgba(7, 13, 18, .94);
+      z-index: 4;
+      color: #7e909c;
+      font-size: 12px;
+      letter-spacing: .06em;
+    }
+    .magnet-row { color: #bc5720; font-weight: 760; letter-spacing: .12em; }
+    #layer-legend {
+      display: none;
+      position: absolute;
+      right: 34px;
+      top: 112px;
+      width: 250px;
+      z-index: 5;
+      overflow: hidden;
+      border: 1px solid rgba(87, 176, 210, .35);
+      border-radius: 10px;
+      background: rgba(8,16,22,.91);
+      box-shadow: 0 12px 34px rgba(0,0,0,.34);
+    }
+    #layer-legend.visible { display: block; }
+    .legend-head {
+      padding: 11px 14px;
+      color: #f4f7f8;
+      background: #142732;
+      font-size: 12px;
+      font-weight: 760;
+      letter-spacing: .08em;
+    }
+    .legend-row {
+      display: grid;
+      grid-template-columns: 34px 1fr;
+      gap: 8px;
+      padding: 8px 12px;
+      border-top: 1px solid rgba(84, 160, 189, .16);
+      font-size: 11px;
+      color: #a7b6bf;
+    }
+    .legend-row b { color: #e56f29; }
+    .axis-note {
+      position: absolute;
+      left: 38px;
+      bottom: 72px;
+      z-index: 5;
+      padding: 8px 10px;
+      border-radius: 6px;
+      border: 1px solid rgba(86,169,201,.26);
+      background: rgba(7,16,22,.78);
+      color: #8fb3c3;
+      font: 650 11px/1.25 ui-monospace, SFMono-Regular, Menlo, monospace;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="title-block">
+      <div class="accent"></div>
+      <div>
+        <h1>磁吸推牌｜同源参数化 3D 结构</h1>
+        <div class="sub">ONE CANONICAL GEOMETRY · 7 AXIAL LAYERS · 6 INLINE MAGNETS</div>
+      </div>
+    </div>
+    <div id="view-badge" class="view-badge">VIEW</div>
+  </header>
+  <main id="stage"></main>
+  <aside id="layer-legend">
+    <div class="legend-head">七层轴向结构 / 7-LAYER STACK</div>
+    <div class="legend-row"><b>L1</b><span>四角孔 Z/S 镂空钛顶框</span></div>
+    <div class="legend-row"><b>L2</b><span>六孔枪灰钛上载板</span></div>
+    <div class="legend-row"><b>L3</b><span>六孔深色 POM 间隔板</span></div>
+    <div class="legend-row"><b>L4</b><span>枪灰导轨 / 弹簧笼</span></div>
+    <div class="legend-row"><b>L5</b><span>独立磁体 M1–M6</span></div>
+    <div class="legend-row"><b>L6</b><span>六凹槽喷砂钛下载板</span></div>
+    <div class="legend-row"><b>L7</b><span>四角紧固喷砂钛背壳</span></div>
+  </aside>
+  <div id="axis-note" class="axis-note"></div>
+  <footer>
+    <span>概念级建模参考 · 所有视图来自同一确定性几何 · 非制造 CAD</span>
+    <span class="magnet-row">M1 — M2 — M3 — M4 — M5 — M6 · X AXIS</span>
+  </footer>
+  <script type="module" src="./model.js"></script>
+</body>
+</html>

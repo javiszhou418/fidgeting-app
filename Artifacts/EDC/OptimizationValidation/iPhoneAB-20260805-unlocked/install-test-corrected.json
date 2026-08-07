@@ -1,0 +1,33 @@
+{
+  "error" : {
+    "code" : 1,
+    "domain" : "com.apple.coredevice.devicectl",
+    "userInfo" : {
+      "NSLocalizedDescription" : {
+        "string" : "Timed out waiting for CoreDeviceService to fully initialize. This is likely a bug in CoreDevice. Please file a bug report against CoreDevice | X."
+      }
+    }
+  },
+  "info" : {
+    "arguments" : [
+      "devicectl",
+      "device",
+      "install",
+      "app",
+      "--device",
+      "556E86BF-7295-5622-AA58-02DF84A8E93F",
+      "/Users/jiawei.zhou/Documents/Fidgeting app/unity/FidgetingApp/Builds/iOS/EDCOptimizationValidation-20260805-012005-DerivedData/Build/Products/Release-iphoneos/EDCOptimizationValidation.app",
+      "--timeout",
+      "180",
+      "--json-output",
+      "/Users/jiawei.zhou/Documents/Fidgeting app/Artifacts/EDC/OptimizationValidation/iPhoneAB-20260805-unlocked/install-test-corrected.json"
+    ],
+    "commandType" : "devicectl.device.install.app",
+    "environment" : {
+      "TERM" : "dumb"
+    },
+    "jsonVersion" : 3,
+    "outcome" : "failed",
+    "version" : "518.27"
+  }
+}
