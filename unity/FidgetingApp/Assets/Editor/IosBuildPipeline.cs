@@ -7,6 +7,7 @@ using UnityEditor.Build.Reporting;
 using UnityEditor.iOS.Xcode;
 using UnityEngine;
 using UnityEngine.Rendering;
+using UnityEngine.Rendering.Universal;
 using FidgetingApp.Product;
 
 namespace CodexUnityLabEditor
@@ -29,6 +30,9 @@ namespace CodexUnityLabEditor
             "Assets/Plugins/iOS/Thumbnails";
         private const string ProductStickerArtworkAssetRootPath =
             "Assets/Resources/ProductStickers/BackdropWhite";
+        private const string MobileRenderPipelineAssetPath =
+            "Assets/Settings/Mobile_RPAsset.asset";
+        private const int SimulatorMsaaSampleCount = 4;
 
         private static readonly string[] ProductScenes =
             ProductCatalog.ShippingScenePaths();
@@ -178,7 +182,9 @@ namespace CodexUnityLabEditor
                     : BuildOptions.None
             };
 
-            BuildReport report = BuildPipeline.BuildPlayer(options);
+            BuildReport report = BuildPlayerWithSimulatorMsaaWorkaround(
+                options,
+                sdkVersion);
             if (report.summary.result != BuildResult.Succeeded)
             {
                 throw new BuildFailedException($"iOS build failed: {report.summary.result}");
@@ -196,6 +202,47 @@ namespace CodexUnityLabEditor
 
             string sdkLabel = sdkVersion == iOSSdkVersion.SimulatorSDK ? "Simulator" : "Device";
             Debug.Log($"[Codex] iOS {sdkLabel} Xcode project created at {outputPath}");
+        }
+
+        private static BuildReport BuildPlayerWithSimulatorMsaaWorkaround(
+            BuildPlayerOptions options,
+            iOSSdkVersion sdkVersion)
+        {
+            if (sdkVersion != iOSSdkVersion.SimulatorSDK)
+            {
+                return BuildPipeline.BuildPlayer(options);
+            }
+
+            UniversalRenderPipelineAsset mobilePipeline =
+                AssetDatabase.LoadAssetAtPath<UniversalRenderPipelineAsset>(
+                    MobileRenderPipelineAssetPath);
+            if (mobilePipeline == null)
+            {
+                throw new BuildFailedException(
+                    $"Simulator MSAA workaround requires {MobileRenderPipelineAssetPath}.");
+            }
+
+            int originalPipelineMsaa = mobilePipeline.msaaSampleCount;
+            int originalQualityMsaa = QualitySettings.antiAliasing;
+            try
+            {
+                // Current Apple-silicon iOS Simulator backbuffers are 4x.
+                // Matching them during export prevents URP's final pass from
+                // requesting a 2x attachment inside a 4x native render pass.
+                // The finally block restores the shipping iPhone 2x budget.
+                mobilePipeline.msaaSampleCount = SimulatorMsaaSampleCount;
+                QualitySettings.antiAliasing = SimulatorMsaaSampleCount;
+                EditorUtility.SetDirty(mobilePipeline);
+                AssetDatabase.SaveAssets();
+                return BuildPipeline.BuildPlayer(options);
+            }
+            finally
+            {
+                mobilePipeline.msaaSampleCount = originalPipelineMsaa;
+                QualitySettings.antiAliasing = originalQualityMsaa;
+                EditorUtility.SetDirty(mobilePipeline);
+                AssetDatabase.SaveAssets();
+            }
         }
 
         [Serializable]

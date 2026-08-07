@@ -17,6 +17,8 @@ namespace FidgetingApp.Product
         private const int TorusSegments = 48;
         private const int TorusSides = 8;
         private const int BearingBallCount = 8;
+        private const int BearingBallLongitudeSegments = 16;
+        private const int BearingBallLatitudeSegments = 8;
 
         private static readonly Color[] StageColors =
         {
@@ -325,11 +327,16 @@ namespace FidgetingApp.Product
             float ballRadius,
             float localY)
         {
+            Mesh ballMesh = BuildSphereMesh(
+                "ProgressionBearingBallMesh",
+                BearingBallLongitudeSegments,
+                BearingBallLatitudeSegments);
+            generatedMeshes.Add(ballMesh);
+
             for (int index = 0; index < BearingBallCount; index++)
             {
                 float angle = index * Mathf.PI * 2f / BearingBallCount;
-                GameObject ball = GameObject.CreatePrimitive(PrimitiveType.Sphere);
-                ball.name = $"BearingBall_{index + 1:00}";
+                GameObject ball = new GameObject($"BearingBall_{index + 1:00}");
                 ball.layer = gameObject.layer;
                 ball.transform.SetParent(parent, false);
                 ball.transform.localPosition = new Vector3(
@@ -338,13 +345,9 @@ namespace FidgetingApp.Product
                     Mathf.Sin(angle) * orbitRadius);
                 ball.transform.localScale = Vector3.one * ballRadius * 2f;
 
-                Collider collider = ball.GetComponent<Collider>();
-                if (collider != null)
-                {
-                    ReleaseGeneratedObject(collider);
-                }
-
-                Renderer renderer = ball.GetComponent<Renderer>();
+                MeshFilter filter = ball.AddComponent<MeshFilter>();
+                filter.sharedMesh = ballMesh;
+                MeshRenderer renderer = ball.AddComponent<MeshRenderer>();
                 ConfigureRenderer(renderer);
                 renderer.sharedMaterial = stageMaterials[0];
                 bearingBallRenderers.Add(renderer);
@@ -453,6 +456,74 @@ namespace FidgetingApp.Product
                     int b = nextSegment * TorusSides + side;
                     int c = nextSegment * TorusSides + nextSide;
                     int d = segment * TorusSides + nextSide;
+                    triangles[triangle++] = a;
+                    triangles[triangle++] = c;
+                    triangles[triangle++] = b;
+                    triangles[triangle++] = a;
+                    triangles[triangle++] = d;
+                    triangles[triangle++] = c;
+                }
+            }
+
+            var mesh = new Mesh
+            {
+                name = meshName,
+                hideFlags = HideFlags.HideAndDontSave,
+                vertices = vertices,
+                normals = normals,
+                uv = uvs,
+                triangles = triangles
+            };
+            mesh.RecalculateBounds();
+            return mesh;
+        }
+
+        private static Mesh BuildSphereMesh(
+            string meshName,
+            int longitudeSegments,
+            int latitudeSegments)
+        {
+            longitudeSegments = Mathf.Max(8, longitudeSegments);
+            latitudeSegments = Mathf.Max(4, latitudeSegments);
+            int verticesPerRing = longitudeSegments + 1;
+            var vertices = new Vector3[(latitudeSegments + 1) * verticesPerRing];
+            var normals = new Vector3[vertices.Length];
+            var uvs = new Vector2[vertices.Length];
+            var triangles = new int[latitudeSegments * longitudeSegments * 6];
+
+            int vertex = 0;
+            for (int latitude = 0; latitude <= latitudeSegments; latitude++)
+            {
+                float v = latitude / (float)latitudeSegments;
+                float polar = v * Mathf.PI;
+                float ringRadius = Mathf.Sin(polar) * 0.5f;
+                float y = Mathf.Cos(polar) * 0.5f;
+                for (int longitude = 0; longitude <= longitudeSegments; longitude++)
+                {
+                    float u = longitude / (float)longitudeSegments;
+                    float azimuth = u * Mathf.PI * 2f;
+                    Vector3 position = new Vector3(
+                        Mathf.Cos(azimuth) * ringRadius,
+                        y,
+                        Mathf.Sin(azimuth) * ringRadius);
+                    vertices[vertex] = position;
+                    normals[vertex] = position.normalized;
+                    uvs[vertex] = new Vector2(u, 1f - v);
+                    vertex++;
+                }
+            }
+
+            int triangle = 0;
+            for (int latitude = 0; latitude < latitudeSegments; latitude++)
+            {
+                int currentRing = latitude * verticesPerRing;
+                int nextRing = currentRing + verticesPerRing;
+                for (int longitude = 0; longitude < longitudeSegments; longitude++)
+                {
+                    int a = currentRing + longitude;
+                    int b = nextRing + longitude;
+                    int c = nextRing + longitude + 1;
+                    int d = currentRing + longitude + 1;
                     triangles[triangle++] = a;
                     triangles[triangle++] = c;
                     triangles[triangle++] = b;

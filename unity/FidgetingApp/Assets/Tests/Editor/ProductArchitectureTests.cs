@@ -156,7 +156,31 @@ namespace FidgetingApp.Tests.Editor
                 "                development: false);",
                 buildPipeline,
                 "Visual approval previews must not include the Unity Development Console.");
+            StringAssert.Contains(
+                "BuildPlayerWithSimulatorMsaaWorkaround",
+                buildPipeline);
+            StringAssert.Contains(
+                "mobilePipeline.msaaSampleCount = SimulatorMsaaSampleCount;",
+                buildPipeline);
+            StringAssert.Contains(
+                "mobilePipeline.msaaSampleCount = originalPipelineMsaa;",
+                buildPipeline,
+                "Simulator preview export must restore the iPhone 2x MSAA source of truth.");
             StringAssert.Contains("PlayerSettings.iOS.buildNumber = \"22\";", buildPipeline);
+        }
+
+        [Test]
+        public void ProgressionBearingVisuals_DoNotCreateStrippedRuntimeColliders()
+        {
+            string source = File.ReadAllText(
+                "Assets/Scripts/Product/SpinnerProgressionVisuals.cs");
+
+            StringAssert.DoesNotContain(
+                "GameObject.CreatePrimitive(PrimitiveType.Sphere)",
+                source,
+                "Release stripping may remove SphereCollider even when the bearing is visual-only.");
+            StringAssert.Contains("BuildSphereMesh(", source);
+            StringAssert.Contains("ball.AddComponent<MeshRenderer>()", source);
         }
 
         [Test]
