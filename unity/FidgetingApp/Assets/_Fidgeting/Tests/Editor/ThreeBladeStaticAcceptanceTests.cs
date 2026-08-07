@@ -322,7 +322,7 @@ namespace ThreeBladeEDC.Tests.Editor
         }
 
         [Test]
-        public void MobileDelivery_UsesOneGestureOwnerSafeAreaAndStudioStage()
+        public void MobileDelivery_UsesOneGestureOwnerNoLegacyCanvasAndStudioStage()
         {
             RotorRigidbodyController[] controllers =
                 _root.GetComponentsInChildren<RotorRigidbodyController>(true);
@@ -334,13 +334,15 @@ namespace ThreeBladeEDC.Tests.Editor
                 _root.GetComponentsInChildren<MobileViewerUI>(true);
             SafeAreaFitter[] safeAreas =
                 _root.GetComponentsInChildren<SafeAreaFitter>(true);
+            Canvas[] canvases = _root.GetComponentsInChildren<Canvas>(true);
 
             Assert.That(controllers, Has.Length.EqualTo(1));
             Assert.That(gestures, Has.Length.EqualTo(1));
             Assert.That(legacyInputs, Is.Empty);
             Assert.That(_root.GetComponentsInChildren<HingeJoint>(true), Is.Empty);
-            Assert.That(mobileUi, Has.Length.EqualTo(1));
-            Assert.That(safeAreas, Has.Length.EqualTo(1));
+            Assert.That(mobileUi, Is.Empty);
+            Assert.That(safeAreas, Is.Empty);
+            Assert.That(canvases, Is.Empty);
             Assert.That(gestures[0].Rotor, Is.SameAs(controllers[0]));
 
             Rigidbody body = controllers[0].GetComponent<Rigidbody>();

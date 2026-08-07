@@ -202,14 +202,16 @@ namespace FidgetingApp.TwoLobeBar.Tests.Editor
         [Test]
         public void ProductRegistrationSources_ContainTheGraphiteModel()
         {
-            string coordinator = File.ReadAllText(
-                "Assets/Scripts/Product/FidgetAppCoordinator.cs");
+            string productCatalog = File.ReadAllText(
+                "Assets/Scripts/Product/ProductCatalog.cs");
             string environmentCatalog = File.ReadAllText(
                 "Assets/Scripts/Product/SpinnerEnvironmentPresenter.cs");
             string nativeUi = File.ReadAllText(
                 "Assets/Plugins/iOS/CodexSwiftUIOverlay.swift");
-            StringAssert.Contains(TwoLobeBarSpecifications.ModelId, coordinator);
-            StringAssert.Contains("SpinnerEnvironmentCatalog.TwoLobeScenePath", coordinator);
+            StringAssert.Contains(TwoLobeBarSpecifications.ModelId, productCatalog);
+            StringAssert.Contains(
+                "SpinnerEnvironmentCatalog.TwoLobeScenePath",
+                productCatalog);
             StringAssert.Contains(TwoLobeBarSpecifications.ScenePath, environmentCatalog);
             StringAssert.Contains(
                 "case graphiteTwoLobe = \"graphite-two-lobe\"",
