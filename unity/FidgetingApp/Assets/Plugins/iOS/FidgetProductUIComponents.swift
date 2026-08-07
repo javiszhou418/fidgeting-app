@@ -42,8 +42,12 @@ enum FidgetUITokens {
     }
 }
 
-/// The product shell follows native iOS typography. Oxanium is registered as a
-/// reward display face and is used only by the Combo lockup.
+/// One typography source for every native product surface.
+///
+/// Oxanium covers the product's Latin letters and numerals. Core Text keeps the
+/// normal iOS cascade for glyphs the family does not ship (including Chinese),
+/// so localized copy remains legible without mixing a second display face into
+/// the Latin hierarchy.
 enum ProductTypography {
     static let familyName = "Oxanium"
     static let resourceName = "Oxanium-VariableFont_wght"
@@ -88,11 +92,11 @@ enum ProductTypography {
         UINavigationBar.appearance().barStyle = .black
         UINavigationBar.appearance().tintColor = .white
         UINavigationBar.appearance().titleTextAttributes = [
-            .font: UIFont.systemFont(ofSize: 17, weight: .semibold),
+            .font: uiFont(size: 17, weight: .semibold),
             .foregroundColor: UIColor.white
         ]
         UINavigationBar.appearance().largeTitleTextAttributes = [
-            .font: UIFont.systemFont(ofSize: 34, weight: .bold),
+            .font: uiFont(size: 34, weight: .bold),
             .foregroundColor: UIColor.white
         ]
         UITabBar.appearance().barStyle = .black
@@ -104,14 +108,22 @@ extension Font {
     static func product(
         _ style: Font.TextStyle,
         weight: Font.Weight = .regular) -> Font {
-        .system(style, design: .default).weight(weight)
+        .custom(
+            ProductTypography.familyName,
+            size: ProductTypography.pointSize(for: style),
+            relativeTo: style)
+            .weight(weight)
     }
 
     static func product(
         size: CGFloat,
         relativeTo style: Font.TextStyle = .body,
         weight: Font.Weight = .regular) -> Font {
-        .system(size: size, weight: weight, design: .default)
+        .custom(
+            ProductTypography.familyName,
+            size: size,
+            relativeTo: style)
+            .weight(weight)
     }
 
     static func combo(
@@ -129,7 +141,7 @@ extension Font {
 private struct ProductDesignSystemModifier: ViewModifier {
     func body(content: Content) -> some View {
         content
-            .font(.system(.body, design: .default))
+            .font(.product(.body))
             .foregroundStyle(Color.white)
             .environment(\.colorScheme, .dark)
     }

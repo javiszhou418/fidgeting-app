@@ -926,7 +926,7 @@ namespace FidgetingApp.Tests.Editor
         }
 
         [Test]
-        public void ProductUiUsesSystemTypographyAndReservesOxaniumForCombo()
+        public void ProductUiUsesOxaniumForLatinAndNumeralsWithSystemChineseFallback()
         {
             const string fontPath =
                 "Assets/Plugins/iOS/Fonts/Oxanium-VariableFont_wght.ttf";
@@ -948,11 +948,19 @@ namespace FidgetingApp.Tests.Editor
             StringAssert.Contains("CTFontManagerRegisterFontsForURL", components);
             StringAssert.Contains("static func product(", components);
             StringAssert.Contains("static func combo(", components);
-            StringAssert.Contains(".system(style, design: .default)", components);
+            StringAssert.Contains(
+                "size: ProductTypography.pointSize(for: style)",
+                components);
             StringAssert.Contains("ProductTypography.familyName", components);
             StringAssert.Contains(".combo(", source);
             StringAssert.Contains("func productDesignSystem()", components);
             StringAssert.Contains("ProductTypography.configureUIKitAppearance()", source);
+            StringAssert.Contains(
+                ".font: uiFont(size: 17, weight: .semibold)",
+                components);
+            StringAssert.Contains(".font(.product(.body))", components);
+            StringAssert.DoesNotContain("UIFont.systemFont", components);
+            StringAssert.DoesNotContain(".font(.system", components);
             Assert.That(
                 source.Split(
                     new[] { "productDesignSystem()" },
@@ -984,8 +992,8 @@ namespace FidgetingApp.Tests.Editor
                     $"Shipping scene {product.ScenePath} must not carry a second legacy HUD.");
             }
 
-            StringAssert.Contains("业务 UI 使用 iOS 系统字体", guideline);
-            StringAssert.Contains("Oxanium 只用于模型顶部 Combo", guideline);
+            StringAssert.Contains("全 App 的拉丁字母与数字统一使用 Oxanium", guideline);
+            StringAssert.Contains("中文由 Core Text 自动级联到 iOS 系统中文字体", guideline);
             StringAssert.Contains("业务层禁止固定 `Color.cyan`", guideline);
         }
 

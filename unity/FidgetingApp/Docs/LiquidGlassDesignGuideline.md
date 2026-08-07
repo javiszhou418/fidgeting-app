@@ -6,13 +6,13 @@
 
 - 原生组件源码权威为 `Assets/Plugins/iOS/FidgetProductUIComponents.swift`；业务状态和 `UnityBridge` 留在 `CodexSwiftUIOverlay.swift`，视觉组件不得直接调用 Unity 或原始 Haptic。
 - 全 App 固定使用 Dark Mode，不跟随设备 Light Mode。iOS `UIUserInterfaceStyle`、UIKit Overlay 容器和 SwiftUI 根环境共同锁定为 dark；产品背景保持中性黑场，主要文字保持白色。禁止使用白色页面背景或会按 Light Mode 解析为浅底的未约束系统材质。不得改写 Unity 根 `Window` / `UIViewController` 的 appearance，以免干扰 Metal 渲染层。
-- 业务 UI 使用 iOS 系统字体与系统中文级联；`Font.product` 只封装语义字号和字重，不替换字体家族。Oxanium 只用于模型顶部 Combo 的数字、乘号与短标签，避免整套界面出现不明展示字体。
-- 字间距始终使用系统字体或 Combo 字体的默认值。禁止用 SwiftUI `tracking` / `kerning` 或其他方式增加字间距；信息层级只通过字号、字重、颜色、透明度和组件间距表达。
+- 全 App 的拉丁字母与数字统一使用 Oxanium 可变字体；`ProductTypography` 是 SwiftUI 语义字号与 UIKit navigation title 的唯一入口，业务页面不得直接使用 `.font(.system...)` 或系统西文字体。Oxanium 不含中文字形，中文由 Core Text 自动级联到 iOS 系统中文字体，避免缺字方框；这不是另一套可选视觉字体。
+- 字间距始终使用 Oxanium 或中文级联字体的默认值。禁止用 SwiftUI `tracking` / `kerning` 或其他方式增加字间距；信息层级只通过字号、字重、颜色、透明度和组件间距表达。
 - Metric 中的数字本身是视觉 headline，至少比 label / subhead 高一个语义字号层级；单位、标题和解释退到 `subheadline` / `caption`。优先用字号、字重、对比度和稳定宽度数字突出数值，不增加字间距，也不依赖永久 accent 填色。
 - 实时速度只使用一个紧凑半圆 Hero 仪表：大号数字和连续扫掠场读取同一真实 telemetry。Intensity / Frequency 可使用左右从属翼表，但三表必须同排留出明确间距，任何圆弧和数值都不得重叠；翼表各自读取真实数据、继承主速度色带、降低线宽/亮度/字号且不使用 glow。Peak 只增强火红扫掠场和局部光晕，不绘制装饰火苗；主 RPM 与 3D Hero 始终保有视觉中心。
 - Speed / Intensity / Frequency 三联仪表簇固定在底部成长卡上方 14 pt；安全区、成长卡 96 pt 高度与 12 pt 底部 inset 由 `ProductOverlayLayout` 统一提供。Combo 使用无票券边框、无胶囊容器的数字优先锁定组合固定在 3D 模型顶部；Spin Reward / Peak 反馈留在仪表上方，不能把实时指标向上顶回 3D Hero 中央区域。
 - 模型顶部 Combo 的 Oxanium Heavy 等宽数字是唯一文字 Hero：2–4 / 5–9 / 10–19 / 20+ 分别使用 42 / 47 / 52 / 58 pt；`COMBO · 档位` 使用 17 pt bold 辅助解释。数字、`×`、COMBO 和档位文字全部使用中性白色，不读取模型或 Combo accent；层级只来自字号、字重、透明度、白色辉光与运动。普通增长只作用于数字字形、数字残影、数字内扫光和短火花，不允许通过胶囊缩放、票券描边、包围文字的常驻周圈光环或全屏震动制造奖励感。跨入默认 10、20、30…里程碑时，允许 `ComboCenterHalo` 从模型屏幕中心向四角扩散一次低透明中性白柔光；它不包围 Combo 文字、不常驻，并在 Reduce Motion 下退化为中心闪光。`ComboHaloTuningPanel` 必须复用同一生产组件，但入口只在 DEBUG/独立预览工具中出现，不进入 Release 设置页。Combo 激活后，真实机械累计每 120° 等效活动可产生一次展示 count，最多 6.25 次/秒；该 count 不发 XP，AUTO / Library 不计数。共享 `ProductStatusPill` 的其他调用不受影响。
-- 仪表统一使用“headline 数字/单位在半圆内部、指标名称在半圆下方”的结构；Intensity / Speed / Frequency 名称保持左 / 中 / 右位置，使用系统 `caption2` bold，并放在固定 20 pt 高、90% 黑色、无描边的独立胶囊中，使用纯白文字、最高布局优先级与高 z-index，不能再依赖背景对比或低透明度文字。数值不得覆盖弧线或刻度，不通过字间距制造层级。
+- 仪表统一使用“headline 数字/单位在半圆内部、指标名称在半圆下方”的结构；Intensity / Speed / Frequency 名称保持左 / 中 / 右位置，使用 Oxanium `caption2` bold，并放在固定 20 pt 高、90% 黑色、无描边的独立胶囊中，使用纯白文字、最高布局优先级与高 z-index，不能再依赖背景对比或低透明度文字。数值不得覆盖弧线或刻度，不通过字间距制造层级。
 - 3D 陀螺是主内容。原生 UI 只提供导航、选择和状态，不用插画或 SF Symbol 替代产品模型。
 - 模型库的 Unity 实时模型舞台必须保持透明；只允许顶部与底部使用低透明度黑色渐变保证文字对比度。设置、藏家等纯原生页面可以使用完整 `ProductBackdrop`。任何全屏 SwiftUI Overlay 都不得以不透明黑层覆盖 Unity 模型舞台。
 - 顶部不绘制横贯屏幕的导航底色；目的地入口使用独立的小尺寸 Liquid Glass 点击面，避免框住标题和 3D 主体。
@@ -30,7 +30,7 @@
 | 组件 | SwiftUI 实现 | 规格 |
 | --- | --- | --- |
 | 设计 token | `FidgetUITokens` | 44 pt 最小热区、38 pt 紧凑图标、52 pt 主操作、16/22/26 pt 圆角、4/8/15 pt 间距、180 ms 选择动效 |
-| 全局字体 | `ProductTypography` / `Font.product` / `Font.combo` / `productDesignSystem` | 业务 UI 使用系统语义字体并支持 Dynamic Type；Oxanium 200–800 只用于 Combo reward lockup；保持默认字距 |
+| 全局字体 | `ProductTypography` / `Font.product` / `Font.combo` / `productDesignSystem` | Oxanium 200–800 可变字重；语义字号支持 Dynamic Type；拉丁与数字使用 Oxanium，中文自动系统级联；保持默认字距 |
 | 玻璃与背景 | `ProductBackdrop` / `ProductGlassModifier` / `productGlass` | plist、UIKit Overlay、SwiftUI 三层固定 Dark Mode；设置/藏家使用中性黑场，模型库中央保持透明以显示 Unity；iOS 26 原生 glass，旧系统使用深色环境下无周圈描边的 `ultraThinMaterial` |
 | 顶部身份 | `ProductTopBar` | 无整栏背景；活动玩具按“当前等级 / 名称 / 当前皮肤”三行排列，皮肤文字使用对应装备色 |
 | 紧凑图标按钮 | `ProductIconButton` | 顶部复位、说明、玩具库与设置共用；视觉直径 38 pt，布局热区不小于 44 pt |
