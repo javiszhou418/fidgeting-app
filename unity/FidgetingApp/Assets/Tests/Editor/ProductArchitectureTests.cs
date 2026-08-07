@@ -20,7 +20,7 @@ namespace FidgetingApp.Tests.Editor
             "com.jiaweizhou.fidgetspinner.codex";
 
         [Test]
-        public void ReleaseBuildContainsOnlyTheFiveApprovedProductScenes()
+        public void ReleaseBuildContainsOnlyTheSixApprovedProductScenes()
         {
             string[] scenes = EditorBuildSettings.scenes
                 .Where(scene => scene.enabled)
@@ -34,13 +34,14 @@ namespace FidgetingApp.Tests.Editor
                     "Assets/_Fidgeting/Scenes/ThreeBladeMetalOriginal.unity",
                     "Assets/_ImportedSpinner/Scenes/ImportedSpinner.unity",
                     "Assets/_TwoLobeBar/Scenes/TwoLobeBar.unity",
-                    "Assets/_EDC/Scenes/MeshyEDC.unity"
+                    "Assets/_EDC/Scenes/MeshyEDC.unity",
+                    "Assets/_FanCard/Scenes/MagneticFanCard.unity"
                 },
                 scenes);
             CollectionAssert.DoesNotContain(
                 scenes,
                 SpinnerEnvironmentCatalog.BlueScenePath);
-            CollectionAssert.DoesNotContain(
+            CollectionAssert.Contains(
                 scenes,
                 SpinnerEnvironmentCatalog.FanCardScenePath);
         }
@@ -61,6 +62,11 @@ namespace FidgetingApp.Tests.Editor
                 "The pointed replacement must own the retired blue model's first slot.");
             StringAssert.Contains(
                 "persistedModelId == \"blue-classic\"",
+                swift);
+            StringAssert.Contains("let migratedModel =", swift);
+            StringAssert.Contains("selectedModel = migratedModel", swift);
+            StringAssert.DoesNotContain(
+                "persistedModelId != selectedModel.rawValue",
                 swift);
             StringAssert.DoesNotContain("primaryModelCatalogVersion", swift);
             StringAssert.Contains(

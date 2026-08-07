@@ -1,0 +1,621 @@
+<?xml version="1.0" encoding="utf-8"?>
+<test-run id="2" testcasecount="93" result="Passed" total="93" passed="93" failed="0" inconclusive="0" skipped="0" asserts="0" engine-version="3.5.0.0" clr-version="4.0.30319.42000" start-time="2026-08-07 15:10:01Z" end-time="2026-08-07 15:10:20Z" duration="18.7104044">
+  <test-suite type="TestSuite" id="1000" name="Fidget Spinner" fullname="Fidget Spinner" runstate="Runnable" testcasecount="192" result="Passed" start-time="2026-08-07 15:10:01Z" end-time="2026-08-07 15:10:20Z" duration="18.710404" total="93" passed="93" failed="0" inconclusive="0" skipped="0" asserts="0">
+    <properties>
+      <property name="platform" value="EditMode" />
+    </properties>
+    <test-suite type="Assembly" id="1214" name="Assembly-CSharp-Editor.dll" fullname="/private/tmp/fidgeting-recovery-v22.zc8oZU/unity/FidgetingApp/Library/ScriptAssemblies/Assembly-CSharp-Editor.dll" runstate="Runnable" testcasecount="192" result="Passed" start-time="2026-08-07 15:10:01Z" end-time="2026-08-07 15:10:20Z" duration="18.704107" total="93" passed="93" failed="0" inconclusive="0" skipped="0" asserts="0">
+      <properties>
+        <property name="_PID" value="36785" />
+        <property name="_APPDOMAIN" value="Unity Child Domain" />
+        <property name="platform" value="EditMode" />
+        <property name="EditorOnly" value="True" />
+      </properties>
+      <test-suite type="TestSuite" id="1218" name="FidgetingApp" fullname="FidgetingApp" runstate="Runnable" testcasecount="129" result="Passed" start-time="2026-08-07 15:10:01Z" end-time="2026-08-07 15:10:14Z" duration="12.301970" total="80" passed="80" failed="0" inconclusive="0" skipped="0" asserts="0">
+        <properties />
+        <test-suite type="TestSuite" id="1225" name="Tests" fullname="FidgetingApp.Tests" runstate="Runnable" testcasecount="101" result="Passed" start-time="2026-08-07 15:10:01Z" end-time="2026-08-07 15:10:11Z" duration="9.913169" total="75" passed="75" failed="0" inconclusive="0" skipped="0" asserts="0">
+          <properties />
+          <test-suite type="TestSuite" id="1226" name="Editor" fullname="FidgetingApp.Tests.Editor" runstate="Runnable" testcasecount="101" result="Passed" start-time="2026-08-07 15:10:01Z" end-time="2026-08-07 15:10:11Z" duration="9.912267" total="75" passed="75" failed="0" inconclusive="0" skipped="0" asserts="0">
+            <properties />
+            <test-suite type="TestFixture" id="1124" name="ProductArchitectureTests" fullname="FidgetingApp.Tests.Editor.ProductArchitectureTests" classname="FidgetingApp.Tests.Editor.ProductArchitectureTests" runstate="Runnable" testcasecount="34" result="Passed" start-time="2026-08-07 15:10:01Z" end-time="2026-08-07 15:10:05Z" duration="3.941770" total="34" passed="34" failed="0" inconclusive="0" skipped="0" asserts="0">
+              <properties />
+              <test-case id="1146" name="AssistantDriveIsExplicitSharedAndStopsAtLifecycleBoundaries" fullname="FidgetingApp.Tests.Editor.ProductArchitectureTests.AssistantDriveIsExplicitSharedAndStopsAtLifecycleBoundaries" methodname="AssistantDriveIsExplicitSharedAndStopsAtLifecycleBoundaries" classname="FidgetingApp.Tests.Editor.ProductArchitectureTests" runstate="Runnable" seed="486849358" result="Passed" start-time="2026-08-07 15:10:01Z" end-time="2026-08-07 15:10:01Z" duration="0.015806" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-suite type="ParameterizedMethod" id="1151" name="AssistantDriveMultipliersScaleTheOneXBaseline" fullname="FidgetingApp.Tests.Editor.ProductArchitectureTests.AssistantDriveMultipliersScaleTheOneXBaseline" classname="FidgetingApp.Tests.Editor.ProductArchitectureTests" runstate="Runnable" testcasecount="4" result="Passed" start-time="2026-08-07 15:10:01Z" end-time="2026-08-07 15:10:01Z" duration="0.010789" total="4" passed="4" failed="0" inconclusive="0" skipped="0" asserts="0">
+                <properties />
+                <test-case id="1147" name="AssistantDriveMultipliersScaleTheOneXBaseline(1.0f,2.2f,0.03f)" fullname="FidgetingApp.Tests.Editor.ProductArchitectureTests.AssistantDriveMultipliersScaleTheOneXBaseline(1.0f,2.2f,0.03f)" methodname="AssistantDriveMultipliersScaleTheOneXBaseline" classname="FidgetingApp.Tests.Editor.ProductArchitectureTests" runstate="Runnable" seed="190024932" result="Passed" start-time="2026-08-07 15:10:01Z" end-time="2026-08-07 15:10:01Z" duration="0.003464" asserts="0">
+                  <properties>
+                    <property name="retryIteration" value="0" />
+                    <property name="repeatIteration" value="0" />
+                  </properties>
+                </test-case>
+                <test-case id="1148" name="AssistantDriveMultipliersScaleTheOneXBaseline(1.5f,3.3f,0.045f)" fullname="FidgetingApp.Tests.Editor.ProductArchitectureTests.AssistantDriveMultipliersScaleTheOneXBaseline(1.5f,3.3f,0.045f)" methodname="AssistantDriveMultipliersScaleTheOneXBaseline" classname="FidgetingApp.Tests.Editor.ProductArchitectureTests" runstate="Runnable" seed="623229777" result="Passed" start-time="2026-08-07 15:10:01Z" end-time="2026-08-07 15:10:01Z" duration="0.000738" asserts="0">
+                  <properties>
+                    <property name="retryIteration" value="0" />
+                    <property name="repeatIteration" value="0" />
+                  </properties>
+                </test-case>
+                <test-case id="1149" name="AssistantDriveMultipliersScaleTheOneXBaseline(2.0f,4.4f,0.06f)" fullname="FidgetingApp.Tests.Editor.ProductArchitectureTests.AssistantDriveMultipliersScaleTheOneXBaseline(2.0f,4.4f,0.06f)" methodname="AssistantDriveMultipliersScaleTheOneXBaseline" classname="FidgetingApp.Tests.Editor.ProductArchitectureTests" runstate="Runnable" seed="373805951" result="Passed" start-time="2026-08-07 15:10:01Z" end-time="2026-08-07 15:10:01Z" duration="0.000585" asserts="0">
+                  <properties>
+                    <property name="retryIteration" value="0" />
+                    <property name="repeatIteration" value="0" />
+                  </properties>
+                </test-case>
+                <test-case id="1150" name="AssistantDriveMultipliersScaleTheOneXBaseline(3.0f,6.6f,0.09f)" fullname="FidgetingApp.Tests.Editor.ProductArchitectureTests.AssistantDriveMultipliersScaleTheOneXBaseline(3.0f,6.6f,0.09f)" methodname="AssistantDriveMultipliersScaleTheOneXBaseline" classname="FidgetingApp.Tests.Editor.ProductArchitectureTests" runstate="Runnable" seed="1132779646" result="Passed" start-time="2026-08-07 15:10:01Z" end-time="2026-08-07 15:10:01Z" duration="0.000447" asserts="0">
+                  <properties>
+                    <property name="retryIteration" value="0" />
+                    <property name="repeatIteration" value="0" />
+                  </properties>
+                </test-case>
+              </test-suite>
+              <test-case id="1152" name="AssistantDriveRejectsUndefinedMultiplier" fullname="FidgetingApp.Tests.Editor.ProductArchitectureTests.AssistantDriveRejectsUndefinedMultiplier" methodname="AssistantDriveRejectsUndefinedMultiplier" classname="FidgetingApp.Tests.Editor.ProductArchitectureTests" runstate="Runnable" seed="2033059463" result="Passed" start-time="2026-08-07 15:10:01Z" end-time="2026-08-07 15:10:01Z" duration="0.000342" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1159" name="BothModelsUseWideTwoDimensionalVelocityResponsiveGestures" fullname="FidgetingApp.Tests.Editor.ProductArchitectureTests.BothModelsUseWideTwoDimensionalVelocityResponsiveGestures" methodname="BothModelsUseWideTwoDimensionalVelocityResponsiveGestures" classname="FidgetingApp.Tests.Editor.ProductArchitectureTests" runstate="Runnable" seed="1703916330" result="Passed" start-time="2026-08-07 15:10:01Z" end-time="2026-08-07 15:10:01Z" duration="0.003966" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1140" name="CollectorRankIsCrossToyManualOnlyAndUsesARealBackButton" fullname="FidgetingApp.Tests.Editor.ProductArchitectureTests.CollectorRankIsCrossToyManualOnlyAndUsesARealBackButton" methodname="CollectorRankIsCrossToyManualOnlyAndUsesARealBackButton" classname="FidgetingApp.Tests.Editor.ProductArchitectureTests" runstate="Runnable" seed="704220582" result="Passed" start-time="2026-08-07 15:10:01Z" end-time="2026-08-07 15:10:01Z" duration="0.026138" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1157" name="DetentAndInertiaUseIndependentIsolatedTransientChannels" fullname="FidgetingApp.Tests.Editor.ProductArchitectureTests.DetentAndInertiaUseIndependentIsolatedTransientChannels" methodname="DetentAndInertiaUseIndependentIsolatedTransientChannels" classname="FidgetingApp.Tests.Editor.ProductArchitectureTests" runstate="Runnable" seed="145884958" result="Passed" start-time="2026-08-07 15:10:01Z" end-time="2026-08-07 15:10:01Z" duration="0.000909" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1143" name="EntireProductUiDefaultsToDarkAppearance" fullname="FidgetingApp.Tests.Editor.ProductArchitectureTests.EntireProductUiDefaultsToDarkAppearance" methodname="EntireProductUiDefaultsToDarkAppearance" classname="FidgetingApp.Tests.Editor.ProductArchitectureTests" runstate="Runnable" seed="143842450" result="Passed" start-time="2026-08-07 15:10:01Z" end-time="2026-08-07 15:10:01Z" duration="0.014936" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1131" name="ImportedThirdSpinnerUsesOptimizedRuntimeMeshAndCanonicalInteraction" fullname="FidgetingApp.Tests.Editor.ProductArchitectureTests.ImportedThirdSpinnerUsesOptimizedRuntimeMeshAndCanonicalInteraction" methodname="ImportedThirdSpinnerUsesOptimizedRuntimeMeshAndCanonicalInteraction" classname="FidgetingApp.Tests.Editor.ProductArchitectureTests" runstate="Runnable" seed="1664939277" result="Passed" start-time="2026-08-07 15:10:01Z" end-time="2026-08-07 15:10:02Z" duration="0.361661" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1136" name="InteractionControllersRouteSemanticEventsInsteadOfCallingIosRenderer" fullname="FidgetingApp.Tests.Editor.ProductArchitectureTests.InteractionControllersRouteSemanticEventsInsteadOfCallingIosRenderer" methodname="InteractionControllersRouteSemanticEventsInsteadOfCallingIosRenderer" classname="FidgetingApp.Tests.Editor.ProductArchitectureTests" runstate="Runnable" seed="1229682314" result="Passed" start-time="2026-08-07 15:10:02Z" end-time="2026-08-07 15:10:02Z" duration="0.000580" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1137" name="InteractionTabsResolveToSmoothAndMechanicalPresets" fullname="FidgetingApp.Tests.Editor.ProductArchitectureTests.InteractionTabsResolveToSmoothAndMechanicalPresets" methodname="InteractionTabsResolveToSmoothAndMechanicalPresets" classname="FidgetingApp.Tests.Editor.ProductArchitectureTests" runstate="Runnable" seed="1179060080" result="Passed" start-time="2026-08-07 15:10:02Z" end-time="2026-08-07 15:10:02Z" duration="0.000928" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1144" name="MagneticSlideTileIsRoutedByTheCanonicalCoordinator" fullname="FidgetingApp.Tests.Editor.ProductArchitectureTests.MagneticSlideTileIsRoutedByTheCanonicalCoordinator" methodname="MagneticSlideTileIsRoutedByTheCanonicalCoordinator" classname="FidgetingApp.Tests.Editor.ProductArchitectureTests" runstate="Runnable" seed="474160171" result="Passed" start-time="2026-08-07 15:10:02Z" end-time="2026-08-07 15:10:02Z" duration="0.004000" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1145" name="MagneticSlideUsesSpatialEdgeCuesAndFiniteCrossingTremor" fullname="FidgetingApp.Tests.Editor.ProductArchitectureTests.MagneticSlideUsesSpatialEdgeCuesAndFiniteCrossingTremor" methodname="MagneticSlideUsesSpatialEdgeCuesAndFiniteCrossingTremor" classname="FidgetingApp.Tests.Editor.ProductArchitectureTests" runstate="Runnable" seed="548302515" result="Passed" start-time="2026-08-07 15:10:02Z" end-time="2026-08-07 15:10:02Z" duration="0.010938" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1135" name="MotionSensitivityPresetsAreMonotonicSharedAndVisibleInSettings" fullname="FidgetingApp.Tests.Editor.ProductArchitectureTests.MotionSensitivityPresetsAreMonotonicSharedAndVisibleInSettings" methodname="MotionSensitivityPresetsAreMonotonicSharedAndVisibleInSettings" classname="FidgetingApp.Tests.Editor.ProductArchitectureTests" runstate="Runnable" seed="2135645334" result="Passed" start-time="2026-08-07 15:10:02Z" end-time="2026-08-07 15:10:02Z" duration="0.008634" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1133" name="NativeBridgeHasOneStableProductObjectName" fullname="FidgetingApp.Tests.Editor.ProductArchitectureTests.NativeBridgeHasOneStableProductObjectName" methodname="NativeBridgeHasOneStableProductObjectName" classname="FidgetingApp.Tests.Editor.ProductArchitectureTests" runstate="Runnable" seed="750801698" result="Passed" start-time="2026-08-07 15:10:02Z" end-time="2026-08-07 15:10:02Z" duration="0.000140" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1153" name="NativeDetentDebugUiRequestsRuntimeCatalogInsteadOfDuplicatingPresets" fullname="FidgetingApp.Tests.Editor.ProductArchitectureTests.NativeDetentDebugUiRequestsRuntimeCatalogInsteadOfDuplicatingPresets" methodname="NativeDetentDebugUiRequestsRuntimeCatalogInsteadOfDuplicatingPresets" classname="FidgetingApp.Tests.Editor.ProductArchitectureTests" runstate="Runnable" seed="495208030" result="Passed" start-time="2026-08-07 15:10:02Z" end-time="2026-08-07 15:10:02Z" duration="0.010736" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1156" name="NativeHapticLifecyclePreparesReportsAndStopsContinuousPlayer" fullname="FidgetingApp.Tests.Editor.ProductArchitectureTests.NativeHapticLifecyclePreparesReportsAndStopsContinuousPlayer" methodname="NativeHapticLifecyclePreparesReportsAndStopsContinuousPlayer" classname="FidgetingApp.Tests.Editor.ProductArchitectureTests" runstate="Runnable" seed="888039276" result="Passed" start-time="2026-08-07 15:10:02Z" end-time="2026-08-07 15:10:02Z" duration="0.002110" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1128" name="NativeOverlayInstallIsApplicationBootstrappedAndDoesNotDependOnTheBlueScene" fullname="FidgetingApp.Tests.Editor.ProductArchitectureTests.NativeOverlayInstallIsApplicationBootstrappedAndDoesNotDependOnTheBlueScene" methodname="NativeOverlayInstallIsApplicationBootstrappedAndDoesNotDependOnTheBlueScene" classname="FidgetingApp.Tests.Editor.ProductArchitectureTests" runstate="Runnable" seed="385900039" result="Passed" start-time="2026-08-07 15:10:02Z" end-time="2026-08-07 15:10:02Z" duration="0.007720" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1154" name="NativeRendererUsesWaveformEnvelopeAndAllHapticDynamicControls" fullname="FidgetingApp.Tests.Editor.ProductArchitectureTests.NativeRendererUsesWaveformEnvelopeAndAllHapticDynamicControls" methodname="NativeRendererUsesWaveformEnvelopeAndAllHapticDynamicControls" classname="FidgetingApp.Tests.Editor.ProductArchitectureTests" runstate="Runnable" seed="344516542" result="Passed" start-time="2026-08-07 15:10:02Z" end-time="2026-08-07 15:10:02Z" duration="0.001080" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1139" name="NativeUiUsesBundledSquareArtworkForModelsSkinsAndStickers" fullname="FidgetingApp.Tests.Editor.ProductArchitectureTests.NativeUiUsesBundledSquareArtworkForModelsSkinsAndStickers" methodname="NativeUiUsesBundledSquareArtworkForModelsSkinsAndStickers" classname="FidgetingApp.Tests.Editor.ProductArchitectureTests" runstate="Runnable" seed="677167019" result="Passed" start-time="2026-08-07 15:10:02Z" end-time="2026-08-07 15:10:02Z" duration="0.026215" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1138" name="NativeUiUsesLivePagedModelsLiquidGlassAndModeTabs" fullname="FidgetingApp.Tests.Editor.ProductArchitectureTests.NativeUiUsesLivePagedModelsLiquidGlassAndModeTabs" methodname="NativeUiUsesLivePagedModelsLiquidGlassAndModeTabs" classname="FidgetingApp.Tests.Editor.ProductArchitectureTests" runstate="Runnable" seed="264341057" result="Passed" start-time="2026-08-07 15:10:02Z" end-time="2026-08-07 15:10:02Z" duration="0.044200" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1141" name="NativeUiUsesReusableProductComponentLibrary" fullname="FidgetingApp.Tests.Editor.ProductArchitectureTests.NativeUiUsesReusableProductComponentLibrary" methodname="NativeUiUsesReusableProductComponentLibrary" classname="FidgetingApp.Tests.Editor.ProductArchitectureTests" runstate="Runnable" seed="1386165596" result="Passed" start-time="2026-08-07 15:10:02Z" end-time="2026-08-07 15:10:02Z" duration="0.041314" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1127" name="PointedAndOriginalMetalScenesOwnDifferentVisibleGeometry" fullname="FidgetingApp.Tests.Editor.ProductArchitectureTests.PointedAndOriginalMetalScenesOwnDifferentVisibleGeometry" methodname="PointedAndOriginalMetalScenesOwnDifferentVisibleGeometry" classname="FidgetingApp.Tests.Editor.ProductArchitectureTests" runstate="Runnable" seed="1340867382" result="Passed" start-time="2026-08-07 15:10:02Z" end-time="2026-08-07 15:10:02Z" duration="0.514783" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1126" name="PointedThreeBladeReplacesBlueWithoutReplacingOriginalMetal" fullname="FidgetingApp.Tests.Editor.ProductArchitectureTests.PointedThreeBladeReplacesBlueWithoutReplacingOriginalMetal" methodname="PointedThreeBladeReplacesBlueWithoutReplacingOriginalMetal" classname="FidgetingApp.Tests.Editor.ProductArchitectureTests" runstate="Runnable" seed="1651061008" result="Passed" start-time="2026-08-07 15:10:02Z" end-time="2026-08-07 15:10:02Z" duration="0.004093" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1132" name="ProductIdentityCannotDriftToStandaloneMetalApp" fullname="FidgetingApp.Tests.Editor.ProductArchitectureTests.ProductIdentityCannotDriftToStandaloneMetalApp" methodname="ProductIdentityCannotDriftToStandaloneMetalApp" classname="FidgetingApp.Tests.Editor.ProductArchitectureTests" runstate="Runnable" seed="875345285" result="Passed" start-time="2026-08-07 15:10:02Z" end-time="2026-08-07 15:10:02Z" duration="0.000815" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1142" name="ProductUiUsesSystemTypographyAndReservesOxaniumForCombo" fullname="FidgetingApp.Tests.Editor.ProductArchitectureTests.ProductUiUsesSystemTypographyAndReservesOxaniumForCombo" methodname="ProductUiUsesSystemTypographyAndReservesOxaniumForCombo" classname="FidgetingApp.Tests.Editor.ProductArchitectureTests" runstate="Runnable" seed="2069308281" result="Passed" start-time="2026-08-07 15:10:02Z" end-time="2026-08-07 15:10:04Z" duration="1.226428" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1158" name="RatchetAudioIsPhysicsDrivenAtomicPolyphonicAndNeverScheduled" fullname="FidgetingApp.Tests.Editor.ProductArchitectureTests.RatchetAudioIsPhysicsDrivenAtomicPolyphonicAndNeverScheduled" methodname="RatchetAudioIsPhysicsDrivenAtomicPolyphonicAndNeverScheduled" classname="FidgetingApp.Tests.Editor.ProductArchitectureTests" runstate="Runnable" seed="1689078390" result="Passed" start-time="2026-08-07 15:10:04Z" end-time="2026-08-07 15:10:04Z" duration="0.002698" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1125" name="ReleaseBuildContainsOnlyTheFiveApprovedProductScenes" fullname="FidgetingApp.Tests.Editor.ProductArchitectureTests.ReleaseBuildContainsOnlyTheFiveApprovedProductScenes" methodname="ReleaseBuildContainsOnlyTheFiveApprovedProductScenes" classname="FidgetingApp.Tests.Editor.ProductArchitectureTests" runstate="Runnable" seed="1795689677" result="Passed" start-time="2026-08-07 15:10:04Z" end-time="2026-08-07 15:10:04Z" duration="0.000691" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1129" name="ReleaseKeepsBothThreeBladeProductsAndExistingApprovedModels" fullname="FidgetingApp.Tests.Editor.ProductArchitectureTests.ReleaseKeepsBothThreeBladeProductsAndExistingApprovedModels" methodname="ReleaseKeepsBothThreeBladeProductsAndExistingApprovedModels" classname="FidgetingApp.Tests.Editor.ProductArchitectureTests" runstate="Runnable" seed="12830099" result="Passed" start-time="2026-08-07 15:10:04Z" end-time="2026-08-07 15:10:04Z" duration="0.000759" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1130" name="RotarySpeedDashboardAndComboPipelineUseCanonicalSources" fullname="FidgetingApp.Tests.Editor.ProductArchitectureTests.RotarySpeedDashboardAndComboPipelineUseCanonicalSources" methodname="RotarySpeedDashboardAndComboPipelineUseCanonicalSources" classname="FidgetingApp.Tests.Editor.ProductArchitectureTests" runstate="Runnable" seed="247732167" result="Passed" start-time="2026-08-07 15:10:04Z" end-time="2026-08-07 15:10:05Z" duration="1.501020" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1134" name="SettingsPanelSeparatesProductControlsFromSemanticCoreHapticsEditor" fullname="FidgetingApp.Tests.Editor.ProductArchitectureTests.SettingsPanelSeparatesProductControlsFromSemanticCoreHapticsEditor" methodname="SettingsPanelSeparatesProductControlsFromSemanticCoreHapticsEditor" classname="FidgetingApp.Tests.Editor.ProductArchitectureTests" runstate="Runnable" seed="497069670" result="Passed" start-time="2026-08-07 15:10:05Z" end-time="2026-08-07 15:10:05Z" duration="0.063726" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1155" name="SpeedTextureLabIsWiredFromActualRotorStateThroughSemanticRouter" fullname="FidgetingApp.Tests.Editor.ProductArchitectureTests.SpeedTextureLabIsWiredFromActualRotorStateThroughSemanticRouter" methodname="SpeedTextureLabIsWiredFromActualRotorStateThroughSemanticRouter" classname="FidgetingApp.Tests.Editor.ProductArchitectureTests" runstate="Runnable" seed="56922506" result="Passed" start-time="2026-08-07 15:10:05Z" end-time="2026-08-07 15:10:05Z" duration="0.012057" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+            </test-suite>
+            <test-suite type="TestFixture" id="1160" name="SpinnerEnvironmentTests" fullname="FidgetingApp.Tests.Editor.SpinnerEnvironmentTests" classname="FidgetingApp.Tests.Editor.SpinnerEnvironmentTests" runstate="Runnable" testcasecount="6" result="Passed" start-time="2026-08-07 15:10:05Z" end-time="2026-08-07 15:10:08Z" duration="3.200914" total="6" passed="6" failed="0" inconclusive="0" skipped="0" asserts="0">
+              <properties />
+              <test-case id="1164" name="AllSixProductsUseLiveBoundsAndViewportOccupancyBoundaries" fullname="FidgetingApp.Tests.Editor.SpinnerEnvironmentTests.AllSixProductsUseLiveBoundsAndViewportOccupancyBoundaries" methodname="AllSixProductsUseLiveBoundsAndViewportOccupancyBoundaries" classname="FidgetingApp.Tests.Editor.SpinnerEnvironmentTests" runstate="Runnable" seed="828566943" result="Passed" start-time="2026-08-07 15:10:05Z" end-time="2026-08-07 15:10:07Z" duration="1.451398" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1165" name="BackgroundPaletteAndGroundingMesh_AreDeterministicAndMaterialDriven" fullname="FidgetingApp.Tests.Editor.SpinnerEnvironmentTests.BackgroundPaletteAndGroundingMesh_AreDeterministicAndMaterialDriven" methodname="BackgroundPaletteAndGroundingMesh_AreDeterministicAndMaterialDriven" classname="FidgetingApp.Tests.Editor.SpinnerEnvironmentTests" runstate="Runnable" seed="1717684720" result="Passed" start-time="2026-08-07 15:10:07Z" end-time="2026-08-07 15:10:07Z" duration="0.006408" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1161" name="CatalogMapsTheApprovedUnifiedCanyonBackgroundToAllProductScenes" fullname="FidgetingApp.Tests.Editor.SpinnerEnvironmentTests.CatalogMapsTheApprovedUnifiedCanyonBackgroundToAllProductScenes" methodname="CatalogMapsTheApprovedUnifiedCanyonBackgroundToAllProductScenes" classname="FidgetingApp.Tests.Editor.SpinnerEnvironmentTests" runstate="Runnable" seed="1926782114" result="Passed" start-time="2026-08-07 15:10:07Z" end-time="2026-08-07 15:10:07Z" duration="0.088499" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1162" name="EveryProductSceneInstallsItsBackgroundAndHarmonizedModelLights" fullname="FidgetingApp.Tests.Editor.SpinnerEnvironmentTests.EveryProductSceneInstallsItsBackgroundAndHarmonizedModelLights" methodname="EveryProductSceneInstallsItsBackgroundAndHarmonizedModelLights" classname="FidgetingApp.Tests.Editor.SpinnerEnvironmentTests" runstate="Runnable" seed="1980724782" result="Passed" start-time="2026-08-07 15:10:07Z" end-time="2026-08-07 15:10:08Z" duration="1.629731" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1166" name="ParallaxMathUsesDeadZoneExponentialSmoothingAndPixelAccurateProjection" fullname="FidgetingApp.Tests.Editor.SpinnerEnvironmentTests.ParallaxMathUsesDeadZoneExponentialSmoothingAndPixelAccurateProjection" methodname="ParallaxMathUsesDeadZoneExponentialSmoothingAndPixelAccurateProjection" classname="FidgetingApp.Tests.Editor.SpinnerEnvironmentTests" runstate="Runnable" seed="89112304" result="Passed" start-time="2026-08-07 15:10:08Z" end-time="2026-08-07 15:10:08Z" duration="0.001628" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1163" name="ProductCoordinatorWiresEnvironmentWithoutEnteringInteractionOrHaptics" fullname="FidgetingApp.Tests.Editor.SpinnerEnvironmentTests.ProductCoordinatorWiresEnvironmentWithoutEnteringInteractionOrHaptics" methodname="ProductCoordinatorWiresEnvironmentWithoutEnteringInteractionOrHaptics" classname="FidgetingApp.Tests.Editor.SpinnerEnvironmentTests" runstate="Runnable" seed="211651638" result="Passed" start-time="2026-08-07 15:10:08Z" end-time="2026-08-07 15:10:08Z" duration="0.007293" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+            </test-suite>
+            <test-suite type="TestFixture" id="1167" name="SpinnerProgressionTests" fullname="FidgetingApp.Tests.Editor.SpinnerProgressionTests" classname="FidgetingApp.Tests.Editor.SpinnerProgressionTests" runstate="Runnable" testcasecount="35" result="Passed" start-time="2026-08-07 15:10:08Z" end-time="2026-08-07 15:10:11Z" duration="2.762704" total="35" passed="35" failed="0" inconclusive="0" skipped="0" asserts="0">
+              <properties />
+              <test-case id="1184" name="ActiveExperience_UsesBothActualRevolutionsAndGestureForce" fullname="FidgetingApp.Tests.Editor.SpinnerProgressionTests.ActiveExperience_UsesBothActualRevolutionsAndGestureForce" methodname="ActiveExperience_UsesBothActualRevolutionsAndGestureForce" classname="FidgetingApp.Tests.Editor.SpinnerProgressionTests" runstate="Runnable" seed="1555855139" result="Passed" start-time="2026-08-07 15:10:08Z" end-time="2026-08-07 15:10:08Z" duration="0.001568" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1189" name="AppearanceActivation_PopsThenPresentsHalfSheetExactlyOnce" fullname="FidgetingApp.Tests.Editor.SpinnerProgressionTests.AppearanceActivation_PopsThenPresentsHalfSheetExactlyOnce" methodname="AppearanceActivation_PopsThenPresentsHalfSheetExactlyOnce" classname="FidgetingApp.Tests.Editor.SpinnerProgressionTests" runstate="Runnable" seed="188893942" result="Passed" start-time="2026-08-07 15:10:08Z" end-time="2026-08-07 15:10:08Z" duration="0.000352" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1190" name="AppearanceHitTesting_AcceptsMetalCenterCapSiblingSurface" fullname="FidgetingApp.Tests.Editor.SpinnerProgressionTests.AppearanceHitTesting_AcceptsMetalCenterCapSiblingSurface" methodname="AppearanceHitTesting_AcceptsMetalCenterCapSiblingSurface" classname="FidgetingApp.Tests.Editor.SpinnerProgressionTests" runstate="Runnable" seed="67957409" result="Passed" start-time="2026-08-07 15:10:08Z" end-time="2026-08-07 15:10:08Z" duration="0.002306" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1188" name="AppearanceLongPress_RequiresAStationaryProductHold" fullname="FidgetingApp.Tests.Editor.SpinnerProgressionTests.AppearanceLongPress_RequiresAStationaryProductHold" methodname="AppearanceLongPress_RequiresAStationaryProductHold" classname="FidgetingApp.Tests.Editor.SpinnerProgressionTests" runstate="Runnable" seed="1971142958" result="Passed" start-time="2026-08-07 15:10:08Z" end-time="2026-08-07 15:10:08Z" duration="0.000262" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1176" name="BadgeCatalog_UsesIndependentSpeedSwipeTimeAndOfflineMilestones" fullname="FidgetingApp.Tests.Editor.SpinnerProgressionTests.BadgeCatalog_UsesIndependentSpeedSwipeTimeAndOfflineMilestones" methodname="BadgeCatalog_UsesIndependentSpeedSwipeTimeAndOfflineMilestones" classname="FidgetingApp.Tests.Editor.SpinnerProgressionTests" runstate="Runnable" seed="39211135" result="Passed" start-time="2026-08-07 15:10:08Z" end-time="2026-08-07 15:10:08Z" duration="0.000710" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1168" name="CatalogMigrationMovesLegacyBlueProgressionAndCollectorIdentityOnce" fullname="FidgetingApp.Tests.Editor.SpinnerProgressionTests.CatalogMigrationMovesLegacyBlueProgressionAndCollectorIdentityOnce" methodname="CatalogMigrationMovesLegacyBlueProgressionAndCollectorIdentityOnce" classname="FidgetingApp.Tests.Editor.SpinnerProgressionTests" runstate="Runnable" seed="837647509" result="Passed" start-time="2026-08-07 15:10:08Z" end-time="2026-08-07 15:10:09Z" duration="0.555684" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1171" name="CollectorEffectiveDaysUseThreeInteractionsSixtySecondsAndFlexibleFiveOfSeven" fullname="FidgetingApp.Tests.Editor.SpinnerProgressionTests.CollectorEffectiveDaysUseThreeInteractionsSixtySecondsAndFlexibleFiveOfSeven" methodname="CollectorEffectiveDaysUseThreeInteractionsSixtySecondsAndFlexibleFiveOfSeven" classname="FidgetingApp.Tests.Editor.SpinnerProgressionTests" runstate="Runnable" seed="725029807" result="Passed" start-time="2026-08-07 15:10:09Z" end-time="2026-08-07 15:10:09Z" duration="0.309940" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1172" name="CollectorFocusChangesOncePerLocalDayAndDoesNotBoostOfflineRules" fullname="FidgetingApp.Tests.Editor.SpinnerProgressionTests.CollectorFocusChangesOncePerLocalDayAndDoesNotBoostOfflineRules" methodname="CollectorFocusChangesOncePerLocalDayAndDoesNotBoostOfflineRules" classname="FidgetingApp.Tests.Editor.SpinnerProgressionTests" runstate="Runnable" seed="1442112668" result="Passed" start-time="2026-08-07 15:10:09Z" end-time="2026-08-07 15:10:10Z" duration="0.303065" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1173" name="CollectorMilestonesAreCrossToyPersistentAndNeverDoubleAwarded" fullname="FidgetingApp.Tests.Editor.SpinnerProgressionTests.CollectorMilestonesAreCrossToyPersistentAndNeverDoubleAwarded" methodname="CollectorMilestonesAreCrossToyPersistentAndNeverDoubleAwarded" classname="FidgetingApp.Tests.Editor.SpinnerProgressionTests" runstate="Runnable" seed="1871907134" result="Passed" start-time="2026-08-07 15:10:10Z" end-time="2026-08-07 15:10:10Z" duration="0.295584" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1170" name="CollectorRankCurveAndManualBonusesStayBounded" fullname="FidgetingApp.Tests.Editor.SpinnerProgressionTests.CollectorRankCurveAndManualBonusesStayBounded" methodname="CollectorRankCurveAndManualBonusesStayBounded" classname="FidgetingApp.Tests.Editor.SpinnerProgressionTests" runstate="Runnable" seed="1420515148" result="Passed" start-time="2026-08-07 15:10:10Z" end-time="2026-08-07 15:10:10Z" duration="0.000368" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1179" name="Combo_FlowTierAndExperienceBonusStayBounded" fullname="FidgetingApp.Tests.Editor.SpinnerProgressionTests.Combo_FlowTierAndExperienceBonusStayBounded" methodname="Combo_FlowTierAndExperienceBonusStayBounded" classname="FidgetingApp.Tests.Editor.SpinnerProgressionTests" runstate="Runnable" seed="1522081404" result="Passed" start-time="2026-08-07 15:10:10Z" end-time="2026-08-07 15:10:10Z" duration="0.001843" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1180" name="Combo_RealMechanicalTravelAddsFastLegibleCountPulses" fullname="FidgetingApp.Tests.Editor.SpinnerProgressionTests.Combo_RealMechanicalTravelAddsFastLegibleCountPulses" methodname="Combo_RealMechanicalTravelAddsFastLegibleCountPulses" classname="FidgetingApp.Tests.Editor.SpinnerProgressionTests" runstate="Runnable" seed="733003097" result="Passed" start-time="2026-08-07 15:10:10Z" end-time="2026-08-07 15:10:10Z" duration="0.001027" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1178" name="Combo_RequiresSpeedIntensityAndSwipeFrequencyThenExpires" fullname="FidgetingApp.Tests.Editor.SpinnerProgressionTests.Combo_RequiresSpeedIntensityAndSwipeFrequencyThenExpires" methodname="Combo_RequiresSpeedIntensityAndSwipeFrequencyThenExpires" classname="FidgetingApp.Tests.Editor.SpinnerProgressionTests" runstate="Runnable" seed="2024200448" result="Passed" start-time="2026-08-07 15:10:10Z" end-time="2026-08-07 15:10:10Z" duration="0.000239" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1201" name="ComboHaloProjection_UsesModelPlaneEllipseAndTopOriginCenter" fullname="FidgetingApp.Tests.Editor.SpinnerProgressionTests.ComboHaloProjection_UsesModelPlaneEllipseAndTopOriginCenter" methodname="ComboHaloProjection_UsesModelPlaneEllipseAndTopOriginCenter" classname="FidgetingApp.Tests.Editor.SpinnerProgressionTests" runstate="Runnable" seed="184749107" result="Passed" start-time="2026-08-07 15:10:10Z" end-time="2026-08-07 15:10:10Z" duration="0.000391" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1200" name="ComboMilestoneHalo_UsesSharedNativeCurveAndModelCenterStage" fullname="FidgetingApp.Tests.Editor.SpinnerProgressionTests.ComboMilestoneHalo_UsesSharedNativeCurveAndModelCenterStage" methodname="ComboMilestoneHalo_UsesSharedNativeCurveAndModelCenterStage" classname="FidgetingApp.Tests.Editor.SpinnerProgressionTests" runstate="Runnable" seed="1248607357" result="Passed" start-time="2026-08-07 15:10:10Z" end-time="2026-08-07 15:10:10Z" duration="0.019673" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1199" name="ComboPresentation_UsesNumberFirstBorderlessRewardLevelsAndIos15Fallback" fullname="FidgetingApp.Tests.Editor.SpinnerProgressionTests.ComboPresentation_UsesNumberFirstBorderlessRewardLevelsAndIos15Fallback" methodname="ComboPresentation_UsesNumberFirstBorderlessRewardLevelsAndIos15Fallback" classname="FidgetingApp.Tests.Editor.SpinnerProgressionTests" runstate="Runnable" seed="2044514796" result="Passed" start-time="2026-08-07 15:10:10Z" end-time="2026-08-07 15:10:10Z" duration="0.008113" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1192" name="ConformalEngraving_UsesActualMetalTopCapAndStaysVisible" fullname="FidgetingApp.Tests.Editor.SpinnerProgressionTests.ConformalEngraving_UsesActualMetalTopCapAndStaysVisible" methodname="ConformalEngraving_UsesActualMetalTopCapAndStaysVisible" classname="FidgetingApp.Tests.Editor.SpinnerProgressionTests" runstate="Runnable" seed="259495438" result="Passed" start-time="2026-08-07 15:10:10Z" end-time="2026-08-07 15:10:10Z" duration="0.252475" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1191" name="DefaultStickerCatalogAndPresenter_ArePersistentVisualOnlyAssets" fullname="FidgetingApp.Tests.Editor.SpinnerProgressionTests.DefaultStickerCatalogAndPresenter_ArePersistentVisualOnlyAssets" methodname="DefaultStickerCatalogAndPresenter_ArePersistentVisualOnlyAssets" classname="FidgetingApp.Tests.Editor.SpinnerProgressionTests" runstate="Runnable" seed="105414657" result="Passed" start-time="2026-08-07 15:10:10Z" end-time="2026-08-07 15:10:11Z" duration="0.524375" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1182" name="ExperienceVisuals_KeepBackgroundDarkAndGateFireSparksByRealSpeed" fullname="FidgetingApp.Tests.Editor.SpinnerProgressionTests.ExperienceVisuals_KeepBackgroundDarkAndGateFireSparksByRealSpeed" methodname="ExperienceVisuals_KeepBackgroundDarkAndGateFireSparksByRealSpeed" classname="FidgetingApp.Tests.Editor.SpinnerProgressionTests" runstate="Runnable" seed="668425150" result="Passed" start-time="2026-08-07 15:10:11Z" end-time="2026-08-07 15:10:11Z" duration="0.000494" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1169" name="LevelCurve_IsMonotonicAndEndsAtLevelOneHundred" fullname="FidgetingApp.Tests.Editor.SpinnerProgressionTests.LevelCurve_IsMonotonicAndEndsAtLevelOneHundred" methodname="LevelCurve_IsMonotonicAndEndsAtLevelOneHundred" classname="FidgetingApp.Tests.Editor.SpinnerProgressionTests" runstate="Runnable" seed="2066098584" result="Passed" start-time="2026-08-07 15:10:11Z" end-time="2026-08-07 15:10:11Z" duration="0.000384" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1193" name="LongPressAppearanceEditor_UsesSharedUiAndConfirmedUnitySelections" fullname="FidgetingApp.Tests.Editor.SpinnerProgressionTests.LongPressAppearanceEditor_UsesSharedUiAndConfirmedUnitySelections" methodname="LongPressAppearanceEditor_UsesSharedUiAndConfirmedUnitySelections" classname="FidgetingApp.Tests.Editor.SpinnerProgressionTests" runstate="Runnable" seed="2114618174" result="Passed" start-time="2026-08-07 15:10:11Z" end-time="2026-08-07 15:10:11Z" duration="0.022234" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1185" name="OfflineExperience_IsCappedNightBoostedAndAssistantAccelerated" fullname="FidgetingApp.Tests.Editor.SpinnerProgressionTests.OfflineExperience_IsCappedNightBoostedAndAssistantAccelerated" methodname="OfflineExperience_IsCappedNightBoostedAndAssistantAccelerated" classname="FidgetingApp.Tests.Editor.SpinnerProgressionTests" runstate="Runnable" seed="1330628978" result="Passed" start-time="2026-08-07 15:10:11Z" end-time="2026-08-07 15:10:11Z" duration="0.000295" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1177" name="ProgressionRuntime_TracksRealActivityAndDailyGesturesPerModel" fullname="FidgetingApp.Tests.Editor.SpinnerProgressionTests.ProgressionRuntime_TracksRealActivityAndDailyGesturesPerModel" methodname="ProgressionRuntime_TracksRealActivityAndDailyGesturesPerModel" classname="FidgetingApp.Tests.Editor.SpinnerProgressionTests" runstate="Runnable" seed="1211477099" result="Passed" start-time="2026-08-07 15:10:11Z" end-time="2026-08-07 15:10:11Z" duration="0.000434" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1197" name="RuntimeAndLiquidGlassUi_AreWiredForGrowthAndOfflineReturn" fullname="FidgetingApp.Tests.Editor.SpinnerProgressionTests.RuntimeAndLiquidGlassUi_AreWiredForGrowthAndOfflineReturn" methodname="RuntimeAndLiquidGlassUi_AreWiredForGrowthAndOfflineReturn" classname="FidgetingApp.Tests.Editor.SpinnerProgressionTests" runstate="Runnable" seed="541171143" result="Passed" start-time="2026-08-07 15:10:11Z" end-time="2026-08-07 15:10:11Z" duration="0.036615" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1198" name="SpeedDashboard_UsesVisibleCaptionsWithoutDecorativeFlames" fullname="FidgetingApp.Tests.Editor.SpinnerProgressionTests.SpeedDashboard_UsesVisibleCaptionsWithoutDecorativeFlames" methodname="SpeedDashboard_UsesVisibleCaptionsWithoutDecorativeFlames" classname="FidgetingApp.Tests.Editor.SpinnerProgressionTests" runstate="Runnable" seed="1479722952" result="Passed" start-time="2026-08-07 15:10:11Z" end-time="2026-08-07 15:10:11Z" duration="0.034135" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1202" name="SpeedDashboardBands_UseDeterministicFourPercentHysteresis" fullname="FidgetingApp.Tests.Editor.SpinnerProgressionTests.SpeedDashboardBands_UseDeterministicFourPercentHysteresis" methodname="SpeedDashboardBands_UseDeterministicFourPercentHysteresis" classname="FidgetingApp.Tests.Editor.SpinnerProgressionTests" runstate="Runnable" seed="1186786899" result="Passed" start-time="2026-08-07 15:10:11Z" end-time="2026-08-07 15:10:11Z" duration="0.000430" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1174" name="SpinnerExperienceAddsCollectorBonusAfterComboAndCapsAtOnePointFive" fullname="FidgetingApp.Tests.Editor.SpinnerProgressionTests.SpinnerExperienceAddsCollectorBonusAfterComboAndCapsAtOnePointFive" methodname="SpinnerExperienceAddsCollectorBonusAfterComboAndCapsAtOnePointFive" classname="FidgetingApp.Tests.Editor.SpinnerProgressionTests" runstate="Runnable" seed="1517330722" result="Passed" start-time="2026-08-07 15:10:11Z" end-time="2026-08-07 15:10:11Z" duration="0.000252" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1181" name="SpinRewards_EvaluateForceSpeedAndRealRevolutionsWithoutChangingPhysics" fullname="FidgetingApp.Tests.Editor.SpinnerProgressionTests.SpinRewards_EvaluateForceSpeedAndRealRevolutionsWithoutChangingPhysics" methodname="SpinRewards_EvaluateForceSpeedAndRealRevolutionsWithoutChangingPhysics" classname="FidgetingApp.Tests.Editor.SpinnerProgressionTests" runstate="Runnable" seed="2004442408" result="Passed" start-time="2026-08-07 15:10:11Z" end-time="2026-08-07 15:10:11Z" duration="0.000895" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1187" name="ThreeBladeMetalSkinCatalog_MapsAllTenLevelBandsToRealRewards" fullname="FidgetingApp.Tests.Editor.SpinnerProgressionTests.ThreeBladeMetalSkinCatalog_MapsAllTenLevelBandsToRealRewards" methodname="ThreeBladeMetalSkinCatalog_MapsAllTenLevelBandsToRealRewards" classname="FidgetingApp.Tests.Editor.SpinnerProgressionTests" runstate="Runnable" seed="1783977750" result="Passed" start-time="2026-08-07 15:10:11Z" end-time="2026-08-07 15:10:11Z" duration="0.001439" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1194" name="ThreeBladeMetalSkins_ApplyEveryAuthoredSurfaceWithoutExtraGeometry" fullname="FidgetingApp.Tests.Editor.SpinnerProgressionTests.ThreeBladeMetalSkins_ApplyEveryAuthoredSurfaceWithoutExtraGeometry" methodname="ThreeBladeMetalSkins_ApplyEveryAuthoredSurfaceWithoutExtraGeometry" classname="FidgetingApp.Tests.Editor.SpinnerProgressionTests" runstate="Runnable" seed="1580856061" result="Passed" start-time="2026-08-07 15:10:11Z" end-time="2026-08-07 15:10:11Z" duration="0.102897" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1195" name="ThreeBladeMetalSkins_TargetEnabledDragonScaleModelInsteadOfHiddenLegacyMeshes" fullname="FidgetingApp.Tests.Editor.SpinnerProgressionTests.ThreeBladeMetalSkins_TargetEnabledDragonScaleModelInsteadOfHiddenLegacyMeshes" methodname="ThreeBladeMetalSkins_TargetEnabledDragonScaleModelInsteadOfHiddenLegacyMeshes" classname="FidgetingApp.Tests.Editor.SpinnerProgressionTests" runstate="Runnable" seed="1263302600" result="Passed" start-time="2026-08-07 15:10:11Z" end-time="2026-08-07 15:10:11Z" duration="0.255154" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1196" name="ThreeBladeMetalSkinSelection_IsPersistedAndBridgedWithoutRawHaptics" fullname="FidgetingApp.Tests.Editor.SpinnerProgressionTests.ThreeBladeMetalSkinSelection_IsPersistedAndBridgedWithoutRawHaptics" methodname="ThreeBladeMetalSkinSelection_IsPersistedAndBridgedWithoutRawHaptics" classname="FidgetingApp.Tests.Editor.SpinnerProgressionTests" runstate="Runnable" seed="1233187529" result="Passed" start-time="2026-08-07 15:10:11Z" end-time="2026-08-07 15:10:11Z" duration="0.012629" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1186" name="TwoWeekPacing_ReachesFinalBuildAroundDayFourteen" fullname="FidgetingApp.Tests.Editor.SpinnerProgressionTests.TwoWeekPacing_ReachesFinalBuildAroundDayFourteen" methodname="TwoWeekPacing_ReachesFinalBuildAroundDayFourteen" classname="FidgetingApp.Tests.Editor.SpinnerProgressionTests" runstate="Runnable" seed="623492688" result="Passed" start-time="2026-08-07 15:10:11Z" end-time="2026-08-07 15:10:11Z" duration="0.000217" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1175" name="UpgradeStages_UnlockComponentsAndMaterialsAtMilestones" fullname="FidgetingApp.Tests.Editor.SpinnerProgressionTests.UpgradeStages_UnlockComponentsAndMaterialsAtMilestones" methodname="UpgradeStages_UnlockComponentsAndMaterialsAtMilestones" classname="FidgetingApp.Tests.Editor.SpinnerProgressionTests" runstate="Runnable" seed="2145246177" result="Passed" start-time="2026-08-07 15:10:11Z" end-time="2026-08-07 15:10:11Z" duration="0.000917" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1183" name="VisualAssembly_AppliesFiveRealMaterialAndComponentStagesWithoutPhysics" fullname="FidgetingApp.Tests.Editor.SpinnerProgressionTests.VisualAssembly_AppliesFiveRealMaterialAndComponentStagesWithoutPhysics" methodname="VisualAssembly_AppliesFiveRealMaterialAndComponentStagesWithoutPhysics" classname="FidgetingApp.Tests.Editor.SpinnerProgressionTests" runstate="Runnable" seed="178855034" result="Passed" start-time="2026-08-07 15:10:11Z" end-time="2026-08-07 15:10:11Z" duration="0.003989" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+            </test-suite>
+          </test-suite>
+        </test-suite>
+        <test-suite type="TestSuite" id="1219" name="TwoLobeBar" fullname="FidgetingApp.TwoLobeBar" runstate="Runnable" testcasecount="5" result="Passed" start-time="2026-08-07 15:10:11Z" end-time="2026-08-07 15:10:14Z" duration="2.385027" total="5" passed="5" failed="0" inconclusive="0" skipped="0" asserts="0">
+          <properties />
+          <test-suite type="TestSuite" id="1220" name="Tests" fullname="FidgetingApp.TwoLobeBar.Tests" runstate="Runnable" testcasecount="5" result="Passed" start-time="2026-08-07 15:10:11Z" end-time="2026-08-07 15:10:14Z" duration="2.381606" total="5" passed="5" failed="0" inconclusive="0" skipped="0" asserts="0">
+            <properties />
+            <test-suite type="TestSuite" id="1221" name="Editor" fullname="FidgetingApp.TwoLobeBar.Tests.Editor" runstate="Runnable" testcasecount="5" result="Passed" start-time="2026-08-07 15:10:11Z" end-time="2026-08-07 15:10:14Z" duration="2.381053" total="5" passed="5" failed="0" inconclusive="0" skipped="0" asserts="0">
+              <properties />
+              <test-suite type="TestFixture" id="1073" name="TwoLobeBarStaticAcceptanceTests" fullname="FidgetingApp.TwoLobeBar.Tests.Editor.TwoLobeBarStaticAcceptanceTests" classname="FidgetingApp.TwoLobeBar.Tests.Editor.TwoLobeBarStaticAcceptanceTests" runstate="Runnable" testcasecount="5" result="Passed" start-time="2026-08-07 15:10:11Z" end-time="2026-08-07 15:10:14Z" duration="2.380524" total="5" passed="5" failed="0" inconclusive="0" skipped="0" asserts="0">
+                <properties />
+                <test-case id="1074" name="DimensionsAndPbrValues_MatchTheAuthoredSpecification" fullname="FidgetingApp.TwoLobeBar.Tests.Editor.TwoLobeBarStaticAcceptanceTests.DimensionsAndPbrValues_MatchTheAuthoredSpecification" methodname="DimensionsAndPbrValues_MatchTheAuthoredSpecification" classname="FidgetingApp.TwoLobeBar.Tests.Editor.TwoLobeBarStaticAcceptanceTests" runstate="Runnable" seed="1156991481" result="Passed" start-time="2026-08-07 15:10:11Z" end-time="2026-08-07 15:10:12Z" duration="0.473254" asserts="0">
+                  <properties>
+                    <property name="retryIteration" value="0" />
+                    <property name="repeatIteration" value="0" />
+                  </properties>
+                </test-case>
+                <test-case id="1077" name="MaterialAndStudio_UseGraphiteBeadBlastAndOneSoftKey" fullname="FidgetingApp.TwoLobeBar.Tests.Editor.TwoLobeBarStaticAcceptanceTests.MaterialAndStudio_UseGraphiteBeadBlastAndOneSoftKey" methodname="MaterialAndStudio_UseGraphiteBeadBlastAndOneSoftKey" classname="FidgetingApp.TwoLobeBar.Tests.Editor.TwoLobeBarStaticAcceptanceTests" runstate="Runnable" seed="774565785" result="Passed" start-time="2026-08-07 15:10:12Z" end-time="2026-08-07 15:10:12Z" duration="0.476162" asserts="0">
+                  <properties>
+                    <property name="retryIteration" value="0" />
+                    <property name="repeatIteration" value="0" />
+                  </properties>
+                </test-case>
+                <test-case id="1075" name="ProceduralMeshes_PreserveContinuousBarAndConcaveDishBounds" fullname="FidgetingApp.TwoLobeBar.Tests.Editor.TwoLobeBarStaticAcceptanceTests.ProceduralMeshes_PreserveContinuousBarAndConcaveDishBounds" methodname="ProceduralMeshes_PreserveContinuousBarAndConcaveDishBounds" classname="FidgetingApp.TwoLobeBar.Tests.Editor.TwoLobeBarStaticAcceptanceTests" runstate="Runnable" seed="867139414" result="Passed" start-time="2026-08-07 15:10:12Z" end-time="2026-08-07 15:10:13Z" duration="0.479124" asserts="0">
+                  <properties>
+                    <property name="retryIteration" value="0" />
+                    <property name="repeatIteration" value="0" />
+                  </properties>
+                </test-case>
+                <test-case id="1078" name="ProductRegistrationSources_ContainTheGraphiteModel" fullname="FidgetingApp.TwoLobeBar.Tests.Editor.TwoLobeBarStaticAcceptanceTests.ProductRegistrationSources_ContainTheGraphiteModel" methodname="ProductRegistrationSources_ContainTheGraphiteModel" classname="FidgetingApp.TwoLobeBar.Tests.Editor.TwoLobeBarStaticAcceptanceTests" runstate="Runnable" seed="1619551742" result="Passed" start-time="2026-08-07 15:10:13Z" end-time="2026-08-07 15:10:13Z" duration="0.475638" asserts="0">
+                  <properties>
+                    <property name="retryIteration" value="0" />
+                    <property name="repeatIteration" value="0" />
+                  </properties>
+                </test-case>
+                <test-case id="1076" name="Scene_HasOneContinuousBarStationaryButtonAndCanonicalInteraction" fullname="FidgetingApp.TwoLobeBar.Tests.Editor.TwoLobeBarStaticAcceptanceTests.Scene_HasOneContinuousBarStationaryButtonAndCanonicalInteraction" methodname="Scene_HasOneContinuousBarStationaryButtonAndCanonicalInteraction" classname="FidgetingApp.TwoLobeBar.Tests.Editor.TwoLobeBarStaticAcceptanceTests" runstate="Runnable" seed="2035178926" result="Passed" start-time="2026-08-07 15:10:13Z" end-time="2026-08-07 15:10:14Z" duration="0.473751" asserts="0">
+                  <properties>
+                    <property name="retryIteration" value="0" />
+                    <property name="repeatIteration" value="0" />
+                  </properties>
+                </test-case>
+              </test-suite>
+            </test-suite>
+          </test-suite>
+        </test-suite>
+      </test-suite>
+      <test-suite type="TestSuite" id="1215" name="ThreeBladeEDC" fullname="ThreeBladeEDC" runstate="Runnable" testcasecount="63" result="Passed" start-time="2026-08-07 15:10:14Z" end-time="2026-08-07 15:10:20Z" duration="6.394495" total="13" passed="13" failed="0" inconclusive="0" skipped="0" asserts="0">
+        <properties />
+        <test-suite type="TestSuite" id="1216" name="Tests" fullname="ThreeBladeEDC.Tests" runstate="Runnable" testcasecount="63" result="Passed" start-time="2026-08-07 15:10:14Z" end-time="2026-08-07 15:10:20Z" duration="6.390624" total="13" passed="13" failed="0" inconclusive="0" skipped="0" asserts="0">
+          <properties />
+          <test-suite type="TestSuite" id="1217" name="Editor" fullname="ThreeBladeEDC.Tests.Editor" runstate="Runnable" testcasecount="63" result="Passed" start-time="2026-08-07 15:10:14Z" end-time="2026-08-07 15:10:20Z" duration="6.388643" total="13" passed="13" failed="0" inconclusive="0" skipped="0" asserts="0">
+            <properties />
+            <test-suite type="TestFixture" id="1059" name="ThreeBladeStaticAcceptanceTests" fullname="ThreeBladeEDC.Tests.Editor.ThreeBladeStaticAcceptanceTests" classname="ThreeBladeEDC.Tests.Editor.ThreeBladeStaticAcceptanceTests" runstate="Runnable" testcasecount="13" result="Passed" start-time="2026-08-07 15:10:14Z" end-time="2026-08-07 15:10:20Z" duration="6.385984" total="13" passed="13" failed="0" inconclusive="0" skipped="0" asserts="0">
+              <properties />
+              <test-case id="1062" name="BearingAndRotor_HaveIndependentPhysicalOwnership" fullname="ThreeBladeEDC.Tests.Editor.ThreeBladeStaticAcceptanceTests.BearingAndRotor_HaveIndependentPhysicalOwnership" methodname="BearingAndRotor_HaveIndependentPhysicalOwnership" classname="ThreeBladeEDC.Tests.Editor.ThreeBladeStaticAcceptanceTests" runstate="Runnable" seed="678676424" result="Passed" start-time="2026-08-07 15:10:14Z" end-time="2026-08-07 15:10:14Z" duration="0.448466" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1068" name="BladeGroove_ReusesTheExistingPolishedSubmesh" fullname="ThreeBladeEDC.Tests.Editor.ThreeBladeStaticAcceptanceTests.BladeGroove_ReusesTheExistingPolishedSubmesh" methodname="BladeGroove_ReusesTheExistingPolishedSubmesh" classname="ThreeBladeEDC.Tests.Editor.ThreeBladeStaticAcceptanceTests" runstate="Runnable" seed="738329946" result="Passed" start-time="2026-08-07 15:10:14Z" end-time="2026-08-07 15:10:14Z" duration="0.447110" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1072" name="IOSDeliverySettings_AreDeviceReady" fullname="ThreeBladeEDC.Tests.Editor.ThreeBladeStaticAcceptanceTests.IOSDeliverySettings_AreDeviceReady" methodname="IOSDeliverySettings_AreDeviceReady" classname="ThreeBladeEDC.Tests.Editor.ThreeBladeStaticAcceptanceTests" runstate="Runnable" seed="931676397" result="Passed" start-time="2026-08-07 15:10:14Z" end-time="2026-08-07 15:10:15Z" duration="0.458085" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1064" name="MobileDelivery_UsesOneGestureOwnerNoLegacyCanvasAndStudioStage" fullname="ThreeBladeEDC.Tests.Editor.ThreeBladeStaticAcceptanceTests.MobileDelivery_UsesOneGestureOwnerNoLegacyCanvasAndStudioStage" methodname="MobileDelivery_UsesOneGestureOwnerNoLegacyCanvasAndStudioStage" classname="ThreeBladeEDC.Tests.Editor.ThreeBladeStaticAcceptanceTests" runstate="Runnable" seed="301882042" result="Passed" start-time="2026-08-07 15:10:15Z" end-time="2026-08-07 15:10:15Z" duration="0.479841" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1066" name="MobileMeshes_StayInsideTriangleBudgetAndProvidePbrChannels" fullname="ThreeBladeEDC.Tests.Editor.ThreeBladeStaticAcceptanceTests.MobileMeshes_StayInsideTriangleBudgetAndProvidePbrChannels" methodname="MobileMeshes_StayInsideTriangleBudgetAndProvidePbrChannels" classname="ThreeBladeEDC.Tests.Editor.ThreeBladeStaticAcceptanceTests" runstate="Runnable" seed="256452077" result="Passed" start-time="2026-08-07 15:10:15Z" end-time="2026-08-07 15:10:16Z" duration="0.452574" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1067" name="MobileRenderers_StayInsideDrawCallAndMaterialBudgets" fullname="ThreeBladeEDC.Tests.Editor.ThreeBladeStaticAcceptanceTests.MobileRenderers_StayInsideDrawCallAndMaterialBudgets" methodname="MobileRenderers_StayInsideDrawCallAndMaterialBudgets" classname="ThreeBladeEDC.Tests.Editor.ThreeBladeStaticAcceptanceTests" runstate="Runnable" seed="23240380" result="Passed" start-time="2026-08-07 15:10:16Z" end-time="2026-08-07 15:10:16Z" duration="0.463475" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1065" name="RatchetAudio_UsesFiveAtomicVariantsTwelveVoicesAndOneListener" fullname="ThreeBladeEDC.Tests.Editor.ThreeBladeStaticAcceptanceTests.RatchetAudio_UsesFiveAtomicVariantsTwelveVoicesAndOneListener" methodname="RatchetAudio_UsesFiveAtomicVariantsTwelveVoicesAndOneListener" classname="ThreeBladeEDC.Tests.Editor.ThreeBladeStaticAcceptanceTests" runstate="Runnable" seed="1209209767" result="Passed" start-time="2026-08-07 15:10:16Z" end-time="2026-08-07 15:10:17Z" duration="0.457349" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1069" name="ReferenceProportions_CenterCapIsAboutHalfTheFrameWidth" fullname="ThreeBladeEDC.Tests.Editor.ThreeBladeStaticAcceptanceTests.ReferenceProportions_CenterCapIsAboutHalfTheFrameWidth" methodname="ReferenceProportions_CenterCapIsAboutHalfTheFrameWidth" classname="ThreeBladeEDC.Tests.Editor.ThreeBladeStaticAcceptanceTests" runstate="Runnable" seed="303095084" result="Passed" start-time="2026-08-07 15:10:17Z" end-time="2026-08-07 15:10:17Z" duration="0.478246" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1061" name="RenderMeshes_HaveFiniteGeometryAndValidTriangleIndices" fullname="ThreeBladeEDC.Tests.Editor.ThreeBladeStaticAcceptanceTests.RenderMeshes_HaveFiniteGeometryAndValidTriangleIndices" methodname="RenderMeshes_HaveFiniteGeometryAndValidTriangleIndices" classname="ThreeBladeEDC.Tests.Editor.ThreeBladeStaticAcceptanceTests" runstate="Runnable" seed="335978128" result="Passed" start-time="2026-08-07 15:10:17Z" end-time="2026-08-07 15:10:18Z" duration="0.692992" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1060" name="Rotor_HasExactlyThreeEqualBladesAtOneHundredTwentyDegrees" fullname="ThreeBladeEDC.Tests.Editor.ThreeBladeStaticAcceptanceTests.Rotor_HasExactlyThreeEqualBladesAtOneHundredTwentyDegrees" methodname="Rotor_HasExactlyThreeEqualBladesAtOneHundredTwentyDegrees" classname="ThreeBladeEDC.Tests.Editor.ThreeBladeStaticAcceptanceTests" runstate="Runnable" seed="1734182039" result="Passed" start-time="2026-08-07 15:10:18Z" end-time="2026-08-07 15:10:18Z" duration="0.457670" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1071" name="RoundMetalParts_UseDenseButMobileSafePerimeters" fullname="ThreeBladeEDC.Tests.Editor.ThreeBladeStaticAcceptanceTests.RoundMetalParts_UseDenseButMobileSafePerimeters" methodname="RoundMetalParts_UseDenseButMobileSafePerimeters" classname="ThreeBladeEDC.Tests.Editor.ThreeBladeStaticAcceptanceTests" runstate="Runnable" seed="729708527" result="Passed" start-time="2026-08-07 15:10:18Z" end-time="2026-08-07 15:10:19Z" duration="0.470962" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1070" name="TopCap_HasTwentyFourWaveTeethAndUsesSimplifiedCollision" fullname="ThreeBladeEDC.Tests.Editor.ThreeBladeStaticAcceptanceTests.TopCap_HasTwentyFourWaveTeethAndUsesSimplifiedCollision" methodname="TopCap_HasTwentyFourWaveTeethAndUsesSimplifiedCollision" classname="ThreeBladeEDC.Tests.Editor.ThreeBladeStaticAcceptanceTests" runstate="Runnable" seed="1818880528" result="Passed" start-time="2026-08-07 15:10:19Z" end-time="2026-08-07 15:10:19Z" duration="0.480932" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1063" name="VisibleRotorAxisPoint_RemainsAtViewportCenterAcrossRepresentativeAngles" fullname="ThreeBladeEDC.Tests.Editor.ThreeBladeStaticAcceptanceTests.VisibleRotorAxisPoint_RemainsAtViewportCenterAcrossRepresentativeAngles" methodname="VisibleRotorAxisPoint_RemainsAtViewportCenterAcrossRepresentativeAngles" classname="ThreeBladeEDC.Tests.Editor.ThreeBladeStaticAcceptanceTests" runstate="Runnable" seed="1638849897" result="Passed" start-time="2026-08-07 15:10:19Z" end-time="2026-08-07 15:10:20Z" duration="0.594637" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+                <output><![CDATA[Saving results to: /Users/jiawei.zhou/Library/Application Support/DefaultCompany/Fidget Spinner/TestResults.xml
+]]></output>
+              </test-case>
+            </test-suite>
+          </test-suite>
+        </test-suite>
+      </test-suite>
+    </test-suite>
+  </test-suite>
+</test-run>

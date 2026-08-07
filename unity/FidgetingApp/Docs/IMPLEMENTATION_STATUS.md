@@ -45,10 +45,14 @@ Combo 数字尺寸提高到 42 / 47 / 52 / 58 pt，继续使用中性白色；�
 选择性纳入本节文件，排除并发 FanCard 修改。
 
 验证证据：恢复专项 EditMode `75/75` 通过，报告为
-`Artifacts/RecoveryFocusedEditModeTests.xml`；shipping Swift iPhoneOS 15 全量 typecheck 通过。五款
+`Artifacts/RecoveryFocusedEditModeTests.xml`；隔离提交上的恢复/shipping fixture `93/93` 通过，报告为
+`Artifacts/RecoveryShippingEditModeTests.xml`。同一隔离提交的全量 EditMode 为 `190/192`，原始报告
+`Artifacts/RecoveryFullEditModeTests.xml` 保留两项未 shipping FanCard 基线失败：其旧测试分别期待
+材质值 `0.96` 与根姿态 `0°`，基线场景实际为 `0.92` 与 `180°`；本次不通过改测试或改场景掩盖它们。
+shipping Swift iPhoneOS 15 全量 typecheck 通过。五款
 真实 shipping Unity 场景的 top / authored hero / 左右斜视 / low 共 25 张图及联系表位于
 `Artifacts/RecoveryApprovalV22/`，总 Hero 联系表为 `shipping-five-hero-contact.png`。完整 EditMode 与
-原生 Simulator 冷启动截图将在隔离的恢复提交工作树中完成并补记；当前 iPhone 视觉与动态验收均待办。
+原生 Simulator 冷启动截图从隔离提交生成并补记；当前 iPhone 视觉与动态验收均待办。
 
 ## 当前绑定矩阵
 

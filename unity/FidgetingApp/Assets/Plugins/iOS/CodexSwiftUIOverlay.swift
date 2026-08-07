@@ -1210,11 +1210,12 @@ private final class ProductUiState: ObservableObject {
         let needsSpeedTextureMigration = tuningVersion < 7
         let needsIndependentControlMigration = tuningVersion < 8
         let persistedModelId = defaults.string(forKey: Key.selectedModel) ?? ""
-        selectedModel = persistedModelId == "blue-classic"
+        let migratedModel = persistedModelId == "blue-classic"
             ? .pointedThreeBlade
             : (SpinnerModel(rawValue: persistedModelId) ?? .pointedThreeBlade)
-        if persistedModelId != selectedModel.rawValue {
-            defaults.set(selectedModel.rawValue, forKey: Key.selectedModel)
+        selectedModel = migratedModel
+        if persistedModelId != migratedModel.rawValue {
+            defaults.set(migratedModel.rawValue, forKey: Key.selectedModel)
         }
         interactionMode = SpinnerInteractionMode(
             rawValue: defaults.string(forKey: Key.interactionMode) ?? "") ?? .smooth
