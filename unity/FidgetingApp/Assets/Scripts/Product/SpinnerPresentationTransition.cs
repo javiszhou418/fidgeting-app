@@ -81,8 +81,8 @@ namespace FidgetingApp.Product
                     FanCardLibraryHeightFraction);
             }
 
-            string modelId = scenePath == SpinnerEnvironmentCatalog.BlueScenePath
-                ? "blue-classic"
+            string modelId = scenePath == SpinnerEnvironmentCatalog.PointedScenePath
+                ? "pointed-three-blade"
                 : scenePath == SpinnerEnvironmentCatalog.ImportedScenePath
                     ? "gold-four-wing"
                     : "metal-three-blade";

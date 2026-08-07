@@ -11,6 +11,7 @@ DEVICE_DETAILS_JSON="/tmp/fidgeting-app-ios-device-details.json"
 DEVICE_LOCK_JSON="/tmp/fidgeting-app-ios-lock-state.json"
 LOCK_DIR="/tmp/fidgeting-app-ios-pipeline.lock"
 BUNDLE_ID="com.jiaweizhou.fidgetspinner.codex"
+BUILD_MANIFEST_NAME="FidgetingBuildManifest.json"
 BUILD_CONFIGURATION="Release"
 SKIP_UNITY_EXPORT=0
 BUILD_MODE="release"
@@ -102,19 +103,42 @@ fi
 TEAM_ID="$TEAM_IDS[1]"
 
 if (( ! SKIP_UNITY_EXPORT )); then
-  "$UNITY_BIN" \
+  SOURCE_ROOT="$(git -C "$UNITY_PROJECT" rev-parse --show-toplevel)"
+  SOURCE_COMMIT="$(git -C "$SOURCE_ROOT" rev-parse HEAD)"
+  if [[ -n "$(git -C "$SOURCE_ROOT" status --porcelain --untracked-files=all)" ]]; then
+    echo "Refusing to build from a mutable working tree. Commit the exact approved source first." >&2
+    exit 74
+  fi
+
+  FIDGET_SOURCE_COMMIT="$SOURCE_COMMIT" "$UNITY_BIN" \
     -batchmode \
     -quit \
     -projectPath "$UNITY_PROJECT" \
     -executeMethod "$UNITY_BUILD_METHOD" \
     -logFile "$LOG_PATH"
+
+  if [[ "$(git -C "$SOURCE_ROOT" rev-parse HEAD)" != "$SOURCE_COMMIT" ]] \
+      || [[ -n "$(git -C "$SOURCE_ROOT" status --porcelain --untracked-files=all)" ]]; then
+    echo "Source changed during Unity export; refusing to sign or install this artifact." >&2
+    exit 74
+  fi
 fi
 
 PROJECT_FILE="$EXPORT_PATH/Unity-iPhone.xcodeproj/project.pbxproj"
 INFO_PLIST="$EXPORT_PATH/Info.plist"
-if [[ ! -f "$PROJECT_FILE" || ! -f "$INFO_PLIST" ]]; then
+BUILD_MANIFEST="$EXPORT_PATH/$BUILD_MANIFEST_NAME"
+if [[ ! -f "$PROJECT_FILE" || ! -f "$INFO_PLIST" || ! -f "$BUILD_MANIFEST" ]]; then
   echo "Unity export did not produce a complete Xcode project." >&2
   exit 67
+fi
+
+MANIFEST_BUNDLE_ID="$(plutil -extract bundleIdentifier raw -o - "$BUILD_MANIFEST" 2>/dev/null || true)"
+MANIFEST_BUILD_NUMBER="$(plutil -extract buildNumber raw -o - "$BUILD_MANIFEST" 2>/dev/null || true)"
+MANIFEST_SOURCE_COMMIT="$(plutil -extract sourceCommit raw -o - "$BUILD_MANIFEST" 2>/dev/null || true)"
+if [[ "$MANIFEST_BUNDLE_ID" != "$BUNDLE_ID" || -z "$MANIFEST_BUILD_NUMBER" \
+      || -z "$MANIFEST_SOURCE_COMMIT" || "$MANIFEST_SOURCE_COMMIT" == "local-preview" ]]; then
+  echo "Refusing to install an untraceable or mismatched Unity export." >&2
+  exit 70
 fi
 
 xcodebuild \
@@ -137,6 +161,11 @@ fi
 BUILT_BUNDLE_ID="$(plutil -extract CFBundleIdentifier raw -o - "$APP_PATH/Info.plist" 2>/dev/null || true)"
 if [[ "$BUILT_BUNDLE_ID" != "$BUNDLE_ID" ]]; then
   echo "Refusing to install a second app identity: expected $BUNDLE_ID, found $BUILT_BUNDLE_ID." >&2
+  exit 70
+fi
+BUILT_BUILD_NUMBER="$(plutil -extract CFBundleVersion raw -o - "$APP_PATH/Info.plist" 2>/dev/null || true)"
+if [[ "$BUILT_BUILD_NUMBER" != "$MANIFEST_BUILD_NUMBER" ]]; then
+  echo "Refusing to install: app build $BUILT_BUILD_NUMBER does not match manifest $MANIFEST_BUILD_NUMBER." >&2
   exit 70
 fi
 

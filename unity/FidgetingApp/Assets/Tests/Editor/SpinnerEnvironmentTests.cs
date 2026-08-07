@@ -26,10 +26,14 @@ namespace FidgetingApp.Tests.Editor
                 .Where(scene => scene.enabled)
                 .Select(scene => scene.path)
                 .ToArray();
-            CollectionAssert.IsSubsetOf(
-                profiles.Select(profile => profile.ScenePath).ToArray(),
+            CollectionAssert.AreEqual(
+                ProductCatalog.ShippingScenePaths(),
                 enabledScenes,
-                "Every spinner environment must still map to an enabled product scene.");
+                "Release build settings must exactly match the approved product catalog.");
+            CollectionAssert.IsSubsetOf(
+                enabledScenes,
+                profiles.Select(profile => profile.ScenePath).ToArray(),
+                "Every shipping product must retain an authored environment profile.");
             Assert.That(
                 profiles.Select(profile => profile.ModelId).Distinct().Count(),
                 Is.EqualTo(6));

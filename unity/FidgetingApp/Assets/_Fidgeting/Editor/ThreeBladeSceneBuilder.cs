@@ -7,19 +7,17 @@ using ThreeBladeEDC.Presentation;
 using UnityEditor;
 using UnityEditor.SceneManagement;
 using UnityEngine;
-using UnityEngine.EventSystems;
-using UnityEngine.InputSystem.UI;
 using UnityEngine.Rendering;
 using UnityEngine.Rendering.Universal;
 using UnityEngine.SceneManagement;
-using UnityEngine.UI;
 
 namespace ThreeBladeEDC.EditorTools
 {
     public static class ThreeBladeSceneBuilder
     {
         public const string ScenePath = "Assets/_Fidgeting/Scenes/ThreeBladeEDC.unity";
-        private const string BlueScenePath = "Assets/Scenes/FidgetSpinnerDemo.unity";
+        public const string OriginalMetalScenePath =
+            "Assets/_Fidgeting/Scenes/ThreeBladeMetalOriginal.unity";
         private const string ImportedScenePath =
             "Assets/_ImportedSpinner/Scenes/ImportedSpinner.unity";
         private const string TwoLobeScenePath =
@@ -29,8 +27,6 @@ namespace ThreeBladeEDC.EditorTools
         private const string MeshFolder = "Assets/_Fidgeting/Generated/Meshes";
         private const string DragonScaleRollbackModelPath =
             "Assets/_Fidgeting/Models/BlenderDragonScale/DragonScaleEDC.fbx";
-        private const string ProductFontPath =
-            "Assets/Plugins/iOS/Fonts/Oxanium-VariableFont_wght.ttf";
         private const int RatchetAudioVoiceCount = 12;
         private static readonly string[] RatchetClickPaths =
         {
@@ -41,8 +37,21 @@ namespace ThreeBladeEDC.EditorTools
             "Assets/_Fidgeting/Audio/RatchetClicks/MetalDetent_Click_05.wav"
         };
 
-        [MenuItem("Fidgeting/Three-Blade/Rebuild Presentation")]
+        [MenuItem("Fidgeting/Three-Blade/Rebuild Pointed Presentation")]
         public static void BuildPresentation()
+        {
+            BuildPresentation(ScenePath, installPointedVisuals: true);
+        }
+
+        [MenuItem("Fidgeting/Three-Blade/Rebuild Original Metal Presentation")]
+        public static void BuildOriginalMetalPresentation()
+        {
+            BuildPresentation(OriginalMetalScenePath, installPointedVisuals: false);
+        }
+
+        private static void BuildPresentation(
+            string outputScenePath,
+            bool installPointedVisuals)
         {
             AssetDatabase.Refresh(ImportAssetOptions.ForceSynchronousImport);
             AudioClip[] ratchetClickVariants = LoadRatchetClickVariants();
@@ -241,25 +250,27 @@ namespace ThreeBladeEDC.EditorTools
                 bearingBallCageMesh,
                 new[] { materials.bearing });
 
-            Renderer[] rollbackRenderers = InstallDragonScaleRollbackVisuals(
-                scene,
-                materials,
-                root.transform,
-                rotor.transform,
-                hub.transform,
-                bearingVisual.transform,
-                cage.transform,
-                topCap.transform,
-                topWasher.transform,
-                bottomWasher.transform,
-                bottomCap.transform);
+            Renderer[] presentationRenderers = installPointedVisuals
+                ? InstallDragonScaleRollbackVisuals(
+                    scene,
+                    materials,
+                    root.transform,
+                    rotor.transform,
+                    hub.transform,
+                    bearingVisual.transform,
+                    cage.transform,
+                    topCap.transform,
+                    topWasher.transform,
+                    bottomWasher.transform,
+                    bottomCap.transform)
+                : root.GetComponentsInChildren<Renderer>(true);
 
             BearingCageVisualSync cageSync =
                 bearingVisual.AddComponent<BearingCageVisualSync>();
             cageSync.Configure(rotorController, cage.transform, 0.5f);
 
             MetalGlintController glint = root.AddComponent<MetalGlintController>();
-            glint.Configure(rotorController, rollbackRenderers);
+            glint.Configure(rotorController, presentationRenderers);
 
             GameObject studio = new GameObject("Studio");
             studio.transform.SetParent(root.transform, false);
@@ -291,10 +302,10 @@ namespace ThreeBladeEDC.EditorTools
             OrbitPresentationCamera orbit =
                 camera.gameObject.AddComponent<OrbitPresentationCamera>();
             orbit.Target = root.transform;
-            orbit.FocusTarget = RequireDescendant(
-                topCap.transform,
-                "FingerCapTop_BrushedFace");
-            orbit.ConfigureFraming(ProductFramingCatalog.Resolve(ScenePath));
+            orbit.FocusTarget = installPointedVisuals
+                ? RequireDescendant(topCap.transform, "FingerCapTop_BrushedFace")
+                : topCap.transform;
+            orbit.ConfigureFraming(ProductFramingCatalog.Resolve(outputScenePath));
             orbit.SetDesktopInputEnabled(false);
 
             MobileGestureController gestures =
@@ -318,15 +329,14 @@ namespace ThreeBladeEDC.EditorTools
             MobileRuntimeBootstrap runtime =
                 root.AddComponent<MobileRuntimeBootstrap>();
             runtime.Configure(rotorController, gestures);
-            CreateMobileUi(root.transform, rotorController, exploded, orbit);
 
             rotorController.CaptureInitialPose();
             EditorSceneManager.MarkSceneDirty(scene);
-            EditorSceneManager.SaveScene(scene, ScenePath);
+            EditorSceneManager.SaveScene(scene, outputScenePath);
             SetBuildScene();
             AssetDatabase.SaveAssets();
             AssetDatabase.Refresh();
-            Debug.Log($"Three-Blade EDC presentation rebuilt: {ScenePath}");
+            Debug.Log($"Three-Blade EDC presentation rebuilt: {outputScenePath}");
         }
 
         public static void BuildAndRenderPreview()
@@ -630,199 +640,6 @@ namespace ThreeBladeEDC.EditorTools
             return materials.blade;
         }
 
-        private static void CreateMobileUi(
-            Transform parent,
-            RotorRigidbodyController rotor,
-            ExplodedViewController exploded,
-            OrbitPresentationCamera orbit)
-        {
-            Font font = AssetDatabase.LoadAssetAtPath<Font>(ProductFontPath);
-            if (font == null)
-            {
-                throw new System.InvalidOperationException(
-                    $"Missing canonical product font at {ProductFontPath}");
-            }
-            GameObject canvasObject = new GameObject(
-                "MobileCanvas",
-                typeof(RectTransform),
-                typeof(Canvas),
-                typeof(CanvasScaler),
-                typeof(GraphicRaycaster));
-            canvasObject.transform.SetParent(parent, false);
-            Canvas canvas = canvasObject.GetComponent<Canvas>();
-            canvas.renderMode = RenderMode.ScreenSpaceOverlay;
-            canvas.sortingOrder = 100;
-            CanvasScaler scaler = canvasObject.GetComponent<CanvasScaler>();
-            scaler.uiScaleMode = CanvasScaler.ScaleMode.ScaleWithScreenSize;
-            scaler.referenceResolution = new Vector2(1920f, 1080f);
-            scaler.screenMatchMode = CanvasScaler.ScreenMatchMode.MatchWidthOrHeight;
-            scaler.matchWidthOrHeight = 0.5f;
-
-            GameObject safeObject = new GameObject(
-                "SafeArea",
-                typeof(RectTransform),
-                typeof(SafeAreaFitter));
-            safeObject.transform.SetParent(canvasObject.transform, false);
-            RectTransform safeRect = safeObject.GetComponent<RectTransform>();
-            safeRect.anchorMin = Vector2.zero;
-            safeRect.anchorMax = Vector2.one;
-            safeRect.offsetMin = Vector2.zero;
-            safeRect.offsetMax = Vector2.zero;
-
-            Text title = CreateLabel(
-                "Title",
-                safeRect,
-                font,
-                "THREE-BLADE EDC",
-                30,
-                TextAnchor.MiddleLeft,
-                new Color(0.90f, 0.94f, 0.98f, 0.92f));
-            RectTransform titleRect = title.rectTransform;
-            titleRect.anchorMin = new Vector2(0f, 1f);
-            titleRect.anchorMax = new Vector2(0f, 1f);
-            titleRect.pivot = new Vector2(0f, 1f);
-            titleRect.anchoredPosition = new Vector2(34f, -26f);
-            titleRect.sizeDelta = new Vector2(520f, 58f);
-
-            Text rpm = CreateLabel(
-                "Rpm",
-                safeRect,
-                font,
-                "0 RPM",
-                28,
-                TextAnchor.MiddleRight,
-                new Color(1f, 0.46f, 0.16f, 0.96f));
-            RectTransform rpmRect = rpm.rectTransform;
-            rpmRect.anchorMin = new Vector2(1f, 1f);
-            rpmRect.anchorMax = new Vector2(1f, 1f);
-            rpmRect.pivot = new Vector2(1f, 1f);
-            rpmRect.anchoredPosition = new Vector2(-34f, -26f);
-            rpmRect.sizeDelta = new Vector2(300f, 58f);
-
-            GameObject barObject = new GameObject(
-                "ControlBar",
-                typeof(RectTransform),
-                typeof(Image),
-                typeof(HorizontalLayoutGroup));
-            barObject.transform.SetParent(safeRect, false);
-            RectTransform barRect = barObject.GetComponent<RectTransform>();
-            barRect.anchorMin = new Vector2(0.5f, 0f);
-            barRect.anchorMax = new Vector2(0.5f, 0f);
-            barRect.pivot = new Vector2(0.5f, 0f);
-            barRect.anchoredPosition = new Vector2(0f, 26f);
-            barRect.sizeDelta = new Vector2(940f, 104f);
-            Image barImage = barObject.GetComponent<Image>();
-            barImage.color = new Color(0.025f, 0.035f, 0.048f, 0.88f);
-            HorizontalLayoutGroup layout = barObject.GetComponent<HorizontalLayoutGroup>();
-            layout.padding = new RectOffset(20, 20, 18, 18);
-            layout.spacing = 18f;
-            layout.childAlignment = TextAnchor.MiddleCenter;
-            layout.childControlWidth = true;
-            layout.childControlHeight = true;
-            layout.childForceExpandWidth = true;
-            layout.childForceExpandHeight = true;
-
-            Button explodeButton = CreateButton(
-                "ExplodeButton", barRect, font, "EXPLODE", out Text explodeLabel);
-            Button resetButton = CreateButton(
-                "ResetButton", barRect, font, "RESET", out _);
-            Button motorButton = CreateButton(
-                "MotorButton", barRect, font, "MOTOR", out Text motorLabel);
-            Button viewButton = CreateButton(
-                "ViewButton", barRect, font, "VIEW", out _);
-
-            MobileViewerUI ui = canvasObject.AddComponent<MobileViewerUI>();
-            ui.Configure(
-                rotor,
-                exploded,
-                orbit,
-                explodeButton,
-                resetButton,
-                motorButton,
-                viewButton,
-                explodeLabel,
-                motorLabel,
-                rpm);
-
-            GameObject eventSystemObject = new GameObject(
-                "EventSystem",
-                typeof(EventSystem),
-                typeof(InputSystemUIInputModule));
-            eventSystemObject.transform.SetParent(parent, false);
-            eventSystemObject
-                .GetComponent<InputSystemUIInputModule>()
-                .AssignDefaultActions();
-        }
-
-        private static Text CreateLabel(
-            string name,
-            Transform parent,
-            Font font,
-            string value,
-            int fontSize,
-            TextAnchor alignment,
-            Color color)
-        {
-            GameObject labelObject = new GameObject(
-                name,
-                typeof(RectTransform),
-                typeof(CanvasRenderer),
-                typeof(Text));
-            labelObject.transform.SetParent(parent, false);
-            Text label = labelObject.GetComponent<Text>();
-            label.font = font;
-            label.text = value;
-            label.fontSize = fontSize;
-            label.alignment = alignment;
-            label.color = color;
-            label.raycastTarget = false;
-            return label;
-        }
-
-        private static Button CreateButton(
-            string name,
-            Transform parent,
-            Font font,
-            string labelValue,
-            out Text label)
-        {
-            GameObject buttonObject = new GameObject(
-                name,
-                typeof(RectTransform),
-                typeof(CanvasRenderer),
-                typeof(Image),
-                typeof(Button),
-                typeof(LayoutElement));
-            buttonObject.transform.SetParent(parent, false);
-            Image image = buttonObject.GetComponent<Image>();
-            image.color = new Color(0.10f, 0.13f, 0.17f, 0.96f);
-            Button button = buttonObject.GetComponent<Button>();
-            ColorBlock colors = button.colors;
-            colors.normalColor = Color.white;
-            colors.highlightedColor = new Color(1f, 0.72f, 0.52f);
-            colors.pressedColor = new Color(1f, 0.46f, 0.16f);
-            colors.selectedColor = new Color(1f, 0.66f, 0.40f);
-            colors.fadeDuration = 0.08f;
-            button.colors = colors;
-            LayoutElement layout = buttonObject.GetComponent<LayoutElement>();
-            layout.preferredWidth = 205f;
-            layout.preferredHeight = 68f;
-
-            label = CreateLabel(
-                "Label",
-                buttonObject.transform,
-                font,
-                labelValue,
-                25,
-                TextAnchor.MiddleCenter,
-                new Color(0.94f, 0.96f, 0.98f, 1f));
-            RectTransform labelRect = label.rectTransform;
-            labelRect.anchorMin = Vector2.zero;
-            labelRect.anchorMax = Vector2.one;
-            labelRect.offsetMin = Vector2.zero;
-            labelRect.offsetMax = Vector2.zero;
-            return button;
-        }
 
         private static void CreateStudio(
             Transform parent,
@@ -1081,8 +898,8 @@ namespace ThreeBladeEDC.EditorTools
         {
             EditorBuildSettings.scenes = new[]
             {
-                new EditorBuildSettingsScene(BlueScenePath, true),
                 new EditorBuildSettingsScene(ScenePath, true),
+                new EditorBuildSettingsScene(OriginalMetalScenePath, true),
                 new EditorBuildSettingsScene(ImportedScenePath, true),
                 new EditorBuildSettingsScene(TwoLobeScenePath, true),
                 new EditorBuildSettingsScene(EdcScenePath, true)

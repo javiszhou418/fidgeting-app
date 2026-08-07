@@ -11,6 +11,45 @@
 - `仅规格`：只有设计规格，不能对外称为已实现。
 - `待真机验收`：自动化能验证结构，但触感仍必须在 iPhone 上确认。
 
+## Build 21 事故排查与 Build 22 恢复候选（覆盖下方较早的产品目录描述）
+
+> **当前发布门禁：Build 22 尚未构建或安装到 iPhone，必须等待本节真实预览获得用户明确批准。**
+> 下方 Build 20/21 与六模型相关条目是对应历史构建时点的记录，不再代表当前 Release 目录。
+
+本次事故不是模型资产被删除，而是四个发布边界同时失效：
+
+1. 仓库此前没有任何 Git commit，Build 21 也没有源码 commit/manifest；相同 build number 曾对应多份
+   不同源码，无法可靠回滚或证明“推到手机”的具体内容。
+2. 发布脚本直接从持续变化的共享 Unity 工作区导出。排查期间再次实测到另一个 FanCard Unity 任务在
+   测试/预览之间改写场景、Build Settings 与资产，证明并发污染不是推测。
+3. `ThreeBladeSceneBuilder.InstallDragonScaleRollbackVisuals` 把原三叶场景的 Renderer 禁用后直接插入
+   尖三叶模型；产品目录又把该场景标成 `metal-three-blade`，所以新设计覆盖了错误槽位。
+4. Build Settings、Swift 枚举和旧选择迁移各自维护顺序。Build 21 还把默认选择强制迁到
+   `metal-three-blade`；旧 Unity `MobileCanvas` 与原生 SwiftUI 同时存在，Oxanium 又被全局用于业务 UI，
+   因而产生“后几款像消失”“陌生字体/陌生 UI”的组合症状。此前“只剩陀螺”的直接原因则是原生
+   overlay 安装依赖旧蓝色场景；应用级 bootstrap 修复仍保留。
+
+Build 22 恢复候选当前固定为五款 Release 产品：尖三叶（替代旧蓝色槽位）、原三叶金属、镜钢四翼、
+石墨双叶、磁吸推牌。尖三叶继续使用 `ThreeBladeEDC.unity`；原三叶金属从程序化原始几何独立重建为
+`ThreeBladeMetalOriginal.unity`，两者不再共享视觉替换。`ProductCatalog` 成为 C# 场景、Coordinator、
+Swift shipping cases、Build Settings 与缩略图白名单的共同来源；旧 `blue-classic` 数据只做一次性、
+不覆盖新数据的迁移到 `pointed-three-blade`。FanCard 与旧蓝色源码仍保留，但不进入 Build 22 Release。
+
+UI 恢复候选只允许原生 SwiftUI：五个 shipping scene 的 `MobileCanvas` / `EventSystem` 已移除，场景
+builder 中创建旧 HUD 的代码也已删除；业务 UI 使用 iOS 系统字体，Oxanium 只保留给模型顶部 Combo。
+Combo 数字尺寸提高到 42 / 47 / 52 / 58 pt，继续使用中性白色；曲线调节工具只在 DEBUG 出现。
+
+防复发措施：发布脚本现在拒绝脏工作树，Unity 导出前后必须是同一 commit；Release 真机导出必须收到
+`FIDGET_SOURCE_COMMIT`，并生成/校验 `FidgetingBuildManifest.json`（bundle、version、build、commit、
+场景表）。Build number 提升到 22。恢复前源码已保存为本地基线 commit `917553f`；正式恢复提交只会
+选择性纳入本节文件，排除并发 FanCard 修改。
+
+验证证据：恢复专项 EditMode `75/75` 通过，报告为
+`Artifacts/RecoveryFocusedEditModeTests.xml`；shipping Swift iPhoneOS 15 全量 typecheck 通过。五款
+真实 shipping Unity 场景的 top / authored hero / 左右斜视 / low 共 25 张图及联系表位于
+`Artifacts/RecoveryApprovalV22/`，总 Hero 联系表为 `shipping-five-hero-contact.png`。完整 EditMode 与
+原生 Simulator 冷启动截图将在隔离的恢复提交工作树中完成并补记；当前 iPhone 视觉与动态验收均待办。
+
 ## 当前绑定矩阵
 
 > 2026-08-07 Build 20 状态覆盖本文件中同日较早的 `approval pending` / `未装机` 描述：用户查看最新正式

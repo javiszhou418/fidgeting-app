@@ -20,7 +20,7 @@ namespace FidgetingApp.Tests.Editor
             "com.jiaweizhou.fidgetspinner.codex";
 
         [Test]
-        public void BuildContainsAllSixFidgetModelsInOneProduct()
+        public void ReleaseBuildContainsOnlyTheFiveApprovedProductScenes()
         {
             string[] scenes = EditorBuildSettings.scenes
                 .Where(scene => scene.enabled)
@@ -31,47 +31,50 @@ namespace FidgetingApp.Tests.Editor
                 new[]
                 {
                     "Assets/_Fidgeting/Scenes/ThreeBladeEDC.unity",
-                    "Assets/Scenes/FidgetSpinnerDemo.unity",
+                    "Assets/_Fidgeting/Scenes/ThreeBladeMetalOriginal.unity",
                     "Assets/_ImportedSpinner/Scenes/ImportedSpinner.unity",
                     "Assets/_TwoLobeBar/Scenes/TwoLobeBar.unity",
-                    "Assets/_EDC/Scenes/MeshyEDC.unity",
-                    "Assets/_FanCard/Scenes/MagneticFanCard.unity"
+                    "Assets/_EDC/Scenes/MeshyEDC.unity"
                 },
                 scenes);
+            CollectionAssert.DoesNotContain(
+                scenes,
+                SpinnerEnvironmentCatalog.BlueScenePath);
+            CollectionAssert.DoesNotContain(
+                scenes,
+                SpinnerEnvironmentCatalog.FanCardScenePath);
         }
 
         [Test]
-        public void DragonScaleThreeBladeOwnsThePrimaryCatalogSlotAcrossUnityAndNativeUi()
+        public void PointedThreeBladeReplacesBlueWithoutReplacingOriginalMetal()
         {
             string swift = File.ReadAllText(
                 "Assets/Plugins/iOS/CodexSwiftUIOverlay.swift");
-            string coordinator = File.ReadAllText(
-                "Assets/Scripts/Product/FidgetAppCoordinator.cs");
-            string buildPipeline = File.ReadAllText(
-                "Assets/Editor/IosBuildPipeline.cs");
+            string catalog = File.ReadAllText(
+                "Assets/Scripts/Product/ProductCatalog.cs");
+            string migration = File.ReadAllText(
+                "Assets/Scripts/Product/ProductCatalogMigration.cs");
 
             Assert.That(
-                swift.IndexOf("case metalThreeBlade = \"metal-three-blade\""),
-                Is.LessThan(swift.IndexOf("case blueClassic = \"blue-classic\"")),
-                "The Dragon Scale model must be the first native library page.");
+                swift.IndexOf("case pointedThreeBlade = \"pointed-three-blade\""),
+                Is.LessThan(swift.IndexOf("case metalThreeBlade = \"metal-three-blade\"")),
+                "The pointed replacement must own the retired blue model's first slot.");
             StringAssert.Contains(
-                "static let primaryModelCatalogVersion = \"fidgeting.primaryModelCatalogVersion\"",
-                swift,
-                "Existing installs need a one-time migration away from the retired first slot.");
-            StringAssert.Contains("? .metalThreeBlade", swift);
+                "persistedModelId == \"blue-classic\"",
+                swift);
+            StringAssert.DoesNotContain("primaryModelCatalogVersion", swift);
             StringAssert.Contains(
-                "new SpinnerProgressionRuntime(MetalModelId)",
-                coordinator);
+                "SpinnerEnvironmentCatalog.PointedScenePath",
+                catalog);
             StringAssert.Contains(
-                "new CollectorProgressionRuntime(MetalModelId)",
-                coordinator);
-
-            int productOrder = coordinator.IndexOf(
-                "MetalModelId,\n            BlueModelId,");
-            Assert.That(productOrder, Is.GreaterThanOrEqualTo(0));
-            int sceneOrder = buildPipeline.IndexOf(
-                "MetalScenePath,\n            BlueScenePath,");
-            Assert.That(sceneOrder, Is.GreaterThanOrEqualTo(0));
+                "SpinnerEnvironmentCatalog.MetalScenePath",
+                catalog);
+            StringAssert.Contains(
+                "MigrateProgression(LegacyBlueModelId, PointedThreeBladeModelId)",
+                migration);
+            Assert.That(
+                SpinnerEnvironmentCatalog.PointedScenePath,
+                Is.Not.EqualTo(SpinnerEnvironmentCatalog.MetalScenePath));
 
             string[] scenes = EditorBuildSettings.scenes
                 .Where(scene => scene.enabled)
@@ -81,6 +84,33 @@ namespace FidgetingApp.Tests.Editor
                 scenes.First(),
                 Is.EqualTo("Assets/_Fidgeting/Scenes/ThreeBladeEDC.unity"),
                 "The shipping app must boot directly into the replacement first spinner.");
+        }
+
+        [Test]
+        public void PointedAndOriginalMetalScenesOwnDifferentVisibleGeometry()
+        {
+            EditorSceneManager.OpenScene(
+                SpinnerEnvironmentCatalog.PointedScenePath,
+                OpenSceneMode.Single);
+            Transform pointedBrushFace = Object.FindObjectsByType<Transform>(
+                    FindObjectsInactive.Include,
+                    FindObjectsSortMode.None)
+                .FirstOrDefault(candidate => candidate.name == "FingerCapTop_BrushedFace");
+            Assert.That(pointedBrushFace, Is.Not.Null);
+            Assert.That(pointedBrushFace.GetComponent<Renderer>().enabled, Is.True);
+            Assert.That(FindRenderer("ThreeBladeFrame").enabled, Is.False);
+
+            EditorSceneManager.OpenScene(
+                SpinnerEnvironmentCatalog.MetalScenePath,
+                OpenSceneMode.Single);
+            Assert.That(FindRenderer("ThreeBladeFrame").enabled, Is.True);
+            Assert.That(FindRenderer("ThreeBladeInsets").enabled, Is.True);
+            Assert.That(
+                Object.FindObjectsByType<Transform>(
+                        FindObjectsInactive.Include,
+                        FindObjectsSortMode.None)
+                    .Any(candidate => candidate.name == "FingerCapTop_BrushedFace"),
+                Is.False);
         }
 
         [Test]
@@ -113,11 +143,11 @@ namespace FidgetingApp.Tests.Editor
                 "PlayerSettings.iOS.simulatorSdkArchitecture =\n" +
                 "                    AppleMobileArchitectureSimulator.ARM64;",
                 buildPipeline);
-            StringAssert.Contains("PlayerSettings.iOS.buildNumber = \"21\";", buildPipeline);
+            StringAssert.Contains("PlayerSettings.iOS.buildNumber = \"22\";", buildPipeline);
         }
 
         [Test]
-        public void BuildContainsAllFourSpinnerModelsInOneProduct()
+        public void ReleaseKeepsBothThreeBladeProductsAndExistingApprovedModels()
         {
             string[] scenes = EditorBuildSettings.scenes
                 .Where(scene => scene.enabled)
@@ -127,13 +157,13 @@ namespace FidgetingApp.Tests.Editor
             CollectionAssert.IsSubsetOf(
                 new[]
                 {
-                    "Assets/Scenes/FidgetSpinnerDemo.unity",
                     "Assets/_Fidgeting/Scenes/ThreeBladeEDC.unity",
+                    "Assets/_Fidgeting/Scenes/ThreeBladeMetalOriginal.unity",
                     "Assets/_ImportedSpinner/Scenes/ImportedSpinner.unity",
                     "Assets/_TwoLobeBar/Scenes/TwoLobeBar.unity"
                 },
                 scenes,
-                "Adding the EDC must not remove any of the four existing spinners.");
+                "Recovery must keep both distinct three-blade products and approved existing models.");
         }
 
         [Test]
@@ -576,6 +606,9 @@ namespace FidgetingApp.Tests.Editor
             StringAssert.Contains("case .graphiteTwoLobe: return \"石墨双叶\"", source);
             StringAssert.Contains("case magneticSlideTile = \"magnetic-slide-tile\"", source);
             StringAssert.Contains("case .magneticSlideTile: return \"磁吸推牌\"", source);
+            StringAssert.Contains("case pointedThreeBlade = \"pointed-three-blade\"", source);
+            StringAssert.Contains("case .pointedThreeBlade: return \"三叶尖金属\"", source);
+            StringAssert.Contains("static let shippingCases: [SpinnerModel]", source);
             StringAssert.Contains("case magneticFanCard = \"magnetic-fan-card\"", source);
             StringAssert.Contains("case .magneticFanCard: return \"磁吸扇牌\"", source);
             StringAssert.Contains("setModeBarVisible(true)", source);
@@ -636,11 +669,12 @@ namespace FidgetingApp.Tests.Editor
                 thumbnailRoot,
                 "*.png",
                 SearchOption.AllDirectories);
-            Assert.That(thumbnails, Has.Length.EqualTo(16));
+            Assert.That(thumbnails, Has.Length.EqualTo(17));
 
             string[] expectedNames =
             {
                 "product-thumbnail-blue-classic.png",
+                "product-thumbnail-pointed-three-blade.png",
                 "product-thumbnail-metal-three-blade.png",
                 "product-thumbnail-gold-four-wing.png",
                 "product-thumbnail-graphite-two-lobe.png",
@@ -710,6 +744,11 @@ namespace FidgetingApp.Tests.Editor
                 pipeline);
             StringAssert.Contains("ProductThumbnailAssetRootPath", pipeline);
             StringAssert.Contains("ProductStickerArtworkAssetRootPath", pipeline);
+            StringAssert.Contains("shippingModelThumbnailNames", pipeline);
+            StringAssert.Contains("ProductCatalog.ShippingEntries", pipeline);
+            StringAssert.Contains(
+                "shippingModelThumbnailNames.Contains(Path.GetFileName(candidate))",
+                pipeline);
             StringAssert.Contains("project.AddFileToBuild(mainTarget, fileGuid)", pipeline);
         }
 
@@ -850,22 +889,17 @@ namespace FidgetingApp.Tests.Editor
         }
 
         [Test]
-        public void EntireProductUiUsesOxaniumAndTheSharedDesignSystem()
+        public void ProductUiUsesSystemTypographyAndReservesOxaniumForCombo()
         {
             const string fontPath =
                 "Assets/Plugins/iOS/Fonts/Oxanium-VariableFont_wght.ttf";
             const string fontLicensePath = "Assets/Plugins/iOS/Fonts/OFL.txt";
-            const string fontGuid = "4acabaa33f32e44ff8de56b38dbcae31";
             string source = File.ReadAllText("Assets/Plugins/iOS/CodexSwiftUIOverlay.swift");
             string components = File.ReadAllText(
                 "Assets/Plugins/iOS/FidgetProductUIComponents.swift");
             string pipeline = File.ReadAllText("Assets/Editor/IosBuildPipeline.cs");
             string builder = File.ReadAllText(
                 "Assets/_Fidgeting/Editor/ThreeBladeSceneBuilder.cs");
-            string metalScene = File.ReadAllText(
-                "Assets/_Fidgeting/Scenes/ThreeBladeEDC.unity");
-            string importedScene = File.ReadAllText(
-                "Assets/_ImportedSpinner/Scenes/ImportedSpinner.unity");
             string guideline = File.ReadAllText("Docs/LiquidGlassDesignGuideline.md");
 
             Assert.That(File.Exists(fontPath), Is.True);
@@ -876,6 +910,10 @@ namespace FidgetingApp.Tests.Editor
             StringAssert.Contains("static let familyName = \"Oxanium\"", components);
             StringAssert.Contains("CTFontManagerRegisterFontsForURL", components);
             StringAssert.Contains("static func product(", components);
+            StringAssert.Contains("static func combo(", components);
+            StringAssert.Contains(".system(style, design: .default)", components);
+            StringAssert.Contains("ProductTypography.familyName", components);
+            StringAssert.Contains(".combo(", source);
             StringAssert.Contains("func productDesignSystem()", components);
             StringAssert.Contains("ProductTypography.configureUIKitAppearance()", source);
             Assert.That(
@@ -885,21 +923,6 @@ namespace FidgetingApp.Tests.Editor
                 Is.GreaterThanOrEqualTo(7));
 
             string combinedSwiftUi = components + source;
-            foreach (string forbiddenFont in new[]
-                     {
-                         ".font(.system",
-                         ".font(.largeTitle",
-                         ".font(.title",
-                         ".font(.headline",
-                         ".font(.body",
-                         ".font(.callout",
-                         ".font(.subheadline",
-                         ".font(.footnote",
-                         ".font(.caption"
-                     })
-            {
-                StringAssert.DoesNotContain(forbiddenFont, combinedSwiftUi);
-            }
             StringAssert.DoesNotContain("Color.cyan", combinedSwiftUi);
             StringAssert.DoesNotContain(".tint(.cyan)", combinedSwiftUi);
 
@@ -907,37 +930,25 @@ namespace FidgetingApp.Tests.Editor
             StringAssert.Contains("Oxanium-VariableFont_wght.ttf", pipeline);
             StringAssert.Contains("project.AddFileToBuild(mainTarget, fontGuid)", pipeline);
             StringAssert.Contains("CreateArray(\"UIAppFonts\")", pipeline);
-            StringAssert.Contains(
-                "AssetDatabase.LoadAssetAtPath<Font>(ProductFontPath)",
+            StringAssert.DoesNotContain(
+                "CreateMobileUi(root.transform, rotorController, exploded, orbit)",
                 builder);
             StringAssert.DoesNotContain("LegacyRuntime.ttf", builder);
 
-            string fontReference =
-                $"m_Font: {{fileID: 12800000, guid: {fontGuid}, type: 3}}";
-            StringAssert.Contains(fontReference, metalScene);
-            StringAssert.Contains(fontReference, importedScene);
-            StringAssert.DoesNotContain(
-                "m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}",
-                metalScene + importedScene);
-
-            foreach (string scenePath in new[]
-                     {
-                         "Assets/_Fidgeting/Scenes/ThreeBladeEDC.unity",
-                         "Assets/_ImportedSpinner/Scenes/ImportedSpinner.unity"
-                     })
+            foreach (ProductCatalogEntry product in ProductCatalog.ShippingEntries)
             {
-                EditorSceneManager.OpenScene(scenePath, OpenSceneMode.Single);
+                EditorSceneManager.OpenScene(product.ScenePath, OpenSceneMode.Single);
                 UnityEngine.UI.Text[] labels = Object.FindObjectsByType<UnityEngine.UI.Text>(
                     FindObjectsInactive.Include,
                     FindObjectsSortMode.None);
-                Assert.That(labels, Is.Not.Empty, $"{scenePath} must contain its legacy HUD labels.");
                 Assert.That(
-                    labels.All(label => label.font != null && label.font.name.Contains("Oxanium")),
-                    Is.True,
-                    $"Every legacy label in {scenePath} must use the canonical Oxanium asset.");
+                    labels,
+                    Is.Empty,
+                    $"Shipping scene {product.ScenePath} must not carry a second legacy HUD.");
             }
 
-            StringAssert.Contains("全 App 的拉丁字母与数字统一使用 Oxanium", guideline);
+            StringAssert.Contains("业务 UI 使用 iOS 系统字体", guideline);
+            StringAssert.Contains("Oxanium 只用于模型顶部 Combo", guideline);
             StringAssert.Contains("业务层禁止固定 `Color.cyan`", guideline);
         }
 
@@ -970,15 +981,16 @@ namespace FidgetingApp.Tests.Editor
         {
             string coordinator = File.ReadAllText(
                 "Assets/Scripts/Product/FidgetAppCoordinator.cs");
+            string catalog = File.ReadAllText(
+                "Assets/Scripts/Product/ProductCatalog.cs");
 
             StringAssert.Contains(
-                "private const string EdcModelId = \"magnetic-slide-tile\"",
-                coordinator);
+                "public const string MagneticSlideTileModelId = \"magnetic-slide-tile\"",
+                catalog);
+            StringAssert.Contains("SpinnerEnvironmentCatalog.EdcScenePath", catalog);
             StringAssert.Contains(
-                "private const string EdcScenePath = SpinnerEnvironmentCatalog.EdcScenePath",
+                "ProductCatalog.TryGetScenePath(modelId, out string scenePath)",
                 coordinator);
-            StringAssert.Contains("case EdcModelId:", coordinator);
-            StringAssert.Contains("scenePath = EdcScenePath", coordinator);
             StringAssert.Contains("edcSlider.ResetToDefaultDetent()", coordinator);
             StringAssert.Contains(
                 "environmentPresenter = SpinnerEnvironmentPresenter.Install(scenePath)",
@@ -1323,6 +1335,16 @@ namespace FidgetingApp.Tests.Editor
             StringAssert.Contains("AlignScreenTangentToSpinAxis", metal);
             StringAssert.Contains("fallbackTouchRadius = 0.48f", metal);
             StringAssert.Contains("reversalConfirmationPixels = 18f", metal);
+        }
+
+        private static Renderer FindRenderer(string objectName)
+        {
+            Renderer renderer = Object.FindObjectsByType<Renderer>(
+                    FindObjectsInactive.Include,
+                    FindObjectsSortMode.None)
+                .FirstOrDefault(candidate => candidate.name == objectName);
+            Assert.That(renderer, Is.Not.Null, $"Missing renderer: {objectName}");
+            return renderer;
         }
     }
 }

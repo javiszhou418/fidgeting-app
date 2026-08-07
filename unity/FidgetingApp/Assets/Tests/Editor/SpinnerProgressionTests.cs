@@ -11,6 +11,97 @@ namespace FidgetingApp.Tests.Editor
     public sealed class SpinnerProgressionTests
     {
         [Test]
+        public void CatalogMigrationMovesLegacyBlueProgressionAndCollectorIdentityOnce()
+        {
+            string[] keys =
+            {
+                "fidgeting.catalog.migration.version",
+                "fidgeting.progression.v1.blue-classic.experience",
+                "fidgeting.progression.v1.pointed-three-blade.experience",
+                "fidgeting.progression.v1.activeModel",
+                "fidgeting.collector.v1.focusModel",
+                "fidgeting.collector.v1.discoveredModels",
+                "fidgeting.collector.v1.awardedToyMilestones",
+                "fidgeting.collector.v1.highestToyLevels",
+                "fidgeting.appearance.sticker.v1.blue-classic",
+                "fidgeting.appearance.sticker.v1.pointed-three-blade"
+            };
+            foreach (string key in keys)
+            {
+                PlayerPrefs.DeleteKey(key);
+            }
+
+            try
+            {
+                PlayerPrefs.SetString(
+                    "fidgeting.progression.v1.blue-classic.experience",
+                    "1234.5");
+                PlayerPrefs.SetString(
+                    "fidgeting.progression.v1.activeModel",
+                    "blue-classic");
+                PlayerPrefs.SetString(
+                    "fidgeting.collector.v1.focusModel",
+                    "blue-classic");
+                PlayerPrefs.SetString(
+                    "fidgeting.collector.v1.discoveredModels",
+                    "blue-classic|gold-four-wing");
+                PlayerPrefs.SetString(
+                    "fidgeting.collector.v1.awardedToyMilestones",
+                    "blue-classic@20");
+                PlayerPrefs.SetString(
+                    "fidgeting.collector.v1.highestToyLevels",
+                    "blue-classic@35");
+                PlayerPrefs.SetString(
+                    "fidgeting.appearance.sticker.v1.blue-classic",
+                    "orbit-mark");
+
+                ProductCatalogMigration.Apply();
+
+                Assert.That(
+                    PlayerPrefs.GetString(
+                        "fidgeting.progression.v1.pointed-three-blade.experience"),
+                    Is.EqualTo("1234.5"));
+                Assert.That(
+                    PlayerPrefs.GetString("fidgeting.progression.v1.activeModel"),
+                    Is.EqualTo("pointed-three-blade"));
+                Assert.That(
+                    PlayerPrefs.GetString("fidgeting.collector.v1.focusModel"),
+                    Is.EqualTo("pointed-three-blade"));
+                StringAssert.Contains(
+                    "pointed-three-blade",
+                    PlayerPrefs.GetString("fidgeting.collector.v1.discoveredModels"));
+                Assert.That(
+                    PlayerPrefs.GetString("fidgeting.collector.v1.awardedToyMilestones"),
+                    Is.EqualTo("pointed-three-blade@20"));
+                Assert.That(
+                    PlayerPrefs.GetString("fidgeting.collector.v1.highestToyLevels"),
+                    Is.EqualTo("pointed-three-blade@35"));
+                Assert.That(
+                    PlayerPrefs.GetString(
+                        "fidgeting.appearance.sticker.v1.pointed-three-blade"),
+                    Is.EqualTo("orbit-mark"));
+
+                PlayerPrefs.SetString(
+                    "fidgeting.progression.v1.blue-classic.experience",
+                    "9999");
+                ProductCatalogMigration.Apply();
+                Assert.That(
+                    PlayerPrefs.GetString(
+                        "fidgeting.progression.v1.pointed-three-blade.experience"),
+                    Is.EqualTo("1234.5"),
+                    "The migration must be idempotent and never overwrite new data.");
+            }
+            finally
+            {
+                foreach (string key in keys)
+                {
+                    PlayerPrefs.DeleteKey(key);
+                }
+                PlayerPrefs.Save();
+            }
+        }
+
+        [Test]
         public void LevelCurve_IsMonotonicAndEndsAtLevelOneHundred()
         {
             double previous = -1d;
@@ -1402,10 +1493,11 @@ namespace FidgetingApp.Tests.Editor
             StringAssert.Contains("case .burst: return 1.27", comboPresentation);
             StringAssert.Contains("case .peak: return 1.32", comboPresentation);
             StringAssert.Contains("activeEffect == .peakBurst ? 1.40", comboPresentation);
-            StringAssert.Contains("case .ignition: return 38", comboPresentation);
-            StringAssert.Contains("case .boost: return 42", comboPresentation);
-            StringAssert.Contains("case .burst: return 46", comboPresentation);
-            StringAssert.Contains("case .peak: return 50", comboPresentation);
+            StringAssert.Contains("case .ignition: return 42", comboPresentation);
+            StringAssert.Contains("case .boost: return 47", comboPresentation);
+            StringAssert.Contains("case .burst: return 52", comboPresentation);
+            StringAssert.Contains("case .peak: return 58", comboPresentation);
+            StringAssert.Contains(".combo(", comboPresentation);
             StringAssert.Contains(".monospacedDigit()", comboPresentation);
             StringAssert.Contains(
                 ".frame(width: 112, height: 62, alignment: .center)",
@@ -1529,6 +1621,13 @@ namespace FidgetingApp.Tests.Editor
             StringAssert.Contains("private struct ComboHaloTuningPanel", swift);
             StringAssert.Contains("ComboBezierCurveEditor(", swift);
             StringAssert.Contains("打开 Combo 光晕工具", swift);
+            int settingsStart = swift.IndexOf("private struct SettingsPanel");
+            int settingsEnd = swift.IndexOf("private struct ProductPanel");
+            string settings = swift.Substring(settingsStart, settingsEnd - settingsStart);
+            Assert.That(
+                settings.IndexOf("#if DEBUG"),
+                Is.LessThan(settings.IndexOf("打开 Combo 光晕工具")),
+                "The Combo curve tool must not appear in Release settings UI.");
             StringAssert.Contains("restoreRecommendedComboHaloTuning", swift);
             StringAssert.Contains("accessibilityReduceMotion", swift);
             StringAssert.Contains("iPhone: iOS", importer);

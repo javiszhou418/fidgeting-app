@@ -100,9 +100,11 @@ namespace FidgetingApp.Product
     /// </summary>
     public static class SpinnerEnvironmentCatalog
     {
+        public const string PointedScenePath =
+            "Assets/_Fidgeting/Scenes/ThreeBladeEDC.unity";
         public const string BlueScenePath = "Assets/Scenes/FidgetSpinnerDemo.unity";
         public const string MetalScenePath =
-            "Assets/_Fidgeting/Scenes/ThreeBladeEDC.unity";
+            "Assets/_Fidgeting/Scenes/ThreeBladeMetalOriginal.unity";
         public const string ImportedScenePath =
             "Assets/_ImportedSpinner/Scenes/ImportedSpinner.unity";
         public const string TwoLobeScenePath =
@@ -122,8 +124,8 @@ namespace FidgetingApp.Product
         private static readonly SpinnerEnvironmentProfile[] profiles =
         {
             new SpinnerEnvironmentProfile(
-                "blue-classic",
-                BlueScenePath,
+                "pointed-three-blade",
+                PointedScenePath,
                 UnifiedBackgroundResourcePath,
                 1882,
                 3344,
@@ -131,25 +133,29 @@ namespace FidgetingApp.Product
                 1.08f,
                 0.68f,
                 false,
-                new Color(0.150f, 0.150f, 0.155f),
-                new Color(0.058f, 0.060f, 0.062f),
-                new Color(0.014f, 0.015f, 0.016f),
-                0.72f,
-                1.00f,
-                1.00f,
-                SpinnerGroundingStageShape.Round,
-                1.38f,
-                0.11f,
+                new Color(0.135f, 0.130f, 0.125f),
+                new Color(0.058f, 0.055f, 0.052f),
+                new Color(0.018f, 0.017f, 0.016f),
+                0.66f,
+                0.48f,
+                0.42f,
+                SpinnerGroundingStageShape.SoftSquare,
+                1.32f,
+                0.10f,
                 true,
                 string.Empty,
                 new SpinnerEnvironmentLightPreset(
-                    "Key Light",
-                    new Color(0.92f, 0.94f, 0.96f),
-                    1.48f),
+                    "Key_5000K",
+                    new Color(0.91f, 0.90f, 1.00f),
+                    0.50f),
                 new SpinnerEnvironmentLightPreset(
-                    "Rim Light",
-                    new Color(0.70f, 0.76f, 0.82f),
-                    5.2f)),
+                    "WarmRim_3200K",
+                    new Color(1.00f, 0.56f, 0.40f),
+                    0.42f),
+                new SpinnerEnvironmentLightPreset(
+                    "CoolFill_6500K",
+                    new Color(0.40f, 0.60f, 1.00f),
+                    0.18f)),
             new SpinnerEnvironmentProfile(
                 "metal-three-blade",
                 MetalScenePath,

@@ -193,22 +193,15 @@ namespace FidgetingApp.Product
     {
         public const string BridgeObjectName = "FidgetApp";
 
-        private const string BlueModelId = "blue-classic";
-        private const string MetalModelId = "metal-three-blade";
-        private const string ImportedModelId = "gold-four-wing";
-        private const string TwoLobeModelId = "graphite-two-lobe";
-        private const string EdcModelId = "magnetic-slide-tile";
+        private const string PointedModelId = ProductCatalog.PointedThreeBladeModelId;
+        private const string MetalModelId = ProductCatalog.MetalThreeBladeModelId;
+        private const string ImportedModelId = ProductCatalog.GoldFourWingModelId;
+        private const string TwoLobeModelId = ProductCatalog.GraphiteTwoLobeModelId;
+        private const string EdcModelId = ProductCatalog.MagneticSlideTileModelId;
         private const string FanCardModelId = "magnetic-fan-card";
         private static readonly string[] ProductModelIds =
-        {
-            MetalModelId,
-            BlueModelId,
-            ImportedModelId,
-            TwoLobeModelId,
-            EdcModelId,
-            FanCardModelId
-        };
-        private const string BlueScenePath = SpinnerEnvironmentCatalog.BlueScenePath;
+            ProductCatalog.ShippingModelIds();
+        private const string PointedScenePath = SpinnerEnvironmentCatalog.PointedScenePath;
         private const string MetalScenePath = SpinnerEnvironmentCatalog.MetalScenePath;
         private const string ImportedScenePath = SpinnerEnvironmentCatalog.ImportedScenePath;
         private const string TwoLobeScenePath = SpinnerEnvironmentCatalog.TwoLobeScenePath;
@@ -348,8 +341,9 @@ namespace FidgetingApp.Product
                 ThreeBladeMetalSkinSelectionKey,
                 ThreeBladeMetalSkinCatalog.AutomaticSelectionId);
             SceneManager.sceneLoaded += HandleSceneLoaded;
-            progression = new SpinnerProgressionRuntime(MetalModelId);
-            collectorProgression = new CollectorProgressionRuntime(MetalModelId);
+            ProductCatalogMigration.Apply();
+            progression = new SpinnerProgressionRuntime(PointedModelId);
+            collectorProgression = new CollectorProgressionRuntime(PointedModelId);
             combo = new SpinnerComboRuntime();
             spinReward = new SpinnerSpinRewardRuntime();
             experienceVisuals = gameObject.AddComponent<SpinnerExperienceVisuals>();
@@ -597,7 +591,8 @@ namespace FidgetingApp.Product
                 SharedPresentationGestureController>();
 
             metalMotion = null;
-            if ((scenePath == MetalScenePath
+            if ((scenePath == PointedScenePath
+                    || scenePath == MetalScenePath
                     || scenePath == ImportedScenePath
                     || scenePath == TwoLobeScenePath)
                 && metalCamera != null)
@@ -1043,24 +1038,9 @@ namespace FidgetingApp.Product
 
         private static string ModelIdForScene(string scenePath)
         {
-            if (scenePath == MetalScenePath)
+            if (ProductCatalog.TryGetModelId(scenePath, out string modelId))
             {
-                return MetalModelId;
-            }
-
-            if (scenePath == ImportedScenePath)
-            {
-                return ImportedModelId;
-            }
-
-            if (scenePath == TwoLobeScenePath)
-            {
-                return TwoLobeModelId;
-            }
-
-            if (scenePath == EdcScenePath)
-            {
-                return EdcModelId;
+                return modelId;
             }
 
             if (scenePath == FanCardScenePath)
@@ -1068,7 +1048,7 @@ namespace FidgetingApp.Product
                 return FanCardModelId;
             }
 
-            return BlueModelId;
+            return PointedModelId;
         }
 
         private void ConfigureProgressionVisuals()
@@ -1205,30 +1185,10 @@ namespace FidgetingApp.Product
 
         public void SelectModelFromNativeUi(string modelId)
         {
-            string scenePath;
-            switch (modelId)
+            if (!ProductCatalog.TryGetScenePath(modelId, out string scenePath))
             {
-                case BlueModelId:
-                    scenePath = BlueScenePath;
-                    break;
-                case MetalModelId:
-                    scenePath = MetalScenePath;
-                    break;
-                case ImportedModelId:
-                    scenePath = ImportedScenePath;
-                    break;
-                case TwoLobeModelId:
-                    scenePath = TwoLobeScenePath;
-                    break;
-                case EdcModelId:
-                    scenePath = EdcScenePath;
-                    break;
-                case FanCardModelId:
-                    scenePath = FanCardScenePath;
-                    break;
-                default:
-                    Debug.LogWarning($"[FidgetingApp] Unknown model id: {modelId}");
-                    return;
+                Debug.LogWarning($"[FidgetingApp] Unknown or non-shipping model id: {modelId}");
+                return;
             }
 
             // A paged TabView can publish another selection while the previous

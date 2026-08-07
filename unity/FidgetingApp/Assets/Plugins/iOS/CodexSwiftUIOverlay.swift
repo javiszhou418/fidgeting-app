@@ -147,8 +147,8 @@ private enum MotionSensitivityPreset: String, CaseIterable, Identifiable, Equata
 }
 
 private enum SpinnerModel: String, CaseIterable, Identifiable, Equatable {
+    case pointedThreeBlade = "pointed-three-blade"
     case metalThreeBlade = "metal-three-blade"
-    case blueClassic = "blue-classic"
     case goldFourWing = "gold-four-wing"
     case graphiteTwoLobe = "graphite-two-lobe"
     case magneticSlideTile = "magnetic-slide-tile"
@@ -156,9 +156,17 @@ private enum SpinnerModel: String, CaseIterable, Identifiable, Equatable {
 
     var id: String { rawValue }
 
+    static let shippingCases: [SpinnerModel] = [
+        .pointedThreeBlade,
+        .metalThreeBlade,
+        .goldFourWing,
+        .graphiteTwoLobe,
+        .magneticSlideTile
+    ]
+
     var title: String {
         switch self {
-        case .blueClassic: return "经典蓝色"
+        case .pointedThreeBlade: return "三叶尖金属"
         case .metalThreeBlade: return "三叶金属"
         case .goldFourWing: return "镜钢四翼"
         case .graphiteTwoLobe: return "石墨双叶"
@@ -169,7 +177,7 @@ private enum SpinnerModel: String, CaseIterable, Identifiable, Equatable {
 
     var subtitle: String {
         switch self {
-        case .blueClassic: return "轻盈 · 经典三叶结构"
+        case .pointedThreeBlade: return "锋锐轮廓 · 一体金属三叶"
         case .metalThreeBlade: return "精密结构 · 金属三叶模型"
         case .goldFourWing: return "镜面不锈钢 · 四翼模型"
         case .graphiteTwoLobe: return "50 mm 横杆 · 珠砂石墨金属"
@@ -180,7 +188,7 @@ private enum SpinnerModel: String, CaseIterable, Identifiable, Equatable {
 
     var symbol: String {
         switch self {
-        case .blueClassic: return "circle.grid.3x3.fill"
+        case .pointedThreeBlade: return "triangle.fill"
         case .metalThreeBlade: return "gearshape.2.fill"
         case .goldFourWing: return "sparkles"
         case .graphiteTwoLobe: return "capsule.fill"
@@ -195,7 +203,7 @@ private enum SpinnerModel: String, CaseIterable, Identifiable, Equatable {
 
     var accent: Color {
         switch self {
-        case .blueClassic: return .blue
+        case .pointedThreeBlade: return Color(white: 0.82)
         case .metalThreeBlade: return Color(white: 0.72)
         case .goldFourWing: return Color(red: 0.72, green: 0.76, blue: 0.82)
         case .graphiteTwoLobe: return Color(red: 0.30, green: 0.32, blue: 0.34)
@@ -206,7 +214,7 @@ private enum SpinnerModel: String, CaseIterable, Identifiable, Equatable {
 }
 
 private struct OfflineProgressionReward: Equatable {
-    var model: SpinnerModel = .metalThreeBlade
+    var model: SpinnerModel = .pointedThreeBlade
     var experience = 0.0
     var elapsedHours = 0.0
     var previousLevel = 1
@@ -990,7 +998,6 @@ private struct HapticLabTelemetrySnapshot: Equatable {
 private final class ProductUiState: ObservableObject {
     private enum Key {
         static let selectedModel = "fidgeting.selectedModel"
-        static let primaryModelCatalogVersion = "fidgeting.primaryModelCatalogVersion"
         static let interactionMode = "fidgeting.interactionMode"
         static let hapticIntensity = UnityBridge.hapticIntensityKey
         static let hapticsEnabled = UnityBridge.hapticsEnabledKey
@@ -1092,7 +1099,7 @@ private final class ProductUiState: ObservableObject {
     @Published var detentPresetDetents = 0
     @Published var detentTuningIntensity = 0.0
     @Published var detentTuningSharpness = 0.0
-    @Published var progressionModel: SpinnerModel = .metalThreeBlade
+    @Published var progressionModel: SpinnerModel = .pointedThreeBlade
     @Published var progressionLevel = 1
     @Published var progressionTotalExperience = 0.0
     @Published var progressionLevelStartExperience = 0.0
@@ -1124,7 +1131,7 @@ private final class ProductUiState: ObservableObject {
     @Published var collectorRankStartExperience = 0.0
     @Published var collectorNextRankExperience = 1.0
     @Published var collectorFraction = 0.0
-    @Published var collectorFocusModel: SpinnerModel = .metalThreeBlade
+    @Published var collectorFocusModel: SpinnerModel = .pointedThreeBlade
     @Published var collectorCanChangeFocus = true
     @Published var collectorGlobalBonus = 0.0
     @Published var collectorFocusBonus = 0.05
@@ -1202,16 +1209,12 @@ private final class ProductUiState: ObservableObject {
         let needsGestureResponsivenessMigration = tuningVersion < 6
         let needsSpeedTextureMigration = tuningVersion < 7
         let needsIndependentControlMigration = tuningVersion < 8
-        let needsPrimaryModelMigration = defaults.integer(
-            forKey: Key.primaryModelCatalogVersion) < 1
-        let persistedModel = SpinnerModel(
-            rawValue: defaults.string(forKey: Key.selectedModel) ?? "")
-        selectedModel = needsPrimaryModelMigration
-            ? .metalThreeBlade
-            : (persistedModel ?? .metalThreeBlade)
-        if needsPrimaryModelMigration {
-            defaults.set(SpinnerModel.metalThreeBlade.rawValue, forKey: Key.selectedModel)
-            defaults.set(1, forKey: Key.primaryModelCatalogVersion)
+        let persistedModelId = defaults.string(forKey: Key.selectedModel) ?? ""
+        selectedModel = persistedModelId == "blue-classic"
+            ? .pointedThreeBlade
+            : (SpinnerModel(rawValue: persistedModelId) ?? .pointedThreeBlade)
+        if persistedModelId != selectedModel.rawValue {
+            defaults.set(selectedModel.rawValue, forKey: Key.selectedModel)
         }
         interactionMode = SpinnerInteractionMode(
             rawValue: defaults.string(forKey: Key.interactionMode) ?? "") ?? .smooth
@@ -2599,10 +2602,10 @@ private enum ComboPresentationLevel: Int, Equatable {
 
     var numberPointSize: CGFloat {
         switch self {
-        case .ignition: return 38
-        case .boost: return 42
-        case .burst: return 46
-        case .peak: return 50
+        case .ignition: return 42
+        case .boost: return 47
+        case .burst: return 52
+        case .peak: return 58
         }
     }
 
@@ -2760,7 +2763,7 @@ private struct RewardingComboLockup: View {
     }
 
     private var numberFont: Font {
-        .product(
+        .combo(
             size: level.numberPointSize,
             relativeTo: .largeTitle,
             weight: .heavy).monospacedDigit()
@@ -2808,7 +2811,7 @@ private struct RewardingComboLockup: View {
         VStack(spacing: -4) {
             HStack(alignment: .lastTextBaseline, spacing: 0) {
                 Text("×")
-                    .font(.product(size: 18, weight: .bold))
+                    .font(.combo(size: 20, weight: .bold))
                     .foregroundStyle(Color.white.opacity(0.72))
 
                 numberLayer
@@ -2822,7 +2825,7 @@ private struct RewardingComboLockup: View {
                 Text(combo.title.uppercased())
                     .foregroundStyle(Color.white.opacity(0.88))
             }
-            .font(.product(.subheadline, weight: .bold))
+            .font(.combo(size: 17, relativeTo: .headline, weight: .bold))
             .lineLimit(1)
             .scaleEffect(labelScale)
         }
@@ -2861,7 +2864,7 @@ private struct RewardingComboLockup: View {
 
             lockupContent
         }
-        .frame(minWidth: 184, minHeight: 94)
+        .frame(minWidth: 198, minHeight: 104)
         .accessibilityElement(children: .ignore)
         .accessibilityLabel("\(combo.count) 连击，\(combo.title)")
         .onAppear {
@@ -4409,7 +4412,7 @@ private struct CollectorProfile: View {
     private var rankOverview: some View {
         VStack(alignment: .leading, spacing: 14) {
             Menu {
-                ForEach(SpinnerModel.allCases) { model in
+                ForEach(SpinnerModel.shippingCases) { model in
                     Button {
                         state.setCollectorFocus(model)
                     } label: {
@@ -4574,7 +4577,7 @@ private struct CollectorProfile: View {
                 Text("我的收藏")
                     .font(.product(.headline))
                     .padding(.bottom, 8)
-                ForEach(SpinnerModel.allCases) { model in
+                ForEach(SpinnerModel.shippingCases) { model in
                     let discovered = state.collectorDiscoveredModelIds.contains(model.rawValue)
                     HStack(spacing: 11) {
                         Image(systemName: model.symbol)
@@ -4591,7 +4594,7 @@ private struct CollectorProfile: View {
                             .foregroundStyle(Color.white.opacity(discovered ? 0.70 : 0.16))
                     }
                     .padding(.vertical, 11)
-                    if model != SpinnerModel.allCases.last {
+                    if model != SpinnerModel.shippingCases.last {
                         Divider().overlay(Color.white.opacity(0.07))
                     }
                 }
@@ -4629,7 +4632,7 @@ private struct SpinnerLibrary: View {
             TabView(selection: Binding(
                 get: { state.selectedModel },
                 set: select)) {
-                ForEach(SpinnerModel.allCases) { model in
+                ForEach(SpinnerModel.shippingCases) { model in
                     Spacer(minLength: 270)
                     .tag(model)
                     .padding(.bottom, 16)
@@ -5058,7 +5061,9 @@ private struct ComboHaloTuningPanel: View {
 private struct SettingsPanel: View {
     @ObservedObject var state: ProductUiState
     @State private var isHapticLabVisible = false
+#if DEBUG
     @State private var isComboHaloLabVisible = false
+#endif
 
     var body: some View {
         ScrollView {
@@ -5067,6 +5072,7 @@ private struct SettingsPanel: View {
                     .font(.product(.subheadline))
                     .foregroundStyle(Color.white.opacity(0.62))
 
+#if DEBUG
                 Button {
                     withAnimation(.easeInOut(duration: 0.2)) {
                         isComboHaloLabVisible.toggle()
@@ -5086,6 +5092,7 @@ private struct SettingsPanel: View {
                     ComboHaloTuningPanel(state: state)
                         .transition(.opacity.combined(with: .move(edge: .top)))
                 }
+#endif
 
                 ProductSectionCard("触觉", symbol: "waveform") {
                     ProductToggleRow(
@@ -6062,8 +6069,8 @@ public func CodexProgressionReceiveState(
     _ equippedThreeBladeMetalSkinId: UnsafePointer<CChar>?,
     _ productStickerCatalog: UnsafePointer<CChar>?,
     _ equippedProductStickerId: UnsafePointer<CChar>?) {
-    let modelRawValue = modelId.map { String(cString: $0) } ?? "metal-three-blade"
-    let model = SpinnerModel(rawValue: modelRawValue) ?? .metalThreeBlade
+    let modelRawValue = modelId.map { String(cString: $0) } ?? "pointed-three-blade"
+    let model = SpinnerModel(rawValue: modelRawValue) ?? .pointedThreeBlade
     let offlineModelRawValue = offlineModelId.map { String(cString: $0) }
         ?? modelRawValue
     let offlineModel = SpinnerModel(rawValue: offlineModelRawValue) ?? model
@@ -6163,8 +6170,8 @@ public func CodexCollectorReceiveState(
     _ discoveredModelPayload: UnsafePointer<CChar>?,
     _ achievementCatalogPayload: UnsafePointer<CChar>?,
     _ previousRank: Int32) {
-    let focusRawValue = focusModelId.map { String(cString: $0) } ?? "metal-three-blade"
-    let focusModel = SpinnerModel(rawValue: focusRawValue) ?? .metalThreeBlade
+    let focusRawValue = focusModelId.map { String(cString: $0) } ?? "pointed-three-blade"
+    let focusModel = SpinnerModel(rawValue: focusRawValue) ?? .pointedThreeBlade
     let discoveredPayload = discoveredModelPayload.map { String(cString: $0) } ?? ""
     let discoveredIds = Set(discoveredPayload.split(separator: "|").map(String.init))
     let achievements = CollectorAchievementDetail.parse(

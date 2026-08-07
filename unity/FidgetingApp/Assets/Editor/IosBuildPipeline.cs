@@ -7,27 +7,20 @@ using UnityEditor.Build.Reporting;
 using UnityEditor.iOS.Xcode;
 using UnityEngine;
 using UnityEngine.Rendering;
+using FidgetingApp.Product;
 
 namespace CodexUnityLabEditor
 {
     public static class IosBuildPipeline
     {
-        private const string BlueScenePath = "Assets/Scenes/FidgetSpinnerDemo.unity";
-        private const string MetalScenePath = "Assets/_Fidgeting/Scenes/ThreeBladeEDC.unity";
-        private const string ImportedScenePath =
-            "Assets/_ImportedSpinner/Scenes/ImportedSpinner.unity";
-        private const string TwoLobeScenePath =
-            "Assets/_TwoLobeBar/Scenes/TwoLobeBar.unity";
-        private const string EdcScenePath =
-            "Assets/_EDC/Scenes/MeshyEDC.unity";
-        private const string FanCardScenePath =
-            "Assets/_FanCard/Scenes/MagneticFanCard.unity";
         private const string RelativeBuildPath = "Builds/iOS/FidgetingApp";
         private const string RelativeDevelopmentBuildPath = "Builds/iOS/FidgetingAppDevelopment";
         private const string RelativeSimulatorBuildPath = "Builds/iOS/FidgetingAppSimulator";
         private const string ProductName = "Fidget Spinner";
         private const string BundleIdentifier = "com.jiaweizhou.fidgetspinner.codex";
         private const string MinimumIosVersion = "15.0";
+        private const string SourceCommitEnvironmentKey = "FIDGET_SOURCE_COMMIT";
+        private const string BuildManifestFileName = "FidgetingBuildManifest.json";
         private const string PersonalTeamIdentifier = "2RJ2CW6NK5";
         private const string OxaniumFontAssetPath =
             "Assets/Plugins/iOS/Fonts/Oxanium-VariableFont_wght.ttf";
@@ -38,14 +31,7 @@ namespace CodexUnityLabEditor
             "Assets/Resources/ProductStickers/BackdropWhite";
 
         private static readonly string[] ProductScenes =
-        {
-            MetalScenePath,
-            BlueScenePath,
-            ImportedScenePath,
-            TwoLobeScenePath,
-            EdcScenePath,
-            FanCardScenePath
-        };
+            ProductCatalog.ShippingScenePaths();
 
         [MenuItem("Tools/Codex/Configure iOS Development Build")]
         public static void ConfigureIosDevelopmentBuild()
@@ -64,7 +50,7 @@ namespace CodexUnityLabEditor
             PlayerSettings.productName = ProductName;
             PlayerSettings.SetApplicationIdentifier(NamedBuildTarget.iOS, BundleIdentifier);
             PlayerSettings.bundleVersion = "0.1.0";
-            PlayerSettings.iOS.buildNumber = "21";
+            PlayerSettings.iOS.buildNumber = "22";
             PlayerSettings.iOS.targetOSVersionString = MinimumIosVersion;
             PlayerSettings.iOS.targetDevice = iOSTargetDevice.iPhoneOnly;
             PlayerSettings.SetScriptingBackend(NamedBuildTarget.iOS, ScriptingImplementation.IL2CPP);
@@ -206,9 +192,55 @@ namespace CodexUnityLabEditor
             {
                 ConfigureXcodeAutomaticSigning(outputPath);
             }
+            WriteBuildManifest(outputPath, development, sdkVersion);
 
             string sdkLabel = sdkVersion == iOSSdkVersion.SimulatorSDK ? "Simulator" : "Device";
             Debug.Log($"[Codex] iOS {sdkLabel} Xcode project created at {outputPath}");
+        }
+
+        [Serializable]
+        private sealed class IosBuildManifest
+        {
+            public string bundleIdentifier;
+            public string version;
+            public string buildNumber;
+            public string sourceCommit;
+            public string generatedAtUtc;
+            public string sdk;
+            public bool development;
+            public string[] scenes;
+        }
+
+        private static void WriteBuildManifest(
+            string outputPath,
+            bool development,
+            iOSSdkVersion sdkVersion)
+        {
+            string sourceCommit = Environment.GetEnvironmentVariable(
+                SourceCommitEnvironmentKey);
+            bool deviceRelease = !development && sdkVersion == iOSSdkVersion.DeviceSDK;
+            if (deviceRelease && string.IsNullOrWhiteSpace(sourceCommit))
+            {
+                throw new BuildFailedException(
+                    $"Release builds require {SourceCommitEnvironmentKey}; use the guarded repository build script.");
+            }
+
+            var manifest = new IosBuildManifest
+            {
+                bundleIdentifier = BundleIdentifier,
+                version = PlayerSettings.bundleVersion,
+                buildNumber = PlayerSettings.iOS.buildNumber,
+                sourceCommit = string.IsNullOrWhiteSpace(sourceCommit)
+                    ? "local-preview"
+                    : sourceCommit,
+                generatedAtUtc = DateTime.UtcNow.ToString("O"),
+                sdk = sdkVersion.ToString(),
+                development = development,
+                scenes = (string[])ProductScenes.Clone()
+            };
+            File.WriteAllText(
+                Path.Combine(outputPath, BuildManifestFileName),
+                JsonUtility.ToJson(manifest, true));
         }
 
         private static void EnsureCanonicalProductIdentity()
@@ -488,6 +520,14 @@ namespace CodexUnityLabEditor
 
         private static void ConfigureProductThumbnails(string projectRoot, string outputPath)
         {
+            var shippingModelThumbnailNames = new HashSet<string>(
+                StringComparer.Ordinal);
+            foreach (ProductCatalogEntry product in ProductCatalog.ShippingEntries)
+            {
+                shippingModelThumbnailNames.Add(
+                    "product-thumbnail-" + product.ModelId + ".png");
+            }
+
             string[] sourceRoots =
             {
                 Path.Combine(projectRoot, ProductThumbnailAssetRootPath),
@@ -503,10 +543,21 @@ namespace CodexUnityLabEditor
                         "Canonical product artwork is missing: " + sourceRoot);
                 }
 
-                allThumbnailPaths.AddRange(Directory.GetFiles(
-                    sourceRoot,
-                    "*.png",
-                    SearchOption.AllDirectories));
+                foreach (string candidate in Directory.GetFiles(
+                             sourceRoot,
+                             "*.png",
+                             SearchOption.AllDirectories))
+                {
+                    bool isModelThumbnail = string.Equals(
+                        new DirectoryInfo(Path.GetDirectoryName(candidate)).Name,
+                        "Models",
+                        StringComparison.Ordinal);
+                    if (!isModelThumbnail
+                        || shippingModelThumbnailNames.Contains(Path.GetFileName(candidate)))
+                    {
+                        allThumbnailPaths.Add(candidate);
+                    }
+                }
             }
 
             string[] thumbnailPaths = allThumbnailPaths.ToArray();
