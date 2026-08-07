@@ -119,7 +119,7 @@ namespace CodexUnityLabEditor
                 iOSSdkVersion.SimulatorSDK,
                 RelativeSimulatorBuildPath,
                 configureSigning: false,
-                development: true);
+                development: false);
         }
 
         private static void BuildIosProject(

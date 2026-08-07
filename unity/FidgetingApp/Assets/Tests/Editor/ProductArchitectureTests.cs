@@ -149,6 +149,13 @@ namespace FidgetingApp.Tests.Editor
                 "PlayerSettings.iOS.simulatorSdkArchitecture =\n" +
                 "                    AppleMobileArchitectureSimulator.ARM64;",
                 buildPipeline);
+            StringAssert.Contains(
+                "iOSSdkVersion.SimulatorSDK,\n" +
+                "                RelativeSimulatorBuildPath,\n" +
+                "                configureSigning: false,\n" +
+                "                development: false);",
+                buildPipeline,
+                "Visual approval previews must not include the Unity Development Console.");
             StringAssert.Contains("PlayerSettings.iOS.buildNumber = \"22\";", buildPipeline);
         }
 
