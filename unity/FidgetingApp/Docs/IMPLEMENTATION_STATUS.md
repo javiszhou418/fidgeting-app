@@ -1,6 +1,6 @@
 # Fidgeting Interaction Integration Status
 
-最后更新：2026-08-07
+最后更新：2026-08-08
 
 本文件回答一个问题：规格中的能力是否已经进入可运行代码。状态只按代码、场景接线和测试证据填写，不按聊天结论或文档完成度填写。
 
@@ -30,8 +30,11 @@
    overlay 安装依赖旧蓝色场景；应用级 bootstrap 修复仍保留。
 
 Build 22 恢复候选当前固定为五款 Release 产品：尖三叶（替代旧蓝色槽位）、原三叶金属、镜钢四翼、
-石墨双叶、磁吸推牌。尖三叶继续使用 `ThreeBladeEDC.unity`；原三叶金属从程序化原始几何独立重建为
-`ThreeBladeMetalOriginal.unity`，两者不再共享视觉替换。`ProductCatalog` 成为 C# 场景、Coordinator、
+石墨双叶、磁吸推牌。2026-08-08 依据用户提供的旧版真机截图复核后确认，前一轮恢复把两套三叶视觉
+归属接反：长水滴叶片的 `DragonScaleEDC` 才是用户截图中的原三叶金属，应由
+`ThreeBladeMetalOriginal.unity` / `metal-three-blade` 承载，继续消费原等级、皮肤与贴纸；程序化尖三叶才应
+留在 `ThreeBladeEDC.unity` / `pointed-three-blade` 并替代旧蓝色槽位。场景 builder、两张 shipping scene、
+皮肤/贴纸预览入口和对应架构测试已同步交换，模型 ID 与历史存档键未改。`ProductCatalog` 成为 C# 场景、Coordinator、
 Swift shipping cases、Build Settings 与缩略图白名单的共同来源；旧 `blue-classic` 数据只做一次性、
 不覆盖新数据的迁移到 `pointed-three-blade`。FanCard 与旧蓝色源码仍保留，但不进入 Build 22 Release。
 
@@ -63,7 +66,16 @@ Simulator 修复后 ProductArchitecture `35/35`、进阶视觉运行时 `35/35` 
 原生 Simulator Release 候选均从隔离源码生成：Build 22 manifest 固定 commit `8cbfc7b`、五个场景且
 `development=false`，Unity 导出与 Xcode Release 均成功；五款分别冷启动后的原生 UI + 3D 联系表为
 `Artifacts/RecoveryApprovalV22/Native/build22-five-models-contact.png`，无黑屏、红色错误层或 Developer
-Console。当前 iPhone 构建、安装、视觉与动态验收均待用户明确批准后进行。
+Console。该联系表中的白色三叶视觉现已被 2026-08-08 的用户截图证据推翻，不能再作为安装批准。
+
+纠正后的原三叶金属直接从 shipping `ThreeBladeMetalOriginal.unity` 实渲：夜航刻度分别覆盖方块
+pictogram、HW text、细线 mark 的 top / hero / 左右斜视 / low 共 15 帧，联系表为
+`Artifacts/OriginalMetalRecoveryV23/night-cyan-three-sticker-contact.png`；冰银回纹 + 方块 pictogram 的
+五视角联系表为 `Artifacts/OriginalMetalRecoveryV23/ice-guilloche-five-angle-contact.png`。隔离工作树全量
+EditMode 为 `190/193`；本次三叶场景归属、DragonScale、程序化尖三叶、皮肤、贴纸与零初速回归全部通过，
+3 项失败均为未进入本次改动的 FanCard/其第六场景基线（材质 0.92 vs 旧期望 0.96、根姿态 180° vs
+旧期望 0°、隔离基线 Build Settings 仍为五场景）。当前 iPhone 构建、安装、视觉与动态验收均待用户对
+纠正后的预览明确批准后进行。
 
 ## 当前绑定矩阵
 
