@@ -13,7 +13,7 @@
 
 ## Build 21 事故排查与 Build 22 恢复候选（覆盖下方较早的产品目录描述）
 
-> **当前发布门禁：Build 22 尚未构建或安装到 iPhone，必须等待本节真实预览获得用户明确批准。**
+> **当前发布门禁：Build 22 已完成隔离 Simulator 验收构建，但尚未构建或安装到 iPhone；必须等待本节真实预览获得用户明确批准。**
 > 下方 Build 20/21 与六模型相关条目是对应历史构建时点的记录，不再代表当前 Release 目录。
 
 本次事故不是模型资产被删除，而是四个发布边界同时失效：
@@ -39,6 +39,12 @@ UI 恢复候选只允许原生 SwiftUI：五个 shipping scene 的 `MobileCanvas
 builder 中创建旧 HUD 的代码也已删除；业务 UI 使用 iOS 系统字体，Oxanium 只保留给模型顶部 Combo。
 Combo 数字尺寸提高到 42 / 47 / 52 / 58 pt，继续使用中性白色；曲线调节工具只在 DEBUG 出现。
 
+Simulator 复核还发现两项只在 Release 路径暴露的问题：iOS 26.4 Simulator 的 4× 回缓冲区与项目
+2× URP attachment 不匹配会造成黑屏；进阶轴承用 `GameObject.CreatePrimitive(Sphere)` 时又会尝试创建
+被 stripping 移除的 `SphereCollider`，触发红色错误覆盖层。导出器现在只在 Simulator BuildPlayer 期间
+临时把 URP/Quality MSAA 设为 4×，并在 `finally` 恢复正式 iPhone 的 2× 源值；视觉轴承则改为无碰撞体的
+程序网格。两项修复均不改变正式设备的性能预算、物理或交互。
+
 防复发措施：发布脚本现在拒绝脏工作树，Unity 导出前后必须是同一 commit；Release 真机导出必须收到
 `FIDGET_SOURCE_COMMIT`，并生成/校验 `FidgetingBuildManifest.json`（bundle、version、build、commit、
 场景表）。Build number 提升到 22。恢复前源码已保存为本地基线 commit `917553f`；正式恢复提交只会
@@ -49,10 +55,15 @@ Combo 数字尺寸提高到 42 / 47 / 52 / 58 pt，继续使用中性白色；�
 `Artifacts/RecoveryShippingEditModeTests.xml`。同一隔离提交的全量 EditMode 为 `190/192`，原始报告
 `Artifacts/RecoveryFullEditModeTests.xml` 保留两项未 shipping FanCard 基线失败：其旧测试分别期待
 材质值 `0.96` 与根姿态 `0°`，基线场景实际为 `0.92` 与 `180°`；本次不通过改测试或改场景掩盖它们。
-shipping Swift iPhoneOS 15 全量 typecheck 通过。五款
+Simulator 修复后 ProductArchitecture `35/35`、进阶视觉运行时 `35/35` 通过，报告为
+`Artifacts/RecoverySimulatorFixTests.xml` 与 `Artifacts/RecoveryProgressionRuntimeTests.xml`；轴承视觉仍为
+零生成碰撞体。shipping Swift iPhoneOS 15 全量 typecheck 通过。五款
 真实 shipping Unity 场景的 top / authored hero / 左右斜视 / low 共 25 张图及联系表位于
 `Artifacts/RecoveryApprovalV22/`，总 Hero 联系表为 `shipping-five-hero-contact.png`。完整 EditMode 与
-原生 Simulator 冷启动截图从隔离提交生成并补记；当前 iPhone 视觉与动态验收均待办。
+原生 Simulator Release 候选均从隔离源码生成：Build 22 manifest 固定 commit `8cbfc7b`、五个场景且
+`development=false`，Unity 导出与 Xcode Release 均成功；五款分别冷启动后的原生 UI + 3D 联系表为
+`Artifacts/RecoveryApprovalV22/Native/build22-five-models-contact.png`，无黑屏、红色错误层或 Developer
+Console。当前 iPhone 构建、安装、视觉与动态验收均待用户明确批准后进行。
 
 ## 当前绑定矩阵
 
