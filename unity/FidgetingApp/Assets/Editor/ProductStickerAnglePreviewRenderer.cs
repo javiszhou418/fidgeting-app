@@ -12,7 +12,7 @@ namespace CodexUnityLabEditor
     public static class ProductStickerAnglePreviewRenderer
     {
         private const string ScenePath =
-            "Assets/_Fidgeting/Scenes/ThreeBladeEDC.unity";
+            "Assets/_Fidgeting/Scenes/ThreeBladeMetalOriginal.unity";
         private const int PreviewSize = 640;
 
         private readonly struct PreviewAngle
@@ -82,6 +82,22 @@ namespace CodexUnityLabEditor
             {
                 throw new MissingReferenceException("ThreeBladeEDC needs its MainCamera.");
             }
+
+            Transform rotor = productRoot.transform.Find("RotorDynamic");
+            ThreeBladeMetalSkinProgression skins = rotor != null
+                ? rotor.GetComponent<ThreeBladeMetalSkinProgression>()
+                    ?? rotor.gameObject.AddComponent<ThreeBladeMetalSkinProgression>()
+                : null;
+            if (skins == null)
+            {
+                throw new MissingReferenceException(
+                    "The original metal scene needs its RotorDynamic skin receiver.");
+            }
+            skins.Apply(10, "night-cyan-index");
+
+            SpinnerEnvironmentPresenter environment =
+                SpinnerEnvironmentPresenter.Install(ScenePath);
+            environment.SetLibraryPreviewActive(false, true);
 
             ProductStickerPresenter presenter =
                 productRoot.GetComponent<ProductStickerPresenter>()
@@ -255,18 +271,34 @@ namespace CodexUnityLabEditor
                 throw new MissingReferenceException("ThreeBladeEDC needs its MainCamera.");
             }
 
+            Transform rotor = productRoot.transform.Find("RotorDynamic");
+            ThreeBladeMetalSkinProgression skins = rotor != null
+                ? rotor.GetComponent<ThreeBladeMetalSkinProgression>()
+                    ?? rotor.gameObject.AddComponent<ThreeBladeMetalSkinProgression>()
+                : null;
+            if (skins == null)
+            {
+                throw new MissingReferenceException(
+                    "The original metal scene needs its RotorDynamic skin receiver.");
+            }
+            skins.Apply(10, "night-cyan-index");
+
+            SpinnerEnvironmentPresenter environment =
+                SpinnerEnvironmentPresenter.Install(ScenePath);
+            environment.SetLibraryPreviewActive(false, true);
+
             ProductStickerPresenter presenter =
                 productRoot.GetComponent<ProductStickerPresenter>()
                 ?? productRoot.AddComponent<ProductStickerPresenter>();
-            string outputRoot = Path.Combine(
-                Path.GetFullPath(Path.Combine(Application.dataPath, "..")),
-                "Artifacts/Stickers/AnglePreviewCenteredV21");
+            string outputRoot = Path.GetFullPath(Path.Combine(
+                Application.dataPath,
+                "../../../Artifacts/OriginalMetalRecoveryV23"));
             Directory.CreateDirectory(outputRoot);
 
             var stickers = new[]
             {
-                new PreviewSticker("10-meteor", "pictogram"),
-                new PreviewSticker("08-geeone", "text"),
+                new PreviewSticker("01-polygon-cube", "pictogram"),
+                new PreviewSticker("02-hw-studio", "text"),
                 new PreviewSticker("21-triple-stroke", "thin-line")
             };
             var angles = new[]
@@ -293,6 +325,18 @@ namespace CodexUnityLabEditor
             target.Create();
             var readback = new Texture2D(
                 PreviewSize,
+                PreviewSize,
+                TextureFormat.RGB24,
+                false,
+                false);
+            var contactSheet = new Texture2D(
+                PreviewSize * angles.Length,
+                PreviewSize * stickers.Length,
+                TextureFormat.RGB24,
+                false,
+                false);
+            var iceContactSheet = new Texture2D(
+                PreviewSize * angles.Length,
                 PreviewSize,
                 TextureFormat.RGB24,
                 false,
@@ -345,6 +389,12 @@ namespace CodexUnityLabEditor
                             0,
                             false);
                         readback.Apply(false, false);
+                        contactSheet.SetPixels(
+                            angleIndex * PreviewSize,
+                            (stickers.Length - stickerIndex - 1) * PreviewSize,
+                            PreviewSize,
+                            PreviewSize,
+                            readback.GetPixels());
                         string fileName = string.Format(
                             "{0:00}-{1:00}-{2}-{3}.png",
                             stickerIndex + 1,
@@ -356,11 +406,37 @@ namespace CodexUnityLabEditor
                             readback.EncodeToPNG());
                     }
                 }
+
+                contactSheet.Apply(false, false);
+                File.WriteAllBytes(
+                    Path.Combine(outputRoot, "night-cyan-three-sticker-contact.png"),
+                    contactSheet.EncodeToPNG());
+
+                skins.Apply(35, "ice-guilloche");
+                presenter.Apply("01-polygon-cube", camera);
+                RenderCamera(camera, target);
+                for (int angleIndex = 0; angleIndex < angles.Length; angleIndex++)
+                {
+                    ApplyCameraPose(camera, targetPoint, angles[angleIndex]);
+                    CaptureCamera(camera, target, readback);
+                    iceContactSheet.SetPixels(
+                        angleIndex * PreviewSize,
+                        0,
+                        PreviewSize,
+                        PreviewSize,
+                        readback.GetPixels());
+                }
+                iceContactSheet.Apply(false, false);
+                File.WriteAllBytes(
+                    Path.Combine(outputRoot, "ice-guilloche-five-angle-contact.png"),
+                    iceContactSheet.EncodeToPNG());
             }
             finally
             {
                 camera.targetTexture = previousTarget;
                 RenderTexture.active = previousActive;
+                UnityEngine.Object.DestroyImmediate(iceContactSheet);
+                UnityEngine.Object.DestroyImmediate(contactSheet);
                 UnityEngine.Object.DestroyImmediate(readback);
                 target.Release();
                 UnityEngine.Object.DestroyImmediate(target);

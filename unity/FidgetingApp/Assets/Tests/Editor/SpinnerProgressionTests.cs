@@ -970,7 +970,7 @@ namespace FidgetingApp.Tests.Editor
         {
             UnityEngine.SceneManagement.Scene scene =
                 UnityEditor.SceneManagement.EditorSceneManager.OpenScene(
-                    "Assets/_Fidgeting/Scenes/ThreeBladeEDC.unity",
+                    "Assets/_Fidgeting/Scenes/ThreeBladeMetalOriginal.unity",
                     UnityEditor.SceneManagement.OpenSceneMode.Single);
             GameObject productRoot = scene.GetRootGameObjects()
                 .First(root => root.name == "ThreeBladeEDC_Root");
@@ -1154,11 +1154,11 @@ namespace FidgetingApp.Tests.Editor
         }
 
         [Test]
-        public void ThreeBladeMetalSkins_TargetEnabledDragonScaleModelInsteadOfHiddenLegacyMeshes()
+        public void ThreeBladeMetalSkins_TargetEnabledDragonScaleModelInMetalScene()
         {
             UnityEngine.SceneManagement.Scene scene =
                 UnityEditor.SceneManagement.EditorSceneManager.OpenScene(
-                    "Assets/_Fidgeting/Scenes/ThreeBladeEDC.unity",
+                    "Assets/_Fidgeting/Scenes/ThreeBladeMetalOriginal.unity",
                     UnityEditor.SceneManagement.OpenSceneMode.Single);
             GameObject productRoot = scene.GetRootGameObjects()
                 .First(root => root.name == "ThreeBladeEDC_Root");

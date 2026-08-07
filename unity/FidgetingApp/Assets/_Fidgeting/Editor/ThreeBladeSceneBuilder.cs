@@ -40,18 +40,18 @@ namespace ThreeBladeEDC.EditorTools
         [MenuItem("Fidgeting/Three-Blade/Rebuild Pointed Presentation")]
         public static void BuildPresentation()
         {
-            BuildPresentation(ScenePath, installPointedVisuals: true);
+            BuildPresentation(ScenePath, installDragonScaleVisuals: false);
         }
 
         [MenuItem("Fidgeting/Three-Blade/Rebuild Original Metal Presentation")]
         public static void BuildOriginalMetalPresentation()
         {
-            BuildPresentation(OriginalMetalScenePath, installPointedVisuals: false);
+            BuildPresentation(OriginalMetalScenePath, installDragonScaleVisuals: true);
         }
 
         private static void BuildPresentation(
             string outputScenePath,
-            bool installPointedVisuals)
+            bool installDragonScaleVisuals)
         {
             AssetDatabase.Refresh(ImportAssetOptions.ForceSynchronousImport);
             AudioClip[] ratchetClickVariants = LoadRatchetClickVariants();
@@ -250,7 +250,7 @@ namespace ThreeBladeEDC.EditorTools
                 bearingBallCageMesh,
                 new[] { materials.bearing });
 
-            Renderer[] presentationRenderers = installPointedVisuals
+            Renderer[] presentationRenderers = installDragonScaleVisuals
                 ? InstallDragonScaleRollbackVisuals(
                     scene,
                     materials,
@@ -302,7 +302,7 @@ namespace ThreeBladeEDC.EditorTools
             OrbitPresentationCamera orbit =
                 camera.gameObject.AddComponent<OrbitPresentationCamera>();
             orbit.Target = root.transform;
-            orbit.FocusTarget = installPointedVisuals
+            orbit.FocusTarget = installDragonScaleVisuals
                 ? RequireDescendant(topCap.transform, "FingerCapTop_BrushedFace")
                 : topCap.transform;
             orbit.ConfigureFraming(ProductFramingCatalog.Resolve(outputScenePath));

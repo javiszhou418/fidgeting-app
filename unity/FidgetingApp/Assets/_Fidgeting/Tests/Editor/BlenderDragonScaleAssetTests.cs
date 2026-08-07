@@ -19,7 +19,7 @@ namespace ThreeBladeEDC.Tests.Editor
         private const string CollisionModelPath =
             "Assets/_Fidgeting/Models/BlenderDragonScale/DragonScaleEDC_Collision.fbx";
         private const string DeliveryScenePath =
-            "Assets/_Fidgeting/Scenes/ThreeBladeEDC.unity";
+            "Assets/_Fidgeting/Scenes/ThreeBladeMetalOriginal.unity";
 
         [Test]
         public void DeliveryScene_UsesSelectedOnePieceDragonScaleVisualAndExplodedOrder()
