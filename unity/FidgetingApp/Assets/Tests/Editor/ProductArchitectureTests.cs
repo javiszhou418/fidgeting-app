@@ -98,17 +98,6 @@ namespace FidgetingApp.Tests.Editor
             EditorSceneManager.OpenScene(
                 SpinnerEnvironmentCatalog.PointedScenePath,
                 OpenSceneMode.Single);
-            Transform pointedBrushFace = Object.FindObjectsByType<Transform>(
-                    FindObjectsInactive.Include,
-                    FindObjectsSortMode.None)
-                .FirstOrDefault(candidate => candidate.name == "FingerCapTop_BrushedFace");
-            Assert.That(pointedBrushFace, Is.Not.Null);
-            Assert.That(pointedBrushFace.GetComponent<Renderer>().enabled, Is.True);
-            Assert.That(FindRenderer("ThreeBladeFrame").enabled, Is.False);
-
-            EditorSceneManager.OpenScene(
-                SpinnerEnvironmentCatalog.MetalScenePath,
-                OpenSceneMode.Single);
             Assert.That(FindRenderer("ThreeBladeFrame").enabled, Is.True);
             Assert.That(FindRenderer("ThreeBladeInsets").enabled, Is.True);
             Assert.That(
@@ -117,6 +106,17 @@ namespace FidgetingApp.Tests.Editor
                         FindObjectsSortMode.None)
                     .Any(candidate => candidate.name == "FingerCapTop_BrushedFace"),
                 Is.False);
+
+            EditorSceneManager.OpenScene(
+                SpinnerEnvironmentCatalog.MetalScenePath,
+                OpenSceneMode.Single);
+            Transform metalBrushFace = Object.FindObjectsByType<Transform>(
+                    FindObjectsInactive.Include,
+                    FindObjectsSortMode.None)
+                .FirstOrDefault(candidate => candidate.name == "FingerCapTop_BrushedFace");
+            Assert.That(metalBrushFace, Is.Not.Null);
+            Assert.That(metalBrushFace.GetComponent<Renderer>().enabled, Is.True);
+            Assert.That(FindRenderer("ThreeBladeFrame").enabled, Is.False);
         }
 
         [Test]

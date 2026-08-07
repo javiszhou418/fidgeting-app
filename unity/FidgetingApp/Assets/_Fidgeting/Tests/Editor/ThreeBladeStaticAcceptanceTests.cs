@@ -254,8 +254,7 @@ namespace ThreeBladeEDC.Tests.Editor
         public void VisibleRotorAxisPoint_RemainsAtViewportCenterAcrossRepresentativeAngles()
         {
             Transform rotor = Require("RotorDynamic");
-            Transform visibleTopCap = Require(
-                "HubStatic/TopCap/TopCap_Root/FingerCapTop_BrushedFace");
+            Transform visibleTopCap = Require("HubStatic/TopCap");
             Renderer visibleTopCapRenderer = visibleTopCap.GetComponent<Renderer>();
             Assert.That(visibleTopCapRenderer, Is.Not.Null);
             OrbitPresentationCamera orbit =

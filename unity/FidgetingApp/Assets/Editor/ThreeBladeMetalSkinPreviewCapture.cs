@@ -9,7 +9,7 @@ namespace FidgetingApp.Editor
     public static class ThreeBladeMetalSkinPreviewCapture
     {
         private const string ScenePath =
-            "Assets/_Fidgeting/Scenes/ThreeBladeEDC.unity";
+            "Assets/_Fidgeting/Scenes/ThreeBladeMetalOriginal.unity";
         private const int Width = 900;
         private const int Height = 1600;
 

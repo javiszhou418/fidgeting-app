@@ -12,7 +12,7 @@ namespace FidgetingApp.Editor
     public static class ThreeBladeRotorAxisPreviewCapture
     {
         private const string ScenePath =
-            "Assets/_Fidgeting/Scenes/ThreeBladeEDC.unity";
+            "Assets/_Fidgeting/Scenes/ThreeBladeMetalOriginal.unity";
         private const int Width = 720;
         private const int Height = 1280;
 
