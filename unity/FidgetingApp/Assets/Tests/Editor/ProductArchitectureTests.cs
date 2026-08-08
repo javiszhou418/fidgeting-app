@@ -769,7 +769,13 @@ namespace FidgetingApp.Tests.Editor
 
             StringAssert.Contains("var thumbnailAssetName: String", source);
             StringAssert.Contains("private struct NativeSquareArtwork: View", source);
-            StringAssert.Contains("UIImage(named: assetName)", source);
+            StringAssert.Contains("private enum NativeArtworkLoader", source);
+            StringAssert.Contains("named: assetName,", source);
+            StringAssert.Contains("Bundle.main.url(", source);
+            StringAssert.Contains("UIImage(contentsOfFile: url.path)", source);
+            StringAssert.Contains("private struct ProgressionUnlockThumbnail: View", source);
+            StringAssert.Contains("assetName: model.thumbnailAssetName", source);
+            StringAssert.Contains("skin: unlockSkin(for: detail.level)", source);
             StringAssert.DoesNotContain("private struct SpinnerLibraryThumbnailTabBar: View", source);
             StringAssert.Contains(".tabViewStyle(.page(indexDisplayMode: .always))", source);
             StringAssert.Contains(".indexViewStyle(.page(backgroundDisplayMode: .never))", source);
