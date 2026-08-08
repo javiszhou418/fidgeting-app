@@ -1280,7 +1280,7 @@ namespace FidgetingApp.Tests.Editor
             string progressionHud = swift.Substring(hudStart, hudEnd - hudStart);
             int autoMenuStart = progressionHud.IndexOf("            Menu {");
             int autoMenuEnd = progressionHud.IndexOf(
-                "            } label: {\n                VStack(spacing: 10)",
+                "            } label: {\n                VStack(spacing: 8)",
                 autoMenuStart);
             string autoMenu = progressionHud.Substring(
                 autoMenuStart,
@@ -1294,16 +1294,28 @@ namespace FidgetingApp.Tests.Editor
             StringAssert.Contains("previousLevel: previousMilestoneLevel", progressionHud);
             StringAssert.Contains("currentLevel: state.progressionLevel", progressionHud);
             StringAssert.Contains("nextLevel: nextMilestoneLevel", progressionHud);
-            StringAssert.Contains("VStack(spacing: 3)", progressionHud);
-            StringAssert.Contains(".frame(width: 62, height: 62)", progressionHud);
-            StringAssert.Contains(".frame(width: 80, height: 80)", progressionHud);
+            StringAssert.Contains("private let endpointIconSize: CGFloat = 64", progressionHud);
+            StringAssert.Contains("private let endpointContentHeight: CGFloat = 76", progressionHud);
+            Assert.AreEqual(
+                2,
+                progressionHud.Split(
+                    new[] { "width: endpointIconSize," },
+                    System.StringSplitOptions.None).Length - 1,
+                "AUTO and the next-unlock thumbnail must share one square icon size.");
+            Assert.AreEqual(
+                2,
+                progressionHud.Split(
+                    new[] { "height: endpointIconSize)" },
+                    System.StringSplitOptions.None).Length - 1,
+                "AUTO and the next-unlock thumbnail must stay square.");
+            StringAssert.Contains("VStack(spacing: 2)", progressionHud);
             StringAssert.Contains("AutoSpeedRotorBadge(", progressionHud);
-            StringAssert.Contains("VStack(spacing: 10)", progressionHud);
-            StringAssert.Contains(".padding(.horizontal, 14)", progressionHud);
-            StringAssert.Contains(".padding(.vertical, 10)", progressionHud);
-            StringAssert.Contains(".frame(width: 80, height: 80)", progressionHud);
-            StringAssert.Contains(".frame(width: 84, height: 84)", progressionHud);
-            StringAssert.Contains(".product(size: 11, weight: .black)", progressionHud);
+            StringAssert.Contains("VStack(spacing: 8)", progressionHud);
+            StringAssert.Contains(".frame(width: 29, height: 29)", progressionHud);
+            StringAssert.Contains(".padding(.horizontal, 11)", progressionHud);
+            StringAssert.Contains(".padding(.vertical, 8)", progressionHud);
+            StringAssert.Contains(".frame(width: 68, height: endpointContentHeight)", progressionHud);
+            StringAssert.Contains(".product(size: 9, weight: .black)", progressionHud);
             StringAssert.Contains("Color(red: 0.30, green: 0.92, blue: 0.80)", progressionHud);
             StringAssert.Contains("? autoEnabledColor.opacity(0.96)", progressionHud);
             StringAssert.Contains("accent: autoEnabledColor", progressionHud);
