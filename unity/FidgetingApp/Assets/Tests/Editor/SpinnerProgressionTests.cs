@@ -1280,7 +1280,7 @@ namespace FidgetingApp.Tests.Editor
             string progressionHud = swift.Substring(hudStart, hudEnd - hudStart);
             int autoMenuStart = progressionHud.IndexOf("            Menu {");
             int autoMenuEnd = progressionHud.IndexOf(
-                "            } label: {\n                VStack(spacing: 5)",
+                "            } label: {\n                VStack(spacing: 6)",
                 autoMenuStart);
             string autoMenu = progressionHud.Substring(
                 autoMenuStart,
@@ -1295,7 +1295,10 @@ namespace FidgetingApp.Tests.Editor
             StringAssert.Contains("currentLevel: state.progressionLevel", progressionHud);
             StringAssert.Contains("nextLevel: nextMilestoneLevel", progressionHud);
             StringAssert.Contains("AutoSpeedRotorBadge(", progressionHud);
-            StringAssert.Contains("VStack(spacing: 5)", progressionHud);
+            StringAssert.Contains("VStack(spacing: 6)", progressionHud);
+            StringAssert.Contains(".padding(.horizontal, 14)", progressionHud);
+            StringAssert.Contains(".padding(.vertical, 7)", progressionHud);
+            StringAssert.Contains(".frame(width: 68, height: 68)", progressionHud);
             StringAssert.Contains(
                 "angularSpeedRadians: state.motionTelemetry.angularSpeedRadians",
                 progressionHud);
