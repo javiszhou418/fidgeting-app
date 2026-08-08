@@ -3293,6 +3293,22 @@ private struct SpinnerProgressionHUD: View {
         String(format: "%.1fx", state.progressionAssistantMultiplier)
     }
 
+    private var autoEnabledColor: Color {
+        Color(red: 0.30, green: 0.92, blue: 0.80)
+    }
+
+    private var autoControlForegroundColor: Color {
+        state.progressionAssistantEnabled
+            ? autoEnabledColor.opacity(0.96)
+            : Color.white.opacity(0.48)
+    }
+
+    private var autoControlBackgroundColor: Color {
+        state.progressionAssistantEnabled
+            ? autoEnabledColor.opacity(0.20)
+            : Color.white.opacity(0.045)
+    }
+
     private var nextPreviewSkin: ThreeBladeMetalSkinDetail? {
         guard state.selectedModel == .metalThreeBlade,
               state.progressionModel == .metalThreeBlade else { return nil }
@@ -3431,20 +3447,21 @@ private struct SpinnerProgressionHUD: View {
                         multiplierText: autoMultiplierText,
                         angularSpeedRadians: state.motionTelemetry.angularSpeedRadians,
                         active: state.progressionAssistantEnabled,
-                        accent: accent)
+                        accent: autoEnabledColor)
                         .frame(width: 36, height: 36)
                     Text("AUTO")
                         .font(.product(.caption2, weight: .semibold))
                 }
-                .foregroundStyle(state.progressionAssistantEnabled
-                                 ? accent.opacity(0.84)
-                                 : Color.white.opacity(0.72))
+                .foregroundStyle(autoControlForegroundColor)
                 .padding(.horizontal, 14)
                 .padding(.vertical, 10)
                 .frame(width: 80, height: 80)
                 .background(
-                    Color.white.opacity(state.progressionAssistantEnabled ? 0.10 : 0.04),
+                    autoControlBackgroundColor,
                     in: RoundedRectangle(cornerRadius: 18, style: .continuous))
+                .animation(
+                    .easeOut(duration: FidgetUITokens.Motion.selectionDuration),
+                    value: state.progressionAssistantEnabled)
             }
             .accessibilityLabel("AUTO 菜单")
             .accessibilityValue(
@@ -3574,13 +3591,21 @@ private struct AutoSpeedRotorBadge: View {
     @StateObject private var animator = AutoSpeedRotorAnimator()
 
     private var ringColor: Color {
-        active ? accent.opacity(0.90) : Color.white.opacity(0.62)
+        active ? accent.opacity(0.98) : Color.white.opacity(0.46)
+    }
+
+    private var trackColor: Color {
+        active ? accent.opacity(0.24) : Color.white.opacity(0.10)
+    }
+
+    private var multiplierColor: Color {
+        active ? accent.opacity(0.98) : Color.white.opacity(0.58)
     }
 
     var body: some View {
         ZStack {
             Circle()
-                .stroke(Color.white.opacity(0.12), lineWidth: 1)
+                .stroke(trackColor, lineWidth: 1)
 
             ZStack {
                 Circle()
@@ -3601,7 +3626,7 @@ private struct AutoSpeedRotorBadge: View {
 
             Text(multiplierText)
                 .font(.product(size: 11, weight: .black).monospacedDigit())
-                .foregroundStyle(Color.white.opacity(0.88))
+                .foregroundStyle(multiplierColor)
         }
         .onAppear {
             updateAnimator()
@@ -5797,6 +5822,7 @@ struct ComboHaloNativePreviewRoot: View {
 struct ProgressionThumbnailNativePreviewRoot: View {
     enum Mode: String {
         case hud
+        case hudOff = "hud-off"
         case sheet
     }
 
@@ -5819,7 +5845,7 @@ struct ProgressionThumbnailNativePreviewRoot: View {
     var body: some View {
         Group {
             switch mode {
-            case .hud:
+            case .hud, .hudOff:
                 ZStack {
                     ProductBackdrop().ignoresSafeArea()
                     VStack(spacing: 0) {
@@ -5854,7 +5880,7 @@ struct ProgressionThumbnailNativePreviewRoot: View {
             speedBand: .engaged)
         state.progressionNextUnlockLevel = 50
         state.progressionNextUnlockName = "双列辅助轴承"
-        state.progressionAssistantEnabled = true
+        state.progressionAssistantEnabled = mode == .hud
         state.progressionAssistantMultiplier = 1.0
         state.progressionLevelCatalog = ProgressionLevelDetail.fallback
         state.threeBladeMetalSkins = ThreeBladeMetalSkinDetail.parse(

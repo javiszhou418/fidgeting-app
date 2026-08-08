@@ -1301,6 +1301,17 @@ namespace FidgetingApp.Tests.Editor
             StringAssert.Contains(".frame(width: 80, height: 80)", progressionHud);
             StringAssert.Contains(".frame(width: 84, height: 84)", progressionHud);
             StringAssert.Contains(".product(size: 11, weight: .black)", progressionHud);
+            StringAssert.Contains("Color(red: 0.30, green: 0.92, blue: 0.80)", progressionHud);
+            StringAssert.Contains("? autoEnabledColor.opacity(0.96)", progressionHud);
+            StringAssert.Contains("? autoEnabledColor.opacity(0.20)", progressionHud);
+            StringAssert.Contains(": Color.white.opacity(0.045)", progressionHud);
+            StringAssert.Contains("accent: autoEnabledColor", progressionHud);
+            StringAssert.Contains("active ? accent.opacity(0.98)", progressionHud);
+            StringAssert.Contains("active ? accent.opacity(0.24)", progressionHud);
+            StringAssert.Contains("active ? accent.opacity(0.98) : Color.white.opacity(0.58)", progressionHud);
+            StringAssert.Contains("value: state.progressionAssistantEnabled", progressionHud);
+            StringAssert.Contains("case hudOff = \"hud-off\"", swift);
+            StringAssert.Contains("state.progressionAssistantEnabled = mode == .hud", swift);
             StringAssert.Contains(
                 "angularSpeedRadians: state.motionTelemetry.angularSpeedRadians",
                 progressionHud);
