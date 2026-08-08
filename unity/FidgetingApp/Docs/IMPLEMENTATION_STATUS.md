@@ -74,7 +74,9 @@ Bottom Sheet 预览分别位于 `Artifacts/ProgressionThumbnailRecoveryV24/progr
 径向柔光与右下冷色反光；不加描边，也不再使用纯色填充或依赖某款模型 accent 是否接近灰白。
 Reduce Transparency 会提高渐变不透明度以维持可读性；状态变化以共享
 `180 ms` selection duration 过渡；VoiceOver 继续明确读出“已开启/已关闭”。原生预览工具新增 `hud-off`
-模式，与 `hud` ON 模式共同作为真机视觉门禁。专项回归同时锁定文档与实现。
+模式，与 `hud` ON 模式共同作为真机视觉门禁。用户复核后指出左侧 `80 × 80 pt` AUTO 与右侧下一解锁
+缩略图视觉重量失衡；右侧缩略图现从 `48 × 48 pt` 提升至 `62 × 62 pt`，缩略图与等级间距为 `3 pt`，
+整体使用 `80 × 80 pt` 占位，与 AUTO 端点等高，同时保留中央里程碑信息宽度。专项回归同时锁定文档与实现。
 shipping Swift 原生预览编译通过，成长 HUD 专项回归 `1/1` 通过；
 更新后的静态预览、60 fps 动态和接触表位于同一目录的 `progression-thumbnail-hud.png`、
 `progression-hud-auto-motion.mp4`、`progression-hud-auto-motion-contact-sheet.png`。本轮仍等待用户明确视觉

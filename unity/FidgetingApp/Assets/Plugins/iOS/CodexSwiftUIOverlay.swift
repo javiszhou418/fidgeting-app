@@ -3380,7 +3380,7 @@ private struct SpinnerProgressionHUD: View {
                             .foregroundStyle(Color.white.opacity(0.58))
                     }
 
-                    VStack(spacing: 1) {
+                    VStack(spacing: 3) {
                         ProgressionUnlockThumbnail(
                             model: state.selectedModel,
                             skin: nextPreviewSkin,
@@ -3388,7 +3388,7 @@ private struct SpinnerProgressionHUD: View {
                             unlocked: true,
                             showsLock: state.progressionLevel < 100,
                             shimmers: true)
-                            .frame(width: 48, height: 48)
+                            .frame(width: 62, height: 62)
 
                         Text(state.progressionLevel >= 100
                              ? "MAX"
@@ -3397,7 +3397,7 @@ private struct SpinnerProgressionHUD: View {
                             .monospacedDigit()
                             .foregroundStyle(accent.opacity(0.78))
                     }
-                    .frame(width: 58)
+                    .frame(width: 80, height: 80)
                 }
                 .padding(.horizontal, 13)
                 .padding(.vertical, 10)
