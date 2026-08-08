@@ -3353,7 +3353,7 @@ private struct SpinnerProgressionHUD: View {
                     Color.clear
                         .frame(width: 68, height: endpointContentHeight)
 
-                    VStack(alignment: .leading, spacing: 5) {
+                    VStack(alignment: .leading, spacing: 8) {
                         HStack(spacing: 6) {
                             Text("LV.\(state.progressionLevel)")
                                 .font(.product(.subheadline, weight: .black).monospacedDigit())
@@ -3372,10 +3372,6 @@ private struct SpinnerProgressionHUD: View {
                             nextLevel: nextMilestoneLevel,
                             progress: milestoneProgress,
                             accent: accent)
-
-                        Text(experienceText)
-                            .font(.product(.caption2).monospacedDigit())
-                            .foregroundStyle(Color.white.opacity(0.58))
                     }
 
                     VStack(spacing: 2) {
@@ -3406,7 +3402,10 @@ private struct SpinnerProgressionHUD: View {
             }
             .buttonStyle(.plain)
             .frame(maxWidth: .infinity)
-            .accessibilityLabel("成长详情，等级 \(state.progressionLevel)")
+            .accessibilityLabel(
+                "成长详情，等级 \(state.progressionLevel)，\(state.progressionLevelTitle)")
+            .accessibilityValue(
+                "\(experienceText)，上一个里程碑 \(previousMilestoneLevel)，下一个里程碑 \(nextMilestoneLevel)")
             .accessibilityHint("打开成长详情")
 
             Menu {
@@ -3558,43 +3557,36 @@ private struct ProgressionMilestoneGauge: View {
     }
 
     var body: some View {
-        GeometryReader { proxy in
-            let width = max(1, proxy.size.width)
-            let markerX = width * CGFloat(clampedProgress)
-            let labelX = min(width - 25, max(25, markerX))
+        HStack(spacing: 7) {
+            Text("\(previousLevel)")
+                .font(.product(size: 7, weight: .bold).monospacedDigit())
+                .foregroundStyle(Color.white.opacity(0.44))
 
-            ZStack(alignment: .topLeading) {
-                Text("\(previousLevel)")
-                    .font(.product(size: 7, weight: .bold).monospacedDigit())
-                    .foregroundStyle(Color.white.opacity(0.44))
-                    .position(x: 8, y: 5)
+            GeometryReader { proxy in
+                let width = max(1, proxy.size.width)
+                let markerX = min(
+                    width - 3,
+                    max(3, width * CGFloat(clampedProgress)))
 
-                Text("LV.\(currentLevel)")
-                    .font(.product(size: 8, weight: .black).monospacedDigit())
-                    .foregroundStyle(.white)
-                    .padding(.horizontal, 4)
-                    .padding(.vertical, 1)
-                    .background(accent.opacity(0.22), in: Capsule())
-                    .position(x: labelX, y: 5)
+                ZStack(alignment: .leading) {
+                    ProductProgressGauge(value: clampedProgress, accent: accent)
+                        .frame(height: 4)
 
-                Text("\(nextLevel)")
-                    .font(.product(size: 7, weight: .bold).monospacedDigit())
-                    .foregroundStyle(Color.white.opacity(0.58))
-                    .position(x: width - 8, y: 5)
-
-                ProductProgressGauge(value: clampedProgress, accent: accent)
-                    .frame(height: 5)
-                    .position(x: width / 2, y: 18)
-
-                Circle()
-                    .fill(Color.white)
-                    .frame(width: 7, height: 7)
-                    .overlay(Circle().stroke(accent.opacity(0.72), lineWidth: 2))
-                    .shadow(color: accent.opacity(0.46), radius: 4)
-                    .position(x: markerX, y: 18)
+                    Circle()
+                        .fill(Color.white)
+                        .frame(width: 6, height: 6)
+                        .overlay(Circle().stroke(accent.opacity(0.72), lineWidth: 1.5))
+                        .shadow(color: accent.opacity(0.42), radius: 3)
+                        .position(x: markerX, y: 4)
+                }
             }
+            .frame(height: 8)
+
+            Text("\(nextLevel)")
+                .font(.product(size: 7, weight: .bold).monospacedDigit())
+                .foregroundStyle(Color.white.opacity(0.58))
         }
-        .frame(height: 23)
+        .frame(height: 12)
         .accessibilityElement(children: .ignore)
         .accessibilityLabel("成长里程碑")
         .accessibilityValue(

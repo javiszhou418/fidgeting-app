@@ -76,7 +76,9 @@ Reduce Transparency 会提高渐变不透明度以维持可读性；状态变化
 `180 ms` selection duration 过渡；VoiceOver 继续明确读出“已开启/已关闭”。原生预览工具新增 `hud-off`
 模式，与 `hud` ON 模式共同作为真机视觉门禁。用户复核后指出左右端点不仅视觉重量失衡，而且整体偏大；
 AUTO 可见方形与下一解锁缩略图现共用唯一的 `64 × 64 pt` 尺寸常量，AUTO 内部转盘、间距和内边距同步
-按约 `0.8×` 缩小，端点内容高度收至 `76 pt`。专项回归会直接统计两个端点对共享尺寸的引用，避免再次漂移。
+按约 `0.8×` 缩小，端点内容高度收至 `76 pt`。中央信息随后收敛为两行：第一行只保留当前等级、称号与
+详情入口；第二行把上一里程碑、进度轨道、当前位置圆点与下一里程碑合并。轨道上重复的当前等级胶囊和独立
+XP 数字行已移除，XP 仍通过 VoiceOver 与详情页提供。专项回归锁定精简层级及两个端点对共享尺寸的引用。
 shipping Swift 原生预览编译通过，成长 HUD 专项回归 `1/1` 通过；
 更新后的静态预览、60 fps 动态和接触表位于同一目录的 `progression-thumbnail-hud.png`、
 `progression-hud-auto-motion.mp4`、`progression-hud-auto-motion-contact-sheet.png`。本轮仍等待用户明确视觉
