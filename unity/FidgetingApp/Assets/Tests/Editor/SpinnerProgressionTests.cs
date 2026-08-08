@@ -1294,6 +1294,13 @@ namespace FidgetingApp.Tests.Editor
             StringAssert.Contains("previousLevel: previousMilestoneLevel", progressionHud);
             StringAssert.Contains("currentLevel: state.progressionLevel", progressionHud);
             StringAssert.Contains("nextLevel: nextMilestoneLevel", progressionHud);
+            StringAssert.DoesNotContain("Text(experienceText)", progressionHud);
+            StringAssert.DoesNotContain("Text(\"LV.\\(currentLevel)\")", progressionHud);
+            StringAssert.Contains("HStack(spacing: 7)", progressionHud);
+            StringAssert.Contains(".frame(height: 12)", progressionHud);
+            StringAssert.Contains(
+                "\\(experienceText)，上一个里程碑 \\(previousMilestoneLevel)，下一个里程碑 \\(nextMilestoneLevel)",
+                progressionHud);
             StringAssert.Contains("private let endpointIconSize: CGFloat = 64", progressionHud);
             StringAssert.Contains("private let endpointContentHeight: CGFloat = 76", progressionHud);
             Assert.AreEqual(
