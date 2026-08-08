@@ -1250,6 +1250,8 @@ namespace FidgetingApp.Tests.Editor
                 "Assets/Plugins/iOS/CodexSwiftUIOverlay.swift");
             string components = File.ReadAllText(
                 "Assets/Plugins/iOS/FidgetProductUIComponents.swift");
+            string designGuideline = File.ReadAllText(
+                "Docs/LiquidGlassDesignGuideline.md");
             string experienceVisuals = File.ReadAllText(
                 "Assets/Scripts/Product/SpinnerExperienceVisuals.cs");
 
@@ -1278,7 +1280,7 @@ namespace FidgetingApp.Tests.Editor
             string progressionHud = swift.Substring(hudStart, hudEnd - hudStart);
             int autoMenuStart = progressionHud.IndexOf("            Menu {");
             int autoMenuEnd = progressionHud.IndexOf(
-                "            } label: {\n                VStack(spacing: 3)",
+                "            } label: {\n                VStack(spacing: 5)",
                 autoMenuStart);
             string autoMenu = progressionHud.Substring(
                 autoMenuStart,
@@ -1293,6 +1295,7 @@ namespace FidgetingApp.Tests.Editor
             StringAssert.Contains("currentLevel: state.progressionLevel", progressionHud);
             StringAssert.Contains("nextLevel: nextMilestoneLevel", progressionHud);
             StringAssert.Contains("AutoSpeedRotorBadge(", progressionHud);
+            StringAssert.Contains("VStack(spacing: 5)", progressionHud);
             StringAssert.Contains(
                 "angularSpeedRadians: state.motionTelemetry.angularSpeedRadians",
                 progressionHud);
@@ -1306,6 +1309,15 @@ namespace FidgetingApp.Tests.Editor
                 "state.progressionNextUnlockName",
                 progressionHud,
                 "The bearing unlock copy should not consume a second HUD line.");
+            StringAssert.Contains(
+                "图标、图标容器与相邻文字之间的留白是硬性约束",
+                designGuideline);
+            StringAssert.Contains(
+                "图标容器与 label 视觉间距不得小于 `4 pt`",
+                designGuideline);
+            StringAssert.Contains(
+                "容器内部的 glyph、倍率数字或状态标记",
+                designGuideline);
             StringAssert.DoesNotContain("progressionStageComponent", progressionHud,
                 "The one-line bearing/material copy was removed from the bottom HUD.");
             StringAssert.DoesNotContain(
