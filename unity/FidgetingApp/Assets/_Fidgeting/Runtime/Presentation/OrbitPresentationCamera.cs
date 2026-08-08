@@ -294,7 +294,10 @@ namespace ThreeBladeEDC.Presentation
                 _pitch - screenDelta.y * orbitSensitivity,
                 pitchLimits.x,
                 pitchLimits.y);
-            distance = FramedDistanceForCurrentPose() * userZoomScale;
+            // A single pointer owns orbit only. Reframing for every new angle
+            // changes camera distance and reads as one-finger zoom. Preserve
+            // the current distance here; only the two-finger pinch path may
+            // call ZoomByScale and change the user's zoom level.
         }
 
         public void ZoomByScale(float scale)

@@ -52,7 +52,7 @@ namespace ThreeBladeEDC.Tests.Editor
         }
 
         [UnityTest]
-        public IEnumerator MobileGestures_ClassifyModelAndBackgroundAndClampZoom()
+        public IEnumerator MobileGestures_OrbitKeepsScaleAndPinchZoomClamps()
         {
             EditorSceneManager.OpenScene(ScenePath, OpenSceneMode.Single);
             yield return new EnterPlayMode();
@@ -76,6 +76,14 @@ namespace ThreeBladeEDC.Tests.Editor
 
             orbit.ResetHero();
             float boundsFramedDistance = orbit.Distance;
+            orbit.OrbitByPixels(new Vector2(96f, -48f));
+            Assert.That(
+                orbit.Distance,
+                Is.EqualTo(boundsFramedDistance).Within(0.0001f),
+                "A single-finger orbit must not change camera distance.");
+
+            orbit.ResetHero();
+            boundsFramedDistance = orbit.Distance;
             orbit.ZoomByScale(100f);
             Assert.That(
                 orbit.Distance,
