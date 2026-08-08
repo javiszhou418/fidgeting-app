@@ -3339,7 +3339,7 @@ private struct SpinnerProgressionHUD: View {
             } label: {
                 HStack(spacing: 10) {
                     Color.clear
-                        .frame(width: 68, height: 68)
+                        .frame(width: 80, height: 80)
 
                     VStack(alignment: .leading, spacing: 5) {
                         HStack(spacing: 6) {
@@ -3436,7 +3436,8 @@ private struct SpinnerProgressionHUD: View {
                                  ? accent.opacity(0.84)
                                  : Color.white.opacity(0.72))
                 .padding(.horizontal, 14)
-                .padding(.vertical, 7)
+                .padding(.vertical, 10)
+                .frame(width: 76, height: 76)
                 .background(
                     Color.white.opacity(state.progressionAssistantEnabled ? 0.10 : 0.04),
                     in: RoundedRectangle(cornerRadius: 18, style: .continuous))
@@ -3595,7 +3596,7 @@ private struct AutoSpeedRotorBadge: View {
             .rotationEffect(.degrees(animator.rotationDegrees))
 
             Text(multiplierText)
-                .font(.product(size: 9, weight: .black).monospacedDigit())
+                .font(.product(size: 11, weight: .black).monospacedDigit())
                 .foregroundStyle(Color.white.opacity(0.88))
         }
         .onAppear {
