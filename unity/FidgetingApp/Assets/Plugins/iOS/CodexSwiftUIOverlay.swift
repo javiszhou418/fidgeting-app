@@ -3426,7 +3426,7 @@ private struct SpinnerProgressionHUD: View {
                     }
                 }
             } label: {
-                VStack(spacing: 3) {
+                VStack(spacing: 5) {
                     AutoSpeedRotorBadge(
                         multiplierText: autoMultiplierText,
                         angularSpeedRadians: state.motionTelemetry.angularSpeedRadians,

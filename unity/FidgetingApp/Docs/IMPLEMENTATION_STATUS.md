@@ -61,7 +61,10 @@ Bottom Sheet 预览分别位于 `Artifacts/ProgressionThumbnailRecoveryV24/progr
 下一个里程碑，并把“上一等级—当前等级—下一等级”和当前区间位置叠在经验轨道上。AUTO 的 `1.0x`–
 `3.0x` 动态倍率进入圆环中心，`AutoSpeedRotorAnimator` 只在 Unity 发布真实 rotary motion telemetry 且
 角速度大于零时用 `CADisplayLink` 积分旋转，停转、无 rotary telemetry、视图消失或 Reduce Motion 时立即
-停止 display link，不创建视觉假转。shipping Swift 原生预览编译通过，成长 HUD 专项回归 `1/1` 通过；
+停止 display link，不创建视觉假转。用户进一步要求图标与文字永不贴合或重叠；
+`Docs/LiquidGlassDesignGuideline.md` 现把紧凑 icon-label 最小 `4 pt`、常规 `8 pt`、容器内部图形到边界
+最小 `4 pt` 写为硬规则，AUTO 圆环与 label 实际使用 `5 pt`，专项回归同时锁定文档与实现。
+shipping Swift 原生预览编译通过，成长 HUD 专项回归 `1/1` 通过；
 更新后的静态预览、60 fps 动态和接触表位于同一目录的 `progression-thumbnail-hud.png`、
 `progression-hud-auto-motion.mp4`、`progression-hud-auto-motion-contact-sheet.png`。本轮仍等待用户明确视觉
 批准，未构建或安装新的 iPhone 包。
