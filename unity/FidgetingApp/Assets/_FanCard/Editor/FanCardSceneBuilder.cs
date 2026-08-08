@@ -41,6 +41,7 @@ namespace FidgetingApp.FanCard.EditorTools
         private const string GoldMeshMaterialPath = MaterialFolder + "/M_FanCardGoldMesh.mat";
         private const string ChromeMaterialPath = MaterialFolder + "/M_FanCardChrome.mat";
         private const string GrainNormalPath = TextureFolder + "/T_FanCardBeadBlastNormal.png";
+        private const string GunmetalGrainPath = TextureFolder + "/T_FanCardGunmetalGrain.png";
         private const string WovenTexturePath = TextureFolder + "/T_FanCardGoldWoven.png";
         private const string ReflectionPath = TextureFolder + "/C_FanCardSoftStudio.asset";
 
@@ -52,27 +53,14 @@ namespace FidgetingApp.FanCard.EditorTools
 
             FanCardDetentProfile profile = CreateOrUpdateProfile();
             Texture2D grainNormal = CreateOrUpdateGrainNormal();
+            Texture2D gunmetalGrain = CreateOrUpdateGunmetalGrain();
             Texture2D woven = CreateOrUpdateWovenTexture();
             Cubemap reflection = CreateOrUpdateReflection();
 
-            Material gunmetal = CreateOrUpdateLitMaterial(
-                GunmetalMaterialPath,
-                "M_FanCardGunmetal",
-                FanCardSpecifications.GunmetalColor,
-                FanCardSpecifications.GunmetalMetallic,
-                FanCardSpecifications.GunmetalSmoothness,
+            Material gunmetal = CreateOrUpdateGunmetalMaterial(
                 grainNormal,
-                FanCardSpecifications.GrainBumpScale,
-                new Vector2(46f, 46f));
-            Material silver = CreateOrUpdateLitMaterial(
-                SilverMaterialPath,
-                "M_FanCardWarmSilver",
-                FanCardSpecifications.WarmSilverColor,
-                FanCardSpecifications.SilverMetallic,
-                FanCardSpecifications.SilverSmoothness,
-                grainNormal,
-                0.095f,
-                new Vector2(72f, 72f));
+                gunmetalGrain);
+            Material silver = CreateOrUpdateSilverMaterial(grainNormal);
             Material etching = CreateOrUpdateLitMaterial(
                 EtchingMaterialPath,
                 "M_FanCardEtching",
@@ -103,15 +91,7 @@ namespace FidgetingApp.FanCard.EditorTools
             goldMesh.SetTexture("_BaseMap", woven);
             goldMesh.SetTextureScale("_BaseMap", new Vector2(8f, 2f));
             EditorUtility.SetDirty(goldMesh);
-            Material chrome = CreateOrUpdateLitMaterial(
-                ChromeMaterialPath,
-                "M_FanCardChrome",
-                new Color(0.86f, 0.89f, 0.93f, 1f),
-                1f,
-                FanCardSpecifications.ChromeSmoothness,
-                null,
-                0f,
-                Vector2.one);
+            Material chrome = CreateOrUpdateChromeMaterial();
 
             Mesh bodyMesh = SaveMesh(
                 CreateRoundedBoxMesh(
@@ -121,17 +101,24 @@ namespace FidgetingApp.FanCard.EditorTools
                     FanCardSpecifications.CardThickness,
                     FanCardSpecifications.CardCornerRadius,
                     FanCardSpecifications.EdgeBevel,
-                    8),
+                    8,
+                    new Vector2(
+                        FanCardSpecifications.PivotX,
+                        FanCardSpecifications.PivotZ),
+                    FanCardSpecifications.AxisHoleRadius,
+                    FanCardSpecifications.AxisHoleBevel),
                 BodyMeshPath);
             Mesh faceMesh = SaveMesh(
-                CreateRoundedBoxMesh(
+                CreateRoundedSurfaceMesh(
                     "M_FanCardFace",
                     FanCardSpecifications.FaceWidth,
                     FanCardSpecifications.FaceHeight,
-                    FanCardSpecifications.FaceThickness,
                     FanCardSpecifications.FaceCornerRadius,
-                    0.00022f,
-                    8),
+                    8,
+                    new Vector2(
+                        FanCardSpecifications.PivotX,
+                        FanCardSpecifications.PivotZ),
+                    FanCardSpecifications.AxisHoleRadius),
                 FaceMeshPath);
             Mesh borderMesh = SaveMesh(
                 CreateRoundedRingMesh(
@@ -267,6 +254,8 @@ namespace FidgetingApp.FanCard.EditorTools
             EdcPortraitCameraFramer framer =
                 camera.gameObject.AddComponent<EdcPortraitCameraFramer>();
             framer.Configure(root.transform);
+            framer.ConfigureFraming(ProductFramingCatalog.Resolve(
+                FanCardSpecifications.ScenePath));
             FanCardCameraProjectionGuard projectionGuard =
                 camera.gameObject.AddComponent<FanCardCameraProjectionGuard>();
             projectionGuard.ApplyNow();
@@ -370,8 +359,24 @@ namespace FidgetingApp.FanCard.EditorTools
                 new Vector3(0.18f, 0.20f, -0.96f).normalized,
                 Vector3.up,
                 Path.Combine(outputFolder, "fan-card-low.png"),
-                900,
-                1600);
+                1200,
+                900);
+
+            Transform topLayer = root.transform.Find("TopCard");
+            Vector3 cardInterior = topLayer.TransformPoint(
+                FanCardSpecifications.CardCenterFromPivot);
+            var materialDetailBounds = new Bounds(
+                Vector3.Lerp(root.transform.position, cardInterior, 0.17f),
+                new Vector3(0.026f, 0.014f, 0.022f));
+            CaptureView(
+                camera,
+                environment,
+                materialDetailBounds,
+                new Vector3(0.28f, 0.78f, -0.56f).normalized,
+                Vector3.forward,
+                Path.Combine(outputFolder, "fan-card-bearing-closeup.png"),
+                1200,
+                800);
 
             // Repeat the overhead render after the first URP/IBL frames have
             // initialized so the open metal faces are not captured before
@@ -397,6 +402,15 @@ namespace FidgetingApp.FanCard.EditorTools
                 Path.Combine(outputFolder, "fan-card-front-closed.png"),
                 900,
                 1600);
+            CaptureView(
+                camera,
+                environment,
+                bounds,
+                new Vector3(0.02f, 0.08f, -1f).normalized,
+                Vector3.up,
+                Path.Combine(outputFolder, "fan-card-side-profile.png"),
+                1200,
+                800);
 
             controller.SetFanProgress(2f / 3f);
             bounds = ResolveBounds(root.transform);
@@ -416,7 +430,7 @@ namespace FidgetingApp.FanCard.EditorTools
                 ImportAssetOptions.ForceSynchronousImport);
             ConfigureThumbnailImporter();
             controller.ResetClosed();
-            Debug.Log($"[FanCard] Six Unity material previews: {outputFolder}");
+            Debug.Log($"[FanCard] Eight Unity material previews: {outputFolder}");
         }
 
         private static GameObject CreateCardLayer(
@@ -452,31 +466,68 @@ namespace FidgetingApp.FanCard.EditorTools
                 bodyMesh,
                 gunmetal,
                 FanCardSpecifications.CardCenterFromPivot);
+            // The silver artwork is a surface projection, not another thin
+            // box. All readable slab thickness comes from GunmetalFrame so a
+            // grazing view cannot reveal curled inset walls or doubled edges.
             float faceY = FanCardSpecifications.CardThickness * 0.5f
-                + FanCardSpecifications.FaceThickness * 0.5f
-                - 0.00006f;
+                + 0.00002f;
             CreateMeshObject(
                 "WarmSilverFace",
                 layer.transform,
                 faceMesh,
                 silver,
                 FanCardSpecifications.CardCenterFromPivot + Vector3.up * faceY);
+            float backFaceY = -FanCardSpecifications.CardThickness * 0.5f
+                - 0.00002f;
+            GameObject backFace = CreateMeshObject(
+                "WarmSilverBackFace",
+                layer.transform,
+                faceMesh,
+                silver,
+                FanCardSpecifications.CardCenterFromPivot + Vector3.up * backFaceY);
+            backFace.transform.localRotation = Quaternion.Euler(180f, 0f, 0f);
             CreateMeshObject(
                 "InsetBorder_ThinLine",
                 layer.transform,
                 borderMesh,
                 etching,
                 FanCardSpecifications.CardCenterFromPivot
-                    + Vector3.up * (faceY + FanCardSpecifications.FaceThickness * 0.52f));
+                    + Vector3.up * (faceY + 0.000035f));
+            GameObject backBorder = CreateMeshObject(
+                "InsetBorder_BackThinLine",
+                layer.transform,
+                borderMesh,
+                etching,
+                FanCardSpecifications.CardCenterFromPivot
+                    + Vector3.up * (backFaceY - 0.000035f));
+            backBorder.transform.localRotation = Quaternion.Euler(180f, 0f, 0f);
 
+            float artworkY = faceY + 0.000075f;
             AddFaceArtwork(
                 layer.transform,
-                faceY + FanCardSpecifications.FaceThickness * 0.56f,
+                artworkY,
                 spadeMesh,
                 spadeStripeMesh,
                 etching,
                 silver,
-                font);
+                font,
+                FanCardSpecifications.CardCenterFromPivot,
+                string.Empty);
+            var backArtwork = new GameObject("BackFaceArtwork");
+            backArtwork.transform.SetParent(layer.transform, false);
+            backArtwork.transform.localPosition =
+                FanCardSpecifications.CardCenterFromPivot;
+            backArtwork.transform.localRotation = Quaternion.Euler(180f, 0f, 0f);
+            AddFaceArtwork(
+                backArtwork.transform,
+                artworkY,
+                spadeMesh,
+                spadeStripeMesh,
+                etching,
+                silver,
+                font,
+                Vector3.zero,
+                "_Back");
             CreateBearingSeat(layer.transform, groove, chrome, faceY);
 
             if (hasTrack)
@@ -515,13 +566,27 @@ namespace FidgetingApp.FanCard.EditorTools
 
             if (hasFollower)
             {
+                float bodyBottom = -FanCardSpecifications.CardThickness * 0.5f;
+                CreateCylinder(
+                    "FollowerSeat_Undercut",
+                    layer.transform,
+                    new Vector3(
+                        FanCardSpecifications.FollowerFromPivot.x,
+                        bodyBottom
+                            - FanCardSpecifications.FollowerSeatHeight * 0.5f,
+                        FanCardSpecifications.FollowerFromPivot.y),
+                    FanCardSpecifications.FollowerSeatRadius,
+                    FanCardSpecifications.FollowerSeatHeight,
+                    groove,
+                    36);
                 GameObject follower = GameObject.CreatePrimitive(PrimitiveType.Sphere);
                 follower.name = "FollowerBearing_Chrome";
                 follower.transform.SetParent(layer.transform, false);
                 follower.transform.localPosition = new Vector3(
                     FanCardSpecifications.FollowerFromPivot.x,
-                    -FanCardSpecifications.CardThickness * 0.5f
-                        - 0.00030f,
+                    bodyBottom
+                        - FanCardSpecifications.FollowerBallProtrusion
+                        + FanCardSpecifications.FollowerBallRadius,
                     FanCardSpecifications.FollowerFromPivot.y);
                 follower.transform.localScale = Vector3.one
                     * (FanCardSpecifications.FollowerBallRadius * 2f);
@@ -539,19 +604,20 @@ namespace FidgetingApp.FanCard.EditorTools
             Mesh stripeMesh,
             Material etching,
             Material silver,
-            Font font)
+            Font font,
+            Vector3 center,
+            string suffix)
         {
-            Vector3 center = FanCardSpecifications.CardCenterFromPivot;
             Vector3 heroPosition = center + new Vector3(0.003f, y, -0.0035f);
             CreateMeshObject(
-                "Spade_Etched",
+                "Spade_Etched" + suffix,
                 layer,
                 spadeMesh,
                 etching,
                 heroPosition,
                 new Vector3(1.10f, 1f, 1.10f));
             CreateMeshObject(
-                "Spade_VerticalSlots",
+                "Spade_VerticalSlots" + suffix,
                 layer,
                 stripeMesh,
                 silver,
@@ -559,9 +625,15 @@ namespace FidgetingApp.FanCard.EditorTools
                 new Vector3(1.10f, 1f, 1.10f));
 
             Vector3 acePosition = center + new Vector3(-0.0172f, y + 0.00018f, 0.0250f);
-            CreateAceText("Ace_A_Oxanium", layer, font, acePosition, 180f, 0.00062f);
+            CreateAceText(
+                "Ace_A_Oxanium" + suffix,
+                layer,
+                font,
+                acePosition,
+                180f,
+                0.00062f);
             GameObject smallSpade = CreateMeshObject(
-                "CornerSpade_Down",
+                "CornerSpade_Down" + suffix,
                 layer,
                 spadeMesh,
                 etching,
@@ -570,14 +642,14 @@ namespace FidgetingApp.FanCard.EditorTools
             smallSpade.transform.localRotation = Quaternion.identity;
 
             CreateAceText(
-                "Ace_A_Oxanium_Reverse",
+                "Ace_A_Oxanium_Reverse" + suffix,
                 layer,
                 font,
                 center + new Vector3(0.0172f, y + 0.00018f, -0.0250f),
                 0f,
                 0.00055f);
             GameObject reverseSpade = CreateMeshObject(
-                "CornerSpade_Down_Reverse",
+                "CornerSpade_Down_Reverse" + suffix,
                 layer,
                 spadeMesh,
                 etching,
@@ -594,7 +666,7 @@ namespace FidgetingApp.FanCard.EditorTools
             for (int index = 0; index < dots.Length; index++)
             {
                 CreateCylinder(
-                    $"EtchedDot_{index + 1:D2}",
+                    $"EtchedDot_{index + 1:D2}{suffix}",
                     layer,
                     center + new Vector3(dots[index].x, y + 0.00002f, dots[index].y),
                     0.00118f,
@@ -666,6 +738,8 @@ namespace FidgetingApp.FanCard.EditorTools
         {
             float totalHeight = FanCardSpecifications.LayerPitch * 2f
                 + FanCardSpecifications.CardThickness;
+            float topSurfaceHeight = FanCardSpecifications.LayerPitch * 2f
+                + FanCardSpecifications.CardThickness * 0.5f;
             CreateCylinder(
                 "CommonAxis_ShadowSleeve",
                 root,
@@ -677,7 +751,7 @@ namespace FidgetingApp.FanCard.EditorTools
             CreateCylinder(
                 "CommonAxis_ChromePin",
                 root,
-                new Vector3(0f, totalHeight + 0.00022f, 0f),
+                new Vector3(0f, topSurfaceHeight + 0.00016f, 0f),
                 FanCardSpecifications.AxisInnerRadius * 0.70f,
                 0.00125f,
                 chrome,
@@ -686,9 +760,9 @@ namespace FidgetingApp.FanCard.EditorTools
             GameObject ballSeat = CreateCylinder(
                 "CommonAxis_BallSeat",
                 root,
-                new Vector3(0f, totalHeight + 0.00008f, 0f),
-                FanCardSpecifications.AxisBallRadius * 1.18f,
-                0.00072f,
+                new Vector3(0f, topSurfaceHeight + 0.00012f, 0f),
+                0.00415f,
+                0.00022f,
                 groove,
                 36);
             ballSeat.GetComponent<MeshRenderer>().shadowCastingMode =
@@ -699,7 +773,7 @@ namespace FidgetingApp.FanCard.EditorTools
             axisBall.transform.SetParent(root, false);
             axisBall.transform.localPosition = new Vector3(
                 0f,
-                totalHeight + 0.00072f,
+                topSurfaceHeight + 0.00062f,
                 0f);
             axisBall.transform.localScale = Vector3.one
                 * (FanCardSpecifications.AxisBallRadius * 2f);
@@ -713,10 +787,10 @@ namespace FidgetingApp.FanCard.EditorTools
         private static Camera CreateStudio(Transform target, Cubemap reflection)
         {
             RenderSettings.ambientMode = AmbientMode.Flat;
-            RenderSettings.ambientLight = new Color(0.28f, 0.27f, 0.25f);
+            RenderSettings.ambientLight = new Color(0.32f, 0.30f, 0.27f);
             RenderSettings.defaultReflectionMode = DefaultReflectionMode.Custom;
             RenderSettings.customReflectionTexture = reflection;
-            RenderSettings.reflectionIntensity = 0.78f;
+            RenderSettings.reflectionIntensity = 0.82f;
 
             var cameraObject = new GameObject("MainCamera");
             cameraObject.tag = "MainCamera";
@@ -733,7 +807,7 @@ namespace FidgetingApp.FanCard.EditorTools
             Light key = keyObject.AddComponent<Light>();
             key.type = LightType.Directional;
             key.color = new Color(1.0f, 0.90f, 0.80f);
-            key.intensity = 0.76f;
+            key.intensity = 0.96f;
             key.shadows = LightShadows.Soft;
             keyObject.transform.rotation = Quaternion.Euler(48f, -34f, 0f);
 
@@ -741,7 +815,7 @@ namespace FidgetingApp.FanCard.EditorTools
             Light fill = fillObject.AddComponent<Light>();
             fill.type = LightType.Directional;
             fill.color = new Color(0.62f, 0.72f, 0.82f);
-            fill.intensity = 0.40f;
+            fill.intensity = 0.34f;
             fill.shadows = LightShadows.None;
             fillObject.transform.rotation = Quaternion.Euler(62f, 146f, 0f);
 
@@ -752,9 +826,17 @@ namespace FidgetingApp.FanCard.EditorTools
             Light front = frontObject.AddComponent<Light>();
             front.type = LightType.Directional;
             front.color = new Color(0.90f, 0.87f, 0.82f);
-            front.intensity = 0.28f;
+            front.intensity = 0.14f;
             front.shadows = LightShadows.None;
             frontObject.transform.rotation = Quaternion.Euler(18f, 8f, 0f);
+
+            var sideObject = new GameObject("CoolSideWallRim");
+            Light side = sideObject.AddComponent<Light>();
+            side.type = LightType.Directional;
+            side.color = new Color(0.48f, 0.61f, 0.74f);
+            side.intensity = 0.20f;
+            side.shadows = LightShadows.None;
+            sideObject.transform.rotation = Quaternion.Euler(12f, 112f, 0f);
             return camera;
         }
 
@@ -821,6 +903,99 @@ namespace FidgetingApp.FanCard.EditorTools
                 material.SetTexture("_BumpMap", null);
                 material.DisableKeyword("_NORMALMAP");
             }
+            material.enableInstancing = true;
+            EditorUtility.SetDirty(material);
+            return material;
+        }
+
+        private static Material CreateOrUpdateChromeMaterial()
+        {
+            Shader shader = Shader.Find("FidgetingApp/FanCardChrome");
+            if (shader == null)
+            {
+                throw new MissingReferenceException(
+                    "The fan-card chrome shader is unavailable.");
+            }
+            Material material = AssetDatabase.LoadAssetAtPath<Material>(
+                ChromeMaterialPath);
+            if (material == null)
+            {
+                material = new Material(shader) { name = "M_FanCardChrome" };
+                AssetDatabase.CreateAsset(material, ChromeMaterialPath);
+            }
+            else
+            {
+                material.shader = shader;
+                material.name = "M_FanCardChrome";
+            }
+            material.SetColor("_BaseColor", new Color(0.93f, 0.95f, 0.98f, 1f));
+            material.SetFloat("_Smoothness", FanCardSpecifications.ChromeSmoothness);
+            material.enableInstancing = true;
+            EditorUtility.SetDirty(material);
+            return material;
+        }
+
+        private static Material CreateOrUpdateGunmetalMaterial(
+            Texture2D grainNormal,
+            Texture2D grainColor)
+        {
+            Shader shader = Shader.Find("FidgetingApp/FanCardGunmetal");
+            if (shader == null)
+            {
+                throw new MissingReferenceException(
+                    "The fan-card gunmetal shader is unavailable.");
+            }
+            Material material = AssetDatabase.LoadAssetAtPath<Material>(
+                GunmetalMaterialPath);
+            if (material == null)
+            {
+                material = new Material(shader) { name = "M_FanCardGunmetal" };
+                AssetDatabase.CreateAsset(material, GunmetalMaterialPath);
+            }
+            else
+            {
+                material.shader = shader;
+                material.name = "M_FanCardGunmetal";
+            }
+            material.SetColor("_BaseColor", FanCardSpecifications.GunmetalColor);
+            material.SetFloat("_Metallic", FanCardSpecifications.GunmetalMetallic);
+            material.SetFloat("_Smoothness", FanCardSpecifications.GunmetalSmoothness);
+            material.SetTexture("_BaseMap", grainColor);
+            material.SetTextureScale("_BaseMap", new Vector2(6f, 6f));
+            material.SetTexture("_BumpMap", grainNormal);
+            material.SetTextureScale("_BumpMap", new Vector2(10f, 10f));
+            material.SetFloat("_BumpScale", FanCardSpecifications.GrainBumpScale);
+            material.enableInstancing = true;
+            EditorUtility.SetDirty(material);
+            return material;
+        }
+
+        private static Material CreateOrUpdateSilverMaterial(Texture2D grainNormal)
+        {
+            Shader shader = Shader.Find("FidgetingApp/FanCardSatinSilver");
+            if (shader == null)
+            {
+                throw new MissingReferenceException(
+                    "The fan-card satin-silver shader is unavailable.");
+            }
+            Material material = AssetDatabase.LoadAssetAtPath<Material>(
+                SilverMaterialPath);
+            if (material == null)
+            {
+                material = new Material(shader) { name = "M_FanCardWarmSilver" };
+                AssetDatabase.CreateAsset(material, SilverMaterialPath);
+            }
+            else
+            {
+                material.shader = shader;
+                material.name = "M_FanCardWarmSilver";
+            }
+            material.SetColor("_BaseColor", FanCardSpecifications.WarmSilverColor);
+            material.SetFloat("_Metallic", FanCardSpecifications.SilverMetallic);
+            material.SetFloat("_Smoothness", FanCardSpecifications.SilverSmoothness);
+            material.SetTexture("_BumpMap", grainNormal);
+            material.SetTextureScale("_BumpMap", new Vector2(18f, 18f));
+            material.SetFloat("_BumpScale", 0.060f);
             material.enableInstancing = true;
             EditorUtility.SetDirty(material);
             return material;
@@ -933,6 +1108,41 @@ namespace FidgetingApp.FanCard.EditorTools
             return AssetDatabase.LoadAssetAtPath<Texture2D>(WovenTexturePath);
         }
 
+        private static Texture2D CreateOrUpdateGunmetalGrain()
+        {
+            const int size = 128;
+            var random = new System.Random(0xB34D5A7);
+            var texture = new Texture2D(size, size, TextureFormat.RGB24, false, false);
+            var pixels = new Color[size * size];
+            for (int y = 0; y < size; y++)
+            {
+                for (int x = 0; x < size; x++)
+                {
+                    float fine = (float)random.NextDouble();
+                    float neighboring = (float)random.NextDouble();
+                    float value = Mathf.Lerp(0.84f, 1.0f, fine * 0.72f + neighboring * 0.28f);
+                    pixels[y * size + x] = new Color(value, value, value, 1f);
+                }
+            }
+            texture.SetPixels(pixels);
+            texture.Apply(false, false);
+            WriteTexturePng(texture, GunmetalGrainPath);
+            UnityEngine.Object.DestroyImmediate(texture);
+            AssetDatabase.ImportAsset(
+                GunmetalGrainPath,
+                ImportAssetOptions.ForceSynchronousImport);
+            TextureImporter importer =
+                (TextureImporter)AssetImporter.GetAtPath(GunmetalGrainPath);
+            importer.textureType = TextureImporterType.Default;
+            importer.sRGBTexture = true;
+            importer.wrapMode = TextureWrapMode.Repeat;
+            importer.filterMode = FilterMode.Trilinear;
+            importer.mipmapEnabled = true;
+            importer.textureCompression = TextureImporterCompression.Compressed;
+            importer.SaveAndReimport();
+            return AssetDatabase.LoadAssetAtPath<Texture2D>(GunmetalGrainPath);
+        }
+
         private static Cubemap CreateOrUpdateReflection()
         {
             const int size = 32;
@@ -984,7 +1194,10 @@ namespace FidgetingApp.FanCard.EditorTools
             float thickness,
             float radius,
             float bevel,
-            int cornerSegments)
+            int cornerSegments,
+            Vector2? holeCenter = null,
+            float holeRadius = 0f,
+            float holeBevel = 0f)
         {
             float halfY = thickness * 0.5f;
             float safeBevel = Mathf.Min(bevel, Mathf.Min(radius * 0.55f, halfY));
@@ -1021,22 +1234,222 @@ namespace FidgetingApp.FanCard.EditorTools
                     triangles.Add(start + j);
                 }
             }
-            int bottomCenter = vertices.Count;
-            vertices.Add(new Vector3(0f, -halfY, 0f));
-            int topCenter = vertices.Count;
-            vertices.Add(new Vector3(0f, halfY, 0f));
-            int topStart = (rings.Length - 1) * count;
-            for (int i = 0; i < count; i++)
+            if (holeCenter.HasValue && holeRadius > 0f)
             {
-                int j = (i + 1) % count;
-                triangles.Add(bottomCenter);
-                triangles.Add(j);
-                triangles.Add(i);
-                triangles.Add(topCenter);
-                triangles.Add(topStart + i);
-                triangles.Add(topStart + j);
+                float safeHoleBevel = Mathf.Min(
+                    Mathf.Max(0f, holeBevel),
+                    Mathf.Max(0f, halfY * 0.45f));
+                AppendPerforatedCap(
+                    vertices,
+                    triangles,
+                    rings[0],
+                    holeCenter.Value,
+                    holeRadius + safeHoleBevel,
+                    -halfY,
+                    false,
+                    96);
+                AppendPerforatedCap(
+                    vertices,
+                    triangles,
+                    rings[^1],
+                    holeCenter.Value,
+                    holeRadius + safeHoleBevel,
+                    halfY,
+                    true,
+                    96);
+                AppendHoleWall(
+                    vertices,
+                    triangles,
+                    holeCenter.Value,
+                    holeRadius,
+                    safeHoleBevel,
+                    halfY,
+                    96);
+            }
+            else
+            {
+                int bottomCenter = vertices.Count;
+                vertices.Add(new Vector3(0f, -halfY, 0f));
+                int topCenter = vertices.Count;
+                vertices.Add(new Vector3(0f, halfY, 0f));
+                int topStart = (rings.Length - 1) * count;
+                for (int i = 0; i < count; i++)
+                {
+                    int j = (i + 1) % count;
+                    triangles.Add(bottomCenter);
+                    triangles.Add(j);
+                    triangles.Add(i);
+                    triangles.Add(topCenter);
+                    triangles.Add(topStart + i);
+                    triangles.Add(topStart + j);
+                }
             }
             return FinalizeMesh(name, vertices, triangles);
+        }
+
+        private static Mesh CreateRoundedSurfaceMesh(
+            string name,
+            float width,
+            float height,
+            float radius,
+            int cornerSegments,
+            Vector2 holeCenter,
+            float holeRadius)
+        {
+            List<Vector2> outer = RoundedRectPoints(
+                width,
+                height,
+                radius,
+                0f,
+                cornerSegments);
+            var vertices = new List<Vector3>();
+            var triangles = new List<int>();
+            AppendPerforatedCap(
+                vertices,
+                triangles,
+                outer,
+                holeCenter,
+                holeRadius,
+                0f,
+                true,
+                96);
+            return FinalizeMesh(name, vertices, triangles);
+        }
+
+        private static void AppendPerforatedCap(
+            List<Vector3> vertices,
+            List<int> triangles,
+            IReadOnlyList<Vector2> outerPolygon,
+            Vector2 center,
+            float innerRadius,
+            float y,
+            bool top,
+            int segments)
+        {
+            int start = vertices.Count;
+            for (int index = 0; index < segments; index++)
+            {
+                float angle = index * Mathf.PI * 2f / segments;
+                Vector2 direction = new(Mathf.Cos(angle), Mathf.Sin(angle));
+                Vector2 inner = center + direction * innerRadius;
+                Vector2 outer = center + direction
+                    * RayToPolygonBoundary(center, direction, outerPolygon);
+                vertices.Add(new Vector3(inner.x, y, inner.y));
+                vertices.Add(new Vector3(outer.x, y, outer.y));
+            }
+
+            for (int index = 0; index < segments; index++)
+            {
+                int next = (index + 1) % segments;
+                int inner = start + index * 2;
+                int outer = inner + 1;
+                int nextInner = start + next * 2;
+                int nextOuter = nextInner + 1;
+                if (top)
+                {
+                    triangles.Add(inner);
+                    triangles.Add(nextOuter);
+                    triangles.Add(outer);
+                    triangles.Add(inner);
+                    triangles.Add(nextInner);
+                    triangles.Add(nextOuter);
+                }
+                else
+                {
+                    triangles.Add(inner);
+                    triangles.Add(outer);
+                    triangles.Add(nextOuter);
+                    triangles.Add(inner);
+                    triangles.Add(nextOuter);
+                    triangles.Add(nextInner);
+                }
+            }
+        }
+
+        private static void AppendHoleWall(
+            List<Vector3> vertices,
+            List<int> triangles,
+            Vector2 center,
+            float radius,
+            float bevel,
+            float halfY,
+            int segments)
+        {
+            float[] radii =
+            {
+                radius + bevel,
+                radius,
+                radius,
+                radius + bevel
+            };
+            float[] heights =
+            {
+                -halfY,
+                -halfY + bevel,
+                halfY - bevel,
+                halfY
+            };
+            int start = vertices.Count;
+            for (int ring = 0; ring < radii.Length; ring++)
+            {
+                for (int index = 0; index < segments; index++)
+                {
+                    float angle = index * Mathf.PI * 2f / segments;
+                    vertices.Add(new Vector3(
+                        center.x + Mathf.Cos(angle) * radii[ring],
+                        heights[ring],
+                        center.y + Mathf.Sin(angle) * radii[ring]));
+                }
+            }
+
+            for (int ring = 0; ring < radii.Length - 1; ring++)
+            {
+                int currentStart = start + ring * segments;
+                int nextStart = currentStart + segments;
+                for (int index = 0; index < segments; index++)
+                {
+                    int next = (index + 1) % segments;
+                    triangles.Add(currentStart + index);
+                    triangles.Add(nextStart + next);
+                    triangles.Add(nextStart + index);
+                    triangles.Add(currentStart + index);
+                    triangles.Add(currentStart + next);
+                    triangles.Add(nextStart + next);
+                }
+            }
+        }
+
+        private static float RayToPolygonBoundary(
+            Vector2 origin,
+            Vector2 direction,
+            IReadOnlyList<Vector2> polygon)
+        {
+            float nearest = float.PositiveInfinity;
+            for (int index = 0; index < polygon.Count; index++)
+            {
+                Vector2 a = polygon[index];
+                Vector2 edge = polygon[(index + 1) % polygon.Count] - a;
+                float denominator = Cross(direction, edge);
+                if (Mathf.Abs(denominator) < 0.0000001f)
+                {
+                    continue;
+                }
+                Vector2 offset = a - origin;
+                float distance = Cross(offset, edge) / denominator;
+                float edgePosition = Cross(offset, direction) / denominator;
+                if (distance >= 0f
+                    && edgePosition >= -0.0001f
+                    && edgePosition <= 1.0001f)
+                {
+                    nearest = Mathf.Min(nearest, distance);
+                }
+            }
+            if (!float.IsFinite(nearest))
+            {
+                throw new InvalidDataException(
+                    "Could not intersect the fan-card cap boundary.");
+            }
+            return nearest;
         }
 
         private static Mesh CreateRoundedRingMesh(
@@ -1498,7 +1911,7 @@ namespace FidgetingApp.FanCard.EditorTools
                 bounds,
                 backward,
                 up,
-                0.88f,
+                0.86f,
                 0.82f,
                 0.07f,
                 0.004f);
@@ -1655,15 +2068,9 @@ namespace FidgetingApp.FanCard.EditorTools
 
         private static void SetProductBuildScenes()
         {
-            EditorBuildSettings.scenes = new[]
-            {
-                new EditorBuildSettingsScene(SpinnerEnvironmentCatalog.MetalScenePath, true),
-                new EditorBuildSettingsScene(SpinnerEnvironmentCatalog.BlueScenePath, true),
-                new EditorBuildSettingsScene(SpinnerEnvironmentCatalog.ImportedScenePath, true),
-                new EditorBuildSettingsScene(SpinnerEnvironmentCatalog.TwoLobeScenePath, true),
-                new EditorBuildSettingsScene(SpinnerEnvironmentCatalog.EdcScenePath, true),
-                new EditorBuildSettingsScene(FanCardSpecifications.ScenePath, true)
-            };
+            EditorBuildSettings.scenes = ProductCatalog.ShippingScenePaths()
+                .Select(path => new EditorBuildSettingsScene(path, true))
+                .ToArray();
         }
     }
 }

@@ -286,10 +286,10 @@ namespace FidgetingApp.Product
                 1.08f,
                 0.68f,
                 false,
-                new Color(0.145f, 0.132f, 0.118f),
-                new Color(0.058f, 0.054f, 0.051f),
-                new Color(0.015f, 0.014f, 0.013f),
-                0.78f,
+                new Color(0.30f, 0.275f, 0.24f),
+                new Color(0.14f, 0.125f, 0.105f),
+                new Color(0.035f, 0.031f, 0.026f),
+                0.82f,
                 0.52f,
                 0.58f,
                 SpinnerGroundingStageShape.SoftSquare,
@@ -300,11 +300,11 @@ namespace FidgetingApp.Product
                 new SpinnerEnvironmentLightPreset(
                     "LargeSoftKey_UpperLeft",
                     new Color(1.00f, 0.88f, 0.76f),
-                    0.74f),
+                    0.96f),
                 new SpinnerEnvironmentLightPreset(
                     "CoolBroadFill",
                     new Color(0.58f, 0.68f, 0.78f),
-                    0.40f))
+                    0.34f))
         };
 
         public static IReadOnlyList<SpinnerEnvironmentProfile> Profiles => profiles;

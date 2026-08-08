@@ -480,6 +480,10 @@ namespace FidgetingApp.Product
             SpinnerEnvironmentPalette palette,
             string modelId)
         {
+            bool useFanCardSoftboxes = string.Equals(
+                modelId,
+                "magnetic-fan-card",
+                StringComparison.Ordinal);
             TextureFormat format = SystemInfo.SupportsTextureFormat(TextureFormat.RGBAHalf)
                 ? TextureFormat.RGBAHalf
                 : TextureFormat.RGBA32;
@@ -506,7 +510,10 @@ namespace FidgetingApp.Product
                     {
                         Vector3 direction = CubeDirection(face, x, y, ReflectionSize);
                         colors[y * ReflectionSize + x] =
-                            SynthesizeReflection(direction, palette);
+                            SynthesizeReflection(
+                                direction,
+                                palette,
+                                useFanCardSoftboxes);
                     }
                 }
                 cubemap.SetPixels(colors, face);
@@ -517,7 +524,8 @@ namespace FidgetingApp.Product
 
         private static Color SynthesizeReflection(
             Vector3 direction,
-            SpinnerEnvironmentPalette palette)
+            SpinnerEnvironmentPalette palette,
+            bool useFanCardSoftboxes)
         {
             float vertical = direction.y;
             Color baseColor = vertical >= 0f
@@ -533,9 +541,56 @@ namespace FidgetingApp.Product
             float fillHighlight = Mathf.Pow(
                 Mathf.Max(0f, Vector3.Dot(direction, -keyDirection)),
                 5f) * 0.18f;
-            Color result = baseColor * 2.2f
-                + NormalizeLightColor(palette.Key) * keyHighlight * 0.72f
-                + NormalizeLightColor(palette.Fill) * fillHighlight;
+            Color result;
+            if (useFanCardSoftboxes)
+            {
+                // Chrome only reads as chrome when it reflects shapes, not
+                // point-like lamps. The fan-card product therefore receives a
+                // broad upper-left studio panel plus a dimmer opposing strip.
+                // This remains environment lighting: no geometry, mechanics,
+                // or product interaction state is touched.
+                Vector3 panelForward = keyDirection;
+                Vector3 panelRight = Vector3.Cross(Vector3.up, panelForward).normalized;
+                if (panelRight.sqrMagnitude < 0.001f)
+                {
+                    panelRight = Vector3.right;
+                }
+                Vector3 panelUp = Vector3.Cross(panelForward, panelRight).normalized;
+                float facing = Mathf.Clamp01(Vector3.Dot(direction, panelForward));
+                float panelX = 1f - Mathf.SmoothStep(
+                    0.28f,
+                    0.56f,
+                    Mathf.Abs(Vector3.Dot(direction, panelRight)));
+                float panelY = 1f - Mathf.SmoothStep(
+                    0.20f,
+                    0.48f,
+                    Mathf.Abs(Vector3.Dot(direction, panelUp)));
+                float broadPanel = Mathf.SmoothStep(0.42f, 0.82f, facing)
+                    * panelX
+                    * panelY;
+
+                Vector3 stripForward = -panelRight * 0.86f
+                    + panelUp * 0.28f
+                    - panelForward * 0.10f;
+                stripForward.Normalize();
+                float stripFacing = Mathf.Clamp01(
+                    Vector3.Dot(direction, stripForward));
+                float opposingStrip = Mathf.SmoothStep(
+                    0.64f,
+                    0.90f,
+                    stripFacing);
+                result = baseColor * 1.28f
+                    + NormalizeLightColor(palette.Key) * keyHighlight * 0.12f
+                    + NormalizeLightColor(palette.Fill) * fillHighlight * 0.10f
+                    + new Color(1.0f, 0.96f, 0.90f) * broadPanel * 0.86f
+                    + new Color(0.55f, 0.66f, 0.78f) * opposingStrip * 0.24f;
+            }
+            else
+            {
+                result = baseColor * 2.2f
+                    + NormalizeLightColor(palette.Key) * keyHighlight * 0.72f
+                    + NormalizeLightColor(palette.Fill) * fillHighlight;
+            }
             result.a = 1f;
             return result;
         }

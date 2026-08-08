@@ -43,6 +43,49 @@ namespace FidgetingApp.Tests.Editor
         }
 
         [Test]
+        public void ReferenceGeometryKeepsFullCardSizeThickSidewallsAndExpandedFraming()
+        {
+            Assert.That(FanCardSpecifications.CardWidth, Is.EqualTo(0.0635f));
+            Assert.That(FanCardSpecifications.CardHeight, Is.EqualTo(0.0889f));
+            Assert.That(FanCardSpecifications.CardThickness, Is.EqualTo(0.0025f));
+            Assert.That(
+                FanCardSpecifications.CardWidth / FanCardSpecifications.CardHeight,
+                Is.EqualTo(63.5f / 88.9f).Within(0.00001f));
+            Assert.That(
+                FanCardSpecifications.CardCornerRadius,
+                Is.EqualTo(FanCardSpecifications.CardWidth * 0.06f));
+            Assert.That(
+                FanCardSpecifications.EdgeBevel,
+                Is.EqualTo(FanCardSpecifications.CardThickness * 0.15f));
+            Assert.That(FanCardSpecifications.LayerPitch, Is.EqualTo(0.00625f));
+            Assert.That(FanCardSpecifications.AxisHoleRadius, Is.EqualTo(0.00215f));
+            Assert.That(
+                FanCardSpecifications.LayerPitch
+                    - FanCardSpecifications.CardThickness,
+                Is.GreaterThanOrEqualTo(
+                    FanCardSpecifications.CardThickness * 1.5f),
+                "The face-to-face air gap must be at least 1.5 slab thicknesses.");
+            Assert.That(
+                FanCardSpecifications.LayerPitch
+                    - FanCardSpecifications.CardThickness
+                    - FanCardSpecifications.FollowerBallProtrusion,
+                Is.GreaterThanOrEqualTo(0.0005f),
+                "The visible follower cap must clear the adjacent plate.");
+            Assert.That(
+                FanCardSpecifications.AxisHoleRadius
+                    - FanCardSpecifications.AxisInnerRadius * 0.76f,
+                Is.InRange(0.00015f, 0.00025f),
+                "The spindle hole should add only a small radial clearance.");
+
+            ProductFramingProfile framing = ProductFramingCatalog.Resolve(
+                FanCardSpecifications.ScenePath);
+            Assert.That(framing.DetailWidthFraction, Is.EqualTo(0.84f));
+            Assert.That(framing.DetailHeightFraction, Is.EqualTo(0.78f));
+            Assert.That(framing.LibraryWidthFraction, Is.EqualTo(0.79f));
+            Assert.That(framing.LibraryHeightFraction, Is.EqualTo(0.73f));
+        }
+
+        [Test]
         public void TrackRequiresBreakawayOnceAndIsDirectionallySymmetric()
         {
             FanCardDetentProfile profile = CreateProfile();
@@ -150,8 +193,22 @@ namespace FidgetingApp.Tests.Editor
                 Quaternion.Angle(Quaternion.identity, top.localRotation),
                 Is.EqualTo(90f).Within(0.01f));
             Assert.That(controller.CapturedDetentIndex, Is.EqualTo(3));
+            Renderer authoredTopFace = top.Find("WarmSilverFace")
+                .GetComponent<Renderer>();
+            Vector3 authoredPivot = root.position;
+            Assert.That(authoredPivot.x, Is.GreaterThan(authoredTopFace.bounds.center.x));
+            Assert.That(authoredPivot.z, Is.LessThan(authoredTopFace.bounds.center.z),
+                "In the authored top view, the common axis must sit at the top card's lower-right corner.");
 
             Transform[] hierarchy = root.GetComponentsInChildren<Transform>(true);
+            Assert.That(
+                controller.GetComponentsInChildren<Cloth>(true),
+                Is.Empty,
+                "Rigid cards must not contain cloth or soft-body components.");
+            Assert.That(
+                controller.GetComponentsInChildren<SkinnedMeshRenderer>(true),
+                Is.Empty,
+                "Rigid cards must not be driven by a deforming skinned mesh.");
             Assert.That(
                 hierarchy.Count(item => item.name == "CurvedTrack_GoldWoven"),
                 Is.EqualTo(2));
@@ -162,11 +219,57 @@ namespace FidgetingApp.Tests.Editor
                 hierarchy.Count(item => item.name == "FollowerBearing_Chrome"),
                 Is.EqualTo(2));
             Assert.That(
+                hierarchy.Count(item => item.name == "FollowerSeat_Undercut"),
+                Is.EqualTo(2));
+            Assert.That(
                 hierarchy.Count(item => item.name == "CommonAxis_ChromeBall"),
                 Is.EqualTo(1));
             Assert.That(
                 hierarchy.Count(item => item.name == "CommonAxis_BallSeat"),
                 Is.EqualTo(1));
+
+            Renderer[] bodies = hierarchy
+                .Where(item => item.name == "GunmetalFrame")
+                .Select(item => item.GetComponent<Renderer>())
+                .OrderBy(item => item.bounds.center.y)
+                .ToArray();
+            Assert.That(bodies, Has.Length.EqualTo(3));
+            Assert.That(
+                bodies.All(item => Mathf.Abs(item.bounds.size.y
+                    - FanCardSpecifications.CardThickness) < 0.00001f),
+                Is.True,
+                "Every shipping card body must retain the authored 2.5 mm section.");
+            for (int index = 1; index < bodies.Length; index++)
+            {
+                Assert.That(
+                    bodies[index].bounds.min.y - bodies[index - 1].bounds.max.y,
+                    Is.GreaterThanOrEqualTo(
+                        FanCardSpecifications.CardThickness * 1.5f - 0.00001f),
+                    "Adjacent card bodies must keep a physical air gap.");
+            }
+            Assert.That(
+                hierarchy.Count(item => item.name == "WarmSilverBackFace"),
+                Is.EqualTo(3),
+                "All three rigid slabs need a rendered underside face.");
+            Mesh projectedFaceMesh = top.Find("WarmSilverFace")
+                .GetComponent<MeshFilter>().sharedMesh;
+            Assert.That(
+                projectedFaceMesh.vertices.All(vertex => Mathf.Abs(vertex.y) < 0.000001f),
+                Is.True,
+                "Face art must be a perfectly flat surface projection, not a second bent slab.");
+
+            Mesh bodyMesh = top.Find("GunmetalFrame")
+                .GetComponent<MeshFilter>().sharedMesh;
+            Vector2 holeCenter = new(
+                FanCardSpecifications.PivotX,
+                FanCardSpecifications.PivotZ);
+            Assert.That(
+                CapContainsPoint(
+                    bodyMesh,
+                    holeCenter,
+                    FanCardSpecifications.CardThickness * 0.5f),
+                Is.False,
+                "The common axis must pass through a real opening, not a solid cap.");
             Assert.That(
                 hierarchy.Where(item => item.name == "CurvedTrack_GoldWoven")
                     .All(item => item.GetComponent<MeshFilter>().sharedMesh.bounds.center.x < 0f
@@ -250,13 +353,23 @@ namespace FidgetingApp.Tests.Editor
             Assert.That(silver, Is.Not.Null);
             Assert.That(chrome, Is.Not.Null);
             Assert.That(gold, Is.Not.Null);
-            Assert.That(gunmetal.GetFloat("_Metallic"), Is.EqualTo(0.96f));
-            Assert.That(gunmetal.GetFloat("_Smoothness"), Is.EqualTo(0.18f));
+            Assert.That(gunmetal.GetFloat("_Metallic"), Is.EqualTo(0.90f));
+            Assert.That(gunmetal.GetFloat("_Smoothness"), Is.EqualTo(0.34f));
             Assert.That(silver.GetFloat("_Metallic"), Is.EqualTo(1f));
-            Assert.That(silver.GetFloat("_Smoothness"), Is.EqualTo(0.22f));
-            Assert.That(chrome.GetFloat("_Smoothness"), Is.EqualTo(0.97f));
+            Assert.That(silver.GetFloat("_Smoothness"), Is.EqualTo(0.36f));
+            Assert.That(chrome.GetFloat("_Smoothness"), Is.EqualTo(0.92f));
+            Assert.That(
+                chrome.shader.name,
+                Is.EqualTo("FidgetingApp/FanCardChrome"));
             Assert.That(gunmetal.GetTexture("_BumpMap"), Is.Not.Null);
+            Assert.That(gunmetal.GetTexture("_BaseMap"), Is.Not.Null);
+            Assert.That(
+                gunmetal.shader.name,
+                Is.EqualTo("FidgetingApp/FanCardGunmetal"));
             Assert.That(silver.GetTexture("_BumpMap"), Is.Not.Null);
+            Assert.That(
+                silver.shader.name,
+                Is.EqualTo("FidgetingApp/FanCardSatinSilver"));
             Assert.That(gold.GetTexture("_BaseMap"), Is.Not.Null);
 
             EditorSceneManager.OpenScene(
@@ -265,7 +378,7 @@ namespace FidgetingApp.Tests.Editor
             FanCardController controller =
                 Object.FindAnyObjectByType<FanCardController>();
             TextMesh[] labels = controller.GetComponentsInChildren<TextMesh>(true);
-            Assert.That(labels, Has.Length.EqualTo(6));
+            Assert.That(labels, Has.Length.EqualTo(12));
             Assert.That(
                 labels.All(label => label.text == "A"
                     && label.font != null
@@ -274,12 +387,12 @@ namespace FidgetingApp.Tests.Editor
                 "Both card corners must use the bundled app typeface without clipped glyphs.");
             Assert.That(
                 controller.GetComponentsInChildren<Transform>(true)
-                    .Count(item => item.name == "Spade_Etched"),
-                Is.EqualTo(3));
+                    .Count(item => item.name.StartsWith("Spade_Etched")),
+                Is.EqualTo(6));
             Assert.That(
                 controller.GetComponentsInChildren<Transform>(true)
-                    .Count(item => item.name == "Spade_VerticalSlots"),
-                Is.EqualTo(3));
+                    .Count(item => item.name.StartsWith("Spade_VerticalSlots")),
+                Is.EqualTo(6));
 
             Mesh spade = AssetDatabase.LoadAssetAtPath<Mesh>(
                 "Assets/_FanCard/Generated/Meshes/M_FanCardSpade.asset");
@@ -320,6 +433,57 @@ namespace FidgetingApp.Tests.Editor
                 ScriptableObject.CreateInstance<FanCardDetentProfile>();
             profile.ApplyReferenceDefaults();
             return profile;
+        }
+
+        private static bool CapContainsPoint(Mesh mesh, Vector2 point, float y)
+        {
+            Vector3[] vertices = mesh.vertices;
+            int[] triangles = mesh.triangles;
+            for (int index = 0; index < triangles.Length; index += 3)
+            {
+                Vector3 a = vertices[triangles[index]];
+                Vector3 b = vertices[triangles[index + 1]];
+                Vector3 c = vertices[triangles[index + 2]];
+                if (Mathf.Abs(a.y - y) > 0.00001f
+                    || Mathf.Abs(b.y - y) > 0.00001f
+                    || Mathf.Abs(c.y - y) > 0.00001f)
+                {
+                    continue;
+                }
+                if (PointInTriangle(
+                    point,
+                    new Vector2(a.x, a.z),
+                    new Vector2(b.x, b.z),
+                    new Vector2(c.x, c.z)))
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        private static bool PointInTriangle(
+            Vector2 point,
+            Vector2 a,
+            Vector2 b,
+            Vector2 c)
+        {
+            float d1 = Cross(point, a, b);
+            float d2 = Cross(point, b, c);
+            float d3 = Cross(point, c, a);
+            bool hasNegative = d1 < -0.0000001f
+                || d2 < -0.0000001f
+                || d3 < -0.0000001f;
+            bool hasPositive = d1 > 0.0000001f
+                || d2 > 0.0000001f
+                || d3 > 0.0000001f;
+            return !(hasNegative && hasPositive);
+        }
+
+        private static float Cross(Vector2 p, Vector2 a, Vector2 b)
+        {
+            return (p.x - b.x) * (a.y - b.y)
+                - (a.x - b.x) * (p.y - b.y);
         }
 
         private static FanCardMagneticTrack RunOpenAndRelease(

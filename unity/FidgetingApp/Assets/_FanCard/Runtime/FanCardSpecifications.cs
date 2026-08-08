@@ -9,16 +9,16 @@ namespace FidgetingApp.FanCard
         public const string ProfilePath =
             "Assets/_FanCard/Generated/FanCardDetentProfile.asset";
 
-        public const float CardWidth = 0.052f;
-        public const float CardHeight = 0.074f;
-        public const float CardThickness = 0.0026f;
-        public const float CardCornerRadius = 0.007f;
-        public const float EdgeBevel = 0.00075f;
-        public const float FaceWidth = 0.0472f;
-        public const float FaceHeight = 0.0692f;
-        public const float FaceCornerRadius = 0.0052f;
-        public const float FaceThickness = 0.00055f;
-        public const float LayerPitch = 0.00335f;
+        public const float CardWidth = 0.0635f;
+        public const float CardHeight = 0.0889f;
+        public const float CardThickness = 0.0025f;
+        public const float CardCornerRadius = CardWidth * 0.06f;
+        public const float EdgeBevel = CardThickness * 0.15f;
+        public const float FaceWidth = 0.0587f;
+        public const float FaceHeight = 0.0841f;
+        public const float FaceCornerRadius = 0.0026f;
+        // 2.5 mm slab plus a 3.75 mm face-to-face air gap.
+        public const float LayerPitch = 0.00625f;
         public const float InteractionPadding = 0.006f;
         public const float PresentationRotationDegrees = 180f;
 
@@ -30,20 +30,28 @@ namespace FidgetingApp.FanCard
         // The follower is safely inset toward the lower-left; rotating it by
         // -45 degrees around the pivot stays inside the rounded card boundary.
         public static readonly Vector2 FollowerFromPivot =
-            new(-0.0134f, -0.0408f);
+            new(-0.0211f, -0.0536f);
         public const float TrackShellWidth = 0.0062f;
         public const float TrackMeshWidth = 0.00425f;
         public const float TrackSurfaceHeight = 0.00194f;
         public const float MagnetRadius = 0.00165f;
         public const float FollowerBallRadius = 0.00210f;
+        // Only this shallow chrome cap sits outside the upper card. Keeping it
+        // below the inter-layer air gap prevents the follower from entering
+        // the lower plate while the rest of the sphere remains in its seat.
+        public const float FollowerBallProtrusion = 0.00070f;
+        public const float FollowerSeatRadius = 0.00255f;
+        public const float FollowerSeatHeight = 0.00032f;
         public const float AxisOuterRadius = 0.00365f;
         public const float AxisInnerRadius = 0.00255f;
-        public const float AxisBallRadius = 0.00235f;
+        public const float AxisHoleRadius = 0.00215f;
+        public const float AxisHoleBevel = 0.00022f;
+        public const float AxisBallRadius = 0.00265f;
 
         public static readonly Color GunmetalColor =
-            new(0.135f, 0.142f, 0.150f, 1f);
+            new(0.155f, 0.163f, 0.172f, 1f);
         public static readonly Color WarmSilverColor =
-            new(0.34f, 0.325f, 0.30f, 1f);
+            new(0.40f, 0.385f, 0.36f, 1f);
         public static readonly Color EtchingColor =
             new(0.050f, 0.052f, 0.054f, 1f);
         public static readonly Color GrooveColor =
@@ -51,14 +59,14 @@ namespace FidgetingApp.FanCard
         public static readonly Color MagnetGoldColor =
             new(0.63f, 0.38f, 0.095f, 1f);
 
-        public const float GunmetalMetallic = 0.96f;
-        public const float GunmetalSmoothness = 0.18f;
+        public const float GunmetalMetallic = 0.90f;
+        public const float GunmetalSmoothness = 0.34f;
         public const float SilverMetallic = 1.0f;
         // Satin bead-blasted face: metallic, but deliberately below polished
         // metal so the studio reflection stays broad instead of clipping to a
         // white mirror band in the overhead view.
-        public const float SilverSmoothness = 0.22f;
-        public const float ChromeSmoothness = 0.97f;
-        public const float GrainBumpScale = 0.20f;
+        public const float SilverSmoothness = 0.36f;
+        public const float ChromeSmoothness = 0.92f;
+        public const float GrainBumpScale = 0.11f;
     }
 }

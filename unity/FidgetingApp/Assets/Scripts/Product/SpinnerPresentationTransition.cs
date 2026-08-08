@@ -44,10 +44,10 @@ namespace FidgetingApp.Product
         public const float BarDetailHeightFraction = 0.62f;
         public const float BarLibraryWidthFraction = 0.76f;
         public const float BarLibraryHeightFraction = 0.58f;
-        public const float FanCardDetailWidthFraction = 0.82f;
-        public const float FanCardDetailHeightFraction = 0.74f;
-        public const float FanCardLibraryWidthFraction = 0.76f;
-        public const float FanCardLibraryHeightFraction = 0.70f;
+        public const float FanCardDetailWidthFraction = 0.84f;
+        public const float FanCardDetailHeightFraction = 0.78f;
+        public const float FanCardLibraryWidthFraction = 0.79f;
+        public const float FanCardLibraryHeightFraction = 0.73f;
 
         public static ProductFramingProfile Resolve(string scenePath)
         {

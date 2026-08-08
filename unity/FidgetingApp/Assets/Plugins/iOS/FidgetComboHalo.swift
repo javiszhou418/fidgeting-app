@@ -34,6 +34,44 @@ struct ComboHaloProjectionState: Equatable {
     }
 }
 
+/// Count-derived visual tier for one-shot Combo milestone feedback. The tier
+/// only changes presentation; it never changes Combo counting, XP or physics.
+enum ComboHaloMilestoneStyle: Equatable {
+    case standard
+    case overdrive
+    case apex
+
+    static func forCount(_ count: Int) -> ComboHaloMilestoneStyle {
+        if count >= 50 { return .apex }
+        if count >= 30 { return .overdrive }
+        return .standard
+    }
+
+    var speedLineCount: Int {
+        switch self {
+        case .standard: return 0
+        case .overdrive: return 10
+        case .apex: return 14
+        }
+    }
+
+    var speedLinePeakScale: Double {
+        switch self {
+        case .standard: return 0
+        case .overdrive: return 0.86
+        case .apex: return 1.12
+        }
+    }
+
+    var edgeBloomPeakScale: Double {
+        switch self {
+        case .standard: return 0
+        case .overdrive: return 0.58
+        case .apex: return 0.78
+        }
+    }
+}
+
 /// Native source of truth for the milestone halo and its editable timing curve.
 /// The production overlay and the Combo Halo Lab both render this same type.
 struct ComboHaloTuning: Codable, Equatable {
@@ -133,6 +171,30 @@ struct ComboHaloTuning: Codable, Equatable {
             releaseStart: 0.28,
             end: 1.00,
             peakScale: 0.78)
+    }
+
+    func speedTunnelOpacity(
+        at progress: Double,
+        style: ComboHaloMilestoneStyle) -> Double {
+        envelope(
+            at: progress,
+            start: 0.035,
+            attackEnd: 0.075,
+            releaseStart: 0.14,
+            end: 0.74,
+            peakScale: style.speedLinePeakScale)
+    }
+
+    func edgeBloomOpacity(
+        at progress: Double,
+        style: ComboHaloMilestoneStyle) -> Double {
+        envelope(
+            at: progress,
+            start: 0.00,
+            attackEnd: 0.025,
+            releaseStart: 0.055,
+            end: 0.32,
+            peakScale: style.edgeBloomPeakScale)
     }
 
     func phase(
@@ -311,6 +373,62 @@ private struct ComboHaloMistWisps: View {
     }
 }
 
+/// A restrained camera-space speed tunnel for rare high Combo milestones.
+/// Every streak begins outside the model silhouette so the material remains
+/// readable; the softened model-plane compression keeps the burst attached to
+/// the live object without turning it into a flat HUD starburst.
+private struct ComboHaloSpeedTunnel: View {
+    let phase: CGFloat
+    let style: ComboHaloMilestoneStyle
+
+    var body: some View {
+        GeometryReader { proxy in
+            let diameter = min(proxy.size.width, proxy.size.height)
+            let lineCount = style.speedLineCount
+
+            ZStack {
+                ForEach(0..<lineCount, id: \.self) { index in
+                    let variation = CGFloat(index % 4) * 0.022
+                    let length = diameter * (0.19 + variation)
+                    let innerRadius = diameter
+                        * (0.17 + CGFloat(index % 3) * 0.012)
+                    let travel = diameter * phase
+                        * (0.18 + CGFloat(index % 5) * 0.010)
+                    let angle = Double(index) / Double(max(1, lineCount)) * 360
+                        + Double((index * 17) % 23) - 11
+
+                    Capsule(style: .continuous)
+                        .fill(LinearGradient(
+                            stops: [
+                                .init(color: .clear, location: 0.00),
+                                .init(color: .white.opacity(
+                                    index.isMultiple(of: 3) ? 0.86 : 0.58), location: 0.28),
+                                .init(color: .white.opacity(0.16), location: 0.72),
+                                .init(color: .clear, location: 1.00)
+                            ],
+                            startPoint: .leading,
+                            endPoint: .trailing))
+                        .frame(
+                            width: length,
+                            height: max(
+                                1.2,
+                                diameter * (index.isMultiple(of: 3)
+                                    ? 0.009
+                                    : 0.006)))
+                        .offset(x: innerRadius + length * 0.5 + travel)
+                        .rotationEffect(.degrees(angle))
+                        .blur(radius: index.isMultiple(of: 3) ? 1.6 : 0.7)
+                        .shadow(
+                            color: .white.opacity(0.34),
+                            radius: index.isMultiple(of: 3) ? 4 : 2)
+                        .opacity(index.isMultiple(of: 4) ? 0.70 : 1.00)
+                }
+            }
+            .frame(width: proxy.size.width, height: proxy.size.height)
+        }
+    }
+}
+
 /// A neutral-white layered pulse that expands in the live model plane.
 /// `progress` drives the authored primary curve; `opacityProgress` is a linear
 /// clock used to offset the core flash, primary ring, echo ring and mist.
@@ -320,6 +438,7 @@ struct ComboCenterHalo: View, Animatable {
     let tuning: ComboHaloTuning
     let reduceMotion: Bool
     let projection: ComboHaloProjectionState
+    var milestoneCount: Int = 10
 
     var animatableData: AnimatablePair<CGFloat, CGFloat> {
         get { AnimatablePair(progress, opacityProgress) }
@@ -357,6 +476,9 @@ struct ComboCenterHalo: View, Animatable {
             let rotation = liveProjection.available
                 ? liveProjection.rotationDegrees
                 : 0
+            let milestoneStyle = ComboHaloMilestoneStyle.forCount(
+                milestoneCount)
+            let speedAxisRatio = CGFloat(0.82) + axisRatio * 0.18
 
             let primaryExpansion = reduceMotion
                 ? CGFloat(0.68)
@@ -397,8 +519,48 @@ struct ComboCenterHalo: View, Animatable {
             let coreExpansion = reduceMotion
                 ? CGFloat(0.52)
                 : CGFloat(0.26) + corePhase * 0.42
+            let speedPhase = easeOutCubic(tuning.phase(
+                at: linearProgress,
+                start: 0.035,
+                end: 0.74))
+            let speedExpansion = CGFloat(0.86) + speedPhase * 0.28
 
             ZStack {
+                if milestoneStyle != .standard && !reduceMotion {
+                    ComboHaloSpeedTunnel(
+                        phase: speedPhase,
+                        style: milestoneStyle)
+                        .frame(
+                            width: stageDiameter * 1.10,
+                            height: stageDiameter * 1.10)
+                        .scaleEffect(
+                            x: speedExpansion,
+                            y: speedExpansion * speedAxisRatio)
+                        .rotationEffect(.degrees(rotation))
+                        .opacity(tuning.speedTunnelOpacity(
+                            at: linearProgress,
+                            style: milestoneStyle))
+
+                    ZStack {
+                        ComboHaloBrokenRing(lineWidth: 13, gapRotation: -4)
+                            .opacity(0.34)
+                            .blur(radius: 12)
+                        ComboHaloBrokenRing(lineWidth: 2.1, gapRotation: -4)
+                            .opacity(0.74)
+                            .blur(radius: 1.2)
+                    }
+                    .frame(
+                        width: stageDiameter * 0.54,
+                        height: stageDiameter * 0.54)
+                    .scaleEffect(
+                        x: 0.74 + speedPhase * 0.18,
+                        y: (0.74 + speedPhase * 0.18) * axisRatio)
+                    .rotationEffect(.degrees(rotation))
+                    .opacity(tuning.edgeBloomOpacity(
+                        at: linearProgress,
+                        style: milestoneStyle))
+                }
+
                 ZStack {
                     ComboHaloMistCloud(
                         phase: CGFloat(linearProgress),

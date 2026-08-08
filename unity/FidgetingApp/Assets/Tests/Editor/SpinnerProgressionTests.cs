@@ -1571,6 +1571,13 @@ namespace FidgetingApp.Tests.Editor
             StringAssert.Contains("func echoRingOpacity(at progress: Double)", halo);
             StringAssert.Contains("func trailingRingOpacity(at progress: Double)", halo);
             StringAssert.Contains("func mistOpacity(at progress: Double)", halo);
+            StringAssert.Contains("enum ComboHaloMilestoneStyle: Equatable", halo);
+            StringAssert.Contains("if count >= 50 { return .apex }", halo);
+            StringAssert.Contains("if count >= 30 { return .overdrive }", halo);
+            StringAssert.Contains("case .overdrive: return 10", halo);
+            StringAssert.Contains("case .apex: return 14", halo);
+            StringAssert.Contains("func speedTunnelOpacity(", halo);
+            StringAssert.Contains("func edgeBloomOpacity(", halo);
             StringAssert.Contains("peakScale: 0.72", halo);
             StringAssert.Contains("peakScale: 1.00", halo);
             StringAssert.Contains("peakScale: 0.65", halo);
@@ -1581,12 +1588,16 @@ namespace FidgetingApp.Tests.Editor
             StringAssert.Contains("struct ComboHaloMistCloud: Shape", halo);
             StringAssert.Contains("struct ComboHaloBrokenRing: View", halo);
             StringAssert.Contains("struct ComboHaloMistWisps: View", halo);
+            StringAssert.Contains("struct ComboHaloSpeedTunnel: View", halo);
             StringAssert.Contains(".trim(from: start, to: end)", halo);
             StringAssert.Contains("ForEach(0..<7", halo);
             StringAssert.Contains("AngularGradient(", halo);
             StringAssert.Contains("echoExpansion", halo);
             StringAssert.Contains("trailingExpansion", halo);
             StringAssert.Contains("mistExpansion", halo);
+            StringAssert.Contains("speedExpansion", halo);
+            StringAssert.Contains("milestoneCount: Int = 10", halo);
+            StringAssert.Contains("milestoneStyle != .standard && !reduceMotion", halo);
             StringAssert.Contains(
                 "var animatableData: AnimatablePair<CGFloat, CGFloat>",
                 halo);
@@ -1614,6 +1625,8 @@ namespace FidgetingApp.Tests.Editor
                 "withAnimation(.linear(duration: duration))",
                 swift);
             StringAssert.Contains("projection: state.comboHaloProjection", swift);
+            StringAssert.Contains("milestoneCount: haloMilestoneCount", swift);
+            StringAssert.Contains("haloMilestoneCount = newCount", swift);
             StringAssert.Contains("CodexComboHaloReceiveProjection", swift);
             StringAssert.Contains(
                 "state.comboHaloTuning.milestoneCrossed(",

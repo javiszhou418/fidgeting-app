@@ -1,0 +1,170 @@
+Shader "FidgetingApp/FanCardGunmetal"
+{
+    Properties
+    {
+        _BaseMap("Bead Grain", 2D) = "white" {}
+        _BaseColor("Gunmetal", Color) = (0.155, 0.163, 0.172, 1)
+        _Metallic("Metallic", Range(0, 1)) = 0.90
+        _Smoothness("Smoothness", Range(0, 1)) = 0.30
+        [Normal] _BumpMap("Bead Normal", 2D) = "bump" {}
+        _BumpScale("Bead Strength", Range(0, 1)) = 0.11
+    }
+
+    SubShader
+    {
+        Tags
+        {
+            "RenderPipeline" = "UniversalPipeline"
+            "RenderType" = "Opaque"
+            "Queue" = "Geometry"
+        }
+
+        Pass
+        {
+            Name "UniversalForward"
+            Tags { "LightMode" = "UniversalForward" }
+            ZWrite On
+            ZTest LEqual
+            Cull Back
+
+            HLSLPROGRAM
+            #pragma vertex Vert
+            #pragma fragment Frag
+            #pragma target 3.0
+            #pragma multi_compile _ _MAIN_LIGHT_SHADOWS _MAIN_LIGHT_SHADOWS_CASCADE
+
+            #include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Core.hlsl"
+            #include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Lighting.hlsl"
+            #include "Packages/com.unity.render-pipelines.core/ShaderLibrary/Packing.hlsl"
+
+            TEXTURE2D(_BaseMap);
+            SAMPLER(sampler_BaseMap);
+            TEXTURE2D(_BumpMap);
+            SAMPLER(sampler_BumpMap);
+
+            CBUFFER_START(UnityPerMaterial)
+                float4 _BaseMap_ST;
+                float4 _BumpMap_ST;
+                half4 _BaseColor;
+                half _Metallic;
+                half _Smoothness;
+                half _BumpScale;
+            CBUFFER_END
+
+            struct Attributes
+            {
+                float4 positionOS : POSITION;
+                float3 normalOS : NORMAL;
+                float4 tangentOS : TANGENT;
+                float2 uv : TEXCOORD0;
+            };
+
+            struct Varyings
+            {
+                float4 positionCS : SV_POSITION;
+                float3 positionWS : TEXCOORD0;
+                half3 normalWS : TEXCOORD1;
+                half3 tangentWS : TEXCOORD2;
+                half3 bitangentWS : TEXCOORD3;
+                float2 baseUv : TEXCOORD4;
+                float2 bumpUv : TEXCOORD5;
+            };
+
+            Varyings Vert(Attributes input)
+            {
+                Varyings output;
+                output.positionWS = TransformObjectToWorld(input.positionOS.xyz);
+                output.positionCS = TransformWorldToHClip(output.positionWS);
+                output.normalWS = TransformObjectToWorldNormal(input.normalOS);
+                output.tangentWS = TransformObjectToWorldDir(input.tangentOS.xyz);
+                half tangentSign = input.tangentOS.w * GetOddNegativeScale();
+                output.bitangentWS = cross(output.normalWS, output.tangentWS)
+                    * tangentSign;
+                output.baseUv = TRANSFORM_TEX(input.uv, _BaseMap);
+                output.bumpUv = TRANSFORM_TEX(input.uv, _BumpMap);
+                return output;
+            }
+
+            half4 Frag(Varyings input) : SV_Target
+            {
+                half3 tangentNormal = UnpackNormalScale(
+                    SAMPLE_TEXTURE2D(_BumpMap, sampler_BumpMap, input.bumpUv),
+                    _BumpScale);
+                float3 normalWS = normalize(
+                    input.tangentWS * tangentNormal.x
+                    + input.bitangentWS * tangentNormal.y
+                    + input.normalWS * tangentNormal.z);
+                float3 viewWS = SafeNormalize(GetWorldSpaceViewDir(input.positionWS));
+                float4 shadowCoord = TransformWorldToShadowCoord(input.positionWS);
+                Light mainLight = GetMainLight(shadowCoord);
+                float3 halfVector = SafeNormalize(mainLight.direction + viewWS);
+                float nDotL = saturate(dot(normalWS, mainLight.direction));
+                float nDotH = saturate(dot(normalWS, halfVector));
+                float grain = SAMPLE_TEXTURE2D(
+                    _BaseMap,
+                    sampler_BaseMap,
+                    input.baseUv).r;
+
+                // Bead-blasted gunmetal carries a wide, low-energy sheen. The
+                // side-wall lift is stronger than the face response so a real
+                // machined section remains readable in a small phone view.
+                float hemisphere = saturate(normalWS.y * 0.5 + 0.5);
+                float diffuseLevel = 0.42
+                    + hemisphere * 0.18
+                    + nDotL * mainLight.shadowAttenuation * 0.30;
+                float broadSheen = pow(nDotH, lerp(3.0, 8.0, _Smoothness))
+                    * lerp(0.075, 0.14, _Metallic);
+                float rim = pow(1.0 - saturate(dot(normalWS, viewWS)), 3.5)
+                    * 0.072;
+                float3 reflectionWS = reflect(-viewWS, normalWS);
+                float3 studioForward = normalize(float3(-0.42, 0.78, -0.47));
+                float studioSheen = smoothstep(
+                    0.24,
+                    0.80,
+                    saturate(dot(reflectionWS, studioForward)));
+                float sideWall = 1.0 - saturate(abs(normalWS.y));
+                half3 color = _BaseColor.rgb
+                    * lerp(
+                        0.82,
+                        1.14,
+                        saturate((grain - 0.84) / 0.16))
+                    * diffuseLevel;
+                color += half3(0.16, 0.175, 0.19) * broadSheen;
+                color += half3(0.10, 0.115, 0.13) * rim;
+                color += half3(0.26, 0.245, 0.225) * studioSheen * 0.16;
+                color += half3(0.18, 0.195, 0.215) * sideWall * 0.58;
+                return half4(color, 1.0);
+            }
+            ENDHLSL
+        }
+
+        Pass
+        {
+            Name "ShadowCaster"
+            Tags { "LightMode" = "ShadowCaster" }
+            ZWrite On
+            ZTest LEqual
+            ColorMask 0
+            Cull Back
+
+            HLSLPROGRAM
+            #pragma vertex ShadowVert
+            #pragma fragment ShadowFrag
+            #pragma target 3.0
+            #include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Core.hlsl"
+
+            struct Attributes { float4 positionOS : POSITION; };
+            struct Varyings { float4 positionCS : SV_POSITION; };
+
+            Varyings ShadowVert(Attributes input)
+            {
+                Varyings output;
+                output.positionCS = TransformObjectToHClip(input.positionOS.xyz);
+                return output;
+            }
+
+            half4 ShadowFrag(Varyings input) : SV_Target { return 0; }
+            ENDHLSL
+        }
+    }
+}

@@ -166,7 +166,7 @@ namespace FidgetingApp.Tests.Editor
                 "mobilePipeline.msaaSampleCount = originalPipelineMsaa;",
                 buildPipeline,
                 "Simulator preview export must restore the iPhone 2x MSAA source of truth.");
-            StringAssert.Contains("PlayerSettings.iOS.buildNumber = \"22\";", buildPipeline);
+            StringAssert.Contains("PlayerSettings.iOS.buildNumber = \"24\";", buildPipeline);
         }
 
         [Test]

@@ -26,6 +26,7 @@ namespace FidgetingApp.Product
         public const string GoldFourWingModelId = "gold-four-wing";
         public const string GraphiteTwoLobeModelId = "graphite-two-lobe";
         public const string MagneticSlideTileModelId = "magnetic-slide-tile";
+        public const string MagneticFanCardModelId = "magnetic-fan-card";
 
         private static readonly ProductCatalogEntry[] shippingEntries =
         {
@@ -43,7 +44,10 @@ namespace FidgetingApp.Product
                 SpinnerEnvironmentCatalog.TwoLobeScenePath),
             new ProductCatalogEntry(
                 MagneticSlideTileModelId,
-                SpinnerEnvironmentCatalog.EdcScenePath)
+                SpinnerEnvironmentCatalog.EdcScenePath),
+            new ProductCatalogEntry(
+                MagneticFanCardModelId,
+                SpinnerEnvironmentCatalog.FanCardScenePath)
         };
 
         public static IReadOnlyList<ProductCatalogEntry> ShippingEntries =>

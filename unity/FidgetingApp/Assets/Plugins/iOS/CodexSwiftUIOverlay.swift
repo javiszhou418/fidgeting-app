@@ -3104,6 +3104,7 @@ private struct SpinnerExperienceFeedbackLayer: View {
     @State private var haloProgress: CGFloat = 1
     @State private var haloOpacityProgress: CGFloat = 1
     @State private var lastHaloObservedCount = 0
+    @State private var haloMilestoneCount = 10
 
     private var comboTransition: AnyTransition {
         if reduceMotion {
@@ -3124,7 +3125,8 @@ private struct SpinnerExperienceFeedbackLayer: View {
                     opacityProgress: haloOpacityProgress,
                     tuning: state.comboHaloTuning,
                     reduceMotion: reduceMotion,
-                    projection: state.comboHaloProjection)
+                    projection: state.comboHaloProjection,
+                    milestoneCount: haloMilestoneCount)
 
                 VStack(spacing: 0) {
                     if state.progressionCombo.isActive {
@@ -3193,6 +3195,7 @@ private struct SpinnerExperienceFeedbackLayer: View {
         var transaction = Transaction()
         transaction.disablesAnimations = true
         withTransaction(transaction) {
+            haloMilestoneCount = newCount
             haloProgress = 0
             haloOpacityProgress = 0
         }
@@ -4901,14 +4904,15 @@ private struct ComboHaloTuningPanel: View {
                         opacityProgress: previewOpacityProgress,
                         tuning: state.comboHaloTuning,
                         reduceMotion: reduceMotion,
-                        projection: .threeBladeHeroPreview)
+                        projection: .threeBladeHeroPreview,
+                        milestoneCount: 30)
 
                     Circle()
                         .fill(Color.black.opacity(0.82))
                         .frame(width: 70, height: 70)
                         .overlay {
                             VStack(spacing: -2) {
-                                Text("×20")
+                                Text("×30")
                                     .font(.product(size: 24, weight: .black))
                                     .monospacedDigit()
                                 Text("MODEL CENTER")
@@ -5481,16 +5485,19 @@ struct ComboHaloNativePreviewRoot: View {
     let mode: Mode
     let frozenProgress: CGFloat
     let sceneView: SceneView
+    let comboCount: Int
 
-    private let previewCombo = ProgressionComboState(
-        tier: 3,
-        count: 20,
-        title: "OVERDRIVE",
-        speed: 0.92,
-        angularSpeedRadians: 42,
-        intensity: 0.88,
-        frequency: 0.84,
-        experienceMultiplier: 1.45)
+    private var previewCombo: ProgressionComboState {
+        ProgressionComboState(
+            tier: 3,
+            count: comboCount,
+            title: "OVERDRIVE",
+            speed: 0.92,
+            angularSpeedRadians: 42,
+            intensity: 0.88,
+            frequency: 0.84,
+            experienceMultiplier: 1.45)
+    }
 
     var body: some View {
         Group {
@@ -5527,7 +5534,8 @@ struct ComboHaloNativePreviewRoot: View {
                                 : frozenProgress,
                             tuning: state.comboHaloTuning,
                             reduceMotion: false,
-                            projection: sceneView.projection)
+                            projection: sceneView.projection,
+                            milestoneCount: comboCount)
 
                         VStack(spacing: 0) {
                             RewardingComboLockup(combo: previewCombo)
@@ -5535,8 +5543,8 @@ struct ComboHaloNativePreviewRoot: View {
                             Spacer(minLength: 0)
 
                             Text(mode == .motion
-                                 ? "NATIVE IMPLEMENTATION · LIVE LOOP"
-                                 : "NATIVE IMPLEMENTATION · 38% FRAME")
+                                 ? "NATIVE IMPLEMENTATION · ×\(comboCount) LIVE LOOP"
+                                 : "NATIVE IMPLEMENTATION · ×\(comboCount) · 38% FRAME")
                                 .font(.product(size: 9, weight: .bold))
                                 .foregroundStyle(Color.white.opacity(0.54))
                                 .padding(.bottom, 34)
