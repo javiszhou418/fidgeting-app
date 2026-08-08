@@ -166,7 +166,7 @@ namespace FidgetingApp.Tests.Editor
                 "mobilePipeline.msaaSampleCount = originalPipelineMsaa;",
                 buildPipeline,
                 "Simulator preview export must restore the iPhone 2x MSAA source of truth.");
-            StringAssert.Contains("PlayerSettings.iOS.buildNumber = \"24\";", buildPipeline);
+            StringAssert.Contains("PlayerSettings.iOS.buildNumber = \"25\";", buildPipeline);
         }
 
         [Test]
@@ -648,6 +648,9 @@ namespace FidgetingApp.Tests.Editor
             StringAssert.Contains("static let shippingCases: [SpinnerModel]", source);
             StringAssert.Contains("case magneticFanCard = \"magnetic-fan-card\"", source);
             StringAssert.Contains("case .magneticFanCard: return \"磁吸扇牌\"", source);
+            StringAssert.Contains(
+                ".magneticSlideTile,\n        .magneticFanCard\n    ]",
+                source);
             StringAssert.Contains("setModeBarVisible(true)", source);
             StringAssert.DoesNotContain(
                 "state.selectedModel != .magneticSlideTile",

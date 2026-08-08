@@ -161,7 +161,8 @@ private enum SpinnerModel: String, CaseIterable, Identifiable, Equatable {
         .metalThreeBlade,
         .goldFourWing,
         .graphiteTwoLobe,
-        .magneticSlideTile
+        .magneticSlideTile,
+        .magneticFanCard
     ]
 
     var title: String {
