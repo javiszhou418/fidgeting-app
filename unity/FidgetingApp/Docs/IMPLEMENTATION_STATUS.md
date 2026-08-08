@@ -79,6 +79,8 @@ AUTO 可见方形与下一解锁缩略图现共用唯一的 `64 × 64 pt` 尺寸
 按约 `0.8×` 缩小，端点内容高度收至 `76 pt`。中央信息随后收敛为两行：第一行只保留当前等级、称号与
 详情入口；第二行把上一里程碑、进度轨道、当前位置圆点与下一里程碑合并。轨道上重复的当前等级胶囊和独立
 XP 数字行已移除，XP 仍通过 VoiceOver 与详情页提供。专项回归锁定精简层级及两个端点对共享尺寸的引用。
+AUTO 随后从成长 Tabbar 内部移到左侧独立的 Opal 玻璃按钮；AUTO 与右侧 Tabbar 共用 `64 pt` 高度，二者以
+`10 pt` 间距并列。Tabbar 内下一解锁缩略图从 `64 pt` 收至 `48 pt`，释放的宽高用于保持中央信息留白。
 shipping Swift 原生预览编译通过，成长 HUD 专项回归 `1/1` 通过；
 更新后的静态预览、60 fps 动态和接触表位于同一目录的 `progression-thumbnail-hud.png`、
 `progression-hud-auto-motion.mp4`、`progression-hud-auto-motion-contact-sheet.png`。本轮仍等待用户明确视觉

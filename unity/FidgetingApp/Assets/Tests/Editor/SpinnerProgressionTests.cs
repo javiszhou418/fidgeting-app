@@ -1289,7 +1289,7 @@ namespace FidgetingApp.Tests.Editor
             StringAssert.DoesNotContain("PRO", progressionHud);
             StringAssert.DoesNotContain("presentAutoGate", progressionHud);
             StringAssert.DoesNotContain("ExperienceJar(", progressionHud);
-            StringAssert.Contains("ZStack(alignment: .leading)", progressionHud);
+            StringAssert.Contains("HStack(spacing: 10)", progressionHud);
             StringAssert.Contains("ProgressionMilestoneGauge(", progressionHud);
             StringAssert.Contains("previousLevel: previousMilestoneLevel", progressionHud);
             StringAssert.Contains("currentLevel: state.progressionLevel", progressionHud);
@@ -1301,27 +1301,25 @@ namespace FidgetingApp.Tests.Editor
             StringAssert.Contains(
                 "\\(experienceText)，上一个里程碑 \\(previousMilestoneLevel)，下一个里程碑 \\(nextMilestoneLevel)",
                 progressionHud);
-            StringAssert.Contains("private let endpointIconSize: CGFloat = 64", progressionHud);
-            StringAssert.Contains("private let endpointContentHeight: CGFloat = 76", progressionHud);
+            StringAssert.Contains("private let controlHeight: CGFloat = 64", progressionHud);
+            StringAssert.Contains("private let thumbnailIconSize: CGFloat = 48", progressionHud);
             Assert.AreEqual(
-                2,
+                1,
                 progressionHud.Split(
-                    new[] { "width: endpointIconSize," },
+                    new[] { "width: controlHeight," },
                     System.StringSplitOptions.None).Length - 1,
-                "AUTO and the next-unlock thumbnail must share one square icon size.");
-            Assert.AreEqual(
-                2,
-                progressionHud.Split(
-                    new[] { "height: endpointIconSize)" },
-                    System.StringSplitOptions.None).Length - 1,
-                "AUTO and the next-unlock thumbnail must stay square.");
-            StringAssert.Contains("VStack(spacing: 2)", progressionHud);
+                "AUTO must use the shared control height as its width.");
+            StringAssert.Contains(".frame(height: controlHeight)", progressionHud);
+            StringAssert.Contains("VStack(spacing: 1)", progressionHud);
+            StringAssert.Contains("width: thumbnailIconSize", progressionHud);
+            StringAssert.Contains("height: thumbnailIconSize", progressionHud);
             StringAssert.Contains("AutoSpeedRotorBadge(", progressionHud);
             StringAssert.Contains("VStack(spacing: 8)", progressionHud);
             StringAssert.Contains(".frame(width: 29, height: 29)", progressionHud);
             StringAssert.Contains(".padding(.horizontal, 11)", progressionHud);
             StringAssert.Contains(".padding(.vertical, 8)", progressionHud);
-            StringAssert.Contains(".frame(width: 68, height: endpointContentHeight)", progressionHud);
+            StringAssert.Contains(".frame(width: 52, height: controlHeight)", progressionHud);
+            StringAssert.Contains("cornerRadius: 20", progressionHud);
             StringAssert.Contains(".product(size: 9, weight: .black)", progressionHud);
             StringAssert.Contains("Color(red: 0.30, green: 0.92, blue: 0.80)", progressionHud);
             StringAssert.Contains("? autoEnabledColor.opacity(0.96)", progressionHud);
