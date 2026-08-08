@@ -3284,6 +3284,8 @@ private struct SpinnerProgressionHUD: View {
 
     private var accent: Color { state.currentAppearanceAccent }
     private let autoMultipliers = [1.0, 1.5, 2.0, 3.0]
+    private let endpointIconSize: CGFloat = 64
+    private let endpointContentHeight: CGFloat = 76
 
     private var autoMultiplierText: String {
         String(format: "%.1fx", state.progressionAssistantMultiplier)
@@ -3347,9 +3349,9 @@ private struct SpinnerProgressionHUD: View {
                 UnityBridge.feedback()
                 showingLevelDetails = true
             } label: {
-                HStack(spacing: 10) {
+                HStack(spacing: 8) {
                     Color.clear
-                        .frame(width: 84, height: 84)
+                        .frame(width: 68, height: endpointContentHeight)
 
                     VStack(alignment: .leading, spacing: 5) {
                         HStack(spacing: 6) {
@@ -3376,7 +3378,7 @@ private struct SpinnerProgressionHUD: View {
                             .foregroundStyle(Color.white.opacity(0.58))
                     }
 
-                    VStack(spacing: 3) {
+                    VStack(spacing: 2) {
                         ProgressionUnlockThumbnail(
                             model: state.selectedModel,
                             skin: nextPreviewSkin,
@@ -3384,19 +3386,21 @@ private struct SpinnerProgressionHUD: View {
                             unlocked: true,
                             showsLock: state.progressionLevel < 100,
                             shimmers: true)
-                            .frame(width: 62, height: 62)
+                            .frame(
+                                width: endpointIconSize,
+                                height: endpointIconSize)
 
                         Text(state.progressionLevel >= 100
                              ? "MAX"
                              : "LV.\(state.progressionNextUnlockLevel)")
-                            .font(.product(size: 8, weight: .black))
+                            .font(.product(size: 7, weight: .black))
                             .monospacedDigit()
                             .foregroundStyle(accent.opacity(0.78))
                     }
-                    .frame(width: 80, height: 80)
+                    .frame(width: 68, height: endpointContentHeight)
                 }
-                .padding(.horizontal, 13)
-                .padding(.vertical, 10)
+                .padding(.horizontal, 11)
+                .padding(.vertical, 8)
                 .frame(maxWidth: .infinity, alignment: .leading)
                 .contentShape(RoundedRectangle(cornerRadius: 22, style: .continuous))
             }
@@ -3432,20 +3436,22 @@ private struct SpinnerProgressionHUD: View {
                     }
                 }
             } label: {
-                VStack(spacing: 10) {
+                VStack(spacing: 8) {
                     AutoSpeedRotorBadge(
                         multiplierText: autoMultiplierText,
                         angularSpeedRadians: state.motionTelemetry.angularSpeedRadians,
                         active: state.progressionAssistantEnabled,
                         accent: autoEnabledColor)
-                        .frame(width: 36, height: 36)
+                        .frame(width: 29, height: 29)
                     Text("AUTO")
                         .font(.product(.caption2, weight: .semibold))
                 }
                 .foregroundStyle(autoControlForegroundColor)
-                .padding(.horizontal, 14)
-                .padding(.vertical, 10)
-                .frame(width: 80, height: 80)
+                .padding(.horizontal, 11)
+                .padding(.vertical, 8)
+                .frame(
+                    width: endpointIconSize,
+                    height: endpointIconSize)
                 .background {
                     AutoControlGlassSurface(
                         active: state.progressionAssistantEnabled,
@@ -3461,7 +3467,7 @@ private struct SpinnerProgressionHUD: View {
                     ? "已开启，\(autoMultiplierText)"
                     : "已关闭")
             .accessibilityHint("打开向上的倍率选择菜单")
-            .padding(.leading, 13)
+            .padding(.leading, 11)
         }
         .productGlass(
             cornerRadius: 22,
@@ -3486,7 +3492,7 @@ private struct AutoControlGlassSurface: View {
     }
 
     var body: some View {
-        let shape = RoundedRectangle(cornerRadius: 18, style: .continuous)
+        let shape = RoundedRectangle(cornerRadius: 15, style: .continuous)
 
         ZStack {
             shape
@@ -3675,14 +3681,14 @@ private struct AutoSpeedRotorBadge: View {
                     Capsule(style: .continuous)
                         .fill(ringColor.opacity(index == 0 ? 1 : 0.46))
                         .frame(width: 2, height: index == 0 ? 5 : 3)
-                        .offset(y: -15)
+                        .offset(y: -12)
                         .rotationEffect(.degrees(Double(index) * 90))
                 }
             }
             .rotationEffect(.degrees(animator.rotationDegrees))
 
             Text(multiplierText)
-                .font(.product(size: 11, weight: .black).monospacedDigit())
+                .font(.product(size: 9, weight: .black).monospacedDigit())
                 .foregroundStyle(multiplierColor)
         }
         .onAppear {
