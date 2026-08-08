@@ -68,7 +68,11 @@ Bottom Sheet 预览分别位于 `Artifacts/ProgressionThumbnailRecoveryV24/progr
 上下 `7 pt` 的显式 padding，圆环与 AUTO label 使用 `6 pt`。用户继续要求更强的上下呼吸感、放大倍率
 并使用正方形 icon container；倍率从 `9 pt` 增至 `11 pt`。继续复核后，圆环（含倍率）到 AUTO label 的
 间距从 `6 pt` 增至 `10 pt`，容器同步固定为 `80 × 80 pt` 圆角正方形，上下 padding 保持 `10 pt`，
-外部以 `84 × 84 pt` 占位防止侵入相邻内容。专项回归同时锁定文档与实现。
+外部以 `84 × 84 pt` 占位防止侵入相邻内容。AUTO 状态不再只靠微弱透明度区分：OFF 使用中性灰环、
+灰倍率和 `4.5%` 白底，ON 使用稳定青绿色状态色（`0.30 / 0.92 / 0.80`）的圆环、倍率、AUTO label 与
+`20%` 同色底，不再依赖某款模型 accent 是否接近灰白；状态变化以共享
+`180 ms` selection duration 过渡；VoiceOver 继续明确读出“已开启/已关闭”。原生预览工具新增 `hud-off`
+模式，与 `hud` ON 模式共同作为真机视觉门禁。专项回归同时锁定文档与实现。
 shipping Swift 原生预览编译通过，成长 HUD 专项回归 `1/1` 通过；
 更新后的静态预览、60 fps 动态和接触表位于同一目录的 `progression-thumbnail-hud.png`、
 `progression-hud-auto-motion.mp4`、`progression-hud-auto-motion-contact-sheet.png`。本轮仍等待用户明确视觉
