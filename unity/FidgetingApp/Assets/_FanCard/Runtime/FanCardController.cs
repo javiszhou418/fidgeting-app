@@ -5,6 +5,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.Controls;
+using UnityEngine.Serialization;
 
 namespace FidgetingApp.FanCard
 {
@@ -12,7 +13,8 @@ namespace FidgetingApp.FanCard
     public sealed class FanCardController : MonoBehaviour
     {
         [SerializeField] private Transform middleLayer;
-        [SerializeField] private Transform topLayer;
+        [FormerlySerializedAs("topLayer")]
+        [SerializeField] private Transform outerLayer;
         [SerializeField] private Camera interactionCamera;
         [SerializeField] private Collider interactionSurface;
         [SerializeField] private FanCardDetentProfile detentProfile;
@@ -21,7 +23,7 @@ namespace FidgetingApp.FanCard
         [SerializeField, HideInInspector]
         private Quaternion middleClosedRotation = Quaternion.identity;
         [SerializeField, HideInInspector]
-        private Quaternion topClosedRotation = Quaternion.identity;
+        private Quaternion outerClosedRotation = Quaternion.identity;
         private FanCardMagneticTrack track;
         private FanCardDetentProfile ownedRuntimeProfile;
         private bool pointerWasPressed;
@@ -69,13 +71,13 @@ namespace FidgetingApp.FanCard
 
         public void Configure(
             Transform middle,
-            Transform top,
+            Transform outer,
             Camera camera,
             Collider surface,
             FanCardDetentProfile profile)
         {
             middleLayer = middle;
-            topLayer = top;
+            outerLayer = outer;
             interactionCamera = camera;
             interactionSurface = surface;
             detentProfile = profile;
@@ -259,8 +261,8 @@ namespace FidgetingApp.FanCard
             middleClosedRotation = middleLayer != null
                 ? middleLayer.localRotation
                 : Quaternion.identity;
-            topClosedRotation = topLayer != null
-                ? topLayer.localRotation
+            outerClosedRotation = outerLayer != null
+                ? outerLayer.localRotation
                 : Quaternion.identity;
         }
 
@@ -268,7 +270,7 @@ namespace FidgetingApp.FanCard
         {
             if (Quaternion.Dot(middleClosedRotation, middleClosedRotation)
                     < 0.5f
-                || Quaternion.Dot(topClosedRotation, topClosedRotation) < 0.5f)
+                || Quaternion.Dot(outerClosedRotation, outerClosedRotation) < 0.5f)
             {
                 CacheClosedRotations();
             }
@@ -395,11 +397,11 @@ namespace FidgetingApp.FanCard
         private float PointerAngle(Vector2 position)
         {
             Camera camera = interactionCamera != null ? interactionCamera : Camera.main;
-            if (camera == null || topLayer == null)
+            if (camera == null)
             {
                 return 0f;
             }
-            Vector3 pivot = camera.WorldToScreenPoint(topLayer.position);
+            Vector3 pivot = camera.WorldToScreenPoint(transform.position);
             return Mathf.Atan2(position.y - pivot.y, position.x - pivot.x)
                 * Mathf.Rad2Deg;
         }
@@ -407,7 +409,7 @@ namespace FidgetingApp.FanCard
         private float ResolveOpeningScreenDirection()
         {
             Camera camera = interactionCamera != null ? interactionCamera : Camera.main;
-            if (camera == null || topLayer == null)
+            if (camera == null || outerLayer == null)
             {
                 return 1f;
             }
@@ -415,13 +417,16 @@ namespace FidgetingApp.FanCard
             Vector3 sample = interactionSurface is BoxCollider box
                 ? box.center
                 : new Vector3(-0.019f, 0f, -0.030f);
-            Vector3 pivotScreen = camera.WorldToScreenPoint(topLayer.position);
+            Vector3 pivotScreen = camera.WorldToScreenPoint(transform.position);
             Vector3 currentScreen = camera.WorldToScreenPoint(
-                topLayer.TransformPoint(sample));
-            Transform parent = topLayer.parent;
-            Quaternion testRotation = topLayer.localRotation
-                * Quaternion.Euler(0f, -1f, 0f);
-            Vector3 testLocal = topLayer.localPosition + testRotation * sample;
+                outerLayer.TransformPoint(sample));
+            Transform parent = outerLayer.parent;
+            Quaternion testRotation = outerLayer.localRotation
+                * Quaternion.Euler(
+                    0f,
+                    FanCardSpecifications.OpeningRotationSign,
+                    0f);
+            Vector3 testLocal = outerLayer.localPosition + testRotation * sample;
             Vector3 testWorld = parent != null
                 ? parent.TransformPoint(testLocal)
                 : testLocal;
@@ -507,7 +512,7 @@ namespace FidgetingApp.FanCard
 
         private void ApplyVisualPose()
         {
-            if (middleLayer == null || topLayer == null || track == null)
+            if (middleLayer == null || outerLayer == null || track == null)
             {
                 return;
             }
@@ -515,12 +520,14 @@ namespace FidgetingApp.FanCard
             middleLayer.localRotation = middleClosedRotation
                 * Quaternion.Euler(
                     0f,
-                    -detentProfile.MaximumRelativeAngleDegrees * visual,
+                    FanCardSpecifications.OpeningRotationSign
+                        * detentProfile.MaximumRelativeAngleDegrees * visual,
                     0f);
-            topLayer.localRotation = topClosedRotation
+            outerLayer.localRotation = outerClosedRotation
                 * Quaternion.Euler(
                     0f,
-                    -detentProfile.MaximumTotalAngleDegrees * visual,
+                    FanCardSpecifications.OpeningRotationSign
+                        * detentProfile.MaximumTotalAngleDegrees * visual,
                     0f);
         }
 

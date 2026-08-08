@@ -3,6 +3,7 @@ using System.IO;
 using System.Linq;
 using CodexUnityLab;
 using FidgetingApp.EDC;
+using FidgetingApp.EditorTools;
 using FidgetingApp.FanCard;
 using FidgetingApp.Product;
 using NUnit.Framework;
@@ -15,6 +16,17 @@ namespace FidgetingApp.Tests.Editor
 {
     public sealed class FanCardAcceptanceTests
     {
+        [Test]
+        public void ShippingGeometryPassesTheFrozenStructuralGate()
+        {
+            Assert.That(
+                CardGeometryValidator.ValidateShippingScene(),
+                Is.True,
+                "The shipping scene must contain three watertight rigid slabs, "
+                + "valid flat face projections, real spindle holes, and the "
+                + "authored 3.75 mm spindle-axis air gaps.");
+        }
+
         [Test]
         public void ReferenceProfilePreservesApprovedFourDetentFanFeel()
         {
@@ -190,8 +202,36 @@ namespace FidgetingApp.Tests.Editor
                 Quaternion.Angle(Quaternion.identity, middle.localRotation),
                 Is.EqualTo(45f).Within(0.01f));
             Assert.That(
-                Quaternion.Angle(Quaternion.identity, top.localRotation),
+                Quaternion.Angle(Quaternion.identity, bottom.localRotation),
                 Is.EqualTo(90f).Within(0.01f));
+            Assert.That(
+                Quaternion.Angle(Quaternion.identity, top.localRotation),
+                Is.EqualTo(0f).Within(0.01f),
+                "The front/top card stays at 0 degrees while the lower cards fan beneath it.");
+            Assert.That(
+                Mathf.DeltaAngle(0f, middle.localEulerAngles.y),
+                Is.EqualTo(45f).Within(0.01f));
+            Assert.That(
+                Mathf.DeltaAngle(0f, bottom.localEulerAngles.y),
+                Is.EqualTo(90f).Within(0.01f));
+            Vector3 openDirection = bottom.TransformPoint(
+                    FanCardSpecifications.CardCenterFromPivot)
+                - root.position;
+            float openPlanAngle = Mathf.Atan2(
+                openDirection.z,
+                openDirection.x) * Mathf.Rad2Deg;
+            controller.SetFanProgress(0f);
+            Vector3 closedDirection = bottom.TransformPoint(
+                    FanCardSpecifications.CardCenterFromPivot)
+                - root.position;
+            float closedPlanAngle = Mathf.Atan2(
+                closedDirection.z,
+                closedDirection.x) * Mathf.Rad2Deg;
+            Assert.That(
+                Mathf.DeltaAngle(openPlanAngle, closedPlanAngle),
+                Is.EqualTo(90f).Within(0.01f),
+                "The visible closing path must travel counterclockwise from 90 degrees to 0 degrees.");
+            controller.SetFanProgress(1f);
             Assert.That(controller.CapturedDetentIndex, Is.EqualTo(3));
             Renderer authoredTopFace = top.Find("WarmSilverFace")
                 .GetComponent<Renderer>();
@@ -276,6 +316,27 @@ namespace FidgetingApp.Tests.Editor
                         && item.GetComponent<MeshFilter>().sharedMesh.bounds.center.z < 0f),
                 Is.True,
                 "Both curved tracks must stay inset toward the lower-left, not touch an edge.");
+            Assert.That(
+                hierarchy.Where(item => item.name.StartsWith("CurvedTrack_"))
+                    .All(item => item.GetComponent<MeshFilter>().sharedMesh.vertices
+                        .All(vertex => IsInsideCardOutline(vertex, 0.0005f))),
+                Is.True,
+                "The entire back-track projection must remain inside the card outline.");
+            Assert.That(
+                hierarchy.Where(item => item.name.StartsWith("CurvedTrack_"))
+                    .All(item => item.localPosition.y
+                        < -FanCardSpecifications.CardThickness * 0.5f
+                        && item.localRotation == Quaternion.identity
+                        && item.GetComponent<MeshFilter>().sharedMesh.normals
+                            .All(normal => normal.y < -0.999f)),
+                Is.True,
+                "Both track layers must face outward from the back of their rigid slab.");
+            Assert.That(
+                hierarchy.Where(item => item.name.StartsWith("Magnet_"))
+                    .All(item => item.localPosition.y
+                        < -FanCardSpecifications.CardThickness * 0.5f),
+                Is.True,
+                "All magnetic detent inserts belong on the back, never the visible front face.");
             Assert.That(root.GetComponentsInChildren<Rigidbody>(true), Is.Empty);
             Assert.That(root.GetComponentsInChildren<Collider>(true), Has.Length.EqualTo(1));
             Assert.That(controller.InteractionSurface, Is.SameAs(top.GetComponent<BoxCollider>()));
@@ -460,6 +521,29 @@ namespace FidgetingApp.Tests.Editor
                 }
             }
             return false;
+        }
+
+        private static bool IsInsideCardOutline(Vector3 vertex, float margin)
+        {
+            Vector2 center = new(
+                FanCardSpecifications.CardCenterFromPivot.x,
+                FanCardSpecifications.CardCenterFromPivot.z);
+            Vector2 local = new(vertex.x - center.x, vertex.z - center.y);
+            float halfWidth = FanCardSpecifications.CardWidth * 0.5f - margin;
+            float halfHeight = FanCardSpecifications.CardHeight * 0.5f - margin;
+            float radius = Mathf.Max(
+                0.0001f,
+                FanCardSpecifications.CardCornerRadius - margin);
+            Vector2 cornerDistance = new(
+                Mathf.Abs(local.x) - (halfWidth - radius),
+                Mathf.Abs(local.y) - (halfHeight - radius));
+            Vector2 outside = new(
+                Mathf.Max(cornerDistance.x, 0f),
+                Mathf.Max(cornerDistance.y, 0f));
+            float signedDistance = outside.magnitude
+                + Mathf.Min(Mathf.Max(cornerDistance.x, cornerDistance.y), 0f)
+                - radius;
+            return signedDistance <= 0.000001f;
         }
 
         private static bool PointInTriangle(

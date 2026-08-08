@@ -133,17 +133,21 @@ namespace FidgetingApp.FanCard.EditorTools
                 CreateArcRibbonMesh(
                     "M_FanCardTrackShell",
                     FanCardSpecifications.FollowerFromPivot,
-                    -profile.MaximumRelativeAngleDegrees,
+                    FanCardSpecifications.OpeningRotationSign
+                        * profile.MaximumRelativeAngleDegrees,
                     FanCardSpecifications.TrackShellWidth,
-                    32),
+                    32,
+                    faceDown: true),
                 TrackShellMeshPath);
             Mesh trackMesh = SaveMesh(
                 CreateArcRibbonMesh(
                     "M_FanCardTrackMesh",
                     FanCardSpecifications.FollowerFromPivot,
-                    -profile.MaximumRelativeAngleDegrees,
+                    FanCardSpecifications.OpeningRotationSign
+                        * profile.MaximumRelativeAngleDegrees,
                     FanCardSpecifications.TrackMeshWidth,
-                    32),
+                    32,
+                    faceDown: true),
                 TrackMeshPath);
             List<Vector2> spadePolygon = CreateDownwardSpadePolygon();
             Mesh spadeMesh = SaveMesh(
@@ -266,7 +270,7 @@ namespace FidgetingApp.FanCard.EditorTools
             FanCardController controller = root.AddComponent<FanCardController>();
             controller.Configure(
                 middle.transform,
-                top.transform,
+                bottom.transform,
                 camera,
                 interaction,
                 profile);
@@ -361,6 +365,15 @@ namespace FidgetingApp.FanCard.EditorTools
                 Path.Combine(outputFolder, "fan-card-low.png"),
                 1200,
                 900);
+            CaptureView(
+                camera,
+                environment,
+                bounds,
+                new Vector3(0.08f, -1f, -0.14f).normalized,
+                Vector3.forward,
+                Path.Combine(outputFolder, "fan-card-back.png"),
+                900,
+                1600);
 
             Transform topLayer = root.transform.Find("TopCard");
             Vector3 cardInterior = topLayer.TransformPoint(
@@ -412,6 +425,39 @@ namespace FidgetingApp.FanCard.EditorTools
                 1200,
                 800);
 
+            CaptureMotionFrame(
+                controller,
+                root.transform,
+                camera,
+                environment,
+                outputFolder,
+                1f,
+                "fan-card-motion-90.png");
+            CaptureMotionFrame(
+                controller,
+                root.transform,
+                camera,
+                environment,
+                outputFolder,
+                2f / 3f,
+                "fan-card-motion-60.png");
+            CaptureMotionFrame(
+                controller,
+                root.transform,
+                camera,
+                environment,
+                outputFolder,
+                1f / 3f,
+                "fan-card-motion-30.png");
+            CaptureMotionFrame(
+                controller,
+                root.transform,
+                camera,
+                environment,
+                outputFolder,
+                0f,
+                "fan-card-motion-00.png");
+
             controller.SetFanProgress(2f / 3f);
             bounds = ResolveBounds(root.transform);
             CaptureView(
@@ -430,7 +476,29 @@ namespace FidgetingApp.FanCard.EditorTools
                 ImportAssetOptions.ForceSynchronousImport);
             ConfigureThumbnailImporter();
             controller.ResetClosed();
-            Debug.Log($"[FanCard] Eight Unity material previews: {outputFolder}");
+            Debug.Log($"[FanCard] Thirteen Unity material previews: {outputFolder}");
+        }
+
+        private static void CaptureMotionFrame(
+            FanCardController controller,
+            Transform root,
+            Camera camera,
+            SpinnerEnvironmentPresenter environment,
+            string outputFolder,
+            float progress,
+            string fileName)
+        {
+            controller.SetFanProgress(progress);
+            Bounds bounds = ResolveBounds(root);
+            CaptureView(
+                camera,
+                environment,
+                bounds,
+                new Vector3(0f, 1f, -0.08f).normalized,
+                Vector3.forward,
+                Path.Combine(outputFolder, fileName),
+                900,
+                1600);
         }
 
         private static GameObject CreateCardLayer(
@@ -532,30 +600,35 @@ namespace FidgetingApp.FanCard.EditorTools
 
             if (hasTrack)
             {
-                CreateMeshObject(
+                float bodyBottom = -FanCardSpecifications.CardThickness * 0.5f;
+                GameObject trackUndercut = CreateMeshObject(
                     "CurvedTrack_Undercut",
                     layer.transform,
                     trackShellMesh,
                     groove,
-                    Vector3.up * FanCardSpecifications.TrackSurfaceHeight);
-                CreateMeshObject(
+                    Vector3.up * (bodyBottom
+                        - FanCardSpecifications.BackTrackUndercutOffset));
+                GameObject trackInlay = CreateMeshObject(
                     "CurvedTrack_GoldWoven",
                     layer.transform,
                     trackMesh,
                     goldMesh,
-                    Vector3.up * (FanCardSpecifications.TrackSurfaceHeight + 0.00005f));
+                    Vector3.up * (bodyBottom
+                        - FanCardSpecifications.BackTrackInlayOffset));
                 for (int detent = 1; detent < profile.DetentCount; detent++)
                 {
                     float t = detent / (float)profile.DetentIntervals;
                     Vector2 point = Rotate2D(
                         FanCardSpecifications.FollowerFromPivot,
-                        -profile.MaximumRelativeAngleDegrees * t);
+                        FanCardSpecifications.OpeningRotationSign
+                            * profile.MaximumRelativeAngleDegrees * t);
                     CreateCylinder(
                         $"Magnet_{detent:D2}",
                         layer.transform,
                         new Vector3(
                             point.x,
-                            FanCardSpecifications.TrackSurfaceHeight + 0.00013f,
+                            bodyBottom
+                                - FanCardSpecifications.BackMagnetCenterOffset,
                             point.y),
                         FanCardSpecifications.MagnetRadius,
                         0.00016f,
@@ -1201,12 +1274,42 @@ namespace FidgetingApp.FanCard.EditorTools
         {
             float halfY = thickness * 0.5f;
             float safeBevel = Mathf.Min(bevel, Mathf.Min(radius * 0.55f, halfY));
+            const int radialSegments = 96;
+            Vector2 radialCenter = holeCenter ?? Vector2.zero;
             List<Vector2>[] rings =
             {
-                RoundedRectPoints(width, height, radius, safeBevel, cornerSegments),
-                RoundedRectPoints(width, height, radius, 0f, cornerSegments),
-                RoundedRectPoints(width, height, radius, 0f, cornerSegments),
-                RoundedRectPoints(width, height, radius, safeBevel, cornerSegments)
+                RadialRoundedRectPoints(
+                    width,
+                    height,
+                    radius,
+                    safeBevel,
+                    cornerSegments,
+                    radialCenter,
+                    radialSegments),
+                RadialRoundedRectPoints(
+                    width,
+                    height,
+                    radius,
+                    0f,
+                    cornerSegments,
+                    radialCenter,
+                    radialSegments),
+                RadialRoundedRectPoints(
+                    width,
+                    height,
+                    radius,
+                    0f,
+                    cornerSegments,
+                    radialCenter,
+                    radialSegments),
+                RadialRoundedRectPoints(
+                    width,
+                    height,
+                    radius,
+                    safeBevel,
+                    cornerSegments,
+                    radialCenter,
+                    radialSegments)
             };
             float[] ys = { -halfY, -halfY + safeBevel, halfY - safeBevel, halfY };
             var vertices = new List<Vector3>();
@@ -1239,24 +1342,22 @@ namespace FidgetingApp.FanCard.EditorTools
                 float safeHoleBevel = Mathf.Min(
                     Mathf.Max(0f, holeBevel),
                     Mathf.Max(0f, halfY * 0.45f));
-                AppendPerforatedCap(
+                AppendMatchedPerforatedCap(
                     vertices,
                     triangles,
                     rings[0],
                     holeCenter.Value,
                     holeRadius + safeHoleBevel,
                     -halfY,
-                    false,
-                    96);
-                AppendPerforatedCap(
+                    false);
+                AppendMatchedPerforatedCap(
                     vertices,
                     triangles,
                     rings[^1],
                     holeCenter.Value,
                     holeRadius + safeHoleBevel,
                     halfY,
-                    true,
-                    96);
+                    true);
                 AppendHoleWall(
                     vertices,
                     triangles,
@@ -1264,7 +1365,7 @@ namespace FidgetingApp.FanCard.EditorTools
                     holeRadius,
                     safeHoleBevel,
                     halfY,
-                    96);
+                    radialSegments);
             }
             else
             {
@@ -1301,19 +1402,246 @@ namespace FidgetingApp.FanCard.EditorTools
                 height,
                 radius,
                 0f,
-                cornerSegments);
-            var vertices = new List<Vector3>();
-            var triangles = new List<int>();
-            AppendPerforatedCap(
-                vertices,
-                triangles,
+                Mathf.Max(16, cornerSegments * 2));
+            List<Vector2> notched = SubtractCircularCornerNotch(
                 outer,
                 holeCenter,
                 holeRadius,
-                0f,
-                true,
-                96);
-            return FinalizeMesh(name, vertices, triangles);
+                48);
+            List<int> triangles = TriangulatePolygon(notched);
+            EnsurePositiveYFacing(notched, triangles);
+            return FinalizeMesh(
+                name,
+                notched.Select(point => new Vector3(point.x, 0f, point.y)).ToList(),
+                triangles);
+        }
+
+        private static List<Vector2> RadialRoundedRectPoints(
+            float width,
+            float height,
+            float radius,
+            float inset,
+            int cornerSegments,
+            Vector2 origin,
+            int radialSegments)
+        {
+            List<Vector2> boundary = RoundedRectPoints(
+                width,
+                height,
+                radius,
+                inset,
+                Mathf.Max(16, cornerSegments * 2));
+            var points = new List<Vector2>(radialSegments);
+            for (int index = 0; index < radialSegments; index++)
+            {
+                float angle = index * Mathf.PI * 2f / radialSegments;
+                Vector2 direction = new(Mathf.Cos(angle), Mathf.Sin(angle));
+                points.Add(origin + direction
+                    * RayToPolygonBoundary(origin, direction, boundary));
+            }
+            return points;
+        }
+
+        private static void AppendMatchedPerforatedCap(
+            List<Vector3> vertices,
+            List<int> triangles,
+            IReadOnlyList<Vector2> outer,
+            Vector2 center,
+            float innerRadius,
+            float y,
+            bool top)
+        {
+            int start = vertices.Count;
+            int count = outer.Count;
+            for (int index = 0; index < count; index++)
+            {
+                float angle = index * Mathf.PI * 2f / count;
+                Vector2 inner = center + new Vector2(
+                    Mathf.Cos(angle),
+                    Mathf.Sin(angle)) * innerRadius;
+                vertices.Add(new Vector3(inner.x, y, inner.y));
+                vertices.Add(new Vector3(outer[index].x, y, outer[index].y));
+            }
+
+            for (int index = 0; index < count; index++)
+            {
+                int next = (index + 1) % count;
+                int inner = start + index * 2;
+                int outerIndex = inner + 1;
+                int nextInner = start + next * 2;
+                int nextOuter = nextInner + 1;
+                if (top)
+                {
+                    triangles.Add(inner);
+                    triangles.Add(nextOuter);
+                    triangles.Add(outerIndex);
+                    triangles.Add(inner);
+                    triangles.Add(nextInner);
+                    triangles.Add(nextOuter);
+                }
+                else
+                {
+                    triangles.Add(inner);
+                    triangles.Add(outerIndex);
+                    triangles.Add(nextOuter);
+                    triangles.Add(inner);
+                    triangles.Add(nextOuter);
+                    triangles.Add(nextInner);
+                }
+            }
+        }
+
+        private static List<Vector2> SubtractCircularCornerNotch(
+            IReadOnlyList<Vector2> outer,
+            Vector2 center,
+            float radius,
+            int arcSegments)
+        {
+            int entrySegment = -1;
+            int exitSegment = -1;
+            for (int index = 0; index < outer.Count; index++)
+            {
+                int next = (index + 1) % outer.Count;
+                bool currentInside = IsInsideCircle(outer[index], center, radius);
+                bool nextInside = IsInsideCircle(outer[next], center, radius);
+                if (!currentInside && nextInside)
+                {
+                    entrySegment = index;
+                }
+                else if (currentInside && !nextInside)
+                {
+                    exitSegment = index;
+                }
+            }
+
+            if (entrySegment < 0 || exitSegment < 0)
+            {
+                throw new InvalidDataException(
+                    "The fan-card face cutout must intersect its rounded corner exactly twice.");
+            }
+
+            Vector2 entry = SegmentCircleIntersection(
+                outer[entrySegment],
+                outer[(entrySegment + 1) % outer.Count],
+                center,
+                radius);
+            Vector2 exit = SegmentCircleIntersection(
+                outer[exitSegment],
+                outer[(exitSegment + 1) % outer.Count],
+                center,
+                radius);
+
+            var polygon = new List<Vector2>(outer.Count + arcSegments);
+            polygon.Add(exit);
+            int cursor = (exitSegment + 1) % outer.Count;
+            int entryOutside = entrySegment;
+            while (true)
+            {
+                polygon.Add(outer[cursor]);
+                if (cursor == entryOutside)
+                {
+                    break;
+                }
+                cursor = (cursor + 1) % outer.Count;
+            }
+            polygon.Add(entry);
+
+            float entryAngle = Mathf.Atan2(
+                entry.y - center.y,
+                entry.x - center.x);
+            float exitAngle = Mathf.Atan2(
+                exit.y - center.y,
+                exit.x - center.x);
+            float counterClockwise = Mathf.Repeat(
+                exitAngle - entryAngle,
+                Mathf.PI * 2f);
+            float clockwise = counterClockwise - Mathf.PI * 2f;
+            float sweep = ArcMidpointIsInsideRoundedRect(
+                center,
+                radius,
+                entryAngle,
+                counterClockwise,
+                FanCardSpecifications.FaceWidth,
+                FanCardSpecifications.FaceHeight,
+                FanCardSpecifications.FaceCornerRadius)
+                ? counterClockwise
+                : clockwise;
+            int steps = Mathf.Max(8, Mathf.CeilToInt(
+                Mathf.Abs(sweep) / (Mathf.PI * 2f) * arcSegments));
+            for (int step = 1; step < steps; step++)
+            {
+                float angle = entryAngle + sweep * step / steps;
+                polygon.Add(center + new Vector2(
+                    Mathf.Cos(angle),
+                    Mathf.Sin(angle)) * radius);
+            }
+            return polygon;
+        }
+
+        private static bool IsInsideCircle(
+            Vector2 point,
+            Vector2 center,
+            float radius)
+        {
+            return (point - center).sqrMagnitude < radius * radius;
+        }
+
+        private static Vector2 SegmentCircleIntersection(
+            Vector2 start,
+            Vector2 end,
+            Vector2 center,
+            float radius)
+        {
+            Vector2 direction = end - start;
+            Vector2 offset = start - center;
+            float a = Vector2.Dot(direction, direction);
+            float b = 2f * Vector2.Dot(offset, direction);
+            float c = Vector2.Dot(offset, offset) - radius * radius;
+            float discriminant = Mathf.Max(0f, b * b - 4f * a * c);
+            float root = Mathf.Sqrt(discriminant);
+            float first = (-b - root) / (2f * a);
+            float second = (-b + root) / (2f * a);
+            if (first >= -0.0001f && first <= 1.0001f)
+            {
+                return Vector2.LerpUnclamped(start, end, first);
+            }
+            if (second >= -0.0001f && second <= 1.0001f)
+            {
+                return Vector2.LerpUnclamped(start, end, second);
+            }
+            throw new InvalidDataException(
+                "Could not resolve the fan-card face/circular-notch intersection.");
+        }
+
+        private static bool ArcMidpointIsInsideRoundedRect(
+            Vector2 center,
+            float radius,
+            float startAngle,
+            float sweep,
+            float width,
+            float height,
+            float cornerRadius)
+        {
+            float angle = startAngle + sweep * 0.5f;
+            Vector2 point = center + new Vector2(
+                Mathf.Cos(angle),
+                Mathf.Sin(angle)) * radius;
+            float x = Mathf.Abs(point.x);
+            float z = Mathf.Abs(point.y);
+            float halfWidth = width * 0.5f;
+            float halfHeight = height * 0.5f;
+            if (x > halfWidth || z > halfHeight)
+            {
+                return false;
+            }
+            float cornerX = halfWidth - cornerRadius;
+            float cornerZ = halfHeight - cornerRadius;
+            if (x <= cornerX || z <= cornerZ)
+            {
+                return true;
+            }
+            return new Vector2(x - cornerX, z - cornerZ).sqrMagnitude
+                <= cornerRadius * cornerRadius;
         }
 
         private static void AppendPerforatedCap(
@@ -1495,7 +1823,8 @@ namespace FidgetingApp.FanCard.EditorTools
             Vector2 startPoint,
             float sweepDegrees,
             float width,
-            int segments)
+            int segments,
+            bool faceDown)
         {
             float radius = startPoint.magnitude;
             float startAngle = Mathf.Atan2(startPoint.y, startPoint.x) * Mathf.Rad2Deg;
@@ -1516,12 +1845,27 @@ namespace FidgetingApp.FanCard.EditorTools
                 int b = a + 1;
                 int c = a + 2;
                 int d = a + 3;
-                triangles.Add(a);
-                triangles.Add(c);
-                triangles.Add(d);
-                triangles.Add(a);
-                triangles.Add(d);
-                triangles.Add(b);
+                bool useDefaultWinding = faceDown
+                    ? sweepDegrees > 0f
+                    : sweepDegrees < 0f;
+                if (!useDefaultWinding)
+                {
+                    triangles.Add(a);
+                    triangles.Add(d);
+                    triangles.Add(c);
+                    triangles.Add(a);
+                    triangles.Add(b);
+                    triangles.Add(d);
+                }
+                else
+                {
+                    triangles.Add(a);
+                    triangles.Add(c);
+                    triangles.Add(d);
+                    triangles.Add(a);
+                    triangles.Add(d);
+                    triangles.Add(b);
+                }
             }
             return FinalizeMesh(name, vertices, triangles);
         }

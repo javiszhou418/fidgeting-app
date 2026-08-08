@@ -20,7 +20,10 @@ namespace FidgetingApp.FanCard
         // 2.5 mm slab plus a 3.75 mm face-to-face air gap.
         public const float LayerPitch = 0.00625f;
         public const float InteractionPadding = 0.006f;
-        public const float PresentationRotationDegrees = 180f;
+        // The top plate is the fixed 0-degree reference. A 90-degree root
+        // presentation keeps its spindle opening in the authored lower-right
+        // corner while the middle/bottom plates sit at -45/-90 degrees.
+        public const float PresentationRotationDegrees = 90f;
 
         public const float PivotX = CardWidth * 0.5f - CardCornerRadius;
         public const float PivotZ = CardHeight * 0.5f - CardCornerRadius;
@@ -28,12 +31,22 @@ namespace FidgetingApp.FanCard
             new(-PivotX, 0f, -PivotZ);
 
         // The follower is safely inset toward the lower-left; rotating it by
-        // -45 degrees around the pivot stays inside the rounded card boundary.
+        // +45 degrees around the pivot stays inside the rounded card boundary.
         public static readonly Vector2 FollowerFromPivot =
-            new(-0.0211f, -0.0536f);
+            new(-0.0536f, -0.0211f);
+        // Open is +90 degrees on the outer/lower plate. Returning from open
+        // to closed therefore travels counterclockwise in the authored top
+        // view, from 90 degrees back to the fixed top plate's 0 degrees.
+        public const float OpeningRotationSign = 1f;
         public const float TrackShellWidth = 0.0062f;
         public const float TrackMeshWidth = 0.00425f;
-        public const float TrackSurfaceHeight = 0.00194f;
+        // All track hardware is authored on the underside. These offsets are
+        // measured outward from the rigid slab's back face so the front view
+        // remains completely clean while the back still reads as a machined
+        // magnetic mechanism.
+        public const float BackTrackUndercutOffset = 0.00018f;
+        public const float BackTrackInlayOffset = 0.00023f;
+        public const float BackMagnetCenterOffset = 0.00032f;
         public const float MagnetRadius = 0.00165f;
         public const float FollowerBallRadius = 0.00210f;
         // Only this shallow chrome cap sits outside the upper card. Keeping it
