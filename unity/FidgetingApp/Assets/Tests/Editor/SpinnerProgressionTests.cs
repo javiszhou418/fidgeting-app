@@ -1297,8 +1297,10 @@ namespace FidgetingApp.Tests.Editor
             StringAssert.Contains("AutoSpeedRotorBadge(", progressionHud);
             StringAssert.Contains("VStack(spacing: 6)", progressionHud);
             StringAssert.Contains(".padding(.horizontal, 14)", progressionHud);
-            StringAssert.Contains(".padding(.vertical, 7)", progressionHud);
-            StringAssert.Contains(".frame(width: 68, height: 68)", progressionHud);
+            StringAssert.Contains(".padding(.vertical, 10)", progressionHud);
+            StringAssert.Contains(".frame(width: 76, height: 76)", progressionHud);
+            StringAssert.Contains(".frame(width: 80, height: 80)", progressionHud);
+            StringAssert.Contains(".product(size: 11, weight: .black)", progressionHud);
             StringAssert.Contains(
                 "angularSpeedRadians: state.motionTelemetry.angularSpeedRadians",
                 progressionHud);
