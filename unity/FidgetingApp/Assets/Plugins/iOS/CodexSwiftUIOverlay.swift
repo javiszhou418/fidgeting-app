@@ -3310,13 +3310,62 @@ private struct SpinnerProgressionHUD: View {
         return String(format: "%.0f / %.0f XP", current, required)
     }
 
+    private var previousMilestoneLevel: Int {
+        let levels = state.progressionLevelCatalog
+            .map(\.level)
+            .filter { $0 <= state.progressionLevel }
+        return levels.max() ?? 0
+    }
+
+    private var nextMilestoneLevel: Int {
+        let levels = state.progressionLevelCatalog
+            .map(\.level)
+            .filter { $0 > state.progressionLevel }
+        return levels.min() ?? 100
+    }
+
+    private var milestoneProgress: Double {
+        let start = Double(previousMilestoneLevel)
+        let end = Double(max(previousMilestoneLevel + 1, nextMilestoneLevel))
+        let liveLevel = min(end, Double(state.progressionLevel) + state.progressionFraction)
+        return min(1, max(0, (liveLevel - start) / (end - start)))
+    }
+
     var body: some View {
-        ZStack(alignment: .trailing) {
+        ZStack(alignment: .leading) {
             Button {
                 UnityBridge.feedback()
                 showingLevelDetails = true
             } label: {
                 HStack(spacing: 10) {
+                    Color.clear
+                        .frame(width: 62, height: 52)
+
+                    VStack(alignment: .leading, spacing: 5) {
+                        HStack(spacing: 6) {
+                            Text("LV.\(state.progressionLevel)")
+                                .font(.product(.subheadline, weight: .black).monospacedDigit())
+                            Text(state.progressionLevelTitle)
+                                .font(.product(.caption, weight: .semibold))
+                                .lineLimit(1)
+                            Image(systemName: "chevron.right.circle.fill")
+                                .font(.product(.caption2))
+                                .foregroundStyle(Color.white.opacity(0.48))
+                        }
+                        .foregroundStyle(.white)
+
+                        ProgressionMilestoneGauge(
+                            previousLevel: previousMilestoneLevel,
+                            currentLevel: state.progressionLevel,
+                            nextLevel: nextMilestoneLevel,
+                            progress: milestoneProgress,
+                            accent: accent)
+
+                        Text(experienceText)
+                            .font(.product(.caption2).monospacedDigit())
+                            .foregroundStyle(Color.white.opacity(0.58))
+                    }
+
                     VStack(spacing: 1) {
                         ProgressionUnlockThumbnail(
                             model: state.selectedModel,
@@ -3333,40 +3382,8 @@ private struct SpinnerProgressionHUD: View {
                             .font(.product(size: 8, weight: .black))
                             .monospacedDigit()
                             .foregroundStyle(accent.opacity(0.78))
-                        Text(state.progressionLevel >= 100
-                             ? "全部解锁"
-                             : state.progressionNextUnlockName)
-                            .font(.product(size: 8, weight: .semibold))
-                            .foregroundStyle(Color.white.opacity(0.64))
-                            .lineLimit(1)
-                            .minimumScaleFactor(0.68)
                     }
                     .frame(width: 58)
-
-                    VStack(alignment: .leading, spacing: 5) {
-                    HStack(spacing: 6) {
-                        Text("LV.\(state.progressionLevel)")
-                            .font(.product(.subheadline, weight: .black).monospacedDigit())
-                        Text(state.progressionLevelTitle)
-                            .font(.product(.caption, weight: .semibold))
-                            .lineLimit(1)
-                        Image(systemName: "chevron.right.circle.fill")
-                            .font(.product(.caption2))
-                            .foregroundStyle(Color.white.opacity(0.48))
-                    }
-                    .foregroundStyle(.white)
-
-                    ProductProgressGauge(
-                        value: state.progressionFraction,
-                        accent: accent)
-
-                    Text(experienceText)
-                    .font(.product(.caption2).monospacedDigit())
-                    .foregroundStyle(Color.white.opacity(0.58))
-                }
-
-                    Color.clear
-                        .frame(width: 62, height: 52)
                 }
                 .padding(.horizontal, 13)
                 .padding(.vertical, 10)
@@ -3406,15 +3423,14 @@ private struct SpinnerProgressionHUD: View {
                 }
             } label: {
                 VStack(spacing: 3) {
-                    Image(systemName: state.progressionAssistantEnabled
-                          ? "autostartstop"
-                          : "gauge.with.dots.needle.33percent")
-                        .font(.product(size: 20, weight: .semibold))
+                    AutoSpeedRotorBadge(
+                        multiplierText: autoMultiplierText,
+                        angularSpeedRadians: state.motionTelemetry.angularSpeedRadians,
+                        active: state.progressionAssistantEnabled,
+                        accent: accent)
+                        .frame(width: 36, height: 36)
                     Text("AUTO")
                         .font(.product(.caption2, weight: .semibold))
-                    Text(autoMultiplierText)
-                        .font(.product(size: 8, weight: .black))
-                        .monospacedDigit()
                 }
                 .foregroundStyle(state.progressionAssistantEnabled
                                  ? accent.opacity(0.84)
@@ -3430,7 +3446,7 @@ private struct SpinnerProgressionHUD: View {
                     ? "已开启，\(autoMultiplierText)"
                     : "已关闭")
             .accessibilityHint("打开向上的倍率选择菜单")
-            .padding(.trailing, 13)
+            .padding(.leading, 13)
         }
         .productGlass(
             cornerRadius: 22,
@@ -3441,6 +3457,163 @@ private struct SpinnerProgressionHUD: View {
         .sheet(isPresented: $showingLevelDetails) {
             ProgressionLevelDetailsSheet(state: state)
         }
+    }
+}
+
+private struct ProgressionMilestoneGauge: View {
+    let previousLevel: Int
+    let currentLevel: Int
+    let nextLevel: Int
+    let progress: Double
+    let accent: Color
+
+    private var clampedProgress: Double {
+        min(1, max(0, progress))
+    }
+
+    var body: some View {
+        GeometryReader { proxy in
+            let width = max(1, proxy.size.width)
+            let markerX = width * CGFloat(clampedProgress)
+            let labelX = min(width - 25, max(25, markerX))
+
+            ZStack(alignment: .topLeading) {
+                Text("\(previousLevel)")
+                    .font(.product(size: 7, weight: .bold).monospacedDigit())
+                    .foregroundStyle(Color.white.opacity(0.44))
+                    .position(x: 8, y: 5)
+
+                Text("LV.\(currentLevel)")
+                    .font(.product(size: 8, weight: .black).monospacedDigit())
+                    .foregroundStyle(.white)
+                    .padding(.horizontal, 4)
+                    .padding(.vertical, 1)
+                    .background(accent.opacity(0.22), in: Capsule())
+                    .position(x: labelX, y: 5)
+
+                Text("\(nextLevel)")
+                    .font(.product(size: 7, weight: .bold).monospacedDigit())
+                    .foregroundStyle(Color.white.opacity(0.58))
+                    .position(x: width - 8, y: 5)
+
+                ProductProgressGauge(value: clampedProgress, accent: accent)
+                    .frame(height: 5)
+                    .position(x: width / 2, y: 18)
+
+                Circle()
+                    .fill(Color.white)
+                    .frame(width: 7, height: 7)
+                    .overlay(Circle().stroke(accent.opacity(0.72), lineWidth: 2))
+                    .shadow(color: accent.opacity(0.46), radius: 4)
+                    .position(x: markerX, y: 18)
+            }
+        }
+        .frame(height: 23)
+        .accessibilityElement(children: .ignore)
+        .accessibilityLabel("成长里程碑")
+        .accessibilityValue(
+            "上一级 \(previousLevel)，当前 \(currentLevel)，下一级 \(nextLevel)")
+    }
+}
+
+private final class AutoSpeedRotorAnimator: NSObject, ObservableObject {
+    @Published private(set) var rotationDegrees = 0.0
+
+    private var angularSpeedRadians = 0.0
+    private var displayLink: CADisplayLink?
+    private var previousTimestamp: CFTimeInterval = 0
+
+    func update(angularSpeedRadians: Double, paused: Bool) {
+        self.angularSpeedRadians = max(0, angularSpeedRadians)
+        guard !paused, self.angularSpeedRadians > 0.01 else {
+            stop()
+            return
+        }
+        guard displayLink == nil else { return }
+        let link = CADisplayLink(target: self, selector: #selector(step(_:)))
+        link.add(to: .main, forMode: .common)
+        displayLink = link
+    }
+
+    func stop() {
+        displayLink?.invalidate()
+        displayLink = nil
+        previousTimestamp = 0
+    }
+
+    @objc private func step(_ link: CADisplayLink) {
+        guard previousTimestamp > 0 else {
+            previousTimestamp = link.timestamp
+            return
+        }
+        let delta = min(0.05, max(0, link.timestamp - previousTimestamp))
+        previousTimestamp = link.timestamp
+        rotationDegrees = (rotationDegrees
+            + angularSpeedRadians * delta * 180 / .pi)
+            .truncatingRemainder(dividingBy: 360)
+    }
+
+    deinit {
+        displayLink?.invalidate()
+    }
+}
+
+private struct AutoSpeedRotorBadge: View {
+    let multiplierText: String
+    let angularSpeedRadians: Double
+    let active: Bool
+    let accent: Color
+
+    @Environment(\.accessibilityReduceMotion) private var reduceMotion
+    @StateObject private var animator = AutoSpeedRotorAnimator()
+
+    private var ringColor: Color {
+        active ? accent.opacity(0.90) : Color.white.opacity(0.62)
+    }
+
+    var body: some View {
+        ZStack {
+            Circle()
+                .stroke(Color.white.opacity(0.12), lineWidth: 1)
+
+            ZStack {
+                Circle()
+                    .trim(from: 0.03, to: 0.76)
+                    .stroke(
+                        ringColor,
+                        style: StrokeStyle(lineWidth: 2, lineCap: .round))
+
+                ForEach(0..<4, id: \.self) { index in
+                    Capsule(style: .continuous)
+                        .fill(ringColor.opacity(index == 0 ? 1 : 0.46))
+                        .frame(width: 2, height: index == 0 ? 5 : 3)
+                        .offset(y: -15)
+                        .rotationEffect(.degrees(Double(index) * 90))
+                }
+            }
+            .rotationEffect(.degrees(animator.rotationDegrees))
+
+            Text(multiplierText)
+                .font(.product(size: 9, weight: .black).monospacedDigit())
+                .foregroundStyle(Color.white.opacity(0.88))
+        }
+        .onAppear {
+            updateAnimator()
+        }
+        .onChange(of: angularSpeedRadians) { _ in
+            updateAnimator()
+        }
+        .onChange(of: reduceMotion) { _ in
+            updateAnimator()
+        }
+        .onDisappear(perform: animator.stop)
+        .accessibilityHidden(true)
+    }
+
+    private func updateAnimator() {
+        animator.update(
+            angularSpeedRadians: angularSpeedRadians,
+            paused: reduceMotion)
     }
 }
 
@@ -5663,8 +5836,15 @@ struct ProgressionThumbnailNativePreviewRoot: View {
         state.progressionTotalExperience = 682
         state.progressionLevelStartExperience = 535
         state.progressionNextLevelExperience = 821
+        state.motionTelemetry = ProductMotionTelemetryState(
+            available: true,
+            normalizedSpeed: 0.54,
+            angularSpeedRadians: 12,
+            speedBand: .engaged)
         state.progressionNextUnlockLevel = 50
         state.progressionNextUnlockName = "双列辅助轴承"
+        state.progressionAssistantEnabled = true
+        state.progressionAssistantMultiplier = 1.0
         state.progressionLevelCatalog = ProgressionLevelDetail.fallback
         state.threeBladeMetalSkins = ThreeBladeMetalSkinDetail.parse(
             Self.skinCatalogPayload)
