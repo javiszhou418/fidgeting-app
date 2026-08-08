@@ -3339,7 +3339,7 @@ private struct SpinnerProgressionHUD: View {
             } label: {
                 HStack(spacing: 10) {
                     Color.clear
-                        .frame(width: 80, height: 80)
+                        .frame(width: 84, height: 84)
 
                     VStack(alignment: .leading, spacing: 5) {
                         HStack(spacing: 6) {
@@ -3422,7 +3422,7 @@ private struct SpinnerProgressionHUD: View {
                     }
                 }
             } label: {
-                VStack(spacing: 6) {
+                VStack(spacing: 10) {
                     AutoSpeedRotorBadge(
                         multiplierText: autoMultiplierText,
                         angularSpeedRadians: state.motionTelemetry.angularSpeedRadians,
@@ -3437,7 +3437,7 @@ private struct SpinnerProgressionHUD: View {
                                  : Color.white.opacity(0.72))
                 .padding(.horizontal, 14)
                 .padding(.vertical, 10)
-                .frame(width: 76, height: 76)
+                .frame(width: 80, height: 80)
                 .background(
                     Color.white.opacity(state.progressionAssistantEnabled ? 0.10 : 0.04),
                     in: RoundedRectangle(cornerRadius: 18, style: .continuous))
