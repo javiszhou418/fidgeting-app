@@ -3299,12 +3299,6 @@ private struct SpinnerProgressionHUD: View {
             : Color.white.opacity(0.48)
     }
 
-    private var autoControlBackgroundColor: Color {
-        state.progressionAssistantEnabled
-            ? autoEnabledColor.opacity(0.20)
-            : Color.white.opacity(0.045)
-    }
-
     private var nextPreviewSkin: ThreeBladeMetalSkinDetail? {
         guard state.selectedModel == .metalThreeBlade,
               state.progressionModel == .metalThreeBlade else { return nil }
@@ -3452,9 +3446,11 @@ private struct SpinnerProgressionHUD: View {
                 .padding(.horizontal, 14)
                 .padding(.vertical, 10)
                 .frame(width: 80, height: 80)
-                .background(
-                    autoControlBackgroundColor,
-                    in: RoundedRectangle(cornerRadius: 18, style: .continuous))
+                .background {
+                    AutoControlGlassSurface(
+                        active: state.progressionAssistantEnabled,
+                        tint: autoEnabledColor)
+                }
                 .animation(
                     .easeOut(duration: FidgetUITokens.Motion.selectionDuration),
                     value: state.progressionAssistantEnabled)
@@ -3476,6 +3472,71 @@ private struct SpinnerProgressionHUD: View {
         .sheet(isPresented: $showingLevelDetails) {
             ProgressionLevelDetailsSheet(state: state)
         }
+    }
+}
+
+private struct AutoControlGlassSurface: View {
+    let active: Bool
+    let tint: Color
+
+    @Environment(\.accessibilityReduceTransparency) private var reduceTransparency
+
+    private var coolReflection: Color {
+        Color(red: 0.42, green: 0.62, blue: 1.00)
+    }
+
+    var body: some View {
+        let shape = RoundedRectangle(cornerRadius: 18, style: .continuous)
+
+        ZStack {
+            shape
+                .fill(.ultraThinMaterial)
+
+            shape
+                .fill(
+                    LinearGradient(
+                        colors: active
+                            ? [
+                                Color.white.opacity(0.10),
+                                tint.opacity(reduceTransparency ? 0.42 : 0.28),
+                                coolReflection.opacity(reduceTransparency ? 0.20 : 0.11),
+                                Color.black.opacity(0.06)
+                            ]
+                            : [
+                                Color.white.opacity(reduceTransparency ? 0.12 : 0.07),
+                                Color.white.opacity(0.025),
+                                Color.black.opacity(0.08)
+                            ],
+                        startPoint: .topLeading,
+                        endPoint: .bottomTrailing))
+
+            shape
+                .fill(
+                    RadialGradient(
+                        colors: [
+                            Color.white.opacity(active ? 0.14 : 0.065),
+                            Color.clear
+                        ],
+                        center: .topLeading,
+                        startRadius: 0,
+                        endRadius: 74))
+
+            if active {
+                shape
+                    .fill(
+                        RadialGradient(
+                            colors: [
+                                coolReflection.opacity(0.12),
+                                Color.clear
+                            ],
+                            center: .bottomTrailing,
+                            startRadius: 0,
+                            endRadius: 68))
+            }
+        }
+        .compositingGroup()
+        .clipShape(shape)
+        .accessibilityHidden(true)
     }
 }
 
