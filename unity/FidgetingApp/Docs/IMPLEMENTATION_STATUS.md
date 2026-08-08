@@ -1,6 +1,6 @@
 # Fidgeting Interaction Integration Status
 
-最后更新：2026-08-07
+最后更新：2026-08-08
 
 本文件回答一个问题：规格中的能力是否已经进入可运行代码。状态只按代码、场景接线和测试证据填写，不按聊天结论或文档完成度填写。
 
@@ -81,10 +81,17 @@ AUTO 可见方形与下一解锁缩略图现共用唯一的 `64 × 64 pt` 尺寸
 XP 数字行已移除，XP 仍通过 VoiceOver 与详情页提供。专项回归锁定精简层级及两个端点对共享尺寸的引用。
 AUTO 随后从成长 Tabbar 内部移到左侧独立的 Opal 玻璃按钮；AUTO 与右侧 Tabbar 共用 `64 pt` 高度，二者以
 `10 pt` 间距并列。Tabbar 内下一解锁缩略图从 `64 pt` 收至 `48 pt`，释放的宽高用于保持中央信息留白。
+模型展示交互同步收紧：iOS 两套触摸仲裁仍只在检测到第二个按下触点时进入 Pinch 并调用 `ZoomByScale`；
+旋转类模型的单指 `OrbitByPixels` 不再按新视角重算 camera distance，因而单指只改变 yaw/pitch，不会产生
+看似缩放的构图跳动。双指捏合仍使用原缩放边界；推牌/扇牌相机本就保持固定 framing distance。
 shipping Swift 原生预览编译通过，成长 HUD 专项回归 `1/1` 通过；
 更新后的静态预览、60 fps 动态和接触表位于同一目录的 `progression-thumbnail-hud.png`、
 `progression-hud-auto-motion.mp4`、`progression-hud-auto-motion-contact-sheet.png`。本轮仍等待用户明确视觉
-批准，未构建或安装新的 iPhone 包。
+批准，未构建或安装新的 iPhone 包。2026-08-08 用户已明确批准最新原生预览并要求推送；以已批准的
+扇牌背面轨道 Build 26 发布线为基底、按提交顺序移植本段 UI 与手势修复的 Build 27 隔离候选已完成
+iPhoneOS 15 Swift typecheck。`MobileGestures_OrbitKeepsScaleAndPinchZoomClamps` 场景专项 `1/1` 通过，
+完整 EditMode `195/195` 通过，报告为 `Logs/Build27PinchOnlyFocusedTests.xml` 与
+`Logs/Build27FullEditModeTests.xml`；iPhone 构建、安装与真机手势验收仍待执行。
 
 Simulator 复核还发现两项只在 Release 路径暴露的问题：iOS 26.4 Simulator 的 4× 回缓冲区与项目
 2× URP attachment 不匹配会造成黑屏；进阶轴承用 `GameObject.CreatePrimitive(Sphere)` 时又会尝试创建
