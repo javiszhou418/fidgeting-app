@@ -56,6 +56,16 @@ shipping Swift Simulator typecheck 与资源/成长 HUD 两项专项测试均通
 Bottom Sheet 预览分别位于 `Artifacts/ProgressionThumbnailRecoveryV24/progression-thumbnail-hud.png`
 和 `progression-thumbnail-sheet.png`，当前等待用户视觉批准；批准前不构建或安装新的 iPhone 包。
 
+同一视觉门禁的第二轮按用户反馈重排常驻成长栏：AUTO 移至左侧，下一解锁缩略图移至右侧，右侧只保留
+缩略图与等级，不再显示“双列辅助轴承”文案；中央 `ProgressionMilestoneGauge` 从等级目录动态求上一个/
+下一个里程碑，并把“上一等级—当前等级—下一等级”和当前区间位置叠在经验轨道上。AUTO 的 `1.0x`–
+`3.0x` 动态倍率进入圆环中心，`AutoSpeedRotorAnimator` 只在 Unity 发布真实 rotary motion telemetry 且
+角速度大于零时用 `CADisplayLink` 积分旋转，停转、无 rotary telemetry、视图消失或 Reduce Motion 时立即
+停止 display link，不创建视觉假转。shipping Swift 原生预览编译通过，成长 HUD 专项回归 `1/1` 通过；
+更新后的静态预览、60 fps 动态和接触表位于同一目录的 `progression-thumbnail-hud.png`、
+`progression-hud-auto-motion.mp4`、`progression-hud-auto-motion-contact-sheet.png`。本轮仍等待用户明确视觉
+批准，未构建或安装新的 iPhone 包。
+
 Simulator 复核还发现两项只在 Release 路径暴露的问题：iOS 26.4 Simulator 的 4× 回缓冲区与项目
 2× URP attachment 不匹配会造成黑屏；进阶轴承用 `GameObject.CreatePrimitive(Sphere)` 时又会尝试创建
 被 stripping 移除的 `SphereCollider`，触发红色错误覆盖层。导出器现在只在 Simulator BuildPlayer 期间

@@ -56,4 +56,28 @@ for MODE in hud sheet; do
     "$ARTIFACT_DIR/progression-thumbnail-$MODE.png" >/dev/null
 done
 
+xcrun simctl launch --terminate-running-process \
+  "$DEVICE_ID" "$BUNDLE_ID" --mode=hud >/dev/null
+xcrun simctl io "$DEVICE_ID" recordVideo \
+  --codec=h264 "$BUILD_ROOT/progression-hud-motion-raw.mp4" >/dev/null 2>&1 &
+RECORD_PID=$!
+sleep 3
+kill -INT "$RECORD_PID"
+wait "$RECORD_PID" || true
+
+ffmpeg -y \
+  -i "$BUILD_ROOT/progression-hud-motion-raw.mp4" \
+  -vf fps=60 \
+  -c:v libx264 \
+  -pix_fmt yuv420p \
+  -movflags +faststart \
+  "$ARTIFACT_DIR/progression-hud-auto-motion.mp4" >/dev/null 2>&1
+
+ffmpeg -y \
+  -i "$ARTIFACT_DIR/progression-hud-auto-motion.mp4" \
+  -vf "fps=4,scale=241:-1,tile=5x2:padding=6:margin=6" \
+  -frames:v 1 \
+  -update 1 \
+  "$ARTIFACT_DIR/progression-hud-auto-motion-contact-sheet.png" >/dev/null 2>&1
+
 print "Captured progression thumbnail previews in $ARTIFACT_DIR"

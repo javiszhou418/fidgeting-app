@@ -1287,6 +1287,25 @@ namespace FidgetingApp.Tests.Editor
             StringAssert.DoesNotContain("PRO", progressionHud);
             StringAssert.DoesNotContain("presentAutoGate", progressionHud);
             StringAssert.DoesNotContain("ExperienceJar(", progressionHud);
+            StringAssert.Contains("ZStack(alignment: .leading)", progressionHud);
+            StringAssert.Contains("ProgressionMilestoneGauge(", progressionHud);
+            StringAssert.Contains("previousLevel: previousMilestoneLevel", progressionHud);
+            StringAssert.Contains("currentLevel: state.progressionLevel", progressionHud);
+            StringAssert.Contains("nextLevel: nextMilestoneLevel", progressionHud);
+            StringAssert.Contains("AutoSpeedRotorBadge(", progressionHud);
+            StringAssert.Contains(
+                "angularSpeedRadians: state.motionTelemetry.angularSpeedRadians",
+                progressionHud);
+            StringAssert.Contains("Text(multiplierText)", progressionHud);
+            StringAssert.Contains("CADisplayLink(target:", progressionHud);
+            StringAssert.Contains("displayLink?.invalidate()", progressionHud);
+            StringAssert.Contains(
+                "angularSpeedRadians * delta * 180 / .pi",
+                progressionHud);
+            StringAssert.DoesNotContain(
+                "state.progressionNextUnlockName",
+                progressionHud,
+                "The bearing unlock copy should not consume a second HUD line.");
             StringAssert.DoesNotContain("progressionStageComponent", progressionHud,
                 "The one-line bearing/material copy was removed from the bottom HUD.");
             StringAssert.DoesNotContain(
