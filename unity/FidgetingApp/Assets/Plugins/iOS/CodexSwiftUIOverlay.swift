@@ -3294,7 +3294,8 @@ private struct SpinnerProgressionHUD: View {
     }
 
     private var nextPreviewSkin: ThreeBladeMetalSkinDetail? {
-        guard state.progressionModel == .metalThreeBlade else { return nil }
+        guard state.selectedModel == .metalThreeBlade,
+              state.progressionModel == .metalThreeBlade else { return nil }
         let targetLevel = state.progressionNextUnlockLevel
         return state.threeBladeMetalSkins.first { $0.level >= targetLevel }
             ?? state.threeBladeMetalSkins.last
@@ -3321,9 +3322,13 @@ private struct SpinnerProgressionHUD: View {
             } label: {
                 HStack(spacing: 10) {
                     VStack(spacing: 1) {
-                        NextUnlockSkinThumbnail(
+                        ProgressionUnlockThumbnail(
+                            model: state.selectedModel,
                             skin: nextPreviewSkin,
-                            accent: accent)
+                            accent: accent,
+                            unlocked: true,
+                            showsLock: state.progressionLevel < 100,
+                            shimmers: true)
                             .frame(width: 48, height: 48)
 
                         Text(state.progressionLevel >= 100
@@ -3443,9 +3448,13 @@ private struct SpinnerProgressionHUD: View {
     }
 }
 
-private struct NextUnlockSkinThumbnail: View {
+private struct ProgressionUnlockThumbnail: View {
+    let model: SpinnerModel
     let skin: ThreeBladeMetalSkinDetail?
     let accent: Color
+    let unlocked: Bool
+    let showsLock: Bool
+    var shimmers = false
     @State private var shimmerAtRight = false
 
     var body: some View {
@@ -3453,41 +3462,44 @@ private struct NextUnlockSkinThumbnail: View {
             if let skin {
                 ThreeBladeMetalSkinSwatch(skin: skin, unlocked: true)
             } else {
-                RoundedRectangle(cornerRadius: 13, style: .continuous)
-                    .fill(LinearGradient(
-                        colors: [Color(white: 0.18), accent.opacity(0.48)],
-                        startPoint: .topLeading,
-                        endPoint: .bottomTrailing))
-                Image(systemName: "paintbrush.pointed.fill")
-                    .font(.product(.headline))
-                    .foregroundStyle(Color.white.opacity(0.78))
+                NativeSquareArtwork(
+                    assetName: model.thumbnailAssetName,
+                    fallbackSymbol: model.symbol,
+                    colors: [Color(white: 0.18), accent.opacity(0.48)],
+                    cornerRadius: 13)
             }
 
-            LinearGradient(
-                colors: [.clear, Color.white.opacity(0.28), .clear],
-                startPoint: .leading,
-                endPoint: .trailing)
-                .frame(width: 18)
-                .rotationEffect(.degrees(17))
-                .offset(x: shimmerAtRight ? 48 : -48)
-                .blendMode(.screen)
+            if shimmers {
+                LinearGradient(
+                    colors: [.clear, Color.white.opacity(0.28), .clear],
+                    startPoint: .leading,
+                    endPoint: .trailing)
+                    .frame(width: 18)
+                    .rotationEffect(.degrees(17))
+                    .offset(x: shimmerAtRight ? 48 : -48)
+                    .blendMode(.screen)
+            }
 
-            VStack {
-                Spacer()
-                HStack {
+            if showsLock {
+                VStack {
                     Spacer()
-                    Image(systemName: "lock.fill")
-                        .font(.product(size: 7, weight: .black))
-                        .foregroundStyle(.white)
-                        .padding(4)
-                        .background(Color.black.opacity(0.62), in: Circle())
+                    HStack {
+                        Spacer()
+                        Image(systemName: "lock.fill")
+                            .font(.product(size: 7, weight: .black))
+                            .foregroundStyle(.white)
+                            .padding(4)
+                            .background(Color.black.opacity(0.62), in: Circle())
+                    }
                 }
+                .padding(4)
             }
-            .padding(4)
         }
+        .saturation(unlocked ? 1 : 0)
+        .opacity(unlocked ? 1 : 0.42)
         .clipShape(RoundedRectangle(cornerRadius: 13, style: .continuous))
         .shadow(color: Color.black.opacity(0.22), radius: 8, y: 4)
-        .onAppear { shimmerAtRight = true }
+        .onAppear { shimmerAtRight = shimmers }
         .animation(
             .linear(duration: 2.6).repeatForever(autoreverses: false),
             value: shimmerAtRight)
@@ -3528,6 +3540,12 @@ private struct ProgressionLevelTimeline: View {
     @ObservedObject var state: ProductUiState
     private var accent: Color { state.currentAppearanceAccent }
 
+    private func unlockSkin(for level: Int) -> ThreeBladeMetalSkinDetail? {
+        guard state.selectedModel == .metalThreeBlade,
+              state.progressionModel == .metalThreeBlade else { return nil }
+        return state.threeBladeMetalSkins.first { $0.level == level }
+    }
+
     var body: some View {
         ScrollView {
             VStack(alignment: .leading, spacing: 16) {
@@ -3556,6 +3574,8 @@ private struct ProgressionLevelTimeline: View {
                             title: "START",
                             unlockName: "选择玩具并开始第一次滑动",
                             level: 0,
+                            model: state.selectedModel,
+                            skin: nil,
                             unlocked: true,
                             current: state.progressionLevel == 0,
                             accent: accent)
@@ -3571,6 +3591,8 @@ private struct ProgressionLevelTimeline: View {
                                 title: detail.title,
                                 unlockName: detail.unlockName,
                                 level: detail.level,
+                                model: state.selectedModel,
+                                skin: unlockSkin(for: detail.level),
                                 unlocked: state.progressionLevel >= detail.level,
                                 current: state.progressionLevel >= detail.level
                                     && state.progressionLevel <= nextLevel,
@@ -3757,6 +3779,24 @@ private struct ThreeBladeMetalSkinSwatch: View {
     }
 }
 
+private enum NativeArtworkLoader {
+    static func image(named assetName: String) -> UIImage? {
+        guard !assetName.isEmpty else { return nil }
+        if let image = UIImage(
+            named: assetName,
+            in: .main,
+            compatibleWith: nil) {
+            return image
+        }
+        guard let url = Bundle.main.url(
+            forResource: assetName,
+            withExtension: "png") else {
+            return nil
+        }
+        return UIImage(contentsOfFile: url.path)
+    }
+}
+
 private struct NativeSquareArtwork: View {
     let assetName: String
     let fallbackSymbol: String
@@ -3772,7 +3812,7 @@ private struct NativeSquareArtwork: View {
                     startPoint: .topLeading,
                     endPoint: .bottomTrailing))
 
-            if !assetName.isEmpty, let image = UIImage(named: assetName) {
+            if let image = NativeArtworkLoader.image(named: assetName) {
                 if fitsInside {
                     Image(uiImage: image)
                         .resizable()
@@ -4068,19 +4108,11 @@ private struct ProgressionLevelRow: View {
     let title: String
     let unlockName: String
     let level: Int
+    let model: SpinnerModel
+    let skin: ThreeBladeMetalSkinDetail?
     let unlocked: Bool
     let current: Bool
     let accent: Color
-
-    private var skinColors: [Color] {
-        switch level {
-        case 0..<20: return [.gray, .blue]
-        case 20..<50: return [.white, Color(white: 0.48)]
-        case 50..<75: return [Color(white: 0.28), .cyan]
-        case 75..<100: return [.blue, .purple]
-        default: return [.white, Color(white: 0.68)]
-        }
-    }
 
     var body: some View {
         ProductSelectionCard(
@@ -4088,20 +4120,13 @@ private struct ProgressionLevelRow: View {
             enabled: unlocked,
             accent: accent) {
             HStack(alignment: .center, spacing: 12) {
-                ZStack {
-                    RoundedRectangle(cornerRadius: 14, style: .continuous)
-                        .fill(LinearGradient(
-                            colors: unlocked ? skinColors : [Color.gray.opacity(0.28)],
-                            startPoint: .topLeading,
-                            endPoint: .bottomTrailing))
-                    Circle()
-                        .stroke(Color.white.opacity(unlocked ? 0.72 : 0.20), lineWidth: 5)
-                        .frame(width: 27, height: 27)
-                    Image(systemName: unlocked ? "sparkles" : "lock.fill")
-                        .font(.product(.caption2, weight: .bold))
-                        .foregroundStyle(Color.white.opacity(unlocked ? 0.94 : 0.35))
-                }
-                .frame(width: 58, height: 58)
+                ProgressionUnlockThumbnail(
+                    model: model,
+                    skin: skin,
+                    accent: accent,
+                    unlocked: unlocked,
+                    showsLock: !unlocked)
+                    .frame(width: 58, height: 58)
 
                 VStack(alignment: .leading, spacing: 4) {
                     HStack(spacing: 7) {
@@ -5589,6 +5614,69 @@ struct ComboHaloNativePreviewRoot: View {
             guard mode == .motion else { return }
             playMotionLoop()
         }
+    }
+}
+
+/// Simulator-only visual gate for the progression thumbnail surfaces. It uses
+/// the shipping HUD, Bottom Sheet, artwork loader, and bundled thumbnail names.
+struct ProgressionThumbnailNativePreviewRoot: View {
+    enum Mode: String {
+        case hud
+        case sheet
+    }
+
+    @StateObject private var state = ProductUiState()
+    let mode: Mode
+
+    private static let skinCatalogPayload = """
+    factory-silver\t1\t原生雾银\t雾面航空铝\t微珠喷砂\t原厂抛光倒角\t标准单列轴承\tAEB3B6\tE5E9EC
+    gunmetal-brush\t5\t枪灰拉丝\t枪灰不锈钢\t纵向细拉丝\t黑铬边线\t磨合配平\t4A5158\tAEB7BF
+    night-cyan-index\t10\t夜航刻度\t深海蓝钢\t十二段夜光刻度\t齐平青蓝蚀刻\t表面平衡刻线\t142A36\t4FF5E7
+    tungsten-honeycomb\t20\t钨金蜂巢\t钨黑 PVD × 香槟金\t微蚀刻蜂巢\t香槟金凹槽\t精钢配重环\t17191B\tD7A84B
+    ice-guilloche\t35\t冰银回纹\t冷银镍铬\t机刻交错回纹\t冰蓝抛光边\t静音缓冲垫圈\tA9B6BE\t8DE9FF
+    blue-damascus\t50\t蓝钢水波\t回火蓝钢\t大马士革水波纹\t银蓝刃线\t双列辅助轴承\t203E5A\tA9D8EE
+    copper-circuit\t65\t赤铜回路\t烟熏铜合金\t精密电路蚀刻\t齐平赤铜节点\t蓝钢冠环表面\t5E3027\tF0A65B
+    titanium-heat\t75\t钛虹热变\t阳极氧化钛\t热变虹彩渐层\t紫金倒角\t低阻保持架\t445A73\tD966FF
+    meteor-obsidian\t90\t星陨黑曜\t黑曜 DLC\t陨石颗粒与银屑\t齐平典藏铭纹\t黑曜凹槽处理\t101215\tC7D0D8
+    mirror-aurora\t100\t镜铬极光\t镜面精钢\t极光镜切纹\t陶瓷白冠环\t陶瓷主轴承 + 镜钢完成体\tDDE4EA\t9BF4FF
+    """
+
+    var body: some View {
+        Group {
+            switch mode {
+            case .hud:
+                ZStack {
+                    ProductBackdrop().ignoresSafeArea()
+                    VStack(spacing: 0) {
+                        Spacer(minLength: 0)
+                        SpinnerProgressionHUD(state: state)
+                            .padding(.horizontal, 14)
+                            .padding(.bottom, 28)
+                    }
+                }
+            case .sheet:
+                ProgressionLevelDetailsSheet(state: state)
+            }
+        }
+        .productDesignSystem()
+        .preferredColorScheme(.dark)
+        .onAppear(perform: configurePreviewState)
+    }
+
+    private func configurePreviewState() {
+        state.selectedModel = .metalThreeBlade
+        state.progressionModel = .metalThreeBlade
+        state.progressionLevel = 39
+        state.progressionLevelTitle = "静音调校师"
+        state.progressionFraction = 0.62
+        state.progressionTotalExperience = 682
+        state.progressionLevelStartExperience = 535
+        state.progressionNextLevelExperience = 821
+        state.progressionNextUnlockLevel = 50
+        state.progressionNextUnlockName = "双列辅助轴承"
+        state.progressionLevelCatalog = ProgressionLevelDetail.fallback
+        state.threeBladeMetalSkins = ThreeBladeMetalSkinDetail.parse(
+            Self.skinCatalogPayload)
     }
 }
 #endif

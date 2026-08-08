@@ -1262,7 +1262,10 @@ namespace FidgetingApp.Tests.Editor
             StringAssert.Contains("SpinGestureCompleted?.Invoke", classic);
             StringAssert.Contains("SpinGestureCompleted?.Invoke", metal);
             StringAssert.Contains("SpinnerProgressionHUD", swift);
-            StringAssert.Contains("NextUnlockSkinThumbnail", swift);
+            StringAssert.Contains("ProgressionUnlockThumbnail", swift);
+            StringAssert.Contains("model: state.selectedModel", swift);
+            StringAssert.Contains("skin: unlockSkin(for: detail.level)", swift);
+            StringAssert.Contains("assetName: model.thumbnailAssetName", swift);
             StringAssert.Contains("ProductProgressGauge(", swift);
             StringAssert.Contains("struct ProductProgressGauge", components);
             StringAssert.Contains("min(1, max(0, value))", components);

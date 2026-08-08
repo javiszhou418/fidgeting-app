@@ -36,8 +36,25 @@ Swift shipping cases、Build Settings 与缩略图白名单的共同来源；旧
 不覆盖新数据的迁移到 `pointed-three-blade`。FanCard 与旧蓝色源码仍保留，但不进入 Build 22 Release。
 
 UI 恢复候选只允许原生 SwiftUI：五个 shipping scene 的 `MobileCanvas` / `EventSystem` 已移除，场景
-builder 中创建旧 HUD 的代码也已删除；业务 UI 使用 iOS 系统字体，Oxanium 只保留给模型顶部 Combo。
+builder 中创建旧 HUD 的代码也已删除。Build 23 真机回报确认恢复时把全局西文字体改成系统字体并非目标；
+当前修正为全 App 英文与数字使用已置入的 Oxanium，中文继续由 Core Text 自动回退到 iOS 系统中文字体。
 Combo 数字尺寸提高到 42 / 47 / 52 / 58 pt，继续使用中性白色；曲线调节工具只在 DEBUG 出现。
+修正同时覆盖 SwiftUI `Font.product` 两个入口、根级 `productDesignSystem()` 与 UIKit navigation title；
+`Font.combo` 继续保留独立语义但使用同一 Oxanium 资产。iPhone Simulator shipping Swift typecheck 已通过，
+专项 `ProductUiUsesOxaniumForLatinAndNumeralsWithSystemChineseFallback` 为 `1/1`。隔离 commit `0e9fed8`
+直接编译 shipping `FidgetProductUIComponents.swift`、`FidgetComboHalo.swift` 与 `CodexSwiftUIOverlay.swift`
+生成的中英文混排原生预览位于 `Artifacts/TypographyRecoveryV24/oxanium-mixed-script-native.png`；该预览
+当前等待用户明确视觉批准，批准前不构建或安装新的 iPhone 包。
+
+Build 23 真机反馈还确认成长解锁 thumbnail 在常驻成长栏和升起的 `成长图鉴` Bottom Sheet 中消失。
+资源并未丢失：Build 23 App bundle 内五张 shipping model PNG 与十张三叶皮肤 PNG 均存在；断点是
+`NextUnlockSkinThumbnail` 只消费三叶皮肤且无数据时画画笔占位，`ProgressionLevelRow` 则完全改成了
+`sparkles` 占位。当前 `ProgressionUnlockThumbnail` 统一恢复两处接线：三叶金属等级按精确 level 使用
+对应 `skin-thumbnail-*`，其余模型/缺数据窗口使用当前 `product-thumbnail-*`；未解锁态继续灰化并叠加
+锁标。`NativeArtworkLoader` 先走 UIKit named resource，再以 `Bundle.main.url` + `contentsOfFile` 兜底。
+shipping Swift Simulator typecheck 与资源/成长 HUD 两项专项测试均通过（`2/2`）。真实原生 HUD 与
+Bottom Sheet 预览分别位于 `Artifacts/ProgressionThumbnailRecoveryV24/progression-thumbnail-hud.png`
+和 `progression-thumbnail-sheet.png`，当前等待用户视觉批准；批准前不构建或安装新的 iPhone 包。
 
 Simulator 复核还发现两项只在 Release 路径暴露的问题：iOS 26.4 Simulator 的 4× 回缓冲区与项目
 2× URP attachment 不匹配会造成黑屏；进阶轴承用 `GameObject.CreatePrimitive(Sphere)` 时又会尝试创建
