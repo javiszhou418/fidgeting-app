@@ -63,7 +63,10 @@ Bottom Sheet 预览分别位于 `Artifacts/ProgressionThumbnailRecoveryV24/progr
 角速度大于零时用 `CADisplayLink` 积分旋转，停转、无 rotary telemetry、视图消失或 Reduce Motion 时立即
 停止 display link，不创建视觉假转。用户进一步要求图标与文字永不贴合或重叠；
 `Docs/LiquidGlassDesignGuideline.md` 现把紧凑 icon-label 最小 `4 pt`、常规 `8 pt`、容器内部图形到边界
-最小 `4 pt` 写为硬规则，AUTO 圆环与 label 实际使用 `5 pt`，专项回归同时锁定文档与实现。
+最小 `4 pt` 写为硬规则。首版只把 AUTO 圆环与 label 改到 `5 pt`，却仍用 `58 × 52 pt` 固定 frame，
+使圆环顶部实际贴住容器；用户截图复核后已移除这个无内边距 frame，改为圆环到容器左右 `14 pt`、
+上下 `7 pt` 的显式 padding，圆环与 AUTO label 使用 `6 pt`，并以 `68 × 68 pt` 占位防止侵入相邻内容。
+专项回归同时锁定文档与实现。
 shipping Swift 原生预览编译通过，成长 HUD 专项回归 `1/1` 通过；
 更新后的静态预览、60 fps 动态和接触表位于同一目录的 `progression-thumbnail-hud.png`、
 `progression-hud-auto-motion.mp4`、`progression-hud-auto-motion-contact-sheet.png`。本轮仍等待用户明确视觉

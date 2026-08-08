@@ -3343,7 +3343,7 @@ private struct SpinnerProgressionHUD: View {
             } label: {
                 HStack(spacing: 10) {
                     Color.clear
-                        .frame(width: 62, height: 52)
+                        .frame(width: 68, height: 68)
 
                     VStack(alignment: .leading, spacing: 5) {
                         HStack(spacing: 6) {
@@ -3426,7 +3426,7 @@ private struct SpinnerProgressionHUD: View {
                     }
                 }
             } label: {
-                VStack(spacing: 5) {
+                VStack(spacing: 6) {
                     AutoSpeedRotorBadge(
                         multiplierText: autoMultiplierText,
                         angularSpeedRadians: state.motionTelemetry.angularSpeedRadians,
@@ -3439,10 +3439,11 @@ private struct SpinnerProgressionHUD: View {
                 .foregroundStyle(state.progressionAssistantEnabled
                                  ? accent.opacity(0.84)
                                  : Color.white.opacity(0.72))
-                .frame(width: 58, height: 52)
+                .padding(.horizontal, 14)
+                .padding(.vertical, 7)
                 .background(
                     Color.white.opacity(state.progressionAssistantEnabled ? 0.10 : 0.04),
-                    in: RoundedRectangle(cornerRadius: 15, style: .continuous))
+                    in: RoundedRectangle(cornerRadius: 18, style: .continuous))
             }
             .accessibilityLabel("AUTO 菜单")
             .accessibilityValue(

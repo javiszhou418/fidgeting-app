@@ -8,7 +8,7 @@
 - 全 App 固定使用 Dark Mode，不跟随设备 Light Mode。iOS `UIUserInterfaceStyle`、UIKit Overlay 容器和 SwiftUI 根环境共同锁定为 dark；产品背景保持中性黑场，主要文字保持白色。禁止使用白色页面背景或会按 Light Mode 解析为浅底的未约束系统材质。不得改写 Unity 根 `Window` / `UIViewController` 的 appearance，以免干扰 Metal 渲染层。
 - 全 App 的拉丁字母与数字统一使用 Oxanium 可变字体；`ProductTypography` 是 SwiftUI 语义字号与 UIKit navigation title 的唯一入口，业务页面不得直接使用 `.font(.system...)` 或系统西文字体。Oxanium 不含中文字形，中文由 Core Text 自动级联到 iOS 系统中文字体，避免缺字方框；这不是另一套可选视觉字体。
 - 字间距始终使用 Oxanium 或中文级联字体的默认值。禁止用 SwiftUI `tracking` / `kerning` 或其他方式增加字间距；信息层级只通过字号、字重、颜色、透明度和组件间距表达。
-- 图标、图标容器与相邻文字之间的留白是硬性约束，不允许例外：紧凑型纵向/横向控件的图标容器与 label 视觉间距不得小于 `4 pt`，常规控件使用 `8 pt`；容器内部的 glyph、倍率数字或状态标记与圆形/圆角边界也必须保留至少 `4 pt` 的视觉安全留白。禁止使用负间距、负 offset 或压缩 frame 让文字贴住、侵入或覆盖图标。小屏、长文案或 Dynamic Type 空间不足时，必须扩大容器、重排、换行或等比缩放内容，不能牺牲这层间距；`44 × 44 pt` 最小点击热区独立计算，不能拿来充当可见间距。
+- 图标、图标容器与相邻文字之间的留白是硬性约束，不允许例外：紧凑型纵向/横向控件的图标容器与 label 视觉间距不得小于 `4 pt`，常规控件使用 `8 pt`；容器内部的 glyph、倍率数字或状态标记与圆形/圆角边界也必须在上、下、左、右四边分别保留至少 `4 pt` 的视觉安全留白，不能用左右留白抵消顶部或底部的贴边。禁止使用负间距、负 offset 或压缩 frame 让文字贴住、侵入或覆盖图标。小屏、长文案或 Dynamic Type 空间不足时，必须扩大容器、重排、换行或等比缩放内容，不能牺牲这层间距；`44 × 44 pt` 最小点击热区独立计算，不能拿来充当可见间距。
 - Metric 中的数字本身是视觉 headline，至少比 label / subhead 高一个语义字号层级；单位、标题和解释退到 `subheadline` / `caption`。优先用字号、字重、对比度和稳定宽度数字突出数值，不增加字间距，也不依赖永久 accent 填色。
 - 实时速度只使用一个紧凑半圆 Hero 仪表：大号数字和连续扫掠场读取同一真实 telemetry。Intensity / Frequency 可使用左右从属翼表，但三表必须同排留出明确间距，任何圆弧和数值都不得重叠；翼表各自读取真实数据、继承主速度色带、降低线宽/亮度/字号且不使用 glow。Peak 只增强火红扫掠场和局部光晕，不绘制装饰火苗；主 RPM 与 3D Hero 始终保有视觉中心。
 - Speed / Intensity / Frequency 三联仪表簇固定在底部成长卡上方 14 pt；安全区、成长卡 96 pt 高度与 12 pt 底部 inset 由 `ProductOverlayLayout` 统一提供。Combo 使用无票券边框、无胶囊容器的数字优先锁定组合固定在 3D 模型顶部；Spin Reward / Peak 反馈留在仪表上方，不能把实时指标向上顶回 3D Hero 中央区域。
