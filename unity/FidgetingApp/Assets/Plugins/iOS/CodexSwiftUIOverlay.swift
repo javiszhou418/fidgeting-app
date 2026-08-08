@@ -3284,8 +3284,8 @@ private struct SpinnerProgressionHUD: View {
 
     private var accent: Color { state.currentAppearanceAccent }
     private let autoMultipliers = [1.0, 1.5, 2.0, 3.0]
-    private let endpointIconSize: CGFloat = 64
-    private let endpointContentHeight: CGFloat = 76
+    private let controlHeight: CGFloat = 64
+    private let thumbnailIconSize: CGFloat = 48
 
     private var autoMultiplierText: String {
         String(format: "%.1fx", state.progressionAssistantMultiplier)
@@ -3344,70 +3344,7 @@ private struct SpinnerProgressionHUD: View {
     }
 
     var body: some View {
-        ZStack(alignment: .leading) {
-            Button {
-                UnityBridge.feedback()
-                showingLevelDetails = true
-            } label: {
-                HStack(spacing: 8) {
-                    Color.clear
-                        .frame(width: 68, height: endpointContentHeight)
-
-                    VStack(alignment: .leading, spacing: 8) {
-                        HStack(spacing: 6) {
-                            Text("LV.\(state.progressionLevel)")
-                                .font(.product(.subheadline, weight: .black).monospacedDigit())
-                            Text(state.progressionLevelTitle)
-                                .font(.product(.caption, weight: .semibold))
-                                .lineLimit(1)
-                            Image(systemName: "chevron.right.circle.fill")
-                                .font(.product(.caption2))
-                                .foregroundStyle(Color.white.opacity(0.48))
-                        }
-                        .foregroundStyle(.white)
-
-                        ProgressionMilestoneGauge(
-                            previousLevel: previousMilestoneLevel,
-                            currentLevel: state.progressionLevel,
-                            nextLevel: nextMilestoneLevel,
-                            progress: milestoneProgress,
-                            accent: accent)
-                    }
-
-                    VStack(spacing: 2) {
-                        ProgressionUnlockThumbnail(
-                            model: state.selectedModel,
-                            skin: nextPreviewSkin,
-                            accent: accent,
-                            unlocked: true,
-                            showsLock: state.progressionLevel < 100,
-                            shimmers: true)
-                            .frame(
-                                width: endpointIconSize,
-                                height: endpointIconSize)
-
-                        Text(state.progressionLevel >= 100
-                             ? "MAX"
-                             : "LV.\(state.progressionNextUnlockLevel)")
-                            .font(.product(size: 7, weight: .black))
-                            .monospacedDigit()
-                            .foregroundStyle(accent.opacity(0.78))
-                    }
-                    .frame(width: 68, height: endpointContentHeight)
-                }
-                .padding(.horizontal, 11)
-                .padding(.vertical, 8)
-                .frame(maxWidth: .infinity, alignment: .leading)
-                .contentShape(RoundedRectangle(cornerRadius: 22, style: .continuous))
-            }
-            .buttonStyle(.plain)
-            .frame(maxWidth: .infinity)
-            .accessibilityLabel(
-                "成长详情，等级 \(state.progressionLevel)，\(state.progressionLevelTitle)")
-            .accessibilityValue(
-                "\(experienceText)，上一个里程碑 \(previousMilestoneLevel)，下一个里程碑 \(nextMilestoneLevel)")
-            .accessibilityHint("打开成长详情")
-
+        HStack(spacing: 10) {
             Menu {
                 ForEach(autoMultipliers, id: \.self) { multiplier in
                     let selected = state.progressionAssistantEnabled
@@ -3449,8 +3386,8 @@ private struct SpinnerProgressionHUD: View {
                 .padding(.horizontal, 11)
                 .padding(.vertical, 8)
                 .frame(
-                    width: endpointIconSize,
-                    height: endpointIconSize)
+                    width: controlHeight,
+                    height: controlHeight)
                 .background {
                     AutoControlGlassSurface(
                         active: state.progressionAssistantEnabled,
@@ -3466,12 +3403,73 @@ private struct SpinnerProgressionHUD: View {
                     ? "已开启，\(autoMultiplierText)"
                     : "已关闭")
             .accessibilityHint("打开向上的倍率选择菜单")
-            .padding(.leading, 11)
+
+            Button {
+                UnityBridge.feedback()
+                showingLevelDetails = true
+            } label: {
+                HStack(spacing: 8) {
+                    VStack(alignment: .leading, spacing: 8) {
+                        HStack(spacing: 6) {
+                            Text("LV.\(state.progressionLevel)")
+                                .font(.product(.subheadline, weight: .black).monospacedDigit())
+                            Text(state.progressionLevelTitle)
+                                .font(.product(.caption, weight: .semibold))
+                                .lineLimit(1)
+                            Image(systemName: "chevron.right.circle.fill")
+                                .font(.product(.caption2))
+                                .foregroundStyle(Color.white.opacity(0.48))
+                        }
+                        .foregroundStyle(.white)
+
+                        ProgressionMilestoneGauge(
+                            previousLevel: previousMilestoneLevel,
+                            currentLevel: state.progressionLevel,
+                            nextLevel: nextMilestoneLevel,
+                            progress: milestoneProgress,
+                            accent: accent)
+                    }
+                    .frame(maxWidth: .infinity, alignment: .leading)
+
+                    VStack(spacing: 1) {
+                        ProgressionUnlockThumbnail(
+                            model: state.selectedModel,
+                            skin: nextPreviewSkin,
+                            accent: accent,
+                            unlocked: true,
+                            showsLock: state.progressionLevel < 100,
+                            shimmers: true)
+                            .frame(
+                                width: thumbnailIconSize,
+                                height: thumbnailIconSize)
+
+                        Text(state.progressionLevel >= 100
+                             ? "MAX"
+                             : "LV.\(state.progressionNextUnlockLevel)")
+                            .font(.product(size: 7, weight: .black))
+                            .monospacedDigit()
+                            .foregroundStyle(accent.opacity(0.78))
+                    }
+                    .frame(width: 52, height: controlHeight)
+                }
+                .padding(.leading, 12)
+                .padding(.trailing, 8)
+                .frame(maxWidth: .infinity, alignment: .leading)
+                .frame(height: controlHeight)
+                .contentShape(RoundedRectangle(cornerRadius: 20, style: .continuous))
+            }
+            .buttonStyle(.plain)
+            .frame(maxWidth: .infinity)
+            .productGlass(
+                cornerRadius: 20,
+                tint: accent.opacity(state.progressionCombo.isActive ? 0.075 : 0.035),
+                interactive: true)
+            .accessibilityLabel(
+                "成长详情，等级 \(state.progressionLevel)，\(state.progressionLevelTitle)")
+            .accessibilityValue(
+                "\(experienceText)，上一个里程碑 \(previousMilestoneLevel)，下一个里程碑 \(nextMilestoneLevel)")
+            .accessibilityHint("打开成长详情")
         }
-        .productGlass(
-            cornerRadius: 22,
-            tint: accent.opacity(state.progressionCombo.isActive ? 0.075 : 0.035),
-            interactive: true)
         .productDesignSystem()
         .preferredColorScheme(.dark)
         .sheet(isPresented: $showingLevelDetails) {
