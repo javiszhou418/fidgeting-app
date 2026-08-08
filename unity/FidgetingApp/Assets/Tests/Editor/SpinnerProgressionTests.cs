@@ -1294,6 +1294,9 @@ namespace FidgetingApp.Tests.Editor
             StringAssert.Contains("previousLevel: previousMilestoneLevel", progressionHud);
             StringAssert.Contains("currentLevel: state.progressionLevel", progressionHud);
             StringAssert.Contains("nextLevel: nextMilestoneLevel", progressionHud);
+            StringAssert.Contains("VStack(spacing: 3)", progressionHud);
+            StringAssert.Contains(".frame(width: 62, height: 62)", progressionHud);
+            StringAssert.Contains(".frame(width: 80, height: 80)", progressionHud);
             StringAssert.Contains("AutoSpeedRotorBadge(", progressionHud);
             StringAssert.Contains("VStack(spacing: 10)", progressionHud);
             StringAssert.Contains(".padding(.horizontal, 14)", progressionHud);
