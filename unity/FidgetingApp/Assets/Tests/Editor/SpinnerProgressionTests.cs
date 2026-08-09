@@ -1278,14 +1278,25 @@ namespace FidgetingApp.Tests.Editor
             int hudStart = swift.IndexOf("private struct SpinnerProgressionHUD");
             int hudEnd = swift.IndexOf("private struct ProgressionLevelDetailsSheet");
             string progressionHud = swift.Substring(hudStart, hudEnd - hudStart);
-            int autoMenuStart = progressionHud.IndexOf("            Menu {");
-            int autoMenuEnd = progressionHud.IndexOf(
-                "            } label: {\n                VStack(spacing: 8)",
-                autoMenuStart);
-            string autoMenu = progressionHud.Substring(
-                autoMenuStart,
-                autoMenuEnd - autoMenuStart);
-            StringAssert.DoesNotContain("lock.fill", autoMenu);
+            int autoControlStart = progressionHud.IndexOf(
+                "            Button {\n                UnityBridge.feedback()\n                showingAutoSpeedPicker = true");
+            int autoControlEnd = progressionHud.IndexOf(
+                "            Button {\n                UnityBridge.feedback()\n                showingLevelDetails = true",
+                autoControlStart);
+            string autoControl = progressionHud.Substring(
+                autoControlStart,
+                autoControlEnd - autoControlStart);
+            StringAssert.Contains(
+                "@State private var showingAutoSpeedPicker = false",
+                progressionHud);
+            StringAssert.Contains("showingAutoSpeedPicker = true", autoControl);
+            StringAssert.Contains(".confirmationDialog(", autoControl);
+            StringAssert.Contains("isPresented: $showingAutoSpeedPicker", autoControl);
+            StringAssert.Contains("Button(\"取消\", role: .cancel)", autoControl);
+            StringAssert.Contains(".contentShape(", autoControl);
+            StringAssert.Contains(".buttonStyle(.plain)", autoControl);
+            StringAssert.DoesNotContain("            Menu {", progressionHud);
+            StringAssert.DoesNotContain("lock.fill", autoControl);
             StringAssert.DoesNotContain("PRO", progressionHud);
             StringAssert.DoesNotContain("presentAutoGate", progressionHud);
             StringAssert.DoesNotContain("ExperienceJar(", progressionHud);
@@ -1304,11 +1315,11 @@ namespace FidgetingApp.Tests.Editor
             StringAssert.Contains("private let controlHeight: CGFloat = 64", progressionHud);
             StringAssert.Contains("private let thumbnailIconSize: CGFloat = 48", progressionHud);
             Assert.AreEqual(
-                1,
+                2,
                 progressionHud.Split(
                     new[] { "width: controlHeight," },
                     System.StringSplitOptions.None).Length - 1,
-                "AUTO must use the shared control height as its width.");
+                "AUTO label and outer hit target must both use the shared square size.");
             StringAssert.Contains(".frame(height: controlHeight)", progressionHud);
             StringAssert.Contains("VStack(spacing: 1)", progressionHud);
             StringAssert.Contains("width: thumbnailIconSize", progressionHud);

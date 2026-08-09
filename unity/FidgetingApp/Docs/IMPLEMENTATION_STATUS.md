@@ -1,6 +1,6 @@
 # Fidgeting Interaction Integration Status
 
-最后更新：2026-08-08
+最后更新：2026-08-09
 
 本文件回答一个问题：规格中的能力是否已经进入可运行代码。状态只按代码、场景接线和测试证据填写，不按聊天结论或文档完成度填写。
 
@@ -92,6 +92,16 @@ shipping Swift 原生预览编译通过，成长 HUD 专项回归 `1/1` 通过�
 iPhoneOS 15 Swift typecheck。`MobileGestures_OrbitKeepsScaleAndPinchZoomClamps` 场景专项 `1/1` 通过，
 完整 EditMode `195/195` 通过，报告为 `Logs/Build27PinchOnlyFocusedTests.xml` 与
 `Logs/Build27FullEditModeTests.xml`；iPhone 构建、安装与真机手势验收仍待执行。
+
+2026-08-09 针对真机“AUTO speed 经常选不中”的反馈，AUTO 入口不再使用会与底部独立 Hosting 层及
+持续状态刷新共同竞争的 SwiftUI `Menu`。入口改为固定 `64 × 64 pt` 的 plain `Button`，视觉标签和
+外层按钮同时使用同一个正方形命中区与显式圆角 `contentShape`；点击后由系统 `confirmationDialog`
+独占显示 `1.0x / 1.5x / 2.0x / 3.0x`、停止与取消，每一档都是系统级大点击行。倍率、Unity bridge、
+AUTO 速度规则和生命周期不变。iPhoneOS 15 Swift typecheck、AUTO 专项 `1/1` 与完整 EditMode
+`195/195` 通过，报告为 `Logs/AutoSpeedPickerFocusedTests.xml`、
+`Logs/AutoSpeedPickerFullEditModeTests.xml`。真实 shipping SwiftUI Simulator 预览为
+`Artifacts/ProgressionThumbnailRecoveryV24/progression-thumbnail-hud-picker.png`；本轮属于 native UI
+交互表现变化，仍待用户明确视觉批准，批准前不构建或安装新的 iPhone 包。
 
 Simulator 复核还发现两项只在 Release 路径暴露的问题：iOS 26.4 Simulator 的 4× 回缓冲区与项目
 2× URP attachment 不匹配会造成黑屏；进阶轴承用 `GameObject.CreatePrimitive(Sphere)` 时又会尝试创建

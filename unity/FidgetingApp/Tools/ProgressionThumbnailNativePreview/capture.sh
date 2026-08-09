@@ -48,7 +48,7 @@ xcrun simctl bootstatus "$DEVICE_ID" -b
 xcrun simctl uninstall "$DEVICE_ID" "$BUNDLE_ID" 2>/dev/null || true
 xcrun simctl install "$DEVICE_ID" "$APP_DIR"
 
-for MODE in hud hud-off sheet; do
+for MODE in hud hud-off hud-picker sheet; do
   xcrun simctl launch --terminate-running-process \
     "$DEVICE_ID" "$BUNDLE_ID" --mode="$MODE" >/dev/null
   sleep 4

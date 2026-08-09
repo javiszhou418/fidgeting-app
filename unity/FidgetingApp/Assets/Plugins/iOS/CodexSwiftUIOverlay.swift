@@ -3284,7 +3284,9 @@ private struct CollectorUnlockOverlay: View {
 
 private struct SpinnerProgressionHUD: View {
     @ObservedObject var state: ProductUiState
+    var autoSpeedPickerPresentedOnAppear = false
     @State private var showingLevelDetails = false
+    @State private var showingAutoSpeedPicker = false
 
     private var accent: Color { state.currentAppearanceAccent }
     private let autoMultipliers = [1.0, 1.5, 2.0, 3.0]
@@ -3349,32 +3351,9 @@ private struct SpinnerProgressionHUD: View {
 
     var body: some View {
         HStack(spacing: 10) {
-            Menu {
-                ForEach(autoMultipliers, id: \.self) { multiplier in
-                    let selected = state.progressionAssistantEnabled
-                        && abs(state.progressionAssistantMultiplier - multiplier) < 0.001
-                    Button {
-                        UnityBridge.feedback(.medium)
-                        state.setProgressionAssistantMultiplier(multiplier)
-                    } label: {
-                        Label(
-                            String(format: "%.1fx", multiplier)
-                                + (selected ? " · 运行中" : ""),
-                            systemImage: selected
-                                ? "checkmark.circle.fill"
-                                : "play.circle.fill")
-                    }
-                }
-
-                if state.progressionAssistantEnabled {
-                    Divider()
-                    Button(role: .destructive) {
-                        UnityBridge.feedback()
-                        state.stopProgressionAssistant()
-                    } label: {
-                        Label("停止 AUTO", systemImage: "stop.circle.fill")
-                    }
-                }
+            Button {
+                UnityBridge.feedback()
+                showingAutoSpeedPicker = true
             } label: {
                 VStack(spacing: 8) {
                     AutoSpeedRotorBadge(
@@ -3392,6 +3371,8 @@ private struct SpinnerProgressionHUD: View {
                 .frame(
                     width: controlHeight,
                     height: controlHeight)
+                .contentShape(
+                    RoundedRectangle(cornerRadius: 15, style: .continuous))
                 .background {
                     AutoControlGlassSurface(
                         active: state.progressionAssistantEnabled,
@@ -3401,12 +3382,45 @@ private struct SpinnerProgressionHUD: View {
                     .easeOut(duration: FidgetUITokens.Motion.selectionDuration),
                     value: state.progressionAssistantEnabled)
             }
-            .accessibilityLabel("AUTO 菜单")
+            .buttonStyle(.plain)
+            .frame(width: controlHeight, height: controlHeight)
+            .accessibilityLabel("AUTO 速度")
             .accessibilityValue(
                 state.progressionAssistantEnabled
                     ? "已开启，\(autoMultiplierText)"
                     : "已关闭")
-            .accessibilityHint("打开向上的倍率选择菜单")
+            .accessibilityHint("打开速度选择面板")
+            .confirmationDialog(
+                "AUTO 速度",
+                isPresented: $showingAutoSpeedPicker,
+                titleVisibility: .visible) {
+                ForEach(autoMultipliers, id: \.self) { multiplier in
+                    let selected = state.progressionAssistantEnabled
+                        && abs(state.progressionAssistantMultiplier - multiplier) < 0.001
+                    Button {
+                        UnityBridge.feedback(.medium)
+                        state.setProgressionAssistantMultiplier(multiplier)
+                    } label: {
+                        Label(
+                            String(format: "%.1fx", multiplier)
+                                + (selected ? " · 运行中" : ""),
+                            systemImage: selected
+                                ? "checkmark.circle.fill"
+                                : "play.circle.fill")
+                    }
+                }
+
+                if state.progressionAssistantEnabled {
+                    Button("停止 AUTO", role: .destructive) {
+                        UnityBridge.feedback()
+                        state.stopProgressionAssistant()
+                    }
+                }
+
+                Button("取消", role: .cancel) {}
+            } message: {
+                Text("选择 1.0x–3.0x；选中后立即按该倍率运行。")
+            }
 
             Button {
                 UnityBridge.feedback()
@@ -3476,6 +3490,12 @@ private struct SpinnerProgressionHUD: View {
         }
         .productDesignSystem()
         .preferredColorScheme(.dark)
+        .onAppear {
+            guard autoSpeedPickerPresentedOnAppear else { return }
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.35) {
+                showingAutoSpeedPicker = true
+            }
+        }
         .sheet(isPresented: $showingLevelDetails) {
             ProgressionLevelDetailsSheet(state: state)
         }
@@ -5880,6 +5900,7 @@ struct ProgressionThumbnailNativePreviewRoot: View {
     enum Mode: String {
         case hud
         case hudOff = "hud-off"
+        case hudPicker = "hud-picker"
         case sheet
     }
 
@@ -5902,12 +5923,14 @@ struct ProgressionThumbnailNativePreviewRoot: View {
     var body: some View {
         Group {
             switch mode {
-            case .hud, .hudOff:
+            case .hud, .hudOff, .hudPicker:
                 ZStack {
                     ProductBackdrop().ignoresSafeArea()
                     VStack(spacing: 0) {
                         Spacer(minLength: 0)
-                        SpinnerProgressionHUD(state: state)
+                        SpinnerProgressionHUD(
+                            state: state,
+                            autoSpeedPickerPresentedOnAppear: mode == .hudPicker)
                             .padding(.horizontal, 14)
                             .padding(.bottom, 28)
                     }
@@ -5937,7 +5960,7 @@ struct ProgressionThumbnailNativePreviewRoot: View {
             speedBand: .engaged)
         state.progressionNextUnlockLevel = 50
         state.progressionNextUnlockName = "双列辅助轴承"
-        state.progressionAssistantEnabled = mode == .hud
+        state.progressionAssistantEnabled = mode == .hud || mode == .hudPicker
         state.progressionAssistantMultiplier = 1.0
         state.progressionLevelCatalog = ProgressionLevelDetail.fallback
         state.threeBladeMetalSkins = ThreeBladeMetalSkinDetail.parse(
