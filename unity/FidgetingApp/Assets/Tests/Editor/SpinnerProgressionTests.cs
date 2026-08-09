@@ -1291,6 +1291,9 @@ namespace FidgetingApp.Tests.Editor
                 progressionHud);
             StringAssert.Contains("showingAutoSpeedPicker = true", autoControl);
             StringAssert.Contains(".confirmationDialog(", autoControl);
+            StringAssert.Contains("\"Speed\",", autoControl);
+            StringAssert.Contains(".accessibilityLabel(\"AUTO Speed\")", autoControl);
+            StringAssert.DoesNotContain("AUTO 速度", autoControl);
             StringAssert.Contains("isPresented: $showingAutoSpeedPicker", autoControl);
             StringAssert.Contains("Button(\"取消\", role: .cancel)", autoControl);
             StringAssert.Contains(".contentShape(", autoControl);

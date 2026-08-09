@@ -97,7 +97,8 @@ iPhoneOS 15 Swift typecheck。`MobileGestures_OrbitKeepsScaleAndPinchZoomClamps`
 持续状态刷新共同竞争的 SwiftUI `Menu`。入口改为固定 `64 × 64 pt` 的 plain `Button`，视觉标签和
 外层按钮同时使用同一个正方形命中区与显式圆角 `contentShape`；点击后由系统 `confirmationDialog`
 独占显示 `1.0x / 1.5x / 2.0x / 3.0x`、停止与取消，每一档都是系统级大点击行。倍率、Unity bridge、
-AUTO 速度规则和生命周期不变。iPhoneOS 15 Swift typecheck、AUTO 专项 `1/1` 与完整 EditMode
+AUTO 速度规则和生命周期不变；用户批准面板形式后将可见标题收敛为 `Speed`，VoiceOver 继续读出
+`AUTO Speed`。iPhoneOS 15 Swift typecheck、AUTO 专项 `1/1` 与完整 EditMode
 `195/195` 通过，报告为 `Logs/AutoSpeedPickerFocusedTests.xml`、
 `Logs/AutoSpeedPickerFullEditModeTests.xml`。真实 shipping SwiftUI Simulator 预览为
 `Artifacts/ProgressionThumbnailRecoveryV24/progression-thumbnail-hud-picker.png`；本轮属于 native UI

@@ -3384,14 +3384,14 @@ private struct SpinnerProgressionHUD: View {
             }
             .buttonStyle(.plain)
             .frame(width: controlHeight, height: controlHeight)
-            .accessibilityLabel("AUTO 速度")
+            .accessibilityLabel("AUTO Speed")
             .accessibilityValue(
                 state.progressionAssistantEnabled
                     ? "已开启，\(autoMultiplierText)"
                     : "已关闭")
             .accessibilityHint("打开速度选择面板")
             .confirmationDialog(
-                "AUTO 速度",
+                "Speed",
                 isPresented: $showingAutoSpeedPicker,
                 titleVisibility: .visible) {
                 ForEach(autoMultipliers, id: \.self) { multiplier in
