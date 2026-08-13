@@ -19,6 +19,9 @@ namespace FidgetingApp.EDC
             new(0f, 0.5f, -0.8660254f);
 
         [SerializeField] private Transform target;
+        [SerializeField] private Transform focusTarget;
+        [SerializeField] private bool useStableLocalBounds;
+        [SerializeField] private Bounds stableLocalBounds;
         [SerializeField, Range(0.30f, 0.90f)]
         private float screenWidthFraction = DefaultScreenWidthFraction;
         [SerializeField, Range(0.30f, 0.90f)]
@@ -35,6 +38,7 @@ namespace FidgetingApp.EDC
         [SerializeField] private bool usePhysicalProjection = true;
         [SerializeField, Range(5f, 120f)]
         private float standardFieldOfView = 26.991f;
+        [SerializeField, Range(-60f, 60f)] private float libraryRollDegrees;
 
         private Camera targetCamera;
         private Vector3 framingBackward;
@@ -59,6 +63,9 @@ namespace FidgetingApp.EDC
         private float transitionTargetYaw;
         private float transitionStartPitch;
         private float transitionTargetPitch;
+        private float framingRollDegrees;
+        private float transitionStartRoll;
+        private float transitionTargetRoll;
         private float transitionStartZoom;
         private float transitionTargetZoom;
         private float presentationMotionOrbitMultiplier = 1f;
@@ -71,12 +78,17 @@ namespace FidgetingApp.EDC
         private float transitionTargetHeightFraction;
 
         public Transform Target => target;
+        public Transform FocusTarget => focusTarget;
         public float ScreenWidthFraction => screenWidthFraction;
         public float ScreenHeightFraction => screenHeightFraction;
         public float FramedDistance { get; private set; }
         public float ZoomScale => zoomScale;
         public float AppearanceActivationScale => appearanceActivationScale;
         public bool UsesPhysicalProjection => usePhysicalProjection;
+        public bool UsesStableLocalBounds => useStableLocalBounds;
+        public Bounds StableLocalBounds => stableLocalBounds;
+        public float LibraryRollDegrees => libraryRollDegrees;
+        public float FramingRollDegrees => framingRollDegrees;
 
         private void OnEnable()
         {
@@ -118,6 +130,19 @@ namespace FidgetingApp.EDC
             FrameNow();
         }
 
+        public void ConfigureFocusTarget(Transform newFocusTarget)
+        {
+            focusTarget = newFocusTarget;
+            FrameNow();
+        }
+
+        public void ConfigureStableLocalBounds(Bounds localBounds)
+        {
+            useStableLocalBounds = localBounds.size.sqrMagnitude > 0.000001f;
+            stableLocalBounds = localBounds;
+            FrameNow();
+        }
+
         public void ConfigureProjection(
             bool usePhysical,
             float fieldOfViewDegrees = 26.991f)
@@ -141,6 +166,16 @@ namespace FidgetingApp.EDC
             screenHeightFraction = libraryPreviewActive
                 ? profile.LibraryHeightFraction
                 : profile.DetailHeightFraction;
+            FrameNow();
+        }
+
+        public void ConfigureLibraryPresentation(float rollDegrees)
+        {
+            libraryRollDegrees = Mathf.Clamp(rollDegrees, -60f, 60f);
+            if (libraryPreviewActive)
+            {
+                framingRollDegrees = libraryRollDegrees;
+            }
             FrameNow();
         }
 
@@ -231,6 +266,7 @@ namespace FidgetingApp.EDC
             float targetHeightFraction = active
                 ? framingProfile.LibraryHeightFraction
                 : framingProfile.DetailHeightFraction;
+            float targetRoll = active ? libraryRollDegrees : 0f;
 
             if (immediate)
             {
@@ -242,6 +278,7 @@ namespace FidgetingApp.EDC
                 targetZoomScale = targetZoom;
                 screenWidthFraction = targetWidthFraction;
                 screenHeightFraction = targetHeightFraction;
+                framingRollDegrees = targetRoll;
                 hasFramingDirection = true;
                 FrameNow();
                 return;
@@ -253,6 +290,8 @@ namespace FidgetingApp.EDC
             transitionTargetYaw = 0f;
             transitionStartPitch = pitchOffset;
             transitionTargetPitch = 0f;
+            transitionStartRoll = framingRollDegrees;
+            transitionTargetRoll = targetRoll;
             transitionStartZoom = zoomScale;
             transitionTargetZoom = targetZoom;
             transitionStartWidthFraction = screenWidthFraction;
@@ -266,6 +305,17 @@ namespace FidgetingApp.EDC
             presentationTransitionElapsed = 0f;
             presentationTransitionActive = true;
             hasFramingDirection = true;
+        }
+
+        public void SetDetailEntranceProgressForPreview(float progress)
+        {
+            SetLibraryPreviewActive(true, true);
+            SetLibraryPreviewActive(false, false);
+            presentationTransitionElapsed =
+                SpinnerPresentationTransition.DurationSeconds
+                * Mathf.Clamp01(progress);
+            AdvancePresentationTransition(0f);
+            presentationTransitionActive = false;
         }
 
         private void AdvancePresentationTransition(float deltaTime)
@@ -284,6 +334,10 @@ namespace FidgetingApp.EDC
             pitchOffset = Mathf.LerpAngle(
                 transitionStartPitch,
                 transitionTargetPitch,
+                progress);
+            framingRollDegrees = Mathf.LerpAngle(
+                transitionStartRoll,
+                transitionTargetRoll,
                 progress);
             zoomScale = Mathf.Lerp(
                 transitionStartZoom,
@@ -310,6 +364,7 @@ namespace FidgetingApp.EDC
                 pitchOffset = transitionTargetPitch;
                 zoomScale = transitionTargetZoom;
                 targetZoomScale = transitionTargetZoom;
+                framingRollDegrees = transitionTargetRoll;
                 screenWidthFraction = transitionTargetWidthFraction;
                 screenHeightFraction = transitionTargetHeightFraction;
                 presentationMotionOrbitMultiplier = transitionTargetMotionMultiplier;
@@ -329,7 +384,7 @@ namespace FidgetingApp.EDC
 
         public void FrameNow()
         {
-            if (target == null || !TryGetRendererBounds(target, out Bounds bounds))
+            if (target == null || !TryGetFramingBounds(out Bounds bounds))
             {
                 return;
             }
@@ -362,7 +417,9 @@ namespace FidgetingApp.EDC
                 screenWidthFraction,
                 screenHeightFraction,
                 minimumDistance,
-                distancePadding);
+                distancePadding,
+                null,
+                framingRollDegrees);
             previousScreenWidth = Screen.width;
             previousScreenHeight = Screen.height;
             ApplyViewPose();
@@ -375,7 +432,7 @@ namespace FidgetingApp.EDC
                 return;
             }
 
-            if (!TryGetRendererBounds(target, out Bounds bounds))
+            if (!TryGetFramingBounds(out Bounds bounds))
             {
                 return;
             }
@@ -393,9 +450,15 @@ namespace FidgetingApp.EDC
                     FramedDistance
                     * Mathf.Max(0.01f, zoomScale)
                     / appearanceActivationScale);
+            Quaternion look =
+                DeviceMotionOrbitMapping.ResolveStableLookRotation(
+                    framingBackward,
+                    orbit);
             transform.SetPositionAndRotation(
                 position,
-                Quaternion.LookRotation(bounds.center - position, Vector3.up));
+                look * Quaternion.AngleAxis(
+                    framingRollDegrees,
+                    Vector3.forward));
         }
 
         private void ConfigureCameraProjection(Camera camera)
@@ -419,9 +482,32 @@ namespace FidgetingApp.EDC
             }
         }
 
-        private static bool TryGetRendererBounds(Transform root, out Bounds bounds)
+        private bool TryGetFramingBounds(out Bounds bounds)
         {
-            return ProductCameraFraming.TryGetProductBounds(root, out bounds);
+            // Detail interaction uses the complete mechanism sweep so the
+            // camera never chases moving layers. Library preview is static;
+            // there the visible closed product itself must define the center,
+            // rather than the corner pivot or an asymmetric sweep envelope.
+            if (useStableLocalBounds && !libraryPreviewActive && target != null)
+            {
+                Vector3 localExtents = stableLocalBounds.extents;
+                Vector3 worldCenter = focusTarget != null
+                    ? focusTarget.position
+                    : target.TransformPoint(stableLocalBounds.center);
+                Vector3 worldX = target.TransformVector(
+                    new Vector3(localExtents.x, 0f, 0f));
+                Vector3 worldY = target.TransformVector(
+                    new Vector3(0f, localExtents.y, 0f));
+                Vector3 worldZ = target.TransformVector(
+                    new Vector3(0f, 0f, localExtents.z));
+                Vector3 worldExtents = new(
+                    Mathf.Abs(worldX.x) + Mathf.Abs(worldY.x) + Mathf.Abs(worldZ.x),
+                    Mathf.Abs(worldX.y) + Mathf.Abs(worldY.y) + Mathf.Abs(worldZ.y),
+                    Mathf.Abs(worldX.z) + Mathf.Abs(worldY.z) + Mathf.Abs(worldZ.z));
+                bounds = new Bounds(worldCenter, worldExtents * 2f);
+                return true;
+            }
+            return ProductCameraFraming.TryGetProductBounds(target, out bounds);
         }
     }
 }

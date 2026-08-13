@@ -621,6 +621,108 @@ namespace
             0.0f,
             0.0f);
     }
+
+    void PlayPushDetentPacketPattern(
+        float primaryIntensity,
+        float primarySharpness,
+        float bodyIntensity,
+        float bodySharpness,
+        float bodyDuration,
+        float tailIntensity,
+        float tailSharpness,
+        float tailDelay)
+    {
+        if (@available(iOS 13.0, *))
+        {
+            if (!EnsureEngine())
+            {
+                PlayFallbackImpact(primaryIntensity);
+                return;
+            }
+
+            NSTimeInterval resolvedBodyDuration =
+                MAX(0.010, MIN(0.080, bodyDuration));
+            NSTimeInterval resolvedTailDelay =
+                MAX(0.010, MIN(0.080, tailDelay));
+            NSMutableArray<CHHapticEvent *> *events = [NSMutableArray array];
+
+            NSArray<CHHapticEventParameter *> *primaryParameters =
+                EventParameters(
+                    0.0f,
+                    0.012f,
+                    0.008f,
+                    false,
+                    ClampUnit(primaryIntensity),
+                    ClampUnit(primarySharpness));
+            AddEvents(
+                events,
+                0,
+                0.0,
+                0.010,
+                primaryParameters);
+
+            NSArray<CHHapticEventParameter *> *bodyParameters =
+                EventParameters(
+                    0.002f,
+                    (float)(resolvedBodyDuration * 0.58),
+                    0.010f,
+                    false,
+                    ClampUnit(bodyIntensity),
+                    ClampUnit(bodySharpness));
+            AddEvents(
+                events,
+                1,
+                0.0,
+                resolvedBodyDuration,
+                bodyParameters);
+
+            NSArray<CHHapticEventParameter *> *tailParameters =
+                EventParameters(
+                    0.0f,
+                    0.010f,
+                    0.008f,
+                    false,
+                    ClampUnit(tailIntensity),
+                    ClampUnit(tailSharpness));
+            AddEvents(
+                events,
+                0,
+                resolvedTailDelay,
+                0.010,
+                tailParameters);
+
+            NSError *patternError = nil;
+            CHHapticPattern *pattern = [[CHHapticPattern alloc]
+                initWithEvents:events
+                parameters:@[]
+                error:&patternError];
+            if (pattern == nil || patternError != nil)
+            {
+                PlayFallbackImpact(primaryIntensity);
+                return;
+            }
+
+            NSError *playerError = nil;
+            id<CHHapticPatternPlayer> player =
+                [gHapticEngine createPlayerWithPattern:pattern error:&playerError];
+            if (player == nil || playerError != nil)
+            {
+                PlayFallbackImpact(primaryIntensity);
+                return;
+            }
+
+            NSError *playError = nil;
+            [player startAtTime:CHHapticTimeImmediate error:&playError];
+            if (playError != nil)
+            {
+                PlayFallbackImpact(primaryIntensity);
+            }
+            return;
+        }
+
+        PlayFallbackImpact(primaryIntensity);
+    }
+
     void PlaySystemPreset(int preset, float intensity)
     {
         if (preset == 0)
@@ -835,5 +937,28 @@ extern "C" void CodexIosHapticsPlayMagneticCrossingTremor(
             ClampUnit(secondaryIntensity),
             ClampUnit(secondarySharpness),
             MAX(0.010f, MIN(0.080f, pulseInterval)));
+    });
+}
+
+extern "C" void CodexIosHapticsPlayPushDetentPacket(
+    float primaryIntensity,
+    float primarySharpness,
+    float bodyIntensity,
+    float bodySharpness,
+    float bodyDuration,
+    float tailIntensity,
+    float tailSharpness,
+    float tailDelay)
+{
+    PerformOnMainQueue(^{
+        PlayPushDetentPacketPattern(
+            ClampUnit(primaryIntensity),
+            ClampUnit(primarySharpness),
+            ClampUnit(bodyIntensity),
+            ClampUnit(bodySharpness),
+            MAX(0.010f, MIN(0.080f, bodyDuration)),
+            ClampUnit(tailIntensity),
+            ClampUnit(tailSharpness),
+            MAX(0.010f, MIN(0.080f, tailDelay)));
     });
 }

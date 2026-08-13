@@ -1,0 +1,430 @@
+{
+  "version": 2,
+  "visualLanguage": "b8.10-vertical-point-hex-safe-area",
+  "canvas": {
+    "width": 1024,
+    "height": 1024,
+    "colorSpace": "sRGB",
+    "transparent": true
+  },
+  "frameShapes": [
+    "verticalPointRoundedHexagon"
+  ],
+  "iconLayout": {
+    "slot": "square",
+    "fit": "longest-side-aspect-fit",
+    "visibleFraction": 0.74,
+    "alphaThreshold": 16,
+    "preserveAspectRatio": true,
+    "circlePrimitive": "equal-diameter"
+  },
+  "runtimeTypography": {
+    "maximumLines": 2,
+    "lines": [
+      "displayToken",
+      "shortName"
+    ]
+  },
+  "assets": [
+    {
+      "id": "toy_power_ignition",
+      "assetName": "badge-b8-toy-power-ignition",
+      "category": "power",
+      "grade": "ignition",
+      "displayToken": "1.0",
+      "shortName": "POWER",
+      "svg": "badge-b8-toy-power-ignition.svg",
+      "png": "badge-b8-toy-power-ignition.png"
+    },
+    {
+      "id": "toy_power_overdrive",
+      "assetName": "badge-b8-toy-power-overdrive",
+      "category": "power",
+      "grade": "overdrive",
+      "displayToken": "2.0",
+      "shortName": "POWER",
+      "svg": "badge-b8-toy-power-overdrive.svg",
+      "png": "badge-b8-toy-power-overdrive.png"
+    },
+    {
+      "id": "toy_power_apex",
+      "assetName": "badge-b8-toy-power-apex",
+      "category": "power",
+      "grade": "apex",
+      "displayToken": "3.5",
+      "shortName": "REDLINE",
+      "svg": "badge-b8-toy-power-apex.svg",
+      "png": "badge-b8-toy-power-apex.png"
+    },
+    {
+      "id": "toy_power_singularity",
+      "assetName": "badge-b8-toy-power-singularity",
+      "category": "power",
+      "grade": "singularity",
+      "displayToken": "4.5",
+      "shortName": "REDLINE",
+      "svg": "badge-b8-toy-power-singularity.svg",
+      "png": "badge-b8-toy-power-singularity.png"
+    },
+    {
+      "id": "toy_pulse_100",
+      "assetName": "badge-b8-toy-pulse-100",
+      "category": "pulse",
+      "grade": "ignition",
+      "displayToken": "100",
+      "shortName": "PULSE",
+      "svg": "badge-b8-toy-pulse-100.svg",
+      "png": "badge-b8-toy-pulse-100.png"
+    },
+    {
+      "id": "toy_pulse_1k",
+      "assetName": "badge-b8-toy-pulse-1k",
+      "category": "pulse",
+      "grade": "overdrive",
+      "displayToken": "1K",
+      "shortName": "PULSE",
+      "svg": "badge-b8-toy-pulse-1k.svg",
+      "png": "badge-b8-toy-pulse-1k.png"
+    },
+    {
+      "id": "toy_pulse_10k",
+      "assetName": "badge-b8-toy-pulse-10k",
+      "category": "pulse",
+      "grade": "apex",
+      "displayToken": "10K",
+      "shortName": "PULSE",
+      "svg": "badge-b8-toy-pulse-10k.svg",
+      "png": "badge-b8-toy-pulse-10k.png"
+    },
+    {
+      "id": "toy_pulse_100k",
+      "assetName": "badge-b8-toy-pulse-100k",
+      "category": "pulse",
+      "grade": "singularity",
+      "displayToken": "100K",
+      "shortName": "PULSE",
+      "svg": "badge-b8-toy-pulse-100k.svg",
+      "png": "badge-b8-toy-pulse-100k.png"
+    },
+    {
+      "id": "toy_technique_clean",
+      "assetName": "badge-b8-toy-technique-clean",
+      "category": "technique",
+      "grade": "ignition",
+      "displayToken": "CLEAN",
+      "shortName": "CONTROL",
+      "svg": "badge-b8-toy-technique-clean.svg",
+      "png": "badge-b8-toy-technique-clean.png"
+    },
+    {
+      "id": "toy_technique_power",
+      "assetName": "badge-b8-toy-technique-power",
+      "category": "technique",
+      "grade": "overdrive",
+      "displayToken": "POWER",
+      "shortName": "CONTROL",
+      "svg": "badge-b8-toy-technique-power.svg",
+      "png": "badge-b8-toy-technique-power.png"
+    },
+    {
+      "id": "toy_technique_speed",
+      "assetName": "badge-b8-toy-technique-speed",
+      "category": "technique",
+      "grade": "apex",
+      "displayToken": "SPEED",
+      "shortName": "CONTROL",
+      "svg": "badge-b8-toy-technique-speed.svg",
+      "png": "badge-b8-toy-technique-speed.png"
+    },
+    {
+      "id": "toy_technique_endurance",
+      "assetName": "badge-b8-toy-technique-endurance",
+      "category": "technique",
+      "grade": "apex",
+      "displayToken": "ENDURE",
+      "shortName": "CONTROL",
+      "svg": "badge-b8-toy-technique-endurance.svg",
+      "png": "badge-b8-toy-technique-endurance.png"
+    },
+    {
+      "id": "toy_technique_perfect",
+      "assetName": "badge-b8-toy-technique-perfect",
+      "category": "technique",
+      "grade": "singularity",
+      "displayToken": "PERFECT",
+      "shortName": "CONTROL",
+      "svg": "badge-b8-toy-technique-perfect.svg",
+      "png": "badge-b8-toy-technique-perfect.png"
+    },
+    {
+      "id": "toy_combo_5",
+      "assetName": "badge-b8-toy-combo-5",
+      "category": "combo",
+      "grade": "ignition",
+      "displayToken": "×5",
+      "shortName": "CHAIN",
+      "svg": "badge-b8-toy-combo-5.svg",
+      "png": "badge-b8-toy-combo-5.png"
+    },
+    {
+      "id": "toy_combo_10",
+      "assetName": "badge-b8-toy-combo-10",
+      "category": "combo",
+      "grade": "overdrive",
+      "displayToken": "×10",
+      "shortName": "CHAIN",
+      "svg": "badge-b8-toy-combo-10.svg",
+      "png": "badge-b8-toy-combo-10.png"
+    },
+    {
+      "id": "toy_combo_20",
+      "assetName": "badge-b8-toy-combo-20",
+      "category": "combo",
+      "grade": "apex",
+      "displayToken": "×20",
+      "shortName": "CHAIN",
+      "svg": "badge-b8-toy-combo-20.svg",
+      "png": "badge-b8-toy-combo-20.png"
+    },
+    {
+      "id": "toy_combo_50",
+      "assetName": "badge-b8-toy-combo-50",
+      "category": "combo",
+      "grade": "singularity",
+      "displayToken": "×50",
+      "shortName": "CHAIN",
+      "svg": "badge-b8-toy-combo-50.svg",
+      "png": "badge-b8-toy-combo-50.png"
+    },
+    {
+      "id": "toy_focus_5m",
+      "assetName": "badge-b8-toy-focus-5m",
+      "category": "focus",
+      "grade": "ignition",
+      "displayToken": "5M",
+      "shortName": "FOCUS",
+      "svg": "badge-b8-toy-focus-5m.svg",
+      "png": "badge-b8-toy-focus-5m.png"
+    },
+    {
+      "id": "toy_focus_30m",
+      "assetName": "badge-b8-toy-focus-30m",
+      "category": "focus",
+      "grade": "overdrive",
+      "displayToken": "30M",
+      "shortName": "FOCUS",
+      "svg": "badge-b8-toy-focus-30m.svg",
+      "png": "badge-b8-toy-focus-30m.png"
+    },
+    {
+      "id": "toy_focus_2h",
+      "assetName": "badge-b8-toy-focus-2h",
+      "category": "focus",
+      "grade": "apex",
+      "displayToken": "2H",
+      "shortName": "FOCUS",
+      "svg": "badge-b8-toy-focus-2h.svg",
+      "png": "badge-b8-toy-focus-2h.png"
+    },
+    {
+      "id": "toy_focus_10h",
+      "assetName": "badge-b8-toy-focus-10h",
+      "category": "focus",
+      "grade": "singularity",
+      "displayToken": "10H",
+      "shortName": "FOCUS",
+      "svg": "badge-b8-toy-focus-10h.svg",
+      "png": "badge-b8-toy-focus-10h.png"
+    },
+    {
+      "id": "collector_rhythm_1w",
+      "assetName": "badge-b8-collector-rhythm-1w",
+      "category": "rhythm",
+      "grade": "ignition",
+      "displayToken": "1W",
+      "shortName": "RHYTHM",
+      "svg": "badge-b8-collector-rhythm-1w.svg",
+      "png": "badge-b8-collector-rhythm-1w.png"
+    },
+    {
+      "id": "collector_rhythm_4w",
+      "assetName": "badge-b8-collector-rhythm-4w",
+      "category": "rhythm",
+      "grade": "overdrive",
+      "displayToken": "4W",
+      "shortName": "RHYTHM",
+      "svg": "badge-b8-collector-rhythm-4w.svg",
+      "png": "badge-b8-collector-rhythm-4w.png"
+    },
+    {
+      "id": "collector_rhythm_12w",
+      "assetName": "badge-b8-collector-rhythm-12w",
+      "category": "rhythm",
+      "grade": "apex",
+      "displayToken": "12W",
+      "shortName": "RHYTHM",
+      "svg": "badge-b8-collector-rhythm-12w.svg",
+      "png": "badge-b8-collector-rhythm-12w.png"
+    },
+    {
+      "id": "collector_explore_2",
+      "assetName": "badge-b8-collector-explore-2",
+      "category": "explore",
+      "grade": "ignition",
+      "displayToken": "2",
+      "shortName": "EXPLORE",
+      "svg": "badge-b8-collector-explore-2.svg",
+      "png": "badge-b8-collector-explore-2.png"
+    },
+    {
+      "id": "collector_explore_3",
+      "assetName": "badge-b8-collector-explore-3",
+      "category": "explore",
+      "grade": "overdrive",
+      "displayToken": "3",
+      "shortName": "EXPLORE",
+      "svg": "badge-b8-collector-explore-3.svg",
+      "png": "badge-b8-collector-explore-3.png"
+    },
+    {
+      "id": "collector_explore_5",
+      "assetName": "badge-b8-collector-explore-5",
+      "category": "explore",
+      "grade": "apex",
+      "displayToken": "5",
+      "shortName": "EXPLORE",
+      "svg": "badge-b8-collector-explore-5.svg",
+      "png": "badge-b8-collector-explore-5.png"
+    },
+    {
+      "id": "collector_mastery_1_lv20",
+      "assetName": "badge-b8-collector-mastery-1-lv20",
+      "category": "mastery",
+      "grade": "ignition",
+      "displayToken": "LV 20",
+      "shortName": "MASTERY",
+      "svg": "badge-b8-collector-mastery-1-lv20.svg",
+      "png": "badge-b8-collector-mastery-1-lv20.png"
+    },
+    {
+      "id": "collector_mastery_3_lv20",
+      "assetName": "badge-b8-collector-mastery-3-lv20",
+      "category": "mastery",
+      "grade": "overdrive",
+      "displayToken": "3×20",
+      "shortName": "MASTERY",
+      "svg": "badge-b8-collector-mastery-3-lv20.svg",
+      "png": "badge-b8-collector-mastery-3-lv20.png"
+    },
+    {
+      "id": "collector_mastery_1_lv100",
+      "assetName": "badge-b8-collector-mastery-1-lv100",
+      "category": "mastery",
+      "grade": "apex",
+      "displayToken": "LV 100",
+      "shortName": "MASTERY",
+      "svg": "badge-b8-collector-mastery-1-lv100.svg",
+      "png": "badge-b8-collector-mastery-1-lv100.png"
+    },
+    {
+      "id": "collector_mastery_3_lv100",
+      "assetName": "badge-b8-collector-mastery-3-lv100",
+      "category": "mastery",
+      "grade": "singularity",
+      "displayToken": "3×100",
+      "shortName": "MASTERY",
+      "svg": "badge-b8-collector-mastery-3-lv100.svg",
+      "png": "badge-b8-collector-mastery-3-lv100.png"
+    },
+    {
+      "id": "collector_collection_5",
+      "assetName": "badge-b8-collector-collection-5",
+      "category": "collection",
+      "grade": "ignition",
+      "displayToken": "5",
+      "shortName": "VAULT",
+      "svg": "badge-b8-collector-collection-5.svg",
+      "png": "badge-b8-collector-collection-5.png"
+    },
+    {
+      "id": "collector_collection_10",
+      "assetName": "badge-b8-collector-collection-10",
+      "category": "collection",
+      "grade": "overdrive",
+      "displayToken": "10",
+      "shortName": "VAULT",
+      "svg": "badge-b8-collector-collection-10.svg",
+      "png": "badge-b8-collector-collection-10.png"
+    },
+    {
+      "id": "collector_collection_25",
+      "assetName": "badge-b8-collector-collection-25",
+      "category": "collection",
+      "grade": "singularity",
+      "displayToken": "25",
+      "shortName": "VAULT",
+      "svg": "badge-b8-collector-collection-25.svg",
+      "png": "badge-b8-collector-collection-25.png"
+    },
+    {
+      "id": "challenge_redline",
+      "assetName": "badge-b8-challenge-redline",
+      "category": "challenge",
+      "grade": "apex",
+      "displayToken": "3×",
+      "shortName": "REDLINE",
+      "svg": "badge-b8-challenge-redline.svg",
+      "png": "badge-b8-challenge-redline.png"
+    },
+    {
+      "id": "challenge_chain_reactor",
+      "assetName": "badge-b8-challenge-chain-reactor",
+      "category": "challenge",
+      "grade": "apex",
+      "displayToken": "2×20",
+      "shortName": "CHAIN",
+      "svg": "badge-b8-challenge-chain-reactor.svg",
+      "png": "badge-b8-challenge-chain-reactor.png"
+    },
+    {
+      "id": "challenge_perfect_protocol",
+      "assetName": "badge-b8-challenge-perfect-protocol",
+      "category": "challenge",
+      "grade": "singularity",
+      "displayToken": "3×",
+      "shortName": "PERFECT",
+      "svg": "badge-b8-challenge-perfect-protocol.svg",
+      "png": "badge-b8-challenge-perfect-protocol.png"
+    },
+    {
+      "id": "challenge_three_core_raid",
+      "assetName": "badge-b8-challenge-three-core-raid",
+      "category": "challenge",
+      "grade": "singularity",
+      "displayToken": "3 CORE",
+      "shortName": "RAID",
+      "svg": "badge-b8-challenge-three-core-raid.svg",
+      "png": "badge-b8-challenge-three-core-raid.png"
+    },
+    {
+      "id": "challenge_cycle_total",
+      "assetName": "badge-b8-challenge-cycle-total",
+      "category": "challenge",
+      "grade": "singularity",
+      "displayToken": "4/4",
+      "shortName": "CYCLE",
+      "svg": "badge-b8-challenge-cycle-total.svg",
+      "png": "badge-b8-challenge-cycle-total.png"
+    },
+    {
+      "id": "legacy_founder",
+      "assetName": "badge-b8-legacy-founder",
+      "category": "legacy",
+      "grade": "singularity",
+      "displayToken": "LEGACY",
+      "shortName": "FOUNDER",
+      "svg": "badge-b8-legacy-founder.svg",
+      "png": "badge-b8-legacy-founder.png"
+    }
+  ]
+}

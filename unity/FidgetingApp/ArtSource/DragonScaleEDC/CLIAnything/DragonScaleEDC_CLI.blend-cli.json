@@ -1,0 +1,448 @@
+{
+  "version": "1.0",
+  "name": "Dragon Scale EDC CLI 85mm",
+  "scene": {
+    "unit_system": "metric",
+    "unit_scale": 1.0,
+    "frame_start": 1,
+    "frame_end": 250,
+    "frame_current": 1,
+    "fps": 24
+  },
+  "render": {
+    "engine": "EEVEE",
+    "resolution_x": 1200,
+    "resolution_y": 1200,
+    "resolution_percentage": 100,
+    "samples": 64,
+    "use_denoising": true,
+    "film_transparent": false,
+    "output_format": "PNG",
+    "output_path": "./render/"
+  },
+  "world": {
+    "background_color": [
+      0.05,
+      0.05,
+      0.05
+    ],
+    "use_hdri": false,
+    "hdri_path": null,
+    "hdri_strength": 1.0
+  },
+  "objects": [
+    {
+      "id": 0,
+      "name": "DragonScaleEDC_CLI_Root",
+      "type": "EMPTY",
+      "mesh_type": "empty",
+      "location": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "scale": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "visible": true,
+      "material": null,
+      "modifiers": [],
+      "keyframes": [],
+      "parent": null,
+      "mesh_params": {}
+    },
+    {
+      "id": 1,
+      "name": "Rotor_Root__ExactMeshInBlend",
+      "type": "EMPTY",
+      "mesh_type": "empty",
+      "location": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "scale": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "visible": true,
+      "material": null,
+      "modifiers": [],
+      "keyframes": [],
+      "parent": 0,
+      "mesh_params": {}
+    },
+    {
+      "id": 2,
+      "name": "Fixed_Root",
+      "type": "EMPTY",
+      "mesh_type": "empty",
+      "location": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "scale": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "visible": true,
+      "material": null,
+      "modifiers": [],
+      "keyframes": [],
+      "parent": 0,
+      "mesh_params": {}
+    },
+    {
+      "id": 3,
+      "name": "BearingAssembly_Root",
+      "type": "EMPTY",
+      "mesh_type": "empty",
+      "location": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "scale": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "visible": true,
+      "material": null,
+      "modifiers": [],
+      "keyframes": [],
+      "parent": 0,
+      "mesh_params": {}
+    },
+    {
+      "id": 4,
+      "name": "BearingCage_Root",
+      "type": "EMPTY",
+      "mesh_type": "empty",
+      "location": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "scale": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "visible": true,
+      "material": null,
+      "modifiers": [],
+      "keyframes": [],
+      "parent": 3,
+      "mesh_params": {}
+    },
+    {
+      "id": 5,
+      "name": "TopCap_Root",
+      "type": "EMPTY",
+      "mesh_type": "empty",
+      "location": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "scale": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "visible": true,
+      "material": null,
+      "modifiers": [],
+      "keyframes": [],
+      "parent": 2,
+      "mesh_params": {}
+    },
+    {
+      "id": 6,
+      "name": "TopWasher_Root",
+      "type": "EMPTY",
+      "mesh_type": "empty",
+      "location": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "scale": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "visible": true,
+      "material": null,
+      "modifiers": [],
+      "keyframes": [],
+      "parent": 2,
+      "mesh_params": {}
+    },
+    {
+      "id": 7,
+      "name": "BottomWasher_Root",
+      "type": "EMPTY",
+      "mesh_type": "empty",
+      "location": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "scale": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "visible": true,
+      "material": null,
+      "modifiers": [],
+      "keyframes": [],
+      "parent": 2,
+      "mesh_params": {}
+    },
+    {
+      "id": 8,
+      "name": "BottomCap_Root",
+      "type": "EMPTY",
+      "mesh_type": "empty",
+      "location": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "scale": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "visible": true,
+      "material": null,
+      "modifiers": [],
+      "keyframes": [],
+      "parent": 2,
+      "mesh_params": {}
+    },
+    {
+      "id": 9,
+      "name": "Collision_Root",
+      "type": "EMPTY",
+      "mesh_type": "empty",
+      "location": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "scale": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "visible": true,
+      "material": null,
+      "modifiers": [],
+      "keyframes": [],
+      "parent": 0,
+      "mesh_params": {}
+    }
+  ],
+  "materials": [
+    {
+      "id": 0,
+      "name": "M_CLI_BlastedTitanium",
+      "type": "principled",
+      "color": [
+        0.26,
+        0.285,
+        0.305,
+        1.0
+      ],
+      "metallic": 1.0,
+      "roughness": 0.28,
+      "specular": 0.5,
+      "emission_color": [
+        0.0,
+        0.0,
+        0.0,
+        1.0
+      ],
+      "emission_strength": 0.0,
+      "alpha": 1.0,
+      "use_backface_culling": false
+    },
+    {
+      "id": 1,
+      "name": "M_CLI_RadialBrushed",
+      "type": "principled",
+      "color": [
+        0.105,
+        0.125,
+        0.145,
+        1.0
+      ],
+      "metallic": 1.0,
+      "roughness": 0.19,
+      "specular": 0.5,
+      "emission_color": [
+        0.0,
+        0.0,
+        0.0,
+        1.0
+      ],
+      "emission_strength": 0.0,
+      "alpha": 1.0,
+      "use_backface_culling": false
+    },
+    {
+      "id": 2,
+      "name": "M_CLI_PolishedEdge",
+      "type": "principled",
+      "color": [
+        0.39,
+        0.43,
+        0.465,
+        1.0
+      ],
+      "metallic": 1.0,
+      "roughness": 0.1,
+      "specular": 0.5,
+      "emission_color": [
+        0.0,
+        0.0,
+        0.0,
+        1.0
+      ],
+      "emission_strength": 0.0,
+      "alpha": 1.0,
+      "use_backface_culling": false
+    },
+    {
+      "id": 3,
+      "name": "M_CLI_BlackPOM",
+      "type": "principled",
+      "color": [
+        0.006,
+        0.008,
+        0.011,
+        1.0
+      ],
+      "metallic": 0.0,
+      "roughness": 0.42,
+      "specular": 0.5,
+      "emission_color": [
+        0.0,
+        0.0,
+        0.0,
+        1.0
+      ],
+      "emission_strength": 0.0,
+      "alpha": 1.0,
+      "use_backface_culling": false
+    },
+    {
+      "id": 4,
+      "name": "M_CLI_BearingSteel",
+      "type": "principled",
+      "color": [
+        0.19,
+        0.21,
+        0.235,
+        1.0
+      ],
+      "metallic": 1.0,
+      "roughness": 0.16,
+      "specular": 0.5,
+      "emission_color": [
+        0.0,
+        0.0,
+        0.0,
+        1.0
+      ],
+      "emission_strength": 0.0,
+      "alpha": 1.0,
+      "use_backface_culling": false
+    }
+  ],
+  "cameras": [],
+  "lights": [],
+  "collections": [
+    {
+      "id": 0,
+      "name": "Collection",
+      "objects": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9
+      ],
+      "visible": true
+    }
+  ],
+  "metadata": {
+    "created": "2026-08-10T20:07:08.278375",
+    "modified": "2026-08-10T20:58:58.202349",
+    "software": "blender-cli 1.0"
+  }
+}

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Globalization;
 using CodexUnityLab;
+using FidgetingApp.DisplayCase;
 using FidgetingApp.EDC;
 using FidgetingApp.FanCard;
 using ThreeBladeEDC;
@@ -184,6 +185,81 @@ namespace FidgetingApp.Product
         public bool ClassicDetentHapticsEnabled { get; }
     }
 
+    public enum LibrarySwipeEndDisposition
+    {
+        Ignored = 0,
+        Rebound = 1,
+        Committed = 2
+    }
+
+    public sealed class LibrarySwipeSessionGate
+    {
+        public long ActiveSessionId { get; private set; }
+        public long LastResolvedSessionId { get; private set; }
+        public bool IsCommitted { get; private set; }
+
+        public bool Begin(long sessionId)
+        {
+            if (sessionId <= 0 || sessionId <= LastResolvedSessionId)
+            {
+                return false;
+            }
+            if (sessionId == ActiveSessionId)
+            {
+                return true;
+            }
+
+            LastResolvedSessionId = System.Math.Max(
+                LastResolvedSessionId,
+                ActiveSessionId);
+            ActiveSessionId = sessionId;
+            IsCommitted = false;
+            return true;
+        }
+
+        public bool Accepts(long sessionId)
+        {
+            return sessionId > 0 && sessionId == ActiveSessionId;
+        }
+
+        public bool Commit(long sessionId)
+        {
+            if (!Accepts(sessionId))
+            {
+                return false;
+            }
+            IsCommitted = true;
+            return true;
+        }
+
+        public LibrarySwipeEndDisposition End(long sessionId)
+        {
+            if (!Accepts(sessionId))
+            {
+                return LibrarySwipeEndDisposition.Ignored;
+            }
+
+            LibrarySwipeEndDisposition disposition = IsCommitted
+                ? LibrarySwipeEndDisposition.Committed
+                : LibrarySwipeEndDisposition.Rebound;
+            LastResolvedSessionId = System.Math.Max(
+                LastResolvedSessionId,
+                ActiveSessionId);
+            ActiveSessionId = 0;
+            IsCommitted = false;
+            return disposition;
+        }
+
+        public void Reset()
+        {
+            LastResolvedSessionId = System.Math.Max(
+                LastResolvedSessionId,
+                ActiveSessionId);
+            ActiveSessionId = 0;
+            IsCommitted = false;
+        }
+    }
+
     /// <summary>
     /// Stable native bridge and model catalog for the single Fidget Spinner app.
     /// Model scenes can change without changing the iOS product identity or UI shell.
@@ -237,6 +313,16 @@ namespace FidgetingApp.Product
         private SharedPresentationGestureController edcPresentationGestures;
         private FanCardController fanCard;
         private SpinnerEnvironmentPresenter environmentPresenter;
+        private string environmentThemeId = SpinnerEnvironmentThemeCatalog.CanyonId;
+        private PremiumDisplayCase activeDisplayCase;
+        private PremiumDisplayCaseInteractionController activeDisplayCaseInteraction;
+        private GameObject activeDisplayCasePrize;
+        private Transform displayCaseHiddenProduct;
+        private bool displayCaseHiddenProductWasActive;
+        private Camera displayCaseCamera;
+        private Vector3 displayCaseCameraPosition;
+        private Quaternion displayCaseCameraRotation;
+        private float displayCaseCameraFieldOfView;
 
         private bool hapticsEnabled = true;
         private float hapticIntensity = 0.62f;
@@ -271,8 +357,11 @@ namespace FidgetingApp.Product
         private float flipOvershoot = 0.1f;
         private bool flipOnRelease;
         private bool libraryPreviewActive;
+        private readonly LibrarySwipeSessionGate librarySwipeSessions =
+            new LibrarySwipeSessionGate();
         private Coroutine modelSceneLoad;
         private string queuedModelId = string.Empty;
+        private float pendingLibraryPageEntranceDirection;
         private bool speedTexturePreviewActive;
         private float nextHapticTelemetryTime;
         private float nextProgressionPublishTime;
@@ -296,6 +385,7 @@ namespace FidgetingApp.Product
             new ProductAppearanceActivationSequence();
         private bool appearanceEditorPresented;
         private SpinnerExperienceVisuals experienceVisuals;
+        private BadgeRewardLedger badgeRewards;
         private SpinnerProgressionRuntime progression;
         private CollectorProgressionRuntime collectorProgression;
         private SpinnerComboRuntime combo;
@@ -340,15 +430,25 @@ namespace FidgetingApp.Product
             selectedThreeBladeMetalSkinId = PlayerPrefs.GetString(
                 ThreeBladeMetalSkinSelectionKey,
                 ThreeBladeMetalSkinCatalog.AutomaticSelectionId);
+            environmentThemeId = SpinnerEnvironmentThemeCatalog.NormalizeId(
+                PlayerPrefs.GetString(
+                    SpinnerEnvironmentThemeCatalog.PreferenceKey,
+                    SpinnerEnvironmentThemeCatalog.CanyonId));
             SceneManager.sceneLoaded += HandleSceneLoaded;
             ProductCatalogMigration.Apply();
-            progression = new SpinnerProgressionRuntime(PointedModelId);
-            collectorProgression = new CollectorProgressionRuntime(PointedModelId);
+            badgeRewards = new BadgeRewardLedger();
+            progression = new SpinnerProgressionRuntime(PointedModelId, badgeRewards);
+            collectorProgression = new CollectorProgressionRuntime(
+                PointedModelId,
+                CollectorProgressionRuntime.DefaultPrefix,
+                badgeRewards);
             combo = new SpinnerComboRuntime();
             spinReward = new SpinnerSpinRewardRuntime();
             experienceVisuals = gameObject.AddComponent<SpinnerExperienceVisuals>();
             pendingOfflineReward = progression.Resume(System.DateTime.UtcNow);
             BackfillCollectorProgressionIfNeeded();
+            progression.ConsumePendingBadgeUnlockCount();
+            collectorProgression.ConsumePendingBadgeUnlockCount();
             ConfigureFramePacing();
             ApplyHapticSettings();
             FidgetHapticRouter.ConfigureSpeedTexture(hapticSpeedTextureProfile);
@@ -437,6 +537,8 @@ namespace FidgetingApp.Product
                 return;
             }
 
+            DismissDisplayCaseExperience();
+
             SceneManager.sceneLoaded -= HandleSceneLoaded;
             if (blueSpinner != null)
             {
@@ -474,6 +576,16 @@ namespace FidgetingApp.Product
         private void HandleSceneLoaded(Scene scene, LoadSceneMode mode)
         {
             ConfigureProductScene(scene.path);
+            if (libraryPreviewActive
+                && !Mathf.Approximately(
+                    pendingLibraryPageEntranceDirection,
+                    0f))
+            {
+                environmentPresenter?.ParallaxController?
+                    .BeginLibraryPageEntrance(
+                        pendingLibraryPageEntranceDirection);
+                pendingLibraryPageEntranceDirection = 0f;
+            }
         }
 
         private void ConfigureProductScene(string scenePath)
@@ -612,7 +724,7 @@ namespace FidgetingApp.Product
             environmentPresenter = SpinnerEnvironmentPresenter.Install(scenePath);
             ApplyLibraryPreviewPose();
             ResetProgressionRotationBaseline();
-            ResetMotionTelemetry(!libraryPreviewActive && HasRotarySpeedTelemetry());
+            ResetMotionTelemetry(!libraryPreviewActive && HasMotionTelemetry());
             ResetComboHaloProjection(!libraryPreviewActive);
             PublishProgressionState();
         }
@@ -645,6 +757,9 @@ namespace FidgetingApp.Product
                     profile.EdgeProbePulseDurationSeconds,
                     profile.DetentHapticIntensity,
                     profile.DetentHapticSharpness,
+                    profile.DetentHapticBodyIntensity,
+                    profile.DetentHapticBodySharpness,
+                    profile.DetentHapticBodyDurationSeconds,
                     profile.DetentHapticSecondaryIntensity,
                     profile.DetentHapticSecondarySharpness,
                     profile.DetentHapticPulseIntervalSeconds));
@@ -654,10 +769,26 @@ namespace FidgetingApp.Product
             FidgetSemanticEvent semanticEvent,
             float normalizedSignal)
         {
-            if (!libraryPreviewActive)
+            if (libraryPreviewActive || fanCard == null || fanCard.Profile == null)
             {
-                FidgetHapticRouter.Emit(semanticEvent, normalizedSignal);
+                return;
             }
+
+            FanCardDetentProfile profile = fanCard.Profile;
+            FidgetHapticRouter.EmitFanCard(
+                semanticEvent,
+                normalizedSignal,
+                new FanCardHapticTuning(
+                    profile.DetentHapticMinimumIntensity,
+                    profile.DetentHapticMaximumIntensity,
+                    profile.DetentHapticMinimumSharpness,
+                    profile.DetentHapticMaximumSharpness,
+                    profile.DetentHapticBodyIntensity,
+                    profile.DetentHapticBodySharpness,
+                    profile.DetentHapticBodyDurationSeconds,
+                    profile.DetentHapticTailIntensity,
+                    profile.DetentHapticTailSharpness,
+                    profile.DetentHapticTailDelaySeconds));
         }
 
         private void HandleSpinGestureCompleted(float normalizedForce)
@@ -668,10 +799,12 @@ namespace FidgetingApp.Product
             }
 
             float angularSpeed = CurrentAngularSpeedRadians();
+            int previousLevel = progression.Snapshot.Level;
             combo.RecordGesture(
                 Time.unscaledTime,
                 angularSpeed,
                 normalizedForce);
+            progression.RecordCombo(combo.Snapshot.Count);
             SpinnerSpinRewardNativeBridge.Clear();
             SpinnerComboNativeBridge.Publish(combo.Snapshot, angularSpeed);
             lastComboHudPublishTime = Time.unscaledTime;
@@ -679,7 +812,6 @@ namespace FidgetingApp.Product
                 normalizedForce,
                 angularSpeed);
 
-            int previousLevel = progression.Snapshot.Level;
             double collectorBonus = collectorProgression?.ActiveBonusForModel(
                 progression.ActiveModelId) ?? 0d;
             progression.RecordGesture(
@@ -691,6 +823,7 @@ namespace FidgetingApp.Product
                 collectorBonus);
             collectorProgression?.RecordGesture(progression.ActiveModelId);
             HandleProgressionChanged(previousLevel);
+            PlayPendingBadgeUnlockHaptic();
         }
 
         private void UpdateProgression()
@@ -738,20 +871,31 @@ namespace FidgetingApp.Product
                 return;
             }
 
-            if (!libraryPreviewActive
+            int activityPreviousLevel = progression.Snapshot.Level;
+            bool progressionActivityChanged = !libraryPreviewActive
                 && progression.RecordActivity(
                     angularSpeed,
                     fingerActivelyTouching ? Time.unscaledDeltaTime : 0f,
-                    fingerActivelyTouching || progression.HasSpinCredit))
+                    fingerActivelyTouching || progression.HasSpinCredit);
+            if (progressionActivityChanged)
+            {
+                progressionUiDirty = true;
+                if (progression.Snapshot.Level > activityPreviousLevel)
+                {
+                    HandleProgressionChanged(activityPreviousLevel);
+                }
+            }
+            bool collectorActivityChanged = !libraryPreviewActive
+                && fingerActivelyTouching
+                && collectorProgression != null
+                && collectorProgression.RecordActivity(Time.unscaledDeltaTime);
+            if (collectorActivityChanged)
             {
                 progressionUiDirty = true;
             }
-            if (!libraryPreviewActive
-                && fingerActivelyTouching
-                && collectorProgression != null
-                && collectorProgression.RecordActivity(Time.unscaledDeltaTime))
+            if (progressionActivityChanged || collectorActivityChanged)
             {
-                progressionUiDirty = true;
+                PlayPendingBadgeUnlockHaptic();
             }
 
             if (combo.Tick(Time.unscaledTime))
@@ -790,6 +934,7 @@ namespace FidgetingApp.Product
                             absoluteDelta,
                             angularSpeed))
                     {
+                        progression.RecordCombo(combo.Snapshot.Count);
                         SpinnerComboNativeBridge.Publish(
                             combo.Snapshot,
                             angularSpeed);
@@ -805,6 +950,7 @@ namespace FidgetingApp.Product
                     if (gained > 0d)
                     {
                         HandleProgressionChanged(previousLevel);
+                        PlayPendingBadgeUnlockHaptic();
                         spinReward.RecordRotation(absoluteDelta, angularSpeed);
                     }
                 }
@@ -824,6 +970,16 @@ namespace FidgetingApp.Product
                     out SpinnerSpinRewardSnapshot reward))
             {
                 ResetComboForReward();
+                int techniquePreviousLevel = progression.Snapshot.Level;
+                if (progression.RecordTechnique(reward.Kind))
+                {
+                    progressionUiDirty = true;
+                    if (progression.Snapshot.Level > techniquePreviousLevel)
+                    {
+                        HandleProgressionChanged(techniquePreviousLevel);
+                    }
+                    PlayPendingBadgeUnlockHaptic();
+                }
                 SpinnerSpinRewardNativeBridge.Publish(reward);
                 experienceVisuals?.ShowReward(reward, Time.unscaledTime);
             }
@@ -875,6 +1031,7 @@ namespace FidgetingApp.Product
             }
 
             progression.SetActiveModel(modelId);
+            progression.ConsumePendingBadgeUnlockCount();
             selectedProductStickerId = PlayerPrefs.GetString(
                 ProductStickerSelectionKeyPrefix + modelId,
                 ProductStickerCatalog.NoneId);
@@ -883,6 +1040,18 @@ namespace FidgetingApp.Product
             ResetCombo();
             ResetProgressionRotationBaseline();
             progressionUiDirty = true;
+        }
+
+        private void PlayPendingBadgeUnlockHaptic()
+        {
+            int count = progression?.ConsumePendingBadgeUnlockCount() ?? 0;
+            count += collectorProgression?.ConsumePendingBadgeUnlockCount() ?? 0;
+            if (count > 0)
+            {
+                FidgetHapticRouter.Emit(
+                    FidgetSemanticEvent.BadgeUnlocked,
+                    Mathf.Clamp01(count / 3f));
+            }
         }
 
         private void ResetProgressionRotationBaseline()
@@ -940,6 +1109,7 @@ namespace FidgetingApp.Product
                 : SpinnerOfflineReward.None(snapshot.ModelId);
             SpinnerProgressionNativeBridge.Publish(
                 snapshot,
+                progression.BadgeCatalogPayloadFor(snapshot.ModelId),
                 reward,
                 pendingLivePreviousLevel,
                 pendingLiveRewardName,
@@ -953,6 +1123,11 @@ namespace FidgetingApp.Product
                 CollectorProgressionNativeBridge.Publish(
                     collectorProgression.Snapshot,
                     collectorProgression.ConsumePendingPreviousRank());
+                if (GachaInventory.SyncRhythmTickets(
+                    collectorProgression.Snapshot.CompletedRhythmWeeks) > 0)
+                {
+                    PublishGachaState();
+                }
             }
             pendingOfflineReward = SpinnerOfflineReward.None(snapshot.ModelId);
             pendingLivePreviousLevel = 0;
@@ -1116,6 +1291,40 @@ namespace FidgetingApp.Product
                         : null;
         }
 
+        private Transform DisplayCaseProductRoot(string modelId)
+        {
+            PremiumDisplayCaseProductProfile profile =
+                PremiumDisplayCaseProductProfiles.Resolve(modelId);
+            foreach (GameObject root in SceneManager.GetActiveScene()
+                         .GetRootGameObjects())
+            {
+                if (string.Equals(
+                        root.name,
+                        profile.SceneRootName,
+                        System.StringComparison.Ordinal))
+                {
+                    return root.transform;
+                }
+            }
+
+            Debug.LogWarning(
+                $"[FidgetingApp] Display-case root {profile.SceneRootName} "
+                + $"was not found for {modelId}; falling back to the active controller.");
+            Transform product = ActiveProductTransform();
+            if (metalSpinner == null || product == null || product.parent == null)
+            {
+                return product;
+            }
+
+            // RotorRigidbodyController lives on RotorDynamic, while the fixed
+            // hub, caps and bearing visuals are siblings on the shipping root.
+            // The display case must snapshot and hide the complete current toy.
+            Transform candidate = product.parent;
+            return candidate.Find("HubStatic") != null
+                ? candidate
+                : product;
+        }
+
         private void ConfigureProductSticker()
         {
             productStickerPresenter = null;
@@ -1185,6 +1394,7 @@ namespace FidgetingApp.Product
 
         public void SelectModelFromNativeUi(string modelId)
         {
+            DismissDisplayCaseExperience();
             if (!ProductCatalog.TryGetScenePath(modelId, out string scenePath))
             {
                 Debug.LogWarning($"[FidgetingApp] Unknown or non-shipping model id: {modelId}");
@@ -1218,10 +1428,32 @@ namespace FidgetingApp.Product
                 return;
             }
 
-            LoadResolvedModelScene(modelId, buildIndex);
+            string activeModelId = ModelIdForScene(activeScene.path);
+            LoadResolvedModelScene(
+                modelId,
+                buildIndex,
+                ResolveLibraryPageDirection(activeModelId, modelId));
         }
 
-        private void LoadResolvedModelScene(string modelId, int buildIndex)
+        public static float ResolveLibraryPageDirection(
+            string currentModelId,
+            string nextModelId)
+        {
+            int currentIndex = System.Array.IndexOf(
+                ProductModelIds,
+                currentModelId);
+            int nextIndex = System.Array.IndexOf(ProductModelIds, nextModelId);
+            if (currentIndex < 0 || nextIndex < 0 || currentIndex == nextIndex)
+            {
+                return 0f;
+            }
+            return Mathf.Sign(nextIndex - currentIndex);
+        }
+
+        private void LoadResolvedModelScene(
+            string modelId,
+            int buildIndex,
+            float pageDirection)
         {
             if (modelSceneLoad != null)
             {
@@ -1230,10 +1462,16 @@ namespace FidgetingApp.Product
             }
 
             modelSceneLoad = StartCoroutine(
-                LoadResolvedModelSceneAsync(modelId, buildIndex));
+                LoadResolvedModelSceneAsync(
+                    modelId,
+                    buildIndex,
+                    pageDirection));
         }
 
-        private IEnumerator LoadResolvedModelSceneAsync(string modelId, int buildIndex)
+        private IEnumerator LoadResolvedModelSceneAsync(
+            string modelId,
+            int buildIndex,
+            float pageDirection)
         {
             StopAssistantDrive(true);
             ActivateProgressionModel(modelId);
@@ -1249,6 +1487,30 @@ namespace FidgetingApp.Product
                 yield break;
             }
 
+            bool animatePage = libraryPreviewActive
+                && !Mathf.Approximately(pageDirection, 0f)
+                && !IosDeviceMotion.IsReduceMotionEnabled();
+            load.allowSceneActivation = false;
+            float transitionStartedAt = Time.unscaledTime;
+            if (animatePage)
+            {
+                environmentPresenter?.ParallaxController?
+                    .BeginLibraryPageExit(-pageDirection);
+            }
+
+            while (load.progress < 0.9f
+                || (animatePage
+                    && Time.unscaledTime - transitionStartedAt
+                        < SpinnerSceneParallaxController
+                            .LibraryPageExitLeadSeconds))
+            {
+                yield return null;
+            }
+
+            pendingLibraryPageEntranceDirection = animatePage
+                ? pageDirection
+                : 0f;
+            load.allowSceneActivation = true;
             while (!load.isDone)
             {
                 yield return null;
@@ -1274,10 +1536,358 @@ namespace FidgetingApp.Product
                 progression?.EndSpinCredit();
                 ResetCombo();
             }
-            ResetMotionTelemetry(!libraryPreviewActive && HasRotarySpeedTelemetry());
+            else
+            {
+                librarySwipeSessions.Reset();
+            }
+            ResetMotionTelemetry(!libraryPreviewActive && HasMotionTelemetry());
             ResetProgressionRotationBaseline();
             ApplyLibraryPreviewPose();
             ResetComboHaloProjection(!libraryPreviewActive);
+        }
+
+        public void BeginLibrarySwipeFromNativeUi(string value)
+        {
+            if (libraryPreviewActive
+                && long.TryParse(
+                    value,
+                    NumberStyles.Integer,
+                    CultureInfo.InvariantCulture,
+                    out long sessionId))
+            {
+                librarySwipeSessions.Begin(sessionId);
+            }
+        }
+
+        public void SetLibrarySwipeProgressFromNativeUi(string value)
+        {
+            string[] fields = (value ?? string.Empty).Split('|');
+            if (!libraryPreviewActive
+                || fields.Length != 2
+                || !long.TryParse(
+                    fields[0],
+                    NumberStyles.Integer,
+                    CultureInfo.InvariantCulture,
+                    out long sessionId)
+                || !librarySwipeSessions.Accepts(sessionId)
+                || !float.TryParse(
+                    fields[1],
+                    NumberStyles.Float,
+                    CultureInfo.InvariantCulture,
+                    out float progress))
+            {
+                return;
+            }
+
+            environmentPresenter?.ParallaxController?
+                .SetLibraryPageDragProgress(progress);
+        }
+
+        public void CommitLibrarySwipeFromNativeUi(string value)
+        {
+            if (long.TryParse(
+                value,
+                NumberStyles.Integer,
+                CultureInfo.InvariantCulture,
+                out long sessionId))
+            {
+                librarySwipeSessions.Commit(sessionId);
+            }
+        }
+
+        public void EndLibrarySwipeFromNativeUi(string value)
+        {
+            if (!long.TryParse(
+                value,
+                NumberStyles.Integer,
+                CultureInfo.InvariantCulture,
+                out long sessionId))
+            {
+                return;
+            }
+
+            // A committed page change owns its exit/entrance animation. A
+            // cancelled or boundary session rebounds, and a late End from an
+            // older session is ignored instead of disturbing the new drag.
+            if (librarySwipeSessions.End(sessionId)
+                    == LibrarySwipeEndDisposition.Rebound
+                && libraryPreviewActive
+                && modelSceneLoad == null)
+            {
+                environmentPresenter?.ParallaxController?
+                    .EndLibraryPageDrag();
+            }
+        }
+
+        public void SetDisplayCasePresentedFromNativeUi(string value)
+        {
+            bool presented = value == "1"
+                || value.Equals("true", System.StringComparison.OrdinalIgnoreCase);
+            if (presented)
+            {
+                PresentDisplayCaseExperience();
+            }
+            else
+            {
+                DismissDisplayCaseExperience();
+            }
+        }
+
+        public void SetDisplayCaseExplodedProgressFromNativeUi(string value)
+        {
+            if (activeDisplayCaseInteraction != null
+                && float.TryParse(
+                    value,
+                    NumberStyles.Float,
+                    CultureInfo.InvariantCulture,
+                    out float progress))
+            {
+                activeDisplayCaseInteraction.SetExplodedProgress(progress);
+            }
+        }
+
+        public void SetDisplayCaseOrbitFromNativeUi(string value)
+        {
+            if (activeDisplayCaseInteraction == null)
+            {
+                return;
+            }
+            string[] fields = (value ?? string.Empty).Split(',');
+            if (fields.Length != 2
+                || !float.TryParse(fields[0], NumberStyles.Float,
+                    CultureInfo.InvariantCulture, out float yaw)
+                || !float.TryParse(fields[1], NumberStyles.Float,
+                    CultureInfo.InvariantCulture, out float pitch))
+            {
+                return;
+            }
+            activeDisplayCaseInteraction.SetOrbitDegrees(yaw, pitch);
+        }
+
+        public void SetDisplayCaseZoomFromNativeUi(string value)
+        {
+            if (activeDisplayCaseInteraction != null
+                && float.TryParse(
+                    value,
+                    NumberStyles.Float,
+                    CultureInfo.InvariantCulture,
+                    out float zoom))
+            {
+                activeDisplayCaseInteraction.SetZoom(zoom);
+            }
+        }
+
+        public void SetDisplayCaseLightingFromNativeUi(string value)
+        {
+            PremiumDisplayCaseLightingPreset preset =
+                PremiumDisplayCaseLightingCatalog.Resolve(value);
+            PlayerPrefs.SetString(
+                PremiumDisplayCaseLightingCatalog.PreferenceKey,
+                preset.Id);
+            activeDisplayCase?.SetLightingPreset(preset.Id);
+        }
+
+        public void PlayDisplayCaseAssemblyFromNativeUi(string unused)
+        {
+            if (activeDisplayCase == null || activeDisplayCaseInteraction == null)
+            {
+                return;
+            }
+            activeDisplayCase.play();
+            activeDisplayCaseInteraction.SetExplodedProgress(1f);
+            activeDisplayCaseInteraction.PlayAssembly();
+        }
+
+        public void ExplodeDisplayCaseFromNativeUi(string unused)
+        {
+            activeDisplayCaseInteraction?.PlayExplode();
+        }
+
+        private void PresentDisplayCaseExperience()
+        {
+            if (activeDisplayCase != null)
+            {
+                return;
+            }
+
+            PremiumDisplayCase prefab = Resources.Load<PremiumDisplayCase>(
+                PremiumDisplayCaseFactory.ResourcesPath);
+            if (prefab == null)
+            {
+                Debug.LogError(
+                    "[FidgetingApp] Premium display-case prefab is unavailable.");
+                return;
+            }
+
+            StopAssistantDrive(true);
+            FidgetHapticRouter.StopAllContinuous(true);
+            progression?.EndSpinCredit();
+            ResetCombo();
+
+            string modelId = ModelIdForScene(SceneManager.GetActiveScene().path);
+            displayCaseHiddenProduct = DisplayCaseProductRoot(modelId);
+            if (displayCaseHiddenProduct == null)
+            {
+                Debug.LogError(
+                    $"[FidgetingApp] No active product is available for {modelId}.");
+                return;
+            }
+
+            try
+            {
+                activeDisplayCasePrize = PremiumDisplayCaseProductSnapshot.Capture(
+                    modelId,
+                    displayCaseHiddenProduct);
+            }
+            catch (System.Exception exception)
+            {
+                activeDisplayCasePrize = null;
+                Debug.LogError(
+                    $"[FidgetingApp] Could not snapshot {modelId} for the "
+                    + $"display case: {exception.Message}");
+                displayCaseHiddenProduct = null;
+                return;
+            }
+
+            if (displayCaseHiddenProduct != null)
+            {
+                displayCaseHiddenProductWasActive =
+                    displayCaseHiddenProduct.gameObject.activeSelf;
+                displayCaseHiddenProduct.gameObject.SetActive(false);
+            }
+
+            displayCaseCamera = Camera.main;
+            if (displayCaseCamera != null)
+            {
+                displayCaseCameraPosition = displayCaseCamera.transform.position;
+                displayCaseCameraRotation = displayCaseCamera.transform.rotation;
+                displayCaseCameraFieldOfView = displayCaseCamera.fieldOfView;
+                displayCaseCamera.transform.position =
+                    PremiumDisplayCaseCameraRules.FrontCameraPosition;
+                displayCaseCamera.transform.LookAt(
+                    PremiumDisplayCaseCameraRules.FrontLookAt);
+                displayCaseCamera.fieldOfView =
+                    PremiumDisplayCaseCameraRules.ResolveVerticalFieldOfView(
+                        displayCaseCamera.aspect);
+            }
+
+            activeDisplayCase = Instantiate(prefab, Vector3.zero, Quaternion.identity);
+            activeDisplayCase.name = "PremiumDisplayCaseInteractive";
+            activeDisplayCaseInteraction = activeDisplayCase.GetComponent<
+                PremiumDisplayCaseInteractionController>();
+            activeDisplayCase.SetLightingPreset(PlayerPrefs.GetString(
+                PremiumDisplayCaseLightingCatalog.PreferenceKey,
+                PremiumDisplayCaseLightingCatalog.DefaultId));
+            PremiumDisplayCaseProductProfile productProfile =
+                PremiumDisplayCaseProductProfiles.Resolve(modelId);
+            SpinnerProgressionSnapshot currentProductProgress = progression != null
+                ? progression.SnapshotFor(modelId)
+                : default;
+            int currentProductLevel = progression != null
+                ? currentProductProgress.Level
+                : 1;
+            activeDisplayCase.SetIdentification(
+                productProfile.EnglishDisplayName,
+                currentProductLevel);
+            if (progression != null
+                && BadgeCatalogV2.TryResolveFeaturedToyBadge(
+                    currentProductProgress,
+                    out BadgeDefinition featuredBadge))
+            {
+                activeDisplayCase.SetFeaturedBadge(
+                    featuredBadge.AssetName,
+                    BadgeCatalogV2.ToyDisplayToken(
+                        currentProductProgress,
+                        featuredBadge),
+                    featuredBadge.ShortName,
+                    featuredBadge.Grade.ToString());
+            }
+            else
+            {
+                activeDisplayCase.ClearFeaturedBadge();
+            }
+            activeDisplayCase.setCapsulePreset(productProfile.CapsulePreset);
+            try
+            {
+                activeDisplayCase.setContent(
+                    activeDisplayCasePrize.transform,
+                    productProfile.ContentOptions);
+            }
+            catch (System.Exception exception)
+            {
+                Debug.LogError(
+                    $"[FidgetingApp] Could not attach {modelId} to the display "
+                    + $"case: {exception.Message}");
+                DismissDisplayCaseExperience();
+                return;
+            }
+            activeDisplayCase.play();
+            if (activeDisplayCaseInteraction != null)
+            {
+                activeDisplayCaseInteraction.SetExplodedProgress(1f);
+                activeDisplayCaseInteraction.PlayAssembly();
+            }
+        }
+
+        private void DismissDisplayCaseExperience()
+        {
+            if (activeDisplayCase != null && activeDisplayCasePrize != null)
+            {
+                activeDisplayCase.setContent((Transform)null);
+            }
+            if (activeDisplayCase != null)
+            {
+                Destroy(activeDisplayCase.gameObject);
+            }
+            if (activeDisplayCasePrize != null)
+            {
+                Destroy(activeDisplayCasePrize);
+            }
+            activeDisplayCase = null;
+            activeDisplayCaseInteraction = null;
+            activeDisplayCasePrize = null;
+
+            if (displayCaseHiddenProduct != null)
+            {
+                displayCaseHiddenProduct.gameObject.SetActive(
+                    displayCaseHiddenProductWasActive);
+            }
+            displayCaseHiddenProduct = null;
+
+            if (displayCaseCamera != null)
+            {
+                displayCaseCamera.transform.position = displayCaseCameraPosition;
+                displayCaseCamera.transform.rotation = displayCaseCameraRotation;
+                displayCaseCamera.fieldOfView = displayCaseCameraFieldOfView;
+            }
+            displayCaseCamera = null;
+        }
+
+        public void SetEnvironmentThemeFromNativeUi(string themeId)
+        {
+            string normalizedThemeId = SpinnerEnvironmentThemeCatalog.NormalizeId(themeId);
+            environmentThemeId = normalizedThemeId;
+            PlayerPrefs.SetString(
+                SpinnerEnvironmentThemeCatalog.PreferenceKey,
+                normalizedThemeId);
+            PlayerPrefs.Save();
+
+            if (environmentPresenter == null)
+            {
+                Debug.LogWarning(
+                    "[FidgetingApp] Environment theme was saved before the "
+                    + $"scene presenter was ready: {normalizedThemeId}.");
+                return;
+            }
+
+            if (!environmentPresenter.ApplyTheme(normalizedThemeId))
+            {
+                Debug.LogError(
+                    $"[FidgetingApp] Failed to apply environment theme: {normalizedThemeId}.");
+                return;
+            }
+
+            ApplyLibraryPreviewPose();
         }
 
         public void ResetCurrentSpinnerFromNativeUi(string unused)
@@ -1310,7 +1920,7 @@ namespace FidgetingApp.Product
                 edcCamera?.ResetInteractiveView();
                 edcMotion?.ResetReference();
             }
-            ResetMotionTelemetry(HasRotarySpeedTelemetry());
+            ResetMotionTelemetry(HasMotionTelemetry());
             ResetProgressionRotationBaseline();
             ResetComboHaloProjection(true);
         }
@@ -1340,6 +1950,90 @@ namespace FidgetingApp.Product
             }
         }
 
+        private Gacha.GachaInventoryRuntime gachaInventory;
+
+        private Gacha.GachaInventoryRuntime GachaInventory =>
+            gachaInventory ??= new Gacha.GachaInventoryRuntime();
+
+        private void PublishGachaState(string receiptPayload = "")
+        {
+            Gacha.GachaNativeBridge.Publish(
+                Gacha.GachaCatalog.CatalogPayload(),
+                GachaInventory.SnapshotPayload(),
+                receiptPayload);
+        }
+
+        public void RequestGachaStateFromNativeUi(string unused)
+        {
+            PublishGachaState();
+        }
+
+        /// <summary>Payload: "seriesId|count|ticket" or "seriesId|count|coin".</summary>
+        public void DrawGachaFromNativeUi(string payload)
+        {
+            string[] parts = (payload ?? string.Empty).Split('|');
+            if (parts.Length != 3
+                || !int.TryParse(
+                    parts[1],
+                    System.Globalization.NumberStyles.Integer,
+                    CultureInfo.InvariantCulture,
+                    out int count))
+            {
+                PublishGachaState(Gacha.GachaNativeBridge.ReceiptPayload(
+                    Gacha.GachaDrawReceipt.Failure("malformed-request")));
+                return;
+            }
+
+            Gacha.GachaPaymentMethod method = parts[2] == "coin"
+                ? Gacha.GachaPaymentMethod.Coin
+                : Gacha.GachaPaymentMethod.Ticket;
+            Gacha.GachaDrawReceipt receipt = GachaInventory.Draw(parts[0], count, method);
+            PublishGachaState(Gacha.GachaNativeBridge.ReceiptPayload(receipt));
+        }
+
+        public void RedeemGachaShardsFromNativeUi(string prizeId)
+        {
+            GachaInventory.TryRedeemShards(prizeId, out string failureReason);
+            PublishGachaState(string.IsNullOrEmpty(failureReason)
+                ? "result\tok"
+                : "result\t" + failureReason);
+        }
+
+        /// <summary>
+        /// Payload: "tickets|N" or "coins|N". Coins may only be credited by
+        /// the StoreKit-verified purchase flow; tickets come from rhythm and
+        /// milestone rewards. Never grants XP or physics.
+        /// </summary>
+        public void CreditGachaFundsFromNativeUi(string payload)
+        {
+            string[] parts = (payload ?? string.Empty).Split('|');
+            if (parts.Length != 2
+                || !int.TryParse(
+                    parts[1],
+                    System.Globalization.NumberStyles.Integer,
+                    CultureInfo.InvariantCulture,
+                    out int amount)
+                || amount <= 0)
+            {
+                return;
+            }
+
+            if (parts[0] == "coins")
+            {
+                GachaInventory.CreditCoins(amount);
+            }
+            else if (parts[0] == "tickets")
+            {
+                GachaInventory.CreditTickets(amount);
+            }
+            else
+            {
+                return;
+            }
+
+            PublishGachaState();
+        }
+
         private float CurrentAngularSpeedRadians()
         {
             if (metalSpinner != null)
@@ -1364,10 +2058,17 @@ namespace FidgetingApp.Product
             return metalSpinner != null || blueSpinner != null;
         }
 
+        private bool HasMotionTelemetry()
+        {
+            return HasRotarySpeedTelemetry()
+                || edcSlider != null
+                || fanCard != null;
+        }
+
         private void PublishMotionTelemetryIfDue(float angularSpeedRadians)
         {
             if (libraryPreviewActive
-                || !HasRotarySpeedTelemetry()
+                || !HasMotionTelemetry()
                 || Time.unscaledTime - lastMotionTelemetryPublishTime
                     < SpinnerComboRules.HudUpdateIntervalSeconds)
             {
@@ -1379,10 +2080,34 @@ namespace FidgetingApp.Product
 
         private void PublishMotionTelemetryNow(float angularSpeedRadians)
         {
-            bool available = !libraryPreviewActive && HasRotarySpeedTelemetry();
-            float normalizedSpeed = available
-                ? SpinnerComboRules.NormalizeSpeed(angularSpeedRadians)
-                : 0f;
+            bool available = !libraryPreviewActive && HasMotionTelemetry();
+            ProductMotionTelemetryKind kind = ProductMotionTelemetryKind.Rotary;
+            float normalizedSpeed = 0f;
+            float motionRate = 0f;
+            float normalizedIntensity = combo.Snapshot.NormalizedIntensity;
+            float normalizedFrequency = combo.Snapshot.NormalizedFrequency;
+            if (available && edcSlider != null)
+            {
+                kind = ProductMotionTelemetryKind.LinearPush;
+                normalizedSpeed = edcSlider.GestureSpeedNormalized;
+                motionRate = edcSlider.GestureSpeedMillimetersPerSecond;
+                normalizedIntensity = edcSlider.GestureIntensityNormalized;
+                normalizedFrequency = edcSlider.GestureFrequencyNormalized;
+            }
+            else if (available && fanCard != null)
+            {
+                kind = ProductMotionTelemetryKind.FanCard;
+                normalizedSpeed = fanCard.GestureSpeedNormalized;
+                motionRate = fanCard.GestureAngularSpeedDegreesPerSecond;
+                normalizedIntensity = fanCard.GestureIntensityNormalized;
+                normalizedFrequency = fanCard.GestureFrequencyNormalized;
+            }
+            else if (available)
+            {
+                normalizedSpeed = SpinnerComboRules.NormalizeSpeed(
+                    angularSpeedRadians);
+                motionRate = Mathf.Abs(angularSpeedRadians);
+            }
             speedDashboardBand = available
                 ? SpinnerSpeedDashboardRules.ResolveBand(
                     normalizedSpeed,
@@ -1390,8 +2115,12 @@ namespace FidgetingApp.Product
                 : SpinnerSpeedBand.Calm;
             ProductMotionTelemetryNativeBridge.Publish(
                 available,
-                angularSpeedRadians,
-                speedDashboardBand);
+                kind,
+                normalizedSpeed,
+                motionRate,
+                speedDashboardBand,
+                normalizedIntensity,
+                normalizedFrequency);
             lastMotionTelemetryPublishTime = Time.unscaledTime;
         }
 
@@ -1401,8 +2130,16 @@ namespace FidgetingApp.Product
             lastMotionTelemetryPublishTime = float.NegativeInfinity;
             ProductMotionTelemetryNativeBridge.Publish(
                 available,
+                edcSlider != null
+                    ? ProductMotionTelemetryKind.LinearPush
+                    : fanCard != null
+                        ? ProductMotionTelemetryKind.FanCard
+                        : ProductMotionTelemetryKind.Rotary,
                 0f,
-                SpinnerSpeedBand.Calm);
+                0f,
+                SpinnerSpeedBand.Calm,
+                0f,
+                0f);
         }
 
         private void PublishComboHaloProjectionIfDue()
@@ -2211,6 +2948,10 @@ namespace FidgetingApp.Product
         {
             blueCamera?.SetLibraryPreviewActive(libraryPreviewActive);
             metalCamera?.SetLibraryPreviewActive(libraryPreviewActive);
+            // The fan-card Library pose is a visual-only two-step opening.
+            // Apply it before framing so live bounds are centered on the
+            // visible fan, while the underlying magnetic detent stays intact.
+            fanCard?.SetLibraryPreviewActive(libraryPreviewActive);
             edcCamera?.SetLibraryPreviewActive(libraryPreviewActive);
             environmentPresenter?.SetLibraryPreviewActive(libraryPreviewActive);
         }

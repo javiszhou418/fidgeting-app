@@ -28,6 +28,10 @@ namespace ThreeBladeEDC
         public const float MinimumReleaseTravelPixels = 28f;
         public const float MinimumReleaseDuration = 0.07f;
         public const float MinimumReleasePixelVelocity = 220f;
+        // Circular products occupy 64% of the short side in detail view. A
+        // 36% fallback radius leaves about 4% edge tolerance around the model
+        // while preserving a reliable 14% outer band for camera orbit.
+        public const float DefaultFallbackTouchRadiusFraction = 0.36f;
 
         public readonly struct TouchResponseProfile
         {
@@ -75,6 +79,29 @@ namespace ThreeBladeEDC
                 0.18f,
                 1.65f,
                 Mathf.Pow(Mathf.Clamp01(normalizedResponse), 0.9f));
+        }
+
+        public static float ResolveFallbackTouchRadiusPixels(
+            float screenWidth,
+            float screenHeight,
+            float radiusFraction = DefaultFallbackTouchRadiusFraction)
+        {
+            float shortSide = Mathf.Max(0f, Mathf.Min(screenWidth, screenHeight));
+            return shortSide * Mathf.Clamp(radiusFraction, 0.2f, 0.5f);
+        }
+
+        public static bool IsWithinFallbackSpinTouchRegion(
+            Vector2 screenPosition,
+            Vector2 center,
+            float screenWidth,
+            float screenHeight,
+            float radiusFraction = DefaultFallbackTouchRadiusFraction)
+        {
+            float radius = ResolveFallbackTouchRadiusPixels(
+                screenWidth,
+                screenHeight,
+                radiusFraction);
+            return Vector2.Distance(screenPosition, center) <= radius;
         }
 
         public static float ScaleSwipeVelocity(

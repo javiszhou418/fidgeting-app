@@ -3,6 +3,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using FidgetingApp.EDC;
+using FidgetingApp.Product;
 using UnityEditor;
 using UnityEditor.SceneManagement;
 using UnityEngine;
@@ -22,12 +23,17 @@ namespace FidgetingApp.EDC.EditorTools
 
         private const string ManifestPath =
             "Assets/_EDC/Generated/Meshes/layer-manifest.json";
-        private const string DarkMaterialPath =
+        public const string ResinMaterialPath =
             "Assets/_EDC/Generated/Materials/M_EDC_DarkPolymer.mat";
-        private const string MagnetMaterialPath =
+        public const string MagnetMaterialPath =
             "Assets/_EDC/Generated/Materials/M_EDC_Magnet.mat";
-        private const string ScrewMaterialPath =
+        public const string ScrewMaterialPath =
             "Assets/_EDC/Generated/Materials/M_EDC_Screw.mat";
+        public const float ResinMetallic = 0.03f;
+        public const float ResinSmoothness = 0.52f;
+        public const float ResinRed = 0.020f;
+        public const float ResinGreen = 0.026f;
+        public const float ResinBlue = 0.032f;
         private const string RailMeshPath =
             "Assets/_EDC/Generated/Meshes/M_EDC_SlideRail.asset";
         private const string MagnetMeshPath =
@@ -66,20 +72,20 @@ namespace FidgetingApp.EDC.EditorTools
             }
 
             Material dark = CreateOrUpdateMaterial(
-                DarkMaterialPath,
-                new Color(0.018f, 0.022f, 0.027f, 1f),
-                0.28f,
-                0.38f);
+                ResinMaterialPath,
+                new Color(ResinRed, ResinGreen, ResinBlue, 1f),
+                ResinMetallic,
+                ResinSmoothness);
             Material magnet = CreateOrUpdateMaterial(
                 MagnetMaterialPath,
-                new Color(0.12f, 0.14f, 0.16f, 1f),
+                new Color(0.56f, 0.60f, 0.63f, 1f),
                 0.95f,
-                0.72f);
+                0.78f);
             Material screw = CreateOrUpdateMaterial(
                 ScrewMaterialPath,
-                new Color(0.58f, 0.61f, 0.65f, 1f),
+                new Color(0.48f, 0.52f, 0.56f, 1f),
                 1f,
-                0.80f);
+                0.76f);
 
             Mesh railMesh = CreateOrUpdateBoxMesh(
                 RailMeshPath,
@@ -112,7 +118,7 @@ namespace FidgetingApp.EDC.EditorTools
             LayerEntry l6 = RequireLayer(manifest, "L6_InnerFrame");
             LayerEntry l7 = RequireLayer(manifest, "L7_BottomShell");
             CreateImportedLayer(l1, sliderGroup.transform, textured);
-            CreateImportedLayer(l2, sliderGroup.transform, textured);
+            CreateImportedLayer(l2, sliderGroup.transform, dark);
             CreateImportedLayer(l3, baseGroup.transform, dark);
 
             GameObject railsGroup = CreateGroup("L4_SlideRails", baseGroup.transform);
@@ -145,8 +151,8 @@ namespace FidgetingApp.EDC.EditorTools
                         0f));
             }
 
-            CreateImportedLayer(l6, baseGroup.transform, textured);
-            CreateImportedLayer(l7, baseGroup.transform, textured);
+            CreateImportedLayer(l6, baseGroup.transform, dark);
+            CreateImportedLayer(l7, baseGroup.transform, dark);
 
             Vector3[] screwPositions =
             {
@@ -324,6 +330,169 @@ namespace FidgetingApp.EDC.EditorTools
             Debug.Log(
                 $"[EDCVerification] folder={outputFolder} hierarchy={hierarchyPath}\n"
                 + hierarchy);
+        }
+
+        [MenuItem("Tools/Codex/EDC/Capture Preview Size And Capture-Fix Approval Views")]
+        public static void CapturePreviewSizeAndCaptureFixApprovalViews()
+        {
+            CaptureEdcApprovalViews(
+                "../../../Artifacts/EDC/PreviewSizeAndCaptureFix_2026-08-09",
+                "EDCPreviewSizeAndCaptureFixApproval",
+                false);
+        }
+
+        [MenuItem("Tools/Codex/EDC/Capture Polished Fine Metal Approval Views")]
+        public static void CapturePolishedFineMetalApprovalViews()
+        {
+            CaptureEdcApprovalViews(
+                "../../../Artifacts/EDC/PolishedFineMetal_2026-08-09",
+                "EDCPolishedFineMetalApproval",
+                true);
+        }
+
+        [MenuItem("Tools/Codex/EDC/Capture Resin Metal Contrast Approval Views")]
+        public static void CaptureResinMetalContrastApprovalViews()
+        {
+            CaptureEdcApprovalViews(
+                "../../../Artifacts/EDC/ResinMetalContrast_2026-08-09",
+                "EDCResinMetalContrastApproval",
+                true,
+                true);
+        }
+
+        [MenuItem("Tools/Codex/EDC/Capture Broader Soft Highlights Approval Views")]
+        public static void CaptureDiffusedLightingApprovalViews()
+        {
+            CaptureEdcApprovalViews(
+                "../../../Artifacts/EDC/BroaderSofterHighlights_2026-08-09",
+                "EDCBroaderSofterHighlightsApproval",
+                true,
+                true);
+        }
+
+        private static void CaptureEdcApprovalViews(
+            string relativeOutputFolder,
+            string logLabel,
+            bool installRuntimeEnvironment,
+            bool includeOpenInterior = false)
+        {
+            Scene scene = EditorSceneManager.OpenScene(ScenePath, OpenSceneMode.Single);
+            GameObject root = scene.GetRootGameObjects()
+                .Single(candidate => candidate.name == "EDC_Root");
+            Camera camera = scene.GetRootGameObjects()
+                .SelectMany(candidate => candidate.GetComponentsInChildren<Camera>(true))
+                .Single(candidate => candidate.name == "MainCamera");
+            EdcSliderController controller = root.GetComponent<EdcSliderController>();
+            EdcPortraitCameraFramer cameraFramer =
+                camera.GetComponent<EdcPortraitCameraFramer>();
+            if (controller == null || cameraFramer == null)
+            {
+                throw new InvalidDataException(
+                    "EDC shipping scene is missing its controller or portrait framer.");
+            }
+
+            string outputFolder = Path.GetFullPath(
+                Path.Combine(
+                    Application.dataPath,
+                    relativeOutputFolder));
+            Directory.CreateDirectory(outputFolder);
+
+            float previousAspect = camera.aspect;
+            controller.ResetToDefaultDetent();
+            camera.aspect = (float)PortraitCaptureWidth / PortraitCaptureHeight;
+            cameraFramer.ConfigureFraming(
+                ProductFramingCatalog.Resolve(ScenePath));
+            cameraFramer.ResetMotionTilt();
+            SpinnerEnvironmentPresenter environment = installRuntimeEnvironment
+                ? SpinnerEnvironmentPresenter.Install(ScenePath)
+                : null;
+            if (installRuntimeEnvironment && environment == null)
+            {
+                throw new InvalidDataException(
+                    "EDC shipping runtime environment could not be installed for preview.");
+            }
+
+            cameraFramer.SetLibraryPreviewActive(true, true);
+            environment?.ImageBasedLighting?.SetLibraryPreviewActive(true);
+            CaptureCamera(
+                camera,
+                Path.Combine(outputFolder, "01_LibraryPreview.png"),
+                PortraitCaptureWidth,
+                PortraitCaptureHeight);
+
+            cameraFramer.SetLibraryPreviewActive(false, true);
+            environment?.ImageBasedLighting?.SetLibraryPreviewActive(false);
+            CaptureApprovalView(
+                camera,
+                cameraFramer,
+                outputFolder,
+                "02_AuthoredHero.png",
+                Vector2.zero);
+            CaptureApprovalView(
+                camera,
+                cameraFramer,
+                outputFolder,
+                "03_LeftOblique.png",
+                new Vector2(-220f, 0f));
+            CaptureApprovalView(
+                camera,
+                cameraFramer,
+                outputFolder,
+                "04_RightOblique.png",
+                new Vector2(220f, 0f));
+            CaptureApprovalView(
+                camera,
+                cameraFramer,
+                outputFolder,
+                "05_Top.png",
+                new Vector2(0f, -220f));
+            CaptureApprovalView(
+                camera,
+                cameraFramer,
+                outputFolder,
+                "06_LowAngle.png",
+                new Vector2(0f, 220f));
+
+            if (includeOpenInterior)
+            {
+                controller.SetSlideProgress(1f);
+                CaptureApprovalView(
+                    camera,
+                    cameraFramer,
+                    outputFolder,
+                    "07_OpenInteriorHero.png",
+                    Vector2.zero);
+                CaptureApprovalView(
+                    camera,
+                    cameraFramer,
+                    outputFolder,
+                    "08_OpenInteriorOblique.png",
+                    new Vector2(-180f, -80f));
+                controller.ResetToDefaultDetent();
+            }
+
+            cameraFramer.ResetInteractiveView();
+            camera.aspect = previousAspect;
+            Debug.Log(
+                $"[{logLabel}] folder={outputFolder} "
+                + $"library={ProductFramingCatalog.ElongatedLibraryWidthFraction:F2}x"
+                + $"{ProductFramingCatalog.ElongatedLibraryHeightFraction:F2}");
+        }
+
+        private static void CaptureApprovalView(
+            Camera camera,
+            EdcPortraitCameraFramer cameraFramer,
+            string outputFolder,
+            string fileName,
+            Vector2 orbitPixels)
+        {
+            cameraFramer.ResetInteractiveView();
+            cameraFramer.OrbitByPixels(orbitPixels);
+            CaptureCamera(
+                camera,
+                Path.Combine(outputFolder, fileName),
+                PortraitCaptureWidth,
+                PortraitCaptureHeight);
         }
 
         private static void CaptureCamera(Camera camera, string outputPath)
@@ -552,13 +721,13 @@ namespace FidgetingApp.EDC.EditorTools
                 studio.transform,
                 Quaternion.Euler(42f, -32f, 0f),
                 new Color(1f, 0.93f, 0.82f),
-                1.8f);
+                0.54f);
             CreateStudioLight(
                 "CoolFill",
                 studio.transform,
                 Quaternion.Euler(125f, 150f, 0f),
                 new Color(0.52f, 0.68f, 1f),
-                1.0f);
+                0.42f);
             RenderSettings.ambientMode = AmbientMode.Flat;
             RenderSettings.ambientLight = new Color(0.13f, 0.16f, 0.21f, 1f);
             RenderSettings.reflectionIntensity = 0.35f;
@@ -603,8 +772,18 @@ namespace FidgetingApp.EDC.EditorTools
             material.SetColor("_BaseColor", color);
             material.SetFloat("_Metallic", metallic);
             material.SetFloat("_Smoothness", smoothness);
+            material.SetFloat("_BumpScale", 0f);
+            material.SetTexture("_BumpMap", null);
+            material.SetFloat("_GlossMapScale", 0f);
+            material.SetTexture("_MetallicGlossMap", null);
+            material.SetColor("_EmissionColor", Color.black);
+            material.SetTexture("_EmissionMap", null);
             material.DisableKeyword("_NORMALMAP");
             material.DisableKeyword("_METALLICSPECGLOSSMAP");
+            material.DisableKeyword("_EMISSION");
+            material.SetFloat("_EnvironmentReflections", 1f);
+            material.SetFloat("_SpecularHighlights", 1f);
+            material.globalIlluminationFlags = MaterialGlobalIlluminationFlags.None;
             EditorUtility.SetDirty(material);
             return material;
         }
@@ -773,5 +952,6 @@ namespace FidgetingApp.EDC.EditorTools
             public int runtimeVertices;
             public int runtimeTriangles;
         }
+
     }
 }

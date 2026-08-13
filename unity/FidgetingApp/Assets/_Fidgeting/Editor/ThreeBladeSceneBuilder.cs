@@ -97,12 +97,8 @@ namespace ThreeBladeEDC.EditorTools
                 MeshFolder + "/M_FacetedBottomCap.asset");
             Mesh rotorCoreMesh = SaveMesh(
                 ProceduralMeshFactory.CreateRing(
-                    "M_RotorCore", 0.0197f, 0.0117f, 0.0056f, 128),
+                    "M_RotorCore", 0.0168f, 0.0117f, 0.0056f, 128),
                 MeshFolder + "/M_RotorCore.asset");
-            Mesh rotorCoreTopTrimMesh = SaveMesh(
-                ProceduralMeshFactory.CreateRing(
-                    "M_RotorCoreTopTrim", 0.0189f, 0.0108f, 0.00024f, 96),
-                MeshFolder + "/M_RotorCoreTopTrim.asset");
             Mesh outerRaceMesh = SaveMesh(
                 ProceduralMeshFactory.CreateRing(
                     "M_BearingOuterRace", 0.0115f, 0.0090f, 0.0060f, 128),
@@ -152,7 +148,7 @@ namespace ThreeBladeEDC.EditorTools
                 "RotorCore",
                 rotor.transform,
                 rotorCoreMesh,
-                new[] { materials.darkRing });
+                new[] { materials.blade });
             CreateMeshObject(
                 "BearingOuterRace",
                 rotor.transform,
@@ -170,13 +166,6 @@ namespace ThreeBladeEDC.EditorTools
                 bladeInsetMesh,
                 new[] { materials.inset });
             insetVisual.transform.localPosition = new Vector3(0f, 0.00316f, 0f);
-            GameObject topTrim = CreateMeshObject(
-                "RotorCoreTopTrim",
-                rotor.transform,
-                rotorCoreTopTrimMesh,
-                new[] { materials.darkRing });
-            topTrim.transform.localPosition = new Vector3(0f, 0.00312f, 0f);
-
             // Keep three independent convex colliders for touch hit testing,
             // while the visible 120-degree array is one batched renderer.
             for (int i = 0; i < 3; i++)
@@ -298,6 +287,15 @@ namespace ThreeBladeEDC.EditorTools
                 ratchetClickVariants,
                 ratchetVoices,
                 0.82f);
+
+            GameObject windAudioObject = new GameObject("RotorWindAudio");
+            windAudioObject.transform.SetParent(root.transform, false);
+            RotorWindAudio windAudio =
+                windAudioObject.AddComponent<RotorWindAudio>();
+            windAudio.Configure(
+                rotorController,
+                3,
+                RotorWindAudioModel.DefaultMasterVolume);
 
             OrbitPresentationCamera orbit =
                 camera.gameObject.AddComponent<OrbitPresentationCamera>();

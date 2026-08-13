@@ -3,16 +3,28 @@ using System.Collections.Generic;
 
 namespace FidgetingApp.Product
 {
+    public enum ProductMechanismKind
+    {
+        Rotor = 0,
+        Slider = 1,
+        Fan = 2
+    }
+
     public readonly struct ProductCatalogEntry
     {
-        public ProductCatalogEntry(string modelId, string scenePath)
+        public ProductCatalogEntry(
+            string modelId,
+            string scenePath,
+            ProductMechanismKind mechanism)
         {
             ModelId = modelId;
             ScenePath = scenePath;
+            Mechanism = mechanism;
         }
 
         public string ModelId { get; }
         public string ScenePath { get; }
+        public ProductMechanismKind Mechanism { get; }
     }
 
     /// <summary>
@@ -26,24 +38,34 @@ namespace FidgetingApp.Product
         public const string GoldFourWingModelId = "gold-four-wing";
         public const string GraphiteTwoLobeModelId = "graphite-two-lobe";
         public const string MagneticSlideTileModelId = "magnetic-slide-tile";
+        public const string MagneticFanCardModelId = "magnetic-fan-card";
 
         private static readonly ProductCatalogEntry[] shippingEntries =
         {
             new ProductCatalogEntry(
                 PointedThreeBladeModelId,
-                SpinnerEnvironmentCatalog.PointedScenePath),
+                SpinnerEnvironmentCatalog.PointedScenePath,
+                ProductMechanismKind.Rotor),
             new ProductCatalogEntry(
                 MetalThreeBladeModelId,
-                SpinnerEnvironmentCatalog.MetalScenePath),
+                SpinnerEnvironmentCatalog.MetalScenePath,
+                ProductMechanismKind.Rotor),
             new ProductCatalogEntry(
                 GoldFourWingModelId,
-                SpinnerEnvironmentCatalog.ImportedScenePath),
+                SpinnerEnvironmentCatalog.ImportedScenePath,
+                ProductMechanismKind.Rotor),
             new ProductCatalogEntry(
                 GraphiteTwoLobeModelId,
-                SpinnerEnvironmentCatalog.TwoLobeScenePath),
+                SpinnerEnvironmentCatalog.TwoLobeScenePath,
+                ProductMechanismKind.Rotor),
             new ProductCatalogEntry(
                 MagneticSlideTileModelId,
-                SpinnerEnvironmentCatalog.EdcScenePath)
+                SpinnerEnvironmentCatalog.EdcScenePath,
+                ProductMechanismKind.Slider),
+            new ProductCatalogEntry(
+                MagneticFanCardModelId,
+                SpinnerEnvironmentCatalog.FanCardScenePath,
+                ProductMechanismKind.Fan)
         };
 
         public static IReadOnlyList<ProductCatalogEntry> ShippingEntries =>
@@ -103,6 +125,22 @@ namespace FidgetingApp.Product
 
             modelId = string.Empty;
             return false;
+        }
+
+        public static ProductMechanismKind MechanismForModel(string modelId)
+        {
+            for (int index = 0; index < shippingEntries.Length; index++)
+            {
+                if (string.Equals(
+                        shippingEntries[index].ModelId,
+                        modelId,
+                        StringComparison.Ordinal))
+                {
+                    return shippingEntries[index].Mechanism;
+                }
+            }
+
+            return ProductMechanismKind.Rotor;
         }
     }
 }

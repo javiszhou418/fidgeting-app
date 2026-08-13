@@ -1,0 +1,386 @@
+using System;
+using System.Collections.Generic;
+using System.Globalization;
+using UnityEngine;
+
+namespace FidgetingApp.Product.Gacha
+{
+    public enum GachaPaymentMethod
+    {
+        Ticket = 0,
+        Coin = 1
+    }
+
+    public readonly struct GachaDrawReceiptRow
+    {
+        public GachaDrawReceiptRow(
+            GachaDrawOutcome outcome,
+            bool isNew,
+            int shardsGained)
+        {
+            Outcome = outcome;
+            IsNew = isNew;
+            ShardsGained = Math.Max(0, shardsGained);
+        }
+
+        public GachaDrawOutcome Outcome { get; }
+        public bool IsNew { get; }
+        public int ShardsGained { get; }
+    }
+
+    public readonly struct GachaDrawReceipt
+    {
+        public GachaDrawReceipt(
+            bool success,
+            string failureReason,
+            IReadOnlyList<GachaDrawReceiptRow> rows)
+        {
+            Success = success;
+            FailureReason = failureReason ?? string.Empty;
+            Rows = rows ?? Array.Empty<GachaDrawReceiptRow>();
+        }
+
+        public bool Success { get; }
+        public string FailureReason { get; }
+        public IReadOnlyList<GachaDrawReceiptRow> Rows { get; }
+
+        public static GachaDrawReceipt Failure(string reason)
+        {
+            return new GachaDrawReceipt(false, reason, Array.Empty<GachaDrawReceiptRow>());
+        }
+    }
+
+    /// <summary>
+    /// Owns balances, owned prizes, shards, and per-series pity. Persistence
+    /// mirrors CollectorProgressionRuntime: namespaced PlayerPrefs keys with a
+    /// version stamp so later schema changes migrate explicitly.
+    /// </summary>
+    public sealed class GachaInventoryRuntime
+    {
+        public const string DefaultPrefix = "fidgeting.gacha.v1.";
+        public const int SchemaVersion = 1;
+
+        private readonly string prefix;
+        private readonly IGachaRandom random;
+        private readonly HashSet<string> ownedPrizes = new HashSet<string>(StringComparer.Ordinal);
+        private readonly Dictionary<string, GachaPityState> pityBySeries =
+            new Dictionary<string, GachaPityState>(StringComparer.Ordinal);
+        private readonly Dictionary<string, int> shardsBySeries =
+            new Dictionary<string, int>(StringComparer.Ordinal);
+        private readonly Dictionary<string, int> drawsBySeries =
+            new Dictionary<string, int>(StringComparer.Ordinal);
+
+        private int tickets;
+        private int coins;
+
+        public GachaInventoryRuntime(
+            string storagePrefix = DefaultPrefix,
+            IGachaRandom randomSource = null)
+        {
+            prefix = string.IsNullOrEmpty(storagePrefix) ? DefaultPrefix : storagePrefix;
+            random = randomSource ?? new GachaSplitMix64(
+                (ulong)Environment.TickCount * 0x9E3779B97F4A7C15UL + 0xD1B54A32D192ED03UL);
+            Load();
+        }
+
+        public int Tickets => tickets;
+        public int Coins => coins;
+
+        public int Shards(string seriesId)
+        {
+            return shardsBySeries.TryGetValue(seriesId ?? string.Empty, out int value) ? value : 0;
+        }
+
+        public int TotalDraws(string seriesId)
+        {
+            return drawsBySeries.TryGetValue(seriesId ?? string.Empty, out int value) ? value : 0;
+        }
+
+        public bool Owns(string prizeId)
+        {
+            return ownedPrizes.Contains(prizeId ?? string.Empty);
+        }
+
+        public int OwnedCount => ownedPrizes.Count;
+
+        public GachaPityState Pity(string seriesId)
+        {
+            return pityBySeries.TryGetValue(seriesId ?? string.Empty, out GachaPityState value)
+                ? value
+                : default;
+        }
+
+        public void CreditTickets(int amount)
+        {
+            if (amount <= 0)
+            {
+                return;
+            }
+
+            tickets += amount;
+            Persist();
+        }
+
+        public void CreditCoins(int amount)
+        {
+            if (amount <= 0)
+            {
+                return;
+            }
+
+            coins += amount;
+            Persist();
+        }
+
+        public int RhythmWeeksCredited { get; private set; }
+
+        /// <summary>
+        /// Free-ticket loop: every completed 7-day rhythm week grants exactly
+        /// one draw ticket, keyed to a persisted credited counter so repeated
+        /// publishes and reloads never double-grant. Returns tickets granted.
+        /// </summary>
+        public int SyncRhythmTickets(int completedRhythmWeeks)
+        {
+            int completed = Math.Max(0, completedRhythmWeeks);
+            if (completed <= RhythmWeeksCredited)
+            {
+                return 0;
+            }
+
+            int granted = completed - RhythmWeeksCredited;
+            RhythmWeeksCredited = completed;
+            tickets += granted;
+            Persist();
+            return granted;
+        }
+
+        public GachaDrawReceipt Draw(string seriesId, int count, GachaPaymentMethod method)
+        {
+            GachaSeriesDefinition series = GachaCatalog.ResolveSeries(seriesId);
+            if (series == null)
+            {
+                return GachaDrawReceipt.Failure("unknown-series");
+            }
+
+            if (count != 1 && count != GachaEconomyRules.TenDrawCount)
+            {
+                return GachaDrawReceipt.Failure("unsupported-count");
+            }
+
+            int ticketCost = count * GachaEconomyRules.SingleDrawTicketCost;
+            int coinCost = count == GachaEconomyRules.TenDrawCount
+                ? GachaEconomyRules.TenDrawCoinCost
+                : GachaEconomyRules.SingleDrawCoinCost;
+            if (method == GachaPaymentMethod.Ticket && tickets < ticketCost)
+            {
+                return GachaDrawReceipt.Failure("insufficient-tickets");
+            }
+
+            if (method == GachaPaymentMethod.Coin && coins < coinCost)
+            {
+                return GachaDrawReceipt.Failure("insufficient-coins");
+            }
+
+            GachaPityState pity = Pity(seriesId);
+            IReadOnlyList<GachaDrawOutcome> outcomes =
+                GachaDrawEngine.DrawBatch(series, count, ref pity, random);
+            pityBySeries[seriesId] = pity;
+
+            var rows = new List<GachaDrawReceiptRow>(outcomes.Count);
+            int shardsGainedTotal = 0;
+            for (int index = 0; index < outcomes.Count; index++)
+            {
+                GachaDrawOutcome outcome = outcomes[index];
+                bool isNew = ownedPrizes.Add(outcome.PrizeId);
+                int shardsGained = 0;
+                if (!isNew)
+                {
+                    shardsGained = GachaEconomyRules.DuplicateShardValue(outcome.Rarity);
+                    shardsGainedTotal += shardsGained;
+                }
+
+                rows.Add(new GachaDrawReceiptRow(outcome, isNew, shardsGained));
+            }
+
+            if (method == GachaPaymentMethod.Ticket)
+            {
+                tickets -= ticketCost;
+            }
+            else
+            {
+                coins -= coinCost;
+            }
+
+            shardsBySeries[seriesId] = Shards(seriesId) + shardsGainedTotal;
+            drawsBySeries[seriesId] = TotalDraws(seriesId) + count;
+            Persist();
+            return new GachaDrawReceipt(true, string.Empty, rows);
+        }
+
+        public bool TryRedeemShards(string prizeId, out string failureReason)
+        {
+            GachaPrizeDefinition? resolved = GachaCatalog.ResolvePrize(prizeId);
+            if (!resolved.HasValue)
+            {
+                failureReason = "unknown-prize";
+                return false;
+            }
+
+            GachaPrizeDefinition prize = resolved.Value;
+            if (!GachaEconomyRules.CanRedeem(prize.Rarity))
+            {
+                failureReason = "not-redeemable";
+                return false;
+            }
+
+            if (Owns(prize.Id))
+            {
+                failureReason = "already-owned";
+                return false;
+            }
+
+            int cost = GachaEconomyRules.RedeemShardCost(prize.Rarity);
+            int balance = Shards(prize.SeriesId);
+            if (balance < cost)
+            {
+                failureReason = "insufficient-shards";
+                return false;
+            }
+
+            shardsBySeries[prize.SeriesId] = balance - cost;
+            ownedPrizes.Add(prize.Id);
+            Persist();
+            failureReason = string.Empty;
+            return true;
+        }
+
+        /// <summary>
+        /// TSV snapshot for the native UI: balances, then one row per series
+        /// with pity progress and shards, then owned prize ids.
+        /// </summary>
+        public string SnapshotPayload()
+        {
+            var rows = new List<string>
+            {
+                string.Join(
+                    "\t",
+                    "wallet",
+                    tickets.ToString(CultureInfo.InvariantCulture),
+                    coins.ToString(CultureInfo.InvariantCulture))
+            };
+            IReadOnlyList<GachaSeriesDefinition> series = GachaCatalog.Series;
+            for (int index = 0; index < series.Count; index++)
+            {
+                GachaSeriesDefinition definition = series[index];
+                GachaPityState pity = Pity(definition.Id);
+                rows.Add(string.Join(
+                    "\t",
+                    "series-state",
+                    definition.Id,
+                    pity.SignatureMisses.ToString(CultureInfo.InvariantCulture),
+                    pity.HeirloomMisses.ToString(CultureInfo.InvariantCulture),
+                    Shards(definition.Id).ToString(CultureInfo.InvariantCulture),
+                    TotalDraws(definition.Id).ToString(CultureInfo.InvariantCulture)));
+            }
+
+            var owned = new List<string>(ownedPrizes);
+            owned.Sort(StringComparer.Ordinal);
+            rows.Add("owned\t" + string.Join("|", owned));
+            return string.Join("\n", rows);
+        }
+
+        private string Key(string suffix)
+        {
+            return prefix + suffix;
+        }
+
+        private void Load()
+        {
+            int version = PlayerPrefs.GetInt(Key("version"), 0);
+            if (version == 0)
+            {
+                PlayerPrefs.SetInt(Key("version"), SchemaVersion);
+            }
+
+            tickets = PlayerPrefs.GetInt(Key("tickets"), 0);
+            coins = PlayerPrefs.GetInt(Key("coins"), 0);
+            RhythmWeeksCredited = PlayerPrefs.GetInt(Key("rhythmWeeksCredited"), 0);
+            string owned = PlayerPrefs.GetString(Key("owned"), string.Empty);
+            if (!string.IsNullOrEmpty(owned))
+            {
+                foreach (string prizeId in owned.Split('|'))
+                {
+                    if (!string.IsNullOrEmpty(prizeId))
+                    {
+                        ownedPrizes.Add(prizeId);
+                    }
+                }
+            }
+
+            IReadOnlyList<GachaSeriesDefinition> series = GachaCatalog.Series;
+            for (int index = 0; index < series.Count; index++)
+            {
+                string seriesId = series[index].Id;
+                var pity = new GachaPityState
+                {
+                    SignatureMisses = PlayerPrefs.GetInt(
+                        Key(seriesId + ".signatureMisses"), 0),
+                    HeirloomMisses = PlayerPrefs.GetInt(
+                        Key(seriesId + ".heirloomMisses"), 0)
+                };
+                pityBySeries[seriesId] = pity;
+                shardsBySeries[seriesId] = PlayerPrefs.GetInt(Key(seriesId + ".shards"), 0);
+                drawsBySeries[seriesId] = PlayerPrefs.GetInt(Key(seriesId + ".draws"), 0);
+            }
+        }
+
+        private void Persist()
+        {
+            PlayerPrefs.SetInt(Key("version"), SchemaVersion);
+            PlayerPrefs.SetInt(Key("tickets"), tickets);
+            PlayerPrefs.SetInt(Key("coins"), coins);
+            PlayerPrefs.SetInt(Key("rhythmWeeksCredited"), RhythmWeeksCredited);
+            var owned = new List<string>(ownedPrizes);
+            owned.Sort(StringComparer.Ordinal);
+            PlayerPrefs.SetString(Key("owned"), string.Join("|", owned));
+            foreach (KeyValuePair<string, GachaPityState> entry in pityBySeries)
+            {
+                PlayerPrefs.SetInt(
+                    Key(entry.Key + ".signatureMisses"), entry.Value.SignatureMisses);
+                PlayerPrefs.SetInt(
+                    Key(entry.Key + ".heirloomMisses"), entry.Value.HeirloomMisses);
+            }
+
+            foreach (KeyValuePair<string, int> entry in shardsBySeries)
+            {
+                PlayerPrefs.SetInt(Key(entry.Key + ".shards"), entry.Value);
+            }
+
+            foreach (KeyValuePair<string, int> entry in drawsBySeries)
+            {
+                PlayerPrefs.SetInt(Key(entry.Key + ".draws"), entry.Value);
+            }
+
+            PlayerPrefs.Save();
+        }
+
+        /// <summary>Test hook: removes every key under this runtime's prefix.</summary>
+        public void DeleteAllForTests()
+        {
+            PlayerPrefs.DeleteKey(Key("version"));
+            PlayerPrefs.DeleteKey(Key("tickets"));
+            PlayerPrefs.DeleteKey(Key("coins"));
+            PlayerPrefs.DeleteKey(Key("rhythmWeeksCredited"));
+            PlayerPrefs.DeleteKey(Key("owned"));
+            IReadOnlyList<GachaSeriesDefinition> series = GachaCatalog.Series;
+            for (int index = 0; index < series.Count; index++)
+            {
+                string seriesId = series[index].Id;
+                PlayerPrefs.DeleteKey(Key(seriesId + ".signatureMisses"));
+                PlayerPrefs.DeleteKey(Key(seriesId + ".heirloomMisses"));
+                PlayerPrefs.DeleteKey(Key(seriesId + ".shards"));
+                PlayerPrefs.DeleteKey(Key(seriesId + ".draws"));
+            }
+        }
+    }
+}

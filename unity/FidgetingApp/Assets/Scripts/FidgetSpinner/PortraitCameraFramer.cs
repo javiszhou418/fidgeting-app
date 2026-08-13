@@ -289,6 +289,17 @@ namespace CodexUnityLab
             hasFramingDirection = true;
         }
 
+        public void SetDetailEntranceProgressForPreview(float progress)
+        {
+            SetLibraryPreviewActive(true, true);
+            SetLibraryPreviewActive(false, false);
+            presentationTransitionElapsed =
+                SpinnerPresentationTransition.DurationSeconds
+                * Mathf.Clamp01(progress);
+            AdvancePresentationTransition(0f);
+            presentationTransitionActive = false;
+        }
+
         private void AdvancePresentationTransition(float deltaTime)
         {
             presentationTransitionElapsed += Mathf.Max(0f, deltaTime);
@@ -358,8 +369,10 @@ namespace CodexUnityLab
                 * zoomScale
                 / appearanceActivationScale);
             Vector3 cameraPosition = framedFocus + cameraOffset;
-            Vector3 lookDirection = framedFocus - cameraPosition;
-            Quaternion cameraRotation = Quaternion.LookRotation(lookDirection.normalized, Vector3.up);
+            Quaternion cameraRotation =
+                DeviceMotionOrbitMapping.ResolveStableLookRotation(
+                    framingBackward,
+                    orbit);
             transform.SetPositionAndRotation(cameraPosition, cameraRotation);
         }
     }

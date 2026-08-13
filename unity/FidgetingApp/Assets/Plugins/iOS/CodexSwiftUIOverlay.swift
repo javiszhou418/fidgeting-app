@@ -1,4 +1,5 @@
 import Foundation
+import QuartzCore
 import SwiftUI
 import UIKit
 
@@ -42,6 +43,31 @@ private enum ProductTab: Equatable {
     case spinners
     case collector
     case settings
+}
+
+private enum EnvironmentTheme: String, CaseIterable, Identifiable, Equatable {
+    case canyon
+    case cyberpunk
+
+    var id: String { rawValue }
+
+    var title: String {
+        switch self {
+        case .canyon: return "星岩峡谷"
+        case .cyberpunk: return "霓虹都市"
+        }
+    }
+
+    var subtitle: String {
+        switch self {
+        case .canyon: return "粗粝岩层 · 双层星空"
+        case .cyberpunk: return "未来建筑 · 霓虹纵深"
+        }
+    }
+
+    func wallpaperAssetName(for model: SpinnerModel) -> String {
+        "scene-wallpaper-\(rawValue)-\(model.rawValue)"
+    }
 }
 
 private enum ProductAppearanceSection: String, CaseIterable, Identifiable, Equatable {
@@ -161,7 +187,8 @@ private enum SpinnerModel: String, CaseIterable, Identifiable, Equatable {
         .metalThreeBlade,
         .goldFourWing,
         .graphiteTwoLobe,
-        .magneticSlideTile
+        .magneticSlideTile,
+        .magneticFanCard
     ]
 
     var title: String {
@@ -219,6 +246,8 @@ private struct OfflineProgressionReward: Equatable {
     var elapsedHours = 0.0
     var previousLevel = 1
     var newLevel = 1
+    var previousLevelProgress = 0.0
+    var newLevelProgress = 0.0
     var assistantEnabled = false
 }
 
@@ -277,7 +306,7 @@ private struct ThreeBladeMetalSkinDetail: Identifiable, Equatable {
     }
 
     static func parse(_ payload: String) -> [ThreeBladeMetalSkinDetail] {
-        payload.split(separator: "\n").compactMap { row in
+        return payload.split(separator: "\n").compactMap { row in
             let fields = row.split(separator: "\t", omittingEmptySubsequences: false)
             guard fields.count == 9, let level = Int(fields[1]) else { return nil }
             return ThreeBladeMetalSkinDetail(
@@ -302,7 +331,7 @@ private struct ProductStickerDetail: Identifiable, Equatable {
     let tintHex: String
 
     static func parse(_ payload: String) -> [ProductStickerDetail] {
-        payload.split(separator: "\n").compactMap { row in
+        return payload.split(separator: "\n").compactMap { row in
             let fields = row.split(separator: "\t", omittingEmptySubsequences: false)
             guard fields.count == 5 else { return nil }
             return ProductStickerDetail(
@@ -327,130 +356,109 @@ private extension Color {
     }
 }
 
-private enum ProgressionAchievementMetric: String, CaseIterable, Equatable {
-    case peakRimSpeedKmh = "PeakRimSpeedKmh"
-    case lifetimeGestures = "LifetimeGestures"
-    case activeInteractionSeconds = "ActiveInteractionSeconds"
-    case lifetimeOfflineExperience = "LifetimeOfflineExperience"
+private enum ProductBadgeScope: String, Decodable, CaseIterable, Identifiable {
+    case toy = "Toy"
+    case collector = "Collector"
+    case challenge = "Challenge"
+    case legacy = "Legacy"
+
+    var id: String { rawValue }
 
     var title: String {
         switch self {
-        case .peakRimSpeedKmh: return "最高速度"
-        case .lifetimeGestures: return "累计滑动"
-        case .activeInteractionSeconds: return "实际交互"
-        case .lifetimeOfflineExperience: return "离线经验"
-        }
-    }
-
-    var symbol: String {
-        switch self {
-        case .peakRimSpeedKmh: return "speedometer"
-        case .lifetimeGestures: return "hand.draw.fill"
-        case .activeInteractionSeconds: return "timer"
-        case .lifetimeOfflineExperience: return "moon.stars.fill"
-        }
-    }
-
-    var accent: Color {
-        switch self {
-        case .peakRimSpeedKmh: return .cyan
-        case .lifetimeGestures: return .orange
-        case .activeInteractionSeconds: return .green
-        case .lifetimeOfflineExperience: return .purple
+        case .toy: return "玩具"
+        case .collector: return "藏家"
+        case .challenge: return "挑战"
+        case .legacy: return "Legacy"
         }
     }
 }
 
-private struct ProgressionAchievementDetail: Identifiable, Equatable {
+private enum ProductBadgeGrade: String, Decodable, CaseIterable {
+    case ignition = "Ignition"
+    case overdrive = "Overdrive"
+    case apex = "Apex"
+    case singularity = "Singularity"
+}
+
+private enum ProductBadgeState: String, Decodable {
+    case locked = "Locked"
+    case inProgress = "InProgress"
+    case hidden = "Hidden"
+    case unlocked = "Unlocked"
+}
+
+private struct ProductBadgeCatalogEnvelope: Decodable {
+    let version: Int
+    let modelId: String?
+    let shardBalance: Int?
+    let badges: [ProductBadgeDetail]
+}
+
+private struct ProductBadgeDetail: Identifiable, Equatable, Decodable {
     let id: String
-    let metric: ProgressionAchievementMetric
-    let threshold: Double
+    let scope: ProductBadgeScope
+    let category: String
+    let mechanism: String
+    let metric: String
+    let currentValue: Double
+    let targetValue: Double
+    let progress: Double
+    let state: ProductBadgeState
+    let unlockedAtUtc: String
+    let rewardClaimed: Bool
+    let grade: ProductBadgeGrade
+    let visibility: String
     let title: String
-    let unlocked: Bool
+    let description: String
+    let assetName: String
+    let displayToken: String
+    let displayUnit: String
+    let shortName: String
+    let experienceReward: Int
+    let shardReward: Int
+    let displayOrder: Int
+    let cycleIndex: Int64
 
-    var milestoneText: String {
-        switch metric {
-        case .peakRimSpeedKmh:
-            return String(format: "%.1f km/h", threshold)
-        case .lifetimeGestures:
-            return threshold >= 1000
-                ? String(format: threshold >= 10000 ? "%.0fK 次滑动" : "%.1fK 次滑动", threshold / 1000)
-                : String(format: "%.0f 次滑动", threshold)
-        case .activeInteractionSeconds:
-            return threshold >= 3600
-                ? String(format: "%.0f 小时交互", threshold / 3600)
-                : String(format: "%.0f 分钟交互", threshold / 60)
-        case .lifetimeOfflineExperience:
-            return threshold >= 1000
-                ? String(format: threshold >= 10000 ? "%.0fK 离线 XP" : "%.1fK 离线 XP", threshold / 1000)
-                : String(format: "%.0f 离线 XP", threshold)
-        }
+    var unlocked: Bool { state == .unlocked }
+    var hidden: Bool { state == .hidden }
+    var unlockIdentity: String {
+        scope == .challenge ? "\(id)@\(cycleIndex)" : id
     }
 
-    static func parse(_ payload: String) -> [ProgressionAchievementDetail] {
-        payload.split(separator: "\n").compactMap { row in
-            let fields = row.split(separator: "\t", omittingEmptySubsequences: false)
-            guard fields.count >= 4,
-                  let metric = ProgressionAchievementMetric(rawValue: String(fields[1])),
-                  let threshold = Double(fields[2]) else { return nil }
-            return ProgressionAchievementDetail(
-                id: String(fields[0]),
-                metric: metric,
-                threshold: threshold,
-                title: String(fields[3]),
-                unlocked: fields.count >= 5 && fields[4] == "1")
-        }
-    }
-}
-
-private enum CollectorAchievementMetric: String, Equatable {
-    case completedRhythmWeeks = "CompletedRhythmWeeks"
-    case discoveredModels = "DiscoveredModels"
-    case toyLevel20Count = "ToyLevel20Count"
-    case toyLevel100Count = "ToyLevel100Count"
-    case collectedCosmetics = "CollectedCosmetics"
-
-    var title: String {
-        switch self {
-        case .completedRhythmWeeks: return "节奏"
-        case .discoveredModels: return "探索"
-        case .toyLevel20Count, .toyLevel100Count: return "精通"
-        case .collectedCosmetics: return "收藏"
-        }
+    var tokenLine: String {
+        displayUnit.isEmpty
+            ? displayToken
+            : "\(displayToken) \(displayUnit)"
     }
 
-    var symbol: String {
-        switch self {
-        case .completedRhythmWeeks: return "calendar.badge.checkmark"
-        case .discoveredModels: return "square.grid.2x2"
-        case .toyLevel20Count: return "dial.medium"
-        case .toyLevel100Count: return "seal.fill"
-        case .collectedCosmetics: return "circle.hexagongrid.fill"
-        }
+    static func parse(_ payload: String) -> [ProductBadgeDetail] {
+        parseEnvelope(payload)?.badges ?? []
+    }
+
+    static func parseEnvelope(_ payload: String) -> ProductBadgeCatalogEnvelope? {
+        guard payload.trimmingCharacters(in: .whitespacesAndNewlines)
+            .hasPrefix("{") else { return nil }
+        guard let data = payload.data(using: .utf8),
+              let envelope = try? JSONDecoder().decode(
+                ProductBadgeCatalogEnvelope.self,
+                from: data),
+              envelope.version == 2 else { return nil }
+        return ProductBadgeCatalogEnvelope(
+            version: envelope.version,
+            modelId: envelope.modelId,
+            shardBalance: envelope.shardBalance,
+            badges: envelope.badges.sorted {
+            if $0.scope == $1.scope { return $0.displayOrder < $1.displayOrder }
+            return $0.scope.rawValue < $1.scope.rawValue
+        })
     }
 }
 
-private struct CollectorAchievementDetail: Identifiable, Equatable {
+private struct ProductBadgeUnlockEvent: Identifiable, Equatable {
     let id: String
-    let metric: CollectorAchievementMetric
-    let threshold: Int
-    let title: String
-    let unlocked: Bool
-
-    static func parse(_ payload: String) -> [CollectorAchievementDetail] {
-        payload.split(separator: "\n").compactMap { row in
-            let fields = row.split(separator: "\t", omittingEmptySubsequences: false)
-            guard fields.count >= 5,
-                  let metric = CollectorAchievementMetric(rawValue: String(fields[1])),
-                  let threshold = Int(fields[2]) else { return nil }
-            return CollectorAchievementDetail(
-                id: String(fields[0]),
-                metric: metric,
-                threshold: threshold,
-                title: String(fields[3]),
-                unlocked: fields[4] == "1")
-        }
-    }
+    let badge: ProductBadgeDetail
+    let sourceTitle: String
 }
 
 private struct CollectorRankUp: Equatable {
@@ -506,14 +514,47 @@ private enum ProductSpeedBand: Int, Equatable {
     }
 }
 
+private enum ProductMotionKind: Int, Equatable {
+    case rotary = 0
+    case linearPush = 1
+    case fanCard = 2
+}
+
 private struct ProductMotionTelemetryState: Equatable {
     var available = false
+    var kind = ProductMotionKind.rotary
     var normalizedSpeed = 0.0
     var angularSpeedRadians = 0.0
+    var motionRate = 0.0
     var speedBand = ProductSpeedBand.calm
+    var intensity = 0.0
+    var frequency = 0.0
 
     var rpm: Double {
         abs(angularSpeedRadians) * 60.0 / (2.0 * .pi)
+    }
+
+    var displayedSpeed: Double {
+        switch kind {
+        case .rotary: return rpm
+        case .linearPush, .fanCard: return motionRate
+        }
+    }
+
+    var displayedUnit: String {
+        switch kind {
+        case .rotary: return "RPM"
+        case .linearPush: return "MM/S"
+        case .fanCard: return "°/S"
+        }
+    }
+
+    var speedAccessibilityLabel: String {
+        switch kind {
+        case .rotary: return "转速"
+        case .linearPush: return "推牌速度"
+        case .fanCard: return "扇牌展开速度"
+        }
     }
 }
 
@@ -1022,6 +1063,9 @@ private final class ProductUiState: ObservableObject {
         static let advancedHapticRecipes = "fidgeting.settings.advancedHapticRecipes"
         static let hapticTuningVersion = "fidgeting.settings.hapticTuningVersion"
         static let hapticRhythm = "fidgeting.settings.productHapticRhythm"
+        static let detentPresetIndex = "fidgeting.settings.detentPresetIndex"
+        static let detentIntensity = "fidgeting.settings.detentIntensity"
+        static let detentSharpness = "fidgeting.settings.detentSharpness"
         static let ratchetFeel = "fidgeting.settings.productRatchetFeel"
         static let spinResponseLevel = "fidgeting.settings.spinResponseLevel"
         static let spinResistanceLevel = "fidgeting.settings.spinResistanceLevel"
@@ -1045,11 +1089,15 @@ private final class ProductUiState: ObservableObject {
         static let selectedSpeedTextureSlot = "fidgeting.hapticLab.selectedSlot"
         static let comboHaloTuning = "fidgeting.comboHalo.tuning.v1"
         static let spinnerOnboardingCompleted = "fidgeting.onboarding.spinner.v1.completed"
+        static let environmentTheme = "fidgeting.environment.theme.v1"
     }
 
     @Published var selectedTab: ProductTab = .spinners
     @Published var isLibraryVisible = true
     @Published var selectedModel: SpinnerModel
+    @Published var environmentTheme: EnvironmentTheme
+    @Published var environmentThemePreview: EnvironmentTheme
+    @Published var isEnvironmentPickerPresented = false
     @Published var interactionMode: SpinnerInteractionMode
     @Published var hapticsEnabled: Bool
     @Published var hapticIntensity: Double
@@ -1123,9 +1171,10 @@ private final class ProductUiState: ObservableObject {
     @Published var progressionTodayGestures = 0
     @Published var progressionActiveInteractionSeconds = 0.0
     @Published var progressionLifetimeOfflineExperience = 0.0
-    @Published var progressionUnlockedAchievementCount = 0
-    @Published var progressionTotalAchievementCount = 0
-    @Published var progressionAchievements: [ProgressionAchievementDetail] = []
+    @Published var progressionUnlockedBadgeCount = 0
+    @Published var progressionTotalBadgeCount = 0
+    @Published var badgeShardBalance = 0
+    @Published var toyBadgeCatalog: [ProductBadgeDetail] = []
     @Published var collectorRank = 1
     @Published var collectorTotalExperience = 0.0
     @Published var collectorRankStartExperience = 0.0
@@ -1139,19 +1188,24 @@ private final class ProductUiState: ObservableObject {
     @Published var collectorCompletedWeeks = 0
     @Published var collectorDiscoveredModelCount = 0
     @Published var collectorCosmeticCount = 0
-    @Published var collectorUnlockedAchievementCount = 0
-    @Published var collectorTotalAchievementCount = 0
+    @Published var collectorUnlockedBadgeCount = 0
+    @Published var collectorTotalBadgeCount = 0
     @Published var collectorDiscoveredModelIds: Set<String> = []
-    @Published var collectorAchievements: [CollectorAchievementDetail] = []
-    @Published var collectorUnlockNotice: CollectorAchievementDetail?
-    @Published var showingCollectorUnlockNotice = false
+    @Published var collectorBadgeCatalog: [ProductBadgeDetail] = []
+    @Published var challengeBadgeCatalog: [ProductBadgeDetail] = []
+    @Published var legacyBadgeCatalog: [ProductBadgeDetail] = []
     @Published var collectorRankUp = CollectorRankUp()
     @Published var showingCollectorRankUp = false
-    @Published var badgeUnlockNotice: ProgressionAchievementDetail?
+    @Published var badgeUnlockNotice: ProductBadgeUnlockEvent?
     @Published var showingBadgeUnlockNotice = false
     @Published var showingSpinnerOnboarding = false
     @Published var offlineProgressionReward = OfflineProgressionReward()
     @Published var showingOfflineProgressionReward = false
+    @Published var progressionTopAvatarFrame = CGRect.zero
+    @Published var progressionSheetAvatarFrame = CGRect.zero
+    @Published var progressionTopAvatarLevelOverride: Int?
+    @Published var progressionTopAvatarProgressOverride: Double?
+    @Published var progressionTopAvatarPulseToken = 0
     @Published var liveProgressionLevelUp = LiveProgressionLevelUp()
     @Published var showingLiveProgressionLevelUp = false
     @Published var progressionCombo = ProgressionComboState()
@@ -1162,6 +1216,15 @@ private final class ProductUiState: ObservableObject {
 
     var displayedProgressionLevel: Int {
         progressionModel == selectedModel ? progressionLevel : 1
+    }
+
+    var progressionTopAvatarLevel: Int {
+        progressionTopAvatarLevelOverride ?? displayedProgressionLevel
+    }
+
+    var progressionTopAvatarProgress: Double {
+        progressionTopAvatarProgressOverride
+            ?? (progressionModel == selectedModel ? progressionFraction : 0)
     }
 
     var currentEquippedThreeBladeSkin: ThreeBladeMetalSkinDetail? {
@@ -1191,13 +1254,12 @@ private final class ProductUiState: ObservableObject {
     }
 
     private var previewWorkItem: DispatchWorkItem?
+    private var hasPersistedDetentTuning = false
     private var spinRewardDismissWorkItem: DispatchWorkItem?
     private var badgeUnlockDismissWorkItem: DispatchWorkItem?
-    private var collectorUnlockDismissWorkItem: DispatchWorkItem?
-    private var pendingBadgeUnlocks: [ProgressionAchievementDetail] = []
-    private var pendingCollectorUnlocks: [CollectorAchievementDetail] = []
-    private var seenBadgeIdsByModel: [String: Set<String>] = [:]
-    private var seenCollectorAchievementIds: Set<String>?
+    private var pendingBadgeUnlocks: [ProductBadgeUnlockEvent] = []
+    private var seenBadgeIdsByContext: [String: Set<String>] = [:]
+    private var progressionTopAvatarRewardPending = false
 
     init() {
         let defaults = UserDefaults.standard
@@ -1217,6 +1279,11 @@ private final class ProductUiState: ObservableObject {
         if persistedModelId != migratedModel.rawValue {
             defaults.set(migratedModel.rawValue, forKey: Key.selectedModel)
         }
+        let persistedEnvironmentTheme = EnvironmentTheme(
+            rawValue: defaults.string(forKey: Key.environmentTheme) ?? "")
+            ?? .canyon
+        environmentTheme = persistedEnvironmentTheme
+        environmentThemePreview = persistedEnvironmentTheme
         interactionMode = SpinnerInteractionMode(
             rawValue: defaults.string(forKey: Key.interactionMode) ?? "") ?? .smooth
         hapticsEnabled = defaults.object(forKey: Key.hapticsEnabled) == nil
@@ -1345,6 +1412,18 @@ private final class ProductUiState: ObservableObject {
             fallback: .preset(.heavySteel))
         selectedSpeedTextureSlot = HapticTuningSlot(
             rawValue: defaults.string(forKey: Key.selectedSpeedTextureSlot) ?? "") ?? .a
+        hasPersistedDetentTuning = defaults.object(forKey: Key.detentPresetIndex) != nil
+            && defaults.object(forKey: Key.detentIntensity) != nil
+            && defaults.object(forKey: Key.detentSharpness) != nil
+        if hasPersistedDetentTuning {
+            detentPresetIndex = max(0, defaults.integer(forKey: Key.detentPresetIndex))
+            detentTuningIntensity = min(
+                1,
+                max(0, defaults.double(forKey: Key.detentIntensity)))
+            detentTuningSharpness = min(
+                1,
+                max(0, defaults.double(forKey: Key.detentSharpness)))
+        }
         comboHaloTuning = Self.loadComboHaloTuning(defaults: defaults)
         if needsInteractionModeMigration
             || needsPerceptibilityMigration
@@ -1360,6 +1439,26 @@ private final class ProductUiState: ObservableObject {
         UserDefaults.standard.set(model.rawValue, forKey: Key.selectedModel)
     }
 
+    func beginEnvironmentThemePreview() {
+        environmentThemePreview = environmentTheme
+        isEnvironmentPickerPresented = true
+    }
+
+    func cancelEnvironmentThemePreview() {
+        environmentThemePreview = environmentTheme
+        isEnvironmentPickerPresented = false
+    }
+
+    func selectEnvironmentTheme(_ theme: EnvironmentTheme) {
+        environmentTheme = theme
+        environmentThemePreview = theme
+        isEnvironmentPickerPresented = false
+        UserDefaults.standard.set(theme.rawValue, forKey: Key.environmentTheme)
+        UnityBridge.send(
+            "SetEnvironmentThemeFromNativeUi",
+            value: theme.rawValue)
+    }
+
     func applyAndPersist(includeMode: Bool = false) {
         applyProductControlMappings()
         let defaults = UserDefaults.standard
@@ -1369,6 +1468,9 @@ private final class ProductUiState: ObservableObject {
         defaults.set(hapticSharpness, forKey: Key.hapticSharpness)
         defaults.set(hapticSpeedInfluence, forKey: Key.hapticSpeedInfluence)
         defaults.set(hapticRhythm.rawValue, forKey: Key.hapticRhythm)
+        if hasPersistedDetentTuning || detentPresetCount > 0 {
+            persistDetentTuning(defaults: defaults)
+        }
         defaults.set(ratchetFeel.rawValue, forKey: Key.ratchetFeel)
         defaults.set(8, forKey: Key.hapticTuningVersion)
         defaults.set(spinResponseLevel, forKey: Key.spinResponseLevel)
@@ -1388,6 +1490,7 @@ private final class ProductUiState: ObservableObject {
         defaults.set(flipDuration, forKey: Key.flipDuration)
         defaults.set(flipOvershoot, forKey: Key.flipOvershoot)
         defaults.set(flipOnRelease, forKey: Key.flipOnRelease)
+        defaults.set(environmentTheme.rawValue, forKey: Key.environmentTheme)
         persistSpeedTextureProfiles(defaults: defaults)
         persistAdvancedRecipes(defaults: defaults)
 
@@ -1409,6 +1512,9 @@ private final class ProductUiState: ObservableObject {
         UnityBridge.send("SetFlipDurationFromNativeUi", value: String(flipDuration))
         UnityBridge.send("SetFlipOvershootFromNativeUi", value: String(flipOvershoot))
         UnityBridge.send("SetFlipOnReleaseFromNativeUi", value: String(flipOnRelease))
+        UnityBridge.send(
+            "SetEnvironmentThemeFromNativeUi",
+            value: environmentTheme.rawValue)
         UnityBridge.send(
             "SetHapticSpeedTextureProfileFromNativeUi",
             value: speedTextureProfile.bridgePayload)
@@ -1599,11 +1705,13 @@ private final class ProductUiState: ObservableObject {
 
     func selectDetentPreset(_ index: Int) {
         detentPresetIndex = index
+        persistDetentTuning(defaults: UserDefaults.standard)
         UnityBridge.send("SetDetentFeelPresetFromNativeUi", value: String(index))
     }
 
     func setDetentIntensityOverride(_ value: Double) {
         detentTuningIntensity = min(1, max(0, value))
+        persistDetentTuning(defaults: UserDefaults.standard)
         UnityBridge.send(
             "SetDetentIntensityOverrideFromNativeUi",
             value: String(detentTuningIntensity))
@@ -1611,6 +1719,7 @@ private final class ProductUiState: ObservableObject {
 
     func setDetentSharpnessOverride(_ value: Double) {
         detentTuningSharpness = min(1, max(0, value))
+        persistDetentTuning(defaults: UserDefaults.standard)
         UnityBridge.send(
             "SetDetentSharpnessOverrideFromNativeUi",
             value: String(detentTuningSharpness))
@@ -1629,6 +1738,20 @@ private final class ProductUiState: ObservableObject {
         detentPresetDetents = detents
         detentTuningIntensity = intensity
         detentTuningSharpness = sharpness
+        persistDetentTuning(defaults: UserDefaults.standard)
+    }
+
+    func restorePersistedDetentTuningIfAvailable() {
+        guard hasPersistedDetentTuning else { return }
+        UnityBridge.send(
+            "SetDetentFeelPresetFromNativeUi",
+            value: String(detentPresetIndex))
+        UnityBridge.send(
+            "SetDetentIntensityOverrideFromNativeUi",
+            value: String(detentTuningIntensity))
+        UnityBridge.send(
+            "SetDetentSharpnessOverrideFromNativeUi",
+            value: String(detentTuningSharpness))
     }
 
     func setProgressionAssistantMultiplier(_ multiplier: Double) {
@@ -1694,10 +1817,9 @@ private final class ProductUiState: ObservableObject {
         completedWeeks: Int,
         discoveredModelCount: Int,
         cosmeticCount: Int,
-        unlockedAchievementCount: Int,
-        totalAchievementCount: Int,
         discoveredModelIds: Set<String>,
-        achievements: [CollectorAchievementDetail],
+        badges: [ProductBadgeDetail],
+        shardBalance: Int,
         previousRank: Int) {
         collectorRank = max(1, min(30, rank))
         collectorTotalExperience = max(0, totalExperience)
@@ -1714,11 +1836,17 @@ private final class ProductUiState: ObservableObject {
         collectorCompletedWeeks = max(0, completedWeeks)
         collectorDiscoveredModelCount = max(0, discoveredModelCount)
         collectorCosmeticCount = max(0, cosmeticCount)
-        collectorUnlockedAchievementCount = max(0, unlockedAchievementCount)
-        collectorTotalAchievementCount = max(0, totalAchievementCount)
         collectorDiscoveredModelIds = discoveredModelIds
-        detectNewCollectorUnlocks(achievements)
-        collectorAchievements = achievements
+        collectorBadgeCatalog = badges.filter { $0.scope == .collector }
+        challengeBadgeCatalog = badges.filter { $0.scope == .challenge }
+        legacyBadgeCatalog = badges.filter { $0.scope == .legacy }
+        collectorUnlockedBadgeCount = collectorBadgeCatalog.filter(\.unlocked).count
+        collectorTotalBadgeCount = collectorBadgeCatalog.count
+        badgeShardBalance = max(badgeShardBalance, max(0, shardBalance))
+        detectNewBadgeUnlocks(
+            contextKey: "global",
+            sourceTitle: "藏家档案",
+            badges: collectorBadgeCatalog + challengeBadgeCatalog + legacyBadgeCatalog)
 
         if previousRank > 0 && collectorRank > previousRank {
             collectorRankUp = CollectorRankUp(
@@ -1726,65 +1854,6 @@ private final class ProductUiState: ObservableObject {
                 newRank: collectorRank)
             showingCollectorRankUp = true
         }
-    }
-
-    private func detectNewCollectorUnlocks(_ achievements: [CollectorAchievementDetail]) {
-        let storageKey = "fidgeting.collector.seenAchievements.v1"
-        let unlocked = Set(achievements.filter(\.unlocked).map(\.id))
-        if seenCollectorAchievementIds == nil {
-            let defaults = UserDefaults.standard
-            if defaults.object(forKey: storageKey) == nil {
-                seenCollectorAchievementIds = unlocked
-                defaults.set(Array(unlocked).sorted(), forKey: storageKey)
-                return
-            }
-            seenCollectorAchievementIds = Set(
-                defaults.stringArray(forKey: storageKey) ?? [])
-        }
-
-        let seen = seenCollectorAchievementIds ?? []
-        let newlyUnlocked = achievements.filter {
-            $0.unlocked && !seen.contains($0.id)
-        }
-        seenCollectorAchievementIds = unlocked
-        UserDefaults.standard.set(Array(unlocked).sorted(), forKey: storageKey)
-        enqueueCollectorUnlocks(newlyUnlocked)
-    }
-
-    private func enqueueCollectorUnlocks(_ achievements: [CollectorAchievementDetail]) {
-        let existingIds = Set(
-            pendingCollectorUnlocks.map(\.id)
-                + [collectorUnlockNotice?.id].compactMap { $0 })
-        pendingCollectorUnlocks.append(contentsOf: achievements.filter {
-            !existingIds.contains($0.id)
-        })
-        guard !showingCollectorUnlockNotice else { return }
-        presentNextCollectorUnlock()
-    }
-
-    private func presentNextCollectorUnlock() {
-        collectorUnlockDismissWorkItem?.cancel()
-        guard !pendingCollectorUnlocks.isEmpty else {
-            collectorUnlockNotice = nil
-            showingCollectorUnlockNotice = false
-            return
-        }
-
-        collectorUnlockNotice = pendingCollectorUnlocks.removeFirst()
-        withAnimation(.spring(response: 0.38, dampingFraction: 0.76)) {
-            showingCollectorUnlockNotice = true
-        }
-        let dismiss = DispatchWorkItem { [weak self] in
-            guard let self else { return }
-            withAnimation(.easeOut(duration: 0.28)) {
-                self.showingCollectorUnlockNotice = false
-            }
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.34) { [weak self] in
-                self?.presentNextCollectorUnlock()
-            }
-        }
-        collectorUnlockDismissWorkItem = dismiss
-        DispatchQueue.main.asyncAfter(deadline: .now() + 3.2, execute: dismiss)
     }
 
     func updateProgression(
@@ -1808,9 +1877,8 @@ private final class ProductUiState: ObservableObject {
         todayGestures: Int,
         activeInteractionSeconds: Double,
         lifetimeOfflineExperience: Double,
-        unlockedAchievementCount: Int,
-        totalAchievementCount: Int,
-        achievements: [ProgressionAchievementDetail],
+        badges: [ProductBadgeDetail],
+        shardBalance: Int,
         threeBladeMetalSkins: [ThreeBladeMetalSkinDetail],
         equippedThreeBladeMetalSkinId: String,
         productStickers: [ProductStickerDetail],
@@ -1841,10 +1909,14 @@ private final class ProductUiState: ObservableObject {
         progressionTodayGestures = max(0, todayGestures)
         progressionActiveInteractionSeconds = max(0, activeInteractionSeconds)
         progressionLifetimeOfflineExperience = max(0, lifetimeOfflineExperience)
-        progressionUnlockedAchievementCount = max(0, unlockedAchievementCount)
-        progressionTotalAchievementCount = max(0, totalAchievementCount)
-        detectNewBadgeUnlocks(model: model, achievements: achievements)
-        progressionAchievements = achievements
+        toyBadgeCatalog = badges.filter { $0.scope == .toy }
+        progressionUnlockedBadgeCount = toyBadgeCatalog.filter(\.unlocked).count
+        progressionTotalBadgeCount = toyBadgeCatalog.count
+        badgeShardBalance = max(badgeShardBalance, max(0, shardBalance))
+        detectNewBadgeUnlocks(
+            contextKey: "toy.\(model.rawValue)",
+            sourceTitle: model.title,
+            badges: toyBadgeCatalog)
         self.threeBladeMetalSkins = threeBladeMetalSkins
         self.equippedThreeBladeMetalSkinId = equippedThreeBladeMetalSkinId
         self.productStickers = productStickers
@@ -1852,42 +1924,94 @@ private final class ProductUiState: ObservableObject {
 
         if let offlineReward, offlineReward.experience >= 1 {
             offlineProgressionReward = offlineReward
+            progressionTopAvatarRewardPending = true
+            progressionTopAvatarLevelOverride = offlineReward.previousLevel
+            progressionTopAvatarProgressOverride = min(
+                1,
+                max(0, offlineReward.previousLevelProgress))
             showingOfflineProgressionReward = true
+        } else if !progressionTopAvatarRewardPending {
+            progressionTopAvatarLevelOverride = nil
+            progressionTopAvatarProgressOverride = nil
         }
         if let liveLevelUp, liveLevelUp.newLevel > liveLevelUp.previousLevel {
             liveProgressionLevelUp = liveLevelUp
-            showingLiveProgressionLevelUp = true
+            if !showingOfflineProgressionReward {
+                showingLiveProgressionLevelUp = true
+            }
         }
     }
 
-    private func detectNewBadgeUnlocks(
-        model: SpinnerModel,
-        achievements: [ProgressionAchievementDetail]) {
-        let modelId = model.rawValue
-        let storageKey = "fidgeting.progression.seenBadges.v1.\(modelId)"
-        let unlocked = Set(achievements.filter(\.unlocked).map(\.id))
+    func dismissOfflineProgressionReward() {
+        showingOfflineProgressionReward = false
+        guard liveProgressionLevelUp.newLevel > liveProgressionLevelUp.previousLevel else {
+            return
+        }
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.34) { [weak self] in
+            self?.showingLiveProgressionLevelUp = true
+        }
+    }
 
-        if seenBadgeIdsByModel[modelId] == nil {
+    func dismissLiveProgressionLevelUp() {
+        showingLiveProgressionLevelUp = false
+        liveProgressionLevelUp = LiveProgressionLevelUp()
+    }
+
+    func updateProgressionTopAvatarFrame(_ frame: CGRect) {
+        guard frame.width > 1, frame.height > 1,
+              !progressionTopAvatarFrame.approximatelyEquals(frame) else { return }
+        progressionTopAvatarFrame = frame
+    }
+
+    func updateProgressionSheetAvatarFrame(_ frame: CGRect) {
+        guard frame.width > 1, frame.height > 1,
+              !progressionSheetAvatarFrame.approximatelyEquals(frame) else { return }
+        progressionSheetAvatarFrame = frame
+    }
+
+    func commitProgressionTopAvatar(_ reward: OfflineProgressionReward) {
+        progressionTopAvatarRewardPending = false
+        progressionTopAvatarLevelOverride = max(1, reward.newLevel)
+        progressionTopAvatarProgressOverride = min(
+            1,
+            max(0, reward.newLevelProgress))
+        progressionTopAvatarPulseToken &+= 1
+    }
+
+    private func detectNewBadgeUnlocks(
+        contextKey: String,
+        sourceTitle: String,
+        badges: [ProductBadgeDetail]) {
+        let storageKey = "fidgeting.badges.seen.v2.\(contextKey)"
+        let unlocked = Set(
+            badges.filter(\.unlocked).map(\.unlockIdentity))
+
+        if seenBadgeIdsByContext[contextKey] == nil {
             let defaults = UserDefaults.standard
             if defaults.object(forKey: storageKey) == nil {
-                seenBadgeIdsByModel[modelId] = unlocked
+                seenBadgeIdsByContext[contextKey] = unlocked
                 defaults.set(Array(unlocked).sorted(), forKey: storageKey)
                 return
             }
-            seenBadgeIdsByModel[modelId] = Set(
+            seenBadgeIdsByContext[contextKey] = Set(
                 defaults.stringArray(forKey: storageKey) ?? [])
         }
 
-        let seen = seenBadgeIdsByModel[modelId] ?? []
-        let newlyUnlocked = achievements.filter {
-            $0.unlocked && !seen.contains($0.id)
+        let seen = seenBadgeIdsByContext[contextKey] ?? []
+        let newlyUnlocked = badges.filter {
+            $0.unlocked && !seen.contains($0.unlockIdentity)
+        }.map { badge in
+            ProductBadgeUnlockEvent(
+                id: "\(contextKey):\(badge.unlockIdentity)",
+                badge: badge,
+                sourceTitle: sourceTitle)
         }
-        seenBadgeIdsByModel[modelId] = unlocked
+        seenBadgeIdsByContext[contextKey] = unlocked
         UserDefaults.standard.set(Array(unlocked).sorted(), forKey: storageKey)
         enqueueBadgeUnlocks(newlyUnlocked)
     }
 
-    private func enqueueBadgeUnlocks(_ badges: [ProgressionAchievementDetail]) {
+    private func enqueueBadgeUnlocks(_ badges: [ProductBadgeUnlockEvent]) {
         let existingIds = Set(
             pendingBadgeUnlocks.map(\.id)
                 + [badgeUnlockNotice?.id].compactMap { $0 })
@@ -2091,6 +2215,13 @@ private final class ProductUiState: ObservableObject {
             value: recipe.bridgePayload(for: semantic))
     }
 
+    private func persistDetentTuning(defaults: UserDefaults) {
+        hasPersistedDetentTuning = true
+        defaults.set(detentPresetIndex, forKey: Key.detentPresetIndex)
+        defaults.set(detentTuningIntensity, forKey: Key.detentIntensity)
+        defaults.set(detentTuningSharpness, forKey: Key.detentSharpness)
+    }
+
     private func sendAllAdvancedRecipes() {
         for semantic in EditableHapticSemantic.allCases {
             sendAdvancedRecipe(semantic)
@@ -2171,8 +2302,1030 @@ private final class ProductUiState: ObservableObject {
     }
 }
 
+private enum ProgressionCelebrationKind: Equatable {
+    case offline
+    case liveLevelUp
+}
+
+private struct ProgressionReduceMotionPreviewOverrideKey: EnvironmentKey {
+    static let defaultValue = false
+}
+
+extension EnvironmentValues {
+    var progressionReduceMotionPreviewOverride: Bool {
+        get { self[ProgressionReduceMotionPreviewOverrideKey.self] }
+        set { self[ProgressionReduceMotionPreviewOverrideKey.self] = newValue }
+    }
+}
+
+private extension CGRect {
+    func approximatelyEquals(_ other: CGRect, tolerance: CGFloat = 0.5) -> Bool {
+        abs(minX - other.minX) <= tolerance
+            && abs(minY - other.minY) <= tolerance
+            && abs(width - other.width) <= tolerance
+            && abs(height - other.height) <= tolerance
+    }
+}
+
+private struct ProductWindowFrameReader: UIViewRepresentable {
+    let onChange: (CGRect) -> Void
+
+    func makeUIView(context: Context) -> UIView {
+        let view = UIView(frame: .zero)
+        view.isUserInteractionEnabled = false
+        view.isAccessibilityElement = false
+        return view
+    }
+
+    func updateUIView(_ uiView: UIView, context: Context) {
+        DispatchQueue.main.async {
+            guard let window = uiView.window else { return }
+            onChange(uiView.convert(uiView.bounds, to: window))
+        }
+    }
+}
+
+private struct ProgressionRewardCelebrationView: View {
+    @ObservedObject var state: ProductUiState
+    let kind: ProgressionCelebrationKind
+    let animationDelay: Double
+    let onComplete: () -> Void
+
+    @Environment(\.accessibilityReduceMotion) private var reduceMotion
+    @Environment(\.progressionReduceMotionPreviewOverride)
+    private var reduceMotionPreviewOverride
+    @State private var cardVisible = false
+    @State private var animatedExperience = 0.0
+    @State private var ringProgress = 0.0
+    @State private var displayedRingLevel = 1
+    @State private var levelReveal = false
+    @State private var rewardDetailsVisible = true
+    @State private var didStart = false
+    @State private var isCompleting = false
+
+    init(
+        state: ProductUiState,
+        kind: ProgressionCelebrationKind,
+        animationDelay: Double = 0,
+        onComplete: @escaping () -> Void) {
+        _state = ObservedObject(wrappedValue: state)
+        self.kind = kind
+        self.animationDelay = max(0, animationDelay)
+        self.onComplete = onComplete
+    }
+
+    private var offlineReward: OfflineProgressionReward {
+        state.offlineProgressionReward
+    }
+
+    private var previousLevel: Int {
+        switch kind {
+        case .offline: return offlineReward.previousLevel
+        case .liveLevelUp: return state.liveProgressionLevelUp.previousLevel
+        }
+    }
+
+    private var newLevel: Int {
+        switch kind {
+        case .offline: return offlineReward.newLevel
+        case .liveLevelUp: return state.liveProgressionLevelUp.newLevel
+        }
+    }
+
+    private var showsLevelUp: Bool {
+        newLevel > previousLevel
+    }
+
+    private var accent: Color {
+        kind == .offline ? offlineReward.model.accent : state.currentAppearanceAccent
+    }
+
+    private var levelTitle: String {
+        state.progressionLevelTitle
+    }
+
+    private var elapsedText: String {
+        let totalMinutes = max(1, Int((offlineReward.elapsedHours * 60).rounded()))
+        let hours = totalMinutes / 60
+        let minutes = totalMinutes % 60
+        if hours == 0 { return "\(minutes) 分钟" }
+        if minutes == 0 { return "\(hours) 小时" }
+        return "\(hours) 小时 \(minutes) 分"
+    }
+
+    private var hourlyGrowthText: String {
+        let hourly = offlineReward.elapsedHours > 0
+            ? offlineReward.experience / offlineReward.elapsedHours
+            : offlineReward.experience
+        return "+\(Int(hourly.rounded()).formatted()) / 小时"
+    }
+
+    private var initialRingProgress: Double {
+        min(1, max(0, offlineReward.previousLevelProgress))
+    }
+
+    private var finalRingProgress: Double {
+        min(1, max(0, offlineReward.newLevelProgress))
+    }
+
+    private var shouldReduceMotion: Bool {
+        reduceMotion || reduceMotionPreviewOverride
+    }
+
+    var body: some View {
+        ZStack {
+            Color.black.opacity(0.34)
+                .ignoresSafeArea()
+
+            RadialGradient(
+                colors: [accent.opacity(levelReveal ? 0.20 : 0.08), .clear],
+                center: .bottom,
+                startRadius: 12,
+                endRadius: 420)
+                .ignoresSafeArea()
+                .animation(.easeOut(duration: 0.8), value: levelReveal)
+
+            VStack(spacing: 0) {
+                Spacer(minLength: 64)
+
+                ScrollView(showsIndicators: false) {
+                    VStack(spacing: 16) {
+                        celebrationHeader
+
+                        if kind == .offline {
+                            ProgressionAvatarLevelRing(
+                                level: displayedRingLevel,
+                                progress: ringProgress,
+                                accent: accent,
+                                showsLevelUp: showsLevelUp && levelReveal)
+                                .background(
+                                    ProductWindowFrameReader { frame in
+                                        state.updateProgressionSheetAvatarFrame(frame)
+                                    })
+                        } else {
+                            ProgressionLevelUpHalo(
+                                previousLevel: previousLevel,
+                                newLevel: newLevel,
+                                levelTitle: levelTitle,
+                                accent: accent,
+                                revealed: levelReveal)
+                        }
+
+                        if kind == .offline {
+                            offlineMetrics
+
+                            HStack {
+                                Text("平均每小时")
+                                Spacer()
+                                Text(hourlyGrowthText)
+                                    .foregroundStyle(accent.opacity(0.88))
+                            }
+                            .font(.product(.caption, weight: .bold))
+                            .foregroundStyle(Color.white.opacity(0.50))
+                            .padding(.horizontal, 4)
+                            .opacity(rewardDetailsVisible ? 1 : 0.24)
+
+                            if showsLevelUp {
+                                levelJourney
+                            }
+                        } else {
+                            liveReward
+
+                            Button(action: complete) {
+                                Text("继续转")
+                                    .font(.product(.headline, weight: .black))
+                                    .foregroundStyle(Color.black.opacity(0.88))
+                                    .frame(maxWidth: .infinity, minHeight: 54)
+                                    .background(
+                                        Color.white,
+                                        in: RoundedRectangle(
+                                            cornerRadius: 18,
+                                            style: .continuous))
+                            }
+                            .buttonStyle(.plain)
+                            .contentShape(
+                                RoundedRectangle(cornerRadius: 18, style: .continuous))
+                            .allowsHitTesting(true)
+                            .zIndex(10)
+                            .accessibilityIdentifier("progression-reward-primary-action")
+                            .accessibilityHint("关闭成长反馈并返回陀螺")
+                        }
+                    }
+                    .padding(22)
+                }
+                .frame(maxWidth: 430, maxHeight: 660)
+                .background(
+                    Color.black.opacity(0.58),
+                    in: RoundedRectangle(cornerRadius: 32, style: .continuous))
+                .productGlass(
+                    cornerRadius: 32,
+                    tint: Color.white.opacity(0.040),
+                    interactive: false)
+                .padding(.horizontal, 12)
+                .padding(.bottom, 8)
+                .offset(y: cardVisible ? 0 : 96)
+                .opacity(cardVisible ? 1 : 0)
+            }
+        }
+        .productDesignSystem()
+        .preferredColorScheme(.dark)
+        .interactiveDismissDisabled()
+        .accessibilityElement(children: .contain)
+        .onAppear(perform: startAnimation)
+    }
+
+    private func complete() {
+        guard !isCompleting else { return }
+        isCompleting = true
+        onComplete()
+        if kind == .liveLevelUp {
+            UnityBridge.feedback(showsLevelUp ? .heavy : .medium)
+        }
+    }
+
+    private var celebrationHeader: some View {
+        HStack(spacing: 10) {
+            Image(systemName: kind == .offline ? "moon.stars.fill" : "arrow.up.forward")
+                .font(.product(size: 14, weight: .bold))
+                .foregroundStyle(accent.opacity(0.90))
+                .frame(width: 30, height: 30)
+                .background(
+                    accent.opacity(0.12),
+                    in: RoundedRectangle(cornerRadius: 10, style: .continuous))
+
+            VStack(alignment: .leading, spacing: 2) {
+                Text(kind == .offline ? "离线成长结算" : "成长升级")
+                    .font(.product(.headline, weight: .bold))
+                    .foregroundStyle(.white)
+                Text(kind == .offline ? offlineReward.model.title : "实时成长已到账")
+                    .font(.product(.caption, weight: .medium))
+                    .foregroundStyle(Color.white.opacity(0.52))
+            }
+
+            Spacer(minLength: 0)
+
+            if kind == .offline, offlineReward.assistantEnabled {
+                ProductInlineTag(
+                    title: "AUTO 持续运行",
+                    accent: accent,
+                    filled: true)
+            }
+        }
+    }
+
+    private var offlineMetrics: some View {
+        HStack(spacing: 10) {
+            ProgressionTimeMetric(
+                elapsedText: elapsedText,
+                accent: accent,
+                revealed: rewardDetailsVisible)
+
+            ProgressionExperienceMetric(
+                experience: animatedExperience,
+                accent: accent,
+                revealed: rewardDetailsVisible)
+        }
+    }
+
+    private var levelJourney: some View {
+        HStack(spacing: 12) {
+            Text("LV.\(previousLevel)")
+                .font(.product(.subheadline, weight: .bold))
+                .monospacedDigit()
+                .foregroundStyle(Color.white.opacity(0.46))
+            Image(systemName: "arrow.right")
+                .font(.product(.caption, weight: .bold))
+                .foregroundStyle(accent.opacity(0.76))
+            Text("LV.\(newLevel)")
+                .font(.product(.title3, weight: .black))
+                .monospacedDigit()
+                .foregroundStyle(.white)
+            Spacer(minLength: 0)
+            Text("连升 \(newLevel - previousLevel) 级")
+                .font(.product(.caption, weight: .bold))
+                .foregroundStyle(accent.opacity(0.86))
+        }
+        .padding(.horizontal, 14)
+        .padding(.vertical, 12)
+        .background(
+            Color.white.opacity(0.035),
+            in: RoundedRectangle(cornerRadius: 16, style: .continuous))
+        .opacity(levelReveal ? 1 : 0)
+        .offset(y: levelReveal ? 0 : 10)
+        .animation(.spring(response: 0.46, dampingFraction: 0.78), value: levelReveal)
+        .accessibilityElement(children: .ignore)
+        .accessibilityLabel("等级从 \(previousLevel) 提升到 \(newLevel)")
+    }
+
+    private var liveReward: some View {
+        HStack(spacing: 12) {
+            Image(systemName: "shippingbox.fill")
+                .font(.product(size: 17, weight: .semibold))
+                .foregroundStyle(accent.opacity(0.88))
+                .frame(width: 38, height: 38)
+                .background(
+                    accent.opacity(0.11),
+                    in: RoundedRectangle(cornerRadius: 12, style: .continuous))
+            VStack(alignment: .leading, spacing: 3) {
+                Text("本级奖励")
+                    .font(.product(.caption2, weight: .bold))
+                    .foregroundStyle(Color.white.opacity(0.46))
+                Text(state.liveProgressionLevelUp.rewardName)
+                    .font(.product(.subheadline, weight: .bold))
+                    .foregroundStyle(.white)
+            }
+            Spacer(minLength: 0)
+        }
+        .padding(13)
+        .background(
+            Color.white.opacity(0.035),
+            in: RoundedRectangle(cornerRadius: 17, style: .continuous))
+        .opacity(levelReveal ? 1 : 0)
+        .offset(y: levelReveal ? 0 : 10)
+        .animation(.spring(response: 0.46, dampingFraction: 0.78), value: levelReveal)
+    }
+
+    private func startAnimation() {
+        guard !didStart else { return }
+        didStart = true
+        displayedRingLevel = previousLevel
+        ringProgress = initialRingProgress
+
+        if shouldReduceMotion {
+            cardVisible = true
+            animatedExperience = offlineReward.experience
+            displayedRingLevel = newLevel
+            ringProgress = finalRingProgress
+            levelReveal = showsLevelUp
+            if kind == .offline {
+                DispatchQueue.main.asyncAfter(deadline: .now() + 1.35) {
+                    complete()
+                }
+            }
+            return
+        }
+
+        if animationDelay > 0 {
+            DispatchQueue.main.asyncAfter(deadline: .now() + animationDelay) {
+                runAnimatedSequence()
+            }
+        } else {
+            runAnimatedSequence()
+        }
+    }
+
+    private func runAnimatedSequence() {
+        withAnimation(.spring(response: 0.48, dampingFraction: 0.84)) {
+            cardVisible = true
+        }
+        guard kind == .offline else {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.82) {
+                withAnimation(.spring(response: 0.58, dampingFraction: 0.67)) {
+                    levelReveal = showsLevelUp
+                }
+                if showsLevelUp { UnityBridge.feedback(.heavy) }
+            }
+            return
+        }
+
+        withAnimation(.easeOut(duration: 1.30).delay(0.22)) {
+            animatedExperience = offlineReward.experience
+        }
+
+        if showsLevelUp {
+            withAnimation(.easeInOut(duration: 0.72).delay(0.18)) {
+                ringProgress = 1
+            }
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.96) {
+                displayedRingLevel = newLevel
+                ringProgress = 0
+                withAnimation(.easeOut(duration: 0.72)) {
+                    ringProgress = finalRingProgress
+                    levelReveal = true
+                }
+                UnityBridge.feedback(.heavy)
+            }
+        } else {
+            withAnimation(.easeOut(duration: 1.30).delay(0.22)) {
+                ringProgress = finalRingProgress
+            }
+        }
+
+        let settlementEnd = showsLevelUp ? 2.20 : 1.82
+        DispatchQueue.main.asyncAfter(deadline: .now() + settlementEnd) {
+            withAnimation(.easeIn(duration: 0.28)) {
+                cardVisible = false
+            }
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.30) {
+                complete()
+            }
+        }
+    }
+}
+
+private struct ProgressionAnimatedValue: View, Animatable {
+    var value: Double
+    let prefix: String
+    let suffix: String
+
+    var animatableData: Double {
+        get { value }
+        set { value = newValue }
+    }
+
+    var body: some View {
+        Text(prefix + NumberFormatter.localizedString(
+            from: NSNumber(value: Int(value.rounded())),
+            number: .decimal) + suffix)
+    }
+}
+
+private struct ProgressionTimeMetric: View {
+    let elapsedText: String
+    let accent: Color
+    let revealed: Bool
+
+    var body: some View {
+        VStack(alignment: .leading, spacing: 8) {
+            Label("离线时长", systemImage: "clock.fill")
+                .font(.product(.caption2, weight: .bold))
+                .foregroundStyle(Color.white.opacity(0.48))
+            Text(elapsedText)
+                .font(.product(.title3, weight: .black))
+                .monospacedDigit()
+                .foregroundStyle(.white)
+                .lineLimit(1)
+                .minimumScaleFactor(0.74)
+        }
+        .frame(maxWidth: .infinity, alignment: .leading)
+        .padding(13)
+        .background(
+            Color.white.opacity(0.032),
+            in: RoundedRectangle(cornerRadius: 17, style: .continuous))
+        .overlay(alignment: .topTrailing) {
+            Circle()
+                .fill(accent.opacity(0.72))
+                .frame(width: 5, height: 5)
+                .padding(12)
+        }
+        .opacity(revealed ? 1 : 0.36)
+        .offset(y: revealed ? 0 : 8)
+    }
+}
+
+private struct ProgressionExperienceMetric: View {
+    let experience: Double
+    let accent: Color
+    let revealed: Bool
+
+    var body: some View {
+        VStack(alignment: .leading, spacing: 8) {
+            Label("收集成长值", systemImage: "sparkles")
+                .font(.product(.caption2, weight: .bold))
+                .foregroundStyle(Color.white.opacity(0.48))
+            ProgressionAnimatedValue(value: experience, prefix: "+", suffix: "")
+                .font(.product(.title3, weight: .black))
+                .monospacedDigit()
+                .foregroundStyle(.white)
+                .lineLimit(1)
+                .minimumScaleFactor(0.74)
+        }
+        .frame(maxWidth: .infinity, alignment: .leading)
+        .padding(13)
+        .background(
+            Color.white.opacity(0.032),
+            in: RoundedRectangle(cornerRadius: 17, style: .continuous))
+        .overlay(alignment: .topTrailing) {
+            Image(systemName: "sparkle")
+                .font(.product(size: 9, weight: .bold))
+                .foregroundStyle(accent.opacity(0.80))
+                .padding(10)
+        }
+        .opacity(revealed ? 1 : 0.36)
+        .offset(y: revealed ? 0 : 8)
+        .accessibilityElement(children: .ignore)
+        .accessibilityLabel("收集成长值 \(Int(experience.rounded()))")
+    }
+}
+
+private struct ProgressionAvatarLevelRing: View {
+    let level: Int
+    let progress: Double
+    let accent: Color
+    let showsLevelUp: Bool
+
+    var body: some View {
+        ZStack {
+            Circle()
+                .fill(
+                    RadialGradient(
+                        colors: [accent.opacity(showsLevelUp ? 0.28 : 0.16), .clear],
+                        center: .center,
+                        startRadius: 2,
+                        endRadius: 108))
+                .frame(width: 214, height: 214)
+
+            Circle()
+                .stroke(Color.white.opacity(0.10), lineWidth: 7)
+                .frame(width: 142, height: 142)
+
+            Circle()
+                .trim(from: 0, to: min(1, max(0, progress)))
+                .stroke(
+                    AngularGradient(
+                        colors: [
+                            Color.white.opacity(0.42),
+                            accent.opacity(0.92),
+                            Color.white.opacity(0.82)
+                        ],
+                        center: .center),
+                    style: StrokeStyle(lineWidth: 8, lineCap: .round))
+                .rotationEffect(.degrees(-90))
+                .frame(width: 142, height: 142)
+                .shadow(color: accent.opacity(0.44), radius: 10)
+
+            VStack(spacing: 5) {
+                Image(systemName: "person.crop.circle")
+                    .font(.product(size: 55, weight: .medium))
+                    .foregroundStyle(Color.white.opacity(0.92))
+                Text("LV.\(level)")
+                    .font(.product(.headline, weight: .black))
+                    .monospacedDigit()
+                    .foregroundStyle(.white)
+                Text(showsLevelUp ? "LEVEL UP" : "当前等级")
+                    .font(.product(.caption2, weight: .bold))
+                    .foregroundStyle(accent.opacity(showsLevelUp ? 0.94 : 0.64))
+            }
+
+        }
+        .frame(height: 190)
+        .accessibilityElement(children: .ignore)
+        .accessibilityLabel(
+            "当前用户头像，等级 \(level)，本级进度 \(Int(progress * 100))%")
+    }
+}
+
+private struct ProgressionRewardFlightEffect: GeometryEffect {
+    var progress: CGFloat
+    let start: CGPoint
+    let end: CGPoint
+    let arcOffset: CGFloat
+
+    var animatableData: CGFloat {
+        get { progress }
+        set { progress = newValue }
+    }
+
+    func effectValue(size: CGSize) -> ProjectionTransform {
+        let t = min(1, max(0, progress))
+        let inverse = 1 - t
+        let control = CGPoint(
+            x: (start.x + end.x) * 0.5 + arcOffset,
+            y: min(start.y, end.y) - 72 - abs(start.x - end.x) * 0.08)
+        let point = CGPoint(
+            x: inverse * inverse * start.x
+                + 2 * inverse * t * control.x
+                + t * t * end.x,
+            y: inverse * inverse * start.y
+                + 2 * inverse * t * control.y
+                + t * t * end.y)
+        return ProjectionTransform(CGAffineTransform(
+            translationX: point.x - start.x,
+            y: point.y - start.y))
+    }
+}
+
+private struct ProgressionRewardFlightFade: AnimatableModifier {
+    var progress: CGFloat
+    let scaleReduction: CGFloat
+
+    var animatableData: CGFloat {
+        get { progress }
+        set { progress = newValue }
+    }
+
+    func body(content: Content) -> some View {
+        let fade = min(1, max(0, (1 - progress) / 0.18))
+        content
+            .scaleEffect(1 - progress * scaleReduction)
+            .opacity(Double(fade))
+    }
+}
+
+private struct ProgressionPageRewardFlightView: View {
+    let experience: Double
+    let accent: Color
+    let sourceFrame: CGRect
+    let targetFrame: CGRect
+    let onArrive: () -> Void
+    let onComplete: () -> Void
+
+    @Environment(\.accessibilityReduceMotion) private var reduceMotion
+    @Environment(\.progressionReduceMotionPreviewOverride)
+    private var reduceMotionPreviewOverride
+    @State private var travelProgress: CGFloat = 0
+    @State private var didStart = false
+
+    private var source: CGPoint {
+        CGPoint(x: sourceFrame.midX, y: sourceFrame.midY)
+    }
+
+    private var target: CGPoint {
+        CGPoint(x: targetFrame.midX, y: targetFrame.midY)
+    }
+
+    private var shouldReduceMotion: Bool {
+        reduceMotion || reduceMotionPreviewOverride
+    }
+
+    var body: some View {
+        ZStack {
+            if !shouldReduceMotion {
+                ForEach(0..<9, id: \.self) { index in
+                    let angle = Double(index) * .pi * 2 / 9
+                    let particleStart = CGPoint(
+                        x: source.x + cos(angle) * 38,
+                        y: source.y + sin(angle) * 28)
+                    Image(systemName: index.isMultiple(of: 3) ? "sparkle" : "circle.fill")
+                        .font(.product(
+                            size: index.isMultiple(of: 3) ? 13 : 7,
+                            weight: .bold))
+                        .foregroundStyle(
+                            index.isMultiple(of: 2)
+                                ? Color.white.opacity(0.94)
+                                : accent.opacity(0.92))
+                        .position(particleStart)
+                        .modifier(ProgressionRewardFlightEffect(
+                            progress: travelProgress,
+                            start: particleStart,
+                            end: target,
+                            arcOffset: CGFloat(index - 4) * 9))
+                        .modifier(ProgressionRewardFlightFade(
+                            progress: travelProgress,
+                            scaleReduction: 0.68))
+                        .shadow(color: accent.opacity(0.46), radius: 7)
+                }
+
+                ProgressionAnimatedValue(
+                    value: experience,
+                    prefix: "+",
+                    suffix: " XP")
+                    .font(.product(.subheadline, weight: .black))
+                    .monospacedDigit()
+                    .foregroundStyle(.white)
+                    .padding(.horizontal, 11)
+                    .frame(height: 32)
+                    .background(Color.black.opacity(0.84), in: Capsule())
+                    .position(source)
+                    .modifier(ProgressionRewardFlightEffect(
+                        progress: travelProgress,
+                        start: source,
+                        end: target,
+                        arcOffset: 22))
+                    .modifier(ProgressionRewardFlightFade(
+                        progress: travelProgress,
+                        scaleReduction: 0.62))
+                    .shadow(color: accent.opacity(0.40), radius: 9)
+            }
+        }
+        .ignoresSafeArea()
+        .allowsHitTesting(false)
+        .accessibilityHidden(true)
+        .onAppear(perform: startAnimation)
+    }
+
+    private func startAnimation() {
+        guard !didStart else { return }
+        didStart = true
+        if shouldReduceMotion {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.08) {
+                onArrive()
+            }
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.58) {
+                onComplete()
+            }
+            return
+        }
+
+        withAnimation(.timingCurve(0.30, 0.04, 0.16, 1, duration: 1.16)) {
+            travelProgress = 1
+        }
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.98) {
+            onArrive()
+        }
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1.30) {
+            onComplete()
+        }
+    }
+}
+
+private struct ProgressionLevelUpHalo: View {
+    let previousLevel: Int
+    let newLevel: Int
+    let levelTitle: String
+    let accent: Color
+    let revealed: Bool
+
+    var body: some View {
+        ZStack {
+            Circle()
+                .fill(
+                    RadialGradient(
+                        colors: [accent.opacity(revealed ? 0.30 : 0.08), .clear],
+                        center: .center,
+                        startRadius: 6,
+                        endRadius: 128))
+                .frame(width: 250, height: 250)
+
+            ForEach(0..<3, id: \.self) { index in
+                Circle()
+                    .stroke(
+                        index == 0
+                            ? Color.white.opacity(revealed ? 0.44 : 0.10)
+                            : accent.opacity(revealed ? 0.30 - Double(index) * 0.07 : 0.06),
+                        lineWidth: index == 0 ? 1.4 : 1)
+                    .frame(
+                        width: CGFloat(118 + index * 38),
+                        height: CGFloat(118 + index * 38))
+                    .scaleEffect(revealed ? 1 : 0.58)
+            }
+
+            ForEach(0..<6, id: \.self) { index in
+                Image(systemName: index.isMultiple(of: 2) ? "sparkle" : "diamond.fill")
+                    .font(.product(size: index.isMultiple(of: 2) ? 11 : 6, weight: .bold))
+                    .foregroundStyle(
+                        index.isMultiple(of: 3)
+                            ? Color.white.opacity(0.84)
+                            : accent.opacity(0.78))
+                    .offset(
+                        x: cos(Double(index) * .pi / 3) * (revealed ? 102 : 34),
+                        y: sin(Double(index) * .pi / 3) * (revealed ? 82 : 28))
+                    .opacity(revealed ? 1 : 0)
+            }
+
+            VStack(spacing: 4) {
+                Text("LEVEL UP")
+                    .font(.product(.caption, weight: .black))
+                    .foregroundStyle(Color.white.opacity(0.58))
+                Text("LV.\(newLevel)")
+                    .font(.product(size: 46, weight: .black))
+                    .monospacedDigit()
+                    .foregroundStyle(.white)
+                Text(levelTitle)
+                    .font(.product(.subheadline, weight: .bold))
+                    .foregroundStyle(accent.opacity(0.86))
+            }
+            .scaleEffect(revealed ? 1 : 0.82)
+        }
+        .frame(height: 224)
+        .animation(.spring(response: 0.62, dampingFraction: 0.64), value: revealed)
+        .accessibilityElement(children: .ignore)
+        .accessibilityLabel("LEVEL UP，等级 \(previousLevel) 提升到 \(newLevel)，\(levelTitle)")
+    }
+}
+
+#if DEBUG
+struct ProgressionCelebrationNativePreviewRoot: View {
+    enum Mode: String {
+        case offline
+        case offlineNoLevel
+        case live
+    }
+
+    @StateObject private var state: ProductUiState
+    @State private var showingCelebration = true
+    @State private var showingPageFlight = false
+    @State private var acceptedReward = false
+    @State private var previewRootWindowFrame = CGRect.zero
+    let mode: Mode
+
+    init(mode: Mode) {
+        self.mode = mode
+        let previewState = ProductUiState()
+        previewState.selectedModel = .metalThreeBlade
+        previewState.progressionModel = .metalThreeBlade
+        previewState.progressionLevel = 42
+        previewState.progressionLevelTitle = "蓝钢技师"
+        previewState.progressionFraction = 0.62
+        previewState.progressionTotalExperience = 1680
+        previewState.offlineProgressionReward = OfflineProgressionReward(
+            model: .metalThreeBlade,
+            experience: 1680,
+            elapsedHours: 7.75,
+            previousLevel: mode == .offlineNoLevel ? 42 : 39,
+            newLevel: 42,
+            previousLevelProgress: mode == .offlineNoLevel ? 0.18 : 0.74,
+            newLevelProgress: 0.62,
+            assistantEnabled: true)
+        previewState.progressionTopAvatarLevelOverride =
+            mode == .offlineNoLevel ? 42 : 39
+        previewState.progressionTopAvatarProgressOverride =
+            mode == .offlineNoLevel ? 0.18 : 0.74
+        previewState.liveProgressionLevelUp = LiveProgressionLevelUp(
+            previousLevel: 39,
+            newLevel: 40,
+            rewardName: "夜航蓝钢刻度")
+        _state = StateObject(wrappedValue: previewState)
+    }
+
+    var body: some View {
+        ZStack {
+            ProgressionCelebrationPreviewContext(state: state)
+                .allowsHitTesting(!showingCelebration)
+                .accessibilityHidden(showingCelebration)
+                .accessibilityIdentifier(
+                    acceptedReward
+                        ? "progression-reward-auto-dismissed"
+                        : "progression-preview-context")
+            if showingCelebration {
+                ProgressionRewardCelebrationView(
+                    state: state,
+                    kind: mode == .live ? .liveLevelUp : .offline,
+                    animationDelay: 0.8,
+                    onComplete: {
+                        showingCelebration = false
+                        guard mode != .live else {
+                            acceptedReward = true
+                            return
+                        }
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.42) {
+                            showingPageFlight = true
+                        }
+                    })
+            }
+
+            if showingPageFlight,
+               state.progressionSheetAvatarFrame.width > 1,
+               state.progressionTopAvatarFrame.width > 1 {
+                ProgressionPageRewardFlightView(
+                    experience: state.offlineProgressionReward.experience,
+                    accent: state.offlineProgressionReward.model.accent,
+                    sourceFrame: localFrame(state.progressionSheetAvatarFrame),
+                    targetFrame: localFrame(state.progressionTopAvatarFrame),
+                    onArrive: {
+                        state.commitProgressionTopAvatar(
+                            state.offlineProgressionReward)
+                    },
+                    onComplete: {
+                        showingPageFlight = false
+                        acceptedReward = true
+                    })
+            }
+        }
+        .background(
+            ProductWindowFrameReader { frame in
+                previewRootWindowFrame = frame
+            })
+    }
+
+    private func localFrame(_ windowFrame: CGRect) -> CGRect {
+        windowFrame.offsetBy(
+            dx: -previewRootWindowFrame.minX,
+            dy: -previewRootWindowFrame.minY)
+    }
+}
+
+private struct ProgressionCelebrationPreviewContext: View {
+    @ObservedObject var state: ProductUiState
+
+    var body: some View {
+        ZStack {
+            LinearGradient(
+                colors: [
+                    Color(red: 0.025, green: 0.13, blue: 0.16),
+                    Color(red: 0.015, green: 0.025, blue: 0.04),
+                    Color(red: 0.12, green: 0.055, blue: 0.025)
+                ],
+                startPoint: .topLeading,
+                endPoint: .bottomTrailing)
+                .ignoresSafeArea()
+
+            Circle()
+                .fill(state.currentAppearanceAccent.opacity(0.28))
+                .frame(width: 330, height: 330)
+                .blur(radius: 72)
+                .offset(y: -44)
+
+            VStack(spacing: 0) {
+                ProductTopBar(state: state)
+                    .frame(height: 108)
+
+                Spacer()
+
+                Image(systemName: state.selectedModel.symbol)
+                    .font(.product(size: 128, weight: .ultraLight))
+                    .foregroundStyle(
+                        LinearGradient(
+                            colors: [.white, state.currentAppearanceAccent.opacity(0.78)],
+                            startPoint: .top,
+                            endPoint: .bottom))
+                    .shadow(color: state.currentAppearanceAccent.opacity(0.42), radius: 26)
+                    .accessibilityHidden(true)
+
+                Spacer()
+
+                VStack(spacing: 8) {
+                    Button {} label: {
+                        Text("查看收藏盒")
+                            .font(.product(.subheadline, weight: .bold))
+                            .foregroundStyle(Color.white.opacity(0.84))
+                            .frame(maxWidth: .infinity, minHeight: 44)
+                            .background(Color.black.opacity(0.32), in:
+                                RoundedRectangle(cornerRadius: 14, style: .continuous))
+                    }
+                    .buttonStyle(.plain)
+                    .accessibilityIdentifier("preview-display-case-action")
+
+                    Button {} label: {
+                        ProductPrimaryActionLabel(
+                            title: "进入 \(state.selectedModel.title)")
+                    }
+                    .buttonStyle(.plain)
+                    .accessibilityIdentifier("preview-enter-model-action")
+                }
+                .padding(.horizontal, 20)
+                .padding(.bottom, 24)
+            }
+        }
+    }
+}
+#endif
+
+private struct ProductProgressionTopAvatar: View {
+    @ObservedObject var state: ProductUiState
+    @State private var pulsing = false
+
+    private var progress: Double {
+        min(1, max(0, state.progressionTopAvatarProgress))
+    }
+
+    var body: some View {
+        Button {
+            UnityBridge.feedback()
+            CodexSwiftUIOverlayManager.shared.selectTab(.collector)
+        } label: {
+            ZStack {
+                Circle()
+                    .stroke(Color.white.opacity(0.12), lineWidth: 3)
+                    .frame(width: 38, height: 38)
+
+                Circle()
+                    .trim(from: 0, to: progress)
+                    .stroke(
+                        AngularGradient(
+                            colors: [
+                                Color.white.opacity(0.44),
+                                state.currentAppearanceAccent.opacity(0.94),
+                                Color.white.opacity(0.82)
+                            ],
+                            center: .center),
+                        style: StrokeStyle(lineWidth: 3, lineCap: .round))
+                    .rotationEffect(.degrees(-90))
+                    .frame(width: 38, height: 38)
+
+                Image(systemName: "person.crop.circle")
+                    .font(.product(size: 20, weight: .medium))
+                    .foregroundStyle(Color.white.opacity(0.90))
+
+                Text("\(state.progressionTopAvatarLevel)")
+                    .font(.product(size: 8, weight: .black).monospacedDigit())
+                    .foregroundStyle(.white)
+                    .padding(.horizontal, 4)
+                    .frame(minWidth: 18, minHeight: 12)
+                    .background(Color.black.opacity(0.82), in: Capsule())
+                    .offset(x: 11, y: 13)
+            }
+            .frame(width: 44, height: 44)
+            .background(
+                ProductWindowFrameReader { frame in
+                    state.updateProgressionTopAvatarFrame(frame)
+                })
+            .scaleEffect(pulsing ? 1.14 : 1)
+            .shadow(
+                color: state.currentAppearanceAccent.opacity(pulsing ? 0.72 : 0.18),
+                radius: pulsing ? 14 : 4)
+        }
+        .buttonStyle(.plain)
+        .accessibilityIdentifier("progression-top-avatar")
+        .accessibilityLabel(
+            "成长头像，等级 \(state.progressionTopAvatarLevel)，本级进度 \(Int(progress * 100))%")
+        .accessibilityHint("打开藏家档案")
+        .onChange(of: state.progressionTopAvatarPulseToken) { _ in
+            withAnimation(.spring(response: 0.26, dampingFraction: 0.54)) {
+                pulsing = true
+            }
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.34) {
+                withAnimation(.easeOut(duration: 0.30)) {
+                    pulsing = false
+                }
+            }
+        }
+    }
+}
+
 private struct ProductTopBar: View {
     @ObservedObject var state: ProductUiState
+    @State private var showGachaStore = false
 
     private var pageTitle: String {
         if state.selectedTab == .collector { return "藏家档案" }
@@ -2188,21 +3341,6 @@ private struct ProductTopBar: View {
         showsProductIdentity || state.selectedTab != .spinners
     }
 
-    private var offlineRewardMessage: String {
-        let reward = state.offlineProgressionReward
-        let source = reward.assistantEnabled ? "代盘秘书" : "陀螺"
-        let levelText = reward.newLevel > reward.previousLevel
-            ? "\nLv.\(reward.previousLevel) → Lv.\(reward.newLevel)"
-            : ""
-        return String(
-            format: "%@在你离开时继续运转了 %.1f 小时，为 %@ 收集了 %.0f 成长值。%@",
-            source,
-            reward.elapsedHours,
-            reward.model.title,
-            reward.experience,
-            levelText)
-    }
-
     var body: some View {
         VStack {
             Spacer(minLength: 0)
@@ -2210,7 +3348,7 @@ private struct ProductTopBar: View {
                 if showsProductIdentity {
                     VStack(spacing: 1) {
                         Text("LV \(state.displayedProgressionLevel)")
-                            .font(.product(size: 9, weight: .semibold))
+                            .font(.product(.caption, weight: .bold))
                             .monospacedDigit()
                             .foregroundStyle(Color.white.opacity(0.42))
                         Text(state.selectedModel.title)
@@ -2222,7 +3360,7 @@ private struct ProductTopBar: View {
                             .lineLimit(1)
                             .minimumScaleFactor(0.74)
                     }
-                    .frame(maxWidth: 170)
+                    .frame(maxWidth: showsBackButton ? 142 : 170)
                     .accessibilityElement(children: .combine)
                     .accessibilityLabel(
                         "等级 \(state.displayedProgressionLevel)，\(state.selectedModel.title)，当前皮肤 \(state.currentAppearanceName)")
@@ -2233,28 +3371,49 @@ private struct ProductTopBar: View {
                 }
 
                 HStack {
-                    if showsBackButton {
-                        ProductIconButton(
-                            symbol: "chevron.left",
-                            accessibilityLabel: "返回",
-                            accent: state.currentAppearanceAccent) {
-                            UnityBridge.feedback()
-                            CodexSwiftUIOverlayManager.shared.showMySpinners()
+                    HStack(spacing: 4) {
+                        if showsBackButton {
+                            ProductIconButton(
+                                symbol: "chevron.left",
+                                accessibilityLabel: "返回",
+                                accent: state.currentAppearanceAccent) {
+                                UnityBridge.feedback()
+                                CodexSwiftUIOverlayManager.shared.showMySpinners()
+                            }
                         }
-                    } else {
-                        topDestinationButton(
-                            .collector,
-                            label: "藏家档案",
-                            symbol: "person.crop.circle")
+
+                        ProductProgressionTopAvatar(state: state)
                     }
 
                     Spacer()
 
                     HStack(spacing: 6) {
-                        topDestinationButton(
-                            .settings,
-                            label: "设置",
-                            symbol: "gearshape")
+                        if state.selectedTab == .settings {
+                            ProductIconButton(
+                                symbol: "checkmark",
+                                accessibilityLabel: "保存并返回 \(state.selectedModel.title)",
+                                selected: true,
+                                accent: state.currentAppearanceAccent) {
+                                state.applyAndPersist()
+                                UnityBridge.feedback(.medium)
+                                CodexSwiftUIOverlayManager.shared
+                                    .dismissPanelToSelectedModel()
+                            }
+                        } else {
+                            if !showsBackButton {
+                                ProductIconButton(
+                                    symbol: "shippingbox",
+                                    accessibilityLabel: "盲盒",
+                                    accent: state.currentAppearanceAccent) {
+                                    UnityBridge.feedback()
+                                    showGachaStore = true
+                                }
+                            }
+                            topDestinationButton(
+                                .settings,
+                                label: "设置",
+                                symbol: "gearshape")
+                        }
                     }
                 }
             }
@@ -2268,22 +3427,6 @@ private struct ProductTopBar: View {
         .fullScreenCover(isPresented: $state.showingSpinnerOnboarding) {
             SpinnerOnboardingView(state: state)
         }
-        .alert("离线收获", isPresented: $state.showingOfflineProgressionReward) {
-            Button("收下", role: .cancel) {
-                UnityBridge.feedback(.medium)
-            }
-        } message: {
-            Text(offlineRewardMessage)
-        }
-        .alert(
-            "LEVEL UP · LV.\(state.liveProgressionLevelUp.newLevel)",
-            isPresented: $state.showingLiveProgressionLevelUp) {
-            Button("继续转", role: .cancel) {
-                UnityBridge.feedback(.heavy)
-            }
-        } message: {
-            Text("成长罐已装满。获得：\(state.liveProgressionLevelUp.rewardName)")
-        }
         .alert(
             "藏家等级提升 · \(state.collectorRankUp.newRank)",
             isPresented: $state.showingCollectorRankUp) {
@@ -2295,6 +3438,9 @@ private struct ProductTopBar: View {
                 "藏家等级 \(state.collectorRankUp.previousRank) → \(state.collectorRankUp.newRank)\n"
                 + "全局 +\(Int((state.collectorGlobalBonus * 100).rounded()))% · "
                 + "主玩 +\(Int((state.collectorFocusBonus * 100).rounded()))%")
+        }
+        .sheet(isPresented: $showGachaStore) {
+            GachaStoreView()
         }
     }
 
@@ -2394,7 +3540,6 @@ private struct SpinnerOnboardingView: View {
                 } label: {
                     ProductPrimaryActionLabel(
                         title: page < 2 ? "下一步" : "开始玩",
-                        symbol: page < 2 ? "arrow.right" : "hand.draw.fill",
                         accent: accent)
                 }
                 .buttonStyle(.plain)
@@ -2488,6 +3633,8 @@ private struct ExperienceJar: View {
 }
 
 private enum ProductOverlayLayout {
+    static let detailEntranceDuration: TimeInterval = 0.68
+    static let detailControlsRevealDelay: TimeInterval = 0.48
     static let progressionHeight: CGFloat = 96
     static let progressionBottomInset: CGFloat = 12
     static let feedbackGap: CGFloat = 14
@@ -2532,41 +3679,42 @@ private struct SpinnerMetricCluster: View {
                 HStack(alignment: .bottom, spacing: 10) {
                     ProductSideMetricDashboard(
                         title: "INTENSITY",
-                        value: String(format: "%.0f", combo.intensity * 100),
+                        value: String(format: "%.0f", telemetry.intensity * 100),
                         unit: "%",
-                        fraction: combo.intensity,
+                        fraction: telemetry.intensity,
                         accent: telemetry.speedBand.accent,
                         accessibilityLabel: "操作强度",
                         accessibilityValue: String(
                             format: "%.0f%%",
-                            combo.intensity * 100))
+                            telemetry.intensity * 100))
                         .frame(width: sideWidth)
 
                     ProductSpeedDashboard(
                         title: "SPEED",
-                        value: String(format: "%.0f", telemetry.rpm),
-                        unit: "RPM",
+                        value: String(format: "%.0f", telemetry.displayedSpeed),
+                        unit: telemetry.displayedUnit,
                         fraction: telemetry.normalizedSpeed,
                         accent: telemetry.speedBand.accent,
                         isPeak: telemetry.speedBand == .peak,
                         stateLabel: telemetry.speedBand.title,
-                        accessibilityLabel: "转速",
+                        accessibilityLabel: telemetry.speedAccessibilityLabel,
                         accessibilityValue: String(
-                            format: "%.0f RPM，%@",
-                            telemetry.rpm,
+                            format: "%.0f %@，%@",
+                            telemetry.displayedSpeed,
+                            telemetry.displayedUnit,
                             telemetry.speedBand.title))
                         .frame(width: mainWidth)
 
                     ProductSideMetricDashboard(
                         title: "FREQUENCY",
-                        value: String(format: "%.0f", combo.frequency * 100),
+                        value: String(format: "%.0f", telemetry.frequency * 100),
                         unit: "%",
-                        fraction: combo.frequency,
+                        fraction: telemetry.frequency,
                         accent: telemetry.speedBand.accent,
                         accessibilityLabel: "操作频率",
                         accessibilityValue: String(
                             format: "%.0f%%",
-                            combo.frequency * 100))
+                            telemetry.frequency * 100))
                         .frame(width: sideWidth)
                 }
                 .frame(maxWidth: 320)
@@ -3104,6 +4252,7 @@ private struct SpinnerExperienceFeedbackLayer: View {
     @State private var haloProgress: CGFloat = 1
     @State private var haloOpacityProgress: CGFloat = 1
     @State private var lastHaloObservedCount = 0
+    @State private var haloMilestoneCount = 10
 
     private var comboTransition: AnyTransition {
         if reduceMotion {
@@ -3124,7 +4273,8 @@ private struct SpinnerExperienceFeedbackLayer: View {
                     opacityProgress: haloOpacityProgress,
                     tuning: state.comboHaloTuning,
                     reduceMotion: reduceMotion,
-                    projection: state.comboHaloProjection)
+                    projection: state.comboHaloProjection,
+                    milestoneCount: haloMilestoneCount)
 
                 VStack(spacing: 0) {
                     if state.progressionCombo.isActive {
@@ -3193,6 +4343,7 @@ private struct SpinnerExperienceFeedbackLayer: View {
         var transaction = Transaction()
         transaction.disablesAnimations = true
         withTransaction(transaction) {
+            haloMilestoneCount = newCount
             haloProgress = 0
             haloOpacityProgress = 0
         }
@@ -3221,15 +4372,12 @@ private struct BadgeUnlockOverlay: View {
         GeometryReader { proxy in
             VStack {
                 if state.showingBadgeUnlockNotice,
-                   let badge = state.badgeUnlockNotice {
-                    ProductNoticeBanner(
-                        kicker: "BADGE UNLOCKED",
-                        title: badge.title,
-                        detail: "\(badge.milestoneText) · 已加入 Badge 图鉴",
-                        symbol: "star.fill",
-                        accent: badge.metric.accent,
-                        accessibilityLabel: "Badge 解锁，\(badge.title)，\(badge.milestoneText)")
-                    .transition(.move(edge: .top).combined(with: .opacity))
+                   let event = state.badgeUnlockNotice {
+                    ProductBadgeUnlockBanner(event: event)
+                        .transition(
+                            .move(edge: .top)
+                                .combined(with: .scale(scale: 0.94, anchor: .top))
+                                .combined(with: .opacity))
                 }
                 Spacer()
             }
@@ -3246,41 +4394,66 @@ private struct BadgeUnlockOverlay: View {
     }
 }
 
-private struct CollectorUnlockOverlay: View {
-    @ObservedObject var state: ProductUiState
+private struct ProductBadgeUnlockBanner: View {
+    let event: ProductBadgeUnlockEvent
+
+    private var badge: ProductBadgeDetail { event.badge }
 
     var body: some View {
-        GeometryReader { proxy in
-            VStack {
-                if state.showingCollectorUnlockNotice,
-                   let achievement = state.collectorUnlockNotice {
-                    ProductNoticeBanner(
-                        kicker: "藏家成就解锁",
-                        title: achievement.title,
-                        detail: "\(achievement.metric.title) · 已加入藏家档案",
-                        symbol: "trophy.fill",
-                        accent: Color.white.opacity(0.82),
-                        accessibilityLabel: "藏家成就解锁，\(achievement.title)")
-                    .transition(.move(edge: .top).combined(with: .opacity))
+        HStack(spacing: 14) {
+            ProductRarityBadge(
+                assetName: badge.assetName,
+                token: badge.tokenLine,
+                shortName: badge.shortName,
+                grade: badge.grade.rawValue,
+                state: badge.state.rawValue,
+                progress: badge.progress)
+                .frame(width: 78)
+                .accessibilityHidden(true)
+
+            VStack(alignment: .leading, spacing: 5) {
+                Text("BADGE UNLOCKED · \(event.sourceTitle)")
+                    .font(.product(.caption2, weight: .bold))
+                    .foregroundStyle(Color.white.opacity(0.56))
+                    .lineLimit(1)
+                Text(badge.title)
+                    .font(.product(.headline, weight: .bold))
+                    .foregroundStyle(.white)
+                    .lineLimit(1)
+                Text(badge.description)
+                    .font(.product(.caption))
+                    .foregroundStyle(Color.white.opacity(0.60))
+                    .lineLimit(2)
+                HStack(spacing: 8) {
+                    ProductInlineTag(
+                        title: "+\(badge.experienceReward) XP",
+                        accent: Color.white.opacity(0.84),
+                        filled: true)
+                    ProductInlineTag(
+                        title: "+\(badge.shardReward) 徽记碎片",
+                        accent: Color.white.opacity(0.70))
                 }
-                Spacer()
             }
-            .frame(maxWidth: .infinity)
-            .padding(.horizontal, 16)
-            .padding(.top, max(238, proxy.safeAreaInsets.top + 184))
-            .animation(
-                .spring(response: 0.38, dampingFraction: 0.76),
-                value: state.showingCollectorUnlockNotice)
+
+            Spacer(minLength: 0)
         }
-        .ignoresSafeArea()
-        .productDesignSystem()
-        .preferredColorScheme(.dark)
+        .padding(.horizontal, 15)
+        .padding(.vertical, 13)
+        .frame(maxWidth: 380)
+        .background(
+            Color.black.opacity(0.26),
+            in: RoundedRectangle(cornerRadius: 24, style: .continuous))
+        .productGlass(cornerRadius: 24, tint: Color.white.opacity(0.035))
+        .accessibilityElement(children: .ignore)
+        .accessibilityLabel(
+            "Badge 解锁，\(badge.title)，奖励 \(badge.experienceReward) XP 和 \(badge.shardReward) 徽记碎片")
     }
 }
 
 private struct SpinnerProgressionHUD: View {
     @ObservedObject var state: ProductUiState
     @State private var showingLevelDetails = false
+    @State private var presentedCatalogSnapshot: ProgressionCatalogSnapshot?
 
     private var accent: Color { state.currentAppearanceAccent }
     private let autoMultipliers = [1.0, 1.5, 2.0, 3.0]
@@ -3376,7 +4549,8 @@ private struct SpinnerProgressionHUD: View {
                     AutoSpeedRotorBadge(
                         multiplierText: autoMultiplierText,
                         angularSpeedRadians: state.motionTelemetry.angularSpeedRadians,
-                        active: state.progressionAssistantEnabled,
+                        active: state.progressionAssistantEnabled
+                            && !showingLevelDetails,
                         accent: autoEnabledColor)
                         .frame(width: 29, height: 29)
                     Text("AUTO")
@@ -3406,6 +4580,7 @@ private struct SpinnerProgressionHUD: View {
 
             Button {
                 UnityBridge.feedback()
+                presentedCatalogSnapshot = ProgressionCatalogSnapshot(state: state)
                 showingLevelDetails = true
             } label: {
                 HStack(spacing: 8) {
@@ -3422,7 +4597,7 @@ private struct SpinnerProgressionHUD: View {
                         }
                         .foregroundStyle(.white)
 
-                        ProgressionMilestoneGauge(
+                        ProductMilestoneProgressGauge(
                             previousLevel: previousMilestoneLevel,
                             currentLevel: state.progressionLevel,
                             nextLevel: nextMilestoneLevel,
@@ -3438,7 +4613,7 @@ private struct SpinnerProgressionHUD: View {
                             accent: accent,
                             unlocked: true,
                             showsLock: state.progressionLevel < 100,
-                            shimmers: true)
+                            shimmers: !showingLevelDetails)
                             .frame(
                                 width: thumbnailIconSize,
                                 height: thumbnailIconSize)
@@ -3472,8 +4647,16 @@ private struct SpinnerProgressionHUD: View {
         }
         .productDesignSystem()
         .preferredColorScheme(.dark)
-        .sheet(isPresented: $showingLevelDetails) {
-            ProgressionLevelDetailsSheet(state: state)
+        .sheet(
+            isPresented: $showingLevelDetails,
+            onDismiss: { presentedCatalogSnapshot = nil }
+        ) {
+            if let presentedCatalogSnapshot {
+                ProgressionLevelDetailsSheet(
+                    state: state,
+                    snapshot: presentedCatalogSnapshot)
+                    .equatable()
+            }
         }
     }
 }
@@ -3543,55 +4726,6 @@ private struct AutoControlGlassSurface: View {
     }
 }
 
-private struct ProgressionMilestoneGauge: View {
-    let previousLevel: Int
-    let currentLevel: Int
-    let nextLevel: Int
-    let progress: Double
-    let accent: Color
-
-    private var clampedProgress: Double {
-        min(1, max(0, progress))
-    }
-
-    var body: some View {
-        HStack(spacing: 7) {
-            Text("\(previousLevel)")
-                .font(.product(size: 7, weight: .bold).monospacedDigit())
-                .foregroundStyle(Color.white.opacity(0.44))
-
-            GeometryReader { proxy in
-                let width = max(1, proxy.size.width)
-                let markerX = min(
-                    width - 3,
-                    max(3, width * CGFloat(clampedProgress)))
-
-                ZStack(alignment: .leading) {
-                    ProductProgressGauge(value: clampedProgress, accent: accent)
-                        .frame(height: 4)
-
-                    Circle()
-                        .fill(Color.white)
-                        .frame(width: 6, height: 6)
-                        .overlay(Circle().stroke(accent.opacity(0.72), lineWidth: 1.5))
-                        .shadow(color: accent.opacity(0.42), radius: 3)
-                        .position(x: markerX, y: 4)
-                }
-            }
-            .frame(height: 8)
-
-            Text("\(nextLevel)")
-                .font(.product(size: 7, weight: .bold).monospacedDigit())
-                .foregroundStyle(Color.white.opacity(0.58))
-        }
-        .frame(height: 12)
-        .accessibilityElement(children: .ignore)
-        .accessibilityLabel("成长里程碑")
-        .accessibilityValue(
-            "上一级 \(previousLevel)，当前 \(currentLevel)，下一级 \(nextLevel)")
-    }
-}
-
 private final class AutoSpeedRotorAnimator: NSObject, ObservableObject {
     @Published private(set) var rotationDegrees = 0.0
 
@@ -3599,9 +4733,9 @@ private final class AutoSpeedRotorAnimator: NSObject, ObservableObject {
     private var displayLink: CADisplayLink?
     private var previousTimestamp: CFTimeInterval = 0
 
-    func update(angularSpeedRadians: Double, paused: Bool) {
+    func update(active: Bool, angularSpeedRadians: Double, paused: Bool) {
         self.angularSpeedRadians = max(0, angularSpeedRadians)
-        guard !paused, self.angularSpeedRadians > 0.01 else {
+        guard active, !paused, self.angularSpeedRadians > 0.01 else {
             stop()
             return
         }
@@ -3687,6 +4821,9 @@ private struct AutoSpeedRotorBadge: View {
         .onChange(of: angularSpeedRadians) { _ in
             updateAnimator()
         }
+        .onChange(of: active) { _ in
+            updateAnimator()
+        }
         .onChange(of: reduceMotion) { _ in
             updateAnimator()
         }
@@ -3696,6 +4833,7 @@ private struct AutoSpeedRotorBadge: View {
 
     private func updateAnimator() {
         animator.update(
+            active: active,
             angularSpeedRadians: angularSpeedRadians,
             paused: reduceMotion)
     }
@@ -3753,89 +4891,270 @@ private struct ProgressionUnlockThumbnail: View {
         .clipShape(RoundedRectangle(cornerRadius: 13, style: .continuous))
         .shadow(color: Color.black.opacity(0.22), radius: 8, y: 4)
         .onAppear { shimmerAtRight = shimmers }
+        .onChange(of: shimmers) { enabled in
+            if enabled {
+                shimmerAtRight = false
+                DispatchQueue.main.async {
+                    shimmerAtRight = true
+                }
+            } else {
+                var transaction = Transaction()
+                transaction.disablesAnimations = true
+                withTransaction(transaction) {
+                    shimmerAtRight = false
+                }
+            }
+        }
         .animation(
-            .linear(duration: 2.6).repeatForever(autoreverses: false),
+            shimmers
+                ? .linear(duration: 2.6).repeatForever(autoreverses: false)
+                : nil,
             value: shimmerAtRight)
         .accessibilityHidden(true)
     }
 }
 
-private struct ProgressionLevelDetailsSheet: View {
-    @ObservedObject var state: ProductUiState
-    @State private var selectedSection = 0
+private struct ProgressionCatalogSnapshot: Equatable {
+    private let sessionID: UUID
+    let selectedModel: SpinnerModel
+    let progressionModel: SpinnerModel
+    let progressionLevel: Int
+    let progressionLevelTitle: String
+    let progressionLevelCatalog: [ProgressionLevelDetail]
+    let threeBladeMetalSkins: [ThreeBladeMetalSkinDetail]
+    let equippedThreeBladeMetalSkinId: String
+    let currentAppearanceName: String
+    let toyBadges: [ProductBadgeDetail]
+    let collectorBadges: [ProductBadgeDetail]
+    let challengeBadges: [ProductBadgeDetail]
+    let legacyBadges: [ProductBadgeDetail]
+    let badgeShardBalance: Int
+
+    @MainActor
+    init(state: ProductUiState) {
+        sessionID = UUID()
+        selectedModel = state.selectedModel
+        progressionModel = state.progressionModel
+        progressionLevel = state.progressionLevel
+        progressionLevelTitle = state.progressionLevelTitle
+        progressionLevelCatalog = state.progressionLevelCatalog
+        threeBladeMetalSkins = state.threeBladeMetalSkins
+        equippedThreeBladeMetalSkinId = state.equippedThreeBladeMetalSkinId
+        currentAppearanceName = state.currentAppearanceName
+        toyBadges = state.toyBadgeCatalog
+        collectorBadges = state.collectorBadgeCatalog
+        challengeBadges = state.challengeBadgeCatalog
+        legacyBadges = state.legacyBadgeCatalog
+        badgeShardBalance = state.badgeShardBalance
+        ProductRarityBadge.prewarmCatalogArtwork(
+            assetNames: state.toyBadgeCatalog.map(\.assetName))
+    }
+
+    static func == (
+        lhs: ProgressionCatalogSnapshot,
+        rhs: ProgressionCatalogSnapshot
+    ) -> Bool {
+        lhs.sessionID == rhs.sessionID
+    }
+
+    var accent: Color {
+        if selectedModel == .metalThreeBlade,
+           progressionModel == .metalThreeBlade,
+           let skin = threeBladeMetalSkins.first(where: {
+               $0.id == equippedThreeBladeMetalSkinId
+           }) {
+            return Color(productHex: skin.accentHex)
+        }
+        return selectedModel.accent
+    }
+}
+
+private struct ProgressionLevelDetailsSheet: View, Equatable {
+    // This sheet deliberately owns one immutable catalog session. ProductUiState
+    // publishes motion telemetry at 20 Hz; observing it here would rebuild the
+    // sheet while the user scrolls even though none of that data is displayed.
+    let state: ProductUiState
+    let snapshot: ProgressionCatalogSnapshot
+    @State private var selectedSection: Int
+    @Environment(\.dismiss) private var dismiss
+
+    init(
+        state: ProductUiState,
+        snapshot: ProgressionCatalogSnapshot,
+        initialSection: Int = 0
+    ) {
+        self.state = state
+        self.snapshot = snapshot
+        _selectedSection = State(initialValue: min(2, max(0, initialSection)))
+    }
+
+    static func == (
+        lhs: ProgressionLevelDetailsSheet,
+        rhs: ProgressionLevelDetailsSheet
+    ) -> Bool {
+        lhs.snapshot == rhs.snapshot
+    }
 
     var body: some View {
-        ProductBottomSheetShell(title: "成长图鉴") {
-            VStack(spacing: 0) {
-                Picker("成长栏目", selection: $selectedSection) {
-                    Text("成就").tag(0)
-                    Text("Badge").tag(1)
-                    Text("外观").tag(2)
-                }
-                .pickerStyle(.segmented)
-                .padding(.horizontal, 18)
-                .padding(.vertical, 12)
+        VStack(spacing: 0) {
+            ProductSheetDragHandle(closeTitle: "完成") { dismiss() }
 
-                switch selectedSection {
-                case 0:
-                    ProgressionLevelTimeline(state: state)
-                case 1:
-                    ProgressionBadgeAchievements(state: state)
-                default:
-                    ProgressionCosmeticsCatalog(state: state)
-                }
+            ProgressionCatalogHeader(
+                selectedSection: $selectedSection,
+                onDone: { dismiss() })
+                .padding(.horizontal, 14)
+                .padding(.bottom, 10)
+
+            switch selectedSection {
+            case 0:
+                ProgressionLevelTimeline(snapshot: snapshot)
+                    .equatable()
+            case 1:
+                ProgressionBadgeAchievements(snapshot: snapshot)
+                    .equatable()
+            default:
+                ProgressionCosmeticsCatalog(
+                    state: state,
+                    snapshot: snapshot)
+                    .equatable()
             }
+        }
+        .productStaticSurfaceMode()
+        .background(ProgressionCatalogSheetBackdrop())
+        .modifier(ProgressionCatalogPresentationBackground())
+        .productDesignSystem()
+        .preferredColorScheme(.dark)
+    }
+}
+
+private struct ProgressionCatalogSheetBackdrop: View {
+    @Environment(\.accessibilityReduceTransparency) private var reduceTransparency
+
+    var body: some View {
+        ZStack {
+            if reduceTransparency {
+                Color.black.opacity(0.94)
+            } else {
+                Rectangle()
+                    .fill(.ultraThinMaterial)
+                    .opacity(0.78)
+                Color.black.opacity(0.24)
+                LinearGradient(
+                    colors: [
+                        Color.white.opacity(0.025),
+                        Color.black.opacity(0.18)
+                    ],
+                    startPoint: .top,
+                    endPoint: .bottom)
+            }
+        }
+        .ignoresSafeArea()
+        .accessibilityHidden(true)
+    }
+}
+
+private struct ProgressionCatalogPresentationBackground: ViewModifier {
+    @ViewBuilder
+    func body(content: Content) -> some View {
+        if #available(iOS 16.4, *) {
+            content.presentationBackground(.clear)
+        } else {
+            content
         }
     }
 }
 
-private struct ProgressionLevelTimeline: View {
-    @ObservedObject var state: ProductUiState
-    private var accent: Color { state.currentAppearanceAccent }
+private struct ProgressionCatalogHeader: View {
+    @Binding var selectedSection: Int
+    let onDone: () -> Void
+
+    var body: some View {
+        VStack(spacing: 13) {
+            ZStack {
+                Text("成长图鉴")
+                    .font(.product(.title3, weight: .bold))
+                    .foregroundStyle(Color.white.opacity(0.96))
+                    .frame(maxWidth: .infinity)
+
+                HStack {
+                    Spacer()
+                    Button("完成", action: onDone)
+                        .font(.product(.subheadline, weight: .semibold))
+                        .foregroundStyle(Color.white.opacity(0.84))
+                        .padding(.horizontal, 12)
+                        .frame(minHeight: 36)
+                        .background(
+                            Color.white.opacity(0.07),
+                            in: Capsule(style: .continuous))
+                }
+            }
+
+            Picker("成长栏目", selection: $selectedSection) {
+                Text("等级").tag(0)
+                Text("Badge").tag(1)
+                Text("外观").tag(2)
+            }
+            .pickerStyle(.segmented)
+        }
+        .padding(.horizontal, 14)
+        .padding(.top, 12)
+        .padding(.bottom, 14)
+        .background(
+            Color.white.opacity(0.014),
+            in: RoundedRectangle(cornerRadius: 24, style: .continuous))
+        .productGlass(
+            cornerRadius: 24,
+            tint: Color.white.opacity(0.014))
+    }
+}
+
+private struct ProgressionLevelTimeline: View, Equatable {
+    let snapshot: ProgressionCatalogSnapshot
+    private var accent: Color { snapshot.accent }
 
     private func unlockSkin(for level: Int) -> ThreeBladeMetalSkinDetail? {
-        guard state.selectedModel == .metalThreeBlade,
-              state.progressionModel == .metalThreeBlade else { return nil }
-        return state.threeBladeMetalSkins.first { $0.level == level }
+        guard snapshot.selectedModel == .metalThreeBlade,
+              snapshot.progressionModel == .metalThreeBlade else { return nil }
+        return snapshot.threeBladeMetalSkins.first { $0.level == level }
     }
 
     var body: some View {
         ScrollView {
-            VStack(alignment: .leading, spacing: 16) {
+            LazyVStack(alignment: .leading, spacing: 16) {
                 HStack(alignment: .top) {
                     VStack(alignment: .leading, spacing: 6) {
-                        Text("LV.\(state.progressionLevel) · \(state.progressionLevelTitle)")
+                        Text("LV.\(snapshot.progressionLevel) · \(snapshot.progressionLevelTitle)")
                             .font(.product(.title2, weight: .bold).monospacedDigit())
                     }
                     Spacer()
-                    Text("\(state.progressionLevel)%")
+                    Text("\(snapshot.progressionLevel)%")
                         .font(.product(.headline, weight: .black).monospacedDigit())
                         .foregroundStyle(accent)
                 }
                 .padding(16)
                 .productGlass(cornerRadius: 22, tint: accent.opacity(0.08))
 
-                HStack(alignment: .top, spacing: 10) {
+                HStack(alignment: .top, spacing: 8) {
                     ProgressionVerticalRail(
-                        progress: Double(state.progressionLevel) / 100.0,
+                        progress: Double(snapshot.progressionLevel) / 100.0,
                         accent: accent)
-                        .frame(width: 24)
+                        .frame(width: 12)
 
-                    VStack(spacing: 12) {
+                    VStack(spacing: 10) {
                         ProgressionLevelRow(
                             levelLabel: "LV.0",
                             title: "START",
                             unlockName: "选择玩具并开始第一次滑动",
                             level: 0,
-                            model: state.selectedModel,
+                            model: snapshot.selectedModel,
                             skin: nil,
                             unlocked: true,
-                            current: state.progressionLevel == 0,
+                            current: snapshot.progressionLevel == 0,
                             accent: accent)
 
-                        ForEach(Array(state.progressionLevelCatalog.enumerated()), id: \.element.id) { index, detail in
-                            let nextLevel = index + 1 < state.progressionLevelCatalog.count
-                                ? state.progressionLevelCatalog[index + 1].level - 1
+                        ForEach(Array(snapshot.progressionLevelCatalog.enumerated()), id: \.element.id) { index, detail in
+                            let nextLevel = index + 1 < snapshot.progressionLevelCatalog.count
+                                ? snapshot.progressionLevelCatalog[index + 1].level - 1
                                 : detail.level
                             ProgressionLevelRow(
                                 levelLabel: detail.level == nextLevel
@@ -3844,11 +5163,11 @@ private struct ProgressionLevelTimeline: View {
                                 title: detail.title,
                                 unlockName: detail.unlockName,
                                 level: detail.level,
-                                model: state.selectedModel,
+                                model: snapshot.selectedModel,
                                 skin: unlockSkin(for: detail.level),
-                                unlocked: state.progressionLevel >= detail.level,
-                                current: state.progressionLevel >= detail.level
-                                    && state.progressionLevel <= nextLevel,
+                                unlocked: snapshot.progressionLevel >= detail.level,
+                                current: snapshot.progressionLevel >= detail.level
+                                    && snapshot.progressionLevel <= nextLevel,
                                 accent: accent)
                         }
                     }
@@ -3872,13 +5191,32 @@ private struct ProgressionLevelTimeline: View {
     }
 }
 
-private struct ProgressionCosmeticsCatalog: View {
-    @ObservedObject var state: ProductUiState
-    private var accent: Color { state.currentAppearanceAccent }
+private struct ProgressionCosmeticsCatalog: View, Equatable {
+    let state: ProductUiState
+    let snapshot: ProgressionCatalogSnapshot
+    @State private var equippedSkinId: String
+
+    init(state: ProductUiState, snapshot: ProgressionCatalogSnapshot) {
+        self.state = state
+        self.snapshot = snapshot
+        _equippedSkinId = State(
+            initialValue: snapshot.equippedThreeBladeMetalSkinId)
+    }
+
+    static func == (
+        lhs: ProgressionCosmeticsCatalog,
+        rhs: ProgressionCosmeticsCatalog) -> Bool {
+        lhs.snapshot == rhs.snapshot
+    }
+
+    private var accent: Color {
+        equippedSkin.map { Color(productHex: $0.accentHex) }
+            ?? snapshot.accent
+    }
 
     private var equippedSkin: ThreeBladeMetalSkinDetail? {
-        state.threeBladeMetalSkins.first {
-            $0.id == state.equippedThreeBladeMetalSkinId
+        snapshot.threeBladeMetalSkins.first {
+            $0.id == equippedSkinId
         }
     }
 
@@ -3904,7 +5242,7 @@ private struct ProgressionCosmeticsCatalog: View {
                             systemImage: "checkmark.circle.fill")
                             .font(.product(.caption, weight: .semibold))
                             .foregroundStyle(accent)
-                    } else if state.progressionModel == .metalThreeBlade {
+                    } else if snapshot.progressionModel == .metalThreeBlade {
                         Label("正在确认 Unity Renderer 的实际材质", systemImage: "arrow.triangle.2.circlepath")
                             .font(.product(.caption, weight: .semibold))
                             .foregroundStyle(.orange)
@@ -3913,15 +5251,18 @@ private struct ProgressionCosmeticsCatalog: View {
                 .padding(16)
                 .productGlass(cornerRadius: 22, tint: accent.opacity(0.08))
 
-                if state.progressionModel == .metalThreeBlade,
-                   !state.threeBladeMetalSkins.isEmpty {
-                    ForEach(state.threeBladeMetalSkins) { skin in
+                if snapshot.progressionModel == .metalThreeBlade,
+                   !snapshot.threeBladeMetalSkins.isEmpty {
+                    ForEach(snapshot.threeBladeMetalSkins) { skin in
                         ThreeBladeMetalSkinRow(
                             skin: skin,
-                            unlocked: state.progressionLevel >= skin.level,
-                            equipped: state.equippedThreeBladeMetalSkinId == skin.id,
+                            unlocked: snapshot.progressionLevel >= skin.level,
+                            equipped: equippedSkinId == skin.id,
                             accent: accent,
-                            onEquip: { state.equipThreeBladeMetalSkin(skin) })
+                            onEquip: {
+                                equippedSkinId = skin.id
+                                state.equipThreeBladeMetalSkin(skin)
+                            })
                     }
                 } else {
                     ProductEmptyState(
@@ -3932,6 +5273,9 @@ private struct ProgressionCosmeticsCatalog: View {
                 }
             }
             .padding(18)
+        }
+        .onChange(of: snapshot.equippedThreeBladeMetalSkinId) { newValue in
+            equippedSkinId = newValue
         }
     }
 }
@@ -4033,12 +5377,23 @@ private struct ThreeBladeMetalSkinSwatch: View {
 }
 
 private enum NativeArtworkLoader {
+    private static let cache: NSCache<NSString, UIImage> = {
+        let cache = NSCache<NSString, UIImage>()
+        cache.countLimit = 96
+        return cache
+    }()
+
     static func image(named assetName: String) -> UIImage? {
         guard !assetName.isEmpty else { return nil }
+        let key = assetName as NSString
+        if let cached = cache.object(forKey: key) {
+            return cached
+        }
         if let image = UIImage(
             named: assetName,
             in: .main,
             compatibleWith: nil) {
+            cache.setObject(image, forKey: key)
             return image
         }
         guard let url = Bundle.main.url(
@@ -4046,7 +5401,9 @@ private enum NativeArtworkLoader {
             withExtension: "png") else {
             return nil
         }
-        return UIImage(contentsOfFile: url.path)
+        guard let image = UIImage(contentsOfFile: url.path) else { return nil }
+        cache.setObject(image, forKey: key)
+        return image
     }
 }
 
@@ -4325,34 +5682,44 @@ private struct ProductAppearanceGridCard<Preview: View>: View {
 private struct ProgressionVerticalRail: View {
     let progress: Double
     let accent: Color
-    @State private var shimmerAtBottom = false
 
     var body: some View {
         GeometryReader { geometry in
-            let fillHeight = max(10, geometry.size.height * max(0, min(1, progress)))
+            let clampedProgress = max(0, min(1, progress))
+            let lineWidth: CGFloat = 3
+            let segmentGap: CGFloat = 4
+            let currentLength = min(14, max(8, geometry.size.height * 0.025))
+            let currentCenter = geometry.size.height * clampedProgress
+            let currentOffset = min(
+                max(0, geometry.size.height - currentLength),
+                max(0, currentCenter - currentLength * 0.5))
+            let completedHeight = max(0, currentOffset - segmentGap)
+            let futureOffset = min(
+                geometry.size.height,
+                currentOffset + currentLength + segmentGap)
+            let futureHeight = max(0, geometry.size.height - futureOffset)
+
             ZStack(alignment: .top) {
+                if completedHeight > 0 {
+                    Capsule(style: .continuous)
+                        .fill(accent.opacity(0.42))
+                        .frame(width: lineWidth, height: completedHeight)
+                }
+
                 Capsule(style: .continuous)
-                    .fill(Color.white.opacity(0.11))
-                    .frame(width: 7)
-                Capsule(style: .continuous)
-                    .fill(LinearGradient(
-                        colors: [accent.opacity(0.95), accent.opacity(0.52)],
-                        startPoint: .top,
-                        endPoint: .bottom))
-                    .frame(width: 7, height: fillHeight)
-                Capsule(style: .continuous)
-                    .fill(Color.white.opacity(0.92))
-                    .shadow(color: accent, radius: 8)
-                    .frame(width: 11, height: 26)
-                    .offset(y: shimmerAtBottom ? max(0, fillHeight - 26) : 0)
-                    .opacity(progress > 0 ? 0.82 : 0)
-                    .animation(
-                        .linear(duration: 1.8).repeatForever(autoreverses: false),
-                        value: shimmerAtBottom)
+                    .fill(accent.opacity(0.92))
+                    .frame(width: lineWidth, height: currentLength)
+                    .offset(y: currentOffset)
+
+                if futureHeight > 0 {
+                    Capsule(style: .continuous)
+                        .fill(Color.white.opacity(0.10))
+                        .frame(width: lineWidth, height: futureHeight)
+                        .offset(y: futureOffset)
+                }
             }
             .frame(maxWidth: .infinity, alignment: .center)
         }
-        .onAppear { shimmerAtBottom = true }
     }
 }
 
@@ -4369,7 +5736,7 @@ private struct ProgressionLevelRow: View {
 
     var body: some View {
         ProductSelectionCard(
-            selected: current,
+            selected: false,
             enabled: unlocked,
             accent: accent) {
             HStack(alignment: .center, spacing: 12) {
@@ -4389,10 +5756,19 @@ private struct ProgressionLevelRow: View {
                         Text(title)
                             .font(.product(.subheadline, weight: .bold))
                         if current {
-                            ProductInlineTag(
-                                title: "CURRENT",
-                                accent: accent,
-                                filled: true)
+                            Circle()
+                                .fill(accent.opacity(0.88))
+                                .frame(width: 7, height: 7)
+                                .accessibilityHidden(true)
+                        } else if unlocked {
+                            Circle()
+                                .fill(accent.opacity(0.22))
+                                .overlay {
+                                    Circle()
+                                        .stroke(accent.opacity(0.24), lineWidth: 0.5)
+                                }
+                                .frame(width: 7, height: 7)
+                                .accessibilityHidden(true)
                         }
                     }
                     Text("解锁：\(unlockName)")
@@ -4402,81 +5778,394 @@ private struct ProgressionLevelRow: View {
                 Spacer(minLength: 0)
             }
         }
+        .accessibilityValue(
+            current ? "当前级别" : (unlocked ? "已完成" : "未解锁"))
     }
 }
 
-private struct ProgressionBadgeAchievements: View {
-    @ObservedObject var state: ProductUiState
-    private var accent: Color { state.currentAppearanceAccent }
-    private let columns = [
-        GridItem(.flexible(), spacing: 10),
-        GridItem(.flexible(), spacing: 10)
-    ]
+private struct ProgressionBadgeAchievements: View, Equatable {
+    let snapshot: ProgressionCatalogSnapshot
+    @State private var selectedScope: ProductBadgeScope = .toy
+    @State private var selectedBadge: ProductBadgeDetail?
+
+    static func == (
+        lhs: ProgressionBadgeAchievements,
+        rhs: ProgressionBadgeAchievements) -> Bool {
+        lhs.snapshot == rhs.snapshot
+    }
+
+    private var accent: Color { snapshot.accent }
+    private var columns: [GridItem] {
+        ProductBadgeLayoutTokens.catalogColumns
+    }
+
+    private var badges: [ProductBadgeDetail] {
+        switch selectedScope {
+        case .toy: return snapshot.toyBadges
+        case .collector: return snapshot.collectorBadges
+        case .challenge: return snapshot.challengeBadges
+        case .legacy: return snapshot.legacyBadges
+        }
+    }
+
+    private var recentTarget: ProductBadgeDetail? {
+        badges.first { $0.state == .inProgress }
+            ?? badges.first { $0.state == .locked }
+            ?? badges.first { $0.state == .hidden }
+    }
 
     var body: some View {
         ScrollView {
             VStack(alignment: .leading, spacing: 16) {
-                ProductScreenHeading(
-                    title: "BADGE ACHIEVEMENTS",
-                    subtitle: "\(state.progressionUnlockedAchievementCount) / \(state.progressionTotalAchievementCount) 已点亮",
-                    symbol: "seal.fill",
-                    accent: accent)
+                HStack(alignment: .top, spacing: 10) {
+                    ProductScreenHeading(
+                        title: "BADGES",
+                        subtitle: "独立目标、真实进度与可收藏奖励",
+                        symbol: "seal.fill",
+                        accent: accent)
+                    Spacer(minLength: 0)
+                    ProductInlineTag(
+                        title: "◆ \(snapshot.badgeShardBalance)",
+                        accent: Color.white.opacity(0.72))
+                }
                 .padding(16)
                 .productGlass(cornerRadius: 22, tint: accent.opacity(0.08))
 
-                LazyVGrid(columns: columns, spacing: 10) {
-                    ProductMetricCard(
-                        title: "最高速度",
-                        value: String(format: "%.2f km/h", state.progressionPeakRimSpeedKmh),
-                        symbol: "speedometer")
-                    ProductMetricCard(
-                        title: "今日滑动",
-                        value: "\(state.progressionTodayGestures) 次",
-                        symbol: "hand.draw.fill")
-                    ProductMetricCard(
-                        title: "实际交互",
-                        value: durationText(state.progressionActiveInteractionSeconds),
-                        symbol: "timer")
-                    ProductMetricCard(
-                        title: "离线累计",
-                        value: compactNumber(state.progressionLifetimeOfflineExperience) + " XP",
-                        symbol: "moon.stars.fill")
+                Picker("Badge 分类", selection: $selectedScope) {
+                    ForEach(ProductBadgeScope.allCases) { scope in
+                        Text(scope.title).tag(scope)
+                    }
+                }
+                .pickerStyle(.segmented)
+
+                if let recentTarget {
+                    Button {
+                        selectedBadge = recentTarget
+                    } label: {
+                        HStack(spacing: 13) {
+                            ProductRarityBadge(
+                                assetName: recentTarget.assetName,
+                                token: recentTarget.tokenLine,
+                                shortName: recentTarget.shortName,
+                                grade: recentTarget.grade.rawValue,
+                                state: recentTarget.state.rawValue,
+                                progress: recentTarget.progress,
+                                renderingMode: .catalog)
+                                .frame(width: ProductBadgeLayoutTokens.recentTargetWidth)
+                            VStack(alignment: .leading, spacing: 5) {
+                                Text("最近目标")
+                                    .font(.product(.caption, weight: .bold))
+                                    .foregroundStyle(Color.white.opacity(0.44))
+                                Text(recentTarget.hidden ? "加密核心" : recentTarget.title)
+                                    .font(.product(.headline, weight: .bold))
+                                    .foregroundStyle(Color.white.opacity(0.92))
+                                Text(recentTarget.hidden
+                                     ? "继续真实盘玩以解密条件"
+                                     : recentTarget.description)
+                                    .font(.product(.caption))
+                                    .foregroundStyle(Color.white.opacity(0.50))
+                                    .lineLimit(2)
+                            }
+                            Spacer(minLength: 0)
+                            Image(systemName: "chevron.right")
+                                .foregroundStyle(Color.white.opacity(0.30))
+                        }
+                        .padding(13)
+                        .productGlass(
+                            cornerRadius: 20,
+                            tint: accent.opacity(0.025),
+                            interactive: true)
+                    }
+                    .buttonStyle(.plain)
                 }
 
-                ForEach(ProgressionAchievementMetric.allCases, id: \.rawValue) { metric in
-                    let achievements = state.progressionAchievements.filter { $0.metric == metric }
-                    if !achievements.isEmpty {
-                        VStack(alignment: .leading, spacing: 10) {
-                            Label(metric.title, systemImage: metric.symbol)
-                                .font(.product(.headline))
-                                .foregroundStyle(metric.accent)
-                            LazyVGrid(columns: columns, spacing: 10) {
-                                ForEach(achievements) { achievement in
-                                    ProductBadgeTile(
-                                        title: achievement.title,
-                                        symbol: achievement.metric.symbol,
-                                        unlocked: achievement.unlocked,
-                                        accent: achievement.metric.accent)
-                                }
+                if badges.isEmpty {
+                    ProductEmptyState(
+                        title: "正在同步 Badge",
+                        detail: "目录由 Unity 运行时发布。",
+                        symbol: "seal",
+                        accent: accent)
+                } else {
+                    LazyVGrid(
+                        columns: columns,
+                        spacing: ProductBadgeLayoutTokens.catalogRowSpacing) {
+                        ForEach(badges) { badge in
+                            Button {
+                                selectedBadge = badge
+                            } label: {
+                                ProductRarityBadge(
+                                    assetName: badge.assetName,
+                                    token: badge.tokenLine,
+                                    shortName: badge.shortName,
+                                    grade: badge.grade.rawValue,
+                                    state: badge.state.rawValue,
+                                    progress: badge.progress,
+                                    renderingMode: .catalog)
+                                    .frame(maxWidth: .infinity)
                             }
+                            .buttonStyle(.plain)
+                            .accessibilityHint("打开 Badge 详情")
                         }
                     }
                 }
             }
-            .padding(18)
+            .padding(.horizontal, ProductBadgeLayoutTokens.catalogHorizontalPadding)
+            .padding(.vertical, 18)
+        }
+        .sheet(item: $selectedBadge) { badge in
+            ProductBadgeDetailSheet(
+                badge: badge,
+                accent: accent,
+                toyName: selectedScope == .toy
+                    ? snapshot.progressionModel.title
+                    : selectedScope.title)
+        }
+    }
+}
+
+private struct ProductBadgeDetailSheet: View {
+    let badge: ProductBadgeDetail
+    let accent: Color
+    let toyName: String
+    @Environment(\.dismiss) private var dismiss
+    @State private var shareImage: UIImage?
+    @State private var showsShareSheet = false
+
+    private var statusTitle: String {
+        switch badge.state {
+        case .locked: return "尚未开始"
+        case .inProgress: return "进行中"
+        case .hidden: return "隐藏成就"
+        case .unlocked: return "已获得"
         }
     }
 
-    private func compactNumber(_ value: Double) -> String {
-        if value >= 100000 { return String(format: "%.0fK", value / 1000) }
-        if value >= 1000 { return String(format: "%.1fK", value / 1000) }
-        return String(format: "%.0f", value)
+    var body: some View {
+        NavigationView {
+            ScrollView {
+                VStack(spacing: 18) {
+                    ProductRarityBadge(
+                        assetName: badge.assetName,
+                        token: badge.tokenLine,
+                        shortName: badge.shortName,
+                        grade: badge.grade.rawValue,
+                        state: badge.state.rawValue,
+                        progress: badge.progress)
+                        .frame(width: ProductBadgeLayoutTokens.detailWidth)
+                        .padding(.top, 12)
+
+                    VStack(alignment: .leading, spacing: 14) {
+                        HStack {
+                            Text(badge.hidden ? "加密核心" : badge.title)
+                                .font(.product(.title2, weight: .bold))
+                            Spacer()
+                            ProductInlineTag(
+                                title: statusTitle,
+                                accent: accent,
+                                filled: badge.unlocked)
+                        }
+                        Text(badge.hidden
+                             ? "继续真实盘玩以解密名称和条件。"
+                             : badge.description)
+                            .font(.product(.body))
+                            .foregroundStyle(Color.white.opacity(0.62))
+                        if !badge.hidden {
+                            ProductProgressGauge(
+                                value: badge.progress,
+                                accent: Color.white.opacity(0.76))
+                            HStack {
+                                Text(String(
+                                    format: "%.0f / %.0f",
+                                    badge.currentValue,
+                                    badge.targetValue))
+                                Spacer()
+                                Text("难度等级 · \(badge.grade.rawValue)")
+                            }
+                            .font(.product(.caption).monospacedDigit())
+                            .foregroundStyle(Color.white.opacity(0.48))
+                        }
+                    }
+                    .padding(16)
+                    .productGlass(cornerRadius: 22)
+
+                    ProductSectionCard("奖励", symbol: "sparkles") {
+                        HStack(spacing: 12) {
+                            ProductCompactMetric(
+                                title: "XP",
+                                value: "+\(badge.experienceReward)")
+                            ProductCompactMetric(
+                                title: "徽记碎片",
+                                value: "+\(badge.shardReward)")
+                        }
+                    }
+
+                    if badge.unlocked {
+                        Button {
+                            ProductBadgeShareRenderer.render(
+                                badge: badge,
+                                toyName: toyName) { image in
+                                shareImage = image
+                                showsShareSheet = image != nil
+                            }
+                        } label: {
+                            ProductActionLabel(
+                                title: "生成 1:1 分享卡",
+                                symbol: "square.and.arrow.up")
+                        }
+                        .buttonStyle(.plain)
+                        .accessibilityHint("生成不包含个人信息的 1080 方形图片")
+                    }
+                }
+                .padding(18)
+            }
+            .background(ProductBackdrop().ignoresSafeArea())
+            .navigationTitle("Badge")
+            .navigationBarTitleDisplayMode(.inline)
+            .toolbar {
+                ToolbarItem(placement: .confirmationAction) {
+                    Button("完成") { dismiss() }
+                }
+            }
+        }
+        .navigationViewStyle(.stack)
+        .productDesignSystem()
+        .preferredColorScheme(.dark)
+        .sheet(isPresented: $showsShareSheet) {
+            if let shareImage {
+                ProductBadgeActivitySheet(items: [shareImage])
+            }
+        }
+    }
+}
+
+private struct ProductBadgeShareCard: View {
+    let badge: ProductBadgeDetail
+    let toyName: String
+
+    var body: some View {
+        ZStack {
+            Color(red: 0.025, green: 0.032, blue: 0.034)
+            ProductBadgeLeatherTexture(grainScale: 0.45)
+                .opacity(0.55)
+            VStack(spacing: 11) {
+                HStack {
+                    Text("FIDGETING")
+                        .font(.product(size: 13, weight: .bold))
+                    Spacer()
+                    Text("BADGE")
+                        .font(.product(size: 11, weight: .bold))
+                        .foregroundStyle(Color.white.opacity(0.48))
+                }
+
+                ProductRarityBadge(
+                    assetName: badge.assetName,
+                    token: badge.tokenLine,
+                    shortName: badge.shortName,
+                    grade: badge.grade.rawValue,
+                    state: ProductBadgeState.unlocked.rawValue,
+                    progress: 1)
+                    .frame(width: ProductBadgeLayoutTokens.shareCardWidth)
+
+                VStack(spacing: 6) {
+                    Text(badge.title)
+                        .font(.product(size: 22, weight: .bold))
+                        .foregroundStyle(Color.white.opacity(0.96))
+                        .lineLimit(1)
+                        .minimumScaleFactor(0.72)
+                    Text(toyName)
+                        .font(.product(size: 13, weight: .semibold))
+                        .foregroundStyle(Color.white.opacity(0.58))
+                    Text(badge.description)
+                        .font(.product(size: 11, weight: .medium))
+                        .foregroundStyle(Color.white.opacity(0.46))
+                        .multilineTextAlignment(.center)
+                        .lineLimit(2)
+                }
+
+                HStack {
+                    Text(badge.grade.rawValue.uppercased())
+                    Spacer()
+                    Text(ProductBadgeShareRenderer.dateText(badge.unlockedAtUtc))
+                }
+                .font(.product(size: 9, weight: .bold).monospacedDigit())
+                .foregroundStyle(Color.white.opacity(0.36))
+            }
+            .padding(20)
+        }
+        .aspectRatio(1, contentMode: .fit)
+        .productDesignSystem()
+        .preferredColorScheme(.dark)
+        .accessibilityElement(children: .combine)
+    }
+}
+
+@MainActor
+private enum ProductBadgeShareRenderer {
+    static func render(
+        badge: ProductBadgeDetail,
+        toyName: String,
+        completion: @escaping (UIImage?) -> Void) {
+        let size = CGSize(width: 360, height: 360)
+        let controller = UIHostingController(
+            rootView: ProductBadgeShareCard(badge: badge, toyName: toyName)
+                .frame(width: size.width, height: size.height))
+        let window: UIWindow
+        if let scene = UIApplication.shared.connectedScenes
+            .compactMap({ $0 as? UIWindowScene })
+            .first {
+            window = UIWindow(windowScene: scene)
+        } else {
+            window = UIWindow(frame: CGRect(origin: .zero, size: size))
+        }
+        window.frame = CGRect(origin: .zero, size: size)
+        window.rootViewController = controller
+        window.windowLevel = .alert + 1
+        window.alpha = 0.01
+        window.isHidden = false
+        controller.view.frame = window.bounds
+        controller.view.backgroundColor = .black
+        controller.beginAppearanceTransition(true, animated: false)
+        controller.endAppearanceTransition()
+        controller.view.setNeedsLayout()
+        DispatchQueue.main.async {
+            controller.view.layoutIfNeeded()
+            let format = UIGraphicsImageRendererFormat()
+            format.scale = 3
+            format.opaque = true
+            let image = UIGraphicsImageRenderer(
+                size: size,
+                format: format).image { _ in
+                controller.view.drawHierarchy(
+                    in: controller.view.bounds,
+                    afterScreenUpdates: true)
+            }
+            window.isHidden = true
+            completion(image)
+        }
     }
 
-    private func durationText(_ seconds: Double) -> String {
-        if seconds >= 3600 { return String(format: "%.1f h", seconds / 3600) }
-        if seconds >= 60 { return String(format: "%.0f min", seconds / 60) }
-        return String(format: "%.0f sec", seconds)
+    static func dateText(_ iso8601: String) -> String {
+        guard let date = ISO8601DateFormatter().date(from: iso8601) else {
+            return "LOCAL COLLECTION"
+        }
+        let formatter = DateFormatter()
+        formatter.locale = Locale(identifier: "en_US_POSIX")
+        formatter.timeZone = TimeZone(secondsFromGMT: 0)
+        formatter.dateFormat = "yyyy.MM.dd"
+        return formatter.string(from: date)
+    }
+}
+
+private struct ProductBadgeActivitySheet: UIViewControllerRepresentable {
+    let items: [Any]
+
+    func makeUIViewController(context: Context) -> UIActivityViewController {
+        UIActivityViewController(activityItems: items, applicationActivities: nil)
+    }
+
+    func updateUIViewController(
+        _ uiViewController: UIActivityViewController,
+        context: Context) {
     }
 }
 
@@ -4612,6 +6301,7 @@ private struct CollectorBonusTier: Identifiable {
 private struct CollectorProfile: View {
     @ObservedObject var state: ProductUiState
     @State private var selectedSection = 0
+    @State private var selectedCollectorBadge: ProductBadgeDetail?
 
     private let bonusTiers = [
         CollectorBonusTier(rank: 1, global: 0, focus: 5),
@@ -4671,7 +6361,7 @@ private struct CollectorProfile: View {
 
                 Picker("藏家栏目", selection: $selectedSection) {
                     Text("等级").tag(0)
-                    Text("成就").tag(1)
+                    Text("Badge").tag(1)
                     Text("收藏").tag(2)
                 }
                 .pickerStyle(.segmented)
@@ -4680,7 +6370,7 @@ private struct CollectorProfile: View {
                 case 0:
                     rankOverview
                 case 1:
-                    achievements
+                    badgeCollection
                 default:
                     collection
                 }
@@ -4690,6 +6380,12 @@ private struct CollectorProfile: View {
             .padding(.bottom, 28)
         }
         .background(ProductBackdrop().ignoresSafeArea())
+        .sheet(item: $selectedCollectorBadge) { badge in
+            ProductBadgeDetailSheet(
+                badge: badge,
+                accent: accent,
+                toyName: "藏家")
+        }
     }
 
     private var rankOverview: some View {
@@ -4790,55 +6486,48 @@ private struct CollectorProfile: View {
         }
     }
 
-    private var achievements: some View {
+    private var badgeCollection: some View {
         VStack(alignment: .leading, spacing: 12) {
             HStack {
-                Text("藏家成就")
+                Text("藏家 Badge")
                     .font(.product(.title3, weight: .bold))
                 Spacer()
-                Text("\(state.collectorUnlockedAchievementCount)/\(state.collectorTotalAchievementCount)")
+                Text("\(state.collectorUnlockedBadgeCount)/\(state.collectorTotalBadgeCount)")
                     .font(.product(.subheadline, weight: .semibold).monospacedDigit())
                     .foregroundStyle(Color.white.opacity(0.48))
+                ProductInlineTag(
+                    title: "◆ \(state.badgeShardBalance)",
+                    accent: Color.white.opacity(0.72))
             }
 
-            ForEach(state.collectorAchievements) { achievement in
-                HStack(spacing: 12) {
-                    ZStack {
-                        Circle()
-                            .fill(Color.white.opacity(achievement.unlocked ? 0.10 : 0.025))
-                            .background(.ultraThinMaterial, in: Circle())
-                        Image(systemName: achievement.unlocked
-                              ? achievement.metric.symbol
-                              : "lock.fill")
-                            .font(.product(.subheadline, weight: .semibold))
-                            .foregroundStyle(Color.white.opacity(
-                                achievement.unlocked ? 0.84 : 0.22))
+            if state.collectorBadgeCatalog.isEmpty {
+                ProductEmptyState(
+                    title: "正在同步 Badge",
+                    detail: "藏家目录由 Unity 运行时发布。",
+                    symbol: "seal",
+                    accent: accent)
+            } else {
+                LazyVGrid(
+                    columns: ProductBadgeLayoutTokens.catalogColumns,
+                    spacing: ProductBadgeLayoutTokens.catalogRowSpacing) {
+                    ForEach(state.collectorBadgeCatalog) { badge in
+                        Button {
+                            selectedCollectorBadge = badge
+                        } label: {
+                            ProductRarityBadge(
+                                assetName: badge.assetName,
+                                token: badge.tokenLine,
+                                shortName: badge.shortName,
+                                grade: badge.grade.rawValue,
+                                state: badge.state.rawValue,
+                                progress: badge.progress,
+                                renderingMode: .catalog)
+                                .frame(maxWidth: .infinity)
+                        }
+                        .buttonStyle(.plain)
+                        .accessibilityHint("打开 Badge 详情")
                     }
-                    .frame(width: 42, height: 42)
-
-                    VStack(alignment: .leading, spacing: 3) {
-                        Text(achievement.title)
-                            .font(.product(.subheadline, weight: .semibold))
-                            .foregroundStyle(Color.white.opacity(
-                                achievement.unlocked ? 0.92 : 0.38))
-                        Text("\(achievement.metric.title) · 里程碑 \(achievement.threshold)")
-                            .font(.product(.caption))
-                            .foregroundStyle(Color.white.opacity(
-                                achievement.unlocked ? 0.50 : 0.24))
-                    }
-                    Spacer()
-                    Text(achievement.unlocked ? "已获得" : "未点亮")
-                        .font(.product(.caption2, weight: .semibold))
-                        .foregroundStyle(Color.white.opacity(
-                            achievement.unlocked ? 0.62 : 0.22))
                 }
-                .padding(13)
-                .background(
-                    Color.white.opacity(achievement.unlocked ? 0.035 : 0.012),
-                    in: RoundedRectangle(cornerRadius: 18, style: .continuous))
-                .productGlass(
-                    cornerRadius: 18,
-                    tint: Color.white.opacity(achievement.unlocked ? 0.022 : 0.006))
             }
         }
     }
@@ -4893,14 +6582,451 @@ private struct CollectorProfile: View {
     }
 }
 
+private struct EnvironmentWallpaperImage: View {
+    let theme: EnvironmentTheme
+    let model: SpinnerModel
+    let showsAppChrome: Bool
+
+    private var image: UIImage? {
+        let modelAssetName = theme.wallpaperAssetName(for: model)
+        if let bundled = UIImage(named: modelAssetName) {
+            return bundled
+        }
+        guard let path = Bundle.main.path(
+            forResource: modelAssetName,
+            ofType: "png") else { return nil }
+        return UIImage(contentsOfFile: path)
+    }
+
+    var body: some View {
+        ZStack {
+            if let image {
+                Image(uiImage: image)
+                    .resizable()
+                    .scaledToFill()
+            } else {
+                LinearGradient(
+                    colors: theme == .canyon
+                        ? [Color.black, Color(red: 0.08, green: 0.13, blue: 0.12)]
+                        : [Color.black, Color(red: 0.02, green: 0.17, blue: 0.23)],
+                    startPoint: .topLeading,
+                    endPoint: .bottomTrailing)
+                    .overlay {
+                        Image(systemName: "photo.on.rectangle.angled")
+                            .font(.system(size: 34, weight: .thin))
+                            .foregroundStyle(Color.white.opacity(0.25))
+                    }
+            }
+
+            if showsAppChrome {
+                VStack(spacing: 0) {
+                    Text("我的陀螺")
+                        .font(.product(.caption, weight: .bold))
+                        .foregroundStyle(.white)
+                        .padding(.top, 28)
+
+                    Text("选择一个陀螺")
+                        .font(.product(.headline, weight: .bold))
+                        .foregroundStyle(.white)
+                        .padding(.top, 14)
+                    Text("左右滑动查看 45° 实时模型")
+                        .font(.product(size: 9, weight: .medium))
+                        .foregroundStyle(Color.white.opacity(0.52))
+                        .padding(.top, 3)
+
+                    Spacer(minLength: 0)
+
+                    Text(model.title)
+                        .font(.product(.subheadline, weight: .bold))
+                        .foregroundStyle(.white)
+                    Text(model.subtitle)
+                        .font(.product(size: 9, weight: .medium))
+                        .foregroundStyle(Color.white.opacity(0.56))
+                        .padding(.top, 3)
+                        .padding(.bottom, 24)
+                }
+            }
+        }
+    }
+}
+
+private final class SceneWallpaperPickerTransition: ObservableObject {
+    static let scaleDuration = 0.52
+
+    @Published private(set) var entered: Bool
+
+    init(startsEntered: Bool) {
+        entered = startsEntered
+    }
+
+    func begin(reduceMotion: Bool) {
+        guard !entered else { return }
+        entered = true
+    }
+}
+
+private struct SceneWallpaperPicker: View {
+    @ObservedObject var state: ProductUiState
+    @ObservedObject private var transition: SceneWallpaperPickerTransition
+    let capturedScreen: UIImage?
+    let capturedTheme: EnvironmentTheme
+    let onSelect: (EnvironmentTheme) -> Void
+
+    @Environment(\.accessibilityReduceMotion) private var reduceMotion
+    @State private var dragOffset: CGFloat = 0
+    @State private var isSettling = false
+
+    private let previewScale = 0.66
+    private let neighborSpacing: CGFloat = 22
+    private let swipeThreshold: CGFloat = 48
+    private let carouselSettleDuration = 0.24
+
+    private var entered: Bool { transition.entered }
+
+    private var activeWindowSafeAreaInsets: UIEdgeInsets {
+        UIApplication.shared.connectedScenes
+            .compactMap { $0 as? UIWindowScene }
+            .flatMap(\.windows)
+            .first(where: { $0.isKeyWindow })?
+            .safeAreaInsets ?? .zero
+    }
+
+    init(
+        state: ProductUiState,
+        capturedScreen: UIImage?,
+        capturedTheme: EnvironmentTheme,
+        startsEntered: Bool = false,
+        transition: SceneWallpaperPickerTransition? = nil,
+        onSelect: @escaping (EnvironmentTheme) -> Void
+    ) {
+        self.state = state
+        self.capturedScreen = capturedScreen
+        self.capturedTheme = capturedTheme
+        self.onSelect = onSelect
+        _transition = ObservedObject(wrappedValue:
+            transition ?? SceneWallpaperPickerTransition(
+                startsEntered: startsEntered))
+    }
+
+    private func themeIndex(_ theme: EnvironmentTheme) -> Int {
+        let themes = EnvironmentTheme.allCases
+        return themes.firstIndex(of: theme) ?? 0
+    }
+
+    private func slotOffset(
+        for theme: EnvironmentTheme,
+        relativeTo selection: EnvironmentTheme
+    ) -> Int {
+        themeIndex(theme) - themeIndex(selection)
+    }
+
+    private func adjacentTheme(
+        relativeTo selection: EnvironmentTheme,
+        offset: Int
+    ) -> EnvironmentTheme? {
+        let themes = EnvironmentTheme.allCases
+        let candidateIndex = themeIndex(selection) + offset
+        guard themes.indices.contains(candidateIndex) else { return nil }
+        return themes[candidateIndex]
+    }
+
+    private func boundedDragOffset(
+        _ horizontal: CGFloat,
+        pitch: CGFloat
+    ) -> CGFloat {
+        let selection = state.environmentThemePreview
+        if horizontal > 0,
+           adjacentTheme(relativeTo: selection, offset: -1) == nil {
+            return 0
+        }
+        if horizontal < 0,
+           adjacentTheme(relativeTo: selection, offset: 1) == nil {
+            return 0
+        }
+        return min(pitch, max(-pitch, horizontal))
+    }
+
+    @ViewBuilder
+    private func wallpaperSurface(
+        theme: EnvironmentTheme,
+        size: CGSize
+    ) -> some View {
+        if theme == capturedTheme, let capturedScreen {
+            Image(uiImage: capturedScreen)
+                .resizable()
+                .scaledToFill()
+        } else {
+            EnvironmentWallpaperImage(
+                theme: theme,
+                model: state.selectedModel,
+                showsAppChrome: true)
+        }
+    }
+
+    private func wallpaperCard(
+        theme: EnvironmentTheme,
+        size: CGSize,
+        isCenterCard: Bool,
+        physicalCenterYOffset: CGFloat
+    ) -> some View {
+        wallpaperSurface(theme: theme, size: size)
+            .frame(width: size.width, height: size.height)
+            .clipped()
+            .clipShape(RoundedRectangle(
+                cornerRadius: entered ? 30 : 0,
+                style: .continuous))
+            .overlay {
+                RoundedRectangle(
+                    cornerRadius: entered ? 30 : 0,
+                    style: .continuous)
+                    .stroke(Color.white.opacity(0.16), lineWidth: 1)
+            }
+            .shadow(color: .black.opacity(0.56), radius: 28, y: 18)
+            .scaleEffect(
+                entered ? previewScale : 1,
+                anchor: .center)
+            // The captured live page occupies the exact same physical plane
+            // before and after the shrink. It remains the current theme's
+            // card instead of fading into a generic wallpaper asset.
+            .offset(y:
+                !entered && isCenterCard && theme == capturedTheme &&
+                    capturedScreen != nil
+                    ? physicalCenterYOffset
+                    : 0)
+    }
+
+    private func carouselDragGesture(pitch: CGFloat) -> some Gesture {
+        DragGesture(minimumDistance: 8, coordinateSpace: .local)
+            .onChanged { value in
+                guard entered, !isSettling else { return }
+                let horizontal = value.translation.width
+                dragOffset = boundedDragOffset(horizontal, pitch: pitch)
+            }
+            .onEnded { value in
+                settleCarousel(value, pitch: pitch)
+            }
+    }
+
+    private func settleCarousel(
+        _ value: DragGesture.Value,
+        pitch: CGFloat
+    ) {
+        guard entered, !isSettling else { return }
+        let horizontal = value.translation.width
+        let projected = value.predictedEndTranslation.width
+        let resolved = abs(projected) > abs(horizontal) ? projected : horizontal
+        let isHorizontal = abs(horizontal) >= abs(value.translation.height)
+
+        guard isHorizontal, abs(resolved) >= swipeThreshold else {
+            withAnimation(.easeOut(duration: 0.18)) {
+                dragOffset = 0
+            }
+            return
+        }
+
+        let themeOffset = resolved < 0 ? 1 : -1
+        guard let nextTheme = adjacentTheme(
+            relativeTo: state.environmentThemePreview,
+            offset: themeOffset) else {
+            withAnimation(.easeOut(duration: 0.18)) {
+                dragOffset = 0
+            }
+            return
+        }
+
+        if reduceMotion {
+            var transaction = Transaction()
+            transaction.disablesAnimations = true
+            withTransaction(transaction) {
+                state.environmentThemePreview = nextTheme
+                dragOffset = 0
+            }
+            return
+        }
+
+        isSettling = true
+        withAnimation(.easeOut(duration: carouselSettleDuration)) {
+            dragOffset = themeOffset > 0 ? -pitch : pitch
+        }
+        DispatchQueue.main.asyncAfter(
+            deadline: .now() + carouselSettleDuration) {
+            var transaction = Transaction()
+            transaction.disablesAnimations = true
+            withTransaction(transaction) {
+                state.environmentThemePreview = nextTheme
+                dragOffset = 0
+                isSettling = false
+            }
+        }
+    }
+
+    var body: some View {
+        GeometryReader { proxy in
+            let size = proxy.size
+            let windowInsets = activeWindowSafeAreaInsets
+            let horizontalBackdropScale =
+                (size.width + 90) / max(size.width, 1)
+            // The outer SwiftUI safe-area proposal and PageTabViewController
+            // each contribute half of the same vertical-center displacement.
+            // Use the complete inset difference to cancel both layers.
+            let physicalCenterYOffset =
+                windowInsets.bottom - windowInsets.top
+            let carouselPitch =
+                size.width * previewScale + neighborSpacing
+            ZStack {
+                EnvironmentWallpaperImage(
+                    theme: state.environmentThemePreview,
+                    model: state.selectedModel,
+                    showsAppChrome: false)
+                    // Keep the backdrop's layout width equal to the screen.
+                    // Its former `width + 90` frame enlarged the whole ZStack
+                    // and shifted every centered element 45 pt to the right.
+                    // transform-based bleed stays visually symmetric without
+                    // participating in layout.
+                    .frame(width: size.width, height: size.height + 90)
+                    .clipped()
+                    .scaleEffect(
+                        x: horizontalBackdropScale,
+                        y: 1,
+                        anchor: .center)
+                    .blur(radius: 34)
+                    .saturation(0.72)
+                    .opacity(0.42)
+                    .animation(.easeInOut(duration: 0.36), value: state.environmentThemePreview)
+
+                Color.black.opacity(0.68)
+                    .ignoresSafeArea()
+
+                ZStack {
+                    ForEach(EnvironmentTheme.allCases) { theme in
+                        let slot = slotOffset(
+                            for: theme,
+                            relativeTo: state.environmentThemePreview)
+                        wallpaperCard(
+                            theme: theme,
+                            size: size,
+                            isCenterCard: slot == 0,
+                            physicalCenterYOffset: physicalCenterYOffset)
+                            .offset(
+                                x: CGFloat(slot) * carouselPitch +
+                                    (entered ? dragOffset : 0))
+                            .opacity(entered || slot == 0 ? 1 : 0)
+                            .zIndex(slot == 0 ? 2 : 1)
+                    }
+                }
+                .contentShape(Rectangle())
+                .gesture(carouselDragGesture(pitch: carouselPitch))
+                .animation(
+                    reduceMotion
+                        ? nil
+                        : .timingCurve(
+                            0.20,
+                            0.80,
+                            0.20,
+                            1.00,
+                            duration: SceneWallpaperPickerTransition.scaleDuration),
+                    value: entered)
+                .offset(y: entered ? physicalCenterYOffset : 0)
+
+                VStack(spacing: 0) {
+                    VStack(spacing: 3) {
+                        Text(state.environmentThemePreview.title)
+                            .font(.product(.headline, weight: .bold))
+                            .foregroundStyle(.white)
+                        Text(state.environmentThemePreview.subtitle)
+                            .font(.product(.caption))
+                            .foregroundStyle(Color.white.opacity(0.55))
+                    }
+                    .padding(.horizontal, 20)
+                    .padding(.top, max(12, proxy.safeAreaInsets.top + 8))
+                    .opacity(entered ? 1 : 0)
+
+                    Spacer()
+
+                    ProductPageIndicator(
+                        items: EnvironmentTheme.allCases,
+                        selection: state.environmentThemePreview,
+                        accessibilityLabel: { index, count in
+                            "第 \(index) 个，共 \(count) 个场景"
+                        })
+                    .padding(.bottom, 14)
+
+                    Button {
+                        guard entered, !isSettling else { return }
+                        onSelect(state.environmentThemePreview)
+                    } label: {
+                        ProductPrimaryActionLabel(
+                            title: "选择当前场景")
+                    }
+                    .buttonStyle(.plain)
+                    .disabled(!entered || isSettling)
+                    .accessibilityHint("应用当前居中的场景")
+                    .padding(.horizontal, 24)
+                    .padding(.bottom, max(14, windowInsets.bottom + 10))
+                }
+                .opacity(entered ? 1 : 0)
+                .animation(
+                    reduceMotion ? nil : .easeOut(duration: 0.30).delay(0.16),
+                    value: entered)
+            }
+            .ignoresSafeArea()
+        }
+        .background(Color.black)
+        .preferredColorScheme(.dark)
+        .productDesignSystem()
+        .onChange(of: state.environmentThemePreview) { _ in
+            UnityBridge.feedback()
+        }
+    }
+}
+
 private struct SpinnerLibrary: View {
     @ObservedObject var state: ProductUiState
+    @State private var activeSwipeSession: Int64?
+    @State private var swipeStartModel: SpinnerModel?
+
+    private static let swipeCommitViewportFraction: CGFloat = 0.18
 
     private func select(_ model: SpinnerModel) {
         guard state.selectedModel != model else { return }
         UnityBridge.feedback()
         state.select(model)
         CodexSwiftUIOverlayManager.shared.previewModel(model)
+    }
+
+    private func beginSwipeIfNeeded() -> Int64 {
+        if let activeSwipeSession {
+            return activeSwipeSession
+        }
+
+        let session = Int64(CACurrentMediaTime() * 1_000_000)
+        activeSwipeSession = session
+        swipeStartModel = state.selectedModel
+        UnityBridge.send(
+            "BeginLibrarySwipeFromNativeUi",
+            value: String(session))
+        return session
+    }
+
+    private func targetModel(
+        from start: SpinnerModel,
+        translation: CGFloat,
+        predictedTranslation: CGFloat,
+        viewportWidth: CGFloat
+    ) -> SpinnerModel? {
+        let projected = abs(predictedTranslation) > abs(translation)
+            ? predictedTranslation
+            : translation
+        guard abs(projected)
+                >= viewportWidth * Self.swipeCommitViewportFraction,
+              let startIndex = SpinnerModel.shippingCases.firstIndex(of: start)
+        else { return nil }
+
+        let targetIndex = startIndex + (projected < 0 ? 1 : -1)
+        guard SpinnerModel.shippingCases.indices.contains(targetIndex) else {
+            return nil
+        }
+        return SpinnerModel.shippingCases[targetIndex]
     }
 
     var body: some View {
@@ -4923,14 +7049,81 @@ private struct SpinnerLibrary: View {
             }
             .tabViewStyle(.page(indexDisplayMode: .always))
             .indexViewStyle(.page(backgroundDisplayMode: .never))
+            .contentShape(Rectangle())
+            .highPriorityGesture(
+                DragGesture(minimumDistance: 2, coordinateSpace: .global)
+                    .onChanged { value in
+                        let width = max(UIScreen.main.bounds.width, 1)
+                        let session = beginSwipeIfNeeded()
+                        let progress = max(
+                            -1,
+                            min(1, value.translation.width / width))
+                        UnityBridge.send(
+                            "SetLibrarySwipeProgressFromNativeUi",
+                            value: String(
+                                format: "%lld|%.4f",
+                                session,
+                                progress))
+                    }
+                    .onEnded { value in
+                        guard let session = activeSwipeSession,
+                              let start = swipeStartModel else { return }
+                        let width = max(UIScreen.main.bounds.width, 1)
+                        if let target = targetModel(
+                            from: start,
+                            translation: value.translation.width,
+                            predictedTranslation:
+                                value.predictedEndTranslation.width,
+                            viewportWidth: width
+                        ) {
+                            UnityBridge.send(
+                                "CommitLibrarySwipeFromNativeUi",
+                                value: String(session))
+                            withAnimation(.easeOut(duration: 0.22)) {
+                                select(target)
+                            }
+                        }
+
+                        UnityBridge.send(
+                            "EndLibrarySwipeFromNativeUi",
+                            value: String(session))
+                        activeSwipeSession = nil
+                        swipeStartModel = nil
+                    })
+            .simultaneousGesture(
+                LongPressGesture(minimumDuration: 0.55, maximumDistance: 14)
+                    .onEnded { _ in
+                        CodexSwiftUIOverlayManager.shared.presentEnvironmentPicker()
+                    })
+            .accessibilityIdentifier("library-model-carousel")
+            .accessibilityHint("左右滑动选择陀螺；长按背景选择场景")
+
+            Button {
+                UnityBridge.feedback(.medium)
+                CodexSwiftUIOverlayManager.shared.presentDisplayCase()
+            } label: {
+                Text("查看收藏盒")
+                .font(.system(size: 14, weight: .semibold))
+                .foregroundStyle(.white.opacity(0.82))
+                .frame(maxWidth: .infinity)
+                .frame(height: 42)
+                .background(.ultraThinMaterial, in:
+                    RoundedRectangle(cornerRadius: 14, style: .continuous))
+                .overlay {
+                    RoundedRectangle(cornerRadius: 14, style: .continuous)
+                        .stroke(.white.opacity(0.09), lineWidth: 0.7)
+                }
+            }
+            .buttonStyle(.plain)
+            .padding(.horizontal, 24)
+            .padding(.bottom, 8)
 
             Button {
                 UnityBridge.feedback(.medium)
                 CodexSwiftUIOverlayManager.shared.enterSelectedModel()
             } label: {
                 ProductPrimaryActionLabel(
-                    title: "进入 \(state.selectedModel.title)",
-                    symbol: "arrow.right")
+                    title: "进入 \(state.selectedModel.title)")
             }
             .buttonStyle(.plain)
             .padding(.horizontal, 24)
@@ -4948,6 +7141,317 @@ private struct SpinnerLibrary: View {
         }
     }
 }
+
+private enum DisplayCaseLightingPreset: String, CaseIterable, Identifiable {
+    case softNeutral = "soft-neutral"
+    case roseStudio = "rose-studio"
+    case amberGallery = "amber-gallery"
+    case coolMist = "cool-mist"
+
+    var id: String { rawValue }
+
+    var title: String {
+        switch self {
+        case .softNeutral: return "柔白"
+        case .roseStudio: return "玫瑰"
+        case .amberGallery: return "琥珀"
+        case .coolMist: return "冷雾"
+        }
+    }
+
+    var swatch: [Color] {
+        switch self {
+        case .softNeutral:
+            return [Color(red: 1.00, green: 0.91, blue: 0.84),
+                    Color(red: 0.76, green: 0.88, blue: 1.00)]
+        case .roseStudio:
+            return [Color(red: 1.00, green: 0.70, blue: 0.87),
+                    Color(red: 0.66, green: 0.80, blue: 1.00)]
+        case .amberGallery:
+            return [Color(red: 1.00, green: 0.78, blue: 0.54),
+                    Color(red: 1.00, green: 0.45, blue: 0.22)]
+        case .coolMist:
+            return [Color(red: 0.70, green: 0.88, blue: 1.00),
+                    Color(red: 0.40, green: 0.54, blue: 1.00)]
+        }
+    }
+}
+
+private struct PremiumDisplayCaseExperienceView: View {
+    let onClose: () -> Void
+
+    @AppStorage("FidgetingApp.DisplayCaseLightingPreset")
+    private var lightingPresetId = DisplayCaseLightingPreset.softNeutral.rawValue
+    @State private var explodedProgress = 0.0
+    @State private var orbitYaw = 0.0
+    @State private var orbitPitch = 0.0
+    @State private var orbitStart = CGSize.zero
+    @State private var zoom = 1.0
+    @State private var zoomStart = 1.0
+
+    private var orbitGesture: some Gesture {
+        DragGesture(minimumDistance: 0)
+            .onChanged { value in
+                orbitYaw = min(34, max(-34,
+                    orbitStart.width - value.translation.width * 0.16))
+                orbitPitch = min(22, max(-22,
+                    orbitStart.height - value.translation.height * 0.16))
+                UnityBridge.send(
+                    "SetDisplayCaseOrbitFromNativeUi",
+                    value: String(
+                        format: "%.3f,%.3f",
+                        locale: Locale(identifier: "en_US_POSIX"),
+                        orbitYaw,
+                        orbitPitch))
+            }
+            .onEnded { _ in
+                orbitStart = CGSize(width: orbitYaw, height: orbitPitch)
+            }
+    }
+
+    private var zoomGesture: some Gesture {
+        MagnificationGesture()
+            .onChanged { value in
+                zoom = min(1.18, max(0.84, zoomStart * value))
+                UnityBridge.send(
+                    "SetDisplayCaseZoomFromNativeUi",
+                    value: String(
+                        format: "%.4f",
+                        locale: Locale(identifier: "en_US_POSIX"),
+                        zoom))
+            }
+            .onEnded { _ in
+                zoomStart = zoom
+            }
+    }
+
+    var body: some View {
+        ZStack {
+            Color.clear
+
+            VStack(spacing: 0) {
+                HStack(spacing: 12) {
+                    Button {
+                        UnityBridge.feedback(.medium)
+                        onClose()
+                    } label: {
+                        Image(systemName: "chevron.left")
+                            .font(.system(size: 16, weight: .semibold))
+                            .foregroundStyle(.white.opacity(0.88))
+                            .frame(width: 42, height: 42)
+                            .background(.ultraThinMaterial, in: Circle())
+                            .overlay {
+                                Circle().stroke(.white.opacity(0.09), lineWidth: 0.7)
+                            }
+                    }
+                    .buttonStyle(.plain)
+                    .accessibilityLabel("关闭收藏盒")
+
+                    VStack(alignment: .leading, spacing: 2) {
+                        Text("DISPLAY CASE")
+                            .font(.system(size: 12, weight: .semibold))
+                            .foregroundStyle(.white.opacity(0.76))
+                        Text("透明亚克力 · 圆形内容槽")
+                            .font(.system(size: 10, weight: .regular))
+                            .foregroundStyle(.white.opacity(0.42))
+                    }
+
+                    Spacer()
+
+                    Button {
+                        orbitYaw = 0
+                        orbitPitch = 0
+                        orbitStart = .zero
+                        zoom = 1
+                        zoomStart = 1
+                        UnityBridge.feedback()
+                        UnityBridge.send("SetDisplayCaseOrbitFromNativeUi", value: "0,0")
+                        UnityBridge.send("SetDisplayCaseZoomFromNativeUi", value: "1")
+                    } label: {
+                        Image(systemName: "view.3d")
+                            .font(.system(size: 15, weight: .medium))
+                            .foregroundStyle(.white.opacity(0.72))
+                            .frame(width: 42, height: 42)
+                            .background(.ultraThinMaterial, in: Circle())
+                    }
+                    .buttonStyle(.plain)
+                    .accessibilityLabel("重置视角")
+                }
+                .padding(.horizontal, 16)
+                .padding(.top, 12)
+
+                Rectangle()
+                    .fill(Color.white.opacity(0.001))
+                    .contentShape(Rectangle())
+                    .gesture(orbitGesture)
+                    .simultaneousGesture(zoomGesture)
+                    .accessibilityLabel("收藏盒三维视图")
+                    .accessibilityHint("单指拖动旋转，双指捏合缩放")
+
+                VStack(spacing: 14) {
+                    VStack(alignment: .leading, spacing: 9) {
+                        HStack {
+                            Text("LIGHT COLOR")
+                                .font(.system(size: 11, weight: .semibold))
+                                .foregroundStyle(.white.opacity(0.70))
+                            Spacer()
+                            Text((DisplayCaseLightingPreset(
+                                rawValue: lightingPresetId) ?? .softNeutral).title)
+                                .font(.system(size: 9, weight: .medium))
+                                .foregroundStyle(.white.opacity(0.44))
+                        }
+
+                        HStack(spacing: 8) {
+                            ForEach(DisplayCaseLightingPreset.allCases) { preset in
+                                let selected = preset.rawValue == lightingPresetId
+                                Button {
+                                    lightingPresetId = preset.rawValue
+                                    UnityBridge.feedback()
+                                    UnityBridge.send(
+                                        "SetDisplayCaseLightingFromNativeUi",
+                                        value: preset.rawValue)
+                                } label: {
+                                    VStack(spacing: 5) {
+                                        Circle()
+                                            .fill(LinearGradient(
+                                                colors: preset.swatch,
+                                                startPoint: .topLeading,
+                                                endPoint: .bottomTrailing))
+                                            .frame(width: 24, height: 24)
+                                            .overlay {
+                                                Circle().stroke(
+                                                    selected
+                                                        ? Color.white.opacity(0.92)
+                                                        : Color.white.opacity(0.16),
+                                                    lineWidth: selected ? 2 : 0.7)
+                                            }
+                                            .shadow(
+                                                color: preset.swatch[0].opacity(0.22),
+                                                radius: 5,
+                                                y: 2)
+                                        Text(preset.title)
+                                            .font(.system(size: 9, weight:
+                                                selected ? .semibold : .regular))
+                                            .foregroundStyle(.white.opacity(
+                                                selected ? 0.84 : 0.46))
+                                    }
+                                    .frame(maxWidth: .infinity)
+                                    .contentShape(Rectangle())
+                                }
+                                .buttonStyle(.plain)
+                                .accessibilityLabel("收藏盒\(preset.title)灯光")
+                                .accessibilityAddTraits(selected ? .isSelected : [])
+                            }
+                        }
+                    }
+
+                    Divider()
+                        .overlay(Color.white.opacity(0.08))
+
+                    HStack {
+                        VStack(alignment: .leading, spacing: 2) {
+                            Text("ASSEMBLY")
+                                .font(.system(size: 11, weight: .semibold))
+                                .foregroundStyle(.white.opacity(0.70))
+                            Text(explodedProgress > 0.5 ? "EXPLODED" : "ASSEMBLED")
+                                .font(.system(size: 9, weight: .medium))
+                                .foregroundStyle(.white.opacity(0.38))
+                        }
+                        Spacer()
+                        Text("\(Int((explodedProgress * 100).rounded()))%")
+                            .font(.system(size: 11, weight: .medium, design: .monospaced))
+                            .foregroundStyle(.white.opacity(0.55))
+                    }
+
+                    Slider(value: Binding(
+                        get: { explodedProgress },
+                        set: { value in
+                            explodedProgress = value
+                            UnityBridge.send(
+                                "SetDisplayCaseExplodedProgressFromNativeUi",
+                                value: String(
+                                    format: "%.4f",
+                                    locale: Locale(identifier: "en_US_POSIX"),
+                                    value))
+                        }), in: 0...1)
+                    .tint(.white.opacity(0.78))
+
+                    HStack(spacing: 10) {
+                        Button {
+                            explodedProgress = 0
+                            UnityBridge.feedback(.medium)
+                            UnityBridge.send("PlayDisplayCaseAssemblyFromNativeUi")
+                        } label: {
+                            Label("装配并重播", systemImage: "play.fill")
+                                .font(.system(size: 12, weight: .semibold))
+                                .foregroundStyle(.black.opacity(0.82))
+                                .frame(maxWidth: .infinity)
+                                .frame(height: 40)
+                                .background(.white.opacity(0.82), in:
+                                    RoundedRectangle(cornerRadius: 12, style: .continuous))
+                        }
+                        .buttonStyle(.plain)
+
+                        Button {
+                            explodedProgress = 1
+                            UnityBridge.feedback()
+                            UnityBridge.send("ExplodeDisplayCaseFromNativeUi")
+                        } label: {
+                            Image(systemName: "square.3.layers.3d")
+                                .font(.system(size: 14, weight: .medium))
+                                .foregroundStyle(.white.opacity(0.74))
+                                .frame(width: 48, height: 40)
+                                .background(.white.opacity(0.055), in:
+                                    RoundedRectangle(cornerRadius: 12, style: .continuous))
+                        }
+                        .buttonStyle(.plain)
+                        .accessibilityLabel("展开零件")
+                    }
+                }
+                .padding(16)
+                .background(.ultraThinMaterial, in:
+                    RoundedRectangle(cornerRadius: 24, style: .continuous))
+                .overlay {
+                    RoundedRectangle(cornerRadius: 24, style: .continuous)
+                        .stroke(.white.opacity(0.09), lineWidth: 0.7)
+                }
+                .padding(.horizontal, 14)
+                .padding(.bottom, 10)
+            }
+        }
+        .preferredColorScheme(.dark)
+        .onAppear {
+            let preset = DisplayCaseLightingPreset(rawValue: lightingPresetId)
+                ?? .softNeutral
+            lightingPresetId = preset.rawValue
+            UnityBridge.send(
+                "SetDisplayCaseLightingFromNativeUi",
+                value: preset.rawValue)
+        }
+    }
+}
+
+#if DEBUG
+struct PremiumDisplayCaseNativePreviewRoot: View {
+    var body: some View {
+        PremiumDisplayCaseExperienceView(onClose: {})
+            .background {
+                if let image = UIImage(named: "premium-display-case-unity-hero.png") {
+                    Image(uiImage: image)
+                        .resizable()
+                        .scaledToFill()
+                        .ignoresSafeArea()
+                } else {
+                    LinearGradient(
+                        colors: [.black, Color(white: 0.07), .black],
+                        startPoint: .topLeading,
+                        endPoint: .bottomTrailing)
+                        .ignoresSafeArea()
+                }
+            }
+    }
+}
+#endif
 
 private struct HapticSpeedTextureLab: View {
     @ObservedObject var state: ProductUiState
@@ -5183,14 +7687,15 @@ private struct ComboHaloTuningPanel: View {
                         opacityProgress: previewOpacityProgress,
                         tuning: state.comboHaloTuning,
                         reduceMotion: reduceMotion,
-                        projection: .threeBladeHeroPreview)
+                        projection: .threeBladeHeroPreview,
+                        milestoneCount: 30)
 
                     Circle()
                         .fill(Color.black.opacity(0.82))
                         .frame(width: 70, height: 70)
                         .overlay {
                             VStack(spacing: -2) {
-                                Text("×20")
+                                Text("×30")
                                     .font(.product(size: 24, weight: .black))
                                     .monospacedDigit()
                                 Text("MODEL CENTER")
@@ -5763,16 +8268,19 @@ struct ComboHaloNativePreviewRoot: View {
     let mode: Mode
     let frozenProgress: CGFloat
     let sceneView: SceneView
+    let comboCount: Int
 
-    private let previewCombo = ProgressionComboState(
-        tier: 3,
-        count: 20,
-        title: "OVERDRIVE",
-        speed: 0.92,
-        angularSpeedRadians: 42,
-        intensity: 0.88,
-        frequency: 0.84,
-        experienceMultiplier: 1.45)
+    private var previewCombo: ProgressionComboState {
+        ProgressionComboState(
+            tier: 3,
+            count: comboCount,
+            title: "OVERDRIVE",
+            speed: 0.92,
+            angularSpeedRadians: 42,
+            intensity: 0.88,
+            frequency: 0.84,
+            experienceMultiplier: 1.45)
+    }
 
     var body: some View {
         Group {
@@ -5809,7 +8317,8 @@ struct ComboHaloNativePreviewRoot: View {
                                 : frozenProgress,
                             tuning: state.comboHaloTuning,
                             reduceMotion: false,
-                            projection: sceneView.projection)
+                            projection: sceneView.projection,
+                            milestoneCount: comboCount)
 
                         VStack(spacing: 0) {
                             RewardingComboLockup(combo: previewCombo)
@@ -5817,8 +8326,8 @@ struct ComboHaloNativePreviewRoot: View {
                             Spacer(minLength: 0)
 
                             Text(mode == .motion
-                                 ? "NATIVE IMPLEMENTATION · LIVE LOOP"
-                                 : "NATIVE IMPLEMENTATION · 38% FRAME")
+                                 ? "NATIVE IMPLEMENTATION · ×\(comboCount) LIVE LOOP"
+                                 : "NATIVE IMPLEMENTATION · ×\(comboCount) · 38% FRAME")
                                 .font(.product(size: 9, weight: .bold))
                                 .foregroundStyle(Color.white.opacity(0.54))
                                 .padding(.bottom, 34)
@@ -5872,10 +8381,23 @@ struct ProgressionThumbnailNativePreviewRoot: View {
         case hud
         case hudOff = "hud-off"
         case sheet
+        case sheetBadge = "sheet-badge"
+        case sheetAppearance = "sheet-appearance"
+        case top
     }
 
     @StateObject private var state = ProductUiState()
+    @State private var showingCatalogSheet = false
+    @State private var previewCatalogSnapshot: ProgressionCatalogSnapshot?
     let mode: Mode
+
+    private var previewCatalogSection: Int {
+        switch mode {
+        case .sheetBadge: return 1
+        case .sheetAppearance: return 2
+        default: return 0
+        }
+    }
 
     private static let skinCatalogPayload = """
     factory-silver\t1\t原生雾银\t雾面航空铝\t微珠喷砂\t原厂抛光倒角\t标准单列轴承\tAEB3B6\tE5E9EC
@@ -5903,16 +8425,46 @@ struct ProgressionThumbnailNativePreviewRoot: View {
                             .padding(.bottom, 28)
                     }
                 }
-            case .sheet:
-                ProgressionLevelDetailsSheet(state: state)
+            case .sheet, .sheetBadge, .sheetAppearance:
+                ProgressionCatalogPreviewScene()
+                    .sheet(isPresented: $showingCatalogSheet) {
+                        if let previewCatalogSnapshot {
+                            ProgressionLevelDetailsSheet(
+                                state: state,
+                                snapshot: previewCatalogSnapshot,
+                                initialSection: previewCatalogSection)
+                                .equatable()
+                        }
+                    }
+            case .top:
+                ZStack {
+                    ProductBackdrop().ignoresSafeArea()
+                    VStack(spacing: 0) {
+                        ProductTopBar(state: state)
+                            .frame(maxWidth: .infinity)
+                            .frame(height: 82)
+                        Spacer(minLength: 0)
+                    }
+                }
             }
         }
         .productDesignSystem()
         .preferredColorScheme(.dark)
-        .onAppear(perform: configurePreviewState)
+        .onAppear {
+            configurePreviewState()
+            if mode == .sheet
+                || mode == .sheetBadge
+                || mode == .sheetAppearance {
+                previewCatalogSnapshot = ProgressionCatalogSnapshot(state: state)
+                DispatchQueue.main.async {
+                    showingCatalogSheet = true
+                }
+            }
+        }
     }
 
     private func configurePreviewState() {
+        state.isLibraryVisible = false
         state.selectedModel = .metalThreeBlade
         state.progressionModel = .metalThreeBlade
         state.progressionLevel = 39
@@ -5925,7 +8477,10 @@ struct ProgressionThumbnailNativePreviewRoot: View {
             available: true,
             normalizedSpeed: 0.54,
             angularSpeedRadians: 12,
-            speedBand: .engaged)
+            motionRate: 12,
+            speedBand: .engaged,
+            intensity: 0.68,
+            frequency: 0.42)
         state.progressionNextUnlockLevel = 50
         state.progressionNextUnlockName = "双列辅助轴承"
         state.progressionAssistantEnabled = mode == .hud
@@ -5933,8 +8488,445 @@ struct ProgressionThumbnailNativePreviewRoot: View {
         state.progressionLevelCatalog = ProgressionLevelDetail.fallback
         state.threeBladeMetalSkins = ThreeBladeMetalSkinDetail.parse(
             Self.skinCatalogPayload)
+        state.toyBadgeCatalog = BadgeNativePreviewRoot.catalogBadges
     }
 }
+
+private struct ProgressionCatalogPreviewScene: View {
+    var body: some View {
+        ZStack {
+            LinearGradient(
+                colors: [
+                    Color(red: 0.025, green: 0.12, blue: 0.15),
+                    Color(red: 0.02, green: 0.025, blue: 0.035),
+                    Color(red: 0.17, green: 0.065, blue: 0.025)
+                ],
+                startPoint: .topLeading,
+                endPoint: .bottomTrailing)
+
+            Circle()
+                .fill(Color.cyan.opacity(0.56))
+                .frame(width: 590, height: 590)
+                .blur(radius: 82)
+                .offset(x: -120, y: -260)
+
+            Circle()
+                .fill(Color.orange.opacity(0.48))
+                .frame(width: 560, height: 560)
+                .blur(radius: 92)
+                .offset(x: 210, y: 540)
+        }
+        .ignoresSafeArea()
+        .accessibilityHidden(true)
+    }
+}
+
+/// Simulator-only visual gate for the shipping product catalog. The preview
+/// deliberately selects the final shipping case so a missing sixth page is
+/// visible before a device build is allowed.
+struct FanCardCatalogNativePreviewRoot: View {
+    @StateObject private var state = ProductUiState()
+
+    var body: some View {
+        GeometryReader { proxy in
+            ZStack {
+                if let imagePath = Bundle.main.path(
+                    forResource: "UnityFanCardHero",
+                    ofType: "png"),
+                   let image = UIImage(contentsOfFile: imagePath) {
+                    Image(uiImage: image)
+                        .resizable()
+                        .scaledToFill()
+                        .frame(width: proxy.size.width, height: proxy.size.height)
+                        .clipped()
+                } else {
+                    Color.black
+                }
+
+                VStack(spacing: 0) {
+                    Color.clear.frame(height: 108)
+                    ProductPanel(state: state)
+                }
+            }
+        }
+        .ignoresSafeArea()
+        .productDesignSystem()
+        .preferredColorScheme(.dark)
+        .onAppear {
+            state.select(.magneticFanCard)
+        }
+    }
+}
+
+/// Simulator-only visual gate for the approved B8 production Badge system.
+/// It renders the shipping catalog, card component, detail sheet and share card.
+struct BadgeNativePreviewRoot: View {
+    enum Mode: String {
+        case catalog
+        case detail
+        case states
+        case unlock
+        case share
+        case reference
+    }
+
+    @StateObject private var state = ProductUiState()
+    let mode: Mode
+
+    private static let unlocked = badge(
+        id: "toy_pulse_100k",
+        asset: "badge-b8-toy-pulse-100k",
+        token: "100K",
+        shortName: "PULSE",
+        grade: .singularity,
+        state: .unlocked,
+        current: 100000,
+        target: 100000,
+        title: "十万脉冲",
+        description: "完成 100,000 次真实手势")
+
+    fileprivate static let catalogBadges: [ProductBadgeDetail] = [
+        badge(
+            id: "toy_power_ignition",
+            asset: "badge-b8-toy-power-ignition",
+            token: "1.0 KM/H",
+            shortName: "POWER",
+            grade: .ignition,
+            state: .unlocked,
+            current: 1.2,
+            target: 1,
+            title: "动力点火",
+            description: "达到第一档动力门槛"),
+        badge(
+            id: "toy_pulse_1k",
+            asset: "badge-b8-toy-pulse-1k",
+            token: "1K",
+            shortName: "PULSE",
+            grade: .overdrive,
+            state: .inProgress,
+            current: 680,
+            target: 1000,
+            title: "千次脉冲",
+            description: "完成 1,000 次真实手势"),
+        badge(
+            id: "toy_combo_20",
+            asset: "badge-b8-toy-combo-20",
+            token: "×20",
+            shortName: "CHAIN",
+            grade: .apex,
+            state: .inProgress,
+            current: 12,
+            target: 20,
+            title: "Chain 20",
+            description: "单次达到 20 Combo"),
+        badge(
+            id: "toy_technique_speed",
+            asset: "badge-b8-toy-technique-speed",
+            token: "SPEED",
+            shortName: "CONTROL",
+            grade: .apex,
+            state: .hidden,
+            current: 0,
+            target: 1,
+            title: "Speed",
+            description: "完成一次高速技巧",
+            visibility: "Hidden"),
+        unlocked,
+        badge(
+            id: "toy_focus_10h",
+            asset: "badge-b8-toy-focus-10h",
+            token: "10H",
+            shortName: "FOCUS",
+            grade: .singularity,
+            state: .locked,
+            current: 0,
+            target: 36000,
+            title: "专注 10 小时",
+            description: "真实触摸累计 10 小时")
+    ]
+
+    private static let referenceBadges: [ProductBadgeDetail] = [
+        badge(
+            id: "toy_pulse_1k",
+            asset: "badge-b8-toy-pulse-1k",
+            token: "1K",
+            shortName: "PULSE",
+            grade: .overdrive,
+            state: .unlocked,
+            current: 1000,
+            target: 1000,
+            title: "千次脉冲",
+            description: "完成 1,000 次真实手势"),
+        badge(
+            id: "toy_pulse_10k",
+            asset: "badge-b8-toy-pulse-10k",
+            token: "10K",
+            shortName: "PULSE",
+            grade: .apex,
+            state: .unlocked,
+            current: 10000,
+            target: 10000,
+            title: "万次脉冲",
+            description: "完成 10,000 次真实手势"),
+        badge(
+            id: "toy_technique_speed",
+            asset: "badge-b8-toy-technique-speed",
+            token: "SPEED",
+            shortName: "CONTROL",
+            grade: .apex,
+            state: .unlocked,
+            current: 1,
+            target: 1,
+            title: "Speed",
+            description: "完成一次高速技巧"),
+        badge(
+            id: "toy_technique_endurance",
+            asset: "badge-b8-toy-technique-endurance",
+            token: "ENDURE",
+            shortName: "CONTROL",
+            grade: .apex,
+            state: .unlocked,
+            current: 1,
+            target: 1,
+            title: "Endurance",
+            description: "完成一次耐力技巧"),
+        badge(
+            id: "toy_combo_20",
+            asset: "badge-b8-toy-combo-20",
+            token: "×20",
+            shortName: "CHAIN",
+            grade: .apex,
+            state: .unlocked,
+            current: 20,
+            target: 20,
+            title: "Chain 20",
+            description: "单次达到 20 Combo"),
+        badge(
+            id: "toy_combo_50",
+            asset: "badge-b8-toy-combo-50",
+            token: "×50",
+            shortName: "CHAIN",
+            grade: .singularity,
+            state: .unlocked,
+            current: 50,
+            target: 50,
+            title: "Chain 50",
+            description: "单次达到 50 Combo"),
+        badge(
+            id: "toy_focus_30m",
+            asset: "badge-b8-toy-focus-30m",
+            token: "30M",
+            shortName: "FOCUS",
+            grade: .overdrive,
+            state: .unlocked,
+            current: 1800,
+            target: 1800,
+            title: "专注 30 分钟",
+            description: "真实触摸累计 30 分钟"),
+        badge(
+            id: "toy_focus_2h",
+            asset: "badge-b8-toy-focus-2h",
+            token: "2H",
+            shortName: "FOCUS",
+            grade: .apex,
+            state: .unlocked,
+            current: 7200,
+            target: 7200,
+            title: "专注 2 小时",
+            description: "真实触摸累计 2 小时")
+    ]
+
+    var body: some View {
+        Group {
+            switch mode {
+            case .catalog:
+                ProgressionBadgeAchievements(
+                    snapshot: ProgressionCatalogSnapshot(state: state))
+                    .background(ProductBackdrop().ignoresSafeArea())
+            case .detail:
+                ProductBadgeDetailSheet(
+                    badge: Self.unlocked,
+                    accent: Color(red: 0.72, green: 0.82, blue: 0.88),
+                    toyName: "三叶金属")
+            case .states:
+                ScrollView {
+                    VStack(alignment: .leading, spacing: 14) {
+                        ProductScreenHeading(
+                            title: "BADGE STATES",
+                            subtitle: "Locked · In progress · Hidden · Unlocked",
+                            symbol: "seal.fill",
+                            accent: Color.white.opacity(0.78))
+                        LazyVGrid(
+                            columns: ProductBadgeLayoutTokens.catalogColumns,
+                            spacing: ProductBadgeLayoutTokens.catalogRowSpacing) {
+                            ForEach(Self.catalogBadges.prefix(4)) { badge in
+                                ProductRarityBadge(
+                                    assetName: badge.assetName,
+                                    token: badge.tokenLine,
+                                    shortName: badge.shortName,
+                                    grade: badge.grade.rawValue,
+                                    state: badge.state.rawValue,
+                                    progress: badge.progress,
+                                    renderingMode: .catalog)
+                                    .frame(maxWidth: .infinity)
+                            }
+                        }
+                    }
+                    .padding(.horizontal, ProductBadgeLayoutTokens.catalogHorizontalPadding)
+                    .padding(.vertical, 18)
+                }
+                .background(ProductBackdrop().ignoresSafeArea())
+            case .unlock:
+                ZStack {
+                    ProductBackdrop().ignoresSafeArea()
+                    BadgeUnlockOverlay(state: state)
+                }
+            case .share:
+                ZStack {
+                    Color.black.ignoresSafeArea()
+                    ProductBadgeShareCard(
+                        badge: Self.unlocked,
+                        toyName: "三叶金属")
+                        .frame(width: 360, height: 360)
+                }
+            case .reference:
+                ScrollView {
+                    VStack(alignment: .leading, spacing: 12) {
+                        ProductScreenHeading(
+                            title: "B8.13 · CENTERED TYPE",
+                            subtitle: "fixed vertical center · smaller typography",
+                            symbol: "sparkles",
+                            accent: Color.white.opacity(0.82))
+                        LazyVGrid(
+                            columns: ProductBadgeLayoutTokens.catalogColumns,
+                            spacing: ProductBadgeLayoutTokens.catalogRowSpacing) {
+                            ForEach(Self.referenceBadges) { badge in
+                                ProductRarityBadge(
+                                    assetName: badge.assetName,
+                                    token: badge.tokenLine,
+                                    shortName: badge.shortName,
+                                    grade: badge.grade.rawValue,
+                                    state: badge.state.rawValue,
+                                    progress: 1,
+                                    renderingMode: .catalog)
+                                    .frame(maxWidth: .infinity)
+                            }
+                        }
+                    }
+                    .padding(.horizontal, ProductBadgeLayoutTokens.catalogHorizontalPadding)
+                    .padding(.vertical, 18)
+                }
+                .background(ProductBackdrop().ignoresSafeArea())
+            }
+        }
+        .productDesignSystem()
+        .preferredColorScheme(.dark)
+        .onAppear {
+            state.progressionModel = .metalThreeBlade
+            state.toyBadgeCatalog = Self.catalogBadges
+            if mode == .unlock {
+                state.badgeUnlockNotice = ProductBadgeUnlockEvent(
+                    id: "preview:\(Self.unlocked.unlockIdentity)",
+                    badge: Self.unlocked,
+                    sourceTitle: "三叶金属")
+                state.showingBadgeUnlockNotice = true
+            }
+        }
+    }
+
+    @MainActor
+    static func renderShareCard(completion: @escaping (UIImage?) -> Void) {
+        ProductBadgeShareRenderer.render(
+            badge: unlocked,
+            toyName: "三叶金属",
+            completion: completion)
+    }
+
+    private static func badge(
+        id: String,
+        asset: String,
+        token: String,
+        shortName: String,
+        grade: ProductBadgeGrade,
+        state: ProductBadgeState,
+        current: Double,
+        target: Double,
+        title: String,
+        description: String,
+        visibility: String = "Standard") -> ProductBadgeDetail {
+        let experience: Int
+        let shards: Int
+        switch grade {
+        case .ignition: experience = 5; shards = 1
+        case .overdrive: experience = 10; shards = 2
+        case .apex: experience = 20; shards = 3
+        case .singularity: experience = 40; shards = 5
+        }
+        return ProductBadgeDetail(
+            id: id,
+            scope: .toy,
+            category: "Preview",
+            mechanism: "Rotor",
+            metric: "Preview",
+            currentValue: current,
+            targetValue: target,
+            progress: target <= 0 ? 0 : min(1, current / target),
+            state: state,
+            unlockedAtUtc: state == .unlocked
+                ? "2026-08-08T10:00:00Z"
+                : "",
+            rewardClaimed: state == .unlocked,
+            grade: grade,
+            visibility: visibility,
+            title: title,
+            description: description,
+            assetName: asset,
+            displayToken: token,
+            displayUnit: "",
+            shortName: shortName,
+            experienceReward: experience,
+            shardReward: shards,
+            displayOrder: 0,
+            cycleIndex: 0)
+    }
+}
+
+/// Simulator-only visual gate for the wallpaper-style environment picker.
+/// It renders the same terminal 66% card, title and pager used in-app.
+struct EnvironmentWallpaperPickerNativePreviewRoot: View {
+    enum Mode: String {
+        case canyon
+        case cyberpunk
+    }
+
+    @StateObject private var state: ProductUiState
+    let mode: Mode
+
+    init(mode: Mode) {
+        self.mode = mode
+        let initialTheme: EnvironmentTheme =
+            mode == .cyberpunk ? .cyberpunk : .canyon
+        let initialState = ProductUiState()
+        initialState.environmentTheme = initialTheme
+        initialState.environmentThemePreview = initialTheme
+        initialState.isEnvironmentPickerPresented = true
+        _state = StateObject(wrappedValue: initialState)
+    }
+
+    private var previewTheme: EnvironmentTheme {
+        mode == .cyberpunk ? .cyberpunk : .canyon
+    }
+
+    var body: some View {
+        SceneWallpaperPicker(
+            state: state,
+            capturedScreen: nil,
+            capturedTheme: previewTheme,
+            startsEntered: true,
+            onSelect: { _ in })
+    }
+}
+
 #endif
 
 private struct ProductPanel: View {
@@ -5971,6 +8963,39 @@ private struct ProductPanel: View {
     }
 }
 
+#if DEBUG
+/// Simulator-only visual gate for the shipping Haptic settings navigation.
+/// It composes the real top bar and settings panel at the same heights used by
+/// the UIKit overlay manager, so the save-and-return affordance is reviewed
+/// before an updated native shell is installed on an iPhone.
+struct HapticSettingsSaveNativePreviewRoot: View {
+    @StateObject private var state = ProductUiState()
+
+    var body: some View {
+        VStack(spacing: 0) {
+            ProductTopBar(state: state)
+                .frame(height: 108)
+            SettingsPanel(state: state)
+        }
+        .background(ProductBackdrop().ignoresSafeArea())
+        .productDesignSystem()
+        .preferredColorScheme(.dark)
+        .onAppear {
+            state.selectedTab = .settings
+            state.isLibraryVisible = false
+            state.detentPresetIndex = 1
+            state.detentPresetCount = 4
+            // Preview-only placeholder: shipping preset labels are supplied by
+            // the managed runtime catalog and must not be duplicated in Swift.
+            state.detentPresetName = "预设 2"
+            state.detentPresetDetents = 12
+            state.detentTuningIntensity = 1
+            state.detentTuningSharpness = 0.72
+        }
+    }
+}
+#endif
+
 @MainActor
 private final class CodexSwiftUIOverlayManager {
     static let shared = CodexSwiftUIOverlayManager()
@@ -5978,12 +9003,16 @@ private final class CodexSwiftUIOverlayManager {
     let state = ProductUiState()
     private var feedbackController: UIHostingController<SpinnerExperienceFeedbackLayer>?
     private var badgeController: UIHostingController<BadgeUnlockOverlay>?
-    private var collectorNoticeController: UIHostingController<CollectorUnlockOverlay>?
     private var topController: UIHostingController<ProductTopBar>?
     private var modeController: UIHostingController<ProductModeBar>?
     private var progressionController: UIHostingController<SpinnerProgressionHUD>?
     private var panelController: UIHostingController<ProductPanel>?
     private var appearanceController: UIHostingController<ProductAppearanceEditor>?
+    private var environmentPickerController: UIHostingController<SceneWallpaperPicker>?
+    private var displayCaseController: UIHostingController<PremiumDisplayCaseExperienceView>?
+    private var progressionRewardController: UIViewController?
+    private var progressionRewardFlightController: UIViewController?
+    private var pendingOfflineRewardFlight = false
 
     func install(retryCount: Int = 0) {
         guard topController == nil else {
@@ -6005,8 +9034,6 @@ private final class CodexSwiftUIOverlayManager {
         let feedback = UIHostingController(
             rootView: SpinnerExperienceFeedbackLayer(state: state))
         let badge = UIHostingController(rootView: BadgeUnlockOverlay(state: state))
-        let collectorNotice = UIHostingController(
-            rootView: CollectorUnlockOverlay(state: state))
         let top = UIHostingController(rootView: ProductTopBar(state: state))
         let mode = UIHostingController(rootView: ProductModeBar(state: state))
         let progression = UIHostingController(rootView: SpinnerProgressionHUD(state: state))
@@ -6014,8 +9041,6 @@ private final class CodexSwiftUIOverlayManager {
         feedback.view.isUserInteractionEnabled = false
         configure(badge, in: rootController)
         badge.view.isUserInteractionEnabled = false
-        configure(collectorNotice, in: rootController)
-        collectorNotice.view.isUserInteractionEnabled = false
         configure(top, in: rootController)
         configure(mode, in: rootController)
         configure(progression, in: rootController)
@@ -6033,11 +9058,6 @@ private final class CodexSwiftUIOverlayManager {
             badge.view.leadingAnchor.constraint(equalTo: rootController.view.leadingAnchor),
             badge.view.trailingAnchor.constraint(equalTo: rootController.view.trailingAnchor),
             badge.view.bottomAnchor.constraint(equalTo: rootController.view.bottomAnchor),
-
-            collectorNotice.view.topAnchor.constraint(equalTo: rootController.view.topAnchor),
-            collectorNotice.view.leadingAnchor.constraint(equalTo: rootController.view.leadingAnchor),
-            collectorNotice.view.trailingAnchor.constraint(equalTo: rootController.view.trailingAnchor),
-            collectorNotice.view.bottomAnchor.constraint(equalTo: rootController.view.bottomAnchor),
 
             top.view.topAnchor.constraint(equalTo: rootController.view.topAnchor),
             top.view.leadingAnchor.constraint(equalTo: rootController.view.leadingAnchor),
@@ -6064,17 +9084,18 @@ private final class CodexSwiftUIOverlayManager {
 
         feedbackController = feedback
         badgeController = badge
-        collectorNoticeController = collectorNotice
         topController = top
         modeController = mode
         progressionController = progression
         state.applyAndPersist(includeMode: true)
+        state.restorePersistedDetentTuningIfAvailable()
         UnityBridge.send("RequestDetentFeelStateFromNativeUi")
         UnityBridge.send("RequestProgressionStateFromNativeUi")
         showPanel()
     }
 
     func selectTab(_ tab: ProductTab) {
+        dismissEnvironmentPicker(resetPreview: true, animated: false)
         dismissAppearanceEditorIfNeeded()
         state.selectedTab = tab
         let showsSpinnerControls = tab == .spinners
@@ -6090,7 +9111,175 @@ private final class CodexSwiftUIOverlayManager {
         }
     }
 
+    func presentProgressionRewardIfNeeded() {
+        guard progressionRewardController == nil,
+              !pendingOfflineRewardFlight,
+              progressionRewardFlightController == nil,
+              let rootController = activeRootViewController() else { return }
+
+        let kind: ProgressionCelebrationKind
+        if state.showingOfflineProgressionReward {
+            kind = .offline
+        } else if state.showingLiveProgressionLevelUp {
+            kind = .liveLevelUp
+        } else {
+            return
+        }
+
+        let controller = UIHostingController(
+            rootView: ProgressionRewardCelebrationView(
+                state: state,
+                kind: kind,
+                onComplete: { [weak self] in
+                    self?.dismissProgressionReward(kind: kind)
+                }))
+        configure(controller, in: rootController, background: .clear)
+        controller.view.isUserInteractionEnabled = true
+        controller.view.isMultipleTouchEnabled = true
+        controller.view.accessibilityViewIsModal = true
+        controller.view.alpha = 0
+        NSLayoutConstraint.activate([
+            controller.view.topAnchor.constraint(equalTo: rootController.view.topAnchor),
+            controller.view.leadingAnchor.constraint(equalTo: rootController.view.leadingAnchor),
+            controller.view.trailingAnchor.constraint(equalTo: rootController.view.trailingAnchor),
+            controller.view.bottomAnchor.constraint(equalTo: rootController.view.bottomAnchor)
+        ])
+        rootController.view.layoutIfNeeded()
+        rootController.view.bringSubviewToFront(controller.view)
+        progressionRewardController = controller
+        UIView.animate(withDuration: 0.18) {
+            controller.view.alpha = 1
+        }
+    }
+
+    private func dismissProgressionReward(kind: ProgressionCelebrationKind) {
+        guard let controller = progressionRewardController else { return }
+        progressionRewardController = nil
+        controller.view.isUserInteractionEnabled = false
+        let offlineReward = kind == .offline
+            ? state.offlineProgressionReward
+            : nil
+        let sheetAvatarFrame = state.progressionSheetAvatarFrame
+        if offlineReward != nil {
+            pendingOfflineRewardFlight = true
+        }
+
+        switch kind {
+        case .offline:
+            state.dismissOfflineProgressionReward()
+        case .liveLevelUp:
+            state.dismissLiveProgressionLevelUp()
+        }
+
+        controller.willMove(toParent: nil)
+        UIView.animate(
+            withDuration: 0.18,
+            animations: { controller.view.alpha = 0 },
+            completion: { [weak self] _ in
+                controller.view.removeFromSuperview()
+                controller.removeFromParent()
+                guard let self,
+                      let offlineReward else { return }
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.42) {
+                    self.presentOfflineProgressionFlight(
+                        reward: offlineReward,
+                        sourceWindowFrame: sheetAvatarFrame)
+                }
+            })
+    }
+
+    private func presentOfflineProgressionFlight(
+        reward: OfflineProgressionReward,
+        sourceWindowFrame: CGRect,
+        retryCount: Int = 0
+    ) {
+        guard progressionRewardFlightController == nil,
+              let rootController = activeRootViewController(),
+              let window = rootController.view.window else {
+            retryOfflineProgressionFlight(
+                reward: reward,
+                sourceWindowFrame: sourceWindowFrame,
+                retryCount: retryCount)
+            return
+        }
+
+        let targetWindowFrame = state.progressionTopAvatarFrame
+        guard sourceWindowFrame.width > 1,
+              sourceWindowFrame.height > 1,
+              targetWindowFrame.width > 1,
+              targetWindowFrame.height > 1 else {
+            retryOfflineProgressionFlight(
+                reward: reward,
+                sourceWindowFrame: sourceWindowFrame,
+                retryCount: retryCount)
+            return
+        }
+
+        let sourceFrame = rootController.view.convert(sourceWindowFrame, from: window)
+        let targetFrame = rootController.view.convert(targetWindowFrame, from: window)
+        let controller = UIHostingController(
+            rootView: ProgressionPageRewardFlightView(
+                experience: reward.experience,
+                accent: reward.model.accent,
+                sourceFrame: sourceFrame,
+                targetFrame: targetFrame,
+                onArrive: { [weak self] in
+                    self?.state.commitProgressionTopAvatar(reward)
+                    UnityBridge.feedback(.medium)
+                },
+                onComplete: { [weak self] in
+                    self?.finishOfflineProgressionFlight()
+                }))
+        configure(controller, in: rootController, background: .clear)
+        controller.view.isUserInteractionEnabled = false
+        controller.view.accessibilityElementsHidden = true
+        NSLayoutConstraint.activate([
+            controller.view.topAnchor.constraint(equalTo: rootController.view.topAnchor),
+            controller.view.leadingAnchor.constraint(equalTo: rootController.view.leadingAnchor),
+            controller.view.trailingAnchor.constraint(equalTo: rootController.view.trailingAnchor),
+            controller.view.bottomAnchor.constraint(equalTo: rootController.view.bottomAnchor)
+        ])
+        rootController.view.layoutIfNeeded()
+        rootController.view.bringSubviewToFront(controller.view)
+        if let topController {
+            rootController.view.bringSubviewToFront(topController.view)
+        }
+        progressionRewardFlightController = controller
+    }
+
+    private func retryOfflineProgressionFlight(
+        reward: OfflineProgressionReward,
+        sourceWindowFrame: CGRect,
+        retryCount: Int
+    ) {
+        guard retryCount < 12 else {
+            state.commitProgressionTopAvatar(reward)
+            pendingOfflineRewardFlight = false
+            presentProgressionRewardIfNeeded()
+            return
+        }
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.05) { [weak self] in
+            self?.presentOfflineProgressionFlight(
+                reward: reward,
+                sourceWindowFrame: sourceWindowFrame,
+                retryCount: retryCount + 1)
+        }
+    }
+
+    private func finishOfflineProgressionFlight() {
+        guard let controller = progressionRewardFlightController else { return }
+        progressionRewardFlightController = nil
+        pendingOfflineRewardFlight = false
+        controller.willMove(toParent: nil)
+        controller.view.removeFromSuperview()
+        controller.removeFromParent()
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.22) { [weak self] in
+            self?.presentProgressionRewardIfNeeded()
+        }
+    }
+
     func showMySpinners() {
+        dismissEnvironmentPicker(resetPreview: true, animated: false)
         dismissAppearanceEditorIfNeeded()
         state.selectedTab = .spinners
         state.isLibraryVisible = true
@@ -6112,15 +9301,166 @@ private final class CodexSwiftUIOverlayManager {
     }
 
     func enterSelectedModel() {
+        dismissEnvironmentPicker(resetPreview: true, animated: false)
         dismissAppearanceEditorIfNeeded()
         state.selectedTab = .spinners
         state.isLibraryVisible = false
         UnityBridge.send("SetLibraryPreviewActiveFromNativeUi", value: "false")
         UnityBridge.send("SelectModelFromNativeUi", value: state.selectedModel.rawValue)
-        hidePanel()
-        setModeBarVisible(true)
-        DispatchQueue.main.async { [weak self] in
-            self?.state.presentSpinnerOnboardingIfNeeded()
+        setModeBarVisible(false)
+        hidePanel(forDetailEntrance: true)
+        DispatchQueue.main.asyncAfter(
+            deadline: .now() + ProductOverlayLayout.detailControlsRevealDelay) {
+            [weak self] in
+            guard let self,
+                  self.state.selectedTab == .spinners,
+                  !self.state.isLibraryVisible else { return }
+            self.setModeBarVisible(true)
+        }
+        DispatchQueue.main.asyncAfter(
+            deadline: .now() + ProductOverlayLayout.detailEntranceDuration) {
+            [weak self] in
+            guard let self,
+                  self.state.selectedTab == .spinners,
+                  !self.state.isLibraryVisible else { return }
+            self.state.presentSpinnerOnboardingIfNeeded()
+        }
+    }
+
+    func presentEnvironmentPicker() {
+        guard environmentPickerController == nil,
+              state.selectedTab == .spinners,
+              state.isLibraryVisible,
+              let rootController = activeRootViewController() else { return }
+
+        let capturedTheme = state.environmentTheme
+        let capturedScreen = captureScreen(from: rootController.view)
+        state.beginEnvironmentThemePreview()
+        UnityBridge.feedback(.medium)
+        let transition = SceneWallpaperPickerTransition(
+            startsEntered: false)
+
+        let picker = UIHostingController(
+            rootView: SceneWallpaperPicker(
+                state: state,
+                capturedScreen: capturedScreen,
+                capturedTheme: capturedTheme,
+                transition: transition,
+                onSelect: { [weak self] theme in
+                    self?.selectEnvironmentTheme(theme)
+                }))
+        // Keep the hosting view transparent until SwiftUI has drawn the frozen
+        // current screen. An outer alpha fade would insert a black dissolve
+        // before the scale and break the one-surface wallpaper transition.
+        configure(picker, in: rootController, background: .clear)
+        picker.view.alpha = 1
+        NSLayoutConstraint.activate([
+            picker.view.topAnchor.constraint(equalTo: rootController.view.topAnchor),
+            picker.view.leadingAnchor.constraint(equalTo: rootController.view.leadingAnchor),
+            picker.view.trailingAnchor.constraint(equalTo: rootController.view.trailingAnchor),
+            picker.view.bottomAnchor.constraint(equalTo: rootController.view.bottomAnchor)
+        ])
+        rootController.view.layoutIfNeeded()
+        rootController.view.bringSubviewToFront(picker.view)
+        environmentPickerController = picker
+        DispatchQueue.main.async { [weak transition] in
+            transition?.begin(
+                reduceMotion: UIAccessibility.isReduceMotionEnabled)
+        }
+    }
+
+    func presentDisplayCase() {
+        guard displayCaseController == nil,
+              let rootController = activeRootViewController() else { return }
+        dismissEnvironmentPicker(resetPreview: true, animated: false)
+        dismissAppearanceEditorIfNeeded()
+        UnityBridge.send("SetDisplayCasePresentedFromNativeUi", value: "true")
+
+        let controller = UIHostingController(
+            rootView: PremiumDisplayCaseExperienceView(onClose: { [weak self] in
+                self?.dismissDisplayCase()
+            }))
+        configure(controller, in: rootController, background: .clear)
+        NSLayoutConstraint.activate([
+            controller.view.topAnchor.constraint(equalTo: rootController.view.topAnchor),
+            controller.view.leadingAnchor.constraint(equalTo: rootController.view.leadingAnchor),
+            controller.view.trailingAnchor.constraint(equalTo: rootController.view.trailingAnchor),
+            controller.view.bottomAnchor.constraint(equalTo: rootController.view.bottomAnchor)
+        ])
+        topController?.view.isHidden = true
+        modeController?.view.isHidden = true
+        progressionController?.view.isHidden = true
+        panelController?.view.isHidden = true
+        rootController.view.bringSubviewToFront(controller.view)
+        displayCaseController = controller
+    }
+
+    private func dismissDisplayCase() {
+        UnityBridge.send("SetDisplayCasePresentedFromNativeUi", value: "false")
+        guard let controller = displayCaseController else { return }
+        displayCaseController = nil
+        controller.willMove(toParent: nil)
+        controller.view.removeFromSuperview()
+        controller.removeFromParent()
+        topController?.view.isHidden = false
+        panelController?.view.isHidden = false
+        setModeBarVisible(false)
+        showPanel()
+    }
+
+    private func selectEnvironmentTheme(_ theme: EnvironmentTheme) {
+        UnityBridge.feedback(.medium)
+        state.selectEnvironmentTheme(theme)
+        // Keep the frozen picker above Unity while its renderer swaps the
+        // environment, then reveal the newly selected live scene.
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.18) { [weak self] in
+            self?.dismissEnvironmentPicker(
+                resetPreview: false,
+                animated: true)
+        }
+    }
+
+    private func dismissEnvironmentPicker(
+        resetPreview: Bool,
+        animated: Bool
+    ) {
+        if resetPreview {
+            state.cancelEnvironmentThemePreview()
+        } else {
+            state.isEnvironmentPickerPresented = false
+        }
+        guard let picker = environmentPickerController else { return }
+        environmentPickerController = nil
+        picker.willMove(toParent: nil)
+
+        let removePicker = {
+            picker.view.removeFromSuperview()
+            picker.removeFromParent()
+        }
+        guard animated else {
+            removePicker()
+            return
+        }
+
+        UIView.animate(
+            withDuration: 0.24,
+            delay: 0,
+            options: [.curveEaseInOut, .beginFromCurrentState]) {
+                picker.view.alpha = 0
+            } completion: { _ in
+                removePicker()
+            }
+    }
+
+    private func captureScreen(from view: UIView) -> UIImage? {
+        guard view.bounds.width > 0, view.bounds.height > 0 else { return nil }
+        let format = UIGraphicsImageRendererFormat.default()
+        format.scale = view.window?.screen.scale ?? UIScreen.main.scale
+        format.opaque = true
+        return UIGraphicsImageRenderer(bounds: view.bounds, format: format).image { _ in
+            if !view.drawHierarchy(in: view.bounds, afterScreenUpdates: false) {
+                view.layer.render(in: UIGraphicsGetCurrentContext()!)
+            }
         }
     }
 
@@ -6238,13 +9578,11 @@ private final class CodexSwiftUIOverlayManager {
         if let topController,
            let modeController,
            let progressionController,
-           let badgeController,
-           let collectorNoticeController {
+           let badgeController {
             rootController.view.bringSubviewToFront(topController.view)
             rootController.view.bringSubviewToFront(modeController.view)
             rootController.view.bringSubviewToFront(progressionController.view)
             rootController.view.bringSubviewToFront(badgeController.view)
-            rootController.view.bringSubviewToFront(collectorNoticeController.view)
         }
         panelController = panel
         UIView.animate(
@@ -6258,15 +9596,20 @@ private final class CodexSwiftUIOverlayManager {
         }
     }
 
-    private func hidePanel() {
+    private func hidePanel(forDetailEntrance: Bool = false) {
         guard let panel = panelController else { return }
         panel.willMove(toParent: nil)
+        let duration = forDetailEntrance ? 0.52 : 0.30
+        let targetTransform = forDetailEntrance
+            ? CGAffineTransform(scaleX: 1.045, y: 1.045)
+                .translatedBy(x: 0, y: 12)
+            : CGAffineTransform(translationX: 0, y: 28)
         UIView.animate(
-            withDuration: 0.30,
+            withDuration: duration,
             delay: 0,
             options: [.curveEaseIn, .beginFromCurrentState]) {
                 panel.view.alpha = 0
-                panel.view.transform = CGAffineTransform(translationX: 0, y: 28)
+                panel.view.transform = targetTransform
             } completion: { _ in
                 panel.view.removeFromSuperview()
                 panel.removeFromParent()
@@ -6290,9 +9633,6 @@ private final class CodexSwiftUIOverlayManager {
             }
             if let badgeView = badgeController?.view {
                 parent.bringSubviewToFront(badgeView)
-            }
-            if let collectorNoticeView = collectorNoticeController?.view {
-                parent.bringSubviewToFront(collectorNoticeView)
             }
         }
     }
@@ -6409,6 +9749,8 @@ public func CodexProgressionReceiveState(
     _ offlineHours: Float,
     _ previousLevel: Int32,
     _ offlineNewLevel: Int32,
+    _ offlinePreviousLevelProgress: Float,
+    _ offlineNewLevelProgress: Float,
     _ livePreviousLevel: Int32,
     _ liveRewardName: UnsafePointer<CChar>?,
     _ peakRimSpeedKmh: Float,
@@ -6446,6 +9788,8 @@ public func CodexProgressionReceiveState(
             elapsedHours: Double(offlineHours),
             previousLevel: Int(previousLevel),
             newLevel: Int(offlineNewLevel),
+            previousLevelProgress: Double(offlinePreviousLevelProgress),
+            newLevelProgress: Double(offlineNewLevelProgress),
             assistantEnabled: offlineAssistantEnabled != 0)
         : nil
     let resolvedLiveReward = liveRewardName.map { String(cString: $0) }
@@ -6457,8 +9801,12 @@ public func CodexProgressionReceiveState(
             newLevel: Int(level),
             rewardName: resolvedLiveReward)
         : nil
-    let resolvedAchievements = ProgressionAchievementDetail.parse(
-        achievementCatalog.map { String(cString: $0) } ?? "")
+    let resolvedAchievementPayload = achievementCatalog.map {
+        String(cString: $0)
+    } ?? ""
+    let resolvedBadgeEnvelope = ProductBadgeDetail.parseEnvelope(
+        resolvedAchievementPayload)
+    let resolvedBadges = resolvedBadgeEnvelope?.badges ?? []
     let resolvedThreeBladeMetalSkins = ThreeBladeMetalSkinDetail.parse(
         threeBladeMetalSkinCatalog.map { String(cString: $0) } ?? "")
     let resolvedEquippedThreeBladeMetalSkinId = equippedThreeBladeMetalSkinId.map {
@@ -6471,7 +9819,8 @@ public func CodexProgressionReceiveState(
     } ?? ""
 
     Task { @MainActor in
-        CodexSwiftUIOverlayManager.shared.state.updateProgression(
+        let manager = CodexSwiftUIOverlayManager.shared
+        manager.state.updateProgression(
             model: model,
             level: Int(level),
             totalExperience: Double(totalExperience),
@@ -6492,15 +9841,15 @@ public func CodexProgressionReceiveState(
             todayGestures: Int(todayGestureCount),
             activeInteractionSeconds: Double(activeInteractionSeconds),
             lifetimeOfflineExperience: Double(lifetimeOfflineExperience),
-            unlockedAchievementCount: Int(unlockedAchievementCount),
-            totalAchievementCount: Int(totalAchievementCount),
-            achievements: resolvedAchievements,
+            badges: resolvedBadges,
+            shardBalance: resolvedBadgeEnvelope?.shardBalance ?? 0,
             threeBladeMetalSkins: resolvedThreeBladeMetalSkins,
             equippedThreeBladeMetalSkinId: resolvedEquippedThreeBladeMetalSkinId,
             productStickers: resolvedProductStickers,
             equippedProductStickerId: resolvedEquippedProductStickerId,
             offlineReward: offlineReward,
             liveLevelUp: liveLevelUp)
+        manager.presentProgressionRewardIfNeeded()
     }
 }
 
@@ -6528,8 +9877,11 @@ public func CodexCollectorReceiveState(
     let focusModel = SpinnerModel(rawValue: focusRawValue) ?? .pointedThreeBlade
     let discoveredPayload = discoveredModelPayload.map { String(cString: $0) } ?? ""
     let discoveredIds = Set(discoveredPayload.split(separator: "|").map(String.init))
-    let achievements = CollectorAchievementDetail.parse(
-        achievementCatalogPayload.map { String(cString: $0) } ?? "")
+    let resolvedAchievementPayload = achievementCatalogPayload.map {
+        String(cString: $0)
+    } ?? ""
+    let badgeEnvelope = ProductBadgeDetail.parseEnvelope(resolvedAchievementPayload)
+    let badges = badgeEnvelope?.badges ?? []
 
     Task { @MainActor in
         CodexSwiftUIOverlayManager.shared.state.updateCollector(
@@ -6546,10 +9898,9 @@ public func CodexCollectorReceiveState(
             completedWeeks: Int(completedRhythmWeeks),
             discoveredModelCount: Int(discoveredModelCount),
             cosmeticCount: Int(collectedCosmeticCount),
-            unlockedAchievementCount: Int(unlockedAchievementCount),
-            totalAchievementCount: Int(totalAchievementCount),
             discoveredModelIds: discoveredIds,
-            achievements: achievements,
+            badges: badges,
+            shardBalance: badgeEnvelope?.shardBalance ?? 0,
             previousRank: Int(previousRank))
     }
 }
@@ -6600,14 +9951,23 @@ public func CodexComboHaloReceiveProjection(
 @_cdecl("CodexMotionTelemetryReceiveState")
 public func CodexMotionTelemetryReceiveState(
     _ available: Int32,
+    _ kind: Int32,
     _ normalizedSpeed: Float,
-    _ angularSpeedRadians: Float,
-    _ speedBand: Int32) {
+    _ motionRate: Float,
+    _ speedBand: Int32,
+    _ normalizedIntensity: Float,
+    _ normalizedFrequency: Float) {
+    let resolvedKind = ProductMotionKind(rawValue: Int(kind)) ?? .rotary
+    let liveMotionRate = max(0, Double(motionRate))
     let telemetry = ProductMotionTelemetryState(
         available: available != 0,
+        kind: resolvedKind,
         normalizedSpeed: min(1, max(0, Double(normalizedSpeed))),
-        angularSpeedRadians: max(0, Double(angularSpeedRadians)),
-        speedBand: ProductSpeedBand(rawValue: Int(speedBand)) ?? .calm)
+        angularSpeedRadians: resolvedKind == .rotary ? liveMotionRate : 0,
+        motionRate: liveMotionRate,
+        speedBand: ProductSpeedBand(rawValue: Int(speedBand)) ?? .calm,
+        intensity: min(1, max(0, Double(normalizedIntensity))),
+        frequency: min(1, max(0, Double(normalizedFrequency))))
     Task { @MainActor in
         CodexSwiftUIOverlayManager.shared.state.updateMotionTelemetry(telemetry)
     }

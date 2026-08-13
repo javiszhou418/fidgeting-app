@@ -18,7 +18,7 @@
       <div>
         <p class="kicker">FIDGETING AUDIO PROTOTYPE</p>
         <h1>Alloy Tone Lab</h1>
-        <p class="subtitle">先从完整音效里选一条，再查看它的首段、主段、尾段并逐项微调。</p>
+        <p class="subtitle">现在可以试听与转速即时同步的低噪叶片切风，也可以继续调整合金 Click 的首段、主段和尾段。</p>
       </div>
       <div class="status-cluster" aria-live="polite">
         <span class="status-dot" id="status-dot"></span>
@@ -26,15 +26,153 @@
       </div>
     </header>
 
+    <section class="wind-lab" aria-labelledby="wind-title">
+      <div class="section-heading wind-heading">
+        <div>
+          <p class="section-label">NEW · SPINNER WIND</p>
+          <h2 id="wind-title">三叶陀螺风声模拟器</h2>
+          <p class="wind-guide">先选择金属材质，再用唯一的“金属共鸣”控制它出现多少：0% 严格只有风声，100% 是当前材质的完整频率、波形、音高与碰撞纹理。</p>
+        </div>
+        <span class="wind-live-state" id="wind-live-state">静止 · 无风声</span>
+      </div>
+
+      <div class="wind-layout">
+        <div class="wind-stage" aria-label="陀螺转速与风声强度示意">
+          <div class="air-ring air-ring-outer" aria-hidden="true"></div>
+          <div class="air-ring air-ring-inner" aria-hidden="true"></div>
+          <div class="wind-rotor" id="wind-rotor" aria-hidden="true">
+            <span class="rotor-blade rotor-blade-a"></span>
+            <span class="rotor-blade rotor-blade-b"></span>
+            <span class="rotor-blade rotor-blade-c"></span>
+            <span class="rotor-hub"></span>
+          </div>
+          <div class="wind-readout" aria-live="polite">
+            <strong id="wind-rpm-readout">250</strong>
+            <span>RPM · 13 Hz 叶片经过</span>
+          </div>
+        </div>
+
+        <div class="wind-controls">
+          <label class="range-label" for="wind-speed-control">
+            <span>转速</span>
+            <output id="wind-speed-value">250 RPM</output>
+          </label>
+          <input type="range" id="wind-speed-control" min="0" max="600" step="10" value="250">
+          <div class="range-cues" aria-hidden="true"><span>静止</span><span>600 RPM 上限</span></div>
+
+          <div class="wind-parameter-grid">
+            <div>
+              <label class="range-label" for="wind-weight-control">
+                <span>厚重感</span>
+                <output id="wind-weight-value">72%</output>
+              </label>
+              <input type="range" id="wind-weight-control" min="0" max="100" step="1" value="72">
+              <div class="range-cues" aria-hidden="true"><span>轻薄</span><span>低沉饱满</span></div>
+            </div>
+            <div>
+              <label class="range-label" for="wind-air-control">
+                <span>切风清晰度</span>
+                <output id="wind-air-value">100%</output>
+              </label>
+              <input type="range" id="wind-air-control" min="0" max="100" step="1" value="100">
+              <div class="range-cues" aria-hidden="true"><span>柔和</span><span>清晰</span></div>
+            </div>
+            <div>
+              <label class="range-label" for="wind-blade-control">
+                <span>叶片脉动</span>
+                <output id="wind-blade-value">100%</output>
+              </label>
+              <input type="range" id="wind-blade-control" min="0" max="100" step="1" value="100">
+              <div class="range-cues" aria-hidden="true"><span>连续顺滑</span><span>叶片更明显</span></div>
+            </div>
+            <div class="wind-material-control">
+              <label class="range-label" for="wind-metal-material-control">
+                <span>金属材质</span>
+              </label>
+              <select id="wind-metal-material-control">
+                <option value="product-alloy">产品合金</option>
+                <option value="thick-wall-alloy">厚壁合金</option>
+                <option value="precision-steel">精密钢</option>
+                <option value="warm-alloy">温润合金</option>
+                <option value="bright-alloy" selected>明亮合金</option>
+              </select>
+              <p class="wind-material-description" id="wind-metal-material-description">明亮合金 · 当前设置 +9 半音</p>
+              <div class="range-cues" aria-hidden="true"><span>决定频率与波形</span><span>五种材质</span></div>
+
+              <div class="wind-material-tuning" aria-label="当前金属材质微调">
+                <div class="wind-tuning-heading">
+                  <strong>调整当前材质</strong>
+                  <span>只影响上面选中的金属</span>
+                </div>
+                <div class="wind-tuning-grid">
+                  <div>
+                    <label class="range-label" for="wind-metal-tone-control">
+                      <span>金属明暗</span>
+                      <output id="wind-metal-tone-value">100% · 明亮清脆</output>
+                    </label>
+                    <input type="range" id="wind-metal-tone-control" min="0" max="100" step="1" value="100">
+                    <div class="range-cues" aria-hidden="true"><span>闷 · 泛音少</span><span>脆 · 泛音亮</span></div>
+                  </div>
+                  <div>
+                    <label class="range-label" for="wind-metal-pitch-control">
+                      <span>整体音高</span>
+                      <output id="wind-metal-pitch-value">+9 半音 · 当前音名</output>
+                    </label>
+                    <input type="range" id="wind-metal-pitch-control" min="-12" max="12" step="1" value="9">
+                    <div class="range-cues" aria-hidden="true"><span>低八度</span><span>高八度</span></div>
+                  </div>
+                </div>
+                <div class="wind-scale-row" aria-label="常用音阶偏移">
+                  <button type="button" class="wind-scale-button" data-wind-pitch="-12">低八度 −12</button>
+                  <button type="button" class="wind-scale-button" data-wind-pitch="-7">低五度 −7</button>
+                  <button type="button" class="wind-scale-button" data-wind-pitch="0">原调 0</button>
+                  <button type="button" class="wind-scale-button" data-wind-pitch="7">高五度 +7</button>
+                  <button type="button" class="wind-scale-button" data-wind-pitch="12">高八度 +12</button>
+                </div>
+                <p class="wind-tone-summary" id="wind-metal-tone-summary">当前主音与三层实际频率会显示在这里。</p>
+              </div>
+            </div>
+            <div>
+              <label class="range-label" for="wind-resonance-control">
+                <span>金属共鸣</span>
+                <output id="wind-resonance-value">100% · 明亮合金</output>
+              </label>
+              <input type="range" id="wind-resonance-control" min="0" max="100" step="1" value="100">
+              <div class="range-cues" aria-hidden="true"><span>纯空气</span><span>合金边缘</span></div>
+            </div>
+            <div>
+              <label class="range-label" for="wind-coast-control">
+                <span>停转消散</span>
+                <output id="wind-coast-value">2.30 s</output>
+              </label>
+              <input type="range" id="wind-coast-control" min="0.20" max="3" step="0.05" value="2.30">
+              <div class="range-cues" aria-hidden="true"><span>快速收声</span><span>悠长滑行</span></div>
+            </div>
+          </div>
+
+          <div class="wind-preset-row" aria-label="常用转速">
+            <button type="button" class="secondary-button" data-wind-rpm="120">轻转 · 120</button>
+            <button type="button" class="secondary-button" data-wind-rpm="250">常用 · 250</button>
+            <button type="button" class="secondary-button" data-wind-rpm="400">快速 · 400</button>
+          </div>
+          <div class="wind-transport">
+            <button type="button" class="primary-button" id="wind-start-button">启动风声</button>
+            <button type="button" class="secondary-button" id="wind-stop-button">停转并消散</button>
+          </div>
+          <p class="wind-note">每次叶片事件包含首段硬碰撞、主段材质鸣响和尾段衰减。声腔按小于手掌的精密合金件标定：频率更高，主段最长 65 ms；叶片节奏和三层金属音高都会跟随真实转速，材质比例保持不变。</p>
+        </div>
+      </div>
+    </section>
+
     <section class="effect-picker" aria-labelledby="effect-picker-title">
       <div class="section-heading">
         <div>
           <p class="section-label">STEP 1 · CHOOSE A SOUND</p>
           <h2 id="effect-picker-title">先选一个完整音效</h2>
         </div>
-        <p class="library-count">14 条完整音效</p>
+        <p class="library-count" id="library-count">17 条完整音效</p>
       </div>
-      <p class="picker-guide">每张卡都是已经组合好的完整声音。点击一张会立即试听，并在下方显示它的首段、主段和尾段。</p>
+      <p class="picker-guide">每张卡都是已经组合好的完整声音。前 14 条是单次 Click；第 15 条是“按压 + 回弹”；第 16 条保留参考视频完整按压；第 17 条把原视频的按压与回弹分别提纯，去掉两声之间的音乐和底噪。</p>
       <div class="effect-grid" id="effect-grid" aria-live="polite"></div>
     </section>
 
@@ -44,32 +182,32 @@
           <div class="stage-heading">
             <div>
               <p class="section-label">STEP 2 · SPLIT THE SELECTED SOUND</p>
-              <h2 id="stage-title"><span id="selected-effect-name">产品合金 01</span> · 首段 → 主段 → 尾段</h2>
+              <h2 id="stage-title"><span id="selected-effect-name">产品合金 01</span> · <span id="segment-flow-label">首段 → 主段 → 尾段</span></h2>
               <p class="selected-effect-description" id="selected-effect-description">平衡、厚实、清脆</p>
             </div>
             <button type="button" class="text-button" id="reset-button">恢复这条音效</button>
           </div>
 
-          <p class="stage-guide">点击任意一段，可以把这一段单独拿出来听。完整声音只会有第一下 Click，主段和尾段是一股连续的金属鸣响。</p>
+          <p class="stage-guide" id="stage-guide">点击任意一段，可以把这一段单独拿出来听。普通音效只有第一下 Click，主段和尾段是一股连续的金属鸣响。</p>
 
           <div class="segment-map" role="group" aria-label="声音的三个时间段">
             <button type="button" class="segment-card segment-head" data-preview-segment="head">
               <span class="segment-index">01 · 首段</span>
-              <strong>第一下 Click</strong>
+              <strong id="head-segment-title">第一下 Click</strong>
               <small id="head-segment-summary">55 ms · 0.0 半音</small>
               <span class="segment-action">只听首段 ▶</span>
             </button>
             <button type="button" class="segment-card segment-body" data-preview-segment="body">
               <span class="segment-index">02 · 主段</span>
-              <strong>合金鸣响</strong>
+              <strong id="body-segment-title">合金鸣响</strong>
               <small id="body-segment-summary">620 Hz · 38% 响度</small>
               <span class="segment-action">只听主段 ▶</span>
             </button>
             <button type="button" class="segment-card segment-tail" data-preview-segment="tail">
               <span class="segment-index">03 · 尾段</span>
-              <strong>自然消散</strong>
+              <strong id="tail-segment-title">自然消散</strong>
               <small id="tail-segment-summary">1.10 秒 · 无第二下</small>
-              <span class="segment-action">只听尾段 ▶</span>
+              <span class="segment-action" id="tail-segment-action">只听尾段 ▶</span>
             </button>
           </div>
 
@@ -181,17 +319,17 @@
               <span class="step-number">尾</span>
               <h2>尾段</h2>
             </div>
-            <span class="control-hint">只是慢慢消失</span>
+            <span class="control-hint" id="tail-control-hint">只是慢慢消失</span>
           </div>
 
-          <p class="control-explanation">尾段不是新的声音，而是主段继续衰减。这里仅决定它要拖多久，不会增加第二下 Click。</p>
+          <p class="control-explanation" id="tail-control-explanation">尾段不是新的声音，而是主段继续衰减。这里仅决定它要拖多久，不会增加第二下 Click。</p>
 
           <label class="range-label" for="decay-control">
-            <span>消散时长</span>
+            <span id="decay-label-text">消散时长</span>
             <output id="decay-value">1.10 s</output>
           </label>
           <input type="range" id="decay-control" min="0.10" max="4" step="0.01" value="1.10">
-          <div class="range-cues" aria-hidden="true"><span>短促结束</span><span>悠长消散</span></div>
+          <div class="range-cues" aria-hidden="true"><span id="decay-cue-start">短促结束</span><span id="decay-cue-end">悠长消散</span></div>
         </section>
 
         <section class="control-section compact-section">
@@ -235,6 +373,6 @@
     </footer>
   </div>
 
-  <script src="app.js"></script>
+  <script src="app.js?v=20260809-can-coin-rebound-r5"></script>
 </body>
 </html>

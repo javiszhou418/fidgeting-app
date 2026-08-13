@@ -1,0 +1,90 @@
+name: SingleDrawStoreDemo
+
+options:
+  deploymentTarget:
+    iOS: "16.0"
+  createIntermediateGroups: true
+
+settings:
+  base:
+    SWIFT_VERSION: "5.0"
+    TARGETED_DEVICE_FAMILY: "1"
+
+targets:
+  SingleDrawStoreDemo:
+    type: application
+    platform: iOS
+    deploymentTarget: "16.0"
+    sources:
+      - path: SingleDrawStoreDemo.swift
+      - path: SingleDrawStoreDemoApp.swift
+      - path: ../../Assets/Plugins/iOS/Thumbnails/Models/product-thumbnail-metal-three-blade.png
+        buildPhase: resources
+      - path: ../../Assets/Plugins/iOS/Thumbnails/Models/product-thumbnail-magnetic-slide-tile.png
+        buildPhase: resources
+      - path: ../../Assets/Plugins/iOS/Thumbnails/Models/product-thumbnail-magnetic-fan-card.png
+        buildPhase: resources
+      - path: ../../Assets/Plugins/iOS/Thumbnails/Models/product-thumbnail-gold-four-wing.png
+        buildPhase: resources
+      - path: ../../Assets/Plugins/iOS/Thumbnails/ThreeBladeSkins/skin-thumbnail-night-cyan-index.png
+        buildPhase: resources
+      - path: ../../Assets/Plugins/iOS/Thumbnails/ThreeBladeSkins/skin-thumbnail-tungsten-honeycomb.png
+        buildPhase: resources
+      - path: ../../Assets/Plugins/iOS/Thumbnails/ThreeBladeSkins/skin-thumbnail-blue-damascus.png
+        buildPhase: resources
+      - path: ../../Assets/Plugins/iOS/Thumbnails/ThreeBladeSkins/skin-thumbnail-titanium-heat.png
+        buildPhase: resources
+      - path: ../../Assets/Plugins/iOS/Thumbnails/ThreeBladeSkins/skin-thumbnail-meteor-obsidian.png
+        buildPhase: resources
+      - path: ../../Assets/Plugins/iOS/Thumbnails/ThreeBladeSkins/skin-thumbnail-mirror-aurora.png
+        buildPhase: resources
+      - path: ../../Artifacts/DisplayCaseRarityRevealPrototype/storyboard/01-back-facing.png
+        name: display-case-reveal-01-back-facing.png
+        buildPhase: resources
+      - path: ../../Artifacts/DisplayCaseRarityRevealPrototype/storyboard/02-flip-to-front.png
+        name: display-case-reveal-02-flip-to-front.png
+        buildPhase: resources
+      - path: ../../Artifacts/DisplayCaseRarityRevealPrototype/storyboard/03-prize-readable.png
+        name: display-case-reveal-03-prize-readable.png
+        buildPhase: resources
+      - path: ../../Artifacts/DisplayCaseRarityRevealPrototype/storyboard/04-parts-exploded.png
+        name: display-case-reveal-04-parts-exploded.png
+        buildPhase: resources
+      - path: ../../Artifacts/DisplayCaseRarityRevealPrototype/storyboard/05-prize-only.png
+        name: display-case-reveal-05-prize-only.png
+        buildPhase: resources
+      - path: ../../Artifacts/DisplayCaseRarityRevealPrototype/storyboard/06-light-pass-complete.png
+        name: display-case-reveal-06-light-pass-complete.png
+        buildPhase: resources
+    info:
+      path: "/Users/jiawei.zhou/Documents/Fidgeting app/unity/FidgetingApp/Tools/SingleDrawStoreDemo/Info.plist"
+    postBuildScripts:
+      - name: Normalize reveal resource names
+        script: |
+          resource_dir="$TARGET_BUILD_DIR/$UNLOCALIZED_RESOURCES_FOLDER_PATH"
+          mv "$resource_dir/01-back-facing.png" "$resource_dir/display-case-reveal-01-back-facing.png"
+          mv "$resource_dir/02-flip-to-front.png" "$resource_dir/display-case-reveal-02-flip-to-front.png"
+          mv "$resource_dir/03-prize-readable.png" "$resource_dir/display-case-reveal-03-prize-readable.png"
+          mv "$resource_dir/04-parts-exploded.png" "$resource_dir/display-case-reveal-04-parts-exploded.png"
+          mv "$resource_dir/05-prize-only.png" "$resource_dir/display-case-reveal-05-prize-only.png"
+          mv "$resource_dir/06-light-pass-complete.png" "$resource_dir/display-case-reveal-06-light-pass-complete.png"
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.jiaweizhou.fidgeting.single-draw-demo
+        PRODUCT_NAME: SingleDrawStoreDemo
+        DEVELOPMENT_TEAM: 2RJ2CW6NK5
+        CODE_SIGN_STYLE: Automatic
+        CODE_SIGN_IDENTITY: Apple Development
+        ASSETCATALOG_COMPILER_APPICON_NAME: ""
+        GENERATE_INFOPLIST_FILE: NO
+        ENABLE_USER_SCRIPT_SANDBOXING: NO
+
+schemes:
+  SingleDrawStoreDemo:
+    build:
+      targets:
+        SingleDrawStoreDemo: all
+    run:
+      config: Debug
+    archive:
+      config: Release

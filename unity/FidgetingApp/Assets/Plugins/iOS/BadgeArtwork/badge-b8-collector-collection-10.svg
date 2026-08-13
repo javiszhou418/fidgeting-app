@@ -1,0 +1,80 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1024" height="1024" viewBox="0 0 160 160">
+
+  <defs>
+    <linearGradient id="chrome" gradientUnits="userSpaceOnUse" x1="31" y1="25" x2="130" y2="137">
+      <stop offset="0" stop-color="#11161a"/><stop offset=".08" stop-color="#566067"/>
+      <stop offset=".16" stop-color="#f8fbfc"/><stop offset=".24" stop-color="#879197"/>
+      <stop offset=".36" stop-color="#ffffff"/><stop offset=".47" stop-color="#30373c"/>
+      <stop offset=".58" stop-color="#cbd2d5"/><stop offset=".69" stop-color="#ffffff"/>
+      <stop offset=".79" stop-color="#596269"/><stop offset=".90" stop-color="#e8edef"/>
+      <stop offset="1" stop-color="#171c20"/>
+    </linearGradient>
+    <linearGradient id="chromeSymmetric" gradientUnits="userSpaceOnUse" x1="22" y1="80" x2="138" y2="80">
+      <stop offset="0" stop-color="#252c31"/><stop offset=".12" stop-color="#aeb6bb"/>
+      <stop offset=".24" stop-color="#ffffff"/><stop offset=".39" stop-color="#737c82"/>
+      <stop offset=".52" stop-color="#f7f9fa"/><stop offset=".66" stop-color="#90989d"/>
+      <stop offset=".80" stop-color="#e9edef"/><stop offset=".92" stop-color="#ffffff"/>
+      <stop offset="1" stop-color="#626a6f"/>
+    </linearGradient>
+    <radialGradient id="orb" cx="34%" cy="27%" r="74%">
+      <stop offset="0" stop-color="#ffffff"/><stop offset=".19" stop-color="#e7ecee"/>
+      <stop offset=".42" stop-color="#8d979c"/><stop offset=".68" stop-color="#30383e"/>
+      <stop offset="1" stop-color="#0d1114"/>
+    </radialGradient>
+    <filter id="softGlow" x="-35%" y="-35%" width="170%" height="170%">
+      <feGaussianBlur stdDeviation="2.8"/>
+    </filter>
+  </defs>
+  <style>
+    .tubeBloom { fill:none; stroke:#edf6fa; stroke-width:21; stroke-linecap:round; stroke-linejoin:round; opacity:.18; filter:url(#softGlow); }
+    .tubeDark { fill:none; stroke:#0b1014; stroke-width:18; stroke-linecap:round; stroke-linejoin:round; }
+    .tubeBody { fill:none; stroke:url(#chrome); stroke-width:13.8; stroke-linecap:round; stroke-linejoin:round; }
+    .tubeShade { fill:none; stroke:#0a0e11; stroke-width:3.2; stroke-linecap:round; stroke-linejoin:round; opacity:.58; transform:translate(1.25px,1.35px); }
+    .tubeLight { fill:none; stroke:#ffffff; stroke-width:2.0; stroke-linecap:round; stroke-linejoin:round; opacity:.82; transform:translate(-1.0px,-1.05px); }
+    .plateBloom { fill:#edf5f8; stroke:none; opacity:.16; filter:url(#softGlow); }
+    .plateShadow { fill:#080c0f; stroke:#080c0f; stroke-width:1.6; transform:translate(2.5px,2.8px); }
+    .plateDepth { fill:#161d22; stroke:#080c0f; stroke-width:2.4; stroke-linejoin:round; transform:translate(1.2px,1.4px); }
+    .plateBody { fill:url(#chrome); stroke:#929ba0; stroke-width:.9; stroke-linejoin:round; }
+    .plateEdge { fill:none; stroke:#ffffff; stroke-width:1.05; stroke-linejoin:round; opacity:.78; transform:translate(-.55px,-.62px); }
+    .orbBloom { fill:#eef8fb; opacity:.40; filter:url(#softGlow); }
+    .orbBody { fill:url(#orb); stroke:#f2f5f6; stroke-width:2.2; }
+    .orbGlint { fill:#ffffff; opacity:.96; }
+  </style>
+  <g><g transform="rotate(0.000 80 80)">
+      <path class="plateBloom" d="M80 28C96 28 109 33 121 43L103 66C98 72 90 73 87 65Z"/>
+      <path class="plateShadow" d="M80 28C96 28 109 33 121 43L103 66C98 72 90 73 87 65Z"/>
+      <path class="plateDepth" d="M80 28C96 28 109 33 121 43L103 66C98 72 90 73 87 65Z"/>
+      <path class="plateBody" d="M80 28C96 28 109 33 121 43L103 66C98 72 90 73 87 65Z"/>
+      <path class="plateEdge" d="M80 28C96 28 109 33 121 43L103 66C98 72 90 73 87 65Z"/>
+    </g><g transform="rotate(60.000 80 80)">
+      <path class="plateBloom" d="M80 28C96 28 109 33 121 43L103 66C98 72 90 73 87 65Z"/>
+      <path class="plateShadow" d="M80 28C96 28 109 33 121 43L103 66C98 72 90 73 87 65Z"/>
+      <path class="plateDepth" d="M80 28C96 28 109 33 121 43L103 66C98 72 90 73 87 65Z"/>
+      <path class="plateBody" d="M80 28C96 28 109 33 121 43L103 66C98 72 90 73 87 65Z"/>
+      <path class="plateEdge" d="M80 28C96 28 109 33 121 43L103 66C98 72 90 73 87 65Z"/>
+    </g><g transform="rotate(120.000 80 80)">
+      <path class="plateBloom" d="M80 28C96 28 109 33 121 43L103 66C98 72 90 73 87 65Z"/>
+      <path class="plateShadow" d="M80 28C96 28 109 33 121 43L103 66C98 72 90 73 87 65Z"/>
+      <path class="plateDepth" d="M80 28C96 28 109 33 121 43L103 66C98 72 90 73 87 65Z"/>
+      <path class="plateBody" d="M80 28C96 28 109 33 121 43L103 66C98 72 90 73 87 65Z"/>
+      <path class="plateEdge" d="M80 28C96 28 109 33 121 43L103 66C98 72 90 73 87 65Z"/>
+    </g><g transform="rotate(180.000 80 80)">
+      <path class="plateBloom" d="M80 28C96 28 109 33 121 43L103 66C98 72 90 73 87 65Z"/>
+      <path class="plateShadow" d="M80 28C96 28 109 33 121 43L103 66C98 72 90 73 87 65Z"/>
+      <path class="plateDepth" d="M80 28C96 28 109 33 121 43L103 66C98 72 90 73 87 65Z"/>
+      <path class="plateBody" d="M80 28C96 28 109 33 121 43L103 66C98 72 90 73 87 65Z"/>
+      <path class="plateEdge" d="M80 28C96 28 109 33 121 43L103 66C98 72 90 73 87 65Z"/>
+    </g><g transform="rotate(240.000 80 80)">
+      <path class="plateBloom" d="M80 28C96 28 109 33 121 43L103 66C98 72 90 73 87 65Z"/>
+      <path class="plateShadow" d="M80 28C96 28 109 33 121 43L103 66C98 72 90 73 87 65Z"/>
+      <path class="plateDepth" d="M80 28C96 28 109 33 121 43L103 66C98 72 90 73 87 65Z"/>
+      <path class="plateBody" d="M80 28C96 28 109 33 121 43L103 66C98 72 90 73 87 65Z"/>
+      <path class="plateEdge" d="M80 28C96 28 109 33 121 43L103 66C98 72 90 73 87 65Z"/>
+    </g><g transform="rotate(300.000 80 80)">
+      <path class="plateBloom" d="M80 28C96 28 109 33 121 43L103 66C98 72 90 73 87 65Z"/>
+      <path class="plateShadow" d="M80 28C96 28 109 33 121 43L103 66C98 72 90 73 87 65Z"/>
+      <path class="plateDepth" d="M80 28C96 28 109 33 121 43L103 66C98 72 90 73 87 65Z"/>
+      <path class="plateBody" d="M80 28C96 28 109 33 121 43L103 66C98 72 90 73 87 65Z"/>
+      <path class="plateEdge" d="M80 28C96 28 109 33 121 43L103 66C98 72 90 73 87 65Z"/>
+    </g></g>
+</svg>

@@ -1,6 +1,6 @@
 # Fidget Spinner Liquid Glass Design Guideline
 
-最后更新：2026-08-08
+最后更新：2026-08-12
 
 ## 设计原则
 
@@ -20,11 +20,20 @@
 - 选中状态优先使用白色。只有需要材质呼应时才从当前已装备皮肤读取低透明度 tint，不使用固定青色作为主界面强调色。
 - 所有 `UIHostingController` 根视图必须应用 `productDesignSystem()`；共享组件默认使用中性白色，只有装备材质、语义指标或状态确有需要时才显式注入 accent。业务层禁止固定 `Color.cyan` 作为通用选中态。
 - Liquid Glass 表面不使用周圈描边或 outline；深度来自系统材质模糊、低透明度 tint、柔和亮度渐变与外投影。选中状态通过玻璃 tint / 亮度、tag 和 checkmark 表达，不能再用高饱和色描边框住整张卡。
-- Badge / 成就解锁通知固定使用实心 SF Symbol 与实心完成标记；不使用空心星标、圆环印章或其他描边式徽章图形。
+- Badge 解锁通知、图鉴、详情和分享卡必须渲染同一个 `ProductRarityBadge`，读取同一份 `ProductBadgeDetail`、正式 artwork、Token、短名和状态；不得用通用 SF Symbol、星标、奖杯、圆环印章或另一套“成就”图形替代 Badge。SF Symbol 只可作为 XP、碎片等辅助奖励语义，不得充当 Badge 本体。
 - iOS 26 使用 SwiftUI `glassEffect`。iOS 15–25 使用无周圈描边的 `ultraThinMaterial` fallback，保持同一结构与信息层级。内部 divider、进度轨道、仪表弧线/刻度以及图标自身的线条仍可作为信息几何使用，不能伪装成卡片边框。
 - 交互控件使用 `interactive: true`；纯信息卡使用静态玻璃，避免无意义的触摸反馈。
+- 产品级文字 CTA 永久只显示动作文字，不附加装饰性 SF Symbol；方向、确认、盒子等装饰图标不得与“进入模型”“查看收藏盒”“下一步/开始玩”等主操作文案并排。导航返回、设置等 icon-only 工具按钮，以及非 CTA 的真实状态/奖励语义不受此规则影响。
 - 背景、材质和模型亮度会变化，主要文字保持白色，次要文字不低于 52% 白色不透明度。
 - 任何跨两个以上业务界面重复的 heading、notice、tag、selection card、badge tile、metric、slider、toggle、empty state 必须进入 `FidgetProductUIComponents.swift`。业务层只组合组件、绑定状态并保留与 3D 模型直接相关的专用视觉，不能再次手写一套玻璃材质、tint、圆角和字号规则。
+
+## 媒体比例、色彩与交互诚实性
+
+- 所有 raster 图片、视频画面和 3D 渲染截图必须始终保持源素材宽高比，绝不允许非等比拉伸、独立改变 X/Y 缩放或用变形填满容器。实现和预览必须能验证媒体内容使用统一等比缩放。
+- `9:16`、`16:9` 等固定比例媒体容器必须由媒体本身按明确设计意图使用 `aspectFill` 或 `aspectFit`：`aspectFill` 只能做可预期的等比裁切，`aspectFit` 用于完整保留内容。禁止用“外层容器背景 + 内嵌媒体背景”叠层假装填满，也禁止意外留白、黑边或 letterbox。选择 `aspectFit` 产生的留白必须在设计说明中明确定义留白的颜色、用途和构图，不得将框架默认行为当作设计。
+- Demo / prototype 默认使用中性、低彩度色彩基线；除非有明确的产品语义、品牌 token 或用户批准的视觉方向，不得随意增加大面积装饰色、多色环境染色或 AI 式高饱和渐变。最小主观验收为：去除语义 accent 后，信息层级仍然完整可读。
+- rarity 色只允许用于徽标、细线、状态 tag、小面积辉光等局部语义载体，不得成为大面积页面背景或容器主色，也不得让多个稀有度颜色在同一页面同时主导视觉。页面主导色仍必须是中性黑、白、灰与低彩度材质色。
+- 不可交互的分类、标签、占位动作或未开放商品必须表现为静态标题、静态信息卡或明确的“未开放”状态；禁止套用 Button 外观、主 CTA 轮廓、`interactive: true` 玻璃、chevron、按压反馈或“立即购买”等伪交互文案。只有实际绑定可达操作与完整状态生命周期的控件才能表现为可点击；产品级文字 CTA 继续遵守“只显示动作文字、不附加装饰 icon”的永久规则。
 
 ## 组件清单
 
@@ -37,13 +46,13 @@
 | 紧凑图标按钮 | `ProductIconButton` | 顶部复位、说明、玩具库与设置共用；视觉直径 38 pt，布局热区不小于 44 pt；出现文字 label 时与图标容器至少间隔 4 pt，内部 glyph 不得贴边 |
 | 模型选择器 | `SpinnerLibrary` | 分页 `TabView`；直接显示 Unity 实时模型；选择页使用 45° Hero 机位 |
 | Page control | `ProductPageIndicator` | 每个模型一个点；当前页 18×6 pt，其他页 6×6 pt；同一 items 集合生成视觉与 VoiceOver 计数 |
-| 主操作 | `ProductPrimaryActionLabel` | 52 pt 高、26 pt 圆角、材质色轻 tint；进入后才开放模型手势 |
+| 主操作 | `ProductPrimaryActionLabel` | 52 pt 高、26 pt 圆角、材质色轻 tint；永久只显示动作文字、不接受装饰 icon；进入后才开放模型手势 |
 | 模式切换 | `ProductIconSegmentedControl` + `ProductModeBar` | 两枚 44 × 40 pt 纯图标；连续旋转 / 机械齿轮语义；玻璃宽度严格随内容，选中只用低透明白色 |
 | 底部成长 | `SpinnerProgressionHUD` | 底部产品导航已移除；成长卡贴合 safe area，材质 tint 跟随当前皮肤 |
 | 设置卡 | `ProductSectionCard` | 22 pt 圆角静态玻璃；系统 Slider、Toggle、Picker 保留原生可访问性行为 |
 | 页面标题 | `ProductScreenHeading` | 标题 / 副标题 / 可选 SF Symbol 共用同一字号、透明度与 VoiceOver 合并规则；可选择左对齐或居中 |
-| 通知与状态 | `ProductNoticeBanner` / `ProductInlineTag` | Badge 与藏家通知共用 48 pt 无描边玻璃图标、实心 symbol、实心完成标记、22 pt 表面和 Reduce Transparency 分支；EQUIPPED / CURRENT / LIVE 共用紧凑 tag |
-| 选择与 Badge | `ProductSelectionCard` / `ProductBadgeTile` | 皮肤行、等级行、Badge 卡统一使用玻璃 tint / 亮度、tag / checkmark 表达选中态，并统一禁用透明度、圆角和可访问性状态；无卡片周圈描边 |
+| 通知与状态 | `ProductBadgeUnlockBanner` / `ProductNoticeBanner` / `ProductInlineTag` | Badge 解锁必须复用正式 `ProductRarityBadge`；普通通知才使用 SF Symbol。两者共用 22 pt 玻璃表面与 Reduce Transparency 分支；EQUIPPED / CURRENT / LIVE 共用紧凑 tag |
+| 选择与 Badge | `ProductSelectionCard` / `ProductBadgeTile` / `ProductRarityBadge` | 图鉴、详情、解锁和分享只保留一套 Badge 本体；皮肤行、等级行与状态卡统一使用玻璃 tint / 亮度、tag / checkmark 表达状态，并统一禁用透明度、圆角和可访问性状态；无卡片周圈描边 |
 | 设置输入 | `ProductSliderRow` / `ProductToggleRow` | 所有产品级滑杆与开关统一 label、稳定宽度数值、accent 和原生可访问性控件 |
 | 辅助状态 | `ProductCompactMetric` / `ProductEmptyState` | 触觉实验室实时值与未开放内容使用同一紧凑指标和空状态层级 |
 | 次级操作 | `ProductActionLabel` | 44 pt 高、16 pt 圆角、交互式玻璃 |
@@ -51,6 +60,8 @@
 | Bottom sheet | `ProductBottomSheetShell` | 统一标题、关闭操作、中性背景与深色导航容器；业务内容通过 builder 注入 |
 | 状态 Chip | `ProductStatusPill` | 24–28 pt 可见 pill；若包装为按钮，外层热区仍须扩到 44 pt |
 | 进度 | `ProductProgressGauge` | 5 pt 线性轨道、0...1 显示夹取、180 ms ease-out 和组合 VoiceOver 数值 |
+| 里程碑进度 | `ProductMilestoneProgressGauge` | 复用 `ProductProgressGauge`；两端等级统一使用 `caption2` bold（默认 11 pt）Oxanium 等宽数字，最小行高 16 pt，禁止业务页面回退到 7–9 pt 微型字号 |
+| 成长结算与升级 | `ProgressionRewardCelebrationView` / `ProgressionPageRewardFlightView` | 底部透明 overlay 保留 Unity 与详情界面上下文并覆盖底部操作区；sheet 内头像环读取权威等级进度但不承载粒子；sheet 完整移除后，页面级 `+XP` 飞向共享 top chrome 的真实头像锚点并更新头像环；Reduce Motion 只更新/高亮左上头像 |
 | 实时速度 | `ProductSpeedDashboard` | 124–160 × 118 pt，68–84 pt 的 180° 半圆内显示 25 pt 起始等宽 RPM headline/单位和 13 根刻度，Speed / 状态名称使用独立高对比胶囊固定在半圆下方；20 Hz telemetry、100 ms 无超调跟随、4% 色带回差；Peak 只保留火红扫掠场/光晕；磁吸推牌不显示 RPM |
 | 从属实时指标 | `ProductSideMetricDashboard` | 64–74 × 78 pt，48–54 pt 半圆内显示 17 pt 起始数值/单位，Intensity / Frequency 名称使用独立高对比胶囊固定在半圆下方；7 根刻度；与主表同排保持 10 pt 间距，各自读取真实 Combo 数据，只继承主表色带并降低视觉权重 |
 
@@ -67,6 +78,7 @@
 - 详情页模型长按由 Unity 命中测试确认后，先做一次 `0.22 s` 相机 framing 轻弹并同步路由语义 `Pop` 触感，回到 `1.000×` 静止态后才打开原生 `ProductAppearanceEditor`；轻弹不得缩放模型 Transform 或改变碰撞体、质量、角速度。编辑态隐藏底部成长卡、三联仪表和机制栏，关闭后恢复。面板必须复用 `ProductSheetDragHandle`、`ProductScreenHeading`、`ProductIconButton`、`ProductIconSegmentedControl`、`ProductStatusPill`、`ProductSelectionCard` 与 `ProductEmptyState`，业务层只组合两列 `LazyVGrid` 和模型专属预览，不另造圆角、玻璃、字体或选中态。贴纸卡片必须以 `scaledToFit` 显示 `Assets/Resources/ProductStickers/BackdropWhite` 的真实透明 PNG，完整保留图形和安全边距；SF Symbol 仅用于资源缺失兜底。
 - 模式 Tab 切换使用系统 UI impact 作为选择确认；玩具触感仍必须经过 `input → mechanism → semantic event → recipe → iOS renderer`。
 - 状态动画使用 180–200 ms ease-out。不要给真实模型添加自动旋转来暗示可交互性。
+- 离线成长与实时升级统一使用透明原生 overlay 承载 `ProgressionRewardCelebrationView`，保留结算发生前的 Unity 与 SwiftUI 详情界面作为可见上下文，不再使用不透明 `fullScreenCover` 或文本 Alert。离线结算是从底部弹起的 sheet，并在显示期间覆盖且屏蔽模型库底部“查看收藏盒”和“进入模型”操作区；自动关闭后必须恢复底层交互。离线结算同时显示格式化离线时长、实际成长值、每小时平均成长速度和来源状态；sheet 内当前用户以 `person.crop.circle` 头像表达，头像外圆弧读取 Unity 本次 reward snapshot 的旧/新等级内进度。数字从 0 动画到真实值，但 SwiftUI 不得重算或再次发放 XP。只有 `newLevel > previousLevel` 才显示 LEVEL UP 高光、真实等级跃迁和跨级数量；未升级时使用当前头像、所属等级与环形进度。离线结算不提供领取 CTA，sheet 内永久不执行 XP 粒子回收；顺序固定为“结算层关闭 → 页面级 +XP 飞行 → 左上头像环更新”。只有确认 UIKit 已移除 sheet controller 且底层 Library 恢复后，`ProgressionPageRewardFlightView` 才能启动。飞行终点必须来自共享 `ProductTopBar` 中 `person.crop.circle` 头像环的真实 window frame anchor，不得按设备尺寸硬编码坐标；详情态应与返回按钮并列保留同一头像锚点。飞行到达后才提交该 reward 的新等级/新 fraction 并脉冲头像环。Reduce Motion 跳过粒子飞行，sheet 关闭后只更新并短暂高亮左上头像。高光以中性白、石墨和当前模型低饱和 accent 为限，不使用周圈描边卡、彩虹粒子或伪 Badge。
 
 ## 可访问性与适配
 

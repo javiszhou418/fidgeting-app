@@ -1,0 +1,2018 @@
+{
+  "version": "1.0",
+  "name": "TrinityCaseCLI",
+  "scene": {
+    "unit_system": "metric",
+    "unit_scale": 1.0,
+    "frame_start": 1,
+    "frame_end": 250,
+    "frame_current": 1,
+    "fps": 24
+  },
+  "render": {
+    "engine": "CYCLES",
+    "resolution_x": 720,
+    "resolution_y": 900,
+    "resolution_percentage": 100,
+    "samples": 24,
+    "use_denoising": true,
+    "film_transparent": false,
+    "output_format": "PNG",
+    "output_path": "/private/tmp/fidgeting_app_cli/unity/FidgetingApp/Artifacts/CliAnythingTrinityCasePreview/hero.png"
+  },
+  "world": {
+    "background_color": [
+      0.05,
+      0.05,
+      0.05
+    ],
+    "use_hdri": false,
+    "hdri_path": null,
+    "hdri_strength": 1.0
+  },
+  "objects": [
+    {
+      "id": 0,
+      "name": "Cut_Front_TL",
+      "type": "MESH",
+      "mesh_type": "cylinder",
+      "location": [
+        -0.079,
+        -0.2,
+        0.105
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "scale": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "visible": false,
+      "material": null,
+      "modifiers": [],
+      "keyframes": [],
+      "parent": null,
+      "mesh_params": {
+        "radius": 0.0065,
+        "depth": 0.018,
+        "vertices": 64
+      }
+    },
+    {
+      "id": 1,
+      "name": "Cut_Front_TR",
+      "type": "MESH",
+      "mesh_type": "cylinder",
+      "location": [
+        0.079,
+        -0.2,
+        0.105
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "scale": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "visible": false,
+      "material": null,
+      "modifiers": [],
+      "keyframes": [],
+      "parent": null,
+      "mesh_params": {
+        "radius": 0.0065,
+        "depth": 0.018,
+        "vertices": 64
+      }
+    },
+    {
+      "id": 2,
+      "name": "Cut_Front_BL",
+      "type": "MESH",
+      "mesh_type": "cylinder",
+      "location": [
+        -0.079,
+        -0.2,
+        -0.105
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "scale": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "visible": false,
+      "material": null,
+      "modifiers": [],
+      "keyframes": [],
+      "parent": null,
+      "mesh_params": {
+        "radius": 0.0065,
+        "depth": 0.018,
+        "vertices": 64
+      }
+    },
+    {
+      "id": 3,
+      "name": "Cut_Front_BR",
+      "type": "MESH",
+      "mesh_type": "cylinder",
+      "location": [
+        0.079,
+        -0.2,
+        -0.105
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "scale": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "visible": false,
+      "material": null,
+      "modifiers": [],
+      "keyframes": [],
+      "parent": null,
+      "mesh_params": {
+        "radius": 0.0065,
+        "depth": 0.018,
+        "vertices": 64
+      }
+    },
+    {
+      "id": 4,
+      "name": "Cut_Rear_TL",
+      "type": "MESH",
+      "mesh_type": "cylinder",
+      "location": [
+        -0.079,
+        0.14,
+        0.105
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "scale": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "visible": false,
+      "material": null,
+      "modifiers": [],
+      "keyframes": [],
+      "parent": null,
+      "mesh_params": {
+        "radius": 0.0065,
+        "depth": 0.018,
+        "vertices": 64
+      }
+    },
+    {
+      "id": 5,
+      "name": "Cut_Rear_TR",
+      "type": "MESH",
+      "mesh_type": "cylinder",
+      "location": [
+        0.079,
+        0.14,
+        0.105
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "scale": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "visible": false,
+      "material": null,
+      "modifiers": [],
+      "keyframes": [],
+      "parent": null,
+      "mesh_params": {
+        "radius": 0.0065,
+        "depth": 0.018,
+        "vertices": 64
+      }
+    },
+    {
+      "id": 6,
+      "name": "Cut_Rear_BL",
+      "type": "MESH",
+      "mesh_type": "cylinder",
+      "location": [
+        -0.079,
+        0.14,
+        -0.105
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "scale": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "visible": false,
+      "material": null,
+      "modifiers": [],
+      "keyframes": [],
+      "parent": null,
+      "mesh_params": {
+        "radius": 0.0065,
+        "depth": 0.018,
+        "vertices": 64
+      }
+    },
+    {
+      "id": 7,
+      "name": "Cut_Rear_BR",
+      "type": "MESH",
+      "mesh_type": "cylinder",
+      "location": [
+        0.079,
+        0.14,
+        -0.105
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "scale": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "visible": false,
+      "material": null,
+      "modifiers": [],
+      "keyframes": [],
+      "parent": null,
+      "mesh_params": {
+        "radius": 0.0065,
+        "depth": 0.018,
+        "vertices": 64
+      }
+    },
+    {
+      "id": 8,
+      "name": "Cut_Foam_Center",
+      "type": "MESH",
+      "mesh_type": "cylinder",
+      "location": [
+        0.0,
+        0.045,
+        0.018
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "scale": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "visible": false,
+      "material": null,
+      "modifiers": [],
+      "keyframes": [],
+      "parent": null,
+      "mesh_params": {
+        "radius": 0.059,
+        "depth": 0.035,
+        "vertices": 96
+      }
+    },
+    {
+      "id": 9,
+      "name": "Layer01_AcrylicFrontPlate",
+      "type": "MESH",
+      "mesh_type": "cube",
+      "location": [
+        0.0,
+        -0.2,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "scale": [
+        0.094,
+        0.003,
+        0.12
+      ],
+      "visible": true,
+      "material": 0,
+      "modifiers": [
+        {
+          "type": "bevel",
+          "name": "FrontEdgePolish",
+          "bpy_type": "BEVEL",
+          "params": {
+            "width": 0.006,
+            "segments": 6,
+            "limit_method": "ANGLE",
+            "angle_limit": 0.523599
+          }
+        },
+        {
+          "type": "boolean",
+          "name": "FrontHoleTL",
+          "bpy_type": "BOOLEAN",
+          "params": {
+            "operation": "DIFFERENCE",
+            "operand_object": "Cut_Front_TL",
+            "solver": "EXACT"
+          }
+        },
+        {
+          "type": "boolean",
+          "name": "FrontHoleTR",
+          "bpy_type": "BOOLEAN",
+          "params": {
+            "operation": "DIFFERENCE",
+            "operand_object": "Cut_Front_TR",
+            "solver": "EXACT"
+          }
+        },
+        {
+          "type": "boolean",
+          "name": "FrontHoleBL",
+          "bpy_type": "BOOLEAN",
+          "params": {
+            "operation": "DIFFERENCE",
+            "operand_object": "Cut_Front_BL",
+            "solver": "EXACT"
+          }
+        },
+        {
+          "type": "boolean",
+          "name": "FrontHoleBR",
+          "bpy_type": "BOOLEAN",
+          "params": {
+            "operation": "DIFFERENCE",
+            "operand_object": "Cut_Front_BR",
+            "solver": "EXACT"
+          }
+        }
+      ],
+      "keyframes": [],
+      "parent": null,
+      "mesh_params": {
+        "size": 2.0
+      }
+    },
+    {
+      "id": 10,
+      "name": "Layer06_AcrylicRearPlate",
+      "type": "MESH",
+      "mesh_type": "cube",
+      "location": [
+        0.0,
+        0.14,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "scale": [
+        0.094,
+        0.0025,
+        0.12
+      ],
+      "visible": true,
+      "material": 0,
+      "modifiers": [
+        {
+          "type": "bevel",
+          "name": "RearEdgePolish",
+          "bpy_type": "BEVEL",
+          "params": {
+            "width": 0.006,
+            "segments": 6,
+            "limit_method": "ANGLE",
+            "angle_limit": 0.523599
+          }
+        },
+        {
+          "type": "boolean",
+          "name": "RearHoleTL",
+          "bpy_type": "BOOLEAN",
+          "params": {
+            "operation": "DIFFERENCE",
+            "operand_object": "Cut_Rear_TL",
+            "solver": "EXACT"
+          }
+        },
+        {
+          "type": "boolean",
+          "name": "RearHoleTR",
+          "bpy_type": "BOOLEAN",
+          "params": {
+            "operation": "DIFFERENCE",
+            "operand_object": "Cut_Rear_TR",
+            "solver": "EXACT"
+          }
+        },
+        {
+          "type": "boolean",
+          "name": "RearHoleBL",
+          "bpy_type": "BOOLEAN",
+          "params": {
+            "operation": "DIFFERENCE",
+            "operand_object": "Cut_Rear_BL",
+            "solver": "EXACT"
+          }
+        },
+        {
+          "type": "boolean",
+          "name": "RearHoleBR",
+          "bpy_type": "BOOLEAN",
+          "params": {
+            "operation": "DIFFERENCE",
+            "operand_object": "Cut_Rear_BR",
+            "solver": "EXACT"
+          }
+        }
+      ],
+      "keyframes": [],
+      "parent": null,
+      "mesh_params": {
+        "size": 2.0
+      }
+    },
+    {
+      "id": 11,
+      "name": "Layer05_BlackFoamInsert",
+      "type": "MESH",
+      "mesh_type": "cube",
+      "location": [
+        0.0,
+        0.045,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "scale": [
+        0.085,
+        0.005,
+        0.11
+      ],
+      "visible": true,
+      "material": 1,
+      "modifiers": [
+        {
+          "type": "bevel",
+          "name": "FoamSoftEdge",
+          "bpy_type": "BEVEL",
+          "params": {
+            "width": 0.009,
+            "segments": 5,
+            "limit_method": "ANGLE",
+            "angle_limit": 0.523599
+          }
+        },
+        {
+          "type": "boolean",
+          "name": "SpinnerAperture",
+          "bpy_type": "BOOLEAN",
+          "params": {
+            "operation": "DIFFERENCE",
+            "operand_object": "Cut_Foam_Center",
+            "solver": "EXACT"
+          }
+        }
+      ],
+      "keyframes": [],
+      "parent": null,
+      "mesh_params": {
+        "size": 2.0
+      }
+    },
+    {
+      "id": 12,
+      "name": "Layer03_AcrylicFrameTop",
+      "type": "MESH",
+      "mesh_type": "cube",
+      "location": [
+        0.0,
+        -0.105,
+        0.111
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "scale": [
+        0.092,
+        0.004,
+        0.007
+      ],
+      "visible": true,
+      "material": 0,
+      "modifiers": [
+        {
+          "type": "bevel",
+          "name": "FrameTopPolish",
+          "bpy_type": "BEVEL",
+          "params": {
+            "width": 0.004,
+            "segments": 5,
+            "limit_method": "ANGLE",
+            "angle_limit": 0.523599
+          }
+        }
+      ],
+      "keyframes": [],
+      "parent": null,
+      "mesh_params": {
+        "size": 2.0
+      }
+    },
+    {
+      "id": 13,
+      "name": "Layer03_AcrylicFrameBottom",
+      "type": "MESH",
+      "mesh_type": "cube",
+      "location": [
+        0.0,
+        -0.105,
+        -0.111
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "scale": [
+        0.092,
+        0.004,
+        0.007
+      ],
+      "visible": true,
+      "material": 0,
+      "modifiers": [
+        {
+          "type": "bevel",
+          "name": "FrameBottomPolish",
+          "bpy_type": "BEVEL",
+          "params": {
+            "width": 0.004,
+            "segments": 5,
+            "limit_method": "ANGLE",
+            "angle_limit": 0.523599
+          }
+        }
+      ],
+      "keyframes": [],
+      "parent": null,
+      "mesh_params": {
+        "size": 2.0
+      }
+    },
+    {
+      "id": 14,
+      "name": "Layer03_AcrylicFrameLeft",
+      "type": "MESH",
+      "mesh_type": "cube",
+      "location": [
+        -0.085,
+        -0.105,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "scale": [
+        0.007,
+        0.004,
+        0.104
+      ],
+      "visible": true,
+      "material": 0,
+      "modifiers": [
+        {
+          "type": "bevel",
+          "name": "FrameLeftPolish",
+          "bpy_type": "BEVEL",
+          "params": {
+            "width": 0.004,
+            "segments": 5,
+            "limit_method": "ANGLE",
+            "angle_limit": 0.523599
+          }
+        }
+      ],
+      "keyframes": [],
+      "parent": null,
+      "mesh_params": {
+        "size": 2.0
+      }
+    },
+    {
+      "id": 15,
+      "name": "Layer03_AcrylicFrameRight",
+      "type": "MESH",
+      "mesh_type": "cube",
+      "location": [
+        0.085,
+        -0.105,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "scale": [
+        0.007,
+        0.004,
+        0.104
+      ],
+      "visible": true,
+      "material": 0,
+      "modifiers": [
+        {
+          "type": "bevel",
+          "name": "FrameRightPolish",
+          "bpy_type": "BEVEL",
+          "params": {
+            "width": 0.004,
+            "segments": 5,
+            "limit_method": "ANGLE",
+            "angle_limit": 0.523599
+          }
+        }
+      ],
+      "keyframes": [],
+      "parent": null,
+      "mesh_params": {
+        "size": 2.0
+      }
+    },
+    {
+      "id": 16,
+      "name": "Layer07_BlackRearShell",
+      "type": "MESH",
+      "mesh_type": "cube",
+      "location": [
+        0.0,
+        0.255,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "scale": [
+        0.11,
+        0.012,
+        0.145
+      ],
+      "visible": true,
+      "material": 2,
+      "modifiers": [
+        {
+          "type": "bevel",
+          "name": "ShellEdgeRadius",
+          "bpy_type": "BEVEL",
+          "params": {
+            "width": 0.01,
+            "segments": 8,
+            "limit_method": "ANGLE",
+            "angle_limit": 0.523599
+          }
+        }
+      ],
+      "keyframes": [],
+      "parent": null,
+      "mesh_params": {
+        "size": 2.0
+      }
+    },
+    {
+      "id": 17,
+      "name": "Layer07_RearShellInset",
+      "type": "MESH",
+      "mesh_type": "cube",
+      "location": [
+        0.0,
+        0.238,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "scale": [
+        0.095,
+        0.004,
+        0.126
+      ],
+      "visible": true,
+      "material": 5,
+      "modifiers": [
+        {
+          "type": "bevel",
+          "name": "InsetSoftEdge",
+          "bpy_type": "BEVEL",
+          "params": {
+            "width": 0.006,
+            "segments": 6,
+            "limit_method": "ANGLE",
+            "angle_limit": 0.523599
+          }
+        }
+      ],
+      "keyframes": [],
+      "parent": null,
+      "mesh_params": {
+        "size": 2.0
+      }
+    },
+    {
+      "id": 18,
+      "name": "RearCounterboreTL",
+      "type": "MESH",
+      "mesh_type": "cylinder",
+      "location": [
+        -0.085,
+        0.226,
+        0.112
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "scale": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "visible": true,
+      "material": 5,
+      "modifiers": [],
+      "keyframes": [],
+      "parent": null,
+      "mesh_params": {
+        "radius": 0.009,
+        "depth": 0.004,
+        "vertices": 64
+      }
+    },
+    {
+      "id": 19,
+      "name": "RearCounterboreTR",
+      "type": "MESH",
+      "mesh_type": "cylinder",
+      "location": [
+        0.085,
+        0.226,
+        0.112
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "scale": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "visible": true,
+      "material": 5,
+      "modifiers": [],
+      "keyframes": [],
+      "parent": null,
+      "mesh_params": {
+        "radius": 0.009,
+        "depth": 0.004,
+        "vertices": 64
+      }
+    },
+    {
+      "id": 20,
+      "name": "RearCounterboreBL",
+      "type": "MESH",
+      "mesh_type": "cylinder",
+      "location": [
+        -0.085,
+        0.226,
+        -0.112
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "scale": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "visible": true,
+      "material": 5,
+      "modifiers": [],
+      "keyframes": [],
+      "parent": null,
+      "mesh_params": {
+        "radius": 0.009,
+        "depth": 0.004,
+        "vertices": 64
+      }
+    },
+    {
+      "id": 21,
+      "name": "RearCounterboreBR",
+      "type": "MESH",
+      "mesh_type": "cylinder",
+      "location": [
+        0.085,
+        0.226,
+        -0.112
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "scale": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "visible": true,
+      "material": 5,
+      "modifiers": [],
+      "keyframes": [],
+      "parent": null,
+      "mesh_params": {
+        "radius": 0.009,
+        "depth": 0.004,
+        "vertices": 64
+      }
+    },
+    {
+      "id": 22,
+      "name": "Layer04_SpinnerCore",
+      "type": "MESH",
+      "mesh_type": "cylinder",
+      "location": [
+        0.0,
+        -0.015,
+        0.018
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "scale": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "visible": true,
+      "material": 4,
+      "modifiers": [
+        {
+          "type": "bevel",
+          "name": "CoreEdge",
+          "bpy_type": "BEVEL",
+          "params": {
+            "width": 0.002,
+            "segments": 4,
+            "limit_method": "ANGLE",
+            "angle_limit": 0.523599
+          }
+        }
+      ],
+      "keyframes": [],
+      "parent": null,
+      "mesh_params": {
+        "radius": 0.038,
+        "depth": 0.01,
+        "vertices": 96
+      }
+    },
+    {
+      "id": 23,
+      "name": "Layer04_CenterFace",
+      "type": "MESH",
+      "mesh_type": "cylinder",
+      "location": [
+        0.0,
+        -0.025,
+        0.018
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "scale": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "visible": true,
+      "material": 5,
+      "modifiers": [
+        {
+          "type": "bevel",
+          "name": "FaceEdge",
+          "bpy_type": "BEVEL",
+          "params": {
+            "width": 0.0018,
+            "segments": 4,
+            "limit_method": "ANGLE",
+            "angle_limit": 0.523599
+          }
+        }
+      ],
+      "keyframes": [],
+      "parent": null,
+      "mesh_params": {
+        "radius": 0.026,
+        "depth": 0.012,
+        "vertices": 96
+      }
+    },
+    {
+      "id": 24,
+      "name": "Layer04_BearingRing",
+      "type": "MESH",
+      "mesh_type": "torus",
+      "location": [
+        0.0,
+        -0.033,
+        0.018
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "scale": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "visible": true,
+      "material": 3,
+      "modifiers": [],
+      "keyframes": [],
+      "parent": null,
+      "mesh_params": {
+        "major_radius": 0.029,
+        "minor_radius": 0.0032,
+        "major_segments": 96,
+        "minor_segments": 18
+      }
+    },
+    {
+      "id": 25,
+      "name": "Layer04_LobeTop",
+      "type": "MESH",
+      "mesh_type": "cylinder",
+      "location": [
+        0.0,
+        -0.015,
+        0.048
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "scale": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "visible": true,
+      "material": 4,
+      "modifiers": [
+        {
+          "type": "bevel",
+          "name": "TopLobeEdge",
+          "bpy_type": "BEVEL",
+          "params": {
+            "width": 0.002,
+            "segments": 4,
+            "limit_method": "ANGLE",
+            "angle_limit": 0.523599
+          }
+        }
+      ],
+      "keyframes": [],
+      "parent": null,
+      "mesh_params": {
+        "radius": 0.025,
+        "depth": 0.01,
+        "vertices": 96
+      }
+    },
+    {
+      "id": 26,
+      "name": "Layer04_LobeLeft",
+      "type": "MESH",
+      "mesh_type": "cylinder",
+      "location": [
+        -0.026,
+        -0.015,
+        0.003
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "scale": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "visible": true,
+      "material": 4,
+      "modifiers": [
+        {
+          "type": "bevel",
+          "name": "LeftLobeEdge",
+          "bpy_type": "BEVEL",
+          "params": {
+            "width": 0.002,
+            "segments": 4,
+            "limit_method": "ANGLE",
+            "angle_limit": 0.523599
+          }
+        }
+      ],
+      "keyframes": [],
+      "parent": null,
+      "mesh_params": {
+        "radius": 0.025,
+        "depth": 0.01,
+        "vertices": 96
+      }
+    },
+    {
+      "id": 27,
+      "name": "Layer04_LobeRight",
+      "type": "MESH",
+      "mesh_type": "cylinder",
+      "location": [
+        0.026,
+        -0.015,
+        0.003
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "scale": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "visible": true,
+      "material": 4,
+      "modifiers": [
+        {
+          "type": "bevel",
+          "name": "RightLobeEdge",
+          "bpy_type": "BEVEL",
+          "params": {
+            "width": 0.002,
+            "segments": 4,
+            "limit_method": "ANGLE",
+            "angle_limit": 0.523599
+          }
+        }
+      ],
+      "keyframes": [],
+      "parent": null,
+      "mesh_params": {
+        "radius": 0.025,
+        "depth": 0.01,
+        "vertices": 96
+      }
+    },
+    {
+      "id": 28,
+      "name": "EtchRingTop",
+      "type": "MESH",
+      "mesh_type": "torus",
+      "location": [
+        0.0,
+        -0.022,
+        0.048
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "scale": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "visible": true,
+      "material": 3,
+      "modifiers": [],
+      "keyframes": [],
+      "parent": null,
+      "mesh_params": {
+        "major_radius": 0.013,
+        "minor_radius": 0.0014,
+        "major_segments": 72,
+        "minor_segments": 12
+      }
+    },
+    {
+      "id": 29,
+      "name": "EtchRingLeft",
+      "type": "MESH",
+      "mesh_type": "torus",
+      "location": [
+        -0.026,
+        -0.022,
+        0.003
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "scale": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "visible": true,
+      "material": 3,
+      "modifiers": [],
+      "keyframes": [],
+      "parent": null,
+      "mesh_params": {
+        "major_radius": 0.013,
+        "minor_radius": 0.0014,
+        "major_segments": 72,
+        "minor_segments": 12
+      }
+    },
+    {
+      "id": 30,
+      "name": "EtchRingRight",
+      "type": "MESH",
+      "mesh_type": "torus",
+      "location": [
+        0.026,
+        -0.022,
+        0.003
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "scale": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "visible": true,
+      "material": 3,
+      "modifiers": [],
+      "keyframes": [],
+      "parent": null,
+      "mesh_params": {
+        "major_radius": 0.013,
+        "minor_radius": 0.0014,
+        "major_segments": 72,
+        "minor_segments": 12
+      }
+    },
+    {
+      "id": 31,
+      "name": "BearingCap",
+      "type": "MESH",
+      "mesh_type": "cylinder",
+      "location": [
+        0.0,
+        -0.039,
+        0.018
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "scale": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "visible": true,
+      "material": 3,
+      "modifiers": [
+        {
+          "type": "bevel",
+          "name": "BearingCapEdge",
+          "bpy_type": "BEVEL",
+          "params": {
+            "width": 0.0018,
+            "segments": 5,
+            "limit_method": "ANGLE",
+            "angle_limit": 0.523599
+          }
+        }
+      ],
+      "keyframes": [],
+      "parent": null,
+      "mesh_params": {
+        "radius": 0.012,
+        "depth": 0.016,
+        "vertices": 96
+      }
+    },
+    {
+      "id": 32,
+      "name": "Layer02_ClearRotorWindow",
+      "type": "MESH",
+      "mesh_type": "cylinder",
+      "location": [
+        0.0,
+        -0.078,
+        0.018
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "scale": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "visible": true,
+      "material": 0,
+      "modifiers": [
+        {
+          "type": "bevel",
+          "name": "WindowEdge",
+          "bpy_type": "BEVEL",
+          "params": {
+            "width": 0.0012,
+            "segments": 4,
+            "limit_method": "ANGLE",
+            "angle_limit": 0.523599
+          }
+        }
+      ],
+      "keyframes": [],
+      "parent": null,
+      "mesh_params": {
+        "radius": 0.057,
+        "depth": 0.0035,
+        "vertices": 96
+      }
+    },
+    {
+      "id": 33,
+      "name": "Layer02_ClearWindowRing",
+      "type": "MESH",
+      "mesh_type": "torus",
+      "location": [
+        0.0,
+        -0.083,
+        0.018
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "scale": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "visible": true,
+      "material": 0,
+      "modifiers": [],
+      "keyframes": [],
+      "parent": null,
+      "mesh_params": {
+        "major_radius": 0.048,
+        "minor_radius": 0.003,
+        "major_segments": 96,
+        "minor_segments": 18
+      }
+    },
+    {
+      "id": 34,
+      "name": "Layer02_FastenerTL",
+      "type": "MESH",
+      "mesh_type": "cylinder",
+      "location": [
+        -0.079,
+        -0.255,
+        0.105
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "scale": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "visible": true,
+      "material": 3,
+      "modifiers": [
+        {
+          "type": "bevel",
+          "name": "FastenerTLEdge",
+          "bpy_type": "BEVEL",
+          "params": {
+            "width": 0.0014,
+            "segments": 4,
+            "limit_method": "ANGLE",
+            "angle_limit": 0.523599
+          }
+        }
+      ],
+      "keyframes": [],
+      "parent": null,
+      "mesh_params": {
+        "radius": 0.0085,
+        "depth": 0.022,
+        "vertices": 64
+      }
+    },
+    {
+      "id": 35,
+      "name": "Layer02_FastenerTR",
+      "type": "MESH",
+      "mesh_type": "cylinder",
+      "location": [
+        0.079,
+        -0.255,
+        0.105
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "scale": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "visible": true,
+      "material": 3,
+      "modifiers": [
+        {
+          "type": "bevel",
+          "name": "FastenerTREdge",
+          "bpy_type": "BEVEL",
+          "params": {
+            "width": 0.0014,
+            "segments": 4,
+            "limit_method": "ANGLE",
+            "angle_limit": 0.523599
+          }
+        }
+      ],
+      "keyframes": [],
+      "parent": null,
+      "mesh_params": {
+        "radius": 0.0085,
+        "depth": 0.022,
+        "vertices": 64
+      }
+    },
+    {
+      "id": 36,
+      "name": "Layer02_FastenerBL",
+      "type": "MESH",
+      "mesh_type": "cylinder",
+      "location": [
+        -0.079,
+        -0.255,
+        -0.105
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "scale": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "visible": true,
+      "material": 3,
+      "modifiers": [
+        {
+          "type": "bevel",
+          "name": "FastenerBLEdge",
+          "bpy_type": "BEVEL",
+          "params": {
+            "width": 0.0014,
+            "segments": 4,
+            "limit_method": "ANGLE",
+            "angle_limit": 0.523599
+          }
+        }
+      ],
+      "keyframes": [],
+      "parent": null,
+      "mesh_params": {
+        "radius": 0.0085,
+        "depth": 0.022,
+        "vertices": 64
+      }
+    },
+    {
+      "id": 37,
+      "name": "Layer02_FastenerBR",
+      "type": "MESH",
+      "mesh_type": "cylinder",
+      "location": [
+        0.079,
+        -0.255,
+        -0.105
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "scale": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "visible": true,
+      "material": 3,
+      "modifiers": [
+        {
+          "type": "bevel",
+          "name": "FastenerBREdge",
+          "bpy_type": "BEVEL",
+          "params": {
+            "width": 0.0014,
+            "segments": 4,
+            "limit_method": "ANGLE",
+            "angle_limit": 0.523599
+          }
+        }
+      ],
+      "keyframes": [],
+      "parent": null,
+      "mesh_params": {
+        "radius": 0.0085,
+        "depth": 0.022,
+        "vertices": 64
+      }
+    },
+    {
+      "id": 38,
+      "name": "FrontCollarTL",
+      "type": "MESH",
+      "mesh_type": "torus",
+      "location": [
+        -0.079,
+        -0.205,
+        0.105
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "scale": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "visible": true,
+      "material": 3,
+      "modifiers": [],
+      "keyframes": [],
+      "parent": null,
+      "mesh_params": {
+        "major_radius": 0.0065,
+        "minor_radius": 0.0015,
+        "major_segments": 64,
+        "minor_segments": 12
+      }
+    },
+    {
+      "id": 39,
+      "name": "FrontCollarTR",
+      "type": "MESH",
+      "mesh_type": "torus",
+      "location": [
+        0.079,
+        -0.205,
+        0.105
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "scale": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "visible": true,
+      "material": 3,
+      "modifiers": [],
+      "keyframes": [],
+      "parent": null,
+      "mesh_params": {
+        "major_radius": 0.0065,
+        "minor_radius": 0.0015,
+        "major_segments": 64,
+        "minor_segments": 12
+      }
+    },
+    {
+      "id": 40,
+      "name": "FrontCollarBL",
+      "type": "MESH",
+      "mesh_type": "torus",
+      "location": [
+        -0.079,
+        -0.205,
+        -0.105
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "scale": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "visible": true,
+      "material": 3,
+      "modifiers": [],
+      "keyframes": [],
+      "parent": null,
+      "mesh_params": {
+        "major_radius": 0.0065,
+        "minor_radius": 0.0015,
+        "major_segments": 64,
+        "minor_segments": 12
+      }
+    },
+    {
+      "id": 41,
+      "name": "FrontCollarBR",
+      "type": "MESH",
+      "mesh_type": "torus",
+      "location": [
+        0.079,
+        -0.205,
+        -0.105
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "scale": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "visible": true,
+      "material": 3,
+      "modifiers": [],
+      "keyframes": [],
+      "parent": null,
+      "mesh_params": {
+        "major_radius": 0.0065,
+        "minor_radius": 0.0015,
+        "major_segments": 64,
+        "minor_segments": 12
+      }
+    },
+    {
+      "id": 42,
+      "name": "StudioBackdrop",
+      "type": "MESH",
+      "mesh_type": "cube",
+      "location": [
+        0.0,
+        0.4,
+        0.02
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "scale": [
+        0.65,
+        0.015,
+        0.65
+      ],
+      "visible": true,
+      "material": 6,
+      "modifiers": [
+        {
+          "type": "bevel",
+          "name": "BackdropEdge",
+          "bpy_type": "BEVEL",
+          "params": {
+            "width": 0.05,
+            "segments": 4,
+            "limit_method": "ANGLE",
+            "angle_limit": 0.523599
+          }
+        }
+      ],
+      "keyframes": [],
+      "parent": null,
+      "mesh_params": {
+        "size": 2.0
+      }
+    }
+  ],
+  "materials": [
+    {
+      "id": 0,
+      "name": "AcrylicClear",
+      "type": "principled",
+      "color": [
+        0.58,
+        0.82,
+        1.0,
+        0.22
+      ],
+      "metallic": 0.0,
+      "roughness": 0.07,
+      "specular": 0.65,
+      "emission_color": [
+        0.0,
+        0.0,
+        0.0,
+        1.0
+      ],
+      "emission_strength": 0.0,
+      "alpha": 0.22,
+      "use_backface_culling": false
+    },
+    {
+      "id": 1,
+      "name": "BlackFoam",
+      "type": "principled",
+      "color": [
+        0.004,
+        0.005,
+        0.007,
+        1.0
+      ],
+      "metallic": 0.0,
+      "roughness": 0.96,
+      "specular": 0.12,
+      "emission_color": [
+        0.0,
+        0.0,
+        0.0,
+        1.0
+      ],
+      "emission_strength": 0.0,
+      "alpha": 1.0,
+      "use_backface_culling": false
+    },
+    {
+      "id": 2,
+      "name": "BlackPolymer",
+      "type": "principled",
+      "color": [
+        0.012,
+        0.015,
+        0.022,
+        1.0
+      ],
+      "metallic": 0.12,
+      "roughness": 0.36,
+      "specular": 0.38,
+      "emission_color": [
+        0.0,
+        0.0,
+        0.0,
+        1.0
+      ],
+      "emission_strength": 0.0,
+      "alpha": 1.0,
+      "use_backface_culling": false
+    },
+    {
+      "id": 3,
+      "name": "BrushedChrome",
+      "type": "principled",
+      "color": [
+        0.48,
+        0.52,
+        0.58,
+        1.0
+      ],
+      "metallic": 1.0,
+      "roughness": 0.16,
+      "specular": 0.55,
+      "emission_color": [
+        0.0,
+        0.0,
+        0.0,
+        1.0
+      ],
+      "emission_strength": 0.0,
+      "alpha": 1.0,
+      "use_backface_culling": false
+    },
+    {
+      "id": 4,
+      "name": "GunmetalEtched",
+      "type": "principled",
+      "color": [
+        0.025,
+        0.032,
+        0.045,
+        1.0
+      ],
+      "metallic": 0.86,
+      "roughness": 0.25,
+      "specular": 0.5,
+      "emission_color": [
+        0.0,
+        0.0,
+        0.0,
+        1.0
+      ],
+      "emission_strength": 0.0,
+      "alpha": 1.0,
+      "use_backface_culling": false
+    },
+    {
+      "id": 5,
+      "name": "DeepBlack",
+      "type": "principled",
+      "color": [
+        0.001,
+        0.0015,
+        0.002,
+        1.0
+      ],
+      "metallic": 0.25,
+      "roughness": 0.48,
+      "specular": 0.3,
+      "emission_color": [
+        0.0,
+        0.0,
+        0.0,
+        1.0
+      ],
+      "emission_strength": 0.0,
+      "alpha": 1.0,
+      "use_backface_culling": false
+    },
+    {
+      "id": 6,
+      "name": "NeonMagenta",
+      "type": "principled",
+      "color": [
+        0.95,
+        0.004,
+        0.42,
+        1.0
+      ],
+      "metallic": 0.0,
+      "roughness": 0.5,
+      "specular": 0.2,
+      "emission_color": [
+        0.75,
+        0.0,
+        0.28,
+        1.0
+      ],
+      "emission_strength": 0.18,
+      "alpha": 1.0,
+      "use_backface_culling": false
+    }
+  ],
+  "cameras": [
+    {
+      "id": 0,
+      "name": "HeroCamera",
+      "type": "PERSP",
+      "location": [
+        0.38,
+        -0.7,
+        0.35
+      ],
+      "rotation": [
+        65.0,
+        0.0,
+        29.0
+      ],
+      "focal_length": 58.0,
+      "sensor_width": 36.0,
+      "clip_start": 0.1,
+      "clip_end": 1000.0,
+      "dof_enabled": false,
+      "dof_focus_distance": 10.0,
+      "dof_aperture": 2.8,
+      "is_active": true
+    }
+  ],
+  "lights": [
+    {
+      "id": 0,
+      "name": "KeySoftbox",
+      "type": "AREA",
+      "location": [
+        -0.3,
+        -0.42,
+        0.55
+      ],
+      "rotation": [
+        48.0,
+        0.0,
+        -32.0
+      ],
+      "color": [
+        1.0,
+        0.82,
+        0.72
+      ],
+      "power": 780.0,
+      "size": 1.0,
+      "size_y": 1.0,
+      "shape": "RECTANGLE"
+    },
+    {
+      "id": 1,
+      "name": "FillSoftbox",
+      "type": "AREA",
+      "location": [
+        0.42,
+        -0.25,
+        0.1
+      ],
+      "rotation": [
+        82.0,
+        0.0,
+        58.0
+      ],
+      "color": [
+        0.45,
+        0.68,
+        1.0
+      ],
+      "power": 420.0,
+      "size": 1.0,
+      "size_y": 1.0,
+      "shape": "RECTANGLE"
+    },
+    {
+      "id": 2,
+      "name": "RimSoftbox",
+      "type": "AREA",
+      "location": [
+        -0.22,
+        0.1,
+        0.48
+      ],
+      "rotation": [
+        35.0,
+        0.0,
+        -18.0
+      ],
+      "color": [
+        1.0,
+        0.22,
+        0.72
+      ],
+      "power": 620.0,
+      "size": 1.0,
+      "size_y": 1.0,
+      "shape": "RECTANGLE"
+    }
+  ],
+  "collections": [
+    {
+      "id": 0,
+      "name": "Collection",
+      "objects": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19,
+        20,
+        21,
+        22,
+        23,
+        24,
+        25,
+        26,
+        27,
+        28,
+        29,
+        30,
+        31,
+        32,
+        33,
+        34,
+        35,
+        36,
+        37,
+        38,
+        39,
+        40,
+        41,
+        42
+      ],
+      "visible": true
+    }
+  ],
+  "metadata": {
+    "created": "2026-08-10T15:34:06.523476",
+    "modified": "2026-08-10T15:45:41.372375",
+    "software": "blender-cli 1.0"
+  }
+}

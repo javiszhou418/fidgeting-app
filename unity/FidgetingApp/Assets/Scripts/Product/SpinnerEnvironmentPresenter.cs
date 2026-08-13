@@ -260,9 +260,9 @@ namespace FidgetingApp.Product
                 new Color(0.122f, 0.126f, 0.120f),
                 new Color(0.050f, 0.052f, 0.049f),
                 new Color(0.013f, 0.014f, 0.013f),
-                0.66f,
+                0.56f,
                 0.20f,
-                0.30f,
+                0.28f,
                 SpinnerGroundingStageShape.SoftSquare,
                 1.42f,
                 0.065f,
@@ -271,11 +271,11 @@ namespace FidgetingApp.Product
                 new SpinnerEnvironmentLightPreset(
                     "Key_UpperLeft",
                     new Color(0.78f, 0.84f, 0.82f),
-                    0.88f),
+                    0.54f),
                 new SpinnerEnvironmentLightPreset(
                     "CoolFill",
                     new Color(0.50f, 0.62f, 0.70f),
-                    0.32f)),
+                    0.42f)),
             new SpinnerEnvironmentProfile(
                 "magnetic-fan-card",
                 FanCardScenePath,
@@ -286,10 +286,10 @@ namespace FidgetingApp.Product
                 1.08f,
                 0.68f,
                 false,
-                new Color(0.145f, 0.132f, 0.118f),
-                new Color(0.058f, 0.054f, 0.051f),
-                new Color(0.015f, 0.014f, 0.013f),
-                0.78f,
+                new Color(0.30f, 0.275f, 0.24f),
+                new Color(0.14f, 0.125f, 0.105f),
+                new Color(0.035f, 0.031f, 0.026f),
+                0.82f,
                 0.52f,
                 0.58f,
                 SpinnerGroundingStageShape.SoftSquare,
@@ -300,11 +300,11 @@ namespace FidgetingApp.Product
                 new SpinnerEnvironmentLightPreset(
                     "LargeSoftKey_UpperLeft",
                     new Color(1.00f, 0.88f, 0.76f),
-                    0.74f),
+                    0.96f),
                 new SpinnerEnvironmentLightPreset(
                     "CoolBroadFill",
                     new Color(0.58f, 0.68f, 0.78f),
-                    0.40f))
+                    0.34f))
         };
 
         public static IReadOnlyList<SpinnerEnvironmentProfile> Profiles => profiles;
@@ -377,6 +377,7 @@ namespace FidgetingApp.Product
         private Texture2D rightForegroundTexture;
         private Texture2D leftForegroundTexture;
         private SpinnerEnvironmentProfile currentProfile;
+        private SpinnerEnvironmentThemeProfile currentTheme;
         private readonly Vector3[] frustumCorners = new Vector3[4];
         private Matrix4x4 previousProjectionMatrix;
         private bool hasPreviousProjection;
@@ -389,6 +390,12 @@ namespace FidgetingApp.Product
         private Vector3 nearStarfieldBasePosition;
         private Vector3 rightForegroundBasePosition;
         private Vector3 leftForegroundBasePosition;
+        private Vector3 backgroundBaseScale;
+        private Vector3 midgroundBaseScale;
+        private Vector3 deepStarfieldBaseScale;
+        private Vector3 nearStarfieldBaseScale;
+        private Vector3 rightForegroundBaseScale;
+        private Vector3 leftForegroundBaseScale;
         private Vector2 parallaxTilt;
         private float farParallaxPixels;
         private float midParallaxPixels;
@@ -400,6 +407,15 @@ namespace FidgetingApp.Product
         private MaterialPropertyBlock backgroundGlowProperties;
         private float framingVisibility = 1f;
         private float targetFramingVisibility = 1f;
+        private float transitionStartFramingVisibility = 1f;
+        private float framingTransitionElapsed;
+        private bool framingTransitionActive;
+
+        public const float DetailBackgroundScale = 1.16f;
+        public const float DetailMidgroundScale = 1.20f;
+        public const float DetailDeepStarfieldScale = 1.035f;
+        public const float DetailNearStarfieldScale = 1.075f;
+        public const float DetailForegroundScale = 1.10f;
 
         public Texture2D BackgroundTexture => backgroundTexture;
         public MeshRenderer BackgroundRenderer => backgroundRenderer;
@@ -411,6 +427,10 @@ namespace FidgetingApp.Product
         public SpinnerSceneParallaxController ParallaxController { get; private set; }
         public SpinnerGroundingStage GroundingStage { get; private set; }
         public SpinnerImageBasedLightingController ImageBasedLighting { get; private set; }
+        public string CurrentThemeId => string.IsNullOrEmpty(currentTheme.Id)
+            ? SpinnerEnvironmentThemeCatalog.CanyonId
+            : currentTheme.Id;
+        public float FramingVisibility => framingVisibility;
 
         public static SpinnerEnvironmentPresenter Install(string scenePath)
         {
@@ -444,9 +464,36 @@ namespace FidgetingApp.Product
         {
             targetCamera = GetComponent<Camera>();
             currentProfile = profile;
-            backgroundTexture = Resources.Load<Texture2D>(profile.BackgroundResourcePath);
-            rightForegroundTexture = Resources.Load<Texture2D>(RightForegroundResourcePath);
-            leftForegroundTexture = Resources.Load<Texture2D>(LeftForegroundResourcePath);
+            SpinnerEnvironmentThemeCatalog.TryGet(
+                PlayerPrefs.GetString(
+                    SpinnerEnvironmentThemeCatalog.PreferenceKey,
+                    SpinnerEnvironmentThemeCatalog.CanyonId),
+                out SpinnerEnvironmentThemeProfile theme);
+            ApplyTheme(theme);
+        }
+
+        public bool ApplyTheme(string themeId)
+        {
+            SpinnerEnvironmentThemeCatalog.TryGet(
+                themeId,
+                out SpinnerEnvironmentThemeProfile theme);
+            return ApplyTheme(theme);
+        }
+
+        private bool ApplyTheme(SpinnerEnvironmentThemeProfile theme)
+        {
+            if (targetCamera == null)
+            {
+                targetCamera = GetComponent<Camera>();
+            }
+            currentTheme = theme;
+            backgroundTexture = Resources.Load<Texture2D>(theme.BackgroundResourcePath);
+            rightForegroundTexture = theme.HasForegroundLayers
+                ? Resources.Load<Texture2D>(theme.RightForegroundResourcePath)
+                : null;
+            leftForegroundTexture = theme.HasForegroundLayers
+                ? Resources.Load<Texture2D>(theme.LeftForegroundResourcePath)
+                : null;
             Material backgroundMaterial = Resources.Load<Material>(
                 SpinnerEnvironmentCatalog.ParallaxMaterialResourcePath);
             Material starfieldMaterial = Resources.Load<Material>(
@@ -454,19 +501,21 @@ namespace FidgetingApp.Product
 
             if (backgroundTexture == null
                 || backgroundMaterial == null
-                || rightForegroundTexture == null
-                || leftForegroundTexture == null)
+                || (theme.HasForegroundLayers
+                    && (rightForegroundTexture == null
+                        || leftForegroundTexture == null)))
             {
                 Debug.LogError(
                     "[FidgetingApp] Environment assets are incomplete: "
-                    + $"texture={profile.BackgroundResourcePath}, "
-                    + $"leftForeground={LeftForegroundResourcePath}, "
-                    + $"rightForeground={RightForegroundResourcePath}, "
+                    + $"theme={theme.Id}, "
+                    + $"texture={theme.BackgroundResourcePath}, "
+                    + $"leftForeground={theme.LeftForegroundResourcePath}, "
+                    + $"rightForeground={theme.RightForegroundResourcePath}, "
                     + "material="
                     + SpinnerEnvironmentCatalog.ParallaxMaterialResourcePath
                     + ".");
                 SetBackgroundActive(false);
-                return;
+                return false;
             }
 
             EnsureBackgroundObject();
@@ -474,22 +523,29 @@ namespace FidgetingApp.Product
             ConfigureRendererProperties(
                 backgroundRenderer,
                 ResolveExperienceTint(targetCamera.backgroundColor),
-                profile.Saturation,
+                ResolveThemeSaturation(currentProfile, theme),
                 false);
             backgroundObject.SetActive(true);
 
-            ConfigureMidground(profile, backgroundMaterial);
-            ConfigureDepthLayers(profile, backgroundMaterial, starfieldMaterial);
+            ConfigureMidground(currentProfile, theme, backgroundMaterial);
+            ConfigureDepthLayers(
+                currentProfile,
+                theme,
+                backgroundMaterial,
+                starfieldMaterial);
 
-            DisableLegacyBackdrop(profile);
-            GroundingStage = SpinnerGroundingStage.Install(profile);
+            DisableLegacyBackdrop(currentProfile);
+            GroundingStage = SpinnerGroundingStage.Install(currentProfile);
             ImageBasedLighting = GetComponent<SpinnerImageBasedLightingController>();
             if (ImageBasedLighting == null)
             {
                 ImageBasedLighting = gameObject.AddComponent<
                     SpinnerImageBasedLightingController>();
             }
-            ImageBasedLighting.Configure(backgroundTexture, profile, GroundingStage);
+            ImageBasedLighting.Configure(
+                backgroundTexture,
+                currentProfile,
+                GroundingStage);
 
             ParallaxController = GetComponent<SpinnerSceneParallaxController>();
             if (ParallaxController == null)
@@ -498,6 +554,16 @@ namespace FidgetingApp.Product
             }
             ParallaxController.Configure(this, ImageBasedLighting);
             ResizeBackground(true);
+            return true;
+        }
+
+        private static float ResolveThemeSaturation(
+            SpinnerEnvironmentProfile profile,
+            SpinnerEnvironmentThemeProfile theme)
+        {
+            return theme.Saturation >= 0f
+                ? Mathf.Clamp01(theme.Saturation)
+                : profile.Saturation;
         }
 
         public void SetExperienceTint(Color backgroundAccent)
@@ -611,15 +677,37 @@ namespace FidgetingApp.Product
 
         public void SetLibraryPreviewActive(bool active, bool immediate = false)
         {
-            targetFramingVisibility = active ? 1f : 0f;
+            float targetVisibility = active ? 1f : 0f;
             GroundingStage?.SetLibraryPreviewActive(active, immediate);
             ImageBasedLighting?.SetLibraryPreviewActive(active);
             ParallaxController?.SetLibraryPreviewActive(active, immediate);
             if (immediate)
             {
-                framingVisibility = targetFramingVisibility;
+                framingTransitionActive = false;
+                targetFramingVisibility = targetVisibility;
+                framingVisibility = targetVisibility;
                 ApplyParallaxOffsets();
+                return;
             }
+
+            if (Mathf.Approximately(targetFramingVisibility, targetVisibility))
+            {
+                return;
+            }
+
+            transitionStartFramingVisibility = framingVisibility;
+            targetFramingVisibility = targetVisibility;
+            framingTransitionElapsed = 0f;
+            framingTransitionActive = true;
+        }
+
+        public void SetDetailEntranceProgressForPreview(float progress)
+        {
+            framingTransitionActive = false;
+            framingVisibility = 1f - Mathf.Clamp01(progress);
+            targetFramingVisibility = framingVisibility;
+            GroundingStage?.SetDetailEntranceProgressForPreview(progress);
+            ApplyParallaxOffsets();
         }
 
         public void BeginLibraryPageExit(float direction)
@@ -659,14 +747,22 @@ namespace FidgetingApp.Product
 
         private void LateUpdate()
         {
-            float transitionBlend = 1f - Mathf.Exp(-Time.unscaledDeltaTime * 7.2f);
-            framingVisibility = Mathf.Lerp(
-                framingVisibility,
-                targetFramingVisibility,
-                transitionBlend);
-            if (Mathf.Abs(framingVisibility - targetFramingVisibility) < 0.001f)
+            if (framingTransitionActive)
             {
-                framingVisibility = targetFramingVisibility;
+                framingTransitionElapsed += Mathf.Max(
+                    0f,
+                    Time.unscaledDeltaTime);
+                float progress = SpinnerPresentationTransition.ResolveProgress(
+                    framingTransitionElapsed);
+                framingVisibility = Mathf.Lerp(
+                    transitionStartFramingVisibility,
+                    targetFramingVisibility,
+                    progress);
+                if (progress >= 1f)
+                {
+                    framingVisibility = targetFramingVisibility;
+                    framingTransitionActive = false;
+                }
             }
             ResizeBackground(false);
             ApplyParallaxOffsets();
@@ -747,9 +843,10 @@ namespace FidgetingApp.Product
 
         private void ConfigureMidground(
             SpinnerEnvironmentProfile profile,
+            SpinnerEnvironmentThemeProfile theme,
             Material backgroundMaterial)
         {
-            if (!profile.LayeredParallax)
+            if (!profile.LayeredParallax && !theme.LayeredMidground)
             {
                 if (midgroundObject != null)
                 {
@@ -773,7 +870,7 @@ namespace FidgetingApp.Product
 
             midgroundMaterial = new Material(backgroundMaterial)
             {
-                name = $"{profile.ModelId}_EnvironmentMidground_Runtime",
+                name = $"{profile.ModelId}_{theme.Id}_EnvironmentMidground_Runtime",
                 renderQueue = (int)RenderQueue.Transparent
             };
             midgroundMaterial.SetFloat("_SrcBlend", (float)BlendMode.SrcAlpha);
@@ -783,19 +880,21 @@ namespace FidgetingApp.Product
             ConfigureRendererProperties(
                 midgroundRenderer,
                 ResolveExperienceTint(targetCamera.backgroundColor),
-                profile.Saturation,
+                ResolveThemeSaturation(profile, theme),
                 true);
             midgroundObject.SetActive(true);
         }
 
         private void ConfigureDepthLayers(
             SpinnerEnvironmentProfile profile,
+            SpinnerEnvironmentThemeProfile theme,
             Material backgroundMaterial,
             Material starfieldSourceMaterial)
         {
             EnsureDepthLayerObjects();
 
-            bool hasStarfield = starfieldSourceMaterial != null
+            bool hasStarfield = theme.DynamicStarfield
+                && starfieldSourceMaterial != null
                 && starfieldSourceMaterial.shader != null;
             if (!hasStarfield)
             {
@@ -813,7 +912,7 @@ namespace FidgetingApp.Product
                 DestroyRuntimeMaterial(ref deepStarfieldMaterial);
                 deepStarfieldMaterial = CreateStarfieldMaterial(
                     starfieldSourceMaterial,
-                    $"{profile.ModelId}_StarsDeep_Runtime",
+                    $"{profile.ModelId}_{theme.Id}_StarsDeep_Runtime",
                     new Color(0.58f, 0.66f, 0.62f, 0.62f),
                     0.028f,
                     58f,
@@ -825,7 +924,7 @@ namespace FidgetingApp.Product
                 DestroyRuntimeMaterial(ref nearStarfieldMaterial);
                 nearStarfieldMaterial = CreateStarfieldMaterial(
                     starfieldSourceMaterial,
-                    $"{profile.ModelId}_StarsNear_Runtime",
+                    $"{profile.ModelId}_{theme.Id}_StarsNear_Runtime",
                     new Color(0.74f, 0.82f, 0.77f, 0.78f),
                     0.020f,
                     82f,
@@ -837,31 +936,40 @@ namespace FidgetingApp.Product
                 nearStarfieldObject.SetActive(true);
             }
 
+            if (!theme.HasForegroundLayers)
+            {
+                DestroyRuntimeMaterial(ref rightForegroundMaterial);
+                DestroyRuntimeMaterial(ref leftForegroundMaterial);
+                rightForegroundObject.SetActive(false);
+                leftForegroundObject.SetActive(false);
+                return;
+            }
+
             DestroyRuntimeMaterial(ref rightForegroundMaterial);
             rightForegroundMaterial = CreateForegroundMaterial(
                 backgroundMaterial,
-                $"{profile.ModelId}_RightForeground_Runtime",
+                $"{profile.ModelId}_{theme.Id}_RightForeground_Runtime",
                 (int)RenderQueue.Transparent + 1);
             rightForegroundRenderer.sharedMaterial = rightForegroundMaterial;
             ConfigureLayerRendererProperties(
                 rightForegroundRenderer,
                 rightForegroundTexture,
                 new Color(0.62f, 0.64f, 0.63f, 1f),
-                Mathf.Min(profile.Saturation, 0.52f),
+                Mathf.Min(ResolveThemeSaturation(profile, theme), 0.52f),
                 0.90f,
                 true);
 
             DestroyRuntimeMaterial(ref leftForegroundMaterial);
             leftForegroundMaterial = CreateForegroundMaterial(
                 backgroundMaterial,
-                $"{profile.ModelId}_LeftForeground_Runtime",
+                $"{profile.ModelId}_{theme.Id}_LeftForeground_Runtime",
                 (int)RenderQueue.Transparent + 2);
             leftForegroundRenderer.sharedMaterial = leftForegroundMaterial;
             ConfigureLayerRendererProperties(
                 leftForegroundRenderer,
                 leftForegroundTexture,
                 new Color(0.54f, 0.56f, 0.55f, 1f),
-                Mathf.Min(profile.Saturation, 0.46f),
+                Mathf.Min(ResolveThemeSaturation(profile, theme), 0.46f),
                 0.94f,
                 true);
 
@@ -1183,6 +1291,7 @@ namespace FidgetingApp.Product
             backgroundTransform.localRotation = Quaternion.identity;
             backgroundTransform.localScale =
                 new Vector3(backgroundWidth, backgroundHeight, 1f);
+            backgroundBaseScale = backgroundTransform.localScale;
 
             if (midgroundObject != null && midgroundObject.activeSelf)
             {
@@ -1195,6 +1304,7 @@ namespace FidgetingApp.Product
                 midgroundTransform.localRotation = Quaternion.identity;
                 midgroundTransform.localScale =
                     new Vector3(backgroundWidth, backgroundHeight, 1f);
+                midgroundBaseScale = midgroundTransform.localScale;
             }
 
             if (deepStarfieldObject != null)
@@ -1209,6 +1319,7 @@ namespace FidgetingApp.Product
                     backgroundWidth,
                     backgroundHeight,
                     1.015f);
+                deepStarfieldBaseScale = deepStarfieldObject.transform.localScale;
             }
 
             if (nearStarfieldObject != null)
@@ -1223,6 +1334,7 @@ namespace FidgetingApp.Product
                     backgroundWidth,
                     backgroundHeight,
                     1.020f);
+                nearStarfieldBaseScale = nearStarfieldObject.transform.localScale;
             }
 
             if (rightForegroundObject != null)
@@ -1237,6 +1349,7 @@ namespace FidgetingApp.Product
                     backgroundWidth,
                     backgroundHeight,
                     1.13f);
+                rightForegroundBaseScale = rightForegroundObject.transform.localScale;
             }
 
             if (leftForegroundObject != null)
@@ -1251,6 +1364,7 @@ namespace FidgetingApp.Product
                     backgroundWidth,
                     backgroundHeight,
                     1.16f);
+                leftForegroundBaseScale = leftForegroundObject.transform.localScale;
             }
 
             currentViewportWidth = viewportWidth;
@@ -1332,6 +1446,30 @@ namespace FidgetingApp.Product
 
             float retreat = 1f - framingVisibility;
             float easedRetreat = retreat * retreat * (3f - 2f * retreat);
+            ApplyDetailDepthScale(
+                backgroundObject,
+                backgroundBaseScale,
+                DetailBackgroundScale);
+            ApplyDetailDepthScale(
+                midgroundObject,
+                midgroundBaseScale,
+                DetailMidgroundScale);
+            ApplyDetailDepthScale(
+                deepStarfieldObject,
+                deepStarfieldBaseScale,
+                DetailDeepStarfieldScale);
+            ApplyDetailDepthScale(
+                nearStarfieldObject,
+                nearStarfieldBaseScale,
+                DetailNearStarfieldScale);
+            ApplyDetailDepthScale(
+                rightForegroundObject,
+                rightForegroundBaseScale,
+                DetailForegroundScale);
+            ApplyDetailDepthScale(
+                leftForegroundObject,
+                leftForegroundBaseScale,
+                DetailForegroundScale);
             if (rightForegroundObject != null)
             {
                 rightForegroundObject.transform.localPosition += new Vector3(
@@ -1346,6 +1484,22 @@ namespace FidgetingApp.Product
                     -currentViewportHeight * 0.10f * easedRetreat,
                     0f);
             }
+        }
+
+        private void ApplyDetailDepthScale(
+            GameObject layer,
+            Vector3 baseScale,
+            float detailScale)
+        {
+            if (layer == null || !layer.activeSelf)
+            {
+                return;
+            }
+
+            layer.transform.localScale = baseScale
+                * SpinnerPresentationTransition.ResolveDetailDepthScale(
+                    framingVisibility,
+                    detailScale);
         }
 
         private static void SetLayerTransform(
@@ -1446,13 +1600,16 @@ namespace FidgetingApp.Product
 
             if (midgroundObject != null)
             {
-                midgroundObject.SetActive(active && currentProfile.LayeredParallax);
+                midgroundObject.SetActive(
+                    active
+                    && (currentProfile.LayeredParallax
+                        || currentTheme.LayeredMidground));
             }
 
-            deepStarfieldObject?.SetActive(active);
-            nearStarfieldObject?.SetActive(active);
-            rightForegroundObject?.SetActive(active);
-            leftForegroundObject?.SetActive(active);
+            deepStarfieldObject?.SetActive(active && currentTheme.DynamicStarfield);
+            nearStarfieldObject?.SetActive(active && currentTheme.DynamicStarfield);
+            rightForegroundObject?.SetActive(active && currentTheme.HasForegroundLayers);
+            leftForegroundObject?.SetActive(active && currentTheme.HasForegroundLayers);
         }
 
         private static void DestroyRuntimeMaterial(ref Material material)

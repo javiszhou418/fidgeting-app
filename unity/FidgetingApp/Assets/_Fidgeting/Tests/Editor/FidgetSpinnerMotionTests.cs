@@ -132,6 +132,48 @@ namespace ThreeBladeEDC.Tests.Editor
         }
 
         [Test]
+        public void FallbackSpinTouchRegion_PreservesAUsableOuterOrbitBand()
+        {
+            const float shortSide = 1000f;
+            Vector2 center = new Vector2(500f, 1200f);
+
+            Assert.That(
+                FidgetSpinnerMotion.DefaultFallbackTouchRadiusFraction,
+                Is.EqualTo(0.36f));
+            Assert.That(
+                FidgetSpinnerMotion.DefaultFallbackTouchRadiusFraction
+                    - ProductFramingCatalog.CircularDetailFraction * 0.5f,
+                Is.EqualTo(0.04f).Within(0.0001f),
+                "The fallback keeps a small tolerance outside the visible model.");
+            Assert.That(
+                0.5f - FidgetSpinnerMotion.DefaultFallbackTouchRadiusFraction,
+                Is.EqualTo(0.14f).Within(0.0001f),
+                "Each side keeps a substantial camera-orbit band.");
+            Assert.That(
+                FidgetSpinnerMotion.IsWithinFallbackSpinTouchRegion(
+                    center + Vector2.right * 359f,
+                    center,
+                    shortSide,
+                    2200f),
+                Is.True);
+            Assert.That(
+                FidgetSpinnerMotion.IsWithinFallbackSpinTouchRegion(
+                    center + Vector2.right * 361f,
+                    center,
+                    shortSide,
+                    2200f),
+                Is.False);
+            Assert.That(
+                FidgetSpinnerMotion.IsWithinFallbackSpinTouchRegion(
+                    center + Vector2.right * 440f,
+                    center,
+                    shortSide,
+                    2200f),
+                Is.False,
+                "A point captured by the old 48% radius must now orbit.");
+        }
+
+        [Test]
         public void DragServo_SlowsFasterThanItAccelerates()
         {
             float accelerated = FidgetSpinnerMotion.FollowDragSpeed(

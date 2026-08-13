@@ -27,6 +27,8 @@
 # Unity crash and profiling artifacts
 sysinfo.txt
 *.stacktrace
+mono_crash.*.json
+.codex-quarantine/
 
 # Build outputs and platform artifacts
 *.apk
@@ -37,3 +39,7 @@ sysinfo.txt
 # macOS metadata
 .DS_Store
 
+# Local authoring junk
+__pycache__/
+*.pyc
+*.blend1

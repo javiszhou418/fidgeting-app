@@ -149,10 +149,14 @@ namespace FidgetingApp.Tests.Editor
             StringAssert.Contains("BuildOptions.Development | BuildOptions.ConnectWithProfiler", pipeline);
             StringAssert.Contains("Builds/iOS/FidgetingAppDevelopment", pipeline);
             StringAssert.Contains("enableFrameTimingStats: 1", projectSettings);
-            StringAssert.Contains("devicectl device info details", installer);
+            StringAssert.Contains(
+                "run_devicectl_json \"$DEVICE_DETAILS_JSON\" device info details",
+                installer);
             StringAssert.Contains("result.connectionProperties.tunnelState", installer);
             StringAssert.Contains("result.deviceProperties.ddiServicesAvailable", installer);
-            StringAssert.Contains("devicectl device info lockState", installer);
+            StringAssert.Contains(
+                "run_devicectl_json \"$DEVICE_LOCK_JSON\" device info lockState",
+                installer);
             StringAssert.Contains("result.passcodeRequired", installer);
             StringAssert.Contains("--development", installer);
             StringAssert.Contains("--no-launch", installer);

@@ -9,6 +9,8 @@ LOG_PATH="/tmp/fidgeting-app-ios-export.log"
 DEVICE_JSON="/tmp/fidgeting-app-ios-devices.json"
 DEVICE_DETAILS_JSON="/tmp/fidgeting-app-ios-device-details.json"
 DEVICE_LOCK_JSON="/tmp/fidgeting-app-ios-lock-state.json"
+DEVICE_INSTALL_JSON="/tmp/fidgeting-app-ios-install.json"
+DEVICE_LAUNCH_JSON="/tmp/fidgeting-app-ios-launch.json"
 LOCK_DIR="/tmp/fidgeting-app-ios-pipeline.lock"
 BUNDLE_ID="com.jiaweizhou.fidgetspinner.codex"
 BUILD_MANIFEST_NAME="FidgetingBuildManifest.json"
@@ -51,13 +53,33 @@ if ! mkdir "$LOCK_DIR" 2>/dev/null; then
 fi
 trap 'rmdir "$LOCK_DIR" 2>/dev/null || true' EXIT INT TERM
 
+# Xcode 26.4 can emit a CoreDevice provider warning and return 198 even though
+# devicectl writes a complete JSON response with info.outcome == success. Keep
+# set -e strict for real failures, but accept that one inconsistent exit only
+# when the just-written result independently proves the command succeeded.
+run_devicectl_json() {
+  local json_path="$1"
+  shift
+  : > "$json_path"
+  if xcrun devicectl "$@" --json-output "$json_path" >/dev/null; then
+    return 0
+  else
+    local command_status="$?"
+    local outcome="$(plutil -extract info.outcome raw -o - "$json_path" 2>/dev/null || true)"
+    if [[ "$outcome" == "success" ]]; then
+      echo "devicectl returned $command_status after writing a successful JSON result; continuing." >&2
+      return 0
+    fi
+    return "$command_status"
+  fi
+}
+
 # Resolve live device, DDI and lock state before starting an expensive Unity or
 # Xcode build. `list devices` is cached; `info details` performs the real tunnel
 # handshake, while `info lockState` prevents a predictable launch failure.
-xcrun devicectl list devices \
+run_devicectl_json "$DEVICE_JSON" list devices \
   --filter "hardwareProperties.platform == 'iOS'" \
-  --timeout 30 \
-  --json-output "$DEVICE_JSON" >/dev/null
+  --timeout 30
 DEVICE_ID="$(plutil -extract result.devices.0.identifier raw -o - "$DEVICE_JSON" 2>/dev/null || true)"
 DEVICE_UDID="$(plutil -extract result.devices.0.hardwareProperties.udid raw -o - "$DEVICE_JSON" 2>/dev/null || true)"
 if [[ -z "$DEVICE_ID" || -z "$DEVICE_UDID" ]]; then
@@ -65,10 +87,9 @@ if [[ -z "$DEVICE_ID" || -z "$DEVICE_UDID" ]]; then
   exit 68
 fi
 
-xcrun devicectl device info details \
+run_devicectl_json "$DEVICE_DETAILS_JSON" device info details \
   --device "$DEVICE_ID" \
-  --timeout 30 \
-  --json-output "$DEVICE_DETAILS_JSON" >/dev/null
+  --timeout 30
 DEVICE_UDID="$(plutil -extract result.hardwareProperties.udid raw -o - "$DEVICE_DETAILS_JSON" 2>/dev/null || print -r -- "$DEVICE_UDID")"
 TUNNEL_STATE="$(plutil -extract result.connectionProperties.tunnelState raw -o - "$DEVICE_DETAILS_JSON" 2>/dev/null || true)"
 DDI_AVAILABLE="$(plutil -extract result.deviceProperties.ddiServicesAvailable raw -o - "$DEVICE_DETAILS_JSON" 2>/dev/null || true)"
@@ -78,10 +99,9 @@ if [[ "$TUNNEL_STATE" != "connected" || "$DDI_AVAILABLE" != "true" ]]; then
   exit 68
 fi
 
-xcrun devicectl device info lockState \
+run_devicectl_json "$DEVICE_LOCK_JSON" device info lockState \
   --device "$DEVICE_ID" \
-  --timeout 30 \
-  --json-output "$DEVICE_LOCK_JSON" >/dev/null
+  --timeout 30
 PASSCODE_REQUIRED="$(plutil -extract result.passcodeRequired raw -o - "$DEVICE_LOCK_JSON" 2>/dev/null || true)"
 if (( LAUNCH_AFTER_INSTALL )) && [[ "$PASSCODE_REQUIRED" == "true" ]]; then
   echo "The paired iPhone is locked. Unlock it before building and launching, or use --no-launch for recovery installation only." >&2
@@ -169,9 +189,12 @@ if [[ "$BUILT_BUILD_NUMBER" != "$MANIFEST_BUILD_NUMBER" ]]; then
   exit 70
 fi
 
-xcrun devicectl device install app --device "$DEVICE_UDID" "$APP_PATH" --timeout 60
+run_devicectl_json "$DEVICE_INSTALL_JSON" device install app \
+  --device "$DEVICE_UDID" \
+  "$APP_PATH" \
+  --timeout 60
 if (( LAUNCH_AFTER_INSTALL )); then
-  xcrun devicectl device process launch \
+  run_devicectl_json "$DEVICE_LAUNCH_JSON" device process launch \
     --device "$DEVICE_UDID" \
     --terminate-existing \
     "$BUNDLE_ID" \

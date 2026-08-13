@@ -1,5 +1,6 @@
 import SwiftUI
 import CoreText
+import ImageIO
 import UIKit
 
 /// Shared visual tokens for the native product shell.
@@ -171,15 +172,31 @@ struct ProductBackdrop: View {
     }
 }
 
+private struct ProductStaticSurfaceModeKey: EnvironmentKey {
+    static let defaultValue = false
+}
+
+extension EnvironmentValues {
+    var productUsesStaticSurfaces: Bool {
+        get { self[ProductStaticSurfaceModeKey.self] }
+        set { self[ProductStaticSurfaceModeKey.self] = newValue }
+    }
+}
+
 struct ProductGlassModifier: ViewModifier {
     let cornerRadius: CGFloat
     let tint: Color
     let interactive: Bool
+    @Environment(\.productUsesStaticSurfaces) private var usesStaticSurfaces
 
     @ViewBuilder
     func body(content: Content) -> some View {
         let shape = RoundedRectangle(cornerRadius: cornerRadius, style: .continuous)
-        if #available(iOS 26.0, *) {
+        if usesStaticSurfaces {
+            content
+                .background(tint, in: shape)
+                .background(Color.white.opacity(0.032), in: shape)
+        } else if #available(iOS 26.0, *) {
             content
                 .glassEffect(
                     .regular.tint(tint).interactive(interactive),
@@ -193,6 +210,10 @@ struct ProductGlassModifier: ViewModifier {
 }
 
 extension View {
+    func productStaticSurfaceMode(_ enabled: Bool = true) -> some View {
+        environment(\.productUsesStaticSurfaces, enabled)
+    }
+
     func productGlass(
         cornerRadius: CGFloat = 20,
         tint: Color = Color.white.opacity(0.014),
@@ -316,14 +337,10 @@ struct ProductPageIndicator<Item: Hashable>: View {
 
 struct ProductPrimaryActionLabel: View {
     let title: String
-    let symbol: String
     var accent = Color.white
 
     var body: some View {
-        HStack(spacing: FidgetUITokens.Spacing.standard) {
-            Text(title)
-            Image(systemName: symbol)
-        }
+        Text(title)
         .font(.product(.headline))
         .foregroundStyle(.white)
         .frame(maxWidth: .infinity)
@@ -484,6 +501,64 @@ struct ProductProgressGauge: View {
         .accessibilityElement(children: .ignore)
         .accessibilityLabel("进度")
         .accessibilityValue("\(Int((clampedValue * 100).rounded()))%")
+    }
+}
+
+/// Shared compact milestone gauge for the persistent product chrome.
+///
+/// Endpoint numerals use the product caption-2 type ramp (11 pt at the default
+/// content size) instead of feature-local microtype so the same values remain
+/// legible in both top-level and tab-bar-adjacent placements.
+struct ProductMilestoneProgressGauge: View {
+    let previousLevel: Int
+    let currentLevel: Int
+    let nextLevel: Int
+    let progress: Double
+    var accent = Color.white
+
+    private var clampedProgress: Double {
+        min(1, max(0, progress))
+    }
+
+    var body: some View {
+        HStack(spacing: 7) {
+            endpointLabel(previousLevel, opacity: 0.58)
+
+            GeometryReader { proxy in
+                let width = max(1, proxy.size.width)
+                let markerX = min(
+                    width - 3,
+                    max(3, width * CGFloat(clampedProgress)))
+
+                ZStack(alignment: .leading) {
+                    ProductProgressGauge(value: clampedProgress, accent: accent)
+                        .frame(height: 4)
+
+                    Circle()
+                        .fill(Color.white)
+                        .frame(width: 6, height: 6)
+                        .overlay(Circle().stroke(accent.opacity(0.72), lineWidth: 1.5))
+                        .shadow(color: accent.opacity(0.42), radius: 3)
+                        .position(x: markerX, y: 6)
+                }
+            }
+            .frame(height: 12)
+
+            endpointLabel(nextLevel, opacity: 0.72)
+        }
+        .frame(minHeight: 16)
+        .accessibilityElement(children: .ignore)
+        .accessibilityLabel("成长里程碑")
+        .accessibilityValue(
+            "上一级 \(previousLevel)，当前 \(currentLevel)，下一级 \(nextLevel)")
+    }
+
+    private func endpointLabel(_ level: Int, opacity: Double) -> some View {
+        Text("\(level)")
+            .font(.product(.caption2, weight: .bold).monospacedDigit())
+            .foregroundStyle(Color.white.opacity(opacity))
+            .lineLimit(1)
+            .fixedSize(horizontal: true, vertical: false)
     }
 }
 
@@ -1015,6 +1090,7 @@ struct ProductBadgeTile: View {
     let symbol: String
     let unlocked: Bool
     var accent = Color.white
+    @Environment(\.productUsesStaticSurfaces) private var usesStaticSurfaces
 
     var body: some View {
         VStack(spacing: FidgetUITokens.Spacing.standard) {
@@ -1023,7 +1099,13 @@ struct ProductBadgeTile: View {
                     .fill(unlocked
                           ? accent.opacity(0.18)
                           : Color.white.opacity(0.035))
-                    .background(.ultraThinMaterial, in: Circle())
+                    .background {
+                        if usesStaticSurfaces {
+                            Circle().fill(Color.white.opacity(0.035))
+                        } else {
+                            Circle().fill(.ultraThinMaterial)
+                        }
+                    }
                 Image(systemName: unlocked ? symbol : "lock.fill")
                     .font(.product(.title3, weight: .semibold))
                     .foregroundStyle(unlocked
@@ -1052,6 +1134,561 @@ struct ProductBadgeTile: View {
                 : Color.white.opacity(0.008))
         .accessibilityElement(children: .combine)
         .accessibilityLabel("\(title)，\(unlocked ? "已点亮" : "未点亮")")
+    }
+}
+
+enum ProductBadgeLayoutTokens {
+    static let recentTargetWidth: CGFloat = 54
+    static let detailWidth: CGFloat = 154
+    static let shareCardWidth: CGFloat = 122
+
+    // Shipping phone catalog: 375 - (20 * 2) - (14 * 2) = 307;
+    // 307 / 3 = 102.333 pt per square Badge cell.
+    static let catalogColumnCount = 3
+    static let catalogHorizontalPadding: CGFloat = 20
+    static let catalogColumnSpacing: CGFloat = 14
+    static let catalogRowSpacing: CGFloat = 16
+    static let iconSlotFraction: CGFloat = 0.46
+    static let centeredContentHeightFraction: CGFloat = 0.64
+    static let tokenSlotHeightFraction: CGFloat = 0.165
+    static let tokenFontFraction: CGFloat = 0.124
+    static let unitFontFraction: CGFloat = 0.048
+    static let milestoneFontSize: CGFloat = 9.5
+    static let milestoneSlotHeight: CGFloat = 13
+    static let normalizedArtworkVisibleFraction: CGFloat = 0.74
+
+    static var catalogColumns: [GridItem] {
+        Array(
+            repeating: GridItem(
+                .flexible(minimum: 0, maximum: .infinity),
+                spacing: catalogColumnSpacing,
+                alignment: .top),
+            count: catalogColumnCount)
+    }
+
+    static func catalogCellWidth(containerWidth: CGFloat) -> CGFloat {
+        let gaps = CGFloat(catalogColumnCount - 1) * catalogColumnSpacing
+        let content = containerWidth - catalogHorizontalPadding * 2 - gaps
+        return max(0, content / CGFloat(catalogColumnCount))
+    }
+
+    // Every state and rarity uses one rounded-hexagon construction. Unlock state
+    // controls luminance; grade must never change silhouette or measurements.
+    static let outerRimFraction: CGFloat = 0.027
+    static let rimGapFraction: CGFloat = 0.031
+    static let innerRimFraction: CGFloat = 0.0045
+}
+
+private struct ProductBadgeShellShape: InsettableShape {
+    var insetAmount: CGFloat = 0
+
+    func inset(by amount: CGFloat) -> ProductBadgeShellShape {
+        var copy = self
+        copy.insetAmount += amount
+        return copy
+    }
+
+    func path(in rect: CGRect) -> Path {
+        let target = rect.insetBy(dx: insetAmount, dy: insetAmount)
+        guard target.width > 0, target.height > 0 else { return Path() }
+        return roundedHexagonPath(in: target)
+    }
+
+    private func roundedHexagonPath(in rect: CGRect) -> Path {
+        // Point-up orientation: the endpoints sit at the top and bottom while
+        // all six corners retain the same continuous rounding treatment.
+        let vertices = [
+            CGPoint(x: rect.midX, y: rect.minY + rect.height * 0.04),
+            CGPoint(x: rect.minX + rect.width * 0.92, y: rect.minY + rect.height * 0.27),
+            CGPoint(x: rect.minX + rect.width * 0.92, y: rect.minY + rect.height * 0.73),
+            CGPoint(x: rect.midX, y: rect.minY + rect.height * 0.96),
+            CGPoint(x: rect.minX + rect.width * 0.08, y: rect.minY + rect.height * 0.73),
+            CGPoint(x: rect.minX + rect.width * 0.08, y: rect.minY + rect.height * 0.27)
+        ]
+        let cornerFraction: CGFloat = 0.16
+
+        func point(_ vertex: CGPoint, toward neighbor: CGPoint) -> CGPoint {
+            CGPoint(
+                x: vertex.x + (neighbor.x - vertex.x) * cornerFraction,
+                y: vertex.y + (neighbor.y - vertex.y) * cornerFraction)
+        }
+
+        var path = Path()
+        path.move(to: point(vertices[0], toward: vertices[5]))
+        for index in vertices.indices {
+            let previous = vertices[(index + vertices.count - 1) % vertices.count]
+            let current = vertices[index]
+            let next = vertices[(index + 1) % vertices.count]
+            let before = point(current, toward: previous)
+            let after = point(current, toward: next)
+            if index > 0 { path.addLine(to: before) }
+            path.addQuadCurve(to: after, control: current)
+        }
+        path.closeSubpath()
+        return path
+    }
+}
+
+struct ProductBadgeLeatherTexture: View {
+    var grainScale: CGFloat = 1
+
+    var body: some View {
+        Image("badge-leather-texture")
+            .resizable()
+            .interpolation(.high)
+            .scaledToFill()
+            .opacity(grainScale < 1 ? 0.78 : 1)
+        .accessibilityHidden(true)
+    }
+}
+
+private enum ProductBadgeArtworkCache {
+    private static let catalogMaxPixelSize = 256
+    private static let detailMaxPixelSize = 512
+    private static let images: NSCache<NSString, UIImage> = {
+        let cache = NSCache<NSString, UIImage>()
+        cache.countLimit = 64
+        cache.totalCostLimit = 24 * 1024 * 1024
+        return cache
+    }()
+    private static let decodeQueue = DispatchQueue(
+        label: "com.jiaweizhou.fidgetspinner.badge-artwork-decode",
+        qos: .userInitiated)
+
+    static func cachedImage(
+        named assetName: String,
+        catalog: Bool
+    ) -> UIImage? {
+        let maxPixelSize = catalog ? catalogMaxPixelSize : detailMaxPixelSize
+        return images.object(forKey: cacheKey(
+            assetName: assetName,
+            maxPixelSize: maxPixelSize))
+    }
+
+    static func load(
+        named assetName: String,
+        catalog: Bool,
+        completion: @escaping (UIImage?) -> Void
+    ) {
+        guard !assetName.isEmpty else {
+            completion(nil)
+            return
+        }
+        let maxPixelSize = catalog ? catalogMaxPixelSize : detailMaxPixelSize
+        let key = cacheKey(assetName: assetName, maxPixelSize: maxPixelSize)
+        if let cached = images.object(forKey: key) {
+            completion(cached)
+            return
+        }
+
+        decodeQueue.async {
+            if let cached = images.object(forKey: key) {
+                DispatchQueue.main.async { completion(cached) }
+                return
+            }
+            let image = downsampledImage(
+                named: assetName,
+                maxPixelSize: maxPixelSize)
+            if let image, let cgImage = image.cgImage {
+                images.setObject(
+                    image,
+                    forKey: key,
+                    cost: cgImage.bytesPerRow * cgImage.height)
+            }
+            DispatchQueue.main.async { completion(image) }
+        }
+    }
+
+    static func prewarmCatalog(assetNames: [String]) {
+        for assetName in assetNames where !assetName.isEmpty {
+            load(named: assetName, catalog: true) { _ in }
+        }
+    }
+
+    private static func cacheKey(
+        assetName: String,
+        maxPixelSize: Int
+    ) -> NSString {
+        "\(assetName)-\(maxPixelSize)" as NSString
+    }
+
+    private static func downsampledImage(
+        named assetName: String,
+        maxPixelSize: Int
+    ) -> UIImage? {
+        guard let url = Bundle.main.url(
+            forResource: assetName,
+            withExtension: "png"),
+              let source = CGImageSourceCreateWithURL(
+                url as CFURL,
+                [kCGImageSourceShouldCache: false] as CFDictionary) else {
+            return nil
+        }
+        let options: [CFString: Any] = [
+            kCGImageSourceCreateThumbnailFromImageAlways: true,
+            kCGImageSourceCreateThumbnailWithTransform: true,
+            kCGImageSourceThumbnailMaxPixelSize: maxPixelSize,
+            kCGImageSourceShouldCacheImmediately: true
+        ]
+        guard let cgImage = CGImageSourceCreateThumbnailAtIndex(
+            source,
+            0,
+            options as CFDictionary) else {
+            return nil
+        }
+        return UIImage(
+            cgImage: cgImage,
+            scale: 1,
+            orientation: .up)
+    }
+}
+
+enum ProductBadgeRenderingMode {
+    case catalog
+    case full
+}
+
+private struct ProductBadgeArtworkLayer: View {
+    let assetName: String
+    let isUnlocked: Bool
+    let renderingMode: ProductBadgeRenderingMode
+    let width: CGFloat
+    @State private var artwork: UIImage?
+
+    private var usesCatalogRendering: Bool {
+        renderingMode == .catalog
+    }
+
+    var body: some View {
+        Group {
+            if let artwork {
+                if usesCatalogRendering {
+                    Image(uiImage: artwork)
+                        .resizable()
+                        .scaledToFit()
+                        .saturation(isUnlocked ? 1 : 0)
+                        .brightness(isUnlocked ? 0.015 : -0.34)
+                        .contrast(isUnlocked ? 1.06 : 0.74)
+                        .opacity(isUnlocked ? 1 : 0.24)
+                } else {
+                    ZStack {
+                        Image(uiImage: artwork)
+                            .resizable()
+                            .scaledToFit()
+                            .saturation(0.70)
+                            .contrast(1.12)
+                            .blur(radius: width * 0.032)
+                            .opacity(isUnlocked ? 0.34 : 0)
+                            .blendMode(.screen)
+                        Image(uiImage: artwork)
+                            .resizable()
+                            .scaledToFit()
+                            .saturation(isUnlocked ? 1 : 0)
+                            .brightness(isUnlocked ? 0.025 : -0.34)
+                            .contrast(isUnlocked ? 1.12 : 0.74)
+                            .opacity(isUnlocked ? 1 : 0.24)
+                            .shadow(
+                                color: Color.white.opacity(isUnlocked ? 0.22 : 0),
+                                radius: width * 0.018,
+                                x: -width * 0.006,
+                                y: -width * 0.006)
+                            .shadow(
+                                color: Color(red: 0.72, green: 0.86, blue: 0.94)
+                                    .opacity(isUnlocked ? 0.46 : 0),
+                                radius: width * 0.052)
+                    }
+                }
+            } else {
+                Image(systemName: "seal")
+                    .font(.product(size: width * 0.20, weight: .light))
+                    .foregroundStyle(Color.white.opacity(0.20))
+            }
+        }
+        .onAppear(perform: requestArtwork)
+        .onChange(of: assetName) { _ in
+            artwork = nil
+            requestArtwork()
+        }
+    }
+
+    private func requestArtwork() {
+        if let cached = ProductBadgeArtworkCache.cachedImage(
+            named: assetName,
+            catalog: usesCatalogRendering) {
+            artwork = cached
+            return
+        }
+        ProductBadgeArtworkCache.load(
+            named: assetName,
+            catalog: usesCatalogRendering) { loaded in
+            artwork = loaded
+        }
+    }
+}
+
+private struct ProductBadgeCatalogCompositingModifier: ViewModifier {
+    let enabled: Bool
+
+    @ViewBuilder
+    func body(content: Content) -> some View {
+        if enabled {
+            content.drawingGroup(opaque: false, colorMode: .nonLinear)
+        } else {
+            content
+        }
+    }
+}
+
+struct ProductRarityBadge: View {
+    let assetName: String
+    let token: String
+    let shortName: String
+    let grade: String
+    let state: String
+    let progress: Double
+    var renderingMode: ProductBadgeRenderingMode = .full
+
+    static func prewarmCatalogArtwork(assetNames: [String]) {
+        ProductBadgeArtworkCache.prewarmCatalog(assetNames: assetNames)
+    }
+
+    private var shape: ProductBadgeShellShape {
+        ProductBadgeShellShape()
+    }
+
+    private var isUnlocked: Bool { state == "Unlocked" }
+    private var isHidden: Bool { state == "Hidden" }
+    private var isInProgress: Bool { state == "InProgress" }
+
+    @ViewBuilder
+    private func badgeToken(width: CGFloat) -> some View {
+        if isHidden {
+            Text("•••")
+                .font(.product(
+                    size: width * ProductBadgeLayoutTokens.tokenFontFraction,
+                    weight: .black).monospacedDigit())
+        } else if token.hasSuffix(" KM/H") {
+            HStack(alignment: .lastTextBaseline, spacing: width * 0.020) {
+                Text(String(token.dropLast(" KM/H".count)))
+                    .font(.product(
+                        size: width * ProductBadgeLayoutTokens.tokenFontFraction,
+                        weight: .black).monospacedDigit())
+                Text("KM/H")
+                    .font(.product(
+                        size: width * ProductBadgeLayoutTokens.unitFontFraction,
+                        weight: .black).monospacedDigit())
+                    .padding(.bottom, width * 0.011)
+            }
+        } else {
+            Text(token)
+                .font(.product(
+                    size: width * ProductBadgeLayoutTokens.tokenFontFraction,
+                    weight: .black).monospacedDigit())
+        }
+    }
+
+    private var milestoneName: some View {
+        Text(isHidden ? "ENCRYPTED" : shortName)
+            .font(.product(
+                size: ProductBadgeLayoutTokens.milestoneFontSize,
+                weight: .bold))
+            .foregroundStyle(Color.white.opacity(isUnlocked ? 0.72 : 0.28))
+            .lineLimit(1)
+            .minimumScaleFactor(0.72)
+            .frame(
+                maxWidth: .infinity,
+                minHeight: ProductBadgeLayoutTokens.milestoneSlotHeight,
+                maxHeight: ProductBadgeLayoutTokens.milestoneSlotHeight,
+                alignment: .center)
+    }
+
+    private var externalProgressBar: some View {
+        GeometryReader { gauge in
+            let trackWidth = gauge.size.width * 0.72
+            Capsule(style: .continuous)
+                .fill(Color.white.opacity(0.10))
+                .overlay(alignment: .leading) {
+                    Capsule(style: .continuous)
+                        .fill(Color.white.opacity(0.64))
+                        .frame(width: trackWidth * max(0, min(1, progress)))
+                }
+                .frame(width: trackWidth, height: 3)
+                .position(x: gauge.size.width * 0.5, y: 1.5)
+        }
+        .frame(height: 3)
+        // Reserve the same slot for every state so all three catalog columns
+        // keep matching row baselines even when only one Badge is in progress.
+        .opacity(isInProgress ? 1 : 0)
+        .accessibilityHidden(!isInProgress)
+    }
+
+    var body: some View {
+        VStack(spacing: 0) {
+            GeometryReader { proxy in
+                let width = proxy.size.width
+                let outerRim = max(2.1, width * ProductBadgeLayoutTokens.outerRimFraction)
+                let rimGap = max(1.2, width * ProductBadgeLayoutTokens.rimGapFraction)
+                let innerRim = max(0.7, width * ProductBadgeLayoutTokens.innerRimFraction)
+                let innerInset = outerRim + rimGap
+                let shellColors: [Color] = isUnlocked
+                    ? [
+                        Color(red: 0.090, green: 0.100, blue: 0.102),
+                        Color(red: 0.038, green: 0.045, blue: 0.047),
+                        Color(red: 0.015, green: 0.019, blue: 0.020)
+                    ]
+                    : [
+                        Color(red: 0.030, green: 0.033, blue: 0.034),
+                        Color(red: 0.014, green: 0.016, blue: 0.017),
+                        Color(red: 0.006, green: 0.007, blue: 0.008)
+                    ]
+                let outerRimColors: [Color] = isUnlocked
+                    ? [
+                        Color(red: 0.72, green: 0.75, blue: 0.76),
+                        Color(red: 0.32, green: 0.35, blue: 0.36),
+                        Color(red: 0.82, green: 0.84, blue: 0.85)
+                    ]
+                    : [
+                        Color(red: 0.18, green: 0.19, blue: 0.20),
+                        Color(red: 0.070, green: 0.076, blue: 0.080),
+                        Color(red: 0.22, green: 0.23, blue: 0.24)
+                    ]
+                let rimStops: [Gradient.Stop] = isUnlocked
+                    ? [
+                        .init(color: Color(red: 0.56, green: 0.59, blue: 0.60), location: 0.00),
+                        .init(color: Color(red: 0.88, green: 0.90, blue: 0.91), location: 0.18),
+                        .init(color: Color.white, location: 0.31),
+                        .init(color: Color(red: 0.50, green: 0.53, blue: 0.54), location: 0.48),
+                        .init(color: Color(red: 0.94, green: 0.96, blue: 0.96), location: 0.64),
+                        .init(color: Color(red: 0.66, green: 0.69, blue: 0.70), location: 0.80),
+                        .init(color: Color(red: 0.56, green: 0.59, blue: 0.60), location: 1.00)
+                    ]
+                    : [
+                        .init(color: Color(red: 0.14, green: 0.15, blue: 0.16), location: 0.00),
+                        .init(color: Color(red: 0.25, green: 0.26, blue: 0.27), location: 0.24),
+                        .init(color: Color(red: 0.090, green: 0.096, blue: 0.100), location: 0.50),
+                        .init(color: Color(red: 0.22, green: 0.23, blue: 0.24), location: 0.72),
+                        .init(color: Color(red: 0.14, green: 0.15, blue: 0.16), location: 1.00)
+                    ]
+                let innerLineOpacity = isUnlocked ? 0.34 : 0.12
+                ZStack {
+                    shape
+                        .fill(LinearGradient(
+                            colors: shellColors,
+                            startPoint: .topLeading,
+                            endPoint: .bottomTrailing))
+                    shape
+                        .fill(RadialGradient(
+                            colors: [
+                                Color.white.opacity(isUnlocked ? 0.060 : 0.020),
+                                Color.white.opacity(0.010),
+                                Color.black.opacity(isUnlocked ? 0.18 : 0.28)
+                            ],
+                            center: .topLeading,
+                            startRadius: width * 0.02,
+                            endRadius: width * 0.92))
+                    ProductBadgeLeatherTexture()
+                        .opacity(isUnlocked ? 1 : 0.58)
+                        .clipShape(shape)
+                    // One milled rim: a dark structural band with a narrower metal
+                    // crest embedded inside it. The two strokes touch, so this reads
+                    // as one bevelled object rather than two decorative outlines.
+                    shape
+                        .strokeBorder(
+                            LinearGradient(
+                                colors: outerRimColors,
+                                startPoint: .topLeading,
+                                endPoint: .bottomTrailing),
+                            lineWidth: outerRim)
+                        .shadow(color: Color.black.opacity(0.64), radius: width * 0.015, y: width * 0.010)
+                    shape
+                        .inset(by: outerRim * 0.20)
+                        .strokeBorder(
+                            AngularGradient(
+                                stops: rimStops,
+                                center: .center),
+                            lineWidth: outerRim * 0.58)
+                        .shadow(
+                            color: Color.white.opacity(isUnlocked ? 0.11 : 0),
+                            radius: width * 0.010)
+                    shape
+                        .inset(by: innerInset)
+                        .strokeBorder(
+                            AngularGradient(
+                                stops: [
+                                    .init(color: Color.white.opacity(innerLineOpacity * 0.48), location: 0.00),
+                                    .init(color: Color.white.opacity(innerLineOpacity), location: 0.31),
+                                    .init(color: Color.white.opacity(innerLineOpacity * 0.38), location: 0.50),
+                                    .init(color: Color.white.opacity(innerLineOpacity), location: 0.66),
+                                    .init(color: Color.white.opacity(innerLineOpacity * 0.48), location: 1.00)
+                                ],
+                                center: .center),
+                            lineWidth: innerRim)
+
+                    VStack(spacing: width * 0.010) {
+                        ZStack {
+                            if isHidden {
+                                Image(systemName: "questionmark")
+                                    .font(.product(size: width * 0.23, weight: .bold))
+                                    .foregroundStyle(Color.white.opacity(0.25))
+                            } else {
+                                ProductBadgeArtworkLayer(
+                                    assetName: assetName,
+                                    isUnlocked: isUnlocked,
+                                    renderingMode: renderingMode,
+                                    width: width)
+                            }
+                        }
+                        .frame(
+                            width: width * ProductBadgeLayoutTokens.iconSlotFraction,
+                            height: width * ProductBadgeLayoutTokens.iconSlotFraction)
+
+                        badgeToken(width: width)
+                            .foregroundStyle(Color.white.opacity(isUnlocked ? 0.96 : 0.28))
+                            .lineLimit(1)
+                            .minimumScaleFactor(0.62)
+                            .frame(
+                                maxWidth: .infinity,
+                                minHeight: width * ProductBadgeLayoutTokens.tokenSlotHeightFraction,
+                                maxHeight: width * ProductBadgeLayoutTokens.tokenSlotHeightFraction,
+                                alignment: .center)
+                    }
+                    // The icon and token are one fixed-height object pinned to
+                    // the exact shell center. Individual glyph bounds or text
+                    // ascenders can no longer move the group vertically.
+                    .frame(
+                        width: width * 0.74,
+                        height: width * ProductBadgeLayoutTokens.centeredContentHeightFraction,
+                        alignment: .center)
+                    .position(x: width * 0.5, y: width * 0.5)
+
+                    if !isUnlocked && !isHidden && !isInProgress {
+                        Image(systemName: "lock.fill")
+                            .font(.product(size: width * 0.075, weight: .bold))
+                            .foregroundStyle(Color.white.opacity(0.34))
+                            .padding(width * 0.055)
+                            .background(Color.black.opacity(0.50), in: Circle())
+                            .offset(y: width * 0.39)
+                    }
+                }
+                .shadow(
+                    color: Color.black.opacity(
+                        renderingMode == .catalog ? 0.38 : 0.62),
+                    radius: width * (renderingMode == .catalog ? 0.020 : 0.050),
+                    y: width * (renderingMode == .catalog ? 0.014 : 0.032))
+                .modifier(ProductBadgeCatalogCompositingModifier(
+                    enabled: renderingMode == .catalog))
+            }
+            .aspectRatio(1, contentMode: .fit)
+
+            // Milestone metadata belongs to the catalog tile, not the metal
+            // object. Keep the shell itself a strict 1:1 artwork surface.
+            milestoneName
+                .padding(.top, 5)
+            externalProgressBar
+                .padding(.top, 5)
+        }
+        .accessibilityElement(children: .ignore)
+        .accessibilityLabel("\(token)，\(shortName)，\(state)")
     }
 }
 

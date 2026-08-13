@@ -1,0 +1,9232 @@
+{
+  "version": "1.0",
+  "name": "UnboundSliderWhiteModel",
+  "scene": {
+    "unit_system": "metric",
+    "unit_scale": 1.0,
+    "frame_start": 1,
+    "frame_end": 40,
+    "frame_current": 1,
+    "fps": 24
+  },
+  "render": {
+    "engine": "EEVEE",
+    "resolution_x": 900,
+    "resolution_y": 900,
+    "resolution_percentage": 100,
+    "samples": 64,
+    "use_denoising": true,
+    "film_transparent": false,
+    "output_format": "PNG",
+    "output_path": "/tmp/fidgeting_app_cli/Artifacts/UnboundSlider/WhiteModel_2026-08-10/01_AssembledHero.png"
+  },
+  "world": {
+    "background_color": [
+      0.05,
+      0.05,
+      0.05
+    ],
+    "use_hdri": false,
+    "hdri_path": null,
+    "hdri_strength": 1.0
+  },
+  "objects": [
+    {
+      "id": 0,
+      "name": "UnboundSlider_Root",
+      "type": "EMPTY",
+      "mesh_type": "empty",
+      "location": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "scale": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "visible": true,
+      "material": null,
+      "modifiers": [],
+      "keyframes": [],
+      "parent": null,
+      "mesh_params": {}
+    },
+    {
+      "id": 1,
+      "name": "TopAssembly_Root",
+      "type": "EMPTY",
+      "mesh_type": "empty",
+      "location": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "scale": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "visible": true,
+      "material": null,
+      "modifiers": [],
+      "keyframes": [],
+      "parent": 0,
+      "mesh_params": {}
+    },
+    {
+      "id": 2,
+      "name": "BottomAssembly_Root",
+      "type": "EMPTY",
+      "mesh_type": "empty",
+      "location": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "scale": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "visible": true,
+      "material": null,
+      "modifiers": [],
+      "keyframes": [],
+      "parent": 0,
+      "mesh_params": {}
+    },
+    {
+      "id": 3,
+      "name": "TopShell_Root",
+      "type": "EMPTY",
+      "mesh_type": "empty",
+      "location": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "scale": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "visible": true,
+      "material": null,
+      "modifiers": [],
+      "keyframes": [
+        {
+          "frame": 1,
+          "property": "location",
+          "value": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "interpolation": "BEZIER"
+        },
+        {
+          "frame": 40,
+          "property": "location",
+          "value": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "interpolation": "LINEAR"
+        }
+      ],
+      "parent": 1,
+      "mesh_params": {}
+    },
+    {
+      "id": 4,
+      "name": "TopCarrier_Root",
+      "type": "EMPTY",
+      "mesh_type": "empty",
+      "location": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "scale": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "visible": true,
+      "material": null,
+      "modifiers": [],
+      "keyframes": [
+        {
+          "frame": 1,
+          "property": "location",
+          "value": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "interpolation": "BEZIER"
+        },
+        {
+          "frame": 40,
+          "property": "location",
+          "value": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "interpolation": "LINEAR"
+        }
+      ],
+      "parent": 1,
+      "mesh_params": {}
+    },
+    {
+      "id": 5,
+      "name": "TopMagnets_Root",
+      "type": "EMPTY",
+      "mesh_type": "empty",
+      "location": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "scale": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "visible": true,
+      "material": null,
+      "modifiers": [],
+      "keyframes": [
+        {
+          "frame": 1,
+          "property": "location",
+          "value": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "interpolation": "BEZIER"
+        },
+        {
+          "frame": 40,
+          "property": "location",
+          "value": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "interpolation": "LINEAR"
+        }
+      ],
+      "parent": 1,
+      "mesh_params": {}
+    },
+    {
+      "id": 6,
+      "name": "TopForks_Root",
+      "type": "EMPTY",
+      "mesh_type": "empty",
+      "location": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "scale": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "visible": true,
+      "material": null,
+      "modifiers": [],
+      "keyframes": [
+        {
+          "frame": 1,
+          "property": "location",
+          "value": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "interpolation": "BEZIER"
+        },
+        {
+          "frame": 40,
+          "property": "location",
+          "value": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "interpolation": "LINEAR"
+        }
+      ],
+      "parent": 1,
+      "mesh_params": {}
+    },
+    {
+      "id": 7,
+      "name": "TopContact_Root",
+      "type": "EMPTY",
+      "mesh_type": "empty",
+      "location": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "scale": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "visible": true,
+      "material": null,
+      "modifiers": [],
+      "keyframes": [
+        {
+          "frame": 1,
+          "property": "location",
+          "value": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "interpolation": "BEZIER"
+        },
+        {
+          "frame": 40,
+          "property": "location",
+          "value": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "interpolation": "LINEAR"
+        }
+      ],
+      "parent": 1,
+      "mesh_params": {}
+    },
+    {
+      "id": 8,
+      "name": "BottomShell_Root",
+      "type": "EMPTY",
+      "mesh_type": "empty",
+      "location": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "scale": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "visible": true,
+      "material": null,
+      "modifiers": [],
+      "keyframes": [
+        {
+          "frame": 1,
+          "property": "location",
+          "value": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "interpolation": "BEZIER"
+        },
+        {
+          "frame": 40,
+          "property": "location",
+          "value": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "interpolation": "LINEAR"
+        }
+      ],
+      "parent": 2,
+      "mesh_params": {}
+    },
+    {
+      "id": 9,
+      "name": "BottomCarrier_Root",
+      "type": "EMPTY",
+      "mesh_type": "empty",
+      "location": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "scale": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "visible": true,
+      "material": null,
+      "modifiers": [],
+      "keyframes": [
+        {
+          "frame": 1,
+          "property": "location",
+          "value": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "interpolation": "BEZIER"
+        },
+        {
+          "frame": 40,
+          "property": "location",
+          "value": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "interpolation": "LINEAR"
+        }
+      ],
+      "parent": 2,
+      "mesh_params": {}
+    },
+    {
+      "id": 10,
+      "name": "BottomMagnets_Root",
+      "type": "EMPTY",
+      "mesh_type": "empty",
+      "location": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "scale": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "visible": true,
+      "material": null,
+      "modifiers": [],
+      "keyframes": [
+        {
+          "frame": 1,
+          "property": "location",
+          "value": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "interpolation": "BEZIER"
+        },
+        {
+          "frame": 40,
+          "property": "location",
+          "value": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "interpolation": "LINEAR"
+        }
+      ],
+      "parent": 2,
+      "mesh_params": {}
+    },
+    {
+      "id": 11,
+      "name": "BottomForks_Root",
+      "type": "EMPTY",
+      "mesh_type": "empty",
+      "location": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "scale": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "visible": true,
+      "material": null,
+      "modifiers": [],
+      "keyframes": [
+        {
+          "frame": 1,
+          "property": "location",
+          "value": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "interpolation": "BEZIER"
+        },
+        {
+          "frame": 40,
+          "property": "location",
+          "value": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "interpolation": "LINEAR"
+        }
+      ],
+      "parent": 2,
+      "mesh_params": {}
+    },
+    {
+      "id": 12,
+      "name": "BottomContact_Root",
+      "type": "EMPTY",
+      "mesh_type": "empty",
+      "location": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "scale": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "visible": true,
+      "material": null,
+      "modifiers": [],
+      "keyframes": [
+        {
+          "frame": 1,
+          "property": "location",
+          "value": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "interpolation": "BEZIER"
+        },
+        {
+          "frame": 40,
+          "property": "location",
+          "value": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "interpolation": "LINEAR"
+        }
+      ],
+      "parent": 2,
+      "mesh_params": {}
+    },
+    {
+      "id": 13,
+      "name": "TopCut_SlotUpper",
+      "type": "MESH",
+      "mesh_type": "cube",
+      "location": [
+        0.0,
+        -0.0058,
+        0.0102
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "scale": [
+        0.0155,
+        0.0022,
+        0.0032
+      ],
+      "visible": false,
+      "material": null,
+      "modifiers": [
+        {
+          "type": "bevel",
+          "name": "SlotUpperRound",
+          "bpy_type": "BEVEL",
+          "params": {
+            "width": 0.0024,
+            "segments": 6,
+            "limit_method": "ANGLE",
+            "angle_limit": 0.523599
+          }
+        }
+      ],
+      "keyframes": [
+        {
+          "frame": 1,
+          "property": "location",
+          "value": [
+            0.0,
+            -0.0058,
+            0.0102
+          ],
+          "interpolation": "LINEAR"
+        },
+        {
+          "frame": 40,
+          "property": "location",
+          "value": [
+            -0.04,
+            -0.0458,
+            0.0452
+          ],
+          "interpolation": "LINEAR"
+        }
+      ],
+      "parent": 3,
+      "mesh_params": {
+        "size": 2.0
+      }
+    },
+    {
+      "id": 14,
+      "name": "TopCut_SlotLower",
+      "type": "MESH",
+      "mesh_type": "cube",
+      "location": [
+        0.0,
+        -0.0058,
+        -0.0102
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "scale": [
+        0.0155,
+        0.0022,
+        0.0032
+      ],
+      "visible": false,
+      "material": null,
+      "modifiers": [
+        {
+          "type": "bevel",
+          "name": "SlotLowerRound",
+          "bpy_type": "BEVEL",
+          "params": {
+            "width": 0.0024,
+            "segments": 6,
+            "limit_method": "ANGLE",
+            "angle_limit": 0.523599
+          }
+        }
+      ],
+      "keyframes": [
+        {
+          "frame": 1,
+          "property": "location",
+          "value": [
+            0.0,
+            -0.0058,
+            -0.0102
+          ],
+          "interpolation": "LINEAR"
+        },
+        {
+          "frame": 40,
+          "property": "location",
+          "value": [
+            -0.04,
+            -0.0458,
+            0.0248
+          ],
+          "interpolation": "LINEAR"
+        }
+      ],
+      "parent": 3,
+      "mesh_params": {
+        "size": 2.0
+      }
+    },
+    {
+      "id": 15,
+      "name": "TopCut_BigTL",
+      "type": "MESH",
+      "mesh_type": "cylinder",
+      "location": [
+        -0.019,
+        -0.0058,
+        0.0102
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "scale": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "visible": false,
+      "material": null,
+      "modifiers": [],
+      "keyframes": [
+        {
+          "frame": 1,
+          "property": "location",
+          "value": [
+            -0.019,
+            -0.0058,
+            0.0102
+          ],
+          "interpolation": "LINEAR"
+        },
+        {
+          "frame": 40,
+          "property": "location",
+          "value": [
+            -0.059,
+            -0.0458,
+            0.0452
+          ],
+          "interpolation": "LINEAR"
+        }
+      ],
+      "parent": 3,
+      "mesh_params": {
+        "radius": 0.0047,
+        "depth": 0.006,
+        "vertices": 64
+      }
+    },
+    {
+      "id": 16,
+      "name": "TopCut_BigTR",
+      "type": "MESH",
+      "mesh_type": "cylinder",
+      "location": [
+        0.019,
+        -0.0058,
+        0.0102
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "scale": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "visible": false,
+      "material": null,
+      "modifiers": [],
+      "keyframes": [
+        {
+          "frame": 1,
+          "property": "location",
+          "value": [
+            0.019,
+            -0.0058,
+            0.0102
+          ],
+          "interpolation": "LINEAR"
+        },
+        {
+          "frame": 40,
+          "property": "location",
+          "value": [
+            -0.021,
+            -0.0458,
+            0.0452
+          ],
+          "interpolation": "LINEAR"
+        }
+      ],
+      "parent": 3,
+      "mesh_params": {
+        "radius": 0.0047,
+        "depth": 0.006,
+        "vertices": 64
+      }
+    },
+    {
+      "id": 17,
+      "name": "TopCut_BigBL",
+      "type": "MESH",
+      "mesh_type": "cylinder",
+      "location": [
+        -0.019,
+        -0.0058,
+        -0.0102
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "scale": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "visible": false,
+      "material": null,
+      "modifiers": [],
+      "keyframes": [
+        {
+          "frame": 1,
+          "property": "location",
+          "value": [
+            -0.019,
+            -0.0058,
+            -0.0102
+          ],
+          "interpolation": "LINEAR"
+        },
+        {
+          "frame": 40,
+          "property": "location",
+          "value": [
+            -0.059,
+            -0.0458,
+            0.0248
+          ],
+          "interpolation": "LINEAR"
+        }
+      ],
+      "parent": 3,
+      "mesh_params": {
+        "radius": 0.0047,
+        "depth": 0.006,
+        "vertices": 64
+      }
+    },
+    {
+      "id": 18,
+      "name": "TopCut_BigBR",
+      "type": "MESH",
+      "mesh_type": "cylinder",
+      "location": [
+        0.019,
+        -0.0058,
+        -0.0102
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "scale": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "visible": false,
+      "material": null,
+      "modifiers": [],
+      "keyframes": [
+        {
+          "frame": 1,
+          "property": "location",
+          "value": [
+            0.019,
+            -0.0058,
+            -0.0102
+          ],
+          "interpolation": "LINEAR"
+        },
+        {
+          "frame": 40,
+          "property": "location",
+          "value": [
+            -0.021,
+            -0.0458,
+            0.0248
+          ],
+          "interpolation": "LINEAR"
+        }
+      ],
+      "parent": 3,
+      "mesh_params": {
+        "radius": 0.0047,
+        "depth": 0.006,
+        "vertices": 64
+      }
+    },
+    {
+      "id": 19,
+      "name": "BottomCut_SlotUpper",
+      "type": "MESH",
+      "mesh_type": "cube",
+      "location": [
+        0.0,
+        0.0058,
+        0.0102
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "scale": [
+        0.0155,
+        0.0022,
+        0.0032
+      ],
+      "visible": false,
+      "material": null,
+      "modifiers": [
+        {
+          "type": "bevel",
+          "name": "SlotUpperRound",
+          "bpy_type": "BEVEL",
+          "params": {
+            "width": 0.0024,
+            "segments": 6,
+            "limit_method": "ANGLE",
+            "angle_limit": 0.523599
+          }
+        }
+      ],
+      "keyframes": [
+        {
+          "frame": 1,
+          "property": "location",
+          "value": [
+            0.0,
+            0.0058,
+            0.0102
+          ],
+          "interpolation": "LINEAR"
+        },
+        {
+          "frame": 40,
+          "property": "location",
+          "value": [
+            0.04,
+            0.0458,
+            -0.0248
+          ],
+          "interpolation": "LINEAR"
+        }
+      ],
+      "parent": 8,
+      "mesh_params": {
+        "size": 2.0
+      }
+    },
+    {
+      "id": 20,
+      "name": "BottomCut_SlotLower",
+      "type": "MESH",
+      "mesh_type": "cube",
+      "location": [
+        0.0,
+        0.0058,
+        -0.0102
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "scale": [
+        0.0155,
+        0.0022,
+        0.0032
+      ],
+      "visible": false,
+      "material": null,
+      "modifiers": [
+        {
+          "type": "bevel",
+          "name": "SlotLowerRound",
+          "bpy_type": "BEVEL",
+          "params": {
+            "width": 0.0024,
+            "segments": 6,
+            "limit_method": "ANGLE",
+            "angle_limit": 0.523599
+          }
+        }
+      ],
+      "keyframes": [
+        {
+          "frame": 1,
+          "property": "location",
+          "value": [
+            0.0,
+            0.0058,
+            -0.0102
+          ],
+          "interpolation": "LINEAR"
+        },
+        {
+          "frame": 40,
+          "property": "location",
+          "value": [
+            0.04,
+            0.0458,
+            -0.0452
+          ],
+          "interpolation": "LINEAR"
+        }
+      ],
+      "parent": 8,
+      "mesh_params": {
+        "size": 2.0
+      }
+    },
+    {
+      "id": 21,
+      "name": "BottomCut_BigTL",
+      "type": "MESH",
+      "mesh_type": "cylinder",
+      "location": [
+        -0.019,
+        0.0058,
+        0.0102
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "scale": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "visible": false,
+      "material": null,
+      "modifiers": [],
+      "keyframes": [
+        {
+          "frame": 1,
+          "property": "location",
+          "value": [
+            -0.019,
+            0.0058,
+            0.0102
+          ],
+          "interpolation": "LINEAR"
+        },
+        {
+          "frame": 40,
+          "property": "location",
+          "value": [
+            0.021,
+            0.0458,
+            -0.0248
+          ],
+          "interpolation": "LINEAR"
+        }
+      ],
+      "parent": 8,
+      "mesh_params": {
+        "radius": 0.0047,
+        "depth": 0.006,
+        "vertices": 64
+      }
+    },
+    {
+      "id": 22,
+      "name": "BottomCut_BigTR",
+      "type": "MESH",
+      "mesh_type": "cylinder",
+      "location": [
+        0.019,
+        0.0058,
+        0.0102
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "scale": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "visible": false,
+      "material": null,
+      "modifiers": [],
+      "keyframes": [
+        {
+          "frame": 1,
+          "property": "location",
+          "value": [
+            0.019,
+            0.0058,
+            0.0102
+          ],
+          "interpolation": "LINEAR"
+        },
+        {
+          "frame": 40,
+          "property": "location",
+          "value": [
+            0.059,
+            0.0458,
+            -0.0248
+          ],
+          "interpolation": "LINEAR"
+        }
+      ],
+      "parent": 8,
+      "mesh_params": {
+        "radius": 0.0047,
+        "depth": 0.006,
+        "vertices": 64
+      }
+    },
+    {
+      "id": 23,
+      "name": "BottomCut_BigBL",
+      "type": "MESH",
+      "mesh_type": "cylinder",
+      "location": [
+        -0.019,
+        0.0058,
+        -0.0102
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "scale": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "visible": false,
+      "material": null,
+      "modifiers": [],
+      "keyframes": [
+        {
+          "frame": 1,
+          "property": "location",
+          "value": [
+            -0.019,
+            0.0058,
+            -0.0102
+          ],
+          "interpolation": "LINEAR"
+        },
+        {
+          "frame": 40,
+          "property": "location",
+          "value": [
+            0.021,
+            0.0458,
+            -0.0452
+          ],
+          "interpolation": "LINEAR"
+        }
+      ],
+      "parent": 8,
+      "mesh_params": {
+        "radius": 0.0047,
+        "depth": 0.006,
+        "vertices": 64
+      }
+    },
+    {
+      "id": 24,
+      "name": "BottomCut_BigBR",
+      "type": "MESH",
+      "mesh_type": "cylinder",
+      "location": [
+        0.019,
+        0.0058,
+        -0.0102
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "scale": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "visible": false,
+      "material": null,
+      "modifiers": [],
+      "keyframes": [
+        {
+          "frame": 1,
+          "property": "location",
+          "value": [
+            0.019,
+            0.0058,
+            -0.0102
+          ],
+          "interpolation": "LINEAR"
+        },
+        {
+          "frame": 40,
+          "property": "location",
+          "value": [
+            0.059,
+            0.0458,
+            -0.0452
+          ],
+          "interpolation": "LINEAR"
+        }
+      ],
+      "parent": 8,
+      "mesh_params": {
+        "radius": 0.0047,
+        "depth": 0.006,
+        "vertices": 64
+      }
+    },
+    {
+      "id": 25,
+      "name": "Top_MetalShell",
+      "type": "MESH",
+      "mesh_type": "cube",
+      "location": [
+        0.0,
+        -0.0058,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "scale": [
+        0.026,
+        0.0012,
+        0.018
+      ],
+      "visible": false,
+      "material": 0,
+      "modifiers": [
+        {
+          "type": "bevel",
+          "name": "OuterRadius",
+          "bpy_type": "BEVEL",
+          "params": {
+            "width": 0.17,
+            "segments": 8,
+            "limit_method": "ANGLE",
+            "angle_limit": 0.523599
+          }
+        },
+        {
+          "type": "boolean",
+          "name": "Cut_TopDetail_DropLeftBulb",
+          "bpy_type": "BOOLEAN",
+          "params": {
+            "operation": "DIFFERENCE",
+            "operand_object": "TopDetail_DropLeftBulb",
+            "solver": "EXACT"
+          }
+        },
+        {
+          "type": "boolean",
+          "name": "Cut_TopDetail_DropLeftNeck",
+          "bpy_type": "BOOLEAN",
+          "params": {
+            "operation": "DIFFERENCE",
+            "operand_object": "TopDetail_DropLeftNeck",
+            "solver": "EXACT"
+          }
+        },
+        {
+          "type": "boolean",
+          "name": "Cut_TopDetail_DropLeftTip",
+          "bpy_type": "BOOLEAN",
+          "params": {
+            "operation": "DIFFERENCE",
+            "operand_object": "TopDetail_DropLeftTip",
+            "solver": "EXACT"
+          }
+        },
+        {
+          "type": "boolean",
+          "name": "Cut_TopDetail_DropRightBulb",
+          "bpy_type": "BOOLEAN",
+          "params": {
+            "operation": "DIFFERENCE",
+            "operand_object": "TopDetail_DropRightBulb",
+            "solver": "EXACT"
+          }
+        },
+        {
+          "type": "boolean",
+          "name": "Cut_TopDetail_DropRightNeck",
+          "bpy_type": "BOOLEAN",
+          "params": {
+            "operation": "DIFFERENCE",
+            "operand_object": "TopDetail_DropRightNeck",
+            "solver": "EXACT"
+          }
+        },
+        {
+          "type": "boolean",
+          "name": "Cut_TopDetail_DropRightTip",
+          "bpy_type": "BOOLEAN",
+          "params": {
+            "operation": "DIFFERENCE",
+            "operand_object": "TopDetail_DropRightTip",
+            "solver": "EXACT"
+          }
+        },
+        {
+          "type": "boolean",
+          "name": "Cut_TopDetail_SlotURBody",
+          "bpy_type": "BOOLEAN",
+          "params": {
+            "operation": "DIFFERENCE",
+            "operand_object": "TopDetail_SlotURBody",
+            "solver": "EXACT"
+          }
+        },
+        {
+          "type": "boolean",
+          "name": "Cut_TopDetail_SlotUREndA",
+          "bpy_type": "BOOLEAN",
+          "params": {
+            "operation": "DIFFERENCE",
+            "operand_object": "TopDetail_SlotUREndA",
+            "solver": "EXACT"
+          }
+        },
+        {
+          "type": "boolean",
+          "name": "Cut_TopDetail_SlotUREndB",
+          "bpy_type": "BOOLEAN",
+          "params": {
+            "operation": "DIFFERENCE",
+            "operand_object": "TopDetail_SlotUREndB",
+            "solver": "EXACT"
+          }
+        },
+        {
+          "type": "boolean",
+          "name": "Cut_TopDetail_SlotBLBody",
+          "bpy_type": "BOOLEAN",
+          "params": {
+            "operation": "DIFFERENCE",
+            "operand_object": "TopDetail_SlotBLBody",
+            "solver": "EXACT"
+          }
+        },
+        {
+          "type": "boolean",
+          "name": "Cut_TopDetail_SlotBLEndA",
+          "bpy_type": "BOOLEAN",
+          "params": {
+            "operation": "DIFFERENCE",
+            "operand_object": "TopDetail_SlotBLEndA",
+            "solver": "EXACT"
+          }
+        },
+        {
+          "type": "boolean",
+          "name": "Cut_TopDetail_SlotBLEndB",
+          "bpy_type": "BOOLEAN",
+          "params": {
+            "operation": "DIFFERENCE",
+            "operand_object": "TopDetail_SlotBLEndB",
+            "solver": "EXACT"
+          }
+        },
+        {
+          "type": "boolean",
+          "name": "Cut_TopDetail_TriangleTL",
+          "bpy_type": "BOOLEAN",
+          "params": {
+            "operation": "DIFFERENCE",
+            "operand_object": "TopDetail_TriangleTL",
+            "solver": "EXACT"
+          }
+        },
+        {
+          "type": "boolean",
+          "name": "Cut_TopDetail_TriangleBR",
+          "bpy_type": "BOOLEAN",
+          "params": {
+            "operation": "DIFFERENCE",
+            "operand_object": "TopDetail_TriangleBR",
+            "solver": "EXACT"
+          }
+        },
+        {
+          "type": "bevel",
+          "name": "DetailEdgeSoftness",
+          "bpy_type": "BEVEL",
+          "params": {
+            "width": 0.025,
+            "segments": 3,
+            "limit_method": "ANGLE",
+            "angle_limit": 0.523599
+          }
+        }
+      ],
+      "keyframes": [
+        {
+          "frame": 1,
+          "property": "location",
+          "value": [
+            0.0,
+            -0.0058,
+            0.0
+          ],
+          "interpolation": "LINEAR"
+        },
+        {
+          "frame": 40,
+          "property": "location",
+          "value": [
+            -0.04,
+            -0.0458,
+            0.035
+          ],
+          "interpolation": "LINEAR"
+        }
+      ],
+      "parent": 3,
+      "mesh_params": {
+        "size": 2.0
+      }
+    },
+    {
+      "id": 26,
+      "name": "Bottom_MetalShell",
+      "type": "MESH",
+      "mesh_type": "cube",
+      "location": [
+        0.0,
+        0.0058,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "scale": [
+        0.026,
+        0.0012,
+        0.018
+      ],
+      "visible": false,
+      "material": 0,
+      "modifiers": [
+        {
+          "type": "bevel",
+          "name": "OuterRadius",
+          "bpy_type": "BEVEL",
+          "params": {
+            "width": 0.17,
+            "segments": 8,
+            "limit_method": "ANGLE",
+            "angle_limit": 0.523599
+          }
+        },
+        {
+          "type": "boolean",
+          "name": "Cut_BottomDetail_DropLeftBulb",
+          "bpy_type": "BOOLEAN",
+          "params": {
+            "operation": "DIFFERENCE",
+            "operand_object": "BottomDetail_DropLeftBulb",
+            "solver": "EXACT"
+          }
+        },
+        {
+          "type": "boolean",
+          "name": "Cut_BottomDetail_DropLeftNeck",
+          "bpy_type": "BOOLEAN",
+          "params": {
+            "operation": "DIFFERENCE",
+            "operand_object": "BottomDetail_DropLeftNeck",
+            "solver": "EXACT"
+          }
+        },
+        {
+          "type": "boolean",
+          "name": "Cut_BottomDetail_DropLeftTip",
+          "bpy_type": "BOOLEAN",
+          "params": {
+            "operation": "DIFFERENCE",
+            "operand_object": "BottomDetail_DropLeftTip",
+            "solver": "EXACT"
+          }
+        },
+        {
+          "type": "boolean",
+          "name": "Cut_BottomDetail_DropRightBulb",
+          "bpy_type": "BOOLEAN",
+          "params": {
+            "operation": "DIFFERENCE",
+            "operand_object": "BottomDetail_DropRightBulb",
+            "solver": "EXACT"
+          }
+        },
+        {
+          "type": "boolean",
+          "name": "Cut_BottomDetail_DropRightNeck",
+          "bpy_type": "BOOLEAN",
+          "params": {
+            "operation": "DIFFERENCE",
+            "operand_object": "BottomDetail_DropRightNeck",
+            "solver": "EXACT"
+          }
+        },
+        {
+          "type": "boolean",
+          "name": "Cut_BottomDetail_DropRightTip",
+          "bpy_type": "BOOLEAN",
+          "params": {
+            "operation": "DIFFERENCE",
+            "operand_object": "BottomDetail_DropRightTip",
+            "solver": "EXACT"
+          }
+        },
+        {
+          "type": "boolean",
+          "name": "Cut_BottomDetail_SlotURBody",
+          "bpy_type": "BOOLEAN",
+          "params": {
+            "operation": "DIFFERENCE",
+            "operand_object": "BottomDetail_SlotURBody",
+            "solver": "EXACT"
+          }
+        },
+        {
+          "type": "boolean",
+          "name": "Cut_BottomDetail_SlotUREndA",
+          "bpy_type": "BOOLEAN",
+          "params": {
+            "operation": "DIFFERENCE",
+            "operand_object": "BottomDetail_SlotUREndA",
+            "solver": "EXACT"
+          }
+        },
+        {
+          "type": "boolean",
+          "name": "Cut_BottomDetail_SlotUREndB",
+          "bpy_type": "BOOLEAN",
+          "params": {
+            "operation": "DIFFERENCE",
+            "operand_object": "BottomDetail_SlotUREndB",
+            "solver": "EXACT"
+          }
+        },
+        {
+          "type": "boolean",
+          "name": "Cut_BottomDetail_SlotBLBody",
+          "bpy_type": "BOOLEAN",
+          "params": {
+            "operation": "DIFFERENCE",
+            "operand_object": "BottomDetail_SlotBLBody",
+            "solver": "EXACT"
+          }
+        },
+        {
+          "type": "boolean",
+          "name": "Cut_BottomDetail_SlotBLEndA",
+          "bpy_type": "BOOLEAN",
+          "params": {
+            "operation": "DIFFERENCE",
+            "operand_object": "BottomDetail_SlotBLEndA",
+            "solver": "EXACT"
+          }
+        },
+        {
+          "type": "boolean",
+          "name": "Cut_BottomDetail_SlotBLEndB",
+          "bpy_type": "BOOLEAN",
+          "params": {
+            "operation": "DIFFERENCE",
+            "operand_object": "BottomDetail_SlotBLEndB",
+            "solver": "EXACT"
+          }
+        },
+        {
+          "type": "boolean",
+          "name": "Cut_BottomDetail_TriangleTL",
+          "bpy_type": "BOOLEAN",
+          "params": {
+            "operation": "DIFFERENCE",
+            "operand_object": "BottomDetail_TriangleTL",
+            "solver": "EXACT"
+          }
+        },
+        {
+          "type": "boolean",
+          "name": "Cut_BottomDetail_TriangleBR",
+          "bpy_type": "BOOLEAN",
+          "params": {
+            "operation": "DIFFERENCE",
+            "operand_object": "BottomDetail_TriangleBR",
+            "solver": "EXACT"
+          }
+        },
+        {
+          "type": "bevel",
+          "name": "DetailEdgeSoftness",
+          "bpy_type": "BEVEL",
+          "params": {
+            "width": 0.025,
+            "segments": 3,
+            "limit_method": "ANGLE",
+            "angle_limit": 0.523599
+          }
+        }
+      ],
+      "keyframes": [
+        {
+          "frame": 1,
+          "property": "location",
+          "value": [
+            0.0,
+            0.0058,
+            0.0
+          ],
+          "interpolation": "LINEAR"
+        },
+        {
+          "frame": 40,
+          "property": "location",
+          "value": [
+            0.04,
+            0.0458,
+            -0.035
+          ],
+          "interpolation": "LINEAR"
+        }
+      ],
+      "parent": 8,
+      "mesh_params": {
+        "size": 2.0
+      }
+    },
+    {
+      "id": 27,
+      "name": "Top_MagnetCarrier",
+      "type": "MESH",
+      "mesh_type": "cube",
+      "location": [
+        0.0,
+        -0.0025,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "scale": [
+        0.0248,
+        0.0023,
+        0.0168
+      ],
+      "visible": true,
+      "material": 1,
+      "modifiers": [
+        {
+          "type": "bevel",
+          "name": "CarrierRadius",
+          "bpy_type": "BEVEL",
+          "params": {
+            "width": 0.14,
+            "segments": 6,
+            "limit_method": "ANGLE",
+            "angle_limit": 0.523599
+          }
+        }
+      ],
+      "keyframes": [
+        {
+          "frame": 1,
+          "property": "location",
+          "value": [
+            0.0,
+            -0.0025,
+            0.0
+          ],
+          "interpolation": "LINEAR"
+        },
+        {
+          "frame": 40,
+          "property": "location",
+          "value": [
+            -0.012,
+            -0.0165,
+            0.008
+          ],
+          "interpolation": "LINEAR"
+        }
+      ],
+      "parent": 4,
+      "mesh_params": {
+        "size": 2.0
+      }
+    },
+    {
+      "id": 28,
+      "name": "Bottom_MagnetCarrier",
+      "type": "MESH",
+      "mesh_type": "cube",
+      "location": [
+        0.0,
+        0.0025,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "scale": [
+        0.0248,
+        0.0023,
+        0.0168
+      ],
+      "visible": true,
+      "material": 1,
+      "modifiers": [
+        {
+          "type": "bevel",
+          "name": "CarrierRadius",
+          "bpy_type": "BEVEL",
+          "params": {
+            "width": 0.14,
+            "segments": 6,
+            "limit_method": "ANGLE",
+            "angle_limit": 0.523599
+          }
+        }
+      ],
+      "keyframes": [
+        {
+          "frame": 1,
+          "property": "location",
+          "value": [
+            0.0,
+            0.0025,
+            0.0
+          ],
+          "interpolation": "LINEAR"
+        },
+        {
+          "frame": 40,
+          "property": "location",
+          "value": [
+            0.012,
+            0.0165,
+            -0.008
+          ],
+          "interpolation": "LINEAR"
+        }
+      ],
+      "parent": 9,
+      "mesh_params": {
+        "size": 2.0
+      }
+    },
+    {
+      "id": 29,
+      "name": "Top_LowFrictionContact",
+      "type": "MESH",
+      "mesh_type": "cube",
+      "location": [
+        0.0,
+        -0.00015,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "scale": [
+        0.0246,
+        0.00015,
+        0.0166
+      ],
+      "visible": true,
+      "material": 4,
+      "modifiers": [
+        {
+          "type": "bevel",
+          "name": "ContactRadius",
+          "bpy_type": "BEVEL",
+          "params": {
+            "width": 0.002,
+            "segments": 5,
+            "limit_method": "ANGLE",
+            "angle_limit": 0.523599
+          }
+        }
+      ],
+      "keyframes": [
+        {
+          "frame": 1,
+          "property": "location",
+          "value": [
+            0.0,
+            -0.00015,
+            0.0
+          ],
+          "interpolation": "LINEAR"
+        },
+        {
+          "frame": 40,
+          "property": "location",
+          "value": [
+            -0.005,
+            -0.00615,
+            0.003
+          ],
+          "interpolation": "LINEAR"
+        }
+      ],
+      "parent": 7,
+      "mesh_params": {
+        "size": 2.0
+      }
+    },
+    {
+      "id": 30,
+      "name": "Bottom_LowFrictionContact",
+      "type": "MESH",
+      "mesh_type": "cube",
+      "location": [
+        0.0,
+        0.00015,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "scale": [
+        0.0246,
+        0.00015,
+        0.0166
+      ],
+      "visible": true,
+      "material": 4,
+      "modifiers": [
+        {
+          "type": "bevel",
+          "name": "ContactRadius",
+          "bpy_type": "BEVEL",
+          "params": {
+            "width": 0.002,
+            "segments": 5,
+            "limit_method": "ANGLE",
+            "angle_limit": 0.523599
+          }
+        }
+      ],
+      "keyframes": [
+        {
+          "frame": 1,
+          "property": "location",
+          "value": [
+            0.0,
+            0.00015,
+            0.0
+          ],
+          "interpolation": "LINEAR"
+        },
+        {
+          "frame": 40,
+          "property": "location",
+          "value": [
+            0.005,
+            0.00615,
+            -0.003
+          ],
+          "interpolation": "LINEAR"
+        }
+      ],
+      "parent": 12,
+      "mesh_params": {
+        "size": 2.0
+      }
+    },
+    {
+      "id": 31,
+      "name": "TopCut_SideLeft",
+      "type": "MESH",
+      "mesh_type": "cylinder",
+      "location": [
+        -0.019,
+        -0.0058,
+        0.0
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        30.0
+      ],
+      "scale": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "visible": false,
+      "material": null,
+      "modifiers": [],
+      "keyframes": [
+        {
+          "frame": 1,
+          "property": "location",
+          "value": [
+            -0.019,
+            -0.0058,
+            0.0
+          ],
+          "interpolation": "LINEAR"
+        },
+        {
+          "frame": 40,
+          "property": "location",
+          "value": [
+            -0.059,
+            -0.0458,
+            0.035
+          ],
+          "interpolation": "LINEAR"
+        }
+      ],
+      "parent": 3,
+      "mesh_params": {
+        "radius": 0.0044,
+        "depth": 0.006,
+        "vertices": 3
+      }
+    },
+    {
+      "id": 32,
+      "name": "TopCut_SideRight",
+      "type": "MESH",
+      "mesh_type": "cylinder",
+      "location": [
+        0.019,
+        -0.0058,
+        0.0
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        -30.0
+      ],
+      "scale": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "visible": false,
+      "material": null,
+      "modifiers": [],
+      "keyframes": [
+        {
+          "frame": 1,
+          "property": "location",
+          "value": [
+            0.019,
+            -0.0058,
+            0.0
+          ],
+          "interpolation": "LINEAR"
+        },
+        {
+          "frame": 40,
+          "property": "location",
+          "value": [
+            -0.021,
+            -0.0458,
+            0.035
+          ],
+          "interpolation": "LINEAR"
+        }
+      ],
+      "parent": 3,
+      "mesh_params": {
+        "radius": 0.0044,
+        "depth": 0.006,
+        "vertices": 3
+      }
+    },
+    {
+      "id": 33,
+      "name": "BottomCut_SideLeft",
+      "type": "MESH",
+      "mesh_type": "cylinder",
+      "location": [
+        -0.019,
+        0.0058,
+        0.0
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        30.0
+      ],
+      "scale": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "visible": false,
+      "material": null,
+      "modifiers": [],
+      "keyframes": [
+        {
+          "frame": 1,
+          "property": "location",
+          "value": [
+            -0.019,
+            0.0058,
+            0.0
+          ],
+          "interpolation": "LINEAR"
+        },
+        {
+          "frame": 40,
+          "property": "location",
+          "value": [
+            0.021,
+            0.0458,
+            -0.035
+          ],
+          "interpolation": "LINEAR"
+        }
+      ],
+      "parent": 8,
+      "mesh_params": {
+        "radius": 0.0044,
+        "depth": 0.006,
+        "vertices": 3
+      }
+    },
+    {
+      "id": 34,
+      "name": "BottomCut_SideRight",
+      "type": "MESH",
+      "mesh_type": "cylinder",
+      "location": [
+        0.019,
+        0.0058,
+        0.0
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        -30.0
+      ],
+      "scale": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "visible": false,
+      "material": null,
+      "modifiers": [],
+      "keyframes": [
+        {
+          "frame": 1,
+          "property": "location",
+          "value": [
+            0.019,
+            0.0058,
+            0.0
+          ],
+          "interpolation": "LINEAR"
+        },
+        {
+          "frame": 40,
+          "property": "location",
+          "value": [
+            0.059,
+            0.0458,
+            -0.035
+          ],
+          "interpolation": "LINEAR"
+        }
+      ],
+      "parent": 8,
+      "mesh_params": {
+        "radius": 0.0044,
+        "depth": 0.006,
+        "vertices": 3
+      }
+    },
+    {
+      "id": 35,
+      "name": "Top_Magnet_R1C1",
+      "type": "MESH",
+      "mesh_type": "cylinder",
+      "location": [
+        -0.019,
+        -0.0035,
+        0.0102
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "scale": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "visible": true,
+      "material": 2,
+      "modifiers": [
+        {
+          "type": "bevel",
+          "name": "MagnetEdge",
+          "bpy_type": "BEVEL",
+          "params": {
+            "width": 0.0005,
+            "segments": 4,
+            "limit_method": "ANGLE",
+            "angle_limit": 0.523599
+          }
+        }
+      ],
+      "keyframes": [
+        {
+          "frame": 1,
+          "property": "location",
+          "value": [
+            -0.019,
+            -0.0035,
+            0.0102
+          ],
+          "interpolation": "LINEAR"
+        },
+        {
+          "frame": 40,
+          "property": "location",
+          "value": [
+            -0.049,
+            -0.0335,
+            0.0352
+          ],
+          "interpolation": "LINEAR"
+        }
+      ],
+      "parent": 5,
+      "mesh_params": {
+        "radius": 0.0042,
+        "depth": 0.0062,
+        "vertices": 64
+      }
+    },
+    {
+      "id": 36,
+      "name": "Top_Magnet_R1C2",
+      "type": "MESH",
+      "mesh_type": "cylinder",
+      "location": [
+        -0.0095,
+        -0.0035,
+        0.0102
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "scale": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "visible": true,
+      "material": 2,
+      "modifiers": [
+        {
+          "type": "bevel",
+          "name": "MagnetEdge",
+          "bpy_type": "BEVEL",
+          "params": {
+            "width": 0.00035,
+            "segments": 4,
+            "limit_method": "ANGLE",
+            "angle_limit": 0.523599
+          }
+        }
+      ],
+      "keyframes": [
+        {
+          "frame": 1,
+          "property": "location",
+          "value": [
+            -0.0095,
+            -0.0035,
+            0.0102
+          ],
+          "interpolation": "LINEAR"
+        },
+        {
+          "frame": 40,
+          "property": "location",
+          "value": [
+            -0.0395,
+            -0.0335,
+            0.0352
+          ],
+          "interpolation": "LINEAR"
+        }
+      ],
+      "parent": 5,
+      "mesh_params": {
+        "radius": 0.00255,
+        "depth": 0.0062,
+        "vertices": 64
+      }
+    },
+    {
+      "id": 37,
+      "name": "Top_Magnet_R1C3",
+      "type": "MESH",
+      "mesh_type": "cylinder",
+      "location": [
+        0.0,
+        -0.0035,
+        0.0102
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "scale": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "visible": true,
+      "material": 2,
+      "modifiers": [
+        {
+          "type": "bevel",
+          "name": "MagnetEdge",
+          "bpy_type": "BEVEL",
+          "params": {
+            "width": 0.00035,
+            "segments": 4,
+            "limit_method": "ANGLE",
+            "angle_limit": 0.523599
+          }
+        }
+      ],
+      "keyframes": [
+        {
+          "frame": 1,
+          "property": "location",
+          "value": [
+            0.0,
+            -0.0035,
+            0.0102
+          ],
+          "interpolation": "LINEAR"
+        },
+        {
+          "frame": 40,
+          "property": "location",
+          "value": [
+            -0.03,
+            -0.0335,
+            0.0352
+          ],
+          "interpolation": "LINEAR"
+        }
+      ],
+      "parent": 5,
+      "mesh_params": {
+        "radius": 0.00255,
+        "depth": 0.0062,
+        "vertices": 64
+      }
+    },
+    {
+      "id": 38,
+      "name": "Top_Magnet_R1C4",
+      "type": "MESH",
+      "mesh_type": "cylinder",
+      "location": [
+        0.0095,
+        -0.0035,
+        0.0102
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "scale": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "visible": true,
+      "material": 2,
+      "modifiers": [
+        {
+          "type": "bevel",
+          "name": "MagnetEdge",
+          "bpy_type": "BEVEL",
+          "params": {
+            "width": 0.00035,
+            "segments": 4,
+            "limit_method": "ANGLE",
+            "angle_limit": 0.523599
+          }
+        }
+      ],
+      "keyframes": [
+        {
+          "frame": 1,
+          "property": "location",
+          "value": [
+            0.0095,
+            -0.0035,
+            0.0102
+          ],
+          "interpolation": "LINEAR"
+        },
+        {
+          "frame": 40,
+          "property": "location",
+          "value": [
+            -0.0205,
+            -0.0335,
+            0.0352
+          ],
+          "interpolation": "LINEAR"
+        }
+      ],
+      "parent": 5,
+      "mesh_params": {
+        "radius": 0.00255,
+        "depth": 0.0062,
+        "vertices": 64
+      }
+    },
+    {
+      "id": 39,
+      "name": "Top_Magnet_R1C5",
+      "type": "MESH",
+      "mesh_type": "cylinder",
+      "location": [
+        0.019,
+        -0.0035,
+        0.0102
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "scale": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "visible": true,
+      "material": 2,
+      "modifiers": [
+        {
+          "type": "bevel",
+          "name": "MagnetEdge",
+          "bpy_type": "BEVEL",
+          "params": {
+            "width": 0.0005,
+            "segments": 4,
+            "limit_method": "ANGLE",
+            "angle_limit": 0.523599
+          }
+        }
+      ],
+      "keyframes": [
+        {
+          "frame": 1,
+          "property": "location",
+          "value": [
+            0.019,
+            -0.0035,
+            0.0102
+          ],
+          "interpolation": "LINEAR"
+        },
+        {
+          "frame": 40,
+          "property": "location",
+          "value": [
+            -0.011,
+            -0.0335,
+            0.0352
+          ],
+          "interpolation": "LINEAR"
+        }
+      ],
+      "parent": 5,
+      "mesh_params": {
+        "radius": 0.0042,
+        "depth": 0.0062,
+        "vertices": 64
+      }
+    },
+    {
+      "id": 40,
+      "name": "Top_Magnet_R2C1",
+      "type": "MESH",
+      "mesh_type": "cylinder",
+      "location": [
+        -0.019,
+        -0.0035,
+        -0.0102
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "scale": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "visible": true,
+      "material": 2,
+      "modifiers": [
+        {
+          "type": "bevel",
+          "name": "MagnetEdge",
+          "bpy_type": "BEVEL",
+          "params": {
+            "width": 0.0005,
+            "segments": 4,
+            "limit_method": "ANGLE",
+            "angle_limit": 0.523599
+          }
+        }
+      ],
+      "keyframes": [
+        {
+          "frame": 1,
+          "property": "location",
+          "value": [
+            -0.019,
+            -0.0035,
+            -0.0102
+          ],
+          "interpolation": "LINEAR"
+        },
+        {
+          "frame": 40,
+          "property": "location",
+          "value": [
+            -0.049,
+            -0.0335,
+            0.0148
+          ],
+          "interpolation": "LINEAR"
+        }
+      ],
+      "parent": 5,
+      "mesh_params": {
+        "radius": 0.0042,
+        "depth": 0.0062,
+        "vertices": 64
+      }
+    },
+    {
+      "id": 41,
+      "name": "Top_Magnet_R2C2",
+      "type": "MESH",
+      "mesh_type": "cylinder",
+      "location": [
+        -0.0095,
+        -0.0035,
+        -0.0102
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "scale": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "visible": true,
+      "material": 2,
+      "modifiers": [
+        {
+          "type": "bevel",
+          "name": "MagnetEdge",
+          "bpy_type": "BEVEL",
+          "params": {
+            "width": 0.00035,
+            "segments": 4,
+            "limit_method": "ANGLE",
+            "angle_limit": 0.523599
+          }
+        }
+      ],
+      "keyframes": [
+        {
+          "frame": 1,
+          "property": "location",
+          "value": [
+            -0.0095,
+            -0.0035,
+            -0.0102
+          ],
+          "interpolation": "LINEAR"
+        },
+        {
+          "frame": 40,
+          "property": "location",
+          "value": [
+            -0.0395,
+            -0.0335,
+            0.0148
+          ],
+          "interpolation": "LINEAR"
+        }
+      ],
+      "parent": 5,
+      "mesh_params": {
+        "radius": 0.00255,
+        "depth": 0.0062,
+        "vertices": 64
+      }
+    },
+    {
+      "id": 42,
+      "name": "Top_Magnet_R2C3",
+      "type": "MESH",
+      "mesh_type": "cylinder",
+      "location": [
+        0.0,
+        -0.0035,
+        -0.0102
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "scale": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "visible": true,
+      "material": 2,
+      "modifiers": [
+        {
+          "type": "bevel",
+          "name": "MagnetEdge",
+          "bpy_type": "BEVEL",
+          "params": {
+            "width": 0.00035,
+            "segments": 4,
+            "limit_method": "ANGLE",
+            "angle_limit": 0.523599
+          }
+        }
+      ],
+      "keyframes": [
+        {
+          "frame": 1,
+          "property": "location",
+          "value": [
+            0.0,
+            -0.0035,
+            -0.0102
+          ],
+          "interpolation": "LINEAR"
+        },
+        {
+          "frame": 40,
+          "property": "location",
+          "value": [
+            -0.03,
+            -0.0335,
+            0.0148
+          ],
+          "interpolation": "LINEAR"
+        }
+      ],
+      "parent": 5,
+      "mesh_params": {
+        "radius": 0.00255,
+        "depth": 0.0062,
+        "vertices": 64
+      }
+    },
+    {
+      "id": 43,
+      "name": "Top_Magnet_R2C4",
+      "type": "MESH",
+      "mesh_type": "cylinder",
+      "location": [
+        0.0095,
+        -0.0035,
+        -0.0102
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "scale": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "visible": true,
+      "material": 2,
+      "modifiers": [
+        {
+          "type": "bevel",
+          "name": "MagnetEdge",
+          "bpy_type": "BEVEL",
+          "params": {
+            "width": 0.00035,
+            "segments": 4,
+            "limit_method": "ANGLE",
+            "angle_limit": 0.523599
+          }
+        }
+      ],
+      "keyframes": [
+        {
+          "frame": 1,
+          "property": "location",
+          "value": [
+            0.0095,
+            -0.0035,
+            -0.0102
+          ],
+          "interpolation": "LINEAR"
+        },
+        {
+          "frame": 40,
+          "property": "location",
+          "value": [
+            -0.0205,
+            -0.0335,
+            0.0148
+          ],
+          "interpolation": "LINEAR"
+        }
+      ],
+      "parent": 5,
+      "mesh_params": {
+        "radius": 0.00255,
+        "depth": 0.0062,
+        "vertices": 64
+      }
+    },
+    {
+      "id": 44,
+      "name": "Top_Magnet_R2C5",
+      "type": "MESH",
+      "mesh_type": "cylinder",
+      "location": [
+        0.019,
+        -0.0035,
+        -0.0102
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "scale": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "visible": true,
+      "material": 2,
+      "modifiers": [
+        {
+          "type": "bevel",
+          "name": "MagnetEdge",
+          "bpy_type": "BEVEL",
+          "params": {
+            "width": 0.0005,
+            "segments": 4,
+            "limit_method": "ANGLE",
+            "angle_limit": 0.523599
+          }
+        }
+      ],
+      "keyframes": [
+        {
+          "frame": 1,
+          "property": "location",
+          "value": [
+            0.019,
+            -0.0035,
+            -0.0102
+          ],
+          "interpolation": "LINEAR"
+        },
+        {
+          "frame": 40,
+          "property": "location",
+          "value": [
+            -0.011,
+            -0.0335,
+            0.0148
+          ],
+          "interpolation": "LINEAR"
+        }
+      ],
+      "parent": 5,
+      "mesh_params": {
+        "radius": 0.0042,
+        "depth": 0.0062,
+        "vertices": 64
+      }
+    },
+    {
+      "id": 45,
+      "name": "Bottom_Magnet_R1C1",
+      "type": "MESH",
+      "mesh_type": "cylinder",
+      "location": [
+        -0.019,
+        0.0035,
+        0.0102
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "scale": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "visible": true,
+      "material": 2,
+      "modifiers": [
+        {
+          "type": "bevel",
+          "name": "MagnetEdge",
+          "bpy_type": "BEVEL",
+          "params": {
+            "width": 0.0005,
+            "segments": 4,
+            "limit_method": "ANGLE",
+            "angle_limit": 0.523599
+          }
+        }
+      ],
+      "keyframes": [
+        {
+          "frame": 1,
+          "property": "location",
+          "value": [
+            -0.019,
+            0.0035,
+            0.0102
+          ],
+          "interpolation": "LINEAR"
+        },
+        {
+          "frame": 40,
+          "property": "location",
+          "value": [
+            0.011,
+            0.0335,
+            -0.0148
+          ],
+          "interpolation": "LINEAR"
+        }
+      ],
+      "parent": 10,
+      "mesh_params": {
+        "radius": 0.0042,
+        "depth": 0.0062,
+        "vertices": 64
+      }
+    },
+    {
+      "id": 46,
+      "name": "Bottom_Magnet_R1C2",
+      "type": "MESH",
+      "mesh_type": "cylinder",
+      "location": [
+        -0.0095,
+        0.0035,
+        0.0102
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "scale": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "visible": true,
+      "material": 2,
+      "modifiers": [
+        {
+          "type": "bevel",
+          "name": "MagnetEdge",
+          "bpy_type": "BEVEL",
+          "params": {
+            "width": 0.00035,
+            "segments": 4,
+            "limit_method": "ANGLE",
+            "angle_limit": 0.523599
+          }
+        }
+      ],
+      "keyframes": [
+        {
+          "frame": 1,
+          "property": "location",
+          "value": [
+            -0.0095,
+            0.0035,
+            0.0102
+          ],
+          "interpolation": "LINEAR"
+        },
+        {
+          "frame": 40,
+          "property": "location",
+          "value": [
+            0.0205,
+            0.0335,
+            -0.0148
+          ],
+          "interpolation": "LINEAR"
+        }
+      ],
+      "parent": 10,
+      "mesh_params": {
+        "radius": 0.00255,
+        "depth": 0.0062,
+        "vertices": 64
+      }
+    },
+    {
+      "id": 47,
+      "name": "Bottom_Magnet_R1C3",
+      "type": "MESH",
+      "mesh_type": "cylinder",
+      "location": [
+        0.0,
+        0.0035,
+        0.0102
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "scale": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "visible": true,
+      "material": 2,
+      "modifiers": [
+        {
+          "type": "bevel",
+          "name": "MagnetEdge",
+          "bpy_type": "BEVEL",
+          "params": {
+            "width": 0.00035,
+            "segments": 4,
+            "limit_method": "ANGLE",
+            "angle_limit": 0.523599
+          }
+        }
+      ],
+      "keyframes": [
+        {
+          "frame": 1,
+          "property": "location",
+          "value": [
+            0.0,
+            0.0035,
+            0.0102
+          ],
+          "interpolation": "LINEAR"
+        },
+        {
+          "frame": 40,
+          "property": "location",
+          "value": [
+            0.03,
+            0.0335,
+            -0.0148
+          ],
+          "interpolation": "LINEAR"
+        }
+      ],
+      "parent": 10,
+      "mesh_params": {
+        "radius": 0.00255,
+        "depth": 0.0062,
+        "vertices": 64
+      }
+    },
+    {
+      "id": 48,
+      "name": "Bottom_Magnet_R1C4",
+      "type": "MESH",
+      "mesh_type": "cylinder",
+      "location": [
+        0.0095,
+        0.0035,
+        0.0102
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "scale": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "visible": true,
+      "material": 2,
+      "modifiers": [
+        {
+          "type": "bevel",
+          "name": "MagnetEdge",
+          "bpy_type": "BEVEL",
+          "params": {
+            "width": 0.00035,
+            "segments": 4,
+            "limit_method": "ANGLE",
+            "angle_limit": 0.523599
+          }
+        }
+      ],
+      "keyframes": [
+        {
+          "frame": 1,
+          "property": "location",
+          "value": [
+            0.0095,
+            0.0035,
+            0.0102
+          ],
+          "interpolation": "LINEAR"
+        },
+        {
+          "frame": 40,
+          "property": "location",
+          "value": [
+            0.0395,
+            0.0335,
+            -0.0148
+          ],
+          "interpolation": "LINEAR"
+        }
+      ],
+      "parent": 10,
+      "mesh_params": {
+        "radius": 0.00255,
+        "depth": 0.0062,
+        "vertices": 64
+      }
+    },
+    {
+      "id": 49,
+      "name": "Bottom_Magnet_R1C5",
+      "type": "MESH",
+      "mesh_type": "cylinder",
+      "location": [
+        0.019,
+        0.0035,
+        0.0102
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "scale": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "visible": true,
+      "material": 2,
+      "modifiers": [
+        {
+          "type": "bevel",
+          "name": "MagnetEdge",
+          "bpy_type": "BEVEL",
+          "params": {
+            "width": 0.0005,
+            "segments": 4,
+            "limit_method": "ANGLE",
+            "angle_limit": 0.523599
+          }
+        }
+      ],
+      "keyframes": [
+        {
+          "frame": 1,
+          "property": "location",
+          "value": [
+            0.019,
+            0.0035,
+            0.0102
+          ],
+          "interpolation": "LINEAR"
+        },
+        {
+          "frame": 40,
+          "property": "location",
+          "value": [
+            0.049,
+            0.0335,
+            -0.0148
+          ],
+          "interpolation": "LINEAR"
+        }
+      ],
+      "parent": 10,
+      "mesh_params": {
+        "radius": 0.0042,
+        "depth": 0.0062,
+        "vertices": 64
+      }
+    },
+    {
+      "id": 50,
+      "name": "Bottom_Magnet_R2C1",
+      "type": "MESH",
+      "mesh_type": "cylinder",
+      "location": [
+        -0.019,
+        0.0035,
+        -0.0102
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "scale": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "visible": true,
+      "material": 2,
+      "modifiers": [
+        {
+          "type": "bevel",
+          "name": "MagnetEdge",
+          "bpy_type": "BEVEL",
+          "params": {
+            "width": 0.0005,
+            "segments": 4,
+            "limit_method": "ANGLE",
+            "angle_limit": 0.523599
+          }
+        }
+      ],
+      "keyframes": [
+        {
+          "frame": 1,
+          "property": "location",
+          "value": [
+            -0.019,
+            0.0035,
+            -0.0102
+          ],
+          "interpolation": "LINEAR"
+        },
+        {
+          "frame": 40,
+          "property": "location",
+          "value": [
+            0.011,
+            0.0335,
+            -0.0352
+          ],
+          "interpolation": "LINEAR"
+        }
+      ],
+      "parent": 10,
+      "mesh_params": {
+        "radius": 0.0042,
+        "depth": 0.0062,
+        "vertices": 64
+      }
+    },
+    {
+      "id": 51,
+      "name": "Bottom_Magnet_R2C2",
+      "type": "MESH",
+      "mesh_type": "cylinder",
+      "location": [
+        -0.0095,
+        0.0035,
+        -0.0102
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "scale": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "visible": true,
+      "material": 2,
+      "modifiers": [
+        {
+          "type": "bevel",
+          "name": "MagnetEdge",
+          "bpy_type": "BEVEL",
+          "params": {
+            "width": 0.00035,
+            "segments": 4,
+            "limit_method": "ANGLE",
+            "angle_limit": 0.523599
+          }
+        }
+      ],
+      "keyframes": [
+        {
+          "frame": 1,
+          "property": "location",
+          "value": [
+            -0.0095,
+            0.0035,
+            -0.0102
+          ],
+          "interpolation": "LINEAR"
+        },
+        {
+          "frame": 40,
+          "property": "location",
+          "value": [
+            0.0205,
+            0.0335,
+            -0.0352
+          ],
+          "interpolation": "LINEAR"
+        }
+      ],
+      "parent": 10,
+      "mesh_params": {
+        "radius": 0.00255,
+        "depth": 0.0062,
+        "vertices": 64
+      }
+    },
+    {
+      "id": 52,
+      "name": "Bottom_Magnet_R2C3",
+      "type": "MESH",
+      "mesh_type": "cylinder",
+      "location": [
+        0.0,
+        0.0035,
+        -0.0102
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "scale": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "visible": true,
+      "material": 2,
+      "modifiers": [
+        {
+          "type": "bevel",
+          "name": "MagnetEdge",
+          "bpy_type": "BEVEL",
+          "params": {
+            "width": 0.00035,
+            "segments": 4,
+            "limit_method": "ANGLE",
+            "angle_limit": 0.523599
+          }
+        }
+      ],
+      "keyframes": [
+        {
+          "frame": 1,
+          "property": "location",
+          "value": [
+            0.0,
+            0.0035,
+            -0.0102
+          ],
+          "interpolation": "LINEAR"
+        },
+        {
+          "frame": 40,
+          "property": "location",
+          "value": [
+            0.03,
+            0.0335,
+            -0.0352
+          ],
+          "interpolation": "LINEAR"
+        }
+      ],
+      "parent": 10,
+      "mesh_params": {
+        "radius": 0.00255,
+        "depth": 0.0062,
+        "vertices": 64
+      }
+    },
+    {
+      "id": 53,
+      "name": "Bottom_Magnet_R2C4",
+      "type": "MESH",
+      "mesh_type": "cylinder",
+      "location": [
+        0.0095,
+        0.0035,
+        -0.0102
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "scale": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "visible": true,
+      "material": 2,
+      "modifiers": [
+        {
+          "type": "bevel",
+          "name": "MagnetEdge",
+          "bpy_type": "BEVEL",
+          "params": {
+            "width": 0.00035,
+            "segments": 4,
+            "limit_method": "ANGLE",
+            "angle_limit": 0.523599
+          }
+        }
+      ],
+      "keyframes": [
+        {
+          "frame": 1,
+          "property": "location",
+          "value": [
+            0.0095,
+            0.0035,
+            -0.0102
+          ],
+          "interpolation": "LINEAR"
+        },
+        {
+          "frame": 40,
+          "property": "location",
+          "value": [
+            0.0395,
+            0.0335,
+            -0.0352
+          ],
+          "interpolation": "LINEAR"
+        }
+      ],
+      "parent": 10,
+      "mesh_params": {
+        "radius": 0.00255,
+        "depth": 0.0062,
+        "vertices": 64
+      }
+    },
+    {
+      "id": 54,
+      "name": "Bottom_Magnet_R2C5",
+      "type": "MESH",
+      "mesh_type": "cylinder",
+      "location": [
+        0.019,
+        0.0035,
+        -0.0102
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "scale": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "visible": true,
+      "material": 2,
+      "modifiers": [
+        {
+          "type": "bevel",
+          "name": "MagnetEdge",
+          "bpy_type": "BEVEL",
+          "params": {
+            "width": 0.0005,
+            "segments": 4,
+            "limit_method": "ANGLE",
+            "angle_limit": 0.523599
+          }
+        }
+      ],
+      "keyframes": [
+        {
+          "frame": 1,
+          "property": "location",
+          "value": [
+            0.019,
+            0.0035,
+            -0.0102
+          ],
+          "interpolation": "LINEAR"
+        },
+        {
+          "frame": 40,
+          "property": "location",
+          "value": [
+            0.049,
+            0.0335,
+            -0.0352
+          ],
+          "interpolation": "LINEAR"
+        }
+      ],
+      "parent": 10,
+      "mesh_params": {
+        "radius": 0.0042,
+        "depth": 0.0062,
+        "vertices": 64
+      }
+    },
+    {
+      "id": 55,
+      "name": "Top_Fork_Main",
+      "type": "MESH",
+      "mesh_type": "cube",
+      "location": [
+        0.0,
+        -0.00425,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "scale": [
+        0.015,
+        0.0003,
+        0.00055
+      ],
+      "visible": true,
+      "material": 3,
+      "modifiers": [
+        {
+          "type": "bevel",
+          "name": "ForkEdge",
+          "bpy_type": "BEVEL",
+          "params": {
+            "width": 0.00025,
+            "segments": 4,
+            "limit_method": "ANGLE",
+            "angle_limit": 0.523599
+          }
+        }
+      ],
+      "keyframes": [
+        {
+          "frame": 1,
+          "property": "location",
+          "value": [
+            0.0,
+            -0.00425,
+            0.0
+          ],
+          "interpolation": "LINEAR"
+        },
+        {
+          "frame": 40,
+          "property": "location",
+          "value": [
+            -0.02,
+            -0.02625,
+            0.015
+          ],
+          "interpolation": "LINEAR"
+        }
+      ],
+      "parent": 6,
+      "mesh_params": {
+        "size": 2.0
+      }
+    },
+    {
+      "id": 56,
+      "name": "Top_Fork_UpperTine",
+      "type": "MESH",
+      "mesh_type": "cube",
+      "location": [
+        -0.003,
+        -0.00425,
+        0.0028
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "scale": [
+        0.011,
+        0.0003,
+        0.00045
+      ],
+      "visible": true,
+      "material": 3,
+      "modifiers": [
+        {
+          "type": "bevel",
+          "name": "ForkEdge",
+          "bpy_type": "BEVEL",
+          "params": {
+            "width": 0.00025,
+            "segments": 4,
+            "limit_method": "ANGLE",
+            "angle_limit": 0.523599
+          }
+        }
+      ],
+      "keyframes": [
+        {
+          "frame": 1,
+          "property": "location",
+          "value": [
+            -0.003,
+            -0.00425,
+            0.0028
+          ],
+          "interpolation": "LINEAR"
+        },
+        {
+          "frame": 40,
+          "property": "location",
+          "value": [
+            -0.023,
+            -0.02625,
+            0.0178
+          ],
+          "interpolation": "LINEAR"
+        }
+      ],
+      "parent": 6,
+      "mesh_params": {
+        "size": 2.0
+      }
+    },
+    {
+      "id": 57,
+      "name": "Top_Fork_LowerTine",
+      "type": "MESH",
+      "mesh_type": "cube",
+      "location": [
+        0.003,
+        -0.00425,
+        -0.0028
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "scale": [
+        0.011,
+        0.0003,
+        0.00045
+      ],
+      "visible": true,
+      "material": 3,
+      "modifiers": [
+        {
+          "type": "bevel",
+          "name": "ForkEdge",
+          "bpy_type": "BEVEL",
+          "params": {
+            "width": 0.00025,
+            "segments": 4,
+            "limit_method": "ANGLE",
+            "angle_limit": 0.523599
+          }
+        }
+      ],
+      "keyframes": [
+        {
+          "frame": 1,
+          "property": "location",
+          "value": [
+            0.003,
+            -0.00425,
+            -0.0028
+          ],
+          "interpolation": "LINEAR"
+        },
+        {
+          "frame": 40,
+          "property": "location",
+          "value": [
+            -0.017,
+            -0.02625,
+            0.0122
+          ],
+          "interpolation": "LINEAR"
+        }
+      ],
+      "parent": 6,
+      "mesh_params": {
+        "size": 2.0
+      }
+    },
+    {
+      "id": 58,
+      "name": "Top_Fork_LeftLink",
+      "type": "MESH",
+      "mesh_type": "cube",
+      "location": [
+        -0.014,
+        -0.00425,
+        0.0014
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "scale": [
+        0.0005,
+        0.0003,
+        0.0014
+      ],
+      "visible": true,
+      "material": 3,
+      "modifiers": [
+        {
+          "type": "bevel",
+          "name": "ForkEdge",
+          "bpy_type": "BEVEL",
+          "params": {
+            "width": 0.00025,
+            "segments": 4,
+            "limit_method": "ANGLE",
+            "angle_limit": 0.523599
+          }
+        }
+      ],
+      "keyframes": [
+        {
+          "frame": 1,
+          "property": "location",
+          "value": [
+            -0.014,
+            -0.00425,
+            0.0014
+          ],
+          "interpolation": "LINEAR"
+        },
+        {
+          "frame": 40,
+          "property": "location",
+          "value": [
+            -0.034,
+            -0.02625,
+            0.0164
+          ],
+          "interpolation": "LINEAR"
+        }
+      ],
+      "parent": 6,
+      "mesh_params": {
+        "size": 2.0
+      }
+    },
+    {
+      "id": 59,
+      "name": "Top_Fork_RightLink",
+      "type": "MESH",
+      "mesh_type": "cube",
+      "location": [
+        0.014,
+        -0.00425,
+        -0.0014
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "scale": [
+        0.0005,
+        0.0003,
+        0.0014
+      ],
+      "visible": true,
+      "material": 3,
+      "modifiers": [
+        {
+          "type": "bevel",
+          "name": "ForkEdge",
+          "bpy_type": "BEVEL",
+          "params": {
+            "width": 0.00025,
+            "segments": 4,
+            "limit_method": "ANGLE",
+            "angle_limit": 0.523599
+          }
+        }
+      ],
+      "keyframes": [
+        {
+          "frame": 1,
+          "property": "location",
+          "value": [
+            0.014,
+            -0.00425,
+            -0.0014
+          ],
+          "interpolation": "LINEAR"
+        },
+        {
+          "frame": 40,
+          "property": "location",
+          "value": [
+            -0.006,
+            -0.02625,
+            0.0136
+          ],
+          "interpolation": "LINEAR"
+        }
+      ],
+      "parent": 6,
+      "mesh_params": {
+        "size": 2.0
+      }
+    },
+    {
+      "id": 60,
+      "name": "Bottom_Fork_Main",
+      "type": "MESH",
+      "mesh_type": "cube",
+      "location": [
+        0.0,
+        0.00425,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "scale": [
+        0.015,
+        0.0003,
+        0.00055
+      ],
+      "visible": true,
+      "material": 3,
+      "modifiers": [
+        {
+          "type": "bevel",
+          "name": "ForkEdge",
+          "bpy_type": "BEVEL",
+          "params": {
+            "width": 0.00025,
+            "segments": 4,
+            "limit_method": "ANGLE",
+            "angle_limit": 0.523599
+          }
+        }
+      ],
+      "keyframes": [
+        {
+          "frame": 1,
+          "property": "location",
+          "value": [
+            0.0,
+            0.00425,
+            0.0
+          ],
+          "interpolation": "LINEAR"
+        },
+        {
+          "frame": 40,
+          "property": "location",
+          "value": [
+            0.02,
+            0.02625,
+            -0.015
+          ],
+          "interpolation": "LINEAR"
+        }
+      ],
+      "parent": 11,
+      "mesh_params": {
+        "size": 2.0
+      }
+    },
+    {
+      "id": 61,
+      "name": "Bottom_Fork_UpperTine",
+      "type": "MESH",
+      "mesh_type": "cube",
+      "location": [
+        -0.003,
+        0.00425,
+        0.0028
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "scale": [
+        0.011,
+        0.0003,
+        0.00045
+      ],
+      "visible": true,
+      "material": 3,
+      "modifiers": [
+        {
+          "type": "bevel",
+          "name": "ForkEdge",
+          "bpy_type": "BEVEL",
+          "params": {
+            "width": 0.00025,
+            "segments": 4,
+            "limit_method": "ANGLE",
+            "angle_limit": 0.523599
+          }
+        }
+      ],
+      "keyframes": [
+        {
+          "frame": 1,
+          "property": "location",
+          "value": [
+            -0.003,
+            0.00425,
+            0.0028
+          ],
+          "interpolation": "LINEAR"
+        },
+        {
+          "frame": 40,
+          "property": "location",
+          "value": [
+            0.017,
+            0.02625,
+            -0.0122
+          ],
+          "interpolation": "LINEAR"
+        }
+      ],
+      "parent": 11,
+      "mesh_params": {
+        "size": 2.0
+      }
+    },
+    {
+      "id": 62,
+      "name": "Bottom_Fork_LowerTine",
+      "type": "MESH",
+      "mesh_type": "cube",
+      "location": [
+        0.003,
+        0.00425,
+        -0.0028
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "scale": [
+        0.011,
+        0.0003,
+        0.00045
+      ],
+      "visible": true,
+      "material": 3,
+      "modifiers": [
+        {
+          "type": "bevel",
+          "name": "ForkEdge",
+          "bpy_type": "BEVEL",
+          "params": {
+            "width": 0.00025,
+            "segments": 4,
+            "limit_method": "ANGLE",
+            "angle_limit": 0.523599
+          }
+        }
+      ],
+      "keyframes": [
+        {
+          "frame": 1,
+          "property": "location",
+          "value": [
+            0.003,
+            0.00425,
+            -0.0028
+          ],
+          "interpolation": "LINEAR"
+        },
+        {
+          "frame": 40,
+          "property": "location",
+          "value": [
+            0.023,
+            0.02625,
+            -0.0178
+          ],
+          "interpolation": "LINEAR"
+        }
+      ],
+      "parent": 11,
+      "mesh_params": {
+        "size": 2.0
+      }
+    },
+    {
+      "id": 63,
+      "name": "Bottom_Fork_LeftLink",
+      "type": "MESH",
+      "mesh_type": "cube",
+      "location": [
+        -0.014,
+        0.00425,
+        0.0014
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "scale": [
+        0.0005,
+        0.0003,
+        0.0014
+      ],
+      "visible": true,
+      "material": 3,
+      "modifiers": [
+        {
+          "type": "bevel",
+          "name": "ForkEdge",
+          "bpy_type": "BEVEL",
+          "params": {
+            "width": 0.00025,
+            "segments": 4,
+            "limit_method": "ANGLE",
+            "angle_limit": 0.523599
+          }
+        }
+      ],
+      "keyframes": [
+        {
+          "frame": 1,
+          "property": "location",
+          "value": [
+            -0.014,
+            0.00425,
+            0.0014
+          ],
+          "interpolation": "LINEAR"
+        },
+        {
+          "frame": 40,
+          "property": "location",
+          "value": [
+            0.006,
+            0.02625,
+            -0.0136
+          ],
+          "interpolation": "LINEAR"
+        }
+      ],
+      "parent": 11,
+      "mesh_params": {
+        "size": 2.0
+      }
+    },
+    {
+      "id": 64,
+      "name": "Bottom_Fork_RightLink",
+      "type": "MESH",
+      "mesh_type": "cube",
+      "location": [
+        0.014,
+        0.00425,
+        -0.0014
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "scale": [
+        0.0005,
+        0.0003,
+        0.0014
+      ],
+      "visible": true,
+      "material": 3,
+      "modifiers": [
+        {
+          "type": "bevel",
+          "name": "ForkEdge",
+          "bpy_type": "BEVEL",
+          "params": {
+            "width": 0.00025,
+            "segments": 4,
+            "limit_method": "ANGLE",
+            "angle_limit": 0.523599
+          }
+        }
+      ],
+      "keyframes": [
+        {
+          "frame": 1,
+          "property": "location",
+          "value": [
+            0.014,
+            0.00425,
+            -0.0014
+          ],
+          "interpolation": "LINEAR"
+        },
+        {
+          "frame": 40,
+          "property": "location",
+          "value": [
+            0.034,
+            0.02625,
+            -0.0164
+          ],
+          "interpolation": "LINEAR"
+        }
+      ],
+      "parent": 11,
+      "mesh_params": {
+        "size": 2.0
+      }
+    },
+    {
+      "id": 65,
+      "name": "Top_RidgeUpper",
+      "type": "MESH",
+      "mesh_type": "cube",
+      "location": [
+        0.0,
+        -0.00725,
+        0.0042
+      ],
+      "rotation": [
+        0.0,
+        -6.0,
+        0.0
+      ],
+      "scale": [
+        0.016,
+        0.00035,
+        0.0011
+      ],
+      "visible": false,
+      "material": 0,
+      "modifiers": [
+        {
+          "type": "bevel",
+          "name": "RidgeEdge",
+          "bpy_type": "BEVEL",
+          "params": {
+            "width": 0.00055,
+            "segments": 4,
+            "limit_method": "ANGLE",
+            "angle_limit": 0.523599
+          }
+        }
+      ],
+      "keyframes": [
+        {
+          "frame": 1,
+          "property": "location",
+          "value": [
+            0.0,
+            -0.00725,
+            0.0042
+          ],
+          "interpolation": "LINEAR"
+        },
+        {
+          "frame": 40,
+          "property": "location",
+          "value": [
+            -0.04,
+            -0.04725,
+            0.0392
+          ],
+          "interpolation": "LINEAR"
+        }
+      ],
+      "parent": 3,
+      "mesh_params": {
+        "size": 2.0
+      }
+    },
+    {
+      "id": 66,
+      "name": "Top_RidgeLower",
+      "type": "MESH",
+      "mesh_type": "cube",
+      "location": [
+        0.0,
+        -0.00725,
+        -0.0042
+      ],
+      "rotation": [
+        0.0,
+        6.0,
+        0.0
+      ],
+      "scale": [
+        0.016,
+        0.00035,
+        0.0011
+      ],
+      "visible": false,
+      "material": 0,
+      "modifiers": [
+        {
+          "type": "bevel",
+          "name": "RidgeEdge",
+          "bpy_type": "BEVEL",
+          "params": {
+            "width": 0.00055,
+            "segments": 4,
+            "limit_method": "ANGLE",
+            "angle_limit": 0.523599
+          }
+        }
+      ],
+      "keyframes": [
+        {
+          "frame": 1,
+          "property": "location",
+          "value": [
+            0.0,
+            -0.00725,
+            -0.0042
+          ],
+          "interpolation": "LINEAR"
+        },
+        {
+          "frame": 40,
+          "property": "location",
+          "value": [
+            -0.04,
+            -0.04725,
+            0.0308
+          ],
+          "interpolation": "LINEAR"
+        }
+      ],
+      "parent": 3,
+      "mesh_params": {
+        "size": 2.0
+      }
+    },
+    {
+      "id": 67,
+      "name": "Bottom_RidgeUpper",
+      "type": "MESH",
+      "mesh_type": "cube",
+      "location": [
+        0.0,
+        0.00725,
+        0.0042
+      ],
+      "rotation": [
+        0.0,
+        -6.0,
+        0.0
+      ],
+      "scale": [
+        0.016,
+        0.00035,
+        0.0011
+      ],
+      "visible": false,
+      "material": 0,
+      "modifiers": [
+        {
+          "type": "bevel",
+          "name": "RidgeEdge",
+          "bpy_type": "BEVEL",
+          "params": {
+            "width": 0.00055,
+            "segments": 4,
+            "limit_method": "ANGLE",
+            "angle_limit": 0.523599
+          }
+        }
+      ],
+      "keyframes": [
+        {
+          "frame": 1,
+          "property": "location",
+          "value": [
+            0.0,
+            0.00725,
+            0.0042
+          ],
+          "interpolation": "LINEAR"
+        },
+        {
+          "frame": 40,
+          "property": "location",
+          "value": [
+            0.04,
+            0.04725,
+            -0.0308
+          ],
+          "interpolation": "LINEAR"
+        }
+      ],
+      "parent": 8,
+      "mesh_params": {
+        "size": 2.0
+      }
+    },
+    {
+      "id": 68,
+      "name": "Bottom_RidgeLower",
+      "type": "MESH",
+      "mesh_type": "cube",
+      "location": [
+        0.0,
+        0.00725,
+        -0.0042
+      ],
+      "rotation": [
+        0.0,
+        6.0,
+        0.0
+      ],
+      "scale": [
+        0.016,
+        0.00035,
+        0.0011
+      ],
+      "visible": false,
+      "material": 0,
+      "modifiers": [
+        {
+          "type": "bevel",
+          "name": "RidgeEdge",
+          "bpy_type": "BEVEL",
+          "params": {
+            "width": 0.00055,
+            "segments": 4,
+            "limit_method": "ANGLE",
+            "angle_limit": 0.523599
+          }
+        }
+      ],
+      "keyframes": [
+        {
+          "frame": 1,
+          "property": "location",
+          "value": [
+            0.0,
+            0.00725,
+            -0.0042
+          ],
+          "interpolation": "LINEAR"
+        },
+        {
+          "frame": 40,
+          "property": "location",
+          "value": [
+            0.04,
+            0.04725,
+            -0.0392
+          ],
+          "interpolation": "LINEAR"
+        }
+      ],
+      "parent": 8,
+      "mesh_params": {
+        "size": 2.0
+      }
+    },
+    {
+      "id": 69,
+      "name": "StudioGround",
+      "type": "MESH",
+      "mesh_type": "cube",
+      "location": [
+        0.0,
+        0.0,
+        -0.045
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "scale": [
+        0.16,
+        0.16,
+        0.005
+      ],
+      "visible": true,
+      "material": 5,
+      "modifiers": [
+        {
+          "type": "bevel",
+          "name": "GroundEdge",
+          "bpy_type": "BEVEL",
+          "params": {
+            "width": 0.008,
+            "segments": 5,
+            "limit_method": "ANGLE",
+            "angle_limit": 0.523599
+          }
+        }
+      ],
+      "keyframes": [],
+      "parent": null,
+      "mesh_params": {
+        "size": 2.0
+      }
+    },
+    {
+      "id": 70,
+      "name": "StudioBackWall",
+      "type": "MESH",
+      "mesh_type": "cube",
+      "location": [
+        0.0,
+        0.09,
+        0.02
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "scale": [
+        0.16,
+        0.006,
+        0.12
+      ],
+      "visible": false,
+      "material": 5,
+      "modifiers": [
+        {
+          "type": "bevel",
+          "name": "BackdropEdge",
+          "bpy_type": "BEVEL",
+          "params": {
+            "width": 0.012,
+            "segments": 6,
+            "limit_method": "ANGLE",
+            "angle_limit": 0.523599
+          }
+        }
+      ],
+      "keyframes": [],
+      "parent": null,
+      "mesh_params": {
+        "size": 2.0
+      }
+    },
+    {
+      "id": 71,
+      "name": "TopDetail_DropLeftBulb",
+      "type": "MESH",
+      "mesh_type": "cylinder",
+      "location": [
+        -0.018,
+        -0.0058,
+        0.0068
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "scale": [
+        0.792453,
+        0.792453,
+        1.0
+      ],
+      "visible": false,
+      "material": null,
+      "modifiers": [],
+      "keyframes": [
+        {
+          "frame": 1,
+          "property": "location",
+          "value": [
+            -0.018,
+            -0.0058,
+            0.0068
+          ],
+          "interpolation": "LINEAR"
+        },
+        {
+          "frame": 40,
+          "property": "location",
+          "value": [
+            -0.058,
+            -0.0458,
+            0.0418
+          ],
+          "interpolation": "LINEAR"
+        }
+      ],
+      "parent": 3,
+      "mesh_params": {
+        "radius": 0.0053,
+        "depth": 0.006,
+        "vertices": 64
+      }
+    },
+    {
+      "id": 72,
+      "name": "TopDetail_DropLeftNeck",
+      "type": "MESH",
+      "mesh_type": "cube",
+      "location": [
+        0.0,
+        -0.0058,
+        0.0068
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "scale": [
+        0.018,
+        0.003,
+        0.00175
+      ],
+      "visible": false,
+      "material": null,
+      "modifiers": [],
+      "keyframes": [
+        {
+          "frame": 1,
+          "property": "location",
+          "value": [
+            0.0,
+            -0.0058,
+            0.0068
+          ],
+          "interpolation": "LINEAR"
+        },
+        {
+          "frame": 40,
+          "property": "location",
+          "value": [
+            -0.04,
+            -0.0458,
+            0.0418
+          ],
+          "interpolation": "LINEAR"
+        }
+      ],
+      "parent": 3,
+      "mesh_params": {
+        "size": 2.0
+      }
+    },
+    {
+      "id": 73,
+      "name": "TopDetail_DropLeftTip",
+      "type": "MESH",
+      "mesh_type": "cylinder",
+      "location": [
+        0.018,
+        -0.0058,
+        0.0068
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "scale": [
+        1.5,
+        1.5,
+        1.0
+      ],
+      "visible": false,
+      "material": null,
+      "modifiers": [],
+      "keyframes": [
+        {
+          "frame": 1,
+          "property": "location",
+          "value": [
+            0.018,
+            -0.0058,
+            0.0068
+          ],
+          "interpolation": "LINEAR"
+        },
+        {
+          "frame": 40,
+          "property": "location",
+          "value": [
+            -0.022,
+            -0.0458,
+            0.0418
+          ],
+          "interpolation": "LINEAR"
+        }
+      ],
+      "parent": 3,
+      "mesh_params": {
+        "radius": 0.0028,
+        "depth": 0.006,
+        "vertices": 64
+      }
+    },
+    {
+      "id": 74,
+      "name": "TopDetail_DropRightBulb",
+      "type": "MESH",
+      "mesh_type": "cylinder",
+      "location": [
+        -0.018,
+        -0.0058,
+        -0.0068
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "scale": [
+        0.792453,
+        0.792453,
+        1.0
+      ],
+      "visible": false,
+      "material": null,
+      "modifiers": [],
+      "keyframes": [
+        {
+          "frame": 1,
+          "property": "location",
+          "value": [
+            -0.018,
+            -0.0058,
+            -0.0068
+          ],
+          "interpolation": "LINEAR"
+        },
+        {
+          "frame": 40,
+          "property": "location",
+          "value": [
+            -0.058,
+            -0.0458,
+            0.0282
+          ],
+          "interpolation": "LINEAR"
+        }
+      ],
+      "parent": 3,
+      "mesh_params": {
+        "radius": 0.0053,
+        "depth": 0.006,
+        "vertices": 64
+      }
+    },
+    {
+      "id": 75,
+      "name": "TopDetail_DropRightNeck",
+      "type": "MESH",
+      "mesh_type": "cube",
+      "location": [
+        0.0,
+        -0.0058,
+        -0.0068
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "scale": [
+        0.018,
+        0.003,
+        0.00175
+      ],
+      "visible": false,
+      "material": null,
+      "modifiers": [],
+      "keyframes": [
+        {
+          "frame": 1,
+          "property": "location",
+          "value": [
+            0.0,
+            -0.0058,
+            -0.0068
+          ],
+          "interpolation": "LINEAR"
+        },
+        {
+          "frame": 40,
+          "property": "location",
+          "value": [
+            -0.04,
+            -0.0458,
+            0.0282
+          ],
+          "interpolation": "LINEAR"
+        }
+      ],
+      "parent": 3,
+      "mesh_params": {
+        "size": 2.0
+      }
+    },
+    {
+      "id": 76,
+      "name": "TopDetail_DropRightTip",
+      "type": "MESH",
+      "mesh_type": "cylinder",
+      "location": [
+        0.018,
+        -0.0058,
+        -0.0068
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "scale": [
+        1.5,
+        1.5,
+        1.0
+      ],
+      "visible": false,
+      "material": null,
+      "modifiers": [],
+      "keyframes": [
+        {
+          "frame": 1,
+          "property": "location",
+          "value": [
+            0.018,
+            -0.0058,
+            -0.0068
+          ],
+          "interpolation": "LINEAR"
+        },
+        {
+          "frame": 40,
+          "property": "location",
+          "value": [
+            -0.022,
+            -0.0458,
+            0.0282
+          ],
+          "interpolation": "LINEAR"
+        }
+      ],
+      "parent": 3,
+      "mesh_params": {
+        "radius": 0.0028,
+        "depth": 0.006,
+        "vertices": 64
+      }
+    },
+    {
+      "id": 77,
+      "name": "TopDetail_SlotURBody",
+      "type": "MESH",
+      "mesh_type": "cube",
+      "location": [
+        0.0,
+        -0.0058,
+        0.014
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "scale": [
+        0.0108,
+        0.003,
+        0.00175
+      ],
+      "visible": false,
+      "material": null,
+      "modifiers": [],
+      "keyframes": [
+        {
+          "frame": 1,
+          "property": "location",
+          "value": [
+            0.0,
+            -0.0058,
+            0.014
+          ],
+          "interpolation": "LINEAR"
+        },
+        {
+          "frame": 40,
+          "property": "location",
+          "value": [
+            -0.04,
+            -0.0458,
+            0.049
+          ],
+          "interpolation": "LINEAR"
+        }
+      ],
+      "parent": 3,
+      "mesh_params": {
+        "size": 2.0
+      }
+    },
+    {
+      "id": 78,
+      "name": "TopDetail_SlotUREndA",
+      "type": "MESH",
+      "mesh_type": "cylinder",
+      "location": [
+        -0.0108,
+        -0.0058,
+        0.014
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "scale": [
+        1.017442,
+        1.017442,
+        1.0
+      ],
+      "visible": false,
+      "material": null,
+      "modifiers": [],
+      "keyframes": [
+        {
+          "frame": 1,
+          "property": "location",
+          "value": [
+            -0.0108,
+            -0.0058,
+            0.014
+          ],
+          "interpolation": "LINEAR"
+        },
+        {
+          "frame": 40,
+          "property": "location",
+          "value": [
+            -0.0508,
+            -0.0458,
+            0.049
+          ],
+          "interpolation": "LINEAR"
+        }
+      ],
+      "parent": 3,
+      "mesh_params": {
+        "radius": 0.00172,
+        "depth": 0.006,
+        "vertices": 48
+      }
+    },
+    {
+      "id": 79,
+      "name": "TopDetail_SlotUREndB",
+      "type": "MESH",
+      "mesh_type": "cylinder",
+      "location": [
+        0.0108,
+        -0.0058,
+        0.014
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "scale": [
+        1.017442,
+        1.017442,
+        1.0
+      ],
+      "visible": false,
+      "material": null,
+      "modifiers": [],
+      "keyframes": [
+        {
+          "frame": 1,
+          "property": "location",
+          "value": [
+            0.0108,
+            -0.0058,
+            0.014
+          ],
+          "interpolation": "LINEAR"
+        },
+        {
+          "frame": 40,
+          "property": "location",
+          "value": [
+            -0.0292,
+            -0.0458,
+            0.049
+          ],
+          "interpolation": "LINEAR"
+        }
+      ],
+      "parent": 3,
+      "mesh_params": {
+        "radius": 0.00172,
+        "depth": 0.006,
+        "vertices": 48
+      }
+    },
+    {
+      "id": 80,
+      "name": "TopDetail_SlotBLBody",
+      "type": "MESH",
+      "mesh_type": "cube",
+      "location": [
+        0.0,
+        -0.0058,
+        -0.014
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "scale": [
+        0.0108,
+        0.003,
+        0.00175
+      ],
+      "visible": false,
+      "material": null,
+      "modifiers": [],
+      "keyframes": [
+        {
+          "frame": 1,
+          "property": "location",
+          "value": [
+            0.0,
+            -0.0058,
+            -0.014
+          ],
+          "interpolation": "LINEAR"
+        },
+        {
+          "frame": 40,
+          "property": "location",
+          "value": [
+            -0.04,
+            -0.0458,
+            0.021
+          ],
+          "interpolation": "LINEAR"
+        }
+      ],
+      "parent": 3,
+      "mesh_params": {
+        "size": 2.0
+      }
+    },
+    {
+      "id": 81,
+      "name": "TopDetail_SlotBLEndA",
+      "type": "MESH",
+      "mesh_type": "cylinder",
+      "location": [
+        -0.0108,
+        -0.0058,
+        -0.014
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "scale": [
+        1.017442,
+        1.017442,
+        1.0
+      ],
+      "visible": false,
+      "material": null,
+      "modifiers": [],
+      "keyframes": [
+        {
+          "frame": 1,
+          "property": "location",
+          "value": [
+            -0.0108,
+            -0.0058,
+            -0.014
+          ],
+          "interpolation": "LINEAR"
+        },
+        {
+          "frame": 40,
+          "property": "location",
+          "value": [
+            -0.0508,
+            -0.0458,
+            0.021
+          ],
+          "interpolation": "LINEAR"
+        }
+      ],
+      "parent": 3,
+      "mesh_params": {
+        "radius": 0.00172,
+        "depth": 0.006,
+        "vertices": 48
+      }
+    },
+    {
+      "id": 82,
+      "name": "TopDetail_SlotBLEndB",
+      "type": "MESH",
+      "mesh_type": "cylinder",
+      "location": [
+        0.0108,
+        -0.0058,
+        -0.014
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "scale": [
+        1.017442,
+        1.017442,
+        1.0
+      ],
+      "visible": false,
+      "material": null,
+      "modifiers": [],
+      "keyframes": [
+        {
+          "frame": 1,
+          "property": "location",
+          "value": [
+            0.0108,
+            -0.0058,
+            -0.014
+          ],
+          "interpolation": "LINEAR"
+        },
+        {
+          "frame": 40,
+          "property": "location",
+          "value": [
+            -0.0292,
+            -0.0458,
+            0.021
+          ],
+          "interpolation": "LINEAR"
+        }
+      ],
+      "parent": 3,
+      "mesh_params": {
+        "radius": 0.00172,
+        "depth": 0.006,
+        "vertices": 48
+      }
+    },
+    {
+      "id": 83,
+      "name": "TopDetail_TriangleTL",
+      "type": "MESH",
+      "mesh_type": "cylinder",
+      "location": [
+        -0.022,
+        -0.0058,
+        0.0
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        30.0
+      ],
+      "scale": [
+        0.684211,
+        0.684211,
+        1.0
+      ],
+      "visible": false,
+      "material": null,
+      "modifiers": [],
+      "keyframes": [
+        {
+          "frame": 1,
+          "property": "location",
+          "value": [
+            -0.022,
+            -0.0058,
+            0.0
+          ],
+          "interpolation": "LINEAR"
+        },
+        {
+          "frame": 40,
+          "property": "location",
+          "value": [
+            -0.062,
+            -0.0458,
+            0.035
+          ],
+          "interpolation": "LINEAR"
+        }
+      ],
+      "parent": 3,
+      "mesh_params": {
+        "radius": 0.0038,
+        "depth": 0.006,
+        "vertices": 3
+      }
+    },
+    {
+      "id": 84,
+      "name": "TopDetail_TriangleBR",
+      "type": "MESH",
+      "mesh_type": "cylinder",
+      "location": [
+        0.022,
+        -0.0058,
+        0.0
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        -30.0
+      ],
+      "scale": [
+        0.684211,
+        0.684211,
+        1.0
+      ],
+      "visible": false,
+      "material": null,
+      "modifiers": [],
+      "keyframes": [
+        {
+          "frame": 1,
+          "property": "location",
+          "value": [
+            0.022,
+            -0.0058,
+            0.0
+          ],
+          "interpolation": "LINEAR"
+        },
+        {
+          "frame": 40,
+          "property": "location",
+          "value": [
+            -0.018,
+            -0.0458,
+            0.035
+          ],
+          "interpolation": "LINEAR"
+        }
+      ],
+      "parent": 3,
+      "mesh_params": {
+        "radius": 0.0038,
+        "depth": 0.006,
+        "vertices": 3
+      }
+    },
+    {
+      "id": 85,
+      "name": "BottomDetail_DropLeftBulb",
+      "type": "MESH",
+      "mesh_type": "cylinder",
+      "location": [
+        -0.018,
+        0.0058,
+        0.0068
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "scale": [
+        0.792453,
+        0.792453,
+        1.0
+      ],
+      "visible": false,
+      "material": null,
+      "modifiers": [],
+      "keyframes": [
+        {
+          "frame": 1,
+          "property": "location",
+          "value": [
+            -0.018,
+            0.0058,
+            0.0068
+          ],
+          "interpolation": "LINEAR"
+        },
+        {
+          "frame": 40,
+          "property": "location",
+          "value": [
+            0.022,
+            0.0458,
+            -0.0282
+          ],
+          "interpolation": "LINEAR"
+        }
+      ],
+      "parent": 8,
+      "mesh_params": {
+        "radius": 0.0053,
+        "depth": 0.006,
+        "vertices": 64
+      }
+    },
+    {
+      "id": 86,
+      "name": "BottomDetail_DropLeftNeck",
+      "type": "MESH",
+      "mesh_type": "cube",
+      "location": [
+        0.0,
+        0.0058,
+        0.0068
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "scale": [
+        0.018,
+        0.003,
+        0.00175
+      ],
+      "visible": false,
+      "material": null,
+      "modifiers": [],
+      "keyframes": [
+        {
+          "frame": 1,
+          "property": "location",
+          "value": [
+            0.0,
+            0.0058,
+            0.0068
+          ],
+          "interpolation": "LINEAR"
+        },
+        {
+          "frame": 40,
+          "property": "location",
+          "value": [
+            0.04,
+            0.0458,
+            -0.0282
+          ],
+          "interpolation": "LINEAR"
+        }
+      ],
+      "parent": 8,
+      "mesh_params": {
+        "size": 2.0
+      }
+    },
+    {
+      "id": 87,
+      "name": "BottomDetail_DropLeftTip",
+      "type": "MESH",
+      "mesh_type": "cylinder",
+      "location": [
+        0.018,
+        0.0058,
+        0.0068
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "scale": [
+        1.5,
+        1.5,
+        1.0
+      ],
+      "visible": false,
+      "material": null,
+      "modifiers": [],
+      "keyframes": [
+        {
+          "frame": 1,
+          "property": "location",
+          "value": [
+            0.018,
+            0.0058,
+            0.0068
+          ],
+          "interpolation": "LINEAR"
+        },
+        {
+          "frame": 40,
+          "property": "location",
+          "value": [
+            0.058,
+            0.0458,
+            -0.0282
+          ],
+          "interpolation": "LINEAR"
+        }
+      ],
+      "parent": 8,
+      "mesh_params": {
+        "radius": 0.0028,
+        "depth": 0.006,
+        "vertices": 64
+      }
+    },
+    {
+      "id": 88,
+      "name": "BottomDetail_DropRightBulb",
+      "type": "MESH",
+      "mesh_type": "cylinder",
+      "location": [
+        -0.018,
+        0.0058,
+        -0.0068
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "scale": [
+        0.792453,
+        0.792453,
+        1.0
+      ],
+      "visible": false,
+      "material": null,
+      "modifiers": [],
+      "keyframes": [
+        {
+          "frame": 1,
+          "property": "location",
+          "value": [
+            -0.018,
+            0.0058,
+            -0.0068
+          ],
+          "interpolation": "LINEAR"
+        },
+        {
+          "frame": 40,
+          "property": "location",
+          "value": [
+            0.022,
+            0.0458,
+            -0.0418
+          ],
+          "interpolation": "LINEAR"
+        }
+      ],
+      "parent": 8,
+      "mesh_params": {
+        "radius": 0.0053,
+        "depth": 0.006,
+        "vertices": 64
+      }
+    },
+    {
+      "id": 89,
+      "name": "BottomDetail_DropRightNeck",
+      "type": "MESH",
+      "mesh_type": "cube",
+      "location": [
+        0.0,
+        0.0058,
+        -0.0068
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "scale": [
+        0.018,
+        0.003,
+        0.00175
+      ],
+      "visible": false,
+      "material": null,
+      "modifiers": [],
+      "keyframes": [
+        {
+          "frame": 1,
+          "property": "location",
+          "value": [
+            0.0,
+            0.0058,
+            -0.0068
+          ],
+          "interpolation": "LINEAR"
+        },
+        {
+          "frame": 40,
+          "property": "location",
+          "value": [
+            0.04,
+            0.0458,
+            -0.0418
+          ],
+          "interpolation": "LINEAR"
+        }
+      ],
+      "parent": 8,
+      "mesh_params": {
+        "size": 2.0
+      }
+    },
+    {
+      "id": 90,
+      "name": "BottomDetail_DropRightTip",
+      "type": "MESH",
+      "mesh_type": "cylinder",
+      "location": [
+        0.018,
+        0.0058,
+        -0.0068
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "scale": [
+        1.5,
+        1.5,
+        1.0
+      ],
+      "visible": false,
+      "material": null,
+      "modifiers": [],
+      "keyframes": [
+        {
+          "frame": 1,
+          "property": "location",
+          "value": [
+            0.018,
+            0.0058,
+            -0.0068
+          ],
+          "interpolation": "LINEAR"
+        },
+        {
+          "frame": 40,
+          "property": "location",
+          "value": [
+            0.058,
+            0.0458,
+            -0.0418
+          ],
+          "interpolation": "LINEAR"
+        }
+      ],
+      "parent": 8,
+      "mesh_params": {
+        "radius": 0.0028,
+        "depth": 0.006,
+        "vertices": 64
+      }
+    },
+    {
+      "id": 91,
+      "name": "BottomDetail_SlotURBody",
+      "type": "MESH",
+      "mesh_type": "cube",
+      "location": [
+        0.0,
+        0.0058,
+        0.014
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "scale": [
+        0.0108,
+        0.003,
+        0.00175
+      ],
+      "visible": false,
+      "material": null,
+      "modifiers": [],
+      "keyframes": [
+        {
+          "frame": 1,
+          "property": "location",
+          "value": [
+            0.0,
+            0.0058,
+            0.014
+          ],
+          "interpolation": "LINEAR"
+        },
+        {
+          "frame": 40,
+          "property": "location",
+          "value": [
+            0.04,
+            0.0458,
+            -0.021
+          ],
+          "interpolation": "LINEAR"
+        }
+      ],
+      "parent": 8,
+      "mesh_params": {
+        "size": 2.0
+      }
+    },
+    {
+      "id": 92,
+      "name": "BottomDetail_SlotUREndA",
+      "type": "MESH",
+      "mesh_type": "cylinder",
+      "location": [
+        -0.0108,
+        0.0058,
+        0.014
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "scale": [
+        1.017442,
+        1.017442,
+        1.0
+      ],
+      "visible": false,
+      "material": null,
+      "modifiers": [],
+      "keyframes": [
+        {
+          "frame": 1,
+          "property": "location",
+          "value": [
+            -0.0108,
+            0.0058,
+            0.014
+          ],
+          "interpolation": "LINEAR"
+        },
+        {
+          "frame": 40,
+          "property": "location",
+          "value": [
+            0.0292,
+            0.0458,
+            -0.021
+          ],
+          "interpolation": "LINEAR"
+        }
+      ],
+      "parent": 8,
+      "mesh_params": {
+        "radius": 0.00172,
+        "depth": 0.006,
+        "vertices": 48
+      }
+    },
+    {
+      "id": 93,
+      "name": "BottomDetail_SlotUREndB",
+      "type": "MESH",
+      "mesh_type": "cylinder",
+      "location": [
+        0.0108,
+        0.0058,
+        0.014
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "scale": [
+        1.017442,
+        1.017442,
+        1.0
+      ],
+      "visible": false,
+      "material": null,
+      "modifiers": [],
+      "keyframes": [
+        {
+          "frame": 1,
+          "property": "location",
+          "value": [
+            0.0108,
+            0.0058,
+            0.014
+          ],
+          "interpolation": "LINEAR"
+        },
+        {
+          "frame": 40,
+          "property": "location",
+          "value": [
+            0.0508,
+            0.0458,
+            -0.021
+          ],
+          "interpolation": "LINEAR"
+        }
+      ],
+      "parent": 8,
+      "mesh_params": {
+        "radius": 0.00172,
+        "depth": 0.006,
+        "vertices": 48
+      }
+    },
+    {
+      "id": 94,
+      "name": "BottomDetail_SlotBLBody",
+      "type": "MESH",
+      "mesh_type": "cube",
+      "location": [
+        0.0,
+        0.0058,
+        -0.014
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "scale": [
+        0.0108,
+        0.003,
+        0.00175
+      ],
+      "visible": false,
+      "material": null,
+      "modifiers": [],
+      "keyframes": [
+        {
+          "frame": 1,
+          "property": "location",
+          "value": [
+            0.0,
+            0.0058,
+            -0.014
+          ],
+          "interpolation": "LINEAR"
+        },
+        {
+          "frame": 40,
+          "property": "location",
+          "value": [
+            0.04,
+            0.0458,
+            -0.049
+          ],
+          "interpolation": "LINEAR"
+        }
+      ],
+      "parent": 8,
+      "mesh_params": {
+        "size": 2.0
+      }
+    },
+    {
+      "id": 95,
+      "name": "BottomDetail_SlotBLEndA",
+      "type": "MESH",
+      "mesh_type": "cylinder",
+      "location": [
+        -0.0108,
+        0.0058,
+        -0.014
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "scale": [
+        1.017442,
+        1.017442,
+        1.0
+      ],
+      "visible": false,
+      "material": null,
+      "modifiers": [],
+      "keyframes": [
+        {
+          "frame": 1,
+          "property": "location",
+          "value": [
+            -0.0108,
+            0.0058,
+            -0.014
+          ],
+          "interpolation": "LINEAR"
+        },
+        {
+          "frame": 40,
+          "property": "location",
+          "value": [
+            0.0292,
+            0.0458,
+            -0.049
+          ],
+          "interpolation": "LINEAR"
+        }
+      ],
+      "parent": 8,
+      "mesh_params": {
+        "radius": 0.00172,
+        "depth": 0.006,
+        "vertices": 48
+      }
+    },
+    {
+      "id": 96,
+      "name": "BottomDetail_SlotBLEndB",
+      "type": "MESH",
+      "mesh_type": "cylinder",
+      "location": [
+        0.0108,
+        0.0058,
+        -0.014
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "scale": [
+        1.017442,
+        1.017442,
+        1.0
+      ],
+      "visible": false,
+      "material": null,
+      "modifiers": [],
+      "keyframes": [
+        {
+          "frame": 1,
+          "property": "location",
+          "value": [
+            0.0108,
+            0.0058,
+            -0.014
+          ],
+          "interpolation": "LINEAR"
+        },
+        {
+          "frame": 40,
+          "property": "location",
+          "value": [
+            0.0508,
+            0.0458,
+            -0.049
+          ],
+          "interpolation": "LINEAR"
+        }
+      ],
+      "parent": 8,
+      "mesh_params": {
+        "radius": 0.00172,
+        "depth": 0.006,
+        "vertices": 48
+      }
+    },
+    {
+      "id": 97,
+      "name": "BottomDetail_TriangleTL",
+      "type": "MESH",
+      "mesh_type": "cylinder",
+      "location": [
+        -0.022,
+        0.0058,
+        0.0
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        30.0
+      ],
+      "scale": [
+        0.684211,
+        0.684211,
+        1.0
+      ],
+      "visible": false,
+      "material": null,
+      "modifiers": [],
+      "keyframes": [
+        {
+          "frame": 1,
+          "property": "location",
+          "value": [
+            -0.022,
+            0.0058,
+            0.0
+          ],
+          "interpolation": "LINEAR"
+        },
+        {
+          "frame": 40,
+          "property": "location",
+          "value": [
+            0.018,
+            0.0458,
+            -0.035
+          ],
+          "interpolation": "LINEAR"
+        }
+      ],
+      "parent": 8,
+      "mesh_params": {
+        "radius": 0.0038,
+        "depth": 0.006,
+        "vertices": 3
+      }
+    },
+    {
+      "id": 98,
+      "name": "BottomDetail_TriangleBR",
+      "type": "MESH",
+      "mesh_type": "cylinder",
+      "location": [
+        0.022,
+        0.0058,
+        0.0
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        -30.0
+      ],
+      "scale": [
+        0.684211,
+        0.684211,
+        1.0
+      ],
+      "visible": false,
+      "material": null,
+      "modifiers": [],
+      "keyframes": [
+        {
+          "frame": 1,
+          "property": "location",
+          "value": [
+            0.022,
+            0.0058,
+            0.0
+          ],
+          "interpolation": "LINEAR"
+        },
+        {
+          "frame": 40,
+          "property": "location",
+          "value": [
+            0.062,
+            0.0458,
+            -0.035
+          ],
+          "interpolation": "LINEAR"
+        }
+      ],
+      "parent": 8,
+      "mesh_params": {
+        "radius": 0.0038,
+        "depth": 0.006,
+        "vertices": 3
+      }
+    },
+    {
+      "id": 99,
+      "name": "MiddlePatternPlate",
+      "type": "MESH",
+      "mesh_type": "cube",
+      "location": [
+        0.0,
+        -0.00425,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "scale": [
+        0.0235,
+        0.00025,
+        0.0155
+      ],
+      "visible": true,
+      "material": 0,
+      "modifiers": [
+        {
+          "type": "bevel",
+          "name": "PatternPlateRadius",
+          "bpy_type": "BEVEL",
+          "params": {
+            "width": 0.14,
+            "segments": 7,
+            "limit_method": "ANGLE",
+            "angle_limit": 0.523599
+          }
+        }
+      ],
+      "keyframes": [
+        {
+          "frame": 1,
+          "property": "location",
+          "value": [
+            0.0,
+            -0.00425,
+            0.0
+          ],
+          "interpolation": "LINEAR"
+        },
+        {
+          "frame": 40,
+          "property": "location",
+          "value": [
+            -0.024,
+            -0.03025,
+            0.019
+          ],
+          "interpolation": "LINEAR"
+        }
+      ],
+      "parent": 4,
+      "mesh_params": {
+        "size": 2.0
+      }
+    },
+    {
+      "id": 100,
+      "name": "PatternScrewCap",
+      "type": "MESH",
+      "mesh_type": "cylinder",
+      "location": [
+        0.0,
+        -0.00472,
+        0.0
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "scale": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "visible": true,
+      "material": 2,
+      "modifiers": [],
+      "keyframes": [
+        {
+          "frame": 1,
+          "property": "location",
+          "value": [
+            0.0,
+            -0.00472,
+            0.0
+          ],
+          "interpolation": "LINEAR"
+        },
+        {
+          "frame": 40,
+          "property": "location",
+          "value": [
+            -0.024,
+            -0.03072,
+            0.019
+          ],
+          "interpolation": "LINEAR"
+        }
+      ],
+      "parent": 4,
+      "mesh_params": {
+        "radius": 0.0022,
+        "depth": 0.0005,
+        "vertices": 64
+      }
+    },
+    {
+      "id": 101,
+      "name": "PatternScrewInset",
+      "type": "MESH",
+      "mesh_type": "cylinder",
+      "location": [
+        0.0,
+        -0.00502,
+        0.0
+      ],
+      "rotation": [
+        90.0,
+        0.0,
+        0.0
+      ],
+      "scale": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "visible": true,
+      "material": 1,
+      "modifiers": [],
+      "keyframes": [
+        {
+          "frame": 1,
+          "property": "location",
+          "value": [
+            0.0,
+            -0.00502,
+            0.0
+          ],
+          "interpolation": "LINEAR"
+        },
+        {
+          "frame": 40,
+          "property": "location",
+          "value": [
+            -0.024,
+            -0.03102,
+            0.019
+          ],
+          "interpolation": "LINEAR"
+        }
+      ],
+      "parent": 4,
+      "mesh_params": {
+        "radius": 0.00072,
+        "depth": 0.0002,
+        "vertices": 32
+      }
+    },
+    {
+      "id": 102,
+      "name": "PatternGroove_TL0_Outer",
+      "type": "MESH",
+      "mesh_type": "cube",
+      "location": [
+        -0.0175,
+        -0.00505,
+        0.004
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "scale": [
+        0.0035,
+        0.00018,
+        0.00028
+      ],
+      "visible": true,
+      "material": 6,
+      "modifiers": [],
+      "keyframes": [
+        {
+          "frame": 1,
+          "property": "location",
+          "value": [
+            -0.0175,
+            -0.00505,
+            0.004
+          ],
+          "interpolation": "LINEAR"
+        },
+        {
+          "frame": 40,
+          "property": "location",
+          "value": [
+            -0.0415,
+            -0.03105,
+            0.023
+          ],
+          "interpolation": "LINEAR"
+        }
+      ],
+      "parent": 4,
+      "mesh_params": {
+        "size": 2.0
+      }
+    },
+    {
+      "id": 103,
+      "name": "PatternGroove_TL0_Diag",
+      "type": "MESH",
+      "mesh_type": "cube",
+      "location": [
+        -0.009,
+        -0.00505,
+        0.0034
+      ],
+      "rotation": [
+        0.0,
+        6.842773412630941,
+        0.0
+      ],
+      "scale": [
+        0.0050359,
+        0.00018,
+        0.00028
+      ],
+      "visible": true,
+      "material": 6,
+      "modifiers": [],
+      "keyframes": [
+        {
+          "frame": 1,
+          "property": "location",
+          "value": [
+            -0.009,
+            -0.00505,
+            0.0034
+          ],
+          "interpolation": "LINEAR"
+        },
+        {
+          "frame": 40,
+          "property": "location",
+          "value": [
+            -0.033,
+            -0.03105,
+            0.0224
+          ],
+          "interpolation": "LINEAR"
+        }
+      ],
+      "parent": 4,
+      "mesh_params": {
+        "size": 2.0
+      }
+    },
+    {
+      "id": 104,
+      "name": "PatternGroove_TR0_Diag",
+      "type": "MESH",
+      "mesh_type": "cube",
+      "location": [
+        0.009,
+        -0.00505,
+        0.0034
+      ],
+      "rotation": [
+        0.0,
+        -6.842773412630941,
+        0.0
+      ],
+      "scale": [
+        0.0050359,
+        0.00018,
+        0.00028
+      ],
+      "visible": true,
+      "material": 6,
+      "modifiers": [],
+      "keyframes": [
+        {
+          "frame": 1,
+          "property": "location",
+          "value": [
+            0.009,
+            -0.00505,
+            0.0034
+          ],
+          "interpolation": "LINEAR"
+        },
+        {
+          "frame": 40,
+          "property": "location",
+          "value": [
+            -0.015,
+            -0.03105,
+            0.0224
+          ],
+          "interpolation": "LINEAR"
+        }
+      ],
+      "parent": 4,
+      "mesh_params": {
+        "size": 2.0
+      }
+    },
+    {
+      "id": 105,
+      "name": "PatternGroove_TR0_Outer",
+      "type": "MESH",
+      "mesh_type": "cube",
+      "location": [
+        0.0175,
+        -0.00505,
+        0.004
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "scale": [
+        0.0035,
+        0.00018,
+        0.00028
+      ],
+      "visible": true,
+      "material": 6,
+      "modifiers": [],
+      "keyframes": [
+        {
+          "frame": 1,
+          "property": "location",
+          "value": [
+            0.0175,
+            -0.00505,
+            0.004
+          ],
+          "interpolation": "LINEAR"
+        },
+        {
+          "frame": 40,
+          "property": "location",
+          "value": [
+            -0.0065,
+            -0.03105,
+            0.023
+          ],
+          "interpolation": "LINEAR"
+        }
+      ],
+      "parent": 4,
+      "mesh_params": {
+        "size": 2.0
+      }
+    },
+    {
+      "id": 106,
+      "name": "PatternGroove_BL0_Outer",
+      "type": "MESH",
+      "mesh_type": "cube",
+      "location": [
+        -0.0175,
+        -0.00505,
+        -0.004
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "scale": [
+        0.0035,
+        0.00018,
+        0.00028
+      ],
+      "visible": true,
+      "material": 6,
+      "modifiers": [],
+      "keyframes": [
+        {
+          "frame": 1,
+          "property": "location",
+          "value": [
+            -0.0175,
+            -0.00505,
+            -0.004
+          ],
+          "interpolation": "LINEAR"
+        },
+        {
+          "frame": 40,
+          "property": "location",
+          "value": [
+            -0.0415,
+            -0.03105,
+            0.015
+          ],
+          "interpolation": "LINEAR"
+        }
+      ],
+      "parent": 4,
+      "mesh_params": {
+        "size": 2.0
+      }
+    },
+    {
+      "id": 107,
+      "name": "PatternGroove_BL0_Diag",
+      "type": "MESH",
+      "mesh_type": "cube",
+      "location": [
+        -0.009,
+        -0.00505,
+        -0.0034
+      ],
+      "rotation": [
+        0.0,
+        -6.842773412630941,
+        0.0
+      ],
+      "scale": [
+        0.0050359,
+        0.00018,
+        0.00028
+      ],
+      "visible": true,
+      "material": 6,
+      "modifiers": [],
+      "keyframes": [
+        {
+          "frame": 1,
+          "property": "location",
+          "value": [
+            -0.009,
+            -0.00505,
+            -0.0034
+          ],
+          "interpolation": "LINEAR"
+        },
+        {
+          "frame": 40,
+          "property": "location",
+          "value": [
+            -0.033,
+            -0.03105,
+            0.0156
+          ],
+          "interpolation": "LINEAR"
+        }
+      ],
+      "parent": 4,
+      "mesh_params": {
+        "size": 2.0
+      }
+    },
+    {
+      "id": 108,
+      "name": "PatternGroove_BR0_Diag",
+      "type": "MESH",
+      "mesh_type": "cube",
+      "location": [
+        0.009,
+        -0.00505,
+        -0.0034
+      ],
+      "rotation": [
+        0.0,
+        6.842773412630941,
+        0.0
+      ],
+      "scale": [
+        0.0050359,
+        0.00018,
+        0.00028
+      ],
+      "visible": true,
+      "material": 6,
+      "modifiers": [],
+      "keyframes": [
+        {
+          "frame": 1,
+          "property": "location",
+          "value": [
+            0.009,
+            -0.00505,
+            -0.0034
+          ],
+          "interpolation": "LINEAR"
+        },
+        {
+          "frame": 40,
+          "property": "location",
+          "value": [
+            -0.015,
+            -0.03105,
+            0.0156
+          ],
+          "interpolation": "LINEAR"
+        }
+      ],
+      "parent": 4,
+      "mesh_params": {
+        "size": 2.0
+      }
+    },
+    {
+      "id": 109,
+      "name": "PatternGroove_BR0_Outer",
+      "type": "MESH",
+      "mesh_type": "cube",
+      "location": [
+        0.0175,
+        -0.00505,
+        -0.004
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "scale": [
+        0.0035,
+        0.00018,
+        0.00028
+      ],
+      "visible": true,
+      "material": 6,
+      "modifiers": [],
+      "keyframes": [
+        {
+          "frame": 1,
+          "property": "location",
+          "value": [
+            0.0175,
+            -0.00505,
+            -0.004
+          ],
+          "interpolation": "LINEAR"
+        },
+        {
+          "frame": 40,
+          "property": "location",
+          "value": [
+            -0.0065,
+            -0.03105,
+            0.015
+          ],
+          "interpolation": "LINEAR"
+        }
+      ],
+      "parent": 4,
+      "mesh_params": {
+        "size": 2.0
+      }
+    },
+    {
+      "id": 110,
+      "name": "PatternGroove_TL1_Outer",
+      "type": "MESH",
+      "mesh_type": "cube",
+      "location": [
+        -0.0175,
+        -0.00505,
+        0.006
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "scale": [
+        0.0035,
+        0.00018,
+        0.00028
+      ],
+      "visible": true,
+      "material": 6,
+      "modifiers": [],
+      "keyframes": [
+        {
+          "frame": 1,
+          "property": "location",
+          "value": [
+            -0.0175,
+            -0.00505,
+            0.006
+          ],
+          "interpolation": "LINEAR"
+        },
+        {
+          "frame": 40,
+          "property": "location",
+          "value": [
+            -0.0415,
+            -0.03105,
+            0.025
+          ],
+          "interpolation": "LINEAR"
+        }
+      ],
+      "parent": 4,
+      "mesh_params": {
+        "size": 2.0
+      }
+    },
+    {
+      "id": 111,
+      "name": "PatternGroove_TL1_Diag",
+      "type": "MESH",
+      "mesh_type": "cube",
+      "location": [
+        -0.009,
+        -0.00505,
+        0.004975
+      ],
+      "rotation": [
+        0.0,
+        11.585126224855046,
+        0.0
+      ],
+      "scale": [
+        0.005104,
+        0.00018,
+        0.00028
+      ],
+      "visible": true,
+      "material": 6,
+      "modifiers": [],
+      "keyframes": [
+        {
+          "frame": 1,
+          "property": "location",
+          "value": [
+            -0.009,
+            -0.00505,
+            0.004975
+          ],
+          "interpolation": "LINEAR"
+        },
+        {
+          "frame": 40,
+          "property": "location",
+          "value": [
+            -0.033,
+            -0.03105,
+            0.023975
+          ],
+          "interpolation": "LINEAR"
+        }
+      ],
+      "parent": 4,
+      "mesh_params": {
+        "size": 2.0
+      }
+    },
+    {
+      "id": 112,
+      "name": "PatternGroove_TR1_Diag",
+      "type": "MESH",
+      "mesh_type": "cube",
+      "location": [
+        0.009,
+        -0.00505,
+        0.004975
+      ],
+      "rotation": [
+        0.0,
+        -11.585126224855046,
+        0.0
+      ],
+      "scale": [
+        0.005104,
+        0.00018,
+        0.00028
+      ],
+      "visible": true,
+      "material": 6,
+      "modifiers": [],
+      "keyframes": [
+        {
+          "frame": 1,
+          "property": "location",
+          "value": [
+            0.009,
+            -0.00505,
+            0.004975
+          ],
+          "interpolation": "LINEAR"
+        },
+        {
+          "frame": 40,
+          "property": "location",
+          "value": [
+            -0.015,
+            -0.03105,
+            0.023975
+          ],
+          "interpolation": "LINEAR"
+        }
+      ],
+      "parent": 4,
+      "mesh_params": {
+        "size": 2.0
+      }
+    },
+    {
+      "id": 113,
+      "name": "PatternGroove_TR1_Outer",
+      "type": "MESH",
+      "mesh_type": "cube",
+      "location": [
+        0.0175,
+        -0.00505,
+        0.006
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "scale": [
+        0.0035,
+        0.00018,
+        0.00028
+      ],
+      "visible": true,
+      "material": 6,
+      "modifiers": [],
+      "keyframes": [
+        {
+          "frame": 1,
+          "property": "location",
+          "value": [
+            0.0175,
+            -0.00505,
+            0.006
+          ],
+          "interpolation": "LINEAR"
+        },
+        {
+          "frame": 40,
+          "property": "location",
+          "value": [
+            -0.0065,
+            -0.03105,
+            0.025
+          ],
+          "interpolation": "LINEAR"
+        }
+      ],
+      "parent": 4,
+      "mesh_params": {
+        "size": 2.0
+      }
+    },
+    {
+      "id": 114,
+      "name": "PatternGroove_BL1_Outer",
+      "type": "MESH",
+      "mesh_type": "cube",
+      "location": [
+        -0.0175,
+        -0.00505,
+        -0.006
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "scale": [
+        0.0035,
+        0.00018,
+        0.00028
+      ],
+      "visible": true,
+      "material": 6,
+      "modifiers": [],
+      "keyframes": [
+        {
+          "frame": 1,
+          "property": "location",
+          "value": [
+            -0.0175,
+            -0.00505,
+            -0.006
+          ],
+          "interpolation": "LINEAR"
+        },
+        {
+          "frame": 40,
+          "property": "location",
+          "value": [
+            -0.0415,
+            -0.03105,
+            0.013
+          ],
+          "interpolation": "LINEAR"
+        }
+      ],
+      "parent": 4,
+      "mesh_params": {
+        "size": 2.0
+      }
+    },
+    {
+      "id": 115,
+      "name": "PatternGroove_BL1_Diag",
+      "type": "MESH",
+      "mesh_type": "cube",
+      "location": [
+        -0.009,
+        -0.00505,
+        -0.004975
+      ],
+      "rotation": [
+        0.0,
+        -11.585126224855046,
+        0.0
+      ],
+      "scale": [
+        0.005104,
+        0.00018,
+        0.00028
+      ],
+      "visible": true,
+      "material": 6,
+      "modifiers": [],
+      "keyframes": [
+        {
+          "frame": 1,
+          "property": "location",
+          "value": [
+            -0.009,
+            -0.00505,
+            -0.004975
+          ],
+          "interpolation": "LINEAR"
+        },
+        {
+          "frame": 40,
+          "property": "location",
+          "value": [
+            -0.033,
+            -0.03105,
+            0.014025
+          ],
+          "interpolation": "LINEAR"
+        }
+      ],
+      "parent": 4,
+      "mesh_params": {
+        "size": 2.0
+      }
+    },
+    {
+      "id": 116,
+      "name": "PatternGroove_BR1_Diag",
+      "type": "MESH",
+      "mesh_type": "cube",
+      "location": [
+        0.009,
+        -0.00505,
+        -0.004975
+      ],
+      "rotation": [
+        0.0,
+        11.585126224855046,
+        0.0
+      ],
+      "scale": [
+        0.005104,
+        0.00018,
+        0.00028
+      ],
+      "visible": true,
+      "material": 6,
+      "modifiers": [],
+      "keyframes": [
+        {
+          "frame": 1,
+          "property": "location",
+          "value": [
+            0.009,
+            -0.00505,
+            -0.004975
+          ],
+          "interpolation": "LINEAR"
+        },
+        {
+          "frame": 40,
+          "property": "location",
+          "value": [
+            -0.015,
+            -0.03105,
+            0.014025
+          ],
+          "interpolation": "LINEAR"
+        }
+      ],
+      "parent": 4,
+      "mesh_params": {
+        "size": 2.0
+      }
+    },
+    {
+      "id": 117,
+      "name": "PatternGroove_BR1_Outer",
+      "type": "MESH",
+      "mesh_type": "cube",
+      "location": [
+        0.0175,
+        -0.00505,
+        -0.006
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "scale": [
+        0.0035,
+        0.00018,
+        0.00028
+      ],
+      "visible": true,
+      "material": 6,
+      "modifiers": [],
+      "keyframes": [
+        {
+          "frame": 1,
+          "property": "location",
+          "value": [
+            0.0175,
+            -0.00505,
+            -0.006
+          ],
+          "interpolation": "LINEAR"
+        },
+        {
+          "frame": 40,
+          "property": "location",
+          "value": [
+            -0.0065,
+            -0.03105,
+            0.013
+          ],
+          "interpolation": "LINEAR"
+        }
+      ],
+      "parent": 4,
+      "mesh_params": {
+        "size": 2.0
+      }
+    },
+    {
+      "id": 118,
+      "name": "PatternGroove_TL2_Outer",
+      "type": "MESH",
+      "mesh_type": "cube",
+      "location": [
+        -0.0175,
+        -0.00505,
+        0.008
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "scale": [
+        0.0035,
+        0.00018,
+        0.00028
+      ],
+      "visible": true,
+      "material": 6,
+      "modifiers": [],
+      "keyframes": [
+        {
+          "frame": 1,
+          "property": "location",
+          "value": [
+            -0.0175,
+            -0.00505,
+            0.008
+          ],
+          "interpolation": "LINEAR"
+        },
+        {
+          "frame": 40,
+          "property": "location",
+          "value": [
+            -0.0415,
+            -0.03105,
+            0.027
+          ],
+          "interpolation": "LINEAR"
+        }
+      ],
+      "parent": 4,
+      "mesh_params": {
+        "size": 2.0
+      }
+    },
+    {
+      "id": 119,
+      "name": "PatternGroove_TL2_Diag",
+      "type": "MESH",
+      "mesh_type": "cube",
+      "location": [
+        -0.009,
+        -0.00505,
+        0.00655
+      ],
+      "rotation": [
+        0.0,
+        16.17215901578255,
+        0.0
+      ],
+      "scale": [
+        0.005206,
+        0.00018,
+        0.00028
+      ],
+      "visible": true,
+      "material": 6,
+      "modifiers": [],
+      "keyframes": [
+        {
+          "frame": 1,
+          "property": "location",
+          "value": [
+            -0.009,
+            -0.00505,
+            0.00655
+          ],
+          "interpolation": "LINEAR"
+        },
+        {
+          "frame": 40,
+          "property": "location",
+          "value": [
+            -0.033,
+            -0.03105,
+            0.02555
+          ],
+          "interpolation": "LINEAR"
+        }
+      ],
+      "parent": 4,
+      "mesh_params": {
+        "size": 2.0
+      }
+    },
+    {
+      "id": 120,
+      "name": "PatternGroove_TR2_Diag",
+      "type": "MESH",
+      "mesh_type": "cube",
+      "location": [
+        0.009,
+        -0.00505,
+        0.00655
+      ],
+      "rotation": [
+        0.0,
+        -16.17215901578255,
+        0.0
+      ],
+      "scale": [
+        0.005206,
+        0.00018,
+        0.00028
+      ],
+      "visible": true,
+      "material": 6,
+      "modifiers": [],
+      "keyframes": [
+        {
+          "frame": 1,
+          "property": "location",
+          "value": [
+            0.009,
+            -0.00505,
+            0.00655
+          ],
+          "interpolation": "LINEAR"
+        },
+        {
+          "frame": 40,
+          "property": "location",
+          "value": [
+            -0.015,
+            -0.03105,
+            0.02555
+          ],
+          "interpolation": "LINEAR"
+        }
+      ],
+      "parent": 4,
+      "mesh_params": {
+        "size": 2.0
+      }
+    },
+    {
+      "id": 121,
+      "name": "PatternGroove_TR2_Outer",
+      "type": "MESH",
+      "mesh_type": "cube",
+      "location": [
+        0.0175,
+        -0.00505,
+        0.008
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "scale": [
+        0.0035,
+        0.00018,
+        0.00028
+      ],
+      "visible": true,
+      "material": 6,
+      "modifiers": [],
+      "keyframes": [
+        {
+          "frame": 1,
+          "property": "location",
+          "value": [
+            0.0175,
+            -0.00505,
+            0.008
+          ],
+          "interpolation": "LINEAR"
+        },
+        {
+          "frame": 40,
+          "property": "location",
+          "value": [
+            -0.0065,
+            -0.03105,
+            0.027
+          ],
+          "interpolation": "LINEAR"
+        }
+      ],
+      "parent": 4,
+      "mesh_params": {
+        "size": 2.0
+      }
+    },
+    {
+      "id": 122,
+      "name": "PatternGroove_BL2_Outer",
+      "type": "MESH",
+      "mesh_type": "cube",
+      "location": [
+        -0.0175,
+        -0.00505,
+        -0.008
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "scale": [
+        0.0035,
+        0.00018,
+        0.00028
+      ],
+      "visible": true,
+      "material": 6,
+      "modifiers": [],
+      "keyframes": [
+        {
+          "frame": 1,
+          "property": "location",
+          "value": [
+            -0.0175,
+            -0.00505,
+            -0.008
+          ],
+          "interpolation": "LINEAR"
+        },
+        {
+          "frame": 40,
+          "property": "location",
+          "value": [
+            -0.0415,
+            -0.03105,
+            0.011
+          ],
+          "interpolation": "LINEAR"
+        }
+      ],
+      "parent": 4,
+      "mesh_params": {
+        "size": 2.0
+      }
+    },
+    {
+      "id": 123,
+      "name": "PatternGroove_BL2_Diag",
+      "type": "MESH",
+      "mesh_type": "cube",
+      "location": [
+        -0.009,
+        -0.00505,
+        -0.00655
+      ],
+      "rotation": [
+        0.0,
+        -16.17215901578255,
+        0.0
+      ],
+      "scale": [
+        0.005206,
+        0.00018,
+        0.00028
+      ],
+      "visible": true,
+      "material": 6,
+      "modifiers": [],
+      "keyframes": [
+        {
+          "frame": 1,
+          "property": "location",
+          "value": [
+            -0.009,
+            -0.00505,
+            -0.00655
+          ],
+          "interpolation": "LINEAR"
+        },
+        {
+          "frame": 40,
+          "property": "location",
+          "value": [
+            -0.033,
+            -0.03105,
+            0.01245
+          ],
+          "interpolation": "LINEAR"
+        }
+      ],
+      "parent": 4,
+      "mesh_params": {
+        "size": 2.0
+      }
+    },
+    {
+      "id": 124,
+      "name": "PatternGroove_BR2_Diag",
+      "type": "MESH",
+      "mesh_type": "cube",
+      "location": [
+        0.009,
+        -0.00505,
+        -0.00655
+      ],
+      "rotation": [
+        0.0,
+        16.17215901578255,
+        0.0
+      ],
+      "scale": [
+        0.005206,
+        0.00018,
+        0.00028
+      ],
+      "visible": true,
+      "material": 6,
+      "modifiers": [],
+      "keyframes": [
+        {
+          "frame": 1,
+          "property": "location",
+          "value": [
+            0.009,
+            -0.00505,
+            -0.00655
+          ],
+          "interpolation": "LINEAR"
+        },
+        {
+          "frame": 40,
+          "property": "location",
+          "value": [
+            -0.015,
+            -0.03105,
+            0.01245
+          ],
+          "interpolation": "LINEAR"
+        }
+      ],
+      "parent": 4,
+      "mesh_params": {
+        "size": 2.0
+      }
+    },
+    {
+      "id": 125,
+      "name": "PatternGroove_BR2_Outer",
+      "type": "MESH",
+      "mesh_type": "cube",
+      "location": [
+        0.0175,
+        -0.00505,
+        -0.008
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "scale": [
+        0.0035,
+        0.00018,
+        0.00028
+      ],
+      "visible": true,
+      "material": 6,
+      "modifiers": [],
+      "keyframes": [
+        {
+          "frame": 1,
+          "property": "location",
+          "value": [
+            0.0175,
+            -0.00505,
+            -0.008
+          ],
+          "interpolation": "LINEAR"
+        },
+        {
+          "frame": 40,
+          "property": "location",
+          "value": [
+            -0.0065,
+            -0.03105,
+            0.011
+          ],
+          "interpolation": "LINEAR"
+        }
+      ],
+      "parent": 4,
+      "mesh_params": {
+        "size": 2.0
+      }
+    },
+    {
+      "id": 126,
+      "name": "PatternGroove_TL3_Outer",
+      "type": "MESH",
+      "mesh_type": "cube",
+      "location": [
+        -0.0175,
+        -0.00505,
+        0.01
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "scale": [
+        0.0035,
+        0.00018,
+        0.00028
+      ],
+      "visible": true,
+      "material": 6,
+      "modifiers": [],
+      "keyframes": [
+        {
+          "frame": 1,
+          "property": "location",
+          "value": [
+            -0.0175,
+            -0.00505,
+            0.01
+          ],
+          "interpolation": "LINEAR"
+        },
+        {
+          "frame": 40,
+          "property": "location",
+          "value": [
+            -0.0415,
+            -0.03105,
+            0.029
+          ],
+          "interpolation": "LINEAR"
+        }
+      ],
+      "parent": 4,
+      "mesh_params": {
+        "size": 2.0
+      }
+    },
+    {
+      "id": 127,
+      "name": "PatternGroove_TL3_Diag",
+      "type": "MESH",
+      "mesh_type": "cube",
+      "location": [
+        -0.009,
+        -0.00505,
+        0.008125
+      ],
+      "rotation": [
+        0.0,
+        20.556045219583464,
+        0.0
+      ],
+      "scale": [
+        0.00534,
+        0.00018,
+        0.00028
+      ],
+      "visible": true,
+      "material": 6,
+      "modifiers": [],
+      "keyframes": [
+        {
+          "frame": 1,
+          "property": "location",
+          "value": [
+            -0.009,
+            -0.00505,
+            0.008125
+          ],
+          "interpolation": "LINEAR"
+        },
+        {
+          "frame": 40,
+          "property": "location",
+          "value": [
+            -0.033,
+            -0.03105,
+            0.027125
+          ],
+          "interpolation": "LINEAR"
+        }
+      ],
+      "parent": 4,
+      "mesh_params": {
+        "size": 2.0
+      }
+    },
+    {
+      "id": 128,
+      "name": "PatternGroove_TR3_Diag",
+      "type": "MESH",
+      "mesh_type": "cube",
+      "location": [
+        0.009,
+        -0.00505,
+        0.008125
+      ],
+      "rotation": [
+        0.0,
+        -20.556045219583464,
+        0.0
+      ],
+      "scale": [
+        0.00534,
+        0.00018,
+        0.00028
+      ],
+      "visible": true,
+      "material": 6,
+      "modifiers": [],
+      "keyframes": [
+        {
+          "frame": 1,
+          "property": "location",
+          "value": [
+            0.009,
+            -0.00505,
+            0.008125
+          ],
+          "interpolation": "LINEAR"
+        },
+        {
+          "frame": 40,
+          "property": "location",
+          "value": [
+            -0.015,
+            -0.03105,
+            0.027125
+          ],
+          "interpolation": "LINEAR"
+        }
+      ],
+      "parent": 4,
+      "mesh_params": {
+        "size": 2.0
+      }
+    },
+    {
+      "id": 129,
+      "name": "PatternGroove_TR3_Outer",
+      "type": "MESH",
+      "mesh_type": "cube",
+      "location": [
+        0.0175,
+        -0.00505,
+        0.01
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "scale": [
+        0.0035,
+        0.00018,
+        0.00028
+      ],
+      "visible": true,
+      "material": 6,
+      "modifiers": [],
+      "keyframes": [
+        {
+          "frame": 1,
+          "property": "location",
+          "value": [
+            0.0175,
+            -0.00505,
+            0.01
+          ],
+          "interpolation": "LINEAR"
+        },
+        {
+          "frame": 40,
+          "property": "location",
+          "value": [
+            -0.0065,
+            -0.03105,
+            0.029
+          ],
+          "interpolation": "LINEAR"
+        }
+      ],
+      "parent": 4,
+      "mesh_params": {
+        "size": 2.0
+      }
+    },
+    {
+      "id": 130,
+      "name": "PatternGroove_BL3_Outer",
+      "type": "MESH",
+      "mesh_type": "cube",
+      "location": [
+        -0.0175,
+        -0.00505,
+        -0.01
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "scale": [
+        0.0035,
+        0.00018,
+        0.00028
+      ],
+      "visible": true,
+      "material": 6,
+      "modifiers": [],
+      "keyframes": [
+        {
+          "frame": 1,
+          "property": "location",
+          "value": [
+            -0.0175,
+            -0.00505,
+            -0.01
+          ],
+          "interpolation": "LINEAR"
+        },
+        {
+          "frame": 40,
+          "property": "location",
+          "value": [
+            -0.0415,
+            -0.03105,
+            0.009
+          ],
+          "interpolation": "LINEAR"
+        }
+      ],
+      "parent": 4,
+      "mesh_params": {
+        "size": 2.0
+      }
+    },
+    {
+      "id": 131,
+      "name": "PatternGroove_BL3_Diag",
+      "type": "MESH",
+      "mesh_type": "cube",
+      "location": [
+        -0.009,
+        -0.00505,
+        -0.008125
+      ],
+      "rotation": [
+        0.0,
+        -20.556045219583464,
+        0.0
+      ],
+      "scale": [
+        0.00534,
+        0.00018,
+        0.00028
+      ],
+      "visible": true,
+      "material": 6,
+      "modifiers": [],
+      "keyframes": [
+        {
+          "frame": 1,
+          "property": "location",
+          "value": [
+            -0.009,
+            -0.00505,
+            -0.008125
+          ],
+          "interpolation": "LINEAR"
+        },
+        {
+          "frame": 40,
+          "property": "location",
+          "value": [
+            -0.033,
+            -0.03105,
+            0.010875
+          ],
+          "interpolation": "LINEAR"
+        }
+      ],
+      "parent": 4,
+      "mesh_params": {
+        "size": 2.0
+      }
+    },
+    {
+      "id": 132,
+      "name": "PatternGroove_BR3_Diag",
+      "type": "MESH",
+      "mesh_type": "cube",
+      "location": [
+        0.009,
+        -0.00505,
+        -0.008125
+      ],
+      "rotation": [
+        0.0,
+        20.556045219583464,
+        0.0
+      ],
+      "scale": [
+        0.00534,
+        0.00018,
+        0.00028
+      ],
+      "visible": true,
+      "material": 6,
+      "modifiers": [],
+      "keyframes": [
+        {
+          "frame": 1,
+          "property": "location",
+          "value": [
+            0.009,
+            -0.00505,
+            -0.008125
+          ],
+          "interpolation": "LINEAR"
+        },
+        {
+          "frame": 40,
+          "property": "location",
+          "value": [
+            -0.015,
+            -0.03105,
+            0.010875
+          ],
+          "interpolation": "LINEAR"
+        }
+      ],
+      "parent": 4,
+      "mesh_params": {
+        "size": 2.0
+      }
+    },
+    {
+      "id": 133,
+      "name": "PatternGroove_BR3_Outer",
+      "type": "MESH",
+      "mesh_type": "cube",
+      "location": [
+        0.0175,
+        -0.00505,
+        -0.01
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "scale": [
+        0.0035,
+        0.00018,
+        0.00028
+      ],
+      "visible": true,
+      "material": 6,
+      "modifiers": [],
+      "keyframes": [
+        {
+          "frame": 1,
+          "property": "location",
+          "value": [
+            0.0175,
+            -0.00505,
+            -0.01
+          ],
+          "interpolation": "LINEAR"
+        },
+        {
+          "frame": 40,
+          "property": "location",
+          "value": [
+            -0.0065,
+            -0.03105,
+            0.009
+          ],
+          "interpolation": "LINEAR"
+        }
+      ],
+      "parent": 4,
+      "mesh_params": {
+        "size": 2.0
+      }
+    },
+    {
+      "id": 134,
+      "name": "PatternGroove_TL4_Outer",
+      "type": "MESH",
+      "mesh_type": "cube",
+      "location": [
+        -0.0175,
+        -0.00505,
+        0.012
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "scale": [
+        0.0035,
+        0.00018,
+        0.00028
+      ],
+      "visible": true,
+      "material": 6,
+      "modifiers": [],
+      "keyframes": [
+        {
+          "frame": 1,
+          "property": "location",
+          "value": [
+            -0.0175,
+            -0.00505,
+            0.012
+          ],
+          "interpolation": "LINEAR"
+        },
+        {
+          "frame": 40,
+          "property": "location",
+          "value": [
+            -0.0415,
+            -0.03105,
+            0.031
+          ],
+          "interpolation": "LINEAR"
+        }
+      ],
+      "parent": 4,
+      "mesh_params": {
+        "size": 2.0
+      }
+    },
+    {
+      "id": 135,
+      "name": "PatternGroove_TL4_Diag",
+      "type": "MESH",
+      "mesh_type": "cube",
+      "location": [
+        -0.009,
+        -0.00505,
+        0.0097
+      ],
+      "rotation": [
+        0.0,
+        24.70243022777131,
+        0.0
+      ],
+      "scale": [
+        0.0055036,
+        0.00018,
+        0.00028
+      ],
+      "visible": true,
+      "material": 6,
+      "modifiers": [],
+      "keyframes": [
+        {
+          "frame": 1,
+          "property": "location",
+          "value": [
+            -0.009,
+            -0.00505,
+            0.0097
+          ],
+          "interpolation": "LINEAR"
+        },
+        {
+          "frame": 40,
+          "property": "location",
+          "value": [
+            -0.033,
+            -0.03105,
+            0.0287
+          ],
+          "interpolation": "LINEAR"
+        }
+      ],
+      "parent": 4,
+      "mesh_params": {
+        "size": 2.0
+      }
+    },
+    {
+      "id": 136,
+      "name": "PatternGroove_TR4_Diag",
+      "type": "MESH",
+      "mesh_type": "cube",
+      "location": [
+        0.009,
+        -0.00505,
+        0.0097
+      ],
+      "rotation": [
+        0.0,
+        -24.70243022777131,
+        0.0
+      ],
+      "scale": [
+        0.0055036,
+        0.00018,
+        0.00028
+      ],
+      "visible": true,
+      "material": 6,
+      "modifiers": [],
+      "keyframes": [
+        {
+          "frame": 1,
+          "property": "location",
+          "value": [
+            0.009,
+            -0.00505,
+            0.0097
+          ],
+          "interpolation": "LINEAR"
+        },
+        {
+          "frame": 40,
+          "property": "location",
+          "value": [
+            -0.015,
+            -0.03105,
+            0.0287
+          ],
+          "interpolation": "LINEAR"
+        }
+      ],
+      "parent": 4,
+      "mesh_params": {
+        "size": 2.0
+      }
+    },
+    {
+      "id": 137,
+      "name": "PatternGroove_TR4_Outer",
+      "type": "MESH",
+      "mesh_type": "cube",
+      "location": [
+        0.0175,
+        -0.00505,
+        0.012
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "scale": [
+        0.0035,
+        0.00018,
+        0.00028
+      ],
+      "visible": true,
+      "material": 6,
+      "modifiers": [],
+      "keyframes": [
+        {
+          "frame": 1,
+          "property": "location",
+          "value": [
+            0.0175,
+            -0.00505,
+            0.012
+          ],
+          "interpolation": "LINEAR"
+        },
+        {
+          "frame": 40,
+          "property": "location",
+          "value": [
+            -0.0065,
+            -0.03105,
+            0.031
+          ],
+          "interpolation": "LINEAR"
+        }
+      ],
+      "parent": 4,
+      "mesh_params": {
+        "size": 2.0
+      }
+    },
+    {
+      "id": 138,
+      "name": "PatternGroove_BL4_Outer",
+      "type": "MESH",
+      "mesh_type": "cube",
+      "location": [
+        -0.0175,
+        -0.00505,
+        -0.012
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "scale": [
+        0.0035,
+        0.00018,
+        0.00028
+      ],
+      "visible": true,
+      "material": 6,
+      "modifiers": [],
+      "keyframes": [
+        {
+          "frame": 1,
+          "property": "location",
+          "value": [
+            -0.0175,
+            -0.00505,
+            -0.012
+          ],
+          "interpolation": "LINEAR"
+        },
+        {
+          "frame": 40,
+          "property": "location",
+          "value": [
+            -0.0415,
+            -0.03105,
+            0.007
+          ],
+          "interpolation": "LINEAR"
+        }
+      ],
+      "parent": 4,
+      "mesh_params": {
+        "size": 2.0
+      }
+    },
+    {
+      "id": 139,
+      "name": "PatternGroove_BL4_Diag",
+      "type": "MESH",
+      "mesh_type": "cube",
+      "location": [
+        -0.009,
+        -0.00505,
+        -0.0097
+      ],
+      "rotation": [
+        0.0,
+        -24.70243022777131,
+        0.0
+      ],
+      "scale": [
+        0.0055036,
+        0.00018,
+        0.00028
+      ],
+      "visible": true,
+      "material": 6,
+      "modifiers": [],
+      "keyframes": [
+        {
+          "frame": 1,
+          "property": "location",
+          "value": [
+            -0.009,
+            -0.00505,
+            -0.0097
+          ],
+          "interpolation": "LINEAR"
+        },
+        {
+          "frame": 40,
+          "property": "location",
+          "value": [
+            -0.033,
+            -0.03105,
+            0.0093
+          ],
+          "interpolation": "LINEAR"
+        }
+      ],
+      "parent": 4,
+      "mesh_params": {
+        "size": 2.0
+      }
+    },
+    {
+      "id": 140,
+      "name": "PatternGroove_BR4_Diag",
+      "type": "MESH",
+      "mesh_type": "cube",
+      "location": [
+        0.009,
+        -0.00505,
+        -0.0097
+      ],
+      "rotation": [
+        0.0,
+        24.70243022777131,
+        0.0
+      ],
+      "scale": [
+        0.0055036,
+        0.00018,
+        0.00028
+      ],
+      "visible": true,
+      "material": 6,
+      "modifiers": [],
+      "keyframes": [
+        {
+          "frame": 1,
+          "property": "location",
+          "value": [
+            0.009,
+            -0.00505,
+            -0.0097
+          ],
+          "interpolation": "LINEAR"
+        },
+        {
+          "frame": 40,
+          "property": "location",
+          "value": [
+            -0.015,
+            -0.03105,
+            0.0093
+          ],
+          "interpolation": "LINEAR"
+        }
+      ],
+      "parent": 4,
+      "mesh_params": {
+        "size": 2.0
+      }
+    },
+    {
+      "id": 141,
+      "name": "PatternGroove_BR4_Outer",
+      "type": "MESH",
+      "mesh_type": "cube",
+      "location": [
+        0.0175,
+        -0.00505,
+        -0.012
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "scale": [
+        0.0035,
+        0.00018,
+        0.00028
+      ],
+      "visible": true,
+      "material": 6,
+      "modifiers": [],
+      "keyframes": [
+        {
+          "frame": 1,
+          "property": "location",
+          "value": [
+            0.0175,
+            -0.00505,
+            -0.012
+          ],
+          "interpolation": "LINEAR"
+        },
+        {
+          "frame": 40,
+          "property": "location",
+          "value": [
+            -0.0065,
+            -0.03105,
+            0.007
+          ],
+          "interpolation": "LINEAR"
+        }
+      ],
+      "parent": 4,
+      "mesh_params": {
+        "size": 2.0
+      }
+    },
+    {
+      "id": 142,
+      "name": "PatternGroove_TL5_Outer",
+      "type": "MESH",
+      "mesh_type": "cube",
+      "location": [
+        -0.0175,
+        -0.00505,
+        0.014
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "scale": [
+        0.0035,
+        0.00018,
+        0.00028
+      ],
+      "visible": true,
+      "material": 6,
+      "modifiers": [],
+      "keyframes": [
+        {
+          "frame": 1,
+          "property": "location",
+          "value": [
+            -0.0175,
+            -0.00505,
+            0.014
+          ],
+          "interpolation": "LINEAR"
+        },
+        {
+          "frame": 40,
+          "property": "location",
+          "value": [
+            -0.0415,
+            -0.03105,
+            0.033
+          ],
+          "interpolation": "LINEAR"
+        }
+      ],
+      "parent": 4,
+      "mesh_params": {
+        "size": 2.0
+      }
+    },
+    {
+      "id": 143,
+      "name": "PatternGroove_TL5_Diag",
+      "type": "MESH",
+      "mesh_type": "cube",
+      "location": [
+        -0.009,
+        -0.00505,
+        0.011275
+      ],
+      "rotation": [
+        0.0,
+        28.5903840607906,
+        0.0
+      ],
+      "scale": [
+        0.0056944,
+        0.00018,
+        0.00028
+      ],
+      "visible": true,
+      "material": 6,
+      "modifiers": [],
+      "keyframes": [
+        {
+          "frame": 1,
+          "property": "location",
+          "value": [
+            -0.009,
+            -0.00505,
+            0.011275
+          ],
+          "interpolation": "LINEAR"
+        },
+        {
+          "frame": 40,
+          "property": "location",
+          "value": [
+            -0.033,
+            -0.03105,
+            0.030275
+          ],
+          "interpolation": "LINEAR"
+        }
+      ],
+      "parent": 4,
+      "mesh_params": {
+        "size": 2.0
+      }
+    },
+    {
+      "id": 144,
+      "name": "PatternGroove_TR5_Diag",
+      "type": "MESH",
+      "mesh_type": "cube",
+      "location": [
+        0.009,
+        -0.00505,
+        0.011275
+      ],
+      "rotation": [
+        0.0,
+        -28.5903840607906,
+        0.0
+      ],
+      "scale": [
+        0.0056944,
+        0.00018,
+        0.00028
+      ],
+      "visible": true,
+      "material": 6,
+      "modifiers": [],
+      "keyframes": [
+        {
+          "frame": 1,
+          "property": "location",
+          "value": [
+            0.009,
+            -0.00505,
+            0.011275
+          ],
+          "interpolation": "LINEAR"
+        },
+        {
+          "frame": 40,
+          "property": "location",
+          "value": [
+            -0.015,
+            -0.03105,
+            0.030275
+          ],
+          "interpolation": "LINEAR"
+        }
+      ],
+      "parent": 4,
+      "mesh_params": {
+        "size": 2.0
+      }
+    },
+    {
+      "id": 145,
+      "name": "PatternGroove_TR5_Outer",
+      "type": "MESH",
+      "mesh_type": "cube",
+      "location": [
+        0.0175,
+        -0.00505,
+        0.014
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "scale": [
+        0.0035,
+        0.00018,
+        0.00028
+      ],
+      "visible": true,
+      "material": 6,
+      "modifiers": [],
+      "keyframes": [
+        {
+          "frame": 1,
+          "property": "location",
+          "value": [
+            0.0175,
+            -0.00505,
+            0.014
+          ],
+          "interpolation": "LINEAR"
+        },
+        {
+          "frame": 40,
+          "property": "location",
+          "value": [
+            -0.0065,
+            -0.03105,
+            0.033
+          ],
+          "interpolation": "LINEAR"
+        }
+      ],
+      "parent": 4,
+      "mesh_params": {
+        "size": 2.0
+      }
+    },
+    {
+      "id": 146,
+      "name": "PatternGroove_BL5_Outer",
+      "type": "MESH",
+      "mesh_type": "cube",
+      "location": [
+        -0.0175,
+        -0.00505,
+        -0.014
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "scale": [
+        0.0035,
+        0.00018,
+        0.00028
+      ],
+      "visible": true,
+      "material": 6,
+      "modifiers": [],
+      "keyframes": [
+        {
+          "frame": 1,
+          "property": "location",
+          "value": [
+            -0.0175,
+            -0.00505,
+            -0.014
+          ],
+          "interpolation": "LINEAR"
+        },
+        {
+          "frame": 40,
+          "property": "location",
+          "value": [
+            -0.0415,
+            -0.03105,
+            0.005
+          ],
+          "interpolation": "LINEAR"
+        }
+      ],
+      "parent": 4,
+      "mesh_params": {
+        "size": 2.0
+      }
+    },
+    {
+      "id": 147,
+      "name": "PatternGroove_BL5_Diag",
+      "type": "MESH",
+      "mesh_type": "cube",
+      "location": [
+        -0.009,
+        -0.00505,
+        -0.011275
+      ],
+      "rotation": [
+        0.0,
+        -28.5903840607906,
+        0.0
+      ],
+      "scale": [
+        0.0056944,
+        0.00018,
+        0.00028
+      ],
+      "visible": true,
+      "material": 6,
+      "modifiers": [],
+      "keyframes": [
+        {
+          "frame": 1,
+          "property": "location",
+          "value": [
+            -0.009,
+            -0.00505,
+            -0.011275
+          ],
+          "interpolation": "LINEAR"
+        },
+        {
+          "frame": 40,
+          "property": "location",
+          "value": [
+            -0.033,
+            -0.03105,
+            0.007725
+          ],
+          "interpolation": "LINEAR"
+        }
+      ],
+      "parent": 4,
+      "mesh_params": {
+        "size": 2.0
+      }
+    },
+    {
+      "id": 148,
+      "name": "PatternGroove_BR5_Diag",
+      "type": "MESH",
+      "mesh_type": "cube",
+      "location": [
+        0.009,
+        -0.00505,
+        -0.011275
+      ],
+      "rotation": [
+        0.0,
+        28.5903840607906,
+        0.0
+      ],
+      "scale": [
+        0.0056944,
+        0.00018,
+        0.00028
+      ],
+      "visible": true,
+      "material": 6,
+      "modifiers": [],
+      "keyframes": [
+        {
+          "frame": 1,
+          "property": "location",
+          "value": [
+            0.009,
+            -0.00505,
+            -0.011275
+          ],
+          "interpolation": "LINEAR"
+        },
+        {
+          "frame": 40,
+          "property": "location",
+          "value": [
+            -0.015,
+            -0.03105,
+            0.007725
+          ],
+          "interpolation": "LINEAR"
+        }
+      ],
+      "parent": 4,
+      "mesh_params": {
+        "size": 2.0
+      }
+    },
+    {
+      "id": 149,
+      "name": "PatternGroove_BR5_Outer",
+      "type": "MESH",
+      "mesh_type": "cube",
+      "location": [
+        0.0175,
+        -0.00505,
+        -0.014
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "scale": [
+        0.0035,
+        0.00018,
+        0.00028
+      ],
+      "visible": true,
+      "material": 6,
+      "modifiers": [],
+      "keyframes": [
+        {
+          "frame": 1,
+          "property": "location",
+          "value": [
+            0.0175,
+            -0.00505,
+            -0.014
+          ],
+          "interpolation": "LINEAR"
+        },
+        {
+          "frame": 40,
+          "property": "location",
+          "value": [
+            -0.0065,
+            -0.03105,
+            0.005
+          ],
+          "interpolation": "LINEAR"
+        }
+      ],
+      "parent": 4,
+      "mesh_params": {
+        "size": 2.0
+      }
+    },
+    {
+      "id": 150,
+      "name": "Top_OrnamentalShell",
+      "type": "MESH",
+      "mesh_type": "cube",
+      "location": [
+        0.0,
+        -0.0058,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "scale": [
+        0.026,
+        0.0012,
+        0.018
+      ],
+      "visible": true,
+      "material": 0,
+      "modifiers": [
+        {
+          "type": "bevel",
+          "name": "OuterRadius",
+          "bpy_type": "BEVEL",
+          "params": {
+            "width": 0.17,
+            "segments": 8,
+            "limit_method": "ANGLE",
+            "angle_limit": 0.523599
+          }
+        },
+        {
+          "type": "boolean",
+          "name": "Cut_TopDetail_DropLeftBulb",
+          "bpy_type": "BOOLEAN",
+          "params": {
+            "operation": "DIFFERENCE",
+            "operand_object": "TopDetail_DropLeftBulb",
+            "solver": "EXACT"
+          }
+        },
+        {
+          "type": "boolean",
+          "name": "Cut_TopDetail_DropLeftNeck",
+          "bpy_type": "BOOLEAN",
+          "params": {
+            "operation": "DIFFERENCE",
+            "operand_object": "TopDetail_DropLeftNeck",
+            "solver": "EXACT"
+          }
+        },
+        {
+          "type": "boolean",
+          "name": "Cut_TopDetail_DropLeftTip",
+          "bpy_type": "BOOLEAN",
+          "params": {
+            "operation": "DIFFERENCE",
+            "operand_object": "TopDetail_DropLeftTip",
+            "solver": "EXACT"
+          }
+        },
+        {
+          "type": "boolean",
+          "name": "Cut_TopDetail_DropRightBulb",
+          "bpy_type": "BOOLEAN",
+          "params": {
+            "operation": "DIFFERENCE",
+            "operand_object": "TopDetail_DropRightBulb",
+            "solver": "EXACT"
+          }
+        },
+        {
+          "type": "boolean",
+          "name": "Cut_TopDetail_DropRightNeck",
+          "bpy_type": "BOOLEAN",
+          "params": {
+            "operation": "DIFFERENCE",
+            "operand_object": "TopDetail_DropRightNeck",
+            "solver": "EXACT"
+          }
+        },
+        {
+          "type": "boolean",
+          "name": "Cut_TopDetail_DropRightTip",
+          "bpy_type": "BOOLEAN",
+          "params": {
+            "operation": "DIFFERENCE",
+            "operand_object": "TopDetail_DropRightTip",
+            "solver": "EXACT"
+          }
+        },
+        {
+          "type": "boolean",
+          "name": "Cut_TopDetail_SlotURBody",
+          "bpy_type": "BOOLEAN",
+          "params": {
+            "operation": "DIFFERENCE",
+            "operand_object": "TopDetail_SlotURBody",
+            "solver": "EXACT"
+          }
+        },
+        {
+          "type": "boolean",
+          "name": "Cut_TopDetail_SlotUREndA",
+          "bpy_type": "BOOLEAN",
+          "params": {
+            "operation": "DIFFERENCE",
+            "operand_object": "TopDetail_SlotUREndA",
+            "solver": "EXACT"
+          }
+        },
+        {
+          "type": "boolean",
+          "name": "Cut_TopDetail_SlotUREndB",
+          "bpy_type": "BOOLEAN",
+          "params": {
+            "operation": "DIFFERENCE",
+            "operand_object": "TopDetail_SlotUREndB",
+            "solver": "EXACT"
+          }
+        },
+        {
+          "type": "boolean",
+          "name": "Cut_TopDetail_SlotBLBody",
+          "bpy_type": "BOOLEAN",
+          "params": {
+            "operation": "DIFFERENCE",
+            "operand_object": "TopDetail_SlotBLBody",
+            "solver": "EXACT"
+          }
+        },
+        {
+          "type": "boolean",
+          "name": "Cut_TopDetail_SlotBLEndA",
+          "bpy_type": "BOOLEAN",
+          "params": {
+            "operation": "DIFFERENCE",
+            "operand_object": "TopDetail_SlotBLEndA",
+            "solver": "EXACT"
+          }
+        },
+        {
+          "type": "boolean",
+          "name": "Cut_TopDetail_SlotBLEndB",
+          "bpy_type": "BOOLEAN",
+          "params": {
+            "operation": "DIFFERENCE",
+            "operand_object": "TopDetail_SlotBLEndB",
+            "solver": "EXACT"
+          }
+        },
+        {
+          "type": "boolean",
+          "name": "Cut_TopDetail_TriangleTL",
+          "bpy_type": "BOOLEAN",
+          "params": {
+            "operation": "DIFFERENCE",
+            "operand_object": "TopDetail_TriangleTL",
+            "solver": "EXACT"
+          }
+        },
+        {
+          "type": "boolean",
+          "name": "Cut_TopDetail_TriangleBR",
+          "bpy_type": "BOOLEAN",
+          "params": {
+            "operation": "DIFFERENCE",
+            "operand_object": "TopDetail_TriangleBR",
+            "solver": "EXACT"
+          }
+        },
+        {
+          "type": "bevel",
+          "name": "DetailEdgeSoftness",
+          "bpy_type": "BEVEL",
+          "params": {
+            "width": 0.025,
+            "segments": 3,
+            "limit_method": "ANGLE",
+            "angle_limit": 0.523599
+          }
+        }
+      ],
+      "keyframes": [
+        {
+          "frame": 1,
+          "property": "location",
+          "value": [
+            0.0,
+            -0.0058,
+            0.0
+          ],
+          "interpolation": "LINEAR"
+        },
+        {
+          "frame": 40,
+          "property": "location",
+          "value": [
+            -0.04,
+            -0.0458,
+            0.035
+          ],
+          "interpolation": "LINEAR"
+        }
+      ],
+      "parent": 3,
+      "mesh_params": {
+        "size": 2.0
+      }
+    },
+    {
+      "id": 151,
+      "name": "Bottom_OrnamentalShell",
+      "type": "MESH",
+      "mesh_type": "cube",
+      "location": [
+        0.0,
+        0.0058,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "scale": [
+        0.026,
+        0.0012,
+        0.018
+      ],
+      "visible": true,
+      "material": 0,
+      "modifiers": [
+        {
+          "type": "bevel",
+          "name": "OuterRadius",
+          "bpy_type": "BEVEL",
+          "params": {
+            "width": 0.17,
+            "segments": 8,
+            "limit_method": "ANGLE",
+            "angle_limit": 0.523599
+          }
+        },
+        {
+          "type": "boolean",
+          "name": "Cut_BottomDetail_DropLeftBulb",
+          "bpy_type": "BOOLEAN",
+          "params": {
+            "operation": "DIFFERENCE",
+            "operand_object": "BottomDetail_DropLeftBulb",
+            "solver": "EXACT"
+          }
+        },
+        {
+          "type": "boolean",
+          "name": "Cut_BottomDetail_DropLeftNeck",
+          "bpy_type": "BOOLEAN",
+          "params": {
+            "operation": "DIFFERENCE",
+            "operand_object": "BottomDetail_DropLeftNeck",
+            "solver": "EXACT"
+          }
+        },
+        {
+          "type": "boolean",
+          "name": "Cut_BottomDetail_DropLeftTip",
+          "bpy_type": "BOOLEAN",
+          "params": {
+            "operation": "DIFFERENCE",
+            "operand_object": "BottomDetail_DropLeftTip",
+            "solver": "EXACT"
+          }
+        },
+        {
+          "type": "boolean",
+          "name": "Cut_BottomDetail_DropRightBulb",
+          "bpy_type": "BOOLEAN",
+          "params": {
+            "operation": "DIFFERENCE",
+            "operand_object": "BottomDetail_DropRightBulb",
+            "solver": "EXACT"
+          }
+        },
+        {
+          "type": "boolean",
+          "name": "Cut_BottomDetail_DropRightNeck",
+          "bpy_type": "BOOLEAN",
+          "params": {
+            "operation": "DIFFERENCE",
+            "operand_object": "BottomDetail_DropRightNeck",
+            "solver": "EXACT"
+          }
+        },
+        {
+          "type": "boolean",
+          "name": "Cut_BottomDetail_DropRightTip",
+          "bpy_type": "BOOLEAN",
+          "params": {
+            "operation": "DIFFERENCE",
+            "operand_object": "BottomDetail_DropRightTip",
+            "solver": "EXACT"
+          }
+        },
+        {
+          "type": "boolean",
+          "name": "Cut_BottomDetail_SlotURBody",
+          "bpy_type": "BOOLEAN",
+          "params": {
+            "operation": "DIFFERENCE",
+            "operand_object": "BottomDetail_SlotURBody",
+            "solver": "EXACT"
+          }
+        },
+        {
+          "type": "boolean",
+          "name": "Cut_BottomDetail_SlotUREndA",
+          "bpy_type": "BOOLEAN",
+          "params": {
+            "operation": "DIFFERENCE",
+            "operand_object": "BottomDetail_SlotUREndA",
+            "solver": "EXACT"
+          }
+        },
+        {
+          "type": "boolean",
+          "name": "Cut_BottomDetail_SlotUREndB",
+          "bpy_type": "BOOLEAN",
+          "params": {
+            "operation": "DIFFERENCE",
+            "operand_object": "BottomDetail_SlotUREndB",
+            "solver": "EXACT"
+          }
+        },
+        {
+          "type": "boolean",
+          "name": "Cut_BottomDetail_SlotBLBody",
+          "bpy_type": "BOOLEAN",
+          "params": {
+            "operation": "DIFFERENCE",
+            "operand_object": "BottomDetail_SlotBLBody",
+            "solver": "EXACT"
+          }
+        },
+        {
+          "type": "boolean",
+          "name": "Cut_BottomDetail_SlotBLEndA",
+          "bpy_type": "BOOLEAN",
+          "params": {
+            "operation": "DIFFERENCE",
+            "operand_object": "BottomDetail_SlotBLEndA",
+            "solver": "EXACT"
+          }
+        },
+        {
+          "type": "boolean",
+          "name": "Cut_BottomDetail_SlotBLEndB",
+          "bpy_type": "BOOLEAN",
+          "params": {
+            "operation": "DIFFERENCE",
+            "operand_object": "BottomDetail_SlotBLEndB",
+            "solver": "EXACT"
+          }
+        },
+        {
+          "type": "boolean",
+          "name": "Cut_BottomDetail_TriangleTL",
+          "bpy_type": "BOOLEAN",
+          "params": {
+            "operation": "DIFFERENCE",
+            "operand_object": "BottomDetail_TriangleTL",
+            "solver": "EXACT"
+          }
+        },
+        {
+          "type": "boolean",
+          "name": "Cut_BottomDetail_TriangleBR",
+          "bpy_type": "BOOLEAN",
+          "params": {
+            "operation": "DIFFERENCE",
+            "operand_object": "BottomDetail_TriangleBR",
+            "solver": "EXACT"
+          }
+        },
+        {
+          "type": "bevel",
+          "name": "DetailEdgeSoftness",
+          "bpy_type": "BEVEL",
+          "params": {
+            "width": 0.025,
+            "segments": 3,
+            "limit_method": "ANGLE",
+            "angle_limit": 0.523599
+          }
+        }
+      ],
+      "keyframes": [
+        {
+          "frame": 1,
+          "property": "location",
+          "value": [
+            0.0,
+            0.0058,
+            0.0
+          ],
+          "interpolation": "LINEAR"
+        },
+        {
+          "frame": 40,
+          "property": "location",
+          "value": [
+            0.04,
+            0.0458,
+            -0.035
+          ],
+          "interpolation": "LINEAR"
+        }
+      ],
+      "parent": 8,
+      "mesh_params": {
+        "size": 2.0
+      }
+    }
+  ],
+  "materials": [
+    {
+      "id": 0,
+      "name": "WhiteMetal",
+      "type": "principled",
+      "color": [
+        0.95,
+        0.38,
+        0.035,
+        1.0
+      ],
+      "metallic": 1.0,
+      "roughness": 0.2,
+      "specular": 0.52,
+      "emission_color": [
+        0.0,
+        0.0,
+        0.0,
+        1.0
+      ],
+      "emission_strength": 0.0,
+      "alpha": 1.0,
+      "use_backface_culling": false
+    },
+    {
+      "id": 1,
+      "name": "DarkCarrier",
+      "type": "principled",
+      "color": [
+        0.018,
+        0.024,
+        0.032,
+        1.0
+      ],
+      "metallic": 0.36,
+      "roughness": 0.44,
+      "specular": 0.32,
+      "emission_color": [
+        0.0,
+        0.0,
+        0.0,
+        1.0
+      ],
+      "emission_strength": 0.0,
+      "alpha": 1.0,
+      "use_backface_culling": false
+    },
+    {
+      "id": 2,
+      "name": "MagnetSteel",
+      "type": "principled",
+      "color": [
+        0.58,
+        0.64,
+        0.7,
+        1.0
+      ],
+      "metallic": 1.0,
+      "roughness": 0.17,
+      "specular": 0.58,
+      "emission_color": [
+        0.0,
+        0.0,
+        0.0,
+        1.0
+      ],
+      "emission_strength": 0.0,
+      "alpha": 1.0,
+      "use_backface_culling": false
+    },
+    {
+      "id": 3,
+      "name": "BrassFork",
+      "type": "principled",
+      "color": [
+        0.55,
+        0.25,
+        0.035,
+        1.0
+      ],
+      "metallic": 1.0,
+      "roughness": 0.28,
+      "specular": 0.5,
+      "emission_color": [
+        0.0,
+        0.0,
+        0.0,
+        1.0
+      ],
+      "emission_strength": 0.0,
+      "alpha": 1.0,
+      "use_backface_culling": false
+    },
+    {
+      "id": 4,
+      "name": "ContactLayer",
+      "type": "principled",
+      "color": [
+        0.006,
+        0.009,
+        0.014,
+        1.0
+      ],
+      "metallic": 0.0,
+      "roughness": 0.62,
+      "specular": 0.24,
+      "emission_color": [
+        0.0,
+        0.0,
+        0.0,
+        1.0
+      ],
+      "emission_strength": 0.0,
+      "alpha": 1.0,
+      "use_backface_culling": false
+    },
+    {
+      "id": 5,
+      "name": "StudioFloor",
+      "type": "principled",
+      "color": [
+        0.012,
+        0.016,
+        0.024,
+        1.0
+      ],
+      "metallic": 0.05,
+      "roughness": 0.82,
+      "specular": 0.22,
+      "emission_color": [
+        0.0,
+        0.0,
+        0.0,
+        1.0
+      ],
+      "emission_strength": 0.0,
+      "alpha": 1.0,
+      "use_backface_culling": false
+    },
+    {
+      "id": 6,
+      "name": "PatternSilver",
+      "type": "principled",
+      "color": [
+        0.2,
+        0.24,
+        0.29,
+        1.0
+      ],
+      "metallic": 0.84,
+      "roughness": 0.38,
+      "specular": 0.5,
+      "emission_color": [
+        0.0,
+        0.0,
+        0.0,
+        1.0
+      ],
+      "emission_strength": 0.0,
+      "alpha": 1.0,
+      "use_backface_culling": false
+    }
+  ],
+  "cameras": [
+    {
+      "id": 0,
+      "name": "HeroCamera",
+      "type": "PERSP",
+      "location": [
+        0.09,
+        -0.165,
+        0.083
+      ],
+      "rotation": [
+        65.0,
+        0.0,
+        29.0
+      ],
+      "focal_length": 58.0,
+      "sensor_width": 36.0,
+      "clip_start": 0.1,
+      "clip_end": 1000.0,
+      "dof_enabled": false,
+      "dof_focus_distance": 10.0,
+      "dof_aperture": 2.8,
+      "is_active": true
+    }
+  ],
+  "lights": [
+    {
+      "id": 0,
+      "name": "KeySoftbox",
+      "type": "AREA",
+      "location": [
+        -0.075,
+        -0.105,
+        0.138
+      ],
+      "rotation": [
+        48.0,
+        0.0,
+        -32.0
+      ],
+      "color": [
+        1.0,
+        0.86,
+        0.74
+      ],
+      "power": 7.0,
+      "size": 0.12,
+      "size_y": 0.09,
+      "shape": "RECTANGLE"
+    },
+    {
+      "id": 1,
+      "name": "FillSoftbox",
+      "type": "AREA",
+      "location": [
+        0.105,
+        -0.063,
+        0.025
+      ],
+      "rotation": [
+        82.0,
+        0.0,
+        58.0
+      ],
+      "color": [
+        0.55,
+        0.72,
+        1.0
+      ],
+      "power": 2.5,
+      "size": 0.1,
+      "size_y": 0.08,
+      "shape": "RECTANGLE"
+    },
+    {
+      "id": 2,
+      "name": "RimSoftbox",
+      "type": "AREA",
+      "location": [
+        -0.055,
+        0.025,
+        0.12
+      ],
+      "rotation": [
+        35.0,
+        0.0,
+        -18.0
+      ],
+      "color": [
+        1.0,
+        0.72,
+        0.46
+      ],
+      "power": 4.5,
+      "size": 0.1,
+      "size_y": 0.08,
+      "shape": "RECTANGLE"
+    }
+  ],
+  "collections": [
+    {
+      "id": 0,
+      "name": "Collection",
+      "objects": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19,
+        20,
+        21,
+        22,
+        23,
+        24,
+        25,
+        26,
+        27,
+        28,
+        29,
+        30,
+        31,
+        32,
+        33,
+        34,
+        35,
+        36,
+        37,
+        38,
+        39,
+        40,
+        41,
+        42,
+        43,
+        44,
+        45,
+        46,
+        47,
+        48,
+        49,
+        50,
+        51,
+        52,
+        53,
+        54,
+        55,
+        56,
+        57,
+        58,
+        59,
+        60,
+        61,
+        62,
+        63,
+        64,
+        65,
+        66,
+        67,
+        68,
+        69,
+        70,
+        71,
+        72,
+        73,
+        74,
+        75,
+        76,
+        77,
+        78,
+        79,
+        80,
+        81,
+        82,
+        83,
+        84,
+        85,
+        86,
+        87,
+        88,
+        89,
+        90,
+        91,
+        92,
+        93,
+        94,
+        95,
+        96,
+        97,
+        98,
+        99,
+        100,
+        101,
+        102,
+        103,
+        104,
+        105,
+        106,
+        107,
+        108,
+        109,
+        110,
+        111,
+        112,
+        113,
+        114,
+        115,
+        116,
+        117,
+        118,
+        119,
+        120,
+        121,
+        122,
+        123,
+        124,
+        125,
+        126,
+        127,
+        128,
+        129,
+        130,
+        131,
+        132,
+        133,
+        134,
+        135,
+        136,
+        137,
+        138,
+        139,
+        140,
+        141,
+        142,
+        143,
+        144,
+        145,
+        146,
+        147,
+        148,
+        149,
+        150,
+        151
+      ],
+      "visible": true
+    }
+  ],
+  "metadata": {
+    "created": "2026-08-10T20:32:30.455468",
+    "modified": "2026-08-11T16:32:42.755342",
+    "software": "blender-cli 1.0"
+  }
+}

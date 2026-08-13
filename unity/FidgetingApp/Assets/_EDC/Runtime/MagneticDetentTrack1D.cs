@@ -212,11 +212,19 @@ namespace FidgetingApp.EDC
                     if (!handActive)
                     {
                         Release();
-                        return StepCapturing(deltaTime);
+                        return StepCapturing(
+                            deltaTime,
+                            handTargetMeters,
+                            false,
+                            slowIntent);
                     }
                     return StepTraveling(deltaTime, handTargetMeters, true, slowIntent);
                 case MagneticDetentState.Capturing:
-                    return StepCapturing(deltaTime);
+                    return StepCapturing(
+                        deltaTime,
+                        handTargetMeters,
+                        handActive,
+                        slowIntent);
                 default:
                     return MagneticDetentStepResult.None;
             }
@@ -333,9 +341,28 @@ namespace FidgetingApp.EDC
                 0);
         }
 
-        private MagneticDetentStepResult StepCapturing(float deltaTime)
+        private MagneticDetentStepResult StepCapturing(
+            float deltaTime,
+            float handTargetMeters,
+            bool handActive,
+            bool slowIntent)
         {
             float target = profile.GetDetentPositionMeters(captureTargetIndex);
+            if (handActive && ShouldInterruptCapture(target, handTargetMeters))
+            {
+                int interruptDirection = Math.Sign(handTargetMeters - target);
+                capturedDetentIndex = captureTargetIndex;
+                basinDetentIndex = captureTargetIndex;
+                breakawayDirection = interruptDirection;
+                escapedCapturedWell = false;
+                State = MagneticDetentState.Traveling;
+                return StepTraveling(
+                    deltaTime,
+                    handTargetMeters,
+                    true,
+                    slowIntent);
+            }
+
             float previousPosition = PositionMeters;
             float force = profile.CaptureSpringNewtonsPerMeter
                     * (target - PositionMeters)
@@ -356,7 +383,7 @@ namespace FidgetingApp.EDC
             int basinDelta = basinDetentIndex - previousBasin;
 
             float error = target - PositionMeters;
-            if (Mathf.Abs(error) > profile.LockPositionErrorMeters
+            if (Mathf.Abs(error) > ResolveCaptureSettleToleranceMeters()
                 || Mathf.Abs(VelocityMetersPerSecond) > profile.LockSpeedMetersPerSecond)
             {
                 return new MagneticDetentStepResult(
@@ -385,6 +412,38 @@ namespace FidgetingApp.EDC
                 true,
                 capturedDetentIndex,
                 direction);
+        }
+
+        private bool ShouldInterruptCapture(float target, float handTargetMeters)
+        {
+            float handForce = profile.HandSpringNewtonsPerMeter
+                * (handTargetMeters - target);
+            int direction = Math.Sign(handForce);
+            return direction != 0
+                && Mathf.Abs(handForce) + 0.000001f >= profile.BreakawayForceNewtons
+                && !(direction < 0 && captureTargetIndex == 0)
+                && !(direction > 0 && captureTargetIndex == profile.DetentCount - 1);
+        }
+
+        private float ResolveCaptureSettleToleranceMeters()
+        {
+            int neighborIndex = captureTargetIndex < profile.DetentCount - 1
+                ? captureTargetIndex + 1
+                : captureTargetIndex - 1;
+            float pitch = Mathf.Abs(
+                profile.GetDetentPositionMeters(neighborIndex)
+                - profile.GetDetentPositionMeters(captureTargetIndex));
+            float localMagneticStiffness = pitch > 0.000001f
+                ? 2f * Mathf.PI * profile.MagneticPeakForceNewtons / pitch
+                : 0f;
+            float localRestoringStiffness = profile.CaptureSpringNewtonsPerMeter
+                + localMagneticStiffness;
+            float staticFrictionEquilibriumError = localRestoringStiffness > 0f
+                ? profile.RailFrictionNewtons / localRestoringStiffness
+                : 0f;
+            return Mathf.Max(
+                profile.LockPositionErrorMeters,
+                staticFrictionEquilibriumError + profile.LockPositionErrorMeters);
         }
 
         private void BeginCapture(int targetIndex)

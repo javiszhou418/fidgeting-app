@@ -37,6 +37,9 @@ namespace FidgetingApp.Product
         private float retreatDistance;
         private float presentationVisibility = 1f;
         private float targetPresentationVisibility = 1f;
+        private float transitionStartPresentationVisibility = 1f;
+        private float presentationTransitionElapsed;
+        private bool presentationTransitionActive;
         private bool usesBakedSupportSurface;
 
         public MeshRenderer StageRenderer { get; private set; }
@@ -120,12 +123,35 @@ namespace FidgetingApp.Product
 
         public void SetLibraryPreviewActive(bool active, bool immediate = false)
         {
-            targetPresentationVisibility = active ? 1f : 0f;
+            float targetVisibility = active ? 1f : 0f;
             if (immediate)
             {
-                presentationVisibility = targetPresentationVisibility;
+                presentationTransitionActive = false;
+                targetPresentationVisibility = targetVisibility;
+                presentationVisibility = targetVisibility;
                 ApplyPresentationVisibility();
+                return;
             }
+
+            if (Mathf.Approximately(
+                    targetPresentationVisibility,
+                    targetVisibility))
+            {
+                return;
+            }
+
+            transitionStartPresentationVisibility = presentationVisibility;
+            targetPresentationVisibility = targetVisibility;
+            presentationTransitionElapsed = 0f;
+            presentationTransitionActive = true;
+        }
+
+        public void SetDetailEntranceProgressForPreview(float progress)
+        {
+            presentationTransitionActive = false;
+            presentationVisibility = 1f - Mathf.Clamp01(progress);
+            targetPresentationVisibility = presentationVisibility;
+            ApplyPresentationVisibility();
         }
 
         public static Renderer[] FindProductRenderers()
@@ -435,14 +461,22 @@ namespace FidgetingApp.Product
 
         private void LateUpdate()
         {
-            float blend = 1f - Mathf.Exp(-Time.unscaledDeltaTime * 8.5f);
-            presentationVisibility = Mathf.Lerp(
-                presentationVisibility,
-                targetPresentationVisibility,
-                blend);
-            if (Mathf.Abs(presentationVisibility - targetPresentationVisibility) < 0.001f)
+            if (presentationTransitionActive)
             {
-                presentationVisibility = targetPresentationVisibility;
+                presentationTransitionElapsed += Mathf.Max(
+                    0f,
+                    Time.unscaledDeltaTime);
+                float progress = SpinnerPresentationTransition.ResolveProgress(
+                    presentationTransitionElapsed);
+                presentationVisibility = Mathf.Lerp(
+                    transitionStartPresentationVisibility,
+                    targetPresentationVisibility,
+                    progress);
+                if (progress >= 1f)
+                {
+                    presentationVisibility = targetPresentationVisibility;
+                    presentationTransitionActive = false;
+                }
             }
             ApplyPresentationVisibility();
         }

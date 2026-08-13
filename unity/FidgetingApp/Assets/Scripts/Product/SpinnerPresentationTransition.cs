@@ -1,3 +1,4 @@
+using FidgetingApp.TwoLobeBar.Geometry;
 using UnityEngine;
 
 namespace FidgetingApp.Product
@@ -36,18 +37,33 @@ namespace FidgetingApp.Product
     {
         public const float CircularDetailFraction = 0.64f;
         public const float CircularLibraryFraction = 0.58f;
+        public const float CircularReferencePlanarDiameterMeters = 0.085f;
         public const float ElongatedDetailWidthFraction = 0.86f;
         public const float ElongatedDetailHeightFraction = 0.60f;
-        public const float ElongatedLibraryWidthFraction = 0.80f;
-        public const float ElongatedLibraryHeightFraction = 0.56f;
-        public const float BarDetailWidthFraction = 0.82f;
-        public const float BarDetailHeightFraction = 0.62f;
-        public const float BarLibraryWidthFraction = 0.76f;
-        public const float BarLibraryHeightFraction = 0.58f;
-        public const float FanCardDetailWidthFraction = 0.82f;
-        public const float FanCardDetailHeightFraction = 0.74f;
-        public const float FanCardLibraryWidthFraction = 0.76f;
-        public const float FanCardLibraryHeightFraction = 0.70f;
+        public const float ElongatedLibraryWidthFraction = 0.68f;
+        public const float ElongatedLibraryHeightFraction = 0.48f;
+        // Camera framing normally fills a per-product boundary, which made the
+        // physically 50 mm graphite bar appear as large as (or larger than)
+        // the 85 mm rotors. Preserve its real 50/85 scale relationship in
+        // both detail and library poses instead of normalizing it to a full
+        // product tile.
+        public const float BarToCircularPhysicalScale =
+            TwoLobeBarSpecifications.BodyLength
+            / CircularReferencePlanarDiameterMeters;
+        public const float BarDetailWidthFraction =
+            CircularDetailFraction * BarToCircularPhysicalScale;
+        public const float BarDetailHeightFraction = BarDetailWidthFraction;
+        public const float BarLibraryWidthFraction =
+            CircularLibraryFraction * BarToCircularPhysicalScale;
+        public const float BarLibraryHeightFraction = BarLibraryWidthFraction;
+        // Fan-card framing is resolved against the complete 0-90 degree sweep,
+        // not the much smaller closed stack. This keeps the open fan clear of
+        // the native chrome and prevents the product from growing under the
+        // finger while it is being dragged.
+        public const float FanCardDetailWidthFraction = 0.80f;
+        public const float FanCardDetailHeightFraction = 0.80f;
+        public const float FanCardLibraryWidthFraction = 0.72f;
+        public const float FanCardLibraryHeightFraction = 0.72f;
 
         public static ProductFramingProfile Resolve(string scenePath)
         {
@@ -145,7 +161,8 @@ namespace FidgetingApp.Product
             float heightFraction,
             float minimumDistance = MinimumDistance,
             float distancePadding = DistancePadding,
-            Vector3? focusPoint = null)
+            Vector3? focusPoint = null,
+            float rollDegrees = 0f)
         {
             if (camera == null)
             {
@@ -155,7 +172,8 @@ namespace FidgetingApp.Product
             Vector3 backward = framingBackward.sqrMagnitude > 0.0001f
                 ? framingBackward.normalized
                 : Vector3.back;
-            Quaternion viewRotation = Quaternion.LookRotation(-backward, Vector3.up);
+            Quaternion viewRotation = Quaternion.LookRotation(-backward, Vector3.up)
+                * Quaternion.AngleAxis(rollDegrees, Vector3.forward);
             Vector3 viewRight = viewRotation * Vector3.right;
             Vector3 viewUp = viewRotation * Vector3.up;
             Vector3 viewForward = viewRotation * Vector3.forward;
@@ -240,13 +258,23 @@ namespace FidgetingApp.Product
     /// </summary>
     public static class SpinnerPresentationTransition
     {
-        public const float DurationSeconds = 0.42f;
+        public const float DurationSeconds = 0.68f;
 
         public static float ResolveProgress(float elapsedSeconds)
         {
             float normalized = Mathf.Clamp01(
                 elapsedSeconds / DurationSeconds);
             return normalized * normalized * (3f - 2f * normalized);
+        }
+
+        public static float ResolveDetailDepthScale(
+            float libraryVisibility,
+            float detailScale)
+        {
+            float detailProgress = 1f - Mathf.Clamp01(libraryVisibility);
+            float eased = detailProgress * detailProgress
+                * (3f - 2f * detailProgress);
+            return Mathf.Lerp(1f, Mathf.Max(1f, detailScale), eased);
         }
     }
 }

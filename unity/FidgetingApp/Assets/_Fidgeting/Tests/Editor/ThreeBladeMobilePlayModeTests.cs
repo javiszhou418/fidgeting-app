@@ -74,6 +74,19 @@ namespace ThreeBladeEDC.Tests.Editor
                 gestures.ClassifyScreenPoint(new Vector2(4f, 4f)),
                 Is.EqualTo(MobileGestureMode.Orbit));
 
+            Camera camera = Camera.main;
+            Assert.That(camera, Is.Not.Null);
+            Vector3 projectedPivot = camera.WorldToScreenPoint(
+                gestures.Rotor.PivotWorld);
+            float shortSide = Mathf.Min(Screen.width, Screen.height);
+            Vector2 formerOversizedSpinPoint = new Vector2(
+                projectedPivot.x + shortSide * 0.42f,
+                projectedPivot.y);
+            Assert.That(
+                gestures.ClassifyScreenPoint(formerOversizedSpinPoint),
+                Is.EqualTo(MobileGestureMode.Orbit),
+                "The old 48% fallback consumed this outer camera-orbit band.");
+
             orbit.ResetHero();
             float boundsFramedDistance = orbit.Distance;
             orbit.OrbitByPixels(new Vector2(96f, -48f));

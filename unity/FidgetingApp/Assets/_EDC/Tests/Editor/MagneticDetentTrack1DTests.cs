@@ -45,15 +45,19 @@ namespace FidgetingApp.EDC.Tests.Editor
             Assert.That(profile.CaptureDampingNewtonSecondsPerMeter, Is.EqualTo(5.8f));
             Assert.That(profile.EdgeProbeLoads, Is.EqualTo(new[] { 0.72f, 0.84f, 0.94f }));
             Assert.That(profile.EdgeProbeRearmLoad, Is.EqualTo(0.55f));
-            Assert.That(profile.EdgeProbeMinimumIntensity, Is.EqualTo(0.08f));
-            Assert.That(profile.EdgeProbeMaximumIntensity, Is.EqualTo(0.14f));
-            Assert.That(profile.EdgeProbeMinimumSharpness, Is.EqualTo(0.14f));
-            Assert.That(profile.EdgeProbeMaximumSharpness, Is.EqualTo(0.22f));
-            Assert.That(profile.DetentHapticIntensity, Is.EqualTo(0.28f));
-            Assert.That(profile.DetentHapticSharpness, Is.EqualTo(0.46f));
-            Assert.That(profile.DetentHapticSecondaryIntensity, Is.EqualTo(0.14f));
-            Assert.That(profile.DetentHapticSecondarySharpness, Is.EqualTo(0.28f));
-            Assert.That(profile.DetentHapticPulseIntervalSeconds, Is.EqualTo(0.030f));
+            Assert.That(profile.EdgeProbeMinimumIntensity, Is.EqualTo(0.20f));
+            Assert.That(profile.EdgeProbeMaximumIntensity, Is.EqualTo(0.38f));
+            Assert.That(profile.EdgeProbeMinimumSharpness, Is.EqualTo(0.18f));
+            Assert.That(profile.EdgeProbeMaximumSharpness, Is.EqualTo(0.32f));
+            Assert.That(profile.EdgeProbePulseDurationSeconds, Is.EqualTo(0.016f));
+            Assert.That(profile.DetentHapticIntensity, Is.EqualTo(0.98f));
+            Assert.That(profile.DetentHapticSharpness, Is.EqualTo(0.78f));
+            Assert.That(profile.DetentHapticBodyIntensity, Is.EqualTo(0.58f));
+            Assert.That(profile.DetentHapticBodySharpness, Is.EqualTo(0.22f));
+            Assert.That(profile.DetentHapticBodyDurationSeconds, Is.EqualTo(0.030f));
+            Assert.That(profile.DetentHapticSecondaryIntensity, Is.EqualTo(0.52f));
+            Assert.That(profile.DetentHapticSecondarySharpness, Is.EqualTo(0.44f));
+            Assert.That(profile.DetentHapticPulseIntervalSeconds, Is.EqualTo(0.022f));
             Assert.That(profile.EdgeGovernorStartSpeedMetersPerSecond, Is.EqualTo(0.022f));
             Assert.That(profile.EdgeGovernorEndSpeedMetersPerSecond, Is.EqualTo(0.0055f));
             Assert.That(profile.MaximumSubstepsPerFrame, Is.EqualTo(8));
@@ -173,6 +177,39 @@ namespace FidgetingApp.EDC.Tests.Editor
                 edgeMaximumSpeed,
                 Is.LessThanOrEqualTo(0.009f),
                 "The last edge-search segment should be visibly slower than approach.");
+        }
+
+        [Test]
+        public void ManualPullPastCapturingDetent_ImmediatelyReturnsControlToFinger()
+        {
+            var track = new MagneticDetentTrack1D(profile);
+            const float deltaTime = 1f / 120f;
+            float handTarget = 0f;
+            bool enteredCapture = false;
+
+            for (int frame = 0; frame < 1200; frame++)
+            {
+                handTarget = Mathf.Min(
+                    profile.GetDetentPositionMeters(1),
+                    handTarget + 0.010f * deltaTime);
+                track.Step(deltaTime, handTarget, true, true);
+                if (track.State == MagneticDetentState.Capturing)
+                {
+                    enteredCapture = true;
+                    break;
+                }
+            }
+
+            Assert.That(enteredCapture, Is.True, "The setup must enter magnetic capture.");
+            float positionBeforePull = track.PositionMeters;
+            track.Step(deltaTime, profile.TravelMeters, true, false);
+
+            Assert.That(
+                track.State,
+                Is.Not.EqualTo(MagneticDetentState.Capturing),
+                "An active finger pulling beyond the next threshold must not be trapped "
+                + "inside a stale capture animation.");
+            Assert.That(track.PositionMeters, Is.GreaterThan(positionBeforePull));
         }
 
         [Test]

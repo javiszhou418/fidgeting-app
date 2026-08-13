@@ -253,11 +253,15 @@ Captured → Loading → Breakaway → Traveling → Capturing → Captured
 
 详情交互镜头由 `EdcPortraitCameraFramer` 固定为正面 + 30° 顶视：相机 backward 为 `(0, 0.5, -0.866)`，因此 68 mm 滑轨严格映射到屏幕水平轴，不再被三分之四视角斜向压缩。详情主体目标占屏宽 72%，Library 以独立 `1.59×` zoom 保持原有预览尺度。`InteractionSurface` 随滑盖移动，尺寸为 `94 × 32 × 58 mm`；它只用于 raycast 命中和手势仲裁，不进入 Rigidbody、质量、磁力或档位积分。
 
-Loading 阶段的低锐度预压由第二个独立 `CHHapticAdvancedPatternPlayer` 输出；高速旋转纹理继续使用原 player。两者共享一个持久 `CHHapticEngine`，但拥有独立的 request、dynamic update、fade/stop 和 reset 恢复状态。
+Loading 阶段不再启动独立 continuous player，也不按触摸持续时间发声。慢搓只在势垒负载 `0.72 / 0.84 / 0.94` 三个空间里程碑各发一次 16 ms 有限提示，回落到 `0.55` 以下才重置；手指停住保持静默。真实跨档由同一个 `DetentCrossed` 同帧启动视觉衰减轻颤和一个有限三层包（主冲击 + 低锐度重量段 + 收尾触点），旋转高速纹理仍独占唯一循环 `CHHapticAdvancedPatternPlayer`。
 
-第六款三层磁吸扇牌 `magnetic-fan-card` 不复用上述线性单位和六档配置，而是由独立 `FanCardDetentProfile` 在归一化坐标 `q` 上运行同一机械状态语义。四个稳定点为 `0 / 1⁄3 / 2⁄3 / 1`；中片角度=`45°q`，顶片角度=`90°q`，所以相邻层最大相对开合 `45°`、最外层总夹角 `90°`。批准 demo 的固定参数为：脱档负载 `0.067`、手指弹簧/阻尼 `52 / 8.7`、磁峰 `7.8`、轨道摩擦 `0.72`、捕获弹簧/阻尼 `92 / 13.6`、脱档冲量 `0.72`、捕获预测 `0.055 s`、可见预压倍率 `0.28`、最大子步 `1/240 s`。
+第六款三层磁吸扇牌 `magnetic-fan-card` 不复用上述线性单位和六档配置，而是由独立 `FanCardDetentProfile` 在归一化坐标 `q` 上运行同一机械状态语义。四个稳定点为 `0 / 1⁄3 / 2⁄3 / 1`；中片角度=`45°q`，顶片角度=`90°q`，所以相邻层最大相对开合 `45°`、最外层总夹角 `90°`。慢推固定参数为：脱档负载 `0.050`、手指弹簧/阻尼 `96 / 6.0`、磁峰 `6.4`、轨道摩擦 `0.38`、捕获弹簧/阻尼 `118 / 14.2`、脱档冲量 `0.95`、捕获预测 `0.070 s`、可见预压倍率 `0.24`、最高速度 `2.4 s⁻¹`。快速模式在同一状态机内平滑混合到脱档 `0.024`、手指弹簧/阻尼 `220 / 5.2`、磁峰倍率 `0.50`、摩擦 `0.16`、脱档冲量 `1.8` 与最高速度 `5.0 s⁻¹`；两者均使用最大子步 `1/240 s`。
 
-`FanCardController` 只在用户授权且机械状态真实变化时发布 `Breakaway / DetentCrossed / DetentCaptured`，再由 Coordinator 进入现有 `FidgetHapticRouter`；控制器内没有 `IosHaptics` 直连。底片与中片各一条同心内嵌弧轨及 3 枚磁体，中片与顶片各一枚随动球，均读取同一全局 `q`。材质、正面图案、Library 设姿、AUTO、Reset 与 `SetFanProgress()` 不得制造 Haptic 或写回既有旋转/线性调节值。
+`FanCardController` 只在用户授权且机械状态真实变化时发布 `Breakaway / DetentCrossed / DetentCaptured`，再由 Coordinator 进入现有 `FidgetHapticRouter`；控制器内没有 `IosHaptics` 直连。输入不再要求手指绕右下机械轴画圆，而是把每帧屏幕位移投影到“当前三片整体视觉质心”的运动切线并连续积分。滑动速度 `0.55→1.30 屏宽/秒`、累计滑动距离、可用 pressure 增量和最近有效手势频率共同形成动态权重：慢推目标逐档跟随真实滑动幅度，只有足够快且有足够距离的手势才在松手后授权端点收尾，仍由同一四档状态机逐井越过；反向快速滑动可清脆收回。直接拖动与快速收尾期间暂停 Core Motion，并持续发布冻结的视差样本；完成后以当前设备姿态重新建立参考，避免轴心或视觉质心在手指下漂移。
+
+独立 `FanCardMetalDetentAudio` 只监听同一语义流中的 `DetentCrossed`：一个事件严格对应一个低约 `2.6` 半音的厚合金 `PlayOneShot`，5 个原子变体由 8 个 2D 声部轮转；专属 Haptic renderer 将同一个事件按实际跨档速度映射为主冲击 `Intensity 0.92→1.00 / Sharpness 0.76→0.90`，并叠加 `32 ms` 重量段 `0.64 / 0.24` 和 `t=22 ms` 收尾 `0.56 / 0.42`。`Breakaway`、捕获、Library、AUTO、Reset 和程序设姿不发声或 Haptic。顶片与中片各一条同心内嵌弧轨及 3 枚磁体，中片与底片各一枚随动球，均读取同一全局 `q`；底片禁止滑轨。材质、正面图案、Library 设姿、AUTO、Reset 与 `SetFanProgress()` 不得制造 Haptic 或写回既有旋转/线性调节值；正面共同轴心只允许单枚低矮抛光轴承帽，结构轴标记不得渲染成额外金属环。
+
+旋转、线性推牌和扇牌在详情 HUD 共享 `Speed / Intensity / Frequency` 三项展示，但单位和来源属于当前产品机制：线性推牌显示 `mm/s`，扇牌显示 `°/s`，旋转产品显示 RPM。推牌与扇牌的 Intensity/Frequency 来自本次用户手势与机械负载，不读取旋转 combo 的替代值；遥测只读机械状态，不参与 Haptic 授权。
 
 ### 3.6 Dial
 
@@ -336,7 +340,7 @@ Rest → FingerDriven → Coasting → Rest
 | `input.rotary.dragFollowResponse` | 由 touch response 派生 | `20...46 s⁻¹` |
 | `input.rotary.dragBrakeResponse` | 由 touch response 派生 | `46...82 s⁻¹` |
 | `input.rotary.screenSpeedForFullSpin` | 由 touch response 派生 | `1800...720 px/s` |
-| `input.rotary.fallbackTouchRadius` | `0.48 × shortSide` | `0.40...0.50` |
+| `input.rotary.fallbackTouchRadius` | `0.36 × shortSide` | `0.32...0.40` |
 | `input.rotary.reversalConfirmation` | `18 px` | `12...32 px` |
 
 `coastHalfLife` 的定义：每经过一个 half-life，角速度减半。
@@ -345,7 +349,7 @@ Rest → FingerDriven → Coasting → Rest
 ω(t + dt) = ω(t) × 0.5^(dt / coastHalfLife)
 ```
 
-自由轮默认不应该有明显 Detent。如果希望模拟轴承颗粒，只添加很弱的 Bearing Rumble，或提供独立的 `Textured Bearing` 模式。
+自由轮默认不应该有明显 Detent。四款旋转模型只保留低噪程序化切风声：`RotorWindAudio` 只读真实绝对角速度，按 2 / 3 / 4 个叶片计算 blade-pass 节奏。主体为低通着色空气流，中频噪声占比不高于 `0.14`、高频 edge 不高于 `0.02`。每次 blade-pass 的首段是占周期 `0.14` 的立方衰减硬碰撞，只承载短促碰撞纹理；主段/尾段以 `3 ms` 完成攻击，最长 `65 ms` 且不超过周期 `0.72`。正式 App 音色采用用户当前选择的“明亮合金 100% / 整体音高 +9 半音”：主层正弦，次层与上层用包含安全三次泛音的三角金属波，混合为 `0.105 / 0.215 / 0.160`，碰撞亮边 `0.34`，四个 shipping scene 及重建器的唯一 `alloyResonance` 均为 `1.0`。固定偏移倍率为 `2^(9/12) ≈ 1.6818`，叠加后 App 三层实际范围为 `1125...1810 / 2588...4161 / 4669...7508 Hz`；250 RPM 验收点为 `1588 / 3651 / 6588 Hz`。三次泛音接近 Nyquist 时会自动退化为纯基频正弦，防止高层折叠失真。金属节奏严格等于 `RPM × bladeCount ÷ 60`；三层模态按真实 `20...400 RPM` 的 `normalizedSpeed^0.78` 同时跟随转速，所以加速会同时增加击发密度并升高材质音高，明亮合金的相对频率、波形、混合与 +9 半音偏移保持不变。120 / 400 RPM 的三叶模型 Click 约 24 / 7 ms，材质鸣响约 65 / 36 ms，因此能辨识材质但不会拖成大金属腔体长鸣，并会在下一片叶片到来前归零。两个包络全部由同一个 `alloyResonance` 控制，不存在第二个明亮强度。低频只提供重量，不承担清脆起音。听感增益使用 `0.62` 指数，`60 RPM` 已清楚起声、运行时约 `286 RPM` 达满幅，静止仍严格为零；网页当前的 250 RPM 只是验收参考，App 不获得固定或初始转速。renderer 在 `OnAudioFilterRead` mixer callback 内生成，参数响应为 `4 ms`，项目 DSP buffer 为 `256 samples`。画面、叶片节奏和金属音高读取同一真实速度，物理减速直接决定声音减速与消散，网页 `2.30 s` 停转模拟不作为独立 App 音尾。该 renderer 不写 Rigidbody，也不进入 Haptic pipeline。
 
 ### 5.2 磁吸棘轮 Magnetic Detent
 
@@ -375,13 +379,13 @@ Traveling
 
 物理档位数量和 Haptic 档位数量必须读取同一个 `DetentFeelConfig.detentsPerRev`。切换预设时下一次机械跨档和下一次 Haptic 同时采用新值。
 
-三叶金属音频同样只读取真实跨档事件，但与 Haptic renderer 完全分离：
+四款旋转模型在棘轮模式下都保留同一连续切风层，并在其上叠加只读取真实跨档事件的 click 层；click 与 Haptic renderer 完全分离：
 
 - 物理一帧跨过多个 detent index 时逐个发事件；一个事件严格对应一个 `PlayOneShot`。
 - 5 个 variant 都由同一枚咬合裁出，mono PCM、约 `48...52 ms`、无 reverb、首尾无静音 padding。
 - variant round-robin，连续两击不得相同；每击再随机 `±1...2` 半音，高速增加 `0...1` 半音上扬。
 - 音量使用与 Haptic speed texture 相同的 normalized angular speed 输入，但反向映射：慢速为完整单击，高速每击最低降到 `0.34×`；最近一次明确 flick 对后续 5 击追加递减增益。
-- 12 个预分配 AudioSource 形成声部池。没有 rate limit、gate、timeline 或高速模式切换；高 RPM 的金属 whir 只能由原子点击自然重叠产生。
+- 12 个预分配 AudioSource 形成声部池。没有 rate limit、gate、timeline 或高速模式切换；高 RPM 的棘轮纹理由原子点击自然重叠，切风与合金空气共鸣仍由连续风声层表达。
 
 后续如果要进一步提高物理真实性，应把当前“速度阈值脱档”升级为输入扭矩/切向位移阈值，并使用弹簧阻尼捕获：
 
@@ -406,18 +410,18 @@ Fmag = -Fpeak·sin(2πq)
 | `detentPositions` | `0 / 13.6 / 27.2 / 40.8 / 54.4 / 68.0 mm` |
 | `defaultDetent / bidirectionalRange` | `index 2 (27.2 mm) / 左 27.2 mm、右 40.8 mm` |
 | `movingMass` | `55 g` |
-| `handSpring / handDamping` | `125 N/m / 4.1 Ns/m` |
-| `breakawayForce / magneticPeakForce` | `0.62 N / 0.58 N` |
+| `handSpring / handDamping` | `100 N/m / 5.0 Ns/m` |
+| `breakawayForce / magneticPeakForce` | `0.44 N / 0.42 N` |
 | `railFriction / railDamping` | `0.085 N / 0.30 Ns/m` |
-| `captureSpring / captureDamping` | `220 N/m / 3.8 Ns/m` |
-| `visiblePreload` | `≤ 1.4 mm` |
-| `captureRadius` | `5.8 mm` |
+| `captureSpring / captureDamping` | `150 N/m / 5.8 Ns/m` |
+| `visiblePreload` | `≤ 0.9 mm` |
+| `captureRadius / captureEntrySpeed` | `4.0 mm / 45 mm/s` |
 | `lockPosition / lockSpeed` | `< 0.10 mm / < 0.0045 m/s` |
 | `integration` | `≤ 1/240 s`，每帧最多 8 子步 |
 
 松手以当前位置加短时速度预测选择最近档位。低于脱档力时逻辑位置保持在当前档，只允许视觉预压；跨越阈值只发一次 Breakaway；每越过一个相邻势垒发一个 DetentCrossed；捕获满足误差和速度条件后把位置对齐档位并把速度严格归零。
 
-预压 Haptic 从 5% 负载启动，保持轻压→继续加力→脱档的线性节奏，但整条曲线上抬为 Intensity `0.45→1.00`、Sharpness `0.30→1.00`；native parameter update 不超过 30 次/秒，该更新率不是硬件振动 Hz。线性跨档固定使用单个 isolated transient，并把 Apple 开放的事件参数推到 `Intensity 1.00 / Sharpness 1.00`；不使用独立多脉冲 Pattern，不读取旋转 Detent Lab，也不套用旋转高速限流。AUTO、Library、Reset 和 `SetSlideProgress()` 不授权 Haptic。
+推牌 Haptic 完全由空间和机制状态驱动，不由触摸时长驱动。慢搓接近同一势垒时，三个有限边缘提示从 `Intensity 0.20 / Sharpness 0.18` 增至 `0.38 / 0.32`，每个 16 ms 且不循环。线性跨档固定使用一个有限三层包：`t=0 ms` 主 transient `0.98 / 0.78`，同时开始的 `30 ms` 低锐度 continuous 重量段 `0.58 / 0.22`，`t=22 ms` 收尾 transient `0.52 / 0.44`；`Breakaway` 与 `DetentCaptured` 不补额外冲击。该 tuning 不读取旋转 Detent Lab，也不套用旋转高速限流。AUTO、Library、Reset 和 `SetSlideProgress()` 不授权 Haptic。
 
 ### 5.3 手指拖拽与 Flick
 
@@ -426,7 +430,7 @@ Fmag = -Fpeak·sin(2πq)
 | `input.drag.activationDistance` | `6 pt` | `4...10 pt` |
 | `input.rotary.minimumScreenDelta` | `0.75 px` | `0.5...2 px` |
 | `input.rotary.maximumSampleAngle` | `24°/frame` | `12...30°` |
-| `input.rotary.fallbackTouchRadius` | `0.42 × shortSide` | `0.32...0.46` |
+| `input.rotary.fallbackTouchRadius` | `0.36 × shortSide` | `0.32...0.40` |
 | `input.rotary.minimumWorldRadius` | `0.008` | 模型尺寸相关 |
 | `haptic.detent.minimumInterval` | `0.025 s` | `0.020...0.050 s` |
 
@@ -689,11 +693,13 @@ input.<inputId>.<parameter>
 - Core Haptics capability 检测、场景加载时启动的唯一持久 engine、reset/stopped 自动恢复，以及 UIKit fallback。
 - 按语义解析的 Haptic Recipe Library，以及全局力度、频率感、节奏和速度跟随修饰。
 - 每个 transient pulse 独立的 intensity/sharpness；Pop、Capture、Reset、Shake 等拥有不同节奏。
-- 两个互不抢占的 `CHHapticAdvancedPatternPlayer` 分别承担高速旋转纹理与线性磁力预压，均支持 dynamic intensity/sharpness、淡出 stop、后台停止和 engine reset 恢复。
+- 唯一循环 `CHHapticAdvancedPatternPlayer` 只承担高速旋转纹理；推牌类使用空间边缘提示与有限三层跨档包，不存在 sustained/looping preload player。
 - 自由轮指数 half-life 衰减。
 - 磁吸档位的 breakaway、capture、snap 和基于实际 unwrapped angle 的 `DetentCrossed`。
-- 第五款推牌的六档 68 mm 力模型、预压、势垒跨越、预测捕获、视觉沉降和独立 magnetic preload player。
+- 第五款推牌的六档 68 mm 力模型、可见预压、慢搓边缘限速、空间提示、势垒跨越、预测捕获和跨档同步视觉轻颤。
 - 产品构建中禁用了历史自动 motor；启动和 reset 角速度为零。
+- 四个正式旋转场景都接入只读真实角速度的低噪、低延迟程序化风声与 12 声部棘轮 click；平滑模式只有风声，棘轮模式为两层叠加。
+- 第六款磁吸扇牌接入 5 个厚合金 click 与 8 声部池，只在用户授权的真实 `DetentCrossed` 上逐档播放一次。
 - 单指真实旋转角度、Pinch、相机 Orbit。
 - Core Motion 60 Hz 的 attitude、rotation rate、gravity 与 userAcceleration。
 - `userAcceleration` 的 0.30/0.22g 回差惯性触点、8/s 限流；金属模型原有明确甩动角冲量保持不变。
@@ -715,18 +721,20 @@ input.<inputId>.<parameter>
 - 冷启动、复位、手指抬起后的最终静止状态都不会自行产生角速度。
 - 同一个初速度在不同帧率下具有近似相同的 half-life。
 - 自由轮默认没有明显机械档位。
+- 风声随真实角速度增强，并随同一物理 half-life 减速、降频和消散；启动与 Reset 不得留下音尾或自行制造运动。
 
 ### 磁吸棘轮
 
 - 低于 breakaway threshold 时不跨档。
 - 超过 threshold 后跨档，实际跨过一个 detent 只产生一次 Tick。
-- 每次 `DetentCrossed` 只产生一个 transient；Intensity/Sharpness 精确等于活动预设，不受全局力度、速度倍率或多层冲击覆盖。
-- 三叶金属由 `RatchetDetentCrossed` 逐档驱动 5 个原子 PCM variant 和 12 声部 `PlayOneShot` 池；Core Haptics pattern 不再承载任何 `audioCustom`。
+- 旋转机制每次 `DetentCrossed` 只产生一个 transient；Intensity/Sharpness 精确等于活动预设，不受全局力度、速度倍率或多层冲击覆盖。推牌类独立使用专用有限三层包，不继承旋转预设。
+- 四款旋转模型均由 `RatchetDetentCrossed` 逐档驱动 5 个原子 PCM variant 和 12 声部 `PlayOneShot` 池，并与连续风声叠加；Core Haptics pattern 不再承载任何 `audioCustom`。
+- 第六款磁吸扇牌每个用户授权的 `DetentCrossed` 只执行一个金属 `PlayOneShot`；自动演示、Reset、程序设姿、Breakaway 和 Capture 均不得制造 click。
 - 高于 `30 detents/s` 时停止逐档 transient 并进入单个 continuous loop；回落后离散节奏随惯性自然变疏。
 - 低速进入 capture 后吸到最近档位并发出一次 Capture Snap。
 - Capture 完成后角速度为零，不发生小幅来回振荡或继续旋转。
 - 线性推牌在 30/60/120 Hz 下必须落入同一档，停止位置误差不超过 0.2 mm，且最后速度严格为零。
-- 推牌从默认第 3 档首次触摸即可向左或向右脱档；六档可在 iPhone 盲辨，慢推、快速全程推和连续 20 次往返均不得漏击或双击，视觉捕获与 Haptic 同帧。
+- 推牌从默认第 3 档首次触摸即可向左或向右脱档；六档可在 iPhone 盲辨，慢推、快速全程推和连续 20 次往返均不得漏档。每次真实跨档必须只有规定的 `0 ms` 主冲击/30 ms 重量段与 `22 ms` 收尾所组成的单个有限包，停手不得持续输出，视觉轻颤与主冲击同帧。
 
 ### Device Twist
 

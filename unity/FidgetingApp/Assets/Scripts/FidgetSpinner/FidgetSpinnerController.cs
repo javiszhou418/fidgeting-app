@@ -32,7 +32,9 @@ namespace CodexUnityLab
         [SerializeField, Min(0f)] private float tapMaximumDuration = 0.28f;
         [SerializeField, Min(0f)] private float dragActivationDistancePoints = 2.5f;
         [SerializeField, Min(0f)] private float pinchActivationDistancePoints = 6f;
-        [SerializeField, Range(0.2f, 0.5f)] private float fallbackTouchRadius = 0.48f;
+        [SerializeField, Range(0.2f, 0.5f)] private float fallbackTouchRadius =
+            global::ThreeBladeEDC.FidgetSpinnerMotion
+                .DefaultFallbackTouchRadiusFraction;
 
         private Rigidbody spinnerBody;
         private PortraitCameraFramer cameraFramer;
@@ -712,8 +714,13 @@ namespace CodexUnityLab
                 return false;
             }
 
-            float fallbackRadius = Mathf.Min(Screen.width, Screen.height) * fallbackTouchRadius;
-            return Vector2.Distance(screenPosition, spinnerScreenPosition) <= fallbackRadius;
+            return global::ThreeBladeEDC.FidgetSpinnerMotion
+                .IsWithinFallbackSpinTouchRegion(
+                    screenPosition,
+                    new Vector2(spinnerScreenPosition.x, spinnerScreenPosition.y),
+                    Screen.width,
+                    Screen.height,
+                    fallbackTouchRadius);
         }
 
         public void SetGestureSpeedScale(float value)

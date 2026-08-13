@@ -47,6 +47,35 @@ namespace FidgetingApp.Tests.Editor
         }
 
         [Test]
+        public void RotaryScenesUseCompactFallbackSpinRegionsForCameraOrbit()
+        {
+            string[] rotaryScenePaths =
+            {
+                SpinnerEnvironmentCatalog.BlueScenePath,
+                SpinnerEnvironmentCatalog.PointedScenePath,
+                SpinnerEnvironmentCatalog.MetalScenePath,
+                SpinnerEnvironmentCatalog.ImportedScenePath,
+                SpinnerEnvironmentCatalog.TwoLobeScenePath
+            };
+
+            foreach (string scenePath in rotaryScenePaths)
+            {
+                string scene = File.ReadAllText(scenePath);
+                StringAssert.Contains(
+                    "fallbackTouchRadius: 0.36",
+                    scene,
+                    scenePath);
+                StringAssert.DoesNotContain(
+                    "fallbackTouchRadius: 0.48",
+                    scene,
+                    scenePath);
+            }
+
+            string prefab = File.ReadAllText("Assets/Prefabs/FidgetSpinner.prefab");
+            StringAssert.Contains("fallbackTouchRadius: 0.36", prefab);
+        }
+
+        [Test]
         public void PointedThreeBladeReplacesBlueWithoutReplacingOriginalMetal()
         {
             string swift = File.ReadAllText(
@@ -166,7 +195,204 @@ namespace FidgetingApp.Tests.Editor
                 "mobilePipeline.msaaSampleCount = originalPipelineMsaa;",
                 buildPipeline,
                 "Simulator preview export must restore the iPhone 2x MSAA source of truth.");
-            StringAssert.Contains("PlayerSettings.iOS.buildNumber = \"22\";", buildPipeline);
+            StringAssert.Contains("PlayerSettings.iOS.buildNumber = \"40\";", buildPipeline);
+        }
+
+        [Test]
+        public void LibraryLongPressOpensTheWallpaperStyleEnvironmentPicker()
+        {
+            string swift = File.ReadAllText(
+                "Assets/Plugins/iOS/CodexSwiftUIOverlay.swift");
+            string coordinator = File.ReadAllText(
+                "Assets/Scripts/Product/FidgetAppCoordinator.cs");
+            string pipeline = File.ReadAllText(
+                "Assets/Editor/IosBuildPipeline.cs");
+            string wallpaperCapture = File.ReadAllText(
+                "Assets/Editor/EnvironmentWallpaperAssetCapture.cs");
+
+            StringAssert.Contains(
+                "LongPressGesture(minimumDuration: 0.55, maximumDistance: 14)",
+                swift);
+            StringAssert.Contains(".simultaneousGesture(", swift);
+            StringAssert.Contains("private let previewScale = 0.66", swift);
+            StringAssert.Contains("ProductPageIndicator(", swift);
+            StringAssert.DoesNotContain(
+                "Color(red: 0.02, green: 0.45, blue: 0.53)",
+                swift);
+            StringAssert.DoesNotContain(
+                "Color(red: 0.02, green: 0.28, blue: 0.34)",
+                swift);
+            StringAssert.DoesNotContain(
+                "Color(red: 0.30, green: 0.86, blue: 0.90)",
+                swift);
+            int pickerStart = swift.IndexOf(
+                "private struct EnvironmentWallpaperImage");
+            Assert.That(pickerStart, Is.GreaterThanOrEqualTo(0));
+            int pickerEnd = swift.IndexOf(
+                "private struct SpinnerLibrary",
+                pickerStart);
+            Assert.That(pickerEnd, Is.GreaterThan(pickerStart));
+            string pickerSource = swift.Substring(
+                pickerStart,
+                pickerEnd - pickerStart);
+            Assert.That(
+                pickerSource.Split(
+                    new[] { "ProductPrimaryActionLabel(" },
+                    System.StringSplitOptions.None).Length - 1,
+                Is.EqualTo(1),
+                "The picker must expose one and only one primary confirmation CTA.");
+            StringAssert.Contains("title: \"选择当前场景\"", pickerSource);
+            StringAssert.Contains(
+                "onSelect(state.environmentThemePreview)",
+                pickerSource);
+            StringAssert.DoesNotContain("ProductIconButton(", pickerSource);
+            StringAssert.DoesNotContain("symbol: \"xmark\"", pickerSource);
+            StringAssert.DoesNotContain("onCancel", pickerSource);
+            StringAssert.DoesNotContain(".onTapGesture", pickerSource);
+            StringAssert.DoesNotContain(
+                "TabView(selection: $state.environmentThemePreview)",
+                pickerSource,
+                "A full-width page TabView clips the adjacent-scene affordance.");
+            StringAssert.Contains(
+                "ForEach(EnvironmentTheme.allCases)",
+                pickerSource,
+                "The picker must render each real theme once instead of duplicating a wrapped neighbor.");
+            StringAssert.Contains("private func adjacentTheme(", pickerSource);
+            StringAssert.Contains("themes.indices.contains(candidateIndex)", pickerSource);
+            StringAssert.Contains("guard let nextTheme = adjacentTheme(", pickerSource);
+            StringAssert.Contains("boundedDragOffset(horizontal, pitch: pitch)", pickerSource);
+            StringAssert.DoesNotContain(
+                "ForEach(-1...1, id: \\.self)",
+                pickerSource,
+                "Two themes must not fill both neighbor slots with the same duplicated scene.");
+            StringAssert.DoesNotContain(
+                "% themes.count",
+                pickerSource,
+                "The two-theme picker is finite and must not wrap at either edge.");
+            StringAssert.Contains("private let neighborSpacing", pickerSource);
+            StringAssert.Contains("let carouselPitch =", pickerSource);
+            StringAssert.Contains("DragGesture(minimumDistance: 8", pickerSource);
+            StringAssert.Contains("settleCarousel(value, pitch: pitch)", pickerSource);
+            StringAssert.Contains("anchor: .center", pickerSource);
+            StringAssert.Contains(
+                "activeWindowSafeAreaInsets",
+                pickerSource);
+            StringAssert.Contains(
+                "windowInsets.bottom - windowInsets.top",
+                pickerSource);
+            StringAssert.Contains(
+                "let horizontalBackdropScale =",
+                pickerSource);
+            StringAssert.Contains(
+                ".frame(width: size.width, height: size.height + 90)",
+                pickerSource);
+            StringAssert.Contains(
+                "x: horizontalBackdropScale",
+                pickerSource);
+            StringAssert.DoesNotContain(
+                "width: size.width + 90",
+                pickerSource,
+                "Backdrop bleed must not enlarge the picker layout or shift its centerline.");
+            StringAssert.DoesNotContain(
+                "(windowInsets.bottom - windowInsets.top) * 0.5",
+                pickerSource);
+            StringAssert.Contains(
+                ".offset(y: entered ? physicalCenterYOffset : 0)",
+                pickerSource);
+            StringAssert.DoesNotContain("physicalCenterInLocal", pickerSource);
+            StringAssert.DoesNotContain(".position(", pickerSource);
+            StringAssert.DoesNotContain(
+                "width: size.width * previewScale",
+                pickerSource,
+                "Entry must scale a fixed full-screen plane around the exact center.");
+            StringAssert.DoesNotContain("title: \"进入 三叶金属\"", pickerSource);
+            StringAssert.Contains(
+                "theme.wallpaperAssetName(for: model)",
+                pickerSource);
+            StringAssert.Contains(
+                "if theme == capturedTheme, let capturedScreen",
+                pickerSource,
+                "The live screen capture must remain the card for the theme that was active at long press.");
+            StringAssert.Contains("Image(uiImage: capturedScreen)", pickerSource);
+            StringAssert.Contains("let capturedTheme = state.environmentTheme", swift);
+            StringAssert.Contains(
+                "static let scaleDuration = 0.52",
+                pickerSource);
+            StringAssert.DoesNotContain("showsCapturedScreen", pickerSource);
+            StringAssert.DoesNotContain("capturedScreenFadeDuration", pickerSource);
+            StringAssert.DoesNotContain(
+                ".opacity(entered ? 0 : 1)",
+                pickerSource,
+                "Fading the capture during scaling breaks the continuous-surface transition.");
+            StringAssert.Contains(
+                "configure(picker, in: rootController, background: .clear)",
+                swift);
+            int presentationStart = swift.IndexOf(
+                "func presentEnvironmentPicker()");
+            int presentationEnd = swift.IndexOf(
+                "private func selectEnvironmentTheme",
+                presentationStart);
+            Assert.That(presentationStart, Is.GreaterThanOrEqualTo(0));
+            Assert.That(presentationEnd, Is.GreaterThan(presentationStart));
+            string presentationSource = swift.Substring(
+                presentationStart,
+                presentationEnd - presentationStart);
+            StringAssert.Contains("picker.view.alpha = 1", presentationSource);
+            StringAssert.DoesNotContain("picker.view.alpha = 0", presentationSource);
+            StringAssert.Contains("rootController.view.layoutIfNeeded()", swift);
+            StringAssert.Contains(
+                "transition?.begin(",
+                swift,
+                "UIKit must explicitly start the transition after the frozen frame is laid out.");
+            StringAssert.Contains(
+                "reduceMotion: UIAccessibility.isReduceMotionEnabled",
+                swift);
+            StringAssert.Contains("state.environmentThemePreview.title", swift);
+            StringAssert.Contains("captureScreen(from: rootController.view)", swift);
+            StringAssert.Contains("state.beginEnvironmentThemePreview()", swift);
+            StringAssert.Contains(
+                "SetEnvironmentThemeFromNativeUi",
+                swift);
+            StringAssert.Contains(
+                "public void SetEnvironmentThemeFromNativeUi(string themeId)",
+                coordinator);
+            StringAssert.Contains(
+                "SpinnerEnvironmentThemeCatalog.PreferenceKey",
+                coordinator);
+            StringAssert.Contains(
+                "Assets/Plugins/iOS/SceneWallpapers",
+                pipeline);
+            StringAssert.Contains(
+                "Vector3 matchedPosition = camera.transform.position",
+                wallpaperCapture);
+            StringAssert.Contains(
+                "Matrix4x4 matchedProjection = camera.projectionMatrix",
+                wallpaperCapture);
+            StringAssert.Contains(
+                "foreach (SpinnerEnvironmentThemeProfile theme",
+                wallpaperCapture);
+            StringAssert.Contains(
+                "scene-wallpaper-{theme.Id}-{profile.ModelId}.png",
+                wallpaperCapture);
+
+            foreach (string modelId in ProductCatalog.ShippingModelIds())
+            {
+                foreach (string themeId in new[]
+                         {
+                             SpinnerEnvironmentThemeCatalog.CanyonId,
+                             SpinnerEnvironmentThemeCatalog.CyberpunkId
+                         })
+                {
+                    string path = Path.Combine(
+                        "Assets/Plugins/iOS/SceneWallpapers",
+                        $"scene-wallpaper-{themeId}-{modelId}.png");
+                    Assert.That(File.Exists(path), Is.True, path);
+                    Texture2D preview = AssetDatabase.LoadAssetAtPath<Texture2D>(path);
+                    Assert.That(preview, Is.Not.Null, path);
+                    Assert.That(preview.width, Is.GreaterThanOrEqualTo(900), path);
+                    Assert.That(preview.height, Is.GreaterThanOrEqualTo(1600), path);
+                }
+            }
         }
 
         [Test]
@@ -300,44 +526,38 @@ namespace FidgetingApp.Tests.Editor
         }
 
         [Test]
-        public void ImportedThirdSpinnerUsesOptimizedRuntimeMeshAndCanonicalInteraction()
+        public void ImportedSlotUsesDimensionedDragonScaleAndCanonicalInteraction()
         {
-            const string sourceModel =
-                "Assets/_ImportedSpinner/Models/ImportedSpinner.fbx";
             const string runtimeModel =
+                "Assets/_ImportedSpinner/Models/DragonScaleCLI/"
+                + "DragonScaleEDC_CLI_85mm.fbx";
+            const string collisionModel =
+                "Assets/_ImportedSpinner/Models/DragonScaleCLI/"
+                + "DragonScaleEDC_CLI_85mm_Collision.fbx";
+            const string dccSource =
+                "ArtSource/DragonScaleEDC/CLIAnything/"
+                + "DragonScaleEDC_CLI_85mm.blend";
+            const string legacySource =
+                "Assets/_ImportedSpinner/Models/ImportedSpinner.fbx";
+            const string legacyRuntime =
                 "Assets/_ImportedSpinner/Models/ImportedSpinner_Runtime.obj";
             const string scenePath =
                 "Assets/_ImportedSpinner/Scenes/ImportedSpinner.unity";
-            const string mirrorStudio =
-                "Assets/_ImportedSpinner/Materials/C_ImportedSpinnerMirrorStudio.asset";
-            const string baseColor =
-                "Assets/_ImportedSpinner/Textures/texture_pbr_20250901.png";
-            const string normal =
-                "Assets/_ImportedSpinner/Textures/texture_pbr_20250901_normal.png";
-            const string metallicSmoothness =
-                "Assets/_ImportedSpinner/Textures/texture_pbr_20250901_metallic_smoothness.png";
+            const string studio =
+                "Assets/_ImportedSpinner/Materials/DragonScaleCLI/"
+                + "C_DragonScaleCLIStudio.asset";
 
-            Assert.That(File.Exists(sourceModel), Is.True);
             Assert.That(File.Exists(runtimeModel), Is.True);
+            Assert.That(File.Exists(collisionModel), Is.True);
+            Assert.That(File.Exists(dccSource), Is.True);
             Assert.That(File.Exists(scenePath), Is.True);
-            Assert.That(File.Exists(mirrorStudio), Is.True);
-            Assert.That(File.Exists(baseColor), Is.True);
-            Assert.That(File.Exists(normal), Is.True);
-            Assert.That(File.Exists(metallicSmoothness), Is.True);
+            Assert.That(File.Exists(studio), Is.True);
 
             string[] dependencies = AssetDatabase.GetDependencies(scenePath, true);
             CollectionAssert.Contains(dependencies, runtimeModel);
-            CollectionAssert.Contains(dependencies, mirrorStudio);
-            CollectionAssert.DoesNotContain(
-                dependencies,
-                baseColor,
-                "Mirror steel must not reintroduce baked color, grain or surface noise.");
-            CollectionAssert.DoesNotContain(dependencies, normal);
-            CollectionAssert.DoesNotContain(dependencies, metallicSmoothness);
-            CollectionAssert.DoesNotContain(
-                dependencies,
-                sourceModel,
-                "The 1.5M-triangle source FBX must never enter the shipping scene.");
+            CollectionAssert.Contains(dependencies, studio);
+            CollectionAssert.DoesNotContain(dependencies, legacySource);
+            CollectionAssert.DoesNotContain(dependencies, legacyRuntime);
 
             Mesh[] runtimeMeshes = AssetDatabase.LoadAllAssetsAtPath(runtimeModel)
                 .OfType<Mesh>()
@@ -347,22 +567,22 @@ namespace FidgetingApp.Tests.Editor
             Assert.That(runtimeImporter, Is.Not.Null);
             Assert.That(
                 runtimeImporter.meshCompression,
-                Is.EqualTo(ModelImporterMeshCompression.Off),
-                "Mirror steel must keep full vertex precision so reflections stay smooth.");
+                Is.EqualTo(ModelImporterMeshCompression.Off));
+            Assert.That(runtimeImporter.useFileScale, Is.True);
+            Assert.That(runtimeImporter.preserveHierarchy, Is.True);
             Assert.That(
-                runtimeImporter.normalCalculationMode,
-                Is.EqualTo(ModelImporterNormalCalculationMode.AreaAndAngleWeighted));
-            Assert.That(
-                runtimeImporter.normalSmoothingSource,
-                Is.EqualTo(ModelImporterNormalSmoothingSource.FromAngle));
+                runtimeImporter.importNormals,
+                Is.EqualTo(ModelImporterNormals.Import));
             Assert.That(
                 runtimeMeshes.All(mesh => mesh.normals.Length == mesh.vertexCount),
-                Is.True,
-                "The welded mirror mesh must retain smooth per-vertex normals.");
+                Is.True);
             int triangleCount = runtimeMeshes.Sum(mesh =>
                 Enumerable.Range(0, mesh.subMeshCount)
                     .Sum(submesh => (int)(mesh.GetIndexCount(submesh) / 3)));
-            Assert.That(triangleCount, Is.InRange(150000, 200000));
+            Assert.That(
+                triangleCount,
+                Is.InRange(20500, 22000),
+                "The approved DCC keeps the high-detail one-piece rotor while excluding the rejected decorative axis rings.");
 
             EditorSceneManager.OpenScene(scenePath);
             GameObject root = GameObject.Find("ImportedSpinner_Root");
@@ -372,7 +592,13 @@ namespace FidgetingApp.Tests.Editor
             Assert.That(rotor.GetComponent<RotorRigidbodyController>(), Is.Not.Null);
             Assert.That(rotor.GetComponent<SpinnerTouchSurface>(), Is.Not.Null);
             Assert.That(rotor.GetComponent<BoxCollider>(), Is.Not.Null);
+            Transform hub = root.transform.Find("HubStatic");
+            Assert.That(hub, Is.Not.Null);
+            Assert.That(hub.gameObject.activeSelf, Is.True);
+            Assert.That(hub.GetComponent<SpinnerTouchSurface>(), Is.Not.Null);
+            Assert.That(hub.GetComponent<CapsuleCollider>(), Is.Not.Null);
             Assert.That(root.GetComponent<MobileGestureController>(), Is.Not.Null);
+            Assert.That(root.GetComponent<ExplodedViewController>(), Is.Not.Null);
             OrbitPresentationCamera camera =
                 Object.FindAnyObjectByType<OrbitPresentationCamera>();
             Assert.That(camera, Is.Not.Null);
@@ -395,33 +621,133 @@ namespace FidgetingApp.Tests.Editor
                     projectedSize.y / framing.DetailHeightFraction),
                 Is.InRange(0.90f, 1.03f),
                 "The live renderer bounds should fill one detail boundary, not a fixed authored distance.");
-            Assert.That(Object.FindAnyObjectByType<MetalRatchetDetentAudio>(), Is.Null);
-            Transform visual = rotor.Find("ImportedSpinnerVisual");
-            Assert.That(visual, Is.Not.Null);
-            Renderer mirrorRenderer = visual.GetComponentInChildren<Renderer>();
-            Assert.That(mirrorRenderer, Is.Not.Null);
-            Material mirrorMaterial = mirrorRenderer.sharedMaterial;
-            Assert.That(mirrorMaterial, Is.Not.Null);
-            Assert.That(mirrorMaterial.name, Is.EqualTo("M_ImportedSpinnerMirrorSteel"));
-            Assert.That(mirrorMaterial.GetTexture("_BaseMap"), Is.Null);
-            Assert.That(mirrorMaterial.GetTexture("_BumpMap"), Is.Null);
-            Assert.That(mirrorMaterial.GetTexture("_MetallicGlossMap"), Is.Null);
-            Assert.That(mirrorMaterial.GetFloat("_Metallic"), Is.EqualTo(1f));
-            Assert.That(mirrorMaterial.GetFloat("_Smoothness"), Is.EqualTo(0.95f));
-            Color steel = mirrorMaterial.GetColor("_BaseColor");
-            Assert.That(Mathf.Abs(steel.r - steel.g), Is.LessThan(0.03f));
-            Assert.That(Mathf.Abs(steel.g - steel.b), Is.LessThan(0.04f));
-            Assert.That(mirrorMaterial.IsKeywordEnabled("_NORMALMAP"), Is.False);
-            Assert.That(mirrorMaterial.IsKeywordEnabled("_METALLICSPECGLOSSMAP"), Is.False);
             Assert.That(
-                mirrorRenderer.reflectionProbeUsage,
-                Is.EqualTo(UnityEngine.Rendering.ReflectionProbeUsage.BlendProbes));
+                Object.FindAnyObjectByType<MetalRatchetDetentAudio>(),
+                Is.Not.Null,
+                "All four shipping rotors must retain layered detent audio in ratchet mode.");
+            RotorWindAudio wind = Object.FindAnyObjectByType<RotorWindAudio>();
+            Assert.That(wind, Is.Not.Null);
+            Assert.That(wind.BladeCount, Is.EqualTo(3));
+
+            Assert.That(rotor.Find("Rotor_Root"), Is.Not.Null);
+            Assert.That(rotor.Find("BearingOuterRace"), Is.Not.Null);
+            Assert.That(rotor.Find("BearingShield_Top"), Is.Not.Null);
+            Assert.That(rotor.Find("BearingShield_Bottom"), Is.Not.Null);
+            Assert.That(hub.Find("Fixed_Root"), Is.Not.Null);
+            Assert.That(hub.Find("BearingInnerRace"), Is.Not.Null);
+            Assert.That(
+                root.transform.Find("BearingVisual/BallCage/BearingCage_Root"),
+                Is.Not.Null);
+
+            Transform rotorVisualRoot = rotor.Find("Rotor_Root");
+            Transform outerRace = rotor.Find("BearingOuterRace");
+            Transform fixedRoot = hub.Find("Fixed_Root");
+            Assert.That(
+                PlanarDistanceInMillimeters(rotor, rotorVisualRoot),
+                Is.LessThan(0.01f),
+                "The authored Dragon Scale origin, not its asymmetric AABB center, must stay on the Rigidbody axis.");
+            Assert.That(
+                PlanarDistanceInMillimeters(rotor, outerRace),
+                Is.LessThan(0.01f),
+                "The rotating outer race must stay coaxial with RotorDynamic.");
+            Assert.That(
+                PlanarDistanceInMillimeters(rotor, fixedRoot),
+                Is.LessThan(0.01f),
+                "The fixed axle must share the rotor's mechanical axis.");
+
+            Renderer[] dragonRenderers = root.GetComponentsInChildren<Renderer>(true)
+                .Where(renderer => renderer.sharedMaterials.Any(material =>
+                    material != null && material.name.StartsWith("M_DragonScale_")))
+                .ToArray();
+            Assert.That(dragonRenderers, Is.Not.Empty);
+            string[] materialNames = dragonRenderers
+                .SelectMany(renderer => renderer.sharedMaterials)
+                .Where(material => material != null)
+                .Select(material => material.name)
+                .Distinct()
+                .ToArray();
+            CollectionAssert.IsSupersetOf(
+                materialNames,
+                new[]
+                {
+                    "M_DragonScale_BlastedTitanium",
+                    "M_DragonScale_BlastedTitaniumDark",
+                    "M_DragonScale_PolishedEdge",
+                    "M_DragonScale_RadialBrushedA",
+                    "M_DragonScale_RadialBrushedB",
+                    "M_DragonScale_RecessedGunmetal",
+                    "M_DragonScale_BearingSteel",
+                    "M_DragonScale_BlackPOM"
+                });
+            Material body = dragonRenderers
+                .SelectMany(renderer => renderer.sharedMaterials)
+                .First(material => material.name == "M_DragonScale_BlastedTitanium");
+            Assert.That(body.GetFloat("_Metallic"), Is.EqualTo(1f));
+            Assert.That(body.GetFloat("_Smoothness"), Is.EqualTo(0.72f).Within(0.001f));
+            Assert.That(body.GetTexture("_BumpMap"), Is.Not.Null);
+            Material polished = dragonRenderers
+                .SelectMany(renderer => renderer.sharedMaterials)
+                .First(material => material.name == "M_DragonScale_PolishedEdge");
+            Assert.That(polished.GetFloat("_Smoothness"), Is.EqualTo(0.90f).Within(0.001f));
+            Material pom = dragonRenderers
+                .SelectMany(renderer => renderer.sharedMaterials)
+                .First(material => material.name == "M_DragonScale_BlackPOM");
+            Assert.That(pom.GetFloat("_Metallic"), Is.EqualTo(0f));
+            Assert.That(pom.GetFloat("_Smoothness"), Is.EqualTo(0.58f).Within(0.001f));
+
+            Bounds dragonBounds = dragonRenderers[0].bounds;
+            for (int index = 1; index < dragonRenderers.Length; index++)
+            {
+                dragonBounds.Encapsulate(dragonRenderers[index].bounds);
+            }
+            Assert.That(
+                Mathf.Max(dragonBounds.size.x, dragonBounds.size.z),
+                Is.EqualTo(0.085f).Within(0.0002f));
+            Assert.That(dragonBounds.size.y, Is.EqualTo(0.017f).Within(0.00025f));
             Assert.That(RenderSettings.customReflectionTexture, Is.Not.Null);
             Assert.That(
                 RenderSettings.customReflectionTexture.name,
-                Is.EqualTo("C_ImportedSpinnerMirrorStudio"));
+                Is.EqualTo("C_DragonScaleCLIStudio"));
             Assert.That(RenderSettings.reflectionIntensity, Is.EqualTo(0.9f).Within(0.001f));
             Assert.That(rotor.GetComponent<Rigidbody>().angularVelocity, Is.EqualTo(Vector3.zero));
+        }
+
+        [Test]
+        public void DragonScaleReplacementCannotLeakIntoEitherThreeBladeProduct()
+        {
+            const string dragonScale =
+                "Assets/_ImportedSpinner/Models/DragonScaleCLI/"
+                + "DragonScaleEDC_CLI_85mm.fbx";
+            const string pointed =
+                "Assets/_Fidgeting/Scenes/ThreeBladeEDC.unity";
+            const string metal =
+                "Assets/_Fidgeting/Scenes/ThreeBladeMetalOriginal.unity";
+
+            Assert.That(
+                ProductCatalog.TryGetScenePath(
+                    ProductCatalog.PointedThreeBladeModelId,
+                    out string pointedScene),
+                Is.True);
+            Assert.That(pointedScene, Is.EqualTo(pointed));
+            Assert.That(
+                ProductCatalog.TryGetScenePath(
+                    ProductCatalog.MetalThreeBladeModelId,
+                    out string metalScene),
+                Is.True);
+            Assert.That(metalScene, Is.EqualTo(metal));
+            Assert.That(
+                ProductCatalog.TryGetScenePath(
+                    ProductCatalog.GoldFourWingModelId,
+                    out string replacedScene),
+                Is.True);
+            Assert.That(replacedScene, Is.EqualTo(
+                "Assets/_ImportedSpinner/Scenes/ImportedSpinner.unity"));
+            CollectionAssert.DoesNotContain(
+                AssetDatabase.GetDependencies(pointed, true),
+                dragonScale);
+            CollectionAssert.DoesNotContain(
+                AssetDatabase.GetDependencies(metal, true),
+                dragonScale);
         }
 
         [Test]
@@ -505,6 +831,17 @@ namespace FidgetingApp.Tests.Editor
             StringAssert.Contains("SetDetentFeelPresetFromNativeUi", source);
             StringAssert.Contains("SetDetentIntensityOverrideFromNativeUi", source);
             StringAssert.Contains("SetDetentSharpnessOverrideFromNativeUi", source);
+            StringAssert.Contains(
+                "static let detentPresetIndex = \"fidgeting.settings.detentPresetIndex\"",
+                source);
+            StringAssert.Contains(
+                "static let detentIntensity = \"fidgeting.settings.detentIntensity\"",
+                source);
+            StringAssert.Contains(
+                "static let detentSharpness = \"fidgeting.settings.detentSharpness\"",
+                source);
+            StringAssert.Contains("private func persistDetentTuning", source);
+            StringAssert.Contains("restorePersistedDetentTuningIfAvailable()", source);
             StringAssert.Contains("EditableHapticSemantic.generalTuningCases", source);
             StringAssert.Contains("DETENT LAB 独占", source);
             StringAssert.Contains("SetRatchetFeelFromNativeUi", source);
@@ -648,6 +985,9 @@ namespace FidgetingApp.Tests.Editor
             StringAssert.Contains("static let shippingCases: [SpinnerModel]", source);
             StringAssert.Contains("case magneticFanCard = \"magnetic-fan-card\"", source);
             StringAssert.Contains("case .magneticFanCard: return \"磁吸扇牌\"", source);
+            StringAssert.Contains(
+                ".magneticSlideTile,\n        .magneticFanCard\n    ]",
+                source);
             StringAssert.Contains("setModeBarVisible(true)", source);
             StringAssert.DoesNotContain(
                 "state.selectedModel != .magneticSlideTile",
@@ -678,10 +1018,23 @@ namespace FidgetingApp.Tests.Editor
             int topBarStart = source.IndexOf("private struct ProductTopBar");
             int topBarEnd = source.IndexOf("private struct SpinnerOnboardingView");
             string topBar = source.Substring(topBarStart, topBarEnd - topBarStart);
+            StringAssert.Contains(
+                ".font(.product(.caption, weight: .bold))",
+                topBar);
+            StringAssert.DoesNotContain(
+                ".font(.product(size: 9, weight: .semibold))",
+                topBar);
             StringAssert.DoesNotContain("label: \"玩具\"", topBar);
             StringAssert.DoesNotContain("symbol: \"square.grid.2x2\"", topBar);
             StringAssert.Contains("symbol: \"gearshape\"", topBar);
             StringAssert.Contains("showMySpinners()", topBar);
+            StringAssert.Contains("if state.selectedTab == .settings", topBar);
+            StringAssert.Contains("symbol: \"checkmark\"", topBar);
+            StringAssert.Contains(
+                "accessibilityLabel: \"保存并返回 \\(state.selectedModel.title)\"",
+                topBar);
+            StringAssert.Contains("state.applyAndPersist()", topBar);
+            StringAssert.Contains("dismissPanelToSelectedModel()", topBar);
             StringAssert.Contains("struct ProductSheetDragHandle", components);
             StringAssert.DoesNotContain("ProductSheetDragHandle(closeTitle: \"关闭面板\")", source);
             StringAssert.Contains("dismissPanelToSelectedModel", source);
@@ -787,6 +1140,7 @@ namespace FidgetingApp.Tests.Editor
                 pipeline);
             StringAssert.Contains("ProductThumbnailAssetRootPath", pipeline);
             StringAssert.Contains("ProductStickerArtworkAssetRootPath", pipeline);
+            StringAssert.Contains("ProductBadgeArtworkAssetRootPath", pipeline);
             StringAssert.Contains("shippingModelThumbnailNames", pipeline);
             StringAssert.Contains("ProductCatalog.ShippingEntries", pipeline);
             StringAssert.Contains(
@@ -824,7 +1178,7 @@ namespace FidgetingApp.Tests.Editor
             StringAssert.Contains("private struct CollectorProfile: View", swift);
             StringAssert.Contains("Text(\"藏家 · \\(state.collectorRank)\")", swift);
             StringAssert.Contains("Text(\"等级\").tag(0)", swift);
-            StringAssert.Contains("Text(\"成就\").tag(1)", swift);
+            StringAssert.Contains("Text(\"Badge\").tag(1)", swift);
             StringAssert.Contains("Text(\"收藏\").tag(2)", swift);
             StringAssert.Contains("symbol: \"chevron.left\"", swift);
             StringAssert.Contains("accessibilityLabel: \"返回\"", swift);
@@ -832,7 +1186,11 @@ namespace FidgetingApp.Tests.Editor
             StringAssert.Contains("label: \"藏家档案\"", swift);
             StringAssert.Contains("CodexSwiftUIOverlayManager.shared.showMySpinners()", swift);
             StringAssert.Contains("CodexCollectorReceiveState", swift);
-            StringAssert.Contains("CollectorUnlockOverlay", swift);
+            StringAssert.Contains("ProductBadgeUnlockBanner", swift);
+            StringAssert.DoesNotContain("CollectorUnlockOverlay", swift);
+            StringAssert.DoesNotContain("ProgressionAchievementDetail", swift);
+            StringAssert.DoesNotContain("CollectorAchievementDetail", swift);
+            StringAssert.Contains("fidgeting.badges.seen.v2", swift);
         }
 
         [Test]
@@ -869,6 +1227,41 @@ namespace FidgetingApp.Tests.Editor
             StringAssert.Contains("struct ProductNoticeBanner", components);
             StringAssert.Contains("struct ProductSelectionCard", components);
             StringAssert.Contains("struct ProductBadgeTile", components);
+            StringAssert.Contains("struct ProductRarityBadge", components);
+            StringAssert.Contains("private func roundedHexagonPath", components);
+            StringAssert.DoesNotContain("private func shieldPath", components);
+            StringAssert.Contains("ProductBadgeShellShape()", components);
+            StringAssert.Contains(".brightness(isUnlocked ? 0.025 : -0.34)", components);
+            StringAssert.Contains(".opacity(isUnlocked ? 1 : 0.24)", components);
+            StringAssert.Contains("static let catalogColumnCount = 3", components);
+            StringAssert.Contains("static let catalogHorizontalPadding: CGFloat = 20", components);
+            StringAssert.Contains("static let catalogColumnSpacing: CGFloat = 14", components);
+            StringAssert.Contains("static let iconSlotFraction: CGFloat = 0.46", components);
+            StringAssert.Contains("static let centeredContentHeightFraction: CGFloat = 0.64", components);
+            StringAssert.Contains("static let tokenSlotHeightFraction: CGFloat = 0.165", components);
+            StringAssert.Contains("static let tokenFontFraction: CGFloat = 0.124", components);
+            StringAssert.Contains("static let unitFontFraction: CGFloat = 0.048", components);
+            StringAssert.Contains("static let milestoneFontSize: CGFloat = 9.5", components);
+            StringAssert.Contains("static let milestoneSlotHeight: CGFloat = 13", components);
+            StringAssert.Contains("Point-up orientation", components);
+            StringAssert.Contains("private var milestoneName: some View", components);
+            StringAssert.Contains("private var externalProgressBar: some View", components);
+            StringAssert.Contains("Milestone metadata belongs to the catalog tile", components);
+            StringAssert.Contains("Image(\"badge-leather-texture\")", components);
+            StringAssert.Contains("private enum ProductBadgeArtworkCache", components);
+            StringAssert.Contains(".blur(radius: width * 0.032)", components);
+            StringAssert.Contains(".blendMode(.screen)", components);
+            StringAssert.Contains(".opacity(isUnlocked ? 1 : 0.58)", components);
+            StringAssert.Contains(".position(x: width * 0.5, y: width * 0.5)", components);
+            StringAssert.Contains(
+                "CGPoint(x: rect.midX, y: rect.minY + rect.height * 0.04)",
+                components);
+            StringAssert.DoesNotContain("if index == 2 || index == 5", components);
+            StringAssert.Contains(
+                "static let normalizedArtworkVisibleFraction: CGFloat = 0.74",
+                components);
+            StringAssert.Contains("content / CGFloat(catalogColumnCount)", components);
+            StringAssert.Contains(".aspectRatio(1, contentMode: .fit)", components);
             StringAssert.Contains("struct ProductCompactMetric", components);
             StringAssert.Contains("struct ProductSliderRow", components);
             StringAssert.Contains("struct ProductToggleRow", components);
@@ -880,7 +1273,11 @@ namespace FidgetingApp.Tests.Editor
             StringAssert.Contains("ProductPrimaryActionLabel(", source);
             StringAssert.Contains("ProductActionLabel(", source);
             StringAssert.Contains("ProductSectionCard(", source);
-            StringAssert.Contains("ProductBottomSheetShell(", source);
+            StringAssert.Contains("ProgressionCatalogHeader(", source);
+            StringAssert.DoesNotContain(
+                "ProductBottomSheetShell(title: \"成长图鉴\")",
+                source,
+                "The approved catalog header keeps title, Done and tabs on one surface.");
             StringAssert.Contains("ProductStatusPill(", source);
             StringAssert.Contains("ProductProgressGauge(", source);
             StringAssert.Contains("ProductSpeedDashboard(", source);
@@ -888,10 +1285,16 @@ namespace FidgetingApp.Tests.Editor
             StringAssert.Contains("ProductMetricCard(", source);
             StringAssert.Contains("ProductScreenHeading(", source);
             StringAssert.Contains("ProductInlineTag(", source);
-            StringAssert.Contains("ProductNoticeBanner(", source);
-            StringAssert.Contains("symbol: \"star.fill\"", source);
+            StringAssert.Contains("ProductBadgeUnlockBanner(", source);
+            StringAssert.DoesNotContain("symbol: \"star.fill\"", source);
             StringAssert.Contains("ProductSelectionCard(", source);
-            StringAssert.Contains("ProductBadgeTile(", source);
+            StringAssert.Contains("ProductRarityBadge(", source);
+            StringAssert.Contains(
+                "columns: ProductBadgeLayoutTokens.catalogColumns",
+                source);
+            StringAssert.DoesNotContain(
+                "ProductBadgeLayoutTokens.catalogWidth",
+                source);
             StringAssert.Contains("ProductCompactMetric(", source);
             StringAssert.Contains("ProductSliderRow(", source);
             StringAssert.Contains("ProductToggleRow(", source);
@@ -927,7 +1330,98 @@ namespace FidgetingApp.Tests.Editor
                 "选中状态通过玻璃 tint / 亮度、tag 和 checkmark 表达",
                 guideline);
             StringAssert.Contains(
-                "Badge / 成就解锁通知固定使用实心 SF Symbol",
+                "Badge 解锁通知、图鉴、详情和分享卡必须渲染同一个 `ProductRarityBadge`",
+                guideline);
+            StringAssert.Contains(
+                "不得用通用 SF Symbol、星标、奖杯、圆环印章或另一套“成就”图形替代 Badge",
+                guideline);
+        }
+
+        [Test]
+        public void VisualGuidelineProtectsMediaAspectColorAndInteractionHonesty()
+        {
+            string guideline = File.ReadAllText(
+                "Docs/LiquidGlassDesignGuideline.md");
+
+            StringAssert.Contains(
+                "raster 图片、视频画面和 3D 渲染截图必须始终保持源素材宽高比",
+                guideline);
+            StringAssert.Contains(
+                "绝不允许非等比拉伸、独立改变 X/Y 缩放",
+                guideline);
+            StringAssert.Contains(
+                "`9:16`、`16:9` 等固定比例媒体容器",
+                guideline);
+            StringAssert.Contains(
+                "媒体本身按明确设计意图使用 `aspectFill` 或 `aspectFit`",
+                guideline);
+            StringAssert.Contains(
+                "禁止意外留白、黑边或 letterbox",
+                guideline);
+            StringAssert.Contains(
+                "选择 `aspectFit` 产生的留白必须在设计说明中明确定义",
+                guideline);
+            StringAssert.Contains(
+                "Demo / prototype 默认使用中性、低彩度色彩基线",
+                guideline);
+            StringAssert.Contains(
+                "不得随意增加大面积装饰色、多色环境染色或 AI 式高饱和渐变",
+                guideline);
+            StringAssert.Contains(
+                "rarity 色只允许用于徽标、细线、状态 tag、小面积辉光等局部语义载体",
+                guideline);
+            StringAssert.Contains(
+                "不得让多个稀有度颜色在同一页面同时主导视觉",
+                guideline);
+            StringAssert.Contains(
+                "不可交互的分类、标签、占位动作或未开放商品",
+                guideline);
+            StringAssert.Contains(
+                "禁止套用 Button 外观、主 CTA 轮廓、`interactive: true` 玻璃、chevron、按压反馈",
+                guideline);
+            StringAssert.Contains(
+                "产品级文字 CTA 继续遵守“只显示动作文字、不附加装饰 icon”的永久规则",
+                guideline);
+        }
+
+        [Test]
+        public void BadgeRewardsCatalogDetailsAndUnlocksUseOneVersionedSystem()
+        {
+            string coordinator = File.ReadAllText(
+                "Assets/Scripts/Product/FidgetAppCoordinator.cs");
+            string progression = File.ReadAllText(
+                "Assets/Scripts/Product/SpinnerProgression.cs");
+            string collector = File.ReadAllText(
+                "Assets/Scripts/Product/CollectorProgression.cs");
+            string haptics = File.ReadAllText(
+                "Assets/Scripts/FidgetSpinner/IosHaptics.cs");
+            string swift = File.ReadAllText(
+                "Assets/Plugins/iOS/CodexSwiftUIOverlay.swift");
+            string guideline = File.ReadAllText(
+                "Docs/LiquidGlassDesignGuideline.md");
+
+            StringAssert.Contains("badgeRewards = new BadgeRewardLedger()", coordinator);
+            StringAssert.Contains(
+                "new SpinnerProgressionRuntime(PointedModelId, badgeRewards)",
+                coordinator);
+            StringAssert.Contains("CollectorProgressionRuntime(", coordinator);
+            StringAssert.Contains("badgeRewards);", coordinator);
+            StringAssert.Contains("BadgeCatalogV2.ToyCatalogJson", progression);
+            StringAssert.Contains("BadgeCatalogV2.CollectorCatalogJson", collector);
+            StringAssert.Contains("BadgeRewardLedger.ToyClaimKey", progression);
+            StringAssert.Contains("BadgeRewardLedger.CollectorClaimKey", collector);
+            StringAssert.Contains("FidgetSemanticEvent.BadgeUnlocked", coordinator);
+            StringAssert.Contains("BadgeUnlocked = 15", haptics);
+
+            StringAssert.Contains("ProductBadgeUnlockEvent", swift);
+            StringAssert.Contains("ProductBadgeUnlockBanner", swift);
+            StringAssert.Contains("ProductRarityBadge(", swift);
+            StringAssert.Contains("fidgeting.badges.seen.v2", swift);
+            StringAssert.DoesNotContain("CollectorUnlockOverlay", swift);
+            StringAssert.DoesNotContain("ProgressionAchievementDetail", swift);
+            StringAssert.DoesNotContain("CollectorAchievementDetail", swift);
+            StringAssert.Contains(
+                "Badge 解锁通知、图鉴、详情和分享卡必须渲染同一个 `ProductRarityBadge`",
                 guideline);
         }
 
@@ -973,7 +1467,17 @@ namespace FidgetingApp.Tests.Editor
                     System.StringSplitOptions.None).Length - 1,
                 Is.GreaterThanOrEqualTo(7));
 
-            string combinedSwiftUi = components + source;
+            int previewStart = source.IndexOf(
+                "#if DEBUG\n/// Simulator-only entry point used by the visual push gate.");
+            int previewEnd = source.IndexOf(
+                "#endif\n\nprivate struct ProductPanel",
+                previewStart);
+            Assert.That(previewStart, Is.GreaterThanOrEqualTo(0));
+            Assert.That(previewEnd, Is.GreaterThan(previewStart));
+            string shippingSource = source.Remove(
+                previewStart,
+                previewEnd + "#endif".Length - previewStart);
+            string combinedSwiftUi = components + shippingSource;
             StringAssert.DoesNotContain("Color.cyan", combinedSwiftUi);
             StringAssert.DoesNotContain(".tint(.cyan)", combinedSwiftUi);
 
@@ -1085,7 +1589,7 @@ namespace FidgetingApp.Tests.Editor
             StringAssert.DoesNotContain("UpdateMagneticPreload", coordinator);
 
             StringAssert.Contains("PlayMagneticEdgeProbeResolved", managed);
-            StringAssert.Contains("PlayMagneticCrossingTremorResolved", managed);
+            StringAssert.Contains("PlayPushDetentPacketResolved", managed);
             int magneticRendererStart = managed.IndexOf(
                 "internal static void PlayMagneticEdgeProbeResolved");
             int magneticRendererEnd = managed.IndexOf(
@@ -1097,7 +1601,7 @@ namespace FidgetingApp.Tests.Editor
                 magneticRendererStart,
                 magneticRendererEnd - magneticRendererStart);
             StringAssert.Contains("CodexIosHapticsPlayMagneticEdgeProbe", magneticRenderer);
-            StringAssert.Contains("CodexIosHapticsPlayMagneticCrossingTremor", magneticRenderer);
+            StringAssert.Contains("CodexIosHapticsPlayPushDetentPacket", magneticRenderer);
             StringAssert.DoesNotContain("StartMagneticPreloadContinuous", managed);
             StringAssert.DoesNotContain("UpdateMagneticPreloadContinuous", managed);
             StringAssert.DoesNotContain("MinimumMagneticSliderDetentInterval", managed);
@@ -1107,9 +1611,24 @@ namespace FidgetingApp.Tests.Editor
                 "CodexIosHapticsPlayMagneticEdgeProbe",
                 native);
             StringAssert.Contains(
-                "CodexIosHapticsPlayMagneticCrossingTremor",
+                "CodexIosHapticsPlayPushDetentPacket",
                 native);
-            StringAssert.Contains("PlayMagneticCrossingTremorPattern", native);
+            int pushPacketStart = native.IndexOf(
+                "void PlayPushDetentPacketPattern");
+            int pushPacketEnd = native.IndexOf(
+                "void PlaySystemPreset",
+                pushPacketStart);
+            Assert.That(pushPacketStart, Is.GreaterThanOrEqualTo(0));
+            Assert.That(pushPacketEnd, Is.GreaterThan(pushPacketStart));
+            string pushPacket = native.Substring(
+                pushPacketStart,
+                pushPacketEnd - pushPacketStart);
+            StringAssert.Contains("primaryParameters", pushPacket);
+            StringAssert.Contains("bodyParameters", pushPacket);
+            StringAssert.Contains("tailParameters", pushPacket);
+            StringAssert.Contains("resolvedBodyDuration", pushPacket);
+            StringAssert.Contains("resolvedTailDelay", pushPacket);
+            StringAssert.Contains("PlayFallbackImpact(primaryIntensity)", pushPacket);
             StringAssert.Contains("false,", native);
             StringAssert.Contains("view.isHidden = !visible", swift);
             StringAssert.Contains(
@@ -1374,7 +1893,7 @@ namespace FidgetingApp.Tests.Editor
             StringAssert.Contains("ResolveReleaseAngularSpeed", classic);
             StringAssert.DoesNotContain("flingImpulsePerPixelPerSecond", classic);
             StringAssert.DoesNotContain("tapImpulse", classic);
-            StringAssert.Contains("fallbackTouchRadius = 0.48f", classic);
+            StringAssert.Contains("DefaultFallbackTouchRadiusFraction", classic);
             StringAssert.Contains("AlignScreenTangentToSpinAxis", classic);
             StringAssert.DoesNotContain("-signedPixels * fallbackDegreesPerPixel", classic);
             StringAssert.DoesNotContain("-filteredHorizontalVelocity", classic);
@@ -1384,7 +1903,7 @@ namespace FidgetingApp.Tests.Editor
             StringAssert.Contains("SetTouchResponse", metal);
             StringAssert.Contains("CalculateScreenFallbackAngle", metal);
             StringAssert.Contains("AlignScreenTangentToSpinAxis", metal);
-            StringAssert.Contains("fallbackTouchRadius = 0.48f", metal);
+            StringAssert.Contains("DefaultFallbackTouchRadiusFraction", metal);
             StringAssert.Contains("reversalConfirmationPixels = 18f", metal);
         }
 
@@ -1396,6 +1915,16 @@ namespace FidgetingApp.Tests.Editor
                 .FirstOrDefault(candidate => candidate.name == objectName);
             Assert.That(renderer, Is.Not.Null, $"Missing renderer: {objectName}");
             return renderer;
+        }
+
+        private static float PlanarDistanceInMillimeters(
+            Transform axis,
+            Transform candidate)
+        {
+            Assert.That(axis, Is.Not.Null);
+            Assert.That(candidate, Is.Not.Null);
+            Vector3 offset = candidate.position - axis.position;
+            return new Vector2(offset.x, offset.z).magnitude * 1000f;
         }
     }
 }

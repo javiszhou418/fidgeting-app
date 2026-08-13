@@ -14,16 +14,43 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::FidgetingApp.FanCard.FanCardDetentProfile
   detentCount: 4
   maximumRelativeAngleDegrees: 45
-  breakawayLoad: 0.067
-  handSpring: 52
-  handDamping: 8.7
-  magneticForcePeak: 7.8
-  railFriction: 0.72
-  captureSpring: 92
-  captureDamping: 13.6
-  breakawayImpulse: 0.72
-  capturePredictionSeconds: 0.055
-  visiblePreloadScale: 0.28
+  breakawayLoad: 0.05
+  handSpring: 96
+  handDamping: 6
+  magneticForcePeak: 6.4
+  railFriction: 0.38
+  captureSpring: 118
+  captureDamping: 14.2
+  breakawayImpulse: 0.95
+  capturePredictionSeconds: 0.07
+  visiblePreloadScale: 0.24
+  maximumHeldSpeed: 2.4
+  fastBreakawayLoad: 0.024
+  fastHandSpring: 220
+  fastHandDamping: 5.2
+  fastMagneticForceScale: 0.5
+  fastRailFriction: 0.16
+  fastBreakawayImpulse: 1.8
+  fastMaximumHeldSpeed: 5
+  fastTraversalHoldAuthority: 0.72
+  fastTraversalStartScreenWidthsPerSecond: 0.55
+  fastTraversalFullScreenWidthsPerSecond: 1.3
+  fastPressureDeltaStart: 0.1
+  fastPressureDeltaFull: 0.45
+  fastTraversalLatchThreshold: 0.6
+  fastTraversalReverseThreshold: 0.35
+  traversalAuthorityRise: 32
+  traversalAuthorityFall: 10
+  detentHapticMinimumIntensity: 0.92
+  detentHapticMaximumIntensity: 1
+  detentHapticMinimumSharpness: 0.76
+  detentHapticMaximumSharpness: 0.9
+  detentHapticBodyIntensity: 0.64
+  detentHapticBodySharpness: 0.24
+  detentHapticBodyDurationSeconds: 0.032
+  detentHapticTailIntensity: 0.56
+  detentHapticTailSharpness: 0.42
+  detentHapticTailDelaySeconds: 0.022
   heldCapturePositionError: 0.004
   heldCaptureSpeed: 0.065
   heldTargetError: 0.026

@@ -49,6 +49,27 @@ namespace FidgetingApp.Product
         public const int SampleWidth = 24;
         public const int SampleHeight = 32;
         public const int ReflectionSize = 16;
+        public const float MagneticSlideSoftboxIntensity = 0.26f;
+        public const float MagneticSlideReflectionBaseScale = 1.00f;
+        public const float MagneticSlideOpposingStripIntensity = 0.18f;
+        public const float MagneticSlideSoftboxHorizontalCore = 0.22f;
+        public const float MagneticSlideSoftboxHorizontalEdge = 0.88f;
+        public const float MagneticSlideSoftboxVerticalCore = 0.18f;
+        public const float MagneticSlideSoftboxVerticalEdge = 0.78f;
+        public const float SoftAmbientScale = 0.42f;
+        public const float SoftDirectLightScale = 0.36f;
+        public const float SoftReflectionIntensityScale = 0.35f;
+        public const float SoftVisibilityFillScale = 0.35f;
+        public const float SoftModelBounceScale = 0.28f;
+        public const float SoftViewHighlightScale = 0.25f;
+        public const float SoftReflectionBaseScale = 0.75f;
+        public const float SoftReflectionKeyScale = 0.12f;
+        public const float SoftReflectionFillScale = 0.04f;
+        public const float SoftReflectionPeak = 0.65f;
+        public const float SoftEnvironmentGlowScale = 0.38f;
+        public const float SoftBrightMetalThreshold = 0.55f;
+        public const float SoftBrightMetalAlbedoScale = 0.68f;
+        public const float SoftBrightMetalSmoothnessCap = 0.70f;
 
         // Every product scene currently uses the same approved canyon plate.
         // A GPU ReadPixels during each page selection forces a render-thread
@@ -78,6 +99,8 @@ namespace FidgetingApp.Product
         private float libraryLightScale = 1f;
         private float libraryReflectionScale = 1f;
         private bool libraryPreviewActive;
+        private bool softSpinnerLightingActive;
+        private float softSpinnerLightTrim = 1f;
         private readonly List<Light> authoredLights = new();
         private readonly List<float> authoredLightIntensities = new();
 
@@ -86,12 +109,15 @@ namespace FidgetingApp.Product
         public Light ModelBounceLight => modelBounceLight;
         public Light VisibilityFillLight => visibilityFillLight;
         public Light ViewHighlightLight => viewHighlightLight;
+        public bool SoftSpinnerLightingActive => softSpinnerLightingActive;
 
         public void Configure(
             Texture background,
             SpinnerEnvironmentProfile profile,
             SpinnerGroundingStage groundingStage)
         {
+            softSpinnerLightingActive = UsesSoftSpinnerLighting(profile.ModelId);
+            softSpinnerLightTrim = ResolveSoftSpinnerLightTrim(profile.ModelId);
             SpinnerEnvironmentPalette fallback = new SpinnerEnvironmentPalette(
                 profile.AmbientSky,
                 profile.AmbientEquator,
@@ -194,9 +220,12 @@ namespace FidgetingApp.Product
             float breathing = reduceMotion
                 ? 0.94f + Mathf.Sin(unscaledTime * 1.15f) * 0.06f
                 : 1f;
+            float environmentGlowScale = softSpinnerLightingActive
+                ? SoftEnvironmentGlowScale * softSpinnerLightTrim
+                : 1f;
             environmentPresenter?.SetEnvironmentGlow(
-                smoothedLeftGlow * breathing,
-                smoothedRightGlow * breathing,
+                smoothedLeftGlow * breathing * environmentGlowScale,
+                smoothedRightGlow * breathing * environmentGlowScale,
                 opticalTilt);
 
             Transform cameraTransform = transform;
@@ -234,7 +263,9 @@ namespace FidgetingApp.Product
             float highlightIntensity = Mathf.Lerp(
                 0.045f,
                 0.16f,
-                modelColorfulness);
+                modelColorfulness) * (softSpinnerLightingActive
+                    ? SoftViewHighlightScale * softSpinnerLightTrim
+                    : 1f);
             viewHighlightLight.intensity = (reduceMotion
                 ? highlightIntensity * 0.55f
                 : highlightIntensity)
@@ -453,11 +484,17 @@ namespace FidgetingApp.Product
             SpinnerEnvironmentPalette palette)
         {
             RenderSettings.ambientMode = AmbientMode.Trilight;
-            RenderSettings.ambientSkyColor = palette.Sky;
-            RenderSettings.ambientEquatorColor = palette.Equator;
-            RenderSettings.ambientGroundColor = palette.Ground;
+            float ambientScale = softSpinnerLightingActive
+                ? SoftAmbientScale * softSpinnerLightTrim
+                : 1f;
+            RenderSettings.ambientSkyColor = palette.Sky * ambientScale;
+            RenderSettings.ambientEquatorColor = palette.Equator * ambientScale;
+            RenderSettings.ambientGroundColor = palette.Ground * ambientScale;
             RenderSettings.defaultReflectionMode = DefaultReflectionMode.Custom;
-            baseReflectionIntensity = profile.ReflectionIntensity;
+            baseReflectionIntensity = profile.ReflectionIntensity
+                * (softSpinnerLightingActive
+                    ? SoftReflectionIntensityScale * softSpinnerLightTrim
+                    : 1f);
             RenderSettings.reflectionIntensity = baseReflectionIntensity;
 
             DestroyRuntimeObject(generatedReflection);
@@ -480,6 +517,36 @@ namespace FidgetingApp.Product
             SpinnerEnvironmentPalette palette,
             string modelId)
         {
+            bool isFanCard = string.Equals(
+                modelId,
+                "magnetic-fan-card",
+                StringComparison.Ordinal);
+            bool isMagneticSlide = string.Equals(
+                modelId,
+                "magnetic-slide-tile",
+                StringComparison.Ordinal);
+            bool useBroadMetalSoftboxes = isFanCard || isMagneticSlide;
+            float reflectionBaseScale = isMagneticSlide
+                ? MagneticSlideReflectionBaseScale
+                : 1.28f;
+            float broadPanelIntensity = isMagneticSlide
+                ? MagneticSlideSoftboxIntensity
+                : 0.86f;
+            float opposingStripIntensity = isMagneticSlide
+                ? MagneticSlideOpposingStripIntensity
+                : 0.24f;
+            float panelHorizontalCore = isMagneticSlide
+                ? MagneticSlideSoftboxHorizontalCore
+                : 0.28f;
+            float panelHorizontalEdge = isMagneticSlide
+                ? MagneticSlideSoftboxHorizontalEdge
+                : 0.56f;
+            float panelVerticalCore = isMagneticSlide
+                ? MagneticSlideSoftboxVerticalCore
+                : 0.20f;
+            float panelVerticalEdge = isMagneticSlide
+                ? MagneticSlideSoftboxVerticalEdge
+                : 0.48f;
             TextureFormat format = SystemInfo.SupportsTextureFormat(TextureFormat.RGBAHalf)
                 ? TextureFormat.RGBAHalf
                 : TextureFormat.RGBA32;
@@ -506,7 +573,17 @@ namespace FidgetingApp.Product
                     {
                         Vector3 direction = CubeDirection(face, x, y, ReflectionSize);
                         colors[y * ReflectionSize + x] =
-                            SynthesizeReflection(direction, palette);
+                            SynthesizeReflection(
+                                direction,
+                                palette,
+                                useBroadMetalSoftboxes,
+                                reflectionBaseScale,
+                                broadPanelIntensity,
+                                opposingStripIntensity,
+                                panelHorizontalCore,
+                                panelHorizontalEdge,
+                                panelVerticalCore,
+                                panelVerticalEdge);
                     }
                 }
                 cubemap.SetPixels(colors, face);
@@ -517,7 +594,15 @@ namespace FidgetingApp.Product
 
         private static Color SynthesizeReflection(
             Vector3 direction,
-            SpinnerEnvironmentPalette palette)
+            SpinnerEnvironmentPalette palette,
+            bool useBroadMetalSoftboxes,
+            float reflectionBaseScale,
+            float broadPanelIntensity,
+            float opposingStripIntensity,
+            float panelHorizontalCore,
+            float panelHorizontalEdge,
+            float panelVerticalCore,
+            float panelVerticalEdge)
         {
             float vertical = direction.y;
             Color baseColor = vertical >= 0f
@@ -533,11 +618,128 @@ namespace FidgetingApp.Product
             float fillHighlight = Mathf.Pow(
                 Mathf.Max(0f, Vector3.Dot(direction, -keyDirection)),
                 5f) * 0.18f;
-            Color result = baseColor * 2.2f
-                + NormalizeLightColor(palette.Key) * keyHighlight * 0.72f
-                + NormalizeLightColor(palette.Fill) * fillHighlight;
-            result.a = 1f;
-            return result;
+            Color result;
+            if (useBroadMetalSoftboxes)
+            {
+                // Chrome only reads as chrome when it reflects shapes, not
+                // point-like lamps. The polished fan-card and magnetic slide
+                // therefore receive a broad upper-left studio panel plus a
+                // dimmer opposing strip.
+                // This remains environment lighting: no geometry, mechanics,
+                // or product interaction state is touched.
+                Vector3 panelForward = keyDirection;
+                Vector3 panelRight = Vector3.Cross(Vector3.up, panelForward).normalized;
+                if (panelRight.sqrMagnitude < 0.001f)
+                {
+                    panelRight = Vector3.right;
+                }
+                Vector3 panelUp = Vector3.Cross(panelForward, panelRight).normalized;
+                float facing = Mathf.Clamp01(Vector3.Dot(direction, panelForward));
+                float panelX = 1f - Mathf.SmoothStep(
+                    panelHorizontalCore,
+                    panelHorizontalEdge,
+                    Mathf.Abs(Vector3.Dot(direction, panelRight)));
+                float panelY = 1f - Mathf.SmoothStep(
+                    panelVerticalCore,
+                    panelVerticalEdge,
+                    Mathf.Abs(Vector3.Dot(direction, panelUp)));
+                float broadPanel = Mathf.SmoothStep(0.42f, 0.82f, facing)
+                    * panelX
+                    * panelY;
+
+                Vector3 stripForward = -panelRight * 0.86f
+                    + panelUp * 0.28f
+                    - panelForward * 0.10f;
+                stripForward.Normalize();
+                float stripFacing = Mathf.Clamp01(
+                    Vector3.Dot(direction, stripForward));
+                float opposingStrip = Mathf.SmoothStep(
+                    0.64f,
+                    0.90f,
+                    stripFacing);
+                result = baseColor * reflectionBaseScale
+                    + NormalizeLightColor(palette.Key) * keyHighlight * 0.12f
+                    + NormalizeLightColor(palette.Fill) * fillHighlight * 0.10f
+                    + new Color(1.0f, 0.96f, 0.90f)
+                        * broadPanel * broadPanelIntensity
+                    + new Color(0.55f, 0.66f, 0.78f)
+                        * opposingStrip * opposingStripIntensity;
+            }
+            else
+            {
+                result = baseColor * SoftReflectionBaseScale
+                    + NormalizeLightColor(palette.Key)
+                        * keyHighlight * SoftReflectionKeyScale
+                    + NormalizeLightColor(palette.Fill)
+                        * fillHighlight * SoftReflectionFillScale;
+            }
+            if (useBroadMetalSoftboxes)
+            {
+                result.a = 1f;
+                return result;
+            }
+            return LimitReflectionPeak(result, SoftReflectionPeak);
+        }
+
+        public static bool UsesSoftSpinnerLighting(string modelId)
+        {
+            return string.Equals(
+                    modelId,
+                    ProductCatalog.PointedThreeBladeModelId,
+                    StringComparison.Ordinal)
+                || string.Equals(
+                    modelId,
+                    ProductCatalog.MetalThreeBladeModelId,
+                    StringComparison.Ordinal)
+                || string.Equals(
+                    modelId,
+                    ProductCatalog.GoldFourWingModelId,
+                    StringComparison.Ordinal)
+                || string.Equals(
+                    modelId,
+                    ProductCatalog.GraphiteTwoLobeModelId,
+                    StringComparison.Ordinal);
+        }
+
+        public static float ResolveSoftSpinnerLightTrim(string modelId)
+        {
+            if (string.Equals(
+                    modelId,
+                    ProductCatalog.PointedThreeBladeModelId,
+                    StringComparison.Ordinal))
+            {
+                return 0.58f;
+            }
+            if (string.Equals(
+                    modelId,
+                    ProductCatalog.MetalThreeBladeModelId,
+                    StringComparison.Ordinal))
+            {
+                return 0.64f;
+            }
+            if (string.Equals(
+                    modelId,
+                    ProductCatalog.GoldFourWingModelId,
+                    StringComparison.Ordinal))
+            {
+                return 0.70f;
+            }
+            return 1f;
+        }
+
+        public static Color LimitReflectionPeak(Color source, float peakLimit)
+        {
+            float limit = Mathf.Max(0.001f, peakLimit);
+            float peak = Mathf.Max(source.r, Mathf.Max(source.g, source.b));
+            if (peak > limit)
+            {
+                float scale = limit / peak;
+                source.r *= scale;
+                source.g *= scale;
+                source.b *= scale;
+            }
+            source.a = 1f;
+            return source;
         }
 
         private static Vector3 CubeDirection(
@@ -593,9 +795,13 @@ namespace FidgetingApp.Product
                         preset.Color,
                         NormalizeLightColor(sampledColor),
                         0.82f));
-                    light.intensity = preset.Intensity;
+                    float softenedIntensity = preset.Intensity
+                        * (softSpinnerLightingActive
+                            ? SoftDirectLightScale * softSpinnerLightTrim
+                            : 1f);
+                    light.intensity = softenedIntensity;
                     authoredLights.Add(light);
-                    authoredLightIntensities.Add(preset.Intensity);
+                    authoredLightIntensities.Add(softenedIntensity);
                     break;
                 }
             }
@@ -627,7 +833,10 @@ namespace FidgetingApp.Product
             visibilityFillLight.intensity = Mathf.Lerp(
                 0.30f,
                 0.18f,
-                Mathf.InverseLerp(0.035f, 0.14f, ambientValue));
+                Mathf.InverseLerp(0.035f, 0.14f, ambientValue))
+                * (softSpinnerLightingActive
+                    ? SoftVisibilityFillScale * softSpinnerLightTrim
+                    : 1f);
             visibilityFillBaseIntensity = visibilityFillLight.intensity;
             visibilityFillLight.shadows = LightShadows.None;
             visibilityFillLight.renderMode = LightRenderMode.Auto;
@@ -674,7 +883,12 @@ namespace FidgetingApp.Product
             baseBouncePosition = modelBounceLight.transform.position;
             modelBounceLight.type = LightType.Point;
             modelBounceLight.color = modelAccent;
-            modelBounceLight.intensity = Mathf.Lerp(0.065f, 0.26f, bounceStrength);
+            modelBounceLight.intensity = Mathf.Lerp(
+                0.065f,
+                0.26f,
+                bounceStrength) * (softSpinnerLightingActive
+                    ? SoftModelBounceScale * softSpinnerLightTrim
+                    : 1f);
             baseBounceIntensity = modelBounceLight.intensity;
             modelBounceLight.range = Mathf.Max(0.01f, planarSize * 0.72f);
             modelBounceLight.shadows = LightShadows.None;
@@ -688,6 +902,82 @@ namespace FidgetingApp.Product
                     renderer.reflectionProbeUsage = ReflectionProbeUsage.BlendProbes;
                 }
             }
+            if (softSpinnerLightingActive)
+            {
+                ApplySoftMaterialResponse(groundingStage.ModelRenderers);
+            }
+        }
+
+        private static void ApplySoftMaterialResponse(
+            IReadOnlyList<Renderer> renderers)
+        {
+            for (int rendererIndex = 0; rendererIndex < renderers.Count; rendererIndex++)
+            {
+                Renderer renderer = renderers[rendererIndex];
+                if (renderer == null)
+                {
+                    continue;
+                }
+
+                Material[] materials = renderer.sharedMaterials;
+                for (int materialIndex = 0; materialIndex < materials.Length; materialIndex++)
+                {
+                    Material material = materials[materialIndex];
+                    if (!UsesSoftMaterialResponse(material))
+                    {
+                        continue;
+                    }
+
+                    var properties = new MaterialPropertyBlock();
+                    renderer.GetPropertyBlock(properties, materialIndex);
+                    Color source = material.HasProperty("_BaseColor")
+                        ? material.GetColor("_BaseColor")
+                        : material.GetColor("_Color");
+                    Color softened = ResolveSoftMaterialColor(source);
+                    if (material.HasProperty("_BaseColor"))
+                    {
+                        properties.SetColor("_BaseColor", softened);
+                    }
+                    if (material.HasProperty("_Color"))
+                    {
+                        properties.SetColor("_Color", softened);
+                    }
+                    if (material.HasProperty("_Smoothness"))
+                    {
+                        properties.SetFloat(
+                            "_Smoothness",
+                            Mathf.Min(
+                                material.GetFloat("_Smoothness"),
+                                SoftBrightMetalSmoothnessCap));
+                    }
+                    renderer.SetPropertyBlock(properties, materialIndex);
+                }
+            }
+        }
+
+        public static bool UsesSoftMaterialResponse(Material material)
+        {
+            if (material == null
+                || !material.HasProperty("_Metallic")
+                || material.GetFloat("_Metallic") < 0.5f
+                || (!material.HasProperty("_BaseColor")
+                    && !material.HasProperty("_Color")))
+            {
+                return false;
+            }
+
+            Color color = material.HasProperty("_BaseColor")
+                ? material.GetColor("_BaseColor")
+                : material.GetColor("_Color");
+            return color.maxColorComponent >= SoftBrightMetalThreshold;
+        }
+
+        public static Color ResolveSoftMaterialColor(Color source)
+        {
+            float alpha = source.a;
+            source *= SoftBrightMetalAlbedoScale;
+            source.a = alpha;
+            return source;
         }
 
         private void EnsureViewHighlight()

@@ -176,7 +176,7 @@ namespace FidgetingApp.Tests.Editor
             Assert.That(snapshot.ValidDaysInWindow, Is.EqualTo(5));
             Assert.That(snapshot.CompletedRhythmWeeks, Is.EqualTo(1));
             Assert.That(snapshot.DiscoveredModelCount, Is.EqualTo(1));
-            StringAssert.Contains("rhythm-1", snapshot.AchievementCatalogPayload);
+            StringAssert.Contains("collector_rhythm_1w", snapshot.AchievementCatalogPayload);
         }
 
         [Test]
@@ -213,8 +213,8 @@ namespace FidgetingApp.Tests.Editor
             runtime.CompleteBackfill();
             CollectorProgressionSnapshot snapshot = runtime.Snapshot;
             Assert.That(snapshot.DiscoveredModelCount, Is.EqualTo(3));
-            StringAssert.Contains("master-20-3", snapshot.AchievementCatalogPayload);
-            StringAssert.Contains("master-100-1", snapshot.AchievementCatalogPayload);
+            StringAssert.Contains("collector_mastery_3_lv20", snapshot.AchievementCatalogPayload);
+            StringAssert.Contains("collector_mastery_1_lv100", snapshot.AchievementCatalogPayload);
         }
 
         [Test]
@@ -271,17 +271,20 @@ namespace FidgetingApp.Tests.Editor
         }
 
         [Test]
-        public void BadgeCatalog_UsesIndependentSpeedSwipeTimeAndOfflineMilestones()
+        public void BadgeCatalogV2_UsesPowerGestureTechniqueComboAndRealFocusMilestones()
         {
-            Assert.That(SpinnerProgressionRules.Achievements.Count, Is.EqualTo(21));
+            Assert.That(BadgeCatalogV2.ToyDefinitions.Count, Is.EqualTo(21));
             Assert.That(
                 SpinnerProgressionRules.RimSpeedKmh(25f),
                 Is.EqualTo(3.6d).Within(0.001d));
             StringAssert.Contains(
-                "speed-350\tPeakRimSpeedKmh\t3.5\t3.5 KM/H",
+                "\"id\":\"toy_power_apex\"",
                 SpinnerProgressionRules.AchievementCatalogPayload());
             StringAssert.Contains(
-                "swipe-100k\tLifetimeGestures\t100000\t100K SWIPES",
+                "\"id\":\"toy_pulse_100k\"",
+                SpinnerProgressionRules.AchievementCatalogPayload());
+            StringAssert.DoesNotContain(
+                "LifetimeOfflineExperience",
                 SpinnerProgressionRules.AchievementCatalogPayload());
 
             var snapshot = new SpinnerProgressionSnapshot(
@@ -302,13 +305,19 @@ namespace FidgetingApp.Tests.Editor
 
             Assert.That(
                 SpinnerProgressionRules.UnlockedAchievementCount(snapshot),
-                Is.EqualTo(10));
+                Is.EqualTo(5));
             string statePayload = SpinnerProgressionRules.AchievementCatalogPayload(snapshot);
             StringAssert.Contains(
-                "speed-350\tPeakRimSpeedKmh\t3.5\t3.5 KM/H\t1",
+                "\"id\":\"toy_power_apex\"",
                 statePayload);
             StringAssert.Contains(
-                "speed-450\tPeakRimSpeedKmh\t4.5\t极速外缘\t0",
+                "\"state\":\"Unlocked\"",
+                statePayload);
+            StringAssert.Contains(
+                "\"id\":\"toy_power_singularity\"",
+                statePayload);
+            StringAssert.Contains(
+                "\"state\":\"InProgress\"",
                 statePayload);
         }
 
@@ -1254,6 +1263,8 @@ namespace FidgetingApp.Tests.Editor
                 "Docs/LiquidGlassDesignGuideline.md");
             string experienceVisuals = File.ReadAllText(
                 "Assets/Scripts/Product/SpinnerExperienceVisuals.cs");
+            string runtime = File.ReadAllText(
+                "Assets/Scripts/Product/SpinnerProgression.cs");
 
             StringAssert.Contains("RecordRotationDegrees", coordinator);
             StringAssert.Contains("SpinGestureCompleted +=", coordinator);
@@ -1290,14 +1301,21 @@ namespace FidgetingApp.Tests.Editor
             StringAssert.DoesNotContain("presentAutoGate", progressionHud);
             StringAssert.DoesNotContain("ExperienceJar(", progressionHud);
             StringAssert.Contains("HStack(spacing: 10)", progressionHud);
-            StringAssert.Contains("ProgressionMilestoneGauge(", progressionHud);
+            StringAssert.Contains("ProductMilestoneProgressGauge(", progressionHud);
             StringAssert.Contains("previousLevel: previousMilestoneLevel", progressionHud);
             StringAssert.Contains("currentLevel: state.progressionLevel", progressionHud);
             StringAssert.Contains("nextLevel: nextMilestoneLevel", progressionHud);
             StringAssert.DoesNotContain("Text(experienceText)", progressionHud);
             StringAssert.DoesNotContain("Text(\"LV.\\(currentLevel)\")", progressionHud);
-            StringAssert.Contains("HStack(spacing: 7)", progressionHud);
-            StringAssert.Contains(".frame(height: 12)", progressionHud);
+            StringAssert.Contains("struct ProductMilestoneProgressGauge", components);
+            StringAssert.Contains("HStack(spacing: 7)", components);
+            StringAssert.Contains(
+                ".font(.product(.caption2, weight: .bold).monospacedDigit())",
+                components);
+            StringAssert.Contains(".frame(minHeight: 16)", components);
+            StringAssert.DoesNotContain(
+                ".product(size: 7, weight: .bold)",
+                components);
             StringAssert.Contains(
                 "\\(experienceText)，上一个里程碑 \\(previousMilestoneLevel)，下一个里程碑 \\(nextMilestoneLevel)",
                 progressionHud);
@@ -1358,14 +1376,128 @@ namespace FidgetingApp.Tests.Editor
             StringAssert.Contains(
                 "容器内部的 glyph、倍率数字或状态标记",
                 designGuideline);
+            StringAssert.Contains(
+                "结算层关闭 → 页面级 +XP 飞行 → 左上头像环更新",
+                designGuideline);
+            StringAssert.Contains(
+                "产品级文字 CTA 永久只显示动作文字",
+                designGuideline);
             StringAssert.DoesNotContain("progressionStageComponent", progressionHud,
                 "The one-line bearing/material copy was removed from the bottom HUD.");
             StringAssert.DoesNotContain(
                 "当前装配：\\(state.progressionStageComponent)",
                 swift,
                 "The visible standard-bearing line was removed from every progression view.");
-            StringAssert.Contains("离线收获", swift);
+            StringAssert.Contains("离线成长结算", swift);
             StringAssert.Contains("LEVEL UP", swift);
+            StringAssert.Contains("ProgressionRewardCelebrationView", swift);
+            StringAssert.Contains("ProgressionAnimatedValue", swift);
+            StringAssert.Contains("ProgressionAvatarLevelRing", swift);
+            StringAssert.Contains("ProgressionPageRewardFlightView", swift);
+            StringAssert.DoesNotContain("ProgressionRewardParticleCollection", swift);
+            StringAssert.DoesNotContain("ProgressionOfflineGrowthTrack", swift);
+            StringAssert.Contains("离线时长", swift);
+            StringAssert.Contains("收集成长值", swift);
+            StringAssert.Contains("连升 \\(newLevel - previousLevel) 级", swift);
+            StringAssert.Contains(
+                "func presentProgressionRewardIfNeeded()",
+                swift);
+            StringAssert.Contains("configure(controller, in: rootController, background: .clear)", swift);
+            StringAssert.Contains("Color.black.opacity(0.34)", swift);
+            StringAssert.Contains("Image(systemName: \"person.crop.circle\")", swift);
+            StringAssert.Contains("ringProgress = initialRingProgress", swift);
+            StringAssert.Contains("ringProgress = finalRingProgress", swift);
+            StringAssert.Contains("offlineReward.previousLevelProgress", swift);
+            StringAssert.Contains("offlineReward.newLevelProgress", swift);
+            StringAssert.Contains("state.progressionFraction", swift);
+            StringAssert.Contains("Spacer(minLength: 64)", swift);
+            StringAssert.Contains(".offset(y: cardVisible ? 0 : 96)", swift);
+            StringAssert.DoesNotContain("收下成长值", swift);
+            StringAssert.Contains(".accessibilityIdentifier(\"progression-reward-primary-action\")", swift);
+            StringAssert.Contains("controller.view.isUserInteractionEnabled = true", swift);
+            StringAssert.Contains("controller.view.accessibilityViewIsModal = true", swift);
+            StringAssert.Contains("private func complete()", swift);
+            StringAssert.Contains("guard !isCompleting else { return }", swift);
+            int rewardViewStart = swift.IndexOf("private struct ProgressionRewardCelebrationView");
+            int rewardViewEnd = swift.IndexOf("private struct ProgressionAnimatedValue");
+            string rewardView = swift.Substring(
+                rewardViewStart,
+                rewardViewEnd - rewardViewStart);
+            StringAssert.Contains("interactive: false", rewardView);
+            StringAssert.DoesNotContain("interactive: true", rewardView,
+                "The parent settlement glass must not compete with its primary button for touches.");
+            StringAssert.DoesNotContain("ProductPrimaryActionLabel(", rewardView,
+                "Offline settlement auto-dismisses and must not expose a claim CTA.");
+            StringAssert.DoesNotContain("ProgressionPageRewardFlightView", rewardView,
+                "XP particles must not fly while the settlement sheet is mounted.");
+            StringAssert.DoesNotContain("travelProgress", rewardView,
+                "The bottom sheet may animate its ring, but not own page-level XP flight.");
+            int frameReaderStart = swift.IndexOf("private struct ProductWindowFrameReader");
+            int rewardStart = swift.IndexOf("private struct ProgressionRewardCelebrationView");
+            string frameReader = swift.Substring(
+                frameReaderStart,
+                rewardStart - frameReaderStart);
+            StringAssert.Contains("uiView.convert(uiView.bounds, to: window)", frameReader);
+            int flightStart = swift.IndexOf("private struct ProgressionPageRewardFlightView");
+            int levelHaloStart = swift.IndexOf("private struct ProgressionLevelUpHalo", flightStart);
+            string pageFlight = swift.Substring(flightStart, levelHaloStart - flightStart);
+            StringAssert.Contains("sourceFrame: CGRect", pageFlight);
+            StringAssert.Contains("targetFrame: CGRect", pageFlight);
+            StringAssert.Contains("@Environment(\\.accessibilityReduceMotion)", pageFlight);
+            StringAssert.Contains("onArrive()", pageFlight);
+            StringAssert.Contains("suffix: \" XP\"", pageFlight);
+            int topAvatarStart = swift.IndexOf("private struct ProductProgressionTopAvatar");
+            int topBarStart = swift.IndexOf("private struct ProductTopBar", topAvatarStart);
+            string topAvatar = swift.Substring(topAvatarStart, topBarStart - topAvatarStart);
+            StringAssert.Contains("Image(systemName: \"person.crop.circle\")", topAvatar);
+            StringAssert.Contains("state.progressionTopAvatarProgress", topAvatar);
+            StringAssert.Contains("ProductWindowFrameReader", topAvatar);
+            StringAssert.Contains("progression-top-avatar", topAvatar);
+            int managerStart = swift.IndexOf("private final class CodexSwiftUIOverlayManager");
+            string manager = swift.Substring(managerStart);
+            StringAssert.Contains("pendingOfflineRewardFlight", manager);
+            StringAssert.Contains("presentOfflineProgressionFlight", manager);
+            StringAssert.Contains("controller.view.isUserInteractionEnabled = false", manager);
+            int dismissStart = manager.IndexOf("private func dismissProgressionReward");
+            int removeSheet = manager.IndexOf("controller.view.removeFromSuperview()", dismissStart);
+            int beginPageFlight = manager.IndexOf("self.presentOfflineProgressionFlight(", removeSheet);
+            Assert.Greater(removeSheet, dismissStart);
+            Assert.Greater(beginPageFlight, removeSheet,
+                "The page flight may start only after UIKit removes the settlement controller.");
+            int primaryActionStart = components.IndexOf("struct ProductPrimaryActionLabel");
+            int secondaryActionStart = components.IndexOf("struct ProductActionLabel");
+            string primaryAction = components.Substring(
+                primaryActionStart,
+                secondaryActionStart - primaryActionStart);
+            StringAssert.DoesNotContain("let symbol", primaryAction);
+            StringAssert.DoesNotContain("Image(systemName:", primaryAction);
+            StringAssert.DoesNotContain("Label(", primaryAction);
+            int onboardingStart = swift.IndexOf("private struct SpinnerOnboardingView");
+            int onboardingEnd = swift.IndexOf("private struct SpinnerLibrary", onboardingStart);
+            string onboarding = swift.Substring(
+                onboardingStart,
+                onboardingEnd - onboardingStart);
+            StringAssert.DoesNotContain("symbol: page < 2", onboarding);
+            int libraryStart = swift.IndexOf("private struct SpinnerLibrary");
+            int libraryEnd = swift.IndexOf("private enum DisplayCaseLightingPreset", libraryStart);
+            string library = swift.Substring(libraryStart, libraryEnd - libraryStart);
+            StringAssert.DoesNotContain("shippingbox.fill", library);
+            StringAssert.DoesNotContain("symbol: \"arrow.right\"", library);
+            StringAssert.Contains("PreviousLevelProgress", runtime);
+            StringAssert.Contains("NewLevelProgress", runtime);
+            StringAssert.Contains("SpinnerProgressionRules.ProgressWithinLevel", runtime);
+            StringAssert.DoesNotContain(
+                ".fullScreenCover(isPresented: $state.showingOfflineProgressionReward)",
+                swift,
+                "Offline growth must preserve the existing Unity and native detail context.");
+            StringAssert.DoesNotContain(
+                "arrow.down.to.line.compact",
+                swift,
+                "Offline growth must not use a download or save-to-device symbol.");
+            StringAssert.DoesNotContain(
+                ".alert(\"离线收获\"",
+                swift,
+                "Offline growth must use the visual settlement flow instead of a text-only alert.");
             StringAssert.Contains("CodexProgressionReceiveState", swift);
             StringAssert.Contains("ProgressionLevelDetailsSheet", swift);
             StringAssert.Contains("ProgressionLevelTimeline", swift);
@@ -1374,7 +1506,7 @@ namespace FidgetingApp.Tests.Editor
             StringAssert.Contains("ProgressionCosmeticsCatalog", swift);
             StringAssert.Contains("BadgeUnlockOverlay", swift);
             StringAssert.Contains("BADGE UNLOCKED", swift);
-            StringAssert.Contains("Text(\"成就\").tag(0)", swift);
+            StringAssert.Contains("Text(\"等级\").tag(0)", swift);
             StringAssert.Contains("Text(\"Badge\").tag(1)", swift);
             StringAssert.Contains("Text(\"外观\").tag(2)", swift);
             StringAssert.Contains("SpinnerOnboardingView", swift);
@@ -1421,6 +1553,185 @@ namespace FidgetingApp.Tests.Editor
             StringAssert.Contains("SpinnerComboRuntime", coordinator);
             StringAssert.Contains("SpinnerSpinRewardRuntime", coordinator);
             StringAssert.Contains(".productGlass(", swift);
+        }
+
+        [Test]
+        public void ProgressionCatalogScrollPath_DoesNotTrackMotionOrDecodeArtworkPerFrame()
+        {
+            string swift = File.ReadAllText(
+                "Assets/Plugins/iOS/CodexSwiftUIOverlay.swift");
+            string components = File.ReadAllText(
+                "Assets/Plugins/iOS/FidgetProductUIComponents.swift");
+
+            int catalogStart = swift.IndexOf(
+                "private struct ProgressionCatalogSnapshot");
+            int catalogEnd = swift.IndexOf(
+                "private struct ProductAppearanceEditor",
+                catalogStart);
+            Assert.That(catalogStart, Is.GreaterThanOrEqualTo(0));
+            Assert.That(catalogEnd, Is.GreaterThan(catalogStart));
+            string catalog = swift.Substring(
+                catalogStart,
+                catalogEnd - catalogStart);
+
+            Assert.AreEqual(
+                0,
+                catalog.Split(
+                    new[] { "@ObservedObject var state" },
+                    System.StringSplitOptions.None).Length - 1,
+                "The open catalog must not subscribe to 20 Hz ProductUiState telemetry.");
+            StringAssert.Contains("ProgressionCatalogSnapshot: Equatable", catalog);
+            StringAssert.Contains("private let sessionID: UUID", catalog);
+            StringAssert.Contains("lhs.sessionID == rhs.sessionID", catalog);
+            StringAssert.Contains("ProgressionLevelDetailsSheet: View, Equatable", catalog);
+            StringAssert.Contains(".equatable()", catalog);
+            StringAssert.Contains(".productStaticSurfaceMode()", catalog);
+            StringAssert.Contains("private struct ProgressionCatalogHeader", catalog);
+            StringAssert.Contains("ProductSheetDragHandle(closeTitle: \"完成\")", catalog);
+            StringAssert.Contains("Text(\"成长图鉴\")", catalog);
+            StringAssert.Contains("Button(\"完成\", action: onDone)", catalog);
+            StringAssert.Contains("Picker(\"成长栏目\"", catalog);
+            StringAssert.Contains("cornerRadius: 24", catalog);
+            StringAssert.Contains("ProgressionCatalogSheetBackdrop", catalog);
+            StringAssert.Contains(".fill(.ultraThinMaterial)", catalog);
+            Assert.AreEqual(
+                1,
+                catalog.Split(
+                    new[] { ".fill(.ultraThinMaterial)" },
+                    System.StringSplitOptions.None).Length - 1,
+                "Only the sheet root may retain a real material blur.");
+            StringAssert.Contains(".opacity(0.78)", catalog);
+            StringAssert.Contains("Color.black.opacity(0.24)", catalog);
+            StringAssert.Contains("accessibilityReduceTransparency", catalog);
+            StringAssert.Contains("Color.black.opacity(0.94)", catalog);
+            StringAssert.Contains("content.presentationBackground(.clear)", catalog);
+            StringAssert.DoesNotContain(
+                ".background(ProductBackdrop().ignoresSafeArea())",
+                catalog,
+                "The catalog sheet must preserve the presenting scene through one frosted layer.");
+            StringAssert.DoesNotContain(
+                "ProductBottomSheetShell(title: \"成长图鉴\")",
+                catalog,
+                "Title, Done and the tabs must share one integrated header surface.");
+            StringAssert.DoesNotContain(
+                "motionTelemetry",
+                catalog,
+                "20 Hz motion telemetry must stay outside the catalog snapshot.");
+            StringAssert.Contains("LazyVStack(alignment: .leading", catalog);
+            StringAssert.Contains("private static let cache: NSCache<NSString, UIImage>", swift);
+            StringAssert.Contains("ProductBadgeArtworkCache", components);
+            StringAssert.Contains("NSCache<NSString, UIImage>", components);
+            StringAssert.Contains("import ImageIO", components);
+            StringAssert.Contains("private static let catalogMaxPixelSize = 256", components);
+            StringAssert.Contains("private static let detailMaxPixelSize = 512", components);
+            StringAssert.Contains("cache.totalCostLimit = 24 * 1024 * 1024", components);
+            StringAssert.Contains("badge-artwork-decode", components);
+            StringAssert.Contains("CGImageSourceCreateThumbnailAtIndex", components);
+            StringAssert.Contains("kCGImageSourceShouldCacheImmediately: true", components);
+            StringAssert.Contains("ProductBadgeRenderingMode", components);
+            StringAssert.Contains("content.drawingGroup(opaque: false", components);
+            StringAssert.Contains("ProductRarityBadge.prewarmCatalogArtwork", catalog);
+            int leatherStart = components.IndexOf("struct ProductBadgeLeatherTexture");
+            int artworkCacheStart = components.IndexOf(
+                "private enum ProductBadgeArtworkCache",
+                leatherStart);
+            Assert.That(leatherStart, Is.GreaterThanOrEqualTo(0));
+            Assert.That(artworkCacheStart, Is.GreaterThan(leatherStart));
+            string leather = components.Substring(
+                leatherStart,
+                artworkCacheStart - leatherStart);
+            StringAssert.Contains("Image(\"badge-leather-texture\")", leather);
+            StringAssert.DoesNotContain("Canvas(", leather,
+                "Badge cells must reuse one raster leather texture while scrolling.");
+            string leatherPath =
+                "Assets/Plugins/iOS/BadgeArtwork/badge-leather-texture.png";
+            Assert.That(File.Exists(leatherPath), Is.True);
+            byte[] leatherPng = File.ReadAllBytes(leatherPath);
+            Assert.That(leatherPng.Length, Is.GreaterThan(24));
+            int leatherWidth =
+                (leatherPng[16] << 24) |
+                (leatherPng[17] << 16) |
+                (leatherPng[18] << 8) |
+                leatherPng[19];
+            int leatherHeight =
+                (leatherPng[20] << 24) |
+                (leatherPng[21] << 16) |
+                (leatherPng[22] << 8) |
+                leatherPng[23];
+            Assert.That(leatherWidth, Is.EqualTo(384));
+            Assert.That(leatherHeight, Is.EqualTo(384));
+            StringAssert.Contains("productUsesStaticSurfaces", components);
+            StringAssert.Contains("if usesStaticSurfaces", components);
+            StringAssert.Contains(
+                ".background(Color.white.opacity(0.032), in: shape)",
+                components);
+            StringAssert.Contains(
+                "Circle().fill(Color.white.opacity(0.035))",
+                components);
+            StringAssert.Contains(
+                "presentedCatalogSnapshot = ProgressionCatalogSnapshot(state: state)",
+                swift);
+            StringAssert.Contains("&& !showingLevelDetails", swift);
+            StringAssert.Contains("shimmers: !showingLevelDetails", swift);
+            int railStart = swift.IndexOf(
+                "private struct ProgressionVerticalRail");
+            int railEnd = swift.IndexOf(
+                "private struct ProgressionBadgeAchievements",
+                railStart);
+            Assert.That(railStart, Is.GreaterThanOrEqualTo(0));
+            Assert.That(railEnd, Is.GreaterThan(railStart));
+            string rail = swift.Substring(railStart, railEnd - railStart);
+            int railVisualEnd = rail.IndexOf(
+                "private struct ProgressionLevelRow");
+            Assert.That(railVisualEnd, Is.GreaterThan(0));
+            string railVisual = rail.Substring(0, railVisualEnd);
+            StringAssert.Contains("let lineWidth: CGFloat = 3", railVisual);
+            StringAssert.Contains("let segmentGap: CGFloat = 4", railVisual);
+            StringAssert.Contains("accent.opacity(0.42)", railVisual);
+            StringAssert.Contains("accent.opacity(0.92)", railVisual);
+            StringAssert.Contains("Color.white.opacity(0.10)", railVisual);
+            Assert.AreEqual(
+                3,
+                railVisual.Split(
+                    new[] { ".frame(width: lineWidth" },
+                    System.StringSplitOptions.None).Length - 1,
+                "Completed, current and future rail segments must share one thickness.");
+            StringAssert.DoesNotContain("ProgressionRailSheen", railVisual);
+            StringAssert.DoesNotContain("Circle()", railVisual);
+            StringAssert.DoesNotContain(
+                "repeatForever",
+                railVisual,
+                "The milestone rail is a static opacity hierarchy.");
+            StringAssert.Contains("selected: false", rail);
+            StringAssert.Contains("accent.opacity(0.88)", rail);
+            StringAssert.Contains("accent.opacity(0.22)", rail);
+            Assert.AreEqual(
+                2,
+                rail.Split(
+                    new[] { ".frame(width: 7, height: 7)" },
+                    System.StringSplitOptions.None).Length - 1,
+                "Current and completed row markers must share one size and differ only by opacity.");
+            StringAssert.Contains("current ? \"当前级别\"", rail);
+            StringAssert.DoesNotContain("title: \"CURRENT\"", rail);
+            int badgesStart = swift.IndexOf(
+                "private struct ProgressionBadgeAchievements");
+            int badgesEnd = swift.IndexOf(
+                "private struct ProductBadgeDetailSheet",
+                badgesStart);
+            string badges = swift.Substring(
+                badgesStart,
+                badgesEnd - badgesStart);
+            StringAssert.Contains("View, Equatable", badges);
+            StringAssert.DoesNotContain("@ObservedObject", badges);
+            StringAssert.Contains("snapshot.toyBadges", badges);
+            StringAssert.Contains("renderingMode: .catalog", badges);
+            StringAssert.Contains(
+                "func update(active: Bool, angularSpeedRadians: Double, paused: Bool)",
+                swift);
+            StringAssert.Contains(
+                "guard active, !paused, self.angularSpeedRadians > 0.01",
+                swift);
+            StringAssert.Contains(".onChange(of: active)", swift);
         }
 
         [Test]
@@ -1497,13 +1808,15 @@ namespace FidgetingApp.Tests.Editor
                 ".frame(height: sizeCategory.isAccessibilityCategory ? 148 : 118)",
                 swift);
             StringAssert.Contains("title: \"SPEED\"", swift);
-            StringAssert.Contains("unit: \"RPM\"", swift);
+            StringAssert.Contains("unit: telemetry.displayedUnit", swift);
             StringAssert.Contains("telemetry.rpm", swift);
+            StringAssert.Contains("case .linearPush: return \"MM/S\"", swift);
+            StringAssert.Contains("case .fanCard: return \"°/S\"", swift);
             StringAssert.DoesNotContain("AutomotiveMetricGauge", swift);
             StringAssert.Contains("title: \"INTENSITY\"", swift);
             StringAssert.Contains("title: \"FREQUENCY\"", swift);
-            StringAssert.Contains("fraction: combo.intensity", swift);
-            StringAssert.Contains("fraction: combo.frequency", swift);
+            StringAssert.Contains("fraction: telemetry.intensity", swift);
+            StringAssert.Contains("fraction: telemetry.frequency", swift);
             StringAssert.Contains(
                 "HStack(alignment: .bottom, spacing: 10)",
                 swift);
@@ -1538,7 +1851,7 @@ namespace FidgetingApp.Tests.Editor
             StringAssert.Contains(
                 "PublishMotionTelemetryIfDue(angularSpeed)",
                 coordinator);
-            StringAssert.Contains("HasRotarySpeedTelemetry()", coordinator);
+            StringAssert.Contains("HasMotionTelemetry()", coordinator);
         }
 
         [Test]
@@ -1645,6 +1958,25 @@ namespace FidgetingApp.Tests.Editor
             StringAssert.Contains("func echoRingOpacity(at progress: Double)", halo);
             StringAssert.Contains("func trailingRingOpacity(at progress: Double)", halo);
             StringAssert.Contains("func mistOpacity(at progress: Double)", halo);
+            StringAssert.Contains("enum ComboHaloMilestoneStyle: Equatable", halo);
+            StringAssert.Contains("if count >= 50 { return .apex }", halo);
+            StringAssert.Contains("if count >= 30 { return .overdrive }", halo);
+            StringAssert.Contains("var speedLineCount: Int", halo);
+            StringAssert.Contains("case .overdrive: return 4", halo);
+            StringAssert.Contains("case .apex: return 6", halo);
+            StringAssert.Contains("var orbitSegmentCount: Int", halo);
+            StringAssert.Contains("var innerOrbitSegmentCount: Int", halo);
+            StringAssert.Contains("var orbitLockMarkerCount: Int", halo);
+            StringAssert.Contains("func speedTunnelOpacity(", halo);
+            StringAssert.Contains("func speedLineLocalPhase(", halo);
+            StringAssert.Contains("func speedLineOpacity(", halo);
+            StringAssert.Contains("func orbitRingOpacity(", halo);
+            StringAssert.Contains("func orbitLockPhase(at progress: Double)", halo);
+            StringAssert.Contains("func orbitReleasePhase(at progress: Double)", halo);
+            StringAssert.Contains("func orbitSegmentReveal(", halo);
+            StringAssert.Contains("func orbitSweepOpacity(", halo);
+            StringAssert.Contains("func orbitSweepPhase(at progress: Double)", halo);
+            StringAssert.Contains("func edgeBloomOpacity(", halo);
             StringAssert.Contains("peakScale: 0.72", halo);
             StringAssert.Contains("peakScale: 1.00", halo);
             StringAssert.Contains("peakScale: 0.65", halo);
@@ -1655,12 +1987,28 @@ namespace FidgetingApp.Tests.Editor
             StringAssert.Contains("struct ComboHaloMistCloud: Shape", halo);
             StringAssert.Contains("struct ComboHaloBrokenRing: View", halo);
             StringAssert.Contains("struct ComboHaloMistWisps: View", halo);
+            StringAssert.Contains("struct ComboHaloSpeedTunnel: View", halo);
+            StringAssert.Contains("struct ComboHaloInterlockRing: View", halo);
             StringAssert.Contains(".trim(from: start, to: end)", halo);
             StringAssert.Contains("ForEach(0..<7", halo);
             StringAssert.Contains("AngularGradient(", halo);
             StringAssert.Contains("echoExpansion", halo);
             StringAssert.Contains("trailingExpansion", halo);
             StringAssert.Contains("mistExpansion", halo);
+            StringAssert.Contains("let localPhase = CGFloat(tuning.speedLineLocalPhase(", halo);
+            StringAssert.Contains("anchor: .leading", halo);
+            StringAssert.Contains("let isEven = index.isMultiple(of: 2)", halo);
+            StringAssert.Contains(
+                "let initialScale: CGFloat = isEven ? 1.13 : 0.89",
+                halo);
+            StringAssert.Contains(
+                "let settledScale = initialScale",
+                halo);
+            StringAssert.Contains("let arrivalRotation = Double(1 - lock)", halo);
+            StringAssert.Contains("-64 + sweep * 286", halo);
+            StringAssert.Contains("118 - sweep * 224", halo);
+            StringAssert.Contains("milestoneCount: Int = 10", halo);
+            StringAssert.Contains("milestoneStyle != .standard && !reduceMotion", halo);
             StringAssert.Contains(
                 "var animatableData: AnimatablePair<CGFloat, CGFloat>",
                 halo);
@@ -1688,6 +2036,8 @@ namespace FidgetingApp.Tests.Editor
                 "withAnimation(.linear(duration: duration))",
                 swift);
             StringAssert.Contains("projection: state.comboHaloProjection", swift);
+            StringAssert.Contains("milestoneCount: haloMilestoneCount", swift);
+            StringAssert.Contains("haloMilestoneCount = newCount", swift);
             StringAssert.Contains("CodexComboHaloReceiveProjection", swift);
             StringAssert.Contains(
                 "state.comboHaloTuning.milestoneCrossed(",

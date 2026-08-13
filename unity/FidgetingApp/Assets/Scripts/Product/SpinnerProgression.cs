@@ -68,7 +68,14 @@ namespace FidgetingApp.Product
             long lifetimeGestureCount,
             int todayGestureCount,
             double activeInteractionSeconds,
-            double lifetimeOfflineExperience)
+            double lifetimeOfflineExperience,
+            double peakNormalizedForce = 0d,
+            int highestCombo = 0,
+            int cleanTechniqueCount = 0,
+            int powerTechniqueCount = 0,
+            int speedTechniqueCount = 0,
+            int enduranceTechniqueCount = 0,
+            int perfectTechniqueCount = 0)
         {
             ModelId = modelId;
             Level = level;
@@ -84,6 +91,13 @@ namespace FidgetingApp.Product
             TodayGestureCount = Math.Max(0, todayGestureCount);
             ActiveInteractionSeconds = Math.Max(0d, activeInteractionSeconds);
             LifetimeOfflineExperience = Math.Max(0d, lifetimeOfflineExperience);
+            PeakNormalizedForce = Math.Max(0d, Math.Min(1d, peakNormalizedForce));
+            HighestCombo = Math.Max(0, highestCombo);
+            CleanTechniqueCount = Math.Max(0, cleanTechniqueCount);
+            PowerTechniqueCount = Math.Max(0, powerTechniqueCount);
+            SpeedTechniqueCount = Math.Max(0, speedTechniqueCount);
+            EnduranceTechniqueCount = Math.Max(0, enduranceTechniqueCount);
+            PerfectTechniqueCount = Math.Max(0, perfectTechniqueCount);
         }
 
         public string ModelId { get; }
@@ -100,6 +114,13 @@ namespace FidgetingApp.Product
         public int TodayGestureCount { get; }
         public double ActiveInteractionSeconds { get; }
         public double LifetimeOfflineExperience { get; }
+        public double PeakNormalizedForce { get; }
+        public int HighestCombo { get; }
+        public int CleanTechniqueCount { get; }
+        public int PowerTechniqueCount { get; }
+        public int SpeedTechniqueCount { get; }
+        public int EnduranceTechniqueCount { get; }
+        public int PerfectTechniqueCount { get; }
     }
 
     public enum SpinnerAchievementMetric
@@ -138,7 +159,9 @@ namespace FidgetingApp.Product
             double elapsedHours,
             bool assistantEnabled,
             int previousLevel,
-            int newLevel)
+            int newLevel,
+            float previousLevelProgress,
+            float newLevelProgress)
         {
             ModelId = modelId;
             Experience = experience;
@@ -146,6 +169,8 @@ namespace FidgetingApp.Product
             AssistantEnabled = assistantEnabled;
             PreviousLevel = previousLevel;
             NewLevel = newLevel;
+            PreviousLevelProgress = Mathf.Clamp01(previousLevelProgress);
+            NewLevelProgress = Mathf.Clamp01(newLevelProgress);
         }
 
         public string ModelId { get; }
@@ -154,11 +179,13 @@ namespace FidgetingApp.Product
         public bool AssistantEnabled { get; }
         public int PreviousLevel { get; }
         public int NewLevel { get; }
+        public float PreviousLevelProgress { get; }
+        public float NewLevelProgress { get; }
         public bool HasReward => Experience >= 1d;
 
         public static SpinnerOfflineReward None(string modelId)
         {
-            return new SpinnerOfflineReward(modelId, 0d, 0d, false, 1, 1);
+            return new SpinnerOfflineReward(modelId, 0d, 0d, false, 1, 1, 0f, 0f);
         }
     }
 
@@ -274,54 +301,18 @@ namespace FidgetingApp.Product
 
         public static int UnlockedAchievementCount(SpinnerProgressionSnapshot snapshot)
         {
-            int unlocked = 0;
-            for (int index = 0; index < achievements.Length; index++)
-            {
-                SpinnerAchievementDefinition achievement = achievements[index];
-                if (AchievementValue(snapshot, achievement.Metric) >= achievement.Threshold)
-                {
-                    unlocked++;
-                }
-            }
-
-            return unlocked;
+            return BadgeCatalogV2.UnlockedToyCount(snapshot);
         }
 
         public static string AchievementCatalogPayload()
         {
-            var rows = new string[achievements.Length];
-            for (int index = 0; index < achievements.Length; index++)
-            {
-                SpinnerAchievementDefinition achievement = achievements[index];
-                rows[index] = string.Join(
-                    "\t",
-                    achievement.Id,
-                    achievement.Metric.ToString(),
-                    achievement.Threshold.ToString("R", CultureInfo.InvariantCulture),
-                    achievement.Title);
-            }
-
-            return string.Join("\n", rows);
+            return BadgeCatalogV2.ToyCatalogJson(
+                default(SpinnerProgressionSnapshot));
         }
 
         public static string AchievementCatalogPayload(SpinnerProgressionSnapshot snapshot)
         {
-            var rows = new string[achievements.Length];
-            for (int index = 0; index < achievements.Length; index++)
-            {
-                SpinnerAchievementDefinition achievement = achievements[index];
-                rows[index] = string.Join(
-                    "\t",
-                    achievement.Id,
-                    achievement.Metric.ToString(),
-                    achievement.Threshold.ToString("R", CultureInfo.InvariantCulture),
-                    achievement.Title,
-                    AchievementValue(snapshot, achievement.Metric) >= achievement.Threshold
-                        ? "1"
-                        : "0");
-            }
-
-            return string.Join("\n", rows);
+            return BadgeCatalogV2.ToyCatalogJson(snapshot);
         }
 
         public static SpinnerLevelBand LevelBandForLevel(int level)
@@ -529,20 +520,26 @@ namespace FidgetingApp.Product
 
         private readonly Dictionary<string, ProgressionRecord> records =
             new Dictionary<string, ProgressionRecord>(StringComparer.Ordinal);
+        private readonly BadgeRewardLedger badgeRewards;
 
         private string activeModelId;
         private bool spinCreditArmed;
         private float activeGestureForce;
+        private int pendingBadgeUnlockCount;
         private bool dirty;
 
-        public SpinnerProgressionRuntime(string fallbackModelId)
+        public SpinnerProgressionRuntime(
+            string fallbackModelId,
+            BadgeRewardLedger rewardLedger = null)
         {
+            badgeRewards = rewardLedger ?? new BadgeRewardLedger();
             activeModelId = PlayerPrefs.GetString(ActiveModelKey, fallbackModelId);
             if (string.IsNullOrEmpty(activeModelId))
             {
                 activeModelId = fallbackModelId;
             }
             EnsureRecord(activeModelId);
+            EvaluateBadgeRewards(activeModelId, DateTime.UtcNow);
         }
 
         public string ActiveModelId => activeModelId;
@@ -561,6 +558,7 @@ namespace FidgetingApp.Product
             activeModelId = modelId;
             PlayerPrefs.SetString(ActiveModelKey, activeModelId);
             EnsureRecord(activeModelId);
+            EvaluateBadgeRewards(activeModelId, DateTime.UtcNow);
             EndSpinCredit();
             dirty = true;
         }
@@ -583,6 +581,9 @@ namespace FidgetingApp.Product
             record.PeakRimSpeedKmh = Math.Max(
                 record.PeakRimSpeedKmh,
                 SpinnerProgressionRules.RimSpeedKmh(angularSpeedRadians));
+            record.PeakNormalizedForce = Math.Max(
+                record.PeakNormalizedForce,
+                Mathf.Clamp01(normalizedForce));
             records[activeModelId] = record;
             dirty = true;
             activeGestureForce = Mathf.Clamp01(normalizedForce);
@@ -593,7 +594,59 @@ namespace FidgetingApp.Product
             double gained = SpinnerProgressionRules.GestureExperience(activeGestureForce)
                 * multiplier;
             AddExperience(activeModelId, gained);
+            EvaluateBadgeRewards(activeModelId, DateTime.UtcNow);
             return gained;
+        }
+
+        public bool RecordCombo(int count)
+        {
+            ProgressionRecord record = EnsureRecord(activeModelId);
+            int next = Math.Max(record.HighestCombo, Math.Max(0, count));
+            if (next == record.HighestCombo)
+            {
+                return false;
+            }
+
+            record.HighestCombo = next;
+            records[activeModelId] = record;
+            dirty = true;
+            EvaluateBadgeRewards(activeModelId, DateTime.UtcNow);
+            return true;
+        }
+
+        public bool RecordTechnique(SpinnerSpinRewardKind kind)
+        {
+            if (kind == SpinnerSpinRewardKind.None)
+            {
+                return false;
+            }
+
+            ProgressionRecord record = EnsureRecord(activeModelId);
+            switch (kind)
+            {
+                case SpinnerSpinRewardKind.CleanSpin:
+                    record.CleanTechniqueCount++;
+                    break;
+                case SpinnerSpinRewardKind.PowerSpin:
+                    record.PowerTechniqueCount++;
+                    break;
+                case SpinnerSpinRewardKind.SpeedRun:
+                    record.SpeedTechniqueCount++;
+                    break;
+                case SpinnerSpinRewardKind.Endurance:
+                    record.EnduranceTechniqueCount++;
+                    break;
+                case SpinnerSpinRewardKind.PerfectSpin:
+                    record.PerfectTechniqueCount++;
+                    break;
+                default:
+                    return false;
+            }
+
+            records[activeModelId] = record;
+            dirty = true;
+            EvaluateBadgeRewards(activeModelId, DateTime.UtcNow);
+            return true;
         }
 
         public bool RecordActivity(
@@ -620,6 +673,7 @@ namespace FidgetingApp.Product
             record.ActiveInteractionSeconds += addedInteraction;
             records[activeModelId] = record;
             dirty = true;
+            EvaluateBadgeRewards(activeModelId, DateTime.UtcNow);
             return true;
         }
 
@@ -718,6 +772,8 @@ namespace FidgetingApp.Product
 
             ProgressionRecord record = EnsureRecord(suspendedModel);
             int previousLevel = SpinnerProgressionRules.LevelForExperience(record.Experience);
+            float previousLevelProgress = SpinnerProgressionRules.ProgressWithinLevel(
+                record.Experience);
             double reward = SpinnerProgressionRules.OfflineExperience(
                 elapsedHours,
                 record.AssistantEnabled,
@@ -732,6 +788,8 @@ namespace FidgetingApp.Product
             }
 
             int newLevel = SpinnerProgressionRules.LevelForExperience(record.Experience);
+            float newLevelProgress = SpinnerProgressionRules.ProgressWithinLevel(
+                record.Experience);
             SaveIfDirty(true);
             return new SpinnerOfflineReward(
                 suspendedModel,
@@ -739,12 +797,28 @@ namespace FidgetingApp.Product
                 creditedHours,
                 record.AssistantEnabled,
                 previousLevel,
-                newLevel);
+                newLevel,
+                previousLevelProgress,
+                newLevelProgress);
         }
 
         public SpinnerProgressionSnapshot SnapshotFor(string modelId)
         {
             return SnapshotWithFreshDay(modelId);
+        }
+
+        public string BadgeCatalogPayloadFor(string modelId)
+        {
+            return BadgeCatalogV2.ToyCatalogJson(
+                SnapshotWithFreshDay(modelId),
+                badgeRewards);
+        }
+
+        public int ConsumePendingBadgeUnlockCount()
+        {
+            int count = pendingBadgeUnlockCount;
+            pendingBadgeUnlockCount = 0;
+            return count;
         }
 
         private SpinnerProgressionSnapshot SnapshotWithFreshDay(string modelId)
@@ -769,7 +843,12 @@ namespace FidgetingApp.Product
                 {
                     PersistRecord(pair.Key, pair.Value);
                 }
+                badgeRewards.SaveIfDirty(false);
                 dirty = false;
+            }
+            else
+            {
+                badgeRewards.SaveIfDirty(false);
             }
 
             if (flush)
@@ -791,6 +870,29 @@ namespace FidgetingApp.Product
                 Math.Max(0d, record.Experience + amount));
             records[modelId] = record;
             dirty = true;
+        }
+
+        private void EvaluateBadgeRewards(string modelId, DateTime utcNow)
+        {
+            ProgressionRecord record = EnsureRecord(modelId);
+            SpinnerProgressionSnapshot snapshot = CreateSnapshot(modelId, record);
+            foreach (BadgeDefinition definition in BadgeCatalogV2.ToyDefinitions)
+            {
+                if (!BadgeCatalogV2.IsToyUnlocked(snapshot, definition))
+                {
+                    continue;
+                }
+
+                string claimKey = BadgeRewardLedger.ToyClaimKey(modelId, definition.Id);
+                if (badgeRewards.TryClaim(
+                        claimKey,
+                        definition,
+                        utcNow,
+                        reward => AddExperience(modelId, reward)))
+                {
+                    pendingBadgeUnlockCount++;
+                }
+            }
         }
 
         private ProgressionRecord EnsureRecord(string modelId)
@@ -825,7 +927,26 @@ namespace FidgetingApp.Product
                     Prefix + modelId + ".dailyGestureStamp",
                     string.Empty),
                 ActiveInteractionSeconds = ReadDouble(modelId, "activeInteractionSeconds"),
-                LifetimeOfflineExperience = ReadDouble(modelId, "lifetimeOfflineExperience")
+                LifetimeOfflineExperience = ReadDouble(modelId, "lifetimeOfflineExperience"),
+                PeakNormalizedForce = ReadDouble(modelId, "peakNormalizedForce"),
+                HighestCombo = PlayerPrefs.GetInt(
+                    Prefix + modelId + ".highestCombo",
+                    0),
+                CleanTechniqueCount = PlayerPrefs.GetInt(
+                    Prefix + modelId + ".technique.clean",
+                    0),
+                PowerTechniqueCount = PlayerPrefs.GetInt(
+                    Prefix + modelId + ".technique.power",
+                    0),
+                SpeedTechniqueCount = PlayerPrefs.GetInt(
+                    Prefix + modelId + ".technique.speed",
+                    0),
+                EnduranceTechniqueCount = PlayerPrefs.GetInt(
+                    Prefix + modelId + ".technique.endurance",
+                    0),
+                PerfectTechniqueCount = PlayerPrefs.GetInt(
+                    Prefix + modelId + ".technique.perfect",
+                    0)
             };
             RefreshDailyGestureWindow(ref record, DateTime.Now);
             records[modelId] = record;
@@ -855,7 +976,14 @@ namespace FidgetingApp.Product
                 record.LifetimeGestureCount,
                 record.TodayGestureCount,
                 record.ActiveInteractionSeconds,
-                record.LifetimeOfflineExperience);
+                record.LifetimeOfflineExperience,
+                record.PeakNormalizedForce,
+                record.HighestCombo,
+                record.CleanTechniqueCount,
+                record.PowerTechniqueCount,
+                record.SpeedTechniqueCount,
+                record.EnduranceTechniqueCount,
+                record.PerfectTechniqueCount);
         }
 
         private static double CalculateNightFraction(DateTime startUtc, DateTime endUtc)
@@ -910,6 +1038,25 @@ namespace FidgetingApp.Product
             PlayerPrefs.SetString(
                 Prefix + modelId + ".lifetimeOfflineExperience",
                 record.LifetimeOfflineExperience.ToString("R", CultureInfo.InvariantCulture));
+            PlayerPrefs.SetString(
+                Prefix + modelId + ".peakNormalizedForce",
+                record.PeakNormalizedForce.ToString("R", CultureInfo.InvariantCulture));
+            PlayerPrefs.SetInt(Prefix + modelId + ".highestCombo", record.HighestCombo);
+            PlayerPrefs.SetInt(
+                Prefix + modelId + ".technique.clean",
+                record.CleanTechniqueCount);
+            PlayerPrefs.SetInt(
+                Prefix + modelId + ".technique.power",
+                record.PowerTechniqueCount);
+            PlayerPrefs.SetInt(
+                Prefix + modelId + ".technique.speed",
+                record.SpeedTechniqueCount);
+            PlayerPrefs.SetInt(
+                Prefix + modelId + ".technique.endurance",
+                record.EnduranceTechniqueCount);
+            PlayerPrefs.SetInt(
+                Prefix + modelId + ".technique.perfect",
+                record.PerfectTechniqueCount);
         }
 
         private static double ReadDouble(string modelId, string suffix)
@@ -956,6 +1103,13 @@ namespace FidgetingApp.Product
             public string DailyGestureStamp;
             public double ActiveInteractionSeconds;
             public double LifetimeOfflineExperience;
+            public double PeakNormalizedForce;
+            public int HighestCombo;
+            public int CleanTechniqueCount;
+            public int PowerTechniqueCount;
+            public int SpeedTechniqueCount;
+            public int EnduranceTechniqueCount;
+            public int PerfectTechniqueCount;
         }
     }
 
@@ -985,6 +1139,8 @@ namespace FidgetingApp.Product
             float offlineHours,
             int previousLevel,
             int offlineNewLevel,
+            float offlinePreviousLevelProgress,
+            float offlineNewLevelProgress,
             int livePreviousLevel,
             string liveRewardName,
             float peakRimSpeedKmh,
@@ -1003,6 +1159,7 @@ namespace FidgetingApp.Product
 
         public static void Publish(
             SpinnerProgressionSnapshot snapshot,
+            string badgeCatalogPayload,
             SpinnerOfflineReward offlineReward,
             int livePreviousLevel,
             string liveRewardName,
@@ -1036,6 +1193,8 @@ namespace FidgetingApp.Product
                 (float)offlineReward.ElapsedHours,
                 offlineReward.PreviousLevel,
                 offlineReward.NewLevel,
+                offlineReward.PreviousLevelProgress,
+                offlineReward.NewLevelProgress,
                 livePreviousLevel,
                 liveRewardName ?? string.Empty,
                 (float)snapshot.PeakRimSpeedKmh,
@@ -1044,8 +1203,10 @@ namespace FidgetingApp.Product
                 (float)snapshot.ActiveInteractionSeconds,
                 (float)snapshot.LifetimeOfflineExperience,
                 SpinnerProgressionRules.UnlockedAchievementCount(snapshot),
-                SpinnerProgressionRules.Achievements.Count,
-                SpinnerProgressionRules.AchievementCatalogPayload(snapshot),
+                BadgeCatalogV2.ToyDefinitions.Count,
+                string.IsNullOrEmpty(badgeCatalogPayload)
+                    ? SpinnerProgressionRules.AchievementCatalogPayload(snapshot)
+                    : badgeCatalogPayload,
                 ThreeBladeMetalSkinCatalog.CatalogPayload(),
                 appliedThreeBladeMetalSkinId ?? string.Empty,
                 ProductStickerCatalog.CatalogPayload(),

@@ -32,6 +32,12 @@ namespace FidgetingApp.EDC
         private Vector2 previousPointerPosition;
         private Vector2 pointerStartPosition;
         private float pointerStartTime;
+        private float cumulativeGestureTravelPixels;
+        private float gestureSpeedNormalized;
+        private float gestureDistanceNormalized;
+        private float gestureIntensityNormalized;
+        private float gestureFrequencyNormalized;
+        private float lastGestureCompletionTime = float.NegativeInfinity;
         private float handTargetMeters;
         private bool poweredDriveActive;
         private float poweredTargetMeters;
@@ -70,6 +76,15 @@ namespace FidgetingApp.EDC
                 && magneticTrack.State == MagneticDetentState.Capturing);
         public float AccumulatedActivityDegrees => accumulatedActivityDegrees;
         public float ActivitySpeedRadians => activitySpeedRadians;
+        public float GestureSpeedMillimetersPerSecond =>
+            Mathf.Max(
+                Mathf.Abs(filteredFingerSpeedMetersPerSecond),
+                Mathf.Abs(magneticTrack?.VelocityMetersPerSecond ?? 0f)) * 1000f;
+        public float GestureSpeedNormalized => Mathf.Max(
+            gestureSpeedNormalized,
+            Mathf.Clamp01(GestureSpeedMillimetersPerSecond / 120f));
+        public float GestureIntensityNormalized => gestureIntensityNormalized;
+        public float GestureFrequencyNormalized => gestureFrequencyNormalized;
         public Camera InteractionCamera => interactionCamera;
         public Collider InteractionSurface => interactionSurface;
         public bool IsAssistantDriving => assistantDriveActive;
@@ -170,6 +185,7 @@ namespace FidgetingApp.EDC
                 dragging && slowIntentActive);
             AdvanceCrossingTremor(deltaTime);
             UpdateActivity(deltaTime);
+            DecayGestureTelemetry(deltaTime);
         }
 
         private void OnDisable()
@@ -181,6 +197,7 @@ namespace FidgetingApp.EDC
             interactionHapticsAuthorized = false;
             ResetEdgeProbeState();
             ResetFingerIntent();
+            ResetGestureTelemetry(false);
             if (magneticTrack != null && !magneticTrack.IsAtRest)
             {
                 magneticTrack.Release();
@@ -221,6 +238,7 @@ namespace FidgetingApp.EDC
             interactionHapticsAuthorized = false;
             ResetEdgeProbeState();
             ResetFingerIntent();
+            ResetGestureTelemetry(false);
             float clamped = Mathf.Clamp01(progress);
             magneticTrack.ResetToPosition(clamped * travelDistance);
             slideProgress = magneticTrack.PositionMeters / travelDistance;
@@ -280,6 +298,7 @@ namespace FidgetingApp.EDC
             poweredDriveActive = false;
             ResetEdgeProbeState();
             ResetFingerIntent();
+            ResetGestureTelemetry(false);
             magneticTrack?.Release();
         }
 
@@ -355,6 +374,7 @@ namespace FidgetingApp.EDC
                         interactionHapticsAuthorized = false;
                         ResetEdgeProbeState();
                         ResetFingerIntent();
+                        ResetGestureTelemetry(false);
                         magneticTrack?.Release();
                         position = firstPressedTouch.position.ReadValue();
                         pressed = false;
@@ -401,7 +421,9 @@ namespace FidgetingApp.EDC
             else if (pressed && pointerWasPressed && dragging)
             {
                 float screenTravel = ResolveScreenTravelPixels();
-                float deltaMeters = (position.x - previousPointerPosition.x)
+                float signedPixels = position.x - previousPointerPosition.x;
+                cumulativeGestureTravelPixels += Mathf.Abs(signedPixels);
+                float deltaMeters = signedPixels
                     / screenTravel
                     * travelDistance;
                 handTargetMeters = Mathf.Clamp(
@@ -437,6 +459,7 @@ namespace FidgetingApp.EDC
             handTargetMeters = magneticTrack.PositionMeters;
             ResetEdgeProbeState();
             ResetFingerIntent();
+            ResetGestureTelemetry(true);
             previousHandTargetMeters = handTargetMeters;
             pointerStartPosition = position;
             previousPointerPosition = position;
@@ -452,21 +475,28 @@ namespace FidgetingApp.EDC
 
             dragging = false;
             ResetEdgeProbeState();
-            ResetFingerIntent();
             float travelPixels = Vector2.Distance(pointerStartPosition, position);
             float duration = Time.unscaledTime - pointerStartTime;
             if (travelPixels <= 6f && duration <= 0.35f)
             {
                 float target = slideProgress >= 0.5f ? 0f : travelDistance;
                 BeginPoweredTravel(target, true);
-                InteractionGestureCompleted?.Invoke(0.28f);
+                InteractionGestureCompleted?.Invoke(Mathf.Max(
+                    0.28f,
+                    gestureIntensityNormalized));
+                UpdateCompletedGestureFrequency(Time.unscaledTime);
+                ResetFingerIntent();
                 return;
             }
 
             magneticTrack.Release();
             float normalizedForce = Mathf.Clamp01(
                 travelPixels / Mathf.Max(1f, Screen.width * 0.34f));
-            InteractionGestureCompleted?.Invoke(Mathf.Max(0.18f, normalizedForce));
+            InteractionGestureCompleted?.Invoke(Mathf.Max(
+                0.18f,
+                Mathf.Max(normalizedForce, gestureIntensityNormalized)));
+            UpdateCompletedGestureFrequency(Time.unscaledTime);
+            ResetFingerIntent();
         }
 
         private float ResolveScreenTravelPixels()
@@ -546,6 +576,16 @@ namespace FidgetingApp.EDC
                 filteredFingerSpeedMetersPerSecond,
                 rawSpeed,
                 blend);
+            gestureSpeedNormalized = Mathf.Clamp01(
+                filteredFingerSpeedMetersPerSecond / 0.12f);
+            gestureDistanceNormalized = Mathf.InverseLerp(
+                0.018f,
+                0.28f,
+                cumulativeGestureTravelPixels / Mathf.Max(1f, Screen.width));
+            gestureIntensityNormalized = Mathf.Clamp01(
+                gestureSpeedNormalized * 0.48f
+                + gestureDistanceNormalized * 0.34f
+                + (magneticTrack?.LoadNormalized ?? 0f) * 0.18f);
 
             if (!slowIntentActive)
             {
@@ -591,6 +631,60 @@ namespace FidgetingApp.EDC
             stationaryElapsed = 0f;
             slowIntentActive = false;
             fingerStationary = false;
+        }
+
+        private void UpdateCompletedGestureFrequency(float completionTime)
+        {
+            if (!float.IsNegativeInfinity(lastGestureCompletionTime))
+            {
+                float interval = completionTime - lastGestureCompletionTime;
+                if (interval > 0.04f)
+                {
+                    gestureFrequencyNormalized = Mathf.Max(
+                        gestureFrequencyNormalized,
+                        Mathf.InverseLerp(0.25f, 2.20f, 1f / interval));
+                }
+            }
+            lastGestureCompletionTime = completionTime;
+        }
+
+        private void ResetGestureTelemetry(bool preserveFrequency)
+        {
+            cumulativeGestureTravelPixels = 0f;
+            gestureSpeedNormalized = 0f;
+            gestureDistanceNormalized = 0f;
+            gestureIntensityNormalized = 0f;
+            if (!preserveFrequency)
+            {
+                gestureFrequencyNormalized = 0f;
+                lastGestureCompletionTime = float.NegativeInfinity;
+            }
+        }
+
+        private void DecayGestureTelemetry(float deltaTime)
+        {
+            if (dragging || deltaTime <= 0f)
+            {
+                return;
+            }
+            float fastDecay = 1f - Mathf.Pow(0.5f, deltaTime / 0.12f);
+            gestureSpeedNormalized = Mathf.Lerp(
+                gestureSpeedNormalized,
+                0f,
+                fastDecay);
+            gestureDistanceNormalized = Mathf.Lerp(
+                gestureDistanceNormalized,
+                0f,
+                fastDecay);
+            gestureIntensityNormalized = Mathf.Lerp(
+                gestureIntensityNormalized,
+                0f,
+                fastDecay);
+            float cadenceDecay = 1f - Mathf.Pow(0.5f, deltaTime / 1.10f);
+            gestureFrequencyNormalized = Mathf.Lerp(
+                gestureFrequencyNormalized,
+                0f,
+                cadenceDecay);
         }
 
         private void AdvancePhysics(

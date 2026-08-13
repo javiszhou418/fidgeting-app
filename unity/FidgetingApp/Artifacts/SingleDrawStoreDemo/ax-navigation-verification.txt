@@ -1,0 +1,18 @@
+SingleDrawStoreDemo navigation verification
+
+Bundle: com.jiaweizhou.fidgeting.single-draw-demo
+Runtime navigation check device: iPhone 17 Pro / 5299DB2C-88EE-4931-A5E1-29E890127418
+Current final-preview device: Fidget-SingleDraw-Demo / 80870085-EAF9-4EC6-9709-9561C4924ED8
+
+Runtime interaction:
+PASS — From the running store, tapping the visible pure-text “返回主页面” control opened the main entry page.
+PASS — From the main entry page, tapping “进入机巧工坊” returned to the store.
+
+Accessibility contract:
+- single-draw-back-main identifies the return action.
+- single-draw-enter-store identifies the re-entry action.
+- single-draw-reveal-phase exposes the current reveal phase.
+- single-draw-reveal-dismiss identifies the final dismiss action.
+
+External inspection limitation:
+The macOS Simulator host accessibility tree exposed the Simulator chrome but did not expose the nested iOS application subtree, so an external identifier lookup could not be completed in this standalone swiftc demo. Runtime navigation was verified by actual injected taps and visible page transitions. The deterministic --preview-home launch argument independently starts the entry page; the default launch independently starts the store. No XCUITest target is added because this demo intentionally has no Xcode project or shipping integration.

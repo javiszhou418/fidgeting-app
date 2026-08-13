@@ -56,14 +56,19 @@ namespace FidgetingApp.EDC.Tests.Editor
             Assert.That(profile.MagneticPeakForceNewtons, Is.EqualTo(0.42f));
             Assert.That(profile.MaximumIntegrationStepSeconds, Is.EqualTo(1f / 240f));
             Assert.That(profile.EdgeProbeLoads, Is.EqualTo(new[] { 0.72f, 0.84f, 0.94f }));
-            Assert.That(profile.EdgeProbeMinimumIntensity, Is.EqualTo(0.08f));
-            Assert.That(profile.EdgeProbeMaximumIntensity, Is.EqualTo(0.14f));
-            Assert.That(profile.EdgeProbeMinimumSharpness, Is.EqualTo(0.14f));
-            Assert.That(profile.EdgeProbeMaximumSharpness, Is.EqualTo(0.22f));
-            Assert.That(profile.DetentHapticIntensity, Is.EqualTo(0.28f));
-            Assert.That(profile.DetentHapticSharpness, Is.EqualTo(0.46f));
-            Assert.That(profile.DetentHapticSecondaryIntensity, Is.EqualTo(0.14f));
-            Assert.That(profile.DetentHapticSecondarySharpness, Is.EqualTo(0.28f));
+            Assert.That(profile.EdgeProbeMinimumIntensity, Is.EqualTo(0.20f));
+            Assert.That(profile.EdgeProbeMaximumIntensity, Is.EqualTo(0.38f));
+            Assert.That(profile.EdgeProbeMinimumSharpness, Is.EqualTo(0.18f));
+            Assert.That(profile.EdgeProbeMaximumSharpness, Is.EqualTo(0.32f));
+            Assert.That(profile.EdgeProbePulseDurationSeconds, Is.EqualTo(0.016f));
+            Assert.That(profile.DetentHapticIntensity, Is.EqualTo(0.98f));
+            Assert.That(profile.DetentHapticSharpness, Is.EqualTo(0.78f));
+            Assert.That(profile.DetentHapticBodyIntensity, Is.EqualTo(0.58f));
+            Assert.That(profile.DetentHapticBodySharpness, Is.EqualTo(0.22f));
+            Assert.That(profile.DetentHapticBodyDurationSeconds, Is.EqualTo(0.030f));
+            Assert.That(profile.DetentHapticSecondaryIntensity, Is.EqualTo(0.52f));
+            Assert.That(profile.DetentHapticSecondarySharpness, Is.EqualTo(0.44f));
+            Assert.That(profile.DetentHapticPulseIntervalSeconds, Is.EqualTo(0.022f));
             Assert.That(profile.CrossingMaximumDurationSeconds, Is.EqualTo(0.080f));
         }
 
@@ -169,6 +174,7 @@ namespace FidgetingApp.EDC.Tests.Editor
             Assert.That(
                 magnets.Cast<Transform>().Select(child => child.name),
                 Is.EquivalentTo(Enumerable.Range(1, 6).Select(index => $"Magnet_{index:D2}")));
+
             LinearMagneticDetentProfile profile =
                 root.GetComponent<EdcSliderController>().Profile;
             float centerOffset = profile.TravelMeters * 0.5f;
@@ -214,23 +220,120 @@ namespace FidgetingApp.EDC.Tests.Editor
                     Is.EqualTo(filter.sharedMesh.vertexCount),
                     $"{path} must preserve one UV per vertex.");
                 Assert.That(renderer.sharedMaterial, Is.Not.Null, path);
-                Assert.That(
-                    renderer.sharedMaterial.shader.name,
-                    Is.EqualTo("Universal Render Pipeline/Lit"),
-                    path);
-                Assert.That(renderer.sharedMaterial.name, Does.Not.Contain("Default"));
+                Assert.That(renderer.sharedMaterial.shader.name,
+                    Is.EqualTo("Universal Render Pipeline/Lit"), path);
+                Assert.That(renderer.sharedMaterial.name, Does.Not.Contain("Default"), path);
             }
 
-            Material textured = Require(root, "SliderGroup/L1_TopFrame")
+            Material silver = Require(root, "SliderGroup/L1_TopFrame")
                 .GetComponent<MeshRenderer>().sharedMaterial;
-            Assert.That(textured.GetTexture("_BaseMap"), Is.Not.Null);
-            Assert.That(textured.GetTexture("_MetallicGlossMap"), Is.Not.Null);
-            Assert.That(textured.GetTexture("_BumpMap"), Is.Not.Null);
-            Assert.That(textured.GetTexture("_EmissionMap"), Is.Not.Null);
+            Assert.That(silver.GetTexture("_BaseMap"), Is.Not.Null);
+            Assert.That(silver.GetTexture("_MetallicGlossMap"), Is.Not.Null);
+            Assert.That(silver.GetTexture("_BumpMap"), Is.Not.Null);
+            Assert.That(silver.GetTexture("_EmissionMap"), Is.Null);
+            Assert.That(silver.IsKeywordEnabled("_EMISSION"), Is.False);
+            Assert.That(silver.GetFloat("_Metallic"), Is.EqualTo(1f));
+            Assert.That(silver.GetFloat("_Smoothness"), Is.EqualTo(1f));
+            Assert.That(silver.GetFloat("_GlossMapScale"),
+                Is.EqualTo(EdcImportPipeline.SilverGlossMapScale));
+            Assert.That(EdcImportPipeline.SilverGlossMapScale, Is.EqualTo(0.68f));
+            Assert.That(silver.GetFloat("_BumpScale"),
+                Is.EqualTo(EdcImportPipeline.SilverNormalScale));
+            Assert.That(EdcImportPipeline.SilverNormalScale, Is.EqualTo(0.28f));
+            Assert.That(silver.GetFloat("_SpecularHighlights"),
+                Is.EqualTo(EdcImportPipeline.SilverRealtimeSpecular));
+            Assert.That(silver.IsKeywordEnabled("_SPECULARHIGHLIGHTS_OFF"), Is.True);
+            Assert.That(EdcImportPipeline.SilverRoughnessInfluence, Is.EqualTo(0.58f));
+            Color silverColor = silver.GetColor("_BaseColor");
+            Assert.That(silverColor.r,
+                Is.EqualTo(EdcImportPipeline.SilverTintRed).Within(0.001f));
+            Assert.That(silverColor.g,
+                Is.EqualTo(EdcImportPipeline.SilverTintGreen).Within(0.001f));
+            Assert.That(silverColor.b,
+                Is.EqualTo(EdcImportPipeline.SilverTintBlue).Within(0.001f));
+
+            string[] resinPaths =
+            {
+                "SliderGroup/L2_UpperShell",
+                "Base/L3_Gasket",
+                "Base/L4_SlideRails/Rail_Left",
+                "Base/L4_SlideRails/Rail_Right",
+                "Base/L6_InnerFrame",
+                "Base/L7_BottomShell"
+            };
+            foreach (string resinPath in resinPaths)
+            {
+                Material resin = Require(root, resinPath)
+                    .GetComponent<MeshRenderer>().sharedMaterial;
+                Assert.That(resin.name, Is.EqualTo("M_EDC_DarkPolymer"), resinPath);
+                Assert.That(resin.GetFloat("_Metallic"),
+                    Is.EqualTo(EdcSceneBuilder.ResinMetallic), resinPath);
+                Assert.That(resin.GetFloat("_Smoothness"),
+                    Is.EqualTo(EdcSceneBuilder.ResinSmoothness), resinPath);
+                Assert.That(resin.GetTexture("_BumpMap"), Is.Null, resinPath);
+                Assert.That(resin.IsKeywordEnabled("_NORMALMAP"), Is.False, resinPath);
+                Assert.That(resin.GetColor("_BaseColor").maxColorComponent,
+                    Is.LessThan(0.05f), resinPath);
+            }
+
+            string[] brightMetalPaths =
+            {
+                "Base/L5_Magnets/Magnet_01",
+                "Base/L5_Magnets/Magnet_06",
+                "Screws/Screw_01",
+                "Screws/Screw_04"
+            };
+            foreach (string brightMetalPath in brightMetalPaths)
+            {
+                Material brightMetal = Require(root, brightMetalPath)
+                    .GetComponent<MeshRenderer>().sharedMaterial;
+                Assert.That(brightMetal.GetFloat("_Metallic"),
+                    Is.GreaterThanOrEqualTo(0.95f), brightMetalPath);
+                Assert.That(brightMetal.GetColor("_BaseColor").maxColorComponent,
+                    Is.GreaterThanOrEqualTo(0.56f), brightMetalPath);
+            }
             Assert.That(
-                Require(root, "Base/L3_Gasket").GetComponent<MeshRenderer>()
-                    .sharedMaterial.name,
-                Is.EqualTo("M_EDC_DarkPolymer"));
+                SpinnerEnvironmentCatalog.TryGetProfile(
+                    SpinnerEnvironmentCatalog.EdcScenePath,
+                    out SpinnerEnvironmentProfile environment),
+                Is.True);
+            Assert.That(environment.ReflectionIntensity, Is.EqualTo(0.56f));
+            Assert.That(environment.LibraryReflectionScale, Is.EqualTo(0.28f));
+            Assert.That(environment.Lights.Count, Is.EqualTo(2));
+            Assert.That(environment.Lights[0].ObjectName, Is.EqualTo("Key_UpperLeft"));
+            Assert.That(environment.Lights[0].Intensity, Is.EqualTo(0.54f));
+            Assert.That(environment.Lights[1].ObjectName, Is.EqualTo("CoolFill"));
+            Assert.That(environment.Lights[1].Intensity, Is.EqualTo(0.42f));
+            Light[] serializedLights = scene.GetRootGameObjects()
+                .SelectMany(sceneRoot => sceneRoot.GetComponentsInChildren<Light>(true))
+                .ToArray();
+            Assert.That(
+                serializedLights.Single(light => light.name == "Key_UpperLeft").intensity,
+                Is.EqualTo(0.54f));
+            Assert.That(
+                serializedLights.Single(light => light.name == "CoolFill").intensity,
+                Is.EqualTo(0.42f));
+            Assert.That(
+                SpinnerImageBasedLightingController.MagneticSlideSoftboxIntensity,
+                Is.EqualTo(0.26f));
+            Assert.That(
+                SpinnerImageBasedLightingController.MagneticSlideReflectionBaseScale,
+                Is.EqualTo(1f));
+            Assert.That(
+                SpinnerImageBasedLightingController.MagneticSlideOpposingStripIntensity,
+                Is.EqualTo(0.18f));
+            Assert.That(
+                SpinnerImageBasedLightingController.MagneticSlideSoftboxHorizontalCore,
+                Is.EqualTo(0.22f));
+            Assert.That(
+                SpinnerImageBasedLightingController.MagneticSlideSoftboxHorizontalEdge,
+                Is.EqualTo(0.88f));
+            Assert.That(
+                SpinnerImageBasedLightingController.MagneticSlideSoftboxVerticalCore,
+                Is.EqualTo(0.18f));
+            Assert.That(
+                SpinnerImageBasedLightingController.MagneticSlideSoftboxVerticalEdge,
+                Is.EqualTo(0.78f));
         }
 
         [Test]
@@ -338,6 +441,27 @@ namespace FidgetingApp.EDC.Tests.Editor
                 Is.EqualTo(EdcSliderController.DefaultInteractionSurfaceSize));
             Assert.That(surface.size.x, Is.GreaterThan(0.08f));
             Assert.That(surface.size.z, Is.GreaterThan(0.047f));
+        }
+
+        [Test]
+        public void LibraryPreview_UsesReducedMagneticSlideOccupancy()
+        {
+            Camera camera = scene.GetRootGameObjects()
+                .SelectMany(sceneRoot => sceneRoot.GetComponentsInChildren<Camera>(true))
+                .Single();
+            EdcPortraitCameraFramer framer = camera.GetComponent<EdcPortraitCameraFramer>();
+            ProductFramingProfile framing = ProductFramingCatalog.Resolve(
+                SpinnerEnvironmentCatalog.EdcScenePath);
+
+            Assert.That(framing.DetailWidthFraction, Is.EqualTo(0.86f));
+            Assert.That(framing.DetailHeightFraction, Is.EqualTo(0.60f));
+            Assert.That(framing.LibraryWidthFraction, Is.EqualTo(0.68f));
+            Assert.That(framing.LibraryHeightFraction, Is.EqualTo(0.48f));
+
+            framer.ConfigureFraming(framing);
+            framer.SetLibraryPreviewActive(true, true);
+            Assert.That(framer.ScreenWidthFraction, Is.EqualTo(0.68f));
+            Assert.That(framer.ScreenHeightFraction, Is.EqualTo(0.48f));
         }
 
         [Test]

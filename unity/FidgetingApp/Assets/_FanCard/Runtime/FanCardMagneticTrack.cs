@@ -102,7 +102,8 @@ namespace FidgetingApp.FanCard
         public FanCardStepResult Step(
             float deltaTime,
             float handTarget,
-            bool handActive)
+            bool handActive,
+            float traversalAuthority = 0f)
         {
             bool brokeAway = false;
             int crossedCount = 0;
@@ -112,6 +113,35 @@ namespace FidgetingApp.FanCard
                 Mathf.Max(0f, deltaTime),
                 profile.MaximumFrameStepSeconds);
             float clampedTarget = Mathf.Clamp01(handTarget);
+            float authority = Mathf.Clamp01(traversalAuthority);
+            float breakawayLoad = Mathf.Lerp(
+                profile.BreakawayLoad,
+                profile.FastBreakawayLoad,
+                authority);
+            float breakawayImpulse = Mathf.Lerp(
+                profile.BreakawayImpulse,
+                profile.FastBreakawayImpulse,
+                authority);
+            float handSpring = Mathf.Lerp(
+                profile.HandSpring,
+                profile.FastHandSpring,
+                authority);
+            float handDamping = Mathf.Lerp(
+                profile.HandDamping,
+                profile.FastHandDamping,
+                authority);
+            float magneticScale = Mathf.Lerp(
+                1f,
+                profile.FastMagneticForceScale,
+                authority);
+            float railFriction = Mathf.Lerp(
+                profile.RailFriction,
+                profile.FastRailFriction,
+                authority);
+            float maximumHeldSpeed = Mathf.Lerp(
+                profile.MaximumHeldSpeed,
+                profile.FastMaximumHeldSpeed,
+                authority);
 
             while (remaining > 0f)
             {
@@ -122,11 +152,11 @@ namespace FidgetingApp.FanCard
                 {
                     load = clampedTarget - Position;
                     Velocity = 0f;
-                    if (Mathf.Abs(load) >= profile.BreakawayLoad)
+                    if (Mathf.Abs(load) >= breakawayLoad)
                     {
                         captured = false;
                         State = MagneticDetentState.Breakaway;
-                        Velocity = Mathf.Sign(load) * profile.BreakawayImpulse;
+                        Velocity = Mathf.Sign(load) * breakawayImpulse;
                         brokeAway = true;
                     }
                     else
@@ -148,9 +178,9 @@ namespace FidgetingApp.FanCard
                 if (handActive)
                 {
                     load = clampedTarget - Position;
-                    force = profile.HandSpring * load
-                        - profile.HandDamping * Velocity
-                        + MagneticForce(Position);
+                    force = handSpring * load
+                        - handDamping * Velocity
+                        + MagneticForce(Position) * magneticScale;
                     State = MagneticDetentState.Traveling;
                 }
                 else
@@ -164,10 +194,17 @@ namespace FidgetingApp.FanCard
 
                 if (Mathf.Abs(Velocity) > 0.008f)
                 {
-                    force -= profile.RailFriction * Mathf.Sign(Velocity);
+                    force -= railFriction * Mathf.Sign(Velocity);
                 }
 
                 Velocity += force * step;
+                if (handActive)
+                {
+                    Velocity = Mathf.Clamp(
+                        Velocity,
+                        -maximumHeldSpeed,
+                        maximumHeldSpeed);
+                }
                 float previous = Position;
                 Position = Mathf.Clamp01(Position + Velocity * step);
                 if ((Position <= 0f && Velocity < 0f)

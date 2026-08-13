@@ -1,0 +1,124 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1254" height="1254" viewBox="0 0 1254 1254">
+  <defs>
+    <style>
+      @font-face { font-family: Oxanium; src: url('../../../Assets/Plugins/iOS/Fonts/Oxanium-VariableFont_wght.ttf'); }
+      .token { font-family: Oxanium, -apple-system, sans-serif; font-size: 58px; font-weight: 720; text-anchor: middle; fill: #f8f5ff; }
+      .wordToken { font-family: Oxanium, -apple-system, sans-serif; font-size: 38px; font-weight: 720; text-anchor: middle; fill: #f8f5ff; }
+      .unit { font-family: Oxanium, -apple-system, sans-serif; font-size: 18px; font-weight: 650; text-anchor: middle; fill: #a9a4b8; }
+      .label { font-family: Oxanium, -apple-system, sans-serif; font-weight: 680; text-anchor: middle; fill: #f5f2fb; }
+      .meta { font-family: -apple-system, sans-serif; font-weight: 500; text-anchor: middle; fill: #9994a6; }
+      .tubeGlow, .tubeEdge, .tubeBody, .tubeHighlight { fill: none; stroke-linecap: round; stroke-linejoin: round; }
+      .tubeGlow { stroke-width: 22; opacity: .13; filter: url(#glow); }
+      .tubeEdge { stroke: #17131e; stroke-width: 18; opacity: .54; transform: translate(0px, 2.2px); }
+      .tubeBody { stroke-width: 14; }
+      .tubeHighlight { stroke: #f5edff; stroke-width: 4; opacity: .2; transform: translate(-2.6px, -2.6px); filter: url(#softHighlight); }
+      .violet .tubeGlow { stroke: #9f78df; } .violet .tubeBody { stroke: url(#mistViolet); }
+      .cyan .tubeGlow { stroke: #79b6d2; } .cyan .tubeBody { stroke: url(#mistBlue); }
+      .gold .tubeGlow { stroke: #c6a670; } .gold .tubeBody { stroke: url(#mistGold); }
+    </style>
+    <linearGradient id="board" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#090a10"/><stop offset="1" stop-color="#11111a"/></linearGradient>
+    <linearGradient id="frame" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#f8f6ff"/><stop offset=".3" stop-color="#898596"/><stop offset=".55" stop-color="#464451"/><stop offset=".82" stop-color="#d8d4e1"/><stop offset="1" stop-color="#777382"/></linearGradient>
+    <linearGradient id="mistViolet" gradientUnits="userSpaceOnUse" x1="70" y1="45" x2="205" y2="135"><stop stop-color="#c195ef"/><stop offset=".56" stop-color="#a47be8"/><stop offset="1" stop-color="#8169d6"/></linearGradient>
+    <linearGradient id="mistBlue" gradientUnits="userSpaceOnUse" x1="70" y1="45" x2="205" y2="135"><stop stop-color="#9dd7e2"/><stop offset=".58" stop-color="#7eb8d5"/><stop offset="1" stop-color="#698dc2"/></linearGradient>
+    <linearGradient id="mistGold" gradientUnits="userSpaceOnUse" x1="70" y1="45" x2="205" y2="135"><stop stop-color="#efd39f"/><stop offset=".58" stop-color="#d5b57e"/><stop offset="1" stop-color="#b7966a"/></linearGradient>
+    <radialGradient id="wellV"><stop stop-color="#3e235d"/><stop offset=".58" stop-color="#21182f"/><stop offset="1" stop-color="#11131b"/></radialGradient>
+    <radialGradient id="wellC"><stop stop-color="#183b50"/><stop offset=".58" stop-color="#162635"/><stop offset="1" stop-color="#11131b"/></radialGradient>
+    <filter id="shadow" x="-50%" y="-50%" width="200%" height="200%"><feDropShadow dx="0" dy="14" stdDeviation="15" flood-color="#000" flood-opacity=".62"/></filter>
+    <filter id="glow" x="-100%" y="-100%" width="300%" height="300%"><feGaussianBlur stdDeviation="9"/></filter>
+    <filter id="softHighlight" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation=".85"/></filter>
+
+    <path id="pulseOuter" d="M88 98c24-25 80-25 104 0"/>
+    <path id="pulseInner" d="M106 74c17-14 51-14 68 0"/>
+
+    <rect id="chainLeft" x="76" y="68" width="76" height="40" rx="20"/>
+    <rect id="chainRight" x="128" y="68" width="76" height="40" rx="20"/>
+
+    <path id="speedShaft" d="M100 95c18-17 38-17 55-1"/>
+    <path id="speedChevron" d="M158 70l22 22-22 22"/>
+
+    <path id="focusOrbit" d="M112 63a36 36 0 1 1-4 49"/>
+    <circle id="focusCore" cx="140" cy="88" r="10"/>
+    <path id="focusHand" d="M140 88l13-12"/>
+
+    <path id="perfectStar" d="M140 52c7 18 14 27 36 36-22 8-29 17-36 36-7-19-14-28-36-36 22-9 29-18 36-36z"/>
+    <circle id="perfectCore" cx="140" cy="88" r="9"/>
+
+    <path id="rhythm" d="M88 91c14 0 15-21 26-21s13 38 25 38 12-36 24-36 13 19 29 19"/>
+    <path id="mastery" d="M133 55q7-4 14 0l25 15q6 4 6 12v28q0 8-7 12l-24 14q-7 4-14 0l-24-14q-7-4-7-12V82q0-8 6-12z"/>
+    <rect id="collectionBack" x="80" y="60" width="68" height="52" rx="19"/>
+    <rect id="collectionFront" x="132" y="68" width="68" height="52" rx="19"/>
+  </defs>
+
+  <rect width="1254" height="1254" fill="url(#board)"/>
+  <text x="627" y="42" class="label" font-size="18">DIFFUSE MIST-TUBE BADGES · B5.2</text>
+  <text x="627" y="69" class="meta" font-size="14">统一 128 × 80 安全区 · 水平垂直居中 · 柔和曲线 · 雾紫漫反射 · 数字保留在 Badge 内</text>
+
+  <g fill="#fff" fill-opacity=".018" stroke="#fff" stroke-opacity=".085">
+    <rect x="12" y="92" width="296" height="522" rx="28"/><rect x="323" y="92" width="296" height="522" rx="28"/><rect x="634" y="92" width="296" height="522" rx="28"/><rect x="945" y="92" width="296" height="522" rx="28"/>
+    <rect x="12" y="632" width="296" height="598" rx="28"/><rect x="323" y="632" width="296" height="598" rx="28"/><rect x="634" y="632" width="296" height="598" rx="28"/><rect x="945" y="632" width="296" height="598" rx="28"/>
+  </g>
+
+  <!-- Shared frame helper is repeated so the preview stays self-contained. -->
+  <g transform="translate(30 130)" filter="url(#shadow)">
+    <rect x="28" y="12" width="224" height="252" rx="72" fill="url(#wellV)" stroke="url(#frame)" stroke-width="8"/>
+    <rect x="43" y="27" width="194" height="222" rx="59" fill="none" stroke="#a77ad0" stroke-opacity=".32" stroke-width="2"/>
+    <g class="violet"><use href="#pulseOuter" class="tubeGlow"/><use href="#pulseOuter" class="tubeEdge"/><use href="#pulseOuter" class="tubeBody"/><use href="#pulseOuter" class="tubeHighlight"/><use href="#pulseInner" class="tubeGlow"/><use href="#pulseInner" class="tubeEdge"/><use href="#pulseInner" class="tubeBody"/><use href="#pulseInner" class="tubeHighlight"/></g>
+    <text x="140" y="190" class="token">100K</text>
+  </g>
+  <text x="160" y="456" class="label" font-size="18">PULSE ARCHIVE</text><text x="160" y="484" class="meta" font-size="15">累计操作 · 100,000 次</text><text x="160" y="548" class="label" font-size="13" fill="#8e79a2">SINGULARITY</text>
+
+  <g transform="translate(341 130)" filter="url(#shadow)">
+    <rect x="28" y="12" width="224" height="252" rx="72" fill="url(#wellV)" stroke="url(#frame)" stroke-width="8"/>
+    <rect x="43" y="27" width="194" height="222" rx="59" fill="none" stroke="#a77ad0" stroke-opacity=".32" stroke-width="2"/>
+    <g class="violet"><use href="#chainLeft" class="tubeGlow"/><use href="#chainLeft" class="tubeEdge"/><use href="#chainLeft" class="tubeBody"/><use href="#chainLeft" class="tubeHighlight"/><use href="#chainRight" class="tubeGlow"/><use href="#chainRight" class="tubeEdge"/><use href="#chainRight" class="tubeBody"/><use href="#chainRight" class="tubeHighlight"/></g>
+    <text x="140" y="190" class="token">×50</text>
+  </g>
+  <text x="471" y="456" class="label" font-size="18">CHAIN REACTOR</text><text x="471" y="484" class="meta" font-size="15">最高 Combo · 50</text><text x="471" y="548" class="label" font-size="13" fill="#8e79a2">SINGULARITY</text>
+
+  <g transform="translate(652 130)" filter="url(#shadow)">
+    <rect x="28" y="12" width="224" height="252" rx="72" fill="url(#wellC)" stroke="url(#frame)" stroke-width="8"/>
+    <rect x="43" y="27" width="194" height="222" rx="59" fill="none" stroke="#64bad2" stroke-opacity=".3" stroke-width="2"/>
+    <g class="cyan"><use href="#speedShaft" class="tubeGlow"/><use href="#speedShaft" class="tubeEdge"/><use href="#speedShaft" class="tubeBody"/><use href="#speedShaft" class="tubeHighlight"/><use href="#speedChevron" class="tubeGlow"/><use href="#speedChevron" class="tubeEdge"/><use href="#speedChevron" class="tubeBody"/><use href="#speedChevron" class="tubeHighlight"/></g>
+    <text x="140" y="190" class="token">3.5</text><text x="140" y="218" class="unit">KM/H</text>
+  </g>
+  <text x="782" y="456" class="label" font-size="18">REDLINE</text><text x="782" y="484" class="meta" font-size="15">动力里程碑 · 3.5 km/h</text><text x="782" y="548" class="label" font-size="13" fill="#6a9bab">APEX</text>
+
+  <g transform="translate(963 130)" filter="url(#shadow)">
+    <rect x="28" y="12" width="224" height="252" rx="72" fill="url(#wellC)" stroke="url(#frame)" stroke-width="8"/>
+    <rect x="43" y="27" width="194" height="222" rx="59" fill="none" stroke="#64bad2" stroke-opacity=".3" stroke-width="2"/>
+    <g class="cyan"><use href="#focusOrbit" class="tubeGlow"/><use href="#focusOrbit" class="tubeEdge"/><use href="#focusOrbit" class="tubeBody"/><use href="#focusOrbit" class="tubeHighlight"/><use href="#focusCore" class="tubeEdge"/><use href="#focusCore" class="tubeBody"/><use href="#focusCore" class="tubeHighlight"/><use href="#focusHand" class="tubeEdge"/><use href="#focusHand" class="tubeBody"/><use href="#focusHand" class="tubeHighlight"/></g>
+    <text x="140" y="190" class="token">10h</text>
+  </g>
+  <text x="1093" y="456" class="label" font-size="18">STEADY FIELD</text><text x="1093" y="484" class="meta" font-size="15">真实触摸 · 10 小时</text><text x="1093" y="548" class="label" font-size="13" fill="#6a9bab">SINGULARITY</text>
+
+  <g transform="translate(30 690)" filter="url(#shadow)">
+    <rect x="28" y="12" width="224" height="252" rx="72" fill="url(#wellV)" stroke="url(#frame)" stroke-width="8"/>
+    <rect x="43" y="27" width="194" height="222" rx="59" fill="none" stroke="#a77ad0" stroke-opacity=".32" stroke-width="2"/>
+    <g class="violet"><use href="#perfectStar" class="tubeGlow"/><use href="#perfectStar" class="tubeEdge"/><use href="#perfectStar" class="tubeBody"/><use href="#perfectStar" class="tubeHighlight"/><use href="#perfectCore" class="tubeEdge"/><use href="#perfectCore" class="tubeBody"/><use href="#perfectCore" class="tubeHighlight"/></g>
+    <text x="140" y="203" class="wordToken">PERFECT</text>
+  </g>
+  <text x="160" y="1016" class="label" font-size="18">PERFECT CONTROL</text><text x="160" y="1044" class="meta" font-size="15">技巧 · Perfect Spin / Slide / Fan</text><text x="160" y="1108" class="label" font-size="13" fill="#8e79a2">HIDDEN · SINGULARITY</text>
+
+  <g transform="translate(341 690)" filter="url(#shadow)">
+    <circle cx="140" cy="138" r="112" fill="url(#wellV)" stroke="url(#frame)" stroke-width="8"/><circle cx="140" cy="138" r="94" fill="none" stroke="#a77ad0" stroke-opacity=".32" stroke-width="2"/>
+    <g class="violet"><use href="#rhythm" class="tubeGlow"/><use href="#rhythm" class="tubeEdge"/><use href="#rhythm" class="tubeBody"/><use href="#rhythm" class="tubeHighlight"/></g>
+    <text x="140" y="190" class="token">12W</text>
+  </g>
+  <text x="471" y="1016" class="label" font-size="18">RHYTHM CORE</text><text x="471" y="1044" class="meta" font-size="15">收藏者节奏 · 12 个有效周</text><text x="471" y="1108" class="label" font-size="13" fill="#8e79a2">SINGULARITY</text>
+
+  <g transform="translate(652 690)" filter="url(#shadow)">
+    <circle cx="140" cy="138" r="112" fill="url(#wellV)" stroke="url(#frame)" stroke-width="8"/><circle cx="140" cy="138" r="94" fill="none" stroke="#a77ad0" stroke-opacity=".32" stroke-width="2"/>
+    <g class="violet"><use href="#mastery" class="tubeGlow"/><use href="#mastery" class="tubeEdge"/><use href="#mastery" class="tubeBody"/><use href="#mastery" class="tubeHighlight"/></g>
+    <text x="140" y="190" class="token">100</text><text x="140" y="218" class="unit">LV</text>
+  </g>
+  <text x="782" y="1016" class="label" font-size="18">MASTER CORE</text><text x="782" y="1044" class="meta" font-size="15">精通 · 玩具达到 LV.100</text><text x="782" y="1108" class="label" font-size="13" fill="#8e79a2">SINGULARITY</text>
+
+  <g transform="translate(963 690)" filter="url(#shadow)">
+    <circle cx="140" cy="138" r="112" fill="url(#wellV)" stroke="url(#frame)" stroke-width="8"/><circle cx="140" cy="138" r="94" fill="none" stroke="#c3a66d" stroke-opacity=".34" stroke-width="2"/>
+    <g class="gold"><use href="#collectionBack" class="tubeGlow"/><use href="#collectionBack" class="tubeEdge"/><use href="#collectionBack" class="tubeBody"/><use href="#collectionBack" class="tubeHighlight"/><use href="#collectionFront" class="tubeGlow"/><use href="#collectionFront" class="tubeEdge"/><use href="#collectionFront" class="tubeBody"/><use href="#collectionFront" class="tubeHighlight"/></g>
+    <text x="140" y="190" class="token">25</text>
+  </g>
+  <text x="1093" y="1016" class="label" font-size="18">VAULT INDEX</text><text x="1093" y="1044" class="meta" font-size="15">外观收藏 · 25 件</text><text x="1093" y="1108" class="label" font-size="13" fill="#b99a64">SINGULARITY</text>
+
+  <text x="627" y="1190" class="meta" font-size="14">数字是 Badge 主视觉；灯管只表达类别与动作，不再让图标代替里程碑</text>
+</svg>

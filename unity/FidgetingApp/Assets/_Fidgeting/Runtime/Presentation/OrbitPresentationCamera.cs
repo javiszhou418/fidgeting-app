@@ -139,9 +139,14 @@ namespace ThreeBladeEDC.Presentation
             // visible point on the same mechanical axis (the upper cap face in
             // ThreeBladeEDC). Other products retain the mechanical root fallback.
             Vector3 focus = ResolveFocusPoint();
-            transform.position = focus + orbit * (
-                Vector3.back * distance / appearanceActivationScale);
-            transform.LookAt(focus, Vector3.up);
+            Vector3 authoredBackward = Vector3.back;
+            Vector3 position = focus + orbit * (
+                authoredBackward * distance / appearanceActivationScale);
+            transform.SetPositionAndRotation(
+                position,
+                DeviceMotionOrbitMapping.ResolveStableLookRotation(
+                    authoredBackward,
+                    orbit));
         }
 
         public void SetAppearanceActivationScale(float apparentScale)
@@ -257,6 +262,18 @@ namespace ThreeBladeEDC.Presentation
                 : 1f;
             _presentationTransitionElapsed = 0f;
             _presentationTransitionActive = true;
+        }
+
+        public void SetDetailEntranceProgressForPreview(float progress)
+        {
+            SetLibraryPreviewActive(true, true);
+            SetLibraryPreviewActive(false, false);
+            _presentationTransitionElapsed =
+                SpinnerPresentationTransition.DurationSeconds
+                * Mathf.Clamp01(progress);
+            AdvancePresentationTransition(0f);
+            _presentationTransitionActive = false;
+            ApplyOrbitPose();
         }
 
         public void ConfigureHeroDistance(float value)

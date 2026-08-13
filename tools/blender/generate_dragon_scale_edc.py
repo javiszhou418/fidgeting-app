@@ -41,6 +41,12 @@ RING_BEVEL_SEGMENTS = 2
 PRIMARY_RING_BEVEL_SEGMENTS = 3
 CAP_BEVEL_SEGMENTS = 4
 
+FORBIDDEN_DECORATIVE_AXIS_RINGS = (
+    "RotorCrownTrim",
+    "FingerCapTop_AccentLine",
+    "FingerCapBottom_AccentLine",
+)
+
 
 def ensure_dirs() -> None:
     for directory in (SOURCE_DIR, MODEL_DIR, ARTIFACT_DIR):
@@ -129,6 +135,9 @@ def create_rounded_tapered_blade(
     inner_depth: float,
     outer_depth: float,
     mat: bpy.types.Material,
+    outer_base_width: float = 0.0205,
+    outer_tip_width: float = 0.00090,
+    outer_shoulder: float = 0.0016,
 ) -> bpy.types.Object:
     """Create a native arrowhead frame with a recessed triangular cavity."""
 
@@ -163,7 +172,13 @@ def create_rounded_tapered_blade(
     # the centre ring, not a long triangular paddle.  The outer shoulder is
     # deliberately wider than the 19 mm finger cap so it stays visible beside
     # the hub; the cavity remains a much smaller inset.
-    outer_loop = profile_loop(inner_x, outer_x, 0.0205, 0.00090, 0.0016)
+    outer_loop = profile_loop(
+        inner_x,
+        outer_x,
+        outer_base_width,
+        outer_tip_width,
+        outer_shoulder,
+    )
     inner_loop = profile_loop(0.0228, 0.0412, 0.0067, 0.00034, 0.0)
     loop_count = len(outer_loop)
 
@@ -695,7 +710,7 @@ def main() -> None:
     # literally, then cut three deep triangular pockets into the upper face.
     rotor_body = create_ring(
         "RotorBody_OnePiece",
-        0.0238,
+        0.0187,
         0.0152,
         BODY_DEPTH,
         0.0,
@@ -768,22 +783,6 @@ def main() -> None:
         )
     rotor_body.data.name = "RotorBody_OnePiece_Mesh"
     shade_smooth_by_angle(rotor_body, 44.0)
-    rotor_crown = parent(
-        create_ring(
-            "RotorCrownTrim",
-            0.02405,
-            0.02265,
-            0.00050,
-            0.00348,
-            polished,
-            segments=PRIMARY_CIRCLE_SEGMENTS,
-            bevel=0.00016,
-            bevel_segments=PRIMARY_RING_BEVEL_SEGMENTS,
-        ),
-        rotor,
-    )
-    visual_objects.append(rotor_crown)
-
     # The bearing is a separate exploded component seated inside the one-piece
     # rotor, matching the supplied lower-right assembly diagram.
     bearing_shell = parent(create_ring("BearingOuterRace", 0.0149, 0.0122, 0.0054, 0.0, bearing_mat, bevel=0.00028), bearing_root)
@@ -846,7 +845,7 @@ def main() -> None:
     top_face = parent(
         create_cylinder(
             "FingerCapTop_BrushedFace",
-            0.0150,
+            0.01845,
             0.00028,
             0.00830,
             polished,
@@ -858,7 +857,7 @@ def main() -> None:
     bottom_face = parent(
         create_cylinder(
             "FingerCapBottom_BrushedFace",
-            0.0150,
+            0.01845,
             0.00028,
             -0.00830,
             polished,
@@ -867,35 +866,20 @@ def main() -> None:
         ),
         bottom_cap_root,
     )
-    top_gold = parent(
-        create_ring(
-            "FingerCapTop_AccentLine",
-            0.0178,
-            0.0171,
-            0.00022,
-            0.00455,
-            gold,
-            segments=ACCENT_CIRCLE_SEGMENTS,
-            bevel=0.00008,
-        ),
-        top_cap_root,
-    )
-    bottom_gold = parent(
-        create_ring(
-            "FingerCapBottom_AccentLine",
-            0.0178,
-            0.0171,
-            0.00022,
-            -0.00455,
-            gold,
-            segments=ACCENT_CIRCLE_SEGMENTS,
-            bevel=0.00008,
-        ),
-        bottom_cap_root,
-    )
     visual_objects.extend(
-        [top_washer, bottom_washer, top_cap, bottom_cap, top_face, bottom_face, top_gold, bottom_gold]
+        [top_washer, bottom_washer, top_cap, bottom_cap, top_face, bottom_face]
     )
+
+    remaining_axis_rings = sorted(
+        obj.name
+        for obj in visual_objects
+        if obj.name in FORBIDDEN_DECORATIVE_AXIS_RINGS
+    )
+    if remaining_axis_rings:
+        raise RuntimeError(
+            "Rejected decorative axis rings remain: "
+            + ", ".join(remaining_axis_rings)
+        )
 
     collision_outline = [
         (0.0170, -0.0180),
@@ -942,7 +926,6 @@ def main() -> None:
     # machined faces and the five-segment bevel transitions.
     circular_objects = [
         rotor_body,
-        rotor_crown,
         bearing_shell,
         inner_race,
         axle,
@@ -952,8 +935,6 @@ def main() -> None:
         bottom_cap,
         top_face,
         bottom_face,
-        top_gold,
-        bottom_gold,
     ]
     for circular_object in circular_objects:
         shade_smooth_by_angle(circular_object, 42.0)
@@ -1070,6 +1051,8 @@ def main() -> None:
             for polygon in obj.data.polygons
         ),
         "collisionMeshCount": len(collision_objects),
+        "decorativeAxisRingCount": len(remaining_axis_rings),
+        "forbiddenDecorativeAxisRings": list(FORBIDDEN_DECORATIVE_AXIS_RINGS),
         "initialAngularVelocity": 0.0,
     }
     STATS_PATH.write_text(json.dumps(stats, indent=2), encoding="utf-8")

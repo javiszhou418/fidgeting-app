@@ -28,6 +28,10 @@ namespace CodexUnityLabEditor
         private const string OxaniumFontFileName = "Oxanium-VariableFont_wght.ttf";
         private const string ProductThumbnailAssetRootPath =
             "Assets/Plugins/iOS/Thumbnails";
+        private const string SceneWallpaperAssetRootPath =
+            "Assets/Plugins/iOS/SceneWallpapers";
+        private const string ProductBadgeArtworkAssetRootPath =
+            "Assets/Plugins/iOS/BadgeArtwork";
         private const string ProductStickerArtworkAssetRootPath =
             "Assets/Resources/ProductStickers/BackdropWhite";
         private const string MobileRenderPipelineAssetPath =
@@ -54,7 +58,7 @@ namespace CodexUnityLabEditor
             PlayerSettings.productName = ProductName;
             PlayerSettings.SetApplicationIdentifier(NamedBuildTarget.iOS, BundleIdentifier);
             PlayerSettings.bundleVersion = "0.1.0";
-            PlayerSettings.iOS.buildNumber = "23";
+            PlayerSettings.iOS.buildNumber = "40";
             PlayerSettings.iOS.targetOSVersionString = MinimumIosVersion;
             PlayerSettings.iOS.targetDevice = iOSTargetDevice.iPhoneOnly;
             PlayerSettings.SetScriptingBackend(NamedBuildTarget.iOS, ScriptingImplementation.IL2CPP);
@@ -578,7 +582,9 @@ namespace CodexUnityLabEditor
             string[] sourceRoots =
             {
                 Path.Combine(projectRoot, ProductThumbnailAssetRootPath),
-                Path.Combine(projectRoot, ProductStickerArtworkAssetRootPath)
+                Path.Combine(projectRoot, SceneWallpaperAssetRootPath),
+                Path.Combine(projectRoot, ProductStickerArtworkAssetRootPath),
+                Path.Combine(projectRoot, ProductBadgeArtworkAssetRootPath)
             };
 
             var allThumbnailPaths = new List<string>();
@@ -612,7 +618,7 @@ namespace CodexUnityLabEditor
             if (thumbnailPaths.Length == 0)
             {
                 throw new BuildFailedException(
-                    "No square product thumbnails or sticker artwork were found.");
+                    "No square product thumbnails, sticker artwork, or Badge artwork were found.");
             }
 
             string projectPath = PBXProject.GetPBXProjectPath(outputPath);

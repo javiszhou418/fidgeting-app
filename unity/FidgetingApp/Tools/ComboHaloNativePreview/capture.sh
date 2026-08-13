@@ -26,10 +26,17 @@ for PREVIOUS_ARTIFACT in \
   combo-halo-effect-left-38.png \
   combo-halo-effect-right-38.png \
   combo-halo-effect-low-38.png \
+  combo-halo-standard-hero-38.png \
+  combo-halo-overdrive-hero-38.png \
+  combo-halo-apex-hero-38.png \
+  combo-halo-tier-contact-sheet.png \
   combo-halo-curve-tool.png \
   combo-halo-motion.mp4 \
+  combo-halo-apex-motion.mp4 \
   combo-halo-motion-contact-sheet.png \
   combo-halo-burst-contact-sheet.png \
+  combo-halo-apex-burst-contact-sheet.png \
+  combo-halo-orbit-motion-comparison.png \
   combo-halo-angle-contact-sheet.png; do
   if [[ -f "$ARTIFACT_DIR/$PREVIOUS_ARTIFACT" ]]; then
     mv "$ARTIFACT_DIR/$PREVIOUS_ARTIFACT" \
@@ -63,11 +70,14 @@ cp "$PROJECT_ROOT/Artifacts/ThreeBladeRotorAxisCenterV2/view-low-15.png" \
   "$APP_DIR/UnityLow.png"
 codesign --force --sign - "$APP_DIR" >/dev/null
 
-DEVICE_ID="$(
-  xcrun simctl list devices available \
-    | sed -nE 's/^[[:space:]]*iPhone[^\(]*\(([0-9A-F-]{36})\).*/\1/p' \
-    | head -1
-)"
+DEVICE_ID="${COMBO_PREVIEW_DEVICE_ID:-}"
+if [[ -z "$DEVICE_ID" ]]; then
+  DEVICE_ID="$(
+    xcrun simctl list devices available \
+      | sed -nE 's/^[[:space:]]*iPhone[^\(]*\(([0-9A-F-]{36})\).*/\1/p' \
+      | head -1
+  )"
+fi
 if [[ -z "$DEVICE_ID" ]]; then
   print -u2 "No available iPhone simulator was found."
   exit 68
@@ -79,16 +89,30 @@ xcrun simctl uninstall "$DEVICE_ID" "$BUNDLE_ID" 2>/dev/null || true
 xcrun simctl install "$DEVICE_ID" "$APP_DIR"
 
 xcrun simctl launch --terminate-running-process "$DEVICE_ID" "$BUNDLE_ID" \
-  --mode=effect --view=hero --progress=0.38 >/dev/null
+  --mode=effect --view=hero --progress=0.38 --combo=30 >/dev/null
 sleep 2.5
 xcrun simctl io "$DEVICE_ID" screenshot \
   "$ARTIFACT_DIR/combo-halo-effect-38.png" >/dev/null
 cp "$ARTIFACT_DIR/combo-halo-effect-38.png" \
   "$ARTIFACT_DIR/combo-halo-effect-hero-38.png"
+cp "$ARTIFACT_DIR/combo-halo-effect-38.png" \
+  "$ARTIFACT_DIR/combo-halo-overdrive-hero-38.png"
+
+xcrun simctl launch --terminate-running-process "$DEVICE_ID" "$BUNDLE_ID" \
+  --mode=effect --view=hero --progress=0.38 --combo=10 >/dev/null
+sleep 1
+xcrun simctl io "$DEVICE_ID" screenshot \
+  "$ARTIFACT_DIR/combo-halo-standard-hero-38.png" >/dev/null
+
+xcrun simctl launch --terminate-running-process "$DEVICE_ID" "$BUNDLE_ID" \
+  --mode=effect --view=hero --progress=0.38 --combo=50 >/dev/null
+sleep 1
+xcrun simctl io "$DEVICE_ID" screenshot \
+  "$ARTIFACT_DIR/combo-halo-apex-hero-38.png" >/dev/null
 
 for SCENE_VIEW in top left right low; do
   xcrun simctl launch --terminate-running-process "$DEVICE_ID" "$BUNDLE_ID" \
-    --mode=effect --view="$SCENE_VIEW" --progress=0.38 >/dev/null
+    --mode=effect --view="$SCENE_VIEW" --progress=0.38 --combo=30 >/dev/null
   sleep 1
   xcrun simctl io "$DEVICE_ID" screenshot \
     "$ARTIFACT_DIR/combo-halo-effect-$SCENE_VIEW-38.png" >/dev/null
@@ -101,7 +125,7 @@ xcrun simctl io "$DEVICE_ID" screenshot \
   "$ARTIFACT_DIR/combo-halo-curve-tool.png" >/dev/null
 
 xcrun simctl launch --terminate-running-process "$DEVICE_ID" "$BUNDLE_ID" \
-  --mode=motion >/dev/null
+  --mode=motion --combo=30 >/dev/null
 xcrun simctl io "$DEVICE_ID" recordVideo \
   --codec=h264 "$BUILD_ROOT/combo-halo-motion-raw.mp4" >/dev/null 2>&1 &
 RECORD_PID=$!
@@ -126,16 +150,64 @@ ffmpeg -y \
   -update 1 \
   "$ARTIFACT_DIR/combo-halo-motion-contact-sheet.png" >/dev/null 2>&1
 
-# A tight timeline makes the 80 ms core flash, delayed echo and lingering mist
-# readable in one QA artifact instead of sampling mostly idle loop frames.
+# A tight timeline begins before the first speed-line packet so the staggered
+# launch, ring handoff and lingering mist remain readable in one QA artifact.
 ffmpeg -y \
-  -ss 0.88 \
-  -t 1.00 \
+  -ss 1.12 \
+  -t 1.02 \
   -i "$ARTIFACT_DIR/combo-halo-motion.mp4" \
-  -vf "fps=12,scale=302:-1,tile=6x2:padding=6:margin=6" \
+  -vf "fps=12,scale=302:-1,tile=6x3:padding=6:margin=6" \
   -frames:v 1 \
   -update 1 \
   "$ARTIFACT_DIR/combo-halo-burst-contact-sheet.png" >/dev/null 2>&1
+
+xcrun simctl launch --terminate-running-process "$DEVICE_ID" "$BUNDLE_ID" \
+  --mode=motion --combo=50 >/dev/null
+xcrun simctl io "$DEVICE_ID" recordVideo \
+  --codec=h264 "$BUILD_ROOT/combo-halo-apex-motion-raw.mp4" >/dev/null 2>&1 &
+RECORD_PID=$!
+sleep 5
+kill -INT "$RECORD_PID"
+wait "$RECORD_PID" || true
+RECORD_PID=""
+
+ffmpeg -y \
+  -ss 0.35 \
+  -i "$BUILD_ROOT/combo-halo-apex-motion-raw.mp4" \
+  -vf fps=60 \
+  -c:v libx264 \
+  -pix_fmt yuv420p \
+  -movflags +faststart \
+  "$ARTIFACT_DIR/combo-halo-apex-motion.mp4" >/dev/null 2>&1
+
+ffmpeg -y \
+  -ss 1.12 \
+  -t 1.02 \
+  -i "$ARTIFACT_DIR/combo-halo-apex-motion.mp4" \
+  -vf "fps=12,scale=302:-1,tile=6x3:padding=6:margin=6" \
+  -frames:v 1 \
+  -update 1 \
+  "$ARTIFACT_DIR/combo-halo-apex-burst-contact-sheet.png" >/dev/null 2>&1
+
+ffmpeg -y \
+  -i "$ARTIFACT_DIR/combo-halo-burst-contact-sheet.png" \
+  -i "$ARTIFACT_DIR/combo-halo-apex-burst-contact-sheet.png" \
+  -filter_complex "[0:v][1:v]vstack=inputs=2[out]" \
+  -map "[out]" \
+  -frames:v 1 \
+  -update 1 \
+  "$ARTIFACT_DIR/combo-halo-orbit-motion-comparison.png" >/dev/null 2>&1
+
+ffmpeg -y \
+  -i "$ARTIFACT_DIR/combo-halo-standard-hero-38.png" \
+  -i "$ARTIFACT_DIR/combo-halo-overdrive-hero-38.png" \
+  -i "$ARTIFACT_DIR/combo-halo-apex-hero-38.png" \
+  -filter_complex \
+  "[0:v]scale=302:-1[standard];[1:v]scale=302:-1[overdrive];[2:v]scale=302:-1[apex];[standard][overdrive][apex]hstack=inputs=3[out]" \
+  -map "[out]" \
+  -frames:v 1 \
+  -update 1 \
+  "$ARTIFACT_DIR/combo-halo-tier-contact-sheet.png" >/dev/null 2>&1
 
 ffmpeg -y \
   -i "$ARTIFACT_DIR/combo-halo-effect-top-38.png" \

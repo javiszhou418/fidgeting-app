@@ -15,6 +15,140 @@ namespace FidgetingApp.Tests.Editor
 {
     public sealed class SpinnerEnvironmentTests
     {
+        [SetUp]
+        public void ResetEnvironmentThemePreference()
+        {
+            PlayerPrefs.DeleteKey(SpinnerEnvironmentThemeCatalog.PreferenceKey);
+        }
+
+        [TearDown]
+        public void ClearEnvironmentThemePreference()
+        {
+            PlayerPrefs.DeleteKey(SpinnerEnvironmentThemeCatalog.PreferenceKey);
+        }
+
+        [Test]
+        public void LibrarySwipeSessionGateCommitsCancelsAndRejectsStaleEnds()
+        {
+            var gate = new LibrarySwipeSessionGate();
+
+            Assert.That(gate.Begin(1001), Is.True);
+            Assert.That(gate.Accepts(1001), Is.True);
+            Assert.That(gate.Commit(1001), Is.True);
+            Assert.That(
+                gate.End(1001),
+                Is.EqualTo(LibrarySwipeEndDisposition.Committed),
+                "A committed page must not spring back before its scene exit.");
+
+            Assert.That(gate.Begin(1002), Is.True);
+            Assert.That(
+                gate.End(1001),
+                Is.EqualTo(LibrarySwipeEndDisposition.Ignored),
+                "A stale End must not disturb the active swipe session.");
+            Assert.That(gate.Accepts(1002), Is.True);
+            Assert.That(
+                gate.End(1002),
+                Is.EqualTo(LibrarySwipeEndDisposition.Rebound),
+                "Only a current uncommitted edge or cancelled drag rebounds.");
+
+            Assert.That(gate.Begin(1001), Is.False);
+            Assert.That(gate.Accepts(1001), Is.False);
+        }
+
+        [Test]
+        public void EnvironmentThemeCatalogDefinesCanyonAndCyberpunkWithoutResampling()
+        {
+            IReadOnlyList<SpinnerEnvironmentThemeProfile> themes =
+                SpinnerEnvironmentThemeCatalog.Profiles;
+
+            Assert.That(themes.Count, Is.EqualTo(2));
+            Assert.That(themes[0].Id, Is.EqualTo(SpinnerEnvironmentThemeCatalog.CanyonId));
+            Assert.That(themes[0].DisplayName, Is.EqualTo("星岩峡谷"));
+            Assert.That(themes[0].HasForegroundLayers, Is.True);
+            Assert.That(themes[1].Id, Is.EqualTo(SpinnerEnvironmentThemeCatalog.CyberpunkId));
+            Assert.That(themes[1].DisplayName, Is.EqualTo("霓虹都市"));
+            Assert.That(themes[1].LayeredMidground, Is.True);
+            Assert.That(themes[1].DynamicStarfield, Is.True);
+            Assert.That(themes[1].HasForegroundLayers, Is.False);
+            Assert.That(
+                SpinnerEnvironmentThemeCatalog.NormalizeId("CYBERPUNK"),
+                Is.EqualTo(SpinnerEnvironmentThemeCatalog.CyberpunkId));
+            Assert.That(
+                SpinnerEnvironmentThemeCatalog.NormalizeId("unknown"),
+                Is.EqualTo(SpinnerEnvironmentThemeCatalog.CanyonId));
+
+            const string cyberAssetPath =
+                "Assets/Resources/EnvironmentBackgrounds/"
+                + "cyber-neon-parallax-depth-v13.png";
+            Assert.That(File.Exists(cyberAssetPath), Is.True);
+            Texture2D texture = Resources.Load<Texture2D>(
+                SpinnerEnvironmentThemeCatalog.CyberpunkBackgroundResourcePath);
+            Assert.That(texture, Is.Not.Null);
+            Assert.That(texture.width, Is.EqualTo(941));
+            Assert.That(texture.height, Is.EqualTo(1672));
+
+            TextureImporter importer = AssetImporter.GetAtPath(cyberAssetPath)
+                as TextureImporter;
+            Assert.That(importer, Is.Not.Null);
+            Assert.That(importer.sRGBTexture, Is.True);
+            Assert.That(importer.isReadable, Is.False);
+            Assert.That(importer.mipmapEnabled, Is.False);
+            Assert.That(importer.npotScale, Is.EqualTo(TextureImporterNPOTScale.None));
+            Assert.That(importer.wrapMode, Is.EqualTo(TextureWrapMode.Clamp));
+            TextureImporterPlatformSettings ios =
+                importer.GetPlatformTextureSettings("iPhone");
+            Assert.That(ios.overridden, Is.True);
+            Assert.That(ios.maxTextureSize, Is.EqualTo(4096));
+            Assert.That(ios.format, Is.EqualTo(TextureImporterFormat.ASTC_8x8));
+        }
+
+        [Test]
+        public void PresenterSwitchesThemesWithoutTouchingTheModelMechanism()
+        {
+            SpinnerEnvironmentProfile profile = SpinnerEnvironmentCatalog.Profiles[1];
+            EditorSceneManager.OpenScene(profile.ScenePath, OpenSceneMode.Single);
+            Rigidbody[] bodies = Object.FindObjectsByType<Rigidbody>();
+            Vector3[] angularVelocities = bodies
+                .Select(body => body.angularVelocity)
+                .ToArray();
+            SpinnerEnvironmentPresenter presenter =
+                SpinnerEnvironmentPresenter.Install(profile.ScenePath);
+
+            Assert.That(
+                presenter.ApplyTheme(SpinnerEnvironmentThemeCatalog.CyberpunkId),
+                Is.True);
+            Assert.That(
+                presenter.CurrentThemeId,
+                Is.EqualTo(SpinnerEnvironmentThemeCatalog.CyberpunkId));
+            Assert.That(
+                presenter.BackgroundTexture.name,
+                Is.EqualTo("cyber-neon-parallax-depth-v13"));
+            Assert.That(presenter.MidgroundRenderer.gameObject.activeSelf, Is.True);
+            Assert.That(presenter.DeepStarfieldRenderer.gameObject.activeSelf, Is.True);
+            Assert.That(presenter.NearStarfieldRenderer.gameObject.activeSelf, Is.True);
+            Assert.That(presenter.RightForegroundRenderer.gameObject.activeSelf, Is.False);
+            Assert.That(presenter.LeftForegroundRenderer.gameObject.activeSelf, Is.False);
+            Assert.That(presenter.ImageBasedLighting.GeneratedReflection, Is.Not.Null);
+
+            Assert.That(
+                presenter.ApplyTheme(SpinnerEnvironmentThemeCatalog.CanyonId),
+                Is.True);
+            Assert.That(
+                presenter.CurrentThemeId,
+                Is.EqualTo(SpinnerEnvironmentThemeCatalog.CanyonId));
+            Assert.That(presenter.MidgroundRenderer.gameObject.activeSelf, Is.False);
+            Assert.That(presenter.RightForegroundRenderer.gameObject.activeSelf, Is.True);
+            Assert.That(presenter.LeftForegroundRenderer.gameObject.activeSelf, Is.True);
+
+            for (int index = 0; index < bodies.Length; index++)
+            {
+                Assert.That(
+                    bodies[index].angularVelocity,
+                    Is.EqualTo(angularVelocities[index]),
+                    $"Theme switching must not inject motion into {bodies[index].name}.");
+            }
+        }
+
         [Test]
         public void CatalogMapsTheApprovedUnifiedCanyonBackgroundToAllProductScenes()
         {
@@ -67,7 +201,7 @@ namespace FidgetingApp.Tests.Editor
                 Assert.That(profile.LayeredParallax, Is.False);
                 Assert.That(profile.UsesBakedSupportSurface, Is.True);
                 Assert.That(profile.LibraryLightScale, Is.InRange(0.20f, 1.00f));
-                Assert.That(profile.LibraryReflectionScale, Is.InRange(0.30f, 1.00f));
+                Assert.That(profile.LibraryReflectionScale, Is.InRange(0.25f, 1.00f));
                 Assert.That(profile.StageScale, Is.InRange(1.30f, 1.45f));
                 Assert.That(profile.StageThicknessRatio, Is.InRange(0.06f, 0.13f));
 
@@ -178,6 +312,22 @@ namespace FidgetingApp.Tests.Editor
 
                 SpinnerEnvironmentPresenter presenter =
                     SpinnerEnvironmentPresenter.Install(profile.ScenePath);
+                bool softSpinnerLighting = SpinnerImageBasedLightingController
+                    .UsesSoftSpinnerLighting(profile.ModelId);
+                float softSpinnerLightTrim = SpinnerImageBasedLightingController
+                    .ResolveSoftSpinnerLightTrim(profile.ModelId);
+                float ambientScale = softSpinnerLighting
+                    ? SpinnerImageBasedLightingController.SoftAmbientScale
+                        * softSpinnerLightTrim
+                    : 1f;
+                float directScale = softSpinnerLighting
+                    ? SpinnerImageBasedLightingController.SoftDirectLightScale
+                        * softSpinnerLightTrim
+                    : 1f;
+                float reflectionScale = softSpinnerLighting
+                    ? SpinnerImageBasedLightingController
+                        .SoftReflectionIntensityScale * softSpinnerLightTrim
+                    : 1f;
 
                 Assert.That(presenter, Is.Not.Null, profile.ModelId);
                 Assert.That(presenter.BackgroundTexture, Is.Not.Null);
@@ -416,6 +566,8 @@ namespace FidgetingApp.Tests.Editor
                     "The slab must extend toward the viewer instead of reading as a centered midground pad.");
 
                 Assert.That(presenter.ImageBasedLighting, Is.Not.Null);
+                Assert.That(presenter.ImageBasedLighting.SoftSpinnerLightingActive,
+                    Is.EqualTo(softSpinnerLighting));
                 Assert.That(presenter.ImageBasedLighting.GeneratedReflection, Is.Not.Null);
                 Assert.That(
                     RenderSettings.customReflectionTexture,
@@ -472,16 +624,20 @@ namespace FidgetingApp.Tests.Editor
 
                 AssertColor(
                     RenderSettings.ambientSkyColor,
-                    presenter.ImageBasedLighting.CurrentPalette.Sky);
+                    presenter.ImageBasedLighting.CurrentPalette.Sky
+                        * ambientScale);
                 AssertColor(
                     RenderSettings.ambientEquatorColor,
-                    presenter.ImageBasedLighting.CurrentPalette.Equator);
+                    presenter.ImageBasedLighting.CurrentPalette.Equator
+                        * ambientScale);
                 AssertColor(
                     RenderSettings.ambientGroundColor,
-                    presenter.ImageBasedLighting.CurrentPalette.Ground);
+                    presenter.ImageBasedLighting.CurrentPalette.Ground
+                        * ambientScale);
                 Assert.That(
                     RenderSettings.reflectionIntensity,
                     Is.EqualTo(profile.ReflectionIntensity
+                        * reflectionScale
                         * profile.LibraryReflectionScale)
                         .Within(0.0001f));
 
@@ -494,6 +650,7 @@ namespace FidgetingApp.Tests.Editor
                     Assert.That(
                         actual.intensity,
                         Is.EqualTo(expected.Intensity
+                            * directScale
                             * profile.LibraryLightScale)
                             .Within(0.0001f));
                     Assert.That(actual.useColorTemperature, Is.False);
@@ -514,14 +671,18 @@ namespace FidgetingApp.Tests.Editor
                 Assert.That(presenter.GroundingStage.SupportRenderer.enabled, Is.False);
                 Assert.That(
                     RenderSettings.reflectionIntensity,
-                    Is.EqualTo(profile.ReflectionIntensity).Within(0.0001f));
+                    Is.EqualTo(profile.ReflectionIntensity
+                        * reflectionScale)
+                        .Within(0.0001f));
                 foreach (SpinnerEnvironmentLightPreset expected in profile.Lights)
                 {
                     Light restored = Object.FindObjectsByType<Light>()
                         .Single(light => light.name == expected.ObjectName);
                     Assert.That(
                         restored.intensity,
-                        Is.EqualTo(expected.Intensity).Within(0.0001f));
+                        Is.EqualTo(expected.Intensity
+                            * directScale)
+                            .Within(0.0001f));
                 }
                 presenter.SetLibraryPreviewActive(true, true);
                 Assert.That(presenter.GroundingStage.StageRenderer.enabled, Is.False);
@@ -529,6 +690,7 @@ namespace FidgetingApp.Tests.Editor
                 Assert.That(
                     RenderSettings.reflectionIntensity,
                     Is.EqualTo(profile.ReflectionIntensity
+                        * reflectionScale
                         * profile.LibraryReflectionScale)
                         .Within(0.0001f));
             }
@@ -565,6 +727,8 @@ namespace FidgetingApp.Tests.Editor
                 "Assets/Scripts/Product/EdcDeviceMotionController.cs");
             string nativeMotionSource = File.ReadAllText(
                 "Assets/Plugins/iOS/CodexIosDeviceMotion.mm");
+            string nativeOverlaySource = File.ReadAllText(
+                "Assets/Plugins/iOS/CodexSwiftUIOverlay.swift");
 
             StringAssert.Contains(
                 "environmentPresenter = SpinnerEnvironmentPresenter.Install(scenePath)",
@@ -608,8 +772,39 @@ namespace FidgetingApp.Tests.Editor
             StringAssert.Contains("EdcDeviceMotionController", coordinator);
             StringAssert.Contains("SceneManager.LoadSceneAsync", coordinator);
             StringAssert.DoesNotContain("SceneManager.LoadScene(buildIndex", coordinator);
-            StringAssert.DoesNotContain("BeginLibraryPageExit", coordinator);
-            StringAssert.DoesNotContain("BeginLibraryPageEntrance", coordinator);
+            StringAssert.Contains(
+                ".BeginLibraryPageExit(-pageDirection)",
+                coordinator,
+                "A left swipe to the next page must move the old model left.");
+            StringAssert.Contains(
+                ".BeginLibraryPageEntrance(\n"
+                + "                        pendingLibraryPageEntranceDirection)",
+                coordinator,
+                "The next model must enter from the right for a left swipe.");
+            StringAssert.Contains("SetLibrarySwipeProgressFromNativeUi", coordinator);
+            StringAssert.Contains("SetLibraryPageDragProgress(progress)", coordinator);
+            StringAssert.Contains("BeginLibrarySwipeFromNativeUi", coordinator);
+            StringAssert.Contains("CommitLibrarySwipeFromNativeUi", coordinator);
+            StringAssert.Contains("EndLibrarySwipeFromNativeUi", coordinator);
+            StringAssert.Contains("LibrarySwipeSessionGate", coordinator);
+            StringAssert.Contains("EndLibraryPageDrag()", coordinator);
+            StringAssert.Contains("SetLibraryPageDragProgress", parallax);
+            StringAssert.Contains(
+                "value.translation.width / width",
+                nativeOverlaySource,
+                "A leftward finger translation must drive the old model left.");
+            StringAssert.Contains(".highPriorityGesture(", nativeOverlaySource);
+            StringAssert.Contains("BeginLibrarySwipeFromNativeUi", nativeOverlaySource);
+            StringAssert.Contains("CommitLibrarySwipeFromNativeUi", nativeOverlaySource);
+            StringAssert.DoesNotContain(
+                "Give that bridge one frame to start the page transition",
+                nativeOverlaySource,
+                "The swipe must use an explicit commit/cancel handshake, not a timer.");
+            StringAssert.Contains(
+                ".accessibilityIdentifier(\"library-model-carousel\")",
+                nativeOverlaySource);
+            StringAssert.Contains("load.allowSceneActivation = false", coordinator);
+            StringAssert.Contains("LibraryPageExitLeadSeconds", coordinator);
             StringAssert.Contains("queuedModelId", coordinator);
             StringAssert.Contains("DeepStarLayerPixels = 2f", parallax);
             StringAssert.Contains("FarLayerPixels = 8f", parallax);
@@ -652,7 +847,30 @@ namespace FidgetingApp.Tests.Editor
             StringAssert.Contains("Vector3.Slerp", portraitCamera);
             StringAssert.Contains("Mathf.LerpAngle", orbitCamera);
             StringAssert.Contains("Vector3.Slerp", edcCamera);
-            StringAssert.Contains("DurationSeconds = 0.42f", presentationTransition);
+            StringAssert.Contains("DurationSeconds = 0.68f", presentationTransition);
+            StringAssert.Contains("ResolveDetailDepthScale", presentationTransition);
+            StringAssert.Contains("DetailBackgroundScale = 1.16f", presenter);
+            StringAssert.Contains("DetailMidgroundScale = 1.20f", presenter);
+            StringAssert.Contains("ApplyDetailDepthScale", presenter);
+            StringAssert.Contains("framingTransitionElapsed", presenter);
+            StringAssert.Contains(
+                "SetDetailEntranceProgressForPreview",
+                portraitCamera);
+            StringAssert.Contains(
+                "SetDetailEntranceProgressForPreview",
+                orbitCamera);
+            StringAssert.Contains(
+                "SetDetailEntranceProgressForPreview",
+                edcCamera);
+            StringAssert.Contains(
+                "detailEntranceDuration: TimeInterval = 0.68",
+                nativeOverlaySource);
+            StringAssert.Contains(
+                "detailControlsRevealDelay: TimeInterval = 0.48",
+                nativeOverlaySource);
+            StringAssert.Contains(
+                "hidePanel(forDetailEntrance: true)",
+                nativeOverlaySource);
             StringAssert.DoesNotContain(
                 "angularVelocity",
                 portraitCamera + orbitCamera + edcCamera + presentationTransition);
@@ -729,7 +947,10 @@ namespace FidgetingApp.Tests.Editor
                     camera,
                     target,
                     framing.DetailWidthFraction,
-                    framing.DetailHeightFraction);
+                    framing.DetailHeightFraction,
+                    environment.ModelId == ProductCatalog.MagneticFanCardModelId
+                        ? 0.60f
+                        : 0.88f);
 
                 setLibraryPreview(true);
                 AssertViewportBoundary(
@@ -737,7 +958,10 @@ namespace FidgetingApp.Tests.Editor
                     camera,
                     target,
                     framing.LibraryWidthFraction,
-                    framing.LibraryHeightFraction);
+                    framing.LibraryHeightFraction,
+                    environment.ModelId == ProductCatalog.MagneticFanCardModelId
+                        ? 0.60f
+                        : 0.88f);
             }
         }
 
@@ -793,6 +1017,87 @@ namespace FidgetingApp.Tests.Editor
         }
 
         [Test]
+        public void SoftLightingPolicy_ReducesEnergyAndCapsReflectionWithoutHueShift()
+        {
+            Assert.That(SpinnerImageBasedLightingController.UsesSoftSpinnerLighting(
+                ProductCatalog.PointedThreeBladeModelId), Is.True);
+            Assert.That(SpinnerImageBasedLightingController.UsesSoftSpinnerLighting(
+                ProductCatalog.MetalThreeBladeModelId), Is.True);
+            Assert.That(SpinnerImageBasedLightingController.UsesSoftSpinnerLighting(
+                ProductCatalog.GoldFourWingModelId), Is.True);
+            Assert.That(SpinnerImageBasedLightingController.UsesSoftSpinnerLighting(
+                ProductCatalog.GraphiteTwoLobeModelId), Is.True);
+            Assert.That(SpinnerImageBasedLightingController.UsesSoftSpinnerLighting(
+                ProductCatalog.MagneticSlideTileModelId), Is.False);
+            Assert.That(SpinnerImageBasedLightingController.UsesSoftSpinnerLighting(
+                ProductCatalog.MagneticFanCardModelId), Is.False);
+            Assert.That(SpinnerImageBasedLightingController.SoftAmbientScale,
+                Is.InRange(0.35f, 0.5f));
+            Assert.That(SpinnerImageBasedLightingController.SoftDirectLightScale,
+                Is.InRange(0.3f, 0.45f));
+            Assert.That(
+                SpinnerImageBasedLightingController.SoftReflectionIntensityScale,
+                Is.InRange(0.3f, 0.45f));
+            Assert.That(
+                SpinnerImageBasedLightingController.SoftViewHighlightScale,
+                Is.LessThan(SpinnerImageBasedLightingController
+                    .SoftDirectLightScale));
+            Assert.That(
+                SpinnerImageBasedLightingController.SoftEnvironmentGlowScale,
+                Is.InRange(0.25f, 0.45f));
+            Assert.That(
+                SpinnerImageBasedLightingController.ResolveSoftSpinnerLightTrim(
+                    ProductCatalog.PointedThreeBladeModelId),
+                Is.LessThan(SpinnerImageBasedLightingController
+                    .ResolveSoftSpinnerLightTrim(
+                        ProductCatalog.MetalThreeBladeModelId)));
+            Assert.That(
+                SpinnerImageBasedLightingController.ResolveSoftSpinnerLightTrim(
+                    ProductCatalog.MetalThreeBladeModelId),
+                Is.LessThan(SpinnerImageBasedLightingController
+                    .ResolveSoftSpinnerLightTrim(
+                        ProductCatalog.GoldFourWingModelId)));
+            Assert.That(
+                SpinnerImageBasedLightingController.ResolveSoftSpinnerLightTrim(
+                    ProductCatalog.GraphiteTwoLobeModelId),
+                Is.EqualTo(1f));
+            Assert.That(
+                SpinnerImageBasedLightingController.ResolveSoftSpinnerLightTrim(
+                    ProductCatalog.MagneticFanCardModelId),
+                Is.EqualTo(1f));
+            Assert.That(
+                SpinnerImageBasedLightingController.SoftBrightMetalAlbedoScale,
+                Is.InRange(0.6f, 0.75f));
+            Assert.That(
+                SpinnerImageBasedLightingController.SoftBrightMetalSmoothnessCap,
+                Is.InRange(0.6f, 0.75f));
+
+            Color brightMetal = new Color(0.80f, 0.40f, 0.20f, 0.65f);
+            Color softenedMetal = SpinnerImageBasedLightingController
+                .ResolveSoftMaterialColor(brightMetal);
+            Assert.That(softenedMetal.r, Is.LessThan(brightMetal.r));
+            Assert.That(softenedMetal.g / softenedMetal.r,
+                Is.EqualTo(brightMetal.g / brightMetal.r).Within(0.0001f));
+            Assert.That(softenedMetal.b / softenedMetal.r,
+                Is.EqualTo(brightMetal.b / brightMetal.r).Within(0.0001f));
+            Assert.That(softenedMetal.a, Is.EqualTo(brightMetal.a));
+
+            Color source = new Color(3f, 1.5f, 0.75f, 0.2f);
+            Color limited = SpinnerImageBasedLightingController
+                .LimitReflectionPeak(
+                    source,
+                    SpinnerImageBasedLightingController.SoftReflectionPeak);
+            Assert.That(limited.maxColorComponent,
+                Is.EqualTo(SpinnerImageBasedLightingController
+                    .SoftReflectionPeak).Within(0.0001f));
+            Assert.That(limited.g / limited.r,
+                Is.EqualTo(source.g / source.r).Within(0.0001f));
+            Assert.That(limited.b / limited.r,
+                Is.EqualTo(source.b / source.r).Within(0.0001f));
+            Assert.That(limited.a, Is.EqualTo(1f));
+        }
+
+        [Test]
         public void ParallaxMathUsesDeadZoneExponentialSmoothingAndPixelAccurateProjection()
         {
             Assert.That(
@@ -806,6 +1111,15 @@ namespace FidgetingApp.Tests.Editor
                 SpinnerPresentationTransition.ResolveProgress(
                     SpinnerPresentationTransition.DurationSeconds),
                 Is.EqualTo(1f));
+            Assert.That(
+                SpinnerPresentationTransition.ResolveDetailDepthScale(1f, 1.10f),
+                Is.EqualTo(1f).Within(0.0001f));
+            Assert.That(
+                SpinnerPresentationTransition.ResolveDetailDepthScale(0.5f, 1.10f),
+                Is.EqualTo(1.05f).Within(0.0001f));
+            Assert.That(
+                SpinnerPresentationTransition.ResolveDetailDepthScale(0f, 1.10f),
+                Is.EqualTo(1.10f).Within(0.0001f));
 
             Assert.That(
                 SceneParallaxInput.NormalizePointer(
@@ -862,6 +1176,25 @@ namespace FidgetingApp.Tests.Editor
                     16f).x,
                 Is.EqualTo(-fartherOrbit.x).Within(0.0001f));
 
+            Quaternion justBeforePole =
+                DeviceMotionOrbitMapping.ResolveStableLookRotation(
+                    Vector3.back,
+                    Quaternion.Euler(89.9f, 0f, 0f));
+            Quaternion justAfterPole =
+                DeviceMotionOrbitMapping.ResolveStableLookRotation(
+                    Vector3.back,
+                    Quaternion.Euler(90.1f, 0f, 0f));
+            Assert.That(
+                Quaternion.Angle(justBeforePole, justAfterPole),
+                Is.LessThan(0.25f),
+                "Crossing the top-down camera pole must remain continuous.");
+            Assert.That(
+                Vector3.Dot(
+                    justBeforePole * Vector3.up,
+                    justAfterPole * Vector3.up),
+                Is.GreaterThan(0.999f),
+                "Camera up must not switch hemispheres at the motion threshold.");
+
             float hoverPeakTime = 1f
                 / (SpinnerSceneParallaxController.LibraryHoverCyclesPerSecond * 4f);
             Assert.That(
@@ -903,6 +1236,21 @@ namespace FidgetingApp.Tests.Editor
                     900f),
                 Is.EqualTo(-972f).Within(0.0001f),
                 "A logical right entrance needs negative perspective projection pixels.");
+            Assert.That(
+                FidgetAppCoordinator.ResolveLibraryPageDirection(
+                    ProductCatalog.PointedThreeBladeModelId,
+                    ProductCatalog.MetalThreeBladeModelId),
+                Is.EqualTo(1f));
+            Assert.That(
+                FidgetAppCoordinator.ResolveLibraryPageDirection(
+                    ProductCatalog.GraphiteTwoLobeModelId,
+                    ProductCatalog.GoldFourWingModelId),
+                Is.EqualTo(-1f));
+            Assert.That(
+                FidgetAppCoordinator.ResolveLibraryPageDirection(
+                    ProductCatalog.MagneticSlideTileModelId,
+                    ProductCatalog.MagneticSlideTileModelId),
+                Is.EqualTo(0f));
 
             Assert.That(
                 SpinnerEnvironmentPresenter.ResolveLocalLayerPixels(
@@ -951,7 +1299,8 @@ namespace FidgetingApp.Tests.Editor
             Camera camera,
             Transform target,
             float widthFraction,
-            float heightFraction)
+            float heightFraction,
+            float minimumFillRatio)
         {
             Assert.That(camera, Is.Not.Null, label);
             Assert.That(target, Is.Not.Null, label);
@@ -974,8 +1323,8 @@ namespace FidgetingApp.Tests.Editor
                 Mathf.Max(
                     projected.x / widthFraction,
                     projected.y / heightFraction),
-                Is.InRange(0.88f, 1.03f),
-                label + " should fill at least one boundary instead of looking tiny.");
+                Is.InRange(minimumFillRatio, 1.03f),
+                label + " should fill its authored live or full-sweep framing boundary.");
         }
 
         private static void AssertBackgroundCoversViewport(

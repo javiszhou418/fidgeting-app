@@ -178,11 +178,15 @@ namespace ThreeBladeEDC.Tests.Editor
             Transform topCap = Require(hubStatic, "TopCap");
             Transform bottomCap = Require(hubStatic, "BottomCap");
             Transform rotorCore = Require(rotor, "RotorCore");
-            Transform rotorCoreTopTrim = Require(rotor, "RotorCoreTopTrim");
             Transform outerRace = Require(rotor, "BearingOuterRace");
             Transform frame = Require(rotor, "ThreeBladeFrame");
             Transform insets = Require(rotor, "ThreeBladeInsets");
             Transform cage = Require(bearingVisual, "BallCage");
+
+            Assert.That(
+                rotor.Find("RotorCoreTopTrim"),
+                Is.Null,
+                "The removed decorative axis ring must not return as a physical requirement.");
 
             Assert.That(hubStatic.parent, Is.EqualTo(_root));
             Assert.That(rotor.parent, Is.EqualTo(_root));
@@ -205,11 +209,27 @@ namespace ThreeBladeEDC.Tests.Editor
             }
 
             Assert.That(rotorCore.IsChildOf(rotor), Is.True);
-            Assert.That(rotorCoreTopTrim.IsChildOf(rotor), Is.True);
             Assert.That(outerRace.IsChildOf(rotor), Is.True);
             Assert.That(frame.IsChildOf(rotor), Is.True);
             Assert.That(insets.IsChildOf(rotor), Is.True);
             Assert.That(cage.IsChildOf(rotor), Is.False);
+
+            Assert.That(
+                rotorCore.GetComponent<MeshFilter>()?.sharedMesh,
+                Is.Not.Null,
+                "RotorCore must remain the real rotating carrier after decorative trim removal.");
+            Assert.That(
+                rotorCore.GetComponent<MeshRenderer>()?.enabled,
+                Is.True,
+                "The real RotorCore carrier must remain visible and owned by RotorDynamic.");
+            Assert.That(
+                outerRace.GetComponent<MeshFilter>()?.sharedMesh,
+                Is.Not.Null,
+                "BearingOuterRace must remain real rotating bearing geometry.");
+            Assert.That(
+                outerRace.GetComponent<MeshRenderer>()?.enabled,
+                Is.True,
+                "BearingOuterRace must remain visible and owned by RotorDynamic.");
 
             Rigidbody body = rotor.GetComponent<Rigidbody>();
             RotorRigidbodyController controller =
@@ -217,6 +237,27 @@ namespace ThreeBladeEDC.Tests.Editor
             MobileGestureController input =
                 _root.GetComponent<MobileGestureController>();
             Assert.That(body, Is.Not.Null, "RotorDynamic needs a Rigidbody.");
+            Rigidbody hubBody = hubStatic.GetComponent<Rigidbody>();
+            Assert.That(
+                hubBody,
+                Is.Not.Null,
+                "HubStatic needs its own kinematic anchor Rigidbody.");
+            Assert.That(
+                hubBody,
+                Is.Not.SameAs(body),
+                "HubStatic and RotorDynamic must retain distinct Rigidbody ownership.");
+            Assert.That(
+                hubBody.isKinematic,
+                Is.True,
+                "The fixed hub body must remain kinematic.");
+            Assert.That(
+                body.isKinematic,
+                Is.False,
+                "The real rotating carrier must remain the non-kinematic body.");
+            Assert.That(
+                bearingVisual.GetComponent<Rigidbody>(),
+                Is.Null,
+                "BearingVisual must remain a driven visual, not an independent physics body.");
             Assert.That(
                 controller,
                 Is.Not.Null,
@@ -368,7 +409,11 @@ namespace ThreeBladeEDC.Tests.Editor
                 gestureSettings,
                 "screenSpeedForFullSpin",
                 global::ThreeBladeEDC.FidgetSpinnerMotion.DefaultScreenSpeedForFullSpin);
-            AssertSerializedFloat(gestureSettings, "fallbackTouchRadius", 0.48f);
+            AssertSerializedFloat(
+                gestureSettings,
+                "fallbackTouchRadius",
+                global::ThreeBladeEDC.FidgetSpinnerMotion
+                    .DefaultFallbackTouchRadiusFraction);
             AssertSerializedFloat(gestureSettings, "reversalConfirmationPixels", 18f);
             SerializedProperty flipOnRelease =
                 gestureSettings.FindProperty("flipOnRelease");
@@ -423,13 +468,13 @@ namespace ThreeBladeEDC.Tests.Editor
         {
             MetalRatchetDetentAudio[] renderers =
                 _root.GetComponentsInChildren<MetalRatchetDetentAudio>(true);
-            AudioSource[] audioSources =
-                _root.GetComponentsInChildren<AudioSource>(true);
             AudioListener[] listeners =
                 _root.GetComponentsInChildren<AudioListener>(true);
 
             Assert.That(renderers, Has.Length.EqualTo(1));
             MetalRatchetDetentAudio renderer = renderers[0];
+            AudioSource[] ratchetSources =
+                renderer.GetComponentsInChildren<AudioSource>(true);
             Assert.That(renderer.Rotor, Is.SameAs(
                 _root.GetComponentInChildren<RotorRigidbodyController>(true)));
             Assert.That(renderer.ClickVariants, Has.Length.EqualTo(5));
@@ -464,7 +509,10 @@ namespace ThreeBladeEDC.Tests.Editor
             Assert.That(
                 renderer.Voices.Length,
                 Is.GreaterThanOrEqualTo(RatchetAudioPhysicsModel.MinimumVoiceCount));
-            Assert.That(audioSources, Has.Length.EqualTo(renderer.Voices.Length));
+            Assert.That(
+                ratchetSources,
+                Has.Length.EqualTo(renderer.Voices.Length),
+                "The independent looping wind source must not be counted as a ratchet voice.");
             Assert.That(listeners, Has.Length.EqualTo(1));
             foreach (AudioSource source in renderer.Voices)
             {

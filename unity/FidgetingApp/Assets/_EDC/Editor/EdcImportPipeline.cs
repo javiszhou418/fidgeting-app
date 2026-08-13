@@ -41,6 +41,14 @@ namespace FidgetingApp.EDC.EditorTools
             "Assets/_EDC/Reports/height-profile.csv";
 
         public const float TargetLongestDimensionMeters = 0.08f;
+        public const float SilverRoughnessInfluence = 0.58f;
+        public const float SilverNormalScale = 0.28f;
+        public const float SilverGlossMapScale = 0.68f;
+        public const float SilverRealtimeSpecular = 0f;
+        public const float SilverTintRed = 0.66f;
+        public const float SilverTintGreen = 0.70f;
+        public const float SilverTintBlue = 0.72f;
+        public const int PolishedTextureCompressionQuality = 100;
         private const float PositionWeldToleranceMeters = 0.000001f;
         private const int PreviewWidth = 1200;
         private const int PreviewHeight = 800;
@@ -94,6 +102,27 @@ namespace FidgetingApp.EDC.EditorTools
             AssetDatabase.ImportAsset(ImportReportPath, ImportAssetOptions.ForceSynchronousImport);
             AssetDatabase.SaveAssets();
             Debug.Log(report);
+        }
+
+        [MenuItem("Tools/Codex/EDC/Apply Silver Metal Material")]
+        public static void ApplySilverMetalMaterial()
+        {
+            RequireAsset(BaseMapPath);
+            RequireAsset(EmissionMapPath);
+            RequireAsset(MetallicMapPath);
+            RequireAsset(NormalMapPath);
+            RequireAsset(RoughnessMapPath);
+            ConfigureSourceTextures();
+            CreatePackedMetallicSmoothnessMap();
+            Material material = CreateOrUpdateUrpMaterial();
+            AssetDatabase.SaveAssets();
+            AssetDatabase.Refresh();
+            Debug.Log(
+                $"[EDCSilverMetal] material={material.name} "
+                + $"roughnessInfluence={SilverRoughnessInfluence:F2} "
+                + $"normalScale={SilverNormalScale:F2} "
+                + $"glossScale={SilverGlossMapScale:F2} "
+                + $"textureQuality={PolishedTextureCompressionQuality}");
         }
 
         [MenuItem("Tools/Codex/EDC/2 Analyze Connected Components")]
@@ -827,6 +856,11 @@ namespace FidgetingApp.EDC.EditorTools
             importer.isReadable = readable;
             importer.mipmapEnabled = true;
             importer.wrapMode = TextureWrapMode.Repeat;
+            importer.filterMode = FilterMode.Trilinear;
+            importer.anisoLevel = 4;
+            importer.mipMapBias = -0.25f;
+            importer.textureCompression = TextureImporterCompression.CompressedHQ;
+            importer.compressionQuality = PolishedTextureCompressionQuality;
             importer.SaveAndReimport();
         }
 
@@ -850,7 +884,12 @@ namespace FidgetingApp.EDC.EditorTools
             for (int index = 0; index < packedPixels.Length; index++)
             {
                 byte metallicValue = metallicPixels[index].r;
-                byte smoothnessValue = (byte)(255 - roughnessPixels[index].r);
+                byte smoothnessValue = (byte)Mathf.Clamp(
+                    Mathf.RoundToInt(
+                        255f
+                        - roughnessPixels[index].r * SilverRoughnessInfluence),
+                    0,
+                    255);
                 packedPixels[index] = new Color32(
                     metallicValue,
                     metallicValue,
@@ -882,6 +921,11 @@ namespace FidgetingApp.EDC.EditorTools
             importer.isReadable = false;
             importer.mipmapEnabled = true;
             importer.wrapMode = TextureWrapMode.Repeat;
+            importer.filterMode = FilterMode.Trilinear;
+            importer.anisoLevel = 4;
+            importer.mipMapBias = -0.25f;
+            importer.textureCompression = TextureImporterCompression.CompressedHQ;
+            importer.compressionQuality = PolishedTextureCompressionQuality;
             importer.SaveAndReimport();
 
             SetTextureReadability(MetallicMapPath, false);
@@ -907,20 +951,29 @@ namespace FidgetingApp.EDC.EditorTools
                 material.shader = shader;
             }
 
-            material.SetColor("_BaseColor", Color.white);
+            material.SetColor(
+                "_BaseColor",
+                new Color(SilverTintRed, SilverTintGreen, SilverTintBlue, 1f));
             material.SetTexture("_BaseMap", LoadTexture(BaseMapPath));
             material.SetFloat("_Metallic", 1f);
             material.SetFloat("_Smoothness", 1f);
+            material.SetFloat("_GlossMapScale", SilverGlossMapScale);
             material.SetFloat("_SmoothnessTextureChannel", 0f);
             material.SetTexture("_MetallicGlossMap", LoadTexture(PackedMaskPath));
             material.EnableKeyword("_METALLICSPECGLOSSMAP");
-            material.SetFloat("_BumpScale", 1f);
+            material.SetFloat("_BumpScale", SilverNormalScale);
             material.SetTexture("_BumpMap", LoadTexture(NormalMapPath));
             material.EnableKeyword("_NORMALMAP");
-            material.SetColor("_EmissionColor", Color.white);
-            material.SetTexture("_EmissionMap", LoadTexture(EmissionMapPath));
-            material.EnableKeyword("_EMISSION");
-            material.globalIlluminationFlags = MaterialGlobalIlluminationFlags.BakedEmissive;
+            material.SetFloat("_EnvironmentReflections", 1f);
+            material.SetFloat("_SpecularHighlights", SilverRealtimeSpecular);
+            material.EnableKeyword("_SPECULARHIGHLIGHTS_OFF");
+            // This is a passive physical product. The source emission texture
+            // made the silver strips glow independently of exposure and clip
+            // to white at oblique angles, so it must not participate at runtime.
+            material.SetColor("_EmissionColor", Color.black);
+            material.SetTexture("_EmissionMap", null);
+            material.DisableKeyword("_EMISSION");
+            material.globalIlluminationFlags = MaterialGlobalIlluminationFlags.None;
             EditorUtility.SetDirty(material);
             AssetDatabase.SaveAssetIfDirty(material);
             return material;

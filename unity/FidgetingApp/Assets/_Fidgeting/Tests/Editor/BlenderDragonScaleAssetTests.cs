@@ -137,6 +137,14 @@ namespace ThreeBladeEDC.Tests.Editor
                 AssertNamedTransform(transforms, "BottomCap_Root");
                 AssertNamedTransform(transforms, "FingerCap_Top");
                 AssertNamedTransform(transforms, "FingerCap_Bottom");
+                Assert.That(
+                    transforms.Any(transform => transform.name == "RotorCrownTrim"),
+                    Is.False,
+                    "The rejected decorative rotor crown ring must not return.");
+                Assert.That(
+                    transforms.Any(transform => transform.name.Contains("AccentLine")),
+                    Is.False,
+                    "The rejected decorative finger-cap ring must not return.");
 
                 Assert.That(
                     transforms.Count(transform => transform.name.StartsWith(
@@ -192,7 +200,6 @@ namespace ThreeBladeEDC.Tests.Editor
                 Transform[] transforms = instance.GetComponentsInChildren<Transform>(true);
                 AssertSilhouetteSamples(transforms, "FingerCap_Top", 120);
                 AssertSilhouetteSamples(transforms, "FingerCapTop_BrushedFace", 120);
-                AssertSilhouetteSamples(transforms, "RotorCrownTrim", 120);
                 AssertSilhouetteSamples(transforms, "BearingOuterRace", 66);
                 AssertSilhouetteSamples(transforms, "TopWasher", 66);
             }

@@ -784,15 +784,25 @@ namespace FidgetingApp.Product
         }
     }
 
+    public enum ProductMotionTelemetryKind
+    {
+        Rotary = 0,
+        LinearPush = 1,
+        FanCard = 2
+    }
+
     public static class ProductMotionTelemetryNativeBridge
     {
 #if UNITY_IOS && !UNITY_EDITOR
         [DllImport("__Internal")]
         private static extern void CodexMotionTelemetryReceiveState(
             int available,
+            int kind,
             float normalizedSpeed,
-            float angularSpeedRadians,
-            int speedBand);
+            float motionRate,
+            int speedBand,
+            float normalizedIntensity,
+            float normalizedFrequency);
 #endif
 
         public static void Publish(
@@ -800,15 +810,34 @@ namespace FidgetingApp.Product
             float angularSpeedRadians,
             SpinnerSpeedBand speedBand)
         {
+            Publish(
+                available,
+                ProductMotionTelemetryKind.Rotary,
+                SpinnerComboRules.NormalizeSpeed(angularSpeedRadians),
+                Mathf.Abs(angularSpeedRadians),
+                speedBand,
+                0f,
+                0f);
+        }
+
+        public static void Publish(
+            bool available,
+            ProductMotionTelemetryKind kind,
+            float normalizedSpeed,
+            float motionRate,
+            SpinnerSpeedBand speedBand,
+            float normalizedIntensity,
+            float normalizedFrequency)
+        {
 #if UNITY_IOS && !UNITY_EDITOR
-            float liveAngularSpeed = available
-                ? Mathf.Abs(angularSpeedRadians)
-                : 0f;
             CodexMotionTelemetryReceiveState(
                 available ? 1 : 0,
-                SpinnerComboRules.NormalizeSpeed(liveAngularSpeed),
-                liveAngularSpeed,
-                (int)(available ? speedBand : SpinnerSpeedBand.Calm));
+                (int)kind,
+                available ? Mathf.Clamp01(normalizedSpeed) : 0f,
+                available ? Mathf.Max(0f, motionRate) : 0f,
+                (int)(available ? speedBand : SpinnerSpeedBand.Calm),
+                available ? Mathf.Clamp01(normalizedIntensity) : 0f,
+                available ? Mathf.Clamp01(normalizedFrequency) : 0f);
 #endif
         }
 

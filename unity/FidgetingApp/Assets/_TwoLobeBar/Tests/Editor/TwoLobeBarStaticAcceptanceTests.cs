@@ -1,6 +1,7 @@
 using System;
 using System.IO;
 using System.Linq;
+using FidgetingApp.Product;
 using FidgetingApp.TwoLobeBar.Geometry;
 using NUnit.Framework;
 using ThreeBladeEDC.Interaction;
@@ -66,6 +67,17 @@ namespace FidgetingApp.TwoLobeBar.Tests.Editor
             Assert.That(
                 TwoLobeBarSpecifications.Smoothness,
                 Is.EqualTo(0.24f).Within(0.0001f));
+            Assert.That(
+                ProductFramingCatalog.BarToCircularPhysicalScale,
+                Is.EqualTo(50f / 85f).Within(0.0001f));
+            Assert.That(
+                ProductFramingCatalog.BarDetailWidthFraction,
+                Is.EqualTo(ProductFramingCatalog.CircularDetailFraction
+                    * (50f / 85f)).Within(0.0001f));
+            Assert.That(
+                ProductFramingCatalog.BarLibraryWidthFraction,
+                Is.EqualTo(ProductFramingCatalog.CircularLibraryFraction
+                    * (50f / 85f)).Within(0.0001f));
         }
 
         [Test]

@@ -1,0 +1,31 @@
+{
+  "schemaVersion": 1,
+  "status": "visual-prototype",
+  "generator": "cli-anything-blender 1.0.0",
+  "sourceScene": "TrinityCase.blend-cli.json",
+  "blendFile": "TrinityCaseCLI.blend",
+  "sceneCounts": {
+    "objects": 43,
+    "materials": 7,
+    "cameras": 1,
+    "lights": 3
+  },
+  "assumedDimensionsMeters": {
+    "frontPlateWidth": 0.188,
+    "frontPlateHeight": 0.24,
+    "frontPlateThickness": 0.006,
+    "rearShellWidth": 0.22,
+    "rearShellHeight": 0.29,
+    "spinnerEnvelopeDiameter": 0.11
+  },
+  "previewArtifacts": [
+    "../../Artifacts/CliAnythingTrinityCasePreview/hero.png",
+    "../../Artifacts/CliAnythingTrinityCasePreview/front-verification.png",
+    "../../Artifacts/CliAnythingTrinityCasePreview/left-oblique-verification.png"
+  ],
+  "limitations": [
+    "The three-lobe rotor is a primitive-based visual approximation.",
+    "Reference logos and concentric engraved artwork are not included.",
+    "The prototype is not integrated into the shipping Unity product."
+  ]
+}

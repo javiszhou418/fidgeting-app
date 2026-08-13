@@ -39,7 +39,9 @@ namespace ThreeBladeEDC.Interaction
             global::ThreeBladeEDC.FidgetSpinnerMotion.DefaultScreenSpeedForFullSpin;
         [SerializeField, Min(0f)] private float fallbackDegreesPerPixel = 0.55f;
         [SerializeField, Min(0.01f)] private float maxRayDistance = 5f;
-        [SerializeField, Range(0.2f, 0.5f)] private float fallbackTouchRadius = 0.48f;
+        [SerializeField, Range(0.2f, 0.5f)] private float fallbackTouchRadius =
+            global::ThreeBladeEDC.FidgetSpinnerMotion
+                .DefaultFallbackTouchRadiusFraction;
         [SerializeField, Min(0.05f)] private float reversalStopDuration = 0.3f;
         [SerializeField, Min(0f)] private float reversalMinimumSpeed = 1.5f;
         [SerializeField, Min(0f)] private float reversalConfirmationPixels = 18f;
@@ -170,8 +172,14 @@ namespace ThreeBladeEDC.Interaction
             if (rotor != null)
             {
                 Vector3 center = camera.WorldToScreenPoint(rotor.PivotWorld);
-                float radius = Mathf.Min(Screen.width, Screen.height) * fallbackTouchRadius;
-                if (center.z > 0f && Vector2.Distance(screenPosition, center) <= radius)
+                if (center.z > 0f
+                    && global::ThreeBladeEDC.FidgetSpinnerMotion
+                        .IsWithinFallbackSpinTouchRegion(
+                            screenPosition,
+                            new Vector2(center.x, center.y),
+                            Screen.width,
+                            Screen.height,
+                            fallbackTouchRadius))
                 {
                     return MobileGestureMode.Spin;
                 }

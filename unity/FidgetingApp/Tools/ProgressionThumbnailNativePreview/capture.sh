@@ -3,7 +3,7 @@ set -euo pipefail
 
 TOOL_DIR="${0:A:h}"
 PROJECT_ROOT="${TOOL_DIR:h:h}"
-ARTIFACT_DIR="$PROJECT_ROOT/Artifacts/ProgressionThumbnailRecoveryV24"
+ARTIFACT_DIR="${1:-$PROJECT_ROOT/Artifacts/ProgressionThumbnailRecoveryV24}"
 BUILD_ROOT="$(mktemp -d /tmp/fidget-progression-thumbnail-preview.XXXXXX)"
 MODULE_CACHE="$BUILD_ROOT/ModuleCache"
 APP_DIR="$BUILD_ROOT/ProgressionThumbnailNativePreview.app"
@@ -48,13 +48,22 @@ xcrun simctl bootstatus "$DEVICE_ID" -b
 xcrun simctl uninstall "$DEVICE_ID" "$BUNDLE_ID" 2>/dev/null || true
 xcrun simctl install "$DEVICE_ID" "$APP_DIR"
 
-for MODE in hud hud-off sheet; do
+for MODE in top hud hud-off sheet; do
   xcrun simctl launch --terminate-running-process \
     "$DEVICE_ID" "$BUNDLE_ID" --mode="$MODE" >/dev/null
   sleep 4
   xcrun simctl io "$DEVICE_ID" screenshot \
     "$ARTIFACT_DIR/progression-thumbnail-$MODE.png" >/dev/null
 done
+
+ffmpeg -y \
+  -i "$ARTIFACT_DIR/progression-thumbnail-top.png" \
+  -i "$ARTIFACT_DIR/progression-thumbnail-hud.png" \
+  -filter_complex \
+  "[0:v]crop=iw:480:0:0[top];[1:v]crop=iw:480:0:ih-600[bottom];[top][bottom]vstack=inputs=2" \
+  -frames:v 1 \
+  -update 1 \
+  "$ARTIFACT_DIR/progression-endpoint-top-bottom-contact-sheet.png" >/dev/null 2>&1
 
 xcrun simctl launch --terminate-running-process \
   "$DEVICE_ID" "$BUNDLE_ID" --mode=hud >/dev/null

@@ -162,6 +162,7 @@ h2 {
 
 .sound-stage,
 .effect-picker,
+.wind-lab,
 .material-library,
 .control-intro,
 .control-section {
@@ -170,6 +171,273 @@ h2 {
   background: var(--panel);
   box-shadow: var(--shadow);
   backdrop-filter: blur(22px);
+}
+
+.wind-lab {
+  --wind-intensity: 0;
+  margin-bottom: 22px;
+  padding: clamp(20px, 2.8vw, 32px);
+  overflow: hidden;
+  background:
+    radial-gradient(circle at 21% 52%, rgba(133, 215, 206, calc(0.035 + var(--wind-intensity) * 0.08)), transparent 24rem),
+    linear-gradient(125deg, rgba(133, 215, 206, 0.045), transparent 42%),
+    var(--panel);
+}
+
+.wind-heading {
+  align-items: flex-start;
+}
+
+.wind-guide {
+  max-width: 780px;
+  margin: 10px 0 0;
+  color: var(--muted);
+  font-size: 0.78rem;
+  line-height: 1.65;
+}
+
+.wind-live-state {
+  flex: 0 0 auto;
+  padding: 8px 11px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  color: var(--accent);
+  background: rgba(133, 215, 206, 0.045);
+  font-size: 0.72rem;
+  font-variant-numeric: tabular-nums;
+}
+
+.wind-layout {
+  display: grid;
+  grid-template-columns: minmax(300px, 0.86fr) minmax(0, 1.5fr);
+  gap: clamp(24px, 4vw, 54px);
+  align-items: center;
+  margin-top: 24px;
+}
+
+.wind-stage {
+  position: relative;
+  display: grid;
+  min-height: 330px;
+  overflow: hidden;
+  place-items: center;
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  background:
+    radial-gradient(circle at center, rgba(133, 215, 206, 0.075), rgba(255, 255, 255, 0.012) 47%, transparent 70%),
+    rgba(5, 8, 10, 0.55);
+}
+
+.wind-rotor {
+  position: relative;
+  z-index: 2;
+  width: 158px;
+  height: 158px;
+  will-change: transform;
+}
+
+.rotor-blade {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 62px;
+  height: 30px;
+  margin-top: -15px;
+  border: 1px solid rgba(215, 240, 237, 0.32);
+  border-radius: 18px 7px 7px 18px;
+  background: linear-gradient(180deg, #667077, #262c31 47%, #111519 52%, #465057);
+  box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.16), 0 8px 20px rgba(0, 0, 0, 0.28);
+  transform-origin: 0 50%;
+}
+
+.rotor-blade::after {
+  position: absolute;
+  top: 50%;
+  right: 9px;
+  width: 11px;
+  height: 11px;
+  border: 2px solid rgba(8, 11, 13, 0.72);
+  border-radius: 50%;
+  background: #20262a;
+  box-shadow: 0 0 0 1px rgba(215, 240, 237, 0.15);
+  content: "";
+  transform: translateY(-50%);
+}
+
+.rotor-blade-a { transform: rotate(0deg) translateX(16px); }
+.rotor-blade-b { transform: rotate(120deg) translateX(16px); }
+.rotor-blade-c { transform: rotate(240deg) translateX(16px); }
+
+.rotor-hub {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 48px;
+  height: 48px;
+  border: 1px solid rgba(215, 240, 237, 0.34);
+  border-radius: 50%;
+  background: radial-gradient(circle at 38% 32%, #7f8b92, #2c3439 48%, #0d1114 75%);
+  box-shadow: inset 0 2px 3px rgba(255, 255, 255, 0.17), 0 8px 24px rgba(0, 0, 0, 0.38);
+  transform: translate(-50%, -50%);
+}
+
+.air-ring {
+  position: absolute;
+  border: 1px solid rgba(133, 215, 206, calc(0.05 + var(--wind-intensity) * 0.22));
+  border-radius: 50%;
+  opacity: calc(0.25 + var(--wind-intensity) * 0.75);
+  box-shadow: 0 0 calc(9px + var(--wind-intensity) * 26px) rgba(133, 215, 206, calc(var(--wind-intensity) * 0.13));
+  transform: scale(calc(0.94 + var(--wind-intensity) * 0.06));
+  transition: opacity 160ms linear, border-color 160ms linear, transform 160ms linear;
+}
+
+.air-ring-inner {
+  width: 214px;
+  height: 214px;
+}
+
+.air-ring-outer {
+  width: 278px;
+  height: 278px;
+  border-style: dashed;
+}
+
+.wind-readout {
+  position: absolute;
+  right: 15px;
+  bottom: 14px;
+  z-index: 3;
+  text-align: right;
+}
+
+.wind-readout strong,
+.wind-readout span {
+  display: block;
+}
+
+.wind-readout strong {
+  color: var(--text);
+  font-size: 1.4rem;
+  font-variant-numeric: tabular-nums;
+  font-weight: 600;
+}
+
+.wind-readout span {
+  margin-top: 3px;
+  color: var(--muted);
+  font-size: 0.63rem;
+}
+
+.wind-controls > .range-cues,
+.wind-parameter-grid .range-cues {
+  margin-bottom: 18px;
+}
+
+.wind-parameter-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0 22px;
+}
+
+.wind-material-control {
+  grid-column: 1 / -1;
+}
+
+.wind-material-tuning {
+  margin: 12px 0 18px;
+  padding: 14px;
+  border: 1px solid rgba(133, 215, 206, 0.16);
+  border-radius: 12px;
+  background: rgba(133, 215, 206, 0.035);
+}
+
+.wind-tuning-heading {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 13px;
+}
+
+.wind-tuning-heading strong {
+  color: var(--text);
+  font-size: 0.76rem;
+  font-weight: 600;
+}
+
+.wind-tuning-heading span,
+.wind-tone-summary {
+  color: var(--muted);
+  font-size: 0.64rem;
+}
+
+.wind-tuning-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0 20px;
+}
+
+.wind-scale-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 7px;
+  margin-top: 2px;
+}
+
+.wind-scale-button {
+  min-height: 31px;
+  padding: 6px 9px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  color: var(--muted);
+  background: rgba(255, 255, 255, 0.025);
+  font: inherit;
+  font-size: 0.62rem;
+  cursor: pointer;
+}
+
+.wind-scale-button:hover,
+.wind-scale-button[aria-pressed="true"] {
+  border-color: rgba(133, 215, 206, 0.48);
+  color: var(--accent);
+  background: rgba(133, 215, 206, 0.08);
+}
+
+.wind-tone-summary {
+  min-height: 1.45em;
+  margin: 11px 0 0;
+  line-height: 1.45;
+  font-variant-numeric: tabular-nums;
+}
+
+.wind-preset-row,
+.wind-transport {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 9px;
+}
+
+.wind-preset-row {
+  margin-top: 2px;
+}
+
+.wind-transport {
+  margin-top: 10px;
+}
+
+.wind-note {
+  margin: 15px 0 0;
+  color: var(--muted);
+  font-size: 0.68rem;
+  line-height: 1.55;
+}
+
+.wind-material-description {
+  min-height: 2.6em;
+  margin: 8px 0 2px;
+  color: var(--muted);
+  font-size: 0.65rem;
+  line-height: 1.4;
 }
 
 .effect-picker {
@@ -317,10 +585,14 @@ h2 {
   content: "";
 }
 
-.segment-card:hover {
+.segment-card:hover:not(:disabled) {
   border-color: var(--line-strong);
   background: rgba(255, 255, 255, 0.04);
   transform: translateY(-1px);
+}
+
+.segment-card:disabled {
+  transform: none;
 }
 
 .segment-head {
@@ -820,6 +1092,10 @@ footer a:hover {
     grid-template-columns: 1fr;
   }
 
+  .wind-layout {
+    grid-template-columns: minmax(270px, 0.72fr) minmax(0, 1.28fr);
+  }
+
   .control-panel {
     position: static;
     grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -838,6 +1114,14 @@ footer a:hover {
   .effect-grid {
     grid-template-columns: repeat(3, minmax(0, 1fr));
   }
+
+  .wind-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .wind-stage {
+    min-height: 300px;
+  }
 }
 
 @media (max-width: 700px) {
@@ -849,6 +1133,16 @@ footer a:hover {
     align-items: flex-start;
     flex-direction: column;
     padding-bottom: 22px;
+  }
+
+  .wind-heading {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .wind-live-state {
+    align-self: stretch;
+    text-align: center;
   }
 
   .status-cluster {
@@ -874,7 +1168,9 @@ footer a:hover {
 
   .source-grid,
   .control-panel,
-  .split-controls {
+  .split-controls,
+  .wind-parameter-grid,
+  .wind-tuning-grid {
     grid-template-columns: 1fr;
   }
 
@@ -887,7 +1183,9 @@ footer a:hover {
   }
 
   .transport > *,
-  .export-row > * {
+  .export-row > *,
+  .wind-preset-row > *,
+  .wind-transport > * {
     flex: 1 1 calc(50% - 9px);
   }
 }
@@ -895,6 +1193,7 @@ footer a:hover {
 @media (max-width: 430px) {
   .sound-stage,
   .effect-picker,
+  .wind-lab,
   .material-library,
   .control-intro,
   .control-section {

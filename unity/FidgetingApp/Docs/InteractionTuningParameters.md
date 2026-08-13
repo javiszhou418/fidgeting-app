@@ -77,7 +77,7 @@ SwiftUI 日常设置只保留力度与频率感两个 Haptic 总控；节奏与�
 | `spin.maximumAngularSpeed` | `12...42 rad/s` | 同左 | 由 touch response 派生，不再独立覆盖 |
 | `gesture.releaseQualification` | `28 px / 70 ms / 220 px/s / 62%` | 真机待调 | 四项同时满足才进入 fling |
 | `gesture.dragActivationDistance` | 2.5 pt（按 DPI 换算） | 2.5 pt（按 DPI 换算） | 降低“已经滑了但尚未抓住”的概率 |
-| `gesture.fallbackTouchRadius` | 短边 48% | 短边 48% | 两个模型的有效圆形触摸区 |
+| `gesture.fallbackTouchRadius` | 短边 36% | 短边 36% | 四款旋转模型共享的兜底圆形触摸区；真实 Collider 命中仍优先，外侧留给 Orbit |
 | `gesture.reversalConfirmation` | 18 px / 1.5 rad/s | 同左 | 过滤单帧方向噪声，确认后才进入反向制动 |
 | `gesture.tapMaximumDuration` | 0.28 s | 0.28 s | 点击的最长持续时间 |
 

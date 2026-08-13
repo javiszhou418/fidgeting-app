@@ -1,0 +1,72 @@
+{
+  "schema_version": 1,
+  "units": "millimeters",
+  "card": {
+    "width": 63.5,
+    "height": 88.9,
+    "thickness": 2.5,
+    "corner_radius_ratio": 0.06,
+    "layer_air_gap": 1.0,
+    "face_inset": 0.5,
+    "axis_hole_radius": 2.15,
+    "axis_hole_bevel": 0.22
+  },
+  "mechanism": {
+    "stable_detents": 4,
+    "middle_max_degrees": 45.0,
+    "top_max_degrees": 90.0,
+    "fixed_layer": "BottomCard",
+    "track_layers": ["TopCard", "MiddleCard"],
+    "follower_layers": ["MiddleCard", "BottomCard"],
+    "front_visible_axis_hardware": "low_profile_chrome_bearing_cap",
+    "spindle_radius": 0.002,
+    "spindle_face_inset": 0.00012,
+    "bearing_cap_radius": 0.00207,
+    "bearing_cap_height": 0.00065
+  },
+  "back_track": {
+    "follower_from_pivot": [-49.0, -27.0],
+    "mechanical_sweep_degrees": 45.0,
+    "undercut_width": 6.2,
+    "grille_width": 4.25,
+    "minimum_outer_edge_clearance": 6.0,
+    "longitudinal_wires": 9,
+    "cross_wires": 72,
+    "wire_diameter": 0.11,
+    "magnets_per_track": 3
+  },
+  "face_art": {
+    "rank_family": "Oxanium",
+    "rank_weight": 700,
+    "rank_height": 6.4,
+    "rank_glyphs": ["A", "Q", "K"],
+    "rank_mesh_names": {
+      "A": "Ace_A_Oxanium",
+      "Q": "Queen_Q_Oxanium",
+      "K": "King_K_Oxanium"
+    },
+    "allowed_patterns": {
+      "AAA": ["A", "A", "A"],
+      "QKA": ["Q", "K", "A"]
+    },
+    "layer_order": ["BottomCard", "MiddleCard", "TopCard"],
+    "randomize_on_detail_entry": true,
+    "pattern_probability": {
+      "AAA": 0.5,
+      "QKA": 0.5
+    },
+    "rank_marks_per_front": 2,
+    "corner_spades_per_front": 2,
+    "rank_offsets_from_card_center": [
+      [-17.2, 25.0],
+      [17.2, -25.0]
+    ],
+    "spade_offsets_from_card_center": [
+      [-14.6, 16.9],
+      [14.6, -16.9]
+    ],
+    "corner_index_rotations_degrees": [0.0, 180.0],
+    "corner_spade_scale": 0.245,
+    "front_art_on_back": false
+  }
+}

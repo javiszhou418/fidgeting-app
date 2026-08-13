@@ -1,0 +1,23 @@
+Progression reward CTA interactive verification
+Date: 2026-08-11 Asia/Shanghai
+Runtime: iPhone 17 Pro Simulator, iOS 26.3
+
+Before click:
+- Accessibility role: button
+- Label: 收下成长值
+- Identifier: progression-reward-primary-action
+- Hint: 关闭成长反馈并返回陀螺
+
+Action:
+- Computer Use invoked the discovered button accessibility element.
+
+After click:
+- progression-reward-primary-action was absent from the accessibility tree.
+- The settlement overlay was removed and the underlying detail context was visible.
+- Preview confirmation label was present with identifier progression-reward-accepted.
+- Screenshot: offline-growth-cta-accepted.png
+
+Scope:
+- This proves the shipping SwiftUI Button action and preview completion closure are tappable.
+- The preview-only confirmation label is not part of the shipping app.
+- iPhone hardware validation remains pending until the candidate is installed.

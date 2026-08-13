@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<test-run id="2" testcasecount="9" result="Passed" total="9" passed="9" failed="0" inconclusive="0" skipped="0" asserts="0" engine-version="3.5.0.0" clr-version="4.0.30319.42000" start-time="2026-08-10 07:23:31Z" end-time="2026-08-10 07:23:33Z" duration="2.2973553">
+  <test-suite type="TestSuite" id="1000" name="Fidget Spinner" fullname="Fidget Spinner" runstate="Runnable" testcasecount="251" result="Passed" start-time="2026-08-10 07:23:31Z" end-time="2026-08-10 07:23:33Z" duration="2.297355" total="9" passed="9" failed="0" inconclusive="0" skipped="0" asserts="0">
+    <properties>
+      <property name="platform" value="EditMode" />
+    </properties>
+    <test-suite type="Assembly" id="1280" name="Assembly-CSharp-Editor.dll" fullname="/private/tmp/fidget-badge-tests.kFfKva/Library/ScriptAssemblies/Assembly-CSharp-Editor.dll" runstate="Runnable" testcasecount="251" result="Passed" start-time="2026-08-10 07:23:31Z" end-time="2026-08-10 07:23:33Z" duration="2.292695" total="9" passed="9" failed="0" inconclusive="0" skipped="0" asserts="0">
+      <properties>
+        <property name="_PID" value="90867" />
+        <property name="_APPDOMAIN" value="Unity Child Domain" />
+        <property name="platform" value="EditMode" />
+        <property name="EditorOnly" value="True" />
+      </properties>
+      <test-suite type="TestSuite" id="1284" name="FidgetingApp" fullname="FidgetingApp" runstate="Runnable" testcasecount="172" result="Passed" start-time="2026-08-10 07:23:31Z" end-time="2026-08-10 07:23:33Z" duration="2.291397" total="9" passed="9" failed="0" inconclusive="0" skipped="0" asserts="0">
+        <properties />
+        <test-suite type="TestSuite" id="1294" name="Tests" fullname="FidgetingApp.Tests" runstate="Runnable" testcasecount="131" result="Passed" start-time="2026-08-10 07:23:31Z" end-time="2026-08-10 07:23:33Z" duration="2.290238" total="9" passed="9" failed="0" inconclusive="0" skipped="0" asserts="0">
+          <properties />
+          <test-suite type="TestSuite" id="1295" name="Editor" fullname="FidgetingApp.Tests.Editor" runstate="Runnable" testcasecount="131" result="Passed" start-time="2026-08-10 07:23:31Z" end-time="2026-08-10 07:23:33Z" duration="2.290063" total="9" passed="9" failed="0" inconclusive="0" skipped="0" asserts="0">
+            <properties />
+            <test-suite type="TestFixture" id="1138" name="BadgeSystemTests" fullname="FidgetingApp.Tests.Editor.BadgeSystemTests" classname="FidgetingApp.Tests.Editor.BadgeSystemTests" runstate="Runnable" testcasecount="9" result="Passed" start-time="2026-08-10 07:23:31Z" end-time="2026-08-10 07:23:33Z" duration="2.287960" total="9" passed="9" failed="0" inconclusive="0" skipped="0" asserts="0">
+              <properties />
+              <test-case id="1139" name="CatalogDefinesThirtyFourPermanentAndSixSpecialBadges" fullname="FidgetingApp.Tests.Editor.BadgeSystemTests.CatalogDefinesThirtyFourPermanentAndSixSpecialBadges" methodname="CatalogDefinesThirtyFourPermanentAndSixSpecialBadges" classname="FidgetingApp.Tests.Editor.BadgeSystemTests" runstate="Runnable" seed="1800107005" result="Passed" start-time="2026-08-10 07:23:31Z" end-time="2026-08-10 07:23:31Z" duration="0.009581" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1140" name="CatalogUsesExactThresholdsGradesAndRewards" fullname="FidgetingApp.Tests.Editor.BadgeSystemTests.CatalogUsesExactThresholdsGradesAndRewards" methodname="CatalogUsesExactThresholdsGradesAndRewards" classname="FidgetingApp.Tests.Editor.BadgeSystemTests" runstate="Runnable" seed="1347153815" result="Passed" start-time="2026-08-10 07:23:31Z" end-time="2026-08-10 07:23:31Z" duration="0.003028" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1146" name="CollectorRuntimeUsesTheSharedBadgeLedgerAndCannotPayTwice" fullname="FidgetingApp.Tests.Editor.BadgeSystemTests.CollectorRuntimeUsesTheSharedBadgeLedgerAndCannotPayTwice" methodname="CollectorRuntimeUsesTheSharedBadgeLedgerAndCannotPayTwice" classname="FidgetingApp.Tests.Editor.BadgeSystemTests" runstate="Runnable" seed="14040121" result="Passed" start-time="2026-08-10 07:23:31Z" end-time="2026-08-10 07:23:31Z" duration="0.555561" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1142" name="JsonV2ExposesHiddenProgressAndTwoLineRuntimeTypography" fullname="FidgetingApp.Tests.Editor.BadgeSystemTests.JsonV2ExposesHiddenProgressAndTwoLineRuntimeTypography" methodname="JsonV2ExposesHiddenProgressAndTwoLineRuntimeTypography" classname="FidgetingApp.Tests.Editor.BadgeSystemTests" runstate="Runnable" seed="531466607" result="Passed" start-time="2026-08-10 07:23:31Z" end-time="2026-08-10 07:23:31Z" duration="0.003918" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1144" name="RewardLedgerClaimsEachBadgeOnceAndPublishesClaimState" fullname="FidgetingApp.Tests.Editor.BadgeSystemTests.RewardLedgerClaimsEachBadgeOnceAndPublishesClaimState" methodname="RewardLedgerClaimsEachBadgeOnceAndPublishesClaimState" classname="FidgetingApp.Tests.Editor.BadgeSystemTests" runstate="Runnable" seed="1983775863" result="Passed" start-time="2026-08-10 07:23:31Z" end-time="2026-08-10 07:23:32Z" duration="0.556291" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1141" name="RotorSliderAndFanReceiveMechanismSpecificReachablePowerPaths" fullname="FidgetingApp.Tests.Editor.BadgeSystemTests.RotorSliderAndFanReceiveMechanismSpecificReachablePowerPaths" methodname="RotorSliderAndFanReceiveMechanismSpecificReachablePowerPaths" classname="FidgetingApp.Tests.Editor.BadgeSystemTests" runstate="Runnable" seed="484108801" result="Passed" start-time="2026-08-10 07:23:32Z" end-time="2026-08-10 07:23:32Z" duration="0.000985" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1147" name="ShippingArtworkIsCompleteSquareTransparentSrgbAndTextFree" fullname="FidgetingApp.Tests.Editor.BadgeSystemTests.ShippingArtworkIsCompleteSquareTransparentSrgbAndTextFree" methodname="ShippingArtworkIsCompleteSquareTransparentSrgbAndTextFree" classname="FidgetingApp.Tests.Editor.BadgeSystemTests" runstate="Runnable" seed="1229571720" result="Passed" start-time="2026-08-10 07:23:32Z" end-time="2026-08-10 07:23:33Z" duration="1.147259" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1145" name="SpinnerRuntimeAwardsBadgeXpAndShardsOnlyOnce" fullname="FidgetingApp.Tests.Editor.BadgeSystemTests.SpinnerRuntimeAwardsBadgeXpAndShardsOnlyOnce" methodname="SpinnerRuntimeAwardsBadgeXpAndShardsOnlyOnce" classname="FidgetingApp.Tests.Editor.BadgeSystemTests" runstate="Runnable" seed="1111329472" result="Passed" start-time="2026-08-10 07:23:33Z" end-time="2026-08-10 07:23:33Z" duration="0.002846" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1143" name="UtcCycleIndexCannotReturnBeforeEpoch" fullname="FidgetingApp.Tests.Editor.BadgeSystemTests.UtcCycleIndexCannotReturnBeforeEpoch" methodname="UtcCycleIndexCannotReturnBeforeEpoch" classname="FidgetingApp.Tests.Editor.BadgeSystemTests" runstate="Runnable" seed="1437490716" result="Passed" start-time="2026-08-10 07:23:33Z" end-time="2026-08-10 07:23:33Z" duration="0.000376" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+                <output><![CDATA[Saving results to: /Users/jiawei.zhou/Library/Application Support/DefaultCompany/Fidget Spinner/TestResults.xml
+]]></output>
+              </test-case>
+            </test-suite>
+          </test-suite>
+        </test-suite>
+      </test-suite>
+    </test-suite>
+  </test-suite>
+</test-run>

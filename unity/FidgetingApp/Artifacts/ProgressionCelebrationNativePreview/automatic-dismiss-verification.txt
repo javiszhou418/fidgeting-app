@@ -1,0 +1,23 @@
+Progression bottom-sheet + page-level XP flight Simulator accessibility verification
+Date: 2026-08-11 (Asia/Shanghai)
+Device: dedicated Fidget-Progression-Flight-Preview (iPhone 17 Pro), iOS 26.3
+Bundle: com.jiaweizhou.fidgetspinner.progression-celebration-preview
+Mode: offlineNoLevel (cold launch)
+
+While the settlement sheet was active:
+- preview-display-case-action was absent from the accessibility tree.
+- preview-enter-model-action was absent from the accessibility tree.
+- The full-screen transparent hosting overlay therefore blocked and hid both
+  underlying bottom product actions while preserving their visible page context.
+
+After the sheet closed and the page-level flight completed without a tap:
+- progression-reward-auto-dismissed was present.
+- preview-display-case-action was present and enabled.
+- preview-enter-model-action was present and enabled.
+- The top-left avatar element was present as “成长头像，等级 42，本级进度 62%”.
+- The page-level flight overlay exposed no accessibility element and did not
+  block the restored Library controls.
+
+Result: PASS — the bottom actions are unavailable during settlement and return
+after automatic dismissal; the final reward snapshot is reflected by the
+top-left avatar ring. No claim action or second XP grant was invoked.

@@ -1,0 +1,27 @@
+{
+  "prototypeOnly": true,
+  "shippingAssetsModified": false,
+  "sourcePrefab": "Assets/Resources/Gacha/PremiumDisplayCase.prefab",
+  "sourcePrize": "Assets/Resources/Gacha/ThreeBladeDisplayPrize.prefab",
+  "rarityMapping": [
+    {"rarity":"Standard","color":"blue","hex":"#3399FF"},
+    {"rarity":"Refined","color":"green","hex":"#33E094"},
+    {"rarity":"Signature","color":"purple","hex":"#A35CFF"},
+    {"rarity":"Heirloom","color":"gold","hex":"#FFA329"}
+  ],
+  "customizationBoundaries": {
+    "screws": ["Fastener_*", "ChromeCollar_*"],
+    "background": ["Graphite_Insert", "Graphite_InnerTray", "*Velvet*"],
+    "innerPlasticCapsule": ["RoundedRecess*", "RoundedEdgeLight", "Capsule_*"],
+    "acrylic": "weak BaseColor/RimColor tint only; preserve transparency",
+    "lighting": "prototype-owned accent and light-pass lights"
+  },
+  "timeline": ["back-facing","flip-to-front","prize-readable","parts-explode","prize-only","light-pass-complete"],
+  "promotionInterfaces": [
+    "RarityVisualProfile Resolve(GachaRarity)",
+    "PremiumDisplayCase.ApplyRarityVisual(profile)",
+    "GachaRevealDirector.Begin(outcome, prizeNode)",
+    "GachaRevealDirector phase/progress callback to native UI",
+    "MaterialPropertyBlock bindings for screw/background/capsule/acrylic roles"
+  ]
+}

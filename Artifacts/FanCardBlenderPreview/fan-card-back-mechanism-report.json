@@ -1,0 +1,195 @@
+{
+  "source_blend": "/Users/jiawei.zhou/Documents/Fidgeting app/unity/FidgetingApp/ArtSource/FanCard/FanCardBackMechanism.blend",
+  "unity_fbx": "/Users/jiawei.zhou/Documents/Fidgeting app/unity/FidgetingApp/Assets/_FanCard/Models/FanCardBackMechanism.fbx",
+  "geometry": [
+    {
+      "name": "Track_Undercut",
+      "vertices": 912,
+      "triangles": 1820,
+      "bounds_mm": [
+        44.0531,
+        36.4636,
+        0.12
+      ]
+    },
+    {
+      "name": "Track_Grille",
+      "vertices": 3510,
+      "triangles": 6048,
+      "bounds_mm": [
+        40.2969,
+        33.2916,
+        0.1133
+      ]
+    },
+    {
+      "name": "Magnet_01",
+      "vertices": 288,
+      "triangles": 572,
+      "bounds_mm": [
+        3.3,
+        3.3,
+        0.16
+      ]
+    },
+    {
+      "name": "Magnet_02",
+      "vertices": 288,
+      "triangles": 572,
+      "bounds_mm": [
+        3.3,
+        3.3,
+        0.16
+      ]
+    },
+    {
+      "name": "Magnet_03",
+      "vertices": 288,
+      "triangles": 572,
+      "bounds_mm": [
+        3.3,
+        3.3,
+        0.16
+      ]
+    },
+    {
+      "name": "Ace_A_Oxanium",
+      "vertices": 56,
+      "triangles": 56,
+      "bounds_mm": [
+        5.8435,
+        6.4,
+        0.15
+      ]
+    },
+    {
+      "name": "Queen_Q_Oxanium",
+      "vertices": 432,
+      "triangles": 432,
+      "bounds_mm": [
+        4.2971,
+        6.4,
+        0.15
+      ]
+    },
+    {
+      "name": "King_K_Oxanium",
+      "vertices": 56,
+      "triangles": 52,
+      "bounds_mm": [
+        5.2128,
+        6.4,
+        0.15
+      ]
+    },
+    {
+      "name": "Axis_BearingCap_Chrome",
+      "vertices": 1474,
+      "triangles": 2944,
+      "bounds_mm": [
+        4.14,
+        4.14,
+        1.3
+      ]
+    }
+  ],
+  "wire_diameter_mm": 0.11,
+  "longitudinal_wires": 9,
+  "cross_wires": 72,
+  "magnet_diameter_mm": 3.3,
+  "mechanical_sweep_degrees": 45.0,
+  "visual_end_margin_degrees": 3.1747692392093616,
+  "minimum_outer_edge_clearance_mm": 7.590000000000002,
+  "required_outer_edge_clearance_mm": 6.0,
+  "face_art": {
+    "rank_family": "Oxanium",
+    "rank_weight": 700,
+    "rank_height": 6.4,
+    "rank_glyphs": [
+      "A",
+      "Q",
+      "K"
+    ],
+    "rank_mesh_names": {
+      "A": "Ace_A_Oxanium",
+      "Q": "Queen_Q_Oxanium",
+      "K": "King_K_Oxanium"
+    },
+    "allowed_patterns": {
+      "AAA": [
+        "A",
+        "A",
+        "A"
+      ],
+      "QKA": [
+        "Q",
+        "K",
+        "A"
+      ]
+    },
+    "layer_order": [
+      "BottomCard",
+      "MiddleCard",
+      "TopCard"
+    ],
+    "randomize_on_detail_entry": true,
+    "pattern_probability": {
+      "AAA": 0.5,
+      "QKA": 0.5
+    },
+    "rank_marks_per_front": 2,
+    "corner_spades_per_front": 2,
+    "rank_offsets_from_card_center": [
+      [
+        -17.2,
+        25.0
+      ],
+      [
+        17.2,
+        -25.0
+      ]
+    ],
+    "spade_offsets_from_card_center": [
+      [
+        -14.6,
+        16.9
+      ],
+      [
+        14.6,
+        -16.9
+      ]
+    ],
+    "corner_index_rotations_degrees": [
+      0.0,
+      180.0
+    ],
+    "corner_spade_scale": 0.245,
+    "front_art_on_back": false
+  },
+  "assembly": {
+    "track_layers": [
+      "TopCard",
+      "MiddleCard"
+    ],
+    "follower_layers": [
+      "MiddleCard",
+      "BottomCard"
+    ],
+    "front_visible_axis_hardware": "low_profile_chrome_bearing_cap"
+  },
+  "assertions": {
+    "grille_is_real_geometry": true,
+    "grille_has_no_surface_fill": true,
+    "three_independent_magnets": true,
+    "grille_outward_of_magnet_caps": true,
+    "four_detents_implied_by_three_inserts_plus_follower": true,
+    "sweep_degrees_unchanged": true,
+    "rounded_track_end_margin_degrees": true,
+    "rank_set_uses_static_app_font_meshes": true,
+    "face_art_uses_two_opposed_corner_indices": true,
+    "only_locked_rank_patterns_are_authored": true,
+    "track_outer_contour_respects_edge_clearance": true,
+    "track_layer_contract_is_top_and_middle_only": true,
+    "single_low_profile_bearing_cap": true
+  }
+}

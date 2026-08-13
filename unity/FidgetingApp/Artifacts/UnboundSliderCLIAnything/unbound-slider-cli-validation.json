@@ -1,0 +1,107 @@
+{
+  "status": "dcc_candidate_unity_visual_rejected_round5",
+  "cliProject": "unity/FidgetingApp/ArtSource/UnboundSlider/CLIAnything/UnboundSliderWhiteModel.blend-cli.json",
+  "blend": "unity/FidgetingApp/ArtSource/UnboundSlider/CLIAnything/UnboundSlider_CLI.blend",
+  "fbx": "unity/FidgetingApp/ArtSource/UnboundSlider/CLIAnything/UnboundSlider_CLI.fbx",
+  "shippingFbx": null,
+  "glb": "unity/FidgetingApp/ArtSource/UnboundSlider/CLIAnything/UnboundSlider_CLI.glb",
+  "collisionFbx": "unity/FidgetingApp/ArtSource/UnboundSlider/CLIAnything/UnboundSlider_CLI_Collision.fbx",
+  "previews": {
+    "top": "unity/FidgetingApp/Artifacts/UnboundSliderCLIAnything/01_Top.png",
+    "hero": "unity/FidgetingApp/Artifacts/UnboundSliderCLIAnything/02_AuthoredHero.png",
+    "left_oblique": "unity/FidgetingApp/Artifacts/UnboundSliderCLIAnything/03_LeftOblique.png",
+    "right_oblique": "unity/FidgetingApp/Artifacts/UnboundSliderCLIAnything/04_RightOblique.png",
+    "low": "unity/FidgetingApp/Artifacts/UnboundSliderCLIAnything/05_LowAngle.png",
+    "side": "unity/FidgetingApp/Artifacts/UnboundSliderCLIAnything/06_Side.png",
+    "exploded": "unity/FidgetingApp/Artifacts/UnboundSliderCLIAnything/07_Exploded.png",
+    "goggle_detail": "unity/FidgetingApp/Artifacts/UnboundSliderCLIAnything/08_GoggleDetail.png",
+    "open": "unity/FidgetingApp/Artifacts/UnboundSliderCLIAnything/09_OpenTravel.png"
+  },
+  "contract": {
+    "overallMm": [
+      52.0,
+      36.0,
+      14.0
+    ],
+    "outerCornerRadiusMm": 4.8,
+    "openingCountPerFace": 6,
+    "goggleCircleRadiusMm": 4.2,
+    "goggleCircleCentersMm": [
+      [
+        -18.0,
+        6.8
+      ],
+      [
+        18.0,
+        6.8
+      ],
+      [
+        -18.0,
+        -6.8
+      ],
+      [
+        18.0,
+        -6.8
+      ]
+    ],
+    "goggleBridgeWidthMm": 3.5,
+    "goggleCenterHeightErrorMm": 0.0,
+    "leftRightMirrorErrorMm": 0.0,
+    "upperLowerCenterSymmetryErrorMm": 0.0,
+    "triangleCenterlineErrorMm": 0.0,
+    "mainToTriangleMinimumGapMm": 0.43493649053890326,
+    "mainToTrapezoidMinimumGapMm": 1.2000000000000015,
+    "visualMagnetCount": 6
+  },
+  "measured": {
+    "overallMm": [
+      52.000001072883606,
+      35.999998450279236,
+      14.000000432133675
+    ],
+    "meshCount": 78,
+    "triangleCount": 36112,
+    "topOrnamentalAudit": {
+      "vertices": 4052,
+      "edges": 12186,
+      "faces": 8124,
+      "boundaryEdges": 0,
+      "nonManifoldEdges": 0,
+      "zeroAreaFaces": 0
+    },
+    "bottomOrnamentalAudit": {
+      "vertices": 4052,
+      "edges": 12186,
+      "faces": 8124,
+      "boundaryEdges": 0,
+      "nonManifoldEdges": 0,
+      "zeroAreaFaces": 0
+    }
+  },
+  "materials": {
+    "gold": {
+      "metallic": 1.0,
+      "roughness": 0.2,
+      "anisotropy": 0.48
+    },
+    "goldEdge": {
+      "metallic": 1.0,
+      "roughness": 0.11
+    },
+    "middle": {
+      "metallic": 0.88,
+      "roughness": 0.36
+    },
+    "graphite": {
+      "metallic": 0.62,
+      "roughness": 0.4
+    }
+  },
+  "cliObjectCount": 152,
+  "interaction": {
+    "shippingController": "EdcSliderController",
+    "detentAuthority": "LinearMagneticDetentProfile",
+    "motionChanged": false,
+    "initialVelocityMetersPerSecond": 0.0
+  }
+}

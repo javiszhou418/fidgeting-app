@@ -34,6 +34,84 @@ struct ComboHaloProjectionState: Equatable {
     }
 }
 
+/// Count-derived visual tier for one-shot Combo milestone feedback. The tier
+/// only changes presentation; it never changes Combo counting, XP or physics.
+enum ComboHaloMilestoneStyle: Equatable {
+    case standard
+    case overdrive
+    case apex
+
+    static func forCount(_ count: Int) -> ComboHaloMilestoneStyle {
+        if count >= 50 { return .apex }
+        if count >= 30 { return .overdrive }
+        return .standard
+    }
+
+    var speedLineCount: Int {
+        switch self {
+        case .standard: return 0
+        case .overdrive: return 4
+        case .apex: return 6
+        }
+    }
+
+    var speedLinePeakScale: Double {
+        switch self {
+        case .standard: return 0
+        case .overdrive: return 0.24
+        case .apex: return 0.34
+        }
+    }
+
+    var edgeBloomPeakScale: Double {
+        switch self {
+        case .standard: return 0
+        case .overdrive: return 0.58
+        case .apex: return 0.78
+        }
+    }
+
+    var orbitSegmentCount: Int {
+        switch self {
+        case .standard: return 0
+        case .overdrive: return 6
+        case .apex: return 8
+        }
+    }
+
+    var innerOrbitSegmentCount: Int {
+        switch self {
+        case .standard: return 0
+        case .overdrive: return 3
+        case .apex: return 5
+        }
+    }
+
+    var orbitLockMarkerCount: Int {
+        switch self {
+        case .standard: return 0
+        case .overdrive: return 3
+        case .apex: return 4
+        }
+    }
+
+    var orbitPeakScale: Double {
+        switch self {
+        case .standard: return 0
+        case .overdrive: return 0.92
+        case .apex: return 1.10
+        }
+    }
+
+    var orbitSweepPeakScale: Double {
+        switch self {
+        case .standard: return 0
+        case .overdrive: return 0.76
+        case .apex: return 1.00
+        }
+    }
+}
+
 /// Native source of truth for the milestone halo and its editable timing curve.
 /// The production overlay and the Combo Halo Lab both render this same type.
 struct ComboHaloTuning: Codable, Equatable {
@@ -133,6 +211,120 @@ struct ComboHaloTuning: Codable, Equatable {
             releaseStart: 0.28,
             end: 1.00,
             peakScale: 0.78)
+    }
+
+    func speedTunnelOpacity(
+        at progress: Double,
+        style: ComboHaloMilestoneStyle) -> Double {
+        envelope(
+            at: progress,
+            start: 0.01,
+            attackEnd: 0.025,
+            releaseStart: 0.10,
+            end: 0.30,
+            peakScale: style.speedLinePeakScale)
+    }
+
+    func speedLineLocalPhase(
+        at progress: Double,
+        index: Int) -> Double {
+        let safeIndex = max(0, index)
+        let delay = 0.015
+            + Double(safeIndex % 3) * 0.012
+        let duration = 0.18 + Double(safeIndex % 2) * 0.025
+        return phase(
+            at: progress,
+            start: delay,
+            end: min(0.28, delay + duration))
+    }
+
+    func speedLineOpacity(
+        at progress: Double,
+        index: Int) -> Double {
+        let localPhase = speedLineLocalPhase(
+            at: progress,
+            index: index)
+        guard localPhase > 0, localPhase < 1 else { return 0 }
+
+        let attack = smoothstep(phase(
+            at: localPhase,
+            start: 0,
+            end: 0.10))
+        let release = smoothstep(phase(
+            at: localPhase,
+            start: 0.52,
+            end: 0.92))
+        return attack * (1 - release)
+    }
+
+    func orbitRingOpacity(
+        at progress: Double,
+        style: ComboHaloMilestoneStyle) -> Double {
+        envelope(
+            at: progress,
+            start: 0.015,
+            attackEnd: 0.075,
+            releaseStart: 0.56,
+            end: 0.94,
+            peakScale: style.orbitPeakScale)
+    }
+
+    func orbitLockPhase(at progress: Double) -> Double {
+        smoothstep(phase(
+            at: progress,
+            start: 0.02,
+            end: 0.34))
+    }
+
+    func orbitReleasePhase(at progress: Double) -> Double {
+        smoothstep(phase(
+            at: progress,
+            start: 0.48,
+            end: 0.94))
+    }
+
+    func orbitSegmentReveal(
+        at progress: Double,
+        index: Int) -> Double {
+        let safeIndex = max(0, index)
+        let delay = 0.015
+            + Double(safeIndex % 3) * 0.012
+            + Double(safeIndex / 3) * 0.004
+        return smoothstep(phase(
+            at: progress,
+            start: delay,
+            end: delay + 0.24))
+    }
+
+    func orbitSweepOpacity(
+        at progress: Double,
+        style: ComboHaloMilestoneStyle) -> Double {
+        envelope(
+            at: progress,
+            start: 0.10,
+            attackEnd: 0.15,
+            releaseStart: 0.42,
+            end: 0.68,
+            peakScale: style.orbitSweepPeakScale)
+    }
+
+    func orbitSweepPhase(at progress: Double) -> Double {
+        phase(
+            at: progress,
+            start: 0.10,
+            end: 0.68)
+    }
+
+    func edgeBloomOpacity(
+        at progress: Double,
+        style: ComboHaloMilestoneStyle) -> Double {
+        envelope(
+            at: progress,
+            start: 0.00,
+            attackEnd: 0.025,
+            releaseStart: 0.055,
+            end: 0.32,
+            peakScale: style.edgeBloomPeakScale)
     }
 
     func phase(
@@ -311,6 +503,265 @@ private struct ComboHaloMistWisps: View {
     }
 }
 
+/// A restrained camera-space speed tunnel for rare high Combo milestones.
+/// Every streak begins outside the model silhouette so the material remains
+/// readable; the softened model-plane compression keeps the burst attached to
+/// the live object without turning it into a flat HUD starburst.
+private struct ComboHaloSpeedTunnel: View {
+    let progress: Double
+    let tuning: ComboHaloTuning
+    let style: ComboHaloMilestoneStyle
+
+    var body: some View {
+        GeometryReader { proxy in
+            let diameter = min(proxy.size.width, proxy.size.height)
+            let lineCount = style.speedLineCount
+
+            ZStack {
+                ForEach(0..<lineCount, id: \.self) { index in
+                    let localPhase = CGFloat(tuning.speedLineLocalPhase(
+                        at: progress,
+                        index: index))
+                    let lineOpacity = tuning.speedLineOpacity(
+                        at: progress,
+                        index: index)
+                    let variation = CGFloat(index % 4) * 0.022
+                    let length = diameter * (0.19 + variation)
+                    let innerRadius = diameter
+                        * (0.17 + CGFloat(index % 3) * 0.012)
+                    let travel = diameter * localPhase
+                        * (0.18 + CGFloat(index % 5) * 0.010)
+                    let stretch = min(1, localPhase / 0.16)
+                    let collapse = min(
+                        1,
+                        max(0, (localPhase - 0.68) / 0.32))
+                    let lengthScale = 0.30 + stretch * 0.70
+                        - collapse * 0.16
+                    let angle = Double(index) / Double(max(1, lineCount)) * 360
+                        + Double((index * 17) % 23) - 11
+                        + Double(localPhase)
+                            * (index.isMultiple(of: 2) ? 2.4 : -2.0)
+
+                    Capsule(style: .continuous)
+                        .fill(LinearGradient(
+                            stops: [
+                                .init(color: .clear, location: 0.00),
+                                .init(color: .white.opacity(
+                                    index.isMultiple(of: 3) ? 0.86 : 0.58), location: 0.28),
+                                .init(color: .white.opacity(0.16), location: 0.72),
+                                .init(color: .clear, location: 1.00)
+                            ],
+                            startPoint: .leading,
+                            endPoint: .trailing))
+                        .frame(
+                            width: length,
+                            height: max(
+                                1.2,
+                                diameter * (index.isMultiple(of: 3)
+                                    ? 0.009
+                                    : 0.006)))
+                        .scaleEffect(
+                            x: lengthScale,
+                            y: 1,
+                            anchor: .leading)
+                        .offset(x: innerRadius + length * 0.5 + travel)
+                        .rotationEffect(.degrees(angle))
+                        .blur(radius: index.isMultiple(of: 3) ? 0.9 : 0.35)
+                        .opacity(
+                            lineOpacity
+                                * (index.isMultiple(of: 4) ? 0.70 : 1.00))
+                }
+            }
+            .frame(width: proxy.size.width, height: proxy.size.height)
+        }
+    }
+}
+
+/// The high-tier signature is carried by the ring itself: alternating arc
+/// plates arrive from inside and outside, settle into one orbit, receive a
+/// travelling lock highlight, then release as a coherent after-wave. Apex adds
+/// a counter-rotating inner rail, so ×30 and ×50 remain recognisable even when
+/// the short radial accents are hidden.
+private struct ComboHaloInterlockRing: View {
+    let progress: Double
+    let tuning: ComboHaloTuning
+    let style: ComboHaloMilestoneStyle
+
+    var body: some View {
+        GeometryReader { proxy in
+            let diameter = min(proxy.size.width, proxy.size.height)
+            let segmentCount = style.orbitSegmentCount
+            let innerCount = style.innerOrbitSegmentCount
+            let markerCount = style.orbitLockMarkerCount
+            let lock = CGFloat(tuning.orbitLockPhase(at: progress))
+            let release = CGFloat(tuning.orbitReleasePhase(at: progress))
+            let sweep = tuning.orbitSweepPhase(at: progress)
+            let sweepOpacity = tuning.orbitSweepOpacity(
+                at: progress,
+                style: style)
+            let releaseScale = CGFloat(style == .apex ? 0.065 : 0.050)
+
+            ZStack {
+                ForEach(0..<segmentCount, id: \.self) { index in
+                    let isEven = index.isMultiple(of: 2)
+                    let reveal = CGFloat(tuning.orbitSegmentReveal(
+                        at: progress,
+                        index: index))
+                    let apexArcVariation = CGFloat(index % 3) * 0.009
+                    let overdriveArcVariation = CGFloat(index % 2) * 0.012
+                    let arcLength: CGFloat = style == .apex
+                        ? 0.068 + apexArcVariation
+                        : 0.092 + overdriveArcVariation
+                    let initialScale: CGFloat = isEven ? 1.13 : 0.89
+                    let settledScale = initialScale
+                        + (1 - initialScale) * lock
+                    let segmentScale = settledScale + release * releaseScale
+                    let rotationVariation = Double(index % 3)
+                    let initialRotation: Double = isEven
+                        ? 15 + rotationVariation * 3
+                        : -(12 + rotationVariation * 4)
+                    let releaseDirection: Double = isEven ? 3.5 : -3.0
+                    let releaseRotation = Double(release) * releaseDirection
+                    let baseRotation = Double(index)
+                        / Double(max(1, segmentCount)) * 360 - 90
+                    let segmentRotation = baseRotation
+                        + Double(1 - lock) * initialRotation
+                        + releaseRotation
+
+                    ZStack {
+                        Circle()
+                            .trim(from: 0, to: arcLength * reveal)
+                            .stroke(
+                                Color.white.opacity(0.28),
+                                style: StrokeStyle(
+                                    lineWidth: style == .apex ? 7.0 : 6.0,
+                                    lineCap: .round))
+                            .blur(radius: 5.5)
+
+                        Circle()
+                            .trim(from: 0, to: arcLength * reveal)
+                            .stroke(
+                                Color.white.opacity(
+                                    index.isMultiple(of: 3) ? 0.96 : 0.72),
+                                style: StrokeStyle(
+                                    lineWidth: style == .apex ? 1.65 : 1.45,
+                                    lineCap: .round))
+                    }
+                    .scaleEffect(segmentScale)
+                    .rotationEffect(.degrees(segmentRotation))
+                }
+
+                ForEach(0..<innerCount, id: \.self) { index in
+                    let isEven = index.isMultiple(of: 2)
+                    let reveal = CGFloat(tuning.orbitSegmentReveal(
+                        at: progress,
+                        index: index + segmentCount))
+                    let innerVariation = CGFloat(index % 2)
+                    let arcLength: CGFloat = style == .apex
+                        ? 0.105 + innerVariation * 0.012
+                        : 0.145 + innerVariation * 0.016
+                    let baseRotation = Double(index)
+                        / Double(max(1, innerCount)) * 360 - 68
+                    let arrivalDirection: Double = isEven ? -18 : 14
+                    let arrivalRotation = Double(1 - lock) * arrivalDirection
+                    let driftDirection: Double = isEven ? -5.0 : 4.0
+                    let drift = Double(release) * driftDirection
+                    let radialArrival: CGFloat = isEven ? 0.08 : -0.06
+
+                    ZStack {
+                        Circle()
+                            .trim(from: 0, to: arcLength * reveal)
+                            .stroke(
+                                Color.white.opacity(0.18),
+                                style: StrokeStyle(
+                                    lineWidth: 4.0,
+                                    lineCap: .round))
+                            .blur(radius: 4.0)
+
+                        Circle()
+                            .trim(from: 0, to: arcLength * reveal)
+                            .stroke(
+                                Color.white.opacity(
+                                    style == .apex ? 0.58 : 0.42),
+                                style: StrokeStyle(
+                                    lineWidth: style == .apex ? 0.92 : 0.78,
+                                    lineCap: .round))
+                    }
+                    .scaleEffect(
+                        0.76
+                            + (1 - lock) * radialArrival
+                            + release * 0.035)
+                    .rotationEffect(.degrees(
+                        baseRotation + arrivalRotation + drift))
+                }
+
+                ForEach(0..<markerCount, id: \.self) { index in
+                    let isEven = index.isMultiple(of: 2)
+                    let baseRotation = Double(index)
+                        / Double(max(1, markerCount)) * 360
+                    let arrivalDirection: Double = isEven ? 9.0 : -9.0
+                    let arrivalRotation = Double(1 - lock) * arrivalDirection
+
+                    Capsule(style: .continuous)
+                        .fill(Color.white.opacity(style == .apex ? 0.72 : 0.54))
+                        .frame(
+                            width: max(1.1, diameter * 0.007),
+                            height: diameter * (style == .apex ? 0.038 : 0.030))
+                        .offset(y: -diameter * 0.485)
+                        .rotationEffect(.degrees(
+                            baseRotation + arrivalRotation))
+                        .opacity(Double(lock) * (1 - Double(release) * 0.72))
+                }
+
+                ZStack {
+                    Circle()
+                        .trim(from: 0.00, to: 0.105)
+                        .stroke(
+                            Color.white.opacity(0.30),
+                            style: StrokeStyle(
+                                lineWidth: 8.0,
+                                lineCap: .round))
+                        .blur(radius: 6.0)
+                    Circle()
+                        .trim(from: 0.00, to: 0.105)
+                        .stroke(
+                            Color.white.opacity(0.98),
+                            style: StrokeStyle(
+                                lineWidth: 1.85,
+                                lineCap: .round))
+                }
+                .rotationEffect(.degrees(-64 + sweep * 286))
+                .opacity(sweepOpacity)
+
+                if style == .apex {
+                    ZStack {
+                        Circle()
+                            .trim(from: 0.00, to: 0.072)
+                            .stroke(
+                                Color.white.opacity(0.22),
+                                style: StrokeStyle(
+                                    lineWidth: 5.5,
+                                    lineCap: .round))
+                            .blur(radius: 5.0)
+                        Circle()
+                            .trim(from: 0.00, to: 0.072)
+                            .stroke(
+                                Color.white.opacity(0.82),
+                                style: StrokeStyle(
+                                    lineWidth: 1.15,
+                                    lineCap: .round))
+                    }
+                    .scaleEffect(0.76)
+                    .rotationEffect(.degrees(118 - sweep * 224))
+                    .opacity(sweepOpacity * 0.74)
+                }
+            }
+            .scaleEffect(0.94 + lock * 0.06 + release * releaseScale)
+            .frame(width: proxy.size.width, height: proxy.size.height)
+        }
+    }
+}
+
 /// A neutral-white layered pulse that expands in the live model plane.
 /// `progress` drives the authored primary curve; `opacityProgress` is a linear
 /// clock used to offset the core flash, primary ring, echo ring and mist.
@@ -320,6 +771,7 @@ struct ComboCenterHalo: View, Animatable {
     let tuning: ComboHaloTuning
     let reduceMotion: Bool
     let projection: ComboHaloProjectionState
+    var milestoneCount: Int = 10
 
     var animatableData: AnimatablePair<CGFloat, CGFloat> {
         get { AnimatablePair(progress, opacityProgress) }
@@ -357,6 +809,9 @@ struct ComboCenterHalo: View, Animatable {
             let rotation = liveProjection.available
                 ? liveProjection.rotationDegrees
                 : 0
+            let milestoneStyle = ComboHaloMilestoneStyle.forCount(
+                milestoneCount)
+            let speedAxisRatio = CGFloat(0.82) + axisRatio * 0.18
 
             let primaryExpansion = reduceMotion
                 ? CGFloat(0.68)
@@ -397,8 +852,48 @@ struct ComboCenterHalo: View, Animatable {
             let coreExpansion = reduceMotion
                 ? CGFloat(0.52)
                 : CGFloat(0.26) + corePhase * 0.42
+            let edgePhase = easeOutCubic(tuning.phase(
+                at: linearProgress,
+                start: 0.00,
+                end: 0.32))
 
             ZStack {
+                if milestoneStyle != .standard && !reduceMotion {
+                    ComboHaloSpeedTunnel(
+                        progress: linearProgress,
+                        tuning: tuning,
+                        style: milestoneStyle)
+                        .frame(
+                            width: stageDiameter * 1.10,
+                            height: stageDiameter * 1.10)
+                        .scaleEffect(
+                            x: 1,
+                            y: speedAxisRatio)
+                        .rotationEffect(.degrees(rotation))
+                        .opacity(tuning.speedTunnelOpacity(
+                            at: linearProgress,
+                            style: milestoneStyle))
+
+                    ZStack {
+                        ComboHaloBrokenRing(lineWidth: 13, gapRotation: -4)
+                            .opacity(0.34)
+                            .blur(radius: 12)
+                        ComboHaloBrokenRing(lineWidth: 2.1, gapRotation: -4)
+                            .opacity(0.74)
+                            .blur(radius: 1.2)
+                    }
+                    .frame(
+                        width: stageDiameter * 0.54,
+                        height: stageDiameter * 0.54)
+                    .scaleEffect(
+                        x: 0.74 + edgePhase * 0.18,
+                        y: (0.74 + edgePhase * 0.18) * axisRatio)
+                    .rotationEffect(.degrees(rotation))
+                    .opacity(tuning.edgeBloomOpacity(
+                        at: linearProgress,
+                        style: milestoneStyle))
+                }
+
                 ZStack {
                     ComboHaloMistCloud(
                         phase: CGFloat(linearProgress),
@@ -442,10 +937,14 @@ struct ComboCenterHalo: View, Animatable {
                 .opacity(tuning.mistOpacity(at: linearProgress))
 
                 ZStack {
-                    ComboHaloBrokenRing(lineWidth: 5.2, gapRotation: -13)
+                    ComboHaloBrokenRing(
+                        lineWidth: 5.2,
+                        gapRotation: -18 + linearProgress * 22)
                         .opacity(0.28)
                         .blur(radius: 7)
-                    ComboHaloBrokenRing(lineWidth: 1.10, gapRotation: -13)
+                    ComboHaloBrokenRing(
+                        lineWidth: 1.10,
+                        gapRotation: -18 + linearProgress * 22)
                         .opacity(0.74)
                         .blur(radius: 0.8)
                 }
@@ -457,10 +956,14 @@ struct ComboCenterHalo: View, Animatable {
                 .opacity(tuning.echoRingOpacity(at: linearProgress))
 
                 ZStack {
-                    ComboHaloBrokenRing(lineWidth: 7.0, gapRotation: 4)
+                    ComboHaloBrokenRing(
+                        lineWidth: 7.0,
+                        gapRotation: 13 - linearProgress * 18)
                         .opacity(0.30)
                         .blur(radius: 8)
-                    ComboHaloBrokenRing(lineWidth: 1.65, gapRotation: 4)
+                    ComboHaloBrokenRing(
+                        lineWidth: 1.65,
+                        gapRotation: 13 - linearProgress * 18)
                         .opacity(0.94)
                         .blur(radius: 0.35)
                 }
@@ -472,10 +975,14 @@ struct ComboCenterHalo: View, Animatable {
                 .opacity(tuning.primaryRingOpacity(at: linearProgress))
 
                 ZStack {
-                    ComboHaloBrokenRing(lineWidth: 4.0, gapRotation: 19)
+                    ComboHaloBrokenRing(
+                        lineWidth: 4.0,
+                        gapRotation: 27 - linearProgress * 12)
                         .opacity(0.22)
                         .blur(radius: 7)
-                    ComboHaloBrokenRing(lineWidth: 0.82, gapRotation: 19)
+                    ComboHaloBrokenRing(
+                        lineWidth: 0.82,
+                        gapRotation: 27 - linearProgress * 12)
                         .opacity(0.58)
                         .blur(radius: 1.0)
                 }
@@ -485,6 +992,23 @@ struct ComboCenterHalo: View, Animatable {
                     y: trailingExpansion * axisRatio)
                 .rotationEffect(.degrees(rotation))
                 .opacity(tuning.trailingRingOpacity(at: linearProgress))
+
+                if milestoneStyle != .standard && !reduceMotion {
+                    ComboHaloInterlockRing(
+                        progress: linearProgress,
+                        tuning: tuning,
+                        style: milestoneStyle)
+                        .frame(
+                            width: stageDiameter
+                                * (milestoneStyle == .apex ? 0.78 : 0.72),
+                            height: stageDiameter
+                                * (milestoneStyle == .apex ? 0.78 : 0.72))
+                        .scaleEffect(x: 1, y: axisRatio)
+                        .rotationEffect(.degrees(rotation))
+                        .opacity(tuning.orbitRingOpacity(
+                            at: linearProgress,
+                            style: milestoneStyle))
+                }
 
                 Circle()
                     .fill(RadialGradient(

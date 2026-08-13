@@ -12,6 +12,7 @@ struct ComboHaloNativePreviewApp: App {
     private let mode: ComboHaloNativePreviewRoot.Mode
     private let frozenProgress: CGFloat
     private let sceneView: ComboHaloNativePreviewRoot.SceneView
+    private let comboCount: Int
 
     init() {
         let arguments = ProcessInfo.processInfo.arguments
@@ -30,6 +31,11 @@ struct ComboHaloNativePreviewApp: App {
             .replacingOccurrences(of: "--view=", with: "") ?? "hero"
         sceneView = ComboHaloNativePreviewRoot.SceneView(
             rawValue: sceneViewValue) ?? .hero
+
+        let comboValue = arguments
+            .first { $0.hasPrefix("--combo=") }?
+            .replacingOccurrences(of: "--combo=", with: "") ?? "30"
+        comboCount = max(10, Int(comboValue) ?? 30)
     }
 
     var body: some Scene {
@@ -37,7 +43,8 @@ struct ComboHaloNativePreviewApp: App {
             ComboHaloNativePreviewRoot(
                 mode: mode,
                 frozenProgress: frozenProgress,
-                sceneView: sceneView)
+                sceneView: sceneView,
+                comboCount: comboCount)
         }
     }
 }

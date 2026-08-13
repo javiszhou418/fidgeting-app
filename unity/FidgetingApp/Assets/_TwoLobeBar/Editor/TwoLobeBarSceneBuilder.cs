@@ -16,12 +16,6 @@ namespace FidgetingApp.TwoLobeBar.EditorTools
     {
         private const string BaseScenePath =
             "Assets/_Fidgeting/Scenes/ThreeBladeEDC.unity";
-        private const string BlueScenePath =
-            "Assets/Scenes/FidgetSpinnerDemo.unity";
-        private const string ImportedScenePath =
-            "Assets/_ImportedSpinner/Scenes/ImportedSpinner.unity";
-        private const string EdcScenePath =
-            "Assets/_EDC/Scenes/MeshyEDC.unity";
         private const string MeshFolder =
             "Assets/_TwoLobeBar/Generated/Meshes";
         private const string MaterialFolder =
@@ -32,8 +26,6 @@ namespace FidgetingApp.TwoLobeBar.EditorTools
             MaterialFolder + "/M_TwoLobeGraphite.mat";
         private const string ButtonMaterialPath =
             MaterialFolder + "/M_TwoLobeButton.mat";
-        private const string ShadowGapMaterialPath =
-            MaterialFolder + "/M_TwoLobeShadowGap.mat";
         private const string BackdropMaterialPath =
             MaterialFolder + "/M_WarmDefocusedBackdrop.mat";
         private const string GrainNormalPath =
@@ -48,8 +40,20 @@ namespace FidgetingApp.TwoLobeBar.EditorTools
             MeshFolder + "/M_TwoLobeBarBody.asset";
         private const string ButtonMeshPath =
             MeshFolder + "/M_TwoLobeConcaveButton.asset";
-        private const string ShadowGapMeshPath =
-            MeshFolder + "/M_TwoLobeUndercutShadowCollar.asset";
+
+        private readonly struct PreviewPose
+        {
+            public PreviewPose(string fileName, float yaw, float pitch)
+            {
+                FileName = fileName;
+                Yaw = yaw;
+                Pitch = pitch;
+            }
+
+            public string FileName { get; }
+            public float Yaw { get; }
+            public float Pitch { get; }
+        }
 
         [MenuItem("Tools/Codex/Build Graphite Two-Lobe Spinner")]
         public static void BuildPresentation()
@@ -63,7 +67,6 @@ namespace FidgetingApp.TwoLobeBar.EditorTools
             Material buttonMaterial = CreateOrUpdateButtonMaterial(
                 grainNormal,
                 buttonOcclusion);
-            Material shadowGapMaterial = CreateOrUpdateShadowGapMaterial();
             Material backdropMaterial = CreateOrUpdateBackdropMaterial(backdropTexture);
             Mesh bodyMesh = SaveMesh(
                 TwoLobeBarMeshFactory.CreateBody(),
@@ -71,9 +74,6 @@ namespace FidgetingApp.TwoLobeBar.EditorTools
             Mesh buttonMesh = SaveMesh(
                 TwoLobeBarMeshFactory.CreateConcaveButton(),
                 ButtonMeshPath);
-            Mesh shadowGapMesh = SaveMesh(
-                TwoLobeBarMeshFactory.CreateUndercutShadowCollar(),
-                ShadowGapMeshPath);
 
             Scene scene = EditorSceneManager.OpenScene(
                 BaseScenePath,
@@ -97,7 +97,6 @@ namespace FidgetingApp.TwoLobeBar.EditorTools
             ClearChildren(rotor);
             ClearChildren(hub);
             DestroyChild(root.transform, "BearingVisual");
-            DestroyChild(root.transform, "RatchetAudio");
             DestroyChild(root.transform, "MobileCanvas");
             DestroyChild(root.transform, "EventSystem");
             DestroyComponent<MetalGlintController>(root);
@@ -130,11 +129,6 @@ namespace FidgetingApp.TwoLobeBar.EditorTools
                 buttonMesh,
                 buttonMaterial,
                 false);
-            CreateMeshObject(
-                "UndercutShadowGap",
-                topButton.transform,
-                shadowGapMesh,
-                shadowGapMaterial);
             topButton.transform.localPosition = Vector3.up
                 * (TwoLobeBarSpecifications.BodyThickness * 0.5f
                     - TwoLobeBarSpecifications.ButtonUndercutSink);
@@ -147,11 +141,6 @@ namespace FidgetingApp.TwoLobeBar.EditorTools
                 buttonMesh,
                 buttonMaterial,
                 true);
-            CreateMeshObject(
-                "UndercutShadowGap",
-                bottomButton.transform,
-                shadowGapMesh,
-                shadowGapMaterial);
             bottomButton.transform.localPosition = Vector3.down
                 * (TwoLobeBarSpecifications.BodyThickness * 0.5f
                     - TwoLobeBarSpecifications.ButtonUndercutSink);
@@ -166,6 +155,20 @@ namespace FidgetingApp.TwoLobeBar.EditorTools
                 throw new InvalidDataException(
                     "The two-lobe scene must retain the canonical interaction pipeline.");
             }
+
+            RotorWindAudio windAudio =
+                root.GetComponentInChildren<RotorWindAudio>(true);
+            MetalRatchetDetentAudio ratchetAudio =
+                root.GetComponentInChildren<MetalRatchetDetentAudio>(true);
+            if (windAudio == null || ratchetAudio == null)
+            {
+                throw new InvalidDataException(
+                    "The two-lobe scene must retain wind and ratchet audio layers.");
+            }
+            windAudio.Configure(
+                rotorController,
+                2,
+                RotorWindAudioModel.DefaultMasterVolume);
 
             rotorBody.mass = 0.095f;
             rotorBody.angularVelocity = Vector3.zero;
@@ -247,6 +250,97 @@ namespace FidgetingApp.TwoLobeBar.EditorTools
             string outputPath = Path.Combine(outputFolder, "two-lobe-bar-hero.png");
             RenderCameraToPng(camera, outputPath);
             Debug.Log($"[TwoLobeBar] Hero preview written: {outputPath}; scene={scene.path}");
+        }
+
+        [MenuItem("Tools/Codex/Build and Capture Graphite Shipping Preview")]
+        public static void BuildAndCaptureShippingPreview()
+        {
+            BuildPresentation();
+            CaptureShippingPreview();
+        }
+
+        [MenuItem("Tools/Codex/Capture Graphite Shipping Preview")]
+        public static void CaptureShippingPreview()
+        {
+            EditorSceneManager.OpenScene(
+                TwoLobeBarSpecifications.ScenePath,
+                OpenSceneMode.Single);
+            GameObject root = GameObject.Find("TwoLobeBar_Root");
+            Camera camera = Camera.main ?? UnityEngine.Object.FindAnyObjectByType<Camera>();
+            OrbitPresentationCamera orbit =
+                UnityEngine.Object.FindAnyObjectByType<OrbitPresentationCamera>();
+            if (root == null || camera == null || orbit == null)
+            {
+                throw new InvalidDataException(
+                    "The shipping graphite scene is missing its root or camera.");
+            }
+            if (!ProductCameraFraming.TryGetProductBounds(root.transform, out Bounds bounds))
+            {
+                throw new InvalidDataException(
+                    "The shipping graphite scene has no visible product bounds.");
+            }
+
+            const int width = 720;
+            const int height = 1280;
+            string folder = Path.GetFullPath(Path.Combine(
+                Application.dataPath,
+                "../Artifacts/TwoLobeBarShippingPreview"));
+            Directory.CreateDirectory(folder);
+            var poses = new[]
+            {
+                new PreviewPose("01-authored-hero-42.png", 32f, 42f),
+                new PreviewPose("02-top-89.png", 0f, 89f),
+                new PreviewPose("03-left-oblique-35.png", -48f, 35f),
+                new PreviewPose("04-right-oblique-35.png", 112f, 35f),
+                new PreviewPose("05-low-angle-15.png", 32f, 15f)
+            };
+            ProductFramingProfile framing = ProductFramingCatalog.Resolve(
+                TwoLobeBarSpecifications.ScenePath);
+            Vector3 focusPoint = orbit.FocusPoint;
+            Vector3 originalPosition = camera.transform.position;
+            Quaternion originalRotation = camera.transform.rotation;
+
+            try
+            {
+                camera.aspect = (float)width / height;
+                camera.clearFlags = CameraClearFlags.SolidColor;
+                camera.backgroundColor = new Color(0.12f, 0.10f, 0.09f, 1f);
+                camera.allowHDR = false;
+                camera.allowMSAA = true;
+                foreach (PreviewPose pose in poses)
+                {
+                    Quaternion rotation = Quaternion.Euler(pose.Pitch, pose.Yaw, 0f);
+                    Vector3 backward = rotation * Vector3.back;
+                    float distance = ProductCameraFraming.RequiredDistance(
+                        camera,
+                        bounds,
+                        backward,
+                        framing.DetailWidthFraction,
+                        framing.DetailHeightFraction,
+                        focusPoint: focusPoint);
+                    camera.transform.position = focusPoint + backward * distance;
+                    camera.transform.LookAt(focusPoint, Vector3.up);
+                    RenderCameraToPng(
+                        camera,
+                        Path.Combine(folder, pose.FileName),
+                        width,
+                        height);
+                }
+
+                File.WriteAllText(
+                    Path.Combine(folder, "README.txt"),
+                    "Shipping scene: " + TwoLobeBarSpecifications.ScenePath + "\n"
+                    + "Physical body: 50 x 18 x 13 mm\n"
+                    + "Framing scale: 50/85 of circular rotor boundary\n"
+                    + "Views: authored hero, top, left/right oblique, low angle\n"
+                    + "Device installation: blocked pending explicit visual approval\n");
+            }
+            finally
+            {
+                camera.transform.SetPositionAndRotation(originalPosition, originalRotation);
+            }
+
+            Debug.Log($"[TwoLobeBar] Shipping previews written: {folder}");
         }
 
         [MenuItem("Tools/Codex/Capture Graphite Two-Lobe Exploded View")]
@@ -592,38 +686,6 @@ namespace FidgetingApp.TwoLobeBar.EditorTools
             material.SetTexture("_OcclusionMap", occlusion);
             material.SetFloat("_OcclusionStrength", 1f);
             material.EnableKeyword("_OCCLUSIONMAP");
-            EditorUtility.SetDirty(material);
-            return material;
-        }
-
-        private static Material CreateOrUpdateShadowGapMaterial()
-        {
-            Shader shader = Shader.Find("Universal Render Pipeline/Lit");
-            if (shader == null)
-            {
-                throw new MissingReferenceException("URP Lit shader is unavailable.");
-            }
-
-            Material material = AssetDatabase.LoadAssetAtPath<Material>(
-                ShadowGapMaterialPath);
-            if (material == null)
-            {
-                material = new Material(shader) { name = "M_TwoLobeShadowGap" };
-                AssetDatabase.CreateAsset(material, ShadowGapMaterialPath);
-            }
-            else
-            {
-                material.shader = shader;
-            }
-
-            Color shadowColor = new Color32(0x10, 0x12, 0x13, 0xFF);
-            material.SetColor("_BaseColor", shadowColor);
-            material.SetColor("_Color", shadowColor);
-            material.SetFloat("_Metallic", 0.72f);
-            material.SetFloat("_Smoothness", 0.12f);
-            material.SetFloat("_SpecularHighlights", 0.35f);
-            material.SetFloat("_EnvironmentReflections", 0.35f);
-            material.enableInstancing = true;
             EditorUtility.SetDirty(material);
             return material;
         }
@@ -991,20 +1053,21 @@ namespace FidgetingApp.TwoLobeBar.EditorTools
 
         private static void SetProductBuildScenes()
         {
-            EditorBuildSettings.scenes = new[]
+            string[] paths = ProductCatalog.ShippingScenePaths();
+            var scenes = new EditorBuildSettingsScene[paths.Length];
+            for (int index = 0; index < paths.Length; index++)
             {
-                new EditorBuildSettingsScene(BlueScenePath, true),
-                new EditorBuildSettingsScene(BaseScenePath, true),
-                new EditorBuildSettingsScene(ImportedScenePath, true),
-                new EditorBuildSettingsScene(TwoLobeBarSpecifications.ScenePath, true),
-                new EditorBuildSettingsScene(EdcScenePath, true)
-            };
+                scenes[index] = new EditorBuildSettingsScene(paths[index], true);
+            }
+            EditorBuildSettings.scenes = scenes;
         }
 
-        private static void RenderCameraToPng(Camera camera, string path)
+        private static void RenderCameraToPng(
+            Camera camera,
+            string path,
+            int width = 1200,
+            int height = 1200)
         {
-            const int width = 1200;
-            const int height = 1200;
             RenderTexture previousTarget = camera.targetTexture;
             RenderTexture previousActive = RenderTexture.active;
             float previousAspect = camera.aspect;
@@ -1016,7 +1079,7 @@ namespace FidgetingApp.TwoLobeBar.EditorTools
             try
             {
                 target.Create();
-                camera.aspect = 1f;
+                camera.aspect = (float)width / height;
                 camera.targetTexture = target;
                 camera.Render();
                 RenderTexture.active = target;

@@ -34,6 +34,7 @@ namespace FidgetingApp.Product
         public const float LibraryHoverCyclesPerSecond = 0.42f;
         public const float LibraryPageTravelViewport = 1.08f;
         public const float LibraryPageTransitionResponse = 13.5f;
+        public const float LibraryPageExitLeadSeconds = 0.12f;
         private const float AccessibilityRefreshInterval = 1f;
 
         private Camera targetCamera;
@@ -251,6 +252,44 @@ namespace FidgetingApp.Product
             libraryPageOffset = Mathf.Sign(direction);
             targetLibraryPageOffset = 0f;
         }
+
+        public void SetLibraryPageDragProgress(float normalizedOffset)
+        {
+            if (!libraryPreviewActive || reduceMotionEnabled)
+            {
+                return;
+            }
+
+            // The native page drag is normalized to the phone width. Apply it
+            // immediately so the Unity model follows the finger before the
+            // SwiftUI TabView commits its new selection.
+            float clamped = Mathf.Clamp(normalizedOffset, -1f, 1f);
+            libraryPageOffset = clamped;
+            targetLibraryPageOffset = clamped;
+        }
+
+        public void EndLibraryPageDrag()
+        {
+            if (!libraryPreviewActive)
+            {
+                return;
+            }
+
+            targetLibraryPageOffset = 0f;
+        }
+
+#if UNITY_EDITOR
+        public void SetLibraryPageOffsetForPreview(float normalizedOffset)
+        {
+            libraryPreviewActive = true;
+            libraryPageOffset = Mathf.Clamp(normalizedOffset, -1f, 1f);
+            targetLibraryPageOffset = libraryPageOffset;
+            ApplyProjectionOffset(
+                Vector2.zero,
+                LibraryAnchorLayerPixels,
+                0f);
+        }
+#endif
 
         public static float ResolveLibraryHoverPixels(
             float unscaledTime,

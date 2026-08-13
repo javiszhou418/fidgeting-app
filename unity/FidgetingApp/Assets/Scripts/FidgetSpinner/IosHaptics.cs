@@ -63,7 +63,8 @@ namespace CodexUnityLab
         Collision = 11,
         Preview = 12,
         InertiaShift = 13,
-        MagneticEdgeProbe = 14
+        MagneticEdgeProbe = 14,
+        BadgeUnlocked = 15
     }
 
     /// <summary>
@@ -120,6 +121,9 @@ namespace CodexUnityLab
             float edgePulseDurationSeconds,
             float crossingPrimaryIntensity,
             float crossingPrimarySharpness,
+            float crossingBodyIntensity,
+            float crossingBodySharpness,
+            float crossingBodyDurationSeconds,
             float crossingSecondaryIntensity,
             float crossingSecondarySharpness,
             float crossingPulseIntervalSeconds)
@@ -131,6 +135,12 @@ namespace CodexUnityLab
             EdgePulseDurationSeconds = Mathf.Clamp(edgePulseDurationSeconds, 0.005f, 0.080f);
             CrossingPrimaryIntensity = Mathf.Clamp01(crossingPrimaryIntensity);
             CrossingPrimarySharpness = Mathf.Clamp01(crossingPrimarySharpness);
+            CrossingBodyIntensity = Mathf.Clamp01(crossingBodyIntensity);
+            CrossingBodySharpness = Mathf.Clamp01(crossingBodySharpness);
+            CrossingBodyDurationSeconds = Mathf.Clamp(
+                crossingBodyDurationSeconds,
+                0.010f,
+                0.080f);
             CrossingSecondaryIntensity = Mathf.Clamp01(crossingSecondaryIntensity);
             CrossingSecondarySharpness = Mathf.Clamp01(crossingSecondarySharpness);
             CrossingPulseIntervalSeconds = Mathf.Clamp(
@@ -146,9 +156,60 @@ namespace CodexUnityLab
         public float EdgePulseDurationSeconds { get; }
         public float CrossingPrimaryIntensity { get; }
         public float CrossingPrimarySharpness { get; }
+        public float CrossingBodyIntensity { get; }
+        public float CrossingBodySharpness { get; }
+        public float CrossingBodyDurationSeconds { get; }
         public float CrossingSecondaryIntensity { get; }
         public float CrossingSecondarySharpness { get; }
         public float CrossingPulseIntervalSeconds { get; }
+    }
+
+    /// <summary>
+    /// Final fan-card crossing values. They remain independent from rotary
+    /// detent presets so a four-step card keeps its authored tactile contrast.
+    /// </summary>
+    public readonly struct FanCardHapticTuning
+    {
+        public FanCardHapticTuning(
+            float minimumIntensity,
+            float maximumIntensity,
+            float minimumSharpness,
+            float maximumSharpness,
+            float bodyIntensity,
+            float bodySharpness,
+            float bodyDurationSeconds,
+            float tailIntensity,
+            float tailSharpness,
+            float tailDelaySeconds)
+        {
+            MinimumIntensity = Mathf.Clamp01(minimumIntensity);
+            MaximumIntensity = Mathf.Clamp(
+                maximumIntensity,
+                MinimumIntensity,
+                1f);
+            MinimumSharpness = Mathf.Clamp01(minimumSharpness);
+            MaximumSharpness = Mathf.Clamp(
+                maximumSharpness,
+                MinimumSharpness,
+                1f);
+            BodyIntensity = Mathf.Clamp01(bodyIntensity);
+            BodySharpness = Mathf.Clamp01(bodySharpness);
+            BodyDurationSeconds = Mathf.Clamp(bodyDurationSeconds, 0.010f, 0.080f);
+            TailIntensity = Mathf.Clamp01(tailIntensity);
+            TailSharpness = Mathf.Clamp01(tailSharpness);
+            TailDelaySeconds = Mathf.Clamp(tailDelaySeconds, 0.010f, 0.080f);
+        }
+
+        public float MinimumIntensity { get; }
+        public float MaximumIntensity { get; }
+        public float MinimumSharpness { get; }
+        public float MaximumSharpness { get; }
+        public float BodyIntensity { get; }
+        public float BodySharpness { get; }
+        public float BodyDurationSeconds { get; }
+        public float TailIntensity { get; }
+        public float TailSharpness { get; }
+        public float TailDelaySeconds { get; }
     }
 
     /// <summary>
@@ -465,6 +526,19 @@ namespace CodexUnityLab
                     pulseInterval = 0.034f;
                     impactLayers = 1.65f;
                     break;
+                case FidgetSemanticEvent.BadgeUnlocked:
+                    waveform = FidgetHapticWaveform.Hybrid;
+                    baseIntensity = 0.78f;
+                    baseSharpness = 0.72f;
+                    endIntensity = 0.34f;
+                    endSharpness = 0.96f;
+                    duration = 0.09f;
+                    decay = 0.07f;
+                    release = 0.05f;
+                    pulseCount = 3;
+                    pulseInterval = 0.042f;
+                    impactLayers = 1.55f;
+                    break;
                 default:
                     baseIntensity = 0.55f;
                     baseSharpness = 0.85f;
@@ -697,9 +771,12 @@ namespace CodexUnityLab
             if (semanticEvent == FidgetSemanticEvent.DetentCrossed)
             {
                 renderedEventCount++;
-                IosHaptics.PlayMagneticCrossingTremorResolved(
+                IosHaptics.PlayPushDetentPacketResolved(
                     tuning.CrossingPrimaryIntensity,
                     tuning.CrossingPrimarySharpness,
+                    tuning.CrossingBodyIntensity,
+                    tuning.CrossingBodySharpness,
+                    tuning.CrossingBodyDurationSeconds,
                     tuning.CrossingSecondaryIntensity,
                     tuning.CrossingSecondarySharpness,
                     tuning.CrossingPulseIntervalSeconds);
@@ -709,7 +786,7 @@ namespace CodexUnityLab
             // The mechanism still emits Breakaway and DetentCaptured for state,
             // telemetry and tests. The magnetic tile deliberately renders no
             // second impact for them: one spatial edge cue and one crossing
-            // tremor are the complete tactile sentence for a manual detent.
+            // weighted packet are the complete tactile sentence for a manual detent.
             if (semanticEvent == FidgetSemanticEvent.Breakaway
                 || semanticEvent == FidgetSemanticEvent.DetentCaptured)
             {
@@ -724,6 +801,52 @@ namespace CodexUnityLab
         public static void StopAllContinuous(bool immediate = false)
         {
             StopSpeedTexture(immediate);
+        }
+
+        /// <summary>
+        /// Renders one short weighted packet for each physical fan-card detent.
+        /// Slow crossings retain a low-sharpness body; ballistic crossings make
+        /// the leading impact harder without inheriting a rotary preset.
+        /// </summary>
+        public static void EmitFanCard(
+            FidgetSemanticEvent semanticEvent,
+            float normalizedSignal,
+            FanCardHapticTuning tuning)
+        {
+            lastSemanticEvent = semanticEvent;
+            if (semanticEvent == FidgetSemanticEvent.DetentCrossed)
+            {
+                float signal = Mathf.Clamp01(normalizedSignal);
+                renderedEventCount++;
+                IosHaptics.PlayPushDetentPacketResolved(
+                    Mathf.Lerp(
+                        tuning.MinimumIntensity,
+                        tuning.MaximumIntensity,
+                        signal),
+                    Mathf.Lerp(
+                        tuning.MinimumSharpness,
+                        tuning.MaximumSharpness,
+                        signal),
+                    tuning.BodyIntensity,
+                    tuning.BodySharpness,
+                    tuning.BodyDurationSeconds,
+                    tuning.TailIntensity,
+                    tuning.TailSharpness,
+                    tuning.TailDelaySeconds);
+                return;
+            }
+
+            // Breakaway and capture remain available to mechanics, visuals and
+            // telemetry, but the card's complete tactile sentence is the one
+            // weighted packet emitted at the real detent crossing.
+            if (semanticEvent == FidgetSemanticEvent.Breakaway
+                || semanticEvent == FidgetSemanticEvent.DetentCaptured)
+            {
+                suppressedEventCount++;
+                return;
+            }
+
+            Emit(semanticEvent, normalizedSignal);
         }
 
         public static FidgetHapticTelemetry GetTelemetry()
@@ -849,6 +972,17 @@ namespace CodexUnityLab
             float secondaryIntensity,
             float secondarySharpness,
             float pulseInterval);
+
+        [DllImport("__Internal")]
+        private static extern void CodexIosHapticsPlayPushDetentPacket(
+            float primaryIntensity,
+            float primarySharpness,
+            float bodyIntensity,
+            float bodySharpness,
+            float bodyDuration,
+            float tailIntensity,
+            float tailSharpness,
+            float tailDelay);
 
         [DllImport("__Internal")]
         private static extern void CodexIosHapticsPlaySystemPreset(
@@ -1083,6 +1217,34 @@ namespace CodexUnityLab
                 Mathf.Clamp01(secondaryIntensity),
                 Mathf.Clamp01(secondarySharpness),
                 Mathf.Clamp(pulseIntervalSeconds, 0.010f, 0.080f));
+#endif
+        }
+
+        internal static void PlayPushDetentPacketResolved(
+            float primaryIntensity,
+            float primarySharpness,
+            float bodyIntensity,
+            float bodySharpness,
+            float bodyDurationSeconds,
+            float tailIntensity,
+            float tailSharpness,
+            float tailDelaySeconds)
+        {
+            if (!settings.Enabled)
+            {
+                return;
+            }
+
+#if UNITY_IOS && !UNITY_EDITOR
+            CodexIosHapticsPlayPushDetentPacket(
+                Mathf.Clamp01(primaryIntensity),
+                Mathf.Clamp01(primarySharpness),
+                Mathf.Clamp01(bodyIntensity),
+                Mathf.Clamp01(bodySharpness),
+                Mathf.Clamp(bodyDurationSeconds, 0.010f, 0.080f),
+                Mathf.Clamp01(tailIntensity),
+                Mathf.Clamp01(tailSharpness),
+                Mathf.Clamp(tailDelaySeconds, 0.010f, 0.080f));
 #endif
         }
 

@@ -57,7 +57,9 @@ namespace FidgetingApp.Product
             int collectedCosmeticCount,
             int unlockedAchievementCount,
             string discoveredModelPayload,
-            string achievementCatalogPayload)
+            string achievementCatalogPayload,
+            int toyLevel20Count = 0,
+            int toyLevel100Count = 0)
         {
             Rank = rank;
             TotalExperience = Math.Max(0d, totalExperience);
@@ -75,6 +77,8 @@ namespace FidgetingApp.Product
             UnlockedAchievementCount = Math.Max(0, unlockedAchievementCount);
             DiscoveredModelPayload = discoveredModelPayload ?? string.Empty;
             AchievementCatalogPayload = achievementCatalogPayload ?? string.Empty;
+            ToyLevel20Count = Math.Max(0, toyLevel20Count);
+            ToyLevel100Count = Math.Max(0, toyLevel100Count);
         }
 
         public int Rank { get; }
@@ -93,6 +97,8 @@ namespace FidgetingApp.Product
         public int UnlockedAchievementCount { get; }
         public string DiscoveredModelPayload { get; }
         public string AchievementCatalogPayload { get; }
+        public int ToyLevel20Count { get; }
+        public int ToyLevel100Count { get; }
     }
 
     /// <summary>
@@ -123,43 +129,43 @@ namespace FidgetingApp.Product
         {
             new CollectorAchievementDefinition(
                 "rhythm-1", CollectorAchievementMetric.CompletedRhythmWeeks,
-                1, "初次成行", 40d),
+                1, "初次成行", 5d),
             new CollectorAchievementDefinition(
                 "rhythm-4", CollectorAchievementMetric.CompletedRhythmWeeks,
-                4, "稳定节奏", 100d),
+                4, "稳定节奏", 10d),
             new CollectorAchievementDefinition(
                 "rhythm-12", CollectorAchievementMetric.CompletedRhythmWeeks,
-                12, "日常相伴", 250d),
+                12, "日常相伴", 20d),
+            new CollectorAchievementDefinition(
+                "explore-2", CollectorAchievementMetric.DiscoveredModels,
+                2, "双件轮换", 5d),
             new CollectorAchievementDefinition(
                 "explore-3", CollectorAchievementMetric.DiscoveredModels,
-                3, "三件轮换", 40d),
+                3, "三件轮换", 10d),
             new CollectorAchievementDefinition(
                 "explore-5", CollectorAchievementMetric.DiscoveredModels,
-                5, "完整轮换", 100d),
+                5, "完整轮换", 20d),
+            new CollectorAchievementDefinition(
+                "master-20-1", CollectorAchievementMetric.ToyLevel20Count,
+                1, "首件入门", 5d),
             new CollectorAchievementDefinition(
                 "master-20-3", CollectorAchievementMetric.ToyLevel20Count,
-                3, "三件入门", 100d),
+                3, "三件入门", 10d),
             new CollectorAchievementDefinition(
                 "master-100-1", CollectorAchievementMetric.ToyLevel100Count,
-                1, "首件完成体", 100d),
+                1, "首件完成体", 20d),
             new CollectorAchievementDefinition(
                 "master-100-3", CollectorAchievementMetric.ToyLevel100Count,
-                3, "多件精通", 250d),
-            new CollectorAchievementDefinition(
-                "collection-model-2", CollectorAchievementMetric.DiscoveredModels,
-                2, "双件收藏", 40d),
-            new CollectorAchievementDefinition(
-                "collection-model-4", CollectorAchievementMetric.DiscoveredModels,
-                4, "四件藏品", 100d),
+                3, "多件精通", 40d),
             new CollectorAchievementDefinition(
                 "collection-cosmetic-5", CollectorAchievementMetric.CollectedCosmetics,
-                5, "五种外观", 40d),
+                5, "五种外观", 5d),
             new CollectorAchievementDefinition(
                 "collection-cosmetic-10", CollectorAchievementMetric.CollectedCosmetics,
-                10, "十种外观", 100d),
+                10, "十种外观", 10d),
             new CollectorAchievementDefinition(
                 "collection-cosmetic-25", CollectorAchievementMetric.CollectedCosmetics,
-                25, "外观藏册", 250d)
+                25, "外观藏册", 40d)
         };
 
         public static IReadOnlyList<int> ToyMilestoneLevels => toyMilestoneLevels;
@@ -277,6 +283,7 @@ namespace FidgetingApp.Product
         private readonly HashSet<string> unlockedAchievements;
         private readonly HashSet<string> validDayStamps;
         private readonly Dictionary<string, int> highestToyLevels;
+        private readonly BadgeRewardLedger badgeRewards;
 
         private double experience;
         private double collectionExperience;
@@ -289,14 +296,20 @@ namespace FidgetingApp.Product
         private string lastRhythmRewardStamp;
         private int completedRhythmWeeks;
         private int pendingPreviousRank;
+        private int pendingBadgeUnlockCount;
         private bool initialized;
         private bool dirty;
 
         public CollectorProgressionRuntime(
             string fallbackFocusModelId,
-            string storagePrefix = DefaultPrefix)
+            string storagePrefix = DefaultPrefix,
+            BadgeRewardLedger rewardLedger = null)
         {
             prefix = string.IsNullOrEmpty(storagePrefix) ? DefaultPrefix : storagePrefix;
+            badgeRewards = rewardLedger ?? new BadgeRewardLedger(
+                prefix == DefaultPrefix
+                    ? BadgeRewardLedger.DefaultPrefix
+                    : prefix + "badges.v2.");
             experience = ReadDouble("experience");
             collectionExperience = ReadDouble("collectionExperience");
             focusModelId = PlayerPrefs.GetString(
@@ -319,6 +332,7 @@ namespace FidgetingApp.Product
             validDayStamps = ReadSet("validDays");
             highestToyLevels = ReadLevelMap("highestToyLevels");
             RefreshDay(DateTime.Now);
+            MigrateLegacyAchievementClaims(DateTime.UtcNow);
             EvaluateAchievements();
         }
 
@@ -451,6 +465,13 @@ namespace FidgetingApp.Product
             return previous;
         }
 
+        public int ConsumePendingBadgeUnlockCount()
+        {
+            int count = pendingBadgeUnlockCount;
+            pendingBadgeUnlockCount = 0;
+            return count;
+        }
+
         public void SaveIfDirty(bool flush)
         {
             if (dirty)
@@ -480,7 +501,12 @@ namespace FidgetingApp.Product
                 WriteSet("unlockedAchievements", unlockedAchievements);
                 WriteSet("validDays", validDayStamps);
                 WriteLevelMap("highestToyLevels", highestToyLevels);
+                badgeRewards.SaveIfDirty(false);
                 dirty = false;
+            }
+            else
+            {
+                badgeRewards.SaveIfDirty(false);
             }
 
             if (flush)
@@ -498,16 +524,34 @@ namespace FidgetingApp.Product
             double nextRank = rank >= CollectorProgressionRules.MaximumRank
                 ? CollectorProgressionRules.FinalExperience
                 : CollectorProgressionRules.ExperienceForRank(rank + 1);
-            string achievementPayload = string.Join(
-                "\n",
-                CollectorProgressionRules.Achievements.Select(definition => string.Join(
-                    "\t",
-                    definition.Id,
-                    definition.Metric.ToString(),
-                    definition.Threshold.ToString(CultureInfo.InvariantCulture),
-                    definition.Title,
-                    unlockedAchievements.Contains(definition.Id) ? "1" : "0")));
-
+            int toyLevel20Count = highestToyLevels.Values.Count(level => level >= 20);
+            int toyLevel100Count = highestToyLevels.Values.Count(level => level >= 100);
+            string discoveredPayload = string.Join(
+                "|",
+                discoveredModels.OrderBy(value => value, StringComparer.Ordinal));
+            var preliminary = new CollectorProgressionSnapshot(
+                rank,
+                experience,
+                rankStart,
+                nextRank,
+                CollectorProgressionRules.ProgressWithinRank(experience),
+                focusModelId,
+                CanChangeFocus(localNow),
+                CollectorProgressionRules.GlobalActiveBonusForRank(rank),
+                CollectorProgressionRules.FocusActiveBonusForRank(rank),
+                validDayStamps.Count,
+                completedRhythmWeeks,
+                discoveredModels.Count,
+                collectedCosmetics.Count,
+                0,
+                discoveredPayload,
+                string.Empty,
+                toyLevel20Count,
+                toyLevel100Count);
+            int unlockedBadgeCount = BadgeCatalogV2.UnlockedCollectorCount(preliminary);
+            string achievementPayload = BadgeCatalogV2.CollectorCatalogJson(
+                preliminary,
+                badgeRewards);
             return new CollectorProgressionSnapshot(
                 rank,
                 experience,
@@ -522,9 +566,11 @@ namespace FidgetingApp.Product
                 completedRhythmWeeks,
                 discoveredModels.Count,
                 collectedCosmetics.Count,
-                unlockedAchievements.Count,
-                string.Join("|", discoveredModels.OrderBy(value => value, StringComparer.Ordinal)),
-                achievementPayload);
+                unlockedBadgeCount,
+                discoveredPayload,
+                achievementPayload,
+                toyLevel20Count,
+                toyLevel100Count);
         }
 
         private bool RecordToyLevelInternal(string modelId, int level)
@@ -611,37 +657,94 @@ namespace FidgetingApp.Product
 
         private void EvaluateAchievements()
         {
-            foreach (CollectorAchievementDefinition definition
-                     in CollectorProgressionRules.Achievements)
+            CollectorProgressionSnapshot snapshot = CreateMetricSnapshot();
+            foreach (BadgeDefinition definition in BadgeCatalogV2.CollectorDefinitions)
             {
-                if (unlockedAchievements.Contains(definition.Id)
-                    || MetricValue(definition.Metric) < definition.Threshold)
+                if (!BadgeCatalogV2.IsCollectorUnlocked(snapshot, definition))
                 {
                     continue;
                 }
 
-                unlockedAchievements.Add(definition.Id);
-                AddExperience(definition.RewardExperience);
-                dirty = true;
+                string claimKey = BadgeRewardLedger.CollectorClaimKey(definition.Id);
+                if (badgeRewards.TryClaim(
+                        claimKey,
+                        definition,
+                        DateTime.UtcNow,
+                        reward => AddExperience(reward)))
+                {
+                    pendingBadgeUnlockCount++;
+                    dirty = true;
+                }
             }
         }
 
-        private int MetricValue(CollectorAchievementMetric metric)
+        private CollectorProgressionSnapshot CreateMetricSnapshot()
+        {
+            int rank = CollectorProgressionRules.RankForExperience(experience);
+            return new CollectorProgressionSnapshot(
+                rank,
+                experience,
+                CollectorProgressionRules.ExperienceForRank(rank),
+                rank >= CollectorProgressionRules.MaximumRank
+                    ? CollectorProgressionRules.FinalExperience
+                    : CollectorProgressionRules.ExperienceForRank(rank + 1),
+                CollectorProgressionRules.ProgressWithinRank(experience),
+                focusModelId,
+                true,
+                CollectorProgressionRules.GlobalActiveBonusForRank(rank),
+                CollectorProgressionRules.FocusActiveBonusForRank(rank),
+                validDayStamps.Count,
+                completedRhythmWeeks,
+                discoveredModels.Count,
+                collectedCosmetics.Count,
+                0,
+                string.Empty,
+                string.Empty,
+                highestToyLevels.Values.Count(level => level >= 20),
+                highestToyLevels.Values.Count(level => level >= 100));
+        }
+
+        private void MigrateLegacyAchievementClaims(DateTime utcNow)
+        {
+            foreach (CollectorAchievementDefinition legacy
+                     in CollectorProgressionRules.Achievements)
+            {
+                if (!unlockedAchievements.Contains(legacy.Id))
+                {
+                    continue;
+                }
+
+                BadgeMetric metric = MapLegacyMetric(legacy.Metric);
+                BadgeDefinition replacement = BadgeCatalogV2.CollectorDefinitions
+                    .FirstOrDefault(candidate => candidate.Metric == metric
+                        && Math.Abs(candidate.Threshold - legacy.Threshold) < 0.001d);
+                if (string.IsNullOrEmpty(replacement.Id))
+                {
+                    continue;
+                }
+
+                badgeRewards.MarkClaimed(
+                    BadgeRewardLedger.CollectorClaimKey(replacement.Id),
+                    utcNow);
+            }
+        }
+
+        private static BadgeMetric MapLegacyMetric(CollectorAchievementMetric metric)
         {
             switch (metric)
             {
                 case CollectorAchievementMetric.CompletedRhythmWeeks:
-                    return completedRhythmWeeks;
+                    return BadgeMetric.CompletedRhythmWeeks;
                 case CollectorAchievementMetric.DiscoveredModels:
-                    return discoveredModels.Count;
+                    return BadgeMetric.DiscoveredModels;
                 case CollectorAchievementMetric.ToyLevel20Count:
-                    return highestToyLevels.Values.Count(level => level >= 20);
+                    return BadgeMetric.ToyLevel20Count;
                 case CollectorAchievementMetric.ToyLevel100Count:
-                    return highestToyLevels.Values.Count(level => level >= 100);
+                    return BadgeMetric.ToyLevel100Count;
                 case CollectorAchievementMetric.CollectedCosmetics:
-                    return collectedCosmetics.Count;
+                    return BadgeMetric.CollectedCosmetics;
                 default:
-                    return 0;
+                    return BadgeMetric.CompletedRhythmWeeks;
             }
         }
 
@@ -827,7 +930,7 @@ namespace FidgetingApp.Product
                 snapshot.DiscoveredModelCount,
                 snapshot.CollectedCosmeticCount,
                 snapshot.UnlockedAchievementCount,
-                CollectorProgressionRules.Achievements.Count,
+                BadgeCatalogV2.CollectorDefinitions.Count,
                 snapshot.DiscoveredModelPayload,
                 snapshot.AchievementCatalogPayload,
                 previousRank);

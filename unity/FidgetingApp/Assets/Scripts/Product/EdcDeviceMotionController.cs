@@ -1,13 +1,15 @@
 using CodexUnityLab;
 using FidgetingApp.EDC;
+using FidgetingApp.FanCard;
 using UnityEngine;
 
 namespace FidgetingApp.Product
 {
     /// <summary>
-    /// Gives the fifth product the same Core Motion presentation response as
-    /// the four rotor scenes. It only publishes visual tilt and camera orbit;
-    /// it never writes slide progress, physics, progression, or Haptics.
+    /// Gives the linear slider and magnetic fan card the same Core Motion
+    /// presentation response as the rotor scenes. It only publishes visual
+    /// tilt and camera orbit; it never writes mechanism progress, physics,
+    /// progression, or Haptics.
     /// </summary>
     [DisallowMultipleComponent]
     [RequireComponent(typeof(EdcPortraitCameraFramer))]
@@ -22,14 +24,23 @@ namespace FidgetingApp.Product
         private Vector2 filteredTilt;
         private bool hasReference;
         private bool motionAvailable;
+        private EdcSliderController sliderController;
+        private FanCardController fanCardController;
+        private bool productInteractionSuppressed;
+        private bool motionSuspendedForInteraction;
+
+        public bool IsProductInteractionSuppressed =>
+            productInteractionSuppressed;
 
         private void Awake()
         {
             cameraFramer = GetComponent<EdcPortraitCameraFramer>();
+            ResolveInteractionSources();
         }
 
         private void OnEnable()
         {
+            ResolveInteractionSources();
             ResumeMotion();
         }
 
@@ -41,6 +52,45 @@ namespace FidgetingApp.Product
 
         private void Update()
         {
+            if (sliderController == null && fanCardController == null)
+            {
+                ResolveInteractionSources();
+            }
+            bool shouldSuppress = ShouldSuppressForProductInteraction(
+                sliderController != null && sliderController.IsDragging,
+                fanCardController != null
+                    && fanCardController.IsDirectInteractionActive);
+            if (shouldSuppress)
+            {
+                // Keep the last camera pose perfectly still while the finger
+                // resolves an angular or linear mechanism. Recomputing tilt
+                // here would move the product pivot underneath that finger.
+                productInteractionSuppressed = true;
+                if (!motionSuspendedForInteraction)
+                {
+                    motionSuspendedForInteraction = true;
+                    motionAvailable = false;
+                    IosDeviceMotion.Stop();
+                }
+                // SpinnerSceneParallaxController treats an old sample as an
+                // instruction to ease back to zero. Republishing the frozen
+                // sample prevents that fallback movement from sliding the
+                // pivot out from beneath the finger while Core Motion is off.
+                SceneParallaxInput.Publish(filteredTilt, maximumInputAngle);
+                cameraFramer?.SetMotionTilt(filteredTilt, maximumMotionOrbit);
+                return;
+            }
+
+            if (productInteractionSuppressed)
+            {
+                // Rebase to the device's release attitude so resuming Core
+                // Motion cannot introduce a one-frame jump after the drag.
+                productInteractionSuppressed = false;
+                motionSuspendedForInteraction = false;
+                motionAvailable = IosDeviceMotion.Start();
+                hasReference = false;
+            }
+
             if (!motionAvailable
                 || !IosDeviceMotion.TryRead(
                     out Vector3 attitude,
@@ -114,8 +164,16 @@ namespace FidgetingApp.Product
             cameraFramer?.ResetMotionTilt();
         }
 
+        public static bool ShouldSuppressForProductInteraction(
+            bool sliderDragging,
+            bool fanCardDragging)
+        {
+            return sliderDragging || fanCardDragging;
+        }
+
         private void ResumeMotion()
         {
+            motionSuspendedForInteraction = false;
             motionAvailable = IosDeviceMotion.Start();
             ResetReference();
         }
@@ -123,7 +181,15 @@ namespace FidgetingApp.Product
         private void SuspendMotion()
         {
             motionAvailable = false;
+            productInteractionSuppressed = false;
+            motionSuspendedForInteraction = false;
             IosDeviceMotion.Stop();
+        }
+
+        private void ResolveInteractionSources()
+        {
+            sliderController = FindAnyObjectByType<EdcSliderController>();
+            fanCardController = FindAnyObjectByType<FanCardController>();
         }
     }
 }
