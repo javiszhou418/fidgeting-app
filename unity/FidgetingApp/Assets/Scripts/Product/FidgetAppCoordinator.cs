@@ -317,12 +317,37 @@ namespace FidgetingApp.Product
         private PremiumDisplayCase activeDisplayCase;
         private PremiumDisplayCaseInteractionController activeDisplayCaseInteraction;
         private GameObject activeDisplayCasePrize;
-        private Transform displayCaseHiddenProduct;
-        private bool displayCaseHiddenProductWasActive;
+        private GameObject displayCaseCanonicalPrize;
+        private string displayCaseCanonicalPrizeModelId = string.Empty;
+        private readonly struct DisplayCaseRendererVisibilityState
+        {
+            public DisplayCaseRendererVisibilityState(Renderer renderer)
+            {
+                Renderer = renderer;
+                Enabled = renderer != null && renderer.enabled;
+            }
+
+            public Renderer Renderer { get; }
+            public bool Enabled { get; }
+        }
+
+        private readonly System.Collections.Generic.List<
+            DisplayCaseRendererVisibilityState> displayCaseHiddenProductRenderers =
+                new System.Collections.Generic.List<
+                    DisplayCaseRendererVisibilityState>();
         private Camera displayCaseCamera;
-        private Vector3 displayCaseCameraPosition;
-        private Quaternion displayCaseCameraRotation;
-        private float displayCaseCameraFieldOfView;
+        private PremiumDisplayCaseCameraLease displayCaseCameraLease;
+        private Coroutine displayCasePresentationConfirmation;
+        private readonly DisplayCasePresentationGate displayCasePresentationGate =
+            new DisplayCasePresentationGate();
+        private readonly DisplayCasePresentationStartGate
+            displayCasePresentationStartGate =
+                new DisplayCasePresentationStartGate();
+        private string selectedModelId = string.Empty;
+        private long selectedModelEpoch;
+        private long legacyModelSelectionEpoch;
+        private bool hasActiveDisplayCaseRequest;
+        private DisplayCasePresentationRequest activeDisplayCaseRequest;
 
         private bool hapticsEnabled = true;
         private float hapticIntensity = 0.62f;
@@ -361,6 +386,7 @@ namespace FidgetingApp.Product
             new LibrarySwipeSessionGate();
         private Coroutine modelSceneLoad;
         private string queuedModelId = string.Empty;
+        private long queuedModelEpoch;
         private float pendingLibraryPageEntranceDirection;
         private bool speedTexturePreviewActive;
         private float nextHapticTelemetryTime;
@@ -538,6 +564,7 @@ namespace FidgetingApp.Product
             }
 
             DismissDisplayCaseExperience();
+            DisposeDisplayCaseCanonicalPrize();
 
             SceneManager.sceneLoaded -= HandleSceneLoaded;
             if (blueSpinner != null)
@@ -590,6 +617,8 @@ namespace FidgetingApp.Product
 
         private void ConfigureProductScene(string scenePath)
         {
+            string configuredModelId = ModelIdForScene(scenePath);
+            DisposeDisplayCaseCanonicalPrize();
             appearanceLongPress.Cancel();
             appearanceActivation.Cancel();
             ApplyAppearanceActivationScale(1f);
@@ -717,16 +746,19 @@ namespace FidgetingApp.Product
             }
 
             ApplyAllSettings();
-            ActivateProgressionModel(ModelIdForScene(scenePath));
+            ActivateProgressionModel(configuredModelId);
             ConfigureProgressionVisuals();
             ConfigureProductSticker();
             ConfigureExperienceVisuals();
+            CacheDisplayCaseCanonicalPrize(configuredModelId);
             environmentPresenter = SpinnerEnvironmentPresenter.Install(scenePath);
             ApplyLibraryPreviewPose();
             ResetProgressionRotationBaseline();
             ResetMotionTelemetry(!libraryPreviewActive && HasMotionTelemetry());
             ResetComboHaloProjection(!libraryPreviewActive);
             PublishProgressionState();
+            PublishSelectedModelReadiness();
+            TryResolvePendingDisplayCaseRequest();
         }
 
         private static void HandleRotorSemanticEvent(
@@ -1325,6 +1357,135 @@ namespace FidgetingApp.Product
                 : product;
         }
 
+        private void CacheDisplayCaseCanonicalPrize(string modelId)
+        {
+            DisposeDisplayCaseCanonicalPrize();
+            Transform sourceRoot = DisplayCaseProductRoot(modelId);
+            if (sourceRoot == null)
+            {
+                Debug.LogError(
+                    $"[FidgetingApp] Cannot cache the display-case rest pose for {modelId}: "
+                    + "the shipping product root is missing.");
+                return;
+            }
+
+            try
+            {
+                displayCaseCanonicalPrize = PremiumDisplayCaseProductSnapshot.Capture(
+                    modelId,
+                    sourceRoot);
+                displayCaseCanonicalPrize.name =
+                    $"DisplayCaseCanonicalPrize_{modelId}";
+                displayCaseCanonicalPrize.transform.SetParent(transform, false);
+                displayCaseCanonicalPrize.SetActive(false);
+                displayCaseCanonicalPrizeModelId = modelId;
+            }
+            catch (System.Exception exception)
+            {
+                displayCaseCanonicalPrize = null;
+                displayCaseCanonicalPrizeModelId = string.Empty;
+                Debug.LogError(
+                    $"[FidgetingApp] Could not cache the canonical display-case "
+                    + $"rest pose for {modelId}: {exception.Message}");
+            }
+        }
+
+        private GameObject InstantiateDisplayCaseCanonicalPrize(string modelId)
+        {
+            if (displayCaseCanonicalPrize == null
+                || !string.Equals(
+                    displayCaseCanonicalPrizeModelId,
+                    modelId,
+                    System.StringComparison.Ordinal))
+            {
+                Debug.LogError(
+                    $"[FidgetingApp] Refusing to snapshot live physical state for "
+                    + $"{modelId}; its canonical display-case prize is unavailable.");
+                return null;
+            }
+
+            GameObject prize = Instantiate(displayCaseCanonicalPrize);
+            prize.name = $"DisplayCasePrize_{modelId}";
+            prize.transform.SetParent(null, false);
+            prize.SetActive(false);
+            return prize;
+        }
+
+        private void HideDisplayCaseProductRenderers(Transform sourceRoot)
+        {
+            RestoreDisplayCaseProductRenderers();
+            if (sourceRoot == null)
+            {
+                return;
+            }
+
+            Renderer[] renderers = sourceRoot.GetComponentsInChildren<Renderer>(false);
+            for (int index = 0; index < renderers.Length; index++)
+            {
+                Renderer renderer = renderers[index];
+                if (!PremiumDisplayCaseProductSnapshot.ShouldCapture(renderer))
+                {
+                    continue;
+                }
+                displayCaseHiddenProductRenderers.Add(
+                    new DisplayCaseRendererVisibilityState(renderer));
+                renderer.enabled = false;
+            }
+        }
+
+        private void RestoreDisplayCaseProductRenderers()
+        {
+            for (int index = 0;
+                 index < displayCaseHiddenProductRenderers.Count;
+                 index++)
+            {
+                DisplayCaseRendererVisibilityState state =
+                    displayCaseHiddenProductRenderers[index];
+                Renderer renderer = state.Renderer;
+                if (renderer != null)
+                {
+                    renderer.enabled = state.Enabled;
+                }
+            }
+            displayCaseHiddenProductRenderers.Clear();
+        }
+
+        private void RefreshDisplayCaseCanonicalPrizeAppearance()
+        {
+            if (displayCaseCanonicalPrize == null
+                || string.IsNullOrEmpty(displayCaseCanonicalPrizeModelId))
+            {
+                return;
+            }
+            Transform sourceRoot = DisplayCaseProductRoot(
+                displayCaseCanonicalPrizeModelId);
+            if (!PremiumDisplayCaseProductSnapshot.RefreshAppearance(
+                    displayCaseCanonicalPrize,
+                    sourceRoot))
+            {
+                Debug.LogWarning(
+                    $"[FidgetingApp] Display-case appearance refresh skipped for "
+                    + $"{displayCaseCanonicalPrizeModelId}; renderer topology changed.");
+            }
+        }
+
+        private void DisposeDisplayCaseCanonicalPrize()
+        {
+            if (displayCaseCanonicalPrize != null)
+            {
+                if (Application.isPlaying)
+                {
+                    Destroy(displayCaseCanonicalPrize);
+                }
+                else
+                {
+                    DestroyImmediate(displayCaseCanonicalPrize);
+                }
+            }
+            displayCaseCanonicalPrize = null;
+            displayCaseCanonicalPrizeModelId = string.Empty;
+        }
+
         private void ConfigureProductSticker()
         {
             productStickerPresenter = null;
@@ -1361,6 +1522,7 @@ namespace FidgetingApp.Product
         private void ApplyProductSticker()
         {
             productStickerPresenter?.Apply(selectedProductStickerId, Camera.main);
+            RefreshDisplayCaseCanonicalPrizeAppearance();
         }
 
         private void ApplyProgressionVisualStage()
@@ -1381,6 +1543,7 @@ namespace FidgetingApp.Product
             threeBladeMetalSkins?.Apply(
                 snapshot.Level,
                 selectedThreeBladeMetalSkinId);
+            RefreshDisplayCaseCanonicalPrizeAppearance();
         }
 
         private static void ConfigureFramePacing()
@@ -1392,14 +1555,56 @@ namespace FidgetingApp.Product
             Time.maximumDeltaTime = MaximumCatchUpSeconds;
         }
 
-        public void SelectModelFromNativeUi(string modelId)
+        public void SelectModelFromNativeUi(string payload)
         {
+            long legacyEpoch = System.Math.Max(
+                System.Math.Max(selectedModelEpoch, legacyModelSelectionEpoch) + 1,
+                1);
+            if (!DisplayCaseModelSelection.TryParse(
+                    payload,
+                    legacyEpoch,
+                    out DisplayCaseModelSelection selection))
+            {
+                Debug.LogWarning(
+                    $"[FidgetingApp] Invalid model selection payload: {payload}");
+                return;
+            }
+
+            legacyModelSelectionEpoch = System.Math.Max(
+                legacyModelSelectionEpoch,
+                selection.Epoch);
+            if (selection.Epoch < selectedModelEpoch
+                || (selection.Epoch == selectedModelEpoch
+                    && !string.IsNullOrEmpty(selectedModelId)
+                    && !string.Equals(
+                        selection.ModelId,
+                        selectedModelId,
+                        System.StringComparison.Ordinal)))
+            {
+                // A late native page callback must never roll Unity back to an
+                // older selection or reuse an epoch for a different model.
+                return;
+            }
+
+            string modelId = selection.ModelId;
             DismissDisplayCaseExperience();
             if (!ProductCatalog.TryGetScenePath(modelId, out string scenePath))
             {
                 Debug.LogWarning($"[FidgetingApp] Unknown or non-shipping model id: {modelId}");
+                DisplayCaseNativeBridge.PublishModelReadiness(
+                    modelId,
+                    selection.Epoch,
+                    false);
                 return;
             }
+
+            selectedModelId = modelId;
+            selectedModelEpoch = selection.Epoch;
+            RejectPendingDisplayCaseRequestIfSelectionChanged();
+            DisplayCaseNativeBridge.PublishModelReadiness(
+                selectedModelId,
+                selectedModelEpoch,
+                false);
 
             // A paged TabView can publish another selection while the previous
             // Unity scene is still loading. Unity scene loads cannot be cancelled,
@@ -1408,6 +1613,7 @@ namespace FidgetingApp.Product
             if (modelSceneLoad != null)
             {
                 queuedModelId = modelId;
+                queuedModelEpoch = selection.Epoch;
                 return;
             }
 
@@ -1418,6 +1624,8 @@ namespace FidgetingApp.Product
                 ActivateProgressionModel(modelId);
                 PublishProgressionState();
                 ApplyLibraryPreviewPose();
+                PublishSelectedModelReadiness();
+                TryResolvePendingDisplayCaseRequest();
                 return;
             }
 
@@ -1425,6 +1633,7 @@ namespace FidgetingApp.Product
             if (buildIndex < 0)
             {
                 Debug.LogError($"[FidgetingApp] Model scene is missing from build settings: {scenePath}");
+                FailPendingDisplayCaseRequest("scene-not-in-build");
                 return;
             }
 
@@ -1458,6 +1667,7 @@ namespace FidgetingApp.Product
             if (modelSceneLoad != null)
             {
                 queuedModelId = modelId;
+                queuedModelEpoch = selectedModelEpoch;
                 return;
             }
 
@@ -1484,6 +1694,8 @@ namespace FidgetingApp.Product
                 Debug.LogError(
                     $"[FidgetingApp] Failed to start async model scene load: {modelId}");
                 modelSceneLoad = null;
+                PublishSelectedModelReadiness();
+                FailPendingDisplayCaseRequest("scene-load-start-failed");
                 yield break;
             }
 
@@ -1520,9 +1732,17 @@ namespace FidgetingApp.Product
             if (!string.IsNullOrEmpty(queuedModelId))
             {
                 string latestModelId = queuedModelId;
+                long latestModelEpoch = queuedModelEpoch;
                 queuedModelId = string.Empty;
-                SelectModelFromNativeUi(latestModelId);
+                queuedModelEpoch = 0;
+                SelectModelFromNativeUi(
+                    new DisplayCaseModelSelection(
+                        latestModelId,
+                        latestModelEpoch).Encode());
+                yield break;
             }
+            PublishSelectedModelReadiness();
+            TryResolvePendingDisplayCaseRequest();
         }
 
         public void SetLibraryPreviewActiveFromNativeUi(string value)
@@ -1619,13 +1839,368 @@ namespace FidgetingApp.Product
             }
         }
 
+        private DisplayCaseReadinessSnapshot CurrentDisplayCaseReadiness()
+        {
+            return new DisplayCaseReadinessSnapshot(
+                selectedModelId,
+                selectedModelEpoch,
+                ModelIdForScene(SceneManager.GetActiveScene().path),
+                displayCaseCanonicalPrizeModelId,
+                modelSceneLoad != null);
+        }
+
+        private void PublishSelectedModelReadiness()
+        {
+            if (string.IsNullOrEmpty(selectedModelId) || selectedModelEpoch <= 0)
+            {
+                return;
+            }
+
+            DisplayCaseNativeBridge.PublishModelReadiness(
+                selectedModelId,
+                selectedModelEpoch,
+                CurrentDisplayCaseReadiness().IsExactModelReady);
+        }
+
+        private void RejectPendingDisplayCaseRequestIfSelectionChanged()
+        {
+            if (!displayCasePresentationGate.HasPendingRequest)
+            {
+                return;
+            }
+
+            DisplayCasePresentationRequest pending =
+                displayCasePresentationGate.PendingRequest;
+            if (string.Equals(
+                    pending.ModelId,
+                    selectedModelId,
+                    System.StringComparison.Ordinal)
+                && pending.SelectionEpoch == selectedModelEpoch)
+            {
+                return;
+            }
+
+            displayCasePresentationGate.Complete(pending.RequestId);
+            DisplayCaseNativeBridge.PublishPresentationResult(
+                pending,
+                false,
+                "selection-changed");
+        }
+
+        private void FailPendingDisplayCaseRequest(string reason)
+        {
+            if (!displayCasePresentationGate.HasPendingRequest)
+            {
+                return;
+            }
+
+            DisplayCasePresentationRequest pending =
+                displayCasePresentationGate.PendingRequest;
+            displayCasePresentationGate.Complete(pending.RequestId);
+            DisplayCaseNativeBridge.PublishPresentationResult(
+                pending,
+                false,
+                reason);
+        }
+
+        private void TryResolvePendingDisplayCaseRequest()
+        {
+            if (!displayCasePresentationGate.HasPendingRequest
+                || displayCasePresentationConfirmation != null)
+            {
+                return;
+            }
+
+            DisplayCaseRequestEvaluation evaluation =
+                displayCasePresentationGate.Evaluate(
+                    CurrentDisplayCaseReadiness());
+            if (evaluation.Disposition == DisplayCaseRequestDisposition.None
+                || evaluation.Disposition
+                    == DisplayCaseRequestDisposition.WaitingForScene)
+            {
+                return;
+            }
+
+            DisplayCasePresentationRequest request =
+                displayCasePresentationGate.PendingRequest;
+            if (evaluation.Disposition == DisplayCaseRequestDisposition.Rejected)
+            {
+                displayCasePresentationGate.Complete(request.RequestId);
+                DisplayCaseNativeBridge.PublishPresentationResult(
+                    request,
+                    false,
+                    evaluation.Reason);
+                return;
+            }
+
+            if (!TryPresentDisplayCaseExperience(request.ModelId, out string reason))
+            {
+                DismissDisplayCaseExperience();
+                displayCasePresentationGate.Complete(request.RequestId);
+                DisplayCaseNativeBridge.PublishPresentationResult(
+                    request,
+                    false,
+                    string.IsNullOrEmpty(reason)
+                        ? "presentation-postcondition-failed"
+                        : reason);
+                return;
+            }
+
+            activeDisplayCaseRequest = request;
+            hasActiveDisplayCaseRequest = true;
+            displayCasePresentationConfirmation = StartCoroutine(
+                ConfirmDisplayCasePresentationAfterEndOfFrame(request));
+        }
+
+        private IEnumerator ConfirmDisplayCasePresentationAfterEndOfFrame(
+            DisplayCasePresentationRequest request)
+        {
+            // Every shipping product has camera authors that run in LateUpdate.
+            // Never acknowledge a conceptual setup state: wait until those
+            // writers had a real chance to run, then validate the rendered
+            // camera and case viewport at the end of that same frame.
+            yield return new WaitForEndOfFrame();
+            displayCasePresentationConfirmation = null;
+
+            if (!displayCasePresentationGate.HasPendingRequest
+                || displayCasePresentationGate.PendingRequest.RequestId
+                    != request.RequestId)
+            {
+                if (hasActiveDisplayCaseRequest
+                    && activeDisplayCaseRequest.RequestId == request.RequestId)
+                {
+                    DismissDisplayCaseExperience();
+                }
+                yield break;
+            }
+
+            if (!IsDisplayCasePresentationComplete(
+                    request,
+                    out string failureReason))
+            {
+                Debug.LogWarning(
+                    $"[FidgetingApp] Display-case presentation rejected "
+                    + $"for {request.ModelId}: {failureReason}");
+                displayCasePresentationGate.Complete(request.RequestId);
+                DismissDisplayCaseExperience();
+                DisplayCaseNativeBridge.PublishPresentationResult(
+                    request,
+                    false,
+                    failureReason);
+                yield break;
+            }
+
+            // This acknowledgement authorizes Swift to mount the overlay; it
+            // must not consume any part of the authored entrance. Swift sends
+            // the same versioned request back from the mounted view's onAppear,
+            // and only that second handshake starts reveal plus assembly.
+            if (!displayCasePresentationStartGate.Arm(request))
+            {
+                displayCasePresentationGate.Complete(request.RequestId);
+                DismissDisplayCaseExperience();
+                DisplayCaseNativeBridge.PublishPresentationResult(
+                    request,
+                    false,
+                    "presentation-start-arm-failed");
+                yield break;
+            }
+            displayCasePresentationGate.Complete(request.RequestId);
+            DisplayCaseNativeBridge.PublishPresentationResult(request, true);
+        }
+
+        private bool IsDisplayCasePresentationComplete(
+            DisplayCasePresentationRequest request,
+            out string failureReason)
+        {
+            DisplayCaseReadinessSnapshot readiness = CurrentDisplayCaseReadiness();
+            bool hierarchyReady = readiness.IsExactModelReady
+                && string.Equals(
+                    request.ModelId,
+                    readiness.SelectedModelId,
+                    System.StringComparison.Ordinal)
+                && request.SelectionEpoch == readiness.SelectedModelEpoch
+                && activeDisplayCase != null
+                && activeDisplayCaseInteraction != null
+                && activeDisplayCasePrize != null
+                && activeDisplayCasePrize.activeInHierarchy
+                && activeDisplayCasePrize.transform.IsChildOf(
+                    activeDisplayCase.transform)
+                && displayCaseCamera != null
+                && displayCaseCameraLease != null;
+            if (!hierarchyReady)
+            {
+                failureReason = "presentation-postcondition-failed";
+                return false;
+            }
+
+            return displayCaseCameraLease.IsPresentationStable(
+                activeDisplayCase.transform,
+                out failureReason);
+        }
+
+        public void RequestDisplayCaseFromNativeUi(string payload)
+        {
+            if (!DisplayCasePresentationRequest.TryParse(
+                    payload,
+                    out DisplayCasePresentationRequest request))
+            {
+                Debug.LogWarning(
+                    $"[FidgetingApp] Invalid display-case request: {payload}");
+                return;
+            }
+            if (!ProductCatalog.TryGetScenePath(request.ModelId, out _))
+            {
+                DisplayCaseNativeBridge.PublishPresentationResult(
+                    request,
+                    false,
+                    "unknown-model");
+                return;
+            }
+
+            if (!displayCasePresentationGate.Begin(
+                    request,
+                    out DisplayCasePresentationRequest superseded))
+            {
+                DisplayCaseNativeBridge.PublishPresentationResult(
+                    request,
+                    false,
+                    "invalid-request");
+                return;
+            }
+            if (superseded.IsValid)
+            {
+                DisplayCaseNativeBridge.PublishPresentationResult(
+                    superseded,
+                    false,
+                    "superseded");
+            }
+
+            TryResolvePendingDisplayCaseRequest();
+        }
+
+        public void CancelDisplayCaseRequestFromNativeUi(string payload)
+        {
+            if (!DisplayCasePresentationRequest.TryParse(
+                    payload,
+                    out DisplayCasePresentationRequest request))
+            {
+                return;
+            }
+
+            if (displayCasePresentationGate.HasPendingRequest
+                && displayCasePresentationGate.PendingRequest.HasSameIdentity(
+                    request))
+            {
+                displayCasePresentationGate.Complete(request.RequestId);
+                DisplayCaseNativeBridge.PublishPresentationResult(
+                    request,
+                    false,
+                    "cancelled");
+            }
+            if (hasActiveDisplayCaseRequest
+                && activeDisplayCaseRequest.HasSameIdentity(request))
+            {
+                DismissDisplayCaseExperience();
+            }
+        }
+
+        public void StartDisplayCasePresentationFromNativeUi(string payload)
+        {
+            if (!DisplayCasePresentationRequest.TryParse(
+                    payload,
+                    out DisplayCasePresentationRequest request))
+            {
+                Debug.LogWarning(
+                    $"[FidgetingApp] Invalid display-case start: {payload}");
+                return;
+            }
+
+            DisplayCasePresentationStartEvaluation evaluation =
+                displayCasePresentationStartGate.Evaluate(request);
+            if (evaluation.Disposition
+                == DisplayCasePresentationStartDisposition.Rejected)
+            {
+                DisplayCaseNativeBridge.PublishPresentationStartResult(
+                    request,
+                    false,
+                    evaluation.Reason);
+                return;
+            }
+            if (evaluation.Disposition
+                == DisplayCasePresentationStartDisposition.AlreadyStarted)
+            {
+                // SwiftUI can re-fire onAppear while preserving the same host.
+                // Re-acknowledge that exact request without replaying motion.
+                DisplayCaseNativeBridge.PublishPresentationStartResult(
+                    request,
+                    true);
+                return;
+            }
+
+            string failureReason = string.Empty;
+            if (!hasActiveDisplayCaseRequest
+                || !activeDisplayCaseRequest.HasSameIdentity(request)
+                || !IsDisplayCasePresentationComplete(
+                    request,
+                    out failureReason))
+            {
+                string normalizedReason = string.IsNullOrEmpty(failureReason)
+                    ? "active-presentation-mismatch"
+                    : failureReason;
+                displayCasePresentationStartGate.Reset();
+                DismissDisplayCaseExperience();
+                DisplayCaseNativeBridge.PublishPresentationStartResult(
+                    request,
+                    false,
+                    normalizedReason);
+                return;
+            }
+
+            try
+            {
+                // Reveal (2.20 s) and the shared exploded-to-assembled motion
+                // (1.35 s) begin in this one Unity message, after the native
+                // overlay is mounted. No product profile owns a second entrance.
+                activeDisplayCaseInteraction.SetExplodedProgress(1f);
+                activeDisplayCase.play();
+                activeDisplayCaseInteraction.PlayAssembly();
+                if (!displayCasePresentationStartGate.MarkStarted(request))
+                {
+                    throw new System.InvalidOperationException(
+                        "display-case-start-state-rejected");
+                }
+            }
+            catch (System.Exception exception)
+            {
+                string startFailure =
+                    $"presentation-start-failed:{exception.Message}";
+                displayCasePresentationStartGate.Reset();
+                DismissDisplayCaseExperience();
+                DisplayCaseNativeBridge.PublishPresentationStartResult(
+                    request,
+                    false,
+                    startFailure);
+                return;
+            }
+
+            DisplayCaseNativeBridge.PublishPresentationStartResult(
+                request,
+                true);
+        }
+
         public void SetDisplayCasePresentedFromNativeUi(string value)
         {
             bool presented = value == "1"
                 || value.Equals("true", System.StringComparison.OrdinalIgnoreCase);
             if (presented)
             {
-                PresentDisplayCaseExperience();
+                string modelId = ModelIdForScene(
+                    SceneManager.GetActiveScene().path);
+                if (!TryPresentDisplayCaseExperience(modelId, out string reason))
+                {
+                    Debug.LogError(
+                        $"[FidgetingApp] Legacy display-case presentation failed: {reason}");
+                }
             }
             else
             {
@@ -1635,7 +2210,8 @@ namespace FidgetingApp.Product
 
         public void SetDisplayCaseExplodedProgressFromNativeUi(string value)
         {
-            if (activeDisplayCaseInteraction != null
+            if (displayCasePresentationStartGate.HasStarted
+                && activeDisplayCaseInteraction != null
                 && float.TryParse(
                     value,
                     NumberStyles.Float,
@@ -1648,7 +2224,8 @@ namespace FidgetingApp.Product
 
         public void SetDisplayCaseOrbitFromNativeUi(string value)
         {
-            if (activeDisplayCaseInteraction == null)
+            if (!displayCasePresentationStartGate.HasStarted
+                || activeDisplayCaseInteraction == null)
             {
                 return;
             }
@@ -1666,7 +2243,8 @@ namespace FidgetingApp.Product
 
         public void SetDisplayCaseZoomFromNativeUi(string value)
         {
-            if (activeDisplayCaseInteraction != null
+            if (displayCasePresentationStartGate.HasStarted
+                && activeDisplayCaseInteraction != null
                 && float.TryParse(
                     value,
                     NumberStyles.Float,
@@ -1689,7 +2267,9 @@ namespace FidgetingApp.Product
 
         public void PlayDisplayCaseAssemblyFromNativeUi(string unused)
         {
-            if (activeDisplayCase == null || activeDisplayCaseInteraction == null)
+            if (!displayCasePresentationStartGate.HasStarted
+                || activeDisplayCase == null
+                || activeDisplayCaseInteraction == null)
             {
                 return;
             }
@@ -1700,23 +2280,67 @@ namespace FidgetingApp.Product
 
         public void ExplodeDisplayCaseFromNativeUi(string unused)
         {
-            activeDisplayCaseInteraction?.PlayExplode();
+            if (displayCasePresentationStartGate.HasStarted)
+            {
+                activeDisplayCaseInteraction?.PlayExplode();
+            }
         }
 
-        private void PresentDisplayCaseExperience()
+        private bool TryPresentDisplayCaseExperience(
+            string modelId,
+            out string failureReason)
         {
+            failureReason = string.Empty;
             if (activeDisplayCase != null)
             {
-                return;
+                failureReason = "display-case-already-presented";
+                return false;
+            }
+            if (!string.Equals(
+                    modelId,
+                    ModelIdForScene(SceneManager.GetActiveScene().path),
+                    System.StringComparison.Ordinal))
+            {
+                failureReason = "active-scene-mismatch";
+                return false;
+            }
+            if (displayCaseCanonicalPrize == null
+                || !string.Equals(
+                    modelId,
+                    displayCaseCanonicalPrizeModelId,
+                    System.StringComparison.Ordinal))
+            {
+                failureReason = "canonical-prize-mismatch";
+                return false;
             }
 
             PremiumDisplayCase prefab = Resources.Load<PremiumDisplayCase>(
                 PremiumDisplayCaseFactory.ResourcesPath);
             if (prefab == null)
             {
-                Debug.LogError(
-                    "[FidgetingApp] Premium display-case prefab is unavailable.");
-                return;
+                failureReason = "display-case-prefab-missing";
+                return false;
+            }
+
+            Transform displayCaseProduct = DisplayCaseProductRoot(modelId);
+            if (displayCaseProduct == null)
+            {
+                failureReason = "active-product-missing";
+                return false;
+            }
+
+            displayCaseCamera = Camera.main;
+            if (displayCaseCamera == null)
+            {
+                failureReason = "display-camera-missing";
+                return false;
+            }
+            activeDisplayCasePrize = InstantiateDisplayCaseCanonicalPrize(modelId);
+            if (activeDisplayCasePrize == null)
+            {
+                displayCaseCamera = null;
+                failureReason = "canonical-prize-instantiation-failed";
+                return false;
             }
 
             StopAssistantDrive(true);
@@ -1724,113 +2348,96 @@ namespace FidgetingApp.Product
             progression?.EndSpinCredit();
             ResetCombo();
 
-            string modelId = ModelIdForScene(SceneManager.GetActiveScene().path);
-            displayCaseHiddenProduct = DisplayCaseProductRoot(modelId);
-            if (displayCaseHiddenProduct == null)
+            displayCaseCameraLease = PremiumDisplayCaseCameraLease.Acquire(
+                displayCaseCamera);
+            if (displayCaseCameraLease == null)
             {
-                Debug.LogError(
-                    $"[FidgetingApp] No active product is available for {modelId}.");
-                return;
-            }
-
-            try
-            {
-                activeDisplayCasePrize = PremiumDisplayCaseProductSnapshot.Capture(
-                    modelId,
-                    displayCaseHiddenProduct);
-            }
-            catch (System.Exception exception)
-            {
+                displayCaseCamera = null;
+                Destroy(activeDisplayCasePrize);
                 activeDisplayCasePrize = null;
-                Debug.LogError(
-                    $"[FidgetingApp] Could not snapshot {modelId} for the "
-                    + $"display case: {exception.Message}");
-                displayCaseHiddenProduct = null;
-                return;
+                failureReason = "display-camera-lease-failed";
+                return false;
             }
 
-            if (displayCaseHiddenProduct != null)
-            {
-                displayCaseHiddenProductWasActive =
-                    displayCaseHiddenProduct.gameObject.activeSelf;
-                displayCaseHiddenProduct.gameObject.SetActive(false);
-            }
+            // Hide exactly the renderers copied into the prize snapshot. The
+            // shared shipping camera, scene lighting, grounding and controller
+            // hierarchy stay active for every model while the case is visible.
+            HideDisplayCaseProductRenderers(displayCaseProduct);
 
-            displayCaseCamera = Camera.main;
-            if (displayCaseCamera != null)
-            {
-                displayCaseCameraPosition = displayCaseCamera.transform.position;
-                displayCaseCameraRotation = displayCaseCamera.transform.rotation;
-                displayCaseCameraFieldOfView = displayCaseCamera.fieldOfView;
-                displayCaseCamera.transform.position =
-                    PremiumDisplayCaseCameraRules.FrontCameraPosition;
-                displayCaseCamera.transform.LookAt(
-                    PremiumDisplayCaseCameraRules.FrontLookAt);
-                displayCaseCamera.fieldOfView =
-                    PremiumDisplayCaseCameraRules.ResolveVerticalFieldOfView(
-                        displayCaseCamera.aspect);
-            }
-
-            activeDisplayCase = Instantiate(prefab, Vector3.zero, Quaternion.identity);
-            activeDisplayCase.name = "PremiumDisplayCaseInteractive";
-            activeDisplayCaseInteraction = activeDisplayCase.GetComponent<
-                PremiumDisplayCaseInteractionController>();
-            activeDisplayCase.SetLightingPreset(PlayerPrefs.GetString(
-                PremiumDisplayCaseLightingCatalog.PreferenceKey,
-                PremiumDisplayCaseLightingCatalog.DefaultId));
-            PremiumDisplayCaseProductProfile productProfile =
-                PremiumDisplayCaseProductProfiles.Resolve(modelId);
-            SpinnerProgressionSnapshot currentProductProgress = progression != null
-                ? progression.SnapshotFor(modelId)
-                : default;
-            int currentProductLevel = progression != null
-                ? currentProductProgress.Level
-                : 1;
-            activeDisplayCase.SetIdentification(
-                productProfile.EnglishDisplayName,
-                currentProductLevel);
-            if (progression != null
-                && BadgeCatalogV2.TryResolveFeaturedToyBadge(
-                    currentProductProgress,
-                    out BadgeDefinition featuredBadge))
-            {
-                activeDisplayCase.SetFeaturedBadge(
-                    featuredBadge.AssetName,
-                    BadgeCatalogV2.ToyDisplayToken(
-                        currentProductProgress,
-                        featuredBadge),
-                    featuredBadge.ShortName,
-                    featuredBadge.Grade.ToString());
-            }
-            else
-            {
-                activeDisplayCase.ClearFeaturedBadge();
-            }
-            activeDisplayCase.setCapsulePreset(productProfile.CapsulePreset);
             try
             {
+                activeDisplayCase = Instantiate(
+                    prefab,
+                    Vector3.zero,
+                    Quaternion.identity);
+                activeDisplayCase.name = "PremiumDisplayCaseInteractive";
+                activeDisplayCaseInteraction = activeDisplayCase.GetComponent<
+                    PremiumDisplayCaseInteractionController>();
+                if (activeDisplayCaseInteraction == null)
+                {
+                    throw new System.InvalidOperationException(
+                        "Display-case interaction controller is missing.");
+                }
+
+                activeDisplayCase.SetLightingPreset(PlayerPrefs.GetString(
+                    PremiumDisplayCaseLightingCatalog.PreferenceKey,
+                    PremiumDisplayCaseLightingCatalog.DefaultId));
+                PremiumDisplayCaseProductProfile productProfile =
+                    PremiumDisplayCaseProductProfiles.Resolve(modelId);
+                SpinnerProgressionSnapshot currentProductProgress = progression != null
+                    ? progression.SnapshotFor(modelId)
+                    : default;
+                int currentProductLevel = progression != null
+                    ? currentProductProgress.Level
+                    : 1;
+                activeDisplayCase.SetIdentification(
+                    productProfile.EnglishDisplayName,
+                    currentProductLevel);
+                if (progression != null
+                    && BadgeCatalogV2.TryResolveFeaturedToyBadge(
+                        currentProductProgress,
+                        out BadgeDefinition featuredBadge))
+                {
+                    activeDisplayCase.SetFeaturedBadge(
+                        featuredBadge.AssetName,
+                        BadgeCatalogV2.ToyDisplayToken(
+                            currentProductProgress,
+                            featuredBadge),
+                        featuredBadge.ShortName,
+                        featuredBadge.Grade.ToString());
+                }
+                else
+                {
+                    activeDisplayCase.ClearFeaturedBadge();
+                }
+                activeDisplayCase.setCapsuleDimensions(
+                    productProfile.CapsuleDimensions);
+                activeDisplayCase.SetProductPresentationOffset(
+                    productProfile.PresentationOffset);
                 activeDisplayCase.setContent(
                     activeDisplayCasePrize.transform,
                     productProfile.ContentOptions);
+                activeDisplayCase.SetRevealProgressForPreview(0f);
+                activeDisplayCaseInteraction.SetExplodedProgress(0f);
             }
             catch (System.Exception exception)
             {
-                Debug.LogError(
-                    $"[FidgetingApp] Could not attach {modelId} to the display "
-                    + $"case: {exception.Message}");
+                failureReason = $"presentation-setup-failed:{exception.Message}";
                 DismissDisplayCaseExperience();
-                return;
+                return false;
             }
-            activeDisplayCase.play();
-            if (activeDisplayCaseInteraction != null)
-            {
-                activeDisplayCaseInteraction.SetExplodedProgress(1f);
-                activeDisplayCaseInteraction.PlayAssembly();
-            }
+
+            return true;
         }
 
         private void DismissDisplayCaseExperience()
         {
+            if (displayCasePresentationConfirmation != null)
+            {
+                StopCoroutine(displayCasePresentationConfirmation);
+                displayCasePresentationConfirmation = null;
+            }
+
             if (activeDisplayCase != null && activeDisplayCasePrize != null)
             {
                 activeDisplayCase.setContent((Transform)null);
@@ -1847,20 +2454,14 @@ namespace FidgetingApp.Product
             activeDisplayCaseInteraction = null;
             activeDisplayCasePrize = null;
 
-            if (displayCaseHiddenProduct != null)
-            {
-                displayCaseHiddenProduct.gameObject.SetActive(
-                    displayCaseHiddenProductWasActive);
-            }
-            displayCaseHiddenProduct = null;
+            RestoreDisplayCaseProductRenderers();
 
-            if (displayCaseCamera != null)
-            {
-                displayCaseCamera.transform.position = displayCaseCameraPosition;
-                displayCaseCamera.transform.rotation = displayCaseCameraRotation;
-                displayCaseCamera.fieldOfView = displayCaseCameraFieldOfView;
-            }
+            displayCaseCameraLease?.Restore();
+            displayCaseCameraLease = null;
             displayCaseCamera = null;
+            displayCasePresentationStartGate.Reset();
+            hasActiveDisplayCaseRequest = false;
+            activeDisplayCaseRequest = default;
         }
 
         public void SetEnvironmentThemeFromNativeUi(string themeId)

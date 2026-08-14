@@ -1095,6 +1095,10 @@ private final class ProductUiState: ObservableObject {
     @Published var selectedTab: ProductTab = .spinners
     @Published var isLibraryVisible = true
     @Published var selectedModel: SpinnerModel
+    @Published private(set) var selectedModelEpoch: Int64 = 0
+    @Published private(set) var readyModel: SpinnerModel?
+    @Published private(set) var readyModelEpoch: Int64 = 0
+    @Published private(set) var isDisplayCaseRequestInFlight = false
     @Published var environmentTheme: EnvironmentTheme
     @Published var environmentThemePreview: EnvironmentTheme
     @Published var isEnvironmentPickerPresented = false
@@ -1437,6 +1441,42 @@ private final class ProductUiState: ObservableObject {
     func select(_ model: SpinnerModel) {
         selectedModel = model
         UserDefaults.standard.set(model.rawValue, forKey: Key.selectedModel)
+    }
+
+    var isSelectedModelReady: Bool {
+        readyModel == selectedModel
+            && selectedModelEpoch > 0
+            && readyModelEpoch == selectedModelEpoch
+    }
+
+    var canRequestDisplayCase: Bool {
+        isSelectedModelReady && !isDisplayCaseRequestInFlight
+    }
+
+    func beginModelSelection(_ model: SpinnerModel, epoch: Int64) {
+        select(model)
+        selectedModelEpoch = epoch
+        readyModel = nil
+        readyModelEpoch = 0
+        isDisplayCaseRequestInFlight = false
+    }
+
+    func receiveModelReadiness(
+        model: SpinnerModel,
+        epoch: Int64,
+        ready: Bool
+    ) {
+        guard model == selectedModel, epoch == selectedModelEpoch else { return }
+        readyModel = ready ? model : nil
+        readyModelEpoch = ready ? epoch : 0
+    }
+
+    func beginDisplayCaseRequest() {
+        isDisplayCaseRequestInFlight = true
+    }
+
+    func finishDisplayCaseRequest() {
+        isDisplayCaseRequestInFlight = false
     }
 
     func beginEnvironmentThemePreview() {
@@ -7098,13 +7138,36 @@ private struct SpinnerLibrary: View {
             .accessibilityIdentifier("library-model-carousel")
             .accessibilityHint("左右滑动选择陀螺；长按背景选择场景")
 
+            if state.isSelectedModelReady {
+                Text("ready")
+                    .font(.system(size: 1))
+                    .frame(width: 1, height: 1)
+                    .clipped()
+                    .accessibilityLabel("当前模型已加载")
+                    .accessibilityValue(state.selectedModel.rawValue)
+                    .accessibilityIdentifier("library-model-ready")
+            }
+
             Button {
                 UnityBridge.feedback(.medium)
                 CodexSwiftUIOverlayManager.shared.presentDisplayCase()
             } label: {
-                Text("查看收藏盒")
-                .font(.system(size: 14, weight: .semibold))
-                .foregroundStyle(.white.opacity(0.82))
+                HStack(spacing: 8) {
+                    if !state.isSelectedModelReady
+                        || state.isDisplayCaseRequestInFlight {
+                        ProgressView()
+                            .controlSize(.small)
+                            .tint(.white.opacity(0.72))
+                    }
+                    Text(state.isDisplayCaseRequestInFlight
+                        ? "正在准备收藏盒…"
+                        : state.isSelectedModelReady
+                            ? "查看收藏盒"
+                            : "模型加载中…")
+                        .font(.system(size: 14, weight: .semibold))
+                }
+                .foregroundStyle(.white.opacity(
+                    state.canRequestDisplayCase ? 0.82 : 0.42))
                 .frame(maxWidth: .infinity)
                 .frame(height: 42)
                 .background(.ultraThinMaterial, in:
@@ -7115,6 +7178,11 @@ private struct SpinnerLibrary: View {
                 }
             }
             .buttonStyle(.plain)
+            .disabled(!state.canRequestDisplayCase)
+            .accessibilityIdentifier("display-case-action")
+            .accessibilityHint(state.isSelectedModelReady
+                ? "等待收藏盒三维场景完成后打开"
+                : "当前陀螺仍在加载")
             .padding(.horizontal, 24)
             .padding(.bottom, 8)
 
@@ -7178,7 +7246,9 @@ private enum DisplayCaseLightingPreset: String, CaseIterable, Identifiable {
 }
 
 private struct PremiumDisplayCaseExperienceView: View {
+    @ObservedObject var lifecycle: DisplayCasePresentationLifecycle
     let onClose: () -> Void
+    let onPresentationMounted: () -> Void
 
     @AppStorage("FidgetingApp.DisplayCaseLightingPreset")
     private var lightingPresetId = DisplayCaseLightingPreset.softNeutral.rawValue
@@ -7228,6 +7298,32 @@ private struct PremiumDisplayCaseExperienceView: View {
     var body: some View {
         ZStack {
             Color.clear
+
+            Text("root")
+                .font(.system(size: 1))
+                .frame(width: 1, height: 1)
+                .clipped()
+                .accessibilityLabel("收藏盒根视图")
+                .accessibilityIdentifier("display-case-root")
+
+            Text("ack")
+                .font(.system(size: 1))
+                .frame(width: 1, height: 1)
+                .clipped()
+                .accessibilityLabel("收藏盒场景已确认")
+                .accessibilityValue(lifecycle.request.model.rawValue)
+                .accessibilityIdentifier("display-case-presentation-ack")
+
+            if lifecycle.didStart {
+                Text("started")
+                    .font(.system(size: 1))
+                    .frame(width: 1, height: 1)
+                    .clipped()
+                    .accessibilityLabel("收藏盒可见入场已开始")
+                    .accessibilityValue(lifecycle.request.payload)
+                    .accessibilityIdentifier(
+                        "display-case-presentation-start-ack")
+            }
 
             VStack(spacing: 0) {
                 HStack(spacing: 12) {
@@ -7382,7 +7478,7 @@ private struct PremiumDisplayCaseExperienceView: View {
                             UnityBridge.feedback(.medium)
                             UnityBridge.send("PlayDisplayCaseAssemblyFromNativeUi")
                         } label: {
-                            Label("装配并重播", systemImage: "play.fill")
+                            Text("装配并重播")
                                 .font(.system(size: 12, weight: .semibold))
                                 .foregroundStyle(.black.opacity(0.82))
                                 .frame(maxWidth: .infinity)
@@ -7427,14 +7523,24 @@ private struct PremiumDisplayCaseExperienceView: View {
             UnityBridge.send(
                 "SetDisplayCaseLightingFromNativeUi",
                 value: preset.rawValue)
+            onPresentationMounted()
         }
     }
 }
 
 #if DEBUG
 struct PremiumDisplayCaseNativePreviewRoot: View {
+    @StateObject private var lifecycle = DisplayCasePresentationLifecycle(
+        request: DisplayCaseNativeRequest(
+            model: .magneticSlideTile,
+            selectionEpoch: 1,
+            requestId: 1))
+
     var body: some View {
-        PremiumDisplayCaseExperienceView(onClose: {})
+        PremiumDisplayCaseExperienceView(
+            lifecycle: lifecycle,
+            onClose: {},
+            onPresentationMounted: {})
             .background {
                 if let image = UIImage(named: "premium-display-case-unity-hero.png") {
                     Image(uiImage: image)
@@ -8996,6 +9102,36 @@ struct HapticSettingsSaveNativePreviewRoot: View {
 }
 #endif
 
+private struct DisplayCaseNativeRequest: Equatable {
+    let model: SpinnerModel
+    let selectionEpoch: Int64
+    let requestId: Int64
+
+    var payload: String {
+        "\(model.rawValue)|\(selectionEpoch)|\(requestId)"
+    }
+}
+
+private final class DisplayCasePresentationLifecycle: ObservableObject {
+    let request: DisplayCaseNativeRequest
+    @Published private(set) var didStart = false
+    private var startRequestSent = false
+
+    init(request: DisplayCaseNativeRequest) {
+        self.request = request
+    }
+
+    func claimStartRequest() -> Bool {
+        guard !startRequestSent else { return false }
+        startRequestSent = true
+        return true
+    }
+
+    func markStarted() {
+        didStart = true
+    }
+}
+
 @MainActor
 private final class CodexSwiftUIOverlayManager {
     static let shared = CodexSwiftUIOverlayManager()
@@ -9010,6 +9146,11 @@ private final class CodexSwiftUIOverlayManager {
     private var appearanceController: UIHostingController<ProductAppearanceEditor>?
     private var environmentPickerController: UIHostingController<SceneWallpaperPicker>?
     private var displayCaseController: UIHostingController<PremiumDisplayCaseExperienceView>?
+    private var modelSelectionEpoch: Int64 = 0
+    private var displayCaseRequestSequence: Int64 = 0
+    private var pendingDisplayCaseRequest: DisplayCaseNativeRequest?
+    private var activeDisplayCaseRequest: DisplayCaseNativeRequest?
+    private var activeDisplayCaseLifecycle: DisplayCasePresentationLifecycle?
     private var progressionRewardController: UIViewController?
     private var progressionRewardFlightController: UIViewController?
     private var pendingOfflineRewardFlight = false
@@ -9288,16 +9429,36 @@ private final class CodexSwiftUIOverlayManager {
         beginLibraryPreview()
     }
 
+    private func sendModelSelection(_ model: SpinnerModel) {
+        cancelPendingDisplayCaseRequest()
+        modelSelectionEpoch = max(
+            modelSelectionEpoch + 1,
+            state.selectedModelEpoch + 1)
+        state.beginModelSelection(model, epoch: modelSelectionEpoch)
+        UnityBridge.send(
+            "SelectModelFromNativeUi",
+            value: "\(model.rawValue)|\(modelSelectionEpoch)")
+    }
+
+    private func cancelPendingDisplayCaseRequest() {
+        guard let request = pendingDisplayCaseRequest else { return }
+        pendingDisplayCaseRequest = nil
+        state.finishDisplayCaseRequest()
+        UnityBridge.send(
+            "CancelDisplayCaseRequestFromNativeUi",
+            value: request.payload)
+    }
+
     func previewModel(_ model: SpinnerModel) {
         state.select(model)
         UnityBridge.send("SetLibraryPreviewActiveFromNativeUi", value: "true")
-        UnityBridge.send("SelectModelFromNativeUi", value: model.rawValue)
+        sendModelSelection(model)
     }
 
     func beginLibraryPreview() {
         guard state.selectedTab == .spinners && state.isLibraryVisible else { return }
         UnityBridge.send("SetLibraryPreviewActiveFromNativeUi", value: "true")
-        UnityBridge.send("SelectModelFromNativeUi", value: state.selectedModel.rawValue)
+        sendModelSelection(state.selectedModel)
     }
 
     func enterSelectedModel() {
@@ -9306,7 +9467,7 @@ private final class CodexSwiftUIOverlayManager {
         state.selectedTab = .spinners
         state.isLibraryVisible = false
         UnityBridge.send("SetLibraryPreviewActiveFromNativeUi", value: "false")
-        UnityBridge.send("SelectModelFromNativeUi", value: state.selectedModel.rawValue)
+        sendModelSelection(state.selectedModel)
         setModeBarVisible(false)
         hidePanel(forDetailEntrance: true)
         DispatchQueue.main.asyncAfter(
@@ -9371,15 +9532,89 @@ private final class CodexSwiftUIOverlayManager {
 
     func presentDisplayCase() {
         guard displayCaseController == nil,
-              let rootController = activeRootViewController() else { return }
+              pendingDisplayCaseRequest == nil,
+              state.canRequestDisplayCase else { return }
         dismissEnvironmentPicker(resetPreview: true, animated: false)
         dismissAppearanceEditorIfNeeded()
-        UnityBridge.send("SetDisplayCasePresentedFromNativeUi", value: "true")
 
+        displayCaseRequestSequence += 1
+        let request = DisplayCaseNativeRequest(
+            model: state.selectedModel,
+            selectionEpoch: state.selectedModelEpoch,
+            requestId: displayCaseRequestSequence)
+        pendingDisplayCaseRequest = request
+        state.beginDisplayCaseRequest()
+        UnityBridge.send(
+            "RequestDisplayCaseFromNativeUi",
+            value: request.payload)
+    }
+
+    func receiveModelReadiness(
+        model: SpinnerModel,
+        selectionEpoch: Int64,
+        ready: Bool
+    ) {
+        state.receiveModelReadiness(
+            model: model,
+            epoch: selectionEpoch,
+            ready: ready)
+    }
+
+    func receiveDisplayCaseResult(
+        model: SpinnerModel,
+        selectionEpoch: Int64,
+        requestId: Int64,
+        succeeded: Bool
+    ) {
+        let result = DisplayCaseNativeRequest(
+            model: model,
+            selectionEpoch: selectionEpoch,
+            requestId: requestId)
+        guard pendingDisplayCaseRequest == result else { return }
+
+        pendingDisplayCaseRequest = nil
+        state.finishDisplayCaseRequest()
+        guard succeeded else { return }
+        // The presentation success ack is the strongest readiness signal: Unity
+        // sends it only after the exact scene, canonical prize, case and camera
+        // postconditions pass.  Apply it here as well so callback scheduling
+        // cannot make a valid presentation depend on two independent tasks.
+        state.receiveModelReadiness(
+            model: model,
+            epoch: selectionEpoch,
+            ready: true)
+        guard state.selectedModel == model,
+              state.selectedModelEpoch == selectionEpoch,
+              state.isSelectedModelReady,
+              let rootController = activeRootViewController()
+        else {
+            UnityBridge.send(
+                "CancelDisplayCaseRequestFromNativeUi",
+                value: result.payload)
+            return
+        }
+
+        let lifecycle = DisplayCasePresentationLifecycle(request: result)
         let controller = UIHostingController(
-            rootView: PremiumDisplayCaseExperienceView(onClose: { [weak self] in
-                self?.dismissDisplayCase()
-            }))
+            rootView: PremiumDisplayCaseExperienceView(
+                lifecycle: lifecycle,
+                onClose: { [weak self] in
+                    self?.dismissDisplayCase()
+                },
+                onPresentationMounted: { [weak self, weak lifecycle] in
+                    guard let lifecycle else { return }
+                    self?.startDisplayCasePresentation(lifecycle)
+                }))
+        // onAppear can run as soon as configure adds the hosting view. Publish
+        // the exact active identity before mounting so that callback can never
+        // be dropped merely because SwiftUI rendered quickly.
+        activeDisplayCaseRequest = result
+        activeDisplayCaseLifecycle = lifecycle
+        displayCaseController = controller
+        topController?.view.isHidden = true
+        modeController?.view.isHidden = true
+        progressionController?.view.isHidden = true
+        panelController?.view.isHidden = true
         configure(controller, in: rootController, background: .clear)
         NSLayoutConstraint.activate([
             controller.view.topAnchor.constraint(equalTo: rootController.view.topAnchor),
@@ -9387,16 +9622,62 @@ private final class CodexSwiftUIOverlayManager {
             controller.view.trailingAnchor.constraint(equalTo: rootController.view.trailingAnchor),
             controller.view.bottomAnchor.constraint(equalTo: rootController.view.bottomAnchor)
         ])
-        topController?.view.isHidden = true
-        modeController?.view.isHidden = true
-        progressionController?.view.isHidden = true
-        panelController?.view.isHidden = true
         rootController.view.bringSubviewToFront(controller.view)
-        displayCaseController = controller
+    }
+
+    private func startDisplayCasePresentation(
+        _ lifecycle: DisplayCasePresentationLifecycle
+    ) {
+        guard displayCaseController != nil,
+              activeDisplayCaseLifecycle === lifecycle,
+              activeDisplayCaseRequest == lifecycle.request,
+              lifecycle.claimStartRequest()
+        else { return }
+
+        UnityBridge.send(
+            "StartDisplayCasePresentationFromNativeUi",
+            value: lifecycle.request.payload)
+    }
+
+    func receiveDisplayCaseStartResult(
+        model: SpinnerModel,
+        selectionEpoch: Int64,
+        requestId: Int64,
+        succeeded: Bool
+    ) {
+        let result = DisplayCaseNativeRequest(
+            model: model,
+            selectionEpoch: selectionEpoch,
+            requestId: requestId)
+        guard activeDisplayCaseRequest == result,
+              let lifecycle = activeDisplayCaseLifecycle,
+              lifecycle.request == result
+        else { return }
+
+        guard succeeded else {
+            activeDisplayCaseRequest = nil
+            activeDisplayCaseLifecycle = nil
+            removeDisplayCaseOverlayAndRestoreLibrary()
+            return
+        }
+        lifecycle.markStarted()
     }
 
     private func dismissDisplayCase() {
-        UnityBridge.send("SetDisplayCasePresentedFromNativeUi", value: "false")
+        cancelPendingDisplayCaseRequest()
+        if let request = activeDisplayCaseRequest {
+            UnityBridge.send(
+                "CancelDisplayCaseRequestFromNativeUi",
+                value: request.payload)
+            activeDisplayCaseRequest = nil
+        } else {
+            UnityBridge.send("SetDisplayCasePresentedFromNativeUi", value: "false")
+        }
+        activeDisplayCaseLifecycle = nil
+        removeDisplayCaseOverlayAndRestoreLibrary()
+    }
+
+    private func removeDisplayCaseOverlayAndRestoreLibrary() {
         guard let controller = displayCaseController else { return }
         displayCaseController = nil
         controller.willMove(toParent: nil)
@@ -9663,6 +9944,78 @@ private final class CodexSwiftUIOverlayManager {
 public func CodexSwiftUiOverlayInstall() {
     DispatchQueue.main.async {
         CodexSwiftUIOverlayManager.shared.install()
+    }
+}
+
+@_cdecl("CodexModelReadinessReceiveState")
+public func CodexModelReadinessReceiveState(
+    _ modelId: UnsafePointer<CChar>?,
+    _ selectionEpoch: Int64,
+    _ ready: Int32
+) {
+    guard let rawValue = modelId.map({ String(cString: $0) }),
+          let model = SpinnerModel(rawValue: rawValue)
+    else { return }
+    Task { @MainActor in
+        CodexSwiftUIOverlayManager.shared.receiveModelReadiness(
+            model: model,
+            selectionEpoch: selectionEpoch,
+            ready: ready != 0)
+    }
+}
+
+@_cdecl("CodexDisplayCaseReceiveResult")
+public func CodexDisplayCaseReceiveResult(
+    _ modelId: UnsafePointer<CChar>?,
+    _ selectionEpoch: Int64,
+    _ requestId: Int64,
+    _ succeeded: Int32,
+    _ failureReason: UnsafePointer<CChar>?
+) {
+    guard let rawValue = modelId.map({ String(cString: $0) }),
+          let model = SpinnerModel(rawValue: rawValue)
+    else { return }
+    // Keep failures out of the UI, but preserve the exact Unity postcondition
+    // in shipping diagnostics so a rejected presentation is never mistaken
+    // for an accessibility or bridge timeout again.
+    let decodedFailureReason = failureReason.map { String(cString: $0) } ?? ""
+    if succeeded == 0 {
+        print(
+            "[FidgetingApp] Display-case presentation rejected "
+            + "for \(rawValue): \(decodedFailureReason)")
+    }
+    Task { @MainActor in
+        CodexSwiftUIOverlayManager.shared.receiveDisplayCaseResult(
+            model: model,
+            selectionEpoch: selectionEpoch,
+            requestId: requestId,
+            succeeded: succeeded != 0)
+    }
+}
+
+@_cdecl("CodexDisplayCaseReceiveStartResult")
+public func CodexDisplayCaseReceiveStartResult(
+    _ modelId: UnsafePointer<CChar>?,
+    _ selectionEpoch: Int64,
+    _ requestId: Int64,
+    _ succeeded: Int32,
+    _ failureReason: UnsafePointer<CChar>?
+) {
+    guard let rawValue = modelId.map({ String(cString: $0) }),
+          let model = SpinnerModel(rawValue: rawValue)
+    else { return }
+    let decodedFailureReason = failureReason.map { String(cString: $0) } ?? ""
+    if succeeded == 0 {
+        print(
+            "[FidgetingApp] Display-case visible entrance rejected "
+            + "for \(rawValue): \(decodedFailureReason)")
+    }
+    Task { @MainActor in
+        CodexSwiftUIOverlayManager.shared.receiveDisplayCaseStartResult(
+            model: model,
+            selectionEpoch: selectionEpoch,
+            requestId: requestId,
+            succeeded: succeeded != 0)
     }
 }
 

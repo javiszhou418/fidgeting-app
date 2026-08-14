@@ -1,4 +1,5 @@
 using FidgetingApp.Product;
+using FidgetingApp.DisplayCase;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -6,7 +7,8 @@ namespace ThreeBladeEDC.Presentation
 {
     [DisallowMultipleComponent]
     [RequireComponent(typeof(Camera))]
-    public sealed class OrbitPresentationCamera : MonoBehaviour
+    public sealed class OrbitPresentationCamera : MonoBehaviour,
+        IPremiumDisplayCaseCameraStateAuthor
     {
         public const float LibraryMotionOrbitMultiplier = 1.25f;
         public const float MinimumUserZoomScale = 0.72f;
@@ -41,6 +43,7 @@ namespace ThreeBladeEDC.Presentation
         private float _presentationMotionOrbitMultiplier = 1f;
         private float _transitionStartMotionMultiplier;
         private float _transitionTargetMotionMultiplier;
+        private bool displayCaseCameraControlSuppressed;
 
         public Transform Target
         {
@@ -122,7 +125,7 @@ namespace ThreeBladeEDC.Presentation
 
         private void ApplyOrbitPose()
         {
-            if (target == null)
+            if (displayCaseCameraControlSuppressed || target == null)
             {
                 return;
             }
@@ -147,6 +150,11 @@ namespace ThreeBladeEDC.Presentation
                 DeviceMotionOrbitMapping.ResolveStableLookRotation(
                     authoredBackward,
                     orbit));
+        }
+
+        public void SetDisplayCaseCameraControlSuppressed(bool suppressed)
+        {
+            displayCaseCameraControlSuppressed = suppressed;
         }
 
         public void SetAppearanceActivationScale(float apparentScale)

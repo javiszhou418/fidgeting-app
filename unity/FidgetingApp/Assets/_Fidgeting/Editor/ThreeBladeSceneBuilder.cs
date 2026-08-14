@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using FidgetingApp.Product;
 using ThreeBladeEDC.Geometry;
 using ThreeBladeEDC.Interaction;
@@ -27,6 +28,10 @@ namespace ThreeBladeEDC.EditorTools
         private const string MeshFolder = "Assets/_Fidgeting/Generated/Meshes";
         private const string DragonScaleRollbackModelPath =
             "Assets/_Fidgeting/Models/BlenderDragonScale/DragonScaleEDC.fbx";
+        private const string DragonMetalRingNeutralModelPath =
+            "Assets/_Fidgeting/Models/BlenderDragonScale/RingNeutral/DragonMetalRingNeutralRotorBody.fbx";
+        private const string DragonMetalRingNeutralMeshPath =
+            MeshFolder + "/M_DragonMetalRingNeutralRotorBody.asset";
         private const int RatchetAudioVoiceCount = 12;
         private static readonly string[] RatchetClickPaths =
         {
@@ -80,7 +85,7 @@ namespace ThreeBladeEDC.EditorTools
             Mesh capMesh = SaveMesh(
                 ProceduralMeshFactory.CreateScallopedDisc(
                     "M_ScallopedTopCap",
-                    0.0172f,
+                    0.0072f,
                     0.0032f,
                     24,
                     6,
@@ -93,11 +98,11 @@ namespace ThreeBladeEDC.EditorTools
                 MeshFolder + "/M_TopCapCollision.asset");
             Mesh bottomCapMesh = SaveMesh(
                 ProceduralMeshFactory.CreateFacetedDisc(
-                    "M_FacetedBottomCap", 0.0148f, 0.0028f, 96, 0.00062f),
+                    "M_FacetedBottomCap", 0.0070f, 0.0028f, 96, 0.00062f),
                 MeshFolder + "/M_FacetedBottomCap.asset");
             Mesh rotorCoreMesh = SaveMesh(
-                ProceduralMeshFactory.CreateRing(
-                    "M_RotorCore", 0.0168f, 0.0117f, 0.0056f, 128),
+                ProceduralMeshFactory.CreateFacetedDisc(
+                    "M_RotorCoreSolidCarrier", 0.0068f, 0.0056f, 96, 0.00058f),
                 MeshFolder + "/M_RotorCore.asset");
             Mesh outerRaceMesh = SaveMesh(
                 ProceduralMeshFactory.CreateRing(
@@ -148,7 +153,7 @@ namespace ThreeBladeEDC.EditorTools
                 "RotorCore",
                 rotor.transform,
                 rotorCoreMesh,
-                new[] { materials.blade });
+                new[] { materials.blade, materials.blade });
             CreateMeshObject(
                 "BearingOuterRace",
                 rotor.transform,
@@ -211,7 +216,7 @@ namespace ThreeBladeEDC.EditorTools
                 "TopCap",
                 hub.transform,
                 capMesh,
-                new[] { materials.cap, materials.bevel });
+                new[] { materials.cap, materials.cap });
             topCap.transform.localPosition = new Vector3(0f, 0.0056f, 0f);
             topCap.AddComponent<SpinnerTouchSurface>();
             MeshCollider topCapCollider = topCap.AddComponent<MeshCollider>();
@@ -225,7 +230,7 @@ namespace ThreeBladeEDC.EditorTools
                 "BottomCap",
                 hub.transform,
                 bottomCapMesh,
-                new[] { materials.darkRing, materials.bevel });
+                new[] { materials.darkRing, materials.darkRing });
             bottomCap.transform.localPosition = new Vector3(0f, -0.0054f, 0f);
 
             GameObject bearingVisual = new GameObject("BearingVisual");
@@ -253,6 +258,21 @@ namespace ThreeBladeEDC.EditorTools
                     bottomWasher.transform,
                     bottomCap.transform)
                 : root.GetComponentsInChildren<Renderer>(true);
+
+            // The fixed axle and the two independent Rigidbody owners remain
+            // the mechanical authority. Annular races, washers and the ball
+            // cage are presentation-only pieces; remove their renderable
+            // geometry so the assembled and exploded product cannot recreate
+            // a high-contrast axis ring. Keep one solid, touchable top cap.
+            StripAnnularAxisVisuals(root.transform);
+            if (installDragonScaleVisuals)
+            {
+                AssignUniformMaterial(topCap.transform, materials.cap);
+                AssignUniformMaterial(bottomCap.transform, materials.darkRing);
+            }
+            presentationRenderers = root.GetComponentsInChildren<Renderer>(true)
+                .Where(renderer => renderer.enabled)
+                .ToArray();
 
             BearingCageVisualSync cageSync =
                 bearingVisual.AddComponent<BearingCageVisualSync>();
@@ -300,9 +320,7 @@ namespace ThreeBladeEDC.EditorTools
             OrbitPresentationCamera orbit =
                 camera.gameObject.AddComponent<OrbitPresentationCamera>();
             orbit.Target = root.transform;
-            orbit.FocusTarget = installDragonScaleVisuals
-                ? RequireDescendant(topCap.transform, "FingerCapTop_BrushedFace")
-                : topCap.transform;
+            orbit.FocusTarget = topCap.transform;
             orbit.ConfigureFraming(ProductFramingCatalog.Resolve(outputScenePath));
             orbit.SetDesktopInputEnabled(false);
 
@@ -517,6 +535,14 @@ namespace ThreeBladeEDC.EditorTools
             ReparentPreservingWorld(bottomCapRoot, bottomCap);
             ReparentPreservingWorld(fixedRoot, hub);
 
+            // The imported cap hierarchy carries its authored brushed-face
+            // receiver, but its 34 mm visual diameter dominated the 85 mm
+            // product. Keep the original 34 mm invisible touch collider on
+            // TopCap and reduce only the render hierarchy to a compact
+            // 16.3 mm solid cap (19.2% of product diameter).
+            topCapRoot.localScale *= 0.475f;
+            bottomCapRoot.localScale *= 0.475f;
+
             var renderers = new List<Renderer>();
             AddRenderers(rotorRoot, materials, renderers);
             AddRenderers(importedBearing, materials, renderers);
@@ -531,8 +557,127 @@ namespace ThreeBladeEDC.EditorTools
             SetNamedRendererEnabled(bottomCapRoot, "FingerCapBottom_AccentLine", false);
             SetNamedRendererEnabled(bearingCage, "BearingBalls", true);
 
+            ReplaceDragonRotorBodyWithRingNeutral(rotorRoot, materials.blade, renderers);
+            UseSingleSolidCap(topCap, topCapRoot, materials.cap, renderers);
+            UseSingleSolidCap(bottomCap, bottomCapRoot, materials.darkRing, renderers);
+
             UnityEngine.Object.DestroyImmediate(instance);
             return renderers.ToArray();
+        }
+
+        private static void UseSingleSolidCap(
+            Transform proceduralCap,
+            Transform importedLayeredCap,
+            Material material,
+            List<Renderer> presentationRenderers)
+        {
+            foreach (Renderer renderer in importedLayeredCap
+                .GetComponentsInChildren<Renderer>(true))
+            {
+                presentationRenderers.Remove(renderer);
+                UnityEngine.Object.DestroyImmediate(renderer);
+            }
+            foreach (MeshFilter filter in importedLayeredCap
+                .GetComponentsInChildren<MeshFilter>(true))
+            {
+                UnityEngine.Object.DestroyImmediate(filter);
+            }
+
+            MeshRenderer capRenderer = proceduralCap.GetComponent<MeshRenderer>();
+            capRenderer.enabled = true;
+            capRenderer.sharedMaterials = Enumerable
+                .Repeat(material, capRenderer.sharedMaterials.Length)
+                .ToArray();
+            if (!presentationRenderers.Contains(capRenderer))
+            {
+                presentationRenderers.Add(capRenderer);
+            }
+        }
+
+        private static void ReplaceDragonRotorBodyWithRingNeutral(
+            Transform rotorRoot,
+            Material material,
+            List<Renderer> presentationRenderers)
+        {
+            Transform sourceBody = RequireDescendant(rotorRoot, "RotorBody_OnePiece");
+            GameObject candidateAsset = AssetDatabase.LoadAssetAtPath<GameObject>(
+                DragonMetalRingNeutralModelPath);
+            if (candidateAsset == null)
+            {
+                throw new FileNotFoundException(
+                    "The ring-neutral Dragon Metal rotor body is missing.",
+                    DragonMetalRingNeutralModelPath);
+            }
+
+            MeshFilter candidateFilter = candidateAsset
+                .GetComponentsInChildren<MeshFilter>(true)
+                .Single(filter => filter.sharedMesh != null);
+            Mesh candidateMesh = SaveMesh(
+                BakeImportedMeshTransform(candidateFilter),
+                DragonMetalRingNeutralMeshPath);
+            MeshFilter sourceFilter = sourceBody.GetComponent<MeshFilter>();
+            MeshRenderer sourceRenderer = sourceBody.GetComponent<MeshRenderer>();
+            if (sourceFilter == null || sourceRenderer == null)
+            {
+                throw new MissingReferenceException(
+                    "Dragon Scale RotorBody_OnePiece lost its MeshFilter or MeshRenderer.");
+            }
+
+            sourceBody.name = "RotorBody_OnePiece_RingNeutral";
+            sourceFilter.sharedMesh = candidateMesh;
+            sourceRenderer.sharedMaterials = new[] { material };
+            if (!presentationRenderers.Contains(sourceRenderer))
+            {
+                presentationRenderers.Add(sourceRenderer);
+            }
+        }
+
+        private static Mesh BakeImportedMeshTransform(MeshFilter importedFilter)
+        {
+            Mesh source = importedFilter.sharedMesh;
+            Mesh baked = UnityEngine.Object.Instantiate(source);
+            baked.name = "M_DragonMetalRingNeutralRotorBody";
+            // The existing Dragon Scale Rotor_Root already owns the FBX
+            // X-axis conversion. Bake only the FBX unit scale here; baking
+            // the imported root rotation as well would apply that conversion
+            // twice and turn the shipping rotor edge-on.
+            Matrix4x4 matrix = Matrix4x4.Scale(importedFilter.transform.lossyScale);
+            Matrix4x4 normalMatrix = matrix.inverse.transpose;
+
+            Vector3[] vertices = source.vertices;
+            Vector3[] normals = source.normals;
+            Vector4[] tangents = source.tangents;
+            for (int index = 0; index < vertices.Length; index++)
+            {
+                vertices[index] = matrix.MultiplyPoint3x4(vertices[index]);
+                if (normals.Length == vertices.Length)
+                {
+                    normals[index] = normalMatrix.MultiplyVector(normals[index]).normalized;
+                }
+                if (tangents.Length == vertices.Length)
+                {
+                    Vector3 tangent = matrix.MultiplyVector(
+                        new Vector3(tangents[index].x, tangents[index].y, tangents[index].z))
+                        .normalized;
+                    tangents[index] = new Vector4(tangent.x, tangent.y, tangent.z, tangents[index].w);
+                }
+            }
+
+            baked.vertices = vertices;
+            if (normals.Length == vertices.Length)
+            {
+                baked.normals = normals;
+            }
+            if (tangents.Length == vertices.Length)
+            {
+                baked.tangents = tangents;
+            }
+            else
+            {
+                baked.RecalculateTangents();
+            }
+            baked.RecalculateBounds();
+            return baked;
         }
 
         private static void DisableRenderer(Transform parent, string childName)
@@ -555,6 +700,52 @@ namespace ThreeBladeEDC.EditorTools
             if (renderer != null)
             {
                 renderer.enabled = enabled;
+            }
+        }
+
+        private static void StripAnnularAxisVisuals(Transform productRoot)
+        {
+            var forbiddenRoots = new HashSet<string>
+            {
+                "BearingOuterRace",
+                "BearingInnerRace",
+                "TopWasher",
+                "BottomWasher",
+                "BearingShield_Top",
+                "BearingShield_Bottom",
+                "BearingBalls",
+                // Retain the Axle transform as the mechanical axis authority,
+                // but do not render its wide cylindrical top through the
+                // smaller solid touch cap where it reads as a second circle.
+                "Axle"
+            };
+
+            Transform[] transforms = productRoot.GetComponentsInChildren<Transform>(true);
+            foreach (Transform candidate in transforms)
+            {
+                if (!forbiddenRoots.Contains(candidate.name))
+                {
+                    continue;
+                }
+
+                foreach (Renderer renderer in candidate.GetComponentsInChildren<Renderer>(true))
+                {
+                    UnityEngine.Object.DestroyImmediate(renderer);
+                }
+                foreach (MeshFilter filter in candidate.GetComponentsInChildren<MeshFilter>(true))
+                {
+                    UnityEngine.Object.DestroyImmediate(filter);
+                }
+            }
+        }
+
+        private static void AssignUniformMaterial(Transform root, Material material)
+        {
+            foreach (Renderer renderer in root.GetComponentsInChildren<Renderer>(true))
+            {
+                renderer.sharedMaterials = Enumerable
+                    .Repeat(material, renderer.sharedMaterials.Length)
+                    .ToArray();
             }
         }
 

@@ -29,7 +29,6 @@ namespace ThreeBladeEDC.Interaction
         private float interactionRadiusScreenFraction = 0.44f;
         [SerializeField, Min(32f)] private float minimumInteractionRadiusPixels = 120f;
         [SerializeField, Min(0f)] private float minimumCircularRadiusPixels = 24f;
-        [SerializeField] private bool showTouchFeedback = true;
 
         [Header("Flick")]
         [SerializeField, Range(0f, 1f)] private float sensitivity =
@@ -68,7 +67,6 @@ namespace ThreeBladeEDC.Interaction
         private double _gestureStartTime;
         private float _gestureSignedTravel;
         private float _filteredReleasePixelVelocity;
-        private Texture2D _touchRingTexture;
 
         public RotorRigidbodyController Rotor => rotor;
         public bool IsPointerActive => _pointerSource != PointerSource.None;
@@ -122,31 +120,6 @@ namespace ThreeBladeEDC.Interaction
             {
                 rotor.SetMotorActive(false);
             }
-        }
-
-        private void OnDestroy()
-        {
-            if (_touchRingTexture != null)
-            {
-                Destroy(_touchRingTexture);
-            }
-        }
-
-        private void OnGUI()
-        {
-            if (!showTouchFeedback || !IsPointerActive)
-            {
-                return;
-            }
-
-            EnsureTouchRingTexture();
-            float size = Mathf.Clamp(Screen.width * 0.055f, 56f, 84f);
-            Rect touchRect = new Rect(
-                _currentScreenPosition.x - size * 0.5f,
-                Screen.height - _currentScreenPosition.y - size * 0.5f,
-                size,
-                size);
-            GUI.DrawTexture(touchRect, _touchRingTexture, ScaleMode.StretchToFill, true);
         }
 
         public void Configure(
@@ -589,44 +562,5 @@ namespace ThreeBladeEDC.Interaction
             return interactionCamera;
         }
 
-        private void EnsureTouchRingTexture()
-        {
-            if (_touchRingTexture != null)
-            {
-                return;
-            }
-
-            const int size = 64;
-            _touchRingTexture = new Texture2D(
-                size,
-                size,
-                TextureFormat.RGBA32,
-                false)
-            {
-                name = "Touch Feedback Ring",
-                filterMode = FilterMode.Bilinear,
-                wrapMode = TextureWrapMode.Clamp,
-                hideFlags = HideFlags.HideAndDontSave
-            };
-
-            Color32[] pixels = new Color32[size * size];
-            Vector2 center = Vector2.one * ((size - 1) * 0.5f);
-            float outer = size * 0.46f;
-            float inner = size * 0.35f;
-            for (int y = 0; y < size; y++)
-            {
-                for (int x = 0; x < size; x++)
-                {
-                    float radius = Vector2.Distance(new Vector2(x, y), center);
-                    float alpha = radius >= inner && radius <= outer
-                        ? 0.72f
-                        : 0f;
-                    pixels[y * size + x] = new Color(0.12f, 0.72f, 0.9f, alpha);
-                }
-            }
-
-            _touchRingTexture.SetPixels32(pixels);
-            _touchRingTexture.Apply(false, true);
-        }
     }
 }

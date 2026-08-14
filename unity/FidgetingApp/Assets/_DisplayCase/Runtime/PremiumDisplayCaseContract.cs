@@ -7,10 +7,23 @@ namespace FidgetingApp.DisplayCase
     {
         public const float ReferenceAspect = 1200f / 1600f;
         public const float ReferenceVerticalFieldOfView = 29f;
+        public const float PresentationNearClipPlane = 0.01f;
+        public const float PresentationFarClipPlane = 10f;
+        public const float PositionToleranceMeters = 0.001f;
+        public const float RotationToleranceDegrees = 0.10f;
+        public const float FieldOfViewToleranceDegrees = 0.05f;
+        public const float ProjectionCenterTolerance = 0.001f;
+        public const float MinimumCaseViewportSpan = 0.12f;
+        public const float MaximumCaseViewportOverflow = 0.08f;
+        public const float MaximumCaseViewportCenterOffset = 0.18f;
         public static readonly Vector3 FrontCameraPosition =
             new Vector3(0f, 0.006f, -0.72f);
         public static readonly Vector3 FrontLookAt =
             new Vector3(0f, 0.006f, 0.008f);
+
+        public static Quaternion FrontCameraRotation => Quaternion.LookRotation(
+            FrontLookAt - FrontCameraPosition,
+            Vector3.up);
 
         public static float ResolveVerticalFieldOfView(float targetAspect)
         {
@@ -22,6 +35,213 @@ namespace FidgetingApp.DisplayCase
                 horizontalFieldOfView,
                 safeAspect);
         }
+
+        public static void ApplyFrontPresentation(Camera camera)
+        {
+            if (camera == null)
+            {
+                return;
+            }
+
+            camera.transform.SetPositionAndRotation(
+                FrontCameraPosition,
+                FrontCameraRotation);
+            camera.orthographic = false;
+            camera.usePhysicalProperties = false;
+            camera.nearClipPlane = PresentationNearClipPlane;
+            camera.farClipPlane = PresentationFarClipPlane;
+            camera.lensShift = Vector2.zero;
+            camera.fieldOfView = ResolveVerticalFieldOfView(camera.aspect);
+            camera.ResetProjectionMatrix();
+            camera.nonJitteredProjectionMatrix = camera.projectionMatrix;
+        }
+
+        public static bool TryValidateFrontPresentation(
+            Camera camera,
+            Transform displayCaseRoot,
+            out string failureReason)
+        {
+            if (camera == null || !camera.isActiveAndEnabled)
+            {
+                failureReason = "display-camera-inactive";
+                return false;
+            }
+            if (camera.orthographic)
+            {
+                failureReason = "display-camera-orthographic";
+                return false;
+            }
+            if (camera.usePhysicalProperties)
+            {
+                failureReason = "display-camera-physical";
+                return false;
+            }
+            if (Vector3.Distance(camera.transform.position, FrontCameraPosition)
+                > PositionToleranceMeters
+                || Quaternion.Angle(camera.transform.rotation, FrontCameraRotation)
+                    > RotationToleranceDegrees)
+            {
+                failureReason = "display-camera-pose-overwritten";
+                return false;
+            }
+
+            float expectedFieldOfView = ResolveVerticalFieldOfView(camera.aspect);
+            if (Mathf.Abs(camera.fieldOfView - expectedFieldOfView)
+                > FieldOfViewToleranceDegrees)
+            {
+                failureReason = "display-camera-fov-overwritten";
+                return false;
+            }
+            if (camera.lensShift.sqrMagnitude
+                > ProjectionCenterTolerance * ProjectionCenterTolerance
+                || Mathf.Abs(camera.projectionMatrix.m02)
+                    > ProjectionCenterTolerance
+                || Mathf.Abs(camera.projectionMatrix.m12)
+                    > ProjectionCenterTolerance)
+            {
+                failureReason = "display-camera-projection-offset";
+                return false;
+            }
+
+            if (!TryMeasureCaseViewport(
+                    camera,
+                    displayCaseRoot,
+                    out Rect viewport,
+                    out float nearestDepth))
+            {
+                failureReason = "display-case-viewport-missing";
+                return false;
+            }
+            if (nearestDepth <= camera.nearClipPlane)
+            {
+                failureReason = "display-case-behind-camera";
+                return false;
+            }
+            if (viewport.width < MinimumCaseViewportSpan
+                || viewport.height < MinimumCaseViewportSpan)
+            {
+                failureReason = "display-case-viewport-edge-on";
+                return false;
+            }
+            if (viewport.xMin < -MaximumCaseViewportOverflow
+                || viewport.xMax > 1f + MaximumCaseViewportOverflow
+                || viewport.yMin < -MaximumCaseViewportOverflow
+                || viewport.yMax > 1f + MaximumCaseViewportOverflow)
+            {
+                failureReason = "display-case-viewport-clipped";
+                return false;
+            }
+            if (Mathf.Abs(viewport.center.x - 0.5f)
+                    > MaximumCaseViewportCenterOffset
+                || Mathf.Abs(viewport.center.y - 0.5f)
+                    > MaximumCaseViewportCenterOffset)
+            {
+                failureReason = "display-case-viewport-off-center";
+                return false;
+            }
+
+            failureReason = string.Empty;
+            return true;
+        }
+
+        public static bool TryMeasureCaseViewport(
+            Camera camera,
+            Transform displayCaseRoot,
+            out Rect viewport,
+            out float nearestDepth)
+        {
+            viewport = default;
+            nearestDepth = float.PositiveInfinity;
+            if (camera == null || displayCaseRoot == null)
+            {
+                return false;
+            }
+
+            Renderer[] renderers = displayCaseRoot.GetComponentsInChildren<Renderer>(
+                false);
+            Bounds bounds = default;
+            bool hasBounds = false;
+            for (int index = 0; index < renderers.Length; index++)
+            {
+                Renderer renderer = renderers[index];
+                if (renderer == null
+                    || !renderer.enabled
+                    || !renderer.gameObject.activeInHierarchy
+                    || !IsFinite(renderer.bounds))
+                {
+                    continue;
+                }
+
+                if (!hasBounds)
+                {
+                    bounds = renderer.bounds;
+                    hasBounds = true;
+                }
+                else
+                {
+                    bounds.Encapsulate(renderer.bounds);
+                }
+            }
+            if (!hasBounds)
+            {
+                return false;
+            }
+
+            float minimumX = float.PositiveInfinity;
+            float maximumX = float.NegativeInfinity;
+            float minimumY = float.PositiveInfinity;
+            float maximumY = float.NegativeInfinity;
+            Vector3 extents = bounds.extents;
+            for (int x = -1; x <= 1; x += 2)
+            {
+                for (int y = -1; y <= 1; y += 2)
+                {
+                    for (int z = -1; z <= 1; z += 2)
+                    {
+                        Vector3 corner = bounds.center + new Vector3(
+                            extents.x * x,
+                            extents.y * y,
+                            extents.z * z);
+                        Vector3 projected = camera.WorldToViewportPoint(corner);
+                        if (!IsFinite(projected))
+                        {
+                            return false;
+                        }
+                        minimumX = Mathf.Min(minimumX, projected.x);
+                        maximumX = Mathf.Max(maximumX, projected.x);
+                        minimumY = Mathf.Min(minimumY, projected.y);
+                        maximumY = Mathf.Max(maximumY, projected.y);
+                        nearestDepth = Mathf.Min(nearestDepth, projected.z);
+                    }
+                }
+            }
+
+            viewport = Rect.MinMaxRect(
+                minimumX,
+                minimumY,
+                maximumX,
+                maximumY);
+            return IsFinite(viewport.xMin)
+                && IsFinite(viewport.yMin)
+                && IsFinite(viewport.xMax)
+                && IsFinite(viewport.yMax)
+                && IsFinite(nearestDepth);
+        }
+
+        private static bool IsFinite(Bounds bounds)
+        {
+            return IsFinite(bounds.center) && IsFinite(bounds.extents);
+        }
+
+        private static bool IsFinite(Vector3 value)
+        {
+            return IsFinite(value.x) && IsFinite(value.y) && IsFinite(value.z);
+        }
+
+        private static bool IsFinite(float value)
+        {
+            return !float.IsNaN(value) && !float.IsInfinity(value);
+        }
     }
 
     public enum PremiumDisplayCaseCapsulePreset
@@ -30,7 +250,8 @@ namespace FidgetingApp.DisplayCase
         CircularStandard = 1,
         CircularDeep = 2,
         RoundedSquareStandard = 3,
-        RoundedSquareDeep = 4
+        RoundedSquareDeep = 4,
+        CircularWide = 5
     }
 
     public enum PremiumDisplayCaseCapsuleShape
@@ -47,21 +268,41 @@ namespace FidgetingApp.DisplayCase
             float diameter,
             float depth,
             float cornerRadius)
+            : this(shape, diameter, diameter, depth, cornerRadius)
+        {
+        }
+
+        /// <summary>
+        /// Width and height remain independent for non-shipping preview/gacha
+        /// callers. Shipping product profiles all resolve the same approved
+        /// magnetic-slide dimensions; prize fitting remains uniform.
+        /// </summary>
+        public PremiumDisplayCaseCapsuleDimensions(
+            PremiumDisplayCaseCapsuleShape shape,
+            float width,
+            float height,
+            float depth,
+            float cornerRadius)
         {
             Shape = shape;
-            Diameter = Mathf.Clamp(diameter, 0.060f, 0.160f);
+            Width = Mathf.Clamp(width, 0.060f, 0.160f);
+            Height = Mathf.Clamp(height, 0.060f, 0.160f);
             Depth = Mathf.Clamp(depth, 0.012f, 0.080f);
             CornerRadius = Mathf.Clamp(
                 cornerRadius,
                 0.002f,
-                Diameter * 0.45f);
+                Mathf.Min(Width, Height) * 0.45f);
         }
 
         public PremiumDisplayCaseCapsuleShape Shape { get; }
-        public float Diameter { get; }
+        public float Width { get; }
+        public float Height { get; }
+        // Kept for the circular preset API and legacy callers. New rectangular
+        // profiles must use Width / Height rather than stretching their prize.
+        public float Diameter => Mathf.Min(Width, Height);
         public float Depth { get; }
         public float CornerRadius { get; }
-        public Vector3 InnerSize => new Vector3(Diameter, Diameter, Depth);
+        public Vector3 InnerSize => new Vector3(Width, Height, Depth);
     }
 
     public static class PremiumDisplayCaseCapsulePresets
@@ -83,6 +324,12 @@ namespace FidgetingApp.DisplayCase
                         0.084f,
                         0.036f,
                         0.010f),
+                PremiumDisplayCaseCapsulePreset.CircularWide =>
+                    new PremiumDisplayCaseCapsuleDimensions(
+                        PremiumDisplayCaseCapsuleShape.Circular,
+                        0.0987f,
+                        0.032f,
+                        0.012f),
                 PremiumDisplayCaseCapsulePreset.RoundedSquareStandard =>
                     new PremiumDisplayCaseCapsuleDimensions(
                         PremiumDisplayCaseCapsuleShape.RoundedSquare,
@@ -127,8 +374,8 @@ namespace FidgetingApp.DisplayCase
         public static PremiumDisplayCaseContentOptions Default =>
             new PremiumDisplayCaseContentOptions(
                 true,
-                4f,
-                new Vector3(0f, -18f, 0f));
+                6f,
+                new Vector3(90f, -8f, 0f));
     }
 
     public readonly struct PremiumDisplayCaseFitResult

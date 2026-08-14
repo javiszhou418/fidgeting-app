@@ -302,7 +302,7 @@ namespace ThreeBladeEDC.Tests.Editor
 
         [TestCase("Assets/_Fidgeting/Scenes/ThreeBladeEDC.unity", 3)]
         [TestCase("Assets/_Fidgeting/Scenes/ThreeBladeMetalOriginal.unity", 3)]
-        [TestCase("Assets/_ImportedSpinner/Scenes/ImportedSpinner.unity", 3)]
+        [TestCase("Assets/_ImportedSpinner/Scenes/ImportedSpinner.unity", 4)]
         [TestCase("Assets/_TwoLobeBar/Scenes/TwoLobeBar.unity", 2)]
         public void ShippingRotorScene_HasWindAndLayeredRatchetAudio(
             string scenePath,

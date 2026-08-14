@@ -12,10 +12,7 @@ namespace FidgetingApp.DisplayCase
         public const string ResourcesPath = "Gacha/ThreeBladeDisplayPrize";
 
         public static PremiumDisplayCaseContentOptions ContentOptions =>
-            new PremiumDisplayCaseContentOptions(
-                true,
-                4f,
-                new Vector3(90f, -18f, 0f));
+            PremiumDisplayCaseProductProfiles.SharedContentOptions;
 
         public static GameObject Instantiate(Transform parent = null)
         {

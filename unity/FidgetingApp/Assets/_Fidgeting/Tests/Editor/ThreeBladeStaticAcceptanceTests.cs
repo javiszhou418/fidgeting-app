@@ -222,14 +222,39 @@ namespace ThreeBladeEDC.Tests.Editor
                 rotorCore.GetComponent<MeshRenderer>()?.enabled,
                 Is.True,
                 "The real RotorCore carrier must remain visible and owned by RotorDynamic.");
+            foreach (Transform annularVisual in new[] { innerRace, outerRace })
+            {
+                Assert.That(
+                    annularVisual.GetComponentsInChildren<Renderer>(true),
+                    Is.Empty,
+                    $"{annularVisual.name} may retain transform ownership but must not render an axis ring.");
+                Assert.That(
+                    annularVisual.GetComponentsInChildren<MeshFilter>(true),
+                    Is.Empty,
+                    $"{annularVisual.name} must not retain hidden annular mesh geometry.");
+            }
             Assert.That(
-                outerRace.GetComponent<MeshFilter>()?.sharedMesh,
-                Is.Not.Null,
-                "BearingOuterRace must remain real rotating bearing geometry.");
-            Assert.That(
-                outerRace.GetComponent<MeshRenderer>()?.enabled,
-                Is.True,
-                "BearingOuterRace must remain visible and owned by RotorDynamic.");
+                rotorCore.GetComponent<MeshFilter>().sharedMesh.name,
+                Is.EqualTo("M_RotorCoreSolidCarrier"),
+                "The rotating bearing load must be represented by one solid carrier, not an annular race.");
+
+            foreach (string forbiddenName in new[]
+                     {
+                         "TopWasher",
+                         "BottomWasher",
+                         "BearingBalls"
+                     })
+            {
+                Transform forbidden = RequireDescendant(_root, forbiddenName);
+                Assert.That(
+                    forbidden.GetComponentsInChildren<Renderer>(true),
+                    Is.Empty,
+                    $"{forbiddenName} must not render a concentric axis ring on the assembled product.");
+                Assert.That(
+                    forbidden.GetComponentsInChildren<MeshFilter>(true),
+                    Is.Empty,
+                    $"{forbiddenName} must not retain render mesh geometry.");
+            }
 
             Rigidbody body = rotor.GetComponent<Rigidbody>();
             RotorRigidbodyController controller =
@@ -275,12 +300,14 @@ namespace ThreeBladeEDC.Tests.Editor
             Assert.That(cageSync.CageVisual, Is.SameAs(cage));
 
             Transform bearingBalls = Require(cage, "BearingBalls");
-            Mesh ballMesh = bearingBalls.GetComponent<MeshFilter>().sharedMesh;
-            Assert.That(ballMesh.name, Is.EqualTo("M_BearingBallCage"));
             Assert.That(
-                cage.GetComponentsInChildren<MeshRenderer>(true),
-                Has.Length.EqualTo(1),
-                "All eight visible balls must share one renderer and draw call.");
+                bearingBalls.GetComponentsInChildren<Renderer>(true),
+                Is.Empty,
+                "Bearing balls are mechanically represented by the driven cage state, not visible annular geometry.");
+            Assert.That(
+                cage.GetComponentsInChildren<MeshFilter>(true),
+                Is.Empty,
+                "The driven cage must not recreate a dotted circular bearing silhouette.");
 
             Vector3 radialOffset = Vector3.ProjectOnPlane(
                 rotor.position - hubStatic.position,
@@ -596,7 +623,7 @@ namespace ThreeBladeEDC.Tests.Editor
         }
 
         [Test]
-        public void ReferenceProportions_CenterCapIsAboutHalfTheFrameWidth()
+        public void UserApprovedDirection_CenterCapStaysBelowTwentyTwoPercentOfFrameWidth()
         {
             Mesh frame = Require("RotorDynamic/ThreeBladeFrame")
                 .GetComponent<MeshFilter>().sharedMesh;
@@ -605,8 +632,8 @@ namespace ThreeBladeEDC.Tests.Editor
             float ratio = topCap.bounds.size.x / frame.bounds.size.x;
             Assert.That(
                 ratio,
-                Is.InRange(0.50f, 0.54f),
-                "Reference sheet specifies a center diameter close to 0.52 of total width.");
+                Is.InRange(0.20f, 0.22f),
+                "The solid touch cap must remain readable without dominating the rotor body.");
         }
 
         [Test]
@@ -673,19 +700,23 @@ namespace ThreeBladeEDC.Tests.Editor
             Assert.That(
                 Require("RotorDynamic/RotorCore")
                     .GetComponent<MeshFilter>().sharedMesh.vertexCount,
-                Is.EqualTo(128 * 16));
+                Is.GreaterThan(300));
             Assert.That(
-                Require("RotorDynamic/BearingOuterRace")
-                    .GetComponent<MeshFilter>().sharedMesh.vertexCount,
-                Is.EqualTo(128 * 16));
-            Assert.That(
-                Require("HubStatic/BearingInnerRace")
-                    .GetComponent<MeshFilter>().sharedMesh.vertexCount,
-                Is.EqualTo(128 * 16));
+                Require("RotorDynamic/RotorCore")
+                    .GetComponent<MeshFilter>().sharedMesh.name,
+                Is.EqualTo("M_RotorCoreSolidCarrier"));
             Assert.That(
                 Require("HubStatic/BottomCap")
                     .GetComponent<MeshFilter>().sharedMesh.vertexCount,
                 Is.EqualTo(96 * 18));
+            Assert.That(
+                Require("RotorDynamic/BearingOuterRace")
+                    .GetComponentsInChildren<MeshFilter>(true),
+                Is.Empty);
+            Assert.That(
+                Require("HubStatic/BearingInnerRace")
+                    .GetComponentsInChildren<MeshFilter>(true),
+                Is.Empty);
         }
 
         [Test]
@@ -944,6 +975,14 @@ namespace ThreeBladeEDC.Tests.Editor
         private static bool IsFinite(float value)
         {
             return !float.IsNaN(value) && !float.IsInfinity(value);
+        }
+
+        private static Transform RequireDescendant(Transform root, string name)
+        {
+            Transform result = root.GetComponentsInChildren<Transform>(true)
+                .FirstOrDefault(candidate => candidate.name == name);
+            Assert.That(result, Is.Not.Null, $"Missing descendant {name}.");
+            return result;
         }
 
         private static string HierarchyPath(Transform transform)

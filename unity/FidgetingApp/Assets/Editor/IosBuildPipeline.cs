@@ -58,7 +58,7 @@ namespace CodexUnityLabEditor
             PlayerSettings.productName = ProductName;
             PlayerSettings.SetApplicationIdentifier(NamedBuildTarget.iOS, BundleIdentifier);
             PlayerSettings.bundleVersion = "0.1.0";
-            PlayerSettings.iOS.buildNumber = "40";
+            PlayerSettings.iOS.buildNumber = "41";
             PlayerSettings.iOS.targetOSVersionString = MinimumIosVersion;
             PlayerSettings.iOS.targetDevice = iOSTargetDevice.iPhoneOnly;
             PlayerSettings.SetScriptingBackend(NamedBuildTarget.iOS, ScriptingImplementation.IL2CPP);

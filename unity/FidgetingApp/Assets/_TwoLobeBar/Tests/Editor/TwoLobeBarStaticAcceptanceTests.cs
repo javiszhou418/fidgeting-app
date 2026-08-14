@@ -58,9 +58,10 @@ namespace FidgetingApp.TwoLobeBar.Tests.Editor
             Assert.That(TwoLobeBarSpecifications.EdgeFilletRadius, Is.EqualTo(0.0035f));
             Assert.That(TwoLobeBarSpecifications.EndTransitionLength, Is.EqualTo(0.0035f));
             Assert.That(TwoLobeBarSpecifications.EndFaceInset, Is.EqualTo(0.0023f));
-            Assert.That(TwoLobeBarSpecifications.ButtonDiameter, Is.EqualTo(0.024f));
+            Assert.That(TwoLobeBarSpecifications.ButtonDiameter, Is.EqualTo(0.010f));
+            Assert.That(TwoLobeBarSpecifications.ButtonTouchDiameter, Is.EqualTo(0.024f));
             Assert.That(TwoLobeBarSpecifications.ButtonProudHeight, Is.EqualTo(0.003f));
-            Assert.That(TwoLobeBarSpecifications.ButtonDishDepth, Is.EqualTo(0.0015f));
+            Assert.That(TwoLobeBarSpecifications.ButtonEdgeBevel, Is.EqualTo(0.00045f));
             Assert.That(TwoLobeBarSpecifications.Metallic, Is.EqualTo(1f));
             Assert.That(TwoLobeBarSpecifications.OffsetFromCollinearDegrees, Is.Zero);
             Assert.That(TwoLobeBarSpecifications.Roughness, Is.EqualTo(0.76f));
@@ -81,10 +82,10 @@ namespace FidgetingApp.TwoLobeBar.Tests.Editor
         }
 
         [Test]
-        public void ProceduralMeshes_PreserveContinuousBarAndConcaveDishBounds()
+        public void ProceduralMeshes_PreserveContinuousBarAndSolidFlushCapBounds()
         {
             Mesh body = TwoLobeBarMeshFactory.CreateBody("AcceptanceBody");
-            Mesh button = TwoLobeBarMeshFactory.CreateConcaveButton("AcceptanceButton");
+            Mesh button = TwoLobeBarMeshFactory.CreateSolidFlushButton("AcceptanceButton");
             try
             {
                 Assert.That(
@@ -111,12 +112,14 @@ namespace FidgetingApp.TwoLobeBar.Tests.Editor
                     button.bounds.size.y,
                     Is.EqualTo(TwoLobeBarSpecifications.ButtonProudHeight).Within(0.00005f));
 
-                float dishCenterHeight = button.vertices
+                float faceCenterHeight = button.vertices
                     .Where(vertex => new Vector2(vertex.x, vertex.z).sqrMagnitude < 1e-12f)
                     .Max(vertex => vertex.y);
                 Assert.That(
-                    button.bounds.max.y - dishCenterHeight,
-                    Is.EqualTo(TwoLobeBarSpecifications.ButtonDishDepth).Within(0.00005f));
+                    faceCenterHeight,
+                    Is.EqualTo(button.bounds.max.y).Within(0.00001f),
+                    "The finger cap must have a single flush face, not a concave annular dish.");
+                Assert.That(button.name, Is.EqualTo("AcceptanceButton"));
 
                 AssertFinite(body);
                 AssertFinite(button);
@@ -144,7 +147,14 @@ namespace FidgetingApp.TwoLobeBar.Tests.Editor
             Assert.That(rotor.Find("Lobe_A"), Is.Null);
             Assert.That(rotor.Find("Lobe_B"), Is.Null);
             Assert.That(topButton.GetComponent<SpinnerTouchSurface>(), Is.Not.Null);
-            Assert.That(topButton.GetComponent<BoxCollider>(), Is.Not.Null);
+            BoxCollider touchCollider = topButton.GetComponent<BoxCollider>();
+            Assert.That(touchCollider, Is.Not.Null);
+            Assert.That(
+                touchCollider.size.x,
+                Is.EqualTo(TwoLobeBarSpecifications.ButtonTouchDiameter).Within(0.00001f));
+            Assert.That(
+                touchCollider.size.z,
+                Is.EqualTo(TwoLobeBarSpecifications.ButtonTouchDiameter).Within(0.00001f));
             Assert.That(
                 Quaternion.Angle(
                     bottomButton.localRotation,
@@ -196,7 +206,8 @@ namespace FidgetingApp.TwoLobeBar.Tests.Editor
             Assert.That(
                 buttonMaterial.GetFloat("_Smoothness"),
                 Is.EqualTo(TwoLobeBarSpecifications.Smoothness).Within(0.0001f));
-            Assert.That(buttonMaterial.GetTexture("_OcclusionMap"), Is.Not.Null);
+            Assert.That(buttonMaterial.GetTexture("_OcclusionMap"), Is.Null);
+            Assert.That(buttonMaterial.IsKeywordEnabled("_OCCLUSIONMAP"), Is.False);
 
             Light[] lights = root.GetComponentsInChildren<Light>(true);
             Assert.That(lights, Has.Length.EqualTo(1));

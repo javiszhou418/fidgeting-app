@@ -1,4 +1,5 @@
 using FidgetingApp.EDC;
+using FidgetingApp.DisplayCase;
 using UnityEngine;
 
 namespace FidgetingApp.FanCard
@@ -14,12 +15,19 @@ namespace FidgetingApp.FanCard
     [DisallowMultipleComponent]
     [RequireComponent(typeof(Camera))]
     [DefaultExecutionOrder(100)]
-    public sealed class FanCardCameraProjectionGuard : MonoBehaviour
+    public sealed class FanCardCameraProjectionGuard : MonoBehaviour,
+        IPremiumDisplayCaseCameraStateAuthor
     {
         public const float ReferenceFieldOfViewDegrees = 26.991f;
+        private bool displayCaseCameraControlSuppressed;
 
         public void ApplyNow()
         {
+            if (displayCaseCameraControlSuppressed)
+            {
+                return;
+            }
+
             Camera targetCamera = GetComponent<Camera>();
             EdcPortraitCameraFramer framer =
                 GetComponent<EdcPortraitCameraFramer>();
@@ -39,6 +47,11 @@ namespace FidgetingApp.FanCard
         private void OnEnable()
         {
             ApplyNow();
+        }
+
+        public void SetDisplayCaseCameraControlSuppressed(bool suppressed)
+        {
+            displayCaseCameraControlSuppressed = suppressed;
         }
     }
 }

@@ -1,4 +1,5 @@
 using CodexUnityLab;
+using FidgetingApp.DisplayCase;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -14,7 +15,8 @@ namespace FidgetingApp.Product
     [DefaultExecutionOrder(1000)]
     [DisallowMultipleComponent]
     [RequireComponent(typeof(Camera))]
-    public sealed class SpinnerSceneParallaxController : MonoBehaviour
+    public sealed class SpinnerSceneParallaxController : MonoBehaviour,
+        IPremiumDisplayCaseCameraStateAuthor
     {
         public const float DeepStarLayerPixels = 2f;
         public const float StarLayerPixels = 4f;
@@ -50,6 +52,7 @@ namespace FidgetingApp.Product
         private bool libraryPreviewActive;
         private float libraryPageOffset;
         private float targetLibraryPageOffset;
+        private bool displayCaseCameraControlSuppressed;
 
         public Vector2 FilteredTilt => filteredTilt;
         public float LibraryPageOffset => libraryPageOffset;
@@ -164,6 +167,11 @@ namespace FidgetingApp.Product
             float anchorPixels,
             float hoverPixels)
         {
+            if (displayCaseCameraControlSuppressed)
+            {
+                return;
+            }
+
             if (!Mathf.Approximately(baselineAspect, targetCamera.aspect))
             {
                 float previousAspect = Mathf.Max(0.01f, baselineAspect);
@@ -205,7 +213,9 @@ namespace FidgetingApp.Product
 
         private void ResetPresentation()
         {
-            if (targetCamera != null && hasBaselineProjection)
+            if (!displayCaseCameraControlSuppressed
+                && targetCamera != null
+                && hasBaselineProjection)
             {
                 targetCamera.projectionMatrix = baselineProjection;
             }
@@ -221,6 +231,11 @@ namespace FidgetingApp.Product
                 Time.unscaledTime,
                 0f,
                 0f);
+        }
+
+        public void SetDisplayCaseCameraControlSuppressed(bool suppressed)
+        {
+            displayCaseCameraControlSuppressed = suppressed;
         }
 
         public void SetLibraryPreviewActive(bool active, bool immediate = false)

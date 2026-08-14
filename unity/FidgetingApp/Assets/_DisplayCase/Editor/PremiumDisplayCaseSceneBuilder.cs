@@ -193,7 +193,8 @@ namespace FidgetingApp.DisplayCase.Editor
                     profile.EnglishDisplayName,
                     PreviewLevel(product.ModelId));
                 ApplyPreviewFeaturedBadge(displayCase, product.ModelId);
-                displayCase.setCapsulePreset(profile.CapsulePreset);
+                displayCase.setCapsuleDimensions(profile.CapsuleDimensions);
+                displayCase.SetProductPresentationOffset(profile.PresentationOffset);
                 displayCase.setContent(snapshot.transform, profile.ContentOptions);
                 displayCase.SetRevealProgressForPreview(1f);
                 displayCase.SetParallaxForPreview(Vector2.zero);
@@ -268,7 +269,8 @@ namespace FidgetingApp.DisplayCase.Editor
                 profile.EnglishDisplayName,
                 PreviewLevel(modelId));
             ApplyPreviewFeaturedBadge(displayCase, modelId);
-            displayCase.setCapsulePreset(profile.CapsulePreset);
+            displayCase.setCapsuleDimensions(profile.CapsuleDimensions);
+            displayCase.SetProductPresentationOffset(profile.PresentationOffset);
             displayCase.setContent(snapshot.transform, profile.ContentOptions);
             displayCase.SetRevealProgressForPreview(1f);
             displayCase.SetParallaxForPreview(Vector2.zero);

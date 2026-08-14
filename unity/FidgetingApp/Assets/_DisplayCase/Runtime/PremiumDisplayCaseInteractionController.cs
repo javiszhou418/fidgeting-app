@@ -79,6 +79,7 @@ namespace FidgetingApp.DisplayCase
         public float ExplodedProgress => explodedProgress;
         public float Zoom => zoom;
         public Vector2 OrbitDegrees => new Vector2(orbitYaw, orbitPitch);
+        public bool IsAssemblyAnimationPlaying => animationPlaying;
 
         private void Awake()
         {
@@ -89,12 +90,22 @@ namespace FidgetingApp.DisplayCase
 
         private void Update()
         {
+            AdvanceAnimation(Time.unscaledDeltaTime);
+        }
+
+        /// <summary>
+        /// Advances the same shipping assembly/explode state machine used by
+        /// Update. Validation and preview capture call this method so every
+        /// product is exercised through play/replay rather than static poses.
+        /// </summary>
+        public void AdvanceAnimation(float unscaledDeltaTime)
+        {
             if (!animationPlaying)
             {
                 return;
             }
 
-            animationElapsed += Mathf.Max(0f, Time.unscaledDeltaTime);
+            animationElapsed += Mathf.Max(0f, unscaledDeltaTime);
             float normalized = animationElapsed
                 / PremiumDisplayCaseExplodedLayout.AssemblyDurationSeconds;
             float eased = PremiumDisplayCaseExplodedLayout.EaseAssembly(normalized);

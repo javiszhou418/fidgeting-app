@@ -2,8 +2,12 @@ using System;
 using System.IO;
 using System.Linq;
 using System.Reflection;
+using CodexUnityLab;
+using FidgetingApp.EDC;
+using FidgetingApp.FanCard;
 using FidgetingApp.Product;
 using NUnit.Framework;
+using ThreeBladeEDC.Presentation;
 using UnityEditor;
 using UnityEngine;
 
@@ -59,14 +63,16 @@ namespace FidgetingApp.DisplayCase.Tests.Editor
         }
 
         [Test]
-        public void DefaultContentOptions_EnableFourSecondIdleRotation()
+        public void DefaultContentOptions_MatchMagneticSlidePresentation()
         {
             PremiumDisplayCaseContentOptions options =
                 PremiumDisplayCaseContentOptions.Default;
 
             Assert.That(options.IdleRotationEnabled, Is.True);
             Assert.That(options.IdleRotationPeriodSeconds,
-                Is.EqualTo(4f).Within(0.0001f));
+                Is.EqualTo(6f).Within(0.0001f));
+            Assert.That(options.InitialEulerAngles,
+                Is.EqualTo(new Vector3(90f, -8f, 0f)));
         }
 
         [Test]
@@ -122,12 +128,29 @@ namespace FidgetingApp.DisplayCase.Tests.Editor
         }
 
         [Test]
-        public void ProductProfiles_CoverAllSixShippingModelsAndPreserveBaseline()
+        public void ProductProfiles_ReuseMagneticSlidePackagingForAllSixModels()
         {
             PremiumDisplayCaseProductProfile[] profiles =
                 PremiumDisplayCaseProductProfiles.Profiles.ToArray();
+            Type[] profileConstructorParameters = typeof(
+                    PremiumDisplayCaseProductProfile)
+                .GetConstructors()
+                .Single()
+                .GetParameters()
+                .Select(parameter => parameter.ParameterType)
+                .ToArray();
 
             Assert.That(profiles.Length, Is.EqualTo(6));
+            Assert.That(profileConstructorParameters, Is.EqualTo(new[]
+            {
+                typeof(string),
+                typeof(string),
+                typeof(string),
+                typeof(PremiumDisplayCasePrizeNormalization)
+            }),
+                "A product profile may only identify its prize and normalize "
+                + "its authored front; the shared case contract and the "
+                + "one-sided readability policy are resolved centrally.");
             Assert.That(profiles.Select(profile => profile.ModelId),
                 Is.EquivalentTo(ProductCatalog.ShippingModelIds()));
             Assert.That(profiles.Select(profile => profile.ModelId).Distinct().Count(),
@@ -155,46 +178,233 @@ namespace FidgetingApp.DisplayCase.Tests.Editor
                 Is.EqualTo("EDC_Root"));
             Assert.That(magneticBaseline.EnglishDisplayName,
                 Is.EqualTo("MAGNETIC SLIDE"));
+            Assert.That(magneticBaseline.PresentationOffset,
+                Is.EqualTo(Vector3.zero));
+            Assert.That(magneticBaseline.ContentOptions.IdleRotationEnabled,
+                Is.True);
 
+            Assert.That(profiles.Select(profile => profile.SceneRootName),
+                Has.All.Not.Empty);
             foreach (PremiumDisplayCaseProductProfile profile in profiles)
             {
-                Assert.That(profile.CapsulePreset,
-                    Is.EqualTo(magneticBaseline.CapsulePreset),
-                    profile.ModelId);
-                Assert.That(profile.ContentOptions.IdleRotationEnabled,
-                    Is.EqualTo(magneticBaseline.ContentOptions.IdleRotationEnabled),
-                    profile.ModelId);
-                Assert.That(profile.ContentOptions.IdleRotationPeriodSeconds,
-                    Is.EqualTo(magneticBaseline.ContentOptions
-                        .IdleRotationPeriodSeconds).Within(0.0001f),
-                    profile.ModelId);
-                Assert.That(profile.SceneRootName, Is.Not.Empty, profile.ModelId);
+                AssertSharedPresentation(profile, magneticBaseline);
             }
-            Assert.That(profiles
-                    .Where(profile => profile.ModelId
-                        != ProductCatalog.MagneticFanCardModelId)
-                    .Select(profile => profile.ContentOptions.InitialEulerAngles),
-                Has.All.EqualTo(magneticBaseline.ContentOptions.InitialEulerAngles));
 
-            Assert.That(PremiumDisplayCaseProductProfiles.Resolve(
-                    ProductCatalog.PointedThreeBladeModelId).SceneRootName,
-                Is.EqualTo("ThreeBladeEDC_Root"));
-            Assert.That(PremiumDisplayCaseProductProfiles.Resolve(
-                    ProductCatalog.MetalThreeBladeModelId).SceneRootName,
-                Is.EqualTo("ThreeBladeEDC_Root"));
-            Assert.That(PremiumDisplayCaseProductProfiles.Resolve(
-                    ProductCatalog.GoldFourWingModelId).SceneRootName,
-                Is.EqualTo("ImportedSpinner_Root"));
-            Assert.That(PremiumDisplayCaseProductProfiles.Resolve(
-                    ProductCatalog.GraphiteTwoLobeModelId).SceneRootName,
-                Is.EqualTo("TwoLobeBar_Root"));
-            Assert.That(PremiumDisplayCaseProductProfiles.Resolve(
-                    ProductCatalog.MagneticFanCardModelId).SceneRootName,
-                Is.EqualTo("MagneticFanCard_Root"));
-            Assert.That(PremiumDisplayCaseProductProfiles.Resolve(
-                    ProductCatalog.MagneticFanCardModelId)
-                    .ContentOptions.InitialEulerAngles,
-                Is.EqualTo(new Vector3(-90f, -8f, 0f)));
+            AssertPrizeNormalization(ProductCatalog.PointedThreeBladeModelId,
+                "ThreeBladeEDC_Root", new Vector3(90f, -18f, 0f));
+            AssertPrizeNormalization(ProductCatalog.MetalThreeBladeModelId,
+                "ThreeBladeEDC_Root", new Vector3(-90f, -8f, 0f));
+            AssertPrizeNormalization(ProductCatalog.GoldFourWingModelId,
+                "ImportedSpinner_Root", new Vector3(90f, -12f, 0f));
+            AssertPrizeNormalization(ProductCatalog.GraphiteTwoLobeModelId,
+                "TwoLobeBar_Root", new Vector3(90f, -10f, 0f));
+            AssertPrizeNormalization(ProductCatalog.MagneticSlideTileModelId,
+                "EDC_Root", new Vector3(90f, -8f, 0f));
+            AssertPrizeNormalization(ProductCatalog.MagneticFanCardModelId,
+                "MagneticFanCard_Root", new Vector3(-90f, 0f, 0f));
+        }
+
+        [Test]
+        public void AllProfiles_ExposeOnlyTheSharedCasePresentationContract()
+        {
+            PremiumDisplayCaseProductProfile baseline =
+                PremiumDisplayCaseProductProfiles.Resolve(
+                    ProductCatalog.MagneticSlideTileModelId);
+
+            foreach (PremiumDisplayCaseProductProfile profile in
+                     PremiumDisplayCaseProductProfiles.Profiles)
+            {
+                AssertSharedPresentation(profile, baseline);
+            }
+            Assert.That(PremiumDisplayCaseRevealMotion.DurationSeconds,
+                Is.EqualTo(2.20f).Within(0.0001f));
+            Assert.That(PremiumDisplayCaseExplodedLayout.AssemblyDurationSeconds,
+                Is.EqualTo(1.35f).Within(0.0001f));
+        }
+
+        private static void AssertSharedPresentation(
+            PremiumDisplayCaseProductProfile profile,
+            PremiumDisplayCaseProductProfile baseline)
+        {
+            Assert.That(profile.CapsulePreset,
+                Is.EqualTo(baseline.CapsulePreset), profile.ModelId);
+            Assert.That(profile.CapsuleDimensions.Shape,
+                Is.EqualTo(baseline.CapsuleDimensions.Shape), profile.ModelId);
+            Assert.That(profile.CapsuleDimensions.Width,
+                Is.EqualTo(baseline.CapsuleDimensions.Width).Within(0.000001f),
+                profile.ModelId);
+            Assert.That(profile.CapsuleDimensions.Height,
+                Is.EqualTo(baseline.CapsuleDimensions.Height).Within(0.000001f),
+                profile.ModelId);
+            Assert.That(profile.CapsuleDimensions.Depth,
+                Is.EqualTo(baseline.CapsuleDimensions.Depth).Within(0.000001f),
+                profile.ModelId);
+            Assert.That(profile.CapsuleDimensions.CornerRadius,
+                Is.EqualTo(baseline.CapsuleDimensions.CornerRadius)
+                    .Within(0.000001f), profile.ModelId);
+            Assert.That(profile.PresentationOffset,
+                Is.EqualTo(baseline.PresentationOffset), profile.ModelId);
+            Assert.That(profile.ContentOptions.InitialEulerAngles,
+                Is.EqualTo(baseline.ContentOptions.InitialEulerAngles),
+                profile.ModelId);
+            bool requiresReadableFront = string.Equals(
+                profile.ModelId,
+                ProductCatalog.MagneticFanCardModelId,
+                StringComparison.Ordinal);
+            Assert.That(profile.ContentOptions.IdleRotationEnabled,
+                Is.EqualTo(!requiresReadableFront),
+                requiresReadableFront
+                    ? "The one-sided fan-card snapshot must not settle on its intentionally blank back."
+                    : profile.ModelId);
+            Assert.That(profile.ContentOptions.IdleRotationPeriodSeconds,
+                Is.EqualTo(baseline.ContentOptions.IdleRotationPeriodSeconds)
+                    .Within(0.0001f), profile.ModelId);
+        }
+
+        private static void AssertPrizeNormalization(
+            string modelId,
+            string sceneRootName,
+            Vector3 expectedCanonicalFront)
+        {
+            PremiumDisplayCaseProductProfile profile =
+                PremiumDisplayCaseProductProfiles.Resolve(modelId);
+            Assert.That(profile.SceneRootName, Is.EqualTo(sceneRootName), modelId);
+            Quaternion composed = Quaternion.Euler(
+                    PremiumDisplayCaseProductProfiles.SharedContentOptions
+                        .InitialEulerAngles)
+                * profile.PrizeNormalization.SnapshotLocalRotation;
+            Assert.That(Quaternion.Angle(
+                    composed,
+                    Quaternion.Euler(expectedCanonicalFront)),
+                Is.LessThan(0.001f), modelId);
+        }
+
+        [Test]
+        public void FanPrize_UsesTheSharedSlideCapsuleWithUniformScale()
+        {
+            PremiumDisplayCaseCapsuleDimensions capsule =
+                PremiumDisplayCaseProductProfiles.Resolve(
+                    ProductCatalog.MagneticFanCardModelId).CapsuleDimensions;
+            PremiumDisplayCaseCapsuleDimensions baseline =
+                PremiumDisplayCaseProductProfiles.Resolve(
+                    ProductCatalog.MagneticSlideTileModelId).CapsuleDimensions;
+            Bounds expandedFan = new Bounds(
+                Vector3.zero,
+                new Vector3(0.109327f, 0.144984f, 0.0095f));
+
+            PremiumDisplayCaseFitResult fit = PremiumDisplayCaseLayout.Fit(
+                expandedFan,
+                capsule);
+
+            Assert.That(capsule.Shape, Is.EqualTo(baseline.Shape));
+            Assert.That(capsule.InnerSize, Is.EqualTo(baseline.InnerSize));
+            Assert.That(fit.UniformScale, Is.GreaterThan(0.532f));
+            Assert.That(fit.UniformScale, Is.LessThan(0.534f));
+            Assert.That(fit.CenterOffset,
+                Is.EqualTo(-expandedFan.center * fit.UniformScale));
+        }
+
+        [Test]
+        public void FanSnapshot_UsesTheReadableNinetyDegreeCollectorFanWithoutMutatingLiveLayers()
+        {
+            var root = new GameObject("MagneticFanCard_Root");
+            GameObject middle = new GameObject("MiddleCard");
+            GameObject top = new GameObject("TopCard");
+            middle.transform.SetParent(root.transform, false);
+            top.transform.SetParent(root.transform, false);
+            GameObject middleVisual = GameObject.CreatePrimitive(PrimitiveType.Cube);
+            GameObject topVisual = GameObject.CreatePrimitive(PrimitiveType.Cube);
+            middleVisual.name = "MiddleReadableFace";
+            topVisual.name = "TopReadableFace";
+            middleVisual.transform.SetParent(middle.transform, false);
+            topVisual.transform.SetParent(top.transform, false);
+            middleVisual.transform.localPosition = Vector3.right * 0.01f;
+            topVisual.transform.localPosition = Vector3.right * 0.01f;
+
+            GameObject snapshot = null;
+            try
+            {
+                snapshot = PremiumDisplayCaseProductSnapshot.Capture(
+                    ProductCatalog.MagneticFanCardModelId,
+                    root.transform);
+                Transform capturedMiddle = snapshot.transform.Cast<Transform>()
+                    .Single(item => item.name.Contains("MiddleReadableFace"));
+                Transform capturedTop = snapshot.transform.Cast<Transform>()
+                    .Single(item => item.name.Contains("TopReadableFace"));
+                Quaternion sharedCaseRotation = Quaternion.Euler(
+                    PremiumDisplayCaseProductProfiles.SharedContentOptions
+                        .InitialEulerAngles);
+                Quaternion canonicalFanFront = Quaternion.Euler(
+                    PremiumDisplayCaseProductProfiles.Resolve(
+                            ProductCatalog.MagneticFanCardModelId)
+                        .PrizeNormalization.CanonicalFrontEulerAngles);
+
+                Assert.That(Quaternion.Angle(
+                        sharedCaseRotation * capturedMiddle.localRotation,
+                        canonicalFanFront * Quaternion.Euler(0f, 45f, 0f)),
+                    Is.LessThan(0.01f));
+                Assert.That(Quaternion.Angle(
+                        sharedCaseRotation * capturedTop.localRotation,
+                        canonicalFanFront * Quaternion.Euler(0f, 90f, 0f)),
+                    Is.LessThan(0.01f));
+                Assert.That(snapshot.GetComponents<MonoBehaviour>()
+                        .Select(component => component.GetType().Name),
+                    Does.Not.Contain("PremiumDisplayCaseFanSnapshotReveal"));
+                Assert.That(middle.transform.localRotation,
+                    Is.EqualTo(Quaternion.identity));
+                Assert.That(top.transform.localRotation,
+                    Is.EqualTo(Quaternion.identity));
+            }
+            finally
+            {
+                if (snapshot != null)
+                {
+                    UnityEngine.Object.DestroyImmediate(snapshot);
+                }
+                UnityEngine.Object.DestroyImmediate(root);
+            }
+        }
+
+        [Test]
+        public void FanSnapshot_DoesNotAddAProductSpecificRevealTimeline()
+        {
+            Assert.That(typeof(PremiumDisplayCaseProductSnapshot).Assembly.GetType(
+                    "FidgetingApp.DisplayCase.PremiumDisplayCaseFanSnapshotReveal"),
+                Is.Null);
+            Assert.That(PremiumDisplayCaseRevealMotion.DurationSeconds,
+                Is.EqualTo(2.20f).Within(0.0001f));
+            Assert.That(PremiumDisplayCaseExplodedLayout.AssemblyDurationSeconds,
+                Is.EqualTo(1.35f).Within(0.0001f));
+        }
+
+        [Test]
+        public void FanPrize_ComposesTheSharedInitialPoseAndHoldsItsReadableFrontAfterSettling()
+        {
+            PremiumDisplayCaseProductProfile fan =
+                PremiumDisplayCaseProductProfiles.Resolve(
+                    ProductCatalog.MagneticFanCardModelId);
+            PremiumDisplayCaseProductProfile slide =
+                PremiumDisplayCaseProductProfiles.Resolve(
+                    ProductCatalog.MagneticSlideTileModelId);
+
+            Quaternion composedFront = Quaternion.Euler(
+                    fan.ContentOptions.InitialEulerAngles)
+                * fan.PrizeNormalization.SnapshotLocalRotation;
+
+            Assert.That(Quaternion.Angle(
+                    composedFront,
+                    Quaternion.Euler(-90f, 0f, 0f)),
+                Is.LessThan(0.001f),
+                "The shared case Euler and fan snapshot normalization must compose to the approved A/Q/K front.");
+            Assert.That(fan.ContentOptions.InitialEulerAngles,
+                Is.EqualTo(slide.ContentOptions.InitialEulerAngles));
+            Assert.That(fan.ContentOptions.IdleRotationPeriodSeconds,
+                Is.EqualTo(slide.ContentOptions.IdleRotationPeriodSeconds)
+                    .Within(0.0001f));
+            Assert.That(fan.ContentOptions.IdleRotationEnabled, Is.False,
+                "Settled fan-card content must remain on its readable front.");
+            Assert.That(slide.ContentOptions.IdleRotationEnabled, Is.True,
+                "The magnetic-slide baseline keeps its approved idle turn.");
         }
 
         [Test]
@@ -380,7 +590,7 @@ namespace FidgetingApp.DisplayCase.Tests.Editor
         }
 
         [Test]
-        public void ProductSnapshot_RemovesShippingPresentationTransform()
+        public void ProductSnapshot_RemovesShippingTransformThenNormalizesPrizeFront()
         {
             var sourceRoot = new GameObject("ShippingProductRoot");
             sourceRoot.transform.position = new Vector3(4f, -3f, 7f);
@@ -400,17 +610,27 @@ namespace FidgetingApp.DisplayCase.Tests.Editor
             try
             {
                 Transform captured = snapshot.transform.GetChild(0);
+                PremiumDisplayCasePrizeNormalization normalization =
+                    PremiumDisplayCaseProductProfiles.Resolve(
+                        ProductCatalog.GraphiteTwoLobeModelId)
+                    .PrizeNormalization;
+                Matrix4x4 authoredLocal = Matrix4x4.TRS(
+                    visual.transform.localPosition,
+                    visual.transform.localRotation,
+                    visual.transform.localScale);
+                Matrix4x4 expectedLocal = normalization.SnapshotLocalMatrix
+                    * authoredLocal;
                 Assert.That(Vector3.Distance(
                         captured.localPosition,
-                        visual.transform.localPosition),
+                        expectedLocal.GetPosition()),
                     Is.LessThan(0.00001f));
                 Assert.That(Quaternion.Angle(
                         captured.localRotation,
-                        visual.transform.localRotation),
+                        expectedLocal.rotation),
                     Is.LessThan(0.001f));
                 Assert.That(Vector3.Distance(
                         captured.localScale,
-                        visual.transform.localScale),
+                        expectedLocal.lossyScale),
                     Is.LessThan(0.00001f));
             }
             finally
@@ -477,6 +697,180 @@ namespace FidgetingApp.DisplayCase.Tests.Editor
             Assert.That(direction.x, Is.EqualTo(0f).Within(0.0001f));
             Assert.That(direction.y, Is.EqualTo(0f).Within(0.0001f));
             Assert.That(direction.z, Is.EqualTo(1f).Within(0.0001f));
+        }
+
+        [Test]
+        public void CameraLease_SuppressesDirectAuthorsAndRestoresFullState()
+        {
+            var cameraObject = new GameObject("ShippingCamera");
+            Camera camera = cameraObject.AddComponent<Camera>();
+            DisplayCaseCameraStateAuthorProbe author = cameraObject.AddComponent<
+                DisplayCaseCameraStateAuthorProbe>();
+
+            try
+            {
+                camera.transform.SetPositionAndRotation(
+                    new Vector3(0.31f, -0.22f, 0.44f),
+                    Quaternion.Euler(17f, 31f, -9f));
+                camera.orthographic = false;
+                camera.aspect = 0.71f;
+                camera.nearClipPlane = 0.023f;
+                camera.farClipPlane = 77f;
+                camera.sensorSize = new Vector2(32f, 18f);
+                camera.lensShift = new Vector2(0.07f, -0.04f);
+                camera.gateFit = Camera.GateFitMode.Overscan;
+                camera.usePhysicalProperties = true;
+                camera.focalLength = 61f;
+                camera.iso = 320;
+                camera.shutterSpeed = 0.0125f;
+                camera.aperture = 3.2f;
+                camera.focusDistance = 1.7f;
+                camera.bladeCount = 7;
+                camera.curvature = new Vector2(1.7f, 8.2f);
+                camera.barrelClipping = 0.21f;
+                camera.anamorphism = 0.33f;
+                Matrix4x4 customProjection = Matrix4x4.Perspective(
+                    37f,
+                    camera.aspect,
+                    camera.nearClipPlane,
+                    camera.farClipPlane);
+                customProjection.m02 = 0.08f;
+                customProjection.m12 = -0.05f;
+                camera.projectionMatrix = customProjection;
+                camera.nonJitteredProjectionMatrix = customProjection;
+                camera.useJitteredProjectionMatrixForTransparentRendering = false;
+                PremiumDisplayCaseCameraState expected =
+                    PremiumDisplayCaseCameraState.Capture(camera);
+
+                PremiumDisplayCaseCameraLease lease =
+                    PremiumDisplayCaseCameraLease.Acquire(camera);
+                Assert.That(lease, Is.Not.Null);
+                Assert.That(lease.CameraStateAuthorCount, Is.EqualTo(1));
+                Assert.That(author.enabled, Is.False);
+                Assert.That(author.Suppressed, Is.True);
+                Assert.That(camera.orthographic, Is.False);
+                Assert.That(camera.usePhysicalProperties, Is.False);
+                Assert.That(camera.lensShift, Is.EqualTo(Vector2.zero));
+                Assert.That(Vector3.Distance(
+                        camera.transform.position,
+                        PremiumDisplayCaseCameraRules.FrontCameraPosition),
+                    Is.LessThan(0.000001f));
+
+                Vector3 ownedPosition = camera.transform.position;
+                Matrix4x4 ownedProjection = camera.projectionMatrix;
+                author.AttemptCameraWrite();
+                Assert.That(camera.transform.position, Is.EqualTo(ownedPosition),
+                    "Direct callbacks must not bypass display-case ownership.");
+                AssertMatrixEquals(ownedProjection, camera.projectionMatrix);
+
+                lease.Restore();
+                Assert.That(author.enabled, Is.True);
+                Assert.That(author.Suppressed, Is.False);
+                Assert.That(camera.transform.position,
+                    Is.EqualTo(expected.Position));
+                Assert.That(camera.transform.rotation,
+                    Is.EqualTo(expected.Rotation));
+                Assert.That(camera.orthographic,
+                    Is.EqualTo(expected.Orthographic));
+                Assert.That(camera.usePhysicalProperties,
+                    Is.EqualTo(expected.UsePhysicalProperties));
+                Assert.That(camera.focalLength,
+                    Is.EqualTo(expected.FocalLength).Within(0.0001f));
+                Assert.That(camera.sensorSize, Is.EqualTo(expected.SensorSize));
+                Assert.That(camera.lensShift, Is.EqualTo(expected.LensShift));
+                Assert.That(camera.gateFit, Is.EqualTo(expected.GateFit));
+                Assert.That(camera.nearClipPlane,
+                    Is.EqualTo(expected.NearClipPlane).Within(0.000001f));
+                Assert.That(camera.farClipPlane,
+                    Is.EqualTo(expected.FarClipPlane).Within(0.0001f));
+                AssertMatrixEquals(expected.ProjectionMatrix,
+                    camera.projectionMatrix);
+                AssertMatrixEquals(expected.NonJitteredProjectionMatrix,
+                    camera.nonJitteredProjectionMatrix);
+            }
+            finally
+            {
+                UnityEngine.Object.DestroyImmediate(cameraObject);
+            }
+        }
+
+        [Test]
+        public void CameraRules_ValidateRealCaseViewportAndRejectPoseOverwrite()
+        {
+            PremiumDisplayCase prefab = AssetDatabase.LoadAssetAtPath<
+                PremiumDisplayCase>(PrefabPath);
+            Assert.That(prefab, Is.Not.Null);
+            PremiumDisplayCase displayCase = UnityEngine.Object.Instantiate(prefab);
+            var cameraObject = new GameObject("DisplayCaseValidationCamera");
+            Camera camera = cameraObject.AddComponent<Camera>();
+            camera.aspect = 942f / 2048f;
+
+            try
+            {
+                // Shipping acknowledges the presentation at the first
+                // EndOfFrame while the shared case is still closed.  Validate
+                // that exact phase; fully revealed authored layers may
+                // intentionally slide beyond the closed-shell viewport.
+                displayCase.SetRevealProgressForPreview(0f);
+                PremiumDisplayCaseCameraRules.ApplyFrontPresentation(camera);
+                Assert.That(PremiumDisplayCaseCameraRules.TryValidateFrontPresentation(
+                        camera,
+                        displayCase.transform,
+                        out string validReason),
+                    Is.True,
+                    validReason);
+
+                camera.transform.rotation = Quaternion.Euler(90f, 0f, 0f);
+                Assert.That(PremiumDisplayCaseCameraRules.TryValidateFrontPresentation(
+                        camera,
+                        displayCase.transform,
+                        out string overwrittenReason),
+                    Is.False);
+                Assert.That(overwrittenReason,
+                    Is.EqualTo("display-camera-pose-overwritten"));
+            }
+            finally
+            {
+                UnityEngine.Object.DestroyImmediate(cameraObject);
+                UnityEngine.Object.DestroyImmediate(displayCase.gameObject);
+            }
+        }
+
+        [Test]
+        public void AllShippingCameraAuthors_ImplementExplicitSuppressionContract()
+        {
+            Type contract = typeof(IPremiumDisplayCaseCameraStateAuthor);
+            Type[] cameraAuthors =
+            {
+                typeof(OrbitPresentationCamera),
+                typeof(EdcPortraitCameraFramer),
+                typeof(PortraitCameraFramer),
+                typeof(SpinnerSceneParallaxController),
+                typeof(FanCardCameraProjectionGuard)
+            };
+
+            Assert.That(cameraAuthors, Has.All.Matches<Type>(
+                author => contract.IsAssignableFrom(author)));
+            string[] sources =
+            {
+                "Assets/_Fidgeting/Runtime/Presentation/OrbitPresentationCamera.cs",
+                "Assets/_EDC/Runtime/EdcPortraitCameraFramer.cs",
+                "Assets/Scripts/FidgetSpinner/PortraitCameraFramer.cs",
+                "Assets/Scripts/Product/SpinnerSceneParallaxController.cs",
+                "Assets/_FanCard/Runtime/FanCardCameraProjectionGuard.cs"
+            };
+            foreach (string path in sources)
+            {
+                string source = File.ReadAllText(path);
+                StringAssert.Contains(
+                    "displayCaseCameraControlSuppressed",
+                    source,
+                    path);
+                StringAssert.Contains(
+                    "SetDisplayCaseCameraControlSuppressed",
+                    source,
+                    path);
+            }
         }
 
         [Test]
@@ -747,6 +1141,12 @@ namespace FidgetingApp.DisplayCase.Tests.Editor
                 "Assets/Scripts/Product/FidgetAppCoordinator.cs");
 
             StringAssert.Contains("PremiumDisplayCaseExperienceView", swift);
+            StringAssert.Contains("Text(\"装配并重播\")", swift);
+            StringAssert.DoesNotContain(
+                "Label(\"装配并重播\", systemImage: \"play.fill\")",
+                swift,
+                "The primary display-case CTA must remain text-only under the "
+                + "shipping Liquid Glass guideline.");
             StringAssert.Contains("DragGesture(minimumDistance: 0)", swift);
             StringAssert.Contains(
                 "orbitStart.width - value.translation.width * 0.16",
@@ -822,7 +1222,7 @@ namespace FidgetingApp.DisplayCase.Tests.Editor
         }
 
         [Test]
-        public void ThreeBladePrize_MapsSpinnerPlaneToDisplayCaseFace()
+        public void ThreeBladePrizeFactory_UsesTheSharedSlidePresentation()
         {
             PremiumDisplayCaseContentOptions options =
                 ThreeBladeDisplayPrizeFactory.ContentOptions;
@@ -830,10 +1230,10 @@ namespace FidgetingApp.DisplayCase.Tests.Editor
             Assert.That(options.InitialEulerAngles.x,
                 Is.EqualTo(90f).Within(0.0001f));
             Assert.That(options.InitialEulerAngles.y,
-                Is.EqualTo(-18f).Within(0.0001f));
+                Is.EqualTo(-8f).Within(0.0001f));
             Assert.That(options.IdleRotationEnabled, Is.True);
             Assert.That(options.IdleRotationPeriodSeconds,
-                Is.EqualTo(4f).Within(0.0001f));
+                Is.EqualTo(6f).Within(0.0001f));
         }
 
         [Test]
@@ -903,5 +1303,54 @@ namespace FidgetingApp.DisplayCase.Tests.Editor
                 ThreeBladeDisplayPrizeFactory.ResourcesPath), Is.Not.Null);
         }
 
+        private static void AssertMatrixEquals(
+            Matrix4x4 expected,
+            Matrix4x4 actual)
+        {
+            for (int index = 0; index < 16; index++)
+            {
+                Assert.That(actual[index],
+                    Is.EqualTo(expected[index]).Within(0.000001f),
+                    $"Matrix element {index}");
+            }
+        }
+
+    }
+
+    internal sealed class DisplayCaseCameraStateAuthorProbe : MonoBehaviour,
+        IPremiumDisplayCaseCameraStateAuthor
+    {
+        public bool Suppressed { get; private set; }
+
+        public void SetDisplayCaseCameraControlSuppressed(bool suppressed)
+        {
+            Suppressed = suppressed;
+        }
+
+        public void AttemptCameraWrite()
+        {
+            if (Suppressed)
+            {
+                return;
+            }
+
+            Camera camera = GetComponent<Camera>();
+            camera.transform.SetPositionAndRotation(
+                new Vector3(9f, 8f, 7f),
+                Quaternion.Euler(40f, 50f, 60f));
+            Matrix4x4 projection = camera.projectionMatrix;
+            projection.m02 += 0.25f;
+            camera.projectionMatrix = projection;
+        }
+
+        private void OnEnable()
+        {
+            AttemptCameraWrite();
+        }
+
+        private void OnDisable()
+        {
+            AttemptCameraWrite();
+        }
     }
 }

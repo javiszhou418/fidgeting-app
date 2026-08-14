@@ -32,6 +32,7 @@ namespace FidgetingApp.DisplayCase
     {
         private const float AuthoredCapsuleDiameter = 0.084f;
         private const float AuthoredCapsuleDepth = 0.026f;
+        public const float FrontReadableHoldSeconds = 0.70f;
 
         [Header("Reveal hierarchy")]
         [SerializeField] private Transform caseRevealRoot;
@@ -50,7 +51,7 @@ namespace FidgetingApp.DisplayCase
         [SerializeField] private Transform contentFitRoot;
         [SerializeField] private Transform developmentPlaceholder;
         [SerializeField] private PremiumDisplayCaseCapsulePreset capsulePreset =
-            PremiumDisplayCaseCapsulePreset.CircularStandard;
+            PremiumDisplayCaseCapsulePreset.RoundedSquareDeep;
 
         [Header("Laser identification")]
         [SerializeField] private TextMesh levelLaserMark;
@@ -84,6 +85,7 @@ namespace FidgetingApp.DisplayCase
         private float revealElapsed;
         private bool revealPlaying;
         private bool revealCallbackFired;
+        private float idleHoldRemaining;
         private Vector3 revealedCasePosition;
         private Vector3 lidClosedPosition;
         private Quaternion lidClosedRotation;
@@ -91,6 +93,9 @@ namespace FidgetingApp.DisplayCase
         private Vector3 acrylicParallaxBase;
         private Vector3 interiorParallaxBase;
         private Vector3 contentParallaxBase;
+        private Vector3 circularCapsuleBasePosition;
+        private Vector3 roundedSquareCapsuleBasePosition;
+        private Vector3 productPresentationOffset;
         private Quaternion caseBaseRotation;
         private float[] baseLightIntensities = Array.Empty<float>();
         private Color[] baseLightColors = Array.Empty<Color>();
@@ -138,6 +143,16 @@ namespace FidgetingApp.DisplayCase
         public float RevealProgress => Mathf.Clamp01(
             revealElapsed / PremiumDisplayCaseRevealMotion.DurationSeconds);
         public string CurrentLightingPresetId => selectedLightingPreset.Id;
+        public Quaternion ContentOrbitRotation => contentOrbitRoot != null
+            ? contentOrbitRoot.localRotation
+            : Quaternion.identity;
+        public Vector3 ContentFitScale => contentFitRoot != null
+            ? contentFitRoot.localScale
+            : Vector3.one;
+        public Vector3 ContentFitPosition => contentFitRoot != null
+            ? contentFitRoot.localPosition
+            : Vector3.zero;
+        public Vector3 ProductPresentationOffset => productPresentationOffset;
 
         private void Awake()
         {
@@ -168,7 +183,17 @@ namespace FidgetingApp.DisplayCase
 
         private void Update()
         {
-            float deltaTime = Time.unscaledDeltaTime;
+            AdvanceAnimation(Time.unscaledDeltaTime);
+        }
+
+        /// <summary>
+        /// Advances the exact shipping reveal, idle-turn and parallax state
+        /// machine. Keeping the step explicit lets validation replay the same
+        /// timeline deterministically instead of sampling editor-only poses.
+        /// </summary>
+        public void AdvanceAnimation(float unscaledDeltaTime)
+        {
+            float deltaTime = Mathf.Max(0f, unscaledDeltaTime);
             UpdateParallax(deltaTime);
             UpdateIdleRotation(deltaTime);
             if (!revealPlaying)
@@ -176,7 +201,7 @@ namespace FidgetingApp.DisplayCase
                 return;
             }
 
-            revealElapsed += Mathf.Max(0f, deltaTime);
+            revealElapsed += deltaTime;
             PremiumDisplayCaseRevealSample sample =
                 PremiumDisplayCaseRevealMotion.Evaluate(revealElapsed);
             ApplyRevealSample(sample);
@@ -356,12 +381,32 @@ namespace FidgetingApp.DisplayCase
                 cornerRadius));
         }
 
+        public void setCapsuleDimensions(
+            PremiumDisplayCaseCapsuleDimensions dimensions)
+        {
+            ApplyCapsuleDimensions(dimensions);
+        }
+
+        /// <summary>
+        /// Product-only placement inside the shared collector shell. The same
+        /// offset is applied to the neutral capsule and renderer-only prize;
+        /// it never changes the outer case, camera or uniform content scale.
+        /// </summary>
+        public void SetProductPresentationOffset(Vector3 offset)
+        {
+            CaptureAuthoredHierarchy();
+            productPresentationOffset = offset;
+            ApplyProductPresentationOffset();
+            UpdateParallax(0f);
+        }
+
         public void play()
         {
             CaptureAuthoredHierarchy();
             revealElapsed = 0f;
             revealPlaying = true;
             revealCallbackFired = false;
+            idleHoldRemaining = FrontReadableHoldSeconds;
             ResetIdleRotation();
             ApplyRevealSample(PremiumDisplayCaseRevealMotion.Evaluate(0f));
         }
@@ -511,6 +556,12 @@ namespace FidgetingApp.DisplayCase
             contentParallaxBase = contentParallaxRoot != null
                 ? contentParallaxRoot.localPosition
                 : Vector3.zero;
+            circularCapsuleBasePosition = circularCapsuleGeometry != null
+                ? circularCapsuleGeometry.localPosition
+                : Vector3.zero;
+            roundedSquareCapsuleBasePosition = roundedSquareCapsuleGeometry != null
+                ? roundedSquareCapsuleGeometry.localPosition
+                : Vector3.zero;
             baseLightIntensities = new float[revealLights.Length];
             baseLightColors = new Color[revealLights.Length];
             for (int index = 0; index < revealLights.Length; index++)
@@ -534,18 +585,19 @@ namespace FidgetingApp.DisplayCase
             {
                 circularCapsuleGeometry.gameObject.SetActive(circular);
                 circularCapsuleGeometry.localScale = new Vector3(
-                    dimensions.Diameter / AuthoredCapsuleDiameter,
-                    dimensions.Diameter / AuthoredCapsuleDiameter,
+                    dimensions.Width / AuthoredCapsuleDiameter,
+                    dimensions.Height / AuthoredCapsuleDiameter,
                     dimensions.Depth / AuthoredCapsuleDepth);
             }
             if (roundedSquareCapsuleGeometry != null)
             {
                 roundedSquareCapsuleGeometry.gameObject.SetActive(!circular);
                 roundedSquareCapsuleGeometry.localScale = new Vector3(
-                    dimensions.Diameter / AuthoredCapsuleDiameter,
-                    dimensions.Diameter / AuthoredCapsuleDiameter,
+                    dimensions.Width / AuthoredCapsuleDiameter,
+                    dimensions.Height / AuthoredCapsuleDiameter,
                     dimensions.Depth / AuthoredCapsuleDepth);
             }
+            ApplyProductPresentationOffset();
 
             Transform content = externalContent.Node != null
                 ? externalContent.Node
@@ -553,6 +605,20 @@ namespace FidgetingApp.DisplayCase
             if (content != null && content.gameObject.activeInHierarchy)
             {
                 FitAttachedContent(content);
+            }
+        }
+
+        private void ApplyProductPresentationOffset()
+        {
+            if (circularCapsuleGeometry != null)
+            {
+                circularCapsuleGeometry.localPosition =
+                    circularCapsuleBasePosition + productPresentationOffset;
+            }
+            if (roundedSquareCapsuleGeometry != null)
+            {
+                roundedSquareCapsuleGeometry.localPosition =
+                    roundedSquareCapsuleBasePosition + productPresentationOffset;
             }
         }
 
@@ -661,9 +727,21 @@ namespace FidgetingApp.DisplayCase
 
         private void UpdateIdleRotation(float deltaTime)
         {
-            if (contentOrbitRoot == null || !contentOptions.IdleRotationEnabled)
+            if (contentOrbitRoot == null
+                || !contentOptions.IdleRotationEnabled
+                || revealPlaying)
             {
                 return;
+            }
+            if (idleHoldRemaining > 0f)
+            {
+                float consumed = Mathf.Min(idleHoldRemaining, deltaTime);
+                idleHoldRemaining -= consumed;
+                deltaTime -= consumed;
+                if (deltaTime <= 0f)
+                {
+                    return;
+                }
             }
             float period = Mathf.Max(0.1f, contentOptions.IdleRotationPeriodSeconds);
             contentOrbitRoot.Rotate(
@@ -705,7 +783,8 @@ namespace FidgetingApp.DisplayCase
             if (contentParallaxRoot != null)
             {
                 contentParallaxRoot.localPosition =
-                    contentParallaxBase + sample.ContentOffset;
+                    contentParallaxBase + productPresentationOffset
+                    + sample.ContentOffset;
             }
             if (caseRevealRoot != null)
             {

@@ -514,7 +514,7 @@ namespace FidgetingApp.Tests.Editor
         }
 
         [Test]
-        public void VisualAssembly_AppliesFiveRealMaterialAndComponentStagesWithoutPhysics()
+        public void ProgressionStages_RetainDataWithoutCreatingVisualOrPhysicalGeometry()
         {
             var rotor = new GameObject("ProgressionVisualTestRotor");
             GameObject sourceVisual = GameObject.CreatePrimitive(PrimitiveType.Cube);
@@ -526,44 +526,42 @@ namespace FidgetingApp.Tests.Editor
             {
                 SpinnerProgressionVisuals visuals =
                     rotor.AddComponent<SpinnerProgressionVisuals>();
+                int baselineTransforms = rotor.GetComponentsInChildren<Transform>(true).Length;
+                int baselineRenderers = rotor.GetComponentsInChildren<Renderer>(true).Length;
+                int baselineMeshFilters = rotor.GetComponentsInChildren<MeshFilter>(true).Length;
+                int baselineColliders = rotor.GetComponentsInChildren<Collider>(true).Length;
+                int baselineBodies = rotor.GetComponentsInChildren<Rigidbody>(true).Length;
 
-                visuals.Apply("test-model", 1);
-                Assert.That(visuals.ActiveStageIndex, Is.EqualTo(0));
-                Assert.That(visuals.ActiveMaterialName, Does.Contain("001"));
-                Assert.That(visuals.WeightRingVisible, Is.False);
+                int[] levels = { 1, 20, 50, 75, 100 };
+                string[] shippingModels = ProductCatalog.ShippingModelIds();
+                foreach (string modelId in shippingModels)
+                {
+                    foreach (int level in levels)
+                    {
+                        visuals.Apply(modelId, level);
+                        Assert.That(
+                            visuals.ActiveStageIndex,
+                            Is.EqualTo(SpinnerProgressionVisuals.StageIndexForLevel(level)),
+                            $"{modelId} level {level}");
+                        Assert.That(visuals.ActiveModelId, Is.EqualTo(modelId));
+                        Assert.That(visuals.ActiveMaterialName, Does.Contain($"{level:000}"));
+                        Assert.That(visuals.CreatesRuntimeGeometry, Is.False);
+                        Assert.That(visuals.GeneratedRendererCount, Is.Zero);
+                        Assert.That(visuals.GeneratedColliderCount, Is.Zero);
+                        Assert.That(visuals.WeightRingVisible, Is.False);
+                        Assert.That(visuals.AuxiliaryBearingsVisible, Is.False);
+                        Assert.That(visuals.LowResistanceCageVisible, Is.False);
+                        Assert.That(visuals.FinalCrownVisible, Is.False);
+                    }
+                }
 
-                visuals.Apply("test-model", 20);
-                Assert.That(visuals.ActiveStageIndex, Is.EqualTo(1));
-                Assert.That(visuals.WeightRingVisible, Is.True);
-                Assert.That(visuals.AuxiliaryBearingsVisible, Is.False);
-
-                visuals.Apply("test-model", 50);
-                Assert.That(visuals.ActiveStageIndex, Is.EqualTo(2));
-                Assert.That(visuals.AuxiliaryBearingsVisible, Is.True);
-                Assert.That(visuals.LowResistanceCageVisible, Is.False);
-
-                visuals.Apply("test-model", 75);
-                Assert.That(visuals.ActiveStageIndex, Is.EqualTo(3));
-                Assert.That(visuals.LowResistanceCageVisible, Is.True);
-                Assert.That(visuals.FinalCrownVisible, Is.False);
-
-                visuals.Apply("test-model", 100);
-                Assert.That(visuals.ActiveStageIndex, Is.EqualTo(4));
-                Assert.That(visuals.ActiveMaterialName, Does.Contain("100"));
-                Assert.That(visuals.FinalCrownVisible, Is.True);
-                Assert.That(visuals.GeneratedColliderCount, Is.Zero);
-                Assert.That(rotor.GetComponent<Rigidbody>(), Is.Null);
-
-                Transform generatedRoot = rotor.transform.Find(
-                    SpinnerProgressionVisuals.VisualRootName);
-                Assert.That(generatedRoot, Is.Not.Null);
-                Assert.That(
-                    generatedRoot.GetComponentsInChildren<Renderer>(true)
-                        .Any(renderer => renderer.sharedMaterial != null
-                            && renderer.sharedMaterial.name ==
-                            "Progression_100_CeramicBearing"),
-                    Is.True,
-                    "The final stage must visibly replace steel bearing balls with ceramic ones.");
+                Assert.That(shippingModels, Has.Length.EqualTo(6));
+                Assert.That(rotor.transform.Find(SpinnerProgressionVisuals.VisualRootName), Is.Null);
+                Assert.That(rotor.GetComponentsInChildren<Transform>(true), Has.Length.EqualTo(baselineTransforms));
+                Assert.That(rotor.GetComponentsInChildren<Renderer>(true), Has.Length.EqualTo(baselineRenderers));
+                Assert.That(rotor.GetComponentsInChildren<MeshFilter>(true), Has.Length.EqualTo(baselineMeshFilters));
+                Assert.That(rotor.GetComponentsInChildren<Collider>(true), Has.Length.EqualTo(baselineColliders));
+                Assert.That(rotor.GetComponentsInChildren<Rigidbody>(true), Has.Length.EqualTo(baselineBodies));
             }
             finally
             {
@@ -984,27 +982,20 @@ namespace FidgetingApp.Tests.Editor
             GameObject productRoot = scene.GetRootGameObjects()
                 .First(root => root.name == "ThreeBladeEDC_Root");
             Transform rotor = productRoot.transform.Find("RotorDynamic");
-            Transform legacyTopCap = productRoot.transform.Find("HubStatic/TopCap");
-            Transform visibleTopCap = productRoot.transform.Find(
-                "HubStatic/TopCap/TopCap_Root/FingerCapTop_BrushedFace");
-            Transform structuralTopCap = productRoot.transform.Find(
-                "HubStatic/TopCap/TopCap_Root/FingerCap_Top");
+            Transform visibleTopCap = productRoot.transform.Find("HubStatic/TopCap");
+            Transform retiredLayeredCap = productRoot.transform.Find(
+                "HubStatic/TopCap/TopCap_Root");
             Assert.That(rotor, Is.Not.Null);
-            Assert.That(legacyTopCap, Is.Not.Null);
             Assert.That(visibleTopCap, Is.Not.Null);
-            Assert.That(structuralTopCap, Is.Not.Null);
+            Assert.That(retiredLayeredCap, Is.Not.Null);
             Assert.That(
-                legacyTopCap.GetComponent<MeshRenderer>().enabled,
-                Is.False,
-                "The superseded procedural cap is intentionally hidden.");
-            Assert.That(
-                visibleTopCap.GetComponent<MeshRenderer>().enabled,
+                visibleTopCap.GetComponent<MeshRenderer>()?.enabled,
                 Is.True,
-                "The imported brushed face is the physical top surface the user sees.");
+                "The single solid cap is the physical top surface the user sees.");
             Assert.That(
-                visibleTopCap.localPosition.z,
-                Is.GreaterThan(structuralTopCap.localPosition.z),
-                "The engraving receiver must be above the structural cap shell.");
+                retiredLayeredCap.GetComponentsInChildren<Renderer>(true),
+                Is.Empty,
+                "The retired layered cap must not recreate concentric visual rings.");
 
             ProductStickerPresenter presenter =
                 productRoot.AddComponent<ProductStickerPresenter>();
@@ -1039,7 +1030,7 @@ namespace FidgetingApp.Tests.Editor
                     Assert.That(
                         surface.IsChildOf(visibleTopCap),
                         Is.True,
-                        "The mark must sit on the topmost imported metal face, not the occluded shell.");
+                        "The mark must sit on the single visible solid cap.");
                 }
             }
             finally
@@ -1176,10 +1167,10 @@ namespace FidgetingApp.Tests.Editor
                 .Find("ThreeBladeFrame")
                 .GetComponent<MeshRenderer>();
             MeshRenderer visibleBody = rotor
-                .Find("Rotor_Root/RotorBody_OnePiece")
+                .Find("Rotor_Root/RotorBody_OnePiece_RingNeutral")
                 .GetComponent<MeshRenderer>();
             MeshRenderer visibleTopCap = productRoot.transform
-                .Find("HubStatic/TopCap/TopCap_Root/FingerCap_Top")
+                .Find("HubStatic/TopCap")
                 .GetComponent<MeshRenderer>();
             Assert.That(hiddenLegacyFrame.enabled, Is.False);
             Assert.That(visibleBody.enabled, Is.True);

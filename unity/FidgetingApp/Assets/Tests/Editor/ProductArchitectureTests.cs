@@ -1,6 +1,8 @@
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using CodexUnityLab;
+using FidgetingApp.DisplayCase;
 using FidgetingApp.EDC;
 using FidgetingApp.FanCard;
 using FidgetingApp.Product;
@@ -139,12 +141,25 @@ namespace FidgetingApp.Tests.Editor
             EditorSceneManager.OpenScene(
                 SpinnerEnvironmentCatalog.MetalScenePath,
                 OpenSceneMode.Single);
-            Transform metalBrushFace = Object.FindObjectsByType<Transform>(
-                    FindObjectsInactive.Include,
-                    FindObjectsSortMode.None)
-                .FirstOrDefault(candidate => candidate.name == "FingerCapTop_BrushedFace");
-            Assert.That(metalBrushFace, Is.Not.Null);
-            Assert.That(metalBrushFace.GetComponent<Renderer>().enabled, Is.True);
+            Renderer metalTopCap = FindRenderer("TopCap");
+            Assert.That(metalTopCap.enabled, Is.True);
+            Assert.That(
+                metalTopCap.GetComponent<SpinnerTouchSurface>(),
+                Is.Not.Null,
+                "The single solid metal cap must remain the authored touch surface.");
+            Assert.That(
+                metalTopCap.GetComponent<Collider>(),
+                Is.Not.Null,
+                "The single solid metal cap must retain its physical collider.");
+            Assert.That(
+                Object.FindObjectsByType<Renderer>(
+                        FindObjectsInactive.Include,
+                        FindObjectsSortMode.None)
+                    .Any(candidate =>
+                        candidate.name == "FingerCapTop_BrushedFace"),
+                Is.False,
+                "The ring-neutral metal scene must use its single solid TopCap, "
+                + "not restore the retired layered finger-cap face.");
             Assert.That(FindRenderer("ThreeBladeFrame").enabled, Is.False);
         }
 
@@ -195,7 +210,123 @@ namespace FidgetingApp.Tests.Editor
                 "mobilePipeline.msaaSampleCount = originalPipelineMsaa;",
                 buildPipeline,
                 "Simulator preview export must restore the iPhone 2x MSAA source of truth.");
-            StringAssert.Contains("PlayerSettings.iOS.buildNumber = \"40\";", buildPipeline);
+            StringAssert.Contains("PlayerSettings.iOS.buildNumber = \"41\";", buildPipeline);
+        }
+
+        [Test]
+        public void DisplayCaseHidesOnlySnapshotProductRenderersAcrossAllShippingScenes()
+        {
+            string coordinator = File.ReadAllText(
+                "Assets/Scripts/Product/FidgetAppCoordinator.cs");
+            string snapshot = File.ReadAllText(
+                "Assets/_DisplayCase/Runtime/PremiumDisplayCaseProductPresentation.cs");
+
+            StringAssert.Contains(
+                "PremiumDisplayCaseProductSnapshot.ShouldCapture(renderer)",
+                coordinator);
+            StringAssert.Contains("renderer.enabled = false", coordinator);
+            StringAssert.Contains("renderer.enabled = state.Enabled", coordinator);
+            StringAssert.DoesNotContain(
+                "displayCaseHiddenProduct.gameObject.SetActive(false)",
+                coordinator);
+            StringAssert.DoesNotContain("displayCaseHiddenProductWasActive", coordinator);
+            StringAssert.DoesNotContain("sourceRoot.gameObject.SetActive", coordinator);
+            StringAssert.Contains("public static bool ShouldCapture", snapshot);
+
+            int cameraLookup = coordinator.IndexOf("displayCaseCamera = Camera.main;");
+            int rendererHide = coordinator.IndexOf(
+                "HideDisplayCaseProductRenderers(displayCaseProduct);");
+            Assert.That(cameraLookup, Is.GreaterThanOrEqualTo(0));
+            Assert.That(rendererHide, Is.GreaterThan(cameraLookup),
+                "The active shipping camera must be captured before any product renderer is hidden.");
+
+            Assert.That(ProductCatalog.ShippingEntries.Count, Is.EqualTo(6));
+            foreach (ProductCatalogEntry product in ProductCatalog.ShippingEntries)
+            {
+                EditorSceneManager.OpenScene(product.ScenePath, OpenSceneMode.Single);
+                PremiumDisplayCaseProductProfile profile =
+                    PremiumDisplayCaseProductProfiles.Resolve(product.ModelId);
+                Transform productRoot = Object.FindObjectsByType<Transform>(
+                        FindObjectsInactive.Include,
+                        FindObjectsSortMode.None)
+                    .Single(candidate => candidate.parent == null
+                        && candidate.name == profile.SceneRootName);
+                Camera camera = Camera.main;
+                Assert.That(camera, Is.Not.Null, product.ModelId);
+                Assert.That(camera.gameObject.activeInHierarchy, Is.True, product.ModelId);
+
+                Renderer[] hidden = productRoot.GetComponentsInChildren<Renderer>(false)
+                    .Where(PremiumDisplayCaseProductSnapshot.ShouldCapture)
+                    .ToArray();
+                Assert.That(hidden, Is.Not.Empty, product.ModelId);
+                Assert.That(hidden.All(renderer => renderer.enabled), Is.True, product.ModelId);
+                Assert.That(hidden.All(renderer =>
+                        renderer.GetComponentInParent<Camera>() == null
+                        && renderer.GetComponentInParent<SpinnerGroundingStage>() == null),
+                    Is.True,
+                    $"{product.ModelId} live-product hiding must exclude camera/studio/grounding renderers.");
+
+                GameObject[] sceneObjects = Object.FindObjectsByType<Transform>(
+                        FindObjectsInactive.Include,
+                        FindObjectsSortMode.None)
+                    .Select(candidate => candidate.gameObject)
+                    .ToArray();
+                bool[] activeStates = sceneObjects
+                    .Select(candidate => candidate.activeSelf)
+                    .ToArray();
+                Renderer[] excludedRenderers = productRoot
+                    .GetComponentsInChildren<Renderer>(true)
+                    .Except(hidden)
+                    .ToArray();
+                bool[] excludedRendererStates = excludedRenderers
+                    .Select(renderer => renderer.enabled)
+                    .ToArray();
+                Camera[] cameras = Object.FindObjectsByType<Camera>(
+                    FindObjectsInactive.Include,
+                    FindObjectsSortMode.None);
+                Light[] lights = Object.FindObjectsByType<Light>(
+                    FindObjectsInactive.Include,
+                    FindObjectsSortMode.None);
+                bool[] cameraHierarchyStates = cameras
+                    .Select(item => item.gameObject.activeInHierarchy)
+                    .ToArray();
+                bool[] lightHierarchyStates = lights
+                    .Select(item => item.gameObject.activeInHierarchy)
+                    .ToArray();
+
+                try
+                {
+                    foreach (Renderer renderer in hidden)
+                    {
+                        renderer.enabled = false;
+                    }
+
+                    CollectionAssert.AreEqual(
+                        activeStates,
+                        sceneObjects.Select(candidate => candidate.activeSelf).ToArray(),
+                        $"{product.ModelId} renderer-only hiding must leave every scene object active state unchanged.");
+                    CollectionAssert.AreEqual(
+                        excludedRendererStates,
+                        excludedRenderers.Select(renderer => renderer.enabled).ToArray(),
+                        $"{product.ModelId} renderer-only hiding must not change excluded studio/environment renderers.");
+                    CollectionAssert.AreEqual(
+                        cameraHierarchyStates,
+                        cameras.Select(item => item.gameObject.activeInHierarchy).ToArray(),
+                        $"{product.ModelId} renderer-only hiding must keep all cameras available.");
+                    CollectionAssert.AreEqual(
+                        lightHierarchyStates,
+                        lights.Select(item => item.gameObject.activeInHierarchy).ToArray(),
+                        $"{product.ModelId} renderer-only hiding must keep all lighting available.");
+                    Assert.That(camera.gameObject.activeInHierarchy, Is.True, product.ModelId);
+                }
+                finally
+                {
+                    foreach (Renderer renderer in hidden)
+                    {
+                        renderer.enabled = true;
+                    }
+                }
+            }
         }
 
         [Test]
@@ -401,12 +532,20 @@ namespace FidgetingApp.Tests.Editor
             string source = File.ReadAllText(
                 "Assets/Scripts/Product/SpinnerProgressionVisuals.cs");
 
-            StringAssert.DoesNotContain(
-                "GameObject.CreatePrimitive(PrimitiveType.Sphere)",
-                source,
-                "Release stripping may remove SphereCollider even when the bearing is visual-only.");
-            StringAssert.Contains("BuildSphereMesh(", source);
-            StringAssert.Contains("ball.AddComponent<MeshRenderer>()", source);
+            StringAssert.Contains("SpinnerProgressionRules.Stages", source);
+            StringAssert.Contains("StageIndexForLevel", source);
+            StringAssert.Contains("CreatesRuntimeGeometry => false", source);
+            StringAssert.DoesNotContain("new GameObject", source);
+            StringAssert.DoesNotContain("CreateTorus", source);
+            StringAssert.DoesNotContain("BuildTorusMesh", source);
+            StringAssert.DoesNotContain("BuildSphereMesh", source);
+            StringAssert.DoesNotContain("AddComponent<MeshRenderer>", source);
+            StringAssert.DoesNotContain("AddComponent<MeshFilter>", source);
+            StringAssert.DoesNotContain("StageMaterialCollar", source);
+            StringAssert.DoesNotContain("PrecisionSteelWeightRing", source);
+            StringAssert.DoesNotContain("\"AuxiliaryBearing", source);
+            StringAssert.DoesNotContain("TitaniumBearingCage", source);
+            StringAssert.DoesNotContain("MirrorSteelCrown", source);
         }
 
         [Test]
@@ -526,79 +665,175 @@ namespace FidgetingApp.Tests.Editor
         }
 
         [Test]
-        public void ImportedSlotUsesDimensionedDragonScaleAndCanonicalInteraction()
+        public void ImportedSlotRestoresTrueFourWingIdentityAndCanonicalInteraction()
         {
             const string runtimeModel =
+                "Assets/_ImportedSpinner/Models/ImportedSpinner_Runtime.obj";
+            const string mirrorMaterial =
+                "Assets/_ImportedSpinner/Materials/M_ImportedSpinnerMirrorSteel.mat";
+            const string rejectedDragonRuntime =
                 "Assets/_ImportedSpinner/Models/DragonScaleCLI/"
                 + "DragonScaleEDC_CLI_85mm.fbx";
-            const string collisionModel =
+            const string rejectedDragonCollision =
                 "Assets/_ImportedSpinner/Models/DragonScaleCLI/"
                 + "DragonScaleEDC_CLI_85mm_Collision.fbx";
-            const string dccSource =
-                "ArtSource/DragonScaleEDC/CLIAnything/"
-                + "DragonScaleEDC_CLI_85mm.blend";
-            const string legacySource =
-                "Assets/_ImportedSpinner/Models/ImportedSpinner.fbx";
-            const string legacyRuntime =
-                "Assets/_ImportedSpinner/Models/ImportedSpinner_Runtime.obj";
             const string scenePath =
                 "Assets/_ImportedSpinner/Scenes/ImportedSpinner.unity";
-            const string studio =
-                "Assets/_ImportedSpinner/Materials/DragonScaleCLI/"
-                + "C_DragonScaleCLIStudio.asset";
 
             Assert.That(File.Exists(runtimeModel), Is.True);
-            Assert.That(File.Exists(collisionModel), Is.True);
-            Assert.That(File.Exists(dccSource), Is.True);
+            Assert.That(File.Exists(mirrorMaterial), Is.True);
             Assert.That(File.Exists(scenePath), Is.True);
-            Assert.That(File.Exists(studio), Is.True);
 
             string[] dependencies = AssetDatabase.GetDependencies(scenePath, true);
             CollectionAssert.Contains(dependencies, runtimeModel);
-            CollectionAssert.Contains(dependencies, studio);
-            CollectionAssert.DoesNotContain(dependencies, legacySource);
-            CollectionAssert.DoesNotContain(dependencies, legacyRuntime);
+            CollectionAssert.Contains(dependencies, mirrorMaterial);
+            CollectionAssert.DoesNotContain(dependencies, rejectedDragonRuntime);
+            CollectionAssert.DoesNotContain(dependencies, rejectedDragonCollision);
+            StringAssert.DoesNotContain(
+                "RingNeutral",
+                string.Join("\n", dependencies),
+                "The excluded wide-ring DCC v1-v10 assets must not enter the release scene.");
 
             Mesh[] runtimeMeshes = AssetDatabase.LoadAllAssetsAtPath(runtimeModel)
                 .OfType<Mesh>()
                 .ToArray();
             Assert.That(runtimeMeshes, Is.Not.Empty);
-            ModelImporter runtimeImporter = AssetImporter.GetAtPath(runtimeModel) as ModelImporter;
-            Assert.That(runtimeImporter, Is.Not.Null);
-            Assert.That(
-                runtimeImporter.meshCompression,
-                Is.EqualTo(ModelImporterMeshCompression.Off));
-            Assert.That(runtimeImporter.useFileScale, Is.True);
-            Assert.That(runtimeImporter.preserveHierarchy, Is.True);
-            Assert.That(
-                runtimeImporter.importNormals,
-                Is.EqualTo(ModelImporterNormals.Import));
             Assert.That(
                 runtimeMeshes.All(mesh => mesh.normals.Length == mesh.vertexCount),
                 Is.True);
-            int triangleCount = runtimeMeshes.Sum(mesh =>
-                Enumerable.Range(0, mesh.subMeshCount)
-                    .Sum(submesh => (int)(mesh.GetIndexCount(submesh) / 3)));
             Assert.That(
-                triangleCount,
-                Is.InRange(20500, 22000),
-                "The approved DCC keeps the high-detail one-piece rotor while excluding the rejected decorative axis rings.");
+                runtimeMeshes.Sum(mesh => mesh.triangles.Length / 3),
+                Is.GreaterThan(10000),
+                "The restored identity must use the authored four-wing mesh, not a marker.");
+
+            Vector2[] authoredPlanVertices = File.ReadLines(runtimeModel)
+                .Where(line => line.StartsWith(
+                    "v ",
+                    System.StringComparison.Ordinal))
+                .Select(line => line.Split(
+                    new[] { ' ' },
+                    System.StringSplitOptions.RemoveEmptyEntries))
+                .Select(parts => new Vector2(
+                    float.Parse(parts[1], CultureInfo.InvariantCulture),
+                    float.Parse(parts[3], CultureInfo.InvariantCulture)))
+                .ToArray();
+            Assert.That(authoredPlanVertices.Length, Is.GreaterThan(80000));
+
+            float minX = authoredPlanVertices.Min(vertex => vertex.x);
+            float maxX = authoredPlanVertices.Max(vertex => vertex.x);
+            float minZ = authoredPlanVertices.Min(vertex => vertex.y);
+            float maxZ = authoredPlanVertices.Max(vertex => vertex.y);
+            Vector2 authoredCenter = new Vector2(
+                (minX + maxX) * 0.5f,
+                (minZ + maxZ) * 0.5f);
+            float outerRadius = authoredPlanVertices.Max(vertex =>
+                Vector2.Distance(authoredCenter, vertex));
+            float[] outerAngles = authoredPlanVertices
+                .Where(vertex =>
+                    Vector2.Distance(authoredCenter, vertex) > outerRadius * 0.65f)
+                .Select(vertex => Mathf.Repeat(
+                    Mathf.Atan2(
+                        vertex.y - authoredCenter.y,
+                        vertex.x - authoredCenter.x) * Mathf.Rad2Deg,
+                    360f))
+                .ToArray();
+
+            (float Start, float End)[] fourWingArcs =
+            {
+                (25f, 60f),
+                (120f, 155f),
+                (205f, 235f),
+                (300f, 330f)
+            };
+            foreach ((float start, float end) in fourWingArcs)
+            {
+                int verticesInWing = outerAngles.Count(angle =>
+                    angle >= start && angle <= end);
+                Assert.That(
+                    verticesInWing,
+                    Is.GreaterThan(outerAngles.Length * 0.08f),
+                    $"The authored outer contour is missing its {start:0}-{end:0} degree wing lobe.");
+            }
+
+            (float Start, float End)[] separatingValleys =
+            {
+                (80f, 100f),
+                (170f, 190f),
+                (260f, 280f)
+            };
+            foreach ((float start, float end) in separatingValleys)
+            {
+                int verticesInValley = outerAngles.Count(angle =>
+                    angle >= start && angle <= end);
+                Assert.That(
+                    verticesInValley,
+                    Is.LessThan(outerAngles.Length * 0.01f),
+                    $"The authored outer contour lost the {start:0}-{end:0} degree wing separation.");
+            }
+            Assert.That(
+                outerAngles.Count(angle => angle >= 350f || angle <= 10f),
+                Is.LessThan(outerAngles.Length * 0.01f),
+                "The authored outer contour lost the fourth wing separation at zero degrees.");
 
             EditorSceneManager.OpenScene(scenePath);
             GameObject root = GameObject.Find("ImportedSpinner_Root");
             Assert.That(root, Is.Not.Null);
             Transform rotor = root.transform.Find("RotorDynamic");
+            Transform hub = root.transform.Find("HubStatic");
             Assert.That(rotor, Is.Not.Null);
+            Assert.That(hub, Is.Not.Null);
             Assert.That(rotor.GetComponent<RotorRigidbodyController>(), Is.Not.Null);
             Assert.That(rotor.GetComponent<SpinnerTouchSurface>(), Is.Not.Null);
             Assert.That(rotor.GetComponent<BoxCollider>(), Is.Not.Null);
-            Transform hub = root.transform.Find("HubStatic");
-            Assert.That(hub, Is.Not.Null);
-            Assert.That(hub.gameObject.activeSelf, Is.True);
-            Assert.That(hub.GetComponent<SpinnerTouchSurface>(), Is.Not.Null);
-            Assert.That(hub.GetComponent<CapsuleCollider>(), Is.Not.Null);
+            Rigidbody rotorBody = rotor.GetComponent<Rigidbody>();
+            Rigidbody hubBody = hub.GetComponent<Rigidbody>();
+            Assert.That(rotorBody, Is.Not.Null);
+            Assert.That(rotorBody.isKinematic, Is.False);
+            Assert.That(hubBody, Is.Not.Null);
+            Assert.That(hubBody.isKinematic, Is.True);
+            Assert.That(hubBody, Is.Not.SameAs(rotorBody));
+            Assert.That(hub.gameObject.activeSelf, Is.False);
+            Assert.That(hub.GetComponentsInChildren<Renderer>(true), Is.Empty);
+            Assert.That(hub.GetComponentsInChildren<MeshFilter>(true), Is.Empty);
+            Assert.That(
+                hub.GetComponent<SpinnerTouchSurface>(),
+                Is.Null,
+                "The retired hub must not reintroduce a second touch/ring surface; "
+                + "the true four-wing rotor remains the canonical touch body.");
+            Assert.That(hub.GetComponent<Collider>(), Is.Null);
             Assert.That(root.GetComponent<MobileGestureController>(), Is.Not.Null);
-            Assert.That(root.GetComponent<ExplodedViewController>(), Is.Not.Null);
+
+            RotorWindAudio wind = Object.FindAnyObjectByType<RotorWindAudio>();
+            Assert.That(wind, Is.Not.Null);
+            Assert.That(
+                wind.BladeCount,
+                Is.EqualTo(4),
+                "MIRROR QUAD audio cadence must match its restored four-wing identity.");
+
+            Transform mirrorQuad = root.GetComponentsInChildren<Transform>(true)
+                .Single(transform => transform.name == "MirrorQuadVisual");
+            Assert.That(mirrorQuad.IsChildOf(rotor), Is.True);
+            MeshFilter[] mirrorFilters =
+                mirrorQuad.GetComponentsInChildren<MeshFilter>(true);
+            Assert.That(mirrorFilters, Is.Not.Empty);
+            Assert.That(
+                mirrorFilters.All(filter =>
+                    AssetDatabase.GetAssetPath(filter.sharedMesh) == runtimeModel),
+                Is.True);
+            Renderer[] mirrorRenderers =
+                mirrorQuad.GetComponentsInChildren<Renderer>(true);
+            Assert.That(mirrorRenderers, Is.Not.Empty);
+            Assert.That(
+                mirrorRenderers.SelectMany(renderer => renderer.sharedMaterials)
+                    .Where(material => material != null)
+                    .All(material => material.name == "M_ImportedSpinnerMirrorSteel"),
+                Is.True);
+
+            Transform axisFocus = rotor.Find("MirrorQuadAxisFocus");
+            Assert.That(axisFocus, Is.Not.Null);
+            Assert.That(axisFocus.GetComponentsInChildren<Renderer>(true), Is.Empty);
+            Assert.That(axisFocus.GetComponentsInChildren<MeshFilter>(true), Is.Empty);
+
             OrbitPresentationCamera camera =
                 Object.FindAnyObjectByType<OrbitPresentationCamera>();
             Assert.That(camera, Is.Not.Null);
@@ -613,103 +848,31 @@ namespace FidgetingApp.Tests.Editor
             Vector2 projectedSize = ProductCameraFraming.ProjectedViewportSize(
                 cameraComponent,
                 bounds);
-            Assert.That(projectedSize.x, Is.LessThanOrEqualTo(framing.DetailWidthFraction + 0.03f));
-            Assert.That(projectedSize.y, Is.LessThanOrEqualTo(framing.DetailHeightFraction + 0.03f));
             Assert.That(
-                Mathf.Max(
-                    projectedSize.x / framing.DetailWidthFraction,
-                    projectedSize.y / framing.DetailHeightFraction),
-                Is.InRange(0.90f, 1.03f),
-                "The live renderer bounds should fill one detail boundary, not a fixed authored distance.");
+                projectedSize.x,
+                Is.LessThanOrEqualTo(framing.DetailWidthFraction + 0.03f));
             Assert.That(
-                Object.FindAnyObjectByType<MetalRatchetDetentAudio>(),
-                Is.Not.Null,
-                "All four shipping rotors must retain layered detent audio in ratchet mode.");
-            RotorWindAudio wind = Object.FindAnyObjectByType<RotorWindAudio>();
-            Assert.That(wind, Is.Not.Null);
-            Assert.That(wind.BladeCount, Is.EqualTo(3));
+                projectedSize.y,
+                Is.LessThanOrEqualTo(framing.DetailHeightFraction + 0.03f));
+            Assert.That(
+                rotor.GetComponent<Rigidbody>().angularVelocity,
+                Is.EqualTo(Vector3.zero));
+        }
 
-            Assert.That(rotor.Find("Rotor_Root"), Is.Not.Null);
-            Assert.That(rotor.Find("BearingOuterRace"), Is.Not.Null);
-            Assert.That(rotor.Find("BearingShield_Top"), Is.Not.Null);
-            Assert.That(rotor.Find("BearingShield_Bottom"), Is.Not.Null);
-            Assert.That(hub.Find("Fixed_Root"), Is.Not.Null);
-            Assert.That(hub.Find("BearingInnerRace"), Is.Not.Null);
-            Assert.That(
-                root.transform.Find("BearingVisual/BallCage/BearingCage_Root"),
-                Is.Not.Null);
+        [Test]
+        public void ImportedSpinnerLegacyBuilderCannotOverwriteMirrorQuad()
+        {
+            const string builderPath =
+                "Assets/_ImportedSpinner/Editor/ImportedSpinnerSceneBuilder.cs";
+            string builder = File.ReadAllText(builderPath);
 
-            Transform rotorVisualRoot = rotor.Find("Rotor_Root");
-            Transform outerRace = rotor.Find("BearingOuterRace");
-            Transform fixedRoot = hub.Find("Fixed_Root");
-            Assert.That(
-                PlanarDistanceInMillimeters(rotor, rotorVisualRoot),
-                Is.LessThan(0.01f),
-                "The authored Dragon Scale origin, not its asymmetric AABB center, must stay on the Rigidbody axis.");
-            Assert.That(
-                PlanarDistanceInMillimeters(rotor, outerRace),
-                Is.LessThan(0.01f),
-                "The rotating outer race must stay coaxial with RotorDynamic.");
-            Assert.That(
-                PlanarDistanceInMillimeters(rotor, fixedRoot),
-                Is.LessThan(0.01f),
-                "The fixed axle must share the rotor's mechanical axis.");
-
-            Renderer[] dragonRenderers = root.GetComponentsInChildren<Renderer>(true)
-                .Where(renderer => renderer.sharedMaterials.Any(material =>
-                    material != null && material.name.StartsWith("M_DragonScale_")))
-                .ToArray();
-            Assert.That(dragonRenderers, Is.Not.Empty);
-            string[] materialNames = dragonRenderers
-                .SelectMany(renderer => renderer.sharedMaterials)
-                .Where(material => material != null)
-                .Select(material => material.name)
-                .Distinct()
-                .ToArray();
-            CollectionAssert.IsSupersetOf(
-                materialNames,
-                new[]
-                {
-                    "M_DragonScale_BlastedTitanium",
-                    "M_DragonScale_BlastedTitaniumDark",
-                    "M_DragonScale_PolishedEdge",
-                    "M_DragonScale_RadialBrushedA",
-                    "M_DragonScale_RadialBrushedB",
-                    "M_DragonScale_RecessedGunmetal",
-                    "M_DragonScale_BearingSteel",
-                    "M_DragonScale_BlackPOM"
-                });
-            Material body = dragonRenderers
-                .SelectMany(renderer => renderer.sharedMaterials)
-                .First(material => material.name == "M_DragonScale_BlastedTitanium");
-            Assert.That(body.GetFloat("_Metallic"), Is.EqualTo(1f));
-            Assert.That(body.GetFloat("_Smoothness"), Is.EqualTo(0.72f).Within(0.001f));
-            Assert.That(body.GetTexture("_BumpMap"), Is.Not.Null);
-            Material polished = dragonRenderers
-                .SelectMany(renderer => renderer.sharedMaterials)
-                .First(material => material.name == "M_DragonScale_PolishedEdge");
-            Assert.That(polished.GetFloat("_Smoothness"), Is.EqualTo(0.90f).Within(0.001f));
-            Material pom = dragonRenderers
-                .SelectMany(renderer => renderer.sharedMaterials)
-                .First(material => material.name == "M_DragonScale_BlackPOM");
-            Assert.That(pom.GetFloat("_Metallic"), Is.EqualTo(0f));
-            Assert.That(pom.GetFloat("_Smoothness"), Is.EqualTo(0.58f).Within(0.001f));
-
-            Bounds dragonBounds = dragonRenderers[0].bounds;
-            for (int index = 1; index < dragonRenderers.Length; index++)
-            {
-                dragonBounds.Encapsulate(dragonRenderers[index].bounds);
-            }
-            Assert.That(
-                Mathf.Max(dragonBounds.size.x, dragonBounds.size.z),
-                Is.EqualTo(0.085f).Within(0.0002f));
-            Assert.That(dragonBounds.size.y, Is.EqualTo(0.017f).Within(0.00025f));
-            Assert.That(RenderSettings.customReflectionTexture, Is.Not.Null);
-            Assert.That(
-                RenderSettings.customReflectionTexture.name,
-                Is.EqualTo("C_DragonScaleCLIStudio"));
-            Assert.That(RenderSettings.reflectionIntensity, Is.EqualTo(0.9f).Within(0.001f));
-            Assert.That(rotor.GetComponent<Rigidbody>().angularVelocity, Is.EqualTo(Vector3.zero));
+            StringAssert.Contains("IsRetiredLegacyBuilder = true", builder);
+            StringAssert.Contains("throw RetiredBuilderException()", builder);
+            StringAssert.Contains("ImportedSpinner_Runtime.obj", builder);
+            StringAssert.DoesNotContain("DragonScaleCLI", builder);
+            StringAssert.DoesNotContain("[MenuItem", builder);
+            StringAssert.DoesNotContain("SaveScene", builder);
+            StringAssert.DoesNotContain("BuildDragonScale", builder);
         }
 
         [Test]
@@ -1183,7 +1346,15 @@ namespace FidgetingApp.Tests.Editor
             StringAssert.Contains("symbol: \"chevron.left\"", swift);
             StringAssert.Contains("accessibilityLabel: \"返回\"", swift);
             StringAssert.Contains("if showsBackButton", swift);
-            StringAssert.Contains("label: \"藏家档案\"", swift);
+            StringAssert.Contains(
+                ".accessibilityIdentifier(\"progression-top-avatar\")",
+                swift);
+            StringAssert.Contains(
+                ".accessibilityHint(\"打开藏家档案\")",
+                swift);
+            StringAssert.Contains(
+                "CodexSwiftUIOverlayManager.shared.selectTab(.collector)",
+                swift);
             StringAssert.Contains("CodexSwiftUIOverlayManager.shared.showMySpinners()", swift);
             StringAssert.Contains("CodexCollectorReceiveState", swift);
             StringAssert.Contains("ProductBadgeUnlockBanner", swift);

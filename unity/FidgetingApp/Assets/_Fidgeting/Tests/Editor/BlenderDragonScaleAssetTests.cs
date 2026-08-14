@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using NUnit.Framework;
 using ThreeBladeEDC.EditorTools;
@@ -20,6 +21,10 @@ namespace ThreeBladeEDC.Tests.Editor
             "Assets/_Fidgeting/Models/BlenderDragonScale/DragonScaleEDC_Collision.fbx";
         private const string DeliveryScenePath =
             "Assets/_Fidgeting/Scenes/ThreeBladeMetalOriginal.unity";
+        private const string RingNeutralRotorPath =
+            "Assets/_Fidgeting/Models/BlenderDragonScale/RingNeutral/DragonMetalRingNeutralRotorBody.fbx";
+        private const string RingNeutralMeshPath =
+            "Assets/_Fidgeting/Generated/Meshes/M_DragonMetalRingNeutralRotorBody.asset";
 
         [Test]
         public void DeliveryScene_UsesSelectedOnePieceDragonScaleVisualAndExplodedOrder()
@@ -37,13 +42,25 @@ namespace ThreeBladeEDC.Tests.Editor
                 Transform rotor = RequirePath(root, "RotorDynamic");
                 Transform onePieceRotor = RequirePath(
                     rotor,
-                    "Rotor_Root/RotorBody_OnePiece");
+                    "Rotor_Root/RotorBody_OnePiece_RingNeutral");
                 var selectedRenderer = onePieceRotor.GetComponent<MeshRenderer>();
                 Assert.That(selectedRenderer, Is.Not.Null);
                 Assert.That(selectedRenderer.enabled, Is.True);
                 Assert.That(
                     AssetDatabase.GetAssetPath(onePieceRotor.GetComponent<MeshFilter>().sharedMesh),
-                    Is.EqualTo(VisualModelPath));
+                    Is.EqualTo(RingNeutralMeshPath));
+                CollectionAssert.Contains(
+                    AssetDatabase.GetDependencies(DeliveryScenePath, true),
+                    RingNeutralMeshPath);
+                Assert.That(File.Exists(RingNeutralRotorPath), Is.True);
+                Mesh ringNeutralMesh = onePieceRotor.GetComponent<MeshFilter>().sharedMesh;
+                Assert.That(ringNeutralMesh.bounds.size.x, Is.EqualTo(0.084038f).Within(0.00005f));
+                Assert.That(ringNeutralMesh.bounds.size.y, Is.EqualTo(0.076041f).Within(0.00005f));
+                Assert.That(ringNeutralMesh.bounds.size.z, Is.EqualTo(0.007855f).Within(0.00005f));
+                Assert.That(ringNeutralMesh.triangles.Length / 3, Is.EqualTo(6664));
+                Assert.That(ringNeutralMesh.uv, Has.Length.EqualTo(ringNeutralMesh.vertexCount));
+                Assert.That(ringNeutralMesh.normals, Has.Length.EqualTo(ringNeutralMesh.vertexCount));
+                Assert.That(ringNeutralMesh.tangents, Has.Length.EqualTo(ringNeutralMesh.vertexCount));
 
                 Assert.That(
                     RequirePath(rotor, "ThreeBladeFrame")
@@ -51,18 +68,28 @@ namespace ThreeBladeEDC.Tests.Editor
                     Is.False,
                     "The superseded procedural visual must stay hidden.");
                 Assert.That(
-                    RequirePath(root, "HubStatic/TopCap/TopCap_Root/FingerCap_Top")
+                    RequirePath(root, "HubStatic/TopCap")
                         .GetComponent<MeshRenderer>().enabled,
                     Is.True);
+                Transform retiredLayeredCap = RequirePath(
+                    root,
+                    "HubStatic/TopCap/TopCap_Root");
+                Assert.That(retiredLayeredCap.GetComponentsInChildren<Renderer>(true), Is.Empty);
+                Assert.That(retiredLayeredCap.GetComponentsInChildren<MeshFilter>(true), Is.Empty);
                 Assert.That(
                     RequirePath(root, "BearingVisual/BearingAssembly_Root"),
                     Is.Not.Null);
 
                 Transform cage = RequirePath(root, "BearingVisual/BallCage");
+                Transform bearingBalls = RequirePath(cage, "BearingBalls");
                 Assert.That(
-                    RequirePath(cage, "BearingBalls").GetComponent<MeshRenderer>().enabled,
-                    Is.True,
-                    "The batched bearing balls are the only visible cage renderer.");
+                    bearingBalls.GetComponentsInChildren<Renderer>(true),
+                    Is.Empty,
+                    "The driven cage may retain mechanism state but must not render a dotted circular bearing silhouette.");
+                Assert.That(
+                    bearingBalls.GetComponentsInChildren<MeshFilter>(true),
+                    Is.Empty,
+                    "The shipping scene must not retain hidden annular bearing mesh geometry.");
                 Assert.That(
                     cage.Find("BearingCage_Root"),
                     Is.Null,

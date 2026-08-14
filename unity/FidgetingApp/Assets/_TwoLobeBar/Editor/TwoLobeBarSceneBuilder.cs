@@ -32,14 +32,12 @@ namespace FidgetingApp.TwoLobeBar.EditorTools
             TextureFolder + "/N_IsotropicBeadBlast.png";
         private const string BackdropTexturePath =
             TextureFolder + "/T_WarmDefocusedBackdrop.png";
-        private const string ButtonOcclusionPath =
-            TextureFolder + "/O_ButtonDishAO.png";
         private const string StudioReflectionPath =
             TextureFolder + "/C_MatteZirconiumStudio.asset";
         private const string BodyMeshPath =
             MeshFolder + "/M_TwoLobeBarBody.asset";
         private const string ButtonMeshPath =
-            MeshFolder + "/M_TwoLobeConcaveButton.asset";
+            MeshFolder + "/M_TwoLobeSolidFlushButton.asset";
 
         private readonly struct PreviewPose
         {
@@ -61,18 +59,15 @@ namespace FidgetingApp.TwoLobeBar.EditorTools
             EnsureFolders();
             Texture2D grainNormal = CreateOrUpdateGrainNormal();
             Texture2D backdropTexture = CreateOrUpdateBackdropTexture();
-            Texture2D buttonOcclusion = CreateOrUpdateButtonOcclusion();
             Cubemap studioReflection = CreateOrUpdateStudioReflection();
             Material bodyMaterial = CreateOrUpdateBodyMaterial(grainNormal);
-            Material buttonMaterial = CreateOrUpdateButtonMaterial(
-                grainNormal,
-                buttonOcclusion);
+            Material buttonMaterial = CreateOrUpdateButtonMaterial(grainNormal);
             Material backdropMaterial = CreateOrUpdateBackdropMaterial(backdropTexture);
             Mesh bodyMesh = SaveMesh(
                 TwoLobeBarMeshFactory.CreateBody(),
                 BodyMeshPath);
             Mesh buttonMesh = SaveMesh(
-                TwoLobeBarMeshFactory.CreateConcaveButton(),
+                TwoLobeBarMeshFactory.CreateSolidFlushButton(),
                 ButtonMeshPath);
 
             Scene scene = EditorSceneManager.OpenScene(
@@ -527,9 +522,9 @@ namespace FidgetingApp.TwoLobeBar.EditorTools
             collider.center = Vector3.up
                 * (TwoLobeBarSpecifications.ButtonProudHeight * 0.5f);
             collider.size = new Vector3(
-                TwoLobeBarSpecifications.ButtonDiameter,
+                TwoLobeBarSpecifications.ButtonTouchDiameter,
                 TwoLobeBarSpecifications.ButtonProudHeight,
-                TwoLobeBarSpecifications.ButtonDiameter);
+                TwoLobeBarSpecifications.ButtonTouchDiameter);
         }
 
         private static GameObject CreateMeshObject(
@@ -661,9 +656,7 @@ namespace FidgetingApp.TwoLobeBar.EditorTools
             return material;
         }
 
-        private static Material CreateOrUpdateButtonMaterial(
-            Texture2D grainNormal,
-            Texture2D occlusion)
+        private static Material CreateOrUpdateButtonMaterial(Texture2D grainNormal)
         {
             Shader shader = Shader.Find("Universal Render Pipeline/Lit");
             if (shader == null)
@@ -683,9 +676,8 @@ namespace FidgetingApp.TwoLobeBar.EditorTools
             }
 
             ConfigureGraphiteMaterial(material, grainNormal);
-            material.SetTexture("_OcclusionMap", occlusion);
-            material.SetFloat("_OcclusionStrength", 1f);
-            material.EnableKeyword("_OCCLUSIONMAP");
+            material.SetTexture("_OcclusionMap", null);
+            material.DisableKeyword("_OCCLUSIONMAP");
             EditorUtility.SetDirty(material);
             return material;
         }
@@ -909,48 +901,6 @@ namespace FidgetingApp.TwoLobeBar.EditorTools
             cubemap.Apply(true, false);
             EditorUtility.SetDirty(cubemap);
             return cubemap;
-        }
-
-        private static Texture2D CreateOrUpdateButtonOcclusion()
-        {
-            const int size = 128;
-            var texture = new Texture2D(size, size, TextureFormat.RGB24, false, true);
-            var pixels = new Color[size * size];
-            for (int y = 0; y < size; y++)
-            {
-                for (int x = 0; x < size; x++)
-                {
-                    float nx = (x + 0.5f) / size * 2f - 1f;
-                    float ny = (y + 0.5f) / size * 2f - 1f;
-                    float radius = Mathf.Sqrt(nx * nx + ny * ny);
-                    float dish = Mathf.SmoothStep(0f, 1f, Mathf.Clamp01(radius / 0.90f));
-                    float value = Mathf.Lerp(0.58f, 1f, dish);
-                    pixels[y * size + x] = new Color(value, value, value, 1f);
-                }
-            }
-            texture.SetPixels(pixels);
-            texture.Apply(false, false);
-            WriteTexturePng(texture, ButtonOcclusionPath);
-            UnityEngine.Object.DestroyImmediate(texture);
-
-            AssetDatabase.ImportAsset(
-                ButtonOcclusionPath,
-                ImportAssetOptions.ForceSynchronousImport);
-            TextureImporter importer =
-                AssetImporter.GetAtPath(ButtonOcclusionPath) as TextureImporter;
-            if (importer == null)
-            {
-                throw new FileNotFoundException("Generated button AO failed to import.");
-            }
-            importer.textureType = TextureImporterType.Default;
-            importer.sRGBTexture = false;
-            importer.wrapMode = TextureWrapMode.Clamp;
-            importer.filterMode = FilterMode.Bilinear;
-            importer.mipmapEnabled = true;
-            importer.textureCompression = TextureImporterCompression.Uncompressed;
-            importer.maxTextureSize = size;
-            importer.SaveAndReimport();
-            return AssetDatabase.LoadAssetAtPath<Texture2D>(ButtonOcclusionPath);
         }
 
         private static float Gaussian(

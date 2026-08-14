@@ -1,4 +1,5 @@
 using System.Globalization;
+using FidgetingApp.DisplayCase;
 using FidgetingApp.Product;
 using UnityEngine;
 
@@ -7,7 +8,8 @@ namespace CodexUnityLab
     [ExecuteAlways]
     [DisallowMultipleComponent]
     [RequireComponent(typeof(Camera))]
-    public sealed class PortraitCameraFramer : MonoBehaviour
+    public sealed class PortraitCameraFramer : MonoBehaviour,
+        IPremiumDisplayCaseCameraStateAuthor
     {
         public const float LibraryMotionOrbitMultiplier = 1.25f;
         [SerializeField] private Transform target;
@@ -52,6 +54,7 @@ namespace CodexUnityLab
         private float transitionTargetWidthFraction;
         private float transitionStartHeightFraction;
         private float transitionTargetHeightFraction;
+        private bool displayCaseCameraControlSuppressed;
 
         public float ZoomScale => zoomScale;
         public float AppearanceActivationScale => appearanceActivationScale;
@@ -182,7 +185,7 @@ namespace CodexUnityLab
 
         public void FrameNow()
         {
-            if (target == null)
+            if (displayCaseCameraControlSuppressed || target == null)
             {
                 return;
             }
@@ -351,7 +354,7 @@ namespace CodexUnityLab
 
         private void ApplyViewPose()
         {
-            if (!hasFrame)
+            if (displayCaseCameraControlSuppressed || !hasFrame)
             {
                 return;
             }
@@ -374,6 +377,11 @@ namespace CodexUnityLab
                     framingBackward,
                     orbit);
             transform.SetPositionAndRotation(cameraPosition, cameraRotation);
+        }
+
+        public void SetDisplayCaseCameraControlSuppressed(bool suppressed)
+        {
+            displayCaseCameraControlSuppressed = suppressed;
         }
     }
 }

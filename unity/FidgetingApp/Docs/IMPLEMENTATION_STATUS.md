@@ -11,6 +11,17 @@
 - `仅规格`：只有设计规格，不能对外称为已实现。
 - `待真机验收`：自动化能验证结构，但触感仍必须在 iPhone 上确认。
 
+## Build 41 统一单 App 候选（六款收藏盒已获视觉批准；正在构建并推送手机）
+
+> **当前发布状态：用户在 Build 40 链路中再次确认，只有磁吸推牌符合期望，其余商品曾出现收藏盒缺失、尺寸/角度/相机不一致。Build 41 候选已把磁吸推牌的完整 presentation contract 设为六款唯一基准，完成新的真实 shipping Simulator 六款门禁，并于 2026-08-14 获得用户明确视觉批准和推送授权；当前正在构建并覆盖安装。正式 bundle 仍唯一为 `com.jiaweizhou.fidgetspinner.codex`，不会安装第二个 Demo App。**
+
+- 六款均实例化同一个 `PremiumDisplayCase` prefab，并完整复用磁吸推牌的 `RoundedSquareDeep 84 × 84 × 38 mm` 内舱、零 presentation offset、`(90°, -8°, 0°)` case pose、统一相机矩阵、`2.20 s` reveal 与 `1.35 s` assembly。产品 profile 不再允许覆盖盒体、内舱、相机或入场时序；只替换 renderer-only 奖品快照，并在快照内部一次性归一到各模型的 authored front。
+- shipping Coordinator 不再 `SetActive(false)` 整个场景根节点，而只隐藏快照实际捕获的产品 Renderer，避免连带关闭四款旋转场景根下的 MainCamera、Studio 和灯光；关闭收藏盒时逐项恢复原 Renderer 状态。相机展示期间取得完整 ownership lease，暂时抑制 Orbit / EDC / Portrait / Parallax / Fan projection author，强制统一非 physical perspective，关闭后精确恢复原 projection 与组件状态。
+- 原生与 Unity 现使用带 `modelId|selectionEpoch|requestId` 的 ready/setup/start 三阶段握手；只有 selected、active scene、canonical snapshot 与 request 四个身份完全一致，且盒体、相机、奖品 hierarchy 与 EndOfFrame postcondition 成功后，SwiftUI 才挂载 overlay。overlay 出现后再精确触发一次 reveal/assembly；失败或过期回包不显示空收藏盒。
+- 发布前联合 EditMode 回归分两组完成：Fan Card 与 Product Architecture 为 `66/66 Passed`；收藏盒动态生命周期、轴圈、成长数据链与正式 Gacha 接线为 `85/85 Passed`。Fan Card source guardrail 为 `27/27 Passed`、完整背轨外轮廓最小净空仍为 `7.590 mm`；`CardGeometryValidator` 以 `=== VALIDATION: ALL PASS ===` 收口。
+- XCTest 的 AX 查询仍可能消耗动画窗口，因此最终动态门禁不再用截图调用时刻冒充动画时钟。连续 H.264 会在每款八秒窗口中从真实像素变化与随后持续出现的亚克力轨道自动定位 visible onset，再抽取 `+0.35 / +1.10 / +2.60 s`。2026-08-14 fresh Simulator run 的六款往返 XCUITest 为 `1/1 Passed`；连续视频门禁为 `6/6 Passed`，六款 rail scale 为 `0.999230–1.000292`、相对平移不超过 `1.076 px`，六次 early→mid 与 mid→settled 均有非零主体运动；扇牌 `+2.60 s` 与更晚 attachment 都保持正面 artwork。证据位于 `/private/tmp/fidgeting-displaycase-finalfix-gate-visible-start-v1/`，其中 `video-derived-six-by-three.png`、`display-case-all-six-round-trip.mp4` 与 `display-case-video-gate.json` 分别为三阶段联系表、全流程录屏和结构化门禁报告。
+- 收藏盒完整 focused EditMode 为 `53/53 Passed`，start protocol 为 `8/8 Passed`，扇牌正面保持回归为 `45/45 Passed`，Fan Card acceptance 为 `22/22 Passed`，source guardrail 继续为 `27/27 Passed`、净空 `7.590 mm`。当前唯一发布等待项是用户对 fresh shipping Simulator 联系表/短视频的明确视觉批准；批准前不得 DeviceSDK export、签名或覆盖安装。批准后才生成唯一新设备 Build，安装后再验收真实屏幕构图、入场节奏与触摸/Haptic。
+
 ## Build 39 正式单 App 已覆盖安装（商店 + Library 手势；待用户真机手感验收）
 
 > **发布结论：用户明确拒绝独立 Demo 与正式 Fidget Spinner 双 App 并存，要求把商店并入 `com.jiaweizhou.fidgetspinner.codex`，并同时带上 Library 左右切换手势修复。唯一正式 Build 39 已完成 Unity DeviceSDK 导出、Xcode Release 编译、签名校验、Simulator 连续左右滑验证、CoreDevice 覆盖安装、启动和设备库存回读；独立 `com.jiaweizhou.fidgeting.single-draw-demo` 已从 iPhone 删除。手机当前只保留并运行 `Fidget Spinner 0.1.0 (39)`。**

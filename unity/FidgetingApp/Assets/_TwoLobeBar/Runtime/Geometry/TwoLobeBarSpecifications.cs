@@ -23,16 +23,21 @@ namespace FidgetingApp.TwoLobeBar.Geometry
         // into the side walls without a flat patch or a sharp tangent break.
         public const float BodyCrownExponent = 3.2f;
 
-        public const float ButtonDiameter = 0.024f;
+        public const float ButtonDiameter = 0.010f;
         public const float ButtonRadius = ButtonDiameter * 0.5f;
+        // Touch acceptance remains generous and independent from the visual
+        // cap so shrinking the render geometry cannot degrade gesture pickup.
+        public const float ButtonTouchDiameter = 0.024f;
         public const float ButtonProudHeight = 0.003f;
-        public const float ButtonDishDepth = 0.0015f;
-        public const float ButtonRimWidth = 0.0012f;
+        // The touch surface is one solid, flush cap. A shallow edge bevel
+        // keeps the silhouette tactile without introducing a visible
+        // annular dish, washer, or trim ring on the assembled product.
+        public const float ButtonEdgeBevel = 0.00045f;
         // A recessed neck supports the finger disc. The full-size disc
         // overhangs this neck, creating a real undercut/shadow gap instead of
         // relying on a painted dark line at the body junction.
-        public const float ButtonUndercutRadius = 0.0102f;
-        public const float ButtonUndercutReveal = 0.00072f;
+        public const float ButtonUndercutRadius = 0.0041f;
+        public const float ButtonUndercutReveal = 0.00050f;
         public const float ButtonUndercutSink = 0.00016f;
         public const float ButtonOverhang = ButtonRadius - ButtonUndercutRadius;
 

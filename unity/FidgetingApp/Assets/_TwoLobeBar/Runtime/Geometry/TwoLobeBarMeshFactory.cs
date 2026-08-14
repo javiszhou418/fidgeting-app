@@ -7,7 +7,7 @@ namespace FidgetingApp.TwoLobeBar.Geometry
 {
     /// <summary>
     /// Deterministic mobile meshes for one radial bar half and the stationary
-    /// concave finger button. The two lobe instances share one mesh asset.
+    /// solid finger button. The two lobe instances share one mesh asset.
     /// </summary>
     public static class TwoLobeBarMeshFactory
     {
@@ -231,22 +231,17 @@ namespace FidgetingApp.TwoLobeBar.Geometry
             return BuildMesh(name, vertices, uvs, triangles);
         }
 
-        public static Mesh CreateConcaveButton(
-            string name = "M_TwoLobeConcaveButton",
+        public static Mesh CreateSolidFlushButton(
+            string name = "M_TwoLobeSolidFlushButton",
             int radialSegments = 64,
-            int dishRings = 10,
             int bevelSegments = 4)
         {
             radialSegments = Mathf.Clamp(radialSegments, 32, 128);
-            dishRings = Mathf.Clamp(dishRings, 5, 20);
             bevelSegments = Mathf.Clamp(bevelSegments, 2, 8);
 
             float radius = TwoLobeBarSpecifications.ButtonRadius;
             float proud = TwoLobeBarSpecifications.ButtonProudHeight;
-            float dishDepth = TwoLobeBarSpecifications.ButtonDishDepth;
-            float rimWidth = TwoLobeBarSpecifications.ButtonRimWidth;
-            float bevel = Mathf.Min(0.00065f, rimWidth * 0.55f);
-            float dishRadius = radius - rimWidth;
+            float bevel = TwoLobeBarSpecifications.ButtonEdgeBevel;
             float undercutRadius = TwoLobeBarSpecifications.ButtonUndercutRadius;
             float undercutReveal = TwoLobeBarSpecifications.ButtonUndercutReveal;
 
@@ -255,19 +250,16 @@ namespace FidgetingApp.TwoLobeBar.Geometry
             var triangles = new List<int>();
 
             int topCenter = vertices.Count;
-            vertices.Add(new Vector3(0f, proud - dishDepth, 0f));
+            vertices.Add(new Vector3(0f, proud, 0f));
             uvs.Add(new Vector2(0.5f, 0.5f));
 
-            var rings = new List<ButtonRing>(dishRings + bevelSegments * 2 + 4);
-            for (int ring = 1; ring <= dishRings; ring++)
+            var rings = new List<ButtonRing>(bevelSegments * 3 + 5)
             {
-                float t = ring / (float)dishRings;
-                float ringRadius = dishRadius * t;
-                float height = proud - dishDepth * (1f - t * t);
-                rings.Add(new ButtonRing(ringRadius, height));
-            }
-
-            rings.Add(new ButtonRing(radius - bevel, proud));
+                // One coplanar face from the center to the edge roll. There
+                // are no height/material discontinuities inside this radius,
+                // so the assembled hero cannot read as concentric rings.
+                new ButtonRing(radius - bevel, proud)
+            };
             for (int segment = 1; segment <= bevelSegments; segment++)
             {
                 float t = segment / (float)bevelSegments;

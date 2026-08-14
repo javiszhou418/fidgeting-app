@@ -1,4 +1,5 @@
 using FidgetingApp.Product;
+using FidgetingApp.DisplayCase;
 using UnityEngine;
 
 namespace FidgetingApp.EDC
@@ -6,7 +7,8 @@ namespace FidgetingApp.EDC
     [ExecuteAlways]
     [DisallowMultipleComponent]
     [RequireComponent(typeof(Camera))]
-    public sealed class EdcPortraitCameraFramer : MonoBehaviour
+    public sealed class EdcPortraitCameraFramer : MonoBehaviour,
+        IPremiumDisplayCaseCameraStateAuthor
     {
         public const float LibraryMotionOrbitMultiplier = 1.25f;
         public const float DefaultScreenWidthFraction =
@@ -76,6 +78,7 @@ namespace FidgetingApp.EDC
         private float transitionTargetWidthFraction;
         private float transitionStartHeightFraction;
         private float transitionTargetHeightFraction;
+        private bool displayCaseCameraControlSuppressed;
 
         public Transform Target => target;
         public Transform FocusTarget => focusTarget;
@@ -384,7 +387,9 @@ namespace FidgetingApp.EDC
 
         public void FrameNow()
         {
-            if (target == null || !TryGetFramingBounds(out Bounds bounds))
+            if (displayCaseCameraControlSuppressed
+                || target == null
+                || !TryGetFramingBounds(out Bounds bounds))
             {
                 return;
             }
@@ -427,7 +432,9 @@ namespace FidgetingApp.EDC
 
         private void ApplyViewPose()
         {
-            if (target == null || FramedDistance <= 0f)
+            if (displayCaseCameraControlSuppressed
+                || target == null
+                || FramedDistance <= 0f)
             {
                 return;
             }
@@ -463,7 +470,7 @@ namespace FidgetingApp.EDC
 
         private void ConfigureCameraProjection(Camera camera)
         {
-            if (camera == null)
+            if (displayCaseCameraControlSuppressed || camera == null)
             {
                 return;
             }
@@ -480,6 +487,11 @@ namespace FidgetingApp.EDC
                 camera.fieldOfView = standardFieldOfView;
                 camera.ResetProjectionMatrix();
             }
+        }
+
+        public void SetDisplayCaseCameraControlSuppressed(bool suppressed)
+        {
+            displayCaseCameraControlSuppressed = suppressed;
         }
 
         private bool TryGetFramingBounds(out Bounds bounds)
