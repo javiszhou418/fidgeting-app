@@ -3445,9 +3445,16 @@ private struct ProductTopBar: View {
                                     symbol: "shippingbox",
                                     accessibilityLabel: "盲盒",
                                     accent: state.currentAppearanceAccent) {
+                                    guard state.canRequestDisplayCase else { return }
                                     UnityBridge.feedback()
                                     showGachaStore = true
                                 }
+                                .disabled(!state.canRequestDisplayCase)
+                                .opacity(state.canRequestDisplayCase ? 1 : 0.42)
+                                .accessibilityIdentifier("gacha-store-entry")
+                                .accessibilityHint(state.isSelectedModelReady
+                                    ? "打开抽卡商店"
+                                    : "等待当前模型场景加载完成")
                             }
                             topDestinationButton(
                                 .settings,
@@ -9235,6 +9242,30 @@ private final class CodexSwiftUIOverlayManager {
         showPanel()
     }
 
+    func setGachaRevealNativeChromeHidden(_ hidden: Bool) {
+        topController?.view.isHidden = hidden
+        panelController?.view.isHidden = hidden
+        badgeController?.view.isHidden = hidden
+        appearanceController?.view.isHidden = hidden
+        environmentPickerController?.view.isHidden = hidden
+
+        if hidden {
+            modeController?.view.isHidden = true
+            progressionController?.view.isHidden = true
+            feedbackController?.view.isHidden = true
+        } else {
+            // Gacha is only entered from the Library. Restore that exact native
+            // chrome after ACK; the still-present store cover remains in front
+            // until the user explicitly returns home.
+            setModeBarVisible(false)
+            topController?.view.isHidden = false
+            panelController?.view.isHidden = false
+            badgeController?.view.isHidden = false
+            appearanceController?.view.isHidden = false
+            environmentPickerController?.view.isHidden = false
+        }
+    }
+
     func selectTab(_ tab: ProductTab) {
         dismissEnvironmentPicker(resetPreview: true, animated: false)
         dismissAppearanceEditorIfNeeded()
@@ -9938,6 +9969,11 @@ private final class CodexSwiftUIOverlayManager {
         let window = scene?.windows.first { $0.isKeyWindow } ?? scene?.windows.first
         return window?.rootViewController
     }
+}
+
+@MainActor
+public func CodexSetGachaRevealNativeChromeHidden(_ hidden: Bool) {
+    CodexSwiftUIOverlayManager.shared.setGachaRevealNativeChromeHidden(hidden)
 }
 
 @_cdecl("CodexSwiftUiOverlayInstall")

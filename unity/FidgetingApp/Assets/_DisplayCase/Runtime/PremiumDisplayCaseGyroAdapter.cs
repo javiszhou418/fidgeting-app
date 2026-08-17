@@ -1,5 +1,6 @@
 using CodexUnityLab;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 namespace FidgetingApp.DisplayCase
 {
@@ -53,10 +54,13 @@ namespace FidgetingApp.DisplayCase
             }
 
 #if UNITY_EDITOR
-            if (usePointerFallbackInEditor && Camera.main != null)
+            Mouse mouse = Mouse.current;
+            if (usePointerFallbackInEditor
+                && Camera.main != null
+                && mouse != null)
             {
                 Vector2 pointer = SceneParallaxInput.NormalizePointer(
-                    Input.mousePosition,
+                    mouse.position.ReadValue(),
                     new Vector2(Screen.width, Screen.height));
                 displayCase.SetParallaxInput(new Vector2(
                     pointer.x,

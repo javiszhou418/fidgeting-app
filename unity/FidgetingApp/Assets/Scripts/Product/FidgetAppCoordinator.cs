@@ -317,6 +317,19 @@ namespace FidgetingApp.Product
         private PremiumDisplayCase activeDisplayCase;
         private PremiumDisplayCaseInteractionController activeDisplayCaseInteraction;
         private GameObject activeDisplayCasePrize;
+        private enum DisplayCasePresentationOwner
+        {
+            None = 0,
+            LibraryCase = 1,
+            GachaReveal = 2
+        }
+        private DisplayCasePresentationOwner displayCasePresentationOwner;
+        private GameObject activeGachaRevealHost;
+        private Gacha.GachaRevealDirector activeGachaRevealDirector;
+        private string activeGachaRevealRequestId = string.Empty;
+        private bool gachaRevealSetupAcknowledged;
+        private bool gachaRevealStarted;
+        private Coroutine gachaRevealPresentationConfirmation;
         private GameObject displayCaseCanonicalPrize;
         private string displayCaseCanonicalPrizeModelId = string.Empty;
         private readonly struct DisplayCaseRendererVisibilityState
@@ -563,6 +576,7 @@ namespace FidgetingApp.Product
                 return;
             }
 
+            DismissGachaRevealPresentation("coordinator-destroyed");
             DismissDisplayCaseExperience();
             DisposeDisplayCaseCanonicalPrize();
 
@@ -618,6 +632,10 @@ namespace FidgetingApp.Product
         private void ConfigureProductScene(string scenePath)
         {
             string configuredModelId = ModelIdForScene(scenePath);
+            // A scene switch invalidates the camera/product renderer lease. A
+            // prepared draw remains durable in GachaInventory and will be
+            // replayed from the same receipt when the store requests it again.
+            DismissGachaRevealPresentation("scene-changed");
             DisposeDisplayCaseCanonicalPrize();
             appearanceLongPress.Cancel();
             appearanceActivation.Cancel();
@@ -1587,6 +1605,7 @@ namespace FidgetingApp.Product
             }
 
             string modelId = selection.ModelId;
+            DismissGachaRevealPresentation("model-selection-changed");
             DismissDisplayCaseExperience();
             if (!ProductCatalog.TryGetScenePath(modelId, out string scenePath))
             {
@@ -2291,9 +2310,21 @@ namespace FidgetingApp.Product
             out string failureReason)
         {
             failureReason = string.Empty;
+            if (displayCasePresentationOwner
+                == DisplayCasePresentationOwner.GachaReveal)
+            {
+                failureReason = "gacha-reveal-already-presented";
+                return false;
+            }
             if (activeDisplayCase != null)
             {
                 failureReason = "display-case-already-presented";
+                return false;
+            }
+            if (activeGachaRevealDirector != null
+                || !string.IsNullOrEmpty(activeGachaRevealRequestId))
+            {
+                failureReason = "gacha-reveal-already-presented";
                 return false;
             }
             if (!string.Equals(
@@ -2335,10 +2366,14 @@ namespace FidgetingApp.Product
                 failureReason = "display-camera-missing";
                 return false;
             }
+            displayCasePresentationOwner =
+                DisplayCasePresentationOwner.LibraryCase;
             activeDisplayCasePrize = InstantiateDisplayCaseCanonicalPrize(modelId);
             if (activeDisplayCasePrize == null)
             {
                 displayCaseCamera = null;
+                displayCasePresentationOwner =
+                    DisplayCasePresentationOwner.None;
                 failureReason = "canonical-prize-instantiation-failed";
                 return false;
             }
@@ -2355,6 +2390,8 @@ namespace FidgetingApp.Product
                 displayCaseCamera = null;
                 Destroy(activeDisplayCasePrize);
                 activeDisplayCasePrize = null;
+                displayCasePresentationOwner =
+                    DisplayCasePresentationOwner.None;
                 failureReason = "display-camera-lease-failed";
                 return false;
             }
@@ -2432,6 +2469,17 @@ namespace FidgetingApp.Product
 
         private void DismissDisplayCaseExperience()
         {
+            if (displayCasePresentationOwner
+                == DisplayCasePresentationOwner.GachaReveal)
+            {
+                // Normal/legacy case requests must never steal the shared
+                // camera or renderer lease from an active gacha reveal.
+                displayCasePresentationStartGate.Reset();
+                hasActiveDisplayCaseRequest = false;
+                activeDisplayCaseRequest = default;
+                return;
+            }
+
             if (displayCasePresentationConfirmation != null)
             {
                 StopCoroutine(displayCasePresentationConfirmation);
@@ -2462,6 +2510,7 @@ namespace FidgetingApp.Product
             displayCasePresentationStartGate.Reset();
             hasActiveDisplayCaseRequest = false;
             activeDisplayCaseRequest = default;
+            displayCasePresentationOwner = DisplayCasePresentationOwner.None;
         }
 
         public void SetEnvironmentThemeFromNativeUi(string themeId)
@@ -2554,7 +2603,21 @@ namespace FidgetingApp.Product
         private Gacha.GachaInventoryRuntime gachaInventory;
 
         private Gacha.GachaInventoryRuntime GachaInventory =>
-            gachaInventory ??= new Gacha.GachaInventoryRuntime();
+            gachaInventory ??= CreateGachaInventoryRuntime();
+
+        private static Gacha.GachaInventoryRuntime CreateGachaInventoryRuntime()
+        {
+#if FIDGET_GACHA_INTERNAL_UNLIMITED
+            // The deterministic catalog8 sequence is parsed only by this
+            // internal-build-only factory. Without the explicit launch
+            // argument the unlimited runtime still uses ordinary random draws.
+            return Gacha.GachaInternalUnlimitedRuntimeFactory.Create(
+                System.Environment.GetCommandLineArgs());
+#else
+            return new Gacha.GachaInventoryRuntime(
+                Gacha.GachaRuntimeMode.Production);
+#endif
+        }
 
         private void PublishGachaState(string receiptPayload = "")
         {
@@ -2564,32 +2627,483 @@ namespace FidgetingApp.Product
                 receiptPayload);
         }
 
+        private void PublishGachaState(
+            Gacha.GachaTransactionResult result,
+            bool isDirectDrawResponse = false)
+        {
+#if FIDGET_GACHA_INTERNAL_UNLIMITED
+            if (isDirectDrawResponse && ShouldDropNextInternalGachaDrawResponse())
+            {
+                Debug.Log(
+                    "[FidgetingApp] Internal gacha intentionally dropped "
+                    + "one draw response; native must query the same request.");
+                return;
+            }
+#endif
+            PublishGachaState(Gacha.GachaNativeBridge.ReceiptPayload(result));
+        }
+
+#if FIDGET_GACHA_INTERNAL_UNLIMITED
+        private static bool? dropNextInternalGachaDrawResponse;
+
+#if UNITY_IOS && !UNITY_EDITOR
+        [System.Runtime.InteropServices.DllImport("__Internal")]
+        private static extern int CodexProcessHasLaunchArgumentValue(
+            string argumentName,
+            string argumentValue);
+#endif
+
+        private static bool ShouldDropNextInternalGachaDrawResponse()
+        {
+            if (!dropNextInternalGachaDrawResponse.HasValue)
+            {
+#if UNITY_IOS && !UNITY_EDITOR
+                // IL2CPP's Environment.GetCommandLineArgs() does not expose
+                // XCTest/XCUIApplication launch arguments on iOS. Read the
+                // exact internal-only fault flag from NSProcessInfo instead;
+                // the nullable latch below still consumes it only once.
+                bool armed = CodexProcessHasLaunchArgumentValue(
+                    "--fidget-gacha-drop-next-response",
+                    "draw") != 0;
+#else
+                string[] arguments = System.Environment.GetCommandLineArgs();
+                bool armed = false;
+                for (int index = 0; index < arguments.Length; index++)
+                {
+                    if (string.Equals(
+                            arguments[index],
+                            "--fidget-gacha-drop-next-response=draw",
+                            System.StringComparison.Ordinal)
+                        || (string.Equals(
+                                arguments[index],
+                                "--fidget-gacha-drop-next-response",
+                                System.StringComparison.Ordinal)
+                            && index + 1 < arguments.Length
+                            && string.Equals(
+                                arguments[index + 1],
+                                "draw",
+                                System.StringComparison.Ordinal)))
+                    {
+                        armed = true;
+                        break;
+                    }
+                }
+#endif
+                dropNextInternalGachaDrawResponse = armed;
+            }
+
+            if (dropNextInternalGachaDrawResponse != true)
+            {
+                return false;
+            }
+
+            dropNextInternalGachaDrawResponse = false;
+            return true;
+        }
+#endif
+
         public void RequestGachaStateFromNativeUi(string unused)
         {
             PublishGachaState();
         }
 
-        /// <summary>Payload: "seriesId|count|ticket" or "seriesId|count|coin".</summary>
+        /// <summary>
+        /// Payload: "seriesId|1|ticket|requestId". The request id is the
+        /// durable idempotency key; retries always replay the same receipt.
+        /// </summary>
         public void DrawGachaFromNativeUi(string payload)
         {
             string[] parts = (payload ?? string.Empty).Split('|');
-            if (parts.Length != 3
+            if (parts.Length != 4
                 || !int.TryParse(
                     parts[1],
                     System.Globalization.NumberStyles.Integer,
                     CultureInfo.InvariantCulture,
-                    out int count))
+                    out int count)
+                || (parts[2] != "ticket" && parts[2] != "coin"))
             {
-                PublishGachaState(Gacha.GachaNativeBridge.ReceiptPayload(
-                    Gacha.GachaDrawReceipt.Failure("malformed-request")));
+                string malformedRequestId = parts.Length >= 4
+                    ? parts[3]
+                    : string.Empty;
+                PublishGachaState(Gacha.GachaTransactionResult.Failed(
+                    GachaInventory.RuntimeMode,
+                    malformedRequestId,
+                    "malformed-request"));
                 return;
             }
 
             Gacha.GachaPaymentMethod method = parts[2] == "coin"
                 ? Gacha.GachaPaymentMethod.Coin
                 : Gacha.GachaPaymentMethod.Ticket;
-            Gacha.GachaDrawReceipt receipt = GachaInventory.Draw(parts[0], count, method);
-            PublishGachaState(Gacha.GachaNativeBridge.ReceiptPayload(receipt));
+            Gacha.GachaTransactionResult result = GachaInventory.PrepareDraw(
+                parts[0],
+                count,
+                method,
+                parts[3]);
+            PublishGachaState(result, isDirectDrawResponse: true);
+        }
+
+        public void QueryGachaTransactionFromNativeUi(string requestId)
+        {
+            PublishGachaState(GachaInventory.QueryTransaction(requestId));
+        }
+
+        /// <summary>
+        /// Prepares the real Unity reveal without advancing its clock. Swift
+        /// mounts the transparent native overlay only after this method has
+        /// held the shipping camera for two complete frames and acknowledged
+        /// the exact durable transaction.
+        /// </summary>
+        public void RequestGachaRevealFromNativeUi(string requestId)
+        {
+            if (!Gacha.GachaTransactionCodec.IsRequestIdValid(requestId))
+            {
+                Gacha.GachaPresentationNativeBridge.PublishSetup(
+                    requestId,
+                    false,
+                    "invalid-request-id");
+                return;
+            }
+
+            if (activeGachaRevealDirector != null)
+            {
+                if (string.Equals(
+                        activeGachaRevealRequestId,
+                        requestId,
+                        System.StringComparison.Ordinal))
+                {
+                    if (gachaRevealSetupAcknowledged)
+                    {
+                        Gacha.GachaPresentationNativeBridge.PublishSetup(
+                            requestId,
+                            true);
+                    }
+                    return;
+                }
+
+                Gacha.GachaPresentationNativeBridge.PublishSetup(
+                    requestId,
+                    false,
+                    "different-reveal-already-active");
+                return;
+            }
+
+            Gacha.GachaTransactionResult transaction =
+                GachaInventory.QueryTransaction(requestId);
+            if (!transaction.Success
+                || transaction.Transaction == null
+                || transaction.Transaction.Phase
+                    == Gacha.GachaTransactionPhase.Completed
+                || transaction.Transaction.Receipt.Rows.Count != 1)
+            {
+                Gacha.GachaPresentationNativeBridge.PublishSetup(
+                    requestId,
+                    false,
+                    transaction.Success
+                        ? "transaction-not-revealable"
+                        : transaction.FailureReason);
+                return;
+            }
+
+            if (displayCasePresentationOwner
+                    != DisplayCasePresentationOwner.None
+                || activeDisplayCase != null
+                || hasActiveDisplayCaseRequest
+                || displayCasePresentationGate.HasPendingRequest)
+            {
+                Gacha.GachaPresentationNativeBridge.PublishSetup(
+                    requestId,
+                    false,
+                    "display-case-already-presented");
+                return;
+            }
+
+            string activeModelId = ModelIdForScene(
+                SceneManager.GetActiveScene().path);
+            Transform productRoot = DisplayCaseProductRoot(activeModelId);
+            Camera camera = Camera.main;
+            if (productRoot == null || camera == null)
+            {
+                Gacha.GachaPresentationNativeBridge.PublishSetup(
+                    requestId,
+                    false,
+                    productRoot == null
+                        ? "active-product-missing"
+                        : "display-camera-missing");
+                return;
+            }
+
+            activeGachaRevealRequestId = requestId;
+            gachaRevealSetupAcknowledged = false;
+            gachaRevealStarted = false;
+            displayCasePresentationOwner =
+                DisplayCasePresentationOwner.GachaReveal;
+            StopAssistantDrive(true);
+            FidgetHapticRouter.StopAllContinuous(true);
+            progression?.EndSpinCredit();
+            ResetCombo();
+
+            displayCaseCamera = camera;
+            displayCaseCameraLease = PremiumDisplayCaseCameraLease.Acquire(camera);
+            if (displayCaseCameraLease == null)
+            {
+                DismissGachaRevealPresentation();
+                Gacha.GachaPresentationNativeBridge.PublishSetup(
+                    requestId,
+                    false,
+                    "display-camera-lease-failed");
+                return;
+            }
+
+            HideDisplayCaseProductRenderers(productRoot);
+            try
+            {
+                activeGachaRevealHost = new GameObject(
+                    "GachaRevealPresentationHost");
+                activeGachaRevealHost.transform.SetParent(transform, false);
+                activeGachaRevealDirector = activeGachaRevealHost.AddComponent<
+                    Gacha.GachaRevealDirector>();
+                activeGachaRevealDirector.phaseChanged +=
+                    HandleGachaRevealPhaseChanged;
+                activeGachaRevealDirector.revealCompleted +=
+                    HandleGachaRevealCompleted;
+
+                Gacha.GachaDrawOutcome outcome =
+                    transaction.Transaction.Receipt.Rows[0].Outcome;
+                if (!activeGachaRevealDirector.Prepare(outcome))
+                {
+                    throw new System.InvalidOperationException(
+                        activeGachaRevealDirector.FailureReason);
+                }
+
+                // Prepared means visible but frozen: the native sheet is
+                // still opaque, and no authored phase advances before Swift's
+                // transparent overlay has committed its first frame.
+                activeGachaRevealDirector.ActiveCase.gameObject.SetActive(true);
+                gachaRevealPresentationConfirmation = StartCoroutine(
+                    ConfirmGachaRevealPresentationAfterTwoFrames(requestId));
+            }
+            catch (System.Exception exception)
+            {
+                string failure = "reveal-setup-failed:" + exception.Message;
+                Debug.LogError("[FidgetingApp] " + failure);
+                DismissGachaRevealPresentation();
+                Gacha.GachaPresentationNativeBridge.PublishSetup(
+                    requestId,
+                    false,
+                    failure);
+            }
+        }
+
+        private IEnumerator ConfirmGachaRevealPresentationAfterTwoFrames(
+            string requestId)
+        {
+            // Camera authors run in LateUpdate. Two end-of-frame boundaries
+            // prove the shared lease is not merely correct for one transient
+            // frame before native reveals the transparent presentation.
+            yield return new WaitForEndOfFrame();
+            yield return new WaitForEndOfFrame();
+            gachaRevealPresentationConfirmation = null;
+
+            string failureReason = string.Empty;
+            bool hierarchyReady = activeGachaRevealDirector != null
+                && string.Equals(
+                    activeGachaRevealRequestId,
+                    requestId,
+                    System.StringComparison.Ordinal)
+                && activeGachaRevealDirector.ActiveCase != null
+                && activeGachaRevealDirector.ActiveCase.gameObject.activeInHierarchy
+                && activeGachaRevealDirector.ActivePrize != null
+                && activeGachaRevealDirector.ActivePrize.gameObject.activeInHierarchy
+                && activeGachaRevealDirector.ActivePrize.IsChildOf(
+                    activeGachaRevealDirector.ActiveCase.transform)
+                && displayCaseCamera != null
+                && displayCaseCameraLease != null;
+            if (!hierarchyReady)
+            {
+                failureReason = "reveal-postcondition-failed";
+            }
+            else if (!displayCaseCameraLease.IsPresentationStable(
+                         activeGachaRevealDirector.ActiveCase.transform,
+                         out failureReason))
+            {
+                // The lease supplies the exact reason: pose/FOV/projection,
+                // inactive camera, edge-on, or viewport clipping.
+            }
+
+            if (!string.IsNullOrEmpty(failureReason))
+            {
+                Debug.LogWarning(
+                    $"[FidgetingApp] Gacha reveal setup rejected for "
+                    + $"{requestId}: {failureReason}");
+                DismissGachaRevealPresentation();
+                Gacha.GachaPresentationNativeBridge.PublishSetup(
+                    requestId,
+                    false,
+                    failureReason);
+                yield break;
+            }
+
+            gachaRevealSetupAcknowledged = true;
+            Gacha.GachaPresentationNativeBridge.PublishSetup(requestId, true);
+        }
+
+        public void StartGachaRevealFromNativeUi(string requestId)
+        {
+            if (activeGachaRevealDirector == null
+                || !gachaRevealSetupAcknowledged
+                || !string.Equals(
+                    activeGachaRevealRequestId,
+                    requestId,
+                    System.StringComparison.Ordinal))
+            {
+                Gacha.GachaPresentationNativeBridge.PublishPhase(
+                    requestId,
+                    "idle",
+                    "reveal-not-prepared");
+                return;
+            }
+
+            if (gachaRevealStarted)
+            {
+                Gacha.GachaPresentationNativeBridge.PublishPhase(
+                    requestId,
+                    activeGachaRevealDirector.Phase);
+                return;
+            }
+
+            if (!activeGachaRevealDirector.StartReveal())
+            {
+                string failure = string.IsNullOrEmpty(
+                        activeGachaRevealDirector.FailureReason)
+                    ? "reveal-start-failed"
+                    : activeGachaRevealDirector.FailureReason;
+                Gacha.GachaPresentationNativeBridge.PublishPhase(
+                    requestId,
+                    "idle",
+                    failure);
+                return;
+            }
+
+            gachaRevealStarted = true;
+        }
+
+        private void HandleGachaRevealPhaseChanged(
+            Gacha.GachaRevealPhase phase)
+        {
+            if (string.IsNullOrEmpty(activeGachaRevealRequestId))
+            {
+                return;
+            }
+            Gacha.GachaPresentationNativeBridge.PublishPhase(
+                activeGachaRevealRequestId,
+                phase);
+        }
+
+        private void HandleGachaRevealCompleted()
+        {
+            string requestId = activeGachaRevealRequestId;
+            if (string.IsNullOrEmpty(requestId))
+            {
+                return;
+            }
+
+            Gacha.GachaTransactionResult result =
+                GachaInventory.MarkRevealAwaitingAcceptance(requestId);
+            PublishGachaState(result);
+            if (!result.Success)
+            {
+                Gacha.GachaPresentationNativeBridge.PublishPhase(
+                    requestId,
+                    "complete",
+                    result.FailureReason);
+            }
+        }
+
+        public void AcknowledgeGachaRevealFromNativeUi(string requestId)
+        {
+            Gacha.GachaTransactionResult result =
+                GachaInventory.AcknowledgePending(requestId);
+            if (result.Success)
+            {
+                if (string.Equals(
+                        activeGachaRevealRequestId,
+                        requestId,
+                        System.StringComparison.Ordinal))
+                {
+                    DismissGachaRevealPresentation();
+                }
+                PublishGachaState(result);
+                return;
+            }
+
+            PublishGachaState(result);
+            Gacha.GachaPresentationNativeBridge.PublishPhase(
+                requestId,
+                "complete",
+                result.FailureReason);
+        }
+
+        private void DismissGachaRevealPresentation(
+            string interruptionReason = "")
+        {
+            bool hasGachaPresentation = activeGachaRevealDirector != null
+                || activeGachaRevealHost != null
+                || gachaRevealPresentationConfirmation != null
+                || !string.IsNullOrEmpty(activeGachaRevealRequestId);
+            if (!hasGachaPresentation)
+            {
+                return;
+            }
+
+            string interruptedRequestId = activeGachaRevealRequestId;
+            if (!string.IsNullOrEmpty(interruptionReason)
+                && !string.IsNullOrEmpty(interruptedRequestId))
+            {
+                if (gachaRevealSetupAcknowledged)
+                {
+                    Gacha.GachaPresentationNativeBridge.PublishPhase(
+                        interruptedRequestId,
+                        "idle",
+                        interruptionReason);
+                }
+                else
+                {
+                    Gacha.GachaPresentationNativeBridge.PublishSetup(
+                        interruptedRequestId,
+                        false,
+                        interruptionReason);
+                }
+            }
+
+            if (gachaRevealPresentationConfirmation != null)
+            {
+                StopCoroutine(gachaRevealPresentationConfirmation);
+                gachaRevealPresentationConfirmation = null;
+            }
+            if (activeGachaRevealDirector != null)
+            {
+                activeGachaRevealDirector.phaseChanged -=
+                    HandleGachaRevealPhaseChanged;
+                activeGachaRevealDirector.revealCompleted -=
+                    HandleGachaRevealCompleted;
+                activeGachaRevealDirector.Dismiss();
+            }
+            if (activeGachaRevealHost != null)
+            {
+                Destroy(activeGachaRevealHost);
+            }
+
+            activeGachaRevealDirector = null;
+            activeGachaRevealHost = null;
+            activeGachaRevealRequestId = string.Empty;
+            gachaRevealSetupAcknowledged = false;
+            gachaRevealStarted = false;
+            RestoreDisplayCaseProductRenderers();
+            displayCaseCameraLease?.Restore();
+            displayCaseCameraLease = null;
+            displayCaseCamera = null;
+            displayCasePresentationOwner = DisplayCasePresentationOwner.None;
         }
 
         public void RedeemGachaShardsFromNativeUi(string prizeId)

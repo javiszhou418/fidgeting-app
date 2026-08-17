@@ -1,23 +1,56 @@
 import SwiftUI
 import UIKit
 
-// Shipping storefront presentation. Economy, ownership, pity and receipts stay
-// owned by GachaStoreModel/Unity; this file only replaces the native layout and
-// the single-result reveal presentation.
+// Shipping storefront presentation. Economy, ownership, transaction recovery,
+// and the 3D reveal timeline stay owned by Unity. SwiftUI only hosts controls and
+// a transparent accessibility/HUD surface above Unity's real presentation.
 public struct GachaStoreView: View {
     @Environment(\.dismiss) private var dismiss
     @ObservedObject private var model = GachaStoreModel.shared
     @State private var selectedTab = 0
     @State private var showDisclosure = false
-    @State private var showMultiResults = false
-    @State private var singleReveal: GachaReceiptRow?
-    @State private var drawRequestInFlight = false
 
     public init() {}
 
     private var activeSeries: GachaSeriesInfo? { model.series.first }
 
     public var body: some View {
+        ZStack(alignment: .bottom) {
+            // Dedicated one-pixel markers keep every child control's own AX
+            // identifier intact. Applying an identifier to this parent ZStack
+            // would cause SwiftUI to propagate it over the full subtree.
+            GachaAccessibilityStateMarkers(
+                model: model,
+                seriesId: activeSeries?.id ?? "")
+                .zIndex(30)
+
+            storefrontContent
+                .opacity(model.revealIsPresented ? 0 : 1)
+                .allowsHitTesting(!model.revealIsPresented)
+                .accessibilityHidden(model.revealIsPresented)
+
+            if model.revealIsPresented,
+               let transaction = model.pendingTransaction {
+                GachaThreeDRevealOverlay(
+                    model: model,
+                    transaction: transaction)
+                .transition(.opacity)
+                .zIndex(20)
+            }
+        }
+        .background(GachaTransparentPresentationBackground())
+        .preferredColorScheme(.dark)
+        .interactiveDismissDisabled(!model.activeRequestId.isEmpty)
+        .onAppear {
+            model.requestState()
+            model.requestRevealSetupIfNeeded()
+        }
+        .sheet(isPresented: $showDisclosure) {
+            probabilityDisclosure
+        }
+    }
+
+    private var storefrontContent: some View {
         ZStack(alignment: .bottom) {
             Color.black.ignoresSafeArea()
 
@@ -34,46 +67,11 @@ public struct GachaStoreView: View {
             }
 
             if selectedTab == 0, let series = activeSeries {
-                drawDock(series)
-            }
-
-            if let receipt = singleReveal {
-                GachaSingleDrawReveal(receipt: receipt) {
-                    model.pendingReceipt = []
-                    singleReveal = nil
+                VStack(spacing: 0) {
+                    transactionStatus
+                    drawDock(series)
                 }
-                .transition(.opacity)
-                .zIndex(20)
             }
-        }
-        .preferredColorScheme(.dark)
-        .interactiveDismissDisabled(
-            drawRequestInFlight || singleReveal != nil || showMultiResults)
-        .onAppear { model.requestState() }
-        .onChange(of: model.pendingReceipt) { rows in
-            guard !rows.isEmpty else { return }
-            drawRequestInFlight = false
-            if rows.count == 1 {
-                singleReveal = rows[0]
-            } else {
-                showMultiResults = true
-            }
-        }
-        .onChange(of: model.lastFailureReason) { reason in
-            if !reason.isEmpty {
-                drawRequestInFlight = false
-            }
-        }
-        .onDisappear {
-            guard !drawRequestInFlight else { return }
-            model.pendingReceipt = []
-            model.lastFailureReason = ""
-        }
-        .sheet(isPresented: $showDisclosure) {
-            probabilityDisclosure
-        }
-        .sheet(isPresented: $showMultiResults) {
-            multiResultSheet
         }
     }
 
@@ -85,7 +83,7 @@ public struct GachaStoreView: View {
             .font(.system(size: 14, weight: .bold))
             .foregroundColor(.white.opacity(0.88))
             .buttonStyle(.plain)
-            .disabled(drawRequestInFlight)
+            .disabled(!model.activeRequestId.isEmpty)
             .accessibilityIdentifier("gacha-return-home")
 
             Spacer()
@@ -108,22 +106,39 @@ public struct GachaStoreView: View {
                 Text("票券抽取 · 外观收藏 · 图纸兑换")
                     .font(.system(size: 11, weight: .medium))
                     .foregroundColor(.white.opacity(0.48))
+                Text(model.runtimeMode.title)
+                    .font(.system(size: 9, weight: .bold, design: .monospaced))
+                    .foregroundColor(
+                        model.runtimeMode == .internalUnlimited
+                            ? .green.opacity(0.82)
+                            : .white.opacity(0.38))
+                    .accessibilityIdentifier("gacha-runtime-mode")
             }
 
             Spacer(minLength: 8)
-            walletChip(symbol: "ticket.fill", value: model.tickets, title: "抽取券")
-            walletChip(symbol: "gearshape.2.fill", value: model.coins, title: "齿轮币")
+            walletChip(
+                symbol: "ticket.fill",
+                value: model.ticketBalanceText,
+                title: model.runtimeMode.title)
+            walletChip(
+                symbol: "gearshape.2.fill",
+                value: "\(model.coins)",
+                title: "齿轮币")
         }
         .padding(.horizontal, 18)
         .padding(.vertical, 12)
     }
 
-    private func walletChip(symbol: String, value: Int, title: String) -> some View {
+    private func walletChip(
+        symbol: String,
+        value: String,
+        title: String
+    ) -> some View {
         HStack(spacing: 6) {
             Image(systemName: symbol)
                 .font(.system(size: 12, weight: .semibold))
             VStack(alignment: .leading, spacing: 0) {
-                Text("\(value)")
+                Text(value)
                     .font(.system(size: 13, weight: .bold, design: .monospaced))
                 Text(title)
                     .font(.system(size: 8, weight: .medium))
@@ -434,16 +449,13 @@ public struct GachaStoreView: View {
     private func drawDock(_ series: GachaSeriesInfo) -> some View {
         HStack(spacing: 12) {
             Button {
-                guard !drawRequestInFlight else { return }
-                drawRequestInFlight = true
-                model.pendingReceipt = []
-                model.lastFailureReason = ""
+                guard model.canStartSingleDraw else { return }
                 model.draw(seriesId: series.id, count: 1, useCoins: false)
             } label: {
                 VStack(spacing: 3) {
                     Text("单抽")
                         .font(.system(size: 17, weight: .bold))
-                    Text("消耗 1 张抽取券")
+                    Text(model.drawCostText)
                         .font(.system(size: 10, weight: .medium))
                         .opacity(0.58)
                 }
@@ -453,8 +465,8 @@ public struct GachaStoreView: View {
                 .background(Color.white, in: RoundedRectangle(cornerRadius: 19))
             }
             .buttonStyle(.plain)
-            .disabled(model.tickets < 1 || drawRequestInFlight)
-            .opacity(model.tickets < 1 || drawRequestInFlight ? 0.36 : 1)
+            .disabled(!model.canStartSingleDraw)
+            .opacity(model.canStartSingleDraw ? 1 : 0.36)
             .accessibilityIdentifier("gacha-single-draw")
 
             VStack(spacing: 3) {
@@ -471,6 +483,41 @@ public struct GachaStoreView: View {
         .padding(.top, 13)
         .padding(.bottom, 12)
         .background(.ultraThinMaterial)
+    }
+
+    @ViewBuilder
+    private var transactionStatus: some View {
+        let failure = model.visibleFailureReason
+        if !failure.isEmpty || model.requestStatus != "idle" {
+            HStack(spacing: 10) {
+                VStack(alignment: .leading, spacing: 2) {
+                    if !failure.isEmpty {
+                        Text(failure)
+                            .font(.system(size: 11, weight: .semibold))
+                            .foregroundColor(.orange.opacity(0.92))
+                            .accessibilityIdentifier("gacha-error")
+                    }
+                    Text(model.requestStatus)
+                        .font(.system(size: 8, weight: .medium, design: .monospaced))
+                        .foregroundColor(.white.opacity(0.36))
+                        .lineLimit(1)
+                        .accessibilityIdentifier("gacha-request-status")
+                }
+                Spacer(minLength: 8)
+                if !model.activeRequestId.isEmpty {
+                    Button("查询原交易") {
+                        model.queryActiveTransaction()
+                    }
+                    .font(.system(size: 11, weight: .bold))
+                    .foregroundColor(.white.opacity(0.82))
+                    .buttonStyle(.plain)
+                    .accessibilityIdentifier("gacha-query-transaction")
+                }
+            }
+            .padding(.horizontal, 18)
+            .padding(.vertical, 8)
+            .background(Color.black.opacity(0.88))
+        }
     }
 
     private var probabilityDisclosure: some View {
@@ -545,309 +592,200 @@ public struct GachaStoreView: View {
         .background(Color.white.opacity(0.05), in: RoundedRectangle(cornerRadius: 16))
     }
 
-    private var multiResultSheet: some View {
-        ZStack {
-            Color.black.ignoresSafeArea()
-            VStack(spacing: 14) {
-                Text("揭晓结果")
-                    .font(.system(size: 23, weight: .black, design: .rounded))
-                    .foregroundColor(.white)
-                    .padding(.top, 20)
-                ScrollView {
-                    VStack(spacing: 9) {
-                        ForEach(model.pendingReceipt) { row in
-                            resultRow(row)
-                        }
-                    }
-                    .padding(.horizontal, 18)
-                }
-                Button("收入囊中") {
-                    model.pendingReceipt = []
-                    showMultiResults = false
-                }
-                .font(.system(size: 16, weight: .bold))
-                .foregroundColor(.black)
-                .frame(maxWidth: .infinity)
-                .frame(height: 56)
-                .background(Color.white, in: RoundedRectangle(cornerRadius: 18))
-                .padding(18)
-            }
-        }
-        .interactiveDismissDisabled(true)
-    }
-
-    private func resultRow(_ row: GachaReceiptRow) -> some View {
-        HStack(spacing: 10) {
-            Capsule().fill(row.rarity.shippingTint).frame(width: 3, height: 34)
-            VStack(alignment: .leading, spacing: 2) {
-                Text(row.name).font(.system(size: 14, weight: .bold))
-                Text(row.rarity.title)
-                    .font(.system(size: 10, weight: .medium))
-                    .foregroundColor(.white.opacity(0.44))
-            }
-            Spacer()
-            Text(row.isNew ? "NEW" : "+\(row.shardsGained)")
-                .font(.system(size: 11, weight: .bold, design: .monospaced))
-                .foregroundColor(.white.opacity(0.68))
-        }
-        .foregroundColor(.white)
-        .padding(13)
-        .background(Color.white.opacity(0.055), in: RoundedRectangle(cornerRadius: 16))
-    }
 }
 
-private enum GachaRevealPhase: Int {
-    case back
-    case front
-    case readable
-    case exploded
-    case prizeOnly
-    case sheen
-    case complete
-}
+private struct GachaThreeDRevealOverlay: View {
+    @ObservedObject var model: GachaStoreModel
+    let transaction: GachaPendingTransaction
 
-private struct GachaSingleDrawReveal: View {
-    let receipt: GachaReceiptRow
-    let completion: () -> Void
+    private var receipt: GachaReceiptRow? {
+        transaction.receipt.first
+    }
 
-    @Environment(\.accessibilityReduceMotion) private var reduceMotion
-    @State private var phase: GachaRevealPhase = .back
-    @State private var sheenOffset: CGFloat = -260
+    private var phaseCaption: String {
+        model.revealPhase?.caption ?? "正在装载真实 3D 收藏盒"
+    }
 
     var body: some View {
         ZStack {
-            Color.black.opacity(0.975).ignoresSafeArea()
+            Color.clear.ignoresSafeArea()
 
-            VStack(spacing: 24) {
-                Text("单抽揭晓")
-                    .font(.system(size: 12, weight: .bold))
-                    .foregroundColor(.white.opacity(0.55))
+            Text("3d-reveal-root")
+                .foregroundColor(.clear)
+                .frame(width: 1, height: 1)
+                .clipped()
+                .accessibilityLabel("真实 3D 揭晓场景")
+                .accessibilityIdentifier("gacha-3d-reveal-root")
 
-                GachaCaseRevealVisual(
-                    phase: phase,
-                    rarity: receipt.rarity,
-                    title: receipt.name,
-                    sheenOffset: sheenOffset)
-                    .frame(width: 290, height: 390)
+            VStack(spacing: 0) {
+                Text("真实 3D 揭晓")
+                    .font(.system(size: 10, weight: .bold, design: .monospaced))
+                    .foregroundColor(.white.opacity(0.62))
+                    .padding(.horizontal, 11)
+                    .frame(height: 28)
+                    .background(Color.black.opacity(0.52), in: Capsule())
+                    .padding(.top, 18)
 
-                VStack(spacing: 7) {
-                    Text(receipt.name)
-                        .font(.system(size: 24, weight: .black, design: .rounded))
-                        .foregroundColor(.white)
-                    HStack(spacing: 7) {
-                        Capsule()
-                            .fill(receipt.rarity.shippingTint)
-                            .frame(width: 24, height: 3)
-                        Text(receipt.rarity.title)
-                        Text(receipt.isNew ? "NEW" : "+\(receipt.shardsGained) 合金屑")
+                Spacer()
+
+                VStack(spacing: 8) {
+                    if let receipt,
+                       model.revealPhase == .readable
+                            || model.revealPhase == .exploded
+                            || model.revealPhase == .prizeOnly
+                            || model.revealPhase == .sheen
+                            || model.revealPhase == .complete {
+                        Text(receipt.name)
+                            .font(.system(size: 22, weight: .black, design: .rounded))
+                            .foregroundColor(.white)
+                        Text("\(receipt.rarity.title) · \(receipt.isNew ? "NEW" : "+\(receipt.shardsGained) 合金屑")")
+                            .font(.system(size: 11, weight: .semibold))
+                            .foregroundColor(.white.opacity(0.66))
                     }
-                    .font(.system(size: 11, weight: .semibold))
-                    .foregroundColor(.white.opacity(0.52))
-                }
-                .opacity(phase.rawValue >= GachaRevealPhase.readable.rawValue ? 1 : 0)
 
-                if phase == .complete {
-                    Button("收下") { completion() }
+                    Text(phaseCaption)
+                        .font(.system(size: 11, weight: .bold))
+                        .foregroundColor(.white.opacity(0.72))
+                        .accessibilityIdentifier("gacha-reveal-phase")
+                        .accessibilityValue(model.revealPhase?.rawValue ?? "preparing")
+
+                    if !model.visibleFailureReason.isEmpty {
+                        Text(model.visibleFailureReason)
+                            .font(.system(size: 11, weight: .semibold))
+                            .foregroundColor(.orange)
+                            .multilineTextAlignment(.center)
+                            .accessibilityIdentifier("gacha-error")
+
+                        Button("查询原交易") {
+                            model.queryActiveTransaction()
+                        }
+                        .font(.system(size: 12, weight: .bold))
+                        .foregroundColor(.white)
+                        .accessibilityIdentifier("gacha-query-transaction")
+                    }
+
+                    if model.revealPhase == .complete,
+                       transaction.phase == .awaitingAcceptance {
+                        Button("收下") {
+                            model.acknowledgeReveal()
+                        }
                         .font(.system(size: 16, weight: .bold))
                         .foregroundColor(.black)
                         .frame(width: 214, height: 54)
                         .background(Color.white, in: RoundedRectangle(cornerRadius: 17))
-                        .transition(.opacity.combined(with: .scale(scale: 0.96)))
+                        .disabled(model.transactionPhase == .acknowledging)
+                        .opacity(model.transactionPhase == .acknowledging ? 0.52 : 1)
                         .accessibilityIdentifier("gacha-reveal-accept")
-                } else {
-                    Text(phaseCaption)
-                        .font(.system(size: 11, weight: .medium))
-                        .foregroundColor(.white.opacity(0.34))
-                        .frame(height: 54)
+                    }
                 }
+                .padding(.horizontal, 24)
+                .padding(.vertical, 18)
+                .background(.ultraThinMaterial, in: RoundedRectangle(cornerRadius: 24))
+                .padding(.horizontal, 18)
+                .padding(.bottom, 18)
             }
-            .padding(.vertical, 32)
         }
-        .task { await play() }
-    }
-
-    private var phaseCaption: String {
-        switch phase {
-        case .back: return "收藏盒入场"
-        case .front: return "收藏盒翻正"
-        case .readable: return "奖品确认"
-        case .exploded: return "盒体散开"
-        case .prizeOnly: return "奖品保留"
-        case .sheen: return "完成过光"
-        case .complete: return ""
+        .accessibilityElement(children: .contain)
+        .onAppear {
+            model.startRevealIfNeeded(requestId: transaction.requestId)
         }
-    }
-
-    @MainActor
-    private func setPhase(_ next: GachaRevealPhase, duration: Double) async {
-        withAnimation(.easeInOut(duration: duration)) {
-            phase = next
-        }
-    }
-
-    private func pause(_ nanoseconds: UInt64) async -> Bool {
-        do {
-            try await Task.sleep(nanoseconds: nanoseconds)
-            return !Task.isCancelled
-        } catch {
-            return false
-        }
-    }
-
-    @MainActor
-    private func play() async {
-        if reduceMotion {
-            phase = .complete
-            return
-        }
-        guard await pause(650_000_000) else { return }
-        await setPhase(.front, duration: 0.72)
-        guard await pause(800_000_000) else { return }
-        await setPhase(.readable, duration: 0.32)
-        guard await pause(760_000_000) else { return }
-        await setPhase(.exploded, duration: 0.78)
-        guard await pause(1_000_000_000) else { return }
-        await setPhase(.prizeOnly, duration: 0.38)
-        guard await pause(480_000_000) else { return }
-        await setPhase(.sheen, duration: 0.22)
-        sheenOffset = -260
-        withAnimation(.easeInOut(duration: 0.92)) {
-            sheenOffset = 260
-        }
-        guard await pause(980_000_000) else { return }
-        await setPhase(.complete, duration: 0.28)
     }
 }
 
-private struct GachaCaseRevealVisual: View {
-    let phase: GachaRevealPhase
-    let rarity: GachaRarityTier
-    let title: String
-    let sheenOffset: CGFloat
+private struct GachaAccessibilityStateMarkers: View {
+    @ObservedObject var model: GachaStoreModel
+    let seriesId: String
 
-    private var isExploded: Bool {
-        phase == .exploded
+    private var requestId: String {
+        model.pendingTransaction?.requestId ?? model.activeRequestId
     }
 
-    private var shellVisible: Bool {
-        phase.rawValue < GachaRevealPhase.prizeOnly.rawValue
+    private var prizeId: String {
+        model.pendingTransaction?.receipt.first?.prizeId ?? ""
+    }
+
+    private var drawCount: Int {
+        model.totalDraws[seriesId] ?? 0
+    }
+
+    private var revealPhaseHistory: String {
+        model.revealPhaseHistory
+            .map(\.rawValue)
+            .joined(separator: "|")
     }
 
     var body: some View {
-        ZStack {
-            ForEach(0..<3, id: \.self) { layer in
-                RoundedRectangle(cornerRadius: 30 - CGFloat(layer * 3))
-                    .stroke(
-                        Color.white.opacity(0.20 - Double(layer) * 0.035),
-                        lineWidth: layer == 0 ? 5 : 2)
-                    .frame(
-                        width: 218 - CGFloat(layer * 18),
-                        height: 302 - CGFloat(layer * 22))
-                    .offset(explodedOffset(layer))
-                    .opacity(shellVisible ? 1 : 0)
-            }
-
-            if shellVisible {
-                cornerPins
-                    .offset(explodedOffset(0))
-            }
-
-            rewardCard
-                .scaleEffect(
-                    phase.rawValue >= GachaRevealPhase.prizeOnly.rawValue
-                        ? 1.16
-                        : 1)
-                .opacity(
-                    phase.rawValue >= GachaRevealPhase.readable.rawValue
-                        ? 1
-                        : 0.12)
+        VStack(spacing: 0) {
+            marker(
+                label: "抽卡商店根节点",
+                identifier: "gacha-store-root",
+                value: "ready")
+            marker(
+                label: "抽卡余额",
+                identifier: "gacha-ticket-balance",
+                value: model.ticketBalanceText)
+            marker(
+                label: "当前抽取请求",
+                identifier: "gacha-active-request-id",
+                value: requestId)
+            marker(
+                label: "待确认奖品",
+                identifier: "gacha-pending-prize-id",
+                value: prizeId)
+            marker(
+                label: "揭晓阶段历史",
+                identifier: "gacha-reveal-phase-history",
+                value: revealPhaseHistory)
+            marker(
+                label: "已收藏数量",
+                identifier: "gacha-owned-count",
+                value: String(model.owned.count))
+            marker(
+                label: "系列累计抽数",
+                identifier: "gacha-total-draws",
+                value: String(drawCount))
         }
-        .rotation3DEffect(
-            .degrees(phase == .back ? 180 : 0),
-            axis: (x: 0, y: 1, z: 0),
-            perspective: 0.62)
+        .frame(width: 1, height: 1)
+        .clipped()
     }
 
-    private var rewardCard: some View {
-        ZStack {
-            RoundedRectangle(cornerRadius: 26, style: .continuous)
-                .fill(Color(white: 0.075))
+    private func marker(
+        label: String,
+        identifier: String,
+        value: String
+    ) -> some View {
+        Text(label)
+            .foregroundColor(.clear)
+            .frame(width: 1, height: 1)
+            .accessibilityIdentifier(identifier)
+            .accessibilityValue(value)
+    }
+}
 
-            VStack(spacing: 14) {
-                Capsule()
-                    .fill(rarity.shippingTint)
-                    .frame(width: 34, height: 4)
-
-                ZStack {
-                    Circle()
-                        .fill(Color.white.opacity(0.055))
-                        .frame(width: 78, height: 78)
-                    RoundedRectangle(cornerRadius: 16, style: .continuous)
-                        .stroke(Color.white.opacity(0.18), lineWidth: 1.2)
-                        .frame(width: 48, height: 48)
-                        .rotationEffect(.degrees(45))
-                    Circle()
-                        .fill(Color.white.opacity(0.82))
-                        .frame(width: 10, height: 10)
-                }
-
-                Text(title)
-                    .font(.system(size: 16, weight: .bold, design: .rounded))
-                    .foregroundColor(.white.opacity(0.92))
-                    .lineLimit(2)
-                    .multilineTextAlignment(.center)
-                    .frame(width: 142)
-
-                Text("COLLECTED")
-                    .font(.system(size: 9, weight: .bold, design: .monospaced))
-                    .tracking(1.4)
-                    .foregroundColor(.white.opacity(0.30))
-            }
-
-            if phase == .sheen || phase == .complete {
-                LinearGradient(
-                    colors: [.clear, .white.opacity(0.34), .clear],
-                    startPoint: .top,
-                    endPoint: .bottom)
-                    .frame(width: 36, height: 250)
-                    .rotationEffect(.degrees(18))
-                    .offset(x: sheenOffset)
-            }
-        }
-        .frame(width: 166, height: 224)
-        .clipShape(RoundedRectangle(cornerRadius: 26, style: .continuous))
-        .overlay {
-            RoundedRectangle(cornerRadius: 26, style: .continuous)
-                .stroke(Color.white.opacity(0.12), lineWidth: 0.8)
-        }
-        .shadow(color: .black.opacity(0.46), radius: 24, y: 14)
+private struct GachaTransparentPresentationBackground: UIViewRepresentable {
+    func makeUIView(context: Context) -> UIView {
+        let view = GachaTransparentPresentationView()
+        view.isUserInteractionEnabled = false
+        return view
     }
 
-    private var cornerPins: some View {
-        ZStack {
-            ForEach(0..<4, id: \.self) { index in
-                let points = [
-                    CGPoint(x: -98, y: -140),
-                    CGPoint(x: 98, y: -140),
-                    CGPoint(x: -98, y: 140),
-                    CGPoint(x: 98, y: 140)
-                ]
-                let point = points[index]
-                Circle()
-                    .fill(Color(white: 0.72))
-                    .frame(width: 13, height: 13)
-                    .overlay { Circle().stroke(Color.white.opacity(0.60), lineWidth: 1) }
-                    .offset(x: point.x, y: point.y)
-            }
-        }
+    func updateUIView(_ uiView: UIView, context: Context) {
+        (uiView as? GachaTransparentPresentationView)?.clearPresentationBackgrounds()
+    }
+}
+
+private final class GachaTransparentPresentationView: UIView {
+    override func didMoveToWindow() {
+        super.didMoveToWindow()
+        clearPresentationBackgrounds()
     }
 
-    private func explodedOffset(_ layer: Int) -> CGSize {
-        guard isExploded else { return .zero }
-        switch layer {
-        case 0: return CGSize(width: -44, height: -18)
-        case 1: return CGSize(width: 38, height: 18)
-        default: return CGSize(width: 0, height: 54)
+    func clearPresentationBackgrounds() {
+        var ancestor = superview
+        while let view = ancestor, !(view is UIWindow) {
+            view.backgroundColor = .clear
+            view.isOpaque = false
+            ancestor = view.superview
         }
     }
 }

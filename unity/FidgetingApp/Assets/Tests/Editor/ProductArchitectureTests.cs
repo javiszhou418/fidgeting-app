@@ -197,7 +197,8 @@ namespace FidgetingApp.Tests.Editor
                 "iOSSdkVersion.SimulatorSDK,\n" +
                 "                RelativeSimulatorBuildPath,\n" +
                 "                configureSigning: false,\n" +
-                "                development: false);",
+                "                development: false,\n" +
+                "                internalGacha: false);",
                 buildPipeline,
                 "Visual approval previews must not include the Unity Development Console.");
             StringAssert.Contains(
@@ -210,7 +211,48 @@ namespace FidgetingApp.Tests.Editor
                 "mobilePipeline.msaaSampleCount = originalPipelineMsaa;",
                 buildPipeline,
                 "Simulator preview export must restore the iPhone 2x MSAA source of truth.");
-            StringAssert.Contains("PlayerSettings.iOS.buildNumber = \"41\";", buildPipeline);
+            StringAssert.Contains("PlayerSettings.iOS.buildNumber = \"42\";", buildPipeline);
+            StringAssert.Contains(
+                "FIDGET_GACHA_INTERNAL_UNLIMITED",
+                buildPipeline);
+            StringAssert.Contains(
+                "public static void BuildIosInternalGachaProject()",
+                buildPipeline);
+            StringAssert.Contains(
+                "public static void BuildIosInternalGachaSimulatorProject()",
+                buildPipeline);
+            StringAssert.Contains(
+                "RelativeInternalGachaBuildPath,\n" +
+                "                configureSigning: true,\n" +
+                "                // Internal-unlimited uses the shipping bundle",
+                buildPipeline);
+            StringAssert.Contains(
+                "                development: true,\n" +
+                "                internalGacha: true);",
+                buildPipeline,
+                "The unlimited device target must be a non-distributable Development build.");
+            StringAssert.Contains(
+                "internalGacha: true);",
+                buildPipeline);
+            StringAssert.Contains(
+                "extraScriptingDefines = internalGacha",
+                buildPipeline);
+            StringAssert.Contains(": Array.Empty<string>()", buildPipeline);
+            StringAssert.Contains("public string gachaMode;", buildPipeline);
+            StringAssert.Contains(
+                "gachaMode = internalGacha ? GachaMode : \"production\"",
+                buildPipeline);
+            StringAssert.Contains(
+                "EnsureGachaBuildIsolation(internalGacha, development, sdkVersion);",
+                buildPipeline);
+            StringAssert.Contains(
+                "if (internalGacha\n" +
+                "                && sdkVersion == iOSSdkVersion.DeviceSDK\n" +
+                "                && !development)",
+                buildPipeline);
+            StringAssert.Contains(
+                "Internal unlimited gacha must never be a persistent iOS",
+                buildPipeline);
         }
 
         [Test]

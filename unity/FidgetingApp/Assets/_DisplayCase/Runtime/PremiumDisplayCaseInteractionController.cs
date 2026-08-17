@@ -139,8 +139,23 @@ namespace FidgetingApp.DisplayCase
 
         public void SetExplodedProgress(float normalizedProgress)
         {
+            SetExplodedProgress(normalizedProgress, 1f);
+        }
+
+        /// <summary>
+        /// Applies the authored exploded layout at a presentation-specific
+        /// amplitude. Existing display-case callers retain the exact authored
+        /// offsets through the one-argument overload; gacha uses a compact
+        /// amplitude so all eight shared-case reveals remain in frame.
+        /// </summary>
+        public void SetExplodedProgress(
+            float normalizedProgress,
+            float offsetScale)
+        {
             animationPlaying = false;
-            ApplyExplodedProgress(normalizedProgress);
+            ApplyExplodedProgress(
+                normalizedProgress,
+                Mathf.Clamp01(offsetScale));
         }
 
         public void PlayAssembly()
@@ -222,7 +237,9 @@ namespace FidgetingApp.DisplayCase
             interactionRoot.localScale = interactionBaseScale * zoom;
         }
 
-        private void ApplyExplodedProgress(float normalizedProgress)
+        private void ApplyExplodedProgress(
+            float normalizedProgress,
+            float offsetScale = 1f)
         {
             CaptureAuthoring();
             explodedProgress = Mathf.Clamp01(normalizedProgress);
@@ -241,7 +258,7 @@ namespace FidgetingApp.DisplayCase
                         index,
                         count,
                         explodedProgress,
-                        explodedOffsets[index]);
+                        explodedOffsets[index] * offsetScale);
                 layer.localPosition = assembledPositions[index] + sample.Offset;
             }
 
@@ -253,7 +270,7 @@ namespace FidgetingApp.DisplayCase
                         index,
                         count,
                         explodedProgress,
-                        explodedOffsets[index]);
+                        explodedOffsets[index] * offsetScale);
                 contentFollower.localPosition =
                     contentFollowerAssembledPosition + sample.Offset;
             }

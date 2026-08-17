@@ -1,127 +1,45 @@
-# Fidget Spinner 指尖玩具产品骨架
+# Fidget Spinner 产品计划（兼容入口）
 
-## 产品目标
+> 本文件保留给旧任务、脚本和专项规范作为稳定入口，不再维护第二套产品设计正文。
 
-Fidget Spinner 是一个持续扩充的数字指尖玩具收藏与体感交互 App。新增 3D 模型只增加到“我的指尖玩具”，不创建新的 Unity 工程、Bundle ID 或手机 App。
+## 权威文档
 
-产品手感目标：通过可信金属视觉、输入预压、脱档、跨档、吸附和质量沉降的同步反馈，让移动端无限接近实体高级指尖玩具令人反复把玩的手感。
+- 产品定义、设计偏好、当前视觉／交互／模型／成长／收藏规格、批准证据与否决历史：
+  [FidgetingAppProductDesignBible.md](unity/FidgetingApp/Docs/FidgetingAppProductDesignBible.md)
+- 交互、机械、Core Motion 与语义 Haptic 目标架构：
+  [FidgetingInteractionHapticsSystem.md](unity/FidgetingApp/Docs/FidgetingInteractionHapticsSystem.md)
+- 产品手感语言与调参范围：
+  [FidgetingProductFeelGuideline.md](unity/FidgetingApp/Docs/FidgetingProductFeelGuideline.md)；
+  [InteractionTuningParameters.md](unity/FidgetingApp/Docs/InteractionTuningParameters.md)
+- 原生 UI 与媒体规则：
+  [LiquidGlassDesignGuideline.md](unity/FidgetingApp/Docs/LiquidGlassDesignGuideline.md)
+- Badge 与 Fan Card 专项合同：
+  [BadgeSystemSpecification.md](unity/FidgetingApp/Docs/BadgeSystemSpecification.md)；
+  [FanCardModelingGuardrails.md](unity/FidgetingApp/Docs/FanCardModelingGuardrails.md)
+- 实际 runtime、场景、测试、构建、安装和真机状态：
+  [IMPLEMENTATION_STATUS.md](unity/FidgetingApp/Docs/IMPLEMENTATION_STATUS.md)
 
-唯一发布身份：
+## 新方案评审入口
 
-- Unity 主工程：`unity/FidgetingApp`
+所有新 feature、重设计和视觉候选在排期前，先通过设计圣经的
+[“设计偏好、产品定义与拒绝准则”](unity/FidgetingApp/Docs/FidgetingAppProductDesignBible.md#2-设计偏好产品定义与拒绝准则)：
+
+1. 说明它如何加强“真实可感的数字玩具”核心，而不是只增加功能或装饰。
+2. 对照可接受特征和明确拒绝的反模式；冲突项先停止，不直接进入实现。
+3. 标明结论来自锁定偏好还是推断；推断不得冒充用户批准。
+4. 命中视觉／手感／经济灰区时，把 shipping 预览、产品决定或 iPhone 验收列为独立门禁。
+5. 涉及触摸、力度、陀螺仪或加速度时，必须写明“真实输入 → 可解释物理参数／状态 → 语义事件 → Haptic／音效／视觉”的完整映射和调校边界；原始传感器值不得直触发反馈。
+
+## 产品身份速查
+
+- 唯一 Unity 产品：`unity/FidgetingApp`
 - iOS 产品名：`Fidget Spinner`
 - Bundle ID：`com.jiaweizhou.fidgetspinner.codex`
+- 当前目录：`blue-classic`、`metal-three-blade`、`gold-four-wing`、`graphite-two-lobe`、`magnetic-slide-tile`、`magnetic-fan-card`
 
-`unity/ThreeBladeEDC` 只视为历史模型来源，不再作为可发布 App。
+## 维护规则
 
-## 信息架构
-
-底部导航只有两个目的地：
-
-1. **模型**：显示当前指尖玩具；详情页可返回“我的指尖玩具”切换模型。
-2. **设置**：实时调节并保存触感、陀螺仪、旋转和方向动画参数。
-
-“复位”是当前陀螺的操作，放在详情页右上角，不占用底部导航。
-
-## 当前模型目录
-
-| 模型 ID | 显示名称 | Unity 场景 |
-| --- | --- | --- |
-| `blue-classic` | 经典蓝色 | `Assets/Scenes/FidgetSpinnerDemo.unity` |
-| `metal-three-blade` | 三叶金属 | `Assets/_Fidgeting/Scenes/ThreeBladeEDC.unity` |
-| `gold-four-wing` | 镜钢四翼 | `Assets/_ImportedSpinner/Scenes/ImportedSpinner.unity` |
-| `graphite-two-lobe` | 石墨双叶 | `Assets/_TwoLobeBar/Scenes/TwoLobeBar.unity` |
-| `magnetic-slide-tile` | 磁吸推牌 | `Assets/_EDC/Scenes/MeshyEDC.unity` |
-| `magnetic-fan-card` | 磁吸扇牌 | `Assets/_FanCard/Scenes/MagneticFanCard.unity` |
-
-## 交互基线
-
-- 拖动响应：单一 `0...1` 产品参数成组派生最大角速度、满速所需手速、加速跟随和减速跟随；禁止把这些派生值再次做成互相覆盖的滑杆
-- 松手自动翻转：默认关闭；实验开关打开后为 `360° / 400 ms / ease-out / 10% overshoot`
-- 反向输入停止：`300 ms / ease-out`
-- 触控命中：模型碰撞体优先；屏幕投影兜底旋转热区半径固定为短边 `36%`，只比详情页约 `32%` 的可见模型半径多 `4%` 容错，并为每侧保留约 `14%` 的空白 Orbit 区；中心死区与单帧角度限幅保持不变
-- 物理控制：Rigidbody 轴向约束为唯一旋转权威；翻转期间临时切换为运动学动画
-- 自由轮模式：四款模型共享归一化惯性阻力及 half-life 曲线，默认阻力 `0.58`（约 `1.18 s` half-life），无默认转速或隐藏电机
-- 四款旋转模型共享低噪程序化切风声：只读真实绝对角速度，按双叶/三叶/四翼的实际叶片数计算 blade-pass 节奏；主体使用低通着色空气流，严格限制中频噪声和高频 hiss。每次 blade-pass 分为占周期 `0.14` 的立方衰减硬碰撞首段，以及 `3 ms` 攻击、最长 `65 ms` 且不超过周期 `0.72` 的材质鸣响主段/尾段；三叶模型在 120 / 400 RPM 的 Click 约 24 / 7 ms，材质鸣响约 65 / 36 ms。正式 App 音色固定为用户当前选择的“明亮合金 100% / 整体音高 +9 半音”：主层正弦，次层与上层使用含安全三次泛音的三角金属波，三层混合 `0.105 / 0.215 / 0.160`，碰撞亮边 `0.34`；四个 shipping scene 与重建器的 `alloyResonance` 默认和序列化值均为 `1.0`。`+9` 半音以固定倍率 `2^(9/12) ≈ 1.6818` 叠加在真实转速跟调之后；声腔按小于手掌、类似厚重 Zippo 的精密合金件标定，App 的实际三层范围为 `1125...1810 Hz` 主模态、`2588...4161 Hz` 次模态与 `4669...7508 Hz` 上层模态，250 RPM 验收点为 `1588 / 3651 / 6588 Hz`。三层模态只进入主段，碰撞纹理只进入短首段，二者由同一个 `alloyResonance` 共同控制，不能拆出第二个强度参数。高层三角波在三次泛音接近 Nyquist 时自动退化为纯基频正弦，避免折叠失真。金属节奏严格为 `RPM × 叶片数 ÷ 60`，三层模态音高同时按真实 `20...400 RPM` 的 `normalizedSpeed^0.78` 跟随转速；因此加速不只是 Click 变密，材质鸣响也会明显升调，而明亮合金的固定频率比例、波形和 +9 半音偏移不会漂移。低频只提供重量，主段会在 65 ms 或下一叶片到来前归零，不允许连续 oscillator 形成嗡声。听感曲线按真实使用的 `20...400 RPM` 校准，`60 RPM` 已清楚起声、约 `286 RPM` 达运行时满幅，静止仍严格为零；网页当前的 250 RPM 只是音色验收参考，不是 App 的固定或初始转速。音频在 mixer callback 内即时生成，参数响应 `4 ms`，项目 DSP buffer 为 `256 samples`；画面、叶片节奏和金属音高读取同一真实速度，物理减速直接决定降频与消散，网页 `2.30 s` 停转模拟不作为独立 App 音尾。默认总音量为 `0.50`，不写 Rigidbody、不触发 Haptic
-- 磁吸棘轮模式：低于脱档阈值保持当前档位；松手降至捕获速度后回吸最近档位
-- Haptic 由物理模型产生的 Breakaway、DetentCrossed、Captured、Collision、Release 等语义事件驱动，不由原始输入直接触发
-- 棘轮跨档由一个 `DetentFeelConfig { detentsPerRev, intensity, sharpness }` 同时驱动物理档位和 Haptic；默认 Camera Dial 为 `12 / 1.0 / 0.72`
-- 平滑模式只播放上述切风声；棘轮模式在同一风声上叠加真实跨档 click。四款旋转模型的 click 音频均独立于 Core Haptics：物理每跨一个真实档位，同帧触发一次原子 `PlayOneShot`；音频不使用 timeline、sequence、scheduler，也不继承 Haptic 的 `30/s` continuous 切换
-- 棘轮音频库只包含同一枚 48–52 ms 单击的 5 个轻微 EQ/微音高变体；每款旋转模型使用 12 声部自然叠音，高速每击变轻，减速后点击密度随真实惯性自然变疏
-- 跨档率超过 `30/s` 后改由单个循环 `CHHapticAdvancedPatternPlayer` 输出速度映射纹理；阈值以下保持静默—敲击对比
-- `userAcceleration ≥ 0.3g` 触发独立的低锐度惯性重量触点，最大 `8/s`，不抢占跨档触点
-- 背景：纯黑；顶部栏、内容组件、底部栏使用 SwiftUI Liquid Glass（旧系统材质回退）
-- UI 遵守 iPhone safe area，模型仍在整屏 Unity 视图中渲染
-- 磁吸推牌固定使用六个稳定档位、13.6 mm 中心距和 68 mm 总行程；默认停在第 3 个真实磁力井，顶板从零视觉偏移可立即向左 27.2 mm、向右 40.8 mm 双向滑动。手指驱动 55 g 质量目标，100 N/m 手指弹簧、5.0 Ns/m 阻尼、0.44 N 脱档与 0.42 N 磁峰值形成可控势垒；捕获使用 150 N/m、5.8 Ns/m、4 mm 半径与 45 mm/s 入井上限，完成时速度严格归零
-- 推牌触觉不得由触摸时长驱动：手指停住即静默，不存在推牌 sustained/looping player。30 ms 半衰期速度滤波以 `≤25 mm/s 持续 80 ms` 进入慢搓、`>40 mm/s 持续 40 ms` 退出；慢搓进入势垒 55%–95% 后，沿跨档方向的速度上限从 22 降至 5.5 mm/s，形成越接近吸附边缘越慢的可控感
-- 同一次接近只在势垒负载 `0.72 / 0.84 / 0.94` 三个空间里程碑各发一次 12 ms 触点，Intensity `0.14→0.28`、Sharpness `0.18→0.34`，降到 0.55 以下才重置；真实 `DetentCrossed` 发 `0 ms: 0.82/0.76` 与 `30 ms: 0.38/0.48` 两个有限脉冲，总持续不超过 60 ms。主脉冲达到默认 Camera Dial 陀螺 82% 的峰值并在 UIKit fallback 进入 Heavy 档，但不使用 sustained/loop。跨档同一语义事件同步触发模型 `0.18 mm` 横向、`0.05 mm` 高度、`0.08°` 的 24 Hz 衰减轻颤，24 ms 半衰期、80 ms 硬上限；Breakaway 与 DetentCaptured 不补第二次触觉
-- 磁吸推牌每个经过授权的真实 `DetentCrossed` 播放一次用户选定的 766 Hz 合金 click：48 kHz mono、0.93 s 容器，主要击发集中在前约 0.14 s；`Breakaway` 与 `DetentCaptured` 不播放第二声，6 个声部允许快速跨档时自然叠加。Library、AUTO、Reset 和程序化设姿必须保持静默
-- 磁吸推牌不显示陀螺专属平滑/棘轮模式栏，旋转 Detent preset 不得覆盖其 `LinearMagneticDetentProfile`；Library、AUTO、Reset 和程序化设姿保持静默
-- 磁吸推牌详情页固定使用无横向透视压缩的正面 + 30° 顶视构图，长轴保持屏幕水平并占可用宽度约 72%；Library 使用独立 `1.59×` 距离补偿而不随详情放大。滑盖隐形触摸体为 `94 × 32 × 58 mm`，大于 `80 × 16.86 × 47.18 mm` 可见主体；它只承担 raycast 命中，不进入质量、磁力或物理档位计算
-- 磁吸扇牌为三层竖向扑克牌结构，单片 `63.5 × 88.9 × 2.5 mm`；三层共享当前正面构图右下圆角圆心处的固定轴，底片不动、中片最大 `45°`、顶片最大 `90°`，因此相邻层最大相对角为 `45°`、最外层总夹角为 `90°`
-- 磁吸扇牌固定为四个全局稳定档位 `q = 0 / 1⁄3 / 2⁄3 / 1`；中片角度为 `45°q`、顶片角度为 `90°q`。顶片与中片各有一条位于背面、向左下内缩的 45° 同心弧轨和 3 枚磁体，底片不得生成滑轨；中片与底片各有一枚随动轴承球。完整滑轨外轮廓（包含 `6.2 mm` 下沉槽宽度和圆头）距圆角牌身外轮廓不得小于 `6.0 mm`；坐标、轨宽、装配层和门槛统一读取 `ArtSource/FanCard/fan_card_guardrails.json`，不得凭预览图重复估算。三张暖银面在轴孔处必须保持完整牌角；下沉哑光轴芯之上只允许一枚 Blender 输出的低矮抛光轴承帽，禁止透出环境亮斑、同心悬浮圆环或额外垫圈
-- 磁吸扇牌只读取独立 `FanCardDetentProfile`。慢推使用脱档 `0.050`、手指弹簧/阻尼 `96 / 6.0`、磁峰/轨道摩擦 `6.4 / 0.38`，让牌片跟随手指幅度逐档运动；快速模式使用脱档 `0.024`、手指弹簧/阻尼 `220 / 5.2`、磁峰倍率/摩擦 `0.50 / 0.16` 与最高速度 `5.0 s⁻¹`。它不得读取或写入四款旋转机制和第五款线性推牌的任何调节状态
-- 磁吸扇牌每次进入详情页只在两套完整正面状态中等概率选择：三层 `AAA`，或按底片/中片/顶片排列的 `Q/K/A`。A/Q/K 使用同一 Oxanium 700 Blender relief 资产族；每张牌左上与右下两个角标共享同一 rank mesh，右下整组旋转 180°。牌面随机只属于无碰撞展示层，不得重置进度、移动牌片、改变四档物理、触发音频或 Haptic
-- 磁吸扇牌的手指目标沿当前三片排面的屏幕质心切线连续积分，不要求用户围绕右下机械轴孔画圆；机械旋转仍严格围绕真实轴孔。物理权重同时读取单帧速度、累计有符号滑动距离、可用 pressure 增量和最近有效手势频率：慢推保留完整磁阻并逐档跟随手指幅度，快速或强力长划才授权端点收尾，反向快速滑动可清脆收回，禁止把任意拖动降级为均速开/关动画。直接拖动和已授权的快速收尾期间，Core Motion 与场景视差锁定当前姿态；结束后重新建立设备参考，不允许陀螺仪移动手指下的机械轴或视觉质心
-- 磁吸扇牌每个用户授权的真实 `DetentCrossed` 播放一次低约 `2.6` 半音的厚合金 click，并使用独立的速度映射 Haptic：Intensity `0.92→1.00`、Sharpness `0.76→0.90`；5 个原子音频变体由 8 个 2D 声部轮转。`Breakaway`、`DetentCaptured`、Library、AUTO、Reset 和程序设姿保持静默，音频只消费语义事件且不调用 Haptic renderer
-- 磁吸扇牌的枪黑框、暖银面、铬轴承与金色编织轨道只参考批准图的材质语言；每片牌正面使用真实扑克牌式双角标：左上为完整 Oxanium 700 `A` 与同向小黑桃，右下为整组旋转 `180°` 的对角索引；中央保留向下极简黑桃、细线和三点蚀刻，背面不得复制任何正面字样。所有图案都是该刚性牌片的直接子物体，不得跨层悬浮或穿模，也不修改档位、角度、阻尼、Collider 或 Haptic 授权
-- 磁吸扇牌背部轨道、金属网和磁体必须以 Blender 源文件制作并导出为真实有厚度的 FBX 几何；Unity 只负责导入、材质、装配和交互，不再用程序平面或贴图假造网孔。网格必须能真实透出下方三枚磁体，机械有效行程仍严格为 `45°`，视觉圆头余量不得改变四档位置或物理状态
-- 磁吸扇牌正面共同轴心只显示一枚覆盖倒角孔边的低矮抛光轴承帽；用于结构校验的轴标记不得带 Renderer，不能再出现悬浮金属环或多层同心亮弧
-
-## 成长与装配
-
-- 抽取一个与具体奖品完全解耦的 premium gacha 展示盒：shipping Resources prefab 使用薄型透明亚克力矩形结构、四角大号黑色帽形紧固件与铬垫圈、内缩深灰衬板和紧凑中央透明胶囊；不得恢复外扩哑黑厚壳。它保留分层陀螺仪视差和有限揭晓时间轴，奖品灯光或高光不得烘焙进任何特定模型。调用方在抽取结果已知后实例化展示盒，并通过 `setContent(gltfNode, options)`、胶囊 preset、`play()` 与 `onRevealComplete` 驱动流程。
-- 展示盒中央必须保留唯一 `contentSlot`。它接受已由调用方导入并实例化的任意 glTF 根节点，按完整 Renderer bounds（无 Renderer 时使用 Collider fallback）在圆形或圆角方形中性胶囊中进行三轴居中和统一缩放，固定保留 8% 留白；默认每 4 秒慢转一圈，单件可关闭。替换或销毁展示盒时必须恢复调用方节点原 parent、local pose、scale 和 active 状态，不销毁奖品。胶囊直径、深度和圆角作为参数及 compact / standard / deep presets 暴露，禁止重新做贴合某一款陀螺轮廓的内胆。
-- 展示盒的 Blender 源固定拆为前板、四颗紧固件、间隔框、中性胶囊、绒布内衬、后板、外盒与盒盖 8 层；Unity 使用 1.35 秒错峰动画在装配／拆解间可逆切换，内容槽始终跟随中性胶囊层。原生体验左上角必须有返回按钮，并支持拖动旋转、双指缩放、拆解进度、装配重播与视角复位；相机锁定参考水平构图并按设备 aspect 反算垂直 FOV，超长 iPhone 不得裁掉亚克力盒左右边缘。
-- 六款玩具分别保存自己的成长值、等级、装配阶段和代盘秘书状态；切换模型不会混用经验
-- 用户另有独立于单款玩具的“藏家等级” Rank 1–30。有效活跃日必须同时满足真实手指接触至少 60 秒和至少 3 次完成交互；任意连续 7 天达到 5 个有效日即可获得一次节奏奖励。首次真实把玩新模型、跨玩具等级里程碑、外观收藏和藏家成就提供一次性经验，其中收藏经验只占少量并有总上限，避免购买替代盘玩
-- 藏家等级为所有玩具提供手动成长加成，并允许每天指定一款“主玩”获得更高加成；Rank 30 时全局为 `+10%`、主玩为 `+20%`。该加成只作用于真实用户输入，与 Combo 相加后总上限为 `1.50×`；离线结算和 AUTO 明确不享受藏家加成
-- 每次滑动结束记录归一化力度，成长值由该次输入之后的实际绝对转动圈数乘以力度系数产生；复位跳变、Library 45° 预览和未被滑动授权的运动不计经验
-- 等级范围为 Lv.1–100，累计曲线终点为 `84,000 XP`；以平均每天约 12 分钟、5 圈/秒、普通夜间离线收益估算，约 14 天完成
-- 主要装配阶段为 Lv.1 / 20 / 50 / 75 / 100，依次开放标准轴承、精钢配重、双列辅助轴承、航空钛合金和镜面精钢完成体。三叶金属使用完整表面换肤表达这些阶段，不叠加材质环、配重环、外露轴承球或冠环；其他尚未接入专属皮肤系统的模型可继续由 `SpinnerProgressionVisuals` 表达阶段，但所有生成件必须有可信装配位置且没有 Collider/Rigidbody，不改变原有质量、惯量、触控或衰减
-- Lv.5 / 10 / 20 / 35 / 50 / 65 / 75 / 90 / 100 设置小惊喜，实际滑动升级时显示 `LEVEL UP` 和本次奖励
-- 首次从模型库进入玩具详情时显示一次性 Quick Start 新手引导：说明顶部等级/名称/当前皮肤、左上角返回、右上角玩具库/设置入口、纯图标平滑/棘轮切换与底部成长卡等常驻 UI，并明确一指操作、双指捏合缩放、空白处拖动观察、实时力度/速度反馈和停稳约 2 秒后的上次交互评分；完成或跳过后不重复打断
-- 在详情页长按命中 3D 模型 `0.55 s` 且移动不超过 `12 pt` 时进入外观编辑；拖动、双指操作、空白长按和模型库预览均不得误触。长按成立后先同步发出一次语义 `Pop` 触感，并以不修改模型 Transform、Collider、质量或角速度的相机 framing 做 `0.22 s` 轻弹：`0.075 s` 达到 `1.035×`、`0.150 s` 回落至 `0.992×`、`0.220 s` 恢复 `1.000×`，随后才打开原生 half sheet。编辑态隐藏底部成长卡、三联仪表和机制栏，保持 3D 模型可见，以两列圆角 Grid 显示皮肤预览、锁定状态和当前装备项，并可在“皮肤 / 贴纸”间切换。三叶金属继续读取十档真实皮肤，其余玩具先显示当前默认皮肤；贴纸目录提供“无贴纸”及视觉设计师交付的 24 张 `BackdropWhite` 透明 PNG，Grid、iOS bundle thumbnail 与 Unity 模型贴花读取同一稳定 ID/视觉源。旧的轨道环、蓄能闪电、像素笑脸和竞速棋格占位存档自动迁移到对应正式贴纸；选择按玩具持久化并应用为无碰撞、无质量的展示贴花
-- 点击底部 LV 成长卡后使用“成就 / Badge / 外观”三个栏目：成就以 Lv.0–100 竖向轨道、皮肤/材质缩略图、当前段标识和填充区向下 shimmer 表达进度；Badge 显示跨速度、次数、实际时长和离线累计的里程碑；外观分列皮肤、配件和贴纸/纹饰。三叶金属在 Lv.1 / 5 / 10 / 20 / 35 / 50 / 65 / 75 / 90 / 100 分别解锁原生雾银、枪灰拉丝、夜航刻度、钨金蜂巢、冰银回纹、蓝钢水波、赤铜回路、钛虹热变、星陨黑曜、镜铬极光。每档由 `ThreeBladeMetalSkinCatalog` 同时提供真实 URP 金属色、程序纹理/法线、装饰和改装件文案；用户可装备任一已解锁外观并持久化选择。三叶金属的纹路与色彩只能贴合正式可见的转子、中心盖、轴承、垫圈、倒角与凹槽表面，不生成悬空或高于外壳的等级环、轴承球、刻度块、配重块等额外几何；`SpinnerProgressionVisuals` 的五阶段外挂装配不应用于三叶金属。外观系统不得增加 Collider/Rigidbody 或改变物理与触觉
-- 模型库左上角使用“藏家档案”入口，其“等级 / 成就 / 收藏”三个栏目集中显示藏家 Rank、7 日节奏、全局/主玩加成、跨玩具成就和已发现模型；详情、藏家档案及设置页左上角统一使用返回按钮回到模型库。模型库、藏家档案和设置等覆盖面板顶部统一显示可点击、可向下拖动关闭的 notch，关闭后直接进入当前选中的玩具
-- 模型库顶部品牌名使用小写 `fidgeting`；面板标题直接显示当前模型名称，副标题仅保留当前皮肤/材质与简化后的当前等级，不再重复显示“选择一个指尖玩具”说明
-- 每款玩具独立累计 Badge 数据：4 cm 虚拟外缘的最高速度（km/h）、累计滑动次数、按本地日期重置的今日滑动次数、真实手指接触时长、累计离线经验。Badge 目录含竞速、累计滑动、实际交互和离线经验四类 21 个里程碑，包含 3.5 km/h 与 500 / 1K / 5K / 10K / 100K 档位；已达成点亮，未达成置灰
-- 后台离线收益从退出到回归按真实时间结算，最低 5 分钟、最多 16 小时；当地 22:00–08:00 的部分获得 25% 夜间加成
-- “代盘秘书”只把离线速度提升到 `1.75×`，不改变手动滑动收益；回到 App 时以“离线收获”弹窗显示时长、经验和跨越的等级
-- 详情页底部使用 Liquid Glass 成长卡：成长罐、逐级 ProgressView、当前组件/材质、下一装配阈值和代盘秘书开关；点击 `LV` 打开等级图鉴，显示当前称号和 Lv.1 / 5 / 10 / 20 / 35 / 50 / 65 / 75 / 90 / 100 的称号区间与真实解锁项
-- 主动成长提供三档连续滑动 Combo：真实角速度（Speed）、本次滑动力度（Intensity）和最近滑动节奏（Frequency）必须同时达标；第二个连续动作起算，停顿 `2.4s` 断连。顺流 / 强驱 / 超频分别为 `1.08× / 1.18× / 1.30×` 主动 XP，成长罐和 ProgressView 随档位变为青绿 / 橙 / 火红并显示 Combo 数字；操作态以一个紧凑的 180° 半圆速度 Hero 仪表为唯一视觉中心，以真实 RPM 同步驱动 20 Hz 大号等宽数字、无超调指针与活动弧，Flow / Drive / Peak 色带使用 4% 回差。Intensity / Frequency 作为左右从属翼表显示各自真实 Combo 指标，三表采用 10 pt 明确间距的同排布局而不重叠；翼表沿用主表当前色带但降低线宽、亮度和字号，不独立发光，也不从 RPM 推导。只有主表进入 Peak 时变为火红并出现静态火苗轮廓与局部光晕，火苗被限制在上方弧段且不进入翼表区域，不创建独立高频动画。磁吸推牌不伪装 RPM；整套反馈只读取输入和转子状态，不写物理参数，也不直接调用 Haptic
-- 三联 Speed / Intensity / Frequency 仪表簇固定在盘玩界面最下方的成长卡上方：与安全区、96 pt 成长卡、12 pt 底部 inset 和 14 pt 间距共享同一 `ProductOverlayLayout` 来源；Combo / Peak footer 排在仪表簇上方，确保三项实时指标是最低一层信息且不压住 Home Indicator
-- 每枚仪表把实时 headline 数字与单位放在半圆内部，把 Intensity / Speed / Frequency 名称固定在各自半圆下方；名称使用较小 `caption2` 层级且保持左 / 中 / 右位置不变。主 RPM 仍是三表中最强的数字层级，但缩小到不遮挡指针和刻度
-
-完整的玩法拆解、Haptic 术语、Recipe、Mapping、Core Motion 输入和推荐参数范围见：
-
-- `unity/FidgetingApp/Docs/FidgetingInteractionHapticsSystem.md`
-- `unity/FidgetingApp/Docs/FidgetingProductFeelGuideline.md`
-- `unity/FidgetingApp/Docs/IMPLEMENTATION_STATUS.md` 记录哪些规则已经进入代码；文档完成不等于功能已经集成
-
-## 设置分组
-
-- 日常设置中的力度/锐度只调节 UI、脱档、吸附等其他语义；跨档触感由设置页内的 `DETENT LAB` 独占，主界面不再显示调参浮层
-- 平滑 / 棘轮模式 Tab 是唯一的机制模式入口；棘轮咬合不再包含“自由”选项，也不能反向切换 Tab
-- `DETENT LAB` 提供 Vault、Camera Dial、Watch Bezel、Silk Ratchet 四个热切换档位，以及实时 Intensity/Sharpness 覆盖；档位数始终是物理磁吸和 Haptic 的共同参数
-- 棘轮咬合只封装轻、机械、重，并在代码中成组映射脱档、捕获与回吸响应
-- 脉冲节奏、速度调制和逐事件 Recipe 属于“触觉实验室”高级调试，不与日常机械手感并列
-- Core Haptics 的 Transient/Continuous、Attack/Decay/Release、尾脉冲、层数和间隔属于语义 Recipe，不在用户面板逐项暴露
-- 设备动作只保留重新校准入口；Tilt 与 Shake 使用发布参数，开发调试值保留在代码和测试中
-
-触觉参数实时生效并自动保存；力度、频率感及实验室参数支持节流试听。设置页右上角提供明确的“保存并返回当前玩具”操作，左上角仍返回模型库；DETENT LAB 的预设、Intensity 与 Sharpness 必须与其他触觉参数一起跨启动恢复。最终触感仍必须在 iPhone 真机锁定。
-
-## 新模型接入规则
-
-1. 模型放入 `unity/FidgetingApp/Assets`，使用独立命名空间和场景。
-2. 在 `FidgetAppCoordinator` 的模型目录中注册，不新增构建脚本或 Bundle ID。
-3. 接入统一的复位、触控、触感、陀螺仪和设置适配接口。
-4. 关闭模型自带的临时 Canvas；产品 UI 只由统一 SwiftUI 外壳提供。
-5. 全部产品场景和唯一 Bundle ID 的防回归测试必须通过。
-
-## 发布规则
-
-- 只使用根目录 `scripts/ios_build_and_install.sh`。
-- 安装前同时在 Unity 配置和最终 `.app` 中校验 Bundle ID。
-- 新 build 覆盖手机上的 Fidget Spinner，不创建并存图标。
-- 旧的 `Three-Blade EDC` 独立 App 只在统一版验证通过后移除。
+1. 新的产品决定、视觉批准、否决和替代只写入设计圣经，并使用稳定 `FDB-*` ID。
+2. 本文件只更新链接或产品身份，不复制参数、状态矩阵或历史方案。
+3. 设计完成不等于集成；实现证据只写入 `IMPLEMENTATION_STATUS.md`。
+4. shipping 预览批准、代码集成、手机安装和用户真机接受始终是四个独立门禁。

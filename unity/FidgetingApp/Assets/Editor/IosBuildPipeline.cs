@@ -17,9 +17,16 @@ namespace CodexUnityLabEditor
         private const string RelativeBuildPath = "Builds/iOS/FidgetingApp";
         private const string RelativeDevelopmentBuildPath = "Builds/iOS/FidgetingAppDevelopment";
         private const string RelativeSimulatorBuildPath = "Builds/iOS/FidgetingAppSimulator";
+        private const string RelativeInternalGachaBuildPath =
+            "Builds/iOS/FidgetingAppInternalGacha";
+        private const string RelativeInternalGachaSimulatorBuildPath =
+            "Builds/iOS/FidgetingAppInternalGachaSimulator";
         private const string ProductName = "Fidget Spinner";
         private const string BundleIdentifier = "com.jiaweizhou.fidgetspinner.codex";
         private const string MinimumIosVersion = "15.0";
+        private const string InternalGachaScriptingDefine =
+            "FIDGET_GACHA_INTERNAL_UNLIMITED";
+        private const string GachaMode = "internalUnlimited";
         private const string SourceCommitEnvironmentKey = "FIDGET_SOURCE_COMMIT";
         private const string BuildManifestFileName = "FidgetingBuildManifest.json";
         private const string PersonalTeamIdentifier = "2RJ2CW6NK5";
@@ -58,7 +65,7 @@ namespace CodexUnityLabEditor
             PlayerSettings.productName = ProductName;
             PlayerSettings.SetApplicationIdentifier(NamedBuildTarget.iOS, BundleIdentifier);
             PlayerSettings.bundleVersion = "0.1.0";
-            PlayerSettings.iOS.buildNumber = "41";
+            PlayerSettings.iOS.buildNumber = "42";
             PlayerSettings.iOS.targetOSVersionString = MinimumIosVersion;
             PlayerSettings.iOS.targetDevice = iOSTargetDevice.iPhoneOnly;
             PlayerSettings.SetScriptingBackend(NamedBuildTarget.iOS, ScriptingImplementation.IL2CPP);
@@ -99,7 +106,8 @@ namespace CodexUnityLabEditor
                 iOSSdkVersion.DeviceSDK,
                 RelativeDevelopmentBuildPath,
                 configureSigning: true,
-                development: true);
+                development: true,
+                internalGacha: false);
         }
 
         [MenuItem("Tools/Codex/Build iOS Performance Project")]
@@ -109,7 +117,8 @@ namespace CodexUnityLabEditor
                 iOSSdkVersion.DeviceSDK,
                 RelativeBuildPath,
                 configureSigning: true,
-                development: false);
+                development: false,
+                internalGacha: false);
         }
 
         [MenuItem("Tools/Codex/Clean Generated Cache Duplicates")]
@@ -127,14 +136,42 @@ namespace CodexUnityLabEditor
                 iOSSdkVersion.SimulatorSDK,
                 RelativeSimulatorBuildPath,
                 configureSigning: false,
-                development: false);
+                development: false,
+                internalGacha: false);
+        }
+
+        [MenuItem("Tools/Codex/Build iOS Internal Gacha Project")]
+        public static void BuildIosInternalGachaProject()
+        {
+            BuildIosProject(
+                iOSSdkVersion.DeviceSDK,
+                RelativeInternalGachaBuildPath,
+                configureSigning: true,
+                // Internal-unlimited uses the shipping bundle so it can
+                // overwrite the current test phone as requested, but it must
+                // remain a Development build and therefore cannot become a
+                // distributable/App Store archive by mistake.
+                development: true,
+                internalGacha: true);
+        }
+
+        [MenuItem("Tools/Codex/Build iOS Internal Gacha Simulator Project")]
+        public static void BuildIosInternalGachaSimulatorProject()
+        {
+            BuildIosProject(
+                iOSSdkVersion.SimulatorSDK,
+                RelativeInternalGachaSimulatorBuildPath,
+                configureSigning: false,
+                development: false,
+                internalGacha: true);
         }
 
         private static void BuildIosProject(
             iOSSdkVersion sdkVersion,
             string relativeBuildPath,
             bool configureSigning,
-            bool development)
+            bool development,
+            bool internalGacha)
         {
             string projectRoot = Path.GetFullPath(Path.Combine(Application.dataPath, ".."));
             QuarantineGeneratedCacheDuplicates(projectRoot);
@@ -151,6 +188,7 @@ namespace CodexUnityLabEditor
 
             ConfigureIosBuild(development);
             EnsureCanonicalProductIdentity();
+            EnsureGachaBuildIsolation(internalGacha, development, sdkVersion);
             PlayerSettings.iOS.sdkVersion = sdkVersion;
             if (sdkVersion == iOSSdkVersion.SimulatorSDK)
             {
@@ -181,6 +219,9 @@ namespace CodexUnityLabEditor
                 locationPathName = outputPath,
                 target = BuildTarget.iOS,
                 targetGroup = BuildTargetGroup.iOS,
+                extraScriptingDefines = internalGacha
+                    ? new[] { InternalGachaScriptingDefine }
+                    : Array.Empty<string>(),
                 options = development
                     ? BuildOptions.Development | BuildOptions.ConnectWithProfiler
                     : BuildOptions.None
@@ -202,7 +243,7 @@ namespace CodexUnityLabEditor
             {
                 ConfigureXcodeAutomaticSigning(outputPath);
             }
-            WriteBuildManifest(outputPath, development, sdkVersion);
+            WriteBuildManifest(outputPath, development, sdkVersion, internalGacha);
 
             string sdkLabel = sdkVersion == iOSSdkVersion.SimulatorSDK ? "Simulator" : "Device";
             Debug.Log($"[Codex] iOS {sdkLabel} Xcode project created at {outputPath}");
@@ -259,13 +300,15 @@ namespace CodexUnityLabEditor
             public string generatedAtUtc;
             public string sdk;
             public bool development;
+            public string gachaMode;
             public string[] scenes;
         }
 
         private static void WriteBuildManifest(
             string outputPath,
             bool development,
-            iOSSdkVersion sdkVersion)
+            iOSSdkVersion sdkVersion,
+            bool internalGacha)
         {
             string sourceCommit = Environment.GetEnvironmentVariable(
                 SourceCommitEnvironmentKey);
@@ -287,6 +330,7 @@ namespace CodexUnityLabEditor
                 generatedAtUtc = DateTime.UtcNow.ToString("O"),
                 sdk = sdkVersion.ToString(),
                 development = development,
+                gachaMode = internalGacha ? GachaMode : "production",
                 scenes = (string[])ProductScenes.Clone()
             };
             File.WriteAllText(
@@ -311,6 +355,37 @@ namespace CodexUnityLabEditor
                 {
                     throw new BuildFailedException($"Required product scene is missing: {scenePath}");
                 }
+            }
+        }
+
+        private static void EnsureGachaBuildIsolation(
+            bool internalGacha,
+            bool development,
+            iOSSdkVersion sdkVersion)
+        {
+            string globalDefines = PlayerSettings.GetScriptingDefineSymbols(
+                NamedBuildTarget.iOS);
+            string[] symbols = (globalDefines ?? string.Empty).Split(
+                new[] { ';', ',', ' ' },
+                StringSplitOptions.RemoveEmptyEntries);
+            if (Array.Exists(symbols, symbol => string.Equals(
+                    symbol,
+                    InternalGachaScriptingDefine,
+                    StringComparison.Ordinal)))
+            {
+                throw new BuildFailedException(
+                    "Internal unlimited gacha must never be a persistent iOS "
+                    + "scripting define. It is injected only into the dedicated "
+                    + "internal BuildPlayerOptions instance.");
+            }
+
+            if (internalGacha
+                && sdkVersion == iOSSdkVersion.DeviceSDK
+                && !development)
+            {
+                throw new BuildFailedException(
+                    "Internal unlimited gacha is restricted to Development "
+                    + "builds and cannot be archived as a distribution build.");
             }
         }
 
