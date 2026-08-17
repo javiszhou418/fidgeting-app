@@ -1,6 +1,6 @@
 # Fidgeting Interaction Integration Status
 
-最后更新：2026-08-13
+最后更新：2026-08-17
 
 本文件回答一个问题：规格中的能力是否已经进入可运行代码。状态只按代码、场景接线和测试证据填写，不按聊天结论或文档完成度填写。
 
@@ -10,6 +10,19 @@
 - `部分集成`：已有部分代码或接线，但还缺语义、生命周期、测试或真机环节。
 - `仅规格`：只有设计规格，不能对外称为已实现。
 - `待真机验收`：自动化能验证结构，但触感仍必须在 iPhone 上确认。
+
+## Build 42 正式抽卡链修复（运行时、Unity 回归、GPU shipping 捕获与主 App Simulator E2E 完成；2026-08-17 视觉批准已确认，手机安装与真机验收待完成）
+
+> **Build 41 失败根因已确认：设备正式 `v1` 存档当前为零券，商店把单抽静默禁用；此前一次抽取会在揭晓前先扣券并写入 owned/pity/draws，receipt 只存在于一次性 native 回包中，回包或页面生命周期中断后无法恢复。原生所谓揭晓仍是 SwiftUI 绘制的二维假收藏盒，shipping Coordinator 从未启动 `GachaRevealDirector`。Build 42 当前只在独立 `internalUnlimited` 构建中启用无限单抽，以新的 `fidgeting.gacha.internal.v2.*` 命名空间隔离正式 Build 41 的票券、已获得“矿尘贴纸”和全部 `v1` 保底数据。**
+
+- 新交易链以 `requestId` 为幂等键，使用 `Prepared → AwaitingAcceptance → Completed` 三阶段持久化。Prepare 只固定奖品和 receipt，不扣券、不写 Gallery/保底/碎片/抽数；真实 3D 动画完成后才进入 Awaiting，用户点击“收下”才一次性提交。pending、completed ledger 和完整 receipt 可跨进程恢复；重复 draw/query/ACK 返回同一结果，不重新消费 RNG。内测模式不扣正式票券，余额显示 `∞ / 内测无限`；十抽、StoreKit 和正式经济入口保持关闭，production 零券会显示明确原因。
+- `GachaPrizePresentationResolver` 为 catalog 的 8/8 `ContentReference` 提供稳定 renderer-only 3D 展示物：三款三叶皮肤、岩层纹实体展示卡、固定种子矿尘实体展示卡、板岩内衬、玄武岩底座和岭线暮色玻璃样板。它们无 Rigidbody、Collider、Audio、Haptic 或自转副作用，全部使用磁吸推牌批准过的唯一 `PremiumDisplayCase`、`RoundedSquareDeep` 内槽、相机 lease 和等比 fit。
+- 权威 `GachaRevealSession` 只由 Unity 计时，固定发布 `back → front → readable → exploded → prizeOnly → sheen → complete`；前三段合计沿用收藏盒 `2.20 s`，散开 `1.35 s`，完整时长 `4.55 s`。SwiftUI 二维假收藏盒已从 shipping storefront 删除；native 只提供透明 HUD、setup/start/phase 回调、错误与“收下”控制。
+- Native/Unity 状态携带 exact request id；丢 draw 回包只查询原交易。setup/start/complete 具有同 request 的 watchdog，场景切换会回传中断原因，不再静默拆掉相机 lease；乱序历史 receipt 不能清空当前 pending。稳定 AX 包括入口、运行模式、余额、request、pending prize、owned count、draw count、3D root、当前 phase、按 request 隔离的有序 phase history、错误与 accept；短阶段由连续 H.264 取证，不再要求 XCTest 在 `0.45–0.55 s` 内完成昂贵截图。
+- 2026-08-17 修复完成页“收下”依赖 Unity 异步 ACK 后才退出、回包慢/丢失时看似无响应的问题。native 现在先同步退出完成页并恢复 chrome，再发送同一 `requestId` 的幂等 ACK；1 秒未确认只查询原交易。若权威状态仍为 `AwaitingAcceptance`，会恢复同一已揭晓奖励、显示可重试原因，不会重新抽取或重复入账。shipping Swift 六文件 `arm64-apple-ios15.0-simulator` type-check 通过；`GachaStorefrontIntegrationTests 3/3` 与 `GachaTransactionTests 12/12` 均为 Passed，新增回归锁定“本地退出必须早于 bridge ACK”及掉 ACK 后的同奖励恢复，既有交易测试继续锁定重复 ACK 只提交一次。隔离 Simulator 验证覆盖成功 ACK 与确定性丢 ACK 两条路径，证据为 `Artifacts/GachaClaimAcceptanceFix/claim-success-exits-to-store.jpeg`、`claim-dropped-ack-immediate-exit.jpeg`、`claim-dropped-ack-restores-reward.jpeg`。本项未改视觉；Build 42 shipping 视觉已于 2026-08-17 获用户明确批准，但尚未据此宣称手机安装或真机接受。
+- Build pipeline 已升为 `0.1.0 (42)`。普通 Device/Simulator 方法仍为 production 且完全不注入 internal define；独立 Internal Gacha Device/Simulator 方法才注入 `FIDGET_GACHA_INTERNAL_UNLIMITED` 并在 manifest 写 `gachaMode=internalUnlimited`。同 bundle 的 internal Device 路径被强制为 Development build，构建函数还拒绝持久化全局 internal define，避免误归档为正式分发包。
+- Unity 最终聚焦回归为 `159/159 Passed`（`/private/tmp/fidgeting-gacha-build42-focused-v7.xml`），覆盖交易、幂等 ledger、internal deterministic sequence、Coordinator、3D resolver/session、相机两帧稳定、统一收藏盒、shipping capture 和 Swift storefront 合同。8 奖品 × 6 阶段 GPU shipping 捕获已完成：`/private/tmp/fidgeting-gacha-build42-previews-v3/shipping-validation.json` 为 `passed:true`，8/8 共 1104 连续帧均通过 3 px 边缘裁切门禁，每项 MP4 位于 `videos/`。用户于 2026-08-17 明确批准该真实 shipping 预览；批准联系表已稳定归档为 `Docs/DesignBibleAssets/gacha-build42-reveal-approved-contact-sheet.png`，批准范围和 SHA-256 见 `FidgetingAppProductDesignBible.md` 的 [V08]，不使用临时路径作为设计权威。
+- fresh Internal Simulator 主 App 端到端测试为 `1/1 Passed`、耗时 `82.304 s`，覆盖 12 次快速连点只保留一个 request、首次 native 回包确定性丢失后 8 秒查询同一 request、catalog8 八项固定顺序、七个 phase token 完整有序、最后一笔 AwaitingAcceptance 杀进程与重启恢复同一 request/prize，以及最终收下后 `owned=8 / draws=8 / balance=∞`。报告为 `/private/tmp/fidgeting-gacha-build42-xcui-run-v4/tests.json`，运行清单为同目录 `manifest.json`，完整真实 H.264 为 `build42-gacha-full-flow.mp4`，原始 XCTest 证据为 `Build42Gacha.xcresult`；测试未使用 fake receipt 或空 `UnitySendMessage` stub。视觉批准门禁已于 2026-08-17 满足；剩余门禁为 Internal Device 构建、覆盖安装、设备版本回读与 iPhone 逐项验收。在这些证据完成前，DeliveryState 仍不得写为 `Installed` 或 `Device Accepted`。
 
 ## Build 41 统一单 App 候选（六款收藏盒已获视觉批准；正在构建并推送手机）
 

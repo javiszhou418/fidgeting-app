@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Globalization;
 #if UNITY_IOS && !UNITY_EDITOR
@@ -42,13 +43,60 @@ namespace FidgetingApp.Product.Gacha
         /// </summary>
         public static string ReceiptPayload(GachaDrawReceipt receipt)
         {
+            var rows = new List<string>();
+            AppendReceiptRows(rows, receipt);
+            return string.Join("\n", rows);
+        }
+
+        /// <summary>
+        /// Transaction-aware receipt. Metadata precedes the legacy result/row
+        /// block so native retry, resume, and acceptance handling never need to
+        /// infer mode or lifecycle phase from UI state.
+        /// </summary>
+        public static string ReceiptPayload(GachaTransactionResult result)
+        {
             var rows = new List<string>
             {
-                "result\t" + (receipt.Success ? "ok" : receipt.FailureReason)
+                "runtime-mode\t" + RuntimeModeToken(result.RuntimeMode)
             };
-            for (int index = 0; index < receipt.Rows.Count; index++)
+            if (result.Success && result.Transaction != null)
             {
-                GachaDrawReceiptRow row = receipt.Rows[index];
+                rows.Add(string.Join(
+                    "\t",
+                    "transaction",
+                    result.Transaction.RequestId,
+                    PhaseToken(result.Transaction.Phase),
+                    result.Transaction.SeriesId,
+                    result.Transaction.Count.ToString(CultureInfo.InvariantCulture),
+                    PaymentToken(result.Transaction.PaymentMethod)));
+                AppendReceiptRows(rows, result.Transaction.Receipt);
+            }
+            else
+            {
+                rows.Add(string.Join(
+                    "\t",
+                    "transaction",
+                    result.RequestId,
+                    "failed",
+                    string.Empty,
+                    "0",
+                    "ticket"));
+                AppendReceiptRows(rows, GachaDrawReceipt.Failure(result.FailureReason));
+            }
+
+            return string.Join("\n", rows);
+        }
+
+        internal static void AppendReceiptRows(
+            List<string> rows,
+            GachaDrawReceipt receipt)
+        {
+            rows.Add("result\t" + (receipt.Success ? "ok" : receipt.FailureReason));
+            IReadOnlyList<GachaDrawReceiptRow> receiptRows =
+                receipt.Rows ?? Array.Empty<GachaDrawReceiptRow>();
+            for (int index = 0; index < receiptRows.Count; index++)
+            {
+                GachaDrawReceiptRow row = receiptRows[index];
                 GachaPrizeDefinition? prize = GachaCatalog.ResolvePrize(row.Outcome.PrizeId);
                 rows.Add(string.Join(
                     "\t",
@@ -65,8 +113,28 @@ namespace FidgetingApp.Product.Gacha
                     row.Outcome.ForcedByHeirloomPity ? "1" : "0",
                     row.Outcome.ForcedByTenDraw ? "1" : "0"));
             }
+        }
 
-            return string.Join("\n", rows);
+        public static string RuntimeModeToken(GachaRuntimeMode mode)
+        {
+            return mode == GachaRuntimeMode.InternalUnlimited
+                ? "internalUnlimited"
+                : "production";
+        }
+
+        public static string PhaseToken(GachaTransactionPhase phase)
+        {
+            return phase switch
+            {
+                GachaTransactionPhase.AwaitingAcceptance => "awaitingAcceptance",
+                GachaTransactionPhase.Completed => "completed",
+                _ => "prepared"
+            };
+        }
+
+        public static string PaymentToken(GachaPaymentMethod method)
+        {
+            return method == GachaPaymentMethod.Coin ? "coin" : "ticket";
         }
     }
 }

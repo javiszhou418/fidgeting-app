@@ -84,7 +84,7 @@ public struct GachaPrizeInfo: Equatable, Identifiable {
 }
 
 public struct GachaReceiptRow: Equatable, Identifiable {
-    public let id = UUID()
+    public var id: String { prizeId }
     public let prizeId: String
     public let name: String
     public let rarity: GachaRarityTier
@@ -93,6 +93,61 @@ public struct GachaReceiptRow: Equatable, Identifiable {
     public let forcedBySignaturePity: Bool
     public let forcedByHeirloomPity: Bool
     public let forcedByTenDraw: Bool
+}
+
+public enum GachaRuntimeMode: String, Equatable {
+    case production
+    case internalUnlimited
+
+    public var balanceText: String {
+        self == .internalUnlimited ? "∞" : ""
+    }
+
+    public var title: String {
+        self == .internalUnlimited ? "内测无限" : "正式经济"
+    }
+}
+
+public enum GachaTransactionPhase: String, Equatable {
+    case idle
+    case requesting
+    case prepared
+    case awaitingAcceptance
+    case acknowledging
+    case completed
+    case failed
+}
+
+public enum GachaRevealPhase: String, Equatable {
+    case back
+    case front
+    case readable
+    case exploded
+    case prizeOnly
+    case sheen
+    case complete
+
+    public var caption: String {
+        switch self {
+        case .back: return "收藏盒入场"
+        case .front: return "收藏盒翻正"
+        case .readable: return "奖品确认"
+        case .exploded: return "盒体散开"
+        case .prizeOnly: return "奖品保留"
+        case .sheen: return "完成过光"
+        case .complete: return "揭晓完成"
+        }
+    }
+}
+
+public struct GachaPendingTransaction: Equatable, Identifiable {
+    public var id: String { requestId }
+    public let requestId: String
+    public let phase: GachaTransactionPhase
+    public let seriesId: String
+    public let count: Int
+    public let payment: String
+    public let receipt: [GachaReceiptRow]
 }
 
 @MainActor
@@ -108,17 +163,153 @@ public final class GachaStoreModel: ObservableObject {
     @Published public private(set) var heirloomMisses: [String: Int] = [:]
     @Published public private(set) var totalDraws: [String: Int] = [:]
     @Published public private(set) var owned: Set<String> = []
+    @Published public private(set) var runtimeMode: GachaRuntimeMode = .production
+    @Published public private(set) var transactionPhase: GachaTransactionPhase = .idle
+    @Published public private(set) var pendingTransaction: GachaPendingTransaction?
+    @Published public private(set) var activeRequestId = ""
+    @Published public private(set) var requestStatus = "idle"
+    @Published public private(set) var revealPhase: GachaRevealPhase?
+    @Published public private(set) var revealPhaseHistory: [GachaRevealPhase] = []
+    @Published public private(set) var revealIsPresented = false
+    @Published public private(set) var revealStartAcknowledged = false
     @Published public var pendingReceipt: [GachaReceiptRow] = []
     @Published public var lastFailureReason = ""
+
+    private var requestTimeoutTask: Task<Void, Never>?
+    private var revealWatchdogTask: Task<Void, Never>?
+    private var revealWatchdogGeneration = 0
+    private var revealSetupRequestedId = ""
+    private var revealStartRequestedId = ""
+    private var revealPhaseHistoryRequestId = ""
+
+    public var canStartSingleDraw: Bool {
+        pendingTransaction == nil
+            && activeRequestId.isEmpty
+            && (runtimeMode == .internalUnlimited || tickets > 0)
+    }
+
+    public var ticketBalanceText: String {
+        runtimeMode == .internalUnlimited ? "∞" : "\(tickets)"
+    }
+
+    public var drawCostText: String {
+        runtimeMode == .internalUnlimited
+            ? "内测无限 · 不消耗正式票券"
+            : "消耗 1 张抽取券"
+    }
+
+    public var visibleFailureReason: String {
+        if !lastFailureReason.isEmpty {
+            return localizedFailure(lastFailureReason)
+        }
+        if runtimeMode == .production && tickets < 1 {
+            return "抽取券不足，当前无法单抽。"
+        }
+        return ""
+    }
 
     public func requestState() {
         GachaUnityBridge.send("RequestGachaStateFromNativeUi")
     }
 
-    public func draw(seriesId: String, count: Int, useCoins: Bool) {
+    @discardableResult
+    public func draw(seriesId: String, count: Int, useCoins: Bool) -> String? {
+        guard count == 1 else {
+            lastFailureReason = "ten-draw-disabled"
+            return nil
+        }
+        guard canStartSingleDraw else {
+            if pendingTransaction != nil || !activeRequestId.isEmpty {
+                lastFailureReason = "transaction-already-pending"
+            } else if runtimeMode == .production && tickets < 1 {
+                lastFailureReason = "insufficient-tickets"
+            }
+            return nil
+        }
+
+        let requestId = UUID().uuidString.lowercased()
+        beginRevealPhaseHistory(requestId: requestId)
+        activeRequestId = requestId
+        transactionPhase = .requesting
+        requestStatus = "requesting:\(requestId)"
+        lastFailureReason = ""
+        pendingReceipt = []
         GachaUnityBridge.send(
             "DrawGachaFromNativeUi",
-            value: "\(seriesId)|\(count)|\(useCoins ? "coin" : "ticket")")
+            value: "\(seriesId)|1|ticket|\(requestId)")
+        scheduleQueryTimeout(requestId: requestId, status: "requesting")
+        return requestId
+    }
+
+    public func queryActiveTransaction() {
+        let requestId = pendingTransaction?.requestId ?? activeRequestId
+        guard !requestId.isEmpty else {
+            requestState()
+            return
+        }
+        requestStatus = "querying:\(requestId)"
+        GachaUnityBridge.send(
+            "QueryGachaTransactionFromNativeUi",
+            value: requestId)
+        scheduleQueryTimeout(requestId: requestId, status: "querying")
+    }
+
+    public func requestRevealSetupIfNeeded() {
+        guard let transaction = pendingTransaction,
+              transaction.phase == .prepared
+                || transaction.phase == .awaitingAcceptance,
+              revealSetupRequestedId != transaction.requestId,
+              !revealIsPresented
+        else { return }
+
+        // A fresh setup replays the real six-stage sequence for this durable
+        // request (including process-recovery and explicit retry paths), so its
+        // ordered AX history must begin from an empty state as well.
+        beginRevealPhaseHistory(requestId: transaction.requestId)
+        revealSetupRequestedId = transaction.requestId
+        requestStatus = "preparing-reveal:\(transaction.requestId)"
+        GachaUnityBridge.send(
+            "RequestGachaRevealFromNativeUi",
+            value: transaction.requestId)
+        scheduleRevealWatchdog(
+            requestId: transaction.requestId,
+            stage: "setup")
+    }
+
+    public func startRevealIfNeeded(requestId: String) {
+        guard revealIsPresented,
+              pendingTransaction?.requestId == requestId,
+              revealStartRequestedId != requestId
+        else { return }
+
+        revealStartRequestedId = requestId
+        requestStatus = "starting-reveal:\(requestId)"
+        GachaUnityBridge.send(
+            "StartGachaRevealFromNativeUi",
+            value: requestId)
+        scheduleRevealWatchdog(requestId: requestId, stage: "start")
+    }
+
+    public func acknowledgeReveal() {
+        guard let transaction = pendingTransaction,
+              revealPhase == .complete,
+              transaction.phase == .awaitingAcceptance,
+              transactionPhase != .acknowledging
+        else { return }
+
+        // Leave the completed reveal synchronously so the tap always has a
+        // visible result. The durable transaction remains authoritative: if
+        // Unity does not confirm the idempotent ACK, the recovery query below
+        // restores this same reward instead of starting another draw.
+        transactionPhase = .acknowledging
+        requestStatus = "acknowledging:\(transaction.requestId)"
+        lastFailureReason = ""
+        revealIsPresented = false
+        CodexSetGachaRevealNativeChromeHidden(false)
+        GachaUnityBridge.send(
+            "AcknowledgeGachaRevealFromNativeUi",
+            value: transaction.requestId)
+        scheduleAcknowledgementRecovery(requestId: transaction.requestId)
     }
 
     public func redeem(prizeId: String) {
@@ -128,9 +319,20 @@ public final class GachaStoreModel: ObservableObject {
     // MARK: TSV ingestion (called from the Unity bridge)
 
     public func ingest(catalog: String, snapshot: String, receipt: String) {
+        let requestBeforeSnapshot = pendingTransaction?.requestId
+            ?? activeRequestId
         if !catalog.isEmpty { parseCatalog(catalog) }
         if !snapshot.isEmpty { parseSnapshot(snapshot) }
-        parseReceipt(receipt)
+        let requestAfterSnapshot = pendingTransaction?.requestId
+            ?? activeRequestId
+        if !receipt.isEmpty {
+            let acceptedRequestIds = Set(
+                [requestBeforeSnapshot, requestAfterSnapshot]
+                    .filter { !$0.isEmpty })
+            parseTransactionPayload(
+                receipt,
+                acceptedRequestIds: acceptedRequestIds)
+        }
     }
 
     private func parseCatalog(_ payload: String) {
@@ -175,17 +377,28 @@ public final class GachaStoreModel: ObservableObject {
                 owned = []
             }
         }
+        parseTransactionPayload(payload)
     }
 
-    private func parseReceipt(_ payload: String) {
+    private func parseTransactionPayload(
+        _ payload: String,
+        acceptedRequestIds: Set<String>? = nil
+    ) {
         guard !payload.isEmpty else { return }
         var rows: [GachaReceiptRow] = []
-        var failure = ""
+        var result = ""
+        var transactionCells: [String]?
+        var sawRuntimeMode = false
         for line in payload.split(separator: "\n") {
             let cells = line.split(separator: "\t", omittingEmptySubsequences: false)
                 .map(String.init)
-            if cells.count >= 2, cells[0] == "result" {
-                failure = cells[1] == "ok" ? "" : cells[1]
+            if cells.count >= 2, cells[0] == "runtime-mode" {
+                runtimeMode = GachaRuntimeMode(rawValue: cells[1]) ?? .production
+                sawRuntimeMode = true
+            } else if cells.count >= 6, cells[0] == "transaction" {
+                transactionCells = cells
+            } else if cells.count >= 2, cells[0] == "result" {
+                result = cells[1]
             } else if cells.count >= 10, cells[0] == "row" {
                 rows.append(GachaReceiptRow(
                     prizeId: cells[1],
@@ -198,10 +411,320 @@ public final class GachaStoreModel: ObservableObject {
                     forcedByTenDraw: cells[9] == "1"))
             }
         }
-        lastFailureReason = failure
-        // A non-empty receipt payload is authoritative for the latest request.
-        // Clear stale rows on failures as well as replacing them on success.
+
+        guard let cells = transactionCells else {
+            // Older production snapshots do not publish a runtime marker. Keep
+            // their economy behavior intact while Build 42 migrates the bridge.
+            if !sawRuntimeMode { runtimeMode = .production }
+            return
+        }
+
+        let requestId = cells[1]
+        let phase = GachaTransactionPhase(rawValue: cells[2]) ?? .failed
+        let seriesId = cells[3]
+        let count = Int(cells[4]) ?? 0
+        let payment = cells[5]
+
+        // The snapshot in the same bridge envelope is authoritative. A late
+        // query/ACK for historical request A may legally arrive while current
+        // request B is pending; that stale receipt must never clear B.
+        if let acceptedRequestIds,
+           !requestId.isEmpty,
+           !acceptedRequestIds.contains(requestId) {
+            return
+        }
+
+        let wasAcknowledgingHiddenReveal = transactionPhase == .acknowledging
+            && !revealIsPresented
+        requestTimeoutTask?.cancel()
+        requestTimeoutTask = nil
+        transactionPhase = phase
+
+        if result == "ok" || result == "none" || result.isEmpty {
+            lastFailureReason = ""
+        } else {
+            lastFailureReason = result
+        }
+
+        if phase == .idle || phase == .completed || requestId.isEmpty {
+            let wasPresenting = revealIsPresented
+            pendingTransaction = nil
+            pendingReceipt = []
+            activeRequestId = ""
+            requestStatus = "idle"
+            lastFailureReason = ""
+            resetRevealState()
+            if wasPresenting {
+                CodexSetGachaRevealNativeChromeHidden(false)
+            }
+            return
+        }
+
+        if phase == .failed {
+            let wasPresenting = revealIsPresented
+            pendingTransaction = nil
+            pendingReceipt = []
+            activeRequestId = ""
+            requestStatus = "failed:\(requestId)"
+            if lastFailureReason.isEmpty { lastFailureReason = "transaction-failed" }
+            resetRevealState()
+            if wasPresenting {
+                CodexSetGachaRevealNativeChromeHidden(false)
+            }
+            return
+        }
+
+        ensureRevealPhaseHistory(requestId: requestId)
+        activeRequestId = requestId
+        let transaction = GachaPendingTransaction(
+            requestId: requestId,
+            phase: phase,
+            seriesId: seriesId,
+            count: count,
+            payment: payment,
+            receipt: rows)
+        pendingTransaction = transaction
         pendingReceipt = rows
+
+        switch phase {
+        case .prepared:
+            requestStatus = "prepared:\(requestId)"
+            if revealIsPresented && revealPhase != .complete {
+                revealStartRequestedId = ""
+                startRevealIfNeeded(requestId: requestId)
+            } else {
+                requestRevealSetupIfNeeded()
+            }
+        case .awaitingAcceptance:
+            requestStatus = "awaiting-acceptance:\(requestId)"
+            if wasAcknowledgingHiddenReveal {
+                // The ACK was not committed (or Unity explicitly republished
+                // awaitingAcceptance). Put back the exact completed reward so
+                // the user can retry without rerolling or double-committing.
+                revealIsPresented = true
+                revealPhase = .complete
+                revealStartAcknowledged = true
+                lastFailureReason = "acceptance-response-timeout"
+                CodexSetGachaRevealNativeChromeHidden(true)
+            } else if revealIsPresented && revealStartAcknowledged {
+                revealPhase = .complete
+                revealWatchdogTask?.cancel()
+                revealWatchdogTask = nil
+            } else {
+                requestRevealSetupIfNeeded()
+            }
+        default:
+            requestStatus = "\(phase.rawValue):\(requestId)"
+        }
+    }
+
+    public func receiveRevealSetup(
+        requestId: String,
+        succeeded: Bool,
+        failureReason: String
+    ) {
+        guard pendingTransaction?.requestId == requestId,
+              revealSetupRequestedId == requestId
+        else { return }
+
+        revealWatchdogTask?.cancel()
+        revealWatchdogTask = nil
+
+        guard succeeded else {
+            revealSetupRequestedId = ""
+            lastFailureReason = failureReason.isEmpty
+                ? "reveal-setup-failed"
+                : failureReason
+            requestStatus = "reveal-setup-failed:\(requestId)"
+            return
+        }
+
+        revealIsPresented = true
+        revealPhase = nil
+        revealStartAcknowledged = false
+        requestStatus = "reveal-mounted:\(requestId)"
+        CodexSetGachaRevealNativeChromeHidden(true)
+    }
+
+    public func receiveRevealPhase(
+        requestId: String,
+        phaseToken: String,
+        failureReason: String
+    ) {
+        guard pendingTransaction?.requestId == requestId,
+              revealIsPresented
+        else { return }
+
+        guard failureReason.isEmpty,
+              let phase = GachaRevealPhase(rawValue: phaseToken)
+        else {
+            revealWatchdogTask?.cancel()
+            revealWatchdogTask = nil
+            lastFailureReason = failureReason.isEmpty
+                ? "invalid-reveal-phase:\(phaseToken)"
+                : failureReason
+            requestStatus = "reveal-failed:\(requestId)"
+            resetRevealState()
+            CodexSetGachaRevealNativeChromeHidden(false)
+            return
+        }
+
+        revealWatchdogTask?.cancel()
+        revealWatchdogTask = nil
+        revealStartAcknowledged = true
+        recordRevealPhase(phase, requestId: requestId)
+        revealPhase = phase
+        requestStatus = "reveal-\(phase.rawValue):\(requestId)"
+        if phase != .complete {
+            scheduleRevealWatchdog(requestId: requestId, stage: "complete")
+        }
+    }
+
+    private func scheduleQueryTimeout(requestId: String, status: String) {
+        requestTimeoutTask?.cancel()
+        requestTimeoutTask = Task { [weak self] in
+            do {
+                try await Task.sleep(nanoseconds: 8_000_000_000)
+            } catch {
+                return
+            }
+            guard !Task.isCancelled,
+                  let self,
+                  self.activeRequestId == requestId,
+                  self.requestStatus.hasPrefix(status)
+            else { return }
+
+            self.requestStatus = "querying:\(requestId)"
+            GachaUnityBridge.send(
+                "QueryGachaTransactionFromNativeUi",
+                value: requestId)
+            self.lastFailureReason = "transaction-response-timeout"
+        }
+    }
+
+    private func scheduleAcknowledgementRecovery(requestId: String) {
+        requestTimeoutTask?.cancel()
+        requestTimeoutTask = Task { [weak self] in
+            do {
+                try await Task.sleep(nanoseconds: 1_000_000_000)
+            } catch {
+                return
+            }
+            guard !Task.isCancelled,
+                  let self,
+                  self.activeRequestId == requestId,
+                  self.transactionPhase == .acknowledging,
+                  !self.revealIsPresented
+            else { return }
+
+            self.requestStatus = "querying:\(requestId)"
+            GachaUnityBridge.send(
+                "QueryGachaTransactionFromNativeUi",
+                value: requestId)
+            self.scheduleQueryTimeout(
+                requestId: requestId,
+                status: "querying")
+        }
+    }
+
+    private func scheduleRevealWatchdog(requestId: String, stage: String) {
+        revealWatchdogTask?.cancel()
+        revealWatchdogGeneration += 1
+        let generation = revealWatchdogGeneration
+        revealWatchdogTask = Task { [weak self] in
+            do {
+                try await Task.sleep(nanoseconds: 8_000_000_000)
+            } catch {
+                return
+            }
+            guard !Task.isCancelled,
+                  let self,
+                  self.revealWatchdogGeneration == generation,
+                  self.pendingTransaction?.requestId == requestId,
+                  self.activeRequestId == requestId
+            else { return }
+
+            switch stage {
+            case "setup":
+                guard !self.revealIsPresented,
+                      self.revealSetupRequestedId == requestId
+                else { return }
+                self.revealSetupRequestedId = ""
+            case "start":
+                guard self.revealIsPresented,
+                      !self.revealStartAcknowledged,
+                      self.revealStartRequestedId == requestId
+                else { return }
+                self.revealStartRequestedId = ""
+            default:
+                guard self.revealIsPresented,
+                      self.revealPhase != .complete
+                else { return }
+            }
+
+            self.lastFailureReason = "reveal-\(stage)-timeout"
+            self.requestStatus = "querying:\(requestId)"
+            GachaUnityBridge.send(
+                "QueryGachaTransactionFromNativeUi",
+                value: requestId)
+            self.scheduleQueryTimeout(
+                requestId: requestId,
+                status: "querying")
+        }
+    }
+
+    private func resetRevealState() {
+        revealWatchdogTask?.cancel()
+        revealWatchdogTask = nil
+        revealWatchdogGeneration += 1
+        revealPhase = nil
+        revealIsPresented = false
+        revealStartAcknowledged = false
+        revealSetupRequestedId = ""
+        revealStartRequestedId = ""
+        revealPhaseHistory = []
+        revealPhaseHistoryRequestId = ""
+    }
+
+    private func beginRevealPhaseHistory(requestId: String) {
+        revealPhaseHistoryRequestId = requestId
+        revealPhaseHistory = []
+    }
+
+    private func ensureRevealPhaseHistory(requestId: String) {
+        if revealPhaseHistoryRequestId != requestId {
+            beginRevealPhaseHistory(requestId: requestId)
+        }
+    }
+
+    private func recordRevealPhase(
+        _ phase: GachaRevealPhase,
+        requestId: String
+    ) {
+        ensureRevealPhaseHistory(requestId: requestId)
+        // Unity may republish its current phase while the native watchdog
+        // queries the same transaction. Consecutive duplicates are transport
+        // retries, not a second animation stage.
+        if revealPhaseHistory.last != phase {
+            revealPhaseHistory.append(phase)
+        }
+    }
+
+    private func localizedFailure(_ reason: String) -> String {
+        switch reason {
+        case "insufficient-tickets": return "抽取券不足，当前无法单抽。"
+        case "ten-draw-disabled": return "十抽尚未开放。"
+        case "transaction-already-pending": return "上一笔抽取尚未确认，请先完成揭晓。"
+        case "transaction-response-timeout": return "抽取响应超时；只会查询原交易，不会重新抽取。"
+        case "acceptance-response-timeout": return "收下确认未完成，已恢复本次奖励，可再次尝试。"
+        case "reveal-setup-failed": return "3D 揭晓准备失败，可查询原交易后重试。"
+        case "reveal-setup-timeout": return "3D 揭晓准备超时；正在查询原交易。"
+        case "reveal-start-timeout": return "3D 揭晓启动超时；正在恢复同一笔交易。"
+        case "reveal-complete-timeout": return "3D 揭晓完成回包超时；正在查询同一笔交易。"
+        case "scene-changed", "model-selection-changed":
+            return "模型场景已变化；请查询原交易后重新揭晓。"
+        default: return "抽取未完成：\(reason)"
+        }
     }
 }
 
@@ -218,6 +741,39 @@ public func CodexGachaReceiveState(
             catalog: catalog,
             snapshot: snapshot,
             receipt: receipt)
+    }
+}
+
+@_cdecl("CodexGachaRevealReceiveSetup")
+public func CodexGachaRevealReceiveSetup(
+    _ requestId: UnsafePointer<CChar>?,
+    _ succeeded: Int32,
+    _ failureReason: UnsafePointer<CChar>?
+) {
+    let decodedRequestId = requestId.map { String(cString: $0) } ?? ""
+    let decodedFailure = failureReason.map { String(cString: $0) } ?? ""
+    Task { @MainActor in
+        GachaStoreModel.shared.receiveRevealSetup(
+            requestId: decodedRequestId,
+            succeeded: succeeded != 0,
+            failureReason: decodedFailure)
+    }
+}
+
+@_cdecl("CodexGachaRevealReceivePhase")
+public func CodexGachaRevealReceivePhase(
+    _ requestId: UnsafePointer<CChar>?,
+    _ phase: UnsafePointer<CChar>?,
+    _ failureReason: UnsafePointer<CChar>?
+) {
+    let decodedRequestId = requestId.map { String(cString: $0) } ?? ""
+    let decodedPhase = phase.map { String(cString: $0) } ?? ""
+    let decodedFailure = failureReason.map { String(cString: $0) } ?? ""
+    Task { @MainActor in
+        GachaStoreModel.shared.receiveRevealPhase(
+            requestId: decodedRequestId,
+            phaseToken: decodedPhase,
+            failureReason: decodedFailure)
     }
 }
 

@@ -1,126 +1,148 @@
 using System;
-using UnityEngine;
 using FidgetingApp.DisplayCase;
+using UnityEngine;
 
 namespace FidgetingApp.Product.Gacha
 {
-    public enum GachaRevealPhase
-    {
-        Idle = 0,
-        Suspense = 1,
-        Revealing = 2,
-        Complete = 3
-    }
-
     /// <summary>
-    /// Orchestrates one prize reveal: instantiates the neutral premium display
-    /// case, applies the per-rarity signature (suspense hold + director-owned
-    /// accent light + capsule preset by prize kind), plays the frozen 2.20 s
-    /// case timeline, and forwards completion exactly once. The prize node is
-    /// caller-owned; the case contract restores its parent/pose on teardown.
-    /// Never writes Rigidbody state and never calls haptics directly.
+    /// Scene-facing wrapper around GachaRevealSession. Setup and Start are
+    /// deliberately separate so native can make its transparent presentation
+    /// visible before Unity advances the authoritative six-phase clock.
     /// </summary>
     public sealed class GachaRevealDirector : MonoBehaviour
     {
+        public event Action<GachaRevealPhase> phaseChanged;
         public event Action revealCompleted;
 
-        private PremiumDisplayCase activeCase;
-        private Light accentLight;
-        private GachaRevealSignature signature;
-        private GachaRevealPhase phase = GachaRevealPhase.Idle;
-        private float suspenseRemaining;
-        private bool completionForwarded;
+        private GachaRevealSession session;
 
-        public GachaRevealPhase Phase => phase;
-        public PremiumDisplayCase ActiveCase => activeCase;
-        public Light AccentLight => accentLight;
+        public GachaRevealPhase Phase => session?.Phase ?? GachaRevealPhase.Idle;
+        public string PhaseToken => GachaPresentationNativeBridge.PhaseToken(Phase);
+        public float PhaseProgress => session?.PhaseProgress ?? 0f;
+        public PremiumDisplayCase ActiveCase => session?.DisplayCase;
+        public Transform ActivePrize => session?.Prize;
+        public Light AccentLight => session?.SheenLight;
+        public string FailureReason { get; private set; } = string.Empty;
+        public bool IsPrepared => session != null;
 
+        public bool Prepare(GachaDrawOutcome outcome)
+        {
+            Dismiss();
+            if (!GachaRevealSession.TryCreate(
+                    transform,
+                    outcome,
+                    out session,
+                    out string failureReason))
+            {
+                FailureReason = failureReason;
+                session = null;
+                return false;
+            }
+
+            FailureReason = string.Empty;
+            Subscribe();
+            return true;
+        }
+
+        public bool Prepare(GachaPrizeDefinition prize)
+        {
+            Dismiss();
+            if (!GachaRevealSession.TryCreate(
+                    transform,
+                    prize,
+                    out session,
+                    out string failureReason))
+            {
+                FailureReason = failureReason;
+                session = null;
+                return false;
+            }
+
+            FailureReason = string.Empty;
+            Subscribe();
+            return true;
+        }
+
+        public bool StartReveal()
+        {
+            if (session == null)
+            {
+                FailureReason = "reveal-not-prepared";
+                return false;
+            }
+
+            session.Start();
+            return true;
+        }
+
+        public void Begin(GachaDrawOutcome outcome)
+        {
+            if (!Prepare(outcome))
+            {
+                throw new InvalidOperationException(FailureReason);
+            }
+            StartReveal();
+        }
+
+        /// <summary>
+        /// Compatibility overload for callers that already own an imported
+        /// renderer-only prize. New gacha code should use Prepare(outcome),
+        /// which resolves the stable ContentReference itself.
+        /// </summary>
         public void Begin(GachaDrawOutcome outcome, Transform prizeNode)
         {
             GachaPrizeDefinition? prize = GachaCatalog.ResolvePrize(outcome.PrizeId);
             GachaPrizeKind kind = prize.HasValue
                 ? prize.Value.Kind
                 : GachaPrizeKind.ToySkin;
-            Begin(outcome.Rarity, kind, prizeNode);
+            Begin(
+                outcome.Rarity,
+                kind,
+                prize.HasValue ? prize.Value.DisplayName : "COLLECTOR EDITION",
+                prizeNode);
         }
 
-        public void Begin(GachaRarity rarity, GachaPrizeKind kind, Transform prizeNode)
+        public void Begin(
+            GachaRarity rarity,
+            GachaPrizeKind kind,
+            Transform prizeNode)
         {
+            Begin(rarity, kind, kind.ToString(), prizeNode);
+        }
+
+        public void Begin(
+            GachaRarity rarity,
+            GachaPrizeKind kind,
+            string displayName,
+            Transform prizeNode)
+        {
+            _ = kind;
             Dismiss();
-            signature = GachaRevealRules.Signature(rarity);
-            activeCase = PremiumDisplayCaseFactory.Instantiate(transform);
-            activeCase.setCapsulePreset(GachaRevealRules.CapsulePresetFor(kind));
-            activeCase.setContent(prizeNode);
-            activeCase.onRevealComplete += HandleRevealComplete;
-            CreateAccentLight();
-            suspenseRemaining = signature.SuspenseHoldSeconds;
-            completionForwarded = false;
-            phase = suspenseRemaining > 0f
-                ? GachaRevealPhase.Suspense
-                : GachaRevealPhase.Revealing;
-            if (phase == GachaRevealPhase.Revealing)
-            {
-                activeCase.play();
-            }
+            session = GachaRevealSession.CreateExternal(
+                transform,
+                rarity,
+                displayName,
+                prizeNode);
+            FailureReason = string.Empty;
+            Subscribe();
+            session.Start();
         }
 
-        /// <summary>Deterministic step, called from Update and from tests.</summary>
-        public void Tick(float deltaTime)
+        /// <summary>Deterministic step, called from Update and tests.</summary>
+        public void Tick(float unscaledDeltaTime)
         {
-            if (activeCase == null || phase == GachaRevealPhase.Idle)
-            {
-                return;
-            }
-
-            float dt = Mathf.Max(0f, deltaTime);
-            if (phase == GachaRevealPhase.Suspense)
-            {
-                suspenseRemaining -= dt;
-                if (suspenseRemaining <= 0f)
-                {
-                    phase = GachaRevealPhase.Revealing;
-                    activeCase.play();
-                }
-            }
-
-            if (accentLight != null)
-            {
-                float envelope = phase == GachaRevealPhase.Suspense
-                    ? 0f
-                    : GachaRevealRules.AccentEnvelope(activeCase.RevealProgress);
-                accentLight.intensity = envelope
-                    * signature.AccentIntensity
-                    * GachaRevealRules.AccentLightMaxIntensity;
-            }
+            session?.Advance(unscaledDeltaTime);
         }
 
-        /// <summary>
-        /// Tears the reveal down. Destroying the case restores the prize
-        /// node's original parent, pose, and active state per the case
-        /// contract; the prize itself is never destroyed here.
-        /// </summary>
         public void Dismiss()
         {
-            if (activeCase != null)
+            if (session != null)
             {
-                activeCase.onRevealComplete -= HandleRevealComplete;
-                // Detach the caller-owned prize before destroying the case.
-                // DestroyImmediate can tear down child objects before the case's
-                // OnDisable/OnDestroy callbacks run, so lifecycle restoration
-                // alone is not sufficient in EditMode or editor tooling.
-                activeCase.setContent((Transform)null);
-                DestroyOwned(activeCase.gameObject);
-                activeCase = null;
+                Unsubscribe();
+                session.Dispose();
+                session = null;
             }
-
-            if (accentLight != null)
-            {
-                DestroyOwned(accentLight.gameObject);
-                accentLight = null;
-            }
-
-            phase = GachaRevealPhase.Idle;
-            completionForwarded = false;
+            FailureReason = string.Empty;
         }
 
         private void Update()
@@ -133,43 +155,26 @@ namespace FidgetingApp.Product.Gacha
             Dismiss();
         }
 
+        private void Subscribe()
+        {
+            session.phaseChanged += HandlePhaseChanged;
+            session.revealCompleted += HandleRevealComplete;
+        }
+
+        private void Unsubscribe()
+        {
+            session.phaseChanged -= HandlePhaseChanged;
+            session.revealCompleted -= HandleRevealComplete;
+        }
+
+        private void HandlePhaseChanged(GachaRevealPhase phase)
+        {
+            phaseChanged?.Invoke(phase);
+        }
+
         private void HandleRevealComplete()
         {
-            phase = GachaRevealPhase.Complete;
-            if (completionForwarded)
-            {
-                return;
-            }
-
-            completionForwarded = true;
             revealCompleted?.Invoke();
-        }
-
-        private void CreateAccentLight()
-        {
-            // Director-owned accent, deliberately outside the case's frozen
-            // hierarchy so rarity tinting never leaks into the neutral prefab.
-            var lightObject = new GameObject("GachaRarityAccentLight");
-            lightObject.transform.SetParent(transform, false);
-            lightObject.transform.localPosition = new Vector3(0f, 0.16f, -0.10f);
-            accentLight = lightObject.AddComponent<Light>();
-            accentLight.type = LightType.Point;
-            accentLight.range = 0.85f;
-            accentLight.color = signature.LiningColor;
-            accentLight.intensity = 0f;
-            accentLight.shadows = LightShadows.None;
-        }
-
-        private static void DestroyOwned(GameObject target)
-        {
-            if (Application.isPlaying)
-            {
-                Destroy(target);
-            }
-            else
-            {
-                DestroyImmediate(target);
-            }
         }
     }
 }

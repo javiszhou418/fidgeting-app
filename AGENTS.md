@@ -12,9 +12,20 @@ These instructions apply to every task and conversation working in this reposito
 ## Canonical product
 
 - The shipping Unity product is `unity/FidgetingApp`.
-- `PRODUCT_PLAN.md` defines product scope.
+- `unity/FidgetingApp/Docs/FidgetingAppProductDesignBible.md` is the canonical authority for product definition, design preferences, current experience requirements, approved visual evidence, rejection criteria, and decision history.
+- `PRODUCT_PLAN.md` is a short compatibility entry and navigation index. It must not become a second, drifting source of product design truth.
 - `unity/FidgetingApp/Docs/FidgetingInteractionHapticsSystem.md` defines the target interaction, mechanics, Core Motion, and Haptic architecture.
 - `unity/FidgetingApp/Docs/IMPLEMENTATION_STATUS.md` records what is actually integrated. A specification or mockup alone is never implementation.
+
+## Design bible synchronization gate
+
+- When the user explicitly approves, rejects, supersedes, or materially changes a product, visual, interaction, growth, collection, economy, or release decision, update `unity/FidgetingApp/Docs/FidgetingAppProductDesignBible.md` in the same feature task.
+- Every executable design decision must use or update a stable `FDB-*` requirement ID and record `DecisionState`, source task/thread ID, and the applicable date or approval round. Do not cite temporary rollout or `/tmp` paths.
+- Keep `DecisionState` separate from `DeliveryState`. A locked design may still be only specified; code, tests, installation, and device acceptance are separate gates.
+- Copy only still-valid, explicitly approved shipping previews into `unity/FidgetingApp/Docs/DesignBibleAssets/`. Rejected, superseded, conceptual, or approval-pending previews belong only in the decision history or implementation evidence, not the approved asset set.
+- Rejected and superseded directions must be removed from current requirements and preserved in the design bible decision appendix with their replacement. Do not silently restore them in later work.
+- Runtime, scene wiring, automated tests, build/install evidence, and iPhone validation continue to be recorded in `unity/FidgetingApp/Docs/IMPLEMENTATION_STATUS.md`; do not duplicate long build logs in the design bible.
+- Build, install, launch, or a request to “push to phone” does not by itself change a design to approved or a delivery state to device accepted.
 
 ## Required interaction invariants
 
