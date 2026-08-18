@@ -60,20 +60,20 @@ namespace FidgetingApp.DisplayCase.Tests.Editor
                 if (modelId == ProductCatalog.MetalThreeBladeModelId)
                 {
                     Assert.That(displayCase.ContentFitScale.x,
-                        Is.EqualTo(0.916576f).Within(0.003f),
-                        "Metal must use one uniform fit inside the shared magnetic-slide capsule.");
+                        Is.EqualTo(1.494417f).Within(0.003f),
+                        "Metal must use one uniform fit inside the shared Collector Slab capsule.");
                 }
                 if (modelId == ProductCatalog.GoldFourWingModelId)
                 {
                     Assert.That(displayCase.ContentFitScale.x,
-                        Is.EqualTo(0.882947f).Within(0.003f),
+                        Is.EqualTo(0.895743f).Within(0.003f),
                         "Mirror Quad must preserve the verified full four-wing fit in the shared case.");
                 }
                 if (modelId == ProductCatalog.MagneticFanCardModelId)
                 {
                     Assert.That(displayCase.ContentFitScale.x,
-                        Is.EqualTo(0.533783f).Within(0.003f),
-                        "The readable Q/K/A fan must fit uniformly inside the same magnetic-slide capsule without a portrait exception.");
+                        Is.EqualTo(0.957329f).Within(0.003f),
+                        "The readable Q/K/A fan must fit uniformly inside the same Collector Slab capsule without a portrait exception.");
                 }
 
                 interaction.SetExplodedProgress(1f);

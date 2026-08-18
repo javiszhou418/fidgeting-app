@@ -27,10 +27,20 @@ namespace FidgetingApp.Product.Gacha
 
         public bool Prepare(GachaDrawOutcome outcome)
         {
+            return Prepare(outcome, string.Empty);
+        }
+
+        /// <summary>
+        /// firstObtainedAtUtc should come from the authoritative receipt row
+        /// so the physical Collector label reads the real acquisition date.
+        /// </summary>
+        public bool Prepare(GachaDrawOutcome outcome, string firstObtainedAtUtc)
+        {
             Dismiss();
             if (!GachaRevealSession.TryCreate(
                     transform,
                     outcome,
+                    firstObtainedAtUtc,
                     out session,
                     out string failureReason))
             {

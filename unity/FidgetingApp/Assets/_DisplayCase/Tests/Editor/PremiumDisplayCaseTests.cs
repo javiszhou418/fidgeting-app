@@ -169,7 +169,7 @@ namespace FidgetingApp.DisplayCase.Tests.Editor
                 PremiumDisplayCaseProductProfiles.Resolve(
                     ProductCatalog.MagneticSlideTileModelId);
             Assert.That(magneticBaseline.CapsulePreset,
-                Is.EqualTo(PremiumDisplayCaseCapsulePreset.RoundedSquareDeep));
+                Is.EqualTo(PremiumDisplayCaseCapsulePreset.CollectorSlabLarge));
             Assert.That(magneticBaseline.ContentOptions.InitialEulerAngles,
                 Is.EqualTo(new Vector3(90f, -8f, 0f)));
             Assert.That(magneticBaseline.ContentOptions.IdleRotationPeriodSeconds,
@@ -298,8 +298,8 @@ namespace FidgetingApp.DisplayCase.Tests.Editor
 
             Assert.That(capsule.Shape, Is.EqualTo(baseline.Shape));
             Assert.That(capsule.InnerSize, Is.EqualTo(baseline.InnerSize));
-            Assert.That(fit.UniformScale, Is.GreaterThan(0.532f));
-            Assert.That(fit.UniformScale, Is.LessThan(0.534f));
+            Assert.That(fit.UniformScale, Is.GreaterThan(0.955f));
+            Assert.That(fit.UniformScale, Is.LessThan(0.957f));
             Assert.That(fit.CenterOffset,
                 Is.EqualTo(-expandedFan.center * fit.UniformScale));
         }
@@ -408,7 +408,7 @@ namespace FidgetingApp.DisplayCase.Tests.Editor
         }
 
         [Test]
-        public void LaserIdentification_IsCenteredAndUsesCurrentClampedLevel()
+        public void CollectorIdentification_IsLeftAlignedOnTheLabelAndUsesCurrentClampedLevel()
         {
             PremiumDisplayCase prefab = AssetDatabase.LoadAssetAtPath<
                 PremiumDisplayCase>(PrefabPath);
@@ -420,27 +420,32 @@ namespace FidgetingApp.DisplayCase.Tests.Editor
                 Assert.That(instance.IdentificationProductName,
                     Is.EqualTo("MAGNETIC TRINITY"));
                 Assert.That(instance.IdentificationLevelText,
-                    Is.EqualTo("LEVEL 24"));
+                    Is.EqualTo("REFINED · LEVEL 24"));
 
                 TextMesh[] marks = instance.GetComponentsInChildren<TextMesh>(true)
-                    .Where(mark => mark.name.StartsWith("Laser"))
+                    .Where(mark => mark.name == "CollectorTierAndLevel"
+                        || mark.name == "CollectorProductName")
                     .ToArray();
                 Assert.That(marks.Length, Is.EqualTo(2));
                 Assert.That(marks.Select(mark => mark.anchor),
-                    Has.All.EqualTo(TextAnchor.MiddleCenter));
+                    Has.All.EqualTo(TextAnchor.MiddleLeft));
                 Assert.That(marks.Select(mark => mark.alignment),
-                    Has.All.EqualTo(TextAlignment.Center));
+                    Has.All.EqualTo(TextAlignment.Left));
+                float sharedLabelX = marks[0].transform.localPosition.x;
                 foreach (TextMesh mark in marks)
                 {
                     Assert.That(mark.font.name, Does.Contain("Oxanium"));
                     Assert.That(mark.transform.localPosition.x,
-                        Is.EqualTo(0f).Within(0.0001f));
+                        Is.EqualTo(sharedLabelX).Within(0.0001f),
+                        "Both lines must sit flush on the same label margin.");
                 }
 
                 instance.SetIdentification("EDGE TRIAD", -10);
-                Assert.That(instance.IdentificationLevelText, Is.EqualTo("LEVEL 1"));
+                Assert.That(instance.IdentificationLevelText,
+                    Is.EqualTo("STANDARD · LEVEL 1"));
                 instance.SetIdentification("EDGE TRIAD", 500);
-                Assert.That(instance.IdentificationLevelText, Is.EqualTo("LEVEL 100"));
+                Assert.That(instance.IdentificationLevelText,
+                    Is.EqualTo("HEIRLOOM · LEVEL 100"));
             }
             finally
             {
@@ -502,18 +507,18 @@ namespace FidgetingApp.DisplayCase.Tests.Editor
                         true)
                     .Single(child => child.name == "FeaturedBadgeRoot");
                 Assert.That(badgeRoot.localPosition.y,
-                    Is.EqualTo(0.081f).Within(0.0001f));
+                    Is.EqualTo(0.108f).Within(0.0001f));
                 Assert.That(badgeRenderer.transform.localPosition.x,
-                    Is.EqualTo(-0.014f).Within(0.0001f));
+                    Is.EqualTo(-0.013f).Within(0.0001f));
                 Assert.That(badgeRenderer.transform.localScale.x,
-                    Is.EqualTo(0.031f).Within(0.0001f));
+                    Is.EqualTo(0.022f).Within(0.0001f));
                 Assert.That(tokenMark.transform.localPosition.x,
-                    Is.EqualTo(0.014f).Within(0.0001f));
+                    Is.EqualTo(0.012f).Within(0.0001f));
                 TextMesh shortNameMark = instance.GetComponentsInChildren<TextMesh>(
                         true)
                     .Single(mark => mark.name == "FeaturedBadgeShortName");
                 Assert.That(shortNameMark.transform.localPosition.x,
-                    Is.EqualTo(0.014f).Within(0.0001f));
+                    Is.EqualTo(0.012f).Within(0.0001f));
                 Assert.That(badgeRenderer.sharedMaterial.shader.name,
                     Is.EqualTo("FidgetingApp/PremiumBadgeArtwork"));
                 Assert.That(badgeRenderer.sharedMaterial.HasProperty("_EtchColor"),
@@ -641,26 +646,23 @@ namespace FidgetingApp.DisplayCase.Tests.Editor
         }
 
         [Test]
-        public void RoundedCapsule_UsesOpaqueNeutralMaterialsInsteadOfFloatingAcrylic()
+        public void CollectorSlab_BackingIsOpaqueVelvetAndRarityBandIsBrushedMetal()
         {
             PremiumDisplayCase prefab = AssetDatabase.LoadAssetAtPath<
                 PremiumDisplayCase>(PrefabPath);
             Assert.That(prefab, Is.Not.Null, "Run the display-case builder first.");
             Transform[] transforms = prefab.GetComponentsInChildren<Transform>(true);
 
-            Renderer wall = transforms.Single(item =>
-                item.name == "RoundedRecessWall").GetComponent<Renderer>();
             Renderer back = transforms.Single(item =>
-                item.name == "RoundedRecessBack").GetComponent<Renderer>();
-            Renderer edge = transforms.Single(item =>
-                item.name == "RoundedEdgeLight").GetComponent<Renderer>();
+                item.name == "Collector_BlackFlocking").GetComponent<Renderer>();
+            Renderer rarityBand = transforms.Single(item =>
+                item.name == "Collector_RarityFoilBand").GetComponent<Renderer>();
 
-            Assert.That(wall.sharedMaterial.name, Is.EqualTo("NeutralGraphite"));
             Assert.That(back.sharedMaterial.name, Is.EqualTo("BlackVelvet"));
-            Assert.That(edge.sharedMaterial.name, Is.EqualTo("BrushedMetal"));
-            Assert.That(new[] { wall, back }.Select(renderer =>
-                    renderer.sharedMaterial.shader.name),
-                Has.None.EqualTo("FidgetingApp/PremiumAcrylicLiquidGlass"));
+            Assert.That(rarityBand.sharedMaterial.name, Is.EqualTo("BrushedMetal"));
+            Assert.That(back.sharedMaterial.shader.name,
+                Is.Not.EqualTo("FidgetingApp/PremiumAcrylicLiquidGlass"),
+                "The label backing must stay opaque velvet, not floating acrylic.");
         }
 
         [Test]
@@ -1081,38 +1083,30 @@ namespace FidgetingApp.DisplayCase.Tests.Editor
                     $"{layerName} contains non-FBX shipping geometry.");
             }
 
-            Assert.That(transforms.Count(item => item.name.StartsWith("Fastener_")),
-                Is.EqualTo(4));
-            Assert.That(transforms.Count(item => item.name.StartsWith("ChromeCollar_")),
-                Is.EqualTo(4));
-            Assert.That(transforms.Any(item => item.name == "MatteBlack_OuterTray"),
-                Is.False);
-            Assert.That(transforms.Any(item => item.name == "MatteBlack_BoxLid"),
-                Is.False);
-            Assert.That(transforms.Any(item => item.name == "Graphite_InnerTray"),
-                Is.True);
-            Assert.That(transforms.Count(item => item.name.StartsWith("Acrylic_BackFrame")),
-                Is.EqualTo(4));
+            Assert.That(transforms.Count(item =>
+                item.name.StartsWith("Polycarbonate_FrontStep_")), Is.EqualTo(4));
+            Assert.That(transforms.Count(item =>
+                item.name.StartsWith("Polycarbonate_RearStep_")), Is.EqualTo(4));
+            Assert.That(transforms.Count(item =>
+                item.name.StartsWith("Polycarbonate_SpacerFrame_")), Is.EqualTo(4));
 
-            foreach (Transform fastener in transforms.Where(item =>
-                         item.name.StartsWith("Fastener_")))
+            foreach (Transform edge in transforms.Where(item =>
+                         item.name.StartsWith("Polycarbonate_FrontStep_")
+                         || item.name.StartsWith("Polycarbonate_RearStep_")
+                         || item.name.StartsWith("Polycarbonate_SpacerFrame_")))
             {
-                Assert.That(fastener.GetComponent<Renderer>().sharedMaterial.name,
-                    Is.EqualTo("MatteBlackBox"));
-            }
-            foreach (Transform collar in transforms.Where(item =>
-                         item.name.StartsWith("ChromeCollar_")))
-            {
-                Assert.That(collar.GetComponent<Renderer>().sharedMaterial.name,
-                    Is.EqualTo("BrushedMetal"));
+                Assert.That(edge.GetComponent<Renderer>().sharedMaterial.name,
+                    Is.EqualTo("LiquidGlassEdge"), edge.name);
             }
 
             Renderer front = transforms.Single(item =>
-                item.name == "Acrylic_FrontPlate").GetComponent<Renderer>();
+                item.name == "Polycarbonate_FrontShell").GetComponent<Renderer>();
             Renderer rear = transforms.Single(item =>
-                item.name == "Acrylic_RearPlate").GetComponent<Renderer>();
+                item.name == "Polycarbonate_RearShell").GetComponent<Renderer>();
+            Assert.That(front.sharedMaterial.name, Is.EqualTo("LiquidGlass"));
+            Assert.That(rear.sharedMaterial.name, Is.EqualTo("LiquidGlass"));
             Assert.That(front.bounds.center.z, Is.LessThan(rear.bounds.center.z),
-                "FBX depth must face the shipping camera; rear plate cannot occlude content.");
+                "FBX depth must face the shipping camera; rear shell cannot occlude content.");
         }
 
         [Test]

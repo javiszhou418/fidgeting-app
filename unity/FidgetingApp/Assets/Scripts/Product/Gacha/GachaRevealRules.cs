@@ -24,7 +24,7 @@ namespace FidgetingApp.Product.Gacha
     public static class GachaRevealRules
     {
         public const PremiumDisplayCaseCapsulePreset SharedCapsulePreset =
-            PremiumDisplayCaseCapsulePreset.RoundedSquareDeep;
+            PremiumDisplayCaseCapsulePreset.CollectorSlabLarge;
 
         /// <summary>Peak lumen budget for the director-owned accent light.</summary>
         public const float AccentLightMaxIntensity = 1.6f;

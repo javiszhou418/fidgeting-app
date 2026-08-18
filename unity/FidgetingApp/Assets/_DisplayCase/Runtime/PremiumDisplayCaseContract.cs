@@ -251,7 +251,8 @@ namespace FidgetingApp.DisplayCase
         CircularDeep = 2,
         RoundedSquareStandard = 3,
         RoundedSquareDeep = 4,
-        CircularWide = 5
+        CircularWide = 5,
+        CollectorSlabLarge = 6
     }
 
     public enum PremiumDisplayCaseCapsuleShape
@@ -282,16 +283,18 @@ namespace FidgetingApp.DisplayCase
             float width,
             float height,
             float depth,
-            float cornerRadius)
+            float cornerRadius,
+            float contentPaddingFraction = PremiumDisplayCaseLayout.ContentPaddingFraction)
         {
             Shape = shape;
-            Width = Mathf.Clamp(width, 0.060f, 0.160f);
-            Height = Mathf.Clamp(height, 0.060f, 0.160f);
+            Width = Mathf.Clamp(width, 0.060f, 0.200f);
+            Height = Mathf.Clamp(height, 0.060f, 0.220f);
             Depth = Mathf.Clamp(depth, 0.012f, 0.080f);
             CornerRadius = Mathf.Clamp(
                 cornerRadius,
                 0.002f,
                 Mathf.Min(Width, Height) * 0.45f);
+            ContentPaddingFraction = Mathf.Clamp(contentPaddingFraction, 0f, 0.35f);
         }
 
         public PremiumDisplayCaseCapsuleShape Shape { get; }
@@ -303,6 +306,13 @@ namespace FidgetingApp.DisplayCase
         public float Depth { get; }
         public float CornerRadius { get; }
         public Vector3 InnerSize => new Vector3(Width, Height, Depth);
+
+        /// <summary>
+        /// Baked-in default padding for <see cref="PremiumDisplayCaseLayout.Fit"/>.
+        /// Only the Collector Slab's larger, label-bearing footprint overrides
+        /// the shared default; every other preset keeps it implicit.
+        /// </summary>
+        public float ContentPaddingFraction { get; }
     }
 
     public static class PremiumDisplayCaseCapsulePresets
@@ -342,6 +352,14 @@ namespace FidgetingApp.DisplayCase
                         0.084f,
                         0.038f,
                         0.014f),
+                PremiumDisplayCaseCapsulePreset.CollectorSlabLarge =>
+                    new PremiumDisplayCaseCapsuleDimensions(
+                        PremiumDisplayCaseCapsuleShape.RoundedSquare,
+                        0.180f,
+                        0.198f,
+                        0.048f,
+                        0.016f,
+                        PremiumDisplayCaseLayout.CollectorSlabContentPaddingFraction),
                 _ => new PremiumDisplayCaseCapsuleDimensions(
                     PremiumDisplayCaseCapsuleShape.Circular,
                     0.084f,
@@ -349,6 +367,93 @@ namespace FidgetingApp.DisplayCase
                     0.010f)
             };
         }
+    }
+
+    public enum PremiumDisplayCaseCollectorTier
+    {
+        Standard = 0,
+        Refined = 1,
+        Signature = 2,
+        Heirloom = 3
+    }
+
+    public static class PremiumDisplayCaseCollectorTierRules
+    {
+        public static PremiumDisplayCaseCollectorTier ResolveForLevel(int level)
+        {
+            int clamped = Mathf.Clamp(level, 1, 100);
+            if (clamped >= 70)
+            {
+                return PremiumDisplayCaseCollectorTier.Heirloom;
+            }
+            if (clamped >= 40)
+            {
+                return PremiumDisplayCaseCollectorTier.Signature;
+            }
+            return clamped >= 20
+                ? PremiumDisplayCaseCollectorTier.Refined
+                : PremiumDisplayCaseCollectorTier.Standard;
+        }
+
+        public static string DisplayName(PremiumDisplayCaseCollectorTier tier)
+        {
+            return tier.ToString().ToUpperInvariant();
+        }
+
+        public static Color FoilColor(PremiumDisplayCaseCollectorTier tier)
+        {
+            return tier switch
+            {
+                PremiumDisplayCaseCollectorTier.Refined =>
+                    new Color(0.40f, 0.57f, 0.68f, 1f),
+                PremiumDisplayCaseCollectorTier.Signature =>
+                    new Color(0.72f, 0.58f, 0.34f, 1f),
+                PremiumDisplayCaseCollectorTier.Heirloom =>
+                    new Color(0.31f, 0.25f, 0.36f, 1f),
+                _ => new Color(0.60f, 0.64f, 0.67f, 1f)
+            };
+        }
+    }
+
+    public readonly struct PremiumDisplayCaseCollectorLabel
+    {
+        public PremiumDisplayCaseCollectorLabel(
+            string productName,
+            string edition,
+            int level,
+            string firstObtainedDate,
+            string collectibleId = "",
+            PremiumDisplayCaseCollectorTier? tierOverride = null)
+        {
+            ProductName = string.IsNullOrWhiteSpace(productName)
+                ? "COLLECTOR EDITION"
+                : productName.Trim().ToUpperInvariant();
+            Edition = string.IsNullOrWhiteSpace(edition)
+                ? "ORIGINAL FINISH"
+                : edition.Trim().ToUpperInvariant();
+            Level = Mathf.Clamp(level, 1, 100);
+            FirstObtainedDate = firstObtainedDate?.Trim() ?? string.Empty;
+            CollectibleId = collectibleId?.Trim().ToUpperInvariant() ?? string.Empty;
+            Tier = tierOverride
+                ?? PremiumDisplayCaseCollectorTierRules.ResolveForLevel(Level);
+        }
+
+        public string ProductName { get; }
+        public string Edition { get; }
+        public int Level { get; }
+        public string FirstObtainedDate { get; }
+        public string CollectibleId { get; }
+        public PremiumDisplayCaseCollectorTier Tier { get; }
+        public string AcquiredDisplay => string.IsNullOrEmpty(FirstObtainedDate)
+            ? "ACQUIRED —"
+            : "ACQUIRED " + FirstObtainedDate.Replace('-', '.');
+        public string TierAndLevelDisplay => string.Concat(
+            PremiumDisplayCaseCollectorTierRules.DisplayName(Tier),
+            " · LEVEL ",
+            Level.ToString());
+        public string CollectibleDisplay => string.IsNullOrEmpty(CollectibleId)
+            ? string.Empty
+            : "COLLECTIBLE " + CollectibleId;
     }
 
     [Serializable]
@@ -394,12 +499,22 @@ namespace FidgetingApp.DisplayCase
     {
         public const float ContentPaddingFraction = 0.08f;
 
+        /// <summary>
+        /// The Collector Slab's larger, label-bearing footprint needs more
+        /// breathing room than the shared default; every other capsule
+        /// preset keeps <see cref="ContentPaddingFraction"/>.
+        /// </summary>
+        public const float CollectorSlabContentPaddingFraction = 0.30f;
+
         public static PremiumDisplayCaseFitResult Fit(
             Bounds contentBounds,
             PremiumDisplayCaseCapsuleDimensions capsule,
-            float paddingFraction = ContentPaddingFraction)
+            float? paddingFractionOverride = null)
         {
-            float padding = Mathf.Clamp(paddingFraction, 0f, 0.35f);
+            float padding = Mathf.Clamp(
+                paddingFractionOverride ?? capsule.ContentPaddingFraction,
+                0f,
+                0.35f);
             Vector3 available = capsule.InnerSize * (1f - padding);
             Vector3 size = contentBounds.size;
             float scale = Mathf.Min(

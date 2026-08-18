@@ -157,7 +157,7 @@ namespace FidgetingApp.Product.Gacha
     /// </summary>
     internal static class GachaTransactionCodec
     {
-        private const int CurrentTransactionSchemaVersion = 2;
+        private const int CurrentTransactionSchemaVersion = 3;
         private const int CurrentLedgerSchemaVersion = 2;
 
         [Serializable]
@@ -187,6 +187,10 @@ namespace FidgetingApp.Product.Gacha
             public bool forcedByTenDraw;
             public bool isNew;
             public int shardsGained;
+
+            // Absent on schema 2 rows; deserializes to null and is treated
+            // as an unknown acquisition date.
+            public string firstObtainedAtUtc;
         }
 
         [Serializable]
@@ -240,7 +244,8 @@ namespace FidgetingApp.Product.Gacha
                     forcedByHeirloomPity = row.Outcome.ForcedByHeirloomPity,
                     forcedByTenDraw = row.Outcome.ForcedByTenDraw,
                     isNew = row.IsNew,
-                    shardsGained = row.ShardsGained
+                    shardsGained = row.ShardsGained,
+                    firstObtainedAtUtc = row.FirstObtainedAtUtc
                 });
             }
 
@@ -519,7 +524,8 @@ namespace FidgetingApp.Product.Gacha
                         storedRow.forcedByHeirloomPity,
                         storedRow.forcedByTenDraw),
                     storedRow.isNew,
-                    storedRow.shardsGained));
+                    storedRow.shardsGained,
+                    storedRow.firstObtainedAtUtc ?? string.Empty));
             }
 
             transaction = new GachaPendingTransaction(

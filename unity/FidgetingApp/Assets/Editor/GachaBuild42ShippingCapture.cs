@@ -569,7 +569,7 @@ namespace FidgetingApp.Product.Gacha.Editor
                         && result.idleRotationDisabled
                         && result.idleRotationErrorDegrees < 0.001f
                         && result.capsulePreset == PremiumDisplayCaseCapsulePreset
-                            .RoundedSquareDeep.ToString()
+                            .CollectorSlabLarge.ToString()
                         && result.uniformFiniteFit
                         && result.cameraStableAfterTwoFrames
                         && result.exactPhaseOrder
@@ -704,7 +704,17 @@ namespace FidgetingApp.Product.Gacha.Editor
                 || name == "LaserProductName"
                 || name == "FeaturedBadgeArtwork"
                 || name == "FeaturedBadgeToken"
-                || name == "FeaturedBadgeShortName";
+                || name == "FeaturedBadgeShortName"
+                || name == "CollectorTierAndLevel"
+                || name == "CollectorProductName"
+                || name == "CollectorEdition"
+                || name == "CollectorAcquiredDate"
+                || name == "CollectorStableId"
+                || name == "Collector_LabelPaper"
+                || name == "Collector_RarityFoilBand"
+                || name.StartsWith(
+                    "Collector_LabelFoil_",
+                    StringComparison.Ordinal);
         }
 
         private static ShippingReport BuildReport(

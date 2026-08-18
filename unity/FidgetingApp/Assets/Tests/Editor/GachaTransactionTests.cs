@@ -312,6 +312,90 @@ namespace FidgetingApp.Tests.Editor
         }
 
         [Test]
+        public void PrepareStampsRealAcquisitionDateAndRepeatedRequestReturnsSameTimestamp()
+        {
+            var random = new CountingRandom();
+            GachaInventoryRuntime runtime = CleanInternal(random);
+            GachaTransactionResult first = runtime.PrepareDraw(
+                GachaCatalog.LaunchSeriesId,
+                1,
+                GachaPaymentMethod.Ticket,
+                "date-idempotent");
+            string firstDate = first.Transaction.Receipt.Rows[0].FirstObtainedAtUtc;
+            Assert.That(firstDate, Is.Not.Empty);
+            Assert.That(DateTime.TryParse(
+                    firstDate,
+                    System.Globalization.CultureInfo.InvariantCulture,
+                    System.Globalization.DateTimeStyles.RoundtripKind,
+                    out _),
+                Is.True,
+                "The acquisition date must be a full round-trip UTC timestamp.");
+            Assert.That(runtime.FirstObtainedAtUtc(
+                    first.Transaction.Receipt.Rows[0].Outcome.PrizeId),
+                Is.Empty,
+                "Preparing must not commit the acquisition date before acknowledgement.");
+
+            GachaTransactionResult retry = runtime.PrepareDraw(
+                GachaCatalog.LaunchSeriesId,
+                1,
+                GachaPaymentMethod.Ticket,
+                "date-idempotent");
+            Assert.That(retry.Transaction.Receipt.Rows[0].FirstObtainedAtUtc,
+                Is.EqualTo(firstDate),
+                "A repeated request id must return the original timestamp, not a fresh one.");
+        }
+
+        [Test]
+        public void PreparedAcquisitionDateSurvivesReloadAndAckCommitsOwnedAndDateTogether()
+        {
+            GachaInventoryRuntime first = CleanInternal(new CountingRandom());
+            GachaTransactionResult prepared = first.PrepareDraw(
+                GachaCatalog.LaunchSeriesId,
+                1,
+                GachaPaymentMethod.Ticket,
+                "date-reload");
+            string prizeId = prepared.Transaction.Receipt.Rows[0].Outcome.PrizeId;
+            string preparedDate = prepared.Transaction.Receipt.Rows[0].FirstObtainedAtUtc;
+            Assert.That(first.FirstObtainedAtUtc(prizeId), Is.Empty);
+
+            var restored = new GachaInventoryRuntime(
+                GachaRuntimeMode.InternalUnlimited,
+                InternalPrefix);
+            Assert.That(restored.PendingTransaction.Receipt.Rows[0].FirstObtainedAtUtc,
+                Is.EqualTo(preparedDate),
+                "A restored pending transaction must keep its durable acquisition date.");
+            Assert.That(restored.FirstObtainedAtUtc(prizeId), Is.Empty,
+                "Ownership and its date must not commit before acceptance.");
+
+            restored.MarkRevealAwaitingAcceptance("date-reload");
+            restored.AcknowledgePending("date-reload");
+            Assert.That(restored.FirstObtainedAtUtc(prizeId), Is.EqualTo(preparedDate),
+                "Acknowledgement must commit owned status and its date together.");
+
+            var reloadedAfterAck = new GachaInventoryRuntime(
+                GachaRuntimeMode.InternalUnlimited,
+                InternalPrefix);
+            Assert.That(reloadedAfterAck.FirstObtainedAtUtc(prizeId),
+                Is.EqualTo(preparedDate));
+        }
+
+        [Test]
+        public void PreSchemaTwoOwnedPrizesReportUnknownAcquisitionDate()
+        {
+            CleanProduction();
+            string legacyPrizeId = GachaCatalog.ResolveSeries(GachaCatalog.LaunchSeriesId)
+                .Prizes[0].Id;
+            PlayerPrefs.SetInt(ProductionPrefix + "version", 1);
+            PlayerPrefs.SetString(ProductionPrefix + "owned", legacyPrizeId);
+            PlayerPrefs.Save();
+
+            var migrated = new GachaInventoryRuntime(ProductionPrefix);
+            Assert.That(migrated.Owns(legacyPrizeId), Is.True);
+            Assert.That(migrated.FirstObtainedAtUtc(legacyPrizeId), Is.Empty,
+                "Build41 v1 owned prizes must report an unknown date, never a fabricated one.");
+        }
+
+        [Test]
         public void CompletedLedgerReplaysAAfterBAndReloadWithoutRerollOrDoubleCommit()
         {
             var originalRandom = new CountingRandom();
@@ -529,6 +613,8 @@ namespace FidgetingApp.Tests.Editor
                     Is.EqualTo(expectedRow.Outcome.ForcedByHeirloomPity));
                 Assert.That(actualRow.Outcome.ForcedByTenDraw,
                     Is.EqualTo(expectedRow.Outcome.ForcedByTenDraw));
+                Assert.That(actualRow.FirstObtainedAtUtc,
+                    Is.EqualTo(expectedRow.FirstObtainedAtUtc));
             }
         }
 

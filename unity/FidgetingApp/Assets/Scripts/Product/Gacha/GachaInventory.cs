@@ -16,16 +16,25 @@ namespace FidgetingApp.Product.Gacha
         public GachaDrawReceiptRow(
             GachaDrawOutcome outcome,
             bool isNew,
-            int shardsGained)
+            int shardsGained,
+            string firstObtainedAtUtc = "")
         {
             Outcome = outcome;
             IsNew = isNew;
             ShardsGained = Math.Max(0, shardsGained);
+            FirstObtainedAtUtc = firstObtainedAtUtc ?? string.Empty;
         }
 
         public GachaDrawOutcome Outcome { get; }
         public bool IsNew { get; }
         public int ShardsGained { get; }
+
+        /// <summary>
+        /// Full round-trip UTC timestamp ("O" format) fixed the moment this
+        /// prize was first prepared. Empty for pre-schema-2 duplicates whose
+        /// original acquisition date was never recorded.
+        /// </summary>
+        public string FirstObtainedAtUtc { get; }
     }
 
     public readonly struct GachaDrawReceipt
@@ -59,12 +68,14 @@ namespace FidgetingApp.Product.Gacha
     {
         public const string DefaultPrefix = "fidgeting.gacha.v1.";
         public const string InternalUnlimitedPrefix = "fidgeting.gacha.internal.v2.";
-        public const int SchemaVersion = 1;
+        public const int SchemaVersion = 2;
         private const int TransactionSchemaVersion = 2;
 
         private readonly string prefix;
         private readonly IGachaRandom random;
         private readonly HashSet<string> ownedPrizes = new HashSet<string>(StringComparer.Ordinal);
+        private readonly Dictionary<string, string> firstObtainedAtUtcByPrizeId =
+            new Dictionary<string, string>(StringComparer.Ordinal);
         private readonly Dictionary<string, GachaPityState> pityBySeries =
             new Dictionary<string, GachaPityState>(StringComparer.Ordinal);
         private readonly Dictionary<string, int> shardsBySeries =
@@ -127,6 +138,19 @@ namespace FidgetingApp.Product.Gacha
         }
 
         public int OwnedCount => ownedPrizes.Count;
+
+        /// <summary>
+        /// Committed acquisition date for an owned prize, or empty when the
+        /// prize predates the schema 2 upgrade and its date is unknown.
+        /// </summary>
+        public string FirstObtainedAtUtc(string prizeId)
+        {
+            return firstObtainedAtUtcByPrizeId.TryGetValue(
+                prizeId ?? string.Empty,
+                out string value)
+                ? value
+                : string.Empty;
+        }
 
         public GachaPityState Pity(string seriesId)
         {
@@ -277,6 +301,9 @@ namespace FidgetingApp.Product.Gacha
                 count,
                 ref pityAfter,
                 random);
+            string preparedAtUtc = DateTime.UtcNow.ToString(
+                "O",
+                CultureInfo.InvariantCulture);
             var projectedOwned = new HashSet<string>(ownedPrizes, StringComparer.Ordinal);
             var rows = new List<GachaDrawReceiptRow>(outcomes.Count);
             for (int index = 0; index < outcomes.Count; index++)
@@ -286,7 +313,14 @@ namespace FidgetingApp.Product.Gacha
                 int shardsGained = isNew
                     ? 0
                     : GachaEconomyRules.DuplicateShardValue(outcome.Rarity);
-                rows.Add(new GachaDrawReceiptRow(outcome, isNew, shardsGained));
+                string firstObtainedAtUtc = isNew
+                    ? preparedAtUtc
+                    : FirstObtainedAtUtc(outcome.PrizeId);
+                rows.Add(new GachaDrawReceiptRow(
+                    outcome,
+                    isNew,
+                    shardsGained,
+                    firstObtainedAtUtc));
             }
 
             pendingTransaction = new GachaPendingTransaction(
@@ -423,6 +457,11 @@ namespace FidgetingApp.Product.Gacha
                 GachaDrawReceiptRow row = pendingTransaction.Receipt.Rows[index];
                 ownedPrizes.Add(row.Outcome.PrizeId);
                 shardsGained += row.ShardsGained;
+                if (row.IsNew && !string.IsNullOrEmpty(row.FirstObtainedAtUtc))
+                {
+                    firstObtainedAtUtcByPrizeId[row.Outcome.PrizeId] =
+                        row.FirstObtainedAtUtc;
+                }
             }
 
             if (RuntimeMode == GachaRuntimeMode.Production)
@@ -671,6 +710,30 @@ namespace FidgetingApp.Product.Gacha
                 }
             }
 
+            // Schema 1 owned prizes never recorded an acquisition date; they
+            // remain unknown rather than being backfilled with today's date.
+            string obtainedDates = PlayerPrefs.GetString(
+                Key("obtainedDates"),
+                string.Empty);
+            if (!string.IsNullOrEmpty(obtainedDates))
+            {
+                foreach (string entry in obtainedDates.Split('|'))
+                {
+                    int separator = entry.IndexOf('=');
+                    if (separator <= 0 || separator == entry.Length - 1)
+                    {
+                        continue;
+                    }
+
+                    string prizeId = entry.Substring(0, separator);
+                    string date = entry.Substring(separator + 1);
+                    if (ownedPrizes.Contains(prizeId))
+                    {
+                        firstObtainedAtUtcByPrizeId[prizeId] = date;
+                    }
+                }
+            }
+
             IReadOnlyList<GachaSeriesDefinition> series = GachaCatalog.Series;
             for (int index = 0; index < series.Count; index++)
             {
@@ -850,6 +913,26 @@ namespace FidgetingApp.Product.Gacha
             var owned = new List<string>(ownedPrizes);
             owned.Sort(StringComparer.Ordinal);
             PlayerPrefs.SetString(Key("owned"), string.Join("|", owned));
+            if (firstObtainedAtUtcByPrizeId.Count == 0)
+            {
+                PlayerPrefs.DeleteKey(Key("obtainedDates"));
+            }
+            else
+            {
+                var obtainedDateEntries = new List<string>(
+                    firstObtainedAtUtcByPrizeId.Count);
+                foreach (KeyValuePair<string, string> entry
+                    in firstObtainedAtUtcByPrizeId)
+                {
+                    obtainedDateEntries.Add(entry.Key + "=" + entry.Value);
+                }
+
+                obtainedDateEntries.Sort(StringComparer.Ordinal);
+                PlayerPrefs.SetString(
+                    Key("obtainedDates"),
+                    string.Join("|", obtainedDateEntries));
+            }
+
             foreach (KeyValuePair<string, GachaPityState> entry in pityBySeries)
             {
                 PlayerPrefs.SetInt(
@@ -916,6 +999,7 @@ namespace FidgetingApp.Product.Gacha
             PlayerPrefs.DeleteKey(Key("coins"));
             PlayerPrefs.DeleteKey(Key("rhythmWeeksCredited"));
             PlayerPrefs.DeleteKey(Key("owned"));
+            PlayerPrefs.DeleteKey(Key("obtainedDates"));
             PlayerPrefs.DeleteKey(Key("transaction.version"));
             PlayerPrefs.DeleteKey(Key("transaction.pending"));
             PlayerPrefs.DeleteKey(Key("transaction.completed"));

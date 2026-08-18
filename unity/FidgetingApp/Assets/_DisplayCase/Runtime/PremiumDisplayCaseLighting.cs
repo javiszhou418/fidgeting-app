@@ -87,12 +87,12 @@ namespace FidgetingApp.DisplayCase
             new PremiumDisplayCaseLightingPreset(
                 DefaultId,
                 "柔白",
-                new Color(1.00f, 0.91f, 0.84f),
-                new Color(0.76f, 0.88f, 1.00f),
-                new Color(1.00f, 0.54f, 0.76f),
-                0.82f,
-                0.88f,
-                0.76f),
+                new Color(1.00f, 0.94f, 0.86f),
+                new Color(0.74f, 0.84f, 0.94f),
+                new Color(0.58f, 0.34f, 0.40f),
+                0.92f,
+                0.72f,
+                0.46f),
             new PremiumDisplayCaseLightingPreset(
                 "rose-studio",
                 "玫瑰",

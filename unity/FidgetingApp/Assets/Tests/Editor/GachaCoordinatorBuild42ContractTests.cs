@@ -178,7 +178,9 @@ namespace FidgetingApp.Tests.Editor
             StringAssert.Contains(
                 "ConfirmGachaRevealPresentationAfterTwoFrames(requestId)",
                 request);
-            StringAssert.Contains("activeGachaRevealDirector.Prepare(outcome)", request);
+            StringAssert.Contains(
+                "activeGachaRevealDirector.Prepare(\n                        revealRow.Outcome,\n                        revealRow.FirstObtainedAtUtc)",
+                request);
             StringAssert.DoesNotContain(".StartReveal()", request);
             Assert.That(
                 CountOccurrences(

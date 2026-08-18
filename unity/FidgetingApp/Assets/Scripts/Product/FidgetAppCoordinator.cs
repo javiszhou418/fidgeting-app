@@ -2868,9 +2868,11 @@ namespace FidgetingApp.Product
                 activeGachaRevealDirector.revealCompleted +=
                     HandleGachaRevealCompleted;
 
-                Gacha.GachaDrawOutcome outcome =
-                    transaction.Transaction.Receipt.Rows[0].Outcome;
-                if (!activeGachaRevealDirector.Prepare(outcome))
+                Gacha.GachaDrawReceiptRow revealRow =
+                    transaction.Transaction.Receipt.Rows[0];
+                if (!activeGachaRevealDirector.Prepare(
+                        revealRow.Outcome,
+                        revealRow.FirstObtainedAtUtc))
                 {
                     throw new System.InvalidOperationException(
                         activeGachaRevealDirector.FailureReason);

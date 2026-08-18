@@ -78,7 +78,7 @@ namespace FidgetingApp.DisplayCase
     public static class PremiumDisplayCaseProductProfiles
     {
         public const PremiumDisplayCaseCapsulePreset SharedCapsulePreset =
-            PremiumDisplayCaseCapsulePreset.RoundedSquareDeep;
+            PremiumDisplayCaseCapsulePreset.CollectorSlabLarge;
 
         private static readonly PremiumDisplayCaseCapsuleDimensions
             sharedCapsuleDimensions = PremiumDisplayCaseCapsulePresets.Resolve(

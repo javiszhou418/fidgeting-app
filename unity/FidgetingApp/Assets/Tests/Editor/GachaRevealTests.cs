@@ -33,7 +33,7 @@ namespace FidgetingApp.Tests.Editor
                     prize.ContentReference);
                 Assert.That(descriptor.DisplayName, Is.EqualTo(prize.DisplayName));
                 Assert.That(descriptor.CapsulePreset,
-                    Is.EqualTo(PremiumDisplayCaseCapsulePreset.RoundedSquareDeep));
+                    Is.EqualTo(PremiumDisplayCaseCapsulePreset.CollectorSlabLarge));
                 Assert.That(descriptor.ContentOptions.IdleRotationEnabled, Is.False,
                     "Gacha prizes must not self-spin.");
                 Assert.That(descriptor.ContentOptions.InitialEulerAngles,
@@ -198,7 +198,7 @@ namespace FidgetingApp.Tests.Editor
             foreach (GachaPrizeKind kind in Enum.GetValues(typeof(GachaPrizeKind)))
             {
                 Assert.That(GachaRevealRules.CapsulePresetFor(kind),
-                    Is.EqualTo(PremiumDisplayCaseCapsulePreset.RoundedSquareDeep),
+                    Is.EqualTo(PremiumDisplayCaseCapsulePreset.CollectorSlabLarge),
                     kind.ToString());
             }
             Assert.That(GachaRevealRules.TotalRevealSeconds(GachaRarity.Standard),
@@ -345,8 +345,12 @@ namespace FidgetingApp.Tests.Editor
 
                 Renderer[] identification = director.ActiveCase
                     .GetComponentsInChildren<Renderer>(true)
-                    .Where(renderer => renderer.name == "LaserLevelMark"
-                        || renderer.name == "LaserProductName")
+                    .Where(renderer => renderer.name == "CollectorTierAndLevel"
+                        || renderer.name == "CollectorProductName"
+                        || renderer.name == "CollectorEdition"
+                        || renderer.name == "CollectorAcquiredDate"
+                        || renderer.name == "Collector_LabelPaper"
+                        || renderer.name == "Collector_RarityFoilBand")
                     .ToArray();
                 Assert.That(identification, Is.Not.Empty);
                 Assert.That(identification.All(renderer => !renderer.enabled),

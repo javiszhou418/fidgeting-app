@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using FidgetingApp.DisplayCase;
 using UnityEngine;
 using UnityEngine.Rendering;
@@ -202,6 +203,77 @@ namespace FidgetingApp.Product.Gacha
     }
 
     /// <summary>
+    /// Converts authoritative gacha metadata into the physical Collector Slab
+    /// label. The pending receipt supplies acquisition time; no collectible id
+    /// is invented when the product has no durable numbering source.
+    /// </summary>
+    public static class GachaCollectorLabelRules
+    {
+        public static PremiumDisplayCaseCollectorLabel Create(
+            GachaPrizeDefinition prize,
+            string firstObtainedAtUtc)
+        {
+            return new PremiumDisplayCaseCollectorLabel(
+                ProductName(prize),
+                EditionName(prize.SeriesId),
+                1,
+                AcquiredDate(firstObtainedAtUtc),
+                string.Empty,
+                CollectorTier(prize.Rarity));
+        }
+
+        public static PremiumDisplayCaseCollectorTier CollectorTier(
+            GachaRarity rarity)
+        {
+            return rarity switch
+            {
+                GachaRarity.Refined => PremiumDisplayCaseCollectorTier.Refined,
+                GachaRarity.Signature => PremiumDisplayCaseCollectorTier.Signature,
+                GachaRarity.Heirloom => PremiumDisplayCaseCollectorTier.Heirloom,
+                _ => PremiumDisplayCaseCollectorTier.Standard
+            };
+        }
+
+        private static string ProductName(GachaPrizeDefinition prize)
+        {
+            if (string.Equals(
+                    prize.Id,
+                    "canyon-std-slate-lining",
+                    StringComparison.Ordinal))
+            {
+                return "SLATE LINING";
+            }
+
+            return string.IsNullOrWhiteSpace(prize.DisplayName)
+                ? "COLLECTOR EDITION"
+                : prize.DisplayName;
+        }
+
+        private static string EditionName(string seriesId)
+        {
+            return string.IsNullOrWhiteSpace(seriesId)
+                ? "GACHA EDITION"
+                : seriesId.Replace('-', ' ').ToUpperInvariant();
+        }
+
+        private static string AcquiredDate(string firstObtainedAtUtc)
+        {
+            if (!DateTime.TryParse(
+                    firstObtainedAtUtc,
+                    CultureInfo.InvariantCulture,
+                    DateTimeStyles.RoundtripKind,
+                    out DateTime parsed))
+            {
+                return string.Empty;
+            }
+
+            return parsed.ToUniversalTime().ToString(
+                "yyyy-MM-dd",
+                CultureInfo.InvariantCulture);
+        }
+    }
+
+    /// <summary>
     /// Owns one neutral case, one prize presentation and the deterministic
     /// reveal timeline. Camera ownership, live-product hiding, transaction
     /// persistence and native callbacks remain coordinator responsibilities.
@@ -230,7 +302,7 @@ namespace FidgetingApp.Product.Gacha
         private GachaRevealSession(
             Transform host,
             GachaRarity rarity,
-            string displayName,
+            PremiumDisplayCaseCollectorLabel collectorLabel,
             Transform prize,
             bool ownsPrize,
             GachaResolvedPrizePresentation resolvedPrize)
@@ -264,7 +336,7 @@ namespace FidgetingApp.Product.Gacha
             DisplayCase.setCapsulePreset(
                 GachaRevealRules.SharedCapsulePreset);
             DisplayCase.SetProductPresentationOffset(Vector3.zero);
-            DisplayCase.SetIdentification(displayName, 1);
+            DisplayCase.SetCollectorLabel(collectorLabel);
             DisplayCase.setContent(
                 prize,
                 GachaPrizePresentationResolver.SharedContentOptions);
@@ -308,6 +380,25 @@ namespace FidgetingApp.Product.Gacha
             out GachaRevealSession session,
             out string failureReason)
         {
+            return TryCreate(
+                host,
+                outcome,
+                string.Empty,
+                out session,
+                out failureReason);
+        }
+
+        /// <summary>
+        /// firstObtainedAtUtc is the authoritative receipt row's acquisition
+        /// timestamp; pass string.Empty only when no durable receipt exists.
+        /// </summary>
+        public static bool TryCreate(
+            Transform host,
+            GachaDrawOutcome outcome,
+            string firstObtainedAtUtc,
+            out GachaRevealSession session,
+            out string failureReason)
+        {
             GachaPrizeDefinition? prize = GachaCatalog.ResolvePrize(outcome.PrizeId);
             if (!prize.HasValue)
             {
@@ -316,12 +407,32 @@ namespace FidgetingApp.Product.Gacha
                 return false;
             }
 
-            return TryCreate(host, prize.Value, out session, out failureReason);
+            return TryCreate(
+                host,
+                prize.Value,
+                firstObtainedAtUtc,
+                out session,
+                out failureReason);
         }
 
         public static bool TryCreate(
             Transform host,
             GachaPrizeDefinition prize,
+            out GachaRevealSession session,
+            out string failureReason)
+        {
+            return TryCreate(
+                host,
+                prize,
+                string.Empty,
+                out session,
+                out failureReason);
+        }
+
+        public static bool TryCreate(
+            Transform host,
+            GachaPrizeDefinition prize,
+            string firstObtainedAtUtc,
             out GachaRevealSession session,
             out string failureReason)
         {
@@ -340,7 +451,7 @@ namespace FidgetingApp.Product.Gacha
                 session = new GachaRevealSession(
                     host,
                     prize.Rarity,
-                    prize.DisplayName,
+                    GachaCollectorLabelRules.Create(prize, firstObtainedAtUtc),
                     presentation.Transform,
                     true,
                     presentation);
@@ -392,7 +503,13 @@ namespace FidgetingApp.Product.Gacha
             return new GachaRevealSession(
                 host,
                 rarity,
-                displayName,
+                new PremiumDisplayCaseCollectorLabel(
+                    displayName,
+                    "GACHA EDITION",
+                    1,
+                    string.Empty,
+                    string.Empty,
+                    GachaCollectorLabelRules.CollectorTier(rarity)),
                 prize,
                 false,
                 null);
@@ -754,7 +871,17 @@ namespace FidgetingApp.Product.Gacha
                 || name == "LaserProductName"
                 || name == "FeaturedBadgeArtwork"
                 || name == "FeaturedBadgeToken"
-                || name == "FeaturedBadgeShortName";
+                || name == "FeaturedBadgeShortName"
+                || name == "CollectorTierAndLevel"
+                || name == "CollectorProductName"
+                || name == "CollectorEdition"
+                || name == "CollectorAcquiredDate"
+                || name == "CollectorStableId"
+                || name == "Collector_LabelPaper"
+                || name == "Collector_RarityFoilBand"
+                || name.StartsWith(
+                    "Collector_LabelFoil_",
+                    StringComparison.Ordinal);
         }
 
         private sealed class ShellFadeMaterial : IDisposable

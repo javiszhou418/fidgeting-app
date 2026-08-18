@@ -30,7 +30,7 @@ namespace FidgetingApp.Tests.Editor
                     Is.True,
                     prize.Id);
                 Assert.That(descriptor.CapsulePreset,
-                    Is.EqualTo(PremiumDisplayCaseCapsulePreset.RoundedSquareDeep));
+                    Is.EqualTo(PremiumDisplayCaseCapsulePreset.CollectorSlabLarge));
                 Assert.That(descriptor.ContentOptions.IdleRotationEnabled,
                     Is.False,
                     prize.Id + " must never self-spin in the reveal.");
