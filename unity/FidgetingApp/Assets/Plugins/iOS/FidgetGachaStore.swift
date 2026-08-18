@@ -166,6 +166,7 @@ public final class GachaStoreModel: ObservableObject {
     @Published public private(set) var runtimeMode: GachaRuntimeMode = .production
     @Published public private(set) var transactionPhase: GachaTransactionPhase = .idle
     @Published public private(set) var pendingTransaction: GachaPendingTransaction?
+    @Published public private(set) var packGateRequestId = ""
     @Published public private(set) var activeRequestId = ""
     @Published public private(set) var requestStatus = "idle"
     @Published public private(set) var revealPhase: GachaRevealPhase?
@@ -181,6 +182,7 @@ public final class GachaStoreModel: ObservableObject {
     private var revealSetupRequestedId = ""
     private var revealStartRequestedId = ""
     private var revealPhaseHistoryRequestId = ""
+    private var packOpenedRequestId = ""
 
     public var canStartSingleDraw: Bool {
         pendingTransaction == nil
@@ -190,6 +192,12 @@ public final class GachaStoreModel: ObservableObject {
 
     public var ticketBalanceText: String {
         runtimeMode == .internalUnlimited ? "∞" : "\(tickets)"
+    }
+
+    public var packIsPresented: Bool {
+        guard let transaction = pendingTransaction else { return false }
+        return !revealIsPresented
+            && packGateRequestId == transaction.requestId
     }
 
     public var drawCostText: String {
@@ -228,6 +236,7 @@ public final class GachaStoreModel: ObservableObject {
         }
 
         let requestId = UUID().uuidString.lowercased()
+        resetPackState()
         beginRevealPhaseHistory(requestId: requestId)
         activeRequestId = requestId
         transactionPhase = .requesting
@@ -256,8 +265,9 @@ public final class GachaStoreModel: ObservableObject {
 
     public func requestRevealSetupIfNeeded() {
         guard let transaction = pendingTransaction,
-              transaction.phase == .prepared
-                || transaction.phase == .awaitingAcceptance,
+              transaction.phase == .awaitingAcceptance
+                || (transaction.phase == .prepared
+                    && packOpenedRequestId == transaction.requestId),
               revealSetupRequestedId != transaction.requestId,
               !revealIsPresented
         else { return }
@@ -274,6 +284,22 @@ public final class GachaStoreModel: ObservableObject {
         scheduleRevealWatchdog(
             requestId: transaction.requestId,
             stage: "setup")
+    }
+
+    /// The Pack is presentation-only. Crossing the tear threshold authorizes
+    /// mounting this request's existing durable receipt in Unity; it never
+    /// generates, replaces, or acknowledges a transaction.
+    public func commitPackOpening(requestId: String) {
+        guard let transaction = pendingTransaction,
+              transaction.requestId == requestId,
+              packGateRequestId == requestId,
+              packOpenedRequestId != requestId,
+              transaction.phase == .prepared
+        else { return }
+
+        packOpenedRequestId = requestId
+        requestStatus = "pack-opened:\(requestId)"
+        requestRevealSetupIfNeeded()
     }
 
     public func startRevealIfNeeded(requestId: String) {
@@ -453,6 +479,7 @@ public final class GachaStoreModel: ObservableObject {
             activeRequestId = ""
             requestStatus = "idle"
             lastFailureReason = ""
+            resetPackState()
             resetRevealState()
             if wasPresenting {
                 CodexSetGachaRevealNativeChromeHidden(false)
@@ -467,6 +494,7 @@ public final class GachaStoreModel: ObservableObject {
             activeRequestId = ""
             requestStatus = "failed:\(requestId)"
             if lastFailureReason.isEmpty { lastFailureReason = "transaction-failed" }
+            resetPackState()
             resetRevealState()
             if wasPresenting {
                 CodexSetGachaRevealNativeChromeHidden(false)
@@ -486,6 +514,17 @@ public final class GachaStoreModel: ObservableObject {
         pendingTransaction = transaction
         pendingReceipt = rows
 
+        // Only a newly prepared draw is Pack-gated. An awaiting-acceptance
+        // transaction has already completed Unity's reveal and must restore
+        // that exact reward directly instead of replaying presentation gates.
+        if phase == .prepared
+            && !revealIsPresented
+            && packOpenedRequestId != requestId {
+            packGateRequestId = requestId
+            requestStatus = "pack-awaiting-open:\(requestId)"
+            return
+        }
+
         switch phase {
         case .prepared:
             requestStatus = "prepared:\(requestId)"
@@ -496,6 +535,7 @@ public final class GachaStoreModel: ObservableObject {
                 requestRevealSetupIfNeeded()
             }
         case .awaitingAcceptance:
+            packGateRequestId = ""
             requestStatus = "awaiting-acceptance:\(requestId)"
             if wasAcknowledgingHiddenReveal {
                 // The ACK was not committed (or Unity explicitly republished
@@ -539,6 +579,7 @@ public final class GachaStoreModel: ObservableObject {
             return
         }
 
+        packGateRequestId = ""
         revealIsPresented = true
         revealPhase = nil
         revealStartAcknowledged = false
@@ -684,6 +725,11 @@ public final class GachaStoreModel: ObservableObject {
         revealStartRequestedId = ""
         revealPhaseHistory = []
         revealPhaseHistoryRequestId = ""
+    }
+
+    private func resetPackState() {
+        packGateRequestId = ""
+        packOpenedRequestId = ""
     }
 
     private func beginRevealPhaseHistory(requestId: String) {

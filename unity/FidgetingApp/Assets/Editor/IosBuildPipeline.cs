@@ -35,6 +35,8 @@ namespace CodexUnityLabEditor
         private const string OxaniumFontFileName = "Oxanium-VariableFont_wght.ttf";
         private const string ProductThumbnailAssetRootPath =
             "Assets/Plugins/iOS/Thumbnails";
+        private const string GachaPackAssetRootPath =
+            "Assets/Plugins/iOS/GachaPacks";
         private const string SceneWallpaperAssetRootPath =
             "Assets/Plugins/iOS/SceneWallpapers";
         private const string ProductBadgeArtworkAssetRootPath =
@@ -657,6 +659,7 @@ namespace CodexUnityLabEditor
             string[] sourceRoots =
             {
                 Path.Combine(projectRoot, ProductThumbnailAssetRootPath),
+                Path.Combine(projectRoot, GachaPackAssetRootPath),
                 Path.Combine(projectRoot, SceneWallpaperAssetRootPath),
                 Path.Combine(projectRoot, ProductStickerArtworkAssetRootPath),
                 Path.Combine(projectRoot, ProductBadgeArtworkAssetRootPath)

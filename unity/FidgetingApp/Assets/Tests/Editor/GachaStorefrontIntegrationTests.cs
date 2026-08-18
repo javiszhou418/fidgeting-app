@@ -12,6 +12,8 @@ namespace FidgetingApp.Tests.Editor
             string storefront = ReadAsset("Plugins/iOS/FidgetGachaStorefront.swift");
             string legacy = ReadAsset("Plugins/iOS/FidgetGachaStore.swift");
             string overlay = ReadAsset("Plugins/iOS/CodexSwiftUIOverlay.swift");
+            string pack = ReadAsset("Plugins/iOS/FidgetGachaPackPresentation.swift");
+            string pipeline = ReadAsset("Editor/IosBuildPipeline.cs");
 
             StringAssert.Contains("public struct GachaStoreView", storefront);
             StringAssert.Contains("@Environment(\\.dismiss) private var dismiss", storefront);
@@ -39,9 +41,20 @@ namespace FidgetingApp.Tests.Editor
             StringAssert.Contains(".scaledToFill()", storefront);
             StringAssert.Contains(".clipped()", storefront);
             StringAssert.Contains("GachaThreeDRevealOverlay", storefront);
+            StringAssert.Contains("GachaPackOpeningOverlay", storefront);
+            StringAssert.Contains("GachaPackVisual", storefront);
+            StringAssert.Contains("GachaPackOpeningRules.shouldCommit", storefront);
+            StringAssert.Contains("model.commitPackOpening(requestId: transaction.requestId)", storefront);
+            StringAssert.Contains("gacha-pack-tear-target", storefront);
+            StringAssert.Contains("gacha-pack-entry", storefront);
+            StringAssert.Contains("gacha-pack-state", storefront);
+            StringAssert.Contains("gacha-pack-progress", storefront);
+            StringAssert.Contains("gacha-pack-request-id", storefront);
             StringAssert.Contains("GachaTransparentPresentationBackground", storefront);
             StringAssert.DoesNotContain("GachaSingleDrawReveal", storefront);
             StringAssert.DoesNotContain("GachaCaseRevealVisual", storefront);
+            StringAssert.DoesNotContain("GachaShippingRevealContinuation", storefront);
+            StringAssert.DoesNotContain("presentPremiumDisplayCase", storefront);
             StringAssert.DoesNotContain("private func play() async", storefront);
             StringAssert.Contains("Button(\"收下\")", storefront);
             StringAssert.Contains("model.acknowledgeReveal()", storefront);
@@ -59,6 +72,16 @@ namespace FidgetingApp.Tests.Editor
             StringAssert.Contains("gacha-error", storefront);
             StringAssert.Contains("gacha-reveal-accept", storefront);
 
+            StringAssert.Contains("case \"canyon-lode\": return .standard", pack);
+            StringAssert.Contains("default: return .standard", pack);
+            StringAssert.Contains("tearTravelPoints: Double = 220", pack);
+            StringAssert.Contains("tearCommitProgress: Double = 0.62", pack);
+            StringAssert.DoesNotContain("GachaRarityTier", pack);
+            StringAssert.Contains("GachaPackAssetRootPath", pipeline);
+            StringAssert.Contains(
+                "Path.Combine(projectRoot, GachaPackAssetRootPath)",
+                pipeline);
+
             StringAssert.Contains("struct LegacyGachaStoreView", legacy);
             StringAssert.DoesNotContain("LegacyGachaStoreView(", overlay);
             StringAssert.Contains("GachaStoreView()", overlay);
@@ -66,6 +89,84 @@ namespace FidgetingApp.Tests.Editor
             StringAssert.Contains("CodexSetGachaRevealNativeChromeHidden", overlay);
             StringAssert.Contains("guard state.canRequestDisplayCase else { return }", overlay);
             StringAssert.Contains(".disabled(!state.canRequestDisplayCase)", overlay);
+        }
+
+        [Test]
+        public void PackGatesPreparedReceiptThenEntersOnlyTheBuild42RevealSession()
+        {
+            string storefront = ReadAsset("Plugins/iOS/FidgetGachaStorefront.swift");
+            string model = ReadAsset("Plugins/iOS/FidgetGachaStore.swift");
+            string requestSetup = Slice(
+                model,
+                "public func requestRevealSetupIfNeeded()",
+                "public func commitPackOpening(requestId: String)");
+            string commit = Slice(
+                model,
+                "public func commitPackOpening(requestId: String)",
+                "public func startRevealIfNeeded(requestId: String)");
+            string transactionIngestion = Slice(
+                model,
+                "private func parseTransactionPayload(",
+                "public func receiveRevealSetup(");
+            string setupAck = Slice(
+                model,
+                "public func receiveRevealSetup(",
+                "public func receiveRevealPhase(");
+
+            StringAssert.Contains(
+                "transaction.phase == .awaitingAcceptance",
+                requestSetup);
+            StringAssert.Contains(
+                "transaction.phase == .prepared",
+                requestSetup);
+            StringAssert.Contains(
+                "packOpenedRequestId == transaction.requestId",
+                requestSetup);
+            StringAssert.Contains(
+                "revealSetupRequestedId != transaction.requestId",
+                requestSetup);
+            Assert.That(
+                CountOccurrences(requestSetup, "RequestGachaRevealFromNativeUi"),
+                Is.EqualTo(1));
+
+            StringAssert.Contains("packOpenedRequestId != requestId", commit);
+            StringAssert.Contains("transaction.phase == .prepared", commit);
+            StringAssert.Contains("requestRevealSetupIfNeeded()", commit);
+            StringAssert.DoesNotContain("DrawGachaFromNativeUi", commit);
+            StringAssert.DoesNotContain("AcknowledgeGachaRevealFromNativeUi", commit);
+
+            StringAssert.Contains("if phase == .prepared", transactionIngestion);
+            StringAssert.Contains("packGateRequestId = requestId", transactionIngestion);
+            StringAssert.Contains("pack-awaiting-open", transactionIngestion);
+            StringAssert.Contains("case .awaitingAcceptance:", transactionIngestion);
+            StringAssert.Contains("packGateRequestId = \"\"", transactionIngestion);
+            StringAssert.Contains("packGateRequestId = \"\"", setupAck);
+            StringAssert.Contains("revealIsPresented = true", setupAck);
+
+            StringAssert.Contains("release-rebound", storefront);
+            StringAssert.Contains("rebound-complete", storefront);
+            StringAssert.Contains("release-commit", storefront);
+            StringAssert.Contains("unity-reveal-request", storefront);
+            StringAssert.DoesNotContain("GachaCaseRevealVisual", storefront);
+            StringAssert.DoesNotContain("GachaShippingRevealContinuation", storefront);
+
+            string packRoot = Path.Combine(
+                Application.dataPath,
+                "Plugins/iOS/GachaPacks");
+            string[] assets = Directory.GetFiles(
+                packRoot,
+                "*.png",
+                SearchOption.TopDirectoryOnly);
+            Assert.That(assets, Has.Length.EqualTo(12));
+            foreach (string asset in assets)
+            {
+                byte[] bytes = File.ReadAllBytes(asset);
+                Assert.That(bytes.Length, Is.GreaterThan(1_000), asset);
+                Assert.That(bytes[0], Is.EqualTo(0x89), asset);
+                Assert.That(bytes[1], Is.EqualTo(0x50), asset);
+                Assert.That(bytes[2], Is.EqualTo(0x4E), asset);
+                Assert.That(bytes[3], Is.EqualTo(0x47), asset);
+            }
         }
 
         [Test]

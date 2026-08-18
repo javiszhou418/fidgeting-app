@@ -1,6 +1,6 @@
 # Fidgeting Interaction Integration Status
 
-最后更新：2026-08-17
+最后更新：2026-08-18
 
 本文件回答一个问题：规格中的能力是否已经进入可运行代码。状态只按代码、场景接线和测试证据填写，不按聊天结论或文档完成度填写。
 
@@ -14,6 +14,8 @@
 ## Build 42 正式抽卡链修复（已覆盖安装并启动 `0.1.0 (42)`；真机业务与触感验收待用户确认）
 
 > **Build 41 失败根因已确认：设备正式 `v1` 存档当前为零券，商店把单抽静默禁用；此前一次抽取会在揭晓前先扣券并写入 owned/pity/draws，receipt 只存在于一次性 native 回包中，回包或页面生命周期中断后无法恢复。原生所谓揭晓仍是 SwiftUI 绘制的二维假收藏盒，shipping Coordinator 从未启动 `GachaRevealDirector`。Build 42 当前只在独立 `internalUnlimited` 构建中启用无限单抽，以新的 `fidgeting.gacha.internal.v2.*` 命名空间隔离正式 Build 41 的票券、已获得“矿尘贴纸”和全部 `v1` 保底数据。**
+
+- 2026-08-18 的 Pack V7 候选已在独立 Build 42 worktree 语义接入，但尚未 fresh export、安装或真机验收：只有 Unity 权威交易进入 `Prepared` 且携带同一 `requestId`/receipt 后才显示 Pack；向右拖动按 `220 pt` 归一，释放 `< 0.62` 只回弹且不创建 setup/watchdog，`>= 0.62` 完成 flap 后精确调用原 Build 42 `RequestGachaRevealFromNativeUi(requestId)`。setup ACK 才移除 Pack并由既有 `GachaThreeDRevealOverlay` 启动真实 `GachaRevealDirector/PremiumDisplayCase`；`AwaitingAcceptance` 恢复直接绕过 Pack。不存在 `GachaShippingRevealContinuation`、普通 Library current-model case 或 SwiftUI fake-case fallback。launch series 使用权威 `canyon-lode` → Standard Pack 映射，绝不读取 receipt rarity。12/12 body+flap PNG 与获批 Pack V7 生产资产逐项 SHA-256 一致，构建流水线已加入 `GachaPacks` resource root。shipping Swift iPhoneOS 15 arm64 type-check 通过；Unity 随附 Roslyn 对完整 Editor assembly 编译为 0 errors（仅既有 obsolete warnings）；规则 harness `9/9` 通过。当前下一门禁是 fresh Internal Gacha Simulator 主 App 连续 H.264，必须同时证明 `<0.62` 回弹、停顿无提交、第二次越阈和真实 3D 收藏盒；该 Pack shipping 动态视觉批准待确认，未推送手机。
 
 - 新交易链以 `requestId` 为幂等键，使用 `Prepared → AwaitingAcceptance → Completed` 三阶段持久化。Prepare 只固定奖品和 receipt，不扣券、不写 Gallery/保底/碎片/抽数；真实 3D 动画完成后才进入 Awaiting，用户点击“收下”才一次性提交。pending、completed ledger 和完整 receipt 可跨进程恢复；重复 draw/query/ACK 返回同一结果，不重新消费 RNG。内测模式不扣正式票券，余额显示 `∞ / 内测无限`；十抽、StoreKit 和正式经济入口保持关闭，production 零券会显示明确原因。
 - `GachaPrizePresentationResolver` 为 catalog 的 8/8 `ContentReference` 提供稳定 renderer-only 3D 展示物：三款三叶皮肤、岩层纹实体展示卡、固定种子矿尘实体展示卡、板岩内衬、玄武岩底座和岭线暮色玻璃样板。它们无 Rigidbody、Collider、Audio、Haptic 或自转副作用，全部使用磁吸推牌批准过的唯一 `PremiumDisplayCase`、`RoundedSquareDeep` 内槽、相机 lease 和等比 fit。

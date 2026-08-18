@@ -1,3 +1,4 @@
+import Foundation
 import SwiftUI
 import UIKit
 
@@ -25,9 +26,19 @@ public struct GachaStoreView: View {
                 .zIndex(30)
 
             storefrontContent
-                .opacity(model.revealIsPresented ? 0 : 1)
-                .allowsHitTesting(!model.revealIsPresented)
-                .accessibilityHidden(model.revealIsPresented)
+                .opacity(model.revealIsPresented || model.packIsPresented ? 0 : 1)
+                .allowsHitTesting(!model.revealIsPresented && !model.packIsPresented)
+                .accessibilityHidden(model.revealIsPresented || model.packIsPresented)
+
+            if model.packIsPresented,
+               let transaction = model.pendingTransaction {
+                GachaPackOpeningOverlay(
+                    model: model,
+                    transaction: transaction)
+                    .id(transaction.requestId)
+                    .transition(.opacity)
+                    .zIndex(25)
+            }
 
             if model.revealIsPresented,
                let transaction = model.pendingTransaction {
@@ -594,6 +605,235 @@ public struct GachaStoreView: View {
 
 }
 
+private struct GachaPackOpeningOverlay: View {
+    @Environment(\.accessibilityReduceMotion) private var reduceMotion
+    @ObservedObject var model: GachaStoreModel
+    let transaction: GachaPendingTransaction
+
+    @State private var tearProgress: CGFloat = 0
+    @State private var interactionState = "sealed"
+    @State private var packOpenCommitted = false
+
+    private var packTier: GachaPackTier {
+        GachaPackTier.forSeriesId(transaction.seriesId)
+    }
+
+    var body: some View {
+        ZStack {
+            Color.black.opacity(0.985).ignoresSafeArea()
+
+            accessibilityMarkers
+
+            VStack(spacing: 20) {
+                Text("单抽封包")
+                    .font(.system(size: 11, weight: .bold, design: .monospaced))
+                    .foregroundColor(.white.opacity(0.52))
+                    .tracking(1.2)
+
+                GachaPackVisual(tier: packTier, tearProgress: tearProgress)
+                    .frame(width: 244, height: 326)
+                    .contentShape(Rectangle())
+                    .gesture(tearGesture)
+                    .accessibilityLabel("\(packTier.title) 抽取包装")
+                    .accessibilityHint("沿顶部封边向右滑动，超过百分之六十二后松开")
+                    .accessibilityValue(
+                        "\(interactionState), \(Int((tearProgress * 100).rounded())) percent")
+                    .accessibilityIdentifier("gacha-pack-tear-target")
+
+                VStack(spacing: 6) {
+                    Text(packOpenCommitted ? "正在进入真实 3D 收藏盒" : "沿顶部封边向右撕开")
+                        .font(.system(size: 12, weight: .semibold))
+                        .foregroundColor(.white.opacity(0.62))
+
+                    Text("释放阈值 62%")
+                        .font(.system(size: 9, weight: .medium, design: .monospaced))
+                        .foregroundColor(.white.opacity(0.34))
+                }
+
+                if !model.visibleFailureReason.isEmpty {
+                    Text(model.visibleFailureReason)
+                        .font(.system(size: 11, weight: .semibold))
+                        .foregroundColor(.orange)
+                        .multilineTextAlignment(.center)
+                        .accessibilityIdentifier("gacha-error")
+
+                    Button("查询原交易") {
+                        model.queryActiveTransaction()
+                    }
+                    .font(.system(size: 12, weight: .bold))
+                    .foregroundColor(.white)
+                    .accessibilityIdentifier("gacha-query-transaction")
+                } else {
+                    Button("撕开包装") {
+                        commitPackOpen(source: "accessible-button")
+                    }
+                    .font(.system(size: 16, weight: .bold))
+                    .foregroundColor(.black)
+                    .frame(width: 214, height: 54)
+                    .background(Color.white, in: RoundedRectangle(cornerRadius: 17))
+                    .disabled(packOpenCommitted)
+                    .opacity(packOpenCommitted ? 0.52 : 1)
+                    .accessibilityIdentifier("gacha-pack-open")
+                }
+            }
+            .padding(.horizontal, 24)
+            .padding(.vertical, 30)
+        }
+        .accessibilityElement(children: .contain)
+        .onAppear {
+            GachaPackInteractionTrace.begin(requestId: transaction.requestId)
+        }
+    }
+
+    private var tearGesture: some Gesture {
+        DragGesture(minimumDistance: 6, coordinateSpace: .local)
+            .onChanged { value in
+                guard !packOpenCommitted else { return }
+                tearProgress = CGFloat(
+                    GachaPackOpeningRules.normalizedProgress(
+                        translationPoints: Double(value.translation.width)))
+                interactionState = tearProgress > 0 ? "dragging" : "sealed"
+            }
+            .onEnded { _ in
+                guard !packOpenCommitted else { return }
+                let releasedProgress = tearProgress
+                if GachaPackOpeningRules.shouldCommit(
+                    progress: Double(releasedProgress)) {
+                    GachaPackInteractionTrace.record(
+                        requestId: transaction.requestId,
+                        event: "release-commit",
+                        progress: releasedProgress)
+                    commitPackOpen(source: "threshold")
+                } else {
+                    interactionState = "rebounding"
+                    GachaPackInteractionTrace.record(
+                        requestId: transaction.requestId,
+                        event: "release-rebound",
+                        progress: releasedProgress)
+                    withAnimation(.easeOut(duration: reduceMotion ? 0.01 : 0.18)) {
+                        tearProgress = 0
+                    }
+                    DispatchQueue.main.asyncAfter(
+                        deadline: .now() + (reduceMotion ? 0.02 : 0.20)) {
+                        guard !packOpenCommitted else { return }
+                        interactionState = "sealed"
+                        GachaPackInteractionTrace.record(
+                            requestId: transaction.requestId,
+                            event: "rebound-complete",
+                            progress: 0)
+                    }
+                }
+            }
+    }
+
+    private var accessibilityMarkers: some View {
+        VStack(spacing: 0) {
+            marker(
+                label: "封包入口",
+                identifier: "gacha-pack-entry",
+                value: "ready")
+            marker(
+                label: "封包状态",
+                identifier: "gacha-pack-state",
+                value: interactionState)
+            marker(
+                label: "封包撕开进度",
+                identifier: "gacha-pack-progress",
+                value: String(format: "%.3f", Double(tearProgress)))
+            marker(
+                label: "封包交易请求",
+                identifier: "gacha-pack-request-id",
+                value: transaction.requestId)
+        }
+        .frame(width: 1, height: 1)
+        .clipped()
+    }
+
+    private func marker(
+        label: String,
+        identifier: String,
+        value: String
+    ) -> some View {
+        Text(label)
+            .foregroundColor(.clear)
+            .frame(width: 1, height: 1)
+            .accessibilityIdentifier(identifier)
+            .accessibilityValue(value)
+    }
+
+    @MainActor
+    private func commitPackOpen(source: String) {
+        guard !packOpenCommitted else { return }
+        packOpenCommitted = true
+        interactionState = "committing"
+        GachaPackInteractionTrace.record(
+            requestId: transaction.requestId,
+            event: "commit-start-\(source)",
+            progress: tearProgress)
+
+        withAnimation(.easeOut(duration: reduceMotion
+            ? 0.01
+            : GachaPackOpeningRules.flapExitDurationSeconds)) {
+            tearProgress = 1
+        }
+
+        Task { @MainActor in
+            do {
+                try await Task.sleep(
+                    nanoseconds: reduceMotion ? 10_000_000 : 360_000_000)
+            } catch {
+                return
+            }
+            interactionState = "requesting-3d-reveal"
+            GachaPackInteractionTrace.record(
+                requestId: transaction.requestId,
+                event: "unity-reveal-request",
+                progress: 1)
+            model.commitPackOpening(requestId: transaction.requestId)
+        }
+    }
+}
+
+private enum GachaPackInteractionTrace {
+    private static let defaultsKey = "gacha.pack.build42.trace.v1"
+
+    static func begin(requestId: String) {
+#if DEBUG
+        guard ProcessInfo.processInfo.arguments.contains("--gacha-pack-trace") else {
+            return
+        }
+        UserDefaults.standard.set([], forKey: defaultsKey)
+        record(requestId: requestId, event: "sealed", progress: 0)
+#endif
+    }
+
+    static func record(requestId: String, event: String, progress: CGFloat) {
+#if DEBUG
+        guard ProcessInfo.processInfo.arguments.contains("--gacha-pack-trace") else {
+            return
+        }
+        let normalized = Double(min(max(progress, 0), 1))
+        var events = UserDefaults.standard.array(forKey: defaultsKey)
+            as? [[String: Any]] ?? []
+        events.append([
+            "requestId": requestId,
+            "event": event,
+            "progress": normalized,
+            "threshold": GachaPackOpeningRules.tearCommitProgress,
+            "uptime": ProcessInfo.processInfo.systemUptime
+        ])
+        UserDefaults.standard.set(events, forKey: defaultsKey)
+        UserDefaults.standard.synchronize()
+        print(String(
+            format: "[GachaPackTrace] %@ %@ progress=%.4f threshold=%.4f",
+            requestId,
+            event,
+            normalized,
+            GachaPackOpeningRules.tearCommitProgress))
+#endif
+    }
+}
+
 private struct GachaThreeDRevealOverlay: View {
     @ObservedObject var model: GachaStoreModel
     let transaction: GachaPendingTransaction
@@ -787,6 +1027,41 @@ private final class GachaTransparentPresentationView: UIView {
             view.isOpaque = false
             ancestor = view.superview
         }
+    }
+}
+
+private struct GachaPackVisual: View {
+    let tier: GachaPackTier
+    let tearProgress: CGFloat
+
+    private var progress: CGFloat {
+        min(max(tearProgress, 0), 1)
+    }
+
+    var body: some View {
+        ZStack {
+            GachaBundleArtwork(name: tier.bodyAssetName)
+                .scaledToFit()
+                .accessibilityHidden(true)
+
+            GachaBundleArtwork(name: tier.flapAssetName)
+                .scaledToFit()
+                .offset(x: progress * 132, y: progress * -34)
+                .rotationEffect(.degrees(Double(progress) * 7), anchor: .topTrailing)
+                .opacity(1 - Double(progress) * 0.12)
+                .accessibilityHidden(true)
+
+            LinearGradient(
+                colors: [.clear, .white.opacity(0.58), .clear],
+                startPoint: .leading,
+                endPoint: .trailing)
+                .frame(width: 202, height: 1.2)
+                .offset(y: -133)
+                .opacity(Double(progress) * 0.72)
+                .accessibilityHidden(true)
+        }
+        .aspectRatio(384.0 / 512.0, contentMode: .fit)
+        .shadow(color: .black.opacity(0.52), radius: 18, y: 11)
     }
 }
 
