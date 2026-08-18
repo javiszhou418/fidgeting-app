@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Security.Cryptography;
 using UnityEditor;
 using UnityEditor.Build;
 using UnityEditor.Build.Reporting;
@@ -37,6 +38,16 @@ namespace CodexUnityLabEditor
             "Assets/Plugins/iOS/Thumbnails";
         private const string GachaPackAssetRootPath =
             "Assets/Plugins/iOS/GachaPacks";
+        private const string GachaRiveAssetPath =
+            "Assets/Plugins/iOS/Rive/gacha-single-draw-jumbotron.riv";
+        private const string GachaRiveAssetFileName =
+            "gacha-single-draw-jumbotron.riv";
+        private const string GachaRiveAssetSha256 =
+            "da5ba78f63c09ea538d214f7bcdd520a852fc77232bf47ef31606106136c7717";
+        private const string RivePackageUrl =
+            "https://github.com/rive-app/rive-ios";
+        private const string RiveMinimumVersion = "6.23.1";
+        private const string RiveMaximumVersion = "6.24.0";
         private const string SceneWallpaperAssetRootPath =
             "Assets/Plugins/iOS/SceneWallpapers";
         private const string ProductBadgeArtworkAssetRootPath =
@@ -239,6 +250,7 @@ namespace CodexUnityLabEditor
 
             ConfigureProductFont(projectRoot, outputPath);
             ConfigureProductThumbnails(projectRoot, outputPath);
+            ConfigureGachaRiveRuntime(projectRoot, outputPath);
             ConfigureGeneratedPlist(outputPath);
             ConfigureSwiftSupport(outputPath);
             if (configureSigning)
@@ -719,6 +731,83 @@ namespace CodexUnityLabEditor
             }
 
             project.WriteToFile(projectPath);
+        }
+
+        private static void ConfigureGachaRiveRuntime(
+            string projectRoot,
+            string outputPath)
+        {
+            string sourcePath = Path.Combine(projectRoot, GachaRiveAssetPath);
+            if (!File.Exists(sourcePath))
+            {
+                throw new FileNotFoundException(
+                    "The canonical single-draw Rive asset is missing.",
+                    sourcePath);
+            }
+
+            string actualSha256 = ComputeSha256(sourcePath);
+            if (!string.Equals(
+                    actualSha256,
+                    GachaRiveAssetSha256,
+                    StringComparison.OrdinalIgnoreCase))
+            {
+                throw new BuildFailedException(
+                    "The single-draw Rive asset does not match its approved source hash. " +
+                    $"Expected {GachaRiveAssetSha256}, got {actualSha256}.");
+            }
+
+            string destinationPath = Path.Combine(
+                outputPath,
+                GachaRiveAssetFileName);
+            File.Copy(sourcePath, destinationPath, true);
+
+            string projectPath = PBXProject.GetPBXProjectPath(outputPath);
+            PBXProject project = new PBXProject();
+            project.ReadFromFile(projectPath);
+            string mainTarget = project.GetUnityMainTargetGuid();
+            string frameworkTarget = project.GetUnityFrameworkTargetGuid();
+
+            string assetGuid = project.FindFileGuidByProjectPath(
+                GachaRiveAssetFileName);
+            if (string.IsNullOrEmpty(assetGuid))
+            {
+                assetGuid = project.AddFile(
+                    GachaRiveAssetFileName,
+                    GachaRiveAssetFileName,
+                    PBXSourceTree.Source);
+            }
+            project.AddFileToBuild(mainTarget, assetGuid);
+
+            string packageGuid = project.AddRemotePackageReferenceWithVersionRange(
+                RivePackageUrl,
+                RiveMinimumVersion,
+                RiveMaximumVersion);
+            project.AddRemotePackageFrameworkToProject(
+                frameworkTarget,
+                "RiveRuntime",
+                packageGuid,
+                false);
+            // RiveRuntime is a dynamic binary product. Keep the app target as a
+            // package consumer as well so Xcode embeds the runtime used by the
+            // Swift sources compiled into UnityFramework.
+            project.AddRemotePackageFrameworkToProject(
+                mainTarget,
+                "RiveRuntime",
+                packageGuid,
+                false);
+
+            project.WriteToFile(projectPath);
+        }
+
+        private static string ComputeSha256(string path)
+        {
+            using (FileStream stream = File.OpenRead(path))
+            using (SHA256 sha256 = SHA256.Create())
+            {
+                return BitConverter.ToString(sha256.ComputeHash(stream))
+                    .Replace("-", string.Empty)
+                    .ToLowerInvariant();
+            }
         }
 
         private static void ConfigureGeneratedPlist(string outputPath)
