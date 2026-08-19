@@ -510,6 +510,18 @@ private struct GachaRivePlaybackSurface: View {
                 y: stage == .magneticHolder && !hasRisenIntoView && hasCapturedRestingFrame
                     ? riseOffset.height : 0)
             .opacity(stage == .magneticHolder && !hasRisenIntoView ? 0 : 1)
+            // An explicit .animation(value:) instead of relying solely on an
+            // ambient withAnimation{} block around the state flip -- the
+            // offset/opacity here sit above a RiveViewModel-backed
+            // UIViewRepresentable subtree, and ambient-transaction
+            // propagation into wrapped UIKit content is not always reliable.
+            // Confirmed via frame-by-frame capture: withAnimation alone
+            // produced a real, non-drifting, correctly-signed offset value
+            // (verified by NSLog) that nonetheless rendered as a near-instant
+            // snap on screen once opacity crossed the visible threshold.
+            .animation(
+                .spring(response: 0.5, dampingFraction: 0.82, blendDuration: 0.08),
+                value: hasRisenIntoView)
             .onPreferenceChange(GachaRiveCardFramePreferenceKey.self) { frame in
                 guard !hasCapturedRestingFrame, frame != .zero else { return }
                 measuredRestingFrame = frame
@@ -595,17 +607,12 @@ private struct GachaRivePlaybackSurface: View {
             try? await Task.sleep(nanoseconds: 32_000_000)
             guard !hasRisenIntoView else { return }
             gachaRiveRuntimeLog("rise-into-view-flipping")
-            withAnimation(.spring(
-                // Retimed to land close to the .riv artboard's own measured
-                // ~0.48s reveal-settle point (see settleHoldSeconds above), so
-                // the SwiftUI rise and the Rive-internal convergence finish
-                // together instead of the SwiftUI motion lagging noticeably
-                // behind an already-settled Rive card.
-                response: 0.5,
-                dampingFraction: 0.82,
-                blendDuration: 0.08)) {
-                hasRisenIntoView = true
-            }
+            // The explicit .animation(value: hasRisenIntoView) modifier on
+            // the card view drives the interpolation now; a plain assignment
+            // here is enough (and more reliable than an ambient
+            // withAnimation{} block reaching into the RiveViewModel-backed
+            // UIViewRepresentable subtree beneath it).
+            hasRisenIntoView = true
         }
     }
 }
