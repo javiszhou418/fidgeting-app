@@ -499,16 +499,29 @@ private struct GachaRivePlaybackSurface: View {
 
     private func riseIntoView() {
         guard !hasRisenIntoView else { return }
-        withAnimation(.spring(
-            // Retimed to land close to the .riv artboard's own measured
-            // ~0.48s reveal-settle point (see settleHoldSeconds above), so
-            // the SwiftUI rise and the Rive-internal convergence finish
-            // together instead of the SwiftUI motion lagging noticeably
-            // behind an already-settled Rive card.
-            response: 0.5,
-            dampingFraction: 0.82,
-            blendDuration: 0.08)) {
-            hasRisenIntoView = true
+        // The pre-rise frame (offset = riseOffset, opacity = 0) must actually
+        // commit and render *before* the animated flip below, or SwiftUI
+        // coalesces both into the same non-animated transaction -- the card
+        // just pops into its resting position with zero visible motion. This
+        // was the exact bug: calling withAnimation synchronously from
+        // .onAppear / .onChange(of: playbackEnabled) (the same commit that
+        // mounts the view / flips the trigger) produced no interpolation at
+        // all, confirmed by a frame-by-frame capture of the shipped build.
+        // Deferring one runloop tick guarantees the "before" frame lands
+        // first so the spring actually has something to animate from.
+        DispatchQueue.main.async { [self] in
+            guard !hasRisenIntoView else { return }
+            withAnimation(.spring(
+                // Retimed to land close to the .riv artboard's own measured
+                // ~0.48s reveal-settle point (see settleHoldSeconds above), so
+                // the SwiftUI rise and the Rive-internal convergence finish
+                // together instead of the SwiftUI motion lagging noticeably
+                // behind an already-settled Rive card.
+                response: 0.5,
+                dampingFraction: 0.82,
+                blendDuration: 0.08)) {
+                hasRisenIntoView = true
+            }
         }
     }
 }
