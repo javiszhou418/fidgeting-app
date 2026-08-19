@@ -330,6 +330,16 @@ struct GachaSingleDrawReceiptRecoveryView: View {
 }
 
 #if canImport(RiveRuntime)
+private struct GachaRiveCardFramePreferenceKey: PreferenceKey {
+    static var defaultValue: CGRect = .zero
+    static func reduce(value: inout CGRect, nextValue: () -> CGRect) {
+        let next = nextValue()
+        if next != .zero {
+            value = next
+        }
+    }
+}
+
 private struct GachaRivePlaybackSurface: View {
     private static let artboardAspectRatio: CGFloat = 375.0 / 812.0
 
@@ -351,6 +361,28 @@ private struct GachaRivePlaybackSurface: View {
     // the dominant perceived motion is "this card just came out of that
     // Pack" instead of a generic fixed-offset slide.
     @State private var hasRisenIntoView = false
+    // The card's *actual* rendered rect, captured via preference key rather
+    // than read off the wrapping GeometryReader's own bounds. The reader
+    // spans the full presentation (status-bar-to-home-indicator, ~402x812pt)
+    // while the aspect-fit card only occupies a smaller region within it, so
+    // using the reader's own frame as "resting position" produced a bogus
+    // ~62pt offset instead of the real distance from the Pack's tear spot to
+    // where the card visually sits -- confirmed via NSLog instrumentation
+    // showing entrance-offset computing (0, -62) when the actual on-screen
+    // gap was several hundred points, which is why three earlier attempts to
+    // fix the *timing* of the rise never produced a visible motion: the
+    // motion itself was too small to see, not merely mistimed.
+    @State private var measuredRestingFrame: CGRect = .zero
+    // Guards measuredRestingFrame so it is captured exactly once, before any
+    // offset is ever applied to the measured view. The preference key is
+    // attached to the SAME view the .offset(x:y:) modifier moves, so once an
+    // offset is applied at all, every subsequent preference update reports
+    // the *already-shifted* position -- a feedback loop confirmed via NSLog
+    // instrumentation showing the resting frame's own Y drifting relative to
+    // the very offset being computed from it, and the rise offset collapsing
+    // back to the old bogus ~62pt value once the animation "settled" onto
+    // its own moving target instead of the true rest position.
+    @State private var hasCapturedRestingFrame = false
 
     init(
         transactionID: UUID,
@@ -407,44 +439,82 @@ private struct GachaRivePlaybackSurface: View {
         guard entranceOriginFrame != .zero else {
             // No captured Pack position (e.g. reduced-motion path never
             // populated it) -- fall back to the old generic rise-from-below.
+            gachaRiveRuntimeLog(
+                "entrance-offset-fallback restingFrame=\(restingFrame)")
             return CGSize(width: 0, height: 240)
         }
-        return CGSize(
+        // Anchor to the Pack's *bottom* edge -- the seam the tear opens
+        // from -- rather than its center. Measured on a real device build,
+        // the Pack's center and the holder's resting center land only ~45pt
+        // apart (both sit roughly mid-screen in this layout), which reads as
+        // no motion at all once blended with the fade. The user's ask was
+        // specifically "the card emerges upward from the exact spot the tear
+        // just opened" -- guarantee that reads as real, visible upward
+        // travel by enforcing a minimum rise distance on top of the real
+        // captured anchor, instead of only ever trusting whatever the raw
+        // geometric gap happens to be.
+        let minimumRiseDistance: CGFloat = 240
+        let startY = max(
+            entranceOriginFrame.maxY,
+            restingFrame.midY + minimumRiseDistance)
+        let offset = CGSize(
             width: entranceOriginFrame.midX - restingFrame.midX,
-            height: entranceOriginFrame.midY - restingFrame.midY)
+            height: startY - restingFrame.midY)
+        gachaRiveRuntimeLog(
+            "entrance-offset origin=\(entranceOriginFrame) resting=\(restingFrame) offset=\(offset)")
+        return offset
     }
 
     var body: some View {
-        GeometryReader { proxy in
-            let restingFrame = proxy.frame(in: .named(Self.entranceOriginSpaceName))
-            let riseOffset = entranceOffset(restingFrame: restingFrame)
-            ZStack {
-                if stage.includesBackground {
-                    background
-                        .view()
-                        .allowsHitTesting(false)
-                }
-                if stage.includesForeground {
-                    foreground
-                        .view()
-                        .allowsHitTesting(false)
-                }
-                if stage == .magneticHolder {
-                    GachaProductOwnedIdentityCaption(
-                        playbackEnabled: playbackEnabled,
-                        identity: GachaHolderIdentity.resolve(from: revealedPrize))
-                        .zIndex(10)
-                }
+        let riseOffset = entranceOffset(restingFrame: measuredRestingFrame)
+        ZStack {
+            if stage.includesBackground {
+                background
+                    .view()
+                    .allowsHitTesting(false)
             }
-                .aspectRatio(Self.artboardAspectRatio, contentMode: .fit)
-                .frame(maxWidth: .infinity, maxHeight: .infinity)
-                .offset(
-                    x: stage == .magneticHolder && !hasRisenIntoView
-                        ? riseOffset.width : 0,
-                    y: stage == .magneticHolder && !hasRisenIntoView
-                        ? riseOffset.height : 0)
-                .opacity(stage == .magneticHolder && !hasRisenIntoView ? 0 : 1)
+            if stage.includesForeground {
+                foreground
+                    .view()
+                    .allowsHitTesting(false)
+            }
+            if stage == .magneticHolder {
+                GachaProductOwnedIdentityCaption(
+                    playbackEnabled: playbackEnabled,
+                    identity: GachaHolderIdentity.resolve(from: revealedPrize))
+                    .zIndex(10)
+            }
         }
+            .aspectRatio(Self.artboardAspectRatio, contentMode: .fit)
+            // Captured on the aspect-fit-sized content itself, before the
+            // .frame(maxWidth:.infinity...) below re-expands the layout box
+            // back out to fill the presentation. Measuring after that
+            // expansion would just reproduce the old full-screen-bounds bug.
+            .background(
+                GeometryReader { proxy in
+                    Color.clear.preference(
+                        key: GachaRiveCardFramePreferenceKey.self,
+                        value: proxy.frame(in: .named(
+                            Self.entranceOriginSpaceName)))
+                }
+            )
+            .frame(maxWidth: .infinity, maxHeight: .infinity)
+            .offset(
+                // hasCapturedRestingFrame must gate this too: until the
+                // first un-offset measurement lands, offsetting at all would
+                // corrupt that very measurement (the preference key is on
+                // this same view, so any offset here is baked into what it
+                // reports back).
+                x: stage == .magneticHolder && !hasRisenIntoView && hasCapturedRestingFrame
+                    ? riseOffset.width : 0,
+                y: stage == .magneticHolder && !hasRisenIntoView && hasCapturedRestingFrame
+                    ? riseOffset.height : 0)
+            .opacity(stage == .magneticHolder && !hasRisenIntoView ? 0 : 1)
+            .onPreferenceChange(GachaRiveCardFramePreferenceKey.self) { frame in
+                guard !hasCapturedRestingFrame, frame != .zero else { return }
+                measuredRestingFrame = frame
+                hasCapturedRestingFrame = true
+            }
             .onAppear {
                 playback.attach(
                     background: background,
@@ -505,6 +575,8 @@ private struct GachaRivePlaybackSurface: View {
     }
 
     private func riseIntoView() {
+        gachaRiveRuntimeLog(
+            "rise-into-view-called hasRisenIntoView=\(hasRisenIntoView) hasStartedPurchase=\(playback.hasStartedPurchase)")
         guard !hasRisenIntoView else { return }
         // The pre-rise frame (offset = riseOffset, opacity = 0) must actually
         // be committed AND rendered on screen before the animated flip below,
@@ -522,6 +594,7 @@ private struct GachaRivePlaybackSurface: View {
         Task { @MainActor in
             try? await Task.sleep(nanoseconds: 32_000_000)
             guard !hasRisenIntoView else { return }
+            gachaRiveRuntimeLog("rise-into-view-flipping")
             withAnimation(.spring(
                 // Retimed to land close to the .riv artboard's own measured
                 // ~0.48s reveal-settle point (see settleHoldSeconds above), so
@@ -644,12 +717,11 @@ private enum GachaRiveLayer: String, CaseIterable {
 }
 
 private func gachaRiveRuntimeLog(_ message: String) {
-#if DEBUG
-    // `print` from Swift compiled into UnityFramework does not reliably enter
-    // Simulator unified logs. NSLog keeps shipping-source smoke evidence tied
-    // to the actual main-app process.
+    // TEMP diagnostic build: #if DEBUG gate removed to get ground-truth
+    // timing of the entrance-rise investigation via the unified log, since
+    // this export's Debug configuration does not define DEBUG for Swift
+    // either. Restore the gate before shipping.
     NSLog("%@", "[GachaRiveRuntime] \(message)")
-#endif
 }
 
 /// This file contains four embedded image payloads and one intentionally empty

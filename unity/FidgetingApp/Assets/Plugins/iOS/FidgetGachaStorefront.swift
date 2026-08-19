@@ -3,9 +3,9 @@ import SwiftUI
 import UIKit
 
 private func gachaSequenceLog(_ message: String) {
-#if DEBUG
+    // TEMP diagnostic: #if DEBUG gate removed for the entrance-rise
+    // investigation. Restore before shipping.
     NSLog("%@", message)
-#endif
 }
 
 // Shipping storefront presentation. Economy, ownership, transaction recovery,
@@ -1052,6 +1052,8 @@ private struct GachaPackOpeningOverlay: View {
         if latestPackVisualFrame != .zero {
             tearOriginFrame = latestPackVisualFrame
         }
+        gachaSequenceLog(
+            "[GachaSequence] tear-origin-captured frame=\(tearOriginFrame) latestPackVisualFrame=\(latestPackVisualFrame)")
         interactionState = "pack-holder-overlap"
         overlapStartedUptime = ProcessInfo.processInfo.systemUptime
         GachaPackInteractionTrace.record(
