@@ -43,7 +43,7 @@ namespace CodexUnityLabEditor
         private const string GachaRiveAssetFileName =
             "gacha-single-draw-jumbotron.riv";
         private const string GachaRiveAssetSha256 =
-            "da5ba78f63c09ea538d214f7bcdd520a852fc77232bf47ef31606106136c7717";
+            "7a9088cb40fce3bef3007c42a37e65d81e8401cc7a10ebf54a3564decb2039bf";
         private const string RivePackageUrl =
             "https://github.com/rive-app/rive-ios";
         private const string RiveMinimumVersion = "6.23.1";
