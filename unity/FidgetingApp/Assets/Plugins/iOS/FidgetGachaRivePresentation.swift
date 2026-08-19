@@ -500,16 +500,20 @@ private struct GachaRivePlaybackSurface: View {
     private func riseIntoView() {
         guard !hasRisenIntoView else { return }
         // The pre-rise frame (offset = riseOffset, opacity = 0) must actually
-        // commit and render *before* the animated flip below, or SwiftUI
-        // coalesces both into the same non-animated transaction -- the card
-        // just pops into its resting position with zero visible motion. This
-        // was the exact bug: calling withAnimation synchronously from
-        // .onAppear / .onChange(of: playbackEnabled) (the same commit that
-        // mounts the view / flips the trigger) produced no interpolation at
-        // all, confirmed by a frame-by-frame capture of the shipped build.
-        // Deferring one runloop tick guarantees the "before" frame lands
-        // first so the spring actually has something to animate from.
-        DispatchQueue.main.async { [self] in
+        // be committed AND rendered on screen before the animated flip below,
+        // or SwiftUI coalesces both into the same non-animated transaction --
+        // the card just pops into its resting position with zero visible
+        // motion. This was the exact bug: calling withAnimation synchronously
+        // from .onAppear / .onChange(of: playbackEnabled) (the same commit
+        // that mounts the view / flips the trigger) produced no interpolation
+        // at all. A single DispatchQueue.main.async hop was NOT enough either
+        // -- confirmed by a second frame-by-frame capture still showing an
+        // instant pop, because that only defers to the next runloop tick, not
+        // past an actual display refresh. Waiting a couple of real frames via
+        // Task.sleep guarantees the "before" frame is actually presented
+        // first, so the spring has something to visibly animate from.
+        Task { @MainActor in
+            try? await Task.sleep(nanoseconds: 32_000_000)
             guard !hasRisenIntoView else { return }
             withAnimation(.spring(
                 // Retimed to land close to the .riv artboard's own measured
