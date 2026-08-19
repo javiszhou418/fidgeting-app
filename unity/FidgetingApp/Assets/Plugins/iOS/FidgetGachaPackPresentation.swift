@@ -67,10 +67,16 @@ public enum GachaPackOpeningRules {
 /// predicted fling so release below the fixed threshold always returns to the
 /// current detent.
 public enum GachaPackCarouselRules {
-    public static let itemSpacingPoints: Double = 160
+    // itemSpacingPoints is close to a phone's half-width so a neighbor's
+    // center sits near the screen edge, leaving roughly half of it visible
+    // (peeking in), not a fully-shown smaller card beside the selection.
+    public static let itemSpacingPoints: Double = 200
     public static let selectionCommitPoints: Double = 56
-    public static let unselectedPackScale: Double = 0.66
-    public static let selectedPackScale: Double = 0.70
+    // A wide gap between selected/unselected scale so the spring transition
+    // reads as a clear "center pops up, sides get pushed away" motion
+    // instead of the ~6% size delta the original 0.66/0.70 pair produced.
+    public static let unselectedPackScale: Double = 0.56
+    public static let selectedPackScale: Double = 0.86
     public static let maximumSideDropPoints: Double = 16
     public static let maximumSideTiltDegrees: Double = 3.5
     public static let selectionSnapResponseSeconds: Double = 0.28

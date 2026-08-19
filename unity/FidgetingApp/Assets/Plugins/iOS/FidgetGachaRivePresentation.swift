@@ -333,6 +333,13 @@ private struct GachaRivePlaybackSurface: View {
     @StateObject private var playback: GachaRivePlaybackCoordinator
     @StateObject private var background: GachaRiveLayerPlaybackModel
     @StateObject private var foreground: GachaRiveLayerPlaybackModel
+    // The .riv artboard's own authored entrance slides in diagonally from a
+    // corner; there is no bindable property to redirect it (checked the
+    // artboard's data-bind schema). Rather than fight that internal motion,
+    // the whole assembly additionally rises from below in sync with the
+    // identity caption's own entrance, so the dominant perceived motion is
+    // "the holder rises up from the bottom" instead of a lateral slide.
+    @State private var hasRisenIntoView = false
 
     init(
         transactionID: UUID,
@@ -386,6 +393,8 @@ private struct GachaRivePlaybackSurface: View {
         }
             .aspectRatio(Self.artboardAspectRatio, contentMode: .fit)
             .frame(maxWidth: .infinity, maxHeight: .infinity)
+            .offset(y: stage == .magneticHolder && !hasRisenIntoView ? 240 : 0)
+            .opacity(stage == .magneticHolder && !hasRisenIntoView ? 0 : 1)
             .onAppear {
                 playback.attach(
                     background: background,
@@ -395,9 +404,23 @@ private struct GachaRivePlaybackSurface: View {
                 gachaRiveRuntimeLog(
                     "surface-appeared stage=\(stage.rawValue) applicationActive=\(active)")
                 playback.setApplicationActive(active)
+                if stage == .magneticHolder, playbackEnabled {
+                    riseIntoView()
+                }
             }
             .onChange(of: playbackEnabled) { enabled in
                 playback.setPresentationEnabled(enabled)
+                if stage == .magneticHolder {
+                    if enabled {
+                        riseIntoView()
+                    } else {
+                        var transaction = Transaction()
+                        transaction.disablesAnimations = true
+                        withTransaction(transaction) {
+                            hasRisenIntoView = false
+                        }
+                    }
+                }
             }
             .onReceive(NotificationCenter.default.publisher(
                 for: UIApplication.didBecomeActiveNotification)) { _ in
@@ -422,6 +445,16 @@ private struct GachaRivePlaybackSurface: View {
                 guard !Task.isCancelled else { return }
                 playback.finishFromWatchdog()
             }
+    }
+
+    private func riseIntoView() {
+        guard !hasRisenIntoView else { return }
+        withAnimation(.spring(
+            response: 0.58,
+            dampingFraction: 0.82,
+            blendDuration: 0.08)) {
+            hasRisenIntoView = true
+        }
     }
 }
 

@@ -1346,15 +1346,6 @@ private struct GachaPackVisual: View {
                 .rotationEffect(.degrees(Double(progress) * 7), anchor: .topTrailing)
                 .opacity(1 - Double(progress) * 0.12)
                 .accessibilityHidden(true)
-
-            LinearGradient(
-                colors: [.clear, .white.opacity(0.58), .clear],
-                startPoint: .leading,
-                endPoint: .trailing)
-                .frame(width: 202, height: 1.2)
-                .offset(y: -133)
-                .opacity(Double(progress) * 0.72)
-                .accessibilityHidden(true)
         }
         .aspectRatio(384.0 / 512.0, contentMode: .fit)
         .shadow(color: .black.opacity(0.52), radius: 18, y: 11)
