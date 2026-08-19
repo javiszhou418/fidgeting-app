@@ -197,8 +197,16 @@ public final class GachaStoreModel: ObservableObject {
 
     public var packIsPresented: Bool {
         guard let transaction = pendingTransaction else { return false }
-        return !revealIsPresented
-            && packGateRequestId == transaction.requestId
+        guard !revealIsPresented else { return false }
+        // Once acknowledged, `pendingTransaction` clears and this naturally
+        // stops being true. Until then, `.awaitingAcceptance` must still
+        // show this overlay in the holder-only build (see
+        // requestRevealSetupIfNeeded/threeDRevealEnabled): packGateRequestId
+        // is cleared as soon as that phase is reached (it used to mean the
+        // 3D reveal already took over), and nothing else in this build ever
+        // shows the accept UI otherwise.
+        return packGateRequestId == transaction.requestId
+            || transaction.phase == .awaitingAcceptance
     }
 
     public var drawCostText: String {
