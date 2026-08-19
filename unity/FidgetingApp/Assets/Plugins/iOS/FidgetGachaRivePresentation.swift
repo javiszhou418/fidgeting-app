@@ -41,33 +41,25 @@ enum GachaRiveSequenceStage: String {
     }
 }
 
-/// Product-owned replacement for the auction branding baked into the reviewed
-/// holder motion asset. Built from the transaction's real receipt row so the
-/// holder shows the actual drawn prize instead of a fixed placeholder; none
-/// of the 8 launch prizes have real bitmap art yet, so the "artwork" is a
-/// procedural rarity-tinted glyph keyed by prize kind (fast-follow: real
-/// per-prize thumbnails via a Unity snapshot tool + their own visual
-/// approval round).
+/// The real drawn prize's identity, captioned over the visible `.riv`
+/// magnetic-holder artboard instead of replacing it. Built from the
+/// transaction's real receipt row so the caption always names the actual
+/// drawn prize instead of a fixed placeholder.
 private struct GachaHolderIdentity {
     static let replacedRiveLogoAssetPrefix = "colographih-"
     static let paletteMarker = "neutralGraphiteSilver"
-    static let surfaceMarker = "productOwnedMagneticHolderSurface"
+    static let surfaceMarker = "productOwnedIdentityCaption"
     static let accessibilityIdentifier = "gacha-holder-product-identity"
-    static let hiddenRiveCompletionOpacity = 0.001
-    static let entranceOffsetX: CGFloat = 96
-    static let entranceTiltDegrees = -38.0
 
     let productName: String
     let tierAndLevelLabel: String
     let acquiredLabel: String
-    let glyphSystemName: String
     let tint: SwiftUI.Color
 
     static let placeholder = GachaHolderIdentity(
         productName: "COLLECTOR EDITION",
         tierAndLevelLabel: "STANDARD",
         acquiredLabel: "揭晓中",
-        glyphSystemName: "sparkles",
         tint: GachaRarityTier.standard.tint)
 
     /// `row` is nil only for the reduce-motion path, which never shows the
@@ -81,28 +73,16 @@ private struct GachaHolderIdentity {
                 ? "\(row.rarity.title) · NEW"
                 : "\(row.rarity.title) · +\(row.shardsGained)",
             acquiredLabel: "GEM/MINT",
-            glyphSystemName: glyphSystemName(forKindIndex: row.kindIndex),
             tint: row.rarity.tint)
-    }
-
-    private static func glyphSystemName(forKindIndex kindIndex: Int) -> String {
-        switch kindIndex {
-        case 1: return "seal" // Sticker
-        case 2: return "square.stack.3d.up" // DisplayBase
-        case 3: return "paintpalette" // EnvironmentTint
-        case 4: return "hand.raised" // Toy
-        default: return "sparkles" // ToySkin
-        }
     }
 }
 
 private final class GachaHolderHiddenLayerAssetSentinel: NSObject {}
 
-/// The `background/mint-slab` + `foreground/mint-slab` Rive layers render at
-/// `hiddenRiveCompletionOpacity` and are never seen — every visible holder
-/// pixel is `GachaProductOwnedMagneticHolderSurface` below. This constant
-/// only satisfies Rive's internal embedded-image decode for that invisible
-/// layer; it is never displayed and does not vary per prize.
+/// The `background/mint-slab` + `foreground/mint-slab` Rive layers now render
+/// visibly and play their full authored motion; this asset only satisfies
+/// Rive's internal embedded-image decode for the artboard's baked artwork —
+/// it does not vary per prize (the real prize is named by the caption above).
 private enum GachaHolderHiddenLayerAsset {
     static let assetName = "product-thumbnail-metal-three-blade"
 
@@ -390,21 +370,15 @@ private struct GachaRivePlaybackSurface: View {
             if stage.includesBackground {
                 background
                     .view()
-                    .opacity(stage == .magneticHolder
-                        ? GachaHolderIdentity.hiddenRiveCompletionOpacity
-                        : 1)
                     .allowsHitTesting(false)
             }
             if stage.includesForeground {
                 foreground
                     .view()
-                    .opacity(stage == .magneticHolder
-                        ? GachaHolderIdentity.hiddenRiveCompletionOpacity
-                        : 1)
                     .allowsHitTesting(false)
             }
             if stage == .magneticHolder {
-                GachaProductOwnedMagneticHolderSurface(
+                GachaProductOwnedIdentityCaption(
                     playbackEnabled: playbackEnabled,
                     identity: GachaHolderIdentity.resolve(from: revealedPrize))
                     .zIndex(10)
@@ -451,34 +425,22 @@ private struct GachaRivePlaybackSurface: View {
     }
 }
 
-/// The Rive holder remains a hidden completion clock. Every visible holder
-/// pixel is product-owned SwiftUI, so embedded third-party art can never flash
-/// during the entrance, tilt, settle or exit choreography.
-private struct GachaProductOwnedMagneticHolderSurface: View {
+/// The real `.riv` magnetic-holder artboard is now the visible card — this
+/// caption only adds the real drawn prize's name/tier/acquired label as a
+/// bottom-pinned strip so it never covers the Rive artwork or its motion.
+private struct GachaProductOwnedIdentityCaption: View {
     let playbackEnabled: Bool
     let identity: GachaHolderIdentity
 
     @State private var isPresented = false
 
     var body: some View {
-        ZStack {
-            holderSlab
-                .scaleEffect(isPresented ? 1 : 0.84)
-                .rotationEffect(.degrees(isPresented ? -1.2 : 4.5))
-                .rotation3DEffect(
-                    .degrees(isPresented
-                        ? -3
-                        : GachaHolderIdentity.entranceTiltDegrees),
-                    axis: (x: 0.08, y: 1, z: 0),
-                    anchor: .center,
-                    perspective: 0.72)
-                .offset(
-                    x: isPresented
-                        ? 0
-                        : GachaHolderIdentity.entranceOffsetX,
-                    y: isPresented ? -160 : -146)
-                .opacity(playbackEnabled ? 1 : 0)
-                .animation(nil, value: playbackEnabled)
+        VStack {
+            Spacer()
+            captionStrip
+                .opacity(isPresented ? 1 : 0)
+                .offset(y: isPresented ? 0 : 14)
+                .padding(.bottom, 116)
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .allowsHitTesting(false)
@@ -490,15 +452,15 @@ private struct GachaProductOwnedMagneticHolderSurface: View {
         .accessibilityHidden(!playbackEnabled)
         .onAppear {
             gachaRiveRuntimeLog(
-                "holder-product-surface-prepared product=\(identity.productName) surface=\(GachaHolderIdentity.surfaceMarker) playbackEnabled=\(playbackEnabled)")
+                "holder-identity-caption-prepared product=\(identity.productName) surface=\(GachaHolderIdentity.surfaceMarker) playbackEnabled=\(playbackEnabled)")
             guard playbackEnabled else { return }
             DispatchQueue.main.async {
-                presentHolder()
+                presentCaption()
             }
         }
         .onChange(of: playbackEnabled) { enabled in
             if enabled {
-                presentHolder()
+                presentCaption()
             } else {
                 var transaction = Transaction()
                 transaction.disablesAnimations = true
@@ -509,128 +471,27 @@ private struct GachaProductOwnedMagneticHolderSurface: View {
         }
     }
 
-    private var holderSlab: some View {
-        VStack(spacing: 12) {
-            identityHeader
-            productWindow
-
-            HStack(spacing: 7) {
-                Capsule()
-                    .fill(Color.white.opacity(0.24))
-                    .frame(height: 1)
-                Text("MAGNETIC HOLDER")
-                    .font(.product(size: 7, weight: .bold))
-                    .tracking(1.1)
-                    .foregroundColor(.white.opacity(0.52))
-                    .fixedSize()
-                Capsule()
-                    .fill(Color.white.opacity(0.24))
-                    .frame(height: 1)
-            }
+    private var captionStrip: some View {
+        VStack(spacing: 3) {
+            Text(identity.productName)
+                .font(.product(size: 13, weight: .bold))
+                .tracking(0.3)
+                .foregroundColor(.white.opacity(0.96))
+                .lineLimit(1)
+                .minimumScaleFactor(0.72)
+            Text(identity.tierAndLevelLabel)
+                .font(.product(size: 10, weight: .semibold))
+                .foregroundColor(identity.tint.opacity(0.92))
         }
-        .padding(.horizontal, 15)
-        .padding(.vertical, 14)
-        .frame(width: 218, height: 318)
+        .padding(.horizontal, 18)
+        .padding(.vertical, 10)
         .background(
-            LinearGradient(
-                colors: [
-                    Color(white: 0.29).opacity(0.93),
-                    Color(white: 0.10).opacity(0.96),
-                    Color(white: 0.20).opacity(0.94)
-                ],
-                startPoint: .topLeading,
-                endPoint: .bottomTrailing),
-            in: RoundedRectangle(cornerRadius: 31, style: .continuous))
-        .overlay {
-            RoundedRectangle(cornerRadius: 31, style: .continuous)
-                .stroke(
-                    LinearGradient(
-                        colors: [
-                            Color.white.opacity(0.82),
-                            Color.white.opacity(0.18),
-                            Color.white.opacity(0.54)
-                        ],
-                        startPoint: .topLeading,
-                        endPoint: .bottomTrailing),
-                    lineWidth: 2.2)
-        }
-        .overlay {
-            RoundedRectangle(cornerRadius: 25, style: .continuous)
-                .stroke(Color.white.opacity(0.16), lineWidth: 0.8)
-                .padding(7)
-        }
-        .shadow(color: .black.opacity(0.58), radius: 24, x: 12, y: 18)
-        .shadow(color: .white.opacity(0.10), radius: 7, x: -3, y: -5)
+            Capsule().fill(Color.black.opacity(0.42)))
+        .overlay(
+            Capsule().stroke(Color.white.opacity(0.16), lineWidth: 1))
     }
 
-    private var identityHeader: some View {
-        HStack(alignment: .top, spacing: 8) {
-            VStack(alignment: .leading, spacing: 4) {
-                Text(identity.productName)
-                    .font(.product(size: 10, weight: .bold))
-                    .tracking(0.25)
-                    .foregroundColor(.white.opacity(0.94))
-                    .lineLimit(1)
-                    .minimumScaleFactor(0.72)
-
-                Text(identity.tierAndLevelLabel)
-                    .font(.product(size: 8, weight: .semibold))
-                    .foregroundColor(.white.opacity(0.58))
-            }
-            .frame(maxWidth: .infinity, alignment: .leading)
-
-            VStack(alignment: .trailing, spacing: 0) {
-                Text(identity.acquiredLabel)
-                    .font(.product(size: 7, weight: .bold))
-                    .foregroundColor(.white.opacity(0.72))
-            }
-        }
-        .padding(.horizontal, 2)
-        .frame(height: 48)
-    }
-
-    private var productWindow: some View {
-        ZStack {
-            Circle()
-                .fill(
-                    RadialGradient(
-                        colors: [
-                            identity.tint.opacity(0.55),
-                            Color.black.opacity(0.78)
-                        ],
-                        center: .center,
-                        startRadius: 4,
-                        endRadius: 90))
-
-            Image(systemName: identity.glyphSystemName)
-                .font(.system(size: 56, weight: .semibold))
-                .foregroundColor(.white.opacity(0.92))
-        }
-        .frame(width: 164, height: 164)
-        .overlay {
-            Circle()
-                .stroke(
-                    AngularGradient(
-                        colors: [
-                            Color.white.opacity(0.84),
-                            identity.tint.opacity(0.55),
-                            Color.white.opacity(0.22),
-                            identity.tint.opacity(0.70),
-                            Color.white.opacity(0.84)
-                        ],
-                        center: .center),
-                    lineWidth: 4)
-        }
-        .overlay {
-            Circle()
-                .stroke(Color.black.opacity(0.54), lineWidth: 1)
-                .padding(7)
-        }
-        .shadow(color: .black.opacity(0.62), radius: 14, x: 7, y: 10)
-        .accessibilityHidden(true)
-    }
-
-    private func presentHolder() {
+    private func presentCaption() {
         guard !isPresented else { return }
         withAnimation(.spring(
             response: 0.58,
@@ -639,7 +500,7 @@ private struct GachaProductOwnedMagneticHolderSurface: View {
             isPresented = true
         }
         gachaRiveRuntimeLog(
-            "holder-product-surface-visible surface=\(GachaHolderIdentity.surfaceMarker) product=\(identity.productName) tier=\(identity.tierAndLevelLabel)")
+            "holder-identity-caption-visible surface=\(GachaHolderIdentity.surfaceMarker) product=\(identity.productName) tier=\(identity.tierAndLevelLabel)")
     }
 }
 

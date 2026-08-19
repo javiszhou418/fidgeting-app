@@ -264,7 +264,18 @@ public final class GachaStoreModel: ObservableObject {
         scheduleQueryTimeout(requestId: requestId, status: "querying")
     }
 
+    // Build 42 shows the real drawn prize directly in the magnetic holder
+    // and intentionally bypasses the Unity 3D PremiumDisplayCase reveal
+    // entirely. Without this flag, an awaiting-acceptance transaction
+    // reached via the holder path (see acknowledgeHolderReveal /
+    // markHolderRevealed) hits the same `.awaitingAcceptance` branch below
+    // that used to only mean "the 3D reveal just finished," which requested
+    // the 3D reveal a second time and raced GachaThreeDRevealOverlay in on
+    // top of the holder. Flip this back to re-enable the 3D path.
+    private static let threeDRevealEnabled = false
+
     public func requestRevealSetupIfNeeded() {
+        guard Self.threeDRevealEnabled else { return }
         guard let transaction = pendingTransaction,
               transaction.phase == .awaitingAcceptance
                 || (transaction.phase == .prepared

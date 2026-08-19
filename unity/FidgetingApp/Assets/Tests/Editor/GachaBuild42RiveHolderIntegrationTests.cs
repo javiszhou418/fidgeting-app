@@ -148,7 +148,7 @@ namespace FidgetingApp.Tests.Editor
         }
 
         [Test]
-        public void VisibleHolderShowsTheRealDrawnPrizeAndTheRiveHolderIsOnlyAHiddenClock()
+        public void VisibleHolderPlaysTheRealRiveArtboardAndCaptionsTheDrawnPrize()
         {
             string source = ReadAsset(
                 "Plugins/iOS/FidgetGachaRivePresentation.swift");
@@ -156,15 +156,22 @@ namespace FidgetingApp.Tests.Editor
                 Application.dataPath,
                 "Plugins/iOS/Thumbnails/Models/product-thumbnail-metal-three-blade.png");
 
-            // The hidden Rive layer still needs some valid embedded image to
-            // decode; it is never seen, so any bundled PNG satisfies it.
+            // The Rive layer's own embedded artwork still needs a valid image
+            // to decode, and now actually renders on screen.
             Assert.That(File.Exists(artworkPath), Is.True, artworkPath);
             Assert.That(new FileInfo(artworkPath).Length, Is.GreaterThan(1_000));
             StringAssert.Contains(
                 "assetName = \"product-thumbnail-metal-three-blade\"",
                 source);
 
-            // The holder is built from the real receipt row rather than a
+            // The magnetic-holder Rive layers must render at full opacity —
+            // no hidden-clock trick — so the authored motion is what plays.
+            StringAssert.DoesNotContain("hiddenRiveCompletionOpacity", source);
+            StringAssert.DoesNotContain(
+                "GachaProductOwnedMagneticHolderSurface",
+                source);
+
+            // The caption is built from the real receipt row rather than a
             // fixed placeholder; the old auction-branding identity constants
             // must be gone, not just hidden.
             StringAssert.DoesNotContain("productName = \"METAL THREE-BLADE\"", source);
@@ -183,25 +190,19 @@ namespace FidgetingApp.Tests.Editor
                 "paletteMarker = \"neutralGraphiteSilver\"",
                 source);
             StringAssert.Contains(
-                "surfaceMarker = \"productOwnedMagneticHolderSurface\"",
+                "surfaceMarker = \"productOwnedIdentityCaption\"",
                 source);
             StringAssert.Contains(
-                "hiddenRiveCompletionOpacity = 0.001",
+                "private struct GachaProductOwnedIdentityCaption",
                 source);
             StringAssert.Contains(
-                "private struct GachaProductOwnedMagneticHolderSurface",
-                source);
-            StringAssert.Contains(
-                "GachaProductOwnedMagneticHolderSurface(",
-                source);
-            StringAssert.Contains(
-                "? GachaHolderIdentity.hiddenRiveCompletionOpacity",
+                "GachaProductOwnedIdentityCaption(",
                 source);
             StringAssert.Contains(
                 "accessibilityIdentifier = \"gacha-holder-product-identity\"",
                 source);
             StringAssert.Contains(
-                "holder-product-surface-visible surface=",
+                "holder-identity-caption-visible surface=",
                 source);
             StringAssert.DoesNotContain("WHATNOT", source);
         }
