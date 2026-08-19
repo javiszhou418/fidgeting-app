@@ -454,22 +454,29 @@ private struct GachaRivePlaybackSurface: View {
                 gachaRiveRuntimeLog(
                     "surface-appeared stage=\(stage.rawValue) applicationActive=\(active)")
                 playback.setApplicationActive(active)
-                if stage == .magneticHolder, playbackEnabled {
+                if stage == .magneticHolder, playback.hasStartedPurchase {
                     riseIntoView()
                 }
             }
             .onChange(of: playbackEnabled) { enabled in
                 playback.setPresentationEnabled(enabled)
-                if stage == .magneticHolder {
-                    if enabled {
-                        riseIntoView()
-                    } else {
-                        var transaction = Transaction()
-                        transaction.disablesAnimations = true
-                        withTransaction(transaction) {
-                            hasRisenIntoView = false
-                        }
+                if stage == .magneticHolder, !enabled {
+                    var transaction = Transaction()
+                    transaction.disablesAnimations = true
+                    withTransaction(transaction) {
+                        hasRisenIntoView = false
                     }
+                }
+            }
+            .onChange(of: playback.hasStartedPurchase) { started in
+                // The rise must start together with the real Rive
+                // triggerPurchase() call, not with playbackEnabled/onAppear --
+                // those fire well before the .riv file has finished binding
+                // and rendering its first frame, so the old triggers made the
+                // container finish rising while the Rive canvas was still
+                // blank underneath it.
+                if stage == .magneticHolder, started {
+                    riseIntoView()
                 }
             }
             .onReceive(NotificationCenter.default.publisher(
@@ -700,6 +707,15 @@ private final class GachaRivePlaybackCoordinator: ObservableObject {
     private var isCancelled = false
     private let settleHoldSeconds: Double?
     private var settleHoldTask: Task<Void, Never>?
+    // Published (not just a plain flag) so GachaRivePlaybackSurface can key
+    // its entrance rise off the *real* moment triggerPurchase() fires, rather
+    // than off view-appear. Binding + first-frame readiness is asynchronous
+    // (.riv file load, autoBind's dispatched callback) and was consistently
+    // slower than the SwiftUI rise's own ~550ms timeline, so the container
+    // was finishing its rise-and-fade while the Rive canvas was still blank
+    // -- confirmed by two rounds of frame-by-frame capture that both showed
+    // the card already fully settled the instant it became visible at all.
+    @Published private(set) var hasStartedPurchase = false
 
     init(
         requiredLayers: Set<GachaRiveLayer>,
@@ -796,6 +812,7 @@ private final class GachaRivePlaybackCoordinator: ObservableObject {
               requiredLayers.isSubset(of: readyLayers),
               requiredLayers.isSubset(of: renderedLayers) else { return }
         didStart = true
+        hasStartedPurchase = true
         gachaRiveRuntimeLog(
             "purchase-trigger synchronizedLayers=\(requiredLayers.count)")
         if requiredLayers.contains(.background) { background?.triggerPurchase() }
