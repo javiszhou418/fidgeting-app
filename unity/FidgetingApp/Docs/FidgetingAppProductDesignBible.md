@@ -520,6 +520,17 @@ stateDiagram-v2
 | FDB-DSP-010 | 相机按 aspect 反算垂直 FOV，超长 iPhone 不裁左右亚克力；原生体验支持返回、拖转、捏合、拆解、重播与复位。 | Locked | Partially Integrated | [T22]；[S-PLAN] |
 | FDB-DSP-011 | Build 42 的八项抽卡奖品全部复用磁吸推牌批准过的唯一盒体、内槽、相机、尺寸、角度与六阶段时序；只替换 `contentSlot` 内的 renderer-only 奖品，不得按奖品新建或覆盖 case profile。 | Locked | Integrated & Tested | [T27] 用户明确 Build 42 计划；[S-STATUS] Build 42；[V08]；2026-08-17 Build 42 approval round |
 
+### 9.4 Pack 分级入口、磁吸推牌直接揭晓（本轮临时绕过 3D 揭晓）
+
+用户在观看 Build 42 首版真实揭晓视频后明确要求：抽卡整体体验必须更顺滑、更有 gamification、有可操作性；单抽入口缺少 Pack 分级选择步骤；Pack 撕开到揭晓之间没有动画、转场生硬；磁吸推牌固定显示占位 "METAL THREE-BLADE"，与实际抽中奖品无关。用户随后明确确认：磁吸推牌直接显示真实抽中奖品，本版本先去掉 Unity 3D `PremiumDisplayCase` 揭晓这一步，"收下" 紧跟在推牌之后。
+
+| ID | 当前要求 | DecisionState | DeliveryState | 来源 |
+| --- | --- | --- | --- | --- |
+| FDB-GAC-016 | 单抽入口点击后先进入表现层 Pack 分级 carousel（6 档，弹簧吸附选择），不触发任何抽取；只有确认分级后才调用既有的权威 `draw` 交易。Pack 分级为纯展示元数据，禁止从收据反推，且不得改变奖池、价格或概率。 | Locked | Integrated & Tested | 用户本轮明确要求（"你能不能……carousel……也没有做"）；round-trip XCUITest `testLibraryToAcceptedPrizeRoundTrip` |
+| FDB-GAC-017 | 本 Build 磁吸推牌播放真实 `.riv` 揭晓动效并直接叠加真实抽中奖品的名称与稀有度／等级说明；不得继续显示与抽中结果无关的固定占位文案。 Unity 3D `PremiumDisplayCase` 揭晓 handoff 在本版本临时禁用（`requestRevealSetupIfNeeded`/`threeDRevealEnabled` 开关），"收下" 由推牌自身流程直接触发，不经过 3D 展示盒。**此条为 FDB-GAC-010／FDB-GAC-011（六拍 Unity 3D 揭晓为唯一叙事）在本 Build 的显式、可逆临时覆盖**，通过单一布尔开关实现，不是删除或重写 3D 揭晓能力；后续恢复 3D 揭晓只需还原该开关。 | Locked | Integrated & Tested | 用户本轮明确要求并确认（"是，Holder 直接显示真实奖品，先去掉 3D 展示柜"） |
+| FDB-GAC-018 | 磁吸推牌 `.riv` 素材本身画面固定为占位分级卡片外观（含 "whatnot GEM/MINT 10 #00000001" 字样与空白图片窗口，不随奖品变化），且其 state machine 是一次性 "直播购买 toast" 动画（entrance → 短暂停留 → 回落到触发前的 idle 姿态），因此播放完毕后卡片本身会消失，只保留真实奖品文字说明与"收下"按钮。用户在查看本 Build 实拍截图后明确接受该占位美术与播放行为，作为本 Build 的已知限制，不阻塞交付。 | Current Request | Partially Integrated | 用户本轮查看实拍截图后明确回复"保留 Rive 可见，但先接受占位美术" |
+| FDB-GAC-019 | 抽卡全部原生按钮统一改用产品设计系统的 `ProductPrimaryActionButton`／`ProductSecondaryActionButton`（52 pt 高、pill 圆角、`ProductActionState` 驱动禁用／loading／成功态），禁止继续保留尺寸不一致的自定义 `Button`。 | Locked | Integrated & Tested | 用户本轮明确要求（"我发现你现在的按钮大小都不一致……按照你的 design guideline"） |
+
 ## 10. 技术、性能与发布约束
 
 ### 10.1 Unity／SwiftUI 职责
@@ -578,7 +589,8 @@ stateDiagram-v2
 | Badge 图鉴性能版 | Pending Approval | Integrated & Tested | Build 31 shipping SwiftUI 预览、typecheck；部分 Unity 门禁受许可证影响 | 当前视觉批准、完整回归、再安装与真机滚动 |
 | 磁吸推牌展示盒基准 | Locked | Device Accepted | 用户真机明确反馈“只有磁吸推牌…正确” | 作为其余五款不变基准 |
 | 六款统一展示盒 | Locked | Installed | Build 37，六款同 profile；25/25 测试 | 其余五款逐款真机视觉验收 |
-| Build 42 内测无限单抽、可恢复交易与八项真实 3D 揭晓 | Locked | Integrated & Tested | Unity `159/159`、八项六阶段 GPU shipping 门禁 `8/8`、主 App Simulator E2E `1/1`；[V08] 于 2026-08-17 获明确视觉批准 | Internal Device 构建与覆盖安装；随后 iPhone 逐项验收，安装不等于真机接受 |
+| Build 42 内测无限单抽、可恢复交易与八项真实 3D 揭晓（首版） | Locked | Integrated & Tested | Unity `159/159`、八项六阶段 GPU shipping 门禁 `8/8`、主 App Simulator E2E `1/1`；[V08] 于 2026-08-17 获明确视觉批准 | Internal Device 构建与覆盖安装；随后 iPhone 逐项验收，安装不等于真机接受 |
+| Build 42 Pack 分级 carousel + 磁吸推牌直接揭晓真实奖品（本版本临时绕过 3D 揭晓） | Locked | Integrated & Tested | Unity EditMode `393/393`；主 App Simulator round-trip XCUITest `testLibraryToAcceptedPrizeRoundTrip` 通过（carousel→分级选择→确认→撕开→推牌揭晓→收下→回商店，owned／draws 各 +1）；`gacha-pack-build42-main-app-full-acceptance-roundtrip.mp4` | 推牌 `.riv` 占位美术（FDB-GAC-018）与整体转场动效手感（用户要求的 gamification／顺滑度）仍需后续专项打磨；未做真机与视觉批准 |
 | 图纸打造与定制经济 | Current Request | Specified | [S-GACHA] 差距审计 | 决定通用合金屑与产品定向蓝图关系 |
 | 30 分钟热／内存 soak | Current Request | Partially Integrated | 短轮性能与结构优化证据 | 目标 iPhone 长时采样与阈值结论 |
 
@@ -637,6 +649,9 @@ stateDiagram-v2
 | SwiftUI 绘制二维假收藏盒并把临时 receipt 当揭晓内容 | Rejected | 没有接入真实 Unity 展示盒与 3D 奖品，回包中断后不可恢复 | Build 42 透明 native presentation + Unity `GachaRevealSession` + [V08] 批准视觉 |
 | 揭晓前先扣券、写 Gallery／保底／抽数 | Superseded | 动画或 native 回包中断会造成已消费但无法恢复的交易 | `Prepared → AwaitingAcceptance → Completed`；“收下”才单次提交，重试查询原 `requestId` |
 | 无界推牌 goggle 开孔候选 | Rejected | shipping 视觉门禁失败 | 保持现有六款目录，未来另起新候选 |
+| Build 42 单抽直接调用权威 `draw`、无 Pack 分级选择步骤 | Superseded | 用户要求抽卡体验有 gamification／可操作性，缺少分级选择破坏心理预期与仪式感 | FDB-GAC-016：表现层 Pack 分级 carousel，确认分级后才调用 `draw` |
+| 磁吸推牌固定占位 "METAL THREE-BLADE" 文案（与实际抽中奖品无关） | Superseded | 用户要求推牌必须直接体现真实抽中奖品 | FDB-GAC-017：推牌叠加真实收据来源的奖品名称与稀有度 |
+| Build 42 揭晓固定经由 Unity 3D `PremiumDisplayCase`（FDB-GAC-010／FDB-GAC-011 原始唯一叙事） | Locked 规则本轮临时覆盖 | 用户要求磁吸推牌直接揭晓、跳过 3D 展示盒这一步；覆盖通过单一可逆开关（`threeDRevealEnabled`）实现，3D 揭晓能力本身未删除 | FDB-GAC-017；后续如需恢复 3D 揭晓需新的产品决定，而非默认回滚 |
 
 ### 12.3 27 个主任务覆盖索引
 

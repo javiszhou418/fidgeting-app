@@ -1,6 +1,6 @@
 # Fidgeting Interaction Integration Status
 
-最后更新：2026-08-18
+最后更新：2026-08-19
 
 本文件回答一个问题：规格中的能力是否已经进入可运行代码。状态只按代码、场景接线和测试证据填写，不按聊天结论或文档完成度填写。
 
@@ -10,6 +10,23 @@
 - `部分集成`：已有部分代码或接线，但还缺语义、生命周期、测试或真机环节。
 - `仅规格`：只有设计规格，不能对外称为已实现。
 - `待真机验收`：自动化能验证结构，但触感仍必须在 iPhone 上确认。
+
+## Build 42 Pack 分级 carousel + 磁吸推牌直接揭晓真实奖品（已在 Simulator 通过完整 round-trip；未安装真机，转场动效手感待专项打磨）
+
+> **背景：用户在查看上一轮 Build 42 首版真实揭晓视频后明确指出：整体抽卡体验必须更顺滑、有 gamification、有可操作性；单抽入口没有 Pack 分级选择步骤；Pack 撕开到揭晓之间没有动画、转场生硬；磁吸推牌固定显示占位 `METAL THREE-BLADE`，与实际抽中奖品无关。用户随后明确确认：磁吸推牌直接显示真实抽中奖品，本版本先去掉 Unity 3D `PremiumDisplayCase` 揭晓这一步，"收下" 紧跟在推牌之后。全部按钮尺寸也要求统一到既有 design guideline。**
+
+- Phase 1：从 `main` 分支移植 `Font.product`、`ProductActionState`、`ProductPrimaryActionButton`／`ProductSecondaryActionButton`／`ProductStatusTag` 与相关 `FidgetUITokens` 补充字段到 Build 42 自己的 `FidgetProductUIComponents.swift`（新增，未覆盖 Build 42 既有的 `ProductPrimaryActionLabel` 等 4 处既有用法）。全部抽卡原生按钮（撕开包装、Pack 分级确认／取消、收下）统一改为该组件，52 pt 高、pill 圆角。
+- Phase 2：从 `main` 分支移植 `GachaPackCarouselRules`（纯数学、无依赖：`itemSpacingPoints=160`、`selectionCommitPoints=56`、`unselectedPackScale=0.66`、`selectedPackScale=0.70`、弹簧吸附 `response=0.28s / damping=0.82`）到 `FidgetGachaPackPresentation.swift`。新增 `GachaPackTierCarouselOverlay`（`FidgetGachaStorefront.swift`）：单抽入口点击后先展示 6 档 Pack 分级 carousel，纯表现层、不触碰任何交易状态；只有点击"选择 `<tier>`"才调用既有的、本 session 未改动的权威 `model.draw(seriesId:count:useCoins:)`。Build 42 原有的 Unity 拥有交易状态机（`GachaInventoryRuntime` 幂等交易）完整保留，未移植 `main` 分支的本地状态机架构。
+- Phase 3：`GachaHolderIdentity`（`FidgetGachaRivePresentation.swift`）从 `static let` 单例改为按真实收据行 `GachaReceiptRow` 解析的实例（`productName`／`tierAndLevelLabel`／`acquiredLabel`／`tint`）。新增 Unity 侧 `FidgetAppCoordinator.MarkGachaHolderRevealedFromNativeUi(requestId)`，复用既有 `GachaInventory.MarkRevealAwaitingAcceptance` 与 `PublishGachaState`，但不获取展示盒相机 lease、不隐藏产品 Renderer、不触碰 `GachaRevealDirector`。新增 Swift 侧 `model.markHolderRevealed(requestId:)` / `model.acknowledgeHolderReveal(requestId:)`，绕开仅供 Unity 3D 完成态使用的 `revealPhase == .complete` 门槛，改为直接判断 `transaction.phase == .awaitingAcceptance`。
+- **本轮修复的三个真实回归**（均通过真实 Simulator round-trip + accessibility 层级 dump 定位，非猜测）：
+  1. Pack 分级 carousel 的容器 `ZStack` 携带了自己的 `accessibilityIdentifier`，覆盖了子层每个分级按钮各自的 `accessibilityIdentifier`，导致按 id 查找／点击单个分级按钮全部失效。修复：移除容器级 identifier（提交 `ab393a3`）。
+  2. `requestRevealSetupIfNeeded()` 在交易进入 `.awaitingAcceptance` 时仍无条件请求 Unity 3D 揭晓——这个 phase 曾经只可能来自 3D 揭晓已完成。新的磁吸推牌直接揭晓路径同样会到达这个 phase，导致它把 3D 揭晓重新请求了一遍，`GachaThreeDRevealOverlay` 叠加在新推牌 overlay 之上并将其顶替下线。修复：新增 `threeDRevealEnabled = false` 开关，本 Build 直接短路该函数（提交 `13ed921`）。
+  3. `packIsPresented`（决定 Pack／推牌 overlay 是否挂载）在交易进入 `.awaitingAcceptance` 的同一时刻跌回 `false`，因为 `packGateRequestId` 会在该 phase 被清空（此前安全，因为 3D 揭晓 overlay 即将接管）。3D 揭晓被禁用后没有任何东西顶替，推牌／收下 UI 直接消失，交易卡在 `awaitingAcceptance` 且无法收下。修复：`packIsPresented` 现在在 `.awaitingAcceptance` 期间也保持 `true`（提交 `6bf2b4e`）。
+- **已知限制（用户查看本 Build 实拍截图后明确接受，非阻塞项）**：磁吸推牌 `.riv` 素材本身画面固定为占位分级卡片外观，含 `"whatnot GEM/MINT 10 #00000001"` 字样与空白图片窗口，不随奖品变化；其 state machine 是一次性"直播购买 toast"动画（`isSelfBuyer`／`isReferral`／`isNewBuyer`／`promoteTag` 等数据绑定属性证实原始用途），entrance → 短暂停留 → 回落到触发前 idle 姿态，因此播放完毕后卡片本身会消失，只保留真实奖品文字说明（`GachaProductOwnedIdentityCaption`：真实奖品名称与稀有度／等级，来自真实收据行）与"收下"按钮。真实逐奖品 Rive 美术为后续独立排期项，本轮不在范围内。
+- Unity EditMode 完整回归为 `393/393 Passed`（`/private/tmp/gacha-build42-pack-gate-fix-editmode-results.xml`），含新增／改写的 `GachaBuild42RiveHolderIntegrationTests.VisibleHolderPlaysTheRealRiveArtboardAndCaptionsTheDrawnPrize`（校验 Rive 层不再以 `hiddenRiveCompletionOpacity` 隐藏、`GachaProductOwnedMagneticHolderSurface` 已不存在）与 `GachaStorefrontIntegrationTests` 相关分级/交易门控断言。
+- fresh Internal Gacha Simulator 主 App round-trip XCUITest `testLibraryToAcceptedPrizeRoundTrip` 为 `1/1 Passed`（`/private/tmp/gacha-pack-build42-full-acceptance.xcresult`），覆盖 Library → 商店 → 单抽 → Pack 分级 carousel（两次拖拽选中 `signature` 档）→ 确认 → 撕开 → 磁吸推牌揭晓 → 收下 → 回商店，`owned`/`draws` 均从 `0` 精确 +1 到 `1`；accessibility 层级 dump 确认全程未出现 `gacha-3d-reveal-root`／`gacha-reveal-phase`（Unity 3D 揭晓 overlay 自身标记），证明 3D 揭晓确实未被挂载。真实 H.264 已剪辑为 62 s 并归档为 `Artifacts/GachaPackShippingNativePreview/gacha-pack-build42-main-app-full-acceptance-roundtrip.mp4`，联系表为同目录 `-contact-sheet.png`，完整证据 JSON 为 `-validation.json`。
+- 不可变发布源为提交 `6bf2b4e5567e5a47d04a966b0f2ee6655c83b8b1`；fresh Unity SimulatorSDK manifest 精确锁定该 `sourceCommit`。录制过程中遇到 Simulator 宿主级录屏死锁（`Host recording is already in progress`，根因是自 `2026-08-09` 起常驻的 `CoreSimulatorService` 进程持有过期录制状态），通过重启该服务并改用新建的 Simulator 设备解决，与本次代码改动无关，记录仅为后续排障参考。
+- DeliveryState 现在可以写为 `Integrated & Tested`（Simulator 层）；未做 Internal Device 构建、未安装真机、未做视觉批准；下一门禁是转场动效／haptics 专项打磨（原计划 Phase 4：撕开/推牌过渡的弹簧曲线、语义 haptic 事件）与 Internal Device fresh 构建 + 真机逐项验收。
 
 ## Build 42 正式抽卡链修复（已覆盖安装并启动 `0.1.0 (42)`；真机业务与触感验收待用户确认）
 
