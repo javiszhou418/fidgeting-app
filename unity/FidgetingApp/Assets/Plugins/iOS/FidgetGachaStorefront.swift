@@ -27,6 +27,24 @@ public struct GachaStoreView: View {
 
     private var activeSeries: GachaSeriesInfo? { model.series.first }
 
+    // Drives one consistent animated crossfade/transition for every step of
+    // the store -> carousel -> pack -> reveal chain from a single value,
+    // instead of requiring every individual state mutation (several of which
+    // originate from async Unity bridge callbacks, not local button taps) to
+    // separately remember to wrap itself in withAnimation. Several of these
+    // transitions were previously instant snaps because nothing here wrapped
+    // the underlying @Published model changes in an animation context.
+    private var presentationPhase: Int {
+        if model.revealIsPresented { return 3 }
+        if model.packIsPresented { return 2 }
+        if carouselSeries != nil { return 1 }
+        return 0
+    }
+
+    private var presentationTransition: Animation {
+        .spring(response: 0.46, dampingFraction: 0.86)
+    }
+
     public var body: some View {
         ZStack(alignment: .bottom) {
             // Dedicated one-pixel markers keep every child control's own AX
@@ -55,7 +73,9 @@ public struct GachaStoreView: View {
                     transaction: transaction,
                     tier: confirmedPackTier)
                     .id(transaction.requestId)
-                    .transition(.opacity)
+                    .transition(.asymmetric(
+                        insertion: .scale(scale: 0.94).combined(with: .opacity),
+                        removal: .opacity))
                     .zIndex(25)
             }
 
@@ -81,10 +101,14 @@ public struct GachaStoreView: View {
                         model.draw(seriesId: series.id, count: 1, useCoins: false)
                     })
                     .accessibilityAddTraits(.isModal)
-                    .transition(.opacity)
+                    .transition(.asymmetric(
+                        insertion: .scale(scale: 0.90, anchor: .bottom)
+                            .combined(with: .opacity),
+                        removal: .opacity))
                     .zIndex(26)
             }
         }
+        .animation(presentationTransition, value: presentationPhase)
         .background(GachaTransparentPresentationBackground())
         .preferredColorScheme(.dark)
         .interactiveDismissDisabled(!model.activeRequestId.isEmpty)
@@ -827,14 +851,16 @@ private struct GachaPackOpeningOverlay: View {
                         .padding(.bottom, 48)
                         .accessibilityIdentifier("gacha-reveal-accept")
                 }
-                .transition(.opacity)
+                .transition(.move(edge: .bottom).combined(with: .opacity))
                 .zIndex(4)
             }
 
             accessibilityMarkers
                 .zIndex(3)
         }
-        .animation(.easeOut(duration: 0.22), value: holderRevealAcceptReady)
+        .animation(
+            .spring(response: 0.42, dampingFraction: 0.82),
+            value: holderRevealAcceptReady)
         .accessibilityElement(children: .contain)
         .onAppear {
             GachaPackInteractionTrace.begin(requestId: transaction.requestId)
