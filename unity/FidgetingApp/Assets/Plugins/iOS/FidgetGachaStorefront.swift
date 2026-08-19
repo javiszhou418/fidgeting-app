@@ -676,7 +676,6 @@ private struct GachaPackTierCarouselOverlay: View {
                 }
             }
         }
-        .accessibilityIdentifier("gacha-pack-tier-carousel-overlay")
     }
 
     private var tierStage: some View {
@@ -751,7 +750,6 @@ private struct GachaPackTierCarouselOverlay: View {
                         selectedTier = tiers[next]
                     }
                 })
-        .accessibilityIdentifier("gacha-pack-carousel")
     }
 }
 
