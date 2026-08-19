@@ -340,6 +340,86 @@ private struct GachaRiveCardFramePreferenceKey: PreferenceKey {
     }
 }
 
+// SwiftUI-declarative animation (ambient withAnimation{}, explicit
+// .animation(value:), even a manually time-driven TimelineView) all failed
+// to produce visible motion here: NSLog instrumentation proved the Rive
+// engine's own rendering pins the main thread heavily enough during exactly
+// the entrance window that SwiftUI's own re-render loop stalls for over a
+// second (confirmed with video recording OFF too, ruling out capture
+// overhead as the cause). Any animation technique that depends on SwiftUI
+// re-invoking a view's body on the main thread will stall along with it.
+// UIView.animate is different: Core Animation commits the start/end values
+// once and interpolates on the render server, independent of whatever the
+// main thread is doing afterward -- exactly what survives a busy main
+// thread. This wrapper hosts the real content once, then drives its
+// transform/alpha via a genuine UIKit animation the first time
+// `isPresenting` flips true.
+private struct GachaRiveEntranceAnimator<Content: View>: UIViewRepresentable {
+    let isPresenting: Bool
+    let startOffset: CGSize
+    let duration: Double
+    let content: () -> Content
+
+    // Auto Layout constraints continuously re-solve on every layout pass,
+    // which Rive's own frequent internal redraws can trigger many times a
+    // second. Manually assigning .frame in layoutSubviews (only invoked when
+    // the container's own bounds actually change) removes Auto Layout from
+    // the picture entirely, in case the constraint solver was interacting
+    // with the container's animated .transform in ways that fought the
+    // in-flight animation.
+    private final class ContainerView: UIView {
+        var hostedView: UIView?
+        override func layoutSubviews() {
+            super.layoutSubviews()
+            hostedView?.frame = bounds
+        }
+    }
+
+    func makeUIView(context: Context) -> UIView {
+        let container = ContainerView()
+        container.clipsToBounds = false
+        container.backgroundColor = .clear
+        let hosting = UIHostingController(rootView: content())
+        hosting.view.backgroundColor = .clear
+        hosting.view.frame = container.bounds
+        container.addSubview(hosting.view)
+        container.hostedView = hosting.view
+        context.coordinator.hostingController = hosting
+        if !isPresenting {
+            container.transform = CGAffineTransform(
+                translationX: startOffset.width, y: startOffset.height)
+            container.alpha = 0
+        }
+        return container
+    }
+
+    func updateUIView(_ uiView: UIView, context: Context) {
+        context.coordinator.hostingController?.rootView = content()
+        guard isPresenting, !context.coordinator.hasAnimated else { return }
+        context.coordinator.hasAnimated = true
+        gachaRiveRuntimeLog(
+            "entrance-animator-starting startOffset=\(startOffset) duration=\(duration)")
+        UIView.animate(
+            withDuration: duration,
+            delay: 0,
+            options: [.curveEaseOut],
+            animations: {
+                uiView.transform = .identity
+                uiView.alpha = 1
+            },
+            completion: { _ in
+                gachaRiveRuntimeLog("entrance-animator-completed")
+            })
+    }
+
+    func makeCoordinator() -> Coordinator { Coordinator() }
+
+    final class Coordinator {
+        var hostingController: UIHostingController<Content>?
+        var hasAnimated = false
+    }
+}
+
 private struct GachaRivePlaybackSurface: View {
     private static let artboardAspectRatio: CGFloat = 375.0 / 812.0
 
@@ -360,7 +440,12 @@ private struct GachaRivePlaybackSurface: View {
     // tear-commit position (entranceOriginFrame) to its resting place, so
     // the dominant perceived motion is "this card just came out of that
     // Pack" instead of a generic fixed-offset slide.
+    // Drives GachaRiveEntranceAnimator below -- a real UIView.animate call,
+    // not a SwiftUI-observed value -- so flipping it true only needs to
+    // happen once, ever.
     @State private var hasRisenIntoView = false
+    private static let riseDuration: Double = 0.6
+
     // The card's *actual* rendered rect, captured via preference key rather
     // than read off the wrapping GeometryReader's own bounds. The reader
     // spans the full presentation (status-bar-to-home-indicator, ~402x812pt)
@@ -465,8 +550,8 @@ private struct GachaRivePlaybackSurface: View {
         return offset
     }
 
-    var body: some View {
-        let riseOffset = entranceOffset(restingFrame: measuredRestingFrame)
+    @ViewBuilder
+    private func cardContent() -> some View {
         ZStack {
             if stage.includesBackground {
                 background
@@ -485,11 +570,37 @@ private struct GachaRivePlaybackSurface: View {
                     .zIndex(10)
             }
         }
+    }
+
+    var body: some View {
+        let riseOffset = entranceOffset(restingFrame: measuredRestingFrame)
+        Group {
+            // Only the magnetic-holder stage needs the entrance rise; every
+            // other stage renders exactly as it did before this wrapper
+            // existed, so this change can't regress the pack-selection halo
+            // or any other caller of this surface.
+            if stage == .magneticHolder {
+                GachaRiveEntranceAnimator(
+                    isPresenting: hasRisenIntoView,
+                    startOffset: riseOffset,
+                    duration: Self.riseDuration,
+                    content: cardContent)
+            } else {
+                cardContent()
+            }
+        }
             .aspectRatio(Self.artboardAspectRatio, contentMode: .fit)
             // Captured on the aspect-fit-sized content itself, before the
-            // .frame(maxWidth:.infinity...) below re-expands the layout box
-            // back out to fill the presentation. Measuring after that
-            // expansion would just reproduce the old full-screen-bounds bug.
+            // .frame(maxWidth:.infinity...) below re-expands the layout
+            // box back out to fill the presentation. Measuring after
+            // that expansion would just reproduce the old
+            // full-screen-bounds bug. This GeometryReader stays in the
+            // plain SwiftUI tree (outside the UIHostingController the
+            // animator wraps its content in above), so the named
+            // coordinate-space lookup below keeps resolving against the
+            // Pack's own capture in FidgetGachaStorefront.swift -- a
+            // UIHostingController boundary would otherwise break that
+            // lookup, since named spaces don't cross it.
             .background(
                 GeometryReader { proxy in
                     Color.clear.preference(
@@ -499,29 +610,6 @@ private struct GachaRivePlaybackSurface: View {
                 }
             )
             .frame(maxWidth: .infinity, maxHeight: .infinity)
-            .offset(
-                // hasCapturedRestingFrame must gate this too: until the
-                // first un-offset measurement lands, offsetting at all would
-                // corrupt that very measurement (the preference key is on
-                // this same view, so any offset here is baked into what it
-                // reports back).
-                x: stage == .magneticHolder && !hasRisenIntoView && hasCapturedRestingFrame
-                    ? riseOffset.width : 0,
-                y: stage == .magneticHolder && !hasRisenIntoView && hasCapturedRestingFrame
-                    ? riseOffset.height : 0)
-            .opacity(stage == .magneticHolder && !hasRisenIntoView ? 0 : 1)
-            // An explicit .animation(value:) instead of relying solely on an
-            // ambient withAnimation{} block around the state flip -- the
-            // offset/opacity here sit above a RiveViewModel-backed
-            // UIViewRepresentable subtree, and ambient-transaction
-            // propagation into wrapped UIKit content is not always reliable.
-            // Confirmed via frame-by-frame capture: withAnimation alone
-            // produced a real, non-drifting, correctly-signed offset value
-            // (verified by NSLog) that nonetheless rendered as a near-instant
-            // snap on screen once opacity crossed the visible threshold.
-            .animation(
-                .spring(response: 0.5, dampingFraction: 0.82, blendDuration: 0.08),
-                value: hasRisenIntoView)
             .onPreferenceChange(GachaRiveCardFramePreferenceKey.self) { frame in
                 guard !hasCapturedRestingFrame, frame != .zero else { return }
                 measuredRestingFrame = frame
@@ -543,11 +631,7 @@ private struct GachaRivePlaybackSurface: View {
             .onChange(of: playbackEnabled) { enabled in
                 playback.setPresentationEnabled(enabled)
                 if stage == .magneticHolder, !enabled {
-                    var transaction = Transaction()
-                    transaction.disablesAnimations = true
-                    withTransaction(transaction) {
-                        hasRisenIntoView = false
-                    }
+                    hasRisenIntoView = false
                 }
             }
             .onChange(of: playback.hasStartedPurchase) { started in
@@ -590,30 +674,7 @@ private struct GachaRivePlaybackSurface: View {
         gachaRiveRuntimeLog(
             "rise-into-view-called hasRisenIntoView=\(hasRisenIntoView) hasStartedPurchase=\(playback.hasStartedPurchase)")
         guard !hasRisenIntoView else { return }
-        // The pre-rise frame (offset = riseOffset, opacity = 0) must actually
-        // be committed AND rendered on screen before the animated flip below,
-        // or SwiftUI coalesces both into the same non-animated transaction --
-        // the card just pops into its resting position with zero visible
-        // motion. This was the exact bug: calling withAnimation synchronously
-        // from .onAppear / .onChange(of: playbackEnabled) (the same commit
-        // that mounts the view / flips the trigger) produced no interpolation
-        // at all. A single DispatchQueue.main.async hop was NOT enough either
-        // -- confirmed by a second frame-by-frame capture still showing an
-        // instant pop, because that only defers to the next runloop tick, not
-        // past an actual display refresh. Waiting a couple of real frames via
-        // Task.sleep guarantees the "before" frame is actually presented
-        // first, so the spring has something to visibly animate from.
-        Task { @MainActor in
-            try? await Task.sleep(nanoseconds: 32_000_000)
-            guard !hasRisenIntoView else { return }
-            gachaRiveRuntimeLog("rise-into-view-flipping")
-            // The explicit .animation(value: hasRisenIntoView) modifier on
-            // the card view drives the interpolation now; a plain assignment
-            // here is enough (and more reliable than an ambient
-            // withAnimation{} block reaching into the RiveViewModel-backed
-            // UIViewRepresentable subtree beneath it).
-            hasRisenIntoView = true
-        }
+        hasRisenIntoView = true
     }
 }
 
@@ -724,11 +785,12 @@ private enum GachaRiveLayer: String, CaseIterable {
 }
 
 private func gachaRiveRuntimeLog(_ message: String) {
-    // TEMP diagnostic build: #if DEBUG gate removed to get ground-truth
-    // timing of the entrance-rise investigation via the unified log, since
-    // this export's Debug configuration does not define DEBUG for Swift
-    // either. Restore the gate before shipping.
+#if DEBUG
+    // `print` from Swift compiled into UnityFramework does not reliably enter
+    // Simulator unified logs. NSLog keeps shipping-source smoke evidence tied
+    // to the actual main-app process.
     NSLog("%@", "[GachaRiveRuntime] \(message)")
+#endif
 }
 
 /// This file contains four embedded image payloads and one intentionally empty

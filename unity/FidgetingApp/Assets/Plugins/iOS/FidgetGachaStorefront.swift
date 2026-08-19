@@ -3,9 +3,9 @@ import SwiftUI
 import UIKit
 
 private func gachaSequenceLog(_ message: String) {
-    // TEMP diagnostic: #if DEBUG gate removed for the entrance-rise
-    // investigation. Restore before shipping.
+#if DEBUG
     NSLog("%@", message)
+#endif
 }
 
 // Shipping storefront presentation. Economy, ownership, transaction recovery,
