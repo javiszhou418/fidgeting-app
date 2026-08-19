@@ -170,83 +170,63 @@ public struct GachaStoreView: View {
 
     private var header: some View {
         HStack(spacing: 10) {
-            VStack(alignment: .leading, spacing: 3) {
-                Text("抽取与收藏")
-                    .font(.system(size: 27, weight: .black, design: .rounded))
-                    .foregroundColor(.white)
-                Text("票券抽取 · 外观收藏 · 图纸兑换")
-                    .font(.system(size: 11, weight: .medium))
-                    .foregroundColor(.white.opacity(0.48))
-                Text(model.runtimeMode.title)
-                    .font(.system(size: 9, weight: .bold, design: .monospaced))
-                    .foregroundColor(
-                        model.runtimeMode == .internalUnlimited
-                            ? .green.opacity(0.82)
-                            : .white.opacity(0.38))
-                    .accessibilityIdentifier("gacha-runtime-mode")
-            }
-
-            Spacer(minLength: 8)
-            walletChip(
-                symbol: "ticket.fill",
-                value: model.ticketBalanceText,
-                title: model.runtimeMode.title)
-            walletChip(
-                symbol: "gearshape.2.fill",
-                value: "\(model.coins)",
-                title: "齿轮币")
+            Spacer()
+            walletChip(symbol: "ticket.fill", value: model.ticketBalanceText)
+                .accessibilityElement(children: .ignore)
+                .accessibilityIdentifier("gacha-runtime-mode")
+                .accessibilityLabel(model.runtimeMode.title)
+            walletChip(symbol: "gearshape.2.fill", value: "\(model.coins)")
         }
         .padding(.horizontal, 18)
         .padding(.vertical, 12)
     }
 
-    private func walletChip(
-        symbol: String,
-        value: String,
-        title: String
-    ) -> some View {
+    // Icon + number only — no descriptive label underneath. The ticket
+    // chip's real mode name is still exposed via accessibilityLabel above.
+    private func walletChip(symbol: String, value: String) -> some View {
         HStack(spacing: 6) {
             Image(systemName: symbol)
-                .font(.system(size: 12, weight: .semibold))
-            VStack(alignment: .leading, spacing: 0) {
-                Text(value)
-                    .font(.system(size: 13, weight: .bold, design: .monospaced))
-                Text(title)
-                    .font(.system(size: 8, weight: .medium))
-                    .foregroundColor(.white.opacity(0.45))
-            }
+                .font(.system(size: 13, weight: .semibold))
+            Text(value)
+                .font(.system(size: 14, weight: .bold, design: .monospaced))
         }
         .foregroundColor(.white.opacity(0.90))
-        .padding(.horizontal, 10)
-        .frame(height: 44)
+        .padding(.horizontal, 12)
+        .frame(height: 40)
         .background(Color.white.opacity(0.08), in: Capsule())
     }
 
+    // Secondary navigation: real Liquid Glass capsules, deliberately lighter
+    // and lower-contrast than ProductPrimaryActionButton's solid white pill
+    // (used for "单抽" below) so the two never read as the same hierarchy
+    // level again.
     private var tabs: some View {
-        HStack(spacing: 0) {
-            tabButton("抽取 / 兑换", index: 0)
+        HStack(spacing: 8) {
+            tabButton("抽取", index: 0)
             tabButton("收藏", index: 1)
         }
-        .padding(5)
-        .background(Color.white.opacity(0.06), in: RoundedRectangle(cornerRadius: 18))
         .padding(.horizontal, 18)
         .padding(.bottom, 8)
     }
 
     private func tabButton(_ title: String, index: Int) -> some View {
-        Button {
+        let isSelected = selectedTab == index
+        return Button {
             withAnimation(.easeOut(duration: 0.20)) {
                 selectedTab = index
             }
         } label: {
             Text(title)
-                .font(.system(size: 14, weight: .bold))
-                .foregroundColor(selectedTab == index ? .black : .white.opacity(0.58))
+                .font(.system(size: 13, weight: .semibold))
+                .foregroundColor(isSelected ? .white : .white.opacity(0.52))
                 .frame(maxWidth: .infinity)
-                .frame(height: 43)
-                .background(
-                    selectedTab == index ? Color.white.opacity(0.90) : Color.clear,
-                    in: RoundedRectangle(cornerRadius: 14))
+                .frame(height: 36)
+                .productGlass(
+                    cornerRadius: 18,
+                    tint: isSelected
+                        ? Color.white.opacity(0.16)
+                        : Color.white.opacity(0.02),
+                    interactive: true)
         }
         .buttonStyle(.plain)
     }
@@ -273,36 +253,27 @@ public struct GachaStoreView: View {
         }
     }
 
+    // Shows the product's own Pack artwork instead of a cropped product
+    // photo — GachaPackVisual is already authored at a fixed 384:512 aspect
+    // and always laid out with .scaledToFit, so it never gets stretched or
+    // over-cropped the way a wide banner forced to fill/clip a square photo
+    // did. See LiquidGlassDesignGuideline.md's non-proportional-stretch rule.
     private var featuredBanner: some View {
-        ZStack(alignment: .bottomLeading) {
-            GachaBundleArtwork(name: "product-thumbnail-metal-three-blade")
-                .scaledToFill()
-                .frame(maxWidth: .infinity)
-                .frame(height: 218)
-                .clipped()
+        HStack(spacing: 18) {
+            GachaPackVisual(tier: .signature, tearProgress: 0)
+                .aspectRatio(384.0 / 512.0, contentMode: .fit)
+                .frame(height: 176)
 
-            LinearGradient(
-                colors: [.clear, Color.black.opacity(0.28), Color.black.opacity(0.92)],
-                startPoint: .top,
-                endPoint: .bottom)
-
-            VStack(alignment: .leading, spacing: 6) {
-                HStack(spacing: 7) {
-                    quietBadge("本期主推")
-                    quietBadge("精选陀螺")
-                }
-                Text("三叶金属")
-                    .font(.system(size: 27, weight: .black, design: .rounded))
-                Text("全尺寸金属转子 · 十档同系列皮肤")
-                    .font(.system(size: 13, weight: .medium))
-                    .foregroundColor(.white.opacity(0.72))
-                Text("商品展示 · 尚未开放购买")
-                    .font(.system(size: 11, weight: .medium))
-                    .foregroundColor(.white.opacity(0.55))
+            VStack(alignment: .leading, spacing: 4) {
+                Text(activeSeries?.name ?? "本期系列")
+                    .font(.system(size: 20, weight: .black, design: .rounded))
+                    .foregroundColor(.white)
+                    .lineLimit(2)
             }
-            .foregroundColor(.white)
-            .padding(18)
+            Spacer(minLength: 0)
         }
+        .padding(18)
+        .frame(maxWidth: .infinity)
         .frame(height: 218)
         .background(Color(white: 0.06))
         .clipShape(RoundedRectangle(cornerRadius: 24, style: .continuous))
@@ -311,16 +282,7 @@ public struct GachaStoreView: View {
                 .stroke(Color.white.opacity(0.10), lineWidth: 0.7)
         }
         .accessibilityElement(children: .combine)
-        .accessibilityLabel("本期主推，三叶金属，商品展示尚未开放购买")
-    }
-
-    private func quietBadge(_ text: String) -> some View {
-        Text(text)
-            .font(.system(size: 10, weight: .bold))
-            .padding(.horizontal, 9)
-            .frame(height: 26)
-            .background(Color.black.opacity(0.44), in: Capsule())
-            .overlay { Capsule().stroke(Color.white.opacity(0.18), lineWidth: 0.7) }
+        .accessibilityLabel(activeSeries?.name ?? "本期系列")
     }
 
     private var relatedSkins: some View {
@@ -667,6 +629,15 @@ private struct GachaPackTierCarouselOverlay: View {
     let onConfirm: () -> Void
 
     @State private var carouselDrag: CGFloat = 0
+    // Confirming plays a dedicated exit choreography before handing off to
+    // the real draw: the selected Pack grows to dominate the screen while
+    // every other Pack slides fully off in the direction it's already
+    // leaning, instead of the whole carousel just cross-fading away.
+    @State private var isConfirming = false
+
+    private static let confirmGrowScale: Double = 1.55
+    private static let confirmExitDistance: Double = 900
+    private static let confirmTransitionSeconds = 0.46
 
     var body: some View {
         GeometryReader { proxy in
@@ -683,6 +654,7 @@ private struct GachaPackTierCarouselOverlay: View {
                             .foregroundColor(.white.opacity(0.48))
                     }
                     .padding(.top, 42)
+                    .opacity(isConfirming ? 0 : 1)
 
                     tierStage
 
@@ -691,14 +663,30 @@ private struct GachaPackTierCarouselOverlay: View {
                             .frame(width: 84)
                         ProductPrimaryActionButton(
                             title: "选择 \(selectedTier.title)",
-                            action: onConfirm)
+                            action: confirmSelection)
                             .frame(maxWidth: min(240, proxy.size.width - 130))
                             .accessibilityIdentifier("gacha-pack-select")
                     }
                     .padding(.horizontal, 22)
                     .padding(.bottom, 28)
+                    .opacity(isConfirming ? 0 : 1)
+                    .allowsHitTesting(!isConfirming)
                 }
             }
+        }
+    }
+
+    private func confirmSelection() {
+        guard !isConfirming else { return }
+        withAnimation(reduceMotion
+            ? .easeOut(duration: 0.01)
+            : .spring(response: Self.confirmTransitionSeconds, dampingFraction: 0.84)) {
+            isConfirming = true
+        }
+        let delaySeconds = reduceMotion ? 0.01 : Self.confirmTransitionSeconds
+        Task { @MainActor in
+            try? await Task.sleep(nanoseconds: UInt64(delaySeconds * 1_000_000_000))
+            onConfirm()
         }
     }
 
@@ -709,6 +697,7 @@ private struct GachaPackTierCarouselOverlay: View {
         return ZStack {
             ForEach(Array(tiers.enumerated()), id: \.element.rawValue) {
                 index, tier in
+                let isSelected = index == selectedIndex
                 let position = GachaPackCarouselRules.continuousPosition(
                     itemIndex: index,
                     selectedIndex: selectedIndex,
@@ -719,6 +708,18 @@ private struct GachaPackTierCarouselOverlay: View {
                     continuousPosition: position)
                 let tilt = GachaPackCarouselRules.tiltDegrees(
                     continuousPosition: position)
+                // Confirming: the selected Pack grows in place; every other
+                // Pack continues traveling further along the same direction
+                // it's already offset in, fully exiting the screen.
+                let exitX: Double = isConfirming
+                    ? (isSelected
+                        ? 0
+                        : x + Double(x.sign == .minus ? -1 : 1)
+                            * Self.confirmExitDistance)
+                    : x
+                let scale = isConfirming && isSelected
+                    ? Self.confirmGrowScale
+                    : GachaPackCarouselRules.packScale(isSelected: isSelected)
                 Button {
                     withAnimation(.spring(
                         response: GachaPackCarouselRules
@@ -732,35 +733,38 @@ private struct GachaPackTierCarouselOverlay: View {
                     VStack(spacing: 2) {
                         GachaPackVisual(tier: tier, tearProgress: 0)
                             .frame(width: 244, height: 326)
-                            .scaleEffect(CGFloat(
-                                GachaPackCarouselRules.packScale(
-                                    isSelected: index == selectedIndex)))
+                            .scaleEffect(CGFloat(scale))
                             .frame(width: 166, height: 226)
                         Text(tier.title)
                             .font(.product(size: 10, weight: .bold))
                             .foregroundColor(.white.opacity(
-                                index == selectedIndex ? 0.92 : 0.42))
+                                isSelected ? 0.92 : 0.42))
+                            .opacity(isConfirming ? 0 : 1)
                     }
                 }
                 .buttonStyle(.plain)
-                .offset(x: CGFloat(x), y: CGFloat(y))
+                .allowsHitTesting(!isConfirming)
+                .offset(x: CGFloat(exitX), y: CGFloat(y))
                 .rotationEffect(.degrees(tilt), anchor: .bottom)
-                .opacity(abs(position) > 2.6 ? 0 : 1)
-                .zIndex(3 - abs(position))
+                .opacity(abs(position) > 2.6 && !isConfirming ? 0 : 1)
+                .zIndex(isSelected ? 10 : 3 - abs(position))
                 .accessibilityLabel("\(tier.title) Pack")
-                .accessibilityAddTraits(index == selectedIndex ? .isSelected : [])
+                .accessibilityAddTraits(isSelected ? .isSelected : [])
                 .accessibilityIdentifier("gacha-pack-tier-\(tier.rawValue)")
             }
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .clipped()
         .contentShape(Rectangle())
+        .allowsHitTesting(!isConfirming)
         .gesture(
             DragGesture(minimumDistance: 12)
                 .onChanged { value in
+                    guard !isConfirming else { return }
                     carouselDrag = value.translation.width
                 }
                 .onEnded { value in
+                    guard !isConfirming else { return }
                     let next = GachaPackCarouselRules.nextIndex(
                         selectedIndex: selectedIndex,
                         itemCount: tiers.count,

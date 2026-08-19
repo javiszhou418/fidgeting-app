@@ -10,6 +10,7 @@ enum GachaRiveCompletionReason: String {
     case watchdog
     case reducedMotion
     case runtimeUnavailable
+    case settledHold
 }
 
 enum GachaRiveSequenceStage: String {
@@ -357,7 +358,19 @@ private struct GachaRivePlaybackSurface: View {
         if stage.includesBackground { requiredLayers.insert(.background) }
         if stage.includesForeground { requiredLayers.insert(.foreground) }
         let playback = GachaRivePlaybackCoordinator(
-            requiredLayers: requiredLayers) {
+            requiredLayers: requiredLayers,
+            // The magnetic-holder artboard's own authored timeline settles
+            // its reveal (position/rotation/scale converge) by ~0.48s, then
+            // spends the rest of its ~3.5s runtime on a decorative tail that
+            // ends by fading the whole card to invisible. The state-machine
+            // "in -> Idle" cycle this coordinator otherwise waits for only
+            // completes at that full ~3.5s mark -- i.e. after the fade-out
+            // already played. Freezing shortly after the measured settle
+            // point instead holds the card at its fully-revealed frame.
+            // Verified via direct parsing of the .riv file's keyframe data,
+            // not guessed; see FidgetGachaRivePresentation git history for
+            // the investigation this constant is based on.
+            settleHoldSeconds: stage == .magneticHolder ? 0.55 : nil) {
             reason in
             onFinished(transactionID, reason)
         }
@@ -450,7 +463,12 @@ private struct GachaRivePlaybackSurface: View {
     private func riseIntoView() {
         guard !hasRisenIntoView else { return }
         withAnimation(.spring(
-            response: 0.58,
+            // Retimed to land close to the .riv artboard's own measured
+            // ~0.48s reveal-settle point (see settleHoldSeconds above), so
+            // the SwiftUI rise and the Rive-internal convergence finish
+            // together instead of the SwiftUI motion lagging noticeably
+            // behind an already-settled Rive card.
+            response: 0.5,
             dampingFraction: 0.82,
             blendDuration: 0.08)) {
             hasRisenIntoView = true
@@ -527,7 +545,12 @@ private struct GachaProductOwnedIdentityCaption: View {
     private func presentCaption() {
         guard !isPresented else { return }
         withAnimation(.spring(
-            response: 0.58,
+            // Retimed to land close to the .riv artboard's own measured
+            // ~0.48s reveal-settle point (see settleHoldSeconds above), so
+            // the SwiftUI rise and the Rive-internal convergence finish
+            // together instead of the SwiftUI motion lagging noticeably
+            // behind an already-settled Rive card.
+            response: 0.5,
             dampingFraction: 0.82,
             blendDuration: 0.08)) {
             isPresented = true
@@ -621,12 +644,16 @@ private final class GachaRivePlaybackCoordinator: ObservableObject {
     private var didStart = false
     private var didFinish = false
     private var isCancelled = false
+    private let settleHoldSeconds: Double?
+    private var settleHoldTask: Task<Void, Never>?
 
     init(
         requiredLayers: Set<GachaRiveLayer>,
+        settleHoldSeconds: Double? = nil,
         completion: @escaping (GachaRiveCompletionReason) -> Void
     ) {
         self.requiredLayers = requiredLayers
+        self.settleHoldSeconds = settleHoldSeconds
         self.completion = completion
     }
 
@@ -699,6 +726,8 @@ private final class GachaRivePlaybackCoordinator: ObservableObject {
     func cancel() {
         guard !isCancelled else { return }
         isCancelled = true
+        settleHoldTask?.cancel()
+        settleHoldTask = nil
         background?.cancel()
         foreground?.cancel()
         completion = nil
@@ -717,11 +746,24 @@ private final class GachaRivePlaybackCoordinator: ObservableObject {
             "purchase-trigger synchronizedLayers=\(requiredLayers.count)")
         if requiredLayers.contains(.background) { background?.triggerPurchase() }
         if requiredLayers.contains(.foreground) { foreground?.triggerPurchase() }
+        if let settleHoldSeconds {
+            settleHoldTask = Task { @MainActor [weak self] in
+                do {
+                    try await Task.sleep(
+                        nanoseconds: UInt64(settleHoldSeconds * 1_000_000_000))
+                } catch {
+                    return
+                }
+                self?.finish(reason: .settledHold)
+            }
+        }
     }
 
     private func finish(reason: GachaRiveCompletionReason) {
         guard !isCancelled, !didFinish else { return }
         didFinish = true
+        settleHoldTask?.cancel()
+        settleHoldTask = nil
         gachaRiveRuntimeLog("completed reason=\(reason.rawValue)")
         background?.pause()
         foreground?.pause()
