@@ -106,19 +106,21 @@ namespace FidgetingApp.Tests.Editor
             StringAssert.Contains(
                 "[GachaSequence] holder-rive-completed request=",
                 holderFinished);
+            // This build intentionally bypasses the Unity 3D
+            // PremiumDisplayCase handoff: the holder marks the transaction
+            // ready for acceptance directly and shows the real prize itself.
             StringAssert.Contains(
-                "[GachaSequence] holder-to-3d-handoff request=",
+                "[GachaSequence] holder-reveal-accept-ready request=",
                 holderFinished);
             StringAssert.Contains(
-                "model.commitPackOpening(requestId: transaction.requestId)",
+                "model.markHolderRevealed(requestId: transaction.requestId)",
                 holderFinished);
-            Assert.That(
-                holderFinished.IndexOf(
-                    "holder-to-3d-handoff",
-                    StringComparison.Ordinal),
-                Is.LessThan(holderFinished.IndexOf(
-                    "model.commitPackOpening",
-                    StringComparison.Ordinal)));
+            StringAssert.Contains(
+                "holderRevealAcceptReady = true",
+                holderFinished);
+            StringAssert.DoesNotContain(
+                "model.commitPackOpening(requestId:",
+                holderFinished);
 
             StringAssert.Contains("if phase == .prepared", transactionIngestion);
             StringAssert.Contains(
@@ -146,7 +148,7 @@ namespace FidgetingApp.Tests.Editor
         }
 
         [Test]
-        public void VisibleHolderIsProductOwnedAndTheRiveHolderIsOnlyAHiddenClock()
+        public void VisibleHolderShowsTheRealDrawnPrizeAndTheRiveHolderIsOnlyAHiddenClock()
         {
             string source = ReadAsset(
                 "Plugins/iOS/FidgetGachaRivePresentation.swift");
@@ -154,15 +156,29 @@ namespace FidgetingApp.Tests.Editor
                 Application.dataPath,
                 "Plugins/iOS/Thumbnails/Models/product-thumbnail-metal-three-blade.png");
 
+            // The hidden Rive layer still needs some valid embedded image to
+            // decode; it is never seen, so any bundled PNG satisfies it.
             Assert.That(File.Exists(artworkPath), Is.True, artworkPath);
             Assert.That(new FileInfo(artworkPath).Length, Is.GreaterThan(1_000));
             StringAssert.Contains(
-                "artworkAssetName = \"product-thumbnail-metal-three-blade\"",
+                "assetName = \"product-thumbnail-metal-three-blade\"",
                 source);
-            StringAssert.Contains("productName = \"METAL THREE-BLADE\"", source);
-            StringAssert.Contains("gradeLabel = \"GEM/MINT\"", source);
-            StringAssert.Contains("gradeValue = \"10\"", source);
-            StringAssert.Contains("serialNumber = \"#00000001\"", source);
+
+            // The holder is built from the real receipt row rather than a
+            // fixed placeholder; the old auction-branding identity constants
+            // must be gone, not just hidden.
+            StringAssert.DoesNotContain("productName = \"METAL THREE-BLADE\"", source);
+            StringAssert.DoesNotContain("gradeLabel = \"GEM/MINT\"", source);
+            StringAssert.DoesNotContain("gradeValue = \"10\"", source);
+            StringAssert.DoesNotContain("serialNumber = \"#00000001\"", source);
+            StringAssert.Contains(
+                "private struct GachaHolderIdentity",
+                source);
+            StringAssert.Contains(
+                "static func resolve(from row: GachaReceiptRow?) -> GachaHolderIdentity",
+                source);
+            StringAssert.Contains("row.name.uppercased()", source);
+            StringAssert.Contains("row.rarity.tint", source);
             StringAssert.Contains(
                 "paletteMarker = \"neutralGraphiteSilver\"",
                 source);
@@ -188,8 +204,6 @@ namespace FidgetingApp.Tests.Editor
                 "holder-product-surface-visible surface=",
                 source);
             StringAssert.DoesNotContain("WHATNOT", source);
-            StringAssert.DoesNotContain("GachaReceiptRow", source);
-            StringAssert.DoesNotContain("GachaRarityTier", source);
         }
 
         private static string ReadAsset(string relativePath)

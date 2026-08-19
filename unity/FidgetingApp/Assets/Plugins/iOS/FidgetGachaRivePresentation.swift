@@ -41,18 +41,15 @@ enum GachaRiveSequenceStage: String {
     }
 }
 
-private final class GachaHolderIdentityBundleSentinel: NSObject {}
-
 /// Product-owned replacement for the auction branding baked into the reviewed
-/// holder motion asset. The rating and serial remain collectible-card metadata;
-/// the identity, artwork and palette belong to the shipping toy catalog.
-private enum GachaHolderIdentity {
-    static let artworkAssetName = "product-thumbnail-metal-three-blade"
+/// holder motion asset. Built from the transaction's real receipt row so the
+/// holder shows the actual drawn prize instead of a fixed placeholder; none
+/// of the 8 launch prizes have real bitmap art yet, so the "artwork" is a
+/// procedural rarity-tinted glyph keyed by prize kind (fast-follow: real
+/// per-prize thumbnails via a Unity snapshot tool + their own visual
+/// approval round).
+private struct GachaHolderIdentity {
     static let replacedRiveLogoAssetPrefix = "colographih-"
-    static let productName = "METAL THREE-BLADE"
-    static let gradeLabel = "GEM/MINT"
-    static let gradeValue = "10"
-    static let serialNumber = "#00000001"
     static let paletteMarker = "neutralGraphiteSilver"
     static let surfaceMarker = "productOwnedMagneticHolderSurface"
     static let accessibilityIdentifier = "gacha-holder-product-identity"
@@ -60,14 +57,63 @@ private enum GachaHolderIdentity {
     static let entranceOffsetX: CGFloat = 96
     static let entranceTiltDegrees = -38.0
 
-    static let artworkData: Data? = {
+    let productName: String
+    let tierAndLevelLabel: String
+    let acquiredLabel: String
+    let glyphSystemName: String
+    let tint: SwiftUI.Color
+
+    static let placeholder = GachaHolderIdentity(
+        productName: "COLLECTOR EDITION",
+        tierAndLevelLabel: "STANDARD",
+        acquiredLabel: "揭晓中",
+        glyphSystemName: "sparkles",
+        tint: GachaRarityTier.standard.tint)
+
+    /// `row` is nil only for the reduce-motion path, which never shows the
+    /// holder surface at all — the placeholder is a safe fallback, not a
+    /// user-visible guess.
+    static func resolve(from row: GachaReceiptRow?) -> GachaHolderIdentity {
+        guard let row else { return .placeholder }
+        return GachaHolderIdentity(
+            productName: row.name.uppercased(),
+            tierAndLevelLabel: row.isNew
+                ? "\(row.rarity.title) · NEW"
+                : "\(row.rarity.title) · +\(row.shardsGained)",
+            acquiredLabel: "GEM/MINT",
+            glyphSystemName: glyphSystemName(forKindIndex: row.kindIndex),
+            tint: row.rarity.tint)
+    }
+
+    private static func glyphSystemName(forKindIndex kindIndex: Int) -> String {
+        switch kindIndex {
+        case 1: return "seal" // Sticker
+        case 2: return "square.stack.3d.up" // DisplayBase
+        case 3: return "paintpalette" // EnvironmentTint
+        case 4: return "hand.raised" // Toy
+        default: return "sparkles" // ToySkin
+        }
+    }
+}
+
+private final class GachaHolderHiddenLayerAssetSentinel: NSObject {}
+
+/// The `background/mint-slab` + `foreground/mint-slab` Rive layers render at
+/// `hiddenRiveCompletionOpacity` and are never seen — every visible holder
+/// pixel is `GachaProductOwnedMagneticHolderSurface` below. This constant
+/// only satisfies Rive's internal embedded-image decode for that invisible
+/// layer; it is never displayed and does not vary per prize.
+private enum GachaHolderHiddenLayerAsset {
+    static let assetName = "product-thumbnail-metal-three-blade"
+
+    static let data: Data? = {
         let bundles = [
             Bundle.main,
-            Bundle(for: GachaHolderIdentityBundleSentinel.self)
+            Bundle(for: GachaHolderHiddenLayerAssetSentinel.self)
         ]
         for bundle in bundles {
             guard let url = bundle.url(
-                forResource: artworkAssetName,
+                forResource: assetName,
                 withExtension: "png") else { continue }
             if let data = try? Data(contentsOf: url), !data.isEmpty {
                 return data
@@ -75,10 +121,6 @@ private enum GachaHolderIdentity {
         }
         return nil
     }()
-
-    static let artworkImage: UIImage? = artworkData.flatMap {
-        UIImage(data: $0)
-    }
 }
 
 /// Receipt-free presentation shown immediately after the user taps Single Draw.
@@ -87,6 +129,9 @@ struct GachaSingleDrawRiveGate: View {
     let transactionID: UUID
     let stage: GachaRiveSequenceStage
     let playbackEnabled: Bool
+    // Only meaningful for `stage == .magneticHolder`: the real drawn prize,
+    // shown directly in the holder instead of a fixed placeholder.
+    let revealedPrize: GachaReceiptRow?
     let onFinished: (UUID, GachaRiveCompletionReason) -> Void
 
     @Environment(\.accessibilityReduceMotion) private var reduceMotion
@@ -95,11 +140,13 @@ struct GachaSingleDrawRiveGate: View {
         transactionID: UUID,
         stage: GachaRiveSequenceStage = .combined,
         playbackEnabled: Bool = true,
+        revealedPrize: GachaReceiptRow? = nil,
         onFinished: @escaping (UUID, GachaRiveCompletionReason) -> Void
     ) {
         self.transactionID = transactionID
         self.stage = stage
         self.playbackEnabled = playbackEnabled
+        self.revealedPrize = revealedPrize
         self.onFinished = onFinished
     }
 
@@ -138,6 +185,7 @@ struct GachaSingleDrawRiveGate: View {
                     transactionID: transactionID,
                     stage: stage,
                     playbackEnabled: playbackEnabled,
+                    revealedPrize: revealedPrize,
                     onFinished: onFinished)
                     .ignoresSafeArea()
 
@@ -299,6 +347,7 @@ private struct GachaRivePlaybackSurface: View {
     let transactionID: UUID
     let stage: GachaRiveSequenceStage
     let playbackEnabled: Bool
+    let revealedPrize: GachaReceiptRow?
     let onFinished: (UUID, GachaRiveCompletionReason) -> Void
 
     @StateObject private var playback: GachaRivePlaybackCoordinator
@@ -309,11 +358,13 @@ private struct GachaRivePlaybackSurface: View {
         transactionID: UUID,
         stage: GachaRiveSequenceStage,
         playbackEnabled: Bool,
+        revealedPrize: GachaReceiptRow? = nil,
         onFinished: @escaping (UUID, GachaRiveCompletionReason) -> Void
     ) {
         self.transactionID = transactionID
         self.stage = stage
         self.playbackEnabled = playbackEnabled
+        self.revealedPrize = revealedPrize
         self.onFinished = onFinished
         var requiredLayers: Set<GachaRiveLayer> = []
         if stage.includesBackground { requiredLayers.insert(.background) }
@@ -354,7 +405,8 @@ private struct GachaRivePlaybackSurface: View {
             }
             if stage == .magneticHolder {
                 GachaProductOwnedMagneticHolderSurface(
-                    playbackEnabled: playbackEnabled)
+                    playbackEnabled: playbackEnabled,
+                    identity: GachaHolderIdentity.resolve(from: revealedPrize))
                     .zIndex(10)
             }
         }
@@ -404,6 +456,7 @@ private struct GachaRivePlaybackSurface: View {
 /// during the entrance, tilt, settle or exit choreography.
 private struct GachaProductOwnedMagneticHolderSurface: View {
     let playbackEnabled: Bool
+    let identity: GachaHolderIdentity
 
     @State private var isPresented = false
 
@@ -431,16 +484,13 @@ private struct GachaProductOwnedMagneticHolderSurface: View {
         .allowsHitTesting(false)
         .accessibilityElement(children: .ignore)
         .accessibilityLabel(
-            "\(GachaHolderIdentity.productName)，"
-                + "\(GachaHolderIdentity.gradeLabel) "
-                + "\(GachaHolderIdentity.gradeValue)，"
-                + "编号 \(GachaHolderIdentity.serialNumber)")
+            "\(identity.productName)，\(identity.tierAndLevelLabel)")
         .accessibilityIdentifier(
             GachaHolderIdentity.accessibilityIdentifier)
         .accessibilityHidden(!playbackEnabled)
         .onAppear {
             gachaRiveRuntimeLog(
-                "holder-product-surface-prepared asset=\(GachaHolderIdentity.artworkAssetName) surface=\(GachaHolderIdentity.surfaceMarker) playbackEnabled=\(playbackEnabled)")
+                "holder-product-surface-prepared product=\(identity.productName) surface=\(GachaHolderIdentity.surfaceMarker) playbackEnabled=\(playbackEnabled)")
             guard playbackEnabled else { return }
             DispatchQueue.main.async {
                 presentHolder()
@@ -516,27 +566,23 @@ private struct GachaProductOwnedMagneticHolderSurface: View {
     private var identityHeader: some View {
         HStack(alignment: .top, spacing: 8) {
             VStack(alignment: .leading, spacing: 4) {
-                Text(GachaHolderIdentity.productName)
+                Text(identity.productName)
                     .font(.product(size: 10, weight: .bold))
                     .tracking(0.25)
                     .foregroundColor(.white.opacity(0.94))
                     .lineLimit(1)
                     .minimumScaleFactor(0.72)
 
-                Text(GachaHolderIdentity.serialNumber)
-                    .font(.product(size: 8, weight: .semibold).monospacedDigit())
+                Text(identity.tierAndLevelLabel)
+                    .font(.product(size: 8, weight: .semibold))
                     .foregroundColor(.white.opacity(0.58))
             }
             .frame(maxWidth: .infinity, alignment: .leading)
 
             VStack(alignment: .trailing, spacing: 0) {
-                Text(GachaHolderIdentity.gradeLabel)
+                Text(identity.acquiredLabel)
                     .font(.product(size: 7, weight: .bold))
                     .foregroundColor(.white.opacity(0.72))
-                Text(GachaHolderIdentity.gradeValue)
-                    .font(.product(size: 30, weight: .black).monospacedDigit())
-                    .foregroundColor(.white)
-                    .minimumScaleFactor(0.8)
             }
         }
         .padding(.horizontal, 2)
@@ -546,15 +592,19 @@ private struct GachaProductOwnedMagneticHolderSurface: View {
     private var productWindow: some View {
         ZStack {
             Circle()
-                .fill(Color.black.opacity(0.78))
+                .fill(
+                    RadialGradient(
+                        colors: [
+                            identity.tint.opacity(0.55),
+                            Color.black.opacity(0.78)
+                        ],
+                        center: .center,
+                        startRadius: 4,
+                        endRadius: 90))
 
-            if let artwork = GachaHolderIdentity.artworkImage {
-                Image(uiImage: artwork)
-                    .resizable()
-                    .scaledToFill()
-                    .frame(width: 148, height: 148)
-                    .clipShape(Circle())
-            }
+            Image(systemName: identity.glyphSystemName)
+                .font(.system(size: 56, weight: .semibold))
+                .foregroundColor(.white.opacity(0.92))
         }
         .frame(width: 164, height: 164)
         .overlay {
@@ -563,9 +613,9 @@ private struct GachaProductOwnedMagneticHolderSurface: View {
                     AngularGradient(
                         colors: [
                             Color.white.opacity(0.84),
-                            Color(white: 0.38),
+                            identity.tint.opacity(0.55),
                             Color.white.opacity(0.22),
-                            Color(white: 0.70),
+                            identity.tint.opacity(0.70),
                             Color.white.opacity(0.84)
                         ],
                         center: .center),
@@ -589,7 +639,7 @@ private struct GachaProductOwnedMagneticHolderSurface: View {
             isPresented = true
         }
         gachaRiveRuntimeLog(
-            "holder-product-surface-visible surface=\(GachaHolderIdentity.surfaceMarker) asset=\(GachaHolderIdentity.artworkAssetName) grade=\(GachaHolderIdentity.gradeLabel)-\(GachaHolderIdentity.gradeValue) serial=\(GachaHolderIdentity.serialNumber) palette=\(GachaHolderIdentity.paletteMarker)")
+            "holder-product-surface-visible surface=\(GachaHolderIdentity.surfaceMarker) product=\(identity.productName) tier=\(identity.tierAndLevelLabel)")
     }
 }
 
@@ -645,14 +695,14 @@ private func loadGachaRiveEmbeddedAsset(
 
     let renderedData: Data
     if filename.hasPrefix(GachaHolderIdentity.replacedRiveLogoAssetPrefix) {
-        guard let replacement = GachaHolderIdentity.artworkData else {
+        guard let replacement = GachaHolderHiddenLayerAsset.data else {
             gachaRiveRuntimeLog(
-                "holder-product-artwork-missing asset=\(GachaHolderIdentity.artworkAssetName)")
+                "holder-hidden-layer-asset-missing asset=\(GachaHolderHiddenLayerAsset.assetName)")
             return false
         }
         renderedData = replacement
         gachaRiveRuntimeLog(
-            "holder-product-artwork-loaded asset=\(GachaHolderIdentity.artworkAssetName) palette=\(GachaHolderIdentity.paletteMarker) bytes=\(replacement.count)")
+            "holder-hidden-layer-asset-loaded asset=\(GachaHolderHiddenLayerAsset.assetName) bytes=\(replacement.count)")
     } else {
         renderedData = data
     }
@@ -1051,6 +1101,7 @@ private struct GachaRivePlaybackSurface: View {
     let transactionID: UUID
     let stage: GachaRiveSequenceStage
     let playbackEnabled: Bool
+    var revealedPrize: GachaReceiptRow?
     let onFinished: (UUID, GachaRiveCompletionReason) -> Void
 
     var body: some View {

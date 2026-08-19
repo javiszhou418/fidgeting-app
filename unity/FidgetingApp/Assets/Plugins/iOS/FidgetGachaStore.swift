@@ -88,6 +88,7 @@ public struct GachaReceiptRow: Equatable, Identifiable {
     public let prizeId: String
     public let name: String
     public let rarity: GachaRarityTier
+    public let kindIndex: Int
     public let isNew: Bool
     public let shardsGained: Int
     public let forcedBySignaturePity: Bool
@@ -316,6 +317,41 @@ public final class GachaStoreModel: ObservableObject {
         scheduleRevealWatchdog(requestId: requestId, stage: "start")
     }
 
+    /// Marks the durable transaction ready for acceptance directly from the
+    /// magnetic holder, bypassing the Unity 3D PremiumDisplayCase handoff
+    /// this build intentionally does not use. Idempotent like
+    /// `commitPackOpening`; never generates or replaces a transaction.
+    public func markHolderRevealed(requestId: String) {
+        guard let transaction = pendingTransaction,
+              transaction.requestId == requestId,
+              transaction.phase == .prepared
+        else { return }
+
+        requestStatus = "holder-revealed:\(requestId)"
+        GachaUnityBridge.send(
+            "MarkGachaHolderRevealedFromNativeUi",
+            value: requestId)
+    }
+
+    /// Companion to `acknowledgeReveal()` for the holder-only path: does not
+    /// require `revealPhase == .complete`, since that phase is a Unity-3D-
+    /// director concept this path never sets.
+    public func acknowledgeHolderReveal(requestId: String) {
+        guard let transaction = pendingTransaction,
+              transaction.requestId == requestId,
+              transaction.phase == .awaitingAcceptance,
+              transactionPhase != .acknowledging
+        else { return }
+
+        transactionPhase = .acknowledging
+        requestStatus = "acknowledging:\(requestId)"
+        lastFailureReason = ""
+        GachaUnityBridge.send(
+            "AcknowledgeGachaRevealFromNativeUi",
+            value: requestId)
+        scheduleAcknowledgementRecovery(requestId: requestId)
+    }
+
     public func acknowledgeReveal() {
         guard let transaction = pendingTransaction,
               revealPhase == .complete,
@@ -430,6 +466,7 @@ public final class GachaStoreModel: ObservableObject {
                     prizeId: cells[1],
                     name: cells[2],
                     rarity: GachaRarityTier(rawValue: Int(cells[3]) ?? 0) ?? .standard,
+                    kindIndex: Int(cells[4]) ?? 0,
                     isNew: cells[5] == "1",
                     shardsGained: Int(cells[6]) ?? 0,
                     forcedBySignaturePity: cells[7] == "1",

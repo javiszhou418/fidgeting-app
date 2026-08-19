@@ -28,7 +28,11 @@ enum FidgetUITokens {
     enum Spacing {
         static let compact: CGFloat = 4
         static let standard: CGFloat = 8
-        static let section: CGFloat = 15
+        static let metadata: CGFloat = 12
+        static let section: CGFloat = 16
+        static let pageInset: CGFloat = 20
+        static let sectionGroup: CGFloat = 24
+        static let majorGroup: CGFloat = 32
     }
 
     enum Opacity {
@@ -36,10 +40,15 @@ enum FidgetUITokens {
         static let secondaryText = 0.58
         static let tertiaryText = 0.42
         static let selectedFill = 0.10
+        static let disabledAction = 0.40
+        static let primaryActionSurface = 0.96
+        static let primaryActionInk = 0.90
     }
 
     enum Motion {
         static let selectionDuration = 0.18
+        static let pressedDuration = 0.12
+        static let pressedScale = 0.98
     }
 }
 
@@ -373,6 +382,155 @@ struct ProductActionLabel: View {
                 cornerRadius: FidgetUITokens.Radius.compact,
                 tint: accent.opacity(0.10),
                 interactive: true)
+    }
+}
+
+/// Outcome contract for a `ProductPrimaryActionButton`. Loading/disabled/
+/// success states block re-submission so a pending authoritative request
+/// (gacha draw, acknowledge, etc.) can never fire twice or double-charge.
+enum ProductActionState: Equatable {
+    case rest
+    case loading(String)
+    case disabledValue(String?)
+    case success(String)
+    case error(String)
+
+    static var disabled: Self { .disabledValue(nil) }
+    static func disabled(reason: String) -> Self { .disabledValue(reason) }
+
+    var disablesInteraction: Bool {
+        switch self {
+        case .loading, .disabledValue, .success: return true
+        case .rest, .error: return false
+        }
+    }
+
+    var accessibilityValue: String? {
+        switch self {
+        case .rest: return nil
+        case .loading: return "处理中"
+        case .disabledValue(let reason):
+            guard let reason = Self.normalized(reason) else { return "不可用" }
+            return "不可用，\(reason)"
+        case .success: return "已完成"
+        case .error: return "失败，可重试"
+        }
+    }
+
+    func visibleTitle(default title: String) -> String {
+        switch self {
+        case .rest, .disabledValue: return title
+        case .loading(let statusTitle), .success(let statusTitle), .error(let statusTitle):
+            return statusTitle
+        }
+    }
+
+    var isLoading: Bool { if case .loading = self { return true }; return false }
+    var isDisabled: Bool { if case .disabledValue = self { return true }; return false }
+
+    private static func normalized(_ value: String?) -> String? {
+        guard let value else { return nil }
+        let normalized = value.trimmingCharacters(in: .whitespacesAndNewlines)
+        return normalized.isEmpty ? nil : normalized
+    }
+}
+
+/// Shared pressed-motion contract: `0.98` scale over a short ease-out, no
+/// layout change, matching the guideline's 100-140 ms pressed state rule.
+struct ProductActionButtonStyle: ButtonStyle {
+    func makeBody(configuration: Configuration) -> some View {
+        configuration.label
+            .scaleEffect(configuration.isPressed
+                         ? FidgetUITokens.Motion.pressedScale
+                         : 1)
+            .animation(
+                .easeOut(duration: FidgetUITokens.Motion.pressedDuration),
+                value: configuration.isPressed)
+    }
+}
+
+/// The one solid-white primary action for a decision region: `52 pt` visible
+/// height, pill radius, single verb/verb+object label. Cost/ticket/rarity
+/// metadata belongs outside this button, never as a second label line.
+struct ProductPrimaryActionButton: View {
+    let title: String
+    var state = ProductActionState.rest
+    let action: () -> Void
+
+    var body: some View {
+        Button(action: action) {
+            HStack(spacing: FidgetUITokens.Spacing.standard) {
+                if state.isLoading {
+                    ProgressView()
+                        .controlSize(.small)
+                        .tint(Color.black.opacity(
+                            FidgetUITokens.Opacity.primaryActionInk))
+                }
+                Text(state.visibleTitle(default: title))
+                    .font(.product(.headline, weight: .semibold))
+            }
+            .foregroundStyle(Color.black.opacity(
+                FidgetUITokens.Opacity.primaryActionInk))
+            .frame(maxWidth: .infinity)
+            .frame(height: FidgetUITokens.Size.primaryActionHeight)
+            .background(
+                Color.white.opacity(
+                    FidgetUITokens.Opacity.primaryActionSurface),
+                in: RoundedRectangle(
+                    cornerRadius: FidgetUITokens.Radius.pill,
+                    style: .continuous))
+            .contentShape(RoundedRectangle(
+                cornerRadius: FidgetUITokens.Radius.pill,
+                style: .continuous))
+            .opacity(state.isDisabled
+                     ? FidgetUITokens.Opacity.disabledAction
+                     : 1)
+        }
+        .buttonStyle(ProductActionButtonStyle())
+        .disabled(state.disablesInteraction)
+        .accessibilityLabel(state.visibleTitle(default: title))
+        .accessibilityValue(state.accessibilityValue ?? "")
+    }
+}
+
+/// Neutral tonal secondary action: same height as the primary, no perimeter
+/// stroke (`FDB-UI-004`), for pairings like carousel "取消".
+struct ProductSecondaryActionButton: View {
+    let title: String
+    let action: () -> Void
+
+    var body: some View {
+        Button(action: action) {
+            Text(title)
+                .font(.product(.subheadline, weight: .semibold))
+                .foregroundStyle(.white.opacity(FidgetUITokens.Opacity.primaryText))
+                .frame(height: FidgetUITokens.Size.primaryActionHeight)
+                .padding(.horizontal, FidgetUITokens.Spacing.section)
+                .background(
+                    Color.white.opacity(0.07),
+                    in: RoundedRectangle(
+                        cornerRadius: FidgetUITokens.Radius.compact,
+                        style: .continuous))
+        }
+        .buttonStyle(ProductActionButtonStyle())
+    }
+}
+
+/// Information-only pill: no Button role, no pressed state. Use for
+/// "coming soon"/status copy that must never look tappable.
+struct ProductStatusTag: View {
+    let title: String
+
+    var body: some View {
+        Text(title)
+            .font(.product(.caption, weight: .semibold))
+            .foregroundStyle(.white.opacity(FidgetUITokens.Opacity.tertiaryText))
+            .padding(.horizontal, FidgetUITokens.Spacing.standard)
+            .frame(height: 26)
+            .background(
+                Color.white.opacity(0.045),
+                in: RoundedRectangle(cornerRadius: 13, style: .continuous))
+            .accessibilityElement(children: .combine)
     }
 }
 

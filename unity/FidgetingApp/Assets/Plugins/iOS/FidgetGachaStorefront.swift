@@ -16,6 +16,12 @@ public struct GachaStoreView: View {
     @ObservedObject private var model = GachaStoreModel.shared
     @State private var selectedTab = 0
     @State private var showDisclosure = false
+    // Presentation-only tier choice shown before the authoritative draw is
+    // requested. Non-nil while the carousel is on screen; the model/Unity
+    // transaction chain is untouched until the user confirms a tier.
+    @State private var carouselSeries: GachaSeriesInfo?
+    @State private var carouselSelectedTier: GachaPackTier = .standard
+    @State private var confirmedPackTier: GachaPackTier = .standard
 
     public init() {}
 
@@ -32,15 +38,22 @@ public struct GachaStoreView: View {
                 .zIndex(30)
 
             storefrontContent
-                .opacity(model.revealIsPresented || model.packIsPresented ? 0 : 1)
-                .allowsHitTesting(!model.revealIsPresented && !model.packIsPresented)
-                .accessibilityHidden(model.revealIsPresented || model.packIsPresented)
+                .opacity(model.revealIsPresented
+                    || model.packIsPresented
+                    || carouselSeries != nil ? 0 : 1)
+                .allowsHitTesting(!model.revealIsPresented
+                    && !model.packIsPresented
+                    && carouselSeries == nil)
+                .accessibilityHidden(model.revealIsPresented
+                    || model.packIsPresented
+                    || carouselSeries != nil)
 
             if model.packIsPresented,
                let transaction = model.pendingTransaction {
                 GachaPackOpeningOverlay(
                     model: model,
-                    transaction: transaction)
+                    transaction: transaction,
+                    tier: confirmedPackTier)
                     .id(transaction.requestId)
                     .transition(.opacity)
                     .zIndex(25)
@@ -53,6 +66,23 @@ public struct GachaStoreView: View {
                     transaction: transaction)
                 .transition(.opacity)
                 .zIndex(20)
+            }
+
+            if let series = carouselSeries {
+                GachaPackTierCarouselOverlay(
+                    selectedTier: $carouselSelectedTier,
+                    onCancel: { carouselSeries = nil },
+                    onConfirm: {
+                        let tier = carouselSelectedTier
+                        confirmedPackTier = tier
+                        carouselSeries = nil
+                        gachaSequenceLog(
+                            "[GachaSequence] carousel-confirmed tier=\(tier.rawValue) presentationOnly=true")
+                        model.draw(seriesId: series.id, count: 1, useCoins: false)
+                    })
+                    .accessibilityAddTraits(.isModal)
+                    .transition(.opacity)
+                    .zIndex(26)
             }
         }
         .background(GachaTransparentPresentationBackground())
@@ -464,40 +494,31 @@ public struct GachaStoreView: View {
     }
 
     private func drawDock(_ series: GachaSeriesInfo) -> some View {
-        HStack(spacing: 12) {
-            Button {
-                guard model.canStartSingleDraw else { return }
-                model.draw(seriesId: series.id, count: 1, useCoins: false)
-            } label: {
-                VStack(spacing: 3) {
-                    Text("单抽")
-                        .font(.system(size: 17, weight: .bold))
+        VStack(spacing: FidgetUITokens.Spacing.metadata) {
+            HStack(alignment: .center, spacing: FidgetUITokens.Spacing.standard) {
+                VStack(alignment: .leading, spacing: FidgetUITokens.Spacing.compact) {
                     Text(model.drawCostText)
-                        .font(.system(size: 10, weight: .medium))
-                        .opacity(0.58)
+                        .font(.product(.caption, weight: .semibold))
+                        .foregroundColor(.white.opacity(FidgetUITokens.Opacity.secondaryText))
                 }
-                .foregroundColor(.black)
-                .frame(maxWidth: .infinity)
-                .frame(height: 62)
-                .background(Color.white, in: RoundedRectangle(cornerRadius: 19))
+                Spacer(minLength: FidgetUITokens.Spacing.standard)
+                ProductStatusTag(title: "十抽后续开放")
             }
-            .buttonStyle(.plain)
-            .disabled(!model.canStartSingleDraw)
-            .opacity(model.canStartSingleDraw ? 1 : 0.36)
-            .accessibilityIdentifier("gacha-single-draw")
 
-            VStack(spacing: 3) {
-                Text("十抽")
-                    .font(.system(size: 17, weight: .bold))
-                Text("后续开放")
-                    .font(.system(size: 10, weight: .medium))
+            ProductPrimaryActionButton(
+                title: "单抽",
+                state: model.canStartSingleDraw ? .rest : .disabled) {
+                guard model.canStartSingleDraw else { return }
+                carouselSelectedTier = .standard
+                carouselSeries = series
+                gachaSequenceLog(
+                    "[GachaSequence] carousel-open seriesId=\(series.id)")
             }
-            .foregroundColor(.white.opacity(0.24))
-            .frame(width: 116, height: 62)
-            .background(Color.white.opacity(0.045), in: RoundedRectangle(cornerRadius: 19))
+            .accessibilityIdentifier("gacha-single-draw")
+            .accessibilityHint("消耗一张抽取券")
         }
-        .padding(.horizontal, 18)
-        .padding(.top, 13)
+        .padding(.horizontal, FidgetUITokens.Spacing.pageInset)
+        .padding(.top, FidgetUITokens.Spacing.metadata)
         .padding(.bottom, 12)
         .background(.ultraThinMaterial)
     }
@@ -611,10 +632,137 @@ public struct GachaStoreView: View {
 
 }
 
+/// Presentation-only Pack tier picker shown before the authoritative draw is
+/// requested. Selecting/scrubbing tiers here never touches `GachaStoreModel`
+/// or Unity; only confirming a tier hands control back to the caller, which
+/// fires the real (already-tested, idempotent) `model.draw(...)` call.
+private struct GachaPackTierCarouselOverlay: View {
+    @Environment(\.accessibilityReduceMotion) private var reduceMotion
+    @Binding var selectedTier: GachaPackTier
+    let onCancel: () -> Void
+    let onConfirm: () -> Void
+
+    @State private var carouselDrag: CGFloat = 0
+
+    var body: some View {
+        GeometryReader { proxy in
+            ZStack {
+                Color.black.opacity(0.985).ignoresSafeArea()
+
+                VStack(spacing: 0) {
+                    VStack(spacing: 7) {
+                        Text("选择 PACK")
+                            .font(.product(size: 24, weight: .black))
+                            .foregroundColor(.white)
+                        Text("包装样式，不改变奖池、价格或概率")
+                            .font(.product(size: 11, weight: .medium))
+                            .foregroundColor(.white.opacity(0.48))
+                    }
+                    .padding(.top, 42)
+
+                    tierStage
+
+                    HStack(spacing: 12) {
+                        ProductSecondaryActionButton(title: "取消", action: onCancel)
+                            .frame(width: 84)
+                        ProductPrimaryActionButton(
+                            title: "选择 \(selectedTier.title)",
+                            action: onConfirm)
+                            .frame(maxWidth: min(240, proxy.size.width - 130))
+                            .accessibilityIdentifier("gacha-pack-select")
+                    }
+                    .padding(.horizontal, 22)
+                    .padding(.bottom, 28)
+                }
+            }
+        }
+        .accessibilityIdentifier("gacha-pack-tier-carousel-overlay")
+    }
+
+    private var tierStage: some View {
+        let tiers = GachaPackTier.allCases
+        let selectedIndex = tiers.firstIndex(of: selectedTier) ?? 0
+
+        return ZStack {
+            ForEach(Array(tiers.enumerated()), id: \.element.rawValue) {
+                index, tier in
+                let position = GachaPackCarouselRules.continuousPosition(
+                    itemIndex: index,
+                    selectedIndex: selectedIndex,
+                    translationPoints: Double(carouselDrag))
+                let x = GachaPackCarouselRules.horizontalOffset(
+                    continuousPosition: position)
+                let y = GachaPackCarouselRules.verticalOffset(
+                    continuousPosition: position)
+                let tilt = GachaPackCarouselRules.tiltDegrees(
+                    continuousPosition: position)
+                Button {
+                    withAnimation(.spring(
+                        response: GachaPackCarouselRules
+                            .selectionSnapResponseSeconds,
+                        dampingFraction: GachaPackCarouselRules
+                            .selectionSnapDampingFraction)) {
+                        carouselDrag = 0
+                        selectedTier = tier
+                    }
+                } label: {
+                    VStack(spacing: 2) {
+                        GachaPackVisual(tier: tier, tearProgress: 0)
+                            .frame(width: 244, height: 326)
+                            .scaleEffect(CGFloat(
+                                GachaPackCarouselRules.packScale(
+                                    isSelected: index == selectedIndex)))
+                            .frame(width: 166, height: 226)
+                        Text(tier.title)
+                            .font(.product(size: 10, weight: .bold))
+                            .foregroundColor(.white.opacity(
+                                index == selectedIndex ? 0.92 : 0.42))
+                    }
+                }
+                .buttonStyle(.plain)
+                .offset(x: CGFloat(x), y: CGFloat(y))
+                .rotationEffect(.degrees(tilt), anchor: .bottom)
+                .opacity(abs(position) > 2.6 ? 0 : 1)
+                .zIndex(3 - abs(position))
+                .accessibilityLabel("\(tier.title) Pack")
+                .accessibilityAddTraits(index == selectedIndex ? .isSelected : [])
+                .accessibilityIdentifier("gacha-pack-tier-\(tier.rawValue)")
+            }
+        }
+        .frame(maxWidth: .infinity, maxHeight: .infinity)
+        .clipped()
+        .contentShape(Rectangle())
+        .gesture(
+            DragGesture(minimumDistance: 12)
+                .onChanged { value in
+                    carouselDrag = value.translation.width
+                }
+                .onEnded { value in
+                    let next = GachaPackCarouselRules.nextIndex(
+                        selectedIndex: selectedIndex,
+                        itemCount: tiers.count,
+                        translationPoints: Double(value.translation.width))
+                    withAnimation(.spring(
+                        response: GachaPackCarouselRules
+                            .selectionSnapResponseSeconds,
+                        dampingFraction: GachaPackCarouselRules
+                            .selectionSnapDampingFraction)) {
+                        carouselDrag = 0
+                        selectedTier = tiers[next]
+                    }
+                })
+        .accessibilityIdentifier("gacha-pack-carousel")
+    }
+}
+
 private struct GachaPackOpeningOverlay: View {
     @Environment(\.accessibilityReduceMotion) private var reduceMotion
     @ObservedObject var model: GachaStoreModel
     let transaction: GachaPendingTransaction
+    // The tier the user actually picked in the carousel. Presentation only —
+    // the transaction/economy remain unaware of it. Falls back to the old
+    // series-derived default for any caller that predates the carousel.
+    var tier: GachaPackTier?
 
     @State private var tearProgress: CGFloat = 0
     @State private var interactionState = "sealed"
@@ -623,12 +771,16 @@ private struct GachaPackOpeningOverlay: View {
     @State private var holderCompletionDispatched = false
     @State private var packVisible = true
     @State private var overlapStartedUptime: TimeInterval?
+    // This build shows the real prize directly in the magnetic holder and
+    // accepts it there; the Unity 3D PremiumDisplayCase handoff is
+    // intentionally bypassed (see MarkGachaHolderRevealedFromNativeUi).
+    @State private var holderRevealAcceptReady = false
 
     private static let invalidRequestFallback = UUID(
         uuidString: "00000000-0000-0000-0000-000000000000")!
 
     private var packTier: GachaPackTier {
-        GachaPackTier.forSeriesId(transaction.seriesId)
+        tier ?? GachaPackTier.forSeriesId(transaction.seriesId)
     }
 
     private var riveTransactionID: UUID {
@@ -648,7 +800,8 @@ private struct GachaPackOpeningOverlay: View {
             GachaSingleDrawRiveGate(
                 transactionID: riveTransactionID,
                 stage: .magneticHolder,
-                playbackEnabled: holderRevealStarted) { id, reason in
+                playbackEnabled: holderRevealStarted,
+                revealedPrize: transaction.receipt.first) { id, reason in
                     guard id == riveTransactionID else { return }
                     holderRiveFinished(reason: reason)
                 }
@@ -664,9 +817,26 @@ private struct GachaPackOpeningOverlay: View {
                 .accessibilityHidden(!packVisible)
                 .zIndex(2)
 
+            if holderRevealAcceptReady {
+                VStack {
+                    Spacer()
+                    ProductPrimaryActionButton(
+                        title: "收下",
+                        state: model.transactionPhase == .acknowledging
+                            ? .loading("提交中") : .rest,
+                        action: acceptHolderReveal)
+                        .frame(width: 214)
+                        .padding(.bottom, 48)
+                        .accessibilityIdentifier("gacha-reveal-accept")
+                }
+                .transition(.opacity)
+                .zIndex(4)
+            }
+
             accessibilityMarkers
                 .zIndex(3)
         }
+        .animation(.easeOut(duration: 0.22), value: holderRevealAcceptReady)
         .accessibilityElement(children: .contain)
         .onAppear {
             GachaPackInteractionTrace.begin(requestId: transaction.requestId)
@@ -714,15 +884,12 @@ private struct GachaPackOpeningOverlay: View {
                 .foregroundColor(.white)
                 .accessibilityIdentifier("gacha-query-transaction")
             } else {
-                Button("撕开包装") {
+                ProductPrimaryActionButton(
+                    title: "撕开包装",
+                    state: packOpenCommitted ? .loading("正在打开") : .rest) {
                     commitPackOpen(source: "accessible-button")
                 }
-                .font(.system(size: 16, weight: .bold))
-                .foregroundColor(.black)
-                .frame(width: 214, height: 54)
-                .background(Color.white, in: RoundedRectangle(cornerRadius: 17))
-                .disabled(packOpenCommitted)
-                .opacity(packOpenCommitted ? 0.52 : 1)
+                .frame(width: 214)
                 .accessibilityIdentifier("gacha-pack-open")
             }
         }
@@ -904,21 +1071,26 @@ private struct GachaPackOpeningOverlay: View {
                   model.pendingTransaction?.requestId == transaction.requestId
             else { return }
 
-            interactionState = "requesting-3d-reveal"
+            interactionState = "holder-revealed"
             gachaSequenceLog(
                 "[GachaSequence] holder-rive-completed request=\(transaction.requestId) reason=\(reason.rawValue)")
             gachaSequenceLog(
-                "[GachaSequence] holder-to-3d-handoff request=\(transaction.requestId)")
+                "[GachaSequence] holder-reveal-accept-ready request=\(transaction.requestId)")
             GachaPackInteractionTrace.record(
                 requestId: transaction.requestId,
                 event: "holder-rive-complete-\(reason.rawValue)",
                 progress: 1)
             GachaPackInteractionTrace.record(
                 requestId: transaction.requestId,
-                event: "unity-reveal-request",
+                event: "holder-reveal-accept-ready",
                 progress: 1)
-            model.commitPackOpening(requestId: transaction.requestId)
+            model.markHolderRevealed(requestId: transaction.requestId)
+            holderRevealAcceptReady = true
         }
+    }
+
+    private func acceptHolderReveal() {
+        model.acknowledgeHolderReveal(requestId: transaction.requestId)
     }
 }
 
@@ -1034,15 +1206,13 @@ private struct GachaThreeDRevealOverlay: View {
 
                     if model.revealPhase == .complete,
                        transaction.phase == .awaitingAcceptance {
-                        Button("收下") {
+                        ProductPrimaryActionButton(
+                            title: "收下",
+                            state: model.transactionPhase == .acknowledging
+                                ? .loading("提交中") : .rest) {
                             model.acknowledgeReveal()
                         }
-                        .font(.system(size: 16, weight: .bold))
-                        .foregroundColor(.black)
-                        .frame(width: 214, height: 54)
-                        .background(Color.white, in: RoundedRectangle(cornerRadius: 17))
-                        .disabled(model.transactionPhase == .acknowledging)
-                        .opacity(model.transactionPhase == .acknowledging ? 0.52 : 1)
+                        .frame(width: 214)
                         .accessibilityIdentifier("gacha-reveal-accept")
                     }
                 }
