@@ -9,7 +9,7 @@ namespace FidgetingApp.Tests.Editor
     public sealed class GachaBuild42RiveHolderIntegrationTests
     {
         private const string ExpectedRiveSha256 =
-            "da623d44ba1beb0d47e7177b4addb511c44c842e87ebafd4a1f56145719e0ab7";
+            "da5ba78f63c09ea538d214f7bcdd520a852fc77232bf47ef31606106136c7717";
 
         [Test]
         public void CanonicalHolderClockIsHashLockedAndBundledByTheIosPipeline()
