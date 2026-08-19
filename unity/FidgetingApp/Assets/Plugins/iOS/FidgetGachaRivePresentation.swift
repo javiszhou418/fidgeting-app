@@ -113,6 +113,11 @@ struct GachaSingleDrawRiveGate: View {
     // Only meaningful for `stage == .magneticHolder`: the real drawn prize,
     // shown directly in the holder instead of a fixed placeholder.
     let revealedPrize: GachaReceiptRow?
+    // The Pack's real on-screen frame at the moment of tear-commit, in this
+    // view's own coordinate space (.zero if unknown). Lets the holder's
+    // entrance animate from the exact spot the card/spinner just came out
+    // of instead of a generic fixed offset.
+    let entranceOriginFrame: CGRect
     let onFinished: (UUID, GachaRiveCompletionReason) -> Void
 
     @Environment(\.accessibilityReduceMotion) private var reduceMotion
@@ -122,8 +127,10 @@ struct GachaSingleDrawRiveGate: View {
         stage: GachaRiveSequenceStage = .combined,
         playbackEnabled: Bool = true,
         revealedPrize: GachaReceiptRow? = nil,
+        entranceOriginFrame: CGRect = .zero,
         onFinished: @escaping (UUID, GachaRiveCompletionReason) -> Void
     ) {
+        self.entranceOriginFrame = entranceOriginFrame
         self.transactionID = transactionID
         self.stage = stage
         self.playbackEnabled = playbackEnabled
@@ -167,6 +174,7 @@ struct GachaSingleDrawRiveGate: View {
                     stage: stage,
                     playbackEnabled: playbackEnabled,
                     revealedPrize: revealedPrize,
+                    entranceOriginFrame: entranceOriginFrame,
                     onFinished: onFinished)
                     .ignoresSafeArea()
 
@@ -329,17 +337,19 @@ private struct GachaRivePlaybackSurface: View {
     let stage: GachaRiveSequenceStage
     let playbackEnabled: Bool
     let revealedPrize: GachaReceiptRow?
+    let entranceOriginFrame: CGRect
     let onFinished: (UUID, GachaRiveCompletionReason) -> Void
 
     @StateObject private var playback: GachaRivePlaybackCoordinator
     @StateObject private var background: GachaRiveLayerPlaybackModel
     @StateObject private var foreground: GachaRiveLayerPlaybackModel
     // The .riv artboard's own authored entrance slides in diagonally from a
-    // corner; there is no bindable property to redirect it (checked the
+    // fixed corner with no bindable property to redirect it (checked the
     // artboard's data-bind schema). Rather than fight that internal motion,
-    // the whole assembly additionally rises from below in sync with the
-    // identity caption's own entrance, so the dominant perceived motion is
-    // "the holder rises up from the bottom" instead of a lateral slide.
+    // the whole assembly additionally rises from the Pack's real captured
+    // tear-commit position (entranceOriginFrame) to its resting place, so
+    // the dominant perceived motion is "this card just came out of that
+    // Pack" instead of a generic fixed-offset slide.
     @State private var hasRisenIntoView = false
 
     init(
@@ -347,12 +357,14 @@ private struct GachaRivePlaybackSurface: View {
         stage: GachaRiveSequenceStage,
         playbackEnabled: Bool,
         revealedPrize: GachaReceiptRow? = nil,
+        entranceOriginFrame: CGRect = .zero,
         onFinished: @escaping (UUID, GachaRiveCompletionReason) -> Void
     ) {
         self.transactionID = transactionID
         self.stage = stage
         self.playbackEnabled = playbackEnabled
         self.revealedPrize = revealedPrize
+        self.entranceOriginFrame = entranceOriginFrame
         self.onFinished = onFinished
         var requiredLayers: Set<GachaRiveLayer> = []
         if stage.includesBackground { requiredLayers.insert(.background) }
@@ -385,29 +397,54 @@ private struct GachaRivePlaybackSurface: View {
             coordinator: playback))
     }
 
-    var body: some View {
-        ZStack {
-            if stage.includesBackground {
-                background
-                    .view()
-                    .allowsHitTesting(false)
-            }
-            if stage.includesForeground {
-                foreground
-                    .view()
-                    .allowsHitTesting(false)
-            }
-            if stage == .magneticHolder {
-                GachaProductOwnedIdentityCaption(
-                    playbackEnabled: playbackEnabled,
-                    identity: GachaHolderIdentity.resolve(from: revealedPrize))
-                    .zIndex(10)
-            }
+    // Must match GachaPackOpeningOverlay.overlaySpaceName in
+    // FidgetGachaStorefront.swift -- coordinate space names are plain
+    // runtime string keys, not a shared compile-time symbol, since that
+    // type is private to its own file.
+    private static let entranceOriginSpaceName = "gachaPackOpeningOverlaySpace"
+
+    private func entranceOffset(restingFrame: CGRect) -> CGSize {
+        guard entranceOriginFrame != .zero else {
+            // No captured Pack position (e.g. reduced-motion path never
+            // populated it) -- fall back to the old generic rise-from-below.
+            return CGSize(width: 0, height: 240)
         }
-            .aspectRatio(Self.artboardAspectRatio, contentMode: .fit)
-            .frame(maxWidth: .infinity, maxHeight: .infinity)
-            .offset(y: stage == .magneticHolder && !hasRisenIntoView ? 240 : 0)
-            .opacity(stage == .magneticHolder && !hasRisenIntoView ? 0 : 1)
+        return CGSize(
+            width: entranceOriginFrame.midX - restingFrame.midX,
+            height: entranceOriginFrame.midY - restingFrame.midY)
+    }
+
+    var body: some View {
+        GeometryReader { proxy in
+            let restingFrame = proxy.frame(in: .named(Self.entranceOriginSpaceName))
+            let riseOffset = entranceOffset(restingFrame: restingFrame)
+            ZStack {
+                if stage.includesBackground {
+                    background
+                        .view()
+                        .allowsHitTesting(false)
+                }
+                if stage.includesForeground {
+                    foreground
+                        .view()
+                        .allowsHitTesting(false)
+                }
+                if stage == .magneticHolder {
+                    GachaProductOwnedIdentityCaption(
+                        playbackEnabled: playbackEnabled,
+                        identity: GachaHolderIdentity.resolve(from: revealedPrize))
+                        .zIndex(10)
+                }
+            }
+                .aspectRatio(Self.artboardAspectRatio, contentMode: .fit)
+                .frame(maxWidth: .infinity, maxHeight: .infinity)
+                .offset(
+                    x: stage == .magneticHolder && !hasRisenIntoView
+                        ? riseOffset.width : 0,
+                    y: stage == .magneticHolder && !hasRisenIntoView
+                        ? riseOffset.height : 0)
+                .opacity(stage == .magneticHolder && !hasRisenIntoView ? 0 : 1)
+        }
             .onAppear {
                 playback.attach(
                     background: background,
@@ -1038,6 +1075,7 @@ private struct GachaRivePlaybackSurface: View {
     let stage: GachaRiveSequenceStage
     let playbackEnabled: Bool
     var revealedPrize: GachaReceiptRow?
+    var entranceOriginFrame: CGRect = .zero
     let onFinished: (UUID, GachaRiveCompletionReason) -> Void
 
     var body: some View {
