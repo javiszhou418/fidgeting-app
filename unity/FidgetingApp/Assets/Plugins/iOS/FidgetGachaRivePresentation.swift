@@ -488,18 +488,27 @@ private struct GachaRivePlaybackSurface: View {
         if stage.includesForeground { requiredLayers.insert(.foreground) }
         let playback = GachaRivePlaybackCoordinator(
             requiredLayers: requiredLayers,
-            // The magnetic-holder artboard's own authored timeline settles
-            // its reveal (position/rotation/scale converge) by ~0.48s, then
-            // spends the rest of its ~3.5s runtime on a decorative tail that
-            // ends by fading the whole card to invisible. The state-machine
-            // "in -> Idle" cycle this coordinator otherwise waits for only
-            // completes at that full ~3.5s mark -- i.e. after the fade-out
-            // already played. Freezing shortly after the measured settle
-            // point instead holds the card at its fully-revealed frame.
-            // Verified via direct parsing of the .riv file's keyframe data,
-            // not guessed; see FidgetGachaRivePresentation git history for
-            // the investigation this constant is based on.
-            settleHoldSeconds: stage == .magneticHolder ? 0.55 : nil) {
+            // CORRECTED after the user kept seeing this as "not playing
+            // completely" post-fix: the previous 0.55s freeze was based on a
+            // wrong reading of the .riv timeline. The base card shape does
+            // settle (position/rotation/scale converge) by ~0.48s, but that
+            // is NOT followed by a "decorative tail" -- it's followed by the
+            // actual reveal flourish: 8 NestedRemapAnimation curves per layer
+            // driving the rotate-line swirl artboards and the Slab-rotate-v01
+            // wobble, spanning ~0.48s to ~3.35s (85% of the 3.5s timeline).
+            // Freezing at 0.55s showed that flourish having played only
+            // 2-7% of its motion -- visually indistinguishable from static,
+            // which is exactly the "didn't finish playing" the user kept
+            // reporting. Re-verified independently this time via a live
+            // headless run through the real rive-ios 6.23.1 runtime (not
+            // just a static keyframe dump): both layers cleanly reach
+            // in -> Idle at t=3.5167s. The authored fade-to-invisible only
+            // starts at ~3.15-3.20s and finishes by ~3.48s -- so holding
+            // just short of that (rather than relying on the natural
+            // in -> Idle completion at 3.5s) plays essentially the entire
+            // swirl/wobble reveal while still avoiding the original
+            // card-disappears bug this constant was first added for.
+            settleHoldSeconds: stage == .magneticHolder ? 3.1 : nil) {
             reason in
             onFinished(transactionID, reason)
         }
