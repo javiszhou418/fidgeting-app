@@ -781,16 +781,6 @@ private struct GachaPackTierCarouselOverlay: View {
     }
 }
 
-private struct GachaPackFramePreferenceKey: PreferenceKey {
-    static var defaultValue: CGRect = .zero
-    static func reduce(value: inout CGRect, nextValue: () -> CGRect) {
-        let next = nextValue()
-        if next != .zero {
-            value = next
-        }
-    }
-}
-
 private struct GachaPackOpeningOverlay: View {
     @Environment(\.accessibilityReduceMotion) private var reduceMotion
     @ObservedObject var model: GachaStoreModel
@@ -811,16 +801,9 @@ private struct GachaPackOpeningOverlay: View {
     // accepts it there; the Unity 3D PremiumDisplayCase handoff is
     // intentionally bypassed (see MarkGachaHolderRevealedFromNativeUi).
     @State private var holderRevealAcceptReady = false
-    // The Pack's real on-screen frame at the moment of tear-commit, captured
-    // via GachaPackFramePreferenceKey so the holder's entrance can animate
-    // from the exact spot the card/spinner just came out of, instead of a
-    // generic fixed offset.
-    @State private var latestPackVisualFrame: CGRect = .zero
-    @State private var tearOriginFrame: CGRect = .zero
 
     private static let invalidRequestFallback = UUID(
         uuidString: "00000000-0000-0000-0000-000000000000")!
-    fileprivate static let overlaySpaceName = "gachaPackOpeningOverlaySpace"
 
     private var packTier: GachaPackTier {
         tier ?? GachaPackTier.forSeriesId(transaction.seriesId)
@@ -844,8 +827,7 @@ private struct GachaPackOpeningOverlay: View {
                 transactionID: riveTransactionID,
                 stage: .magneticHolder,
                 playbackEnabled: holderRevealStarted,
-                revealedPrize: transaction.receipt.first,
-                entranceOriginFrame: tearOriginFrame) { id, reason in
+                revealedPrize: transaction.receipt.first) { id, reason in
                     guard id == riveTransactionID else { return }
                     holderRiveFinished(reason: reason)
                 }
@@ -880,11 +862,6 @@ private struct GachaPackOpeningOverlay: View {
             accessibilityMarkers
                 .zIndex(3)
         }
-        .coordinateSpace(name: Self.overlaySpaceName)
-        .onPreferenceChange(GachaPackFramePreferenceKey.self) { frame in
-            guard frame != .zero else { return }
-            latestPackVisualFrame = frame
-        }
         .animation(
             .spring(response: 0.42, dampingFraction: 0.82),
             value: holderRevealAcceptReady)
@@ -903,14 +880,6 @@ private struct GachaPackOpeningOverlay: View {
 
             GachaPackVisual(tier: packTier, tearProgress: tearProgress)
                 .frame(width: 244, height: 326)
-                .background(
-                    GeometryReader { proxy in
-                        Color.clear.preference(
-                            key: GachaPackFramePreferenceKey.self,
-                            value: proxy.frame(in: .named(
-                                GachaPackOpeningOverlay.overlaySpaceName)))
-                    }
-                )
                 .contentShape(Rectangle())
                 .gesture(tearGesture)
                 .accessibilityLabel("\(packTier.title) 抽取包装")
@@ -1046,14 +1015,6 @@ private struct GachaPackOpeningOverlay: View {
     private func commitPackOpen(source: String) {
         guard !packOpenCommitted else { return }
         packOpenCommitted = true
-        // Freeze the Pack's real on-screen frame right as the tear commits,
-        // so the holder's entrance can animate from the exact spot the card
-        // just came out of instead of a generic fixed offset.
-        if latestPackVisualFrame != .zero {
-            tearOriginFrame = latestPackVisualFrame
-        }
-        gachaSequenceLog(
-            "[GachaSequence] tear-origin-captured frame=\(tearOriginFrame) latestPackVisualFrame=\(latestPackVisualFrame)")
         interactionState = "pack-holder-overlap"
         overlapStartedUptime = ProcessInfo.processInfo.systemUptime
         GachaPackInteractionTrace.record(

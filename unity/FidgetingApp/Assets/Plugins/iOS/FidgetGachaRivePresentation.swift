@@ -113,11 +113,6 @@ struct GachaSingleDrawRiveGate: View {
     // Only meaningful for `stage == .magneticHolder`: the real drawn prize,
     // shown directly in the holder instead of a fixed placeholder.
     let revealedPrize: GachaReceiptRow?
-    // The Pack's real on-screen frame at the moment of tear-commit, in this
-    // view's own coordinate space (.zero if unknown). Lets the holder's
-    // entrance animate from the exact spot the card/spinner just came out
-    // of instead of a generic fixed offset.
-    let entranceOriginFrame: CGRect
     let onFinished: (UUID, GachaRiveCompletionReason) -> Void
 
     @Environment(\.accessibilityReduceMotion) private var reduceMotion
@@ -127,10 +122,8 @@ struct GachaSingleDrawRiveGate: View {
         stage: GachaRiveSequenceStage = .combined,
         playbackEnabled: Bool = true,
         revealedPrize: GachaReceiptRow? = nil,
-        entranceOriginFrame: CGRect = .zero,
         onFinished: @escaping (UUID, GachaRiveCompletionReason) -> Void
     ) {
-        self.entranceOriginFrame = entranceOriginFrame
         self.transactionID = transactionID
         self.stage = stage
         self.playbackEnabled = playbackEnabled
@@ -174,7 +167,6 @@ struct GachaSingleDrawRiveGate: View {
                     stage: stage,
                     playbackEnabled: playbackEnabled,
                     revealedPrize: revealedPrize,
-                    entranceOriginFrame: entranceOriginFrame,
                     onFinished: onFinished)
                     .ignoresSafeArea()
 
@@ -330,16 +322,6 @@ struct GachaSingleDrawReceiptRecoveryView: View {
 }
 
 #if canImport(RiveRuntime)
-private struct GachaRiveCardFramePreferenceKey: PreferenceKey {
-    static var defaultValue: CGRect = .zero
-    static func reduce(value: inout CGRect, nextValue: () -> CGRect) {
-        let next = nextValue()
-        if next != .zero {
-            value = next
-        }
-    }
-}
-
 // SwiftUI-declarative animation (ambient withAnimation{}, explicit
 // .animation(value:), even a manually time-driven TimelineView) all failed
 // to produce visible motion here: NSLog instrumentation proved the Rive
@@ -348,30 +330,86 @@ private struct GachaRiveCardFramePreferenceKey: PreferenceKey {
 // second (confirmed with video recording OFF too, ruling out capture
 // overhead as the cause). Any animation technique that depends on SwiftUI
 // re-invoking a view's body on the main thread will stall along with it.
-// UIView.animate is different: Core Animation commits the start/end values
-// once and interpolates on the render server, independent of whatever the
-// main thread is doing afterward -- exactly what survives a busy main
-// thread. This wrapper hosts the real content once, then drives its
-// transform/alpha via a genuine UIKit animation the first time
-// `isPresenting` flips true.
+//
+// A first UIKit attempt translated this container by the rise distance,
+// relying on UIView.animate's Core Animation-driven interpolation to survive
+// the busy main thread. The values genuinely animated (confirmed via
+// CALayer.presentation()), but a live human watching the simulator still
+// saw a sudden pop with no visible travel -- SwiftUI sizes this
+// representable to exactly the aspect-fit card box (~375x812pt), and
+// translating outside that box got clipped by SwiftUI's own hosting
+// plumbing regardless of this container's clipsToBounds=false. Asking for
+// a taller box via sizeThatFits "fixed" the clipping but broke sibling
+// layout instead (the taller reported size pushed the accept button
+// off-screen, confirmed by a real XCUITest failure) -- that extra size is
+// not a locally-contained hack, it really does propagate to everything
+// around this view.
+//
+// A growing bottom-anchored mask sidesteps both problems: it only ever
+// reveals pixels that are already within the container's real, correctly
+// laid-out bounds, so there's nothing to clip and no reason to ask for a
+// different size. It's also a more literal match for what was asked for --
+// "the card should grow out of the pack from the bottom up" -- than a
+// translate ever was.
 private struct GachaRiveEntranceAnimator<Content: View>: UIViewRepresentable {
     let isPresenting: Bool
-    let startOffset: CGSize
     let duration: Double
     let content: () -> Content
 
-    // Auto Layout constraints continuously re-solve on every layout pass,
-    // which Rive's own frequent internal redraws can trigger many times a
-    // second. Manually assigning .frame in layoutSubviews (only invoked when
-    // the container's own bounds actually change) removes Auto Layout from
-    // the picture entirely, in case the constraint solver was interacting
-    // with the container's animated .transform in ways that fought the
-    // in-flight animation.
     private final class ContainerView: UIView {
         var hostedView: UIView?
+        let revealMask = CALayer()
+
+        override init(frame: CGRect) {
+            super.init(frame: frame)
+            revealMask.backgroundColor = UIColor.black.cgColor
+            layer.mask = revealMask
+        }
+
+        required init?(coder: NSCoder) { fatalError("unsupported") }
+
         override func layoutSubviews() {
             super.layoutSubviews()
             hostedView?.frame = bounds
+            // Only reposition the mask to match the current bounds while no
+            // reveal animation is in flight -- once CABasicAnimation starts
+            // interpolating revealMask.bounds/position, further layout
+            // passes (Rive's own content redraws frequently) must not stomp
+            // the in-flight animation's model values.
+            guard revealMask.animation(forKey: "reveal") == nil else { return }
+            revealMask.bounds = bounds
+            revealMask.position = CGPoint(x: bounds.midX, y: bounds.midY)
+        }
+
+        func revealFromBottom(duration: Double, completion: @escaping () -> Void) {
+            let fullBounds = bounds
+            let startBounds = CGRect(x: 0, y: 0, width: fullBounds.width, height: 0)
+            revealMask.bounds = fullBounds
+            revealMask.position = CGPoint(x: fullBounds.midX, y: fullBounds.midY)
+
+            CATransaction.begin()
+            CATransaction.setCompletionBlock(completion)
+
+            let boundsAnimation = CABasicAnimation(keyPath: "bounds")
+            boundsAnimation.fromValue = startBounds
+            boundsAnimation.toValue = fullBounds
+
+            let positionAnimation = CABasicAnimation(keyPath: "position")
+            // The mask grows upward from the bottom edge: its vertical
+            // center starts pinned to the container's bottom edge and ends
+            // at the container's true center once full-height.
+            positionAnimation.fromValue = CGPoint(x: fullBounds.midX, y: fullBounds.maxY)
+            positionAnimation.toValue = CGPoint(x: fullBounds.midX, y: fullBounds.midY)
+
+            let group = CAAnimationGroup()
+            group.animations = [boundsAnimation, positionAnimation]
+            group.duration = duration
+            group.timingFunction = CAMediaTimingFunction(name: .easeOut)
+            group.fillMode = .forwards
+            group.isRemovedOnCompletion = false
+            revealMask.add(group, forKey: "reveal")
+
+            CATransaction.commit()
         }
     }
 
@@ -386,30 +424,20 @@ private struct GachaRiveEntranceAnimator<Content: View>: UIViewRepresentable {
         container.hostedView = hosting.view
         context.coordinator.hostingController = hosting
         if !isPresenting {
-            container.transform = CGAffineTransform(
-                translationX: startOffset.width, y: startOffset.height)
-            container.alpha = 0
+            container.revealMask.bounds = CGRect(x: 0, y: 0, width: 0, height: 0)
         }
         return container
     }
 
     func updateUIView(_ uiView: UIView, context: Context) {
         context.coordinator.hostingController?.rootView = content()
-        guard isPresenting, !context.coordinator.hasAnimated else { return }
+        guard isPresenting, !context.coordinator.hasAnimated,
+              let container = uiView as? ContainerView else { return }
         context.coordinator.hasAnimated = true
-        gachaRiveRuntimeLog(
-            "entrance-animator-starting startOffset=\(startOffset) duration=\(duration)")
-        UIView.animate(
-            withDuration: duration,
-            delay: 0,
-            options: [.curveEaseOut],
-            animations: {
-                uiView.transform = .identity
-                uiView.alpha = 1
-            },
-            completion: { _ in
-                gachaRiveRuntimeLog("entrance-animator-completed")
-            })
+        gachaRiveRuntimeLog("entrance-animator-starting duration=\(duration)")
+        container.revealFromBottom(duration: duration) {
+            gachaRiveRuntimeLog("entrance-animator-completed")
+        }
     }
 
     func makeCoordinator() -> Coordinator { Coordinator() }
@@ -427,7 +455,6 @@ private struct GachaRivePlaybackSurface: View {
     let stage: GachaRiveSequenceStage
     let playbackEnabled: Bool
     let revealedPrize: GachaReceiptRow?
-    let entranceOriginFrame: CGRect
     let onFinished: (UUID, GachaRiveCompletionReason) -> Void
 
     @StateObject private var playback: GachaRivePlaybackCoordinator
@@ -436,52 +463,27 @@ private struct GachaRivePlaybackSurface: View {
     // The .riv artboard's own authored entrance slides in diagonally from a
     // fixed corner with no bindable property to redirect it (checked the
     // artboard's data-bind schema). Rather than fight that internal motion,
-    // the whole assembly additionally rises from the Pack's real captured
-    // tear-commit position (entranceOriginFrame) to its resting place, so
-    // the dominant perceived motion is "this card just came out of that
-    // Pack" instead of a generic fixed-offset slide.
-    // Drives GachaRiveEntranceAnimator below -- a real UIView.animate call,
+    // GachaRiveEntranceAnimator additionally grows the whole assembly in
+    // from the bottom of its own resting frame via a bottom-anchored mask,
+    // so the dominant perceived motion is "this card is emerging from
+    // where the Pack was" instead of a generic fade-in. Drives
+    // GachaRiveEntranceAnimator below -- a real UIKit/Core Animation call,
     // not a SwiftUI-observed value -- so flipping it true only needs to
     // happen once, ever.
     @State private var hasRisenIntoView = false
     private static let riseDuration: Double = 0.6
-
-    // The card's *actual* rendered rect, captured via preference key rather
-    // than read off the wrapping GeometryReader's own bounds. The reader
-    // spans the full presentation (status-bar-to-home-indicator, ~402x812pt)
-    // while the aspect-fit card only occupies a smaller region within it, so
-    // using the reader's own frame as "resting position" produced a bogus
-    // ~62pt offset instead of the real distance from the Pack's tear spot to
-    // where the card visually sits -- confirmed via NSLog instrumentation
-    // showing entrance-offset computing (0, -62) when the actual on-screen
-    // gap was several hundred points, which is why three earlier attempts to
-    // fix the *timing* of the rise never produced a visible motion: the
-    // motion itself was too small to see, not merely mistimed.
-    @State private var measuredRestingFrame: CGRect = .zero
-    // Guards measuredRestingFrame so it is captured exactly once, before any
-    // offset is ever applied to the measured view. The preference key is
-    // attached to the SAME view the .offset(x:y:) modifier moves, so once an
-    // offset is applied at all, every subsequent preference update reports
-    // the *already-shifted* position -- a feedback loop confirmed via NSLog
-    // instrumentation showing the resting frame's own Y drifting relative to
-    // the very offset being computed from it, and the rise offset collapsing
-    // back to the old bogus ~62pt value once the animation "settled" onto
-    // its own moving target instead of the true rest position.
-    @State private var hasCapturedRestingFrame = false
 
     init(
         transactionID: UUID,
         stage: GachaRiveSequenceStage,
         playbackEnabled: Bool,
         revealedPrize: GachaReceiptRow? = nil,
-        entranceOriginFrame: CGRect = .zero,
         onFinished: @escaping (UUID, GachaRiveCompletionReason) -> Void
     ) {
         self.transactionID = transactionID
         self.stage = stage
         self.playbackEnabled = playbackEnabled
         self.revealedPrize = revealedPrize
-        self.entranceOriginFrame = entranceOriginFrame
         self.onFinished = onFinished
         var requiredLayers: Set<GachaRiveLayer> = []
         if stage.includesBackground { requiredLayers.insert(.background) }
@@ -523,42 +525,6 @@ private struct GachaRivePlaybackSurface: View {
             coordinator: playback))
     }
 
-    // Must match GachaPackOpeningOverlay.overlaySpaceName in
-    // FidgetGachaStorefront.swift -- coordinate space names are plain
-    // runtime string keys, not a shared compile-time symbol, since that
-    // type is private to its own file.
-    private static let entranceOriginSpaceName = "gachaPackOpeningOverlaySpace"
-
-    private func entranceOffset(restingFrame: CGRect) -> CGSize {
-        guard entranceOriginFrame != .zero else {
-            // No captured Pack position (e.g. reduced-motion path never
-            // populated it) -- fall back to the old generic rise-from-below.
-            gachaRiveRuntimeLog(
-                "entrance-offset-fallback restingFrame=\(restingFrame)")
-            return CGSize(width: 0, height: 240)
-        }
-        // Anchor to the Pack's *bottom* edge -- the seam the tear opens
-        // from -- rather than its center. Measured on a real device build,
-        // the Pack's center and the holder's resting center land only ~45pt
-        // apart (both sit roughly mid-screen in this layout), which reads as
-        // no motion at all once blended with the fade. The user's ask was
-        // specifically "the card emerges upward from the exact spot the tear
-        // just opened" -- guarantee that reads as real, visible upward
-        // travel by enforcing a minimum rise distance on top of the real
-        // captured anchor, instead of only ever trusting whatever the raw
-        // geometric gap happens to be.
-        let minimumRiseDistance: CGFloat = 240
-        let startY = max(
-            entranceOriginFrame.maxY,
-            restingFrame.midY + minimumRiseDistance)
-        let offset = CGSize(
-            width: entranceOriginFrame.midX - restingFrame.midX,
-            height: startY - restingFrame.midY)
-        gachaRiveRuntimeLog(
-            "entrance-offset origin=\(entranceOriginFrame) resting=\(restingFrame) offset=\(offset)")
-        return offset
-    }
-
     @ViewBuilder
     private func cardContent() -> some View {
         ZStack {
@@ -582,7 +548,6 @@ private struct GachaRivePlaybackSurface: View {
     }
 
     var body: some View {
-        let riseOffset = entranceOffset(restingFrame: measuredRestingFrame)
         Group {
             // Only the magnetic-holder stage needs the entrance rise; every
             // other stage renders exactly as it did before this wrapper
@@ -591,7 +556,6 @@ private struct GachaRivePlaybackSurface: View {
             if stage == .magneticHolder {
                 GachaRiveEntranceAnimator(
                     isPresenting: hasRisenIntoView,
-                    startOffset: riseOffset,
                     duration: Self.riseDuration,
                     content: cardContent)
             } else {
@@ -599,31 +563,7 @@ private struct GachaRivePlaybackSurface: View {
             }
         }
             .aspectRatio(Self.artboardAspectRatio, contentMode: .fit)
-            // Captured on the aspect-fit-sized content itself, before the
-            // .frame(maxWidth:.infinity...) below re-expands the layout
-            // box back out to fill the presentation. Measuring after
-            // that expansion would just reproduce the old
-            // full-screen-bounds bug. This GeometryReader stays in the
-            // plain SwiftUI tree (outside the UIHostingController the
-            // animator wraps its content in above), so the named
-            // coordinate-space lookup below keeps resolving against the
-            // Pack's own capture in FidgetGachaStorefront.swift -- a
-            // UIHostingController boundary would otherwise break that
-            // lookup, since named spaces don't cross it.
-            .background(
-                GeometryReader { proxy in
-                    Color.clear.preference(
-                        key: GachaRiveCardFramePreferenceKey.self,
-                        value: proxy.frame(in: .named(
-                            Self.entranceOriginSpaceName)))
-                }
-            )
             .frame(maxWidth: .infinity, maxHeight: .infinity)
-            .onPreferenceChange(GachaRiveCardFramePreferenceKey.self) { frame in
-                guard !hasCapturedRestingFrame, frame != .zero else { return }
-                measuredRestingFrame = frame
-                hasCapturedRestingFrame = true
-            }
             .onAppear {
                 playback.attach(
                     background: background,
@@ -1259,7 +1199,6 @@ private struct GachaRivePlaybackSurface: View {
     let stage: GachaRiveSequenceStage
     let playbackEnabled: Bool
     var revealedPrize: GachaReceiptRow?
-    var entranceOriginFrame: CGRect = .zero
     let onFinished: (UUID, GachaRiveCompletionReason) -> Void
 
     var body: some View {
