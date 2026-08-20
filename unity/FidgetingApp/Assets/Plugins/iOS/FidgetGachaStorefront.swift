@@ -623,21 +623,21 @@ public struct GachaStoreView: View {
 /// or Unity; only confirming a tier hands control back to the caller, which
 /// fires the real (already-tested, idempotent) `model.draw(...)` call.
 private struct GachaPackTierCarouselOverlay: View {
-    @Environment(\.accessibilityReduceMotion) private var reduceMotion
     @Binding var selectedTier: GachaPackTier
     let onCancel: () -> Void
     let onConfirm: () -> Void
 
     @State private var carouselDrag: CGFloat = 0
-    // Confirming plays a dedicated exit choreography before handing off to
-    // the real draw: the selected Pack grows to dominate the screen while
-    // every other Pack slides fully off in the direction it's already
-    // leaning, instead of the whole carousel just cross-fading away.
+    // Hides the tier labels/buttons and disables interaction the instant
+    // confirmation happens. A prior version also played a ~0.46s "grow to
+    // 155%, everything else exits" choreography here before calling
+    // onConfirm() -- the user explicitly asked for that removed: selecting a
+    // tier should hand off to the tear scene immediately, with the carousel
+    // dismissal and the tear scene's own insertion transition (both driven
+    // by the shared `presentationTransition` in GachaStoreView) providing
+    // the crossfade, instead of three disjointed beats (grow, then cut, then
+    // the pack reappearing in a new scene).
     @State private var isConfirming = false
-
-    private static let confirmGrowScale: Double = 1.55
-    private static let confirmExitDistance: Double = 900
-    private static let confirmTransitionSeconds = 0.46
 
     var body: some View {
         GeometryReader { proxy in
@@ -678,16 +678,8 @@ private struct GachaPackTierCarouselOverlay: View {
 
     private func confirmSelection() {
         guard !isConfirming else { return }
-        withAnimation(reduceMotion
-            ? .easeOut(duration: 0.01)
-            : .spring(response: Self.confirmTransitionSeconds, dampingFraction: 0.84)) {
-            isConfirming = true
-        }
-        let delaySeconds = reduceMotion ? 0.01 : Self.confirmTransitionSeconds
-        Task { @MainActor in
-            try? await Task.sleep(nanoseconds: UInt64(delaySeconds * 1_000_000_000))
-            onConfirm()
-        }
+        isConfirming = true
+        onConfirm()
     }
 
     private var tierStage: some View {
@@ -708,18 +700,7 @@ private struct GachaPackTierCarouselOverlay: View {
                     continuousPosition: position)
                 let tilt = GachaPackCarouselRules.tiltDegrees(
                     continuousPosition: position)
-                // Confirming: the selected Pack grows in place; every other
-                // Pack continues traveling further along the same direction
-                // it's already offset in, fully exiting the screen.
-                let exitX: Double = isConfirming
-                    ? (isSelected
-                        ? 0
-                        : x + Double(x.sign == .minus ? -1 : 1)
-                            * Self.confirmExitDistance)
-                    : x
-                let scale = isConfirming && isSelected
-                    ? Self.confirmGrowScale
-                    : GachaPackCarouselRules.packScale(isSelected: isSelected)
+                let scale = GachaPackCarouselRules.packScale(isSelected: isSelected)
                 Button {
                     withAnimation(.spring(
                         response: GachaPackCarouselRules
@@ -744,7 +725,7 @@ private struct GachaPackTierCarouselOverlay: View {
                 }
                 .buttonStyle(.plain)
                 .allowsHitTesting(!isConfirming)
-                .offset(x: CGFloat(exitX), y: CGFloat(y))
+                .offset(x: CGFloat(x), y: CGFloat(y))
                 .rotationEffect(.degrees(tilt), anchor: .bottom)
                 .opacity(abs(position) > 2.6 && !isConfirming ? 0 : 1)
                 .zIndex(isSelected ? 10 : 3 - abs(position))
@@ -827,7 +808,8 @@ private struct GachaPackOpeningOverlay: View {
                 transactionID: riveTransactionID,
                 stage: .magneticHolder,
                 playbackEnabled: holderRevealStarted,
-                revealedPrize: transaction.receipt.first) { id, reason in
+                revealedPrize: transaction.receipt.first,
+                isAcceptReady: holderRevealAcceptReady) { id, reason in
                     guard id == riveTransactionID else { return }
                     holderRiveFinished(reason: reason)
                 }

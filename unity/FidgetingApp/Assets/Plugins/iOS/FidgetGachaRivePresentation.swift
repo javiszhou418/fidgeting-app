@@ -113,6 +113,12 @@ struct GachaSingleDrawRiveGate: View {
     // Only meaningful for `stage == .magneticHolder`: the real drawn prize,
     // shown directly in the holder instead of a fixed placeholder.
     let revealedPrize: GachaReceiptRow?
+    // Once the reveal has produced an acceptable result, the caller shows a
+    // real "收下" accept button elsewhere on screen. This gate must stop
+    // claiming "正在开启收藏" ("still opening") at that point -- showing
+    // both together reads as contradictory, since accept-ready and
+    // still-in-progress can't both be true.
+    var isAcceptReady: Bool = false
     let onFinished: (UUID, GachaRiveCompletionReason) -> Void
 
     @Environment(\.accessibilityReduceMotion) private var reduceMotion
@@ -122,12 +128,14 @@ struct GachaSingleDrawRiveGate: View {
         stage: GachaRiveSequenceStage = .combined,
         playbackEnabled: Bool = true,
         revealedPrize: GachaReceiptRow? = nil,
+        isAcceptReady: Bool = false,
         onFinished: @escaping (UUID, GachaRiveCompletionReason) -> Void
     ) {
         self.transactionID = transactionID
         self.stage = stage
         self.playbackEnabled = playbackEnabled
         self.revealedPrize = revealedPrize
+        self.isAcceptReady = isAcceptReady
         self.onFinished = onFinished
     }
 
@@ -175,9 +183,11 @@ struct GachaSingleDrawRiveGate: View {
                         .font(.product(size: 12, weight: .bold))
                         .foregroundColor(.white.opacity(0.48))
                     Spacer()
-                    Text("正在开启收藏")
-                        .font(.product(size: 13, weight: .semibold))
-                        .foregroundColor(.white.opacity(0.58))
+                    if !isAcceptReady {
+                        Text("正在开启收藏")
+                            .font(.product(size: 13, weight: .semibold))
+                            .foregroundColor(.white.opacity(0.58))
+                    }
                 }
                 .padding(.vertical, 34)
                 .allowsHitTesting(false)
@@ -359,6 +369,19 @@ private struct GachaRiveEntranceAnimator<Content: View>: UIViewRepresentable {
     private final class ContainerView: UIView {
         var hostedView: UIView?
         let revealMask = CALayer()
+        // BUG (found only once a live human watched, not any recording):
+        // layoutSubviews reset the mask to the full, unmasked bounds on
+        // EVERY layout pass regardless of whether revealFromBottom had ever
+        // been called. Rive's own content redraws trigger layout constantly,
+        // so the very first real layout pass after the view got a non-zero
+        // frame -- which happens immediately, well before isPresenting ever
+        // flips true -- unmasked the card completely. The card was visible
+        // at full size from the moment it existed, which is indistinguishable
+        // from a hard cut with no entrance at all. This flag makes the
+        // "not revealed yet" mask state (zero height, pinned to the bottom
+        // edge) survive every layout pass until revealFromBottom actually
+        // starts the real animation.
+        private var isRevealed = false
 
         override init(frame: CGRect) {
             super.init(frame: frame)
@@ -377,11 +400,17 @@ private struct GachaRiveEntranceAnimator<Content: View>: UIViewRepresentable {
             // passes (Rive's own content redraws frequently) must not stomp
             // the in-flight animation's model values.
             guard revealMask.animation(forKey: "reveal") == nil else { return }
-            revealMask.bounds = bounds
-            revealMask.position = CGPoint(x: bounds.midX, y: bounds.midY)
+            if isRevealed {
+                revealMask.bounds = bounds
+                revealMask.position = CGPoint(x: bounds.midX, y: bounds.midY)
+            } else {
+                revealMask.bounds = CGRect(x: 0, y: 0, width: bounds.width, height: 0)
+                revealMask.position = CGPoint(x: bounds.midX, y: bounds.maxY)
+            }
         }
 
         func revealFromBottom(duration: Double, completion: @escaping () -> Void) {
+            isRevealed = true
             let fullBounds = bounds
             let startBounds = CGRect(x: 0, y: 0, width: fullBounds.width, height: 0)
             revealMask.bounds = fullBounds
@@ -490,19 +519,19 @@ private struct GachaRivePlaybackSurface: View {
         if stage.includesForeground { requiredLayers.insert(.foreground) }
         let playback = GachaRivePlaybackCoordinator(
             requiredLayers: requiredLayers,
-            // No early freeze at all, for either stage. Two different
-            // artificial cutoffs (0.55s, then 3.1s -- picked to land just
-            // short of the authored fade-to-invisible) both still read to
-            // the user as "the animation didn't finish playing," because
-            // both were still artificial cutoffs before the .riv file's own
-            // authored ending. The real in -> Idle state-machine transition
-            // (wired up in RiveStateMachineDelegate.stateMachine(_:
-            // didChangeState:) below) is confirmed -- via a live headless
-            // run through the real rive-ios 6.23.1 runtime, not just a
-            // static dump -- to fire reliably for both layers at t=3.5167s,
-            // the .riv file's own true end. Let that drive completion
-            // instead of guessing at a cutoff point a second time.
-            settleHoldSeconds: nil) {
+            // Letting the .riv file run to its own true end (no hold at all)
+            // was tried and rejected: the user explicitly wants the card to
+            // stay visible once revealed, since it needs to still be on
+            // screen for the accept ("收下") action -- but the .riv file's
+            // own authored ending is a fade to fully invisible starting at
+            // ~3.15-3.20s. Holding at 3.15s -- confirmed via the same
+            // headless rive-ios 6.23.1 run as the "no hold" investigation --
+            // plays effectively the entire swirl/wobble reveal (which spans
+            // ~0.48s-3.35s) while landing just before the fade would start
+            // erasing the card. The state-machine "in -> Idle" cycle this
+            // coordinator would otherwise wait for only completes at the
+            // full ~3.5s mark -- i.e. after the fade already played.
+            settleHoldSeconds: stage == .magneticHolder ? 3.15 : nil) {
             reason in
             onFinished(transactionID, reason)
         }
