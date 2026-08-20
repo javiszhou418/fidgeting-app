@@ -490,27 +490,19 @@ private struct GachaRivePlaybackSurface: View {
         if stage.includesForeground { requiredLayers.insert(.foreground) }
         let playback = GachaRivePlaybackCoordinator(
             requiredLayers: requiredLayers,
-            // CORRECTED after the user kept seeing this as "not playing
-            // completely" post-fix: the previous 0.55s freeze was based on a
-            // wrong reading of the .riv timeline. The base card shape does
-            // settle (position/rotation/scale converge) by ~0.48s, but that
-            // is NOT followed by a "decorative tail" -- it's followed by the
-            // actual reveal flourish: 8 NestedRemapAnimation curves per layer
-            // driving the rotate-line swirl artboards and the Slab-rotate-v01
-            // wobble, spanning ~0.48s to ~3.35s (85% of the 3.5s timeline).
-            // Freezing at 0.55s showed that flourish having played only
-            // 2-7% of its motion -- visually indistinguishable from static,
-            // which is exactly the "didn't finish playing" the user kept
-            // reporting. Re-verified independently this time via a live
-            // headless run through the real rive-ios 6.23.1 runtime (not
-            // just a static keyframe dump): both layers cleanly reach
-            // in -> Idle at t=3.5167s. The authored fade-to-invisible only
-            // starts at ~3.15-3.20s and finishes by ~3.48s -- so holding
-            // just short of that (rather than relying on the natural
-            // in -> Idle completion at 3.5s) plays essentially the entire
-            // swirl/wobble reveal while still avoiding the original
-            // card-disappears bug this constant was first added for.
-            settleHoldSeconds: stage == .magneticHolder ? 3.1 : nil) {
+            // No early freeze at all, for either stage. Two different
+            // artificial cutoffs (0.55s, then 3.1s -- picked to land just
+            // short of the authored fade-to-invisible) both still read to
+            // the user as "the animation didn't finish playing," because
+            // both were still artificial cutoffs before the .riv file's own
+            // authored ending. The real in -> Idle state-machine transition
+            // (wired up in RiveStateMachineDelegate.stateMachine(_:
+            // didChangeState:) below) is confirmed -- via a live headless
+            // run through the real rive-ios 6.23.1 runtime, not just a
+            // static dump -- to fire reliably for both layers at t=3.5167s,
+            // the .riv file's own true end. Let that drive completion
+            // instead of guessing at a cutoff point a second time.
+            settleHoldSeconds: nil) {
             reason in
             onFinished(transactionID, reason)
         }
@@ -697,10 +689,10 @@ private struct GachaProductOwnedIdentityCaption: View {
         guard !isPresented else { return }
         withAnimation(.spring(
             // Retimed to land close to the .riv artboard's own measured
-            // ~0.48s reveal-settle point (see settleHoldSeconds above), so
-            // the SwiftUI rise and the Rive-internal convergence finish
-            // together instead of the SwiftUI motion lagging noticeably
-            // behind an already-settled Rive card.
+            // ~0.48s point where the base card shape (position/rotation/
+            // scale) settles, so the caption appears once there's an
+            // actual settled card to attach it to, without waiting for
+            // the full ~3.5s swirl/wobble flourish that follows.
             response: 0.5,
             dampingFraction: 0.82,
             blendDuration: 0.08)) {
