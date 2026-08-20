@@ -523,15 +523,33 @@ private struct GachaRivePlaybackSurface: View {
             // was tried and rejected: the user explicitly wants the card to
             // stay visible once revealed, since it needs to still be on
             // screen for the accept ("收下") action -- but the .riv file's
-            // own authored ending is a fade to fully invisible starting at
-            // ~3.15-3.20s. Holding at 3.15s -- confirmed via the same
-            // headless rive-ios 6.23.1 run as the "no hold" investigation --
-            // plays effectively the entire swirl/wobble reveal (which spans
-            // ~0.48s-3.35s) while landing just before the fade would start
-            // erasing the card. The state-machine "in -> Idle" cycle this
-            // coordinator would otherwise wait for only completes at the
-            // full ~3.5s mark -- i.e. after the fade already played.
-            settleHoldSeconds: stage == .magneticHolder ? 3.15 : nil) {
+            // own authored ending is a fade to fully invisible.
+            //
+            // A first hold at 3.15s (picked only to land before that fade)
+            // was ALSO wrong: the "rotation" this card appears to do is
+            // actually a fake-3D flip driven by animating the card face's
+            // scaleX (1.00 -> 0.36, per a frame-by-frame keyframe dump/
+            // simulation through the real rive-ios 6.23.1 runtime), and
+            // 3.15s lands inside the *exit* flip back to a side view
+            // (measured cardScaleX at 3.15s: 0.57 background, 0.37/0.60
+            // foreground) -- one frame before the foreground layers hard-cut
+            // to invisible. The real timeline is: flip in (0-0.98s) -> a
+            // settled, front-facing plateau where cardScaleX is pinned at
+            // exactly 1.0 (0.98s-2.83s bg / ~2.92s fg) -> flip back out to
+            // side (2.83s-3.17s) -> fade to invisible (starts ~3.15-3.17s).
+            // 2.85s sits in the middle of that plateau (measured cardScaleX
+            // 0.999/1.000/1.000 -- indistinguishable from fully front-facing)
+            // with a wide ~1.9s safe band (1.05s-2.95s) on either side, so
+            // it isn't a fragile knife-edge value the way 3.15s was.
+            //
+            // rive-ios 6.23.1 has no public API to read an arbitrary
+            // animated node property at runtime (only SMI inputs -- this
+            // state machine has none -- text runs, and data-binding view-
+            // model properties), so a dynamically-detected "is it
+            // front-facing right now" freeze isn't available; a fixed
+            // timestamp landing well inside a wide plateau is the correct
+            // fix here, not a workaround.
+            settleHoldSeconds: stage == .magneticHolder ? 2.85 : nil) {
             reason in
             onFinished(transactionID, reason)
         }
