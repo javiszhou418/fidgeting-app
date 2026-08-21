@@ -27,11 +27,14 @@ for argument in "$@"; do
     --development)
       BUILD_MODE="development"
       ;;
+    --internal-gacha)
+      BUILD_MODE="internal-gacha"
+      ;;
     --no-launch)
       LAUNCH_AFTER_INSTALL=0
       ;;
     *)
-      echo "Usage: ${0:t} [--development] [--install-existing] [--no-launch]" >&2
+      echo "Usage: ${0:t} [--development|--internal-gacha] [--install-existing] [--no-launch]" >&2
       exit 64
       ;;
   esac
@@ -41,6 +44,10 @@ if [[ "$BUILD_MODE" == "development" ]]; then
   EXPORT_PATH="$UNITY_PROJECT/Builds/iOS/FidgetingAppDevelopment"
   DERIVED_PATH="$UNITY_PROJECT/Builds/iOS/DerivedDataDevelopment"
   UNITY_BUILD_METHOD="CodexUnityLabEditor.IosBuildPipeline.BuildIosDevelopmentProject"
+elif [[ "$BUILD_MODE" == "internal-gacha" ]]; then
+  EXPORT_PATH="$UNITY_PROJECT/Builds/iOS/FidgetingAppInternalGacha"
+  DERIVED_PATH="$UNITY_PROJECT/Builds/iOS/DerivedDataInternalGacha"
+  UNITY_BUILD_METHOD="CodexUnityLabEditor.IosBuildPipeline.BuildIosInternalGachaProject"
 else
   EXPORT_PATH="$UNITY_PROJECT/Builds/iOS/FidgetingApp"
   DERIVED_PATH="$UNITY_PROJECT/Builds/iOS/DerivedData"
