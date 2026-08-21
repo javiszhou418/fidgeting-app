@@ -17,7 +17,8 @@ namespace FidgetingApp.Tests.Editor
 
             StringAssert.Contains("public struct GachaStoreView", storefront);
             StringAssert.Contains("@Environment(\\.dismiss) private var dismiss", storefront);
-            StringAssert.Contains("Button(\"返回主页\")", storefront);
+            StringAssert.Contains("gacha-return-home", storefront);
+            StringAssert.Contains("chevron.left", storefront);
             StringAssert.Contains("model.draw(seriesId: series.id, count: 1, useCoins: false)", storefront);
             StringAssert.Contains(".interactiveDismissDisabled(", storefront);
             StringAssert.Contains("GachaRuntimeMode", legacy);

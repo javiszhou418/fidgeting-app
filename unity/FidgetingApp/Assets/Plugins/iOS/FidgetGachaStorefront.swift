@@ -124,11 +124,25 @@ public struct GachaStoreView: View {
     private var storefrontContent: some View {
         ZStack(alignment: .bottom) {
             Color.black.ignoresSafeArea()
+            // Frosted wash over the base black so the whole storefront reads
+            // as a translucent panel rather than flat black, matching the
+            // .ultraThinMaterial language already used by drawDock/tabs.
+            Rectangle()
+                .fill(.ultraThinMaterial)
+                .opacity(0.72)
+                .ignoresSafeArea()
 
             VStack(spacing: 0) {
-                navigation
-                header
-                tabs
+                // Nav content stays inset from the notch, but its material
+                // backing extends up through the top safe area so the
+                // physical notch/status-bar strip is blocked by an opaque
+                // blurred bar instead of sitting flush against transparent
+                // content.
+                VStack(spacing: 0) {
+                    navigation
+                    tabs
+                }
+                .background(.ultraThinMaterial, ignoresSafeAreaEdges: .top)
 
                 TabView(selection: $selectedTab) {
                     drawAndRedeem.tag(0)
@@ -146,39 +160,31 @@ public struct GachaStoreView: View {
         }
     }
 
+    // Icon-only back control — same SF Symbol convention as walletChip's
+    // icon-first layout below. dismiss()'s behavior and the
+    // "gacha-return-home" identifier are unchanged; only the visible "返回
+    // 主页" text label and the "机巧工坊" title are gone per on-device
+    // feedback that the top bar read as too text-heavy.
     private var navigation: some View {
         HStack {
-            Button("返回主页") {
+            Button {
                 dismiss()
+            } label: {
+                Image(systemName: "chevron.left")
+                    .font(.system(size: 15, weight: .bold))
+                    .foregroundColor(.white.opacity(0.88))
+                    .frame(width: 32, height: 32)
             }
-            .font(.system(size: 14, weight: .bold))
-            .foregroundColor(.white.opacity(0.88))
             .buttonStyle(.plain)
             .disabled(!model.activeRequestId.isEmpty)
             .accessibilityIdentifier("gacha-return-home")
+            .accessibilityLabel("返回主页")
 
             Spacer()
-
-            Text("机巧工坊")
-                .font(.system(size: 12, weight: .bold))
-                .foregroundColor(.white.opacity(0.42))
         }
         .padding(.horizontal, 18)
         .padding(.top, 12)
         .padding(.bottom, 4)
-    }
-
-    private var header: some View {
-        HStack(spacing: 10) {
-            Spacer()
-            walletChip(symbol: "ticket.fill", value: model.ticketBalanceText)
-                .accessibilityElement(children: .ignore)
-                .accessibilityIdentifier("gacha-runtime-mode")
-                .accessibilityLabel(model.runtimeMode.title)
-            walletChip(symbol: "gearshape.2.fill", value: "\(model.coins)")
-        }
-        .padding(.horizontal, 18)
-        .padding(.vertical, 12)
     }
 
     // Icon + number only — no descriptive label underneath. The ticket
@@ -481,6 +487,18 @@ public struct GachaStoreView: View {
 
     private func drawDock(_ series: GachaSeriesInfo) -> some View {
         VStack(spacing: FidgetUITokens.Spacing.metadata) {
+            // Wallet chips moved down from the top header into the dock per
+            // on-device feedback — currency now lives alongside the 单抽
+            // action instead of floating in the top-right corner.
+            HStack(spacing: 10) {
+                walletChip(symbol: "ticket.fill", value: model.ticketBalanceText)
+                    .accessibilityElement(children: .ignore)
+                    .accessibilityIdentifier("gacha-runtime-mode")
+                    .accessibilityLabel(model.runtimeMode.title)
+                walletChip(symbol: "gearshape.2.fill", value: "\(model.coins)")
+                Spacer(minLength: 0)
+            }
+
             HStack(alignment: .center, spacing: FidgetUITokens.Spacing.standard) {
                 VStack(alignment: .leading, spacing: FidgetUITokens.Spacing.compact) {
                     Text(model.drawCostText)
