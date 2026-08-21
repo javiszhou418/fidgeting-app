@@ -774,79 +774,22 @@ private struct GachaPackOpeningOverlay: View {
     @State private var tearProgress: CGFloat = 0
     @State private var interactionState = "sealed"
     @State private var packOpenCommitted = false
-    @State private var holderRevealStarted = false
-    @State private var holderCompletionDispatched = false
-    @State private var packVisible = true
-    @State private var overlapStartedUptime: TimeInterval?
-    // This build shows the real prize directly in the magnetic holder and
-    // accepts it there; the Unity 3D PremiumDisplayCase handoff is
-    // intentionally bypassed (see MarkGachaHolderRevealedFromNativeUi).
-    @State private var holderRevealAcceptReady = false
-
-    private static let invalidRequestFallback = UUID(
-        uuidString: "00000000-0000-0000-0000-000000000000")!
 
     private var packTier: GachaPackTier {
         tier ?? GachaPackTier.forSeriesId(transaction.seriesId)
-    }
-
-    private var riveTransactionID: UUID {
-        UUID(uuidString: transaction.requestId)
-            ?? Self.invalidRequestFallback
-    }
-
-    private var packToHolderAnimation: Animation {
-        .easeOut(duration: GachaSingleDrawGateState
-            .packToHolderTransitionSeconds)
     }
 
     var body: some View {
         ZStack {
             Color.black.opacity(0.985).ignoresSafeArea()
 
-            GachaSingleDrawRiveGate(
-                transactionID: riveTransactionID,
-                stage: .magneticHolder,
-                playbackEnabled: holderRevealStarted,
-                revealedPrize: transaction.receipt.first,
-                isAcceptReady: holderRevealAcceptReady) { id, reason in
-                    guard id == riveTransactionID else { return }
-                    holderRiveFinished(reason: reason)
-                }
-                .opacity(holderRevealStarted ? 1 : 0)
-                .animation(packToHolderAnimation, value: holderRevealStarted)
-                .accessibilityHidden(!holderRevealStarted)
-                .zIndex(1)
-
             packSurface
-                .opacity(packVisible ? 1 : 0)
-                .animation(packToHolderAnimation, value: packVisible)
-                .allowsHitTesting(packVisible && !packOpenCommitted)
-                .accessibilityHidden(!packVisible)
+                .allowsHitTesting(!packOpenCommitted)
                 .zIndex(2)
-
-            if holderRevealAcceptReady {
-                VStack {
-                    Spacer()
-                    ProductPrimaryActionButton(
-                        title: "收下",
-                        state: model.transactionPhase == .acknowledging
-                            ? .loading("提交中") : .rest,
-                        action: acceptHolderReveal)
-                        .frame(width: 214)
-                        .padding(.bottom, 48)
-                        .accessibilityIdentifier("gacha-reveal-accept")
-                }
-                .transition(.move(edge: .bottom).combined(with: .opacity))
-                .zIndex(4)
-            }
 
             accessibilityMarkers
                 .zIndex(3)
         }
-        .animation(
-            .spring(response: 0.42, dampingFraction: 0.82),
-            value: holderRevealAcceptReady)
         .accessibilityElement(children: .contain)
         .onAppear {
             GachaPackInteractionTrace.begin(requestId: transaction.requestId)
@@ -966,16 +909,6 @@ private struct GachaPackOpeningOverlay: View {
                 label: "封包交易请求",
                 identifier: "gacha-pack-request-id",
                 value: transaction.requestId)
-            marker(
-                label: "封包到收藏夹连续转场",
-                identifier: "gacha-pack-holder-transition",
-                value: interactionState)
-            marker(
-                label: "磁吸收藏夹播放状态",
-                identifier: "gacha-holder-playback-state",
-                value: holderRevealStarted
-                    ? (holderCompletionDispatched ? "completed" : "playing")
-                    : "waiting")
         }
         .frame(width: 1, height: 1)
         .clipped()
@@ -997,14 +930,13 @@ private struct GachaPackOpeningOverlay: View {
     private func commitPackOpen(source: String) {
         guard !packOpenCommitted else { return }
         packOpenCommitted = true
-        interactionState = "pack-holder-overlap"
-        overlapStartedUptime = ProcessInfo.processInfo.systemUptime
+        interactionState = "unity-reveal-request"
         GachaPackInteractionTrace.record(
             requestId: transaction.requestId,
             event: "commit-start-\(source)",
             progress: tearProgress)
         gachaSequenceLog(
-            "[GachaSequence] pack-holder-overlap-start request=\(transaction.requestId) reduceMotion=\(reduceMotion)")
+            "[GachaSequence] pack-tear-committed request=\(transaction.requestId) reduceMotion=\(reduceMotion)")
 
         withAnimation(.easeOut(duration: reduceMotion
             ? 0.01
@@ -1012,25 +944,12 @@ private struct GachaPackOpeningOverlay: View {
             tearProgress = 1
         }
 
-        if reduceMotion {
-            var nativeTransition = Transaction()
-            nativeTransition.disablesAnimations = true
-            withTransaction(nativeTransition) {
-                holderRevealStarted = true
-            }
-        } else {
-            withAnimation(packToHolderAnimation) {
-                holderRevealStarted = true
-                packVisible = false
-            }
-        }
-
         Task { @MainActor in
             do {
                 try await Task.sleep(
                     nanoseconds: UInt64(
-                        GachaSingleDrawGateState
-                            .packToHolderTransitionSeconds * 1_000_000_000))
+                        (reduceMotion ? 0.01 : GachaPackOpeningRules.flapExitDurationSeconds)
+                            * 1_000_000_000))
             } catch {
                 return
             }
@@ -1038,69 +957,14 @@ private struct GachaPackOpeningOverlay: View {
                   model.packIsPresented,
                   model.pendingTransaction?.requestId == transaction.requestId
             else { return }
-            if reduceMotion {
-                var nativeTransition = Transaction()
-                nativeTransition.disablesAnimations = true
-                withTransaction(nativeTransition) {
-                    packVisible = false
-                }
-            }
-            interactionState = holderCompletionDispatched
-                ? "holder-completed"
-                : "holder-playing"
-            gachaSequenceLog(
-                "[GachaSequence] pack-holder-overlap-complete request=\(transaction.requestId)")
-        }
-    }
-
-    @MainActor
-    private func holderRiveFinished(reason: GachaRiveCompletionReason) {
-        guard packOpenCommitted,
-              holderRevealStarted,
-              !holderCompletionDispatched
-        else { return }
-
-        holderCompletionDispatched = true
-        let now = ProcessInfo.processInfo.systemUptime
-        let elapsed = max(0, now - (overlapStartedUptime ?? now))
-        let remaining = max(
-            0,
-            GachaSingleDrawGateState.packToHolderTransitionSeconds - elapsed)
-
-        Task { @MainActor in
-            if remaining > 0 {
-                do {
-                    try await Task.sleep(
-                        nanoseconds: UInt64(remaining * 1_000_000_000))
-                } catch {
-                    return
-                }
-            }
-            guard !Task.isCancelled,
-                  model.packIsPresented,
-                  model.pendingTransaction?.requestId == transaction.requestId
-            else { return }
-
-            interactionState = "holder-revealed"
-            gachaSequenceLog(
-                "[GachaSequence] holder-rive-completed request=\(transaction.requestId) reason=\(reason.rawValue)")
-            gachaSequenceLog(
-                "[GachaSequence] holder-reveal-accept-ready request=\(transaction.requestId)")
             GachaPackInteractionTrace.record(
                 requestId: transaction.requestId,
-                event: "holder-rive-complete-\(reason.rawValue)",
+                event: "unity-reveal-request",
                 progress: 1)
-            GachaPackInteractionTrace.record(
-                requestId: transaction.requestId,
-                event: "holder-reveal-accept-ready",
-                progress: 1)
-            model.markHolderRevealed(requestId: transaction.requestId)
-            holderRevealAcceptReady = true
+            gachaSequenceLog(
+                "[GachaSequence] unity-reveal-request request=\(transaction.requestId)")
+            model.commitPackOpening(requestId: transaction.requestId)
         }
-    }
-
-    private func acceptHolderReveal() {
-        model.acknowledgeHolderReveal(requestId: transaction.requestId)
     }
 }
 
@@ -1181,9 +1045,6 @@ private struct GachaThreeDRevealOverlay: View {
                 VStack(spacing: 8) {
                     if let receipt,
                        model.revealPhase == .readable
-                            || model.revealPhase == .exploded
-                            || model.revealPhase == .prizeOnly
-                            || model.revealPhase == .sheen
                             || model.revealPhase == .complete {
                         Text(receipt.name)
                             .font(.system(size: 22, weight: .black, design: .rounded))

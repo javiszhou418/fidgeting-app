@@ -252,7 +252,8 @@ namespace FidgetingApp.DisplayCase
         RoundedSquareStandard = 3,
         RoundedSquareDeep = 4,
         CircularWide = 5,
-        CollectorSlabLarge = 6
+        CollectorSlabLarge = 6,
+        CollectorSlabCompact = 7
     }
 
     public enum PremiumDisplayCaseCapsuleShape
@@ -359,6 +360,14 @@ namespace FidgetingApp.DisplayCase
                         0.198f,
                         0.048f,
                         0.016f,
+                        PremiumDisplayCaseLayout.CollectorSlabContentPaddingFraction),
+                PremiumDisplayCaseCapsulePreset.CollectorSlabCompact =>
+                    new PremiumDisplayCaseCapsuleDimensions(
+                        PremiumDisplayCaseCapsuleShape.RoundedSquare,
+                        0.115f,
+                        0.125f,
+                        0.030f,
+                        0.010f,
                         PremiumDisplayCaseLayout.CollectorSlabContentPaddingFraction),
                 _ => new PremiumDisplayCaseCapsuleDimensions(
                     PremiumDisplayCaseCapsuleShape.Circular,

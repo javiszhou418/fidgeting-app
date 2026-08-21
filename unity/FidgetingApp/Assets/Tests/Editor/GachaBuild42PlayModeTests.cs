@@ -46,7 +46,7 @@ namespace FidgetingApp.Tests.Editor
         }
 
         [UnityTest]
-        public IEnumerator RevealDirector_PublishesSixVisiblePhasesInOrderAcrossFrames()
+        public IEnumerator RevealDirector_PublishesVisiblePhasesInOrderAcrossFrames()
         {
             OpenIsolatedEmptyScene();
             yield return new EnterPlayMode();
@@ -86,21 +86,6 @@ namespace FidgetingApp.Tests.Editor
             AssertSamePresentation(director, sharedCase, sharedPrize);
 
             AdvanceOnePhase(director, GachaRevealTimeline.ReadableSeconds);
-            Assert.That(director.Phase, Is.EqualTo(GachaRevealPhase.Exploded));
-            yield return null;
-            AssertSamePresentation(director, sharedCase, sharedPrize);
-
-            AdvanceOnePhase(director, GachaRevealTimeline.ExplodedSeconds);
-            Assert.That(director.Phase, Is.EqualTo(GachaRevealPhase.PrizeOnly));
-            yield return null;
-            AssertSamePresentation(director, sharedCase, sharedPrize);
-
-            AdvanceOnePhase(director, GachaRevealTimeline.PrizeOnlySeconds);
-            Assert.That(director.Phase, Is.EqualTo(GachaRevealPhase.Sheen));
-            yield return null;
-            AssertSamePresentation(director, sharedCase, sharedPrize);
-
-            AdvanceOnePhase(director, GachaRevealTimeline.SheenSeconds);
             Assert.That(director.Phase, Is.EqualTo(GachaRevealPhase.Complete));
             yield return null;
 
@@ -109,11 +94,8 @@ namespace FidgetingApp.Tests.Editor
                 GachaRevealPhase.Back,
                 GachaRevealPhase.Front,
                 GachaRevealPhase.Readable,
-                GachaRevealPhase.Exploded,
-                GachaRevealPhase.PrizeOnly,
-                GachaRevealPhase.Sheen,
                 GachaRevealPhase.Complete
-            }), "Six visible phases plus terminal Complete must be authoritative and ordered.");
+            }), "Visible phases plus terminal Complete must be authoritative and ordered.");
             Assert.That(events.CompletionCount, Is.EqualTo(1));
             Assert.That(director.ActiveCase, Is.SameAs(sharedCase),
                 "A reveal must never replace the approved shared case per prize or phase.");

@@ -123,9 +123,6 @@ public enum GachaRevealPhase: String, Equatable {
     case back
     case front
     case readable
-    case exploded
-    case prizeOnly
-    case sheen
     case complete
 
     public var caption: String {
@@ -133,9 +130,6 @@ public enum GachaRevealPhase: String, Equatable {
         case .back: return "收藏盒入场"
         case .front: return "收藏盒翻正"
         case .readable: return "奖品确认"
-        case .exploded: return "盒体散开"
-        case .prizeOnly: return "奖品保留"
-        case .sheen: return "完成过光"
         case .complete: return "揭晓完成"
         }
     }
@@ -197,16 +191,8 @@ public final class GachaStoreModel: ObservableObject {
 
     public var packIsPresented: Bool {
         guard let transaction = pendingTransaction else { return false }
-        guard !revealIsPresented else { return false }
-        // Once acknowledged, `pendingTransaction` clears and this naturally
-        // stops being true. Until then, `.awaitingAcceptance` must still
-        // show this overlay in the holder-only build (see
-        // requestRevealSetupIfNeeded/threeDRevealEnabled): packGateRequestId
-        // is cleared as soon as that phase is reached (it used to mean the
-        // 3D reveal already took over), and nothing else in this build ever
-        // shows the accept UI otherwise.
-        return packGateRequestId == transaction.requestId
-            || transaction.phase == .awaitingAcceptance
+        return !revealIsPresented
+            && packGateRequestId == transaction.requestId
     }
 
     public var drawCostText: String {
@@ -272,18 +258,7 @@ public final class GachaStoreModel: ObservableObject {
         scheduleQueryTimeout(requestId: requestId, status: "querying")
     }
 
-    // Build 42 shows the real drawn prize directly in the magnetic holder
-    // and intentionally bypasses the Unity 3D PremiumDisplayCase reveal
-    // entirely. Without this flag, an awaiting-acceptance transaction
-    // reached via the holder path (see acknowledgeHolderReveal /
-    // markHolderRevealed) hits the same `.awaitingAcceptance` branch below
-    // that used to only mean "the 3D reveal just finished," which requested
-    // the 3D reveal a second time and raced GachaThreeDRevealOverlay in on
-    // top of the holder. Flip this back to re-enable the 3D path.
-    private static let threeDRevealEnabled = false
-
     public func requestRevealSetupIfNeeded() {
-        guard Self.threeDRevealEnabled else { return }
         guard let transaction = pendingTransaction,
               transaction.phase == .awaitingAcceptance
                 || (transaction.phase == .prepared
@@ -334,41 +309,6 @@ public final class GachaStoreModel: ObservableObject {
             "StartGachaRevealFromNativeUi",
             value: requestId)
         scheduleRevealWatchdog(requestId: requestId, stage: "start")
-    }
-
-    /// Marks the durable transaction ready for acceptance directly from the
-    /// magnetic holder, bypassing the Unity 3D PremiumDisplayCase handoff
-    /// this build intentionally does not use. Idempotent like
-    /// `commitPackOpening`; never generates or replaces a transaction.
-    public func markHolderRevealed(requestId: String) {
-        guard let transaction = pendingTransaction,
-              transaction.requestId == requestId,
-              transaction.phase == .prepared
-        else { return }
-
-        requestStatus = "holder-revealed:\(requestId)"
-        GachaUnityBridge.send(
-            "MarkGachaHolderRevealedFromNativeUi",
-            value: requestId)
-    }
-
-    /// Companion to `acknowledgeReveal()` for the holder-only path: does not
-    /// require `revealPhase == .complete`, since that phase is a Unity-3D-
-    /// director concept this path never sets.
-    public func acknowledgeHolderReveal(requestId: String) {
-        guard let transaction = pendingTransaction,
-              transaction.requestId == requestId,
-              transaction.phase == .awaitingAcceptance,
-              transactionPhase != .acknowledging
-        else { return }
-
-        transactionPhase = .acknowledging
-        requestStatus = "acknowledging:\(requestId)"
-        lastFailureReason = ""
-        GachaUnityBridge.send(
-            "AcknowledgeGachaRevealFromNativeUi",
-            value: requestId)
-        scheduleAcknowledgementRecovery(requestId: requestId)
     }
 
     public func acknowledgeReveal() {

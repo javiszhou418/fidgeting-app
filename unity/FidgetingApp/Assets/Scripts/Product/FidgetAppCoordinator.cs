@@ -3022,29 +3022,6 @@ namespace FidgetingApp.Product
             }
         }
 
-        /// <summary>
-        /// Marks the durable transaction ready for acceptance directly from
-        /// the magnetic holder reveal, without requesting the Unity 3D
-        /// PremiumDisplayCase. This build intentionally bypasses that
-        /// handoff; it does not acquire the display-case camera lease, hide
-        /// product renderers, or touch GachaRevealDirector, and it commits
-        /// through the same idempotent GachaInventory.AcknowledgePending
-        /// contract as the 3D-reveal completion path (HandleGachaRevealCompleted).
-        /// </summary>
-        public void MarkGachaHolderRevealedFromNativeUi(string requestId)
-        {
-            Gacha.GachaTransactionResult result =
-                GachaInventory.MarkRevealAwaitingAcceptance(requestId);
-            PublishGachaState(result);
-            if (!result.Success)
-            {
-                Gacha.GachaPresentationNativeBridge.PublishPhase(
-                    requestId,
-                    "complete",
-                    result.FailureReason);
-            }
-        }
-
         public void AcknowledgeGachaRevealFromNativeUi(string requestId)
         {
             Gacha.GachaTransactionResult result =

@@ -40,17 +40,16 @@ namespace FidgetingApp.Tests.Editor
             StringAssert.DoesNotContain("可购买商品", storefront);
             StringAssert.Contains(".scaledToFill()", storefront);
             StringAssert.Contains(".clipped()", storefront);
-            // GachaThreeDRevealOverlay and commitPackOpening remain defined
-            // (a reversible bypass, not a deletion) but this build's holder
-            // reveals the real prize directly and marks acceptance itself,
-            // so the Unity 3D handoff is never actually reached.
+            // The pack tear hands off to the real Unity 3D
+            // PremiumDisplayCase reveal via commitPackOpening; the Rive
+            // magnetic holder has been removed entirely.
             StringAssert.Contains("GachaThreeDRevealOverlay", storefront);
             StringAssert.Contains("GachaPackOpeningOverlay", storefront);
             StringAssert.Contains("GachaPackTierCarouselOverlay", storefront);
             StringAssert.Contains("GachaPackVisual", storefront);
             StringAssert.Contains("GachaPackOpeningRules.shouldCommit", storefront);
-            StringAssert.Contains("model.markHolderRevealed(requestId: transaction.requestId)", storefront);
-            StringAssert.DoesNotContain("model.commitPackOpening(requestId:", storefront);
+            StringAssert.Contains("model.commitPackOpening(requestId: transaction.requestId)", storefront);
+            StringAssert.DoesNotContain("GachaSingleDrawRiveGate", storefront);
             StringAssert.Contains("gacha-pack-tear-target", storefront);
             StringAssert.Contains("gacha-pack-entry", storefront);
             StringAssert.Contains("gacha-pack-state", storefront);
@@ -64,7 +63,6 @@ namespace FidgetingApp.Tests.Editor
             StringAssert.DoesNotContain("private func play() async", storefront);
             StringAssert.Contains("title: \"收下\"", storefront);
             StringAssert.Contains("model.acknowledgeReveal()", storefront);
-            StringAssert.Contains("model.acknowledgeHolderReveal(requestId: transaction.requestId)", storefront);
             StringAssert.Contains("gacha-store-root", storefront);
             StringAssert.Contains("gacha-runtime-mode", storefront);
             StringAssert.Contains("gacha-ticket-balance", storefront);
@@ -153,7 +151,7 @@ namespace FidgetingApp.Tests.Editor
             StringAssert.Contains("release-rebound", storefront);
             StringAssert.Contains("rebound-complete", storefront);
             StringAssert.Contains("release-commit", storefront);
-            StringAssert.Contains("holder-reveal-accept-ready", storefront);
+            StringAssert.Contains("unity-reveal-request", storefront);
             StringAssert.DoesNotContain("GachaCaseRevealVisual", storefront);
             StringAssert.DoesNotContain("GachaShippingRevealContinuation", storefront);
 

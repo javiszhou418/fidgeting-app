@@ -21,7 +21,6 @@ namespace FidgetingApp.Product.Gacha
         public float PhaseProgress => session?.PhaseProgress ?? 0f;
         public PremiumDisplayCase ActiveCase => session?.DisplayCase;
         public Transform ActivePrize => session?.Prize;
-        public Light AccentLight => session?.SheenLight;
         public string FailureReason { get; private set; } = string.Empty;
         public bool IsPrepared => session != null;
 

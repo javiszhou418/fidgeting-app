@@ -1,14 +1,12 @@
 using System;
-using System.Collections.Generic;
 using System.Globalization;
 using FidgetingApp.DisplayCase;
 using UnityEngine;
-using UnityEngine.Rendering;
 
 namespace FidgetingApp.Product.Gacha
 {
     /// <summary>
-    /// Six visible shipping phases plus an idle setup state and terminal
+    /// Three visible shipping phases plus an idle setup state and terminal
     /// complete state. Native code consumes the lower-camel tokens published
     /// by GachaPresentationNativeBridge; it never owns this clock.
     /// </summary>
@@ -18,10 +16,7 @@ namespace FidgetingApp.Product.Gacha
         Back = 1,
         Front = 2,
         Readable = 3,
-        Exploded = 4,
-        PrizeOnly = 5,
-        Sheen = 6,
-        Complete = 7
+        Complete = 4
     }
 
     public static class GachaRevealTimeline
@@ -32,17 +27,11 @@ namespace FidgetingApp.Product.Gacha
             PremiumDisplayCaseRevealMotion.DurationSeconds
             - BackSeconds
             - FrontSeconds;
-        public const float ExplodedSeconds =
-            PremiumDisplayCaseExplodedLayout.AssemblyDurationSeconds;
-        public const float PrizeOnlySeconds = 0.55f;
-        public const float SheenSeconds = 0.45f;
 
         public const float BackEnd = BackSeconds;
         public const float FrontEnd = BackEnd + FrontSeconds;
         public const float ReadableEnd = FrontEnd + ReadableSeconds;
-        public const float ExplodedEnd = ReadableEnd + ExplodedSeconds;
-        public const float PrizeOnlyEnd = ExplodedEnd + PrizeOnlySeconds;
-        public const float TotalSeconds = PrizeOnlyEnd + SheenSeconds;
+        public const float TotalSeconds = ReadableEnd;
 
         public static GachaRevealPhase PhaseAt(float elapsedSeconds)
         {
@@ -58,18 +47,6 @@ namespace FidgetingApp.Product.Gacha
             if (elapsed < ReadableEnd)
             {
                 return GachaRevealPhase.Readable;
-            }
-            if (elapsed < ExplodedEnd)
-            {
-                return GachaRevealPhase.Exploded;
-            }
-            if (elapsed < PrizeOnlyEnd)
-            {
-                return GachaRevealPhase.PrizeOnly;
-            }
-            if (elapsed < TotalSeconds)
-            {
-                return GachaRevealPhase.Sheen;
             }
             return GachaRevealPhase.Complete;
         }
@@ -89,18 +66,6 @@ namespace FidgetingApp.Product.Gacha
                     elapsedSeconds,
                     FrontEnd,
                     ReadableEnd),
-                GachaRevealPhase.Exploded => Range(
-                    elapsedSeconds,
-                    ReadableEnd,
-                    ExplodedEnd),
-                GachaRevealPhase.PrizeOnly => Range(
-                    elapsedSeconds,
-                    ExplodedEnd,
-                    PrizeOnlyEnd),
-                GachaRevealPhase.Sheen => Range(
-                    elapsedSeconds,
-                    PrizeOnlyEnd,
-                    TotalSeconds),
                 GachaRevealPhase.Complete => 1f,
                 _ => 0f
             };
@@ -113,83 +78,13 @@ namespace FidgetingApp.Product.Gacha
     }
 
     /// <summary>
-    /// Gacha-only exploded-motion envelope for the shared magnetic-slide case.
-    /// The approved reveal, box, content pose and camera remain untouched;
-    /// only the interactive viewer's broad authored layer offsets are reduced
-    /// to a compact, readable fan for the locked portrait viewport. No prize
-    /// is allowed to select a different profile.
-    /// </summary>
-    public static class GachaRevealPresentationMotion
-    {
-        public const float ExplodedOffsetScale = 0.10f;
-
-        public static float OffsetScale(
-            GachaRevealPhase phase,
-            float phaseProgress)
-        {
-            return phase switch
-            {
-                GachaRevealPhase.Exploded => ExplodedOffsetScale,
-                GachaRevealPhase.PrizeOnly => Mathf.Lerp(
-                    ExplodedOffsetScale,
-                    0f,
-                    Smooth(phaseProgress)),
-                _ => 0f
-            };
-        }
-
-        private static float Smooth(float value)
-        {
-            float t = Mathf.Clamp01(value);
-            return t * t * (3f - 2f * t);
-        }
-    }
-
-    /// <summary>
-    /// One shared, prize-independent finishing treatment. The case profile,
-    /// capsule and camera never vary; only the already fitted content grows
-    /// into a readable centered hero while the shell dissolves away.
+    /// One shared, prize-independent finishing treatment. The case, its
+    /// shell and the fitted content never leave 1x scale/full opacity --
+    /// the reveal ends with the case itself settled and fully visible, not
+    /// a bare zoomed prize.
     /// </summary>
     public static class GachaRevealPrizePresentation
     {
-        public const float FinalPrizeScale = 1.45f;
-
-        public static float PrizeScale(
-            GachaRevealPhase phase,
-            float phaseProgress)
-        {
-            return phase switch
-            {
-                GachaRevealPhase.PrizeOnly => Mathf.Lerp(
-                    1f,
-                    FinalPrizeScale,
-                    Smooth(phaseProgress)),
-                GachaRevealPhase.Sheen => FinalPrizeScale,
-                GachaRevealPhase.Complete => FinalPrizeScale,
-                _ => 1f
-            };
-        }
-
-        public static float ShellOpacity(
-            GachaRevealPhase phase,
-            float phaseProgress)
-        {
-            return phase switch
-            {
-                // The shell finishes dissolving during the tail of the
-                // exploded phase. PrizeOnly therefore means exactly what its
-                // native phase token says: only the prize remains. Starting
-                // after the midpoint preserves a clearly readable exploded
-                // keyframe while avoiding a hard cut at the phase boundary.
-                GachaRevealPhase.Exploded => 1f - Smooth(
-                    Mathf.InverseLerp(0.55f, 1f, phaseProgress)),
-                GachaRevealPhase.PrizeOnly => 0f,
-                GachaRevealPhase.Sheen => 0f,
-                GachaRevealPhase.Complete => 0f,
-                _ => 1f
-            };
-        }
-
         public static bool ShowsFrontIdentification(GachaRevealPhase phase)
         {
             return phase != GachaRevealPhase.Back;
@@ -281,19 +176,16 @@ namespace FidgetingApp.Product.Gacha
     public sealed class GachaRevealSession : IDisposable
     {
         private readonly Transform host;
-        private readonly GachaRevealSignature signature;
         private readonly bool ownsPrize;
         private readonly Renderer[] caseRenderers;
         private readonly Renderer[] identificationRenderers;
+        private readonly Renderer[] lidRenderers;
         private readonly Quaternion caseBaseRotation;
         private readonly Vector3 caseBasePosition;
         private readonly Transform prizeFitRoot;
         private readonly Vector3 prizeFitBasePosition;
         private readonly Vector3 prizeFitBaseScale;
-        private readonly List<ShellFadeMaterial> shellFadeMaterials =
-            new List<ShellFadeMaterial>();
         private GachaResolvedPrizePresentation resolvedPrize;
-        private bool shellFadePrepared;
         private bool disposed;
         private bool started;
         private bool completionForwarded;
@@ -301,7 +193,6 @@ namespace FidgetingApp.Product.Gacha
 
         private GachaRevealSession(
             Transform host,
-            GachaRarity rarity,
             PremiumDisplayCaseCollectorLabel collectorLabel,
             Transform prize,
             bool ownsPrize,
@@ -310,16 +201,18 @@ namespace FidgetingApp.Product.Gacha
             this.host = host;
             this.ownsPrize = ownsPrize;
             this.resolvedPrize = resolvedPrize;
-            signature = GachaRevealRules.Signature(rarity);
 
             DisplayCase = PremiumDisplayCaseFactory.Instantiate(host);
             DisplayCase.name = "GachaPremiumDisplayCase";
+            DisplayCase.transform.localScale =
+                Vector3.one * GachaRevealRules.CaseViewportScale;
             caseBasePosition = DisplayCase.transform.localPosition;
             caseBaseRotation = DisplayCase.transform.localRotation;
             caseRenderers = DisplayCase.GetComponentsInChildren<Renderer>(true);
             identificationRenderers = Array.FindAll(
                 caseRenderers,
                 IsFrontIdentificationRenderer);
+            lidRenderers = Array.FindAll(caseRenderers, IsLidRenderer);
             Interaction = DisplayCase.GetComponent<
                 PremiumDisplayCaseInteractionController>();
             if (Interaction == null)
@@ -350,12 +243,9 @@ namespace FidgetingApp.Product.Gacha
             prizeFitBasePosition = prizeFitRoot.localPosition;
             prizeFitBaseScale = prizeFitRoot.localScale;
             DisplayCase.SetRevealProgressForPreview(0f);
-            Interaction.SetExplodedProgress(0f);
 
             Prize = prize;
-            SheenLight = CreateSheenLight(host, signature.LiningColor);
             SetCaseRenderersVisible(true);
-            SheenLight.gameObject.SetActive(false);
         }
 
         public event Action<GachaRevealPhase> phaseChanged;
@@ -364,14 +254,11 @@ namespace FidgetingApp.Product.Gacha
         public PremiumDisplayCase DisplayCase { get; private set; }
         public PremiumDisplayCaseInteractionController Interaction { get; private set; }
         public Transform Prize { get; private set; }
-        public Light SheenLight { get; private set; }
         public GachaRevealPhase Phase { get; private set; } = GachaRevealPhase.Idle;
         public float PhaseProgress => GachaRevealTimeline.PhaseProgress(Phase, elapsed);
         public float ElapsedSeconds => elapsed;
         public bool IsStarted => started;
         public bool IsComplete => Phase == GachaRevealPhase.Complete;
-        public float ShellOpacity { get; private set; } = 1f;
-        public float PrizePresentationScale { get; private set; } = 1f;
         public bool FrontIdentificationVisible { get; private set; } = true;
 
         public static bool TryCreate(
@@ -450,7 +337,6 @@ namespace FidgetingApp.Product.Gacha
             {
                 session = new GachaRevealSession(
                     host,
-                    prize.Rarity,
                     GachaCollectorLabelRules.Create(prize, firstObtainedAtUtc),
                     presentation.Transform,
                     true,
@@ -502,7 +388,6 @@ namespace FidgetingApp.Product.Gacha
 
             return new GachaRevealSession(
                 host,
-                rarity,
                 new PremiumDisplayCaseCollectorLabel(
                     displayName,
                     "GACHA EDITION",
@@ -527,7 +412,6 @@ namespace FidgetingApp.Product.Gacha
             completionForwarded = false;
             elapsed = 0f;
             DisplayCase.gameObject.SetActive(true);
-            SheenLight.gameObject.SetActive(true);
             SetCaseRenderersVisible(true);
             ApplyVisualState();
             SetPhase(GachaRevealPhase.Back);
@@ -583,15 +467,6 @@ namespace FidgetingApp.Product.Gacha
                 DisplayCase = null;
                 Interaction = null;
             }
-            DisposeShellFadeMaterials();
-
-            if (SheenLight != null)
-            {
-                SheenLight.gameObject.SetActive(false);
-                GachaPrizePresentationResolver.DestroyOwned(
-                    SheenLight.gameObject);
-                SheenLight = null;
-            }
 
             if (ownsPrize && resolvedPrize != null)
             {
@@ -628,11 +503,6 @@ namespace FidgetingApp.Product.Gacha
             float caseRevealProgress;
             float yaw;
             float entryOffset;
-            float explodedProgress;
-            float explodedOffsetScale;
-            float shellOpacity;
-            float prizeScale;
-            float sheen;
 
             switch (visualPhase)
             {
@@ -640,80 +510,17 @@ namespace FidgetingApp.Product.Gacha
                     caseRevealProgress = Mathf.Lerp(0.04f, 0.18f, Smooth(progress));
                     yaw = 180f;
                     entryOffset = Mathf.Lerp(0.030f, 0.012f, Smooth(progress));
-                    explodedProgress = 0f;
-                    explodedOffsetScale = 0f;
-                    shellOpacity = 1f;
-                    prizeScale = 1f;
-                    sheen = 0f;
                     break;
                 case GachaRevealPhase.Front:
                     caseRevealProgress = Mathf.Lerp(0.18f, 0.46f, Smooth(progress));
                     yaw = Mathf.Lerp(180f, 0f, EaseOutCubic(progress));
                     entryOffset = Mathf.Lerp(0.012f, 0f, Smooth(progress));
-                    explodedProgress = 0f;
-                    explodedOffsetScale = 0f;
-                    shellOpacity = 1f;
-                    prizeScale = 1f;
-                    sheen = 0f;
                     break;
                 case GachaRevealPhase.Readable:
+                default:
                     caseRevealProgress = Mathf.Lerp(0.46f, 1f, Smooth(progress));
                     yaw = 0f;
                     entryOffset = 0f;
-                    explodedProgress = 0f;
-                    explodedOffsetScale = 0f;
-                    shellOpacity = 1f;
-                    prizeScale = 1f;
-                    sheen = 0f;
-                    break;
-                case GachaRevealPhase.Exploded:
-                    caseRevealProgress = 1f;
-                    yaw = 0f;
-                    entryOffset = 0f;
-                    explodedProgress = PremiumDisplayCaseExplodedLayout
-                        .EaseAssembly(progress);
-                    explodedOffsetScale = GachaRevealPresentationMotion
-                        .OffsetScale(visualPhase, progress);
-                    shellOpacity = GachaRevealPrizePresentation.ShellOpacity(
-                        visualPhase,
-                        progress);
-                    prizeScale = 1f;
-                    sheen = 0f;
-                    break;
-                case GachaRevealPhase.PrizeOnly:
-                    caseRevealProgress = 1f;
-                    yaw = 0f;
-                    entryOffset = 0f;
-                    explodedProgress = 1f;
-                    explodedOffsetScale = GachaRevealPresentationMotion
-                        .OffsetScale(visualPhase, progress);
-                    shellOpacity = GachaRevealPrizePresentation.ShellOpacity(
-                        visualPhase,
-                        progress);
-                    prizeScale = GachaRevealPrizePresentation.PrizeScale(
-                        visualPhase,
-                        progress);
-                    sheen = 0f;
-                    break;
-                case GachaRevealPhase.Sheen:
-                    caseRevealProgress = 1f;
-                    yaw = 0f;
-                    entryOffset = 0f;
-                    explodedProgress = 1f;
-                    explodedOffsetScale = 0f;
-                    shellOpacity = 0f;
-                    prizeScale = GachaRevealPrizePresentation.FinalPrizeScale;
-                    sheen = Mathf.Sin(progress * Mathf.PI);
-                    break;
-                default:
-                    caseRevealProgress = 1f;
-                    yaw = 0f;
-                    entryOffset = 0f;
-                    explodedProgress = 1f;
-                    explodedOffsetScale = 0f;
-                    shellOpacity = 0f;
-                    prizeScale = GachaRevealPrizePresentation.FinalPrizeScale;
-                    sheen = 0f;
                     break;
             }
 
@@ -722,47 +529,17 @@ namespace FidgetingApp.Product.Gacha
             DisplayCase.transform.localRotation = caseBaseRotation
                 * Quaternion.Euler(0f, yaw, 0f);
             DisplayCase.SetRevealProgressForPreview(caseRevealProgress);
-            Interaction.SetExplodedProgress(
-                explodedProgress,
-                explodedOffsetScale);
-            ApplyPrizeScale(prizeScale);
-            SetShellOpacity(shellOpacity);
             SetFrontIdentificationVisible(
                 GachaRevealPrizePresentation.ShowsFrontIdentification(
                     visualPhase));
-            ApplySheen(progress, sheen);
-        }
-
-        private void ApplyPrizeScale(float scale)
-        {
-            PrizePresentationScale = Mathf.Max(0.01f, scale);
-            if (prizeFitRoot == null)
-            {
-                return;
-            }
-
-            // PremiumDisplayCase fit position is -bounds.center * fitScale.
-            // Scaling both values by the same factor keeps the fitted bounds
-            // at the exact shared capsule/camera center instead of drifting.
-            prizeFitRoot.localScale = prizeFitBaseScale
-                * PrizePresentationScale;
-            prizeFitRoot.localPosition = prizeFitBasePosition
-                * PrizePresentationScale;
-        }
-
-        private void ApplySheen(float progress, float envelope)
-        {
-            if (SheenLight == null)
-            {
-                return;
-            }
-            SheenLight.transform.localPosition = new Vector3(
-                Mathf.Lerp(-0.12f, 0.12f, progress),
-                0.08f,
-                -0.16f);
-            SheenLight.intensity = envelope
-                * signature.AccentIntensity
-                * GachaRevealRules.AccentLightMaxIntensity;
+            // The shared reveal envelope slides the lid fully open by this
+            // fraction of caseRevealProgress (PremiumDisplayCaseRevealMotion's
+            // lidOpen curve). Gacha's compact viewport scale shortens the
+            // lid's resting slide-away distance enough that it can graze back
+            // into frame, so it is disabled once retracted instead of relying
+            // on distance alone to hide it.
+            const float lidFullyOpenProgress = 0.38f;
+            SetLidRenderersVisible(caseRevealProgress < lidFullyOpenProgress);
         }
 
         private void SetCaseRenderersVisible(bool visible)
@@ -780,24 +557,9 @@ namespace FidgetingApp.Product.Gacha
             }
         }
 
-        private void SetShellOpacity(float opacity)
-        {
-            ShellOpacity = Mathf.Clamp01(opacity);
-            if (ShellOpacity < 0.999f)
-            {
-                EnsureShellFadeMaterials();
-            }
-
-            for (int index = 0; index < shellFadeMaterials.Count; index++)
-            {
-                shellFadeMaterials[index].SetOpacity(ShellOpacity);
-            }
-            SetCaseRenderersVisible(ShellOpacity > 0.001f);
-        }
-
         private void SetFrontIdentificationVisible(bool visible)
         {
-            FrontIdentificationVisible = visible && ShellOpacity > 0.001f;
+            FrontIdentificationVisible = visible;
             for (int index = 0; index < identificationRenderers.Length; index++)
             {
                 if (identificationRenderers[index] != null)
@@ -808,56 +570,43 @@ namespace FidgetingApp.Product.Gacha
             }
         }
 
-        private void EnsureShellFadeMaterials()
+        private void SetLidRenderersVisible(bool visible)
         {
-            if (shellFadePrepared)
+            for (int index = 0; index < lidRenderers.Length; index++)
             {
-                return;
-            }
-            shellFadePrepared = true;
-
-            for (int rendererIndex = 0;
-                 rendererIndex < caseRenderers.Length;
-                 rendererIndex++)
-            {
-                Renderer renderer = caseRenderers[rendererIndex];
-                if (renderer == null)
+                if (lidRenderers[index] != null)
                 {
-                    continue;
+                    lidRenderers[index].enabled = visible;
                 }
-
-                Material[] originals = renderer.sharedMaterials;
-                var clones = new Material[originals.Length];
-                for (int materialIndex = 0;
-                     materialIndex < originals.Length;
-                     materialIndex++)
-                {
-                    Material original = originals[materialIndex];
-                    if (original == null)
-                    {
-                        continue;
-                    }
-
-                    var clone = new Material(original)
-                    {
-                        name = original.name + "_GachaShellFade"
-                    };
-                    clones[materialIndex] = clone;
-                    shellFadeMaterials.Add(new ShellFadeMaterial(clone));
-                }
-                renderer.sharedMaterials = clones;
             }
         }
 
-        private void DisposeShellFadeMaterials()
+        /// <summary>
+        /// The shared case hides its lid by sliding Layer_08_BoxLid outside
+        /// the shot once opened (see GachaBuild42ShippingCapture's
+        /// IsTransientBoxLid) rather than disabling it. That escape distance
+        /// is expressed in the case's own local space, so gacha's compact
+        /// viewport scale shrinks it along with everything else and the lid
+        /// can graze back into frame. Disabling it explicitly here is scoped
+        /// to gacha only; the shared component's default behavior is
+        /// unchanged for the Library case.
+        /// </summary>
+        private static bool IsLidRenderer(Renderer renderer)
         {
-            for (int index = shellFadeMaterials.Count - 1;
-                 index >= 0;
-                 index--)
+            if (renderer == null)
             {
-                shellFadeMaterials[index].Dispose();
+                return false;
             }
-            shellFadeMaterials.Clear();
+            for (Transform cursor = renderer.transform;
+                 cursor != null;
+                 cursor = cursor.parent)
+            {
+                if (cursor.name == "BoxLidRoot")
+                {
+                    return true;
+                }
+            }
+            return false;
         }
 
         private static bool IsFrontIdentificationRenderer(Renderer renderer)
@@ -884,121 +633,6 @@ namespace FidgetingApp.Product.Gacha
                     StringComparison.Ordinal);
         }
 
-        private sealed class ShellFadeMaterial : IDisposable
-        {
-            private static readonly int BaseColorId =
-                Shader.PropertyToID("_BaseColor");
-            private static readonly int ColorId = Shader.PropertyToID("_Color");
-            private static readonly int OpacityId =
-                Shader.PropertyToID("_Opacity");
-            private static readonly int EtchOpacityId =
-                Shader.PropertyToID("_EtchOpacity");
-
-            private Material material;
-            private readonly bool hasBaseColor;
-            private readonly bool hasColor;
-            private readonly bool hasOpacity;
-            private readonly bool hasEtchOpacity;
-            private readonly Color baseColor;
-            private readonly Color color;
-            private readonly float opacity;
-            private readonly float etchOpacity;
-
-            public ShellFadeMaterial(Material material)
-            {
-                this.material = material;
-                hasBaseColor = material.HasProperty(BaseColorId);
-                hasColor = material.HasProperty(ColorId);
-                hasOpacity = material.HasProperty(OpacityId);
-                hasEtchOpacity = material.HasProperty(EtchOpacityId);
-                baseColor = hasBaseColor
-                    ? material.GetColor(BaseColorId)
-                    : Color.white;
-                color = hasColor
-                    ? material.GetColor(ColorId)
-                    : Color.white;
-                opacity = hasOpacity ? material.GetFloat(OpacityId) : 1f;
-                etchOpacity = hasEtchOpacity
-                    ? material.GetFloat(EtchOpacityId)
-                    : 1f;
-                ConfigureTransparent(material);
-            }
-
-            public void SetOpacity(float value)
-            {
-                if (material == null)
-                {
-                    return;
-                }
-                float alpha = Mathf.Clamp01(value);
-                if (hasBaseColor)
-                {
-                    material.SetColor(BaseColorId, WithAlpha(baseColor, alpha));
-                }
-                if (hasColor)
-                {
-                    material.SetColor(ColorId, WithAlpha(color, alpha));
-                }
-                if (hasOpacity)
-                {
-                    material.SetFloat(OpacityId, opacity * alpha);
-                }
-                if (hasEtchOpacity)
-                {
-                    material.SetFloat(EtchOpacityId, etchOpacity * alpha);
-                }
-            }
-
-            public void Dispose()
-            {
-                if (material == null)
-                {
-                    return;
-                }
-                GachaPrizePresentationResolver.DestroyOwned(material);
-                material = null;
-            }
-
-            private static void ConfigureTransparent(Material target)
-            {
-                if (target.HasProperty("_Surface"))
-                {
-                    target.SetFloat("_Surface", 1f);
-                    target.EnableKeyword("_SURFACE_TYPE_TRANSPARENT");
-                }
-                if (target.HasProperty("_Mode"))
-                {
-                    target.SetFloat("_Mode", 3f);
-                    target.EnableKeyword("_ALPHABLEND_ON");
-                }
-                if (target.HasProperty("_SrcBlend"))
-                {
-                    target.SetFloat("_SrcBlend", (float)BlendMode.SrcAlpha);
-                }
-                if (target.HasProperty("_DstBlend"))
-                {
-                    target.SetFloat(
-                        "_DstBlend",
-                        (float)BlendMode.OneMinusSrcAlpha);
-                }
-                if (target.HasProperty("_ZWrite"))
-                {
-                    target.SetFloat("_ZWrite", 0f);
-                }
-                target.SetOverrideTag("RenderType", "Transparent");
-                target.renderQueue = (int)RenderQueue.Transparent;
-            }
-
-            private static Color WithAlpha(Color source, float opacity)
-            {
-                return new Color(
-                    source.r,
-                    source.g,
-                    source.b,
-                    source.a * opacity);
-            }
-        }
-
         private void SetPhase(GachaRevealPhase value)
         {
             if (Phase == value)
@@ -1007,19 +641,6 @@ namespace FidgetingApp.Product.Gacha
             }
             Phase = value;
             phaseChanged?.Invoke(value);
-        }
-
-        private static Light CreateSheenLight(Transform parent, Color color)
-        {
-            var lightObject = new GameObject("GachaPrizeSheenLight");
-            lightObject.transform.SetParent(parent, false);
-            Light light = lightObject.AddComponent<Light>();
-            light.type = LightType.Point;
-            light.color = color;
-            light.range = 0.60f;
-            light.intensity = 0f;
-            light.shadows = LightShadows.None;
-            return light;
         }
 
         private static float Smooth(float value)

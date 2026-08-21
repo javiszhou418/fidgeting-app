@@ -37,10 +37,7 @@ namespace FidgetingApp.Product.Gacha.Editor
         {
             GachaRevealPhase.Back,
             GachaRevealPhase.Front,
-            GachaRevealPhase.Readable,
-            GachaRevealPhase.Exploded,
-            GachaRevealPhase.PrizeOnly,
-            GachaRevealPhase.Sheen
+            GachaRevealPhase.Readable
         };
 
         [Serializable]
@@ -112,8 +109,8 @@ namespace FidgetingApp.Product.Gacha.Editor
             public bool rendererOnly;
             public bool noPhysics;
             public bool noHapticComponents;
-            public bool idleRotationDisabled;
-            public float idleRotationErrorDegrees;
+            public bool idleRotationEnabled;
+            public float idleRotationPeriodErrorDegrees;
             public string caseResource;
             public string caseHierarchySignature;
             public string capsulePreset;
@@ -316,12 +313,6 @@ namespace FidgetingApp.Product.Gacha.Editor
                     + GachaRevealTimeline.FrontEnd) * 0.5f,
                 GachaRevealPhase.Readable => (GachaRevealTimeline.FrontEnd
                     + GachaRevealTimeline.ReadableEnd) * 0.5f,
-                GachaRevealPhase.Exploded => (GachaRevealTimeline.ReadableEnd
-                    + GachaRevealTimeline.ExplodedEnd) * 0.5f,
-                GachaRevealPhase.PrizeOnly => (GachaRevealTimeline.ExplodedEnd
-                    + GachaRevealTimeline.PrizeOnlyEnd) * 0.5f,
-                GachaRevealPhase.Sheen => (GachaRevealTimeline.PrizeOnlyEnd
-                    + GachaRevealTimeline.TotalSeconds) * 0.5f,
                 _ => throw new ArgumentOutOfRangeException(nameof(phase), phase, null)
             };
         }
@@ -388,10 +379,14 @@ namespace FidgetingApp.Product.Gacha.Editor
                 prizeObject = director.ActivePrize.gameObject;
                 Renderer[] prizeRenderers = prizeObject.GetComponentsInChildren<Renderer>(
                     true);
+                // Layer_08_BoxLid is excluded here too: gacha explicitly
+                // disables it once retracted (see IsTransientBoxLid below),
+                // so it is not part of the settled shell this gate verifies.
                 Renderer[] shellRenderers = caseObject
                     .GetComponentsInChildren<Renderer>(true)
                     .Where(renderer => !renderer.transform.IsChildOf(
-                        prizeObject.transform))
+                        prizeObject.transform)
+                        && !IsTransientBoxLid(renderer.transform, caseObject.transform))
                     .ToArray();
 
                 bool rendererOnly = GachaPrizePresentationResolver.IsRendererOnly(
@@ -406,7 +401,7 @@ namespace FidgetingApp.Product.Gacha.Editor
                     .ToArray();
                 bool noHaptics = componentTypes.All(value =>
                     value.IndexOf("Haptic", StringComparison.OrdinalIgnoreCase) < 0);
-                bool idleRotationDisabled = !GachaPrizePresentationResolver
+                bool idleRotationEnabled = GachaPrizePresentationResolver
                     .SharedContentOptions.IdleRotationEnabled;
                 bool uniformFiniteFit = IsUniformFinitePositive(
                     director.ActiveCase.ContentFitScale);
@@ -500,14 +495,14 @@ namespace FidgetingApp.Product.Gacha.Editor
                         ref elapsed,
                         GachaRevealTimeline.TotalSeconds);
 
+                    director.ActiveCase.AdvanceAnimation(
+                        PremiumDisplayCaseRevealMotion.DurationSeconds + 0.1f);
                     Quaternion idleBefore = director.ActiveCase
                         .ContentOrbitRotation;
                     director.ActiveCase.AdvanceAnimation(
-                        PremiumDisplayCaseRevealMotion.DurationSeconds + 0.1f);
-                    director.ActiveCase.AdvanceAnimation(
                         GachaPrizePresentationResolver.SharedContentOptions
                             .IdleRotationPeriodSeconds * 2f);
-                    float idleRotationError = Quaternion.Angle(
+                    float idleRotationPeriodError = Quaternion.Angle(
                         idleBefore,
                         director.ActiveCase.ContentOrbitRotation);
 
@@ -530,8 +525,8 @@ namespace FidgetingApp.Product.Gacha.Editor
                         rendererOnly = rendererOnly,
                         noPhysics = noPhysics,
                         noHapticComponents = noHaptics,
-                        idleRotationDisabled = idleRotationDisabled,
-                        idleRotationErrorDegrees = idleRotationError,
+                        idleRotationEnabled = idleRotationEnabled,
+                        idleRotationPeriodErrorDegrees = idleRotationPeriodError,
                         caseResource = PremiumDisplayCaseFactory.ResourcesPath,
                         caseHierarchySignature = hierarchySignature,
                         capsulePreset = director.ActiveCase.CapsulePreset.ToString(),
@@ -566,10 +561,10 @@ namespace FidgetingApp.Product.Gacha.Editor
                         && result.rendererOnly
                         && result.noPhysics
                         && result.noHapticComponents
-                        && result.idleRotationDisabled
-                        && result.idleRotationErrorDegrees < 0.001f
+                        && result.idleRotationEnabled
+                        && result.idleRotationPeriodErrorDegrees < 0.001f
                         && result.capsulePreset == PremiumDisplayCaseCapsulePreset
-                            .CollectorSlabLarge.ToString()
+                            .CollectorSlabCompact.ToString()
                         && result.uniformFiniteFit
                         && result.cameraStableAfterTwoFrames
                         && result.exactPhaseOrder
@@ -620,7 +615,6 @@ namespace FidgetingApp.Product.Gacha.Editor
                 string path = Path.Combine(phaseOutput, filename);
                 CapturedImage image = recorder.Render(measureVisiblePixels: true);
                 File.WriteAllBytes(path, image.Png);
-                bool expectShell = sample.Phase <= GachaRevealPhase.Exploded;
                 bool shellVisibility;
                 if (sample.Phase == GachaRevealPhase.Back)
                 {
@@ -636,8 +630,7 @@ namespace FidgetingApp.Product.Gacha.Editor
                 else
                 {
                     shellVisibility = shellRenderers.Length > 0
-                        && shellRenderers.All(
-                            renderer => renderer.enabled == expectShell);
+                        && shellRenderers.All(renderer => renderer.enabled);
                 }
                 bool prizeVisible = prizeRenderers.Length > 0
                     && prizeRenderers.All(renderer => renderer.enabled);

@@ -67,9 +67,6 @@ namespace FidgetingApp.Product.Gacha
                 GachaRevealPhase.Back => "back",
                 GachaRevealPhase.Front => "front",
                 GachaRevealPhase.Readable => "readable",
-                GachaRevealPhase.Exploded => "exploded",
-                GachaRevealPhase.PrizeOnly => "prizeOnly",
-                GachaRevealPhase.Sheen => "sheen",
                 GachaRevealPhase.Complete => "complete",
                 _ => "idle"
             };

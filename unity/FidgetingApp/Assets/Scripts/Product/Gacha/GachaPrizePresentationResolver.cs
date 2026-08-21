@@ -94,7 +94,7 @@ namespace FidgetingApp.Product.Gacha
     {
         public static readonly PremiumDisplayCaseContentOptions
             SharedContentOptions = new PremiumDisplayCaseContentOptions(
-                false,
+                true,
                 PremiumDisplayCaseProductProfiles.SharedContentOptions
                     .IdleRotationPeriodSeconds,
                 PremiumDisplayCaseProductProfiles.SharedContentOptions

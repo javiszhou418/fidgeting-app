@@ -33,9 +33,9 @@ namespace FidgetingApp.Tests.Editor
                     prize.ContentReference);
                 Assert.That(descriptor.DisplayName, Is.EqualTo(prize.DisplayName));
                 Assert.That(descriptor.CapsulePreset,
-                    Is.EqualTo(PremiumDisplayCaseCapsulePreset.CollectorSlabLarge));
-                Assert.That(descriptor.ContentOptions.IdleRotationEnabled, Is.False,
-                    "Gacha prizes must not self-spin.");
+                    Is.EqualTo(PremiumDisplayCaseCapsulePreset.CollectorSlabCompact));
+                Assert.That(descriptor.ContentOptions.IdleRotationEnabled, Is.True,
+                    "Gacha prizes float once revealed instead of holding still.");
                 Assert.That(descriptor.ContentOptions.InitialEulerAngles,
                     Is.EqualTo(PremiumDisplayCaseProductProfiles
                         .SharedContentOptions.InitialEulerAngles));
@@ -198,85 +198,33 @@ namespace FidgetingApp.Tests.Editor
             foreach (GachaPrizeKind kind in Enum.GetValues(typeof(GachaPrizeKind)))
             {
                 Assert.That(GachaRevealRules.CapsulePresetFor(kind),
-                    Is.EqualTo(PremiumDisplayCaseCapsulePreset.CollectorSlabLarge),
+                    Is.EqualTo(PremiumDisplayCaseCapsulePreset.CollectorSlabCompact),
                     kind.ToString());
             }
             Assert.That(GachaRevealRules.TotalRevealSeconds(GachaRarity.Standard),
                 Is.EqualTo(GachaRevealTimeline.TotalSeconds).Within(0.000001f));
             Assert.That(GachaRevealRules.TotalRevealSeconds(GachaRarity.Heirloom),
                 Is.EqualTo(GachaRevealTimeline.TotalSeconds).Within(0.000001f),
-                "Rarity may tint the sheen but must not fork the timeline.");
+                "Rarity may tint the reveal but must not fork the timeline.");
         }
 
         [Test]
-        public void GachaRevealUsesOneCompactSharedCaseMotionEnvelope()
-        {
-            Assert.That(GachaRevealPresentationMotion.ExplodedOffsetScale,
-                Is.EqualTo(0.10f).Within(0.000001f));
-            Assert.That(GachaRevealPresentationMotion.OffsetScale(
-                    GachaRevealPhase.Exploded,
-                    0.5f),
-                Is.EqualTo(GachaRevealPresentationMotion.ExplodedOffsetScale)
-                    .Within(0.000001f));
-            Assert.That(GachaRevealPresentationMotion.OffsetScale(
-                    GachaRevealPhase.PrizeOnly,
-                    0f),
-                Is.EqualTo(GachaRevealPresentationMotion.ExplodedOffsetScale)
-                    .Within(0.000001f));
-            Assert.That(GachaRevealPresentationMotion.OffsetScale(
-                    GachaRevealPhase.PrizeOnly,
-                    1f),
-                Is.Zero.Within(0.000001f),
-                "The prize must settle back to the shared case center before sheen.");
-            Assert.That(GachaRevealPresentationMotion.OffsetScale(
-                    GachaRevealPhase.Sheen,
-                    0.5f),
-                Is.Zero.Within(0.000001f));
-        }
-
-        [Test]
-        public void SharedPrizeFinishScalesAndCrossFadesWithoutChangingTimeline()
+        public void GachaRevealSettlesOnTheReadableCaseWithoutForkingTheTimeline()
         {
             Assert.That(GachaRevealTimeline.TotalSeconds,
-                Is.EqualTo(4.55f).Within(0.000001f));
-            Assert.That(GachaRevealPrizePresentation.FinalPrizeScale,
-                Is.EqualTo(1.45f).Within(0.000001f));
-            Assert.That(GachaRevealPrizePresentation.PrizeScale(
-                    GachaRevealPhase.PrizeOnly,
-                    0f),
-                Is.EqualTo(1f).Within(0.000001f));
-            Assert.That(GachaRevealPrizePresentation.PrizeScale(
-                    GachaRevealPhase.PrizeOnly,
-                    0.5f),
-                Is.EqualTo(1.225f).Within(0.000001f));
-            Assert.That(GachaRevealPrizePresentation.PrizeScale(
-                    GachaRevealPhase.Sheen,
-                    0f),
-                Is.EqualTo(1.45f).Within(0.000001f));
-            Assert.That(GachaRevealPrizePresentation.ShellOpacity(
-                    GachaRevealPhase.Exploded,
-                    0.5f),
-                Is.EqualTo(1f).Within(0.000001f));
-            Assert.That(GachaRevealPrizePresentation.ShellOpacity(
-                    GachaRevealPhase.Exploded,
-                    1f),
-                Is.Zero.Within(0.000001f));
-            Assert.That(GachaRevealPrizePresentation.ShellOpacity(
-                    GachaRevealPhase.PrizeOnly,
-                    0.5f),
-                Is.Zero.Within(0.000001f));
-            Assert.That(GachaRevealPrizePresentation.ShellOpacity(
-                    GachaRevealPhase.Sheen,
-                    0f),
-                Is.Zero.Within(0.000001f));
+                Is.EqualTo(GachaRevealTimeline.ReadableEnd).Within(0.000001f));
             Assert.That(GachaRevealPrizePresentation
                 .ShowsFrontIdentification(GachaRevealPhase.Back), Is.False);
             Assert.That(GachaRevealPrizePresentation
                 .ShowsFrontIdentification(GachaRevealPhase.Front), Is.True);
+            Assert.That(GachaRevealPrizePresentation
+                .ShowsFrontIdentification(GachaRevealPhase.Readable), Is.True);
+            Assert.That(GachaRevealPrizePresentation
+                .ShowsFrontIdentification(GachaRevealPhase.Complete), Is.True);
         }
 
         [Test]
-        public void PrepareDoesNotStartAndStartPublishesStrictSixPhaseOrder()
+        public void PrepareDoesNotStartAndStartPublishesStrictPhaseOrder()
         {
             var host = new GameObject("director-host");
             try
@@ -312,9 +260,6 @@ namespace FidgetingApp.Tests.Editor
                     GachaRevealPhase.Back,
                     GachaRevealPhase.Front,
                     GachaRevealPhase.Readable,
-                    GachaRevealPhase.Exploded,
-                    GachaRevealPhase.PrizeOnly,
-                    GachaRevealPhase.Sheen,
                     GachaRevealPhase.Complete
                 }));
                 Assert.That(completions, Is.EqualTo(1));
@@ -328,7 +273,7 @@ namespace FidgetingApp.Tests.Editor
         }
 
         [Test]
-        public void BackHidesFrontLabelsAndPrizeOnlySmoothlyRevealsCenteredPrize()
+        public void BackHidesFrontLabelsAndCaseAndPrizeStayTogetherThroughComplete()
         {
             var host = new GameObject("director-host");
             try
@@ -357,65 +302,38 @@ namespace FidgetingApp.Tests.Editor
                     Is.True,
                     "Back entry must not expose upside-down front labels.");
 
-                float fadedExplodedTime = GachaRevealTimeline.ReadableEnd
-                    + GachaRevealTimeline.ExplodedSeconds * 0.8f;
-                director.Tick(fadedExplodedTime);
-
-                Assert.That(director.Phase,
-                    Is.EqualTo(GachaRevealPhase.Exploded));
-
                 var prizeSet = new HashSet<Renderer>(director.ActivePrize
                     .GetComponentsInChildren<Renderer>(true));
+                // The lid retracts off-frame once open (see
+                // GachaBuild42ShippingCapture's IsTransientBoxLid) and gacha's
+                // compact viewport scale shortens that escape distance enough
+                // that it is explicitly disabled once retracted -- it is not
+                // part of the settled shell this test is verifying.
                 Renderer[] shellRenderers = director.ActiveCase
                     .GetComponentsInChildren<Renderer>(true)
-                    .Where(renderer => !prizeSet.Contains(renderer))
+                    .Where(renderer => !prizeSet.Contains(renderer)
+                        && !IsUnderNamedAncestor(renderer.transform, "BoxLidRoot"))
                     .ToArray();
                 Assert.That(shellRenderers, Is.Not.Empty);
-                Assert.That(shellRenderers.Any(renderer => renderer.enabled),
-                    Is.True,
-                    "The shell must remain visible while it dissolves.");
-                bool sawTranslucentShell = shellRenderers
-                    .Where(renderer => renderer.enabled)
-                    .SelectMany(renderer => renderer.sharedMaterials)
-                    .Where(material => material != null
-                        && material.HasProperty("_BaseColor"))
-                    .Any(material => material.GetColor("_BaseColor").a < 0.8f);
-                Assert.That(sawTranslucentShell, Is.True,
-                    "Exploded must cross-fade cloned shell materials, not hard-cut.");
 
-                float prizeOnlyMidpoint = GachaRevealTimeline.ExplodedEnd
-                    + GachaRevealTimeline.PrizeOnlySeconds * 0.5f;
-                director.Tick(prizeOnlyMidpoint - fadedExplodedTime);
+                director.Tick(GachaRevealTimeline.TotalSeconds + 1f);
 
                 Assert.That(director.Phase,
-                    Is.EqualTo(GachaRevealPhase.PrizeOnly));
+                    Is.EqualTo(GachaRevealPhase.Complete));
+                Assert.That(identification.All(renderer => renderer.enabled),
+                    Is.True,
+                    "The front labels must be visible once the case settles.");
+                Assert.That(shellRenderers.All(renderer => renderer.enabled),
+                    Is.True,
+                    "The case shell must remain on screen instead of dissolving.");
                 Renderer[] prizeRenderers = director.ActivePrize
                     .GetComponentsInChildren<Renderer>(true);
                 Assert.That(prizeRenderers, Is.Not.Empty);
                 Assert.That(prizeRenderers.All(renderer => renderer.enabled),
-                    Is.True,
-                    "PrizeOnly must never hide the prize with the shell.");
-
-                Assert.That(shellRenderers.All(renderer => !renderer.enabled),
-                    Is.True,
-                    "PrizeOnly must contain only the prize after the exploded fade.");
-                Assert.That(fitRoot.localScale,
-                    Is.EqualTo(fittedScale * 1.225f));
-                Assert.That(fitRoot.localPosition,
-                    Is.EqualTo(fittedPosition * 1.225f),
-                    "Fit scale and center offset must grow together without drift.");
-
-                director.Tick(
-                    GachaRevealTimeline.PrizeOnlySeconds * 0.5f + 0.01f);
-                Assert.That(director.Phase, Is.EqualTo(GachaRevealPhase.Sheen));
-                Assert.That(shellRenderers.All(renderer => !renderer.enabled),
-                    Is.True,
-                    "The shell must be fully gone before the sheen phase.");
-                Assert.That(prizeRenderers.All(renderer => renderer.enabled),
                     Is.True);
-                Assert.That(fitRoot.localScale,
-                    Is.EqualTo(fittedScale
-                        * GachaRevealPrizePresentation.FinalPrizeScale));
+                Assert.That(fitRoot.localScale, Is.EqualTo(fittedScale),
+                    "The fitted prize must never be re-scaled after the reveal.");
+                Assert.That(fitRoot.localPosition, Is.EqualTo(fittedPosition));
             }
             finally
             {
@@ -471,6 +389,18 @@ namespace FidgetingApp.Tests.Editor
             return root.GetComponentsInChildren<Transform>(true)
                 .Where(item => item.name.StartsWith(prefix, StringComparison.Ordinal))
                 .ToList();
+        }
+
+        private static bool IsUnderNamedAncestor(Transform item, string name)
+        {
+            for (Transform cursor = item; cursor != null; cursor = cursor.parent)
+            {
+                if (cursor.name == name)
+                {
+                    return true;
+                }
+            }
+            return false;
         }
     }
 }

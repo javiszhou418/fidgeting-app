@@ -30,25 +30,22 @@ namespace FidgetingApp.Tests.Editor
                     Is.True,
                     prize.Id);
                 Assert.That(descriptor.CapsulePreset,
-                    Is.EqualTo(PremiumDisplayCaseCapsulePreset.CollectorSlabLarge));
+                    Is.EqualTo(PremiumDisplayCaseCapsulePreset.CollectorSlabCompact));
                 Assert.That(descriptor.ContentOptions.IdleRotationEnabled,
-                    Is.False,
-                    prize.Id + " must never self-spin in the reveal.");
+                    Is.True,
+                    prize.Id + " must float once the reveal settles.");
             }
         }
 
         [Test]
-        public void CaptureSamplesStrictSixPhaseMidpointsFromRuntimeTimeline()
+        public void CaptureSamplesStrictPhaseMidpointsFromRuntimeTimeline()
         {
             Assert.That(GachaBuild42ShippingCapture.VisiblePhaseOrder,
                 Is.EqualTo(new[]
                 {
                     GachaRevealPhase.Back,
                     GachaRevealPhase.Front,
-                    GachaRevealPhase.Readable,
-                    GachaRevealPhase.Exploded,
-                    GachaRevealPhase.PrizeOnly,
-                    GachaRevealPhase.Sheen
+                    GachaRevealPhase.Readable
                 }));
 
             foreach (GachaRevealPhase phase in
