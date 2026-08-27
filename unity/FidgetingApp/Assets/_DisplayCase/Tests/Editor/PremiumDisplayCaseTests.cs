@@ -17,7 +17,7 @@ namespace FidgetingApp.DisplayCase.Tests.Editor
             "Assets/Resources/Gacha/ThreeBladeDisplayPrize.prefab";
 
         [Test]
-        public void ContentFit_UsesEightPercentPaddingAndCentersAllAxes()
+        public void ContentFit_UsesThirtyPercentPaddingAndCentersAllAxes()
         {
             Bounds bounds = new Bounds(
                 new Vector3(1f, 2f, -0.5f),
@@ -30,7 +30,7 @@ namespace FidgetingApp.DisplayCase.Tests.Editor
                 bounds,
                 capsule);
 
-            float expectedScale = capsule.Diameter * 0.92f / 4f;
+            float expectedScale = capsule.Height * 0.70f / 4f;
             Assert.That(result.UniformScale, Is.EqualTo(expectedScale).Within(0.000001f));
             Assert.That(Vector3.SqrMagnitude(
                 result.CenterOffset - (-bounds.center * expectedScale)),
@@ -38,7 +38,24 @@ namespace FidgetingApp.DisplayCase.Tests.Editor
         }
 
         [Test]
-        public void CapsulePresets_AreNeutralAndExposeDifferentDepths()
+        public void ContentFit_DepthDoesNotShrinkAThickSlenderCollectible()
+        {
+            Bounds bounds = new Bounds(Vector3.zero,
+                new Vector3(0.050f, 0.018f, 0.016f));
+            PremiumDisplayCaseCapsuleDimensions slab =
+                PremiumDisplayCaseCapsulePresets.Resolve(
+                    PremiumDisplayCaseCapsulePreset.CollectorSlabLarge);
+
+            PremiumDisplayCaseFitResult result = PremiumDisplayCaseLayout.Fit(
+                bounds,
+                slab);
+
+            Assert.That(0.050f * result.UniformScale,
+                Is.EqualTo(slab.Width * 0.70f).Within(0.0001f));
+        }
+
+        [Test]
+        public void CapsulePresets_ExposeLegacyShapesAndCollectorSlabDimensions()
         {
             PremiumDisplayCaseCapsuleDimensions circular =
                 PremiumDisplayCaseCapsulePresets.Resolve(
@@ -49,6 +66,9 @@ namespace FidgetingApp.DisplayCase.Tests.Editor
             PremiumDisplayCaseCapsuleDimensions rounded =
                 PremiumDisplayCaseCapsulePresets.Resolve(
                     PremiumDisplayCaseCapsulePreset.RoundedSquareStandard);
+            PremiumDisplayCaseCapsuleDimensions slab =
+                PremiumDisplayCaseCapsulePresets.Resolve(
+                    PremiumDisplayCaseCapsulePreset.CollectorSlabLarge);
 
             Assert.That(circular.Shape,
                 Is.EqualTo(PremiumDisplayCaseCapsuleShape.Circular));
@@ -56,6 +76,11 @@ namespace FidgetingApp.DisplayCase.Tests.Editor
                 Is.EqualTo(PremiumDisplayCaseCapsuleShape.RoundedSquare));
             Assert.That(circularDeep.Depth, Is.GreaterThan(circular.Depth));
             Assert.That(circular.Diameter, Is.EqualTo(0.084f).Within(0.0001f));
+            Assert.That(slab.Shape,
+                Is.EqualTo(PremiumDisplayCaseCapsuleShape.RoundedSquare));
+            Assert.That(slab.Width, Is.EqualTo(0.180f).Within(0.0001f));
+            Assert.That(slab.Height, Is.EqualTo(0.198f).Within(0.0001f));
+            Assert.That(slab.Depth, Is.EqualTo(0.048f).Within(0.0001f));
         }
 
         [Test]
@@ -146,15 +171,17 @@ namespace FidgetingApp.DisplayCase.Tests.Editor
                 PremiumDisplayCaseProductProfiles.Resolve(
                     ProductCatalog.MagneticSlideTileModelId);
             Assert.That(magneticBaseline.CapsulePreset,
-                Is.EqualTo(PremiumDisplayCaseCapsulePreset.RoundedSquareDeep));
+                Is.EqualTo(PremiumDisplayCaseCapsulePreset.CollectorSlabLarge));
             Assert.That(magneticBaseline.ContentOptions.InitialEulerAngles,
                 Is.EqualTo(new Vector3(90f, -8f, 0f)));
-            Assert.That(magneticBaseline.ContentOptions.IdleRotationPeriodSeconds,
-                Is.EqualTo(6f).Within(0.0001f));
+            Assert.That(magneticBaseline.ContentOptions.IdleRotationEnabled,
+                Is.False);
             Assert.That(magneticBaseline.SceneRootName,
                 Is.EqualTo("EDC_Root"));
             Assert.That(magneticBaseline.EnglishDisplayName,
                 Is.EqualTo("MAGNETIC SLIDE"));
+            Assert.That(magneticBaseline.EditionName,
+                Is.EqualTo("BEAD-BLASTED GRAPHITE"));
 
             foreach (PremiumDisplayCaseProductProfile profile in profiles)
             {
@@ -169,6 +196,7 @@ namespace FidgetingApp.DisplayCase.Tests.Editor
                         .IdleRotationPeriodSeconds).Within(0.0001f),
                     profile.ModelId);
                 Assert.That(profile.SceneRootName, Is.Not.Empty, profile.ModelId);
+                Assert.That(profile.EditionName, Is.Not.Empty, profile.ModelId);
             }
             Assert.That(profiles
                     .Where(profile => profile.ModelId
@@ -198,7 +226,7 @@ namespace FidgetingApp.DisplayCase.Tests.Editor
         }
 
         [Test]
-        public void LaserIdentification_IsCenteredAndUsesCurrentClampedLevel()
+        public void CollectorLabel_UsesPhysicalLeftAlignedMetadataAndTierFoil()
         {
             PremiumDisplayCase prefab = AssetDatabase.LoadAssetAtPath<
                 PremiumDisplayCase>(PrefabPath);
@@ -206,31 +234,44 @@ namespace FidgetingApp.DisplayCase.Tests.Editor
             PremiumDisplayCase instance = UnityEngine.Object.Instantiate(prefab);
             try
             {
-                instance.SetIdentification(" magnetic trinity ", 24);
+                instance.SetCollectorLabel(new PremiumDisplayCaseCollectorLabel(
+                    " magnetic trinity ",
+                    " bead-blasted titanium ",
+                    24,
+                    "2026-08-17",
+                    "004821"));
                 Assert.That(instance.IdentificationProductName,
                     Is.EqualTo("MAGNETIC TRINITY"));
                 Assert.That(instance.IdentificationLevelText,
-                    Is.EqualTo("LEVEL 24"));
+                    Is.EqualTo("REFINED · LEVEL 24"));
+                Assert.That(instance.IdentificationEditionText,
+                    Is.EqualTo("BEAD-BLASTED TITANIUM"));
+                Assert.That(instance.IdentificationAcquiredText,
+                    Is.EqualTo("ACQUIRED 2026.08.17"));
+                Assert.That(instance.IdentificationCollectibleText,
+                    Is.EqualTo("COLLECTIBLE 004821"));
 
                 TextMesh[] marks = instance.GetComponentsInChildren<TextMesh>(true)
-                    .Where(mark => mark.name.StartsWith("Laser"))
+                    .Where(mark => mark.name.StartsWith("Collector"))
                     .ToArray();
-                Assert.That(marks.Length, Is.EqualTo(2));
+                Assert.That(marks.Length, Is.EqualTo(5));
                 Assert.That(marks.Select(mark => mark.anchor),
-                    Has.All.EqualTo(TextAnchor.MiddleCenter));
+                    Has.All.EqualTo(TextAnchor.MiddleLeft));
                 Assert.That(marks.Select(mark => mark.alignment),
-                    Has.All.EqualTo(TextAlignment.Center));
+                    Has.All.EqualTo(TextAlignment.Left));
                 foreach (TextMesh mark in marks)
                 {
                     Assert.That(mark.font.name, Does.Contain("Oxanium"));
-                    Assert.That(mark.transform.localPosition.x,
-                        Is.EqualTo(0f).Within(0.0001f));
                 }
 
                 instance.SetIdentification("EDGE TRIAD", -10);
-                Assert.That(instance.IdentificationLevelText, Is.EqualTo("LEVEL 1"));
+                Assert.That(instance.IdentificationLevelText,
+                    Is.EqualTo("STANDARD · LEVEL 1"));
+                Assert.That(instance.IdentificationAcquiredText,
+                    Is.EqualTo("ACQUIRED —"));
                 instance.SetIdentification("EDGE TRIAD", 500);
-                Assert.That(instance.IdentificationLevelText, Is.EqualTo("LEVEL 100"));
+                Assert.That(instance.IdentificationLevelText,
+                    Is.EqualTo("HEIRLOOM · LEVEL 100"));
             }
             finally
             {
@@ -261,20 +302,20 @@ namespace FidgetingApp.DisplayCase.Tests.Editor
                     Has.All.Not.Null);
 
                 instance.SetFeaturedBadge(
-                    "badge-b8-toy-pulse-100k",
+                    "badge-b10-toy-pulse-100k",
                     "100k",
                     "pulse",
                     BadgeGrade.Singularity.ToString());
                 Assert.That(instance.HasFeaturedBadge, Is.True);
                 Assert.That(instance.FeaturedBadgeAssetName,
-                    Is.EqualTo("badge-b8-toy-pulse-100k"));
+                    Is.EqualTo("badge-b10-toy-pulse-100k"));
                 Assert.That(instance.FeaturedBadgeToken, Is.EqualTo("100K"));
                 Assert.That(instance.FeaturedBadgeShortName, Is.EqualTo("PULSE"));
                 TextMesh tokenMark = instance.GetComponentsInChildren<TextMesh>(true)
                     .Single(mark => mark.name == "FeaturedBadgeToken");
                 Color singularityColor = tokenMark.color;
                 instance.SetFeaturedBadge(
-                    "badge-b8-toy-power-ignition",
+                    "badge-b10-toy-power-ignition",
                     "1.0",
                     "power",
                     BadgeGrade.Ignition.ToString());
@@ -292,18 +333,18 @@ namespace FidgetingApp.DisplayCase.Tests.Editor
                         true)
                     .Single(child => child.name == "FeaturedBadgeRoot");
                 Assert.That(badgeRoot.localPosition.y,
-                    Is.EqualTo(0.081f).Within(0.0001f));
+                    Is.EqualTo(0.108f).Within(0.0001f));
                 Assert.That(badgeRenderer.transform.localPosition.x,
-                    Is.EqualTo(-0.014f).Within(0.0001f));
+                    Is.EqualTo(-0.013f).Within(0.0001f));
                 Assert.That(badgeRenderer.transform.localScale.x,
-                    Is.EqualTo(0.031f).Within(0.0001f));
+                    Is.EqualTo(0.022f).Within(0.0001f));
                 Assert.That(tokenMark.transform.localPosition.x,
-                    Is.EqualTo(0.014f).Within(0.0001f));
+                    Is.EqualTo(0.012f).Within(0.0001f));
                 TextMesh shortNameMark = instance.GetComponentsInChildren<TextMesh>(
                         true)
                     .Single(mark => mark.name == "FeaturedBadgeShortName");
                 Assert.That(shortNameMark.transform.localPosition.x,
-                    Is.EqualTo(0.014f).Within(0.0001f));
+                    Is.EqualTo(0.012f).Within(0.0001f));
                 Assert.That(badgeRenderer.sharedMaterial.shader.name,
                     Is.EqualTo("FidgetingApp/PremiumBadgeArtwork"));
                 Assert.That(badgeRenderer.sharedMaterial.HasProperty("_EtchColor"),
@@ -421,26 +462,26 @@ namespace FidgetingApp.DisplayCase.Tests.Editor
         }
 
         [Test]
-        public void RoundedCapsule_UsesOpaqueNeutralMaterialsInsteadOfFloatingAcrylic()
+        public void CollectorSlab_UsesFrostedShellFlockingAndMetalFoil()
         {
             PremiumDisplayCase prefab = AssetDatabase.LoadAssetAtPath<
                 PremiumDisplayCase>(PrefabPath);
             Assert.That(prefab, Is.Not.Null, "Run the display-case builder first.");
             Transform[] transforms = prefab.GetComponentsInChildren<Transform>(true);
 
-            Renderer wall = transforms.Single(item =>
-                item.name == "RoundedRecessWall").GetComponent<Renderer>();
-            Renderer back = transforms.Single(item =>
-                item.name == "RoundedRecessBack").GetComponent<Renderer>();
-            Renderer edge = transforms.Single(item =>
-                item.name == "RoundedEdgeLight").GetComponent<Renderer>();
+            Renderer shell = transforms.Single(item =>
+                item.name == "Polycarbonate_FrontShell").GetComponent<Renderer>();
+            Renderer flocking = transforms.Single(item =>
+                item.name == "Collector_BlackFlocking").GetComponent<Renderer>();
+            Renderer foil = transforms.Single(item =>
+                item.name == "Collector_RarityFoilBand").GetComponent<Renderer>();
 
-            Assert.That(wall.sharedMaterial.name, Is.EqualTo("NeutralGraphite"));
-            Assert.That(back.sharedMaterial.name, Is.EqualTo("BlackVelvet"));
-            Assert.That(edge.sharedMaterial.name, Is.EqualTo("BrushedMetal"));
-            Assert.That(new[] { wall, back }.Select(renderer =>
-                    renderer.sharedMaterial.shader.name),
-                Has.None.EqualTo("FidgetingApp/PremiumAcrylicLiquidGlass"));
+            Assert.That(shell.sharedMaterial.shader.name,
+                Is.EqualTo("FidgetingApp/PremiumAcrylicLiquidGlass"));
+            Assert.That(shell.sharedMaterial.GetFloat("_FrostStrength"),
+                Is.GreaterThan(0.4f));
+            Assert.That(flocking.sharedMaterial.name, Is.EqualTo("BlackVelvet"));
+            Assert.That(foil.sharedMaterial.name, Is.EqualTo("BrushedMetal"));
         }
 
         [Test]
@@ -657,7 +698,7 @@ namespace FidgetingApp.DisplayCase.Tests.Editor
         }
 
         [Test]
-        public void ShippingPrefab_UsesBlenderFbxForAllApprovedCaseLayers()
+        public void ShippingPrefab_UsesBlenderFbxForCollectorSlabLayers()
         {
             PremiumDisplayCase prefab = AssetDatabase.LoadAssetAtPath<
                 PremiumDisplayCase>(PrefabPath);
@@ -688,58 +729,47 @@ namespace FidgetingApp.DisplayCase.Tests.Editor
             }
 
             Assert.That(transforms.Count(item => item.name.StartsWith("Fastener_")),
-                Is.EqualTo(4));
+                Is.Zero);
             Assert.That(transforms.Count(item => item.name.StartsWith("ChromeCollar_")),
-                Is.EqualTo(4));
-            Assert.That(transforms.Any(item => item.name == "MatteBlack_OuterTray"),
-                Is.False);
-            Assert.That(transforms.Any(item => item.name == "MatteBlack_BoxLid"),
-                Is.False);
-            Assert.That(transforms.Any(item => item.name == "Graphite_InnerTray"),
+                Is.Zero);
+            Assert.That(transforms.Any(item => item.name == "Collector_LabelPaper"),
                 Is.True);
-            Assert.That(transforms.Count(item => item.name.StartsWith("Acrylic_BackFrame")),
-                Is.EqualTo(4));
-
-            foreach (Transform fastener in transforms.Where(item =>
-                         item.name.StartsWith("Fastener_")))
-            {
-                Assert.That(fastener.GetComponent<Renderer>().sharedMaterial.name,
-                    Is.EqualTo("MatteBlackBox"));
-            }
-            foreach (Transform collar in transforms.Where(item =>
-                         item.name.StartsWith("ChromeCollar_")))
-            {
-                Assert.That(collar.GetComponent<Renderer>().sharedMaterial.name,
-                    Is.EqualTo("BrushedMetal"));
-            }
+            Assert.That(transforms.Any(item => item.name == "Collector_RarityFoilBand"),
+                Is.True);
+            Assert.That(transforms.Any(item => item.name == "Collector_BlackFlocking"),
+                Is.True);
+            Assert.That(transforms.Count(item =>
+                    item.name.StartsWith("Polycarbonate_")),
+                Is.GreaterThanOrEqualTo(4));
 
             Renderer front = transforms.Single(item =>
-                item.name == "Acrylic_FrontPlate").GetComponent<Renderer>();
+                item.name == "Polycarbonate_FrontShell").GetComponent<Renderer>();
             Renderer rear = transforms.Single(item =>
-                item.name == "Acrylic_RearPlate").GetComponent<Renderer>();
+                item.name == "Polycarbonate_RearShell").GetComponent<Renderer>();
             Assert.That(front.bounds.center.z, Is.LessThan(rear.bounds.center.z),
                 "FBX depth must face the shipping camera; rear plate cannot occlude content.");
         }
 
         [Test]
-        public void BlenderManifest_IsReferenceClearAcrylicAndContainsNoPrizeGeometry()
+        public void BlenderManifest_IsCollectorSlabAndContainsNoPrizeGeometry()
         {
             string manifest = File.ReadAllText(
                 "ArtSource/DisplayCase/premium_display_case_manifest.json");
             StringAssert.Contains("\"containsPrizeGeometry\": false", manifest);
             StringAssert.Contains("\"contentSlot\": \"ContentSlot_Anchor\"", manifest);
-            StringAssert.Contains("\"diameterMm\": 84", manifest);
+            StringAssert.Contains("\"widthMm\": 180", manifest);
+            StringAssert.Contains("\"heightMm\": 198", manifest);
             StringAssert.Contains(
-                "\"style\": \"clear-acrylic-four-fastener\"", manifest);
+                "\"style\": \"frosted-polycarbonate-collector-slab\"", manifest);
             StringAssert.Contains("\"hasOpaqueOuterBox\": false", manifest);
             StringAssert.Contains(
-                "\"fastenerStyle\": \"black-cap-with-chrome-collar\"", manifest);
+                "\"fastenerStyle\": \"none\"", manifest);
             StringAssert.DoesNotContain("TRINITY", manifest.ToUpperInvariant());
             StringAssert.DoesNotContain("TRI-BLADE", manifest.ToUpperInvariant());
         }
 
         [Test]
-        public void NativeBridge_ExposesDragPinchScrubReplayAndCloseLifecycle()
+        public void NativeBridge_ExposesProductViewWithoutAssemblyControls()
         {
             string swift = File.ReadAllText(
                 "Assets/Plugins/iOS/CodexSwiftUIOverlay.swift");
@@ -760,14 +790,17 @@ namespace FidgetingApp.DisplayCase.Tests.Editor
                 "orbitStart.width + value.translation.width * 0.16",
                 swift);
             StringAssert.Contains("MagnificationGesture()", swift);
-            StringAssert.Contains("SetDisplayCaseExplodedProgressFromNativeUi", swift);
-            StringAssert.Contains("PlayDisplayCaseAssemblyFromNativeUi", swift);
-            StringAssert.Contains("SetDisplayCasePresentedFromNativeUi", swift);
-            StringAssert.Contains(
-                "@AppStorage(\"FidgetingApp.DisplayCaseLightingPreset\")",
+            StringAssert.DoesNotContain(
+                "SetDisplayCaseExplodedProgressFromNativeUi",
                 swift);
-            StringAssert.Contains("DisplayCaseLightingPreset.allCases", swift);
-            StringAssert.Contains("SetDisplayCaseLightingFromNativeUi", swift);
+            StringAssert.DoesNotContain(
+                "PlayDisplayCaseAssemblyFromNativeUi",
+                swift);
+            StringAssert.DoesNotContain(
+                "ExplodeDisplayCaseFromNativeUi",
+                coordinator);
+            StringAssert.Contains("SetDisplayCasePresentedFromNativeUi", swift);
+            StringAssert.DoesNotContain("DisplayCaseLightingPreset.allCases", swift);
             StringAssert.Contains("public void SetDisplayCasePresentedFromNativeUi", coordinator);
             StringAssert.Contains(
                 "public void SetDisplayCaseLightingFromNativeUi",
@@ -784,16 +817,92 @@ namespace FidgetingApp.DisplayCase.Tests.Editor
             StringAssert.Contains(
                 "PremiumDisplayCaseProductProfiles.Resolve(modelId)",
                 coordinator);
-            StringAssert.Contains("activeDisplayCase.SetIdentification", coordinator);
+            StringAssert.Contains("activeDisplayCase.SetCollectorLabel", coordinator);
+            StringAssert.Contains("collectorProgression?.FirstDiscoveredDate", coordinator);
             StringAssert.Contains(
                 "BadgeCatalogV2.TryResolveFeaturedToyBadge",
                 coordinator);
             StringAssert.Contains("activeDisplayCase.SetFeaturedBadge", coordinator);
             StringAssert.Contains("activeDisplayCase.ClearFeaturedBadge", coordinator);
             StringAssert.DoesNotContain(
-                "ThreeBladeDisplayPrizeFactory.Instantiate()",
+                "activeDisplayCaseInteraction.SetExplodedProgress(1f)",
+                coordinator);
+            StringAssert.DoesNotContain(
+                "activeDisplayCaseInteraction.PlayAssembly()",
                 coordinator);
             StringAssert.Contains("activeDisplayCase.setContent", coordinator);
+        }
+
+        [Test]
+        public void ShippingSources_HaveNoDisplayCaseExplodeOrAssemblyCallPath()
+        {
+            string[] roots =
+            {
+                "Assets/Scripts",
+                "Assets/Plugins/iOS",
+                "Assets/_DisplayCase/Runtime"
+            };
+            string[] forbiddenCalls =
+            {
+                "SetDisplayCaseExplodedProgress",
+                "PlayDisplayCaseAssembly",
+                "ExplodeDisplayCase",
+                ".SetExplodedProgress(",
+                ".PlayAssembly(",
+                ".PlayExplode("
+            };
+            string[] shippingFiles = roots
+                .SelectMany(root => Directory.GetFiles(
+                    root,
+                    "*",
+                    SearchOption.AllDirectories))
+                .Where(path =>
+                    path.EndsWith(".cs", StringComparison.Ordinal)
+                    || path.EndsWith(".swift", StringComparison.Ordinal))
+                .Where(path => !path.EndsWith(
+                    "PremiumDisplayCaseInteractionController.cs",
+                    StringComparison.Ordinal))
+                .ToArray();
+            string[] violations = shippingFiles
+                .SelectMany(path =>
+                {
+                    string source = File.ReadAllText(path);
+                    return forbiddenCalls
+                        .Where(call => source.Contains(call))
+                        .Select(call => $"{path}: {call}");
+                })
+                .ToArray();
+
+            Assert.That(
+                violations,
+                Is.Empty,
+                string.Join(Environment.NewLine, violations));
+
+            string authoringController = File.ReadAllText(
+                "Assets/_DisplayCase/Runtime/"
+                + "PremiumDisplayCaseInteractionController.cs");
+            StringAssert.Contains(
+                "public void SetExplodedProgress(float normalizedProgress)",
+                authoringController);
+            StringAssert.Contains(
+                "public void PlayAssembly()",
+                authoringController);
+            StringAssert.Contains(
+                "public void PlayExplode()",
+                authoringController);
+
+            string prefab = File.ReadAllText(PrefabPath);
+            StringAssert.Contains("explodedProgress: 0", prefab);
+
+            string rules = File.ReadAllText(Path.GetFullPath(Path.Combine(
+                Application.dataPath,
+                "..",
+                "..",
+                "..",
+                "AGENTS.md")));
+            StringAssert.Contains(
+                "## Premium Display Case whole-case gate",
+                rules);
         }
 
         [Test]
@@ -886,6 +995,8 @@ namespace FidgetingApp.DisplayCase.Tests.Editor
 
             StringAssert.DoesNotContain("sampler2D", shader);
             StringAssert.DoesNotContain("TEXTURE2D", shader);
+            StringAssert.Contains("_FrostStrength", shader);
+            StringAssert.Contains("_MicroScratchStrength", shader);
             StringAssert.Contains("SceneParallaxInput.TryGetRecent", gyro);
             StringAssert.DoesNotContain("IosDeviceMotion.Start", gyro);
             StringAssert.DoesNotContain("IosDeviceMotion.Stop", gyro);

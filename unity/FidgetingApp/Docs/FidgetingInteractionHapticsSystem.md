@@ -249,6 +249,8 @@ Captured → Loading → Breakaway → Traveling → Capturing → Captured
 
 第五款磁吸推牌已经把这套状态机实现为 `MagneticDetentTrack1D`。它不是两端补间：六个稳定点为 `0 / 13.6 / 27.2 / 40.8 / 54.4 / 68.0 mm`，默认停在第 3 个真实磁力井 `27.2 mm`；该位置映射为模型零视觉偏移，因此首次触摸即可向左或向右脱档，而不是从单向端点出发。手指位置作为弹簧目标，滑盖由质量、阻尼、摩擦和连续磁势阱共同积分。物理、场景中的六枚磁体和 Haptic 都读取同一 `LinearMagneticDetentProfile`。
 
+替代模型的旋转棘轮模式新增锁定设计要求：完整 `360°`、每 `12°` 一个 detent、每圈恰好 `30` 档。该旋转配置与上述六档线性轨道是两个机制通道；不能把 30 档写回现有线性 `LinearMagneticDetentProfile`。未来实现时，旋转物理与 Haptic 必须读取同一个机制设置。当前 DeliveryState 仅为 `specified-only`；runtime、Haptic、iPhone 触感与整圈计数均未实现或验证。隐藏齿、棘爪、滚珠、弹簧和耦合结构继续 unknown。
+
 磁吸推牌的机械音频由独立 `MagneticSlideDetentAudio` renderer 消费同一条语义事件流，不读取原始手势，也不调用 Haptic renderer。只有经过输入授权的 `DetentCrossed` 会播放用户选定的 766 Hz 合金 click；`Breakaway` 和 `DetentCaptured` 都不发声，避免一次跨档听成“咔—嗒”两段。该资源是 48 kHz mono、0.93 s 容器，主要击发集中在前约 0.14 s；6 个预分配 2D `AudioSource` 保留快速跨档时的自然叠音。renderer 没有 `Update`、timeline、rate limit 或 scheduler。Reset、Library、AUTO 与程序化设姿由既有输入授权门保持静默。
 
 详情交互镜头由 `EdcPortraitCameraFramer` 固定为正面 + 30° 顶视：相机 backward 为 `(0, 0.5, -0.866)`，因此 68 mm 滑轨严格映射到屏幕水平轴，不再被三分之四视角斜向压缩。详情主体目标占屏宽 72%，Library 以独立 `1.59×` zoom 保持原有预览尺度。`InteractionSurface` 随滑盖移动，尺寸为 `94 × 32 × 58 mm`；它只用于 raycast 命中和手势仲裁，不进入 Rigidbody、质量、磁力或档位积分。

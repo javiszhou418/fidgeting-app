@@ -38,7 +38,7 @@ def png_chunks(data: bytes) -> list[tuple[bytes, bytes]]:
 def validate() -> None:
     manifest = json.loads(MANIFEST.read_text(encoding="utf-8"))
     assert manifest["version"] == 2
-    assert manifest["visualLanguage"] == "b8.10-vertical-point-hex-safe-area"
+    assert manifest["visualLanguage"] == "b9.2-reference-proportioned-satin-relief"
     assert manifest["canvas"] == {
         "width": 1024,
         "height": 1024,
@@ -55,6 +55,15 @@ def validate() -> None:
         "circlePrimitive": "equal-diameter",
     }
     assert manifest["runtimeTypography"]["maximumLines"] == 2
+    assert manifest["runtimeTypography"]["placement"] == "outside-badge"
+    assert manifest["runtimeTypography"]["line"] == [
+        "shortName", "displayToken"]
+    assert manifest["iconMaterial"] == {
+        "face": "satin-pearl-silver",
+        "depth": "soft-dark-lavender-sidewall",
+        "bevel": "continuous-rounded-manufactured-edge",
+        "lighting": "top-left-softbox",
+    }
 
     assets = manifest["assets"]
     assert len(assets) == EXPECTED_COUNT
@@ -71,17 +80,14 @@ def validate() -> None:
     speed_svg = (
         ARTWORK / "badge-b8-toy-technique-speed.svg"
     ).read_text(encoding="utf-8")
-    assert "M22 74C43 52 74 39 138 40" in speed_svg, (
-        "SPEED upper wing source path is missing"
+    assert "M53 109C35 92 35 63 53 47" in speed_svg, (
+        "SPEED reference-matched rounded arc is missing"
     )
-    assert "M22 86C43 108 74 121 138 120" in speed_svg, (
-        "SPEED lower wing must expand the exact y=80 mirror coordinates"
+    assert "rotate(180 80 80)" in speed_svg, (
+        "SPEED paired arcs must remain exactly rotationally symmetric"
     )
-    assert speed_svg.count('fill="url(#chromeSymmetric)"') == 2, (
-        "SPEED wings must share the same y-invariant chrome lighting"
-    )
-    assert "M80 64C82 74 86 78 96 80" in speed_svg, (
-        "SPEED negative-space star must remain centered at 80,80"
+    assert "M57 117L103 43" in speed_svg, (
+        "SPEED central diagonal slash is missing"
     )
 
     for item in assets:
@@ -102,8 +108,21 @@ def validate() -> None:
         assert ".plateDepth" in svg_text, (
             f"3D plate depth material definition is missing: {svg_path.name}"
         )
-        assert "stroke-width:21" in svg_text and "opacity:.18" in svg_text, (
-            f"diffuse tube bloom definition is missing: {svg_path.name}"
+        assert ".plateBevel" in svg_text and ".plateSheen" in svg_text, (
+            f"satin plate bevel material is missing: {svg_path.name}"
+        )
+        assert all(marker in svg_text for marker in (
+            ".tubeDepth", ".tubeBevel", ".tubeSheen")), (
+            f"3D tube depth and bevel material is missing: {svg_path.name}"
+        )
+        assert "stroke-width:22" in svg_text and "opacity:.07" in svg_text, (
+            f"restrained diffuse tube bloom definition is missing: {svg_path.name}"
+        )
+        assert "translate(3.2px,3.8px)" in svg_text, (
+            f"visible manufactured icon extrusion is missing: {svg_path.name}"
+        )
+        assert "filter:url(#iconShadow)" in svg_text, (
+            f"soft cast shadow definition is missing: {svg_path.name}"
         )
 
         png_path = ARTWORK / item["png"]

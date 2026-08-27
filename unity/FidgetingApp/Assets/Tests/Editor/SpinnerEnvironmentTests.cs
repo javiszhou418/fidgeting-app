@@ -56,26 +56,41 @@ namespace FidgetingApp.Tests.Editor
         }
 
         [Test]
-        public void EnvironmentThemeCatalogDefinesCanyonAndCyberpunkWithoutResampling()
+        public void EnvironmentThemeCatalogDefinesFourSelectableEnvironments()
         {
             IReadOnlyList<SpinnerEnvironmentThemeProfile> themes =
                 SpinnerEnvironmentThemeCatalog.Profiles;
 
-            Assert.That(themes.Count, Is.EqualTo(2));
-            Assert.That(themes[0].Id, Is.EqualTo(SpinnerEnvironmentThemeCatalog.CanyonId));
-            Assert.That(themes[0].DisplayName, Is.EqualTo("星岩峡谷"));
-            Assert.That(themes[0].HasForegroundLayers, Is.True);
-            Assert.That(themes[1].Id, Is.EqualTo(SpinnerEnvironmentThemeCatalog.CyberpunkId));
-            Assert.That(themes[1].DisplayName, Is.EqualTo("霓虹都市"));
-            Assert.That(themes[1].LayeredMidground, Is.True);
-            Assert.That(themes[1].DynamicStarfield, Is.True);
-            Assert.That(themes[1].HasForegroundLayers, Is.False);
+            Assert.That(themes.Count, Is.EqualTo(4));
+            Assert.That(themes[0].Id, Is.EqualTo(SpinnerEnvironmentThemeCatalog.AdaptiveId));
+            Assert.That(themes[0].DisplayName, Is.EqualTo("随形微光"));
+            Assert.That(themes[0].ModelReactiveBackdrop, Is.True);
+            Assert.That(themes[0].DynamicStarfield, Is.False);
+            Assert.That(themes[0].HasForegroundLayers, Is.False);
+            Assert.That(themes[1].Id, Is.EqualTo(SpinnerEnvironmentThemeCatalog.CanyonId));
+            Assert.That(themes[1].DisplayName, Is.EqualTo("星岩峡谷"));
+            Assert.That(themes[1].HasForegroundLayers, Is.True);
+            Assert.That(themes[2].Id, Is.EqualTo(SpinnerEnvironmentThemeCatalog.CyberpunkId));
+            Assert.That(themes[2].DisplayName, Is.EqualTo("霓虹都市"));
+            Assert.That(themes[2].LayeredMidground, Is.True);
+            Assert.That(themes[2].DynamicStarfield, Is.True);
+            Assert.That(themes[2].HasForegroundLayers, Is.False);
+            Assert.That(themes[3].Id,
+                Is.EqualTo(SpinnerEnvironmentThemeCatalog.MineralRidgeId));
+            Assert.That(themes[3].DisplayName, Is.EqualTo("矿脊台座"));
+            Assert.That(themes[3].CollageMineralPlate, Is.True);
+            Assert.That(themes[3].ModelReactiveBackdrop, Is.False);
+            Assert.That(themes[3].DynamicStarfield, Is.False);
+            Assert.That(themes[3].HasForegroundLayers, Is.False);
             Assert.That(
                 SpinnerEnvironmentThemeCatalog.NormalizeId("CYBERPUNK"),
                 Is.EqualTo(SpinnerEnvironmentThemeCatalog.CyberpunkId));
             Assert.That(
+                SpinnerEnvironmentThemeCatalog.NormalizeId("MINERAL-RIDGE"),
+                Is.EqualTo(SpinnerEnvironmentThemeCatalog.MineralRidgeId));
+            Assert.That(
                 SpinnerEnvironmentThemeCatalog.NormalizeId("unknown"),
-                Is.EqualTo(SpinnerEnvironmentThemeCatalog.CanyonId));
+                Is.EqualTo(SpinnerEnvironmentThemeCatalog.AdaptiveId));
 
             const string cyberAssetPath =
                 "Assets/Resources/EnvironmentBackgrounds/"
@@ -100,6 +115,187 @@ namespace FidgetingApp.Tests.Editor
             Assert.That(ios.overridden, Is.True);
             Assert.That(ios.maxTextureSize, Is.EqualTo(4096));
             Assert.That(ios.format, Is.EqualTo(TextureImporterFormat.ASTC_8x8));
+
+            const string mineralAssetPath =
+                "Assets/Resources/EnvironmentBackgrounds/"
+                + "mineral-ridge-digital-collage-v3.png";
+            Assert.That(File.Exists(mineralAssetPath), Is.True);
+            Texture2D mineralPlate = Resources.Load<Texture2D>(
+                SpinnerEnvironmentThemeCatalog.MineralRidgeBackgroundResourcePath);
+            Assert.That(mineralPlate, Is.Not.Null);
+            Assert.That(mineralPlate.width, Is.EqualTo(941));
+            Assert.That(mineralPlate.height, Is.EqualTo(1672));
+        }
+
+        [Test]
+        public void ReapplyingTheCurrentThemeSkipsPersistenceAndEnvironmentRebuild()
+        {
+            string coordinator = File.ReadAllText(
+                "Assets/Scripts/Product/FidgetAppCoordinator.cs");
+            int methodStart = coordinator.IndexOf(
+                "public void SetEnvironmentThemeFromNativeUi");
+            int methodEnd = coordinator.IndexOf(
+                "public void ResetCurrentSpinnerFromNativeUi",
+                methodStart);
+            Assert.That(methodStart, Is.GreaterThanOrEqualTo(0));
+            Assert.That(methodEnd, Is.GreaterThan(methodStart));
+            string method = coordinator.Substring(
+                methodStart,
+                methodEnd - methodStart);
+
+            StringAssert.Contains("bool changed =", method);
+            StringAssert.Contains("if (changed)", method);
+            StringAssert.Contains(
+                "environmentPresenter.CurrentThemeId",
+                method);
+            Assert.That(
+                method.IndexOf("environmentPresenter.CurrentThemeId"),
+                Is.LessThan(method.IndexOf("environmentPresenter.ApplyTheme")),
+                "The no-op guard must run before expensive theme reconstruction.");
+        }
+
+        [Test]
+        public void AdaptiveBackdropMovesOldAndNewHuesWithTheLibraryPager()
+        {
+            Assert.That(
+                SpinnerAdaptiveBackdropRules.GlowIntensity,
+                Is.LessThanOrEqualTo(0.26f));
+            Assert.That(
+                SpinnerAdaptiveBackdropRules.TopLightBottomBrightness,
+                Is.LessThan(0.10f));
+            Assert.That(
+                SpinnerAdaptiveBackdropRules.TopLightBottomSaturation,
+                Is.LessThan(0.20f));
+            Assert.That(
+                SpinnerAdaptiveBackdropRules.TopLightFalloff,
+                Is.GreaterThan(1f));
+            foreach (string modelId in ProductCatalog.ShippingModelIds())
+            {
+                Color identity = SpinnerEnvironmentAccentCatalog.Resolve(modelId);
+                Color.RGBToHSV(
+                    identity,
+                    out _,
+                    out float saturation,
+                    out float value);
+                Assert.That(
+                    saturation,
+                    Is.LessThanOrEqualTo(
+                        SpinnerAdaptiveBackdropRules.MaximumSaturation + 0.0001f),
+                    modelId);
+                Assert.That(
+                    value,
+                    Is.LessThanOrEqualTo(
+                        SpinnerAdaptiveBackdropRules.MaximumValue + 0.0001f),
+                    modelId);
+            }
+
+            SpinnerAdaptiveBackdropTransition stable =
+                SpinnerAdaptiveBackdropRules.Resolve(
+                    ProductCatalog.MetalThreeBladeModelId,
+                    0f);
+            Assert.That(stable.IncomingModelId,
+                Is.EqualTo(ProductCatalog.MetalThreeBladeModelId));
+            Assert.That(stable.OutgoingWeight, Is.EqualTo(1f));
+            Assert.That(
+                stable.IncomingWeight,
+                Is.EqualTo(SpinnerAdaptiveBackdropRules.StableSecondaryWeight));
+            Assert.That(stable.OutgoingCenterX, Is.EqualTo(0.50f));
+
+            SpinnerAdaptiveBackdropTransition next =
+                SpinnerAdaptiveBackdropRules.Resolve(
+                    ProductCatalog.MetalThreeBladeModelId,
+                    -0.5f);
+            Assert.That(next.IncomingModelId,
+                Is.EqualTo(ProductCatalog.GoldFourWingModelId));
+            Assert.That(next.OutgoingWeight, Is.EqualTo(0.5f));
+            Assert.That(next.IncomingWeight, Is.EqualTo(0.5f));
+            Assert.That(next.OutgoingCenterX, Is.EqualTo(0f));
+            Assert.That(next.IncomingCenterX, Is.EqualTo(1f));
+
+            SpinnerAdaptiveBackdropTransition previous =
+                SpinnerAdaptiveBackdropRules.Resolve(
+                    ProductCatalog.MetalThreeBladeModelId,
+                    0.25f);
+            Assert.That(previous.IncomingModelId,
+                Is.EqualTo(ProductCatalog.PointedThreeBladeModelId));
+            Assert.That(previous.OutgoingWeight, Is.EqualTo(0.75f));
+            Assert.That(previous.IncomingWeight, Is.EqualTo(0.25f));
+            Assert.That(previous.OutgoingCenterX, Is.EqualTo(0.75f));
+            Assert.That(previous.IncomingCenterX, Is.EqualTo(-0.25f));
+
+            SpinnerAdaptiveBackdropTransition boundary =
+                SpinnerAdaptiveBackdropRules.Resolve(
+                    ProductCatalog.PointedThreeBladeModelId,
+                    0.8f);
+            Assert.That(boundary.IncomingModelId,
+                Is.EqualTo(ProductCatalog.PointedThreeBladeModelId));
+            Assert.That(boundary.OutgoingCenterX, Is.EqualTo(0.50f));
+            Assert.That(boundary.IncomingCenterX, Is.EqualTo(0.72f));
+        }
+
+        [Test]
+        public void AdaptiveBackdropUsesAContinuousTopDownLightField()
+        {
+            string shader = File.ReadAllText(
+                "Assets/Shaders/EnvironmentParallaxUnlit.shader");
+
+            StringAssert.Contains(
+                "half topProgress = smoothstep(0.03h, 0.98h, input.uv.y)",
+                shader);
+            StringAssert.Contains(
+                "half brightness = lerp(",
+                shader);
+            StringAssert.Contains(
+                "_TopLightBottomBrightness",
+                shader);
+            StringAssert.Contains(
+                "half saturation = lerp(",
+                shader);
+            StringAssert.Contains(
+                "_TopLightBottomSaturation",
+                shader);
+            StringAssert.Contains(
+                "0.92h,\n                            0.52h,\n                            topProgress",
+                shader,
+                "The overhead beam must open downward instead of returning to a centered halo.");
+            StringAssert.Contains(
+                "* brightness * _GlowIntensity * sampled.a",
+                shader);
+        }
+
+        [Test]
+        public void AdaptiveBackdropKeepsTheNewHueDuringSceneEntrance()
+        {
+            var cameraObject = new GameObject("AdaptiveEntranceCamera");
+            cameraObject.AddComponent<Camera>();
+            SpinnerSceneParallaxController parallax =
+                cameraObject.AddComponent<SpinnerSceneParallaxController>();
+            try
+            {
+                parallax.SetLibraryPreviewActive(true, true);
+                parallax.BeginLibraryPageEntrance(1f);
+                Assert.That(parallax.IsLibraryPageEntranceActive, Is.True);
+                Assert.That(parallax.LibraryPageOffset, Is.EqualTo(1f));
+
+                parallax.SetLibraryPageDragProgress(-0.4f);
+                Assert.That(parallax.IsLibraryPageEntranceActive, Is.False);
+                Assert.That(parallax.LibraryPageOffset, Is.EqualTo(-0.4f));
+
+                parallax.BeginLibraryPageEntrance(-1f);
+                Assert.That(parallax.IsLibraryPageEntranceActive, Is.True);
+                Assert.That(parallax.LibraryPageOffset, Is.EqualTo(-1f));
+
+                string presenterSource = File.ReadAllText(
+                    "Assets/Scripts/Product/SpinnerEnvironmentPresenter.cs");
+                StringAssert.Contains(
+                    "!ParallaxController.IsLibraryPageEntranceActive",
+                    presenterSource,
+                    "The incoming scene must keep its own stable hue while the model enters.");
+            }
+            finally
+            {
+                UnityEngine.Object.DestroyImmediate(cameraObject);
+            }
         }
 
         [Test]
@@ -113,6 +309,62 @@ namespace FidgetingApp.Tests.Editor
                 .ToArray();
             SpinnerEnvironmentPresenter presenter =
                 SpinnerEnvironmentPresenter.Install(profile.ScenePath);
+
+            Assert.That(
+                presenter.ApplyTheme(SpinnerEnvironmentThemeCatalog.AdaptiveId),
+                Is.True);
+            Assert.That(
+                presenter.CurrentThemeId,
+                Is.EqualTo(SpinnerEnvironmentThemeCatalog.AdaptiveId));
+            Assert.That(
+                presenter.BackgroundTexture.name,
+                Is.EqualTo("adaptive-dark-neutral-runtime"));
+            Assert.That(
+                presenter.MidgroundRenderer == null
+                || !presenter.MidgroundRenderer.gameObject.activeSelf,
+                Is.True);
+            Assert.That(presenter.DeepStarfieldRenderer.gameObject.activeSelf, Is.False);
+            Assert.That(presenter.NearStarfieldRenderer.gameObject.activeSelf, Is.False);
+            Assert.That(presenter.RightForegroundRenderer.gameObject.activeSelf, Is.False);
+            Assert.That(presenter.LeftForegroundRenderer.gameObject.activeSelf, Is.False);
+            var adaptiveProperties = new MaterialPropertyBlock();
+            presenter.BackgroundRenderer.GetPropertyBlock(adaptiveProperties);
+            Assert.That(
+                adaptiveProperties.GetFloat("_AdaptiveSurface"),
+                Is.EqualTo(1f));
+            Assert.That(
+                adaptiveProperties.GetFloat("_GlowRadius"),
+                Is.EqualTo(SpinnerAdaptiveBackdropRules.GlowRadius).Within(0.0001f));
+            Assert.That(
+                adaptiveProperties.GetFloat("_GlowIntensity"),
+                Is.EqualTo(SpinnerAdaptiveBackdropRules.GlowIntensity).Within(0.0001f));
+            Assert.That(
+                adaptiveProperties.GetFloat("_AdaptiveGrain"),
+                Is.EqualTo(SpinnerAdaptiveBackdropRules.GrainIntensity)
+                    .Within(0.0001f));
+            Assert.That(
+                SpinnerAdaptiveBackdropRules.GrainIntensity,
+                Is.InRange(0.010f, 0.014f),
+                "The dark surface needs visible texture without becoming snow-like noise.");
+            string adaptiveShader = File.ReadAllText(
+                "Assets/Shaders/EnvironmentParallaxUnlit.shader");
+            StringAssert.Contains("floor(input.positionHCS.xy)", adaptiveShader);
+            StringAssert.DoesNotContain(
+                "_Time",
+                adaptiveShader,
+                "Adaptive grain must stay static so paging cannot shimmer or flicker.");
+            Assert.That(
+                adaptiveProperties.GetFloat("_TopLightBottomBrightness"),
+                Is.EqualTo(SpinnerAdaptiveBackdropRules.TopLightBottomBrightness)
+                    .Within(0.0001f));
+            Assert.That(
+                adaptiveProperties.GetFloat("_TopLightBottomSaturation"),
+                Is.EqualTo(SpinnerAdaptiveBackdropRules.TopLightBottomSaturation)
+                    .Within(0.0001f));
+            Assert.That(
+                adaptiveProperties.GetFloat("_TopLightFalloff"),
+                Is.EqualTo(SpinnerAdaptiveBackdropRules.TopLightFalloff)
+                    .Within(0.0001f));
 
             Assert.That(
                 presenter.ApplyTheme(SpinnerEnvironmentThemeCatalog.CyberpunkId),
@@ -139,6 +391,44 @@ namespace FidgetingApp.Tests.Editor
             Assert.That(presenter.MidgroundRenderer.gameObject.activeSelf, Is.False);
             Assert.That(presenter.RightForegroundRenderer.gameObject.activeSelf, Is.True);
             Assert.That(presenter.LeftForegroundRenderer.gameObject.activeSelf, Is.True);
+            var canyonProperties = new MaterialPropertyBlock();
+            presenter.BackgroundRenderer.GetPropertyBlock(canyonProperties);
+            Assert.That(canyonProperties.GetFloat("_AdaptiveSurface"), Is.EqualTo(0f));
+
+            Assert.That(
+                presenter.ApplyTheme(SpinnerEnvironmentThemeCatalog.MineralRidgeId),
+                Is.True);
+            Assert.That(
+                presenter.CurrentThemeId,
+                Is.EqualTo(SpinnerEnvironmentThemeCatalog.MineralRidgeId));
+            Assert.That(
+                presenter.BackgroundTexture.name,
+                Is.EqualTo("mineral-ridge-digital-collage-v3"));
+            var mineralProperties = new MaterialPropertyBlock();
+            presenter.BackgroundRenderer.GetPropertyBlock(mineralProperties);
+            Assert.That(
+                mineralProperties.GetVector("_BaseMap_ST").w,
+                Is.EqualTo(SpinnerEnvironmentPresenter.MineralRidgeTextureOffsetY)
+                    .Within(0.0001f));
+            Assert.That(presenter.MidgroundRenderer.gameObject.activeSelf, Is.False);
+            Assert.That(presenter.DeepStarfieldRenderer.gameObject.activeSelf, Is.False);
+            Assert.That(presenter.NearStarfieldRenderer.gameObject.activeSelf, Is.False);
+            Assert.That(presenter.RightForegroundRenderer.gameObject.activeSelf, Is.False);
+            Assert.That(presenter.LeftForegroundRenderer.gameObject.activeSelf, Is.False);
+            Assert.That(presenter.GroundingStage, Is.Not.Null);
+            Assert.That(presenter.GroundingStage.StageRenderer.enabled, Is.False);
+            Assert.That(presenter.GroundingStage.SupportRenderer.enabled, Is.False);
+            Assert.That(
+                presenter.GroundingStage.GetComponent<Collider>(),
+                Is.Null);
+            Assert.That(
+                presenter.GroundingStage.GetComponent<Rigidbody>(),
+                Is.Null);
+            Assert.That(mineralProperties.GetFloat("_GlowEnabled"), Is.EqualTo(0f));
+            Assert.That(mineralProperties.GetFloat("_ShadowEnabled"), Is.EqualTo(1f));
+            Assert.That(
+                mineralProperties.GetFloat("_ShadowStrength"),
+                Is.EqualTo(0.42f).Within(0.0001f));
 
             for (int index = 0; index < bodies.Length; index++)
             {
@@ -312,6 +602,10 @@ namespace FidgetingApp.Tests.Editor
 
                 SpinnerEnvironmentPresenter presenter =
                     SpinnerEnvironmentPresenter.Install(profile.ScenePath);
+                Assert.That(
+                    presenter.ApplyTheme(SpinnerEnvironmentThemeCatalog.CanyonId),
+                    Is.True,
+                    profile.ModelId);
                 bool softSpinnerLighting = SpinnerImageBasedLightingController
                     .UsesSoftSpinnerLighting(profile.ModelId);
                 float softSpinnerLightTrim = SpinnerImageBasedLightingController

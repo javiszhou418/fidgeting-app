@@ -46,22 +46,28 @@ private enum ProductTab: Equatable {
 }
 
 private enum EnvironmentTheme: String, CaseIterable, Identifiable, Equatable {
+    case adaptive
     case canyon
     case cyberpunk
+    case mineralRidge = "mineral-ridge"
 
     var id: String { rawValue }
 
     var title: String {
         switch self {
+        case .adaptive: return "随形微光"
         case .canyon: return "星岩峡谷"
         case .cyberpunk: return "霓虹都市"
+        case .mineralRidge: return "矿脊台座"
         }
     }
 
     var subtitle: String {
         switch self {
+        case .adaptive: return "深色底 · 随当前玩具偏色"
         case .canyon: return "粗粝岩层 · 双层星空"
         case .cyberpunk: return "未来建筑 · 霓虹纵深"
+        case .mineralRidge: return "远景拼贴 · 不规则矿脊承托"
         }
     }
 
@@ -1255,6 +1261,8 @@ private final class ProductUiState: ObservableObject {
 
     private var previewWorkItem: DispatchWorkItem?
     private var hasPersistedDetentTuning = false
+    private var hasSynchronizedInitialUnityModel = false
+    private var userSelectedModelSinceLaunch = false
     private var spinRewardDismissWorkItem: DispatchWorkItem?
     private var badgeUnlockDismissWorkItem: DispatchWorkItem?
     private var pendingBadgeUnlocks: [ProductBadgeUnlockEvent] = []
@@ -1281,7 +1289,7 @@ private final class ProductUiState: ObservableObject {
         }
         let persistedEnvironmentTheme = EnvironmentTheme(
             rawValue: defaults.string(forKey: Key.environmentTheme) ?? "")
-            ?? .canyon
+            ?? .adaptive
         environmentTheme = persistedEnvironmentTheme
         environmentThemePreview = persistedEnvironmentTheme
         interactionMode = SpinnerInteractionMode(
@@ -1435,6 +1443,7 @@ private final class ProductUiState: ObservableObject {
     }
 
     func select(_ model: SpinnerModel) {
+        userSelectedModelSinceLaunch = true
         selectedModel = model
         UserDefaults.standard.set(model.rawValue, forKey: Key.selectedModel)
     }
@@ -1885,6 +1894,15 @@ private final class ProductUiState: ObservableObject {
         equippedProductStickerId: String,
         offlineReward: OfflineProgressionReward?,
         liveLevelUp: LiveProgressionLevelUp?) {
+        if !hasSynchronizedInitialUnityModel {
+            hasSynchronizedInitialUnityModel = true
+            if !userSelectedModelSinceLaunch && selectedModel != model {
+                selectedModel = model
+                UserDefaults.standard.set(
+                    model.rawValue,
+                    forKey: Key.selectedModel)
+            }
+        }
         progressionModel = model
         progressionLevel = max(1, min(100, level))
         progressionTotalExperience = max(0, totalExperience)
@@ -3236,11 +3254,8 @@ private struct ProgressionCelebrationPreviewContext: View {
                     .buttonStyle(.plain)
                     .accessibilityIdentifier("preview-display-case-action")
 
-                    Button {} label: {
-                        ProductPrimaryActionLabel(
-                            title: "进入 \(state.selectedModel.title)")
-                    }
-                    .buttonStyle(.plain)
+                    ProductPrimaryActionButton(
+                        title: "进入 \(state.selectedModel.title)") {}
                     .accessibilityIdentifier("preview-enter-model-action")
                 }
                 .padding(.horizontal, 20)
@@ -3251,6 +3266,27 @@ private struct ProgressionCelebrationPreviewContext: View {
 }
 #endif
 
+private struct CollectorProfileAvatar: View {
+    @ObservedObject var state: ProductUiState
+
+    var body: some View {
+        Button {
+            UnityBridge.feedback()
+            CodexSwiftUIOverlayManager.shared.selectTab(.collector)
+        } label: {
+            Text("\(state.collectorRank)")
+                .font(.product(size: 17, weight: .bold).monospacedDigit())
+                .foregroundStyle(Color.white.opacity(0.84))
+                .frame(minWidth: 44, minHeight: 44, alignment: .leading)
+                .contentShape(Rectangle())
+        }
+        .buttonStyle(.plain)
+        .accessibilityIdentifier("collector-profile-avatar")
+        .accessibilityLabel("藏家档案，等级 \(state.collectorRank)")
+        .accessibilityHint("打开藏家档案")
+    }
+}
+
 private struct ProductProgressionTopAvatar: View {
     @ObservedObject var state: ProductUiState
     @State private var pulsing = false
@@ -3260,56 +3296,46 @@ private struct ProductProgressionTopAvatar: View {
     }
 
     var body: some View {
-        Button {
-            UnityBridge.feedback()
-            CodexSwiftUIOverlayManager.shared.selectTab(.collector)
-        } label: {
-            ZStack {
-                Circle()
-                    .stroke(Color.white.opacity(0.12), lineWidth: 3)
-                    .frame(width: 38, height: 38)
+        ZStack {
+            Circle()
+                .fill(Color.black.opacity(0.28))
+            Circle()
+                .stroke(Color.white.opacity(0.12), lineWidth: 2)
 
-                Circle()
-                    .trim(from: 0, to: progress)
-                    .stroke(
-                        AngularGradient(
-                            colors: [
-                                Color.white.opacity(0.44),
-                                state.currentAppearanceAccent.opacity(0.94),
-                                Color.white.opacity(0.82)
-                            ],
-                            center: .center),
-                        style: StrokeStyle(lineWidth: 3, lineCap: .round))
-                    .rotationEffect(.degrees(-90))
-                    .frame(width: 38, height: 38)
+            Circle()
+                .trim(from: 0, to: progress)
+                .stroke(
+                    AngularGradient(
+                        colors: [
+                            Color.white.opacity(0.44),
+                            state.currentAppearanceAccent.opacity(0.94),
+                            Color.white.opacity(0.82)
+                        ],
+                        center: .center),
+                    style: StrokeStyle(lineWidth: 2, lineCap: .round))
+                .rotationEffect(.degrees(-90))
 
-                Image(systemName: "person.crop.circle")
-                    .font(.product(size: 20, weight: .medium))
-                    .foregroundStyle(Color.white.opacity(0.90))
-
+            VStack(spacing: -1) {
+                Text("LV")
+                    .font(.product(size: 5, weight: .bold))
+                    .foregroundStyle(Color.white.opacity(0.46))
                 Text("\(state.progressionTopAvatarLevel)")
-                    .font(.product(size: 8, weight: .black).monospacedDigit())
+                    .font(.product(size: 10, weight: .black).monospacedDigit())
                     .foregroundStyle(.white)
-                    .padding(.horizontal, 4)
-                    .frame(minWidth: 18, minHeight: 12)
-                    .background(Color.black.opacity(0.82), in: Capsule())
-                    .offset(x: 11, y: 13)
             }
-            .frame(width: 44, height: 44)
-            .background(
-                ProductWindowFrameReader { frame in
-                    state.updateProgressionTopAvatarFrame(frame)
-                })
-            .scaleEffect(pulsing ? 1.14 : 1)
-            .shadow(
-                color: state.currentAppearanceAccent.opacity(pulsing ? 0.72 : 0.18),
-                radius: pulsing ? 14 : 4)
         }
-        .buttonStyle(.plain)
+        .frame(width: 32, height: 32)
+        .background(
+            ProductWindowFrameReader { frame in
+                state.updateProgressionTopAvatarFrame(frame)
+            })
+        .scaleEffect(pulsing ? 1.12 : 1)
+        .shadow(
+            color: state.currentAppearanceAccent.opacity(pulsing ? 0.72 : 0.18),
+            radius: pulsing ? 14 : 4)
         .accessibilityIdentifier("progression-top-avatar")
         .accessibilityLabel(
-            "成长头像，等级 \(state.progressionTopAvatarLevel)，本级进度 \(Int(progress * 100))%")
-        .accessibilityHint("打开藏家档案")
+            "当前玩具等级 \(state.progressionTopAvatarLevel)，本级进度 \(Int(progress * 100))%")
         .onChange(of: state.progressionTopAvatarPulseToken) { _ in
             withAnimation(.spring(response: 0.26, dampingFraction: 0.54)) {
                 pulsing = true
@@ -3320,6 +3346,34 @@ private struct ProductProgressionTopAvatar: View {
                 }
             }
         }
+    }
+}
+
+private struct ProductToyIdentityLockup: View {
+    @ObservedObject var state: ProductUiState
+
+    var body: some View {
+        HStack(spacing: 8) {
+            ProductProgressionTopAvatar(state: state)
+
+            VStack(alignment: .leading, spacing: 0) {
+                Text(state.selectedModel.title)
+                    .font(.product(.headline, weight: .semibold))
+                    .foregroundStyle(Color.white.opacity(0.94))
+                    .lineLimit(1)
+                    .minimumScaleFactor(0.82)
+
+                Text(state.currentAppearanceName)
+                    .font(.product(size: 10, weight: .medium))
+                    .foregroundStyle(state.currentAppearanceAccent.opacity(0.76))
+                    .lineLimit(1)
+                    .minimumScaleFactor(0.72)
+                    .padding(.top, 4)
+            }
+        }
+        .accessibilityElement(children: .combine)
+        .accessibilityLabel(
+            "\(state.selectedModel.title)，玩具等级 \(state.displayedProgressionLevel)，当前皮肤 \(state.currentAppearanceName)")
     }
 }
 
@@ -3346,24 +3400,9 @@ private struct ProductTopBar: View {
             Spacer(minLength: 0)
             ZStack {
                 if showsProductIdentity {
-                    VStack(spacing: 1) {
-                        Text("LV \(state.displayedProgressionLevel)")
-                            .font(.product(.caption, weight: .bold))
-                            .monospacedDigit()
-                            .foregroundStyle(Color.white.opacity(0.42))
-                        Text(state.selectedModel.title)
-                            .font(.product(.headline, weight: .semibold))
-                            .foregroundStyle(Color.white.opacity(0.92))
-                        Text(state.currentAppearanceName)
-                            .font(.product(size: 10, weight: .medium))
-                            .foregroundStyle(state.currentAppearanceAccent.opacity(0.78))
-                            .lineLimit(1)
-                            .minimumScaleFactor(0.74)
-                    }
-                    .frame(maxWidth: showsBackButton ? 142 : 170)
-                    .accessibilityElement(children: .combine)
-                    .accessibilityLabel(
-                        "等级 \(state.displayedProgressionLevel)，\(state.selectedModel.title)，当前皮肤 \(state.currentAppearanceName)")
+                    ProductToyIdentityLockup(state: state)
+                        .frame(maxWidth: showsBackButton ? 156 : 176)
+                        .offset(y: 4)
                 } else {
                     Text(pageTitle)
                         .font(.product(.headline, weight: .semibold))
@@ -3382,7 +3421,7 @@ private struct ProductTopBar: View {
                             }
                         }
 
-                        ProductProgressionTopAvatar(state: state)
+                        CollectorProfileAvatar(state: state)
                     }
 
                     Spacer()
@@ -3530,19 +3569,16 @@ private struct SpinnerOnboardingView: View {
                         "快速开始第 \(index) 页，共 \(count) 页"
                     })
 
-                Button {
+                ProductPrimaryActionButton(
+                    title: page < 2 ? "下一步" : "开始玩",
+                    accent: accent) {
                     UnityBridge.feedback(.medium)
                     if page < 2 {
                         withAnimation(.easeOut(duration: 0.24)) { page += 1 }
                     } else {
                         state.completeSpinnerOnboarding()
                     }
-                } label: {
-                    ProductPrimaryActionLabel(
-                        title: page < 2 ? "下一步" : "开始玩",
-                        accent: accent)
                 }
-                .buttonStyle(.plain)
                 .padding(.horizontal, 24)
                 .padding(.bottom, 14)
             }
@@ -3635,6 +3671,9 @@ private struct ExperienceJar: View {
 private enum ProductOverlayLayout {
     static let detailEntranceDuration: TimeInterval = 0.68
     static let detailControlsRevealDelay: TimeInterval = 0.48
+    static let topBarHeight: CGFloat = 108
+    static let modeBarTop: CGFloat = topBarHeight
+    static let modeBarHeight: CGFloat = 58
     static let progressionHeight: CGFloat = 96
     static let progressionBottomInset: CGFloat = 12
     static let feedbackGap: CGFloat = 14
@@ -4368,6 +4407,8 @@ private struct SpinnerExperienceFeedbackLayer: View {
 private struct BadgeUnlockOverlay: View {
     @ObservedObject var state: ProductUiState
 
+    @Environment(\.accessibilityReduceMotion) private var reduceMotion
+
     var body: some View {
         GeometryReader { proxy in
             VStack {
@@ -4383,9 +4424,16 @@ private struct BadgeUnlockOverlay: View {
             }
             .frame(maxWidth: .infinity)
             .padding(.horizontal, 16)
-            .padding(.top, max(166, proxy.safeAreaInsets.top + 112))
+            .padding(
+                .top,
+                max(
+                    ProductOverlayLayout.comboTopMinimum,
+                    proxy.safeAreaInsets.top
+                        + ProductOverlayLayout.comboTopSafeAreaOffset))
             .animation(
-                .spring(response: 0.38, dampingFraction: 0.76),
+                reduceMotion
+                    ? nil
+                    : .spring(response: 0.38, dampingFraction: 0.76),
                 value: state.showingBadgeUnlockNotice)
         }
         .ignoresSafeArea()
@@ -5817,16 +5865,55 @@ private struct ProgressionBadgeAchievements: View, Equatable {
     var body: some View {
         ScrollView {
             VStack(alignment: .leading, spacing: 16) {
-                HStack(alignment: .top, spacing: 10) {
-                    ProductScreenHeading(
-                        title: "BADGES",
-                        subtitle: "独立目标、真实进度与可收藏奖励",
-                        symbol: "seal.fill",
-                        accent: accent)
-                    Spacer(minLength: 0)
-                    ProductInlineTag(
-                        title: "◆ \(snapshot.badgeShardBalance)",
-                        accent: Color.white.opacity(0.72))
+                VStack(alignment: .leading, spacing: 13) {
+                    HStack(alignment: .top, spacing: 10) {
+                        ProductScreenHeading(
+                            title: "BADGES",
+                            subtitle: "独立目标、真实进度与可收藏奖励",
+                            symbol: "seal.fill",
+                            accent: accent)
+                        Spacer(minLength: 0)
+                        ProductInlineTag(
+                            title: "◆ \(snapshot.badgeShardBalance)",
+                            accent: Color.white.opacity(0.72))
+                    }
+
+                    if let recentTarget {
+                        Divider().overlay(Color.white.opacity(0.08))
+                        Button {
+                            selectedBadge = recentTarget
+                        } label: {
+                            HStack(spacing: 13) {
+                                ProductRarityBadge(
+                                    assetName: recentTarget.assetName,
+                                    token: recentTarget.tokenLine,
+                                    shortName: recentTarget.shortName,
+                                    grade: recentTarget.grade.rawValue,
+                                    state: recentTarget.state.rawValue,
+                                    progress: recentTarget.progress,
+                                    renderingMode: .catalog)
+                                    .frame(width: ProductBadgeLayoutTokens.recentTargetWidth)
+                                VStack(alignment: .leading, spacing: 5) {
+                                    Text("最近目标")
+                                        .font(.product(.caption, weight: .bold))
+                                        .foregroundStyle(Color.white.opacity(0.44))
+                                    Text(recentTarget.hidden ? "加密核心" : recentTarget.title)
+                                        .font(.product(.headline, weight: .bold))
+                                        .foregroundStyle(Color.white.opacity(0.92))
+                                    Text(recentTarget.hidden
+                                         ? "继续真实盘玩以解密条件"
+                                         : recentTarget.description)
+                                        .font(.product(.caption))
+                                        .foregroundStyle(Color.white.opacity(0.50))
+                                        .lineLimit(2)
+                                }
+                                Spacer(minLength: 0)
+                                Image(systemName: "chevron.right")
+                                    .foregroundStyle(Color.white.opacity(0.30))
+                            }
+                        }
+                        .buttonStyle(.plain)
+                    }
                 }
                 .padding(16)
                 .productGlass(cornerRadius: 22, tint: accent.opacity(0.08))
@@ -5837,47 +5924,6 @@ private struct ProgressionBadgeAchievements: View, Equatable {
                     }
                 }
                 .pickerStyle(.segmented)
-
-                if let recentTarget {
-                    Button {
-                        selectedBadge = recentTarget
-                    } label: {
-                        HStack(spacing: 13) {
-                            ProductRarityBadge(
-                                assetName: recentTarget.assetName,
-                                token: recentTarget.tokenLine,
-                                shortName: recentTarget.shortName,
-                                grade: recentTarget.grade.rawValue,
-                                state: recentTarget.state.rawValue,
-                                progress: recentTarget.progress,
-                                renderingMode: .catalog)
-                                .frame(width: ProductBadgeLayoutTokens.recentTargetWidth)
-                            VStack(alignment: .leading, spacing: 5) {
-                                Text("最近目标")
-                                    .font(.product(.caption, weight: .bold))
-                                    .foregroundStyle(Color.white.opacity(0.44))
-                                Text(recentTarget.hidden ? "加密核心" : recentTarget.title)
-                                    .font(.product(.headline, weight: .bold))
-                                    .foregroundStyle(Color.white.opacity(0.92))
-                                Text(recentTarget.hidden
-                                     ? "继续真实盘玩以解密条件"
-                                     : recentTarget.description)
-                                    .font(.product(.caption))
-                                    .foregroundStyle(Color.white.opacity(0.50))
-                                    .lineLimit(2)
-                            }
-                            Spacer(minLength: 0)
-                            Image(systemName: "chevron.right")
-                                .foregroundStyle(Color.white.opacity(0.30))
-                        }
-                        .padding(13)
-                        .productGlass(
-                            cornerRadius: 20,
-                            tint: accent.opacity(0.025),
-                            interactive: true)
-                    }
-                    .buttonStyle(.plain)
-                }
 
                 if badges.isEmpty {
                     ProductEmptyState(
@@ -6000,19 +6046,16 @@ private struct ProductBadgeDetailSheet: View {
                     }
 
                     if badge.unlocked {
-                        Button {
+                        ProductSecondaryActionButton(
+                            title: "生成 1:1 分享卡",
+                            symbol: "square.and.arrow.up") {
                             ProductBadgeShareRenderer.render(
                                 badge: badge,
                                 toyName: toyName) { image in
                                 shareImage = image
                                 showsShareSheet = image != nil
                             }
-                        } label: {
-                            ProductActionLabel(
-                                title: "生成 1:1 分享卡",
-                                symbol: "square.and.arrow.up")
                         }
-                        .buttonStyle(.plain)
                         .accessibilityHint("生成不包含个人信息的 1080 方形图片")
                     }
                 }
@@ -6105,6 +6148,23 @@ private enum ProductBadgeShareRenderer {
         badge: ProductBadgeDetail,
         toyName: String,
         completion: @escaping (UIImage?) -> Void) {
+        // The badge face loads its artwork asynchronously off a background
+        // decode queue; without prewarming, the snapshot below can fire
+        // before that completes and capture the empty-artwork placeholder.
+        // Forcing the image into cache first guarantees `onAppear` resolves
+        // it synchronously via the artwork cache's synchronous cache-hit path.
+        ProductRarityBadge.prewarmFullArtwork(assetName: badge.assetName) {
+            renderAfterArtworkIsCached(
+                badge: badge,
+                toyName: toyName,
+                completion: completion)
+        }
+    }
+
+    private static func renderAfterArtworkIsCached(
+        badge: ProductBadgeDetail,
+        toyName: String,
+        completion: @escaping (UIImage?) -> Void) {
         let size = CGSize(width: 360, height: 360)
         let controller = UIHostingController(
             rootView: ProductBadgeShareCard(badge: badge, toyName: toyName)
@@ -6169,6 +6229,74 @@ private struct ProductBadgeActivitySheet: UIViewControllerRepresentable {
     }
 }
 
+private struct LibraryToyBadgeRow: View {
+    @ObservedObject var state: ProductUiState
+    let onOpenCatalog: () -> Void
+
+    private var spotlightBadges: [ProductBadgeDetail] {
+        let unlocked = state.toyBadgeCatalog
+            .filter(\.unlocked)
+            .sorted { $0.displayOrder > $1.displayOrder }
+        let currentTarget = state.toyBadgeCatalog.first {
+            $0.state == .inProgress
+        }
+        var selection = Array(unlocked.prefix(currentTarget == nil ? 3 : 2))
+        if let currentTarget,
+           !selection.contains(where: { $0.id == currentTarget.id }) {
+            selection.append(currentTarget)
+        }
+        if selection.count < 3 {
+            let selectedIDs = Set(selection.map(\.id))
+            selection.append(contentsOf: state.toyBadgeCatalog
+                .filter { !selectedIDs.contains($0.id) }
+                .prefix(3 - selection.count))
+        }
+        return Array(selection.prefix(3))
+    }
+
+    var body: some View {
+        Button(action: onOpenCatalog) {
+            HStack(spacing: 16) {
+                ForEach(spotlightBadges) { badge in
+                    ProductRarityBadge(
+                        assetName: badge.assetName,
+                        token: badge.tokenLine,
+                        shortName: badge.shortName,
+                        grade: badge.grade.rawValue,
+                        state: badge.state.rawValue,
+                        progress: badge.progress,
+                        renderingMode: .catalog)
+                        .frame(width: 42)
+                        .accessibilityHidden(true)
+                }
+
+                if spotlightBadges.isEmpty {
+                    Image(systemName: "seal")
+                        .font(.product(size: 18, weight: .light))
+                        .foregroundStyle(Color.white.opacity(0.22))
+                        .frame(width: 44, height: 44)
+                        .accessibilityHidden(true)
+                }
+            }
+            .frame(minWidth: 52, minHeight: 44)
+            .contentShape(Rectangle())
+        }
+        .buttonStyle(.plain)
+        .accessibilityIdentifier("library-toy-badge-row")
+        .accessibilityLabel(
+            "打开 \(state.selectedModel.title) 的 Badge 图鉴")
+        .accessibilityHint("打开当前陀螺的 Badge 成就目录")
+        .onAppear {
+            ProductRarityBadge.prewarmCatalogArtwork(
+                assetNames: spotlightBadges.map(\.assetName))
+        }
+        .onChange(of: state.toyBadgeCatalog) { _ in
+            ProductRarityBadge.prewarmCatalogArtwork(
+                assetNames: spotlightBadges.map(\.assetName))
+        }
+    }
+}
+
 private struct ProductModeBar: View {
     @ObservedObject var state: ProductUiState
 
@@ -6183,7 +6311,7 @@ private struct ProductModeBar: View {
                 let selected = state.interactionMode == mode
                 UnityBridge.feedback(selected ? .light : .medium)
                 state.selectInteractionMode(mode)
-            }
+        }
         .frame(maxWidth: .infinity)
         .padding(.top, 4)
         .productDesignSystem()
@@ -6598,6 +6726,27 @@ private struct EnvironmentWallpaperImage: View {
         return UIImage(contentsOfFile: path)
     }
 
+    private var fallbackColors: [Color] {
+        switch theme {
+        case .adaptive:
+            return [
+                Color(red: 0.015, green: 0.017, blue: 0.022),
+                model.accent.opacity(0.16),
+                Color.black
+            ]
+        case .canyon:
+            return [Color.black, Color(red: 0.08, green: 0.13, blue: 0.12)]
+        case .cyberpunk:
+            return [Color.black, Color(red: 0.02, green: 0.17, blue: 0.23)]
+        case .mineralRidge:
+            return [
+                Color(red: 0.24, green: 0.24, blue: 0.23),
+                Color(red: 0.08, green: 0.085, blue: 0.08),
+                Color.black
+            ]
+        }
+    }
+
     var body: some View {
         ZStack {
             if let image {
@@ -6606,9 +6755,7 @@ private struct EnvironmentWallpaperImage: View {
                     .scaledToFill()
             } else {
                 LinearGradient(
-                    colors: theme == .canyon
-                        ? [Color.black, Color(red: 0.08, green: 0.13, blue: 0.12)]
-                        : [Color.black, Color(red: 0.02, green: 0.17, blue: 0.23)],
+                    colors: fallbackColors,
                     startPoint: .topLeading,
                     endPoint: .bottomTrailing)
                     .overlay {
@@ -6951,15 +7098,14 @@ private struct SceneWallpaperPicker: View {
                         })
                     .padding(.bottom, 14)
 
-                    Button {
+                    ProductPrimaryActionButton(
+                        title: "选择当前场景",
+                        state: !entered || isSettling
+                            ? .disabled(reason: "场景仍在加载")
+                            : .rest) {
                         guard entered, !isSettling else { return }
                         onSelect(state.environmentThemePreview)
-                    } label: {
-                        ProductPrimaryActionLabel(
-                            title: "选择当前场景")
                     }
-                    .buttonStyle(.plain)
-                    .disabled(!entered || isSettling)
                     .accessibilityHint("应用当前居中的场景")
                     .padding(.horizontal, 24)
                     .padding(.bottom, max(14, windowInsets.bottom + 10))
@@ -6984,6 +7130,8 @@ private struct SpinnerLibrary: View {
     @ObservedObject var state: ProductUiState
     @State private var activeSwipeSession: Int64?
     @State private var swipeStartModel: SpinnerModel?
+    @State private var showingBadgeCatalog = false
+    @State private var presentedCatalogSnapshot: ProgressionCatalogSnapshot?
 
     private static let swipeCommitViewportFraction: CGFloat = 0.18
 
@@ -7031,12 +7179,10 @@ private struct SpinnerLibrary: View {
 
     var body: some View {
         VStack(spacing: 0) {
-            ProductScreenHeading(
-                title: state.selectedModel.title,
-                subtitle: "\(state.currentAppearanceName) · LV.\(state.displayedProgressionLevel)",
-                centered: true)
-            .padding(.top, 18)
-            .padding(.horizontal, 24)
+            ProductToyIdentityLockup(state: state)
+                .frame(maxWidth: .infinity)
+                .padding(.top, 18)
+                .padding(.horizontal, 24)
 
             TabView(selection: Binding(
                 get: { state.selectedModel },
@@ -7095,6 +7241,14 @@ private struct SpinnerLibrary: View {
                     .onEnded { _ in
                         CodexSwiftUIOverlayManager.shared.presentEnvironmentPicker()
                     })
+            .overlay(alignment: .bottom) {
+                LibraryToyBadgeRow(state: state) {
+                    UnityBridge.feedback()
+                    presentedCatalogSnapshot = ProgressionCatalogSnapshot(state: state)
+                    showingBadgeCatalog = true
+                }
+                .padding(.bottom, 60)
+            }
             .accessibilityIdentifier("library-model-carousel")
             .accessibilityHint("左右滑动选择陀螺；长按背景选择场景")
 
@@ -7118,14 +7272,11 @@ private struct SpinnerLibrary: View {
             .padding(.horizontal, 24)
             .padding(.bottom, 8)
 
-            Button {
+            ProductPrimaryActionButton(
+                title: "进入 \(state.selectedModel.title)") {
                 UnityBridge.feedback(.medium)
                 CodexSwiftUIOverlayManager.shared.enterSelectedModel()
-            } label: {
-                ProductPrimaryActionLabel(
-                    title: "进入 \(state.selectedModel.title)")
             }
-            .buttonStyle(.plain)
             .padding(.horizontal, 24)
             .padding(.bottom, 14)
         }
@@ -7139,55 +7290,46 @@ private struct SpinnerLibrary: View {
         .onAppear {
             CodexSwiftUIOverlayManager.shared.beginLibraryPreview()
         }
-    }
-}
-
-private enum DisplayCaseLightingPreset: String, CaseIterable, Identifiable {
-    case softNeutral = "soft-neutral"
-    case roseStudio = "rose-studio"
-    case amberGallery = "amber-gallery"
-    case coolMist = "cool-mist"
-
-    var id: String { rawValue }
-
-    var title: String {
-        switch self {
-        case .softNeutral: return "柔白"
-        case .roseStudio: return "玫瑰"
-        case .amberGallery: return "琥珀"
-        case .coolMist: return "冷雾"
-        }
-    }
-
-    var swatch: [Color] {
-        switch self {
-        case .softNeutral:
-            return [Color(red: 1.00, green: 0.91, blue: 0.84),
-                    Color(red: 0.76, green: 0.88, blue: 1.00)]
-        case .roseStudio:
-            return [Color(red: 1.00, green: 0.70, blue: 0.87),
-                    Color(red: 0.66, green: 0.80, blue: 1.00)]
-        case .amberGallery:
-            return [Color(red: 1.00, green: 0.78, blue: 0.54),
-                    Color(red: 1.00, green: 0.45, blue: 0.22)]
-        case .coolMist:
-            return [Color(red: 0.70, green: 0.88, blue: 1.00),
-                    Color(red: 0.40, green: 0.54, blue: 1.00)]
+        .sheet(
+            isPresented: $showingBadgeCatalog,
+            onDismiss: { presentedCatalogSnapshot = nil }
+        ) {
+            if let presentedCatalogSnapshot {
+                ProgressionLevelDetailsSheet(
+                    state: state,
+                    snapshot: presentedCatalogSnapshot,
+                    initialSection: 1)
+                    .equatable()
+            }
         }
     }
 }
 
 private struct PremiumDisplayCaseExperienceView: View {
+    let gachaRequestId: String?
+    let gachaReceipt: GachaReceiptRow?
     let onClose: () -> Void
+    let onAccept: (() -> Void)?
 
-    @AppStorage("FidgetingApp.DisplayCaseLightingPreset")
-    private var lightingPresetId = DisplayCaseLightingPreset.softNeutral.rawValue
-    @State private var explodedProgress = 0.0
+    init(
+        gachaRequestId: String? = nil,
+        gachaReceipt: GachaReceiptRow? = nil,
+        onClose: @escaping () -> Void,
+        onAccept: (() -> Void)? = nil
+    ) {
+        self.gachaRequestId = gachaRequestId
+        self.gachaReceipt = gachaReceipt
+        self.onClose = onClose
+        self.onAccept = onAccept
+    }
+
+    @ObservedObject private var gachaModel = GachaStoreModel.shared
     @State private var orbitYaw = 0.0
     @State private var orbitPitch = 0.0
     @State private var orbitStart = CGSize.zero
     @State private var zoom = 1.0
     @State private var zoomStart = 1.0
+    @State private var acceptingGachaResult = false
 
     private var orbitGesture: some Gesture {
         DragGesture(minimumDistance: 0)
@@ -7230,204 +7372,130 @@ private struct PremiumDisplayCaseExperienceView: View {
             Color.clear
 
             VStack(spacing: 0) {
-                HStack(spacing: 12) {
-                    Button {
-                        UnityBridge.feedback(.medium)
-                        onClose()
-                    } label: {
-                        Image(systemName: "chevron.left")
-                            .font(.system(size: 16, weight: .semibold))
-                            .foregroundStyle(.white.opacity(0.88))
-                            .frame(width: 42, height: 42)
-                            .background(.ultraThinMaterial, in: Circle())
-                            .overlay {
-                                Circle().stroke(.white.opacity(0.09), lineWidth: 0.7)
+                if gachaReceipt == nil {
+                    HStack(spacing: 12) {
+                        ProductIconButton(
+                            symbol: "chevron.left",
+                            accessibilityLabel: "关闭收藏盒") {
+                                UnityBridge.feedback(.medium)
+                                onClose()
+                            }
+
+                        VStack(alignment: .leading, spacing:
+                            FidgetUITokens.Spacing.compact) {
+                            Text("DISPLAY CASE")
+                                .font(.product(.caption, weight: .semibold))
+                                .foregroundStyle(.white.opacity(0.76))
+                            Text("透明亚克力 · 收藏内容槽")
+                                .font(.product(.caption2))
+                                .foregroundStyle(.white.opacity(0.52))
+                        }
+
+                        Spacer()
+
+                        ProductIconButton(
+                            symbol: "view.3d",
+                            accessibilityLabel: "重置视角") {
+                                orbitYaw = 0
+                                orbitPitch = 0
+                                orbitStart = .zero
+                                zoom = 1
+                                zoomStart = 1
+                                UnityBridge.feedback()
+                                UnityBridge.send(
+                                    "SetDisplayCaseOrbitFromNativeUi",
+                                    value: "0,0")
+                                UnityBridge.send(
+                                    "SetDisplayCaseZoomFromNativeUi",
+                                    value: "1")
                             }
                     }
-                    .buttonStyle(.plain)
-                    .accessibilityLabel("关闭收藏盒")
-
-                    VStack(alignment: .leading, spacing: 2) {
-                        Text("DISPLAY CASE")
-                            .font(.system(size: 12, weight: .semibold))
-                            .foregroundStyle(.white.opacity(0.76))
-                        Text("透明亚克力 · 圆形内容槽")
-                            .font(.system(size: 10, weight: .regular))
-                            .foregroundStyle(.white.opacity(0.42))
-                    }
-
-                    Spacer()
-
-                    Button {
-                        orbitYaw = 0
-                        orbitPitch = 0
-                        orbitStart = .zero
-                        zoom = 1
-                        zoomStart = 1
-                        UnityBridge.feedback()
-                        UnityBridge.send("SetDisplayCaseOrbitFromNativeUi", value: "0,0")
-                        UnityBridge.send("SetDisplayCaseZoomFromNativeUi", value: "1")
-                    } label: {
-                        Image(systemName: "view.3d")
-                            .font(.system(size: 15, weight: .medium))
-                            .foregroundStyle(.white.opacity(0.72))
-                            .frame(width: 42, height: 42)
-                            .background(.ultraThinMaterial, in: Circle())
-                    }
-                    .buttonStyle(.plain)
-                    .accessibilityLabel("重置视角")
+                    .padding(.horizontal, FidgetUITokens.Spacing.section)
+                    .padding(.top, FidgetUITokens.Spacing.metadata)
                 }
-                .padding(.horizontal, 16)
-                .padding(.top, 12)
 
                 Rectangle()
                     .fill(Color.white.opacity(0.001))
                     .contentShape(Rectangle())
                     .gesture(orbitGesture)
                     .simultaneousGesture(zoomGesture)
+                    .allowsHitTesting(gachaReceipt == nil)
                     .accessibilityLabel("收藏盒三维视图")
-                    .accessibilityHint("单指拖动旋转，双指捏合缩放")
+                    .accessibilityHint(gachaReceipt == nil
+                        ? "单指拖动旋转，双指捏合缩放"
+                        : "抽取结果展示")
 
-                VStack(spacing: 14) {
-                    VStack(alignment: .leading, spacing: 9) {
-                        HStack {
-                            Text("LIGHT COLOR")
-                                .font(.system(size: 11, weight: .semibold))
-                                .foregroundStyle(.white.opacity(0.70))
-                            Spacer()
-                            Text((DisplayCaseLightingPreset(
-                                rawValue: lightingPresetId) ?? .softNeutral).title)
-                                .font(.system(size: 9, weight: .medium))
-                                .foregroundStyle(.white.opacity(0.44))
+            }
+
+            if let receipt = gachaReceipt {
+                VStack(spacing: 0) {
+                    Spacer()
+                    ProductBottomActionDock {
+                        ProductScreenHeading(
+                            title: receipt.name,
+                            subtitle: "真实收藏品已进入展示盒",
+                            centered: true)
+
+                        HStack(spacing: FidgetUITokens.Spacing.standard) {
+                            ProductStatusTag(
+                                title: receipt.rarity.title,
+                                accent: receipt.rarity.tint,
+                                emphasized: true)
+                            ProductStatusTag(
+                                title: receipt.isNew
+                                    ? "NEW"
+                                    : "+\(receipt.shardsGained) 合金屑")
                         }
 
-                        HStack(spacing: 8) {
-                            ForEach(DisplayCaseLightingPreset.allCases) { preset in
-                                let selected = preset.rawValue == lightingPresetId
-                                Button {
-                                    lightingPresetId = preset.rawValue
-                                    UnityBridge.feedback()
-                                    UnityBridge.send(
-                                        "SetDisplayCaseLightingFromNativeUi",
-                                        value: preset.rawValue)
-                                } label: {
-                                    VStack(spacing: 5) {
-                                        Circle()
-                                            .fill(LinearGradient(
-                                                colors: preset.swatch,
-                                                startPoint: .topLeading,
-                                                endPoint: .bottomTrailing))
-                                            .frame(width: 24, height: 24)
-                                            .overlay {
-                                                Circle().stroke(
-                                                    selected
-                                                        ? Color.white.opacity(0.92)
-                                                        : Color.white.opacity(0.16),
-                                                    lineWidth: selected ? 2 : 0.7)
-                                            }
-                                            .shadow(
-                                                color: preset.swatch[0].opacity(0.22),
-                                                radius: 5,
-                                                y: 2)
-                                        Text(preset.title)
-                                            .font(.system(size: 9, weight:
-                                                selected ? .semibold : .regular))
-                                            .foregroundStyle(.white.opacity(
-                                                selected ? 0.84 : 0.46))
-                                    }
-                                    .frame(maxWidth: .infinity)
-                                    .contentShape(Rectangle())
-                                }
-                                .buttonStyle(.plain)
-                                .accessibilityLabel("收藏盒\(preset.title)灯光")
-                                .accessibilityAddTraits(selected ? .isSelected : [])
+                        if gachaModel.revealIsComplete {
+                            ProductPrimaryActionButton(
+                                title: "收下",
+                                state: acceptingGachaResult
+                                    ? .loading("正在收下")
+                                    : .rest) {
+                                guard !acceptingGachaResult else { return }
+                                acceptingGachaResult = true
+                                UnityBridge.feedback(.medium)
+                                onAccept?()
                             }
+                            .accessibilityIdentifier("gacha-reveal-accept")
+                        } else {
+                            HStack(spacing: FidgetUITokens.Spacing.standard) {
+                                ProgressView().tint(.white)
+                                Text("正在完成高光")
+                                    .font(.product(.subheadline, weight: .semibold))
+                                    .foregroundStyle(.white.opacity(
+                                        FidgetUITokens.Opacity.secondaryText))
+                            }
+                            .frame(height: FidgetUITokens.Size.primaryActionHeight)
+                            .accessibilityIdentifier("gacha-reveal-in-progress")
                         }
-                    }
-
-                    Divider()
-                        .overlay(Color.white.opacity(0.08))
-
-                    HStack {
-                        VStack(alignment: .leading, spacing: 2) {
-                            Text("ASSEMBLY")
-                                .font(.system(size: 11, weight: .semibold))
-                                .foregroundStyle(.white.opacity(0.70))
-                            Text(explodedProgress > 0.5 ? "EXPLODED" : "ASSEMBLED")
-                                .font(.system(size: 9, weight: .medium))
-                                .foregroundStyle(.white.opacity(0.38))
-                        }
-                        Spacer()
-                        Text("\(Int((explodedProgress * 100).rounded()))%")
-                            .font(.system(size: 11, weight: .medium, design: .monospaced))
-                            .foregroundStyle(.white.opacity(0.55))
-                    }
-
-                    Slider(value: Binding(
-                        get: { explodedProgress },
-                        set: { value in
-                            explodedProgress = value
-                            UnityBridge.send(
-                                "SetDisplayCaseExplodedProgressFromNativeUi",
-                                value: String(
-                                    format: "%.4f",
-                                    locale: Locale(identifier: "en_US_POSIX"),
-                                    value))
-                        }), in: 0...1)
-                    .tint(.white.opacity(0.78))
-
-                    HStack(spacing: 10) {
-                        Button {
-                            explodedProgress = 0
-                            UnityBridge.feedback(.medium)
-                            UnityBridge.send("PlayDisplayCaseAssemblyFromNativeUi")
-                        } label: {
-                            Label("装配并重播", systemImage: "play.fill")
-                                .font(.system(size: 12, weight: .semibold))
-                                .foregroundStyle(.black.opacity(0.82))
-                                .frame(maxWidth: .infinity)
-                                .frame(height: 40)
-                                .background(.white.opacity(0.82), in:
-                                    RoundedRectangle(cornerRadius: 12, style: .continuous))
-                        }
-                        .buttonStyle(.plain)
-
-                        Button {
-                            explodedProgress = 1
-                            UnityBridge.feedback()
-                            UnityBridge.send("ExplodeDisplayCaseFromNativeUi")
-                        } label: {
-                            Image(systemName: "square.3.layers.3d")
-                                .font(.system(size: 14, weight: .medium))
-                                .foregroundStyle(.white.opacity(0.74))
-                                .frame(width: 48, height: 40)
-                                .background(.white.opacity(0.055), in:
-                                    RoundedRectangle(cornerRadius: 12, style: .continuous))
-                        }
-                        .buttonStyle(.plain)
-                        .accessibilityLabel("展开零件")
                     }
                 }
-                .padding(16)
-                .background(.ultraThinMaterial, in:
-                    RoundedRectangle(cornerRadius: 24, style: .continuous))
-                .overlay {
-                    RoundedRectangle(cornerRadius: 24, style: .continuous)
-                        .stroke(.white.opacity(0.09), lineWidth: 0.7)
+            }
+
+            if let gachaRequestId, let gachaReceipt {
+                VStack(spacing: 0) {
+                    Text(gachaRequestId)
+                        .accessibilityIdentifier("gacha-active-request-id")
+                        .accessibilityValue(gachaRequestId)
+                    Text(gachaReceipt.prizeId)
+                        .accessibilityIdentifier("gacha-pending-prize-id")
+                        .accessibilityValue(gachaReceipt.prizeId)
                 }
-                .padding(.horizontal, 14)
-                .padding(.bottom, 10)
+                .font(.product(size: 1, weight: .regular))
+                .foregroundStyle(.clear)
+                .frame(width: 1, height: 1)
             }
         }
+        .productDesignSystem()
         .preferredColorScheme(.dark)
-        .onAppear {
-            let preset = DisplayCaseLightingPreset(rawValue: lightingPresetId)
-                ?? .softNeutral
-            lightingPresetId = preset.rawValue
-            UnityBridge.send(
-                "SetDisplayCaseLightingFromNativeUi",
-                value: preset.rawValue)
-        }
+        .accessibilityIdentifier(gachaReceipt == nil
+            ? "premium-display-case-experience"
+            : "gacha-3d-reveal-root")
+        .accessibilityValue(gachaReceipt.map {
+            "modelId=metal-three-blade;prizeId=\($0.prizeId)"
+        } ?? "modelId=current")
     }
 }
 
@@ -7533,15 +7601,12 @@ private struct HapticSpeedTextureLab: View {
                 .colorScheme(.dark)
             }
 
-            Button {
+            ProductSecondaryActionButton(
+                title: "保存当前参数到 \(state.selectedSpeedTextureSlot.title) 槽",
+                symbol: "tray.and.arrow.down.fill") {
                 state.saveCurrentSpeedTextureSlot()
                 UnityBridge.feedback(.medium)
-            } label: {
-                ProductActionLabel(
-                    title: "保存当前参数到 \(state.selectedSpeedTextureSlot.title) 槽",
-                    symbol: "tray.and.arrow.down.fill")
             }
-            .buttonStyle(.plain)
 
             Group {
                 Text("阶段切换")
@@ -7798,22 +7863,18 @@ private struct ComboHaloTuningPanel: View {
                     apply: {})
 
                 HStack(spacing: 8) {
-                    Button {
+                    ProductSecondaryActionButton(
+                        title: "播放预演",
+                        symbol: "play.fill") {
                         playPreview()
-                    } label: {
-                        ProductActionLabel(title: "播放预演", symbol: "play.fill")
                     }
-                    .buttonStyle(.plain)
 
-                    Button {
+                    ProductSecondaryActionButton(
+                        title: "恢复推荐",
+                        symbol: "arrow.uturn.backward") {
                         state.restoreRecommendedComboHaloTuning()
                         playPreview()
-                    } label: {
-                        ProductActionLabel(
-                            title: "恢复推荐",
-                            symbol: "arrow.uturn.backward")
                     }
-                    .buttonStyle(.plain)
                 }
             }
         }
@@ -7861,20 +7922,17 @@ private struct SettingsPanel: View {
                     .foregroundStyle(Color.white.opacity(0.62))
 
 #if DEBUG
-                Button {
+                ProductSecondaryActionButton(
+                    title: isComboHaloLabVisible
+                        ? "收起 Combo 光晕工具"
+                        : "打开 Combo 光晕工具",
+                    symbol: isComboHaloLabVisible
+                        ? "chevron.up"
+                        : "circle.circle") {
                     withAnimation(.easeInOut(duration: 0.2)) {
                         isComboHaloLabVisible.toggle()
                     }
-                } label: {
-                    ProductActionLabel(
-                        title: isComboHaloLabVisible
-                            ? "收起 Combo 光晕工具"
-                            : "打开 Combo 光晕工具",
-                        symbol: isComboHaloLabVisible
-                            ? "chevron.up"
-                            : "circle.circle")
                 }
-                .buttonStyle(.plain)
 
                 if isComboHaloLabVisible {
                     ComboHaloTuningPanel(state: state)
@@ -7904,27 +7962,23 @@ private struct SettingsPanel: View {
                         .font(.product(.footnote))
                         .foregroundStyle(Color.white.opacity(0.5))
 
-                    Button {
+                    ProductSecondaryActionButton(
+                        title: "试听当前组合",
+                        symbol: "play.fill") {
                         state.applyAndPersist()
                         UnityBridge.send("PreviewHapticFromNativeUi")
-                    } label: {
-                        ProductActionLabel(title: "试听当前组合", symbol: "play.fill")
                     }
-                    .buttonStyle(.plain)
                 }
 
                 DetentTuningPanel(state: state)
 
-                Button {
+                ProductSecondaryActionButton(
+                    title: isHapticLabVisible ? "收起触觉实验室" : "打开触觉实验室",
+                    symbol: isHapticLabVisible ? "chevron.up" : "wrench.and.screwdriver.fill") {
                     withAnimation(.easeInOut(duration: 0.2)) {
                         isHapticLabVisible.toggle()
                     }
-                } label: {
-                    ProductActionLabel(
-                        title: isHapticLabVisible ? "收起触觉实验室" : "打开触觉实验室",
-                        symbol: isHapticLabVisible ? "chevron.up" : "wrench.and.screwdriver.fill")
                 }
-                .buttonStyle(.plain)
 
                 if isHapticLabVisible {
                     ProductSectionCard("触觉映射 · 高级", symbol: "slider.horizontal.3") {
@@ -8099,20 +8153,18 @@ private struct SettingsPanel: View {
                         .foregroundStyle(Color.white.opacity(0.5))
 
                     HStack(spacing: 10) {
-                        Button {
+                        ProductSecondaryActionButton(
+                            title: "试听当前事件",
+                            symbol: "play.fill") {
                             state.previewSelectedAdvancedRecipe()
-                        } label: {
-                            ProductActionLabel(title: "试听当前事件", symbol: "play.fill")
                         }
-                        .buttonStyle(.plain)
 
-                        Button {
+                        ProductSecondaryActionButton(
+                            title: "恢复此事件",
+                            symbol: "arrow.uturn.backward") {
                             state.resetSelectedAdvancedRecipe()
                             UnityBridge.feedback()
-                        } label: {
-                            ProductActionLabel(title: "恢复此事件", symbol: "arrow.uturn.backward")
                         }
-                        .buttonStyle(.plain)
                     }
                     }
                 }
@@ -8188,22 +8240,20 @@ private struct SettingsPanel: View {
                         .font(.product(.footnote))
                         .foregroundStyle(Color.white.opacity(0.54))
 
-                    Button {
+                    ProductSecondaryActionButton(
+                        title: "重新校准设备姿态",
+                        symbol: "scope") {
                         UnityBridge.feedback()
                         UnityBridge.send("RecenterMotionFromNativeUi")
-                    } label: {
-                        ProductActionLabel(title: "重新校准设备姿态", symbol: "scope")
                     }
-                    .buttonStyle(.plain)
                 }
 
-                Button {
+                ProductSecondaryActionButton(
+                    title: "恢复推荐参数",
+                    symbol: "arrow.uturn.backward") {
                     state.restoreRecommendedValues()
                     UnityBridge.feedback(.medium)
-                } label: {
-                    ProductActionLabel(title: "恢复推荐参数", symbol: "arrow.uturn.backward")
                 }
-                .buttonStyle(.plain)
 
                 Text("触感需要在支持 Taptic Engine 的真机上判断；模拟器无法还原力度与锐度。")
                     .font(.product(.footnote))
@@ -8492,6 +8542,110 @@ struct ProgressionThumbnailNativePreviewRoot: View {
     }
 }
 
+/// Simulator-only visual gate for the shipping Library selection page. It
+/// keeps the real carousel, CTAs, global Collector profile, per-toy identity,
+/// and the direct three-Badge horizontal row in one full-screen context.
+struct ProductIdentityNativePreviewRoot: View {
+    enum Mode: String {
+        case gold
+        case metal
+
+        fileprivate var model: SpinnerModel {
+            self == .gold ? .goldFourWing : .metalThreeBlade
+        }
+
+        var backgroundResource: String {
+            self == .gold
+                ? "product-identity-gold-background"
+                : "product-identity-metal-background"
+        }
+    }
+
+    @StateObject private var state: ProductUiState
+    let mode: Mode
+
+    init(mode: Mode) {
+        self.mode = mode
+        let previewState = ProductUiState()
+        previewState.selectedTab = .spinners
+        previewState.isLibraryVisible = true
+        previewState.selectedModel = mode.model
+        previewState.progressionModel = mode.model
+        previewState.progressionLevel = mode == .gold ? 27 : 39
+        previewState.progressionLevelTitle = mode == .gold
+            ? "镜面装配师"
+            : "静音调校师"
+        previewState.progressionFraction = mode == .gold ? 0.46 : 0.62
+        previewState.progressionTotalExperience = mode == .gold ? 438 : 682
+        previewState.progressionLevelStartExperience = mode == .gold ? 361 : 535
+        previewState.progressionNextLevelExperience = mode == .gold ? 529 : 821
+        previewState.progressionStageMaterial = mode == .gold
+            ? "基础合金"
+            : "冷银镍铬"
+        if mode == .metal {
+            previewState.threeBladeMetalSkins = ThreeBladeMetalSkinDetail.parse(
+                "ice-guilloche\t35\t冰银回纹\t冷银镍铬\t机刻交错回纹\t冰蓝抛光边\t静音缓冲垫圈\tA9B6BE\t8DE9FF")
+            previewState.equippedThreeBladeMetalSkinId = "ice-guilloche"
+        }
+        previewState.collectorRank = 12
+        previewState.collectorFraction = 0.58
+        previewState.collectorTotalExperience = 2680
+        previewState.collectorRankStartExperience = 2400
+        previewState.collectorNextRankExperience = 2880
+        previewState.toyBadgeCatalog = BadgeNativePreviewRoot.catalogBadges
+        previewState.progressionUnlockedBadgeCount =
+            previewState.toyBadgeCatalog.filter(\.unlocked).count
+        previewState.progressionTotalBadgeCount = previewState.toyBadgeCatalog.count
+        previewState.motionTelemetry = ProductMotionTelemetryState(
+            available: true,
+            normalizedSpeed: 0.52,
+            angularSpeedRadians: 11,
+            motionRate: 11,
+            speedBand: .engaged,
+            intensity: 0.64,
+            frequency: 0.40)
+        _state = StateObject(wrappedValue: previewState)
+    }
+
+    var body: some View {
+        GeometryReader { proxy in
+            ZStack {
+                if let imagePath = Bundle.main.path(
+                    forResource: mode.backgroundResource,
+                    ofType: "png"),
+                   let image = UIImage(contentsOfFile: imagePath) {
+                    Image(uiImage: image)
+                        .resizable()
+                        .scaledToFill()
+                        .frame(width: proxy.size.width, height: proxy.size.height)
+                        .clipped()
+                } else {
+                    ProductBackdrop()
+                }
+
+                LinearGradient(
+                    colors: [
+                        Color.black.opacity(0.26),
+                        Color.clear,
+                        Color.black.opacity(0.16)
+                    ],
+                    startPoint: .top,
+                    endPoint: .bottom)
+                    .accessibilityHidden(true)
+
+                VStack(spacing: 0) {
+                    ProductTopBar(state: state)
+                        .frame(height: ProductOverlayLayout.topBarHeight)
+                    ProductPanel(state: state)
+                }
+            }
+        }
+        .ignoresSafeArea()
+        .productDesignSystem()
+        .preferredColorScheme(.dark)
+    }
+}
+
 private struct ProgressionCatalogPreviewScene: View {
     var body: some View {
         ZStack {
@@ -8560,6 +8714,65 @@ struct FanCardCatalogNativePreviewRoot: View {
 
 /// Simulator-only visual gate for the approved B8 production Badge system.
 /// It renders the shipping catalog, card component, detail sheet and share card.
+private struct BadgeThumbnailManifest: Decodable {
+    let assets: [BadgeThumbnailManifestAsset]
+}
+
+private struct BadgeThumbnailManifestAsset: Decodable {
+    let id: String
+    let assetName: String
+    let category: String
+    let grade: String
+    let displayToken: String
+    let shortName: String
+}
+
+private struct ProductBadgeThumbnailCategoryPage: View {
+    let title: String
+    let subtitle: String
+    let badges: [ProductBadgeDetail]
+
+    var body: some View {
+        VStack(alignment: .leading, spacing: 16) {
+            VStack(alignment: .leading, spacing: 3) {
+                HStack(alignment: .firstTextBaseline) {
+                    Text(title)
+                        .font(.product(size: 17, weight: .bold))
+                        .foregroundStyle(Color.white.opacity(0.94))
+                    Spacer()
+                    Text(String(format: "%02d", badges.count))
+                        .font(.product(size: 11, weight: .bold).monospacedDigit())
+                        .foregroundStyle(Color.white.opacity(0.40))
+                }
+                Text(subtitle)
+                    .font(.product(size: 8.5, weight: .semibold))
+                    .foregroundStyle(Color.white.opacity(0.44))
+                    .lineLimit(1)
+            }
+
+            LazyVGrid(
+                columns: ProductBadgeLayoutTokens.catalogColumns,
+                spacing: ProductBadgeLayoutTokens.catalogRowSpacing) {
+                ForEach(badges) { badge in
+                    ProductRarityBadge(
+                        assetName: badge.assetName,
+                        token: badge.tokenLine,
+                        shortName: badge.shortName,
+                        grade: badge.grade.rawValue,
+                        state: ProductBadgeState.unlocked.rawValue,
+                        progress: 1,
+                        renderingMode: .catalog)
+                        .frame(maxWidth: .infinity)
+                }
+            }
+
+            Spacer(minLength: 0)
+        }
+        .padding(.horizontal, ProductBadgeLayoutTokens.catalogHorizontalPadding)
+        .padding(.vertical, 18)
+    }
+}
+
 struct BadgeNativePreviewRoot: View {
     enum Mode: String {
         case catalog
@@ -8568,6 +8781,14 @@ struct BadgeNativePreviewRoot: View {
         case unlock
         case share
         case reference
+        case thumbnailPower
+        case thumbnailPulse
+        case thumbnailTechnique
+        case thumbnailCombo
+        case thumbnailFocus
+        case thumbnailCollectorFoundation
+        case thumbnailCollectorCollection
+        case thumbnailChallengeLegacy
     }
 
     @StateObject private var state = ProductUiState()
@@ -8575,7 +8796,7 @@ struct BadgeNativePreviewRoot: View {
 
     private static let unlocked = badge(
         id: "toy_pulse_100k",
-        asset: "badge-b8-toy-pulse-100k",
+        asset: "badge-b10-toy-pulse-100k",
         token: "100K",
         shortName: "PULSE",
         grade: .singularity,
@@ -8588,7 +8809,7 @@ struct BadgeNativePreviewRoot: View {
     fileprivate static let catalogBadges: [ProductBadgeDetail] = [
         badge(
             id: "toy_power_ignition",
-            asset: "badge-b8-toy-power-ignition",
+            asset: "badge-b10-toy-power-ignition",
             token: "1.0 KM/H",
             shortName: "POWER",
             grade: .ignition,
@@ -8599,7 +8820,7 @@ struct BadgeNativePreviewRoot: View {
             description: "达到第一档动力门槛"),
         badge(
             id: "toy_pulse_1k",
-            asset: "badge-b8-toy-pulse-1k",
+            asset: "badge-b10-toy-pulse-1k",
             token: "1K",
             shortName: "PULSE",
             grade: .overdrive,
@@ -8610,7 +8831,7 @@ struct BadgeNativePreviewRoot: View {
             description: "完成 1,000 次真实手势"),
         badge(
             id: "toy_combo_20",
-            asset: "badge-b8-toy-combo-20",
+            asset: "badge-b10-toy-combo-20",
             token: "×20",
             shortName: "CHAIN",
             grade: .apex,
@@ -8621,7 +8842,7 @@ struct BadgeNativePreviewRoot: View {
             description: "单次达到 20 Combo"),
         badge(
             id: "toy_technique_speed",
-            asset: "badge-b8-toy-technique-speed",
+            asset: "badge-b10-toy-technique-speed",
             token: "SPEED",
             shortName: "CONTROL",
             grade: .apex,
@@ -8634,7 +8855,7 @@ struct BadgeNativePreviewRoot: View {
         unlocked,
         badge(
             id: "toy_focus_10h",
-            asset: "badge-b8-toy-focus-10h",
+            asset: "badge-b10-toy-focus-10h",
             token: "10H",
             shortName: "FOCUS",
             grade: .singularity,
@@ -8648,7 +8869,7 @@ struct BadgeNativePreviewRoot: View {
     private static let referenceBadges: [ProductBadgeDetail] = [
         badge(
             id: "toy_pulse_1k",
-            asset: "badge-b8-toy-pulse-1k",
+            asset: "badge-b10-toy-pulse-1k",
             token: "1K",
             shortName: "PULSE",
             grade: .overdrive,
@@ -8659,7 +8880,7 @@ struct BadgeNativePreviewRoot: View {
             description: "完成 1,000 次真实手势"),
         badge(
             id: "toy_pulse_10k",
-            asset: "badge-b8-toy-pulse-10k",
+            asset: "badge-b10-toy-pulse-10k",
             token: "10K",
             shortName: "PULSE",
             grade: .apex,
@@ -8670,7 +8891,7 @@ struct BadgeNativePreviewRoot: View {
             description: "完成 10,000 次真实手势"),
         badge(
             id: "toy_technique_speed",
-            asset: "badge-b8-toy-technique-speed",
+            asset: "badge-b10-toy-technique-speed",
             token: "SPEED",
             shortName: "CONTROL",
             grade: .apex,
@@ -8681,7 +8902,7 @@ struct BadgeNativePreviewRoot: View {
             description: "完成一次高速技巧"),
         badge(
             id: "toy_technique_endurance",
-            asset: "badge-b8-toy-technique-endurance",
+            asset: "badge-b10-toy-technique-endurance",
             token: "ENDURE",
             shortName: "CONTROL",
             grade: .apex,
@@ -8692,7 +8913,7 @@ struct BadgeNativePreviewRoot: View {
             description: "完成一次耐力技巧"),
         badge(
             id: "toy_combo_20",
-            asset: "badge-b8-toy-combo-20",
+            asset: "badge-b10-toy-combo-20",
             token: "×20",
             shortName: "CHAIN",
             grade: .apex,
@@ -8703,7 +8924,7 @@ struct BadgeNativePreviewRoot: View {
             description: "单次达到 20 Combo"),
         badge(
             id: "toy_combo_50",
-            asset: "badge-b8-toy-combo-50",
+            asset: "badge-b10-toy-combo-50",
             token: "×50",
             shortName: "CHAIN",
             grade: .singularity,
@@ -8714,7 +8935,7 @@ struct BadgeNativePreviewRoot: View {
             description: "单次达到 50 Combo"),
         badge(
             id: "toy_focus_30m",
-            asset: "badge-b8-toy-focus-30m",
+            asset: "badge-b10-toy-focus-30m",
             token: "30M",
             shortName: "FOCUS",
             grade: .overdrive,
@@ -8725,7 +8946,7 @@ struct BadgeNativePreviewRoot: View {
             description: "真实触摸累计 30 分钟"),
         badge(
             id: "toy_focus_2h",
-            asset: "badge-b8-toy-focus-2h",
+            asset: "badge-b10-toy-focus-2h",
             token: "2H",
             shortName: "FOCUS",
             grade: .apex,
@@ -8735,6 +8956,125 @@ struct BadgeNativePreviewRoot: View {
             title: "专注 2 小时",
             description: "真实触摸累计 2 小时")
     ]
+
+    private static let allThumbnailBadges: [ProductBadgeDetail] = {
+        guard let url = Bundle.main.url(
+            forResource: "badge-b10-manifest",
+            withExtension: "json"),
+              let data = try? Data(contentsOf: url),
+              let manifest = try? JSONDecoder().decode(
+                BadgeThumbnailManifest.self,
+                from: data) else { return [] }
+
+        return manifest.assets.enumerated().compactMap { index, asset in
+            let grade: ProductBadgeGrade
+            switch asset.grade.lowercased() {
+            case "ignition": grade = .ignition
+            case "overdrive": grade = .overdrive
+            case "apex": grade = .apex
+            case "singularity": grade = .singularity
+            default: return nil
+            }
+
+            let scope: ProductBadgeScope
+            if asset.id.hasPrefix("toy_") {
+                scope = .toy
+            } else if asset.id.hasPrefix("collector_") {
+                scope = .collector
+            } else if asset.id.hasPrefix("challenge_") {
+                scope = .challenge
+            } else if asset.id.hasPrefix("legacy_") {
+                scope = .legacy
+            } else {
+                return nil
+            }
+
+            let token = asset.category == "power"
+                ? "\(asset.displayToken) KM/H"
+                : asset.displayToken
+            let rewards: (experience: Int, shards: Int)
+            switch grade {
+            case .ignition: rewards = (5, 1)
+            case .overdrive: rewards = (10, 2)
+            case .apex: rewards = (20, 3)
+            case .singularity: rewards = (40, 5)
+            }
+            return ProductBadgeDetail(
+                id: asset.id,
+                scope: scope,
+                category: asset.category,
+                mechanism: "ThumbnailCatalog",
+                metric: "ThumbnailCatalog",
+                currentValue: 1,
+                targetValue: 1,
+                progress: 1,
+                state: .unlocked,
+                unlockedAtUtc: "2026-08-17T00:00:00Z",
+                rewardClaimed: true,
+                grade: grade,
+                visibility: "Standard",
+                title: asset.id,
+                description: asset.id,
+                assetName: asset.assetName,
+                displayToken: token,
+                displayUnit: "",
+                shortName: asset.shortName,
+                experienceReward: rewards.experience,
+                shardReward: rewards.shards,
+                displayOrder: index,
+                cycleIndex: 0)
+        }
+    }()
+
+    private static func thumbnailPageSpec(
+        for mode: Mode
+    ) -> (title: String, subtitle: String, badges: [ProductBadgeDetail]) {
+        let categories: Set<String>
+        let title: String
+        let subtitle: String
+        switch mode {
+        case .thumbnailPower:
+            categories = ["power"]
+            title = "TOY · POWER"
+            subtitle = "1.0 · 2.0 · 3.5 · 4.5 KM/H"
+        case .thumbnailPulse:
+            categories = ["pulse"]
+            title = "TOY · PULSE"
+            subtitle = "100 · 1K · 10K · 100K"
+        case .thumbnailTechnique:
+            categories = ["technique"]
+            title = "TOY · CONTROL"
+            subtitle = "CLEAN · POWER · SPEED · ENDURE · PERFECT"
+        case .thumbnailCombo:
+            categories = ["combo"]
+            title = "TOY · CHAIN"
+            subtitle = "×5 · ×10 · ×20 · ×50"
+        case .thumbnailFocus:
+            categories = ["focus"]
+            title = "TOY · FOCUS"
+            subtitle = "5M · 30M · 2H · 10H"
+        case .thumbnailCollectorFoundation:
+            categories = ["rhythm", "explore"]
+            title = "COLLECTOR · RHYTHM / EXPLORE"
+            subtitle = "VALID WEEKS · DISCOVERED MODELS"
+        case .thumbnailCollectorCollection:
+            categories = ["mastery", "collection"]
+            title = "COLLECTOR · MASTERY / VAULT"
+            subtitle = "TOY LEVELS · APPEARANCE COLLECTION"
+        case .thumbnailChallengeLegacy:
+            categories = ["challenge", "legacy"]
+            title = "CHALLENGE + LEGACY"
+            subtitle = "WEEKLY · CYCLE · FOUNDER"
+        default:
+            categories = []
+            title = "BADGE THUMBNAILS"
+            subtitle = "SHIPPING MANIFEST"
+        }
+        return (
+            title,
+            subtitle,
+            allThumbnailBadges.filter { categories.contains($0.category) })
+    }
 
     var body: some View {
         Group {
@@ -8793,8 +9133,8 @@ struct BadgeNativePreviewRoot: View {
                 ScrollView {
                     VStack(alignment: .leading, spacing: 12) {
                         ProductScreenHeading(
-                            title: "B8.13 · CENTERED TYPE",
-                            subtitle: "fixed vertical center · smaller typography",
+                            title: "B10 · CHALLENGE + LEGACY MASTER",
+                            subtitle: "rounded satin frame · recessed leather · pearl relief",
                             symbol: "sparkles",
                             accent: Color.white.opacity(0.82))
                         LazyVGrid(
@@ -8817,6 +9157,20 @@ struct BadgeNativePreviewRoot: View {
                     .padding(.vertical, 18)
                 }
                 .background(ProductBackdrop().ignoresSafeArea())
+            case .thumbnailPower,
+                 .thumbnailPulse,
+                 .thumbnailTechnique,
+                 .thumbnailCombo,
+                 .thumbnailFocus,
+                 .thumbnailCollectorFoundation,
+                 .thumbnailCollectorCollection,
+                 .thumbnailChallengeLegacy:
+                let spec = Self.thumbnailPageSpec(for: mode)
+                ProductBadgeThumbnailCategoryPage(
+                    title: spec.title,
+                    subtitle: spec.subtitle,
+                    badges: spec.badges)
+                .background(ProductBackdrop().ignoresSafeArea())
             }
         }
         .productDesignSystem()
@@ -8830,6 +9184,11 @@ struct BadgeNativePreviewRoot: View {
                     badge: Self.unlocked,
                     sourceTitle: "三叶金属")
                 state.showingBadgeUnlockNotice = true
+            }
+            let thumbnailSpec = Self.thumbnailPageSpec(for: mode)
+            if !thumbnailSpec.badges.isEmpty {
+                ProductRarityBadge.prewarmCatalogArtwork(
+                    assetNames: thumbnailSpec.badges.map(\.assetName))
             }
         }
     }
@@ -8895,8 +9254,10 @@ struct BadgeNativePreviewRoot: View {
 /// It renders the same terminal 66% card, title and pager used in-app.
 struct EnvironmentWallpaperPickerNativePreviewRoot: View {
     enum Mode: String {
+        case adaptive
         case canyon
         case cyberpunk
+        case mineralRidge = "mineral-ridge"
     }
 
     @StateObject private var state: ProductUiState
@@ -8904,8 +9265,13 @@ struct EnvironmentWallpaperPickerNativePreviewRoot: View {
 
     init(mode: Mode) {
         self.mode = mode
-        let initialTheme: EnvironmentTheme =
-            mode == .cyberpunk ? .cyberpunk : .canyon
+        let initialTheme: EnvironmentTheme
+        switch mode {
+        case .adaptive: initialTheme = .adaptive
+        case .canyon: initialTheme = .canyon
+        case .cyberpunk: initialTheme = .cyberpunk
+        case .mineralRidge: initialTheme = .mineralRidge
+        }
         let initialState = ProductUiState()
         initialState.environmentTheme = initialTheme
         initialState.environmentThemePreview = initialTheme
@@ -8914,7 +9280,12 @@ struct EnvironmentWallpaperPickerNativePreviewRoot: View {
     }
 
     private var previewTheme: EnvironmentTheme {
-        mode == .cyberpunk ? .cyberpunk : .canyon
+        switch mode {
+        case .adaptive: return .adaptive
+        case .canyon: return .canyon
+        case .cyberpunk: return .cyberpunk
+        case .mineralRidge: return .mineralRidge
+        }
     }
 
     var body: some View {
@@ -9062,12 +9433,16 @@ private final class CodexSwiftUIOverlayManager {
             top.view.topAnchor.constraint(equalTo: rootController.view.topAnchor),
             top.view.leadingAnchor.constraint(equalTo: rootController.view.leadingAnchor),
             top.view.trailingAnchor.constraint(equalTo: rootController.view.trailingAnchor),
-            top.view.heightAnchor.constraint(equalToConstant: 108),
+            top.view.heightAnchor.constraint(
+                equalToConstant: ProductOverlayLayout.topBarHeight),
 
-            mode.view.topAnchor.constraint(equalTo: rootController.view.topAnchor, constant: 108),
+            mode.view.topAnchor.constraint(
+                equalTo: rootController.view.topAnchor,
+                constant: ProductOverlayLayout.modeBarTop),
             mode.view.leadingAnchor.constraint(equalTo: rootController.view.leadingAnchor),
             mode.view.trailingAnchor.constraint(equalTo: rootController.view.trailingAnchor),
-            mode.view.heightAnchor.constraint(equalToConstant: 58),
+            mode.view.heightAnchor.constraint(
+                equalToConstant: ProductOverlayLayout.modeBarHeight),
 
             progression.view.leadingAnchor.constraint(
                 equalTo: rootController.view.leadingAnchor,
@@ -9089,6 +9464,16 @@ private final class CodexSwiftUIOverlayManager {
         progressionController = progression
         state.applyAndPersist(includeMode: true)
         state.restorePersistedDetentTuningIfAvailable()
+        GachaShippingRevealContinuation.preparePremiumDisplayCase = {
+            [weak self] requestID, receipt in
+            self?.presentGachaPrizeDisplayCase(
+                requestID: requestID,
+                receipt: receipt)
+        }
+        GachaShippingRevealContinuation.cancelPreparedDisplayCase = {
+            [weak self] in
+            self?.dismissDisplayCase()
+        }
         UnityBridge.send("RequestDetentFeelStateFromNativeUi")
         UnityBridge.send("RequestProgressionStateFromNativeUi")
         showPanel()
@@ -9297,7 +9682,6 @@ private final class CodexSwiftUIOverlayManager {
     func beginLibraryPreview() {
         guard state.selectedTab == .spinners && state.isLibraryVisible else { return }
         UnityBridge.send("SetLibraryPreviewActiveFromNativeUi", value: "true")
-        UnityBridge.send("SelectModelFromNativeUi", value: state.selectedModel.rawValue)
     }
 
     func enterSelectedModel() {
@@ -9395,8 +9779,55 @@ private final class CodexSwiftUIOverlayManager {
         displayCaseController = controller
     }
 
-    private func dismissDisplayCase() {
-        UnityBridge.send("SetDisplayCasePresentedFromNativeUi", value: "false")
+    func presentGachaPrizeDisplayCase(
+        requestID: String,
+        receipt: GachaReceiptRow
+    ) {
+        guard displayCaseController == nil,
+              let rootController = activeRootViewController() else { return }
+        dismissEnvironmentPicker(resetPreview: true, animated: false)
+        dismissAppearanceEditorIfNeeded()
+        UnityBridge.send(
+            "PresentGachaPrizeFromNativeUi",
+            value: "\(requestID.lowercased())|\(receipt.prizeId)")
+
+        let controller = UIHostingController(
+            rootView: PremiumDisplayCaseExperienceView(
+                gachaRequestId: requestID.lowercased(),
+                gachaReceipt: receipt,
+                onClose: { [weak self] in
+                    self?.dismissDisplayCase()
+                },
+                onAccept: { [weak self] in
+                    self?.acceptGachaReveal(requestID: requestID)
+                }))
+        configure(controller, in: rootController, background: .clear)
+        NSLayoutConstraint.activate([
+            controller.view.topAnchor.constraint(equalTo: rootController.view.topAnchor),
+            controller.view.leadingAnchor.constraint(equalTo: rootController.view.leadingAnchor),
+            controller.view.trailingAnchor.constraint(equalTo: rootController.view.trailingAnchor),
+            controller.view.bottomAnchor.constraint(equalTo: rootController.view.bottomAnchor)
+        ])
+        topController?.view.isHidden = true
+        modeController?.view.isHidden = true
+        progressionController?.view.isHidden = true
+        panelController?.view.isHidden = true
+        rootController.view.bringSubviewToFront(controller.view)
+        displayCaseController = controller
+    }
+
+    private func acceptGachaReveal(requestID: String) {
+        UnityBridge.send(
+            "AcknowledgeGachaReceiptFromNativeUi",
+            value: requestID.lowercased())
+        GachaStoreModel.shared.resetRevealPresentation()
+        dismissDisplayCase(notifyUnity: false)
+    }
+
+    private func dismissDisplayCase(notifyUnity: Bool = true) {
+        if notifyUnity {
+            UnityBridge.send("SetDisplayCasePresentedFromNativeUi", value: "false")
+        }
         guard let controller = displayCaseController else { return }
         displayCaseController = nil
         controller.willMove(toParent: nil)

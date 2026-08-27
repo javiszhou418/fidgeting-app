@@ -191,6 +191,10 @@ namespace FidgetingApp.Product.Gacha
     public static class GachaCatalog
     {
         public const string LaunchSeriesId = "canyon-lode";
+        public const string MetalThreeBladePrizeId =
+            "canyon-heir-metal-three-blade";
+        public const string MetalThreeBladeContentReference =
+            "toy/metal-three-blade";
 
         private static readonly GachaSeriesDefinition[] series =
         {
@@ -231,7 +235,11 @@ namespace FidgetingApp.Product.Gacha
                     new GachaPrizeDefinition(
                         "canyon-heir-aurora-vein", LaunchSeriesId,
                         GachaRarity.Heirloom, GachaPrizeKind.ToySkin,
-                        "极光矿脉", "skin/pointed-three-blade/gacha-aurora-vein")
+                        "极光矿脉", "skin/pointed-three-blade/gacha-aurora-vein"),
+                    new GachaPrizeDefinition(
+                        MetalThreeBladePrizeId, LaunchSeriesId,
+                        GachaRarity.Heirloom, GachaPrizeKind.Toy,
+                        "三叶金属陀螺", MetalThreeBladeContentReference)
                 })
         };
 

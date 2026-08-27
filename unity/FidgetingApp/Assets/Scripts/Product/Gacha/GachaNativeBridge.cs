@@ -19,6 +19,7 @@ namespace FidgetingApp.Product.Gacha
             string catalogPayload,
             string snapshotPayload,
             string receiptPayload);
+
 #endif
 
         public static void Publish(
@@ -42,9 +43,22 @@ namespace FidgetingApp.Product.Gacha
         /// </summary>
         public static string ReceiptPayload(GachaDrawReceipt receipt)
         {
+            return ReceiptPayload(string.Empty, receipt);
+        }
+
+        public static string ReceiptPayload(
+            string requestId,
+            GachaDrawReceipt receipt)
+        {
             var rows = new List<string>
             {
-                "result\t" + (receipt.Success ? "ok" : receipt.FailureReason)
+                string.IsNullOrEmpty(requestId)
+                    ? "result\t" + (receipt.Success ? "ok" : receipt.FailureReason)
+                    : string.Join(
+                        "\t",
+                        "result",
+                        requestId,
+                        receipt.Success ? "ok" : receipt.FailureReason)
             };
             for (int index = 0; index < receipt.Rows.Count; index++)
             {
@@ -63,7 +77,8 @@ namespace FidgetingApp.Product.Gacha
                     row.ShardsGained.ToString(CultureInfo.InvariantCulture),
                     row.Outcome.ForcedBySignaturePity ? "1" : "0",
                     row.Outcome.ForcedByHeirloomPity ? "1" : "0",
-                    row.Outcome.ForcedByTenDraw ? "1" : "0"));
+                    row.Outcome.ForcedByTenDraw ? "1" : "0",
+                    row.FirstObtainedAtUtc));
             }
 
             return string.Join("\n", rows);

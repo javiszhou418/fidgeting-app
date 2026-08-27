@@ -41,11 +41,26 @@ def reset_scene() -> None:
 
 
 def material(name: str, color: tuple[float, float, float, float], metallic: float,
-             roughness: float) -> bpy.types.Material:
+             roughness: float, transmission: float = 0.0,
+             ior: float = 1.5) -> bpy.types.Material:
     result = bpy.data.materials.get(name) or bpy.data.materials.new(name)
     result.diffuse_color = color
     result.metallic = metallic
     result.roughness = roughness
+    result.use_nodes = True
+    principled = result.node_tree.nodes.get("Principled BSDF")
+    if principled is not None:
+        principled.inputs["Base Color"].default_value = color
+        principled.inputs["Metallic"].default_value = metallic
+        principled.inputs["Roughness"].default_value = roughness
+        if "IOR" in principled.inputs:
+            principled.inputs["IOR"].default_value = ior
+        if "Transmission Weight" in principled.inputs:
+            principled.inputs["Transmission Weight"].default_value = transmission
+        elif "Transmission" in principled.inputs:
+            principled.inputs["Transmission"].default_value = transmission
+        if "Alpha" in principled.inputs:
+            principled.inputs["Alpha"].default_value = color[3]
     return result
 
 
@@ -87,6 +102,25 @@ def rounded_box(name: str, dimensions_mm: tuple[float, float, float],
     obj.dimensions = tuple(millimeters(v) for v in dimensions_mm)
     obj.parent = parent
     return finish_mesh(obj, mat, bevel_mm, 6)
+
+
+def rounded_frame(name_prefix: str, width_mm: float, height_mm: float,
+                  bar_mm: float, depth_mm: float,
+                  location_mm: tuple[float, float, float], bevel_mm: float,
+                  mat: bpy.types.Material, parent: bpy.types.Object) -> list[bpy.types.Object]:
+    x, y, z = location_mm
+    horizontal_width = max(bar_mm, width_mm - bar_mm)
+    vertical_height = max(bar_mm, height_mm - bar_mm)
+    return [
+        rounded_box(f"{name_prefix}_Top", (horizontal_width, depth_mm, bar_mm),
+                    (x, y, z + (height_mm - bar_mm) * 0.5), bevel_mm, mat, parent),
+        rounded_box(f"{name_prefix}_Bottom", (horizontal_width, depth_mm, bar_mm),
+                    (x, y, z - (height_mm - bar_mm) * 0.5), bevel_mm, mat, parent),
+        rounded_box(f"{name_prefix}_Left", (bar_mm, depth_mm, vertical_height),
+                    (x - (width_mm - bar_mm) * 0.5, y, z), bevel_mm, mat, parent),
+        rounded_box(f"{name_prefix}_Right", (bar_mm, depth_mm, vertical_height),
+                    (x + (width_mm - bar_mm) * 0.5, y, z), bevel_mm, mat, parent),
+    ]
 
 
 def cylinder(name: str, diameter_mm: float, depth_mm: float,
@@ -155,94 +189,84 @@ def build_model() -> tuple[bpy.types.Object, dict[str, object]]:
     scene.unit_settings.length_unit = "METERS"
     scene.unit_settings.scale_length = 1.0
 
-    acrylic = material("MAT_Acrylic_Clear", (0.70, 0.82, 0.90, 0.12), 0.0, 0.05)
-    acrylic.diffuse_color = (0.70, 0.82, 0.90, 0.12)
-    metal = material("MAT_BrushedMetal", (0.58, 0.62, 0.68, 1.0), 0.98, 0.18)
-    graphite = material("MAT_NeutralGraphite", (0.055, 0.067, 0.082, 1.0), 0.46, 0.34)
-    velvet = material("MAT_BlackVelvet", (0.012, 0.016, 0.022, 1.0), 0.0, 0.84)
-    matte = material("MAT_MatteBlackBox", (0.003, 0.004, 0.006, 1.0), 0.10, 0.22)
+    acrylic = material(
+        "MAT_FrostedPolycarbonate", (0.61, 0.65, 0.68, 0.10),
+        0.0, 0.22, transmission=0.92, ior=1.585)
+    acrylic_edge = material(
+        "MAT_FrostedPolycarbonateEdge", (0.72, 0.75, 0.77, 0.21),
+        0.0, 0.18, transmission=0.78, ior=1.585)
+    metal = material(
+        "MAT_RarityFoilSilver", (0.58, 0.62, 0.66, 1.0), 0.96, 0.30)
+    graphite = material(
+        "MAT_LabelGraphite", (0.055, 0.060, 0.066, 1.0), 0.22, 0.52)
+    velvet = material(
+        "MAT_BlackFlocking", (0.009, 0.011, 0.014, 1.0), 0.0, 0.91)
+    label_paper = material(
+        "MAT_LabelPaper", (0.74, 0.72, 0.68, 1.0), 0.0, 0.73)
 
     root = empty(ROOT_NAME)
     root["content_contract"] = "runtime-only"
-    root["capsule_shape"] = "neutral-circular"
-    root["style"] = "clear-acrylic-four-fastener"
+    root["capsule_shape"] = "collector-slab-large-chamber"
+    root["style"] = "frosted-polycarbonate-collector-slab"
     root["has_opaque_outer_box"] = False
     root["units"] = "meters"
     layers = {name: empty(name, root) for name in EXPECTED_LAYERS}
 
-    rounded_box("Acrylic_FrontPlate", (188, 5, 240), (0, -18, 0), 12,
+    rounded_box("Polycarbonate_FrontShell", (212, 6, 300), (0, -22, 0), 13,
                 acrylic, layers["Layer_01_FrontPlate"])
 
-    fastener_positions = {
-        "Fastener_TL": (-78, -23, 104),
-        "Fastener_TR": (78, -23, 104),
-        "Fastener_BL": (-78, -23, -104),
-        "Fastener_BR": (78, -23, -104),
-    }
-    for name, position in fastener_positions.items():
-        cylinder(name, 16, 12, position, matte,
-                 layers["Layer_02_Fasteners"], vertices=64, bevel_mm=1.2)
-        collar_name = name.replace("Fastener_", "ChromeCollar_")
-        cylinder(collar_name, 20, 4, (position[0], -17, position[2]), metal,
-                 layers["Layer_02_Fasteners"], vertices=64, bevel_mm=0.8)
+    label_layer = layers["Layer_02_Fasteners"]
+    rounded_box("Collector_LabelPaper", (184, 3.0, 58), (0, -26, 105), 4.0,
+                label_paper, label_layer)
+    rounded_frame("Collector_LabelFoil", 188, 62, 2.2, 1.6,
+                  (0, -28, 105), 0.65, metal, label_layer)
 
     spacer = layers["Layer_03_SpacerFrame"]
-    rounded_box("Acrylic_SpacerFrame_Top", (180, 10, 10), (0, -11, 110), 4,
-                acrylic, spacer)
-    rounded_box("Acrylic_SpacerFrame_Bottom", (180, 10, 10), (0, -11, -110), 4,
-                acrylic, spacer)
-    rounded_box("Acrylic_SpacerFrame_Left", (10, 10, 210), (-84, -11, 0), 4,
-                acrylic, spacer)
-    rounded_box("Acrylic_SpacerFrame_Right", (10, 10, 210), (84, -11, 0), 4,
-                acrylic, spacer)
+    rounded_frame("Polycarbonate_SpacerFrame", 202, 288, 8, 12,
+                  (0, -12, 0), 3.4, acrylic_edge, spacer)
 
     capsule = layers["Layer_04_Capsule"]
-    torus("Capsule_CircularRing", 96, 84, 1.6, (0, -7, 0),
-          acrylic, capsule)
-    cylinder("Capsule_ClearBack", 84, 3, (0, -1, 0), acrylic,
-             capsule, vertices=96, bevel_mm=0.8)
-    torus("Capsule_EdgeHighlight", 90, 86, 0.45, (0, -12, 0),
-          metal, capsule)
+    rounded_frame("Collector_ChamberRim", 190, 210, 5.5, 8,
+                  (0, -16, -42), 2.4, acrylic_edge, capsule)
+    rounded_box("Collector_RarityFoilBand", (170, 1.8, 2.4),
+                (0, -27.5, 69), 0.8, metal, capsule)
 
-    graphite_insert_with_aperture(layers["Layer_05_VelvetInsert"], graphite)
+    rounded_box("Collector_BlackFlocking", (182, 9, 202), (0, -2, -42), 10,
+                velvet, layers["Layer_05_VelvetInsert"])
 
-    rounded_box("Acrylic_RearPlate", (188, 4, 240), (0, 10, 0), 12,
+    rounded_box("Polycarbonate_RearShell", (212, 7, 300), (0, 16, 0), 13,
                 acrylic, layers["Layer_06_RearPlate"])
 
     tray = layers["Layer_07_OuterTray"]
-    rounded_box("Graphite_InnerTray", (160, 8, 208), (0, 16, 0), 10,
-                graphite, tray)
+    rounded_frame("Polycarbonate_RearStep", 216, 304, 6, 9,
+                  (0, 23, 0), 2.6, acrylic_edge, tray)
 
     lid = layers["Layer_08_BoxLid"]
-    rounded_box("Acrylic_BackFrame_Top", (188, 6, 8), (0, 23, 116), 3,
-                acrylic, lid)
-    rounded_box("Acrylic_BackFrame_Bottom", (188, 6, 8), (0, 23, -116), 3,
-                acrylic, lid)
-    rounded_box("Acrylic_BackFrame_Left", (8, 6, 224), (-90, 23, 0), 3,
-                acrylic, lid)
-    rounded_box("Acrylic_BackFrame_Right", (8, 6, 224), (90, 23, 0), 3,
-                acrylic, lid)
+    rounded_frame("Polycarbonate_FrontStep", 216, 304, 6, 9,
+                  (0, -27, 0), 2.6, acrylic_edge, lid)
 
     # A stable locator included for DCC inspection only. Unity creates the
     # actual runtime contentSlot hierarchy so prize ownership stays external.
     content_anchor = empty("ContentSlot_Anchor", root)
-    content_anchor.location = (0.0, millimeters(-7), 0.0)
+    content_anchor.location = (0.0, millimeters(-18), millimeters(-42))
     content_anchor["runtime_content_only"] = True
 
     bpy.context.view_layer.objects.active = root
     root.select_set(True)
 
     manifest = {
-        "schemaVersion": 1,
+        "schemaVersion": 2,
         "root": ROOT_NAME,
         "unit": "meter",
-        "style": "clear-acrylic-four-fastener",
-        "caseDimensionsMm": {"width": 188, "height": 240, "depth": 53},
-        "outerBoxDimensionsMm": {"width": 188, "height": 240, "depth": 53},
-        "capsule": {"shape": "circular", "diameterMm": 84, "depthMm": 26},
+        "style": "frosted-polycarbonate-collector-slab",
+        "caseDimensionsMm": {"width": 216, "height": 304, "depth": 50},
+        "outerBoxDimensionsMm": {"width": 216, "height": 304, "depth": 50},
+        "label": {"widthMm": 184, "heightMm": 58, "centerYmm": 105},
+        "capsule": {"shape": "rounded-rectangle", "widthMm": 180,
+                    "heightMm": 198, "depthMm": 48, "centerYmm": -42},
         "layers": list(EXPECTED_LAYERS),
-        "fasteners": list(fastener_positions),
-        "fastenerStyle": "black-cap-with-chrome-collar",
+        "fasteners": [],
+        "fastenerStyle": "none",
         "contentSlot": "ContentSlot_Anchor",
         "hasOpaqueOuterBox": False,
         "containsPrizeGeometry": False,

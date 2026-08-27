@@ -15,6 +15,8 @@ enum FidgetUITokens {
         static let minimumHitTarget: CGFloat = 44
         static let compactIconButton: CGFloat = 38
         static let primaryActionHeight: CGFloat = 52
+        static let filterChipHeight: CGFloat = 32
+        static let statusTagHeight: CGFloat = 26
         static let pageDot: CGFloat = 6
         static let selectedPageDotWidth: CGFloat = 18
     }
@@ -28,7 +30,11 @@ enum FidgetUITokens {
     enum Spacing {
         static let compact: CGFloat = 4
         static let standard: CGFloat = 8
-        static let section: CGFloat = 15
+        static let metadata: CGFloat = 12
+        static let section: CGFloat = 16
+        static let pageInset: CGFloat = 20
+        static let sectionGroup: CGFloat = 24
+        static let majorGroup: CGFloat = 32
     }
 
     enum Opacity {
@@ -36,10 +42,15 @@ enum FidgetUITokens {
         static let secondaryText = 0.58
         static let tertiaryText = 0.42
         static let selectedFill = 0.10
+        static let disabledAction = 0.40
+        static let primaryActionSurface = 0.96
+        static let primaryActionInk = 0.90
     }
 
     enum Motion {
         static let selectionDuration = 0.18
+        static let pressedDuration = 0.12
+        static let pressedScale = 0.98
     }
 }
 
@@ -335,37 +346,200 @@ struct ProductPageIndicator<Item: Hashable>: View {
     }
 }
 
+enum ProductActionState: Equatable {
+    case rest
+    case loading(String)
+    case disabledValue(String?)
+    case success(String)
+    case error(String)
+
+    /// Keeps existing `.disabled` call sites source-compatible while allowing
+    /// new actions to explain why they are unavailable with
+    /// `.disabled(reason: "...")`.
+    static var disabled: Self {
+        .disabledValue(nil)
+    }
+
+    static func disabled(reason: String) -> Self {
+        .disabledValue(reason)
+    }
+
+    var disablesInteraction: Bool {
+        switch self {
+        case .loading, .disabledValue, .success:
+            return true
+        case .rest, .error:
+            return false
+        }
+    }
+
+    var accessibilityValue: String? {
+        switch self {
+        case .rest:
+            return nil
+        case .loading:
+            return "处理中"
+        case .disabledValue(let reason):
+            guard let reason = Self.normalized(reason) else {
+                return "不可用"
+            }
+            return "不可用，\(reason)"
+        case .success:
+            return "已完成"
+        case .error:
+            return "失败，可重试"
+        }
+    }
+
+    func visibleTitle(default title: String) -> String {
+        switch self {
+        case .rest, .disabledValue:
+            return title
+        case .loading(let statusTitle),
+             .success(let statusTitle),
+             .error(let statusTitle):
+            return statusTitle
+        }
+    }
+
+    var isLoading: Bool {
+        if case .loading = self { return true }
+        return false
+    }
+
+    var isDisabled: Bool {
+        if case .disabledValue = self { return true }
+        return false
+    }
+
+    var disabledReason: String? {
+        guard case .disabledValue(let reason) = self else { return nil }
+        return Self.normalized(reason)
+    }
+
+    private static func normalized(_ value: String?) -> String? {
+        guard let value else { return nil }
+        let normalized = value.trimmingCharacters(in: .whitespacesAndNewlines)
+        return normalized.isEmpty ? nil : normalized
+    }
+}
+
+struct ProductActionButtonStyle: ButtonStyle {
+    func makeBody(configuration: Configuration) -> some View {
+        configuration.label
+            .scaleEffect(configuration.isPressed
+                         ? FidgetUITokens.Motion.pressedScale
+                         : 1)
+            .animation(
+                .easeOut(duration: FidgetUITokens.Motion.pressedDuration),
+                value: configuration.isPressed)
+    }
+}
+
 struct ProductPrimaryActionLabel: View {
     let title: String
     var accent = Color.white
+    var state = ProductActionState.rest
 
     var body: some View {
-        Text(title)
-        .font(.product(.headline))
-        .foregroundStyle(.white)
+        HStack(spacing: FidgetUITokens.Spacing.standard) {
+            if state.isLoading {
+                ProgressView()
+                    .controlSize(.small)
+                    .tint(Color.black.opacity(
+                        FidgetUITokens.Opacity.primaryActionInk))
+            }
+            Text(state.visibleTitle(default: title))
+                .font(.product(.headline, weight: .semibold))
+        }
+        .foregroundStyle(Color.black.opacity(
+            FidgetUITokens.Opacity.primaryActionInk))
         .frame(maxWidth: .infinity)
         .frame(height: FidgetUITokens.Size.primaryActionHeight)
+        .background(
+            Color.white.opacity(FidgetUITokens.Opacity.primaryActionSurface),
+            in: RoundedRectangle(
+                cornerRadius: FidgetUITokens.Radius.pill,
+                style: .continuous))
         .contentShape(RoundedRectangle(
             cornerRadius: FidgetUITokens.Radius.pill,
             style: .continuous))
-        .productGlass(
-            cornerRadius: FidgetUITokens.Radius.pill,
-            tint: accent.opacity(0.16),
-            interactive: true)
+        .opacity(state.isDisabled
+                 ? FidgetUITokens.Opacity.disabledAction
+                 : 1)
+        .accessibilityElement(children: .ignore)
+        .accessibilityLabel(state.visibleTitle(default: title))
+        .accessibilityValue(state.accessibilityValue ?? "")
+    }
+}
+
+struct ProductPrimaryActionButton: View {
+    let title: String
+    var accent = Color.white
+    var state = ProductActionState.rest
+    let action: () -> Void
+
+    var body: some View {
+        Button(action: action) {
+            ProductPrimaryActionLabel.init(
+                title: title,
+                accent: accent,
+                state: state)
+        }
+        .buttonStyle(ProductActionButtonStyle())
+        .disabled(state.disablesInteraction)
+    }
+}
+
+struct ProductBottomActionDock<Content: View>: View {
+    private let content: Content
+
+    init(@ViewBuilder content: () -> Content) {
+        self.content = content()
+    }
+
+    var body: some View {
+        VStack(spacing: FidgetUITokens.Spacing.section) {
+            content
+        }
+        .padding(.horizontal, FidgetUITokens.Spacing.pageInset)
+        .padding(.top, FidgetUITokens.Spacing.sectionGroup)
+        .padding(.bottom, FidgetUITokens.Spacing.section)
+        .background {
+            LinearGradient(
+                colors: [
+                    Color.black.opacity(0),
+                    Color.black.opacity(0.72),
+                    Color.black.opacity(0.92)
+                ],
+                startPoint: .top,
+                endPoint: .bottom)
+                .ignoresSafeArea(edges: .bottom)
+        }
     }
 }
 
 struct ProductActionLabel: View {
     let title: String
-    let symbol: String
+    /// Source-compatible label metadata for older callers. Product-level text
+    /// actions intentionally do not render decorative symbols.
+    var symbol: String? = nil
     var accent = Color.white
+    var state = ProductActionState.rest
 
     var body: some View {
-        Label(title, systemImage: symbol)
+        HStack(spacing: FidgetUITokens.Spacing.standard) {
+            if state.isLoading {
+                ProgressView()
+                    .controlSize(.small)
+                    .tint(.white)
+            }
+            Text(state.visibleTitle(default: title))
+        }
             .font(.product(.subheadline, weight: .semibold))
             .foregroundStyle(.white)
             .frame(maxWidth: .infinity)
-            .frame(height: FidgetUITokens.Size.minimumHitTarget)
+            .frame(height: FidgetUITokens.Size.primaryActionHeight)
             .contentShape(RoundedRectangle(
                 cornerRadius: FidgetUITokens.Radius.compact,
                 style: .continuous))
@@ -373,6 +547,99 @@ struct ProductActionLabel: View {
                 cornerRadius: FidgetUITokens.Radius.compact,
                 tint: accent.opacity(0.10),
                 interactive: true)
+            .opacity(state.isDisabled
+                     ? FidgetUITokens.Opacity.disabledAction
+                     : 1)
+            .accessibilityElement(children: .ignore)
+            .accessibilityLabel(state.visibleTitle(default: title))
+            .accessibilityValue(state.accessibilityValue ?? "")
+    }
+}
+
+struct ProductSecondaryActionButton: View {
+    let title: String
+    /// Preserved for call-site compatibility only; decorative symbols are not
+    /// rendered beside product-level action copy.
+    var symbol: String? = nil
+    var accent = Color.white
+    var state = ProductActionState.rest
+    let action: () -> Void
+
+    var body: some View {
+        Button(action: action) {
+            ProductActionLabel(
+                title: title,
+                symbol: symbol,
+                accent: accent,
+                state: state)
+        }
+        .buttonStyle(ProductActionButtonStyle())
+        .disabled(state.disablesInteraction)
+    }
+}
+
+struct ProductFilterChip: View {
+    let title: String
+    var selected = false
+    var enabled = true
+    let action: () -> Void
+
+    var body: some View {
+        Button(action: action) {
+            HStack(spacing: FidgetUITokens.Spacing.compact) {
+                if selected {
+                    Image(systemName: "checkmark")
+                        .font(.product(size: 11, weight: .bold))
+                }
+                Text(title)
+                    .font(.product(.caption, weight: .semibold))
+            }
+            .foregroundStyle(selected
+                             ? Color.black.opacity(0.90)
+                             : Color.white.opacity(0.76))
+            .padding(.horizontal, FidgetUITokens.Spacing.metadata)
+            .frame(height: FidgetUITokens.Size.filterChipHeight)
+            .background(
+                selected
+                    ? Color.white.opacity(0.92)
+                    : Color.white.opacity(0.08),
+                in: Capsule(style: .continuous))
+        }
+        .buttonStyle(ProductActionButtonStyle())
+        .frame(minHeight: FidgetUITokens.Size.minimumHitTarget)
+        .disabled(!enabled)
+        .opacity(enabled ? 1 : FidgetUITokens.Opacity.disabledAction)
+        .accessibilityAddTraits(selected ? .isSelected : [])
+    }
+}
+
+struct ProductStatusTag: View {
+    let title: String
+    var symbol: String? = nil
+    var accent = Color.white
+    var emphasized = false
+    var font = Font.product(.caption2, weight: .bold)
+
+    @ViewBuilder
+    private var content: some View {
+        if let symbol {
+            Label(title, systemImage: symbol)
+        } else {
+            Text(title)
+        }
+    }
+
+    var body: some View {
+        content
+            .font(font)
+            .foregroundStyle(accent.opacity(emphasized ? 0.94 : 0.76))
+            .padding(.horizontal, emphasized ? 10 : 8)
+            .frame(height: FidgetUITokens.Size.statusTagHeight)
+            .background(
+                accent.opacity(emphasized ? 0.14 : 0.06),
+                in: Capsule(style: .continuous))
+            .accessibilityElement(children: .ignore)
+            .accessibilityLabel(title)
     }
 }
 
@@ -463,15 +730,12 @@ struct ProductStatusPill: View {
     var font = Font.product(.caption2, weight: .bold)
 
     var body: some View {
-        Label(title, systemImage: symbol)
-            .font(font)
-            .foregroundStyle(accent.opacity(selected ? 0.94 : 0.76))
-            .padding(.horizontal, 9)
-            .padding(.vertical, 6)
-            .background(
-                accent.opacity(selected ? 0.14 : 0.06),
-                in: Capsule())
-            .accessibilityLabel(title)
+        ProductStatusTag(
+            title: title,
+            symbol: symbol,
+            accent: accent,
+            emphasized: selected,
+            font: font)
             .accessibilityAddTraits(selected ? .isSelected : [])
     }
 }
@@ -1148,13 +1412,8 @@ enum ProductBadgeLayoutTokens {
     static let catalogHorizontalPadding: CGFloat = 20
     static let catalogColumnSpacing: CGFloat = 14
     static let catalogRowSpacing: CGFloat = 16
-    static let iconSlotFraction: CGFloat = 0.46
-    static let centeredContentHeightFraction: CGFloat = 0.64
-    static let tokenSlotHeightFraction: CGFloat = 0.165
-    static let tokenFontFraction: CGFloat = 0.124
-    static let unitFontFraction: CGFloat = 0.048
-    static let milestoneFontSize: CGFloat = 9.5
-    static let milestoneSlotHeight: CGFloat = 13
+    static let milestoneFontSize: CGFloat = 8.5
+    static let milestoneSlotHeight: CGFloat = 22
     static let normalizedArtworkVisibleFraction: CGFloat = 0.74
 
     static var catalogColumns: [GridItem] {
@@ -1171,12 +1430,6 @@ enum ProductBadgeLayoutTokens {
         let content = containerWidth - catalogHorizontalPadding * 2 - gaps
         return max(0, content / CGFloat(catalogColumnCount))
     }
-
-    // Every state and rarity uses one rounded-hexagon construction. Unlock state
-    // controls luminance; grade must never change silhouette or measurements.
-    static let outerRimFraction: CGFloat = 0.027
-    static let rimGapFraction: CGFloat = 0.031
-    static let innerRimFraction: CGFloat = 0.0045
 }
 
 private struct ProductBadgeShellShape: InsettableShape {
@@ -1199,13 +1452,13 @@ private struct ProductBadgeShellShape: InsettableShape {
         // all six corners retain the same continuous rounding treatment.
         let vertices = [
             CGPoint(x: rect.midX, y: rect.minY + rect.height * 0.04),
-            CGPoint(x: rect.minX + rect.width * 0.92, y: rect.minY + rect.height * 0.27),
-            CGPoint(x: rect.minX + rect.width * 0.92, y: rect.minY + rect.height * 0.73),
+            CGPoint(x: rect.minX + rect.width * 0.90, y: rect.minY + rect.height * 0.27),
+            CGPoint(x: rect.minX + rect.width * 0.90, y: rect.minY + rect.height * 0.73),
             CGPoint(x: rect.midX, y: rect.minY + rect.height * 0.96),
-            CGPoint(x: rect.minX + rect.width * 0.08, y: rect.minY + rect.height * 0.73),
-            CGPoint(x: rect.minX + rect.width * 0.08, y: rect.minY + rect.height * 0.27)
+            CGPoint(x: rect.minX + rect.width * 0.10, y: rect.minY + rect.height * 0.73),
+            CGPoint(x: rect.minX + rect.width * 0.10, y: rect.minY + rect.height * 0.27)
         ]
-        let cornerFraction: CGFloat = 0.16
+        let cornerFraction: CGFloat = 0.25
 
         func point(_ vertex: CGPoint, toward neighbor: CGPoint) -> CGPoint {
             CGPoint(
@@ -1237,6 +1490,7 @@ struct ProductBadgeLeatherTexture: View {
             .resizable()
             .interpolation(.high)
             .scaledToFill()
+            .scaleEffect(grainScale < 1 ? 1.65 : 1.35)
             .opacity(grainScale < 1 ? 0.78 : 1)
         .accessibilityHidden(true)
     }
@@ -1366,36 +1620,37 @@ private struct ProductBadgeArtworkLayer: View {
                     Image(uiImage: artwork)
                         .resizable()
                         .scaledToFit()
-                        .saturation(isUnlocked ? 1 : 0)
-                        .brightness(isUnlocked ? 0.015 : -0.34)
-                        .contrast(isUnlocked ? 1.06 : 0.74)
+                        .saturation(isUnlocked ? 0.86 : 0)
+                        .brightness(isUnlocked ? 0.018 : -0.36)
+                        .contrast(isUnlocked ? 1.02 : 0.72)
                         .opacity(isUnlocked ? 1 : 0.24)
                 } else {
                     ZStack {
                         Image(uiImage: artwork)
                             .resizable()
                             .scaledToFit()
-                            .saturation(0.70)
-                            .contrast(1.12)
-                            .blur(radius: width * 0.032)
-                            .opacity(isUnlocked ? 0.34 : 0)
+                            .saturation(0.62)
+                            .contrast(1.02)
+                            .blur(radius: width * 0.020)
+                            .opacity(isUnlocked ? 0.14 : 0)
                             .blendMode(.screen)
                         Image(uiImage: artwork)
                             .resizable()
                             .scaledToFit()
-                            .saturation(isUnlocked ? 1 : 0)
-                            .brightness(isUnlocked ? 0.025 : -0.34)
-                            .contrast(isUnlocked ? 1.12 : 0.74)
+                            .saturation(isUnlocked ? 0.86 : 0)
+                            .brightness(isUnlocked ? 0.018 : -0.36)
+                            .contrast(isUnlocked ? 1.03 : 0.72)
                             .opacity(isUnlocked ? 1 : 0.24)
                             .shadow(
-                                color: Color.white.opacity(isUnlocked ? 0.22 : 0),
+                                color: Color.black.opacity(isUnlocked ? 0.58 : 0.30),
                                 radius: width * 0.018,
-                                x: -width * 0.006,
-                                y: -width * 0.006)
+                                x: width * 0.012,
+                                y: width * 0.018)
                             .shadow(
-                                color: Color(red: 0.72, green: 0.86, blue: 0.94)
-                                    .opacity(isUnlocked ? 0.46 : 0),
-                                radius: width * 0.052)
+                                color: Color.white.opacity(isUnlocked ? 0.10 : 0),
+                                radius: width * 0.010,
+                                x: -width * 0.004,
+                                y: -width * 0.006)
                     }
                 }
             } else {
@@ -1452,6 +1707,16 @@ struct ProductRarityBadge: View {
         ProductBadgeArtworkCache.prewarmCatalog(assetNames: assetNames)
     }
 
+    /// Forces full-resolution (`.full` rendering mode) artwork into cache and
+    /// calls back once it resolves. Callers that snapshot a badge off-screen
+    /// (for example the share-card renderer) must await this first, since the
+    /// artwork otherwise decodes asynchronously after the snapshot is taken.
+    static func prewarmFullArtwork(assetName: String, completion: @escaping () -> Void) {
+        ProductBadgeArtworkCache.load(named: assetName, catalog: false) { _ in
+            completion()
+        }
+    }
+
     private var shape: ProductBadgeShellShape {
         ProductBadgeShellShape()
     }
@@ -1460,41 +1725,20 @@ struct ProductRarityBadge: View {
     private var isHidden: Bool { state == "Hidden" }
     private var isInProgress: Bool { state == "InProgress" }
 
-    @ViewBuilder
-    private func badgeToken(width: CGFloat) -> some View {
-        if isHidden {
-            Text("•••")
-                .font(.product(
-                    size: width * ProductBadgeLayoutTokens.tokenFontFraction,
-                    weight: .black).monospacedDigit())
-        } else if token.hasSuffix(" KM/H") {
-            HStack(alignment: .lastTextBaseline, spacing: width * 0.020) {
-                Text(String(token.dropLast(" KM/H".count)))
-                    .font(.product(
-                        size: width * ProductBadgeLayoutTokens.tokenFontFraction,
-                        weight: .black).monospacedDigit())
-                Text("KM/H")
-                    .font(.product(
-                        size: width * ProductBadgeLayoutTokens.unitFontFraction,
-                        weight: .black).monospacedDigit())
-                    .padding(.bottom, width * 0.011)
-            }
-        } else {
-            Text(token)
-                .font(.product(
-                    size: width * ProductBadgeLayoutTokens.tokenFontFraction,
-                    weight: .black).monospacedDigit())
-        }
+    private var externalMilestoneTitle: String {
+        guard !isHidden else { return "ENCRYPTED" }
+        return "\(shortName) \(token)"
     }
 
     private var milestoneName: some View {
-        Text(isHidden ? "ENCRYPTED" : shortName)
+        Text(externalMilestoneTitle)
             .font(.product(
                 size: ProductBadgeLayoutTokens.milestoneFontSize,
-                weight: .bold))
-            .foregroundStyle(Color.white.opacity(isUnlocked ? 0.72 : 0.28))
-            .lineLimit(1)
-            .minimumScaleFactor(0.72)
+                weight: .semibold).monospacedDigit())
+            .foregroundStyle(Color.white.opacity(isUnlocked ? 0.54 : 0.24))
+            .multilineTextAlignment(.center)
+            .lineLimit(2)
+            .minimumScaleFactor(0.68)
             .frame(
                 maxWidth: .infinity,
                 minHeight: ProductBadgeLayoutTokens.milestoneSlotHeight,
@@ -1526,140 +1770,39 @@ struct ProductRarityBadge: View {
         VStack(spacing: 0) {
             GeometryReader { proxy in
                 let width = proxy.size.width
-                let outerRim = max(2.1, width * ProductBadgeLayoutTokens.outerRimFraction)
-                let rimGap = max(1.2, width * ProductBadgeLayoutTokens.rimGapFraction)
-                let innerRim = max(0.7, width * ProductBadgeLayoutTokens.innerRimFraction)
-                let innerInset = outerRim + rimGap
-                let shellColors: [Color] = isUnlocked
-                    ? [
-                        Color(red: 0.090, green: 0.100, blue: 0.102),
-                        Color(red: 0.038, green: 0.045, blue: 0.047),
-                        Color(red: 0.015, green: 0.019, blue: 0.020)
-                    ]
-                    : [
-                        Color(red: 0.030, green: 0.033, blue: 0.034),
-                        Color(red: 0.014, green: 0.016, blue: 0.017),
-                        Color(red: 0.006, green: 0.007, blue: 0.008)
-                    ]
-                let outerRimColors: [Color] = isUnlocked
-                    ? [
-                        Color(red: 0.72, green: 0.75, blue: 0.76),
-                        Color(red: 0.32, green: 0.35, blue: 0.36),
-                        Color(red: 0.82, green: 0.84, blue: 0.85)
-                    ]
-                    : [
-                        Color(red: 0.18, green: 0.19, blue: 0.20),
-                        Color(red: 0.070, green: 0.076, blue: 0.080),
-                        Color(red: 0.22, green: 0.23, blue: 0.24)
-                    ]
-                let rimStops: [Gradient.Stop] = isUnlocked
-                    ? [
-                        .init(color: Color(red: 0.56, green: 0.59, blue: 0.60), location: 0.00),
-                        .init(color: Color(red: 0.88, green: 0.90, blue: 0.91), location: 0.18),
-                        .init(color: Color.white, location: 0.31),
-                        .init(color: Color(red: 0.50, green: 0.53, blue: 0.54), location: 0.48),
-                        .init(color: Color(red: 0.94, green: 0.96, blue: 0.96), location: 0.64),
-                        .init(color: Color(red: 0.66, green: 0.69, blue: 0.70), location: 0.80),
-                        .init(color: Color(red: 0.56, green: 0.59, blue: 0.60), location: 1.00)
-                    ]
-                    : [
-                        .init(color: Color(red: 0.14, green: 0.15, blue: 0.16), location: 0.00),
-                        .init(color: Color(red: 0.25, green: 0.26, blue: 0.27), location: 0.24),
-                        .init(color: Color(red: 0.090, green: 0.096, blue: 0.100), location: 0.50),
-                        .init(color: Color(red: 0.22, green: 0.23, blue: 0.24), location: 0.72),
-                        .init(color: Color(red: 0.14, green: 0.15, blue: 0.16), location: 1.00)
-                    ]
-                let innerLineOpacity = isUnlocked ? 0.34 : 0.12
                 ZStack {
-                    shape
-                        .fill(LinearGradient(
-                            colors: shellColors,
-                            startPoint: .topLeading,
-                            endPoint: .bottomTrailing))
-                    shape
-                        .fill(RadialGradient(
-                            colors: [
-                                Color.white.opacity(isUnlocked ? 0.060 : 0.020),
-                                Color.white.opacity(0.010),
-                                Color.black.opacity(isUnlocked ? 0.18 : 0.28)
-                            ],
-                            center: .topLeading,
-                            startRadius: width * 0.02,
-                            endRadius: width * 0.92))
-                    ProductBadgeLeatherTexture()
-                        .opacity(isUnlocked ? 1 : 0.58)
-                        .clipShape(shape)
-                    // One milled rim: a dark structural band with a narrower metal
-                    // crest embedded inside it. The two strokes touch, so this reads
-                    // as one bevelled object rather than two decorative outlines.
-                    shape
-                        .strokeBorder(
-                            LinearGradient(
-                                colors: outerRimColors,
-                                startPoint: .topLeading,
-                                endPoint: .bottomTrailing),
-                            lineWidth: outerRim)
-                        .shadow(color: Color.black.opacity(0.64), radius: width * 0.015, y: width * 0.010)
-                    shape
-                        .inset(by: outerRim * 0.20)
-                        .strokeBorder(
-                            AngularGradient(
-                                stops: rimStops,
-                                center: .center),
-                            lineWidth: outerRim * 0.58)
-                        .shadow(
-                            color: Color.white.opacity(isUnlocked ? 0.11 : 0),
-                            radius: width * 0.010)
-                    shape
-                        .inset(by: innerInset)
-                        .strokeBorder(
-                            AngularGradient(
-                                stops: [
-                                    .init(color: Color.white.opacity(innerLineOpacity * 0.48), location: 0.00),
-                                    .init(color: Color.white.opacity(innerLineOpacity), location: 0.31),
-                                    .init(color: Color.white.opacity(innerLineOpacity * 0.38), location: 0.50),
-                                    .init(color: Color.white.opacity(innerLineOpacity), location: 0.66),
-                                    .init(color: Color.white.opacity(innerLineOpacity * 0.48), location: 1.00)
+                    if isHidden {
+                        // Hidden Badges never reveal artwork, so they still need a
+                        // plain hexagon shell to seat the placeholder glyph in.
+                        shape
+                            .fill(LinearGradient(
+                                colors: [
+                                    Color(red: 0.22, green: 0.22, blue: 0.25),
+                                    Color(red: 0.17, green: 0.17, blue: 0.20),
+                                    Color(red: 0.09, green: 0.09, blue: 0.11)
                                 ],
-                                center: .center),
-                            lineWidth: innerRim)
-
-                    VStack(spacing: width * 0.010) {
-                        ZStack {
-                            if isHidden {
-                                Image(systemName: "questionmark")
-                                    .font(.product(size: width * 0.23, weight: .bold))
-                                    .foregroundStyle(Color.white.opacity(0.25))
-                            } else {
-                                ProductBadgeArtworkLayer(
-                                    assetName: assetName,
-                                    isUnlocked: isUnlocked,
-                                    renderingMode: renderingMode,
-                                    width: width)
-                            }
-                        }
-                        .frame(
-                            width: width * ProductBadgeLayoutTokens.iconSlotFraction,
-                            height: width * ProductBadgeLayoutTokens.iconSlotFraction)
-
-                        badgeToken(width: width)
-                            .foregroundStyle(Color.white.opacity(isUnlocked ? 0.96 : 0.28))
-                            .lineLimit(1)
-                            .minimumScaleFactor(0.62)
-                            .frame(
-                                maxWidth: .infinity,
-                                minHeight: width * ProductBadgeLayoutTokens.tokenSlotHeightFraction,
-                                maxHeight: width * ProductBadgeLayoutTokens.tokenSlotHeightFraction,
-                                alignment: .center)
+                                startPoint: .topLeading,
+                                endPoint: .bottomTrailing))
+                            .overlay(
+                                shape.strokeBorder(
+                                    Color.white.opacity(0.10),
+                                    lineWidth: max(0.9, width * 0.006)))
+                        Image(systemName: "questionmark")
+                            .font(.product(size: width * 0.23, weight: .bold))
+                            .foregroundStyle(Color.white.opacity(0.25))
+                    } else {
+                        // The approved 2026-08-21 Challenge+Legacy master bakes its
+                        // own pearl-silver satin hexagon shell, recessed well and
+                        // bevel directly into the artwork, so the artwork fills the
+                        // cell edge-to-edge instead of sitting inset inside a second
+                        // shell drawn here — nesting both produced a double frame.
+                        ProductBadgeArtworkLayer(
+                            assetName: assetName,
+                            isUnlocked: isUnlocked,
+                            renderingMode: renderingMode,
+                            width: width)
+                            .frame(width: width, height: width)
                     }
-                    // The icon and token are one fixed-height object pinned to
-                    // the exact shell center. Individual glyph bounds or text
-                    // ascenders can no longer move the group vertically.
-                    .frame(
-                        width: width * 0.74,
-                        height: width * ProductBadgeLayoutTokens.centeredContentHeightFraction,
-                        alignment: .center)
-                    .position(x: width * 0.5, y: width * 0.5)
 
                     if !isUnlocked && !isHidden && !isInProgress {
                         Image(systemName: "lock.fill")
@@ -1672,18 +1815,18 @@ struct ProductRarityBadge: View {
                 }
                 .shadow(
                     color: Color.black.opacity(
-                        renderingMode == .catalog ? 0.38 : 0.62),
-                    radius: width * (renderingMode == .catalog ? 0.020 : 0.050),
-                    y: width * (renderingMode == .catalog ? 0.014 : 0.032))
+                        renderingMode == .catalog ? 0.34 : 0.58),
+                    radius: width * (renderingMode == .catalog ? 0.018 : 0.044),
+                    y: width * (renderingMode == .catalog ? 0.012 : 0.028))
                 .modifier(ProductBadgeCatalogCompositingModifier(
                     enabled: renderingMode == .catalog))
             }
             .aspectRatio(1, contentMode: .fit)
 
-            // Milestone metadata belongs to the catalog tile, not the metal
-            // object. Keep the shell itself a strict 1:1 artwork surface.
+            // The reference language keeps every token and milestone label
+            // outside the 1:1 metal object; the recessed face contains icon only.
             milestoneName
-                .padding(.top, 5)
+                .padding(.top, 6)
             externalProgressBar
                 .padding(.top, 5)
         }

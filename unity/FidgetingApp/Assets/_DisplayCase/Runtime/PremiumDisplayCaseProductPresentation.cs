@@ -11,12 +11,14 @@ namespace FidgetingApp.DisplayCase
         public PremiumDisplayCaseProductProfile(
             string modelId,
             string englishDisplayName,
+            string editionName,
             string sceneRootName,
             PremiumDisplayCaseCapsulePreset capsulePreset,
             PremiumDisplayCaseContentOptions contentOptions)
         {
             ModelId = modelId ?? string.Empty;
             EnglishDisplayName = englishDisplayName ?? string.Empty;
+            EditionName = editionName ?? string.Empty;
             SceneRootName = sceneRootName ?? string.Empty;
             CapsulePreset = capsulePreset;
             ContentOptions = contentOptions;
@@ -24,6 +26,7 @@ namespace FidgetingApp.DisplayCase
 
         public string ModelId { get; }
         public string EnglishDisplayName { get; }
+        public string EditionName { get; }
         public string SceneRootName { get; }
         public PremiumDisplayCaseCapsulePreset CapsulePreset { get; }
         public PremiumDisplayCaseContentOptions ContentOptions { get; }
@@ -36,36 +39,42 @@ namespace FidgetingApp.DisplayCase
     /// </summary>
     public static class PremiumDisplayCaseProductProfiles
     {
-        private const PremiumDisplayCaseCapsulePreset MagneticSlideBaselineCapsule =
-            PremiumDisplayCaseCapsulePreset.RoundedSquareDeep;
+        private const PremiumDisplayCaseCapsulePreset CollectorSlabCapsule =
+            PremiumDisplayCaseCapsulePreset.CollectorSlabLarge;
         private static readonly PremiumDisplayCaseContentOptions
-            MagneticSlideBaselineContent = FacingOptions(90f, -8f, 6f);
+            CollectorSlabContent = FacingOptions(90f, -8f, 6f);
 
         private static readonly PremiumDisplayCaseProductProfile[] profiles =
         {
             BaselineProfile(
                 ProductCatalog.PointedThreeBladeModelId,
                 "EDGE TRIAD",
+                "POINTED STEEL EDITION",
                 "ThreeBladeEDC_Root"),
             BaselineProfile(
                 ProductCatalog.MetalThreeBladeModelId,
                 "MAGNETIC TRINITY",
+                "BEAD-BLASTED TITANIUM",
                 "ThreeBladeEDC_Root"),
             BaselineProfile(
                 ProductCatalog.GoldFourWingModelId,
                 "MIRROR QUAD",
+                "SATIN MIRROR STEEL",
                 "ImportedSpinner_Root"),
             BaselineProfile(
                 ProductCatalog.GraphiteTwoLobeModelId,
                 "GRAPHITE DUO",
+                "LIMITED GRAPHITE EDITION",
                 "TwoLobeBar_Root"),
             BaselineProfile(
                 ProductCatalog.MagneticSlideTileModelId,
                 "MAGNETIC SLIDE",
+                "BEAD-BLASTED GRAPHITE",
                 "EDC_Root"),
             Profile(
                 ProductCatalog.MagneticFanCardModelId,
                 "MAGNETIC FAN",
+                "ACE / QKA EDITION",
                 "MagneticFanCard_Root",
                 // Card faces point up in the authored XZ plane. The other
                 // products use +90 degrees, but that exposes the fan's plain
@@ -95,32 +104,37 @@ namespace FidgetingApp.DisplayCase
                     ? ProductCatalog.MetalThreeBladeModelId
                     : modelId,
                 "COLLECTOR EDITION",
+                "ORIGINAL FINISH",
                 "ThreeBladeEDC_Root");
         }
 
         private static PremiumDisplayCaseProductProfile BaselineProfile(
             string modelId,
             string englishDisplayName,
+            string editionName,
             string sceneRootName)
         {
             return Profile(
                 modelId,
                 englishDisplayName,
+                editionName,
                 sceneRootName,
-                MagneticSlideBaselineContent);
+                CollectorSlabContent);
         }
 
         private static PremiumDisplayCaseProductProfile Profile(
             string modelId,
             string englishDisplayName,
+            string editionName,
             string sceneRootName,
             PremiumDisplayCaseContentOptions contentOptions)
         {
             return new PremiumDisplayCaseProductProfile(
                 modelId,
                 englishDisplayName,
+                editionName,
                 sceneRootName,
-                MagneticSlideBaselineCapsule,
+                CollectorSlabCapsule,
                 contentOptions);
         }
 
@@ -130,7 +144,7 @@ namespace FidgetingApp.DisplayCase
             float idlePeriodSeconds)
         {
             return new PremiumDisplayCaseContentOptions(
-                true,
+                false,
                 idlePeriodSeconds,
                 new Vector3(pitchDegrees, yawDegrees, 0f));
         }

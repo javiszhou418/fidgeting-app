@@ -89,6 +89,10 @@ namespace FidgetingApp.Product
             ReplaceSetValue(
                 CollectorPrefix + "discoveredModels",
                 value => value == sourceModelId ? targetModelId : value);
+            ReplaceStringMapKey(
+                CollectorPrefix + "firstDiscoveredDates",
+                sourceModelId,
+                targetModelId);
             ReplaceSetValue(
                 CollectorPrefix + "awardedToyMilestones",
                 value => ReplaceModelPrefix(value, sourceModelId, targetModelId));
@@ -185,6 +189,46 @@ namespace FidgetingApp.Product
                     levels.OrderBy(pair => pair.Key, StringComparer.Ordinal)
                         .Select(pair => pair.Key + "@"
                             + pair.Value.ToString(CultureInfo.InvariantCulture))));
+        }
+
+        private static void ReplaceStringMapKey(
+            string key,
+            string sourceModelId,
+            string targetModelId)
+        {
+            if (!PlayerPrefs.HasKey(key))
+            {
+                return;
+            }
+
+            var values = new Dictionary<string, string>(StringComparer.Ordinal);
+            foreach (string row in PlayerPrefs.GetString(key, string.Empty).Split(
+                         new[] { '|' },
+                         StringSplitOptions.RemoveEmptyEntries))
+            {
+                int separator = row.IndexOf('=');
+                if (separator <= 0 || separator >= row.Length - 1)
+                {
+                    continue;
+                }
+                string modelId = row.Substring(0, separator);
+                string value = row.Substring(separator + 1);
+                if (modelId == sourceModelId)
+                {
+                    modelId = targetModelId;
+                }
+                if (!values.ContainsKey(modelId))
+                {
+                    values[modelId] = value;
+                }
+            }
+
+            PlayerPrefs.SetString(
+                key,
+                string.Join(
+                    "|",
+                    values.OrderBy(pair => pair.Key, StringComparer.Ordinal)
+                        .Select(pair => pair.Key + "=" + pair.Value)));
         }
 
         private static string ReplaceModelPrefix(

@@ -21,6 +21,13 @@ private enum GachaUnityBridge {
     }
 }
 
+@MainActor
+enum GachaShippingRevealContinuation {
+    static var preparePremiumDisplayCase:
+        ((_ requestID: String, _ receipt: GachaReceiptRow) -> Void)?
+    static var cancelPreparedDisplayCase: (() -> Void)?
+}
+
 // MARK: - Model
 
 public enum GachaRarityTier: Int, CaseIterable {
@@ -93,6 +100,7 @@ public struct GachaReceiptRow: Equatable, Identifiable {
     public let forcedBySignaturePity: Bool
     public let forcedByHeirloomPity: Bool
     public let forcedByTenDraw: Bool
+    public let firstObtainedAtUtc: String
 }
 
 @MainActor
@@ -108,17 +116,118 @@ public final class GachaStoreModel: ObservableObject {
     @Published public private(set) var heirloomMisses: [String: Int] = [:]
     @Published public private(set) var totalDraws: [String: Int] = [:]
     @Published public private(set) var owned: Set<String> = []
+    @Published public private(set) var firstObtainedAtUtcByPrize: [String: String] = [:]
     @Published public var pendingReceipt: [GachaReceiptRow] = []
+    @Published public private(set) var pendingReceiptRequestID = ""
     @Published public var lastFailureReason = ""
+    @Published public private(set) var lastFailureRequestID = ""
+    @Published public private(set) var revealRequestID = ""
+    @Published public private(set) var revealSetupSucceeded = false
+    @Published public private(set) var revealSetupFailure = ""
+    @Published public private(set) var revealPhase = "idle"
+    @Published public private(set) var revealPhaseFailure = ""
+
+    public var revealIsComplete: Bool {
+        revealPhase == "complete" && revealPhaseFailure.isEmpty
+    }
 
     public func requestState() {
+#if DEBUG
+        let fundingArgument =
+            "--preview-gacha-funding-token=metal-three-blade-v1"
+        if ProcessInfo.processInfo.arguments.contains(fundingArgument) {
+            GachaUnityBridge.send(
+                "RequestGachaStateFromNativeUi",
+                value: "metal-three-blade-v1")
+            return
+        }
+#endif
         GachaUnityBridge.send("RequestGachaStateFromNativeUi")
     }
 
-    public func draw(seriesId: String, count: Int, useCoins: Bool) {
+    public func draw(
+        requestID: UUID,
+        seriesId: String,
+        count: Int,
+        useCoins: Bool
+    ) {
+        var payload =
+            "\(requestID.uuidString.lowercased())|\(seriesId)|\(count)|\(useCoins ? "coin" : "ticket")"
+#if DEBUG
+        if ProcessInfo.processInfo.arguments.contains(
+            "--preview-authoritative-metal-three-blade") {
+            payload += "|preview-metal-three-blade"
+        }
+#endif
         GachaUnityBridge.send(
             "DrawGachaFromNativeUi",
-            value: "\(seriesId)|\(count)|\(useCoins ? "coin" : "ticket")")
+            value: payload)
+    }
+
+    public func draw(seriesId: String, count: Int, useCoins: Bool) {
+        draw(
+            requestID: UUID(),
+            seriesId: seriesId,
+            count: count,
+            useCoins: useCoins)
+    }
+
+    public func requestReceipt(requestID: UUID) {
+        GachaUnityBridge.send(
+            "RequestGachaReceiptFromNativeUi",
+            value: requestID.uuidString.lowercased())
+    }
+
+    public func acknowledgeReceipt(requestID: UUID) {
+        GachaUnityBridge.send(
+            "AcknowledgeGachaReceiptFromNativeUi",
+            value: requestID.uuidString.lowercased())
+        pendingReceipt = []
+        pendingReceiptRequestID = ""
+        lastFailureReason = ""
+        lastFailureRequestID = ""
+        resetRevealPresentation()
+    }
+
+    public func beginRevealSetup(requestID: String) {
+        revealRequestID = requestID.lowercased()
+        revealSetupSucceeded = false
+        revealSetupFailure = ""
+        revealPhase = "preparing"
+        revealPhaseFailure = ""
+    }
+
+    public func resetRevealPresentation() {
+        revealRequestID = ""
+        revealSetupSucceeded = false
+        revealSetupFailure = ""
+        revealPhase = "idle"
+        revealPhaseFailure = ""
+    }
+
+    fileprivate func ingestRevealSetup(
+        requestID: String,
+        succeeded: Bool,
+        failureReason: String
+    ) {
+        let normalized = requestID.lowercased()
+        guard normalized == revealRequestID else { return }
+        revealSetupSucceeded = succeeded
+        revealSetupFailure = failureReason
+        if !succeeded {
+            revealPhase = "idle"
+        }
+    }
+
+    fileprivate func ingestRevealPhase(
+        requestID: String,
+        phase: String,
+        failureReason: String
+    ) {
+        let normalized = requestID.lowercased()
+        guard normalized == revealRequestID else { return }
+        revealPhase = phase
+        revealPhaseFailure = failureReason
     }
 
     public func redeem(prizeId: String) {
@@ -169,10 +278,16 @@ public final class GachaStoreModel: ObservableObject {
                 heirloomMisses[cells[1]] = Int(cells[3]) ?? 0
                 shardsBySeries[cells[1]] = Int(cells[4]) ?? 0
                 totalDraws[cells[1]] = Int(cells[5]) ?? 0
+            } else if cells.count >= 3, cells[0] == "owned-meta" {
+                firstObtainedAtUtcByPrize[cells[1]] = cells[2]
             } else if cells.count >= 2, cells[0] == "owned" {
                 owned = Set(cells[1].split(separator: "|").map(String.init))
+                firstObtainedAtUtcByPrize = firstObtainedAtUtcByPrize.filter {
+                    owned.contains($0.key)
+                }
             } else if cells.count >= 1, cells[0] == "owned" {
                 owned = []
+                firstObtainedAtUtcByPrize = [:]
             }
         }
     }
@@ -181,10 +296,15 @@ public final class GachaStoreModel: ObservableObject {
         guard !payload.isEmpty else { return }
         var rows: [GachaReceiptRow] = []
         var failure = ""
+        var requestID = ""
         for line in payload.split(separator: "\n") {
             let cells = line.split(separator: "\t", omittingEmptySubsequences: false)
                 .map(String.init)
-            if cells.count >= 2, cells[0] == "result" {
+            if cells.count >= 3, cells[0] == "result" {
+                requestID = cells[1].lowercased()
+                failure = cells[2] == "ok" ? "" : cells[2]
+            } else if cells.count >= 2, cells[0] == "result" {
+                // Compatibility with pre-request-id receipts used by old builds.
                 failure = cells[1] == "ok" ? "" : cells[1]
             } else if cells.count >= 10, cells[0] == "row" {
                 rows.append(GachaReceiptRow(
@@ -195,13 +315,16 @@ public final class GachaStoreModel: ObservableObject {
                     shardsGained: Int(cells[6]) ?? 0,
                     forcedBySignaturePity: cells[7] == "1",
                     forcedByHeirloomPity: cells[8] == "1",
-                    forcedByTenDraw: cells[9] == "1"))
+                    forcedByTenDraw: cells[9] == "1",
+                    firstObtainedAtUtc: cells.count >= 11 ? cells[10] : ""))
             }
         }
         lastFailureReason = failure
+        lastFailureRequestID = failure.isEmpty ? "" : requestID
         // A non-empty receipt payload is authoritative for the latest request.
         // Clear stale rows on failures as well as replacing them on success.
         pendingReceipt = rows
+        pendingReceiptRequestID = rows.isEmpty ? "" : requestID
     }
 }
 
@@ -218,6 +341,37 @@ public func CodexGachaReceiveState(
             catalog: catalog,
             snapshot: snapshot,
             receipt: receipt)
+    }
+}
+
+@_cdecl("CodexGachaRevealReceiveSetup")
+public func CodexGachaRevealReceiveSetup(
+    _ requestID: UnsafePointer<CChar>?,
+    _ succeeded: Int32,
+    _ failureReason: UnsafePointer<CChar>?) {
+    let request = requestID.map { String(cString: $0) } ?? ""
+    let failure = failureReason.map { String(cString: $0) } ?? ""
+    Task { @MainActor in
+        GachaStoreModel.shared.ingestRevealSetup(
+            requestID: request,
+            succeeded: succeeded != 0,
+            failureReason: failure)
+    }
+}
+
+@_cdecl("CodexGachaRevealReceivePhase")
+public func CodexGachaRevealReceivePhase(
+    _ requestID: UnsafePointer<CChar>?,
+    _ phase: UnsafePointer<CChar>?,
+    _ failureReason: UnsafePointer<CChar>?) {
+    let request = requestID.map { String(cString: $0) } ?? ""
+    let phaseToken = phase.map { String(cString: $0) } ?? "idle"
+    let failure = failureReason.map { String(cString: $0) } ?? ""
+    Task { @MainActor in
+        GachaStoreModel.shared.ingestRevealPhase(
+            requestID: request,
+            phase: phaseToken,
+            failureReason: failure)
     }
 }
 
@@ -283,7 +437,7 @@ struct LegacyGachaStoreView: View {
         HStack(spacing: 6) {
             Image(systemName: icon).font(.caption)
             Text("\(value)")
-                .font(.system(.subheadline, design: .monospaced).bold())
+                .font(.product(.subheadline, weight: .bold).monospacedDigit())
             Text(label).font(.caption2).opacity(0.7)
         }
         .foregroundColor(.white)
@@ -341,7 +495,7 @@ struct LegacyGachaStoreView: View {
                 Text(title).font(.caption.bold()).foregroundColor(.white)
                 Spacer()
                 Text("\(current) / \(target + 1)")
-                    .font(.system(.caption, design: .monospaced))
+                    .font(.product(.caption).monospacedDigit())
                     .foregroundColor(tint)
             }
             ProgressView(value: Double(min(current, target)), total: Double(target))
@@ -402,7 +556,7 @@ struct LegacyGachaStoreView: View {
                 Text("兑换所").font(.headline).foregroundColor(.white)
                 Spacer()
                 Label("\(shards)", systemImage: "sparkles")
-                    .font(.system(.caption, design: .monospaced))
+                    .font(.product(.caption).monospacedDigit())
                     .foregroundColor(.white.opacity(0.8))
             }
             if redeemables.isEmpty {
@@ -507,7 +661,7 @@ struct LegacyGachaStoreView: View {
                                 Text(String(
                                     format: "%.2f%%",
                                     (series.rates[safe: tier.rawValue] ?? 0) * 100))
-                                    .font(.system(.body, design: .monospaced))
+                                    .font(.product(.body).monospacedDigit())
                                     .foregroundColor(tier.tint)
                             }
                             .font(.subheadline)

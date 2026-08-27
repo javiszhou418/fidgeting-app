@@ -8,6 +8,8 @@ Shader "FidgetingApp/PremiumAcrylicLiquidGlass"
         _RimStrength("Rim Strength", Range(0, 2)) = 0.82
         _RimPower("Rim Tightness", Range(0.5, 8)) = 3.6
         _SpecularStrength("Specular Strength", Range(0, 3)) = 1.35
+        _FrostStrength("Frost Strength", Range(0, 1)) = 0.42
+        _MicroScratchStrength("Micro Scratch Strength", Range(0, 1)) = 0.16
         _RevealVisibility("Reveal Visibility", Range(0, 1)) = 1
         _RevealSweep("Reveal Sweep", Range(0, 1)) = 1
         _ParallaxTilt("Parallax Tilt", Vector) = (0, 0, 0, 0)
@@ -45,6 +47,8 @@ Shader "FidgetingApp/PremiumAcrylicLiquidGlass"
                 half _RimStrength;
                 half _RimPower;
                 half _SpecularStrength;
+                half _FrostStrength;
+                half _MicroScratchStrength;
                 half _RevealVisibility;
                 half _RevealSweep;
                 float4 _ParallaxTilt;
@@ -90,10 +94,19 @@ Shader "FidgetingApp/PremiumAcrylicLiquidGlass"
                 half3 reflected = reflect(-viewDirection, normalWS);
                 half tightSpecular = pow(
                     saturate(dot(reflected, virtualKey)),
-                    84.0h) * _SpecularStrength;
+                    44.0h) * _SpecularStrength;
                 half broadSpecular = pow(
                     saturate(dot(reflected, normalize(half3(0.58h, 0.32h, -0.74h)))),
-                    16.0h) * 0.22h;
+                    10.0h) * 0.28h;
+
+                float2 microCell = floor(input.positionWS.xy * 14000.0);
+                half grain = frac(sin(dot(microCell, float2(12.9898, 78.233)))
+                    * 43758.5453);
+                half centeredGrain = grain - 0.5h;
+                half scratch = pow(
+                    saturate(sin((input.positionWS.y * 18000.0)
+                        + grain * 6.28318) * 0.5h + 0.5h),
+                    22.0h);
 
                 half sweepCoordinate = input.glassCoordinate.y * 4.2h
                     + input.glassCoordinate.x * 2.1h;
@@ -107,9 +120,12 @@ Shader "FidgetingApp/PremiumAcrylicLiquidGlass"
                 color += _RimColor.rgb * fresnel * _RimStrength;
                 color += _RimColor.rgb
                     * (tightSpecular + broadSpecular + revealSweep * 0.82h);
+                color += _RimColor.rgb * centeredGrain * 0.075h * _FrostStrength;
+                color += _RimColor.rgb * scratch * 0.045h * _MicroScratchStrength;
                 half alpha = (_Opacity
                     + fresnel * 0.24h
                     + tightSpecular * 0.08h
+                    + abs(centeredGrain) * 0.055h * _FrostStrength
                     + revealSweep * 0.12h)
                     * saturate(_RevealVisibility);
                 return half4(color, saturate(alpha));

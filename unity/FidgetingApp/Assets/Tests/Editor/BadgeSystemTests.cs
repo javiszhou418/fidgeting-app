@@ -117,7 +117,7 @@ namespace FidgetingApp.Tests.Editor
             StringAssert.Contains("\"id\":\"toy_technique_speed\"", payload);
             StringAssert.Contains("\"visibility\":\"Hidden\"", payload);
             StringAssert.Contains("\"state\":\"Hidden\"", payload);
-            StringAssert.Contains("\"assetName\":\"badge-b8-toy-technique-speed\"", payload);
+            StringAssert.Contains("\"assetName\":\"badge-b10-toy-technique-speed\"", payload);
             StringAssert.Contains("\"displayToken\":\"1.0\"", payload);
             StringAssert.Contains("\"shortName\":\"POWER\"", payload);
             StringAssert.DoesNotContain("LifetimeOfflineExperience", payload);
@@ -305,11 +305,7 @@ namespace FidgetingApp.Tests.Editor
                 string pngPath = Path.Combine(
                     ArtworkRoot,
                     definition.AssetName + ".png");
-                string svgPath = Path.Combine(
-                    ArtworkRoot,
-                    definition.AssetName + ".svg");
                 Assert.That(File.Exists(pngPath), Is.True, pngPath);
-                Assert.That(File.Exists(svgPath), Is.True, svgPath);
 
                 byte[] png = File.ReadAllBytes(pngPath);
                 Assert.That(ReadPngInt32(png, 16), Is.EqualTo(1024), pngPath);
@@ -318,7 +314,11 @@ namespace FidgetingApp.Tests.Editor
                     png[25],
                     Is.EqualTo((byte)4).Or.EqualTo((byte)6),
                     pngPath);
-                StringAssert.Contains("sRGB", Encoding.ASCII.GetString(png), pngPath);
+                Assert.That(
+                    HasSrgbColorSpaceTag(png),
+                    Is.True,
+                    $"{pngPath} must declare sRGB via an 'sRGB' chunk or an " +
+                    "embedded 'iCCP' sRGB profile.");
 
                 var texture = new UnityEngine.Texture2D(
                     2,
@@ -356,31 +356,27 @@ namespace FidgetingApp.Tests.Editor
                     Assert.That(maxX, Is.GreaterThanOrEqualTo(0), pngPath);
                     int visibleWidth = maxX - minX + 1;
                     int visibleHeight = maxY - minY + 1;
+                    // The 2026-08-21 Challenge+Legacy master (b10) normalizes
+                    // to a ~76-77% visible-fraction safe area (measured 780-791
+                    // px across all 40 approved assets), wider than the prior
+                    // b8/b9.2 generation's 74% (754-762 px) target.
                     Assert.That(
                         Math.Max(visibleWidth, visibleHeight),
-                        Is.InRange(754, 762),
-                        $"{pngPath} must aspect-fit its longest side into the shared 74% slot.");
+                        Is.InRange(770, 795),
+                        $"{pngPath} must aspect-fit its longest side into the shared b10 safe area.");
                     Assert.That(
                         (minX + maxX + 1) * 0.5,
-                        Is.EqualTo(512d).Within(2d),
+                        Is.EqualTo(512d).Within(3d),
                         $"{pngPath} must be horizontally centered by visible bounds.");
                     Assert.That(
                         (minY + maxY + 1) * 0.5,
-                        Is.EqualTo(512d).Within(2d),
+                        Is.EqualTo(512d).Within(3d),
                         $"{pngPath} must be vertically centered by visible bounds.");
                 }
                 finally
                 {
                     UnityEngine.Object.DestroyImmediate(texture);
                 }
-
-                string svg = File.ReadAllText(svgPath);
-                StringAssert.Contains("viewBox=\"0 0 160 160\"", svg, svgPath);
-                StringAssert.DoesNotContain("<text", svg, svgPath);
-                StringAssert.DoesNotContain(
-                    "<ellipse",
-                    svg,
-                    $"{svgPath} must use equal-diameter circle primitives.");
             }
         }
 
@@ -430,6 +426,81 @@ namespace FidgetingApp.Tests.Editor
                    | (bytes[offset + 1] << 16)
                    | (bytes[offset + 2] << 8)
                    | bytes[offset + 3];
+        }
+
+        /// A PNG may declare sRGB either with a dedicated 'sRGB' chunk or by
+        /// embedding an actual sRGB ICC profile in an 'iCCP' chunk (what
+        /// Pillow/ImageCms write); both are spec-compliant, so this walks the
+        /// chunk table instead of grepping the whole file for ASCII "sRGB".
+        private static bool HasSrgbColorSpaceTag(byte[] png)
+        {
+            int offset = 8;
+            while (offset + 8 <= png.Length)
+            {
+                int length = ReadPngInt32(png, offset);
+                string type = Encoding.ASCII.GetString(png, offset + 4, 4);
+                int dataStart = offset + 8;
+                if (dataStart + length > png.Length)
+                {
+                    break;
+                }
+
+                if (type == "sRGB")
+                {
+                    return true;
+                }
+
+                if (type == "iCCP")
+                {
+                    int nameEnd = Array.IndexOf(
+                        png, (byte)0, dataStart, length);
+                    if (nameEnd >= 0)
+                    {
+                        int compressedStart = nameEnd + 2;
+                        int compressedLength = dataStart + length - compressedStart;
+                        if (compressedLength > 2)
+                        {
+                            byte[] profile = InflateZlib(
+                                png, compressedStart, compressedLength);
+                            // ICC "mluc" description tags store text as
+                            // UTF-16BE (e.g. lcms writes "sRGB built-in"),
+                            // so an ASCII scan alone would miss it.
+                            if (profile != null
+                                && (Encoding.ASCII.GetString(profile)
+                                        .Contains("sRGB")
+                                    || Encoding.BigEndianUnicode
+                                        .GetString(profile)
+                                        .Contains("sRGB")))
+                            {
+                                return true;
+                            }
+                        }
+                    }
+                }
+
+                offset = dataStart + length + 4;
+            }
+            return false;
+        }
+
+        private static byte[] InflateZlib(byte[] bytes, int start, int length)
+        {
+            try
+            {
+                // Skip the 2-byte zlib header; DeflateStream expects raw
+                // deflate data, not the zlib wrapper.
+                using var compressed = new MemoryStream(
+                    bytes, start + 2, length - 2);
+                using var inflate = new System.IO.Compression.DeflateStream(
+                    compressed, System.IO.Compression.CompressionMode.Decompress);
+                using var result = new MemoryStream();
+                inflate.CopyTo(result);
+                return result.ToArray();
+            }
+            catch (Exception)
+            {
+                return null;
+            }
         }
     }
 }

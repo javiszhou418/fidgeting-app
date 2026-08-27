@@ -1,24 +1,26 @@
 {
   "capsule": {
-    "depthMm": 26,
-    "diameterMm": 84,
-    "shape": "circular"
+    "centerYmm": -42,
+    "depthMm": 48,
+    "heightMm": 198,
+    "shape": "rounded-rectangle",
+    "widthMm": 180
   },
   "caseDimensionsMm": {
-    "depth": 53,
-    "height": 240,
-    "width": 188
+    "depth": 50,
+    "height": 304,
+    "width": 216
   },
   "containsPrizeGeometry": false,
   "contentSlot": "ContentSlot_Anchor",
-  "fastenerStyle": "black-cap-with-chrome-collar",
-  "fasteners": [
-    "Fastener_TL",
-    "Fastener_TR",
-    "Fastener_BL",
-    "Fastener_BR"
-  ],
+  "fastenerStyle": "none",
+  "fasteners": [],
   "hasOpaqueOuterBox": false,
+  "label": {
+    "centerYmm": 105,
+    "heightMm": 58,
+    "widthMm": 184
+  },
   "layers": [
     "Layer_01_FrontPlate",
     "Layer_02_Fasteners",
@@ -30,12 +32,12 @@
     "Layer_08_BoxLid"
   ],
   "outerBoxDimensionsMm": {
-    "depth": 53,
-    "height": 240,
-    "width": 188
+    "depth": 50,
+    "height": 304,
+    "width": 216
   },
   "root": "PremiumDisplayCase_Model",
-  "schemaVersion": 1,
-  "style": "clear-acrylic-four-fastener",
+  "schemaVersion": 2,
+  "style": "frosted-polycarbonate-collector-slab",
   "unit": "meter"
 }

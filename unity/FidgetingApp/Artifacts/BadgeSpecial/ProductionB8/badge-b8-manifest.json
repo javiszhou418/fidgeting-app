@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "visualLanguage": "b8.10-vertical-point-hex-safe-area",
+  "visualLanguage": "b9.2-reference-proportioned-satin-relief",
   "canvas": {
     "width": 1024,
     "height": 1024,
@@ -18,11 +18,18 @@
     "preserveAspectRatio": true,
     "circlePrimitive": "equal-diameter"
   },
+  "iconMaterial": {
+    "face": "satin-pearl-silver",
+    "depth": "soft-dark-lavender-sidewall",
+    "bevel": "continuous-rounded-manufactured-edge",
+    "lighting": "top-left-softbox"
+  },
   "runtimeTypography": {
     "maximumLines": 2,
-    "lines": [
-      "displayToken",
-      "shortName"
+    "placement": "outside-badge",
+    "line": [
+      "shortName",
+      "displayToken"
     ]
   },
   "assets": [

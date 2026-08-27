@@ -42,15 +42,75 @@ namespace FidgetingApp.Product.Gacha
                 ? prize.Value.Kind
                 : GachaPrizeKind.ToySkin;
             Begin(outcome.Rarity, kind, prizeNode);
+            if (activeCase != null)
+            {
+                activeCase.SetCollectorLabel(new PremiumDisplayCaseCollectorLabel(
+                    prize.HasValue ? prize.Value.DisplayName : outcome.PrizeId,
+                    prize.HasValue ? prize.Value.SeriesId : "GACHA EDITION",
+                    1,
+                    string.Empty,
+                    string.Empty,
+                    CollectorTier(outcome.Rarity)));
+            }
+        }
+
+        public void Begin(GachaDrawReceiptRow receiptRow, Transform prizeNode)
+        {
+            Begin(
+                receiptRow,
+                prizeNode,
+                PremiumDisplayCaseContentOptions.Default);
+        }
+
+        public void Begin(
+            GachaDrawReceiptRow receiptRow,
+            Transform prizeNode,
+            PremiumDisplayCaseContentOptions contentOptions)
+        {
+            GachaPrizeDefinition? resolved = GachaCatalog.ResolvePrize(
+                receiptRow.Outcome.PrizeId);
+            GachaPrizeKind kind = resolved.HasValue
+                ? resolved.Value.Kind
+                : GachaPrizeKind.ToySkin;
+            Begin(
+                receiptRow.Outcome.Rarity,
+                kind,
+                prizeNode,
+                contentOptions);
+            GachaPrizeDefinition? prize = GachaCatalog.ResolvePrize(
+                receiptRow.Outcome.PrizeId);
+            string acquiredDate = receiptRow.FirstObtainedAtUtc.Length >= 10
+                ? receiptRow.FirstObtainedAtUtc.Substring(0, 10)
+                : string.Empty;
+            activeCase?.SetCollectorLabel(new PremiumDisplayCaseCollectorLabel(
+                prize.HasValue ? prize.Value.DisplayName : receiptRow.Outcome.PrizeId,
+                prize.HasValue ? prize.Value.SeriesId : "GACHA EDITION",
+                1,
+                acquiredDate,
+                string.Empty,
+                CollectorTier(receiptRow.Outcome.Rarity)));
         }
 
         public void Begin(GachaRarity rarity, GachaPrizeKind kind, Transform prizeNode)
+        {
+            Begin(
+                rarity,
+                kind,
+                prizeNode,
+                PremiumDisplayCaseContentOptions.Default);
+        }
+
+        public void Begin(
+            GachaRarity rarity,
+            GachaPrizeKind kind,
+            Transform prizeNode,
+            PremiumDisplayCaseContentOptions contentOptions)
         {
             Dismiss();
             signature = GachaRevealRules.Signature(rarity);
             activeCase = PremiumDisplayCaseFactory.Instantiate(transform);
             activeCase.setCapsulePreset(GachaRevealRules.CapsulePresetFor(kind));
-            activeCase.setContent(prizeNode);
+            activeCase.setContent(prizeNode, contentOptions);
             activeCase.onRevealComplete += HandleRevealComplete;
             CreateAccentLight();
             suspenseRemaining = signature.SuspenseHoldSeconds;
@@ -170,6 +230,18 @@ namespace FidgetingApp.Product.Gacha
             {
                 DestroyImmediate(target);
             }
+        }
+
+        private static PremiumDisplayCaseCollectorTier CollectorTier(
+            GachaRarity rarity)
+        {
+            return rarity switch
+            {
+                GachaRarity.Refined => PremiumDisplayCaseCollectorTier.Refined,
+                GachaRarity.Signature => PremiumDisplayCaseCollectorTier.Signature,
+                GachaRarity.Heirloom => PremiumDisplayCaseCollectorTier.Heirloom,
+                _ => PremiumDisplayCaseCollectorTier.Standard
+            };
         }
     }
 }

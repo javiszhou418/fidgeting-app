@@ -12,7 +12,7 @@ namespace FidgetingApp.Editor
 {
     /// <summary>
     /// Builds the native wallpaper-picker plates from the shipping Unity scenes.
-    /// Both themes for a model are rendered from one frozen camera, projection,
+    /// All themes for a model are rendered from one frozen camera, projection,
     /// model pose and library framing state so changing themes cannot resize the
     /// product in the picker.
     /// </summary>
@@ -26,6 +26,23 @@ namespace FidgetingApp.Editor
         [MenuItem("Fidgeting/Product/Capture Matched Environment Wallpapers")]
         public static void CaptureAll()
         {
+            CaptureThemes(null);
+        }
+
+        [MenuItem("Fidgeting/Product/Capture Adaptive Environment Wallpapers")]
+        public static void CaptureAdaptiveOnly()
+        {
+            CaptureThemes(new[] { SpinnerEnvironmentThemeCatalog.AdaptiveId });
+        }
+
+        [MenuItem("Fidgeting/Product/Capture Mineral Ridge Environment Wallpapers")]
+        public static void CaptureMineralRidgeOnly()
+        {
+            CaptureThemes(new[] { SpinnerEnvironmentThemeCatalog.MineralRidgeId });
+        }
+
+        private static void CaptureThemes(string[] includedThemeIds)
+        {
             string outputFolder = Path.GetFullPath(Path.Combine(
                 Application.dataPath,
                 "Plugins/iOS/SceneWallpapers"));
@@ -34,21 +51,22 @@ namespace FidgetingApp.Editor
             foreach (SpinnerEnvironmentProfile profile in
                      SpinnerEnvironmentCatalog.Profiles)
             {
-                CaptureThemePair(profile, outputFolder);
+                CaptureThemeSet(profile, outputFolder, includedThemeIds);
             }
 
             AssetDatabase.Refresh(ImportAssetOptions.ForceSynchronousImport);
             ConfigureImporters();
             AssetDatabase.SaveAssets();
             Debug.Log(
-                "[FidgetingApp] Captured matched canyon/cyberpunk wallpaper "
-                + $"pairs for {SpinnerEnvironmentCatalog.Profiles.Count} "
+                "[FidgetingApp] Captured matched environment wallpapers for "
+                + $"{SpinnerEnvironmentCatalog.Profiles.Count} "
                 + $"shipping products: {outputFolder}");
         }
 
-        private static void CaptureThemePair(
+        private static void CaptureThemeSet(
             SpinnerEnvironmentProfile profile,
-            string outputFolder)
+            string outputFolder,
+            string[] includedThemeIds)
         {
             EditorSceneManager.OpenScene(profile.ScenePath, OpenSceneMode.Single);
             Camera camera = Camera.main ?? UnityEngine.Object.FindAnyObjectByType<Camera>();
@@ -112,6 +130,11 @@ namespace FidgetingApp.Editor
                 foreach (SpinnerEnvironmentThemeProfile theme in
                          SpinnerEnvironmentThemeCatalog.Profiles)
                 {
+                    if (includedThemeIds != null
+                        && Array.IndexOf(includedThemeIds, theme.Id) < 0)
+                    {
+                        continue;
+                    }
                     camera.transform.SetPositionAndRotation(
                         matchedPosition,
                         matchedRotation);

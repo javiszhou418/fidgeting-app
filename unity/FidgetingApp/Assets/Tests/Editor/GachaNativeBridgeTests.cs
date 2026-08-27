@@ -29,7 +29,8 @@ namespace FidgetingApp.Tests.Editor
                         new GachaDrawOutcome(heirloom.Id, GachaRarity.Heirloom,
                             false, true, false),
                         false,
-                        40)
+                        40,
+                        "2026-08-17T07:12:30.0000000Z")
                 });
 
             string payload = GachaNativeBridge.ReceiptPayload(receipt);
@@ -46,7 +47,19 @@ namespace FidgetingApp.Tests.Editor
                 "40",
                 "0",
                 "1",
-                "0")));
+                "0",
+                "2026-08-17T07:12:30.0000000Z")));
+        }
+
+        [Test]
+        public void RequestScopedReceiptCarriesStableExactlyOnceRequestId()
+        {
+            const string requestId = "2fd82871-0797-4a11-a910-a6573ffe7227";
+            string payload = GachaNativeBridge.ReceiptPayload(
+                requestId,
+                GachaDrawReceipt.Failure("draw-already-pending"));
+            Assert.That(payload,
+                Is.EqualTo("result\t" + requestId + "\tdraw-already-pending"));
         }
     }
 }

@@ -275,6 +275,7 @@ namespace FidgetingApp.Product
     public sealed class CollectorProgressionRuntime
     {
         public const string DefaultPrefix = "fidgeting.collector.v1.";
+        public const int SchemaVersion = 2;
 
         private readonly string prefix;
         private readonly HashSet<string> discoveredModels;
@@ -283,6 +284,7 @@ namespace FidgetingApp.Product
         private readonly HashSet<string> unlockedAchievements;
         private readonly HashSet<string> validDayStamps;
         private readonly Dictionary<string, int> highestToyLevels;
+        private readonly Dictionary<string, string> firstDiscoveredDateByModel;
         private readonly BadgeRewardLedger badgeRewards;
 
         private double experience;
@@ -326,17 +328,46 @@ namespace FidgetingApp.Product
             completedRhythmWeeks = PlayerPrefs.GetInt(Key("completedRhythmWeeks"), 0);
             initialized = PlayerPrefs.GetInt(Key("initialized"), 0) != 0;
             discoveredModels = ReadSet("discoveredModels");
+            firstDiscoveredDateByModel = ReadStringMap("firstDiscoveredDates");
+            foreach (string modelId in firstDiscoveredDateByModel.Keys.ToArray())
+            {
+                if (!discoveredModels.Contains(modelId)
+                    || !TryParseDate(
+                        firstDiscoveredDateByModel[modelId],
+                        out _))
+                {
+                    firstDiscoveredDateByModel.Remove(modelId);
+                }
+            }
             collectedCosmetics = ReadSet("collectedCosmetics");
             awardedToyMilestones = ReadSet("awardedToyMilestones");
             unlockedAchievements = ReadSet("unlockedAchievements");
             validDayStamps = ReadSet("validDays");
             highestToyLevels = ReadLevelMap("highestToyLevels");
+            int schemaVersion = PlayerPrefs.GetInt(Key("schemaVersion"), 1);
+            if (schemaVersion < SchemaVersion)
+            {
+                // Existing discoveries predate acquisition metadata. Preserve
+                // them as unknown rather than pretending migration day was the
+                // day the physical collectible was acquired.
+                PlayerPrefs.SetInt(Key("schemaVersion"), SchemaVersion);
+                PlayerPrefs.Save();
+            }
             RefreshDay(DateTime.Now);
             MigrateLegacyAchievementClaims(DateTime.UtcNow);
             EvaluateAchievements();
         }
 
         public bool HasInitializedProfile => initialized;
+
+        public string FirstDiscoveredDate(string modelId)
+        {
+            return firstDiscoveredDateByModel.TryGetValue(
+                modelId ?? string.Empty,
+                out string date)
+                ? date
+                : string.Empty;
+        }
 
         public CollectorProgressionSnapshot Snapshot => CreateSnapshot(DateTime.Now);
 
@@ -380,6 +411,7 @@ namespace FidgetingApp.Product
             todayInteractionCount++;
             if (!string.IsNullOrEmpty(modelId) && discoveredModels.Add(modelId))
             {
+                firstDiscoveredDateByModel[modelId] = DateStamp(now);
                 AddExperience(CollectorProgressionRules.FirstModelExperience);
             }
             TryCreditEffectiveDay(now);
@@ -495,7 +527,9 @@ namespace FidgetingApp.Product
                     lastRhythmRewardStamp ?? string.Empty);
                 PlayerPrefs.SetInt(Key("completedRhythmWeeks"), completedRhythmWeeks);
                 PlayerPrefs.SetInt(Key("initialized"), initialized ? 1 : 0);
+                PlayerPrefs.SetInt(Key("schemaVersion"), SchemaVersion);
                 WriteSet("discoveredModels", discoveredModels);
+                WriteStringMap("firstDiscoveredDates", firstDiscoveredDateByModel);
                 WriteSet("collectedCosmetics", collectedCosmetics);
                 WriteSet("awardedToyMilestones", awardedToyMilestones);
                 WriteSet("unlockedAchievements", unlockedAchievements);
@@ -853,6 +887,24 @@ namespace FidgetingApp.Product
             return result;
         }
 
+        private Dictionary<string, string> ReadStringMap(string suffix)
+        {
+            var result = new Dictionary<string, string>(StringComparer.Ordinal);
+            string payload = PlayerPrefs.GetString(Key(suffix), string.Empty);
+            foreach (string row in payload.Split(
+                         new[] { '|' },
+                         StringSplitOptions.RemoveEmptyEntries))
+            {
+                int separator = row.IndexOf('=');
+                if (separator <= 0 || separator >= row.Length - 1)
+                {
+                    continue;
+                }
+                result[row.Substring(0, separator)] = row.Substring(separator + 1);
+            }
+            return result;
+        }
+
         private void WriteSet(string suffix, IEnumerable<string> values)
         {
             PlayerPrefs.SetString(
@@ -869,6 +921,18 @@ namespace FidgetingApp.Product
                     values.OrderBy(pair => pair.Key, StringComparer.Ordinal)
                         .Select(pair => pair.Key + "@"
                             + pair.Value.ToString(CultureInfo.InvariantCulture))));
+        }
+
+        private void WriteStringMap(
+            string suffix,
+            Dictionary<string, string> values)
+        {
+            PlayerPrefs.SetString(
+                Key(suffix),
+                string.Join(
+                    "|",
+                    values.OrderBy(pair => pair.Key, StringComparer.Ordinal)
+                        .Select(pair => pair.Key + "=" + pair.Value)));
         }
 
         private static string DateStamp(DateTime localNow)

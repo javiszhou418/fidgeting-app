@@ -199,6 +199,45 @@ namespace FidgetingApp.Tests.Editor
         }
 
         [Test]
+        public void ColdBootDoesNotReloadThePersistedLibraryModel()
+        {
+            string swift = File.ReadAllText(
+                "Assets/Plugins/iOS/CodexSwiftUIOverlay.swift");
+            string coordinator = File.ReadAllText(
+                "Assets/Scripts/Product/FidgetAppCoordinator.cs");
+            int previewStart = swift.IndexOf("func beginLibraryPreview()");
+            int previewEnd = swift.IndexOf(
+                "func enterSelectedModel()",
+                previewStart);
+            Assert.That(previewStart, Is.GreaterThanOrEqualTo(0));
+            Assert.That(previewEnd, Is.GreaterThan(previewStart));
+            string initialPreview = swift.Substring(
+                previewStart,
+                previewEnd - previewStart);
+
+            StringAssert.Contains(
+                "SetLibraryPreviewActiveFromNativeUi",
+                initialPreview);
+            StringAssert.DoesNotContain(
+                "SelectModelFromNativeUi",
+                initialPreview,
+                "Opening the initial Library must not load a second product scene.");
+            StringAssert.Contains(
+                "hasSynchronizedInitialUnityModel",
+                swift);
+            StringAssert.Contains(
+                "userSelectedModelSinceLaunch",
+                swift);
+            StringAssert.Contains(
+                "PrepareHapticsAfterFirstInteractiveFrames",
+                coordinator);
+            StringAssert.DoesNotContain(
+                "FidgetHapticRouter.ConfigureSpeedTexture(hapticSpeedTextureProfile);\n"
+                    + "            IosHaptics.Prepare();",
+                coordinator);
+        }
+
+        [Test]
         public void LibraryLongPressOpensTheWallpaperStyleEnvironmentPicker()
         {
             string swift = File.ReadAllText(
@@ -237,7 +276,7 @@ namespace FidgetingApp.Tests.Editor
                 pickerEnd - pickerStart);
             Assert.That(
                 pickerSource.Split(
-                    new[] { "ProductPrimaryActionLabel(" },
+                    new[] { "ProductPrimaryActionButton(" },
                     System.StringSplitOptions.None).Length - 1,
                 Is.EqualTo(1),
                 "The picker must expose one and only one primary confirmation CTA.");
@@ -264,11 +303,11 @@ namespace FidgetingApp.Tests.Editor
             StringAssert.DoesNotContain(
                 "ForEach(-1...1, id: \\.self)",
                 pickerSource,
-                "Two themes must not fill both neighbor slots with the same duplicated scene.");
+                "Finite themes must not fill both neighbor slots with duplicated scenes.");
             StringAssert.DoesNotContain(
                 "% themes.count",
                 pickerSource,
-                "The two-theme picker is finite and must not wrap at either edge.");
+                "The four-theme picker is finite and must not wrap at either edge.");
             StringAssert.Contains("private let neighborSpacing", pickerSource);
             StringAssert.Contains("let carouselPitch =", pickerSource);
             StringAssert.Contains("DragGesture(minimumDistance: 8", pickerSource);
@@ -379,8 +418,10 @@ namespace FidgetingApp.Tests.Editor
             {
                 foreach (string themeId in new[]
                          {
+                             SpinnerEnvironmentThemeCatalog.AdaptiveId,
                              SpinnerEnvironmentThemeCatalog.CanyonId,
-                             SpinnerEnvironmentThemeCatalog.CyberpunkId
+                             SpinnerEnvironmentThemeCatalog.CyberpunkId,
+                             SpinnerEnvironmentThemeCatalog.MineralRidgeId
                          })
                 {
                     string path = Path.Combine(
@@ -683,12 +724,12 @@ namespace FidgetingApp.Tests.Editor
                 .SelectMany(renderer => renderer.sharedMaterials)
                 .First(material => material.name == "M_DragonScale_BlastedTitanium");
             Assert.That(body.GetFloat("_Metallic"), Is.EqualTo(1f));
-            Assert.That(body.GetFloat("_Smoothness"), Is.EqualTo(0.72f).Within(0.001f));
+            Assert.That(body.GetFloat("_Smoothness"), Is.EqualTo(0.44f).Within(0.001f));
             Assert.That(body.GetTexture("_BumpMap"), Is.Not.Null);
             Material polished = dragonRenderers
                 .SelectMany(renderer => renderer.sharedMaterials)
                 .First(material => material.name == "M_DragonScale_PolishedEdge");
-            Assert.That(polished.GetFloat("_Smoothness"), Is.EqualTo(0.90f).Within(0.001f));
+            Assert.That(polished.GetFloat("_Smoothness"), Is.EqualTo(0.70f).Within(0.001f));
             Material pom = dragonRenderers
                 .SelectMany(renderer => renderer.sharedMaterials)
                 .First(material => material.name == "M_DragonScale_BlackPOM");
@@ -1214,7 +1255,9 @@ namespace FidgetingApp.Tests.Editor
             StringAssert.Contains("struct ProductIconSegmentedControl", components);
             StringAssert.Contains("struct ProductPageIndicator", components);
             StringAssert.Contains("struct ProductPrimaryActionLabel", components);
+            StringAssert.Contains("struct ProductPrimaryActionButton", components);
             StringAssert.Contains("struct ProductActionLabel", components);
+            StringAssert.Contains("struct ProductSecondaryActionButton", components);
             StringAssert.Contains("struct ProductSectionCard", components);
             StringAssert.Contains("struct ProductBottomSheetShell", components);
             StringAssert.Contains("struct ProductStatusPill", components);
@@ -1231,28 +1274,36 @@ namespace FidgetingApp.Tests.Editor
             StringAssert.Contains("private func roundedHexagonPath", components);
             StringAssert.DoesNotContain("private func shieldPath", components);
             StringAssert.Contains("ProductBadgeShellShape()", components);
-            StringAssert.Contains(".brightness(isUnlocked ? 0.025 : -0.34)", components);
+            StringAssert.Contains(".brightness(isUnlocked ? 0.018 : -0.36)", components);
             StringAssert.Contains(".opacity(isUnlocked ? 1 : 0.24)", components);
             StringAssert.Contains("static let catalogColumnCount = 3", components);
             StringAssert.Contains("static let catalogHorizontalPadding: CGFloat = 20", components);
             StringAssert.Contains("static let catalogColumnSpacing: CGFloat = 14", components);
-            StringAssert.Contains("static let iconSlotFraction: CGFloat = 0.46", components);
-            StringAssert.Contains("static let centeredContentHeightFraction: CGFloat = 0.64", components);
-            StringAssert.Contains("static let tokenSlotHeightFraction: CGFloat = 0.165", components);
-            StringAssert.Contains("static let tokenFontFraction: CGFloat = 0.124", components);
-            StringAssert.Contains("static let unitFontFraction: CGFloat = 0.048", components);
-            StringAssert.Contains("static let milestoneFontSize: CGFloat = 9.5", components);
-            StringAssert.Contains("static let milestoneSlotHeight: CGFloat = 13", components);
+            StringAssert.Contains("static let milestoneFontSize: CGFloat = 8.5", components);
+            StringAssert.Contains("static let milestoneSlotHeight: CGFloat = 22", components);
             StringAssert.Contains("Point-up orientation", components);
+            StringAssert.Contains("private var externalMilestoneTitle: String", components);
             StringAssert.Contains("private var milestoneName: some View", components);
             StringAssert.Contains("private var externalProgressBar: some View", components);
-            StringAssert.Contains("Milestone metadata belongs to the catalog tile", components);
+            StringAssert.Contains("recessed face contains icon only", components);
             StringAssert.Contains("Image(\"badge-leather-texture\")", components);
+            StringAssert.Contains(".scaleEffect(grainScale < 1 ? 1.65 : 1.35)", components);
             StringAssert.Contains("private enum ProductBadgeArtworkCache", components);
-            StringAssert.Contains(".blur(radius: width * 0.032)", components);
+            StringAssert.Contains(".blur(radius: width * 0.020)", components);
             StringAssert.Contains(".blendMode(.screen)", components);
-            StringAssert.Contains(".opacity(isUnlocked ? 1 : 0.58)", components);
-            StringAssert.Contains(".position(x: width * 0.5, y: width * 0.5)", components);
+            // The 2026-08-21 Challenge+Legacy master bakes its own hexagon shell,
+            // well and bevel into the artwork; the artwork must fill the cell
+            // directly rather than sit inset inside a second runtime-drawn shell,
+            // which previously produced a visible double (nested) frame.
+            StringAssert.Contains(
+                "ProductBadgeArtworkLayer(",
+                components);
+            StringAssert.Contains(".frame(width: width, height: width)", components);
+            StringAssert.DoesNotContain("static let iconSlotFraction", components);
+            StringAssert.DoesNotContain("frameFaceShape", components);
+            StringAssert.DoesNotContain("wellShape", components);
+            StringAssert.DoesNotContain("panelShape", components);
+            StringAssert.DoesNotContain("private func badgeToken", components);
             StringAssert.Contains(
                 "CGPoint(x: rect.midX, y: rect.minY + rect.height * 0.04)",
                 components);
@@ -1270,8 +1321,9 @@ namespace FidgetingApp.Tests.Editor
             StringAssert.Contains("ProductIconButton(", source);
             StringAssert.Contains("ProductIconSegmentedControl(", source);
             StringAssert.Contains("ProductPageIndicator(", source);
-            StringAssert.Contains("ProductPrimaryActionLabel(", source);
+            StringAssert.Contains("ProductPrimaryActionButton(", source);
             StringAssert.Contains("ProductActionLabel(", source);
+            StringAssert.Contains("ProductSecondaryActionButton(", source);
             StringAssert.Contains("ProductSectionCard(", source);
             StringAssert.Contains("ProgressionCatalogHeader(", source);
             StringAssert.DoesNotContain(

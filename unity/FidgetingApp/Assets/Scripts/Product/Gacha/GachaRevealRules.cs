@@ -60,17 +60,8 @@ namespace FidgetingApp.Product.Gacha
 
         public static PremiumDisplayCaseCapsulePreset CapsulePresetFor(GachaPrizeKind kind)
         {
-            return kind switch
-            {
-                GachaPrizeKind.Toy => PremiumDisplayCaseCapsulePreset.CircularDeep,
-                GachaPrizeKind.DisplayBase =>
-                    PremiumDisplayCaseCapsulePreset.RoundedSquareDeep,
-                GachaPrizeKind.Sticker =>
-                    PremiumDisplayCaseCapsulePreset.RoundedSquareStandard,
-                GachaPrizeKind.EnvironmentTint =>
-                    PremiumDisplayCaseCapsulePreset.RoundedSquareStandard,
-                _ => PremiumDisplayCaseCapsulePreset.CircularStandard
-            };
+            _ = kind;
+            return PremiumDisplayCaseCapsulePreset.CollectorSlabLarge;
         }
 
         public static float TotalRevealSeconds(GachaRarity rarity)

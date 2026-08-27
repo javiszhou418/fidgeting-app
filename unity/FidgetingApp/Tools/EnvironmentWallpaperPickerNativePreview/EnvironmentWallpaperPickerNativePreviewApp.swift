@@ -13,19 +13,21 @@ struct EnvironmentWallpaperPickerNativePreviewApp: App {
 
     init() {
         ProductTypography.configureUIKitAppearance()
-        let bundleRequestsCyberpunk = Bundle.main.bundleIdentifier?
-            .hasSuffix(".cyberpunk") == true
+        let bundleMode = Bundle.main.bundleIdentifier?
+            .split(separator: ".")
+            .last
+            .flatMap { EnvironmentWallpaperPickerNativePreviewRoot.Mode(
+                rawValue: String($0)) }
         let environmentValue = ProcessInfo.processInfo.environment[
             "FIDGET_WALLPAPER_PREVIEW_MODE"]
         let argumentValue = ProcessInfo.processInfo.arguments
             .first { $0.hasPrefix("--mode=") }?
             .replacingOccurrences(of: "--mode=", with: "")
-        let requestsCyberpunk = [environmentValue, argumentValue]
+        let requestedMode = [environmentValue, argumentValue]
             .compactMap { $0?.lowercased() }
-            .contains { $0.contains("cyberpunk") }
-        mode = bundleRequestsCyberpunk || requestsCyberpunk
-            ? .cyberpunk
-            : .canyon
+            .compactMap(EnvironmentWallpaperPickerNativePreviewRoot.Mode.init(rawValue:))
+            .first
+        mode = requestedMode ?? bundleMode ?? .adaptive
     }
 
     var body: some Scene {

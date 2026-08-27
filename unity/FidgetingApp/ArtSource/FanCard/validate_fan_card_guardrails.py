@@ -19,6 +19,11 @@ BUILDER_PATH = PROJECT_ROOT / "unity/FidgetingApp/Assets/_FanCard/Editor/FanCard
 TEST_PATH = PROJECT_ROOT / "unity/FidgetingApp/Assets/_FanCard/Tests/Editor/FanCardAcceptanceTests.cs"
 SCENE_PATH = PROJECT_ROOT / "unity/FidgetingApp/Assets/_FanCard/Scenes/MagneticFanCard.unity"
 REPORT_PATH = PROJECT_ROOT / "Artifacts/FanCardBlenderPreview/fan-card-back-mechanism-report.json"
+TESSELLATION_CONTRACT_PATH = (
+    PROJECT_ROOT
+    / "unity/FidgetingApp/ArtSource/ModelPipeline/magnetic-fan-card/"
+    / "evidence/03-contract/rev-007/modeling-contract.json"
+)
 
 
 def require(condition: bool, message: str) -> None:
@@ -106,15 +111,81 @@ def main() -> int:
     face = config["face_art"]
     card = config["card"]
     mechanism = config["mechanism"]
+    tessellation_contract = json.loads(
+        TESSELLATION_CONTRACT_PATH.read_text(encoding="utf-8")
+    )
 
-    spec_face_inset = capture(
+    spec_thickness = capture(
         spec,
-        r"FaceInset\s*=\s*([0-9.]+)f",
-        "FanCardSpecifications.FaceInset",
+        r"CardThickness\s*=\s*([0-9.]+)f",
+        "FanCardSpecifications.CardThickness",
+    )[0]
+    spec_radius = capture(
+        spec,
+        r"CardCornerRadius\s*=\s*([0-9.]+)f",
+        "FanCardSpecifications.CardCornerRadius",
     )[0]
     require(
-        abs(spec_face_inset * 1000.0 - card["face_inset"]) < 1e-6,
-        "C# closed face inset matches the canonical guardrail",
+        abs(spec_thickness * 1000.0 - card["thickness"]) < 1e-6
+        and abs(spec_radius * 1000.0 - card["corner_radius"]) < 1e-6,
+        "C# card thickness and corner radius match the canonical guardrail",
+    )
+    spec_corner_segments = capture(
+        spec,
+        r"VisualCornerSegmentsPerQuadrant\s*=\s*([0-9]+)",
+        "FanCardSpecifications.VisualCornerSegmentsPerQuadrant",
+    )[0]
+    require(
+        int(spec_corner_segments)
+        == int(card["visual_corner_segments_per_quadrant"])
+        == int(
+            tessellation_contract["geometry"][
+                "visualCornerSegmentsPerQuadrant"
+            ]
+        )
+        == 72,
+        "C#, Blender contract, and guardrail lock 72 visible corner segments",
+    )
+    require(
+        "LoadVisualModelPart(" in builder
+        and "ConvertAuthoritativeVisualMesh(" in builder
+        and "public static void BuildScene()" in builder
+        and builder.split("public static void BuildScene()", 1)[1]
+            .split('[MenuItem("Tools/Codex/Fan Card/2', 1)[0]
+            .count("CreateRoundedBoxMesh(") == 0
+        and builder.split("public static void BuildScene()", 1)[1]
+            .split('[MenuItem("Tools/Codex/Fan Card/2', 1)[0]
+            .count("CreateRoundedSurfaceMesh(") == 0
+        and "authoritative 72-segment" in (
+            PROJECT_ROOT
+            / "unity/FidgetingApp/ArtSource/ModelPipeline/magnetic-fan-card/"
+            / "evidence/10-export/rev-003/export_fan_card_smooth_normals.py"
+        ).read_text(encoding="utf-8"),
+        "Unity body, gold trim, and silver face import the 72-segment Blender FBX",
+    )
+    spec_black_border = capture(
+        spec,
+        r"BlackBorderWidth\s*=\s*([0-9.]+)f",
+        "FanCardSpecifications.BlackBorderWidth",
+    )[0]
+    spec_gold_trim = capture(
+        spec,
+        r"GoldTrimWidth\s*=\s*([0-9.]+)f",
+        "FanCardSpecifications.GoldTrimWidth",
+    )[0]
+    spec_gold_bevel = capture(
+        spec,
+        r"GoldTrimBevel\s*=\s*([0-9.]+)f",
+        "FanCardSpecifications.GoldTrimBevel",
+    )[0]
+    require(
+        abs(spec_black_border * 1000.0 - card["black_border_width"]) < 1e-6
+        and abs(spec_gold_trim * 1000.0 - card["gold_trim_width"]) < 1e-6
+        and abs(spec_gold_bevel * 1000.0 - card["gold_trim_bevel"]) < 1e-6
+        and abs((spec_black_border + spec_gold_trim) * 1000.0
+                - card["face_inset"]) < 1e-6
+        and "FaceInset = BlackBorderWidth + GoldTrimWidth" in spec,
+        "C# black border, gold trim, bevel, and face inset match the guardrail",
     )
     require(
         "CircleIsInsideRoundedRect" in builder
@@ -171,6 +242,21 @@ def main() -> int:
         abs(spec_clearance * 1000.0 - track["minimum_outer_edge_clearance"]) < 1e-6,
         "C# edge-clearance threshold matches the canonical guardrail",
     )
+    blender_thickness = capture(
+        blender,
+        r"CARD_THICKNESS\s*=\s*([0-9.]+)",
+        "Blender CARD_THICKNESS",
+    )[0]
+    blender_radius = capture(
+        blender,
+        r"CARD_RADIUS\s*=\s*([0-9.]+)",
+        "Blender CARD_RADIUS",
+    )[0]
+    require(
+        abs(blender_thickness * 1000.0 - card["thickness"]) < 1e-6
+        and abs(blender_radius * 1000.0 - card["corner_radius"]) < 1e-6,
+        "Blender card thickness and corner radius match the guardrail",
+    )
     blender_follower = capture(
         blender,
         r"FOLLOWER\s*=\s*Vector\(\((-?[0-9.]+),\s*(-?[0-9.]+)\)\)",
@@ -223,6 +309,27 @@ def main() -> int:
         == face["corner_spades_per_front"]
         == 2,
         "each front uses exactly two diagonal rank and spade corner indices",
+    )
+    spec_dot_count = capture(
+        spec,
+        r"DecorativeDotCountPerFront\s*=\s*([0-9]+);",
+        "FanCardSpecifications.DecorativeDotCountPerFront",
+    )[0]
+    require(
+        spec_dot_count == face["decorative_dots_per_front"] == 0
+        and "EtchedDot_" not in builder
+        and 'StartsWith("EtchedDot_")' in tests,
+        "front artwork contains no semantically unexplained decorative dots",
+    )
+    require(
+        '"WarmGoldTrim"' in builder
+        and '"WarmGoldBackTrim"' in builder
+        and "BottomCard_GoldTrim" in builder
+        and "GoldTrimOuterWidth" in spec
+        and "GoldTrimBevel" in spec
+        and '"WarmGoldTrim"' in tests
+        and '"WarmGoldBackTrim"' in tests,
+        "Unity scene builder attaches the approved beveled gold inlay",
     )
     top_left_rotation = capture(
         spec,

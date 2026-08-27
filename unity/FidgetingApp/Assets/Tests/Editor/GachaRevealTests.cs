@@ -64,15 +64,15 @@ namespace FidgetingApp.Tests.Editor
         public void EveryPrizeKindResolvesACapsulePreset()
         {
             Assert.That(GachaRevealRules.CapsulePresetFor(GachaPrizeKind.Toy),
-                Is.EqualTo(PremiumDisplayCaseCapsulePreset.CircularDeep));
+                Is.EqualTo(PremiumDisplayCaseCapsulePreset.CollectorSlabLarge));
             Assert.That(GachaRevealRules.CapsulePresetFor(GachaPrizeKind.ToySkin),
-                Is.EqualTo(PremiumDisplayCaseCapsulePreset.CircularStandard));
+                Is.EqualTo(PremiumDisplayCaseCapsulePreset.CollectorSlabLarge));
             Assert.That(GachaRevealRules.CapsulePresetFor(GachaPrizeKind.Sticker),
-                Is.EqualTo(PremiumDisplayCaseCapsulePreset.RoundedSquareStandard));
+                Is.EqualTo(PremiumDisplayCaseCapsulePreset.CollectorSlabLarge));
             Assert.That(GachaRevealRules.CapsulePresetFor(GachaPrizeKind.DisplayBase),
-                Is.EqualTo(PremiumDisplayCaseCapsulePreset.RoundedSquareDeep));
+                Is.EqualTo(PremiumDisplayCaseCapsulePreset.CollectorSlabLarge));
             Assert.That(GachaRevealRules.CapsulePresetFor(GachaPrizeKind.EnvironmentTint),
-                Is.EqualTo(PremiumDisplayCaseCapsulePreset.RoundedSquareStandard));
+                Is.EqualTo(PremiumDisplayCaseCapsulePreset.CollectorSlabLarge));
         }
 
         [Test]
@@ -128,7 +128,7 @@ namespace FidgetingApp.Tests.Editor
                 Assert.That(director.Phase, Is.EqualTo(GachaRevealPhase.Revealing));
                 Assert.That(director.ActiveCase.IsRevealPlaying, Is.True);
                 Assert.That(director.ActiveCase.CapsulePreset,
-                    Is.EqualTo(PremiumDisplayCaseCapsulePreset.RoundedSquareStandard));
+                    Is.EqualTo(PremiumDisplayCaseCapsulePreset.CollectorSlabLarge));
             }
             finally
             {

@@ -49,9 +49,8 @@ namespace FidgetingApp.DisplayCase
     }
 
     /// <summary>
-    /// Native-facing manipulation for the reusable case. Gesture recognition
-    /// stays in SwiftUI; this component applies semantic orbit, zoom and
-    /// assembly progress to the authored Blender layers.
+    /// Shipping paths use orbit and zoom only. Exploded layout methods remain
+    /// authoring tools and must have no native or coordinator call path.
     /// </summary>
     [DisallowMultipleComponent]
     public sealed class PremiumDisplayCaseInteractionController : MonoBehaviour

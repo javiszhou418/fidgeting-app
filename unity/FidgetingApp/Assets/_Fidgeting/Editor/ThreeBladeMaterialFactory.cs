@@ -41,16 +41,16 @@ namespace ThreeBladeEDC.EditorTools
             MaterialSet set = new MaterialSet
             {
                 blade = CreateOrUpdateMaterial(
-                    "M_BladeSandblast", new Color32(0xAE, 0xB3, 0xB6, 0xFF), 1f, 0.72f, sandblast, sandblastNormal, 0.16f),
+                    "M_BladeSandblast", new Color32(0xAE, 0xB3, 0xB6, 0xFF), 1f, 0.40f, sandblast, sandblastNormal, 0.18f),
                 cap = CreateOrUpdateMaterial(
-                    "M_CapRadialBrushed", new Color32(0xC2, 0xC5, 0xC7, 0xFF), 1f, 0.79f, radialBrush, radialNormal, 0.10f,
+                    "M_CapRadialBrushed", new Color32(0xC2, 0xC5, 0xC7, 0xFF), 1f, 0.50f, radialBrush, radialNormal, 0.10f,
                     "ThreeBlade/RadialBrushedMetal"),
                 bevel = CreateOrUpdateMaterial(
-                    "M_BevelPolished", new Color32(0xD6, 0xDA, 0xDD, 0xFF), 1f, 0.90f, null, null, 0f),
+                    "M_BevelPolished", new Color32(0xD6, 0xDA, 0xDD, 0xFF), 1f, 0.68f, null, null, 0f),
                 darkRing = CreateOrUpdateMaterial(
                     "M_DarkRing", new Color32(0x0B, 0x0D, 0x10, 0xFF), 0f, 0.45f, sandblast, sandblastNormal, 0.08f),
                 bearing = CreateOrUpdateMaterial(
-                    "M_BearingSteel", new Color32(0x68, 0x70, 0x77, 0xFF), 1f, 0.76f, null, null, 0f),
+                    "M_BearingSteel", new Color32(0x68, 0x70, 0x77, 0xFF), 1f, 0.70f, null, null, 0f),
                 inset = CreateOrUpdateMaterial(
                     "M_BladeInset", new Color32(0x28, 0x2D, 0x32, 0xFF), 0.85f, 0.48f, sandblast, sandblastNormal, 0.08f),
                 floor = CreateOrUpdateMaterial(

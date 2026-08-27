@@ -32,6 +32,20 @@ namespace FidgetingApp.DisplayCase.Editor
         private const string BadgeArtworkRoot =
             "Assets/Plugins/iOS/BadgeArtwork";
 
+        [MenuItem("Tools/Codex/Rebuild Collector Slab Shipping Assets")]
+        public static void RebuildCollectorSlabShippingAssets()
+        {
+            // Rebuild the three approved metal finishes from their canonical
+            // sources before the case snapshots them. These calls preserve
+            // every authored mesh, pivot, parent, collider and interaction.
+            ThreeBladeEDC.EditorTools.ThreeBladeSceneBuilder.BuildPresentation();
+            FidgetingApp.ImportedSpinner.EditorTools.ImportedSpinnerSceneBuilder
+                .BuildPresentation();
+            FidgetingApp.TwoLobeBar.EditorTools.TwoLobeBarSceneBuilder
+                .BuildPresentation();
+            BuildPrefabAndScene();
+        }
+
         [MenuItem("Fidgeting/Display Case/Build Prefab And Scene")]
         public static void BuildPrefabAndScene()
         {
@@ -76,7 +90,7 @@ namespace FidgetingApp.DisplayCase.Editor
             Scene scene = EditorSceneManager.OpenScene(ScenePath, OpenSceneMode.Single);
             PremiumDisplayCase displayCase = UnityEngine.Object.FindAnyObjectByType<
                 PremiumDisplayCase>();
-            Camera camera = UnityEngine.Object.FindAnyObjectByType<Camera>();
+            Camera camera = FindPreviewCamera();
             if (displayCase == null || camera == null)
             {
                 throw new InvalidOperationException(
@@ -189,9 +203,11 @@ namespace FidgetingApp.DisplayCase.Editor
                 displayCase.name = $"PremiumDisplayCase_{product.ModelId}";
                 PremiumDisplayCaseProductProfile profile =
                     PremiumDisplayCaseProductProfiles.Resolve(product.ModelId);
-                displayCase.SetIdentification(
+                displayCase.SetCollectorLabel(new PremiumDisplayCaseCollectorLabel(
                     profile.EnglishDisplayName,
-                    PreviewLevel(product.ModelId));
+                    profile.EditionName,
+                    PreviewLevel(product.ModelId),
+                    string.Empty));
                 ApplyPreviewFeaturedBadge(displayCase, product.ModelId);
                 displayCase.setCapsulePreset(profile.CapsulePreset);
                 displayCase.setContent(snapshot.transform, profile.ContentOptions);
@@ -199,7 +215,7 @@ namespace FidgetingApp.DisplayCase.Editor
                 displayCase.SetParallaxForPreview(Vector2.zero);
 
                 CreatePreviewEnvironment();
-                Camera camera = UnityEngine.Object.FindAnyObjectByType<Camera>();
+                Camera camera = FindPreviewCamera();
                 if (camera == null)
                 {
                     throw new InvalidOperationException(
@@ -264,16 +280,18 @@ namespace FidgetingApp.DisplayCase.Editor
                     "Shipping display-case component is missing.");
             }
 
-            displayCase.SetIdentification(
+            displayCase.SetCollectorLabel(new PremiumDisplayCaseCollectorLabel(
                 profile.EnglishDisplayName,
-                PreviewLevel(modelId));
+                profile.EditionName,
+                PreviewLevel(modelId),
+                string.Empty));
             ApplyPreviewFeaturedBadge(displayCase, modelId);
             displayCase.setCapsulePreset(profile.CapsulePreset);
             displayCase.setContent(snapshot.transform, profile.ContentOptions);
             displayCase.SetRevealProgressForPreview(1f);
             displayCase.SetParallaxForPreview(Vector2.zero);
             CreatePreviewEnvironment();
-            Camera camera = UnityEngine.Object.FindAnyObjectByType<Camera>();
+            Camera camera = FindPreviewCamera();
             if (camera == null)
             {
                 throw new InvalidOperationException(
@@ -375,7 +393,7 @@ namespace FidgetingApp.DisplayCase.Editor
             Scene scene = EditorSceneManager.OpenScene(ScenePath, OpenSceneMode.Single);
             PremiumDisplayCase displayCase = UnityEngine.Object.FindAnyObjectByType<
                 PremiumDisplayCase>();
-            Camera camera = UnityEngine.Object.FindAnyObjectByType<Camera>();
+            Camera camera = FindPreviewCamera();
             if (displayCase == null || camera == null)
             {
                 throw new InvalidOperationException(
@@ -477,7 +495,7 @@ namespace FidgetingApp.DisplayCase.Editor
             EditorSceneManager.OpenScene(ScenePath, OpenSceneMode.Single);
             PremiumDisplayCase displayCase = UnityEngine.Object.FindAnyObjectByType<
                 PremiumDisplayCase>();
-            Camera camera = UnityEngine.Object.FindAnyObjectByType<Camera>();
+            Camera camera = FindPreviewCamera();
             if (displayCase == null || camera == null)
             {
                 throw new InvalidOperationException(
@@ -682,12 +700,11 @@ namespace FidgetingApp.DisplayCase.Editor
                 materials,
                 acrylicRenderers);
             Transform circularCapsule = Child(interior, "CircularCapsuleGeometry");
-            blenderLayers[3].SetParent(circularCapsule, true);
             Transform roundedCapsule = Child(interior, "RoundedSquareCapsuleGeometry");
-            BuildRoundedCapsule(roundedCapsule, materials);
+            blenderLayers[3].SetParent(roundedCapsule, true);
 
             Transform contentParallax = Child(caseReveal, "ContentParallaxRoot");
-            contentParallax.localPosition = new Vector3(0f, 0f, -0.014f);
+            contentParallax.localPosition = new Vector3(0f, -0.042f, -0.018f);
             Transform contentSlot = Child(contentParallax, "contentSlot");
             Transform contentReveal = Child(contentSlot, "ContentRevealRoot");
             Transform contentOrbit = Child(contentReveal, "ContentOrbitRoot");
@@ -701,20 +718,57 @@ namespace FidgetingApp.DisplayCase.Editor
             }
             TextMesh levelLaserMark = BuildLaserMark(
                 interior,
-                "LaserLevelMark",
+                "CollectorTierAndLevel",
                 productFont,
-                "LEVEL 1",
-                new Vector3(0f, -0.073f, -0.012f),
-                0.0014f,
-                new Color(0.54f, 0.60f, 0.65f, 0.86f));
+                "STANDARD · LEVEL 1",
+                new Vector3(-0.078f, 0.082f, -0.033f),
+                0.00078f,
+                new Color(0.025f, 0.028f, 0.032f, 1f),
+                TextAnchor.MiddleLeft,
+                TextAlignment.Left);
             TextMesh productNameLaserMark = BuildLaserMark(
                 interior,
-                "LaserProductName",
+                "CollectorProductName",
                 productFont,
                 "COLLECTOR EDITION",
-                new Vector3(0f, -0.087f, -0.012f),
-                0.0019f,
-                new Color(0.72f, 0.76f, 0.79f, 0.94f));
+                new Vector3(-0.078f, 0.125f, -0.033f),
+                0.00225f,
+                new Color(0.012f, 0.014f, 0.018f, 1f),
+                TextAnchor.MiddleLeft,
+                TextAlignment.Left);
+            TextMesh editionLabelMark = BuildLaserMark(
+                interior,
+                "CollectorEdition",
+                productFont,
+                "ORIGINAL FINISH",
+                new Vector3(-0.078f, 0.109f, -0.033f),
+                0.00090f,
+                new Color(0.025f, 0.028f, 0.032f, 1f),
+                TextAnchor.MiddleLeft,
+                TextAlignment.Left);
+            TextMesh acquiredDateLabelMark = BuildLaserMark(
+                interior,
+                "CollectorAcquiredDate",
+                productFont,
+                "ACQUIRED —",
+                new Vector3(-0.078f, 0.094f, -0.033f),
+                0.00082f,
+                new Color(0.030f, 0.033f, 0.038f, 1f),
+                TextAnchor.MiddleLeft,
+                TextAlignment.Left);
+            TextMesh collectibleIdLabelMark = BuildLaserMark(
+                interior,
+                "CollectorStableId",
+                productFont,
+                string.Empty,
+                new Vector3(0.030f, 0.082f, -0.033f),
+                0.00072f,
+                new Color(0.035f, 0.038f, 0.043f, 1f),
+                TextAnchor.MiddleLeft,
+                TextAlignment.Left);
+            Renderer rarityFoilRenderer = FindDescendant(
+                roundedCapsule,
+                "Collector_RarityFoilBand")?.GetComponent<Renderer>();
             BuildFeaturedBadge(
                 interior,
                 materials,
@@ -762,6 +816,10 @@ namespace FidgetingApp.DisplayCase.Editor
                 placeholder,
                 levelLaserMark,
                 productNameLaserMark,
+                editionLabelMark,
+                acquiredDateLabelMark,
+                collectibleIdLabelMark,
+                rarityFoilRenderer,
                 featuredBadgeRoot,
                 featuredBadgeArtworkRenderer,
                 featuredBadgeTokenMark,
@@ -795,7 +853,9 @@ namespace FidgetingApp.DisplayCase.Editor
             string text,
             Vector3 localPosition,
             float characterSize,
-            Color color)
+            Color color,
+            TextAnchor anchor = TextAnchor.MiddleCenter,
+            TextAlignment alignment = TextAlignment.Center)
         {
             GameObject label = new GameObject(name);
             label.transform.SetParent(parent, false);
@@ -809,8 +869,8 @@ namespace FidgetingApp.DisplayCase.Editor
             mark.fontStyle = FontStyle.Normal;
             mark.text = text;
             mark.characterSize = characterSize;
-            mark.anchor = TextAnchor.MiddleCenter;
-            mark.alignment = TextAlignment.Center;
+            mark.anchor = anchor;
+            mark.alignment = alignment;
             mark.color = color;
             mark.richText = false;
 
@@ -835,14 +895,14 @@ namespace FidgetingApp.DisplayCase.Editor
             out TextMesh shortNameMark)
         {
             badgeRoot = Child(interior, "FeaturedBadgeRoot");
-            badgeRoot.localPosition = new Vector3(0f, 0.081f, -0.013f);
+            badgeRoot.localPosition = new Vector3(0.053f, 0.108f, -0.0335f);
 
             GameObject artwork = GameObject.CreatePrimitive(PrimitiveType.Quad);
             artwork.name = "FeaturedBadgeArtwork";
             artwork.transform.SetParent(badgeRoot, false);
-            artwork.transform.localPosition = new Vector3(-0.014f, 0f, 0f);
+            artwork.transform.localPosition = new Vector3(-0.013f, 0f, 0f);
             artwork.transform.localRotation = Quaternion.identity;
-            artwork.transform.localScale = Vector3.one * 0.031f;
+            artwork.transform.localScale = Vector3.one * 0.022f;
             Collider artworkCollider = artwork.GetComponent<Collider>();
             if (artworkCollider != null)
             {
@@ -863,18 +923,18 @@ namespace FidgetingApp.DisplayCase.Editor
                 "FeaturedBadgeToken",
                 font,
                 "100K",
-                new Vector3(0.014f, 0.0032f, -0.0012f),
-                0.0015f,
-                new Color(0.66f, 0.69f, 0.71f, 0.90f));
+                new Vector3(0.012f, 0.0028f, -0.0012f),
+                0.00115f,
+                new Color(0.12f, 0.13f, 0.14f, 0.90f));
             tokenMark.GetComponent<MeshRenderer>().sortingOrder = 3;
             shortNameMark = BuildLaserMark(
                 badgeRoot,
                 "FeaturedBadgeShortName",
                 font,
                 "PULSE",
-                new Vector3(0.014f, -0.0040f, -0.0013f),
-                0.00068f,
-                new Color(0.66f, 0.69f, 0.71f, 0.74f));
+                new Vector3(0.012f, -0.0036f, -0.0013f),
+                0.00058f,
+                new Color(0.12f, 0.13f, 0.14f, 0.72f));
             shortNameMark.GetComponent<MeshRenderer>().sortingOrder = 3;
         }
 
@@ -1052,30 +1112,29 @@ namespace FidgetingApp.DisplayCase.Editor
             {
                 string name = renderer.gameObject.name;
                 Material resolved;
-                if (name.StartsWith("Acrylic_FrontPlate", StringComparison.Ordinal)
-                    || name.StartsWith("Acrylic_RearPlate", StringComparison.Ordinal)
-                    || name.StartsWith("Acrylic_BackFrame", StringComparison.Ordinal)
-                    || name == "Capsule_ClearBack")
+                if (name == "Polycarbonate_FrontShell"
+                    || name == "Polycarbonate_RearShell")
                 {
                     resolved = materials.Acrylic;
                     acrylicRenderers.Add(renderer);
                 }
-                else if (name.StartsWith("Acrylic_SpacerFrame", StringComparison.Ordinal)
-                    || name == "Capsule_CircularRing")
+                else if (name.StartsWith("Polycarbonate_", StringComparison.Ordinal)
+                    || name.StartsWith("Collector_ChamberRim", StringComparison.Ordinal))
                 {
                     resolved = materials.AcrylicEdge;
                     acrylicRenderers.Add(renderer);
                 }
-                else if (name.StartsWith("ChromeCollar_", StringComparison.Ordinal)
-                    || name == "Capsule_EdgeHighlight")
+                else if (name.StartsWith("Collector_LabelFoil", StringComparison.Ordinal)
+                    || name == "Collector_RarityFoilBand")
                 {
                     resolved = materials.BrushedMetal;
                 }
-                else if (name.StartsWith("Fastener_", StringComparison.Ordinal))
+                else if (name == "Collector_LabelPaper")
                 {
-                    resolved = materials.MatteBox;
+                    resolved = materials.LabelPaper;
                 }
-                else if (name.Contains("Velvet", StringComparison.Ordinal))
+                else if (name.Contains("Flocking", StringComparison.Ordinal)
+                    || name.Contains("Velvet", StringComparison.Ordinal))
                 {
                     resolved = materials.Velvet;
                 }
@@ -1217,17 +1276,17 @@ namespace FidgetingApp.DisplayCase.Editor
         private static Light[] BuildCaseLights(Transform parent)
         {
             Light key = AddLight(parent, "CaseLight_Key", LightType.Directional,
-                new Color(1f, 0.72f, 0.90f), 0.42f,
+                new Color(1f, 0.94f, 0.86f), 0.48f,
                 new Vector3(-0.26f, 0.31f, -0.34f));
             key.transform.LookAt(Vector3.zero);
 
             Light fill = AddLight(parent, "CaseLight_Fill", LightType.Point,
-                new Color(0.76f, 0.90f, 1f), 0.13f,
+                new Color(0.74f, 0.84f, 0.94f), 0.11f,
                 new Vector3(0.22f, 0.035f, -0.24f));
             fill.range = 0.75f;
 
             Light rim = AddLight(parent, "CaseLight_Rim", LightType.Point,
-                new Color(1f, 0.30f, 0.70f), 0.24f,
+                new Color(0.58f, 0.34f, 0.40f), 0.15f,
                 new Vector3(-0.18f, 0.13f, 0.17f));
             rim.range = 0.65f;
             return new[] { key, fill, rim };
@@ -1258,6 +1317,7 @@ namespace FidgetingApp.DisplayCase.Editor
             GameObject environment = new GameObject("PreviewEnvironment");
 
             GameObject cameraObject = new GameObject("PremiumDisplayCaseCamera");
+            cameraObject.transform.SetParent(environment.transform, false);
             cameraObject.tag = "MainCamera";
             Camera camera = cameraObject.AddComponent<Camera>();
             camera.clearFlags = CameraClearFlags.SolidColor;
@@ -1272,6 +1332,7 @@ namespace FidgetingApp.DisplayCase.Editor
             camera.transform.LookAt(PremiumDisplayCaseCameraRules.FrontLookAt);
 
             GameObject ambient = new GameObject("PreviewAmbientLight");
+            ambient.transform.SetParent(environment.transform, false);
             Light ambientLight = ambient.AddComponent<Light>();
             ambientLight.type = LightType.Directional;
             ambientLight.color = new Color(0.88f, 0.48f, 0.70f);
@@ -1281,6 +1342,17 @@ namespace FidgetingApp.DisplayCase.Editor
             RenderSettings.ambientMode = AmbientMode.Flat;
             RenderSettings.ambientLight = new Color(0.055f, 0.020f, 0.045f);
             RenderSettings.fog = false;
+        }
+
+        private static Camera FindPreviewCamera()
+        {
+            GameObject authored = GameObject.Find("PremiumDisplayCaseCamera");
+            Camera camera = authored != null
+                ? authored.GetComponent<Camera>()
+                : null;
+            return camera != null
+                ? camera
+                : UnityEngine.Object.FindAnyObjectByType<Camera>();
         }
 
         private static void Capture(
@@ -1318,6 +1390,11 @@ namespace FidgetingApp.DisplayCase.Editor
             RenderTexture previousTarget = camera.targetTexture;
             camera.targetTexture = renderTexture;
             RenderTexture.active = renderTexture;
+            // The first render after opening a shipping product scene warms
+            // imported materials, shadow maps, and the display-case shader.
+            // Discard it so the first product's hero frame is governed by the
+            // same settled render state as every later approval view.
+            camera.Render();
             camera.Render();
             Texture2D texture = new Texture2D(width, height, TextureFormat.RGBA32,
                 false, false);
@@ -1354,7 +1431,9 @@ namespace FidgetingApp.DisplayCase.Editor
             Material graphite = CreateLitMaterial("NeutralGraphite", lit,
                 new Color(0.055f, 0.067f, 0.082f, 1f), 0.46f, 0.66f);
             Material metal = CreateLitMaterial("BrushedMetal", lit,
-                new Color(0.58f, 0.62f, 0.68f, 1f), 0.98f, 0.82f);
+                new Color(0.58f, 0.62f, 0.68f, 1f), 0.98f, 0.58f);
+            Material labelPaper = CreateLitMaterial("CollectorLabelPaper", lit,
+                new Color(0.82f, 0.80f, 0.76f, 1f), 0.0f, 0.24f);
             Material gem = CreateLitMaterial("DevelopmentGem", lit,
                 new Color(0.20f, 0.27f, 0.30f, 1f), 0.74f, 0.74f);
             gem.SetColor("_EmissionColor", new Color(0.006f, 0.014f, 0.018f));
@@ -1364,22 +1443,26 @@ namespace FidgetingApp.DisplayCase.Editor
 
             Material acrylic = CreateOrUpdateMaterial(
                 MaterialRoot + "/LiquidGlass.mat", acrylicShader);
-            acrylic.SetColor("_BaseColor", new Color(0.70f, 0.82f, 0.90f, 1f));
-            acrylic.SetColor("_RimColor", new Color(1f, 0.72f, 0.94f, 1f));
-            acrylic.SetFloat("_Opacity", 0.035f);
-            acrylic.SetFloat("_RimStrength", 0.72f);
-            acrylic.SetFloat("_RimPower", 3.8f);
-            acrylic.SetFloat("_SpecularStrength", 0.94f);
+            acrylic.SetColor("_BaseColor", new Color(0.61f, 0.65f, 0.68f, 1f));
+            acrylic.SetColor("_RimColor", new Color(0.88f, 0.90f, 0.91f, 1f));
+            acrylic.SetFloat("_Opacity", 0.13f);
+            acrylic.SetFloat("_RimStrength", 0.54f);
+            acrylic.SetFloat("_RimPower", 3.2f);
+            acrylic.SetFloat("_SpecularStrength", 0.74f);
+            acrylic.SetFloat("_FrostStrength", 0.46f);
+            acrylic.SetFloat("_MicroScratchStrength", 0.14f);
             acrylic.renderQueue = (int)RenderQueue.Transparent + 20;
 
             Material acrylicEdge = CreateOrUpdateMaterial(
                 MaterialRoot + "/LiquidGlassEdge.mat", acrylicShader);
-            acrylicEdge.SetColor("_BaseColor", new Color(0.72f, 0.86f, 0.94f, 1f));
-            acrylicEdge.SetColor("_RimColor", new Color(1f, 0.66f, 0.92f, 1f));
-            acrylicEdge.SetFloat("_Opacity", 0.075f);
-            acrylicEdge.SetFloat("_RimStrength", 1.02f);
-            acrylicEdge.SetFloat("_RimPower", 2.8f);
-            acrylicEdge.SetFloat("_SpecularStrength", 1.08f);
+            acrylicEdge.SetColor("_BaseColor", new Color(0.70f, 0.73f, 0.75f, 1f));
+            acrylicEdge.SetColor("_RimColor", new Color(0.96f, 0.97f, 0.98f, 1f));
+            acrylicEdge.SetFloat("_Opacity", 0.22f);
+            acrylicEdge.SetFloat("_RimStrength", 0.88f);
+            acrylicEdge.SetFloat("_RimPower", 2.5f);
+            acrylicEdge.SetFloat("_SpecularStrength", 0.92f);
+            acrylicEdge.SetFloat("_FrostStrength", 0.34f);
+            acrylicEdge.SetFloat("_MicroScratchStrength", 0.18f);
             acrylicEdge.renderQueue = (int)RenderQueue.Transparent + 21;
 
             Material badgeArtwork = CreateOrUpdateMaterial(
@@ -1394,7 +1477,8 @@ namespace FidgetingApp.DisplayCase.Editor
             EditorUtility.SetDirty(acrylic);
             EditorUtility.SetDirty(acrylicEdge);
             EditorUtility.SetDirty(badgeArtwork);
-            return new MaterialLibrary(matteBox, velvet, graphite, metal, gem,
+            return new MaterialLibrary(matteBox, velvet, graphite, metal,
+                labelPaper, gem,
                 acrylic, acrylicEdge, badgeArtwork, background);
         }
 
@@ -1845,6 +1929,7 @@ namespace FidgetingApp.DisplayCase.Editor
                 Material velvet,
                 Material graphite,
                 Material brushedMetal,
+                Material labelPaper,
                 Material placeholderGem,
                 Material acrylic,
                 Material acrylicEdge,
@@ -1855,6 +1940,7 @@ namespace FidgetingApp.DisplayCase.Editor
                 Velvet = velvet;
                 Graphite = graphite;
                 BrushedMetal = brushedMetal;
+                LabelPaper = labelPaper;
                 PlaceholderGem = placeholderGem;
                 Acrylic = acrylic;
                 AcrylicEdge = acrylicEdge;
@@ -1866,6 +1952,7 @@ namespace FidgetingApp.DisplayCase.Editor
             public Material Velvet { get; }
             public Material Graphite { get; }
             public Material BrushedMetal { get; }
+            public Material LabelPaper { get; }
             public Material PlaceholderGem { get; }
             public Material Acrylic { get; }
             public Material AcrylicEdge { get; }

@@ -4,10 +4,15 @@
   "card": {
     "width": 63.5,
     "height": 88.9,
-    "thickness": 2.5,
-    "corner_radius_ratio": 0.06,
+    "thickness": 3.5,
+    "corner_radius": 9.5,
+    "corner_radius_ratio": 0.14960629921259844,
+    "visual_corner_segments_per_quadrant": 72,
     "layer_air_gap": 1.0,
-    "face_inset": 0.5,
+    "face_inset": 1.8,
+    "black_border_width": 1.0,
+    "gold_trim_width": 0.8,
+    "gold_trim_bevel": 0.38,
     "axis_hole_radius": 2.15,
     "axis_hole_bevel": 0.22
   },
@@ -25,7 +30,7 @@
     "bearing_cap_height": 0.00065
   },
   "back_track": {
-    "follower_from_pivot": [-49.0, -27.0],
+    "follower_from_pivot": [-43.31, -21.31],
     "mechanical_sweep_degrees": 45.0,
     "undercut_width": 6.2,
     "grille_width": 4.25,
@@ -67,6 +72,8 @@
     ],
     "corner_index_rotations_degrees": [0.0, 180.0],
     "corner_spade_scale": 0.245,
+    "decorative_dots_per_front": 0,
+    "warm_silver_surface_profile": "medium_bead_blast",
     "front_art_on_back": false
   }
 }

@@ -731,6 +731,13 @@ namespace FidgetingApp.Product
 
         public SpinnerOfflineReward Resume(DateTime utcNow)
         {
+            bool hasSuspensionState = PlayerPrefs.HasKey(SuspendedAtKey)
+                || PlayerPrefs.HasKey(SuspendedModelKey);
+            if (!hasSuspensionState)
+            {
+                return SpinnerOfflineReward.None(activeModelId);
+            }
+
             string ticksText = PlayerPrefs.GetString(SuspendedAtKey, string.Empty);
             string suspendedModel = PlayerPrefs.GetString(
                 SuspendedModelKey,

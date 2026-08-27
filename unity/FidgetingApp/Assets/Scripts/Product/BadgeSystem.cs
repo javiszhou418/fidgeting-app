@@ -684,7 +684,7 @@ namespace FidgetingApp.Product
 
         private static string AssetName(string id)
         {
-            return "badge-b8-" + id.Replace('_', '-');
+            return "badge-b10-" + id.Replace('_', '-');
         }
 
         private static double ResolveToyThreshold(

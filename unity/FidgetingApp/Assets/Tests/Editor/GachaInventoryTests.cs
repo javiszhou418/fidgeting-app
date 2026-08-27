@@ -1,6 +1,9 @@
+using System;
 using System.Collections.Generic;
+using System.Globalization;
 using FidgetingApp.Product.Gacha;
 using NUnit.Framework;
+using UnityEngine;
 
 namespace FidgetingApp.Tests.Editor
 {
@@ -23,11 +26,13 @@ namespace FidgetingApp.Tests.Editor
             }
         }
 
-        private static GachaInventoryRuntime CreateClean(IGachaRandom random = null)
+        private static GachaInventoryRuntime CreateClean(
+            IGachaRandom random = null,
+            Func<DateTime> utcNow = null)
         {
-            var runtime = new GachaInventoryRuntime(TestPrefix, random);
+            var runtime = new GachaInventoryRuntime(TestPrefix, random, utcNow);
             runtime.DeleteAllForTests();
-            return new GachaInventoryRuntime(TestPrefix, random);
+            return new GachaInventoryRuntime(TestPrefix, random, utcNow);
         }
 
         private static void Cleanup()
@@ -138,6 +143,73 @@ namespace FidgetingApp.Tests.Editor
         }
 
         [Test]
+        public void FirstObtainedTimestamp_IsAuthoritativeStableAndPersists()
+        {
+            try
+            {
+                DateTime firstAward = new DateTime(
+                    2026, 8, 17, 7, 12, 30, DateTimeKind.Utc);
+                DateTime current = firstAward;
+                GachaInventoryRuntime inventory = CreateClean(
+                    new ConstantRandom(0.9999d),
+                    () => current);
+                inventory.CreditTickets(2);
+
+                GachaDrawReceipt first = inventory.Draw(
+                    GachaCatalog.LaunchSeriesId, 1, GachaPaymentMethod.Ticket);
+                string prizeId = first.Rows[0].Outcome.PrizeId;
+                string expected = firstAward.ToString("O", CultureInfo.InvariantCulture);
+                Assert.That(first.Rows[0].IsNew, Is.True);
+                Assert.That(first.Rows[0].FirstObtainedAtUtc, Is.EqualTo(expected));
+                Assert.That(inventory.FirstObtainedAtUtc(prizeId), Is.EqualTo(expected));
+
+                current = firstAward.AddDays(9);
+                GachaDrawReceipt duplicate = inventory.Draw(
+                    GachaCatalog.LaunchSeriesId, 1, GachaPaymentMethod.Ticket);
+                Assert.That(duplicate.Rows[0].IsNew, Is.False);
+                Assert.That(duplicate.Rows[0].FirstObtainedAtUtc, Is.EqualTo(expected));
+
+                var reloaded = new GachaInventoryRuntime(TestPrefix);
+                Assert.That(reloaded.FirstObtainedAtUtc(prizeId), Is.EqualTo(expected));
+                StringAssert.Contains(
+                    $"owned-meta\t{prizeId}\t{expected}",
+                    reloaded.SnapshotPayload());
+            }
+            finally
+            {
+                Cleanup();
+            }
+        }
+
+        [Test]
+        public void VersionOneOwnership_MigratesWithoutInventingAcquisitionDate()
+        {
+            try
+            {
+                Cleanup();
+                const string legacyPrize = "canyon-std-slate-lining";
+                PlayerPrefs.SetInt(TestPrefix + "version", 1);
+                PlayerPrefs.SetString(TestPrefix + "owned", legacyPrize);
+                PlayerPrefs.Save();
+
+                var migrated = new GachaInventoryRuntime(
+                    TestPrefix,
+                    new ConstantRandom(0.9999d),
+                    () => new DateTime(2026, 8, 17, 0, 0, 0, DateTimeKind.Utc));
+
+                Assert.That(migrated.Owns(legacyPrize), Is.True);
+                Assert.That(migrated.FirstObtainedAtUtc(legacyPrize), Is.Empty);
+                Assert.That(PlayerPrefs.GetInt(TestPrefix + "version"),
+                    Is.EqualTo(GachaInventoryRuntime.SchemaVersion));
+                StringAssert.DoesNotContain("owned-meta", migrated.SnapshotPayload());
+            }
+            finally
+            {
+                Cleanup();
+            }
+        }
+
+        [Test]
         public void RedeemEnforcesCatalogOwnershipAndBalanceRules()
         {
             try
@@ -237,6 +309,139 @@ namespace FidgetingApp.Tests.Editor
         }
 
         [Test]
+        public void DrawOnceChargesAndRollsExactlyOnceUntilReceiptIsAcknowledged()
+        {
+            try
+            {
+                GachaInventoryRuntime inventory = CreateClean(
+                    new ConstantRandom(0.9999d));
+                inventory.CreditTickets(2);
+                string requestId = Guid.NewGuid().ToString("D").ToLowerInvariant();
+
+                GachaDrawReceipt first = inventory.DrawOnce(
+                    requestId,
+                    GachaCatalog.LaunchSeriesId,
+                    1,
+                    GachaPaymentMethod.Ticket);
+                GachaDrawReceipt duplicate = inventory.DrawOnce(
+                    requestId,
+                    GachaCatalog.LaunchSeriesId,
+                    1,
+                    GachaPaymentMethod.Ticket);
+
+                Assert.That(first.Success, Is.True);
+                Assert.That(duplicate.Rows[0].Outcome.PrizeId,
+                    Is.EqualTo(first.Rows[0].Outcome.PrizeId));
+                Assert.That(inventory.Tickets, Is.EqualTo(1));
+                Assert.That(inventory.TotalDraws(GachaCatalog.LaunchSeriesId),
+                    Is.EqualTo(1));
+
+                var reloaded = new GachaInventoryRuntime(TestPrefix);
+                GachaDrawReceipt recovered = reloaded.DrawOnce(
+                    requestId,
+                    GachaCatalog.LaunchSeriesId,
+                    1,
+                    GachaPaymentMethod.Ticket);
+                Assert.That(recovered.Rows[0].Outcome.PrizeId,
+                    Is.EqualTo(first.Rows[0].Outcome.PrizeId));
+                Assert.That(reloaded.Tickets, Is.EqualTo(1));
+                Assert.That(reloaded.TotalDraws(GachaCatalog.LaunchSeriesId),
+                    Is.EqualTo(1));
+
+                GachaDrawReceipt blocked = reloaded.DrawOnce(
+                    Guid.NewGuid().ToString("D"),
+                    GachaCatalog.LaunchSeriesId,
+                    1,
+                    GachaPaymentMethod.Ticket);
+                Assert.That(blocked.FailureReason,
+                    Is.EqualTo("draw-already-pending"));
+                Assert.That(reloaded.AcknowledgePendingReceipt(requestId), Is.True);
+                Assert.That(reloaded.PendingRequestId, Is.Empty);
+            }
+            finally
+            {
+                Cleanup();
+            }
+        }
+
+        [Test]
+        public void DevelopmentPreviewAwardsCanonicalMetalThreeBladeAsRealToy()
+        {
+            try
+            {
+                GachaInventoryRuntime inventory = CreateClean();
+                inventory.CreditTickets(1);
+                string requestId = Guid.NewGuid().ToString("D").ToLowerInvariant();
+
+                GachaDrawReceipt receipt =
+                    inventory.DrawOnceForDevelopmentPreview(
+                        requestId,
+                        GachaCatalog.LaunchSeriesId,
+                        GachaPaymentMethod.Ticket,
+                        GachaCatalog.MetalThreeBladePrizeId);
+
+                Assert.That(receipt.Success, Is.True);
+                Assert.That(receipt.Rows.Count, Is.EqualTo(1));
+                Assert.That(receipt.Rows[0].Outcome.PrizeId,
+                    Is.EqualTo(GachaCatalog.MetalThreeBladePrizeId));
+                Assert.That(inventory.Owns(
+                    GachaCatalog.MetalThreeBladePrizeId), Is.True);
+                Assert.That(inventory.Tickets, Is.Zero);
+                GachaPrizeDefinition prize = GachaCatalog.ResolvePrize(
+                    GachaCatalog.MetalThreeBladePrizeId).Value;
+                Assert.That(prize.DisplayName, Is.EqualTo("三叶金属陀螺"));
+                Assert.That(prize.Kind, Is.EqualTo(GachaPrizeKind.Toy));
+                Assert.That(prize.ContentReference,
+                    Is.EqualTo("toy/metal-three-blade"));
+
+                var reloaded = new GachaInventoryRuntime(TestPrefix);
+                Assert.That(reloaded.Owns(
+                    GachaCatalog.MetalThreeBladePrizeId), Is.True);
+                Assert.That(reloaded.PendingRequestId, Is.EqualTo(requestId));
+            }
+            finally
+            {
+                Cleanup();
+            }
+        }
+
+        [Test]
+        public void DevelopmentPreviewTicketFundingIsDebugTokenGatedAndPersistentOneShot()
+        {
+            try
+            {
+                GachaInventoryRuntime inventory = CreateClean();
+                Assert.That(inventory.CreditDevelopmentPreviewTicketOnce(
+                    GachaInventoryRuntime.DevelopmentPreviewFundingToken,
+                    false), Is.False);
+                Assert.That(inventory.CreditDevelopmentPreviewTicketOnce(
+                    "wrong-token",
+                    true), Is.False);
+                Assert.That(inventory.Tickets, Is.Zero);
+
+                Assert.That(inventory.CreditDevelopmentPreviewTicketOnce(
+                    GachaInventoryRuntime.DevelopmentPreviewFundingToken,
+                    true), Is.True);
+                Assert.That(inventory.Tickets,
+                    Is.EqualTo(GachaEconomyRules.SingleDrawTicketCost));
+                Assert.That(inventory.CreditDevelopmentPreviewTicketOnce(
+                    GachaInventoryRuntime.DevelopmentPreviewFundingToken,
+                    true), Is.False);
+
+                var reloaded = new GachaInventoryRuntime(TestPrefix);
+                Assert.That(reloaded.CreditDevelopmentPreviewTicketOnce(
+                    GachaInventoryRuntime.DevelopmentPreviewFundingToken,
+                    true), Is.False);
+                Assert.That(reloaded.Tickets,
+                    Is.EqualTo(GachaEconomyRules.SingleDrawTicketCost));
+            }
+            finally
+            {
+                Cleanup();
+            }
+        }
+
+        [Test]
         public void RhythmTicketsGrantOncePerCompletedWeekAndSurviveReload()
         {
             try
@@ -278,6 +483,8 @@ namespace FidgetingApp.Tests.Editor
                 StringAssert.StartsWith("series-state\tcanyon-lode\t1\t1\t0\t1", lines[1]);
                 StringAssert.StartsWith("owned\t", lines[lines.Count - 1]);
                 StringAssert.Contains("canyon-std-", lines[lines.Count - 1]);
+                Assert.That(lines.Exists(line => line.StartsWith(
+                    "owned-meta\tcanyon-std-", StringComparison.Ordinal)), Is.True);
             }
             finally
             {

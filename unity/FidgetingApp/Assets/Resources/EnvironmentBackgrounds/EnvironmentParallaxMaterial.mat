@@ -30,6 +30,9 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
+    - _AdaptiveGrain: 0.012
+    - _AdaptiveSurface: 0
+    - _AdaptiveVignette: 0.18
     - _DstBlend: 0
     - _GlowEnabled: 0
     - _GlowIntensity: 0
@@ -40,9 +43,14 @@ Material:
     - _Opacity: 1
     - _Saturation: 1
     - _SrcBlend: 1
+    - _TopLightBottomBrightness: 0.08
+    - _TopLightBottomSaturation: 0.18
+    - _TopLightFalloff: 1.25
     - _ZTest: 4
     - _ZWrite: 1
     m_Colors:
+    - _AdaptiveBaseBottom: {r: 0.004, g: 0.005, b: 0.008, a: 1}
+    - _AdaptiveBaseTop: {r: 0.024, g: 0.026, b: 0.031, a: 1}
     - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
     - _GlowCenterA: {r: 0.25, g: 0.52, b: 0, a: 0}
     - _GlowCenterB: {r: 0.75, g: 0.42, b: 0, a: 0}

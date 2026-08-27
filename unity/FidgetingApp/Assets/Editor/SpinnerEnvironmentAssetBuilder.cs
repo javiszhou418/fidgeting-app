@@ -22,6 +22,8 @@ namespace FidgetingApp.Editor
             "Assets/Resources/EnvironmentForegrounds/canyon-left-foreground-v1.png";
         public const string RightForegroundAssetPath =
             "Assets/Resources/EnvironmentForegrounds/canyon-right-foreground-v1.png";
+        public const string MineralRidgeAssetPath =
+            "Assets/Resources/EnvironmentBackgrounds/mineral-ridge-digital-collage-v3.png";
 
         [MenuItem("Fidgeting/Product/Rebuild Environment Background Assets")]
         public static void Build()
@@ -32,6 +34,7 @@ namespace FidgetingApp.Editor
             {
                 ConfigureTexture(profile);
             }
+            ConfigureCollageMineralPlate();
 
             ConfigureForegroundTexture(LeftForegroundAssetPath);
             ConfigureForegroundTexture(RightForegroundAssetPath);
@@ -44,6 +47,16 @@ namespace FidgetingApp.Editor
             Debug.Log(
                 "[FidgetingApp] Unified five-product canyon background imported " +
                 "and the opaque/parallax materials rebuilt.");
+        }
+
+        [MenuItem("Fidgeting/Product/Configure Mineral Ridge Background")]
+        public static void ConfigureMineralRidgeOnly()
+        {
+            AssetDatabase.Refresh(ImportAssetOptions.ForceSynchronousImport);
+            ConfigureCollageMineralPlate();
+            AssetDatabase.SaveAssets();
+            Debug.Log(
+                "[FidgetingApp] Configured the digital-collage mineral ridge background.");
         }
 
         private static void ConfigureTexture(SpinnerEnvironmentProfile profile)
@@ -110,6 +123,40 @@ namespace FidgetingApp.Editor
             ios.maxTextureSize = 4096;
             ios.resizeAlgorithm = TextureResizeAlgorithm.Mitchell;
             ios.format = TextureImporterFormat.ASTC_6x6;
+            ios.compressionQuality = 100;
+            importer.SetPlatformTextureSettings(ios);
+            importer.SaveAndReimport();
+        }
+
+        private static void ConfigureCollageMineralPlate()
+        {
+            TextureImporter importer = AssetImporter.GetAtPath(MineralRidgeAssetPath)
+                as TextureImporter;
+            if (importer == null)
+            {
+                throw new InvalidOperationException(
+                    $"Mineral ridge background is missing: {MineralRidgeAssetPath}");
+            }
+
+            importer.textureType = TextureImporterType.Default;
+            importer.sRGBTexture = true;
+            importer.isReadable = false;
+            importer.alphaSource = TextureImporterAlphaSource.None;
+            importer.mipmapEnabled = false;
+            importer.streamingMipmaps = false;
+            importer.wrapMode = TextureWrapMode.Clamp;
+            importer.filterMode = FilterMode.Bilinear;
+            importer.anisoLevel = 1;
+            importer.npotScale = TextureImporterNPOTScale.None;
+            importer.maxTextureSize = 4096;
+            importer.textureCompression = TextureImporterCompression.Compressed;
+
+            TextureImporterPlatformSettings ios =
+                importer.GetPlatformTextureSettings("iPhone");
+            ios.overridden = true;
+            ios.maxTextureSize = 4096;
+            ios.resizeAlgorithm = TextureResizeAlgorithm.Mitchell;
+            ios.format = TextureImporterFormat.ASTC_8x8;
             ios.compressionQuality = 100;
             importer.SetPlatformTextureSettings(ios);
             importer.SaveAndReimport();
@@ -184,6 +231,17 @@ namespace FidgetingApp.Editor
             material.SetFloat("_LayerMaskStart", 0.38f);
             material.SetFloat("_LayerMaskFeather", 0.10f);
             material.SetFloat("_Opacity", 1f);
+            material.SetFloat("_AdaptiveSurface", 0f);
+            material.SetColor(
+                "_AdaptiveBaseTop",
+                new Color(0.024f, 0.026f, 0.031f, 1f));
+            material.SetColor(
+                "_AdaptiveBaseBottom",
+                new Color(0.004f, 0.005f, 0.008f, 1f));
+            material.SetFloat(
+                "_AdaptiveGrain",
+                SpinnerAdaptiveBackdropRules.GrainIntensity);
+            material.SetFloat("_AdaptiveVignette", 0.18f);
             material.SetFloat("_GlowEnabled", 0f);
             material.SetFloat("_GlowIntensity", 0f);
             material.SetVector("_GlowScaleA", new Vector4(0.5625f, 1f, 0f, 0f));

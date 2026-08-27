@@ -22,6 +22,9 @@ xcrun swift \
 
 python3 "$TOOL_DIR/normalize_badge_artwork.py" \
   --directory "$ASSET_DIR"
+# Refresh the contact-sheet SVGs after normalization so their embedded PNGs
+# always match the just-rendered shipping glyphs instead of the previous run.
+python3 "$TOOL_DIR/generate_b8_badges.py"
 python3 "$TOOL_DIR/validate_b8_assets.py"
 
 print "Built, normalized and validated 40 B8 SVG/PNG assets."

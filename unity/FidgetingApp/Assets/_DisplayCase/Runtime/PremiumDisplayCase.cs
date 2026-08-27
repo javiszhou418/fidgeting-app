@@ -30,8 +30,9 @@ namespace FidgetingApp.DisplayCase
     [DisallowMultipleComponent]
     public sealed class PremiumDisplayCase : MonoBehaviour
     {
-        private const float AuthoredCapsuleDiameter = 0.084f;
-        private const float AuthoredCapsuleDepth = 0.026f;
+        private const float AuthoredCapsuleWidth = 0.180f;
+        private const float AuthoredCapsuleHeight = 0.198f;
+        private const float AuthoredCapsuleDepth = 0.048f;
 
         [Header("Reveal hierarchy")]
         [SerializeField] private Transform caseRevealRoot;
@@ -52,9 +53,13 @@ namespace FidgetingApp.DisplayCase
         [SerializeField] private PremiumDisplayCaseCapsulePreset capsulePreset =
             PremiumDisplayCaseCapsulePreset.CircularStandard;
 
-        [Header("Laser identification")]
+        [Header("Physical collector label")]
         [SerializeField] private TextMesh levelLaserMark;
         [SerializeField] private TextMesh productNameLaserMark;
+        [SerializeField] private TextMesh editionLabelMark;
+        [SerializeField] private TextMesh acquiredDateLabelMark;
+        [SerializeField] private TextMesh collectibleIdLabelMark;
+        [SerializeField] private Renderer rarityFoilRenderer;
 
         [Header("Featured earned Badge")]
         [SerializeField] private Transform featuredBadgeRoot;
@@ -73,6 +78,7 @@ namespace FidgetingApp.DisplayCase
 
         private MaterialPropertyBlock materialProperties;
         private MaterialPropertyBlock badgeMaterialProperties;
+        private MaterialPropertyBlock labelMaterialProperties;
         private readonly List<Renderer> measuredRenderers = new List<Renderer>();
         private readonly List<Collider> measuredColliders = new List<Collider>();
         private PremiumDisplayCaseContentOptions contentOptions =
@@ -108,6 +114,8 @@ namespace FidgetingApp.DisplayCase
             Shader.PropertyToID("_ParallaxTilt");
         private static readonly int BadgeBaseMapId =
             Shader.PropertyToID("_BaseMap");
+        private static readonly int BaseColorId =
+            Shader.PropertyToID("_BaseColor");
 
         /// <summary>
         /// Exact API contract consumed by the future gacha coordinator.
@@ -125,6 +133,15 @@ namespace FidgetingApp.DisplayCase
             : string.Empty;
         public string IdentificationProductName => productNameLaserMark != null
             ? productNameLaserMark.text
+            : string.Empty;
+        public string IdentificationEditionText => editionLabelMark != null
+            ? editionLabelMark.text
+            : string.Empty;
+        public string IdentificationAcquiredText => acquiredDateLabelMark != null
+            ? acquiredDateLabelMark.text
+            : string.Empty;
+        public string IdentificationCollectibleText => collectibleIdLabelMark != null
+            ? collectibleIdLabelMark.text
             : string.Empty;
         public bool HasFeaturedBadge => featuredBadgeRoot != null
             && featuredBadgeRoot.gameObject.activeSelf;
@@ -253,23 +270,51 @@ namespace FidgetingApp.DisplayCase
 
         public void SetIdentification(string englishProductName, int currentLevel)
         {
-            string normalizedName = string.IsNullOrWhiteSpace(englishProductName)
-                ? "COLLECTOR EDITION"
-                : englishProductName.Trim().ToUpperInvariant();
-            int clampedLevel = Mathf.Clamp(currentLevel, 1, 100);
+            SetCollectorLabel(new PremiumDisplayCaseCollectorLabel(
+                englishProductName,
+                "ORIGINAL FINISH",
+                currentLevel,
+                string.Empty));
+        }
+
+        public void SetCollectorLabel(PremiumDisplayCaseCollectorLabel label)
+        {
             if (levelLaserMark != null)
             {
-                levelLaserMark.text = $"LEVEL {clampedLevel}";
+                levelLaserMark.text = label.TierAndLevelDisplay;
             }
             if (productNameLaserMark != null)
             {
-                productNameLaserMark.text = normalizedName;
-                const float baseCharacterSize = 0.0019f;
+                productNameLaserMark.text = label.ProductName;
+                const float baseCharacterSize = 0.00225f;
                 float estimatedWidth = Mathf.Max(
                     0.001f,
-                    normalizedName.Length * baseCharacterSize * 2.8f);
+                    label.ProductName.Length * baseCharacterSize * 2.8f);
                 productNameLaserMark.characterSize = baseCharacterSize
-                    * Mathf.Min(1f, 0.090f / estimatedWidth);
+                    * Mathf.Min(1f, 0.142f / estimatedWidth);
+            }
+            if (editionLabelMark != null)
+            {
+                editionLabelMark.text = label.Edition;
+            }
+            if (acquiredDateLabelMark != null)
+            {
+                acquiredDateLabelMark.text = label.AcquiredDisplay;
+            }
+            if (collectibleIdLabelMark != null)
+            {
+                collectibleIdLabelMark.text = label.CollectibleDisplay;
+                collectibleIdLabelMark.gameObject.SetActive(
+                    !string.IsNullOrEmpty(label.CollectibleDisplay));
+            }
+            if (rarityFoilRenderer != null)
+            {
+                labelMaterialProperties ??= new MaterialPropertyBlock();
+                rarityFoilRenderer.GetPropertyBlock(labelMaterialProperties);
+                labelMaterialProperties.SetColor(
+                    BaseColorId,
+                    PremiumDisplayCaseCollectorTierRules.FoilColor(label.Tier));
+                rarityFoilRenderer.SetPropertyBlock(labelMaterialProperties);
             }
         }
 
@@ -412,6 +457,10 @@ namespace FidgetingApp.DisplayCase
             Transform authoredDevelopmentPlaceholder,
             TextMesh authoredLevelLaserMark,
             TextMesh authoredProductNameLaserMark,
+            TextMesh authoredEditionLabelMark,
+            TextMesh authoredAcquiredDateLabelMark,
+            TextMesh authoredCollectibleIdLabelMark,
+            Renderer authoredRarityFoilRenderer,
             Transform authoredFeaturedBadgeRoot,
             Renderer authoredFeaturedBadgeArtworkRenderer,
             TextMesh authoredFeaturedBadgeTokenMark,
@@ -435,6 +484,10 @@ namespace FidgetingApp.DisplayCase
             developmentPlaceholder = authoredDevelopmentPlaceholder;
             levelLaserMark = authoredLevelLaserMark;
             productNameLaserMark = authoredProductNameLaserMark;
+            editionLabelMark = authoredEditionLabelMark;
+            acquiredDateLabelMark = authoredAcquiredDateLabelMark;
+            collectibleIdLabelMark = authoredCollectibleIdLabelMark;
+            rarityFoilRenderer = authoredRarityFoilRenderer;
             featuredBadgeRoot = authoredFeaturedBadgeRoot;
             featuredBadgeArtworkRenderer = authoredFeaturedBadgeArtworkRenderer;
             featuredBadgeTokenMark = authoredFeaturedBadgeTokenMark;
@@ -534,16 +587,16 @@ namespace FidgetingApp.DisplayCase
             {
                 circularCapsuleGeometry.gameObject.SetActive(circular);
                 circularCapsuleGeometry.localScale = new Vector3(
-                    dimensions.Diameter / AuthoredCapsuleDiameter,
-                    dimensions.Diameter / AuthoredCapsuleDiameter,
+                    dimensions.Width / AuthoredCapsuleWidth,
+                    dimensions.Height / AuthoredCapsuleHeight,
                     dimensions.Depth / AuthoredCapsuleDepth);
             }
             if (roundedSquareCapsuleGeometry != null)
             {
                 roundedSquareCapsuleGeometry.gameObject.SetActive(!circular);
                 roundedSquareCapsuleGeometry.localScale = new Vector3(
-                    dimensions.Diameter / AuthoredCapsuleDiameter,
-                    dimensions.Diameter / AuthoredCapsuleDiameter,
+                    dimensions.Width / AuthoredCapsuleWidth,
+                    dimensions.Height / AuthoredCapsuleHeight,
                     dimensions.Depth / AuthoredCapsuleDepth);
             }
 

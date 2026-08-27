@@ -35,7 +35,7 @@ namespace FidgetingApp.EditorTools
         // plane tolerance cannot be reused without swallowing millimetre-scale
         // hole triangles.
         private const float SignedAreaTolerance = 0.000000000001f;
-        private const float WeldTolerance = 0.000002f;
+        private const float WeldTolerance = 0.00000001f;
         private const float MinimumShaftClearance = 0.00010f;
         private const float MinimumLayerAirGap =
             FanCardSpecifications.LayerAirGap;

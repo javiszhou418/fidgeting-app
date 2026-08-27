@@ -14,22 +14,19 @@ mkdir -p "$MODULE_CACHE" "$APP_DIR" "$ARTIFACT_DIR"
 
 build_preview() {
   local mode="$1"
-  local -a preview_flags
-  preview_flags=()
-  if [[ "$mode" == "cyberpunk" ]]; then
-    preview_flags=(-D PREVIEW_CYBERPUNK)
-  fi
-
   xcrun --sdk iphonesimulator swiftc \
     -D DEBUG \
-    "${preview_flags[@]}" \
     -parse-as-library \
     -target arm64-apple-ios15.0-simulator \
     -module-cache-path "$MODULE_CACHE" \
     "$PROJECT_ROOT/Assets/Plugins/iOS/FidgetProductUIComponents.swift" \
     "$PROJECT_ROOT/Assets/Plugins/iOS/FidgetComboHalo.swift" \
+    "$PROJECT_ROOT/Assets/Plugins/iOS/FidgetGachaPackPresentation.swift" \
+    "$PROJECT_ROOT/Assets/Plugins/iOS/FidgetGachaRiveGateRules.swift" \
+    "$PROJECT_ROOT/Assets/Plugins/iOS/FidgetGachaRivePresentation.swift" \
     "$PROJECT_ROOT/Assets/Plugins/iOS/FidgetStoreKit.swift" \
     "$PROJECT_ROOT/Assets/Plugins/iOS/FidgetGachaStore.swift" \
+    "$PROJECT_ROOT/Assets/Plugins/iOS/FidgetGachaStorefront.swift" \
     "$PROJECT_ROOT/Assets/Plugins/iOS/CodexSwiftUIOverlay.swift" \
     "$TOOL_DIR/EnvironmentWallpaperPickerNativePreviewApp.swift" \
     -o "$APP_BINARY"
@@ -55,7 +52,7 @@ fi
 xcrun simctl boot "$DEVICE_ID" 2>/dev/null || true
 xcrun simctl bootstatus "$DEVICE_ID" -b
 
-for MODE in canyon cyberpunk; do
+for MODE in adaptive canyon cyberpunk mineral-ridge; do
   MODE_BUNDLE_ID="$BUNDLE_ID.$MODE"
   build_preview "$MODE"
   cp "$TOOL_DIR/Info.plist" "$APP_DIR/Info.plist"
@@ -64,6 +61,8 @@ for MODE in canyon cyberpunk; do
   codesign --force --sign - "$APP_DIR" >/dev/null
   xcrun simctl terminate "$DEVICE_ID" "$BUNDLE_ID.canyon" 2>/dev/null || true
   xcrun simctl terminate "$DEVICE_ID" "$BUNDLE_ID.cyberpunk" 2>/dev/null || true
+  xcrun simctl terminate "$DEVICE_ID" "$BUNDLE_ID.adaptive" 2>/dev/null || true
+  xcrun simctl terminate "$DEVICE_ID" "$BUNDLE_ID.mineral-ridge" 2>/dev/null || true
   xcrun simctl terminate "$DEVICE_ID" "$MODE_BUNDLE_ID" 2>/dev/null || true
   xcrun simctl uninstall "$DEVICE_ID" "$MODE_BUNDLE_ID" 2>/dev/null || true
   xcrun simctl install "$DEVICE_ID" "$APP_DIR"
@@ -75,9 +74,11 @@ for MODE in canyon cyberpunk; do
 done
 
 ffmpeg -y \
+  -i "$ARTIFACT_DIR/environment-picker-adaptive.png" \
   -i "$ARTIFACT_DIR/environment-picker-canyon.png" \
   -i "$ARTIFACT_DIR/environment-picker-cyberpunk.png" \
-  -filter_complex "[0:v]scale=360:-1[a];[1:v]scale=360:-1[b];[a][b]hstack=inputs=2" \
+  -i "$ARTIFACT_DIR/environment-picker-mineral-ridge.png" \
+  -filter_complex "[0:v]scale=300:-1[a];[1:v]scale=300:-1[b];[2:v]scale=300:-1[c];[3:v]scale=300:-1[d];[a][b][c][d]hstack=inputs=4" \
   -frames:v 1 \
   "$ARTIFACT_DIR/environment-picker-contact-sheet.png" >/dev/null 2>&1
 

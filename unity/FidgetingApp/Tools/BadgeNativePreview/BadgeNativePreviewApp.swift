@@ -23,16 +23,20 @@ struct BadgeNativePreviewApp: App {
         WindowGroup {
             BadgeNativePreviewRoot(mode: mode)
                 .onAppear {
-                    guard mode == .share else { return }
-                    BadgeNativePreviewRoot.renderShareCard { image in
-                        guard let data = image?.pngData(),
-                              let documents = FileManager.default.urls(
-                                for: .documentDirectory,
-                                in: .userDomainMask).first else { return }
-                        try? data.write(
-                            to: documents.appendingPathComponent(
-                                "badge-share-card-1080.png"),
-                            options: .atomic)
+                    switch mode {
+                    case .share:
+                        BadgeNativePreviewRoot.renderShareCard { image in
+                            guard let data = image?.pngData(),
+                                  let documents = FileManager.default.urls(
+                                    for: .documentDirectory,
+                                    in: .userDomainMask).first else { return }
+                            try? data.write(
+                                to: documents.appendingPathComponent(
+                                    "badge-share-card-1080.png"),
+                                options: .atomic)
+                        }
+                    default:
+                        break
                     }
                 }
         }

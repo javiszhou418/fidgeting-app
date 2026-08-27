@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Generate the approved B8 diffuse-chrome production glyph catalog.
+"""Generate the recessed satin-metal production glyph catalog.
 
 The artwork is deliberately text-free. The shipping SwiftUI badge component owns
 the two permitted text baselines: milestone token and short semantic name.
@@ -37,9 +37,11 @@ def tube(path: str, transform: str = "") -> str:
     transform_attr = f' transform="{transform}"' if transform else ""
     return f'''<g{transform_attr}>
       <path class="tubeBloom" d="{path}"/>
-      <path class="tubeDark" d="{path}"/>
+      <path class="tubeShadow" d="{path}"/>
+      <path class="tubeDepth" d="{path}"/>
+      <path class="tubeBevel" d="{path}"/>
       <path class="tubeBody" d="{path}"/>
-      <path class="tubeShade" d="{path}"/>
+      <path class="tubeSheen" d="{path}"/>
       <path class="tubeLight" d="{path}"/>
     </g>'''
 
@@ -50,25 +52,33 @@ def plate(path: str, transform: str = "") -> str:
       <path class="plateBloom" d="{path}"/>
       <path class="plateShadow" d="{path}"/>
       <path class="plateDepth" d="{path}"/>
+      <path class="plateBevel" d="{path}"/>
       <path class="plateBody" d="{path}"/>
+      <path class="plateSheen" d="{path}"/>
       <path class="plateEdge" d="{path}"/>
     </g>'''
 
 
 def symmetric_plate(path: str) -> str:
-    """A chrome plate whose lighting is invariant across the y=80 mirror."""
+    """A satin plate whose lighting is invariant across the y=80 mirror."""
     return f'''<g>
       <path class="plateBloom" d="{path}"/>
-      <path d="{path}" fill="#151a1e" stroke="#151a1e" stroke-width="3.2" stroke-linejoin="round"/>
-      <path d="{path}" fill="url(#chromeSymmetric)" stroke="#727a7f" stroke-width=".75" stroke-linejoin="round"/>
-      <path d="{path}" fill="none" stroke="#ffffff" stroke-width=".72" stroke-linejoin="round" opacity=".58"/>
+      <path class="plateShadow" d="{path}"/>
+      <path class="plateDepth" d="{path}"/>
+      <path d="{path}" fill="url(#iconBevelSymmetric)" fill-rule="evenodd" stroke="#615d6d" stroke-width="9.0" stroke-linejoin="round"/>
+      <path d="{path}" fill="url(#iconFaceSymmetric)" fill-rule="evenodd" stroke="#d9d8e0" stroke-width="1.35" stroke-linejoin="round" transform="translate(-.8px,-1.0px)"/>
+      <path d="{path}" fill="url(#iconSheenSymmetric)" fill-rule="evenodd" stroke="none" opacity=".58" transform="translate(-.8px,-1.0px)"/>
+      <path d="{path}" fill="none" stroke="#ffffff" stroke-width="1.15" stroke-linejoin="round" opacity=".78" transform="translate(-1.25px,-1.45px)"/>
     </g>'''
 
 
 def orb(cx: int, cy: int, radius: int) -> str:
     return f'''<g>
       <circle class="orbBloom" cx="{cx}" cy="{cy}" r="{radius + 4}"/>
-      <circle class="orbBody" cx="{cx}" cy="{cy}" r="{radius}"/>
+      <circle class="orbShadow" cx="{cx}" cy="{cy}" r="{radius}"/>
+      <circle class="orbDepth" cx="{cx}" cy="{cy}" r="{radius}"/>
+      <circle class="orbBevel" cx="{cx}" cy="{cy}" r="{radius}"/>
+      <circle class="orbBody" cx="{cx}" cy="{cy}" r="{max(1, radius - 2)}"/>
       <circle class="orbGlint" cx="{cx - radius * .28:.1f}" cy="{cy - radius * .32:.1f}" r="{max(2, radius * .22):.1f}"/>
     </g>'''
 
@@ -77,9 +87,11 @@ def ring(cx: int, cy: int, radius: int) -> str:
     """A true circular chrome tube; never substitute an ellipse."""
     return f'''<g>
       <circle class="tubeBloom" cx="{cx}" cy="{cy}" r="{radius}"/>
-      <circle class="tubeDark" cx="{cx}" cy="{cy}" r="{radius}"/>
+      <circle class="tubeShadow" cx="{cx}" cy="{cy}" r="{radius}"/>
+      <circle class="tubeDepth" cx="{cx}" cy="{cy}" r="{radius}"/>
+      <circle class="tubeBevel" cx="{cx}" cy="{cy}" r="{radius}"/>
       <circle class="tubeBody" cx="{cx}" cy="{cy}" r="{radius}"/>
-      <circle class="tubeShade" cx="{cx}" cy="{cy}" r="{radius}"/>
+      <circle class="tubeSheen" cx="{cx}" cy="{cy}" r="{radius}"/>
       <circle class="tubeLight" cx="{cx}" cy="{cy}" r="{radius}"/>
     </g>'''
 
@@ -95,6 +107,80 @@ def fins(count: int, orbit: bool = False) -> str:
         result += tube("M42 116C22 91 26 57 51 38C72 22 105 24 126 43")
         result += plate("M119 34L136 43L120 52Z")
     return result
+
+
+def speed_slash() -> str:
+    """Reference-matched redline: two rotational arcs and one rounded slash."""
+    first_arc = tube("M53 109C35 92 35 63 53 47C57 43 61 40 66 38")
+    second_arc = tube(
+        "M53 109C35 92 35 63 53 47C57 43 61 40 66 38",
+        "rotate(180 80 80)")
+    slash = tube("M57 117L103 43")
+    return first_arc + second_arc + slash
+
+
+def rotor_mark(blades: int) -> str:
+    """One coherent three-blade rotor; milestone values remain outside."""
+    del blades
+    blade = (
+        "M80 31C95 33 106 43 106 55C106 67 96 76 78 83"
+        "C83 70 85 59 84 48C84 41 82 35 80 31Z"
+    )
+    return "".join(
+        plate(blade, f"rotate({120 * index:.3f} 80 80)")
+        for index in range(3)
+    ) + orb(80, 80, 9)
+
+
+def chain_links() -> str:
+    """Two identical closed obround links on one 45-degree construction axis."""
+    link = (
+        "M64 72C71 72 76 77 76 84V108C76 115 71 120 64 120"
+        "C57 120 52 115 52 108V84C52 77 57 72 64 72Z"
+    )
+    return (
+        tube(link, "rotate(45 64 96)")
+        + tube(link, "translate(32 -32) rotate(45 64 96)")
+    )
+
+
+def hourglass_mark() -> str:
+    """A single cast hourglass frame; the openings reveal the leather."""
+    return plate(
+        "M52 31C52 27 55 24 59 24H101C105 24 108 27 108 31"
+        "C106 51 98 67 88 80C98 93 106 109 108 129"
+        "C108 133 105 136 101 136H59C55 136 52 133 52 129"
+        "C54 109 62 93 72 80C62 67 54 51 52 31Z"
+        "M64 39H96C93 53 88 65 80 75C72 65 67 53 64 39Z"
+        "M80 85C88 95 93 107 96 121H64C67 107 72 95 80 85Z"
+    )
+
+
+def triangle_core() -> str:
+    """One symmetric rounded triangular casting, matching the master sheet."""
+    return plate(
+        "M80 29C87 29 91 34 95 42L125 106C131 118 123 130 110 130"
+        "H50C37 130 29 118 35 106L65 42C69 34 73 29 80 29Z")
+
+
+def cycle_arrows() -> str:
+    arc = tube("M42 79C42 56 59 40 82 40C99 40 112 48 120 61")
+    arrow = plate("M111 49C111 47 113 46 115 47L135 62C138 64 137 68 134 69L110 75C108 76 106 74 107 72Z")
+    return arc + arrow + f'<g transform="rotate(180 80 80)">{arc}{arrow}</g>'
+
+
+def shield_mark() -> str:
+    return (
+        plate("M80 28C98 28 113 33 124 42V79C124 104 107 123 80 135C53 123 36 104 36 79V42C47 33 62 28 80 28Z")
+        + tube("M80 43V117")
+    )
+
+
+def vault_wheel(spokes: int) -> str:
+    result = ring(80, 80, 45)
+    for index in range(spokes):
+        result += tube("M80 80V43", f"rotate({360 * index / spokes:.3f} 80 80)")
+    return result + orb(80, 80, 12)
 
 
 def rotor(blades: int, core: bool = False) -> str:
@@ -244,37 +330,22 @@ def rhythm(nodes: int) -> str:
 
 
 def constellation(nodes: int) -> str:
-    positions = {
-        2: [(49, 80), (111, 80)],
-        3: [(80, 38), (42, 108), (118, 108)],
-        5: [(80, 30), (128, 65), (110, 123), (50, 123), (32, 65)],
-    }[nodes]
-    if nodes == 2:
-        result = tube("M61 80H99")
-    elif nodes == 3:
-        result = tube("M74 50L49 96M86 50L111 96M56 108H104")
-    else:
-        result = tube("M80 42L116 68L102 111H58L44 68Z")
-    return result + "".join(orb(x, y, 9 if nodes < 5 else 7) for x, y in positions)
+    del nodes
+    # Every tier uses the same true circular orbit. Three equal inlaid pearls
+    # sit exactly 120 degrees apart, so no milestone looks stretched or loose.
+    return (
+        ring(80, 80, 41)
+        + orb(80, 39, 7)
+        + orb(115, 101, 7)
+        + orb(45, 101, 7)
+        + glint(80, 80, .45)
+    )
 
 
 def mastery(level: int) -> str:
-    blades = [5, 5, 6, 6][level - 1]
-    base = (
-        "M80 29C98 32 108 44 104 58C101 69 90 77 74 83"
-        "C82 70 88 59 88 49C88 40 85 33 80 29Z"
-    )
-    result = "".join(
-        plate(base, f"rotate({360 * index / blades:.3f} 80 80)")
-        for index in range(blades)
-    )
-    if level >= 2:
-        result += orb(80, 80, 7)
-    if level >= 3:
-        result += glint(80, 80, .25)
-    if level >= 4:
-        result += glint(113, 49, .20)
-    return result
+    del level
+    # A compact centered medallion replaces the previous loose blade piles.
+    return ring(80, 80, 42) + star()
 
 
 def aperture(blades: int) -> str:
@@ -287,7 +358,11 @@ def aperture(blades: int) -> str:
 
 
 def star() -> str:
-    return plate("M80 23C84 56 88 72 125 80C88 88 84 104 80 137C76 104 72 88 35 80C72 72 76 56 80 23Z")
+    return plate(
+        "M80 25C84 48 88 65 98 72C106 77 119 78 135 80"
+        "C119 82 106 83 98 88C88 95 84 112 80 135"
+        "C76 112 72 95 62 88C54 83 41 82 25 80"
+        "C41 78 54 77 62 72C72 65 76 48 80 25Z")
 
 
 def endurance() -> str:
@@ -295,53 +370,52 @@ def endurance() -> str:
 
 
 def clean() -> str:
-    return tube("M37 84L64 108L120 47") + tube("M37 48C57 33 87 29 117 43")
+    return tube("M38 82L64 107L121 48")
 
 
 def power_burst() -> str:
-    return plate("M80 20L92 59L131 72L98 94L105 136L80 105L55 136L62 94L29 72L68 59Z")
+    return plate(
+        "M88 24C91 24 93 27 92 31L84 62H112C117 62 119 68 116 72"
+        "L72 135C70 138 65 135 66 131L75 94H48C43 94 41 88 44 84L88 24Z")
 
 
 def challenge_redline() -> str:
-    return fins(3, True) + tube("M35 126H128")
+    return speed_slash()
 
 
 def challenge_cycle() -> str:
-    result = tube("M80 27C109 27 133 51 133 80C133 109 109 133 80 133C51 133 27 109 27 80C27 51 51 27 80 27Z")
-    for rotation in (0, 90, 180, 270):
-        result += plate("M80 18L86 31L99 37L86 43L80 56L74 43L61 37L74 31Z", f"rotate({rotation} 80 80)")
-    return result
+    return cycle_arrows()
 
 
 def founder() -> str:
-    return plate("M80 22C101 22 118 30 129 42V82C129 109 109 128 80 140C51 128 31 109 31 82V42C42 30 59 22 80 22Z") + star()
+    return shield_mark()
 
 
 BADGES = [
-    BadgeArt("toy_power_ignition", "power", "ignition", "1.0", "POWER", fins(1)),
-    BadgeArt("toy_power_overdrive", "power", "overdrive", "2.0", "POWER", fins(2)),
-    BadgeArt("toy_power_apex", "power", "apex", "3.5", "REDLINE", fins(3, True)),
-    BadgeArt("toy_power_singularity", "power", "singularity", "4.5", "REDLINE", fins(3, True)),
-    BadgeArt("toy_pulse_100", "pulse", "ignition", "100", "PULSE", pulse(1)),
-    BadgeArt("toy_pulse_1k", "pulse", "overdrive", "1K", "PULSE", pulse(2)),
-    BadgeArt("toy_pulse_10k", "pulse", "apex", "10K", "PULSE", pulse(3)),
-    BadgeArt("toy_pulse_100k", "pulse", "singularity", "100K", "PULSE", pulse(4)),
+    BadgeArt("toy_power_ignition", "power", "ignition", "1.0", "POWER", speed_slash()),
+    BadgeArt("toy_power_overdrive", "power", "overdrive", "2.0", "POWER", speed_slash()),
+    BadgeArt("toy_power_apex", "power", "apex", "3.5", "REDLINE", speed_slash()),
+    BadgeArt("toy_power_singularity", "power", "singularity", "4.5", "REDLINE", speed_slash()),
+    BadgeArt("toy_pulse_100", "pulse", "ignition", "100", "PULSE", rotor_mark(3)),
+    BadgeArt("toy_pulse_1k", "pulse", "overdrive", "1K", "PULSE", rotor_mark(3)),
+    BadgeArt("toy_pulse_10k", "pulse", "apex", "10K", "PULSE", rotor_mark(3)),
+    BadgeArt("toy_pulse_100k", "pulse", "singularity", "100K", "PULSE", rotor_mark(3)),
     BadgeArt("toy_technique_clean", "technique", "ignition", "CLEAN", "CONTROL", clean()),
     BadgeArt("toy_technique_power", "technique", "overdrive", "POWER", "CONTROL", power_burst()),
-    BadgeArt("toy_technique_speed", "technique", "apex", "SPEED", "CONTROL", speed_comet()),
-    BadgeArt("toy_technique_endurance", "technique", "apex", "ENDURE", "CONTROL", endurance()),
+    BadgeArt("toy_technique_speed", "technique", "apex", "SPEED", "CONTROL", speed_slash()),
+    BadgeArt("toy_technique_endurance", "technique", "apex", "ENDURE", "CONTROL", hourglass_mark()),
     BadgeArt("toy_technique_perfect", "technique", "singularity", "PERFECT", "CONTROL", star()),
-    BadgeArt("toy_combo_5", "combo", "ignition", "×5", "CHAIN", links(1)),
-    BadgeArt("toy_combo_10", "combo", "overdrive", "×10", "CHAIN", links(2)),
-    BadgeArt("toy_combo_20", "combo", "apex", "×20", "CHAIN", links(3)),
-    BadgeArt("toy_combo_50", "combo", "singularity", "×50", "CHAIN", links(4)),
-    BadgeArt("toy_focus_5m", "focus", "ignition", "5M", "FOCUS", focus(1)),
-    BadgeArt("toy_focus_30m", "focus", "overdrive", "30M", "FOCUS", focus(2)),
-    BadgeArt("toy_focus_2h", "focus", "apex", "2H", "FOCUS", focus(3)),
-    BadgeArt("toy_focus_10h", "focus", "singularity", "10H", "FOCUS", focus(4)),
-    BadgeArt("collector_rhythm_1w", "rhythm", "ignition", "1W", "RHYTHM", rhythm(4)),
+    BadgeArt("toy_combo_5", "combo", "ignition", "×5", "CHAIN", chain_links()),
+    BadgeArt("toy_combo_10", "combo", "overdrive", "×10", "CHAIN", chain_links()),
+    BadgeArt("toy_combo_20", "combo", "apex", "×20", "CHAIN", chain_links()),
+    BadgeArt("toy_combo_50", "combo", "singularity", "×50", "CHAIN", chain_links()),
+    BadgeArt("toy_focus_5m", "focus", "ignition", "5M", "FOCUS", hourglass_mark()),
+    BadgeArt("toy_focus_30m", "focus", "overdrive", "30M", "FOCUS", hourglass_mark()),
+    BadgeArt("toy_focus_2h", "focus", "apex", "2H", "FOCUS", hourglass_mark()),
+    BadgeArt("toy_focus_10h", "focus", "singularity", "10H", "FOCUS", hourglass_mark()),
+    BadgeArt("collector_rhythm_1w", "rhythm", "ignition", "1W", "RHYTHM", rhythm(6)),
     BadgeArt("collector_rhythm_4w", "rhythm", "overdrive", "4W", "RHYTHM", rhythm(6)),
-    BadgeArt("collector_rhythm_12w", "rhythm", "apex", "12W", "RHYTHM", rhythm(8)),
+    BadgeArt("collector_rhythm_12w", "rhythm", "apex", "12W", "RHYTHM", rhythm(6)),
     BadgeArt("collector_explore_2", "explore", "ignition", "2", "EXPLORE", constellation(2)),
     BadgeArt("collector_explore_3", "explore", "overdrive", "3", "EXPLORE", constellation(3)),
     BadgeArt("collector_explore_5", "explore", "apex", "5", "EXPLORE", constellation(5)),
@@ -349,13 +423,13 @@ BADGES = [
     BadgeArt("collector_mastery_3_lv20", "mastery", "overdrive", "3×20", "MASTERY", mastery(2)),
     BadgeArt("collector_mastery_1_lv100", "mastery", "apex", "LV 100", "MASTERY", mastery(3)),
     BadgeArt("collector_mastery_3_lv100", "mastery", "singularity", "3×100", "MASTERY", mastery(4)),
-    BadgeArt("collector_collection_5", "collection", "ignition", "5", "VAULT", aperture(5)),
-    BadgeArt("collector_collection_10", "collection", "overdrive", "10", "VAULT", aperture(6)),
-    BadgeArt("collector_collection_25", "collection", "singularity", "25", "VAULT", aperture(7)),
+    BadgeArt("collector_collection_5", "collection", "ignition", "5", "VAULT", vault_wheel(5)),
+    BadgeArt("collector_collection_10", "collection", "overdrive", "10", "VAULT", vault_wheel(5)),
+    BadgeArt("collector_collection_25", "collection", "singularity", "25", "VAULT", vault_wheel(5)),
     BadgeArt("challenge_redline", "challenge", "apex", "3×", "REDLINE", challenge_redline()),
-    BadgeArt("challenge_chain_reactor", "challenge", "apex", "2×20", "CHAIN", links(4)),
-    BadgeArt("challenge_perfect_protocol", "challenge", "singularity", "3×", "PERFECT", star() + tube("M33 80C33 51 51 33 80 33C109 33 127 51 127 80")),
-    BadgeArt("challenge_three_core_raid", "challenge", "singularity", "3 CORE", "RAID", constellation(3) + orb(80, 80, 7)),
+    BadgeArt("challenge_chain_reactor", "challenge", "apex", "2×20", "CHAIN", chain_links()),
+    BadgeArt("challenge_perfect_protocol", "challenge", "singularity", "3×", "PERFECT", star()),
+    BadgeArt("challenge_three_core_raid", "challenge", "singularity", "3 CORE", "RAID", triangle_core()),
     BadgeArt("challenge_cycle_total", "challenge", "singularity", "4/4", "CYCLE", challenge_cycle()),
     BadgeArt("legacy_founder", "legacy", "singularity", "LEGACY", "FOUNDER", founder()),
 ]
@@ -364,44 +438,67 @@ BADGES = [
 def definitions() -> str:
     return '''
   <defs>
-    <linearGradient id="chrome" gradientUnits="userSpaceOnUse" x1="31" y1="25" x2="130" y2="137">
-      <stop offset="0" stop-color="#11161a"/><stop offset=".08" stop-color="#566067"/>
-      <stop offset=".16" stop-color="#f8fbfc"/><stop offset=".24" stop-color="#879197"/>
-      <stop offset=".36" stop-color="#ffffff"/><stop offset=".47" stop-color="#30373c"/>
-      <stop offset=".58" stop-color="#cbd2d5"/><stop offset=".69" stop-color="#ffffff"/>
-      <stop offset=".79" stop-color="#596269"/><stop offset=".90" stop-color="#e8edef"/>
-      <stop offset="1" stop-color="#171c20"/>
+    <linearGradient id="iconFace" gradientUnits="userSpaceOnUse" x1="34" y1="25" x2="126" y2="138">
+      <stop offset="0" stop-color="#f8f6fb"/><stop offset=".32" stop-color="#e8e5ed"/>
+      <stop offset=".62" stop-color="#cbc7d3"/><stop offset=".82" stop-color="#ddd7e7"/>
+      <stop offset="1" stop-color="#aaa4b5"/>
     </linearGradient>
-    <linearGradient id="chromeSymmetric" gradientUnits="userSpaceOnUse" x1="22" y1="80" x2="138" y2="80">
-      <stop offset="0" stop-color="#252c31"/><stop offset=".12" stop-color="#aeb6bb"/>
-      <stop offset=".24" stop-color="#ffffff"/><stop offset=".39" stop-color="#737c82"/>
-      <stop offset=".52" stop-color="#f7f9fa"/><stop offset=".66" stop-color="#90989d"/>
-      <stop offset=".80" stop-color="#e9edef"/><stop offset=".92" stop-color="#ffffff"/>
-      <stop offset="1" stop-color="#626a6f"/>
+    <linearGradient id="iconBevel" gradientUnits="userSpaceOnUse" x1="29" y1="28" x2="133" y2="135">
+      <stop offset="0" stop-color="#ffffff"/><stop offset=".34" stop-color="#d9d6df"/>
+      <stop offset=".70" stop-color="#a6a1b0"/><stop offset="1" stop-color="#777181"/>
     </linearGradient>
-    <radialGradient id="orb" cx="34%" cy="27%" r="74%">
-      <stop offset="0" stop-color="#ffffff"/><stop offset=".19" stop-color="#e7ecee"/>
-      <stop offset=".42" stop-color="#8d979c"/><stop offset=".68" stop-color="#30383e"/>
-      <stop offset="1" stop-color="#0d1114"/>
+    <linearGradient id="iconSheen" gradientUnits="userSpaceOnUse" x1="48" y1="33" x2="116" y2="128">
+      <stop offset="0" stop-color="#ffffff" stop-opacity=".72"/>
+      <stop offset=".44" stop-color="#ffffff" stop-opacity=".08"/>
+      <stop offset="1" stop-color="#cbb9e5" stop-opacity=".30"/>
+    </linearGradient>
+    <linearGradient id="iconFaceSymmetric" gradientUnits="userSpaceOnUse" x1="22" y1="80" x2="138" y2="80">
+      <stop offset="0" stop-color="#b9b5c2"/><stop offset=".28" stop-color="#f3f1f7"/>
+      <stop offset=".60" stop-color="#ddd9e3"/><stop offset="1" stop-color="#aaa5b5"/>
+    </linearGradient>
+    <linearGradient id="iconBevelSymmetric" gradientUnits="userSpaceOnUse" x1="22" y1="80" x2="138" y2="80">
+      <stop offset="0" stop-color="#797482"/><stop offset=".30" stop-color="#e1dee6"/>
+      <stop offset=".70" stop-color="#beb9c6"/><stop offset="1" stop-color="#77717f"/>
+    </linearGradient>
+    <linearGradient id="iconSheenSymmetric" gradientUnits="userSpaceOnUse" x1="22" y1="80" x2="138" y2="80">
+      <stop offset="0" stop-color="#cab8eb" stop-opacity=".20"/>
+      <stop offset=".40" stop-color="#ffffff" stop-opacity=".10"/>
+      <stop offset=".62" stop-color="#ffffff" stop-opacity=".62"/>
+      <stop offset="1" stop-color="#9a84c7" stop-opacity=".24"/>
+    </linearGradient>
+    <radialGradient id="orbFace" cx="31%" cy="24%" r="78%">
+      <stop offset="0" stop-color="#ffffff"/><stop offset=".28" stop-color="#f2f1f6"/>
+      <stop offset=".58" stop-color="#c4c2cd"/><stop offset=".82" stop-color="#8a8797"/>
+      <stop offset="1" stop-color="#666373"/>
     </radialGradient>
-    <filter id="softGlow" x="-35%" y="-35%" width="170%" height="170%">
-      <feGaussianBlur stdDeviation="2.8"/>
+    <filter id="softGlow" x="-38%" y="-38%" width="176%" height="176%">
+      <feGaussianBlur stdDeviation="2.4"/>
+    </filter>
+    <filter id="iconShadow" x="-35%" y="-35%" width="180%" height="190%">
+      <feGaussianBlur stdDeviation="2.2"/>
     </filter>
   </defs>
   <style>
-    .tubeBloom { fill:none; stroke:#edf6fa; stroke-width:21; stroke-linecap:round; stroke-linejoin:round; opacity:.18; filter:url(#softGlow); }
-    .tubeDark { fill:none; stroke:#0b1014; stroke-width:18; stroke-linecap:round; stroke-linejoin:round; }
-    .tubeBody { fill:none; stroke:url(#chrome); stroke-width:13.8; stroke-linecap:round; stroke-linejoin:round; }
-    .tubeShade { fill:none; stroke:#0a0e11; stroke-width:3.2; stroke-linecap:round; stroke-linejoin:round; opacity:.58; transform:translate(1.25px,1.35px); }
-    .tubeLight { fill:none; stroke:#ffffff; stroke-width:2.0; stroke-linecap:round; stroke-linejoin:round; opacity:.82; transform:translate(-1.0px,-1.05px); }
-    .plateBloom { fill:#edf5f8; stroke:none; opacity:.16; filter:url(#softGlow); }
-    .plateShadow { fill:#080c0f; stroke:#080c0f; stroke-width:1.6; transform:translate(2.5px,2.8px); }
-    .plateDepth { fill:#161d22; stroke:#080c0f; stroke-width:2.4; stroke-linejoin:round; transform:translate(1.2px,1.4px); }
-    .plateBody { fill:url(#chrome); stroke:#929ba0; stroke-width:.9; stroke-linejoin:round; }
-    .plateEdge { fill:none; stroke:#ffffff; stroke-width:1.05; stroke-linejoin:round; opacity:.78; transform:translate(-.55px,-.62px); }
-    .orbBloom { fill:#eef8fb; opacity:.40; filter:url(#softGlow); }
-    .orbBody { fill:url(#orb); stroke:#f2f5f6; stroke-width:2.2; }
-    .orbGlint { fill:#ffffff; opacity:.96; }
+    .tubeBloom { fill:none; stroke:#e6def2; stroke-width:22; stroke-linecap:round; stroke-linejoin:round; opacity:.07; filter:url(#softGlow); }
+    .tubeShadow { fill:none; stroke:#0b0910; stroke-width:21; stroke-linecap:round; stroke-linejoin:round; opacity:.54; transform:translate(3.2px,3.8px); filter:url(#iconShadow); }
+    .tubeDepth { fill:none; stroke:#5b5564; stroke-width:19.5; stroke-linecap:round; stroke-linejoin:round; transform:translate(2.5px,3.0px); }
+    .tubeBevel { fill:none; stroke:url(#iconBevel); stroke-width:18; stroke-linecap:round; stroke-linejoin:round; }
+    .tubeBody { fill:none; stroke:url(#iconFace); stroke-width:12.8; stroke-linecap:round; stroke-linejoin:round; transform:translate(-.35px,-.48px); }
+    .tubeSheen { fill:none; stroke:url(#iconSheen); stroke-width:9.2; stroke-linecap:round; stroke-linejoin:round; opacity:.48; transform:translate(-.5px,-.65px); }
+    .tubeLight { fill:none; stroke:#ffffff; stroke-width:1.2; stroke-linecap:round; stroke-linejoin:round; opacity:.34; transform:translate(-.8px,-1px); }
+    .plateBloom { fill:#e9e0f7; fill-rule:evenodd; stroke:none; opacity:.07; filter:url(#softGlow); }
+    .plateShadow { fill:#0b0910; fill-rule:evenodd; stroke:#0b0910; stroke-width:2.4; transform:translate(3.2px,3.8px); opacity:.54; filter:url(#iconShadow); }
+    .plateDepth { fill:#5b5564; fill-rule:evenodd; stroke:#45404e; stroke-width:3.2; stroke-linejoin:round; transform:translate(2.5px,3.0px); }
+    .plateBevel { fill:url(#iconBevel); fill-rule:evenodd; stroke:#7f7987; stroke-width:7.2; stroke-linejoin:round; }
+    .plateBody { fill:url(#iconFace); fill-rule:evenodd; stroke:#dedbe4; stroke-width:1.0; stroke-linejoin:round; transform:translate(-.45px,-.58px); }
+    .plateSheen { fill:url(#iconSheen); fill-rule:evenodd; stroke:none; opacity:.46; transform:translate(-.45px,-.58px); }
+    .plateEdge { fill:none; stroke:#ffffff; stroke-width:.82; stroke-linejoin:round; opacity:.30; transform:translate(-.75px,-.92px); }
+    .orbBloom { fill:#e6def4; opacity:.10; filter:url(#softGlow); }
+    .orbShadow { fill:#0b0910; transform:translate(3.2px,3.8px); opacity:.54; filter:url(#iconShadow); }
+    .orbDepth { fill:#5b5564; stroke:#45404e; stroke-width:2.8; transform:translate(2.5px,3.0px); }
+    .orbBevel { fill:url(#iconBevel); stroke:#d6d2dc; stroke-width:2.0; }
+    .orbBody { fill:url(#orbFace); stroke:#f2eff5; stroke-width:.8; transform:translate(-.4px,-.5px); }
+    .orbGlint { fill:#ffffff; opacity:.58; }
   </style>'''
 
 
@@ -417,13 +514,13 @@ def shape_for_grade(grade: str, x: float, y: float, width: float, height: float)
     del grade
     vertices = [
         (x + width * .50, y + height * .04),
-        (x + width * .92, y + height * .27),
-        (x + width * .92, y + height * .73),
+        (x + width * .90, y + height * .27),
+        (x + width * .90, y + height * .73),
         (x + width * .50, y + height * .96),
-        (x + width * .08, y + height * .73),
-        (x + width * .08, y + height * .27),
+        (x + width * .10, y + height * .73),
+        (x + width * .10, y + height * .27),
     ]
-    corner_fraction = .16
+    corner_fraction = .25
 
     def toward(point: tuple[float, float], neighbor: tuple[float, float]) -> tuple[float, float]:
         return (
@@ -473,42 +570,55 @@ def sheet_svg(title: str, badges: list[BadgeArt], columns: int) -> str:
         x = cell_x + (cell_width - badge_width) / 2
         y = cell_y + (cell_height - badge_height) / 2
         shape = shape_for_grade(badge.grade, x, y, badge_width, badge_height)
-        rim_inset = badge_width * .054
-        inner_shape = shape_for_grade(
+        well_inset = badge_width * .115
+        panel_inset = badge_width * .135
+        well_shape = shape_for_grade(
             badge.grade,
-            x + rim_inset,
-            y + rim_inset,
-            badge_width - rim_inset * 2,
-            badge_height - rim_inset * 2)
-        art_size = badge_width * .46
+            x + well_inset,
+            y + well_inset,
+            badge_width - well_inset * 2,
+            badge_height - well_inset * 2)
+        panel_shape = shape_for_grade(
+            badge.grade,
+            x + panel_inset,
+            y + panel_inset,
+            badge_width - panel_inset * 2,
+            badge_height - panel_inset * 2)
+        art_size = badge_width * .48
         art_x = x + (badge_width - art_size) / 2
-        art_y = y + badge_height * .08
-        token_y = y + badge_height * .72
-        label_y = y + badge_height * .84
+        art_y = y + (badge_height - art_size) / 2
+        label_y = y + badge_height + 12
         items.append(f'''<g>
-  <defs><clipPath id="clip-{index}">{shape}</clipPath></defs>
-  <g class="badgeShadow"><g class="shell">{shape}</g></g>
-  <g class="innerRim">{inner_shape}</g>
+  <defs><clipPath id="clip-{index}">{panel_shape}</clipPath></defs>
+  <g class="badgeShadow">
+    <g class="shellDepth" transform="translate(0 {badge_width * .025:.2f})">{shape}</g>
+    <g class="shell">{shape}</g>
+    <g class="well">{well_shape}</g>
+    <g class="panel">{panel_shape}</g>
+  </g>
   <g clip-path="url(#clip-{index})">
     <image href="{embedded_png_href(badge)}" x="{art_x:.2f}" y="{art_y:.2f}" width="{art_size:.2f}" height="{art_size:.2f}"/>
-    <text x="{x + badge_width/2:.2f}" y="{token_y:.2f}" class="token">{escape(badge.token)}</text>
-    <text x="{x + badge_width/2:.2f}" y="{label_y:.2f}" class="label">{escape(badge.short_name)}</text>
   </g>
+  <text x="{x + badge_width/2:.2f}" y="{label_y:.2f}" class="label">{escape(badge.short_name)} {escape(badge.token)}</text>
 </g>''')
     return f'''<svg xmlns="http://www.w3.org/2000/svg" width="1254" height="1254" viewBox="0 0 1254 1254">
   <defs>
     <style>
       @font-face {{ font-family: Oxanium; src: url('../../Assets/Plugins/iOS/Fonts/Oxanium-VariableFont_wght.ttf'); }}
-      .heading,.token,.label {{ font-family:Oxanium,-apple-system,sans-serif;text-anchor:middle;fill:#f3f5f6; }}
-      .heading {{ font-size:18px;font-weight:700; }} .token {{ font-size:18px;font-weight:720; }}
-      .label {{ font-size:7px;font-weight:680;letter-spacing:.8px;fill:#c5cbd0; }}
-      .shell {{ fill:url(#leather);stroke:url(#rim);stroke-width:3.5; }}
-      .innerRim {{ fill:none;stroke:#71787b;stroke-width:.75;opacity:.62; }}
+      .heading,.label {{ font-family:Oxanium,-apple-system,sans-serif;text-anchor:middle;fill:#f3f5f6; }}
+      .heading {{ font-size:18px;font-weight:700; }}
+      .label {{ font-size:7px;font-weight:620;letter-spacing:.5px;fill:#8d8b96; }}
+      .shellDepth {{ fill:#34313e;stroke:#1c1a24;stroke-width:1.5; }}
+      .shell {{ fill:url(#rim);stroke:#f4f3f8;stroke-width:1.1; }}
+      .well {{ fill:url(#well);stroke:#8f8d99;stroke-width:1.7; }}
+      .panel {{ fill:url(#panel);stroke:#111019;stroke-width:1.1; }}
       .badgeShadow {{ filter:url(#shadow); }}
     </style>
     <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#07090b"/><stop offset="1" stop-color="#11151a"/></linearGradient>
     <pattern id="leather" width="37" height="31" patternUnits="userSpaceOnUse"><rect width="37" height="31" fill="#0b1012"/><path d="M3 7C7 3 12 5 16 10M23 3C27 7 31 8 35 5M7 21C12 18 16 19 20 24M27 18C31 15 35 17 39 20" fill="none" stroke="#454c4f" stroke-width=".48" opacity=".22"/><path d="M3.5 7.8C7.5 3.8 12.5 5.8 16.5 10.8M7.5 21.8C12.5 18.8 16.5 19.8 20.5 24.8" fill="none" stroke="#000" stroke-width=".8" opacity=".34"/><circle cx="5" cy="15" r=".55" fill="#60676a" opacity=".22"/><circle cx="20" cy="13" r=".48" fill="#000" opacity=".68"/><circle cx="31" cy="27" r=".5" fill="#555c5f" opacity=".18"/></pattern>
-    <linearGradient id="rim" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#f0f4f5"/><stop offset=".32" stop-color="#abb1b3"/><stop offset=".68" stop-color="#5b6265"/><stop offset="1" stop-color="#303638"/></linearGradient>
+    <linearGradient id="rim" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#e8f4f1"/><stop offset=".23" stop-color="#ffffff"/><stop offset=".48" stop-color="#aaa8b5"/><stop offset=".72" stop-color="#d8d0e7"/><stop offset="1" stop-color="#6b6877"/></linearGradient>
+    <linearGradient id="well" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#777481"/><stop offset=".34" stop-color="#24222e"/><stop offset="1" stop-color="#08070d"/></linearGradient>
+    <linearGradient id="panel" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#242231"/><stop offset=".48" stop-color="#100f18"/><stop offset="1" stop-color="#08070d"/></linearGradient>
     <filter id="shadow" x="-30%" y="-25%" width="160%" height="170%"><feDropShadow dx="0" dy="7" stdDeviation="7" flood-color="#000" flood-opacity=".72"/></filter>
   </defs>
   <rect width="1254" height="1254" fill="url(#bg)"/>
@@ -529,7 +639,7 @@ def main() -> None:
 
     manifest = {
         "version": 2,
-        "visualLanguage": "b8.10-vertical-point-hex-safe-area",
+        "visualLanguage": "b9.2-reference-proportioned-satin-relief",
         "canvas": {"width": 1024, "height": 1024, "colorSpace": "sRGB", "transparent": True},
         "frameShapes": ["verticalPointRoundedHexagon"],
         "iconLayout": {
@@ -540,7 +650,17 @@ def main() -> None:
             "preserveAspectRatio": True,
             "circlePrimitive": "equal-diameter",
         },
-        "runtimeTypography": {"maximumLines": 2, "lines": ["displayToken", "shortName"]},
+        "iconMaterial": {
+            "face": "satin-pearl-silver",
+            "depth": "soft-dark-lavender-sidewall",
+            "bevel": "continuous-rounded-manufactured-edge",
+            "lighting": "top-left-softbox",
+        },
+        "runtimeTypography": {
+            "maximumLines": 2,
+            "placement": "outside-badge",
+            "line": ["shortName", "displayToken"],
+        },
         "assets": [
             {
                 "id": badge.asset_id,

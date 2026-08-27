@@ -218,6 +218,29 @@ namespace FidgetingApp.Tests.Editor
         }
 
         [Test]
+        public void CollectorDiscoveryDate_IsRecordedOnRealGestureAndMigrationStaysUnknown()
+        {
+            string prefix = "collector-acquired-" + System.Guid.NewGuid() + ".";
+            var runtime = new CollectorProgressionRuntime("seed-model", prefix);
+            runtime.BackfillModel("legacy-model", 20, true);
+            Assert.That(runtime.FirstDiscoveredDate("legacy-model"), Is.Empty,
+                "Backfill represents migrated history and must not invent today's date.");
+
+            var discoveredAt = new System.DateTime(2026, 8, 17, 18, 30, 0);
+            runtime.RecordGesture("new-model", discoveredAt);
+            Assert.That(runtime.FirstDiscoveredDate("new-model"),
+                Is.EqualTo("2026-08-17"));
+            runtime.SaveIfDirty(true);
+
+            var reloaded = new CollectorProgressionRuntime("seed-model", prefix);
+            Assert.That(reloaded.FirstDiscoveredDate("new-model"),
+                Is.EqualTo("2026-08-17"));
+            Assert.That(reloaded.FirstDiscoveredDate("legacy-model"), Is.Empty);
+            Assert.That(UnityEngine.PlayerPrefs.GetInt(prefix + "schemaVersion"),
+                Is.EqualTo(CollectorProgressionRuntime.SchemaVersion));
+        }
+
+        [Test]
         public void SpinnerExperienceAddsCollectorBonusAfterComboAndCapsAtOnePointFive()
         {
             string baselineModel = "collector-base-" + System.Guid.NewGuid();
@@ -600,6 +623,32 @@ namespace FidgetingApp.Tests.Editor
             Assert.That(
                 SpinnerProgressionRules.OfflineExperience(4d / 60d, true, 1d),
                 Is.Zero);
+        }
+
+        [Test]
+        public void ColdBootWithoutSuspensionReturnsBeforePlayerPrefsFlush()
+        {
+            string runtime = File.ReadAllText(
+                "Assets/Scripts/Product/SpinnerProgression.cs");
+            int resumeStart = runtime.IndexOf(
+                "public SpinnerOfflineReward Resume(DateTime utcNow)");
+            int suspendStart = runtime.IndexOf(
+                "public void SaveIfDirty",
+                resumeStart);
+            Assert.That(resumeStart, Is.GreaterThanOrEqualTo(0));
+            Assert.That(suspendStart, Is.GreaterThan(resumeStart));
+            string resume = runtime.Substring(
+                resumeStart,
+                suspendStart - resumeStart);
+
+            StringAssert.Contains("PlayerPrefs.HasKey(SuspendedAtKey)", resume);
+            int noStateGuard = resume.IndexOf("if (!hasSuspensionState)");
+            int firstSave = resume.IndexOf("PlayerPrefs.Save()");
+            Assert.That(noStateGuard, Is.GreaterThanOrEqualTo(0));
+            Assert.That(firstSave, Is.GreaterThan(noStateGuard));
+            StringAssert.Contains(
+                "return SpinnerOfflineReward.None(activeModelId);",
+                resume.Substring(noStateGuard, firstSave - noStateGuard));
         }
 
         [Test]
@@ -1377,7 +1426,7 @@ namespace FidgetingApp.Tests.Editor
                 "容器内部的 glyph、倍率数字或状态标记",
                 designGuideline);
             StringAssert.Contains(
-                "结算层关闭 → 页面级 +XP 飞行 → 左上头像环更新",
+                "结算层关闭 → 页面级 +XP 飞行 → 单品身份等级环更新",
                 designGuideline);
             StringAssert.Contains(
                 "产品级文字 CTA 永久只显示动作文字",
@@ -1446,13 +1495,94 @@ namespace FidgetingApp.Tests.Editor
             StringAssert.Contains("@Environment(\\.accessibilityReduceMotion)", pageFlight);
             StringAssert.Contains("onArrive()", pageFlight);
             StringAssert.Contains("suffix: \" XP\"", pageFlight);
-            int topAvatarStart = swift.IndexOf("private struct ProductProgressionTopAvatar");
+            int collectorAvatarStart = swift.IndexOf(
+                "private struct CollectorProfileAvatar");
+            int topAvatarStart = swift.IndexOf(
+                "private struct ProductProgressionTopAvatar");
             int topBarStart = swift.IndexOf("private struct ProductTopBar", topAvatarStart);
+            string collectorAvatar = swift.Substring(
+                collectorAvatarStart,
+                topAvatarStart - collectorAvatarStart);
+            StringAssert.Contains("state.collectorRank", collectorAvatar);
+            StringAssert.Contains("size: 17", collectorAvatar);
+            StringAssert.Contains("minWidth: 44, minHeight: 44", collectorAvatar);
+            StringAssert.DoesNotContain("state.collectorFraction", collectorAvatar);
+            StringAssert.DoesNotContain("Circle()", collectorAvatar);
+            StringAssert.DoesNotContain("person.crop.circle", collectorAvatar);
+            StringAssert.DoesNotContain("AngularGradient", collectorAvatar);
+            StringAssert.DoesNotContain(
+                "currentAppearanceAccent",
+                collectorAvatar,
+                "The global Collector profile must not inherit the current toy colour.");
+            StringAssert.DoesNotContain(
+                "displayedProgressionLevel",
+                collectorAvatar,
+                "The global Collector rank and per-toy level are separate systems.");
             string topAvatar = swift.Substring(topAvatarStart, topBarStart - topAvatarStart);
-            StringAssert.Contains("Image(systemName: \"person.crop.circle\")", topAvatar);
             StringAssert.Contains("state.progressionTopAvatarProgress", topAvatar);
             StringAssert.Contains("ProductWindowFrameReader", topAvatar);
             StringAssert.Contains("progression-top-avatar", topAvatar);
+            StringAssert.Contains("Text(\"LV\")", topAvatar);
+            StringAssert.Contains(".frame(width: 32, height: 32)", topAvatar);
+            StringAssert.Contains("StrokeStyle(lineWidth: 2", topAvatar);
+            StringAssert.DoesNotContain("person.crop.circle", topAvatar);
+            int identityStart = swift.IndexOf(
+                "private struct ProductToyIdentityLockup");
+            string identity = swift.Substring(
+                identityStart,
+                topBarStart - identityStart);
+            StringAssert.Contains("ProductProgressionTopAvatar(state: state)", identity);
+            StringAssert.Contains("Text(state.selectedModel.title)", identity);
+            StringAssert.Contains("Text(state.currentAppearanceName)", identity);
+            StringAssert.Contains(".padding(.top, 4)", identity);
+            int onboardingStartForTopBar = swift.IndexOf(
+                "private struct SpinnerOnboardingView",
+                topBarStart);
+            string topBar = swift.Substring(
+                topBarStart,
+                onboardingStartForTopBar - topBarStart);
+            StringAssert.Contains("ProductToyIdentityLockup(state: state)", topBar);
+            StringAssert.Contains("CollectorProfileAvatar(state: state)", topBar);
+            int badgeRailStart = swift.IndexOf(
+                "private struct LibraryToyBadgeRow");
+            int modeBarStart = swift.IndexOf(
+                "private struct ProductModeBar",
+                badgeRailStart);
+            string badgeRail = swift.Substring(
+                badgeRailStart,
+                modeBarStart - badgeRailStart);
+            StringAssert.Contains("state.toyBadgeCatalog", badgeRail);
+            StringAssert.Contains("ProductRarityBadge(", badgeRail);
+            StringAssert.Contains("HStack(spacing: 16)", badgeRail);
+            StringAssert.Contains(".frame(width: 42)", badgeRail);
+            StringAssert.DoesNotContain("Text(\"单品成就\")", badgeRail);
+            StringAssert.DoesNotContain("unlockedCount", badgeRail);
+            StringAssert.DoesNotContain("productGlass", badgeRail,
+                "The direct Library Badge rail must not regain a large card container.");
+            int detentPanelStart = swift.IndexOf(
+                "private struct DetentTuningPanel",
+                modeBarStart);
+            string modeBar = swift.Substring(
+                modeBarStart,
+                detentPanelStart - modeBarStart);
+            StringAssert.DoesNotContain("LibraryToyBadgeRow", modeBar,
+                "Toy Badges belong to Library selection, not the detail mode bar.");
+            int libraryStartForBadges = swift.IndexOf(
+                "private struct SpinnerLibrary");
+            int displayCaseStartForBadges = swift.IndexOf(
+                "private enum DisplayCaseLightingPreset",
+                libraryStartForBadges);
+            string libraryForBadges = swift.Substring(
+                libraryStartForBadges,
+                displayCaseStartForBadges - libraryStartForBadges);
+            StringAssert.Contains("ProductToyIdentityLockup(state: state)", libraryForBadges);
+            StringAssert.Contains("LibraryToyBadgeRow(state: state)", libraryForBadges);
+            StringAssert.Contains(".overlay(alignment: .bottom)", libraryForBadges);
+            StringAssert.Contains(".padding(.bottom, 60)", libraryForBadges);
+            StringAssert.Contains("initialSection: 1", libraryForBadges);
+            StringAssert.Contains("library-model-carousel", libraryForBadges);
+            StringAssert.Contains("查看收藏盒", libraryForBadges);
+            StringAssert.Contains("进入 \\(state.selectedModel.title)", libraryForBadges);
             int managerStart = swift.IndexOf("private final class CodexSwiftUIOverlayManager");
             string manager = swift.Substring(managerStart);
             StringAssert.Contains("pendingOfflineRewardFlight", manager);
@@ -1471,7 +1601,7 @@ namespace FidgetingApp.Tests.Editor
                 secondaryActionStart - primaryActionStart);
             StringAssert.DoesNotContain("let symbol", primaryAction);
             StringAssert.DoesNotContain("Image(systemName:", primaryAction);
-            StringAssert.DoesNotContain("Label(", primaryAction);
+            StringAssert.DoesNotContain("Label(title", primaryAction);
             int onboardingStart = swift.IndexOf("private struct SpinnerOnboardingView");
             int onboardingEnd = swift.IndexOf("private struct SpinnerLibrary", onboardingStart);
             string onboarding = swift.Substring(

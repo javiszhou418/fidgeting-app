@@ -1,129 +1,143 @@
-# Premium Display Case
+# Premium Display Case / Collector Slab
 
-The premium display case is a reusable gacha presentation component. Its
-shipping style is a slim clear-acrylic rectangle with four oversized black cap
-fasteners, chrome collars, a graphite insert, and a compact central capsule.
-It owns the case, lighting, parallax, and reveal motion, but never owns a
-particular prize design. An oversized opaque outer box is explicitly excluded.
+The shipping premium display case is one reusable vertical Collector Slab for
+all six products. It uses a stepped frosted-polycarbonate shell, a physical top
+label, a black flocked display chamber, and one narrow rarity foil line. The old
+four black fasteners and compact center capsule are intentionally absent.
+
+The case owns packaging, label presentation, lighting, parallax, reveal motion,
+and content fitting. It never owns or remodels a prize. Geometry, pivots,
+parents, colliders, mechanism state, and interaction remain with the canonical
+shipping product.
 
 ## Runtime contract
 
-The shipping prefab is loaded through:
-
 ```csharp
 PremiumDisplayCase displayCase = PremiumDisplayCaseFactory.Instantiate(parent);
-displayCase.setCapsulePreset(PremiumDisplayCaseCapsulePreset.CircularStandard);
-displayCase.setContent(importedGltfRoot, PremiumDisplayCaseContentOptions.Default);
+displayCase.setCapsulePreset(
+    PremiumDisplayCaseCapsulePreset.CollectorSlabLarge);
+displayCase.SetCollectorLabel(new PremiumDisplayCaseCollectorLabel(
+    productName,
+    editionName,
+    level,
+    firstObtainedDate,
+    authoritativeCollectibleId));
+displayCase.setContent(productSnapshot, profile.ContentOptions);
 displayCase.onRevealComplete += HandleRevealComplete;
 displayCase.play();
 ```
 
-`setContent` receives an already-instantiated Unity `Transform` or `GameObject`
-that represents the root of a glTF import. URL fetching and glTF parsing stay in
-the caller so the case does not depend on a specific importer package. Passing
-`null` restores the development coin placeholder.
+`setContent` receives an already-instantiated Unity `Transform` or `GameObject`.
+The case temporarily reparents it and restores its original parent, local pose,
+scale, active state, and ownership when replaced or destroyed. Passing `null`
+restores the development placeholder. The case never destroys caller-owned
+content.
 
-The case temporarily reparents external content for presentation and restores
-its original parent, local pose, scale, and active state when it is replaced or
-the case is destroyed. It never destroys caller-owned content.
-
-## Content slot
-
-The exact anchor is named `contentSlot` and is centered in the neutral capsule.
-Three internal wrappers separate reveal scale, idle rotation, and fit transform:
+The exact anchor remains `contentSlot`:
 
 ```text
 contentSlot
 └── ContentRevealRoot
     └── ContentOrbitRoot
         └── ContentFitRoot
-            └── runtime glTF root or development placeholder
+            └── renderer-only shipping product snapshot
 ```
 
-All enabled child renderers are measured after parenting. Collider bounds are a
-fallback for renderer-free nodes. The measured bounds are uniformly scaled to
-the capsule's diameter and depth with 8% total padding, and their center is
-translated to the capsule origin on all three axes. Idle rotation is enabled by
-default at one revolution per 4 seconds and can be disabled per content item.
+The snapshot preserves shared meshes, materials, renderer property blocks and
+source-root-relative transforms, but excludes cameras, particles, lines,
+grounding stages, physics, audio, input and runtime scripts.
 
-## Capsule presets
+## Physical dimensions and content fit
 
-The neutral capsule can be circular or rounded-square. Diameter and depth are
-runtime parameters clamped to safe authored ranges. Shipping presets are:
+`CollectorSlabLarge` is a `180 × 198 × 48 mm` rounded-rectangle display chamber
+with a `16 mm` corner radius. The Blender shell is `216 × 304 × 59 mm`; its top
+physical label is `184 × 58 mm`.
 
-| Preset | Shape | Diameter | Depth |
-| --- | --- | ---: | ---: |
-| Circular Compact | Circular | 72 mm | 20 mm |
-| Circular Standard | Circular | 84 mm | 26 mm |
-| Circular Deep | Circular | 84 mm | 36 mm |
-| Rounded Square Standard | Rounded square | 84 mm | 26 mm |
-| Rounded Square Deep | Rounded square | 84 mm | 38 mm |
+Content is centered on all three axes and uniformly scaled. XY bounds are the
+authoritative visible-composition constraint with 30% total padding, yielding a
+70% target fill on the limiting display-plane dimension. Z bounds do not shrink
+the visible collectible: all six authored products are already thinner than the
+48 mm chamber, while their 90-degree presentation transform can map a planar
+dimension into world Z during measurement. Scale remains uniform; no product is
+stretched.
 
-No capsule contour follows a prize silhouette.
+Collector Slab profiles disable autonomous idle rotation. They retain the
+authoritative front-facing orientation (`90,-8,0`, or `-90,-8,0` for the fan
+card so its A/Q/K face remains visible).
 
-## Motion and rendering ownership
+## Physical label and persisted data
 
-The reveal is a finite 2.20-second deterministic sequence: the clear rear
-reinforcement layer separates, the acrylic case rises with a restrained overshoot, the liquid
-glass appears with a diagonal sweep, the content resolves, and the case-owned
-lights pulse before settling. `onRevealComplete` fires exactly once per `play()`.
+The top label is built from real case geometry and `TextMesh` marks, so it is
+lit with the slab instead of behaving like a floating UI overlay. It contains:
 
-Parallax consumes the app's existing filtered `SceneParallaxInput` stream. The
-adapter does not start or stop Core Motion. Four authored depth layers move at
-different amplitudes: the outer box counters the tilt, acrylic moves slightly,
-the inner lining moves farther, and the content slot moves farthest. A maximum
-4.8-degree case rotation keeps the effect readable without making the object
-feel loose.
+- canonical English product name;
+- edition / finish;
+- first authoritative acquisition or discovery date;
+- rarity tier and current level;
+- stable collectible ID only when an authoritative value exists;
+- the highest applicable Toy Badge treatment.
 
-The acrylic shader is neutral and texture-free. Its Fresnel edge, virtual
-specular bands, reveal sweep, and subtle tilt response are case properties. Case
-lights never use a content texture or prize-specific baked reflection.
+Core model discovery dates and gacha prize acquisition timestamps use a
+versioned schema. New records persist the first timestamp only. Existing v1
+ownership migrates safely with an unknown date and renders `ACQUIRED —`; the
+runtime never substitutes the current date or a conceptual sample number.
 
-## Blender layers and native manipulation
+Tier color is restricted to the label frame and a single narrow foil band:
+Standard cool silver, Refined blue titanium, Signature champagne gold, and
+Heirloom smoked violet. These are metallic material signals, not emission.
+
+## Materials and lighting
+
+The shell shader exposes frosted transmission, broad edge sheen and subtle
+isotropic micro-scratches. The display chamber uses black flocking; the label is
+warm neutral stock with dark print. Default lighting is a restrained warm key,
+cool fill and muted burgundy rim against a dark wine background.
+
+Three approved real products share a refined mobile metal response without
+geometry changes:
+
+- `MAGNETIC TRINITY`: bead-blasted titanium body, broad matte highlights;
+- `MIRROR QUAD`: satin steel body with restrained polished/radial accents;
+- `GRAPHITE DUO`: `#3A3D40`, metallic `1`, roughness `0.76`, isotropic grain.
+
+The other three products retain their already approved shipping materials.
+
+## Blender layers and interaction
 
 `ArtSource/DisplayCase/PremiumDisplayCase.blend` is the editable source of
-truth. `build_premium_display_case.py` rebuilds that source and exports the FBX
-consumed by Unity. The FBX contains eight stable, prize-agnostic layers:
+truth. The FBX keeps eight stable prize-agnostic interaction layers for backward
+compatibility, while their physical contents are now:
 
-1. clear front acrylic plate;
-2. four removable black cap fasteners with chrome collars;
-3. clear acrylic spacer frame;
-4. compact clear neutral capsule;
-5. graphite insert with a real capsule aperture;
-6. clear rear acrylic plate;
-7. inset graphite tray, fully inside the acrylic outline;
-8. clear rear reinforcement frame.
+1. frosted polycarbonate front shell;
+2. physical label stock and foil frame;
+3. transparent molded spacer frame;
+4. rounded display-chamber rim and rarity foil band;
+5. black flocking insert;
+6. frosted rear shell;
+7. rear stepped reinforcement frame;
+8. front stepped reinforcement frame.
 
-Unity reapplies the Blender-to-Unity axis mapping after unpacking the FBX so
-Blender +Z is Unity +Y and Blender -Y faces the shipping camera. The runtime
-interaction controller keeps the content slot attached to layer 4 while the
-eight authored case layers move through a deterministic 1.35-second exploded
-or assembly sequence.
-
-The shipping SwiftUI overlay supplies a top-left back button, drag-to-orbit,
-pinch-to-zoom, an exploded-progress slider, assembly replay, and view reset.
-These gestures send semantic values to `FidgetAppCoordinator`; Unity remains
-the owner of the 3D transforms. Orbit is clamped to 34 degrees yaw and 22
-degrees pitch, and zoom is clamped to 0.84–1.18.
-
-The preview reference composition is 1200×1600 at a 29-degree vertical field
-of view. Runtime cameras preserve that horizontal composition and derive their
-vertical field of view from the current device aspect ratio, preventing the
-case edges from being cropped on tall iPhones.
+The runtime exploded/assembly controller and `contentSlot` layer attachment are
+unchanged. Native controls continue to provide back, drag orbit, pinch zoom,
+exploded progress, replay and reset. The case presentation never writes prize
+physics, mechanism state or Haptic events.
 
 ## Shipping assets and validation
 
 - Runtime prefab: `Assets/Resources/Gacha/PremiumDisplayCase.prefab`
 - Blender source: `ArtSource/DisplayCase/PremiumDisplayCase.blend`
-- Reproducible Blender build: `ArtSource/DisplayCase/build_premium_display_case.py`
+- Blender build: `ArtSource/DisplayCase/build_premium_display_case.py`
+- Blender validator: `ArtSource/DisplayCase/validate_premium_display_case.py`
 - Unity FBX: `Assets/_DisplayCase/Models/PremiumDisplayCase.fbx`
 - Preview scene: `Assets/_DisplayCase/Scenes/PremiumDisplayCase.unity`
 - Runtime source: `Assets/_DisplayCase/Runtime/`
-- Acrylic shader: `Assets/_DisplayCase/Shaders/PremiumAcrylicLiquidGlass.shader`
-- Deterministic EditMode tests: `Assets/_DisplayCase/Tests/Editor/PremiumDisplayCaseTests.cs`
-- Shipping-scene previews: `Artifacts/PremiumDisplayCasePreview/`
-- Shipping native preview: `Artifacts/PremiumDisplayCaseNativePreview/`
+- Shell shader: `Assets/_DisplayCase/Shaders/PremiumAcrylicLiquidGlass.shader`
+- Tests: `Assets/_DisplayCase/Tests/Editor/PremiumDisplayCaseTests.cs`
+- Six-product previews:
+  `Artifacts/PremiumDisplayCaseMagneticSlideBaselineConsistencyPreview/`
 
-The placeholder coin is for development and fallback only. It is not a prize
-catalog item and does not establish any content-specific geometry or material
-contract.
+Required visual evidence is generated from shipping Unity with a real graphics
+device, never `-nographics`. Each of the six product folders contains authored
+hero, top, left oblique, right oblique, low angle and phone hero captures.
+Concept images are not shipping evidence and are not copied into the approved
+Design Bible asset set.

@@ -67,11 +67,12 @@ def configure_scene() -> bpy.types.Object:
     background.inputs["Color"].default_value = (0.34, 0.045, 0.17, 1.0)
     background.inputs["Strength"].default_value = 0.30
 
-    principled_material("MAT_Acrylic_Clear", (0.70, 0.84, 0.92, 1.0), 0.0, 0.045, 1.0, 0.13)
-    principled_material("MAT_BrushedMetal", (0.62, 0.66, 0.72, 1.0), 0.98, 0.18)
-    principled_material("MAT_NeutralGraphite", (0.055, 0.068, 0.084, 1.0), 0.46, 0.34)
-    principled_material("MAT_BlackVelvet", (0.012, 0.016, 0.022, 1.0), 0.0, 0.84)
-    principled_material("MAT_MatteBlackBox", (0.003, 0.004, 0.006, 1.0), 0.10, 0.22)
+    principled_material("MAT_FrostedPolycarbonate", (0.61, 0.65, 0.68, 1.0), 0.0, 0.22, 0.92, 0.10)
+    principled_material("MAT_FrostedPolycarbonateEdge", (0.72, 0.75, 0.77, 1.0), 0.0, 0.18, 0.78, 0.21)
+    principled_material("MAT_RarityFoilSilver", (0.62, 0.66, 0.70, 1.0), 0.96, 0.30)
+    principled_material("MAT_LabelGraphite", (0.055, 0.060, 0.066, 1.0), 0.22, 0.52)
+    principled_material("MAT_BlackFlocking", (0.009, 0.011, 0.014, 1.0), 0.0, 0.91)
+    principled_material("MAT_LabelPaper", (0.74, 0.72, 0.68, 1.0), 0.0, 0.73)
 
     camera_data = bpy.data.cameras.new("ValidationCamera")
     camera_data.lens = 58
@@ -79,7 +80,7 @@ def configure_scene() -> bpy.types.Object:
     bpy.context.collection.objects.link(camera)
     scene.camera = camera
 
-    target = Vector((0.0, 0.0, 0.0))
+    target = Vector((0.0, 0.0, -0.015))
     area_light("Key_Softbox", (-0.30, -0.38, 0.40), 52, (1.0, 0.60, 0.82), 0.28, target)
     area_light("Fill_Softbox", (0.34, -0.20, 0.12), 28, (0.64, 0.82, 1.0), 0.22, target)
     area_light("Rim_Strip", (0.08, 0.32, 0.30), 72, (1.0, 0.22, 0.66), 0.16, target)
@@ -103,8 +104,16 @@ def main() -> None:
     output.mkdir(parents=True, exist_ok=True)
     camera = configure_scene()
 
-    render(camera, output / "blender-assembled-hero.png",
-           (0.30, -0.43, 0.26), (0.0, 0.0, 0.0), False)
+    render(camera, output / "01_blender_assembled_hero.png",
+           (0.30, -0.50, 0.27), (0.0, 0.0, -0.015), False)
+    render(camera, output / "02_blender_top.png",
+           (0.02, -0.34, 0.48), (0.0, 0.0, -0.015), False)
+    render(camera, output / "03_blender_left_oblique.png",
+           (-0.34, -0.50, 0.13), (0.0, 0.0, -0.015), False)
+    render(camera, output / "04_blender_right_oblique.png",
+           (0.34, -0.50, 0.13), (0.0, 0.0, -0.015), False)
+    render(camera, output / "05_blender_low_angle.png",
+           (0.24, -0.52, -0.24), (0.0, 0.0, -0.015), False)
 
     offsets = {
         # Unity offsets converted back through U=(-Bx, Bz, By) so the DCC
@@ -124,8 +133,8 @@ def main() -> None:
     if content_anchor is not None:
         content_anchor.hide_render = True
 
-    render(camera, output / "blender-exploded-transparent.png",
-           (0.46, -0.66, 0.38), (0.005, 0.012, 0.018), True)
+    render(camera, output / "06_blender_exploded_transparent.png",
+           (0.46, -0.70, 0.40), (0.005, 0.012, -0.005), True)
     print(f"BLENDER_PREVIEW_DIR={output}")
 
 
