@@ -11,13 +11,23 @@ namespace FidgetingApp.FanCard
 
         public const float CardWidth = 0.0635f;
         public const float CardHeight = 0.0889f;
-        public const float CardThickness = 0.0025f;
-        public const float CardCornerRadius = CardWidth * 0.06f;
+        public const float CardThickness = 0.0035f;
+        public const float CardCornerRadius = 0.0095f;
+        public const int VisualCornerSegmentsPerQuadrant = 72;
         public const float EdgeBevel = CardThickness * 0.15f;
-        // The warm-silver surface now follows the complete rounded card corner
-        // instead of opening a notch from the spindle hole to the outside.
-        // A 0.5 mm gunmetal reveal remains around the full perimeter.
-        public const float FaceInset = 0.0005f;
+        // The user-selected face transition uses a 1.0 mm black frame plus a
+        // 0.8 mm warm-gold inlay with a broad 0.38 mm bevel.
+        public const float BlackBorderWidth = 0.0010f;
+        public const float GoldTrimWidth = 0.0008f;
+        public const float GoldTrimBevel = 0.00038f;
+        public const float FaceInset = BlackBorderWidth + GoldTrimWidth;
+        public const float GoldTrimOuterWidth =
+            CardWidth - BlackBorderWidth * 2f;
+        public const float GoldTrimOuterHeight =
+            CardHeight - BlackBorderWidth * 2f;
+        public const float GoldTrimOuterCornerRadius =
+            CardCornerRadius - BlackBorderWidth;
+        public const float GoldTrimThickness = GoldTrimBevel * 2f;
         public const float FaceWidth = CardWidth - FaceInset * 2f;
         public const float FaceHeight = CardHeight - FaceInset * 2f;
         public const float FaceCornerRadius = CardCornerRadius - FaceInset;
@@ -96,7 +106,7 @@ namespace FidgetingApp.FanCard
         // complete 6.2 mm undercut contour must keep at least 6 mm of metal
         // between itself and the rounded card outline across the full sweep.
         public static readonly Vector2 FollowerFromPivot =
-            new(-0.0490f, -0.0270f);
+            new(-0.04331f, -0.02131f);
         // Open is +90 degrees on the outer/lower plate. Returning from open
         // to closed therefore travels counterclockwise in the authored top
         // view, from 90 degrees back to the fixed top plate's 0 degrees.
@@ -159,6 +169,7 @@ namespace FidgetingApp.FanCard
         public const float CornerTopLeftRotationDegrees = 0f;
         public const float CornerBottomRightRotationDegrees = 180f;
         public const float CornerSpadeScale = 0.245f;
+        public const int DecorativeDotCountPerFront = 0;
 
         public static readonly Color GunmetalColor =
             new(0.155f, 0.163f, 0.172f, 1f);
@@ -172,13 +183,14 @@ namespace FidgetingApp.FanCard
             new(0.63f, 0.38f, 0.095f, 1f);
 
         public const float GunmetalMetallic = 0.90f;
-        public const float GunmetalSmoothness = 0.34f;
+        public const float GunmetalSmoothness = 0.28f;
         public const float SilverMetallic = 1.0f;
-        // Satin bead-blasted face: metallic, but deliberately below polished
-        // metal so the studio reflection stays broad instead of clipping to a
-        // white mirror band in the overhead view.
-        public const float SilverSmoothness = 0.36f;
-        public const float ChromeSmoothness = 0.92f;
+        // Bead-blasted satin: keep a wide sheen, but no mirror-like IBL.
+        public const float SilverSmoothness = 0.24f;
+        public const float SilverBumpScale = 0.13f;
+        public const float GoldMetallic = 0.82f;
+        public const float GoldSmoothness = 0.22f;
+        public const float ChromeSmoothness = 0.78f;
         public const float GrainBumpScale = 0.11f;
 
         private static Bounds ResolveSweepBounds(

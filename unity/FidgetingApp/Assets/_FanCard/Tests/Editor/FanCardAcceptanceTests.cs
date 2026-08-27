@@ -78,18 +78,33 @@ namespace FidgetingApp.Tests.Editor
         {
             Assert.That(FanCardSpecifications.CardWidth, Is.EqualTo(0.0635f));
             Assert.That(FanCardSpecifications.CardHeight, Is.EqualTo(0.0889f));
-            Assert.That(FanCardSpecifications.CardThickness, Is.EqualTo(0.0025f));
+            Assert.That(FanCardSpecifications.CardThickness, Is.EqualTo(0.0035f));
             Assert.That(
                 FanCardSpecifications.CardWidth / FanCardSpecifications.CardHeight,
                 Is.EqualTo(63.5f / 88.9f).Within(0.00001f));
             Assert.That(
                 FanCardSpecifications.CardCornerRadius,
-                Is.EqualTo(FanCardSpecifications.CardWidth * 0.06f));
+                Is.EqualTo(0.0095f));
+            Assert.That(
+                FanCardSpecifications.VisualCornerSegmentsPerQuadrant,
+                Is.EqualTo(72));
             Assert.That(
                 FanCardSpecifications.EdgeBevel,
-                Is.EqualTo(FanCardSpecifications.CardThickness * 0.15f));
+                Is.EqualTo(FanCardSpecifications.CardThickness * 0.15f)
+                    .Within(0.000000001f));
             Assert.That(FanCardSpecifications.LayerAirGap, Is.EqualTo(0.0010f));
-            Assert.That(FanCardSpecifications.LayerPitch, Is.EqualTo(0.0035f));
+            Assert.That(
+                FanCardSpecifications.LayerPitch,
+                Is.EqualTo(0.0045f).Within(0.000000001f));
+            Assert.That(FanCardSpecifications.BlackBorderWidth, Is.EqualTo(0.0010f));
+            Assert.That(FanCardSpecifications.GoldTrimWidth, Is.EqualTo(0.0008f));
+            Assert.That(FanCardSpecifications.GoldTrimBevel, Is.EqualTo(0.00038f));
+            Assert.That(
+                FanCardSpecifications.FaceInset,
+                Is.EqualTo(
+                    FanCardSpecifications.BlackBorderWidth
+                    + FanCardSpecifications.GoldTrimWidth));
+            Assert.That(FanCardSpecifications.DecorativeDotCountPerFront, Is.Zero);
             Assert.That(FanCardSpecifications.LibraryPreviewDetentIndex, Is.EqualTo(2));
             Assert.That(FanCardSpecifications.LibraryPreviewProgress, Is.EqualTo(2f / 3f));
             Assert.That(FanCardSpecifications.LibraryPreviewRollDegrees, Is.EqualTo(45f));
@@ -131,8 +146,11 @@ namespace FidgetingApp.Tests.Editor
                 FanCardSpecifications.VisualSweepBounds.size.x,
                 Is.GreaterThan(FanCardSpecifications.CardWidth * 1.6f));
             Assert.That(
-                FanCardSpecifications.VisualSweepBounds.size.z,
-                Is.GreaterThan(FanCardSpecifications.CardHeight * 1.6f));
+                FanCardSpecifications.VisualSweepBounds.size.z
+                    / FanCardSpecifications.CardHeight,
+                Is.InRange(1.51f, 1.53f),
+                "The approved 9.5 mm corners keep the portrait sweep "
+                + "inside the locked framing range.");
             Assert.That(
                 FanCardSpecifications.InteractionSweepBounds.size.x,
                 Is.GreaterThan(FanCardSpecifications.VisualSweepBounds.size.x));
@@ -145,6 +163,76 @@ namespace FidgetingApp.Tests.Editor
                 FanCardSpecifications.CameraSweepBoundsScale,
                 Is.InRange(0.99f, 1f),
                 "Camera framing may ignore only sub-percent tangent extrema.");
+        }
+
+        [Test]
+        public void ShippingVisualMeshesAndShaderUseTheAuthoritativeBlenderSource()
+        {
+            ModelImporter importer = AssetImporter.GetAtPath(
+                FidgetingApp.FanCard.EditorTools.FanCardVisualModelIntegrator
+                    .VisualModelPath)
+                as ModelImporter;
+            Assert.That(importer, Is.Not.Null);
+            Assert.That(importer.preserveHierarchy, Is.True);
+            Assert.That(importer.bakeAxisConversion, Is.True);
+            Assert.That(importer.importNormals, Is.EqualTo(ModelImporterNormals.Import));
+
+            Mesh[] meshes = AssetDatabase.LoadAllAssetsAtPath(
+                    FidgetingApp.FanCard.EditorTools.FanCardVisualModelIntegrator
+                        .VisualModelPath)
+                .OfType<Mesh>()
+                .ToArray();
+            foreach (string name in new[]
+            {
+                "BottomCard_GunmetalFrame",
+                "BottomCard_GoldTrim",
+                "BottomCard_WarmSilverFace"
+            })
+            {
+                Assert.That(
+                    meshes.Any(mesh =>
+                        mesh.name == name || mesh.name == name + "_Mesh"),
+                    Is.True,
+                    name);
+            }
+
+            string builder = File.ReadAllText(Path.Combine(
+                Application.dataPath,
+                "_FanCard/Editor/FanCardSceneBuilder.cs"));
+            int buildStart = builder.IndexOf(
+                "public static void BuildScene()",
+                System.StringComparison.Ordinal);
+            int buildEnd = builder.IndexOf(
+                "[MenuItem(\"Tools/Codex/Fan Card/2",
+                buildStart,
+                System.StringComparison.Ordinal);
+            Assert.That(buildStart, Is.GreaterThanOrEqualTo(0));
+            Assert.That(buildEnd, Is.GreaterThan(buildStart));
+            string buildMethod = builder.Substring(
+                buildStart,
+                buildEnd - buildStart);
+            StringAssert.Contains("LoadVisualModelPart(", buildMethod);
+            StringAssert.Contains("ConvertAuthoritativeVisualMesh(", buildMethod);
+            StringAssert.DoesNotContain("CreateRoundedBoxMesh(", buildMethod);
+            StringAssert.DoesNotContain("CreateRoundedSurfaceMesh(", buildMethod);
+
+            string shader = File.ReadAllText(Path.Combine(
+                Application.dataPath,
+                "_FanCard/Shaders/FanCardSatinSilver.shader"));
+            StringAssert.DoesNotContain("softPanel", shader);
+            StringAssert.DoesNotContain("reflectedBand", shader);
+            StringAssert.DoesNotContain("0.30, 0.30, 0.30", shader);
+            StringAssert.DoesNotContain("0.34 + ambientIrradiance", shader);
+            StringAssert.Contains("GetMainLight", shader);
+            StringAssert.Contains("SampleSH", shader);
+
+            string gunmetalShader = File.ReadAllText(Path.Combine(
+                Application.dataPath,
+                "_FanCard/Shaders/FanCardGunmetal.shader"));
+            StringAssert.DoesNotContain("studioForward", gunmetalShader);
+            StringAssert.DoesNotContain("studioSheen", gunmetalShader);
+            StringAssert.Contains("GetMainLight", gunmetalShader);
+            StringAssert.Contains("SampleSH", gunmetalShader);
         }
 
         [Test]
@@ -586,7 +674,7 @@ namespace FidgetingApp.Tests.Editor
                 bodies.All(item => Mathf.Abs(item.bounds.size.y
                     - FanCardSpecifications.CardThickness) < 0.00001f),
                 Is.True,
-                "Every shipping card body must retain the authored 2.5 mm section.");
+                "Every shipping card body must retain the authored 3.5 mm section.");
             for (int index = 1; index < bodies.Length; index++)
             {
                 Assert.That(
@@ -599,8 +687,30 @@ namespace FidgetingApp.Tests.Editor
                 hierarchy.Count(item => item.name == "WarmSilverBackFace"),
                 Is.EqualTo(3),
                 "All three rigid slabs need a rendered underside face.");
+            Transform[] frontGoldTrims = hierarchy
+                .Where(item => item.name == "WarmGoldTrim")
+                .ToArray();
+            Transform[] backGoldTrims = hierarchy
+                .Where(item => item.name == "WarmGoldBackTrim")
+                .ToArray();
+            Assert.That(frontGoldTrims, Has.Length.EqualTo(3));
+            Assert.That(backGoldTrims, Has.Length.EqualTo(3));
+            Assert.That(
+                frontGoldTrims.Concat(backGoldTrims)
+                    .All(item => item.GetComponent<Renderer>()
+                        .sharedMaterial.name.Contains("Gold")),
+                Is.True,
+                "The black frame must transition through the approved warm-gold inlay.");
+            Assert.That(
+                hierarchy.Count(item => item.name.StartsWith("EtchedDot_")),
+                Is.Zero,
+                "The approved face has no semantically unexplained three-dot motif.");
             Mesh projectedFaceMesh = top.Find("WarmSilverFace")
                 .GetComponent<MeshFilter>().sharedMesh;
+            Assert.That(
+                projectedFaceMesh.vertexCount,
+                Is.EqualTo(1579),
+                "The visible silver face must come from the authoritative FBX cap.");
             Assert.That(
                 projectedFaceMesh.vertices.All(vertex => Mathf.Abs(vertex.y) < 0.000001f),
                 Is.True,
@@ -620,6 +730,16 @@ namespace FidgetingApp.Tests.Editor
 
             Mesh bodyMesh = top.Find("GunmetalFrame")
                 .GetComponent<MeshFilter>().sharedMesh;
+            Assert.That(
+                bodyMesh.vertexCount,
+                Is.EqualTo(3969),
+                "The visible body must preserve the authoritative FBX split normals.");
+            Mesh goldTrimMesh = top.Find("WarmGoldTrim")
+                .GetComponent<MeshFilter>().sharedMesh;
+            Assert.That(
+                goldTrimMesh.vertexCount,
+                Is.EqualTo(3981),
+                "The warm-gold trim must preserve the authoritative FBX split normals.");
             Vector2 holeCenter = new(
                 FanCardSpecifications.PivotX,
                 FanCardSpecifications.PivotZ);
@@ -666,11 +786,16 @@ namespace FidgetingApp.Tests.Editor
                 "The entire back-track projection must remain inside the card outline.");
             Assert.That(
                 hierarchy.Where(item => item.name.StartsWith("CurvedTrack_"))
-                    .All(item => item.localPosition.y
-                        < -FanCardSpecifications.CardThickness * 0.5f
-                        && item.localRotation == Quaternion.identity),
+                    .All(item =>
+                    {
+                        Transform backFace = item.parent.Find("WarmSilverBackFace");
+                        return backFace != null
+                            && item.localPosition.y < backFace.localPosition.y
+                            && item.localRotation == Quaternion.identity;
+                    }),
                 Is.True,
-                "Both Blender-authored track layers must remain on the back of their rigid slab.");
+                "Both Blender-authored track layers must remain visibly outside "
+                + "the back face of their rigid slab.");
             Assert.That(
                 grilles.All(item =>
                 {
@@ -865,10 +990,46 @@ namespace FidgetingApp.Tests.Editor
             Assert.That(chrome, Is.Not.Null);
             Assert.That(gold, Is.Not.Null);
             Assert.That(gunmetal.GetFloat("_Metallic"), Is.EqualTo(0.90f));
-            Assert.That(gunmetal.GetFloat("_Smoothness"), Is.EqualTo(0.34f));
+            Assert.That(
+                gunmetal.GetFloat("_Smoothness"),
+                Is.EqualTo(FanCardSpecifications.GunmetalSmoothness));
             Assert.That(silver.GetFloat("_Metallic"), Is.EqualTo(1f));
-            Assert.That(silver.GetFloat("_Smoothness"), Is.EqualTo(0.36f));
-            Assert.That(chrome.GetFloat("_Smoothness"), Is.EqualTo(0.92f));
+            Assert.That(
+                silver.GetFloat("_Smoothness"),
+                Is.EqualTo(FanCardSpecifications.SilverSmoothness));
+            Assert.That(
+                silver.GetFloat("_BumpScale"),
+                Is.EqualTo(FanCardSpecifications.SilverBumpScale));
+            Assert.That(
+                chrome.GetFloat("_Smoothness"),
+                Is.EqualTo(FanCardSpecifications.ChromeSmoothness));
+            Assert.That(
+                gold.GetFloat("_Metallic"),
+                Is.EqualTo(FanCardSpecifications.GoldMetallic));
+            Assert.That(
+                gold.GetFloat("_Smoothness"),
+                Is.EqualTo(FanCardSpecifications.GoldSmoothness));
+            Assert.That(
+                SpinnerImageBasedLightingController.FanCardSoftboxIntensity,
+                Is.EqualTo(0.22f));
+            Assert.That(
+                SpinnerImageBasedLightingController.FanCardReflectionBaseScale,
+                Is.EqualTo(0.92f));
+            Assert.That(
+                SpinnerImageBasedLightingController.FanCardOpposingStripIntensity,
+                Is.EqualTo(0.10f));
+            Assert.That(
+                SpinnerEnvironmentCatalog.TryGetProfile(
+                    FanCardSpecifications.ScenePath,
+                    out SpinnerEnvironmentProfile environment),
+                Is.True);
+            Assert.That(environment.ReflectionIntensity, Is.EqualTo(0.28f));
+            Assert.That(
+                environment.Lights[0].Intensity,
+                Is.EqualTo(0.92f));
+            Assert.That(
+                environment.Lights[1].Intensity,
+                Is.EqualTo(0.28f));
             Assert.That(
                 chrome.shader.name,
                 Is.EqualTo("FidgetingApp/FanCardChrome"));
@@ -1040,7 +1201,7 @@ namespace FidgetingApp.Tests.Editor
                 .Where(mesh => mesh != null)
                 .ToHashSet();
             int triangleCount = meshes.Sum(mesh => mesh.triangles.Length / 3);
-            Assert.That(triangleCount, Is.LessThan(30000));
+            Assert.That(triangleCount, Is.LessThan(100000));
         }
 
         [Test]
@@ -1212,6 +1373,7 @@ namespace FidgetingApp.Tests.Editor
 
         private static bool CapContainsPoint(Mesh mesh, Vector2 point, float y)
         {
+            const float planeTolerance = 0.000002f;
             Vector3[] vertices = mesh.vertices;
             int[] triangles = mesh.triangles;
             for (int index = 0; index < triangles.Length; index += 3)
@@ -1219,9 +1381,9 @@ namespace FidgetingApp.Tests.Editor
                 Vector3 a = vertices[triangles[index]];
                 Vector3 b = vertices[triangles[index + 1]];
                 Vector3 c = vertices[triangles[index + 2]];
-                if (Mathf.Abs(a.y - y) > 0.00001f
-                    || Mathf.Abs(b.y - y) > 0.00001f
-                    || Mathf.Abs(c.y - y) > 0.00001f)
+                if (Mathf.Abs(a.y - y) > planeTolerance
+                    || Mathf.Abs(b.y - y) > planeTolerance
+                    || Mathf.Abs(c.y - y) > planeTolerance)
                 {
                     continue;
                 }
@@ -1289,22 +1451,22 @@ namespace FidgetingApp.Tests.Editor
             Vector2 b,
             Vector2 c)
         {
-            float d1 = Cross(point, a, b);
-            float d2 = Cross(point, b, c);
-            float d3 = Cross(point, c, a);
-            bool hasNegative = d1 < -0.0000001f
-                || d2 < -0.0000001f
-                || d3 < -0.0000001f;
-            bool hasPositive = d1 > 0.0000001f
-                || d2 > 0.0000001f
-                || d3 > 0.0000001f;
-            return !(hasNegative && hasPositive);
+            const float signedAreaTolerance = 0.000000000001f;
+            float d1 = Cross(point - a, b - a);
+            float d2 = Cross(point - b, c - b);
+            float d3 = Cross(point - c, a - c);
+            bool negative = d1 < -signedAreaTolerance
+                || d2 < -signedAreaTolerance
+                || d3 < -signedAreaTolerance;
+            bool positive = d1 > signedAreaTolerance
+                || d2 > signedAreaTolerance
+                || d3 > signedAreaTolerance;
+            return !(negative && positive);
         }
 
-        private static float Cross(Vector2 p, Vector2 a, Vector2 b)
+        private static float Cross(Vector2 a, Vector2 b)
         {
-            return (p.x - b.x) * (a.y - b.y)
-                - (a.x - b.x) * (p.y - b.y);
+            return a.x * b.y - a.y * b.x;
         }
 
         private static FanCardMagneticTrack RunOpenAndRelease(

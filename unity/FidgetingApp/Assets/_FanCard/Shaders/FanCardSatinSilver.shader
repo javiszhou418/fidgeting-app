@@ -4,9 +4,9 @@ Shader "FidgetingApp/FanCardSatinSilver"
     {
         _BaseColor("Warm Silver", Color) = (0.40, 0.385, 0.36, 1)
         _Metallic("Metallic", Range(0, 1)) = 1.0
-        _Smoothness("Smoothness", Range(0, 1)) = 0.36
+        _Smoothness("Smoothness", Range(0, 1)) = 0.24
         [Normal] _BumpMap("Bead Normal", 2D) = "bump" {}
-        _BumpScale("Bead Strength", Range(0, 1)) = 0.06
+        _BumpScale("Bead Strength", Range(0, 1)) = 0.13
     }
 
     SubShader
@@ -59,17 +59,15 @@ Shader "FidgetingApp/FanCardSatinSilver"
             {
                 float4 positionCS : SV_POSITION;
                 float3 positionWS : TEXCOORD0;
-                float3 positionOS : TEXCOORD1;
-                half3 normalWS : TEXCOORD2;
-                half3 tangentWS : TEXCOORD3;
-                half3 bitangentWS : TEXCOORD4;
-                float2 bumpUv : TEXCOORD5;
+                half3 normalWS : TEXCOORD1;
+                half3 tangentWS : TEXCOORD2;
+                half3 bitangentWS : TEXCOORD3;
+                float2 bumpUv : TEXCOORD4;
             };
 
             Varyings Vert(Attributes input)
             {
                 Varyings output;
-                output.positionOS = input.positionOS.xyz;
                 output.positionWS = TransformObjectToWorld(input.positionOS.xyz);
                 output.positionCS = TransformWorldToHClip(output.positionWS);
                 output.normalWS = TransformObjectToWorldNormal(input.normalOS);
@@ -95,33 +93,48 @@ Shader "FidgetingApp/FanCardSatinSilver"
                     TransformWorldToShadowCoord(input.positionWS));
                 float nDotL = saturate(dot(normalWS, mainLight.direction));
                 float3 halfVector = SafeNormalize(mainLight.direction + viewWS);
+                float nDotH = saturate(dot(normalWS, halfVector));
+                float nDotV = saturate(dot(normalWS, viewWS));
+                float roughness = saturate(1.0 - _Smoothness);
                 float broadSpecular = pow(
-                    saturate(dot(normalWS, halfVector)),
-                    lerp(5.0, 12.0, _Smoothness));
+                    nDotH,
+                    lerp(3.0, 14.0, _Smoothness));
+                half attenuation = mainLight.distanceAttenuation
+                    * mainLight.shadowAttenuation;
+                half3 ambientIrradiance = SampleSH(normalWS);
+                half3 f0 = lerp(
+                    half3(0.04, 0.04, 0.04),
+                    _BaseColor.rgb,
+                    _Metallic);
+                half3 fresnel = f0 + (1.0 - f0)
+                    * pow(1.0 - nDotV, 5.0);
+                half3 environmentSpecular = GlossyEnvironmentReflection(
+                    reflect(-viewWS, normalWS),
+                    roughness,
+                    1.0);
+                float hemisphere = saturate(normalWS.y * 0.5 + 0.5);
 
-                // A large reflected panel sweeps diagonally over each satin
-                // face. It is intentionally broad enough to read on a phone,
-                // while the normal map keeps the highlight bead-blasted.
-                float2 panelDelta = float2(
-                    (input.positionOS.x + 0.010) / 0.040,
-                    (input.positionOS.z - 0.014) / 0.056);
-                float softPanel = exp2(-dot(panelDelta, panelDelta) * 1.35);
-                float diagonalBand = smoothstep(
-                    -0.65,
-                    0.55,
-                    input.positionOS.z * 24.0 - input.positionOS.x * 15.0);
-                softPanel *= lerp(0.72, 1.0, diagonalBand);
-                float bandCoordinate = input.positionOS.x * 0.80
-                    + input.positionOS.z * 0.30;
-                float reflectedBand = exp2(-pow(
-                    (bandCoordinate + 0.004) / 0.012,
-                    2.0) * 1.55);
-                softPanel = max(softPanel * 0.48, reflectedBand);
-
-                half3 color = _BaseColor.rgb
-                    * (0.54 + nDotL * mainLight.shadowAttenuation * 0.32);
-                color += half3(0.94, 0.84, 0.69) * softPanel * 0.42;
-                color += half3(0.62, 0.70, 0.78) * broadSpecular * 0.11;
+                // Bead-blasted aluminum still reads as a light metal on a dark
+                // product plate. Keep a modest room fill; do not floor SH to a
+                // constant or add a mirror-like environment lobe.
+                half3 color = _BaseColor.rgb * (
+                    0.42
+                    + hemisphere * 0.18
+                    + ambientIrradiance * 0.62);
+                color += _BaseColor.rgb
+                    * mainLight.color
+                    * nDotL
+                    * attenuation
+                    * lerp(1.0, 0.70, _Metallic);
+                color += mainLight.color
+                    * fresnel
+                    * broadSpecular
+                    * attenuation
+                    * lerp(0.10, 0.20, _Metallic)
+                    * (1.0 - roughness * 0.18);
+                color += environmentSpecular
+                    * fresnel
+                    * lerp(0.06, 0.14, _Metallic);
                 return half4(color, 1.0);
             }
             ENDHLSL

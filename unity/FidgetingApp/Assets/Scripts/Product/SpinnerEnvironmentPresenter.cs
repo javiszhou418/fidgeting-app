@@ -286,12 +286,12 @@ namespace FidgetingApp.Product
                 1.08f,
                 0.68f,
                 false,
-                new Color(0.30f, 0.275f, 0.24f),
-                new Color(0.14f, 0.125f, 0.105f),
-                new Color(0.035f, 0.031f, 0.026f),
-                0.82f,
-                0.52f,
-                0.58f,
+                new Color(0.22f, 0.205f, 0.185f),
+                new Color(0.10f, 0.092f, 0.082f),
+                new Color(0.028f, 0.025f, 0.022f),
+                0.28f,
+                0.56f,
+                0.40f,
                 SpinnerGroundingStageShape.SoftSquare,
                 1.40f,
                 0.075f,
@@ -300,11 +300,11 @@ namespace FidgetingApp.Product
                 new SpinnerEnvironmentLightPreset(
                     "LargeSoftKey_UpperLeft",
                     new Color(1.00f, 0.88f, 0.76f),
-                    0.96f),
+                    0.92f),
                 new SpinnerEnvironmentLightPreset(
                     "CoolBroadFill",
                     new Color(0.58f, 0.68f, 0.78f),
-                    0.34f))
+                    0.28f))
         };
 
         public static IReadOnlyList<SpinnerEnvironmentProfile> Profiles => profiles;
@@ -341,6 +341,7 @@ namespace FidgetingApp.Product
     [RequireComponent(typeof(Camera))]
     public sealed class SpinnerEnvironmentPresenter : MonoBehaviour
     {
+        public const float MineralRidgeTextureOffsetY = -0.034f;
         public const string BackgroundObjectName = "SpinnerEnvironmentBackground";
         public const string MidgroundObjectName = "SpinnerEnvironmentMidground";
         public const string DeepStarfieldObjectName = "SpinnerEnvironmentStarsDeep";
@@ -374,6 +375,7 @@ namespace FidgetingApp.Product
         private Material rightForegroundMaterial;
         private Material leftForegroundMaterial;
         private Texture2D backgroundTexture;
+        private Texture2D adaptiveBackgroundTexture;
         private Texture2D rightForegroundTexture;
         private Texture2D leftForegroundTexture;
         private SpinnerEnvironmentProfile currentProfile;
@@ -428,7 +430,7 @@ namespace FidgetingApp.Product
         public SpinnerGroundingStage GroundingStage { get; private set; }
         public SpinnerImageBasedLightingController ImageBasedLighting { get; private set; }
         public string CurrentThemeId => string.IsNullOrEmpty(currentTheme.Id)
-            ? SpinnerEnvironmentThemeCatalog.CanyonId
+            ? SpinnerEnvironmentThemeCatalog.AdaptiveId
             : currentTheme.Id;
         public float FramingVisibility => framingVisibility;
 
@@ -467,7 +469,7 @@ namespace FidgetingApp.Product
             SpinnerEnvironmentThemeCatalog.TryGet(
                 PlayerPrefs.GetString(
                     SpinnerEnvironmentThemeCatalog.PreferenceKey,
-                    SpinnerEnvironmentThemeCatalog.CanyonId),
+                    SpinnerEnvironmentThemeCatalog.AdaptiveId),
                 out SpinnerEnvironmentThemeProfile theme);
             ApplyTheme(theme);
         }
@@ -487,7 +489,9 @@ namespace FidgetingApp.Product
                 targetCamera = GetComponent<Camera>();
             }
             currentTheme = theme;
-            backgroundTexture = Resources.Load<Texture2D>(theme.BackgroundResourcePath);
+            backgroundTexture = theme.ModelReactiveBackdrop
+                ? EnsureAdaptiveBackgroundTexture()
+                : Resources.Load<Texture2D>(theme.BackgroundResourcePath);
             rightForegroundTexture = theme.HasForegroundLayers
                 ? Resources.Load<Texture2D>(theme.RightForegroundResourcePath)
                 : null;
@@ -522,9 +526,15 @@ namespace FidgetingApp.Product
             backgroundRenderer.sharedMaterial = backgroundMaterial;
             ConfigureRendererProperties(
                 backgroundRenderer,
-                ResolveExperienceTint(targetCamera.backgroundColor),
+                theme.CollageMineralPlate
+                    ? Color.white
+                    : ResolveExperienceTint(targetCamera.backgroundColor),
                 ResolveThemeSaturation(currentProfile, theme),
-                false);
+                false,
+                theme.ModelReactiveBackdrop,
+                theme.CollageMineralPlate
+                    ? MineralRidgeTextureOffsetY
+                    : 0f);
             backgroundObject.SetActive(true);
 
             ConfigureMidground(currentProfile, theme, backgroundMaterial);
@@ -545,7 +555,10 @@ namespace FidgetingApp.Product
             ImageBasedLighting.Configure(
                 backgroundTexture,
                 currentProfile,
-                GroundingStage);
+                GroundingStage,
+                theme.ModelReactiveBackdrop
+                    ? $"generated:{theme.Id}:{currentProfile.ModelId}"
+                    : theme.BackgroundResourcePath);
 
             ParallaxController = GetComponent<SpinnerSceneParallaxController>();
             if (ParallaxController == null)
@@ -650,13 +663,38 @@ namespace FidgetingApp.Product
             leftGlowProperties ??= new MaterialPropertyBlock();
             rightGlowProperties ??= new MaterialPropertyBlock();
             backgroundGlowProperties ??= new MaterialPropertyBlock();
-            ConfigureBackgroundSubjectGlow(
-                backgroundRenderer,
-                backgroundGlowProperties,
-                leftGlow,
-                rightGlow,
-                normalizedTilt,
-                modelHoverNormalized);
+            if (currentTheme.ModelReactiveBackdrop)
+            {
+                ConfigureAdaptiveBackgroundGlow(
+                    backgroundRenderer,
+                    backgroundGlowProperties,
+                    leftGlow,
+                    rightGlow,
+                    normalizedTilt,
+                    modelHoverNormalized,
+                    currentProfile.ModelId,
+                    ParallaxController != null
+                        && !ParallaxController.IsLibraryPageEntranceActive
+                        ? ParallaxController.LibraryPageOffset
+                        : 0f);
+            }
+            else if (currentTheme.CollageMineralPlate)
+            {
+                ConfigureMineralContactShadow(
+                    backgroundRenderer,
+                    backgroundGlowProperties,
+                    normalizedTilt);
+            }
+            else
+            {
+                ConfigureBackgroundSubjectGlow(
+                    backgroundRenderer,
+                    backgroundGlowProperties,
+                    leftGlow,
+                    rightGlow,
+                    normalizedTilt,
+                    modelHoverNormalized);
+            }
             ConfigureForegroundGlow(
                 leftForegroundRenderer,
                 leftGlowProperties,
@@ -775,6 +813,7 @@ namespace FidgetingApp.Product
             DestroyRuntimeMaterial(ref nearStarfieldMaterial);
             DestroyRuntimeMaterial(ref rightForegroundMaterial);
             DestroyRuntimeMaterial(ref leftForegroundMaterial);
+            DestroyRuntimeTexture(ref adaptiveBackgroundTexture);
 
             if (backgroundMesh == null)
             {
@@ -881,7 +920,8 @@ namespace FidgetingApp.Product
                 midgroundRenderer,
                 ResolveExperienceTint(targetCamera.backgroundColor),
                 ResolveThemeSaturation(profile, theme),
-                true);
+                true,
+                false);
             midgroundObject.SetActive(true);
         }
 
@@ -893,15 +933,19 @@ namespace FidgetingApp.Product
         {
             EnsureDepthLayerObjects();
 
-            bool hasStarfield = theme.DynamicStarfield
+            bool starfieldRequested = theme.DynamicStarfield;
+            bool hasStarfield = starfieldRequested
                 && starfieldSourceMaterial != null
                 && starfieldSourceMaterial.shader != null;
             if (!hasStarfield)
             {
-                Debug.LogError(
-                    "[FidgetingApp] Environment starfield material is unavailable: "
-                    + SpinnerEnvironmentCatalog.StarfieldMaterialResourcePath
-                    + ". Continuing with canyon foregrounds and no stars.");
+                if (starfieldRequested)
+                {
+                    Debug.LogError(
+                        "[FidgetingApp] Environment starfield material is unavailable: "
+                        + SpinnerEnvironmentCatalog.StarfieldMaterialResourcePath
+                        + ". Continuing with canyon foregrounds and no stars.");
+                }
                 DestroyRuntimeMaterial(ref deepStarfieldMaterial);
                 DestroyRuntimeMaterial(ref nearStarfieldMaterial);
                 deepStarfieldObject.SetActive(false);
@@ -1176,23 +1220,204 @@ namespace FidgetingApp.Product
             renderer.SetPropertyBlock(properties);
         }
 
+        private static void ConfigureMineralContactShadow(
+            MeshRenderer renderer,
+            MaterialPropertyBlock properties,
+            Vector2 normalizedTilt)
+        {
+            if (renderer == null)
+            {
+                return;
+            }
+
+            renderer.GetPropertyBlock(properties);
+            properties.SetFloat("_GlowEnabled", 0f);
+            properties.SetFloat("_GlowIntensity", 0f);
+            properties.SetFloat("_ShadowEnabled", 1f);
+            properties.SetVector(
+                "_ShadowCenter",
+                new Vector4(
+                    0.50f + normalizedTilt.x * 0.012f,
+                    0.445f + normalizedTilt.y * 0.004f,
+                    0f,
+                    0f));
+            properties.SetVector(
+                "_ShadowScale",
+                new Vector4(0.72f, 10.5f, 0f, 0f));
+            properties.SetFloat("_ShadowRadius", 0.10f);
+            properties.SetFloat("_ShadowStrength", 0.42f);
+            renderer.SetPropertyBlock(properties);
+        }
+
+        private static void ConfigureAdaptiveBackgroundGlow(
+            MeshRenderer renderer,
+            MaterialPropertyBlock properties,
+            Color leftColor,
+            Color rightColor,
+            Vector2 normalizedTilt,
+            float hoverNormalized,
+            string currentModelId,
+            float signedPageOffset)
+        {
+            if (renderer == null)
+            {
+                return;
+            }
+
+            SpinnerAdaptiveBackdropTransition transition =
+                SpinnerAdaptiveBackdropRules.Resolve(
+                    currentModelId,
+                    signedPageOffset);
+            Color measuredCurrent = Color.Lerp(leftColor, rightColor, 0.5f);
+            Color outgoing = SpinnerAdaptiveBackdropRules.Restrain(
+                Color.Lerp(
+                    transition.OutgoingColor,
+                    measuredCurrent,
+                    0.18f));
+
+            renderer.GetPropertyBlock(properties);
+            properties.SetFloat("_GlowEnabled", 1f);
+            properties.SetColor(
+                "_GlowColorA",
+                outgoing.linear * transition.OutgoingWeight);
+            properties.SetColor(
+                "_GlowColorB",
+                transition.IncomingColor.linear * transition.IncomingWeight);
+            properties.SetVector(
+                "_GlowCenterA",
+                new Vector4(
+                    transition.OutgoingCenterX + normalizedTilt.x * 0.018f,
+                    SpinnerAdaptiveBackdropRules.GlowCenterY
+                        + normalizedTilt.y * 0.016f,
+                    0f,
+                    0f));
+            properties.SetVector(
+                "_GlowCenterB",
+                new Vector4(
+                    transition.IncomingCenterX - normalizedTilt.x * 0.010f,
+                    SpinnerAdaptiveBackdropRules.GlowCenterY - 0.08f
+                        + normalizedTilt.y * 0.010f,
+                    0f,
+                    0f));
+            properties.SetVector(
+                "_GlowScaleA",
+                new Vector4(0.72f, 0.94f, 0f, 0f));
+            properties.SetVector(
+                "_GlowScaleB",
+                new Vector4(0.68f, 1.08f, 0f, 0f));
+            properties.SetFloat(
+                "_GlowRadius",
+                SpinnerAdaptiveBackdropRules.GlowRadius);
+            properties.SetFloat(
+                "_GlowIntensity",
+                SpinnerAdaptiveBackdropRules.GlowIntensity);
+            properties.SetFloat(
+                "_TopLightBottomBrightness",
+                SpinnerAdaptiveBackdropRules.TopLightBottomBrightness);
+            properties.SetFloat(
+                "_TopLightBottomSaturation",
+                SpinnerAdaptiveBackdropRules.TopLightBottomSaturation);
+            properties.SetFloat(
+                "_TopLightFalloff",
+                SpinnerAdaptiveBackdropRules.TopLightFalloff);
+            properties.SetFloat("_ShadowEnabled", 1f);
+            properties.SetVector(
+                "_ShadowCenter",
+                new Vector4(
+                    0.50f + normalizedTilt.x * 0.022f,
+                    0.325f + normalizedTilt.y * 0.006f,
+                    0f,
+                    0f));
+            properties.SetVector(
+                "_ShadowScale",
+                new Vector4(
+                    Mathf.Lerp(0.70f, 0.62f, hoverNormalized),
+                    Mathf.Lerp(8.4f, 6.6f, hoverNormalized),
+                    0f,
+                    0f));
+            properties.SetFloat(
+                "_ShadowRadius",
+                Mathf.Lerp(0.19f, 0.23f, hoverNormalized));
+            properties.SetFloat(
+                "_ShadowStrength",
+                Mathf.Lerp(0.46f, 0.26f, hoverNormalized));
+            renderer.SetPropertyBlock(properties);
+        }
+
+        private Texture2D EnsureAdaptiveBackgroundTexture()
+        {
+            if (adaptiveBackgroundTexture != null)
+            {
+                return adaptiveBackgroundTexture;
+            }
+
+            adaptiveBackgroundTexture = new Texture2D(
+                2,
+                2,
+                TextureFormat.RGB24,
+                false,
+                true)
+            {
+                name = "adaptive-dark-neutral-runtime",
+                filterMode = FilterMode.Bilinear,
+                wrapMode = TextureWrapMode.Clamp,
+                hideFlags = HideFlags.DontSave
+            };
+            Color bottom = new Color(0.006f, 0.007f, 0.009f, 1f);
+            Color top = new Color(0.022f, 0.024f, 0.029f, 1f);
+            adaptiveBackgroundTexture.SetPixels(new[]
+            {
+                bottom,
+                bottom,
+                top,
+                top
+            });
+            adaptiveBackgroundTexture.Apply(false, true);
+            return adaptiveBackgroundTexture;
+        }
+
         private void ConfigureRendererProperties(
             MeshRenderer renderer,
             Color tint,
             float saturation,
-            bool midgroundMask)
+            bool midgroundMask,
+            bool adaptiveSurface,
+            float textureOffsetY = 0f)
         {
             var properties = new MaterialPropertyBlock();
             properties.SetTexture("_BaseMap", backgroundTexture);
             properties.SetTexture("_MainTex", backgroundTexture);
+            properties.SetVector(
+                "_BaseMap_ST",
+                new Vector4(1f, 1f, 0f, textureOffsetY));
             properties.SetColor("_BaseColor", tint);
             properties.SetFloat("_Saturation", saturation);
             properties.SetFloat("_LayerMask", midgroundMask ? 1f : 0f);
+            properties.SetFloat("_AdaptiveSurface", adaptiveSurface ? 1f : 0f);
+            properties.SetColor(
+                "_AdaptiveBaseTop",
+                new Color(0.024f, 0.026f, 0.031f, 1f));
+            properties.SetColor(
+                "_AdaptiveBaseBottom",
+                new Color(0.004f, 0.005f, 0.008f, 1f));
+            properties.SetFloat(
+                "_AdaptiveGrain",
+                adaptiveSurface ? SpinnerAdaptiveBackdropRules.GrainIntensity : 0f);
+            properties.SetFloat("_AdaptiveVignette", adaptiveSurface ? 0.18f : 0f);
             properties.SetFloat("_LayerMaskStart", 0.38f);
             properties.SetFloat("_LayerMaskFeather", 0.10f);
             properties.SetFloat("_GlowEnabled", midgroundMask ? 0f : 1f);
             properties.SetFloat("_GlowRadius", 0.24f);
             properties.SetFloat("_GlowIntensity", 0f);
+            properties.SetFloat(
+                "_TopLightBottomBrightness",
+                SpinnerAdaptiveBackdropRules.TopLightBottomBrightness);
+            properties.SetFloat(
+                "_TopLightBottomSaturation",
+                SpinnerAdaptiveBackdropRules.TopLightBottomSaturation);
+            properties.SetFloat(
+                "_TopLightFalloff",
+                SpinnerAdaptiveBackdropRules.TopLightFalloff);
             properties.SetFloat("_ShadowEnabled", 0f);
             properties.SetVector("_ShadowScale", new Vector4(0.82f, 11f, 0f, 0f));
             properties.SetFloat("_ShadowRadius", 0.20f);
@@ -1628,6 +1853,24 @@ namespace FidgetingApp.Product
                 DestroyImmediate(material);
             }
             material = null;
+        }
+
+        private static void DestroyRuntimeTexture(ref Texture2D texture)
+        {
+            if (texture == null)
+            {
+                return;
+            }
+
+            if (Application.isPlaying)
+            {
+                Destroy(texture);
+            }
+            else
+            {
+                DestroyImmediate(texture);
+            }
+            texture = null;
         }
     }
 }

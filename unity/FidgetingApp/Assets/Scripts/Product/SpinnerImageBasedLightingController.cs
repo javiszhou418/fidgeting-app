@@ -56,6 +56,13 @@ namespace FidgetingApp.Product
         public const float MagneticSlideSoftboxHorizontalEdge = 0.88f;
         public const float MagneticSlideSoftboxVerticalCore = 0.18f;
         public const float MagneticSlideSoftboxVerticalEdge = 0.78f;
+        public const float FanCardSoftboxIntensity = 0.22f;
+        public const float FanCardReflectionBaseScale = 0.92f;
+        public const float FanCardOpposingStripIntensity = 0.10f;
+        public const float FanCardSoftboxHorizontalCore = 0.22f;
+        public const float FanCardSoftboxHorizontalEdge = 0.88f;
+        public const float FanCardSoftboxVerticalCore = 0.18f;
+        public const float FanCardSoftboxVerticalEdge = 0.78f;
         public const float SoftAmbientScale = 0.42f;
         public const float SoftDirectLightScale = 0.36f;
         public const float SoftReflectionIntensityScale = 0.35f;
@@ -114,7 +121,8 @@ namespace FidgetingApp.Product
         public void Configure(
             Texture background,
             SpinnerEnvironmentProfile profile,
-            SpinnerGroundingStage groundingStage)
+            SpinnerGroundingStage groundingStage,
+            string backgroundCacheKey = null)
         {
             softSpinnerLightingActive = UsesSoftSpinnerLighting(profile.ModelId);
             softSpinnerLightTrim = ResolveSoftSpinnerLightTrim(profile.ModelId);
@@ -130,7 +138,9 @@ namespace FidgetingApp.Product
 
             CurrentPalette = TryResolvePalette(
                     background,
-                    profile.BackgroundResourcePath,
+                    string.IsNullOrEmpty(backgroundCacheKey)
+                        ? profile.BackgroundResourcePath
+                        : backgroundCacheKey,
                     out SpinnerEnvironmentPalette sampled)
                 ? StabilizePalette(sampled, fallback)
                 : fallback;
@@ -528,25 +538,39 @@ namespace FidgetingApp.Product
             bool useBroadMetalSoftboxes = isFanCard || isMagneticSlide;
             float reflectionBaseScale = isMagneticSlide
                 ? MagneticSlideReflectionBaseScale
-                : 1.28f;
+                : isFanCard
+                    ? FanCardReflectionBaseScale
+                    : 1.28f;
             float broadPanelIntensity = isMagneticSlide
                 ? MagneticSlideSoftboxIntensity
-                : 0.86f;
+                : isFanCard
+                    ? FanCardSoftboxIntensity
+                    : 0.86f;
             float opposingStripIntensity = isMagneticSlide
                 ? MagneticSlideOpposingStripIntensity
-                : 0.24f;
+                : isFanCard
+                    ? FanCardOpposingStripIntensity
+                    : 0.24f;
             float panelHorizontalCore = isMagneticSlide
                 ? MagneticSlideSoftboxHorizontalCore
-                : 0.28f;
+                : isFanCard
+                    ? FanCardSoftboxHorizontalCore
+                    : 0.28f;
             float panelHorizontalEdge = isMagneticSlide
                 ? MagneticSlideSoftboxHorizontalEdge
-                : 0.56f;
+                : isFanCard
+                    ? FanCardSoftboxHorizontalEdge
+                    : 0.56f;
             float panelVerticalCore = isMagneticSlide
                 ? MagneticSlideSoftboxVerticalCore
-                : 0.20f;
+                : isFanCard
+                    ? FanCardSoftboxVerticalCore
+                    : 0.20f;
             float panelVerticalEdge = isMagneticSlide
                 ? MagneticSlideSoftboxVerticalEdge
-                : 0.48f;
+                : isFanCard
+                    ? FanCardSoftboxVerticalEdge
+                    : 0.48f;
             TextureFormat format = SystemInfo.SupportsTextureFormat(TextureFormat.RGBAHalf)
                 ? TextureFormat.RGBAHalf
                 : TextureFormat.RGBA32;
@@ -622,9 +646,9 @@ namespace FidgetingApp.Product
             if (useBroadMetalSoftboxes)
             {
                 // Chrome only reads as chrome when it reflects shapes, not
-                // point-like lamps. The polished fan-card and magnetic slide
-                // therefore receive a broad upper-left studio panel plus a
-                // dimmer opposing strip.
+                // point-like lamps. Magnetic slide keeps a readable panel.
+                // The bead-blasted fan card uses the same shape at much
+                // lower energy so faces do not read as digital studio metal.
                 // This remains environment lighting: no geometry, mechanics,
                 // or product interaction state is touched.
                 Vector3 panelForward = keyDirection;

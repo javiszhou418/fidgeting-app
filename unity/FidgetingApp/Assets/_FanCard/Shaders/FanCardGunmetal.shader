@@ -5,7 +5,7 @@ Shader "FidgetingApp/FanCardGunmetal"
         _BaseMap("Bead Grain", 2D) = "white" {}
         _BaseColor("Gunmetal", Color) = (0.155, 0.163, 0.172, 1)
         _Metallic("Metallic", Range(0, 1)) = 0.90
-        _Smoothness("Smoothness", Range(0, 1)) = 0.30
+        _Smoothness("Smoothness", Range(0, 1)) = 0.28
         [Normal] _BumpMap("Bead Normal", 2D) = "bump" {}
         _BumpScale("Bead Strength", Range(0, 1)) = 0.11
     }
@@ -95,44 +95,57 @@ Shader "FidgetingApp/FanCardGunmetal"
                     + input.bitangentWS * tangentNormal.y
                     + input.normalWS * tangentNormal.z);
                 float3 viewWS = SafeNormalize(GetWorldSpaceViewDir(input.positionWS));
-                float4 shadowCoord = TransformWorldToShadowCoord(input.positionWS);
-                Light mainLight = GetMainLight(shadowCoord);
+                Light mainLight = GetMainLight(
+                    TransformWorldToShadowCoord(input.positionWS));
                 float3 halfVector = SafeNormalize(mainLight.direction + viewWS);
                 float nDotL = saturate(dot(normalWS, mainLight.direction));
                 float nDotH = saturate(dot(normalWS, halfVector));
+                float nDotV = saturate(dot(normalWS, viewWS));
+                float roughness = saturate(1.0 - _Smoothness);
                 float grain = SAMPLE_TEXTURE2D(
                     _BaseMap,
                     sampler_BaseMap,
                     input.baseUv).r;
-
-                // Bead-blasted gunmetal carries a wide, low-energy sheen. The
-                // side-wall lift is stronger than the face response so a real
-                // machined section remains readable in a small phone view.
-                float hemisphere = saturate(normalWS.y * 0.5 + 0.5);
-                float diffuseLevel = 0.42
-                    + hemisphere * 0.18
-                    + nDotL * mainLight.shadowAttenuation * 0.30;
-                float broadSheen = pow(nDotH, lerp(3.0, 8.0, _Smoothness))
-                    * lerp(0.075, 0.14, _Metallic);
-                float rim = pow(1.0 - saturate(dot(normalWS, viewWS)), 3.5)
-                    * 0.072;
-                float3 reflectionWS = reflect(-viewWS, normalWS);
-                float3 studioForward = normalize(float3(-0.42, 0.78, -0.47));
-                float studioSheen = smoothstep(
-                    0.24,
-                    0.80,
-                    saturate(dot(reflectionWS, studioForward)));
-                float sideWall = 1.0 - saturate(abs(normalWS.y));
-                half3 color = _BaseColor.rgb
+                half attenuation = mainLight.distanceAttenuation
+                    * mainLight.shadowAttenuation;
+                half3 albedo = _BaseColor.rgb
                     * lerp(
-                        0.82,
-                        1.14,
-                        saturate((grain - 0.84) / 0.16))
-                    * diffuseLevel;
-                color += half3(0.16, 0.175, 0.19) * broadSheen;
-                color += half3(0.10, 0.115, 0.13) * rim;
-                color += half3(0.26, 0.245, 0.225) * studioSheen * 0.16;
-                color += half3(0.18, 0.195, 0.215) * sideWall * 0.58;
+                        0.92,
+                        1.06,
+                        saturate((grain - 0.84) / 0.16));
+                half3 ambientIrradiance = SampleSH(normalWS);
+                half3 f0 = lerp(
+                    half3(0.04, 0.04, 0.04),
+                    albedo,
+                    _Metallic);
+                half3 fresnel = f0 + (1.0 - f0)
+                    * pow(1.0 - nDotV, 5.0);
+                float broadSheen = pow(
+                    nDotH,
+                    lerp(3.0, 10.0, _Smoothness));
+                half3 environmentSpecular = GlossyEnvironmentReflection(
+                    reflect(-viewWS, normalWS),
+                    roughness,
+                    1.0);
+
+                float hemisphere = saturate(normalWS.y * 0.5 + 0.5);
+                half3 color = albedo * (
+                    0.14
+                    + hemisphere * 0.10
+                    + ambientIrradiance * lerp(1.0, 0.28, _Metallic));
+                color += albedo
+                    * mainLight.color
+                    * nDotL
+                    * attenuation
+                    * lerp(1.0, 0.32, _Metallic);
+                color += mainLight.color
+                    * fresnel
+                    * broadSheen
+                    * attenuation
+                    * lerp(0.06, 0.14, _Metallic);
+                color += environmentSpecular
+                    * fresnel
+                    * lerp(0.04, 0.08, _Metallic);
                 return half4(color, 1.0);
             }
             ENDHLSL

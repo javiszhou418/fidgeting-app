@@ -3,7 +3,7 @@ Shader "FidgetingApp/FanCardChrome"
     Properties
     {
         _BaseColor("Chrome Tint", Color) = (0.93, 0.95, 0.98, 1)
-        _Smoothness("Smoothness", Range(0, 1)) = 0.92
+        _Smoothness("Smoothness", Range(0, 1)) = 0.78
     }
 
     SubShader
@@ -29,6 +29,7 @@ Shader "FidgetingApp/FanCardChrome"
             #pragma target 3.0
 
             #include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Core.hlsl"
+            #include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Lighting.hlsl"
 
             CBUFFER_START(UnityPerMaterial)
                 half4 _BaseColor;
@@ -62,11 +63,11 @@ Shader "FidgetingApp/FanCardChrome"
                 float3 normalWS = normalize(input.normalWS);
                 float3 viewWS = SafeNormalize(GetWorldSpaceViewDir(input.positionWS));
                 float3 reflectionWS = reflect(-viewWS, normalWS);
+                Light mainLight = GetMainLight();
+                float3 halfVector = SafeNormalize(mainLight.direction + viewWS);
+                float nDotH = saturate(dot(normalWS, halfVector));
+                float spec = pow(nDotH, lerp(24.0, 72.0, _Smoothness));
 
-                // A fixed studio softbox is encoded procedurally so the small
-                // axis ball keeps a readable chrome value on mobile without a
-                // high-resolution reflection probe. The lower hemisphere stays
-                // dark while the upper-left panel produces one broad highlight.
                 float3 panelForward = normalize(float3(-0.34, 0.82, -0.46));
                 float3 panelRight = normalize(cross(float3(0.0, 1.0, 0.0), panelForward));
                 float3 panelUp = normalize(cross(panelForward, panelRight));
@@ -94,12 +95,13 @@ Shader "FidgetingApp/FanCardChrome"
                     lerp(3.2, 5.2, _Smoothness));
 
                 half3 chrome = lerp(
-                    half3(0.035, 0.042, 0.050),
-                    half3(0.28, 0.31, 0.35) * _BaseColor.rgb,
+                    half3(0.045, 0.050, 0.056),
+                    half3(0.22, 0.24, 0.27) * _BaseColor.rgb,
                     vertical);
-                chrome += half3(1.0, 0.97, 0.92) * softbox * 0.94;
-                chrome += half3(0.30, 0.48, 0.68) * coolStrip * 0.20;
-                chrome += fresnel * half3(0.18, 0.20, 0.23);
+                chrome += half3(0.92, 0.90, 0.86) * softbox * 0.42;
+                chrome += half3(0.28, 0.40, 0.52) * coolStrip * 0.10;
+                chrome += mainLight.color * spec * 0.18;
+                chrome += fresnel * half3(0.10, 0.11, 0.13);
                 return half4(chrome, 1.0);
             }
             ENDHLSL
