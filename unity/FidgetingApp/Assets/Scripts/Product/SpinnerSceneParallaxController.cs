@@ -48,11 +48,13 @@ namespace FidgetingApp.Product
         private float baselineAspect;
         private bool hasBaselineProjection;
         private bool libraryPreviewActive;
+        private bool libraryPageEntranceActive;
         private float libraryPageOffset;
         private float targetLibraryPageOffset;
 
         public Vector2 FilteredTilt => filteredTilt;
         public float LibraryPageOffset => libraryPageOffset;
+        public bool IsLibraryPageEntranceActive => libraryPageEntranceActive;
 
         public void Configure(SpinnerEnvironmentPresenter presenter)
         {
@@ -105,6 +107,11 @@ namespace FidgetingApp.Product
             if (Mathf.Abs(libraryPageOffset - targetLibraryPageOffset) < 0.001f)
             {
                 libraryPageOffset = targetLibraryPageOffset;
+                if (libraryPageEntranceActive
+                    && Mathf.Approximately(targetLibraryPageOffset, 0f))
+                {
+                    libraryPageEntranceActive = false;
+                }
             }
 
             float hoverPixels = ResolveLibraryHoverPixels(
@@ -221,6 +228,7 @@ namespace FidgetingApp.Product
                 Time.unscaledTime,
                 0f,
                 0f);
+            libraryPageEntranceActive = false;
         }
 
         public void SetLibraryPreviewActive(bool active, bool immediate = false)
@@ -229,6 +237,7 @@ namespace FidgetingApp.Product
             if (!active)
             {
                 targetLibraryPageOffset = 0f;
+                libraryPageEntranceActive = false;
             }
             if (immediate)
             {
@@ -243,12 +252,14 @@ namespace FidgetingApp.Product
                 return;
             }
 
+            libraryPageEntranceActive = false;
             targetLibraryPageOffset = Mathf.Sign(direction);
         }
 
         public void BeginLibraryPageEntrance(float direction)
         {
             libraryPreviewActive = true;
+            libraryPageEntranceActive = true;
             libraryPageOffset = Mathf.Sign(direction);
             targetLibraryPageOffset = 0f;
         }
@@ -264,6 +275,7 @@ namespace FidgetingApp.Product
             // immediately so the Unity model follows the finger before the
             // SwiftUI TabView commits its new selection.
             float clamped = Mathf.Clamp(normalizedOffset, -1f, 1f);
+            libraryPageEntranceActive = false;
             libraryPageOffset = clamped;
             targetLibraryPageOffset = clamped;
         }
@@ -275,13 +287,17 @@ namespace FidgetingApp.Product
                 return;
             }
 
+            libraryPageEntranceActive = false;
             targetLibraryPageOffset = 0f;
         }
 
 #if UNITY_EDITOR
-        public void SetLibraryPageOffsetForPreview(float normalizedOffset)
+        public void SetLibraryPageOffsetForPreview(
+            float normalizedOffset,
+            bool entrance = false)
         {
             libraryPreviewActive = true;
+            libraryPageEntranceActive = entrance;
             libraryPageOffset = Mathf.Clamp(normalizedOffset, -1f, 1f);
             targetLibraryPageOffset = libraryPageOffset;
             ApplyProjectionOffset(
