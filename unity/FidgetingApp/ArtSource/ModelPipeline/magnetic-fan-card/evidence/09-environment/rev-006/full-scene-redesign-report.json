@@ -1,0 +1,32 @@
+{
+  "productGeometryModified": false,
+  "camera": {
+    "lensMm": 80,
+    "elevationDegrees": 32,
+    "distanceScale": 0.91,
+    "shiftX": -0.19,
+    "fStop": 3.8
+  },
+  "routes": {
+    "A-golden-lounge": "reference-A bias: architecture, cards, droplets",
+    "B-card-rain": "vertical card motion and stronger volume",
+    "C-high-stakes-vortex": "reference-B bias: chips and spiral energy"
+  },
+  "renderer": {
+    "backend": "Cycles",
+    "device": "Apple M4 Max (GPU - 40 cores)"
+  },
+  "samples": 96,
+  "outputs": {
+    "A-golden-lounge": "A-golden-lounge.png",
+    "B-card-rain": "B-card-rain.png",
+    "C-high-stakes-vortex": "C-high-stakes-vortex.png"
+  },
+  "culledProductOverlapFx": {
+    "A-golden-lounge": 16,
+    "B-card-rain": 25,
+    "C-high-stakes-vortex": 62
+  },
+  "screenSpaceParticles": 0,
+  "shippingIntegrated": false
+}

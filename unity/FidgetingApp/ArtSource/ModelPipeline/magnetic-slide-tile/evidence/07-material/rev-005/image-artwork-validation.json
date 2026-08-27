@@ -1,0 +1,86 @@
+{
+  "schemaVersion": 1,
+  "gate": "07-material",
+  "materialRevision": 5,
+  "target": {
+    "sourceHueSignedMedianDegrees": -9.261,
+    "sourceCorrectedSrgbRange": {
+      "p10": [
+        54.89,
+        0,
+        10.39
+      ],
+      "median": [
+        96.07,
+        10.81,
+        22.86
+      ],
+      "p90": [
+        135.28,
+        21.63,
+        38.44
+      ]
+    },
+    "shaderTargetLinearRgb": [
+      0.22,
+      0.008,
+      0.018
+    ]
+  },
+  "frontBloodRed": {
+    "selectedPixels": 192493,
+    "signedHueMedianDegrees": -10.7812,
+    "saturationMedian": 0.9726,
+    "valueMedian": 0.4941,
+    "pinkFraction": 3.1e-05,
+    "bloodRedFraction": 0.972155,
+    "clippingAbove250Fraction": 4.126e-05,
+    "hard255Fraction": 0.0
+  },
+  "crystalHighlight": {
+    "neutral": {
+      "above220Fraction": 0.00070556,
+      "above240Fraction": 0.00015069,
+      "maxLuma": 254.5748
+    },
+    "secondDiagnosticLight": {
+      "above220Fraction": 0.00470764,
+      "above240Fraction": 0.00385903,
+      "maxLuma": 254.5748
+    }
+  },
+  "sideReflection": {
+    "maximumReflectionSpanPx": 648,
+    "maximumReflectionSpanFraction": 0.462857,
+    "brightNeutralPixels": 5365,
+    "metalCrystalBoundaryRowsDetected": 10
+  },
+  "lowerArtwork": {
+    "roiPx": [
+      624,
+      588
+    ],
+    "redSurfaceFraction": 0.317766,
+    "darkPatternFraction": 0.406544,
+    "visiblePatternContrast": 0.72431
+  },
+  "checks": {
+    "bloodRedTargetDistance": true,
+    "pinkSuppressed": true,
+    "bloodRedDominant": true,
+    "noMeaningfulClipping": true,
+    "noEmission": true,
+    "secondLightShowsCrystalResponse": true,
+    "sideReflectionVisible": true,
+    "lowerPatternVisible": true,
+    "editableSlotsIndependent": true,
+    "lowerOcclusionDeclared": true,
+    "sourceClassesDistinct": true,
+    "exactProductFirst": true,
+    "reconstructionOnlyInsideOcclusion": true,
+    "directAndReconstructionDisjoint": true,
+    "supplementalOfficialAndSeparate": true,
+    "regionConfidenceExplained": true
+  },
+  "pass": true
+}

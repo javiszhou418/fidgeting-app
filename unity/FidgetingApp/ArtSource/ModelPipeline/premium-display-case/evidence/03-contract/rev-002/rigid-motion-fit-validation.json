@@ -1,0 +1,95 @@
+{
+  "schema": "premium-display-case-gate03-rigid-motion-fit-validation.v1",
+  "modelId": "premium-display-case",
+  "gate": "03-contract",
+  "contractRevision": 2,
+  "status": "pass",
+  "checks": {
+    "sourceHashesPresent": true,
+    "nineRiveSamplesFit": true,
+    "allPoseValuesFinite": true,
+    "quaternionsNormalized": true,
+    "uniformScaleLocked": true,
+    "positiveCameraDepth": true,
+    "residualsFiniteAndReported": true,
+    "nonExactFitDeclared": true,
+    "clippedSamplesDeclared": true,
+    "compositeRotationPresent": true,
+    "axisOverclaimAbsent": true,
+    "riveDeformationExcludedFromTarget": true,
+    "wholeCaseNoExplode": true,
+    "durationExact": true,
+    "timeScaleOnly": true,
+    "allActiveClaimsConsumed": true,
+    "gate04Blocked": true,
+    "toyOutOfScope": true,
+    "largeTypePreview": true,
+    "imagesNonBlank": true
+  },
+  "metrics": {
+    "meanReprojectionResidualPixels": 6.780574,
+    "rmseReprojectionResidualPixels": 11.241096,
+    "maximumReprojectionResidualPixels": 38.343513,
+    "unclippedMeanReprojectionResidualPixels": 2.938339,
+    "unclippedMaximumReprojectionResidualPixels": 8.840549,
+    "diagnosticVerticalFovDegrees": 71.75,
+    "totalDurationSeconds": 4.520833,
+    "activeGate02ClaimCount": 11
+  },
+  "imageReports": {
+    "unity/FidgetingApp/ArtSource/ModelPipeline/premium-display-case/evidence/03-contract/rev-002/contract-preview.png": {
+      "width": 3200,
+      "height": 4300,
+      "meanRgb": [
+        22.393495,
+        32.57965,
+        40.126341
+      ],
+      "channelRanges": [
+        248,
+        236,
+        241
+      ],
+      "nonBlank": true
+    },
+    "unity/FidgetingApp/ArtSource/ModelPipeline/premium-display-case/evidence/03-contract/rev-002/rigid-pose-contact-sheet.png": {
+      "width": 3000,
+      "height": 4050,
+      "meanRgb": [
+        15.327006,
+        22.697026,
+        28.005297
+      ],
+      "channelRanges": [
+        255,
+        246,
+        248
+      ],
+      "nonBlank": true
+    },
+    "unity/FidgetingApp/ArtSource/ModelPipeline/premium-display-case/evidence/03-contract/rev-002/rigid-motion-curves.png": {
+      "width": 2600,
+      "height": 2100,
+      "meanRgb": [
+        24.854451,
+        38.458287,
+        47.105123
+      ],
+      "channelRanges": [
+        247,
+        235,
+        239
+      ],
+      "nonBlank": true
+    }
+  },
+  "truth": {
+    "bestFitNotExact": true,
+    "wholeCaseOnly": true,
+    "explode": false,
+    "meshDeformationTarget": false,
+    "shippingUnityChanged": false,
+    "blenderGeometryOrMaterialChanged": false,
+    "buildInstallPhonePush": false
+  }
+}

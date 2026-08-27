@@ -1,0 +1,105 @@
+{
+  "schemaVersion": 1,
+  "modelId": "premium-display-case",
+  "gate": "06-geometry",
+  "geometryRevision": 3,
+  "status": "pass",
+  "checks": {
+    "geometryReportPassed": true,
+    "allGeometryChecksPassed": true,
+    "approvedGate05SourceDigest": true,
+    "stableDerivativeDigest": true,
+    "vertexPositionsStable": true,
+    "silhouetteStable": true,
+    "sixOrthographicViews": true,
+    "standardViewCaptureVerified": true,
+    "workbenchPresent": true,
+    "dimensionOverlayPresent": true,
+    "pivotOverlayPresent": true,
+    "primaryBoardPresent": true,
+    "interactiveReviewPassed": true,
+    "boundsExact": true,
+    "labelAndCornersExact": true,
+    "closedManifold": true,
+    "noSelfIntersectionOrDegenerates": true,
+    "positiveSignedVolumesAndNormals": true,
+    "closedTubeConnected": true,
+    "presentationOwnershipRigid": true,
+    "reviewArtifactsWholeCaseOnly": true,
+    "internalExplodedEvidenceOnly": true,
+    "scopeBoundariesPreserved": true
+  },
+  "metrics": {
+    "orthographicViewCount": 6,
+    "reviewArtifactExplodedPartCount": 0,
+    "openBoundaryEdgeCount": 0,
+    "nonManifoldEdgeCount": 0,
+    "selfIntersectionPairCount": 0,
+    "degenerateElementCount": 0,
+    "tubeSignedVolumeMm3": 52932.982745,
+    "geometryDigest": "a3d1e9fe3c6d26c957c7ad1584cc489b9091a1a79e435a660aa89bcf6acc3951",
+    "vertexPositionDigest": "ced0edf95f8fa6416c5a0e33ebf8dc99fdafcdb3beceac85ee2970bbb2a7682c",
+    "silhouetteDigest": "81615c0e5afd59b634dfa2e85040b31b30b9d5ef0ddc9e12462f1b3d1c59f6b4"
+  },
+  "imageSizes": {
+    "geometry-presentation-review.png": [
+      3000,
+      2000
+    ],
+    "geometry-workbench.png": [
+      1600,
+      1400
+    ],
+    "dimension-overlay.png": [
+      1800,
+      1200
+    ],
+    "pivot-presentation-root-overlay.png": [
+      1800,
+      1200
+    ],
+    "ortho-front.png": [
+      1000,
+      1000
+    ],
+    "ortho-back.png": [
+      1000,
+      1000
+    ],
+    "ortho-top.png": [
+      1000,
+      1000
+    ],
+    "ortho-bottom.png": [
+      1000,
+      1000
+    ],
+    "ortho-left.png": [
+      1000,
+      1000
+    ],
+    "ortho-right.png": [
+      1000,
+      1000
+    ]
+  },
+  "reviewArtifactFiles": [
+    "premium-display-case-gate06-review-r003.glb",
+    "geometry-presentation-review.png",
+    "geometry-workbench.png",
+    "dimension-overlay.png",
+    "pivot-presentation-root-overlay.png",
+    "ortho-front.png",
+    "ortho-back.png",
+    "ortho-top.png",
+    "ortho-bottom.png",
+    "ortho-left.png",
+    "ortho-right.png"
+  ],
+  "internalTechnicalArtifactIds": [
+    "premium-display-case-geometry-exploded-r002"
+  ],
+  "shippingUnityChanged": false,
+  "buildInstallPhonePush": false,
+  "gate07Status": "blocked"
+}

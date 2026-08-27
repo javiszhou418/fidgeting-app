@@ -1,0 +1,27 @@
+{
+  "cli_anything": {
+    "installed": true,
+    "preview_available": false,
+    "path": "/Users/jiawei.zhou/.local/bin/cli-anything-blender",
+    "help_returncode": 0,
+    "preview_returncode": 2
+  },
+  "capture_backend": "blender-bpy-fallback",
+  "blender": "/opt/homebrew/bin/blender",
+  "command": [
+    "/opt/homebrew/bin/blender",
+    "--background",
+    "/Users/jiawei.zhou/Documents/Fidgeting app/unity/FidgetingApp/ArtSource/ModelPipeline/premium-display-case/evidence/05-blockout/rev-001/premium-display-case-blockout.blend",
+    "--python",
+    "/Users/jiawei.zhou/Documents/Fidgeting app/skills/fidgeting-model-pipeline/scripts/blender_capture_standard_views.py",
+    "--",
+    "--output",
+    "/Users/jiawei.zhou/Documents/Fidgeting app/unity/FidgetingApp/ArtSource/ModelPipeline/premium-display-case/evidence/05-blockout/rev-001/fixed-views",
+    "--run-id",
+    "1fec0fb4-7a0a-4fe9-b74c-d8e77e12ec70"
+  ],
+  "blender_returncode": 0,
+  "verified_capture": true,
+  "missing_views": [],
+  "run_id": "1fec0fb4-7a0a-4fe9-b74c-d8e77e12ec70"
+}

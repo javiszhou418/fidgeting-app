@@ -1,0 +1,63 @@
+{
+  "schemaVersion": 1,
+  "modelId": "magnetic-fan-card",
+  "contractRevision": 7,
+  "status": "locked-by-user-topology-selection",
+  "sourceClaimIds": [
+    "fan-analysis-claim-shared-camera",
+    "fan-analysis-claim-real-contact",
+    "fan-analysis-claim-light-field",
+    "fan-analysis-claim-material-zones",
+    "fan-analysis-claim-three-support-variants"
+  ],
+  "geometry": {
+    "cardMm": [63.5, 88.9, 3.5],
+    "cornerRadiusMm": 9.5,
+    "visualCornerSegmentsPerQuadrant": 72,
+    "previousBlenderCornerSegmentsPerQuadrant": 12,
+    "previousUnityResolvedSegmentsPerQuadrant": 24,
+    "collisionCornerSegmentsPerQuadrant": 8,
+    "airGapMm": 1.0,
+    "blackBorderMm": 1.0,
+    "goldTrimMm": 0.8,
+    "goldTrimBevelMm": 0.38,
+    "faceInsetMm": 1.8,
+    "layerAnglesDegrees": [0, 45, 90],
+    "rankOrder": ["Q", "K", "A"]
+  },
+  "mechanism": {
+    "followerFromPivotMm": [-43.31, -21.31],
+    "minimumOuterTrackClearanceMm": 7.59,
+    "trackLayers": ["TopCard", "MiddleCard"],
+    "followerLayers": ["MiddleCard", "BottomCard"]
+  },
+  "surfaceAndArtwork": {
+    "warmSilver": "medium_bead_blast",
+    "decorativeDotsPerFront": 0,
+    "followersVisibleOnFront": false
+  },
+  "cameraAndLight": {
+    "lensMm": 80,
+    "elevationDegrees": 32,
+    "keyTemperatureKelvin": 5000,
+    "keySourceSizeMm": 350,
+    "keyToFill": "5:1",
+    "viewTransform": "AgX"
+  },
+  "topologyPolicy": {
+    "visibleGeometry": "72 segments per 90-degree corner on body, gold trim, and silver face",
+    "collisionGeometry": "8 segments per 90-degree corner",
+    "dimensionsChanged": false,
+    "pivotChanged": false,
+    "mechanicsChanged": false,
+    "singleCardVisibleTriangles": 15840,
+    "maximumCornerChordErrorMm": 0.0005652
+  },
+  "selectionEvidence": {
+    "date": "2026-08-26",
+    "userSelection": "72",
+    "reason": "Selected after reviewing 48, 72, and 96 segment visual-quality and runtime tradeoffs.",
+    "reviewArtifact": "tessellation-selection.png"
+  },
+  "shippingAssetModified": false
+}

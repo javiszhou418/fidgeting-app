@@ -1,0 +1,69 @@
+{
+  "schemaVersion": 1,
+  "modelId": "magnetic-slide-tile",
+  "gate": "03-contract",
+  "revision": 1,
+  "status": "internal-superseded-paused-before-registration",
+  "reviewEligible": false,
+  "reviewMode": "interactive-hand-feel-simulator",
+  "approvedCadInput": {
+    "gate": "02-analysis",
+    "revision": 15,
+    "contractAssetId": "slider-analysis-mechanism-evidence-contract-r015",
+    "contractSha256": "b4318452f163ef7c105c826d4466a739a1dd0d942d4d74d921c29c39e02a84f2",
+    "cadArtifactId": "slider-analysis-interactive-cad-geometry-config-r015",
+    "cadArtifactSha256": "494d2d908740f42be7b74947a0d77373bd99b3346af8f72d6452f18655a98ded",
+    "immutable": true
+  },
+  "kinematics": {
+    "fixedBottom": true,
+    "fixedAxis": true,
+    "rotatingCarrier": true,
+    "movingTop": true,
+    "topUndersideTwinGrooves": true,
+    "simultaneousSlideRotation": true,
+    "finiteGrooveEndpoints": true,
+    "minimumOverlapDiskContainment": true,
+    "detentCount": 30,
+    "detentStepDeg": 12,
+    "initialLinearVelocityLPerSecond": 0,
+    "initialAngularVelocityDegPerSecond": 0,
+    "selfMotion": false
+  },
+  "evidenceConstrainedDefaults": {
+    "slideResistance": 0.28,
+    "rotationResistance": 0.22,
+    "breakawayThreshold": 0.38,
+    "detentStrength": 0.52,
+    "linearInertia": 0.7,
+    "angularInertia": 0.76,
+    "linearDampingHalfLife": 0.18,
+    "angularDampingHalfLife": 0.26,
+    "captureSpeedDegPerSecond": 42,
+    "captureWindowDeg": 4.5,
+    "endStopStiffness": 0.82,
+    "endStopSoftnessL": 0.025,
+    "clickAudio": false
+  },
+  "validationLimits": {
+    "physicalForceNewtons": "unvalidated",
+    "magnetStrength": "unvalidated",
+    "phoneHaptic": "unvalidated",
+    "desktopScope": "motion lag, inertia, detent snap, end-stop response and optional click audio"
+  },
+  "approval": {
+    "interactiveEvidenceRequiredBeforeAsking": true,
+    "toolButtonRequired": false,
+    "finalAuthority": "latest-explicit-chat-or-tool-user-decision",
+    "requiredMilestones": [
+      "directManipulation",
+      "compoundMotion",
+      "detentFeel",
+      "endStops",
+      "resetNoSelfMotion",
+      "parameterTuning",
+      "audioToggle",
+      "referenceMapping"
+    ]
+  }
+}

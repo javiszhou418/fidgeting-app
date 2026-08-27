@@ -1,0 +1,34 @@
+{
+  "route": "C-electronic-high-roller",
+  "productGeometryModified": false,
+  "lockedCamera": {
+    "lensMm": 80,
+    "elevationDegrees": 32
+  },
+  "sceneHierarchy": [
+    "COL_Product_Locked",
+    "COL_Layout",
+    "COL_Modular_Geo",
+    "COL_SetDressing",
+    "COL_Lights",
+    "COL_Cameras",
+    "COL_FX"
+  ],
+  "renderer": {
+    "backend": "Cycles",
+    "device": "Apple M4 Max (GPU - 40 cores)"
+  },
+  "samples": 64,
+  "outputs": {
+    "neutral": "high-roller-neutral.png",
+    "C1-grounded-luxury": "C1-grounded-luxury.png",
+    "C2-electronic-stage": "C2-electronic-stage.png",
+    "C3-high-energy": "C3-high-energy.png"
+  },
+  "variants": {
+    "C1-grounded-luxury": "lowest prop and particle density",
+    "C2-electronic-stage": "balanced recommended density",
+    "C3-high-energy": "maximum controlled cards, chips, and particles"
+  },
+  "shippingIntegrated": false
+}

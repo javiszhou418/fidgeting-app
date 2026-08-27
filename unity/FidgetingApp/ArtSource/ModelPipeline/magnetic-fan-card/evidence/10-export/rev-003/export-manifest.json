@@ -1,0 +1,37 @@
+{
+  "modelId": "magnetic-fan-card",
+  "gate": "10-export",
+  "revision": 1,
+  "sourceAsset": {
+    "path": "unity/FidgetingApp/ArtSource/ModelPipeline/magnetic-fan-card/evidence/08-lighting/rev-004/fan-card-smooth-normal-lighting.blend",
+    "sha256": "06a6ead8ad4411c0093e672ae2885909daeeed9c5ffb283e6d34bb96958c4f39"
+  },
+  "exports": {
+    "blend-source": {
+      "path": "unity/FidgetingApp/ArtSource/ModelPipeline/magnetic-fan-card/evidence/10-export/rev-003/magnetic-fan-card-export-ready.blend",
+      "sha256": "ae7147dfacd381ab7cd3848177d867d2e18cd0978d18c494e7310bcd02c819c4",
+      "sizeBytes": 1174851
+    },
+    "fbx-export": {
+      "path": "unity/FidgetingApp/ArtSource/ModelPipeline/magnetic-fan-card/evidence/10-export/rev-003/magnetic-fan-card.fbx",
+      "sha256": "22b50be362b72d83846929bad53bbc57efbb0f80b5a468de784bcc6a1328631b",
+      "sizeBytes": 1946428
+    },
+    "glb-export": {
+      "path": "unity/FidgetingApp/ArtSource/ModelPipeline/magnetic-fan-card/evidence/10-export/rev-003/magnetic-fan-card.glb",
+      "sha256": "6071571b712ee0c13118c22d348aee0a2b27eab9677ab6901c0c45e8d156e8b1",
+      "sizeBytes": 2745176
+    },
+    "collision-export": {
+      "path": "unity/FidgetingApp/ArtSource/ModelPipeline/magnetic-fan-card/evidence/10-export/rev-003/magnetic-fan-card-collision.fbx",
+      "sha256": "dfbe5968e7f4f33f9801b0e1eb0880c1cf71042efc4c9508d15220db8fc17f2c",
+      "sizeBytes": 22028
+    }
+  },
+  "auditReport": {
+    "path": "unity/FidgetingApp/ArtSource/ModelPipeline/magnetic-fan-card/evidence/10-export/rev-003/export-audit-report.json",
+    "sha256": "e42f8d3421397f1033969b0d925563fc77c06648ae40b1dca67800c43970601d"
+  },
+  "materialPolicy": "FBX/GLB preserve material names and preview values; Gate 11 Unity parity assigns shipping materials.",
+  "collisionPolicy": "Three watertight convex rounded-slab proxies remain separate and parent to BottomCard, MiddleCard, and TopCard."
+}

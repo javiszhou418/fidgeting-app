@@ -1,0 +1,51 @@
+{
+  "schema": "premium-display-case-entry-motion-validation.v1",
+  "status": "pass",
+  "checks": [
+    {
+      "id": "one-subject",
+      "status": "pass",
+      "value": 1
+    },
+    {
+      "id": "screen-y-only",
+      "status": "pass"
+    },
+    {
+      "id": "case-x-stable",
+      "status": "pass",
+      "value": 360
+    },
+    {
+      "id": "rotation-zero",
+      "status": "pass",
+      "value": [
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "id": "scale-stable",
+      "status": "pass",
+      "value": 1.0
+    },
+    {
+      "id": "single-highlight",
+      "status": "pass",
+      "count": 1
+    },
+    {
+      "id": "whole-case-only",
+      "status": "pass"
+    },
+    {
+      "id": "no-object-replacement",
+      "status": "pass"
+    },
+    {
+      "id": "timing-not-locked",
+      "status": "pass"
+    }
+  ]
+}

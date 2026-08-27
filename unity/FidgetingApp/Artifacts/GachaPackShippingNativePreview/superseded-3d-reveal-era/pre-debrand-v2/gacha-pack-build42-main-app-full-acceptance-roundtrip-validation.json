@@ -1,0 +1,41 @@
+{
+  "feature": "Build 42: every store<->carousel<->pack<->reveal step now animates (was previously several instant snaps); Rive de-branding attempt reverted after a flawed patch, safe original branded asset restored",
+  "sourceCommit": "89656924a84c5b2f70d63bb3f70cac6c5eed8e7d",
+  "branch": "codex/gacha-build42",
+  "buildManifest": {
+    "bundleIdentifier": "com.jiaweizhou.fidgetspinner.codex",
+    "buildNumber": "42",
+    "sdk": "SimulatorSDK",
+    "gachaMode": "internalUnlimited"
+  },
+  "simulator": {
+    "device": "GachaRoundTripDevice2 (iPhone 17 Pro runtime)",
+    "udid": "D337403C-60AD-46C1-9FB1-381471EBAA39"
+  },
+  "editModeTestSuite": {
+    "totalTests": 393,
+    "passed": 393,
+    "failed": 0,
+    "resultFile": "/private/tmp/gacha-build42-revert-debrand-editmode-results.xml"
+  },
+  "xcuiTest": {
+    "target": "FidgetingGachaGestureUITests/FullAcceptanceRoundTripUITests/testLibraryToAcceptedPrizeRoundTrip",
+    "result": "passed",
+    "xcresultPath": "/private/tmp/gacha-pack-build42-full-acceptance.xcresult",
+    "ownedCountBefore": 0,
+    "ownedCountAfter": 1,
+    "totalDrawsBefore": 0,
+    "totalDrawsAfter": 1
+  },
+  "changesThisRound": [
+    "GachaStoreView (FidgetGachaStorefront.swift) previously had several instant, unanimated presentation snaps: opening the pack-tier carousel, dismissing it into the pack overlay, and returning to the store after accepting were all driven by @Published model state (several mutated from async Unity bridge callbacks, not local SwiftUI actions) with no animation context anywhere in that chain, so the existing .transition(.opacity) modifiers never actually animated. Added a single presentationPhase Int derived from the same state, driving one .animation(_:value:) so every step animates consistently regardless of where the underlying mutation originates. Also changed the carousel and pack overlay transitions from plain opacity to scale+opacity, and the accept button from a flat fade to a spring slide-up. Visually confirmed via real mid-transition frame captures showing genuine blended crossfades where there were previously instant cuts.",
+    "Rive de-branding attempt (yellow 'whatnot' branding on the magnetic holder card) was reverted this round after a first patch attempt was found, on real visual inspection, to leave the actual yellow background bar completely unchanged while only affecting an unrelated accent shape. That patch has been reverted; the shipping .riv asset and its two hash-lock references (IosBuildPipeline.cs, GachaBuild42RiveHolderIntegrationTests.cs) are back to the original untouched branded asset (SHA-256 da5ba78f63c09ea538d214f7bcdd520a852fc77232bf47ef31606106136c7717, verified). Note: on closer inspection, the '10' grade digit's blue-purple gradient coloring is native to the ORIGINAL asset, not something the reverted patch broke -- that was a misdiagnosis in the prior round's frame comparison. A corrected de-branding attempt (with proper structural verification of which shapes are the actual background vs. incidental accents, not just color-value pattern matching) is being investigated separately and will land as its own follow-up commit once verified."
+  ],
+  "infrastructureNote": "This round's first xcodebuild attempt failed with a generic PhaseScriptExecution failure; root cause was the build host's disk at 100% capacity (493MB free) from ~11 accumulated ~4.8GB DerivedData directories across this session's many rebuild cycles, not a code issue. Freed ~42GB by deleting stale DerivedData directories and the build succeeded cleanly on retry.",
+  "visualApprovalStatus": "pending - real Simulator capture only, not pushed to a physical iPhone; branding still shows the original 'whatnot' artwork pending a corrected de-branding pass",
+  "finalArtifacts": {
+    "video": "unity/FidgetingApp/Artifacts/GachaPackShippingNativePreview/gacha-pack-build42-main-app-full-acceptance-roundtrip.mp4",
+    "videoDurationSeconds": 59.6,
+    "contactSheet": "unity/FidgetingApp/Artifacts/GachaPackShippingNativePreview/gacha-pack-build42-main-app-full-acceptance-roundtrip-contact-sheet.png"
+  }
+}

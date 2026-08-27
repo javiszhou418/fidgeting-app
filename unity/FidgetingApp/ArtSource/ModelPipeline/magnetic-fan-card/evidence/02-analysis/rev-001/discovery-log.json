@@ -1,0 +1,70 @@
+{
+  "stage": "02-analysis",
+  "purpose": "Reference-match camera, contact, material, and lighting without changing product geometry.",
+  "approved_input_boundary": {
+    "product_sources": [
+      "fan-intake-user-model-reference",
+      "fan-intake-current-unity-hero",
+      "fan-intake-current-unity-top",
+      "fan-intake-current-unity-low",
+      "fan-intake-current-unity-track"
+    ],
+    "environment_sources": [
+      "fan-intake-nxedc-wormhole",
+      "fan-intake-nxedc-cracker",
+      "fan-intake-nxedc-bit09",
+      "fan-intake-ai-environment-target"
+    ],
+    "rejected_source": "fan-intake-rejected-composite"
+  },
+  "installed_workflow_sources": [
+    {
+      "name": "arjun988/blender-skills",
+      "revision": "8f778d2405a214b508d4c7d80742be8e43acdd52",
+      "used_guidance": [
+        "reference-image-match",
+        "camera-cinematography",
+        "materials",
+        "lighting",
+        "lookdev"
+      ]
+    },
+    {
+      "name": "RobLe3/cc-blender-skill",
+      "revision": "11016c9a5847897491dde935c346571bd7548e3d",
+      "used_guidance": [
+        "reference-analysis-validator",
+        "reference-look-calibration",
+        "blender-cameras",
+        "blender-lighting"
+      ]
+    },
+    {
+      "name": "stuffmatic/fSpy-Blender",
+      "revision": "eec40b085d45cc623fd379998d85b88de679d4b8",
+      "use": "Still-image camera calibration and Blender camera import."
+    },
+    {
+      "name": "DLR-RM/BlenderProc",
+      "version": "2.8.0",
+      "use": "Physically based render and camera/light pipeline verification."
+    },
+    {
+      "name": "DiffusionLight-Turbo",
+      "revision": "6e8b0f1ad664f5e11281d80482ae19a490927cc4",
+      "use": "Optional HDR light-probe estimation after the environment image is selected.",
+      "compatibility": "Source and MPS dependencies installed; upstream inference remains CUDA-specific and is not accepted as validated output."
+    }
+  ],
+  "observations": [
+    "The rejected composite combines two independent cameras: the card edges and hard-case seam do not share a vanishing solution.",
+    "The background suggests one broad side source, while the product reflection band comes from the prior Unity studio rig.",
+    "A 2D alpha shadow cannot reproduce per-layer contact, occlusion, or reflected environment color.",
+    "NXEDC references place the product on a continuous physical surface and derive depth from real contact, coherent lens perspective, and one explainable light field."
+  ],
+  "unknowns_requiring_user_decision": [
+    "Final physical support: dark walnut, charcoal hard case/EVA, or cork.",
+    "Whether the hero should favor warm collectible mood or neutral technical material evaluation."
+  ],
+  "guardrail": "No analysis conclusion may alter fan-card dimensions, pivot, hierarchy, artwork, tracks, magnets, detents, colliders, audio, or Haptics."
+}

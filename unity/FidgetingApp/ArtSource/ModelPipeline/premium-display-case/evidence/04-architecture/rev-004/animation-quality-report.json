@@ -1,0 +1,125 @@
+{
+  "schema": "premium-display-case-gate04-animation-quality.v3",
+  "modelId": "premium-display-case",
+  "gate": "04-architecture",
+  "architectureRevision": 1,
+  "evidenceRevision": 4,
+  "status": "pass",
+  "reviewState": "ready_for_review",
+  "approvalEffect": "none",
+  "gate05Status": "blocked",
+  "truth": {
+    "artifactClass": "whole-case-motion-envelope-preview",
+    "newGeometry": false,
+    "blenderRender": false,
+    "unityCapture": false,
+    "shippingAnimation": false,
+    "appReveal": false,
+    "wholeCaseOnly": true,
+    "explode": false,
+    "speedOnlySupersession": true,
+    "frameSequenceChanged": false,
+    "newPauseAdded": false,
+    "secondHighlightAdded": false
+  },
+  "metrics": {
+    "frameCount": 217,
+    "fps": 48,
+    "mp4DurationMilliseconds": 4520.833,
+    "gifEncodedFrameCount": 21,
+    "gifDurationMilliseconds": 4520,
+    "maximumAdjacentMeanRgbDifference": 6.3072,
+    "meanAdjacentMeanRgbDifference": 0.5225,
+    "settledHoldDifference": 0.0,
+    "minimumProjectedPrizeWidthPixels": 22,
+    "highlightCount": 1,
+    "partSeparationCount": 0,
+    "objectIdentityCount": 1,
+    "sourceSamplingFps": 60,
+    "targetDurationMilliseconds": 4521.25,
+    "baselineDurationMilliseconds": 3617,
+    "timeScale": 1.25,
+    "targetDeltaMilliseconds": -0.417,
+    "motionSequenceSha256": "61b39eb28012cdd7e5804e8a56d5e0b2f6647d81519f0235a958b088b4842058"
+  },
+  "checks": [
+    {
+      "id": "whole-case-only",
+      "status": "pass",
+      "evidence": "Every frame renders one object identity and zero child-layer offsets."
+    },
+    {
+      "id": "no-explode-or-reassembly",
+      "status": "pass",
+      "evidence": "Part separation count is 0; no layer translation or object replacement exists."
+    },
+    {
+      "id": "prize-visible",
+      "status": "pass",
+      "evidence": "The same prize proxy remains rendered in all 217 frames; minimum projected width is 22px."
+    },
+    {
+      "id": "portrait-stability",
+      "status": "pass",
+      "evidence": "The 3:4 contract, center, height, pivot, and frame remain fixed through the full turn."
+    },
+    {
+      "id": "single-full-turn",
+      "status": "pass",
+      "evidence": "The unwrapped +Y preview angle is monotonic 0→360 and samples 0/90/180/270/360."
+    },
+    {
+      "id": "single-highlight",
+      "status": "pass",
+      "evidence": "Exactly one upper-left to lower-right highlight interval is authored."
+    },
+    {
+      "id": "time-scale-only",
+      "status": "pass",
+      "evidence": "The same 217 ordered motion samples use 48fps playback. No frame, pause, highlight, object, or part event was added."
+    },
+    {
+      "id": "flicker",
+      "status": "pass",
+      "evidence": "Settled subject frames are byte-stable after downsampling; hold difference 0.0000. Intended max adjacent mean RGB difference is 6.3072."
+    },
+    {
+      "id": "duration",
+      "status": "pass",
+      "evidence": "ffprobe measures 4520.833ms versus the 4521.250ms target; delta -0.417ms."
+    },
+    {
+      "id": "gif-and-mp4-truth",
+      "status": "pass",
+      "evidence": "GIF metadata totals 4520ms across 21 encoded frames; MP4 ffprobe metadata carries the 48fps timing authority."
+    },
+    {
+      "id": "authored-unknowns-explicit",
+      "status": "pass",
+      "evidence": "Exact authored Rive easing, highlight curve, timeline duration, and Y sign remain unknown."
+    },
+    {
+      "id": "reference-identity-excluded",
+      "status": "pass",
+      "evidence": "No WHATNOT copy, yellow field, smiley, barcode, sample serial, or circular coin window is rendered."
+    },
+    {
+      "id": "contact-sheet-coverage",
+      "status": "pass",
+      "evidence": "The contact sheet includes start, highlight, 0, 90, 180, 270, 360, and settled."
+    },
+    {
+      "id": "gate-boundary",
+      "status": "pass",
+      "evidence": "Evidence-only Gate 04 rev 4 preview; Gate 05, Blender, Unity, build, install, and phone push remain blocked."
+    }
+  ],
+  "revisionDisposition": {
+    "rejectedEvidenceRevision": 3,
+    "rejectionScope": "speed-only",
+    "wholeCaseDirectionRejected": false,
+    "portraitRejected": false,
+    "fullTurnRejected": false,
+    "singleHighlightRejected": false
+  }
+}

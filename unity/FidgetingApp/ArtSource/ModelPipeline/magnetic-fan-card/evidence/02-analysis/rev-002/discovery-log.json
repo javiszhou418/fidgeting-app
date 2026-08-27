@@ -1,0 +1,35 @@
+{
+  "stage": "02-analysis",
+  "analysis_revision": "002",
+  "supersedes": "rev-001 environment selection requirement",
+  "user_correction": "Do not choose one support surface before rendering. Try all three.",
+  "variant_contract": {
+    "variants": [
+      "dark-walnut",
+      "charcoal-hard-case",
+      "cork-slab"
+    ],
+    "locked_across_variants": [
+      "exact three-layer product geometry",
+      "product pose",
+      "camera and lens",
+      "framing and crop",
+      "key-light direction and source size",
+      "fill ratio",
+      "AgX exposure"
+    ],
+    "changes_per_variant": [
+      "physical support material",
+      "support-surface roughness and normal response",
+      "physically resulting reflected bounce"
+    ]
+  },
+  "shared_analysis": [
+    "Product and support must use one Blender camera and one perspective solution.",
+    "The cards must contact real 3D support geometry.",
+    "Product and environment must share one motivated light field.",
+    "Warm silver, gunmetal, chrome, and rear-gold material zones remain distinct.",
+    "The old 2D composite remains rejected."
+  ],
+  "guardrail": "Variant generation cannot change product geometry, pivot, hierarchy, artwork, tracks, magnets, detents, colliders, audio, or Haptics."
+}

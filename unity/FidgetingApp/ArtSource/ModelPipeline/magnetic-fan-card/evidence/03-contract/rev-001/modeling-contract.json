@@ -1,0 +1,167 @@
+{
+  "schemaVersion": 1,
+  "modelId": "magnetic-fan-card",
+  "contractRevision": 1,
+  "scope": "reference-matched Blender lookdev previews only",
+  "sourceClaimIds": [
+    "fan-analysis-claim-shared-camera",
+    "fan-analysis-claim-real-contact",
+    "fan-analysis-claim-light-field",
+    "fan-analysis-claim-material-zones",
+    "fan-analysis-claim-three-support-variants"
+  ],
+  "units": "millimeters",
+  "coordinateSystem": {
+    "x": "card width, right",
+    "y": "card height, away from viewer",
+    "z": "support normal, up",
+    "origin": "shared lower-right rounded-corner pivot"
+  },
+  "geometry": {
+    "source": "fan_card_guardrails.json plus current Unity scene-builder rules",
+    "generatedProductGeometry": false,
+    "card": {
+      "width": 63.5,
+      "height": 88.9,
+      "thickness": 2.5,
+      "cornerRadius": 3.81,
+      "edgeBevel": 0.375,
+      "airGap": 1.0,
+      "layerPitch": 3.5,
+      "axisHoleRadius": 2.15
+    },
+    "layers": [
+      {
+        "name": "BottomCard",
+        "angleDegrees": 0.0,
+        "z": 0.0,
+        "rank": "Q"
+      },
+      {
+        "name": "MiddleCard",
+        "angleDegrees": 45.0,
+        "z": 3.5,
+        "rank": "K"
+      },
+      {
+        "name": "TopCard",
+        "angleDegrees": 90.0,
+        "z": 7.0,
+        "rank": "A"
+      }
+    ],
+    "pivot": {
+      "cardCenterFromPivot": [
+        -27.94,
+        -40.64,
+        0.0
+      ],
+      "bearingCapRadius": 2.07,
+      "bearingCapVisibleHeight": 0.65
+    },
+    "lockedMechanism": {
+      "stableDetents": 4,
+      "middleMaximumDegrees": 45.0,
+      "topMaximumDegrees": 90.0,
+      "tracks": [
+        "TopCard",
+        "MiddleCard"
+      ],
+      "followers": [
+        "MiddleCard",
+        "BottomCard"
+      ],
+      "trackMinimumOuterClearance": 6.0
+    }
+  },
+  "materialZones": [
+    "warm-silver satin faces",
+    "dark bead-blasted gunmetal frames",
+    "dark etched rank and spade relief",
+    "single polished chrome bearing cap",
+    "rear gold grille and magnets"
+  ],
+  "camera": {
+    "deliveryResolution": [
+      1179,
+      654
+    ],
+    "sensorWidthMm": 36.0,
+    "lensMm": 80.0,
+    "azimuthDegrees": -35.0,
+    "elevationDegrees": 32.0,
+    "rollDegrees": 0.0,
+    "productWidthFraction": 0.62,
+    "leftCopySafeFraction": 0.33,
+    "depthOfField": "off for controlled comparison"
+  },
+  "lighting": {
+    "key": {
+      "type": "area",
+      "motivation": "large upper-right softbox / window",
+      "colorTemperatureKelvin": 5000,
+      "sourceSizeMm": 350.0
+    },
+    "keyToFillRatio": "5:1",
+    "rim": "disabled for first controlled pass",
+    "world": "low-strength neutral environment reflection",
+    "shadow": "real Cycles contact and inter-layer occlusion"
+  },
+  "supportVariants": [
+    {
+      "id": "A-dark-walnut",
+      "geometry": "shared beveled support plane",
+      "material": "dark oiled walnut"
+    },
+    {
+      "id": "B-charcoal-hard-case",
+      "geometry": "shared beveled support plane",
+      "material": "charcoal EVA / rubberized hard-case skin"
+    },
+    {
+      "id": "C-cork-slab",
+      "geometry": "shared beveled support plane",
+      "material": "compressed warm cork"
+    }
+  ],
+  "controlledComparison": {
+    "locked": [
+      "product geometry",
+      "product pose",
+      "camera and lens",
+      "framing and crop",
+      "key direction and size",
+      "fill ratio",
+      "render exposure",
+      "AgX look"
+    ],
+    "variant": [
+      "support material",
+      "support normal and roughness response",
+      "physically resulting bounce"
+    ]
+  },
+  "render": {
+    "engine": "Cycles",
+    "device": "Metal GPU",
+    "previewSamples": 128,
+    "finalSamples": 256,
+    "denoise": true,
+    "viewTransform": "AgX",
+    "look": "Medium High Contrast",
+    "transparentFilm": false
+  },
+  "route": {
+    "primary": "deterministic bpy / CLIAnything Blender",
+    "cameraValidation": "fSpy or equivalent shared-camera solve",
+    "pipelineValidation": "BlenderProc render smoke plus reference-look metrics",
+    "rodinPolicy": "prohibited for product geometry"
+  },
+  "acceptance": [
+    "All three support variants render from the same saved Blender scene.",
+    "No generated product geometry or product pixels are used.",
+    "Three rigid layers, two air gaps, pivot, Q/K/A ordering, and visible bearing cap match the canonical product.",
+    "Product and support share one perspective, one light field, and real contact shadows.",
+    "No preview is copied into shipping assets before explicit visual approval."
+  ]
+}

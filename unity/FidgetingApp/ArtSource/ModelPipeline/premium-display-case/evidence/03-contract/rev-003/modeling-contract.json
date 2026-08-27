@@ -1,0 +1,419 @@
+{
+  "schemaVersion": 1,
+  "modelId": "premium-display-case",
+  "contractRevision": 3,
+  "createdDate": "2026-08-26",
+  "stageStatus": "ready_for_review",
+  "approvalEffect": "none-until-explicit-gate-03-user-approval",
+  "sourceAnalysisRevision": 6,
+  "sourceMotionStructureRevision": 5,
+  "sourceLightTreatmentRevision": 6,
+  "sourceClaimIds": [
+    "premium-display-case-analysis-balanced-entry-r005",
+    "premium-display-case-analysis-serial-showcase-r005",
+    "premium-display-case-analysis-no-simultaneous-clutter-r005",
+    "premium-display-case-analysis-balanced-highlight-r005",
+    "premium-display-case-analysis-balanced-timing-r005",
+    "premium-display-case-analysis-pack-seam-light-r006",
+    "premium-display-case-analysis-arrival-rim-r006",
+    "premium-display-case-analysis-rotation-rim-r006",
+    "premium-display-case-analysis-final-light-stop-r006",
+    "premium-display-case-analysis-light-forbidden-r006"
+  ],
+  "units": {
+    "geometry": "millimeters",
+    "angles": "degrees",
+    "time": "seconds",
+    "lightColor": "kelvin-or-linear-rgb-candidate"
+  },
+  "coordinateSystem": {
+    "authoring": "x width-right, y height-up, z depth-toward-camera",
+    "origin": "assembled outer-envelope center",
+    "motionOwner": "PresentationRoot",
+    "toyOwner": "caller-owned ContentSlot"
+  },
+  "staticPreservation": {
+    "decisionState": "historical-compatible-inputs-pending-gate03-rev3-approval",
+    "geometryMutationAllowed": false,
+    "materialMutationAllowed": false,
+    "portraitEnvelope": {
+      "widthMm": 228.0,
+      "heightMm": 304.0,
+      "depthMm": 59.0,
+      "widthHeightRatio": 0.75
+    },
+    "closedTube": {
+      "outerSectionMm": {
+        "width": 10.0,
+        "depth": 9.0
+      },
+      "passageSectionMm": {
+        "width": 6.0,
+        "depth": 5.0
+      },
+      "wallThicknessMm": 2.0,
+      "profileCornerRadiusMm": 3.0,
+      "passageCornerRadiusMm": 1.0,
+      "outerCornerRadiusMm": 20.0,
+      "centerlineCornerRadiusMm": 15.0,
+      "innerCornerRadiusMm": 10.0,
+      "connectivity": "one connected manifold",
+      "openBoundaryEdgeCount": 0,
+      "channelFloodFill": "384/384"
+    },
+    "physicalLabel": {
+      "widthMm": 184.0,
+      "heightMm": 58.0,
+      "centerYmm": 99.0
+    },
+    "contentSlot": {
+      "widthMm": 180.0,
+      "heightMm": 198.0,
+      "depthMm": 48.0,
+      "owner": "caller"
+    },
+    "concentricCornerFamilies": {
+      "maximumDriftMm": 0.0,
+      "toleranceMm": 0.01,
+      "caseTubeShellCentersMm": [
+        [
+          -94,
+          -132
+        ],
+        [
+          -94,
+          132
+        ],
+        [
+          94,
+          -132
+        ],
+        [
+          94,
+          132
+        ]
+      ],
+      "mainDisplayChamberCentersMm": [
+        [
+          -75,
+          -127
+        ],
+        [
+          -75,
+          43
+        ],
+        [
+          75,
+          -127
+        ],
+        [
+          75,
+          43
+        ]
+      ],
+      "physicalLabelCentersMm": [
+        [
+          -86,
+          76
+        ],
+        [
+          -86,
+          122
+        ],
+        [
+          86,
+          76
+        ],
+        [
+          86,
+          122
+        ]
+      ]
+    },
+    "materialRanges": {
+      "decisionState": "historical-approved-retained-no-material-edit",
+      "zones": [
+        "closed frosted-polycarbonate tube and shell",
+        "clearer polycarbonate edge response",
+        "black flocked chamber",
+        "warm neutral physical label stock",
+        "dark physical print",
+        "one narrow non-emissive rarity foil",
+        "unchanged canonical prize materials"
+      ],
+      "pbrValues": {
+        "frostedPolycarbonateShell": {
+          "ior": 1.585,
+          "roughness": 0.22,
+          "transmissionWeight": 0.92,
+          "micrograinFeatureSizeMm": 0.62,
+          "micrograinCoordinateSpace": "object-local"
+        },
+        "continuousTubeEdge": {
+          "ior": 1.585,
+          "roughness": 0.18,
+          "transmissionWeight": 0.78,
+          "micrograinFeatureSizeMm": 0.58,
+          "micrograinCoordinateSpace": "object-local"
+        },
+        "blackTactileInsert": {
+          "roughness": 0.91,
+          "micrograinFeatureSizeMm": 0.48,
+          "micrograinBumpDistanceMm": 0.16,
+          "micrograinCoordinateSpace": "object-local"
+        },
+        "physicalLabelPaper": {
+          "roughness": 0.73,
+          "micrograinFeatureSizeMm": 0.44,
+          "micrograinCoordinateSpace": "object-local"
+        },
+        "narrowNeutralSilverFoil": {
+          "metallic": 0.96,
+          "roughness": 0.3,
+          "micrograinFeatureSizeMm": 0.38,
+          "micrograinCoordinateSpace": "object-local"
+        }
+      },
+      "background": {
+        "world": {
+          "baseColor": [
+            0.032,
+            0.033,
+            0.035,
+            1
+          ],
+          "strength": 0.28,
+          "imageTextureCount": 0,
+          "proceduralNoiseCount": 0,
+          "radialHalo": false,
+          "fixedGreenBias": false
+        },
+        "surface": {
+          "material": "MAT_M07_ContinuousNeutralFriction",
+          "metallic": 0,
+          "roughness": 0.84,
+          "linearLuminanceRange": [
+            0.045,
+            0.063
+          ],
+          "maximumSaturation": 0.12,
+          "grainFeatureSizeMm": 0.5,
+          "normalPeakToPeakMm": 0.08,
+          "coordinateSource": "Texture Coordinate:Object",
+          "localNoiseMasks": 0,
+          "radialHalo": false,
+          "fixedGreenBias": false
+        }
+      }
+    },
+    "toyScope": {
+      "status": "out-of-scope-caller-owned-content",
+      "attachment": "ContentSlot",
+      "geometryChanged": false,
+      "materialsChanged": false,
+      "artworkChanged": false,
+      "pivotChanged": false,
+      "physicsChanged": false,
+      "hapticsChanged": false,
+      "mechanismChanged": false
+    }
+  },
+  "closedTubeFrame": {
+    "topology": {
+      "connectivity": "one connected manifold",
+      "path": "one cyclic perimeter through four tangent-continuous bends",
+      "openBoundaryEdges": 0
+    }
+  },
+  "handoffContract": {
+    "decisionState": "locked-existing-runtime-invariant",
+    "authoritativeReceiptRequired": true,
+    "sameRequestRequired": true,
+    "casePrizeCameraStableFrames": 2,
+    "packRemainsForegroundUntilReady": true,
+    "packRetreatSeconds": 0.28,
+    "visibleObjectGapAllowed": false,
+    "proxyAllowed": false
+  },
+  "motionContract": {
+    "decisionState": "gate03-rev3-pending-user-approval",
+    "target": "one rigid assembled Portrait case",
+    "motionOwner": "PresentationRoot",
+    "phaseOrder": [
+      "entry-y-z",
+      "settle",
+      "showcase-local-y-360",
+      "final-sheen-short-halo",
+      "static-hold"
+    ],
+    "entry": {
+      "translationAxes": [
+        "screen-y",
+        "camera-depth-z"
+      ],
+      "rotationDegrees": [
+        0,
+        0,
+        0
+      ],
+      "xDrift": 0,
+      "modelScale": 1,
+      "cameraMotion": false,
+      "backgroundMotion": false
+    },
+    "settle": {
+      "requiredBeforeShowcase": true,
+      "translationVelocityAtExit": 0,
+      "rotationVelocityAtExit": 0
+    },
+    "showcase": {
+      "axis": "local-y",
+      "degrees": 360,
+      "count": 1,
+      "translationLocked": true,
+      "modelScale": 1,
+      "toyIndependentAngularVelocity": 0
+    },
+    "simultaneousEntryAndShowcase": false,
+    "wholeCaseOnly": true,
+    "objectReplacement": false,
+    "toyMotion": false,
+    "forbidden": [
+      "x-drift",
+      "roll",
+      "pitch",
+      "independent-model-scale-animation",
+      "camera-motion",
+      "background-motion",
+      "object-replacement",
+      "proxy",
+      "split",
+      "explode",
+      "toy-motion",
+      "rarity-color",
+      "rainbow",
+      "large-bloom",
+      "particles",
+      "vfx-graph",
+      "full-screen-flash",
+      "explosion",
+      "screen-shake",
+      "persistent-light-loop"
+    ]
+  },
+  "lightContract": {
+    "decisionState": "gate03-rev3-pending-user-approval",
+    "causalCueOrder": [
+      "pack-seam-light",
+      "arrival-rim",
+      "rotation-surface-rim",
+      "final-diagonal-sheen",
+      "settle-halo-then-zero"
+    ],
+    "packSeamLight": {
+      "count": 1,
+      "cause": "Pack opening during entry",
+      "rarityInformation": false
+    },
+    "arrivalRim": {
+      "count": 1,
+      "cause": "case clears Pack threshold",
+      "fullScreenFlash": false
+    },
+    "rotationRim": {
+      "cause": "turning case surface orientation",
+      "objectBound": true,
+      "independentEmitter": false
+    },
+    "finalSheen": {
+      "count": 1,
+      "shape": "narrow-diagonal"
+    },
+    "settleHalo": {
+      "count": 1,
+      "maximumAlpha": 0.09411764705882353,
+      "persistent": false
+    },
+    "maximumRgbChroma": 25,
+    "vfxGraphDependency": false,
+    "particles": false
+  },
+  "tunableRuntimeParameters": {
+    "decisionState": "explicitly-unlocked-for-later-gates-and-shipping-tuning",
+    "previewDurationSeconds": 3.4,
+    "shippingTotalDurationSeconds": null,
+    "phaseDurationsSeconds": null,
+    "phaseEasing": null,
+    "entryScreenYDistance": null,
+    "entryCameraDepthZDistance": null,
+    "rotationAngularVelocityCurve": null,
+    "seamLightWidth": null,
+    "seamLightIntensity": null,
+    "arrivalRimWidth": null,
+    "arrivalRimIntensity": null,
+    "lightColorTemperatureKelvin": null,
+    "lightFalloff": null,
+    "finalSheenWidth": null,
+    "finalSheenIntensity": null,
+    "settleHaloRadius": null,
+    "settleHaloDuration": null,
+    "shippingCameraFovDegrees": null,
+    "note": "The 3.4 s Gate 02 preview is not a shipping duration. The stale 4.520833 s and rev 3 quaternion path are not current authority."
+  },
+  "reduceMotion": {
+    "decisionState": "locked-causal-order-tunable-transition",
+    "causalOrderPreserved": true,
+    "entry": "short Y+Z transition or immediate settled pose after readiness",
+    "showcase": "omitted",
+    "light": "single non-spatial neutral emphasis, then zero",
+    "hold": "static"
+  },
+  "performanceBudget": {
+    "lockedProductTargets": {
+      "targetFramesPerSecond": 60,
+      "perFrameManagedAllocationsBytes": 0,
+      "offscreenUpdates": 0
+    },
+    "candidateGateBudget": {
+      "caseTrianglesMax": 120000,
+      "caseMaterialSlotsMax": 8,
+      "additionalRealtimeLightsMax": 3,
+      "presentationCpuMillisecondsMax": 0.2,
+      "incrementalGpuMillisecondsMax": 1.5,
+      "measurement": "Target iPhone Release build; Simulator cannot pass."
+    }
+  },
+  "claimDisposition": {
+    "premium-display-case-analysis-balanced-entry-r005": "lock-serial-motion-direction",
+    "premium-display-case-analysis-serial-showcase-r005": "lock-serial-motion-direction",
+    "premium-display-case-analysis-no-simultaneous-clutter-r005": "lock-serial-motion-direction",
+    "premium-display-case-analysis-balanced-highlight-r005": "lock-serial-motion-direction",
+    "premium-display-case-analysis-balanced-timing-r005": "lock-serial-motion-direction",
+    "premium-display-case-analysis-pack-seam-light-r006": "lock-restrained-causal-light-boundary",
+    "premium-display-case-analysis-arrival-rim-r006": "lock-restrained-causal-light-boundary",
+    "premium-display-case-analysis-rotation-rim-r006": "lock-restrained-causal-light-boundary",
+    "premium-display-case-analysis-final-light-stop-r006": "lock-restrained-causal-light-boundary",
+    "premium-display-case-analysis-light-forbidden-r006": "lock-restrained-causal-light-boundary"
+  },
+  "route": {
+    "primary": "deterministic contract; existing Blender geometry remains unchanged",
+    "blenderGeometryEdit": false,
+    "materialEdit": false,
+    "shippingUnityEdit": false,
+    "buildInstallPhonePush": false,
+    "nextGatePolicy": "Do not enter Gate 04 before explicit Gate 03 approval."
+  },
+  "historyBoundary": {
+    "gate03Rev1": "preserved-stale",
+    "gate03Rev2": "preserved-stale",
+    "gate04Through08": "preserved-stale",
+    "staticArtifactsDeleted": false
+  },
+  "completeness": {
+    "complete": true,
+    "activeGate02ClaimCount": 10,
+    "allActiveGate02ClaimsConsumed": true,
+    "unknownsCarriedForward": true
+  },
+  "approvalQuestion": "是否批准 Gate 03 rev 3：锁定 Y+Z 入场→停稳→一次 local-Y 360°→克制因果光效→静止 hold 的串行合同，同时保持时长、easing、Z 行程和光效参数继续可调？"
+}

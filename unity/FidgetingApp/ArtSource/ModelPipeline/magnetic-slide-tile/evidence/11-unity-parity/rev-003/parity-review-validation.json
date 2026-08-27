@@ -1,0 +1,59 @@
+{
+  "schemaVersion": 1,
+  "gate": "11-unity-parity",
+  "revision": 3,
+  "geometry": {
+    "silhouetteIoU": 0.98585328,
+    "sameCamera": true,
+    "sameImportedMesh": true
+  },
+  "artwork": {
+    "upperLowerMasksIndependent": true,
+    "unlitOverlayCount": 0,
+    "placementPreviouslyAccepted": true
+  },
+  "material": {
+    "blenderRedMedianRgb": [
+      123.0,
+      67.0,
+      69.0
+    ],
+    "unityRedMedianRgb": [
+      128.0,
+      60.0,
+      64.0
+    ],
+    "redMedianAbsoluteDelta": [
+      5.0,
+      7.0,
+      5.0
+    ],
+    "blenderSilverMedianRgb": [
+      130.0,
+      132.0,
+      131.0
+    ],
+    "unitySilverMedianRgb": [
+      125.0,
+      124.0,
+      122.0
+    ],
+    "silverMedianAbsoluteDelta": [
+      5.0,
+      8.0,
+      9.0
+    ],
+    "shippingCapableCrystalShader": true,
+    "continuousReflection": true,
+    "zeroEmission": true
+  },
+  "outputs": [
+    "geometry-comparison.png",
+    "geometry-overlay.png",
+    "artwork-comparison.png",
+    "material-comparison.png",
+    "gate11-rev3-parity-board.png"
+  ],
+  "approvalQuestion": "修正后的 Unity 物体现在是否像同机位的 Blender 目标？",
+  "pass": true
+}

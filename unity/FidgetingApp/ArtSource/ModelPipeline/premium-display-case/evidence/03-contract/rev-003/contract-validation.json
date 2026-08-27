@@ -1,0 +1,61 @@
+{
+  "schema": "premium-display-case-gate03-serial-contract-validation.v1",
+  "modelId": "premium-display-case",
+  "gate": "03-contract",
+  "contractRevision": 3,
+  "status": "pass",
+  "checks": {
+    "sourceHashesPresent": true,
+    "tenActiveClaimsConsumed": true,
+    "claimIdsUnique": true,
+    "serialPhaseOrder": true,
+    "entryAxesLocked": true,
+    "entryRotationZero": true,
+    "showcaseAfterSettle": true,
+    "oneLocalY360": true,
+    "noSimultaneousEntryAndShowcase": true,
+    "wholeCaseNoReplacement": true,
+    "toyStatic": true,
+    "causalLightOrder": true,
+    "neutralLightBound": true,
+    "haloStops": true,
+    "particlesAndVfxGraphForbidden": true,
+    "shippingDurationUnknown": true,
+    "phaseTimingUnknown": true,
+    "distanceUnknownsPreserved": true,
+    "lightUnknownsPreserved": true,
+    "oldTimingNotRestored": true,
+    "gate04Blocked": true,
+    "shippingBoundary": true,
+    "largeTypePreview": true
+  },
+  "metrics": {
+    "activeGate02ClaimCount": 10,
+    "lockedPhaseCount": 5,
+    "showcaseDegrees": 360,
+    "approvedShippingDuration": null,
+    "tunableParameterCount": 17
+  },
+  "imageReport": {
+    "path": "unity/FidgetingApp/ArtSource/ModelPipeline/premium-display-case/evidence/03-contract/rev-003/contract-preview.png",
+    "width": 3200,
+    "height": 3900,
+    "meanRgb": [
+      23.132836,
+      34.125961,
+      42.738918
+    ],
+    "channelRanges": [
+      235,
+      235,
+      232
+    ],
+    "nonBlank": true
+  },
+  "truth": {
+    "contractOnly": true,
+    "blenderGeometryOrMaterialChanged": false,
+    "shippingUnityChanged": false,
+    "buildInstallPhonePush": false
+  }
+}

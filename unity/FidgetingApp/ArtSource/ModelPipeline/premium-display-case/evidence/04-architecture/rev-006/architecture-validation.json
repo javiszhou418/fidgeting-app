@@ -1,0 +1,52 @@
+{
+  "schema": "premium-display-case-gate04-overlap-validation.v1",
+  "modelId": "premium-display-case",
+  "gate": "04-architecture",
+  "architectureRevision": 2,
+  "evidenceRevision": 6,
+  "status": "pass",
+  "checks": {
+    "sourceContractRevision3": true,
+    "sameOwnershipAsRev5": true,
+    "oneRigidCaseInstance": true,
+    "wholeCaseOnly": true,
+    "nativePackExternal": true,
+    "toyCallerOwned": true,
+    "toyAngularVelocityZero": true,
+    "entryDominant": true,
+    "caseClearsPackBeforeRotation": true,
+    "entryTailDecelerating": true,
+    "oneBoundedOverlapWindow": true,
+    "noHardPause": true,
+    "noUnboundedSimultaneousMotion": true,
+    "xRollPitchScaleCameraBackgroundZero": true,
+    "fourFiniteLightCues": true,
+    "noParticleOrPersistentLoop": true,
+    "noProxyOrExplode": true,
+    "overlapValuesPending": true,
+    "internalExplodedNotReview": true,
+    "userReviewAssembledOnly": true,
+    "gate05Blocked": true,
+    "shippingBoundary": true
+  },
+  "metrics": {
+    "phaseCount": 6,
+    "overlapWindowCount": 1,
+    "reviewCandidateOverlapStartEntryProgress": 0.82,
+    "reviewCandidateOverlapSeconds": 0.16,
+    "overlapLockedParameterCount": 0,
+    "reviewArtifactExplodedPartCount": 0
+  },
+  "artifactHashes": {
+    "architecture": "8fcb5b33501cb031e5875ec53f3834c72fd7fb41a0fea9c212546357691cf66c",
+    "gif": "fe85bc62b417e97ce8c2d4540e0083a4c1d559ce121553bb61da73733a98fdf2",
+    "contact": "fdf9bc90fe14aa4824846f8575b9e7fc04f73023778192c65ffe2713670eb1a5",
+    "review": "00b5b82d7a5ba7f511df82f7a44bc82a49872c060727997f0c3feeaa24cf0f3b"
+  },
+  "truth": {
+    "architectureOnly": true,
+    "internalExplodedPlanOnly": true,
+    "shippingUnityChanged": false,
+    "buildInstallPhonePush": false
+  }
+}

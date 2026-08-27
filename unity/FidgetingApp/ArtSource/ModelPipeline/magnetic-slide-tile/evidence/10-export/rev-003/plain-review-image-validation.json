@@ -1,0 +1,42 @@
+{
+  "schemaVersion": 1,
+  "modelId": "magnetic-slide-tile",
+  "gate": "10-export",
+  "reviewRevision": 3,
+  "roiSourcePixels": [
+    540,
+    1040,
+    1200,
+    1700
+  ],
+  "locationMapping": {
+    "mappedRoiPx": [
+      518,
+      1038,
+      1005,
+      1525
+    ],
+    "scale": 0.7375
+  },
+  "actualBeforeAfterDifference": {
+    "meanRgbLevels": 0.01173,
+    "p99RgbLevels": 0.333333,
+    "maximumRgbLevels": 6.333333,
+    "visuallyObvious": false
+  },
+  "honestyPolicy": "The actual rev 1/rev 2 difference is too subtle for a truthful 'before was faceted' claim. The review uses matched neutral continuity images and states that fact.",
+  "defaultReviewAssets": [
+    "round-edge-location.png",
+    "round-edge-before-after.png"
+  ],
+  "checks": {
+    "sourceImages3200x1800": true,
+    "identicalCropCoordinates": true,
+    "cropAtLeast3xInDefaultBoard": true,
+    "actualDifferenceIsSubtle": true,
+    "plainLocationImageExists": true,
+    "plainComparisonImageExists": true,
+    "userImagesHighResolution": true
+  },
+  "pass": true
+}

@@ -1,0 +1,26 @@
+{
+  "schemaVersion": 1,
+  "modelId": "premium-display-case",
+  "gate": "08-lighting",
+  "lightingRevision": 1,
+  "result": "READY_FOR_LIGHTING_REVIEW_NOT_SHIPPING",
+  "status": "pass",
+  "blockers": [],
+  "majors": [],
+  "minors": [],
+  "expectedPending": [
+    "User Gate 08 lighting approval",
+    "Gate 09 environment review",
+    "Gate 12 shipping-source visual approval",
+    "iPhone acceptance after a separately authorized installation"
+  ],
+  "wholeCaseOnly": true,
+  "explode": false,
+  "shippingUnityChanged": false,
+  "buildInstallPhonePush": false,
+  "evidence": {
+    "lightingReview": "unity/FidgetingApp/ArtSource/ModelPipeline/premium-display-case/evidence/08-lighting/rev-001/lighting-review.png",
+    "blenderAudit": "unity/FidgetingApp/ArtSource/ModelPipeline/premium-display-case/evidence/08-lighting/rev-001/blender-lighting-audit.json",
+    "imageValidation": "unity/FidgetingApp/ArtSource/ModelPipeline/premium-display-case/evidence/08-lighting/rev-001/lighting-image-validation.json"
+  }
+}

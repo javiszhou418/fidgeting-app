@@ -1,0 +1,30 @@
+name: GachaContinuousPreviewHarness
+options:
+  bundleIdPrefix: com.jiaweizhou.codex
+settings:
+  base:
+    IPHONEOS_DEPLOYMENT_TARGET: "15.0"
+    SWIFT_VERSION: "5.0"
+    TARGETED_DEVICE_FAMILY: "1"
+targets:
+  GachaContinuousPreviewUITests:
+    type: bundle.ui-testing
+    platform: iOS
+    deploymentTarget: "15.0"
+    sources:
+      - path: GachaContinuousPreviewUITests
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.jiaweizhou.codex.GachaContinuousPreviewUITests
+        GENERATE_INFOPLIST_FILE: YES
+        CODE_SIGNING_ALLOWED: NO
+        CODE_SIGNING_REQUIRED: NO
+        TEST_TARGET_NAME: ""
+schemes:
+  GachaContinuousPreviewUITests:
+    build:
+      targets:
+        GachaContinuousPreviewUITests: [test]
+    test:
+      targets:
+        - GachaContinuousPreviewUITests

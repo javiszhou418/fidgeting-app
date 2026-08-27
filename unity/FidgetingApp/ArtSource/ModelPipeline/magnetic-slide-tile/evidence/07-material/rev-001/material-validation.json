@@ -1,0 +1,233 @@
+{
+  "schemaVersion": 1,
+  "gate": "07-material",
+  "materialRevision": 1,
+  "sourceGate06": {
+    "geometryRevision": 1,
+    "blendPath": "unity/FidgetingApp/ArtSource/ModelPipeline/magnetic-slide-tile/evidence/06-geometry/rev-001/magnetic-slide-tile-geometry-r001.blend",
+    "sha256Before": "dae227b2810e4c264b856bd4539e10d6a96d807e8ec68ca9b0a8e371d1be72ae",
+    "sha256After": "dae227b2810e4c264b856bd4539e10d6a96d807e8ec68ca9b0a8e371d1be72ae",
+    "unchanged": true,
+    "evaluatedGeometryDigest": "85bd7dd237c6822c72e575c9a23085eec9a2f28d7afea3a5bf0f13fdc4ebd90f"
+  },
+  "geometryPreservation": {
+    "digestBefore": "85bd7dd237c6822c72e575c9a23085eec9a2f28d7afea3a5bf0f13fdc4ebd90f",
+    "digestAfterMaterialAssignment": "85bd7dd237c6822c72e575c9a23085eec9a2f28d7afea3a5bf0f13fdc4ebd90f",
+    "digestAfterRenders": "85bd7dd237c6822c72e575c9a23085eec9a2f28d7afea3a5bf0f13fdc4ebd90f",
+    "unchanged": true,
+    "boundsMm": [
+      50.0,
+      31.0,
+      12.0
+    ],
+    "axisPointWorldMm": [
+      0.0,
+      -9.5,
+      0.0
+    ],
+    "lowerMatrixUnchanged": true,
+    "upperMatrixUnchanged": true,
+    "envelopeMatrixUnchanged": true,
+    "envelopeType": "EMPTY",
+    "envelopeHideRender": true,
+    "envelopeGeometry": "none",
+    "smoothProfileSegmentsPerSemicircle": 256,
+    "visibleModelMeshes": [
+      "LowerBody_Fixed_CleanPlane",
+      "UpperCapsule_Moving"
+    ],
+    "hiddenMechanismMeshCount": 0,
+    "artworkOrnamentGeometryCount": 0,
+    "animatedOrConstrainedObjects": [],
+    "pass": true
+  },
+  "materialZones": {
+    "lower-polished-silver-alloy": {
+      "object": "LowerBody_Fixed_CleanPlane",
+      "faces": "all",
+      "material": "M07_Lower_PolishedSilver_Approx",
+      "baseColor": [
+        0.58,
+        0.63,
+        0.7,
+        1.0
+      ],
+      "metallic": 0.96,
+      "roughness": 0.17,
+      "ior": 1.5,
+      "coatWeight": 0.24,
+      "coatRoughness": 0.1,
+      "transmissionWeight": 0.0,
+      "support": "Current approved bright-silver material language and exact-product reflective outer rim.",
+      "certainty": "visual-approximation",
+      "uncertainty": "Exact alloy, plating stack, brushed direction, oxidation resistance, and production roughness are unknown.",
+      "actualPbr": {
+        "baseColor": [
+          0.5799999833106995,
+          0.6299999952316284,
+          0.699999988079071,
+          1.0
+        ],
+        "metallic": 0.9599999785423279,
+        "roughness": 0.17000000178813934,
+        "ior": 1.5,
+        "coatWeight": 0.23999999463558197,
+        "coatRoughness": 0.10000000149011612,
+        "transmissionWeight": 0.0
+      }
+    },
+    "upper-dark-coated-frame": {
+      "object": "UpperCapsule_Moving",
+      "faces": "side-and-bottom",
+      "material": "M07_Upper_DarkCoatedMetal_Approx",
+      "baseColor": [
+        0.04,
+        0.05,
+        0.065,
+        1.0
+      ],
+      "metallic": 0.9,
+      "roughness": 0.2,
+      "ior": 1.5,
+      "coatWeight": 0.34,
+      "coatRoughness": 0.12,
+      "transmissionWeight": 0.0,
+      "support": "HALOOPLAYER and NXEDC images show a dark reflective frame inside the bright perimeter.",
+      "certainty": "visual-approximation",
+      "uncertainty": "Exact substrate, black coating chemistry, thickness, and gloss tolerance are unknown.",
+      "actualPbr": {
+        "baseColor": [
+          0.03999999910593033,
+          0.05000000074505806,
+          0.06499999761581421,
+          1.0
+        ],
+        "metallic": 0.8999999761581421,
+        "roughness": 0.20000000298023224,
+        "ior": 1.5,
+        "coatWeight": 0.3400000035762787,
+        "coatRoughness": 0.11999999731779099,
+        "transmissionWeight": 0.0
+      }
+    },
+    "upper-smoked-clear-face": {
+      "object": "UpperCapsule_Moving",
+      "faces": "top-cap-only",
+      "material": "M07_Upper_SmokedClearFace_Approx",
+      "baseColor": [
+        0.075,
+        0.095,
+        0.13,
+        1.0
+      ],
+      "metallic": 0.0,
+      "roughness": 0.13,
+      "ior": 1.48,
+      "coatWeight": 0.62,
+      "coatRoughness": 0.08,
+      "transmissionWeight": 0.12,
+      "support": "Exact-product images show a transparent or semitransparent jewel-like decorative face above dark structure.",
+      "certainty": "visual-approximation",
+      "uncertainty": "Exact resin/glass identity, absorption, tint, transmission, thickness, birefringence, coating, and pearlescent stack are unknown.",
+      "actualPbr": {
+        "baseColor": [
+          0.07500000298023224,
+          0.0949999988079071,
+          0.12999999523162842,
+          1.0
+        ],
+        "metallic": 0.0,
+        "roughness": 0.12999999523162842,
+        "ior": 1.4800000190734863,
+        "coatWeight": 0.6200000047683716,
+        "coatRoughness": 0.07999999821186066,
+        "transmissionWeight": 0.11999999731779099
+      }
+    }
+  },
+  "materialAssignments": {
+    "slots": {
+      "LowerBody_Fixed_CleanPlane": [
+        "M07_Lower_PolishedSilver_Approx"
+      ],
+      "UpperCapsule_Moving": [
+        "M07_Upper_DarkCoatedMetal_Approx",
+        "M07_Upper_SmokedClearFace_Approx"
+      ]
+    },
+    "upperFaces": {
+      "topCapFaceCount": 1,
+      "frameFaceCount": 514
+    },
+    "zoneCount": 3,
+    "pass": true
+  },
+  "sourceLinks": [
+    {
+      "assetId": "slider-intake-haloo-official-01",
+      "role": "official hero; bright reflective perimeter, dark inner frame, jewel-like face",
+      "path": "unity/FidgetingApp/ArtSource/ModelPipeline/magnetic-slide-tile/evidence/01-intake/rev-002/haloo-official/01.png"
+    },
+    {
+      "assetId": "slider-intake-haloo-official-02",
+      "role": "official dual-sided exterior; consistent silver rim and dark face boundary",
+      "path": "unity/FidgetingApp/ArtSource/ModelPipeline/magnetic-slide-tile/evidence/01-intake/rev-002/haloo-official/02.png"
+    },
+    {
+      "assetId": "slider-intake-nxedc-ref-02",
+      "role": "reseller exact-product exterior; reflective frame and translucent decorative layer",
+      "path": "unity/FidgetingApp/ArtSource/ModelPipeline/magnetic-slide-tile/evidence/01-intake/rev-002/external-nxedc/reference-02.jpg"
+    }
+  ],
+  "sourceClaimIds": [
+    "slider-analysis-claim-material-language"
+  ],
+  "uncertaintyPolicy": {
+    "pbrValuesAreProductionSpecifications": false,
+    "artworkOrnamentApproved": false,
+    "hiddenRatchetConstructionKnown": false,
+    "unknownInternalParts": [
+      "teeth",
+      "pawls",
+      "balls",
+      "coupling",
+      "coating-stack",
+      "transparent-layer-thickness"
+    ],
+    "note": "PBR values are neutral lookdev approximations. They cannot establish alloy, coating, resin/glass, or internal mechanism production specifications."
+  },
+  "mechanismDecisionMetadata": {
+    "decisionState": "locked-user-authoritative",
+    "deliveryState": "specified-only-runtime-and-hardware-validation-pending",
+    "rotationRangeDegrees": 360,
+    "detentStepDegrees": 12,
+    "detentCount": 30,
+    "semantics": "ratchet",
+    "physicalAndHapticConsumeSameSetting": true,
+    "runtimeChanged": false,
+    "hapticsChanged": false,
+    "unityChanged": false,
+    "hiddenConstruction": "unknown"
+  },
+  "neutralReveal": {
+    "lights": [
+      "M07_Key_Softbox",
+      "M07_Fill_Softbox",
+      "M07_Rim_Strip"
+    ],
+    "worldStrength": 0.72,
+    "finalLightingOrEnvironment": false,
+    "materialBoard": "neutral-pbr-material-board.png",
+    "materialCloseup": "neutral-pbr-material-closeup.png"
+  },
+  "scope": {
+    "geometryChanged": false,
+    "artworkAdded": false,
+    "hiddenMechanismAdded": false,
+    "runtimeChanged": false,
+    "hapticsChanged": false,
+    "unityAssetChanged": false,
+    "gate08Entered": false
+  },
+  "blender": "5.2.0 LTS"
+}

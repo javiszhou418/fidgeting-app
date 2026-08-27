@@ -1,0 +1,38 @@
+{
+  "modelId": "magnetic-slide-tile",
+  "gate": "02-analysis",
+  "revision": 11,
+  "status": "pass",
+  "contractSha256": "2f685c464db042392f4535fb5705f404e4c6e746adb590b9c020849f7a3cf40a",
+  "checks": {
+    "nodeTests": "56/56 pass",
+    "fixedBottomCadTests": "12/12 pass",
+    "contractTests": "8/8 pass",
+    "pipelineTests": "16/16 pass",
+    "browserDesktopMobilePointer": "pass",
+    "compoundPose": {
+      "travelL": 0.389,
+      "angleDeg": 222.4,
+      "bottomTransform": "identity",
+      "axisLocalEqualsWorld": true,
+      "railOwner": "BottomBase"
+    },
+    "cadApprovalChecklist": "8/8 enabled after interaction",
+    "componentLayers": 7,
+    "referenceCards": 18,
+    "userSelectedReferences": 2,
+    "simulatorLocked": true,
+    "simulatorActiveControls": 0,
+    "syntax": "pass",
+    "pipelineValidation": "pass"
+  },
+  "delivery": {
+    "cadOnly": true,
+    "simulator": "locked-not-generated",
+    "blender": "not-started",
+    "unity": "not-started",
+    "build": "not-started",
+    "install": "not-started",
+    "phone": "not-started"
+  }
+}

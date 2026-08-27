@@ -1,0 +1,41 @@
+{
+  "feature": "Build 42: animated store<->carousel<->pack<->reveal transitions + corrected Rive holder de-branding (v2, covers a nested artboard the first attempt missed)",
+  "sourceCommit": "004a6dc10ada88f6a63964b228ed84fb53a05848",
+  "branch": "codex/gacha-build42",
+  "buildManifest": {
+    "bundleIdentifier": "com.jiaweizhou.fidgetspinner.codex",
+    "buildNumber": "42",
+    "sdk": "SimulatorSDK",
+    "gachaMode": "internalUnlimited"
+  },
+  "simulator": {
+    "device": "GachaRoundTripDevice2 (iPhone 17 Pro runtime)",
+    "udid": "D337403C-60AD-46C1-9FB1-381471EBAA39"
+  },
+  "editModeTestSuite": {
+    "totalTests": 393,
+    "passed": 393,
+    "failed": 0,
+    "resultFile": "/private/tmp/gacha-build42-debrand-v2-editmode-results.xml"
+  },
+  "xcuiTest": {
+    "target": "FidgetingGachaGestureUITests/FullAcceptanceRoundTripUITests/testLibraryToAcceptedPrizeRoundTrip",
+    "result": "passed",
+    "xcresultPath": "/private/tmp/gacha-pack-build42-full-acceptance.xcresult",
+    "ownedCountBefore": 0,
+    "ownedCountAfter": 1,
+    "totalDrawsBefore": 0,
+    "totalDrawsAfter": 1
+  },
+  "changesThisRound": [
+    "Every store<->carousel<->pack<->reveal transition now genuinely animates (see prior validation records in superseded-3d-reveal-era/pre-debrand-v2/ for the transition-animation change details) -- unaffected by this round, carried forward.",
+    "Rive holder de-branding, corrected: v1 (reverted last round) only inspected the foreground/mint-slab artboard's own SolidColor shapes and missed that the runtime binds a second, nested artboard (Coin_Slab_v09-sm) as this artboard's actual rendered foreground content. Re-instrumented the parser to trace every color property read at the field level (not just successfully-constructed objects), found 5 more genuine brand-yellow reads inside the nested artboard, and patched all 17 confirmed occurrences (the original 12 plus these 5) to dark charcoal 0xFF1A1A1A. Verified via full before/after byte-diff that only these 17x3=51 bytes changed anywhere in the 357120-byte file. New asset SHA-256: 7a9088cb40fce3bef3007c42a37e65d81e8401cc7a10ebf54a3564decb2039bf. Visually confirmed via real Simulator frame capture: the yellow bar background is now dark charcoal; the 'whatnot' wordmark and mascot logo are still present but now low-contrast dark-on-dark rather than bright yellow branding."
+  ],
+  "knownRemainingItem": "A muted khaki/gold gradient (hex family 0xFFDCD7A0/0xFF7E7C43/0xFFC3BE87) sits in the same mascot-icon node subtree as the already-patched icon accents but was intentionally left unpatched -- it's a much less vivid tone than the patched brand-yellow, and it's unclear without a product call whether it's meant to be the mascot's fur/coin-shine highlight (keep) or another branding remnant (recolor). Needs a visual decision, not a technical blocker.",
+  "visualApprovalStatus": "pending - real Simulator capture only, not pushed to a physical iPhone",
+  "finalArtifacts": {
+    "video": "unity/FidgetingApp/Artifacts/GachaPackShippingNativePreview/gacha-pack-build42-main-app-full-acceptance-roundtrip.mp4",
+    "videoDurationSeconds": 59.07,
+    "contactSheet": "unity/FidgetingApp/Artifacts/GachaPackShippingNativePreview/gacha-pack-build42-main-app-full-acceptance-roundtrip-contact-sheet.png"
+  }
+}

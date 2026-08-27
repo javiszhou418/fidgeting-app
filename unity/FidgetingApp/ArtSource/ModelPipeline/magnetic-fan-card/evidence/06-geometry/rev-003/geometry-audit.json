@@ -1,0 +1,62 @@
+{
+  "modelId": "magnetic-fan-card",
+  "visibleCornerSegmentsPerQuadrant": 72,
+  "meshObjects": 80,
+  "vertices": 35972,
+  "triangles": 69724,
+  "bodyStats": {
+    "BottomCard_GunmetalFrame": {
+      "vertices": 2552,
+      "triangles": 5104,
+      "dimensionsMm": [
+        63.500002,
+        88.9,
+        3.5
+      ]
+    },
+    "MiddleCard_GunmetalFrame": {
+      "vertices": 2552,
+      "triangles": 5104,
+      "dimensionsMm": [
+        63.500002,
+        88.9,
+        3.5
+      ]
+    },
+    "TopCard_GunmetalFrame": {
+      "vertices": 2552,
+      "triangles": 5104,
+      "dimensionsMm": [
+        63.500002,
+        88.9,
+        3.5
+      ]
+    }
+  },
+  "layerZMillimetres": [
+    0.0,
+    4.5,
+    9.0
+  ],
+  "layerAnglesDegrees": [
+    0.0,
+    45.000001,
+    90.000003
+  ],
+  "trackParents": [
+    "MiddleCard",
+    "TopCard"
+  ],
+  "followerParents": [
+    "BottomCard",
+    "MiddleCard"
+  ],
+  "checks": {
+    "bodyTopologyIncreased": true,
+    "layerPitchPreserved": true,
+    "anglesPreserved": true,
+    "tracksPreserved": true,
+    "followersPreserved": true
+  },
+  "pass": true
+}

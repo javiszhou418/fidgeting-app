@@ -1,0 +1,248 @@
+{
+  "schemaVersion": 1,
+  "modelId": "premium-display-case",
+  "gate": "05-blockout",
+  "blockoutRevision": 1,
+  "status": "pass",
+  "artifactTruth": {
+    "realBlenderBlockout": true,
+    "schematic": false,
+    "shippingUnityChanged": false,
+    "finalGeometry": false
+  },
+  "coordinateSystem": {
+    "x": "width",
+    "y": "height",
+    "z": "depth-positive-front",
+    "origin": "assembled outer-envelope center"
+  },
+  "dimensionsMm": {
+    "target": {
+      "width": 228.0,
+      "height": 304.0,
+      "depth": 59.0
+    },
+    "measured": {
+      "width": 228.0,
+      "height": 304.0,
+      "depth": 59.0
+    },
+    "minimum": [
+      -114.0,
+      -152.0,
+      -29.5
+    ],
+    "maximum": [
+      114.0,
+      152.0,
+      29.5
+    ],
+    "toleranceMm": 0.01,
+    "pass": true
+  },
+  "portrait": {
+    "widthHeightRatio": 0.75,
+    "target": 0.75,
+    "pass": true
+  },
+  "closedTube": {
+    "object": "ContinuousTubePerimeter",
+    "meshObjectCount": 1,
+    "pathClosed": true,
+    "pathSampleCount": 384,
+    "outerSectionMm": {
+      "width": 10.0,
+      "depth": 9.0
+    },
+    "wallThicknessMm": 2.0,
+    "passageSectionMm": {
+      "width": 6.0,
+      "depth": 5.0
+    },
+    "profileCornerRadiusMm": 3.0,
+    "passageCornerRadiusMm": 1.0,
+    "cornerRadiiMm": {
+      "outer": 20.0,
+      "centerline": 15.0,
+      "inner": 10.0
+    },
+    "tangentContinuity": {
+      "joinCount": 8,
+      "analyticMaximumJoinAngleDegrees": 0.0,
+      "continuity": "G1",
+      "pass": true
+    },
+    "topology": {
+      "vertices": 36864,
+      "edges": 73728,
+      "faces": 36864,
+      "openBoundaryEdgeCount": 0,
+      "nonManifoldEdgeCount": 0,
+      "surfaceConnectedComponentCount": 2,
+      "expectedBoundarySurfaceComponents": 2,
+      "surfaceComponents": [
+        {
+          "vertices": 18432,
+          "edges": 36864,
+          "faces": 18432,
+          "eulerCharacteristic": 0
+        },
+        {
+          "vertices": 18432,
+          "edges": 36864,
+          "faces": 18432,
+          "eulerCharacteristic": 0
+        }
+      ],
+      "connectedMaterialBodyCount": 1,
+      "materialBodyBasis": "A cyclic sweep of one connected annular cross-section.",
+      "boundaryInterpretation": "A closed hollow pipe has separate inner and outer watertight boundary surfaces while its annular wall remains one connected material body.",
+      "manifoldPreflightPass": true
+    },
+    "channelFloodFill": {
+      "method": "cyclic-centerline-construction-graph-preflight",
+      "sampleCount": 384,
+      "visitedSamples": 384,
+      "regionsVisited": [
+        "bottom",
+        "bottom-left-bend",
+        "bottom-right-bend",
+        "left",
+        "right",
+        "top",
+        "top-left-bend",
+        "top-right-bend"
+      ],
+      "expectedRegions": [
+        "bottom",
+        "bottom-left-bend",
+        "bottom-right-bend",
+        "left",
+        "right",
+        "top",
+        "top-left-bend",
+        "top-right-bend"
+      ],
+      "pass": true,
+      "gateBoundary": "Construction-level preflight only; volumetric and exported-mesh checks remain Gate 06."
+    }
+  },
+  "hierarchy": {
+    "expected": {
+      "PresentationRoot": null,
+      "CaseAssembly": "PresentationRoot",
+      "RearPolycarbonateShell": "CaseAssembly",
+      "TactileBackgroundInsert": "RearPolycarbonateShell",
+      "ContentSlot": "RearPolycarbonateShell",
+      "FrontPolycarbonateShell": "CaseAssembly",
+      "ContinuousTubePerimeter": "FrontPolycarbonateShell",
+      "PhysicalLabel": "FrontPolycarbonateShell",
+      "LogoZone": "PhysicalLabel",
+      "AchievementZone": "PhysicalLabel",
+      "NarrowFoil": "PhysicalLabel",
+      "TransparentCover": "FrontPolycarbonateShell"
+    },
+    "actual": {
+      "PresentationRoot": null,
+      "CaseAssembly": "PresentationRoot",
+      "RearPolycarbonateShell": "CaseAssembly",
+      "TactileBackgroundInsert": "RearPolycarbonateShell",
+      "ContentSlot": "RearPolycarbonateShell",
+      "FrontPolycarbonateShell": "CaseAssembly",
+      "ContinuousTubePerimeter": "FrontPolycarbonateShell",
+      "PhysicalLabel": "FrontPolycarbonateShell",
+      "LogoZone": "PhysicalLabel",
+      "AchievementZone": "PhysicalLabel",
+      "NarrowFoil": "PhysicalLabel",
+      "TransparentCover": "FrontPolycarbonateShell"
+    },
+    "requiredNodesPresent": true,
+    "contentSlotType": "EMPTY",
+    "transparentCoverType": "EMPTY"
+  },
+  "secondaryDimensions": {
+    "provenance": "retained-approved-shipping-baseline",
+    "sourcePaths": [
+      "unity/FidgetingApp/Docs/DisplayCase/PremiumDisplayCaseSpecification.md",
+      "unity/FidgetingApp/ArtSource/DisplayCase/build_premium_display_case.py",
+      "unity/FidgetingApp/ArtSource/DisplayCase/premium_display_case_manifest.json"
+    ],
+    "adaptation": "Gate 03 changes the approved case width to 228 mm. The blockout retains the shipping shell inset, label, chamber, insert, and ContentSlot dimensions. Rear-shell placement terminates at the approved -29.5 mm envelope boundary.",
+    "frontShellMm": {
+      "width": 224,
+      "height": 300,
+      "depth": 6,
+      "cornerRadius": 13
+    },
+    "rearShellMm": {
+      "width": 224,
+      "height": 300,
+      "depth": 7,
+      "cornerRadius": 13
+    },
+    "labelMm": {
+      "width": 184,
+      "height": 58,
+      "depth": 3,
+      "centerY": 105,
+      "cornerRadius": 4
+    },
+    "tactileInsertMm": {
+      "width": 182,
+      "height": 202,
+      "depth": 9,
+      "centerY": -42,
+      "cornerRadius": 10
+    },
+    "contentSlotMm": {
+      "width": 180,
+      "height": 198,
+      "depth": 48,
+      "centerY": -42,
+      "cornerRadius": 16
+    }
+  },
+  "scope": {
+    "finalMaterials": false,
+    "branding": false,
+    "logos": false,
+    "badges": false,
+    "hiddenFasteners": false,
+    "inventedInternalParts": false,
+    "transparentCoverGeometry": "deferred-no-approved-thickness",
+    "diagnosticMaterialNames": [
+      "MAT_DIAGNOSTIC_InsertClay",
+      "MAT_DIAGNOSTIC_LabelClay",
+      "MAT_DIAGNOSTIC_ShellClay",
+      "MAT_DIAGNOSTIC_TubeClay"
+    ]
+  },
+  "checks": {
+    "approvedEnvelopeExact": true,
+    "portraitRatioExact": true,
+    "tubeSingleMesh": true,
+    "tubeManifoldPreflight": true,
+    "tubeChannelFloodFill": true,
+    "tubeTangentContinuity": true,
+    "approvedHierarchy": true,
+    "contentSlotIsRuntimeAnchor": true,
+    "coverThicknessNotGuessed": true,
+    "noFinalMaterials": true,
+    "noIdentityArtwork": true,
+    "noInventedHardware": true
+  },
+  "validationContext": {
+    "stage": "blockout-preflight",
+    "fullGate06ValidationDeferred": true,
+    "fullGate06Requirements": [
+      "six orthographic views",
+      "Workbench topology review",
+      "dimension and pivot overlays",
+      "exported-mesh manifold verification",
+      "volumetric channel flood-fill",
+      "exploded geometry"
+    ]
+  },
+  "blender": "5.2.0 LTS",
+  "sourceBlend": "premium-display-case-blockout.blend"
+}

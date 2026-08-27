@@ -1,0 +1,499 @@
+{
+  "schemaVersion": 1,
+  "modelId": "magnetic-slide-tile",
+  "gate": "10-export",
+  "exportRevision": 2,
+  "sourceGate10Revision": {
+    "revision": 1,
+    "status": "rejected-preserved",
+    "reason": "Gate 10 rev 1 is rejected because the capsule arcs visibly look faceted; diagnose and correct export shading before changing approved geometry."
+  },
+  "rootCause": {
+    "geometryInsufficient": false,
+    "renderArcSegmentsPerSemicircle": 256,
+    "maximumTurnDegrees": 0.703125,
+    "maximumChordDeviationMm": 0.0002917831196828091,
+    "rev1FbxSmoothingExport": "OFF",
+    "rev2FbxSmoothingExport": "FACE",
+    "collisionReviewConfound": "Rev 1 displayed intentionally low-poly non-rendering collision capsules as shaded geometry beside the shipping model."
+  },
+  "sourceGate09": {
+    "revision": 2,
+    "approvalWording": "\u53ef\u4ee5\u7684\uff0c\u53ef\u4ee5\u7684\u3002\u7136\u540e\u5f00\u59cb\u7ee7\u7eed\u4e0b\u4e00\u6b65\u5427\u3002",
+    "blendPath": "unity/FidgetingApp/ArtSource/ModelPipeline/magnetic-slide-tile/evidence/09-environment/rev-002/magnetic-slide-tile-environment-open-r002.blend",
+    "sha256Before": "8069cd924b31ae81bb7855edb6a8fdcd2e66b0816d13fbba233bb8a35d4c5571",
+    "sha256After": "8069cd924b31ae81bb7855edb6a8fdcd2e66b0816d13fbba233bb8a35d4c5571",
+    "unchanged": true,
+    "geometryDigest": "85bd7dd237c6822c72e575c9a23085eec9a2f28d7afea3a5bf0f13fdc4ebd90f",
+    "localMeshHash": "50b1f913f8b94a1428af404478cb5169d7e142b765955d224125108de463d5d0"
+  },
+  "authoritativeBlend": {
+    "defaultPose": "closed-zero-motion",
+    "sceneUnits": {
+      "system": "METRIC",
+      "scaleLength": 0.0010000000474974513,
+      "lengthUnit": "MILLIMETERS",
+      "modelingUnit": "millimeter",
+      "unityUnit": "meter"
+    },
+    "runtimeObjects": [
+      "CentralAxisPivot_Point",
+      "ConcealedCircularEnvelope_Metadata",
+      "FixedAssembly",
+      "LowerBody_Fixed_CleanPlane",
+      "MagneticSlideTile_Blockout_R003",
+      "UpperCapsule_Moving",
+      "UpperTranslation"
+    ],
+    "diagnosticEnvironmentLightsCamerasRemoved": true,
+    "bounds": {
+      "minimumMm": [
+        -15.5,
+        -25.0,
+        -6.0
+      ],
+      "maximumMm": [
+        15.5,
+        25.0,
+        6.0
+      ],
+      "sizeMm": [
+        31.0,
+        50.0,
+        12.0
+      ]
+    },
+    "triangleCounts": {
+      "LowerBody_Fixed_CleanPlane": 2048,
+      "UpperCapsule_Moving": 2048
+    },
+    "totalTriangles": 4096,
+    "materials": {
+      "LowerBody_Fixed_CleanPlane": [
+        "M07R7_DaylightNeutralPolishedSilver",
+        "M07R7_BloodRedCrystal_WideBorder_Lower"
+      ],
+      "UpperCapsule_Moving": [
+        "M07R7_DaylightNeutralPolishedSilver",
+        "M07R7_BloodRedCrystal_WideBorder_Upper"
+      ]
+    },
+    "uvLayers": {
+      "LowerBody_Fixed_CleanPlane": {
+        "name": "UV0",
+        "minimum": 0.0,
+        "maximum": 1.0,
+        "loops": 3078
+      },
+      "UpperCapsule_Moving": {
+        "name": "UV0",
+        "minimum": 0.0,
+        "maximum": 1.0,
+        "loops": 3078
+      }
+    },
+    "smoothing": {
+      "LowerBody_Fixed_CleanPlane": {
+        "sideFacesSmooth": 513,
+        "capFacesFlat": 2,
+        "sharpCapSideEdges": 1026,
+        "policy": "smooth side walls; flat top/bottom caps; sharp cap-side boundaries"
+      },
+      "UpperCapsule_Moving": {
+        "sideFacesSmooth": 513,
+        "capFacesFlat": 2,
+        "sharpCapSideEdges": 1026,
+        "policy": "smooth side walls; flat top/bottom caps; sharp cap-side boundaries"
+      }
+    },
+    "artworkImagePaths": {
+      "artwork-lower-mask.png": "//textures/artwork-lower-mask.png",
+      "artwork-top-perimeter-border-mask.png": "//textures/artwork-top-perimeter-border-mask.png",
+      "artwork-upper-mask.png": "//textures/artwork-upper-mask.png"
+    },
+    "motion": {
+      "closedDefaultTranslationMm": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "closedDefaultRotationDegrees": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "separateSlidePose": {
+        "axis": "+Y",
+        "travelMm": 21.0,
+        "rotationDegrees": 0.0
+      },
+      "pointAxis": {
+        "coordinateMm": [
+          0.0,
+          -9.5,
+          0.0
+        ],
+        "axis": "+Z"
+      },
+      "detents": {
+        "count": 30,
+        "stepDegrees": 12.0,
+        "deliveryState": "specified-only"
+      },
+      "animations": [],
+      "constraints": [],
+      "drivers": [],
+      "cleanup": {
+        "removedConstraints": [],
+        "removedDrivers": [],
+        "removedAnimations": []
+      }
+    },
+    "hiddenMechanism": {
+      "object": "ConcealedCircularEnvelope_Metadata",
+      "type": "EMPTY",
+      "geometry": "none",
+      "hideRender": true,
+      "exportPolicy": "non-rendering-metadata-only"
+    }
+  },
+  "exports": {
+    "authoritativeBlend": {
+      "path": "unity/FidgetingApp/ArtSource/ModelPipeline/magnetic-slide-tile/evidence/10-export/rev-002/magnetic-slide-tile-authoritative-r002.blend",
+      "sha256": "b6d823ee78733cd140daa958e118c5dae05d056b0ab045ff2042e92c708a52e8",
+      "bytes": 177929
+    },
+    "fbx": {
+      "path": "unity/FidgetingApp/ArtSource/ModelPipeline/magnetic-slide-tile/evidence/10-export/rev-002/magnetic-slide-tile-r002.fbx",
+      "sha256": "3b9e62440b87f7765e8290b048ec327c724b97efc0caa955069f5c0d5906c3c1",
+      "bytes": 256844
+    },
+    "glb": {
+      "path": "unity/FidgetingApp/ArtSource/ModelPipeline/magnetic-slide-tile/evidence/10-export/rev-002/magnetic-slide-tile-r002.glb",
+      "sha256": "26a80c330afbfb80b427875dadda1f95280e71b059e43514bc5cb62e111dcfdc",
+      "bytes": 285308
+    },
+    "collisionFbx": {
+      "path": "unity/FidgetingApp/ArtSource/ModelPipeline/magnetic-slide-tile/evidence/10-export/rev-002/magnetic-slide-tile-collision-r002.fbx",
+      "sha256": "756e506254934ad2ccecef04a44b0bac1b25a111c663090c8e574f4fb23dbeee",
+      "bytes": 19500
+    },
+    "smoothing": {
+      "sourceTriangleGeometryDigest": "9f7606754c8faf4dbf6e95c473f2ae8ee720ee3f3854fecd96345e5cc64a97bb",
+      "exportTriangleGeometryDigest": "9f7606754c8faf4dbf6e95c473f2ae8ee720ee3f3854fecd96345e5cc64a97bb",
+      "unchanged": true
+    },
+    "settings": {
+      "fbx": {
+        "binary": true,
+        "selectionOnly": true,
+        "unitScale": true,
+        "applyScaling": "FBX_SCALE_UNITS",
+        "forward": "-Z",
+        "up": "Y",
+        "normals": true,
+        "tangents": true,
+        "customProperties": true,
+        "animations": false,
+        "embeddedTransportTextures": true,
+        "temporaryTriangulation": "applied-at-export-only",
+        "smoothing": "FACE",
+        "sideWalls": "smooth",
+        "caps": "flat",
+        "capSideBoundaries": "sharp",
+        "splitNormals": "computed from explicit smooth flags and sharp cap boundaries"
+      },
+      "glb": {
+        "format": "GLB",
+        "selectionOnly": true,
+        "up": "Y",
+        "applyTransforms": false,
+        "normals": true,
+        "tangents": true,
+        "uvs": true,
+        "extras": true,
+        "animations": false,
+        "cameras": false,
+        "lights": false,
+        "embeddedTransportTextures": true,
+        "temporaryTriangulation": "applied-at-export-only",
+        "millimeterToMeterRootScale": 0.001
+      },
+      "collision": {
+        "format": "FBX",
+        "strategy": "two-convex-capsule-prisms",
+        "collection": "COL_Collision_MagneticSlideTile",
+        "objects": [
+          "UCX_MagneticSlideTile_Lower_00",
+          "UCX_MagneticSlideTile_Upper_00"
+        ],
+        "triangleCounts": {
+          "UCX_MagneticSlideTile_Lower_00": 128,
+          "UCX_MagneticSlideTile_Upper_00": 128
+        },
+        "totalTriangles": 256,
+        "renderGeometryChanged": false,
+        "visibleLodCreated": false
+      }
+    },
+    "materialTransportNote": "The authoritative Blend retains the approved procedural materials. FBX/GLB keep the same material slot names and use deterministic PBR transport textures; Gate 11 must map the independent masks to the URP shader approximation."
+  },
+  "textures": {
+    "records": {
+      "artwork-lower-channel-pack.png": {
+        "path": "unity/FidgetingApp/ArtSource/ModelPipeline/magnetic-slide-tile/evidence/10-export/rev-002/textures/artwork-lower-channel-pack.png",
+        "sha256": "5e24821cf93895d5d8c2db57e5ad18c9ca95ce44fd47d23f41494177578875ed",
+        "dimensionsPx": [
+          620,
+          1000
+        ],
+        "mode": "RGBA",
+        "channels": [
+          "R",
+          "G",
+          "B",
+          "A"
+        ],
+        "fileBytes": 31515,
+        "estimatedRgba32MemoryBytes": 2480000,
+        "plannedAstcMemoryBytes": 620000,
+        "gate11ImportPlan": {
+          "deliveryState": "specified-only-not-applied",
+          "platform": "iPhone",
+          "format": "ASTC_4x4",
+          "maxSize": 1024,
+          "mipmaps": true,
+          "sRGB": false,
+          "alphaSource": "InputTextureAlpha",
+          "runtime": true
+        }
+      },
+      "artwork-lower-mask.png": {
+        "path": "unity/FidgetingApp/ArtSource/ModelPipeline/magnetic-slide-tile/evidence/10-export/rev-002/textures/artwork-lower-mask.png",
+        "sha256": "8250df70d2286849db353862283b0d3db9c66e1ac92bed3795bcb5377a431c36",
+        "dimensionsPx": [
+          620,
+          1000
+        ],
+        "mode": "L",
+        "channels": [
+          "L"
+        ],
+        "fileBytes": 20641,
+        "estimatedRgba32MemoryBytes": 2480000,
+        "plannedAstcMemoryBytes": null,
+        "gate11ImportPlan": {
+          "deliveryState": "specified-only-not-applied",
+          "platform": "iPhone",
+          "format": "EditorSource",
+          "maxSize": 1024,
+          "mipmaps": false,
+          "sRGB": false,
+          "alphaSource": "None",
+          "runtime": false
+        }
+      },
+      "artwork-top-perimeter-border-mask.png": {
+        "path": "unity/FidgetingApp/ArtSource/ModelPipeline/magnetic-slide-tile/evidence/10-export/rev-002/textures/artwork-top-perimeter-border-mask.png",
+        "sha256": "2179bf26210994c8b3d279337bf6ad0f4beaee3c7285ae97d1cd888db2bd64fc",
+        "dimensionsPx": [
+          620,
+          1000
+        ],
+        "mode": "L",
+        "channels": [
+          "L"
+        ],
+        "fileBytes": 5632,
+        "estimatedRgba32MemoryBytes": 2480000,
+        "plannedAstcMemoryBytes": null,
+        "gate11ImportPlan": {
+          "deliveryState": "specified-only-not-applied",
+          "platform": "iPhone",
+          "format": "EditorSource",
+          "maxSize": 1024,
+          "mipmaps": false,
+          "sRGB": false,
+          "alphaSource": "None",
+          "runtime": false
+        }
+      },
+      "artwork-upper-channel-pack.png": {
+        "path": "unity/FidgetingApp/ArtSource/ModelPipeline/magnetic-slide-tile/evidence/10-export/rev-002/textures/artwork-upper-channel-pack.png",
+        "sha256": "5e24821cf93895d5d8c2db57e5ad18c9ca95ce44fd47d23f41494177578875ed",
+        "dimensionsPx": [
+          620,
+          1000
+        ],
+        "mode": "RGBA",
+        "channels": [
+          "R",
+          "G",
+          "B",
+          "A"
+        ],
+        "fileBytes": 31515,
+        "estimatedRgba32MemoryBytes": 2480000,
+        "plannedAstcMemoryBytes": 620000,
+        "gate11ImportPlan": {
+          "deliveryState": "specified-only-not-applied",
+          "platform": "iPhone",
+          "format": "ASTC_4x4",
+          "maxSize": 1024,
+          "mipmaps": true,
+          "sRGB": false,
+          "alphaSource": "InputTextureAlpha",
+          "runtime": true
+        }
+      },
+      "artwork-upper-mask.png": {
+        "path": "unity/FidgetingApp/ArtSource/ModelPipeline/magnetic-slide-tile/evidence/10-export/rev-002/textures/artwork-upper-mask.png",
+        "sha256": "8250df70d2286849db353862283b0d3db9c66e1ac92bed3795bcb5377a431c36",
+        "dimensionsPx": [
+          620,
+          1000
+        ],
+        "mode": "L",
+        "channels": [
+          "L"
+        ],
+        "fileBytes": 20641,
+        "estimatedRgba32MemoryBytes": 2480000,
+        "plannedAstcMemoryBytes": null,
+        "gate11ImportPlan": {
+          "deliveryState": "specified-only-not-applied",
+          "platform": "iPhone",
+          "format": "EditorSource",
+          "maxSize": 1024,
+          "mipmaps": false,
+          "sRGB": false,
+          "alphaSource": "None",
+          "runtime": false
+        }
+      },
+      "face-lower-transport-basecolor.png": {
+        "path": "unity/FidgetingApp/ArtSource/ModelPipeline/magnetic-slide-tile/evidence/10-export/rev-002/textures/face-lower-transport-basecolor.png",
+        "sha256": "5c1504dab48df4ee6e71aca80f6d9831ce5b23fff6c534563a8ecc3d4ffcfcc2",
+        "dimensionsPx": [
+          620,
+          1000
+        ],
+        "mode": "RGB",
+        "channels": [
+          "R",
+          "G",
+          "B"
+        ],
+        "fileBytes": 26642,
+        "estimatedRgba32MemoryBytes": 2480000,
+        "plannedAstcMemoryBytes": 277888,
+        "gate11ImportPlan": {
+          "deliveryState": "specified-only-not-applied",
+          "platform": "iPhone",
+          "format": "ASTC_6x6",
+          "maxSize": 1024,
+          "mipmaps": false,
+          "sRGB": true,
+          "alphaSource": "None",
+          "runtime": false
+        }
+      },
+      "face-upper-transport-basecolor.png": {
+        "path": "unity/FidgetingApp/ArtSource/ModelPipeline/magnetic-slide-tile/evidence/10-export/rev-002/textures/face-upper-transport-basecolor.png",
+        "sha256": "5c1504dab48df4ee6e71aca80f6d9831ce5b23fff6c534563a8ecc3d4ffcfcc2",
+        "dimensionsPx": [
+          620,
+          1000
+        ],
+        "mode": "RGB",
+        "channels": [
+          "R",
+          "G",
+          "B"
+        ],
+        "fileBytes": 26642,
+        "estimatedRgba32MemoryBytes": 2480000,
+        "plannedAstcMemoryBytes": 277888,
+        "gate11ImportPlan": {
+          "deliveryState": "specified-only-not-applied",
+          "platform": "iPhone",
+          "format": "ASTC_6x6",
+          "maxSize": 1024,
+          "mipmaps": false,
+          "sRGB": true,
+          "alphaSource": "None",
+          "runtime": false
+        }
+      }
+    },
+    "channelPacking": {
+      "upper": {
+        "file": "artwork-upper-channel-pack.png",
+        "R": "upper motif",
+        "G": "top perimeter border",
+        "B": "MAX motif+border",
+        "A": "opaque/reserved"
+      },
+      "lower": {
+        "file": "artwork-lower-channel-pack.png",
+        "R": "lower motif",
+        "G": "top perimeter border",
+        "B": "MAX motif+border",
+        "A": "opaque/reserved"
+      },
+      "independentArtworkEditingPreserved": true
+    },
+    "gate11IosAstcPlan": {
+      "decisionState": "specified",
+      "deliveryState": "not-applied-until-unity-import",
+      "runtimeTextures": [
+        "artwork-upper-channel-pack.png",
+        "artwork-lower-channel-pack.png"
+      ],
+      "recommendedFormat": "ASTC_4x4",
+      "maxSize": 1024,
+      "mipmaps": true,
+      "sRGB": false,
+      "alphaHandling": "opaque; A reserved",
+      "reason": "4x4 preserves the crisp gothic mask edges; separate upper/lower packs preserve independent replacement.",
+      "transportBaseColors": "GLB/FBX preview only; omit from Unity runtime after Shader Graph mask mapping."
+    }
+  },
+  "optimization": {
+    "renderModelTriangles": 4096,
+    "renderMeshCount": 2,
+    "highLowPairCreated": false,
+    "lodCreated": false,
+    "futureSimplifiedLibraryModel": "conditional-on-unity-profiling",
+    "futureHighPoly": "bake-only-never-ships"
+  },
+  "scope": {
+    "gate11Entered": false,
+    "unityImportedOrModified": false,
+    "astcAppliedInUnity": false,
+    "runtimeOrHapticsChanged": false,
+    "buildInstallOrPhonePush": false
+  },
+  "checks": {
+    "gate09ApprovedExactWording": true,
+    "rev1RejectedPreserved": true,
+    "sourceGate09Immutable": true,
+    "closedZeroMotionDefault": true,
+    "geometryPreserved": true,
+    "twoExteriorMeshes": true,
+    "materialsAndSlotsPreserved": true,
+    "independentArtworkPreserved": true,
+    "uvsPresent": true,
+    "smoothingExplicit": true,
+    "triangulatedGeometryUnchanged": true,
+    "hiddenMechanismMetadataOnly": true,
+    "noAnimationConstraintsDrivers": true,
+    "collisionWithinBudget": true,
+    "noLod": true,
+    "requiredFilesExist": true,
+    "astcSpecifiedOnly": true,
+    "gate10Only": true
+  },
+  "packageDigest": "ae9d7dcb1234582b8d959a96e87b616eb29588bf50b2f031c8118341850e0850",
+  "pass": true
+}

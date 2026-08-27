@@ -1,0 +1,333 @@
+{
+  "schema": "premium-display-case-gate04-overlap-architecture.v1",
+  "modelId": "premium-display-case",
+  "gate": "04-architecture",
+  "architectureRevision": 2,
+  "evidenceRevision": 6,
+  "status": "ready_for_review",
+  "sourceContract": {
+    "path": "unity/FidgetingApp/ArtSource/ModelPipeline/premium-display-case/evidence/03-contract/rev-003/modeling-contract.json",
+    "sha256": "1aea4db5fb45e61b936c5145d83d39a2e2a4abfe000dddb46cfdb200f76023f3",
+    "contractRevision": 3,
+    "sourceAnalysisRevision": 6,
+    "sourceClaimIds": [
+      "premium-display-case-analysis-balanced-entry-r005",
+      "premium-display-case-analysis-serial-showcase-r005",
+      "premium-display-case-analysis-no-simultaneous-clutter-r005",
+      "premium-display-case-analysis-balanced-highlight-r005",
+      "premium-display-case-analysis-balanced-timing-r005",
+      "premium-display-case-analysis-pack-seam-light-r006",
+      "premium-display-case-analysis-arrival-rim-r006",
+      "premium-display-case-analysis-rotation-rim-r006",
+      "premium-display-case-analysis-final-light-stop-r006",
+      "premium-display-case-analysis-light-forbidden-r006"
+    ]
+  },
+  "ownership": {
+    "pack": "external/native NativePackOwner",
+    "presentation": "PresentationRoot",
+    "case": "one rigid CaseAssembly instance",
+    "toy": "caller-owned ContentSlot child",
+    "light": "RestrainedLightController"
+  },
+  "nodes": [
+    {
+      "id": "native-pack-owner",
+      "parentId": null,
+      "kind": "external-native-owner",
+      "physical": false,
+      "reviewVisible": true,
+      "responsibilities": [
+        "Pack foreground",
+        "tear progress",
+        "authoritative handoff trigger"
+      ]
+    },
+    {
+      "id": "presentation-root",
+      "parentId": null,
+      "kind": "transform-root",
+      "physical": false,
+      "reviewVisible": true,
+      "responsibilities": [
+        "serial phase ownership",
+        "Y+Z entry",
+        "local-Y 360 showcase"
+      ]
+    },
+    {
+      "id": "reveal-sequence-controller",
+      "parentId": "presentation-root",
+      "kind": "logic-controller",
+      "physical": false,
+      "reviewVisible": true,
+      "responsibilities": [
+        "ENTRY",
+        "ENTRY_SHOWCASE_OVERLAP",
+        "SHOWCASE",
+        "FINAL_LIGHT",
+        "HOLD"
+      ]
+    },
+    {
+      "id": "restrained-light-controller",
+      "parentId": "presentation-root",
+      "kind": "logic-controller",
+      "physical": false,
+      "reviewVisible": true,
+      "responsibilities": [
+        "pack-seam-light",
+        "arrival-rim",
+        "rotation-surface-rim",
+        "final-sheen-short-halo"
+      ]
+    },
+    {
+      "id": "case-assembly",
+      "parentId": "presentation-root",
+      "kind": "rigid-transform-group",
+      "physical": false,
+      "reviewVisible": true,
+      "responsibilities": [
+        "one assembled instance",
+        "same identity through ACK"
+      ]
+    },
+    {
+      "id": "rear-polycarbonate-shell",
+      "parentId": "case-assembly",
+      "kind": "physical-part",
+      "physical": true,
+      "reviewVisible": false
+    },
+    {
+      "id": "tactile-background-insert",
+      "parentId": "case-assembly",
+      "kind": "physical-part",
+      "physical": true,
+      "reviewVisible": false
+    },
+    {
+      "id": "content-slot",
+      "parentId": "case-assembly",
+      "kind": "caller-anchor",
+      "physical": false,
+      "reviewVisible": true
+    },
+    {
+      "id": "toy-content",
+      "parentId": "content-slot",
+      "kind": "external-caller-owned-content",
+      "physical": true,
+      "reviewVisible": true,
+      "independentAngularVelocity": 0
+    },
+    {
+      "id": "front-polycarbonate-shell",
+      "parentId": "case-assembly",
+      "kind": "physical-part",
+      "physical": true,
+      "reviewVisible": false
+    },
+    {
+      "id": "continuous-tube-perimeter",
+      "parentId": "case-assembly",
+      "kind": "one-connected-physical-part",
+      "physical": true,
+      "reviewVisible": false
+    },
+    {
+      "id": "physical-label",
+      "parentId": "case-assembly",
+      "kind": "physical-part",
+      "physical": true,
+      "reviewVisible": false
+    },
+    {
+      "id": "transparent-cover",
+      "parentId": "case-assembly",
+      "kind": "physical-part",
+      "physical": true,
+      "reviewVisible": false
+    }
+  ],
+  "phaseArchitecture": [
+    {
+      "id": "prepare",
+      "owner": "NativePackOwner + RevealSequenceController",
+      "visible": "Pack only",
+      "completion": "receipt + same request + case/prize/camera stable for 2 frames"
+    },
+    {
+      "id": "entry",
+      "owner": "PresentationRoot",
+      "motion": [
+        "screen-y",
+        "camera-depth-z"
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "concurrentPackAction": "Pack retreats for 0.28 s",
+      "lightCue": "pack-seam-light",
+      "completion": "case clears Pack and entry enters deceleration tail"
+    },
+    {
+      "id": "entry-showcase-overlap",
+      "owner": "PresentationRoot",
+      "translation": "late decelerating Y+Z tail",
+      "rotation": "early local-Y 360 onset",
+      "bounded": true,
+      "count": 1,
+      "approvalState": "architecture-locked-window-runtime-values-pending",
+      "lightCue": "arrival-rim transitions to rotation-surface-rim"
+    },
+    {
+      "id": "showcase",
+      "owner": "PresentationRoot",
+      "motion": "continue one local-Y 360",
+      "translation": "locked after entry tail ends",
+      "lightCue": "rotation-surface-rim"
+    },
+    {
+      "id": "final-light",
+      "owner": "RestrainedLightController",
+      "motion": "none",
+      "lightCue": "final-sheen-short-halo"
+    },
+    {
+      "id": "hold",
+      "owner": "RevealSequenceController",
+      "motion": "none",
+      "light": "all cues zero",
+      "completion": "user ACK"
+    }
+  ],
+  "lightCues": [
+    {
+      "id": "pack-seam-light",
+      "owner": "RestrainedLightController",
+      "renderOwner": "NativePackOwner",
+      "trigger": "tear/opening during ENTRY",
+      "finite": true
+    },
+    {
+      "id": "arrival-rim",
+      "owner": "RestrainedLightController",
+      "renderOwner": "CaseAssembly",
+      "trigger": "case clears Pack threshold",
+      "finite": true
+    },
+    {
+      "id": "rotation-surface-rim",
+      "owner": "RestrainedLightController",
+      "renderOwner": "CaseAssembly",
+      "trigger": "turning surface orientation during SHOWCASE",
+      "finite": true
+    },
+    {
+      "id": "final-sheen-short-halo",
+      "owner": "RestrainedLightController",
+      "renderOwner": "CaseAssembly",
+      "trigger": "SHOWCASE completion",
+      "finite": true,
+      "contains": [
+        "final-diagonal-sheen",
+        "settle-halo-then-zero"
+      ]
+    }
+  ],
+  "invariants": {
+    "oneCaseInstance": true,
+    "wholeCaseOnly": true,
+    "packProxyAllowed": false,
+    "entryRotationDegrees": [
+      0,
+      0,
+      0
+    ],
+    "showcaseDegrees": 360,
+    "entryAndShowcaseOverlap": true,
+    "toyIndependentAngularVelocity": 0,
+    "particleEmitterCount": 0,
+    "persistentLightLoop": false,
+    "explodeEligible": false,
+    "overlapWindowCount": 1,
+    "overlapBounded": true,
+    "entryTailOnly": true
+  },
+  "tunableRuntimeParameters": {
+    "decisionState": "explicitly-unlocked-for-later-gates-and-shipping-tuning",
+    "previewDurationSeconds": 3.4,
+    "shippingTotalDurationSeconds": null,
+    "phaseDurationsSeconds": null,
+    "phaseEasing": null,
+    "entryScreenYDistance": null,
+    "entryCameraDepthZDistance": null,
+    "rotationAngularVelocityCurve": null,
+    "seamLightWidth": null,
+    "seamLightIntensity": null,
+    "arrivalRimWidth": null,
+    "arrivalRimIntensity": null,
+    "lightColorTemperatureKelvin": null,
+    "lightFalloff": null,
+    "finalSheenWidth": null,
+    "finalSheenIntensity": null,
+    "settleHaloRadius": null,
+    "settleHaloDuration": null,
+    "shippingCameraFovDegrees": null,
+    "note": "The overlap shown in review is a pending demonstration. Shipping duration, threshold, easing, distance and light values remain unlocked.",
+    "overlapStartThreshold": null,
+    "overlapDurationSeconds": null,
+    "rotationOnsetCurve": null
+  },
+  "internalEvidence": {
+    "partTreeAssetId": "premium-display-case-part-tree-internal-r005",
+    "explodedPlanAssetId": "premium-display-case-exploded-plan-internal-r005",
+    "reviewEligible": false,
+    "productAnimationEligible": false,
+    "changedByRev6": false
+  },
+  "userReview": {
+    "board": "whole-case-overlap-architecture-review.png",
+    "gif": "whole-case-overlap-motion.gif",
+    "contactSheet": "whole-case-overlap-contact-sheet.png",
+    "assembledOnly": true,
+    "explodedVisible": false
+  },
+  "route": {
+    "gate05Status": "blocked",
+    "shippingUnityEdit": false,
+    "buildInstallPhonePush": false,
+    "nextGatePolicy": "Do not enter Gate 05 before explicit Gate 04 approval."
+  },
+  "sourceFeedback": {
+    "quote": "对，然后也不用完全停完再原地转一圈。",
+    "accepted": [
+      "same-case-identity",
+      "ownership-boundaries",
+      "four-finite-light-cues"
+    ],
+    "rejected": "full-stop-before-rotation"
+  },
+  "overlapContract": {
+    "enabled": true,
+    "count": 1,
+    "entryTailOnly": true,
+    "caseMustClearPackBeforeRotation": true,
+    "entryTranslationMustBeDecelerating": true,
+    "unboundedSimultaneousMotion": false,
+    "reviewDemonstrationCandidate": {
+      "entryProgressAtRotationStart": 0.82,
+      "durationSeconds": 0.16,
+      "approvalEffect": "none-pending-runtime-tuning"
+    },
+    "lockedValues": {
+      "startThreshold": null,
+      "durationSeconds": null,
+      "rotationOnsetCurve": null
+    }
+  }
+}

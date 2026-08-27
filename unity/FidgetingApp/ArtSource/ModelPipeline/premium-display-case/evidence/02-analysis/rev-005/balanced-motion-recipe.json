@@ -1,0 +1,2191 @@
+{
+  "schema": "premium-display-case-balanced-motion-review.v1",
+  "modelId": "premium-display-case",
+  "gate": "02-analysis",
+  "analysisRevision": 5,
+  "status": "ready_for_review",
+  "userIntent": "entry-primary-with-z-transfer-and-one-360-showcase",
+  "durationSecondsCandidateOnly": 3.4,
+  "fps": 30,
+  "frameCount": 102,
+  "motion": {
+    "phaseOrder": [
+      "entry-y-z",
+      "settle",
+      "showcase-y-360",
+      "single-highlight",
+      "hold"
+    ],
+    "entryTranslationAxes": [
+      "screen-y",
+      "camera-depth-z"
+    ],
+    "entryRotationDegrees": [
+      0,
+      0,
+      0
+    ],
+    "showcaseTranslationLocked": true,
+    "showcaseRotation": {
+      "axis": "local-y",
+      "degrees": 360,
+      "count": 1
+    },
+    "modelScale": 1.0,
+    "xDrift": false,
+    "roll": false,
+    "pitch": false,
+    "cameraMotion": false,
+    "backgroundMotion": false,
+    "singleHighlight": true,
+    "wholeCaseOnly": true,
+    "objectReplacement": false,
+    "toyMotion": false,
+    "simultaneousEntryAndRotation": false
+  },
+  "timingApprovalEffect": "none-review-candidate-only",
+  "frames": [
+    {
+      "timeSeconds": 0.0,
+      "phase": "READY",
+      "entryProgress": 0.0,
+      "showcaseProgress": 0.0,
+      "sheenProgress": 0.0,
+      "caseWorldPosition": [
+        0.0,
+        -2.75,
+        2.0
+      ],
+      "packTop": 650.0,
+      "rotationEulerDegrees": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "modelScale": 1.0,
+      "cameraMotion": false,
+      "backgroundMotion": false
+    },
+    {
+      "timeSeconds": 0.0333,
+      "phase": "READY",
+      "entryProgress": 0.0,
+      "showcaseProgress": 0.0,
+      "sheenProgress": 0.0,
+      "caseWorldPosition": [
+        0.0,
+        -2.75,
+        2.0
+      ],
+      "packTop": 650.0,
+      "rotationEulerDegrees": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "modelScale": 1.0,
+      "cameraMotion": false,
+      "backgroundMotion": false
+    },
+    {
+      "timeSeconds": 0.0667,
+      "phase": "READY",
+      "entryProgress": 0.0,
+      "showcaseProgress": 0.0,
+      "sheenProgress": 0.0,
+      "caseWorldPosition": [
+        0.0,
+        -2.75,
+        2.0
+      ],
+      "packTop": 650.0,
+      "rotationEulerDegrees": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "modelScale": 1.0,
+      "cameraMotion": false,
+      "backgroundMotion": false
+    },
+    {
+      "timeSeconds": 0.1,
+      "phase": "READY",
+      "entryProgress": 0.0,
+      "showcaseProgress": 0.0,
+      "sheenProgress": 0.0,
+      "caseWorldPosition": [
+        0.0,
+        -2.75,
+        2.0
+      ],
+      "packTop": 650.0,
+      "rotationEulerDegrees": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "modelScale": 1.0,
+      "cameraMotion": false,
+      "backgroundMotion": false
+    },
+    {
+      "timeSeconds": 0.1333,
+      "phase": "READY",
+      "entryProgress": 0.0,
+      "showcaseProgress": 0.0,
+      "sheenProgress": 0.0,
+      "caseWorldPosition": [
+        0.0,
+        -2.75,
+        2.0
+      ],
+      "packTop": 650.0,
+      "rotationEulerDegrees": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "modelScale": 1.0,
+      "cameraMotion": false,
+      "backgroundMotion": false
+    },
+    {
+      "timeSeconds": 0.1667,
+      "phase": "ENTRY · Y + Z",
+      "entryProgress": 0.00146,
+      "showcaseProgress": 0.0,
+      "sheenProgress": 0.0,
+      "caseWorldPosition": [
+        0.0,
+        -2.745986,
+        1.997373
+      ],
+      "packTop": 650.554623,
+      "rotationEulerDegrees": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "modelScale": 1.0,
+      "cameraMotion": false,
+      "backgroundMotion": false
+    },
+    {
+      "timeSeconds": 0.2,
+      "phase": "ENTRY · Y + Z",
+      "entryProgress": 0.012741,
+      "showcaseProgress": 0.0,
+      "sheenProgress": 0.0,
+      "caseWorldPosition": [
+        0.0,
+        -2.714963,
+        1.977067
+      ],
+      "packTop": 654.841481,
+      "rotationEulerDegrees": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "modelScale": 1.0,
+      "cameraMotion": false,
+      "backgroundMotion": false
+    },
+    {
+      "timeSeconds": 0.2333,
+      "phase": "ENTRY · Y + Z",
+      "entryProgress": 0.034294,
+      "showcaseProgress": 0.0,
+      "sheenProgress": 0.0,
+      "caseWorldPosition": [
+        0.0,
+        -2.655693,
+        1.938272
+      ],
+      "packTop": 663.03155,
+      "rotationEulerDegrees": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "modelScale": 1.0,
+      "cameraMotion": false,
+      "backgroundMotion": false
+    },
+    {
+      "timeSeconds": 0.2667,
+      "phase": "ENTRY · Y + Z",
+      "entryProgress": 0.065064,
+      "showcaseProgress": 0.0,
+      "sheenProgress": 0.0,
+      "caseWorldPosition": [
+        0.0,
+        -2.571073,
+        1.882884
+      ],
+      "packTop": 674.724499,
+      "rotationEulerDegrees": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "modelScale": 1.0,
+      "cameraMotion": false,
+      "backgroundMotion": false
+    },
+    {
+      "timeSeconds": 0.3,
+      "phase": "ENTRY · Y + Z",
+      "entryProgress": 0.104,
+      "showcaseProgress": 0.0,
+      "sheenProgress": 0.0,
+      "caseWorldPosition": [
+        0.0,
+        -2.464,
+        1.8128
+      ],
+      "packTop": 689.52,
+      "rotationEulerDegrees": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "modelScale": 1.0,
+      "cameraMotion": false,
+      "backgroundMotion": false
+    },
+    {
+      "timeSeconds": 0.3333,
+      "phase": "ENTRY · Y + Z",
+      "entryProgress": 0.150047,
+      "showcaseProgress": 0.0,
+      "sheenProgress": 0.0,
+      "caseWorldPosition": [
+        0.0,
+        -2.337372,
+        1.729916
+      ],
+      "packTop": 707.017723,
+      "rotationEulerDegrees": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "modelScale": 1.0,
+      "cameraMotion": false,
+      "backgroundMotion": false
+    },
+    {
+      "timeSeconds": 0.3667,
+      "phase": "ENTRY · Y + Z",
+      "entryProgress": 0.202151,
+      "showcaseProgress": 0.0,
+      "sheenProgress": 0.0,
+      "caseWorldPosition": [
+        0.0,
+        -2.194085,
+        1.636128
+      ],
+      "packTop": 726.817339,
+      "rotationEulerDegrees": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "modelScale": 1.0,
+      "cameraMotion": false,
+      "backgroundMotion": false
+    },
+    {
+      "timeSeconds": 0.4,
+      "phase": "ENTRY · Y + Z",
+      "entryProgress": 0.259259,
+      "showcaseProgress": 0.0,
+      "sheenProgress": 0.0,
+      "caseWorldPosition": [
+        0.0,
+        -2.037037,
+        1.533333
+      ],
+      "packTop": 748.518519,
+      "rotationEulerDegrees": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "modelScale": 1.0,
+      "cameraMotion": false,
+      "backgroundMotion": false
+    },
+    {
+      "timeSeconds": 0.4333,
+      "phase": "ENTRY · Y + Z",
+      "entryProgress": 0.320318,
+      "showcaseProgress": 0.0,
+      "sheenProgress": 0.0,
+      "caseWorldPosition": [
+        0.0,
+        -1.869125,
+        1.423427
+      ],
+      "packTop": 771.720933,
+      "rotationEulerDegrees": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "modelScale": 1.0,
+      "cameraMotion": false,
+      "backgroundMotion": false
+    },
+    {
+      "timeSeconds": 0.4667,
+      "phase": "ENTRY · Y + Z",
+      "entryProgress": 0.384274,
+      "showcaseProgress": 0.0,
+      "sheenProgress": 0.0,
+      "caseWorldPosition": [
+        0.0,
+        -1.693246,
+        1.308306
+      ],
+      "packTop": 796.024252,
+      "rotationEulerDegrees": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "modelScale": 1.0,
+      "cameraMotion": false,
+      "backgroundMotion": false
+    },
+    {
+      "timeSeconds": 0.5,
+      "phase": "ENTRY · Y + Z",
+      "entryProgress": 0.450074,
+      "showcaseProgress": 0.0,
+      "sheenProgress": 0.0,
+      "caseWorldPosition": [
+        0.0,
+        -1.512296,
+        1.189867
+      ],
+      "packTop": 821.028148,
+      "rotationEulerDegrees": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "modelScale": 1.0,
+      "cameraMotion": false,
+      "backgroundMotion": false
+    },
+    {
+      "timeSeconds": 0.5333,
+      "phase": "ENTRY · Y + Z",
+      "entryProgress": 0.516664,
+      "showcaseProgress": 0.0,
+      "sheenProgress": 0.0,
+      "caseWorldPosition": [
+        0.0,
+        -1.329174,
+        1.070005
+      ],
+      "packTop": 846.332291,
+      "rotationEulerDegrees": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "modelScale": 1.0,
+      "cameraMotion": false,
+      "backgroundMotion": false
+    },
+    {
+      "timeSeconds": 0.5667,
+      "phase": "ENTRY · Y + Z",
+      "entryProgress": 0.58299,
+      "showcaseProgress": 0.0,
+      "sheenProgress": 0.0,
+      "caseWorldPosition": [
+        0.0,
+        -1.146776,
+        0.950617
+      ],
+      "packTop": 871.536351,
+      "rotationEulerDegrees": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "modelScale": 1.0,
+      "cameraMotion": false,
+      "backgroundMotion": false
+    },
+    {
+      "timeSeconds": 0.6,
+      "phase": "ENTRY · Y + Z",
+      "entryProgress": 0.648,
+      "showcaseProgress": 0.0,
+      "sheenProgress": 0.0,
+      "caseWorldPosition": [
+        0.0,
+        -0.968,
+        0.8336
+      ],
+      "packTop": 896.24,
+      "rotationEulerDegrees": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "modelScale": 1.0,
+      "cameraMotion": false,
+      "backgroundMotion": false
+    },
+    {
+      "timeSeconds": 0.6333,
+      "phase": "ENTRY · Y + Z",
+      "entryProgress": 0.710639,
+      "showcaseProgress": 0.0,
+      "sheenProgress": 0.0,
+      "caseWorldPosition": [
+        0.0,
+        -0.795742,
+        0.720849
+      ],
+      "packTop": 920.042908,
+      "rotationEulerDegrees": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "modelScale": 1.0,
+      "cameraMotion": false,
+      "backgroundMotion": false
+    },
+    {
+      "timeSeconds": 0.6667,
+      "phase": "ENTRY · Y + Z",
+      "entryProgress": 0.769855,
+      "showcaseProgress": 0.0,
+      "sheenProgress": 0.0,
+      "caseWorldPosition": [
+        0.0,
+        -0.6329,
+        0.614262
+      ],
+      "packTop": 942.544746,
+      "rotationEulerDegrees": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "modelScale": 1.0,
+      "cameraMotion": false,
+      "backgroundMotion": false
+    },
+    {
+      "timeSeconds": 0.7,
+      "phase": "ENTRY · Y + Z",
+      "entryProgress": 0.824593,
+      "showcaseProgress": 0.0,
+      "sheenProgress": 0.0,
+      "caseWorldPosition": [
+        0.0,
+        -0.48237,
+        0.515733
+      ],
+      "packTop": 963.345185,
+      "rotationEulerDegrees": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "modelScale": 1.0,
+      "cameraMotion": false,
+      "backgroundMotion": false
+    },
+    {
+      "timeSeconds": 0.7333,
+      "phase": "ENTRY · Y + Z",
+      "entryProgress": 0.8738,
+      "showcaseProgress": 0.0,
+      "sheenProgress": 0.0,
+      "caseWorldPosition": [
+        0.0,
+        -0.347051,
+        0.42716
+      ],
+      "packTop": 982.043896,
+      "rotationEulerDegrees": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "modelScale": 1.0,
+      "cameraMotion": false,
+      "backgroundMotion": false
+    },
+    {
+      "timeSeconds": 0.7667,
+      "phase": "ENTRY · Y + Z",
+      "entryProgress": 0.916422,
+      "showcaseProgress": 0.0,
+      "sheenProgress": 0.0,
+      "caseWorldPosition": [
+        0.0,
+        -0.229838,
+        0.35044
+      ],
+      "packTop": 998.240549,
+      "rotationEulerDegrees": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "modelScale": 1.0,
+      "cameraMotion": false,
+      "backgroundMotion": false
+    },
+    {
+      "timeSeconds": 0.8,
+      "phase": "ENTRY · Y + Z",
+      "entryProgress": 0.951407,
+      "showcaseProgress": 0.0,
+      "sheenProgress": 0.0,
+      "caseWorldPosition": [
+        0.0,
+        -0.13363,
+        0.287467
+      ],
+      "packTop": 1011.534815,
+      "rotationEulerDegrees": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "modelScale": 1.0,
+      "cameraMotion": false,
+      "backgroundMotion": false
+    },
+    {
+      "timeSeconds": 0.8333,
+      "phase": "ENTRY · Y + Z",
+      "entryProgress": 0.977701,
+      "showcaseProgress": 0.0,
+      "sheenProgress": 0.0,
+      "caseWorldPosition": [
+        0.0,
+        -0.061322,
+        0.240138
+      ],
+      "packTop": 1021.526365,
+      "rotationEulerDegrees": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "modelScale": 1.0,
+      "cameraMotion": false,
+      "backgroundMotion": false
+    },
+    {
+      "timeSeconds": 0.8667,
+      "phase": "ENTRY · Y + Z",
+      "entryProgress": 0.99425,
+      "showcaseProgress": 0.0,
+      "sheenProgress": 0.0,
+      "caseWorldPosition": [
+        0.0,
+        -0.015813,
+        0.210351
+      ],
+      "packTop": 1027.81487,
+      "rotationEulerDegrees": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "modelScale": 1.0,
+      "cameraMotion": false,
+      "backgroundMotion": false
+    },
+    {
+      "timeSeconds": 0.9,
+      "phase": "SETTLE",
+      "entryProgress": 1.0,
+      "showcaseProgress": 0.0,
+      "sheenProgress": 0.0,
+      "caseWorldPosition": [
+        0.0,
+        0.0,
+        0.2
+      ],
+      "packTop": 1030.0,
+      "rotationEulerDegrees": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "modelScale": 1.0,
+      "cameraMotion": false,
+      "backgroundMotion": false
+    },
+    {
+      "timeSeconds": 0.9333,
+      "phase": "SETTLE",
+      "entryProgress": 1.0,
+      "showcaseProgress": 0.0,
+      "sheenProgress": 0.0,
+      "caseWorldPosition": [
+        0.0,
+        0.0,
+        0.2
+      ],
+      "packTop": 1030.0,
+      "rotationEulerDegrees": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "modelScale": 1.0,
+      "cameraMotion": false,
+      "backgroundMotion": false
+    },
+    {
+      "timeSeconds": 0.9667,
+      "phase": "SETTLE",
+      "entryProgress": 1.0,
+      "showcaseProgress": 0.0,
+      "sheenProgress": 0.0,
+      "caseWorldPosition": [
+        0.0,
+        0.0,
+        0.2
+      ],
+      "packTop": 1030.0,
+      "rotationEulerDegrees": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "modelScale": 1.0,
+      "cameraMotion": false,
+      "backgroundMotion": false
+    },
+    {
+      "timeSeconds": 1.0,
+      "phase": "SETTLE",
+      "entryProgress": 1.0,
+      "showcaseProgress": 0.0,
+      "sheenProgress": 0.0,
+      "caseWorldPosition": [
+        0.0,
+        0.0,
+        0.2
+      ],
+      "packTop": 1030.0,
+      "rotationEulerDegrees": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "modelScale": 1.0,
+      "cameraMotion": false,
+      "backgroundMotion": false
+    },
+    {
+      "timeSeconds": 1.0333,
+      "phase": "SETTLE",
+      "entryProgress": 1.0,
+      "showcaseProgress": 0.0,
+      "sheenProgress": 0.0,
+      "caseWorldPosition": [
+        0.0,
+        0.0,
+        0.2
+      ],
+      "packTop": 1030.0,
+      "rotationEulerDegrees": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "modelScale": 1.0,
+      "cameraMotion": false,
+      "backgroundMotion": false
+    },
+    {
+      "timeSeconds": 1.0667,
+      "phase": "360° SHOWCASE",
+      "entryProgress": 1.0,
+      "showcaseProgress": 0.000422,
+      "sheenProgress": 0.0,
+      "caseWorldPosition": [
+        0.0,
+        0.0,
+        0.2
+      ],
+      "packTop": 1030.0,
+      "rotationEulerDegrees": [
+        0.0,
+        0.151846,
+        0.0
+      ],
+      "modelScale": 1.0,
+      "cameraMotion": false,
+      "backgroundMotion": false
+    },
+    {
+      "timeSeconds": 1.1,
+      "phase": "360° SHOWCASE",
+      "entryProgress": 1.0,
+      "showcaseProgress": 0.003735,
+      "sheenProgress": 0.0,
+      "caseWorldPosition": [
+        0.0,
+        0.0,
+        0.2
+      ],
+      "packTop": 1030.0,
+      "rotationEulerDegrees": [
+        0.0,
+        1.344752,
+        0.0
+      ],
+      "modelScale": 1.0,
+      "cameraMotion": false,
+      "backgroundMotion": false
+    },
+    {
+      "timeSeconds": 1.1333,
+      "phase": "360° SHOWCASE",
+      "entryProgress": 1.0,
+      "showcaseProgress": 0.010207,
+      "sheenProgress": 0.0,
+      "caseWorldPosition": [
+        0.0,
+        0.0,
+        0.2
+      ],
+      "packTop": 1030.0,
+      "rotationEulerDegrees": [
+        0.0,
+        3.674684,
+        0.0
+      ],
+      "modelScale": 1.0,
+      "cameraMotion": false,
+      "backgroundMotion": false
+    },
+    {
+      "timeSeconds": 1.1667,
+      "phase": "360° SHOWCASE",
+      "entryProgress": 1.0,
+      "showcaseProgress": 0.019676,
+      "sheenProgress": 0.0,
+      "caseWorldPosition": [
+        0.0,
+        0.0,
+        0.2
+      ],
+      "packTop": 1030.0,
+      "rotationEulerDegrees": [
+        0.0,
+        7.083333,
+        0.0
+      ],
+      "modelScale": 1.0,
+      "cameraMotion": false,
+      "backgroundMotion": false
+    },
+    {
+      "timeSeconds": 1.2,
+      "phase": "360° SHOWCASE",
+      "entryProgress": 1.0,
+      "showcaseProgress": 0.031979,
+      "sheenProgress": 0.0,
+      "caseWorldPosition": [
+        0.0,
+        0.0,
+        0.2
+      ],
+      "packTop": 1030.0,
+      "rotationEulerDegrees": [
+        0.0,
+        11.512391,
+        0.0
+      ],
+      "modelScale": 1.0,
+      "cameraMotion": false,
+      "backgroundMotion": false
+    },
+    {
+      "timeSeconds": 1.2333,
+      "phase": "360° SHOWCASE",
+      "entryProgress": 1.0,
+      "showcaseProgress": 0.046954,
+      "sheenProgress": 0.0,
+      "caseWorldPosition": [
+        0.0,
+        0.0,
+        0.2
+      ],
+      "packTop": 1030.0,
+      "rotationEulerDegrees": [
+        0.0,
+        16.903547,
+        0.0
+      ],
+      "modelScale": 1.0,
+      "cameraMotion": false,
+      "backgroundMotion": false
+    },
+    {
+      "timeSeconds": 1.2667,
+      "phase": "360° SHOWCASE",
+      "entryProgress": 1.0,
+      "showcaseProgress": 0.06444,
+      "sheenProgress": 0.0,
+      "caseWorldPosition": [
+        0.0,
+        0.0,
+        0.2
+      ],
+      "packTop": 1030.0,
+      "rotationEulerDegrees": [
+        0.0,
+        23.198494,
+        0.0
+      ],
+      "modelScale": 1.0,
+      "cameraMotion": false,
+      "backgroundMotion": false
+    },
+    {
+      "timeSeconds": 1.3,
+      "phase": "360° SHOWCASE",
+      "entryProgress": 1.0,
+      "showcaseProgress": 0.084275,
+      "sheenProgress": 0.0,
+      "caseWorldPosition": [
+        0.0,
+        0.0,
+        0.2
+      ],
+      "packTop": 1030.0,
+      "rotationEulerDegrees": [
+        0.0,
+        30.338921,
+        0.0
+      ],
+      "modelScale": 1.0,
+      "cameraMotion": false,
+      "backgroundMotion": false
+    },
+    {
+      "timeSeconds": 1.3333,
+      "phase": "360° SHOWCASE",
+      "entryProgress": 1.0,
+      "showcaseProgress": 0.106296,
+      "sheenProgress": 0.0,
+      "caseWorldPosition": [
+        0.0,
+        0.0,
+        0.2
+      ],
+      "packTop": 1030.0,
+      "rotationEulerDegrees": [
+        0.0,
+        38.266521,
+        0.0
+      ],
+      "modelScale": 1.0,
+      "cameraMotion": false,
+      "backgroundMotion": false
+    },
+    {
+      "timeSeconds": 1.3667,
+      "phase": "360° SHOWCASE",
+      "entryProgress": 1.0,
+      "showcaseProgress": 0.130342,
+      "sheenProgress": 0.0,
+      "caseWorldPosition": [
+        0.0,
+        0.0,
+        0.2
+      ],
+      "packTop": 1030.0,
+      "rotationEulerDegrees": [
+        0.0,
+        46.922983,
+        0.0
+      ],
+      "modelScale": 1.0,
+      "cameraMotion": false,
+      "backgroundMotion": false
+    },
+    {
+      "timeSeconds": 1.4,
+      "phase": "360° SHOWCASE",
+      "entryProgress": 1.0,
+      "showcaseProgress": 0.15625,
+      "sheenProgress": 0.0,
+      "caseWorldPosition": [
+        0.0,
+        0.0,
+        0.2
+      ],
+      "packTop": 1030.0,
+      "rotationEulerDegrees": [
+        0.0,
+        56.25,
+        0.0
+      ],
+      "modelScale": 1.0,
+      "cameraMotion": false,
+      "backgroundMotion": false
+    },
+    {
+      "timeSeconds": 1.4333,
+      "phase": "360° SHOWCASE",
+      "entryProgress": 1.0,
+      "showcaseProgress": 0.183859,
+      "sheenProgress": 0.0,
+      "caseWorldPosition": [
+        0.0,
+        0.0,
+        0.2
+      ],
+      "packTop": 1030.0,
+      "rotationEulerDegrees": [
+        0.0,
+        66.189261,
+        0.0
+      ],
+      "modelScale": 1.0,
+      "cameraMotion": false,
+      "backgroundMotion": false
+    },
+    {
+      "timeSeconds": 1.4667,
+      "phase": "360° SHOWCASE",
+      "entryProgress": 1.0,
+      "showcaseProgress": 0.213007,
+      "sheenProgress": 0.0,
+      "caseWorldPosition": [
+        0.0,
+        0.0,
+        0.2
+      ],
+      "packTop": 1030.0,
+      "rotationEulerDegrees": [
+        0.0,
+        76.682459,
+        0.0
+      ],
+      "modelScale": 1.0,
+      "cameraMotion": false,
+      "backgroundMotion": false
+    },
+    {
+      "timeSeconds": 1.5,
+      "phase": "360° SHOWCASE",
+      "entryProgress": 1.0,
+      "showcaseProgress": 0.243531,
+      "sheenProgress": 0.0,
+      "caseWorldPosition": [
+        0.0,
+        0.0,
+        0.2
+      ],
+      "packTop": 1030.0,
+      "rotationEulerDegrees": [
+        0.0,
+        87.671283,
+        0.0
+      ],
+      "modelScale": 1.0,
+      "cameraMotion": false,
+      "backgroundMotion": false
+    },
+    {
+      "timeSeconds": 1.5333,
+      "phase": "360° SHOWCASE",
+      "entryProgress": 1.0,
+      "showcaseProgress": 0.275271,
+      "sheenProgress": 0.0,
+      "caseWorldPosition": [
+        0.0,
+        0.0,
+        0.2
+      ],
+      "packTop": 1030.0,
+      "rotationEulerDegrees": [
+        0.0,
+        99.097425,
+        0.0
+      ],
+      "modelScale": 1.0,
+      "cameraMotion": false,
+      "backgroundMotion": false
+    },
+    {
+      "timeSeconds": 1.5667,
+      "phase": "360° SHOWCASE",
+      "entryProgress": 1.0,
+      "showcaseProgress": 0.308063,
+      "sheenProgress": 0.0,
+      "caseWorldPosition": [
+        0.0,
+        0.0,
+        0.2
+      ],
+      "packTop": 1030.0,
+      "rotationEulerDegrees": [
+        0.0,
+        110.902575,
+        0.0
+      ],
+      "modelScale": 1.0,
+      "cameraMotion": false,
+      "backgroundMotion": false
+    },
+    {
+      "timeSeconds": 1.6,
+      "phase": "360° SHOWCASE",
+      "entryProgress": 1.0,
+      "showcaseProgress": 0.341746,
+      "sheenProgress": 0.0,
+      "caseWorldPosition": [
+        0.0,
+        0.0,
+        0.2
+      ],
+      "packTop": 1030.0,
+      "rotationEulerDegrees": [
+        0.0,
+        123.028426,
+        0.0
+      ],
+      "modelScale": 1.0,
+      "cameraMotion": false,
+      "backgroundMotion": false
+    },
+    {
+      "timeSeconds": 1.6333,
+      "phase": "360° SHOWCASE",
+      "entryProgress": 1.0,
+      "showcaseProgress": 0.376157,
+      "sheenProgress": 0.0,
+      "caseWorldPosition": [
+        0.0,
+        0.0,
+        0.2
+      ],
+      "packTop": 1030.0,
+      "rotationEulerDegrees": [
+        0.0,
+        135.416667,
+        0.0
+      ],
+      "modelScale": 1.0,
+      "cameraMotion": false,
+      "backgroundMotion": false
+    },
+    {
+      "timeSeconds": 1.6667,
+      "phase": "360° SHOWCASE",
+      "entryProgress": 1.0,
+      "showcaseProgress": 0.411136,
+      "sheenProgress": 0.0,
+      "caseWorldPosition": [
+        0.0,
+        0.0,
+        0.2
+      ],
+      "packTop": 1030.0,
+      "rotationEulerDegrees": [
+        0.0,
+        148.008989,
+        0.0
+      ],
+      "modelScale": 1.0,
+      "cameraMotion": false,
+      "backgroundMotion": false
+    },
+    {
+      "timeSeconds": 1.7,
+      "phase": "360° SHOWCASE",
+      "entryProgress": 1.0,
+      "showcaseProgress": 0.44652,
+      "sheenProgress": 0.0,
+      "caseWorldPosition": [
+        0.0,
+        0.0,
+        0.2
+      ],
+      "packTop": 1030.0,
+      "rotationEulerDegrees": [
+        0.0,
+        160.747085,
+        0.0
+      ],
+      "modelScale": 1.0,
+      "cameraMotion": false,
+      "backgroundMotion": false
+    },
+    {
+      "timeSeconds": 1.7333,
+      "phase": "360° SHOWCASE",
+      "entryProgress": 1.0,
+      "showcaseProgress": 0.482146,
+      "sheenProgress": 0.0,
+      "caseWorldPosition": [
+        0.0,
+        0.0,
+        0.2
+      ],
+      "packTop": 1030.0,
+      "rotationEulerDegrees": [
+        0.0,
+        173.572643,
+        0.0
+      ],
+      "modelScale": 1.0,
+      "cameraMotion": false,
+      "backgroundMotion": false
+    },
+    {
+      "timeSeconds": 1.7667,
+      "phase": "360° SHOWCASE",
+      "entryProgress": 1.0,
+      "showcaseProgress": 0.517854,
+      "sheenProgress": 0.0,
+      "caseWorldPosition": [
+        0.0,
+        0.0,
+        0.2
+      ],
+      "packTop": 1030.0,
+      "rotationEulerDegrees": [
+        0.0,
+        186.427357,
+        0.0
+      ],
+      "modelScale": 1.0,
+      "cameraMotion": false,
+      "backgroundMotion": false
+    },
+    {
+      "timeSeconds": 1.8,
+      "phase": "360° SHOWCASE",
+      "entryProgress": 1.0,
+      "showcaseProgress": 0.55348,
+      "sheenProgress": 0.0,
+      "caseWorldPosition": [
+        0.0,
+        0.0,
+        0.2
+      ],
+      "packTop": 1030.0,
+      "rotationEulerDegrees": [
+        0.0,
+        199.252915,
+        0.0
+      ],
+      "modelScale": 1.0,
+      "cameraMotion": false,
+      "backgroundMotion": false
+    },
+    {
+      "timeSeconds": 1.8333,
+      "phase": "360° SHOWCASE",
+      "entryProgress": 1.0,
+      "showcaseProgress": 0.588864,
+      "sheenProgress": 0.0,
+      "caseWorldPosition": [
+        0.0,
+        0.0,
+        0.2
+      ],
+      "packTop": 1030.0,
+      "rotationEulerDegrees": [
+        0.0,
+        211.991011,
+        0.0
+      ],
+      "modelScale": 1.0,
+      "cameraMotion": false,
+      "backgroundMotion": false
+    },
+    {
+      "timeSeconds": 1.8667,
+      "phase": "360° SHOWCASE",
+      "entryProgress": 1.0,
+      "showcaseProgress": 0.623843,
+      "sheenProgress": 0.0,
+      "caseWorldPosition": [
+        0.0,
+        0.0,
+        0.2
+      ],
+      "packTop": 1030.0,
+      "rotationEulerDegrees": [
+        0.0,
+        224.583333,
+        0.0
+      ],
+      "modelScale": 1.0,
+      "cameraMotion": false,
+      "backgroundMotion": false
+    },
+    {
+      "timeSeconds": 1.9,
+      "phase": "360° SHOWCASE",
+      "entryProgress": 1.0,
+      "showcaseProgress": 0.658254,
+      "sheenProgress": 0.0,
+      "caseWorldPosition": [
+        0.0,
+        0.0,
+        0.2
+      ],
+      "packTop": 1030.0,
+      "rotationEulerDegrees": [
+        0.0,
+        236.971574,
+        0.0
+      ],
+      "modelScale": 1.0,
+      "cameraMotion": false,
+      "backgroundMotion": false
+    },
+    {
+      "timeSeconds": 1.9333,
+      "phase": "360° SHOWCASE",
+      "entryProgress": 1.0,
+      "showcaseProgress": 0.691937,
+      "sheenProgress": 0.0,
+      "caseWorldPosition": [
+        0.0,
+        0.0,
+        0.2
+      ],
+      "packTop": 1030.0,
+      "rotationEulerDegrees": [
+        0.0,
+        249.097425,
+        0.0
+      ],
+      "modelScale": 1.0,
+      "cameraMotion": false,
+      "backgroundMotion": false
+    },
+    {
+      "timeSeconds": 1.9667,
+      "phase": "360° SHOWCASE",
+      "entryProgress": 1.0,
+      "showcaseProgress": 0.724729,
+      "sheenProgress": 0.0,
+      "caseWorldPosition": [
+        0.0,
+        0.0,
+        0.2
+      ],
+      "packTop": 1030.0,
+      "rotationEulerDegrees": [
+        0.0,
+        260.902575,
+        0.0
+      ],
+      "modelScale": 1.0,
+      "cameraMotion": false,
+      "backgroundMotion": false
+    },
+    {
+      "timeSeconds": 2.0,
+      "phase": "360° SHOWCASE",
+      "entryProgress": 1.0,
+      "showcaseProgress": 0.756469,
+      "sheenProgress": 0.0,
+      "caseWorldPosition": [
+        0.0,
+        0.0,
+        0.2
+      ],
+      "packTop": 1030.0,
+      "rotationEulerDegrees": [
+        0.0,
+        272.328717,
+        0.0
+      ],
+      "modelScale": 1.0,
+      "cameraMotion": false,
+      "backgroundMotion": false
+    },
+    {
+      "timeSeconds": 2.0333,
+      "phase": "360° SHOWCASE",
+      "entryProgress": 1.0,
+      "showcaseProgress": 0.786993,
+      "sheenProgress": 0.0,
+      "caseWorldPosition": [
+        0.0,
+        0.0,
+        0.2
+      ],
+      "packTop": 1030.0,
+      "rotationEulerDegrees": [
+        0.0,
+        283.317541,
+        0.0
+      ],
+      "modelScale": 1.0,
+      "cameraMotion": false,
+      "backgroundMotion": false
+    },
+    {
+      "timeSeconds": 2.0667,
+      "phase": "360° SHOWCASE",
+      "entryProgress": 1.0,
+      "showcaseProgress": 0.816141,
+      "sheenProgress": 0.0,
+      "caseWorldPosition": [
+        0.0,
+        0.0,
+        0.2
+      ],
+      "packTop": 1030.0,
+      "rotationEulerDegrees": [
+        0.0,
+        293.810739,
+        0.0
+      ],
+      "modelScale": 1.0,
+      "cameraMotion": false,
+      "backgroundMotion": false
+    },
+    {
+      "timeSeconds": 2.1,
+      "phase": "360° SHOWCASE",
+      "entryProgress": 1.0,
+      "showcaseProgress": 0.84375,
+      "sheenProgress": 0.0,
+      "caseWorldPosition": [
+        0.0,
+        0.0,
+        0.2
+      ],
+      "packTop": 1030.0,
+      "rotationEulerDegrees": [
+        0.0,
+        303.75,
+        0.0
+      ],
+      "modelScale": 1.0,
+      "cameraMotion": false,
+      "backgroundMotion": false
+    },
+    {
+      "timeSeconds": 2.1333,
+      "phase": "360° SHOWCASE",
+      "entryProgress": 1.0,
+      "showcaseProgress": 0.869658,
+      "sheenProgress": 0.0,
+      "caseWorldPosition": [
+        0.0,
+        0.0,
+        0.2
+      ],
+      "packTop": 1030.0,
+      "rotationEulerDegrees": [
+        0.0,
+        313.077017,
+        0.0
+      ],
+      "modelScale": 1.0,
+      "cameraMotion": false,
+      "backgroundMotion": false
+    },
+    {
+      "timeSeconds": 2.1667,
+      "phase": "360° SHOWCASE",
+      "entryProgress": 1.0,
+      "showcaseProgress": 0.893704,
+      "sheenProgress": 0.0,
+      "caseWorldPosition": [
+        0.0,
+        0.0,
+        0.2
+      ],
+      "packTop": 1030.0,
+      "rotationEulerDegrees": [
+        0.0,
+        321.733479,
+        0.0
+      ],
+      "modelScale": 1.0,
+      "cameraMotion": false,
+      "backgroundMotion": false
+    },
+    {
+      "timeSeconds": 2.2,
+      "phase": "360° SHOWCASE",
+      "entryProgress": 1.0,
+      "showcaseProgress": 0.915725,
+      "sheenProgress": 0.0,
+      "caseWorldPosition": [
+        0.0,
+        0.0,
+        0.2
+      ],
+      "packTop": 1030.0,
+      "rotationEulerDegrees": [
+        0.0,
+        329.661079,
+        0.0
+      ],
+      "modelScale": 1.0,
+      "cameraMotion": false,
+      "backgroundMotion": false
+    },
+    {
+      "timeSeconds": 2.2333,
+      "phase": "360° SHOWCASE",
+      "entryProgress": 1.0,
+      "showcaseProgress": 0.93556,
+      "sheenProgress": 0.0,
+      "caseWorldPosition": [
+        0.0,
+        0.0,
+        0.2
+      ],
+      "packTop": 1030.0,
+      "rotationEulerDegrees": [
+        0.0,
+        336.801506,
+        0.0
+      ],
+      "modelScale": 1.0,
+      "cameraMotion": false,
+      "backgroundMotion": false
+    },
+    {
+      "timeSeconds": 2.2667,
+      "phase": "360° SHOWCASE",
+      "entryProgress": 1.0,
+      "showcaseProgress": 0.953046,
+      "sheenProgress": 0.0,
+      "caseWorldPosition": [
+        0.0,
+        0.0,
+        0.2
+      ],
+      "packTop": 1030.0,
+      "rotationEulerDegrees": [
+        0.0,
+        343.096453,
+        0.0
+      ],
+      "modelScale": 1.0,
+      "cameraMotion": false,
+      "backgroundMotion": false
+    },
+    {
+      "timeSeconds": 2.3,
+      "phase": "360° SHOWCASE",
+      "entryProgress": 1.0,
+      "showcaseProgress": 0.968021,
+      "sheenProgress": 0.0,
+      "caseWorldPosition": [
+        0.0,
+        0.0,
+        0.2
+      ],
+      "packTop": 1030.0,
+      "rotationEulerDegrees": [
+        0.0,
+        348.487609,
+        0.0
+      ],
+      "modelScale": 1.0,
+      "cameraMotion": false,
+      "backgroundMotion": false
+    },
+    {
+      "timeSeconds": 2.3333,
+      "phase": "360° SHOWCASE",
+      "entryProgress": 1.0,
+      "showcaseProgress": 0.980324,
+      "sheenProgress": 0.0,
+      "caseWorldPosition": [
+        0.0,
+        0.0,
+        0.2
+      ],
+      "packTop": 1030.0,
+      "rotationEulerDegrees": [
+        0.0,
+        352.916667,
+        0.0
+      ],
+      "modelScale": 1.0,
+      "cameraMotion": false,
+      "backgroundMotion": false
+    },
+    {
+      "timeSeconds": 2.3667,
+      "phase": "360° SHOWCASE",
+      "entryProgress": 1.0,
+      "showcaseProgress": 0.989793,
+      "sheenProgress": 0.0,
+      "caseWorldPosition": [
+        0.0,
+        0.0,
+        0.2
+      ],
+      "packTop": 1030.0,
+      "rotationEulerDegrees": [
+        0.0,
+        356.325316,
+        0.0
+      ],
+      "modelScale": 1.0,
+      "cameraMotion": false,
+      "backgroundMotion": false
+    },
+    {
+      "timeSeconds": 2.4,
+      "phase": "360° SHOWCASE",
+      "entryProgress": 1.0,
+      "showcaseProgress": 0.996265,
+      "sheenProgress": 0.0,
+      "caseWorldPosition": [
+        0.0,
+        0.0,
+        0.2
+      ],
+      "packTop": 1030.0,
+      "rotationEulerDegrees": [
+        0.0,
+        358.655248,
+        0.0
+      ],
+      "modelScale": 1.0,
+      "cameraMotion": false,
+      "backgroundMotion": false
+    },
+    {
+      "timeSeconds": 2.4333,
+      "phase": "360° SHOWCASE",
+      "entryProgress": 1.0,
+      "showcaseProgress": 0.999578,
+      "sheenProgress": 0.0,
+      "caseWorldPosition": [
+        0.0,
+        0.0,
+        0.2
+      ],
+      "packTop": 1030.0,
+      "rotationEulerDegrees": [
+        0.0,
+        359.848154,
+        0.0
+      ],
+      "modelScale": 1.0,
+      "cameraMotion": false,
+      "backgroundMotion": false
+    },
+    {
+      "timeSeconds": 2.4667,
+      "phase": "SETTLE",
+      "entryProgress": 1.0,
+      "showcaseProgress": 1.0,
+      "sheenProgress": 0.0,
+      "caseWorldPosition": [
+        0.0,
+        0.0,
+        0.2
+      ],
+      "packTop": 1030.0,
+      "rotationEulerDegrees": [
+        0.0,
+        360.0,
+        0.0
+      ],
+      "modelScale": 1.0,
+      "cameraMotion": false,
+      "backgroundMotion": false
+    },
+    {
+      "timeSeconds": 2.5,
+      "phase": "ONE HIGHLIGHT",
+      "entryProgress": 1.0,
+      "showcaseProgress": 1.0,
+      "sheenProgress": 0.0,
+      "caseWorldPosition": [
+        0.0,
+        0.0,
+        0.2
+      ],
+      "packTop": 1030.0,
+      "rotationEulerDegrees": [
+        0.0,
+        360.0,
+        0.0
+      ],
+      "modelScale": 1.0,
+      "cameraMotion": false,
+      "backgroundMotion": false
+    },
+    {
+      "timeSeconds": 2.5333,
+      "phase": "ONE HIGHLIGHT",
+      "entryProgress": 1.0,
+      "showcaseProgress": 1.0,
+      "sheenProgress": 0.060606,
+      "caseWorldPosition": [
+        0.0,
+        0.0,
+        0.2
+      ],
+      "packTop": 1030.0,
+      "rotationEulerDegrees": [
+        0.0,
+        360.0,
+        0.0
+      ],
+      "modelScale": 1.0,
+      "cameraMotion": false,
+      "backgroundMotion": false
+    },
+    {
+      "timeSeconds": 2.5667,
+      "phase": "ONE HIGHLIGHT",
+      "entryProgress": 1.0,
+      "showcaseProgress": 1.0,
+      "sheenProgress": 0.121212,
+      "caseWorldPosition": [
+        0.0,
+        0.0,
+        0.2
+      ],
+      "packTop": 1030.0,
+      "rotationEulerDegrees": [
+        0.0,
+        360.0,
+        0.0
+      ],
+      "modelScale": 1.0,
+      "cameraMotion": false,
+      "backgroundMotion": false
+    },
+    {
+      "timeSeconds": 2.6,
+      "phase": "ONE HIGHLIGHT",
+      "entryProgress": 1.0,
+      "showcaseProgress": 1.0,
+      "sheenProgress": 0.181818,
+      "caseWorldPosition": [
+        0.0,
+        0.0,
+        0.2
+      ],
+      "packTop": 1030.0,
+      "rotationEulerDegrees": [
+        0.0,
+        360.0,
+        0.0
+      ],
+      "modelScale": 1.0,
+      "cameraMotion": false,
+      "backgroundMotion": false
+    },
+    {
+      "timeSeconds": 2.6333,
+      "phase": "ONE HIGHLIGHT",
+      "entryProgress": 1.0,
+      "showcaseProgress": 1.0,
+      "sheenProgress": 0.242424,
+      "caseWorldPosition": [
+        0.0,
+        0.0,
+        0.2
+      ],
+      "packTop": 1030.0,
+      "rotationEulerDegrees": [
+        0.0,
+        360.0,
+        0.0
+      ],
+      "modelScale": 1.0,
+      "cameraMotion": false,
+      "backgroundMotion": false
+    },
+    {
+      "timeSeconds": 2.6667,
+      "phase": "ONE HIGHLIGHT",
+      "entryProgress": 1.0,
+      "showcaseProgress": 1.0,
+      "sheenProgress": 0.30303,
+      "caseWorldPosition": [
+        0.0,
+        0.0,
+        0.2
+      ],
+      "packTop": 1030.0,
+      "rotationEulerDegrees": [
+        0.0,
+        360.0,
+        0.0
+      ],
+      "modelScale": 1.0,
+      "cameraMotion": false,
+      "backgroundMotion": false
+    },
+    {
+      "timeSeconds": 2.7,
+      "phase": "ONE HIGHLIGHT",
+      "entryProgress": 1.0,
+      "showcaseProgress": 1.0,
+      "sheenProgress": 0.363636,
+      "caseWorldPosition": [
+        0.0,
+        0.0,
+        0.2
+      ],
+      "packTop": 1030.0,
+      "rotationEulerDegrees": [
+        0.0,
+        360.0,
+        0.0
+      ],
+      "modelScale": 1.0,
+      "cameraMotion": false,
+      "backgroundMotion": false
+    },
+    {
+      "timeSeconds": 2.7333,
+      "phase": "ONE HIGHLIGHT",
+      "entryProgress": 1.0,
+      "showcaseProgress": 1.0,
+      "sheenProgress": 0.424242,
+      "caseWorldPosition": [
+        0.0,
+        0.0,
+        0.2
+      ],
+      "packTop": 1030.0,
+      "rotationEulerDegrees": [
+        0.0,
+        360.0,
+        0.0
+      ],
+      "modelScale": 1.0,
+      "cameraMotion": false,
+      "backgroundMotion": false
+    },
+    {
+      "timeSeconds": 2.7667,
+      "phase": "ONE HIGHLIGHT",
+      "entryProgress": 1.0,
+      "showcaseProgress": 1.0,
+      "sheenProgress": 0.484848,
+      "caseWorldPosition": [
+        0.0,
+        0.0,
+        0.2
+      ],
+      "packTop": 1030.0,
+      "rotationEulerDegrees": [
+        0.0,
+        360.0,
+        0.0
+      ],
+      "modelScale": 1.0,
+      "cameraMotion": false,
+      "backgroundMotion": false
+    },
+    {
+      "timeSeconds": 2.8,
+      "phase": "ONE HIGHLIGHT",
+      "entryProgress": 1.0,
+      "showcaseProgress": 1.0,
+      "sheenProgress": 0.545455,
+      "caseWorldPosition": [
+        0.0,
+        0.0,
+        0.2
+      ],
+      "packTop": 1030.0,
+      "rotationEulerDegrees": [
+        0.0,
+        360.0,
+        0.0
+      ],
+      "modelScale": 1.0,
+      "cameraMotion": false,
+      "backgroundMotion": false
+    },
+    {
+      "timeSeconds": 2.8333,
+      "phase": "ONE HIGHLIGHT",
+      "entryProgress": 1.0,
+      "showcaseProgress": 1.0,
+      "sheenProgress": 0.606061,
+      "caseWorldPosition": [
+        0.0,
+        0.0,
+        0.2
+      ],
+      "packTop": 1030.0,
+      "rotationEulerDegrees": [
+        0.0,
+        360.0,
+        0.0
+      ],
+      "modelScale": 1.0,
+      "cameraMotion": false,
+      "backgroundMotion": false
+    },
+    {
+      "timeSeconds": 2.8667,
+      "phase": "ONE HIGHLIGHT",
+      "entryProgress": 1.0,
+      "showcaseProgress": 1.0,
+      "sheenProgress": 0.666667,
+      "caseWorldPosition": [
+        0.0,
+        0.0,
+        0.2
+      ],
+      "packTop": 1030.0,
+      "rotationEulerDegrees": [
+        0.0,
+        360.0,
+        0.0
+      ],
+      "modelScale": 1.0,
+      "cameraMotion": false,
+      "backgroundMotion": false
+    },
+    {
+      "timeSeconds": 2.9,
+      "phase": "ONE HIGHLIGHT",
+      "entryProgress": 1.0,
+      "showcaseProgress": 1.0,
+      "sheenProgress": 0.727273,
+      "caseWorldPosition": [
+        0.0,
+        0.0,
+        0.2
+      ],
+      "packTop": 1030.0,
+      "rotationEulerDegrees": [
+        0.0,
+        360.0,
+        0.0
+      ],
+      "modelScale": 1.0,
+      "cameraMotion": false,
+      "backgroundMotion": false
+    },
+    {
+      "timeSeconds": 2.9333,
+      "phase": "ONE HIGHLIGHT",
+      "entryProgress": 1.0,
+      "showcaseProgress": 1.0,
+      "sheenProgress": 0.787879,
+      "caseWorldPosition": [
+        0.0,
+        0.0,
+        0.2
+      ],
+      "packTop": 1030.0,
+      "rotationEulerDegrees": [
+        0.0,
+        360.0,
+        0.0
+      ],
+      "modelScale": 1.0,
+      "cameraMotion": false,
+      "backgroundMotion": false
+    },
+    {
+      "timeSeconds": 2.9667,
+      "phase": "ONE HIGHLIGHT",
+      "entryProgress": 1.0,
+      "showcaseProgress": 1.0,
+      "sheenProgress": 0.848485,
+      "caseWorldPosition": [
+        0.0,
+        0.0,
+        0.2
+      ],
+      "packTop": 1030.0,
+      "rotationEulerDegrees": [
+        0.0,
+        360.0,
+        0.0
+      ],
+      "modelScale": 1.0,
+      "cameraMotion": false,
+      "backgroundMotion": false
+    },
+    {
+      "timeSeconds": 3.0,
+      "phase": "ONE HIGHLIGHT",
+      "entryProgress": 1.0,
+      "showcaseProgress": 1.0,
+      "sheenProgress": 0.909091,
+      "caseWorldPosition": [
+        0.0,
+        0.0,
+        0.2
+      ],
+      "packTop": 1030.0,
+      "rotationEulerDegrees": [
+        0.0,
+        360.0,
+        0.0
+      ],
+      "modelScale": 1.0,
+      "cameraMotion": false,
+      "backgroundMotion": false
+    },
+    {
+      "timeSeconds": 3.0333,
+      "phase": "ONE HIGHLIGHT",
+      "entryProgress": 1.0,
+      "showcaseProgress": 1.0,
+      "sheenProgress": 0.969697,
+      "caseWorldPosition": [
+        0.0,
+        0.0,
+        0.2
+      ],
+      "packTop": 1030.0,
+      "rotationEulerDegrees": [
+        0.0,
+        360.0,
+        0.0
+      ],
+      "modelScale": 1.0,
+      "cameraMotion": false,
+      "backgroundMotion": false
+    },
+    {
+      "timeSeconds": 3.0667,
+      "phase": "HOLD",
+      "entryProgress": 1.0,
+      "showcaseProgress": 1.0,
+      "sheenProgress": 1.0,
+      "caseWorldPosition": [
+        0.0,
+        0.0,
+        0.2
+      ],
+      "packTop": 1030.0,
+      "rotationEulerDegrees": [
+        0.0,
+        360.0,
+        0.0
+      ],
+      "modelScale": 1.0,
+      "cameraMotion": false,
+      "backgroundMotion": false
+    },
+    {
+      "timeSeconds": 3.1,
+      "phase": "HOLD",
+      "entryProgress": 1.0,
+      "showcaseProgress": 1.0,
+      "sheenProgress": 1.0,
+      "caseWorldPosition": [
+        0.0,
+        0.0,
+        0.2
+      ],
+      "packTop": 1030.0,
+      "rotationEulerDegrees": [
+        0.0,
+        360.0,
+        0.0
+      ],
+      "modelScale": 1.0,
+      "cameraMotion": false,
+      "backgroundMotion": false
+    },
+    {
+      "timeSeconds": 3.1333,
+      "phase": "HOLD",
+      "entryProgress": 1.0,
+      "showcaseProgress": 1.0,
+      "sheenProgress": 1.0,
+      "caseWorldPosition": [
+        0.0,
+        0.0,
+        0.2
+      ],
+      "packTop": 1030.0,
+      "rotationEulerDegrees": [
+        0.0,
+        360.0,
+        0.0
+      ],
+      "modelScale": 1.0,
+      "cameraMotion": false,
+      "backgroundMotion": false
+    },
+    {
+      "timeSeconds": 3.1667,
+      "phase": "HOLD",
+      "entryProgress": 1.0,
+      "showcaseProgress": 1.0,
+      "sheenProgress": 1.0,
+      "caseWorldPosition": [
+        0.0,
+        0.0,
+        0.2
+      ],
+      "packTop": 1030.0,
+      "rotationEulerDegrees": [
+        0.0,
+        360.0,
+        0.0
+      ],
+      "modelScale": 1.0,
+      "cameraMotion": false,
+      "backgroundMotion": false
+    },
+    {
+      "timeSeconds": 3.2,
+      "phase": "HOLD",
+      "entryProgress": 1.0,
+      "showcaseProgress": 1.0,
+      "sheenProgress": 1.0,
+      "caseWorldPosition": [
+        0.0,
+        0.0,
+        0.2
+      ],
+      "packTop": 1030.0,
+      "rotationEulerDegrees": [
+        0.0,
+        360.0,
+        0.0
+      ],
+      "modelScale": 1.0,
+      "cameraMotion": false,
+      "backgroundMotion": false
+    },
+    {
+      "timeSeconds": 3.2333,
+      "phase": "HOLD",
+      "entryProgress": 1.0,
+      "showcaseProgress": 1.0,
+      "sheenProgress": 1.0,
+      "caseWorldPosition": [
+        0.0,
+        0.0,
+        0.2
+      ],
+      "packTop": 1030.0,
+      "rotationEulerDegrees": [
+        0.0,
+        360.0,
+        0.0
+      ],
+      "modelScale": 1.0,
+      "cameraMotion": false,
+      "backgroundMotion": false
+    },
+    {
+      "timeSeconds": 3.2667,
+      "phase": "HOLD",
+      "entryProgress": 1.0,
+      "showcaseProgress": 1.0,
+      "sheenProgress": 1.0,
+      "caseWorldPosition": [
+        0.0,
+        0.0,
+        0.2
+      ],
+      "packTop": 1030.0,
+      "rotationEulerDegrees": [
+        0.0,
+        360.0,
+        0.0
+      ],
+      "modelScale": 1.0,
+      "cameraMotion": false,
+      "backgroundMotion": false
+    },
+    {
+      "timeSeconds": 3.3,
+      "phase": "HOLD",
+      "entryProgress": 1.0,
+      "showcaseProgress": 1.0,
+      "sheenProgress": 1.0,
+      "caseWorldPosition": [
+        0.0,
+        0.0,
+        0.2
+      ],
+      "packTop": 1030.0,
+      "rotationEulerDegrees": [
+        0.0,
+        360.0,
+        0.0
+      ],
+      "modelScale": 1.0,
+      "cameraMotion": false,
+      "backgroundMotion": false
+    },
+    {
+      "timeSeconds": 3.3333,
+      "phase": "HOLD",
+      "entryProgress": 1.0,
+      "showcaseProgress": 1.0,
+      "sheenProgress": 1.0,
+      "caseWorldPosition": [
+        0.0,
+        0.0,
+        0.2
+      ],
+      "packTop": 1030.0,
+      "rotationEulerDegrees": [
+        0.0,
+        360.0,
+        0.0
+      ],
+      "modelScale": 1.0,
+      "cameraMotion": false,
+      "backgroundMotion": false
+    },
+    {
+      "timeSeconds": 3.3667,
+      "phase": "HOLD",
+      "entryProgress": 1.0,
+      "showcaseProgress": 1.0,
+      "sheenProgress": 1.0,
+      "caseWorldPosition": [
+        0.0,
+        0.0,
+        0.2
+      ],
+      "packTop": 1030.0,
+      "rotationEulerDegrees": [
+        0.0,
+        360.0,
+        0.0
+      ],
+      "modelScale": 1.0,
+      "cameraMotion": false,
+      "backgroundMotion": false
+    }
+  ]
+}

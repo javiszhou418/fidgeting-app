@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="1100" viewBox="0 0 1600 1100">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#071017"/><stop offset="1" stop-color="#151925"/></linearGradient>
+    <linearGradient id="accent" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#70e8ee"/><stop offset=".52" stop-color="#786ee8"/><stop offset="1" stop-color="#ef79be"/></linearGradient>
+    <clipPath id="photoA"><rect x="70" y="205" width="405" height="320" rx="24"/></clipPath>
+    <clipPath id="photoB"><rect x="70" y="570" width="405" height="320" rx="24"/></clipPath>
+    <style>
+      .sans{font-family:Inter,Arial,sans-serif}.eye{font-size:18px;font-weight:800;letter-spacing:.15em;fill:#70e8ee}.title{font-size:50px;font-weight:850;fill:#f4f8fa}.sub{font-size:20px;fill:#aab6bf}.h2{font-size:25px;font-weight:850;fill:#f4f8fa}.body{font-size:18px;fill:#acb8c1}.small{font-size:15px;fill:#93a3ad}.label{font-size:17px;font-weight:800;fill:#f4f8fa}.node{fill:#111c24;stroke:#344752;stroke-width:2}.root{fill:#11232b;stroke:#70e8ee;stroke-width:3}.line{fill:none;stroke:#607581;stroke-width:3}
+    </style>
+  </defs>
+  <rect width="1600" height="1100" fill="url(#bg)"/>
+  <text x="65" y="70" class="sans eye">GATE 04 / SOURCE-LINKED PART TREE / REV 06</text>
+  <text x="65" y="134" class="sans title">Two exterior shells, plus visible modules</text>
+  <text x="65" y="173" class="sans sub">Exterior shell count does not erase the linear, rotary, spring, and ball modules visible in official evidence.</text>
+
+  <rect x="65" y="198" width="415" height="334" rx="28" fill="#05080b" stroke="#344752" stroke-width="2"/>
+  <image href="../../01-intake/rev-002/haloo-official/07.png" x="70" y="205" width="405" height="320" preserveAspectRatio="xMidYMid slice" clip-path="url(#photoA)"/>
+  <rect x="88" y="220" width="275" height="42" rx="21" fill="#071018" stroke="#70e8ee"/>
+  <text x="110" y="248" class="sans label">OFFICIAL / INTERNAL VIEW</text>
+  <rect x="88" y="472" width="355" height="43" rx="13" fill="#071018" fill-opacity=".92"/>
+  <text x="108" y="500" class="sans small">Linear rails + circular track + central region</text>
+
+  <rect x="65" y="563" width="415" height="334" rx="28" fill="#05080b" stroke="#344752" stroke-width="2"/>
+  <image href="../../01-intake/rev-002/haloo-official/05.png" x="70" y="570" width="405" height="320" preserveAspectRatio="xMidYMid slice" clip-path="url(#photoB)"/>
+  <rect x="88" y="585" width="275" height="42" rx="21" fill="#071018" stroke="#70e8ee"/>
+  <text x="110" y="613" class="sans label">OFFICIAL / TUNING PARTS</text>
+  <rect x="88" y="837" width="355" height="43" rx="13" fill="#071018" fill-opacity=".92"/>
+  <text x="108" y="865" class="sans small">Spring + steel or ceramic balls; count unknown</text>
+
+  <rect x="555" y="205" width="975" height="112" rx="25" class="root"/>
+  <rect x="580" y="228" width="190" height="38" rx="19" fill="url(#accent)"/>
+  <text x="612" y="254" class="sans label" fill="#071017">ASSEMBLY ROOT</text>
+  <text x="795" y="252" class="sans h2">MagneticSlideTile_Assembly</text>
+  <text x="795" y="286" class="sans body">50 x 31 x 12 mm and S 21 mm are provisional digital-blockout values only.</text>
+
+  <path d="M1042 317V360H762V395M1042 360H1316V395" class="line"/>
+  <rect x="555" y="395" width="420" height="185" rx="24" class="node"/>
+  <rect x="581" y="419" width="160" height="36" rx="18" fill="url(#accent)"/>
+  <text x="607" y="444" class="sans label" fill="#071017">SHELL 01</text>
+  <text x="581" y="500" class="sans h2">UpperShell_Moving</text>
+  <text x="581" y="536" class="sans body">Moving exterior carrier shell</text>
+  <text x="581" y="562" class="sans small">Surface decoration is not another shell.</text>
+
+  <rect x="1110" y="395" width="420" height="185" rx="24" class="node"/>
+  <rect x="1136" y="419" width="160" height="36" rx="18" fill="#dce6e9"/>
+  <text x="1162" y="444" class="sans label" fill="#071017">SHELL 02</text>
+  <text x="1136" y="500" class="sans h2">LowerShell_Fixed</text>
+  <text x="1136" y="536" class="sans body">Fixed exterior carrier shell</text>
+  <text x="1136" y="562" class="sans small">Exact module coupling remains unknown.</text>
+
+  <path d="M1042 580V628H670V670M1042 628H960V670M1042 628H1250V670M1042 628H1455V670" class="line"/>
+  <rect x="535" y="670" width="270" height="175" rx="22" class="node"/>
+  <text x="560" y="706" class="sans eye">VISIBLE MODULE A</text><text x="560" y="750" class="sans h2">Bilateral linear rails</text><text x="560" y="786" class="sans body">Ball or bead grooves</text><text x="560" y="817" class="sans small">Count / section unknown</text>
+  <rect x="825" y="670" width="270" height="175" rx="22" class="node"/>
+  <text x="850" y="706" class="sans eye">VISIBLE MODULE B</text><text x="850" y="750" class="sans h2">Circular ball track</text><text x="850" y="786" class="sans body">Rotary path evidence</text><text x="850" y="817" class="sans small">No 90-degree cap asserted</text>
+  <rect x="1115" y="670" width="270" height="175" rx="22" class="node"/>
+  <text x="1140" y="706" class="sans eye">VISIBLE MODULE C</text><text x="1140" y="750" class="sans h2">Central shaft region</text><text x="1140" y="786" class="sans body">Bearing region evidence</text><text x="1140" y="817" class="sans small">Interface unknown</text>
+  <rect x="1405" y="670" width="150" height="175" rx="22" class="node"/>
+  <text x="1426" y="706" class="sans eye">TUNING</text><text x="1426" y="750" class="sans h2">Spring</text><text x="1426" y="782" class="sans h2">+ balls</text><text x="1426" y="817" class="sans small">Count unknown</text>
+
+  <rect x="555" y="882" width="975" height="138" rx="24" fill="#101a22" stroke="#d8a75e" stroke-width="2"/>
+  <text x="585" y="923" class="sans label">EXCLUDED FROM THIS REVISION</text>
+  <text x="585" y="958" class="sans body">Five-layer shell / exactly two objects / end-stop unlock / 90-degree limit</text>
+  <text x="585" y="992" class="sans small">Also unknown: hidden counts, tolerances, hole depths, and unproven coupling.</text>
+  <text x="65" y="1064" class="sans small">Sources: approved Gate 03 contract rev 7 + HALOOPLAYER official assets 05 and 07. No user-video inference is used for hidden architecture.</text>
+</svg>

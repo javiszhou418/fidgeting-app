@@ -1,0 +1,96 @@
+{
+  "schema": "motion-landmark-validation.v1",
+  "status": "pass-with-explicit-unknowns",
+  "modalityRule": "No silhouette IoU is claimed because the user screenshot uses different artwork and a different visible contour.",
+  "userScreenshotQuad": {
+    "corners": [
+      [
+        374.0,
+        152.0
+      ],
+      [
+        737.0,
+        283.0
+      ],
+      [
+        492.0,
+        576.0
+      ],
+      [
+        219.0,
+        473.0
+      ]
+    ],
+    "center": [
+      455.5,
+      371.0
+    ],
+    "topEdgePixels": 385.914,
+    "bottomEdgePixels": 291.784,
+    "leftEdgePixels": 356.463,
+    "rightEdgePixels": 381.935,
+    "topBottomPerspectiveRatio": 1.322603,
+    "leftRightPerspectiveRatio": 0.93331,
+    "meanWidthHeightRatio": 0.917796,
+    "screenRollDegrees": 19.843578,
+    "polygonAreaPixels": 121026.0,
+    "homography": [
+      [
+        351.611324413,
+        -85.839257204,
+        374.0
+      ],
+      [
+        126.626872196,
+        470.374572341,
+        152.0
+      ],
+      [
+        -0.015452748,
+        0.315802479,
+        1.0
+      ]
+    ],
+    "projectiveTerms": [
+      -0.015452748,
+      0.315802479
+    ]
+  },
+  "nearestRiveFrame": {
+    "label": "USER-SCREENSHOT NEAREST",
+    "milliseconds": 200,
+    "distance": 0.560939,
+    "basis": "roll, opposite-edge ratios and width/height signature; identity pixels excluded",
+    "exactMatch": false
+  },
+  "conclusion": {
+    "roll": {
+      "status": "confirmed",
+      "confidence": "high",
+      "evidence": "Two root layers author −16.652° and +26.858° screen rotations, both converging to 0° over frames 0–29."
+    },
+    "yaw": {
+      "status": "apparent-pseudo-yaw",
+      "confidence": "high-for-visual-turn-low-for-3d-axis",
+      "evidence": "Slab-rotate-v01 translates side sprites; Coin_Slab_v09-sm deforms 2D mesh vertices; runtime frames show front/edge/reverse/front."
+    },
+    "pitch": {
+      "status": "unknown",
+      "confidence": "low",
+      "evidence": "The user screenshot has foreshortening, but no 3D pitch channel exists; sprite substitution and 2D homography can produce the same raster."
+    },
+    "threeDimensionalAxis": {
+      "status": "unknown",
+      "confidence": "none",
+      "evidence": "The canonical Rive format exposes 2D x/y/rotation/scale, masks and remaps, not Euler or quaternion axes."
+    },
+    "pureVerticalYTurntable": {
+      "status": "rejected",
+      "confidence": "user-authoritative-and-measurement-supported"
+    },
+    "xAxisReplacement": {
+      "status": "not-claimed",
+      "confidence": "none"
+    }
+  }
+}

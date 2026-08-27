@@ -1,0 +1,270 @@
+{
+  "schemaVersion": 1,
+  "modelId": "premium-display-case",
+  "gate": "05-blockout",
+  "blockoutRevision": 2,
+  "evidenceClass": "supplementary-material-diagnostic",
+  "status": "pass",
+  "notice": "DIAGNOSTIC MATERIAL PROXY · NOT GATE 07 APPROVAL",
+  "approvalEffect": "none-not-gate07-material-approval",
+  "rawMetrics": {
+    "hero": {
+      "width": 1400,
+      "height": 1120,
+      "meanLuma": 27.984987,
+      "p01Luma": 10.8596,
+      "p99Luma": 154.996002,
+      "lowClipFraction": 0.0,
+      "highClipFraction": 0.0,
+      "meanChannelChroma": 0.00966858
+    },
+    "left-oblique": {
+      "width": 1280,
+      "height": 1080,
+      "meanLuma": 26.868652,
+      "p01Luma": 10.9318,
+      "p99Luma": 154.276794,
+      "lowClipFraction": 0.0,
+      "highClipFraction": 0.0,
+      "meanChannelChroma": 0.00926019
+    },
+    "right-oblique": {
+      "width": 1280,
+      "height": 1080,
+      "meanLuma": 28.695663,
+      "p01Luma": 11.8596,
+      "p99Luma": 155.208603,
+      "lowClipFraction": 0.0,
+      "highClipFraction": 0.0,
+      "meanChannelChroma": 0.00968761
+    },
+    "low": {
+      "width": 1280,
+      "height": 1080,
+      "meanLuma": 29.262457,
+      "p01Luma": 11.8596,
+      "p99Luma": 155.349014,
+      "lowClipFraction": 0.0,
+      "highClipFraction": 0.0,
+      "meanChannelChroma": 0.00979976
+    },
+    "side": {
+      "width": 1100,
+      "height": 1320,
+      "meanLuma": 17.595097,
+      "p01Luma": 14.859599,
+      "p99Luma": 53.931801,
+      "lowClipFraction": 0.00500895,
+      "highClipFraction": 0.0,
+      "meanChannelChroma": 0.00817077
+    },
+    "label-closeup": {
+      "width": 1500,
+      "height": 980,
+      "meanLuma": 93.396858,
+      "p01Luma": 8.647,
+      "p99Luma": 164.434402,
+      "lowClipFraction": 0.0,
+      "highClipFraction": 0.0,
+      "meanChannelChroma": 0.01775956
+    },
+    "concentric-closeup": {
+      "width": 1280,
+      "height": 1080,
+      "meanLuma": 45.834675,
+      "p01Luma": 15.8596,
+      "p99Luma": 156.136383,
+      "lowClipFraction": 0.0,
+      "highClipFraction": 0.0,
+      "meanChannelChroma": 0.01200348
+    },
+    "clay-hero-same-camera": {
+      "width": 1400,
+      "height": 1120,
+      "meanLuma": 66.795876,
+      "p01Luma": 15.8596,
+      "p99Luma": 174.787399,
+      "lowClipFraction": 0.0,
+      "highClipFraction": 0.0,
+      "meanChannelChroma": 0.0133123
+    }
+  },
+  "backgroundMetrics": {
+    "patchMeanLuma": {
+      "topLeft": 16.554239,
+      "topRight": 16.555355,
+      "midLeft": 16.554527,
+      "midRight": 16.556101
+    },
+    "patchMeanLumaRange": 0.001862,
+    "patchMeanChannelChroma": {
+      "topLeft": 0.00815066,
+      "topRight": 0.00814369,
+      "midLeft": 0.00815766,
+      "midRight": 0.00814711
+    },
+    "fineResidualOutlierFractions": {
+      "topLeft": 0.0,
+      "topRight": 0.0,
+      "midLeft": 0.0,
+      "midRight": 0.0
+    },
+    "maximumFineResidualOutlierFraction": 0.0,
+    "maximumPatchMeanChannelChroma": 0.00815766
+  },
+  "labelReadabilityInitialCheck": {
+    "crop": [
+      105,
+      156,
+      1395,
+      656
+    ],
+    "p10Luma": 37.7192,
+    "p90Luma": 155.136414,
+    "p10P90Contrast": 117.417213,
+    "darkPrintFraction": 0.18130853,
+    "lightStockFraction": 0.76486357,
+    "meanEdgeResponse": 3.415409,
+    "blackoutFraction": 0.0,
+    "scope": "Rendered diagnostic readability only. Shipping phone 17/11 pt projection remains a later gate."
+  },
+  "transparentSortingInitialCheck": {
+    "blenderLayerOrdering": {
+      "labelZmm": [
+        22.5,
+        25.5
+      ],
+      "foilZmm": [
+        26.200000762939453,
+        26.200000762939453
+      ],
+      "printZmm": [
+        26.360000610351562,
+        26.360000610351562
+      ],
+      "coverZmm": [
+        26.6200008392334,
+        26.6200008392334
+      ],
+      "pass": true
+    },
+    "labelBlackoutFraction": 0.0,
+    "scope": "Cycles diagnostic preflight only. Unity transparency sorting remains untested and unapproved."
+  },
+  "artifacts": {
+    "annotated-hero": {
+      "path": "/Users/jiawei.zhou/Documents/Fidgeting app/unity/FidgetingApp/ArtSource/ModelPipeline/premium-display-case/evidence/05-blockout/rev-002/material-diagnostic/diagnostic-material-hero.png",
+      "sha256": "746da016610eff632aff95c99a9df550bfc88cfdc1b3912cbeb34a456b1e4e7f",
+      "sizeBytes": 828403,
+      "dimensions": [
+        1400,
+        1316
+      ]
+    },
+    "annotated-left-oblique": {
+      "path": "/Users/jiawei.zhou/Documents/Fidgeting app/unity/FidgetingApp/ArtSource/ModelPipeline/premium-display-case/evidence/05-blockout/rev-002/material-diagnostic/diagnostic-material-left-oblique.png",
+      "sha256": "42176b0c03171dce1be36a0076c041e9214477723fedaa41b2982c577398553d",
+      "sizeBytes": 732331,
+      "dimensions": [
+        1280,
+        1276
+      ]
+    },
+    "annotated-right-oblique": {
+      "path": "/Users/jiawei.zhou/Documents/Fidgeting app/unity/FidgetingApp/ArtSource/ModelPipeline/premium-display-case/evidence/05-blockout/rev-002/material-diagnostic/diagnostic-material-right-oblique.png",
+      "sha256": "b6866623d2486bab90b016da86358de1e9f9e459f9891476e8b1bd6786a5e7c8",
+      "sizeBytes": 742155,
+      "dimensions": [
+        1280,
+        1276
+      ]
+    },
+    "annotated-low": {
+      "path": "/Users/jiawei.zhou/Documents/Fidgeting app/unity/FidgetingApp/ArtSource/ModelPipeline/premium-display-case/evidence/05-blockout/rev-002/material-diagnostic/diagnostic-material-low.png",
+      "sha256": "4c81f8f65a72abfb8f3b85692e9163d984c996f25dcf7fbec5d184c0016891f5",
+      "sizeBytes": 767080,
+      "dimensions": [
+        1280,
+        1276
+      ]
+    },
+    "annotated-side": {
+      "path": "/Users/jiawei.zhou/Documents/Fidgeting app/unity/FidgetingApp/ArtSource/ModelPipeline/premium-display-case/evidence/05-blockout/rev-002/material-diagnostic/diagnostic-material-side.png",
+      "sha256": "84186c5c3eac4aae5b4c4987eae998135155226ca8e1a48ceb4db715569c5d00",
+      "sizeBytes": 664772,
+      "dimensions": [
+        1100,
+        1516
+      ]
+    },
+    "annotated-label-closeup": {
+      "path": "/Users/jiawei.zhou/Documents/Fidgeting app/unity/FidgetingApp/ArtSource/ModelPipeline/premium-display-case/evidence/05-blockout/rev-002/material-diagnostic/diagnostic-material-label-closeup.png",
+      "sha256": "c346419306b7ed6e07a4740b920942d4d33ceb678d36577284782774c90fb2ab",
+      "sizeBytes": 880378,
+      "dimensions": [
+        1500,
+        1176
+      ]
+    },
+    "annotated-concentric-closeup": {
+      "path": "/Users/jiawei.zhou/Documents/Fidgeting app/unity/FidgetingApp/ArtSource/ModelPipeline/premium-display-case/evidence/05-blockout/rev-002/material-diagnostic/diagnostic-material-concentric-closeup.png",
+      "sha256": "fbadad7526c6fb7124672a6dd7e111329a3c771f778e1e2996fb376ec01fab36",
+      "sizeBytes": 750679,
+      "dimensions": [
+        1280,
+        1276
+      ]
+    },
+    "annotated-clay-hero-same-camera": {
+      "path": "/Users/jiawei.zhou/Documents/Fidgeting app/unity/FidgetingApp/ArtSource/ModelPipeline/premium-display-case/evidence/05-blockout/rev-002/material-diagnostic/diagnostic-clay-hero-same-camera.png",
+      "sha256": "fe324d9bddf14f76e11754412883b76932700253bb785a344fe536eb5a4efd4e",
+      "sizeBytes": 817525,
+      "dimensions": [
+        1400,
+        1316
+      ]
+    },
+    "same-camera-comparison": {
+      "path": "/Users/jiawei.zhou/Documents/Fidgeting app/unity/FidgetingApp/ArtSource/ModelPipeline/premium-display-case/evidence/05-blockout/rev-002/material-diagnostic/diagnostic-clay-vs-pbr-same-camera.png",
+      "sha256": "b5e6aab04b86b5d30018c94cb2b3d76cbbbe89a6e38a41fb73f285d514f27baf",
+      "sizeBytes": 1609525,
+      "dimensions": [
+        2960,
+        1398
+      ]
+    },
+    "material-contact-sheet": {
+      "path": "/Users/jiawei.zhou/Documents/Fidgeting app/unity/FidgetingApp/ArtSource/ModelPipeline/premium-display-case/evidence/05-blockout/rev-002/material-diagnostic/diagnostic-material-contact-sheet.png",
+      "sha256": "c370bbc652e3fe820450a0e6fb776d34e48efd86947a742d88de38442dd71950",
+      "sizeBytes": 3103190,
+      "dimensions": [
+        3300,
+        2668
+      ]
+    }
+  },
+  "checks": {
+    "buildValidationPassed": true,
+    "blenderAuditPassed": true,
+    "allRawViewsPresent": true,
+    "allAnnotatedViewsPresent": true,
+    "sameCameraComparisonPresent": true,
+    "contactSheetPresent": true,
+    "sameCameraDimensionsMatch": true,
+    "noSevereChannelClipping": true,
+    "backgroundLowSaturation": true,
+    "backgroundNoLocalizedNoiseSpots": true,
+    "backgroundContinuousPatchValues": true,
+    "labelContrastVisible": true,
+    "labelDarkPrintVisible": true,
+    "labelStockVisible": true,
+    "labelEdgesReadable": true,
+    "labelNotBlackedOutByCover": true,
+    "transparentOrderingPreflightPassed": true,
+    "geometryDigestUnchanged": true,
+    "gate05ReadyForReviewPreserved": true,
+    "gate06And07Blocked": true,
+    "shippingUnityUnchanged": true,
+    "noBuildInstallPhonePush": true
+  }
+}

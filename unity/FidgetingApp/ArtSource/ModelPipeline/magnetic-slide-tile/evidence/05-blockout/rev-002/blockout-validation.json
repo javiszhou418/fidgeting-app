@@ -1,0 +1,123 @@
+{
+  "schemaVersion": 2,
+  "gate": "05-blockout",
+  "blockoutRevision": 2,
+  "dimensionBasis": "user-authorized-provisional-digital-blockout",
+  "dimensionsMm": {
+    "target": {
+      "length": 50.0,
+      "width": 31.0,
+      "thickness": 12.0
+    },
+    "closedMeasured": {
+      "length": 50.0,
+      "width": 31.0,
+      "thickness": 12.0
+    },
+    "toleranceMm": 0.01,
+    "pass": true
+  },
+  "travel": {
+    "axis": "+Y",
+    "targetMm": 21.0,
+    "implementedMm": 21.0,
+    "pass": true
+  },
+  "pivot": {
+    "worldMm": [
+      0.0,
+      0.0,
+      0.0
+    ],
+    "rotationAxis": "+Z",
+    "canonicalUpperMotionOrigin": [
+      0.0,
+      0.0,
+      0.0
+    ],
+    "pass": true
+  },
+  "hierarchy": {
+    "MagneticSlideTile_Blockout_R002": null,
+    "FixedAssembly": "MagneticSlideTile_Blockout_R002",
+    "UpperMotion": "MagneticSlideTile_Blockout_R002",
+    "LowerBody_Fixed_CleanPlane": "FixedAssembly",
+    "ConcealedCircularEnvelope": "FixedAssembly",
+    "HiddenMechanismProxy": "ConcealedCircularEnvelope",
+    "UpperCapsule_Moving": "UpperMotion"
+  },
+  "zeroSelfMotion": {
+    "animatedOrConstrainedObjects": [],
+    "upperAngularVelocity": 0.0,
+    "pass": true
+  },
+  "visibleArchitecture": {
+    "renderedMeshObjects": [
+      "LowerBody_Fixed_CleanPlane",
+      "UpperCapsule_Moving"
+    ],
+    "renderedMeshCount": 2,
+    "lowerTopPlanarityDeviationMm": 0.0,
+    "lowerExposedTopFeatureCount": 0,
+    "exposedRailOrHardwareObjectNames": [],
+    "concealedEnvelopeType": "EMPTY",
+    "concealedEnvelopeShape": "circular",
+    "concealedEnvelopeHiddenFromRender": true,
+    "hiddenMechanismGeometry": "none",
+    "pass": true
+  },
+  "smoothness": {
+    "profileKind": "analytic capsule sampled at fixed angular intervals",
+    "arcSegmentsPerSemicircle": 256,
+    "profileVertexCount": 513,
+    "maximumProfileSegmentAngleDeg": 0.703125,
+    "maximumChordDeviationMm": 0.0002917831196828091,
+    "bevelSegments": 8,
+    "bevelWidthMm": 0.45,
+    "sideNormals": "smooth",
+    "capNormals": "flat",
+    "meshValidationChangedGeometry": {
+      "LowerBody_Fixed_CleanPlane": false,
+      "UpperCapsule_Moving": false
+    },
+    "thresholds": {
+      "maximumProfileSegmentAngleDeg": 1.0,
+      "maximumChordDeviationMm": 0.005,
+      "minimumBevelSegments": 8
+    },
+    "geometryPass": true
+  },
+  "renderedSilhouette": {
+    "source": "silhouette-top.png",
+    "renderSizePx": [
+      2048,
+      2048
+    ],
+    "alphaThreshold": 16,
+    "boundingBoxPx": [
+      476,
+      141,
+      1572,
+      1907
+    ],
+    "silhouetteWidthPx": 1096,
+    "silhouetteHeightPx": 1766,
+    "measuredAspectRatio": 1.6113138686131387,
+    "targetAspectRatio": 1.6129032258064515,
+    "relativeAspectError": 0.0009854014598539163,
+    "rowsWithInteriorAlphaGaps": 0,
+    "monotonicCapReversalTolerancePx": 2,
+    "monotonicCapViolationCount": 0,
+    "maximumContourReversalPx": 0,
+    "pass": true
+  },
+  "scope": {
+    "twoExteriorMainBodies": true,
+    "visibleLowerPlaneClean": true,
+    "concealedCircularEnvelopeOnly": true,
+    "hiddenEngineeringModeled": false,
+    "finalMaterialsOrArtwork": false
+  },
+  "blender": "5.2.0 LTS",
+  "sourceBlend": "magnetic-slide-tile-blockout-r002.blend"
+}

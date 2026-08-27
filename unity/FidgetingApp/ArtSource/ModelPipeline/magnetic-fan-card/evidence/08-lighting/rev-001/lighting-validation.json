@@ -1,0 +1,28 @@
+{
+  "renderer": "Blender Eevee PBR preview",
+  "device": "Apple Metal / Eevee",
+  "samples": "realtime preview",
+  "camera": {
+    "lensMm": 80,
+    "heroElevationDegrees": 32,
+    "heroAzimuthDegrees": -35
+  },
+  "light": {
+    "keyKelvin": 5000,
+    "keySizeMm": 350,
+    "keyToFill": "5:1"
+  },
+  "heroVariants": {
+    "A-dark-walnut": "hero-A-dark-walnut.png",
+    "B-charcoal-hard-case": "hero-B-charcoal-hard-case.png",
+    "C-cork-slab": "hero-C-cork-slab.png"
+  },
+  "passes": [
+    "beauty",
+    "clay",
+    "normal",
+    "depth",
+    "roughness"
+  ],
+  "shippingAssetModified": false
+}

@@ -1,0 +1,31 @@
+{
+  "geometryUnchanged": true,
+  "camera": {
+    "lensMm": 80,
+    "elevationDegrees": 32,
+    "shiftX": -0.22,
+    "fStop": 7.1
+  },
+  "light": {
+    "keyKelvin": 5000,
+    "keySizeMm": 350,
+    "keyToFill": "5:1"
+  },
+  "renderer": {
+    "backend": "Cycles",
+    "device": "Apple M4 Max (GPU - 40 cores)"
+  },
+  "samples": 48,
+  "outputs": {
+    "neutral": "environment-neutral.png",
+    "A-dark-walnut": "environment-A-dark-walnut.png",
+    "B-charcoal-hard-case": "environment-B-charcoal-hard-case.png",
+    "C-cork-slab": "environment-C-cork-slab.png"
+  },
+  "referenceIntent": {
+    "A-dark-walnut": "warm collectible workbench",
+    "B-charcoal-hard-case": "neutral technical hard-case",
+    "C-cork-slab": "soft lifestyle slab"
+  },
+  "shippingAssetModified": false
+}

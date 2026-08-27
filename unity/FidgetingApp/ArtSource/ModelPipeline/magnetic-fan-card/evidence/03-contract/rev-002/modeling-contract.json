@@ -1,0 +1,91 @@
+{
+  "schemaVersion": 1,
+  "modelId": "magnetic-fan-card",
+  "contractRevision": 2,
+  "status": "visual-parameter-selection",
+  "sourceClaimIds": [
+    "fan-analysis-claim-shared-camera",
+    "fan-analysis-claim-real-contact",
+    "fan-analysis-claim-light-field",
+    "fan-analysis-claim-material-zones",
+    "fan-analysis-claim-three-support-variants"
+  ],
+  "lockedProduct": {
+    "source": "fan_card_guardrails.json and current Unity scene-builder rules",
+    "cardMm": [
+      63.5,
+      88.9,
+      2.5
+    ],
+    "airGapMm": 1.0,
+    "layers": [
+      "Bottom Q at 0 degrees",
+      "Middle K at 45 degrees",
+      "Top A at 90 degrees"
+    ],
+    "pivot": "shared lower-right rounded-corner center",
+    "geometryChangeAllowed": false
+  },
+  "controlledVariants": [
+    "dark-walnut",
+    "charcoal-hard-case",
+    "cork-slab"
+  ],
+  "visualSelections": {
+    "lensMm": {
+      "options": [
+        50,
+        80,
+        110
+      ],
+      "selected": null
+    },
+    "elevationDegrees": {
+      "options": [
+        20,
+        32,
+        45
+      ],
+      "selected": null
+    },
+    "keyTemperatureKelvin": {
+      "options": [
+        3500,
+        5000,
+        6500
+      ],
+      "selected": null
+    },
+    "keySourceSizeMm": {
+      "options": [
+        150,
+        350,
+        700
+      ],
+      "selected": null
+    }
+  },
+  "fixedDuringSweep": {
+    "azimuthDegrees": -35,
+    "deliveryResolution": [
+      1179,
+      654
+    ],
+    "productWidthFraction": 0.62,
+    "keyToFillRatio": "5:1",
+    "depthOfField": false,
+    "viewTransform": "AgX"
+  },
+  "evidence": {
+    "renderEngine": "Blender Eevee parameter study",
+    "sourceScript": "parameter_sweep.py",
+    "scene": "fan-card-parameter-sweep.blend",
+    "contactSheets": [
+      "lens-contact-sheet.png",
+      "elevation-contact-sheet.png",
+      "temperature-contact-sheet.png",
+      "source-size-contact-sheet.png"
+    ]
+  },
+  "shippingAssetModified": false
+}

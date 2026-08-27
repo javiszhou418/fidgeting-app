@@ -1,0 +1,53 @@
+{
+  "productMaterials": {
+    "warmSilverOptions": {
+      "fine": {
+        "roughness": 0.46,
+        "bumpStrength": 0.055
+      },
+      "medium": {
+        "roughness": 0.53,
+        "bumpStrength": 0.17
+      },
+      "coarse": {
+        "roughness": 0.61,
+        "bumpStrength": 0.3
+      }
+    },
+    "gunmetal": {
+      "metallic": 1.0,
+      "roughness": 0.5
+    },
+    "etching": {
+      "metallic": 1.0,
+      "roughness": 0.62
+    },
+    "chrome": {
+      "metallic": 1.0,
+      "roughness": 0.12
+    },
+    "rearGold": {
+      "metallic": 1.0,
+      "roughness": 0.3
+    }
+  },
+  "followersVisibleOnFront": false,
+  "artworkOptions": [
+    "keep-three-dots",
+    "remove-three-dots"
+  ],
+  "surfaceOutputs": {
+    "fine": "surface-fine.png",
+    "medium": "surface-medium.png",
+    "coarse": "surface-coarse.png"
+  },
+  "camera": {
+    "lensMm": 80,
+    "elevationDegrees": 32
+  },
+  "light": {
+    "temperatureKelvin": 5000,
+    "sourceSizeMm": 350
+  },
+  "shippingAssetModified": false
+}

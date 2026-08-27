@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<test-run id="2" testcasecount="3" result="Passed" total="3" passed="3" failed="0" inconclusive="0" skipped="0" asserts="0" engine-version="3.5.0.0" clr-version="4.0.30319.42000" start-time="2026-08-26 14:30:47Z" end-time="2026-08-26 14:30:47Z" duration="0.4666727">
+  <test-suite type="TestSuite" id="1000" name="Fidget Spinner" fullname="Fidget Spinner" runstate="Runnable" testcasecount="377" result="Passed" start-time="2026-08-26 14:30:47Z" end-time="2026-08-26 14:30:47Z" duration="0.466673" total="3" passed="3" failed="0" inconclusive="0" skipped="0" asserts="0">
+    <properties>
+      <property name="platform" value="EditMode" />
+    </properties>
+    <test-suite type="Assembly" id="1422" name="Assembly-CSharp-Editor.dll" fullname="/Users/jiawei.zhou/Documents/Fidgeting app/unity/FidgetingApp/Library/ScriptAssemblies/Assembly-CSharp-Editor.dll" runstate="Runnable" testcasecount="377" result="Passed" start-time="2026-08-26 14:30:47Z" end-time="2026-08-26 14:30:47Z" duration="0.444763" total="3" passed="3" failed="0" inconclusive="0" skipped="0" asserts="0">
+      <properties>
+        <property name="_PID" value="80306" />
+        <property name="_APPDOMAIN" value="Unity Child Domain" />
+        <property name="platform" value="EditMode" />
+        <property name="EditorOnly" value="True" />
+      </properties>
+      <test-suite type="TestSuite" id="1426" name="FidgetingApp" fullname="FidgetingApp" runstate="Runnable" testcasecount="298" result="Passed" start-time="2026-08-26 14:30:47Z" end-time="2026-08-26 14:30:47Z" duration="0.431841" total="3" passed="3" failed="0" inconclusive="0" skipped="0" asserts="0">
+        <properties />
+        <test-suite type="TestSuite" id="1436" name="Tests" fullname="FidgetingApp.Tests" runstate="Runnable" testcasecount="228" result="Passed" start-time="2026-08-26 14:30:47Z" end-time="2026-08-26 14:30:47Z" duration="0.422217" total="3" passed="3" failed="0" inconclusive="0" skipped="0" asserts="0">
+          <properties />
+          <test-suite type="TestSuite" id="1437" name="Editor" fullname="FidgetingApp.Tests.Editor" runstate="Runnable" testcasecount="228" result="Passed" start-time="2026-08-26 14:30:47Z" end-time="2026-08-26 14:30:47Z" duration="0.416521" total="3" passed="3" failed="0" inconclusive="0" skipped="0" asserts="0">
+            <properties />
+            <test-suite type="TestFixture" id="1242" name="GachaStorefrontIntegrationTests" fullname="FidgetingApp.Tests.Editor.GachaStorefrontIntegrationTests" classname="FidgetingApp.Tests.Editor.GachaStorefrontIntegrationTests" runstate="Runnable" testcasecount="3" result="Passed" start-time="2026-08-26 14:30:47Z" end-time="2026-08-26 14:30:47Z" duration="0.398206" total="3" passed="3" failed="0" inconclusive="0" skipped="0" asserts="0">
+              <properties />
+              <test-case id="1244" name="ApprovedFanCardBannerKeepsItsIntrinsicShippingAspect" fullname="FidgetingApp.Tests.Editor.GachaStorefrontIntegrationTests.ApprovedFanCardBannerKeepsItsIntrinsicShippingAspect" methodname="ApprovedFanCardBannerKeepsItsIntrinsicShippingAspect" classname="FidgetingApp.Tests.Editor.GachaStorefrontIntegrationTests" runstate="Runnable" seed="1144777583" result="Passed" start-time="2026-08-26 14:30:47Z" end-time="2026-08-26 14:30:47Z" duration="0.126329" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1245" name="ApprovedPackAssetsAreLayeredCompleteAndIndependentFromPrizeRarity" fullname="FidgetingApp.Tests.Editor.GachaStorefrontIntegrationTests.ApprovedPackAssetsAreLayeredCompleteAndIndependentFromPrizeRarity" methodname="ApprovedPackAssetsAreLayeredCompleteAndIndependentFromPrizeRarity" classname="FidgetingApp.Tests.Editor.GachaStorefrontIntegrationTests" runstate="Runnable" seed="776160128" result="Passed" start-time="2026-08-26 14:30:47Z" end-time="2026-08-26 14:30:47Z" duration="0.161256" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1243" name="ShippingStorefrontKeepsNavigationTicketEconomyAndRevealWiring" fullname="FidgetingApp.Tests.Editor.GachaStorefrontIntegrationTests.ShippingStorefrontKeepsNavigationTicketEconomyAndRevealWiring" methodname="ShippingStorefrontKeepsNavigationTicketEconomyAndRevealWiring" classname="FidgetingApp.Tests.Editor.GachaStorefrontIntegrationTests" runstate="Runnable" seed="555086825" result="Passed" start-time="2026-08-26 14:30:47Z" end-time="2026-08-26 14:30:47Z" duration="0.062948" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+                <output><![CDATA[connection.state_change
+oldState=Connecting newState=Failed error=WebSocketException: Unable to connect to the remote server (after 10 attempts)
+Saving results to: /Users/jiawei.zhou/Library/Application Support/DefaultCompany/Fidget Spinner/TestResults.xml
+]]></output>
+              </test-case>
+            </test-suite>
+          </test-suite>
+        </test-suite>
+      </test-suite>
+    </test-suite>
+  </test-suite>
+</test-run>

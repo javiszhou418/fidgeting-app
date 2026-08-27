@@ -1,0 +1,59 @@
+{
+  "schemaVersion": 1,
+  "status": "pass",
+  "capturedAt": "2026-08-18",
+  "artifactKind": "shipping-source Simulator visual preview",
+  "scope": "Pack threshold commit to product-owned magnetic holder",
+  "video": {
+    "path": "Artifacts/GachaRiveShippingPreview/gacha-pack-to-product-holder-transition.mp4",
+    "codec": "h264",
+    "pixelFormat": "yuv420p",
+    "width": 1206,
+    "height": 2622,
+    "frameRate": 60,
+    "durationSeconds": 7.25,
+    "sha256": "64ad68f0bfc3cdbe52d1f3101e6a53704e95848f12ec653778cf1738934497ab",
+    "fullFrameDecode": "pass"
+  },
+  "contactSheet": {
+    "path": "Artifacts/GachaRiveShippingPreview/gacha-pack-to-product-holder-transition-contact-sheet.png",
+    "width": 1240,
+    "height": 1328,
+    "sha256": "51e4c51d5da5956311c5f3fbbb5795097a26b9b167386dfabf8afd4c234f94a6"
+  },
+  "runtime": {
+    "riveRuntimeVersion": "6.23.1",
+    "riveRuntimeArchiveSha256": "eaba09813f47bfede2d87b9a8ad436e9e6d155f4f38e3f267360962575fc10b9",
+    "shippingSwiftSourceSetSha256": "41dfcaae5208887b8ee81bbe54277b7d8f24a4bbb35f420561ce1e5b5a54de86",
+    "visibleHolder": "GachaProductOwnedMagneticHolderSurface",
+    "hiddenRiveCompletionOpacity": 0.001,
+    "packHolderCrossfadeSeconds": 0.28,
+    "packExitSeconds": 0.34
+  },
+  "visualAssertions": {
+    "packAndHolderOverlapVisible": true,
+    "blackGapObserved": false,
+    "whatnotWordmarkObserved": false,
+    "legacyWLogoObserved": false,
+    "yellowGreenBrandPaletteObserved": false,
+    "screenFixedIdentityOverlayPresent": false,
+    "holderToyArtwork": "product-thumbnail-metal-three-blade",
+    "holderProductName": "METAL THREE-BLADE",
+    "holderGrade": "GEM/MINT 10",
+    "holderSerial": "#00000001",
+    "holderPalette": "neutralGraphiteSilver"
+  },
+  "automatedEvidence": {
+    "shippingSwiftDebugTypecheck": "pass",
+    "shippingSwiftReleaseTypecheck": "pass",
+    "gateRules": "77/77 pass",
+    "packRules": "25/25 pass",
+    "finalSourceContract": "30/30 pass"
+  },
+  "limitations": {
+    "mainAppUnityReceiptEndToEnd": "covered by prior real storefront/Unity XCUITest, not re-claimed by this visual-only preview",
+    "phoneInstalled": false,
+    "deviceAccepted": false,
+    "visualApproval": "pending-user-confirmation"
+  }
+}

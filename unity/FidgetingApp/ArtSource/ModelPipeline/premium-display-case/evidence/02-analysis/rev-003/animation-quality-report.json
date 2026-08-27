@@ -1,0 +1,78 @@
+{
+  "schema": "premium-display-case-gate02-animation-quality.v1",
+  "status": "pass",
+  "reviewState": "ready_for_review",
+  "truth": {
+    "realRiveContactSheet": true,
+    "schematicNotShipping": true,
+    "wholeCaseOnly": true,
+    "explode": false,
+    "usesMeasuredLandmarks": true,
+    "usesCosineWidth": false
+  },
+  "metrics": {
+    "generatedSourceFrameCount": 109,
+    "gifDurationMilliseconds": 4520,
+    "candidateDurationMilliseconds": 4520.833,
+    "activeMotionMilliseconds": 875.0,
+    "maximumConnectedSubjectComponents": 1,
+    "minimumProjectedSubjectWidthPixels": 43,
+    "maximumAdjacentCornerDeltaPixels": 116.0352,
+    "maximumHoldMeanRgbDifference": 0.0,
+    "maximumYellowPixelFraction": 0.0,
+    "encodedGifFrameCount": 22,
+    "probedGifDurationMilliseconds": 4520
+  },
+  "checks": [
+    {
+      "id": "whole-case-only",
+      "status": "pass",
+      "evidence": "Maximum connected subject components=1."
+    },
+    {
+      "id": "silhouette-and-direction",
+      "status": "pass",
+      "evidence": "Measured quadrilateral interpolation preserves entry roll, edge compression, reverse face and final front."
+    },
+    {
+      "id": "complete-flip-read",
+      "status": "pass",
+      "evidence": "Contact sheet includes front-to-edge 550 ms, edge 600 ms, reverse 650 ms and front 700 ms source states."
+    },
+    {
+      "id": "no-split-or-reassembly",
+      "status": "pass",
+      "evidence": "One warped neutral case remains connected; no child offsets, explode or object replacement exists."
+    },
+    {
+      "id": "flicker",
+      "status": "pass",
+      "evidence": "Hold max mean RGB difference=0.0."
+    },
+    {
+      "id": "minimum-edge-read",
+      "status": "pass",
+      "evidence": "Minimum projected subject width=43 px."
+    },
+    {
+      "id": "duration-truth",
+      "status": "pass",
+      "evidence": "GIF=22 encoded frames from 109 generated samples/4520 ms; identical hold frames are coalesced. 4.520833 s remains a candidate, not motion approval."
+    },
+    {
+      "id": "source-identity-excluded",
+      "status": "pass",
+      "evidence": "Neutral schematic yellow fraction=0.0; source branding is absent."
+    },
+    {
+      "id": "axis-unknowns",
+      "status": "pass",
+      "evidence": "Roll is confirmed; apparent yaw is labeled sprite/mesh-driven; pitch and physical 3D axis remain unknown."
+    },
+    {
+      "id": "gate-boundary",
+      "status": "pass",
+      "evidence": "Gate 02 ready_for_review only. Gate 03 is not approved or entered; no shipping, Blender, build, install or phone change."
+    }
+  ]
+}

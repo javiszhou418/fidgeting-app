@@ -1,0 +1,195 @@
+{
+  "schemaVersion": 1,
+  "gate": "07-material",
+  "materialRevision": 7,
+  "borderComparison": {
+    "rev6": {
+      "roiPx": [
+        120,
+        280,
+        780,
+        740
+      ],
+      "darkFraction": 0.20443017,
+      "redFraction": 0.33668643,
+      "laplacianVariance": 132.730882,
+      "cannyEdgePixels": 5681
+    },
+    "rev7": {
+      "roiPx": [
+        120,
+        280,
+        780,
+        740
+      ],
+      "darkFraction": 0.2748419,
+      "redFraction": 0.2518643,
+      "laplacianVariance": 122.83243,
+      "cannyEdgePixels": 6146
+    }
+  },
+  "motifMasks": {
+    "upper": {
+      "sha256": "8250df70d2286849db353862283b0d3db9c66e1ac92bed3795bcb5377a431c36",
+      "laplacianVariance": 11708.275645,
+      "cannyEdgePixels": 30140,
+      "intermediatePixelFraction": 0.0
+    },
+    "lower": {
+      "sha256": "8250df70d2286849db353862283b0d3db9c66e1ac92bed3795bcb5377a431c36",
+      "laplacianVariance": 11708.275645,
+      "cannyEdgePixels": 30140,
+      "intermediatePixelFraction": 0.0
+    }
+  },
+  "silverDiagnosis": {
+    "rev6OriginalBlueStudio": {
+      "roiPx": [
+        100,
+        650,
+        1000,
+        980
+      ],
+      "neutralSamples": 92419,
+      "medianRgb": [
+        238.0,
+        237.0,
+        237.0
+      ],
+      "medianLStar": 94.117647,
+      "medianAStar": 0.0,
+      "medianBStar": 0.0,
+      "medianCStar": 1.0,
+      "p90LStar": 95.294118,
+      "blueBiasBelowMinus2Fraction": 0.13119597,
+      "roiClipAbove250Fraction": 0.00024916
+    },
+    "rev6ShaderNeutralStudio": {
+      "roiPx": [
+        100,
+        650,
+        1000,
+        980
+      ],
+      "neutralSamples": 95203,
+      "medianRgb": [
+        238.0,
+        237.0,
+        237.0
+      ],
+      "medianLStar": 94.117647,
+      "medianAStar": 0.0,
+      "medianBStar": 0.0,
+      "medianCStar": 0.0,
+      "p90LStar": 95.294118,
+      "blueBiasBelowMinus2Fraction": 0.0,
+      "roiClipAbove250Fraction": 0.00024916
+    },
+    "rev7ShaderNeutralStudio": {
+      "roiPx": [
+        100,
+        650,
+        1000,
+        980
+      ],
+      "neutralSamples": 95178,
+      "medianRgb": [
+        238.0,
+        237.0,
+        237.0
+      ],
+      "medianLStar": 94.117647,
+      "medianAStar": 0.0,
+      "medianBStar": 0.0,
+      "medianCStar": 0.0,
+      "p90LStar": 95.294118,
+      "blueBiasBelowMinus2Fraction": 0.0,
+      "roiClipAbove250Fraction": 0.00026599
+    },
+    "cause": "Rev 6 mirror metal reflected a blue-tinted world. Rev 7 uses a neutral studio world and a D65-balanced daylight diagnostic."
+  },
+  "d65Silver": {
+    "hero": {
+      "roiPx": [
+        470,
+        470,
+        1120,
+        790
+      ],
+      "neutralSamples": 90396,
+      "medianRgb": [
+        180.0,
+        180.0,
+        178.0
+      ],
+      "medianLStar": 73.333333,
+      "medianAStar": 0.0,
+      "medianBStar": 1.0,
+      "medianCStar": 1.0,
+      "p90LStar": 78.431373,
+      "blueBiasBelowMinus2Fraction": 0.0,
+      "roiClipAbove250Fraction": 6.25e-05
+    },
+    "sideDirect": {
+      "roiPx": [
+        20,
+        350,
+        1000,
+        620
+      ],
+      "neutralSamples": 251941,
+      "medianRgb": [
+        174.0,
+        162.0,
+        162.0
+      ],
+      "medianLStar": 67.45098,
+      "medianAStar": 0.0,
+      "medianBStar": 1.0,
+      "medianCStar": 1.0,
+      "p90LStar": 79.215686,
+      "blueBiasBelowMinus2Fraction": 0.0,
+      "roiClipAbove250Fraction": 0.0001096
+    }
+  },
+  "d65ReferenceCards": {
+    "white80": 197.360614,
+    "gray18": 120.377141,
+    "black": 29.350328
+  },
+  "bloodRed": {
+    "selectedPixels": 156551,
+    "signedHueMedianDegrees": -6.335404,
+    "bloodRedFraction": 1.0,
+    "pinkFraction": 0.0,
+    "wholeImageClipAbove250Fraction": 0.00010069
+  },
+  "openLowerArtwork": {
+    "laplacianVariance": 150.152264,
+    "cannyEdgePixels": 3675
+  },
+  "checks": {
+    "borderPreparationPasses": true,
+    "borderReachesOuterPerimeter": true,
+    "borderWidthExposed": true,
+    "renderedBorderWider": true,
+    "cleanMotifIdentityPreserved": true,
+    "motifSharpnessIdentityPreserved": true,
+    "independentArtworkSlots": true,
+    "rev6BlueBiasDiagnosed": true,
+    "neutralStudioBlueBiasRemoved": true,
+    "d65HeroBrightNeutralSilver": true,
+    "d65SideBrightNeutralSilver": true,
+    "d65HighlightsNotClipped": true,
+    "referenceCardsOrdered": true,
+    "bloodRedTarget": true,
+    "bloodRedClippingControlled": true,
+    "openLowerArtworkLegible": true,
+    "physicallyPlausibleSilver": true,
+    "noEmission": true,
+    "geometryDigestUnchanged": true,
+    "mechanismScopeUnchanged": true,
+    "gate07Only": true
+  },
+  "pass": true
+}

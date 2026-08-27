@@ -1,0 +1,60 @@
+{
+  "schemaVersion": 1,
+  "modelId": "magnetic-slide-tile",
+  "gate": "08-lighting",
+  "question": "Can the silver mirror body reflect the Unity scene?",
+  "answer": "Yes, approximately. URP reflection probes and the skybox/HDRI provide cubemap-based environment reflections. This is not ray-traced or per-pixel true mirror reflection.",
+  "decisionState": "specified",
+  "deliveryState": "specified-only-not-integrated",
+  "canonicalUnityProject": "unity/FidgetingApp",
+  "renderPipeline": {
+    "name": "Universal Render Pipeline",
+    "version": "17.5.0",
+    "manifestPath": "unity/FidgetingApp/Packages/manifest.json",
+    "manifestSha256": "86374e23655dd4e403386c211f3c2887a1a55824a004ecd9a9c554aa6951a9f8",
+    "packageLockPath": "unity/FidgetingApp/Packages/packages-lock.json",
+    "packageLockSha256": "e3398ddc1d1f1996cd1bc87df91e447060d6e147c1cd3744cceb78a98cc4f351"
+  },
+  "mobilePipelineAsset": {
+    "path": "unity/FidgetingApp/Assets/Settings/Mobile_RPAsset.asset",
+    "sha256": "8ca6dd4c9347f597e1300d1b44b197de770cb9fd572576112475bd38202308b6",
+    "capabilities": {
+      "reflectionProbeBlending": true,
+      "reflectionProbeBoxProjection": true,
+      "reflectionProbeAtlas": true
+    }
+  },
+  "laterUnityStrategy": {
+    "silverBody": [
+      "Use local reflection probes for nearby scene response.",
+      "Blend with the scene skybox or HDRI cubemap.",
+      "Use box projection for bounded interiors where appropriate.",
+      "Update realtime probes only when scene changes require it, not every frame."
+    ],
+    "reflectionType": "approximate-cubemap-reflection",
+    "notSupportedClaim": "not-ray-traced-and-not-per-pixel-true-mirror",
+    "crystal": "Transmission and iridescence require a URP Shader Graph or custom approximation."
+  },
+  "verification": {
+    "Gate09": "Verify neutral and shipping environment contribution with matching cameras.",
+    "Gate11": "Verify Blender-versus-Unity material and reflection parity.",
+    "deviceAcceptance": "pending"
+  },
+  "scope": {
+    "unityFilesChanged": false,
+    "runtimeImplemented": false,
+    "reflectionProbesCreated": false,
+    "shaderGraphImplemented": false,
+    "hapticsChanged": false,
+    "buildOrInstallPerformed": false
+  },
+  "checks": {
+    "urp175Confirmed": true,
+    "mobileReflectionProbeFeaturesEnabled": true,
+    "noUnityFilesModified": true,
+    "deliveryStateSpecifiedOnly": true,
+    "verificationDeferredToGate09And11": true,
+    "deviceAcceptancePending": true
+  },
+  "pass": true
+}

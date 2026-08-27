@@ -1,0 +1,71 @@
+{
+  "schemaVersion": 1,
+  "modelId": "magnetic-slide-tile",
+  "gate": "02-analysis",
+  "revision": 11,
+  "contractAssetId": "slider-analysis-mechanism-evidence-contract-r011",
+  "contractSha256": "2f685c464db042392f4535fb5705f404e4c6e746adb590b9c020849f7a3cf40a",
+  "evidenceSelectors": {
+    "aspectRatioLW": "MEC-SILHOUETTE-ASPECT.value.aspectRatioLW.midpoint",
+    "maxTravelL": "MEC-TRAVEL-NORMALIZED.value.supportedRange.max",
+    "observedPeakTravelL": "MEC-TRAVEL-NORMALIZED.value.observedPeak",
+    "detentStepDeg": "MEC-DETENTS.value.stepDegrees",
+    "detentCount": "MEC-DETENTS.value.countPerRevolution",
+    "bottomBase": "MEC-BOTTOM-BASE-FIXED.value",
+    "fixedAxisModule": "MEC-AXIS-MODULE-FIXED.value",
+    "axisProjectedPosition": "MEC-AXIS-PROJECTED-POSITION.value",
+    "movingTop": "MEC-TOP-PLATE-MOVING.value",
+    "rails": "MEC-RAILS-BILATERAL-BOTTOM.value"
+  },
+  "diagrammaticRailLayout": [
+    {
+      "side": "left",
+      "xL": -0.18,
+      "startYL": -0.34,
+      "endYL": 0.34,
+      "state": "inferred-diagrammatic-not-dimensional"
+    },
+    {
+      "side": "right",
+      "xL": 0.18,
+      "startYL": -0.34,
+      "endYL": 0.34,
+      "state": "inferred-diagrammatic-not-dimensional"
+    }
+  ],
+  "componentLayers": [
+    "BottomBase",
+    "AxisModule",
+    "AxisCarrierCandidate",
+    "LeftRail",
+    "RightRail",
+    "TopPlate",
+    "UnknownTopUndersideContacts"
+  ],
+  "cadApprovalChecklist": [
+    "topView",
+    "sideView",
+    "sectionView",
+    "slideRange",
+    "rotationPositions",
+    "pivotInspection",
+    "componentLayers",
+    "sourceMapping"
+  ],
+  "approvalRule": {
+    "interactiveRequired": true,
+    "approvalType": "interactive-cad-geometry",
+    "chatTextApprovalAllowed": false,
+    "staticScreenshotApprovalAllowed": false,
+    "requiredArtifactHash": true,
+    "requiredContractHash": true,
+    "requiredGeometrySnapshot": true,
+    "requiredBrowserTimestamp": true,
+    "approvalEffect": "records-cad-subapproval-only-simulator-remains-separate-and-locked"
+  },
+  "simulator": {
+    "locked": true,
+    "label": "交互 CAD 批准后生成",
+    "activeControls": 0
+  }
+}

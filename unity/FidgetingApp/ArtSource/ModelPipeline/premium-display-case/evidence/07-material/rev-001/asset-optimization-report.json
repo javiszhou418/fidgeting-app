@@ -1,0 +1,23 @@
+{
+  "schemaVersion": 1,
+  "modelId": "premium-display-case",
+  "gate": "07-material",
+  "status": "pass",
+  "subjectTriangles": 100016,
+  "triangleBudget": 120000,
+  "subjectMaterialSlots": 5,
+  "materialSlotBudget": 8,
+  "subjectObjects": 5,
+  "renderOnlyMaterialZoneProxies": 11,
+  "lodGenerated": false,
+  "lodReason": "Gate 07 preserves the approved source; export and LOD decisions remain downstream.",
+  "checks": {
+    "triangleBudget": true,
+    "materialSlotBudget": true,
+    "closedAndManifold": true,
+    "appliedSubjectScales": true,
+    "noUnusedSubjectSlots": true,
+    "proceduralCoverageNoUvPackingRequired": true,
+    "approvedGeometryNotOptimizedOrDecimated": true
+  }
+}

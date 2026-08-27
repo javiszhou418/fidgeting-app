@@ -1,0 +1,31 @@
+{
+  "productGeometryModified": false,
+  "lensMm": 80,
+  "elevationSweepDegrees": [
+    32,
+    27,
+    22
+  ],
+  "fStop": 4.5,
+  "depthBands": {
+    "foreground": "two near-camera chips and six transmissive droplets",
+    "midground": "approved Fan Card, table, and 64 bounded sparks",
+    "background": "three arch planes, 42 bokeh lights, two floating dark cards"
+  },
+  "volumetric": {
+    "localDensity": 0.008,
+    "anisotropy": 0.68,
+    "spotEnergy": 7.5
+  },
+  "renderer": {
+    "backend": "Cycles",
+    "device": "Apple M4 Max (GPU - 40 cores)"
+  },
+  "samples": 96,
+  "outputs": {
+    "32": "depth-camera-32.png",
+    "27": "depth-camera-27.png",
+    "22": "depth-camera-22.png"
+  },
+  "shippingIntegrated": false
+}

@@ -1,0 +1,187 @@
+{
+  "fbx": {
+    "format": "FBX",
+    "path": "magnetic-fan-card.fbx",
+    "objects": 36,
+    "missingRequiredNames": [],
+    "hierarchy": {
+      "BottomCard": "MagneticFanCard_Root",
+      "MiddleCard": "MagneticFanCard_Root",
+      "TopCard": "MagneticFanCard_Root"
+    },
+    "rankTypes": {
+      "BottomCard_Rank_0": "MESH",
+      "MiddleCard_Rank_1": "MESH",
+      "BottomCard_Rank_1": "MESH",
+      "MiddleCard_Rank_0": "MESH",
+      "TopCard_Rank_1": "MESH",
+      "TopCard_Rank_0": "MESH"
+    },
+    "bottomTracks": [],
+    "middleTopTracks": [
+      "MiddleCard_Track_Grille",
+      "MiddleCard_Track_Undercut",
+      "TopCard_Track_Grille",
+      "TopCard_Track_Undercut"
+    ],
+    "stats": {
+      "meshObjects": 32,
+      "vertices": 36804,
+      "triangles": 70548,
+      "materials": [
+        "MAT_Chrome_Selected",
+        "MAT_Etching_Selected",
+        "MAT_Gunmetal_Selected",
+        "MAT_WarmGold_Selected",
+        "MAT_WarmSilver_Medium_Selected"
+      ]
+    },
+    "bounds": {
+      "minimum": [
+        -0.013435,
+        -0.054,
+        -0.0
+      ],
+      "maximum": [
+        0.094328,
+        0.0794,
+        0.01315
+      ],
+      "extent": [
+        0.1077631,
+        0.1334,
+        0.01315
+      ]
+    },
+    "checks": {
+      "requiredNames": true,
+      "cardParenting": true,
+      "rankMeshes": true,
+      "bottomHasNoTrack": true,
+      "topMiddleTrackObjects": true,
+      "triangleBudget": true,
+      "noCollisionInProduct": true
+    },
+    "pass": true
+  },
+  "glb": {
+    "format": "GLB",
+    "path": "magnetic-fan-card.glb",
+    "objects": 36,
+    "missingRequiredNames": [],
+    "hierarchy": {
+      "BottomCard": "MagneticFanCard_Root",
+      "MiddleCard": "MagneticFanCard_Root",
+      "TopCard": "MagneticFanCard_Root"
+    },
+    "rankTypes": {
+      "BottomCard_Rank_0": "MESH",
+      "MiddleCard_Rank_1": "MESH",
+      "BottomCard_Rank_1": "MESH",
+      "MiddleCard_Rank_0": "MESH",
+      "TopCard_Rank_1": "MESH",
+      "TopCard_Rank_0": "MESH"
+    },
+    "bottomTracks": [],
+    "middleTopTracks": [
+      "MiddleCard_Track_Grille",
+      "MiddleCard_Track_Undercut",
+      "TopCard_Track_Grille",
+      "TopCard_Track_Undercut"
+    ],
+    "stats": {
+      "meshObjects": 32,
+      "vertices": 110792,
+      "triangles": 70548,
+      "materials": [
+        "MAT_Chrome_Selected",
+        "MAT_Etching_Selected",
+        "MAT_Gunmetal_Selected",
+        "MAT_WarmGold_Selected",
+        "MAT_WarmSilver_Medium_Selected"
+      ]
+    },
+    "bounds": {
+      "minimum": [
+        -0.013435,
+        -0.054,
+        0.0
+      ],
+      "maximum": [
+        0.0943281,
+        0.0794,
+        0.01315
+      ],
+      "extent": [
+        0.1077631,
+        0.1334001,
+        0.01315
+      ]
+    },
+    "checks": {
+      "requiredNames": true,
+      "cardParenting": true,
+      "rankMeshes": true,
+      "bottomHasNoTrack": true,
+      "topMiddleTrackObjects": true,
+      "triangleBudget": true,
+      "noCollisionInProduct": true
+    },
+    "pass": true
+  },
+  "collisionFbx": {
+    "format": "FBX collision",
+    "path": "magnetic-fan-card-collision.fbx",
+    "objects": 7,
+    "colliders": [
+      "COLLIDER_BottomCard",
+      "COLLIDER_MiddleCard",
+      "COLLIDER_TopCard"
+    ],
+    "watertight": {
+      "COLLIDER_BottomCard": true,
+      "COLLIDER_MiddleCard": true,
+      "COLLIDER_TopCard": true
+    },
+    "parenting": {
+      "COLLIDER_BottomCard": "BottomCard",
+      "COLLIDER_MiddleCard": "MiddleCard",
+      "COLLIDER_TopCard": "TopCard"
+    },
+    "bounds": {
+      "minimum": [
+        -0.0538815,
+        -0.0538815,
+        -0.00175
+      ],
+      "maximum": [
+        0.0538815,
+        0.0538815,
+        0.01075
+      ],
+      "extent": [
+        0.1077631,
+        0.1077631,
+        0.0125
+      ]
+    },
+    "checks": {
+      "threeColliders": true,
+      "watertight": true,
+      "parenting": true,
+      "renderMeshesAbsent": true
+    },
+    "pass": true
+  },
+  "crossFormat": {
+    "sortedExtentRelativeErrors": [
+      0.0,
+      0.0,
+      7e-07
+    ],
+    "boundsWithinOnePercent": true,
+    "triangleDifference": 0,
+    "triangleCountsWithinOnePercent": true
+  },
+  "pass": true
+}

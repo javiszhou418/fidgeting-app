@@ -1,0 +1,137 @@
+{
+  "schemaVersion": 1,
+  "status": "PASS",
+  "capturedAtLocal": "2026-08-18T09:32:40+08:00",
+  "feature": "Build 42 authoritative Pack threshold gesture into real PremiumDisplayCase",
+  "truthfulness": {
+    "mainAppBundle": true,
+    "standalonePreview": false,
+    "fakeReceipt": false,
+    "emptyUnitySendMessage": false,
+    "realUnityPendingTransaction": true,
+    "realPremiumDisplayCase": true
+  },
+  "build": {
+    "bundleIdentifier": "com.jiaweizhou.fidgetspinner.codex",
+    "version": "0.1.0",
+    "buildNumber": "42",
+    "sourceCommit": "ef6a7badd4304e9c18fc94db1e30bf3d2a2e1f2f",
+    "sdk": "SimulatorSDK",
+    "gachaMode": "internalUnlimited",
+    "development": false,
+    "manifestArtifact": "gacha-pack-build42-manifest.json"
+  },
+  "device": {
+    "platform": "iOS Simulator",
+    "model": "iPhone 17 Pro",
+    "osVersion": "26.3.1",
+    "osBuild": "23D8133",
+    "architecture": "arm64",
+    "udid": "5BF378DF-5EAB-4885-87E1-2838F6DA6E46"
+  },
+  "launchArguments": [
+    "--gacha-pack-trace",
+    "--fidget-gacha-sequence",
+    "catalog8"
+  ],
+  "authoritativeTransaction": {
+    "requestId": "d2735b5c-c9b1-45c4-9fd7-83241807364f",
+    "prizeId": "canyon-std-slate-lining",
+    "runtimeMode": "internalUnlimited",
+    "persistedPhaseAfterVideo": "awaitingAcceptance",
+    "persistedPhaseRawValue": 1,
+    "ownedAfterVideo": [],
+    "drawCountAfterVideo": 0,
+    "acceptanceTapped": false,
+    "autoCommitObserved": false
+  },
+  "gestureRules": {
+    "travelPoints": 220,
+    "commitThreshold": 0.62,
+    "belowThreshold": {
+      "dragPoints": 121,
+      "normalizedProgress": 0.55,
+      "expected": "rebound-to-sealed",
+      "observed": "rebound-to-sealed",
+      "postReleaseState": "sealed",
+      "commitObserved": false
+    },
+    "aboveThreshold": {
+      "dragPoints": 165,
+      "normalizedProgress": 0.75,
+      "expected": "commit-exact-once-and-request-3d",
+      "observed": "pack-dismissed-and-real-3d-root-present"
+    }
+  },
+  "xctest": {
+    "result": "Passed",
+    "totalTestCount": 1,
+    "passedTests": 1,
+    "failedTests": 0,
+    "durationSeconds": 30.986,
+    "testCase": "GachaGestureUITests.testRecordThresholdFlow",
+    "relativeTimelineSeconds": {
+      "singleDrawTapped": 9.05,
+      "packPresent": 10.44,
+      "requestAndPrizeRead": 12.68,
+      "belowThresholdGestureStart": 15.71,
+      "belowThresholdGestureEnd": 16.85,
+      "packStillPresentAfterPause": 18.86,
+      "sealedStateAsserted": 19.96,
+      "aboveThresholdGestureStart": 19.98,
+      "aboveThresholdGestureEnd": 21.26,
+      "packDismissed": 22.30,
+      "real3dRootPresent": 23.38,
+      "sixPhaseHistoryComplete": 26.50,
+      "acceptButtonPresent": 27.57
+    }
+  },
+  "reveal": {
+    "accessibilityRoot": "gacha-3d-reveal-root",
+    "phaseHistory": [
+      "back",
+      "front",
+      "readable",
+      "exploded",
+      "prizeOnly",
+      "sheen",
+      "complete"
+    ],
+    "acceptAccessibilityIdentifier": "gacha-reveal-accept",
+    "completedWithoutAcceptance": true
+  },
+  "releaseTraceInstrumentation": {
+    "requestedByLaunchArgument": true,
+    "defaultsKey": "gacha.pack.build42.trace.v1",
+    "emitted": false,
+    "reason": "The trace writer is compiled only under #if DEBUG, while this verified Simulator app was built with the Release configuration (manifest development=false). Gesture progress and ordering were therefore verified by exact XCTest coordinates, AX state assertions, persisted Unity transaction state, and the continuous H.264 recording rather than by a Release UserDefaults trace."
+  },
+  "video": {
+    "artifact": "gacha-pack-build42-main-app-threshold-reveal.mp4",
+    "codec": "h264",
+    "pixelFormat": "yuv420p",
+    "width": 1206,
+    "height": 2622,
+    "framesPerSecond": 60,
+    "frameCount": 1830,
+    "durationSeconds": 30.5,
+    "sizeBytes": 5287531,
+    "sha256": "1f189be4df50b89fa80b07eb5220bd5b9f251616ac8ed366cf6175a1a0c9fede",
+    "continuous": true,
+    "videoTimelineSeconds": {
+      "storefront": 2.0,
+      "sealedPack": 9.0,
+      "belowThresholdDrag": 12.3,
+      "reboundedAndSealed": 14.0,
+      "aboveThresholdDrag": 17.0,
+      "commitTo3dTransition": 18.4,
+      "real3dCase": 20.0,
+      "completeAwaitingAcceptance": 23.5
+    }
+  },
+  "contactSheet": {
+    "artifact": "gacha-pack-build42-main-app-threshold-reveal-contact-sheet.png",
+    "sha256": "4c6e575e61e48b1450671da27ecd178aeb7ccd2dc4b239a14484aa9f64159c7e",
+    "frameTimesSeconds": [2.0, 9.0, 12.3, 14.0, 17.0, 18.4, 20.0, 23.5]
+  }
+}

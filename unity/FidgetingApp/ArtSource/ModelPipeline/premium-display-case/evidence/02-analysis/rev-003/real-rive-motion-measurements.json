@@ -1,0 +1,1053 @@
+{
+  "schema": "premium-display-case-gate02-real-rive-motion-analysis.v1",
+  "modelId": "premium-display-case",
+  "gate": "02-analysis",
+  "analysisRevision": 3,
+  "status": "ready_for_review",
+  "sourceTask": "current Cursor thread",
+  "userRejection": {
+    "quote": "当前 Y 轴 turntable 旋转完全错误。",
+    "instruction": "用户截图显示的不是简单 Y 轴转盘。不要先猜是 X 轴。",
+    "decision": "reject-pure-vertical-y-axis-360-turntable"
+  },
+  "sources": [
+    {
+      "path": "unity/FidgetingApp/ArtSource/ModelPipeline/premium-display-case/evidence/02-analysis/rev-003/user-motion-rejection-reference.png",
+      "role": "user-provided-motion-rejection-screenshot",
+      "bytes": 172761,
+      "sha256": "7bd29fd5e5d9cd6b016865fbeb6f040eb4400daa461769f34c7a31908bbe1fdf"
+    },
+    {
+      "path": "unity/FidgetingApp/Assets/Plugins/iOS/Rive/gacha-single-draw-jumbotron.riv",
+      "role": "canonical-rive-source",
+      "bytes": 357120,
+      "sha256": "da5ba78f63c09ea538d214f7bcdd520a852fc77232bf47ef31606106136c7717"
+    },
+    {
+      "path": "unity/FidgetingApp/Assets/Plugins/iOS/FidgetGachaRivePresentation.swift",
+      "role": "shipping-swift-binding",
+      "bytes": 36960,
+      "sha256": "68b19f0cb27bd20d21f5df20764ea2e05791d8d55efc96cebb5e2b53df8ae661"
+    },
+    {
+      "path": "unity/FidgetingApp/Artifacts/GachaPackRiveUnityContinuousPreview/gacha-pack-rive-unity-continuous-combined.log",
+      "role": "main-app-runtime-log",
+      "bytes": 2218006,
+      "sha256": "6613f8c82f79626aad7bbe5fd78570a9670196787dccd75f4da70a7035e62ac5"
+    },
+    {
+      "path": "unity/FidgetingApp/Artifacts/GachaRiveShippingPreview/gacha-rive-shipping-flow.log",
+      "role": "standalone-runtime-log",
+      "bytes": 16213,
+      "sha256": "9307ebf92e31be304178ecb8572de4af615b5dd955bbb2c99f62ee1e5663e59e"
+    },
+    {
+      "path": "unity/FidgetingApp/ArtSource/ModelPipeline/premium-display-case/evidence/02-analysis/rev-003/rive-authored-motion-extract.json",
+      "role": "authored-motion-binary-extract",
+      "bytes": 236182,
+      "sha256": "9329778cd36d3cfdebd6e5cc51763ea185f3cd5684949c2e1f49601be0ea28b0"
+    }
+  ],
+  "realRiveFrames": [
+    {
+      "path": "unity/FidgetingApp/ArtSource/ModelPipeline/premium-display-case/evidence/02-analysis/rev-003/frames/00-start-000ms.png",
+      "label": "START",
+      "milliseconds": 0,
+      "bytes": 6121,
+      "sha256": "f03d3561e001870a6a8f2bfabe4c1f413eda488d79e370305ab172f16ff69416"
+    },
+    {
+      "path": "unity/FidgetingApp/ArtSource/ModelPipeline/premium-display-case/evidence/02-analysis/rev-003/frames/01-quarter-175ms.png",
+      "label": "QUARTER",
+      "milliseconds": 175,
+      "bytes": 59038,
+      "sha256": "bea202aa7f7a06bbaa8c7d4fc127f58141771585d37a9c609ecfc15c2f1df417"
+    },
+    {
+      "path": "unity/FidgetingApp/ArtSource/ModelPipeline/premium-display-case/evidence/02-analysis/rev-003/frames/02-user-nearest-200ms.png",
+      "label": "USER-SCREENSHOT NEAREST",
+      "milliseconds": 200,
+      "bytes": 57907,
+      "sha256": "a303355954f5e7e9e199e12f1f6b4cdfadf0465d77d21d4bf8b2f911aa85595a"
+    },
+    {
+      "path": "unity/FidgetingApp/ArtSource/ModelPipeline/premium-display-case/evidence/02-analysis/rev-003/frames/03-half-350ms.png",
+      "label": "HALF",
+      "milliseconds": 350,
+      "bytes": 55902,
+      "sha256": "c80128dfa607b67c5bf8e7b6e5e926884cf684e47e89921b43d62f5b309d8f8a"
+    },
+    {
+      "path": "unity/FidgetingApp/ArtSource/ModelPipeline/premium-display-case/evidence/02-analysis/rev-003/frames/04-three-quarter-525ms.png",
+      "label": "THREE-QUARTER",
+      "milliseconds": 525,
+      "bytes": 35856,
+      "sha256": "21cfe5b420d9ea627ca3be56feff9cb93eb86353189ec4c8124186fc040f684b"
+    },
+    {
+      "path": "unity/FidgetingApp/ArtSource/ModelPipeline/premium-display-case/evidence/02-analysis/rev-003/frames/06-turn-front-to-edge-550ms.png",
+      "label": "FRONT → EDGE",
+      "milliseconds": 550,
+      "bytes": 33572,
+      "sha256": "27cec8d3c999e8b842925353c7faaed0a1cfda5851797775519cd839d2293f69"
+    },
+    {
+      "path": "unity/FidgetingApp/ArtSource/ModelPipeline/premium-display-case/evidence/02-analysis/rev-003/frames/07-edge-600ms.png",
+      "label": "EDGE",
+      "milliseconds": 600,
+      "bytes": 22182,
+      "sha256": "36d8446de8df62908ce64e6b512e786de71d3f004bf5e21970028565506acb70"
+    },
+    {
+      "path": "unity/FidgetingApp/ArtSource/ModelPipeline/premium-display-case/evidence/02-analysis/rev-003/frames/08-reverse-650ms.png",
+      "label": "REVERSE FACE",
+      "milliseconds": 650,
+      "bytes": 33100,
+      "sha256": "9837c4264cadef39d4fc1b05b32493cc8889f4221b87414a5993230eb74f1039"
+    },
+    {
+      "path": "unity/FidgetingApp/ArtSource/ModelPipeline/premium-display-case/evidence/02-analysis/rev-003/frames/05-end-700ms.png",
+      "label": "END / FRONT",
+      "milliseconds": 700,
+      "bytes": 36231,
+      "sha256": "0aa6237a836131d8a39fca51fc8c5d574fbc54e6a6b9f0289bab324d5608758f"
+    }
+  ],
+  "runtimeBinding": {
+    "outerArtboards": [
+      "background/mint-slab",
+      "foreground/mint-slab"
+    ],
+    "outerStateMachine": "Main",
+    "backgroundBindableArtboard": "Slab-rotate-v01",
+    "foregroundBindableArtboard": "Coin_Slab_v09-sm",
+    "childStateMachine": "State Machine 1",
+    "playTriggers": [
+      "internalViewModel/playBackground",
+      "internalViewModel/playForeground"
+    ],
+    "screenshotBranchAnimationType": "T2_COIN_FLIP_JUMBOTRON",
+    "shippingMagneticHolderAnimationType": "T2_SPORTS_CARD_JUMBOTRON"
+  },
+  "authoredTimeline": {
+    "formatVersion": "7.2",
+    "rootDurationFrames": 210,
+    "rootFps": 60,
+    "rootDurationMilliseconds": 3500,
+    "rootTimeScaled125Milliseconds": 4375,
+    "mainAppObservedMilliseconds": 3617,
+    "mainAppObservedTimeScaled125Milliseconds": 4521.25,
+    "approvedSlowEnvelopeCandidateMilliseconds": 4520.833,
+    "approvedCandidateIsMotionApproval": false,
+    "activeMotionFrames": [
+      0,
+      42
+    ],
+    "activeMotionMilliseconds": [
+      0,
+      700
+    ],
+    "activeMotionTimeScaled125Milliseconds": [
+      0,
+      875
+    ]
+  },
+  "authoredTransformEvidence": {
+    "entranceFrames": [
+      0,
+      29
+    ],
+    "leftLayer": {
+      "x": [
+        -137.5,
+        187.50001525878906
+      ],
+      "y": [
+        126,
+        168.59487915039062
+      ],
+      "rotationDegrees": [
+        -16.651707498356778,
+        0
+      ],
+      "scale": [
+        1.399999976158142,
+        1
+      ],
+      "xCubicBezier": [
+        0,
+        0.6152073740959167,
+        0.3009326457977295,
+        0.992511510848999
+      ],
+      "yCubicBezier": [
+        0.4451611042022705,
+        0.21943403780460358,
+        0.8368913531303406,
+        0.7462557554244995
+      ]
+    },
+    "rightLayer": {
+      "x": [
+        520,
+        187.5
+      ],
+      "y": [
+        149,
+        166.5
+      ],
+      "rotationDegrees": [
+        26.857948184532816,
+        0
+      ],
+      "scale": [
+        0.3400000035762787,
+        0.5980510115623474
+      ],
+      "xCubicBezier": [
+        0,
+        0.5918778777122498,
+        1,
+        1
+      ],
+      "yCubicBezier": [
+        0.4964722692966461,
+        0.2569124400615692,
+        0.8526223301887512,
+        0.7566784024238586
+      ]
+    },
+    "slabRotateChild": {
+      "artboard": "Slab-rotate-v01",
+      "stateMachine": "State Machine 1",
+      "timeline": "Timeline 1",
+      "durationFrames": 60,
+      "fps": 60,
+      "durationMilliseconds": 1000,
+      "loop": "pingPong",
+      "spriteXTracks": [
+        {
+          "targetId": 72,
+          "from": 1154.5,
+          "to": 103.5
+        },
+        {
+          "targetId": 34,
+          "from": 1154.5,
+          "to": 103.5
+        }
+      ]
+    },
+    "coinSlabChild": {
+      "artboard": "Coin_Slab_v09-sm",
+      "stateMachine": "State Machine 1",
+      "timeline": "Timeline 1",
+      "durationFrames": 60,
+      "fps": 60,
+      "keyedTrackCount": 456,
+      "keyframeCount": 816,
+      "changedValueTrackCount": 89,
+      "targetTypes": {
+        "MeshVertex": 350,
+        "ContourMeshVertex": 106
+      },
+      "properties": {
+        "x": 228,
+        "y": 228
+      },
+      "interpretation": "2D mesh/contour deformation; not a 3D Euler rotation channel"
+    }
+  },
+  "landmarks": {
+    "userScreenshot": {
+      "componentAreaPixels": 59010,
+      "componentBbox": [
+        210,
+        152,
+        530,
+        429
+      ],
+      "componentCentroid": [
+        438.099,
+        428.628
+      ],
+      "sourceDimensions": [
+        968,
+        660
+      ],
+      "corners": [
+        [
+          374.0,
+          152.0
+        ],
+        [
+          737.0,
+          283.0
+        ],
+        [
+          492.0,
+          576.0
+        ],
+        [
+          219.0,
+          473.0
+        ]
+      ],
+      "center": [
+        455.5,
+        371.0
+      ],
+      "topEdgePixels": 385.914,
+      "bottomEdgePixels": 291.784,
+      "leftEdgePixels": 356.463,
+      "rightEdgePixels": 381.935,
+      "topBottomPerspectiveRatio": 1.322603,
+      "leftRightPerspectiveRatio": 0.93331,
+      "meanWidthHeightRatio": 0.917796,
+      "screenRollDegrees": 19.843578,
+      "polygonAreaPixels": 121026.0,
+      "homography": [
+        [
+          351.611324413,
+          -85.839257204,
+          374.0
+        ],
+        [
+          126.626872196,
+          470.374572341,
+          152.0
+        ],
+        [
+          -0.015452748,
+          0.315802479,
+          1.0
+        ]
+      ],
+      "projectiveTerms": [
+        -0.015452748,
+        0.315802479
+      ]
+    },
+    "frames": [
+      {
+        "label": "START",
+        "milliseconds": 0,
+        "componentAreaPixels": 1238,
+        "componentBbox": [
+          713,
+          122,
+          36,
+          62
+        ],
+        "componentCentroid": [
+          731.037,
+          158.229
+        ],
+        "sourceDimensions": [
+          968,
+          660
+        ],
+        "corners": [
+          [
+            734.0,
+            122.0
+          ],
+          [
+            748.0,
+            168.0
+          ],
+          [
+            737.0,
+            183.0
+          ],
+          [
+            713.0,
+            169.0
+          ]
+        ],
+        "center": [
+          733.0,
+          160.5
+        ],
+        "topEdgePixels": 48.083,
+        "bottomEdgePixels": 27.785,
+        "leftEdgePixels": 51.478,
+        "rightEdgePixels": 18.601,
+        "topBottomPerspectiveRatio": 1.730554,
+        "leftRightPerspectiveRatio": 2.767483,
+        "meanWidthHeightRatio": 1.082605,
+        "screenRollDegrees": 73.072487,
+        "polygonAreaPixels": 1069.0,
+        "homography": [
+          [
+            1335.369649805,
+            259.206225681,
+            734.0
+          ],
+          [
+            342.778210117,
+            113.416342412,
+            122.0
+          ],
+          [
+            1.766536965,
+            0.392996109,
+            1.0
+          ]
+        ],
+        "projectiveTerms": [
+          1.766536965,
+          0.392996109
+        ],
+        "screenshotSignatureDistance": 5.749417
+      },
+      {
+        "label": "QUARTER",
+        "milliseconds": 175,
+        "componentAreaPixels": 42501,
+        "componentBbox": [
+          334,
+          0,
+          293,
+          270
+        ],
+        "componentCentroid": [
+          469.466,
+          146.057
+        ],
+        "sourceDimensions": [
+          968,
+          660
+        ],
+        "corners": [
+          [
+            334.0,
+            0.0
+          ],
+          [
+            622.0,
+            60.0
+          ],
+          [
+            580.0,
+            207.0
+          ],
+          [
+            389.0,
+            260.0
+          ]
+        ],
+        "center": [
+          481.25,
+          131.75
+        ],
+        "topEdgePixels": 294.184,
+        "bottomEdgePixels": 198.217,
+        "leftEdgePixels": 265.754,
+        "rightEdgePixels": 152.882,
+        "topBottomPerspectiveRatio": 1.484149,
+        "leftRightPerspectiveRatio": 1.738289,
+        "meanWidthHeightRatio": 1.176203,
+        "screenRollDegrees": 11.768289,
+        "polygonAreaPixels": 48715.5,
+        "homography": [
+          [
+            931.005222235,
+            340.982940699,
+            334.0
+          ],
+          [
+            122.026227225,
+            451.145410236,
+            0.0
+          ],
+          [
+            1.033770454,
+            0.735174655,
+            1.0
+          ]
+        ],
+        "projectiveTerms": [
+          1.033770454,
+          0.735174655
+        ],
+        "screenshotSignatureDistance": 0.985068
+      },
+      {
+        "label": "USER-SCREENSHOT NEAREST",
+        "milliseconds": 200,
+        "componentAreaPixels": 41452,
+        "componentBbox": [
+          341,
+          0,
+          277,
+          271
+        ],
+        "componentCentroid": [
+          470.442,
+          147.37
+        ],
+        "sourceDimensions": [
+          968,
+          660
+        ],
+        "corners": [
+          [
+            341.0,
+            0.0
+          ],
+          [
+            611.0,
+            57.0
+          ],
+          [
+            536.0,
+            245.0
+          ],
+          [
+            391.0,
+            259.0
+          ]
+        ],
+        "center": [
+          469.75,
+          140.25
+        ],
+        "topEdgePixels": 275.951,
+        "bottomEdgePixels": 145.674,
+        "leftEdgePixels": 263.782,
+        "rightEdgePixels": 202.408,
+        "topBottomPerspectiveRatio": 1.894302,
+        "leftRightPerspectiveRatio": 1.30322,
+        "meanWidthHeightRatio": 0.904407,
+        "screenRollDegrees": 11.920739,
+        "polygonAreaPixels": 46645.0,
+        "homography": [
+          [
+            550.789584128,
+            480.010492179,
+            341.0
+          ],
+          [
+            83.194772987,
+            543.840709653,
+            0.0
+          ],
+          [
+            0.459557421,
+            1.09977108,
+            1.0
+          ]
+        ],
+        "projectiveTerms": [
+          0.459557421,
+          1.09977108
+        ],
+        "screenshotSignatureDistance": 0.560939
+      },
+      {
+        "label": "HALF",
+        "milliseconds": 350,
+        "componentAreaPixels": 37023,
+        "componentBbox": [
+          371,
+          0,
+          210,
+          272
+        ],
+        "componentCentroid": [
+          478.256,
+          139.447
+        ],
+        "sourceDimensions": [
+          968,
+          660
+        ],
+        "corners": [
+          [
+            373.0,
+            0.0
+          ],
+          [
+            559.0,
+            0.0
+          ],
+          [
+            576.0,
+            245.0
+          ],
+          [
+            406.0,
+            267.0
+          ]
+        ],
+        "center": [
+          478.5,
+          128.0
+        ],
+        "topEdgePixels": 186.0,
+        "bottomEdgePixels": 171.418,
+        "leftEdgePixels": 269.032,
+        "rightEdgePixels": 245.589,
+        "topBottomPerspectiveRatio": 1.085069,
+        "leftRightPerspectiveRatio": 1.095454,
+        "meanWidthHeightRatio": 0.694526,
+        "screenRollDegrees": 0.0,
+        "polygonAreaPixels": 45843.0,
+        "homography": [
+          [
+            240.431467733,
+            67.258423758,
+            373.0
+          ],
+          [
+            0.0,
+            289.52955454,
+            0.0
+          ],
+          [
+            0.09737293,
+            0.084380354,
+            1.0
+          ]
+        ],
+        "projectiveTerms": [
+          0.09737293,
+          0.084380354
+        ],
+        "screenshotSignatureDistance": 0.691266
+      },
+      {
+        "label": "THREE-QUARTER",
+        "milliseconds": 525,
+        "componentAreaPixels": 23451,
+        "componentBbox": [
+          403,
+          19,
+          177,
+          232
+        ],
+        "componentCentroid": [
+          484.767,
+          142.492
+        ],
+        "sourceDimensions": [
+          968,
+          660
+        ],
+        "corners": [
+          [
+            407.0,
+            31.0
+          ],
+          [
+            558.0,
+            22.0
+          ],
+          [
+            567.0,
+            239.0
+          ],
+          [
+            415.0,
+            246.0
+          ]
+        ],
+        "center": [
+          486.75,
+          134.5
+        ],
+        "topEdgePixels": 151.268,
+        "bottomEdgePixels": 152.161,
+        "leftEdgePixels": 215.149,
+        "rightEdgePixels": 217.187,
+        "topBottomPerspectiveRatio": 0.99413,
+        "leftRightPerspectiveRatio": 0.990617,
+        "meanWidthHeightRatio": 0.701837,
+        "screenRollDegrees": -3.410945,
+        "polygonAreaPixels": 32792.0,
+        "homography": [
+          [
+            145.748751778,
+            5.500983448,
+            407.0
+          ],
+          [
+            -9.20703846,
+            213.518655249,
+            31.0
+          ],
+          [
+            -0.009410839,
+            -0.006021727,
+            1.0
+          ]
+        ],
+        "projectiveTerms": [
+          -0.009410839,
+          -0.006021727
+        ],
+        "screenshotSignatureDistance": 0.886895
+      },
+      {
+        "label": "FRONT → EDGE",
+        "milliseconds": 550,
+        "componentAreaPixels": 25743,
+        "componentBbox": [
+          402,
+          18,
+          178,
+          234
+        ],
+        "componentCentroid": [
+          485.441,
+          146.482
+        ],
+        "sourceDimensions": [
+          968,
+          660
+        ],
+        "corners": [
+          [
+            405.0,
+            31.0
+          ],
+          [
+            561.0,
+            22.0
+          ],
+          [
+            569.0,
+            239.0
+          ],
+          [
+            415.0,
+            248.0
+          ]
+        ],
+        "center": [
+          487.5,
+          135.0
+        ],
+        "topEdgePixels": 156.259,
+        "bottomEdgePixels": 154.263,
+        "leftEdgePixels": 217.23,
+        "rightEdgePixels": 217.147,
+        "topBottomPerspectiveRatio": 1.012943,
+        "leftRightPerspectiveRatio": 1.000382,
+        "meanWidthHeightRatio": 0.714867,
+        "screenRollDegrees": -3.301866,
+        "polygonAreaPixels": 33716.0,
+        "homography": [
+          [
+            156.301522843,
+            15.378023291,
+            405.0
+          ],
+          [
+            -8.988175575,
+            220.213854882,
+            31.0
+          ],
+          [
+            0.000537474,
+            0.012959092,
+            1.0
+          ]
+        ],
+        "projectiveTerms": [
+          0.000537474,
+          0.012959092
+        ],
+        "screenshotSignatureDistance": 0.847832
+      },
+      {
+        "label": "EDGE",
+        "milliseconds": 600,
+        "componentAreaPixels": 9863,
+        "componentBbox": [
+          453,
+          22,
+          60,
+          225
+        ],
+        "componentCentroid": [
+          483.678,
+          138.525
+        ],
+        "sourceDimensions": [
+          968,
+          660
+        ],
+        "corners": [
+          [
+            461.0,
+            23.0
+          ],
+          [
+            512.0,
+            35.0
+          ],
+          [
+            507.0,
+            246.0
+          ],
+          [
+            453.0,
+            234.0
+          ]
+        ],
+        "center": [
+          483.25,
+          134.5
+        ],
+        "topEdgePixels": 52.393,
+        "bottomEdgePixels": 55.317,
+        "leftEdgePixels": 211.152,
+        "rightEdgePixels": 211.059,
+        "topBottomPerspectiveRatio": 0.947132,
+        "leftRightPerspectiveRatio": 1.000438,
+        "meanWidthHeightRatio": 0.25511,
+        "screenRollDegrees": 13.24052,
+        "polygonAreaPixels": 11155.5,
+        "homography": [
+          [
+            52.609219487,
+            -33.034834992,
+            461.0
+          ],
+          [
+            12.110005238,
+            198.068098481,
+            23.0
+          ],
+          [
+            0.003143007,
+            -0.055264536,
+            1.0
+          ]
+        ],
+        "projectiveTerms": [
+          0.003143007,
+          -0.055264536
+        ],
+        "screenshotSignatureDistance": 2.846966
+      },
+      {
+        "label": "REVERSE FACE",
+        "milliseconds": 650,
+        "componentAreaPixels": 25353,
+        "componentBbox": [
+          376,
+          15,
+          205,
+          240
+        ],
+        "componentCentroid": [
+          484.251,
+          148.481
+        ],
+        "sourceDimensions": [
+          968,
+          660
+        ],
+        "corners": [
+          [
+            404.0,
+            26.0
+          ],
+          [
+            563.0,
+            19.0
+          ],
+          [
+            573.0,
+            240.0
+          ],
+          [
+            415.0,
+            252.0
+          ]
+        ],
+        "center": [
+          488.75,
+          134.25
+        ],
+        "topEdgePixels": 159.154,
+        "bottomEdgePixels": 158.455,
+        "leftEdgePixels": 226.268,
+        "rightEdgePixels": 221.226,
+        "topBottomPerspectiveRatio": 1.004411,
+        "leftRightPerspectiveRatio": 1.022789,
+        "meanWidthHeightRatio": 0.709751,
+        "screenRollDegrees": -2.520828,
+        "polygonAreaPixels": 35524.5,
+        "homography": [
+          [
+            171.886751527,
+            13.025372453,
+            404.0
+          ],
+          [
+            -6.565100748,
+            227.229864718,
+            26.0
+          ],
+          [
+            0.022889434,
+            0.004880416,
+            1.0
+          ]
+        ],
+        "projectiveTerms": [
+          0.022889434,
+          0.004880416
+        ],
+        "screenshotSignatureDistance": 0.830658
+      },
+      {
+        "label": "END / FRONT",
+        "milliseconds": 700,
+        "componentAreaPixels": 22652,
+        "componentBbox": [
+          376,
+          14,
+          203,
+          242
+        ],
+        "componentCentroid": [
+          482.899,
+          143.287
+        ],
+        "sourceDimensions": [
+          968,
+          660
+        ],
+        "corners": [
+          [
+            403.0,
+            26.0
+          ],
+          [
+            566.0,
+            20.0
+          ],
+          [
+            573.0,
+            242.0
+          ],
+          [
+            410.0,
+            250.0
+          ]
+        ],
+        "center": [
+          488.0,
+          134.5
+        ],
+        "topEdgePixels": 163.11,
+        "bottomEdgePixels": 163.196,
+        "leftEdgePixels": 224.109,
+        "rightEdgePixels": 222.11,
+        "topBottomPerspectiveRatio": 0.999474,
+        "leftRightPerspectiveRatio": 1.009,
+        "meanWidthHeightRatio": 0.731269,
+        "screenRollDegrees": -2.108095,
+        "polygonAreaPixels": 36398.0,
+        "homography": [
+          [
+            168.091220131,
+            6.84162022,
+            403.0
+          ],
+          [
+            -5.820098229,
+            223.903426963,
+            26.0
+          ],
+          [
+            0.008995089,
+            -0.000386292,
+            1.0
+          ]
+        ],
+        "projectiveTerms": [
+          0.008995089,
+          -0.000386292
+        ],
+        "screenshotSignatureDistance": 0.788625
+      }
+    ],
+    "nearestActualRiveFrame": {
+      "label": "USER-SCREENSHOT NEAREST",
+      "milliseconds": 200,
+      "distance": 0.560939,
+      "basis": "roll, opposite-edge ratios and width/height signature; identity pixels excluded",
+      "exactMatch": false
+    }
+  },
+  "axisConclusion": {
+    "roll": {
+      "status": "confirmed",
+      "confidence": "high",
+      "evidence": "Two root layers author −16.652° and +26.858° screen rotations, both converging to 0° over frames 0–29."
+    },
+    "yaw": {
+      "status": "apparent-pseudo-yaw",
+      "confidence": "high-for-visual-turn-low-for-3d-axis",
+      "evidence": "Slab-rotate-v01 translates side sprites; Coin_Slab_v09-sm deforms 2D mesh vertices; runtime frames show front/edge/reverse/front."
+    },
+    "pitch": {
+      "status": "unknown",
+      "confidence": "low",
+      "evidence": "The user screenshot has foreshortening, but no 3D pitch channel exists; sprite substitution and 2D homography can produce the same raster."
+    },
+    "threeDimensionalAxis": {
+      "status": "unknown",
+      "confidence": "none",
+      "evidence": "The canonical Rive format exposes 2D x/y/rotation/scale, masks and remaps, not Euler or quaternion axes."
+    },
+    "pureVerticalYTurntable": {
+      "status": "rejected",
+      "confidence": "user-authoritative-and-measurement-supported"
+    },
+    "xAxisReplacement": {
+      "status": "not-claimed",
+      "confidence": "none"
+    }
+  },
+  "schematic": {
+    "path": "unity/FidgetingApp/ArtSource/ModelPipeline/premium-display-case/evidence/02-analysis/rev-003/whole-case-measured-motion-schematic.gif",
+    "mapping": "single connected neutral case warped through measured four-corner landmarks",
+    "usesCosineWidth": false,
+    "uses3DEulerGuess": false,
+    "wholeCaseOnly": true,
+    "identityCopied": false,
+    "generatedSourceFrameCount": 109,
+    "gifDurationMilliseconds": 4520,
+    "candidateDurationMilliseconds": 4520.833,
+    "activeMotionMilliseconds": 875.0,
+    "maximumConnectedSubjectComponents": 1,
+    "minimumProjectedSubjectWidthPixels": 43,
+    "maximumAdjacentCornerDeltaPixels": 116.0352,
+    "maximumHoldMeanRgbDifference": 0.0,
+    "maximumYellowPixelFraction": 0.0,
+    "encodedGifFrameCount": 22,
+    "probedGifDurationMilliseconds": 4520
+  },
+  "unknowns": [
+    "physical pitch angle",
+    "physical yaw angle and sign",
+    "physical rotation axis",
+    "author-intended 3D camera",
+    "whether the user screenshot uses the same dynamic artwork payload"
+  ],
+  "gateBoundary": {
+    "earliestGate": "02-analysis",
+    "gate01TopologyApprovalPreserved": true,
+    "gate03Through08MustBeStale": true,
+    "shippingUnityChanged": false,
+    "blenderGeometryOrMaterialChanged": false,
+    "buildInstallPhonePush": false
+  }
+}

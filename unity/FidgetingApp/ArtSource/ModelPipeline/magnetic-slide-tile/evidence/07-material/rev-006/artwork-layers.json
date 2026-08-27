@@ -1,0 +1,31 @@
+{
+  "schemaVersion": 1,
+  "gate": "07-material",
+  "materialRevision": 6,
+  "geometryDigest": "85bd7dd237c6822c72e575c9a23085eec9a2f28d7afea3a5bf0f13fdc4ebd90f",
+  "reuseClass": "user-authorized-prior-material-design-reuse",
+  "notNewExactTraceClaim": true,
+  "lineageManifest": "artwork-lineage.json",
+  "lineageManifestSha256": "6e46d4e37ebe75cc5aa3798a87c867f7e8096cddc82a26b3468ffecf2dc55b78",
+  "slots": {
+    "Artwork_Upper": {
+      "mask": "artwork-upper-mask.png",
+      "maskSha256": "8250df70d2286849db353862283b0d3db9c66e1ac92bed3795bcb5377a431c36",
+      "independentlyEditable": true,
+      "sourceAssetIds": [
+        "magnetic-slide-tile-motif-mask-r002"
+      ],
+      "sourceClaim": "user-authorized-prior-design-reuse"
+    },
+    "Artwork_Lower": {
+      "mask": "artwork-lower-mask.png",
+      "maskSha256": "8250df70d2286849db353862283b0d3db9c66e1ac92bed3795bcb5377a431c36",
+      "independentlyEditable": true,
+      "sourceAssetIds": [
+        "magnetic-slide-tile-motif-mask-r002"
+      ],
+      "sourceClaim": "user-authorized-prior-design-reuse"
+    }
+  },
+  "swapContract": "Artwork_Upper and Artwork_Lower use distinct external paths and node groups. Either file can change without rebuilding mesh."
+}

@@ -1,0 +1,71 @@
+{
+  "feature": "Build 42 gacha experience overhaul: pack-tier carousel entry, real-prize magnetic-holder reveal, Unity 3D display-case handoff dropped",
+  "sourceCommit": "6bf2b4e5567e5a47d04a966b0f2ee6655c83b8b1",
+  "branch": "codex/gacha-build42",
+  "buildManifest": {
+    "bundleIdentifier": "com.jiaweizhou.fidgetspinner.codex",
+    "buildNumber": "42",
+    "sdk": "SimulatorSDK",
+    "gachaMode": "internalUnlimited",
+    "generatedAtUtc": "2026-08-19T03:23:16.1262130Z"
+  },
+  "simulator": {
+    "device": "GachaRoundTripDevice2 (iPhone 17 Pro runtime)",
+    "udid": "D337403C-60AD-46C1-9FB1-381471EBAA39",
+    "note": "A different simulator device than earlier session runs. The originally-used device (5BF378DF-5EAB-4885-87E1-2838F6DA6E46) hit a stuck host-level video-recording lock ('Host recording is already in progress') that persisted through killing replayd and restarting Simulator.app; root cause was a CoreSimulatorService process alive since 2026-08-09 holding stale recording state. Restarting CoreSimulatorService and using a freshly created device resolved it."
+  },
+  "authoritativeTransactionChain": "real Unity GachaInventoryRuntime PrepareDraw/MarkRevealAwaitingAcceptance/AcknowledgePending via GachaPresentationNativeBridge; no fake receipt, no standalone preview, no empty UnitySendMessage",
+  "editModeTestSuite": {
+    "totalTests": 393,
+    "passed": 393,
+    "failed": 0,
+    "resultFile": "/private/tmp/gacha-build42-pack-gate-fix-editmode-results.xml"
+  },
+  "xcuiTest": {
+    "target": "FidgetingGachaGestureUITests/FullAcceptanceRoundTripUITests/testLibraryToAcceptedPrizeRoundTrip",
+    "result": "passed",
+    "xcresultPath": "/private/tmp/gacha-pack-build42-full-acceptance.xcresult",
+    "rawVideoPath": "/private/tmp/gacha-pack-build42-main-app-full-acceptance-roundtrip-raw.mp4",
+    "markTimeline": [
+      "app-running", "library-visible", "store-visible", "single-draw-tapped",
+      "carousel-visible", "carousel-swiped step=1", "carousel-swiped step=2",
+      "carousel-tier-selected tier=signature", "carousel-confirmed",
+      "pack-sealed prize=canyon-std-slate-lining", "pack-released progress=0.75 threshold=0.62",
+      "holder-overlap-visible state=holder-revealed playback=completed",
+      "holder-reveal-complete", "accept-tapped",
+      "roundtrip-complete owned=1 draws=1 status=idle"
+    ],
+    "ownedCountBefore": 0,
+    "ownedCountAfter": 1,
+    "totalDrawsBefore": 0,
+    "totalDrawsAfter": 1,
+    "finalStoreStatus": "idle",
+    "singleDrawReEnabledAfterAck": true,
+    "tearProgressReleased": 0.75,
+    "tearCommitThreshold": 0.62,
+    "carouselTierSelected": "signature",
+    "no3dRevealMounted": "Confirmed via accessibility hierarchy: gacha-3d-reveal-root and gacha-reveal-phase (the Unity 3D PremiumDisplayCase overlay's own markers) never appeared anywhere in the tree at any point in this run."
+  },
+  "priorFailedAttemptsThisPass": {
+    "count": 3,
+    "rootCausesFound": [
+      "(1) A SwiftUI accessibility-identifier-propagation bug: the pack-tier carousel's container ZStack carried its own accessibilityIdentifier after its child tier buttons already had theirs, so every tier button reported the container's identifier instead of its own, making individual tiers unfindable/untappable by id. Fixed by removing the container-level identifier (commit ab393a3).",
+      "(2) requestRevealSetupIfNeeded() still fired whenever a transaction reached .awaitingAcceptance, a phase that used to only mean 'the Unity 3D reveal just finished.' The new holder-only path reaches that same phase, so it re-requested the 3D reveal, which mounted GachaThreeDRevealOverlay on top of the new holder overlay and tore it down. Disabled for this build via a threeDRevealEnabled flag (commit 13ed921).",
+      "(3) packIsPresented (which gates whether the pack/holder overlay is mounted at all) dropped to false the instant a transaction reached .awaitingAcceptance, because packGateRequestId is cleared at that same transition (previously safe, since the 3D reveal overlay was about to take over showing the accept UI). With the 3D reveal disabled, nothing replaced it, so the holder overlay simply vanished with the transaction stuck in awaiting-acceptance and no way to accept it. Fixed by keeping packIsPresented true through .awaitingAcceptance too (commit 6bf2b4e)."
+    ],
+    "allThreeConfirmedViaRealSimulatorRunsAndAccessibilityHierarchyDumps": true
+  },
+  "knownLimitation_riveHolderPlaceholderArt": {
+    "description": "The magnetic-holder .riv asset's own baked artwork is a fixed 'whatnot GEM/MINT 10 #00000001' grading-slab design with an empty image window; it does not vary per prize, and its authored state machine is a one-shot livestream-purchase toast (has isSelfBuyer/isReferral/isNewBuyer/promoteTag properties) that plays an entrance, briefly holds, then settles back to its pre-trigger idle pose -- which visually reads as the card disappearing, leaving only the real-prize identity caption and the accept button.",
+    "realPrizeDataShown": "Only via GachaProductOwnedIdentityCaption, a small non-covering text caption below the Rive artwork with the real drawn prize's name and rarity/tier (sourced from the transaction's real receipt row, not a placeholder).",
+    "decisionRecord": "Explicitly reviewed with the user via screenshots from this build's own round-trip video. User's direction: keep the real .riv layers visible (do not re-hide them behind a fake SwiftUI card) and accept the fixed placeholder grading art for now. Real per-prize Rive artwork is out of scope for this build.",
+    "fastFollow": "Real per-prize Rive artwork/data-binding (or a redesigned non-toast holder animation) is a separate, unscoped follow-up."
+  },
+  "visualApprovalStatus": "pending - real Simulator capture only, not pushed to a physical iPhone; the holder-art limitation above was reviewed and accepted, but no final visual sign-off on the overall carousel/tear/holder motion polish (deferred 'Phase 4' motion+haptics pass) has been requested or granted yet",
+  "finalArtifacts": {
+    "video": "unity/FidgetingApp/Artifacts/GachaPackShippingNativePreview/gacha-pack-build42-main-app-full-acceptance-roundtrip.mp4",
+    "videoDurationSeconds": 61.97,
+    "videoTrim": "raw recording trimmed from ~8.5s in (first clean Library frame) through a few seconds past the settled post-accept Store idle tail",
+    "contactSheet": "unity/FidgetingApp/Artifacts/GachaPackShippingNativePreview/gacha-pack-build42-main-app-full-acceptance-roundtrip-contact-sheet.png"
+  }
+}

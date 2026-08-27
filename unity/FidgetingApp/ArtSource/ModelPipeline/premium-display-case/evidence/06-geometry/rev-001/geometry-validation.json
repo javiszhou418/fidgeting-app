@@ -1,0 +1,803 @@
+{
+  "schemaVersion": 1,
+  "modelId": "premium-display-case",
+  "gate": "06-geometry",
+  "geometryRevision": 1,
+  "status": "pass",
+  "pipelineRevisionAtBuild": 27,
+  "sourceGate05": {
+    "blockoutRevision": 2,
+    "approvalQuote": "可以，继续推进",
+    "approvalScope": [
+      "label-downshift-6mm",
+      "analytic-concentric-corner-families",
+      "current-white-model-rev2"
+    ],
+    "blendPath": "unity/FidgetingApp/ArtSource/ModelPipeline/premium-display-case/evidence/05-blockout/rev-002/premium-display-case-blockout.blend",
+    "deterministicBuilderPath": "unity/FidgetingApp/ArtSource/ModelPipeline/premium-display-case/evidence/05-blockout/rev-002/build_blockout.py",
+    "validatorPath": "unity/FidgetingApp/ArtSource/ModelPipeline/premium-display-case/evidence/05-blockout/rev-002/validate_blockout.py",
+    "hashesBefore": {
+      "blend": "3f0411e43900e9ff67a8f52ee4af9d630147acb46251985baf8b2a1a06936e31",
+      "builder": "8a0cb6c3b14edb171fa5fdfe992c1665689c6a3e7f4cd8f87093f537bd3e8f2c",
+      "validator": "6a63dcf75922510db9bdea293ef50af10110c562cfeb547eeac0fd2b612d14df"
+    },
+    "hashesAfter": {
+      "blend": "3f0411e43900e9ff67a8f52ee4af9d630147acb46251985baf8b2a1a06936e31",
+      "builder": "8a0cb6c3b14edb171fa5fdfe992c1665689c6a3e7f4cd8f87093f537bd3e8f2c",
+      "validator": "6a63dcf75922510db9bdea293ef50af10110c562cfeb547eeac0fd2b612d14df"
+    },
+    "unchanged": true
+  },
+  "geometryIdentity": {
+    "subjectObjects": [
+      "RearPolycarbonateShell",
+      "TactileBackgroundInsert",
+      "FrontPolycarbonateShell",
+      "ContinuousTubePerimeter",
+      "PhysicalLabel"
+    ],
+    "expectedDigest": "6656ebb6f9003092d2d771a774ec006683347e01c4f12d0c994cc66fc603877f",
+    "digestBefore": "6656ebb6f9003092d2d771a774ec006683347e01c4f12d0c994cc66fc603877f",
+    "digestAfterEvidenceRenders": "6656ebb6f9003092d2d771a774ec006683347e01c4f12d0c994cc66fc603877f",
+    "digestAfterEvidenceBlendSave": "6656ebb6f9003092d2d771a774ec006683347e01c4f12d0c994cc66fc603877f",
+    "sameAcrossViews": true,
+    "sameAfterEvidenceRenders": true,
+    "sameAfterEvidenceBlendSave": true,
+    "crossView": {
+      "front": {
+        "cameraObject": "Gate06CameraFront",
+        "cameraId": "front",
+        "type": "ORTHO",
+        "orthographicScale": 360.0,
+        "axisContract": "X-width/Y-height/Z-front",
+        "geometryDigestBefore": "6656ebb6f9003092d2d771a774ec006683347e01c4f12d0c994cc66fc603877f",
+        "geometryDigestAfter": "6656ebb6f9003092d2d771a774ec006683347e01c4f12d0c994cc66fc603877f",
+        "sameGeometry": true,
+        "rawPath": "unity/FidgetingApp/ArtSource/ModelPipeline/premium-display-case/evidence/06-geometry/rev-001/raw/front.png"
+      },
+      "back": {
+        "cameraObject": "Gate06CameraBack",
+        "cameraId": "back",
+        "type": "ORTHO",
+        "orthographicScale": 360.0,
+        "axisContract": "X-width/Y-height/Z-front",
+        "geometryDigestBefore": "6656ebb6f9003092d2d771a774ec006683347e01c4f12d0c994cc66fc603877f",
+        "geometryDigestAfter": "6656ebb6f9003092d2d771a774ec006683347e01c4f12d0c994cc66fc603877f",
+        "sameGeometry": true,
+        "rawPath": "unity/FidgetingApp/ArtSource/ModelPipeline/premium-display-case/evidence/06-geometry/rev-001/raw/back.png"
+      },
+      "top": {
+        "cameraObject": "Gate06CameraTop",
+        "cameraId": "top",
+        "type": "ORTHO",
+        "orthographicScale": 285.0,
+        "axisContract": "X-width/Y-height/Z-front",
+        "geometryDigestBefore": "6656ebb6f9003092d2d771a774ec006683347e01c4f12d0c994cc66fc603877f",
+        "geometryDigestAfter": "6656ebb6f9003092d2d771a774ec006683347e01c4f12d0c994cc66fc603877f",
+        "sameGeometry": true,
+        "rawPath": "unity/FidgetingApp/ArtSource/ModelPipeline/premium-display-case/evidence/06-geometry/rev-001/raw/top.png"
+      },
+      "bottom": {
+        "cameraObject": "Gate06CameraBottom",
+        "cameraId": "bottom",
+        "type": "ORTHO",
+        "orthographicScale": 285.0,
+        "axisContract": "X-width/Y-height/Z-front",
+        "geometryDigestBefore": "6656ebb6f9003092d2d771a774ec006683347e01c4f12d0c994cc66fc603877f",
+        "geometryDigestAfter": "6656ebb6f9003092d2d771a774ec006683347e01c4f12d0c994cc66fc603877f",
+        "sameGeometry": true,
+        "rawPath": "unity/FidgetingApp/ArtSource/ModelPipeline/premium-display-case/evidence/06-geometry/rev-001/raw/bottom.png"
+      },
+      "left": {
+        "cameraObject": "Gate06CameraLeft",
+        "cameraId": "left",
+        "type": "ORTHO",
+        "orthographicScale": 360.0,
+        "axisContract": "X-width/Y-height/Z-front",
+        "geometryDigestBefore": "6656ebb6f9003092d2d771a774ec006683347e01c4f12d0c994cc66fc603877f",
+        "geometryDigestAfter": "6656ebb6f9003092d2d771a774ec006683347e01c4f12d0c994cc66fc603877f",
+        "sameGeometry": true,
+        "rawPath": "unity/FidgetingApp/ArtSource/ModelPipeline/premium-display-case/evidence/06-geometry/rev-001/raw/left.png"
+      },
+      "right": {
+        "cameraObject": "Gate06CameraRight",
+        "cameraId": "right",
+        "type": "ORTHO",
+        "orthographicScale": 360.0,
+        "axisContract": "X-width/Y-height/Z-front",
+        "geometryDigestBefore": "6656ebb6f9003092d2d771a774ec006683347e01c4f12d0c994cc66fc603877f",
+        "geometryDigestAfter": "6656ebb6f9003092d2d771a774ec006683347e01c4f12d0c994cc66fc603877f",
+        "sameGeometry": true,
+        "rawPath": "unity/FidgetingApp/ArtSource/ModelPipeline/premium-display-case/evidence/06-geometry/rev-001/raw/right.png"
+      }
+    },
+    "pass": true
+  },
+  "bounds": {
+    "targetMm": {
+      "width": 228.0,
+      "height": 304.0,
+      "depth": 59.0
+    },
+    "measured": {
+      "minimumMm": [
+        -114.0,
+        -152.0,
+        -29.5
+      ],
+      "maximumMm": [
+        114.0,
+        152.0,
+        29.5
+      ],
+      "sizeMm": {
+        "width": 228.0,
+        "height": 304.0,
+        "depth": 59.0
+      }
+    },
+    "portraitWidthHeightRatio": 0.75,
+    "toleranceMm": 0.01,
+    "pass": true
+  },
+  "label": {
+    "baselineCenterYmm": 105.0,
+    "approvedCenterYmm": 99.0,
+    "approvedDownshiftMm": 6.0,
+    "minimumFrameToChamberRimMm": 7.31328,
+    "minimumFrameToTubeInnerMm": 12.591362,
+    "minimumPaperToInsertFaceMm": 13.155361,
+    "minimumRequiredClearanceMm": 5.0,
+    "pass": true
+  },
+  "concentricContours": {
+    "outerRadiusMm": 20.0,
+    "families": {
+      "caseTubeShell": {
+        "family": "case-tube-shell",
+        "construction": "analytic-radius-offset; no independent bevel radius",
+        "contours": [
+          {
+            "name": "outerEnvelopeAndTubeOuter",
+            "widthMm": 228.0,
+            "heightMm": 304.0,
+            "radiusMm": 20.0,
+            "centerYmm": 0.0,
+            "cornerCentersMm": [
+              [
+                94.0,
+                132.0
+              ],
+              [
+                -94.0,
+                132.0
+              ],
+              [
+                -94.0,
+                -132.0
+              ],
+              [
+                94.0,
+                -132.0
+              ]
+            ],
+            "maximumDriftFromFamilyReferenceMm": 0.0
+          },
+          {
+            "name": "frontRearShellInset",
+            "widthMm": 224.0,
+            "heightMm": 300.0,
+            "radiusMm": 18.0,
+            "centerYmm": 0.0,
+            "cornerCentersMm": [
+              [
+                94.0,
+                132.0
+              ],
+              [
+                -94.0,
+                132.0
+              ],
+              [
+                -94.0,
+                -132.0
+              ],
+              [
+                94.0,
+                -132.0
+              ]
+            ],
+            "maximumDriftFromFamilyReferenceMm": 0.0
+          },
+          {
+            "name": "tubeCenterline",
+            "widthMm": 218.0,
+            "heightMm": 294.0,
+            "radiusMm": 15.0,
+            "centerYmm": 0.0,
+            "cornerCentersMm": [
+              [
+                94.0,
+                132.0
+              ],
+              [
+                -94.0,
+                132.0
+              ],
+              [
+                -94.0,
+                -132.0
+              ],
+              [
+                94.0,
+                -132.0
+              ]
+            ],
+            "maximumDriftFromFamilyReferenceMm": 0.0
+          },
+          {
+            "name": "tubeInner",
+            "widthMm": 208.0,
+            "heightMm": 284.0,
+            "radiusMm": 10.0,
+            "centerYmm": 0.0,
+            "cornerCentersMm": [
+              [
+                94.0,
+                132.0
+              ],
+              [
+                -94.0,
+                132.0
+              ],
+              [
+                -94.0,
+                -132.0
+              ],
+              [
+                94.0,
+                -132.0
+              ]
+            ],
+            "maximumDriftFromFamilyReferenceMm": 0.0
+          }
+        ],
+        "maximumCornerCenterDriftMm": 0.0,
+        "toleranceMm": 0.01,
+        "pass": true
+      },
+      "mainDisplayChamber": {
+        "family": "main-display-chamber",
+        "construction": "analytic-radius-offset; no independent bevel radius",
+        "contours": [
+          {
+            "name": "mainChamberRim",
+            "widthMm": 190.0,
+            "heightMm": 210.0,
+            "radiusMm": 20.0,
+            "centerYmm": -42.0,
+            "cornerCentersMm": [
+              [
+                75.0,
+                43.0
+              ],
+              [
+                -75.0,
+                43.0
+              ],
+              [
+                -75.0,
+                -127.0
+              ],
+              [
+                75.0,
+                -127.0
+              ]
+            ],
+            "maximumDriftFromFamilyReferenceMm": 0.0
+          },
+          {
+            "name": "tactileInsertFace",
+            "widthMm": 182.0,
+            "heightMm": 202.0,
+            "radiusMm": 16.0,
+            "centerYmm": -42.0,
+            "cornerCentersMm": [
+              [
+                75.0,
+                43.0
+              ],
+              [
+                -75.0,
+                43.0
+              ],
+              [
+                -75.0,
+                -127.0
+              ],
+              [
+                75.0,
+                -127.0
+              ]
+            ],
+            "maximumDriftFromFamilyReferenceMm": 0.0
+          }
+        ],
+        "maximumCornerCenterDriftMm": 0.0,
+        "toleranceMm": 0.01,
+        "pass": true
+      },
+      "physicalLabel": {
+        "family": "physical-label",
+        "construction": "analytic-radius-offset; no independent bevel radius",
+        "contours": [
+          {
+            "name": "labelFrame",
+            "widthMm": 188.0,
+            "heightMm": 62.0,
+            "radiusMm": 8.0,
+            "centerYmm": 99.0,
+            "cornerCentersMm": [
+              [
+                86.0,
+                122.0
+              ],
+              [
+                -86.0,
+                122.0
+              ],
+              [
+                -86.0,
+                76.0
+              ],
+              [
+                86.0,
+                76.0
+              ]
+            ],
+            "maximumDriftFromFamilyReferenceMm": 0.0
+          },
+          {
+            "name": "transparentLabelCover",
+            "widthMm": 186.0,
+            "heightMm": 60.0,
+            "radiusMm": 7.0,
+            "centerYmm": 99.0,
+            "cornerCentersMm": [
+              [
+                86.0,
+                122.0
+              ],
+              [
+                -86.0,
+                122.0
+              ],
+              [
+                -86.0,
+                76.0
+              ],
+              [
+                86.0,
+                76.0
+              ]
+            ],
+            "maximumDriftFromFamilyReferenceMm": 0.0
+          },
+          {
+            "name": "physicalLabelPaper",
+            "widthMm": 184.0,
+            "heightMm": 58.0,
+            "radiusMm": 6.0,
+            "centerYmm": 99.0,
+            "cornerCentersMm": [
+              [
+                86.0,
+                122.0
+              ],
+              [
+                -86.0,
+                122.0
+              ],
+              [
+                -86.0,
+                76.0
+              ],
+              [
+                86.0,
+                76.0
+              ]
+            ],
+            "maximumDriftFromFamilyReferenceMm": 0.0
+          }
+        ],
+        "maximumCornerCenterDriftMm": 0.0,
+        "toleranceMm": 0.01,
+        "pass": true
+      },
+      "maximumDriftMm": 0.0,
+      "toleranceMm": 0.01,
+      "pass": true
+    },
+    "maximumCenterDriftMm": 0.0,
+    "toleranceMm": 0.01,
+    "pass": true
+  },
+  "meshIntegrity": {
+    "objects": {
+      "RearPolycarbonateShell": {
+        "vertices": 192,
+        "edges": 288,
+        "polygons": 98,
+        "triangles": 380,
+        "surfaceConnectedComponentCount": 1,
+        "surfaceComponentVertexCounts": [
+          192
+        ],
+        "openBoundaryEdgeCount": 0,
+        "nonManifoldEdgeCount": 0,
+        "badContiguousEdgeCount": 0,
+        "zeroLengthEdgeCount": 0,
+        "zeroAreaFaceCount": 0,
+        "zeroAreaTriangleCount": 0,
+        "duplicateVertexCount": 0,
+        "selfIntersectionPairCount": 0,
+        "invalidPolygonNormalCount": 0,
+        "signedVolumeMm3": 468326.105887,
+        "normalCoherencePass": true,
+        "outwardSignedVolumePositive": true,
+        "orientationDisposition": "positive-outward",
+        "pass": true
+      },
+      "TactileBackgroundInsert": {
+        "vertices": 288,
+        "edges": 480,
+        "polygons": 194,
+        "triangles": 572,
+        "surfaceConnectedComponentCount": 1,
+        "surfaceComponentVertexCounts": [
+          288
+        ],
+        "openBoundaryEdgeCount": 0,
+        "nonManifoldEdgeCount": 0,
+        "badContiguousEdgeCount": 0,
+        "zeroLengthEdgeCount": 0,
+        "zeroAreaFaceCount": 0,
+        "zeroAreaTriangleCount": 0,
+        "duplicateVertexCount": 0,
+        "selfIntersectionPairCount": 0,
+        "invalidPolygonNormalCount": 0,
+        "signedVolumeMm3": 354364.868649,
+        "normalCoherencePass": true,
+        "outwardSignedVolumePositive": true,
+        "orientationDisposition": "positive-outward",
+        "pass": true
+      },
+      "FrontPolycarbonateShell": {
+        "vertices": 192,
+        "edges": 288,
+        "polygons": 98,
+        "triangles": 380,
+        "surfaceConnectedComponentCount": 1,
+        "surfaceComponentVertexCounts": [
+          192
+        ],
+        "openBoundaryEdgeCount": 0,
+        "nonManifoldEdgeCount": 0,
+        "badContiguousEdgeCount": 0,
+        "zeroLengthEdgeCount": 0,
+        "zeroAreaFaceCount": 0,
+        "zeroAreaTriangleCount": 0,
+        "duplicateVertexCount": 0,
+        "selfIntersectionPairCount": 0,
+        "invalidPolygonNormalCount": 0,
+        "signedVolumeMm3": 401422.373356,
+        "normalCoherencePass": true,
+        "outwardSignedVolumePositive": true,
+        "orientationDisposition": "positive-outward",
+        "pass": true
+      },
+      "ContinuousTubePerimeter": {
+        "vertices": 49152,
+        "edges": 98304,
+        "polygons": 49152,
+        "triangles": 98304,
+        "surfaceConnectedComponentCount": 2,
+        "surfaceComponentVertexCounts": [
+          24576,
+          24576
+        ],
+        "openBoundaryEdgeCount": 0,
+        "nonManifoldEdgeCount": 0,
+        "badContiguousEdgeCount": 0,
+        "zeroLengthEdgeCount": 0,
+        "zeroAreaFaceCount": 0,
+        "zeroAreaTriangleCount": 0,
+        "duplicateVertexCount": 0,
+        "selfIntersectionPairCount": 0,
+        "invalidPolygonNormalCount": 0,
+        "signedVolumeMm3": -52932.982745,
+        "normalCoherencePass": true,
+        "outwardSignedVolumePositive": false,
+        "orientationDisposition": "consistent-negative-winding-preserved-from-approved-source",
+        "pass": true
+      },
+      "PhysicalLabel": {
+        "vertices": 192,
+        "edges": 288,
+        "polygons": 98,
+        "triangles": 380,
+        "surfaceConnectedComponentCount": 1,
+        "surfaceComponentVertexCounts": [
+          192
+        ],
+        "openBoundaryEdgeCount": 0,
+        "nonManifoldEdgeCount": 0,
+        "badContiguousEdgeCount": 0,
+        "zeroLengthEdgeCount": 0,
+        "zeroAreaFaceCount": 0,
+        "zeroAreaTriangleCount": 0,
+        "duplicateVertexCount": 0,
+        "selfIntersectionPairCount": 0,
+        "invalidPolygonNormalCount": 0,
+        "signedVolumeMm3": 31914.650074,
+        "normalCoherencePass": true,
+        "outwardSignedVolumePositive": true,
+        "orientationDisposition": "positive-outward",
+        "pass": true
+      }
+    },
+    "allOpenBoundaryEdgeCount": 0,
+    "allNonManifoldEdgeCount": 0,
+    "allBadContiguousEdgeCount": 0,
+    "allSelfIntersectionPairCount": 0,
+    "allDegenerateElementCount": 0,
+    "normalNote": "Every polygon normal is finite and every manifold edge is contiguous. The approved tube source has consistent negative winding; Gate 06 preserves it to satisfy source-hash and geometry-digest immutability.",
+    "pass": true
+  },
+  "closedTube": {
+    "object": "ContinuousTubePerimeter",
+    "meshObjectCount": 1,
+    "connectedMaterialBodyCount": 1,
+    "boundarySurfaceComponentCount": 2,
+    "boundarySurfaceExplanation": "One connected hollow material body has separate closed outer and inner boundary surfaces.",
+    "pathClosed": true,
+    "pathSampleCount": 384,
+    "cornerRadiiMm": {
+      "outer": 20.0,
+      "centerline": 15.0,
+      "inner": 10.0
+    },
+    "declaredOuterSectionMm": {
+      "width": 10.0,
+      "depth": 9.0
+    },
+    "declaredPassageSectionMm": {
+      "width": 6.0,
+      "depth": 5.0
+    },
+    "declaredWallThicknessMm": 2.0,
+    "volumetricPassageFloodFill": {
+      "method": "evaluated-mesh-BVH passage rays plus cyclic 3D centerline flood-fill",
+      "sampleCount": 384,
+      "validVolumetricSampleCount": 384,
+      "visitedSamples": 384,
+      "regionsVisited": [
+        "bottom",
+        "bottom-left-bend",
+        "bottom-right-bend",
+        "left",
+        "right",
+        "top",
+        "top-left-bend",
+        "top-right-bend"
+      ],
+      "expectedRegions": [
+        "bottom",
+        "bottom-left-bend",
+        "bottom-right-bend",
+        "left",
+        "right",
+        "top",
+        "top-left-bend",
+        "top-right-bend"
+      ],
+      "failedRayCount": 0,
+      "failedRays": [],
+      "evaluatedPassageSectionMm": {
+        "width": 5.995339,
+        "depth": 4.995297
+      },
+      "evaluatedWallThicknessMm": {
+        "minimum": 1.995617,
+        "maximum": 1.995784,
+        "mean": 1.995687
+      },
+      "evaluatedOuterSectionMm": {
+        "width": 9.986712,
+        "depth": 8.98667
+      },
+      "declaredSectionMm": {
+        "outer": {
+          "width": 10.0,
+          "depth": 9.0
+        },
+        "passage": {
+          "width": 6.0,
+          "depth": 5.0
+        },
+        "wallThickness": 2.0
+      },
+      "samplingToleranceMm": 0.03,
+      "pass": true
+    },
+    "neverSplitIntoFourSides": true,
+    "pass": true
+  },
+  "hierarchyAndMotion": {
+    "expected": {
+      "PresentationRoot": null,
+      "CaseAssembly": "PresentationRoot",
+      "RearPolycarbonateShell": "CaseAssembly",
+      "TactileBackgroundInsert": "RearPolycarbonateShell",
+      "ContentSlot": "RearPolycarbonateShell",
+      "FrontPolycarbonateShell": "CaseAssembly",
+      "ContinuousTubePerimeter": "FrontPolycarbonateShell",
+      "PhysicalLabel": "FrontPolycarbonateShell",
+      "LogoZone": "PhysicalLabel",
+      "AchievementZone": "PhysicalLabel",
+      "NarrowFoil": "PhysicalLabel",
+      "TransparentCover": "FrontPolycarbonateShell"
+    },
+    "actual": {
+      "PresentationRoot": null,
+      "CaseAssembly": "PresentationRoot",
+      "RearPolycarbonateShell": "CaseAssembly",
+      "TactileBackgroundInsert": "RearPolycarbonateShell",
+      "ContentSlot": "RearPolycarbonateShell",
+      "FrontPolycarbonateShell": "CaseAssembly",
+      "ContinuousTubePerimeter": "FrontPolycarbonateShell",
+      "PhysicalLabel": "FrontPolycarbonateShell",
+      "LogoZone": "PhysicalLabel",
+      "AchievementZone": "PhysicalLabel",
+      "NarrowFoil": "PhysicalLabel",
+      "TransparentCover": "FrontPolycarbonateShell"
+    },
+    "requiredNodesPresent": true,
+    "presentationRoot": {
+      "worldLocationMm": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "rotationRadians": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "scale": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "parent": null,
+      "motionOwner": true,
+      "angularVelocity": 0.0,
+      "showcaseAxis": "+Y"
+    },
+    "caseAssembly": {
+      "parent": "PresentationRoot",
+      "role": "always-assembled-transform-group",
+      "alwaysAssembled": true
+    },
+    "subjectDescendsFromPresentationRoot": {
+      "RearPolycarbonateShell": true,
+      "TactileBackgroundInsert": true,
+      "FrontPolycarbonateShell": true,
+      "ContinuousTubePerimeter": true,
+      "PhysicalLabel": true
+    },
+    "motionOwnerObjects": [
+      "PresentationRoot"
+    ],
+    "animatedOrConstrainedObjects": [],
+    "contentSlot": {
+      "type": "EMPTY",
+      "parent": "RearPolycarbonateShell",
+      "role": "runtime-anchor",
+      "widthMm": 180.0,
+      "heightMm": 198.0,
+      "depthMm": 48.0,
+      "cornerRadiusMm": 16.0,
+      "localLocationMm": [
+        0.0,
+        -42.0,
+        16.0
+      ],
+      "prizeContentModeled": false
+    },
+    "transparentCover": {
+      "type": "EMPTY",
+      "geometryStatus": "contour-only-thickness-deferred",
+      "physicalPartGeometry": false
+    },
+    "pass": true
+  },
+  "hiddenStructure": {
+    "modeledHiddenPartNames": [],
+    "inventedInternalNames": [],
+    "inventedInternalPartCount": 0,
+    "transparentCoverRemainsUnmodeled": true,
+    "pass": true
+  },
+  "explodedEvidence": {
+    "purpose": "internal-geometry-validation-only",
+    "shippingRevealPolicy": "always-assembled-never-explodes",
+    "approvedVisibleSubjectPartCount": 5,
+    "explodedObjectNames": [
+      "EXPLODED_RearPolycarbonateShell",
+      "EXPLODED_TactileBackgroundInsert",
+      "EXPLODED_FrontPolycarbonateShell",
+      "EXPLODED_ContinuousTubePerimeter",
+      "EXPLODED_PhysicalLabel"
+    ],
+    "continuousTubeExplodedObjectCount": 1,
+    "continuousTubeUsesExactSourceMeshData": true,
+    "inventedInternalPartCount": 0,
+    "pass": true
+  },
+  "evidence": {
+    "rawOrthographic": {
+      "front": "unity/FidgetingApp/ArtSource/ModelPipeline/premium-display-case/evidence/06-geometry/rev-001/raw/front.png",
+      "back": "unity/FidgetingApp/ArtSource/ModelPipeline/premium-display-case/evidence/06-geometry/rev-001/raw/back.png",
+      "top": "unity/FidgetingApp/ArtSource/ModelPipeline/premium-display-case/evidence/06-geometry/rev-001/raw/top.png",
+      "bottom": "unity/FidgetingApp/ArtSource/ModelPipeline/premium-display-case/evidence/06-geometry/rev-001/raw/bottom.png",
+      "left": "unity/FidgetingApp/ArtSource/ModelPipeline/premium-display-case/evidence/06-geometry/rev-001/raw/left.png",
+      "right": "unity/FidgetingApp/ArtSource/ModelPipeline/premium-display-case/evidence/06-geometry/rev-001/raw/right.png"
+    },
+    "rawWorkbench": "unity/FidgetingApp/ArtSource/ModelPipeline/premium-display-case/evidence/06-geometry/rev-001/raw/workbench.png",
+    "rawDimensionOverlay": "unity/FidgetingApp/ArtSource/ModelPipeline/premium-display-case/evidence/06-geometry/rev-001/raw/dimension-overlay.png",
+    "rawPivotAxisOverlay": "unity/FidgetingApp/ArtSource/ModelPipeline/premium-display-case/evidence/06-geometry/rev-001/raw/pivot-axis-overlay.png",
+    "rawExplodedGeometry": "unity/FidgetingApp/ArtSource/ModelPipeline/premium-display-case/evidence/06-geometry/rev-001/raw/exploded-geometry.png",
+    "outputBlend": "unity/FidgetingApp/ArtSource/ModelPipeline/premium-display-case/evidence/06-geometry/rev-001/premium-display-case-geometry-r001.blend",
+    "realBlenderSameGeometry": true
+  },
+  "scope": {
+    "geometryChanged": false,
+    "finalMaterialsApproved": false,
+    "gate07Entered": false,
+    "shippingUnityChanged": false,
+    "buildInstallPhonePush": false
+  },
+  "checks": {
+    "gate05ApprovedThroughPipeline": true,
+    "sourceFilesUnchanged": true,
+    "approvedGeometryDigestExact": true,
+    "geometryDigestUnchanged": true,
+    "boundsUnchanged": true,
+    "subjectMatricesUnchanged": true,
+    "subjectMeshDataUnchanged": true,
+    "sixOrthographicSameGeometry": true,
+    "approvedEnvelopeExact": true,
+    "portraitRatioExact": true,
+    "labelPositionApproved": true,
+    "outerRadiusApproved": true,
+    "concentricFamiliesPass": true,
+    "allSubjectMeshesClosedAndManifold": true,
+    "allNormalsFiniteAndContiguous": true,
+    "noSelfIntersections": true,
+    "noDegenerateGeometry": true,
+    "tubeSingleConnectedMaterialBody": true,
+    "tubeVolumetricFloodFill": true,
+    "tubeSectionAndWall": true,
+    "contentSlotAndMotionOwnership": true,
+    "labelClearance": true,
+    "noHiddenStructureInvented": true,
+    "explodedTubeRemainsOnePart": true,
+    "explodedEvidenceInternalOnly": true,
+    "gate07NotEntered": true,
+    "shippingUnityUnchanged": true,
+    "noBuildInstallPhonePush": true
+  },
+  "blender": "5.2.0 LTS",
+  "outputBlendSha256": "cc902f929926cdf9fbaac76c278da21b6fc394228ac58c44d97f16b05c259618"
+}

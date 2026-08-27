@@ -1,0 +1,60 @@
+{
+  "feature": "Build 42 gacha motion polish: tear white-line removed, carousel selection made dramatic (center-enlarge/edge-peek), holder rises from below instead of sliding in diagonally",
+  "sourceCommit": "0cc389e7aa503ffdff4e30729ae005090fed916f",
+  "branch": "codex/gacha-build42",
+  "buildManifest": {
+    "bundleIdentifier": "com.jiaweizhou.fidgetspinner.codex",
+    "buildNumber": "42",
+    "sdk": "SimulatorSDK",
+    "gachaMode": "internalUnlimited"
+  },
+  "simulator": {
+    "device": "GachaRoundTripDevice2 (iPhone 17 Pro runtime)",
+    "udid": "D337403C-60AD-46C1-9FB1-381471EBAA39"
+  },
+  "authoritativeTransactionChain": "real Unity GachaInventoryRuntime PrepareDraw/MarkRevealAwaitingAcceptance/AcknowledgePending via GachaPresentationNativeBridge; no fake receipt, no standalone preview, no empty UnitySendMessage",
+  "editModeTestSuite": {
+    "totalTests": 393,
+    "passed": 393,
+    "failed": 0,
+    "resultFile": "/private/tmp/gacha-build42-motion-fix-editmode-results-v2.xml",
+    "note": "First attempt at this suite crashed inside Unity's Burst compiler-server child domain (unrelated to this change -- these commits are pure Swift, nothing touches Burst-compiled jobs). Retried cleanly to 393/393."
+  },
+  "xcuiTest": {
+    "target": "FidgetingGachaGestureUITests/FullAcceptanceRoundTripUITests/testLibraryToAcceptedPrizeRoundTrip",
+    "result": "passed",
+    "xcresultPath": "/private/tmp/gacha-pack-build42-full-acceptance.xcresult",
+    "rawVideoPath": "/private/tmp/gacha-pack-build42-main-app-full-acceptance-roundtrip-raw.mp4",
+    "markTimeline": [
+      "app-running", "library-visible", "store-visible", "single-draw-tapped",
+      "carousel-visible", "carousel-swiped step=1", "carousel-swiped step=2",
+      "carousel-tier-selected tier=signature", "carousel-confirmed",
+      "pack-sealed prize=canyon-std-slate-lining", "pack-released progress=0.75 threshold=0.62",
+      "holder-overlap-visible state=holder-revealed playback=completed",
+      "holder-reveal-complete", "accept-tapped",
+      "roundtrip-complete owned=1 draws=1 status=idle"
+    ],
+    "ownedCountBefore": 0,
+    "ownedCountAfter": 1,
+    "totalDrawsBefore": 0,
+    "totalDrawsAfter": 1,
+    "finalStoreStatus": "idle"
+  },
+  "changesThisRound": [
+    "Removed a hardcoded white LinearGradient 'tear glint' line in GachaPackVisual (FidgetGachaStorefront.swift) that faded to full visibility exactly as the pack tear completed -- a real, confirmed UI bug, visually verified gone in frames around the tear/crossfade window (e.g. /private/tmp/gacha-motion-fix-holder-51s.png).",
+    "GachaPackCarouselRules (FidgetGachaPackPresentation.swift): unselectedPackScale 0.66->0.56, selectedPackScale 0.70->0.86, itemSpacingPoints 160->200 (roughly a phone's half-width). Visually verified via /private/tmp/gacha-motion-fix-carousel-40s.png: the selected tier is now clearly larger and centered, with neighbor tiers cropped at the screen edges (edge-peek), matching the requested 'center enlarges, sides pushed away' selection transition instead of the prior ~6% scale delta that read as no transition at all.",
+    "GachaRivePlaybackSurface (FidgetGachaRivePresentation.swift, magneticHolder stage only): the whole Rive art + identity caption assembly now additionally rises from below (offset 240pt -> 0, opacity 0 -> 1, same 0.58s/0.82-damping spring as the caption) in sync with the caption's own entrance, since the .riv artboard's own baked entrance animation slides in diagonally from a corner and there is no bindable Rive property to redirect it (confirmed by dumping the artboard's data-bind schema and the raw .riv binary's string table -- no direction/entrance-related property exists). The added SwiftUI motion is layered on top of, not a replacement for, the Rive-internal animation."
+  ],
+  "knownLimitation_riveHolderPlaceholderArt": {
+    "description": "The magnetic-holder .riv asset's own baked artwork is still a fixed 'whatnot GEM/MINT 10 #00000001' grading-slab design (yellow bar, mascot logo, fixed grade/serial) with an empty image window; confirmed via the raw .riv binary and Rive's own open-source core (SolidColor objects, typeKey 18) that this is static vector art, not a swappable image or bindable property -- the only swappable element in the whole file is one embedded raster image (already used elsewhere). Real prize data is shown separately via GachaProductOwnedIdentityCaption (real name/rarity from the receipt, not a placeholder).",
+    "status": "Separate investigation in progress: building a standalone tool against Rive's open-source C++ runtime core (bundled transitively via the RiveRuntime SPM package) to parse and recolor the branded SolidColor shapes directly and re-export a de-branded .riv, without needing the hosted Rive Editor. Not yet complete as of this artifact; the branding is unchanged in this video."
+  },
+  "visualApprovalStatus": "pending - real Simulator capture only, not pushed to a physical iPhone; carousel/tear/holder motion changes in this round have not yet been explicitly re-approved by the user against this specific video",
+  "finalArtifacts": {
+    "video": "unity/FidgetingApp/Artifacts/GachaPackShippingNativePreview/gacha-pack-build42-main-app-full-acceptance-roundtrip.mp4",
+    "videoDurationSeconds": 60.33,
+    "videoTrim": "raw recording trimmed from 8.5s in (first clean Library frame) through a few seconds past the settled post-accept Store idle tail",
+    "contactSheet": "unity/FidgetingApp/Artifacts/GachaPackShippingNativePreview/gacha-pack-build42-main-app-full-acceptance-roundtrip-contact-sheet.png",
+    "priorRoundArtifacts": "unity/FidgetingApp/Artifacts/GachaPackShippingNativePreview/superseded-3d-reveal-era/pre-motion-fix/ (video, contact sheet, validation JSON, and raw verification frames from the immediately preceding round, before this pass's motion fixes)"
+  }
+}

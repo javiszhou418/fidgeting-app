@@ -1,0 +1,797 @@
+{
+  "schemaVersion": 1,
+  "modelId": "premium-display-case",
+  "gate": "08-lighting",
+  "lightingRevision": 2,
+  "status": "pass",
+  "notice": "GATE 08 REV 2 LIGHTING · READY FOR REVIEW · NOT APPROVED",
+  "pipelineRevisionAtBuild": 63,
+  "sourceGate07": {
+    "materialRevision": 2,
+    "approvalQuote": "材质与扫光批准，标签文字后续由 Unity 替换为真实数据",
+    "approvalScope": [
+      "current-gate07-material-rev2",
+      "material-response-and-zones",
+      "object-local-grain",
+      "transparent-ordering",
+      "mesh-clipped-sheen-zero-outside-silhouette",
+      "placeholder-label-text-and-artwork-excluded",
+      "blender-label-geometry-uv-paper-cover-foil-zones",
+      "unity-authoritative-label-data",
+      "runtime-light-and-timing-remain-tunable"
+    ],
+    "labelContentApproved": false,
+    "blendPath": "unity/FidgetingApp/ArtSource/ModelPipeline/premium-display-case/evidence/07-material/rev-002/premium-display-case-material-r002.blend",
+    "sha256Before": "076f5dd07f8e611ceaaabb7d1a92790659a7fcf9c1dd04dcd8e1fc7e9684dd49",
+    "sha256After": "076f5dd07f8e611ceaaabb7d1a92790659a7fcf9c1dd04dcd8e1fc7e9684dd49",
+    "unchanged": true,
+    "sourceAssetIds": [
+      "premium-display-case-material-blend-r002",
+      "premium-display-case-material-revalidation-r002",
+      "premium-display-case-material-review-validation-r002",
+      "premium-display-case-material-compatibility-snapshot-r002",
+      "premium-display-case-material-turntable-mp4-r002",
+      "premium-display-case-material-sheen-compatibility-r002",
+      "premium-display-case-mesh-light-architecture-r007",
+      "premium-display-case-geometry-blend-r003"
+    ],
+    "sourceClaimIds": [
+      "premium-display-case-analysis-balanced-entry-r005",
+      "premium-display-case-analysis-serial-showcase-r005",
+      "premium-display-case-analysis-no-simultaneous-clutter-r005",
+      "premium-display-case-analysis-balanced-highlight-r005",
+      "premium-display-case-analysis-balanced-timing-r005",
+      "premium-display-case-analysis-pack-seam-light-r006",
+      "premium-display-case-analysis-arrival-rim-r006",
+      "premium-display-case-analysis-rotation-rim-r006",
+      "premium-display-case-analysis-final-light-stop-r006",
+      "premium-display-case-analysis-light-forbidden-r006"
+    ]
+  },
+  "geometry": {
+    "digestBefore": "a3d1e9fe3c6d26c957c7ad1584cc489b9091a1a79e435a660aa89bcf6acc3951",
+    "digestAfter": "a3d1e9fe3c6d26c957c7ad1584cc489b9091a1a79e435a660aa89bcf6acc3951",
+    "identityBefore": {
+      "objectMatrixDigest": "34d52e8980dbbffc5573523b80de9a47d145a49bb22ae95f8d7c1b38e393d588",
+      "vertexPositionDigest": "ced0edf95f8fa6416c5a0e33ebf8dc99fdafcdb3beceac85ee2970bbb2a7682c",
+      "silhouetteDigest": "81615c0e5afd59b634dfa2e85040b31b30b9d5ef0ddc9e12462f1b3d1c59f6b4",
+      "silhouetteDigestMethod": "six-orthographic orientation-insensitive projected-face point sets",
+      "topologyWindingDigest": "c29bc1dd8c0f0c52fd4c70d102bcfc2b4007e579795b605adeb21611a3bf7c79",
+      "fullGeometryDigest": "a3d1e9fe3c6d26c957c7ad1584cc489b9091a1a79e435a660aa89bcf6acc3951",
+      "perObject": {
+        "ContinuousTubePerimeter": {
+          "objectMatrixDigest": "10e4e4078bbe630ffa334f35119efc17e11af5ad9651cf85c7e0d34cc7566e58",
+          "vertexPositionDigest": "68db3db78f2891c1e592d4a1b2b706fd2e7145a828b59fcb8a0ac64f76037ae2",
+          "silhouetteDigest": "bcf0e1b0cd81a575ae36df7c7d2f913f39cb2698135ec4046d16ff0b2bd0059d",
+          "topologyWindingDigest": "5500cba4412f6a6882ebef7c52394f983ff0dff20d82513a15fad4bc65d31f5d",
+          "fullGeometryDigest": "988f98d73da6c323acf4ab7fd502b0702ec015e036120e28bf30bab6cd912beb"
+        },
+        "FrontPolycarbonateShell": {
+          "objectMatrixDigest": "2820c8d6c8bdfbbb82b42b4b7d43e0fc54ad4c4390d17d5e5270f5c4b65ebae2",
+          "vertexPositionDigest": "18d2cb410e45d861c419cce32f4b8ad4f67a5e92c1c32588b2199fb1c0abdfb1",
+          "silhouetteDigest": "94fe85d2cad49f7c49beb6fec411f6be21cd1a6c962af6b3772757546b54c5ae",
+          "topologyWindingDigest": "d88077776cd98184dbba6b1bb6eac9f8ffe6f32c1e30134040d273cb7f2f7ea6",
+          "fullGeometryDigest": "c9b33964b1a60d94bc5ec34f9143efb0ce8a1ffed1e6f02ad70bab98b8ef69ac"
+        },
+        "PhysicalLabel": {
+          "objectMatrixDigest": "c3ace59d4367c93e80ca6e2b0a0363f137e3b93d4c6ce516e2e71887a612a413",
+          "vertexPositionDigest": "290c74d829df3dc25931786df21bf94bf88231f3a83f4b80d6ba94bdc9cc9f8a",
+          "silhouetteDigest": "7ee89748594628e030d9b37c7cb74981d0460f2a1b348128eac6586b82799af8",
+          "topologyWindingDigest": "2d36369c367ebb98a68362c4b387568646e48cf559557f28751511dbd966e379",
+          "fullGeometryDigest": "cebc2249a6f03eaa4f2a79f4462e590b510ae6102091660ca7f2ab540464af45"
+        },
+        "RearPolycarbonateShell": {
+          "objectMatrixDigest": "9895d4b3696173d8b8a31b2ad7316afe1ffeec56164ef615dfaab40d6f0c96ed",
+          "vertexPositionDigest": "8878e8059e28b496928670d8a14c2629e245a0fc51f481b4eaf3942c100802f4",
+          "silhouetteDigest": "5c718443c33c4afd616db63cbcb753cfd4902934f35414153f89bd29c39b9591",
+          "topologyWindingDigest": "d492353dd904965c5f2012776ceda6631fb03837c0ca631e4aa163376364da43",
+          "fullGeometryDigest": "1ccfcaae510d1fc62fd7fbe14ed34ec16e51cbacb98641a6817bed4a967899e7"
+        },
+        "TactileBackgroundInsert": {
+          "objectMatrixDigest": "cc249bc11072cbf005463c6dcf77f0b58192a141f893d99337c8c1e38af1f943",
+          "vertexPositionDigest": "9699e2d8bf4ffdfa32a07df9f80e45691effd34764eee1c48ba799f7c10fcc64",
+          "silhouetteDigest": "41782e9fd6a9dd980f7f7fc2830f575615f2bd3e8eb31bc8f0820f9c3bb82b89",
+          "topologyWindingDigest": "1e961e7a2d13ef8915ac230113a745d431507879fe38c63cb70168f922d33602",
+          "fullGeometryDigest": "8e7d0ff44ab456ad3c2dda8bbd29fb7e6de2dccd42e9ff66ba561ed6a102575e"
+        }
+      }
+    },
+    "identityAfter": {
+      "objectMatrixDigest": "34d52e8980dbbffc5573523b80de9a47d145a49bb22ae95f8d7c1b38e393d588",
+      "vertexPositionDigest": "ced0edf95f8fa6416c5a0e33ebf8dc99fdafcdb3beceac85ee2970bbb2a7682c",
+      "silhouetteDigest": "81615c0e5afd59b634dfa2e85040b31b30b9d5ef0ddc9e12462f1b3d1c59f6b4",
+      "silhouetteDigestMethod": "six-orthographic orientation-insensitive projected-face point sets",
+      "topologyWindingDigest": "c29bc1dd8c0f0c52fd4c70d102bcfc2b4007e579795b605adeb21611a3bf7c79",
+      "fullGeometryDigest": "a3d1e9fe3c6d26c957c7ad1584cc489b9091a1a79e435a660aa89bcf6acc3951",
+      "perObject": {
+        "ContinuousTubePerimeter": {
+          "objectMatrixDigest": "10e4e4078bbe630ffa334f35119efc17e11af5ad9651cf85c7e0d34cc7566e58",
+          "vertexPositionDigest": "68db3db78f2891c1e592d4a1b2b706fd2e7145a828b59fcb8a0ac64f76037ae2",
+          "silhouetteDigest": "bcf0e1b0cd81a575ae36df7c7d2f913f39cb2698135ec4046d16ff0b2bd0059d",
+          "topologyWindingDigest": "5500cba4412f6a6882ebef7c52394f983ff0dff20d82513a15fad4bc65d31f5d",
+          "fullGeometryDigest": "988f98d73da6c323acf4ab7fd502b0702ec015e036120e28bf30bab6cd912beb"
+        },
+        "FrontPolycarbonateShell": {
+          "objectMatrixDigest": "2820c8d6c8bdfbbb82b42b4b7d43e0fc54ad4c4390d17d5e5270f5c4b65ebae2",
+          "vertexPositionDigest": "18d2cb410e45d861c419cce32f4b8ad4f67a5e92c1c32588b2199fb1c0abdfb1",
+          "silhouetteDigest": "94fe85d2cad49f7c49beb6fec411f6be21cd1a6c962af6b3772757546b54c5ae",
+          "topologyWindingDigest": "d88077776cd98184dbba6b1bb6eac9f8ffe6f32c1e30134040d273cb7f2f7ea6",
+          "fullGeometryDigest": "c9b33964b1a60d94bc5ec34f9143efb0ce8a1ffed1e6f02ad70bab98b8ef69ac"
+        },
+        "PhysicalLabel": {
+          "objectMatrixDigest": "c3ace59d4367c93e80ca6e2b0a0363f137e3b93d4c6ce516e2e71887a612a413",
+          "vertexPositionDigest": "290c74d829df3dc25931786df21bf94bf88231f3a83f4b80d6ba94bdc9cc9f8a",
+          "silhouetteDigest": "7ee89748594628e030d9b37c7cb74981d0460f2a1b348128eac6586b82799af8",
+          "topologyWindingDigest": "2d36369c367ebb98a68362c4b387568646e48cf559557f28751511dbd966e379",
+          "fullGeometryDigest": "cebc2249a6f03eaa4f2a79f4462e590b510ae6102091660ca7f2ab540464af45"
+        },
+        "RearPolycarbonateShell": {
+          "objectMatrixDigest": "9895d4b3696173d8b8a31b2ad7316afe1ffeec56164ef615dfaab40d6f0c96ed",
+          "vertexPositionDigest": "8878e8059e28b496928670d8a14c2629e245a0fc51f481b4eaf3942c100802f4",
+          "silhouetteDigest": "5c718443c33c4afd616db63cbcb753cfd4902934f35414153f89bd29c39b9591",
+          "topologyWindingDigest": "d492353dd904965c5f2012776ceda6631fb03837c0ca631e4aa163376364da43",
+          "fullGeometryDigest": "1ccfcaae510d1fc62fd7fbe14ed34ec16e51cbacb98641a6817bed4a967899e7"
+        },
+        "TactileBackgroundInsert": {
+          "objectMatrixDigest": "cc249bc11072cbf005463c6dcf77f0b58192a141f893d99337c8c1e38af1f943",
+          "vertexPositionDigest": "9699e2d8bf4ffdfa32a07df9f80e45691effd34764eee1c48ba799f7c10fcc64",
+          "silhouetteDigest": "41782e9fd6a9dd980f7f7fc2830f575615f2bd3e8eb31bc8f0820f9c3bb82b89",
+          "topologyWindingDigest": "1e961e7a2d13ef8915ac230113a745d431507879fe38c63cb70168f922d33602",
+          "fullGeometryDigest": "8e7d0ff44ab456ad3c2dda8bbd29fb7e6de2dccd42e9ff66ba561ed6a102575e"
+        }
+      }
+    },
+    "unchanged": true,
+    "boundsMm": {
+      "width": 228.0,
+      "height": 304.0,
+      "depth": 59.0
+    }
+  },
+  "materials": {
+    "digestMethod": "SHA-256 of approved material node/input/link/custom-property payload plus product/studio material-slot assignments",
+    "digestBefore": "8358cfdb12e49f87adbbafd96f33f2beb3415f9b920cb62732c73173c7799210",
+    "digestAfter": "8358cfdb12e49f87adbbafd96f33f2beb3415f9b920cb62732c73173c7799210",
+    "unchanged": true,
+    "approvedMaterialNames": [
+      "MAT_BlackFlocking",
+      "MAT_FrostedPolycarbonate",
+      "MAT_FrostedPolycarbonateEdge",
+      "MAT_LabelGraphite",
+      "MAT_LabelPaper",
+      "MAT_M07_ContinuousNeutralFriction",
+      "MAT_RarityFoilSilver"
+    ],
+    "assignmentsRestored": true,
+    "transparentOrderingPreflight": {
+      "frontDepthOrder": [
+        "FrontPolycarbonateShell",
+        "ContinuousTubePerimeter",
+        "M07_TransparentCoverProxy",
+        "RearPolycarbonateShell"
+      ],
+      "reverseDepthOrder": [
+        "RearPolycarbonateShell",
+        "ContinuousTubePerimeter",
+        "M07_TransparentCoverProxy",
+        "FrontPolycarbonateShell"
+      ],
+      "basis": "actual camera-space object origins; empirical image validation follows",
+      "pass": true
+    },
+    "materialGraphDigests": {
+      "MAT_FrostedPolycarbonate": "367f7192d2fe7465feea4b5493ed6e4479db443b0953deb7256b5f4ed08b174d",
+      "MAT_FrostedPolycarbonateEdge": "72e857dc4942fddac312d981a4e4647966e7a3b86857188e125b83a221a5245c",
+      "MAT_BlackFlocking": "9c75ac70fd96cad7e18912e507606fefe491e64750b90a6bb0ca7f992b38cf95",
+      "MAT_LabelPaper": "08ebe728abe1f1eef0be273cf3d826fc6f009f32e1cccaa1caee63cb874ac90f",
+      "MAT_RarityFoilSilver": "611cd3f82a277c4ae2bcb183056afe17eeff052ff1c8fb3e8611922fe89ec318",
+      "MAT_LabelGraphite": "ce34914f6609e7e1d9fb26c006160c27fb7f6c2fdc9f27889dd06b3ea657e7ac"
+    }
+  },
+  "lighting": {
+    "classification": "professional neutral controlled Blender product lookdev; not Unity runtime lighting",
+    "ratios": {
+      "key": 1.0,
+      "fill": 0.3,
+      "rim": 0.4
+    },
+    "lights": [
+      {
+        "name": "M08_KeyStrip_5000K",
+        "role": "key",
+        "locationMm": [
+          470.0,
+          360.0,
+          690.0
+        ],
+        "targetMm": [
+          0.0,
+          8.0,
+          12.0
+        ],
+        "energy": 2400000.0,
+        "ratioToKey": 1.0,
+        "sizeMm": 560.0,
+        "sizeYmm": 150.0,
+        "linearRgb": [
+          1.0,
+          0.975,
+          0.95
+        ],
+        "colorTemperatureKelvin": 5000,
+        "rotationEulerDegrees": [
+          40.895081,
+          -1.2e-05,
+          126.830876
+        ],
+        "type": "AREA",
+        "shape": "RECTANGLE",
+        "rarityLight": false,
+        "shippingRuntimeParameter": false
+      },
+      {
+        "name": "M08_FillSoftbox_6200K",
+        "role": "fill",
+        "locationMm": [
+          -430.0,
+          100.0,
+          530.0
+        ],
+        "targetMm": [
+          0.0,
+          -10.0,
+          10.0
+        ],
+        "energy": 720000.0,
+        "ratioToKey": 0.3,
+        "sizeMm": 620.0,
+        "sizeYmm": 460.0,
+        "linearRgb": [
+          0.955,
+          0.972,
+          1.0
+        ],
+        "colorTemperatureKelvin": 6200,
+        "rotationEulerDegrees": [
+          40.482466,
+          5e-06,
+          -104.349335
+        ],
+        "type": "AREA",
+        "shape": "RECTANGLE",
+        "rarityLight": false,
+        "shippingRuntimeParameter": false
+      },
+      {
+        "name": "M08_RimStrip_5600K",
+        "role": "rim",
+        "locationMm": [
+          -300.0,
+          340.0,
+          -430.0
+        ],
+        "targetMm": [
+          0.0,
+          10.0,
+          0.0
+        ],
+        "energy": 960000.0,
+        "ratioToKey": 0.4,
+        "sizeMm": 460.0,
+        "sizeYmm": 105.0,
+        "linearRgb": [
+          0.975,
+          0.985,
+          1.0
+        ],
+        "colorTemperatureKelvin": 5600,
+        "rotationEulerDegrees": [
+          -46.045232,
+          179.999991,
+          42.273687
+        ],
+        "type": "AREA",
+        "shape": "RECTANGLE",
+        "rarityLight": false,
+        "shippingRuntimeParameter": false
+      }
+    ],
+    "world": {
+      "linearRgb": [
+        0.03200000151991844,
+        0.032999999821186066,
+        0.03500000014901161,
+        1.0
+      ],
+      "sourceStrength": 0.2800000011920929,
+      "renderStrength": 0.2,
+      "hdri": null,
+      "fixedGreenBias": false,
+      "rarityLight": false
+    }
+  },
+  "render": {
+    "engine": "CYCLES",
+    "device": "Apple M4 Max (GPU - 40 cores)",
+    "samples": 96,
+    "adaptiveThreshold": 0.017999999225139618,
+    "denoiser": "OPENIMAGEDENOISE",
+    "transmissionBounces": 20,
+    "viewTransform": "AgX",
+    "look": "AgX - Medium High Contrast",
+    "exposureEv": 0.550000011920929,
+    "gamma": 1.0,
+    "whiteBalanceKelvin": 5600.0,
+    "whiteBalanceTint": 0.0,
+    "shutterSeconds": null,
+    "iso": null,
+    "unityRuntimeMapping": "not claimed; Blender exposure, camera, and lights are Gate 08 review parameters only",
+    "technicalPassEngine": "BLENDER_EEVEE"
+  },
+  "cameras": {
+    "hero": {
+      "name": "M08_HeroCamera",
+      "locationMm": [
+        274.691223,
+        140.791016,
+        849.412659
+      ],
+      "rotationEulerDegrees": [
+        -9.0,
+        18.000001,
+        -0.0
+      ],
+      "targetMm": [
+        0.0,
+        0.0,
+        4.0
+      ],
+      "lensMm": 60.0,
+      "sensorWidthMm": 36.0,
+      "sensorHeightMm": 32.0,
+      "sensorFit": "VERTICAL",
+      "verticalFovDegrees": 29.862834,
+      "depthOfField": false,
+      "resolution": [
+        1400,
+        1600
+      ],
+      "assemblyState": "assembled",
+      "shippingRuntimeParameter": false,
+      "framing": {
+        "normalizedBounds": [
+          0.2224538,
+          0.16041361,
+          0.78567946,
+          0.82271969
+        ],
+        "minimumMargin": 0.16041361,
+        "notCropped": true,
+        "comfortableMargin": true
+      }
+    },
+    "left-oblique": {
+      "name": "M08_Left_ObliqueCamera",
+      "locationMm": [
+        -368.102722,
+        95.120903,
+        830.772278
+      ],
+      "rotationEulerDegrees": [
+        -6.0,
+        -24.000002,
+        0.0
+      ],
+      "targetMm": [
+        0.0,
+        0.0,
+        4.0
+      ],
+      "lensMm": 60.0,
+      "sensorWidthMm": 36.0,
+      "sensorHeightMm": 32.0,
+      "sensorFit": "VERTICAL",
+      "verticalFovDegrees": 29.862834,
+      "depthOfField": false,
+      "resolution": [
+        1400,
+        1600
+      ],
+      "assemblyState": "assembled",
+      "shippingRuntimeParameter": false,
+      "framing": {
+        "normalizedBounds": [
+          0.21815014,
+          0.15944456,
+          0.76434869,
+          0.82542229
+        ],
+        "minimumMargin": 0.15944456,
+        "notCropped": true,
+        "comfortableMargin": true
+      }
+    },
+    "right-oblique": {
+      "name": "M08_Right_ObliqueCamera",
+      "locationMm": [
+        368.102722,
+        95.120903,
+        830.772278
+      ],
+      "rotationEulerDegrees": [
+        -6.0,
+        24.000002,
+        -0.0
+      ],
+      "targetMm": [
+        0.0,
+        0.0,
+        4.0
+      ],
+      "lensMm": 60.0,
+      "sensorWidthMm": 36.0,
+      "sensorHeightMm": 32.0,
+      "sensorFit": "VERTICAL",
+      "verticalFovDegrees": 29.862834,
+      "depthOfField": false,
+      "resolution": [
+        1400,
+        1600
+      ],
+      "assemblyState": "assembled",
+      "shippingRuntimeParameter": false,
+      "framing": {
+        "normalizedBounds": [
+          0.23565133,
+          0.15944456,
+          0.78190112,
+          0.82542229
+        ],
+        "minimumMargin": 0.15944456,
+        "notCropped": true,
+        "comfortableMargin": true
+      }
+    },
+    "low": {
+      "name": "M08_LowCamera",
+      "locationMm": [
+        312.31311,
+        -122.119797,
+        860.073242
+      ],
+      "rotationEulerDegrees": [
+        7.000001,
+        19.999999,
+        -0.0
+      ],
+      "targetMm": [
+        0.0,
+        -10.0,
+        2.0
+      ],
+      "lensMm": 60.0,
+      "sensorWidthMm": 36.0,
+      "sensorHeightMm": 32.0,
+      "sensorFit": "VERTICAL",
+      "verticalFovDegrees": 29.862834,
+      "depthOfField": false,
+      "resolution": [
+        1400,
+        1600
+      ],
+      "assemblyState": "assembled",
+      "shippingRuntimeParameter": false,
+      "framing": {
+        "normalizedBounds": [
+          0.23047742,
+          0.20320985,
+          0.77727121,
+          0.85542792
+        ],
+        "minimumMargin": 0.14457208,
+        "notCropped": true,
+        "comfortableMargin": true
+      }
+    },
+    "label-closeup": {
+      "name": "M08_Label_CloseupCamera",
+      "locationMm": [
+        0.0,
+        102.0,
+        450.0
+      ],
+      "rotationEulerDegrees": [
+        -0.403485,
+        0.0,
+        0.0
+      ],
+      "targetMm": [
+        0.0,
+        99.0,
+        24.0
+      ],
+      "lensMm": 92.0,
+      "sensorWidthMm": 36.0,
+      "sensorHeightMm": 32.0,
+      "sensorFit": "VERTICAL",
+      "verticalFovDegrees": 19.731614,
+      "depthOfField": false,
+      "resolution": [
+        1600,
+        1100
+      ],
+      "assemblyState": "assembled",
+      "shippingRuntimeParameter": false
+    },
+    "tube-corner": {
+      "name": "M08_Tube_CornerCamera",
+      "locationMm": [
+        270.0,
+        270.0,
+        520.0
+      ],
+      "rotationEulerDegrees": [
+        -14.903445,
+        19.77838,
+        0.0
+      ],
+      "targetMm": [
+        92.0,
+        130.0,
+        25.0
+      ],
+      "lensMm": 104.0,
+      "sensorWidthMm": 36.0,
+      "sensorHeightMm": 32.0,
+      "sensorFit": "VERTICAL",
+      "verticalFovDegrees": 17.492325,
+      "depthOfField": false,
+      "resolution": [
+        1500,
+        1200
+      ],
+      "assemblyState": "assembled",
+      "shippingRuntimeParameter": false
+    },
+    "black-panel": {
+      "name": "M08_Black_PanelCamera",
+      "locationMm": [
+        210.0,
+        -72.0,
+        430.0
+      ],
+      "rotationEulerDegrees": [
+        1.734082,
+        27.008337,
+        -0.0
+      ],
+      "targetMm": [
+        0.0,
+        -58.0,
+        18.0
+      ],
+      "lensMm": 96.0,
+      "sensorWidthMm": 36.0,
+      "sensorHeightMm": 32.0,
+      "sensorFit": "VERTICAL",
+      "verticalFovDegrees": 18.924644,
+      "depthOfField": false,
+      "resolution": [
+        1500,
+        1200
+      ],
+      "assemblyState": "assembled",
+      "shippingRuntimeParameter": false
+    }
+  },
+  "framing": {
+    "hero": {
+      "normalizedBounds": [
+        0.2224538,
+        0.16041361,
+        0.78567946,
+        0.82271969
+      ],
+      "minimumMargin": 0.16041361,
+      "notCropped": true,
+      "comfortableMargin": true
+    },
+    "left-oblique": {
+      "normalizedBounds": [
+        0.21815014,
+        0.15944456,
+        0.76434869,
+        0.82542229
+      ],
+      "minimumMargin": 0.15944456,
+      "notCropped": true,
+      "comfortableMargin": true
+    },
+    "right-oblique": {
+      "normalizedBounds": [
+        0.23565133,
+        0.15944456,
+        0.78190112,
+        0.82542229
+      ],
+      "minimumMargin": 0.15944456,
+      "notCropped": true,
+      "comfortableMargin": true
+    },
+    "low": {
+      "normalizedBounds": [
+        0.23047742,
+        0.20320985,
+        0.77727121,
+        0.85542792
+      ],
+      "minimumMargin": 0.14457208,
+      "notCropped": true,
+      "comfortableMargin": true
+    }
+  },
+  "grainStability": {
+    "anglesDegrees": [
+      0,
+      90,
+      180,
+      270,
+      360
+    ],
+    "coordinatePolicy": "Texture Coordinate:Object",
+    "frames": {
+      "0": {
+        "rootRotationDegrees": 0,
+        "maximumRecoveredLocalCoordinateDeltaMm": 3.814697265625e-06
+      },
+      "90": {
+        "rootRotationDegrees": 90,
+        "maximumRecoveredLocalCoordinateDeltaMm": 3.822140584440565e-06
+      },
+      "180": {
+        "rootRotationDegrees": 180,
+        "maximumRecoveredLocalCoordinateDeltaMm": 3.831424398419427e-06
+      },
+      "270": {
+        "rootRotationDegrees": 270,
+        "maximumRecoveredLocalCoordinateDeltaMm": 3.904900396861839e-06
+      },
+      "360": {
+        "rootRotationDegrees": 360,
+        "maximumRecoveredLocalCoordinateDeltaMm": 3.814697265625e-06
+      }
+    },
+    "maximumRecoveredLocalCoordinateDeltaMm": 3.904900396861839e-06,
+    "toleranceMm": 1e-05,
+    "pass": true
+  },
+  "outputs": {
+    "hero": "unity/FidgetingApp/ArtSource/ModelPipeline/premium-display-case/evidence/08-lighting/rev-002/raw/hero.png",
+    "leftOblique": "unity/FidgetingApp/ArtSource/ModelPipeline/premium-display-case/evidence/08-lighting/rev-002/raw/left-oblique.png",
+    "rightOblique": "unity/FidgetingApp/ArtSource/ModelPipeline/premium-display-case/evidence/08-lighting/rev-002/raw/right-oblique.png",
+    "low": "unity/FidgetingApp/ArtSource/ModelPipeline/premium-display-case/evidence/08-lighting/rev-002/raw/low.png",
+    "beauty": "unity/FidgetingApp/ArtSource/ModelPipeline/premium-display-case/evidence/08-lighting/rev-002/raw/pass-beauty.png",
+    "clay": "unity/FidgetingApp/ArtSource/ModelPipeline/premium-display-case/evidence/08-lighting/rev-002/raw/pass-clay.png",
+    "normal": "unity/FidgetingApp/ArtSource/ModelPipeline/premium-display-case/evidence/08-lighting/rev-002/raw/pass-normal.png",
+    "depth": "unity/FidgetingApp/ArtSource/ModelPipeline/premium-display-case/evidence/08-lighting/rev-002/raw/pass-depth.png",
+    "roughness": "unity/FidgetingApp/ArtSource/ModelPipeline/premium-display-case/evidence/08-lighting/rev-002/raw/pass-roughness.png",
+    "labelCloseup": "unity/FidgetingApp/ArtSource/ModelPipeline/premium-display-case/evidence/08-lighting/rev-002/raw/label-closeup.png",
+    "tubeCorner": "unity/FidgetingApp/ArtSource/ModelPipeline/premium-display-case/evidence/08-lighting/rev-002/raw/tube-corner.png",
+    "blackPanel": "unity/FidgetingApp/ArtSource/ModelPipeline/premium-display-case/evidence/08-lighting/rev-002/raw/black-panel.png",
+    "labelPlaceholderReview": "unity/FidgetingApp/ArtSource/ModelPipeline/premium-display-case/evidence/08-lighting/rev-002/label-placeholder-review.png",
+    "meshClippedSheenCompatibility": "unity/FidgetingApp/ArtSource/ModelPipeline/premium-display-case/evidence/08-lighting/rev-002/mesh-clipped-sheen-compatibility.png",
+    "lightingReview": "unity/FidgetingApp/ArtSource/ModelPipeline/premium-display-case/evidence/08-lighting/rev-002/lighting-review.png"
+  },
+  "technicalPassPolicy": {
+    "beautyUsesApprovedGate07Materials": true,
+    "clayNormalDepthRoughnessUseTemporaryOverrides": true,
+    "temporaryOverridesAreShippingMaterials": false,
+    "approvedAssignmentsRestoredBeforeSave": true
+  },
+  "scope": {
+    "wholeCaseOnly": true,
+    "explode": false,
+    "gate08Status": "ready_for_review",
+    "gate08Approved": false,
+    "gate09Entered": false,
+    "shippingUnityChanged": false,
+    "buildInstallPhonePush": false,
+    "sourceArchitectureEvidenceRevision": 7,
+    "reviewExplodedPartCount": 0,
+    "labelContentApproved": false,
+    "runtimeTimingBaked": false,
+    "runtimeEasingBaked": false
+  },
+  "checks": {
+    "gate07ApiApprovalExact": true,
+    "sourceBlendUnchanged": true,
+    "sourceEvidencePassed": true,
+    "geometryDigestUnchanged": true,
+    "materialDigestUnchanged": true,
+    "requiredOutputsPresent": true,
+    "grainStableAtFiveAngles": true,
+    "transparentOrderingPreflight": true,
+    "wholeCaseOnlyNoExplode": true,
+    "fillRatioWithinRequestedRange": true,
+    "rimRatioWithinRequestedRange": true,
+    "noRarityOrGreenLight": true,
+    "mainViewsNotCropped": true,
+    "gate09NotEntered": true,
+    "shippingUnityUnchanged": true,
+    "noBuildInstallPhonePush": true,
+    "gate07Rev2ApprovalExact": true,
+    "gate04Rev7ArchitectureApproved": true,
+    "placeholderLabelContentNotApproved": true,
+    "unityAuthoritativeLabelData": true,
+    "meshClippedSheenZeroOutside": true,
+    "noExternalHaloBloomParticlesOrEmission": true,
+    "lookdevValuesAreCandidates": true,
+    "runtimeTimingAndEasingNotBaked": true
+  },
+  "blender": "5.2.0 LTS",
+  "outputBlend": "unity/FidgetingApp/ArtSource/ModelPipeline/premium-display-case/evidence/08-lighting/rev-002/premium-display-case-lighting-r002.blend",
+  "outputBlendSha256": "612e99ea9e9895a7848dc408728ac89ae1db23a55aad08fb60600e42170e15b6",
+  "sourceGate04": {
+    "architectureEvidenceRevision": 7,
+    "sha256": "d5afb4eecdb86953cb6d5c28e217e19f88becb6c0aef1316eaffac2ae630fc3e",
+    "wholeAssembledCaseOnly": true,
+    "meshClippedSheenOwner": "Unity MaterialPropertyBlock",
+    "outsideSilhouettePixels": 0,
+    "runtimeTimingIncluded": false
+  },
+  "labelPolicy": {
+    "visibleContentState": "placeholder-not-approved",
+    "blenderOwns": [
+      "label geometry",
+      "label UV",
+      "paper zone",
+      "transparent cover zone",
+      "foil zone"
+    ],
+    "unityOwns": [
+      "product name",
+      "edition or finish",
+      "acquired date",
+      "rarity or level",
+      "real collectible ID when available"
+    ],
+    "fakeOrPlaceholderCollectibleIdForbidden": true
+  },
+  "sheenCompatibility": {
+    "classification": "material-runtime compatibility cue; not external light spill",
+    "owner": "Unity MaterialPropertyBlock",
+    "outsideSubjectPixels": 0,
+    "outsideAllowedMaterialZonePixels": 0,
+    "externalHalo": false,
+    "pointLight": false,
+    "runtimeTimingIncluded": false
+  },
+  "candidateBoundary": {
+    "blenderLookdevCandidatesOnly": true,
+    "automaticUnityRuntimeConstants": false,
+    "tunableUntilShippingUnityPreview": [
+      "intensity",
+      "color temperature",
+      "exposure",
+      "field of view",
+      "light width",
+      "falloff"
+    ]
+  },
+  "animationBoundary": {
+    "gate04StructurePreserved": true,
+    "timingBaked": false,
+    "easingBaked": false,
+    "presentationRootAnimationAction": null
+  },
+  "forbiddenEffects": {
+    "fixedGreenCast": false,
+    "rarityLight": false,
+    "externalHalo": false,
+    "largeBloom": false,
+    "particles": false,
+    "flash": false,
+    "shake": false,
+    "persistentEmission": false
+  }
+}

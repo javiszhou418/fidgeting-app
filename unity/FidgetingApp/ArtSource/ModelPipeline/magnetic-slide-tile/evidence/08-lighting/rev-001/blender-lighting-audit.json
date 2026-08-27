@@ -1,0 +1,222 @@
+{
+  "schemaVersion": 1,
+  "modelId": "magnetic-slide-tile",
+  "gate": "08-lighting",
+  "lightingRevision": 1,
+  "blender": "5.2.0 LTS",
+  "renderer": "BLENDER_EEVEE",
+  "geometryDigest": "85bd7dd237c6822c72e575c9a23085eec9a2f28d7afea3a5bf0f13fdc4ebd90f",
+  "cameras": {
+    "beauty": {
+      "name": "M08R1_BeautyCamera",
+      "locationMm": [
+        76.0,
+        -138.0,
+        58.0
+      ],
+      "targetMm": [
+        0,
+        0,
+        4
+      ],
+      "lensMm": 82.0
+    },
+    "hero": {
+      "name": "M08R1_HeroCamera",
+      "locationMm": [
+        88.0,
+        -132.0,
+        74.0
+      ],
+      "targetMm": [
+        0,
+        0,
+        4
+      ],
+      "lensMm": 72.0
+    },
+    "left-oblique": {
+      "name": "M08R1_Left_ObliqueCamera",
+      "locationMm": [
+        -96.0,
+        -122.0,
+        66.0
+      ],
+      "targetMm": [
+        0,
+        0,
+        4
+      ],
+      "lensMm": 74.0
+    },
+    "low": {
+      "name": "M08R1_LowCamera",
+      "locationMm": [
+        104.0,
+        -146.0,
+        25.0
+      ],
+      "targetMm": [
+        0,
+        0,
+        4
+      ],
+      "lensMm": 78.0
+    },
+    "open-side": {
+      "name": "M08R1_Open_SideCamera",
+      "locationMm": [
+        102.0,
+        -112.0,
+        46.0
+      ],
+      "targetMm": [
+        0,
+        8,
+        4
+      ],
+      "lensMm": 78.0
+    },
+    "right-oblique": {
+      "name": "M08R1_Right_ObliqueCamera",
+      "locationMm": [
+        98.0,
+        -120.0,
+        64.0
+      ],
+      "targetMm": [
+        0,
+        0,
+        4
+      ],
+      "lensMm": 74.0
+    }
+  },
+  "lights": {
+    "M08R1_FaceReveal": {
+      "locationMm": [
+        -12.0,
+        -28.0,
+        112.0
+      ],
+      "powerW": 23000.0,
+      "sizeMm": 30.0,
+      "linearRgb": [
+        1.0,
+        0.9800000190734863,
+        0.9399999976158142
+      ],
+      "colorTemperatureKelvin": 5900,
+      "targetMm": [
+        0.0,
+        0.0,
+        4.0
+      ]
+    },
+    "M08R1_Fill_Neutral": {
+      "locationMm": [
+        -62.0,
+        -22.0,
+        62.0
+      ],
+      "powerW": 30000.0,
+      "sizeMm": 46.0,
+      "linearRgb": [
+        1.0,
+        0.9649999737739563,
+        0.9200000166893005
+      ],
+      "colorTemperatureKelvin": 5600,
+      "targetMm": [
+        0.0,
+        0.0,
+        3.0
+      ]
+    },
+    "M08R1_Key_D65_Softbox": {
+      "locationMm": [
+        54.0,
+        -72.0,
+        98.0
+      ],
+      "powerW": 62000.0,
+      "sizeMm": 52.0,
+      "linearRgb": [
+        1.0,
+        0.9940000176429749,
+        0.9700000286102295
+      ],
+      "colorTemperatureKelvin": 6504,
+      "targetMm": [
+        0.0,
+        0.0,
+        3.0
+      ]
+    },
+    "M08R1_Rim_SilverStrip": {
+      "locationMm": [
+        34.0,
+        72.0,
+        68.0
+      ],
+      "powerW": 48000.0,
+      "sizeMm": 38.0,
+      "linearRgb": [
+        1.0,
+        0.996999979019165,
+        0.9850000143051147
+      ],
+      "colorTemperatureKelvin": 6400,
+      "targetMm": [
+        0.0,
+        2.0,
+        4.0
+      ]
+    }
+  },
+  "reflectionCards": {
+    "M08R1_BlackCard_NegativeFill": {
+      "cameraVisible": false,
+      "renderVisible": true
+    },
+    "M08R1_WhiteCard_Camera": {
+      "cameraVisible": false,
+      "renderVisible": true
+    },
+    "M08R1_WhiteCard_Left": {
+      "cameraVisible": false,
+      "renderVisible": true
+    },
+    "M08R1_WhiteCard_Right": {
+      "cameraVisible": false,
+      "renderVisible": true
+    }
+  },
+  "shippingEmissionStrengths": {
+    "M07R7_DaylightNeutralPolishedSilver": 0.0,
+    "M07R7_BloodRedCrystal_WideBorder_Upper": 0.0,
+    "M07R7_BloodRedCrystal_WideBorder_Lower": 0.0
+  },
+  "technicalPassMaterials": [
+    "M08R1_Pass_Depth",
+    "M08R1_Pass_Normal",
+    "M08R1_Pass_RoughnessLower",
+    "M08R1_Pass_RoughnessSilver",
+    "M08R1_Pass_RoughnessUpper"
+  ],
+  "checks": {
+    "geometryDigestUnchanged": true,
+    "closedPoseRestored": true,
+    "pointAxisPreserved": true,
+    "hiddenEnvelopeUnchanged": true,
+    "materialSlotsRestored": true,
+    "shippingEmissionZero": true,
+    "requiredCameras": true,
+    "controlledLights": true,
+    "reflectionCardsCameraHidden": true,
+    "technicalPassesSeparated": true,
+    "allOutputsPresent": true,
+    "gate08Only": true
+  },
+  "pass": true
+}

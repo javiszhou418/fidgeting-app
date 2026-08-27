@@ -1,0 +1,264 @@
+{
+  "schemaVersion": 1,
+  "revision": 10,
+  "createdAt": "2026-08-20T00:00:00.000Z",
+  "updatedAt": "2026-08-26T15:22:57.244Z",
+  "model": {
+    "id": "blue-classic",
+    "name": "经典蓝色",
+    "mechanism": "rotor",
+    "status": "shipping-current-rebuild-requested",
+    "scenePath": "unity/FidgetingApp/Assets/Scenes/FidgetSpinnerDemo.unity"
+  },
+  "route": {
+    "primary": "blender-cli",
+    "rodinPolicy": "concept-only",
+    "note": "机械 Rotor 必须参数化重建；Rodin 输出只能作为隔离的概念对照。"
+  },
+  "currentState": {
+    "rebuildRequested": true,
+    "shippingAssetUnchanged": true,
+    "visualApproval": "pending",
+    "deviceStatus": "not-approved",
+    "diagnosis": "项目内没有找到可回溯的原始参考包、尺寸分析、爆炸图或 Blender 源；现有 Unity 场景不能反向充当建模依据。"
+  },
+  "assets": [
+    {
+      "id": "blue-contract-design-bible",
+      "stageId": "03-contract",
+      "slot": "modeling-contract",
+      "path": "unity/FidgetingApp/Docs/FidgetingAppProductDesignBible.md",
+      "sha256": "3627a7cc1bc6cb38f186bbccccaecfacb4c4ad00cc2f139e32963991e132ab96",
+      "role": "contract",
+      "producer": {
+        "name": "product-design-bible",
+        "version": "2026-08-20"
+      },
+      "sourceAssetIds": [],
+      "exists": true,
+      "sizeBytes": 219208
+    },
+    {
+      "id": "blue-unity-scene",
+      "stageId": "11-unity-parity",
+      "slot": "unity-neutral",
+      "path": "unity/FidgetingApp/Assets/Scenes/FidgetSpinnerDemo.unity",
+      "sha256": "374034a6e26bd3ea63f70a1002bab360f15a2fed195acef8102497b8db41e39b",
+      "role": "historical",
+      "producer": {
+        "name": "Unity",
+        "version": "6000.0.58f2"
+      },
+      "sourceAssetIds": [],
+      "exists": true,
+      "sizeBytes": 60998
+    },
+    {
+      "id": "blue-legacy-unity",
+      "stageId": "12-shipping",
+      "slot": "shipping-library",
+      "path": "Artifacts/EnvironmentIntegration/blue-classic-unity.png",
+      "sha256": "805ff33e1df7fe44844e01037c4e40cabee8d0b22604612f6b73b009a98ac0ab",
+      "role": "historical",
+      "producer": {
+        "name": "Unity",
+        "version": "legacy",
+        "recipe": "environment-integration"
+      },
+      "sourceAssetIds": [
+        "blue-unity-scene"
+      ],
+      "view": {
+        "id": "library",
+        "camera": "legacy-unknown"
+      },
+      "exists": true,
+      "sizeBytes": 1990376
+    },
+    {
+      "id": "blue-legacy-progression",
+      "stageId": "12-shipping",
+      "slot": "shipping-hero",
+      "path": "Artifacts/ProgressionVisuals/blue-classic-lv001.png",
+      "sha256": "a7f55e55c7167d113de7628c7761f560c66a30d48a86442feda5c58e9684f016",
+      "role": "historical",
+      "producer": {
+        "name": "Unity",
+        "version": "legacy",
+        "recipe": "progression-lv001"
+      },
+      "sourceAssetIds": [
+        "blue-unity-scene"
+      ],
+      "view": {
+        "id": "hero",
+        "camera": "legacy-unknown"
+      },
+      "exists": true,
+      "sizeBytes": 441347
+    }
+  ],
+  "claims": [
+    {
+      "id": "blue-entry-rotor",
+      "stageId": "03-contract",
+      "category": "product-role",
+      "statement": "经典蓝色应直读为三叶、中心指盖和真实旋转质量的入门 Rotor。",
+      "confidence": "high",
+      "sourceAssetIds": [
+        "blue-contract-design-bible"
+      ],
+      "sourceRegions": []
+    },
+    {
+      "id": "blue-source-gap",
+      "stageId": "02-analysis",
+      "category": "unknown",
+      "statement": "原始轮廓、真实直径、厚度、背面结构和轴承尺寸均缺少可追溯图片依据。",
+      "confidence": "unknown",
+      "sourceAssetIds": [],
+      "sourceRegions": []
+    }
+  ],
+  "stages": [
+    {
+      "id": "01-intake",
+      "revision": 1,
+      "status": "missing",
+      "artifactIds": [],
+      "inputDigest": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "outputDigest": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "validations": [],
+      "decision": null
+    },
+    {
+      "id": "02-analysis",
+      "revision": 1,
+      "status": "stale",
+      "artifactIds": [],
+      "inputDigest": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "outputDigest": "2ec8d59c6938c6893cb60f2989492453e912b215a86c48d0292350f7f503640b",
+      "validations": [],
+      "decision": null,
+      "staleReason": "素材文件哈希或存在状态发生变化。"
+    },
+    {
+      "id": "03-contract",
+      "revision": 1,
+      "status": "stale",
+      "artifactIds": [
+        "blue-contract-design-bible"
+      ],
+      "inputDigest": "2ec8d59c6938c6893cb60f2989492453e912b215a86c48d0292350f7f503640b",
+      "outputDigest": "399e5b963ac1a8f646f697beff21f9fda505e260d7310a9d9ac3a3c656eb0c3a",
+      "validations": [],
+      "decision": null,
+      "staleReason": "素材文件哈希或存在状态发生变化。"
+    },
+    {
+      "id": "04-architecture",
+      "revision": 1,
+      "status": "missing",
+      "artifactIds": [],
+      "inputDigest": "399e5b963ac1a8f646f697beff21f9fda505e260d7310a9d9ac3a3c656eb0c3a",
+      "outputDigest": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "validations": [],
+      "decision": null,
+      "staleReason": "上游 03-contract 的素材发生变化。"
+    },
+    {
+      "id": "05-blockout",
+      "revision": 1,
+      "status": "missing",
+      "artifactIds": [],
+      "inputDigest": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "outputDigest": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "validations": [],
+      "decision": null,
+      "staleReason": "上游 03-contract 的素材发生变化。"
+    },
+    {
+      "id": "06-geometry",
+      "revision": 1,
+      "status": "missing",
+      "artifactIds": [],
+      "inputDigest": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "outputDigest": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "validations": [],
+      "decision": null,
+      "staleReason": "上游 03-contract 的素材发生变化。"
+    },
+    {
+      "id": "07-material",
+      "revision": 1,
+      "status": "stale",
+      "artifactIds": [],
+      "inputDigest": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "outputDigest": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "validations": [],
+      "decision": null,
+      "staleReason": "上游 03-contract 的素材发生变化。"
+    },
+    {
+      "id": "08-lighting",
+      "revision": 1,
+      "status": "stale",
+      "artifactIds": [],
+      "inputDigest": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "outputDigest": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "validations": [],
+      "decision": null,
+      "staleReason": "上游 03-contract 的素材发生变化。"
+    },
+    {
+      "id": "09-environment",
+      "revision": 1,
+      "status": "stale",
+      "artifactIds": [],
+      "inputDigest": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "outputDigest": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "validations": [],
+      "decision": null,
+      "staleReason": "上游 03-contract 的素材发生变化。"
+    },
+    {
+      "id": "10-export",
+      "revision": 1,
+      "status": "missing",
+      "artifactIds": [],
+      "inputDigest": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "outputDigest": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "validations": [],
+      "decision": null,
+      "staleReason": "上游 03-contract 的素材发生变化。"
+    },
+    {
+      "id": "11-unity-parity",
+      "revision": 1,
+      "status": "stale",
+      "artifactIds": [
+        "blue-unity-scene"
+      ],
+      "inputDigest": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "outputDigest": "a5429c429aa8fb430cddd3773ee9f106f069a39303e5f984d794ab1ccddddf10",
+      "validations": [],
+      "decision": null,
+      "staleReason": "上游 03-contract 的素材发生变化。"
+    },
+    {
+      "id": "12-shipping",
+      "revision": 1,
+      "status": "stale",
+      "artifactIds": [
+        "blue-legacy-unity",
+        "blue-legacy-progression"
+      ],
+      "inputDigest": "a5429c429aa8fb430cddd3773ee9f106f069a39303e5f984d794ab1ccddddf10",
+      "outputDigest": "2d6b5c7ce23d54fb3d2d19431a69d6b980b1ef584e9c06330526dd89a4443bf3",
+      "validations": [],
+      "decision": null,
+      "staleReason": "上游 03-contract 的素材发生变化。"
+    }
+  ],
+  "issues": []
+}

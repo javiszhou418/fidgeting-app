@@ -1,0 +1,157 @@
+{
+  "modelId": "magnetic-fan-card",
+  "gate": "11-unity-parity",
+  "viewId": "hero",
+  "cameraRecipe": "neutral-camera-recipe.json",
+  "imageComparison": {
+    "resolution": [
+      1179,
+      654
+    ],
+    "threshold": 28,
+    "silhouetteIou": 0.9914715,
+    "bboxEdgeError": 0.0015291,
+    "centroidError": 2.6e-06,
+    "areaRatioUnityOverBlender": 0.9914715,
+    "blender": {
+      "areaPixels": 255965,
+      "areaFraction": 0.3319625038582949,
+      "bbox": [
+        93,
+        104,
+        879,
+        646
+      ],
+      "centroid": [
+        519.7296427245913,
+        369.998503701678
+      ]
+    },
+    "unity": {
+      "areaPixels": 253782,
+      "areaFraction": 0.3291313584051171,
+      "bbox": [
+        94,
+        105,
+        878,
+        645
+      ],
+      "centroid": [
+        519.7308240931193,
+        369.99518090329497
+      ]
+    },
+    "checks": {
+      "silhouetteIouAtLeast085": true,
+      "bboxEdgeErrorAtMost5Percent": true,
+      "centroidErrorAtMost3Percent": true,
+      "areaRatioWithin10Percent": true
+    }
+  },
+  "numericChecks": {
+    "unityImporterPass": true,
+    "triangleCountPreserved": true,
+    "meshObjectCountPreserved": true,
+    "boundsWithinOnePercent": true,
+    "rankMeshesPreserved": true,
+    "trackDistributionPreserved": true,
+    "collisionMeshesPreserved": true
+  },
+  "blenderReport": {
+    "fbx": "/Users/jiawei.zhou/Documents/Fidgeting app/unity/FidgetingApp/ArtSource/ModelPipeline/magnetic-fan-card/evidence/10-export/rev-002/magnetic-fan-card.fbx",
+    "objects": 36,
+    "meshObjects": 32,
+    "triangles": 70548,
+    "materials": [
+      "MAT_Chrome_Selected",
+      "MAT_Etching_Selected",
+      "MAT_Gunmetal_Selected",
+      "MAT_WarmGold_Selected",
+      "MAT_WarmSilver_Medium_Selected"
+    ],
+    "root": "MagneticFanCard_Root",
+    "cards": {
+      "BottomCard": "MagneticFanCard_Root",
+      "MiddleCard": "MagneticFanCard_Root",
+      "TopCard": "MagneticFanCard_Root"
+    },
+    "cameraRecipe": "neutral-camera-recipe.json",
+    "output": "blender-neutral.png"
+  },
+  "unityReport": {
+    "pass": true,
+    "failures": [],
+    "productAssetPath": "Assets/Editor/GeneratedModelParity/MagneticFanCard/magnetic-fan-card.fbx",
+    "collisionAssetPath": "Assets/Editor/GeneratedModelParity/MagneticFanCard/magnetic-fan-card-collision.fbx",
+    "unityVersion": "6000.5.6f1",
+    "output": "/Users/jiawei.zhou/Documents/Fidgeting app/unity/FidgetingApp/ArtSource/ModelPipeline/magnetic-fan-card/evidence/11-unity-parity/rev-002/unity-neutral.png",
+    "meshObjects": 32,
+    "vertices": 70962,
+    "triangles": 70548,
+    "rankMeshes": 6,
+    "bottomTrackObjects": 0,
+    "middleTopTrackObjects": 4,
+    "collisionMeshes": 3,
+    "bounds": {
+      "center": {
+        "x": -0.040446504950523376,
+        "y": 0.006574999075382948,
+        "z": -0.012699998915195465
+      },
+      "extent": {
+        "x": 0.10776306688785553,
+        "y": 0.01315000094473362,
+        "z": 0.13340000808238983
+      }
+    },
+    "sourceBoundsExtent": {
+      "x": 0.10776306688785553,
+      "y": 0.013150000013411045,
+      "z": 0.13340002298355103
+    },
+    "boundsRelativeError": 1.117028389785446e-07,
+    "hierarchy": [
+      {
+        "name": "BottomCard",
+        "parent": "MagneticFanCard_Root"
+      },
+      {
+        "name": "MiddleCard",
+        "parent": "MagneticFanCard_Root"
+      },
+      {
+        "name": "TopCard",
+        "parent": "MagneticFanCard_Root"
+      }
+    ],
+    "camera": {
+      "position": {
+        "x": -0.20052653551101685,
+        "y": 0.15331502258777618,
+        "z": 0.18740002810955048
+      },
+      "lookAt": {
+        "x": -0.040446504950523376,
+        "y": 0.0065750000067055225,
+        "z": -0.012700000777840614
+      },
+      "verticalFovDegrees": 20.578899383544922,
+      "resolution": {
+        "x": 1179,
+        "y": 654
+      }
+    },
+    "importer": {
+      "globalScale": 1.0,
+      "useFileScale": true,
+      "normals": "Import",
+      "tangents": "CalculateMikk",
+      "materials": "None",
+      "optimizeMesh": false
+    },
+    "shippingIntegrated": false
+  },
+  "pass": true,
+  "shippingIntegrated": false,
+  "deviceValidated": false
+}

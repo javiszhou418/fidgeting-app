@@ -1,0 +1,568 @@
+{
+  "schemaVersion": 1,
+  "revision": 11,
+  "createdAt": "2026-08-20T00:00:00.000Z",
+  "updatedAt": "2026-08-26T15:22:57.987Z",
+  "model": {
+    "id": "metal-three-blade",
+    "name": "三叶金属",
+    "mechanism": "rotor",
+    "status": "shipping-current-rebuild-requested",
+    "scenePath": "unity/FidgetingApp/Assets/_Fidgeting/Scenes/ThreeBladeEDC.unity"
+  },
+  "route": {
+    "primary": "blender-cli",
+    "rodinPolicy": "concept-only",
+    "note": "保留现有 Blender 源作为历史证据；新几何从参考 claim 和确定性参数重建。"
+  },
+  "currentState": {
+    "rebuildRequested": true,
+    "shippingAssetUnchanged": true,
+    "visualApproval": "pending",
+    "deviceStatus": "not-approved",
+    "diagnosis": "参考、Blender 源和 Unity 输出均存在，但缺少逐条参考 claim、完整同源六视图和新几何审批。现有材质批准不能替代几何批准。"
+  },
+  "assets": [
+    {
+      "id": "tri-input-orthographic",
+      "stageId": "01-intake",
+      "slot": "original-reference",
+      "path": "unity/FidgetingApp/Docs/ModelingReferences/fidget_rotor_orthographic_5view_v3_large_center_chamfered.png",
+      "sha256": "96c73ba30b60bacfedce88a6727d47ad3cc5fef7af2d6c135c344ced495c6be6",
+      "role": "ai-target",
+      "producer": {
+        "name": "user-provided-generated-reference",
+        "version": "v3"
+      },
+      "provenance": {
+        "origin": "user-provided",
+        "contentClass": "ai-generated-target",
+        "assertedBy": "legacy-record",
+        "note": "历史记录称该生成目标图由用户提供；仍需在第 1 关由用户重新确认其权威性。"
+      },
+      "sourceAssetIds": [],
+      "exists": true,
+      "sizeBytes": 1540907
+    },
+    {
+      "id": "tri-input-exploded",
+      "stageId": "01-intake",
+      "slot": "original-reference",
+      "path": "unity/FidgetingApp/Docs/ModelingReferences/fidget_rotor_exploded_reference_v1.png",
+      "sha256": "b1ad9114e1c480765b6994008e08ee3d2c9a4e652f13c6f30092847857bfb754",
+      "role": "ai-target",
+      "producer": {
+        "name": "user-provided-generated-reference",
+        "version": "v1"
+      },
+      "provenance": {
+        "origin": "user-provided",
+        "contentClass": "ai-generated-target",
+        "assertedBy": "legacy-record",
+        "note": "历史记录称该爆炸目标图由用户提供；仍需在第 1 关由用户重新确认其权威性。"
+      },
+      "sourceAssetIds": [],
+      "exists": true,
+      "sizeBytes": 1805553
+    },
+    {
+      "id": "tri-analysis-form",
+      "stageId": "02-analysis",
+      "slot": "analysis-board",
+      "path": "assets/3d-analysis/2026-08-01/01-three-blade-spinner-analysis.png",
+      "sha256": "4ae1c9f1cea106b999280db96169c3387571add54990f72c000b679c84a8a086",
+      "role": "analysis",
+      "producer": {
+        "name": "image-analysis",
+        "version": "2026-08-01"
+      },
+      "sourceAssetIds": [
+        "tri-input-orthographic"
+      ],
+      "exists": true,
+      "sizeBytes": 1894722
+    },
+    {
+      "id": "tri-contract-design-bible",
+      "stageId": "03-contract",
+      "slot": "modeling-contract",
+      "path": "unity/FidgetingApp/Docs/FidgetingAppProductDesignBible.md",
+      "sha256": "3627a7cc1bc6cb38f186bbccccaecfacb4c4ad00cc2f139e32963991e132ab96",
+      "role": "contract",
+      "producer": {
+        "name": "product-design-bible",
+        "version": "2026-08-20"
+      },
+      "sourceAssetIds": [
+        "tri-input-orthographic",
+        "tri-input-exploded"
+      ],
+      "exists": true,
+      "sizeBytes": 219208
+    },
+    {
+      "id": "tri-part-tree",
+      "stageId": "04-architecture",
+      "slot": "part-tree",
+      "path": "assets/3d-analysis/2026-08-01/08-three-blade-series-02-orthographic-exploded.png",
+      "sha256": "6df2407a1810533b5ff51f2f325c60fe2349e520355d79c1678ea964cd8b5f2d",
+      "role": "analysis",
+      "producer": {
+        "name": "image-analysis",
+        "version": "2026-08-01"
+      },
+      "sourceAssetIds": [
+        "tri-input-exploded"
+      ],
+      "exists": true,
+      "sizeBytes": 1818466
+    },
+    {
+      "id": "tri-exploded-plan",
+      "stageId": "04-architecture",
+      "slot": "exploded-plan",
+      "path": "Artifacts/three-blade-edc-exploded.png",
+      "sha256": "b12ee0ac2800f09eb372cea66435930b1a6dfd24861ae07fe30ca235d8ea71c0",
+      "role": "process",
+      "producer": {
+        "name": "Blender",
+        "version": "legacy"
+      },
+      "sourceAssetIds": [
+        "tri-input-exploded"
+      ],
+      "exists": true,
+      "sizeBytes": 227969
+    },
+    {
+      "id": "tri-blend-source",
+      "stageId": "05-blockout",
+      "slot": "white-model-source",
+      "path": "unity/FidgetingApp/ArtSource/ThreeBladeSpinner/ThreeBladeSpinner.blend",
+      "sha256": "4cbb92e8bd0b83abdb4bd229dc9bc1f66a99fc4e4a0899527662fe815c9245f6",
+      "role": "source-model",
+      "producer": {
+        "name": "Blender",
+        "version": "legacy"
+      },
+      "sourceAssetIds": [
+        "tri-input-orthographic",
+        "tri-input-exploded"
+      ],
+      "exists": true,
+      "sizeBytes": 213778
+    },
+    {
+      "id": "tri-legacy-blender-hero",
+      "stageId": "05-blockout",
+      "slot": "white-model-hero",
+      "path": "unity/FidgetingApp/Artifacts/BlenderThreeBlade/three-blade-spinner-hero.png",
+      "sha256": "6dd7e1b90b8d0b1331868f62f45e4fb2b16812bc4f2ad964b98a084ac19152d8",
+      "role": "historical",
+      "producer": {
+        "name": "Blender",
+        "version": "legacy",
+        "recipe": "hero"
+      },
+      "sourceAssetIds": [
+        "tri-blend-source"
+      ],
+      "view": {
+        "id": "hero",
+        "camera": "legacy-unknown"
+      },
+      "exists": true,
+      "sizeBytes": 994443
+    },
+    {
+      "id": "tri-geometry-top",
+      "stageId": "06-geometry",
+      "slot": "view-top",
+      "path": "unity/FidgetingApp/Artifacts/BlenderThreeBlade/three-blade-spinner-top.png",
+      "sha256": "6673c4bbc483e1cbf88506078a2a61bb95333b96713b01f15801c1a15126a862",
+      "role": "blender-render",
+      "producer": {
+        "name": "Blender",
+        "version": "legacy"
+      },
+      "sourceAssetIds": [
+        "tri-blend-source"
+      ],
+      "view": {
+        "id": "top",
+        "camera": "legacy-unknown"
+      },
+      "exists": true,
+      "sizeBytes": 855028
+    },
+    {
+      "id": "tri-fbx",
+      "stageId": "10-export",
+      "slot": "fbx-export",
+      "path": "unity/FidgetingApp/Assets/_Fidgeting/Models/BlenderThreeBlade/ThreeBladeSpinner.fbx",
+      "sha256": "c32ed4bb90a21c717c7e971b4af66f1b100ef24801cc7e8b480f75c161a2ecc9",
+      "role": "export",
+      "producer": {
+        "name": "Blender",
+        "version": "legacy"
+      },
+      "sourceAssetIds": [
+        "tri-blend-source"
+      ],
+      "exists": true,
+      "sizeBytes": 667260
+    },
+    {
+      "id": "tri-glb",
+      "stageId": "10-export",
+      "slot": "glb-export",
+      "path": "unity/FidgetingApp/Assets/_Fidgeting/Models/BlenderThreeBlade/ThreeBladeSpinner.glb",
+      "sha256": "d8a2882828ec805b383ac9fd64bd555fbcf98717643930ec2f43dc8409dbc0a3",
+      "role": "export",
+      "producer": {
+        "name": "Blender",
+        "version": "legacy"
+      },
+      "sourceAssetIds": [
+        "tri-blend-source"
+      ],
+      "exists": true,
+      "sizeBytes": 882204
+    },
+    {
+      "id": "tri-collision",
+      "stageId": "10-export",
+      "slot": "collision-export",
+      "path": "unity/FidgetingApp/Assets/_Fidgeting/Models/BlenderThreeBlade/ThreeBladeSpinner_Collision.fbx",
+      "sha256": "e69b6b34ee328a3aa12b78912e27d0d36a62ca81a30fc96973f224074de0855d",
+      "role": "export",
+      "producer": {
+        "name": "Blender",
+        "version": "legacy"
+      },
+      "sourceAssetIds": [
+        "tri-blend-source"
+      ],
+      "exists": true,
+      "sizeBytes": 51468
+    },
+    {
+      "id": "tri-shipping-hero",
+      "stageId": "12-shipping",
+      "slot": "shipping-hero",
+      "path": "unity/FidgetingApp/Artifacts/PremiumDisplayCaseMagneticSlideBaselineConsistencyPreview/metal-three-blade/01_hero.png",
+      "sha256": "66392398dc82d4b47fc27f6b0d71afb2f714900020057ba29c1f8e41696ee431",
+      "role": "historical",
+      "producer": {
+        "name": "Unity",
+        "version": "6000.0.58f2",
+        "recipe": "shipping-hero"
+      },
+      "sourceAssetIds": [
+        "tri-fbx"
+      ],
+      "view": {
+        "id": "hero",
+        "camera": "shipping-hero-v1"
+      },
+      "exists": true,
+      "sizeBytes": 1794376
+    },
+    {
+      "id": "tri-shipping-top",
+      "stageId": "12-shipping",
+      "slot": "shipping-top",
+      "path": "unity/FidgetingApp/Artifacts/PremiumDisplayCaseMagneticSlideBaselineConsistencyPreview/metal-three-blade/02_top.png",
+      "sha256": "117b59bedf048d7f4203939bdba02a6fd621a1aef14028683c3b93e8e55af1a2",
+      "role": "historical",
+      "producer": {
+        "name": "Unity",
+        "version": "6000.0.58f2",
+        "recipe": "shipping-top"
+      },
+      "sourceAssetIds": [
+        "tri-fbx"
+      ],
+      "view": {
+        "id": "top",
+        "camera": "shipping-top-v1"
+      },
+      "exists": true,
+      "sizeBytes": 1719170
+    },
+    {
+      "id": "tri-shipping-left",
+      "stageId": "12-shipping",
+      "slot": "shipping-left-oblique",
+      "path": "unity/FidgetingApp/Artifacts/PremiumDisplayCaseMagneticSlideBaselineConsistencyPreview/metal-three-blade/03_left_oblique.png",
+      "sha256": "90324b4b02dc7192da18e5a86ac68fbb20f33c551acf9c58c592049b9880a893",
+      "role": "historical",
+      "producer": {
+        "name": "Unity",
+        "version": "6000.0.58f2",
+        "recipe": "shipping-left"
+      },
+      "sourceAssetIds": [
+        "tri-fbx"
+      ],
+      "view": {
+        "id": "left-oblique",
+        "camera": "shipping-left-v1"
+      },
+      "exists": true,
+      "sizeBytes": 1565312
+    },
+    {
+      "id": "tri-shipping-right",
+      "stageId": "12-shipping",
+      "slot": "shipping-right-oblique",
+      "path": "unity/FidgetingApp/Artifacts/PremiumDisplayCaseMagneticSlideBaselineConsistencyPreview/metal-three-blade/04_right_oblique.png",
+      "sha256": "ff778c7aedfb637d366190a145b67922f36acf1555c4dd6347ccc94c8b0c56a2",
+      "role": "historical",
+      "producer": {
+        "name": "Unity",
+        "version": "6000.0.58f2",
+        "recipe": "shipping-right"
+      },
+      "sourceAssetIds": [
+        "tri-fbx"
+      ],
+      "view": {
+        "id": "right-oblique",
+        "camera": "shipping-right-v1"
+      },
+      "exists": true,
+      "sizeBytes": 1587224
+    },
+    {
+      "id": "tri-shipping-low",
+      "stageId": "12-shipping",
+      "slot": "shipping-low",
+      "path": "unity/FidgetingApp/Artifacts/PremiumDisplayCaseMagneticSlideBaselineConsistencyPreview/metal-three-blade/05_low_angle.png",
+      "sha256": "006b8a91fccef04d8fca2c61de304888ba410dece4c537114d8c0a7c861b5b38",
+      "role": "historical",
+      "producer": {
+        "name": "Unity",
+        "version": "6000.0.58f2",
+        "recipe": "shipping-low"
+      },
+      "sourceAssetIds": [
+        "tri-fbx"
+      ],
+      "view": {
+        "id": "low",
+        "camera": "shipping-low-v1"
+      },
+      "exists": true,
+      "sizeBytes": 1654004
+    },
+    {
+      "id": "tri-shipping-phone",
+      "stageId": "12-shipping",
+      "slot": "shipping-phone",
+      "path": "unity/FidgetingApp/Artifacts/PremiumDisplayCaseMagneticSlideBaselineConsistencyPreview/metal-three-blade/06_phone_hero.png",
+      "sha256": "979e243e4c11d0ec84f2608c093cf27f846ee483ca62b9c3b8022b73aaf76117",
+      "role": "historical",
+      "producer": {
+        "name": "Unity",
+        "version": "6000.0.58f2",
+        "recipe": "shipping-phone"
+      },
+      "sourceAssetIds": [
+        "tri-fbx"
+      ],
+      "view": {
+        "id": "phone",
+        "camera": "shipping-phone-v1"
+      },
+      "exists": true,
+      "sizeBytes": 1146378
+    }
+  ],
+  "claims": [
+    {
+      "id": "tri-single-axis",
+      "stageId": "03-contract",
+      "category": "mechanism",
+      "statement": "所有动态几何必须围绕唯一机械原点旋转，固定指盖不得成为 Rotor 子节点。",
+      "confidence": "high",
+      "sourceAssetIds": [
+        "tri-contract-design-bible",
+        "tri-input-exploded"
+      ],
+      "sourceRegions": []
+    },
+    {
+      "id": "tri-silhouette-unverified",
+      "stageId": "02-analysis",
+      "category": "geometry",
+      "statement": "现有基础轮廓与中心结构尚未通过逐区域参考比对；新模型必须重新审批 silhouette。",
+      "confidence": "high",
+      "sourceAssetIds": [
+        "tri-input-orthographic",
+        "tri-analysis-form"
+      ],
+      "sourceRegions": []
+    }
+  ],
+  "stages": [
+    {
+      "id": "01-intake",
+      "revision": 1,
+      "status": "draft",
+      "artifactIds": [
+        "tri-input-orthographic",
+        "tri-input-exploded"
+      ],
+      "inputDigest": "cb067d8705539c330949863f5ebdc5e82ec182fa32f0a6ac662addd5644332ca",
+      "outputDigest": "cb067d8705539c330949863f5ebdc5e82ec182fa32f0a6ac662addd5644332ca",
+      "validations": [],
+      "decision": null
+    },
+    {
+      "id": "02-analysis",
+      "revision": 1,
+      "status": "stale",
+      "artifactIds": [
+        "tri-analysis-form"
+      ],
+      "inputDigest": "cb067d8705539c330949863f5ebdc5e82ec182fa32f0a6ac662addd5644332ca",
+      "outputDigest": "a3d12fec3d754d018a908d7b835bfcd8598c69a31a394f8d022aaded642aba40",
+      "validations": [],
+      "decision": null,
+      "staleReason": "素材文件哈希或存在状态发生变化。"
+    },
+    {
+      "id": "03-contract",
+      "revision": 1,
+      "status": "stale",
+      "artifactIds": [
+        "tri-contract-design-bible"
+      ],
+      "inputDigest": "a3d12fec3d754d018a908d7b835bfcd8598c69a31a394f8d022aaded642aba40",
+      "outputDigest": "be5c3c8f641062aae49b2a78cd5347741f77510ee5b3e37ffb25355aa7dd60dc",
+      "validations": [],
+      "decision": null,
+      "staleReason": "素材文件哈希或存在状态发生变化。"
+    },
+    {
+      "id": "04-architecture",
+      "revision": 1,
+      "status": "stale",
+      "artifactIds": [
+        "tri-part-tree",
+        "tri-exploded-plan"
+      ],
+      "inputDigest": "be5c3c8f641062aae49b2a78cd5347741f77510ee5b3e37ffb25355aa7dd60dc",
+      "outputDigest": "17f46e5224b727205c7cd4dec1e3828d2303106fbc0fdcf8f5efc9e864985866",
+      "validations": [],
+      "decision": null,
+      "staleReason": "上游 03-contract 的素材发生变化。"
+    },
+    {
+      "id": "05-blockout",
+      "revision": 1,
+      "status": "stale",
+      "artifactIds": [
+        "tri-blend-source",
+        "tri-legacy-blender-hero"
+      ],
+      "inputDigest": "17f46e5224b727205c7cd4dec1e3828d2303106fbc0fdcf8f5efc9e864985866",
+      "outputDigest": "faac620ebee8527eaa9a147436572c999fc560a910f3c7754f6747cbbd4309b8",
+      "validations": [],
+      "decision": null,
+      "staleReason": "上游 03-contract 的素材发生变化。"
+    },
+    {
+      "id": "06-geometry",
+      "revision": 1,
+      "status": "stale",
+      "artifactIds": [
+        "tri-geometry-top"
+      ],
+      "inputDigest": "faac620ebee8527eaa9a147436572c999fc560a910f3c7754f6747cbbd4309b8",
+      "outputDigest": "cfbdb1cd74a3d195fe10c145faffa90b47be8740477c5b482e30a812aa276415",
+      "validations": [],
+      "decision": null,
+      "staleReason": "上游 03-contract 的素材发生变化。"
+    },
+    {
+      "id": "07-material",
+      "revision": 1,
+      "status": "stale",
+      "artifactIds": [],
+      "inputDigest": "cfbdb1cd74a3d195fe10c145faffa90b47be8740477c5b482e30a812aa276415",
+      "outputDigest": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "validations": [],
+      "decision": null,
+      "staleReason": "上游 03-contract 的素材发生变化。"
+    },
+    {
+      "id": "08-lighting",
+      "revision": 1,
+      "status": "stale",
+      "artifactIds": [],
+      "inputDigest": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "outputDigest": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "validations": [],
+      "decision": null,
+      "staleReason": "上游 03-contract 的素材发生变化。"
+    },
+    {
+      "id": "09-environment",
+      "revision": 1,
+      "status": "stale",
+      "artifactIds": [],
+      "inputDigest": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "outputDigest": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "validations": [],
+      "decision": null,
+      "staleReason": "上游 03-contract 的素材发生变化。"
+    },
+    {
+      "id": "10-export",
+      "revision": 1,
+      "status": "stale",
+      "artifactIds": [
+        "tri-fbx",
+        "tri-glb",
+        "tri-collision"
+      ],
+      "inputDigest": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "outputDigest": "8883135e2ab1b4f1fd46b822654cc93a054229b4c34bab3ce7cf7a209d1c67dd",
+      "validations": [],
+      "decision": null,
+      "staleReason": "上游 03-contract 的素材发生变化。"
+    },
+    {
+      "id": "11-unity-parity",
+      "revision": 1,
+      "status": "missing",
+      "artifactIds": [],
+      "inputDigest": "8883135e2ab1b4f1fd46b822654cc93a054229b4c34bab3ce7cf7a209d1c67dd",
+      "outputDigest": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "validations": [],
+      "decision": null,
+      "staleReason": "上游 03-contract 的素材发生变化。"
+    },
+    {
+      "id": "12-shipping",
+      "revision": 1,
+      "status": "stale",
+      "artifactIds": [
+        "tri-shipping-hero",
+        "tri-shipping-top",
+        "tri-shipping-left",
+        "tri-shipping-right",
+        "tri-shipping-low",
+        "tri-shipping-phone"
+      ],
+      "inputDigest": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "outputDigest": "5554ca8572b517bcb8d901f4c0e62ca589b5c807be7849b8a7c2ecababa24fcf",
+      "validations": [],
+      "decision": null,
+      "staleReason": "上游 03-contract 的素材发生变化。"
+    }
+  ],
+  "issues": []
+}

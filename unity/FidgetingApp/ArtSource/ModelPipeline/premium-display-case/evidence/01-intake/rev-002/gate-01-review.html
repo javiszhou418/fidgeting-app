@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Premium Display Case · Gate 01 · Rev 2</title>
+  <style>
+    * { box-sizing: border-box; }
+    html, body { margin: 0; width: 100%; height: 100%; background: #0a0b0d; color: #f5f5f3; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", sans-serif;
+      padding: 46px 54px;
+    }
+    header { display: flex; justify-content: space-between; align-items: end; margin-bottom: 28px; }
+    h1 { margin: 0; font-size: 34px; font-weight: 720; }
+    .stage { color: #b3b8c0; font-size: 21px; }
+    main { display: grid; grid-template-columns: 0.92fr 1.08fr; gap: 34px; }
+    figure { margin: 0; }
+    .baseline {
+      width: 100%;
+      height: 865px;
+      object-fit: contain;
+      background: #111318;
+      border: 1px solid #30343b;
+    }
+    figcaption { margin-top: 13px; color: #c2c6cc; font-size: 18px; line-height: 1.45; }
+    aside { display: flex; flex-direction: column; gap: 20px; }
+    .crops { display: grid; grid-template-columns: 1.12fr 0.88fr; gap: 16px; }
+    .crop-card { margin: 0; }
+    .crop {
+      position: relative;
+      height: 330px;
+      overflow: hidden;
+      background: #14161a;
+      border: 2px solid #6e4a4a;
+    }
+    .crop img { position: absolute; max-width: none; transform-origin: top left; }
+    .label-crop img { width: 2898px; height: 2769px; left: -820px; top: -98px; }
+    .seam-crop img { width: 2016px; height: 1926px; left: -48px; top: -50px; }
+    .crop-card figcaption { color: #f0d8d8; font-size: 19px; font-weight: 650; }
+    .requirements { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
+    section { border-top: 2px solid #343840; padding-top: 14px; }
+    h2 { margin: 0 0 10px; font-size: 21px; }
+    p { margin: 0; color: #c5c9cf; font-size: 18px; line-height: 1.5; }
+    .question {
+      margin-top: auto;
+      padding: 18px 20px;
+      background: #181a1f;
+      border: 1px solid #3a3e46;
+      font-size: 21px;
+      line-height: 1.45;
+    }
+    .question small { display: block; margin-top: 7px; color: #aeb3bb; font-size: 17px; }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Premium Display Case · Gate 01 · Rev 2</h1>
+    <div class="stage">用户纠正后的输入范围</div>
+  </header>
+  <main>
+    <figure>
+      <img class="baseline" src="file:///Users/jiawei.zhou/Documents/Fidgeting%20app/unity/FidgetingApp/Docs/DesignBibleAssets/collector-slab-six-products-approved.png" alt="当前六款 Collector Slab 基线">
+      <figcaption>
+        当前基线仅作为问题来源保留，不再整体验收。背景、标签可读性和连续圆角外框必须重新设计并逐关预览。
+      </figcaption>
+    </figure>
+    <aside>
+      <div class="crops">
+        <figure class="crop-card">
+          <div class="crop label-crop">
+            <img src="file:///Users/jiawei.zhou/Documents/Fidgeting%20app/unity/FidgetingApp/Docs/DesignBibleAssets/collector-slab-six-products-approved.png" alt="">
+          </div>
+          <figcaption>问题 A：产品名、Logo 与雪花成就标记在手机构图中不可读</figcaption>
+        </figure>
+        <figure class="crop-card">
+          <div class="crop seam-crop">
+            <img src="file:///Users/jiawei.zhou/Documents/Fidgeting%20app/unity/FidgetingApp/Docs/DesignBibleAssets/collector-slab-six-products-approved.png" alt="">
+          </div>
+          <figcaption>问题 B：四边像独立零件拼接，角部不连续</figcaption>
+        </figure>
+      </div>
+      <div class="requirements">
+        <section>
+          <h2>背景材质</h2>
+          <p>从平色改为低饱和、真实、克制的磨砂／摩擦表面。纹理必须连续，不能是局部噪点或径向晕。</p>
+        </section>
+        <section>
+          <h2>信息可读性</h2>
+          <p>重新分配标签字号、行距和留白。产品名、Logo 与雪花成就标记必须在 phone hero 中可辨认。</p>
+        </section>
+        <section>
+          <h2>连续外框</h2>
+          <p>外框改为视觉上一体的连续周边。四个角必须由相切圆角连接，不能保留四条独立直边的断缝。</p>
+        </section>
+      </div>
+      <div class="question">
+        Gate 01 Rev 2 只确认：这三项是否完整、准确地表达了你刚才指出的问题？
+        <small>批准后，Gate 02 会先给背景材质、标签可读性和连续圆角的视觉分析板；不会直接跳到最终模型。</small>
+      </div>
+    </aside>
+  </main>
+</body>
+</html>

@@ -1,0 +1,144 @@
+{
+  "modelId": "magnetic-fan-card",
+  "gate": "12-shipping",
+  "assets": {
+    "shipping-library.png": {
+      "source": "Artifacts/FanCardMaterialPreview/fan-card-library-centered.png",
+      "sha256": "a6ac692af7f21e8cc9b856d4f6ef9539ce57feded7481a46d3ae4ff6ba7db288",
+      "dimensions": [
+        900,
+        1600
+      ],
+      "sizeBytes": 2207319
+    },
+    "shipping-hero.png": {
+      "source": "Artifacts/FanCardMaterialPreview/fan-card-hero.png",
+      "sha256": "582a0cdb55598a67e196985400df7400546494922bb42ec42dffb6af6ec10ab9",
+      "dimensions": [
+        900,
+        1600
+      ],
+      "sizeBytes": 2171131
+    },
+    "shipping-top.png": {
+      "source": "Artifacts/FanCardMaterialPreview/fan-card-top.png",
+      "sha256": "92c4fd774764b270cc53fbb9f915c6d9ef013d5f15d8b9e0a438bdf0fd8bbdde",
+      "dimensions": [
+        900,
+        1600
+      ],
+      "sizeBytes": 2078242
+    },
+    "shipping-left-oblique.png": {
+      "source": "Artifacts/FanCardMaterialPreview/fan-card-left.png",
+      "sha256": "b3040cda5b6c7d752233e0f1552393b5416672f33a06b86ea40d173cdc91da80",
+      "dimensions": [
+        900,
+        1600
+      ],
+      "sizeBytes": 2201173
+    },
+    "shipping-right-oblique.png": {
+      "source": "Artifacts/FanCardMaterialPreview/fan-card-right.png",
+      "sha256": "33e8670e2e5e2f6140f11751a90cbe19fa3f6f4857dde4695298512c33f440f7",
+      "dimensions": [
+        900,
+        1600
+      ],
+      "sizeBytes": 2217027
+    },
+    "shipping-low.png": {
+      "source": "Artifacts/FanCardMaterialPreview/fan-card-low.png",
+      "sha256": "333690fa1bb370b2f6e59ffad4c0b47910a5c292170895e50a528497249d1b9f",
+      "dimensions": [
+        1200,
+        900
+      ],
+      "sizeBytes": 1672567
+    },
+    "shipping-phone.png": {
+      "source": "unity/FidgetingApp/Artifacts/GachaPackShippingNativePreview/01-storefront-pack-entry.png",
+      "sha256": "4fe7520bbf7b9f6f44330e5c19b20fe23af193c32192e1fff13dbb979e8b354d",
+      "dimensions": [
+        1206,
+        2622
+      ],
+      "sizeBytes": 2610922
+    },
+    "shipping-back.png": {
+      "source": "Artifacts/FanCardMaterialPreview/fan-card-back.png",
+      "sha256": "f20c708c7fb817084a0346e8b4af2fad0f6eea8176f74303fb606df48f62ff5e",
+      "dimensions": [
+        900,
+        1600
+      ],
+      "sizeBytes": 2024258
+    },
+    "shipping-track-closeup.png": {
+      "source": "Artifacts/FanCardMaterialPreview/fan-card-back-track-closeup.png",
+      "sha256": "026b2b99a74e20d6ad479e3c76892a919dce9108ae09d394899cb75a499697c9",
+      "dimensions": [
+        1200,
+        900
+      ],
+      "sizeBytes": 1026290
+    },
+    "shipping-review-contact-sheet.png": {
+      "source": "generated from Gate 12 evidence",
+      "sha256": "d94a042c933bd4ce02d8289b5c4646cdd938f4d45bc32670dfa3eee215989a96",
+      "dimensions": [
+        2400,
+        1440
+      ],
+      "sizeBytes": 1528571
+    },
+    "shipping-mechanism-contact-sheet.png": {
+      "source": "generated from Gate 12 mechanism evidence",
+      "sha256": "19ea77947c621302860ef850daf0877bec1d9068f1ec0862f12797595ffafadf",
+      "dimensions": [
+        1700,
+        820
+      ],
+      "sizeBytes": 691227
+    }
+  },
+  "tests": {
+    "fan-card-acceptance-tests.xml": {
+      "source": "unity/FidgetingApp/Logs/FanCardAcceptanceTests-Gate12.xml",
+      "sha256": "ff0889bf9d9d9e31b81dc817a773b7e83bb840b9768ef3b58c856686d2d6e98b",
+      "summary": {
+        "total": 22,
+        "passed": 22,
+        "failed": 0,
+        "skipped": 0,
+        "result": "Passed"
+      }
+    },
+    "gacha-storefront-integration-tests.xml": {
+      "source": "unity/FidgetingApp/Logs/GachaStorefrontIntegrationTests-Gate12.xml",
+      "sha256": "4b2a7530fa712533aa33f66b6513a7eaeda07bbcf625ec225f03e42b41e2cf03",
+      "summary": {
+        "total": 3,
+        "passed": 3,
+        "failed": 0,
+        "skipped": 0,
+        "result": "Passed"
+      }
+    }
+  },
+  "guardrails": {
+    "fullValidator": "ALL PASS",
+    "trackClearanceMm": 7.59,
+    "mechanismFbxRebuilt": true
+  },
+  "banner": {
+    "assetName": "product-banner-magnetic-fan-card",
+    "sourceRevision": "09-environment/rev-005",
+    "aspectPolicy": "scaledToFit at 1179:654",
+    "screenSpaceParticles": 0
+  },
+  "built": false,
+  "installed": false,
+  "deviceValidated": false,
+  "visualApprovalPending": true
+}

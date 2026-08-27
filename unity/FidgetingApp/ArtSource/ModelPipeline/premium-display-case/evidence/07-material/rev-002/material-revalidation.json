@@ -1,0 +1,653 @@
+{
+  "schemaVersion": 1,
+  "modelId": "premium-display-case",
+  "gate": "07-material",
+  "materialRevision": 2,
+  "status": "pass",
+  "notice": "READY FOR MATERIAL REVIEW \u00b7 NOT APPROVED \u00b7 GATE 08 BLOCKED",
+  "pipelineRevisionAtBuild": 61,
+  "sourceGate06": {
+    "geometryRevision": 3,
+    "approval": {
+      "approvedRevision": 3,
+      "userApprovalQuote": "\u6b63\u786e\uff0c\u6279\u51c6\u5e76\u7ee7\u7eed\uff08\u63a8\u8350\uff09",
+      "approvalScope": [
+        "current-gate06-geometry-rev3",
+        "geometry-unchanged",
+        "presentation-root-rigid-whole-case",
+        "caller-owned-static-content-slot",
+        "whole-case-only",
+        "no-exploded-review",
+        "no-light-proxy-or-toy-geometry"
+      ],
+      "approvalEffect": "locks-unchanged-geometry-and-presentation-root-rigid-whole-case-ownership",
+      "reviewedArtifactId": "premium-display-case-geometry-interactive-review-r003",
+      "reviewedArtifactSha256": "9297edb9dbd8d1f0c6c769324e7f1f12f228deae7c67c13e06c2fe4f098def2d",
+      "governingContractId": "premium-display-case-modeling-contract-r003",
+      "governingContractSha256": "1aea4db5fb45e61b936c5145d83d39a2e2a4abfe000dddb46cfdb200f76023f3",
+      "parameterSnapshotId": "premium-display-case-geometry-revalidation-r003",
+      "parameterSnapshotSha256": "14e513550d35a47abd86249d51640fceb33e1c829f65ff11a5ca83ddcccb0702",
+      "completedChecklist": [
+        "orbit-whole-case",
+        "inspect-six-fixed-directions",
+        "toggle-wireframe",
+        "confirm-presentation-root-rigid-ownership",
+        "confirm-no-exploded-review"
+      ],
+      "interactionMode": "interactive-glb-plus-review-board",
+      "reviewedAt": "2026-08-26T16:06:10.285Z",
+      "reviewDevice": "Cursor IDE desktop",
+      "gate07Status": "eligible"
+    },
+    "blendPath": "unity/FidgetingApp/ArtSource/ModelPipeline/premium-display-case/evidence/06-geometry/rev-003/premium-display-case-geometry-r003.blend",
+    "sha256": "e0fec2a57fa01c8842e8a652b7ae327f388233d2cbd49c1620b249a0ccec3326",
+    "geometryIdentity": {
+      "objectMatrixDigest": "34d52e8980dbbffc5573523b80de9a47d145a49bb22ae95f8d7c1b38e393d588",
+      "vertexPositionDigest": "ced0edf95f8fa6416c5a0e33ebf8dc99fdafcdb3beceac85ee2970bbb2a7682c",
+      "silhouetteDigest": "81615c0e5afd59b634dfa2e85040b31b30b9d5ef0ddc9e12462f1b3d1c59f6b4",
+      "silhouetteDigestMethod": "six-orthographic orientation-insensitive projected-face point sets",
+      "topologyWindingDigest": "c29bc1dd8c0f0c52fd4c70d102bcfc2b4007e579795b605adeb21611a3bf7c79",
+      "fullGeometryDigest": "a3d1e9fe3c6d26c957c7ad1584cc489b9091a1a79e435a660aa89bcf6acc3951",
+      "perObject": {
+        "ContinuousTubePerimeter": {
+          "objectMatrixDigest": "10e4e4078bbe630ffa334f35119efc17e11af5ad9651cf85c7e0d34cc7566e58",
+          "vertexPositionDigest": "68db3db78f2891c1e592d4a1b2b706fd2e7145a828b59fcb8a0ac64f76037ae2",
+          "silhouetteDigest": "bcf0e1b0cd81a575ae36df7c7d2f913f39cb2698135ec4046d16ff0b2bd0059d",
+          "topologyWindingDigest": "5500cba4412f6a6882ebef7c52394f983ff0dff20d82513a15fad4bc65d31f5d",
+          "fullGeometryDigest": "988f98d73da6c323acf4ab7fd502b0702ec015e036120e28bf30bab6cd912beb"
+        },
+        "FrontPolycarbonateShell": {
+          "objectMatrixDigest": "2820c8d6c8bdfbbb82b42b4b7d43e0fc54ad4c4390d17d5e5270f5c4b65ebae2",
+          "vertexPositionDigest": "18d2cb410e45d861c419cce32f4b8ad4f67a5e92c1c32588b2199fb1c0abdfb1",
+          "silhouetteDigest": "94fe85d2cad49f7c49beb6fec411f6be21cd1a6c962af6b3772757546b54c5ae",
+          "topologyWindingDigest": "d88077776cd98184dbba6b1bb6eac9f8ffe6f32c1e30134040d273cb7f2f7ea6",
+          "fullGeometryDigest": "c9b33964b1a60d94bc5ec34f9143efb0ce8a1ffed1e6f02ad70bab98b8ef69ac"
+        },
+        "PhysicalLabel": {
+          "objectMatrixDigest": "c3ace59d4367c93e80ca6e2b0a0363f137e3b93d4c6ce516e2e71887a612a413",
+          "vertexPositionDigest": "290c74d829df3dc25931786df21bf94bf88231f3a83f4b80d6ba94bdc9cc9f8a",
+          "silhouetteDigest": "7ee89748594628e030d9b37c7cb74981d0460f2a1b348128eac6586b82799af8",
+          "topologyWindingDigest": "2d36369c367ebb98a68362c4b387568646e48cf559557f28751511dbd966e379",
+          "fullGeometryDigest": "cebc2249a6f03eaa4f2a79f4462e590b510ae6102091660ca7f2ab540464af45"
+        },
+        "RearPolycarbonateShell": {
+          "objectMatrixDigest": "9895d4b3696173d8b8a31b2ad7316afe1ffeec56164ef615dfaab40d6f0c96ed",
+          "vertexPositionDigest": "8878e8059e28b496928670d8a14c2629e245a0fc51f481b4eaf3942c100802f4",
+          "silhouetteDigest": "5c718443c33c4afd616db63cbcb753cfd4902934f35414153f89bd29c39b9591",
+          "topologyWindingDigest": "d492353dd904965c5f2012776ceda6631fb03837c0ca631e4aa163376364da43",
+          "fullGeometryDigest": "1ccfcaae510d1fc62fd7fbe14ed34ec16e51cbacb98641a6817bed4a967899e7"
+        },
+        "TactileBackgroundInsert": {
+          "objectMatrixDigest": "cc249bc11072cbf005463c6dcf77f0b58192a141f893d99337c8c1e38af1f943",
+          "vertexPositionDigest": "9699e2d8bf4ffdfa32a07df9f80e45691effd34764eee1c48ba799f7c10fcc64",
+          "silhouetteDigest": "41782e9fd6a9dd980f7f7fc2830f575615f2bd3e8eb31bc8f0820f9c3bb82b89",
+          "topologyWindingDigest": "1e961e7a2d13ef8915ac230113a745d431507879fe38c63cb70168f922d33602",
+          "fullGeometryDigest": "8e7d0ff44ab456ad3c2dda8bbd29fb7e6de2dccd42e9ff66ba561ed6a102575e"
+        }
+      }
+    },
+    "boundsMm": {
+      "minimumMm": [
+        -114.0,
+        -152.0,
+        -29.5
+      ],
+      "maximumMm": [
+        114.0,
+        152.0,
+        29.5
+      ],
+      "sizeMm": {
+        "width": 228.0,
+        "height": 304.0,
+        "depth": 59.0
+      }
+    }
+  },
+  "sourceGate04": {
+    "architectureEvidenceRevision": 7,
+    "path": "unity/FidgetingApp/ArtSource/ModelPipeline/premium-display-case/evidence/04-architecture/rev-007/architecture.json",
+    "sha256": "d5afb4eecdb86953cb6d5c28e217e19f88becb6c0aef1316eaffac2ae630fc3e",
+    "finalSheenOwner": "Unity MaterialPropertyBlock object-local mesh mask",
+    "runtimeTimingIncluded": false,
+    "externalHalo": false,
+    "pointLight": false
+  },
+  "historicalMaterialSource": {
+    "materialRevision": 1,
+    "approvalState": "historically-approved-now-revalidated",
+    "blendPath": "unity/FidgetingApp/ArtSource/ModelPipeline/premium-display-case/evidence/07-material/rev-001/premium-display-case-material-r001.blend",
+    "sha256": "0fae324fe8ff4a94697c2a9f69458730495060f5bc4162349de5bc8064cb2fb8",
+    "materialGraphDigests": {
+      "MAT_FrostedPolycarbonate": "367f7192d2fe7465feea4b5493ed6e4479db443b0953deb7256b5f4ed08b174d",
+      "MAT_FrostedPolycarbonateEdge": "72e857dc4942fddac312d981a4e4647966e7a3b86857188e125b83a221a5245c",
+      "MAT_BlackFlocking": "9c75ac70fd96cad7e18912e507606fefe491e64750b90a6bb0ca7f992b38cf95",
+      "MAT_LabelPaper": "08ebe728abe1f1eef0be273cf3d826fc6f009f32e1cccaa1caee63cb874ac90f",
+      "MAT_RarityFoilSilver": "611cd3f82a277c4ae2bcb183056afe17eeff052ff1c8fb3e8611922fe89ec318",
+      "MAT_LabelGraphite": "ce34914f6609e7e1d9fb26c006160c27fb7f6c2fdc9f27889dd06b3ea657e7ac"
+    }
+  },
+  "materialAssignments": {
+    "RearPolycarbonateShell": "MAT_FrostedPolycarbonate",
+    "TactileBackgroundInsert": "MAT_BlackFlocking",
+    "FrontPolycarbonateShell": "MAT_FrostedPolycarbonate",
+    "ContinuousTubePerimeter": "MAT_FrostedPolycarbonateEdge",
+    "PhysicalLabel": "MAT_LabelPaper"
+  },
+  "materialParameters": {
+    "MAT_FrostedPolycarbonate": {
+      "Base Color": [
+        0.610000014,
+        0.649999976,
+        0.680000007,
+        0.100000001
+      ],
+      "Metallic": 0.0,
+      "Roughness": 0.219999999,
+      "Transmission Weight": 0.920000017,
+      "IOR": 1.585000038,
+      "Alpha": 0.100000001,
+      "Emission Strength": 0.0
+    },
+    "MAT_FrostedPolycarbonateEdge": {
+      "Base Color": [
+        0.720000029,
+        0.75,
+        0.769999981,
+        0.209999993
+      ],
+      "Metallic": 0.0,
+      "Roughness": 0.180000007,
+      "Transmission Weight": 0.779999971,
+      "IOR": 1.585000038,
+      "Alpha": 0.209999993,
+      "Emission Strength": 0.0
+    },
+    "MAT_BlackFlocking": {
+      "Base Color": [
+        0.009,
+        0.011,
+        0.014,
+        1.0
+      ],
+      "Metallic": 0.0,
+      "Roughness": 0.910000026,
+      "Transmission Weight": 0.0,
+      "IOR": 1.5,
+      "Alpha": 1.0,
+      "Emission Strength": 0.0
+    },
+    "MAT_LabelPaper": {
+      "Base Color": [
+        0.74000001,
+        0.720000029,
+        0.680000007,
+        1.0
+      ],
+      "Metallic": 0.0,
+      "Roughness": 0.730000019,
+      "Transmission Weight": 0.0,
+      "IOR": 1.5,
+      "Alpha": 1.0,
+      "Emission Strength": 0.0
+    },
+    "MAT_RarityFoilSilver": {
+      "Base Color": [
+        0.579999983,
+        0.620000005,
+        0.660000026,
+        1.0
+      ],
+      "Metallic": 0.959999979,
+      "Roughness": 0.300000012,
+      "Transmission Weight": 0.0,
+      "IOR": 1.5,
+      "Alpha": 1.0,
+      "Emission Strength": 0.0
+    },
+    "MAT_LabelGraphite": {
+      "Base Color": [
+        0.055,
+        0.059999999,
+        0.066,
+        1.0
+      ],
+      "Metallic": 0.0,
+      "Roughness": 0.519999981,
+      "Transmission Weight": 0.0,
+      "IOR": 1.5,
+      "Alpha": 1.0,
+      "Emission Strength": 0.0
+    }
+  },
+  "materialGraphDigestsAfter": {
+    "MAT_FrostedPolycarbonate": "367f7192d2fe7465feea4b5493ed6e4479db443b0953deb7256b5f4ed08b174d",
+    "MAT_FrostedPolycarbonateEdge": "72e857dc4942fddac312d981a4e4647966e7a3b86857188e125b83a221a5245c",
+    "MAT_BlackFlocking": "9c75ac70fd96cad7e18912e507606fefe491e64750b90a6bb0ca7f992b38cf95",
+    "MAT_LabelPaper": "08ebe728abe1f1eef0be273cf3d826fc6f009f32e1cccaa1caee63cb874ac90f",
+    "MAT_RarityFoilSilver": "611cd3f82a277c4ae2bcb183056afe17eeff052ff1c8fb3e8611922fe89ec318",
+    "MAT_LabelGraphite": "ce34914f6609e7e1d9fb26c006160c27fb7f6c2fdc9f27889dd06b3ea657e7ac"
+  },
+  "objectLocalGrain": {
+    "MAT_FrostedPolycarbonate": {
+      "coordinateSpace": "object-local",
+      "featureSizeMm": 0.62,
+      "bumpDistanceMm": 0.03,
+      "worldSpace": false
+    },
+    "MAT_FrostedPolycarbonateEdge": {
+      "coordinateSpace": "object-local",
+      "featureSizeMm": 0.58,
+      "bumpDistanceMm": 0.025,
+      "worldSpace": false
+    },
+    "MAT_BlackFlocking": {
+      "coordinateSpace": "object-local",
+      "featureSizeMm": 0.48,
+      "bumpDistanceMm": 0.16,
+      "worldSpace": false
+    },
+    "MAT_LabelPaper": {
+      "coordinateSpace": "object-local",
+      "featureSizeMm": 0.44,
+      "bumpDistanceMm": 0.04,
+      "worldSpace": false
+    },
+    "MAT_RarityFoilSilver": {
+      "coordinateSpace": "object-local",
+      "featureSizeMm": 0.38,
+      "bumpDistanceMm": 0.02,
+      "worldSpace": false
+    },
+    "MAT_LabelGraphite": {
+      "coordinateSpace": "object-local",
+      "featureSizeMm": 0.42,
+      "bumpDistanceMm": 0.025,
+      "worldSpace": false
+    }
+  },
+  "transparentOrdering": {
+    "frontDepthOrder": [
+      "FrontPolycarbonateShell",
+      "ContinuousTubePerimeter",
+      "M07_TransparentCoverProxy",
+      "RearPolycarbonateShell"
+    ],
+    "reverseDepthOrder": [
+      "RearPolycarbonateShell",
+      "ContinuousTubePerimeter",
+      "M07_TransparentCoverProxy",
+      "FrontPolycarbonateShell"
+    ],
+    "basis": "actual camera-space object origins; empirical image validation follows"
+  },
+  "render": {
+    "engine": "CYCLES",
+    "device": "METAL",
+    "turntableSamples": 48,
+    "closeupSamples": 96,
+    "turntableFrames": [
+      {
+        "index": 0,
+        "angleDegrees": 0,
+        "path": "unity/FidgetingApp/ArtSource/ModelPipeline/premium-display-case/evidence/07-material/rev-002/raw/turn-000.png",
+        "sha256": "a132d575582dc6494c33c39afbf21066a8c17c144123231d7405bb0f7f224b22"
+      },
+      {
+        "index": 1,
+        "angleDegrees": 15,
+        "path": "unity/FidgetingApp/ArtSource/ModelPipeline/premium-display-case/evidence/07-material/rev-002/raw/turn-001.png",
+        "sha256": "ada0fdff98a7ed468b3f29b60156568ca218374ae05139cd84aba7252aee32a6"
+      },
+      {
+        "index": 2,
+        "angleDegrees": 30,
+        "path": "unity/FidgetingApp/ArtSource/ModelPipeline/premium-display-case/evidence/07-material/rev-002/raw/turn-002.png",
+        "sha256": "e49f947c10ed38c6cddec607aa42a6b0882e64518969bdea23b0d3d81cc232ac"
+      },
+      {
+        "index": 3,
+        "angleDegrees": 45,
+        "path": "unity/FidgetingApp/ArtSource/ModelPipeline/premium-display-case/evidence/07-material/rev-002/raw/turn-003.png",
+        "sha256": "d3e7f25440a55e0f2c5f077b0163d7559521109e6cbe3f9f7ed22933e2f39793"
+      },
+      {
+        "index": 4,
+        "angleDegrees": 60,
+        "path": "unity/FidgetingApp/ArtSource/ModelPipeline/premium-display-case/evidence/07-material/rev-002/raw/turn-004.png",
+        "sha256": "04cb3b8c5c3d9a39cb0fa8436afe72e0f7ecb88ed7eb08c61c18144c4ed62b4f"
+      },
+      {
+        "index": 5,
+        "angleDegrees": 75,
+        "path": "unity/FidgetingApp/ArtSource/ModelPipeline/premium-display-case/evidence/07-material/rev-002/raw/turn-005.png",
+        "sha256": "1a5aa3bbd3ac970ebaeac833df6ef62f2d751d105922df5f3572bbd75cd9e0b1"
+      },
+      {
+        "index": 6,
+        "angleDegrees": 90,
+        "path": "unity/FidgetingApp/ArtSource/ModelPipeline/premium-display-case/evidence/07-material/rev-002/raw/turn-006.png",
+        "sha256": "0bbb4536a34d4e47af73f24a6c9f07069c39b3a727ac7f6d4f5d5ea26460e226"
+      },
+      {
+        "index": 7,
+        "angleDegrees": 105,
+        "path": "unity/FidgetingApp/ArtSource/ModelPipeline/premium-display-case/evidence/07-material/rev-002/raw/turn-007.png",
+        "sha256": "497adc1998709e45e6c6d35c0f6b1ce68aad11674e4837bf7e01292e8849d493"
+      },
+      {
+        "index": 8,
+        "angleDegrees": 120,
+        "path": "unity/FidgetingApp/ArtSource/ModelPipeline/premium-display-case/evidence/07-material/rev-002/raw/turn-008.png",
+        "sha256": "ed215ea0d06932e6d2971eaa406825afd8e716367d121136a8ad018cfc0f2bd6"
+      },
+      {
+        "index": 9,
+        "angleDegrees": 135,
+        "path": "unity/FidgetingApp/ArtSource/ModelPipeline/premium-display-case/evidence/07-material/rev-002/raw/turn-009.png",
+        "sha256": "2b7650ebadc3329bb53e169b4611318ebb43a6570d0534a64cf44992d1684dd2"
+      },
+      {
+        "index": 10,
+        "angleDegrees": 150,
+        "path": "unity/FidgetingApp/ArtSource/ModelPipeline/premium-display-case/evidence/07-material/rev-002/raw/turn-010.png",
+        "sha256": "bd7dfd0eedad9c13ce933d3d716e4765149b5e09d2ee8f4e4795aada1e355031"
+      },
+      {
+        "index": 11,
+        "angleDegrees": 165,
+        "path": "unity/FidgetingApp/ArtSource/ModelPipeline/premium-display-case/evidence/07-material/rev-002/raw/turn-011.png",
+        "sha256": "f092f862ff3f1baffff384ee9601c21d454870aa435a53b6530d98583775b9da"
+      },
+      {
+        "index": 12,
+        "angleDegrees": 180,
+        "path": "unity/FidgetingApp/ArtSource/ModelPipeline/premium-display-case/evidence/07-material/rev-002/raw/turn-012.png",
+        "sha256": "a765f202bdd5a438de1789b6a43041b860550abff601d9ba3b1dd60a808856d3"
+      },
+      {
+        "index": 13,
+        "angleDegrees": 195,
+        "path": "unity/FidgetingApp/ArtSource/ModelPipeline/premium-display-case/evidence/07-material/rev-002/raw/turn-013.png",
+        "sha256": "6383777253479c35b82ce26327f22752c54c64784b0138581c1a5446bda3c2ea"
+      },
+      {
+        "index": 14,
+        "angleDegrees": 210,
+        "path": "unity/FidgetingApp/ArtSource/ModelPipeline/premium-display-case/evidence/07-material/rev-002/raw/turn-014.png",
+        "sha256": "a89e27621ff0616dd58729836a852786936b4488541f463107024314a2c2e20a"
+      },
+      {
+        "index": 15,
+        "angleDegrees": 225,
+        "path": "unity/FidgetingApp/ArtSource/ModelPipeline/premium-display-case/evidence/07-material/rev-002/raw/turn-015.png",
+        "sha256": "5eccb598771af619d8739a491faa022a11eef26f4bccd44fc6cde680070814ff"
+      },
+      {
+        "index": 16,
+        "angleDegrees": 240,
+        "path": "unity/FidgetingApp/ArtSource/ModelPipeline/premium-display-case/evidence/07-material/rev-002/raw/turn-016.png",
+        "sha256": "c789b8e0a10d53dca8508206dafb0eee7a3514616406d2e21e24b1a64429a8ce"
+      },
+      {
+        "index": 17,
+        "angleDegrees": 255,
+        "path": "unity/FidgetingApp/ArtSource/ModelPipeline/premium-display-case/evidence/07-material/rev-002/raw/turn-017.png",
+        "sha256": "c06f26e01adab1ec6c783dcc88f8084c5f6f5282c2e070ce802e6d5df3cc035e"
+      },
+      {
+        "index": 18,
+        "angleDegrees": 270,
+        "path": "unity/FidgetingApp/ArtSource/ModelPipeline/premium-display-case/evidence/07-material/rev-002/raw/turn-018.png",
+        "sha256": "f8369ccb23323c9ed24dbffe2e25455e6736ff18f7f603545b7dc445a52ef006"
+      },
+      {
+        "index": 19,
+        "angleDegrees": 285,
+        "path": "unity/FidgetingApp/ArtSource/ModelPipeline/premium-display-case/evidence/07-material/rev-002/raw/turn-019.png",
+        "sha256": "90ef894257255232a0e01a1e96b9965ffb5ac6ed8fddc738a1ddb12a7d3b2644"
+      },
+      {
+        "index": 20,
+        "angleDegrees": 300,
+        "path": "unity/FidgetingApp/ArtSource/ModelPipeline/premium-display-case/evidence/07-material/rev-002/raw/turn-020.png",
+        "sha256": "5d446cde75494497d3f8141100685fb501410e49c5b7f93cdf983efc98c25e8c"
+      },
+      {
+        "index": 21,
+        "angleDegrees": 315,
+        "path": "unity/FidgetingApp/ArtSource/ModelPipeline/premium-display-case/evidence/07-material/rev-002/raw/turn-021.png",
+        "sha256": "a3c092f38204a533bf3ad6fb2ab46105f5c04e3753fb655130cec6dbb5d7cbb6"
+      },
+      {
+        "index": 22,
+        "angleDegrees": 330,
+        "path": "unity/FidgetingApp/ArtSource/ModelPipeline/premium-display-case/evidence/07-material/rev-002/raw/turn-022.png",
+        "sha256": "8e8d034a6e28d294484f6c415516a3e64166c8a81ec1abe3fdfd6c599101edf7"
+      },
+      {
+        "index": 23,
+        "angleDegrees": 345,
+        "path": "unity/FidgetingApp/ArtSource/ModelPipeline/premium-display-case/evidence/07-material/rev-002/raw/turn-023.png",
+        "sha256": "f70f1a14ec7313088a1dd3fa9c815bd8dfe992eadc57346c380301455efdad3d"
+      },
+      {
+        "index": 24,
+        "angleDegrees": 360,
+        "path": "unity/FidgetingApp/ArtSource/ModelPipeline/premium-display-case/evidence/07-material/rev-002/raw/turn-024.png",
+        "sha256": "36dfe1ce4783dd8b6bde87f13d2bbfb96f66ea0243c3f26fe6e17795e3a7baa9"
+      }
+    ],
+    "closeups": {
+      "front": {
+        "path": "unity/FidgetingApp/ArtSource/ModelPipeline/premium-display-case/evidence/07-material/rev-002/raw/front.png",
+        "sha256": "f5a8ba5b7b144dc0ddaccf2ce12944281af5197dab6e87eb2eb5deb10a1905da",
+        "camera": "M07_RotationCamera",
+        "angleDegrees": 0,
+        "resolution": [
+          900,
+          980
+        ]
+      },
+      "edge": {
+        "path": "unity/FidgetingApp/ArtSource/ModelPipeline/premium-display-case/evidence/07-material/rev-002/raw/edge.png",
+        "sha256": "0e95c3a871d7b5a5bdc51647b07e2cd9fceaea0bac8cdaf31f2ed018bc7e445c",
+        "camera": "M07_RotationCamera",
+        "angleDegrees": 90,
+        "resolution": [
+          900,
+          980
+        ]
+      },
+      "reverse": {
+        "path": "unity/FidgetingApp/ArtSource/ModelPipeline/premium-display-case/evidence/07-material/rev-002/raw/reverse.png",
+        "sha256": "6fb4716711d73aef181762935ec79e592ac9dfe1e8f397a891acf76450451597",
+        "camera": "M07_RotationCamera",
+        "angleDegrees": 180,
+        "resolution": [
+          900,
+          980
+        ]
+      },
+      "front-return": {
+        "path": "unity/FidgetingApp/ArtSource/ModelPipeline/premium-display-case/evidence/07-material/rev-002/raw/front-return.png",
+        "sha256": "42ae55995cc49414c69415a64cc9c8aec10dc3921f8dbf23accbf1047fbe3e3f",
+        "camera": "M07_RotationCamera",
+        "angleDegrees": 360,
+        "resolution": [
+          900,
+          980
+        ]
+      },
+      "tube-corner": {
+        "path": "unity/FidgetingApp/ArtSource/ModelPipeline/premium-display-case/evidence/07-material/rev-002/raw/tube-corner.png",
+        "sha256": "a285d6552981eace191e7ae854f248753ce60ef5ca26e88ee65b78bd549d4e45",
+        "camera": "M07_TubeCornerCamera",
+        "angleDegrees": 0,
+        "resolution": [
+          1100,
+          840
+        ]
+      },
+      "label-closeup": {
+        "path": "unity/FidgetingApp/ArtSource/ModelPipeline/premium-display-case/evidence/07-material/rev-002/raw/label-closeup.png",
+        "sha256": "08e6eaccb0bb8e495ce091f5ee2796d8738fcc3bd46d6c3780b60bdcf0ae630d",
+        "camera": "M07_LabelCloseupCamera",
+        "angleDegrees": 0,
+        "resolution": [
+          1100,
+          760
+        ]
+      },
+      "tactile-closeup": {
+        "path": "unity/FidgetingApp/ArtSource/ModelPipeline/premium-display-case/evidence/07-material/rev-002/raw/tactile-closeup.png",
+        "sha256": "9e71ae412e6e7037a11453c2ac72e52e11458f535b449cb44ec3c06f8ec952b4",
+        "camera": "M07_TactileCloseupCamera",
+        "angleDegrees": 0,
+        "resolution": [
+          1100,
+          820
+        ]
+      }
+    },
+    "maskFrames": [
+      {
+        "kind": "subject",
+        "angleDegrees": 0,
+        "path": "unity/FidgetingApp/ArtSource/ModelPipeline/premium-display-case/evidence/07-material/rev-002/masks/subject-000.png",
+        "sha256": "86f0240f3332a1dea1cfdcb07270766bb2ed10d7c4e02277c02820985918d63c"
+      },
+      {
+        "kind": "sheen-eligible",
+        "angleDegrees": 0,
+        "path": "unity/FidgetingApp/ArtSource/ModelPipeline/premium-display-case/evidence/07-material/rev-002/masks/sheen-eligible-000.png",
+        "sha256": "5906e82bd176a208641a38e2d1845b4dad84f36afa4bac98c7d0455138190732"
+      },
+      {
+        "kind": "tube",
+        "angleDegrees": 0,
+        "path": "unity/FidgetingApp/ArtSource/ModelPipeline/premium-display-case/evidence/07-material/rev-002/masks/tube-000.png",
+        "sha256": "76a0edaf31fb1018b348e7612c55fa107de275ca1ecb68da85bab16992bdd0e7"
+      },
+      {
+        "kind": "subject",
+        "angleDegrees": 90,
+        "path": "unity/FidgetingApp/ArtSource/ModelPipeline/premium-display-case/evidence/07-material/rev-002/masks/subject-090.png",
+        "sha256": "433e741612106cdc6d7b7ff0e3477c024a2cdacb63661a3c64bbe82988241f64"
+      },
+      {
+        "kind": "sheen-eligible",
+        "angleDegrees": 90,
+        "path": "unity/FidgetingApp/ArtSource/ModelPipeline/premium-display-case/evidence/07-material/rev-002/masks/sheen-eligible-090.png",
+        "sha256": "2882bc0d005b171a290cb165e991ff8397fb3b0d90ac859018b5336c2aaa990c"
+      },
+      {
+        "kind": "tube",
+        "angleDegrees": 90,
+        "path": "unity/FidgetingApp/ArtSource/ModelPipeline/premium-display-case/evidence/07-material/rev-002/masks/tube-090.png",
+        "sha256": "71f79b72bad86dc0a76e2ccde55fbfeddd11539554469e15576f88eb9b95ef67"
+      },
+      {
+        "kind": "subject",
+        "angleDegrees": 180,
+        "path": "unity/FidgetingApp/ArtSource/ModelPipeline/premium-display-case/evidence/07-material/rev-002/masks/subject-180.png",
+        "sha256": "77bbf2a7af525bb7aa469662c5311680a4bc45e2f72d81a571c0b3846c34872b"
+      },
+      {
+        "kind": "sheen-eligible",
+        "angleDegrees": 180,
+        "path": "unity/FidgetingApp/ArtSource/ModelPipeline/premium-display-case/evidence/07-material/rev-002/masks/sheen-eligible-180.png",
+        "sha256": "77bbf2a7af525bb7aa469662c5311680a4bc45e2f72d81a571c0b3846c34872b"
+      },
+      {
+        "kind": "tube",
+        "angleDegrees": 180,
+        "path": "unity/FidgetingApp/ArtSource/ModelPipeline/premium-display-case/evidence/07-material/rev-002/masks/tube-180.png",
+        "sha256": "448d20b05cd5574cec87cb4af7582006588bb128d4445c2c20ea1d6faeea5b47"
+      },
+      {
+        "kind": "subject",
+        "angleDegrees": 270,
+        "path": "unity/FidgetingApp/ArtSource/ModelPipeline/premium-display-case/evidence/07-material/rev-002/masks/subject-270.png",
+        "sha256": "53bf3fc47ad2178a64012a8f14bfca59e2c05e14ef52dfb1e469fa8f12ed2a11"
+      },
+      {
+        "kind": "sheen-eligible",
+        "angleDegrees": 270,
+        "path": "unity/FidgetingApp/ArtSource/ModelPipeline/premium-display-case/evidence/07-material/rev-002/masks/sheen-eligible-270.png",
+        "sha256": "4eb5942d761385df4028cfd3f223b590d462fc5dd5f2bdc28f4d366bce3b940c"
+      },
+      {
+        "kind": "tube",
+        "angleDegrees": 270,
+        "path": "unity/FidgetingApp/ArtSource/ModelPipeline/premium-display-case/evidence/07-material/rev-002/masks/tube-270.png",
+        "sha256": "a02153339002772ce26d5e200b9e345a293fc0f56a789932fcb765d7c1201457"
+      },
+      {
+        "kind": "subject",
+        "angleDegrees": 360,
+        "path": "unity/FidgetingApp/ArtSource/ModelPipeline/premium-display-case/evidence/07-material/rev-002/masks/subject-360.png",
+        "sha256": "e280dbe2eb2a6433dfab42d474bd4d30f31e9b59c0683599cb1d08bc30150f84"
+      },
+      {
+        "kind": "sheen-eligible",
+        "angleDegrees": 360,
+        "path": "unity/FidgetingApp/ArtSource/ModelPipeline/premium-display-case/evidence/07-material/rev-002/masks/sheen-eligible-360.png",
+        "sha256": "e280dbe2eb2a6433dfab42d474bd4d30f31e9b59c0683599cb1d08bc30150f84"
+      },
+      {
+        "kind": "tube",
+        "angleDegrees": 360,
+        "path": "unity/FidgetingApp/ArtSource/ModelPipeline/premium-display-case/evidence/07-material/rev-002/masks/tube-360.png",
+        "sha256": "85b6a58bc82b3c835f0791d8defb251d7666c03bac2e4f77476f53f79df940f0"
+      }
+    ],
+    "neutralReviewEnvironmentOnly": true,
+    "gate08FinalLighting": false
+  },
+  "scope": {
+    "wholeAssembledCaseOnly": true,
+    "reviewExplodedPartCount": 0,
+    "toyChanged": false,
+    "geometryChanged": false,
+    "runtimeTimingBaked": false,
+    "lightGeometryAdded": false,
+    "externalHalo": false,
+    "particles": false,
+    "vfxGraph": false,
+    "bloomDependency": false,
+    "persistentEmission": false,
+    "shippingUnityChanged": false,
+    "buildInstallPhonePush": false
+  },
+  "checks": {
+    "gate06Rev3Approved": true,
+    "gate04Rev7Approved": true,
+    "sourceGate06ReportPassed": true,
+    "sourceGate06BlendUnchanged": true,
+    "priorMaterialBlendUnchanged": true,
+    "geometryIdentityMatchesGate06": true,
+    "geometryIdentityUnchanged": true,
+    "boundsUnchanged": true,
+    "assignmentsPreserved": true,
+    "materialGraphsStable": true,
+    "historicalParametersCompatible": true,
+    "objectLocalGrain": true,
+    "principledOnly": true,
+    "zeroPersistentEmission": true,
+    "transparentDielectrics": true,
+    "neutralFoilPreserved": true,
+    "noPointLights": true,
+    "noBloomDependency": true,
+    "noRuntimeAnimation": true,
+    "contentSlotCallerOwnedEmpty": true,
+    "wholeCaseOnly": true,
+    "forbiddenIdentityExcluded": true,
+    "turntableCardinalsPresent": true,
+    "maskCardinalsPresent": true,
+    "shippingUnityUnchanged": true
+  },
+  "blender": "5.2.0 LTS",
+  "outputBlend": "unity/FidgetingApp/ArtSource/ModelPipeline/premium-display-case/evidence/07-material/rev-002/premium-display-case-material-r002.blend",
+  "outputBlendSha256": "076f5dd07f8e611ceaaabb7d1a92790659a7fcf9c1dd04dcd8e1fc7e9684dd49"
+}

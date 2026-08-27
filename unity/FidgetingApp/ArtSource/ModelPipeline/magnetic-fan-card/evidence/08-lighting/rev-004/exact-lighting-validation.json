@@ -1,0 +1,49 @@
+{
+  "geometry": {
+    "cardThicknessMm": 3.5,
+    "cornerRadiusMm": 9.5,
+    "blackBorderMm": 1.0,
+    "goldTrimMm": 0.8,
+    "goldTrimBevelMm": 0.38
+  },
+  "renderer": {
+    "backend": "Cycles",
+    "device": "Apple M4 Max (GPU - 40 cores)"
+  },
+  "samples": 48,
+  "denoising": true,
+  "camera": {
+    "lensMm": 80,
+    "heroElevationDegrees": 32,
+    "heroAzimuthDegrees": -35
+  },
+  "light": {
+    "keyKelvin": 5000,
+    "keySizeMm": 350,
+    "keyToFill": "5:1"
+  },
+  "heroVariants": {
+    "A-dark-walnut": "hero-A-dark-walnut.png",
+    "B-charcoal-hard-case": "hero-B-charcoal-hard-case.png",
+    "C-cork-slab": "hero-C-cork-slab.png"
+  },
+  "angleVariants": {
+    "left-oblique": "left-oblique.png",
+    "right-oblique": "right-oblique.png",
+    "low-angle": "low-angle.png",
+    "top-oblique": "top-oblique.png"
+  },
+  "diagnostics": [
+    "beauty",
+    "clay",
+    "normal",
+    "roughness"
+  ],
+  "shippingAssetModified": false,
+  "visibleCornerSegmentsPerQuadrant": 72,
+  "normalPolicy": {
+    "sideAndBevel": "smooth",
+    "planarCaps": "hard"
+  },
+  "lightingChanged": false
+}

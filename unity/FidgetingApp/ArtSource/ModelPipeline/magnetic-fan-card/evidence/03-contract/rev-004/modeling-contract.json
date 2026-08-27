@@ -1,0 +1,87 @@
+{
+  "schemaVersion": 1,
+  "modelId": "magnetic-fan-card",
+  "contractRevision": 4,
+  "status": "visual-geometry-selection",
+  "supersedes": "contract revision 3 dimensions",
+  "sourceClaimIds": [
+    "fan-analysis-claim-shared-camera",
+    "fan-analysis-claim-real-contact",
+    "fan-analysis-claim-light-field",
+    "fan-analysis-claim-material-zones",
+    "fan-analysis-claim-three-support-variants"
+  ],
+  "unchanged": {
+    "cardWidthMm": 63.5,
+    "cardHeightMm": 88.9,
+    "airGapMm": 1.0,
+    "layerAnglesDegrees": [
+      0,
+      45,
+      90
+    ],
+    "rankOrder": [
+      "Q",
+      "K",
+      "A"
+    ],
+    "camera": "80 mm at 32 degrees",
+    "light": "5000 K, 350 mm, 5:1",
+    "frontArtwork": "no decorative dots; no visible followers",
+    "surface": "medium bead-blast warm silver"
+  },
+  "visualSelections": {
+    "cardThicknessMm": {
+      "options": [
+        2.5,
+        3.5,
+        4.5
+      ],
+      "selected": null
+    },
+    "cornerRadiusMm": {
+      "options": [
+        3.81,
+        6.35,
+        9.5
+      ],
+      "selected": null
+    },
+    "blackBorderMm": {
+      "options": [
+        0.5,
+        1.0,
+        1.5
+      ],
+      "selected": null
+    },
+    "goldTrim": {
+      "options": [
+        {
+          "widthMm": 0.0,
+          "bevelMm": 0.0
+        },
+        {
+          "widthMm": 0.45,
+          "bevelMm": 0.18
+        },
+        {
+          "widthMm": 0.8,
+          "bevelMm": 0.38
+        }
+      ],
+      "selected": null
+    }
+  },
+  "evidence": {
+    "source": "model_change_sweep.py",
+    "report": "model-change-sweep/model-change-sweep.json",
+    "contactSheets": [
+      "model-change-sweep/thickness-contact-sheet.png",
+      "model-change-sweep/radius-contact-sheet.png",
+      "model-change-sweep/border-contact-sheet.png",
+      "model-change-sweep/gold-trim-contact-sheet.png"
+    ]
+  },
+  "shippingAssetModified": false
+}

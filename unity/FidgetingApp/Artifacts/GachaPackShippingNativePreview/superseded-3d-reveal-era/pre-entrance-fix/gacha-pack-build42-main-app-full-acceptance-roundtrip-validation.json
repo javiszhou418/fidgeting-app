@@ -1,0 +1,48 @@
+{
+  "feature": "Build 42: root-caused and fixed the Rive holder disappearing-card bug, real carousel grow/exit transition, storefront text/banner/tab simplification",
+  "sourceCommit": "c5299712fe8dadf5d9da76fdc85a6479a3099bda",
+  "branch": "codex/gacha-build42",
+  "buildManifest": {
+    "bundleIdentifier": "com.jiaweizhou.fidgetspinner.codex",
+    "buildNumber": "42",
+    "sdk": "SimulatorSDK",
+    "gachaMode": "internalUnlimited"
+  },
+  "simulator": {
+    "device": "GachaRoundTripDevice2 (iPhone 17 Pro, iOS 26.4 runtime)",
+    "udid": "D337403C-60AD-46C1-9FB1-381471EBAA39"
+  },
+  "editModeTestSuite": {
+    "totalTests": 393,
+    "passed": 393,
+    "failed": 0,
+    "resultFile": "/private/tmp/gacha-build42-bigfix-editmode-results.xml"
+  },
+  "xcuiTest": {
+    "target": "FidgetingGachaGestureUITests/FullAcceptanceRoundTripUITests/testLibraryToAcceptedPrizeRoundTrip",
+    "result": "passed",
+    "xcresultPath": "/private/tmp/gacha-pack-build42-full-acceptance.xcresult",
+    "ownedCountBefore": 0,
+    "ownedCountAfter": 1,
+    "totalDrawsBefore": 0,
+    "totalDrawsAfter": 1
+  },
+  "changesThisRound": [
+    "Rive holder disappearing-card bug: root-caused via direct C++ parsing of the .riv file's actual keyframe/state-machine data (not guesswork). The artboard's own authored timeline settles its reveal (position/rotation/scale converge) by ~0.48s, then spends the rest of its ~3.5s runtime on a decorative tail that ends by fading the whole card to invisible between ~3.15s-3.5s. The old completion signal (state machine 'in'->'Idle' cycle) only fired at that full ~3.5s mark -- after the fade already played -- so the card always looked broken/vanished by the time anything treated it as 'done'. GachaRivePlaybackCoordinator now takes a settleHoldSeconds parameter and freezes the magnetic-holder layers ~0.55s after triggering playback, catching the fully-revealed frame before the fade-out runs. VERIFIED via real frame captures at three separate timestamps (t+~4.5s, +7.5s, +8.5s after the holder first appears) showing the identical, fully-visible card each time -- it no longer disappears.",
+    "Pack-tier carousel confirm now has a real choreographed exit: tapping 'select <tier>' grows the selected pack in place while the header text and unselected packs fade/slide away, then hands off to the real draw after ~0.46s -- confirmed via real frame capture showing the pack visibly larger and centered with the confirm/cancel UI gone, versus an instant cross-fade before.",
+    "Storefront header/subtitle/runtime-mode descriptive text removed; wallet chips are icon+number only (e.g. ticket icon + infinity symbol, gear icon + 0).",
+    "The stretched/over-cropped product-photo banner replaced with the app's own GachaPackVisual pack artwork (fixed 384:512 aspect, always scaledToFit) plus the real series name -- confirmed via frame capture, no distortion.",
+    "The two tab buttons ('抽取'/'收藏') now use real Liquid Glass (.productGlass, .glassEffect on this iOS 26.4 simulator) visually distinct from the solid-white primary CTA below, addressing a hierarchy complaint.",
+    "Added an explicit hard-rule callout to Docs/LiquidGlassDesignGuideline.md banning non-proportional image stretching, citing this incident."
+  ],
+  "knownRemainingItems": [
+    "Rive de-branding (the yellow 'whatnot' bar) is NOT re-applied in this build -- it was reverted to the original branded asset last round after a flawed first patch, and the corrected v2 patch has not yet been re-integrated on top of this round's changes. The card in this video shows the original branded artwork.",
+    "The Rive entrance motion still cannot be literally anchored to the exact on-screen pack-tear position -- confirmed via the same investigation that no position/offset data-bind property exists in this asset; the SwiftUI-level rise animation was retimed (0.58s -> 0.5s) to better sync with the newly-measured ~0.48s internal settle point, which is the closest available approximation."
+  ],
+  "visualApprovalStatus": "pending - real Simulator capture only, not pushed to a physical iPhone; not yet explicitly re-approved by the user against this specific video",
+  "finalArtifacts": {
+    "video": "unity/FidgetingApp/Artifacts/GachaPackShippingNativePreview/gacha-pack-build42-main-app-full-acceptance-roundtrip.mp4",
+    "videoDurationSeconds": 61.81,
+    "contactSheet": "unity/FidgetingApp/Artifacts/GachaPackShippingNativePreview/gacha-pack-build42-main-app-full-acceptance-roundtrip-contact-sheet.png"
+  }
+}

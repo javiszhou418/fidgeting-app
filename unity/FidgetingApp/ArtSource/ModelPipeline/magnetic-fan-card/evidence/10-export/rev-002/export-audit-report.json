@@ -1,0 +1,115 @@
+{
+  "sourceBlend": "unity/FidgetingApp/ArtSource/ModelPipeline/magnetic-fan-card/evidence/08-lighting/rev-003/fan-card-72-segment-lighting.blend",
+  "unitSystem": "meters",
+  "unityUnitsPerMeter": 1.0,
+  "fbxAxis": {
+    "forward": "-Z",
+    "up": "Y"
+  },
+  "glbAxis": "Y-up",
+  "root": "MagneticFanCard_Root",
+  "cardHierarchy": {
+    "BottomCard": {
+      "parent": "MagneticFanCard_Root",
+      "rotationDegreesZ": 0.0
+    },
+    "MiddleCard": {
+      "parent": "MagneticFanCard_Root",
+      "rotationDegreesZ": 45.0
+    },
+    "TopCard": {
+      "parent": "MagneticFanCard_Root",
+      "rotationDegreesZ": 90.0
+    }
+  },
+  "convertedFontObjects": [
+    "BottomCard_Rank_0",
+    "BottomCard_Rank_1",
+    "MiddleCard_Rank_0",
+    "MiddleCard_Rank_1",
+    "TopCard_Rank_0",
+    "TopCard_Rank_1"
+  ],
+  "staticArtworkJoins": [
+    {
+      "card": "BottomCard",
+      "sourceObjects": 19,
+      "result": "BottomCard_BlackArtwork"
+    },
+    {
+      "card": "MiddleCard",
+      "sourceObjects": 19,
+      "result": "MiddleCard_BlackArtwork"
+    },
+    {
+      "card": "TopCard",
+      "sourceObjects": 19,
+      "result": "TopCard_BlackArtwork"
+    }
+  ],
+  "beforeOptimization": {
+    "meshObjects": 80,
+    "vertices": 35972,
+    "triangles": 69724,
+    "materials": [
+      "MAT_Chrome_Selected",
+      "MAT_Etching_Selected",
+      "MAT_Gunmetal_Selected",
+      "MAT_WarmGold_Selected",
+      "MAT_WarmSilver_Medium_Selected"
+    ],
+    "materialCount": 5
+  },
+  "afterOptimization": {
+    "meshObjects": 32,
+    "vertices": 36804,
+    "triangles": 70548,
+    "materials": [
+      "MAT_Chrome_Selected",
+      "MAT_Etching_Selected",
+      "MAT_Gunmetal_Selected",
+      "MAT_WarmGold_Selected",
+      "MAT_WarmSilver_Medium_Selected"
+    ],
+    "materialCount": 5
+  },
+  "budget": {
+    "profile": "Unity hero asset",
+    "triangleLimit": 100000,
+    "pass": true
+  },
+  "collision": {
+    "COLLIDER_BottomCard": {
+      "vertices": 72,
+      "polygons": 38,
+      "watertight": true,
+      "nonTwoFaceEdges": 0
+    },
+    "COLLIDER_MiddleCard": {
+      "vertices": 72,
+      "polygons": 38,
+      "watertight": true,
+      "nonTwoFaceEdges": 0
+    },
+    "COLLIDER_TopCard": {
+      "vertices": 72,
+      "polygons": 38,
+      "watertight": true,
+      "nonTwoFaceEdges": 0
+    }
+  },
+  "lockedInvariants": {
+    "cardDimensionsMm": [
+      63.5,
+      88.9,
+      3.5
+    ],
+    "cornerRadiusMm": 9.5,
+    "airGapMm": 1.0,
+    "trackClearanceMm": 7.59,
+    "bottomTrackCount": 0,
+    "topMiddleTrackCount": 2,
+    "followerCount": 2,
+    "productGeometryChangedByExport": false
+  }
+}

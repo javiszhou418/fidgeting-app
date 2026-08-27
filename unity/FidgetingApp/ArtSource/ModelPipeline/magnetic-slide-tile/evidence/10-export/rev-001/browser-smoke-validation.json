@@ -1,0 +1,40 @@
+{
+  "schemaVersion": 1,
+  "modelId": "magnetic-slide-tile",
+  "gate": "10-export",
+  "exportRevision": 1,
+  "desktop": {
+    "modelButtons": 7,
+    "phases": 5,
+    "title": "磁吸推牌 · Chrome Hearts",
+    "reviewTitle": "这个导出包的比例、层级与碰撞体是否正确？",
+    "reviewCards": 5,
+    "modalClose": true,
+    "escapeClose": true,
+    "backdropClose": true,
+    "browserBackClose": true
+  },
+  "gate10GlbViewer": {
+    "assetId": "magnetic-slide-tile-export-glb-r001",
+    "state": "viewer",
+    "cameraViews": 6
+  },
+  "mobile": {
+    "viewport": [390, 844],
+    "horizontalOverflow": false,
+    "sidebarAboveMain": true,
+    "phases": 5,
+    "assetColumns": 1
+  },
+  "checks": {
+    "desktopWorkbench": true,
+    "gate10ScopeCopy": true,
+    "fiveCurrentReviewCards": true,
+    "modalCloseEscapeBackdropBack": true,
+    "gate10GlbViewer": true,
+    "genericGlbViewerRegression": true,
+    "mobile390x844": true,
+    "screenshotCaptured": true
+  },
+  "pass": true
+}

@@ -1,0 +1,39 @@
+{
+  "schemaVersion": 1,
+  "modelId": "premium-display-case",
+  "gate": "06-geometry",
+  "geometryRevision": 3,
+  "purpose": "interactive-review-only-not-gate10-export",
+  "sourceBlend": "unity/FidgetingApp/ArtSource/ModelPipeline/premium-display-case/evidence/06-geometry/rev-003/premium-display-case-geometry-r003.blend",
+  "sourceBlendSha256": "e0fec2a57fa01c8842e8a652b7ae327f388233d2cbd49c1620b249a0ccec3326",
+  "reviewGlb": "unity/FidgetingApp/ArtSource/ModelPipeline/premium-display-case/evidence/06-geometry/rev-003/premium-display-case-gate06-review-r003.glb",
+  "reviewGlbSha256": "9297edb9dbd8d1f0c6c769324e7f1f12f228deae7c67c13e06c2fe4f098def2d",
+  "selectedObjectNames": [
+    "AchievementZone",
+    "CaseAssembly",
+    "ContentSlot",
+    "ContinuousTubePerimeter",
+    "FrontPolycarbonateShell",
+    "LogoZone",
+    "NarrowFoil",
+    "PhysicalLabel",
+    "PresentationRoot",
+    "RearPolycarbonateShell",
+    "TactileBackgroundInsert",
+    "TransparentCover"
+  ],
+  "checks": {
+    "sourceBlendPresent": true,
+    "reviewGlbPresent": true,
+    "presentationRootIncluded": true,
+    "caseAssemblyIncluded": true,
+    "contentSlotIncluded": true,
+    "allSubjectMeshesIncluded": true,
+    "wholeCaseHierarchyOnly": true,
+    "animationsExcluded": true,
+    "shippingExportNotClaimed": true
+  },
+  "status": "pass",
+  "shippingUnityChanged": false,
+  "buildInstallPhonePush": false
+}

@@ -1,0 +1,13 @@
+{
+  "shader": "unity/FidgetingApp/Assets/_FanCard/Shaders/FanCardSatinSilver.shader",
+  "policy": "actual main light + spherical harmonics + rough specular",
+  "checks": {
+    "noSoftPanel": true,
+    "noReflectedBand": true,
+    "usesMainLight": true,
+    "usesSphericalHarmonics": true,
+    "usesRoughness": true,
+    "usesFresnel": true
+  },
+  "pass": true
+}

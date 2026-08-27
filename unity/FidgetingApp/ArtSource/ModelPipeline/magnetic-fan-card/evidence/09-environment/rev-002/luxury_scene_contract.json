@@ -1,0 +1,69 @@
+{
+  "goal": "Turn the approved Fan Card render into a click-driving in-app game Banner.",
+  "lockedProduct": {
+    "geometry": "Gate 06 rev-002 approved exact model",
+    "materials": "Gate 07 rev-004 approved material language",
+    "cameraLanguage": "80 mm compressed product hero",
+    "frontVisibility": "no tracks, followers, decorative dots, or occluding FX",
+    "mechanicalRead": "three slabs, two air gaps, one bearing cap"
+  },
+  "requiredLayers": {
+    "foreground": [
+      "one or two cropped poker chips at frame corners",
+      "sparse suit-shaped shards and gold dust",
+      "strong depth-of-field blur"
+    ],
+    "subject": [
+      "approved Fan Card remains the only sharp hero",
+      "dark burgundy or black felt card table",
+      "brass table rail and one grounded contact shadow",
+      "subtle electronic suit/circuit inlay under the product"
+    ],
+    "background": [
+      "abstract black-gold high-roller architecture",
+      "warm horizontal light bands and vertical brass frames",
+      "defocused cards or chips at reduced contrast",
+      "no readable third-party branding"
+    ],
+    "lightFx": [
+      "warm key motivated by casino light bands",
+      "narrow gold rim for separation",
+      "restrained volumetric shaft behind the product",
+      "bounded gold particles following one diagonal flow"
+    ]
+  },
+  "routes": [
+    {
+      "id": "A-casino-lounge",
+      "description": "Most grounded: velvet table, brass rail, defocused high-roller interior, fewer floating props.",
+      "referenceBias": "Pinterest casino-party reference"
+    },
+    {
+      "id": "B-black-vortex",
+      "description": "Most game-like: black void, dramatic floating chips/cards, sharp red and gold accents.",
+      "referenceBias": "Pinterest card-magic reference"
+    },
+    {
+      "id": "C-electronic-high-roller",
+      "description": "Recommended synthesis: real velvet table and casino scale plus luminous suit circuitry, controlled chips/cards, gold particles, and a focused light shaft.",
+      "referenceBias": "balanced synthesis"
+    }
+  ],
+  "marketingLayout": {
+    "aspectRatio": "1179:654",
+    "productZone": "right 58%",
+    "copyZone": "left 34%",
+    "copy": ["FEATURED", "MAGNETIC FAN CARD"],
+    "cta": "none until product flow defines a truthful action",
+    "safeZone": "critical content inside central 80%"
+  },
+  "rejectionRules": [
+    "no random all-frame confetti",
+    "no bloom that hides product edges or material",
+    "no casino asset that competes with the Fan Card",
+    "no generic purple-blue neon",
+    "no fake price, jackpot, crown, currency, or gambling claim",
+    "no copied third-party card artwork or casino branding",
+    "no product geometry or face-art changes"
+  ]
+}
