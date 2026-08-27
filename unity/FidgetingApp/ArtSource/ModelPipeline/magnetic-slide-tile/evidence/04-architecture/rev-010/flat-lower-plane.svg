@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1400" height="940" viewBox="0 0 1400 940">
+  <defs><style>
+      .title{font:800 36px -apple-system,"PingFang SC",sans-serif;fill:#f5f7f8}.sub{font:500 18px -apple-system,"PingFang SC",sans-serif;fill:#aab2b8}
+      .panel{fill:#0a0d10;stroke:#303840;stroke-width:2}.head{font:800 21px -apple-system,"PingFang SC",sans-serif;fill:#f5f7f8}
+      .note{font:550 16px -apple-system,"PingFang SC",sans-serif;fill:#c5ccd1}.badge{font:800 16px -apple-system,"PingFang SC",sans-serif;fill:#f5f7f8}
+      .hidden{fill:#62d9ff18;stroke:#62d9ff;stroke-width:7;stroke-dasharray:14 12}.internal{fill:#62d9ff}.unknown{fill:none;stroke:#a6afb6;stroke-width:5;stroke-dasharray:10 9}
+    .flat{fill:none;stroke:#55e39b;stroke-width:8;stroke-linecap:round;stroke-linejoin:round}.yes{fill:#55e39b}.no{fill:#ff8278}</style></defs>
+  <rect width="1400" height="940" fill="#080a0c"/>
+  <text x="38" y="54" class="title">外露下层：干净平面，不画滑轨</text><text x="38" y="86" class="sub">用户权威纠正；视频只用于核对可见边界。轨道证据属于圆端重叠区内部，不能延伸到外露平面。</text>
+  <g transform="translate(28 120)"><rect width="654" height="750" rx="16" class="panel"/><text x="22" y="38" class="head">① 操作时可见的下层表面</text>
+    <svg x="22" y="58" width="610" height="535" viewBox="0 0 760 666"><image href="source-crops/visible-flat-lower.png" width="760" height="666"/><path class="flat" d="M205 123 Q354 70 615 126 Q710 157 735 260 L705 485 Q648 584 490 624 Q281 626 154 506 Q123 456 146 392 L178 225 Q183 159 205 123 Z"/><path class="unknown" d="M205 123 Q393 158 615 126"/></svg>
+    <rect x="22" y="612" width="610" height="112" rx="12" fill="#0d1512" stroke="#55e39b" stroke-width="2"/><text x="42" y="648" class="badge yes">绿色 · 可见平面边界</text><text x="42" y="681" class="note">表面可有 artwork 与边缘开口；没有外露纵向轨道。</text><text x="42" y="708" class="note">上沿被上件遮住，虚线后的边界继续 unknown。</text>
+  </g>
+  <g transform="translate(706 120)"><rect width="666" height="750" rx="16" class="panel"/><text x="22" y="38" class="head">② 滑开后出现的圆端内部区</text>
+    <svg x="22" y="58" width="622" height="538" viewBox="0 0 760 659"><image href="source-crops/circular-slide-overlap.png" width="760" height="659"/><ellipse class="hidden" cx="391" cy="296" rx="264" ry="270"/><path class="unknown" d="M125 340 Q390 590 658 337"/></svg>
+    <rect x="22" y="612" width="622" height="112" rx="12" fill="#0b1419" stroke="#62d9ff" stroke-width="2"/><text x="42" y="648" class="badge internal">蓝色虚线 · 隐藏机构 envelope</text><text x="42" y="681" class="note">只锁定“机制位于圆端重叠区”；不把图中内部细节画成外露表面。</text><text x="42" y="708" class="note">虚线不代表精确轨道路径、深度、数量或耦合。</text>
+  </g>
+  <rect x="28" y="890" width="1344" height="34" rx="8" fill="#15100f"/><text x="48" y="913" class="badge no">禁止：下一版白模不得在可见下层平面建立任何外露滑轨代理。</text>
+</svg>

@@ -1,0 +1,66 @@
+{
+  "schemaVersion": 1,
+  "modelId": "magnetic-slide-tile",
+  "gate": "02-analysis",
+  "revision": 10,
+  "contractAssetId": "slider-analysis-mechanism-evidence-contract-r008",
+  "contractSha256": "3b3f494805b2241f865bfdad5ec32a64ea95d03165714b55a272d81f0c1437a2",
+  "evidenceSelectors": {
+    "aspectRatioLW": "MEC-SILHOUETTE-ASPECT.value.aspectRatioLW.midpoint",
+    "maxTravelL": "MEC-TRAVEL-NORMALIZED.value.supportedRange.max",
+    "observedPeakTravelL": "MEC-TRAVEL-NORMALIZED.value.observedPeak",
+    "detentStepDeg": "MEC-DETENTS.value.stepDegrees",
+    "detentCount": "MEC-DETENTS.value.countPerRevolution",
+    "pivot": "MEC-PIVOT-ENDPOINT-ATTACHMENT.value",
+    "rails": "MEC-RAILS-BILATERAL-LOWER-REVERSE.value"
+  },
+  "diagrammaticRailLayout": [
+    {
+      "side": "left",
+      "xL": -0.18,
+      "startYL": -0.34,
+      "endYL": 0.34,
+      "state": "inferred-diagrammatic-not-dimensional"
+    },
+    {
+      "side": "right",
+      "xL": 0.18,
+      "startYL": -0.34,
+      "endYL": 0.34,
+      "state": "inferred-diagrammatic-not-dimensional"
+    }
+  ],
+  "cadApprovalChecklist": [
+    "topView",
+    "sideView",
+    "sectionView",
+    "slideRange",
+    "rotationPositions",
+    "pivotInspection",
+    "sourceMapping"
+  ],
+  "approvalRule": {
+    "interactiveRequired": true,
+    "approvalType": "interactive-cad-geometry",
+    "chatTextApprovalAllowed": false,
+    "staticScreenshotApprovalAllowed": false,
+    "requiredArtifactHash": true,
+    "requiredContractHash": true,
+    "requiredGeometrySnapshot": true,
+    "requiredBrowserTimestamp": true,
+    "approvalEffect": "records-cad-subapproval-only-simulator-remains-separate-and-locked"
+  },
+  "simulator": {
+    "locked": true,
+    "label": "交互 CAD 批准后生成",
+    "forbiddenInCadSurface": [
+      "damping",
+      "force-feel",
+      "detent-strength",
+      "inertia",
+      "sound",
+      "stop-softness",
+      "recording"
+    ]
+  }
+}

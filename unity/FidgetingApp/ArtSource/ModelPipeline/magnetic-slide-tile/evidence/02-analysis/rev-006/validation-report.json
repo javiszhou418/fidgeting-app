@@ -1,0 +1,107 @@
+{
+  "schemaVersion": 1,
+  "modelId": "magnetic-slide-tile",
+  "gate": "02-analysis",
+  "revision": 6,
+  "result": "READY_FOR_REVIEW_NOT_APPROVED",
+  "rootCause": {
+    "reproduced": true,
+    "input": "Chrome DevTools real Input.dispatchMouseEvent",
+    "viewport": [756, 469],
+    "priorResult": {
+      "travelL": 0,
+      "angleDeg": 0
+    },
+    "causes": [
+      "Old 520×560 SVG exceeded the 469 px visible height.",
+      "Drag start and axis could fall outside the viewport.",
+      "Synthetic PointerEvent tests bypassed viewport hit testing.",
+      "No independent large rotation-ring hit area existed."
+    ]
+  },
+  "checks": {
+    "deterministic": {
+      "result": "pass",
+      "cadAndMechanism": "27/27",
+      "fullNode": "42/42",
+      "coverage": [
+        "capsule arcs and tangent points",
+        "fixed upper and translated lower axis",
+        "bilateral lower rails",
+        "synchronized top/side/section transforms",
+        "unknown-safe physical dimensions",
+        "guarded derived dimensions",
+        "zoom/pan inverse coordinates",
+        "30×12-degree detents",
+        "breakaway/damping/stops/no self-motion/reset",
+        "one-step simultaneous s and theta",
+        "compound motion at partial/max travel",
+        "reverse rotation while closing",
+        "detent capture during ongoing slide",
+        "translation-only clamp and dual-velocity reset"
+      ]
+    },
+    "desktopBrowser": {
+      "result": "pass",
+      "realMouseInput": true,
+      "shortViewport": [756, 469],
+      "oneGestureChangesSlideAndRotation": true,
+      "slideThenRotateAtNonzeroTravel": true,
+      "rotationAfterZoomPan": true,
+      "visibleRingHitArea": true,
+      "keyboardDetents": [0, 12, 36, 24],
+      "resetZeroVelocity": true
+    },
+    "mobileBrowser": {
+      "result": "pass",
+      "viewport": [390, 844],
+      "realTouchCompoundMotion": true,
+      "realTouchRingRotation": true,
+      "horizontalOverflow": false
+    },
+    "cad": {
+      "result": "pass",
+      "views": ["top", "side", "section-a-a", "component-tree"],
+      "detentTicks": 30,
+      "bilateralRails": 2,
+      "physicalInputs": 15,
+      "blankUnknownState": true,
+      "derivedOnlyWhenComplete": true,
+      "evidenceLegend": ["实测", "视频比例", "用户输入", "未知"]
+    },
+    "regressions": {
+      "opacity": "pass",
+      "modalCloseEscapeBackdropBack": "pass",
+      "videoPlayback": {
+        "width": 720,
+        "height": 1280,
+        "durationSeconds": 14.214,
+        "error": null
+      },
+      "screenshotWall": 0,
+      "technicalEvidenceCollapsed": true
+    },
+    "pipeline": {
+      "result": "pass",
+      "errors": 0,
+      "missingFiles": 0,
+      "unhashedAssets": 0,
+      "approved": "1/12",
+      "earliestProblem": "02-analysis-ready_for_review"
+    },
+    "preview": {
+      "path": "unity/FidgetingApp/ArtSource/ModelPipeline/magnetic-slide-tile/evidence/02-analysis/rev-006/workbench-browser.png",
+      "width": 1440,
+      "height": 3281,
+      "pose": {
+        "travelL": 0.21,
+        "angleDeg": 36
+      }
+    }
+  },
+  "boundaries": [
+    "Hidden follower, pin, slot and ratchet sections remain red dashed unknowns.",
+    "Force, magnetism, friction and manufacturing tolerance need calipers, teardown or device tests.",
+    "No Blender, Unity, build, install or phone work ran."
+  ]
+}

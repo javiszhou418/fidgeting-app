@@ -1,0 +1,36 @@
+{
+  "schemaVersion": 1,
+  "gate": "07-material",
+  "materialRevision": 6,
+  "reuseClass": "user-authorized-prior-material-design-reuse",
+  "notNewExactTraceClaim": true,
+  "sourceMaterialRevision": 2,
+  "unchangedInMaterialRevision": 3,
+  "sourceAssetId": "magnetic-slide-tile-motif-mask-r002",
+  "sourcePath": "unity/FidgetingApp/ArtSource/ModelPipeline/magnetic-slide-tile/evidence/07-material/rev-002/source-derived-motif-visual-trace.png",
+  "sourceSha256": "8250df70d2286849db353862283b0d3db9c66e1ac92bed3795bcb5377a431c36",
+  "registeredRev2Sha256": "8250df70d2286849db353862283b0d3db9c66e1ac92bed3795bcb5377a431c36",
+  "registeredRev3Sha256": "8250df70d2286849db353862283b0d3db9c66e1ac92bed3795bcb5377a431c36",
+  "rev5RejectedMask": {
+    "assetId": "magnetic-slide-tile-artwork-upper-mask-r005",
+    "path": "unity/FidgetingApp/ArtSource/ModelPipeline/magnetic-slide-tile/evidence/07-material/rev-005/artwork-upper-mask.png",
+    "sha256": "18776e873271ca757c6d6cf7da5dbcfd390f4de0353cec794d34421f4b318b97",
+    "reason": "User rejected the direct original-image trace because the complete motif blurred into noise."
+  },
+  "slots": {
+    "Artwork_Upper": {
+      "path": "unity/FidgetingApp/ArtSource/ModelPipeline/magnetic-slide-tile/evidence/07-material/rev-006/artwork-upper-mask.png",
+      "sha256": "8250df70d2286849db353862283b0d3db9c66e1ac92bed3795bcb5377a431c36",
+      "initialIdentity": "lossless-byte-copy-of-rev2-clean-mask",
+      "independentlyEditable": true
+    },
+    "Artwork_Lower": {
+      "path": "unity/FidgetingApp/ArtSource/ModelPipeline/magnetic-slide-tile/evidence/07-material/rev-006/artwork-lower-mask.png",
+      "sha256": "8250df70d2286849db353862283b0d3db9c66e1ac92bed3795bcb5377a431c36",
+      "initialIdentity": "lossless-byte-copy-of-rev2-clean-mask",
+      "independentlyEditable": true,
+      "composition": "same complete clean motif; legible in +21 mm open pose"
+    }
+  },
+  "policy": "Reuse the clean complete rev 2/3 design by explicit user authority. Do not relabel it as a new exact-product trace."
+}

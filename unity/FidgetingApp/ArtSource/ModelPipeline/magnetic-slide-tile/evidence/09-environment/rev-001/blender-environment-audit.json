@@ -1,0 +1,52 @@
+{
+  "schemaVersion": 1,
+  "modelId": "magnetic-slide-tile",
+  "gate": "09-environment",
+  "environmentRevision": 1,
+  "blender": "5.2.0 LTS",
+  "triangles": {
+    "LowerBody_Fixed_CleanPlane": 2048,
+    "UpperCapsule_Moving": 2048
+  },
+  "controlledLights": [
+    "M08R1_FaceReveal",
+    "M08R1_Fill_Neutral",
+    "M08R1_Key_D65_Softbox",
+    "M08R1_Rim_SilverStrip"
+  ],
+  "worldNodes": [
+    "M09R1_AdaptiveBackground",
+    "M09R1_EnvironmentDirection",
+    "M09R1_EnvironmentReflectionContent",
+    "M09R1_GrainAmplitude0012",
+    "M09R1_NormalizeVertical",
+    "M09R1_StaticFineGrain",
+    "M09R1_TopDownAdaptiveField",
+    "M09R1_VerticalDirection",
+    "M09R1_WorldOutput"
+  ],
+  "shippingMaterialEmissionStrengths": {
+    "M07R7_DaylightNeutralPolishedSilver": 0.0,
+    "M07R7_BloodRedCrystal_WideBorder_Upper": 0.0,
+    "M07R7_BloodRedCrystal_WideBorder_Lower": 0.0
+  },
+  "lodObjects": [],
+  "decimateModifiers": [],
+  "checks": {
+    "gateAndRevision": true,
+    "approvalWording": true,
+    "geometryDigestFrozen": true,
+    "cameraContractFrozen": true,
+    "lightContractFrozen": true,
+    "materialContractFrozen": true,
+    "shippingEmissionZero": true,
+    "shippingWorldNodesPresent": true,
+    "shippingGroundPresent": true,
+    "single4096TriangleModel": true,
+    "noLods": true,
+    "independentArtworkMasks": true,
+    "scopeFlags": true,
+    "pointAxisAndEnvelope": true
+  },
+  "pass": true
+}

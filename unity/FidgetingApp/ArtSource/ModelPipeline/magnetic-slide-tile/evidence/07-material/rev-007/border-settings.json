@@ -1,0 +1,39 @@
+{
+  "schemaVersion": 1,
+  "gate": "07-material",
+  "materialRevision": 7,
+  "settingId": "TopFaceBlackPerimeterBorder",
+  "mask": "artwork-top-perimeter-border-mask.png",
+  "maskSha256": "2179bf26210994c8b3d279337bf6ad0f4beaee3c7285ae97d1cd888db2bd64fc",
+  "compositionOperation": "maximum(cleanMotifMask, topPerimeterBorderMask)",
+  "borderWidthPx": 64,
+  "borderWidthFractionMinorAxis": 0.10322581,
+  "approxVisualWidthMm": 3.2,
+  "outerPerimeterInsetPx": 0,
+  "appliesTo": [
+    "Artwork_Upper",
+    "Artwork_Lower"
+  ],
+  "geometryChanged": false,
+  "topologyBoundary": {
+    "black": "decorative top-face perimeter/inlay only",
+    "silver": "structural vertical side wall and visible metal rim"
+  },
+  "metrics": {
+    "sizePx": [
+      620,
+      1000
+    ],
+    "widthPx": 64,
+    "widthFractionMinorAxis": 0.10322581,
+    "approxVisualWidthMm": 3.2,
+    "outerPerimeterReachPx": {
+      "left": 0,
+      "right": 0,
+      "top": 0,
+      "bottom": 0
+    },
+    "centerRowInnerTransitionPx": 64,
+    "coverage": 0.25923226
+  }
+}

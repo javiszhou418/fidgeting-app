@@ -1,0 +1,235 @@
+{
+  "schemaVersion": 1,
+  "kind": "anthropometric-video-measurement-estimate",
+  "modelId": "magnetic-slide-tile",
+  "gate": "03-contract",
+  "revision": 10,
+  "classification": "anthropometric video estimate; not production measured",
+  "userAuthorization": {
+    "anthropometricAndVideoEstimatesAllowed": true,
+    "ballDiameterMm": [
+      2.0,
+      3.0
+    ],
+    "trackWidthMm": {
+      "minimum": null,
+      "maximum": 3.0
+    }
+  },
+  "sources": [
+    {
+      "title": "AIST Japanese hand anthropometric database",
+      "url": "https://www.airc.aist.go.jp/dhrt/hand/index.html",
+      "population": "530 healthy Japanese adults, 18\u201364; 327 male, 203 female",
+      "method": "traditional anthropometry; digital calipers except circumference"
+    },
+    {
+      "title": "AIST hand breadth statistics B03",
+      "url": "https://www.airc.aist.go.jp/dhrt/hand/data/B.pdf",
+      "priorUsedMm": {
+        "P25Combined": 75.3,
+        "P75Combined": 83.8,
+        "meanCombined": 79.8
+      }
+    },
+    {
+      "title": "GB/T 16252-2023 / GB/T 10000-2023 values reproduced in peer-reviewed joystick study",
+      "url": "https://doi.org/10.3390/app15063019",
+      "crossCheck": "Chinese adult male hand breadth P10/P50/P90 = 82/88/94 mm; not used as the user's sex/percentile is unknown."
+    },
+    {
+      "title": "Korean hand-shape survey",
+      "url": "https://www.sciencedirect.com/science/article/abs/pii/S016981411530041X",
+      "population": "321 adults; breadth, palm length and finger length are the three dominant factors",
+      "use": "regional shape caution only; no numeric scale imported"
+    }
+  ],
+  "method": {
+    "tool": "OpenCV 4.13.0",
+    "landmarks": "manually reviewed palm-breadth endpoints tracked across adjacent frames; toy minAreaRect from four silhouette landmarks",
+    "perspective": "accepted only near-open-palm frames where toy and palm share depth; one blurred/foreshortened frame rejected",
+    "scale": "toy/palm pixel ratio \u00d7 AIST combined-sex B03 P25\u2013P75 prior",
+    "limitations": "No camera calibration or known-size object shares the toy plane. Results remain range estimates."
+  },
+  "frames": [
+    {
+      "source": "unity/FidgetingApp/ArtSource/ModelPipeline/magnetic-slide-tile/evidence/03-contract/rev-010/source-crops/video-frame-02.png",
+      "annotated": "unity/FidgetingApp/ArtSource/ModelPipeline/magnetic-slide-tile/evidence/03-contract/rev-010/source-crops/video-frame-02-annotated.png",
+      "state": "accepted",
+      "toyLengthPx": 268.15,
+      "toyWidthPx": 195.96,
+      "palmBreadthLandmarkPx": 460.14,
+      "lengthToPalmBreadth": 0.5828,
+      "widthToPalmBreadth": 0.4259,
+      "estimatedLengthMm": [
+        48.7,
+        57.8
+      ],
+      "estimatedWidthMm": [
+        32.1,
+        35.7
+      ],
+      "lengthDerivation": "width estimate \u00d7 approved perspective-corrected L/W range 1.52\u20131.62; open pose occludes direct full-length silhouette",
+      "errorSources": [
+        "hand-size population prior",
+        "soft-tissue landmark placement",
+        "residual perspective",
+        "toy/palm depth mismatch"
+      ]
+    },
+    {
+      "source": "unity/FidgetingApp/ArtSource/ModelPipeline/magnetic-slide-tile/evidence/03-contract/rev-010/source-crops/video-frame-03.png",
+      "annotated": "unity/FidgetingApp/ArtSource/ModelPipeline/magnetic-slide-tile/evidence/03-contract/rev-010/source-crops/video-frame-03-annotated.png",
+      "state": "accepted",
+      "toyLengthPx": 230.6,
+      "toyWidthPx": 185.31,
+      "palmBreadthLandmarkPx": 452.77,
+      "lengthToPalmBreadth": 0.5093,
+      "widthToPalmBreadth": 0.4093,
+      "estimatedLengthMm": [
+        46.8,
+        55.6
+      ],
+      "estimatedWidthMm": [
+        30.8,
+        34.3
+      ],
+      "lengthDerivation": "width estimate \u00d7 approved perspective-corrected L/W range 1.52\u20131.62; open pose occludes direct full-length silhouette",
+      "errorSources": [
+        "hand-size population prior",
+        "soft-tissue landmark placement",
+        "residual perspective",
+        "toy/palm depth mismatch"
+      ]
+    },
+    {
+      "source": "unity/FidgetingApp/ArtSource/ModelPipeline/magnetic-slide-tile/evidence/03-contract/rev-010/source-crops/video-frame-01.png",
+      "annotated": "unity/FidgetingApp/ArtSource/ModelPipeline/magnetic-slide-tile/evidence/03-contract/rev-010/source-crops/video-frame-01-annotated.png",
+      "state": "rejected-severe-foreshortening-and-motion-blur",
+      "toyLengthPx": 221.61,
+      "toyWidthPx": 189.6,
+      "palmBreadthLandmarkPx": 680.02,
+      "lengthToPalmBreadth": 0.3259,
+      "widthToPalmBreadth": 0.2788,
+      "estimatedLengthMm": [
+        31.9,
+        37.9
+      ],
+      "estimatedWidthMm": [
+        21.0,
+        23.4
+      ],
+      "lengthDerivation": "width estimate \u00d7 approved perspective-corrected L/W range 1.52\u20131.62; open pose occludes direct full-length silhouette",
+      "errorSources": [
+        "hand-size population prior",
+        "soft-tissue landmark placement",
+        "residual perspective",
+        "toy/palm depth mismatch"
+      ]
+    }
+  ],
+  "exteriorEstimateMm": {
+    "overallLength": {
+      "range": [
+        46.8,
+        57.8
+      ],
+      "recommendedProvisional": 50.0,
+      "confidence": "medium-low"
+    },
+    "overallWidth": {
+      "range": [
+        30.8,
+        35.7
+      ],
+      "recommendedProvisional": 31.0,
+      "confidence": "medium-low"
+    },
+    "totalThickness": {
+      "range": null,
+      "recommendedProvisional": 12.0,
+      "confidence": "low",
+      "reason": "frontal palm scale cannot constrain thickness"
+    }
+  },
+  "internalFeatureEstimateMm": {
+    "ballDiameter": {
+      "range": [
+        2.0,
+        3.0
+      ],
+      "state": "user-authoritative estimate",
+      "confidence": "medium"
+    },
+    "trackWidth": {
+      "range": [
+        1.8,
+        3.0
+      ],
+      "state": "user maximum plus HALOO/NXEDC visible-ratio estimate",
+      "confidence": "low"
+    },
+    "trackCenterSpacing": {
+      "range": [
+        5.0,
+        8.5
+      ],
+      "state": "official internal-view pixel ratio",
+      "confidence": "low"
+    },
+    "axisOffsetFromNearestEnd": {
+      "range": [
+        14.5,
+        17.5
+      ],
+      "recommendedProvisional": 16.0,
+      "confidence": "low"
+    },
+    "carrierDiameter": {
+      "range": [
+        21.0,
+        26.0
+      ],
+      "recommendedProvisional": 23.0,
+      "confidence": "low"
+    }
+  },
+  "officialInternalPixelRatios": {
+    "sourceAssetIds": [
+      "slider-intake-haloo-official-05",
+      "slider-intake-haloo-official-07",
+      "magnetic-slide-tile-official-slider-a-r008",
+      "magnetic-slide-tile-official-slider-b-r008"
+    ],
+    "ballToOverallWidth": [
+      0.055,
+      0.082
+    ],
+    "trackWidthToOverallWidth": [
+      0.058,
+      0.088
+    ],
+    "warning": "Perspective, blur and uncertain edge ownership dominate; ratios only support ranges."
+  },
+  "remainingUnknowns": [
+    "ball material and exact count",
+    "spring count and layout",
+    "groove cross-section and depth",
+    "contact preload",
+    "operating clearance",
+    "manufacturing allowance",
+    "manufacturing tolerance"
+  ],
+  "archivedUserRejectionScreenshots": [
+    {
+      "path": "unity/FidgetingApp/ArtSource/ModelPipeline/magnetic-slide-tile/evidence/03-contract/rev-010/source-crops/user-rejection-screenshot-01.png",
+      "sha256": "f96d33fba1d59785217ca62e504346e03c81a1c62a973b5d7a98e7d070fc2d8a",
+      "interpretation": "Rejected Gate 05 rev 4 evidence: visible circular depression is wrong; required mechanism is a raised independent axis boss."
+    },
+    {
+      "path": "unity/FidgetingApp/ArtSource/ModelPipeline/magnetic-slide-tile/evidence/03-contract/rev-010/source-crops/user-rejection-screenshot-02.png",
+      "sha256": "d5d123f6461b935b71b73d59670e7acda2366ae16b0042e70b1ef1ec41cf33a0",
+      "interpretation": "Rejected Gate 05 rev 4 evidence: visible circular depression is wrong; required mechanism is a raised independent axis boss."
+    }
+  ]
+}

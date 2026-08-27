@@ -1,0 +1,122 @@
+{
+  "schemaVersion": 1,
+  "modelId": "magnetic-slide-tile",
+  "contractRevision": 5,
+  "createdAt": "2026-08-21T14:06:48.719Z",
+  "sourceClaimIds": [
+    "slider-analysis-official-product-match-r002",
+    "slider-analysis-official-dual-mode-r002",
+    "slider-analysis-official-shell-hierarchy-r002",
+    "slider-analysis-official-linear-module-r002",
+    "slider-analysis-official-rotary-module-r002",
+    "slider-analysis-official-tuning-parts-r002",
+    "slider-analysis-official-evidence-boundary-r002"
+  ],
+  "sourceAssetIds": [
+    "slider-analysis-official-discovery-log-r002",
+    "slider-analysis-official-mechanism-board-r002",
+    "slider-intake-user-frame-04",
+    "slider-intake-user-frame-03",
+    "slider-intake-user-frame-12"
+  ],
+  "units": "millimeters",
+  "dimensionBasis": {
+    "type": "anthropometric-estimate",
+    "confidence": "medium",
+    "method": "Adult-finger scale estimate from the user-recorded video; retained from the previously user-accepted scale proposal and revalidated separately from the corrected mechanism.",
+    "calibration": {
+      "adultFingerBreadthMm": {
+        "center": 22.5,
+        "min": 20,
+        "max": 25
+      }
+    },
+    "corroboration": [],
+    "limitation": "Perspective, finger-size variation and custom-shell variation remain in the stated ranges; this is not a production measurement."
+  },
+  "dimensionEstimateRangesMm": {
+    "overallLengthMm": {
+      "min": 47,
+      "max": 53
+    },
+    "overallWidthMm": {
+      "min": 29,
+      "max": 33
+    },
+    "totalThicknessMm": {
+      "min": 10.5,
+      "max": 13.5
+    },
+    "linearTravelMm": {
+      "min": 18,
+      "max": 24
+    }
+  },
+  "coordinateSystem": {
+    "x": "width-right",
+    "y": "length-and-primary-slide-forward",
+    "z": "thickness-up",
+    "origin": "closed-assembly-center",
+    "pivotRule": "two exterior main shells; preserve the straight-push axis and central free-spin bearing region; defer exact coupling to Gate 04 physical evidence"
+  },
+  "dimensions": {
+    "overallLengthMm": 50,
+    "overallWidthMm": 31,
+    "totalThicknessMm": 12,
+    "linearTravelMm": 21,
+    "seamClearanceMm": 0.25
+  },
+  "boundsMm": {
+    "x": 31,
+    "y": 50,
+    "z": 12
+  },
+  "mechanism": {
+    "fixedPart": "lower-body",
+    "movingPart": "upper-body",
+    "primaryMotion": "straight-push-along-positive-y",
+    "secondaryMotion": "dual-mode-free-spin",
+    "maxRotationDeg": null,
+    "laneMode": "dual-working-lanes",
+    "internalHardwareMode": "visual-mechanism-proxy",
+    "magnetCount": null,
+    "ballCount": null,
+    "steelPlateCount": null,
+    "interactionModes": [
+      "straight-push",
+      "free-spin"
+    ],
+    "modeRelationship": "separately-supported; exact-kinematic-coupling-unknown",
+    "rotationMode": "continuous-free-spin-about-central-bearing-region",
+    "externalMainShellCount": 2,
+    "linearModule": "bilateral-long-rail-ball-or-bead-grooves",
+    "rotaryModule": "circular-ball-track-and-central-shaft-or-bearing-region",
+    "tuningParts": "spring-and-steel-or-ceramic-balls",
+    "evidenceBoundary": "do-not-lock-counts-tolerances-hole-depths-or-coupling-without-physical-proof"
+  },
+  "modelingRules": {
+    "symmetry": "outline bilateral across X; do not mirror asymmetric artwork",
+    "triangleBudgetMax": 120000,
+    "collisionTriangleBudgetMax": 2000,
+    "materialLanguageDeferredToGate": "07-material",
+    "audioBehaviorDeferredToInteractionSystem": true
+  },
+  "route": {
+    "primary": "blender-cli",
+    "deterministic": true,
+    "rodinPolicy": "concept-only; never promote directly to Unity"
+  },
+  "claimDisposition": {
+    "slider-analysis-official-product-match-r002": "lock-shared-silhouette-and-mechanism-family; color-and-artwork-remain-custom",
+    "slider-analysis-official-dual-mode-r002": "lock-straight-push-and-free-spin-as-separately-supported-modes; reject-end-stop-sequence",
+    "slider-analysis-official-shell-hierarchy-r002": "lock-two-exterior-main-shells; preserve-visible-internal-functional-modules",
+    "slider-analysis-official-linear-module-r002": "lock-bilateral-long-rail-ball-or-bead-groove-module",
+    "slider-analysis-official-rotary-module-r002": "lock-circular-ball-track-and-central-bearing-region; coupling-remains-unknown",
+    "slider-analysis-official-tuning-parts-r002": "show-visible-spring-and-ball-tuning-parts-without-inventing-counts",
+    "slider-analysis-official-evidence-boundary-r002": "carry-counts-dimensions-tolerances-hole-depths-and-coupling-as-unknown"
+  },
+  "completeness": {
+    "complete": true,
+    "missing": []
+  }
+}

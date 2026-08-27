@@ -1,0 +1,107 @@
+{
+  "schemaVersion": 1,
+  "modelId": "magnetic-slide-tile",
+  "gate": "02-analysis",
+  "revision": 15,
+  "contractAssetId": "slider-analysis-mechanism-evidence-contract-r015",
+  "contractSha256": "b4318452f163ef7c105c826d4466a739a1dd0d942d4d74d921c29c39e02a84f2",
+  "evidenceSelectors": {
+    "aspectRatioLW": "MEC-SILHOUETTE-ASPECT.value.aspectRatioLW.midpoint",
+    "maxTravelL": "MEC-TRAVEL-NORMALIZED.value.supportedRange.max",
+    "observedPeakTravelL": "MEC-TRAVEL-NORMALIZED.value.observedPeak",
+    "detentStepDeg": "MEC-DETENTS.value.stepDegrees",
+    "detentCount": "MEC-DETENTS.value.countPerRevolution",
+    "bottomExterior": "MEC-BOTTOM-EXTERIOR-NO-RAILS.value",
+    "fixedAxis": "MEC-AXIS-MODULE-FIXED.value",
+    "rotatingCarrier": "MEC-ROTATING-CARRIER.value",
+    "carrierFollowers": "MEC-CARRIER-FOLLOWERS-BILATERAL.value",
+    "topGrooves": "MEC-TOP-UNDERSIDE-GROOVES.value",
+    "topTransform": "MEC-TOP-CARRIER-LOCAL-TRANSLATION.value",
+    "axisCoverage": "MEC-AXIS-COVERAGE-AT-MAX-TRAVEL.value",
+    "closedStop": "MEC-CLOSED-OVERLAP-HARD-STOP.value",
+    "finiteGrooveStops": "MEC-FINITE-GROOVE-ENDPOINT-STOPS.value",
+    "sweptEnvelope": "MEC-TOP-ABOVE-BOTTOM-SWEPT-ENVELOPE.value",
+    "minimumOverlapDisk": "MEC-MINIMUM-OVERLAP-DISK.value",
+    "actualTravelDualBound": "MEC-ACTUAL-TRAVEL-DUAL-BOUND.value",
+    "continuousContainment": "MEC-CONTINUOUS-OVERLAP-CONTAINMENT.value"
+  },
+  "diagrammaticGeometry": {
+    "axisNormalizedY": 0.32,
+    "carrierRadiusL": 0.23,
+    "carrierSideCutoutHalfWidthL": 0.08,
+    "followerOffsetXL": 0.18,
+    "grooveOffsetXL": 0.18,
+    "grooveStartYL": -0.34,
+    "grooveEndYL": 0.34,
+    "grooveStartFromTopL": 0.32,
+    "grooveEndFromTopL": 0.78,
+    "minimumOverlapDiskRadiusL": 0.3184713375796178
+  },
+  "componentLayers": [
+    "BottomExterior",
+    "FixedAxis",
+    "MinimumOverlapDisk",
+    "RotatingCarrier",
+    "CarrierFollowerLeft",
+    "CarrierFollowerRight",
+    "TopPlate",
+    "TopGrooveLeft",
+    "TopGrooveRight",
+    "UnknownContacts"
+  ],
+  "cadApprovalChecklist": [
+    "minimumOverlapDisk",
+    "robustContainment",
+    "finiteGrooveEndpoints",
+    "synchronizedViews",
+    "pointerDirection",
+    "fixedAxis",
+    "rotatingCarrier",
+    "topUndersideGrooves",
+    "compoundMotion",
+    "pivotCoverage",
+    "smoothBottomExterior",
+    "sourceMapping"
+  ],
+  "approvalRule": {
+    "interactiveRequired": true,
+    "approvalType": "interactive-cad-geometry",
+    "chatTextApprovalAllowed": false,
+    "staticScreenshotApprovalAllowed": false,
+    "requiredArtifactHash": true,
+    "requiredContractHash": true,
+    "requiredGeometrySnapshot": true,
+    "requiredBrowserTimestamp": true,
+    "approvalEffect": "records-cad-subapproval-only-simulator-remains-separate-and-locked"
+  },
+  "simulator": {
+    "locked": true,
+    "label": "交互 CAD 批准后生成",
+    "activeControls": 0
+  },
+  "finiteGroove": {
+    "startFromTopL": 0.32,
+    "endFromTopL": 0.78,
+    "maxTravelDerivation": "end-start",
+    "physicalMillimetres": null
+  },
+  "sweptEnvelope": {
+    "detentCount": 30,
+    "slideSampleFractions": [
+      0,
+      0.25,
+      0.5,
+      0.75,
+      1
+    ],
+    "topZ": 2,
+    "bottomZ": 0,
+    "bottomMasksTop": false
+  },
+  "overlapDisk": {
+    "radiusNormalizedL": 0.3184713375796178,
+    "physicalRadiusMm": null,
+    "sourceStatus": "用户输入 · reviewed CAD normalized",
+    "denseSweepDegrees": 1
+  }
+}

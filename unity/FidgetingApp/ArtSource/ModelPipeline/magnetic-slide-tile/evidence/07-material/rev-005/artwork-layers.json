@@ -1,0 +1,132 @@
+{
+  "schemaVersion": 1,
+  "gate": "07-material",
+  "materialRevision": 5,
+  "geometryDigest": "85bd7dd237c6822c72e575c9a23085eec9a2f28d7afea3a5bf0f13fdc4ebd90f",
+  "slots": {
+    "Artwork_Upper": {
+      "mask": "artwork-upper-mask.png",
+      "sourceAssetIds": [
+        "slider-intake-obs-frame-01",
+        "slider-intake-haloo-official-03"
+      ],
+      "sourceQuadPixels": [
+        289,
+        530,
+        429,
+        546,
+        466,
+        901,
+        256,
+        873
+      ],
+      "coverage": "full-visible-face",
+      "occludedOrReconstructed": false,
+      "regions": [
+        {
+          "id": "upper-direct-exact-product",
+          "class": "directly-traced-exact-product",
+          "mask": "artwork-upper-mask.png",
+          "confidence": "high",
+          "sourceAssetIds": [
+            "slider-intake-obs-frame-01",
+            "slider-intake-haloo-official-03"
+          ],
+          "maskSha256": "18776e873271ca757c6d6cf7da5dbcfd390f4de0353cec794d34421f4b318b97"
+        }
+      ],
+      "maskSha256": "18776e873271ca757c6d6cf7da5dbcfd390f4de0353cec794d34421f4b318b97"
+    },
+    "Artwork_Lower": {
+      "mask": "artwork-lower-mask.png",
+      "unknownMask": "artwork-lower-occluded-unknown.png",
+      "sourceAssetIds": [
+        "slider-intake-obs-frame-10"
+      ],
+      "sourceQuadPixels": [
+        272,
+        716,
+        439,
+        733,
+        438,
+        884,
+        274,
+        871
+      ],
+      "coverage": "source-visible-open-end-plus-labeled-style-reconstruction",
+      "occludedOrReconstructed": true,
+      "policy": "The source-visible exposed end is traced first. The hidden region remains explicitly occluded/incomplete, then receives a separate low-confidence Chrome Hearts-style reconstruction from archived official sources.",
+      "regions": [
+        {
+          "id": "lower-direct-exact-product",
+          "class": "directly-traced-exact-product",
+          "mask": "artwork-lower-direct-trace-mask.png",
+          "normalizedY": [
+            0.62,
+            1.0
+          ],
+          "confidence": "medium",
+          "sourceAssetIds": [
+            "slider-intake-obs-frame-10"
+          ],
+          "maskSha256": "7862f2106e57660113ebe86b44124adf5686eb5e7a95efb742411ff67cdb2236"
+        },
+        {
+          "id": "lower-occluded-incomplete",
+          "class": "occluded-incomplete",
+          "mask": "artwork-lower-occluded-unknown.png",
+          "normalizedY": [
+            0.0,
+            0.62
+          ],
+          "confidence": "none-for-exact-detail",
+          "sourceAssetIds": [
+            "slider-intake-obs-frame-10"
+          ],
+          "maskSha256": "c7d632dcb3061f86e7ef4a2462a445c8158e3c40e0f4bbea9fca97468128457d"
+        },
+        {
+          "id": "lower-chrome-hearts-style-reconstructed",
+          "class": "chrome-hearts-style-reconstructed",
+          "mask": "artwork-lower-reconstructed-mask.png",
+          "normalizedY": [
+            0.0,
+            0.62
+          ],
+          "confidence": "low",
+          "sourceAssetIds": [
+            "chromehearts-official-ch-plus-matchstick-holder",
+            "chromehearts-official-crosstail-water",
+            "chromehearts-official-stencil-dagger-socks"
+          ],
+          "allowedLanguage": [
+            "classic-gothic-cross",
+            "fleur-floral",
+            "pointed-arch",
+            "blackened-silver"
+          ],
+          "notExactProductTrace": true,
+          "maskSha256": "55608bec7f092b7e32094913df39578eeac29cfd97e1ea8863a425c19c90bbfb"
+        }
+      ],
+      "maskSha256": "1ff549866be53fb0e635866f37c4af0fcd991a5efa66619a110b28ae85812e1e",
+      "unknownMaskSha256": "c7d632dcb3061f86e7ef4a2462a445c8158e3c40e0f4bbea9fca97468128457d"
+    }
+  },
+  "sourcePriority": [
+    "exact-product-direct-trace",
+    "explicit-occluded-incomplete-boundary",
+    "official-Chrome-Hearts-style-reconstruction-only-where-unreadable"
+  ],
+  "supplementalSourceManifest": "supplemental-source-manifest.json",
+  "supplementalSourceManifestSha256": "76cd1c5157beb70f2701cc15cf7411a8294ed368fb43ab71853b02ad2f3691a3",
+  "editableControls": [
+    "maskPath",
+    "darkFillColor",
+    "mixFactor",
+    "etchBumpStrength",
+    "etchDepthIllusionMm",
+    "roughnessDelta"
+  ],
+  "swapContract": "Each slot points to an external repository-relative mask and can be replaced without changing mesh data."
+}

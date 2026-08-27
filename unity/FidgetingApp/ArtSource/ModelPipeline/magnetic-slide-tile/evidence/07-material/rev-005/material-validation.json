@@ -1,0 +1,726 @@
+{
+  "schemaVersion": 5,
+  "gate": "07-material",
+  "materialRevision": 5,
+  "supersedesMaterialRevision": 4,
+  "userRequest": "deep blood red, not pink; editable upper/lower artwork; diagnostic light and side reflection",
+  "sourceGate06": {
+    "geometryRevision": 1,
+    "blendPath": "unity/FidgetingApp/ArtSource/ModelPipeline/magnetic-slide-tile/evidence/06-geometry/rev-001/magnetic-slide-tile-geometry-r001.blend",
+    "sha256Before": "dae227b2810e4c264b856bd4539e10d6a96d807e8ec68ca9b0a8e371d1be72ae",
+    "sha256After": "dae227b2810e4c264b856bd4539e10d6a96d807e8ec68ca9b0a8e371d1be72ae",
+    "unchanged": true,
+    "evaluatedGeometryDigest": "85bd7dd237c6822c72e575c9a23085eec9a2f28d7afea3a5bf0f13fdc4ebd90f"
+  },
+  "geometryPreservation": {
+    "digestBefore": "85bd7dd237c6822c72e575c9a23085eec9a2f28d7afea3a5bf0f13fdc4ebd90f",
+    "digestAfterMaterialAssignment": "85bd7dd237c6822c72e575c9a23085eec9a2f28d7afea3a5bf0f13fdc4ebd90f",
+    "digestAfterRenders": "85bd7dd237c6822c72e575c9a23085eec9a2f28d7afea3a5bf0f13fdc4ebd90f",
+    "unchanged": true,
+    "boundsMm": [
+      50.0,
+      31.0,
+      12.0
+    ],
+    "axisPointWorldMm": [
+      0.0,
+      -9.5,
+      0.0
+    ],
+    "matricesUnchanged": true,
+    "envelopeType": "EMPTY",
+    "envelopeHideRender": true,
+    "envelopeGeometry": "none",
+    "smoothProfileSegmentsPerSemicircle": 256,
+    "visibleModelMeshes": [
+      "LowerBody_Fixed_CleanPlane",
+      "UpperCapsule_Moving"
+    ],
+    "hiddenMechanismMeshes": [],
+    "artworkOrnamentGeometryCount": 0,
+    "animatedOrConstrainedObjects": [],
+    "pass": true
+  },
+  "materialZones": {
+    "mirror-silver-exterior-body": {
+      "material": "M07R5_MirrorSilver_Unchanged",
+      "baseColor": [
+        0.72,
+        0.78,
+        0.86,
+        1.0
+      ],
+      "metallic": 1.0,
+      "roughness": 0.095,
+      "ior": 1.5,
+      "coatWeight": 0.32,
+      "coatRoughness": 0.055,
+      "transmissionWeight": 0.0,
+      "objects": [
+        "LowerBody_Fixed_CleanPlane",
+        "UpperCapsule_Moving side-and-bottom"
+      ],
+      "support": "Official exact product page confirms Steel. Images support a bright mirror-silver response; alloy and finishing process remain unknown.",
+      "certainty": "confirmed-steel-visual-finish-provisional",
+      "actualPbr": {
+        "metallic": 1.0,
+        "roughness": 0.0949999988079071,
+        "ior": 1.5,
+        "coatWeight": 0.3199999928474426,
+        "coatRoughness": 0.054999999701976776,
+        "transmissionWeight": 0.0,
+        "thinFilmIor": 1.3300000429153442,
+        "thinFilmThicknessNm": 0.0,
+        "specularIorLevel": 0.5,
+        "emissionStrength": 0.0
+      }
+    },
+    "deep-blood-red-crystal-face": {
+      "baseColor": [
+        0.22,
+        0.008,
+        0.018,
+        1.0
+      ],
+      "metallic": 0.0,
+      "roughness": 0.035,
+      "ior": 1.52,
+      "specularIorLevel": 0.58,
+      "coatWeight": 1.0,
+      "coatRoughness": 0.012,
+      "transmissionWeight": 0.12,
+      "thinFilmIor": 1.38,
+      "thinFilmThicknessNm": 430.0,
+      "etchBumpStrength": 0.2,
+      "etchDepthIllusionMm": 0.06,
+      "motifDarkColor": [
+        0.003,
+        0.0015,
+        0.002,
+        1.0
+      ],
+      "motifMixFactor": 0.92,
+      "roughnessDelta": 0.08,
+      "microfacetSparkleScale": 145.0,
+      "microfacetSparkleStrength": 0.028,
+      "microfacetSparkleDistanceMm": 0.012,
+      "substrateSaturation": 1.08,
+      "substrateValue": 1.02,
+      "faces": "Upper and lower top caps through independent artwork materials",
+      "method": "clear-coat/transmission over controlled dark-red substrate with restrained ruby/blue accents",
+      "support": "User-authoritative blood-red correction plus white-balance-normalized source sampling against adjacent steel.",
+      "certainty": "visual-approximation",
+      "actualPbrUpper": {
+        "metallic": 0.0,
+        "roughness": 0.03500000014901161,
+        "ior": 1.5199999809265137,
+        "coatWeight": 1.0,
+        "coatRoughness": 0.012000000104308128,
+        "transmissionWeight": 0.11999999731779099,
+        "thinFilmIor": 1.3799999952316284,
+        "thinFilmThicknessNm": 430.0,
+        "specularIorLevel": 0.5799999833106995,
+        "emissionStrength": 0.0
+      },
+      "actualPbrLower": {
+        "metallic": 0.0,
+        "roughness": 0.03500000014901161,
+        "ior": 1.5199999809265137,
+        "coatWeight": 1.0,
+        "coatRoughness": 0.012000000104308128,
+        "transmissionWeight": 0.11999999731779099,
+        "thinFilmIor": 1.3799999952316284,
+        "thinFilmThicknessNm": 430.0,
+        "specularIorLevel": 0.5799999833106995,
+        "emissionStrength": 0.0
+      }
+    }
+  },
+  "materialAssignments": {
+    "slots": {
+      "LowerBody_Fixed_CleanPlane": [
+        "M07R5_MirrorSilver_Unchanged",
+        "M07R5_BloodRedCrystal_Artwork_Lower"
+      ],
+      "UpperCapsule_Moving": [
+        "M07R5_MirrorSilver_Unchanged",
+        "M07R5_BloodRedCrystal_Artwork_Upper"
+      ]
+    },
+    "topCapFaces": {
+      "upperTopCapFaceCount": 1,
+      "lowerTopCapFaceCount": 1,
+      "upperFrameFaceCount": 514,
+      "lowerFrameFaceCount": 514
+    },
+    "zoneCount": 3,
+    "pass": true
+  },
+  "artworkLayers": {
+    "configPath": "unity/FidgetingApp/ArtSource/ModelPipeline/magnetic-slide-tile/evidence/07-material/rev-005/artwork-layers.json",
+    "configSha256": "69969b4cfc519a5c72b1d4bac633268b40e95a4ae310870987399993fd9a027c",
+    "slots": {
+      "Artwork_Upper": {
+        "mask": "artwork-upper-mask.png",
+        "sourceAssetIds": [
+          "slider-intake-obs-frame-01",
+          "slider-intake-haloo-official-03"
+        ],
+        "sourceQuadPixels": [
+          289,
+          530,
+          429,
+          546,
+          466,
+          901,
+          256,
+          873
+        ],
+        "coverage": "full-visible-face",
+        "occludedOrReconstructed": false,
+        "regions": [
+          {
+            "id": "upper-direct-exact-product",
+            "class": "directly-traced-exact-product",
+            "mask": "artwork-upper-mask.png",
+            "confidence": "high",
+            "sourceAssetIds": [
+              "slider-intake-obs-frame-01",
+              "slider-intake-haloo-official-03"
+            ],
+            "maskSha256": "18776e873271ca757c6d6cf7da5dbcfd390f4de0353cec794d34421f4b318b97"
+          }
+        ],
+        "maskSha256": "18776e873271ca757c6d6cf7da5dbcfd390f4de0353cec794d34421f4b318b97"
+      },
+      "Artwork_Lower": {
+        "mask": "artwork-lower-mask.png",
+        "unknownMask": "artwork-lower-occluded-unknown.png",
+        "sourceAssetIds": [
+          "slider-intake-obs-frame-10"
+        ],
+        "sourceQuadPixels": [
+          272,
+          716,
+          439,
+          733,
+          438,
+          884,
+          274,
+          871
+        ],
+        "coverage": "source-visible-open-end-plus-labeled-style-reconstruction",
+        "occludedOrReconstructed": true,
+        "policy": "The source-visible exposed end is traced first. The hidden region remains explicitly occluded/incomplete, then receives a separate low-confidence Chrome Hearts-style reconstruction from archived official sources.",
+        "regions": [
+          {
+            "id": "lower-direct-exact-product",
+            "class": "directly-traced-exact-product",
+            "mask": "artwork-lower-direct-trace-mask.png",
+            "normalizedY": [
+              0.62,
+              1.0
+            ],
+            "confidence": "medium",
+            "sourceAssetIds": [
+              "slider-intake-obs-frame-10"
+            ],
+            "maskSha256": "7862f2106e57660113ebe86b44124adf5686eb5e7a95efb742411ff67cdb2236"
+          },
+          {
+            "id": "lower-occluded-incomplete",
+            "class": "occluded-incomplete",
+            "mask": "artwork-lower-occluded-unknown.png",
+            "normalizedY": [
+              0.0,
+              0.62
+            ],
+            "confidence": "none-for-exact-detail",
+            "sourceAssetIds": [
+              "slider-intake-obs-frame-10"
+            ],
+            "maskSha256": "c7d632dcb3061f86e7ef4a2462a445c8158e3c40e0f4bbea9fca97468128457d"
+          },
+          {
+            "id": "lower-chrome-hearts-style-reconstructed",
+            "class": "chrome-hearts-style-reconstructed",
+            "mask": "artwork-lower-reconstructed-mask.png",
+            "normalizedY": [
+              0.0,
+              0.62
+            ],
+            "confidence": "low",
+            "sourceAssetIds": [
+              "chromehearts-official-ch-plus-matchstick-holder",
+              "chromehearts-official-crosstail-water",
+              "chromehearts-official-stencil-dagger-socks"
+            ],
+            "allowedLanguage": [
+              "classic-gothic-cross",
+              "fleur-floral",
+              "pointed-arch",
+              "blackened-silver"
+            ],
+            "notExactProductTrace": true,
+            "maskSha256": "55608bec7f092b7e32094913df39578eeac29cfd97e1ea8863a425c19c90bbfb"
+          }
+        ],
+        "maskSha256": "1ff549866be53fb0e635866f37c4af0fcd991a5efa66619a110b28ae85812e1e",
+        "unknownMaskSha256": "c7d632dcb3061f86e7ef4a2462a445c8158e3c40e0f4bbea9fca97468128457d"
+      }
+    },
+    "nodeGroups": {
+      "Artwork_Upper": "unity/FidgetingApp/ArtSource/ModelPipeline/magnetic-slide-tile/evidence/07-material/rev-005/artwork-upper-mask.png",
+      "Artwork_Lower": "unity/FidgetingApp/ArtSource/ModelPipeline/magnetic-slide-tile/evidence/07-material/rev-005/artwork-lower-mask.png"
+    },
+    "independentSwap": true,
+    "geometryRebuildRequired": false,
+    "lowerOccludedRegionPolicy": "The source-visible exposed end is traced first. The hidden region remains explicitly occluded/incomplete, then receives a separate low-confidence Chrome Hearts-style reconstruction from archived official sources.",
+    "sourcePriority": [
+      "exact-product-direct-trace",
+      "explicit-occluded-incomplete-boundary",
+      "official-Chrome-Hearts-style-reconstruction-only-where-unreadable"
+    ],
+    "sourceBoundaryClasses": [
+      "chrome-hearts-style-reconstructed",
+      "directly-traced-exact-product",
+      "occluded-incomplete"
+    ],
+    "supplementalSourceManifest": {
+      "path": "unity/FidgetingApp/ArtSource/ModelPipeline/magnetic-slide-tile/evidence/07-material/rev-005/supplemental-source-manifest.json",
+      "sha256": "76cd1c5157beb70f2701cc15cf7411a8294ed368fb43ab71853b02ad2f3691a3",
+      "sources": [
+        {
+          "id": "chromehearts-official-ch-plus-matchstick-holder",
+          "url": "https://www.chromehearts.com/scents/matchstick-holder/148310SLVXXX186.html",
+          "page": "supplemental/chromehearts-ch-plus-matchstick-holder.html",
+          "imageUrl": "https://www.chromehearts.com/dw/image/v2/BFBV_PRD/on/demandware.static/-/Sites-ch-master-catalog/default/dw9d7b3726/img_products/hi-res/148310SLVXXX186_1.png?sw=1600&sh=2000",
+          "image": "supplemental/chromehearts-ch-plus-matchstick-holder.png",
+          "confirmedOfficialText": ".925 sterling silver; CH Plus top",
+          "styleUse": "CH Plus lobe proportions and blackened-silver recess language",
+          "pageSha256": "b918558645c2a20c85d7873a4537c15fd1b7d6ee87ccf0de5004b8dbdce52bc8",
+          "imageSha256": "627d677704512fd251cb35c8289c33b8e3b1d77b6357331ba26f3b8c51a7693c",
+          "origin": "external-primary-official",
+          "publisher": "Chrome Hearts",
+          "retrievedAt": "2026-08-24",
+          "priority": "supplemental-only-after-exact-product-evidence",
+          "notExactProductEvidence": true
+        },
+        {
+          "id": "chromehearts-official-crosstail-water",
+          "url": "https://www.chromehearts.com/baccarat/water/177732CRYXXX042.html",
+          "page": "supplemental/chromehearts-crosstail-water.html",
+          "imageUrl": "https://www.chromehearts.com/dw/image/v2/BFBV_PRD/on/demandware.static/-/Sites-ch-master-catalog/default/dw2513c62d/img_products/hi-res/503177732CRYXXX042_0632.png?sw=1600&sh=2000",
+          "image": "supplemental/chromehearts-crosstail-water.png",
+          "confirmedOfficialText": "Baccarat for Chrome Hearts; CROSSTAIL design",
+          "styleUse": "radial floral composition and pointed petal endings",
+          "pageSha256": "7da3ede7b8502a256175cd89be55d65bffdd9bc1fdf11338936f7a2b509a97ea",
+          "imageSha256": "f4449e750a4ea43613bad4d7984fbfce0721cc0f9fc0f38f3b5b7e05047dedf3",
+          "origin": "external-primary-official",
+          "publisher": "Chrome Hearts",
+          "retrievedAt": "2026-08-24",
+          "priority": "supplemental-only-after-exact-product-evidence",
+          "notExactProductEvidence": true
+        },
+        {
+          "id": "chromehearts-official-stencil-dagger-socks",
+          "url": "https://www.chromehearts.com/socks/stencil-socks/176354MB3XXX465.html",
+          "page": "supplemental/chromehearts-stencil-dagger-socks.html",
+          "imageUrl": "https://www.chromehearts.com/dw/image/v2/BFBV_PRD/on/demandware.static/-/Sites-ch-master-catalog/default/dw35e5a211/img_products/hi-res/316176354MB3MED465_1.png?sw=1600&sh=2000",
+          "image": "supplemental/chromehearts-stencil-dagger-socks.png",
+          "confirmedOfficialText": "Stencil motif; embroidered dagger detail",
+          "styleUse": "repeated CH Plus field and pointed dagger rhythm",
+          "pageSha256": "4cb686a90a1c3382ec5c1f78d9e2917bec6a7be27acb5d751c2ea07697c1f2a1",
+          "imageSha256": "1dd6b31333b81196caf8d4cbe38ad010cd2040afc3b29b2e16f3e6d7bca7f2a2",
+          "origin": "external-primary-official",
+          "publisher": "Chrome Hearts",
+          "retrievedAt": "2026-08-24",
+          "priority": "supplemental-only-after-exact-product-evidence",
+          "notExactProductEvidence": true
+        }
+      ],
+      "exactProductPriority": true,
+      "notExactProductEvidence": true
+    },
+    "pass": true
+  },
+  "colorTarget": {
+    "sampleCount": 247176,
+    "nearbyNeutralSteelSampleCount": 6200,
+    "nearbyNeutralSteelMeanSrgb": [
+      107.391,
+      107.094,
+      101.327
+    ],
+    "whiteBalanceGains": [
+      0.980258,
+      0.982973,
+      1.03892
+    ],
+    "correctedBloodRedSrgb": {
+      "p10": [
+        54.89,
+        0,
+        10.39
+      ],
+      "median": [
+        96.07,
+        10.81,
+        22.86
+      ],
+      "p90": [
+        135.28,
+        21.63,
+        38.44
+      ]
+    },
+    "correctedHsv": {
+      "hueSignedMedianDegrees": -9.261,
+      "saturationMedian": 0.8852,
+      "valueMedian": 0.3767
+    },
+    "shaderTargetLinearRgb": [
+      0.22,
+      0.008,
+      0.018
+    ],
+    "shaderAllowedLinearRange": {
+      "red": [
+        0.08,
+        0.42
+      ],
+      "green": [
+        0.002,
+        0.028
+      ],
+      "blue": [
+        0.004,
+        0.045
+      ]
+    },
+    "userAuthority": "deep blood red, not pink",
+    "chemistryClaimed": false,
+    "schemaVersion": 1,
+    "sourceAssetIds": [
+      "slider-intake-obs-frame-01",
+      "slider-intake-obs-frame-05",
+      "slider-intake-obs-frame-10",
+      "slider-intake-haloo-official-03"
+    ],
+    "sourceHashes": {
+      "upper": "7dab36969a2a9d91f690b07959dd99a02de0558d5471b2bd99cef2f90b12eb5e",
+      "upperColorCrossCheck": "6dabf128d0c946902787f8eb6e0fcf3a9a2bbd7b69253b8ae72a20a49f45e5fb",
+      "lower": "b179cc306d11a0e1652723de09fdd9052b163494e98df767b2ea63f30758ba78",
+      "officialRedCrossCheck": "60ac5b7c3d1e4705e3ad72cbea14cfebf1a17db9d25be3d352e47dad1117225c"
+    },
+    "perspectiveRectification": {
+      "upperQuadPixels": [
+        289,
+        530,
+        429,
+        546,
+        466,
+        901,
+        256,
+        873
+      ],
+      "lowerVisibleQuadPixels": [
+        272,
+        716,
+        439,
+        733,
+        438,
+        884,
+        274,
+        871
+      ],
+      "outputSizePx": [
+        620,
+        1000
+      ]
+    }
+  },
+  "sourceLinks": [
+    {
+      "assetId": "slider-intake-obs-frame-01",
+      "role": "authoritative deep blood-red upper face and full upper motif",
+      "path": "unity/FidgetingApp/ArtSource/ModelPipeline/magnetic-slide-tile/evidence/01-intake/rev-001/obsidian-frames/frame-01.jpg"
+    },
+    {
+      "assetId": "slider-intake-obs-frame-05",
+      "role": "authoritative oblique blood-red crystal response",
+      "path": "unity/FidgetingApp/ArtSource/ModelPipeline/magnetic-slide-tile/evidence/01-intake/rev-001/obsidian-frames/frame-05.jpg"
+    },
+    {
+      "assetId": "slider-intake-obs-frame-10",
+      "role": "authoritative open pose and source-visible lower pattern end",
+      "path": "unity/FidgetingApp/ArtSource/ModelPipeline/magnetic-slide-tile/evidence/01-intake/rev-001/obsidian-frames/frame-10.jpg"
+    },
+    {
+      "assetId": "slider-intake-haloo-official-03",
+      "role": "official three-color face lineup; silver perimeter, opaque motif, bright angle-varying face",
+      "path": "unity/FidgetingApp/ArtSource/ModelPipeline/magnetic-slide-tile/evidence/01-intake/rev-002/haloo-official/03.png"
+    },
+    {
+      "assetId": "slider-intake-haloo-official-04",
+      "role": "official high-resolution purple face closeup; motif boundaries and face highlights",
+      "path": "unity/FidgetingApp/ArtSource/ModelPipeline/magnetic-slide-tile/evidence/01-intake/rev-002/haloo-official/04.png"
+    },
+    {
+      "assetId": "slider-intake-haloo-official-06",
+      "role": "official oblique open view; edge stacking and purple-blue interference",
+      "path": "unity/FidgetingApp/ArtSource/ModelPipeline/magnetic-slide-tile/evidence/01-intake/rev-002/haloo-official/06.png"
+    },
+    {
+      "assetId": "slider-intake-haloo-official-08",
+      "role": "official front/open view; bright crystalline highlight breakup",
+      "path": "unity/FidgetingApp/ArtSource/ModelPipeline/magnetic-slide-tile/evidence/01-intake/rev-002/haloo-official/08.png"
+    },
+    {
+      "assetId": "slider-intake-nxedc-ref-01",
+      "role": "exact-product front closeup used for deterministic motif visual trace",
+      "path": "unity/FidgetingApp/ArtSource/ModelPipeline/magnetic-slide-tile/evidence/01-intake/rev-002/external-nxedc/reference-01.jpg"
+    },
+    {
+      "assetId": "slider-intake-nxedc-ref-05",
+      "role": "exact-product macro oblique closeup; parallax, edge stack, green-blue-pink response",
+      "path": "unity/FidgetingApp/ArtSource/ModelPipeline/magnetic-slide-tile/evidence/01-intake/rev-002/external-nxedc/reference-05.jpg"
+    }
+  ],
+  "sourceClaimIds": [
+    "slider-analysis-claim-material-language"
+  ],
+  "manufacturingAnalysis": {
+    "confirmed": [
+      {
+        "claim": "The exact HALOOPLAYER product page lists Material: Steel.",
+        "confidence": "high",
+        "url": "https://www.halooplayer.com/halo-heart-rhythm-haloo-player-edc-push-slider--high-tech-stress-relief-toy-fingertip-gyro--hand-fidget-gadget-p6875695.html"
+      }
+    ],
+    "visualCues": [
+      "Narrow white mirror highlights and a bright perimeter support polished metal, but do not identify alloy or plating.",
+      "The opaque dark motif keeps crisp edges over changing red fields.",
+      "Oblique closeups show highlight separation and apparent depth between motif, color field, and perimeter.",
+      "Patchy red response can fit nacre/abalone, dichroic film, or interference pigment; pixels do not establish chemistry."
+    ],
+    "recommendedProvisionalStack": [
+      {
+        "layer": "mirror-polished steel frame/body",
+        "confidence": "medium",
+        "alternatives": [
+          "polished steel with clear protective finish",
+          "steel substrate with bright plating"
+        ]
+      },
+      {
+        "layer": "opaque dark motif",
+        "confidence": "medium",
+        "alternatives": [
+          "blackened/annealed steel mark",
+          "etched and dark-filled recess",
+          "laser-cut black overlay"
+        ]
+      },
+      {
+        "layer": "iridescent substrate",
+        "confidence": "medium-low",
+        "alternatives": [
+          "mother-of-pearl/abalone inlay",
+          "dichroic multilayer film",
+          "interference-pigment layer"
+        ]
+      },
+      {
+        "layer": "clear protective cap",
+        "confidence": "medium-low",
+        "alternatives": [
+          "clear resin",
+          "clear polymer lens",
+          "glass/crystal cover"
+        ]
+      }
+    ],
+    "researchLinks": [
+      "https://doi.org/10.1038/s41598-021-99327-4",
+      "https://www.antalis.fr/mediashare/g4media/pdf/TS_EN_3M_GLASS_FINISHES_DICHROIC_TECH_DATASHEET_00_11022026.pdf",
+      "https://www.troteclaser.com/en/helpcenter/materials/application-techniques/laser-marking-steel-through-annealing-process"
+    ],
+    "productionSpecificationEstablished": false
+  },
+  "uncertaintyPolicy": {
+    "pbrValuesAreProductionSpecifications": false,
+    "motifIsExactProductionVector": false,
+    "alloyKnown": false,
+    "coatingKnown": false,
+    "clearLayerMaterialKnown": false,
+    "iridescentSubstrateKnown": false,
+    "hiddenRatchetConstructionKnown": false
+  },
+  "mechanismDecisionMetadata": {
+    "decisionState": "locked-user-authoritative",
+    "deliveryState": "specified-only-runtime-and-hardware-validation-pending",
+    "rotationRangeDegrees": 360,
+    "detentStepDegrees": 12,
+    "detentCount": 30,
+    "semantics": "ratchet",
+    "physicalAndHapticConsumeSameSetting": true,
+    "runtimeChanged": false,
+    "hapticsChanged": false,
+    "unityChanged": false,
+    "hiddenConstruction": "unknown"
+  },
+  "neutralReveal": {
+    "lights": [
+      "M07R5_Neutral_Key_Softbox",
+      "M07R5_Neutral_Fill_Softbox",
+      "M07R5_Neutral_Rim_Strip",
+      "M07R5_Neutral_Face_Reveal"
+    ],
+    "lightSignature": [
+      {
+        "location": [
+          48,
+          -62,
+          88
+        ],
+        "energy": 62000,
+        "size": 48,
+        "target": [
+          0,
+          0,
+          1
+        ]
+      },
+      {
+        "location": [
+          -54,
+          -14,
+          52
+        ],
+        "energy": 36000,
+        "size": 42,
+        "target": [
+          0,
+          0,
+          1
+        ]
+      },
+      {
+        "location": [
+          18,
+          68,
+          58
+        ],
+        "energy": 52000,
+        "size": 30,
+        "target": [
+          0,
+          2,
+          1
+        ]
+      },
+      {
+        "location": [
+          -6,
+          -34,
+          104
+        ],
+        "energy": 34000,
+        "size": 26,
+        "target": [
+          0,
+          0,
+          3
+        ]
+      }
+    ],
+    "worldStrength": 0.9,
+    "finalLightingOrEnvironment": false,
+    "materialBoard": "neutral-pbr-material-board.png",
+    "materialCloseup": "neutral-pbr-material-closeup.png"
+  },
+  "diagnosticLighting": {
+    "classification": "Gate 07 material tests only; not approved Gate 08 lighting",
+    "exposureEv": 0.0,
+    "crystalResponse": {
+      "image": "diagnostic-second-light-crystal-response.png",
+      "camera": {
+        "location": [
+          58,
+          -72,
+          58
+        ],
+        "target": [
+          0,
+          -1,
+          3.2
+        ],
+        "lensMm": 78
+      },
+      "light": {
+        "location": [
+          -62,
+          34,
+          76
+        ],
+        "energyW": 44000,
+        "sizeMm": 18,
+        "target": [
+          0,
+          2,
+          4
+        ]
+      }
+    },
+    "sideDirectReflection": {
+      "image": "diagnostic-side-direct-reflection.png",
+      "camera": {
+        "location": [
+          110,
+          0,
+          20
+        ],
+        "target": [
+          0,
+          0,
+          4
+        ],
+        "lensMm": 82
+      },
+      "light": {
+        "location": [
+          96,
+          0,
+          24
+        ],
+        "energyW": 50000,
+        "sizeMm": 30,
+        "target": [
+          24,
+          0,
+          4
+        ]
+      }
+    },
+    "finalLightingOrEnvironment": false
+  },
+  "forbiddenLightingAndShaderTricks": {
+    "upperEmissionStrength": 0.0,
+    "lowerEmissionStrength": 0.0,
+    "bloomEnabled": false,
+    "overexposureUsed": false,
+    "gate08LightingUsed": false,
+    "pass": true
+  },
+  "scope": {
+    "geometryChanged": false,
+    "artworkGeometryAdded": false,
+    "hiddenMechanismAdded": false,
+    "runtimeChanged": false,
+    "hapticsChanged": false,
+    "unityAssetChanged": false,
+    "gate08Entered": false
+  },
+  "blender": "5.2.0 LTS"
+}

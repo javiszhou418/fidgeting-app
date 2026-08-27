@@ -1,0 +1,78 @@
+{
+  "schemaVersion": 1,
+  "gate": "07-material",
+  "materialRevision": 6,
+  "metrics": {
+    "rev2Clean": {
+      "sizePx": [
+        620,
+        1000
+      ],
+      "foregroundCoverage": 0.38705645,
+      "intermediatePixelFraction": 0.0,
+      "edgePixelCount": 30140,
+      "foregroundConnectedComponents": 30,
+      "foregroundComponentsAtLeast8Px": 30,
+      "foregroundTinyComponentsBelow8Px": 0,
+      "backgroundConnectedComponents": 99,
+      "backgroundComponentsAtLeast8Px": 95,
+      "backgroundTinyComponentsBelow8Px": 4
+    },
+    "rev5RejectedUpper": {
+      "sizePx": [
+        620,
+        1000
+      ],
+      "foregroundCoverage": 0.35845645,
+      "intermediatePixelFraction": 0.0,
+      "edgePixelCount": 20540,
+      "foregroundConnectedComponents": 96,
+      "foregroundComponentsAtLeast8Px": 92,
+      "foregroundTinyComponentsBelow8Px": 4,
+      "backgroundConnectedComponents": 88,
+      "backgroundComponentsAtLeast8Px": 47,
+      "backgroundTinyComponentsBelow8Px": 41
+    },
+    "rev6Upper": {
+      "sizePx": [
+        620,
+        1000
+      ],
+      "foregroundCoverage": 0.38705645,
+      "intermediatePixelFraction": 0.0,
+      "edgePixelCount": 30140,
+      "foregroundConnectedComponents": 30,
+      "foregroundComponentsAtLeast8Px": 30,
+      "foregroundTinyComponentsBelow8Px": 0,
+      "backgroundConnectedComponents": 99,
+      "backgroundComponentsAtLeast8Px": 95,
+      "backgroundTinyComponentsBelow8Px": 4
+    },
+    "rev6Lower": {
+      "sizePx": [
+        620,
+        1000
+      ],
+      "foregroundCoverage": 0.38705645,
+      "intermediatePixelFraction": 0.0,
+      "edgePixelCount": 30140,
+      "foregroundConnectedComponents": 30,
+      "foregroundComponentsAtLeast8Px": 30,
+      "foregroundTinyComponentsBelow8Px": 0,
+      "backgroundConnectedComponents": 99,
+      "backgroundComponentsAtLeast8Px": 95,
+      "backgroundTinyComponentsBelow8Px": 4
+    }
+  },
+  "checks": {
+    "rev2RegisteredHashMatches": true,
+    "rev3UsedSameHash": true,
+    "upperLosslessIdentity": true,
+    "lowerLosslessIdentity": true,
+    "rev5RejectedMaskIsDifferent": true,
+    "sharpnessNoWorseThanPrior": true,
+    "connectedDetailNoWorseThanPrior": true,
+    "independentPaths": true
+  },
+  "pass": true
+}

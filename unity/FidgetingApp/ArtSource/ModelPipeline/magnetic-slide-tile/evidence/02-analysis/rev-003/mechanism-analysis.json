@@ -1,0 +1,131 @@
+{
+  "schemaVersion": 1,
+  "modelId": "magnetic-slide-tile",
+  "gate": "02-analysis",
+  "revision": 3,
+  "userIntakeClassification": {
+    "approved": true,
+    "exactStatement": "三段视频拍摄的是与目标完全相同的产品，仅花纹和纹路不同。视频用于逐帧确认轴心、滑轨、单向推动、最大行程、任意角度旋转和棘轮玩法。",
+    "boundary": "颜色、花纹和纹路差异不得被解释为机构差异。"
+  },
+  "findings": {
+    "IMG_6022": {
+      "observed": [
+        "426 decoded frames show stepped longitudinal opening and successful closure.",
+        "M exterior has silver text/motif; its reverse exposes two Torx screws, rails and ball rows.",
+        "C has purple exterior/cyan-doodle reverse and is thumb-driven.",
+        "Maximum visible travel is 0.38±0.04L with about 0.62L residual overlap.",
+        "Closed stop blocks farther opening in the opposite direction; open-to-closed return succeeds.",
+        "Mid-travel relative yaw spans about 11.3°; full rotation is not proven here."
+      ],
+      "inferred": "Lower-carrier pin plus cover slot is mildly favored, but reciprocal ownership fits nearly as well.",
+      "confidence": "low for concealed pin/slot ownership"
+    },
+    "IMG_6023": {
+      "observed": [
+        "480 decoded frames show stepped 0°→180°→0° rotation at one translational registration.",
+        "No successful slide is shown.",
+        "The apparent end-to-end pose is rotation rather than translation.",
+        "The distal perforation on M is not the pivot."
+      ],
+      "inferred": "15 candidate detent impulses per 180° direction support 12° cadence and 30 detents per 360°.",
+      "confidence": "strong for cadence; hidden pin not visible"
+    },
+    "IMG_6024": {
+      "observed": [
+        "821 decoded frames expose the M track face around f183–207.",
+        "Slide and rotation occur at partial and near-maximum translation.",
+        "Maximum travel is about 0.44L median, about 0.50L peak; fitted point/path interval is about 0.46L.",
+        "Clean rests appear near 12.3°, 134° and 170°.",
+        "The final about 34° turn has three strong impulses, about 11.3° per impulse.",
+        "Reverse slide succeeds; no mechanical jam is demonstrated."
+      ],
+      "inferred": "A 48-frame fit supports an M fixed point near normalized (u,v)≈(0.36±0.08,0.45±0.10), with C centerline contact traversing u≈0.30–0.76.",
+      "confidence": "medium; shaft and slot walls remain hidden"
+    }
+  },
+  "combinedClaims": [
+    {
+      "id": "compound-axis-longitudinal-track",
+      "statement": "Two plates are constrained by a compound axis/longitudinal-track relationship.",
+      "confidence": "high"
+    },
+    {
+      "id": "carrier-cover-relative-roles",
+      "statement": "M is hand-supported and likely carries the fixed point; C is the moving cover.",
+      "confidence": "medium",
+      "unknown": "Hidden attachment geometry is not directly visible."
+    },
+    {
+      "id": "centerline-contact-path",
+      "statement": "C carries or follows a centerline longitudinal slot/contact path.",
+      "confidence": "medium",
+      "unknown": "Exact concealed slot profile and coupling."
+    },
+    {
+      "id": "one-outward-direction",
+      "statement": "From closed, slide opens in one outward direction and returns on the same path; it does not pass beyond the closed stop.",
+      "confidence": "high"
+    },
+    {
+      "id": "normalized-travel-range",
+      "statement": "Supported travel is about 0.38–0.46L, up to about 0.50L peak.",
+      "confidence": "medium",
+      "boundary": "21 mm is only consistent with this range, not newly measured."
+    },
+    {
+      "id": "twelve-degree-detents",
+      "statement": "Detented rotation is strongly supported at 12° per position, 30 per 360°.",
+      "confidence": "strong",
+      "boundary": "Videos directly show reversible 0↔180° and up to about 170°; full 360° is user-authoritative."
+    },
+    {
+      "id": "rotation-across-slide",
+      "statement": "Rotation is observed at partial and near-maximum slide.",
+      "confidence": "high",
+      "unknown": "Access at every exact slot location."
+    },
+    {
+      "id": "no-jam-proven",
+      "statement": "No jam is proven; dwell/release behavior is consistent with detent/breakaway resistance.",
+      "confidence": "medium"
+    },
+    {
+      "id": "exterior-versus-reverse-face",
+      "statement": "Rails, screws and ball rows belong to the exposed reverse/internal face of M, distinct from its normal clean exterior face.",
+      "confidence": "high",
+      "unknown": "Any remaining conflict with prior concealed-overlap interpretation requires user review."
+    }
+  ],
+  "reviewQuestion": "这个玩法/机构解读是否符合真实玩具？",
+  "boards": [
+    {
+      "path": "unity/FidgetingApp/ArtSource/ModelPipeline/magnetic-slide-tile/evidence/02-analysis/rev-003/three-video-timeline-board.png",
+      "sha256": "35c73d1f2612bd7638b6cb5543c7864df75ebcb5480809947df0b4f6148331b0"
+    },
+    {
+      "path": "unity/FidgetingApp/ArtSource/ModelPipeline/magnetic-slide-tile/evidence/02-analysis/rev-003/plate-identity-board.png",
+      "sha256": "c951d9d4d6a6936c3973903c1aa1765e03378b652176ceaddcc6c7e15e1d3f52"
+    },
+    {
+      "path": "unity/FidgetingApp/ArtSource/ModelPipeline/magnetic-slide-tile/evidence/02-analysis/rev-003/one-way-slide-sequence-board.png",
+      "sha256": "01e7dd7fd836cfbb68f1c3ad4a10857ece4f6d224b0534ea9f1536935d722e85"
+    },
+    {
+      "path": "unity/FidgetingApp/ArtSource/ModelPipeline/magnetic-slide-tile/evidence/02-analysis/rev-003/rotation-and-audio-board.png",
+      "sha256": "20c3d7fcffdee653e32951e958a2edc0167f898eb4ec778126a9b5a28839f30d"
+    },
+    {
+      "path": "unity/FidgetingApp/ArtSource/ModelPipeline/magnetic-slide-tile/evidence/02-analysis/rev-003/axis-slot-hypothesis-board.png",
+      "sha256": "ed8d1c8b0a5c8d1cbc6059ec3e4b63409d8d2179f529d333c352ab066efa1c80"
+    },
+    {
+      "path": "unity/FidgetingApp/ArtSource/ModelPipeline/magnetic-slide-tile/evidence/02-analysis/rev-003/contradiction-board.png",
+      "sha256": "92dc829bec50f9e2c5331d897a9e1bf56f1dddf0ba7ebf0a823f8d33e1f29c43"
+    },
+    {
+      "path": "unity/FidgetingApp/ArtSource/ModelPipeline/magnetic-slide-tile/evidence/02-analysis/rev-003/audio-impulse-contact-sheet.png",
+      "sha256": "b2909fccad379098da7b3131667dd9669e1d8cc9cea6d631bd077056b7035764"
+    }
+  ]
+}

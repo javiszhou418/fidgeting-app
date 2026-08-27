@@ -1,0 +1,54 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="1100" viewBox="0 0 1600 1100">
+  <defs>
+    <linearGradient id="bg2" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#071017"/><stop offset="1" stop-color="#131a22"/></linearGradient>
+    <linearGradient id="silver" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#f2f7f8"/><stop offset=".32" stop-color="#64747f"/><stop offset=".64" stop-color="#dfe8eb"/><stop offset="1" stop-color="#7e8f99"/></linearGradient>
+    <linearGradient id="glass" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#7cecf1" stop-opacity=".72"/><stop offset=".5" stop-color="#7c66e6" stop-opacity=".67"/><stop offset="1" stop-color="#f07abf" stop-opacity=".72"/></linearGradient>
+    <linearGradient id="track" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#313f48"/><stop offset="1" stop-color="#10171c"/></linearGradient>
+    <marker id="arrow2" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="9" markerHeight="9" orient="auto-start-reverse"><path d="M0 0L10 5L0 10Z" fill="#70e8ee"/></marker>
+    <clipPath id="turnClip"><rect x="1190" y="180" width="330" height="390" rx="24"/></clipPath>
+    <clipPath id="laneClip"><rect x="1190" y="630" width="330" height="300" rx="24"/></clipPath>
+    <filter id="s" x="-30%" y="-30%" width="160%" height="160%"><feDropShadow dx="0" dy="12" stdDeviation="14" flood-color="#000" flood-opacity=".42"/></filter>
+    <style>
+      .sans{font-family:Inter,-apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei",sans-serif}.title{font-size:52px;font-weight:850;fill:#f4f8fa}.sub{font-size:21px;fill:#a5b2bd}.eyebrow{font-size:18px;font-weight:800;letter-spacing:.16em;fill:#70e8ee}.label{font-size:22px;font-weight:820;fill:#f4f8fa}.copy{font-size:17px;fill:#aebac4}.small{font-size:15px;fill:#94a3ae}.leader{fill:none;stroke:#70e8ee;stroke-width:4;marker-end:url(#arrow2)}.ghost{fill:none;stroke:#566b78;stroke-width:3;stroke-dasharray:12 10}.capsule{stroke:#dce8ec;stroke-width:3}.note{fill:#101a22;stroke:#334652;stroke-width:2}
+    </style>
+  </defs>
+  <rect width="1600" height="1100" fill="url(#bg2)"/>
+  <text x="70" y="76" class="sans eyebrow">GATE 04 · EXPLODED PLAN</text>
+  <text x="70" y="140" class="sans title">爆炸顺序与运动关系</text>
+  <rect x="760" y="54" width="760" height="94" rx="22" fill="#10212a" stroke="#4c8490"/>
+  <text x="800" y="91" class="sans label">合同：50 × 31 × 12 mm</text>
+  <text x="800" y="124" class="sans copy">直推 21 mm → 端部旋转约 90° · 两条工作通道 · 可见机构代理</text>
+
+  <path d="M650 265V900" class="ghost"/>
+  <path d="M620 238V180" class="leader"/><text x="520" y="172" class="sans small">爆炸轴 +Z</text>
+
+  <g filter="url(#s)">
+    <g transform="translate(0,-10)"><rect x="470" y="220" width="360" height="126" rx="63" fill="url(#glass)" class="capsule"/><path d="M540 283H760" class="ghost"/></g>
+    <g><rect x="440" y="370" width="420" height="150" rx="75" fill="url(#silver)" class="capsule"/><rect x="470" y="397" width="360" height="96" rx="48" fill="#141d23" opacity=".34"/></g>
+    <g><rect x="474" y="565" width="352" height="120" rx="60" fill="url(#track)" class="capsule"/><path d="M585 584V666" stroke="#70e8ee" stroke-width="16" stroke-linecap="round"/><path d="M715 584V666" stroke="#d8f6f7" stroke-width="16" stroke-linecap="round"/><circle cx="585" cy="610" r="10" fill="#e5edf0"/><circle cx="585" cy="646" r="10" fill="#e5edf0"/><circle cx="715" cy="600" r="10" fill="#e5edf0"/><circle cx="715" cy="636" r="10" fill="#e5edf0"/></g>
+    <g><rect x="440" y="735" width="420" height="150" rx="75" fill="url(#silver)" class="capsule"/><rect x="470" y="762" width="360" height="96" rx="48" fill="#141d23" opacity=".34"/></g>
+    <g><rect x="470" y="905" width="360" height="126" rx="63" fill="url(#glass)" class="capsule"/><path d="M540 968H760" class="ghost"/></g>
+  </g>
+
+  <rect x="78" y="210" width="300" height="92" rx="18" class="note"/><text x="108" y="247" class="sans label">01 · 正面装饰嵌片</text><text x="108" y="277" class="sans copy">外观层；厚度暂不单独猜测</text><path d="M378 258H476" class="leader"/>
+  <rect x="78" y="390" width="300" height="92" rx="18" class="note"/><text x="108" y="427" class="sans label">02 · 上片承载件</text><text x="108" y="457" class="sans copy">随手指移动与旋转</text><path d="M378 438H447" class="leader"/>
+  <rect x="78" y="590" width="300" height="112" rx="18" class="note"/><text x="108" y="627" class="sans label">03 · 导向 / 旋转接口</text><text x="108" y="657" class="sans copy">双通道可见代理</text><text x="108" y="683" class="sans copy">隐藏硬件数量不建模为事实</text><path d="M378 642H478" class="leader"/>
+  <rect x="78" y="790" width="300" height="92" rx="18" class="note"/><text x="108" y="827" class="sans label">04 · 下片承载件</text><text x="108" y="857" class="sans copy">固定基座 / 坐标原点</text><path d="M378 838H447" class="leader"/>
+  <rect x="78" y="954" width="300" height="92" rx="18" class="note"/><text x="108" y="991" class="sans label">05 · 背面装饰嵌片</text><text x="108" y="1021" class="sans copy">与正面花纹独立</text><path d="M378 1002H476" class="leader"/>
+
+  <path d="M880 430H1070" class="leader"/><text x="895" y="407" class="sans label">+Y 直推 21 mm</text>
+  <path d="M1000 540 C1100 480 1115 370 1040 305" class="leader"/><text x="900" y="576" class="sans label">末端约 90°</text>
+  <circle cx="1040" cy="305" r="15" fill="#70e8ee"/><text x="895" y="608" class="sans copy">旋转发生在端部接口，不绕模型中心自转</text>
+
+  <rect x="1190" y="180" width="330" height="390" rx="24" fill="#05080b" stroke="#334652" stroke-width="2"/>
+  <image href="../../01-intake/rev-001/user-video-frames/frame-11.jpg" x="1190" y="180" width="330" height="390" preserveAspectRatio="xMidYMid slice" clip-path="url(#turnClip)"/>
+  <rect x="1210" y="198" width="200" height="42" rx="21" fill="#071018" stroke="#70e8ee"/><text x="1234" y="226" class="sans copy" fill="#f4f8fa">实拍：约 90° 姿态</text>
+
+  <rect x="1190" y="630" width="330" height="300" rx="24" fill="#05080b" stroke="#334652" stroke-width="2"/>
+  <image href="../../01-intake/rev-001/user-video-frames/frame-08.jpg" x="1190" y="630" width="330" height="300" preserveAspectRatio="xMidYMid slice" clip-path="url(#laneClip)"/>
+  <rect x="1210" y="650" width="205" height="42" rx="21" fill="#071018" stroke="#70e8ee"/><text x="1234" y="678" class="sans copy" fill="#f4f8fa">实拍：双通道内侧</text>
+
+  <rect x="900" y="948" width="620" height="98" rx="20" fill="#19171a" stroke="#d8a75e" stroke-width="2"/>
+  <text x="930" y="985" class="sans label" fill="#f0c681">白模边界</text>
+  <text x="930" y="1017" class="sans copy">Gate 05 先只验证这 5 层顺序、胶囊轮廓、12 mm 总厚度和两段运动；材质细节留到 Gate 07。</text>
+</svg>

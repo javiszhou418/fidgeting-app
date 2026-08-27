@@ -1,0 +1,1561 @@
+{
+  "schemaVersion": 1,
+  "modelId": "magnetic-slide-tile",
+  "gate": "02-analysis",
+  "revision": 11,
+  "title": "Gate 02 rev 11 · 固定底座与固定轴机构证据合同",
+  "sourceInventory": {
+    "assetIds": [
+      "slider-intake-user-video",
+      "slider-intake-user-frame-01",
+      "slider-intake-user-frame-02",
+      "slider-intake-user-frame-03",
+      "slider-intake-user-frame-04",
+      "slider-intake-user-frame-05",
+      "slider-intake-user-frame-06",
+      "slider-intake-user-frame-07",
+      "slider-intake-user-frame-08",
+      "slider-intake-user-frame-09",
+      "slider-intake-user-frame-10",
+      "slider-intake-user-frame-11",
+      "slider-intake-user-frame-12",
+      "slider-intake-user-contact-sheet",
+      "slider-intake-audio-waveform",
+      "slider-intake-source-metadata",
+      "slider-intake-obsidian-note",
+      "slider-intake-obs-frame-01",
+      "slider-intake-obs-frame-02",
+      "slider-intake-obs-frame-03",
+      "slider-intake-obs-frame-04",
+      "slider-intake-obs-frame-05",
+      "slider-intake-obs-frame-06",
+      "slider-intake-obs-frame-07",
+      "slider-intake-obs-frame-08",
+      "slider-intake-obs-frame-09",
+      "slider-intake-obs-frame-10",
+      "slider-intake-obsidian-contact-sheet",
+      "slider-intake-nxedc-ref-01",
+      "slider-intake-nxedc-ref-02",
+      "slider-intake-nxedc-ref-03",
+      "slider-intake-nxedc-ref-04",
+      "slider-intake-nxedc-ref-05",
+      "slider-intake-nxedc-ref-06",
+      "slider-intake-nxedc-contact-sheet",
+      "slider-intake-nxedc-metadata",
+      "slider-intake-haloo-official-01",
+      "slider-intake-haloo-official-02",
+      "slider-intake-haloo-official-03",
+      "slider-intake-haloo-official-04",
+      "slider-intake-haloo-official-05",
+      "slider-intake-haloo-official-06",
+      "slider-intake-haloo-official-07",
+      "slider-intake-haloo-official-08",
+      "slider-intake-haloo-official-metadata",
+      "slider-intake-user-mechanism-video-6022",
+      "slider-intake-user-mechanism-video-6023",
+      "slider-intake-user-mechanism-video-6024",
+      "slider-intake-user-mechanism-source-metadata-r003",
+      "slider-analysis-video-survey-generator-r003",
+      "slider-analysis-mechanism-board-builder-r003",
+      "slider-analysis-frame-survey-report-r003",
+      "slider-analysis-mechanism-findings-r003",
+      "slider-analysis-img-6022-frame-manifest-json-r003",
+      "slider-analysis-img-6022-frame-manifest-csv-r003",
+      "slider-analysis-img-6022-survey-board-r003",
+      "slider-analysis-img-6022-audio-impulses-csv-r003",
+      "slider-analysis-img-6022-audio-impulses-png-r003",
+      "slider-analysis-img-6022-playback-proxy-r003",
+      "slider-analysis-img-6023-frame-manifest-json-r003",
+      "slider-analysis-img-6023-frame-manifest-csv-r003",
+      "slider-analysis-img-6023-survey-board-r003",
+      "slider-analysis-img-6023-audio-impulses-csv-r003",
+      "slider-analysis-img-6023-audio-impulses-png-r003",
+      "slider-analysis-img-6023-playback-proxy-r003",
+      "slider-analysis-img-6024-frame-manifest-json-r003",
+      "slider-analysis-img-6024-frame-manifest-csv-r003",
+      "slider-analysis-img-6024-survey-board-r003",
+      "slider-analysis-img-6024-audio-impulses-csv-r003",
+      "slider-analysis-img-6024-audio-impulses-png-r003",
+      "slider-analysis-img-6024-playback-proxy-r003",
+      "slider-analysis-img-6022-key-f0000-r003",
+      "slider-analysis-img-6022-key-f0050-r003",
+      "slider-analysis-img-6022-key-f0075-r003",
+      "slider-analysis-img-6022-key-f0100-r003",
+      "slider-analysis-img-6022-key-f0125-r003",
+      "slider-analysis-img-6022-key-f0175-r003",
+      "slider-analysis-img-6022-key-f0225-r003",
+      "slider-analysis-img-6022-key-f0350-r003",
+      "slider-analysis-img-6022-key-f0425-r003",
+      "slider-analysis-img-6023-key-f0000-r003",
+      "slider-analysis-img-6023-key-f0012-r003",
+      "slider-analysis-img-6023-key-f0024-r003",
+      "slider-analysis-img-6023-key-f0048-r003",
+      "slider-analysis-img-6023-key-f0072-r003",
+      "slider-analysis-img-6023-key-f0096-r003",
+      "slider-analysis-img-6023-key-f0120-r003",
+      "slider-analysis-img-6023-key-f0192-r003",
+      "slider-analysis-img-6023-key-f0240-r003",
+      "slider-analysis-img-6024-key-f0000-r003",
+      "slider-analysis-img-6024-key-f0032-r003",
+      "slider-analysis-img-6024-key-f0064-r003",
+      "slider-analysis-img-6024-key-f0096-r003",
+      "slider-analysis-img-6024-key-f0128-r003",
+      "slider-analysis-img-6024-key-f0160-r003",
+      "slider-analysis-img-6024-key-f0183-r003",
+      "slider-analysis-img-6024-key-f0191-r003",
+      "slider-analysis-img-6024-key-f0199-r003",
+      "slider-analysis-img-6024-key-f0207-r003",
+      "slider-analysis-img-6024-key-f0256-r003",
+      "slider-analysis-img-6024-key-f0320-r003",
+      "slider-analysis-img-6024-key-f0384-r003",
+      "slider-analysis-img-6024-key-f0576-r003",
+      "slider-analysis-img-6024-key-f0608-r003",
+      "slider-analysis-img-6024-key-f0704-r003",
+      "slider-analysis-img-6024-key-f0736-r003",
+      "slider-analysis-img-6024-key-f0768-r003",
+      "slider-analysis-img-6024-key-f0800-r003",
+      "slider-analysis-img-6024-key-f0820-r003",
+      "slider-analysis-key-frame-manifest-r003",
+      "slider-analysis-video-timeline-r003",
+      "slider-analysis-plate-identity-r003",
+      "slider-analysis-one-way-slide-r003",
+      "slider-analysis-rotation-audio-r003",
+      "slider-analysis-axis-slot-hypothesis-r003",
+      "slider-analysis-contradiction-r003",
+      "slider-analysis-audio-contact-sheet-r003",
+      "slider-analysis-validation-report-r003",
+      "slider-analysis-video-registrar-r003",
+      "slider-analysis-video-workbench-browser-r003",
+      "slider-analysis-video-browser-registrar-r003",
+      "slider-analysis-path-boundary-correction-r003",
+      "slider-analysis-proportion-analysis-r004",
+      "slider-analysis-endpoint-pivot-reference-contract-r007",
+      "magnetic-slide-tile-supplemental-source-config-r005",
+      "magnetic-slide-tile-supplemental-ch-plus-page-r005",
+      "magnetic-slide-tile-supplemental-ch-plus-image-r005",
+      "magnetic-slide-tile-supplemental-crosstail-page-r005",
+      "magnetic-slide-tile-supplemental-crosstail-image-r005",
+      "magnetic-slide-tile-supplemental-stencil-page-r005",
+      "magnetic-slide-tile-supplemental-stencil-image-r005",
+      "slider-analysis-user-selected-bottom-base-close-r011",
+      "slider-analysis-user-selected-bottom-base-context-r011"
+    ],
+    "groups": {
+      "img5961AndDerived": [
+        "slider-intake-user-video",
+        "slider-intake-user-frame-01",
+        "slider-intake-user-frame-02",
+        "slider-intake-user-frame-03",
+        "slider-intake-user-frame-04",
+        "slider-intake-user-frame-05",
+        "slider-intake-user-frame-06",
+        "slider-intake-user-frame-07",
+        "slider-intake-user-frame-08",
+        "slider-intake-user-frame-09",
+        "slider-intake-user-frame-10",
+        "slider-intake-user-frame-11",
+        "slider-intake-user-frame-12",
+        "slider-intake-user-contact-sheet",
+        "slider-intake-audio-waveform",
+        "slider-intake-source-metadata"
+      ],
+      "obsidianNoteAndFrames": [
+        "slider-intake-obsidian-note",
+        "slider-intake-obs-frame-01",
+        "slider-intake-obs-frame-02",
+        "slider-intake-obs-frame-03",
+        "slider-intake-obs-frame-04",
+        "slider-intake-obs-frame-05",
+        "slider-intake-obs-frame-06",
+        "slider-intake-obs-frame-07",
+        "slider-intake-obs-frame-08",
+        "slider-intake-obs-frame-09",
+        "slider-intake-obs-frame-10",
+        "slider-intake-obsidian-contact-sheet"
+      ],
+      "nxedcSameModel": [
+        "slider-intake-nxedc-ref-01",
+        "slider-intake-nxedc-ref-02",
+        "slider-intake-nxedc-ref-03",
+        "slider-intake-nxedc-ref-04",
+        "slider-intake-nxedc-ref-05",
+        "slider-intake-nxedc-ref-06",
+        "slider-intake-nxedc-contact-sheet",
+        "slider-intake-nxedc-metadata"
+      ],
+      "halooOfficialExactProduct": [
+        "slider-intake-haloo-official-01",
+        "slider-intake-haloo-official-02",
+        "slider-intake-haloo-official-03",
+        "slider-intake-haloo-official-04",
+        "slider-intake-haloo-official-05",
+        "slider-intake-haloo-official-06",
+        "slider-intake-haloo-official-07",
+        "slider-intake-haloo-official-08",
+        "slider-intake-haloo-official-metadata"
+      ],
+      "silverSameModelOriginals": [
+        "slider-intake-user-mechanism-video-6022",
+        "slider-intake-user-mechanism-video-6023",
+        "slider-intake-user-mechanism-video-6024",
+        "slider-intake-user-mechanism-source-metadata-r003"
+      ],
+      "silverVideoDerivedEvidence": [
+        "slider-analysis-video-survey-generator-r003",
+        "slider-analysis-mechanism-board-builder-r003",
+        "slider-analysis-frame-survey-report-r003",
+        "slider-analysis-mechanism-findings-r003",
+        "slider-analysis-img-6022-frame-manifest-json-r003",
+        "slider-analysis-img-6022-frame-manifest-csv-r003",
+        "slider-analysis-img-6022-survey-board-r003",
+        "slider-analysis-img-6022-audio-impulses-csv-r003",
+        "slider-analysis-img-6022-audio-impulses-png-r003",
+        "slider-analysis-img-6022-playback-proxy-r003",
+        "slider-analysis-img-6023-frame-manifest-json-r003",
+        "slider-analysis-img-6023-frame-manifest-csv-r003",
+        "slider-analysis-img-6023-survey-board-r003",
+        "slider-analysis-img-6023-audio-impulses-csv-r003",
+        "slider-analysis-img-6023-audio-impulses-png-r003",
+        "slider-analysis-img-6023-playback-proxy-r003",
+        "slider-analysis-img-6024-frame-manifest-json-r003",
+        "slider-analysis-img-6024-frame-manifest-csv-r003",
+        "slider-analysis-img-6024-survey-board-r003",
+        "slider-analysis-img-6024-audio-impulses-csv-r003",
+        "slider-analysis-img-6024-audio-impulses-png-r003",
+        "slider-analysis-img-6024-playback-proxy-r003",
+        "slider-analysis-img-6022-key-f0000-r003",
+        "slider-analysis-img-6022-key-f0050-r003",
+        "slider-analysis-img-6022-key-f0075-r003",
+        "slider-analysis-img-6022-key-f0100-r003",
+        "slider-analysis-img-6022-key-f0125-r003",
+        "slider-analysis-img-6022-key-f0175-r003",
+        "slider-analysis-img-6022-key-f0225-r003",
+        "slider-analysis-img-6022-key-f0350-r003",
+        "slider-analysis-img-6022-key-f0425-r003",
+        "slider-analysis-img-6023-key-f0000-r003",
+        "slider-analysis-img-6023-key-f0012-r003",
+        "slider-analysis-img-6023-key-f0024-r003",
+        "slider-analysis-img-6023-key-f0048-r003",
+        "slider-analysis-img-6023-key-f0072-r003",
+        "slider-analysis-img-6023-key-f0096-r003",
+        "slider-analysis-img-6023-key-f0120-r003",
+        "slider-analysis-img-6023-key-f0192-r003",
+        "slider-analysis-img-6023-key-f0240-r003",
+        "slider-analysis-img-6024-key-f0000-r003",
+        "slider-analysis-img-6024-key-f0032-r003",
+        "slider-analysis-img-6024-key-f0064-r003",
+        "slider-analysis-img-6024-key-f0096-r003",
+        "slider-analysis-img-6024-key-f0128-r003",
+        "slider-analysis-img-6024-key-f0160-r003",
+        "slider-analysis-img-6024-key-f0183-r003",
+        "slider-analysis-img-6024-key-f0191-r003",
+        "slider-analysis-img-6024-key-f0199-r003",
+        "slider-analysis-img-6024-key-f0207-r003",
+        "slider-analysis-img-6024-key-f0256-r003",
+        "slider-analysis-img-6024-key-f0320-r003",
+        "slider-analysis-img-6024-key-f0384-r003",
+        "slider-analysis-img-6024-key-f0576-r003",
+        "slider-analysis-img-6024-key-f0608-r003",
+        "slider-analysis-img-6024-key-f0704-r003",
+        "slider-analysis-img-6024-key-f0736-r003",
+        "slider-analysis-img-6024-key-f0768-r003",
+        "slider-analysis-img-6024-key-f0800-r003",
+        "slider-analysis-img-6024-key-f0820-r003",
+        "slider-analysis-key-frame-manifest-r003",
+        "slider-analysis-video-timeline-r003",
+        "slider-analysis-plate-identity-r003",
+        "slider-analysis-one-way-slide-r003",
+        "slider-analysis-rotation-audio-r003",
+        "slider-analysis-axis-slot-hypothesis-r003",
+        "slider-analysis-contradiction-r003",
+        "slider-analysis-audio-contact-sheet-r003",
+        "slider-analysis-validation-report-r003",
+        "slider-analysis-video-registrar-r003",
+        "slider-analysis-video-workbench-browser-r003",
+        "slider-analysis-video-browser-registrar-r003",
+        "slider-analysis-path-boundary-correction-r003",
+        "slider-analysis-proportion-analysis-r004",
+        "slider-analysis-endpoint-pivot-reference-contract-r007"
+      ],
+      "chromeHeartsSupplementalOnly": [
+        "magnetic-slide-tile-supplemental-source-config-r005",
+        "magnetic-slide-tile-supplemental-ch-plus-page-r005",
+        "magnetic-slide-tile-supplemental-ch-plus-image-r005",
+        "magnetic-slide-tile-supplemental-crosstail-page-r005",
+        "magnetic-slide-tile-supplemental-crosstail-image-r005",
+        "magnetic-slide-tile-supplemental-stencil-page-r005",
+        "magnetic-slide-tile-supplemental-stencil-image-r005"
+      ],
+      "allGate01Intake": [
+        "slider-intake-obsidian-note",
+        "slider-intake-user-video",
+        "slider-intake-obs-frame-01",
+        "slider-intake-obs-frame-02",
+        "slider-intake-obs-frame-03",
+        "slider-intake-obs-frame-04",
+        "slider-intake-obs-frame-05",
+        "slider-intake-obs-frame-06",
+        "slider-intake-obs-frame-07",
+        "slider-intake-obs-frame-08",
+        "slider-intake-obs-frame-09",
+        "slider-intake-obs-frame-10",
+        "slider-intake-user-frame-01",
+        "slider-intake-user-frame-02",
+        "slider-intake-user-frame-03",
+        "slider-intake-user-frame-04",
+        "slider-intake-user-frame-05",
+        "slider-intake-user-frame-06",
+        "slider-intake-user-frame-07",
+        "slider-intake-user-frame-08",
+        "slider-intake-user-frame-09",
+        "slider-intake-user-frame-10",
+        "slider-intake-user-frame-11",
+        "slider-intake-user-frame-12",
+        "slider-intake-obsidian-contact-sheet",
+        "slider-intake-user-contact-sheet",
+        "slider-intake-audio-waveform",
+        "slider-intake-source-metadata",
+        "slider-intake-nxedc-ref-01",
+        "slider-intake-nxedc-ref-02",
+        "slider-intake-nxedc-ref-03",
+        "slider-intake-nxedc-ref-04",
+        "slider-intake-nxedc-ref-05",
+        "slider-intake-nxedc-ref-06",
+        "slider-intake-nxedc-contact-sheet",
+        "slider-intake-nxedc-metadata",
+        "slider-intake-haloo-official-01",
+        "slider-intake-haloo-official-02",
+        "slider-intake-haloo-official-03",
+        "slider-intake-haloo-official-04",
+        "slider-intake-haloo-official-05",
+        "slider-intake-haloo-official-06",
+        "slider-intake-haloo-official-07",
+        "slider-intake-haloo-official-08",
+        "slider-intake-haloo-official-metadata",
+        "slider-intake-user-mechanism-video-6022",
+        "slider-intake-user-mechanism-video-6023",
+        "slider-intake-user-mechanism-video-6024",
+        "slider-intake-user-mechanism-source-metadata-r003"
+      ],
+      "userSelectedBottomBaseImages": [
+        "slider-analysis-user-selected-bottom-base-close-r011",
+        "slider-analysis-user-selected-bottom-base-context-r011"
+      ]
+    },
+    "counts": {
+      "uniqueAssets": 133,
+      "gate01Assets": 49,
+      "originalUserVideo": 1,
+      "img5961DerivedFrames": 12,
+      "obsidianFrames": 10,
+      "nxedcImages": 6,
+      "halooOfficialImages": 8,
+      "silverSameModelVideos": 3,
+      "silverVideoPtsFrames": 1727,
+      "chromeHeartsSupplementalAssets": 7,
+      "userSelectedBottomBaseImages": 2
+    },
+    "allFilesExistAndHashed": true,
+    "boundaries": {
+      "userSources": "authoritative input",
+      "haloo": "official exact-product external reference",
+      "nxedc": "same-model external candidate",
+      "chromeHearts": "supplemental artwork language only; never mechanism evidence"
+    }
+  },
+  "constraints": [
+    {
+      "id": "MEC-SILHOUETTE-ASPECT",
+      "value": {
+        "aspectRatioLW": [
+          1.52,
+          1.62
+        ],
+        "physicalLengthMm": null,
+        "physicalWidthMm": null
+      },
+      "units": "L/W normalized ratio",
+      "state": "video-measured",
+      "confidence": "medium",
+      "sourceAssetIds": [
+        "slider-intake-user-video",
+        "slider-intake-obsidian-contact-sheet",
+        "slider-intake-nxedc-contact-sheet",
+        "slider-intake-haloo-official-01"
+      ],
+      "regions": [
+        {
+          "assetId": "slider-intake-user-video",
+          "note": "Original user video silhouette."
+        },
+        {
+          "assetId": "slider-intake-haloo-official-01",
+          "note": "Official exact-product shell silhouette."
+        }
+      ],
+      "decisionNote": "Use only normalized aspect evidence until physical measurements exist.",
+      "downstreamConsumers": [
+        "interactive-cad",
+        "blender",
+        "unity",
+        "haptics",
+        "tests",
+        "shipping-review"
+      ]
+    },
+    {
+      "id": "MEC-COMPOUND-TRANSFORM",
+      "value": "BottomBase=identity; AxisModule=constant child of BottomBase; TopPlate=T(s along fixed bottom rails)*R(theta about fixed bottom-axis); s and theta may update simultaneously",
+      "units": "2-DOF transform",
+      "state": "user-authoritative",
+      "confidence": "locked",
+      "sourceAssetIds": [
+        "slider-intake-user-mechanism-video-6024",
+        "slider-intake-user-mechanism-source-metadata-r003",
+        "slider-analysis-user-selected-bottom-base-close-r011",
+        "slider-analysis-user-selected-bottom-base-context-r011"
+      ],
+      "regions": [
+        {
+          "assetId": "slider-analysis-user-selected-bottom-base-close-r011",
+          "normalizedRect": [
+            0.07,
+            0.05,
+            0.86,
+            0.89
+          ],
+          "note": "Black capsule bottom base and both long rail regions are visible."
+        },
+        {
+          "assetId": "slider-analysis-user-selected-bottom-base-close-r011",
+          "normalizedRect": [
+            0.39,
+            0.24,
+            0.34,
+            0.36
+          ],
+          "note": "Separate white/silver carrier and central bearing/axis module are visible."
+        },
+        {
+          "assetId": "slider-analysis-user-selected-bottom-base-context-r011",
+          "normalizedRect": [
+            0.12,
+            0.18,
+            0.75,
+            0.73
+          ],
+          "note": "Wider view confirms the black capsule base, bilateral rails and embedded axis module."
+        }
+      ],
+      "decisionNote": "User-authoritative correction: the bottom and axis stay fixed while the top owns both translation and rotation.",
+      "downstreamConsumers": [
+        "interactive-cad",
+        "blender",
+        "unity",
+        "haptics",
+        "tests",
+        "shipping-review"
+      ]
+    },
+    {
+      "id": "MEC-SLIDE-DIRECTION-AND-CLOSED-STOP",
+      "value": {
+        "openingDirectionsFromClosed": 1,
+        "returnPath": "same longitudinal path",
+        "oppositeClosedStopTravel": 0
+      },
+      "units": "normalized motion rule",
+      "state": "video-measured",
+      "confidence": "high",
+      "sourceAssetIds": [
+        "slider-intake-user-mechanism-video-6022",
+        "slider-intake-haloo-official-08"
+      ],
+      "regions": [
+        {
+          "assetId": "slider-intake-user-mechanism-video-6022",
+          "frameIndex": 0,
+          "ptsSeconds": 0,
+          "normalizedRect": [
+            0.03,
+            0.18,
+            0.94,
+            0.68
+          ],
+          "note": "Closed pose."
+        },
+        {
+          "assetId": "slider-intake-user-mechanism-video-6022",
+          "frameIndex": 75,
+          "ptsSeconds": 2.501667,
+          "normalizedRect": [
+            0.03,
+            0.18,
+            0.94,
+            0.68
+          ],
+          "note": "Outward stepped opening."
+        },
+        {
+          "assetId": "slider-intake-user-mechanism-video-6022",
+          "frameIndex": 225,
+          "ptsSeconds": 7.503333,
+          "normalizedRect": [
+            0.03,
+            0.18,
+            0.94,
+            0.68
+          ],
+          "note": "Return toward closed."
+        }
+      ],
+      "decisionNote": "One-way means one outward opening direction plus reversible closure, not irreversible motion.",
+      "downstreamConsumers": [
+        "interactive-cad",
+        "blender",
+        "unity",
+        "haptics",
+        "tests",
+        "shipping-review"
+      ]
+    },
+    {
+      "id": "MEC-TRAVEL-NORMALIZED",
+      "value": {
+        "supportedRange": [
+          0.38,
+          0.46
+        ],
+        "observedPeak": 0.5,
+        "millimetres": null
+      },
+      "units": "L",
+      "state": "video-measured",
+      "confidence": "medium",
+      "sourceAssetIds": [
+        "slider-intake-user-mechanism-video-6022",
+        "slider-intake-user-mechanism-video-6024"
+      ],
+      "regions": [
+        {
+          "assetId": "slider-intake-user-mechanism-video-6022",
+          "frameIndex": 125,
+          "ptsSeconds": 4.168333,
+          "normalizedRect": [
+            0.03,
+            0.18,
+            0.94,
+            0.68
+          ],
+          "note": "About 0.38±0.04L visible travel."
+        },
+        {
+          "assetId": "slider-intake-user-mechanism-video-6024",
+          "frameIndex": 199,
+          "ptsSeconds": 6.636667,
+          "normalizedRect": [
+            0.03,
+            0.18,
+            0.94,
+            0.68
+          ],
+          "note": "About 0.44L median / 0.50L peak evidence."
+        }
+      ],
+      "decisionNote": "Rejected provisional millimetres are not current evidence.",
+      "downstreamConsumers": [
+        "interactive-cad",
+        "blender",
+        "unity",
+        "haptics",
+        "tests",
+        "shipping-review"
+      ]
+    },
+    {
+      "id": "MEC-ROTATION-RANGE",
+      "value": 360,
+      "units": "degrees",
+      "state": "user-authoritative",
+      "confidence": "locked",
+      "sourceAssetIds": [
+        "slider-intake-user-mechanism-source-metadata-r003",
+        "slider-intake-user-mechanism-video-6023",
+        "slider-intake-haloo-official-06"
+      ],
+      "regions": [
+        {
+          "assetId": "slider-intake-user-mechanism-video-6023",
+          "frameIndex": 0,
+          "ptsSeconds": 0,
+          "normalizedRect": [
+            0.03,
+            0.18,
+            0.94,
+            0.68
+          ],
+          "note": "Clip begins at one rotational registration."
+        },
+        {
+          "assetId": "slider-intake-user-mechanism-video-6023",
+          "frameIndex": 240,
+          "ptsSeconds": 8.005,
+          "normalizedRect": [
+            0.03,
+            0.18,
+            0.94,
+            0.68
+          ],
+          "note": "Video directly covers reversible 0↔180°; full 360° comes from user authority."
+        }
+      ],
+      "decisionNote": "Apparent end-to-end pose in IMG_6023 is rotation, not slide.",
+      "downstreamConsumers": [
+        "interactive-cad",
+        "blender",
+        "unity",
+        "haptics",
+        "tests",
+        "shipping-review"
+      ]
+    },
+    {
+      "id": "MEC-DETENTS",
+      "value": {
+        "stepDegrees": 12,
+        "countPerRevolution": 30,
+        "observedImpulsesPer180": 15
+      },
+      "units": "degrees/count",
+      "state": "video-measured",
+      "confidence": "high",
+      "sourceAssetIds": [
+        "slider-intake-user-mechanism-video-6023",
+        "slider-analysis-img-6023-audio-impulses-csv-r003"
+      ],
+      "regions": [
+        {
+          "assetId": "slider-intake-user-mechanism-video-6023",
+          "frameIndex": 120,
+          "ptsSeconds": 4.001667,
+          "normalizedRect": [
+            0.03,
+            0.18,
+            0.94,
+            0.68
+          ],
+          "note": "Detented rotation sequence."
+        },
+        {
+          "assetId": "slider-intake-user-mechanism-video-6023",
+          "frameIndex": 240,
+          "ptsSeconds": 8.005,
+          "normalizedRect": [
+            0.03,
+            0.18,
+            0.94,
+            0.68
+          ],
+          "note": "About 15 candidate impulses over 180°."
+        }
+      ],
+      "decisionNote": "12° cadence is supported by motion and audio; physical detent recipe remains unknown.",
+      "downstreamConsumers": [
+        "interactive-cad",
+        "blender",
+        "unity",
+        "haptics",
+        "tests",
+        "shipping-review"
+      ]
+    },
+    {
+      "id": "MEC-ROTATION-DURING-SLIDE",
+      "value": {
+        "allAuthorizedSlidePositions": true,
+        "directlyObservedPositions": [
+          "partial",
+          "near-maximum"
+        ]
+      },
+      "units": "reachability",
+      "state": "user-authoritative",
+      "confidence": "locked",
+      "sourceAssetIds": [
+        "slider-intake-user-mechanism-video-6024",
+        "slider-intake-user-mechanism-source-metadata-r003"
+      ],
+      "regions": [
+        {
+          "assetId": "slider-intake-user-mechanism-video-6024",
+          "frameIndex": 128,
+          "ptsSeconds": 4.268333,
+          "normalizedRect": [
+            0.03,
+            0.18,
+            0.94,
+            0.68
+          ],
+          "note": "Rotation at partial translation."
+        },
+        {
+          "assetId": "slider-intake-user-mechanism-video-6024",
+          "frameIndex": 320,
+          "ptsSeconds": 10.673333,
+          "normalizedRect": [
+            0.03,
+            0.18,
+            0.94,
+            0.68
+          ],
+          "note": "Rotation near maximum translation."
+        }
+      ],
+      "decisionNote": "Do not overstate what each video alone proves; all-position access is the latest user rule.",
+      "downstreamConsumers": [
+        "interactive-cad",
+        "blender",
+        "unity",
+        "haptics",
+        "tests",
+        "shipping-review"
+      ]
+    },
+    {
+      "id": "MEC-RESISTANCE-SEMANTICS",
+      "value": {
+        "breakawayObserved": true,
+        "detentResistanceObserved": true,
+        "exactForceNewtons": null,
+        "exactMagnetSpringValues": null
+      },
+      "units": "semantic events / unknown physical force",
+      "state": "inferred",
+      "confidence": "medium",
+      "sourceAssetIds": [
+        "slider-intake-user-mechanism-video-6023",
+        "slider-intake-user-mechanism-video-6024",
+        "slider-intake-haloo-official-05"
+      ],
+      "regions": [
+        {
+          "assetId": "slider-intake-user-mechanism-video-6023",
+          "frameIndex": 120,
+          "ptsSeconds": 4.001667,
+          "normalizedRect": [
+            0.03,
+            0.18,
+            0.94,
+            0.68
+          ],
+          "note": "Dwell/release and impulses support detent resistance."
+        },
+        {
+          "assetId": "slider-intake-haloo-official-05",
+          "note": "Official spring and steel/ceramic ball tuning only."
+        }
+      ],
+      "decisionNote": "Desktop/Haptics recipes must not claim measured Newton force or exact magnetic/spring values.",
+      "downstreamConsumers": [
+        "interactive-cad",
+        "haptics",
+        "tests",
+        "shipping-review"
+      ]
+    },
+    {
+      "id": "MEC-VISIBLE-HARDWARE",
+      "value": {
+        "visible": [
+          "bilateral rails",
+          "ball rows",
+          "screws",
+          "spring/ball tuning module",
+          "circular internal region"
+        ],
+        "exactQuantities": null,
+        "hiddenCrossSections": null
+      },
+      "units": "visible components",
+      "state": "video-measured",
+      "confidence": "high",
+      "sourceAssetIds": [
+        "slider-intake-user-mechanism-video-6022",
+        "slider-intake-user-mechanism-video-6024",
+        "slider-intake-haloo-official-05",
+        "slider-intake-haloo-official-07"
+      ],
+      "regions": [
+        {
+          "assetId": "slider-intake-user-mechanism-video-6022",
+          "frameIndex": 100,
+          "ptsSeconds": 3.335,
+          "normalizedRect": [
+            0.03,
+            0.18,
+            0.94,
+            0.68
+          ],
+          "note": "Rails, ball rows and screws."
+        },
+        {
+          "assetId": "slider-intake-user-mechanism-video-6024",
+          "frameIndex": 199,
+          "ptsSeconds": 6.636667,
+          "normalizedRect": [
+            0.03,
+            0.18,
+            0.94,
+            0.68
+          ],
+          "note": "Mechanism face."
+        },
+        {
+          "assetId": "slider-intake-haloo-official-05",
+          "note": "Spring/ball tuning module."
+        },
+        {
+          "assetId": "slider-intake-haloo-official-07",
+          "note": "Official internal overview."
+        }
+      ],
+      "decisionNote": "Only visible hardware classes are locked; counts, depths and sections remain unknown.",
+      "downstreamConsumers": [
+        "interactive-cad",
+        "blender",
+        "unity",
+        "tests",
+        "shipping-review"
+      ]
+    },
+    {
+      "id": "MEC-ARTWORK-MECHANISM-BOUNDARY",
+      "value": "different artwork, color and texture do not imply a mechanism difference",
+      "units": "classification rule",
+      "state": "user-authoritative",
+      "confidence": "locked",
+      "sourceAssetIds": [
+        "slider-intake-obsidian-note",
+        "slider-intake-user-mechanism-source-metadata-r003",
+        "slider-intake-haloo-official-03",
+        "slider-intake-nxedc-contact-sheet"
+      ],
+      "regions": [
+        {
+          "assetId": "slider-intake-user-mechanism-source-metadata-r003",
+          "note": "User classifies silver videos as the same product with different artwork."
+        },
+        {
+          "assetId": "slider-intake-haloo-official-03",
+          "note": "Official colorway variation."
+        }
+      ],
+      "decisionNote": "Chrome Hearts official supplements are artwork-language-only and never mechanism evidence.",
+      "downstreamConsumers": [
+        "blender",
+        "unity",
+        "tests",
+        "shipping-review"
+      ]
+    },
+    {
+      "id": "MEC-PHYSICAL-DIMENSIONS",
+      "value": {
+        "overallLengthMm": null,
+        "overallWidthMm": null,
+        "totalThicknessMm": null,
+        "upperThicknessMm": null,
+        "lowerThicknessMm": null,
+        "closedGapMm": null,
+        "stepHeightsMm": null,
+        "clearanceMm": null,
+        "toleranceMm": null
+      },
+      "units": "mm",
+      "state": "unknown",
+      "confidence": "unknown",
+      "sourceAssetIds": [
+        "slider-intake-user-video",
+        "slider-intake-user-mechanism-video-6022",
+        "slider-intake-user-mechanism-video-6024",
+        "slider-intake-haloo-official-metadata",
+        "slider-intake-nxedc-metadata"
+      ],
+      "regions": [
+        {
+          "assetId": "slider-intake-user-mechanism-video-6024",
+          "frameIndex": 199,
+          "ptsSeconds": 6.636667,
+          "normalizedRect": [
+            0.03,
+            0.18,
+            0.94,
+            0.68
+          ],
+          "note": "Perspective video cannot provide production dimensions/tolerances."
+        }
+      ],
+      "decisionNote": "Remain unknown until caliper, orthogonal scale photo or teardown measurement.",
+      "downstreamConsumers": [
+        "interactive-cad",
+        "blender",
+        "unity",
+        "haptics",
+        "tests",
+        "shipping-review"
+      ]
+    },
+    {
+      "id": "MEC-BOTTOM-BASE-FIXED",
+      "value": {
+        "transform": "identity",
+        "worldMotion": false,
+        "role": "black capsule mechanism carrier"
+      },
+      "units": "transform ownership",
+      "state": "user-authoritative",
+      "confidence": "locked",
+      "sourceAssetIds": [
+        "slider-analysis-user-selected-bottom-base-close-r011",
+        "slider-analysis-user-selected-bottom-base-context-r011"
+      ],
+      "regions": [
+        {
+          "assetId": "slider-analysis-user-selected-bottom-base-close-r011",
+          "normalizedRect": [
+            0.07,
+            0.05,
+            0.86,
+            0.89
+          ],
+          "note": "Black capsule bottom base and both long rail regions are visible."
+        },
+        {
+          "assetId": "slider-analysis-user-selected-bottom-base-context-r011",
+          "normalizedRect": [
+            0.12,
+            0.18,
+            0.75,
+            0.73
+          ],
+          "note": "Wider view confirms the black capsule base, bilateral rails and embedded axis module."
+        }
+      ],
+      "decisionNote": "The pictured black capsule carrier is the fixed bottom base.",
+      "downstreamConsumers": [
+        "interactive-cad",
+        "blender",
+        "unity",
+        "haptics",
+        "tests",
+        "shipping-review"
+      ]
+    },
+    {
+      "id": "MEC-AXIS-MODULE-FIXED",
+      "value": {
+        "owner": "BottomBase",
+        "localPosition": "constant",
+        "worldPosition": "constant",
+        "independentSlidingDof": false,
+        "bearingAxis": "fixed",
+        "surroundingCarrierRotationState": "unknown"
+      },
+      "units": "bottom-local and world transform",
+      "state": "user-authoritative",
+      "confidence": "locked",
+      "sourceAssetIds": [
+        "slider-analysis-user-selected-bottom-base-close-r011",
+        "slider-analysis-user-selected-bottom-base-context-r011"
+      ],
+      "regions": [
+        {
+          "assetId": "slider-analysis-user-selected-bottom-base-close-r011",
+          "normalizedRect": [
+            0.39,
+            0.24,
+            0.34,
+            0.36
+          ],
+          "note": "Separate white/silver carrier and central bearing/axis module are visible."
+        },
+        {
+          "assetId": "slider-analysis-user-selected-bottom-base-context-r011",
+          "normalizedRect": [
+            0.12,
+            0.18,
+            0.75,
+            0.73
+          ],
+          "note": "Wider view confirms the black capsule base, bilateral rails and embedded axis module."
+        }
+      ],
+      "decisionNote": "The axis point is embedded in BottomBase and remains fixed locally and in the CAD world frame. The surrounding white/silver carrier may appear rotatable, but evidence does not prove which subpart rotates.",
+      "downstreamConsumers": [
+        "interactive-cad",
+        "blender",
+        "unity",
+        "haptics",
+        "tests",
+        "shipping-review"
+      ]
+    },
+    {
+      "id": "MEC-TOP-PLATE-MOVING",
+      "value": {
+        "ownerOfTranslation": true,
+        "ownerOfRotation": true,
+        "undersideContacts": "unknown"
+      },
+      "units": "transform ownership",
+      "state": "user-authoritative",
+      "confidence": "locked",
+      "sourceAssetIds": [
+        "slider-analysis-user-selected-bottom-base-close-r011",
+        "slider-analysis-user-selected-bottom-base-context-r011"
+      ],
+      "regions": [
+        {
+          "assetId": "slider-analysis-user-selected-bottom-base-close-r011",
+          "normalizedRect": [
+            0.07,
+            0.05,
+            0.86,
+            0.89
+          ],
+          "note": "Black capsule bottom base and both long rail regions are visible."
+        },
+        {
+          "assetId": "slider-analysis-user-selected-bottom-base-context-r011",
+          "normalizedRect": [
+            0.12,
+            0.18,
+            0.75,
+            0.73
+          ],
+          "note": "Wider view confirms the black capsule base, bilateral rails and embedded axis module."
+        }
+      ],
+      "decisionNote": "The top plate is the active plate. Its hidden underside contacts remain unknown.",
+      "downstreamConsumers": [
+        "interactive-cad",
+        "blender",
+        "unity",
+        "haptics",
+        "tests",
+        "shipping-review"
+      ]
+    },
+    {
+      "id": "MEC-RAILS-BILATERAL-BOTTOM",
+      "value": {
+        "count": 2,
+        "owner": "BottomBase",
+        "sides": [
+          "left",
+          "right"
+        ],
+        "crossSection": "unknown",
+        "ballCoupling": "unknown"
+      },
+      "units": "visible regions",
+      "state": "user-authoritative",
+      "confidence": "locked",
+      "sourceAssetIds": [
+        "slider-analysis-user-selected-bottom-base-close-r011",
+        "slider-analysis-user-selected-bottom-base-context-r011"
+      ],
+      "regions": [
+        {
+          "assetId": "slider-analysis-user-selected-bottom-base-close-r011",
+          "normalizedRect": [
+            0.07,
+            0.05,
+            0.86,
+            0.89
+          ],
+          "note": "Black capsule bottom base and both long rail regions are visible."
+        },
+        {
+          "assetId": "slider-analysis-user-selected-bottom-base-context-r011",
+          "normalizedRect": [
+            0.12,
+            0.18,
+            0.75,
+            0.73
+          ],
+          "note": "Wider view confirms the black capsule base, bilateral rails and embedded axis module."
+        }
+      ],
+      "decisionNote": "Both long rail regions are fixed children of BottomBase. Exact section and ball/follower coupling are unknown.",
+      "downstreamConsumers": [
+        "interactive-cad",
+        "blender",
+        "unity",
+        "haptics",
+        "tests",
+        "shipping-review"
+      ]
+    },
+    {
+      "id": "MEC-AXIS-PROJECTED-POSITION",
+      "value": {
+        "normalizedYFromTopRange": [
+          0.29,
+          0.35
+        ],
+        "diagrammaticMidpoint": 0.32,
+        "physicalPosition": "unknown"
+      },
+      "units": "image-projected L",
+      "state": "inferred",
+      "confidence": "medium",
+      "sourceAssetIds": [
+        "slider-analysis-user-selected-bottom-base-close-r011",
+        "slider-analysis-user-selected-bottom-base-context-r011"
+      ],
+      "regions": [
+        {
+          "assetId": "slider-analysis-user-selected-bottom-base-close-r011",
+          "normalizedRect": [
+            0.39,
+            0.24,
+            0.34,
+            0.36
+          ],
+          "note": "Separate white/silver carrier and central bearing/axis module are visible."
+        },
+        {
+          "assetId": "slider-analysis-user-selected-bottom-base-context-r011",
+          "normalizedRect": [
+            0.12,
+            0.18,
+            0.75,
+            0.73
+          ],
+          "note": "Wider view confirms the black capsule base, bilateral rails and embedded axis module."
+        }
+      ],
+      "decisionNote": "The two perspective images place the visible axis near 0.29–0.35L from the top of the pictured base. This is diagrammatic image evidence, not a physical dimension.",
+      "downstreamConsumers": [
+        "interactive-cad",
+        "blender",
+        "unity",
+        "haptics",
+        "tests",
+        "shipping-review"
+      ]
+    },
+    {
+      "id": "MEC-TOP-UNDERSIDE-CONTACTS",
+      "value": {
+        "geometry": "unknown",
+        "display": "dashed candidate only"
+      },
+      "units": "hidden structure",
+      "state": "unknown",
+      "confidence": "unknown",
+      "sourceAssetIds": [
+        "slider-analysis-user-selected-bottom-base-close-r011",
+        "slider-analysis-user-selected-bottom-base-context-r011"
+      ],
+      "regions": [
+        {
+          "assetId": "slider-analysis-user-selected-bottom-base-close-r011",
+          "normalizedRect": [
+            0.07,
+            0.05,
+            0.86,
+            0.89
+          ],
+          "note": "Black capsule bottom base and both long rail regions are visible."
+        },
+        {
+          "assetId": "slider-analysis-user-selected-bottom-base-context-r011",
+          "normalizedRect": [
+            0.12,
+            0.18,
+            0.75,
+            0.73
+          ],
+          "note": "Wider view confirms the black capsule base, bilateral rails and embedded axis module."
+        }
+      ],
+      "decisionNote": "Neither supplied view directly proves the top plate underside slot/follower geometry.",
+      "downstreamConsumers": [
+        "interactive-cad",
+        "blender",
+        "unity",
+        "haptics",
+        "tests",
+        "shipping-review"
+      ]
+    }
+  ],
+  "coverageMatrix": [
+    {
+      "topic": "exterior silhouette/proportions",
+      "supports": [
+        "slider-intake-user-video",
+        "slider-intake-user-frame-01",
+        "slider-intake-user-frame-02",
+        "slider-intake-user-frame-03",
+        "slider-intake-user-frame-04",
+        "slider-intake-user-frame-05",
+        "slider-intake-user-frame-06",
+        "slider-intake-user-frame-07",
+        "slider-intake-user-frame-08",
+        "slider-intake-user-frame-09",
+        "slider-intake-user-frame-10",
+        "slider-intake-user-frame-11",
+        "slider-intake-user-frame-12",
+        "slider-intake-user-contact-sheet",
+        "slider-intake-audio-waveform",
+        "slider-intake-source-metadata",
+        "slider-intake-obsidian-note",
+        "slider-intake-obs-frame-01",
+        "slider-intake-obs-frame-02",
+        "slider-intake-obs-frame-03",
+        "slider-intake-obs-frame-04",
+        "slider-intake-obs-frame-05",
+        "slider-intake-obs-frame-06",
+        "slider-intake-obs-frame-07",
+        "slider-intake-obs-frame-08",
+        "slider-intake-obs-frame-09",
+        "slider-intake-obs-frame-10",
+        "slider-intake-obsidian-contact-sheet",
+        "slider-intake-nxedc-ref-01",
+        "slider-intake-nxedc-ref-02",
+        "slider-intake-nxedc-ref-03",
+        "slider-intake-nxedc-ref-04",
+        "slider-intake-nxedc-ref-05",
+        "slider-intake-nxedc-ref-06",
+        "slider-intake-nxedc-contact-sheet",
+        "slider-intake-nxedc-metadata",
+        "slider-intake-haloo-official-01",
+        "slider-intake-haloo-official-02",
+        "slider-intake-haloo-official-03",
+        "slider-intake-haloo-official-04",
+        "slider-intake-haloo-official-05",
+        "slider-intake-haloo-official-06",
+        "slider-intake-haloo-official-07",
+        "slider-intake-haloo-official-08",
+        "slider-intake-haloo-official-metadata"
+      ],
+      "conflicts": [],
+      "unknowns": [
+        "production millimetres"
+      ]
+    },
+    {
+      "topic": "upper/lower/mechanism-carrier identity",
+      "supports": [
+        "slider-analysis-user-selected-bottom-base-close-r011",
+        "slider-analysis-user-selected-bottom-base-context-r011"
+      ],
+      "conflicts": [
+        "rev 8/rev 10 fixed-upper moving-lower ownership is superseded"
+      ],
+      "unknowns": [
+        "exact top underside contact ownership"
+      ]
+    },
+    {
+      "topic": "visible reverse/internal faces",
+      "supports": [
+        "slider-intake-user-mechanism-video-6022",
+        "slider-intake-user-mechanism-video-6024",
+        "slider-intake-haloo-official-01",
+        "slider-intake-haloo-official-02",
+        "slider-intake-haloo-official-03",
+        "slider-intake-haloo-official-04",
+        "slider-intake-haloo-official-05",
+        "slider-intake-haloo-official-06",
+        "slider-intake-haloo-official-07",
+        "slider-intake-haloo-official-08",
+        "slider-intake-haloo-official-metadata"
+      ],
+      "conflicts": [
+        "clean exterior is not mechanism face"
+      ],
+      "unknowns": []
+    },
+    {
+      "topic": "bilateral rails/ball rows/screws",
+      "supports": [
+        "slider-analysis-user-selected-bottom-base-close-r011",
+        "slider-analysis-user-selected-bottom-base-context-r011",
+        "slider-intake-haloo-official-07"
+      ],
+      "conflicts": [
+        "prior lower-moving rail frame is superseded"
+      ],
+      "unknowns": [
+        "exact rail cross-section and ball/follower coupling"
+      ]
+    },
+    {
+      "topic": "endpoint pivot attachment",
+      "supports": [
+        "slider-analysis-user-selected-bottom-base-close-r011",
+        "slider-analysis-user-selected-bottom-base-context-r011"
+      ],
+      "conflicts": [
+        "endpoint-pivot interpretation is superseded"
+      ],
+      "unknowns": [
+        "physical axis coordinates",
+        "which surrounding carrier subpart rotates"
+      ]
+    },
+    {
+      "topic": "longitudinal slide direction and return",
+      "supports": [
+        "slider-intake-user-mechanism-video-6022",
+        "slider-intake-haloo-official-01",
+        "slider-intake-haloo-official-02",
+        "slider-intake-haloo-official-03",
+        "slider-intake-haloo-official-04",
+        "slider-intake-haloo-official-05",
+        "slider-intake-haloo-official-06",
+        "slider-intake-haloo-official-07",
+        "slider-intake-haloo-official-08",
+        "slider-intake-haloo-official-metadata"
+      ],
+      "conflicts": [
+        "one-way does not mean no return"
+      ],
+      "unknowns": []
+    },
+    {
+      "topic": "simultaneous slide+rotation",
+      "supports": [
+        "slider-intake-user-mechanism-video-6024",
+        "slider-intake-user-mechanism-source-metadata-r003"
+      ],
+      "conflicts": [
+        "separate-mode presentation rejected"
+      ],
+      "unknowns": []
+    },
+    {
+      "topic": "travel range/end stops",
+      "supports": [
+        "slider-intake-user-mechanism-video-6022",
+        "slider-intake-user-mechanism-video-6024"
+      ],
+      "conflicts": [],
+      "unknowns": [
+        "millimetres/stop section"
+      ]
+    },
+    {
+      "topic": "12° detents/30 positions",
+      "supports": [
+        "slider-intake-user-mechanism-video-6023",
+        "slider-analysis-img-6023-audio-impulses-csv-r003",
+        "slider-intake-user-mechanism-video-6024"
+      ],
+      "conflicts": [],
+      "unknowns": [
+        "physical detent recipe"
+      ]
+    },
+    {
+      "topic": "full-rotation evidence/user authority",
+      "supports": [
+        "slider-intake-user-mechanism-source-metadata-r003",
+        "slider-intake-haloo-official-01",
+        "slider-intake-haloo-official-02",
+        "slider-intake-haloo-official-03",
+        "slider-intake-haloo-official-04",
+        "slider-intake-haloo-official-05",
+        "slider-intake-haloo-official-06",
+        "slider-intake-haloo-official-07",
+        "slider-intake-haloo-official-08",
+        "slider-intake-haloo-official-metadata",
+        "slider-intake-user-mechanism-video-6023",
+        "slider-analysis-img-6023-audio-impulses-csv-r003"
+      ],
+      "conflicts": [
+        "IMG_6023 directly covers 180°, not 360°"
+      ],
+      "unknowns": []
+    },
+    {
+      "topic": "material/artwork differences",
+      "supports": [
+        "slider-intake-obsidian-note",
+        "slider-intake-obs-frame-01",
+        "slider-intake-obs-frame-02",
+        "slider-intake-obs-frame-03",
+        "slider-intake-obs-frame-04",
+        "slider-intake-obs-frame-05",
+        "slider-intake-obs-frame-06",
+        "slider-intake-obs-frame-07",
+        "slider-intake-obs-frame-08",
+        "slider-intake-obs-frame-09",
+        "slider-intake-obs-frame-10",
+        "slider-intake-obsidian-contact-sheet",
+        "slider-intake-nxedc-ref-01",
+        "slider-intake-nxedc-ref-02",
+        "slider-intake-nxedc-ref-03",
+        "slider-intake-nxedc-ref-04",
+        "slider-intake-nxedc-ref-05",
+        "slider-intake-nxedc-ref-06",
+        "slider-intake-nxedc-contact-sheet",
+        "slider-intake-nxedc-metadata",
+        "slider-intake-haloo-official-01",
+        "slider-intake-haloo-official-02",
+        "slider-intake-haloo-official-03",
+        "slider-intake-haloo-official-04",
+        "slider-intake-haloo-official-05",
+        "slider-intake-haloo-official-06",
+        "slider-intake-haloo-official-07",
+        "slider-intake-haloo-official-08",
+        "slider-intake-haloo-official-metadata",
+        "magnetic-slide-tile-supplemental-source-config-r005",
+        "magnetic-slide-tile-supplemental-ch-plus-page-r005",
+        "magnetic-slide-tile-supplemental-ch-plus-image-r005",
+        "magnetic-slide-tile-supplemental-crosstail-page-r005",
+        "magnetic-slide-tile-supplemental-crosstail-image-r005",
+        "magnetic-slide-tile-supplemental-stencil-page-r005",
+        "magnetic-slide-tile-supplemental-stencil-image-r005",
+        "slider-intake-user-mechanism-source-metadata-r003"
+      ],
+      "conflicts": [
+        "artwork difference is not mechanism difference"
+      ],
+      "unknowns": []
+    },
+    {
+      "topic": "hidden coupling/tolerances",
+      "supports": [
+        "slider-intake-haloo-official-01",
+        "slider-intake-haloo-official-02",
+        "slider-intake-haloo-official-03",
+        "slider-intake-haloo-official-04",
+        "slider-intake-haloo-official-05",
+        "slider-intake-haloo-official-06",
+        "slider-intake-haloo-official-07",
+        "slider-intake-haloo-official-08",
+        "slider-intake-haloo-official-metadata",
+        "slider-intake-user-mechanism-video-6022",
+        "slider-intake-user-mechanism-video-6024"
+      ],
+      "conflicts": [],
+      "unknowns": [
+        "upper follower",
+        "coupling",
+        "clearance",
+        "tolerance"
+      ]
+    },
+    {
+      "topic": "breakaway/detent resistance",
+      "supports": [
+        "slider-intake-user-mechanism-video-6023",
+        "slider-analysis-img-6023-audio-impulses-csv-r003",
+        "slider-intake-user-mechanism-video-6024",
+        "slider-intake-haloo-official-01",
+        "slider-intake-haloo-official-02",
+        "slider-intake-haloo-official-03",
+        "slider-intake-haloo-official-04",
+        "slider-intake-haloo-official-05",
+        "slider-intake-haloo-official-06",
+        "slider-intake-haloo-official-07",
+        "slider-intake-haloo-official-08",
+        "slider-intake-haloo-official-metadata"
+      ],
+      "conflicts": [],
+      "unknowns": [
+        "force",
+        "magnet",
+        "spring constants"
+      ]
+    }
+  ],
+  "conclusions": [
+    {
+      "statement": "黑色胶囊底座固定；活动顶片承担复合运动",
+      "constraintIds": [
+        "MEC-BOTTOM-BASE-FIXED",
+        "MEC-TOP-PLATE-MOVING"
+      ],
+      "confidence": "high",
+      "sourceCount": 2
+    },
+    {
+      "statement": "轴心模块嵌入底座；局部与世界位置都固定",
+      "constraintIds": [
+        "MEC-AXIS-MODULE-FIXED",
+        "MEC-AXIS-PROJECTED-POSITION"
+      ],
+      "confidence": "high",
+      "sourceCount": 2
+    },
+    {
+      "statement": "左右双轨固定属于底座",
+      "constraintIds": [
+        "MEC-RAILS-BILATERAL-BOTTOM"
+      ],
+      "confidence": "high",
+      "sourceCount": 3
+    },
+    {
+      "statement": "顶片可同时滑动并绕固定轴旋转",
+      "constraintIds": [
+        "MEC-COMPOUND-TRANSFORM",
+        "MEC-ROTATION-DURING-SLIDE"
+      ],
+      "confidence": "high",
+      "sourceCount": 4
+    },
+    {
+      "statement": "不存在轴心独立滑动自由度",
+      "constraintIds": [
+        "MEC-AXIS-MODULE-FIXED"
+      ],
+      "confidence": "high",
+      "sourceCount": 2
+    },
+    {
+      "statement": "顶片底面接触件与白银载体旋转归属仍未知",
+      "constraintIds": [
+        "MEC-TOP-UNDERSIDE-CONTACTS",
+        "MEC-AXIS-MODULE-FIXED"
+      ],
+      "confidence": "medium",
+      "sourceCount": 2
+    }
+  ],
+  "unknowns": [
+    "top plate underside slot/follower/contact geometry",
+    "rail cross-section and ball/follower coupling",
+    "which white/silver carrier subpart rotates around the fixed bearing axis",
+    "physical axis coordinates, thickness, gap, step, clearance and tolerance",
+    "exact force, magnet, spring and friction values"
+  ],
+  "downstreamPolicy": {
+    "gate02ApprovalRequired": true,
+    "contractHashRequired": true,
+    "duplicateDefaultsForbidden": true,
+    "consumers": [
+      "interactive-cad",
+      "blender",
+      "unity",
+      "haptics",
+      "tests",
+      "shipping-review"
+    ],
+    "rule": "Every CAD and later artifact must record this rev 11 contract SHA-256. CAD approval unlocks only a separate Simulator; Simulator approval is required before Blender."
+  },
+  "reviewQuestion": null,
+  "supersedesContractAssetId": "slider-analysis-mechanism-evidence-contract-r008",
+  "supersededConstraintIds": [
+    "MEC-PLATE-UPPER-FIXED",
+    "MEC-PLATE-LOWER-MOVING",
+    "MEC-PIVOT-ENDPOINT-ATTACHMENT",
+    "MEC-RAILS-BILATERAL-LOWER-REVERSE"
+  ]
+}

@@ -1,0 +1,67 @@
+{
+  "schemaVersion": 1,
+  "modelId": "magnetic-slide-tile",
+  "gate": "10-export",
+  "exportRevision": 1,
+  "blender": "5.2.0 LTS",
+  "objectNames": [
+    "CentralAxisPivot_Point",
+    "CollisionRoot",
+    "ConcealedCircularEnvelope_Metadata",
+    "FixedAssembly",
+    "LowerBody_Fixed_CleanPlane",
+    "MagneticSlideTile_Blockout_R003",
+    "UCX_MagneticSlideTile_Lower_00",
+    "UCX_MagneticSlideTile_Upper_00",
+    "UpperCapsule_Moving",
+    "UpperTranslation"
+  ],
+  "renderTriangles": {
+    "LowerBody_Fixed_CleanPlane": 2048,
+    "UpperCapsule_Moving": 2048
+  },
+  "collisionTriangles": {
+    "UCX_MagneticSlideTile_Lower_00": 128,
+    "UCX_MagneticSlideTile_Upper_00": 128
+  },
+  "materialNames": [
+    "M07R7_BloodRedCrystal_WideBorder_Lower",
+    "M07R7_BloodRedCrystal_WideBorder_Upper",
+    "M07R7_DaylightNeutralPolishedSilver"
+  ],
+  "imagePaths": {
+    "artwork-lower-mask.png": "//textures/artwork-lower-mask.png",
+    "artwork-top-perimeter-border-mask.png": "//textures/artwork-top-perimeter-border-mask.png",
+    "artwork-upper-mask.png": "//textures/artwork-upper-mask.png"
+  },
+  "unexpectedMeshes": [],
+  "packageHashes": {
+    "authoritativeBlend": "be889ed2c13119e05e837d7d0e410842ddc40ae8e3faf32306f9a0e197a22635",
+    "fbx": "38e0674d4dac5df83d4727c3a096ce7b77365e4855dcbc4ea97ab05272a3f874",
+    "glb": "fb94dccfca04027eb82e8d7aa011b94a74f040147b9fe97672206e95472e996b",
+    "collisionFbx": "b06ef84a26554b9609d251afa80e83acc82dd69cb43bafa371a22ddd481e216c"
+  },
+  "checks": {
+    "blendHash": true,
+    "packageHashes": true,
+    "noDiagnosticCamerasLights": true,
+    "noDiagnosticEnvironment": true,
+    "twoRenderMeshesOnly": true,
+    "renderTriangles4096": true,
+    "approvedGeometryHash": true,
+    "closedDefault": true,
+    "pointAxis": true,
+    "slideMetadata": true,
+    "detentSpecifiedOnly": true,
+    "hiddenEnvelopeMetadataOnly": true,
+    "collisionTwoCapsules256": true,
+    "approvedMaterialSlots": true,
+    "zeroEmission": true,
+    "uvsPresent": true,
+    "relativeArtworkPaths": true,
+    "noActions": true,
+    "noConstraintsDrivers": true,
+    "noLodObjects": true
+  },
+  "pass": true
+}

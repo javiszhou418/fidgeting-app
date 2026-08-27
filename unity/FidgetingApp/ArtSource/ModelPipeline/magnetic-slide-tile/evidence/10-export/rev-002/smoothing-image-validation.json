@@ -1,0 +1,63 @@
+{
+  "schemaVersion": 1,
+  "modelId": "magnetic-slide-tile",
+  "gate": "10-export",
+  "exportRevision": 2,
+  "cropBoxPx": [
+    1685,
+    4,
+    2560,
+    722
+  ],
+  "sameCameraImageDifference": {
+    "fbx": {
+      "meanAbsoluteRgbDifference": 0.03628,
+      "p99AbsoluteRgbDifference": 0.333333,
+      "maximumAbsoluteRgbDifference": 11.0,
+      "pixelsAbove2Levels": 14,
+      "fractionAbove2Levels": 3.4022e-05
+    },
+    "glb": {
+      "meanAbsoluteRgbDifference": 0.03358,
+      "p99AbsoluteRgbDifference": 0.333333,
+      "maximumAbsoluteRgbDifference": 13.0,
+      "pixelsAbove2Levels": 3,
+      "fractionAbove2Levels": 7.29e-06
+    }
+  },
+  "contourComparison": {
+    "fbx": {
+      "maximumSymmetricContourDistancePx": 0.0,
+      "p99SymmetricContourDistancePx": 0.0,
+      "maskIntersectionOverUnion": 1.0
+    },
+    "glb": {
+      "maximumSymmetricContourDistancePx": 0.0,
+      "p99SymmetricContourDistancePx": 0.0,
+      "maskIntersectionOverUnion": 1.0
+    }
+  },
+  "highlightContinuity": {
+    "method": "No export-added band may exceed the source same-camera image by more than 3 RGB levels at p99.",
+    "fbxAddedFacetBandPixelsAbove2Levels": 14,
+    "glbAddedFacetBandPixelsAbove2Levels": 3,
+    "normalDiscontinuityDegrees": 0.0
+  },
+  "boards": [
+    "export-shading-review-board.png",
+    "arc-contour-overlay-2560.png",
+    "collision-non-rendering-panel.png"
+  ],
+  "checks": {
+    "sourceFbxGlbSameCamera": true,
+    "highResolutionArcEvidence": true,
+    "fbxNoAddedPeriodicFacetBands": true,
+    "glbNoAddedPeriodicFacetBands": true,
+    "fbxContourMatches": true,
+    "glbContourMatches": true,
+    "normalValidationPasses": true,
+    "collisionSeparatedAndLabeled": true,
+    "reviewBoardsExist": true
+  },
+  "pass": true
+}

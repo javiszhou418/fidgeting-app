@@ -1,0 +1,76 @@
+{
+  "schemaVersion": 1,
+  "gate": "07-material",
+  "materialRevision": 3,
+  "comparisonMode": "same-camera-same-neutral-light",
+  "baseline": {
+    "path": "unity/FidgetingApp/ArtSource/ModelPipeline/magnetic-slide-tile/evidence/07-material/rev-002/neutral-pbr-material-closeup.png",
+    "sha256": "ab7a7782f05e00e17ba9264e1eaa43dd9690ee1b91128879ccee393a5033b09a",
+    "metrics": {
+      "sizePx": [
+        1200,
+        1200
+      ],
+      "roi": [
+        30,
+        180,
+        1180,
+        1170
+      ],
+      "meanLuma": 76.3027,
+      "stddevLuma": 41.7982,
+      "highlightFractionAbove200": 0.002525,
+      "highlightFractionAbove230": 0.000891,
+      "clippedFractionAbove250": 0.000256,
+      "hardClipFraction255": 8.4e-05,
+      "meanRgbChroma": 32.1215,
+      "faceContrastP90MinusP10": 121
+    }
+  },
+  "candidate": {
+    "path": "neutral-pbr-material-closeup.png",
+    "sha256": "f19e5fadc3c3ce3d85d6bc7fd03c452ac53471fcb75de86149542521b79f0098",
+    "metrics": {
+      "sizePx": [
+        1200,
+        1200
+      ],
+      "roi": [
+        30,
+        180,
+        1180,
+        1170
+      ],
+      "meanLuma": 76.3875,
+      "stddevLuma": 44.9085,
+      "highlightFractionAbove200": 0.002702,
+      "highlightFractionAbove230": 0.001094,
+      "clippedFractionAbove250": 0.000258,
+      "hardClipFraction255": 8.4e-05,
+      "meanRgbChroma": 35.426,
+      "faceContrastP90MinusP10": 131
+    }
+  },
+  "deltas": {
+    "meanLuma": 0.0848,
+    "stddevLuma": 3.1103,
+    "highlightFractionAbove200": 0.000177,
+    "highlightFractionAbove230": 0.000203,
+    "clippedFractionAbove250": 2e-06,
+    "hardClipFraction255": 0.0,
+    "meanRgbChroma": 3.3045,
+    "faceContrastP90MinusP10": 10,
+    "highlightAbove230RelativeGain": 0.227834
+  },
+  "checks": {
+    "sameCameraResolution": true,
+    "brightnessGain": true,
+    "highlightGain": true,
+    "colorSeparationGain": true,
+    "noMeaningfulClipping": true,
+    "motifContrastMaintained": true
+  },
+  "comparisonPath": "same-camera-crystal-comparison.png",
+  "comparisonSha256": "2c9e0a2d945814def58190b93e2378628777cac249e5cdc7a568e2168a77e626",
+  "pass": true
+}

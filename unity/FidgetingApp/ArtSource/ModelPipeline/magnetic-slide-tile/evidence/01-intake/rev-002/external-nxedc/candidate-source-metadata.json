@@ -1,0 +1,74 @@
+{
+  "schemaVersion": 1,
+  "archivedAt": "2026-08-20T13:54:56Z",
+  "candidateId": "candidate-haloo-player-chrome-hearts",
+  "classification": "external-candidate-reference",
+  "selection": {
+    "assertedBy": "user",
+    "statement": "用户认为该外部候选来源可以作为扩展参考，并要求把候选图片加入输入集合。",
+    "approvalBoundary": "这不是 Gate 01 批准，也不构成品牌、尺寸、材料或内部机构确认。"
+  },
+  "source": {
+    "title": "Chrome Hearts - Haloo Player",
+    "publisher": "NXEDC",
+    "productPageUrl": "https://nxedc.com/products/chrome-hearts-fidget-slider",
+    "productPageStatusAtArchive": "live request returned HTTP 404; search index retained a previously crawled product snapshot",
+    "indexedSnapshotNotes": [
+      "The indexed snapshot lists Haloo Player as the studio and classifies the item as mechanical.",
+      "The indexed snapshot exposes six product-image links and three colorway labels.",
+      "All indexed product descriptions remain external assertions pending Gate 02 review."
+    ]
+  },
+  "images": [
+    {
+      "file": "reference-01.jpg",
+      "viewLabel": "front-dopamine-colorful",
+      "sourceUrl": "https://nxedc.com/cdn/shop/files/Chrome-Hearts-Haloo-Player-214152165.jpg?v=1759077199",
+      "width": 1280,
+      "height": 1280
+    },
+    {
+      "file": "reference-02.jpg",
+      "viewLabel": "front-venice-purple",
+      "sourceUrl": "https://nxedc.com/cdn/shop/files/Chrome-Hearts-Haloo-Player-214152273.jpg?v=1759077198",
+      "width": 1280,
+      "height": 1280
+    },
+    {
+      "file": "reference-03.jpg",
+      "viewLabel": "front-rouge-pur-couture",
+      "sourceUrl": "https://nxedc.com/cdn/shop/files/Chrome-Hearts-Haloo-Player-214152385.jpg?v=1759077202",
+      "width": 1280,
+      "height": 1280
+    },
+    {
+      "file": "reference-04.jpg",
+      "viewLabel": "open-oblique-dopamine-colorful",
+      "sourceUrl": "https://nxedc.com/cdn/shop/files/Chrome-Hearts-Haloo-Player-214152467.jpg?v=1759077201",
+      "width": 1280,
+      "height": 1280
+    },
+    {
+      "file": "reference-05.jpg",
+      "viewLabel": "open-closeup-dopamine-colorful",
+      "sourceUrl": "https://nxedc.com/cdn/shop/files/Chrome-Hearts-Haloo-Player-214152546.jpg?v=1759077203",
+      "width": 1280,
+      "height": 1280
+    },
+    {
+      "file": "reference-06.jpg",
+      "viewLabel": "multi-colorway-open-state",
+      "sourceUrl": "https://nxedc.com/cdn/shop/files/Chrome-Hearts-Haloo-Player-214152655.jpg?v=1759077204",
+      "width": 1280,
+      "height": 1280
+    }
+  ],
+  "derivatives": [
+    {
+      "file": "candidate-contact-sheet.jpg",
+      "producer": "ffmpeg 8.1.1",
+      "recipe": "six 1280x1280 source images scaled to 640x640 and tiled 3x2"
+    }
+  ],
+  "guardrail": "外部候选图片可增加可见角度，但不能覆盖用户视频和 Obsidian 输入；候选图中的透视、灯光、颜色、结构描述和商品文案必须在 Gate 02 分项核验。"
+}

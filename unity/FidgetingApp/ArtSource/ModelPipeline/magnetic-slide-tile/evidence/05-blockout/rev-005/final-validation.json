@@ -1,0 +1,174 @@
+{
+  "schemaVersion": 1,
+  "pass": true,
+  "nodeTests": {
+    "total": 113,
+    "passed": 113,
+    "exitCode": 0
+  },
+  "pipelineValidation": {
+    "refresh": false,
+    "models": [
+      {
+        "modelId": "blue-classic",
+        "revision": 10,
+        "approved": "0/12",
+        "earliestProblem": {
+          "stageId": "01-intake",
+          "title": "原始参考归档",
+          "status": "missing",
+          "reasons": [
+            "缺少必需素材：original-reference。"
+          ]
+        },
+        "errors": [],
+        "missingFiles": [],
+        "unhashed": []
+      },
+      {
+        "modelId": "gold-four-wing",
+        "revision": 10,
+        "approved": "0/12",
+        "earliestProblem": {
+          "stageId": "01-intake",
+          "title": "原始参考归档",
+          "status": "missing",
+          "reasons": [
+            "缺少必需素材：original-reference。"
+          ]
+        },
+        "errors": [],
+        "missingFiles": [],
+        "unhashed": []
+      },
+      {
+        "modelId": "graphite-two-lobe",
+        "revision": 12,
+        "approved": "0/12",
+        "earliestProblem": {
+          "stageId": "01-intake",
+          "title": "原始参考归档",
+          "status": "missing",
+          "reasons": [
+            "缺少必需素材：original-reference。",
+            "仍有 1 项验证未通过。"
+          ]
+        },
+        "errors": [],
+        "missingFiles": [],
+        "unhashed": []
+      },
+      {
+        "modelId": "magnetic-fan-card",
+        "revision": 136,
+        "approved": "10/12",
+        "earliestProblem": {
+          "stageId": "11-unity-parity",
+          "title": "Unity 对齐",
+          "status": "ready_for_review",
+          "reasons": [
+            "仍有 1 项验证未通过。"
+          ]
+        },
+        "errors": [],
+        "missingFiles": [],
+        "unhashed": []
+      },
+      {
+        "modelId": "magnetic-slide-tile",
+        "revision": 169,
+        "approved": "4/12",
+        "earliestProblem": {
+          "stageId": "05-blockout",
+          "title": "Blender 白模 Blockout",
+          "status": "ready_for_review",
+          "reasons": [
+            "等待用户审批。"
+          ]
+        },
+        "errors": [],
+        "missingFiles": [],
+        "unhashed": []
+      },
+      {
+        "modelId": "metal-three-blade",
+        "revision": 11,
+        "approved": "0/12",
+        "earliestProblem": {
+          "stageId": "01-intake",
+          "title": "原始参考归档",
+          "status": "draft",
+          "reasons": [
+            "等待用户审批。"
+          ]
+        },
+        "errors": [],
+        "missingFiles": [],
+        "unhashed": []
+      },
+      {
+        "modelId": "premium-display-case",
+        "revision": 67,
+        "approved": "9/12",
+        "earliestProblem": {
+          "stageId": "10-export",
+          "title": "导出包",
+          "status": "blocked",
+          "reasons": [
+            "缺少必需素材：blend-source、fbx-export、glb-export、collision-export、export-manifest。"
+          ]
+        },
+        "errors": [],
+        "missingFiles": [],
+        "unhashed": []
+      }
+    ]
+  },
+  "modelValidation": {
+    "modelId": "magnetic-slide-tile",
+    "revision": 169,
+    "shippingReady": false,
+    "approved": "4/12",
+    "earliestProblem": {
+      "stageId": "05-blockout",
+      "title": "Blender 白模 Blockout",
+      "status": "ready_for_review",
+      "reasons": [
+        "等待用户审批。"
+      ]
+    },
+    "errors": [],
+    "missingFiles": [],
+    "unhashed": []
+  },
+  "browser": {
+    "pass": true,
+    "desktopWidthPx": 1440,
+    "mobileWidthPx": 390,
+    "runtimeExceptionCount": 0,
+    "loadingFailureCount": 0
+  },
+  "blender": {
+    "pass": true,
+    "version": "5.2.0 LTS",
+    "objectCount": 32,
+    "nonmanifoldEdges": {
+      "BottomExterior": 0,
+      "_BottomExteriorUpperRim": 0,
+      "FixedAxisBoss": 0,
+      "RotatingCarrierBody": 0,
+      "MovingTopBody": 0
+    }
+  },
+  "syntax": {
+    "javascript": "pass",
+    "python": "pass",
+    "html5": "pass"
+  },
+  "scope": {
+    "simulatorUsed": false,
+    "materialProgression": false,
+    "unityChanged": false,
+    "buildInstallOrDevice": false
+  }
+}

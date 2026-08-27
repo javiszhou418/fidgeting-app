@@ -1,0 +1,90 @@
+{
+  "schemaVersion": 1,
+  "modelId": "magnetic-slide-tile",
+  "contractRevision": 1,
+  "createdAt": "2026-08-21T03:40:50.006Z",
+  "sourceClaimIds": [
+    "slider-analysis-claim-silhouette",
+    "slider-analysis-claim-two-piece-stack",
+    "slider-analysis-claim-primary-motion",
+    "slider-analysis-claim-secondary-motion",
+    "slider-analysis-claim-internal-lanes",
+    "slider-analysis-claim-material-language",
+    "slider-analysis-claim-scale",
+    "slider-analysis-claim-audio-impulses",
+    "slider-analysis-claim-product-identity"
+  ],
+  "sourceAssetIds": [
+    "slider-analysis-discovery-log",
+    "slider-analysis-board-source",
+    "slider-analysis-board",
+    "slider-analysis-audio-spectrogram",
+    "slider-intake-user-frame-04",
+    "slider-intake-user-frame-03",
+    "slider-intake-user-frame-12"
+  ],
+  "units": "millimeters",
+  "coordinateSystem": {
+    "x": "width-right",
+    "y": "length-and-primary-slide-forward",
+    "z": "thickness-up",
+    "origin": "closed-assembly-center",
+    "pivotRule": "lower-body-fixed; upper-body pivot resolved from approved motion choice"
+  },
+  "dimensions": {
+    "overallLengthMm": null,
+    "overallWidthMm": null,
+    "totalThicknessMm": null,
+    "linearTravelMm": null,
+    "seamClearanceMm": null
+  },
+  "boundsMm": null,
+  "mechanism": {
+    "fixedPart": "lower-body",
+    "movingPart": "upper-body",
+    "primaryMotion": "translation-along-positive-y",
+    "secondaryMotion": "unknown",
+    "maxRotationDeg": null,
+    "laneMode": "unknown",
+    "internalHardwareMode": "unknown",
+    "magnetCount": null,
+    "ballCount": null,
+    "steelPlateCount": null
+  },
+  "modelingRules": {
+    "symmetry": "outline bilateral across X; do not mirror asymmetric artwork",
+    "triangleBudgetMax": 120000,
+    "collisionTriangleBudgetMax": 2000,
+    "materialLanguageDeferredToGate": "07-material",
+    "audioBehaviorDeferredToInteractionSystem": true
+  },
+  "route": {
+    "primary": "blender-cli",
+    "deterministic": true,
+    "rodinPolicy": "concept-only; never promote directly to Unity"
+  },
+  "claimDisposition": {
+    "slider-analysis-claim-silhouette": "locked-for-blockout",
+    "slider-analysis-claim-two-piece-stack": "locked-for-part-planning",
+    "slider-analysis-claim-primary-motion": "locked-to-positive-y-translation",
+    "slider-analysis-claim-secondary-motion": "resolved-by-secondaryMotion",
+    "slider-analysis-claim-internal-lanes": "resolved-by-laneMode-and-internalHardwareMode",
+    "slider-analysis-claim-material-language": "deferred-to-gate-07",
+    "slider-analysis-claim-scale": "resolved-only-by-user-measurements",
+    "slider-analysis-claim-audio-impulses": "deferred-to-interaction-and-haptics",
+    "slider-analysis-claim-product-identity": "display-name-only; no geometry authority"
+  },
+  "completeness": {
+    "complete": false,
+    "missing": [
+      "闭合总长度 L",
+      "闭合总宽度 W",
+      "闭合总厚度 T",
+      "直线行程 S",
+      "数字白模接缝间隙",
+      "末段动作",
+      "内部双通道用途",
+      "内部还原深度"
+    ]
+  }
+}

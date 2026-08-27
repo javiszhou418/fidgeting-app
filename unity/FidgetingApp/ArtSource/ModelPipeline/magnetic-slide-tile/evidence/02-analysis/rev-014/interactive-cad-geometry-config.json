@@ -1,0 +1,95 @@
+{
+  "schemaVersion": 1,
+  "modelId": "magnetic-slide-tile",
+  "gate": "02-analysis",
+  "revision": 14,
+  "contractAssetId": "slider-analysis-mechanism-evidence-contract-r014",
+  "contractSha256": "aa5762b30bde0c754eb3fbd34dbd6f98d7ba3dd50e30cf95fb4a5fc081879930",
+  "evidenceSelectors": {
+    "aspectRatioLW": "MEC-SILHOUETTE-ASPECT.value.aspectRatioLW.midpoint",
+    "maxTravelL": "MEC-TRAVEL-NORMALIZED.value.supportedRange.max",
+    "observedPeakTravelL": "MEC-TRAVEL-NORMALIZED.value.observedPeak",
+    "detentStepDeg": "MEC-DETENTS.value.stepDegrees",
+    "detentCount": "MEC-DETENTS.value.countPerRevolution",
+    "bottomExterior": "MEC-BOTTOM-EXTERIOR-NO-RAILS.value",
+    "fixedAxis": "MEC-AXIS-MODULE-FIXED.value",
+    "rotatingCarrier": "MEC-ROTATING-CARRIER.value",
+    "carrierFollowers": "MEC-CARRIER-FOLLOWERS-BILATERAL.value",
+    "topGrooves": "MEC-TOP-UNDERSIDE-GROOVES.value",
+    "topTransform": "MEC-TOP-CARRIER-LOCAL-TRANSLATION.value",
+    "axisCoverage": "MEC-AXIS-COVERAGE-AT-MAX-TRAVEL.value",
+    "closedStop": "MEC-CLOSED-OVERLAP-HARD-STOP.value",
+    "finiteGrooveStops": "MEC-FINITE-GROOVE-ENDPOINT-STOPS.value",
+    "sweptEnvelope": "MEC-TOP-ABOVE-BOTTOM-SWEPT-ENVELOPE.value"
+  },
+  "diagrammaticGeometry": {
+    "axisNormalizedY": 0.32,
+    "carrierRadiusL": 0.23,
+    "carrierSideCutoutHalfWidthL": 0.08,
+    "followerOffsetXL": 0.18,
+    "grooveOffsetXL": 0.18,
+    "grooveStartYL": -0.34,
+    "grooveEndYL": 0.34,
+    "grooveStartFromTopL": 0.32,
+    "grooveEndFromTopL": 0.78
+  },
+  "componentLayers": [
+    "BottomExterior",
+    "FixedAxis",
+    "RotatingCarrier",
+    "CarrierFollowerLeft",
+    "CarrierFollowerRight",
+    "TopPlate",
+    "TopGrooveLeft",
+    "TopGrooveRight",
+    "UnknownContacts"
+  ],
+  "cadApprovalChecklist": [
+    "finiteGrooveEndpoints",
+    "sweptEnvelope",
+    "synchronizedViews",
+    "pointerDirection",
+    "fixedAxis",
+    "rotatingCarrier",
+    "topUndersideGrooves",
+    "compoundMotion",
+    "pivotCoverage",
+    "smoothBottomExterior",
+    "sourceMapping"
+  ],
+  "approvalRule": {
+    "interactiveRequired": true,
+    "approvalType": "interactive-cad-geometry",
+    "chatTextApprovalAllowed": false,
+    "staticScreenshotApprovalAllowed": false,
+    "requiredArtifactHash": true,
+    "requiredContractHash": true,
+    "requiredGeometrySnapshot": true,
+    "requiredBrowserTimestamp": true,
+    "approvalEffect": "records-cad-subapproval-only-simulator-remains-separate-and-locked"
+  },
+  "simulator": {
+    "locked": true,
+    "label": "交互 CAD 批准后生成",
+    "activeControls": 0
+  },
+  "finiteGroove": {
+    "startFromTopL": 0.32,
+    "endFromTopL": 0.78,
+    "maxTravelDerivation": "end-start",
+    "physicalMillimetres": null
+  },
+  "sweptEnvelope": {
+    "detentCount": 30,
+    "slideSampleFractions": [
+      0,
+      0.25,
+      0.5,
+      0.75,
+      1
+    ],
+    "topZ": 2,
+    "bottomZ": 0,
+    "bottomMasksTop": false
+  }
+}

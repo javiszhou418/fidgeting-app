@@ -1,0 +1,627 @@
+{
+  "schemaVersion": 1,
+  "gate": "07-material",
+  "materialRevision": 10,
+  "sourceBlend": "unity/FidgetingApp/ArtSource/ModelPipeline/magnetic-slide-tile/evidence/07-material/rev-009/magnetic-slide-tile-material-r009.blend",
+  "outputBlend": "unity/FidgetingApp/ArtSource/ModelPipeline/magnetic-slide-tile/evidence/07-material/rev-010/magnetic-slide-tile-material-r010.blend",
+  "sourceAssetIds": [
+    "slider-intake-obs-frame-01",
+    "slider-intake-obs-frame-03",
+    "slider-intake-obs-frame-05",
+    "slider-intake-obs-frame-10",
+    "slider-intake-haloo-official-08"
+  ],
+  "geometry": {
+    "digestBefore": "85bd7dd237c6822c72e575c9a23085eec9a2f28d7afea3a5bf0f13fdc4ebd90f",
+    "digestAfter": "85bd7dd237c6822c72e575c9a23085eec9a2f28d7afea3a5bf0f13fdc4ebd90f",
+    "expectedDigest": "85bd7dd237c6822c72e575c9a23085eec9a2f28d7afea3a5bf0f13fdc4ebd90f",
+    "unchanged": true,
+    "matricesUnchanged": true,
+    "assignments": {
+      "LowerBody_Fixed_CleanPlane": {
+        "topCapFaces": 1,
+        "sideAndBottomFaces": 514
+      },
+      "UpperCapsule_Moving": {
+        "topCapFaces": 1,
+        "sideAndBottomFaces": 514
+      }
+    }
+  },
+  "artwork": {
+    "schemaVersion": 1,
+    "gate": "07-material",
+    "revision": 10,
+    "method": "perspective-rectified multi-frame dark-line segmentation with explicit provenance zones",
+    "sources": {
+      "user-frame-10": {
+        "assetId": "slider-intake-obs-frame-10",
+        "path": "unity/FidgetingApp/ArtSource/ModelPipeline/magnetic-slide-tile/evidence/01-intake/rev-001/obsidian-frames/frame-10.jpg",
+        "sourceQuadPx": [
+          [
+            224,
+            584
+          ],
+          [
+            402,
+            582
+          ],
+          [
+            410,
+            704
+          ],
+          [
+            222,
+            704
+          ]
+        ],
+        "visibleTargetY": [
+          360,
+          965
+        ],
+        "confidence": "primary-direct",
+        "homography": [
+          [
+            4.999686655380647,
+            0.08332811092301085,
+            -1168.5934275843035
+          ],
+          [
+            0.1348551696164172,
+            7.760473338572119,
+            -4053.3275768455524
+          ],
+          [
+            0.0001397462897579451,
+            0.0006550954626548796,
+            1.0
+          ]
+        ]
+      },
+      "user-frame-03": {
+        "assetId": "slider-intake-obs-frame-03",
+        "path": "unity/FidgetingApp/ArtSource/ModelPipeline/magnetic-slide-tile/evidence/01-intake/rev-001/obsidian-frames/frame-03.jpg",
+        "sourceQuadPx": [
+          [
+            281,
+            567
+          ],
+          [
+            416,
+            565
+          ],
+          [
+            419,
+            694
+          ],
+          [
+            278,
+            695
+          ]
+        ],
+        "visibleTargetY": [
+          360,
+          965
+        ],
+        "confidence": "secondary-direct",
+        "homography": [
+          [
+            5.893006276696023,
+            0.1381173346100638,
+            -1734.247292475489
+          ],
+          [
+            0.1232640749759853,
+            6.451629332845021,
+            -3233.9271672353184
+          ],
+          [
+            8.345793272489104e-05,
+            0.0004425889921693651,
+            1.0
+          ]
+        ]
+      },
+      "user-frame-05": {
+        "assetId": "slider-intake-obs-frame-05",
+        "path": "unity/FidgetingApp/ArtSource/ModelPipeline/magnetic-slide-tile/evidence/01-intake/rev-001/obsidian-frames/frame-05.jpg",
+        "sourceQuadPx": [
+          [
+            250,
+            665
+          ],
+          [
+            420,
+            660
+          ],
+          [
+            423,
+            785
+          ],
+          [
+            248,
+            785
+          ]
+        ],
+        "visibleTargetY": [
+          400,
+          965
+        ],
+        "confidence": "secondary-direct-motion-soft",
+        "homography": [
+          [
+            4.895350098574621,
+            0.08158916830957728,
+            -1278.0943215695243
+          ],
+          [
+            0.31402417751559336,
+            6.3767169839442674,
+            -3803.0102325115345
+          ],
+          [
+            0.0003254136554565742,
+            0.00031380165655881345,
+            1.0
+          ]
+        ]
+      },
+      "official-frame-08": {
+        "assetId": "slider-intake-haloo-official-08",
+        "path": "unity/FidgetingApp/ArtSource/ModelPipeline/magnetic-slide-tile/evidence/01-intake/rev-002/haloo-official/08.png",
+        "sourceQuadPx": [
+          [
+            198,
+            670
+          ],
+          [
+            464,
+            666
+          ],
+          [
+            468,
+            870
+          ],
+          [
+            195,
+            872
+          ]
+        ],
+        "visibleTargetY": [
+          360,
+          965
+        ],
+        "confidence": "reconstruction-language-only",
+        "homography": [
+          [
+            2.5983759366592523,
+            0.03858974163355333,
+            -540.3335623530128
+          ],
+          [
+            0.06705411731304758,
+            3.4489826568060367,
+            -1926.2536366568052
+          ],
+          [
+            4.4355764818621824e-05,
+            0.00014378018123943428,
+            1.0
+          ]
+        ]
+      }
+    },
+    "directTrace": {
+      "sourceAssetIds": [
+        "slider-intake-obs-frame-10",
+        "slider-intake-obs-frame-03",
+        "slider-intake-obs-frame-05"
+      ],
+      "targetRegionY": [
+        360,
+        965
+      ],
+      "claim": "Only pixels directly visible in user frames; source blur and glare limit stroke precision.",
+      "pixelCount": 118942
+    },
+    "reconstruction": {
+      "sourceAssetIds": [
+        "slider-intake-haloo-official-08"
+      ],
+      "targetRegionY": [
+        0,
+        360
+      ],
+      "claim": "Occluded upper region uses authorized official gothic reference language only; not an exact trace of the red user variant.",
+      "pixelCount": 102670
+    },
+    "mask": {
+      "sizePx": [
+        620,
+        1000
+      ],
+      "upperSha256": "8250df70d2286849db353862283b0d3db9c66e1ac92bed3795bcb5377a431c36",
+      "lowerSha256": "7bf5921f469a217b850ff2ea94dc5ae6c251091b8de60bd81c1b88ec42dfa7c2",
+      "hashesDistinct": true,
+      "binaryDifferenceFraction": 0.382127,
+      "independentlyEditable": true
+    },
+    "artifacts": {
+      "artwork-lower-mask-r010.png": "7bf5921f469a217b850ff2ea94dc5ae6c251091b8de60bd81c1b88ec42dfa7c2",
+      "artwork-lower-direct-mask-r010.png": "be19e06f9d29e867bb5a92a7a6dcdc7ebb24be7138c7bf2347ec72ff17120b2d",
+      "artwork-lower-reconstructed-mask-r010.png": "6c16a7d85c791e2e730fa150c4e5682e86bf17f14396b8e8021638711910cb24",
+      "artwork-lower-provenance-map-r010.png": "4c6ea64864bb1f147c82ecf8d9ec6529313baa104dc2a3d5d78c290ad0afc052",
+      "lower-artwork-direct-vs-reconstructed.png": "89fadf38dc4552de86b1d1633eb07ae7c730856290f8d60f7d61957e78edf20f"
+    },
+    "pass": true
+  },
+  "motionEvidence": {
+    "axisPointWorldMm": [
+      0.0,
+      -9.5,
+      0.0
+    ],
+    "axisDirection": "+Z",
+    "spin": [
+      {
+        "angleDeg": 0,
+        "detentIndex": 0,
+        "pivotWorldMm": [
+          0.0,
+          -9.5,
+          0.0
+        ],
+        "pivotDriftMm": 0.0,
+        "translationWorldMm": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "translationMagnitudeMm": 0.0,
+        "axisDirection": "+Z",
+        "axisPixel": [
+          800.0,
+          833.636
+        ],
+        "render": "spin-00deg.png"
+      },
+      {
+        "angleDeg": 12,
+        "detentIndex": 1,
+        "pivotWorldMm": [
+          0.0,
+          -9.5,
+          0.0
+        ],
+        "pivotDriftMm": 0.0,
+        "translationWorldMm": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "translationMagnitudeMm": 0.0,
+        "axisDirection": "+Z",
+        "axisPixel": [
+          800.0,
+          833.636
+        ],
+        "render": "spin-12deg.png"
+      },
+      {
+        "angleDeg": 36,
+        "detentIndex": 3,
+        "pivotWorldMm": [
+          0.0,
+          -9.5,
+          0.0
+        ],
+        "pivotDriftMm": 0.0,
+        "translationWorldMm": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "translationMagnitudeMm": 0.0,
+        "axisDirection": "+Z",
+        "axisPixel": [
+          800.0,
+          833.636
+        ],
+        "render": "spin-36deg.png"
+      }
+    ],
+    "slide": {
+      "translationLocalMm": [
+        0.0,
+        21.0,
+        0.0
+      ],
+      "rotationDeg": 0,
+      "pivotWorldMm": [
+        0.0,
+        11.5,
+        0.0
+      ],
+      "upperRotationDeg": 0.0,
+      "render": "slide-open-21mm-0deg.png"
+    },
+    "detentEquation": "360° / 12° = 30",
+    "allSpinAnglesDetentAligned": true,
+    "allSpinTranslationsZero": true,
+    "allPivotDriftZero": true,
+    "fortyFiveDegreePrimaryPoseUsed": false
+  },
+  "recipe": {
+    "silver": {
+      "baseColorLinear": [
+        0.78,
+        0.77,
+        0.74,
+        1.0
+      ],
+      "metallic": 1.0,
+      "roughness": 0.075,
+      "anisotropy": 0.16,
+      "anisotropyRotation": 0.08,
+      "coatWeight": 0.08,
+      "coatRoughness": 0.018,
+      "microScratchScale": 520.0,
+      "microScratchStrength": 0.012,
+      "emission": 0.0
+    },
+    "crystal": {
+      "deepBloodRedLinear": [
+        0.18,
+        0.003,
+        0.008,
+        1.0
+      ],
+      "darkRubyLinear": [
+        0.018,
+        0.00025,
+        0.0008,
+        1.0
+      ],
+      "highlightRubyLinear": [
+        0.72,
+        0.025,
+        0.045,
+        1.0
+      ],
+      "roughnessMinMax": [
+        0.022,
+        0.11
+      ],
+      "ior": 1.52,
+      "coatWeight": 0.48,
+      "coatRoughness": 0.035,
+      "transmissionMinMax": [
+        0.05,
+        0.3
+      ],
+      "thinFilmIor": 1.38,
+      "thinFilmThicknessNm": [
+        365.0,
+        455.0
+      ],
+      "mosaicScale": 24.0,
+      "mosaicDetailScale": 120.0,
+      "mosaicBumpStrength": 0.22,
+      "mosaicBumpDistanceMm": 0.024,
+      "motifBumpStrength": 0.16,
+      "motifDepthMm": 0.045,
+      "iridescenceMix": 0.08,
+      "emission": 0.0,
+      "microflakeScale": 85.0,
+      "microflakeThreshold": [
+        0.72,
+        0.79
+      ],
+      "microflakeColorLinear": [
+        1.0,
+        0.22,
+        0.28,
+        1.0
+      ],
+      "microflakeMix": 0.7,
+      "microflakeBumpStrength": 0.11,
+      "microflakeBumpDistanceMm": 0.006,
+      "granularVariationScale": 28.0,
+      "granularVariationMix": 0.68
+    },
+    "motif": {
+      "baseColorLinear": [
+        0.004,
+        0.0015,
+        0.0018,
+        1.0
+      ],
+      "metallic": 0.42,
+      "roughness": 0.16,
+      "coatWeight": 0.35
+    },
+    "perimeter": {
+      "baseColorLinear": [
+        0.018,
+        0.02,
+        0.024,
+        1.0
+      ],
+      "metallic": 0.24,
+      "roughness": 0.18,
+      "coatWeight": 0.55,
+      "borderMaskWidthPx": 64,
+      "outerInsetPx": 0
+    },
+    "colorManagement": {
+      "viewTransform": "AgX",
+      "look": "AgX - Medium High Contrast",
+      "exposureEv": 0.0,
+      "gamma": 1.0,
+      "whiteBalanceKelvin": 6504,
+      "whiteBalanceTint": 10
+    },
+    "chemistryClaim": "unknown; visual approximation only",
+    "lowerArtwork": {
+      "upperMaskSha256": "8250df70d2286849db353862283b0d3db9c66e1ac92bed3795bcb5377a431c36",
+      "lowerMaskSha256": "7bf5921f469a217b850ff2ea94dc5ae6c251091b8de60bd81c1b88ec42dfa7c2",
+      "hashesDistinct": true,
+      "directTraceRegionY": [
+        360,
+        965
+      ],
+      "reconstructedRegionY": [
+        0,
+        360
+      ],
+      "reconstructionClaim": "Occluded upper region uses authorized official gothic reference language only; not an exact trace of the red user variant."
+    },
+    "motionEvidence": {
+      "axisPointWorldMm": [
+        0.0,
+        -9.5,
+        0.0
+      ],
+      "axisDirection": "+Z",
+      "spinAnglesDeg": [
+        0,
+        12,
+        36
+      ],
+      "detentIndices": [
+        0,
+        1,
+        3
+      ],
+      "detentEquation": "360° / 12° = 30",
+      "slidePose": {
+        "translationMm": [
+          0,
+          21,
+          0
+        ],
+        "rotationDeg": 0
+      },
+      "primaryAngleDeg": 12,
+      "fortyFiveDegreePrimaryPoseUsed": false
+    }
+  },
+  "render": {
+    "engine": "BLENDER_EEVEE",
+    "viewTransform": "AgX",
+    "look": "AgX - Medium High Contrast",
+    "exposure": 0.0,
+    "whiteBalanceKelvin": 6504.0,
+    "whiteBalanceTint": 10.0,
+    "emission": 0.0,
+    "bloom": false,
+    "cameras": {
+      "front": {
+        "location": [
+          0.0,
+          -88.0,
+          128.0
+        ],
+        "rotationEuler": [
+          0.6115275621414185,
+          -0.0,
+          0.0
+        ],
+        "lensMm": 88.0,
+        "cameraId": "front-source-oriented",
+        "recipe": "Gate07Rev10-neutral-material-axis-review"
+      },
+      "oblique": {
+        "location": [
+          68.0,
+          -94.0,
+          66.0
+        ],
+        "rotationEuler": [
+          1.0800063610076904,
+          -5.602893438094725e-08,
+          0.6262615323066711
+        ],
+        "lensMm": 94.0,
+        "cameraId": "material-oblique",
+        "recipe": "Gate07Rev10-neutral-material-axis-review"
+      },
+      "side": {
+        "location": [
+          82.0,
+          -84.0,
+          30.0
+        ],
+        "rotationEuler": [
+          1.3104372024536133,
+          -2.2923956066733808e-08,
+          0.728854775428772
+        ],
+        "lensMm": 112.0,
+        "cameraId": "side-rim",
+        "recipe": "Gate07Rev10-neutral-material-axis-review"
+      },
+      "open": {
+        "location": [
+          0.0,
+          -112.0,
+          116.0
+        ],
+        "rotationEuler": [
+          0.8132283091545105,
+          -0.0,
+          0.0
+        ],
+        "lensMm": 86.0,
+        "cameraId": "open-front",
+        "recipe": "Gate07Rev10-neutral-material-axis-review"
+      },
+      "lower": {
+        "location": [
+          4.0,
+          -104.0,
+          82.0
+        ],
+        "rotationEuler": [
+          0.8670704364776611,
+          -4.5887933453059304e-09,
+          0.042984265834093094
+        ],
+        "lensMm": 106.0,
+        "cameraId": "lower-artwork-macro",
+        "recipe": "Gate07Rev10-neutral-material-axis-review"
+      },
+      "microflake": {
+        "location": [
+          20.0,
+          -63.0,
+          70.0
+        ],
+        "rotationEuler": [
+          0.7999670505523682,
+          6.77821088146402e-09,
+          0.3073975145816803
+        ],
+        "lensMm": 132.0,
+        "cameraId": "crystal-microflake-macro",
+        "recipe": "Gate07Rev10-neutral-material-axis-review"
+      },
+      "spin": {
+        "location": [
+          0.0,
+          -102.0,
+          126.0
+        ],
+        "rotationEuler": [
+          0.6903418898582458,
+          -0.0,
+          0.0
+        ],
+        "lensMm": 92.0,
+        "cameraId": "point-axis-spin",
+        "recipe": "Gate07Rev10-neutral-material-axis-review"
+      }
+    }
+  },
+  "pass": true
+}

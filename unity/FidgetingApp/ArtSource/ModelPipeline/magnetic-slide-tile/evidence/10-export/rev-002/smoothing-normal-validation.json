@@ -1,0 +1,177 @@
+{
+  "schemaVersion": 1,
+  "modelId": "magnetic-slide-tile",
+  "gate": "10-export",
+  "exportRevision": 2,
+  "source": {
+    "label": "authoritative-source-base-mesh",
+    "triangleGeometryDigest": "9f2af08b36590121e59cca68287d59394aae09896098d1755dc64caee5420ea2",
+    "totalTriangles": 4096,
+    "objects": {
+      "LowerBody_Fixed_CleanPlane": {
+        "triangles": 2048,
+        "sidePolygons": 513,
+        "capPolygons": 2,
+        "sideCoordinateGroups": 1026,
+        "maximumSideCornerNormalDiscontinuityDegrees": 0.0,
+        "p95SideCornerNormalDiscontinuityDegrees": 0.0,
+        "sideGroupsAbovePoint05Degrees": 0,
+        "minimumCapSideNormalAngleDegrees": 90.00000250447816,
+        "maximumCapSideNormalAngleDegrees": 90.00000250447816,
+        "minimumSideOutwardDot": 0.9999952912330627,
+        "minimumCapOrientationDot": 1.0,
+        "smoothPolygonCount": 513,
+        "flatPolygonCount": 2
+      },
+      "UpperCapsule_Moving": {
+        "triangles": 2048,
+        "sidePolygons": 513,
+        "capPolygons": 2,
+        "sideCoordinateGroups": 1026,
+        "maximumSideCornerNormalDiscontinuityDegrees": 0.0,
+        "p95SideCornerNormalDiscontinuityDegrees": 0.0,
+        "sideGroupsAbovePoint05Degrees": 0,
+        "minimumCapSideNormalAngleDegrees": 90.00000250447816,
+        "maximumCapSideNormalAngleDegrees": 90.00000250447816,
+        "minimumSideOutwardDot": 0.9999952912330627,
+        "minimumCapOrientationDot": 1.0,
+        "smoothPolygonCount": 513,
+        "flatPolygonCount": 2
+      }
+    }
+  },
+  "rejectedRev1Fbx": {
+    "label": "rejected-rev1-fbx-smoothing-off",
+    "triangleGeometryDigest": "9a512ae87f8cb987792fab844b0497f5e6536ba9280f971f4ec5bbcfe8c4fbbd",
+    "totalTriangles": 4096,
+    "objects": {
+      "LowerBody_Fixed_CleanPlane": {
+        "triangles": 2048,
+        "sidePolygons": 1026,
+        "capPolygons": 1022,
+        "sideCoordinateGroups": 1026,
+        "maximumSideCornerNormalDiscontinuityDegrees": 0.0,
+        "p95SideCornerNormalDiscontinuityDegrees": 0.0,
+        "sideGroupsAbovePoint05Degrees": 0,
+        "minimumCapSideNormalAngleDegrees": 89.99998884409983,
+        "maximumCapSideNormalAngleDegrees": 90.00000250447816,
+        "minimumSideOutwardDot": 0.9999952912330627,
+        "minimumCapOrientationDot": 1.0,
+        "smoothPolygonCount": 2048,
+        "flatPolygonCount": 0
+      },
+      "UpperCapsule_Moving": {
+        "triangles": 2048,
+        "sidePolygons": 1026,
+        "capPolygons": 1022,
+        "sideCoordinateGroups": 1026,
+        "maximumSideCornerNormalDiscontinuityDegrees": 0.0,
+        "p95SideCornerNormalDiscontinuityDegrees": 0.0,
+        "sideGroupsAbovePoint05Degrees": 0,
+        "minimumCapSideNormalAngleDegrees": 89.99998884409983,
+        "maximumCapSideNormalAngleDegrees": 90.00000250447816,
+        "minimumSideOutwardDot": 0.9999952912330627,
+        "minimumCapOrientationDot": 1.0,
+        "smoothPolygonCount": 2048,
+        "flatPolygonCount": 0
+      }
+    }
+  },
+  "diagnosis": {
+    "primaryVisualConfound": "The rev 1 review board displayed 128-triangle non-rendering collision capsules as shaded geometry beside the shipping mesh.",
+    "exportPortabilityRisk": "FBX mesh_smooth_type was OFF. Blender re-import still recovered continuous custom side normals, but the file omitted explicit face smoothing metadata for other importers.",
+    "geometryFinding": "The 256-segment semicircles are sufficient; no Gate 06 geometry change is justified."
+  },
+  "rev2Fbx": {
+    "label": "rev2-fbx-smoothing-face",
+    "triangleGeometryDigest": "9f2af08b36590121e59cca68287d59394aae09896098d1755dc64caee5420ea2",
+    "totalTriangles": 4096,
+    "objects": {
+      "LowerBody_Fixed_CleanPlane": {
+        "triangles": 2048,
+        "sidePolygons": 1026,
+        "capPolygons": 1022,
+        "sideCoordinateGroups": 1026,
+        "maximumSideCornerNormalDiscontinuityDegrees": 0.0,
+        "p95SideCornerNormalDiscontinuityDegrees": 0.0,
+        "sideGroupsAbovePoint05Degrees": 0,
+        "minimumCapSideNormalAngleDegrees": 89.99952439123626,
+        "maximumCapSideNormalAngleDegrees": 90.00241356125518,
+        "minimumSideOutwardDot": 0.9999952912330627,
+        "minimumCapOrientationDot": 1.0,
+        "smoothPolygonCount": 1026,
+        "flatPolygonCount": 1022
+      },
+      "UpperCapsule_Moving": {
+        "triangles": 2048,
+        "sidePolygons": 1026,
+        "capPolygons": 1022,
+        "sideCoordinateGroups": 1026,
+        "maximumSideCornerNormalDiscontinuityDegrees": 0.0,
+        "p95SideCornerNormalDiscontinuityDegrees": 0.0,
+        "sideGroupsAbovePoint05Degrees": 0,
+        "minimumCapSideNormalAngleDegrees": 89.99952439123626,
+        "maximumCapSideNormalAngleDegrees": 90.00241356125518,
+        "minimumSideOutwardDot": 0.9999952912330627,
+        "minimumCapOrientationDot": 1.0,
+        "smoothPolygonCount": 1026,
+        "flatPolygonCount": 1022
+      }
+    }
+  },
+  "rev2Glb": {
+    "label": "rev2-glb-explicit-normals",
+    "triangleGeometryDigest": "9f2af08b36590121e59cca68287d59394aae09896098d1755dc64caee5420ea2",
+    "totalTriangles": 4096,
+    "objects": {
+      "LowerBody_Fixed_CleanPlane": {
+        "triangles": 2048,
+        "sidePolygons": 1026,
+        "capPolygons": 1022,
+        "sideCoordinateGroups": 1026,
+        "maximumSideCornerNormalDiscontinuityDegrees": 0.0,
+        "p95SideCornerNormalDiscontinuityDegrees": 0.0,
+        "sideGroupsAbovePoint05Degrees": 0,
+        "minimumCapSideNormalAngleDegrees": 89.99952439123626,
+        "maximumCapSideNormalAngleDegrees": 90.00244088201187,
+        "minimumSideOutwardDot": 0.9999952066063997,
+        "minimumCapOrientationDot": 1.0,
+        "smoothPolygonCount": 1026,
+        "flatPolygonCount": 1022
+      },
+      "UpperCapsule_Moving": {
+        "triangles": 2048,
+        "sidePolygons": 1026,
+        "capPolygons": 1022,
+        "sideCoordinateGroups": 1026,
+        "maximumSideCornerNormalDiscontinuityDegrees": 0.0,
+        "p95SideCornerNormalDiscontinuityDegrees": 0.0,
+        "sideGroupsAbovePoint05Degrees": 0,
+        "minimumCapSideNormalAngleDegrees": 89.99952439123626,
+        "maximumCapSideNormalAngleDegrees": 90.00244088201187,
+        "minimumSideOutwardDot": 0.9999952066063997,
+        "minimumCapOrientationDot": 1.0,
+        "smoothPolygonCount": 1026,
+        "flatPolygonCount": 1022
+      }
+    }
+  },
+  "silhouette": {
+    "segmentsPerSemicircle": 256,
+    "maximumTurnDegrees": 0.703125,
+    "maximumChordDeviationMm": 0.0002917831196828091,
+    "geometryChangeRequired": false
+  },
+  "checks": {
+    "geometryDigestUnchanged": true,
+    "triangleCountUnchanged": true,
+    "sourceSideNormalsContinuous": true,
+    "rev1FbxSmoothingMetadataWasOff": true,
+    "rev1BlenderReimportStillHadContinuousCustomNormals": true,
+    "rev2SideNormalsContinuous": true,
+    "hardCapSideBoundaryPreserved": true,
+    "noNormalInversions": true,
+    "approvedSilhouetteSampling": true
+  },
+  "pass": true
+}

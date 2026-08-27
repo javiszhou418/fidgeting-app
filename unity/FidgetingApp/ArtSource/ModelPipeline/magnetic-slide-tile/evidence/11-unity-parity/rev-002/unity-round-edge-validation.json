@@ -1,0 +1,87 @@
+{
+  "schemaVersion": 1,
+  "modelId": "magnetic-slide-tile",
+  "gate": "11-unity-parity",
+  "revision": 2,
+  "inspectionRoiPixels": [
+    170,
+    275,
+    690,
+    540
+  ],
+  "bandMeasurementRoiPixels": [
+    280,
+    340,
+    640,
+    475
+  ],
+  "old": {
+    "columnGradientMedian": 0.0,
+    "columnGradientP95": 0.075614,
+    "columnGradientP99": 5.449015,
+    "secondDerivativeP99": 5.715447,
+    "hardBandColumns": 4,
+    "smoothGradientCoverage": 0.030641,
+    "flatColumnFraction": 0.949861,
+    "periodicBandScore": 72.063414,
+    "profileRange": 210.561205
+  },
+  "new": {
+    "columnGradientMedian": 0.0,
+    "columnGradientP95": 0.715195,
+    "columnGradientP99": 5.449015,
+    "secondDerivativeP99": 5.715447,
+    "hardBandColumns": 4,
+    "smoothGradientCoverage": 0.089136,
+    "flatColumnFraction": 0.874652,
+    "periodicBandScore": 7.618925,
+    "profileRange": 134.633394
+  },
+  "wireframeCyanPixels": 124454,
+  "visual": {
+    "blenderBoundingBox": [
+      271,
+      145,
+      1332,
+      829
+    ],
+    "unityBoundingBox": [
+      271,
+      144,
+      1331,
+      833
+    ],
+    "boundingBoxIoU": 0.99181422,
+    "silhouetteIoU": 0.98690226,
+    "contourP95Pixels": 4.10788
+  },
+  "rootCause": {
+    "verified": true,
+    "oldEnvironment": "six independent 32x32 solid-color faces; mipmaps false",
+    "newEnvironment": "256x256 RGBAHalf direction-continuous function; mipmaps true; trilinear",
+    "geometryChanged": false,
+    "importerNormalsChanged": false
+  },
+  "checks": {
+    "unityImportPassed": true,
+    "geometryUnchanged": true,
+    "trianglesUnchanged": true,
+    "boundsUnchanged": true,
+    "arcNormalProgressionGradual": true,
+    "arcNormalMedianMatches256Segments": true,
+    "capSideBoundaryHard": true,
+    "continuousEnvironmentMipChain": true,
+    "continuousEnvironmentFiltering": true,
+    "boxProjectionDisabled": true,
+    "analyticEnvironmentSeamsContinuous": true,
+    "hardBandsReduced": true,
+    "highlightJumpReduced": true,
+    "wireframeVisible": true,
+    "silhouetteAligned": true,
+    "boundingBoxAligned": true,
+    "contourAligned": true,
+    "patternDecisionPreserved": true,
+    "shippingSceneUnchanged": true
+  },
+  "pass": true
+}

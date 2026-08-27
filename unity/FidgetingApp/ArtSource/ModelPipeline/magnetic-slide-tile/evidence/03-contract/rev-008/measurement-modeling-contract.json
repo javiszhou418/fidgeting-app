@@ -1,0 +1,357 @@
+{
+  "schemaVersion": 2,
+  "kind": "guided-core-measurement-modeling-contract",
+  "modelId": "magnetic-slide-tile",
+  "gate": "03-contract",
+  "contractRevision": 8,
+  "createdAt": "2026-08-27T02:30:53.072Z",
+  "units": "millimeters",
+  "approvedGate02ContractSha256": "b4318452f163ef7c105c826d4466a739a1dd0d942d4d74d921c29c39e02a84f2",
+  "sourceClaimIds": [
+    "slider-analysis-evidence-contract-authority-r008",
+    "slider-analysis-mec-silhouette-aspect-r008",
+    "slider-analysis-mec-plate-upper-fixed-r008",
+    "slider-analysis-mec-plate-lower-moving-r008",
+    "slider-analysis-mec-pivot-endpoint-attachment-r008",
+    "slider-analysis-mec-compound-transform-r008",
+    "slider-analysis-mec-rails-bilateral-lower-reverse-r008",
+    "slider-analysis-mec-slide-direction-and-closed-stop-r008",
+    "slider-analysis-mec-travel-normalized-r008",
+    "slider-analysis-mec-rotation-range-r008",
+    "slider-analysis-mec-detents-r008",
+    "slider-analysis-mec-rotation-during-slide-r008",
+    "slider-analysis-mec-resistance-semantics-r008",
+    "slider-analysis-mec-visible-hardware-r008",
+    "slider-analysis-mec-artwork-mechanism-boundary-r008",
+    "slider-analysis-mec-physical-dimensions-r008",
+    "slider-analysis-minimum-overlap-disk-r015"
+  ],
+  "sourceAssetIds": [
+    "slider-analysis-mechanism-evidence-contract-r015",
+    "slider-analysis-interactive-cad-geometry-config-r015"
+  ],
+  "policy": {
+    "requiredCoreFieldIds": [
+      "closedOverallLength",
+      "overallWidth",
+      "totalClosedThickness",
+      "topPlateThickness",
+      "bottomPlateThickness",
+      "maximumSlideTravel",
+      "fixedAxisOffsetFromNearestEnd",
+      "rotatingCarrierDiameter",
+      "closedSeamGap"
+    ],
+    "optionalEngineeringFieldIds": [
+      "bilateralGrooveCenterSpacing",
+      "grooveWidth",
+      "grooveDepth",
+      "fixedAxisDiameter",
+      "upperStepHeight",
+      "lowerStepHeight",
+      "visibleFollowerDimensions"
+    ],
+    "manufacturingLaterFieldIds": [
+      "operatingClearance",
+      "manufacturingAllowance",
+      "manufacturingTolerance"
+    ],
+    "optionalFieldsBlockInitialBlender": false,
+    "manufacturingFieldsBlockInitialBlender": false,
+    "rejectedDefaults": [
+      "50×31×12 mm",
+      "21 mm"
+    ]
+  },
+  "definitions": {
+    "requiredCore": [
+      {
+        "id": "closedOverallLength",
+        "label": "闭合总长 L",
+        "method": "正交俯视；卡尺或同平面毫米尺照片"
+      },
+      {
+        "id": "overallWidth",
+        "label": "总宽 W",
+        "method": "正交俯视；测最宽处"
+      },
+      {
+        "id": "totalClosedThickness",
+        "label": "闭合总厚 T",
+        "method": "正交侧视；测闭合总厚"
+      },
+      {
+        "id": "topPlateThickness",
+        "label": "顶片厚度",
+        "method": "正交侧视；避开台阶测主体厚度"
+      },
+      {
+        "id": "bottomPlateThickness",
+        "label": "底片厚度",
+        "method": "正交侧视；避开台阶测主体厚度"
+      },
+      {
+        "id": "maximumSlideTravel",
+        "label": "最大直推行程",
+        "method": "闭合/全开同机位同尺；比较固定端点"
+      },
+      {
+        "id": "fixedAxisOffsetFromNearestEnd",
+        "label": "轴心距最近圆端",
+        "method": "俯视内部近照；圆端外缘到轴心中心"
+      },
+      {
+        "id": "rotatingCarrierDiameter",
+        "label": "旋转载体直径",
+        "method": "俯视内部近照；测圆形载体最大外径"
+      },
+      {
+        "id": "closedSeamGap",
+        "label": "闭合接缝/间隙",
+        "method": "正交侧视微距；测两片闭合可见间隙"
+      }
+    ],
+    "optionalEngineering": [
+      {
+        "id": "bilateralGrooveCenterSpacing",
+        "label": "双槽中心距"
+      },
+      {
+        "id": "grooveWidth",
+        "label": "槽宽"
+      },
+      {
+        "id": "grooveDepth",
+        "label": "槽深"
+      },
+      {
+        "id": "fixedAxisDiameter",
+        "label": "固定轴直径"
+      },
+      {
+        "id": "upperStepHeight",
+        "label": "顶片台阶高度"
+      },
+      {
+        "id": "lowerStepHeight",
+        "label": "底片台阶高度"
+      },
+      {
+        "id": "visibleFollowerDimensions",
+        "label": "可见随动/接触尺寸"
+      }
+    ],
+    "manufacturingLater": [
+      {
+        "id": "operatingClearance",
+        "label": "工作间隙"
+      },
+      {
+        "id": "manufacturingAllowance",
+        "label": "加工余量"
+      },
+      {
+        "id": "manufacturingTolerance",
+        "label": "制造公差"
+      }
+    ]
+  },
+  "measurements": {
+    "required": {
+      "closedOverallLength": {
+        "valueMm": null,
+        "uncertaintyMm": null,
+        "source": null,
+        "method": "正交俯视；卡尺或同平面毫米尺照片",
+        "photoAssetIds": []
+      },
+      "overallWidth": {
+        "valueMm": null,
+        "uncertaintyMm": null,
+        "source": null,
+        "method": "正交俯视；测最宽处",
+        "photoAssetIds": []
+      },
+      "totalClosedThickness": {
+        "valueMm": null,
+        "uncertaintyMm": null,
+        "source": null,
+        "method": "正交侧视；测闭合总厚",
+        "photoAssetIds": []
+      },
+      "topPlateThickness": {
+        "valueMm": null,
+        "uncertaintyMm": null,
+        "source": null,
+        "method": "正交侧视；避开台阶测主体厚度",
+        "photoAssetIds": []
+      },
+      "bottomPlateThickness": {
+        "valueMm": null,
+        "uncertaintyMm": null,
+        "source": null,
+        "method": "正交侧视；避开台阶测主体厚度",
+        "photoAssetIds": []
+      },
+      "maximumSlideTravel": {
+        "valueMm": null,
+        "uncertaintyMm": null,
+        "source": null,
+        "method": "闭合/全开同机位同尺；比较固定端点",
+        "photoAssetIds": []
+      },
+      "fixedAxisOffsetFromNearestEnd": {
+        "valueMm": null,
+        "uncertaintyMm": null,
+        "source": null,
+        "method": "俯视内部近照；圆端外缘到轴心中心",
+        "photoAssetIds": []
+      },
+      "rotatingCarrierDiameter": {
+        "valueMm": null,
+        "uncertaintyMm": null,
+        "source": null,
+        "method": "俯视内部近照；测圆形载体最大外径",
+        "photoAssetIds": []
+      },
+      "closedSeamGap": {
+        "valueMm": null,
+        "uncertaintyMm": null,
+        "source": null,
+        "method": "正交侧视微距；测两片闭合可见间隙",
+        "photoAssetIds": []
+      }
+    },
+    "optional": {
+      "bilateralGrooveCenterSpacing": {
+        "valueMm": null,
+        "uncertaintyMm": null,
+        "source": null,
+        "method": null,
+        "photoAssetIds": []
+      },
+      "grooveWidth": {
+        "valueMm": null,
+        "uncertaintyMm": null,
+        "source": null,
+        "method": null,
+        "photoAssetIds": []
+      },
+      "grooveDepth": {
+        "valueMm": null,
+        "uncertaintyMm": null,
+        "source": null,
+        "method": null,
+        "photoAssetIds": []
+      },
+      "fixedAxisDiameter": {
+        "valueMm": null,
+        "uncertaintyMm": null,
+        "source": null,
+        "method": null,
+        "photoAssetIds": []
+      },
+      "upperStepHeight": {
+        "valueMm": null,
+        "uncertaintyMm": null,
+        "source": null,
+        "method": null,
+        "photoAssetIds": []
+      },
+      "lowerStepHeight": {
+        "valueMm": null,
+        "uncertaintyMm": null,
+        "source": null,
+        "method": null,
+        "photoAssetIds": []
+      },
+      "visibleFollowerDimensions": {
+        "valueMm": null,
+        "uncertaintyMm": null,
+        "source": null,
+        "method": null,
+        "photoAssetIds": []
+      }
+    },
+    "manufacturingLater": {
+      "operatingClearance": {
+        "valueMm": null,
+        "state": "unknown-manufacturing-later",
+        "blocking": false
+      },
+      "manufacturingAllowance": {
+        "valueMm": null,
+        "state": "unknown-manufacturing-later",
+        "blocking": false
+      },
+      "manufacturingTolerance": {
+        "valueMm": null,
+        "state": "unknown-manufacturing-later",
+        "blocking": false
+      }
+    }
+  },
+  "consistency": {
+    "thicknessStack": "topPlateThickness + bottomPlateThickness + closedSeamGap ≈ totalClosedThickness within stated uncertainty",
+    "axisCarrierFit": "carrier circle must fit the bottom footprint at the measured axis offset",
+    "travelContainment": "maximumSlideTravel <= 0.3615286624203821 * closedOverallLength within stated uncertainty",
+    "aspectEvidenceWarningRange": [
+      1.52,
+      1.62
+    ],
+    "errors": [],
+    "warnings": []
+  },
+  "completeness": {
+    "complete": false,
+    "requiredComplete": 0,
+    "requiredTotal": 9,
+    "fieldErrors": {
+      "closedOverallLength": [
+        "缺少毫米值",
+        "缺少不确定度",
+        "缺少来源"
+      ],
+      "overallWidth": [
+        "缺少毫米值",
+        "缺少不确定度",
+        "缺少来源"
+      ],
+      "totalClosedThickness": [
+        "缺少毫米值",
+        "缺少不确定度",
+        "缺少来源"
+      ],
+      "topPlateThickness": [
+        "缺少毫米值",
+        "缺少不确定度",
+        "缺少来源"
+      ],
+      "bottomPlateThickness": [
+        "缺少毫米值",
+        "缺少不确定度",
+        "缺少来源"
+      ],
+      "maximumSlideTravel": [
+        "缺少毫米值",
+        "缺少不确定度",
+        "缺少来源"
+      ],
+      "fixedAxisOffsetFromNearestEnd": [
+        "缺少毫米值",
+        "缺少不确定度",
+        "缺少来源"
+      ],
+      "rotatingCarrierDiameter": [
+        "缺少毫米值",
+        "缺少不确定度",
+        "缺少来源"
+      ],
+      "closedSeamGap": [
+        "缺少毫米值",
+        "缺少不确定度",
+        "缺少来源"
+      ]
+    }
+  }
+}

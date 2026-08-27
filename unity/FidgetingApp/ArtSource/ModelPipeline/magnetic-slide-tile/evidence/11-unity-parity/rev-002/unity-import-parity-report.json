@@ -1,0 +1,80 @@
+{
+    "pass": true,
+    "failures": [],
+    "unityVersion": "6000.5.6f1",
+    "urpVersion": "17.5.0",
+    "sourceProductAssetPath": "Assets/ModelPipeline/MagneticSlideTile/Gate11Rev001/Imported/magnetic-slide-tile-r002.fbx",
+    "sourceCollisionAssetPath": "Assets/ModelPipeline/MagneticSlideTile/Gate11Rev001/Imported/magnetic-slide-tile-collision-r002.fbx",
+    "parityScenePath": "Assets/ModelPipeline/MagneticSlideTile/Gate11Rev002/MagneticSlideTileNeutralParityRev2.unity",
+    "renderMeshes": 2,
+    "vertices": 4124,
+    "triangles": 4096,
+    "collisionTriangles": [
+        128,
+        128
+    ],
+    "boundsMeters": [
+        0.012000005692243576,
+        0.03100000135600567,
+        0.04999999701976776
+    ],
+    "boundsRelativeError": 4.656610599340638e-7,
+    "arcNormals": {
+        "uniqueHorizontalNormals": 839,
+        "nonZeroAdjacentEdges": 4104,
+        "expectedSegmentsPerSemicircle": 256,
+        "expectedNormalStepDegrees": 0.703125,
+        "minimumAdjacentStepDegrees": 0.3516591489315033,
+        "medianAdjacentStepDegrees": 0.7030433416366577,
+        "p95AdjacentStepDegrees": 0.703599750995636,
+        "maximumAdjacentStepDegrees": 0.8778186440467835,
+        "gradualProgressionPass": true
+    },
+    "capSideBoundary": {
+        "comparedPairs": 2076,
+        "minimumCapSideAngleDegrees": 90.0,
+        "hardBoundaryPass": true
+    },
+    "environment": {
+        "resolution": 256,
+        "format": "RGBAHalf",
+        "mipCount": 9,
+        "filterMode": "Trilinear",
+        "wrapMode": "Clamp",
+        "boxProjection": false,
+        "realtimeUpdates": false,
+        "directionContinuousFormula": true,
+        "maximumAnalyticSeamDelta": 0.00001424551010131836,
+        "oldEnvironment": "six independent 32x32 solid-color faces; mipmaps false",
+        "newEnvironment": "256x256 RGBAHalf direction-continuous function; mipmaps true; trilinear"
+    },
+    "camera": {
+        "position": {
+            "x": -0.07199999690055847,
+            "y": 0.04600000008940697,
+            "z": 0.09200000017881394
+        },
+        "lookAt": {
+            "x": 0.0,
+            "y": 0.0,
+            "z": 0.0020000000949949028
+        },
+        "verticalFovDegrees": 16.937904357910158,
+        "resolution": {
+            "x": 1600,
+            "y": 900
+        }
+    },
+    "geometryChanged": false,
+    "renderGeometryInflated": false,
+    "patternPlacementDecision": "accepted-provisionally-not-under-review",
+    "roundEdgeDecision": "rev1-rejected-rev2-pending",
+    "rootCause": "Rev 1 used six unrelated solid-color cubemap faces without mipmaps. Near-mirror silver exposed the face transitions as broad hard bands.",
+    "importerNormalsChanged": false,
+    "shippingSceneHashBefore": "99083a32fbad262f615707d0904bf68f7989e8e351579f8691066bd4bc97850d",
+    "shippingSceneHashAfter": "99083a32fbad262f615707d0904bf68f7989e8e351579f8691066bd4bc97850d",
+    "shippingSceneModified": false,
+    "shippingIntegrated": false,
+    "gate12Started": false,
+    "deviceAcceptance": "pending"
+}

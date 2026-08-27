@@ -1,0 +1,55 @@
+{
+  "schemaVersion": 1,
+  "modelId": "magnetic-slide-tile",
+  "gate": "02-analysis",
+  "revision": 4,
+  "status": "pass",
+  "checks": [
+    {
+      "id": "deterministic-mechanism-unit-tests",
+      "status": "pass",
+      "evidence": "8/8 passed: 30x12-degree mapping, no self-spin, frame-rate-independent damping, breakaway/capture, one outward slide, reversible closure, hard/soft stops, clamp, wrapping, reset and parameter changes."
+    },
+    {
+      "id": "workbench-unit-tests",
+      "status": "pass",
+      "evidence": "23/23 Node tests passed."
+    },
+    {
+      "id": "browser-desktop-pointer",
+      "status": "pass",
+      "evidence": "Six conclusions, no screenshot wall, pointer slide and rotation, live values, control update, reset zero velocity, collapsed evidence and one approval question passed."
+    },
+    {
+      "id": "browser-mobile",
+      "status": "pass",
+      "evidence": "390x844 layout uses one sandbox and dimension column with no horizontal overflow."
+    },
+    {
+      "id": "browser-modal-return",
+      "status": "pass",
+      "evidence": "Close button, Escape, backdrop and browser Back return to the workbench."
+    },
+    {
+      "id": "video-playback",
+      "status": "pass",
+      "evidence": "H.264 review proxy loaded at 720x1280, 14.214 seconds, video.error=null."
+    },
+    {
+      "id": "pipeline-validation",
+      "status": "pass",
+      "evidence": "Model and all-pipeline validators report no schema errors, missing files or unhashed assets at manifest revision 114."
+    },
+    {
+      "id": "dimension-overclaim-removed",
+      "status": "pass",
+      "evidence": "Default Gate 02 review contains no rejected physical dimension values. It shows measured, inferred range and unknown separately."
+    },
+    {
+      "id": "shipping-boundary",
+      "status": "pass",
+      "evidence": "Gate 01 approved; Gate 02 ready_for_review; Gates 03-11 stale; Gate 12 blocked/rejected. No Blender, Unity, build, install or phone work ran."
+    }
+  ],
+  "previewPath": "unity/FidgetingApp/ArtSource/ModelPipeline/magnetic-slide-tile/evidence/02-analysis/rev-004/workbench-browser.png"
+}

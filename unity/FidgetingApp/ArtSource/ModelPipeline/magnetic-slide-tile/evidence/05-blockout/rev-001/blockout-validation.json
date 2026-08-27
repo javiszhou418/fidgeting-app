@@ -1,0 +1,63 @@
+{
+  "schemaVersion": 1,
+  "gate": "05-blockout",
+  "dimensionBasis": "user-authorized-provisional-digital-blockout",
+  "dimensionsMm": {
+    "target": {
+      "length": 50.0,
+      "width": 31.0,
+      "thickness": 12.0
+    },
+    "closedMeasured": {
+      "length": 50.0,
+      "width": 31.0,
+      "thickness": 12.0
+    },
+    "pass": true
+  },
+  "travel": {
+    "axis": "+Y",
+    "targetMm": 21.0,
+    "implementedMm": 21.0,
+    "pass": true
+  },
+  "pivot": {
+    "worldMm": [
+      0.0,
+      0.0,
+      0.0
+    ],
+    "rotationAxis": "+Z",
+    "upperMotionOrigin": [
+      0.0,
+      0.0,
+      0.0
+    ],
+    "pass": true
+  },
+  "hierarchy": {
+    "MagneticSlideTile_Blockout": null,
+    "FixedAssembly": "MagneticSlideTile_Blockout",
+    "UpperMotion": "MagneticSlideTile_Blockout",
+    "LowerBody_Fixed": "FixedAssembly",
+    "TrackCarrier_VisibleProxy": "FixedAssembly",
+    "PivotInterface_Proxy": "FixedAssembly",
+    "UpperCapsule_Moving": "UpperMotion",
+    "TrackZone_Left_Proxy": "FixedAssembly",
+    "TrackZone_Right_Proxy": "FixedAssembly"
+  },
+  "zeroSelfMotion": {
+    "animatedOrConstrainedObjects": [],
+    "upperAngularVelocity": 0.0,
+    "pass": true
+  },
+  "scope": {
+    "twoExteriorMainBodies": true,
+    "visibleCarrierTrackZones": true,
+    "centralPivotProxy": true,
+    "hiddenEngineeringModeled": false,
+    "finalMaterialsOrArtwork": false
+  },
+  "blender": "5.2.0 LTS",
+  "sourceBlend": "magnetic-slide-tile-blockout.blend"
+}

@@ -1,0 +1,284 @@
+{
+  "schemaVersion": 1,
+  "gate": "06-geometry",
+  "geometryRevision": 1,
+  "sourceGate05": {
+    "blockoutRevision": 3,
+    "blendPath": "unity/FidgetingApp/ArtSource/ModelPipeline/magnetic-slide-tile/evidence/05-blockout/rev-003/magnetic-slide-tile-blockout-r003.blend",
+    "sha256Before": "4ef16a80a1ca5256d9c460fb4a7efdf86cb1cb151259ec8e480f5e274cbc2567",
+    "sha256After": "4ef16a80a1ca5256d9c460fb4a7efdf86cb1cb151259ec8e480f5e274cbc2567",
+    "unchanged": true
+  },
+  "geometryIdentity": {
+    "evaluatedDigest": "85bd7dd237c6822c72e575c9a23085eec9a2f28d7afea3a5bf0f13fdc4ebd90f",
+    "finalDigest": "85bd7dd237c6822c72e575c9a23085eec9a2f28d7afea3a5bf0f13fdc4ebd90f",
+    "sameAcrossViews": true,
+    "sameAfterEvidenceRenders": true,
+    "modelMeshObjects": [
+      "LowerBody_Fixed_CleanPlane",
+      "UpperCapsule_Moving"
+    ],
+    "pass": true
+  },
+  "bounds": {
+    "targetMm": [
+      50.0,
+      31.0,
+      12.0
+    ],
+    "measuredMm": [
+      50.0,
+      31.0,
+      12.0
+    ],
+    "crossView": {
+      "front": {
+        "cameraObject": "Camera_Front",
+        "cameraId": "front",
+        "recipe": "orthographic-scale-38.0-closed-canonical",
+        "geometryDigest": "85bd7dd237c6822c72e575c9a23085eec9a2f28d7afea3a5bf0f13fdc4ebd90f",
+        "boundsMinMm": [
+          -15.5,
+          -25.0,
+          -6.0
+        ],
+        "boundsMaxMm": [
+          15.5,
+          25.0,
+          6.0
+        ],
+        "sameGeometry": true
+      },
+      "back": {
+        "cameraObject": "Camera_Back",
+        "cameraId": "back",
+        "recipe": "orthographic-scale-38.0-closed-canonical",
+        "geometryDigest": "85bd7dd237c6822c72e575c9a23085eec9a2f28d7afea3a5bf0f13fdc4ebd90f",
+        "boundsMinMm": [
+          -15.5,
+          -25.0,
+          -6.0
+        ],
+        "boundsMaxMm": [
+          15.5,
+          25.0,
+          6.0
+        ],
+        "sameGeometry": true
+      },
+      "top": {
+        "cameraObject": "Camera_Top",
+        "cameraId": "top",
+        "recipe": "orthographic-scale-58.0-closed-canonical",
+        "geometryDigest": "85bd7dd237c6822c72e575c9a23085eec9a2f28d7afea3a5bf0f13fdc4ebd90f",
+        "boundsMinMm": [
+          -15.5,
+          -25.0,
+          -6.0
+        ],
+        "boundsMaxMm": [
+          15.5,
+          25.0,
+          6.0
+        ],
+        "sameGeometry": true
+      },
+      "bottom": {
+        "cameraObject": "Camera_Bottom",
+        "cameraId": "bottom",
+        "recipe": "orthographic-scale-58.0-closed-canonical",
+        "geometryDigest": "85bd7dd237c6822c72e575c9a23085eec9a2f28d7afea3a5bf0f13fdc4ebd90f",
+        "boundsMinMm": [
+          -15.5,
+          -25.0,
+          -6.0
+        ],
+        "boundsMaxMm": [
+          15.5,
+          25.0,
+          6.0
+        ],
+        "sameGeometry": true
+      },
+      "left": {
+        "cameraObject": "Camera_Left",
+        "cameraId": "left",
+        "recipe": "orthographic-scale-58.0-closed-canonical",
+        "geometryDigest": "85bd7dd237c6822c72e575c9a23085eec9a2f28d7afea3a5bf0f13fdc4ebd90f",
+        "boundsMinMm": [
+          -15.5,
+          -25.0,
+          -6.0
+        ],
+        "boundsMaxMm": [
+          15.5,
+          25.0,
+          6.0
+        ],
+        "sameGeometry": true
+      },
+      "right": {
+        "cameraObject": "Camera_Right",
+        "cameraId": "right",
+        "recipe": "orthographic-scale-58.0-closed-canonical",
+        "geometryDigest": "85bd7dd237c6822c72e575c9a23085eec9a2f28d7afea3a5bf0f13fdc4ebd90f",
+        "boundsMinMm": [
+          -15.5,
+          -25.0,
+          -6.0
+        ],
+        "boundsMaxMm": [
+          15.5,
+          25.0,
+          6.0
+        ],
+        "sameGeometry": true
+      }
+    },
+    "pass": true
+  },
+  "meshIntegrity": {
+    "LowerBody_Fixed_CleanPlane": {
+      "vertices": 1026,
+      "edges": 1539,
+      "polygons": 515,
+      "triangles": 2048,
+      "nonmanifoldEdgeCount": 0,
+      "signedVolumeMm3": 8062.425469962402,
+      "invalidPolygonNormalCount": 0,
+      "meshValidationChangedGeometry": false,
+      "pass": true
+    },
+    "UpperCapsule_Moving": {
+      "vertices": 1026,
+      "edges": 1539,
+      "polygons": 515,
+      "triangles": 2048,
+      "nonmanifoldEdgeCount": 0,
+      "signedVolumeMm3": 8062.425469962402,
+      "invalidPolygonNormalCount": 0,
+      "meshValidationChangedGeometry": false,
+      "pass": true
+    },
+    "seamGapMm": 0.0,
+    "closedVolumeOverlapDepthMm": 0.0,
+    "expectation": "two watertight exterior meshes meet at z=0 seam with zero gap and zero volume overlap",
+    "pass": true
+  },
+  "pivotAndMotion": {
+    "axisPointWorldMm": [
+      0.0,
+      -9.5,
+      0.0
+    ],
+    "rotationAxis": "+Z",
+    "slidePose": {
+      "translationMm": [
+        0,
+        21.0,
+        0
+      ],
+      "rotationDeg": 0
+    },
+    "spinPose": {
+      "translationMm": [
+        0,
+        0,
+        0
+      ],
+      "rotationDeg": 45.0
+    },
+    "separatePoses": true,
+    "pivotWorldDriftMm": 0.0,
+    "pass": true
+  },
+  "fixedLowerAndEnvelope": {
+    "lowerMatrixUnchanged": true,
+    "lowerTopPlanarityDeviationMm": 0.0,
+    "envelopeMatrixUnchanged": true,
+    "envelopeType": "EMPTY",
+    "envelopeHideRender": true,
+    "envelopeGeometry": "none",
+    "proxyRendered": false,
+    "exposedTrackOrHardwareCount": 0,
+    "pass": true
+  },
+  "zeroSelfMotion": {
+    "animatedOrConstrainedObjects": [],
+    "pass": true
+  },
+  "smoothness": {
+    "arcSegmentsPerSemicircle": 256,
+    "profileVertexCount": 513,
+    "maximumProfileSegmentAngleDeg": 0.703125,
+    "maximumChordDeviationMm": 0.0002917831196828091,
+    "bevelSegments": 8,
+    "pass": true
+  },
+  "cameras": {
+    "front": {
+      "object": "Camera_Front",
+      "id": "front",
+      "type": "ORTHO",
+      "recipe": "orthographic-scale-38.0-closed-canonical",
+      "orthographicScale": 38.0
+    },
+    "back": {
+      "object": "Camera_Back",
+      "id": "back",
+      "type": "ORTHO",
+      "recipe": "orthographic-scale-38.0-closed-canonical",
+      "orthographicScale": 38.0
+    },
+    "top": {
+      "object": "Camera_Top",
+      "id": "top",
+      "type": "ORTHO",
+      "recipe": "orthographic-scale-58.0-closed-canonical",
+      "orthographicScale": 58.0
+    },
+    "bottom": {
+      "object": "Camera_Bottom",
+      "id": "bottom",
+      "type": "ORTHO",
+      "recipe": "orthographic-scale-58.0-closed-canonical",
+      "orthographicScale": 58.0
+    },
+    "left": {
+      "object": "Camera_Left",
+      "id": "left",
+      "type": "ORTHO",
+      "recipe": "orthographic-scale-58.0-closed-canonical",
+      "orthographicScale": 58.0
+    },
+    "right": {
+      "object": "Camera_Right",
+      "id": "right",
+      "type": "ORTHO",
+      "recipe": "orthographic-scale-58.0-closed-canonical",
+      "orthographicScale": 58.0
+    }
+  },
+  "evidence": {
+    "orthographic": [
+      "ortho-front.png",
+      "ortho-back.png",
+      "ortho-top.png",
+      "ortho-bottom.png",
+      "ortho-left.png",
+      "ortho-right.png"
+    ],
+    "workbench": "geometry-workbench.png",
+    "dimensions": "dimension-overlay.png",
+    "pointPivot": "point-pivot-overlay.png",
+    "exploded": "exploded-geometry.png",
+    "explodedApprovedExteriorBodyCount": 2,
+    "inventedInternalPartCount": 0
+  },
+  "scope": {
+    "neutralClayOnly": true,
+    "finalMaterialsOrLighting": false,
+    "unityAssetChanged": false
+  },
+  "blender": "5.2.0 LTS"
+}

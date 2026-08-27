@@ -1,0 +1,108 @@
+{
+  "schemaVersion": 1,
+  "gate": "07-material",
+  "materialRevision": 6,
+  "blender": "5.2.0 LTS",
+  "geometryDigest": "85bd7dd237c6822c72e575c9a23085eec9a2f28d7afea3a5bf0f13fdc4ebd90f",
+  "artworkNodeGroups": {
+    "Artwork_Upper": {
+      "externalMaskRepositoryRelative": "unity/FidgetingApp/ArtSource/ModelPipeline/magnetic-slide-tile/evidence/07-material/rev-006/artwork-upper-mask.png",
+      "externalMaskSha256": "8250df70d2286849db353862283b0d3db9c66e1ac92bed3795bcb5377a431c36",
+      "swapWithoutGeometryRebuild": true,
+      "imageNodeCount": 1,
+      "packed": false,
+      "sourcePaths": [
+        "/Users/jiawei.zhou/Documents/Fidgeting app/unity/FidgetingApp/ArtSource/ModelPipeline/magnetic-slide-tile/evidence/07-material/rev-006/artwork-upper-mask.png"
+      ],
+      "interpolation": [
+        "Closest"
+      ]
+    },
+    "Artwork_Lower": {
+      "externalMaskRepositoryRelative": "unity/FidgetingApp/ArtSource/ModelPipeline/magnetic-slide-tile/evidence/07-material/rev-006/artwork-lower-mask.png",
+      "externalMaskSha256": "8250df70d2286849db353862283b0d3db9c66e1ac92bed3795bcb5377a431c36",
+      "swapWithoutGeometryRebuild": true,
+      "imageNodeCount": 1,
+      "packed": false,
+      "sourcePaths": [
+        "/Users/jiawei.zhou/Documents/Fidgeting app/unity/FidgetingApp/ArtSource/ModelPipeline/magnetic-slide-tile/evidence/07-material/rev-006/artwork-lower-mask.png"
+      ],
+      "interpolation": [
+        "Closest"
+      ]
+    }
+  },
+  "materialSlots": {
+    "LowerBody_Fixed_CleanPlane": [
+      "M07R6_PolishedPureSilver_VisualTarget",
+      "M07R6_BloodRedCrystal_CleanArtwork_Lower"
+    ],
+    "UpperCapsule_Moving": [
+      "M07R6_PolishedPureSilver_VisualTarget",
+      "M07R6_BloodRedCrystal_CleanArtwork_Upper"
+    ]
+  },
+  "emissionStrengths": {
+    "M07R6_BloodRedCrystal_CleanArtwork_Upper": 0.0,
+    "M07R6_BloodRedCrystal_CleanArtwork_Lower": 0.0,
+    "M07R6_PolishedPureSilver_VisualTarget": 0.0
+  },
+  "silverPbr": {
+    "baseColor": [
+      0.9399999976158142,
+      0.9399999976158142,
+      0.9200000166893005,
+      1.0
+    ],
+    "metallic": 1.0,
+    "roughness": 0.04500000178813934,
+    "anisotropy": 0.2199999988079071,
+    "anisotropyRotation": 0.07999999821186066,
+    "coatWeight": 0.11999999731779099,
+    "coatRoughness": 0.02500000037252903
+  },
+  "reflectionCards": [
+    "M07R6_Card_Black",
+    "M07R6_Card_CameraBlack",
+    "M07R6_Card_CameraWhite",
+    "M07R6_Card_Gray18",
+    "M07R6_Card_SideWhite",
+    "M07R6_Card_White"
+  ],
+  "lights": [
+    "M07R6_Diagnostic_Crystal_KeyRim",
+    "M07R6_Diagnostic_SideDirect",
+    "M07R6_Neutral_Face_Reveal",
+    "M07R6_Neutral_Fill_Softbox",
+    "M07R6_Neutral_Key_Softbox",
+    "M07R6_Neutral_Rim_Strip"
+  ],
+  "cameras": [
+    "M07R6_MaterialBoardCamera",
+    "M07R6_MaterialCloseupCamera",
+    "M07R6_NeutralFrontCamera",
+    "M07R6_OpenArtworkCamera",
+    "M07R6_ReflectionCardCamera",
+    "M07R6_SideReflectionCamera"
+  ],
+  "checks": {
+    "geometryDigestUnchanged": true,
+    "closedPoseRestored": true,
+    "hiddenEnvelopeUnchanged": true,
+    "upperSlotExists": true,
+    "lowerSlotExists": true,
+    "externalMasksNotPacked": true,
+    "losslessPriorMaskHashes": true,
+    "independentMaskPaths": true,
+    "nearestMaskSampling": true,
+    "upperMaterialAssigned": true,
+    "lowerMaterialAssigned": true,
+    "noEmission": true,
+    "pureSilverShader": true,
+    "silverMicroScratchBump": true,
+    "reflectionCardsPresent": true,
+    "diagnosticLightsPresent": true,
+    "diagnosticCamerasPresent": true
+  },
+  "pass": true
+}

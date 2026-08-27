@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1320" height="930" viewBox="0 0 1320 930">
+  <defs>
+    <style>
+      .title{font:800 34px -apple-system,"PingFang SC",sans-serif;fill:#f5f7f8}.sub{font:500 18px -apple-system,"PingFang SC",sans-serif;fill:#aab2b8}
+      .panel{fill:#0a0d10;stroke:#303840;stroke-width:2}.fixed{fill:none;stroke:#55e39b;stroke-width:8;stroke-linejoin:round}.moving{fill:none;stroke:#ffb454;stroke-width:7;stroke-linejoin:round}
+      .pivot{fill:none;stroke:#ffe06c;stroke-width:7}.label{font:750 18px -apple-system,"PingFang SC",sans-serif;fill:#f5f7f8}.note{font:550 15px -apple-system,"PingFang SC",sans-serif;fill:#c2c9ce}
+      .fixedText{fill:#55e39b}.movingText{fill:#ffb454}.unknown{fill:none;stroke:#9ba5ad;stroke-width:5;stroke-dasharray:10 9}
+    </style>
+  </defs>
+  <rect width="1320" height="930" fill="#080a0c"/>
+  <text x="38" y="53" class="title">固定参照：下层主体与轨道承载区</text>
+  <text x="38" y="84" class="sub">用户视频 42.00–43.50 秒：绿色区域相对手指保持不动；橙色上盖沿长轴覆盖它</text>
+
+  <rect x="28" y="112" width="474" height="780" rx="16" class="panel"/>
+  <svg x="45" y="130" width="440" height="766" viewBox="0 0 620 1080">
+    <image href="source-crops/slide-42.00.png" width="620" height="1080"/>
+    <path class="fixed" d="M166 111 Q310 42 471 101 L548 342 Q525 383 476 396 L157 372 Q123 342 132 286 Z"/>
+    <path class="moving" d="M116 357 Q306 280 519 365 L589 910 Q575 1030 431 1065 L168 1018 Q89 968 77 840 Z"/>
+    <path class="unknown" d="M151 370 Q307 408 479 390"/>
+  </svg>
+  <text x="52" y="156" class="label fixedText">① 相对固定</text>
+  <text x="52" y="835" class="label movingText">② 线性滑动上盖</text>
+  <text x="52" y="868" class="note">虚线：上盖遮住后的延续边界未知</text>
+
+  <rect x="524" y="112" width="768" height="780" rx="16" class="panel"/>
+  <svg x="548" y="138" width="700" height="737" viewBox="0 0 700 737">
+    <image href="source-crops/official-fixed-carrier.png" width="700" height="737"/>
+    <path class="fixed" d="M52 548 Q37 391 111 247 Q190 102 372 75 Q565 73 622 216 L644 391 Q620 574 488 645 Q288 711 123 629 Z"/>
+    <path class="fixed" d="M209 315 L250 149 Q279 111 334 111 L502 148 Q530 165 535 208 L520 346 Q500 390 455 405 L274 378 Q224 363 209 315 Z"/>
+    <circle class="pivot" cx="390" cy="235" r="66"/>
+  </svg>
+  <rect x="554" y="142" width="318" height="78" rx="12" fill="#07120ddd" stroke="#55e39b" stroke-width="2"/>
+  <text x="574" y="174" class="label fixedText">绿色：下层外壳 / 承载区</text>
+  <text x="574" y="201" class="note">与视频中的固定参照一致</text>
+  <rect x="920" y="732" width="338" height="108" rx="12" fill="#161309ee" stroke="#ffe06c" stroke-width="2"/>
+  <text x="940" y="767" class="label">P1 · 可见中央接口区</text>
+  <text x="940" y="796" class="note">可定位旋转轴心候选位置</text>
+  <text x="940" y="824" class="note">孔深与背后连接方式不可见</text>
+</svg>

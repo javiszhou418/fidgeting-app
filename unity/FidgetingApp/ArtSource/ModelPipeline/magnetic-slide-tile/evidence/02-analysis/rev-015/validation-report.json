@@ -1,0 +1,56 @@
+{
+  "schemaVersion": 1,
+  "modelId": "magnetic-slide-tile",
+  "gate": "02-analysis",
+  "revision": 15,
+  "validatedAt": "2026-08-27T01:08:00+08:00",
+  "contractSha256": "b4318452f163ef7c105c826d4466a739a1dd0d942d4d74d921c29c39e02a84f2",
+  "results": {
+    "nodeTests": {
+      "passed": 70,
+      "failed": 0
+    },
+    "minimumOverlapDisk": {
+      "owner": "BottomBase",
+      "center": "FixedAxis",
+      "radiusNormalizedL": 0.3184713375796178,
+      "physicalRadiusMm": null,
+      "analyticContainment": true,
+      "angleInvariant": true
+    },
+    "travelBounds": {
+      "grooveEndpointLimitL": 0.46,
+      "overlapContainmentLimitL": 0.3615286624203821,
+      "actualSMaxL": 0.3615286624203821,
+      "activeLimitingCause": "MinimumOverlapDisk"
+    },
+    "denseSweep": {
+      "angleSamples": 360,
+      "slideSamplesPerAngle": 5,
+      "sampleCount": 1800,
+      "invalidSamples": 0,
+      "exactBoundaryTangency": true,
+      "beyondBoundaryInvalid": true
+    },
+    "browser": {
+      "desktopPointer": "pass",
+      "mobileTouch": "pass",
+      "zoomPan": "pass",
+      "sourceModalVideo": "pass",
+      "parameterSourceSwitch": "pass",
+      "forcedInvalidFlashingRed": "pass",
+      "approvalChecklist": "12/12",
+      "svgClipMasks": 0
+    },
+    "simulator": {
+      "locked": true,
+      "activeControls": 0,
+      "recording": false
+    },
+    "downstream": {
+      "blender": "not-started",
+      "unity": "not-started",
+      "buildInstallPhone": "not-started"
+    }
+  }
+}
