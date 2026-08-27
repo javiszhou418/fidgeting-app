@@ -1,0 +1,82 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1400" height="1320" viewBox="0 0 1400 1320">
+  <defs>
+    <style>
+      .title{font:800 34px -apple-system,"PingFang SC",sans-serif;fill:#f5f7f8}.sub{font:500 18px -apple-system,"PingFang SC",sans-serif;fill:#aab2b8}
+      .panel{fill:#0a0d10;stroke:#303840;stroke-width:2}.head{font:800 20px -apple-system,"PingFang SC",sans-serif;fill:#f5f7f8}
+      .slot{fill:none;stroke:#62d9ff;stroke-width:6;stroke-linecap:round;stroke-linejoin:round}.hole{fill:none;stroke:#ffcf68;stroke-width:6}.contact{fill:none;stroke:#ff8ab1;stroke-width:5}
+      .tag{fill:#071016;stroke:#62d9ff;stroke-width:2}.num{font:800 15px -apple-system,"PingFang SC",sans-serif;fill:#f5f7f8;text-anchor:middle;dominant-baseline:middle}
+      .note{font:550 15px -apple-system,"PingFang SC",sans-serif;fill:#c1c8cd}.unknown{fill:none;stroke:#9ba5ad;stroke-width:5;stroke-dasharray:10 9}
+    </style>
+  </defs>
+  <rect width="1400" height="1320" fill="#080a0c"/>
+  <text x="36" y="52" class="title">可见孔、槽与接触区：只沿可见边缘描线</text>
+  <text x="36" y="84" class="sub">蓝 = 槽 / 珠道边界；黄 = 开口 / 孔候选；粉 = 可见接触件。编号只用于本次确认，不代表隐藏数量或孔深。</text>
+
+  <g transform="translate(28 112)">
+    <rect width="662" height="560" rx="16" class="panel"/>
+    <text x="20" y="34" class="head">活动槽板 A · 用户确认“可运动”</text>
+    <svg x="20" y="50" width="622" height="493" viewBox="0 0 720 641">
+      <image href="source-crops/official-slider-a.png" width="720" height="641"/>
+      <path class="slot" d="M420 144 L349 402"/><path class="slot" d="M505 143 L440 433"/>
+      <path class="slot" d="M372 132 Q337 228 307 331"/><path class="slot" d="M596 170 Q559 272 526 381"/>
+      <circle class="hole" cx="449" cy="113" r="22"/><circle class="hole" cx="315" cy="257" r="22"/><circle class="hole" cx="638" cy="272" r="22"/><circle class="hole" cx="501" cy="417" r="22"/>
+      <g><circle class="tag" cx="448" cy="76" r="18"/><text class="num" x="448" y="76">H1</text></g>
+      <g><circle class="tag" cx="278" cy="258" r="18"/><text class="num" x="278" y="258">H2</text></g>
+      <g><circle class="tag" cx="674" cy="272" r="18"/><text class="num" x="674" y="272">H3</text></g>
+      <g><circle class="tag" cx="500" cy="461" r="18"/><text class="num" x="500" y="461">H4</text></g>
+      <text class="num" x="394" y="290">S1</text><text class="num" x="481" y="300">S2</text>
+    </svg>
+  </g>
+
+  <g transform="translate(710 112)">
+    <rect width="662" height="560" rx="16" class="panel"/>
+    <text x="20" y="34" class="head">活动槽板 B · 用户确认“可运动”</text>
+    <svg x="20" y="50" width="622" height="493" viewBox="0 0 720 643">
+      <image href="source-crops/official-slider-b.png" width="720" height="643"/>
+      <path class="slot" d="M239 269 L565 439"/><path class="slot" d="M194 324 L523 497"/>
+      <path class="slot" d="M326 219 Q448 281 574 347"/><path class="slot" d="M246 385 Q365 447 483 508"/>
+      <circle class="hole" cx="382" cy="197" r="22"/><circle class="hole" cx="552" cy="263" r="22"/><circle class="hole" cx="209" cy="419" r="22"/><circle class="hole" cx="408" cy="530" r="22"/>
+      <g><circle class="tag" cx="382" cy="160" r="18"/><text class="num" x="382" y="160">H5</text></g>
+      <g><circle class="tag" cx="590" cy="264" r="18"/><text class="num" x="590" y="264">H6</text></g>
+      <g><circle class="tag" cx="171" cy="419" r="18"/><text class="num" x="171" y="419">H7</text></g>
+      <g><circle class="tag" cx="408" cy="570" r="18"/><text class="num" x="408" y="570">H8</text></g>
+      <text class="num" x="401" y="342">S3</text><text class="num" x="354" y="415">S4</text>
+    </svg>
+  </g>
+
+  <g transform="translate(28 692)">
+    <rect width="662" height="560" rx="16" class="panel"/>
+    <text x="20" y="34" class="head">中央接口板 · 可见开口与接触件</text>
+    <svg x="20" y="50" width="622" height="493" viewBox="0 0 720 655">
+      <image href="source-crops/official-interface-plate.png" width="720" height="655"/>
+      <circle class="hole" cx="287" cy="277" r="60"/>
+      <circle class="contact" cx="127" cy="128" r="28"/><circle class="contact" cx="267" cy="111" r="30"/>
+      <circle class="contact" cx="108" cy="229" r="31"/><circle class="contact" cx="431" cy="270" r="31"/>
+      <circle class="contact" cx="302" cy="389" r="31"/><circle class="contact" cx="457" cy="411" r="28"/>
+      <g><circle class="tag" cx="287" cy="203" r="20"/><text class="num" x="287" y="203">P2</text></g>
+      <g><circle class="tag" cx="85" cy="90" r="18"/><text class="num" x="85" y="90">C1</text></g>
+      <g><circle class="tag" cx="267" cy="67" r="18"/><text class="num" x="267" y="67">C2</text></g>
+      <g><circle class="tag" cx="62" cy="230" r="18"/><text class="num" x="62" y="230">C3</text></g>
+      <g><circle class="tag" cx="482" cy="269" r="18"/><text class="num" x="482" y="269">C4</text></g>
+      <g><circle class="tag" cx="302" cy="439" r="18"/><text class="num" x="302" y="439">C5</text></g>
+      <g><circle class="tag" cx="506" cy="411" r="18"/><text class="num" x="506" y="411">C6</text></g>
+    </svg>
+  </g>
+
+  <g transform="translate(710 692)">
+    <rect width="662" height="560" rx="16" class="panel"/>
+    <text x="20" y="34" class="head">下层承载区 · 中央接口与可见接触件</text>
+    <svg x="20" y="50" width="622" height="493" viewBox="0 0 700 737">
+      <image href="source-crops/official-fixed-carrier.png" width="700" height="737"/>
+      <circle class="hole" cx="390" cy="235" r="64"/>
+      <circle class="contact" cx="323" cy="170" r="29"/><circle class="contact" cx="417" cy="132" r="29"/>
+      <circle class="contact" cx="449" cy="174" r="29"/><circle class="contact" cx="500" cy="182" r="26"/>
+      <circle class="contact" cx="283" cy="326" r="27"/><circle class="contact" cx="335" cy="330" r="28"/>
+      <circle class="contact" cx="377" cy="360" r="28"/><circle class="contact" cx="493" cy="317" r="28"/>
+      <g><circle class="tag" cx="390" cy="235" r="22"/><text class="num" x="390" y="235">P1</text></g>
+      <path class="unknown" d="M243 389 Q390 454 528 369"/>
+    </svg>
+    <text x="24" y="536" class="note">虚线以下被外壳 / 图案遮挡；不补画背面孔槽或连接方式。</text>
+  </g>
+  <text x="36" y="1292" class="note">未声明：孔深、公差、不可见数量、磁极、A/B 与上盖的隐藏紧固方式、或直推与旋转接口的内部耦合。</text>
+</svg>

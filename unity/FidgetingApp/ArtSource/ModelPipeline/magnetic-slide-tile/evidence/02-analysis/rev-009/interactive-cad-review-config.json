@@ -1,0 +1,63 @@
+{
+  "schemaVersion": 1,
+  "modelId": "magnetic-slide-tile",
+  "gate": "02-analysis",
+  "revision": 9,
+  "contractAssetId": "slider-analysis-mechanism-evidence-contract-r008",
+  "contractSha256": "3b3f494805b2241f865bfdad5ec32a64ea95d03165714b55a272d81f0c1437a2",
+  "evidenceSelectors": {
+    "aspectRatioLW": "MEC-SILHOUETTE-ASPECT.value.aspectRatioLW.midpoint",
+    "maxTravelL": "MEC-TRAVEL-NORMALIZED.value.supportedRange.max",
+    "observedPeakTravelL": "MEC-TRAVEL-NORMALIZED.value.observedPeak",
+    "detentStepDeg": "MEC-DETENTS.value.stepDegrees",
+    "detentCount": "MEC-DETENTS.value.countPerRevolution",
+    "pivot": "MEC-PIVOT-ENDPOINT-ATTACHMENT.value",
+    "rails": "MEC-RAILS-BILATERAL-LOWER-REVERSE.value"
+  },
+  "reviewTuning": {
+    "slideResistance": 0.34,
+    "rotationResistance": 0.28,
+    "detentStrength": 0.68,
+    "breakaway": 0.32,
+    "damping": 0.48,
+    "inertiaHalfLife": 0.22,
+    "endStopSoftness": 0.06,
+    "endStopStiffness": 0.82,
+    "captureSpeedDegPerSecond": 24,
+    "captureWindowDeg": 3.2
+  },
+  "diagrammaticRailLayout": [
+    {
+      "side": "left",
+      "xL": -0.18,
+      "startYL": -0.34,
+      "endYL": 0.34,
+      "state": "diagrammatic-not-dimensional"
+    },
+    {
+      "side": "right",
+      "xL": 0.18,
+      "startYL": -0.34,
+      "endYL": 0.34,
+      "state": "diagrammatic-not-dimensional"
+    }
+  ],
+  "approvalChecklist": [
+    "outward-slide",
+    "closed-return",
+    "compound-slide-rotate",
+    "three-detent-transitions",
+    "max-travel-stop",
+    "source-constraint-mapping-or-recording"
+  ],
+  "approvalRule": {
+    "interactiveRequired": true,
+    "chatTextApprovalAllowed": false,
+    "staticScreenshotApprovalAllowed": false,
+    "recordingFallbackAllowedWhenInteractionUnavailable": true,
+    "requiredArtifactHash": true,
+    "requiredContractHash": true,
+    "requiredParameterSnapshot": true,
+    "requiredBrowserTimestamp": true
+  }
+}

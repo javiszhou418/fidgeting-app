@@ -1,0 +1,55 @@
+{
+  "revision": 2,
+  "createdAt": "2026-08-21T12:10:00+08:00",
+  "productIdentity": {
+    "officialName": "HalooPlayer Aurora Heart Mechanical Fidget Slider",
+    "resellerName": "Chrome Hearts - Haloo Player",
+    "confidence": "high",
+    "basis": "Matching capsule silhouette, artwork family, colorways, straight-push view, free-spin view and internal photography."
+  },
+  "sources": [
+    {
+      "kind": "manufacturer-product-page",
+      "url": "https://www.halooplayer.com/halo-heart-rhythm-haloo-player-edc-push-slider--high-tech-stress-relief-toy-fingertip-gyro--hand-fidget-gadget-p6875695.html",
+      "usedFor": ["exact product imagery", "straight-push gameplay", "free-spin gameplay", "internal mechanism", "spring and ball tuning"]
+    },
+    {
+      "kind": "reseller-product-page",
+      "url": "https://nxedc.com/products/chrome-hearts-fidget-slider",
+      "usedFor": ["rotating-push and straight-push naming", "bilateral staggered bead-groove description"]
+    },
+    {
+      "kind": "secondary-market-corroboration",
+      "url": "https://www.jd.com/brand/623345f92790c6cb27dd.html",
+      "usedFor": ["旋转回弹 wording only; not used for hidden geometry"]
+    }
+  ],
+  "correctedFindings": [
+    {
+      "id": "dual-mode",
+      "finding": "Straight push and free rotation are separately demonstrated modes; no sequential end-stop unlock is asserted.",
+      "sourceAssets": ["slider-intake-haloo-official-06", "slider-intake-haloo-official-08"]
+    },
+    {
+      "id": "straight-track-module",
+      "finding": "The straight-push mechanism visibly includes two long rail zones with rows of balls or bead grooves.",
+      "sourceAssets": ["slider-intake-haloo-official-07"]
+    },
+    {
+      "id": "rotary-module",
+      "finding": "A circular ball track and central shaft or bearing region are visible as a separate internal functional module.",
+      "sourceAssets": ["slider-intake-haloo-official-05", "slider-intake-haloo-official-07"]
+    },
+    {
+      "id": "tuning-parts",
+      "finding": "Official copy attributes rebound to the spring and smoothness or sound to steel or ceramic balls.",
+      "sourceAssets": ["slider-intake-haloo-official-05"]
+    }
+  ],
+  "notLocked": [
+    "Exact component counts for the user's customized unit",
+    "Exact millimeter dimensions and tolerances",
+    "Exact coupling between the straight-push and free-spin mechanisms",
+    "Whether every visible official internal component is unchanged in the user's colorway"
+  ]
+}

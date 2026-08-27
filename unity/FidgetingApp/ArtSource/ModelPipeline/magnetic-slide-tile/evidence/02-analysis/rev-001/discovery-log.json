@@ -1,0 +1,88 @@
+{
+  "schemaVersion": 1,
+  "modelId": "magnetic-slide-tile",
+  "stageId": "02-analysis",
+  "revision": 1,
+  "generatedAt": "2026-08-20T14:12:12Z",
+  "purpose": "从用户批准的 Gate 01 输入中提取可检索特征，寻找同款与结构补充证据；外部来源只用于交叉核验，不覆盖用户输入。",
+  "primaryEvidence": [
+    {
+      "assetId": "slider-intake-user-video",
+      "authority": "authoritative-user-input",
+      "use": ["整体外形", "手持尺度", "侧面厚度", "开合过程", "内部局部", "机械声音"]
+    },
+    {
+      "assetId": "slider-intake-obsidian-note",
+      "authority": "user-selected-reference-note",
+      "use": ["同款红黑定制外观", "手持尺度", "打开状态", "动作方式"]
+    }
+  ],
+  "extractedKeywords": [
+    {
+      "term": "胶囊形双层机械推牌",
+      "kind": "silhouette-and-category",
+      "sourceAssetIds": ["slider-intake-user-contact-sheet", "slider-intake-obsidian-contact-sheet"]
+    },
+    {
+      "term": "直推 + 旋转推 / 律动",
+      "kind": "motion-candidate",
+      "sourceAssetIds": ["slider-intake-user-video", "slider-intake-obs-frame-10"]
+    },
+    {
+      "term": "双轨珠道 / 高低音机械推牌",
+      "kind": "mechanism-candidate",
+      "sourceAssetIds": ["slider-intake-user-frame-08", "slider-intake-nxedc-ref-04"]
+    },
+    {
+      "term": "HALOO PLAYER / 哈噜玩家 / Chrome Hearts / 克罗心律动",
+      "kind": "identity-candidate",
+      "sourceAssetIds": ["slider-intake-nxedc-contact-sheet"]
+    },
+    {
+      "term": "抛光金属框 + 透明或晶体装饰面片",
+      "kind": "material-appearance",
+      "sourceAssetIds": ["slider-intake-user-frame-04", "slider-intake-obs-frame-10", "slider-intake-nxedc-ref-04"]
+    }
+  ],
+  "searchRuns": [
+    {
+      "query": "Haloo Player Chrome Hearts fidget slider",
+      "language": "en",
+      "result": "高视觉相似候选；6 张公开 CDN 商品图已在 Gate 01 独立归档。",
+      "sourceUrl": "https://nxedc.com/products/chrome-hearts-fidget-slider",
+      "sourceStatus": "product page currently returns 404; archived CDN images remain available"
+    },
+    {
+      "query": "克罗心律动 哈噜玩家 HALOOPLAYER 高低音机械推牌",
+      "language": "zh-CN",
+      "result": "检索到独立视频标题，支持候选名称与高低音机械推牌关键词，但未用于锁定内部尺寸。",
+      "sourceUrl": "https://www.bilibili.com/video/BV1Yge6zqEuP/",
+      "sourceStatus": "indexed-candidate"
+    },
+    {
+      "query": "Chrome Hearts HALOO PLAYER fidget slider",
+      "language": "en-ja",
+      "result": "检索到二手商品标题，提供跨站名称一致性；商品描述与尺寸尚未核实。",
+      "sourceUrl": "https://paypayfleamarket.yahoo.co.jp/item/z521263341",
+      "sourceStatus": "indexed-candidate"
+    }
+  ],
+  "candidateAssessment": {
+    "candidateId": "candidate-haloo-player-chrome-hearts",
+    "identityConfidence": "medium",
+    "supports": [
+      "胶囊形上下两片主体",
+      "打开后可见纵向双通道结构",
+      "外观面片可作为定制皮肤变化",
+      "直推与带偏转的打开姿态候选"
+    ],
+    "doesNotSupportYet": [
+      "任何毫米尺寸",
+      "确切合金、镀层或晶体材料",
+      "磁铁、弹簧、滚珠的确切数量与规格",
+      "内部零件的完整层级",
+      "转动轴、运动角度与限位结构"
+    ]
+  },
+  "guardrail": "所有外部名称和机构文字均保持为待用户审批的外部断言。Gate 03 之前不得把它们改写成固定尺寸或生产结构。"
+}

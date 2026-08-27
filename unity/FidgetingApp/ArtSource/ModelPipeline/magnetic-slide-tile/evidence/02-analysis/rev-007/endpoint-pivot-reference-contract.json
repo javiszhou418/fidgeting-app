@@ -1,0 +1,90 @@
+{
+  "schemaVersion": 1,
+  "modelId": "magnetic-slide-tile",
+  "gate": "02-analysis",
+  "revision": 7,
+  "priorRevision": {
+    "revision": 6,
+    "disposition": "rejected-requested-revision",
+    "reasons": [
+      "The pivot appeared able to slide within the lower plate.",
+      "Original same-model official and NXEDC references were not clearly accessible."
+    ]
+  },
+  "motionModel": {
+    "upper": "M_upper=I",
+    "lower": "M_lower=T(s)*R_about(A_endpoint_local,theta)",
+    "axisLocalToLower": "constant bottom-endcap center derived from capsule tangency",
+    "axisWorld": "A_endpoint_local+T(s)",
+    "axisIndependentDof": false,
+    "pivotDriftUnderRotation": 0,
+    "simultaneousDegreesOfFreedom": [
+      "lower translation along fixed upper long axis",
+      "lower rotation about translated endpoint pivot"
+    ],
+    "plainRule": "轴心只随底片整体移动，不在底片上滑动"
+  },
+  "endpointConstruction": {
+    "basis": "normalized capsule geometry",
+    "aspectRatioLW": {
+      "status": "视频比例",
+      "range": [
+        1.52,
+        1.62
+      ],
+      "default": 1.57
+    },
+    "chosenEnd": "bottom rounded end",
+    "axis": "center of bottom endcap arc",
+    "formula": {
+      "x": "centerX",
+      "y": "bottomY-radius",
+      "normalizedYFromTop": "1-1/(2*(L/W))"
+    },
+    "rejectedInputs": [
+      "arbitrary pixels",
+      "rejected millimetres",
+      "independent axis slider"
+    ]
+  },
+  "referenceAccess": {
+    "topLevelTabs": [
+      "结论",
+      "交互 CAD",
+      "原图与拆解参考"
+    ],
+    "userVideos": [
+      "IMG_6022",
+      "IMG_6023",
+      "IMG_6024"
+    ],
+    "halooOfficialAssets": [
+      "slider-intake-haloo-official-05",
+      "slider-intake-haloo-official-06",
+      "slider-intake-haloo-official-07",
+      "slider-intake-haloo-official-08"
+    ],
+    "nxedcAssets": [
+      "slider-intake-nxedc-contact-sheet",
+      "slider-intake-nxedc-ref-04",
+      "slider-intake-nxedc-ref-05",
+      "slider-intake-nxedc-ref-06"
+    ],
+    "derivedReferenceAssets": [
+      "slider-analysis-official-mechanism-board-r002",
+      "magnetic-slide-tile-official-rotary-pivot-r008",
+      "magnetic-slide-tile-official-slider-a-r008",
+      "magnetic-slide-tile-official-slider-b-r008",
+      "magnetic-slide-tile-nxedc-open-track-r008"
+    ],
+    "requiredMetadata": [
+      "source classification",
+      "original URL when external",
+      "repository path",
+      "open-full-archive action",
+      "key timestamps for user videos"
+    ],
+    "trackingMathLocation": "collapsed technical evidence"
+  },
+  "reviewQuestion": "固定端点轴心与原图参考入口，现在是否符合预期？"
+}

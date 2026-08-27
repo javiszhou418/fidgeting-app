@@ -1,0 +1,60 @@
+{
+  "schemaVersion": 1,
+  "modelId": "magnetic-slide-tile",
+  "decision": "Keep the current 4,096-triangle model as the single close-up model. Do not create high/low variants now.",
+  "userApprovalWording": "\u53ef\u4ee5\u5427\uff0c\u7136\u540e\u4f60\u7ee7\u7eed",
+  "decisionState": "locked-user-approved",
+  "deliveryState": {
+    "singleCloseupModel": "current-approved-model-preserved",
+    "highLowVariants": "not-created-and-not-required",
+    "independentArtworkMasks": "blender-pipeline-present-unity-parity-pending",
+    "simplifiedLibraryModel": "conditional-not-created-profile-many-simultaneous-models-first",
+    "futureHighPolySource": "specified-bake-only-never-ships",
+    "astcAndChannelPacking": "specified-only-gate10-and-unity-import-pending",
+    "deviceAcceptance": "pending"
+  },
+  "plainTerms": [
+    "The current model is light enough for one close-up product view.",
+    "Keep one shipping mesh instead of maintaining high and low versions now.",
+    "Keep upper and lower artwork as separate replaceable masks.",
+    "Only make a simpler library mesh if Unity profiling proves that many simultaneous models need it.",
+    "Any future high-poly model is only for baking textures and never ships.",
+    "ASTC texture compression and channel packing belong to Gate 10 and Unity import work; they are not delivered yet."
+  ],
+  "measuredModel": {
+    "totalTriangles": 4096,
+    "meshTriangles": {
+      "LowerBody_Fixed_CleanPlane": 2048,
+      "UpperCapsule_Moving": 2048
+    },
+    "geometryDigest": "85bd7dd237c6822c72e575c9a23085eec9a2f28d7afea3a5bf0f13fdc4ebd90f",
+    "sourcePath": "unity/FidgetingApp/ArtSource/ModelPipeline/magnetic-slide-tile/evidence/06-geometry/rev-001/geometry-validation.json",
+    "sourceSha256": "b23e7cfa9916459e8c54a04005bd68dbb1cb1257389ea0dacceda946d6e3c0bf"
+  },
+  "artwork": {
+    "upperMask": "artwork-upper-mask.png",
+    "lowerMask": "artwork-lower-mask.png",
+    "independentlyReplaceable": true,
+    "sourcePath": "unity/FidgetingApp/ArtSource/ModelPipeline/magnetic-slide-tile/evidence/07-material/rev-007/artwork-layers.json",
+    "sourceSha256": "2f44fa1ce3a70da19d698f5f23c093e9658f846632cf215bc7f886e5a69e2ba9"
+  },
+  "scope": {
+    "geometryChanged": false,
+    "lodCreated": false,
+    "unityChanged": false,
+    "textureImportChanged": false,
+    "exportPerformed": false,
+    "buildOrInstallPerformed": false
+  },
+  "checks": {
+    "triangleCountIs4096": true,
+    "singleCloseupModelOnly": true,
+    "noHighLowVariantsCreated": true,
+    "upperLowerMasksRemainIndependent": true,
+    "simplifiedLibraryModelDeferredUntilProfiling": true,
+    "futureHighPolyBakeOnly": true,
+    "astcAndChannelPackingDeferredToGate10": true,
+    "geometryAndLodUnchanged": true
+  },
+  "pass": true
+}

@@ -1,0 +1,73 @@
+{
+  "schemaVersion": 1,
+  "gate": "07-material",
+  "materialRevision": 4,
+  "blender": "5.2.0 LTS",
+  "geometryDigest": "85bd7dd237c6822c72e575c9a23085eec9a2f28d7afea3a5bf0f13fdc4ebd90f",
+  "artworkNodeGroups": {
+    "Artwork_Upper": {
+      "externalMaskRepositoryRelative": "unity/FidgetingApp/ArtSource/ModelPipeline/magnetic-slide-tile/evidence/07-material/rev-004/artwork-upper-mask.png",
+      "externalMaskSha256": "18776e873271ca757c6d6cf7da5dbcfd390f4de0353cec794d34421f4b318b97",
+      "swapWithoutGeometryRebuild": true,
+      "imageNodeCount": 1,
+      "packed": false,
+      "sourcePaths": [
+        "/Users/jiawei.zhou/Documents/Fidgeting app/unity/FidgetingApp/ArtSource/ModelPipeline/magnetic-slide-tile/evidence/07-material/rev-004/artwork-upper-mask.png"
+      ]
+    },
+    "Artwork_Lower": {
+      "externalMaskRepositoryRelative": "unity/FidgetingApp/ArtSource/ModelPipeline/magnetic-slide-tile/evidence/07-material/rev-004/artwork-lower-mask.png",
+      "externalMaskSha256": "7862f2106e57660113ebe86b44124adf5686eb5e7a95efb742411ff67cdb2236",
+      "swapWithoutGeometryRebuild": true,
+      "imageNodeCount": 1,
+      "packed": false,
+      "sourcePaths": [
+        "/Users/jiawei.zhou/Documents/Fidgeting app/unity/FidgetingApp/ArtSource/ModelPipeline/magnetic-slide-tile/evidence/07-material/rev-004/artwork-lower-mask.png"
+      ]
+    }
+  },
+  "materialSlots": {
+    "LowerBody_Fixed_CleanPlane": [
+      "M07R4_MirrorSilver_Unchanged",
+      "M07R4_BloodRedCrystal_Artwork_Lower"
+    ],
+    "UpperCapsule_Moving": [
+      "M07R4_MirrorSilver_Unchanged",
+      "M07R4_BloodRedCrystal_Artwork_Upper"
+    ]
+  },
+  "emissionStrengths": {
+    "M07R4_BloodRedCrystal_Artwork_Upper": 0.0,
+    "M07R4_BloodRedCrystal_Artwork_Lower": 0.0
+  },
+  "lights": [
+    "M07R4_Diagnostic_Crystal_KeyRim",
+    "M07R4_Diagnostic_SideDirect",
+    "M07R4_Neutral_Face_Reveal",
+    "M07R4_Neutral_Fill_Softbox",
+    "M07R4_Neutral_Key_Softbox",
+    "M07R4_Neutral_Rim_Strip"
+  ],
+  "cameras": [
+    "M07R4_MaterialBoardCamera",
+    "M07R4_MaterialCloseupCamera",
+    "M07R4_NeutralFrontCamera",
+    "M07R4_OpenArtworkCamera",
+    "M07R4_SideReflectionCamera"
+  ],
+  "checks": {
+    "geometryDigestUnchanged": true,
+    "closedPoseRestored": true,
+    "hiddenEnvelopeUnchanged": true,
+    "upperSlotExists": true,
+    "lowerSlotExists": true,
+    "externalMasksNotPacked": true,
+    "independentMaskHashes": true,
+    "upperMaterialAssigned": true,
+    "lowerMaterialAssigned": true,
+    "noEmission": true,
+    "diagnosticLightsPresent": true,
+    "diagnosticCamerasPresent": true
+  },
+  "pass": true
+}

@@ -1,0 +1,62 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1320" height="980" viewBox="0 0 1320 980">
+  <defs>
+    <marker id="arrow" markerWidth="11" markerHeight="11" refX="9" refY="5.5" orient="auto"><path d="M0 0L11 5.5L0 11Z" fill="#ffb454"/></marker>
+    <style>
+      .title{font:800 34px -apple-system,"PingFang SC",sans-serif;fill:#f5f7f8}.sub{font:500 18px -apple-system,"PingFang SC",sans-serif;fill:#aab2b8}
+      .panel{fill:#0a0d10;stroke:#303840;stroke-width:2}.time{font:800 17px -apple-system,"PingFang SC",sans-serif;fill:#f5f7f8}
+      .fixed{fill:none;stroke:#55e39b;stroke-width:9}.moving{fill:none;stroke:#ffb454;stroke-width:9}.pivot{fill:none;stroke:#ffe06c;stroke-width:8}
+      .arrow{fill:none;stroke:#ffb454;stroke-width:9;stroke-linecap:round}.note{font:600 16px -apple-system,"PingFang SC",sans-serif;fill:#c6cdd2}
+      .fixedText{fill:#55e39b}.movingText{fill:#ffb454}.pivotText{fill:#ffe06c}.unknown{fill:none;stroke:#9ba5ad;stroke-width:5;stroke-dasharray:10 9}
+    </style>
+  </defs>
+  <rect width="1320" height="980" fill="#080a0c"/>
+  <text x="38" y="53" class="title">旋转运动：同一个上盖绕中央接口转动</text>
+  <text x="38" y="84" class="sub">用户视频 66.00–67.25 秒确认上层整件转动；下层主体相对手指保持方向</text>
+
+  <g transform="translate(28 112)">
+    <rect width="398" height="500" rx="14" class="panel"/>
+    <svg x="8" y="38" width="382" height="452" viewBox="0 0 760 900">
+      <image href="source-crops/rotate-66.00.png" width="760" height="900"/>
+      <path class="moving" d="M216 295 Q244 224 341 205 L665 235 Q734 262 744 345 L690 546 Q660 607 574 625 L286 598 Q215 571 201 488 Z"/>
+      <path class="fixed" d="M246 526 Q384 469 575 533 L598 746 Q545 819 391 817 L242 742 Z"/>
+      <circle class="unknown" cx="431" cy="563" r="55"/>
+    </svg>
+    <text x="16" y="27" class="time">66.00 s</text>
+  </g>
+  <g transform="translate(461 112)">
+    <rect width="398" height="500" rx="14" class="panel"/>
+    <svg x="8" y="38" width="382" height="452" viewBox="0 0 760 900">
+      <image href="source-crops/rotate-66.50.png" width="760" height="900"/>
+      <path class="moving" d="M222 236 Q279 166 387 155 L666 237 Q720 278 709 371 L622 548 Q568 611 470 607 L281 535 Q218 496 199 409 Z"/>
+      <path class="fixed" d="M248 503 Q377 460 559 533 L571 751 Q510 823 376 811 L243 728 Z"/>
+      <circle class="unknown" cx="421" cy="548" r="55"/>
+    </svg>
+    <text x="16" y="27" class="time">66.50 s</text>
+  </g>
+  <g transform="translate(894 112)">
+    <rect width="398" height="500" rx="14" class="panel"/>
+    <svg x="8" y="38" width="382" height="452" viewBox="0 0 760 900">
+      <image href="source-crops/rotate-67.25.png" width="760" height="900"/>
+      <path class="moving" d="M225 4 Q384 -42 555 18 L630 438 Q620 545 529 607 L333 615 Q240 565 218 465 Z"/>
+      <path class="fixed" d="M242 515 Q363 481 546 539 L568 700 Q504 758 368 744 L245 686 Z"/>
+      <circle class="unknown" cx="410" cy="568" r="55"/>
+    </svg>
+    <text x="16" y="27" class="time">67.25 s</text>
+  </g>
+  <path d="M414 336 L449 336" class="arrow" marker-end="url(#arrow)"/>
+  <path d="M847 336 L882 336" class="arrow" marker-end="url(#arrow)"/>
+
+  <rect x="28" y="636" width="520" height="310" rx="14" class="panel"/>
+  <svg x="44" y="652" width="488" height="278" viewBox="0 0 720 627">
+    <image href="source-crops/official-rotary-pivot.png" width="720" height="627"/>
+    <circle class="pivot" cx="320" cy="277" r="72"/>
+    <circle class="pivot" cx="320" cy="277" r="165"/>
+  </svg>
+  <rect x="572" y="636" width="720" height="310" rx="14" class="panel"/>
+  <text x="604" y="684" class="time pivotText">P1 · 中央柱 / 轴承候选区</text>
+  <text x="604" y="724" class="note">官方拆件图显示中心柱与同心圆形球道；视频中的转轴被上盖遮挡，</text>
+  <text x="604" y="755" class="note">所以只能确认轴心投影落在上盖与下层主体的重叠中心附近。</text>
+  <text x="604" y="811" class="time fixedText">绿色：下层主体相对手指不转</text>
+  <text x="604" y="848" class="time movingText">橙色：上层装饰胶囊整件旋转</text>
+  <text x="604" y="900" class="note">未知：轴承背面连接、孔深、锁止方式，以及 A/B 槽板中哪一件直连上盖。</text>
+</svg>

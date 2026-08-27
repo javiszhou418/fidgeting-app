@@ -1,0 +1,98 @@
+{
+  "schemaVersion": 1,
+  "gate": "07-material",
+  "materialRevision": 6,
+  "motifSharpness": {
+    "rev5Rejected": {
+      "roiPx": [
+        120,
+        280,
+        780,
+        740
+      ],
+      "laplacianVariance": 68.626554,
+      "cannyEdgePixels": 2447
+    },
+    "rev6Restored": {
+      "roiPx": [
+        120,
+        280,
+        780,
+        740
+      ],
+      "laplacianVariance": 132.947196,
+      "cannyEdgePixels": 5658
+    }
+  },
+  "silverComparison": {
+    "rev5Gray": {
+      "roiPx": [
+        100,
+        700,
+        800,
+        980
+      ],
+      "neutralSamples": 88140,
+      "neutralMedianLuma": 54.2338,
+      "neutralMeanChroma": 5.378137,
+      "neutralP90Luma": 239.0,
+      "neutralHighlightAbove180Fraction": 0.4591332,
+      "neutralClipAbove250Fraction": 0.00066939
+    },
+    "rev6PureSilverTarget": {
+      "roiPx": [
+        100,
+        700,
+        800,
+        980
+      ],
+      "neutralSamples": 138214,
+      "neutralMedianLuma": 73.949,
+      "neutralMeanChroma": 9.779689,
+      "neutralP90Luma": 238.2126,
+      "neutralHighlightAbove180Fraction": 0.29275616,
+      "neutralClipAbove250Fraction": 0.0005354
+    }
+  },
+  "bloodRed": {
+    "selectedPixels": 160761,
+    "signedHueMedianDegrees": -10.243902,
+    "pinkFraction": 6.22e-06,
+    "bloodRedFraction": 0.99999378,
+    "wholeImageClipAbove250Fraction": 5.175e-05
+  },
+  "reflectionCards": {
+    "white": 180.813583,
+    "gray": 94.479438,
+    "black": 10.492865
+  },
+  "sideWhiteCard": {
+    "maximumNeutralHighlightSpanPx": 630,
+    "maximumNeutralHighlightSpanFraction": 0.45,
+    "neutralHighlightPixels": 4996
+  },
+  "openLowerArtwork": {
+    "laplacianVariance": 134.834799,
+    "cannyEdgePixels": 3696
+  },
+  "checks": {
+    "lineageAndLosslessIdentity": true,
+    "renderedPatternSharperThanRev5": true,
+    "renderedConnectedDetailImproved": true,
+    "lowerPatternLegible": true,
+    "silverNeutral": true,
+    "silverMedianBrighterThanGray": true,
+    "silverHighlightsWithoutClipping": true,
+    "reflectionCardsOrdered": true,
+    "sideWhiteCardReflectionVisible": true,
+    "bloodRedTarget": true,
+    "wholeImageClippingControlled": true,
+    "silverShaderValues": true,
+    "steelClaimBoundary": true,
+    "noEmission": true,
+    "geometryDigestUnchanged": true,
+    "mechanismScopeUnchanged": true,
+    "gate07Only": true
+  },
+  "pass": true
+}

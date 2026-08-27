@@ -1,0 +1,41 @@
+{
+  "schemaVersion": 1,
+  "kind": "visual-trace-not-production-vector",
+  "sourceAssetIds": [
+    "slider-intake-nxedc-ref-01"
+  ],
+  "sourcePath": "unity/FidgetingApp/ArtSource/ModelPipeline/magnetic-slide-tile/evidence/01-intake/rev-002/external-nxedc/reference-01.jpg",
+  "sourceSha256": "381f518f2ad4a58f96f99ed8152b9503360b4681cc0b2424e5f24aea38dfd97f",
+  "sourceCropNormalized": [
+    0.2890625,
+    0.142578125,
+    0.7109375,
+    0.8369140625
+  ],
+  "sourceCropPixels": [
+    370,
+    182,
+    910,
+    1071
+  ],
+  "recipe": {
+    "outputSizePx": [
+      620,
+      1000
+    ],
+    "grayscale": "Pillow ImageOps.grayscale",
+    "localContrast": "GaussianBlur radius 12; localMean - gray >= 20",
+    "absoluteDark": "gray <= 70",
+    "interiorMask": "analytic capsule inset 45 px",
+    "cleanup": "MaxFilter 3; MedianFilter 3; MinFilter 3; MaxFilter 3"
+  },
+  "outputPath": "source-derived-motif-visual-trace.png",
+  "outputSha256": "8250df70d2286849db353862283b0d3db9c66e1ac92bed3795bcb5377a431c36",
+  "foregroundCoverage": 0.387056,
+  "limitations": [
+    "The mask is a visual trace from a raster closeup, not an exact production vector.",
+    "Dark low-luma substrate regions can enter the trace; the Blender shader uses restrained strength.",
+    "No hidden manufacturing path, engraving depth, or production tolerance is asserted."
+  ],
+  "pass": true
+}

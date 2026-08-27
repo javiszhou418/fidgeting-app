@@ -1,0 +1,344 @@
+{
+  "schemaVersion": 1,
+  "modelId": "magnetic-slide-tile",
+  "gate": "08-lighting",
+  "lightingRevision": 1,
+  "sourceGate07": {
+    "materialRevision": 7,
+    "blendPath": "unity/FidgetingApp/ArtSource/ModelPipeline/magnetic-slide-tile/evidence/07-material/rev-007/magnetic-slide-tile-material-r007.blend",
+    "sha256Before": "dc34da323813f103c90efa0c6f21142b68b741e1093b205eb04c091c28a7db2e",
+    "sha256After": "dc34da323813f103c90efa0c6f21142b68b741e1093b205eb04c091c28a7db2e",
+    "unchanged": true,
+    "approvalWording": "\u53ef\u4ee5"
+  },
+  "geometry": {
+    "digestBefore": "85bd7dd237c6822c72e575c9a23085eec9a2f28d7afea3a5bf0f13fdc4ebd90f",
+    "digestAfter": "85bd7dd237c6822c72e575c9a23085eec9a2f28d7afea3a5bf0f13fdc4ebd90f",
+    "expectedDigest": "85bd7dd237c6822c72e575c9a23085eec9a2f28d7afea3a5bf0f13fdc4ebd90f",
+    "unchanged": true,
+    "matricesUnchanged": true,
+    "closedPoseRestored": true,
+    "pointAxisWorldMm": [
+      0.0,
+      -9.5,
+      0.0
+    ],
+    "hiddenEnvelopeUnchanged": true
+  },
+  "materials": {
+    "assignmentsRestored": true,
+    "shippingEmissionStrengths": {
+      "M07R7_DaylightNeutralPolishedSilver": 0.0,
+      "M07R7_BloodRedCrystal_WideBorder_Lower": 0.0,
+      "M07R7_BloodRedCrystal_WideBorder_Upper": 0.0
+    },
+    "shippingEmissionZero": true,
+    "fullBlackPerimeterPreserved": true,
+    "motifSha256": "8250df70d2286849db353862283b0d3db9c66e1ac92bed3795bcb5377a431c36",
+    "bloodRedBase": [
+      0.22,
+      0.008,
+      0.018,
+      1.0
+    ],
+    "silverPbr": {
+      "baseColor": [
+        0.9700000286102295,
+        0.9649999737739563,
+        0.9399999976158142,
+        1.0
+      ],
+      "metallic": 1.0,
+      "roughness": 0.029999999329447746,
+      "ior": 1.4500000476837158,
+      "anisotropy": 0.14000000059604645,
+      "anisotropyRotation": 0.07999999821186066,
+      "coatWeight": 0.05999999865889549,
+      "coatRoughness": 0.019999999552965164,
+      "transmissionWeight": 0.0,
+      "thinFilmIor": 1.3300000429153442,
+      "thinFilmThicknessNm": 0.0,
+      "specularIorLevel": 0.5,
+      "emissionStrength": 0.0
+    }
+  },
+  "lightingRecipe": {
+    "classification": "controlled Gate 08 lighting; no Gate 09 environment composition",
+    "lights": [
+      {
+        "name": "M08R1_Key_D65_Softbox",
+        "type": "AREA",
+        "locationMm": [
+          54,
+          -72,
+          98
+        ],
+        "powerW": 62000,
+        "sizeMm": 52,
+        "linearRgb": [
+          1.0,
+          0.994,
+          0.97
+        ],
+        "colorTemperatureKelvin": 6504,
+        "targetMm": [
+          0,
+          0,
+          3
+        ]
+      },
+      {
+        "name": "M08R1_Fill_Neutral",
+        "type": "AREA",
+        "locationMm": [
+          -62,
+          -22,
+          62
+        ],
+        "powerW": 30000,
+        "sizeMm": 46,
+        "linearRgb": [
+          1.0,
+          0.965,
+          0.92
+        ],
+        "colorTemperatureKelvin": 5600,
+        "targetMm": [
+          0,
+          0,
+          3
+        ]
+      },
+      {
+        "name": "M08R1_Rim_SilverStrip",
+        "type": "AREA",
+        "locationMm": [
+          34,
+          72,
+          68
+        ],
+        "powerW": 48000,
+        "sizeMm": 38,
+        "linearRgb": [
+          1.0,
+          0.997,
+          0.985
+        ],
+        "colorTemperatureKelvin": 6400,
+        "targetMm": [
+          0,
+          2,
+          4
+        ]
+      },
+      {
+        "name": "M08R1_FaceReveal",
+        "type": "AREA",
+        "locationMm": [
+          -12,
+          -28,
+          112
+        ],
+        "powerW": 23000,
+        "sizeMm": 30,
+        "linearRgb": [
+          1.0,
+          0.98,
+          0.94
+        ],
+        "colorTemperatureKelvin": 5900,
+        "targetMm": [
+          0,
+          0,
+          4
+        ]
+      }
+    ],
+    "world": {
+      "type": "uniform-neutral",
+      "linearRgb": [
+        0.24,
+        0.24,
+        0.24
+      ],
+      "strength": 0.85,
+      "hdri": null
+    },
+    "reflectionCards": [
+      {
+        "name": "M08R1_WhiteCard_Left",
+        "linearRgb": [
+          0.8,
+          0.8,
+          0.8
+        ],
+        "cameraVisible": false
+      },
+      {
+        "name": "M08R1_WhiteCard_Right",
+        "linearRgb": [
+          0.8,
+          0.8,
+          0.8
+        ],
+        "cameraVisible": false
+      },
+      {
+        "name": "M08R1_WhiteCard_Camera",
+        "linearRgb": [
+          0.8,
+          0.8,
+          0.8
+        ],
+        "cameraVisible": false
+      },
+      {
+        "name": "M08R1_BlackCard_NegativeFill",
+        "linearRgb": [
+          0.008,
+          0.008,
+          0.008
+        ],
+        "cameraVisible": false
+      }
+    ],
+    "exposureEv": 0.0,
+    "whiteBalanceKelvin": 6504,
+    "whiteBalanceTint": 10,
+    "viewTransform": "AgX",
+    "look": "AgX - Medium High Contrast",
+    "renderer": "BLENDER_EEVEE",
+    "blender": "5.2.0 LTS"
+  },
+  "cameras": {
+    "hero": {
+      "name": "M08R1_HeroCamera",
+      "locationMm": [
+        88,
+        -132,
+        74
+      ],
+      "targetMm": [
+        0,
+        0,
+        4
+      ],
+      "lensMm": 72
+    },
+    "left-oblique": {
+      "name": "M08R1_Left_ObliqueCamera",
+      "locationMm": [
+        -96,
+        -122,
+        66
+      ],
+      "targetMm": [
+        0,
+        0,
+        4
+      ],
+      "lensMm": 74
+    },
+    "right-oblique": {
+      "name": "M08R1_Right_ObliqueCamera",
+      "locationMm": [
+        98,
+        -120,
+        64
+      ],
+      "targetMm": [
+        0,
+        0,
+        4
+      ],
+      "lensMm": 74
+    },
+    "low": {
+      "name": "M08R1_LowCamera",
+      "locationMm": [
+        104,
+        -146,
+        25
+      ],
+      "targetMm": [
+        0,
+        0,
+        4
+      ],
+      "lensMm": 78
+    },
+    "beauty": {
+      "name": "M08R1_BeautyCamera",
+      "locationMm": [
+        76,
+        -138,
+        58
+      ],
+      "targetMm": [
+        0,
+        0,
+        4
+      ],
+      "lensMm": 82
+    },
+    "open-side": {
+      "name": "M08R1_Open_SideCamera",
+      "locationMm": [
+        102,
+        -112,
+        46
+      ],
+      "targetMm": [
+        0,
+        8,
+        4
+      ],
+      "lensMm": 78
+    }
+  },
+  "outputs": {
+    "hero": "hero.png",
+    "leftOblique": "left-oblique.png",
+    "rightOblique": "right-oblique.png",
+    "low": "low-angle.png",
+    "beauty": "pass-beauty.png",
+    "clay": "pass-clay.png",
+    "normal": "pass-normal.png",
+    "depth": "pass-depth.png",
+    "roughness": "pass-roughness.png",
+    "openSideReflection": "open-side-reflection.png"
+  },
+  "technicalPassPolicy": {
+    "normalDepthRoughnessUseUnlitOverrides": true,
+    "technicalOverridesAreShippingMaterials": false,
+    "beautyUsesApprovedGate07Materials": true
+  },
+  "unityReflectionPlan": {
+    "path": "unity/FidgetingApp/ArtSource/ModelPipeline/magnetic-slide-tile/evidence/08-lighting/rev-001/unity-reflection-plan.json",
+    "sha256": "9a9f9c8f45cebb353d5f698a4dfac5f2d75787896545bfe576f1e576fad6cf7a",
+    "deliveryState": "specified-only-not-integrated",
+    "unityFilesChanged": false
+  },
+  "scope": {
+    "gate09Entered": false,
+    "unityFilesChanged": false,
+    "runtimeChanged": false,
+    "reflectionProbesImplemented": false,
+    "shaderGraphImplemented": false,
+    "hapticsChanged": false,
+    "buildInstallOrPhonePush": false
+  },
+  "checks": {
+    "sourceGate07Unchanged": true,
+    "geometryUnchanged": true,
+    "closedPoseAndPointAxis": true,
+    "hiddenMechanismUnchanged": true,
+    "materialsRestored": true,
+    "shippingEmissionZero": true,
+    "approvedMaterialLanguagePreserved": true,
+    "requiredViewsAndPassesRendered": true,
+    "gate08Only": true,
+    "unityPlanSpecifiedOnly": true
+  },
+  "pass": true
+}

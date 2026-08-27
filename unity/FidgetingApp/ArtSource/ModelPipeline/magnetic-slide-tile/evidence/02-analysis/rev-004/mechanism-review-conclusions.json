@@ -1,0 +1,105 @@
+{
+  "schemaVersion": 1,
+  "modelId": "magnetic-slide-tile",
+  "gate": "02-analysis",
+  "revision": 4,
+  "reportingMode": "two-layer-conclusion-first-interactive",
+  "userReview": {
+    "conclusions": [
+      {
+        "id": "one-outward-slide",
+        "confidence": "high",
+        "conclusion": "滑动只有一个打开方向。",
+        "implication": "从闭合止点向外打开，并可沿原路关闭；不能越过闭合止点。"
+      },
+      {
+        "id": "compound-constraint",
+        "confidence": "high",
+        "conclusion": "两片受轴心与纵向轨迹共同约束。",
+        "implication": "机构不是单纯转轴，也不是完全分离的两片。"
+      },
+      {
+        "id": "normalized-travel",
+        "confidence": "medium",
+        "conclusion": "有效行程约为 0.38–0.46L，峰值约 0.50L。",
+        "implication": "当前只使用归一化长度，不换算毫米。"
+      },
+      {
+        "id": "detent-map",
+        "confidence": "high",
+        "conclusion": "旋转为 30 档 × 12°。",
+        "implication": "沙盒按每圈 30 个捕获位模拟，完整 360° 可连续转动。"
+      },
+      {
+        "id": "rotation-across-slide",
+        "confidence": "high",
+        "conclusion": "部分滑开与接近最大滑开时均可旋转。",
+        "implication": "沙盒允许这两类状态；每个精确滑位是否都可转仍未确认。"
+      },
+      {
+        "id": "candidate-axis-owner",
+        "confidence": "medium",
+        "conclusion": "固定点更可能在承载片上。",
+        "implication": "当前轴点只是一项可检验候选；隐藏轴销归属仍未看见。"
+      }
+    ],
+    "unknowns": [
+      "隐藏轴销属于哪一片，以及槽壁的真实截面。",
+      "每个精确滑位是否都允许旋转。",
+      "真实尺寸、力值、磁力、摩擦和 Haptic 手感。"
+    ],
+    "decisionQuestion": "在沙盒里试过后，这个滑动方向、轴心位置和 30 档旋转是否符合实物？"
+  },
+  "dimensionStatus": {
+    "measured": [
+      "视频逐帧索引与 PTS",
+      "音频瞬态候选",
+      "多帧轮廓点"
+    ],
+    "inferredRange": {
+      "aspectRatioLW": [
+        1.52,
+        1.62
+      ],
+      "sandboxAspectRatioLW": 1.57,
+      "travelL": [
+        0.38,
+        0.46
+      ],
+      "observedPeakTravelL": 0.5
+    },
+    "unknown": [
+      "physicalLength",
+      "physicalWidth",
+      "physicalThickness",
+      "physicalTravel"
+    ],
+    "physicalMeasurementFields": {
+      "editable": true,
+      "defaults": null,
+      "units": [
+        "mm",
+        "cm"
+      ]
+    }
+  },
+  "simulatorBoundary": {
+    "canSimulate": [
+      "pointer-driven translation",
+      "pointer-driven rotation",
+      "motion lag",
+      "detent snap and capture",
+      "audio cue",
+      "frame-rate-independent damping"
+    ],
+    "cannotValidate": [
+      "Newton force",
+      "magnetic force",
+      "material friction",
+      "phone Haptic",
+      "concealed coupling geometry"
+    ],
+    "note": "桌面可模拟动作滞后、吸附和声音；真实受力与手机 Haptic 必须在设备上验证。"
+  },
+  "internalEvidenceRevision": 3
+}

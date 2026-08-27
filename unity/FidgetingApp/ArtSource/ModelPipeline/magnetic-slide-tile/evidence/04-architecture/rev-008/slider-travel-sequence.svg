@@ -1,0 +1,47 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1320" height="900" viewBox="0 0 1320 900">
+  <defs>
+    <marker id="arrow" markerWidth="11" markerHeight="11" refX="9" refY="5.5" orient="auto"><path d="M0 0L11 5.5L0 11Z" fill="#ffb454"/></marker>
+    <style>
+      .title{font:800 34px -apple-system,"PingFang SC",sans-serif;fill:#f5f7f8}.sub{font:500 18px -apple-system,"PingFang SC",sans-serif;fill:#aab2b8}
+      .panel{fill:#0a0d10;stroke:#303840;stroke-width:2}.time{font:800 18px -apple-system,"PingFang SC",sans-serif;fill:#f5f7f8}
+      .fixed{fill:none;stroke:#55e39b;stroke-width:8}.moving{fill:none;stroke:#ffb454;stroke-width:8}.arrow{fill:none;stroke:#ffb454;stroke-width:9;stroke-linecap:round}
+      .note{font:600 16px -apple-system,"PingFang SC",sans-serif;fill:#c6cdd2}.fixedText{fill:#55e39b}.movingText{fill:#ffb454}
+    </style>
+  </defs>
+  <rect width="1320" height="900" fill="#080a0c"/>
+  <text x="38" y="53" class="title">线性运动：上盖沿固定轨道承载区滑动</text>
+  <text x="38" y="84" class="sub">同一段用户原始视频连续帧；装饰图案与固定螺钉提供可追踪参照</text>
+
+  <g transform="translate(30 116)">
+    <rect width="400" height="690" rx="14" class="panel"/>
+    <svg x="10" y="42" width="380" height="662" viewBox="0 0 620 1080">
+      <image href="source-crops/slide-42.00.png" width="620" height="1080"/>
+      <path class="fixed" d="M166 111 Q310 42 471 101 L548 342 Q525 383 476 396 L157 372 Q123 342 132 286 Z"/>
+      <path class="moving" d="M116 357 Q306 280 519 365 L589 910 Q575 1030 431 1065 L168 1018 Q89 968 77 840 Z"/>
+    </svg>
+    <text x="18" y="29" class="time">42.00 s · 轨道大面积露出</text>
+  </g>
+  <g transform="translate(460 116)">
+    <rect width="400" height="690" rx="14" class="panel"/>
+    <svg x="10" y="42" width="380" height="662" viewBox="0 0 620 1080">
+      <image href="source-crops/slide-42.75.png" width="620" height="1080"/>
+      <path class="fixed" d="M169 150 Q310 92 470 141 L542 320 Q516 354 475 365 L165 350 Q137 326 140 277 Z"/>
+      <path class="moving" d="M115 330 Q305 260 520 340 L588 907 Q570 1025 433 1065 L171 1018 Q88 970 78 839 Z"/>
+    </svg>
+    <text x="18" y="29" class="time">42.75 s · 上盖继续覆盖</text>
+  </g>
+  <g transform="translate(890 116)">
+    <rect width="400" height="690" rx="14" class="panel"/>
+    <svg x="10" y="42" width="380" height="662" viewBox="0 0 620 1080">
+      <image href="source-crops/slide-43.50.png" width="620" height="1080"/>
+      <path class="fixed" d="M160 196 Q303 142 460 181 L529 287 Q503 319 464 328 L171 323 Q148 301 146 267 Z"/>
+      <path class="moving" d="M111 270 Q300 214 518 292 L586 904 Q569 1025 434 1065 L172 1020 Q87 969 79 836 Z"/>
+    </svg>
+    <text x="18" y="29" class="time">43.50 s · 接近闭合</text>
+  </g>
+
+  <path d="M417 360 L449 360" class="arrow" marker-end="url(#arrow)"/>
+  <path d="M847 360 L879 360" class="arrow" marker-end="url(#arrow)"/>
+  <rect x="30" y="826" width="1260" height="50" rx="10" fill="#111519"/>
+  <text x="52" y="858" class="note"><tspan class="fixedText">绿色 = 相对手持下层不动</tspan><tspan dx="28" class="movingText">橙色 = 上层整件沿长轴平移</tspan><tspan dx="28">A/B 两个槽板可运动，不再把任一个写成永久固定件。</tspan></text>
+</svg>

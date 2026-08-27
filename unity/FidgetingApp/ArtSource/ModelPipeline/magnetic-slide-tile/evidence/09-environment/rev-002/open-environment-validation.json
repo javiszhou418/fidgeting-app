@@ -1,0 +1,1358 @@
+{
+  "schemaVersion": 1,
+  "modelId": "magnetic-slide-tile",
+  "gate": "09-environment",
+  "environmentRevision": 2,
+  "sourceRevision": {
+    "revision": 1,
+    "status": "rejected-incomplete",
+    "reason": "Gate 09 rev 1 never showed the slide-open appearance.",
+    "blendPath": "unity/FidgetingApp/ArtSource/ModelPipeline/magnetic-slide-tile/evidence/09-environment/rev-001/magnetic-slide-tile-environment-r001.blend",
+    "sha256Before": "83087bfcc539fee537b01ecc5d00311760b7c0c7751180c9e91c7b00ede15f56",
+    "sha256After": "83087bfcc539fee537b01ecc5d00311760b7c0c7751180c9e91c7b00ede15f56",
+    "unchanged": true
+  },
+  "approvedContracts": {
+    "dimensionsMm": [
+      50.0,
+      31.0,
+      12.0
+    ],
+    "closedGeometryDigest": "85bd7dd237c6822c72e575c9a23085eec9a2f28d7afea3a5bf0f13fdc4ebd90f",
+    "openTravelMm": 21.0,
+    "openAxis": "+Y",
+    "openRotationDegrees": 0.0,
+    "fixedLowerPlane": true,
+    "concealedMechanism": true,
+    "pointAxisWorldMm": [
+      0.0,
+      -9.5,
+      0.0
+    ]
+  },
+  "pose": {
+    "translationMatrixClosed": [
+      [
+        1.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        1.0,
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.0,
+        1.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.0,
+        0.0,
+        1.0
+      ]
+    ],
+    "translationMatrixOpen": [
+      [
+        1.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        1.0,
+        0.0,
+        21.0
+      ],
+      [
+        0.0,
+        0.0,
+        1.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.0,
+        0.0,
+        1.0
+      ]
+    ],
+    "upperMatrixOpen": [
+      [
+        1.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        1.0,
+        0.0,
+        21.0
+      ],
+      [
+        0.0,
+        0.0,
+        1.0,
+        3.0
+      ],
+      [
+        0.0,
+        0.0,
+        0.0,
+        1.0
+      ]
+    ],
+    "translationLocationMm": [
+      0.0,
+      21.0,
+      0.0
+    ],
+    "translationRotationRadians": [
+      0.0,
+      0.0,
+      0.0
+    ],
+    "translationScale": [
+      1.0,
+      1.0,
+      1.0
+    ],
+    "lowerMatrixBefore": [
+      [
+        1.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        1.0,
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.0,
+        1.0,
+        -3.0
+      ],
+      [
+        0.0,
+        0.0,
+        0.0,
+        1.0
+      ]
+    ],
+    "lowerMatrixAfter": [
+      [
+        1.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        1.0,
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.0,
+        1.0,
+        -3.0
+      ],
+      [
+        0.0,
+        0.0,
+        0.0,
+        1.0
+      ]
+    ],
+    "pivotWorldMm": [
+      0.0,
+      11.5,
+      0.0
+    ],
+    "sequence": [
+      {
+        "frame": 0,
+        "travelMm": 0.0,
+        "path": "sequence-00-00mm.png",
+        "translation": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "rotationDegrees": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "lowerMatrix": [
+          [
+            1.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            1.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            0.0,
+            1.0,
+            -3.0
+          ],
+          [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        ]
+      },
+      {
+        "frame": 1,
+        "travelMm": 7.0,
+        "path": "sequence-01-07mm.png",
+        "translation": [
+          0.0,
+          7.0,
+          0.0
+        ],
+        "rotationDegrees": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "lowerMatrix": [
+          [
+            1.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            1.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            0.0,
+            1.0,
+            -3.0
+          ],
+          [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        ]
+      },
+      {
+        "frame": 2,
+        "travelMm": 14.0,
+        "path": "sequence-02-14mm.png",
+        "translation": [
+          0.0,
+          14.0,
+          0.0
+        ],
+        "rotationDegrees": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "lowerMatrix": [
+          [
+            1.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            1.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            0.0,
+            1.0,
+            -3.0
+          ],
+          [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        ]
+      },
+      {
+        "frame": 3,
+        "travelMm": 21.0,
+        "path": "sequence-03-21mm.png",
+        "translation": [
+          0.0,
+          21.0,
+          0.0
+        ],
+        "rotationDegrees": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "lowerMatrix": [
+          [
+            1.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            1.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            0.0,
+            1.0,
+            -3.0
+          ],
+          [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        ]
+      }
+    ]
+  },
+  "invariants": {
+    "localMeshHashBefore": "50b1f913f8b94a1428af404478cb5169d7e142b765955d224125108de463d5d0",
+    "localMeshHashAfter": "50b1f913f8b94a1428af404478cb5169d7e142b765955d224125108de463d5d0",
+    "localMeshUnchanged": true,
+    "materialHashesBefore": {
+      "M07R7_DaylightNeutralPolishedSilver": "0b844517f5b59a607e66e30bc92d87538b6fefba3e08703888f4087d1a71b5b1",
+      "M07R7_BloodRedCrystal_WideBorder_Upper": "eb0dbfd727c7575622d90e624bb78edbdb5193e9e944d08d8f8b9a57dd9b8d64",
+      "M07R7_BloodRedCrystal_WideBorder_Lower": "95b1309542f2c6a3ad52c0587059a7d4a8e8551e4abf0cefa35593808b64daf7"
+    },
+    "materialHashesAfter": {
+      "M07R7_DaylightNeutralPolishedSilver": "0b844517f5b59a607e66e30bc92d87538b6fefba3e08703888f4087d1a71b5b1",
+      "M07R7_BloodRedCrystal_WideBorder_Upper": "eb0dbfd727c7575622d90e624bb78edbdb5193e9e944d08d8f8b9a57dd9b8d64",
+      "M07R7_BloodRedCrystal_WideBorder_Lower": "95b1309542f2c6a3ad52c0587059a7d4a8e8551e4abf0cefa35593808b64daf7"
+    },
+    "materialsUnchanged": true,
+    "materialAssignmentsBefore": {
+      "LowerBody_Fixed_CleanPlane": [
+        "M07R7_DaylightNeutralPolishedSilver",
+        "M07R7_BloodRedCrystal_WideBorder_Lower"
+      ],
+      "UpperCapsule_Moving": [
+        "M07R7_DaylightNeutralPolishedSilver",
+        "M07R7_BloodRedCrystal_WideBorder_Upper"
+      ]
+    },
+    "materialAssignmentsAfter": {
+      "LowerBody_Fixed_CleanPlane": [
+        "M07R7_DaylightNeutralPolishedSilver",
+        "M07R7_BloodRedCrystal_WideBorder_Lower"
+      ],
+      "UpperCapsule_Moving": [
+        "M07R7_DaylightNeutralPolishedSilver",
+        "M07R7_BloodRedCrystal_WideBorder_Upper"
+      ]
+    },
+    "materialAssignmentsUnchanged": true,
+    "lightRigBefore": {
+      "M08R1_FaceReveal": {
+        "name": "M08R1_FaceReveal",
+        "matrixWorld": [
+          [
+            0.919145048,
+            0.379126072,
+            -0.106938519,
+            -12.0
+          ],
+          [
+            -0.393919289,
+            0.884627461,
+            -0.249523118,
+            -28.0
+          ],
+          [
+            3.2e-08,
+            0.27147308,
+            0.962446034,
+            112.0
+          ],
+          [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        ],
+        "type": "AREA",
+        "energy": 23000.0,
+        "size": 30.0,
+        "color": [
+          1.0,
+          0.9800000190734863,
+          0.9399999976158142
+        ],
+        "kelvin": 5900,
+        "hideRender": false
+      },
+      "M08R1_Fill_Neutral": {
+        "name": "M08R1_Fill_Neutral",
+        "matrixWorld": [
+          [
+            0.334409833,
+            0.62921977,
+            -0.701607108,
+            -62.0
+          ],
+          [
+            -0.942427754,
+            0.223271444,
+            -0.248957425,
+            -22.0
+          ],
+          [
+            -1.02e-07,
+            0.744467854,
+            0.667658329,
+            62.0
+          ],
+          [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        ],
+        "type": "AREA",
+        "energy": 30000.0,
+        "size": 46.0,
+        "color": [
+          1.0,
+          0.9649999737739563,
+          0.9200000166893005
+        ],
+        "kelvin": 5600,
+        "hideRender": false
+      },
+      "M08R1_Key_D65_Softbox": {
+        "name": "M08R1_Key_D65_Softbox",
+        "matrixWorld": [
+          [
+            0.799999952,
+            -0.4355717,
+            0.41264683,
+            54.0
+          ],
+          [
+            0.600000083,
+            0.580762088,
+            -0.550195694,
+            -72.0
+          ],
+          [
+            5.1e-08,
+            0.687744677,
+            0.725952685,
+            98.0
+          ],
+          [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        ],
+        "type": "AREA",
+        "energy": 62000.0,
+        "size": 52.0,
+        "color": [
+          1.0,
+          0.9940000176429749,
+          0.9700000286102295
+        ],
+        "kelvin": 6504,
+        "hideRender": false
+      },
+      "M08R1_Rim_SilverStrip": {
+        "name": "M08R1_Rim_SilverStrip",
+        "matrixWorld": [
+          [
+            -0.899508178,
+            -0.277517378,
+            0.33744505,
+            34.0
+          ],
+          [
+            0.436903924,
+            -0.571359336,
+            0.694739819,
+            72.0
+          ],
+          [
+            3e-09,
+            0.772355258,
+            0.635190845,
+            68.0
+          ],
+          [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        ],
+        "type": "AREA",
+        "energy": 48000.0,
+        "size": 38.0,
+        "color": [
+          1.0,
+          0.996999979019165,
+          0.9850000143051147
+        ],
+        "kelvin": 6400,
+        "hideRender": false
+      }
+    },
+    "lightRigAfter": {
+      "M08R1_FaceReveal": {
+        "name": "M08R1_FaceReveal",
+        "matrixWorld": [
+          [
+            0.919145048,
+            0.379126072,
+            -0.106938519,
+            -12.0
+          ],
+          [
+            -0.393919289,
+            0.884627461,
+            -0.249523118,
+            -28.0
+          ],
+          [
+            3.2e-08,
+            0.27147308,
+            0.962446034,
+            112.0
+          ],
+          [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        ],
+        "type": "AREA",
+        "energy": 23000.0,
+        "size": 30.0,
+        "color": [
+          1.0,
+          0.9800000190734863,
+          0.9399999976158142
+        ],
+        "kelvin": 5900,
+        "hideRender": false
+      },
+      "M08R1_Fill_Neutral": {
+        "name": "M08R1_Fill_Neutral",
+        "matrixWorld": [
+          [
+            0.334409833,
+            0.62921977,
+            -0.701607108,
+            -62.0
+          ],
+          [
+            -0.942427754,
+            0.223271444,
+            -0.248957425,
+            -22.0
+          ],
+          [
+            -1.02e-07,
+            0.744467854,
+            0.667658329,
+            62.0
+          ],
+          [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        ],
+        "type": "AREA",
+        "energy": 30000.0,
+        "size": 46.0,
+        "color": [
+          1.0,
+          0.9649999737739563,
+          0.9200000166893005
+        ],
+        "kelvin": 5600,
+        "hideRender": false
+      },
+      "M08R1_Key_D65_Softbox": {
+        "name": "M08R1_Key_D65_Softbox",
+        "matrixWorld": [
+          [
+            0.799999952,
+            -0.4355717,
+            0.41264683,
+            54.0
+          ],
+          [
+            0.600000083,
+            0.580762088,
+            -0.550195694,
+            -72.0
+          ],
+          [
+            5.1e-08,
+            0.687744677,
+            0.725952685,
+            98.0
+          ],
+          [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        ],
+        "type": "AREA",
+        "energy": 62000.0,
+        "size": 52.0,
+        "color": [
+          1.0,
+          0.9940000176429749,
+          0.9700000286102295
+        ],
+        "kelvin": 6504,
+        "hideRender": false
+      },
+      "M08R1_Rim_SilverStrip": {
+        "name": "M08R1_Rim_SilverStrip",
+        "matrixWorld": [
+          [
+            -0.899508178,
+            -0.277517378,
+            0.33744505,
+            34.0
+          ],
+          [
+            0.436903924,
+            -0.571359336,
+            0.694739819,
+            72.0
+          ],
+          [
+            3e-09,
+            0.772355258,
+            0.635190845,
+            68.0
+          ],
+          [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        ],
+        "type": "AREA",
+        "energy": 48000.0,
+        "size": 38.0,
+        "color": [
+          1.0,
+          0.996999979019165,
+          0.9850000143051147
+        ],
+        "kelvin": 6400,
+        "hideRender": false
+      }
+    },
+    "lightRigUnchanged": true,
+    "reflectionCardsBefore": {
+      "M08R1_BlackCard_NegativeFill": [
+        [
+          16.0,
+          0.0,
+          0.0,
+          44.0
+        ],
+        [
+          0.0,
+          1.0045e-05,
+          -1.0,
+          -148.0
+        ],
+        [
+          0.0,
+          32.0,
+          3.14e-07,
+          44.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "M08R1_WhiteCard_Camera": [
+        [
+          34.0,
+          0.0,
+          0.0,
+          -18.0
+        ],
+        [
+          0.0,
+          1.1929e-05,
+          -1.0,
+          -180.0
+        ],
+        [
+          0.0,
+          38.0,
+          3.14e-07,
+          46.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "M08R1_WhiteCard_Left": [
+        [
+          17.709186554,
+          -1.798e-06,
+          0.179029584,
+          -52.0
+        ],
+        [
+          3.222532511,
+          9.883e-06,
+          -0.983843684,
+          -95.0
+        ],
+        [
+          0.0,
+          32.0,
+          3.14e-07,
+          40.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "M08R1_WhiteCard_Right": [
+        [
+          13.77381134,
+          1.686e-06,
+          -0.179029584,
+          58.0
+        ],
+        [
+          -2.506414175,
+          9.265e-06,
+          -0.983843684,
+          -88.0
+        ],
+        [
+          0.0,
+          30.0,
+          3.14e-07,
+          34.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ]
+    },
+    "reflectionCardsAfter": {
+      "M08R1_BlackCard_NegativeFill": [
+        [
+          16.0,
+          0.0,
+          0.0,
+          44.0
+        ],
+        [
+          0.0,
+          1.0045e-05,
+          -1.0,
+          -148.0
+        ],
+        [
+          0.0,
+          32.0,
+          3.14e-07,
+          44.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "M08R1_WhiteCard_Camera": [
+        [
+          34.0,
+          0.0,
+          0.0,
+          -18.0
+        ],
+        [
+          0.0,
+          1.1929e-05,
+          -1.0,
+          -180.0
+        ],
+        [
+          0.0,
+          38.0,
+          3.14e-07,
+          46.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "M08R1_WhiteCard_Left": [
+        [
+          17.709186554,
+          -1.798e-06,
+          0.179029584,
+          -52.0
+        ],
+        [
+          3.222532511,
+          9.883e-06,
+          -0.983843684,
+          -95.0
+        ],
+        [
+          0.0,
+          32.0,
+          3.14e-07,
+          40.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "M08R1_WhiteCard_Right": [
+        [
+          13.77381134,
+          1.686e-06,
+          -0.179029584,
+          58.0
+        ],
+        [
+          -2.506414175,
+          9.265e-06,
+          -0.983843684,
+          -88.0
+        ],
+        [
+          0.0,
+          30.0,
+          3.14e-07,
+          34.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ]
+    },
+    "reflectionCardsUnchanged": true,
+    "shippingWorldHashBefore": "15b98a2bf78c2fe8cf78cb92cf80a921a1ca7d1627d6b160da4b5e33f2c43b5d",
+    "shippingWorldHashAfter": "15b98a2bf78c2fe8cf78cb92cf80a921a1ca7d1627d6b160da4b5e33f2c43b5d",
+    "shippingWorldUnchanged": true,
+    "shippingGroundHash": "a03a1d6dd1660174661c1c2d4c776b3c56e53abee22405c2964fe1fbf2585319",
+    "shippingEmissionStrengths": {
+      "M07R7_DaylightNeutralPolishedSilver": 0.0,
+      "M07R7_BloodRedCrystal_WideBorder_Upper": 0.0,
+      "M07R7_BloodRedCrystal_WideBorder_Lower": 0.0
+    },
+    "shippingEmissionZero": true,
+    "artwork": {
+      "upper": {
+        "filepath": "unity/FidgetingApp/ArtSource/ModelPipeline/magnetic-slide-tile/evidence/07-material/rev-007/artwork-upper-mask.png",
+        "sha256": "8250df70d2286849db353862283b0d3db9c66e1ac92bed3795bcb5377a431c36",
+        "nodeGroup": "Artwork_Upper"
+      },
+      "lower": {
+        "filepath": "unity/FidgetingApp/ArtSource/ModelPipeline/magnetic-slide-tile/evidence/07-material/rev-007/artwork-lower-mask.png",
+        "sha256": "8250df70d2286849db353862283b0d3db9c66e1ac92bed3795bcb5377a431c36",
+        "nodeGroup": "Artwork_Lower"
+      }
+    },
+    "independentArtworkSlots": true,
+    "hiddenEnvelope": {
+      "type": "EMPTY",
+      "hideRender": true,
+      "geometry": "none"
+    }
+  },
+  "comparison": {
+    "neutralShippingCamera": {
+      "name": "M09R2_OpenHeroCamera",
+      "matrixWorld": [
+        [
+          0.872777283,
+          -0.178387344,
+          0.454354197,
+          92.0
+        ],
+        [
+          0.488118619,
+          0.318964243,
+          -0.812405109,
+          -154.0
+        ],
+        [
+          3.7e-08,
+          0.930827439,
+          0.365458935,
+          76.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "lensMm": 78.0,
+      "sensorWidthMm": 36.0
+    },
+    "neutralShippingPose": {
+      "travelMm": 21.0,
+      "rotationDegrees": 0.0
+    },
+    "neutralWorld": {
+      "linearRgb": [
+        0.24,
+        0.24,
+        0.24
+      ],
+      "strength": 0.85,
+      "groundMaterial": "M09R2_NeutralControlGround"
+    },
+    "shippingWorld": {
+      "world": {
+        "authority": [
+          "FDB-SCN-001 top-down low-saturation adaptive field",
+          "FDB-SCN-002 ground, lighting, IBL, and shadow share one space",
+          "MeshyEDC.unity camera background 0.012/0.016/0.023"
+        ],
+        "type": "procedural-directional-skybox-preview",
+        "hdri": null,
+        "strength": 0.85,
+        "verticalStops": [
+          {
+            "position": 0.0,
+            "linearRgb": [
+              0.008,
+              0.012,
+              0.018
+            ]
+          },
+          {
+            "position": 0.46,
+            "linearRgb": [
+              0.022,
+              0.03,
+              0.039
+            ]
+          },
+          {
+            "position": 0.76,
+            "linearRgb": [
+              0.34,
+              0.36,
+              0.37
+            ]
+          },
+          {
+            "position": 1.0,
+            "linearRgb": [
+              0.085,
+              0.1,
+              0.108
+            ]
+          }
+        ],
+        "staticFineGrain": {
+          "strength": 0.012,
+          "scale": 120.0,
+          "detail": 2.0,
+          "animated": false
+        },
+        "reflectionContent": "Directional top field, neutral horizon, dark lower hemisphere, and static fine grain are visible to the polished silver through Blender world reflections.",
+        "unityClaim": "Blender preview only; no Unity skybox or Reflection Probe integration."
+      },
+      "ground": {
+        "material": "M09R1_ShippingAdaptiveGround",
+        "baseColor": [
+          0.018,
+          0.024,
+          0.032,
+          1.0
+        ],
+        "roughness": 0.48
+      },
+      "reflectionCards": {
+        "M08R1_BlackCard_NegativeFill": {
+          "matrixWorld": [
+            [
+              16.0,
+              0.0,
+              0.0,
+              44.0
+            ],
+            [
+              0.0,
+              1.0045e-05,
+              -1.0,
+              -148.0
+            ],
+            [
+              0.0,
+              32.0,
+              3.14e-07,
+              44.0
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ]
+          ],
+          "cameraVisible": false,
+          "renderVisible": true,
+          "material": "M08R1_BlackCard_NegativeFill_Material"
+        },
+        "M08R1_WhiteCard_Camera": {
+          "matrixWorld": [
+            [
+              34.0,
+              0.0,
+              0.0,
+              -18.0
+            ],
+            [
+              0.0,
+              1.1929e-05,
+              -1.0,
+              -180.0
+            ],
+            [
+              0.0,
+              38.0,
+              3.14e-07,
+              46.0
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ]
+          ],
+          "cameraVisible": false,
+          "renderVisible": true,
+          "material": "M08R1_WhiteCard_Camera_Material"
+        },
+        "M08R1_WhiteCard_Left": {
+          "matrixWorld": [
+            [
+              17.709186554,
+              -1.798e-06,
+              0.179029584,
+              -52.0
+            ],
+            [
+              3.222532511,
+              9.883e-06,
+              -0.983843684,
+              -95.0
+            ],
+            [
+              0.0,
+              32.0,
+              3.14e-07,
+              40.0
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ]
+          ],
+          "cameraVisible": false,
+          "renderVisible": true,
+          "material": "M08R1_WhiteCard_Left_Material"
+        },
+        "M08R1_WhiteCard_Right": {
+          "matrixWorld": [
+            [
+              13.77381134,
+              1.686e-06,
+              -0.179029584,
+              58.0
+            ],
+            [
+              -2.506414175,
+              9.265e-06,
+              -0.983843684,
+              -88.0
+            ],
+            [
+              0.0,
+              30.0,
+              3.14e-07,
+              34.0
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ]
+          ],
+          "cameraVisible": false,
+          "renderVisible": true,
+          "material": "M08R1_WhiteCard_Right_Material"
+        }
+      },
+      "outputs": {
+        "matchedCamera": "shipping-environment.png",
+        "sideReflection": "shipping-side-reflection.png"
+      },
+      "classification": "Blender preview of the canonical adaptive shipping environment; not Unity integration."
+    },
+    "sameLightRig": true,
+    "sameExposureEv": 0.0,
+    "sameWhiteBalanceKelvin": 6504,
+    "sameWhiteBalanceTint": 10
+  },
+  "cameras": {
+    "M09R2_OpenHeroCamera": {
+      "name": "M09R2_OpenHeroCamera",
+      "matrixWorld": [
+        [
+          0.872777283,
+          -0.178387344,
+          0.454354197,
+          92.0
+        ],
+        [
+          0.488118619,
+          0.318964243,
+          -0.812405109,
+          -154.0
+        ],
+        [
+          3.7e-08,
+          0.930827439,
+          0.365458935,
+          76.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "lensMm": 78.0,
+      "sensorWidthMm": 36.0
+    },
+    "M09R2_OpenObliqueCamera": {
+      "name": "M09R2_OpenObliqueCamera",
+      "matrixWorld": [
+        [
+          0.786222696,
+          0.21143876,
+          -0.580644071,
+          -112.0
+        ],
+        [
+          -0.617943287,
+          0.269018143,
+          -0.738766074,
+          -132.0
+        ],
+        [
+          5e-09,
+          0.939639747,
+          0.342165321,
+          68.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "lensMm": 76.0,
+      "sensorWidthMm": 36.0
+    },
+    "M09R2_OpenTopCamera": {
+      "name": "M09R2_OpenTopCamera",
+      "matrixWorld": [
+        [
+          0.738028765,
+          -0.63390708,
+          0.2312475,
+          48.0
+        ],
+        [
+          0.674769282,
+          0.693335712,
+          -0.252926856,
+          -42.0
+        ],
+        [
+          -3.3e-08,
+          0.342705995,
+          0.939442694,
+          195.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "lensMm": 76.0,
+      "sensorWidthMm": 36.0
+    },
+    "M09R2_OpenLayerCamera": {
+      "name": "M09R2_OpenLayerCamera",
+      "matrixWorld": [
+        [
+          0.812595904,
+          -0.136539325,
+          0.56660825,
+          104.0
+        ],
+        [
+          0.582827508,
+          0.190367267,
+          -0.789982557,
+          -138.0
+        ],
+        [
+          2.3e-08,
+          0.972171426,
+          0.234270528,
+          43.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "lensMm": 86.0,
+      "sensorWidthMm": 36.0
+    }
+  },
+  "outputs": {
+    "neutralOpenHero": "open-neutral-hero.png",
+    "shippingOpenHero": "open-shipping-hero.png",
+    "shippingOpenOblique": "open-shipping-oblique.png",
+    "shippingOpenTop": "open-shipping-top.png",
+    "neutralLayerCloseup": "open-neutral-layer-closeup.png",
+    "shippingLayerCloseup": "open-shipping-layer-closeup.png",
+    "sequence": [
+      "sequence-00-00mm.png",
+      "sequence-01-07mm.png",
+      "sequence-02-14mm.png",
+      "sequence-03-21mm.png"
+    ]
+  },
+  "scope": {
+    "gate10Entered": false,
+    "exportPerformed": false,
+    "geometryChanged": false,
+    "lodCreated": false,
+    "unityChanged": false,
+    "runtimeOrHapticsChanged": false,
+    "buildInstallOrPhonePush": false
+  },
+  "checks": {
+    "sourceRevisionImmutable": true,
+    "exactOpenTravel": true,
+    "zeroRotation": true,
+    "fixedLowerMatrix": true,
+    "geometryUnchanged": true,
+    "materialsUnchanged": true,
+    "approvedLightingUnchanged": true,
+    "approvedEnvironmentUnchanged": true,
+    "reflectionCardsUnchanged": true,
+    "independentArtworkSlots": true,
+    "mechanismConcealed": true,
+    "shippingEmissionZero": true,
+    "sequenceEndsAtExactOpenPose": true,
+    "requiredOutputs": true,
+    "gate09Only": true
+  },
+  "pass": true
+}

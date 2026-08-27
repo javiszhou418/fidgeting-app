@@ -1,0 +1,96 @@
+{
+  "schemaVersion": 1,
+  "gate": "11-unity-parity",
+  "revision": 4,
+  "decisionState": "ready_for_review",
+  "deliveryState": "not_integrated",
+  "visualApproval": "pending",
+  "shippingSceneDefault": "unchanged",
+  "buildInstallPhone": "not_started",
+  "checks": {
+    "geometrySilhouetteIou": 0.986,
+    "geometryEdgeF1": 1.0,
+    "geometryEdgeTolerancePixels": 5,
+    "materialSilhouetteIou": 0.9869,
+    "objectSsim": 0.719,
+    "objectMedianDeltaE76": 46.11,
+    "bloodRed": {
+      "blenderMedianRgb": [
+        124.0,
+        71.0,
+        73.0
+      ],
+      "unityMedianRgb": [
+        109.0,
+        55.0,
+        57.0
+      ],
+      "deltaE76": 16.06
+    },
+    "silver": {
+      "blenderMedianRgb": [
+        66.0,
+        65.0,
+        65.0
+      ],
+      "unityMedianRgb": [
+        90.0,
+        89.0,
+        86.0
+      ],
+      "blenderLumaStd": 31.16,
+      "unityLumaStd": 19.52,
+      "gradientRatio": 0.627
+    },
+    "crystalViewResponse": {
+      "neutralMedianRgb": [
+        109.0,
+        55.0,
+        57.0
+      ],
+      "angleMedianRgb": [
+        108.0,
+        54.0,
+        56.0
+      ],
+      "deltaE76": 1.0
+    },
+    "clippedObjectPixels": 0,
+    "emission": false,
+    "cameraRecipeIdentical": true,
+    "toneMapping": "Neutral calibrated to Blender AgX target",
+    "postExposureEv": 0.0,
+    "motifRChannelByteIdentical": true,
+    "borderWidthPixels": {
+      "rejectedRev3": 64,
+      "reviewRev4": 42
+    },
+    "pass": true
+  },
+  "artifacts": [
+    {
+      "path": "unity/FidgetingApp/ArtSource/ModelPipeline/magnetic-slide-tile/evidence/11-unity-parity/rev-004/gate11-rev4-difference-heatmap.png",
+      "sha256": "f18111863811a23682a26d1c6ae08672c35b718da449f7567dbf0db423236cdb"
+    },
+    {
+      "path": "unity/FidgetingApp/ArtSource/ModelPipeline/magnetic-slide-tile/evidence/11-unity-parity/rev-004/gate11-rev4-geometry-board.png",
+      "sha256": "ea91bd476ce864f6d58a64c0ddb2bd34941ecdbfeb05e2bb48c7960ce16bc4af"
+    },
+    {
+      "path": "unity/FidgetingApp/ArtSource/ModelPipeline/magnetic-slide-tile/evidence/11-unity-parity/rev-004/gate11-rev4-artwork-board.png",
+      "sha256": "ac68404706cbeefcdc088e711af1f81036180d553a7c5fcba7c09a63eefdd282"
+    },
+    {
+      "path": "unity/FidgetingApp/ArtSource/ModelPipeline/magnetic-slide-tile/evidence/11-unity-parity/rev-004/gate11-rev4-material-board.png",
+      "sha256": "75abf0abab277decc1be92b5e930b48c0a91dacee373d474854c6d31bcd6e33d"
+    },
+    {
+      "path": "unity/FidgetingApp/ArtSource/ModelPipeline/magnetic-slide-tile/evidence/11-unity-parity/rev-004/gate11-rev4-final-board.png",
+      "sha256": "abfa3b98581affcfe6b286d4df6c2e00ae8f1a5715e080a2dfd2f76a8e9d0510"
+    },
+    {
+      "path": "unity/FidgetingApp/ArtSource/ModelPipeline/magnetic-slide-tile/evidence/11-unity-parity/rev-004/gate11-rev4-review.png",
+      "sha256": "32bdc22d8f26c117b3b80d8e31b47ea02190597f5b76e1218e9f6a145ddbecfa"
+    }
+  ]
+}

@@ -1,0 +1,57 @@
+{
+  "schemaVersion": 1,
+  "modelId": "magnetic-slide-tile",
+  "gate": "11-unity-parity",
+  "revision": 1,
+  "output": "blender-neutral.png",
+  "silhouetteOutput": "blender-neutral-silhouette.png",
+  "resolution": [
+    1600,
+    900
+  ],
+  "camera": {
+    "blenderPositionMm": [
+      72.0,
+      -92.0,
+      46.0
+    ],
+    "blenderLookAtMm": [
+      0.0,
+      -2.0,
+      0.0
+    ],
+    "unityPositionMeters": [
+      -0.072,
+      0.046,
+      0.092
+    ],
+    "unityLookAtMeters": [
+      0.0,
+      0.0,
+      0.002
+    ],
+    "lensMm": 68.0,
+    "sensorWidthMm": 36.0,
+    "verticalFovDegrees": 16.937905,
+    "nearMeters": 0.01,
+    "farMeters": 2.0
+  },
+  "renderMeshes": [
+    "LowerBody_Fixed_CleanPlane",
+    "UpperCapsule_Moving"
+  ],
+  "materials": {
+    "LowerBody_Fixed_CleanPlane": [
+      "M07R7_DaylightNeutralPolishedSilver",
+      "M07R7_BloodRedCrystal_WideBorder_Lower"
+    ],
+    "UpperCapsule_Moving": [
+      "M07R7_DaylightNeutralPolishedSilver",
+      "M07R7_BloodRedCrystal_WideBorder_Upper"
+    ]
+  },
+  "materialState": "approved Gate 07 rev 7 procedural Blender materials",
+  "emission": 0.0,
+  "shippingSceneModified": false,
+  "pass": true
+}

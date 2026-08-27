@@ -1,0 +1,55 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="1100" viewBox="0 0 1600 1100">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#081017"/><stop offset="1" stop-color="#111922"/></linearGradient>
+    <linearGradient id="metal" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#dce7eb"/><stop offset=".42" stop-color="#7d8b93"/><stop offset="1" stop-color="#edf6f8"/></linearGradient>
+    <linearGradient id="resin" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#6be7ef" stop-opacity=".82"/><stop offset=".55" stop-color="#8669e8" stop-opacity=".74"/><stop offset="1" stop-color="#ed77be" stop-opacity=".72"/></linearGradient>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="9" markerHeight="9" orient="auto-start-reverse"><path d="M0 0L10 5L0 10Z" fill="#6fe7ed"/></marker>
+    <clipPath id="photoClip"><rect x="70" y="190" width="520" height="790" rx="28"/></clipPath>
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%"><feDropShadow dx="0" dy="12" stdDeviation="16" flood-color="#000" flood-opacity=".38"/></filter>
+    <style>
+      .sans{font-family:Inter,-apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei",sans-serif}.title{font-size:52px;font-weight:850;fill:#f4f8fa}.sub{font-size:22px;fill:#a5b2bd}.eyebrow{font-size:18px;font-weight:800;letter-spacing:.16em;fill:#6fe7ed}.node{fill:#111b24;stroke:#31414e;stroke-width:2}.node-main{fill:#13232b;stroke:#6fe7ed;stroke-width:3}.node-title{font-size:25px;font-weight:820;fill:#f4f8fa}.node-copy{font-size:18px;fill:#aebac4}.chip{font-size:16px;font-weight:760;fill:#091217}.callout{font-size:18px;font-weight:760;fill:#f4f8fa}.small{font-size:16px;fill:#97a5b0}.line{fill:none;stroke:#6fe7ed;stroke-width:4;marker-end:url(#arrow)}.tree{fill:none;stroke:#536878;stroke-width:3}
+    </style>
+  </defs>
+  <rect width="1600" height="1100" fill="url(#bg)"/>
+  <text x="70" y="76" class="sans eyebrow">GATE 04 · PART ARCHITECTURE</text>
+  <text x="70" y="140" class="sans title">磁吸推牌 · 零件树</text>
+  <text x="650" y="127" class="sans sub">只锁定可见结构和装配职责；隐藏磁体、钢板、滚珠数量保持未知</text>
+
+  <rect x="70" y="190" width="520" height="790" rx="28" fill="#05080b" stroke="#31414e" stroke-width="2" filter="url(#shadow)"/>
+  <image href="../../01-intake/rev-001/user-video-frames/frame-08.jpg" x="70" y="190" width="520" height="790" preserveAspectRatio="xMidYMid slice" clip-path="url(#photoClip)"/>
+  <rect x="89" y="214" width="148" height="42" rx="21" fill="#081117" stroke="#6fe7ed"/><text x="115" y="242" class="sans callout">你的实拍</text>
+  <path d="M225 480 C145 440 130 360 165 305" class="line"/>
+  <rect x="105" y="270" width="250" height="54" rx="14" fill="#071018" fill-opacity=".92" stroke="#6fe7ed"/><text x="132" y="305" class="sans callout">双工作通道</text>
+  <path d="M395 644 C525 615 535 570 525 520" class="line"/>
+  <rect x="310" y="655" width="245" height="54" rx="14" fill="#071018" fill-opacity=".92" stroke="#6fe7ed"/><text x="338" y="690" class="sans callout">上片金属承载件</text>
+  <path d="M310 840 C175 830 145 780 170 720" class="line"/>
+  <rect x="96" y="850" width="245" height="54" rx="14" fill="#071018" fill-opacity=".92" stroke="#6fe7ed"/><text x="123" y="885" class="sans callout">下片固定承载件</text>
+
+  <rect x="710" y="192" width="790" height="116" rx="24" class="node-main"/>
+  <text x="750" y="238" class="sans node-title">Assembly_Root · 50 × 31 × 12 mm</text>
+  <text x="750" y="276" class="sans node-copy">闭合中心为原点；下片固定，上片先沿 +Y 平移 21 mm，再允许端部约 90° 旋转</text>
+
+  <path d="M760 308V378H840" class="tree"/><path d="M760 378V620" class="tree"/><path d="M760 498H840" class="tree"/><path d="M760 620H840" class="tree"/>
+
+  <rect x="840" y="344" width="610" height="126" rx="22" class="node"/>
+  <rect x="870" y="368" width="188" height="34" rx="17" fill="url(#metal)"/><text x="898" y="391" class="sans chip">固定组件</text>
+  <text x="870" y="434" class="sans node-title">LowerBody_Fixed</text>
+  <text x="1140" y="397" class="sans node-copy">下片金属承载件</text><text x="1140" y="431" class="sans node-copy">背面装饰嵌片</text>
+
+  <rect x="840" y="492" width="610" height="126" rx="22" class="node"/>
+  <rect x="870" y="516" width="188" height="34" rx="17" fill="url(#resin)"/><text x="898" y="539" class="sans chip">运动组件</text>
+  <text x="870" y="582" class="sans node-title">UpperBody_Moving</text>
+  <text x="1140" y="545" class="sans node-copy">上片金属承载件</text><text x="1140" y="579" class="sans node-copy">正面装饰嵌片</text>
+
+  <rect x="840" y="640" width="610" height="144" rx="22" class="node"/>
+  <rect x="870" y="664" width="216" height="34" rx="17" fill="#6fe7ed"/><text x="898" y="687" class="sans chip">连接 / 导向</text>
+  <text x="870" y="742" class="sans node-title">Guide_Pivot_Interface</text>
+  <text x="1140" y="690" class="sans node-copy">两条可见工作通道</text><text x="1140" y="724" class="sans node-copy">端部旋转接口</text><text x="1140" y="758" class="sans node-copy">限位只做可见代理</text>
+
+  <rect x="710" y="832" width="790" height="148" rx="24" fill="#17161a" stroke="#d8a75e" stroke-width="2"/>
+  <text x="750" y="881" class="sans node-title" fill="#f0c681">VisibleHardware_Proxy</text>
+  <text x="750" y="923" class="sans node-copy">只建画面中能看见的珠状触点、槽和螺钉头；不声明其隐藏数量、极性、弹簧或孔深。</text>
+  <text x="750" y="955" class="sans small">这样 Gate 05 白模能验证外观与运动，又不会把猜测固化成错误工程结构。</text>
+
+  <text x="70" y="1045" class="sans small">批准本图后，Gate 05 的对象层级必须与该树一致；任何新增隐藏件都要回到本关建立新 revision。</text>
+</svg>

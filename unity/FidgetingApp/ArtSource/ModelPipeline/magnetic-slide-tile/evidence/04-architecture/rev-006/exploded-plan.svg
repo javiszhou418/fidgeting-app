@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="1100" viewBox="0 0 1600 1100">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#071017"/><stop offset="1" stop-color="#151925"/></linearGradient>
+    <linearGradient id="metal" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#f3f7f8"/><stop offset=".3" stop-color="#687983"/><stop offset=".64" stop-color="#dbe5e8"/><stop offset="1" stop-color="#758691"/></linearGradient>
+    <linearGradient id="face" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#70e8ee" stop-opacity=".86"/><stop offset=".52" stop-color="#786ee8" stop-opacity=".78"/><stop offset="1" stop-color="#ef79be" stop-opacity=".78"/></linearGradient>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0 0L10 5L0 10Z" fill="#70e8ee"/></marker>
+    <clipPath id="photoPush"><rect x="1195" y="205" width="335" height="300" rx="24"/></clipPath>
+    <clipPath id="photoSpin"><rect x="1195" y="548" width="335" height="300" rx="24"/></clipPath>
+    <style>
+      .sans{font-family:Inter,Arial,sans-serif}.eye{font-size:18px;font-weight:800;letter-spacing:.15em;fill:#70e8ee}.title{font-size:50px;font-weight:850;fill:#f4f8fa}.sub{font-size:20px;fill:#aab6bf}.h2{font-size:25px;font-weight:850;fill:#f4f8fa}.body{font-size:18px;fill:#acb8c1}.small{font-size:15px;fill:#93a3ad}.label{font-size:17px;font-weight:800;fill:#f4f8fa}.leader{fill:none;stroke:#70e8ee;stroke-width:4;marker-end:url(#arrow)}.dash{fill:none;stroke:#657985;stroke-width:3;stroke-dasharray:11 9}
+    </style>
+  </defs>
+  <rect width="1600" height="1100" fill="url(#bg)"/>
+  <text x="65" y="70" class="sans eye">GATE 04 / SOURCE-LINKED EXPLODED PLAN / REV 06</text>
+  <text x="65" y="134" class="sans title">Two shells + visible modules / parallel modes</text>
+  <text x="65" y="173" class="sans sub">Architecture responsibility plan, not a teardown claim. Straight push and free spin are supported separately.</text>
+
+  <rect x="65" y="205" width="1080" height="643" rx="30" fill="#0a1219" stroke="#344752" stroke-width="2"/>
+  <rect x="95" y="229" width="430" height="50" rx="18" fill="#11232b" stroke="#70e8ee"/>
+  <text x="122" y="261" class="sans label">PROVISIONAL ENVELOPE / 50 x 31 x 12 mm</text>
+
+  <g transform="translate(315 300)">
+    <rect width="560" height="194" rx="94" fill="url(#metal)" stroke="#e0eaed" stroke-width="3"/>
+    <rect x="31" y="25" width="498" height="144" rx="70" fill="#17232b"/>
+    <rect x="76" y="48" width="408" height="98" rx="47" fill="url(#face)" opacity=".74"/>
+    <path d="M188 41V153M372 41V153" stroke="#70e8ee" stroke-width="16" stroke-linecap="round"/>
+    <circle cx="188" cy="62" r="9" fill="#f4f8fa"/><circle cx="188" cy="132" r="9" fill="#f4f8fa"/><circle cx="372" cy="62" r="9" fill="#f4f8fa"/><circle cx="372" cy="132" r="9" fill="#f4f8fa"/>
+    <text x="135" y="-27" class="sans h2">01 / UpperShell_Moving</text>
+    <text x="125" y="225" class="sans small">Visible linear module; count, section, and hole depth unknown</text>
+  </g>
+
+  <path d="M595 532V592" class="dash"/>
+  <text x="622" y="568" class="sans small">Assembly interface and exact coupling remain unknown</text>
+
+  <g transform="translate(315 626)">
+    <rect width="560" height="194" rx="94" fill="url(#metal)" stroke="#e0eaed" stroke-width="3"/>
+    <rect x="31" y="25" width="498" height="144" rx="70" fill="#17232b"/>
+    <path d="M312 45A58 58 0 1 1 258 68" fill="none" stroke="#70e8ee" stroke-width="17" stroke-linecap="round"/>
+    <circle cx="258" cy="68" r="9" fill="#f4f8fa"/><circle cx="312" cy="45" r="9" fill="#f4f8fa"/><circle cx="280" cy="97" r="22" fill="#0c141a" stroke="#dce7ea" stroke-width="5"/>
+    <path d="M182 52V142M378 52V142" stroke="#526975" stroke-width="11" stroke-linecap="round"/>
+    <text x="150" y="-27" class="sans h2">02 / LowerShell_Fixed</text>
+    <text x="77" y="225" class="sans small">Circular track + central region + spring/ball modules; ownership unknown</text>
+  </g>
+
+  <rect x="95" y="330" width="190" height="102" rx="20" fill="#111c24" stroke="#344752" stroke-width="2"/>
+  <text x="120" y="367" class="sans label">EXTERIOR SHELL 01</text><text x="120" y="400" class="sans small">Moving carrier</text><path d="M285 383H348" class="leader"/>
+  <rect x="95" y="654" width="190" height="102" rx="20" fill="#111c24" stroke="#344752" stroke-width="2"/>
+  <text x="120" y="691" class="sans label">EXTERIOR SHELL 02</text><text x="120" y="724" class="sans small">Fixed carrier</text><path d="M285 707H348" class="leader"/>
+  <rect x="909" y="329" width="204" height="126" rx="20" fill="#19171a" stroke="#d8a75e" stroke-width="2"/>
+  <text x="934" y="367" class="sans label">NOT EXTRA SHELLS</text><text x="934" y="400" class="sans small">Tracks, spring, balls,</text><text x="934" y="426" class="sans small">and surface zones</text><path d="M909 406L846 441" class="leader"/>
+
+  <rect x="1195" y="205" width="335" height="300" rx="24" fill="#05080b" stroke="#344752" stroke-width="2"/>
+  <image href="../../01-intake/rev-002/haloo-official/08.png" x="1195" y="205" width="335" height="300" preserveAspectRatio="xMidYMid slice" clip-path="url(#photoPush)"/>
+  <rect x="1213" y="223" width="220" height="42" rx="21" fill="#071018" stroke="#70e8ee"/><text x="1236" y="251" class="sans label">MODE A / PUSH</text>
+  <rect x="1213" y="442" width="286" height="44" rx="14" fill="#071018" fill-opacity=".92"/><text x="1234" y="470" class="sans small">S 21 mm = provisional travel</text>
+
+  <rect x="1195" y="548" width="335" height="300" rx="24" fill="#05080b" stroke="#344752" stroke-width="2"/>
+  <image href="../../01-intake/rev-002/haloo-official/06.png" x="1195" y="548" width="335" height="300" preserveAspectRatio="xMidYMid slice" clip-path="url(#photoSpin)"/>
+  <rect x="1213" y="566" width="245" height="42" rx="21" fill="#071018" stroke="#70e8ee"/><text x="1236" y="594" class="sans label">MODE B / FREE SPIN</text>
+  <rect x="1213" y="785" width="286" height="44" rx="14" fill="#071018" fill-opacity=".92"/><text x="1234" y="813" class="sans small">Continuous; no angle cap asserted</text>
+
+  <rect x="65" y="886" width="1465" height="135" rx="25" fill="#101a22" stroke="#344752" stroke-width="2"/>
+  <text x="95" y="924" class="sans label">PARALLEL SUPPORT / NOT A SEQUENTIAL UNLOCK</text>
+  <rect x="95" y="947" width="355" height="46" rx="23" fill="#173039" stroke="#70e8ee"/><text x="132" y="977" class="sans body">A / Straight push / S 21 mm provisional</text>
+  <text x="489" y="977" class="sans h2">+</text>
+  <rect x="535" y="947" width="355" height="46" rx="23" fill="#27223a" stroke="#8d83f1"/><text x="573" y="977" class="sans body">B / Free spin / no degree-limit claim</text>
+  <rect x="930" y="934" width="565" height="70" rx="18" fill="#171417" stroke="#d8a75e"/>
+  <text x="956" y="962" class="sans small">Excluded: end-stop unlock / 90-degree cap / five-layer shell</text>
+  <text x="956" y="988" class="sans small">Unknown: coupling, counts, tolerances, hole depths, interfaces</text>
+  <text x="65" y="1064" class="sans small">Sources: approved Gate 03 contract rev 7 + HALOOPLAYER official assets 06 and 08. The images prove modes, not switching sequence.</text>
+</svg>

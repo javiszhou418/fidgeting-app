@@ -1,0 +1,150 @@
+{
+  "schemaVersion": 1,
+  "modelId": "magnetic-slide-tile",
+  "gate": "09-environment",
+  "environmentRevision": 2,
+  "metrics": {
+    "shippingHero": {
+      "silver": {
+        "silverBody": {
+          "samples": 87563,
+          "medianLStar": 60.392157,
+          "medianAStar": -1.0,
+          "medianBStar": 0.0,
+          "medianCStar": 1.0
+        },
+        "brightReflection": {
+          "samples": 1037,
+          "medianLStar": 84.313725,
+          "medianAStar": 0.0,
+          "medianBStar": 0.0,
+          "medianCStar": 0.0
+        },
+        "clipAbove250Fraction": 6.615e-05
+      },
+      "bloodRed": {
+        "selectedPixels": 74071,
+        "signedHueMedianDegrees": -7.5,
+        "pinkFraction": 0.0,
+        "bloodRedFraction": 1.0
+      }
+    },
+    "shippingOblique": {
+      "silver": {
+        "silverBody": {
+          "samples": 71760,
+          "medianLStar": 59.607843,
+          "medianAStar": -1.0,
+          "medianBStar": 0.0,
+          "medianCStar": 1.0
+        },
+        "brightReflection": {
+          "samples": 1428,
+          "medianLStar": 85.490196,
+          "medianAStar": 0.0,
+          "medianBStar": 1.0,
+          "medianCStar": 1.0
+        },
+        "clipAbove250Fraction": 3.021e-05
+      },
+      "bloodRed": {
+        "selectedPixels": 71416,
+        "signedHueMedianDegrees": -7.619048,
+        "pinkFraction": 0.0,
+        "bloodRedFraction": 1.0
+      }
+    },
+    "shippingTop": {
+      "bloodRed": {
+        "selectedPixels": 153747,
+        "signedHueMedianDegrees": -6.233766,
+        "pinkFraction": 0.0,
+        "bloodRedFraction": 1.0
+      },
+      "lowerArtwork": {
+        "roiPx": [
+          150,
+          550,
+          850,
+          1300
+        ],
+        "redArtworkPixels": 91714,
+        "redMedianLuma": 27.0,
+        "darkMedianLuma": 17.0,
+        "contrastRatio": 1.58651,
+        "laplacianVariance": 221.645291,
+        "cannyEdgePixels": 24264
+      },
+      "clipAbove250Fraction": 0.0
+    },
+    "shippingLayer": {
+      "silver": {
+        "silverBody": {
+          "samples": 6014,
+          "medianLStar": 60.784314,
+          "medianAStar": -1.0,
+          "medianBStar": 0.0,
+          "medianCStar": 1.0
+        },
+        "brightReflection": {
+          "samples": 1631,
+          "medianLStar": 86.27451,
+          "medianAStar": 0.0,
+          "medianBStar": 1.0,
+          "medianCStar": 1.0
+        },
+        "clipAbove250Fraction": 0.00013239
+      },
+      "bloodRed": {
+        "selectedPixels": 59161,
+        "signedHueMedianDegrees": -9.677419,
+        "pinkFraction": 0.0,
+        "bloodRedFraction": 1.0
+      }
+    }
+  },
+  "sequence": {
+    "closedRedArtworkPixels": 31999,
+    "openRedArtworkPixels": 41984,
+    "openToClosedArtworkRatio": 1.312041
+  },
+  "differences": {
+    "neutralShippingOpenHero": {
+      "meanAbsoluteChannelDelta": 36.546788,
+      "p90AbsoluteChannelDelta": 48.0,
+      "fractionPixelsMaxDeltaAbove12": 0.98495469,
+      "maxChannelDelta": 116
+    },
+    "neutralShippingLayer": {
+      "meanAbsoluteChannelDelta": 42.678767,
+      "p90AbsoluteChannelDelta": 60.0,
+      "fractionPixelsMaxDeltaAbove12": 0.9367517,
+      "maxChannelDelta": 118
+    },
+    "closedToOpen": {
+      "meanAbsoluteChannelDelta": 8.677656,
+      "p90AbsoluteChannelDelta": 8.0,
+      "fractionPixelsMaxDeltaAbove12": 0.12108796,
+      "maxChannelDelta": 254
+    }
+  },
+  "checks": {
+    "sceneValidationPasses": true,
+    "exactOpenPose": true,
+    "sameCameraNeutralShipping": true,
+    "lowerPatternVisible": true,
+    "openShowsMoreArtworkThanClosed": true,
+    "silverNeutral": true,
+    "silverReflectionsBright": true,
+    "bloodRedNoPink": true,
+    "clippingControlled": true,
+    "environmentReflectionVisible": true,
+    "openDifferenceVisible": true,
+    "artworkSlotsIndependent": true,
+    "mechanismNotExposed": true,
+    "shippingEmissionZero": true,
+    "geometryMaterialLightEnvironmentPreserved": true,
+    "gate09Only": true
+  },
+  "pass": true
+}

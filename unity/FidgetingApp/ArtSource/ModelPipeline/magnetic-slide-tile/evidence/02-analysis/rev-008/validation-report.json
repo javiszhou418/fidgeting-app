@@ -1,0 +1,69 @@
+{
+  "modelId": "magnetic-slide-tile",
+  "gate": "02-analysis",
+  "revision": 8,
+  "contract": {
+    "path": "unity/FidgetingApp/ArtSource/ModelPipeline/magnetic-slide-tile/evidence/02-analysis/rev-008/mechanism-evidence-contract.json",
+    "sha256": "3b3f494805b2241f865bfdad5ec32a64ea95d03165714b55a272d81f0c1437a2",
+    "sourceAssets": 131,
+    "constraints": 15,
+    "coverageRows": 13,
+    "schema": "pass",
+    "sourceLinks": "pass",
+    "frameAndPtsRegions": "pass",
+    "downstreamHashPolicy": "pass",
+    "duplicateDefaults": "pass"
+  },
+  "tests": {
+    "fullNode": {
+      "passed": 53,
+      "failed": 0
+    },
+    "contractFocused": {
+      "passed": 7,
+      "failed": 0
+    },
+    "mechanismCore": {
+      "passed": 20,
+      "failed": 0
+    },
+    "browser": {
+      "desktop": "pass",
+      "mobile390x844": "pass",
+      "referenceCards": 53,
+      "cardsWithAppliedTo": 53,
+      "modalReturn": "pass",
+      "videoPlayback": "720x1280 / 14.214s / error=null",
+      "runtimeExceptions": 0,
+      "loadingFailures": 0,
+      "horizontalOverflowPx": 0
+    },
+    "pipelineValidators": {
+      "errors": 0,
+      "missingFiles": 0,
+      "unhashedAssets": 0
+    },
+    "syntax": {
+      "appJs": "pass",
+      "mechanismCore": "pass",
+      "builder": "pass",
+      "registrar": "pass"
+    },
+    "xml": "not-applicable-no-xml-changed"
+  },
+  "preview": {
+    "path": "unity/FidgetingApp/ArtSource/ModelPipeline/magnetic-slide-tile/evidence/02-analysis/rev-008/workbench-browser.png",
+    "width": 1440,
+    "height": 9782
+  },
+  "pipelineStatus": {
+    "manifestRevisionAtValidation": 125,
+    "gate01": "approved",
+    "gate02": "ready_for_review",
+    "gates03To11": "stale",
+    "gate12": "blocked/rejected",
+    "approved": "1/12",
+    "cadLocked": true,
+    "blenderUnityBuildInstallPhone": "not-started"
+  }
+}

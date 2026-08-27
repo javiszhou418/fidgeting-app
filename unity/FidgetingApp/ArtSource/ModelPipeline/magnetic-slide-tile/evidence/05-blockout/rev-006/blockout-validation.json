@@ -1,0 +1,430 @@
+{
+  "schemaVersion": 3,
+  "modelId": "magnetic-slide-tile",
+  "gate": "05-blockout",
+  "revision": 6,
+  "contractSha256": "5aee71817c2c033ed92b770126ba0ecb6d79c2f032d786743b214b79078a47ea",
+  "partialApproval": {
+    "accepted": "Gate 05 rev 5 hierarchy and kinematics",
+    "rejected": "recessed/concave BottomExterior top surface",
+    "supersedesRevision": 5
+  },
+  "dimensionsMm": {
+    "overallLength": 50,
+    "overallWidth": 31,
+    "totalClosedThickness": 12,
+    "topThickness": 5.875,
+    "bottomThickness": 5.875,
+    "bottomTopPlaneZ": 5.875,
+    "axisBossModuleDepth": 2,
+    "axisBossExposedProtrusion": 0.2,
+    "maxTravel": 18.076433121019107,
+    "state": "user-authorized-provisional-not-production-measured"
+  },
+  "flatPlaneMetrics": {
+    "sampleCount": 1218,
+    "stepMm": 1.0,
+    "toleranceMm": 0.001,
+    "maximumDeviationMm": 0.0,
+    "minimumZMm": 5.875,
+    "maximumZMm": 5.875,
+    "minimumNormalZ": 0.9999999403953552,
+    "topFacingPolygonCount": 1,
+    "topFacingVertexCount": 513,
+    "minimumTopFacingVertexZMm": 5.875,
+    "maximumTopFacingVertexZMm": 5.875,
+    "definedTopPlaneZMm": 5.875
+  },
+  "carrierPacking": {
+    "maximumWorldZMm": 5.825000286102295,
+    "topPlaneZMm": 5.875,
+    "clearanceBelowPlaneMm": 0.04999971389770508,
+    "exteriorVisible": false
+  },
+  "hierarchy": [
+    "BottomExterior",
+    "FixedAxisBoss",
+    "MinimumOverlapDisk",
+    "RotatingCarrier",
+    "CarrierFollowerLeft",
+    "CarrierFollowerRight",
+    "BallCandidateLeft",
+    "BallCandidateRight",
+    "MovingTop",
+    "TopOuterGrooveLeft",
+    "TopInnerGrooveLeft",
+    "TopInnerGrooveRight",
+    "TopOuterGrooveRight",
+    "UnknownSprings",
+    "UnknownPreload"
+  ],
+  "poses": [
+    {
+      "id": "closed",
+      "travelMm": 0.0,
+      "angleDeg": 0.0,
+      "axisDriftMm": 0.0,
+      "movingTopMatrixWorld": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          -9.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "topSlideMatrixLocal": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "topZMinMm": 6.125,
+      "bottomTopPlaneZMm": 5.875
+    },
+    {
+      "id": "max-open",
+      "travelMm": 18.076433121019107,
+      "angleDeg": 0.0,
+      "axisDriftMm": 0.0,
+      "movingTopMatrixWorld": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          -9.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "topSlideMatrixLocal": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          -18.076433182
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "topZMinMm": 6.125,
+      "bottomTopPlaneZMm": 5.875
+    },
+    {
+      "id": "detent-01",
+      "travelMm": 8.134394904458599,
+      "angleDeg": 12.0,
+      "axisDriftMm": 0.0,
+      "movingTopMatrixWorld": [
+        [
+          0.978147626,
+          -0.2079117,
+          0.0,
+          0.0
+        ],
+        [
+          0.2079117,
+          0.978147626,
+          0.0,
+          -9.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "topSlideMatrixLocal": [
+        [
+          0.99999994,
+          0.0,
+          0.0,
+          2.38e-07
+        ],
+        [
+          0.0,
+          0.99999994,
+          0.0,
+          -8.134393692
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "topZMinMm": 6.125,
+      "bottomTopPlaneZMm": 5.875
+    },
+    {
+      "id": "detent-03",
+      "travelMm": 12.653503184713374,
+      "angleDeg": 36.0,
+      "axisDriftMm": 0.0,
+      "movingTopMatrixWorld": [
+        [
+          0.809017003,
+          -0.587785244,
+          0.0,
+          0.0
+        ],
+        [
+          0.587785244,
+          0.809017003,
+          0.0,
+          -9.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "topSlideMatrixLocal": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          -4.77e-07
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          -12.653505325
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "topZMinMm": 6.125,
+      "bottomTopPlaneZMm": 5.875
+    }
+  ],
+  "meshAudit": {
+    "BottomExterior": {
+      "vertices": 9234,
+      "polygons": 8723,
+      "triangles": 18464,
+      "nonmanifoldEdges": 0,
+      "signedVolumeMm3": 7882.4714627384865,
+      "meshValidationChanged": false
+    },
+    "MovingTopBody": {
+      "vertices": 13346,
+      "polygons": 10783,
+      "triangles": 26688,
+      "nonmanifoldEdges": 0,
+      "signedVolumeMm3": 7664.462005307273,
+      "meshValidationChanged": false
+    },
+    "FixedAxisBoss": {
+      "vertices": 256,
+      "polygons": 130,
+      "triangles": 508,
+      "nonmanifoldEdges": 0,
+      "signedVolumeMm3": 72.60446142808844,
+      "meshValidationChanged": false
+    },
+    "RotatingCarrierBody": {
+      "vertices": 252,
+      "polygons": 128,
+      "triangles": 500,
+      "nonmanifoldEdges": 0,
+      "signedVolumeMm3": 299.9740557733458,
+      "meshValidationChanged": false
+    },
+    "CarrierFollowerLeft": {
+      "vertices": 1026,
+      "polygons": 515,
+      "triangles": 2048,
+      "nonmanifoldEdges": 0,
+      "signedVolumeMm3": 9.477804615723308,
+      "meshValidationChanged": false
+    },
+    "CarrierFollowerRight": {
+      "vertices": 1026,
+      "polygons": 515,
+      "triangles": 2048,
+      "nonmanifoldEdges": 0,
+      "signedVolumeMm3": 9.477804615723308,
+      "meshValidationChanged": false
+    },
+    "BallCandidateLeft": {
+      "vertices": 1986,
+      "polygons": 2048,
+      "triangles": 3968,
+      "nonmanifoldEdges": 0,
+      "signedVolumeMm3": 8.148428164925173,
+      "meshValidationChanged": false
+    },
+    "BallCandidateRight": {
+      "vertices": 1986,
+      "polygons": 2048,
+      "triangles": 3968,
+      "nonmanifoldEdges": 0,
+      "signedVolumeMm3": 8.148428164925171,
+      "meshValidationChanged": false
+    }
+  },
+  "denseSweep": {
+    "sampleCount": 3600,
+    "angularStepDegrees": 0.5,
+    "allValid": true
+  },
+  "geometryComparisonToRev5": {
+    "acceptedHierarchyUnchanged": true,
+    "topMeshMetricsUnchanged": true,
+    "poseTravelAndAnglesUnchanged": true,
+    "changedExteriorGeometry": [
+      "BottomExterior top skin"
+    ],
+    "removedGeometry": [
+      "_BottomExteriorUpperRim recessed perimeter"
+    ],
+    "unchangedMechanismMeshGeometry": [
+      "FixedAxisBoss",
+      "RotatingCarrierBody",
+      "CarrierFollowerLeft",
+      "CarrierFollowerRight",
+      "BallCandidateLeft",
+      "BallCandidateRight",
+      "MovingTopBody"
+    ]
+  },
+  "checks": {
+    "contractHashConsumed": true,
+    "flatPlaneWithinTolerance": true,
+    "noTopSkinVertexBelowPlane": true,
+    "noBottomRecessModifier": true,
+    "noNegativeRecessDepth": true,
+    "noConcaveCircularSurface": true,
+    "axisBossPositive": true,
+    "carrierHiddenBelowPlane": true,
+    "fourTopUndersideGrooves": true,
+    "hierarchyExact": true,
+    "axisInvariant": true,
+    "topAlwaysAbovePlane": true,
+    "minimumOverlapDenseSweep": true,
+    "geometryComparisonOnlyRecessChanged": true,
+    "zeroAnimationAndSelfMotion": true,
+    "glbWritten": true,
+    "blendWritten": true
+  },
+  "outputs": {
+    "blend": "magnetic-slide-tile-blockout-r006.blend",
+    "glb": "magnetic-slide-tile-blockout-r006-review.glb",
+    "renders": [
+      "white-hero.png",
+      "white-closed.png",
+      "white-max-open.png",
+      "white-detent-12.png",
+      "white-detent-36.png",
+      "white-bottom-flat-plane-closeup.png",
+      "white-raised-axis-closeup.png",
+      "white-underside-four-grooves.png",
+      "white-exploded-hierarchy.png",
+      "pivot-overlap-overlay.png"
+    ]
+  },
+  "pass": true
+}

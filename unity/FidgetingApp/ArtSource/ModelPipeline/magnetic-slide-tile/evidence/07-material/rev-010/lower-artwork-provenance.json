@@ -1,0 +1,227 @@
+{
+  "schemaVersion": 1,
+  "gate": "07-material",
+  "revision": 10,
+  "method": "perspective-rectified multi-frame dark-line segmentation with explicit provenance zones",
+  "sources": {
+    "user-frame-10": {
+      "assetId": "slider-intake-obs-frame-10",
+      "path": "unity/FidgetingApp/ArtSource/ModelPipeline/magnetic-slide-tile/evidence/01-intake/rev-001/obsidian-frames/frame-10.jpg",
+      "sourceQuadPx": [
+        [
+          224,
+          584
+        ],
+        [
+          402,
+          582
+        ],
+        [
+          410,
+          704
+        ],
+        [
+          222,
+          704
+        ]
+      ],
+      "visibleTargetY": [
+        360,
+        965
+      ],
+      "confidence": "primary-direct",
+      "homography": [
+        [
+          4.999686655380647,
+          0.08332811092301085,
+          -1168.5934275843035
+        ],
+        [
+          0.1348551696164172,
+          7.760473338572119,
+          -4053.3275768455524
+        ],
+        [
+          0.0001397462897579451,
+          0.0006550954626548796,
+          1.0
+        ]
+      ]
+    },
+    "user-frame-03": {
+      "assetId": "slider-intake-obs-frame-03",
+      "path": "unity/FidgetingApp/ArtSource/ModelPipeline/magnetic-slide-tile/evidence/01-intake/rev-001/obsidian-frames/frame-03.jpg",
+      "sourceQuadPx": [
+        [
+          281,
+          567
+        ],
+        [
+          416,
+          565
+        ],
+        [
+          419,
+          694
+        ],
+        [
+          278,
+          695
+        ]
+      ],
+      "visibleTargetY": [
+        360,
+        965
+      ],
+      "confidence": "secondary-direct",
+      "homography": [
+        [
+          5.893006276696023,
+          0.1381173346100638,
+          -1734.247292475489
+        ],
+        [
+          0.1232640749759853,
+          6.451629332845021,
+          -3233.9271672353184
+        ],
+        [
+          8.345793272489104e-05,
+          0.0004425889921693651,
+          1.0
+        ]
+      ]
+    },
+    "user-frame-05": {
+      "assetId": "slider-intake-obs-frame-05",
+      "path": "unity/FidgetingApp/ArtSource/ModelPipeline/magnetic-slide-tile/evidence/01-intake/rev-001/obsidian-frames/frame-05.jpg",
+      "sourceQuadPx": [
+        [
+          250,
+          665
+        ],
+        [
+          420,
+          660
+        ],
+        [
+          423,
+          785
+        ],
+        [
+          248,
+          785
+        ]
+      ],
+      "visibleTargetY": [
+        400,
+        965
+      ],
+      "confidence": "secondary-direct-motion-soft",
+      "homography": [
+        [
+          4.895350098574621,
+          0.08158916830957728,
+          -1278.0943215695243
+        ],
+        [
+          0.31402417751559336,
+          6.3767169839442674,
+          -3803.0102325115345
+        ],
+        [
+          0.0003254136554565742,
+          0.00031380165655881345,
+          1.0
+        ]
+      ]
+    },
+    "official-frame-08": {
+      "assetId": "slider-intake-haloo-official-08",
+      "path": "unity/FidgetingApp/ArtSource/ModelPipeline/magnetic-slide-tile/evidence/01-intake/rev-002/haloo-official/08.png",
+      "sourceQuadPx": [
+        [
+          198,
+          670
+        ],
+        [
+          464,
+          666
+        ],
+        [
+          468,
+          870
+        ],
+        [
+          195,
+          872
+        ]
+      ],
+      "visibleTargetY": [
+        360,
+        965
+      ],
+      "confidence": "reconstruction-language-only",
+      "homography": [
+        [
+          2.5983759366592523,
+          0.03858974163355333,
+          -540.3335623530128
+        ],
+        [
+          0.06705411731304758,
+          3.4489826568060367,
+          -1926.2536366568052
+        ],
+        [
+          4.4355764818621824e-05,
+          0.00014378018123943428,
+          1.0
+        ]
+      ]
+    }
+  },
+  "directTrace": {
+    "sourceAssetIds": [
+      "slider-intake-obs-frame-10",
+      "slider-intake-obs-frame-03",
+      "slider-intake-obs-frame-05"
+    ],
+    "targetRegionY": [
+      360,
+      965
+    ],
+    "claim": "Only pixels directly visible in user frames; source blur and glare limit stroke precision.",
+    "pixelCount": 118942
+  },
+  "reconstruction": {
+    "sourceAssetIds": [
+      "slider-intake-haloo-official-08"
+    ],
+    "targetRegionY": [
+      0,
+      360
+    ],
+    "claim": "Occluded upper region uses authorized official gothic reference language only; not an exact trace of the red user variant.",
+    "pixelCount": 102670
+  },
+  "mask": {
+    "sizePx": [
+      620,
+      1000
+    ],
+    "upperSha256": "8250df70d2286849db353862283b0d3db9c66e1ac92bed3795bcb5377a431c36",
+    "lowerSha256": "7bf5921f469a217b850ff2ea94dc5ae6c251091b8de60bd81c1b88ec42dfa7c2",
+    "hashesDistinct": true,
+    "binaryDifferenceFraction": 0.382127,
+    "independentlyEditable": true
+  },
+  "artifacts": {
+    "artwork-lower-mask-r010.png": "7bf5921f469a217b850ff2ea94dc5ae6c251091b8de60bd81c1b88ec42dfa7c2",
+    "artwork-lower-direct-mask-r010.png": "be19e06f9d29e867bb5a92a7a6dcdc7ebb24be7138c7bf2347ec72ff17120b2d",
+    "artwork-lower-reconstructed-mask-r010.png": "6c16a7d85c791e2e730fa150c4e5682e86bf17f14396b8e8021638711910cb24",
+    "artwork-lower-provenance-map-r010.png": "4c6ea64864bb1f147c82ecf8d9ec6529313baa104dc2a3d5d78c290ad0afc052",
+    "lower-artwork-direct-vs-reconstructed.png": "89fadf38dc4552de86b1d1633eb07ae7c730856290f8d60f7d61957e78edf20f"
+  },
+  "pass": true
+}

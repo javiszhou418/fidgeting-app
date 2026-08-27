@@ -1,0 +1,81 @@
+{
+  "schemaVersion": 1,
+  "modelId": "magnetic-slide-tile",
+  "gate": "02-analysis",
+  "revision": 5,
+  "result": "READY_FOR_REVIEW_NOT_APPROVED",
+  "checks": {
+    "mechanismCore": {
+      "result": "pass",
+      "tests": "13/13",
+      "coverage": [
+        "30 detents at 12 degrees",
+        "zero self-spin and zero-velocity reset",
+        "frame-rate-independent damping",
+        "breakaway and capture",
+        "one outward slide direction and reversible closure",
+        "hard and soft stops",
+        "angle wrapping and parameter changes",
+        "upper transform remains identity",
+        "lower translation changes",
+        "axis world position changes exactly with lower translation",
+        "lower rotation uses translated axis",
+        "bilateral rails remain lower-owned",
+        "0/12/36-degree detents remain separate from +0.21L slide"
+      ]
+    },
+    "nodeSuite": {
+      "result": "pass",
+      "tests": "28/28"
+    },
+    "browser": {
+      "result": "pass",
+      "desktop": true,
+      "pointerSlide": true,
+      "pointerRotation": true,
+      "fixedUpperTransform": true,
+      "movingAxisReadout": true,
+      "bilateralRails": 2,
+      "internalsOpacityDefault": 0.72,
+      "internalsOpacityControl": true,
+      "mobile390x844": true,
+      "modalCloseEscapeBackdropBack": true,
+      "videoPlayback": {
+        "width": 720,
+        "height": 1280,
+        "durationSeconds": 14.214,
+        "error": null
+      }
+    },
+    "reporting": {
+      "conclusions": 6,
+      "screenshotWall": 0,
+      "technicalEvidenceCollapsed": true,
+      "normalizedDimensionsOnly": true,
+      "physicalMeasurementDefaults": null
+    },
+    "pipeline": {
+      "result": "pass",
+      "errors": 0,
+      "missingFiles": 0,
+      "unhashedAssets": 0,
+      "approved": "1/12",
+      "earliestProblem": "02-analysis-ready_for_review"
+    },
+    "preview": {
+      "path": "unity/FidgetingApp/ArtSource/ModelPipeline/magnetic-slide-tile/evidence/02-analysis/rev-005/workbench-browser.png",
+      "width": 1440,
+      "height": 2720,
+      "pose": {
+        "upper": "fixed",
+        "lowerTravelL": "greater-than-0.15",
+        "angleDeg": 0
+      }
+    }
+  },
+  "boundaries": [
+    "Upper hidden follower/contact geometry remains unknown and dashed.",
+    "Desktop simulation does not validate Newton force, magnetic force, material friction or phone Haptic.",
+    "No Blender, Unity, build, install or device work ran."
+  ]
+}

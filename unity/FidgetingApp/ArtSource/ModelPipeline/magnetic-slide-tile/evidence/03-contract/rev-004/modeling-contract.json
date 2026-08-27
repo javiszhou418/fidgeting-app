@@ -1,0 +1,140 @@
+{
+  "schemaVersion": 1,
+  "modelId": "magnetic-slide-tile",
+  "contractRevision": 4,
+  "createdAt": "2026-08-21T11:07:25.709Z",
+  "sourceClaimIds": [
+    "slider-analysis-claim-silhouette",
+    "slider-analysis-claim-two-piece-stack",
+    "slider-analysis-claim-primary-motion",
+    "slider-analysis-claim-secondary-motion",
+    "slider-analysis-claim-internal-lanes",
+    "slider-analysis-claim-material-language",
+    "slider-analysis-claim-scale",
+    "slider-analysis-claim-audio-impulses",
+    "slider-analysis-claim-product-identity"
+  ],
+  "sourceAssetIds": [
+    "slider-analysis-discovery-log",
+    "slider-analysis-board-source",
+    "slider-analysis-board",
+    "slider-analysis-audio-spectrogram",
+    "slider-intake-user-frame-04",
+    "slider-intake-user-frame-03",
+    "slider-intake-user-frame-12"
+  ],
+  "units": "millimeters",
+  "dimensionBasis": {
+    "type": "anthropometric-estimate",
+    "confidence": "medium",
+    "method": "Estimate the closed body from same-depth adult thumb/index breadth in user frames 04 and 03, then estimate opened total length from frame 12 and subtract the closed length. Cross-check only against the classic Rhythm mechanism family and the distant Magic Mouse; neither cross-check is treated as a measurement of this customized object.",
+    "calibration": {
+      "adultFingerBreadthMm": {
+        "center": 22.5,
+        "min": 20,
+        "max": 25,
+        "sourceLabel": "CDC/NIOSH adult hand anthropometry, thumb and index breadth",
+        "sourceUrl": "https://stacks.cdc.gov/view/cdc/36887/cdc_36887_DS1.pdf"
+      },
+      "userVideoFrames": [
+        "slider-intake-user-frame-04",
+        "slider-intake-user-frame-03",
+        "slider-intake-user-frame-12"
+      ]
+    },
+    "corroboration": [
+      {
+        "label": "NXEDC Chrome Hearts description: based on classic Rhythm rotating-push / straight-push structure",
+        "url": "https://nxedc.com/products/chrome-hearts-fidget-slider",
+        "authority": "mechanism-family-only"
+      },
+      {
+        "label": "MOT Rhythm comparable dimensions 50 × 31 × 11.8 mm",
+        "url": "https://geeone.com/en-gb/products/rhythm-slider",
+        "authority": "comparable-only; not exact-custom-shell measurement"
+      },
+      {
+        "label": "Apple Magic Mouse dimensions 57.1 × 113.5 × 21.6 mm",
+        "url": "https://support.apple.com/en-gb/111885",
+        "authority": "distant-plane sanity-check-only"
+      }
+    ],
+    "limitation": "Video perspective, individual finger size and possible custom-shell variation remain in the stated ranges. Replace with caliper measurements if they become available."
+  },
+  "dimensionEstimateRangesMm": {
+    "overallLengthMm": {
+      "min": 47,
+      "max": 53
+    },
+    "overallWidthMm": {
+      "min": 29,
+      "max": 33
+    },
+    "totalThicknessMm": {
+      "min": 10.5,
+      "max": 13.5
+    },
+    "linearTravelMm": {
+      "min": 18,
+      "max": 24
+    }
+  },
+  "coordinateSystem": {
+    "x": "width-right",
+    "y": "length-and-primary-slide-forward",
+    "z": "thickness-up",
+    "origin": "closed-assembly-center",
+    "pivotRule": "lower-body-fixed; upper-body pivot resolved from approved motion choice"
+  },
+  "dimensions": {
+    "overallLengthMm": 50,
+    "overallWidthMm": 31,
+    "totalThicknessMm": 12,
+    "linearTravelMm": 21,
+    "seamClearanceMm": 0.25
+  },
+  "boundsMm": {
+    "x": 31,
+    "y": 50,
+    "z": 12
+  },
+  "mechanism": {
+    "fixedPart": "lower-body",
+    "movingPart": "upper-body",
+    "primaryMotion": "translation-along-positive-y",
+    "secondaryMotion": "translation-plus-rotation",
+    "maxRotationDeg": 90,
+    "laneMode": "dual-working-lanes",
+    "internalHardwareMode": "visual-mechanism-proxy",
+    "magnetCount": null,
+    "ballCount": null,
+    "steelPlateCount": null
+  },
+  "modelingRules": {
+    "symmetry": "outline bilateral across X; do not mirror asymmetric artwork",
+    "triangleBudgetMax": 120000,
+    "collisionTriangleBudgetMax": 2000,
+    "materialLanguageDeferredToGate": "07-material",
+    "audioBehaviorDeferredToInteractionSystem": true
+  },
+  "route": {
+    "primary": "blender-cli",
+    "deterministic": true,
+    "rodinPolicy": "concept-only; never promote directly to Unity"
+  },
+  "claimDisposition": {
+    "slider-analysis-claim-silhouette": "locked-for-blockout",
+    "slider-analysis-claim-two-piece-stack": "locked-for-part-planning",
+    "slider-analysis-claim-primary-motion": "locked-to-positive-y-translation",
+    "slider-analysis-claim-secondary-motion": "resolved-by-secondaryMotion",
+    "slider-analysis-claim-internal-lanes": "resolved-by-laneMode-and-internalHardwareMode",
+    "slider-analysis-claim-material-language": "deferred-to-gate-07",
+    "slider-analysis-claim-scale": "resolved-by-adult-finger-video-estimate-with-explicit-range; not-production-measurement",
+    "slider-analysis-claim-audio-impulses": "deferred-to-interaction-and-haptics",
+    "slider-analysis-claim-product-identity": "display-name-only; no geometry authority"
+  },
+  "completeness": {
+    "complete": true,
+    "missing": []
+  }
+}

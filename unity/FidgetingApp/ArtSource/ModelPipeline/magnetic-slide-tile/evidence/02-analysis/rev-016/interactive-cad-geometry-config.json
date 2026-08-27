@@ -1,0 +1,75 @@
+{
+  "schemaVersion": 2,
+  "modelId": "magnetic-slide-tile",
+  "gate": "02-analysis",
+  "revision": 16,
+  "contractAssetId": "slider-analysis-mechanism-evidence-contract-r016",
+  "contractSha256": "5aee71817c2c033ed92b770126ba0ecb6d79c2f032d786743b214b79078a47ea",
+  "expectedContractSha256": "5aee71817c2c033ed92b770126ba0ecb6d79c2f032d786743b214b79078a47ea",
+  "diagrammaticGeometry": {
+    "axisNormalizedY": 0.32,
+    "carrierRadiusL": 0.23,
+    "carrierSideCutoutHalfWidthL": 0.08,
+    "followerOffsetXL": 0.12,
+    "innerGrooveOffsetXL": 0.12,
+    "outerGrooveOffsetXL": 0.235,
+    "grooveStartYL": -0.34,
+    "grooveEndYL": 0.34,
+    "grooveStartFromTopL": 0.32,
+    "grooveEndFromTopL": 0.78,
+    "minimumOverlapDiskRadiusL": 0.3184713375796178,
+    "axisBossProtrusionMm": 2,
+    "ballDiameterMm": 2.5,
+    "trackWidthMm": 2.4
+  },
+  "componentLayers": [
+    "BottomExterior",
+    "FixedAxisBoss",
+    "MinimumOverlapDisk",
+    "RotatingCarrier",
+    "CarrierFollowerLeft",
+    "CarrierFollowerRight",
+    "BallCandidateLeft",
+    "BallCandidateRight",
+    "MovingTop",
+    "TopOuterGrooveLeft",
+    "TopInnerGrooveLeft",
+    "TopInnerGrooveRight",
+    "TopOuterGrooveRight",
+    "UnknownSprings",
+    "UnknownPreload"
+  ],
+  "geometryBlockers": {
+    "trackCountMustEqual": 4,
+    "requiredTrackRoles": [
+      "fore-aft-slide",
+      "central-axis-link"
+    ],
+    "axisBossProtrusionMustExceedMm": 0,
+    "recessedAxisFlagForbidden": true,
+    "ballDiameterAuthorizedMm": [
+      2,
+      3
+    ],
+    "trackWidthMaximumMm": 3,
+    "contractHashMustMatch": "5aee71817c2c033ed92b770126ba0ecb6d79c2f032d786743b214b79078a47ea"
+  },
+  "cadApprovalChecklist": [
+    "fourTracks",
+    "outerInnerRoles",
+    "raisedAxisBoss",
+    "ballRange",
+    "trackWidth",
+    "minimumOverlapDisk",
+    "finiteGrooveEndpoints",
+    "pointerDirection",
+    "compoundMotion",
+    "fixedAxisCoverage",
+    "topAboveBottom",
+    "sourceMapping"
+  ],
+  "simulator": {
+    "locked": true,
+    "current": false
+  }
+}

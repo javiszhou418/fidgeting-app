@@ -1,0 +1,63 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="1100" viewBox="0 0 1600 1100">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#071017"/><stop offset="1" stop-color="#131b23"/></linearGradient>
+    <linearGradient id="metal" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#f2f7f8"/><stop offset=".28" stop-color="#657681"/><stop offset=".58" stop-color="#dce6e9"/><stop offset="1" stop-color="#748590"/></linearGradient>
+    <linearGradient id="face" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#75e9ef" stop-opacity=".82"/><stop offset=".52" stop-color="#756ce7" stop-opacity=".74"/><stop offset="1" stop-color="#ef79be" stop-opacity=".75"/></linearGradient>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="9" markerHeight="9" orient="auto-start-reverse"><path d="M0 0L10 5L0 10Z" fill="#70e8ee"/></marker>
+    <clipPath id="photoA"><rect x="1180" y="188" width="350" height="332" rx="24"/></clipPath>
+    <clipPath id="photoB"><rect x="1180" y="548" width="350" height="332" rx="24"/></clipPath>
+    <style>
+      .sans{font-family:Inter,-apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei",sans-serif}.eye{font-size:18px;font-weight:800;letter-spacing:.15em;fill:#70e8ee}.title{font-size:50px;font-weight:850;fill:#f4f8fa}.h2{font-size:26px;font-weight:850;fill:#f4f8fa}.body{font-size:19px;fill:#abb8c1}.small{font-size:16px;fill:#95a4ae}.label{font-size:18px;font-weight:820;fill:#f4f8fa}.chip{font-size:17px;font-weight:820;fill:#071017}.leader{fill:none;stroke:#70e8ee;stroke-width:4;marker-end:url(#arrow)}.dash{fill:none;stroke:#627683;stroke-width:3;stroke-dasharray:11 9}
+    </style>
+  </defs>
+  <rect width="1600" height="1100" fill="url(#bg)"/>
+  <text x="65" y="73" class="sans eye">GATE 04 · TWO-PART EXPLODED PLAN · REV 03</text>
+  <text x="65" y="137" class="sans title">两片式拆解与“先推、后转”</text>
+  <rect x="815" y="54" width="715" height="92" rx="22" fill="#10212a" stroke="#4c8490"/>
+  <text x="850" y="91" class="sans label">结构锁定：2 个实体零件</text>
+  <text x="850" y="122" class="sans small">直推 21 mm → 到达纵向末端 → 圆形轨解锁约 90° 旋转</text>
+
+  <g transform="translate(0 4)">
+    <rect x="355" y="226" width="560" height="210" rx="102" fill="url(#metal)" stroke="#e0eaed" stroke-width="3"/>
+    <rect x="390" y="258" width="490" height="146" rx="72" fill="#17232b"/>
+    <path d="M540 282V380" stroke="#70e8ee" stroke-width="18" stroke-linecap="round"/><path d="M730 282V380" stroke="#c9f8fa" stroke-width="18" stroke-linecap="round"/>
+    <circle cx="540" cy="300" r="10" fill="#f4f8fa"/><circle cx="540" cy="362" r="10" fill="#f4f8fa"/><circle cx="730" cy="300" r="10" fill="#f4f8fa"/><circle cx="730" cy="362" r="10" fill="#f4f8fa"/>
+    <rect x="88" y="258" width="235" height="104" rx="20" fill="#111c24" stroke="#334652" stroke-width="2"/>
+    <text x="116" y="298" class="sans h2">01 · 运动上片</text><text x="116" y="332" class="sans body">翻看背面：双通道</text><text x="116" y="356" class="sans small">花纹与轨道都属于本体</text>
+    <path d="M323 314H392" class="leader"/>
+    <text x="462" y="469" class="sans label">UpperBody_Moving · 背面朝下</text>
+
+    <path d="M635 503V570" class="dash"/><text x="659" y="544" class="sans small">只有两个零件之间的装配间隙</text>
+
+    <rect x="355" y="598" width="560" height="210" rx="102" fill="url(#metal)" stroke="#e0eaed" stroke-width="3"/>
+    <rect x="390" y="630" width="490" height="146" rx="72" fill="#17232b"/>
+    <path d="M667 649A62 62 0 1 1 615 675" fill="none" stroke="#70e8ee" stroke-width="18" stroke-linecap="round"/>
+    <circle cx="615" cy="675" r="9" fill="#f4f8fa"/><circle cx="667" cy="649" r="9" fill="#f4f8fa"/>
+    <path d="M540 655V751" stroke="#526975" stroke-width="12" stroke-linecap="round"/><path d="M730 655V751" stroke="#526975" stroke-width="12" stroke-linecap="round"/>
+    <rect x="88" y="630" width="235" height="112" rx="20" fill="#111c24" stroke="#334652" stroke-width="2"/>
+    <text x="116" y="670" class="sans h2">02 · 固定下片</text><text x="116" y="704" class="sans body">内部：圆形旋转滑轨</text><text x="116" y="730" class="sans small">背面装饰仍属于本体</text>
+    <path d="M323 688H392" class="leader"/>
+    <text x="467" y="841" class="sans label">LowerBody_Fixed · 内侧朝上</text>
+  </g>
+
+  <rect x="1180" y="188" width="350" height="332" rx="24" fill="#05080b" stroke="#334652" stroke-width="2"/>
+  <image href="../../01-intake/rev-001/user-video-frames/frame-12.jpg" x="1180" y="188" width="350" height="332" preserveAspectRatio="xMidYMid slice" clip-path="url(#photoA)"/>
+  <rect x="1198" y="206" width="238" height="42" rx="21" fill="#071018" stroke="#70e8ee"/><text x="1222" y="234" class="sans small">实拍：纵向推到最大行程</text>
+
+  <rect x="1180" y="548" width="350" height="332" rx="24" fill="#05080b" stroke="#334652" stroke-width="2"/>
+  <image href="../../01-intake/rev-001/user-video-frames/frame-11.jpg" x="1180" y="548" width="350" height="332" preserveAspectRatio="xMidYMid slice" clip-path="url(#photoB)"/>
+  <rect x="1198" y="566" width="238" height="42" rx="21" fill="#071018" stroke="#70e8ee"/><text x="1222" y="594" class="sans small">实拍：末端进入旋转状态</text>
+
+  <rect x="65" y="900" width="1465" height="130" rx="24" fill="#101b22" stroke="#334652" stroke-width="2"/>
+  <text x="96" y="941" class="sans label">运动状态机（不会边滑边自由旋转）</text>
+  <rect x="96" y="961" width="245" height="44" rx="22" fill="#1b2a33"/><text x="139" y="990" class="sans small">A · 闭合 / 旋转锁定</text>
+  <path d="M358 983H442" class="leader"/>
+  <rect x="460" y="961" width="350" height="44" rx="22" fill="#1b2a33"/><text x="502" y="990" class="sans small">B · 只允许沿双通道纵向直推</text>
+  <path d="M827 983H911" class="leader"/>
+  <rect x="929" y="961" width="556" height="44" rx="22" fill="#1b2a33"/><text x="970" y="990" class="sans small">C · 到达最大行程后，进入下片圆形轨并允许旋转 ≤90°</text>
+
+  <rect x="975" y="411" width="168" height="92" rx="18" fill="#19171a" stroke="#d8a75e" stroke-width="2"/>
+  <text x="999" y="445" class="sans label" fill="#f0c681">不是第三件</text><text x="999" y="477" class="sans small">槽 / 轨属于本体</text>
+  <path d="M915 404L975 445" class="leader"/>
+  <text x="65" y="1068" class="sans small">本图只锁定用户明确确认的两片结构与运动条件；磁铁、滚珠、弹簧、截面和紧固方式继续保持未知。</text>
+</svg>

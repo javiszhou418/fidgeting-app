@@ -1,0 +1,16 @@
+{
+  "name": "fidgeting-model-provenance-explorer",
+  "version": "2.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "start": "node server.mjs",
+    "test": "node --test tests/*.test.mjs",
+    "test:browser": "node tests/browser-cdp-smoke.mjs",
+    "validate": "node validate-pipelines.mjs"
+  },
+  "dependencies": {
+    "three": "0.185.1",
+    "ws": "8.21.3"
+  }
+}

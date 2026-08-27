@@ -1,0 +1,102 @@
+{
+  "schemaVersion": 1,
+  "modelId": "magnetic-slide-tile",
+  "gate": "10-export",
+  "exportRevision": 2,
+  "header": {
+    "magic": "glTF",
+    "version": 2,
+    "totalLength": 285308
+  },
+  "chunks": [
+    {
+      "type": 1313821514,
+      "bytes": 10900
+    },
+    {
+      "type": 5130562,
+      "bytes": 274380
+    }
+  ],
+  "asset": {
+    "generator": "Khronos glTF Blender I/O v5.2.39",
+    "version": "2.0"
+  },
+  "sceneCount": 1,
+  "nodeNames": [
+    "CentralAxisPivot_Point",
+    "ConcealedCircularEnvelope_Metadata",
+    "FixedAssembly",
+    "LowerBody_Fixed_CleanPlane",
+    "MagneticSlideTile_Blockout_R003",
+    "UpperCapsule_Moving",
+    "UpperTranslation"
+  ],
+  "meshNames": [
+    "LowerBody_Fixed_CleanPlane_Mesh_Gate10R2Triangulated",
+    "UpperCapsule_Moving_Mesh_Gate10R2Triangulated"
+  ],
+  "materialNames": [
+    "M07R7_DaylightNeutralPolishedSilver",
+    "M07R7_BloodRedCrystal_WideBorder_Lower",
+    "M07R7_BloodRedCrystal_WideBorder_Upper"
+  ],
+  "imageRecords": [
+    {
+      "bufferView": 10,
+      "mimeType": "image/png",
+      "name": "face-lower-transport-basecolor"
+    },
+    {
+      "bufferView": 19,
+      "mimeType": "image/png",
+      "name": "face-upper-transport-basecolor"
+    }
+  ],
+  "primitiveAttributes": [
+    [
+      "NORMAL",
+      "POSITION",
+      "TANGENT",
+      "TEXCOORD_0"
+    ],
+    [
+      "NORMAL",
+      "POSITION",
+      "TANGENT",
+      "TEXCOORD_0"
+    ],
+    [
+      "NORMAL",
+      "POSITION",
+      "TANGENT",
+      "TEXCOORD_0"
+    ],
+    [
+      "NORMAL",
+      "POSITION",
+      "TANGENT",
+      "TEXCOORD_0"
+    ]
+  ],
+  "animations": [],
+  "checks": {
+    "header": true,
+    "jsonAndBinaryChunks": true,
+    "twoMeshesFourPrimitives": true,
+    "normalsPresent": true,
+    "tangentsPresent": true,
+    "uvsPresent": true,
+    "positionsPresent": true,
+    "indicesPresent": true,
+    "threeMaterials": true,
+    "twoEmbeddedImages": true,
+    "noAnimations": true,
+    "noCameras": true,
+    "noLightsExtension": true,
+    "closedDefault": true,
+    "millimeterToMeterRootScale": true,
+    "hiddenEnvelopeMetadataOnly": true
+  },
+  "pass": true
+}

@@ -1,0 +1,63 @@
+{
+  "schemaVersion": 1,
+  "modelId": "magnetic-slide-tile",
+  "gate": "02-analysis",
+  "revision": 4,
+  "purpose": "Correct the rejected schematic proportions without inventing physical dimensions.",
+  "sourcePolicy": {
+    "units": "normalized L/W only",
+    "millimetresAllowed": false,
+    "historicalProvisionalValuesCurrent": false,
+    "perspectivePolicy": "Use closed or near-closed frames with readable full outer silhouette. Reject severe hand occlusion, motion blur and edge-on views."
+  },
+  "samples": [
+    {
+      "videoAssetId": "slider-intake-user-mechanism-video-6023",
+      "frameIndex": 0,
+      "ptsSeconds": 0,
+      "method": "capsule centerline and perpendicular silhouette chords; mild projective correction from parallel side edges",
+      "inferredAspectRatioLW": 1.56,
+      "confidence": "medium"
+    },
+    {
+      "videoAssetId": "slider-intake-user-mechanism-video-6023",
+      "frameIndex": 12,
+      "ptsSeconds": 0.4,
+      "method": "capsule centerline and perpendicular silhouette chords; mild projective correction from parallel side edges",
+      "inferredAspectRatioLW": 1.59,
+      "confidence": "medium"
+    },
+    {
+      "videoAssetId": "slider-intake-user-mechanism-video-6024",
+      "frameIndex": 0,
+      "ptsSeconds": 0,
+      "method": "outer silhouette with partial hand-occlusion uncertainty widened",
+      "inferredAspectRatioLW": 1.55,
+      "confidence": "low"
+    }
+  ],
+  "result": {
+    "status": "inferred-range",
+    "aspectRatioLW": {
+      "minimum": 1.52,
+      "maximum": 1.62,
+      "sandboxDefault": 1.57
+    },
+    "travelL": {
+      "supportedMinimum": 0.38,
+      "supportedMaximum": 0.46,
+      "observedPeak": 0.5,
+      "sandboxDefault": 0.42
+    },
+    "physicalLength": "unknown",
+    "physicalWidth": "unknown",
+    "physicalThickness": "unknown",
+    "physicalTravel": "unknown"
+  },
+  "validation": {
+    "diagramUsesPhysicalMillimetres": false,
+    "sandboxOutlineUsesNormalizedAspectRatio": true,
+    "labelsMeasuredInferredUnknown": true,
+    "editablePhysicalMeasurementFieldsRequired": true
+  }
+}
