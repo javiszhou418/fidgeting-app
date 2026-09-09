@@ -31,10 +31,13 @@ Shader "FidgetingApp/FanCardSatinSilver"
             #pragma fragment Frag
             #pragma target 3.0
             #pragma multi_compile _ _MAIN_LIGHT_SHADOWS _MAIN_LIGHT_SHADOWS_CASCADE
+            #pragma multi_compile _ _ADDITIONAL_LIGHTS_VERTEX _ADDITIONAL_LIGHTS
+            #pragma multi_compile _ _CLUSTER_LIGHT_LOOP
 
             #include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Core.hlsl"
             #include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Lighting.hlsl"
             #include "Packages/com.unity.render-pipelines.core/ShaderLibrary/Packing.hlsl"
+            #include "FanCardMovingLights.hlsl"
 
             TEXTURE2D(_BumpMap);
             SAMPLER(sampler_BumpMap);
@@ -96,9 +99,14 @@ Shader "FidgetingApp/FanCardSatinSilver"
                 float nDotH = saturate(dot(normalWS, halfVector));
                 float nDotV = saturate(dot(normalWS, viewWS));
                 float roughness = saturate(1.0 - _Smoothness);
+                // Bead-blast silver keeps a wide lobe. The narrow term only
+                // shapes a readable band; it must never become a mirror dot.
                 float broadSpecular = pow(
                     nDotH,
-                    lerp(3.0, 14.0, _Smoothness));
+                    lerp(2.0, 9.0, _Smoothness));
+                float bandSpecular = pow(
+                    nDotH,
+                    lerp(9.0, 34.0, _Smoothness));
                 half attenuation = mainLight.distanceAttenuation
                     * mainLight.shadowAttenuation;
                 half3 ambientIrradiance = SampleSH(normalWS);
@@ -108,33 +116,47 @@ Shader "FidgetingApp/FanCardSatinSilver"
                     _Metallic);
                 half3 fresnel = f0 + (1.0 - f0)
                     * pow(1.0 - nDotV, 5.0);
+                float3 reflectionWS = FanCardRotateReflection(
+                    reflect(-viewWS, normalWS));
                 half3 environmentSpecular = GlossyEnvironmentReflection(
-                    reflect(-viewWS, normalWS),
+                    reflectionWS,
                     roughness,
                     1.0);
                 float hemisphere = saturate(normalWS.y * 0.5 + 0.5);
 
-                // Bead-blasted aluminum still reads as a light metal on a dark
-                // product plate. Keep a modest room fill; do not floor SH to a
-                // constant or add a mirror-like environment lobe.
+                // Top-down key plus SH/cubemap carry the room. Do not add an
+                // unexplained diagonal stripe or restore a grey SH floor.
                 half3 color = _BaseColor.rgb * (
-                    0.42
-                    + hemisphere * 0.18
-                    + ambientIrradiance * 0.62);
+                    0.05
+                    + hemisphere * 0.17
+                    + ambientIrradiance * 0.46);
                 color += _BaseColor.rgb
                     * mainLight.color
                     * nDotL
                     * attenuation
-                    * lerp(1.0, 0.70, _Metallic);
+                    * lerp(1.0, 0.86, _Metallic);
                 color += mainLight.color
                     * fresnel
                     * broadSpecular
                     * attenuation
-                    * lerp(0.10, 0.20, _Metallic)
-                    * (1.0 - roughness * 0.18);
+                    * lerp(0.10, 0.30, _Metallic)
+                    * (1.0 - roughness * 0.12);
+                color += mainLight.color
+                    * fresnel
+                    * bandSpecular
+                    * attenuation
+                    * lerp(0.12, 0.62, _Metallic);
+                color += FanCardSampleAdditionalLights(
+                    input.positionWS,
+                    input.positionCS,
+                    _BaseColor.rgb,
+                    normalWS,
+                    viewWS,
+                    _Metallic,
+                    _Smoothness);
                 color += environmentSpecular
                     * fresnel
-                    * lerp(0.06, 0.14, _Metallic);
+                    * lerp(0.12, 0.42, _Metallic);
                 return half4(color, 1.0);
             }
             ENDHLSL

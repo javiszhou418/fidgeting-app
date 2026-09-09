@@ -107,11 +107,35 @@ def main() -> int:
     card = config["card"]
     mechanism = config["mechanism"]
 
-    spec_face_inset = capture(
-        spec,
+    literal_face_inset = re.search(
         r"FaceInset\s*=\s*([0-9.]+)f",
-        "FanCardSpecifications.FaceInset",
-    )[0]
+        spec,
+        re.MULTILINE,
+    )
+    if literal_face_inset:
+        spec_face_inset = float(literal_face_inset.group(1))
+    else:
+        require(
+            re.search(
+                r"FaceInset\s*=\s*BlackBorderWidth\s*\+\s*GoldTrimWidth;",
+                spec,
+                re.MULTILINE,
+            )
+            is not None,
+            "C# face inset derives from the locked black border and gold trim",
+        )
+        spec_face_inset = sum((
+            capture(
+                spec,
+                r"BlackBorderWidth\s*=\s*([0-9.]+)f",
+                "FanCardSpecifications.BlackBorderWidth",
+            )[0],
+            capture(
+                spec,
+                r"GoldTrimWidth\s*=\s*([0-9.]+)f",
+                "FanCardSpecifications.GoldTrimWidth",
+            )[0],
+        ))
     require(
         abs(spec_face_inset * 1000.0 - card["face_inset"]) < 1e-6,
         "C# closed face inset matches the canonical guardrail",
@@ -136,20 +160,63 @@ def main() -> int:
         and abs(spec_spindle_inset - mechanism["spindle_face_inset"]) < 1e-7,
         "C# recessed spindle dimensions match the canonical guardrail",
     )
-    spec_cap_radius = capture(
+    require(
+        mechanism["front_visible_axis_hardware"]
+            == "recessed_matte_spindle_only"
+        and mechanism["front_visible_axis_renderer"]
+            == "CommonAxis_RecessedMatteSpindle"
+        and mechanism["front_visible_axis_renderer_count"] == 1
+        and "bearing_cap_radius" not in mechanism
+        and "bearing_cap_height" not in mechanism
+        and "BearingCapRadius" not in spec
+        and "BearingCapHeight" not in spec,
+        "canonical contract permits only one recessed matte axis renderer",
+    )
+    spec_axis_renderer = re.search(
+        r'FrontVisibleAxisRendererName\s*=\s*\n?\s*"([^"]+)"',
         spec,
-        r"BearingCapRadius\s*=\s*([0-9.]+)f",
-        "FanCardSpecifications.BearingCapRadius",
+    )
+    spec_forbidden_tokens = re.search(
+        r"ForbiddenAxisHardwareNameTokens\s*=\s*\n?\s*\{([^}]+)\}",
+        spec,
+        re.DOTALL,
+    )
+    require(
+        spec_axis_renderer is not None
+        and spec_axis_renderer.group(1)
+            == mechanism["front_visible_axis_renderer"]
+        and spec_forbidden_tokens is not None
+        and re.findall(r'"([^"]+)"', spec_forbidden_tokens.group(1))
+            == mechanism["forbidden_front_axis_name_tokens"],
+        "C# axis renderer and forbidden tokens match the canonical guardrail",
+    )
+    spec_axis_material = re.search(
+        r'FrontVisibleAxisMaterialName\s*=\s*\n?\s*"([^"]+)"',
+        spec,
+    )
+    spec_axis_metallic = capture(
+        spec,
+        r"FrontVisibleAxisMetallic\s*=\s*([0-9.]+)f",
+        "FanCardSpecifications.FrontVisibleAxisMetallic",
     )[0]
-    spec_cap_height = capture(
+    spec_axis_smoothness = capture(
         spec,
-        r"BearingCapHeight\s*=\s*([0-9.]+)f",
-        "FanCardSpecifications.BearingCapHeight",
+        r"FrontVisibleAxisSmoothness\s*=\s*([0-9.]+)f",
+        "FanCardSpecifications.FrontVisibleAxisSmoothness",
     )[0]
     require(
-        abs(spec_cap_radius - mechanism["bearing_cap_radius"]) < 1e-7
-        and abs(spec_cap_height - mechanism["bearing_cap_height"]) < 1e-7,
-        "C# bearing-cap dimensions match the canonical guardrail",
+        spec_axis_material is not None
+        and spec_axis_material.group(1)
+            == mechanism["front_visible_axis_material"]
+        and spec_axis_metallic
+            == mechanism["front_visible_axis_metallic"]
+        and spec_axis_smoothness
+            == mechanism["front_visible_axis_smoothness"]
+        and "FrontVisibleAxisSpecularHighlights = false" in spec
+        and "FrontVisibleAxisEnvironmentReflections = false" in spec
+        and mechanism["front_visible_axis_specular_highlights"] is False
+        and mechanism["front_visible_axis_environment_reflections"] is False,
+        "C# matte axis material matches the zero-reflection guardrail",
     )
 
     spec_follower = capture(
@@ -268,12 +335,18 @@ def main() -> int:
     )
     require(
         '"CommonAxis_RecessedMatteSpindle"' in builder
-        and '"CommonAxis_BearingCap_Chrome"' in builder
         and 'new GameObject("CommonAxis_ShadowSleeve")' in builder
-        and "create_bearing_cap(" in blender
-        and mechanism["front_visible_axis_hardware"]
-            == "low_profile_chrome_bearing_cap",
-        "axis uses one Blender bearing cap, recessed spindle, and non-rendered marker",
+        and '"CommonAxis_BearingCap_Chrome"' not in builder
+        and "create_bearing_cap(" not in blender
+        and "Axis_BearingCap_Chrome" not in blender
+        and "BearingChrome" not in blender,
+        "axis uses only the recessed matte spindle and non-rendered marker",
+    )
+    require(
+        "CreateOrUpdateAxisMatteMaterial" in builder
+        and 'material.EnableKeyword("_SPECULARHIGHLIGHTS_OFF")' in builder
+        and 'material.EnableKeyword("_ENVIRONMENTREFLECTIONS_OFF")' in builder,
+        "scene builder disables specular and environment reflection on the axis",
     )
     require(
         'Transform topLayer = root.transform.Find("TopCard")' in builder
@@ -339,6 +412,18 @@ def main() -> int:
         and "CornerSpade_Back" not in scene,
         "shipping scene has no back-face corner-index artwork",
     )
+    forbidden_axis_tokens = mechanism["forbidden_front_axis_name_tokens"]
+    axis_object_names = re.findall(r"m_Name: (CommonAxis_[^\n]+)", scene)
+    require(
+        scene.count("m_Name: CommonAxis_RecessedMatteSpindle\n")
+            == mechanism["front_visible_axis_renderer_count"]
+        and all(
+            token.lower() not in object_name.lower()
+            for object_name in axis_object_names
+            for token in forbidden_axis_tokens
+        ),
+        "shipping scene has one matte axis renderer and no cap/ring/washer/seat",
+    )
     report = json.loads(REPORT_PATH.read_text(encoding="utf-8"))
     report_clearance = report.get("minimum_outer_edge_clearance_mm", -1.0)
     require(
@@ -353,6 +438,19 @@ def main() -> int:
         report["face_art"]["rank_marks_per_front"] == 2
         and report["face_art"]["corner_spades_per_front"] == 2,
         "Blender report records the canonical two-corner face-art contract",
+    )
+    require(
+        report["assembly"]["front_visible_axis_hardware"]
+            == "recessed_matte_spindle_only"
+        and report["assertions"][
+            "front_axis_export_has_no_cap_ring_washer_or_seat"
+        ]
+        and all(
+            token.lower() not in item["name"].lower()
+            for item in report["geometry"]
+            for token in forbidden_axis_tokens
+        ),
+        "Blender export report contains no front cap/ring/washer/seat",
     )
     print(f"=== FAN CARD MODELING GUARDRAILS: ALL PASS ({clearance:.3f} mm) ===")
     return 0

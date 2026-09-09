@@ -40,8 +40,8 @@ namespace FidgetingApp.Editor
                 .Single(candidate => candidate.name == "ThreeBladeEDC_Root")
                 .transform;
             Transform rotor = root.Find("RotorDynamic");
-            Transform visibleTopCap = root.Find(
-                "HubStatic/TopCap/TopCap_Root/FingerCapTop_BrushedFace");
+            Transform visibleTopCap = root.Find("HubStatic/TopCap/Cap_Top")
+                ?? root.Find("HubStatic/TopCap/TopCap_Root/FingerCapTop_BrushedFace");
             Renderer visibleTopCapRenderer = visibleTopCap != null
                 ? visibleTopCap.GetComponent<Renderer>()
                 : null;

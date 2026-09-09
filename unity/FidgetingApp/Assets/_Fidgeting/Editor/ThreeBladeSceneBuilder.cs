@@ -27,6 +27,10 @@ namespace ThreeBladeEDC.EditorTools
         private const string MeshFolder = "Assets/_Fidgeting/Generated/Meshes";
         private const string DragonScaleRollbackModelPath =
             "Assets/_Fidgeting/Models/BlenderDragonScale/DragonScaleEDC.fbx";
+        // GEEONE 龙鳞三叶: ModelPipeline metal-three-blade Gate 10 rev-002 export (two kinematic groups:
+        // Rotor_Root spins about local +Y, Fixed_Root = Cap_Top + Cap_Bottom + Hub_Core stays with the fingers).
+        public const string GeeoneModelPath =
+            "Assets/_Fidgeting/Models/GeeoneTriSpinner/GeeoneTriSpinner.fbx";
         private const int RatchetAudioVoiceCount = 12;
         private static readonly string[] RatchetClickPaths =
         {
@@ -240,17 +244,14 @@ namespace ThreeBladeEDC.EditorTools
                 new[] { materials.bearing });
 
             Renderer[] presentationRenderers = installDragonScaleVisuals
-                ? InstallDragonScaleRollbackVisuals(
+                ? InstallGeeoneVisuals(
                     scene,
                     materials,
                     root.transform,
                     rotor.transform,
                     hub.transform,
-                    bearingVisual.transform,
                     cage.transform,
                     topCap.transform,
-                    topWasher.transform,
-                    bottomWasher.transform,
                     bottomCap.transform)
                 : root.GetComponentsInChildren<Renderer>(true);
 
@@ -301,7 +302,7 @@ namespace ThreeBladeEDC.EditorTools
                 camera.gameObject.AddComponent<OrbitPresentationCamera>();
             orbit.Target = root.transform;
             orbit.FocusTarget = installDragonScaleVisuals
-                ? RequireDescendant(topCap.transform, "FingerCapTop_BrushedFace")
+                ? RequireDescendant(topCap.transform, "Cap_Top")
                 : topCap.transform;
             orbit.ConfigureFraming(ProductFramingCatalog.Resolve(outputScenePath));
             orbit.SetDesktopInputEnabled(false);
@@ -440,6 +441,128 @@ namespace ThreeBladeEDC.EditorTools
             }
         }
 
+        private static Renderer[] InstallGeeoneVisuals(
+            Scene scene,
+            ThreeBladeMaterialFactory.MaterialSet materials,
+            Transform productRoot,
+            Transform rotor,
+            Transform hub,
+            Transform bearingCage,
+            Transform topCap,
+            Transform bottomCap)
+        {
+            ConfigureGeeoneImporter(GeeoneModelPath);
+            GameObject modelAsset = AssetDatabase.LoadAssetAtPath<GameObject>(GeeoneModelPath);
+            if (modelAsset == null)
+            {
+                throw new FileNotFoundException(
+                    "The GEEONE tri-spinner FBX is missing.",
+                    GeeoneModelPath);
+            }
+
+            DisableRenderer(rotor, "RotorCore");
+            DisableRenderer(rotor, "BearingOuterRace");
+            DisableRenderer(rotor, "ThreeBladeFrame");
+            DisableRenderer(rotor, "ThreeBladeInsets");
+            DisableRenderer(rotor, "RotorCoreTopTrim");
+            DisableRenderer(hub, "Axle");
+            DisableRenderer(hub, "BearingInnerRace");
+            DisableRenderer(hub, "TopWasher");
+            DisableRenderer(hub, "BottomWasher");
+            DisableRenderer(hub, "TopCap");
+            DisableRenderer(hub, "BottomCap");
+            // No bearing is visible on the GEEONE design (D09: no bright bearing ring anywhere);
+            // the static Hub_Core is the only thing between cap lip and rotor face.
+            DisableRenderer(bearingCage, "BearingBalls");
+
+            GameObject instance = (GameObject)PrefabUtility.InstantiatePrefab(
+                modelAsset,
+                scene);
+            instance.name = "GeeoneTriSpinner_Source";
+            instance.transform.SetParent(productRoot, false);
+            // Blender +Y (blade at twelve o'clock in the authored top view) maps to Unity -Z through
+            // FBX conversion; rotate about the +Y spin axis so one blade points at +Z / twelve o'clock.
+            instance.transform.localRotation = Quaternion.Euler(0f, 180f, 0f);
+            PrefabUtility.UnpackPrefabInstance(
+                instance,
+                PrefabUnpackMode.Completely,
+                InteractionMode.AutomatedAction);
+
+            Transform rotorRoot = RequireDescendant(instance.transform, "Rotor_Root");
+            Transform capTop = RequireDescendant(instance.transform, "Cap_Top");
+            Transform capBottom = RequireDescendant(instance.transform, "Cap_Bottom");
+            Transform hubCore = RequireDescendant(instance.transform, "Hub_Core");
+            RequireDescendant(instance.transform, "Rotor_Body");
+
+            // Kinematics: Rotor_Root (blades + connecting ring) under the Rigidbody rotor; the caps ride the
+            // exploded-view cap transforms; the hub core stays with the static hub.
+            ReparentPreservingWorld(rotorRoot, rotor);
+            ReparentPreservingWorld(capTop, topCap);
+            ReparentPreservingWorld(capBottom, bottomCap);
+            ReparentPreservingWorld(hubCore, hub);
+
+            var renderers = new List<Renderer>();
+            AddGeeoneRenderers(rotorRoot, materials, renderers);
+            AddGeeoneRenderers(capTop, materials, renderers);
+            AddGeeoneRenderers(capBottom, materials, renderers);
+            AddGeeoneRenderers(hubCore, materials, renderers);
+
+            UnityEngine.Object.DestroyImmediate(instance);
+            return renderers.ToArray();
+        }
+
+        private static void ConfigureGeeoneImporter(string assetPath)
+        {
+            AssetDatabase.ImportAsset(assetPath, ImportAssetOptions.ForceSynchronousImport);
+            ModelImporter importer = AssetImporter.GetAtPath(assetPath) as ModelImporter;
+            if (importer == null)
+            {
+                throw new FileNotFoundException("GEEONE model importer is missing.", assetPath);
+            }
+
+            importer.globalScale = 1f;
+            importer.useFileScale = true;
+            importer.preserveHierarchy = true;
+            importer.importAnimation = false;
+            importer.importBlendShapes = false;
+            importer.importCameras = false;
+            importer.importLights = false;
+            importer.importVisibility = false;
+            importer.materialImportMode = ModelImporterMaterialImportMode.ImportStandard;
+            importer.meshCompression = ModelImporterMeshCompression.Off;
+            importer.optimizeMeshPolygons = true;
+            importer.optimizeMeshVertices = true;
+            importer.weldVertices = true;
+            importer.isReadable = true;
+            importer.importNormals = ModelImporterNormals.Import;
+            importer.importTangents = ModelImporterTangents.CalculateMikk;
+            importer.SaveAndReimport();
+        }
+
+        private static void AddGeeoneRenderers(
+            Transform root,
+            ThreeBladeMaterialFactory.MaterialSet materials,
+            List<Renderer> destination)
+        {
+            Renderer[] renderers = root.GetComponentsInChildren<Renderer>(true);
+            for (int index = 0; index < renderers.Length; index++)
+            {
+                renderers[index].enabled = true;
+                Material[] assigned = renderers[index].sharedMaterials;
+                for (int materialIndex = 0; materialIndex < assigned.Length; materialIndex++)
+                {
+                    string name = assigned[materialIndex] != null ? assigned[materialIndex].name : string.Empty;
+                    assigned[materialIndex] = name.Contains("DiscTurned")
+                        ? materials.geeoneDisc
+                        : name.Contains("HubDark")
+                            ? materials.geeoneHubDark
+                            : materials.geeoneSatin;
+                }
+                renderers[index].sharedMaterials = assigned;
+                destination.Add(renderers[index]);
+            }
+        }
+
         private static Renderer[] InstallDragonScaleRollbackVisuals(
             Scene scene,
             ThreeBladeMaterialFactory.MaterialSet materials,
@@ -567,7 +690,7 @@ namespace ThreeBladeEDC.EditorTools
             }
 
             throw new MissingReferenceException(
-                $"{DragonScaleRollbackModelPath} is missing {objectName}.");
+                $"The imported metal model under {root.name} is missing {objectName}.");
         }
 
         private static Transform FindDescendant(Transform root, string objectName)
@@ -665,7 +788,7 @@ namespace ThreeBladeEDC.EditorTools
             camera.transform.LookAt(target);
             camera.clearFlags = CameraClearFlags.SolidColor;
             camera.backgroundColor = Color.black;
-            camera.allowHDR = false;
+            camera.allowHDR = true;
             camera.allowMSAA = true;
             camera.usePhysicalProperties = true;
             camera.focalLength = 85f;
@@ -674,7 +797,7 @@ namespace ThreeBladeEDC.EditorTools
             camera.farClipPlane = 10f;
             UniversalAdditionalCameraData cameraData =
                 camera.gameObject.AddComponent<UniversalAdditionalCameraData>();
-            cameraData.renderPostProcessing = false;
+            cameraData.renderPostProcessing = true;
             cameraData.renderShadows = true;
 
             CreateSpotLight(
@@ -683,7 +806,7 @@ namespace ThreeBladeEDC.EditorTools
                 target + new Vector3(-0.22f, 0.30f, -0.18f),
                 target,
                 5000f,
-                0.44f,
+                0.62f,
                 58f);
             CreateSpotLight(
                 "WarmRim_3200K",
@@ -691,7 +814,7 @@ namespace ThreeBladeEDC.EditorTools
                 target + new Vector3(0.22f, 0.22f, 0.16f),
                 target,
                 3200f,
-                0.38f,
+                0.52f,
                 46f);
             CreateSpotLight(
                 "CoolFill_6500K",
@@ -699,14 +822,14 @@ namespace ThreeBladeEDC.EditorTools
                 target + new Vector3(-0.18f, 0.14f, 0.14f),
                 target,
                 6500f,
-                0.16f,
+                0.24f,
                 74f);
 
             RenderSettings.ambientMode = AmbientMode.Trilight;
-            RenderSettings.ambientSkyColor = new Color(0.12f, 0.14f, 0.18f);
-            RenderSettings.ambientEquatorColor = new Color(0.055f, 0.065f, 0.08f);
-            RenderSettings.ambientGroundColor = new Color(0.018f, 0.020f, 0.026f);
-            RenderSettings.reflectionIntensity = 0.35f;
+            RenderSettings.ambientSkyColor = new Color(0.16f, 0.18f, 0.22f);
+            RenderSettings.ambientEquatorColor = new Color(0.075f, 0.085f, 0.10f);
+            RenderSettings.ambientGroundColor = new Color(0.028f, 0.030f, 0.036f);
+            RenderSettings.reflectionIntensity = 0.48f;
             RenderSettings.defaultReflectionMode = DefaultReflectionMode.Custom;
             RenderSettings.customReflectionTexture = studioReflection;
 
@@ -744,9 +867,9 @@ namespace ThreeBladeEDC.EditorTools
             {
                 color = profile.Add<ColorAdjustments>(true);
             }
-            color.postExposure.Override(-0.3f);
-            color.contrast.Override(12f);
-            color.saturation.Override(-5f);
+            color.postExposure.Override(0.75f);
+            color.contrast.Override(4f);
+            color.saturation.Override(-2f);
 
             if (!profile.TryGet(out Vignette vignette))
             {

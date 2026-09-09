@@ -1,11 +1,11 @@
 """Author and validate the Fan Card manufactured geometry in Blender.
 
 The exported FBX contains the dark undercut, a genuinely open woven metal
-grille, three magnetic inserts, a low-profile polished bearing cap, and the
-canonical heavy Oxanium A/Q/K rank marks. Card motion remains authored by
-Unity's FanCardController and FanCardDetentProfile. Unity instantiates the rear
-mechanism only on the canonical TopCard and MiddleCard layers; the bearing cap
-is instantiated once on the shared axis.
+grille, three magnetic inserts, and the canonical heavy Oxanium A/Q/K rank
+marks. Card motion remains authored by Unity's FanCardController and
+FanCardDetentProfile. Unity instantiates the rear mechanism only on the
+canonical TopCard and MiddleCard layers. The front axis exposes only the
+recessed matte spindle; this export must contain no cap, ring, washer, or seat.
 """
 
 from __future__ import annotations
@@ -36,13 +36,13 @@ from validate_fan_card_guardrails import minimum_track_clearance
 
 CARD_WIDTH = 0.0635
 CARD_HEIGHT = 0.0889
-CARD_THICKNESS = 0.0025
-CARD_RADIUS = CARD_WIDTH * 0.06
+CARD_THICKNESS = 0.0035
+CARD_RADIUS = 0.0095
 PIVOT_X = CARD_WIDTH * 0.5 - CARD_RADIUS
 PIVOT_Y = CARD_HEIGHT * 0.5 - CARD_RADIUS
 CARD_CENTER = Vector((-PIVOT_X, -PIVOT_Y, 0.0))
 
-FOLLOWER = Vector((-0.0490, -0.0270))
+FOLLOWER = Vector((-0.04331, -0.02131))
 SWEEP_DEGREES = 45.0
 TRACK_SHELL_WIDTH = 0.0062
 TRACK_GRID_WIDTH = 0.00425
@@ -309,35 +309,6 @@ def create_magnet(
     return obj
 
 
-def create_bearing_cap(
-    radius: float,
-    visible_height: float,
-    material: bpy.types.Material,
-) -> bpy.types.Object:
-    """Create one oblate polished cap that reads as hardware, never a ring.
-
-    The equator sits at the top card face in Unity. Its lower half stays inside
-    the real through-hole while the upper half supplies a broad, unmistakable
-    bearing highlight. The cap radius remains smaller than the authored hole,
-    so it does not intersect the rigid card slab.
-    """
-    bpy.ops.mesh.primitive_uv_sphere_add(
-        segments=64,
-        ring_count=24,
-        radius=1.0,
-        location=(0.0, 0.0, 0.0),
-    )
-    cap = bpy.context.active_object
-    cap.name = "Axis_BearingCap_Chrome"
-    cap.data.name = "Axis_BearingCap_Chrome_Mesh"
-    cap.scale = (radius, radius, visible_height)
-    bpy.ops.object.transform_apply(location=False, rotation=False, scale=True)
-    cap.data.materials.append(material)
-    for polygon in cap.data.polygons:
-        polygon.use_smooth = True
-    return cap
-
-
 def create_rank_mark(
     glyph: str,
     object_name: str,
@@ -496,9 +467,6 @@ def main() -> None:
     etching = make_metal_material(
         "Etching", (0.018, 0.019, 0.021, 1.0), 0.76, 0.77, 520.0
     )
-    chrome = make_metal_material(
-        "BearingChrome", (0.72, 0.75, 0.79, 1.0), 1.0, 0.12, 900.0
-    )
 
     visual_track_start = rotate_2d(FOLLOWER, -TRACK_CAP_ANGLE_DEGREES)
     visual_track_sweep = SWEEP_DEGREES + TRACK_CAP_ANGLE_DEGREES * 2.0
@@ -521,13 +489,7 @@ def main() -> None:
         create_rank_mark("Q", "Queen_Q_Oxanium", etching),
         create_rank_mark("K", "King_K_Oxanium", etching),
     ]
-    bearing_cap = create_bearing_cap(
-        guardrails["mechanism"]["bearing_cap_radius"],
-        guardrails["mechanism"]["bearing_cap_height"],
-        chrome,
-    )
-
-    export_objects = [undercut, grille, *magnets, *rank_marks, bearing_cap]
+    export_objects = [undercut, grille, *magnets, *rank_marks]
     for obj in export_objects:
         obj["fan_card_role"] = obj.name
         obj["units"] = "meters"
@@ -676,12 +638,16 @@ def main() -> None:
             and guardrails["mechanism"]["follower_layers"]
             == ["MiddleCard", "BottomCard"]
         ),
-        "single_low_profile_bearing_cap": (
-            bearing_cap.type == "MESH"
-            and abs(bearing_cap.dimensions.x * 0.5
-                    - guardrails["mechanism"]["bearing_cap_radius"]) < 0.000001
-            and abs(bearing_cap.dimensions.z * 0.5
-                    - guardrails["mechanism"]["bearing_cap_height"]) < 0.000001
+        "front_axis_export_has_no_cap_ring_washer_or_seat": (
+            guardrails["mechanism"]["front_visible_axis_hardware"]
+                == "recessed_matte_spindle_only"
+            and all(
+                token.lower() not in obj.name.lower()
+                for obj in export_objects
+                for token in guardrails["mechanism"][
+                    "forbidden_front_axis_name_tokens"
+                ]
+            )
         ),
     }
     if not all(assertions.values()):

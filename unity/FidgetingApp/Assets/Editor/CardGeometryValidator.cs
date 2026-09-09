@@ -25,7 +25,6 @@ namespace FidgetingApp.EditorTools
             "MiddleCard",
             "TopCard"
         };
-
         private const string BodyName = "GunmetalFrame";
         private const string FrontFaceName = "WarmSilverFace";
         private const string BackFaceName = "WarmSilverBackFace";
@@ -35,7 +34,8 @@ namespace FidgetingApp.EditorTools
         // plane tolerance cannot be reused without swallowing millimetre-scale
         // hole triangles.
         private const float SignedAreaTolerance = 0.000000000001f;
-        private const float WeldTolerance = 0.000002f;
+        private const float WeldTolerance =
+            FanCardSpecifications.VisualMeshWeldTolerance;
         private const float MinimumShaftClearance = 0.00010f;
         private const float MinimumLayerAirGap =
             FanCardSpecifications.LayerAirGap;
@@ -120,6 +120,7 @@ namespace FidgetingApp.EditorTools
 
             ValidateLayerSeparation(cards);
             ValidateCommonAxis(root.transform, cards);
+            ValidateVisibleAxisHardware(root.transform);
             Finish();
             return failureCount == 0;
         }
@@ -261,6 +262,65 @@ namespace FidgetingApp.EditorTools
                         -FanCardSpecifications.CardThickness * 0.5f),
                     $"{card.Root.name}: bottom cap contains a real spindle opening");
             }
+        }
+
+        private static void ValidateVisibleAxisHardware(Transform root)
+        {
+            Transform[] axisObjects = root
+                .Cast<Transform>()
+                .Where(item => item.name.StartsWith(
+                    "CommonAxis_",
+                    StringComparison.Ordinal))
+                .ToArray();
+            Transform[] visibleAxisObjects = axisObjects
+                .Where(item =>
+                {
+                    Renderer renderer = item.GetComponent<Renderer>();
+                    return renderer != null && renderer.enabled;
+                })
+                .ToArray();
+            Check(
+                visibleAxisObjects.Length == 1
+                    && visibleAxisObjects[0].name
+                        == FanCardSpecifications.FrontVisibleAxisRendererName,
+                "Only the recessed matte spindle renders at the common axis");
+            Check(
+                !axisObjects.Any(item =>
+                    FanCardSpecifications.ForbiddenAxisHardwareNameTokens.Any(
+                        token => item.name.IndexOf(
+                            token,
+                            StringComparison.OrdinalIgnoreCase) >= 0)),
+                "No common-axis cap, ring, washer, seat, cover disc, or chrome ball");
+
+            Transform spindle = root.Find("CommonAxis_RecessedMatteSpindle");
+            Renderer spindleRenderer = spindle != null
+                ? spindle.GetComponent<Renderer>()
+                : null;
+            Check(
+                spindleRenderer != null
+                    && spindleRenderer.sharedMaterial != null
+                    && spindleRenderer.sharedMaterial.name
+                        == FanCardSpecifications.FrontVisibleAxisMaterialName
+                    && Mathf.Approximately(
+                        spindleRenderer.sharedMaterial.GetFloat("_Metallic"),
+                        FanCardSpecifications.FrontVisibleAxisMetallic)
+                    && Mathf.Approximately(
+                        spindleRenderer.sharedMaterial.GetFloat("_Smoothness"),
+                        FanCardSpecifications.FrontVisibleAxisSmoothness)
+                    && spindleRenderer.sharedMaterial.GetFloat(
+                        "_SpecularHighlights") == 0f
+                    && spindleRenderer.sharedMaterial.GetFloat(
+                        "_EnvironmentReflections") == 0f,
+                "The sole visible spindle is matte with no specular or environment reflection");
+
+            Transform marker = root.Find("CommonAxis_ShadowSleeve");
+            Renderer markerRenderer = marker != null
+                ? marker.GetComponent<Renderer>()
+                : null;
+            Check(
+                marker != null
+                    && (markerRenderer == null || !markerRenderer.enabled),
+                "The structural axis marker remains non-rendered");
         }
 
         private static bool IsFiniteAndRigid(Mesh mesh)

@@ -1,10 +1,11 @@
 import SwiftUI
 import UIKit
 
+#if LEGACY_GACHA_PRESENTATION
 // Shipping storefront presentation. Economy, ownership, pity and receipts stay
 // owned by GachaStoreModel/Unity; this file only replaces the native layout and
 // the single-result reveal presentation.
-public struct GachaStoreView: View {
+public struct LegacyGachaStorefrontView: View {
     @Environment(\.dismiss) private var dismiss
     @ObservedObject private var model = GachaStoreModel.shared
     @State private var selectedTab = 0
@@ -877,3 +878,4 @@ private extension GachaRarityTier {
         }
     }
 }
+#endif

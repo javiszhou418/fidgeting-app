@@ -30,11 +30,19 @@ namespace FidgetingApp.FanCard
     /// </summary>
     public sealed class FanCardMagneticTrack
     {
+        /// <summary>
+        /// Minimum rest inside a well before sustained device gravity may
+        /// break the next detent. Paces a held tilt to a readable click cadence
+        /// instead of one continuous slide.
+        /// </summary>
+        public const float DeviceStepDwellSeconds = 0.12f;
+
         private readonly FanCardDetentProfile profile;
         private float captureTarget;
         private float load;
         private bool captured = true;
         private int lastCrossedIndex;
+        private float deviceDwell = DeviceStepDwellSeconds;
 
         public FanCardMagneticTrack(FanCardDetentProfile profile)
         {
@@ -99,16 +107,28 @@ namespace FidgetingApp.FanCard
             State = MagneticDetentState.Capturing;
         }
 
+        /// <summary>
+        /// Advances the track. <paramref name="deviceLoad"/> is the normalized
+        /// device-gravity torque expressed in the same load units as
+        /// <see cref="FanCardDetentProfile.BreakawayLoad"/>; positive opens.
+        /// It only acts while no hand is active: a captured well shows it as
+        /// visible preload and releases one detent at a time once it reaches
+        /// breakaway, then the unchanged release-capture spring carries the
+        /// cards into the next well. With zero device load the equations are
+        /// identical to the approved prototype.
+        /// </summary>
         public FanCardStepResult Step(
             float deltaTime,
             float handTarget,
             bool handActive,
-            float traversalAuthority = 0f)
+            float traversalAuthority = 0f,
+            float deviceLoad = 0f)
         {
             bool brokeAway = false;
             int crossedCount = 0;
             int crossingDirection = 0;
             bool capturedThisStep = false;
+            bool deviceActive = !handActive && !Mathf.Approximately(deviceLoad, 0f);
             float remaining = Mathf.Min(
                 Mathf.Max(0f, deltaTime),
                 profile.MaximumFrameStepSeconds);
@@ -168,9 +188,39 @@ namespace FidgetingApp.FanCard
                     continue;
                 }
 
+                if (captured && deviceActive)
+                {
+                    load = deviceLoad;
+                    Velocity = 0f;
+                    deviceDwell += step;
+                    int direction = load > 0f ? 1 : -1;
+                    int nextIndex = CapturedDetentIndex + direction;
+                    bool nextWellExists = nextIndex >= 0
+                        && nextIndex <= profile.DetentIntervals;
+                    if (Mathf.Abs(load) >= profile.BreakawayLoad
+                        && nextWellExists
+                        && deviceDwell >= DeviceStepDwellSeconds)
+                    {
+                        captured = false;
+                        State = MagneticDetentState.Breakaway;
+                        Velocity = direction * profile.BreakawayImpulse;
+                        captureTarget = nextIndex / (float)profile.DetentIntervals;
+                        brokeAway = true;
+                        deviceDwell = 0f;
+                    }
+                    else
+                    {
+                        State = Mathf.Abs(load) > 0.006f
+                            ? MagneticDetentState.Loading
+                            : MagneticDetentState.Captured;
+                    }
+                    continue;
+                }
+
                 if (captured)
                 {
                     load = 0f;
+                    deviceDwell = DeviceStepDwellSeconds;
                     continue;
                 }
 
@@ -280,6 +330,7 @@ namespace FidgetingApp.FanCard
                 Position * profile.DetentIntervals);
             lastCrossedIndex = CapturedDetentIndex;
             State = MagneticDetentState.Captured;
+            deviceDwell = 0f;
         }
     }
 }

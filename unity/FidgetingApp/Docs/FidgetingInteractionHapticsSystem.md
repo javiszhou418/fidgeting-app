@@ -485,6 +485,25 @@ Tilt 有两种不同玩法，不能混为一谈：
 1. `Camera Parallax`：只移动观察视角，不向陀螺物理体施加力。
 2. `Gravity Drive`：将设备重力投影为物理力或转矩，适合 Bounce/Tilt 玩具。
 
+当前实现（2026-09-07，`FDB-INT-015`／`FDB-INT-017`）：
+
+```text
+CMDeviceMotion (右手系, +z 朝用户)
+        ↓ DeviceMotionMechanismCoupling
+rotationRate → 相机基底 (−rx, −ry, +rz)   // 伪向量翻转符号
+gravity / userAcceleration → (gx, gy, −gz)   // 真向量不翻转
+        ↓
+Rotor:   ω_rel −= Δω_phone(about spin axis)   // 自由转子保持世界角速度
+         locked 且 |ω_phone| ≥ 2.2 rad/s → Breakaway；期间禁止 capture
+Fan:     load = deadzone(τ_gravity, 0.06) × 0.18 → 每次一档 breakaway → release-capture
+Slide:   顶片重力摆 + 框架耦合（最大行程）；沿轨 flick → 滑到远端
+```
+
+- `0.06 rad/s` 陀螺死区与 `12 rad/s` 限幅保证静置永不产生冲量或档位。
+- 机身与机构之间的耦合只改变机构状态；Haptic 仍由机构的 `Breakaway / DetentCrossed / DetentCaptured / ShakeBurst` 产生。
+- 重力驱动使用绝对重力而不是参考姿态差值：差值会在放平手机时伪造“向上拉”。扇牌闭合态靠在末端挡块，竖持不会自开；推牌顶片在竖持时已处于悬垂平衡。
+- Library 浏览、离屏、Reset 清空全部设备驱动样本；恢复后第一帧只建立参考。
+
 ### 5.5 手机 360° 旋转 Device Twist
 
 用途：将手机本体视为一个无限 Dial，或让用户转动手机来驱动模型和 Detent。
@@ -501,6 +520,8 @@ Tilt 有两种不同玩法，不能混为一谈：
 - `twist.minimumTickInterval = 0.030 s`
 - `twist.recenterOnActivate = true`
 - `twist.accumulatedAngle` 使用 `Double` 或周期性安全归一化。
+
+当前实现（`DeviceTwistDial`，`FDB-INT-016`）：积分屏幕法线 `rotationRate.z`（`0.06 rad/s` 死区、`12 rad/s` 限幅），档位边界 `±1.0°` 迟滞，`30 ms` 限流只丢弃 tick、不延迟索引；语义 `TwistDetentCrossed` 由 `MetalDeviceMotionController`／`DeviceMotionController` 作为机构事件发出，coordinator 转交 router。转子棘轮正在跨档（`IsDetentTravelActive`）时拨盘让位；蓝色经典手指按住时让位。推牌／扇牌场景不叠加拨盘，它们的陀螺仪联动走重力／框架耦合。
 
 ### 5.6 Pinch Zoom
 
@@ -563,7 +584,7 @@ accelMagnitude <= thresholdOff
 | `shake.maximumAccelForMapping` | `3.0 g` | `2.5...4 g` |
 | `shake.spinImpulseMax` | `10 rad/s` | `4...18 rad/s` |
 
-当前产品不再由 Shake detector 播放明亮 Burst；达到 0.3g 的动作由低锐度 inertia channel 反馈，明确甩动仍可按既有方向给三叶陀螺角冲量。
+2026-09-07 起（`FDB-INT-018`）：明确甩动经 `RotorRigidbodyController.ApplyDeviceShakeImpulse` 施加 `4…10 rad/s` 角冲量；冲量真正改变转子状态时由转子发出 `ShakeBurst`，被磁吸保持住则静默；手指、AUTO、翻转、反向刹车期间忽略甩动。运动控制器不再直接调用 `AddFlickVelocity`，也不向 router 发 `ShakeBurst`。0.3g 的 inertia channel 保持不变，两者可同时出现，不互相 stop。
 
 ## 6. 推荐 Haptic Recipe Library
 
@@ -702,16 +723,19 @@ input.<inputId>.<parameter>
 - 第六款磁吸扇牌接入 5 个厚合金 click 与 8 声部池，只在用户授权的真实 `DetentCrossed` 上逐档播放一次。
 - 单指真实旋转角度、Pinch、相机 Orbit。
 - Core Motion 60 Hz 的 attitude、rotation rate、gravity 与 userAcceleration。
-- `userAcceleration` 的 0.30/0.22g 回差惯性触点、8/s 限流；金属模型原有明确甩动角冲量保持不变。
+- `userAcceleration` 的 0.30/0.22g 回差惯性触点、8/s 限流；金属模型明确甩动角冲量经转子发出 `ShakeBurst`。
+- 五款旋转玩具的手机框架耦合：机身绕转子轴转动改变转子相对角速度，金属棘轮按 `2.2 rad/s` 脱档，蓝色自由轮直接耦合；Haptic 全部来自转子自身语义。
+- `DeviceTwistDial` 24 档拨盘（五个旋转场景）发出 `TwistDetentCrossed`，转子跨档时让位。
+- 推牌顶片重力摆 + 框架耦合、滑片惯性 flick；扇牌重力逐档开合。事件仍由 `MagneticSlideTileShippingMechanism` 与 `FanCardMagneticTrack` 发出。
 - SwiftUI `DETENT LAB` 热切换四个预设并显示实时值；日常/高级设置不再重复暴露 Detent 参数。
 
 ### 需要重构或新增
 
-1. 经典蓝色模型的 Detent 仍由拖拽累计产生；需要像三叶金属一样迁移到实际转子 unwrapped angle。
+1. 经典蓝色模型的 Detent 仍由累计角产生；需要像三叶金属一样迁移到实际转子 unwrapped angle。蓝色作为自由轮已接入框架耦合、甩动与拨盘（用户要求“应用到所有的陀螺上面”），没有磁吸捕获逻辑。
 2. 高速 Detent 已连接 continuous advanced player；仍需在 iPhone 验收 30/s crossover、engine 恢复与温升。
-3. 现有控制器读取 yaw 但没有使用；Device Twist 需要 yaw unwrap 或 quaternion/rotation-rate 累计。
-4. 当前 Router 只对高频 Detent 做 rate limit；后续还需加入跨语义优先级、抢占与更完整的 layering policy。
-5. Gravity 已输出但尚未连接 Gravity Drive 玩法。
+3. 手机框架耦合、拨盘、重力／flick 驱动与甩动确认已实现并有 EditMode 覆盖；仍需真机验证 rotation rate 符号映射、拨盘可辨性、扇牌／推牌倾斜阈值、flick 误触与静置零自运动。符号或阈值不对只改常量。
+4. 当前 Router 只对高频 Detent 做 rate limit，拨盘自带 30 ms 限流；后续还需加入跨语义优先级、抢占与更完整的 layering policy。
+5. 旧 `MagneticDetentTrack1D` 直线滑块路径没有接入重力驱动；shipping `MeshyEDC` 场景使用 Gate12R002 机构。
 6. `InteractionTuningParameters.md` 仍包含历史调参记录，不能再作为当前 Haptic 架构的唯一事实来源。
 
 ## 10. 验收标准
@@ -741,6 +765,15 @@ input.<inputId>.<parameter>
 - 穿越 `-180° / +180°` 时累计角度连续。
 - 手机完整旋转 360° 后 detent 数量与配置一致。
 - 快速旋转受 rate limit 控制，但最终 detent index 正确。
+- 静置 60 s、陀螺噪声 `±0.05 rad/s` 不产生任何 tick 或索引变化。
+- 转子棘轮正在跨档时不叠加拨盘 tick。
+
+### 手机框架耦合与设备重力驱动
+
+- 手机绕转子轴来回转动并停止后，自由转子相对手机的净速度变化为零；转动期间滞后方向与手机相反。
+- 被捕获的棘轮在手机转速低于 `2.2 rad/s` 时随机身共转、不跨档；达到阈值只脱档一次，停转后以零速度重新捕获。
+- 扇牌：低于 breakaway 的倾斜只产生可见预压、不跨档；持续倾斜一次一档，`30/60/120 Hz` 落在同一档，端点不再脱档，最终速度为零；手指持有期间重力无效。
+- 推牌：角度未对齐时 flick 不动滑片；对齐且静止时一次 flick 滑到远端并按既有边缘提示／端点语义发声；最大行程处顶片在重力下摆到悬垂最近档并捕获。
 
 ### 设备惯性
 

@@ -29,7 +29,8 @@ namespace FidgetingApp.Product.Gacha
             GachaRarity rarity,
             GachaPrizeKind kind,
             string displayName,
-            string contentReference)
+            string contentReference,
+            string editionFinish = "")
         {
             Id = id ?? string.Empty;
             SeriesId = seriesId ?? string.Empty;
@@ -37,6 +38,7 @@ namespace FidgetingApp.Product.Gacha
             Kind = kind;
             DisplayName = displayName ?? string.Empty;
             ContentReference = contentReference ?? string.Empty;
+            EditionFinish = editionFinish ?? string.Empty;
         }
 
         public string Id { get; }
@@ -44,6 +46,7 @@ namespace FidgetingApp.Product.Gacha
         public GachaRarity Rarity { get; }
         public GachaPrizeKind Kind { get; }
         public string DisplayName { get; }
+        public string EditionFinish { get; }
 
         /// <summary>
         /// Stable reference consumed by the reveal director: a skin id, a
@@ -229,9 +232,10 @@ namespace FidgetingApp.Product.Gacha
                         GachaRarity.Signature, GachaPrizeKind.ToySkin,
                         "铜层岩理", "skin/pointed-three-blade/gacha-copper-strata"),
                     new GachaPrizeDefinition(
-                        "canyon-heir-aurora-vein", LaunchSeriesId,
-                        GachaRarity.Heirloom, GachaPrizeKind.ToySkin,
-                        "极光矿脉", "skin/pointed-three-blade/gacha-aurora-vein")
+                        "canyon-heir-metal-three-blade", LaunchSeriesId,
+                        GachaRarity.Heirloom, GachaPrizeKind.Toy,
+                        "三叶金属陀螺", "toy/metal-three-blade",
+                        "峡谷矿脉 · 抛光钢")
                 })
         };
 

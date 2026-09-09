@@ -120,6 +120,29 @@ namespace FidgetingApp.Product
             "EnvironmentBackgrounds/EnvironmentStarfieldMaterial";
         public const string UnifiedBackgroundResourcePath =
             "EnvironmentBackgrounds/canyon-unified-ledgestone-v1-2x";
+        public const string FanCardTopKeyName = "CanyonTopKey";
+        public static readonly Color FanCardTopKeyColor =
+            new(0.95f, 0.97f, 1.00f);
+        public const float FanCardTopKeyIntensity = 1.55f;
+        public const string FanCardRockBounceName = "CanyonRockBounce";
+        public static readonly Color FanCardRockBounceColor =
+            new(1.00f, 0.82f, 0.64f);
+        public const float FanCardRockBounceIntensity = 0.18f;
+        public const string FanCardSkyFillName = "CanyonSkyFill";
+        public static readonly Color FanCardSkyFillColor =
+            new(0.62f, 0.74f, 1.00f);
+        public const float FanCardSkyFillIntensity = 0.34f;
+        public const string FanCardApertureTopLightName =
+            "CanyonApertureTopLight";
+        public static readonly Color FanCardApertureTopLightColor =
+            new(0.96f, 0.98f, 1.00f);
+        public const float FanCardApertureTopLightIntensity = 0.04f;
+        public const float FanCardApertureTopLightRange = 0.42f;
+        public const float FanCardApertureTopLightSpotAngle = 92f;
+        public const float FanCardApertureTopLightInnerAngle = 68f;
+        public static readonly Vector3 FanCardApertureTopLightOffset =
+            new(0.025f, 0.19f, 0.10f);
+        public const float FanCardReflectionIntensity = 0.42f;
 
         private static readonly SpinnerEnvironmentProfile[] profiles =
         {
@@ -170,8 +193,10 @@ namespace FidgetingApp.Product
                 new Color(0.058f, 0.055f, 0.052f),
                 new Color(0.018f, 0.017f, 0.016f),
                 0.66f,
-                0.48f,
-                0.42f,
+                // GEEONE: library and detail share one lighting recipe
+                // (user 2026-09-08 "内外一定要一致"), so no library dimming.
+                1.00f,
+                1.00f,
                 SpinnerGroundingStageShape.SoftSquare,
                 1.32f,
                 0.10f,
@@ -261,8 +286,8 @@ namespace FidgetingApp.Product
                 new Color(0.050f, 0.052f, 0.049f),
                 new Color(0.013f, 0.014f, 0.013f),
                 0.56f,
-                0.20f,
-                0.28f,
+                0.48f,
+                0.42f,
                 SpinnerGroundingStageShape.SoftSquare,
                 1.42f,
                 0.065f,
@@ -289,22 +314,30 @@ namespace FidgetingApp.Product
                 new Color(0.22f, 0.205f, 0.185f),
                 new Color(0.10f, 0.092f, 0.082f),
                 new Color(0.028f, 0.025f, 0.022f),
-                0.28f,
-                0.56f,
-                0.40f,
+                FanCardReflectionIntensity,
+                0.70f,
+                0.80f,
                 SpinnerGroundingStageShape.SoftSquare,
                 1.40f,
                 0.075f,
                 true,
                 string.Empty,
                 new SpinnerEnvironmentLightPreset(
-                    "LargeSoftKey_UpperLeft",
-                    new Color(1.00f, 0.88f, 0.76f),
-                    0.92f),
+                    FanCardTopKeyName,
+                    FanCardTopKeyColor,
+                    FanCardTopKeyIntensity),
                 new SpinnerEnvironmentLightPreset(
-                    "CoolBroadFill",
-                    new Color(0.58f, 0.68f, 0.78f),
-                    0.28f))
+                    FanCardRockBounceName,
+                    FanCardRockBounceColor,
+                    FanCardRockBounceIntensity),
+                new SpinnerEnvironmentLightPreset(
+                    FanCardSkyFillName,
+                    FanCardSkyFillColor,
+                    FanCardSkyFillIntensity),
+                new SpinnerEnvironmentLightPreset(
+                    FanCardApertureTopLightName,
+                    FanCardApertureTopLightColor,
+                    FanCardApertureTopLightIntensity))
         };
 
         public static IReadOnlyList<SpinnerEnvironmentProfile> Profiles => profiles;
@@ -566,6 +599,7 @@ namespace FidgetingApp.Product
                 ParallaxController = gameObject.AddComponent<SpinnerSceneParallaxController>();
             }
             ParallaxController.Configure(this, ImageBasedLighting);
+            SpinnerSharedPresentationGrading.Ensure(targetCamera);
             ResizeBackground(true);
             return true;
         }
@@ -687,14 +721,28 @@ namespace FidgetingApp.Product
             }
             else
             {
+                bool fanCardCanyon = string.Equals(
+                    currentProfile.ModelId,
+                    "magnetic-fan-card",
+                    StringComparison.Ordinal);
+                Vector2 contactKeyViewport = fanCardCanyon && ImageBasedLighting != null
+                    ? ImageBasedLighting.CurrentPalette.KeyViewport
+                    : new Vector2(0.50f, 0.50f);
                 ConfigureBackgroundSubjectGlow(
                     backgroundRenderer,
                     backgroundGlowProperties,
                     leftGlow,
                     rightGlow,
                     normalizedTilt,
-                    modelHoverNormalized);
+                    modelHoverNormalized,
+                    contactKeyViewport,
+                    fanCardCanyon);
             }
+
+            bool fenceFanCardGlow = string.Equals(
+                currentProfile.ModelId,
+                "magnetic-fan-card",
+                StringComparison.Ordinal);
             ConfigureForegroundGlow(
                 leftForegroundRenderer,
                 leftGlowProperties,
@@ -702,7 +750,10 @@ namespace FidgetingApp.Product
                 rightGlow,
                 new Vector2(
                     0.22f + normalizedTilt.x * 0.035f,
-                    0.50f + normalizedTilt.y * 0.030f));
+                    0.50f + normalizedTilt.y * 0.030f),
+                fenceFanCardGlow
+                    ? SpinnerImageBasedLightingController.FanCardForegroundGlowIntensity
+                    : 0.32f);
             ConfigureForegroundGlow(
                 rightForegroundRenderer,
                 rightGlowProperties,
@@ -710,14 +761,17 @@ namespace FidgetingApp.Product
                 leftGlow,
                 new Vector2(
                     0.78f + normalizedTilt.x * 0.035f,
-                    0.46f + normalizedTilt.y * 0.030f));
+                    0.46f + normalizedTilt.y * 0.030f),
+                fenceFanCardGlow
+                    ? SpinnerImageBasedLightingController.FanCardForegroundGlowIntensity
+                    : 0.32f);
         }
 
         public void SetLibraryPreviewActive(bool active, bool immediate = false)
         {
             float targetVisibility = active ? 1f : 0f;
             GroundingStage?.SetLibraryPreviewActive(active, immediate);
-            ImageBasedLighting?.SetLibraryPreviewActive(active);
+            ImageBasedLighting?.SetLibraryPreviewActive(active, immediate);
             ParallaxController?.SetLibraryPreviewActive(active, immediate);
             if (immediate)
             {
@@ -745,6 +799,7 @@ namespace FidgetingApp.Product
             framingVisibility = 1f - Mathf.Clamp01(progress);
             targetFramingVisibility = framingVisibility;
             GroundingStage?.SetDetailEntranceProgressForPreview(progress);
+            ImageBasedLighting?.SetDetailEntranceProgressForPreview(progress);
             ApplyParallaxOffsets();
         }
 
@@ -1137,7 +1192,8 @@ namespace FidgetingApp.Product
             MaterialPropertyBlock properties,
             Color primary,
             Color secondary,
-            Vector2 center)
+            Vector2 center,
+            float intensity)
         {
             if (renderer == null)
             {
@@ -1153,7 +1209,8 @@ namespace FidgetingApp.Product
             properties.SetVector(
                 "_GlowCenterB",
                 new Vector4(1f - center.x, center.y - 0.10f, 0f, 0f));
-            properties.SetFloat("_GlowIntensity", 0.32f);
+            properties.SetFloat("_GlowEnabled", intensity > 0f ? 1f : 0f);
+            properties.SetFloat("_GlowIntensity", intensity);
             properties.SetVector("_GlowScaleA", new Vector4(0.5625f, 1f, 0f, 0f));
             properties.SetVector("_GlowScaleB", new Vector4(0.5625f, 1f, 0f, 0f));
             renderer.SetPropertyBlock(properties);
@@ -1165,7 +1222,9 @@ namespace FidgetingApp.Product
             Color leftColor,
             Color rightColor,
             Vector2 normalizedTilt,
-            float hoverNormalized)
+            float hoverNormalized,
+            Vector2 keyViewport,
+            bool fanCardPedestalVolume = false)
         {
             if (renderer == null)
             {
@@ -1175,48 +1234,103 @@ namespace FidgetingApp.Product
             renderer.GetPropertyBlock(properties);
             Color subjectColor = Color.Lerp(leftColor, rightColor, 0.5f);
             Color contactColor = Color.Lerp(rightColor, leftColor, 0.32f);
-            properties.SetFloat("_GlowEnabled", 1f);
+            float shadowCenterX =
+                SpinnerImageBasedLightingController.ResolveFanCardContactShadowCenterX(
+                    keyViewport);
+            bool glowEnabled = !fanCardPedestalVolume
+                || SpinnerImageBasedLightingController.FanCardPedestalGlowIntensity > 0f;
+            properties.SetFloat("_GlowEnabled", glowEnabled ? 1f : 0f);
             properties.SetColor("_GlowColorA", subjectColor.linear * 0.84f);
             properties.SetColor("_GlowColorB", contactColor.linear * 0.62f);
-            properties.SetVector(
-                "_GlowCenterA",
-                new Vector4(
-                    0.50f + normalizedTilt.x * 0.028f,
-                    0.43f + normalizedTilt.y * 0.020f,
-                    0f,
-                    0f));
-            properties.SetVector(
-                "_GlowCenterB",
-                new Vector4(
-                    0.50f - normalizedTilt.x * 0.012f,
-                    0.315f + normalizedTilt.y * 0.006f,
-                    0f,
-                    0f));
-            properties.SetVector("_GlowScaleA", new Vector4(0.5625f, 1f, 0f, 0f));
-            properties.SetVector("_GlowScaleB", new Vector4(0.42f, 2.8f, 0f, 0f));
-            properties.SetFloat("_GlowRadius", 0.24f);
-            properties.SetFloat("_GlowIntensity", 0.42f);
+            if (fanCardPedestalVolume)
+            {
+                float pedestalY =
+                    SpinnerImageBasedLightingController.FanCardPedestalGlowCenterY;
+                properties.SetVector(
+                    "_GlowCenterA",
+                    new Vector4(
+                        0.50f + normalizedTilt.x * 0.010f,
+                        pedestalY + 0.04f + normalizedTilt.y * 0.008f,
+                        0f,
+                        0f));
+                properties.SetVector(
+                    "_GlowCenterB",
+                    new Vector4(
+                        0.50f - normalizedTilt.x * 0.006f,
+                        pedestalY + normalizedTilt.y * 0.004f,
+                        0f,
+                        0f));
+                properties.SetVector("_GlowScaleA", new Vector4(2.00f, 3.10f, 0f, 0f));
+                properties.SetVector("_GlowScaleB", new Vector4(2.40f, 3.60f, 0f, 0f));
+                properties.SetFloat(
+                    "_GlowRadius",
+                    SpinnerImageBasedLightingController.FanCardPedestalGlowRadius);
+                properties.SetFloat(
+                    "_GlowIntensity",
+                    SpinnerImageBasedLightingController.FanCardPedestalGlowIntensity);
+            }
+            else
+            {
+                properties.SetVector(
+                    "_GlowCenterA",
+                    new Vector4(
+                        0.50f + normalizedTilt.x * 0.028f,
+                        0.43f + normalizedTilt.y * 0.020f,
+                        0f,
+                        0f));
+                properties.SetVector(
+                    "_GlowCenterB",
+                    new Vector4(
+                        0.50f - normalizedTilt.x * 0.012f,
+                        0.315f + normalizedTilt.y * 0.006f,
+                        0f,
+                        0f));
+                properties.SetVector("_GlowScaleA", new Vector4(0.5625f, 1f, 0f, 0f));
+                properties.SetVector("_GlowScaleB", new Vector4(0.42f, 2.8f, 0f, 0f));
+                properties.SetFloat("_GlowRadius", 0.24f);
+                properties.SetFloat("_GlowIntensity", 0.42f);
+            }
             properties.SetFloat("_ShadowEnabled", 1f);
             properties.SetVector(
                 "_ShadowCenter",
                 new Vector4(
-                    0.50f + normalizedTilt.x * 0.030f,
+                    shadowCenterX + normalizedTilt.x * 0.030f,
                     0.325f + normalizedTilt.y * 0.008f,
                     0f,
                     0f));
             properties.SetVector(
                 "_ShadowScale",
                 new Vector4(
-                    Mathf.Lerp(0.82f, 0.70f, hoverNormalized),
-                    Mathf.Lerp(11.0f, 8.2f, hoverNormalized),
+                    fanCardPedestalVolume
+                        ? Mathf.Lerp(
+                            SpinnerImageBasedLightingController.FanCardContactShadowScaleX,
+                            0.70f,
+                            hoverNormalized)
+                        : Mathf.Lerp(0.82f, 0.70f, hoverNormalized),
+                    fanCardPedestalVolume
+                        ? Mathf.Lerp(
+                            SpinnerImageBasedLightingController.FanCardContactShadowScaleY,
+                            8.2f,
+                            hoverNormalized)
+                        : Mathf.Lerp(11.0f, 8.2f, hoverNormalized),
                     0f,
                     0f));
             properties.SetFloat(
                 "_ShadowRadius",
-                Mathf.Lerp(0.175f, 0.225f, hoverNormalized));
+                fanCardPedestalVolume
+                    ? Mathf.Lerp(
+                        SpinnerImageBasedLightingController.FanCardContactShadowRadius,
+                        0.185f,
+                        hoverNormalized)
+                    : Mathf.Lerp(0.175f, 0.225f, hoverNormalized));
             properties.SetFloat(
                 "_ShadowStrength",
-                Mathf.Lerp(0.88f, 0.50f, hoverNormalized));
+                fanCardPedestalVolume
+                    ? Mathf.Lerp(
+                        SpinnerImageBasedLightingController.FanCardContactShadowStrength,
+                        0.34f,
+                        hoverNormalized)
+                    : Mathf.Lerp(0.88f, 0.50f, hoverNormalized));
             renderer.SetPropertyBlock(properties);
         }
 

@@ -95,7 +95,7 @@ namespace FidgetingApp.FanCard.EditorTools
             string source = Path.Combine(
                 projectRoot,
                 "ArtSource/ModelPipeline/magnetic-fan-card/evidence/"
-                    + "10-export/rev-003/magnetic-fan-card.fbx");
+                    + "10-export/rev-004/magnetic-fan-card-no-axis-ring.fbx");
             string destination = Path.Combine(projectRoot, VisualModelPath);
             if (!File.Exists(source))
             {
@@ -136,6 +136,24 @@ namespace FidgetingApp.FanCard.EditorTools
             Mesh[] meshes = AssetDatabase.LoadAllAssetsAtPath(VisualModelPath)
                 .OfType<Mesh>()
                 .ToArray();
+            string[] forbiddenMeshes = meshes
+                .Select(mesh => mesh.name)
+                .Where(name => name.IndexOf(
+                    "Axis",
+                    StringComparison.OrdinalIgnoreCase) >= 0)
+                .Where(name =>
+                    FanCardSpecifications.ForbiddenAxisHardwareNameTokens.Any(token =>
+                        name.IndexOf(
+                            token,
+                            StringComparison.OrdinalIgnoreCase) >= 0))
+                .ToArray();
+            if (forbiddenMeshes.Length > 0)
+            {
+                throw new InvalidDataException(
+                    "The Fan Card visual FBX contains forbidden front-axis "
+                    + "hardware: "
+                    + string.Join(", ", forbiddenMeshes));
+            }
             string[] required =
             {
                 "BottomCard_GunmetalFrame",

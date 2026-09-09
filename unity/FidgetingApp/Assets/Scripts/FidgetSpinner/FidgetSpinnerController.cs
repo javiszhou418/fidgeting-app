@@ -69,6 +69,9 @@ namespace CodexUnityLab
         private bool hasDetentIndex;
         private bool assistantDriveActive;
         private float assistantTargetSpeed;
+        private bool hasDeviceFrameSample;
+        private float deviceFrameRate;
+        private float deviceFrameRateApplied;
 
         public event Action<float> SpinGestureCompleted;
 
@@ -79,6 +82,9 @@ namespace CodexUnityLab
             ? Vector3.Dot(spinnerBody.angularVelocity, Vector3.up)
             : 0f;
         public bool IsAssistantDriving => assistantDriveActive;
+        /// <summary>World spin axis of the classic rotor (Rigidbody constraint axis).</summary>
+        public Vector3 SpinAxisWorld => Vector3.up;
+        public float DeviceFrameRate => hasDeviceFrameSample ? deviceFrameRate : 0f;
 
         private void Awake()
         {
@@ -110,6 +116,7 @@ namespace CodexUnityLab
         private void OnDisable()
         {
             assistantDriveActive = false;
+            ClearDeviceFrameRotation();
             ResetTouchState();
 
             if (enhancedTouchEnabledByController && EnhancedTouchSupport.enabled)
@@ -382,6 +389,23 @@ namespace CodexUnityLab
             else if (!fingerControlling)
             {
                 float speed = Vector3.Dot(spinnerBody.angularVelocity, Vector3.up);
+                // Free rotor: the phone turning about the spin axis leaves the
+                // rotor's world angular velocity alone, so its speed relative
+                // to the phone changes by minus the phone-rate change. The
+                // half-life below then acts as bearing friction.
+                if (hasDeviceFrameSample)
+                {
+                    speed = global::ThreeBladeEDC.FidgetSpinnerMotion
+                        .ApplyDeviceFrameCoupling(
+                            speed,
+                            deviceFrameRate,
+                            deviceFrameRateApplied,
+                            false,
+                            false,
+                            0f,
+                            maximumAngularSpeed)
+                        .AxialSpeed;
+                }
                 float decayed = global::ThreeBladeEDC.FidgetSpinnerMotion.ApplyCoastHalfLife(
                     speed,
                     Time.fixedUnscaledDeltaTime,
@@ -393,7 +417,67 @@ namespace CodexUnityLab
                 spinnerBody.angularVelocity = Vector3.up * decayed;
             }
 
+            // Finger and assistant own the rotor: track the phone so resuming
+            // never replays the rate change that happened meanwhile.
+            deviceFrameRateApplied = deviceFrameRate;
             TrackDetentCrossing();
+        }
+
+        /// <summary>
+        /// Latest phone rotation rate about the spin axis (Unity sign, rad/s,
+        /// already dead-zoned), published every frame by the motion controller.
+        /// </summary>
+        public void SetDeviceFrameRotationRate(float rateAboutSpinAxis)
+        {
+            float clamped = Mathf.Clamp(
+                rateAboutSpinAxis,
+                -maximumAngularSpeed,
+                maximumAngularSpeed);
+            if (!hasDeviceFrameSample)
+            {
+                deviceFrameRateApplied = clamped;
+                hasDeviceFrameSample = true;
+            }
+            deviceFrameRate = clamped;
+        }
+
+        /// <summary>
+        /// Drops the phone-frame sample so no stored rate can turn into an
+        /// impulse after reset, suspension, or a scene change.
+        /// </summary>
+        public void ClearDeviceFrameRotation()
+        {
+            hasDeviceFrameSample = false;
+            deviceFrameRate = 0f;
+            deviceFrameRateApplied = 0f;
+        }
+
+        /// <summary>
+        /// Device shake impulse. Finger and assistant keep authority. The
+        /// rotor raises ShakeBurst itself because its state changed.
+        /// </summary>
+        public bool ApplyDeviceShakeImpulse(
+            float deltaRadiansPerSecond,
+            float normalizedStrength)
+        {
+            if (spinnerBody == null
+                || IsFingerControlling
+                || assistantDriveActive
+                || Mathf.Approximately(deltaRadiansPerSecond, 0f))
+            {
+                return false;
+            }
+
+            float requested = Mathf.Clamp(
+                AngularSpeedRadians + deltaRadiansPerSecond,
+                -maximumAngularSpeed,
+                maximumAngularSpeed);
+            spinnerBody.angularVelocity = Vector3.up * requested;
+            spinnerBody.WakeUp();
+            FidgetHapticRouter.Emit(
+                FidgetSemanticEvent.ShakeBurst,
+                Mathf.Clamp01(normalizedStrength));
+            return true;
         }
 
         private void StopFromTap()
@@ -806,6 +890,7 @@ namespace CodexUnityLab
             filteredHorizontalVelocity = 0f;
             spinnerBody.angularVelocity = Vector3.zero;
             accumulatedRotationDegrees = 0f;
+            ClearDeviceFrameRotation();
             ResetDetentTracking();
             cameraFramer?.ResetInteractiveView();
             FidgetHapticRouter.Emit(FidgetSemanticEvent.Reset);
