@@ -44,17 +44,9 @@ namespace FidgetingApp.DisplayCase
         private static readonly PremiumDisplayCaseProductProfile[] profiles =
         {
             BaselineProfile(
-                ProductCatalog.PointedThreeBladeModelId,
-                "EDGE TRIAD",
-                "ThreeBladeEDC_Root"),
-            BaselineProfile(
                 ProductCatalog.MetalThreeBladeModelId,
                 "MAGNETIC TRINITY",
                 "ThreeBladeEDC_Root"),
-            BaselineProfile(
-                ProductCatalog.GoldFourWingModelId,
-                "MIRROR QUAD",
-                "ImportedSpinner_Root"),
             BaselineProfile(
                 ProductCatalog.GraphiteTwoLobeModelId,
                 "GRAPHITE DUO",

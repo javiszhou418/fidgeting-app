@@ -67,8 +67,9 @@ namespace CodexUnityLabEditor
                 OpenSceneMode.Single);
             GameObject productRoot = scene.GetRootGameObjects()
                 .First(root => root.name == "ThreeBladeEDC_Root");
-            Transform visibleTopCap = productRoot.transform.Find(
-                "HubStatic/TopCap/TopCap_Root/FingerCapTop_BrushedFace");
+            Transform visibleTopCap = productRoot.transform.Find("HubStatic/TopCap/Cap_Top")
+                ?? productRoot.transform.Find(
+                    "HubStatic/TopCap/TopCap_Root/FingerCapTop_BrushedFace");
             if (visibleTopCap == null
                 || !(visibleTopCap.GetComponent<MeshRenderer>() is MeshRenderer capRenderer)
                 || !capRenderer.enabled)
@@ -254,8 +255,9 @@ namespace CodexUnityLabEditor
                 OpenSceneMode.Single);
             GameObject productRoot = scene.GetRootGameObjects()
                 .First(root => root.name == "ThreeBladeEDC_Root");
-            Transform visibleTopCap = productRoot.transform.Find(
-                "HubStatic/TopCap/TopCap_Root/FingerCapTop_BrushedFace");
+            Transform visibleTopCap = productRoot.transform.Find("HubStatic/TopCap/Cap_Top")
+                ?? productRoot.transform.Find(
+                    "HubStatic/TopCap/TopCap_Root/FingerCapTop_BrushedFace");
             if (visibleTopCap == null
                 || !(visibleTopCap.GetComponent<MeshRenderer>() is MeshRenderer capRenderer)
                 || !capRenderer.enabled)

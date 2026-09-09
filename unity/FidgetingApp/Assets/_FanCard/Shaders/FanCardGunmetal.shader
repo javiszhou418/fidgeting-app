@@ -32,10 +32,13 @@ Shader "FidgetingApp/FanCardGunmetal"
             #pragma fragment Frag
             #pragma target 3.0
             #pragma multi_compile _ _MAIN_LIGHT_SHADOWS _MAIN_LIGHT_SHADOWS_CASCADE
+            #pragma multi_compile _ _ADDITIONAL_LIGHTS_VERTEX _ADDITIONAL_LIGHTS
+            #pragma multi_compile _ _CLUSTER_LIGHT_LOOP
 
             #include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Core.hlsl"
             #include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Lighting.hlsl"
             #include "Packages/com.unity.render-pipelines.core/ShaderLibrary/Packing.hlsl"
+            #include "FanCardMovingLights.hlsl"
 
             TEXTURE2D(_BaseMap);
             SAMPLER(sampler_BaseMap);
@@ -123,16 +126,18 @@ Shader "FidgetingApp/FanCardGunmetal"
                 float broadSheen = pow(
                     nDotH,
                     lerp(3.0, 10.0, _Smoothness));
+                float3 reflectionWS = FanCardRotateReflection(
+                    reflect(-viewWS, normalWS));
                 half3 environmentSpecular = GlossyEnvironmentReflection(
-                    reflect(-viewWS, normalWS),
+                    reflectionWS,
                     roughness,
                     1.0);
 
                 float hemisphere = saturate(normalWS.y * 0.5 + 0.5);
                 half3 color = albedo * (
-                    0.14
+                    0.12
                     + hemisphere * 0.10
-                    + ambientIrradiance * lerp(1.0, 0.28, _Metallic));
+                    + ambientIrradiance * lerp(1.0, 0.55, _Metallic));
                 color += albedo
                     * mainLight.color
                     * nDotL
@@ -143,9 +148,17 @@ Shader "FidgetingApp/FanCardGunmetal"
                     * broadSheen
                     * attenuation
                     * lerp(0.06, 0.14, _Metallic);
+                color += FanCardSampleAdditionalLights(
+                    input.positionWS,
+                    input.positionCS,
+                    albedo,
+                    normalWS,
+                    viewWS,
+                    _Metallic,
+                    _Smoothness);
                 color += environmentSpecular
                     * fresnel
-                    * lerp(0.04, 0.08, _Metallic);
+                    * lerp(0.12, 0.32, _Metallic);
                 return half4(color, 1.0);
             }
             ENDHLSL

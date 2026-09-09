@@ -64,7 +64,31 @@ namespace CodexUnityLab
         Preview = 12,
         InertiaShift = 13,
         MagneticEdgeProbe = 14,
-        BadgeUnlocked = 15
+        BadgeUnlocked = 15,
+        /// <summary>
+        /// The phone body crossed one detent of the Device Twist dial. This
+        /// is a mechanism event from <c>DeviceTwistDial</c>, not a rotor detent.
+        /// </summary>
+        TwistDetentCrossed = 16
+    }
+
+    /// <summary>
+    /// Isolated-transient values for the Device Twist dial. Softer than the
+    /// rotor ratchet so the two tick sources stay distinguishable on device.
+    /// </summary>
+    public static class DeviceTwistHapticRecipe
+    {
+        public const float MinimumIntensity = 0.34f;
+        public const float MaximumIntensity = 0.62f;
+        public const float Sharpness = 0.56f;
+
+        public static float ResolveIntensity(float normalizedRate)
+        {
+            return Mathf.Lerp(
+                MinimumIntensity,
+                MaximumIntensity,
+                Mathf.Clamp01(normalizedRate));
+        }
     }
 
     /// <summary>
@@ -484,6 +508,13 @@ namespace CodexUnityLab
                     duration = 0.012f;
                     usesFinalIsolatedValues = true;
                     break;
+                case FidgetSemanticEvent.TwistDetentCrossed:
+                    baseIntensity = DeviceTwistHapticRecipe.ResolveIntensity(signal);
+                    baseSharpness = DeviceTwistHapticRecipe.Sharpness;
+                    endIntensity = baseIntensity;
+                    endSharpness = baseSharpness;
+                    usesFinalIsolatedValues = true;
+                    break;
                 case FidgetSemanticEvent.ButtonPressed:
                     baseIntensity = 0.55f;
                     baseSharpness = 0.88f;
@@ -645,6 +676,8 @@ namespace CodexUnityLab
         public static HapticSpeedTextureProfile SpeedTextureProfile => speedTextureProfile;
         public static HapticSpeedTextureSample SpeedTextureSample => speedTextureSample;
         public static DetentFeelConfig DetentFeel => detentFeel;
+        public static int LastMagneticSliderDirection { get; private set; }
+        public static int LastMagneticSliderDetentIndex { get; private set; }
 
         public static void ConfigureDetentFeel(DetentFeelConfig config)
         {
@@ -748,9 +781,20 @@ namespace CodexUnityLab
         public static void EmitMagneticSlider(
             FidgetSemanticEvent semanticEvent,
             float normalizedSignal,
-            MagneticSliderHapticTuning tuning)
+            MagneticSliderHapticTuning tuning,
+            int direction = 0,
+            int detentIndex = 0)
         {
             lastSemanticEvent = semanticEvent;
+            if (semanticEvent == FidgetSemanticEvent.DetentCrossed)
+            {
+                LastMagneticSliderDirection = direction < 0
+                    ? -1
+                    : direction > 0
+                        ? 1
+                        : 0;
+                LastMagneticSliderDetentIndex = detentIndex;
+            }
             if (semanticEvent == FidgetSemanticEvent.MagneticEdgeProbe)
             {
                 float signal = Mathf.Clamp01(normalizedSignal);
@@ -895,6 +939,18 @@ namespace CodexUnityLab
             {
                 renderedEventCount++;
                 IosHaptics.PlayInertiaTransientResolved(normalizedSignal);
+                return;
+            }
+
+            if (semanticEvent == FidgetSemanticEvent.TwistDetentCrossed)
+            {
+                // The dial rate-limits itself (30 ms) and must not share the
+                // rotor detent gate, so a phone twist during rotor coasting
+                // never steals or delays a real ratchet tick.
+                renderedEventCount++;
+                IosHaptics.PlayDetentTransientResolved(
+                    DeviceTwistHapticRecipe.ResolveIntensity(normalizedSignal),
+                    DeviceTwistHapticRecipe.Sharpness);
                 return;
             }
 

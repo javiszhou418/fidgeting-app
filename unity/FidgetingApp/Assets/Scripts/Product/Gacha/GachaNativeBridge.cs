@@ -42,16 +42,38 @@ namespace FidgetingApp.Product.Gacha
         /// </summary>
         public static string ReceiptPayload(GachaDrawReceipt receipt)
         {
+            return ReceiptPayload(receipt, string.Empty, false);
+        }
+
+        public static string ReceiptPayload(
+            GachaDrawReceipt receipt,
+            string requestId)
+        {
+            return ReceiptPayload(receipt, requestId, true);
+        }
+
+        private static string ReceiptPayload(
+            GachaDrawReceipt receipt,
+            string requestId,
+            bool includeTransactionAuthority)
+        {
             var rows = new List<string>
             {
-                "result\t" + (receipt.Success ? "ok" : receipt.FailureReason)
+                includeTransactionAuthority
+                    ? string.Join(
+                        "\t",
+                        "result",
+                        receipt.Success ? "ok" : receipt.FailureReason,
+                        requestId ?? string.Empty)
+                    : "result\t"
+                        + (receipt.Success ? "ok" : receipt.FailureReason)
             };
             for (int index = 0; index < receipt.Rows.Count; index++)
             {
                 GachaDrawReceiptRow row = receipt.Rows[index];
                 GachaPrizeDefinition? prize = GachaCatalog.ResolvePrize(row.Outcome.PrizeId);
-                rows.Add(string.Join(
-                    "\t",
+                var cells = new List<string>
+                {
                     "row",
                     row.Outcome.PrizeId,
                     prize.HasValue ? prize.Value.DisplayName : row.Outcome.PrizeId,
@@ -63,7 +85,14 @@ namespace FidgetingApp.Product.Gacha
                     row.ShardsGained.ToString(CultureInfo.InvariantCulture),
                     row.Outcome.ForcedBySignaturePity ? "1" : "0",
                     row.Outcome.ForcedByHeirloomPity ? "1" : "0",
-                    row.Outcome.ForcedByTenDraw ? "1" : "0"));
+                    row.Outcome.ForcedByTenDraw ? "1" : "0"
+                };
+                if (includeTransactionAuthority)
+                {
+                    cells.Add(row.FirstObtainedAtUtc);
+                    cells.Add(row.CollectibleId);
+                }
+                rows.Add(string.Join("\t", cells));
             }
 
             return string.Join("\n", rows);

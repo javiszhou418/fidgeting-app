@@ -5,6 +5,7 @@ using CodexUnityLab;
 using FidgetingApp.EDC;
 using FidgetingApp.EditorTools;
 using FidgetingApp.FanCard;
+using FidgetingApp.FanCard.EditorTools;
 using FidgetingApp.Product;
 using NUnit.Framework;
 using ThreeBladeEDC.Interaction;
@@ -109,10 +110,11 @@ namespace FidgetingApp.Tests.Editor
             Assert.That(FanCardSpecifications.LibraryPreviewProgress, Is.EqualTo(2f / 3f));
             Assert.That(FanCardSpecifications.LibraryPreviewRollDegrees, Is.EqualTo(45f));
             Assert.That(FanCardSpecifications.AxisHoleRadius, Is.EqualTo(0.00215f));
+            Assert.That(
+                FanCardSpecifications.VisualMeshWeldTolerance,
+                Is.EqualTo(0.000002f));
             Assert.That(FanCardSpecifications.RecessedSpindleRadius, Is.EqualTo(0.00200f));
             Assert.That(FanCardSpecifications.RecessedSpindleTopInset, Is.EqualTo(0.00012f));
-            Assert.That(FanCardSpecifications.BearingCapRadius, Is.EqualTo(0.00207f));
-            Assert.That(FanCardSpecifications.BearingCapHeight, Is.EqualTo(0.00065f));
             Assert.That(
                 FanCardSpecifications.AxisHoleRadius
                     - FanCardSpecifications.RecessedSpindleRadius,
@@ -223,8 +225,46 @@ namespace FidgetingApp.Tests.Editor
             StringAssert.DoesNotContain("reflectedBand", shader);
             StringAssert.DoesNotContain("0.30, 0.30, 0.30", shader);
             StringAssert.DoesNotContain("0.34 + ambientIrradiance", shader);
+            StringAssert.Contains("hemisphere * 0.17", shader);
+            StringAssert.Contains("ambientIrradiance * 0.46", shader);
+            StringAssert.Contains("lerp(0.10, 0.30, _Metallic)", shader);
+            StringAssert.Contains("lerp(0.12, 0.42, _Metallic)", shader);
+            // The narrow band term shapes the visible top-key sheen. Its
+            // exponent must stay a satin lobe, never a mirror dot.
+            StringAssert.Contains("lerp(0.12, 0.62, _Metallic)", shader);
+            StringAssert.Contains("lerp(9.0, 34.0, _Smoothness)", shader);
+            StringAssert.Contains("lerp(2.0, 9.0, _Smoothness)", shader);
+            StringAssert.DoesNotContain("satinBand", shader);
+            StringAssert.DoesNotContain("lerp(2.4, 7.0, _Smoothness)", shader);
             StringAssert.Contains("GetMainLight", shader);
             StringAssert.Contains("SampleSH", shader);
+            StringAssert.Contains("FanCardSampleAdditionalLights", shader);
+            StringAssert.Contains("FanCardRotateReflection", shader);
+            StringAssert.Contains("_ADDITIONAL_LIGHTS", shader);
+            StringAssert.Contains("_CLUSTER_LIGHT_LOOP", shader);
+            string movingLights = File.ReadAllText(Path.Combine(
+                Application.dataPath,
+                "_FanCard/Shaders/FanCardMovingLights.hlsl"));
+            StringAssert.Contains("USE_CLUSTER_LIGHT_LOOP", movingLights);
+            StringAssert.Contains(
+                "URP_FP_DIRECTIONAL_LIGHTS_COUNT",
+                movingLights);
+            StringAssert.Contains("UNITY_LOOP", movingLights);
+            string environmentLighting = File.ReadAllText(Path.Combine(
+                Application.dataPath,
+                "Scripts/Product/SpinnerImageBasedLightingController.cs"));
+            StringAssert.Contains(
+                "viewHighlightLight.gameObject.SetActive(false);",
+                environmentLighting);
+            StringAssert.Contains(
+                "modelBounceLight.gameObject.SetActive(false);",
+                environmentLighting);
+            StringAssert.Contains(
+                "FanCardReflectionTiltShaderId",
+                environmentLighting);
+            StringAssert.Contains(
+                "synthetic panel and strip shapes remain slide-only",
+                environmentLighting);
 
             string gunmetalShader = File.ReadAllText(Path.Combine(
                 Application.dataPath,
@@ -233,6 +273,18 @@ namespace FidgetingApp.Tests.Editor
             StringAssert.DoesNotContain("studioSheen", gunmetalShader);
             StringAssert.Contains("GetMainLight", gunmetalShader);
             StringAssert.Contains("SampleSH", gunmetalShader);
+            StringAssert.Contains("FanCardSampleAdditionalLights", gunmetalShader);
+            StringAssert.Contains("FanCardRotateReflection", gunmetalShader);
+            StringAssert.Contains("_CLUSTER_LIGHT_LOOP", gunmetalShader);
+
+            string chromeShader = File.ReadAllText(Path.Combine(
+                Application.dataPath,
+                "_FanCard/Shaders/FanCardChrome.shader"));
+            StringAssert.Contains("FanCardSampleAdditionalLights", chromeShader);
+            StringAssert.Contains("FanCardRotateReflection", chromeShader);
+            StringAssert.Contains("GlossyEnvironmentReflection", chromeShader);
+            StringAssert.Contains("_ADDITIONAL_LIGHTS", chromeShader);
+            StringAssert.Contains("_CLUSTER_LIGHT_LOOP", chromeShader);
         }
 
         [Test]
@@ -515,6 +567,47 @@ namespace FidgetingApp.Tests.Editor
             EditorSceneManager.OpenScene(
                 FanCardSpecifications.ScenePath,
                 OpenSceneMode.Single);
+            Light[] sceneLights = Object.FindObjectsByType<Light>(
+                FindObjectsInactive.Include);
+            Light topKey = sceneLights.Single(light =>
+                light.name == SpinnerEnvironmentCatalog.FanCardTopKeyName);
+            Light rockBounce = sceneLights.Single(light =>
+                light.name == SpinnerEnvironmentCatalog.FanCardRockBounceName);
+            Light skyFill = sceneLights.Single(light =>
+                light.name == SpinnerEnvironmentCatalog.FanCardSkyFillName);
+            Light apertureTop = sceneLights.Single(light =>
+                light.name == SpinnerEnvironmentCatalog.FanCardApertureTopLightName);
+            Assert.That(topKey.type, Is.EqualTo(LightType.Directional));
+            Assert.That(topKey.shadows, Is.EqualTo(LightShadows.Soft));
+            Assert.That(
+                topKey.intensity,
+                Is.EqualTo(SpinnerEnvironmentCatalog.FanCardTopKeyIntensity));
+            Assert.That(rockBounce.type, Is.EqualTo(LightType.Directional));
+            Assert.That(rockBounce.shadows, Is.EqualTo(LightShadows.None));
+            Assert.That(
+                rockBounce.intensity,
+                Is.EqualTo(SpinnerEnvironmentCatalog.FanCardRockBounceIntensity));
+            Assert.That(skyFill.type, Is.EqualTo(LightType.Directional));
+            Assert.That(skyFill.shadows, Is.EqualTo(LightShadows.None));
+            Assert.That(
+                skyFill.intensity,
+                Is.EqualTo(SpinnerEnvironmentCatalog.FanCardSkyFillIntensity));
+            Assert.That(apertureTop.type, Is.EqualTo(LightType.Spot));
+            Assert.That(apertureTop.shadows, Is.EqualTo(LightShadows.Soft));
+            Assert.That(
+                apertureTop.intensity,
+                Is.EqualTo(
+                    SpinnerEnvironmentCatalog.FanCardApertureTopLightIntensity));
+            Assert.That(
+                apertureTop.range,
+                Is.EqualTo(SpinnerEnvironmentCatalog.FanCardApertureTopLightRange));
+            Assert.That(
+                apertureTop.spotAngle,
+                Is.EqualTo(
+                    SpinnerEnvironmentCatalog.FanCardApertureTopLightSpotAngle));
+            Assert.That(
+                sceneLights.Any(light => light.name == "CoolSideWallRim"),
+                Is.False);
             FanCardController controller =
                 Object.FindAnyObjectByType<FanCardController>();
             Assert.That(controller, Is.Not.Null);
@@ -648,21 +741,69 @@ namespace FidgetingApp.Tests.Editor
                 recessedSpindle.localScale.x,
                 Is.LessThan(FanCardSpecifications.AxisHoleRadius),
                 "The intentional matte shaft must not form a ring over the beveled hole.");
-            Transform bearingCap = root.Find("CommonAxis_BearingCap_Chrome");
-            Assert.That(bearingCap, Is.Not.Null);
-            MeshFilter bearingCapFilter = bearingCap.GetComponent<MeshFilter>();
-            MeshRenderer bearingCapRenderer = bearingCap.GetComponent<MeshRenderer>();
-            Assert.That(bearingCapFilter, Is.Not.Null);
-            Assert.That(bearingCapRenderer, Is.Not.Null);
+            Transform[] visibleAxisHardware = hierarchy
+                .Where(item =>
+                {
+                    Renderer renderer = item.GetComponent<Renderer>();
+                    return item.parent == root
+                        && item.name.StartsWith("CommonAxis_")
+                        && renderer != null
+                        && renderer.enabled;
+                })
+                .ToArray();
             Assert.That(
-                bearingCapFilter.sharedMesh.bounds.extents.x,
-                Is.EqualTo(FanCardSpecifications.BearingCapRadius)
-                    .Within(0.00001f));
+                visibleAxisHardware.Select(item => item.name),
+                Is.EquivalentTo(new[]
+                {
+                    FanCardSpecifications.FrontVisibleAxisRendererName
+                }),
+                "The recessed matte spindle must be the only visible root-axis hardware.");
             Assert.That(
-                bearingCapFilter.sharedMesh.bounds.extents.y,
-                Is.EqualTo(FanCardSpecifications.BearingCapHeight)
-                    .Within(0.00001f));
-            StringAssert.Contains("Chrome", bearingCapRenderer.sharedMaterial.name);
+                hierarchy.Where(item => item.name.StartsWith("CommonAxis_"))
+                    .Any(item =>
+                        FanCardSpecifications.ForbiddenAxisHardwareNameTokens.Any(
+                            token => item.name.IndexOf(
+                                token,
+                                System.StringComparison.OrdinalIgnoreCase) >= 0)),
+                Is.False,
+                "No cap, ring, washer, seat, cover disc, or chrome ball may return at the common axis.");
+            Material axisMaterial =
+                recessedSpindle.GetComponent<Renderer>().sharedMaterial;
+            Assert.That(
+                axisMaterial.name,
+                Is.EqualTo(FanCardSpecifications.FrontVisibleAxisMaterialName));
+            Assert.That(
+                axisMaterial.GetFloat("_Metallic"),
+                Is.EqualTo(FanCardSpecifications.FrontVisibleAxisMetallic));
+            Assert.That(
+                axisMaterial.GetFloat("_Smoothness"),
+                Is.EqualTo(FanCardSpecifications.FrontVisibleAxisSmoothness));
+            Assert.That(axisMaterial.GetFloat("_SpecularHighlights"), Is.Zero);
+            Assert.That(axisMaterial.GetFloat("_EnvironmentReflections"), Is.Zero);
+            foreach (string modelPath in new[]
+            {
+                FanCardVisualModelIntegrator.VisualModelPath,
+                "Assets/_FanCard/Models/FanCardBackMechanism.fbx"
+            })
+            {
+                string[] importedMeshNames = AssetDatabase
+                    .LoadAllAssetsAtPath(modelPath)
+                    .OfType<Mesh>()
+                    .Select(mesh => mesh.name)
+                    .ToArray();
+                Assert.That(
+                    importedMeshNames
+                        .Where(name => name.IndexOf(
+                            "Axis",
+                            System.StringComparison.OrdinalIgnoreCase) >= 0)
+                        .Any(name =>
+                        FanCardSpecifications.ForbiddenAxisHardwareNameTokens.Any(
+                            token => name.IndexOf(
+                                token,
+                                System.StringComparison.OrdinalIgnoreCase) >= 0)),
+                    Is.False,
+                    $"{modelPath} must not contain dormant axis hardware that a later rebuild could restore.");
+            }
 
             Renderer[] bodies = hierarchy
                 .Where(item => item.name == "GunmetalFrame")
@@ -732,14 +873,16 @@ namespace FidgetingApp.Tests.Editor
                 .GetComponent<MeshFilter>().sharedMesh;
             Assert.That(
                 bodyMesh.vertexCount,
-                Is.EqualTo(3969),
-                "The visible body must preserve the authoritative FBX split normals.");
+                Is.EqualTo(3944),
+                "The visible body must preserve split normals while removing "
+                + "the FBX's weld-degenerate zero-area vertices.");
             Mesh goldTrimMesh = top.Find("WarmGoldTrim")
                 .GetComponent<MeshFilter>().sharedMesh;
             Assert.That(
                 goldTrimMesh.vertexCount,
-                Is.EqualTo(3981),
-                "The warm-gold trim must preserve the authoritative FBX split normals.");
+                Is.EqualTo(3960),
+                "The warm-gold trim must preserve split normals while removing "
+                + "the FBX's weld-degenerate zero-area vertices.");
             Vector2 holeCenter = new(
                 FanCardSpecifications.PivotX,
                 FanCardSpecifications.PivotZ);
@@ -1010,26 +1153,222 @@ namespace FidgetingApp.Tests.Editor
                 gold.GetFloat("_Smoothness"),
                 Is.EqualTo(FanCardSpecifications.GoldSmoothness));
             Assert.That(
-                SpinnerImageBasedLightingController.FanCardSoftboxIntensity,
-                Is.EqualTo(0.22f));
-            Assert.That(
                 SpinnerImageBasedLightingController.FanCardReflectionBaseScale,
-                Is.EqualTo(0.92f));
+                Is.EqualTo(0.78f));
             Assert.That(
-                SpinnerImageBasedLightingController.FanCardOpposingStripIntensity,
+                SpinnerImageBasedLightingController.FanCardReflectionPeak,
+                Is.EqualTo(0.66f));
+            Assert.That(
+                SpinnerImageBasedLightingController.FanCardReflectionYawRadians,
                 Is.EqualTo(0.10f));
+            Assert.That(
+                SpinnerImageBasedLightingController.FanCardReflectionPitchRadians,
+                Is.EqualTo(0.07f));
+            Assert.That(
+                SpinnerImageBasedLightingController.FanCardEnvironmentColorCoupling,
+                Is.EqualTo(0.26f));
+            Assert.That(
+                SpinnerImageBasedLightingController.FanCardAmbientChromaRetention,
+                Is.EqualTo(0.44f));
+            Assert.That(
+                SpinnerImageBasedLightingController.FanCardCubemapKeyScale,
+                Is.EqualTo(0.34f));
+            Assert.That(
+                SpinnerImageBasedLightingController.FanCardCubemapFillScale,
+                Is.EqualTo(0.12f));
+            Assert.That(
+                SpinnerImageBasedLightingController.FanCardAmbientKeyMix,
+                Is.EqualTo(0.14f));
+            Assert.That(
+                SpinnerImageBasedLightingController.FanCardVisibilityFillScale,
+                Is.EqualTo(0f));
+            Assert.That(
+                SpinnerImageBasedLightingController.FanCardSoftFrontLiftScale,
+                Is.EqualTo(0f));
+            Assert.That(
+                SpinnerImageBasedLightingController.FanCardLightSaturationCap,
+                Is.EqualTo(0.30f));
+            Assert.That(
+                SpinnerImageBasedLightingController.FanCardAuthoredLightMix,
+                Is.EqualTo(0.18f));
+            Assert.That(
+                SpinnerImageBasedLightingController.FanCardSampledLightMix,
+                Is.EqualTo(0.30f));
+            Assert.That(
+                SpinnerImageBasedLightingController.FanCardSourceColorSampleMix,
+                Is.EqualTo(0.28f));
+            Assert.That(
+                SpinnerImageBasedLightingController.FanCardVisibleKeyViewportX,
+                Is.EqualTo(0.34f));
+            Assert.That(
+                SpinnerImageBasedLightingController.FanCardVisibleKeyViewportY,
+                Is.EqualTo(0.94f));
+            Assert.That(
+                SpinnerImageBasedLightingController.FanCardKeyPitchMin,
+                Is.EqualTo(52f));
+            Assert.That(
+                SpinnerImageBasedLightingController.FanCardKeyPitchMax,
+                Is.EqualTo(58f));
+            Assert.That(
+                SpinnerImageBasedLightingController.FanCardKeyYawSpan,
+                Is.EqualTo(60f));
+            Assert.That(
+                SpinnerImageBasedLightingController.FanCardSkyFillPitch,
+                Is.EqualTo(72f));
+            Assert.That(
+                SpinnerImageBasedLightingController.FanCardSkyFillYaw,
+                Is.EqualTo(-60f));
+            Assert.That(
+                SpinnerImageBasedLightingController.FanCardForegroundGlowIntensity,
+                Is.EqualTo(0f));
+            Assert.That(
+                SpinnerImageBasedLightingController.FanCardPedestalGlowRadius,
+                Is.EqualTo(0.13f));
+            Assert.That(
+                SpinnerImageBasedLightingController.FanCardPedestalGlowIntensity,
+                Is.EqualTo(0f));
+            Assert.That(
+                SpinnerImageBasedLightingController.FanCardPedestalGlowCenterY,
+                Is.EqualTo(0.34f));
+            Assert.That(
+                SpinnerImageBasedLightingController.FanCardContactShadowScaleX,
+                Is.EqualTo(0.76f));
+            Assert.That(
+                SpinnerImageBasedLightingController.FanCardContactShadowScaleY,
+                Is.EqualTo(9.2f));
+            Assert.That(
+                SpinnerImageBasedLightingController.FanCardContactShadowRadius,
+                Is.EqualTo(0.145f));
+            Assert.That(
+                SpinnerImageBasedLightingController.FanCardContactShadowStrength,
+                Is.EqualTo(0.46f));
+            Assert.That(
+                SpinnerImageBasedLightingController.FanCardKeyIntensityScale,
+                Is.EqualTo(1f));
+            Assert.That(
+                SpinnerImageBasedLightingController.FanCardFillIntensityScale,
+                Is.EqualTo(1f));
+            Assert.That(
+                SpinnerImageBasedLightingController.ResolveFanCardSampleMix(
+                    new Color(0.26f, 0.28f, 0.25f)),
+                Is.EqualTo(
+                    SpinnerImageBasedLightingController.FanCardAuthoredLightMix)
+                    .Within(0.01f));
+            Assert.That(
+                SpinnerImageBasedLightingController.ResolveFanCardSampleMix(
+                    new Color(0.38f, 0.68f, 1.00f)),
+                Is.EqualTo(
+                    SpinnerImageBasedLightingController.FanCardSampledLightMix)
+                    .Within(0.01f));
+            var greyCanyon = new SpinnerEnvironmentPalette(
+                new Color(0.12f, 0.13f, 0.12f),
+                new Color(0.08f, 0.09f, 0.08f),
+                new Color(0.02f, 0.02f, 0.02f),
+                new Color(0.26f, 0.28f, 0.25f),
+                new Color(0.22f, 0.24f, 0.23f),
+                new Vector2(0.50f, 0.38f));
+            var authoredFan = new SpinnerEnvironmentPalette(
+                new Color(0.22f, 0.205f, 0.185f),
+                new Color(0.10f, 0.092f, 0.082f),
+                new Color(0.028f, 0.025f, 0.022f),
+                SpinnerEnvironmentCatalog.FanCardTopKeyColor,
+                SpinnerEnvironmentCatalog.FanCardRockBounceColor,
+                new Vector2(0.50f, 0.94f));
+            SpinnerEnvironmentPalette coupledCanyon =
+                SpinnerImageBasedLightingController.CoupleFanCardPalette(
+                    greyCanyon,
+                    authoredFan);
+            Assert.That(coupledCanyon.Key.b, Is.GreaterThan(coupledCanyon.Key.r));
+            Assert.That(
+                coupledCanyon.KeyViewport.x,
+                Is.EqualTo(0.34f).Within(0.001f));
+            Assert.That(
+                coupledCanyon.KeyViewport.y,
+                Is.EqualTo(0.94f).Within(0.001f));
+            var neon = new SpinnerEnvironmentPalette(
+                new Color(0.08f, 0.12f, 0.28f),
+                new Color(0.06f, 0.10f, 0.22f),
+                new Color(0.02f, 0.03f, 0.06f),
+                new Color(0.38f, 0.68f, 1.00f),
+                new Color(0.30f, 0.48f, 0.90f),
+                new Vector2(0.50f, 0.38f));
+            SpinnerEnvironmentPalette coupledNeon =
+                SpinnerImageBasedLightingController.CoupleFanCardPalette(
+                    neon,
+                    authoredFan);
+            Assert.That(coupledNeon.Key.b, Is.GreaterThan(coupledNeon.Key.r));
+            Assert.That(
+                coupledNeon.KeyViewport.x,
+                Is.EqualTo(0.34f).Within(0.001f));
+            Assert.That(
+                coupledNeon.KeyViewport.y,
+                Is.EqualTo(0.94f).Within(0.001f));
+            Assert.That(
+                SpinnerImageBasedLightingController.EnvironmentColorCoupling,
+                Is.EqualTo(0.14f));
+            Assert.That(
+                silver.GetFloat("_Smoothness"),
+                Is.EqualTo(0.24f));
+            Vector3 keyForward = SpinnerImageBasedLightingController
+                .ResolveFanCardKeyRotation(new Vector2(0.50f, 0.94f)) * Vector3.forward;
+            Assert.That(keyForward.x, Is.EqualTo(0f).Within(0.12f));
+            Assert.That(keyForward.y, Is.LessThan(0f));
+            Vector4 staticReflectionTilt =
+                SpinnerImageBasedLightingController.ResolveFanCardReflectionTilt(
+                    Vector2.zero);
+            Assert.That(staticReflectionTilt, Is.EqualTo(Vector4.zero));
+            Vector4 rightReflectionTilt =
+                SpinnerImageBasedLightingController.ResolveFanCardReflectionTilt(
+                    Vector2.right);
+            Assert.That(
+                rightReflectionTilt.x,
+                Is.EqualTo(
+                    SpinnerImageBasedLightingController.FanCardReflectionYawRadians));
+            Assert.That(rightReflectionTilt.y, Is.EqualTo(0f));
+            Assert.That(
+                SpinnerImageBasedLightingController.ResolveFanCardContactShadowCenterX(
+                    new Vector2(0.50f, 0.94f)),
+                Is.EqualTo(0.50f).Within(0.001f));
+            Assert.That(
+                SpinnerImageBasedLightingController.ResolveFanCardContactShadowCenterX(
+                    new Vector2(0.50f, 0.50f)),
+                Is.EqualTo(0.50f).Within(0.001f));
             Assert.That(
                 SpinnerEnvironmentCatalog.TryGetProfile(
                     FanCardSpecifications.ScenePath,
                     out SpinnerEnvironmentProfile environment),
                 Is.True);
-            Assert.That(environment.ReflectionIntensity, Is.EqualTo(0.28f));
+            Assert.That(
+                environment.ReflectionIntensity,
+                Is.EqualTo(SpinnerEnvironmentCatalog.FanCardReflectionIntensity));
+            Assert.That(environment.LibraryLightScale, Is.EqualTo(0.70f));
+            Assert.That(environment.LibraryReflectionScale, Is.EqualTo(0.80f));
+            Assert.That(
+                environment.Lights[0].ObjectName,
+                Is.EqualTo(SpinnerEnvironmentCatalog.FanCardTopKeyName));
             Assert.That(
                 environment.Lights[0].Intensity,
-                Is.EqualTo(0.92f));
+                Is.EqualTo(SpinnerEnvironmentCatalog.FanCardTopKeyIntensity));
+            Assert.That(
+                environment.Lights[1].ObjectName,
+                Is.EqualTo(SpinnerEnvironmentCatalog.FanCardRockBounceName));
             Assert.That(
                 environment.Lights[1].Intensity,
-                Is.EqualTo(0.28f));
+                Is.EqualTo(SpinnerEnvironmentCatalog.FanCardRockBounceIntensity));
+            Assert.That(
+                environment.Lights[2].ObjectName,
+                Is.EqualTo(SpinnerEnvironmentCatalog.FanCardSkyFillName));
+            Assert.That(
+                environment.Lights[2].Intensity,
+                Is.EqualTo(SpinnerEnvironmentCatalog.FanCardSkyFillIntensity));
+            Assert.That(
+                environment.Lights[3].ObjectName,
+                Is.EqualTo(
+                    SpinnerEnvironmentCatalog.FanCardApertureTopLightName));
+            Assert.That(
+                environment.Lights[3].Intensity,
+                Is.EqualTo(
+                    SpinnerEnvironmentCatalog.FanCardApertureTopLightIntensity));
             Assert.That(
                 chrome.shader.name,
                 Is.EqualTo("FidgetingApp/FanCardChrome"));

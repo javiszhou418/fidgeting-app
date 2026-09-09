@@ -231,6 +231,10 @@ namespace FidgetingApp.Product
         public const float StableSecondaryWeight = 0.16f;
         public const float MaximumSaturation = 0.20f;
         public const float MaximumValue = 0.58f;
+        // HSV value alone lets cyan accents (slide) carry ~22% more linear
+        // luminance than pink/graphite ones at the same V. Cap Rec.709 luma so
+        // every toy's backdrop glow adds the same energy to the shared canyon.
+        public const float MaximumLuminance = 0.50f;
         public const float GrainIntensity = 0.012f;
         public const float TopLightBottomBrightness = 0.08f;
         public const float TopLightBottomSaturation = 0.18f;
@@ -243,8 +247,18 @@ namespace FidgetingApp.Product
                 hue,
                 Mathf.Min(saturation, MaximumSaturation),
                 Mathf.Min(value, MaximumValue));
+            float luminance = Luminance(restrained);
+            if (luminance > MaximumLuminance)
+            {
+                restrained *= MaximumLuminance / luminance;
+            }
             restrained.a = color.a;
             return restrained;
+        }
+
+        public static float Luminance(Color color)
+        {
+            return 0.2126f * color.r + 0.7152f * color.g + 0.0722f * color.b;
         }
 
         public static SpinnerAdaptiveBackdropTransition Resolve(

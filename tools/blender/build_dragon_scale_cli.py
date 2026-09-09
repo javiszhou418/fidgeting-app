@@ -14,6 +14,7 @@ from __future__ import annotations
 
 import json
 import math
+import os
 import sys
 from pathlib import Path
 
@@ -27,6 +28,15 @@ UNITY_ROOT = REPO_ROOT / "unity" / "FidgetingApp"
 TOOLS_DIR = REPO_ROOT / "tools" / "blender"
 SOURCE_DIR = UNITY_ROOT / "ArtSource" / "DragonScaleEDC" / "CLIAnything"
 ARTIFACT_DIR = UNITY_ROOT / "Artifacts" / "DragonScaleEDC_CLIAnything"
+
+# A candidate build writes beside the shipping asset instead of replacing it,
+# so hub experiments cannot invalidate the approved export before review.
+CANDIDATE_ID = os.environ.get("DRAGON_SCALE_CANDIDATE", "").strip()
+if CANDIDATE_ID:
+    SOURCE_DIR = SOURCE_DIR / "Candidates" / CANDIDATE_ID
+    ARTIFACT_DIR = ARTIFACT_DIR / "Candidates" / CANDIDATE_ID
+    SOURCE_DIR.mkdir(parents=True, exist_ok=True)
+    ARTIFACT_DIR.mkdir(parents=True, exist_ok=True)
 
 BLEND_PATH = SOURCE_DIR / "DragonScaleEDC_CLI_85mm.blend"
 FBX_PATH = SOURCE_DIR / "DragonScaleEDC_CLI_85mm.fbx"
@@ -46,10 +56,21 @@ PREVIEW_PATHS = {
 
 # Hard dimensions read from the annotated reference.
 TARGET_WIDTH = 0.0850
-TARGET_CAP_DIAMETER = TARGET_WIDTH * 0.52
+# 0.52 is the annotated reference ratio. A smaller cap uncovers the
+# RotorBody_OnePiece core ring, so pair any reduction with HUB_RECESS.
+TARGET_CAP_RATIO = float(os.environ.get("DRAGON_SCALE_CAP_RATIO", "0.52"))
+TARGET_CAP_DIAMETER = TARGET_WIDTH * TARGET_CAP_RATIO
 TARGET_BODY_DEPTH = TARGET_WIDTH * 0.09
 TARGET_ASSEMBLED_DEPTH = TARGET_WIDTH * 0.20
 CAP_RADIUS = TARGET_CAP_DIAMETER * 0.5
+# The radial crown insets 0.65 mm inside the cap band at the reference ratio.
+CAP_FACE_RADIUS = CAP_RADIUS - 0.00065
+# Gives the exposed core ring its own dark material slot so a reduced cap
+# cannot reveal a chrome annulus.
+HUB_RECESS = os.environ.get("DRAGON_SCALE_HUB_RECESS", "0") == "1"
+# Replaces the cap's brushed/polished stack with the recessed finish. The
+# reference cap only blows out to white under the shipping canyon key light.
+MATTE_CAP = os.environ.get("DRAGON_SCALE_MATTE_CAP", "0") == "1"
 TIP_RADIUS = TARGET_WIDTH / math.sqrt(3.0) - 0.000588
 BEARING_OD = 0.0220
 BEARING_ID = 0.0080
@@ -471,7 +492,7 @@ def main() -> None:
         inner_radius=0.01135,
         depth=TARGET_BODY_DEPTH,
         z_center=0.0,
-        mat=blasted,
+        mat=recess if HUB_RECESS else blasted,
         segments=PRIMARY_SEGMENTS,
         bevel=0.00078,
         bevel_segments=3,
@@ -643,33 +664,39 @@ def main() -> None:
     visual_objects.extend([top_washer, bottom_washer])
 
     cap_center = (0.00822 + 0.00435) * 0.5
+    cap_body_material = recess if MATTE_CAP else blasted
+    cap_face_materials = (
+        (recess, recess, recess)
+        if MATTE_CAP
+        else (brushed_a, brushed_b, polished)
+    )
     top_cap = parent(
-        create_facet_cap_body("FingerCap_Top", cap_center, blasted),
+        create_facet_cap_body("FingerCap_Top", cap_center, cap_body_material),
         top_cap_root,
     )
     bottom_cap = parent(
-        create_facet_cap_body("FingerCap_Bottom", -cap_center, blasted),
+        create_facet_cap_body("FingerCap_Bottom", -cap_center, cap_body_material),
         bottom_cap_root,
     )
     top_face = parent(
         create_radial_crown(
             "FingerCapTop_RadialFace",
-            radius=0.02145,
+            radius=CAP_FACE_RADIUS,
             depth=0.00026,
             face_z=TARGET_ASSEMBLED_DEPTH * 0.5 - 0.00018,
             facing=1.0,
-            materials=(brushed_a, brushed_b, polished),
+            materials=cap_face_materials,
         ),
         top_cap_root,
     )
     bottom_face = parent(
         create_radial_crown(
             "FingerCapBottom_RadialFace",
-            radius=0.02145,
+            radius=CAP_FACE_RADIUS,
             depth=0.00026,
             face_z=-TARGET_ASSEMBLED_DEPTH * 0.5 + 0.00018,
             facing=-1.0,
-            materials=(brushed_a, brushed_b, polished),
+            materials=cap_face_materials,
         ),
         bottom_cap_root,
     )
@@ -743,7 +770,8 @@ def main() -> None:
     scale_meshes_xy(rotor_meshes + collision_objects, planar_normalization)
 
     root["reference_width_mm"] = 85.0
-    root["reference_cap_ratio"] = 0.52
+    root["reference_cap_ratio"] = TARGET_CAP_RATIO
+    root["hub_recess_material"] = HUB_RECESS
     root["reference_body_depth_ratio"] = 0.09
     root["reference_total_depth_ratio"] = 0.20
     root["blade_angles_degrees"] = "90,210,330"

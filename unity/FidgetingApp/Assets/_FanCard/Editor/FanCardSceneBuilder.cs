@@ -38,6 +38,8 @@ namespace FidgetingApp.FanCard.EditorTools
         private const string SilverMaterialPath = MaterialFolder + "/M_FanCardWarmSilver.mat";
         private const string EtchingMaterialPath = MaterialFolder + "/M_FanCardEtching.mat";
         private const string GrooveMaterialPath = MaterialFolder + "/M_FanCardGroove.mat";
+        private const string AxisMatteMaterialPath =
+            MaterialFolder + "/M_FanCardAxisMatte.mat";
         private const string GoldMeshMaterialPath = MaterialFolder + "/M_FanCardGoldMesh.mat";
         private const string ChromeMaterialPath = MaterialFolder + "/M_FanCardChrome.mat";
         private const string GrainNormalPath = TextureFolder + "/T_FanCardBeadBlastNormal.png";
@@ -88,6 +90,7 @@ namespace FidgetingApp.FanCard.EditorTools
                 grainNormal,
                 0.08f,
                 new Vector2(80f, 80f));
+            Material axisMatte = CreateOrUpdateAxisMatteMaterial();
             Material goldMesh = CreateOrUpdateLitMaterial(
                 GoldMeshMaterialPath,
                 "M_FanCardGoldMesh",
@@ -172,8 +175,6 @@ namespace FidgetingApp.FanCard.EditorTools
             Mesh aceMesh = LoadBackMechanismMesh("Ace_A_Oxanium");
             Mesh queenMesh = LoadBackMechanismMesh("Queen_Q_Oxanium");
             Mesh kingMesh = LoadBackMechanismMesh("King_K_Oxanium");
-            Mesh bearingCapMesh = LoadBackMechanismMesh(
-                "Axis_BearingCap_Chrome");
             List<Vector2> spadePolygon = CreateDownwardSpadePolygon();
             Mesh spadeMesh = SaveMesh(
                 CreatePlanarPolygonMesh("M_FanCardSpade", spadePolygon),
@@ -274,9 +275,7 @@ namespace FidgetingApp.FanCard.EditorTools
 
             CreateAxisAssembly(
                 root.transform,
-                bearingCapMesh,
-                gunmetal,
-                chrome);
+                axisMatte);
 
             FanCardFaceRankPresenter rankPresenter =
                 root.AddComponent<FanCardFaceRankPresenter>();
@@ -343,6 +342,90 @@ namespace FidgetingApp.FanCard.EditorTools
                 + $"{profile.MaximumRelativeAngleDegrees:F0}deg; total="
                 + $"{profile.MaximumTotalAngleDegrees:F0}deg; scene="
                 + FanCardSpecifications.ScenePath);
+        }
+
+        [MenuItem("Tools/Codex/Fan Card/Apply Canyon Top-Light Rig")]
+        public static void ApplyCanyonTopLightRig()
+        {
+            Scene scene = EditorSceneManager.OpenScene(
+                FanCardSpecifications.ScenePath,
+                OpenSceneMode.Single);
+            Light topKey = RequireSceneLight(
+                SpinnerEnvironmentCatalog.FanCardTopKeyName,
+                "LargeSoftKey_UpperLeft");
+            Light rockBounce = RequireSceneLight(
+                SpinnerEnvironmentCatalog.FanCardRockBounceName,
+                "CoolBroadFill");
+            Light frontLift = RequireSceneLight("SoftFrontLift");
+            GameObject rootObject = GameObject.Find("MagneticFanCard_Root");
+            if (rootObject == null)
+            {
+                throw new MissingReferenceException("Fan Card root is missing.");
+            }
+
+            topKey.gameObject.name = SpinnerEnvironmentCatalog.FanCardTopKeyName;
+            topKey.type = LightType.Directional;
+            topKey.color = SpinnerEnvironmentCatalog.FanCardTopKeyColor;
+            topKey.intensity = SpinnerEnvironmentCatalog.FanCardTopKeyIntensity;
+            topKey.shadows = LightShadows.Soft;
+            topKey.transform.rotation =
+                SpinnerImageBasedLightingController.ResolveFanCardKeyRotation(
+                    new Vector2(
+                        SpinnerImageBasedLightingController.FanCardVisibleKeyViewportX,
+                        SpinnerImageBasedLightingController.FanCardVisibleKeyViewportY));
+
+            rockBounce.gameObject.name =
+                SpinnerEnvironmentCatalog.FanCardRockBounceName;
+            rockBounce.type = LightType.Directional;
+            rockBounce.color = SpinnerEnvironmentCatalog.FanCardRockBounceColor;
+            rockBounce.intensity =
+                SpinnerEnvironmentCatalog.FanCardRockBounceIntensity;
+            rockBounce.shadows = LightShadows.None;
+            Vector3 topKeyEuler = topKey.transform.eulerAngles;
+            // The warm rock bounce must arrive from the side opposite the key so
+            // the silver face reads the canyon warm/cool split, not a back rim.
+            rockBounce.transform.rotation = Quaternion.Euler(
+                Mathf.Clamp(topKeyEuler.x - 12f, 34f, 46f),
+                topKeyEuler.y - 104f,
+                0f);
+
+            Light skyFill = FindSceneLight(
+                SpinnerEnvironmentCatalog.FanCardSkyFillName);
+            if (skyFill == null)
+            {
+                var skyFillObject = new GameObject(
+                    SpinnerEnvironmentCatalog.FanCardSkyFillName);
+                skyFill = skyFillObject.AddComponent<Light>();
+            }
+            skyFill.type = LightType.Directional;
+            skyFill.color = SpinnerEnvironmentCatalog.FanCardSkyFillColor;
+            skyFill.intensity = SpinnerEnvironmentCatalog.FanCardSkyFillIntensity;
+            skyFill.shadows = LightShadows.None;
+            skyFill.transform.rotation =
+                SpinnerImageBasedLightingController.ResolveFanCardSkyFillRotation();
+
+            ConfigureCanyonApertureTopLight(
+                GetOrCreateSceneLight(
+                    SpinnerEnvironmentCatalog.FanCardApertureTopLightName),
+                rootObject.transform);
+
+            frontLift.intensity = 0f;
+            frontLift.enabled = false;
+            Light obsoleteSideRim = FindSceneLight("CoolSideWallRim");
+            if (obsoleteSideRim != null)
+            {
+                UnityEngine.Object.DestroyImmediate(obsoleteSideRim.gameObject);
+            }
+
+            RenderSettings.reflectionIntensity =
+                SpinnerEnvironmentCatalog.FanCardReflectionIntensity;
+            EditorSceneManager.MarkSceneDirty(scene);
+            EditorSceneManager.SaveScene(scene, FanCardSpecifications.ScenePath, true);
+            AssetDatabase.SaveAssets();
+            AssetDatabase.Refresh();
+            Debug.Log(
+                "[FanCard] Applied top-key, sky-fill and rock-bounce lighting without "
+                + "rebuilding the authoritative visual FBX.");
         }
 
         [MenuItem("Tools/Codex/Fan Card/2 Build and Capture Material Previews")]
@@ -527,10 +610,6 @@ namespace FidgetingApp.FanCard.EditorTools
                 .Find("CommonAxis_RecessedMatteSpindle")
                 .GetComponent<Renderer>();
             Bounds axisDetailBounds = recessedSpindleRenderer.bounds;
-            axisDetailBounds.Encapsulate(root.transform
-                .Find("CommonAxis_BearingCap_Chrome")
-                .GetComponent<Renderer>()
-                .bounds);
             axisDetailBounds.Expand(0.011f);
             CaptureView(
                 camera,
@@ -684,6 +763,438 @@ namespace FidgetingApp.FanCard.EditorTools
             controller.ResetClosed();
             rankPresenter.ApplyPattern(FanCardRankPattern.TripleAce);
             Debug.Log($"[FanCard] Unity material and AAA/QKA previews: {outputFolder}");
+        }
+
+        [MenuItem("Tools/Codex/Fan Card/3 Capture Canyon Multi-Angle Previews")]
+        public static void CaptureFaceReflectionAngles()
+        {
+            Scene scene = EditorSceneManager.OpenScene(
+                FanCardSpecifications.ScenePath,
+                OpenSceneMode.Single);
+            GameObject root = scene.GetRootGameObjects()
+                .Single(candidate => candidate.name == "MagneticFanCard_Root");
+            FanCardController controller = root.GetComponent<FanCardController>();
+            FanCardFaceRankPresenter rankPresenter =
+                root.GetComponent<FanCardFaceRankPresenter>();
+            rankPresenter.ApplyPattern(FanCardRankPattern.QueenKingAce);
+            Camera camera = Camera.main ?? UnityEngine.Object.FindAnyObjectByType<Camera>();
+            EdcPortraitCameraFramer framer = camera.GetComponent<EdcPortraitCameraFramer>();
+            framer.enabled = false;
+            controller.enabled = false;
+
+            SpinnerEnvironmentPresenter environment =
+                SpinnerEnvironmentPresenter.Install(FanCardSpecifications.ScenePath);
+            if (!environment.ApplyTheme(SpinnerEnvironmentThemeCatalog.CanyonId))
+            {
+                throw new InvalidDataException("Fan Card Canyon theme failed.");
+            }
+            environment.SetLibraryPreviewActive(false, true);
+            environment.RefreshLayout();
+
+            string outputFolder = Path.GetFullPath(Path.Combine(
+                Directory.GetParent(Application.dataPath).FullName,
+                "../../Artifacts/EnvironmentIntegration/"
+                + "magnetic-fan-card-canyon-multiangle-r011-matte-axis"));
+            Directory.CreateDirectory(outputFolder);
+
+            Transform topFace = root.transform.Find("TopCard/WarmSilverFace");
+            if (topFace == null)
+            {
+                throw new InvalidDataException("TopCard/WarmSilverFace is missing.");
+            }
+
+            controller.SetFanProgress(FanCardSpecifications.LibraryPreviewProgress);
+            Bounds productBounds = ResolveBounds(root.transform);
+            Bounds faceBounds = topFace.GetComponent<Renderer>().bounds;
+            faceBounds.Expand(0.004f);
+
+            // URP/IBL can miss the first submitted frame in batch capture.
+            CaptureFaceAngle(
+                camera,
+                environment,
+                productBounds,
+                Vector3.up,
+                Vector3.forward,
+                Path.Combine(outputFolder, "_warmup.png"),
+                900,
+                1600,
+                Vector2.zero);
+
+            CaptureFaceAngle(
+                camera,
+                environment,
+                productBounds,
+                new Vector3(0f, 1f, -0.08f),
+                Vector3.forward,
+                Path.Combine(outputFolder, "fanned-overhead.png"),
+                900,
+                1600,
+                Vector2.zero);
+            CaptureFaceAngle(
+                camera,
+                environment,
+                productBounds,
+                FaceHemisphere(32f, 0f),
+                Vector3.forward,
+                Path.Combine(outputFolder, "fanned-high-32.png"),
+                900,
+                1600,
+                Vector2.zero);
+            CaptureFaceAngle(
+                camera,
+                environment,
+                productBounds,
+                EdcPortraitCameraFramer.DefaultDetailFramingBackward,
+                Vector3.up,
+                Path.Combine(outputFolder, "fanned-hero.png"),
+                900,
+                1600,
+                Vector2.zero);
+            CaptureFaceAngle(
+                camera,
+                environment,
+                productBounds,
+                FaceHemisphere(58f, -38f),
+                Vector3.up,
+                Path.Combine(outputFolder, "fanned-left-38.png"),
+                900,
+                1600,
+                Vector2.zero);
+            CaptureFaceAngle(
+                camera,
+                environment,
+                productBounds,
+                FaceHemisphere(58f, 38f),
+                Vector3.up,
+                Path.Combine(outputFolder, "fanned-right-38.png"),
+                900,
+                1600,
+                Vector2.zero);
+            CaptureFaceAngle(
+                camera,
+                environment,
+                productBounds,
+                FaceHemisphere(72f, 8f),
+                Vector3.up,
+                Path.Combine(outputFolder, "fanned-grazing.png"),
+                1200,
+                900,
+                Vector2.zero);
+            CaptureFaceAngle(
+                camera,
+                environment,
+                productBounds,
+                FaceHemisphere(76f, -32f),
+                Vector3.up,
+                Path.Combine(outputFolder, "fanned-low-left.png"),
+                1200,
+                900,
+                Vector2.zero);
+            CaptureFaceAngle(
+                camera,
+                environment,
+                productBounds,
+                FaceHemisphere(76f, 32f),
+                Vector3.up,
+                Path.Combine(outputFolder, "fanned-low-right.png"),
+                1200,
+                900,
+                Vector2.zero);
+            CaptureFaceAngle(
+                camera,
+                environment,
+                productBounds,
+                new Vector3(0.08f, -1f, -0.14f).normalized,
+                Vector3.forward,
+                Path.Combine(outputFolder, "fanned-back.png"),
+                900,
+                1600,
+                Vector2.zero);
+
+            Transform topLayer = topFace.parent;
+            Transform middleLayer = root.transform.Find("MiddleCard");
+            Transform bottomLayer = root.transform.Find("BottomCard");
+            Renderer trackRenderer = topLayer
+                .Find("CurvedTrack_GoldGrille")
+                .GetComponent<Renderer>();
+            Bounds trackBounds = trackRenderer.bounds;
+            foreach (Renderer magnetRenderer in topLayer
+                .Cast<Transform>()
+                .Where(child => child.name.StartsWith("Magnet_"))
+                .Select(child => child.GetComponent<Renderer>()))
+            {
+                trackBounds.Encapsulate(magnetRenderer.bounds);
+            }
+            trackBounds.Expand(0.007f);
+            bool middleWasActive = middleLayer.gameObject.activeSelf;
+            bool bottomWasActive = bottomLayer.gameObject.activeSelf;
+            middleLayer.gameObject.SetActive(false);
+            bottomLayer.gameObject.SetActive(false);
+            CaptureFaceAngle(
+                camera,
+                environment,
+                trackBounds,
+                new Vector3(0.16f, -0.94f, -0.30f).normalized,
+                Vector3.forward,
+                Path.Combine(outputFolder, "fanned-track-closeup.png"),
+                1400,
+                900,
+                Vector2.zero,
+                0.88f,
+                0.86f);
+            middleLayer.gameObject.SetActive(middleWasActive);
+            bottomLayer.gameObject.SetActive(bottomWasActive);
+            CaptureFaceAngle(
+                camera,
+                environment,
+                productBounds,
+                new Vector3(0f, 1f, -0.08f),
+                Vector3.forward,
+                Path.Combine(outputFolder, "fanned-overhead-ibl-left.png"),
+                900,
+                1600,
+                new Vector2(0.85f, 0f));
+            CaptureFaceAngle(
+                camera,
+                environment,
+                productBounds,
+                new Vector3(0f, 1f, -0.08f),
+                Vector3.forward,
+                Path.Combine(outputFolder, "fanned-overhead-ibl-right.png"),
+                900,
+                1600,
+                new Vector2(-0.85f, 0f));
+            CaptureFaceAngle(
+                camera,
+                environment,
+                productBounds,
+                EdcPortraitCameraFramer.DefaultDetailFramingBackward,
+                Vector3.up,
+                Path.Combine(outputFolder, "fanned-hero-ibl-left.png"),
+                900,
+                1600,
+                new Vector2(0.85f, 0f));
+            CaptureFaceAngle(
+                camera,
+                environment,
+                productBounds,
+                EdcPortraitCameraFramer.DefaultDetailFramingBackward,
+                Vector3.up,
+                Path.Combine(outputFolder, "fanned-hero-ibl-right.png"),
+                900,
+                1600,
+                new Vector2(-0.85f, 0f));
+
+            CaptureFaceAngle(
+                camera,
+                environment,
+                faceBounds,
+                Vector3.up,
+                Vector3.forward,
+                Path.Combine(outputFolder, "face-front.png"),
+                1200,
+                1200,
+                Vector2.zero,
+                0.92f,
+                0.92f);
+            CaptureFaceAngle(
+                camera,
+                environment,
+                faceBounds,
+                FaceHemisphere(28f, 12f),
+                Vector3.forward,
+                Path.Combine(outputFolder, "face-pitch-28.png"),
+                1200,
+                1200,
+                Vector2.zero,
+                0.92f,
+                0.92f);
+            CaptureFaceAngle(
+                camera,
+                environment,
+                faceBounds,
+                FaceHemisphere(64f, 18f),
+                Vector3.up,
+                Path.Combine(outputFolder, "face-grazing.png"),
+                1400,
+                900,
+                Vector2.zero,
+                0.90f,
+                0.88f);
+            CaptureFaceAngle(
+                camera,
+                environment,
+                faceBounds,
+                FaceHemisphere(64f, 18f),
+                Vector3.up,
+                Path.Combine(outputFolder, "face-grazing-ibl-left.png"),
+                1400,
+                900,
+                new Vector2(0.90f, 0.15f),
+                0.90f,
+                0.88f);
+            CaptureFaceAngle(
+                camera,
+                environment,
+                faceBounds,
+                FaceHemisphere(64f, 18f),
+                Vector3.up,
+                Path.Combine(outputFolder, "face-grazing-ibl-right.png"),
+                1400,
+                900,
+                new Vector2(-0.90f, -0.10f),
+                0.90f,
+                0.88f);
+            CaptureFaceAngle(
+                camera,
+                environment,
+                faceBounds,
+                FaceHemisphere(48f, -42f),
+                Vector3.up,
+                Path.Combine(outputFolder, "face-left-42.png"),
+                1200,
+                1200,
+                Vector2.zero,
+                0.92f,
+                0.92f);
+            CaptureFaceAngle(
+                camera,
+                environment,
+                faceBounds,
+                FaceHemisphere(48f, 42f),
+                Vector3.up,
+                Path.Combine(outputFolder, "face-right-42.png"),
+                1200,
+                1200,
+                Vector2.zero,
+                0.92f,
+                0.92f);
+
+            controller.SetFanProgress(0f);
+            Bounds closedBounds = ResolveBounds(root.transform);
+            Vector3 closedHero = EdcPortraitCameraFramer.DefaultDetailFramingBackward;
+            CaptureFaceAngle(
+                camera,
+                environment,
+                closedBounds,
+                new Vector3(0f, 1f, -0.02f),
+                ResolveRolledUp(
+                    new Vector3(0f, 1f, -0.02f),
+                    FanCardSpecifications.LibraryPreviewRollDegrees),
+                Path.Combine(outputFolder, "closed-library-face.png"),
+                900,
+                1600,
+                Vector2.zero);
+            CaptureFaceAngle(
+                camera,
+                environment,
+                closedBounds,
+                FaceHemisphere(40f, 0f),
+                ResolveRolledUp(
+                    FaceHemisphere(40f, 0f),
+                    FanCardSpecifications.LibraryPreviewRollDegrees),
+                Path.Combine(outputFolder, "closed-library-pitch-40.png"),
+                900,
+                1600,
+                Vector2.zero);
+            CaptureFaceAngle(
+                camera,
+                environment,
+                closedBounds,
+                FaceHemisphere(68f, 16f),
+                ResolveRolledUp(
+                    FaceHemisphere(68f, 16f),
+                    FanCardSpecifications.LibraryPreviewRollDegrees),
+                Path.Combine(outputFolder, "closed-library-grazing.png"),
+                900,
+                1600,
+                Vector2.zero);
+            CaptureFaceAngle(
+                camera,
+                environment,
+                closedBounds,
+                new Vector3(0f, 1f, -0.02f),
+                ResolveRolledUp(
+                    new Vector3(0f, 1f, -0.02f),
+                    FanCardSpecifications.LibraryPreviewRollDegrees),
+                Path.Combine(outputFolder, "closed-library-ibl-left.png"),
+                900,
+                1600,
+                new Vector2(0.85f, 0.20f));
+            CaptureFaceAngle(
+                camera,
+                environment,
+                closedBounds,
+                new Vector3(0f, 1f, -0.02f),
+                ResolveRolledUp(
+                    new Vector3(0f, 1f, -0.02f),
+                    FanCardSpecifications.LibraryPreviewRollDegrees),
+                Path.Combine(outputFolder, "closed-library-ibl-right.png"),
+                900,
+                1600,
+                new Vector2(-0.85f, -0.20f));
+            CaptureFaceAngle(
+                camera,
+                environment,
+                closedBounds,
+                closedHero,
+                ResolveRolledUp(
+                    closedHero,
+                    FanCardSpecifications.LibraryPreviewRollDegrees),
+                Path.Combine(outputFolder, "closed-rolled-hero.png"),
+                900,
+                1600,
+                Vector2.zero);
+
+            File.Delete(Path.Combine(outputFolder, "_warmup.png"));
+            environment.ImageBasedLighting?.SetViewResponse(
+                Vector2.zero,
+                false,
+                0f,
+                0f,
+                0f);
+            controller.ResetClosed();
+            Debug.Log($"[FanCard] Canyon multi-angle previews: {outputFolder}");
+        }
+
+        private static Vector3 FaceHemisphere(float pitchFromOverheadDegrees, float yawDegrees)
+        {
+            return (Quaternion.AngleAxis(yawDegrees, Vector3.up)
+                * Quaternion.AngleAxis(pitchFromOverheadDegrees, Vector3.right)
+                * Vector3.up).normalized;
+        }
+
+        private static void CaptureFaceAngle(
+            Camera camera,
+            SpinnerEnvironmentPresenter environment,
+            Bounds bounds,
+            Vector3 backward,
+            Vector3 up,
+            string path,
+            int width,
+            int height,
+            Vector2 iblTilt,
+            float widthFraction = 0.86f,
+            float heightFraction = 0.82f)
+        {
+            environment.ImageBasedLighting?.SetViewResponse(
+                iblTilt,
+                false,
+                0f,
+                0f,
+                0f);
+            CaptureView(
+                camera,
+                environment,
+                bounds,
+                backward,
+                up,
+                path,
+                width,
+                height,
+                widthFraction,
+                heightFraction,
+                true);
         }
 
         private static void CaptureMotionFrame(
@@ -1016,9 +1527,7 @@ namespace FidgetingApp.FanCard.EditorTools
 
         private static void CreateAxisAssembly(
             Transform root,
-            Mesh bearingCapMesh,
-            Material spindleMaterial,
-            Material chrome)
+            Material spindleMaterial)
         {
             float totalHeight = FanCardSpecifications.LayerPitch * 2f
                 + FanCardSpecifications.CardThickness;
@@ -1049,16 +1558,8 @@ namespace FidgetingApp.FanCard.EditorTools
                 spindleMaterial,
                 48);
 
-            // One Blender-authored oblate cap covers the layered aperture
-            // crescents and makes the shared pivot read as actual bearing
-            // hardware. It is neither a ring nor a decorative free-floating
-            // ball, and its lower half stays inside the real spindle hole.
-            CreateMeshObject(
-                "CommonAxis_BearingCap_Chrome",
-                root,
-                bearingCapMesh,
-                chrome,
-                Vector3.up * topFace);
+            // No front cap, washer, seat, cover disc, or ring is permitted.
+            // The recessed matte spindle is the only visible axis renderer.
         }
 
         private static Camera CreateStudio(Transform target, Cubemap reflection)
@@ -1067,7 +1568,8 @@ namespace FidgetingApp.FanCard.EditorTools
             RenderSettings.ambientLight = new Color(0.22f, 0.205f, 0.185f);
             RenderSettings.defaultReflectionMode = DefaultReflectionMode.Custom;
             RenderSettings.customReflectionTexture = reflection;
-            RenderSettings.reflectionIntensity = 0.28f;
+            RenderSettings.reflectionIntensity =
+                SpinnerEnvironmentCatalog.FanCardReflectionIntensity;
 
             var cameraObject = new GameObject("MainCamera");
             cameraObject.tag = "MainCamera";
@@ -1080,41 +1582,116 @@ namespace FidgetingApp.FanCard.EditorTools
             camera.allowMSAA = true;
             cameraObject.AddComponent<AudioListener>();
 
-            var keyObject = new GameObject("LargeSoftKey_UpperLeft");
+            var keyObject = new GameObject(
+                SpinnerEnvironmentCatalog.FanCardTopKeyName);
             Light key = keyObject.AddComponent<Light>();
             key.type = LightType.Directional;
-            key.color = new Color(1.0f, 0.90f, 0.80f);
-            key.intensity = 0.92f;
+            key.color = SpinnerEnvironmentCatalog.FanCardTopKeyColor;
+            key.intensity = SpinnerEnvironmentCatalog.FanCardTopKeyIntensity;
             key.shadows = LightShadows.Soft;
-            keyObject.transform.rotation = Quaternion.Euler(48f, -34f, 0f);
+            Quaternion topKeyRotation =
+                SpinnerImageBasedLightingController.ResolveFanCardKeyRotation(
+                    new Vector2(
+                        SpinnerImageBasedLightingController.FanCardVisibleKeyViewportX,
+                        SpinnerImageBasedLightingController.FanCardVisibleKeyViewportY));
+            keyObject.transform.rotation = topKeyRotation;
 
-            var fillObject = new GameObject("CoolBroadFill");
+            var fillObject = new GameObject(
+                SpinnerEnvironmentCatalog.FanCardRockBounceName);
             Light fill = fillObject.AddComponent<Light>();
             fill.type = LightType.Directional;
-            fill.color = new Color(0.62f, 0.72f, 0.82f);
-            fill.intensity = 0.28f;
+            fill.color = SpinnerEnvironmentCatalog.FanCardRockBounceColor;
+            fill.intensity = SpinnerEnvironmentCatalog.FanCardRockBounceIntensity;
             fill.shadows = LightShadows.None;
-            fillObject.transform.rotation = Quaternion.Euler(62f, 146f, 0f);
+            Vector3 topKeyEuler = topKeyRotation.eulerAngles;
+            fillObject.transform.rotation = Quaternion.Euler(
+                Mathf.Clamp(topKeyEuler.x - 12f, 34f, 46f),
+                topKeyEuler.y - 104f,
+                0f);
 
-            // A low-energy frontal softbox keeps the bead-blasted metal
-            // readable in left/right and low-angle product views without
-            // creating a second hard highlight.
+            var skyFillObject = new GameObject(
+                SpinnerEnvironmentCatalog.FanCardSkyFillName);
+            Light skyFill = skyFillObject.AddComponent<Light>();
+            skyFill.type = LightType.Directional;
+            skyFill.color = SpinnerEnvironmentCatalog.FanCardSkyFillColor;
+            skyFill.intensity = SpinnerEnvironmentCatalog.FanCardSkyFillIntensity;
+            skyFill.shadows = LightShadows.None;
+            skyFillObject.transform.rotation =
+                SpinnerImageBasedLightingController.ResolveFanCardSkyFillRotation();
+
+            var apertureObject = new GameObject(
+                SpinnerEnvironmentCatalog.FanCardApertureTopLightName);
+            ConfigureCanyonApertureTopLight(
+                apertureObject.AddComponent<Light>(),
+                target);
+
             var frontObject = new GameObject("SoftFrontLift");
             Light front = frontObject.AddComponent<Light>();
             front.type = LightType.Directional;
             front.color = new Color(0.90f, 0.87f, 0.82f);
-            front.intensity = 0.10f;
+            front.intensity = 0f;
             front.shadows = LightShadows.None;
             frontObject.transform.rotation = Quaternion.Euler(18f, 8f, 0f);
-
-            var sideObject = new GameObject("CoolSideWallRim");
-            Light side = sideObject.AddComponent<Light>();
-            side.type = LightType.Directional;
-            side.color = new Color(0.48f, 0.61f, 0.74f);
-            side.intensity = 0.12f;
-            side.shadows = LightShadows.None;
-            sideObject.transform.rotation = Quaternion.Euler(12f, 112f, 0f);
             return camera;
+        }
+
+        private static Light RequireSceneLight(
+            string preferredName,
+            string legacyName = null)
+        {
+            Light light = FindSceneLight(preferredName)
+                ?? (!string.IsNullOrEmpty(legacyName)
+                    ? FindSceneLight(legacyName)
+                    : null);
+            if (light == null)
+            {
+                throw new MissingReferenceException(
+                    $"Fan Card light is missing: {preferredName}.");
+            }
+            return light;
+        }
+
+        private static Light FindSceneLight(string name)
+        {
+            return UnityEngine.Object.FindObjectsByType<Light>(
+                    FindObjectsInactive.Include)
+                .FirstOrDefault(light => string.Equals(
+                    light.name,
+                    name,
+                    StringComparison.Ordinal));
+        }
+
+        private static Light GetOrCreateSceneLight(string name)
+        {
+            Light light = FindSceneLight(name);
+            if (light != null)
+            {
+                return light;
+            }
+
+            var lightObject = new GameObject(name);
+            return lightObject.AddComponent<Light>();
+        }
+
+        private static void ConfigureCanyonApertureTopLight(
+            Light light,
+            Transform target)
+        {
+            Vector3 position = target.position
+                + SpinnerEnvironmentCatalog.FanCardApertureTopLightOffset;
+            light.type = LightType.Spot;
+            light.color = SpinnerEnvironmentCatalog.FanCardApertureTopLightColor;
+            light.intensity =
+                SpinnerEnvironmentCatalog.FanCardApertureTopLightIntensity;
+            light.range = SpinnerEnvironmentCatalog.FanCardApertureTopLightRange;
+            light.spotAngle =
+                SpinnerEnvironmentCatalog.FanCardApertureTopLightSpotAngle;
+            light.innerSpotAngle =
+                SpinnerEnvironmentCatalog.FanCardApertureTopLightInnerAngle;
+            light.shadows = LightShadows.Soft;
+            light.transform.SetPositionAndRotation(
+                position,
+                Quaternion.LookRotation(target.position - position, Vector3.up));
         }
 
         private static FanCardMetalDetentAudio CreateMetalDetentAudio(
@@ -1188,19 +1765,36 @@ namespace FidgetingApp.FanCard.EditorTools
                     != ModelImporterMaterialImportMode.None
                 || !importer.isReadable
                 || importer.meshCompression != ModelImporterMeshCompression.Off;
-            if (!requiresReimport)
+            if (requiresReimport)
             {
-                return;
+                importer.globalScale = 1f;
+                importer.useFileScale = true;
+                importer.bakeAxisConversion = true;
+                importer.importCameras = false;
+                importer.importLights = false;
+                importer.materialImportMode = ModelImporterMaterialImportMode.None;
+                importer.isReadable = true;
+                importer.meshCompression = ModelImporterMeshCompression.Off;
+                importer.SaveAndReimport();
             }
-            importer.globalScale = 1f;
-            importer.useFileScale = true;
-            importer.bakeAxisConversion = true;
-            importer.importCameras = false;
-            importer.importLights = false;
-            importer.materialImportMode = ModelImporterMaterialImportMode.None;
-            importer.isReadable = true;
-            importer.meshCompression = ModelImporterMeshCompression.Off;
-            importer.SaveAndReimport();
+
+            string[] forbiddenMeshes = AssetDatabase
+                .LoadAllAssetsAtPath(FanCardSpecifications.BackMechanismModelPath)
+                .OfType<Mesh>()
+                .Select(mesh => mesh.name)
+                .Where(name =>
+                    FanCardSpecifications.ForbiddenAxisHardwareNameTokens.Any(
+                        token => name.IndexOf(
+                            token,
+                            StringComparison.OrdinalIgnoreCase) >= 0))
+                .ToArray();
+            if (forbiddenMeshes.Length > 0)
+            {
+                throw new InvalidDataException(
+                    "The Fan Card mechanism FBX contains forbidden front-axis "
+                    + "hardware: "
+                    + string.Join(", ", forbiddenMeshes));
+            }
         }
 
         private static Mesh LoadBackMechanismMesh(string objectName)
@@ -1407,12 +2001,10 @@ namespace FidgetingApp.FanCard.EditorTools
                     int b = triangles[offset + 1];
                     int c = triangles[offset + 2];
                     Vector3 ab = vertices[b] - vertices[a];
-                    Vector3 bc = vertices[c] - vertices[b];
-                    Vector3 ca = vertices[a] - vertices[c];
                     Vector3 cross = Vector3.Cross(ab, vertices[c] - vertices[a]);
-                    bool collapsedEdge = ab.sqrMagnitude < 0.0000000000000001f
-                        || bc.sqrMagnitude < 0.0000000000000001f
-                        || ca.sqrMagnitude < 0.0000000000000001f;
+                    bool collapsedEdge = SameWeldedPoint(vertices[a], vertices[b])
+                        || SameWeldedPoint(vertices[b], vertices[c])
+                        || SameWeldedPoint(vertices[c], vertices[a]);
                     bool flatDegenerate = flattenSurface
                         && cross.sqrMagnitude < 0.00000000000000000001f;
                     bool coversAxis = flattenSurface
@@ -1440,6 +2032,17 @@ namespace FidgetingApp.FanCard.EditorTools
             };
             mesh.RecalculateBounds();
             return mesh;
+        }
+
+        private static bool SameWeldedPoint(Vector3 a, Vector3 b)
+        {
+            float tolerance = FanCardSpecifications.VisualMeshWeldTolerance;
+            return (long)Math.Round(a.x / tolerance)
+                    == (long)Math.Round(b.x / tolerance)
+                && (long)Math.Round(a.y / tolerance)
+                    == (long)Math.Round(b.y / tolerance)
+                && (long)Math.Round(a.z / tolerance)
+                    == (long)Math.Round(b.z / tolerance);
         }
 
         private static bool PointInTriangleXZ(
@@ -1485,6 +2088,29 @@ namespace FidgetingApp.FanCard.EditorTools
 
             public Mesh Mesh { get; }
             public Matrix4x4 ObjectToCard { get; }
+        }
+
+        private static Material CreateOrUpdateAxisMatteMaterial()
+        {
+            Material material = CreateOrUpdateLitMaterial(
+                AxisMatteMaterialPath,
+                FanCardSpecifications.FrontVisibleAxisMaterialName,
+                FanCardSpecifications.GrooveColor,
+                FanCardSpecifications.FrontVisibleAxisMetallic,
+                FanCardSpecifications.FrontVisibleAxisSmoothness,
+                null,
+                0f,
+                Vector2.one);
+            material.SetFloat(
+                "_SpecularHighlights",
+                FanCardSpecifications.FrontVisibleAxisSpecularHighlights ? 1f : 0f);
+            material.SetFloat(
+                "_EnvironmentReflections",
+                FanCardSpecifications.FrontVisibleAxisEnvironmentReflections ? 1f : 0f);
+            material.EnableKeyword("_SPECULARHIGHLIGHTS_OFF");
+            material.EnableKeyword("_ENVIRONMENTREFLECTIONS_OFF");
+            EditorUtility.SetDirty(material);
+            return material;
         }
 
         private static Material CreateOrUpdateLitMaterial(
@@ -2909,7 +3535,8 @@ namespace FidgetingApp.FanCard.EditorTools
             int width,
             int height,
             float widthFraction = 0.86f,
-            float heightFraction = 0.82f)
+            float heightFraction = 0.82f,
+            bool submitUrpRequest = false)
         {
             float previousAspect = camera.aspect;
             camera.aspect = width / (float)height;
@@ -2929,7 +3556,7 @@ namespace FidgetingApp.FanCard.EditorTools
                 up);
             environment.RefreshLayout();
             Directory.CreateDirectory(Path.GetDirectoryName(path));
-            RenderCameraToPng(camera, path, width, height);
+            RenderCameraToPng(camera, path, width, height, submitUrpRequest);
             camera.aspect = previousAspect;
             camera.ResetProjectionMatrix();
         }
@@ -2993,7 +3620,8 @@ namespace FidgetingApp.FanCard.EditorTools
             Camera camera,
             string path,
             int width,
-            int height)
+            int height,
+            bool submitUrpRequest = false)
         {
             RenderTexture previousTarget = camera.targetTexture;
             RenderTexture previousActive = RenderTexture.active;
@@ -3006,7 +3634,20 @@ namespace FidgetingApp.FanCard.EditorTools
             {
                 target.Create();
                 camera.targetTexture = target;
-                camera.Render();
+                if (submitUrpRequest)
+                {
+                    var request = new UnityEngine.Rendering.RenderPipeline.StandardRequest
+                    {
+                        destination = target
+                    };
+                    UnityEngine.Rendering.RenderPipeline.SubmitRenderRequest(
+                        camera,
+                        request);
+                }
+                else
+                {
+                    camera.Render();
+                }
                 RenderTexture.active = target;
                 image.ReadPixels(new Rect(0f, 0f, width, height), 0, 0);
                 image.Apply(false, false);

@@ -1,4 +1,5 @@
 import Foundation
+import Combine
 import QuartzCore
 import SwiftUI
 import UIKit
@@ -182,14 +183,26 @@ private enum SpinnerModel: String, CaseIterable, Identifiable, Equatable {
 
     var id: String { rawValue }
 
+    /// FDB-PREF-032: the two older three-blade rotors are retired from the
+    /// shipping library. Their enum cases stay so saved state can migrate.
     static let shippingCases: [SpinnerModel] = [
-        .pointedThreeBlade,
         .metalThreeBlade,
-        .goldFourWing,
         .graphiteTwoLobe,
         .magneticSlideTile,
         .magneticFanCard
     ]
+
+    static let retiredCases: [SpinnerModel] = [.pointedThreeBlade, .goldFourWing]
+    static let defaultModel: SpinnerModel = .metalThreeBlade
+
+    /// Resolves a persisted raw model id to a shipping model. `blue-classic`
+    /// and both retired rotors resolve to the consolidated three-blade rotor.
+    static func resolveShipping(rawValue: String) -> SpinnerModel {
+        guard let model = SpinnerModel(rawValue: rawValue) else { return defaultModel }
+        return shippingCases.contains(model) ? model : defaultModel
+    }
+
+    var isRetired: Bool { Self.retiredCases.contains(self) }
 
     var title: String {
         switch self {
@@ -241,7 +254,7 @@ private enum SpinnerModel: String, CaseIterable, Identifiable, Equatable {
 }
 
 private struct OfflineProgressionReward: Equatable {
-    var model: SpinnerModel = .pointedThreeBlade
+    var model: SpinnerModel = .metalThreeBlade
     var experience = 0.0
     var elapsedHours = 0.0
     var previousLevel = 1
@@ -1147,7 +1160,7 @@ private final class ProductUiState: ObservableObject {
     @Published var detentPresetDetents = 0
     @Published var detentTuningIntensity = 0.0
     @Published var detentTuningSharpness = 0.0
-    @Published var progressionModel: SpinnerModel = .pointedThreeBlade
+    @Published var progressionModel: SpinnerModel = .metalThreeBlade
     @Published var progressionLevel = 1
     @Published var progressionTotalExperience = 0.0
     @Published var progressionLevelStartExperience = 0.0
@@ -1180,7 +1193,7 @@ private final class ProductUiState: ObservableObject {
     @Published var collectorRankStartExperience = 0.0
     @Published var collectorNextRankExperience = 1.0
     @Published var collectorFraction = 0.0
-    @Published var collectorFocusModel: SpinnerModel = .pointedThreeBlade
+    @Published var collectorFocusModel: SpinnerModel = .metalThreeBlade
     @Published var collectorCanChangeFocus = true
     @Published var collectorGlobalBonus = 0.0
     @Published var collectorFocusBonus = 0.05
@@ -1272,9 +1285,7 @@ private final class ProductUiState: ObservableObject {
         let needsSpeedTextureMigration = tuningVersion < 7
         let needsIndependentControlMigration = tuningVersion < 8
         let persistedModelId = defaults.string(forKey: Key.selectedModel) ?? ""
-        let migratedModel = persistedModelId == "blue-classic"
-            ? .pointedThreeBlade
-            : (SpinnerModel(rawValue: persistedModelId) ?? .pointedThreeBlade)
+        let migratedModel = SpinnerModel.resolveShipping(rawValue: persistedModelId)
         selectedModel = migratedModel
         if persistedModelId != migratedModel.rawValue {
             defaults.set(migratedModel.rawValue, forKey: Key.selectedModel)
@@ -3323,9 +3334,32 @@ private struct ProductProgressionTopAvatar: View {
     }
 }
 
+enum LibraryDetailPreviewLaunchRules {
+    static let argumentPrefix = "--fidgeting-preview-enter-detail-after="
+    static let maximumDelaySeconds: TimeInterval = 60
+
+    /// Returns the requested delay, or nil when the argument is absent or
+    /// malformed. Negative and over-long delays are rejected so a typo cannot
+    /// leave the preview host waiting forever.
+    static func enterDetailDelay(arguments: [String]) -> TimeInterval? {
+        for argument in arguments where argument.hasPrefix(argumentPrefix) {
+            let raw = String(argument.dropFirst(argumentPrefix.count))
+            guard let seconds = TimeInterval(raw),
+                  seconds.isFinite,
+                  seconds >= 0,
+                  seconds <= maximumDelaySeconds else { return nil }
+            return seconds
+        }
+        return nil
+    }
+}
+
 private struct ProductTopBar: View {
     @ObservedObject var state: ProductUiState
-    @State private var showGachaStore = false
+    @State private var showGachaStore =
+        ProcessInfo.processInfo.arguments
+            .contains("--premium-display-case-gate12-preview")
+        || GachaPackHandoffRules.isNativeHybridCandidatePreview
 
     private var pageTitle: String {
         if state.selectedTab == .collector { return "藏家档案" }
@@ -3424,6 +3458,17 @@ private struct ProductTopBar: View {
         }
         .productDesignSystem()
         .preferredColorScheme(.dark)
+        .opacity(showGachaStore ? 0 : 1)
+        .allowsHitTesting(!showGachaStore)
+        .accessibilityHidden(showGachaStore)
+        .onAppear {
+            CodexSwiftUIOverlayManager.shared
+                .setGachaPresentationActive(showGachaStore)
+        }
+        .onChange(of: showGachaStore) { active in
+            CodexSwiftUIOverlayManager.shared
+                .setGachaPresentationActive(active)
+        }
         .fullScreenCover(isPresented: $state.showingSpinnerOnboarding) {
             SpinnerOnboardingView(state: state)
         }
@@ -3439,7 +3484,7 @@ private struct ProductTopBar: View {
                 + "全局 +\(Int((state.collectorGlobalBonus * 100).rounded()))% · "
                 + "主玩 +\(Int((state.collectorFocusBonus * 100).rounded()))%")
         }
-        .sheet(isPresented: $showGachaStore) {
+        .fullScreenCover(isPresented: $showGachaStore) {
             GachaStoreView()
         }
     }
@@ -9010,9 +9055,18 @@ private final class CodexSwiftUIOverlayManager {
     private var appearanceController: UIHostingController<ProductAppearanceEditor>?
     private var environmentPickerController: UIHostingController<SceneWallpaperPicker>?
     private var displayCaseController: UIHostingController<PremiumDisplayCaseExperienceView>?
+    private var nativeHybridR027CandidateController:
+        UIHostingController<GachaNativeHybridR027CandidateView>?
+    private var nativeHybridR028CandidateController:
+        UIHostingController<GachaNativeHybridR028CandidateView>?
+    private var nativeHybridR029CandidateController:
+        UIHostingController<GachaNativeHybridR029CandidateView>?
+    private var nativeHybridR030CandidateController:
+        UIHostingController<GachaNativeHybridR030CandidateView>?
     private var progressionRewardController: UIViewController?
     private var progressionRewardFlightController: UIViewController?
     private var pendingOfflineRewardFlight = false
+    private var gachaPresentationActive = false
 
     func install(retryCount: Int = 0) {
         guard topController == nil else {
@@ -9092,6 +9146,21 @@ private final class CodexSwiftUIOverlayManager {
         UnityBridge.send("RequestDetentFeelStateFromNativeUi")
         UnityBridge.send("RequestProgressionStateFromNativeUi")
         showPanel()
+        presentNativeHybridCandidateIfRequested()
+        scheduleLibraryDetailPreviewIfRequested()
+    }
+
+    /// Simulator-only capture hook: `--fidgeting-preview-enter-detail-after=<seconds>`
+    /// runs the real library→detail entrance on the persisted model so the
+    /// shipping transition can be recorded without a synthetic tap.
+    private func scheduleLibraryDetailPreviewIfRequested() {
+        guard let delay = LibraryDetailPreviewLaunchRules.enterDetailDelay(
+            arguments: ProcessInfo.processInfo.arguments) else { return }
+        DispatchQueue.main.asyncAfter(deadline: .now() + delay) { [weak self] in
+            guard let self, self.state.selectedTab == .spinners,
+                  self.state.isLibraryVisible else { return }
+            self.enterSelectedModel()
+        }
     }
 
     func selectTab(_ tab: ProductTab) {
@@ -9108,6 +9177,214 @@ private final class CodexSwiftUIOverlayManager {
             showPanel()
         } else {
             hidePanel()
+        }
+    }
+
+    func setGachaPresentationActive(_ active: Bool) {
+        let resolvedActive = active
+            || nativeHybridR027CandidateController != nil
+            || nativeHybridR028CandidateController != nil
+            || nativeHybridR029CandidateController != nil
+            || nativeHybridR030CandidateController != nil
+        guard gachaPresentationActive != resolvedActive else { return }
+        gachaPresentationActive = resolvedActive
+        if resolvedActive {
+            panelController?.view.isHidden = true
+            modeController?.view.isHidden = true
+            progressionController?.view.isHidden = true
+            feedbackController?.view.isHidden = true
+            badgeController?.view.isHidden = true
+            return
+        }
+        badgeController?.view.isHidden = false
+        // selectTab only creates a panel when none exists; the library panel
+        // survived the storefront hidden, so unhide it here (user 2026-09-08
+        // 18:48 "从抽卡页面返回以后，首页的进入按钮都消失了").
+        panelController?.view.isHidden = false
+        selectTab(state.selectedTab)
+    }
+
+    private func presentNativeHybridCandidateIfRequested() {
+        guard let rootController = activeRootViewController() else {
+            return
+        }
+
+        if GachaNativeHybridR030Rules.isIsolatedCandidate,
+           nativeHybridR030CandidateController == nil {
+            let controller = UIHostingController(
+                rootView: GachaNativeHybridR030CandidateView {
+                    [weak self] layerState in
+                    self?.captureNativeHybridR030CandidateLayer(layerState)
+                })
+            configure(controller, in: rootController, background: .clear)
+            NSLayoutConstraint.activate([
+                controller.view.topAnchor.constraint(
+                    equalTo: rootController.view.topAnchor),
+                controller.view.leadingAnchor.constraint(
+                    equalTo: rootController.view.leadingAnchor),
+                controller.view.trailingAnchor.constraint(
+                    equalTo: rootController.view.trailingAnchor),
+                controller.view.bottomAnchor.constraint(
+                    equalTo: rootController.view.bottomAnchor)
+            ])
+            nativeHybridR030CandidateController = controller
+            setGachaPresentationActive(true)
+            rootController.view.layoutIfNeeded()
+            rootController.view.bringSubviewToFront(controller.view)
+            return
+        }
+
+        if GachaNativeHybridR029Rules.isIsolatedCandidate,
+           nativeHybridR029CandidateController == nil {
+            let controller = UIHostingController(
+                rootView: GachaNativeHybridR029CandidateView {
+                    [weak self] layerState in
+                    self?.captureNativeHybridR029CandidateLayer(layerState)
+                })
+            configure(controller, in: rootController, background: .clear)
+            NSLayoutConstraint.activate([
+                controller.view.topAnchor.constraint(
+                    equalTo: rootController.view.topAnchor),
+                controller.view.leadingAnchor.constraint(
+                    equalTo: rootController.view.leadingAnchor),
+                controller.view.trailingAnchor.constraint(
+                    equalTo: rootController.view.trailingAnchor),
+                controller.view.bottomAnchor.constraint(
+                    equalTo: rootController.view.bottomAnchor)
+            ])
+            nativeHybridR029CandidateController = controller
+            setGachaPresentationActive(true)
+            rootController.view.layoutIfNeeded()
+            rootController.view.bringSubviewToFront(controller.view)
+            return
+        }
+
+        if GachaNativeHybridR028Rules.isIsolatedCandidate,
+           nativeHybridR028CandidateController == nil {
+            let controller = UIHostingController(
+                rootView: GachaNativeHybridR028CandidateView {
+                    [weak self] layerState in
+                    self?.captureNativeHybridR028CandidateLayer(layerState)
+                })
+            configure(controller, in: rootController, background: .clear)
+            NSLayoutConstraint.activate([
+                controller.view.topAnchor.constraint(
+                    equalTo: rootController.view.topAnchor),
+                controller.view.leadingAnchor.constraint(
+                    equalTo: rootController.view.leadingAnchor),
+                controller.view.trailingAnchor.constraint(
+                    equalTo: rootController.view.trailingAnchor),
+                controller.view.bottomAnchor.constraint(
+                    equalTo: rootController.view.bottomAnchor)
+            ])
+            nativeHybridR028CandidateController = controller
+            setGachaPresentationActive(true)
+            rootController.view.layoutIfNeeded()
+            rootController.view.bringSubviewToFront(controller.view)
+            return
+        }
+
+        guard GachaNativeHybridR027Rules.isIsolatedCandidate,
+              nativeHybridR027CandidateController == nil else {
+            return
+        }
+        let controller = UIHostingController(
+            rootView: GachaNativeHybridR027CandidateView {
+                [weak self] layerState in
+                self?.captureNativeHybridCandidateLayer(layerState)
+            })
+        configure(controller, in: rootController, background: .clear)
+        NSLayoutConstraint.activate([
+            controller.view.topAnchor.constraint(
+                equalTo: rootController.view.topAnchor),
+            controller.view.leadingAnchor.constraint(
+                equalTo: rootController.view.leadingAnchor),
+            controller.view.trailingAnchor.constraint(
+                equalTo: rootController.view.trailingAnchor),
+            controller.view.bottomAnchor.constraint(
+                equalTo: rootController.view.bottomAnchor)
+        ])
+        nativeHybridR027CandidateController = controller
+        setGachaPresentationActive(true)
+        rootController.view.layoutIfNeeded()
+        rootController.view.bringSubviewToFront(controller.view)
+    }
+
+    private func captureNativeHybridCandidateLayer(
+        _ layerState: GachaNativeHybridR027LayerState
+    ) {
+        guard let controller = nativeHybridR027CandidateController else {
+            return
+        }
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.08) {
+            [weak self, weak controller] in
+            guard let self,
+                  let controller,
+                  self.nativeHybridR027CandidateController === controller else {
+                return
+            }
+            GachaNativeHybridR027OverlayDiagnostics.capture(
+                overlayView: controller.view,
+                state: layerState)
+        }
+    }
+
+    private func captureNativeHybridR028CandidateLayer(
+        _ layerState: GachaNativeHybridR028LayerState
+    ) {
+        guard let controller = nativeHybridR028CandidateController else {
+            return
+        }
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.08) {
+            [weak self, weak controller] in
+            guard let self,
+                  let controller,
+                  self.nativeHybridR028CandidateController === controller else {
+                return
+            }
+            GachaNativeHybridR028OverlayDiagnostics.capture(
+                overlayView: controller.view,
+                state: layerState)
+        }
+    }
+
+    private func captureNativeHybridR029CandidateLayer(
+        _ layerState: GachaNativeHybridR029LayerState
+    ) {
+        guard let controller = nativeHybridR029CandidateController else {
+            return
+        }
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.05) {
+            [weak self, weak controller] in
+            guard let self,
+                  let controller,
+                  self.nativeHybridR029CandidateController === controller else {
+                return
+            }
+            controller.view.layoutIfNeeded()
+            GachaNativeHybridR029Diagnostics.capture(
+                overlayView: controller.view,
+                state: layerState)
+        }
+    }
+
+    private func captureNativeHybridR030CandidateLayer(
+        _ layerState: GachaNativeHybridR030LayerState
+    ) {
+        guard let controller = nativeHybridR030CandidateController else {
+            return
+        }
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.05) {
+            [weak self, weak controller] in
+            guard let self,
+                  let controller,
+                  self.nativeHybridR030CandidateController === controller else {
+                return
+            }
+            controller.view.layoutIfNeeded()
+            GachaNativeHybridR030Diagnostics.capture(
+                overlayView: controller.view,
+                state: layerState)
         }
     }
 
@@ -9621,11 +9898,11 @@ private final class CodexSwiftUIOverlayManager {
         guard let view = modeController?.view else { return }
         // The fifth product is always a six-step magnetic mechanism. Rotary
         // smooth/ratchet controls must neither appear nor override its profile.
-        view.isHidden = !visible
+        view.isHidden = gachaPresentationActive || !visible
             || state.selectedModel == .magneticSlideTile
             || state.selectedModel == .magneticFanCard
-        progressionController?.view.isHidden = !visible
-        feedbackController?.view.isHidden = !visible
+        progressionController?.view.isHidden = gachaPresentationActive || !visible
+        feedbackController?.view.isHidden = gachaPresentationActive || !visible
         if visible, let parent = view.superview {
             parent.bringSubviewToFront(view)
             if let progressionView = progressionController?.view {
@@ -9765,8 +10042,8 @@ public func CodexProgressionReceiveState(
     _ equippedThreeBladeMetalSkinId: UnsafePointer<CChar>?,
     _ productStickerCatalog: UnsafePointer<CChar>?,
     _ equippedProductStickerId: UnsafePointer<CChar>?) {
-    let modelRawValue = modelId.map { String(cString: $0) } ?? "pointed-three-blade"
-    let model = SpinnerModel(rawValue: modelRawValue) ?? .pointedThreeBlade
+    let modelRawValue = modelId.map { String(cString: $0) } ?? SpinnerModel.defaultModel.rawValue
+    let model = SpinnerModel(rawValue: modelRawValue) ?? SpinnerModel.defaultModel
     let offlineModelRawValue = offlineModelId.map { String(cString: $0) }
         ?? modelRawValue
     let offlineModel = SpinnerModel(rawValue: offlineModelRawValue) ?? model
@@ -9873,8 +10150,8 @@ public func CodexCollectorReceiveState(
     _ discoveredModelPayload: UnsafePointer<CChar>?,
     _ achievementCatalogPayload: UnsafePointer<CChar>?,
     _ previousRank: Int32) {
-    let focusRawValue = focusModelId.map { String(cString: $0) } ?? "pointed-three-blade"
-    let focusModel = SpinnerModel(rawValue: focusRawValue) ?? .pointedThreeBlade
+    let focusRawValue = focusModelId.map { String(cString: $0) } ?? SpinnerModel.defaultModel.rawValue
+    let focusModel = SpinnerModel(rawValue: focusRawValue) ?? SpinnerModel.defaultModel
     let discoveredPayload = discoveredModelPayload.map { String(cString: $0) } ?? ""
     let discoveredIds = Set(discoveredPayload.split(separator: "|").map(String.init))
     let resolvedAchievementPayload = achievementCatalogPayload.map {

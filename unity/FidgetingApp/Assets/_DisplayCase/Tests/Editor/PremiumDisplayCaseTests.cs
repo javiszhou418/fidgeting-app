@@ -122,21 +122,21 @@ namespace FidgetingApp.DisplayCase.Tests.Editor
         }
 
         [Test]
-        public void ProductProfiles_CoverAllSixShippingModelsAndPreserveBaseline()
+        public void ProductProfiles_CoverAllFourShippingModelsAndPreserveBaseline()
         {
             PremiumDisplayCaseProductProfile[] profiles =
                 PremiumDisplayCaseProductProfiles.Profiles.ToArray();
 
-            Assert.That(profiles.Length, Is.EqualTo(6));
+            Assert.That(profiles.Length, Is.EqualTo(4));
             Assert.That(profiles.Select(profile => profile.ModelId),
                 Is.EquivalentTo(ProductCatalog.ShippingModelIds()));
             Assert.That(profiles.Select(profile => profile.ModelId).Distinct().Count(),
-                Is.EqualTo(6));
+                Is.EqualTo(4));
             Assert.That(profiles.Select(profile => profile.EnglishDisplayName),
                 Has.All.Not.Empty);
             Assert.That(profiles.Select(profile => profile.EnglishDisplayName)
                     .Distinct().Count(),
-                Is.EqualTo(6));
+                Is.EqualTo(4));
             Assert.That(profiles.All(profile =>
                     profile.EnglishDisplayName
                         == profile.EnglishDisplayName.ToUpperInvariant()),
@@ -177,14 +177,8 @@ namespace FidgetingApp.DisplayCase.Tests.Editor
                 Has.All.EqualTo(magneticBaseline.ContentOptions.InitialEulerAngles));
 
             Assert.That(PremiumDisplayCaseProductProfiles.Resolve(
-                    ProductCatalog.PointedThreeBladeModelId).SceneRootName,
-                Is.EqualTo("ThreeBladeEDC_Root"));
-            Assert.That(PremiumDisplayCaseProductProfiles.Resolve(
                     ProductCatalog.MetalThreeBladeModelId).SceneRootName,
                 Is.EqualTo("ThreeBladeEDC_Root"));
-            Assert.That(PremiumDisplayCaseProductProfiles.Resolve(
-                    ProductCatalog.GoldFourWingModelId).SceneRootName,
-                Is.EqualTo("ImportedSpinner_Root"));
             Assert.That(PremiumDisplayCaseProductProfiles.Resolve(
                     ProductCatalog.GraphiteTwoLobeModelId).SceneRootName,
                 Is.EqualTo("TwoLobeBar_Root"));
@@ -790,7 +784,10 @@ namespace FidgetingApp.DisplayCase.Tests.Editor
                 coordinator);
             StringAssert.Contains("activeDisplayCase.SetFeaturedBadge", coordinator);
             StringAssert.Contains("activeDisplayCase.ClearFeaturedBadge", coordinator);
-            StringAssert.DoesNotContain(
+            StringAssert.Contains(
+                "receipt-prize-not-canonical-toy",
+                coordinator);
+            StringAssert.Contains(
                 "ThreeBladeDisplayPrizeFactory.Instantiate()",
                 coordinator);
             StringAssert.Contains("activeDisplayCase.setContent", coordinator);
