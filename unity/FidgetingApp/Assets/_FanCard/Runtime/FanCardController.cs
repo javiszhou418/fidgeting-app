@@ -62,6 +62,9 @@ namespace FidgetingApp.FanCard
         private float assistantDirection = 1f;
         private float assistantSpeed = 0.20f;
         private bool libraryPreviewActive;
+        private Vector3 deviceGravityWorld;
+        private bool deviceGravityAvailable;
+        private bool deviceTravelActive;
 
         public event Action<float> InteractionGestureCompleted;
         public event Action<FidgetSemanticEvent, float> SemanticEventRaised;
@@ -101,6 +104,9 @@ namespace FidgetingApp.FanCard
         public Collider InteractionSurface => interactionSurface;
         public FanCardDetentProfile Profile => detentProfile;
         public bool IsLibraryPreviewActive => libraryPreviewActive;
+        /// <summary>Signed device-gravity load fed to the track this frame; positive opens.</summary>
+        public float DeviceGravityLoad { get; private set; }
+        public bool IsDeviceGravityAvailable => deviceGravityAvailable;
 
         public void Configure(
             Transform middle,
@@ -165,14 +171,108 @@ namespace FidgetingApp.FanCard
                 physicsAuthority = 0f;
             }
 
+            float deviceLoad = 0f;
+            if (!handActive && !pointerWasPressed)
+            {
+                deviceLoad = ResolveDeviceGravityLoad(track?.Position ?? 0f);
+                // Tilting the phone is explicit user input, so detents the
+                // cards cross under gravity are real, authorized crossings,
+                // including the tail of a step after the phone levels again.
+                if (deviceTravelActive || !Mathf.Approximately(deviceLoad, 0f))
+                {
+                    hapticAuthorized = true;
+                }
+            }
+            else
+            {
+                deviceTravelActive = false;
+            }
+            DeviceGravityLoad = deviceLoad;
+
             AdvancePhysics(
                 deltaTime,
                 physicsTarget,
                 handActive,
                 physicsAuthority,
-                hapticAuthorized);
+                hapticAuthorized,
+                deviceLoad);
             UpdateActivity(deltaTime);
             DecayGestureTelemetry(deltaTime);
+        }
+
+        /// <summary>
+        /// World-space gravity (in g) from the device motion controller. The
+        /// controller only supplies samples; this mechanism owns the resulting
+        /// load, breakaway, travel, capture, and semantic events.
+        /// </summary>
+        public void SetDeviceGravity(Vector3 gravityWorld, bool available)
+        {
+            deviceGravityWorld = gravityWorld;
+            deviceGravityAvailable = available;
+            if (!available)
+            {
+                DeviceGravityLoad = 0f;
+            }
+        }
+
+        /// <summary>
+        /// Centroid of the two moving plates in pivot-local space. Only they
+        /// feel gravity torque; the fixed plate is part of the body.
+        /// </summary>
+        public static Vector3 ResolveMovingCentroidLocal(float progress)
+        {
+            float clamped = Mathf.Clamp01(progress);
+            Vector3 cardCenter = FanCardSpecifications.CardCenterFromPivot;
+            Vector3 middleCenter = Quaternion.Euler(
+                    0f,
+                    FanCardSpecifications.OpeningRotationSign
+                        * FanCardDetentProfile.ReferenceMaximumRelativeAngleDegrees
+                        * clamped,
+                    0f) * cardCenter;
+            Vector3 outerCenter = Quaternion.Euler(
+                    0f,
+                    FanCardSpecifications.OpeningRotationSign
+                        * FanCardDetentProfile.ReferenceMaximumTotalAngleDegrees
+                        * clamped,
+                    0f) * cardCenter;
+            return (middleCenter + outerCenter) * 0.5f;
+        }
+
+        /// <summary>
+        /// Normalized gravity torque about the fan axis, shaped into track load
+        /// units. Positive opens. Pure given the transform basis, so the same
+        /// tilt always yields the same load.
+        /// </summary>
+        public static float ResolveDeviceGravityLoad(
+            Vector3 gravityWorld,
+            Vector3 pivotUpWorld,
+            Vector3 movingCentroidWorldOffset)
+        {
+            float torque = FidgetingApp.Product.DeviceMotionMechanismCoupling
+                .ResolveGravityTorqueNormalized(
+                    movingCentroidWorldOffset,
+                    gravityWorld,
+                    pivotUpWorld);
+            float shaped = FidgetingApp.Product.DeviceMotionMechanismCoupling.ApplyDeadZone(
+                torque * FanCardSpecifications.OpeningRotationSign,
+                FanCardSpecifications.DeviceGravityTorqueDeadZone);
+            return shaped * FanCardSpecifications.DeviceGravityLoadScale;
+        }
+
+        private float ResolveDeviceGravityLoad(float progress)
+        {
+            if (!deviceGravityAvailable
+                || libraryPreviewActive
+                || assistantDriveActive
+                || deviceGravityWorld.sqrMagnitude <= Mathf.Epsilon)
+            {
+                return 0f;
+            }
+
+            return ResolveDeviceGravityLoad(
+                deviceGravityWorld,
+                transform.up,
+                transform.TransformDirection(ResolveMovingCentroidLocal(progress)));
         }
 
         private void OnDisable()
@@ -184,6 +284,9 @@ namespace FidgetingApp.FanCard
             flingDriveActive = false;
             interactionHapticsAuthorized = false;
             gestureBrokeAway = false;
+            deviceTravelActive = false;
+            deviceGravityAvailable = false;
+            DeviceGravityLoad = 0f;
             ResetCurrentGestureTelemetry(false);
             ResetTraversalGesture();
             if (track != null && !track.IsAtRest)
@@ -230,6 +333,7 @@ namespace FidgetingApp.FanCard
             flingDriveActive = false;
             interactionHapticsAuthorized = false;
             gestureBrokeAway = false;
+            deviceTravelActive = false;
             ResetCurrentGestureTelemetry(false);
             ResetTraversalGesture();
             track.ResetToDetent(0);
@@ -250,6 +354,7 @@ namespace FidgetingApp.FanCard
             flingDriveActive = false;
             interactionHapticsAuthorized = false;
             gestureBrokeAway = false;
+            deviceTravelActive = false;
             ResetCurrentGestureTelemetry(false);
             ResetTraversalGesture();
             track.ResetToPosition(progress);
@@ -933,17 +1038,21 @@ namespace FidgetingApp.FanCard
             float target,
             bool handActive,
             float physicsAuthority,
-            bool hapticAuthorized)
+            bool hapticAuthorized,
+            float deviceLoad = 0f)
         {
             EnsureTrack();
             FanCardStepResult result = track.Step(
                 deltaTime,
                 target,
                 handActive,
-                physicsAuthority);
+                physicsAuthority,
+                deviceLoad);
             if (result.BrokeAway)
             {
                 gestureBrokeAway = true;
+                deviceTravelActive = !handActive
+                    && !Mathf.Approximately(deviceLoad, 0f);
                 EmitSemanticIfAuthorized(
                     FidgetSemanticEvent.Breakaway,
                     1f,
@@ -968,6 +1077,7 @@ namespace FidgetingApp.FanCard
                         hapticAuthorized);
                 }
                 gestureBrokeAway = false;
+                deviceTravelActive = false;
                 if (flingDriveActive
                     && Mathf.Abs(track.Position - flingDriveTarget) < 0.0001f)
                 {

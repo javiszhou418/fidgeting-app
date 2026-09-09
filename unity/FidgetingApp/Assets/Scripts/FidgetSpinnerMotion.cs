@@ -426,6 +426,69 @@ namespace ThreeBladeEDC
                 >= Mathf.Max(0f, breakawayVelocity);
         }
 
+        public readonly struct DeviceFrameCouplingResult
+        {
+            public DeviceFrameCouplingResult(
+                float axialSpeed,
+                bool brokeAway,
+                bool inhibitsCapture)
+            {
+                AxialSpeed = axialSpeed;
+                BrokeAway = brokeAway;
+                InhibitsCapture = inhibitsCapture;
+            }
+
+            public float AxialSpeed { get; }
+            public bool BrokeAway { get; }
+            /// <summary>
+            /// The phone is still turning at or above breakaway rate, so the
+            /// rotor may not settle into a detent yet.
+            /// </summary>
+            public bool InhibitsCapture { get; }
+        }
+
+        /// <summary>
+        /// Couples the rotor to the phone body turning about the spin axis.
+        /// A free rotor keeps its world angular velocity, so its speed relative
+        /// to the phone changes by minus the change in phone rate; the existing
+        /// half-life then acts as bearing friction. A captured magnetic detent
+        /// co-rotates with the phone and only releases when the phone rate
+        /// reaches the same breakaway speed a finger needs. The frame right
+        /// after breakaway starts from zero lag because the rotor had been
+        /// co-rotating until then.
+        /// </summary>
+        public static DeviceFrameCouplingResult ApplyDeviceFrameCoupling(
+            float axialSpeed,
+            float phoneRateAboutAxis,
+            float previousPhoneRateAboutAxis,
+            bool magneticMode,
+            bool magneticLocked,
+            float breakawaySpeed,
+            float maximumAngularSpeed)
+        {
+            float maximum = Mathf.Abs(maximumAngularSpeed);
+            bool phoneDrivesBreakaway = magneticMode
+                && Mathf.Abs(phoneRateAboutAxis) > Mathf.Epsilon
+                && BreaksMagneticDetent(phoneRateAboutAxis, breakawaySpeed);
+
+            if (magneticMode && magneticLocked)
+            {
+                return new DeviceFrameCouplingResult(
+                    Mathf.Clamp(axialSpeed, -maximum, maximum),
+                    phoneDrivesBreakaway,
+                    phoneDrivesBreakaway);
+            }
+
+            float coupled = Mathf.Clamp(
+                axialSpeed - (phoneRateAboutAxis - previousPhoneRateAboutAxis),
+                -maximum,
+                maximum);
+            return new DeviceFrameCouplingResult(
+                coupled,
+                false,
+                phoneDrivesBreakaway);
+        }
+
         public static float NearestDetentDegrees(float angleDegrees, int detentsPerTurn)
         {
             float step = 360f / Mathf.Max(1, detentsPerTurn);

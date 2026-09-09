@@ -1,5 +1,6 @@
 import Foundation
 import SwiftUI
+import Combine
 
 // MARK: - Unity bridge (send)
 
@@ -9,7 +10,7 @@ private func GachaUnitySendMessage(
     _ methodName: UnsafePointer<CChar>,
     _ message: UnsafePointer<CChar>)
 
-private enum GachaUnityBridge {
+enum GachaUnityBridge {
     static func send(_ method: String, value: String = "") {
         "FidgetApp".withCString { objectName in
             method.withCString { methodName in
@@ -35,6 +36,16 @@ public enum GachaRarityTier: Int, CaseIterable {
         case .refined: return "精制"
         case .signature: return "臻藏"
         case .heirloom: return "传世"
+        }
+    }
+
+    /// R053: matches the Unity plate (`GachaRarity.ToString().ToUpperInvariant()`).
+    var plateTitle: String {
+        switch self {
+        case .standard: return "STANDARD"
+        case .refined: return "REFINED"
+        case .signature: return "SIGNATURE"
+        case .heirloom: return "HEIRLOOM"
         }
     }
 
@@ -93,6 +104,124 @@ public struct GachaReceiptRow: Equatable, Identifiable {
     public let forcedBySignaturePity: Bool
     public let forcedByHeirloomPity: Bool
     public let forcedByTenDraw: Bool
+    public let firstObtainedAtUtc: String
+    public let collectibleId: String
+    /// R053: English plate copy from `GachaPrizeDefinition.PlateName`.
+    /// Falls back to `name` when the bridge predates the field.
+    public var plateName: String = ""
+    public var plateEdition: String = ""
+
+    /// What the result sheet and case plate print: English only.
+    public var resultTitle: String {
+        plateName.isEmpty ? name : plateName
+    }
+}
+
+public struct GachaRevealCompositionState: Equatable {
+    public static let empty = GachaRevealCompositionState(
+        caseRootName: "",
+        caseTypeName: "",
+        caseEntityID: "",
+        caseRendererCount: 0,
+        caseIsCanonical: false,
+        caseIsOnlyUnityRenderable: false,
+        unityClearBackdropIsolated: false)
+
+    public let caseRootName: String
+    public let caseTypeName: String
+    public let caseEntityID: String
+    public let caseRendererCount: Int
+    public let caseIsCanonical: Bool
+    public let caseIsOnlyUnityRenderable: Bool
+    public let unityClearBackdropIsolated: Bool
+}
+
+public struct GachaNativeHybridR029TraceState: Equatable {
+    public static let empty = GachaNativeHybridR029TraceState(
+        checkpoint: "",
+        rawRequestUUID: "",
+        receiptUUID: "",
+        unityFrameCount: -1,
+        caseRootName: "",
+        caseTypeName: "",
+        caseEntityID: "",
+        caseRendererCount: 0,
+        foreignRendererCount: -1,
+        caseStableFrame: false,
+        cameraStableFrame: false,
+        setupSucceeded: false,
+        revealSetupFailure: "",
+        nativeHybridProgress: 0,
+        caseIsCanonical: false,
+        caseIsOnlyUnityRenderable: false,
+        unityClearBackdropIsolated: false)
+
+    public let checkpoint: String
+    public let rawRequestUUID: String
+    public let receiptUUID: String
+    public let unityFrameCount: Int
+    public let caseRootName: String
+    public let caseTypeName: String
+    public let caseEntityID: String
+    public let caseRendererCount: Int
+    public let foreignRendererCount: Int
+    public let caseStableFrame: Bool
+    public let cameraStableFrame: Bool
+    public let setupSucceeded: Bool
+    public let revealSetupFailure: String
+    public let nativeHybridProgress: Double
+    public let caseIsCanonical: Bool
+    public let caseIsOnlyUnityRenderable: Bool
+    public let unityClearBackdropIsolated: Bool
+}
+
+public struct GachaNativeHybridR030TraceState: Equatable {
+    public static let empty = GachaNativeHybridR030TraceState(
+        checkpoint: "",
+        stableFrameOrdinal: 0,
+        rawRequestUUID: "",
+        receiptUUID: "",
+        unityFrameCount: -1,
+        cameraInstanceID: 0,
+        cameraName: "",
+        caseRootName: "",
+        caseTypeName: "",
+        caseEntityID: "",
+        caseRendererCount: 0,
+        foreignRendererCount: -1,
+        caseStableFrame: false,
+        cameraStableFrame: false,
+        isolationActive: false,
+        usesCavityClearBackdrop: false,
+        publishSetupPublished: false,
+        publishSetupSucceeded: false,
+        publishSetupFailure: "",
+        nativeHybridProgress: 0,
+        caseIsCanonical: false,
+        caseIsOnlyUnityRenderable: false)
+
+    public let checkpoint: String
+    public let stableFrameOrdinal: Int
+    public let rawRequestUUID: String
+    public let receiptUUID: String
+    public let unityFrameCount: Int
+    public let cameraInstanceID: Int64
+    public let cameraName: String
+    public let caseRootName: String
+    public let caseTypeName: String
+    public let caseEntityID: String
+    public let caseRendererCount: Int
+    public let foreignRendererCount: Int
+    public let caseStableFrame: Bool
+    public let cameraStableFrame: Bool
+    public let isolationActive: Bool
+    public let usesCavityClearBackdrop: Bool
+    public let publishSetupPublished: Bool
+    public let publishSetupSucceeded: Bool
+    public let publishSetupFailure: String
+    public let nativeHybridProgress: Double
+    public let caseIsCanonical: Bool
+    public let caseIsOnlyUnityRenderable: Bool
 }
 
 @MainActor
@@ -110,15 +239,217 @@ public final class GachaStoreModel: ObservableObject {
     @Published public private(set) var owned: Set<String> = []
     @Published public var pendingReceipt: [GachaReceiptRow] = []
     @Published public var lastFailureReason = ""
+    @Published public private(set) var receiptRequestID = ""
+    @Published public private(set) var transactionPhase = "idle"
+    @Published public private(set) var revealRequestID = ""
+    @Published public private(set) var revealSetupSucceeded = false
+    @Published public private(set) var revealSetupFailure = ""
+    @Published public private(set) var revealSetupCallbackSerial = 0
+    @Published public private(set) var revealHandoffDurationSeconds = 0.0
+    @Published public private(set) var revealPhase = "idle"
+    @Published public private(set) var revealCaseCrossedPackLip = false
+    @Published public private(set) var revealComposition =
+        GachaRevealCompositionState.empty
+    @Published public private(set) var nativeHybridR029Trace =
+        GachaNativeHybridR029TraceState.empty
+    @Published public private(set) var nativeHybridR030Trace =
+        GachaNativeHybridR030TraceState.empty
 
-    public func requestState() {
-        GachaUnityBridge.send("RequestGachaStateFromNativeUi")
+    public func requestState(previewToken: String? = nil) {
+        let resolvedPreviewToken: String
+        if let previewToken {
+            resolvedPreviewToken = previewToken
+        } else if GachaPackHandoffRules.isNativeHybridCandidatePreview {
+            resolvedPreviewToken = GachaPackHandoffRules
+                .nativeHybridCandidatePreviewToken
+        } else if ProcessInfo.processInfo.arguments.contains(
+            "--gacha-no-funds-preview") {
+            // Device-parity rehearsal: no preview priming, so the store sees
+            // the real (empty) wallet and must disable the CTA instead of
+            // hanging on a refused draw.
+            resolvedPreviewToken = ""
+        } else if ProcessInfo.processInfo.arguments.contains(
+            "--gacha-no-funds-preview") {
+            // Device-parity rehearsal: no preview priming, so the store sees
+            // the real (empty) wallet and must disable the CTA instead of
+            // hanging on a refused draw.
+            resolvedPreviewToken = ""
+        } else if ProcessInfo.processInfo.arguments.contains(
+            "--premium-display-case-gate12-preview") {
+            resolvedPreviewToken = "premium-display-case-gate12-r4"
+        } else {
+            resolvedPreviewToken = ""
+        }
+        GachaUnityBridge.send(
+            "RequestGachaStateFromNativeUi",
+            value: resolvedPreviewToken)
+    }
+
+    public func beginNativeHybridCandidate(previewToken: String) {
+        series = []
+        prizes = []
+        pendingReceipt = []
+        lastFailureReason = ""
+        receiptRequestID = ""
+        transactionPhase = "idle"
+        clearRevealState()
+        requestState(previewToken: previewToken)
+    }
+
+    public func draw(
+        requestID: UUID,
+        seriesId: String,
+        count: Int,
+        useCoins: Bool
+    ) {
+        GachaUnityBridge.send(
+            "DrawGachaFromNativeUi",
+            value: "\(requestID.uuidString.lowercased())|\(seriesId)|\(count)|\(useCoins ? "coin" : "ticket")")
     }
 
     public func draw(seriesId: String, count: Int, useCoins: Bool) {
+        draw(
+            requestID: UUID(),
+            seriesId: seriesId,
+            count: count,
+            useCoins: useCoins)
+    }
+
+    public func presentReveal(
+        requestID: UUID,
+        nativeHybridCandidate: Bool = false
+    ) {
         GachaUnityBridge.send(
-            "DrawGachaFromNativeUi",
-            value: "\(seriesId)|\(count)|\(useCoins ? "coin" : "ticket")")
+            nativeHybridCandidate
+                ? "PresentGachaNativeHybridCandidateFromNativeUi"
+                : "PresentGachaPrizeFromNativeUi",
+            value: requestID.uuidString.lowercased())
+    }
+
+    public func presentR028NativeHybridReveal(requestID: UUID) {
+        GachaUnityBridge.send(
+            "PresentGachaNativeHybridR028CandidateFromNativeUi",
+            value: requestID.uuidString.lowercased())
+    }
+
+    public func presentR029NativeHybridReveal(requestID: UUID) {
+        GachaUnityBridge.send(
+            "PresentGachaNativeHybridR029CandidateFromNativeUi",
+            value: requestID.uuidString.lowercased())
+    }
+
+    public func presentR030NativeHybridReveal(requestID: UUID) {
+        GachaUnityBridge.send(
+            "PresentGachaNativeHybridR030CandidateFromNativeUi",
+            value: requestID.uuidString.lowercased())
+    }
+
+    public func configureR029CaptureCheckpoint(
+        requestID: UUID,
+        checkpoint: GachaNativeHybridR029CaptureCheckpoint?
+    ) {
+        guard let checkpoint else { return }
+        GachaUnityBridge.send(
+            "ConfigureGachaNativeHybridR029CaptureCheckpointFromNativeUi",
+            value: "\(requestID.uuidString.lowercased())|\(checkpoint.rawValue)")
+    }
+
+    public func configureR030CaptureCheckpoint(
+        requestID: UUID,
+        checkpoint: GachaNativeHybridR030CaptureCheckpoint?
+    ) {
+        guard let checkpoint else { return }
+        GachaUnityBridge.send(
+            "ConfigureGachaNativeHybridR030CaptureCheckpointFromNativeUi",
+            value: "\(requestID.uuidString.lowercased())|\(checkpoint.rawValue)")
+    }
+
+    public func startReveal(requestID: UUID) {
+        GachaUnityBridge.send(
+            "StartGachaRevealFromNativeUi",
+            value: requestID.uuidString.lowercased())
+    }
+
+    public func setNativeHybridPreviewProgress(
+        requestID: UUID,
+        progress: Double
+    ) {
+        let value = String(format: "%.3f", locale: Locale(
+            identifier: "en_US_POSIX"), progress)
+        GachaUnityBridge.send(
+            "SetGachaNativeHybridPreviewProgressFromNativeUi",
+            value: "\(requestID.uuidString.lowercased())|\(value)")
+    }
+
+    public func setNativeHybridApertureHold(
+        requestID: UUID,
+        hold: Bool
+    ) {
+        GachaUnityBridge.send(
+            "SetGachaNativeHybridApertureHoldFromNativeUi",
+            value: "\(requestID.uuidString.lowercased())|\(hold ? "1" : "0")")
+    }
+
+    public func skipReveal(requestID: UUID) {
+        GachaUnityBridge.send(
+            "SkipGachaRevealFromNativeUi",
+            value: requestID.uuidString.lowercased())
+    }
+
+    public func acknowledgeReveal(requestID: UUID) {
+        GachaUnityBridge.send(
+            "AcknowledgeGachaRevealFromNativeUi",
+            value: requestID.uuidString.lowercased())
+    }
+
+    public func interruptReveal(requestID: UUID) {
+        GachaUnityBridge.send(
+            "InterruptGachaRevealFromNativeUi",
+            value: requestID.uuidString.lowercased())
+    }
+
+    /// Pack selected: Unity hides the spinner cameras and dims the cave to
+    /// 25% behind the sealed Pack, so the stage never cuts to black.
+    /// `tint` and `strength` describe the Pack-hue backdrop Unity keeps in
+    /// front of the environment until the card flips.
+    public func enterGachaStage(
+        tint: (red: Double, green: Double, blue: Double)? = nil,
+        strength: Double = 1,
+        backdropSnapshotPath: String? = nil
+    ) {
+        var payload = tint.map {
+            String(
+                format: "%.3f,%.3f,%.3f,%.3f",
+                min(max($0.red, 0), 1),
+                min(max($0.green, 0), 1),
+                min(max($0.blue, 0), 1),
+                min(max(strength, 0), 1))
+        } ?? ""
+        // A PNG of the native backdrop lets Unity hold the exact same image
+        // behind the case until the flip, whatever the native design is.
+        if let path = backdropSnapshotPath, !path.isEmpty {
+            payload += "|" + path
+        }
+        GachaUnityBridge.send("EnterGachaStageFromNativeUi", value: payload)
+    }
+
+    /// Storefront closed without a reveal; Unity restores the library view.
+    public func leaveGachaStage() {
+        GachaUnityBridge.send("LeaveGachaStageFromNativeUi")
+    }
+
+    /// Seal finished tearing: one medium transient via the semantic Haptic
+    /// pipeline (mechanism state → semantic event → recipe → renderer).
+    public func emitTearSnap() {
+        GachaUnityBridge.send("EmitGachaTearSnapFromNativeUi")
+    }
+
+    /// Carousel settled on a tier: one detent through the semantic pipeline,
+    /// weighted by the tier ladder (0…1).
+    public func emitCarouselSnap(signal: Double) {
+        GachaUnityBridge.send(
+            "EmitGachaCarouselSnapFromNativeUi",
+            value: String(format: "%.3f", min(max(signal, 0), 1)))
     }
 
     public func redeem(prizeId: String) {
@@ -173,6 +504,9 @@ public final class GachaStoreModel: ObservableObject {
                 owned = Set(cells[1].split(separator: "|").map(String.init))
             } else if cells.count >= 1, cells[0] == "owned" {
                 owned = []
+            } else if cells.count >= 3, cells[0] == "transaction" {
+                receiptRequestID = cells[1]
+                transactionPhase = cells[2]
             }
         }
     }
@@ -186,6 +520,9 @@ public final class GachaStoreModel: ObservableObject {
                 .map(String.init)
             if cells.count >= 2, cells[0] == "result" {
                 failure = cells[1] == "ok" ? "" : cells[1]
+                if cells.count >= 3 {
+                    receiptRequestID = cells[2]
+                }
             } else if cells.count >= 10, cells[0] == "row" {
                 rows.append(GachaReceiptRow(
                     prizeId: cells[1],
@@ -195,13 +532,171 @@ public final class GachaStoreModel: ObservableObject {
                     shardsGained: Int(cells[6]) ?? 0,
                     forcedBySignaturePity: cells[7] == "1",
                     forcedByHeirloomPity: cells[8] == "1",
-                    forcedByTenDraw: cells[9] == "1"))
+                    forcedByTenDraw: cells[9] == "1",
+                    firstObtainedAtUtc: cells.count >= 12 ? cells[10] : "",
+                    collectibleId: cells.count >= 12 ? cells[11] : "",
+                    plateName: cells.count >= 14 ? cells[12] : "",
+                    plateEdition: cells.count >= 14 ? cells[13] : ""))
             }
         }
         lastFailureReason = failure
         // A non-empty receipt payload is authoritative for the latest request.
         // Clear stale rows on failures as well as replacing them on success.
         pendingReceipt = rows
+    }
+
+    public func ingestRevealSetup(
+        requestID: String,
+        succeeded: Bool,
+        failureReason: String,
+        handoffDurationSeconds: Float
+    ) {
+        revealRequestID = requestID
+        revealSetupFailure = failureReason
+        revealHandoffDurationSeconds = succeeded
+            ? max(0, Double(handoffDurationSeconds))
+            : 0
+        revealSetupSucceeded = succeeded
+        revealSetupCallbackSerial &+= 1
+    }
+
+    public func ingestRevealPhase(requestID: String, phase: String) {
+        revealRequestID = requestID
+        revealPhase = phase
+        if phase == "case-crossing-pack-lip" {
+            revealCaseCrossedPackLip = true
+        }
+    }
+
+    public func ingestRevealComposition(
+        requestID: String,
+        caseRootName: String,
+        caseTypeName: String,
+        caseEntityID: String,
+        caseRendererCount: Int,
+        caseIsCanonical: Bool,
+        caseIsOnlyUnityRenderable: Bool,
+        unityClearBackdropIsolated: Bool
+    ) {
+        guard requestID == revealRequestID || revealRequestID.isEmpty else {
+            return
+        }
+        revealRequestID = requestID
+        revealComposition = GachaRevealCompositionState(
+            caseRootName: caseRootName,
+            caseTypeName: caseTypeName,
+            caseEntityID: caseEntityID,
+            caseRendererCount: max(0, caseRendererCount),
+            caseIsCanonical: caseIsCanonical,
+            caseIsOnlyUnityRenderable: caseIsOnlyUnityRenderable,
+            unityClearBackdropIsolated: unityClearBackdropIsolated)
+    }
+
+    public func ingestNativeHybridR029Trace(
+        checkpoint: String,
+        rawRequestUUID: String,
+        receiptUUID: String,
+        unityFrameCount: Int,
+        caseRootName: String,
+        caseTypeName: String,
+        caseEntityID: String,
+        caseRendererCount: Int,
+        foreignRendererCount: Int,
+        caseStableFrame: Bool,
+        cameraStableFrame: Bool,
+        setupSucceeded: Bool,
+        revealSetupFailure: String,
+        nativeHybridProgress: Float,
+        caseIsCanonical: Bool,
+        caseIsOnlyUnityRenderable: Bool,
+        unityClearBackdropIsolated: Bool
+    ) {
+        guard GachaNativeHybridR029Rules.isIsolatedCandidate else {
+            return
+        }
+        nativeHybridR029Trace = GachaNativeHybridR029TraceState(
+            checkpoint: checkpoint,
+            rawRequestUUID: rawRequestUUID,
+            receiptUUID: receiptUUID,
+            unityFrameCount: unityFrameCount,
+            caseRootName: caseRootName,
+            caseTypeName: caseTypeName,
+            caseEntityID: caseEntityID,
+            caseRendererCount: max(0, caseRendererCount),
+            foreignRendererCount: foreignRendererCount,
+            caseStableFrame: caseStableFrame,
+            cameraStableFrame: cameraStableFrame,
+            setupSucceeded: setupSucceeded,
+            revealSetupFailure: revealSetupFailure,
+            nativeHybridProgress: max(0, Double(nativeHybridProgress)),
+            caseIsCanonical: caseIsCanonical,
+            caseIsOnlyUnityRenderable: caseIsOnlyUnityRenderable,
+            unityClearBackdropIsolated: unityClearBackdropIsolated)
+    }
+
+    public func ingestNativeHybridR030Trace(
+        checkpoint: String,
+        stableFrameOrdinal: Int,
+        rawRequestUUID: String,
+        receiptUUID: String,
+        unityFrameCount: Int,
+        cameraInstanceID: Int64,
+        cameraName: String,
+        caseRootName: String,
+        caseTypeName: String,
+        caseEntityID: String,
+        caseRendererCount: Int,
+        foreignRendererCount: Int,
+        caseStableFrame: Bool,
+        cameraStableFrame: Bool,
+        isolationActive: Bool,
+        usesCavityClearBackdrop: Bool,
+        publishSetupPublished: Bool,
+        publishSetupSucceeded: Bool,
+        publishSetupFailure: String,
+        nativeHybridProgress: Float,
+        caseIsCanonical: Bool,
+        caseIsOnlyUnityRenderable: Bool
+    ) {
+        guard GachaNativeHybridR030Rules.isIsolatedCandidate else {
+            return
+        }
+        nativeHybridR030Trace = GachaNativeHybridR030TraceState(
+            checkpoint: checkpoint,
+            stableFrameOrdinal: max(0, stableFrameOrdinal),
+            rawRequestUUID: rawRequestUUID,
+            receiptUUID: receiptUUID,
+            unityFrameCount: unityFrameCount,
+            cameraInstanceID: cameraInstanceID,
+            cameraName: cameraName,
+            caseRootName: caseRootName,
+            caseTypeName: caseTypeName,
+            caseEntityID: caseEntityID,
+            caseRendererCount: max(0, caseRendererCount),
+            foreignRendererCount: foreignRendererCount,
+            caseStableFrame: caseStableFrame,
+            cameraStableFrame: cameraStableFrame,
+            isolationActive: isolationActive,
+            usesCavityClearBackdrop: usesCavityClearBackdrop,
+            publishSetupPublished: publishSetupPublished,
+            publishSetupSucceeded: publishSetupSucceeded,
+            publishSetupFailure: publishSetupFailure,
+            nativeHybridProgress: max(0, Double(nativeHybridProgress)),
+            caseIsCanonical: caseIsCanonical,
+            caseIsOnlyUnityRenderable: caseIsOnlyUnityRenderable)
+    }
+
+    public func clearRevealState() {
+        revealRequestID = ""
+        revealSetupSucceeded = false
+        revealSetupFailure = ""
+        revealSetupCallbackSerial = 0
+        revealHandoffDurationSeconds = 0
+        revealPhase = "idle"
+        revealCaseCrossedPackLip = false
+        revealComposition = .empty
+        nativeHybridR029Trace = .empty
+        nativeHybridR030Trace = .empty
     }
 }
 
@@ -218,6 +713,175 @@ public func CodexGachaReceiveState(
             catalog: catalog,
             snapshot: snapshot,
             receipt: receipt)
+    }
+}
+
+@_cdecl("CodexGachaRevealReceiveSetup")
+public func CodexGachaRevealReceiveSetup(
+    _ requestID: UnsafePointer<CChar>?,
+    _ succeeded: Int32,
+    _ failureReason: UnsafePointer<CChar>?,
+    _ handoffDurationSeconds: Float
+) {
+    let id = requestID.map { String(cString: $0) } ?? ""
+    let reason = failureReason.map { String(cString: $0) } ?? ""
+    Task { @MainActor in
+        GachaStoreModel.shared.ingestRevealSetup(
+            requestID: id,
+            succeeded: succeeded != 0,
+            failureReason: reason,
+            handoffDurationSeconds: handoffDurationSeconds)
+    }
+}
+
+@_cdecl("CodexGachaRevealReceivePhase")
+public func CodexGachaRevealReceivePhase(
+    _ requestID: UnsafePointer<CChar>?,
+    _ phase: UnsafePointer<CChar>?
+) {
+    let id = requestID.map { String(cString: $0) } ?? ""
+    let token = phase.map { String(cString: $0) } ?? ""
+    Task { @MainActor in
+        GachaStoreModel.shared.ingestRevealPhase(
+            requestID: id,
+            phase: token)
+    }
+}
+
+@_cdecl("CodexGachaRevealReceiveComposition")
+public func CodexGachaRevealReceiveComposition(
+    _ requestID: UnsafePointer<CChar>?,
+    _ caseRootName: UnsafePointer<CChar>?,
+    _ caseTypeName: UnsafePointer<CChar>?,
+    _ caseEntityID: UnsafePointer<CChar>?,
+    _ caseRendererCount: Int32,
+    _ caseIsCanonical: Int32,
+    _ caseIsOnlyUnityRenderable: Int32,
+    _ unityClearBackdropIsolated: Int32
+) {
+    let id = requestID.map { String(cString: $0) } ?? ""
+    let rootName = caseRootName.map { String(cString: $0) } ?? ""
+    let typeName = caseTypeName.map { String(cString: $0) } ?? ""
+    let entityID = caseEntityID.map { String(cString: $0) } ?? ""
+    Task { @MainActor in
+        GachaStoreModel.shared.ingestRevealComposition(
+            requestID: id,
+            caseRootName: rootName,
+            caseTypeName: typeName,
+            caseEntityID: entityID,
+            caseRendererCount: Int(caseRendererCount),
+            caseIsCanonical: caseIsCanonical != 0,
+            caseIsOnlyUnityRenderable: caseIsOnlyUnityRenderable != 0,
+            unityClearBackdropIsolated: unityClearBackdropIsolated != 0)
+    }
+}
+
+@_cdecl("CodexGachaRevealReceiveR029Trace")
+public func CodexGachaRevealReceiveR029Trace(
+    _ checkpoint: UnsafePointer<CChar>?,
+    _ rawRequestUUID: UnsafePointer<CChar>?,
+    _ receiptUUID: UnsafePointer<CChar>?,
+    _ unityFrameCount: Int32,
+    _ caseRootName: UnsafePointer<CChar>?,
+    _ caseTypeName: UnsafePointer<CChar>?,
+    _ caseEntityID: UnsafePointer<CChar>?,
+    _ caseRendererCount: Int32,
+    _ foreignRendererCount: Int32,
+    _ caseStableFrame: Int32,
+    _ cameraStableFrame: Int32,
+    _ setupSucceeded: Int32,
+    _ revealSetupFailure: UnsafePointer<CChar>?,
+    _ nativeHybridProgress: Float,
+    _ caseIsCanonical: Int32,
+    _ caseIsOnlyUnityRenderable: Int32,
+    _ unityClearBackdropIsolated: Int32
+) {
+    let checkpointValue = checkpoint.map { String(cString: $0) } ?? ""
+    let requestValue = rawRequestUUID.map { String(cString: $0) } ?? ""
+    let receiptValue = receiptUUID.map { String(cString: $0) } ?? ""
+    let rootName = caseRootName.map { String(cString: $0) } ?? ""
+    let typeName = caseTypeName.map { String(cString: $0) } ?? ""
+    let entityID = caseEntityID.map { String(cString: $0) } ?? ""
+    let failure = revealSetupFailure.map { String(cString: $0) } ?? ""
+    Task { @MainActor in
+        GachaStoreModel.shared.ingestNativeHybridR029Trace(
+            checkpoint: checkpointValue,
+            rawRequestUUID: requestValue,
+            receiptUUID: receiptValue,
+            unityFrameCount: Int(unityFrameCount),
+            caseRootName: rootName,
+            caseTypeName: typeName,
+            caseEntityID: entityID,
+            caseRendererCount: Int(caseRendererCount),
+            foreignRendererCount: Int(foreignRendererCount),
+            caseStableFrame: caseStableFrame != 0,
+            cameraStableFrame: cameraStableFrame != 0,
+            setupSucceeded: setupSucceeded != 0,
+            revealSetupFailure: failure,
+            nativeHybridProgress: nativeHybridProgress,
+            caseIsCanonical: caseIsCanonical != 0,
+            caseIsOnlyUnityRenderable: caseIsOnlyUnityRenderable != 0,
+            unityClearBackdropIsolated: unityClearBackdropIsolated != 0)
+    }
+}
+
+@_cdecl("CodexGachaRevealReceiveR030Trace")
+public func CodexGachaRevealReceiveR030Trace(
+    _ checkpoint: UnsafePointer<CChar>?,
+    _ stableFrameOrdinal: Int32,
+    _ rawRequestUUID: UnsafePointer<CChar>?,
+    _ receiptUUID: UnsafePointer<CChar>?,
+    _ unityFrameCount: Int32,
+    _ cameraInstanceID: Int64,
+    _ cameraName: UnsafePointer<CChar>?,
+    _ caseRootName: UnsafePointer<CChar>?,
+    _ caseTypeName: UnsafePointer<CChar>?,
+    _ caseEntityID: UnsafePointer<CChar>?,
+    _ caseRendererCount: Int32,
+    _ foreignRendererCount: Int32,
+    _ caseStableFrame: Int32,
+    _ cameraStableFrame: Int32,
+    _ isolationActive: Int32,
+    _ usesCavityClearBackdrop: Int32,
+    _ publishSetupPublished: Int32,
+    _ publishSetupSucceeded: Int32,
+    _ publishSetupFailure: UnsafePointer<CChar>?,
+    _ nativeHybridProgress: Float,
+    _ caseIsCanonical: Int32,
+    _ caseIsOnlyUnityRenderable: Int32
+) {
+    let checkpointValue = checkpoint.map { String(cString: $0) } ?? ""
+    let requestValue = rawRequestUUID.map { String(cString: $0) } ?? ""
+    let receiptValue = receiptUUID.map { String(cString: $0) } ?? ""
+    let cameraNameValue = cameraName.map { String(cString: $0) } ?? ""
+    let rootName = caseRootName.map { String(cString: $0) } ?? ""
+    let typeName = caseTypeName.map { String(cString: $0) } ?? ""
+    let entityID = caseEntityID.map { String(cString: $0) } ?? ""
+    let failure = publishSetupFailure.map { String(cString: $0) } ?? ""
+    Task { @MainActor in
+        GachaStoreModel.shared.ingestNativeHybridR030Trace(
+            checkpoint: checkpointValue,
+            stableFrameOrdinal: Int(stableFrameOrdinal),
+            rawRequestUUID: requestValue,
+            receiptUUID: receiptValue,
+            unityFrameCount: Int(unityFrameCount),
+            cameraInstanceID: cameraInstanceID,
+            cameraName: cameraNameValue,
+            caseRootName: rootName,
+            caseTypeName: typeName,
+            caseEntityID: entityID,
+            caseRendererCount: Int(caseRendererCount),
+            foreignRendererCount: Int(foreignRendererCount),
+            caseStableFrame: caseStableFrame != 0,
+            cameraStableFrame: cameraStableFrame != 0,
+            isolationActive: isolationActive != 0,
+            usesCavityClearBackdrop: usesCavityClearBackdrop != 0,
+            publishSetupPublished: publishSetupPublished != 0,
+            publishSetupSucceeded: publishSetupSucceeded != 0,
+            publishSetupFailure: failure,
+            nativeHybridProgress: nativeHybridProgress,
+            caseIsCanonical: caseIsCanonical != 0,
+            caseIsOnlyUnityRenderable: caseIsOnlyUnityRenderable != 0)
     }
 }
 

@@ -29,7 +29,10 @@ namespace FidgetingApp.Product.Gacha
             GachaRarity rarity,
             GachaPrizeKind kind,
             string displayName,
-            string contentReference)
+            string contentReference,
+            string editionFinish = "",
+            string plateName = "",
+            string plateEdition = "")
         {
             Id = id ?? string.Empty;
             SeriesId = seriesId ?? string.Empty;
@@ -37,13 +40,28 @@ namespace FidgetingApp.Product.Gacha
             Kind = kind;
             DisplayName = displayName ?? string.Empty;
             ContentReference = contentReference ?? string.Empty;
+            EditionFinish = editionFinish ?? string.Empty;
+            PlateName = string.IsNullOrWhiteSpace(plateName)
+                ? DisplayName
+                : plateName.Trim();
+            PlateEdition = string.IsNullOrWhiteSpace(plateEdition)
+                ? EditionFinish
+                : plateEdition.Trim();
         }
+
+        /// <summary>
+        /// English plate copy (R053, user 2026-09-09: the case label is
+        /// English in one typeface). Chinese stays in the native UI.
+        /// </summary>
+        public string PlateName { get; }
+        public string PlateEdition { get; }
 
         public string Id { get; }
         public string SeriesId { get; }
         public GachaRarity Rarity { get; }
         public GachaPrizeKind Kind { get; }
         public string DisplayName { get; }
+        public string EditionFinish { get; }
 
         /// <summary>
         /// Stable reference consumed by the reveal director: a skin id, a
@@ -229,9 +247,12 @@ namespace FidgetingApp.Product.Gacha
                         GachaRarity.Signature, GachaPrizeKind.ToySkin,
                         "铜层岩理", "skin/pointed-three-blade/gacha-copper-strata"),
                     new GachaPrizeDefinition(
-                        "canyon-heir-aurora-vein", LaunchSeriesId,
-                        GachaRarity.Heirloom, GachaPrizeKind.ToySkin,
-                        "极光矿脉", "skin/pointed-three-blade/gacha-aurora-vein")
+                        "canyon-heir-metal-three-blade", LaunchSeriesId,
+                        GachaRarity.Heirloom, GachaPrizeKind.Toy,
+                        "三叶金属陀螺", "toy/metal-three-blade",
+                        "峡谷矿脉 · 抛光钢",
+                        "GEEONE TRI-SPINNER",
+                        "SATIN STEEL · DRAGON SCALE")
                 })
         };
 

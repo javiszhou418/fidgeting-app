@@ -628,7 +628,7 @@ namespace FidgetingApp.Product
             {
                 string name = current.name;
                 if (name == DecorationRootName
-                    || name == SpinnerProgressionVisuals.VisualRootName
+                    || name == FidgetAppCoordinator.LegacyProgressionRingRootName
                     || name == ProductStickerPresenter.StickerRootName)
                 {
                     return true;

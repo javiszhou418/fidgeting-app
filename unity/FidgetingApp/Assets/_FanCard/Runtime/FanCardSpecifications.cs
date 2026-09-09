@@ -111,6 +111,14 @@ namespace FidgetingApp.FanCard
         // to closed therefore travels counterclockwise in the authored top
         // view, from 90 degrees back to the fixed top plate's 0 degrees.
         public const float OpeningRotationSign = 1f;
+        // Device gravity on the two moving plates. One g at right angles to
+        // the moving centroid maps to this many track load units; with the
+        // 0.050 breakaway load and 0.06 dead zone a well releases once the
+        // in-plane gravity torque exceeds about 0.34 (roughly 20 degrees of
+        // misalignment). The closed stack rests against its end stop, so the
+        // upright holding pose never opens the fan by itself.
+        public const float DeviceGravityLoadScale = 0.18f;
+        public const float DeviceGravityTorqueDeadZone = 0.06f;
         public const float TrackShellWidth = 0.0062f;
         public const float TrackMeshWidth = 0.00425f;
         public const float MinimumTrackOuterEdgeClearance = 0.0060f;
@@ -141,13 +149,30 @@ namespace FidgetingApp.FanCard
         public const float AxisInnerRadius = 0.00255f;
         public const float AxisHoleRadius = 0.00215f;
         public const float AxisHoleBevel = 0.00022f;
-        // The shaft nearly fills the through-hole but remains below the face.
-        // This leaves one intentional mechanical shadow gap instead of the
-        // layered bright crescents that previously read as a floating ring.
+        public const float VisualMeshWeldTolerance = 0.000002f;
+        // The recessed matte shaft is the only front-visible axis renderer.
+        // Chrome caps, washers, seats, cover discs, and annular hardware are
+        // forbidden because grazing environment light turns them into a ring.
         public const float RecessedSpindleRadius = 0.00200f;
         public const float RecessedSpindleTopInset = 0.00012f;
-        public const float BearingCapRadius = 0.00207f;
-        public const float BearingCapHeight = 0.00065f;
+        public const string FrontVisibleAxisRendererName =
+            "CommonAxis_RecessedMatteSpindle";
+        public const string FrontVisibleAxisMaterialName =
+            "M_FanCardAxisMatte";
+        public const float FrontVisibleAxisMetallic = 0f;
+        public const float FrontVisibleAxisSmoothness = 0f;
+        public const bool FrontVisibleAxisSpecularHighlights = false;
+        public const bool FrontVisibleAxisEnvironmentReflections = false;
+        public static readonly string[] ForbiddenAxisHardwareNameTokens =
+        {
+            "BearingCap",
+            "Ring",
+            "Washer",
+            "AxisSeat",
+            "CoverDisc",
+            "ChromeBall",
+            "BallSeat"
+        };
 
         // Standard playing-card corner indices: one upright pair at the
         // upper-left and one 180-degree pair at the lower-right. The active

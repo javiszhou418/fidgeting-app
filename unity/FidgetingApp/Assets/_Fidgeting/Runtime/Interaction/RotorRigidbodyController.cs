@@ -86,6 +86,10 @@ namespace ThreeBladeEDC.Interaction
         private int _ratchetInitialFlickClicksRemaining;
         private bool _assistantDriveActive;
         private float _assistantTargetSpeed;
+        private bool _hasDeviceFrameSample;
+        private float _deviceFrameRate;
+        private float _deviceFrameRateApplied;
+        private bool _deviceFrameInhibitsCapture;
 
         public event Action ResetPerformed;
         public event Action<FidgetSemanticEvent, float> SemanticEventRaised;
@@ -106,6 +110,15 @@ namespace ThreeBladeEDC.Interaction
         public float AngularSpeedDegrees => AngularSpeedRadians * Mathf.Rad2Deg;
         public float AccumulatedRotationDegrees => _accumulatedRotationDegrees;
         public int DetentsPerTurn => magneticDetentsPerTurn;
+        /// <summary>
+        /// True while the unlocked ratchet is moving and therefore emitting
+        /// its own DetentCrossed events. Secondary tick sources yield to it.
+        /// </summary>
+        public bool IsDetentTravelActive =>
+            resistanceMode == global::ThreeBladeEDC.SpinnerResistanceMode.MagneticDetent
+            && !_magneticLocked
+            && Mathf.Abs(AngularSpeedRadians) > stoppedSpeedThreshold;
+        public float DeviceFrameRate => _hasDeviceFrameSample ? _deviceFrameRate : 0f;
 
         public void SetCoastHalfLife(float value)
         {
@@ -249,11 +262,15 @@ namespace ThreeBladeEDC.Interaction
             if (_isFlipping)
             {
                 UpdateFlip();
+                // Track the phone while the flip animates so the rate change
+                // during those 400 ms never replays as an impulse afterwards.
+                _deviceFrameRateApplied = _deviceFrameRate;
                 return;
             }
 
             if (_body.isKinematic)
             {
+                _deviceFrameRateApplied = _deviceFrameRate;
                 return;
             }
 
@@ -273,6 +290,8 @@ namespace ThreeBladeEDC.Interaction
                     maxAngularSpeed);
                 _hasPendingSpinVelocity = false;
             }
+
+            axialSpeed = ApplyDeviceFrameCoupling(axialSpeed);
 
             if (_assistantDriveActive && !_fingerControlling)
             {
@@ -303,7 +322,9 @@ namespace ThreeBladeEDC.Interaction
             {
                 if (resistanceMode == global::ThreeBladeEDC.SpinnerResistanceMode.MagneticDetent)
                 {
-                    if (!_magneticLocked && Mathf.Abs(axialSpeed) <= magneticCaptureSpeed)
+                    if (!_magneticLocked
+                        && !_deviceFrameInhibitsCapture
+                        && Mathf.Abs(axialSpeed) <= magneticCaptureSpeed)
                     {
                         BeginMagneticCapture(true);
                     }
@@ -357,6 +378,127 @@ namespace ThreeBladeEDC.Interaction
             _hasPendingSpinVelocity = false;
             _ratchetInitialFlickForce = 0f;
             _ratchetInitialFlickClicksRemaining = 0;
+        }
+
+        /// <summary>
+        /// Latest phone rotation rate about the spin axis (Unity sign, rad/s,
+        /// already dead-zoned). The device motion controller publishes this
+        /// every frame; FixedUpdate consumes the change since the last step.
+        /// </summary>
+        public void SetDeviceFrameRotationRate(float rateAboutSpinAxis)
+        {
+            float clamped = Mathf.Clamp(rateAboutSpinAxis, -maxAngularSpeed, maxAngularSpeed);
+            if (!_hasDeviceFrameSample)
+            {
+                _deviceFrameRateApplied = clamped;
+                _hasDeviceFrameSample = true;
+            }
+            _deviceFrameRate = clamped;
+        }
+
+        /// <summary>
+        /// Drops the phone-frame sample so no stored rate can turn into an
+        /// impulse after reset, suspension, or a scene change.
+        /// </summary>
+        public void ClearDeviceFrameRotation()
+        {
+            _hasDeviceFrameSample = false;
+            _deviceFrameRate = 0f;
+            _deviceFrameRateApplied = 0f;
+            _deviceFrameInhibitsCapture = false;
+        }
+
+        /// <summary>
+        /// Device shake impulse. Finger, assistant, flip, and smooth-stop keep
+        /// authority. A captured magnetic detent only releases when the
+        /// resulting speed reaches the same breakaway speed a finger needs.
+        /// The rotor raises ShakeBurst itself because its state changed; the
+        /// motion controller never talks to the haptic router for this.
+        /// </summary>
+        public bool ApplyDeviceShakeImpulse(
+            float deltaRadiansPerSecond,
+            float normalizedStrength)
+        {
+            if (_body == null
+                || _body.isKinematic
+                || _isFlipping
+                || _isSmoothStopping
+                || _fingerControlling
+                || _assistantDriveActive
+                || Mathf.Approximately(deltaRadiansPerSecond, 0f))
+            {
+                return false;
+            }
+
+            float requested = Mathf.Clamp(
+                AngularSpeedRadians + deltaRadiansPerSecond,
+                -maxAngularSpeed,
+                maxAngularSpeed);
+            if (resistanceMode == global::ThreeBladeEDC.SpinnerResistanceMode.MagneticDetent
+                && _magneticLocked)
+            {
+                if (!global::ThreeBladeEDC.FidgetSpinnerMotion.BreaksMagneticDetent(
+                        requested,
+                        magneticBreakawaySpeed))
+                {
+                    return false;
+                }
+
+                _magneticLocked = false;
+                _magneticCapturePending = false;
+                EmitSemantic(
+                    FidgetSemanticEvent.Breakaway,
+                    Mathf.Abs(requested) / Mathf.Max(0.1f, maxAngularSpeed));
+            }
+
+            SetSpinVelocity(requested);
+            RecordInitialFlickForce(
+                Mathf.Abs(deltaRadiansPerSecond) / Mathf.Max(0.1f, maxAngularSpeed));
+            EmitSemantic(FidgetSemanticEvent.ShakeBurst, normalizedStrength);
+            return true;
+        }
+
+        private float ApplyDeviceFrameCoupling(float axialSpeed)
+        {
+            _deviceFrameInhibitsCapture = false;
+            if (!_hasDeviceFrameSample)
+            {
+                return axialSpeed;
+            }
+
+            float rate = _deviceFrameRate;
+            bool couplingActive = !_fingerControlling
+                && !_assistantDriveActive
+                && !_isSmoothStopping;
+            if (couplingActive)
+            {
+                global::ThreeBladeEDC.FidgetSpinnerMotion.DeviceFrameCouplingResult result =
+                    global::ThreeBladeEDC.FidgetSpinnerMotion.ApplyDeviceFrameCoupling(
+                        axialSpeed,
+                        rate,
+                        _deviceFrameRateApplied,
+                        resistanceMode
+                            == global::ThreeBladeEDC.SpinnerResistanceMode.MagneticDetent,
+                        _magneticLocked,
+                        magneticBreakawaySpeed,
+                        maxAngularSpeed);
+                if (result.BrokeAway)
+                {
+                    _magneticLocked = false;
+                    _magneticCapturePending = false;
+                    EmitSemantic(
+                        FidgetSemanticEvent.Breakaway,
+                        Mathf.Abs(rate) / Mathf.Max(0.1f, maxAngularSpeed));
+                }
+                axialSpeed = result.AxialSpeed;
+                _deviceFrameInhibitsCapture = result.InhibitsCapture;
+            }
+
+            // Finger, assistant, or braking own the rotor: track the phone so
+            // resuming coupling never replays the rate change that happened
+            // while they were in charge.
+            _deviceFrameRateApplied = rate;
+            return axialSpeed;
         }
 
         public bool DriveFromFinger(float radiansPerSecond)
@@ -607,6 +749,7 @@ namespace ThreeBladeEDC.Interaction
             _ratchetInitialFlickForce = 0f;
             _ratchetInitialFlickClicksRemaining = 0;
             CancelFlip(false);
+            ClearDeviceFrameRotation();
 
             if (_body != null && !_body.isKinematic)
             {
@@ -640,6 +783,7 @@ namespace ThreeBladeEDC.Interaction
             _ratchetInitialFlickClicksRemaining = 0;
             _fingerControlling = false;
             CancelFlip(false);
+            ClearDeviceFrameRotation();
             _body.position = _initialPosition;
             _body.rotation = _initialRotation;
             if (!_body.isKinematic)
