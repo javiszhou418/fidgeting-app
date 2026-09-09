@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using CodexUnityLab;
 using UnityEngine;
 
@@ -16,20 +17,45 @@ namespace FidgetingApp.EDC
 
         public static bool ShouldRender(FidgetSemanticEvent semanticEvent)
         {
-            return semanticEvent == FidgetSemanticEvent.DetentCrossed;
+            return semanticEvent == FidgetSemanticEvent.MagneticEdgeProbe
+                || semanticEvent == FidgetSemanticEvent.Breakaway
+                || semanticEvent == FidgetSemanticEvent.DetentCrossed
+                || semanticEvent == FidgetSemanticEvent.DetentCaptured;
         }
 
-        public static float ResolveGain(float normalizedSpeed)
+        public static float ResolveGain(
+            FidgetSemanticEvent semanticEvent,
+            float normalizedSignal)
         {
-            float speed = Mathf.Clamp01(normalizedSpeed);
-            return Mathf.Lerp(1f, 0.72f, Mathf.SmoothStep(0f, 1f, speed));
+            float signal = Mathf.Clamp01(normalizedSignal);
+            return semanticEvent switch
+            {
+                FidgetSemanticEvent.MagneticEdgeProbe =>
+                    Mathf.Lerp(0.34f, 0.58f, signal),
+                FidgetSemanticEvent.Breakaway => 0.82f,
+                FidgetSemanticEvent.DetentCaptured => 0.68f,
+                _ => Mathf.Lerp(
+                    1f,
+                    0.72f,
+                    Mathf.SmoothStep(0f, 1f, signal)),
+            };
+        }
+
+        public static float ResolvePitch(FidgetSemanticEvent semanticEvent)
+        {
+            return semanticEvent switch
+            {
+                FidgetSemanticEvent.MagneticEdgeProbe => 0.88f,
+                FidgetSemanticEvent.Breakaway => 0.76f,
+                FidgetSemanticEvent.DetentCaptured => 0.82f,
+                _ => 1f,
+            };
         }
     }
 
     /// <summary>
-    /// Plays one complete Alloy Click 766 Hz sound for each authorized physical
-    /// detent crossing. Capture, breakaway, reset, assistant drive and
-    /// programmatic pose changes do not create an extra click.
+    /// Plays one event-routed Alloy Click for slide steps, endpoint unlock,
+    /// rotational detents and endpoint lock. Programmatic poses stay silent.
     /// </summary>
     [DisallowMultipleComponent]
     public sealed class MagneticSlideDetentAudio : MonoBehaviour
@@ -42,11 +68,32 @@ namespace FidgetingApp.EDC
 
         private int nextVoiceIndex;
         private bool subscribed;
+        private readonly Dictionary<FidgetSemanticEvent, int> playbackCounts = new();
 
         public EdcSliderController Slider => slider;
         public AudioClip EffectClip => effectClip;
         public AudioSource[] Voices => voices;
         public float MasterVolume => masterVolume;
+        public bool AudioReady { get; private set; }
+        public int PlaybackCount { get; private set; }
+        public int InitializationCount { get; private set; }
+        public double LastPlaybackDspTime { get; private set; }
+        public FidgetSemanticEvent LastPlaybackEvent { get; private set; }
+        public int LastDetentDirection { get; private set; }
+        public int LastDetentIndex { get; private set; }
+        public int ActiveVoiceCount
+        {
+            get
+            {
+                int count = 0;
+                foreach (AudioSource voice in voices)
+                {
+                    if (voice != null && voice.isPlaying)
+                        count++;
+                }
+                return count;
+            }
+        }
 
         public void Configure(
             EdcSliderController configuredSlider,
@@ -60,6 +107,7 @@ namespace FidgetingApp.EDC
             voices = configuredVoices ?? Array.Empty<AudioSource>();
             masterVolume = Mathf.Clamp01(configuredMasterVolume);
             ConfigureVoices();
+            ReportAudioReady();
             if (isActiveAndEnabled)
             {
                 Subscribe();
@@ -73,6 +121,7 @@ namespace FidgetingApp.EDC
                 slider = GetComponentInParent<EdcSliderController>();
             }
             ConfigureVoices();
+            ReportAudioReady();
         }
 
         private void OnEnable()
@@ -127,10 +176,37 @@ namespace FidgetingApp.EDC
                 return;
             }
 
-            voice.pitch = 1f;
+            voice.pitch = MagneticSlideAudioModel.ResolvePitch(semanticEvent);
             float volume = masterVolume
-                * MagneticSlideAudioModel.ResolveGain(normalizedSignal);
+                * MagneticSlideAudioModel.ResolveGain(
+                    semanticEvent,
+                    normalizedSignal);
             voice.PlayOneShot(effectClip, volume);
+            PlaybackCount++;
+            playbackCounts.TryGetValue(semanticEvent, out int eventCount);
+            playbackCounts[semanticEvent] = eventCount + 1;
+            LastPlaybackEvent = semanticEvent;
+            if (semanticEvent == FidgetSemanticEvent.DetentCrossed)
+            {
+                LastDetentDirection = slider.LastSemanticDetentDirection;
+                LastDetentIndex = slider.LastSemanticDetentIndex;
+            }
+            LastPlaybackDspTime = AudioSettings.dspTime;
+            Debug.Log(
+                "[MagneticSlideRuntime] audio-play "
+                + $"event={semanticEvent} count={PlaybackCount} "
+                + $"direction={LastDetentDirection} "
+                + $"detent={LastDetentIndex} "
+                + $"volume={volume:F3} pitch={voice.pitch:F3}");
+        }
+
+        public int PlaybackCountFor(FidgetSemanticEvent semanticEvent)
+        {
+            return playbackCounts.TryGetValue(
+                semanticEvent,
+                out int count)
+                ? count
+                : 0;
         }
 
         private AudioSource ResolveVoice()
@@ -169,6 +245,30 @@ namespace FidgetingApp.EDC
                 voice.bypassReverbZones = true;
                 voice.priority = 48;
             }
+        }
+
+        private void ReportAudioReady()
+        {
+            bool ready = slider != null
+                && effectClip != null
+                && voices.Length == MagneticSlideAudioModel.VoiceCount;
+            foreach (AudioSource voice in voices)
+            {
+                ready &= voice != null && voice.enabled;
+            }
+            AudioReady = ready;
+            if (!AudioReady)
+                return;
+
+            InitializationCount++;
+            AudioSettings.GetDSPBufferSize(
+                out int bufferLength,
+                out int bufferCount);
+            Debug.Log(
+                "[MagneticSlideRuntime] audio-ready "
+                + $"clip={effectClip.name} voices={voices.Length} "
+                + $"sampleRate={AudioSettings.outputSampleRate} "
+                + $"dspBuffer={bufferLength}x{bufferCount}");
         }
     }
 }

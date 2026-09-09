@@ -14,10 +14,15 @@ namespace FidgetingApp.Product
     {
         public const string LegacyBlueModelId = "blue-classic";
         public const string PointedThreeBladeModelId = "pointed-three-blade";
+        public const string GoldFourWingModelId = ProductCatalog.GoldFourWingModelId;
+        public const string ConsolidatedRotorModelId = ProductCatalog.MetalThreeBladeModelId;
 
-        private const string MigrationVersionKey =
+        public const string MigrationVersionKey =
             "fidgeting.catalog.migration.version";
-        private const int CurrentMigrationVersion = 1;
+        // v1: blue-classic -> pointed-three-blade.
+        // v2: FDB-PREF-032 consolidation, pointed-three-blade and
+        //     gold-four-wing -> metal-three-blade (max-merge, never discard).
+        public const int CurrentMigrationVersion = 2;
         private const string ProgressionPrefix = "fidgeting.progression.v1.";
         private const string CollectorPrefix = "fidgeting.collector.v1.";
         private const string StickerPrefix = "fidgeting.appearance.sticker.v1.";
@@ -40,34 +45,68 @@ namespace FidgetingApp.Product
 
         public static void Apply()
         {
-            if (PlayerPrefs.GetInt(MigrationVersionKey, 0) >= CurrentMigrationVersion)
+            int version = PlayerPrefs.GetInt(MigrationVersionKey, 0);
+            if (version >= CurrentMigrationVersion)
             {
                 return;
             }
 
-            MigrateProgression(LegacyBlueModelId, PointedThreeBladeModelId);
-            MigrateCollector(LegacyBlueModelId, PointedThreeBladeModelId);
-            CopyStringIfDestinationMissing(
-                StickerPrefix + LegacyBlueModelId,
-                StickerPrefix + PointedThreeBladeModelId);
+            if (version < 1)
+            {
+                MigrateProgression(LegacyBlueModelId, PointedThreeBladeModelId, false);
+                MigrateCollector(LegacyBlueModelId, PointedThreeBladeModelId);
+                CopyStringIfDestinationMissing(
+                    StickerPrefix + LegacyBlueModelId,
+                    StickerPrefix + PointedThreeBladeModelId);
+            }
+
+            if (version < 2)
+            {
+                foreach (string retired in ProductCatalog.RetiredModelIds)
+                {
+                    MigrateProgression(retired, ConsolidatedRotorModelId, true);
+                    MigrateCollector(retired, ConsolidatedRotorModelId);
+                    CopyStringIfDestinationMissing(
+                        StickerPrefix + retired,
+                        StickerPrefix + ConsolidatedRotorModelId);
+                }
+            }
+
             PlayerPrefs.SetInt(MigrationVersionKey, CurrentMigrationVersion);
             PlayerPrefs.Save();
         }
 
-        private static void MigrateProgression(string sourceModelId, string targetModelId)
+        private static void MigrateProgression(
+            string sourceModelId,
+            string targetModelId,
+            bool mergeMaximum)
         {
             foreach (string field in ProgressionStringFields)
             {
-                CopyStringIfDestinationMissing(
-                    ProgressionPrefix + sourceModelId + "." + field,
-                    ProgressionPrefix + targetModelId + "." + field);
+                string sourceKey = ProgressionPrefix + sourceModelId + "." + field;
+                string targetKey = ProgressionPrefix + targetModelId + "." + field;
+                if (mergeMaximum)
+                {
+                    MergeMaximumNumericString(sourceKey, targetKey);
+                }
+                else
+                {
+                    CopyStringIfDestinationMissing(sourceKey, targetKey);
+                }
             }
 
             foreach (string field in ProgressionIntegerFields)
             {
-                CopyIntegerIfDestinationMissing(
-                    ProgressionPrefix + sourceModelId + "." + field,
-                    ProgressionPrefix + targetModelId + "." + field);
+                string sourceKey = ProgressionPrefix + sourceModelId + "." + field;
+                string targetKey = ProgressionPrefix + targetModelId + "." + field;
+                if (mergeMaximum)
+                {
+                    MergeMaximumInteger(sourceKey, targetKey);
+                }
+                else
+                {
+                    CopyIntegerIfDestinationMissing(sourceKey, targetKey);
+                }
             }
 
             ReplaceExactValue(
@@ -114,6 +153,56 @@ namespace FidgetingApp.Product
             if (!PlayerPrefs.HasKey(targetKey) && PlayerPrefs.HasKey(sourceKey))
             {
                 PlayerPrefs.SetInt(targetKey, PlayerPrefs.GetInt(sourceKey));
+            }
+        }
+
+        /// <summary>
+        /// Consolidating several toys into one must not lose the best run on
+        /// any of them. Numeric strings keep the larger value; non-numeric
+        /// strings (date stamps) only fill a missing destination.
+        /// </summary>
+        private static void MergeMaximumNumericString(string sourceKey, string targetKey)
+        {
+            if (!PlayerPrefs.HasKey(sourceKey))
+            {
+                return;
+            }
+
+            string source = PlayerPrefs.GetString(sourceKey);
+            if (!PlayerPrefs.HasKey(targetKey))
+            {
+                PlayerPrefs.SetString(targetKey, source);
+                return;
+            }
+
+            string target = PlayerPrefs.GetString(targetKey);
+            if (double.TryParse(
+                    source,
+                    NumberStyles.Float,
+                    CultureInfo.InvariantCulture,
+                    out double sourceValue)
+                && double.TryParse(
+                    target,
+                    NumberStyles.Float,
+                    CultureInfo.InvariantCulture,
+                    out double targetValue)
+                && sourceValue > targetValue)
+            {
+                PlayerPrefs.SetString(targetKey, source);
+            }
+        }
+
+        private static void MergeMaximumInteger(string sourceKey, string targetKey)
+        {
+            if (!PlayerPrefs.HasKey(sourceKey))
+            {
+                return;
+            }
+
+            int source = PlayerPrefs.GetInt(sourceKey);
+            if (!PlayerPrefs.HasKey(targetKey) || source > PlayerPrefs.GetInt(targetKey))
+            {
+                PlayerPrefs.SetInt(targetKey, source);
             }
         }
 

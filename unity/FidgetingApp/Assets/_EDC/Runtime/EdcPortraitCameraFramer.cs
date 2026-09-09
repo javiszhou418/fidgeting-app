@@ -17,6 +17,16 @@ namespace FidgetingApp.EDC
         public static readonly Vector2 DefaultSensorSizeMillimeters = new(36f, 24f);
         public static readonly Vector3 DefaultDetailFramingBackward =
             new(0f, 0.5f, -0.8660254f);
+        // The detail pose is an authored fixed camera, so a boundary-fraction
+        // library pose scaled with the phone aspect while detail did not; on a
+        // 19.5:9 phone the closed tile read ~1.7x larger in the library
+        // (user 2026-09-08: "在列表场景的时候，它的尺寸过大了"). Library now keeps
+        // the authored magnification and only steps back by the catalog's
+        // library/detail ratio, like the circular rotors.
+        public const float LibraryDistanceScale =
+            ProductFramingCatalog.CircularDetailFraction
+            / ProductFramingCatalog.CircularLibraryFraction;
+        public const float LibrarySafetyFraction = 0.90f;
 
         [SerializeField] private Transform target;
         [SerializeField] private Transform focusTarget;
@@ -39,6 +49,11 @@ namespace FidgetingApp.EDC
         [SerializeField, Range(5f, 120f)]
         private float standardFieldOfView = 26.991f;
         [SerializeField, Range(-60f, 60f)] private float libraryRollDegrees;
+        [SerializeField] private bool preserveAuthoredDefaultPose;
+        [SerializeField] private Vector3 authoredDefaultCameraPosition;
+        [SerializeField] private Quaternion authoredDefaultCameraRotation =
+            Quaternion.identity;
+        [SerializeField] private Vector3 authoredDefaultFocusPoint;
 
         private Camera targetCamera;
         private Vector3 framingBackward;
@@ -76,16 +91,29 @@ namespace FidgetingApp.EDC
         private float transitionTargetWidthFraction;
         private float transitionStartHeightFraction;
         private float transitionTargetHeightFraction;
+        private float transitionStartDistance;
+        private float transitionTargetDistance;
+        private float transitionProgress;
 
         public Transform Target => target;
+        public float AuthoredDefaultDistance => Vector3.Distance(
+            authoredDefaultCameraPosition,
+            authoredDefaultFocusPoint);
         public Transform FocusTarget => focusTarget;
         public float ScreenWidthFraction => screenWidthFraction;
         public float ScreenHeightFraction => screenHeightFraction;
         public float FramedDistance { get; private set; }
         public float ZoomScale => zoomScale;
+        public float TargetZoomScale => targetZoomScale;
+        public float YawOffset => yawOffset;
+        public float PitchOffset => pitchOffset;
+        public int ZoomUpdateCount { get; private set; }
+        public int OrbitUpdateCount { get; private set; }
         public float AppearanceActivationScale => appearanceActivationScale;
         public bool UsesPhysicalProjection => usePhysicalProjection;
         public bool UsesStableLocalBounds => useStableLocalBounds;
+        public bool PreservesAuthoredDefaultPose =>
+            preserveAuthoredDefaultPose;
         public Bounds StableLocalBounds => stableLocalBounds;
         public float LibraryRollDegrees => libraryRollDegrees;
         public float FramingRollDegrees => framingRollDegrees;
@@ -126,8 +154,27 @@ namespace FidgetingApp.EDC
         {
             CancelPresentationTransition();
             target = newTarget;
+            preserveAuthoredDefaultPose = false;
             hasFramingDirection = false;
             FrameNow();
+        }
+
+        public void ConfigureAuthoredRuntimeTarget(
+            Transform newTarget,
+            Bounds localBounds,
+            Vector3 focusPoint)
+        {
+            CancelPresentationTransition();
+            target = newTarget;
+            focusTarget = null;
+            useStableLocalBounds =
+                localBounds.size.sqrMagnitude > 0.000001f;
+            stableLocalBounds = localBounds;
+            preserveAuthoredDefaultPose = true;
+            authoredDefaultCameraPosition = transform.position;
+            authoredDefaultCameraRotation = transform.rotation;
+            authoredDefaultFocusPoint = focusPoint;
+            ApplyAuthoredDefaultPose();
         }
 
         public void ConfigureFocusTarget(Transform newFocusTarget)
@@ -166,6 +213,11 @@ namespace FidgetingApp.EDC
             screenHeightFraction = libraryPreviewActive
                 ? profile.LibraryHeightFraction
                 : profile.DetailHeightFraction;
+            if (preserveAuthoredDefaultPose && !libraryPreviewActive)
+            {
+                ApplyAuthoredDefaultPose();
+                return;
+            }
             FrameNow();
         }
 
@@ -195,6 +247,10 @@ namespace FidgetingApp.EDC
                 pitchOffset - screenDelta.y * orbitSensitivity,
                 pitchLimits.x,
                 pitchLimits.y);
+            OrbitUpdateCount++;
+            Debug.Log(
+                "[MagneticSlideRuntime] orbit-update "
+                + $"yaw={yawOffset:F2} pitch={pitchOffset:F2}");
             ApplyViewPose();
         }
 
@@ -209,6 +265,10 @@ namespace FidgetingApp.EDC
                 targetZoomScale / scale,
                 zoomLimits.x,
                 zoomLimits.y);
+            ZoomUpdateCount++;
+            Debug.Log(
+                "[MagneticSlideRuntime] zoom-update "
+                + $"scale={scale:F4} target={targetZoomScale:F3}");
         }
 
         public void ResetInteractiveView()
@@ -218,6 +278,11 @@ namespace FidgetingApp.EDC
             pitchOffset = 0f;
             zoomScale = 1f;
             targetZoomScale = 1f;
+            if (preserveAuthoredDefaultPose && !libraryPreviewActive)
+            {
+                ApplyAuthoredDefaultPose();
+                return;
+            }
             ApplyViewPose();
         }
 
@@ -302,9 +367,55 @@ namespace FidgetingApp.EDC
             transitionTargetMotionMultiplier = active
                 ? LibraryMotionOrbitMultiplier
                 : 1f;
+            transitionStartDistance = FramedDistance;
+            transitionTargetDistance = ResolveAuthoredPoseDistance(
+                active,
+                targetBackward,
+                targetRoll);
+            transitionProgress = 0f;
             presentationTransitionElapsed = 0f;
             presentationTransitionActive = true;
             hasFramingDirection = true;
+        }
+
+        /// <summary>
+        /// Distance for a pose when the detail camera is authored. Library keeps
+        /// the authored magnification (stepped back by
+        /// <see cref="LibraryDistanceScale"/>) and never lets the closed tile
+        /// exceed <see cref="LibrarySafetyFraction"/> of the viewport.
+        /// </summary>
+        public float ResolveAuthoredPoseDistance(
+            bool libraryPose,
+            Vector3 poseBackward,
+            float rollDegrees)
+        {
+            float authored = AuthoredDefaultDistance;
+            if (!libraryPose)
+            {
+                return authored;
+            }
+
+            float matched = authored * LibraryDistanceScale;
+            if (targetCamera == null)
+            {
+                targetCamera = GetComponent<Camera>();
+            }
+            if (targetCamera == null || !TryGetFramingBounds(out Bounds bounds))
+            {
+                return matched;
+            }
+
+            float safety = ProductCameraFraming.RequiredDistance(
+                targetCamera,
+                bounds,
+                poseBackward,
+                LibrarySafetyFraction,
+                LibrarySafetyFraction,
+                minimumDistance,
+                distancePadding,
+                null,
+                rollDegrees);
+            return Mathf.Max(matched, safety);
         }
 
         public void SetDetailEntranceProgressForPreview(float progress)
@@ -356,6 +467,7 @@ namespace FidgetingApp.EDC
                 transitionStartMotionMultiplier,
                 transitionTargetMotionMultiplier,
                 progress);
+            transitionProgress = progress;
 
             if (progress >= 1f)
             {
@@ -386,6 +498,17 @@ namespace FidgetingApp.EDC
         {
             if (target == null || !TryGetFramingBounds(out Bounds bounds))
             {
+                return;
+            }
+
+            if (preserveAuthoredDefaultPose
+                && !libraryPreviewActive
+                && !presentationTransitionActive
+                && Mathf.Abs(yawOffset) <= 0.0001f
+                && Mathf.Abs(pitchOffset) <= 0.0001f
+                && Mathf.Abs(targetZoomScale - 1f) <= 0.0001f)
+            {
+                ApplyAuthoredDefaultPose();
                 return;
             }
 
@@ -420,6 +543,23 @@ namespace FidgetingApp.EDC
                 distancePadding,
                 null,
                 framingRollDegrees);
+            if (preserveAuthoredDefaultPose)
+            {
+                if (presentationTransitionActive)
+                {
+                    FramedDistance = Mathf.Lerp(
+                        transitionStartDistance,
+                        transitionTargetDistance,
+                        transitionProgress);
+                }
+                else if (libraryPreviewActive)
+                {
+                    FramedDistance = ResolveAuthoredPoseDistance(
+                        true,
+                        framingBackward,
+                        framingRollDegrees);
+                }
+            }
             previousScreenWidth = Screen.width;
             previousScreenHeight = Screen.height;
             ApplyViewPose();
@@ -445,7 +585,11 @@ namespace FidgetingApp.EDC
                 yawOffset + motionOrbit.x,
                 0f);
             Vector3 backward = orbit * framingBackward;
-            Vector3 position = bounds.center
+            Vector3 focus = preserveAuthoredDefaultPose
+                    && !libraryPreviewActive
+                ? authoredDefaultFocusPoint
+                : bounds.center;
+            Vector3 position = focus
                 + backward * (
                     FramedDistance
                     * Mathf.Max(0.01f, zoomScale)
@@ -459,6 +603,29 @@ namespace FidgetingApp.EDC
                 look * Quaternion.AngleAxis(
                     framingRollDegrees,
                     Vector3.forward));
+        }
+
+        private void ApplyAuthoredDefaultPose()
+        {
+            if (!preserveAuthoredDefaultPose)
+                return;
+            if (targetCamera == null)
+                targetCamera = GetComponent<Camera>();
+            framingBackward =
+                authoredDefaultCameraRotation * Vector3.back;
+            defaultFramingBackward = framingBackward;
+            hasFramingDirection = true;
+            hasDefaultFramingDirection = true;
+            FramedDistance = Vector3.Distance(
+                authoredDefaultCameraPosition,
+                authoredDefaultFocusPoint);
+            zoomScale = 1f;
+            targetZoomScale = 1f;
+            previousScreenWidth = Screen.width;
+            previousScreenHeight = Screen.height;
+            transform.SetPositionAndRotation(
+                authoredDefaultCameraPosition,
+                authoredDefaultCameraRotation);
         }
 
         private void ConfigureCameraProjection(Camera camera)

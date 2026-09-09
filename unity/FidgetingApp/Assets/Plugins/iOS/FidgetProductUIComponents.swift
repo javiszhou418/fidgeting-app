@@ -17,6 +17,8 @@ enum FidgetUITokens {
         static let primaryActionHeight: CGFloat = 52
         static let pageDot: CGFloat = 6
         static let selectedPageDotWidth: CGFloat = 18
+        /// 28 read too small (user 2026-09-08 22:43 "icon 适当放大一点").
+        static let headingEmblem: CGFloat = 36
     }
 
     enum Radius {
@@ -145,6 +147,9 @@ private struct ProductDesignSystemModifier: ViewModifier {
             .font(.product(.body))
             .foregroundStyle(Color.white)
             .environment(\.colorScheme, .dark)
+            .onAppear {
+                ProductTypography.registerBundledFontIfNeeded()
+            }
     }
 }
 
@@ -169,6 +174,1770 @@ struct ProductBackdrop: View {
                 startRadius: 20,
                 endRadius: 360)
         }
+    }
+}
+
+struct ProductPackHueBackdrop: View {
+    let accent: Color
+    /// 1 for coloured tiers; neutral tiers pass a reduced strength.
+    var strength: Double = 1
+
+    var body: some View {
+        ZStack {
+            Color.black
+            RadialGradient(
+                colors: [
+                    accent.opacity(
+                        GachaPackStorefrontBackdropRules.centerGlowOpacity * strength),
+                    accent.opacity(
+                        GachaPackStorefrontBackdropRules.midRingOpacity * strength),
+                    Color.clear,
+                ],
+                center: UnitPoint(x: 0.5, y: 0.42),
+                startRadius: 24,
+                endRadius: 420)
+            RadialGradient(
+                colors: [
+                    accent.opacity(
+                        GachaPackStorefrontBackdropRules.floorGlowOpacity * strength),
+                    Color.clear,
+                ],
+                center: UnitPoint(x: 0.5, y: 0.94),
+                startRadius: 12,
+                endRadius: 280)
+            LinearGradient(
+                colors: [
+                    accent.opacity(
+                        GachaPackStorefrontBackdropRules.topWashOpacity * strength),
+                    Color.black.opacity(0.88),
+                    Color.black,
+                ],
+                startPoint: .top,
+                endPoint: .bottom)
+        }
+    }
+}
+
+/// Source-faithful, iOS-native port of OpenSourceUI's Dark Arc Bands.
+///
+/// Source: `dark-arc-bands-background.tsx` at commit
+/// `d239c3463c984a099dd2cb67817a41fc0bcc876f` (MIT, Bidyut Kundu).
+/// The full notice is kept in `Docs/OpenSourceUI-DarkArcBands-MIT.md`.
+/// Geometry, alpha profile, blur, lift and dot texture follow the source.
+/// The four colour stops come from the Pack tier's colourway (FDB-GAC-035
+/// amended 2026-09-07: present from the carousel, one metallic colourway per
+/// Pack, the rarest keeps the source palette). Receipt and rarity never
+/// reach it.
+struct ProductPackArcBandsBackdrop: View {
+    let intensity: Double
+    /// `GachaPackArcBackdropRules.Colourway.forTier(selectedPack)`.
+    var colourway: GachaPackArcBackdropRules.Colourway = .source
+
+    @Environment(\.accessibilityReduceTransparency)
+    private var reduceTransparency
+
+    private var clampedIntensity: Double {
+        min(max(intensity, 0), 1)
+    }
+
+    private var baseOpacity: Double {
+        reduceTransparency
+            ? GachaPackArcBackdropRules.reducedTransparencyBaseOpacity
+            : GachaPackArcBackdropRules.baseOpacity
+    }
+
+    var body: some View {
+        GeometryReader { proxy in
+            let size = proxy.size
+            let primaryHeight = size.height
+                * CGFloat(GachaPackArcBackdropRules.primaryHeightFraction)
+            let softHeight = size.height
+                * CGFloat(GachaPackArcBackdropRules.softHeightFraction)
+            let liftHeight = size.height
+                * CGFloat(GachaPackArcBackdropRules.liftHeightFraction)
+
+            ZStack {
+                LinearGradient(
+                    colors: [
+                        sourceColor(
+                            GachaPackArcBackdropRules.baseTopRGB,
+                            opacity: baseOpacity),
+                        sourceColor(
+                            GachaPackArcBackdropRules.baseBottomRGB,
+                            opacity: baseOpacity),
+                    ],
+                    startPoint: .top,
+                    endPoint: .bottom)
+
+                ProductPackArcBand(
+                    width: size.width
+                        * CGFloat(GachaPackArcBackdropRules.primaryWidthFraction),
+                    height: primaryHeight,
+                    xRadiusFraction: CGFloat(
+                        GachaPackArcBackdropRules.primaryXRadiusFraction),
+                    yRadiusFraction: CGFloat(
+                        GachaPackArcBackdropRules.primaryYRadiusFraction),
+                    stops: sourceStops(
+                        GachaPackArcBackdropRules.primaryStops(for: colourway)),
+                    blurPoints: 0)
+                    .position(
+                        x: size.width * 0.5,
+                        y: size.height * CGFloat(
+                            1 + GachaPackArcBackdropRules
+                                .primaryBottomOverflowFraction)
+                            - primaryHeight * 0.5)
+
+                ProductPackArcBand(
+                    width: size.width
+                        * CGFloat(GachaPackArcBackdropRules.softWidthFraction),
+                    height: softHeight,
+                    xRadiusFraction: CGFloat(
+                        GachaPackArcBackdropRules.softXRadiusFraction),
+                    yRadiusFraction: CGFloat(
+                        GachaPackArcBackdropRules.softYRadiusFraction),
+                    stops: sourceStops(
+                        GachaPackArcBackdropRules.softStops(for: colourway)),
+                    blurPoints: CGFloat(
+                        GachaPackArcBackdropRules.softBlurPoints))
+                    .position(
+                        x: size.width * 0.5,
+                        y: size.height * CGFloat(
+                            1 + GachaPackArcBackdropRules
+                                .softBottomOverflowFraction)
+                            - softHeight * 0.5)
+
+                ProductPackArcBand(
+                    width: size.width
+                        * CGFloat(GachaPackArcBackdropRules.liftWidthFraction),
+                    height: liftHeight,
+                    xRadiusFraction: CGFloat(
+                        GachaPackArcBackdropRules.liftXRadiusFraction),
+                    yRadiusFraction: CGFloat(
+                        GachaPackArcBackdropRules.liftYRadiusFraction),
+                    stops: [
+                        Gradient.Stop(
+                            color: Color.white.opacity(
+                                GachaPackArcBackdropRules.liftPeakOpacity),
+                            location: 0),
+                        Gradient.Stop(
+                            color: Color.clear,
+                            location: CGFloat(
+                                GachaPackArcBackdropRules.liftEndLocation)),
+                    ],
+                    blurPoints: CGFloat(
+                        GachaPackArcBackdropRules.liftBlurPoints))
+                    .position(
+                        x: size.width * 0.5,
+                        y: size.height * CGFloat(
+                            1 + GachaPackArcBackdropRules
+                                .liftBottomOverflowFraction)
+                            - liftHeight * 0.5)
+
+                ProductPackArcDotField(
+                    spacing: CGFloat(
+                        GachaPackArcBackdropRules.dotSpacingPoints),
+                    diameter: CGFloat(
+                        GachaPackArcBackdropRules.dotDiameterPoints))
+                    .fill(Color.white.opacity(
+                        GachaPackArcBackdropRules.dotColorOpacity))
+                    .opacity(GachaPackArcBackdropRules.dotLayerOpacity)
+            }
+            .frame(width: size.width, height: size.height)
+            .clipped()
+        }
+        .opacity(clampedIntensity)
+        .allowsHitTesting(false)
+        .accessibilityHidden(true)
+    }
+
+    private func sourceColor(
+        _ rgb: (red: Double, green: Double, blue: Double),
+        opacity: Double
+    ) -> Color {
+        Color(
+            .sRGB,
+            red: rgb.red,
+            green: rgb.green,
+            blue: rgb.blue,
+            opacity: opacity)
+    }
+
+    private func sourceStops(
+        _ stops: [GachaPackArcBackdropRules.SourceColorStop]
+    ) -> [Gradient.Stop] {
+        stops.map { stop in
+            Gradient.Stop(
+                color: Color(
+                    .sRGB,
+                    red: stop.red,
+                    green: stop.green,
+                    blue: stop.blue,
+                    opacity: stop.opacity),
+                location: CGFloat(stop.location))
+        }
+    }
+}
+
+private struct ProductPackArcBand: View {
+    let width: CGFloat
+    let height: CGFloat
+    let xRadiusFraction: CGFloat
+    let yRadiusFraction: CGFloat
+    let stops: [Gradient.Stop]
+    let blurPoints: CGFloat
+
+    var body: some View {
+        let yRadius = max(height * yRadiusFraction, 1)
+        let xScale = width * xRadiusFraction / yRadius
+        RadialGradient(
+                gradient: Gradient(stops: stops),
+                center: .bottom,
+                startRadius: 0,
+                endRadius: yRadius)
+            .frame(width: width, height: height)
+            .scaleEffect(x: xScale, y: 1, anchor: .bottom)
+            .frame(width: width, height: height)
+            .clipShape(Ellipse())
+            .blur(radius: blurPoints)
+    }
+}
+
+/// One static path draw reproduces the source's 1 px-radius / 4 px dot tile
+/// without importing a raster asset or running a time-based noise shader.
+private struct ProductPackArcDotField: Shape {
+    let spacing: CGFloat
+    let diameter: CGFloat
+
+    func path(in rect: CGRect) -> Path {
+        var path = Path()
+        guard spacing > 0, diameter > 0 else { return path }
+        var y = rect.minY + spacing * 0.5
+        while y < rect.maxY {
+            var x = rect.minX + spacing * 0.5
+            while x < rect.maxX {
+                path.addEllipse(in: CGRect(
+                    x: x - diameter * 0.5,
+                    y: y - diameter * 0.5,
+                    width: diameter,
+                    height: diameter))
+                x += spacing
+            }
+            y += spacing
+        }
+        return path
+    }
+}
+
+struct ProductPackTierCaption: View {
+    let title: String
+    var price = ""
+    let detail: String
+    var accent = Color.white
+    /// rev-006 review: the tier copy under the carousel is left-aligned.
+    var alignment: HorizontalAlignment = .leading
+    var itemSpacing = FidgetUITokens.Spacing.compact
+    var includesHorizontalPadding = true
+    /// Third, quieter line under `detail` (payment / shortfall).
+    var footnote = ""
+
+    private var frameAlignment: Alignment {
+        alignment == .leading ? .leading : .center
+    }
+
+    private var textAlignment: TextAlignment {
+        alignment == .leading ? .leading : .center
+    }
+
+    var body: some View {
+        VStack(alignment: alignment, spacing: itemSpacing) {
+            if !price.isEmpty {
+                Text(price)
+                    .font(.product(.footnote, weight: .semibold))
+                    .foregroundStyle(accent.opacity(0.92))
+            }
+            Text(title)
+                .font(.product(.title2, weight: .bold))
+                .foregroundStyle(accent.opacity(0.96))
+            if !detail.isEmpty {
+                Text(detail)
+                    .font(.product(.subheadline))
+                    .foregroundStyle(
+                        Color.white.opacity(FidgetUITokens.Opacity.secondaryText))
+                    .multilineTextAlignment(textAlignment)
+                    .lineLimit(3)
+            }
+            if !footnote.isEmpty {
+                Text(footnote)
+                    .font(.product(.footnote))
+                    .foregroundStyle(
+                        Color.white.opacity(FidgetUITokens.Opacity.tertiaryText))
+                    .multilineTextAlignment(textAlignment)
+                    .lineLimit(2)
+            }
+        }
+        .frame(maxWidth: .infinity, alignment: frameAlignment)
+        .padding(.horizontal, includesHorizontalPadding
+            ? FidgetUITokens.Spacing.section : 0)
+        .accessibilityElement(children: .combine)
+        .accessibilityLabel(accessibilityLabelText)
+    }
+
+    private var accessibilityLabelText: String {
+        [title, price, detail, footnote].filter { !$0.isEmpty }.joined(separator: "，")
+    }
+}
+
+struct ProductRasterAssetImage: View {
+    let name: String
+
+    var body: some View {
+        Group {
+            if let url = Bundle.main.url(
+                forResource: name,
+                withExtension: "png"),
+               let image = UIImage(contentsOfFile: url.path) {
+                Image(uiImage: image)
+                    .resizable()
+                    .scaledToFit()
+            } else {
+                Color.white.opacity(0.06)
+            }
+        }
+    }
+}
+
+struct ProductPackTearRevealLayer: View {
+    let bodyAssetName: String
+    let flapAssetName: String
+    let tearProgress: Double
+    let seamLightStrength: Double
+    let releasePulseStrength: Double
+    let liveCaseReady: Bool
+    let retreatProgress: Double
+    /// Idle loop before the tear starts (spec §1.4): vertical drift, a
+    /// slow yaw about the vertical axis and a highlight sweeping the seal.
+    var idleOffsetPoints: Double = 0
+    var idleYawDegrees: Double = 0
+    /// Device-tilt pitch about the horizontal axis (FDB-GAC-036).
+    var idlePitchDegrees: Double = 0
+    /// Tier-ladder wriggle (GachaPackTierLadder): sideways knock, roll and swell.
+    var idleWriggleXPoints: Double = 0
+    var idleWriggleRollDegrees: Double = 0
+    var idleWriggleScale: Double = 1
+    /// Holographic sheen pose; nil draws no sheen.
+    var sheenPose: GachaPackHolographicSheenRules.SheenPose? = nil
+    /// Foil mask (`GachaPackTier.foilAssetName`); defaults to the body.
+    var sheenMaskAssetName: String? = nil
+    /// R051y: stand-alone print raster parallaxed against the foil, and
+    /// whether the view-following glare is drawn (off under Reduce Motion).
+    var printAssetName: String? = nil
+    var glareEnabled = false
+    /// R051z: tier-tinted drop shadow behind the sealed Pack; nil draws none.
+    var shadowTint: Color? = nil
+    /// R052d: the torn mouth's interior takes the tier's foil shade; nil
+    /// keeps the neutral dark cavity.
+    var interiorTier: GachaPackTier? = nil
+    /// 0…1 sweep position across the seal; nil hides the highlight.
+    var idleSealSweepProgress: Double? = nil
+    /// Mouth gape multiplier at commit (spec §2.8).
+    var mouthGapeScale: Double = 1
+    /// When set, the Pack artwork shares geometry with the carousel's
+    /// selected Pack so the selection→tear change animates as one Pack
+    /// moving and growing instead of a cut.
+    var matchedGeometryID: String? = nil
+    var matchedGeometryNamespace: Namespace.ID? = nil
+
+    private var progress: CGFloat {
+        CGFloat(min(max(tearProgress, 0), 1))
+    }
+
+    private var retreat: CGFloat {
+        CGFloat(min(max(retreatProgress, 0), 1))
+    }
+
+    /// Seal hit area in stage coordinates: `sealHitAreaHeightPoints` tall,
+    /// centred on the fin, full Pack width (spec §1.5).
+    static func sealHitRect(in size: CGSize) -> CGRect {
+        let frame = ProductPackTearLayout.frame(in: size, retreatProgress: 0)
+        let finTop = frame.minY + frame.height
+            * CGFloat(GachaPackOpeningRules.authoredPackTopYFraction)
+        let seam = frame.minY + frame.height
+            * CGFloat(GachaPackOpeningRules.authoredSeamYFraction)
+        let height = CGFloat(GachaPackHandoffRules.sealHitAreaHeightPoints)
+        return CGRect(
+            x: frame.minX,
+            y: (finTop + seam) * 0.5 - height * 0.5,
+            width: frame.width,
+            height: height)
+    }
+
+    var body: some View {
+        GeometryReader { proxy in
+            let packFrame = ProductPackTearLayout.frame(
+                in: proxy.size,
+                retreatProgress: retreat)
+
+            ZStack {
+                ProductTearablePackArtwork(
+                    bodyAssetName: bodyAssetName,
+                    flapAssetName: flapAssetName,
+                    tearProgress: tearProgress,
+                    seamLightStrength: seamLightStrength,
+                    releasePulseStrength: releasePulseStrength,
+                    caseReady: liveCaseReady,
+                    sealSweepProgress: idleSealSweepProgress,
+                    mouthGapeScale: mouthGapeScale,
+                    interiorTier: interiorTier)
+                .background {
+                    if let sheenPose, let shadowTint, tearProgress <= 0.002 {
+                        ProductPackTintedShadow(
+                            maskAssetName: bodyAssetName,
+                            pose: sheenPose,
+                            accent: shadowTint)
+                    }
+                }
+                .overlay {
+                    // The print sits wholly below the flap rows, so it can
+                    // ride above the tearable stack without covering the lid.
+                    if let printAssetName {
+                        ProductPackPrintLayer(
+                            assetName: printAssetName,
+                            pose: sheenPose ?? .rest)
+                    }
+                }
+                .overlay {
+                    if let sheenPose {
+                        ProductPackHolographicSheen(
+                            maskAssetName: sheenMaskAssetName ?? bodyAssetName,
+                            pose: sheenPose)
+                    }
+                }
+                .overlay {
+                    if let sheenPose, let printAssetName, glareEnabled {
+                        ProductPackGlare(maskAssetName: printAssetName, pose: sheenPose)
+                    }
+                }
+                .modifier(ProductMatchedGeometry(
+                    id: matchedGeometryID,
+                    namespace: matchedGeometryNamespace))
+                .scaleEffect(idleWriggleScale)
+                .rotationEffect(.degrees(idleWriggleRollDegrees))
+                .rotation3DEffect(
+                    .degrees(idlePitchDegrees),
+                    axis: (x: 1, y: 0, z: 0),
+                    perspective: 0.6)
+                .rotation3DEffect(
+                    .degrees(idleYawDegrees),
+                    axis: (x: 0, y: 1, z: 0),
+                    perspective: 0.6)
+                // Departure: drop, tilt back and fade as one rigid body. The
+                // case behind stays fully opaque throughout (spec §3.14).
+                .modifier(ProductPackDepartureEffect(retreat: Double(retreat)))
+                .position(
+                    x: packFrame.midX + CGFloat(idleWriggleXPoints),
+                    y: packFrame.midY + CGFloat(idleOffsetPoints))
+
+                ProductPackReleaseBurst(
+                    strength: releasePulseStrength,
+                    center: ProductPackTearLayout.seamCenter(in: proxy.size),
+                    stageSize: proxy.size)
+            }
+            .frame(width: proxy.size.width, height: proxy.size.height)
+        }
+        .accessibilityHidden(true)
+    }
+}
+
+/// R051y (after holo-card's layered depth): the stamped print as its own
+/// raster, shifted by `GachaPackHolographicSheenRules.printParallax` so the
+/// emblem, type and panel rim ride above the foil when the phone tilts.
+struct ProductPackPrintLayer: View {
+    let assetName: String
+    let pose: GachaPackHolographicSheenRules.SheenPose
+
+    var body: some View {
+        GeometryReader { proxy in
+            let shift = GachaPackHolographicSheenRules.printParallax(pose: pose)
+            ProductRasterAssetImage(name: assetName)
+                .frame(width: proxy.size.width, height: proxy.size.height)
+                .offset(
+                    x: proxy.size.width * CGFloat(shift.x),
+                    y: proxy.size.height * CGFloat(shift.y))
+        }
+        .accessibilityHidden(true)
+    }
+}
+
+/// View-following specular on the metal print (R051z, user 09-09 09:58: a
+/// highlight needs a reflective surface to sit on). One broad soft gloss
+/// with a faint chromatic fringe, masked to the print raster (rim, panel
+/// frame, emblem, type) so the matte foil never shows a hot spot.
+struct ProductPackGlare: View {
+    /// Metal mask: `GachaPackTier.printAssetName`.
+    let maskAssetName: String
+    let pose: GachaPackHolographicSheenRules.SheenPose
+
+    private typealias Rules = GachaPackHolographicSheenRules
+
+    var body: some View {
+        GeometryReader { proxy in
+            let width = proxy.size.width
+            let centre = Rules.glareCenter(pose: pose)
+            let point = CGPoint(x: width * CGFloat(centre.x), y: proxy.size.height * CGFloat(centre.y))
+            let radius = width * CGFloat(Rules.glareCoreRadiusFraction)
+            ZStack {
+                Circle()
+                    .strokeBorder(
+                        AngularGradient(
+                            stops: ProductPackHolographicSheen.spectrumStops(offset: pose.offset),
+                            center: .center),
+                        lineWidth: radius * 0.6)
+                    .frame(width: radius * 2.6, height: radius * 2.6)
+                    .blur(radius: radius * 0.5)
+                    .opacity(Rules.glareFringeOpacity)
+                    .position(point)
+                Circle()
+                    .fill(RadialGradient(
+                        colors: [
+                            Color.white.opacity(Rules.glareCoreOpacity),
+                            Color.white.opacity(Rules.glareCoreOpacity * 0.45),
+                            Color.white.opacity(0),
+                        ],
+                        center: .center,
+                        startRadius: 0,
+                        endRadius: radius))
+                    .frame(width: radius * 2, height: radius * 2)
+                    .position(point)
+            }
+            .opacity(Rules.glareBoost(pose: pose))
+            .blendMode(.plusLighter)
+            .mask(
+                ProductRasterAssetImage(name: maskAssetName)
+                    .frame(width: proxy.size.width, height: proxy.size.height))
+        }
+        .accessibilityHidden(true)
+    }
+}
+
+/// Tinted drop shadow behind the Pack (R051z, user 09-09 09:58 "drop shadow
+/// 深一些、按 tier 颜色、subtle、再扩散"): the pouch silhouette filled with the
+/// darkened tier accent, blurred wide and dropped a little. Deepens on a
+/// sweep. Normal blend: this is shade, not glow.
+struct ProductPackTintedShadow: View {
+    let maskAssetName: String
+    let pose: GachaPackHolographicSheenRules.SheenPose
+    let accent: Color
+
+    private typealias Rules = GachaPackHolographicSheenRules
+
+    var body: some View {
+        GeometryReader { proxy in
+            Rectangle()
+                .fill(accent)
+                .mask(
+                    ProductRasterAssetImage(name: maskAssetName)
+                        .frame(width: proxy.size.width, height: proxy.size.height))
+                .blur(radius: CGFloat(Rules.shadowBlurPoints))
+                .opacity(Rules.shadowOpacity(pose: pose))
+                .scaleEffect(CGFloat(Rules.shadowScale))
+                .offset(y: CGFloat(Rules.shadowDropPoints))
+        }
+        .accessibilityHidden(true)
+    }
+}
+
+extension GachaPackTier {
+    /// Shadow tint: the storefront accent scaled to `shadowTintScale`.
+    var shadowTint: Color {
+        let rgb = storefrontAccentRGB
+        let k = GachaPackHolographicSheenRules.shadowTintScale
+        return Color(red: rgb.red * k, green: rgb.green * k, blue: rgb.blue * k)
+    }
+}
+
+/// Holographic foil sheen on the sealed Pack (FDB-GAC-036; reference:
+/// LerSentAI parallax laser card). A wide, soft iridescent band — cyan,
+/// white, magenta, gold — plus a narrow laser core, composited additively so
+/// it brightens the print instead of painting over it. `maskAssetName` is
+/// the tier's foil mask (`GachaPackTier.foilAssetName`): only the centre
+/// emblem and the text carry the foil, not the whole bag (user review
+/// 2026-09-07 17:22). `pose` comes from `GachaPackHolographicSheenRules`.
+struct ProductPackHolographicSheen: View {
+    let maskAssetName: String
+    let pose: GachaPackHolographicSheenRules.SheenPose
+
+    private typealias Rules = GachaPackHolographicSheenRules
+
+    /// Band envelope: clear → white → clear across the band frame.
+    private static let bandEnvelope = LinearGradient(
+        stops: [
+            .init(color: Color.clear, location: 0),
+            .init(color: Color.white.opacity(0.35), location: 0.22),
+            .init(color: Color.white, location: 0.5),
+            .init(color: Color.white.opacity(0.35), location: 0.78),
+            .init(color: Color.clear, location: 1),
+        ],
+        startPoint: .leading,
+        endPoint: .trailing)
+
+    /// Diffraction stripes (R051x): cosine-palette rainbow, phase slides with
+    /// the band offset so tilting re-colours the foil like a real hologram.
+    static func spectrumStops(offset: Double) -> [Gradient.Stop] {
+        let count = 48
+        let phase = offset * Rules.spectrumPhaseGain
+        return (0..<count).map { i in
+            let t = Double(i) / Double(count - 1)
+            let c = Rules.spectrum(t * Rules.spectrumCycles + phase)
+            return .init(
+                color: Color(red: c.red, green: c.green, blue: c.blue),
+                location: t)
+        }
+    }
+
+    var body: some View {
+        GeometryReader { proxy in
+            let width = proxy.size.width
+            let height = proxy.size.height
+            let bandWidth = width * CGFloat(Rules.bandWidthFraction)
+            let bandCenterX = width * 0.5 + CGFloat(pose.offset) * width
+            let angle = Rules.bandAngleDegrees * Double.pi / 180
+            ZStack {
+                ZStack {
+                    Rectangle()
+                        .fill(LinearGradient(
+                            stops: Self.spectrumStops(offset: pose.offset),
+                            startPoint: .leading,
+                            endPoint: .trailing))
+                        .opacity(Rules.spectrumOpacity)
+                        .mask(Rectangle().fill(Self.bandEnvelope))
+                        .frame(width: bandWidth * 2.0, height: height * 2.6)
+                    // Laser core: the bright line that reads as the beam.
+                    Rectangle()
+                        .fill(LinearGradient(
+                            colors: [
+                                Color.white.opacity(0),
+                                Color.white.opacity(0.85),
+                                Color.white.opacity(0),
+                            ],
+                            startPoint: .leading,
+                            endPoint: .trailing))
+                        .frame(width: bandWidth * 0.18, height: height * 2.6)
+                }
+                .rotationEffect(.degrees(Rules.bandAngleDegrees))
+                .position(x: bandCenterX, y: height * 0.5)
+
+                // Glints stay fixed on the foil and flash as the band passes.
+                Canvas { context, size in
+                    let glintSize = CGFloat(Rules.glintSizePoints)
+                    for i in 0..<Rules.glintCount {
+                        let p = Rules.glintPosition(i)
+                        let x = size.width * CGFloat(p.x)
+                        let y = size.height * CGFloat(p.y)
+                        // Signed distance to the band centre line along its normal.
+                        let d = ((x - bandCenterX) * CGFloat(cos(angle))
+                            + (y - size.height * 0.5) * CGFloat(sin(angle)))
+                            / bandWidth
+                        let strength = Rules.glintEnvelope(distanceFromBandCentre: Double(d))
+                        if strength < 0.02 { continue }
+                        let r = glintSize * CGFloat(0.6 + 0.4 * strength)
+                        var star = Path()
+                        star.move(to: CGPoint(x: x - r * 2.2, y: y))
+                        star.addQuadCurve(to: CGPoint(x: x, y: y - r * 2.2), control: CGPoint(x: x, y: y))
+                        star.addQuadCurve(to: CGPoint(x: x + r * 2.2, y: y), control: CGPoint(x: x, y: y))
+                        star.addQuadCurve(to: CGPoint(x: x, y: y + r * 2.2), control: CGPoint(x: x, y: y))
+                        star.addQuadCurve(to: CGPoint(x: x - r * 2.2, y: y), control: CGPoint(x: x, y: y))
+                        context.fill(
+                            star,
+                            with: .color(Color.white.opacity(Rules.glintOpacity * strength)))
+                    }
+                }
+            }
+            .opacity(pose.opacity)
+        }
+        .mask(ProductRasterAssetImage(name: maskAssetName))
+        .blendMode(.plusLighter)
+        .allowsHitTesting(false)
+        .accessibilityHidden(true)
+    }
+}
+
+/// The selected tier's floor glow grows from a small seed into a broad
+/// ellipse. Recreating this component with `.id(tier)` replays the growth on
+/// every carousel snap. It replaces the R049 full-screen circular wipe,
+/// which completed too quickly to read as a bottom-origin ripple.
+struct ProductPackBottomGlowGrowth: View {
+    let accent: Color
+    let strength: Double
+    var reduceMotion = false
+
+    @State private var progress = 0.0
+
+    var body: some View {
+        GeometryReader { proxy in
+            let size = proxy.size
+            let xScale = CGFloat(
+                GachaPackBackdropRippleRules.xScale(progress: progress))
+            let yScale = CGFloat(
+                GachaPackBackdropRippleRules.yScale(progress: progress))
+            let echo = CGFloat(
+                GachaPackBackdropRippleRules.echoProgress(progress: progress))
+            let width = size.width
+                * CGFloat(GachaPackBackdropRippleRules.widthFraction)
+            let height = size.height
+                * CGFloat(GachaPackBackdropRippleRules.heightFraction)
+            let floorY = size.height
+                * CGFloat(GachaPackBackdropRippleRules.originYFraction)
+            // `.position` places the frame centre; put the frame's bottom
+            // edge on the floor line so the gradient centre stays on screen.
+            let glowCenter = CGPoint(x: size.width * 0.5, y: floorY - height * 0.5)
+            let echoHeight = height * 0.48
+            let echoCenter = CGPoint(x: size.width * 0.5, y: floorY - echoHeight * 0.5)
+
+            ZStack {
+                RadialGradient(
+                    colors: [
+                        accent.opacity(0.96),
+                        accent.opacity(0.66),
+                        accent.opacity(0.24),
+                        Color.clear,
+                    ],
+                    center: .bottom,
+                    startRadius: 0,
+                    endRadius: max(width, height) * 0.55)
+                    .frame(width: width, height: height)
+                    .scaleEffect(
+                        x: xScale,
+                        y: yScale,
+                        anchor: .bottom)
+                    .opacity(
+                        GachaPackBackdropRippleRules.opacity(progress: progress)
+                            * strength)
+                    .blur(radius: 14)
+                    .position(glowCenter)
+
+                Ellipse()
+                    .stroke(
+                        accent.opacity(
+                            GachaPackBackdropRippleRules.echoOpacity(
+                                progress: progress) * strength),
+                        lineWidth: CGFloat(
+                            GachaPackBackdropRippleRules.echoLineWidthPoints))
+                    .frame(width: width, height: echoHeight)
+                    .scaleEffect(
+                        x: max(echo, 0.02),
+                        y: max(echo, 0.02),
+                        anchor: .bottom)
+                    .blur(radius: CGFloat(
+                        GachaPackBackdropRippleRules.echoBlurPoints))
+                    .position(echoCenter)
+                    .blendMode(.plusLighter)
+            }
+        }
+        .allowsHitTesting(false)
+        .accessibilityHidden(true)
+        .onAppear {
+            if reduceMotion {
+                progress = 1
+            } else {
+                progress = 0
+                // Linear clock: the rules' growth curve is the only easing.
+                withAnimation(.linear(
+                    duration: GachaPackBackdropRippleRules.seconds)) {
+                    progress = 1
+                }
+            }
+        }
+    }
+}
+
+/// Fine dust in the tier colour (R050) drawn as soft glows and star
+/// sparkles (R051, user 2026-09-08 12:16: no hard-edged discs, no halo
+/// disc behind a core disc). Rise speed follows the tier; a tier change
+/// carries the accumulated travel forward so the field never jumps.
+struct ProductPackBackdropAmbience: View {
+    let tier: GachaPackTier
+    let accent: Color
+    let reference: Date
+    var reduceMotion = false
+
+    @State private var travelAtChange = 0.0
+    @State private var changedAt: Date? = nil
+    @State private var previousTier: GachaPackTier? = nil
+
+    var body: some View {
+        TimelineView(.animation(paused: reduceMotion)) { context in
+            Canvas { graphics, size in
+                let elapsed = reduceMotion ? 0 : context.date.timeIntervalSince(reference)
+                let travel = reduceMotion ? 0 : GachaPackBackdropAmbienceRules.travel(
+                    travelAtChange: travelAtChange,
+                    secondsSinceChange: context.date.timeIntervalSince(changedAt ?? reference),
+                    tier: tier)
+                for index in 0..<GachaPackBackdropAmbienceRules.moteCount(for: tier) {
+                    let mote = GachaPackBackdropAmbienceRules.mote(
+                        index: index, elapsed: elapsed, travel: travel, tier: tier)
+                    let center = CGPoint(
+                        x: CGFloat(mote.x) * size.width,
+                        y: CGFloat(mote.y) * size.height)
+                    let glowRadius = CGFloat(mote.radiusPoints) * 2.2
+                    let core = mote.sparkle
+                        ? Color.white.opacity(min(mote.alpha, 0.9))
+                        : accent.opacity(mote.alpha)
+                    // Soft glow: lit core fading to nothing, no edge anywhere.
+                    graphics.fill(
+                        Path(ellipseIn: CGRect(
+                            x: center.x - glowRadius,
+                            y: center.y - glowRadius,
+                            width: glowRadius * 2,
+                            height: glowRadius * 2)),
+                        with: .radialGradient(
+                            Gradient(stops: [
+                                .init(color: core, location: 0),
+                                .init(color: core, location: GachaPackBackdropAmbienceRules.glowCoreFraction),
+                                .init(color: accent.opacity(mote.alpha * 0.35), location: 0.6),
+                                .init(color: accent.opacity(0), location: 1),
+                            ]),
+                            center: center,
+                            startRadius: 0,
+                            endRadius: glowRadius))
+                    if mote.sparkle {
+                        graphics.fill(
+                            Self.starPath(
+                                center: center,
+                                spike: CGFloat(mote.spikePoints),
+                                waist: CGFloat(GachaPackBackdropAmbienceRules.sparkleSpikeWaistPoints)),
+                            with: .radialGradient(
+                                Gradient(colors: [
+                                    Color.white.opacity(min(mote.alpha * 0.9, 0.85)),
+                                    accent.opacity(mote.alpha * 0.5),
+                                    accent.opacity(0),
+                                ]),
+                                center: center,
+                                startRadius: 0,
+                                endRadius: CGFloat(mote.spikePoints)))
+                    }
+                }
+            }
+            .blendMode(.plusLighter)
+        }
+        .onAppear { previousTier = tier }
+        .onChange(of: tier) { next in
+            // Freeze the travel reached at the old speed, then continue at
+            // the new tier's speed from here.
+            let now = Date()
+            travelAtChange = GachaPackBackdropAmbienceRules.travel(
+                travelAtChange: travelAtChange,
+                secondsSinceChange: now.timeIntervalSince(changedAt ?? reference),
+                tier: previousTier ?? next)
+            changedAt = now
+            previousTier = next
+        }
+        .allowsHitTesting(false)
+        .accessibilityHidden(true)
+    }
+
+    /// Four-point star: long thin spikes meeting at a narrow waist.
+    static func starPath(center: CGPoint, spike: CGFloat, waist: CGFloat) -> Path {
+        var path = Path()
+        let points: [CGPoint] = [
+            CGPoint(x: 0, y: -spike), CGPoint(x: waist, y: -waist),
+            CGPoint(x: spike, y: 0), CGPoint(x: waist, y: waist),
+            CGPoint(x: 0, y: spike), CGPoint(x: -waist, y: waist),
+            CGPoint(x: -spike, y: 0), CGPoint(x: -waist, y: -waist),
+        ]
+        path.move(to: CGPoint(x: center.x + points[0].x, y: center.y + points[0].y))
+        for point in points.dropFirst() {
+            path.addLine(to: CGPoint(x: center.x + point.x, y: center.y + point.y))
+        }
+        path.closeSubpath()
+        return path
+    }
+}
+
+/// Resting Pack idle: slow float and a yaw about the vertical axis, driven
+/// by a shared clock so the carousel and the tear stage stay in phase.
+/// `settledAt` ramps the amplitude in after a swipe settles; `nil` means
+/// full amplitude immediately. With `motion` and `sheenMaskAssetName` the
+/// Pack also tilts with the device and carries the holographic sheen.
+///
+/// The sheen overlay is always in the hierarchy when a mask is given: adding
+/// and removing it on selection made SwiftUI fade a second copy in and out
+/// during the snap (2026-09-08 12:16 "拖影"). `carouselPosition` couples the
+/// band to the Pack's slide so the foil reads as attached to the print.
+struct ProductPackIdleFloat: ViewModifier, Animatable {
+    let active: Bool
+    let reference: Date
+    let settledAt: Date?
+    var motion: GachaPackMotionFeed? = nil
+    var sheenMaskAssetName: String? = nil
+    var reduceMotion = false
+    /// Tier ladder (GachaPackTierLadder): richer Packs wriggle in bursts and
+    /// land heavier when the carousel steps up to them.
+    var tier: GachaPackTier = .standard
+    var steppedUp = false
+    /// Continuous carousel slot (0 = centred) for sheen parallax. Animatable
+    /// so the band follows the same snap spring as the Pack's offset instead
+    /// of jumping when the selection index changes.
+    var carouselPosition: Double = 0
+    /// While the finger drags the carousel the body is already re-evaluated
+    /// per touch sample; a live timeline on top doubled the render load.
+    var suspended = false
+    /// R051y/z: stand-alone print raster, parallaxed against the foil and
+    /// also the metal mask for the specular; pouch raster for the shadow.
+    var printAssetName: String? = nil
+    var shadowMaskAssetName: String? = nil
+
+    var animatableData: Double {
+        get { carouselPosition }
+        set { carouselPosition = newValue }
+    }
+
+    private var paused: Bool {
+        suspended || (!active && (motion == nil || motion?.mode == .off))
+    }
+
+    func body(content: Content) -> some View {
+        TimelineView(.animation(paused: paused)) { context in
+            let elapsed = context.date.timeIntervalSince(reference)
+            let amplitude = active
+                ? (settledAt.map {
+                    GachaPackIdleMotion.rampIn(
+                        sinceSettle: context.date.timeIntervalSince($0))
+                } ?? 1)
+                : 0
+            let sample = motion?.sample(at: context.date) ?? .still
+            let pose = GachaPackHolographicSheenRules.pose(
+                elapsed: elapsed,
+                idleAmplitude: amplitude,
+                gravityX: sample.gravityX,
+                gravityY: sample.gravityY,
+                sweepProgress: sample.sweepProgress,
+                reduceMotion: reduceMotion,
+                carouselPosition: carouselPosition)
+            // Eagerness ladder: bursts of knocking that grow with tier, plus
+            // a rise-and-settle when the carousel stepped up to this Pack.
+            let eager = active && !reduceMotion ? amplitude : 0
+            let wriggleX = GachaPackTierLadder.wriggleOffsetPoints(
+                elapsed: elapsed, tier: tier) * eager
+            let wriggleRoll = GachaPackTierLadder.wriggleDegrees(
+                elapsed: elapsed, tier: tier) * eager
+            let swell = 1 + (GachaPackTierLadder.wriggleScale(
+                elapsed: elapsed, tier: tier) - 1) * eager
+            let arrival = (active && !reduceMotion)
+                ? (settledAt.map {
+                    GachaPackTierLadder.arrivalOffsetPoints(
+                        sinceSettle: context.date.timeIntervalSince($0),
+                        steppedUp: steppedUp,
+                        tier: tier)
+                } ?? 0)
+                : 0
+            content
+                .background {
+                    // R051z tinted shadow behind the selected Pack only: the
+                    // silhouette blur is the one costly layer in the carousel.
+                    if let shadowMaskAssetName, active {
+                        ProductPackTintedShadow(
+                            maskAssetName: shadowMaskAssetName,
+                            pose: pose,
+                            accent: tier.shadowTint)
+                    }
+                }
+                .overlay {
+                    // R051y: the print floats above the foil and shifts with
+                    // the tilt (holo-card foreground depth), then the sheen,
+                    // then the view-following glare over the whole pouch.
+                    if let printAssetName {
+                        ProductPackPrintLayer(assetName: printAssetName, pose: pose)
+                    }
+                }
+                .overlay {
+                    if let sheenMaskAssetName {
+                        ProductPackHolographicSheen(
+                            maskAssetName: sheenMaskAssetName,
+                            pose: pose)
+                    }
+                }
+                .overlay {
+                    // Selected Pack only: a fixed flare on every side Pack read
+                    // as a crosshair (R051y review).
+                    if let printAssetName, active, !reduceMotion {
+                        ProductPackGlare(maskAssetName: printAssetName, pose: pose)
+                    }
+                }
+                .scaleEffect(swell)
+                .rotationEffect(.degrees(wriggleRoll))
+                .rotation3DEffect(
+                    .degrees(pose.tiltPitchDegrees),
+                    axis: (x: 1, y: 0, z: 0),
+                    perspective: 0.6)
+                .rotation3DEffect(
+                    .degrees(GachaPackIdleMotion.yawDegrees(
+                        elapsed: elapsed,
+                        amplitude: amplitude) + pose.tiltYawDegrees),
+                    axis: (x: 0, y: 1, z: 0),
+                    perspective: 0.6)
+                .offset(
+                    x: CGFloat(wriggleX),
+                    y: CGFloat(GachaPackIdleMotion.offsetPoints(
+                        elapsed: elapsed,
+                        amplitude: amplitude) + arrival))
+        }
+    }
+}
+
+/// Pack departure as one rigid body: tilt back about the bottom edge and
+/// fade. `retreat` is the animatable value, so the opacity shaping
+/// (`packDepartureOpacity`: solid for the first 35%, then fade) is evaluated
+/// per frame along the drop's timing curve instead of SwiftUI interpolating
+/// the final opacity linearly.
+struct ProductPackDepartureEffect: ViewModifier, Animatable {
+    var retreat: Double
+
+    var animatableData: Double {
+        get { retreat }
+        set { retreat = newValue }
+    }
+
+    func body(content: Content) -> some View {
+        let clamped = min(max(retreat, 0), 1)
+        content
+            .rotation3DEffect(
+                .degrees(GachaPackHandoffRules.packDepartureTiltDegrees * clamped),
+                axis: (x: 1, y: 0, z: 0),
+                anchor: .bottom,
+                perspective: 0.6)
+            .opacity(GachaPackHandoffRules.packDepartureOpacity(
+                retreatProgress: clamped))
+    }
+}
+
+/// Applies `matchedGeometryEffect` when an id and namespace exist.
+///
+/// The modifier keeps one view branch. A `nil` id falls back to
+/// `fallbackID`, which no other view shares, so the effect is inert. Swapping
+/// between an `if`/`else` branch changed the view identity whenever the
+/// carousel selection moved; SwiftUI then crossfaded two copies of the Pack
+/// during the snap — the "拖影" the user saw (2026-09-08 12:16).
+struct ProductMatchedGeometry: ViewModifier {
+    let id: String?
+    let namespace: Namespace.ID?
+    var fallbackID: String = "product-matched-geometry-inert"
+
+    @ViewBuilder
+    func body(content: Content) -> some View {
+        if let namespace {
+            content.matchedGeometryEffect(
+                id: id ?? fallbackID,
+                in: namespace,
+                properties: .frame,
+                anchor: .center,
+                isSource: id != nil)
+        } else {
+            content
+        }
+    }
+}
+
+/// A transparent foreground Pack for a live Unity stage.
+///
+/// The Pack artwork remains opaque, while the shaped mouth is cut out of this
+/// hosting view. The Unity view below owns any background or live case pixels.
+struct ProductLiveUnityPackRevealLayer: View {
+    let bodyAssetName: String
+    let flapAssetName: String
+    let tearProgress: Double
+    let seamLightStrength: Double
+    let liveCaseReady: Bool
+    let retreatProgress: Double
+    var releasePulseStrength: Double = 0
+
+    private var retreat: CGFloat {
+        CGFloat(min(max(retreatProgress, 0), 1))
+    }
+
+    var body: some View {
+        GeometryReader { proxy in
+            let packFrame = ProductPackTearLayout.frame(
+                in: proxy.size,
+                retreatProgress: retreat)
+
+            ZStack {
+                ProductTearablePackArtwork(
+                    bodyAssetName: bodyAssetName,
+                    flapAssetName: flapAssetName,
+                    tearProgress: tearProgress,
+                    seamLightStrength: seamLightStrength,
+                    releasePulseStrength: releasePulseStrength,
+                    caseReady: liveCaseReady)
+                .modifier(ProductPackDepartureEffect(retreat: Double(retreat)))
+                .position(x: packFrame.midX, y: packFrame.midY)
+
+                // Full-stage flash and streaks. They sit above the live Unity
+                // view for well under a second, the same way the Sweeps cut
+                // washes the whole screen.
+                ProductPackReleaseBurst(
+                    strength: releasePulseStrength,
+                    center: ProductPackTearLayout.seamCenter(in: proxy.size),
+                    stageSize: proxy.size)
+            }
+            .frame(width: proxy.size.width, height: proxy.size.height)
+        }
+        .accessibilityHidden(true)
+    }
+}
+
+struct ProductTearablePackArtwork: View {
+    let bodyAssetName: String
+    let flapAssetName: String
+    let tearProgress: Double
+    let seamLightStrength: Double
+    let releasePulseStrength: Double
+    let caseReady: Bool
+    let sealSweepProgress: Double?
+    let mouthGapeScale: Double
+    let interiorTier: GachaPackTier?
+
+    init(
+        bodyAssetName: String,
+        flapAssetName: String,
+        tearProgress: Double,
+        seamLightStrength: Double,
+        releasePulseStrength: Double,
+        caseReady: Bool = false,
+        exposesLiveUnityBackground: Bool = false,
+        sealSweepProgress: Double? = nil,
+        mouthGapeScale: Double = 1,
+        interiorTier: GachaPackTier? = nil
+    ) {
+        self.bodyAssetName = bodyAssetName
+        self.flapAssetName = flapAssetName
+        self.tearProgress = tearProgress
+        self.seamLightStrength = seamLightStrength
+        self.releasePulseStrength = releasePulseStrength
+        self.caseReady = caseReady
+        self.sealSweepProgress = sealSweepProgress
+        self.mouthGapeScale = mouthGapeScale
+        self.interiorTier = interiorTier
+        // This compatibility input cannot authorize transparency. Only the
+        // same-request receipt-and-readiness gate may open the aperture.
+        _ = exposesLiveUnityBackground
+    }
+
+    private var progress: CGFloat {
+        CGFloat(min(max(tearProgress, 0), 1))
+    }
+
+    private var tearFront: CGFloat {
+        CGFloat(GachaPackOpeningRules.tearFrontProgress(
+            progress: tearProgress))
+    }
+
+    /// Layer order, bottom to top:
+    /// 1. body raster, never cut;
+    /// 2. mouth sliver sitting on the body's top edge in freed columns;
+    /// 3. the still-attached part of the seal fin;
+    /// 4. the freed fin (lid) hinged at the tear front, later flying off;
+    /// 5. release pulse.
+    /// At progress 0 the fin is whole, so 1 + 3 is the authored sealed Pack.
+    var body: some View {
+        ZStack {
+            ProductRasterAssetImage(name: bodyAssetName)
+                .frame(
+                    width: ProductPackTearLayout.artworkWidth,
+                    height: ProductPackTearLayout.artworkHeight)
+
+            // No lip line or outline: on the dark stage any stroke above the
+            // body edge reads as a plate floating on the seal. Depth comes
+            // from the sliver gradient once the case is behind it.
+            ProductPackSlitCavity(
+                progress: progress,
+                seamLightStrength: seamLightStrength,
+                tier: interiorTier)
+                .scaleEffect(
+                    x: 1,
+                    y: CGFloat(mouthGapeScale),
+                    anchor: UnitPoint(
+                        x: 0.5,
+                        y: GachaPackOpeningRules.authoredSeamYFraction))
+                .opacity(tearFront > 0 ? 1 : 0)
+
+            ProductRasterAssetImage(name: flapAssetName)
+                .frame(
+                    width: ProductPackTearLayout.artworkWidth,
+                    height: ProductPackTearLayout.artworkHeight)
+                .mask(ProductPackSlitBodyMask(progress: progress))
+
+            // Idle hint: an 8 pt highlight sweeping along the seal (spec §1.4).
+            if let sweep = sealSweepProgress, progress <= 0.002 {
+                ProductPackSealSweep(progress: CGFloat(sweep))
+            }
+
+            // Tear front: 2 pt matte white edge that travels with the front
+            // while the seal is being torn (spec §2.6).
+            if tearFront > 0.0001, tearFront < 0.9999 {
+                ProductPackTearFrontEdge(progress: progress)
+            }
+
+            ProductPackLid(
+                assetName: flapAssetName,
+                progress: progress,
+                width: ProductPackTearLayout.artworkWidth,
+                height: ProductPackTearLayout.artworkHeight)
+        }
+        .frame(
+            width: ProductPackTearLayout.artworkWidth,
+            height: ProductPackTearLayout.artworkHeight)
+        .accessibilityHidden(true)
+    }
+}
+
+/// Highlight band sweeping across the seal fin while the Pack waits.
+private struct ProductPackSealSweep: View {
+    let progress: CGFloat
+
+    var body: some View {
+        let width = ProductPackTearLayout.artworkWidth
+        let height = ProductPackTearLayout.artworkHeight
+        let finTop = height * CGFloat(GachaPackOpeningRules.authoredPackTopYFraction)
+        let seam = height * CGFloat(GachaPackOpeningRules.authoredSeamYFraction)
+        let span = GachaPackOpeningRules.authoredFlapSpanFraction
+        let left = width * CGFloat(span.lowerBound)
+        let right = width * CGFloat(span.upperBound)
+        let band = CGFloat(GachaPackHandoffRules.idleSealSweepWidthPoints)
+        let x = left + (right - left) * min(max(progress, 0), 1)
+        Rectangle()
+            .fill(
+                LinearGradient(
+                    colors: [
+                        Color.white.opacity(0),
+                        Color.white.opacity(0.55),
+                        Color.white.opacity(0)
+                    ],
+                    startPoint: .leading,
+                    endPoint: .trailing))
+            .frame(width: band, height: seam - finTop)
+            .position(x: x, y: (finTop + seam) * 0.5)
+            .blendMode(.screen)
+            .allowsHitTesting(false)
+    }
+}
+
+/// Matte white edge at the tear front, from fin top to seam.
+private struct ProductPackTearFrontEdge: View {
+    let progress: CGFloat
+
+    var body: some View {
+        let width = ProductPackTearLayout.artworkWidth
+        let height = ProductPackTearLayout.artworkHeight
+        let finTop = height * CGFloat(GachaPackOpeningRules.authoredPackTopYFraction)
+        let seam = height * CGFloat(GachaPackOpeningRules.authoredSeamYFraction)
+        let inset = CGFloat(GachaPackOpeningRules.openingInsetFraction)
+        let front = CGFloat(GachaPackOpeningRules.tearFrontProgress(
+            progress: Double(progress)))
+        let x = width * (inset + (1 - inset * 2) * front)
+        Rectangle()
+            .fill(Color(red: 0.93, green: 0.93, blue: 0.91).opacity(0.9))
+            .frame(width: 2, height: seam - finTop)
+            .position(x: x, y: (finTop + seam) * 0.5)
+            .allowsHitTesting(false)
+    }
+}
+
+/// Release beat drawn over the whole stage, not just the Pack artwork: a
+/// full-frame flash that peaks at commit and a radial burst of streaks that
+/// keeps travelling outward from the seam while the case comes up.
+struct ProductPackReleaseBurst: View {
+    let strength: Double
+    let center: CGPoint
+    let stageSize: CGSize
+
+    var body: some View {
+        let pulse = min(max(strength, 0), 1)
+        let radius = max(stageSize.width, stageSize.height) * 0.5
+        ZStack {
+            Color.white
+                .opacity(GachaPackOpeningRules.releaseFlashOpacity(
+                    pulseStrength: pulse))
+            ProductPackBurstStreaks(travel: CGFloat(1 - pulse))
+                .stroke(
+                    Color.white.opacity(0.95 * pulse),
+                    style: StrokeStyle(lineWidth: 2.4, lineCap: .round))
+                .frame(width: radius * 2, height: radius * 2)
+                .position(center)
+        }
+        .frame(width: stageSize.width, height: stageSize.height)
+        .opacity(pulse > 0.001 ? 1 : 0)
+        .allowsHitTesting(false)
+        .accessibilityHidden(true)
+    }
+}
+
+/// Deterministic radial streaks. Each streak starts near the seam and moves
+/// outward with `travel` (0 at the flash peak, 1 at the end of the pulse);
+/// the ease-out makes them shoot then coast, like the Sweeps cut.
+private struct ProductPackBurstStreaks: Shape {
+    var travel: CGFloat
+
+    var animatableData: CGFloat {
+        get { travel }
+        set { travel = newValue }
+    }
+
+    private func noise(_ index: Int, _ salt: Double) -> CGFloat {
+        let value = sin(Double(index) * 12.9898 + salt * 78.233) * 43758.5453
+        return CGFloat(value - floor(value))
+    }
+
+    func path(in rect: CGRect) -> Path {
+        let center = CGPoint(x: rect.midX, y: rect.midY)
+        let radius = min(rect.width, rect.height) * 0.5
+        let count = GachaPackOpeningRules.releaseBurstStreakCount
+        let inner = CGFloat(GachaPackOpeningRules.releaseBurstInnerRadiusFraction)
+        let reach = CGFloat(GachaPackOpeningRules.releaseBurstTravelFraction)
+        let eased = 1 - (1 - travel) * (1 - travel)
+        var result = Path()
+        for index in 0..<count {
+            let angle = (Double(index) + Double(noise(index, 1)) * 0.7)
+                / Double(count) * 2 * Double.pi
+            let direction = CGPoint(x: cos(angle), y: sin(angle))
+            let start = radius * (inner + noise(index, 2) * 0.22)
+                + radius * reach * eased * (0.7 + noise(index, 3) * 0.5)
+            let length = radius * (0.035 + noise(index, 4) * 0.075)
+                * (1 - 0.35 * eased)
+            result.move(to: CGPoint(
+                x: center.x + direction.x * start,
+                y: center.y + direction.y * start))
+            result.addLine(to: CGPoint(
+                x: center.x + direction.x * (start + length),
+                y: center.y + direction.y * (start + length)))
+        }
+        return result
+    }
+}
+
+/// The sealed Pack as authored: body raster with the seal fin on top. Use
+/// this wherever a closed Pack is shown so the carousel and the tear stage
+/// start from the same pixels.
+struct ProductPackSealedArtwork: View {
+    let bodyAssetName: String
+    let flapAssetName: String
+
+    /// R051y: body/flap carry the bare foil; the print is its own raster.
+    /// Callers that parallax the print (`ProductPackIdleFloat`) leave this
+    /// nil and draw it themselves.
+    var printAssetName: String? = nil
+
+    var body: some View {
+        ZStack {
+            ProductRasterAssetImage(name: bodyAssetName)
+            if let printAssetName {
+                ProductRasterAssetImage(name: printAssetName)
+            }
+            ProductRasterAssetImage(name: flapAssetName)
+        }
+        .accessibilityHidden(true)
+    }
+}
+
+private enum ProductPackTearLayout {
+    static let artworkWidth = CGFloat(
+        GachaPackOpeningRules.artworkWidthPoints)
+    static let artworkHeight = CGFloat(
+        GachaPackOpeningRules.artworkHeightPoints)
+
+    /// Pack rests centred at (50%, 44%) of the stage. Departure drops it by
+    /// `packDepartureDropFraction` of the stage height while it tilts, and
+    /// it fades only near the bottom (rev-006 review).
+    static func frame(
+        in size: CGSize,
+        retreatProgress: CGFloat
+    ) -> CGRect {
+        let centerY = size.height
+            * CGFloat(GachaPackHandoffRules.stagePackCenterYFraction)
+        return CGRect(
+            x: (size.width - artworkWidth) * 0.5,
+            y: centerY - artworkHeight * 0.5
+                + size.height
+                    * CGFloat(GachaPackHandoffRules.packDepartureDropFraction)
+                    * retreatProgress,
+            width: artworkWidth,
+            height: artworkHeight)
+    }
+
+    /// Seam midpoint of the resting Pack; the release burst radiates from
+    /// here and does not follow the retreat.
+    static func seamCenter(in size: CGSize) -> CGPoint {
+        let resting = frame(in: size, retreatProgress: 0)
+        return CGPoint(
+            x: resting.midX,
+            y: resting.minY + artworkHeight
+                * CGFloat(GachaPackOpeningRules.authoredSeamYFraction))
+    }
+}
+
+/// Mask for the part of the seal fin that is still attached: the whole
+/// canvas minus the freed columns, built as explicit non-overlapping
+/// pieces so it does not depend on even-odd subtraction.
+private struct ProductPackSlitBodyMask: View {
+    let progress: CGFloat
+
+    var body: some View {
+        ProductPackSlitBodyShape(progress: progress)
+            .fill(Color.white, style: FillStyle(eoFill: false))
+    }
+}
+
+private struct ProductPackSlitBodyShape: Shape {
+    var progress: CGFloat
+
+    var animatableData: CGFloat {
+        get { progress }
+        set { progress = newValue }
+    }
+
+    func path(in rect: CGRect) -> Path {
+        guard let freed = ProductPackTornAwayTopShape.freedColumns(
+            progress: progress,
+            in: rect) else {
+            return Path(rect)
+        }
+        var result = Path()
+        // Left of the freed span (the inset margin), full height.
+        result.addRect(CGRect(
+            x: rect.minX,
+            y: rect.minY,
+            width: max(0, freed.left - rect.minX),
+            height: rect.height))
+        // Right of the tear front, full height.
+        result.addRect(CGRect(
+            x: freed.right,
+            y: rect.minY,
+            width: max(0, rect.maxX - freed.right),
+            height: rect.height))
+        // Below the seam inside the freed span: the fin has no pixels here,
+        // but keeping it makes the mask an exact complement.
+        result.move(to: CGPoint(x: freed.left, y: rect.maxY))
+        result.addLine(to: CGPoint(x: freed.right, y: rect.maxY))
+        let samples = ProductPackTearPath.samples
+        for sample in stride(from: samples, through: 0, by: -1) {
+            let x = freed.left
+                + (freed.right - freed.left) * CGFloat(sample) / CGFloat(samples)
+            result.addLine(to: CGPoint(
+                x: x,
+                y: ProductPackTearPath.tornEdgeY(at: x, in: rect)))
+        }
+        result.closeSubpath()
+        return result
+    }
+}
+
+/// The part of the seal fin the tear front has freed: the columns from the
+/// left inset to the front, from the canvas top down to the seam. The front
+/// is a crisp vertical edge; because the lid hinges at that edge, the freed
+/// and attached fin meet there with zero displacement. The same shape masks
+/// the lid, so the piece that leaves is exactly the piece that was freed.
+private struct ProductPackTornAwayTopShape: Shape {
+    var progress: CGFloat
+
+    var animatableData: CGFloat {
+        get { progress }
+        set { progress = newValue }
+    }
+
+    /// Horizontal span of the freed fin, or nil while nothing is freed.
+    static func freedColumns(
+        progress: CGFloat,
+        in rect: CGRect
+    ) -> (left: CGFloat, right: CGFloat)? {
+        guard progress > 0.002 else { return nil }
+        let tearFront = CGFloat(GachaPackOpeningRules.tearFrontProgress(
+            progress: Double(progress)))
+        guard tearFront > 0.0001 else { return nil }
+        let inset = CGFloat(GachaPackOpeningRules.openingInsetFraction)
+        let left = rect.minX + rect.width * inset
+        let right = rect.minX
+            + rect.width * (inset + (1 - inset * 2) * tearFront)
+        guard right > left else { return nil }
+        return (left, right)
+    }
+
+    func path(in rect: CGRect) -> Path {
+        guard let freed = Self.freedColumns(progress: progress, in: rect)
+        else {
+            return Path()
+        }
+        var result = Path()
+        result.move(to: CGPoint(x: freed.left, y: rect.minY))
+        result.addLine(to: CGPoint(x: freed.right, y: rect.minY))
+        let samples = ProductPackTearPath.samples
+        for sample in stride(from: samples, through: 0, by: -1) {
+            let x = freed.left
+                + (freed.right - freed.left) * CGFloat(sample) / CGFloat(samples)
+            result.addLine(to: CGPoint(
+                x: x,
+                y: ProductPackTearPath.tornEdgeY(at: x, in: rect)))
+        }
+        result.closeSubpath()
+        return result
+    }
+}
+
+/// One rigid lid: the freed seal fin. It must leave as a single body;
+/// separately posed foil portions read as debris rather than a removed seal.
+private struct ProductPackLid: View {
+    let assetName: String
+    let progress: CGFloat
+    let width: CGFloat
+    let height: CGFloat
+
+    private var pose: GachaPackLidPose {
+        GachaPackLidRules.pose(
+            progress: Double(progress),
+            artworkWidthPoints: Double(width),
+            artworkHeightPoints: Double(height))
+    }
+
+    var body: some View {
+        let pose = pose
+        let shape = ProductPackTornAwayTopShape(progress: progress)
+        let hinge = UnitPoint(
+            x: pose.hingeXFraction,
+            y: pose.hingeYFraction)
+        ZStack {
+            // Foil thickness: a darkened copy of the lid pixels shifted down,
+            // so the underside has the lid silhouette and nothing more.
+            ProductRasterAssetImage(name: assetName)
+                .frame(width: width, height: height)
+                .mask(shape)
+                .colorMultiply(Color(red: 0.20, green: 0.21, blue: 0.21))
+                .offset(y: CGFloat(pose.undersideDepthPoints))
+
+            ProductRasterAssetImage(name: assetName)
+                .frame(width: width, height: height)
+                .mask(shape)
+        }
+        .frame(width: width, height: height)
+        .shadow(
+            color: Color.black.opacity(0.28 * pose.opacity),
+            radius: 3,
+            x: 0,
+            y: 3)
+        .rotationEffect(.degrees(pose.rotationDegrees), anchor: hinge)
+        .offset(
+            x: CGFloat(pose.offsetXPoints),
+            y: CGFloat(pose.offsetYPoints))
+        .opacity(pose.opacity)
+        .allowsHitTesting(false)
+    }
+}
+
+/// The interior sliver seen above the body's top edge once the fin is off.
+/// Opaque local cavity (R033 contract): the stage must not show through the
+/// pouch. It is attached to the body edge and has no outline, so it reads
+/// as depth, not as an object; on the dark stage it simply disappears.
+private struct ProductPackSlitCavity: View {
+    let progress: CGFloat
+    let seamLightStrength: Double
+    var tier: GachaPackTier? = nil
+
+    /// A touch lighter at the back lip while the tear gesture is live, so
+    /// the freshly exposed gap under the lifting fin reads on the stage.
+    /// R052d (user 09-09 15:23 "一块黑色的不明物体"): with a tier the cavity
+    /// is the pouch's own foil seen from inside — the lit back lip at
+    /// `interiorLipScale`, falling to `interiorDepthScale` — so it reads as
+    /// the sachet's depth on a light stage instead of a black bar.
+    private var cavityFill: LinearGradient {
+        let light = min(max(seamLightStrength, 0), 1)
+        guard let tier else {
+            return LinearGradient(
+                colors: [
+                    Color(
+                        red: 0.075 + 0.03 * light,
+                        green: 0.08 + 0.03 * light,
+                        blue: 0.085 + 0.03 * light),
+                    Color(red: 0.04, green: 0.045, blue: 0.05),
+                    Color(red: 0.055, green: 0.06, blue: 0.065)
+                ],
+                startPoint: .top,
+                endPoint: .bottom)
+        }
+        typealias Rules = GachaPackOpeningRules
+        let rgb = tier.storefrontAccentRGB
+        func shade(_ k: Double) -> Color {
+            Color(red: rgb.red * k, green: rgb.green * k, blue: rgb.blue * k)
+        }
+        return LinearGradient(
+            stops: [
+                .init(color: shade(Rules.interiorLipScale + 0.08 * light), location: 0),
+                .init(color: shade(Rules.interiorMidScale), location: 0.22),
+                .init(color: shade(Rules.interiorDepthScale), location: 0.72),
+                .init(color: shade(Rules.interiorMidScale), location: 1),
+            ],
+            startPoint: .top,
+            endPoint: .bottom)
+    }
+
+    var body: some View {
+        ProductPackMouthMask(progress: progress)
+            .fill(cavityFill)
+    }
+}
+
+private enum ProductPackTearPath {
+    static let samples = 48
+    static let openingCenterSag: CGFloat = 0.8
+    static let edgeOffsets: [CGFloat] = [
+        0, -0.35, 0.18, -0.22, 0.42, -0.12, 0.25, -0.40, 0.10,
+        -0.18, 0.30, -0.08, 0.16
+    ]
+
+    /// Overlap into the body so the sliver's bottom never shows an
+    /// anti-aliased hairline gap above the authored top edge.
+    static let bodyOverlapPoints: CGFloat = 0.6
+
+    static func faceTopY(in rect: CGRect) -> CGFloat {
+        rect.minY + rect.height * CGFloat(
+            GachaPackOpeningRules.authoredPackFaceTopYFraction)
+    }
+
+    /// Seam between the seal fin and the body: the body's authored top edge.
+    static func seamY(in rect: CGRect) -> CGFloat {
+        rect.minY + rect.height * CGFloat(
+            GachaPackOpeningRules.authoredSeamYFraction)
+    }
+
+    static func interiorFraction(at x: CGFloat, in rect: CGRect) -> CGFloat {
+        let canvasFraction = (x - rect.minX) / max(rect.width, 1)
+        let insetFraction = CGFloat(
+            GachaPackOpeningRules.openingInsetFraction)
+        return min(
+            max(
+                (canvasFraction - insetFraction)
+                    / (1 - insetFraction * 2),
+                0),
+            1)
+    }
+
+    static func openingFactor(
+        at x: CGFloat,
+        in rect: CGRect,
+        progress: CGFloat
+    ) -> CGFloat {
+        guard rect.width > 0 else { return 0 }
+        let canvasFraction = (x - rect.minX) / rect.width
+        let insetFraction = CGFloat(
+            GachaPackOpeningRules.openingInsetFraction)
+        guard canvasFraction >= insetFraction,
+              canvasFraction <= 1 - insetFraction else {
+            return 0
+        }
+        return CGFloat(GachaPackOpeningRules.openingFraction(
+            horizontalFraction: Double(interiorFraction(at: x, in: rect)),
+            progress: Double(progress)))
+    }
+
+    /// Back-panel lip: the upper edge of the interior sliver, above the
+    /// body's top edge in the space the fin vacates. Tapered to zero at both
+    /// ends so it stays inside the Pack shoulders.
+    static func openingTopY(
+        at x: CGFloat,
+        in rect: CGRect,
+        progress: CGFloat
+    ) -> CGFloat {
+        let factor = openingFactor(at: x, in: rect, progress: progress)
+        let interior = interiorFraction(at: x, in: rect)
+        let height = CGFloat(GachaPackOpeningRules.openingHeightPoints(
+            horizontalFraction: Double(interior),
+            progress: Double(progress)))
+        let taper = CGFloat(GachaPackOpeningRules.openingEndTaper(
+            horizontalFraction: Double(interior)))
+        let sag = sin(interior * .pi) * openingCenterSag * factor * taper
+        return seamY(in: rect)
+            - CGFloat(GachaPackOpeningRules.openingSealLiftPoints)
+                * factor * taper
+            - height - sag
+    }
+
+    /// Lower edge of the freed fin: the seam with a little torn-foil texture.
+    /// The body below keeps its authored straight edge.
+    static func tornEdgeY(at x: CGFloat, in rect: CGRect) -> CGFloat {
+        let column = Int(((x - rect.minX) / max(rect.width, 1))
+            * CGFloat(samples))
+        let texture = edgeOffsets[abs(column) % edgeOffsets.count]
+            * CGFloat(GachaPackOpeningRules.tornEdgeAmplitudePoints)
+        return seamY(in: rect) + texture
+    }
+}
+
+private struct ProductPackMouthMask: Shape {
+    var progress: CGFloat
+    var inset: CGFloat = 0
+
+    var animatableData: AnimatablePair<CGFloat, CGFloat> {
+        get { AnimatablePair(progress, inset) }
+        set {
+            progress = newValue.first
+            inset = newValue.second
+        }
+    }
+
+    func path(in rect: CGRect) -> Path {
+        guard GachaPackOpeningRules.isMouthOpen(
+            progress: Double(progress)) else {
+            return Path()
+        }
+
+        var result = Path()
+        let horizontalInset = min(
+            inset,
+            rect.width * 0.035)
+        let left = rect.minX
+            + rect.width * CGFloat(
+                GachaPackOpeningRules.openingInsetFraction)
+            + horizontalInset
+        let right = rect.maxX
+            - rect.width * CGFloat(
+                GachaPackOpeningRules.openingInsetFraction)
+            - horizontalInset
+        guard right > left else { return result }
+
+        for sample in 0...ProductPackTearPath.samples {
+            let fraction = CGFloat(sample)
+                / CGFloat(ProductPackTearPath.samples)
+            let x = left + (right - left) * fraction
+            let point = CGPoint(
+                x: x,
+                y: ProductPackTearPath.openingTopY(
+                    at: x,
+                    in: rect,
+                    progress: progress) + inset)
+            if sample == 0 {
+                result.move(to: point)
+            } else {
+                result.addLine(to: point)
+            }
+        }
+        // Bottom edge: the body's authored top edge, straight. A small
+        // overlap into the body hides the anti-aliased hairline between the
+        // two, and fades out where the sliver has no height.
+        let seam = ProductPackTearPath.seamY(in: rect)
+        for sample in stride(
+            from: ProductPackTearPath.samples,
+            through: 0,
+            by: -1
+        ) {
+            let fraction = CGFloat(sample)
+                / CGFloat(ProductPackTearPath.samples)
+            let x = left + (right - left) * fraction
+            let top = ProductPackTearPath.openingTopY(
+                at: x,
+                in: rect,
+                progress: progress)
+            let overlap = ProductPackTearPath.bodyOverlapPoints
+                * min(max((seam - top) / 2, 0), 1)
+            result.addLine(to: CGPoint(x: x, y: seam + overlap - inset))
+        }
+        result.closeSubpath()
+        return result
     }
 }
 
@@ -336,22 +2105,147 @@ struct ProductPageIndicator<Item: Hashable>: View {
 }
 
 struct ProductPrimaryActionLabel: View {
+    enum Surface {
+        case glass
+        case filledWhite
+    }
+
+    let title: String
+    var accent = Color.white
+    var surface: Surface = .glass
+    var titleGradient: LinearGradient? = nil
+    /// Disabled/loading dim the title only; a `.filledWhite` plate stays
+    /// pure white in every state (user 2026-09-08 18:48).
+    var titleOpacity = 1.0
+
+    var body: some View {
+        Text(title)
+            .font(.product(.headline, weight: .semibold))
+            .foregroundStyle(titleForeground)
+            .opacity(titleOpacity)
+            .frame(maxWidth: .infinity)
+            .frame(height: FidgetUITokens.Size.primaryActionHeight)
+            .background {
+                if surface == .filledWhite {
+                    RoundedRectangle(
+                        cornerRadius: FidgetUITokens.Radius.pill,
+                        style: .continuous)
+                        .fill(Color.white)
+                } else {
+                    Color.clear
+                        .productGlass(
+                            cornerRadius: FidgetUITokens.Radius.pill,
+                            tint: accent.opacity(0.16),
+                            interactive: true)
+                }
+            }
+            .contentShape(RoundedRectangle(
+                cornerRadius: FidgetUITokens.Radius.pill,
+                style: .continuous))
+    }
+
+    private var titleForeground: some ShapeStyle {
+        if let titleGradient {
+            return AnyShapeStyle(titleGradient)
+        }
+        return AnyShapeStyle(surface == .filledWhite ? accent : Color.white)
+    }
+}
+
+enum ProductActionState: Equatable {
+    case ready
+    case loading
+    case disabled
+
+    var isEnabled: Bool { self == .ready }
+}
+
+struct ProductPrimaryActionButton: View {
+    let title: String
+    var accent = Color.white
+    var surface: ProductPrimaryActionLabel.Surface = .glass
+    var titleGradient: LinearGradient? = nil
+    var state: ProductActionState = .ready
+    let action: () -> Void
+
+    var body: some View {
+        Button(action: action) {
+            ProductPrimaryActionLabel(
+                title: title,
+                accent: accent,
+                surface: surface,
+                titleGradient: titleGradient,
+                titleOpacity: state == .ready ? 1 : (state == .loading ? 0 : 0.42))
+                .overlay {
+                    if state == .loading {
+                        ProgressView()
+                            .tint(surface == .filledWhite ? accent : .white)
+                            .accessibilityHidden(true)
+                    }
+                }
+                .opacity(state == .disabled && surface == .glass ? 0.42 : 1)
+        }
+        .buttonStyle(.plain)
+        .disabled(!state.isEnabled)
+        .accessibilityValue(state == .loading ? "处理中" : "")
+    }
+}
+
+struct ProductSecondaryActionButton: View {
+    let title: String
+    var state: ProductActionState = .ready
+    let action: () -> Void
+
+    var body: some View {
+        Button(action: action) {
+            Text(title)
+                .font(.product(.subheadline, weight: .semibold))
+                .foregroundStyle(Color.white.opacity(0.82))
+                .frame(
+                    minWidth: FidgetUITokens.Size.minimumHitTarget,
+                    minHeight: FidgetUITokens.Size.minimumHitTarget)
+                .padding(.horizontal, FidgetUITokens.Spacing.standard)
+                .productGlass(
+                    cornerRadius: FidgetUITokens.Radius.compact,
+                    tint: Color.white.opacity(0.018),
+                    interactive: true)
+        }
+        .buttonStyle(.plain)
+        .disabled(!state.isEnabled)
+        .opacity(state == .disabled ? 0.42 : 1)
+        .accessibilityValue(state == .loading ? "处理中" : "")
+    }
+}
+
+struct ProductBottomActionDock<Content: View>: View {
+    var tint = Color.white.opacity(0.025)
+    let content: Content
+
+    init(
+        tint: Color = Color.white.opacity(0.025),
+        @ViewBuilder content: () -> Content) {
+        self.tint = tint
+        self.content = content()
+    }
+
+    var body: some View {
+        content
+            .padding(FidgetUITokens.Spacing.section)
+            .productGlass(
+                cornerRadius: FidgetUITokens.Radius.card,
+                tint: tint,
+                interactive: false)
+            .padding(.horizontal, FidgetUITokens.Spacing.section)
+            .padding(.bottom, FidgetUITokens.Spacing.standard)
+    }
+}
+
+struct ProductStatusTag: View {
     let title: String
     var accent = Color.white
 
     var body: some View {
-        Text(title)
-        .font(.product(.headline))
-        .foregroundStyle(.white)
-        .frame(maxWidth: .infinity)
-        .frame(height: FidgetUITokens.Size.primaryActionHeight)
-        .contentShape(RoundedRectangle(
-            cornerRadius: FidgetUITokens.Radius.pill,
-            style: .continuous))
-        .productGlass(
-            cornerRadius: FidgetUITokens.Radius.pill,
-            tint: accent.opacity(0.16),
-            interactive: true)
+        ProductInlineTag(title: title, accent: accent)
     }
 }
 
@@ -946,20 +2840,36 @@ struct ProductScreenHeading: View {
     var symbol: String? = nil
     var accent = Color.white
     var centered = false
+    var titleStyle: Font.TextStyle = .title3
+    var subtitleStyle: Font.TextStyle = .subheadline
+    /// Small reversed-out raster mark above the title (user 2026-09-08
+    /// 22:31: the Pack emblem, white, small and fine, over "CHASE").
+    var emblemAssetName: String? = nil
 
     var body: some View {
         HStack(alignment: .top, spacing: FidgetUITokens.Spacing.standard) {
             VStack(
                 alignment: centered ? .center : .leading,
                 spacing: FidgetUITokens.Spacing.compact) {
+                if let emblemAssetName {
+                    ProductRasterAssetImage(name: emblemAssetName)
+                        .frame(
+                            width: FidgetUITokens.Size.headingEmblem,
+                            height: FidgetUITokens.Size.headingEmblem)
+                        .opacity(0.92)
+                        .padding(.bottom, FidgetUITokens.Spacing.compact)
+                        .accessibilityHidden(true)
+                }
                 Text(title)
-                    .font(.product(.title3, weight: .bold))
+                    .font(.product(titleStyle, weight: .bold))
                     .foregroundStyle(.white)
-                Text(subtitle)
-                    .font(.product(.subheadline))
-                    .foregroundStyle(
-                        Color.white.opacity(FidgetUITokens.Opacity.secondaryText))
-                    .multilineTextAlignment(centered ? .center : .leading)
+                if !subtitle.isEmpty {
+                    Text(subtitle)
+                        .font(.product(subtitleStyle))
+                        .foregroundStyle(
+                            Color.white.opacity(FidgetUITokens.Opacity.secondaryText))
+                        .multilineTextAlignment(centered ? .center : .leading)
+                }
             }
             .frame(maxWidth: .infinity, alignment: centered ? .center : .leading)
 

@@ -1,6 +1,6 @@
 # Fidgeting Interaction Integration Status
 
-最后更新：2026-08-27
+最后更新：2026-09-09
 
 本文件回答一个问题：规格中的能力是否已经进入可运行代码。状态只按代码、场景接线和测试证据填写，不按聊天结论或文档完成度填写。
 
@@ -10,6 +10,1004 @@
 - `部分集成`：已有部分代码或接线，但还缺语义、生命周期、测试或真机环节。
 - `仅规格`：只有设计规格，不能对外称为已实现。
 - `待真机验收`：自动化能验证结构，但触感仍必须在 iPhone 上确认。
+
+## 2026-09-09 四款 catalog 收敛、成长圆环删除、库／详情同一套光照与倍率、GEEONE 光照预设 A/B/C/D、四场景共用 +0.15 EV
+
+> **状态：代码 + EditMode 测试 + 模拟器录屏已完成；视觉批准待确认，未推送手机。** GEEONE 光照预设等待用户在 A/B/C/D 中选择，出货仍为 A（Studio Bright）。
+
+用户指令（thread `c22de829-ed8e-43df-af2e-695615b0c261`）：09-08 19:28“主场景里面的那个光照和点击‘进入详情’把玩的这个光照，感觉用的不是一套”；19:40“每一个模型上面都有一个奇怪的圆环……去掉”“推牌……在列表场景的时候，它的尺寸过大了”“内外一定要一致……不要顺跳，要过渡”；09-09 08:31“前两张图的陀螺去掉……第三张的陀螺是不是光照太强了，有没有柔和的一点的灯光设置”。
+
+### 已集成并有测试
+
+- **Catalog 收敛（`FDB-PREF-032`）**：`ProductCatalog.shippingEntries` 只余 `metal-three-blade`（`DefaultModelId`）/ `graphite-two-lobe` / `magnetic-slide-tile` / `magnetic-fan-card`；`RetiredModelIds = {pointed-three-blade, gold-four-wing}`。`ProductCatalogMigration` `CurrentMigrationVersion = 2`，链式执行 v1→v2，把两旧 ID 的成长 / 收藏 / 皮肤 / 已选模型迁入 GEEONE，数值字段取最大值（`MergeMaximumNumericString` / `MergeMaximumInteger`）。`EditorBuildSettings` 移除 `ThreeBladeEDC.unity`、`ImportedSpinner.unity`；`PremiumDisplayCaseProductPresentation.profiles` 4 款；`FidgetAppCoordinator.ModelIdForScene` 退役场景回落默认模型。Swift `CodexSwiftUIOverlay.swift`：`shippingCases` 4 款，`retiredCases` + `resolveShipping` 迁移持久化选择，默认 `metalThreeBlade`。测试：`SpinnerProgressionTests.CatalogMigrationConsolidatesRetiredRotorsIntoGeeoneWithoutLosingState` / `CatalogMigrationVersionTwoUpgradesAnExistingVersionOneInstall`；`ProductArchitectureTests.ReleaseBuildContainsOnlyTheFourApprovedProductScenes` / `RetiredThreeBladeRotorsConsolidateIntoGeeoneWithoutLosingState`；`PremiumDisplayCaseTests` 4 款。
+- **成长圆环删除（`FDB-PREF-034`，`FDB-TRI-005`）**：根因是 `SpinnerProgressionVisuals` 在每个 rotor 上生成 `StageMaterialCollar` 圆环。删除 `SpinnerProgressionVisuals.cs`、`ProgressionVisualPreviewCapture.cs`；`FidgetAppCoordinator.ConfigureProgressionVisuals` 改为 `RemoveLegacyProgressionRingRoot`（`LegacyProgressionRingRootName`）；`ThreeBladeMetalSkinProgression` 改引用该常量。测试：`SpinnerProgressionTests.ThreeBladeMetalSkinSelection_IsPersistedAndBridgedWithoutRawHaptics` 断言不再 `AddComponent<SpinnerProgressionVisuals>`。
+- **库／详情同一套光照 + 过渡（`FDB-PREF-035`）**：`SpinnerEnvironmentCatalog` `metal-three-blade` `LibraryLightScale = LibraryReflectionScale = 1.00`；`SpinnerImageBasedLightingController` GEEONE 库／详情共用 `GeeoneLightingPresetCatalog.Active`，`PresentationLightingState` 在共享 presentation 曲线上插值；`SpinnerEnvironmentPresenter.SetLibraryPreviewActive` 透传 `immediate`，`SetDetailEntranceProgressForPreview` 同步灯光进度。测试：`SpinnerEnvironmentTests.GeeoneLightsIdenticallyInLibraryAndDetail`、`LibraryDetailLightingSwitchTweensOnTheSharedPresentationCurve`、`SoftLightingPolicy_ReducesEnergyAndCapsReflectionWithoutHueShift`（GEEONE trim = 1）。
+- **推牌列表倍率（`FDB-PREF-035`）**：`EdcPortraitCameraFramer` 新增 `LibraryDistanceScale` / `LibrarySafetyFraction`，列表距离由 `ResolveAuthoredPoseDistance` 按 authored 详情距离缩放，`transitionProgress` tween；不再按视口占比放大。测试：`SpinnerEnvironmentTests.AllSixProductsUseLiveBoundsAndViewportOccupancyBoundaries`（`magnetic-slide-tile` 改验 authored 距离与倍率）。
+- **GEEONE 光照预设（`FDB-PREF-036`，Proposed）**：新增 `GeeoneLightingPresetCatalog`（`Shipping` / `SoftStudio` / `Overcast` / `LowKey`），字段：Key / WarmRim / CoolFill 最终强度、`VisibilityFillIntensity`、`AmbientBoost`、`StudioSoftboxIntensity`。`SpinnerImageBasedLightingController`：GEEONE 三盏 authored 聚光直接取预设强度（不再是 floor，否则柔预设降不下去）；`BuildReflectionCubemap` 对 GEEONE 按 `StudioSoftboxIntensity` 叠加推牌同款宽面柔光箱 + 中性底（峡谷调色板接近全黑，钢面原本几乎没有环境反射）。出货 `Shipping` 数值 = 原 floor，渲染不变。测试：`SpinnerEnvironmentTests.GeeoneLightingPresets_ShipStudioBrightAndOfferOnlySofterAlternatives`。诊断（消融）：关全部灯 → 全黑；关反射／环境 → 无变化；聚光 ×0.4 仍大面积贴 LUT 上限（≈208），说明白钢“过曝”来自聚光镜面叶 + LDR 无 tonemapping 剪切，不来自环境光。
+
+### 证据
+
+- EditMode 聚焦套件（`SpinnerEnvironmentTests|SpinnerProgressionTests|ProductArchitectureTests|PremiumDisplayCaseTests`）119 项：113 通过，6 失败与本任务无关且在本任务开始前（08:47 结果）已存在：`CollectorRankIsCrossToyManualOnlyAndUsesARealBackButton`、`MagneticSlideUsesSpatialEdgeCuesAndFiniteCrossingTremor`、`RuntimeAndLiquidGlassUi_AreWiredForGrowthAndOfflineReturn`（Swift 源字符串断言，工作区已有未提交 Swift 改动）、`RatchetAudioIsPhysicsDrivenAtomicPolyphonicAndNeverScheduled`、`EveryProductSceneInstallsItsBackgroundAndHarmonizedModelLights`（ledge glow 2.8 vs 1.08）、`ParallaxMathUsesDeadZoneExponentialSmoothingAndPixelAccurateProjection`。
+- 模拟器录屏 [V12]：Unity `BuildIosSimulatorProject` → `xcodebuild` Release-iphonesimulator（`Builds/iOS/Logs/consolidation-r001-simulator-export.log`、`consolidation-r001-xcodebuild.log`）→ `Tools/LibraryDetailConsistency/capture_library_detail_simulator.py --round r002`（iPhone 17 Pro `5BF378DF`，app sha256 见 `r002-simulator-capture.json`）→ `compose_library_detail_sheet.py`。产物：`Artifacts/LibraryDetailConsistency/r002/r002-library-detail-sheet.png`、四段 `r002-<model>-library-to-detail-clear.mp4`。列表分页点 4 个，四款均无圆环，推牌库／详情倍率一致，GEEONE 库／详情同亮度。
+- GEEONE 光照预设对比 [V13]：`Assets/Editor/GeeoneLightingOptionsPreviewCapture.cs`（`Tools/Codex/Capture GEEONE Lighting Options`）→ `Artifacts/GeeoneLighting/r001/r001-geeone-lighting-options-sheet.png` + `presets.json`。静态渲染，因为只比较灯光配方；用户选定后重录模拟器。
+
+### 2026-09-09 15:04 追加：四场景共用 +0.15 EV 相机分级、推牌背景对齐（`FDB-PREF-037`）
+
+用户 10:51“为什么感觉磁吸推牌的背景更亮一些”；14:57“把其他三款也加 +0.55 EV。这个EV是什么单位，能不能加的非常subtle”；15:04“可以”。
+
+- **根因（三层，均已量化）**：
+  1. 推牌 `MagneticSlideShippingLightingController` 独有 `postExposure +0.55 EV`（×1.46）作用于整帧，其余三场景无 Volume → 岩壁 31.8 vs 16.5 灰阶。
+  2. 推牌不在 `UsesSoftSpinnerLighting` 名单，`SpinnerImageBasedLightingController` 背景光晕倍率走 `1.0`，三款陀螺走 `SoftEnvironmentGlowScale 0.38`；运行期探针 `_GlowColorA` 推牌 0.84 vs GEEONE 0.097 → 模型下方的大片灰绿雾团（详情 haze 145 vs 63）。
+  3. `SpinnerAdaptiveBackdropRules.Restrain` 只限 HSV V，青色 accent 的线性亮度比粉／石墨高 22%。
+- **实现**：新增 `SpinnerSharedPresentationGrading`（`PostExposureEv = 0.15`（×1.11）、Neutral tonemap、单个 camera Volume priority 50），`SpinnerEnvironmentPresenter.Install` 对四场景统一安装；`MagneticSlideShippingLighting` Balanced 改为 rev 5：`PostExposureEv = SpinnerSharedPresentationGrading.PostExposureEv`，Key 0.68→0.90、Fill 0.54→0.71（补回 0.40 EV = ×1.32，只落在模型灯），`EnsureVolume` 复用共享 Volume；`MeshyEDC.unity` 序列化灯强度同步。`ResolveEnvironmentGlowScale(modelId)`：推牌与陀螺同为 0.38，扇牌保留 pedestal 路径。`Restrain` 追加 `MaximumLuminance 0.50`。
+- **测试**：`SpinnerEnvironmentTests.EveryProductSceneSharesOneSubtleCameraGrading`（四场景 HDR/后处理开、Volume 唯一、EV/tonemap 相等、光晕倍率相等、accent 亮度差 <0.01）；`MagneticSlideLightingRevisionTests.BalancedLighting_HasNeutralToneMapAndMeasuredLift` 改验 rev 5 值与 ×1.32 关系。聚焦套件 104 项 97 通过，7 失败均为既有／环境（Swift 字符串断言 3、`Ratchet…`、`ParallaxMath…`、`EveryProductSceneInstallsIts…` 2.8 vs 1.08、MCP WebSocket 日志）。
+- **证据 [V14]**：模拟器 r005 `Artifacts/LibraryDetailConsistency/r005/r005-library-detail-sheet.png` + 四段 `*-library-to-detail-clear.mp4`；背景灰阶（library 岩壁 / 台面；detail 台面）：GEEONE 17.8/50.1/93.4，石墨 17.3/49.9/93.3，推牌 17.5/50.1/93.4，扇牌 17.1/49.6/101.1（r002 推牌为 31.8/81.3/139.6）。导出／构建日志 `Builds/iOS/Logs/grading-r005-*.log`。
+- **GEEONE 高光“死白”的真正原因（供用户决策，未改）**：`Assets/_Fidgeting/Generated/ThreeBladeVolume.asset` 三个组件为 null（`ThreeBladeSceneBuilder.ConfigureVolume` 用 `profile.Add<T>()` 但未 `AddObjectToAsset`，从未持久化），且 iPhone 走 `Mobile_RPAsset`：`m_SupportsHDR: 0`、`m_ColorGradingMode: 0 (LDR)` → 渲染目标在后处理前就钳到 1.0，任何 tonemapper 都无法压回高光。因此“柔”只能靠减灯（`FDB-PREF-036` B/C/D），或另立决策把 Mobile 管线切到 HDR + HDR 分级（影响四款外观、需重新批准）。
+- 推牌 Gate 12 灯光值从 rev 4 变为 rev 5，属已批准模型的可见改动：**视觉批准待确认，未推送手机**。
+
+### 待办
+
+- 用户选择光照预设 A/B/C/D → 设为 `Shipping` → 重录 [V12] → 视觉批准 → 手机构建。
+- 用户决定是否把 Mobile 管线切到 HDR + HDR 分级（GEEONE 死白根因）。
+- 视觉批准前不推送手机；`pointed-three-blade` / `gold-four-wing` 场景资产保留作 rollback。
+
+## 2026-09-08 Gacha carousel R051：切档拖影、镭射同步、星芒粒子、六档配色、slab 图案
+
+> **当前状态：用户 12:16 反馈 R050「太有漂浮感」「镭射亮片和包装动画不同步、横滑时有拖影」「粒子原色实心点密集恐惧，要星芒或软发光，不要大圆套小圆，速度也要随档位加快」「六档包装颜色太相近，拉不开价格」；12:23 追加「包装图案太抽象、圆滚滚，和开包出现的 slab 形状比例不符，静态图案要再改几版」。五项已改完并录屏。12:55 用户看三版候选后指 `outline` 版「这版好一点，但是饱和度可以降低一点」——已把 `outline` 装入 shipping 资源并降饱和重录（R051b）；13:20 追问「能不能用贵金属色在后面几个 pack 增加高级感，中间这个黑块是什么」——黑块是回填算法缺陷已修，高档位徽记与印字改为贵金属箔（R051c）；13:28「比例能再加大一点吗」——slab 徽记 170 → 184 px（R051d）；13:33「特别糊」——光栅改为 768×1024 二倍输出、旧徽记残影改用平铺颗粒回填、预览改为全分辨率录屏（R051e）；13:51「所有字和图案都看不清，需要重新做……pack 再扁平一些，更贴合 slab 形状」——弃用 384 px 照片源，袋体、封口、颗粒、徽记、文字全部程序化绘制，袋形改为 280×375 扁平袋（R051f）；14:55「完全没有厚度了……上下边缘加一点锯齿，暗示可撕开」——加回枕形鼓度、内容物凸起、封口褶皱，顶/底封口边缘锯齿化（R051g）；15:03「风格越改越土，铝箔纸的高级感完全没了，像破纸片」——放弃纯程序化哑光表面，铝箔回到照片源（2×、回填、压窄），程序化只负责起伏、锯齿、徽记与文字（R051h）；15:28「占比大一些」——舞台 Pack 244→280 pt、选中 scale 1.0、选包页间距收紧（R051i）；15:43 选包页文案改版：标题=档位名、副标题=奖池说明、底部=人民币价格、白底购买按钮（R051j）；15:53 去掉右上「选择 PACK」标签、统一 Oxanium（R051k）；15:58 价格白色、标题 title2／说明 footnote、下移 16 pt、加 page control、购买文字单色、不做 dock（R051l）；17:10「中间这个图案还是不太好看，有没有陀螺相关的，极简一点的，有漂亮的曲率和粗细线条的对比」——出六版候选，18:33 用户「这两个通过」批准 A 指尖陀螺轮廓 + C 陀螺仪环（R051m，已装入 shipping 光栅）。徽记图案已获用户批准；选包页 UI 与整体视觉批准待确认，未推送手机。**
+
+- 拖影根因（`PackCarousel`）：`ProductMatchedGeometry` 的 `if let id` 与 `ProductPackIdleFloat` 的 `if let sheenMaskAssetName` 都是按「是否选中」切换的 `@ViewBuilder` 分支。选中变化时整只 Pack 视图身份改变，SwiftUI 在 snap 弹簧期间对新旧两份做默认淡入淡出，于是出现两只半透明 REFINED 重叠滑动（`Artifacts/PackTearNativeCandidate/r051-foil-sync/r050-ghost-before.png` 第 4–7 帧）。
+  - 修复：`ProductMatchedGeometry` 单分支，未选中用 `fallbackID: "gacha-pack-slot-<i>"` + `isSource: false`；镭射 overlay 对六只 Pack 常驻（未选中为 rest pose，opacity 0.30）。修后 30 fps 抽帧 `snap-frames-30fps.png` 每帧每只 Pack 只出现一次。
+- 镭射同步（`GachaPackHolographicSheenRules.carouselOffset`）：光源固定于屏幕，Pack 每向右滑一格，亮片在印刷上反向移 `0.45` 包宽，clamp ±0.90；`ProductPackIdleFloat` 改为 `Animatable`，`carouselPosition` 与 offset 走同一根 snap 弹簧，不再在选中索引跳变时突跳。Reduce Motion 下保留（它跟随用户已做的滑动，不是自发运动）。
+- 漂浮感：`idleFloatAmplitudePoints 6 → 3`、`idleYawDegrees 4 → 2`，周期 2.4/3.2 → 3.0/3.6 s；生命感交给档位敲击与镭射视差。
+- 粒子（`GachaPackBackdropAmbienceRules` + `ProductPackBackdropAmbience`）：全部改为径向渐变软发光（核心 35% 内实、其后衰减到 0，无硬边）；最近一层（depth > 0.8）画四角星芒（spike = 3.2 × 半径 × twinkle，腰 0.45 pt），删除 2.8× 光晕圆盘。上升速度 `riseSpeedScale` STANDARD 1× → 1.25/1.55/1.9/2.3 → 1 OF 1 2.8×；视图在 `onChange(of: tier)` 用 `travel(travelAtChange:secondsSinceChange:tier:)` 累积行程，切档只改斜率不改位置；sway/twinkle 仍走时钟，与档位无关。1:1 裁切 `motes-one-of-one-closeup.png`。
+- 六档配色：`storefrontAccentRGB` 改为 银 (0.58,0.60,0.64) / 蓝宝石 (0.30,0.55,0.85) / 玫瑰金 (0.88,0.40,0.42) / 香槟金 (0.90,0.74,0.28) / 紫晶 (0.56,0.36,0.86) / 黑曜石+全光谱→玫红 (0.86,0.46,0.80)，与 `GachaPackArcBackdropRules.Colourway` 同一套；harness 断言任意两个彩色档色相差 ≥ 40°、RGB 距离 ≥ 0.30。
+- 包装光栅（新工具 `Tools/GachaPackArtwork/build_pack_artwork.py`）：中性源图保存在 `ArtSource/GachaPacks/Neutral/`（原六张 body/flap 此前只存在于 `Assets/Plugins/iOS/GachaPacks/`，未入库；STANDARD body SHA-256 `ebc17bb2…4681d6`）。流程：① 用面板自身高频纹理回填旧浮雕徽记（中值滤波掉轮廓像素，低频取周围面板）；② 按亮度做三色调（shadow/mid/high）分级，中间调向灰回拉 22–34% 保持金属感，1 OF 1 黑曜石叠对角全光谱（仅亮褶带色）；③ 浮雕 slab 徽记：展示盒真实比例 188:240，高 170 px 居中面板，顶部标签板 8.5%–31% H、圆形凹槽直径 84/188 W 居 64% H，顶左键光浮雕，档位色描边；④ 输出 body / flap / foil（foil = slab 外壳 ∪ 原文字掩膜，复用 `build_pack_foil_masks.text_mask`）。三版：`outline`（只描边）、`plate`（实体外壳+标签板+凹槽）、`toy`（凹槽内加三叶陀螺剪影）。候选联系表 `Artifacts/PackTearNativeCandidate/r051-pack-artwork/pack-artwork-variants-sheet.png`。
+  - R051b（用户 12:55 选 `outline`、要求降饱和）：脚本默认 `--variant outline`；`DESATURATE` 中间调向灰回拉 REFINED 0.55 / SIGNATURE 0.46 / CHASE 0.44 / GRAIL 0.60（原 0.34/0.24/0.22/0.32），1 OF 1 光谱强度 0.40 → 0.30。六张 body 并排 `r051-pack-artwork/outline-desat-six.png`；Simulator 录屏 `Artifacts/PackTearNativeCandidate/r051b-outline-desat/r051b-outline-desat.mp4`（20.5 s 六档往返，540 宽）+ `strip.png`。Swift 预览重新 `BUILD SUCCEEDED`（`/tmp/r051/swift-build2.log`）；规则代码未改，harness 结论不变。
+  - R051c（用户 13:20）：① 「黑块」根因——`inpaint_emblem` 用归一化高斯（σ 22、默认 4σ 截断）从洞外取低频，洞中心 ≥ 4σ 处权重被 1e-4 下限截住，除出一块偏黑的矩形，正好落在凹槽圆环内。改为 `distance_transform_edt` 让洞内每像素先取最近洞外像素再模糊；纹理高通 σ 6 → 3，旧徽记残影同时减弱。② 贵金属箔 `METALS`：REFINED 银、SIGNATURE 玫瑰金、CHASE 黄金、GRAIL 紫晶配黄金、1 OF 1 铂金；STANDARD 保持平涂灰。`metal_ink` 为对角明暗 + 高光带，用于徽记描边与印字（`metallize_text` 复用 foil 文字掩膜）。描边宽度与浮雕深度按 `STROKE_SCALE` 1.0/1.0/1.15/1.3/1.3/1.45 递增。六张并排 `Artifacts/PackTearNativeCandidate/r051c-metal-foil/metal-six.png`（下排为面板 1:1 放大）；录屏 `r051c-metal-foil/r051c-metal-foil.mp4`（20.5 s）+ `strip.png`；Swift 预览 `BUILD SUCCEEDED`（`/tmp/r051/swift-build3.log`）。
+  - R051d（用户 13:28）：`SLAB_HEIGHT` 170 → 184（面板内高 194 px，上下各留 5 px），宽随 188:240 变为 144 px。六张并排 `Artifacts/PackTearNativeCandidate/r051d-slab-184/slab-184-six.png`；录屏 `r051d-slab-184/r051d-slab-184.mp4`（20.5 s）+ `strip.png`；Swift 预览 `BUILD SUCCEEDED`（`/tmp/r051/swift-build4.log`）。
+  - R051e（用户 13:33「特别糊」）：两个成因。① 资源分辨率：舞台 Pack 244 pt = 3× 屏 732 px，而光栅只有 384 px，运行时放大 1.9×。现在 `build_pack_artwork.py` 以 `S = 2` 输出 768×1024（源图 Lanczos 放大 + UnsharpMask r2/60%，徽记、金属箔、印字全部在 2× 上绘制；所有像素常量按 S 缩放，文字掩膜在 384 画布检测后 zoom 到 2×）。Swift 只用画布比例分数（`authoredCanvasWidth/Height` 384/512 仅作比例），文件名不变，不需改代码。② 预览视频此前缩到 540 宽，本身就糊；R051e 起交付全分辨率 1206×2622 crf 17。另：旧徽记的软阴影比任何中值窗都宽，改为把整个面板洞的高频颗粒替换成印字上方素面（384 画布 96–122 行）的镜像平铺（确定性 seed 7），残影消失。证据：设备像素尺度六档 `Artifacts/PackTearNativeCandidate/r051e-hires/hires-six-device-scale.png`（下排 1:1 裁切）、全分辨率抽帧 `chase-frame-fullres.png`、录屏 `r051e-hires/r051e-hires-clear.mp4`（20.6 s）；Swift 预览 `BUILD SUCCEEDED`（`/tmp/r051/swift-build5.log`）。生成耗时 ≈ 30 s/六档。
+  - R051f（用户 13:51）：`build_pack_artwork.py` 重写为纯程序化。① 袋形：384×512 画布不变（Swift 只用比例分数），袋体列 52–332、fin 行 45–92（flap 光栅 45–101 重复袋体顶行）、袋底 467，袋面 280×335 ≈ 0.84，接近 slab 188:240；顶/底封口 3 px 波纹压痕、7 px 侧封、5 px 圆角、边缘 7 px 卷边压暗、单条柔和斜向光带、细颗粒 ±0.022 + 斑驳 ±0.007，整体平坦无鼓包。② 徽记：slab 高 212（居袋面），描边 2.4/1.3/1.3/1.7 px × `STROKE_SCALE`，4× 超采样矢量描边，右下 0.9 px 硬阴影 + 左上 0.6 px 亮唇，贵金属 ink 不变。③ 文字：DIN Condensed Bold（macOS Supplemental 系统字体，光栅化进资源，字体文件不入包）14 px「FIDGET ARCHIVE / SERIES 01」+ 22 px 档位名，字距 0.06 em，同一 ink 压印。④ foil 掩膜 = 徽记 ∪ 文字精确 alpha，不再检测。⑤ 1 OF 1 光谱改跟随模糊后的光场，去掉彩色噪点。Swift 同步：`openingInsetFraction` 0.05 → 48/384、`authoredFlapSpanFraction` 24–360 → 52–332、`authoredPackInteriorWidthFraction` 0.875 → 280/384；harness 新增 Python/Swift 常量一致断言，`PASS 239/239`。`ArtSource/GachaPacks/Neutral/` 与 `Tools/GachaPackFoilMask/` 不再参与生成，保留为历史。证据：六档 `Artifacts/PackTearNativeCandidate/r051f-flat-pouch/flat-pouch-six.png`、设备尺度 GRAIL `grail-device-scale.png`、全分辨率抽帧 `frame-fullres.png`、撕包近景 `tear-closeup.png`（fin 整条剥离、无 crimp ears）、录屏 `r051f-flat-pouch-clear.mp4`（22.5 s 六档 + 3.2 s `--pack-tear-candidate-preview` 撕包）；Swift 预览 `BUILD SUCCEEDED`（`/tmp/r051/swift-build6.log`）。生成耗时 ≈ 12 s/六档。
+  - R051g（用户 14:55）：① 厚度——袋面枕形鼓度 `PILLOW_GAIN` 0.17（中央亮、四边暗，椭圆平方根轮廓）；内部 slab 顶起铝箔的软凸起 `CONTENT_BULGE` 0.085（徽记外扩 6 px 圆角矩形，σ 9 px）+ 右下 `CONTENT_SHADOW` 0.11；上下封口与袋面交界处聚拢褶皱 `CREASE_GAIN` 0.08（暗谷 3 px + 亮脊 8 px，沿 x 11 px 周期起伏）；卷边压暗 0.22 → 0.28。② 锯齿——`serrated_band()` 在 fin 顶边（行 45）与袋底边（行 467）切出 8 px 间距、4.5 px 深的三角齿，齿向内切，外沿行号不变，Swift `authoredPackTopYFraction` 等常量不受影响；卷边压暗跟随齿形，齿有立体感。证据：六档 `Artifacts/PackTearNativeCandidate/r051g-volume-serration/six.png`、设备尺度+齿边放大 `six-device-scale-detail.png`、全分辨率抽帧 `frame-fullres.png`、撕包近景 `tear-closeup.png`、录屏 `r051g-volume-serration-clear.mp4`（20.5 s 六档 + 3.6 s 撕包）；Swift 预览 `BUILD SUCCEEDED`（`/tmp/r051/swift-build7.log`）；规则代码未改，harness 239/239 结论不变。
+  - R051h（用户 15:03）：混合管线。铝箔来自 `ArtSource/GachaPacks/Neutral/` STANDARD body+flap 合成照片：Lanczos 2× + UnsharpMask r2/60%；`inpaint()` 回填旧徽记（行 188–380、列 94–294）与烘入文字（SERIES 行 120–176、档位名行 386–422）——低频取最近未动像素（σ 14），高频用 fin 下方素面（行 104–120、列 60–324，避开侧封边缘）镜像平铺、幅度夹 ±0.05；列 24–360 压到 52–332（行不动）。光场 = (照片亮度 / 0.42)^0.9 × 程序化起伏（枕形 0.10、内容凸起 0.085、褶皱 0.04、卷边 0.20、锯齿），再走档位双色调；程序化颗粒/压痕降到 0.006/0.05 避免与照片重复。slab 徽记回到照片浮雕框内（高 188，顶 186）。第一版颗粒库含 fin 底边（行 96–101）与侧封边缘，平铺后在面板里出现周期性「蝴蝶」痕，已换行/列范围修掉。证据：六档 `Artifacts/PackTearNativeCandidate/r051h-foil-hybrid/six.png`、设备尺度 CHASE/GRAIL/1 OF 1 `six-device-scale-detail.png`、全分辨率抽帧 `frame-fullres.png`、撕包 `tear-closeup.png`、录屏 `r051h-foil-hybrid-clear.mp4`（20.5 s 六档 + 3.2 s 撕包）；Swift 预览 `BUILD SUCCEEDED`（`/tmp/r051/swift-build8.log`）；规则代码未改。R051f/g 的纯程序化表面记为 superseded。
+  - R051i（用户 15:28「让这些包裹在屏幕中的这个占比大一些」）：`GachaPackOpeningRules.artworkWidthPoints` 244 → 280（选中 carousel ≈ 237 pt ≈ 屏宽 60%，原 178 pt ≈ 45%）；`tearTravelPoints` 158 → 181（commit 仍落在包宽 40%）；`GachaPackCarouselRules.selectedPackScale` 0.86 → 1.0、`unselectedPackScale` 0.56 → 0.62；选包页 `VStack` 间距 15 → 8 pt、标题/档位说明各减 4 pt 留白。证据：`Artifacts/PackTearNativeCandidate/r051i-larger-pack/frame-fullres.png`、`r051i-larger-pack-clear.mp4`（20.5 s）；harness `PASS 239/239`；Swift 预览 `BUILD SUCCEEDED`（`/tmp/r051/swift-build9.log`）。
+  - R051j（用户 15:43）：`GachaPackTier.storefrontCashPriceCNY` 6/12/24/32/64/128（SIGNATURE 24 为推断，用户只给了 6/12/32/64/128），`storefrontPriceLabel` = `¥{n}`；`storefrontOddsLine` 改为奖池说明，删除「四档奖品池不变」；`ProductScreenHeading` 标题=`tier.title`；`ProductPackTierCaption.title` 显示价格；`ProductPrimaryActionButton` 新增 `surface: .filledWhite` 与 `titleGradient`。harness 新增价格标签与文案断言 `PASS 245/245`；录屏 `Artifacts/PackTearNativeCandidate/r051j-storefront-copy/r051j-storefront-copy-clear.mp4`。
+  - R051k（用户 15:53）：右上 `ProductStatusTag("选择 PACK")` 为旧占位，删除，仅失败提示时显示；`productDesignSystem()` 与预览 App 启动时注册 Oxanium（预览曾回退系统字体）；`ProductBottomActionDock` 加 `tint` 参数。录屏 `r051k-bottom-dock/r051k-bottom-dock-clear.mp4`（dock 版随后被用户 15:58 取消）。
+  - R051l（用户 15:58）：价格 `accent: .white`；`ProductScreenHeading` 新增 `subtitleStyle`，选包页标题 `.title2`／说明 `.footnote`、整块下移 16 pt；`ProductPageIndicator(items: GachaPackTier.allCases)` 置于价格上方（选中白色胶囊 18 pt、未选 6 pt 圆点，随 `selectedPack` 切换）；购买文字去渐变改单色 accent；不用 dock。录屏 `r051l-page-control/r051l-page-control-clear.mp4`；harness `245/245`；Swift 预览 `BUILD SUCCEEDED`。
+  - R051m（用户 17:10 / 18:33）：`build_pack_artwork.py` 徽记改为局部 8 px/单位 SDF 光栅（`_EmblemRaster`：布尔形状 → 有向距离 → 精确宽度描边，圆角并集用高斯阈值做 fillet，变宽笔画用扫掠多边形）。六版候选 A 指尖陀螺轮廓／B 陀螺侧影／C 陀螺仪环／D 轴承+甩动弧／E 实心陀螺／F 陀螺+轨道（`r051m-emblem-gyro/emblem-candidates-sheet.png`、`zoom-grid-A-E.png`、`full-packs-A-E.png`），用户批准 A + C。`EMBLEMS`：STANDARD/REFINED/SIGNATURE = spinner（hub r40 + 三叶 r33 距 46、fillet 9、粗 3.2 描边；轴承环 r15 与叶环 r15 细 0.9；轴心实点 r4.5），CHASE/GRAIL/1 OF 1 = gyro（外环 r70 粗 3.2；万向椭圆 66×22 倾 −28° 细 0.9；轴半长 76 由中间 0.9 向两端 0.35 收细；轴心实点 r5.5）；粗细均 × `STROKE_SCALE`。旧 slab 徽记代码删除，`slab_geometry()` 只保留供内容凸起用。foil 掩膜自动跟随。证据：六档 `r051m-emblem-gyro/six.png`、徽记 1:1 `six-emblem-1to1.png`、录屏 `r051m-emblem-gyro-clear.mp4`（20.5 s）、抽帧 `frame-chase.png`；Swift 预览 `BUILD SUCCEEDED`（`/tmp/r051/swift-build11.log`）；harness `245/245`。B/D/E/F 记为 superseded 候选。
+  - R051n（用户 18:48 四点）：① 「动画卡、不跟手」——`GachaPackCarouselRules.detentHoldGain` 0.7 → 0.92（单档规则已由 release 保证，不再靠压位移），`PackCarousel` 拖动 `minimumDistance` 12 → 6 pt，`ProductPackIdleFloat` 新增 `suspended`：拖动期间暂停镭射 TimelineView（body 已按触点重算，双重刷新只增渲染负担）；真机帧率仍待装机验证。② 图标参考（四张锐角星芒/收尾 swoosh 参考图）——新出六版候选 G 轨道 swoosh+星／H 星芒陀螺仪／I 交叉 swoosh／J 实心三叶+星芒镂空／K 三段 swoosh／L 双轨道陀螺仪，星芒用 n=0.55 超椭圆（凹边、真尖角），swoosh 用变宽扫掠（尖头→粗腰→尖尾）；`Artifacts/PackTearNativeCandidate/r051n-emblem-swoosh/zoom-grid-G-L.png`、`full-packs-G-L.png`。19:39 用户「icon 都没替换」——装入 K（STANDARD/REFINED/SIGNATURE：三段变宽 swoosh r70 跨 100°、峰值 0.28、最宽 9 × `STROKE_SCALE`，四芒星 r30 转 15°）+ H（CHASE/GRAIL/1 OF 1：78×27 细轨道 1.2×0.9、竖向星芒 22×86、横向星芒 52×10），`_EmblemRaster` 新增 `star4`／`crescent`；旧 spinner/gyro 常量删除。六档 `six.png`、徽记 1:1 `six-emblem-1to1.png`、录屏 `r051n-emblem-swoosh-clear.mp4`（21.9 s）、抽帧 `frame-grail.png`/`frame-refined.png`；Swift 预览 `BUILD SUCCEEDED`（`/tmp/r051/swift-build13.log`）。20:01 用户「每个 pack 有一个自己的图标」→ R051o：`EMBLEMS` 六档各一：STANDARD K 三段 swoosh／REFINED J 实心三叶+星芒镂空／SIGNATURE G 倾斜变宽轨道+星／CHASE I 交叉 swoosh+长星芒／GRAIL L 双轨道+两段粗弧／1 OF 1 H 星芒陀螺仪；`_EmblemRaster` 新增 `tapered_ring`（闭合变宽环 = 内外两多边形 XOR）。六档 `r051o-emblem-per-tier/six.png`、徽记 1:1 `six-emblem-1to1.png`、录屏 `r051o-emblem-per-tier-clear.mp4` + `strip.png`、抽帧 `frame-grail.png`/`frame-refined.png`；Swift 预览 `BUILD SUCCEEDED`（`/tmp/r051/swift-build14.log`）。22:21 用户「整体色相饱和度过高，像零食，不够高级」→ R051p 全链路降饱和：① 袋体 `GRADES` 中间调改为哑光金属（REFINED 钢蓝 (0.22,0.32,0.46)／SIGNATURE 灰玫瑰铜 (0.52,0.32,0.30)／CHASE 古铜金 (0.58,0.47,0.24)／GRAIL 茄紫 (0.34,0.24,0.44)），`DESATURATE` 0.35/0.35/0.35/0.40，`METALS` 高光压低，1 OF 1 光谱 0.22 → 0.16；② Swift `storefrontAccentRGB` 同步为 (0.40,0.52,0.68)/(0.70,0.42,0.44)/(0.76,0.64,0.40)/(0.50,0.40,0.64)/(0.68,0.50,0.64)；③ `GachaPackStorefrontBackdropRules` 底部光晕 `saturationBoost` 2.4 → 1.3、`maximumSaturation` 0.85 → 0.55、`minimumValue` 0.62 → 0.52；④ `GachaPackArcBackdropRules.Colourway` 五套弧带色全部改为哑光金属（蓝宝石 → 钢蓝 2A4A72/3E6A96、玫瑰金 → 82482E/B8735E、香槟金 → 8C7440/BC9E4E、紫晶 → 4A3468/7B5E9E + 金心 C9A85A、银 6F7A88/B4BCC6）。harness 阈值随之调整：accent 两两 RGB 距离 ≥ 0.30 → ≥ 0.15（色相 ≥ 40° 不变）、弧带两两 ≥ 0.25 → ≥ 0.15、玫瑰金 glow 红通道 > 0.9 → > 0.6、香槟中心 > 0.95 → > 0.9；`246/246`。证据：六档 `r051p-muted-metals/six.png`、录屏 `r051p-muted-metals-clear.mp4` + `strip.png`、抽帧 `frame-chase.png`/`frame-grail.png`；Swift 预览 `BUILD SUCCEEDED`（`/tmp/r051/swift-build15.log`）。音效候选：`Artifacts/GachaSfxCandidates/kenney-cc0/`（Kenney CC0，71 条，按 01 切档吸附／02 购买确认／03 撕包／04 盒子滑出／05 落地翻面／06 稀有度提示／07 失败返回 分组，ogg + m4a），未接入运行时。 ③ 购买按钮——`ProductPrimaryActionLabel.titleOpacity`：`.filledWhite` 底板在 disabled/loading 下保持纯白，只淡化文字（原来整块 0.42 透明发灰）；`.glass` 行为不变。「点不动」代码上唯一路径是 `ProductActionState.disabled`（券 0 且硬币 < 160，价格行显示缺口）或 `loading`（Unity 目录未到达）；Simulator 预置资金无法复现，需用户确认真机钱包/构建版本。④ 「返回后首页进入按钮消失」——`CodexSwiftUIOverlayManager.setGachaPresentationActive(true)` 把 `panelController.view.isHidden = true`，回到 false 时只调 `selectTab` → `showPanel()`，而 `showPanel` 在 panel 已存在时直接 return，面板永久隐藏。修复：恢复前显式 `panelController?.view.isHidden = false`；`GachaStorefrontIntegrationTests` 新增字符串断言。证据：harness `246/246`（新增 hold gain ≥ 0.9 / 0.1 间距处 ≥ 0.09 断言）；Swift 预览 `BUILD SUCCEEDED`（`/tmp/r051/swift-build12.log`）；Simulator 截图 `r051n-storefront.png`；录屏 `r051n-emblem-swoosh/r051n-tracking-clear.mp4`（22.4 s 六档往返，1206×2622 crf 17）+ 抽帧 `frame-grail.png`。Unity EditMode 未重跑（仅新增字符串断言）。视觉批准待确认，未推送手机。
+  - R051q（用户 22:31 六点）：① 「硬挺感、降饱和、金属感」——`build_pack_artwork.py`：`PILLOW_GAIN` 0.10 → 0.06（袋面更平）、`CREASE_GAIN` 0.04 → 0.06、`CONTENT_SHADOW` 0.11 → 0.13、新增窄高光条 `SPECULAR_GAIN`/`SPECULAR_WIDTH` 0.20/0.045 叠在软 sheen 上、光场绕 1.0 拉伸 `METAL_CONTRAST` 1.30、照片褶皱 `PHOTO_GAMMA` 0.9 → 1.15、`DESATURATE` 0.45/0.45/0.42/0.48。② 标题上方反白小徽记——脚本新增导出 `gacha-pack-<tier>-emblem.png`（400 × 400 白底透明，裁 `EMBLEM_BOX`）+ Unity `.meta` + Xcode 预览工程资源；`GachaPackTier.emblemAssetName`；`ProductScreenHeading.emblemAssetName` 以 `FidgetUITokens.Size.headingEmblem` 28 pt、0.92 不透明置于标题上方；storefront 传 `selectedPack.emblemAssetName`。③ page control 上移 16 pt（指示器 `.padding(.bottom, 16)`）。④ 描述文案移到价格下——heading `subtitle` 置空；`ProductPackTierCaption` 新增第三行 `footnote`（footnote 字号、tertiaryText 0.42），现在为 `¥32` → 概率描述 → `一张抽取券 · 余 8 张`。⑤ 圆形渐变同步——`GachaPackBackdropRippleRules.seconds` 1.3 → 0.7、`backdropFollowDelaySeconds` 0.55 → 0.12、`backdropFollowSeconds` 0.6 → 0.5。⑥ 跟手与 snap 阻尼——`detentHoldGain` 0.92 → 1.0（完全 1:1）、拖动 `minimumDistance` 6 → 3 pt、`snapStiffness` 420 → 300 / `snapDamping` 38 → 40（ζ ≈ 1.15 略过阻尼、更沉）；真机手感仍需装机验证。harness 新增 3 条（1:1 + ζ ≥ 1.05 + k ≤ 320；光晕 ≤ 0.8 s / 延迟 ≤ 0.15 s；六档 `emblemAssetName`），`0.2 间距处 <` 改为 `<=`；`PASS 249/249`。`GachaStorefrontIntegrationTests` 新增六档 emblem 文件与字符串断言（Unity EditMode 未重跑）。证据：六档接触表 `Artifacts/PackTearNativeCandidate/r051q-metal-heading/six.png`、录屏 `r051q-metal-heading-clear.mp4`（22.5 s）+ `strip.png`、抽帧 `frame-chase.png`/`frame-grail.png`；Swift 预览 `BUILD SUCCEEDED`（`/tmp/r051/swift-build16.log`）。视觉批准待确认，未推送手机。
+  - R051r（用户 22:43「褶皱感再弱一点，金属感和硬挺感再强一些，icon 适当放大」）：`build_pack_artwork.py` 照片亮度先高斯 `PHOTO_SMOOTH` 1.4 px 抹平细褶，`PHOTO_RELIEF` 0.85 → 0.60、`PHOTO_GAMMA` 1.15 → 1.0（不再放大褶皱），对比改由 `METAL_CONTRAST` 1.30 → 1.55 与高光条 `SPECULAR_GAIN` 0.20 → 0.30 提供；`PILLOW_GAIN` 0.06 → 0.03、`CREASE_GAIN` 0.06 → 0.03、`GRAIN_FINE` 0.006 → 0.004。标题徽记 `FidgetUITokens.Size.headingEmblem` 28 → 36 pt（袋面徽记未动）。harness 不受影响（`249/249`）。证据：`Artifacts/PackTearNativeCandidate/r051r-stiff-metal/six.png`、录屏 `r051r-stiff-metal-clear.mp4`（22.5 s）+ `strip.png`、抽帧 `frame-chase.png`/`frame-grail.png`；Swift 预览 `BUILD SUCCEEDED`（`/tmp/r051/swift-build17.log`）。视觉批准待确认，未推送手机。
+  - R051s（用户 2026-09-09 08:02「icon 的圆角矩形内再加一层淡淡的背景，随镭射光反射变化」）：`build_pack_artwork.py` 新增 `plate_mask(shell)`（压花面板内缩 3、圆角 10、边缘 σ 1.2 px 柔化）；袋体在面板内向 tier 高光色（半去饱和）混 `PLATE_TINT` 0.10 × 对角渐变 0.55–1.0，读作一层淡膜；foil 掩膜 `PLATE_FOIL_ALPHA` 0.22 叠入面板（徽记/文字仍 1.0），`ProductPackHolographicSheen` 以 alpha 遮罩 → 镭射光带扫过面板时淡淡带亮。这修正了 2026-09-07 17:22「foil 只在徽记与文字」的约束：面板以 0.22 弱强度参与，属用户本轮明确要求。证据：`Artifacts/PackTearNativeCandidate/r051s-panel-film/six.png`、录屏 `r051s-panel-film-clear.mp4`（22.5 s）+ `strip.png`、抽帧 `frame-chase.png`/`frame-grail.png`；Swift 预览 `BUILD SUCCEEDED`（`/tmp/r051/swift-build18.log`）。harness/EditMode 无规则改动。视觉批准待确认，未推送手机。
+  - R051t（用户 09-09 08:28「膜延展到四个角的对焦框；表面更平整，不然破破烂烂」）：`plate_mask` 由 shell 内缩 3 改为外扩 6、圆角 12，与照片压花面板的四角对齐（同 `light_field` 的 `inner`）；`PHOTO_RELIEF` 0.60 → 0.35、`PHOTO_SMOOTH` 1.4 → 2.6 px、`GRAIN_FINE` 0.004 → 0.002，只保留大褶。证据：`Artifacts/PackTearNativeCandidate/r051t-flat-panel/six.png`、录屏 `r051t-flat-panel-clear.mp4`（22.5 s）+ `strip.png`、抽帧 `frame-chase.png`/`frame-grail.png`；Swift 预览 `BUILD SUCCEEDED`（`/tmp/r051/swift-build19.log`）。视觉批准待确认，未推送手机。
+  - R051u（用户 09-09 08:32 圈出左上大折光「把这个熨平」）：根因是 `light = (photo/0.42)^γ × (...) × relief` 里照片亮度始终全强度相乘，`PHOTO_RELIEF` 只调过程性浮雕的占比，所以前几轮降 relief/加模糊都压不住照片本身的左上高光褶。改为 `photo_term = 1 + ((photo/0.42)^γ − 1) × PHOTO_RELIEF`，再乘过程性 relief；0.35 权重下左上区域基本平整，金属感由 `METAL_CONTRAST`/高光条维持。证据：`Artifacts/PackTearNativeCandidate/r051u-ironed/six.png`、录屏 `r051u-ironed-clear.mp4`（22.5 s）+ `strip.png`、抽帧 `frame-chase.png`/`frame-grail.png`；Swift 预览 `BUILD SUCCEEDED`（`/tmp/r051/swift-build20.log`）。视觉批准待确认，未推送手机。
+  - R051v（用户 09-09 08:39「面板膜去掉，有点丑；或整个 pack 都过光、icon 更亮；饱和度大幅降低」）：① R051s/t 面板膜 rejected——`plate_mask`、`PLATE_TINT`、`PLATE_FOIL_ALPHA` 删除，袋体不再烘焙面板底色；foil 掩膜改为整个袋体 `BODY_FOIL_ALPHA` 0.18 + 徽记/文字 1.0，镭射光带扫过整袋、经过徽记时全亮。② 袋体 `DESATURATE` 0.45 → 0.72/0.72/0.70/0.74；金属 ink 新增 `INK_DESATURATE` 0.30（金/玫瑰金/银向灰拉 30%）。③ Swift `storefrontAccentRGB` 再向自身亮度拉 ~35%：REFINED (0.44,0.52,0.62)／SIGNATURE (0.63,0.45,0.46)／CHASE (0.73,0.65,0.49)／GRAIL (0.48,0.42,0.57)／1 OF 1 (0.66,0.51,0.62)；`GachaPackStorefrontBackdropRules.saturationBoost` 1.3 → 1.1、`maximumSaturation` 0.55 → 0.38。harness accent 两两 RGB 距离 ≥ 0.15 → ≥ 0.10（色相 ≥ 40° 不变；REFINED–GRAIL 现为 0.12），`PASS 249/249`。证据：`Artifacts/PackTearNativeCandidate/r051v-whole-sheen-muted/six.png`、录屏 `r051v-whole-sheen-muted-clear.mp4`（22.5 s）+ `strip.png`、抽帧 `frame-chase.png`/`frame-grail.png`；Swift 预览 `BUILD SUCCEEDED`（`/tmp/r051/swift-build21.log`）。视觉批准待确认，未推送手机。
+  - R051w（用户 09-09 08:48 圈出六袋左上斜向亮痕「褶皱太强，大幅降低这个 dent」）：亮痕 = `SPECULAR` 窄高光条叠在照片残余折光上。`SPECULAR_GAIN/WIDTH` 0.30/0.05 → 0.08/0.10（变成宽而淡的渐变），`PHOTO_RELIEF` 0.35 → 0.15。金属感现在主要由运行时镭射光带（整袋 0.18 + 徽记 1.0）提供。证据：`Artifacts/PackTearNativeCandidate/r051w-flat-dent/six.png`、录屏 `r051w-flat-dent-clear.mp4`（22.5 s）+ `strip.png`、抽帧 `frame-chase.png`/`frame-grail.png`；Swift 预览 `BUILD SUCCEEDED`（`/tmp/r051/swift-build22.log`）。视觉批准待确认，未推送手机。
+  - R051x（用户 09-09 08:54「白色羽化模糊背景去掉；整包太哑光，镭射感更强；学习 https://github.com/LerSent001/holo-card」）：① `CONTENT_BULGE`/`CONTENT_SHADOW` 0.085/0.13 → 0，徽记后的浮起面板光与投影删除。② 学习 holo-card `renderer.js` 的光栅模型并移植到 `ProductPackHolographicSheen`：余弦调色板光谱 `.52+.48·cos(2π(t+(0,⅓,⅔)))`、相位随视角（band offset）滑动（`spectrumPhaseGain` 1.9、`spectrumCycles` 2.4、`spectrumOpacity` 0.62）、光带包络在上、白色激光芯保留、26 个固定位置的四角星 glint 只在光带内闪（`glintEnvelope` = (1−2|d|)²）；`restOpacity` 0.30 → 0.45、`sweepOpacity` 0.78 → 0.95；foil 掩膜整袋份额 `BODY_FOIL_ALPHA` 0.18 → 0.30（0.40 试过，把 tier 色淹没）。skill 已安装到 `~/.codex/skills/holo-card`（其分层 parallax/contour glow 面向网页卡，本项目只借用光栅着色模型）。harness 新增 4 条（光谱有界且到达红/蓝、倾斜改变颜色、glint 位置/包络、rest<sweep≤1），`PASS 253/253`。证据：`Artifacts/PackTearNativeCandidate/r051x-holo-sheen/six.png`、录屏 `r051x-holo-sheen-clear.mp4`（21.7 s）+ `strip.png`、抽帧 `frame-chase.png`/`frame-grail.png`；Swift 预览 `BUILD SUCCEEDED`（`/tmp/r051/swift-build24.log`）。视觉批准待确认，未推送手机。
+  - R051y（用户 09-09 09:06「holo card 里有更多陀螺仪 feature 和卡片 frame design，学 https://x.com/LerSentAI/status/2097006824318738660」；09:17 附 AI 光晕参考图「这种级别的光晕可以考虑加上」）：抽帧分析该推文两段视频（`viewer.js` 陀螺仪：相对基准的 β/γ×0.85、夹 ±28°、按屏幕方向旋转、0.115 lerp；`renderer.js`：前景按 `view·0.08·depth` 视差、背景反向、随视角的 `glare`、轮廓 bloom、金色同心卡框吃光谱）。移植：① 印层分离——`build_pack_artwork.py` 新增 `print_layer()`，徽记/字样/面板细框（`FRAME_GROW/RADIUS/STROKE` 6/12/0.8，holo-card 卡框的小袋版）导出为独立 `gacha-pack-<tier>-print.png`（每档 5 文件），body/flap 只留裸箔；`GachaPackTier.printAssetName`、`ProductPackPrintLayer` 按 `printParallax`（满偏 3.5% 宽，竖向 ×`verticalTiltWeight`）相对箔面移动，`ProductPackSealedArtwork`/`ProductPackTearRevealLayer`/预览 App 全部接线。② 陀螺仪倾角 9/6 °/g → 34/22 °/g（gravity≈sin θ，近 1:1），新增夹角 `tiltYawClampDegrees` 22 / `tiltPitchClampDegrees` 14。③ `ProductPackGlare`（仅选中包）：随视角的白色热芯 0.9/半径 5%、光谱色边 0.35、宽 halo 0.18、水平镜头光条 0.4（长 2.0 宽、厚 2%），sweep 时整体 ×1.35。④ `ProductPackContourGlow`（选中包/撕包待机）：袋形剪影模糊 18 pt，白色 rim 0.8 + 光谱 0.45，rest 0.55 → sweep 0.95，缩放 1.04。第一版光条为十字且画在每个包上，被自审为「瞄准镜」，改为仅选中包 + 单向光条。harness 更新倾角断言并新增 print 视差/glare/contour 断言，`PASS 257/257`；Unity `GachaStorefrontIntegrationTests` 新增 print.png 存在与接线断言（未在本轮运行 Unity EditMode）。证据：`Artifacts/PackTearNativeCandidate/r051y-holo-depth/r051y-holo-depth-clear.mp4`（22.5 s，scripted tilt）+ `frame-4s.png`/`frame-12s.png`；Swift 预览 `BUILD SUCCEEDED`（`/tmp/r051/swift-build26.log`）。真机陀螺仪耦合仍待 iPhone 验证。视觉批准待确认，未推送手机。
+  - R051z（用户 09-09 09:58「光晕很假，高光点要有强反光材质承载；雾面不会有横线高光；三处在晃；镭射光带与图形彼此独立；扩散再宽；drop shadow 按 tier 色更深更扩散、subtle；四边缘要显出里面 slab 轮廓」）：① `build_pack_artwork.py` 新增 `rim_mask()`：袋形轮廓内 0.8 单位起 3.2 单位宽的金属边（tier 金属油墨，压印深度 0.35，进 print 层与 foil 掩膜 1.0），高光有了落点；`BODY_FOIL_ALPHA` 0.30 → 0.16，雾面袋身只吃宽而弱的过光。② slab 边缘：`SLAB_RIDGE_GAIN` 0.09（宽 2.2）+ 外侧阴影 0.07（偏 4、宽 5）+ 平台抬升 0.02，用有符号距离场沿面板轮廓做出厚度感，与印层细框重合。③ `ProductPackGlare` 去掉横向光条、halo；只剩一枚宽软高光（半径 16% 宽、0.55）+ 微弱光谱边 0.22，掩膜改为 print 层（金属才有高光）。④ 白色 contour glow 删除，改为 `ProductPackTintedShadow`：tier accent ×0.7 的袋形剪影，模糊 36 pt、缩放 1.08、下落 12 pt、rest 0.62 → sweep 0.85，普通混合。⑤ 光带 `bandWidthFraction` 0.55 → 0.85，激光芯 0.28 → 0.18 带宽；印层视差 0.035 → 0.02，减少「第三个在晃的东西」。harness 更新高光/阴影/带宽断言，`PASS 258/258`。证据：`Artifacts/PackTearNativeCandidate/r051z-metal-rim/r051z-metal-rim-clear.mp4`（22.5 s）+ `frame-5s.png`/`frame-13s.png`；Swift 预览 `BUILD SUCCEEDED`（`/tmp/r051/swift-build27.log`）。视觉批准待确认，未推送手机。
+  - R052a（用户 09-09 10:15「围绕 icon 的金边加到蓝框位置，把内容都框进来，加点小修饰花纹，只用圆角有点普通」）：`frame_mask()` 重写为整面装饰框 `FRAME_BOX`（侧封内 4 单位、y 104–421，位于 flap 行 92–101 之下），直边 0.9 + 6 单位切角、每角内藏一枚 3 单位四角星（与徽记同一超椭圆族）、内侧 3.2 单位 0.45 细线在角部收口、四边中点各一枚 2.4 单位菱形并断线 4 单位。徽记外的小面板框取消（slab 边缘起伏保留作厚度）。字样内移：HEADLINE 108/126 → 118/136，TITLE_TOP 392 → 382。框、星、菱形全部进 print 层与 foil 掩膜，随倾斜吃高光。无 Swift 改动；预览 `BUILD SUCCEEDED`（`/tmp/r051/swift-build28.log`）。证据：`Artifacts/PackTearNativeCandidate/r052a-ornate-frame/r052a-ornate-frame-clear.mp4`（22.4 s）+ `frame-5s.png`/`frame-13s.png`。视觉批准待确认，未推送手机。
+  - R052b（用户 09-09 10:54「把 slab 凸起轮廓和内细描线合成同一个框、一样大小；slab 外边缘倒角缓和；文字内移让内外两条线拉开间距」）：新增 `INNER_BOX` = `FRAME_BOX` 内缩 11 单位、圆角 9，同时驱动印层内细线（连续圆角环，0.45）与箔面 slab 起伏（脊光 0.08/宽 3.2，外侧阴影 0.06/偏 5/宽 7，更缓）；原按 `slab_geometry()` 的 188:240 小面板起伏取消。角星仍藏在外框切角与内框圆角之间。字样内移：`TEXT_X` 76 → 84，HEADLINE 118/136 → 124/142，TITLE_TOP 382 → 376。无 Swift 改动；预览 `BUILD SUCCEEDED`（`/tmp/r051/swift-build29.log`）。证据：`Artifacts/PackTearNativeCandidate/r052b-slab-frame/r052b-slab-frame-clear.mp4`（22.5 s）+ `frame-5s.png`/`frame-13s.png`。视觉批准待确认，未推送手机。
+  - R052c（用户 09-09 15:02「内圈 slab 描边和外延间距还是过近，再向内收；改完连同撕包装一起录屏」）：`FRAME_INNER_INSET` 11 → 18（内框/slab 起伏与外框金线净距 18 单位 ≈ 13 pt@280 pt），圆角 9 不变；徽记框 `EMBLEM_BOX` 上移 8（172–372，中心 272）让 1 OF 1 星底与档位名保持 ≥ 10 单位；字样随内框内移：`TEXT_X` 84 → 91，HEADLINE 124/142 → 131/149，TITLE_TOP 376 → 369。无 Swift 改动；预览 `BUILD SUCCEEDED`（`/tmp/r051/swift-build30.log`）。证据：`Artifacts/PackTearNativeCandidate/r052c-inner-frame-tear/r052c-inner-frame-tear-clear.mp4`（14.2 s：前 10.9 s `--premium-display-case-gate12-preview` 一镜到底 STANDARD→REFINED→STANDARD→选包→摇晃过光→0.32 s 撕开→白闪交接；后 3.3 s `--pack-tear-candidate-preview` 慢速撕包近景）+ `frame-stage.png`/`frame-tear.png`/`frame-slowtear.png`。视觉批准待确认，未推送手机。
+  - R052d（用户 09-09 15:23「撕开时有一块黑色不明物体；撕开后锯齿的银色描边依然存在，不符合定理」）：① 银边残留——运行时印层 `print.png` 与镭射掩膜 `foil.png` 都不参与撕裂，此前却覆盖 fin 行 45–92，撕开后金属边和过光仍留在原位。`build_pack_artwork.py` 把印层与 foil 全部裁到 seam 行 92 以下；fin 那段锯齿银边烘进 `flap.png`，随盖片一起飞走（sealed 外观不变，合成图仍完整）。② 黑块——是 R033 契约里的开口内腔 `ProductPackSlitCavity`（近黑 0.04–0.075 渐变），在白闪浅底上读成黑条。新增 `GachaPackOpeningRules.interiorLipScale/MidScale/DepthScale` = 0.55/0.36/0.26 × tier accent：内腔变成从内侧看到的本袋铝箔（上唇受光、向下变深），`ProductPackTearRevealLayer.interiorTier` → `ProductTearablePackArtwork.interiorTier` 传入；店面与预览 app 均传当前 tier，nil 时保持旧中性色。harness 新增内腔明度阶梯断言，`PASS 259/259`；预览 `BUILD SUCCEEDED`（`/tmp/r051/swift-build31.log`）。证据：`Artifacts/PackTearNativeCandidate/r052d-tear-mouth/r052d-tear-mouth-clear.mp4`（18.2 s：gate12 一镜到底 + 慢速撕包）+ `frame-stage.png`/`frame-lid.png`（盖片带锯齿银边飞离）/`frame-flash.png`（白闪底上无银边残留、无过光鬼影，内腔为灰色铝箔内侧）。视觉批准待确认，未推送手机。
+- 证据：Swift 规则 harness `PASS 238/238`（新增 carousel 视差、Reduce Motion 视差保留、idle ≤ 3 pt/2°、riseSpeedScale 单调且 ≤ 3×、行程连续、星芒仅最近层、色相分离）；Swift 预览 `xcodebuild` `BUILD SUCCEEDED`（`/tmp/r051/swift-build.log`）；Simulator 录屏 `Artifacts/PackTearNativeCandidate/r051-foil-sync/r051-foil-sync-clear.mp4`（24.9 s：实速六档往返 + STANDARD→REFINED、GRAIL→1 OF 1 两段 0.35× 慢放；904×1966 crf 17），`contact-sheet.png` 每 1.5 s 一帧。
+- 未做：Unity EditMode 未重跑（本轮无 C# 改动）；图案版本待用户从三版中选定；真机验收待视觉批准后装机。
+
+## 2026-09-07/08 Gacha carousel R049–R050：背景粒子、底部渐变生长、单档吸附、开包失败即回退
+
+> **当前状态：用户 19:39 提出四点——背景要有效果（粒子/过光）、真机一开包就卡住、切档时底部渐变要有从下向上的入场、snap 太弱容易滑两档；22:41 反馈 R049「粒子太大、整屏斜向过光假、没看到 ripple」。R050 已按反馈改完并录屏（本条由接管线程完成，原线程 `2e7782a0` 因上下文过大、多次被新消息中断而停摆）。视觉批准待确认，未推送手机。**
+
+- 真机「一开包就卡住」根因：`GachaInventory.PrepareDraw` 在 0 张抽取券时返回 `insufficient-tickets` 失败收据，Unity 写回 `lastFailureReason`，但 shipping storefront 从不读取它，只等 20 s 收据超时，期间状态文字被隐藏 → 用户看到撕开的包停在原地。Simulator 有 preview token 预置 8 张券，所以从未复现。
+  - 修复（`GachaPackPaymentRules`）：付费方式 `tickets ≥ 1 → 券`，否则 `coins ≥ 160 → 硬币`（`singleDrawCoinCost` 与 C# `GachaEconomyRules.SingleDrawCoinCost` 由 EditMode 断言保持一致），两者都不足则 CTA 置 disabled、价格行显示「抽取券不足 · 硬币 N/160」。
+  - `onChange(of: model.lastFailureReason)` → `handleDrawFailure`：立即 `gate.reset()`、撕口/鼓口/退场归零、退出 gacha stage、恢复渐变底，`ProductStatusTag` 显示原因 3.2 s。20 s 超时路径保留为真正无响应时的兜底。
+  - 新增 `--gacha-no-funds-preview` 启动参数：不预置资金，Simulator 可复现空钱包路径。
+- 单档吸附（`GachaPackCarouselRules`）：拖动映射改为磁性 detent 曲线（`detentHoldGain 0.7`，过 42% 间距前压住位移），提交条件 `|Δ| ≥ 0.42 × 间距` 或预测终点 `≥ 140 pt` 快甩，每次释放最多 ±1 档；落位弹簧 `k 420 / c 38`（近临界阻尼）。
+- 背景（`GachaPackBackdropAmbienceRules`）：R050 首版细尘 `0.11–1.04 pt`、alpha 0.13–0.34 在 3× 屏与 h264 下完全消失（用户 09-08 07:13「粒子效果又没了」）。改为按深度分布：半径 `0.8 + 1.8·depth^2.4`（大多数 0.8–1.3 pt 细尘，最近 ~20% 为 2.0–2.6 pt 白芯 bokeh 带 2.8× 光晕），alpha `tier(0.72→1.0) × (0.38 + 0.5·depth) × twinkle`，数量 36→84；颜色用档位色向白提 45%（`dustRGB`，否则 STANDARD 银灰在黑底上不可见）；深度与横向位置按黄金比分层，低档较少的粒子也覆盖全深度。R049 的整屏斜向过光已删除（用户：假）。
+- 底部渐变生长（`GachaPackBackdropRippleRules` + `ProductPackBottomGlowGrowth`）：每次切档在 `.id(tier)` 上重建，所选色从底部 `0.96 H` 一条小种子（x 0.16 / y 0.035）线性 1.3 s 按 ease-out³ 长成 `1.6 W × 0.8 H` 椭圆，峰值 0.92 → 稳态 0.46，跟随一圈 1.2 pt 回声弧；上方色相底与弧带延迟 `0.55 s` 再用 `0.6 s` 跟上，保证颜色先在底部出现再向上铺开。R049 版是整屏圆形遮罩且渐变中心落在屏外 25%，肉眼几乎不可见——这是用户「没看到 ripple」的直接原因。
+- 证据：Swift 规则 harness `PASS 220/220`；Swift 预览 `xcodebuild` `BUILD SUCCEEDED`（`r051e-swift-build.log`）；Unity EditMode 聚焦 `26/26`（`editmode-v2s.xml`；`GachaStorefrontIntegrationTests.ShippingStorefrontKeepsNavigationTicketEconomyAndRevealWiring` 改为断言 `GachaPackPaymentRules.priceLine(` / `handleDrawFailure` 接线，旧 `storefrontPriceLabel` 断言过期）；Simulator 录屏 `Artifacts/PackTearNativeCandidate/r050-backdrop-growth/r050-backdrop-growth-clear.mp4`（实速 17.4 s 六档往返 + REFINED→SIGNATURE、GRAIL→1 OF 1 两段 0.35× 慢放），10 fps 抽帧 `growth-strip-10fps.png` 可见 0.2–0.6 s 内暖色从底部升起、上方仍为蓝色；`motes-standard.png` / `motes-top-tier.png` 为 STANDARD 与 1 OF 1 的 1:1 像素裁切，细尘与 bokeh 均可见。
+- 未做：真机复现「开包卡住」修复（需装机，待视觉批准）。
+
+## 2026-09-07 Gacha carousel R048：档位阶梯——越贵的 Pack 越「迫不及待」
+
+> **当前状态：用户 18:54 要求「除了背景以外，carousel 越往后滑、越贵的 pack 越 be more ready，从浮动节奏上有 wriggling / shaking、迫不及待想破壳而出的感觉」。已实现并录屏。视觉批准待确认，未推送手机。**
+
+- 规则（`GachaPackTierLadder`，`FidgetGachaPackPresentation.swift`）：六档单调递增。
+  - 敲击脉冲：STANDARD 无；REFINED→1 OF 1 间隔 4.2/3.2/2.4/1.8/1.3 s，脉冲时长 0.55→0.85 s，横向 1.2→6.0 pt，滚转 0.8→5.0°，鼓胀 0.4%→2%，11 Hz 衰减正弦 × 正弦包络；脉冲之间完全静止；相邻档相位错开 0.37 s。
+  - 到位：往贵的方向翻页时新 Pack 先升 3→8 pt 再落回（0.55 s）；往便宜方向只平滑滑入。
+  - 触感：翻页 snap 走语义管线 `EmitGachaCarouselSnapFromNativeUi(signal)` → `FidgetHapticRouter.Emit(DetentCaptured, 0.30→1.0)`，不新增 raw `IosHaptics` 调用。
+  - 撕封前的舞台 Pack 沿用同档的敲击（`ProductPackTearRevealLayer.idleWriggle*`），撕开即停。
+  - Reduce Motion：无敲击、无升落。
+- 预览：`--gacha-carousel-ladder-preview`（与 gate12 参数并用）自动 STANDARD→1 OF 1 每档停 2.6 s，再退一档；不抽卡。
+- 证据：Swift 规则 `202/202`；Unity EditMode 聚焦 `26/26`；Gate 12 Simulator 录屏 `Artifacts/PackTearNativeCandidate/r048-gacha-carousel-tier-ladder/r048-gacha-carousel-tier-ladder-clear.mp4`（实速 15 s + GRAIL、1 OF 1 敲击 0.3× 慢放），30 fps 抽帧 `grail-knock-burst-30fps.png`。像素测量：CHASE 敲击 ±1.5 pt、GRAIL ±2.9 pt、1 OF 1 ±2.9 pt（包络峰）；脉冲间 < 0.3 pt。
+- 未做：材质/花纹/文字层级阶梯（用户说背景已够）；真机触感权重待 iPhone 验收。
+
+## 2026-09-07 Gacha reveal v2 R047：渐变底保持到翻转，翻过来那一刻再切到当前场景
+
+> **当前状态：用户要求"选中 Pack 后、卡片出现之前场景都不要换，保持渐变底；直到卡片啪转过来那一刻再切到当前场景"。已实现并重录（pipeline `evidence/12-shipping/rev-015/`）。视觉批准待确认，未推送手机。**
+
+- 做法：Unity 收藏盒在 native 层之下，native 渐变底不能一直盖着，所以在选中 Pack 时 storefront 把当前 native 舞台底（`ProductPackArcBandsBackdrop`，所选 colourway）用 `ImageRenderer`（iOS 15 回退 `UIHostingController` 快照）渲染成 1× PNG，路径随 `EnterGachaStageFromNativeUi` 载荷（`r,g,b,strength|path`）传给 Unity；`GachaRevealStageFX.TrySetBackdropImage` 把它贴在贴合屏幕的 quad 上挡住环境。native 层在 handoff 淡出时下面是同一张图，衔接看不出。过 90° 那帧 quad 在 `StageLightUpSeconds 0.35 s` 内淡出（藏在 flash 后面），露出用户当前的环境场景。
+- 渲染顺序修正：洞穴前景岩层 `sortingOrder 1000/1001` 且 `ZTest Always`，而 Unity 透明排序中 sortingOrder 优先于 renderQueue——舞台 quad 提到 1002+，收藏盒所有 Renderer 提到 1010（磨砂壳仍叠在底上），flash 2000。quad 尺寸改用 `Camera.CalculateFrustumCorners`：HeroCamera 的 `fieldOfView` 不是竖直轴，旧的 `2·d·tan(fov/2)` 只覆盖中间一条（这也是此前 75% 压暗从未盖满全屏的原因）。
+- `GachaShippingRevealDirector.Begin` 不再 dispose 从 storefront 接管的 stage FX（之前 case 首帧会把底/色相一起丢掉）。
+- 验证：Unity EditMode 26 passed（Gate12 + Storefront + Choreography，新增 `TrySetBackdropImage`/`SetStageStrength` 接线断言、`StageLightUpSeconds 0.35`）；Swift harness 138/138；export `gate12-export18.log` Success；`xcodebuild` Release Success（`gate12-xcodebuild21.log`）。录屏 `Artifacts/PackTearNativeCandidate/r047-gacha-reveal-v2-scene-at-flip/r047-gacha-reveal-v2-scene-at-flip-clear.mp4`、`r047-before-after-flip.png`、`r047-sheet.png`；history event `61e9f093-7303-4996-b219-8c12fc03f1f9`。
+- 并行线程冲突：本线程曾把文件误写进 `evidence/12-shipping/rev-010`（colourway/镭射线程所有），两支被覆盖的视频已按 hash 从 `Artifacts/PackTearNativeCandidate/r042-gacha-reveal-v2-timeline-canvas` 恢复，本轮改用 rev-015。
+- 同轮其他改动（已随 R041 记录）：抽取券在 tier 名上方且字号更小、按钮「购买 {tier}」、抽出 0.78 s / 落位 0.24 s、时间线 canvas `gacha-reveal-timeline.canvas.tsx`（圆角色块、按阶段配色、slider 同色）。
+
+## 2026-09-07 陀螺仪 → 机构 → Haptic 联动：转子框架耦合、Device Twist 拨盘、推牌／扇牌重力与 flick 驱动、甩动 ShakeBurst
+
+> **当前状态：已集成并有测试 · Build 45（0.1.0/45，development）已安装并启动到 iPhone 15 Pro Max · 待真机验收。** 用户指出“陀螺仪和 haptic 并没有产生联动”，对评估给出的四个方向原话“都要”，随后要求“先把这个 haptic 应用到所有的陀螺上面，就把版本推到我手机上，先感觉一下”。设计圣经 `FDB-INT-015`—`FDB-INT-019`、`FDB-HAP-011` 已锁定（source thread `e24a8eac-4683-4277-bb36-d40dbd46a796`，[T32]）。没有新增任何 raw input → `IosHaptics` 或 raw input → router 的 Haptic 调用；全部新触觉由机构语义事件产生。视觉无变化，不涉及模型外观门禁；Build 45 同时携带工作树中其他任务尚未批准的未提交改动（tracked dirty=79，含 Swift overlay、扇牌 lookdev、Gacha），安装不等于这些改动获批。
+>
+> **Build 45 交付**：job `gyro-haptic-linkage-build45-20260907T111808Z-snapshot`，buildKey `a825eb5f…6a0768`，source digest `cada67dc…4b6b83`，HEAD `62d8bcd`。脚本 `scripts/device_delivery_gyro_haptics.sh`（沿用 Build 42/44 的单写者 snapshot 流程：双锁、受保护源哈希、唯一 `Builds/iOS/DeviceJobs/<job>/Export`、单调 Build 号、签名、安装、启动、console 捕获、`delivery-result.json`）。预检 EditMode 147/147 首轮通过；`PrepareUniqueIosDevelopmentSnapshot` 确认 Build 45；Unity `iOS Device Xcode project created`，export 前后受保护源哈希一致；`xcodebuild` Release `BUILD SUCCEEDED`；`devicectl` install + launch 成功，pid `40947`，console 见 `MagneticSlideDetentAudio.ReportAudioReady` 与 `MagneticSlideTileShippingCoordinator.Awake`。证据目录 `Artifacts/DeviceDelivery/gyro-haptic-linkage/device-delivery/gyro-haptic-linkage-build45-20260907T111808Z-snapshot/`（同目录下两个 `111522Z`／`111638Z` job 为预检被 Unity AI Assistant WebSocket 日志误判打断的失败记录，未消费 Build 号）。无 App Store submission。
+>
+> **蓝色经典补齐**（本轮）：`FidgetSpinnerController` 新增 `SetDeviceFrameRotationRate / ClearDeviceFrameRotation / ApplyDeviceShakeImpulse`，FixedUpdate 内以 `ApplyDeviceFrameCoupling(magneticMode: false)` 耦合自由轮；甩动冲量成功后由该机构自身 `FidgetHapticRouter.Emit(ShakeBurst)`（与其既有 DetentCrossed／Released 同一路径）。`DeviceMotionController` 新增 `FidgetShakeDetector`，用 `PortraitCameraFramer` 基底与 `Vector3.up` 轴推送框架转速并施加甩动，运动控制器本身不发 ShakeBurst。五款旋转玩具现在全部具备框架耦合 + 拨盘 + 甩动。
+
+- **共享映射** `Assets/Scripts/Product/DeviceMotionMechanismCoupling.cs`：Core Motion 右手系 → Unity 左手系。rotation rate（伪向量）按相机基底映射为 `(−rx, −ry, +rz)`，gravity／userAcceleration（真向量）为 `(gx, gy, −gz)`；`0.06 rad/s` 陀螺死区、`12 rad/s` 限幅、`0.06` 重力力矩死区；`ResolveGravityTorqueNormalized` 给出绕机构轴的归一化力矩，正向等于 Unity 正旋转。
+- **B 转子框架耦合**（4 个金属场景）：`FidgetSpinnerMotion.ApplyDeviceFrameCoupling` 纯函数；`RotorRigidbodyController.SetDeviceFrameRotationRate / ClearDeviceFrameRotation`，FixedUpdate 内 `ω_rel −= Δω_phone`，磁吸锁定时随机身共转，`|ω_phone| ≥ magneticBreakawaySpeed (2.2 rad/s)` 才脱档并发 `Breakaway`，脱档瞬间滞后为零，手机仍 ≥ breakaway 时 `_deviceFrameInhibitsCapture` 阻止 capture；手指、AUTO、反向刹车、翻转、kinematic 期间只跟踪不累积。`MetalDeviceMotionController` 每帧用相机基底与 `rotor.SpinAxisWorld` 计算轴向转速并推送。Haptic 只来自转子既有 `Breakaway / DetentCrossed / DetentCaptured` 与高速纹理。
+- **A Device Twist 拨盘**（5 个旋转场景）：`Assets/Scripts/Product/DeviceTwistDial.cs` 积分 `rotationRate.z`，24 档／圈、边界 `±1.0°` 迟滞、`30 ms` tick 限流（只丢弃 tick，索引永不延迟）、`5 rad/s` 满强度、double 累计与安全归一化。`MetalDeviceMotionController` 与 `DeviceMotionController` 以 `SemanticEventRaised(TwistDetentCrossed)` 发出机构事件；`FidgetAppCoordinator.ConfigureProductScene` 订阅两者并转交 `FidgetHapticRouter`。让位规则：`rotor.IsDetentTravelActive`（金属）或 `spinner.IsFingerControlling`（蓝色）时不发 tick。`FidgetSemanticEvent.TwistDetentCrossed = 16` 新增，router `Emit` 走独立 isolated transient（`DeviceTwistHapticRecipe` intensity `0.34…0.62`、sharpness `0.56`），不共用转子 Detent 门。
+- **D 甩动确认**：`RotorRigidbodyController.ApplyDeviceShakeImpulse(delta, strength)` 取代运动控制器直接 `AddFlickVelocity`；手指／AUTO／翻转／刹车期间忽略；磁吸锁定时按同一 breakaway 速度判定；成功改变状态才由转子 `EmitSemantic(ShakeBurst)`。`FidgetShakeDetector` 阈值不变（`1.55 / 0.65 g`、jerk `8 g/s`、`0.14 s`）。`InertiaShift` 通道不变。
+- **C 推牌／扇牌设备驱动**：`EdcDeviceMotionController` 改读 4 参数 `IosDeviceMotion.TryRead`，把世界系 gravity／acceleration／phone angular velocity 推给 `EdcSliderController.SetDeviceMotionSample` 与 `FanCardController.SetDeviceGravity`；手指持有、Library 浏览、离屏时推送“不可用”。它仍不写机构状态、不调用 Haptic。
+  - 扇牌：`FanCardMagneticTrack.Step(..., deviceLoad)` 新增设备档；`deviceLoad = 0` 时与批准原型逐位一致（回归测试比对）。锁定井内 `load = deviceLoad` 形成可见预压，`|load| ≥ 0.050` 且 dwell ≥ `0.12 s` 才一次脱一档并把 `captureTarget` 设为相邻井，由既有 release-capture 弹簧送达并以零速度捕获；端点不再脱档。`FanCardController` 用两片活动牌质心（`ResolveMovingCentroidLocal`）与 `transform.up` 求力矩，`FanCardSpecifications.DeviceGravityLoadScale = 0.18`、死区 `0.06`；设备驱动的跨档视为 user-authorized，进入既有 `EmitFanCard` 与金属 click 音频；`deviceTravelActive` 保证放平手机后的收尾跨档仍授权。
+  - 推牌（shipping Gate12R002 机构）：新增纯类 `MagneticSlideTileDeviceDrive` + `MagneticSlideFlickDetector`（`Assets/_EDC/Candidates/MagneticSlideTileGate12R002/Runtime/`）。最大行程处顶片为 30 档重力摆（breakaway 力矩 `0.30`、`720 °/s²`／单位力矩、阻尼 `2.2 s⁻¹`、`< 90 °/s` 且落在 `5.4°` 捕获半径且力矩 `< 0.30` 才捕获）并叠加框架耦合（`≥ 2.2 rad/s` 脱档）；角度对齐且静止时沿轨 flick（`1.10 / 0.45 g`、jerk `9 g/s`、`0.25 s` cooldown，方向与加速度相反）以 `0.16…0.32 m/s` 滑到远端。控制器把命令翻译为 `TryBeginRotation / TrySetAngle / TryCaptureNearestDetent / TrySetTravel(…, userAuthorized: true)`，互锁、边缘提示、端点 `Breakaway / DetentCaptured` 与 `DetentCrossed` 全部沿用机构原有语义 → `EmitMagneticSlider`。`MagneticSlideTileShippingMechanism` 暴露 `RotationBrokenAway / IsAngleAligned / RotationAxisWorld / SlideDirectionWorld / ResolveMovingTopLeverWorld()`（renderer 缓存，无 per-frame allocation）。手指开始拖动时 `deviceDrive.Cancel()`。旧 `MagneticDetentTrack1D` 直线路径未接入（非 shipping 场景）。
+- **Library／离屏／Reset**：`ApplyLibraryPreviewPose` 对三个运动控制器调用 `SetMechanismDriveEnabled(!libraryPreviewActive)`；`ResetReference`／`SuspendMotion` 清空转子样本、拨盘累计角与 EDC 样本。进度／经济遥测未改：设备驱动不计入 `accumulatedActivityDegrees` 或成长。
+- **测试**：新增 `Assets/Tests/Editor/DeviceMotionMechanismCouplingTests.cs` 26/26 Passed（映射符号与死区、拨盘静置 60 s 零 tick／360° = 24 档／迟滞无抖动／限流不延迟索引、框架耦合往返净零与 breakaway／capture 抑制、扇牌零载荷逐位一致／次阈值只预压／持续倾斜逐档到端点／30·60·120 Hz 同档／手指优先、flick 迟滞与方向、滑片到端点、未对齐忽略、重力摆脱档—摆动—零速捕获、次阈值保持、扭转脱档滞后、样本映射、架构字符串门禁）。回归：`ProductArchitectureTests`／`SpinnerEnvironmentTests`／`MobilePerformanceBudgetTests`／`HapticSpeedTextureTests` 中与本改动相关的全部通过；`FanCardAcceptanceTests 23/23`、`EdcSliderAcceptanceTests 9/9`、`MagneticDetentTrack1DTests 16/16`、`MagneticSlideTileGate12R002Tests 8/8`、`FidgetSpinnerMotionTests 38/38`。同一工作树上 5 个与本改动无关的既有失败（Swift overlay 字符串 ×2、`Assets/StreamingAssets` 存在、推牌 framing、灯光数值）来自其他进行中的任务，未处理。
+- **仍待**：用户在 Build 45 上真机验证（a）手机绕转子轴转动时转子滞后方向与预期一致——若相反只需翻转 `ResolvePhoneAngularVelocityWorld` 的 z 项；（b）拨盘 tick 与转子棘轮可盲辨；（c）扇牌 `0.18` 与推牌 `0.30` 倾斜阈值、flick 阈值的误触率；（d）静置桌面 60 s 零自运动、零 tick；（e）Library 横滑期间无机构驱动。视觉无变化，无需外观预览批准。Device Acceptance=`pending-user-validation`。
+
+## 2026-09-07 Gacha Pack 镭射箔面 R045→R046：陀螺仪倾斜随动 + 摇一摇镭射过光，镭射只在图案与文字（FDB-GAC-036）
+
+> **当前状态：用户 16:57 问「设备陀螺仪能不能和这个 pack 进行联动，在监测到陀螺仪有晃动的时候，会有镭射的过光效果」并给出 LerSentAI 视差镭射卡参考（R045，rev-013）；17:22 看过整袋镭射后修订「应该只有在中间的图案部分和文字部分做镭射效果」（R046，rev-014）。两轮都已在 shipping storefront 落地并重录 Gate 12。Simulator 没有陀螺仪，录屏用脚本手势跑同一套管线；真机倾斜／摇一摇灵敏度待 iPhone 验收。视觉批准待确认，未推送手机。**
+
+- **R046 foil mask**（17:22 修订）：sheen 的 mask 由整个袋身改为每档 `Assets/Plugins/iOS/GachaPacks/gacha-pack-<tier>-foil.png`（384×512，白色 + alpha）。生成器 `Tools/GachaPackFoilMask/build_pack_foil_masks.py`：emblem 取压印轮廓段（高通 > 14、去 < 20 px 碎片）的凸包（外轮廓为凸形，凸包即完整剪影；模板六档相同，只从 STANDARD 取一次并内缩 1 px）；档位文字取 y 390–418 带内高通 > 22；「FIDGET ARCHIVE／SERIES 01」为暗印，取高通 < −9；均去碎片、膨胀 1 px、0.8 px 软边。重跑逐字节一致。`GachaPackTier.foilAssetName`；`ProductPackHolographicSheen(maskAssetName:)`；`ProductPackIdleFloat.sheenMaskAssetName`；`ProductPackTearRevealLayer.sheenMaskAssetName`（缺省回退袋身）。Xcode export 与预览工具的 `GachaPacks/*.png` 通配自动带上六张 mask。验证：harness 193/193；Unity EditMode 48 passed / 2 skipped（新增六张 foil PNG 与生成器存在性、mask 接线字符串）；export `gate12-export17.log`、`xcodebuild` `gate12-xcodebuild20.log` Success。证据：`Artifacts/PackTearNativeCandidate/r046-pack-holographic-foil-emblem/`（`-clear.mp4`、`r046-stage-sweep-10fps.png`、`r046-six-packs-foil-rest.png`、`r046-foil-mask-overlay.png`）；pipeline `evidence/12-shipping/rev-014/`，history events rev-013 用户意见 + rev-014 ready。录屏实测 T0 ≈ 13.13，reveal 15.9（T0+2.77）。
+
+- **规则**（`GachaPackHolographicSheenRules`，纯函数）：倾斜 → 光带位移 `tiltOffset`（gravity 相对静止姿态的偏移 × 1.6，夹在 ±0.60 袋宽，纵向权重 0.35）与 Pack 随手倾斜（yaw ±9°、pitch ±6°）；无运动时光带随待机 yaw 时钟（±0.22 袋宽）；摇一摇 → `GachaPackShakeDetector`（userAcceleration 模长 ≥ 0.55 g 触发、< 0.18 g 重新武装、1.2 s 冷却——只用 user acceleration + 滞回 + 冷却，符合仓库 shake 约束）→ 一次 0.85 s 镭射过光（`sweepOffset` −1.25 → +1.25 袋宽 easeInOut，`sweepOpacity` 0.30 → 0.78 峰值在 22% → 回落）。`pose(...)` 汇总 idle + tilt + sweep + Reduce Motion（RM：光带静止、Pack 不倾斜、摇一摇只做亮度脉冲）。
+- **运动源**（`FidgetGachaPackMotionFeed.swift`，新文件）：`GachaPackMotionFeed` 拉式采样——由 Pack 的 `TimelineView` 每帧调用 `sample(at:)`，无 timer、无每帧 `@Published`；通过 `@_silgen_name` 调 `CodexIosDeviceMotionNativeUiStart/Stop/Read` 复用 Unity 陀螺控制器的同一个 `CMMotionManager`。`CodexIosDeviceMotion.mm` 新增双客户端仲裁（Unity 与 native UI 各一标志，两者都离开才 `stopDeviceMotionUpdates`），任一方离开不会切断另一方。100 ms 低通 + 3 s 基线回中（手停下时光带回到中位）。生命周期：Pack 在屏（choosingPack…preparingCase）start，handoff／complete／receiptRecovery 与 `onDisappear` stop。Simulator `deviceMotionAvailable == false` 时，Gate 12 预览改用脚本手势（3.6 s／5.3 s 正弦倾斜 + `simulateShake()`）。
+- **组件**：`ProductPackHolographicSheen`（青→白→品红→金宽柔光带 + 细白激光芯，−26°，`plusLighter`，以袋身 raster 作 mask；封条不受影响，避免飞出后的封条区域被涂亮）；`ProductPackIdleFloat` 新增 `motion / sheenBodyAssetName / reduceMotion`（carousel 只给选中 Pack）；`ProductPackTearRevealLayer` 新增 `idlePitchDegrees / sheenPose`；撕封开始后 sheen 冻结。
+- **预览脚本**（仅 Gate 12）：carousel 每档停留时 `simulateShake()` 一次；选中后台上停 1.8 s 并摇一次再撕封，T0 相应后移，拍点相对 T0 不变。预览工具补 `@_cdecl` 桩（无 .mm），`project.yml` 加入新文件并 `xcodegen generate`。
+- **验证**：Swift harness 192/192（新增 13 条：位移夹取、倾斜角、待机相位、低通权重、sweep 进度／位移／不透明度、pose 四态、shake 滞回与冷却、脚本手势幅度）；Unity EditMode 48 passed / 2 skipped（新增 `PackHolographicSheenFollowsDeviceMotionWithShakeSweep`，含 `.mm` 仲裁、feed 无自建 `CMMotionManager`、storefront 生命周期；`SpinnerEnvironmentTests.ProductCoordinatorWiresEnvironmentWithoutEnteringInteractionOrHaptics` 通过）；`GachaShippingNativePreview` BUILD SUCCEEDED；export `gate12-export16.log` Success；`xcodebuild` Release Success（`gate12-xcodebuild19.log`）。同轮全量 `SpinnerEnvironmentTests` 另有 2 个与本改动无关的既有失败（magnetic-slide-tile 取景 0.38、ledge 光池 1.08），未处理。
+- **证据**：`Artifacts/PackTearNativeCandidate/r045-pack-holographic-sheen-motion/r045-pack-holographic-sheen-clear.mp4`（实速 + 0.5×）、`r045-stage-sweep-10fps.png`、`r045-carousel-sweep-10fps.png`、参考 `r045-reference-lersentai-contact-sheet.png`；pipeline `evidence/12-shipping/rev-013/`，history event `8ff73b93-…`。录屏实测：carousel 过光 ≈ 5.8／8.5 s，台上过光 11.7–12.6 s，T0 ≈ 13.43，reveal 16.2（T0+2.77）。
+- **仍待**：真机上倾斜增益／摇一摇阈值的手感校准；rest 态光带不透明度 0.30 是否偏强待用户判断；封条是否也要吃 sheen（现为袋身 only）。
+
+## 2026-09-07 Gacha Pack 撕包背景 R044：六档金属 colourway（银／蓝宝石／玫瑰金／香槟金／紫晶金心／全光谱）
+
+> **当前状态：用户看过 rev-011 六档色相旋转图后指出「几个颜色都太相近了，应该可以增加一些金银这种表示 luxury、premium 的感觉」。已改为每档一套显式金属 palette 并重录（`evidence/12-shipping/rev-012/`）。视觉批准待确认，未推送手机。**
+
+- **规则**（`GachaPackArcBackdropRules.Colourway`，取代 R043 的 `HueTransform`）：`forTier` 映射 STANDARD→`silver`、REFINED→`sapphire`、SIGNATURE→`roseGold`、CHASE→`champagneGold`、GRAIL→`amethystGold`、1 OF 1→`source`（源 sky／teal／amber／rose 原封不动）。`primaryStops(for:)`／`softStops(for:)` 只替换四个颜色 stop（soft 层向白提 22%），位置与 alpha 形状沿用源；`alphaScale` 按档位提亮（银 1.8、蓝宝石 1.2、玫瑰金 1.25、香槟金 1.25、紫晶 1.2、源 1.0）——午夜底偏蓝黑，低 alpha 的金属色会糊成橄榄／灰，银没有色相可依托所以提得最多。每套都是双色调金属（亮心／饱和中环／深色带）。
+- **第一版金属色的教训**：淡色（银 #B3C1D3、香槟 #F3C75B）在源 alpha 下混进午夜底变成灰雾与橄榄色，与 R041 被否的「灰阶」同病；改为高饱和金属色 + alpha 提亮后才读得出金属感。harness 强制任意两档在色带与 glow 两环上 RGB 距离 ≥ 0.25（曾捕获源 vs 玫瑰金、源 vs 香槟金、蓝宝石 vs 紫晶三次过近）。
+- **接线**：`ProductPackArcBandsBackdrop(intensity:colourway:)`，storefront 传 `Colourway.forTier(selectedPack)`，`.id(selectedPack)` + `.transition(.opacity)` crossfade；`usesPackArcBackdrop` 含 `.choosingPack`；`visibility(tearProgress:stageEligible:)` 只随封条退出归零。预览工具 `--pack-arc-bands-tier=<rawValue>` 渲染任一档底色；`--pack-arc-bands-pack=<rawValue>` 渲染「该档卡包 + 文案 + 底色」（撕封台位置与尺寸）；`--pack-arc-bands-source-only` 仍渲染源 palette。
+- **验证**：Swift harness 179/179；Unity EditMode 46 passed / 2 skipped（`GachaStorefrontIntegrationTests` 断言 `Colourway.forTier(selectedPack)`、`case .oneOfOne: return .source`、无 receipt 输入）；`GachaShippingNativePreview` BUILD SUCCEEDED；export `gate12-export15.log` Success；`xcodebuild` Release Success（`gate12-xcodebuild18.log`）。录屏实测 T0 ≈ 9.73 s：翻页 5.7／7.7 s 银 ↔ 蓝宝石；reveal 12.5（T0+2.77）、标签 13.7（T0+3.96）。
+- **证据**：`Artifacts/PackTearNativeCandidate/r044-arc-bands-metallic-colourways/r044-gacha-arc-metallic-clear.mp4`（实速 + 0.5×）、`r044-tier-colourways.png`、`r044-arc-tier-*.png`（六张全尺寸）、`r044-pack-with-colourway-sheet.png` / `-strip.png` / `-<tier>.png`（六档卡包 + 对应底色，2026-09-07 14:22 用户索取）、`r044-carousel-switch.png`、`r044-contact-sheet-5fps.png`；pipeline `evidence/12-shipping/rev-012/`，history events `0c295217-…`（rev-011 用户意见）、`8bdd6fa3-…`（rev-012 ready）。
+- **仍待**：FDB-GAC-035 第二阶段（午夜底与 dim cave 合成透明度）未做；各档具体色值待用户视觉批准后再锁定。
+
+## 2026-09-07 Gacha Pack 撕包背景 R043：arc 渐变底进入 carousel，随所选 Pack 变色（colourway 方案已被 R044 取代）
+
+> **当前状态：用户看过 rev-010 录屏后要求「这个渐变色的背景在carousel的时候也要出现，在切换不同pack的时候要有变化」。已按此修订 `FDB-GAC-035` 并落地：arc-bands 从 carousel 阶段起就是背景，切 Pack 时 colourway 随 tier 变化；Gate 12 Simulator 重新导出并录屏（`evidence/12-shipping/rev-011/`）。R043 的色相旋转 colourway 被用户评为「太相近」，已由 R044 的显式金属 palette 取代；carousel 接线与 visibility 规则沿用。**
+
+- **规则**（`GachaPackArcBackdropRules`）：`hueTransform(packAccentRGB:)` / `colourway(_:transform:)` 把源 palette 整体做色相变换，使最宽的 rose 色带落在所选 tier accent 的色相上；默认旋转，若旋转让可见环落入 60°–170° 绿色区更多（`greenLoad`：amber glow ×2、中心两环 ×1）则改为绕色带镜像。结果：STANDARD／1 OF 1 中性（饱和度 < 0.2）= 源 palette；REFINED 旋转（蓝带／紫 glow／金心）；SIGNATURE 镜像（铜带／粉 glow／青心）；CHASE 镜像（金带／红 glow／青心）；GRAIL 镜像（紫带／天蓝 glow／金心）。alpha、位置、三组椭圆、blur、lift、点阵、午夜底全部不变；不读取 receipt／rarity。
+- **接线**：`usesPackArcBackdrop` 加入 `.choosingPack`；`visibility(tearProgress:stageEligible:)` 去掉选中后的 crossfade-in，只随封条退出归零；`ProductPackArcBandsBackdrop(intensity:packAccentRGB:)`，storefront 传 `selectedPack.storefrontAccentRGB`，用 `.id(selectedPack)` + `.transition(.opacity)` 在 `selectionDuration` 内 crossfade。`ProductPackHueBackdrop` 仍在其下（不透明 arc 完全覆盖，待 FDB-GAC-035 第二阶段 cave 合成时再一并处理）。预览工具新增 `--pack-arc-bands-tier=<rawValue>`。
+- **验证**：Swift harness 168/168（新增：各档色带色相 = accent、glow 不落绿区、rotate/mirror 取绿量更小者、alpha／位置不变、相邻 Pack 色带 ≥ 15°、中性档保持源 palette）；Unity EditMode 46 passed / 2 skipped（`GachaStorefrontIntegrationTests` 改为断言 carousel phase、`packAccentRGB: selectedPack`、无 receipt 输入、新 visibility）；`GachaShippingNativePreview` BUILD SUCCEEDED；export `gate12-export14.log` Success；`xcodebuild` Release Success（`gate12-xcodebuild17.log`）。
+- **证据**：`Artifacts/PackTearNativeCandidate/r043-arc-bands-carousel-colourway/r043-gacha-arc-carousel-clear.mp4`（实速 + 0.5×）、`r043-tier-colourways.png`（六档，shipping 组件渲染）、`r043-carousel-switch.png`（STANDARD → REFINED → STANDARD → 选中 → 撕封）、`r043-contact-sheet-5fps.png`；pipeline `evidence/12-shipping/rev-011/`，history events `8e495fc0-…`（rev-010 用户修订）、`2f55a752-…`（rev-011 ready）。录屏实测 T0 ≈ 9.53 s：翻页 5.5／7.5 s 处 arc 变色，reveal 12.3（T0+2.77）、标签 13.5（T0+3.96）。
+- **仍待**：FDB-GAC-035 第二阶段（午夜底与 dim cave 的 full-hybrid 合成透明度）未做；SIGNATURE 与 CHASE 的 accent 只差 18°，两档 colourway 相近（铜／粉 vs 金／红），如需更大区分需用户决定。
+
+## 2026-09-07 Gacha Pack 撕包背景 R042：OpenSourceUI source-faithful native baseline
+
+> **当前状态：R041 灰阶重设计被用户否决后，R042 已逐值恢复 OpenSourceUI `DarkArcBandsBackground` 的固定 sky／teal／amber／rose 色相、两组连续 RGBA stops、三组椭圆裁切、`40/64 px` blur、`0.08` white lift、`4 px` 周期／`1 px` 半径点阵与不透明午夜底。该层不再接收 Pack tier、receipt 或 rarity。source-only 原生渲染与同尺寸 browser reference 已通过像素及人工对照，Pack 四态预览已生成。当前仍是视觉候选：不透明 source base 在真实 shipping flow 会遮住 `FDB-GAC-033` 的 dim Unity cave，full-hybrid base 合成尚未校准，所以 Not Shipping Ready。视觉批准待确认，未推送手机；真机验收未执行。**
+
+- **实现**：`GachaPackArcBackdropRules` 以公开 source stop 数据锁定原始 RGBA 与几何；`ProductPackArcBandsBackdrop` 删除 `accentRGB`／`tonalColor`／人工暗谷和 `.linear` drawing group，恢复 source dot 的 `.70 × .04` 两级透明度；storefront 只传 phase visibility，保留 carousel crossfade、commit hold 与 whole-case 前归零时序。`--pack-arc-bands-source-only` 使用同一 shipping 组件做 isolated reference render。
+- **视觉证据**：`Artifacts/PackTearNativeCandidate/r042-source-faithful/r042-source-vs-native.png` 左为 browser reference、右为 native（相同顶部裁切），SHA-256=`cfc0587e064b725eb6468c17ce70b74ff7abcb9e221495ecf229e936d04e803b`；状态栏以下全画面平均绝对误差 `R=1.323 / G=1.246 / B=1.871`、合计 `1.48 RGB`、P95=`5 RGB`。Pack 四态联系表 `r042-dark-arc-pack-contact-sheet.png` SHA-256=`f0a7853cc9d8862e9a25cbcd09d8edfe753cd2fdc01a5d14ec0e6b1d81d2f822`，顺序为 sealed／partial／commit／faded；最后一态验证 overlay 已归零。
+- **验证**：fresh Swift rules harness `141/141 PASS`；Unity 6000.5.6f1 focused `GachaStorefrontIntegrationTests`=`2/2 passed`、0 failed/skipped/inconclusive，XML `r042-source-faithful-unity-editmode-results.xml` SHA-256=`ada1515fb63f2734676df4e4176104b7405a9643fbf3ccf5371e4d00245ac30f`；iOS Simulator Debug 编译／链接 `BUILD SUCCEEDED`，iPhone 17 Pro Simulator 生成全部 `1206×2622` PNG。另一 Unity task 的既有 lock 被原样等待，没有删除 lock 或终止进程；最终测试已释放项目 lock。
+- **下一门禁**：用户先确认 R042 是否忠实保持原设计；若批准，再仅校准午夜 base 与真实 dim cave 的合成透明度，彩色 arc／点阵不得改色或削弱，并生成 cave＋Pack＋whole-case 的 full-hybrid shipping preview。完成该视觉门禁前不得 build／install 到手机。
+
+## 2026-09-07 Gacha Pack 撕包背景 R041：OpenSourceUI Dark Arc Bands 灰阶候选（用户已拒绝）
+
+> **当前状态：R041 shipping native 灰阶候选已接入并完成技术验证，但用户明确否决其视觉，原话为“你这个 background 可以说和他原来的这个设计是一点关系都没有啊？你自己就是连色相、包括细节、质感全都不对”。审计确认该版主动把源 sky／teal／amber／rose 连续色带改成 STANDARD 单色灰阶、插入人工明暗谷、削弱 lift／soft／点阵并把午夜底半透明化；因此它不是 faithful port，不能继续作为批准候选。代码和证据仅作 rejected history；下一版按 `FDB-GAC-035` 先逐值复现源视觉，再做 full-hybrid 合成。未推送手机；真机验收未执行。**
+
+- **来源与许可证**：实现审计并固定 OpenSourceUI `DarkArcBandsBackground` commit `d239c3463c984a099dd2cb67817a41fc0bcc876f`、Git blob `b13404dd73e02a4267b48ff1136aa3c1b2205827`、MIT / Copyright © 2026 Bidyut Kundu。原 React／Tailwind runtime 未引入；完整 notice 在 `Docs/OpenSourceUI-DarkArcBands-MIT.md`，并由 `Assets/StreamingAssets/ThirdPartyNotices/OpenSourceUI-DarkArcBands-MIT.txt` 随 app bundle 出货。
+- **shipping 实现**：`FidgetGachaPackPresentation.swift` 新增 `GachaPackArcBackdropRules`，保存三层椭圆的宽高、独立 X/Y radial 比例、模糊、圆点密度、透明度与确定性 visibility；`FidgetProductUIComponents.swift` 新增 `ProductPackArcBandsBackdrop`，只用 Pack display-tier tonal variants，不读 receipt rarity，STANDARD 保持银灰中性，静态圆点、无 hit testing、对 accessibility 隐藏，并处理 Reduce Transparency；`FidgetGachaShippingStorefront.swift` 在 `.selectionRive/.tearPack/.waitingForReceipt/.preparingCase` 接线，`(1-selectionBackdropOpacity) × sealExitOpacity` 让其在 `tearProgress=1` 与 `.handoff` 前为 0。底层 alpha=`0.58`（Reduce Transparency=`0.86`），避免覆盖 `FDB-GAC-033` 的 dim cave；旧亮 donut／generic shockwave 未恢复。
+- **测试与构建**：Swift rules harness `138/138 PASS`（source pin、stop arrays 等长／有序／范围、120%/88% 与 110%/80% 椭圆、carousel crossfade、commit hold、seal midpoint 0.5、progress 1 与 phase gate 归零）；Unity 6000.5.6f1 focused EditMode `GachaStorefrontIntegrationTests`=`2/2 passed`、0 failed/skipped/inconclusive，结果 `Artifacts/PackTearNativeCandidate/r041-dark-arc-bands/unity-editmode-results.xml` SHA-256=`9e2353091b98a94dd3280bc5866cd33fd10871540f328b0e15fc6fa414b31597`；`GachaShippingNativePreview` iOS Simulator Debug 编译／链接 `BUILD SUCCEEDED`，部署目标 iOS 15.0，随后安装并启动于 iPhone 17 Pro Simulator。Unity 退出后项目 lock 已释放。
+- **shipping-source 视觉证据**：四态联系表 `Artifacts/PackTearNativeCandidate/r041-dark-arc-bands/r041-dark-arc-bands-contact-sheet.png`（左上 sealed、右上 partial、左下 commit、右下 faded；SHA-256=`0a24e4791f9910e83b87633a9ff98dcc7cf899d47a76e23d957d8ba722d42f8d`）；真实 Simulator H.264 `r041-dark-arc-bands-tear-preview.mp4`（`1206×2622`、30 fps、1.60 s、SHA-256=`802c712ddccfe80dbb3c25afa83184be2901322e251020e7a226d45f9b99e416`）。faded 帧验证 native arc 为 0；该 host 的底层是纯黑，仅为 component/Pack 时序证据，不能替代真实 Unity cave／whole-case 合成验收。
+- **否决与下一步**：当前联系表／短片已被用户拒绝，不再等待批准，也不得复制到 `Docs/DesignBibleAssets/`。下一版必须先逐值恢复源四色 stops、alpha、lift、点阵与不透明午夜 baseline，并以同尺寸 browser reference／isolated native render 做并排和像素校准；只有 source fidelity 成立后，才进入真实 Unity dim cave＋Pack＋whole-case full-hybrid 合成并校准 base 透明度。现阶段不得 build／install。当前不改 Unity 3D scene、case、toy、奖品材质、物理或 Haptics。
+
+## 2026-09-05 → 09-08 龙鳞三叶（GEEONE，`metal-three-blade`）：源视频 intake → 12 Gate 全部批准 → Build 47 真机验收通过
+
+> **当前状态（2026-09-08）：12/12 approved（pipeline.json rev 66）。Gate 12 rev-007（光照提亮）由用户 18:36“推到手机上吧”chat 批准；Build 47 安装启动；用户随后确认“Build 47 已装到手机，用户真机验收通过”。DecisionState 与 DeliveryState 均已闭合：出货场景 `ThreeBladeMetalOriginal.unity`，材质 `M_GeeoneSatin / M_GeeoneDiscTurned / M_GeeoneHubDark`，`SpinnerImageBasedLightingController` GEEONE 详情提亮。所有 mm 仍为 85 mm user-authorized-provisional。剩余待用户决定：`FDB-PREF-032` 的 catalog 收敛（`gold-four-wing` / `pointed-three-blade` 旧条目），本轮未动。下方按时间保留完整决策链。**
+>
+> 历史起点（09-05 晚）：用户 22:22/23:07 否决 rev-004/rev-005 几何（叶尖弧度、楔形过渡、凸凹细节不符，要求逐帧对比），22:31 要求完整跑 Obsidian 剪藏对应的视频。已用 yt-dlp 下载小红书源视频（36.6 s，720×1280），ffmpeg 10 fps 抽帧 366 张，完成 Gate 01 rev-003 与 Gate 02 rev-006。
+
+- Gate 01 rev-003：`evidence/01-intake/rev-003/obsidian-geeone-video/geeone-source.mp4`（sha256 记录于 `intake-record.json`，含 yt-dlp 版本、format、URL）、25 张关键帧（逐张哈希）、7 张 10 fps 缩略表 + 2 fps 总览；rev-002 的 7 张剪藏截图重新关联。44 个 artifacts。
+- Gate 02 rev-006：`measure_geeone_video_frames.py` 对桌面平放段 f0077/f0078 剪影做椭圆→圆倾斜校正后量测：盖/外接圆 0.485±0.009（照片 0.536）、平盘/盖 0.80、叶尖角 67°±3、叶尖圆角 ≈0.045 R、每缺口露盖弧 ≈56°（透视未校正，36–71°）。12 条 source-linked claims（`claims-rev6.json`），15 条旧 claim superseded；**65 mm → 85 mm user-authorized-provisional（追加式 supersession，65 mm 历史保留；适用范围仅未来 Gate 03–05；不得标 measured）**。参考 CAD `reference-cad-from-video.{png,pdf}`（顶视 + 剖面示意，比例单位 R）；`frame-vs-rev004-comparison.png` 四组逐帧对比；`frame-zooms/` 细节放大。
+- 视频揭示、与此前指示冲突、待用户裁决的四项：盖侧（冠环+裙）露出≈0.14 R≈0.8×机身厚（vs“高出 1.5 mm”）；每片叶根有开口朝盖的三角凹坑、外壁斜切（vs“实心”）；盖/外接圆 0.485（vs 0.536）；平盘/盖 0.80（vs 0.70）。另：倒角带内 3–4 个平面（“楔形过渡”/龙鳞），冠环下裙为多边形分面。
+- 未知项保持 unknown：全部绝对 mm、凹坑深度/通孔、倒角各面角度、缝宽、轴承型号、楔数精确值（24±2）、材质牌号。
+- 验证：`validate_model_pipeline.mjs metal-three-blade`（只读）0 errors、0 missing（rev 29）；未运行 `--refresh`；无 git 操作；无安装。
+- 2026-09-06 07:27 用户要求“把表面的细节再还原一下，确保带入 Blender 建模”。Gate 02 rev-006 追加（仍 ready_for_review）：`surface-detail-atlas.png`（8 帧 2–4× 放大，D01–D10 标注）；`surface-detail-spec.json`（10 项 `mustBeGeometry` 细节：D01 平盘、D02 冠环三角 24±2、D03 盖裙第二排 ≈24 平面、D04 平台、D05 叶边倒角鳞面带每边 5–7 平面倾角交替、D06 竖壁 ≈0.45×厚、D07 叶尖 67°/圆角 0.045R/脊、D08 叶根三角凹坑、D09 暗缝与缺口露盖、D10 底面镜像），每项含来源帧、置信度、Gate 06 检查项与 Blender 构建要求；`check_surface_detail_coverage.py` 门禁：builder 必须逐项 `# detail: UTS-Dxx` 标记，缺一项即 exit 1，Gate 05/06 登记脚本以此阻断——对历史 rev-005 builder 实测 0/10（`detail-coverage-current-builder.json`）。Gate 01 补入 6 张被引用关键帧（rev 31，validator 0 errors）。
+- 2026-09-06 07:53 用户“再生成一版”：`reference-cad-from-video-v2.{png,pdf}`（`draw_geeone_reference_cad_v2.py`）在 v1 轮廓上加入 D01–D10：顶视画出鳞面带分界（每边 6 面）、平台边、叶尖脊、凹坑与斜切内三角、冠环三角与 24 边形盖裙；A-A 加凹坑占位（深度未知，橙虚线）与盖侧两排；C-C 示意相邻鳞面倾角交替；Detail D/E 为鳞面带与盖侧两排刻面展开。v1 保留为历史。validator 0 errors（rev 32）。
+- 2026-09-06 07:59 用户：“三个叶片的比例好像要更大一点，边缘都是弧形，把叶面内部的细节还原到 CAD 图上”。在校正剪影上直接量叶片半宽曲线（x/R 0.50→半宽 0.399 … 0.90→0.146 … 1.00→0.031，3 叶平均）：叶根接盖于极角 ±39°、缺口两侧径向直边、肩 r≈0.64 R 处最宽 ≈0.80 R（≈0.82×盖径）、边缘为凸弧、叶尖圆角 ≈0.085 R（推翻此前 67° 直边/0.045 R 读数，claim `tri-r6b-blade-planform` 取代 `tri-r6-blade-outline-teardrop`）。`reference-cad-from-video-v3.{png,pdf}` 由该曲线直接绘出，并画出叶面内部：平台边界、鳞面带 6 面分界、叶尖脊、铣削平底三角凹坑（圆角 0.025 R、边沿倒角、底边半宽 0.135 R、尖端 0.70 R）、过凹坑横剖 C-C。`surface-detail-spec.json` 同步 D07/D08 与 `planformProfile`。validator 0 errors（rev 33）。
+- 2026-09-06 08:10 用户：“尖角没有那么尖锐，应该几乎是圆的半径的弧度；三角下方两个叶片的底边几乎近似平行”。把实测半宽曲线（x 0.50–0.85）拟合为**圆角等边三角 + 三个径向缺口**：直边与叶轴成 30°、距中心 0.606 R（虚拟顶点 1.212 R），叶尖为 R≈0.212 R（≈9 mm @85 provisional）跨 120° 的大圆弧、顶点在外接圆上，相邻两叶底边共线；缺口为 42° 径向扇形切到盖圈，肩 0.64 R。残差 ±0.02 R；x≥0.90 实测偏窄系叶尖暗色倒角低于剪影阈值。`reference-cad-from-video-v4.{png,pdf}` 由该模型绘出（叶面内部细节同 v3），claim `tri-r6c-blade-planform-triangle` 取代 `tri-r6b`。validator 0 errors（rev 34）。
+- 2026-09-06 20:41 用户截图批注“这个尖角没有那么突出”（v4 肩部）：肩部改为 ≈0.09 R 圆角平滑过渡（`planformProfile.parametric.shoulderFilletRadiusToR`），`reference-cad-from-video-v5.{png,pdf}`，claim `tri-r6d-shoulder-fillet`，用户截图存为 user-input 资产。validator 0 errors（rev 35）。
+- 2026-09-06 20:46 用户两张截图（f0148/f0134 红圈、f0077 盖）：“过渡应贴圆心、下层拐角几乎是锐角、斜切线有弧度，你做成了钝角拐角”；“中间凹下去、切成约 14 片、放拇指”。`trace_geeone_blade_root.py` 逐叶在校正剪影上描迹（`frame-zooms/blade-root-traces.png`）：叶边是**凸圆弧**而非直边——4 条干净边圆弧拟合 rms 0.0006–0.0010 R（直线 0.011–0.015 R），R_s≈1.37 R、圆心在叶轴垂线上距盖心 0.92 R，弧直接扫到盖圈，**无肩角**；相邻两弧在角平分线交于 r≈0.49 R（距盖圈 ≈0.005 R ≈0.2 mm @85），弧与盖圈交角 ≈18°（锐角新月尖）；叶尖两弧夹 ≈90° + 0.03 R 圆角（“三个尖角不够尖锐”与本读数一致，v4/v5 的 0.21 R 大圆弧作废）。盖：展开图 + FFT 计数冠环 **14±1 楔 = 28 三角**（24 作废），盖裙 14 鳞 ×2 排（f0200/f0208），盘 0.82×盖（0.80–0.85）；f0077 远侧冠环被压缩到侧向 1/3 ⇒ 冠环由盘缘向外向下（盘缘为最高圈）；盘内凹面拇指位按用户口述登记为 user-stated（f0204/f0208 锥形放射明暗 + 同心车纹支持“车削浅锥/碟”，凹深 unknown，CAD 6° 占位）。`reference-cad-from-video-v6.{png,pdf}`（顶视 + A-A + Detail D 缺口对比 v5 + Detail E 盖顶 E1/E2 二选一 + 拟合表）；`planform-v6-on-frames.png` 把 v6 轮廓反投影到原帧 f0077/f0078；`cap-evidence-v6.png` 盖证据板。claims `tri-r6e-*` 5 条新增，`tri-r6c/tri-r6d/cap-crown/table-ratio/seam/unknowns` superseded；Gate 01 rev-003 补入 f0192/f0200/f0208。validator 0 errors、0 missing（rev 37）。
+- 2026-09-07 07:53 用户对 v6 缺口处红箭头：“这个部分是有些间隔的，不需要连接在一起”。根部描迹复核（4 条干净边）：叶边都在 x≈0.31 R 到达盖圈（极角 51–53°），随后剪影沿盖圈延伸到 ≥62°——相邻叶片不相接，每缺口露盖 ≈16°；单一大圆弧无法同时贴合叶边中段与该根部点（残差 −0.025 R），故 v7 = 大凸弧（R≈1.37 R）→ 自 x≈0.40 R 起 R≈0.15 R 内收圆弧 → 止于盖圈极角 52°，与盖圈切线夹 ≈60°。`reference-cad-from-video-v7.{png,pdf}`（Detail D 对比 v6 的 V 交点），`planform-v7-on-frames.png` 反投影叠加，`blade-root-traces.png` 重出（v6 vs v7）。claim `tri-r6f-blade-planform-gap` 取代 `tri-r6e-blade-planform-arcs`/`tri-r6e-notch-exposure`；D07/D09 与 `planformProfile.parametric.rootBlend` 同步；用户截图与原话存为 user-input 资产。validator 0 errors、0 missing（rev 38）。
+- 2026-09-07 08:25 用户对盖部截图：“这个圆应该以圆心为中心，作为中心点，然后被切分成14片。均分”。f0077 校正后对盘做角向高通展开（`disc-unwrap-f0077-highpass.png`）：受光半周每 ≈26° 一条扇区亮度阶跃，6× 高通图 14 辐条（相位 ≈16°）与分界吻合（`disc-sectors-f0077.png`）——D01 由“车削平盘/浅碟”改为**以圆心为顶点均分的 14 个平面扇区组成的凹 14 棱锥拇指位**，盘缘 14 边形（0.82×盖）顶点与冠环内顶点重合，盘/冠环/裙共用一套 14 等分；凹深仍未知（顶点透视位移 ±2 px → 视频上限 ≈2°，CAD 3° 占位）。`reference-cad-from-video-v8.{png,pdf}`（叶片同 v7），claim `tri-r6f-disc-14-sectors` 取代 `tri-r6e-cap-dish-user-stated`；用户截图与原话存为 user-input 资产。validator 0 errors、0 missing（rev 39）。
+- 2026-09-07 08:39 用户在 CAD v8 上手绘红色 Y：“就是有一个这样的凸起的弧度，然后中间红色的部分就是它的隆起”。D04 由“平台为平面”改为 **Y 形隆起脊线**：主脊沿叶轴从叶尖到 x≈0.72 R（凹坑尖端外），两臂沿凹坑两侧外凸弧线（“叉臂”）到盖圈极角 ±38°，顶面自脊线向外落到鳞面带、向内落到凹坑边；f0108/f0132 主脊与两臂亮带环抱凹坑、f0156 斜视大斜面软脊与此一致（`blade-top-y-ridge-f0108-f0132-f0156.png`）。脊高未测（CAD 以 0.025 R 占位）。`reference-cad-from-video-v9.{png,pdf}`：顶视加紫色点划脊线，A-A 沿主脊，新增 C-C（x 0.58，两臂隆起 + 凹坑）与 F-F（x 0.85，单脊）。claim `tri-r6f-blade-top-y-ridge` 取代 `tri-r6-blade-top-structure`；Gate 01 补入 f0108/f0132/f0156；用户手绘与原话存为 user-input 资产。validator 0 errors、0 missing（rev 40）。
+- 2026-09-07 09:36 用户两张图：C—C v9 截图“这个我看不懂”；源帧局部蓝/红/绿三色圈图“通过三层过渡完成了从平面到垂直面的变化”。（1）可读性：v9 顶视没有剖切线、C—C 里上下两坑让切面像哑铃且各面无标注——`reference-cad-from-video-v10.{png,pdf}` 在顶视右下叶标出 A—A / C—C / F—F 剖切线（圆圈字母），C—C/F—F 逐面标注（顶面/Y 臂脊/鳞面带/竖壁/凹坑），凹坑占位深度改 25%/侧，并出 `section-cc-reading-guide.png`。（2）三色圈图用归一化互相关模板匹配定位到 **f0132 (336,524)+181×168，NCC 0.92（`cap-edge-three-tier-evidence.png`）——位于盖缘，不是叶边**：绿 = 冠环楔（贴 14 边形盘缘，最缓）、红 = 盖裙上排、蓝 = 盖裙下排（最陡近竖直），f0128–f0140 8× 盘缘外依次为亮排→纹理中排→暗陡排。D02/D03 改为**盖缘三层逐层变陡的过渡**（冠环外顶点到 ≈0.92×盖而非盖圆；裙两排各有径向宽而非竖直），其下一小段竖直 14 边形侧壁接暗缝；各层径向宽/斜度 0.10/0.06/0.02×盖径、20°/45°/75° 为占位，14 等分与盘 0.82×盖不变。新增 Detail G 盖缘 4:1 半剖，A-A/Detail E 同步三层。曾短暂把三层写入叶边 D05，定位后撤回，D05/D06 恢复原值。claim `tri-r6f-cap-edge-three-tiers` 取代 `tri-r6e-cap-crown-14`；Gate 01 补入 f0128/f0136/f0140；用户两张截图与原话存为 user-input 资产。validator 0 errors、0 missing（rev 41）。
+- 2026-09-07 10:08 用户：“用 shadow 的亮度和明度表示什么地方凹、什么地方凸”。`shade_geeone_reference_v10.py` 用 CAD v10 同一参数生成 2.5D 高度图（叶片 Y 隆起 + 鳞面带 + 凹坑、盘 14 扇区凹棱锥、盖缘三层、暗缝），输出 `shaded-relief-v10.png`：主光左上 38° 与低角度侧光左 18° 两种阴影（高度夸张 3×）、相对各自主面高度的红/蓝凹凸图（红 = 高于主面、蓝 = 低于主面）、凸/凹标定球、盖与右下叶放大。只是分析插图，不是 Blender 白模或渲染；脊高/盘凹/坑深/三层角度均为占位，鳞面带内各面倾角交替未表现。validator 0 errors、0 missing（rev 43）。
+- 2026-09-07 10:40 用户对阴影图叶边局部：“这个地方的过渡不对，叶面从平面过渡到垂直面需要有多层龙鳞纹过渡；截图里有个不明的凹痕”。（1）D05 由单排倒角带改为**多排龙鳞刻面**逐排变陡到竖壁，与盖缘三层同一构造：排数 3 为占位（f0128–f0140 5× 至少可见 2 排），每排每边 6±1 鳞、错半鳞、相邻一亮一暗，占位 0.030/0.022/0.018 R、15°/38°/62°；D06 竖壁 0.30×厚占位（原 0.45）。09:36 曾把三层写到叶边后撤回，此次按用户明确指令重新登记。`reference-cad-from-video-v11.{png,pdf}`：C-C/F-F 叶边三排上色，新增 Detail H（叶边多层鳞 4:1 + 俯视错半鳞示意），拟合表移出（v6–v10 保留）。（2）“不明凹痕”查明为 v10 阴影图中栅格距离场（EDT）对数字化边界的 ≈0.0002 R 周期误差，被 3× 夸张 + 18° 侧光放大成条纹，不是几何；`shade_geeone_reference_v11.py` 改用 2400 点样条边界 + KD-tree 精确距离/弧长，叶边带做成显式平面鳞排（三角波起伏 0.004 R、鳞长 0.11 R 占位），`shaded-relief-v11.png` 条纹消失、鳞排一亮一暗可见。claim `tri-r6f-blade-edge-scale-rows`（refines `tri-r6-surface-detail-spec`）；用户截图与原话存为 user-input 资产。validator 0 errors、0 missing（rev 44）。
+- 2026-09-07 10:55 用户：“原图的龙鳞纹要比你做的每一片面积要大一些”。核对 f0148/f0154（叶片捏在手指间、边缘正对相机）：顶面到中面之间 **2 排大鳞**（下半镜像），沿一条叶边 4–5 片、每片 ≈0.18 R 长，排间错半鳞。D05 由 3 排 × 每边 6 片改为 2 排 × 每边 4–5 大鳞（排宽 0.040/0.030 R、斜 22°/55° 占位），D06 竖壁 ≈0.31×厚。`reference-cad-from-video-v12.{png,pdf}`（Detail H 两排 + 错半鳞展开），`shaded-relief-v12.png`（相邻鳞 ±7° 交替倾角，读作一片片大平面）。claim `tri-r6f-blade-edge-large-scales` 取代 `tri-r6f-blade-edge-scale-rows`；用户截图与原话存为 user-input 资产。validator 0 errors、0 missing（rev 46）。
+- 同日 v13（f0148/f0150/f0154 7× 复核）：叶片捏在手指间、相机在上方时，侧面最宽处（中面）成为剪影，可见的恰是上半——**2 排大鳞从顶面直落到中面**，第 1 排中等斜度、第 2 排更陡、锯齿分界、错半鳞；两排径向 ≈0.07 R（与 f0077 顶视一致）、竖向 ≈0.085 R = 半厚，占位 35°/62°。**没有独立竖直圆柱壁**：D06 由 0.45→0.30→≈0（f0226 侧视读数很可能就是陡排），用户所说“垂直面”= 陡的第 2 排。`reference-cad-from-video-v13.{png,pdf}`、`shaded-relief-v13.png`、`blade-edge-large-scales-evidence.png`；claim `tri-r6f-blade-side-two-rows-to-midplane` 取代 `tri-r6f-blade-edge-large-scales`；Gate 01 补入 f0150。validator 0 errors、0 missing（rev 47）。
+- 2026-09-07 11:10 用户：“每片鳞片的过渡太平滑了，应该硬朗一点”。v13 的鳞面是三角波起伏 + 排中线扭转的连续面；`shade_geeone_reference_v14.py` 改为**每片鳞一个独立平面**（相邻鳞斜度 ±5°、扭转 ±3° 交替，占位）、排界 V 形锯齿（±0.005 R 占位）、鳞间硬折边、着色前不模糊。`shaded-relief-v14.png`、`blade-scale-hardness-v13-vs-v14.png`（f0148 vs v13 vs v14）。spec D05 增加 `facetStyle`（planar, hardCreases）与 Gate 06 检查“每片鳞单一平面、锐折边、无平滑过渡”。CAD v13 几何不变。validator 0 errors、0 missing（rev 48）。
+- 2026-09-07 11:47 用户在阴影图 v14 右下叶圈出 Y 交点两侧两处：“这两个地方凹下去了。然后鳞片的细节还是不对，你再仔细对照图片看一下。”（1）凹陷是 v9–v14 顶面模型的产物：z = 脊高·d_low/(d_low+d_crest) 让柄与两臂三条脊线之间形成谷。D04 改为 **Y 形平顶隆起**：顶区平、四周直斜裙（≈0.09 R 占位）落到鳞带边与坑边，柄臂之间保持高位、无谷；Gate 06 检查改为“顶面无局部极小”。（2）f0148/f0150/f0152 10× 复核鳞片形状：叶侧不是两排叠放的浅锯齿，而是**一道深锯齿咬合**——亮“鸢形”自顶面边下垂（顶边宽、V 尖到带宽 ≈85%，较缓 ≈42° 占位）与暗“Λ 形”自中面上升（底边在中面、尖到 ≈25%，较陡 ≈56° 占位）沿边交替、共用斜折边，每边 4–5 片鸢形、节距 ≈0.18 R，每片独立平面、硬折边；v13/v14 的“2 排”其实是这两族。D05 增加 `facetFamilies`/`zigzagBoundary`，D06 措辞同步。`reference-cad-from-video-v14.{png,pdf}`（Detail H 改为鸢形/Λ 剖面 + 侧视展开示意，顶视/剖面 D04/D05 标注同步）、`shade_geeone_reference_v15.py` → `shaded-relief-v15.png`（鸢形/Λ 独立平面 + 平顶隆起）、`blade-scale-shape-v14-vs-v15.png`（f0148 10× vs v14 vs v15）。claims `tri-r6f-blade-top-y-mesa` 取代 `tri-r6f-blade-top-y-ridge`、`tri-r6f-blade-side-kite-lambda-interlock` 取代 `tri-r6f-blade-side-two-rows-to-midplane`；Gate 01 补入 f0152；用户截图与原话存为 user-input 资产。validator 0 errors、0 missing（rev 49）。
+- 2026-09-07 13:27 用户在 f0132 上叶根部（`frame-zooms/blade-top-y-ridge-f0108-f0132-f0156.png` ③）手绘绿/蓝/红线：“这个细节图能帮助你理解吗”。归一化互相关定位到 f0132 (287,396) 2.4×（NCC 0.92）。读法：绿 = 坑尖以上的主脊折边并沿凹坑右缘继续（**坑缘 = 坑侧面的上边 = 最高线**，臂不是独立隆起）；蓝框 = 叶尖面 T，一块大平面；红 = 平面之间的直折边（坑角 → K → T 面角；K → 根部边缘）；右蓝 = 根角面 C。D04 由“平顶隆起 + 直斜裙”改为**几块大平面硬切的凸包络**：每半叶 T（含主脊，向叶尖下落 0.025 R 占位）/ F（上边 = 水平坑缘）/ C（自坑角与 K 落到根部边缘）三平面取最低值，折边 = 平面交线（直线），无谷；K ≈ 坑角外 0.07×0.07 R、落差 0.015 R 占位。`draw_geeone_reference_cad_v15.py`（`facetPlanes` 读自 spec；`top_z`/`crease_segments` 由平面交线算出折边；顶视紫线改为折边 + T/F/C 标注；A-A 主脊下落；C-C/F-F 顶面按 `top_z` 采样）→ `reference-cad-from-video-v15.{png,pdf}`；`shade_geeone_reference_v16.py` → `shaded-relief-v16.png`（叶顶取平面最低值，鳞带自实际顶面边高度下垂）；`blade-top-facets-user-1327-vs-v16.png`（用户描线定位 + 读法 vs v16）。claim `tri-r6f-blade-top-hard-cut-facets` 取代 `tri-r6f-blade-top-y-mesa`；用户手绘与原话存为 user-input 资产。validator 0 errors、0 missing（rev 50）。
+- 2026-09-07 14:01 用户在阴影图 v16 上标红圈 / 蓝线 / 黄线：“红色部分要用圆角过渡…内凹的台阶要更深一些…蓝色部分有一个斜面过渡，你现在只是向内收了，应该向外扩展，深度也要更深…黄色部分是用不同的梯度来进行平面和垂直面的过渡，你现在只是轻轻地在上面做了一层雕刻”。（1）D08 凹坑改为**斜面漏斗 + 深台阶 + 圆角**：口沿在顶视描迹线外 0.03 R、平底在内 0.03 R（壁 ≈47°），平底深 38% 厚/侧（原 25%，仍 unknown），口/底圆角 0.04/0.025 R；f0116/f0120/f0124/f0128 6× 可见圆角尖、亮口沿斜带、暗深腔。（2）D05 改为**宽多梯度过渡** 0.14 R：T/F/C ≈15° → A 层大斜面 0.07 R@22°（每边 3 片、错半片）→ 鸢形 38° / Λ 53° 到中面（f0148–f0152 读法保留为最后两级）；f0116/f0124 3× 叶顶大刻面；叶尖 x>0.85 R 整个顶面都是过渡刻面。`draw_geeone_reference_cad_v16.py`（口/底双轮廓、A-A/C-C 漏斗剖面、三层叶边剖面按到中面归一、Detail H 三层、顶视 A 层分格线）→ `reference-cad-from-video-v16.{png,pdf}`；`shade_geeone_reference_v17.py` → `shaded-relief-v17.png`（A 层错位大平面 + 鸢形/Λ、漏斗坑高度场）；`edge-gradient-pocket-funnel-user-1401-vs-v17.png`。claims `tri-r6f-blade-edge-wide-gradient-transition` 取代 `tri-r6f-blade-side-kite-lambda-interlock`、`tri-r6f-pocket-funnel-step-rounded` 取代 `tri-r6-root-pocket`；Gate 01 补入 f0116/f0124；用户标注与原话存为 user-input 资产。validator 0 errors、0 missing（rev 51）。
+- 2026-09-07 14:25 用户：“你是不会用圆角吗”。v17 首版的凹坑“圆角”只是直线切角。改为**真圆角**：`round_polygon` 重写为相切圆弧（顶视口 R0.05、底 R0.03 占位）；新增 `funnel_profile`，剖面口沿凸圆角 R0.03（顶面→斜壁）、平底边凹圆角 R0.03（斜壁→平底），A-A/C-C 剖面与阴影图 v17 高度场（口沿外圈、斜壁、平底边三段圆弧）同步；spec D08 增加 `edgeFilletTopToR/edgeFilletFloorToR`；claim `tri-r6f-pocket-funnel-step-rounded` 修订；证据板重做。validator 0 errors、0 missing（rev 52）。
+- 2026-09-07 17:18 用户粘贴《geeone-02 · rev-006 · 叶根凹坑 + 阶梯过渡 + 刀纹 —— agent 执行说明》（原文存 `evidence/05-blockout/rev-005/rev006-agent-instructions-user-2026-09-07-1718.md`），要求在“rev-005 的 .blend”上 Run `spinner_rev006_rootpocket.py`。现状：该脚本磁盘上不存在，rev-005 只有外部 agent 的 `~/Downloads/spinner_rev005.py`（09-05 23:05，65 mm、圆角等边三角整体机身 + 中心盖孔 + 尖朝圆心的旧凹槽）。处理：按 A/B/C 表写出 `spinner_rev006_rootpocket.py`（P 字典驱动：凹坑刀体 = 坑底轮廓 + 坑口上方 2 mm 放大轮廓两层桥接，平面直壁 62°、锥顶弧 R2.5、开口伸进盖孔 R_CAP−3；Bevel A weight 1.2×1 按法向打标 84 条顶面↔竖壁边；Bevel B angle 0.2×2@35°；SP_Steel_ArmLay 辐条/同心刀纹 Bump、SP_Steel_PocketLay 等高环纹，Boolean TRANSFER），`run_rev005_rev006_headless.py` 在 Blender 5.2 headless 跑 rev005 → rev006，产出 `geeone-blockout-r005.blend`、`geeone-blockout-r005-rev006-rootpocket.blend`、`checks/` 六张 Workbench 视图、`fixed-views/` 固定相机包（verified）。**D 验收**：D1 圆顶等腰三角/尖朝叶尖/开口进盖孔 ✓、D2 坑尖到叶尖 5.00 mm ✓、D3 直壁整块平面 ✓、D5 两条折线 + 1.2 带 ✓、D6 `[rev006]` 四行 ✓；**D4 ✗**：坑底 z 8.80（BODY_H 12.0 − 3.2）高于 rev-005 盖座 7.50 且盖体填在孔内，透过坑看到的是盖侧壁不是黑腔——说明书“坑底 9.8 低于盖体下沿”与 rev-005 数值不自洽。**偏差**：Exact Boolean 在 Bevel A 之后失败（刀体顶面残留、29 非流形边），改 MANIFOLD 求解器后 selfcheck 0 非流形；rev-005 反向凹槽与旧角度倒角已移除（说明书未提）。**与 Gate 02 冲突（列为 warn，待用户裁决）**：65 vs 85 mm；圆角三角整体机身 + 1.03 mm 连续薄壁 vs 叶片分离露盖 16°（用户 07:53）；45°×1.2 平切带 + 竖壁两级 vs 宽多梯度 + 鸢形/Λ 龙鳞（D05 v17）；平面直壁 62° 打穿 vs 47° 漏斗 + 深台阶 + 真圆角（D08 v17）。登记为 Gate 05 rev-005 `draft`（`upstream-gates-pending` warn），Gate 01/02 仍 ready_for_review，无任何批准，Cycles 未开，未进 Unity；视觉批准待确认，未推送手机。validator 0 errors、0 missing（rev 53）。
+- 2026-09-07 17:50 用户：“我觉得不对，还是按照你之前的那一版来做吧。”→ Gate 05 rev-005（外部脚本 + rev-006 执行说明）记为 **rejected**（原话入 historicalDecisions），白模改按仓库自己的 Gate 02 rev-006 分析重建为 **Gate 05 rev-006**：`export_geeone_gate02_geometry.py` 从 CAD v16 模块导出几何合同 `geeone-gate02-geometry-contract.json`（R 单位；全转子外轮廓 / A 层边 / 顶面边三条 r(θ) 表来自 EDT 等距轮廓；六平面；坑口/底真圆角多边形；盖参数；哈希链到 spec v17），`build_geeone_gate02_blockout.py`（bpy，D01–D10 全部 `# detail:` 标记，coverage 10/10）生成：凸弧三叶 + 尖叶尖 + 缺口露盖（D07/D09），T/F/C 六平面精确裁剪的硬切顶（D04，按扇区 + 半平面裁剪，T 形接头已缝合），A 层 0.07 R@22° + 鸢形 38°/Λ 53° 咬合到中面（D05/D06，三环按极角拉链缝合，节距 0.18 R → 33 片/圈），漏斗坑（D08：口外扩 0.03 / 底内收 0.03 R、深 38% t、顶视真圆角、底边凹圆角 4 段弧、开口进盖座；口沿凸圆角留待 Gate 06 边倒角），盖座 Boolean 压平毂顶，上下镜像（D10），盖：14 扇 3° 凹盘 + 14 楔 28 三角冠环 + 14×2 裙 + 14 边竖壁 + 暗缝环（D01–D03/D09）。Blender 5.2 headless：基础面片 0 非流形，盖座 + 6 坑 MANIFOLD Boolean 后 2125 顶点 / 2012 面 / 0 非流形；`checks/` 十张 Workbench 白模视图、`fixed-views/` 固定相机包（verified）。2R = 85 mm 仍 provisional。Gate 05 rev-006 `ready_for_review`；Gate 01/02 仍 ready_for_review（17:50 原话是方向选择，不是 Gate 批准）；Cycles/材质/Unity 未做；视觉批准待确认，未推送手机。validator 0 errors、0 missing（rev 55）。
+- 2026-09-07 18:33 用户在 rev-006 白模缺口特写上标黄弧 / 绿框：“黄色的部分，它的圆圈的半径应该是大于内部的这个轴心的转动的承托的…绿色的应该是往内收。它的这个圆环是要往内收，然后上下内凹的这个圆盘要稍微盖住中间的一点点。”→ 盖缘（盘 + 冠环 + 裙）下面不是与盖同径的竖壁，而是**内收的毂座**（轴心转动的承托）：spec D03/D09 v18（`capOverhangToR` 0.03、`hubSeatRadiusToR` 0.455、`hubSeatHeightToR` 0.057，均占位；暗缝 = 外悬下阴影），CAD v17（A-A / Detail G 画出外悬缘 + 毂座），claim `tri-r6f-cap-overhang-hub-seat`（refines cap-edge-three-tiers）。白模 **Gate 05 rev-007**：盖裙底边即盖下缘（无竖壁），`Hub_Seat_Top/Bottom` 暗材质圆柱接盖与转子，上下镜像；rev-006 记 rejected（原话入 historicalDecisions）。coverage 10/10、0 非流形、Workbench 十视图 + 评审板 + 固定相机包（verified）。Gate 05 rev-007 ready_for_review；Gate 01/02 仍 ready_for_review；视觉批准待确认，未推送手机。validator 0 errors、0 missing（rev 57）。
+- 2026-09-07 18:52 用户对 rev-007 评审板：“可以，继续推进吧”。按原话登记为 chat 批准（证据模式：Workbench 静态视图 + 固定相机包，无交互式查看器，已在各 Gate validations 标 warn）：**Gate 01 rev-003、Gate 02 rev-006、Gate 03 rev-005（`modeling-contract.md` + 几何合同 JSON，全部 R 比例、mm 仅 85 provisional）、Gate 04 rev-005（`architecture.md`：Rotor_Body 旋转 / Cap_Top·Bottom + Hub_Seat 静止；Unity `Fixed_Root` / `Rotor` 挂点）、Gate 05 rev-007 → approved（5/12）**。此前五项冲突按 Gate 02 现值收口且全 provisional（盖侧高 0.14 R、漏斗坑、盖 0.485、平盘 0.82、盖顶 E1）。随后推进：**Gate 06 rev-005**（`finalize_geeone_geometry.py`：apply Boolean → 坑口沿凸圆角 R0.03 R 权重倒角 6 段（30 边）→ 0.15 mm 微倒角 >40° → `gate06-checks.json` 7 项全过：顶面无谷、刻面平面度 2e-6 R、口沿圆角、上下镜像、14 扇区、盖缘 > 毂座、倒角后 0 非流形；3393 顶点 / 3208 面）ready_for_review；**Gate 07/08/09 rev-002**（`lookdev_geeone.py`，同一 `geeone-lookdev-r002.blend`：satin 钢 roughness 0.36 metallic 1、盘 anisotropic 0.7 径向 + 0.12 mm 同心 bump、毂座暗钢；Key/Fill/Rim 三面光（mm 场景功率 ×250）+ 渐变天空；哑光深灰地面 + 接触阴影；Cycles 96 spp 六视图 + `lookdev-review-board.png` + 36 帧转台 mp4/gif）ready_for_review。未导出、未进 Unity、未 build、未安装；视觉批准待确认，未推送手机。validator 0 errors、0 missing（rev 58）。
+- 2026-09-07 19:42 用户对 lookdev rev-002：“质感挺漂亮的，但是中间你那个切分的细节又丢了。就是从圆心，大概就是像切披萨一样切成了14片，这个细节又没有了，而且它是应该是向内凹一点的。”（原话存 `evidence/02-analysis/rev-006/user-instructions-2026-09-07-1942.md`，资产 `tri-r6-user-instructions-1942`）。材质方向被认可；唯一修改点是 D01 中央盘的**可见性**（几何定义 08:25 起就是 14 等分凹棱锥）。根因：盘凹 3° → 相邻扇区法线只差 ≈1.3°；盘面各向异性 0.7 + 同心 bump 0.25 盖过刻面色调；没有参考截图角度的视图。修正：**spec D01 v19**（`dishSlopeDegProvisional` 3→5，凹深 ≈0.035 R ≈ 1.48 mm@85 provisional；`sectorAltTiltDegProvisional` 0.5 = 相邻扇区绕角平分线反向倾 ±0.5°，顶视等分不变，占位可设 0；`sectorCreaseHighlightBevelMm` 0 —— 首次 rev-006 试过 0.12 mm 后放弃，倒角把 2° 折边摊平反而看不见），合同在 `06-geometry/rev-006/` 重新导出（spec v19 哈希链）。**Gate 06 rev-006**：`finalize_geeone_geometry.py` 盖从合同重建（14 平面扇区 + 锯齿盘缘 ±0.033 mm，冠环/裙层直接从盘缘长出；首版用独立水平环 + `holes_fill` 留下 28 边界边，已改），Cap_Top/Bottom 57 顶点 / 99 面 / 0 非流形；`gate06-checks.json` 9 项全过（新增 `D01 dish visibly concave (>= 4 deg)`、`D01 caps manifold`）。**Gate 07/08/09 rev-003**（`geeone-lookdev-r003.blend`，几何 rev-006）：盘 anisotropic 0.7→0.4、同心 bump 0.25→0.12 无扭曲，灯光/天空/地面不变；新增 `disc-macro`（复现用户 08:25 参考截图角度）；Cycles 96 spp 七视图 + `lookdev-review-board.png` + `cap-14-slices-review-board.png`（参考截图 vs rev-002 vs rev-003）+ 36 帧转台。disc-macro / cap-macro 中 14 个扇区有明暗台阶、硬折边、盘凹可见。Gate 02/03/05 保持 approved，各加 warn `d01-amended-1942` / `cap-block-amended-1942` / `cap-dish-amended-1942`（用户未要求重出白模）。未导出、未进 Unity、未 build、未安装；视觉批准待确认，未推送手机。validator 0 errors、0 missing（rev 59）。
+- 2026-09-07 22:51 用户对 lookdev rev-003 顶视（红箭头指盘外盖缘带）：“就这个 bevel 可以再厚一点。就是这两片龙鳞的这个高度可以再高，然后中间的那个内凹的效果感觉还是不够明显。”（原话 + 截图存 `evidence/02-analysis/rev-006/user-instructions-2026-09-07-2251.md` / `user-markup-2026-09-07-2251-cap-bevel.png`）。**spec v20**：D01 盘凹 5°→8°（凹深 1.48→2.32 mm@85）、盘径 0.82→0.80 盖（实测区间 0.80–0.85 下限，盖缘带 0.18→0.20 盖宽）；D02 冠环 0.10@20°→0.09@18°；D03 裙两排 0.06@45°/0.02@75° → 0.07@50°/0.04@72°（两排高 2.78→4.26 mm，+54 %）、盖侧高 0.14→0.16 R（原读数 f0226 单帧 ±20 %，+14 % 在区间内）；D09 毂座/暗缝高 = 盖侧 − 三层落差 = 0.0456 R（2.42→1.94 mm）。全部 provisional。`export_geeone_gate02_geometry.py` 增加 `--out`，合同导出到 `06-geometry/rev-007/`。**Gate 06 rev-007**：`finalize_geeone_geometry.py` 盖重建 + 新增 `rebuild_hub_seat`（毂座随盖唇高度重建），Cap 57/99/0 非流形，Rotor 3393/3208/0；`gate06-checks.json` 11 项全过（新增 `D02/D03 each tier steeper`、`D03 tiers drop <= side height`）。**Gate 07/08/09 rev-004**：材质/灯光/环境与 rev-003 完全相同，在几何 rev-007 上重渲七视图 + 36 帧转台；`cap-tiers-before-after-board.png`（rev-003 vs rev-004：顶视盖局部 / cap-macro / disc-macro / low）、`cap-section-v19-vs-v20.png`（合同直接生成的盖 A–A 剖面，标注凹深/两排鳞高/盖侧/毂座 mm）。Gate 02/03/05 保持 approved，各加 warn `cap-amended-2251` / `cap-block-amended-2251`；`reference-cad-from-video-v17.png` 仍是 v18 层值（图未重画，spec 为机器可读权威）。未导出、未进 Unity、未 build、未安装；视觉批准待确认，未推送手机。validator 0 errors、0 missing（rev 60）。
+- 2026-09-08 07:13 用户：“OK还有一点就是这个陀螺的三个页面是可以转的，你确保在结构上是正确的，没问题的话你可以推进下一步。”→ 按原话登记 **Gate 07/08/09 rev-004 approved**（chat；证据 = 评审板 + 36 帧转台 mp4，用户 IDE 中打开）；结构条件转入运动学检查。13:21 用户附转台低角度帧：“这个不是一体的，叶片是分开转的。”→ **Gate 06 rev-007 rejected**（原话入 historicalDecisions；毂座坐在实心转子上，盖 / 毂 / 叶片读成一体）。修正 **spec v21**（D03/D09）：转子中心通孔 R0.425 R（18.1 mm）；毂改为一根**静止** `Hub_Core` R0.41 R（17.4 mm）从下盖唇穿过转子到上盖唇（两端埋入盖体 0.002 R）；径向间隙 0.015 R = 0.64 mm；盖缘外悬毂 0.075 R（受盖下连接环 ≥ 2.5 mm 约束，18:33 的“稍微盖住”量为占位）。**Gate 04 rev-006**（`architecture.md`：Fixed_Root = Cap_Top + Cap_Bottom + Hub_Core；Rotor_Root = Rotor_Body，绕 Blender Z / Unity Y）ready_for_review，rev-005 批准保留为历史。**Gate 06 rev-008**：`finalize_geeone_geometry.py` + `cut_rotor_bore`（EXACT，192 段）+ `rebuild_hub_core` + `kinematic_checks`（射线实测缺口连接环 2.97 mm；盖足迹内转子最高点到盖唇 0.52 mm；转子质心离轴 7e-5 R；|Ixz|,|Iyz|/Izz < 1e-6；Izz/Ixx 1.98）+ 半剖 Workbench 渲染（静止件蓝 / 转子灰）；`gate06-checks.json` 20 项全过（12 几何 + 8 运动学）；Rotor 4737/4316/0 非流形。**Gate 07/08/09 rev-005**：材质 / 灯光 / 地面与已批准 rev-004 完全一致，在 rev-008 上重渲；新增 Cycles 半剖两视图 + 交界特写 + **转子单独旋转 24 帧**（`spin/geeone-rotor-spin.mp4`，盖与毂芯静止）+ 36 帧转台；`kinematic-review-board.png`、`lookdev-review-board.png`。Gate 02/03/05 保持 approved 并标 warn。未导出、未进 Unity、未 build、未安装；视觉批准待确认，未推送手机。validator 0 errors、0 missing（rev 61）。
+- 2026-09-08 13:55 用户：“继续吧”→ 按原话登记 **Gate 04 rev-006 / 06 rev-008 / 07/08/09 rev-005 approved**（chat；半剖 + 转子单独旋转录像 + 转台）→ 9/12。随后推进：**Gate 10 rev-002**（`evidence/10-export/rev-002/export_geeone_gate10.py`：只保留 Rotor_Body / Cap_Top / Cap_Bottom / Hub_Core，apply 倒角，mm→m（2R = 0.085 m provisional），层级 `GEEONE_TriSpinner/Rotor_Root[Rotor_Body]` + `Fixed_Root[Cap_Top, Cap_Bottom, Hub_Core]`，材质按名 `M_Geeone_Satin / M_Geeone_DiscTurned / M_Geeone_HubDark`；FBX（-Z/Y，FBX_SCALE_UNITS）+ GLB + collision FBX（转子凸包 + 盖径圆柱）；GLB/FBX 往返 9 项检查全过：外接圆 0.085 m、厚 10.07 mm、通孔 18.06 mm 居中、四网格、归属、材质；`export-manifest.json` 全哈希；Workbench 回读 hero/low/top + 24 帧 orbit）。**Gate 11 rev-002**：`Assets/_Fidgeting/Models/GeeoneTriSpinner/GeeoneTriSpinner.fbx`（+ `_Collision.fbx`）；`ThreeBladeSceneBuilder.InstallGeeoneVisuals`（替代 DragonScale rollback：Rotor_Root → RotorDynamic，Cap_Top/Cap_Bottom → TopCap/BottomCap，Hub_Core → HubStatic，180° yaw，隐藏 procedural + BearingBalls，orbit 焦点 Cap_Top）；`ThreeBladeMaterialFactory` 新增 `M_GeeoneSatin` 0.64 / `M_GeeoneDiscTurned` 0.68（URP Lit——径向 brushed shader 会把 14 扇区抹平，已弃）/ `M_GeeoneHubDark` 0.55；`ProductAppearanceCustomization` 贴纸接收面加 `Cap_Top`；编辑器预览工具路径回退到 `HubStatic/TopCap/Cap_Top`；`GeeoneShippingPreviewCapture.CaptureAll`（batchmode）输出中性轮廓 + `unity-import-parity-report.json`；`build_geeone_parity_report.py`：轮廓 IoU 顶视 **0.998** / hero **0.995**，平面外接 1.7327 R 两侧一致，三角数一致，转子转 / 盖 + 毂芯静，零初速，yaw 180 → `parity-report.json` PASS。**Gate 12 rev-006**：`ThreeBladeMetalOriginal.unity` 已 batchmode 重建；出货预览 phone / hero / top / 左右 oblique / low / library（`shipping-review-contact-sheet.png`），library 缩略图写入 `Assets/Plugins/iOS/Thumbnails/Models/product-thumbnail-metal-three-blade.png`（被驳回则 git 还原）。测试：`GeeoneTriSpinnerAssetTests`（新，资产两组 + 场景归属 / 85 mm / 材质 / 隐藏件 / 爆炸顺序 / 零角速度 / 无 DragonScale 依赖）；`BlenderDragonScaleAssetTests` 移除场景用例（FBX 资产用例保留为 rollback）；`ProductArchitectureTests` / `SpinnerProgressionTests` 改为 `Cap_Top` / `Rotor_Root/Rotor_Body`（皮肤 ≥ 4 个渲染器）。EditMode 相关套件 **121/122**，唯一失败 `RuntimeAndLiquidGlassUi_AreWiredForGrowthAndOfflineReturn`（Swift `Label(` 文案检查）与模型无关；首轮全量里另有 8 个失败均为其他在途任务（Swift 文案、Build Settings 缺 MagneticFanCard、slide-tile 取景、环境 `_GlowScaleB`、`Assets/StreamingAssets` 存在），与本模型无关。**未 build、未安装；视觉批准待确认，未推送手机。** validator 0 errors、0 missing（rev 63）。
+- 2026-09-08 14:56 用户：“这些预览图好像被拉伸了。”→ 确认：出货预览纵向拉伸 ≈1.8×。根因：`SpinnerEnvironmentPresenter.Install` 装的 `SpinnerSceneParallaxController.Configure` 把当时（batchmode 4:3）的投影矩阵存为 baseline 并显式写回 `camera.projectionMatrix`，之后改 `camera.aspect` 不再生效，渲进 720×1280 目标即被拉伸；`SpinnerEnvironmentPreviewCapture` 早已用 `ResetProjectionMatrix()` 规避，`RecoveryApprovalPreviewCapture`（RecoveryApprovalV22 旧图）与首版 `GeeoneShippingPreviewCapture` 没有。修复：`GeeoneShippingPreviewCapture.PortraitProjection()` 每次渲染前 `ResetProjectionMatrix` + 设 aspect；重拍 phone / hero / top / 左右 / low / library（顶视 h/w 0.885，理论 0.907@89°）。Gate 12 rev-006 资产哈希刷新，validator 0 errors（rev 64）。仍 ready_for_review；视觉批准待确认，未推送手机。
+- 2026-09-08 15:45 用户：“感觉挺好的，但是为什么光照感觉特别暗，特别黑？”→ 根因：metal-three-blade 共用 `SpinnerImageBasedLightingController` 的 soft-metal 策略（直射 ×0.36、环境 ×0.42、反射 ×0.35，再乘 trim）是为峡谷 library 卡防过曝；出货详情页黑底无环境反弹，硬切面缎面钢高光极亮、背光面仍近黑。修复：`SpinnerImageBasedLightingController` 新增 GEEONE 详情提亮（详情模式抬高 key/fill/visibility fill 下限、环境光 floor、反射 boost）；`ThreeBladeSceneBuilder` 启用 HDR + ACES、`postExposure` +0.75、对比度 4、场景灯加强；`GeeoneShippingPreviewCapture` rev-007 捕获前强制详情灯光配方并重拍七视图。中心 hero 区 mean 0.199→0.246、P90 0.317→0.762（rev-006 vs rev-007）。Gate 12 rev-007 ready_for_review；视觉批准待确认，未推送手机。
+- 2026-09-08 18:36 用户：“推到手机上吧”→ chat 视觉批准 + 真机推送。**Build 47**（`geeone-tri-spinner-build47-20260908T103620Z-snapshot`）：EditMode 预检 152/152；`com.jiaweizhou.fidgetspinner.codex` v0.1.0 已安装并启动（`installed=true launched=true pid=45090`）。证据：`evidence/12-shipping/rev-007/device-delivery/geeone-tri-spinner-build47-20260908T103620Z-snapshot/delivery-result.json`。真机交互验收当时待用户确认。
+- 2026-09-08 18:5x 用户（新线程）：“GEEONE 龙鳞三叶（metal-three-blade）12 Gate 已完成，Build 47 已装到手机，用户真机验收通过。”→ **真机验收通过**。登记（`register_geeone_gate12_r007_device_accepted.py`，pipeline.json rev 65→66）：Gate 12 由 rev-006 升为 **rev-007 approved**（18:36 原话“推到手机上吧”，evidenceMode = 七张重拍出货视图 + 随后的设备 build；rev-006 记 superseded，其 15:11 批准保留为历史，15:45 光照反馈原话入 historicalDecisions）；rev-007 资产 21 项全哈希：场景、`SpinnerImageBasedLightingController.cs`、`ThreeBladeSceneBuilder.cs`、`GeeoneShippingPreviewCapture.cs`、七视图 + 新拼 `shipping-review-contact-sheet.png`（`build_geeone_shipping_contact_sheet.py`，仅排版）、library 缩略图（与出货 `product-thumbnail-metal-three-blade.png` 同字节）、Build 47 快照 `delivery-result.json` / `unity-editmode-results.xml`（152/152）/ `install.json` / `launch.json` / `source-hashes-after-export.txt`、18:34 预检快照、以及新写的 `device-acceptance.json`（用户原话 + delivery-result 哈希；不改动不可变快照）。validations：`device-build` pass、`device-acceptance` pass、`approval-evidence-mode` warn（chat 批准，无交互式 Unity 运行会话）。`currentState.deviceStatus = build-47-installed-launched-user-device-accepted-2026-09-08`，`rebuildRequested=false`，`model.status = shipping-current-geeone-device-accepted`，`model.scenePath` 改为 `ThreeBladeMetalOriginal.unity`（原 `ThreeBladeEDC.unity` 是 `pointed-three-blade` 的场景）。history.ndjson 追加 4 条（revised / approved / delivery / device-accepted）。`validate_model_pipeline.mjs metal-three-blade`：12/12、0 errors、0 missing（rev 66）；`validate-pipelines.mjs`（只读）metal-three-blade 0 errors，未运行 `--refresh`（避免改动其他模型清单）。`tests/pipeline-core.test.mjs` 的 readiness 期望同步为 metal-three-blade `shippingReady=true / rebuildRequested=false`；`npm test` 213/253，40 个失败与改动前逐条相同（magnetic-slide-tile / premium-display-case 既有漂移，本轮未处理）。设计圣经 `FDB-PREF-032/033` DeliveryState 同步为 device accepted，rev-007 七视图复制到 `Docs/DesignBibleAssets/geeone-tri-spinner-shipping-*-20260908.png`。
+- 下一步（待用户决定，本轮未动）：`FDB-PREF-032` 的 catalog 收敛——`gold-four-wing`（`ImportedSpinner.unity`）与 `pointed-three-blade`（`ThreeBladeEDC.unity`）两条旧 Rotor 条目是否下线、并入 `metal-three-blade`，涉及 `SpinnerModel.allCases` / `ProductCatalog` / `ProductCatalogMigration`（已有选择迁移）/ 成长与皮肤存档 key / Gacha 奖品目录 / Build Settings 场景表 / `ProductArchitectureTests` 场景断言 / library 缩略图。属于产品决策，需用户明确指令后另开 feature task；任何 catalog 变更前不得再 build / 安装。85 mm 及其他 provisional 尺寸若要转 measured，需要用户提供实测卡尺值并新开 Gate 03 修订。
+
+## 2026-09-05 统一三叶陀螺：rev-003 三点驳回 → rev-004 圆锥锯齿楔环 + 泪滴厚叶片（Blender Cycles，未进 Unity）— 已被视频 intake 取代，保留为历史
+
+> **当前状态：rev-003 被用户 19:43 三点驳回（楔环成“城墙”、叶片成扇形桨露机身、叶片太薄）。rev-004 已按驳回重建并登记为 Gate 02 rev-005、Gate 03–06 rev-004，全部 `draft` 等待用户批准。出货 Unity 资产、场景、catalog 未改动；未构建、未安装、未推手机。视觉批准待确认，未推送手机。**
+
+- 驳回原文完整存 `evidence/06-geometry/rev-003/user-rejection-2026-09-05-b.md`（user-input 资产 `tri-r5-user-rejection`）。2 条 rev-4 claim superseded，7 条 rev-5 claim 新增；修正表 `evidence/02-analysis/rev-005/analysis-corrections-rev5.json`。
+- 盖：平盘 Ø24.4 z=7.25 是最高点；楔环为 25° 圆锥，内环 24 点在盘边、外环 24 点错半步且 ±0.55 mm 锯齿 → 48 个三角平面，尖端向内 24 / 向外 24，相邻法线 9.3–16.1°，单面斜 19.5–29.3°（均值 24.4°）；外沿均值 z=4.81，低于叶面 0.94 mm；暗裙至 z=2.5。暗缝 0.8 mm（沉孔 Ø36.44 vs 盖 Ø34.84）。
+- 叶片：泪滴轮廓——缺口 V 60° 起于暗缝边（apex r=18.22–18.55）、凸 Bezier 侧边、R12 外弧占 ±60°、最大半宽 16.4 mm；厚 11.5 mm；顶面 = 2 个 10.2° 屋脊面 + 1 个 32° 端面斜切（每叶 3 大平面 + 镜像），竖直侧壁最宽处 5.6 mm；0.5 mm 两段倒角在凸包阶段施加；侧壁作为连续曲面 smooth，其余全部 flat。毂领删除：三叶根部在暗缝边相接，`hubVisibleInTopView=false`。机身 = 三个各自沉孔切割的凸包叶片 + Ø35.8 暗色轴承座环 join；每壳 manifold（0/0/0），三角 5864。
+- 渲染：Cycles/Metal 96 spp denoise（Eevee 不出各向异性；平盘径向各向异性 0.85 + 同心 Bump 0.09 现已可见）；白模仍 Workbench。新增 `cap-profile`、`notch-macro` 机位。
+- 用户指令内部矛盾的处理（`tri-r5-notch-interpretation`）：“两侧向内收成约 60° 夹角”按“相邻叶片间 V 缺口 60°”解释——若按单片泪滴切线夹 60° 字面构造，R12 切线在 r≈18 处相距 49°，机身必外露，与“机身被完全包住”矛盾。评审板已标注，待用户裁决。
+- 新悬案：台面 0.70（用户）+ 25° 斜 ⇒ 楔环外沿低于叶面 0.94 mm，暗缝看起来比 0.8 mm 深；照片值 0.797 ⇒ 外沿与叶面齐平（0.15 mm）。已出同机位对比 `evidence/06-geometry/rev-004-variant-table-0797/`（仅对比、未导出、不是 revision）。
+- Obsidian vault 复扫（`evidence/02-analysis/rev-005/discovery-log-rev5.json`）：22 条相关笔记 / 40 张图，本产品只有 Gate 01 已归档的 7 张 GEEONE 实拍；TW 玲珑云三叶、钛 storm 三叶为同类不同款，仅作语境。
+- 证据：`evidence/05-blockout/rev-004/`（clay 6 视 + `builder-snapshot-rev-004.py`）；`evidence/06-geometry/rev-004/` 六正交、workbench、hero、双斜视、low、cap-macro、cap-profile、notch-macro、exploded、`review-board.png`、`dimension-overlay.png`、`pivot-overlay.png`、`geometry-validation.json`。rev-003 证据与 builder 快照保留为驳回历史。导出 `ArtSource/UnifiedTriSpinner/UnifiedTriSpinner.{blend,fbx,glb}` 与 `_Collision.fbx` 已随构建更新，尚未登记 Gate 10，也未导入 Unity。
+- 验证：`validate-pipelines.mjs --refresh` 与 `validate_model_pipeline.mjs metal-three-blade` 均 0 errors（rev 24）；Gate 06 十项验证全部 pass；Gate 01–03 仅剩“无实测 mm”一项 fail。登记脚本现同步 `pipeline-core` 的 stage digest，refresh 不再把自身登记误判为过期；Gate 01 因此从误标 stale 恢复 draft。
+- 2D CAD（用户 22:00 要求“先出平面图 CAD 图”）：`tools/blender/export_unified_tri_spinner_cad.py` 在 Blender 内 import builder 导出 `evidence/06-geometry/rev-004/cad-geometry.json`（轮廓、屋脊高、缺口尖点、盖剖面、楔环顶点，全部来自 builder 函数，不另行推导）；`tools/model-provenance-explorer/draw_unified_tri_spinner_cad.py` 由该 JSON 出 `cad-sheet-1-plan-sections.{png,pdf}`（顶视 + 过叶片轴剖面 A-A + 最宽处横剖 C-C + 楔环展开 detail B/B'）与 `cad-sheet-2-decision-overlays.{png,pdf}`（台面 0.70/0.797、缺口解释 ①/② 叠加）。已登记为 Gate 04 rev-004 `structural-cad` 资产（`tri-r5-cad-*`），验证项 `structural-cad-present`。
+- 工作台修正：`pipeline-core.mjs refreshManifest` 现只让“仍在某阶段 artifactIds 中”的资产触发 stale；孤儿资产（如早期指向活文档设计圣经的 `tri-contract-design-bible`）只刷新哈希，不再在每次改文档时把 Gate 03–12 标过期。`npm test` 213/253，40 个失败在改动前后完全一致（magnetic-slide／premium-display-case 既有清单漂移），本轮未处理。
+- 待办：用户批准 Gate 02–06（并裁决台面 0.70/0.797、缺口解释、叶根暗三角）后进入 Gate 07 材质（圆盘各向异性在 URP 需烘法线）、Gate 08 灯光、Gate 10 导出登记、Gate 11 Unity 对齐、Gate 12 shipping 预览；三个旧 catalog 条目在 Gate 12 批准后再收敛。
+
+## 2026-09-05 统一三叶陀螺：rev-002 五点驳回 → rev-003 两层盖 + 实心硬切叶片（Blender，未进 Unity）— 已被 rev-004 取代
+
+> **当前状态：用户要求把三款三叶 Rotor 合成一款“结构正确、细节到位、光感质感拉满”的模型（`FDB-PREF-032`）。第一版几何（rev-002）被用户五点驳回，rev-003 已按驳回逐点重建，Gate 02 rev-004、Gate 03–06 rev-003 全部 `draft` 等待用户批准。出货 Unity 资产、场景、catalog 未改动；未构建、未安装、未推手机。视觉批准待确认。**
+
+- 驳回链：Gate 02 rev-002（GEEONE 53.6% 大盖 + 规则梯形冠环）被“看到了，但是完全不对啊”驳回 → rev-003 把放射楔放到台面、冠环做成不规则鳞片 → 用户再次驳回（原文存 `evidence/06-geometry/rev-002/user-rejection-2026-09-05.md`，user-input 资产 `tri-r4-user-rejection`）：① 盖应为平车削盘（≈0.70 盖径）+ 外圈规则向下楔面，无随机鳞片；② 盖只高出叶面 1–2 mm、黑线约 1 mm；③ 叶片实心、向中心收窄、外端大圆角平面、4–5 大平面硬切、竖直侧壁；④ satin 非镜面，各向异性只给圆盘；⑤ 倒角 0.5 mm 2–3 段。5 条旧 claim superseded，5 条 rev-4 claim 新增（`evidence/02-analysis/rev-004/analysis-corrections-rev4.json`）。
+- rev-003 构建（`tools/blender/build_unified_tri_spinner.py`，确定性 bpy，无随机抖动，Blender 5.2）：盖 = 平台面 Ø24.4（0.70×Ø34.8）z=6.5（高出叶面 1.5 mm）+ 24 楔 48 平面（每半面为 48 边棱台面绕自身中线 ±11° 旋转，精确平面；楔面平面与水平台面相交形成细锯齿边界，台面倾斜 0.0°；外缘沿 r=17.4 圆柱脊谷 ±0.22 mm；相邻法线 18.7–25.0°）+ 楔环外缘 z=4.1 沉入缝内（斜 25°）+ 暗裙。缝 = 沉孔 Ø36.8 与盖 Ø34.8 之间 1.0 mm，毂领改为机身亮金属，只有沉孔壁／底暗。叶片 = 确定性控制点凸包：根部半宽 12.0 mm、外端沿外接圆大弧、顶面每叶 7 个大平面（脊线 + 侧切 + 端切）、竖直侧壁 3.8 mm、0.5 mm 2 段倒角、无口袋；叶根在 r=18.5 mm 切除；叶厚 9.9 vs 毂 10.0。材质 body 0.36 / wedge 0.34 / table 0.32（仅台面径向各向异性 0.7 + 同心 bump）；key 光 55 mm。旋转体 manifold（0/0/0），三角 5432。
+- 照片 vs 用户指示的两处差异已登记为 claim 待裁决：台面比 0.797（照片）vs 0.70（用户，本轮采用）；geeone-01 每个叶根紧贴盖处的暗色三角凹陷（照片）vs 实心（用户，本轮采用）。
+- 证据：`evidence/05-blockout/rev-003/`（clay）；`evidence/06-geometry/rev-003/` 六正交、workbench、hero、双斜视、low、cap-macro、exploded、`dimension-overlay.png`、`pivot-overlay.png`、`geometry-validation.json`。rev-002 证据完整保留为驳回历史。导出 `ArtSource/UnifiedTriSpinner/UnifiedTriSpinner.{blend,fbx,glb}` 与 `_Collision.fbx` 已随构建更新，尚未登记 Gate 10，也未导入 Unity。
+- 验证：`validate-pipelines.mjs --refresh` 与 `validate_model_pipeline.mjs metal-three-blade` 均 0 errors（rev 20）。`npm test` 253/238；15 个失败全部为 magnetic-slide-tile／premium-display-case 既有状态漂移，与本模型无关，本轮未处理。
+- 待办：用户批准 Gate 02–06 后进入 Gate 07 材质（圆盘各向异性在 URP 需烘法线）、Gate 08 灯光、Gate 10 导出登记、Gate 11 Unity 对齐、Gate 12 shipping 预览；三个旧 catalog 条目在 Gate 12 批准后再收敛。
+
+## 2026-09-07 Gacha reveal v2 打磨五（R042）：canvas 时间线落码——Pack 下落 0.58 s、抽出提前、标签 3.26 s
+
+> **当前状态：用户在 `gacha-reveal-timeline` canvas 上调整三段时长并一键应用，常量已落码、测试同步、Gate 12 Simulator 重新导出并录屏（`evidence/12-shipping/rev-010/`）。视觉批准待确认，未推送手机。**
+
+- 常量：`nativeHybridPackDepartureDurationSeconds 1.0 → 0.58`（曲线、50% 舞台位移、14°、78% 起淡出不变）；`PullStartSeconds 0.35 → 0.24`；`LabelSeconds 3.37 → 3.26`（回弹后 0.80 s 间隔不变）。其余 17 个 canvas 参数与源码原值一致，未改。
+- 新拍点（case play 为零点）：抽出 0.24–1.02 → 落位 1.26 → 停顿 1.66 → 预备 1.86 → 翻转 2.28（过 90° ≈ 2.07）→ 回弹 2.46 → 标签 3.26；T0 相对：reveal T0+2.77、complete T0+3.96、面板 T0+4.26。
+- 测试：`GachaShippingRevealChoreographyTests.TimelineMatchesTheSpecBeats` 全部拍点改为新值并新增「标签 − 回弹结束 = 0.80 s」断言；Swift harness「Pack falls 0.58 s」。canvas `DEFAULTS` 同步为 `packLead 240 / packFall 580`，保持「默认值 = 当前源码」。
+- 验证：Unity EditMode 46 passed / 2 skipped；Swift harness 141/141；`GachaShippingNativePreview` BUILD SUCCEEDED；export `gate12-export13.log` Success；`xcodebuild` Release Success（`gate12-xcodebuild16.log`）。录屏实测（raw，T0 ≈ 9.75 s）：case play 10.45、Pack 落 10.45–11.03、reveal 闪光 12.5（T0+2.77）、标签 13.7（T0+3.96）、面板 14.1–14.4，与新常量一致。录屏 `Artifacts/PackTearNativeCandidate/r042-gacha-reveal-v2-timeline-canvas/r042-gacha-reveal-v2-clear.mp4`（实速 + 0.5×）、`r042-pack-fall-20fps.png`、`r042-standard-refined-end.png`、`r042-contact-sheet-5fps.png`；pipeline `evidence/12-shipping/rev-010/`，history events `15d8c7a2-…`（rev-009 经 canvas 调整）、`51e64c5f-…`（rev-010 ready）。
+- 录屏注意：9.0–10.4 s 的选中／撕封阶段带有并行任务 FDB-GAC-035 R042 arc-bands 背景（`GachaPackArcBackdropRules.baseOpacity 1.0`，不透明午夜底 + 四色带），是同一工作树中另一任务的进行中改动，不属于本 rev；评审本 rev 请只看时间线拍点。
+
+## 2026-09-07 Gacha reveal v2 打磨四（R041）：文案顺序、购买按钮、抽出提速、可交互时间线
+
+> **当前状态：用户三项打磨 + 一项工具需求已落地并重录（`evidence/12-shipping/rev-009/`）。视觉批准待确认，未推送手机。**
+
+- `ProductPackTierCaption`：「1 张抽取券／包」移到 tier 名上方、字号 footnote；tier 名 title2；说明在下；整体左对齐。中性档（STANDARD）底色 glow 强度 ×0.55（`neutralGlowStrength`），避免提饱和后的灰雾。
+- CTA 文案：`购买 \(selectedPack.title)`（购买 STANDARD / 购买 REFINED …）。
+- 抽出→落位提速：`PullSeconds 0.90 → 0.78`、`SettleSeconds 0.30 → 0.24`，`LabelSeconds 3.55 → 3.37`（回弹后的间隔不变）；下游拍点整体 −0.18 s。
+- 可交互时间线：canvas `gacha-reveal-timeline.canvas.tsx`——每段一个 slider（Swift 与 Unity 两栏），实时重算 T0 相对时间线（Gantt + 关键节点）、翻转前静止是否 ≥ 400 ms、导出 `GachaShippingRevealChoreography.cs` / `FidgetGachaPackPresentation.swift` 常量，并可一键让 agent 应用。默认值 = 当前源码。
+- 验证：Swift harness 138/138；Unity EditMode 46 passed / 2 skipped；export `gate12-export12.log` Success；`xcodebuild` Release Success（`gate12-xcodebuild15.log`）。录屏 `Artifacts/PackTearNativeCandidate/r041-gacha-reveal-v2-caption-timeline/r041-gacha-reveal-v2-clear.mp4`、`r041-standard-refined-end.png`。
+
+## 2026-09-07 Gacha reveal v2 打磨三（R040）：STANDARD 舞台不再发蓝
+
+> **当前状态：用户指出 rev-007 中 STANDARD Pack 的舞台被染成钢蓝（"这个蓝色哪来的，不对"）。根因是 `backdropRGB` 强制最低饱和度 0.45，把中性银灰 accent（0.58, 0.60, 0.64）造出了蓝色，并经 `EnterGachaStageFromNativeUi` 传给 Unity dimmer。已修并重录（`evidence/12-shipping/rev-008/`）。视觉批准待确认，未推送手机。**
+
+- 规则：accent 饱和度 < 0.2（`neutralSaturationThreshold`）视为中性档，保持原色相/饱和度不动；只有彩色档（钢蓝、氧化铜、香槟金…）做 ×2.4 提饱和（上限 0.85）。Unity `GachaRevealStageFX.SetDimTint` 的明度按饱和度从 0.08（中性）插值到 0.30（全饱和），STANDARD 舞台回到近黑压暗，REFINED 等保留自身色相。
+- 验证：Swift harness 130/130（新增「STANDARD backdrop 保持银灰，不发蓝」断言）；Unity export `gate12-export11.log` Success；`xcodebuild` Release Success（`gate12-xcodebuild13.log`）。录屏 `Artifacts/PackTearNativeCandidate/r040-gacha-reveal-v2-neutral-stage/r040-gacha-reveal-v2-neutral-stage-clear.mp4`、`r040-carousel-stage-hold.png`；pipeline `evidence/12-shipping/rev-008/`。
+
+## 2026-09-06 Gacha reveal v2 打磨二（R039）：Pack 落到底再淡出、粒子加强、舞台色相、左对齐、无底 CTA
+
+> **当前状态：用户看过 rev-006 录屏后提出五项打磨，已全部落地并重录（`evidence/12-shipping/rev-007/`）。视觉批准待确认，未推送手机。**
+
+- **Pack 下落**：位移改为舞台高度的 50%（中心 44% → 94%），1.0 s `cubic-bezier(0.33,0,0.2,1)`，后仰 14°；不透明度在前 78% 保持 1，只在最后 22% 淡出（`packDepartureDropFraction 0.5`、`packDepartureFadeStartProgress 0.78`）。`ProductPackTearLayout.frame` 改为按舞台高度取位移，`packDepartureDropPoints` 删除。
+- **粒子**：数量 ×2（heirloom 240 / signature 96 / refined 56 / standard 0），尺寸 7–15 px，初速 260–560 px/s，重力 −60 px/s²，寿命 0.9–1.6 s，颜色向白色偏 45%，改用 32 px 径向软圆 sprite（原为默认方块），沿盒体轮廓 0.82–1.12 抖动生成并前移 3 cm 免被透明外壳遮挡。
+- **舞台色相**：native 底色 opacity 0.42/0.16/0.24/0.12，并用 HSV 提饱和的 tier accent（`GachaPackStorefrontBackdropRules.backdropRGB`：饱和度 ×2.4 夹在 0.45–0.85，明度 ≥ 0.62；`GachaPackTier.storefrontBackdropRGB`）；Unity 舞台 dimmer 用同一 accent 着色（`EnterGachaStageFromNativeUi` 载荷 `r,g,b`，`GachaRevealStageFX.SetDimTint`，HSV 明度 0.30）。修了一个会吃掉色相的 bug：`GachaShippingRevealDirector.Begin` 先调 `Dismiss()`，把从 storefront 接管的 stage FX 一起 dispose 了，导致 case 首帧蓝色 wash 消失——现在 Begin 会保住已接管的 FX。
+- **文案与 CTA**：`ProductPackTierCaption` 新增 `alignment`（默认 `.leading`），标题/价格/概率左对齐；「选择此 Pack」直接用 `ProductPrimaryActionButton`，去掉外层 `ProductBottomActionDock` 底板（handoff/receiptRecovery 的 dock 保留）。
+- 验证：Unity EditMode Gacha* + Gate12 45 passed / 2 skipped；Swift harness 129/129（新增 backdrop 饱和度、下落参数、淡出起点断言）；`GachaShippingNativePreview` BUILD SUCCEEDED；Unity export `gate12-export10.log` Success，`xcodebuild` Release Success（`gate12-xcodebuild11.log`）。录屏 `Artifacts/PackTearNativeCandidate/r039-gacha-reveal-v2-polish2/r039-gacha-reveal-v2-polish2-clear.mp4`（实速 + 0.5×）、`-sheet.png`、`r039-reveal-burst-10fps.png`、`r039-carousel-stage-end.png`；pipeline `evidence/12-shipping/rev-007/`，history events `ba0aba2d-…`（rev-006 用户意见）、`9ba49460-…`（rev-007 ready）。
+- 仍未做：§8 卡面资产、洞穴 saturation 曲线（现以着色 dimmer 近似）、逐叶点亮、撕纸音效。
+
+## 2026-09-06 Gacha reveal v2 打磨（R038）：单陀螺、Pack 先出场、下落放慢、carousel 悬浮
+
+> **当前状态：用户看过 rev-005 录屏，"整体来说是 OK 的"，提出四项打磨。已全部落地并用 Gate 12 Simulator 工程重录（`evidence/12-shipping/rev-006/`）。视觉批准待确认，未推送手机。**
+
+- **"卡里有两个陀螺"**：竖起来的那个不是奖品，是 Library 当前展示的三叶陀螺本体——位于场景原点，对 reveal 相机正好是侧面（一条横杠 + 轴承块），透过收藏盒透明外壳漏出；卡片翻转时它不动，所以两面都在同一处。修复：`FidgetAppCoordinator.HideLibraryProductForGacha()` 在 `AcquireGachaCamera` 时关闭产品根下的 Renderer（跳过挂在相机／`SpinnerEnvironmentPresenter` 下的洞穴图层，否则背景会一起变黑——rev-006 首次录屏就踩到了这一点），`RestoreLibraryProductAfterGacha()` 随相机恢复。另在 `PremiumDisplayCaseShippingPresentation.AttachContent` 隐藏 ContentFit 下的任何 authored 占位物（`Resources/Gacha/PremiumDisplayCase.prefab` 带开发用 `DevelopmentPlaceholder_Coin`；shipping 用的 Gate12 R004 prefab 没有），并加 `ContentFitHoldsOnlyAttachedContent` 断言。
+- **Pack 先出场、卡后入场**：Unity `HasCrossedPackLip` 在 case play 首帧即为真 → native Pack 立即开始下落；收藏盒起始位置改为顶边低于袋口 12 pt（`PullStartPeekPoints -12`，完全被袋身挡住），`PullStartSeconds 0.35` 后才开始抽出，所以先是 Pack 的下落把卡露出来，再是卡上升。下游拍点整体 +0.10 s（`LabelSeconds 3.55`，reveal ≈ 2.36 s）。
+- **Pack 速度**：`nativeHybridPackDepartureDurationSeconds 0.42 → 0.80`，`cubic-bezier(0.33,0,0.2,1)`；前 35% 保持实体，之后 smoothstep 淡出（`packDepartureOpacity`）。淡出整形必须逐帧按 retreat 求值，因此新增 `ProductPackDepartureEffect: ViewModifier, Animatable`（`animatableData = retreat`），否则 SwiftUI 只会把最终 opacity 线性插值，实体段丢失。
+- **carousel 悬浮**：`ProductPackIdleFloat`（`GachaPackIdleMotion`：Y ±6 pt / 2.4 s、yaw ±4° / 3.2 s、换页停稳后 ramp-in、拖动中暂停、Reduce Motion 关闭）挂在 carousel 选中 Pack 上；Gate 12 自动预览新增一次 STANDARD → REFINED → STANDARD 换页演示。
+- 验证：Unity EditMode Gacha* + Gate12 45 passed / 2 skipped（新增 `HideLibraryProductForGacha`/`RestoreLibraryProductAfterGacha` 接线断言、`ContentFitHoldsOnlyAttachedContent`）；Swift harness 123/123；`GachaShippingNativePreview` BUILD SUCCEEDED；Unity export `Builds/iOS/Logs/gate12-export8.log` Success，`xcodebuild` Release Success（`gate12-xcodebuild9.log`）。录屏 `Artifacts/PackTearNativeCandidate/r038-gacha-reveal-v2-polish/r038-gacha-reveal-v2-polish-clear.mp4`（实速 + 0.5×）、`-sheet.png`、原始 `-raw.mp4`；pipeline `evidence/12-shipping/rev-006/`（含 20 fps Pack-先落 strip 与正反面全尺寸裁切），history events `a3358c6c-…`（rev-005 用户打磨意见）、`3df370ff-…`（rev-006 ready）。
+- 运行环境备注：昨晚 Unity batchmode 卡住 28 min 是 Licensing Client 断连循环（`Channel LicenseClient-… doesn't exist` / `Timed-out after 60.00s`），杀掉残留 `Unity.Licensing.Client` 后恢复；本轮所有 Unity 调用加了 60 s 级 watchdog。
+- 仍未做：§8 卡面资产、洞穴 saturation、逐叶点亮、撕纸音效（同 R037 偏差列表）。
+
+## 2026-09-05 Gacha reveal v2（R037）：单条 timeline——撕封 → 抽出 → 卡背停顿 → 翻转 → 稀有度光效 → 结果面板
+
+> **当前状态：用户驳回 Gate 12 rev-004 并给出「Gacha reveal v2 · agent spec」（`FDB-GAC-033`）。Unity + Swift shipping 路径已按 §1–§7 接线并在 Gate 12 Simulator 工程中完整录屏（`ArtSource/ModelPipeline/premium-display-case/evidence/12-shipping/rev-005/`）。§8 卡面资产、洞穴饱和度、逐叶点亮、撕纸音效未做（见「偏差」）。视觉批准待确认，未推送手机。**
+
+- 时间轴（T0 = 撕封触发；Unity 侧 `GachaShippingRevealChoreography` 以 case play = T0+0.70 s 为零点）：选中 600 ms `cubic-bezier(0.16,1,0.3,1)` 居中放大 1.18×（carousel Pack 改为 244/1.18 pt，matchedGeometry 进入 244 pt 撕封 Pack），其余元素与 Pack 色相底 250 ms 淡出；Unity `EnterGachaStageFromNativeUi` 在选中时关闭 spinner 相机、把主相机移到 reveal 位、挂 `GachaRevealStageFX` 把洞穴压到 25%（dim 0.75），不再有纯黑态。待机 `TimelineView`：Y ±6 pt/2.4 s、yaw ±4°/3.2 s、封条 8 pt 高光每 1.8 s 扫 0.7 s；封条 72 pt 命中区，横拖 ≥40% 卡宽（`tearTravelPoints 158`，commit 0.62 ≈ 98 pt）或长按 450 ms 自动撕。撕封 320 ms `cubic-bezier(0.83,0,0.17,1)`，撕裂前沿 2 pt 亚光白 `ProductPackTearFrontEdge`；commit 时 `EmitGachaTearSnapFromNativeUi → FidgetHapticRouter.Emit(Pop, 0.7)`（medium）、袋口 `scaleY 1→1.06` 180 ms `cubic-bezier(0.34,1.56,0.64,1)`、封条 480 ms EASE_OUT（rotZ 14°、Y −90 pt、X +60 pt 顺撕向、全程淡出，不悬停）；commit 后隐藏「沿封边撕开」，`progressChrome` 不再显示任何内部状态字（仅保留 `receiptRecovery` 的「等待权威结果」与「跳过展示」）。R036 的 commit 闪白与放射线按 spec 移除（`releaseFlashPeakOpacity 0`、`releaseBurstStreakCount 0`）。
+- 抽出：draw 在 commit 发出（`drawAfterLidClearNanoseconds 0`），`startReveal` 不早于 commit+380 ms（`caseReadyMinimumAfterCommitNanoseconds`，即 T0+700）。收藏盒以背面朝前生成在 Pack 内（顶边露出 20 pt：`MouthViewportYFraction 0.68` 对应 44% 居中 Pack 的袋身顶边），`PullProgress` 用 `cubic-bezier(0.2,0,0.1,1)` 900 ms 抽到 apex（中心距顶 28%），settle 300 ms 落到 44%；抽出中 rotX −6°、scale 0.72→1。因盒体比 Pack 矮，直接抽到 44% 会全程被 Pack 遮住，apex 是为让抽出可读的实现决定。抽到 60%（0.54 s）发布 `case-crossing-pack-lip`，native Pack 420 ms EASE_OUT：+120 pt、rotX +10°（`rotation3DEffect` 底边锚点）、opacity→0；盒体 opacity 全程 1。
+- 停顿与翻转：卡背停 400 ms，边缘 glow 0→0.5×`glowIntensity`（frosted shell `_RimColor/_RimStrength` 经 `PremiumDisplayCaseDirectedPose.RimColor/RimGlow`）；预备 yaw +12°（背面侧）、scale 0.97、200 ms `cubic-bezier(0.36,0,0.66,−0.56)`；翻转 192°→0° 420 ms `cubic-bezier(0.83,0,0.17,1)`；回弹 −4° 180 ms 正弦；`RevealSeconds` 由 yaw 过 90° 那帧二分解出（≈2.01 s，即 T0+2.71 s）。
+- 揭晓光效（过 90° 帧起）：`GachaRevealRarityStyle` 按 rarity 查表——Standard `#9AA3AD`/0.35/flash 0/0 粒子/Pop 0.35；Refined `#5FB8FF`/0.5/0.25/24/Pop 0.55；Signature `#5FB8FF`/0.6/0.4/40/Pop 0.7；Heirloom `#C8F2C0`/1.0/0.85/120/`BadgeUnlocked`。全屏 flash 260 ms（60 ms 线性升、200 ms EASE_OUT 降）、glow 0.5→1.0（120 ms）→0.6（1200 ms）常亮、`ThreeBladeInsets` `_EmissionColor` 220 ms 点亮、Shuriken 粒子从盒体轮廓外扩（寿命 0.8–1.4 s、初速 120–260 px/s 折算世界单位、重力 −40 px/s²、alpha 线性衰减）、洞穴 dim 0.75→0 800 ms、盒后径向光晕 0→0.35（半径 = 盒宽 × 1.6）。标签 T0+3900 淡入 300 ms；Unity 同帧发布 `complete`，native 结果面板延 300 ms（T0+4200）自底 `.move(edge: .bottom)` 420 ms EASE_OUT 滑入；之后盒体 yaw ±3°/4 s 待机（`Tick` 完成后继续驱动）。
+- 代码：`GachaShippingRevealChoreography.cs`（`GachaCubicBezier` 二分求解 CSS 曲线、timeline、`GachaRevealRarityStyle`、`GachaRevealStageFX` dimmer/flash/halo/particles）、`GachaShippingRevealDirector.cs`（`PrepareShippingChoreography`/`ApplyShippingChoreography`/`MeasureShippingOffsets`/`ShrinkStartUntilInsidePack`/`EmitRevealBurst`/`PrepareBladeEmissive`/`AdoptStageFX`）、`PremiumDisplayCaseDirectedPose`（新增 `RimColor/RimGlow`）与 `PremiumDisplayCaseShippingPresentation.ApplyRimGlow`、`FidgetAppCoordinator`（`EnterGachaStageFromNativeUi`/`LeaveGachaStageFromNativeUi`/`EmitGachaTearSnapFromNativeUi`、`AcquireGachaCamera` 幂等、`RestoreGachaCamera`、`HandleGachaShippingFrontRevealed` 按 rarity 发语义 Haptic）；Swift：`FidgetGachaPackPresentation.swift` 新常量、`FidgetProductUIComponents.swift`（`ProductPackSealSweep`、`ProductPackTearFrontEdge`、袋口 gape、下退 tilt/fade、`sealHitRect`）、`FidgetGachaShippingStorefront.swift`（`PackTearStage` TimelineView 待机、封条手势、`visibleStatusTitle`、`enterGachaStage/leaveGachaStage/emitTearSnap`）。
+- 验证：Unity EditMode `GachaShippingRevealChoreographyTests`（曲线、拍点、yaw、60% 下退、rarity 光效、接线字符串）+ `GachaNativeHybridCandidateTests` + `PremiumDisplayCaseGate12Tests` + `GachaStorefrontIntegrationTests` + `GachaRevealTests`：45 passed / 2 skipped；Swift harness `GachaGate12RulesHarness` 121/121；`GachaShippingNativePreview` BUILD SUCCEEDED；Gate 12 Simulator export `Builds/iOS/Logs/gate12-export4.log` Success，`xcodebuild` Release Success；完整录屏 `Artifacts/PackTearNativeCandidate/r037-gacha-reveal-v2/r037-gacha-reveal-v2-clear.mp4`（实速 + 0.5×）、`r037-gacha-reveal-v2-sheet.png`、原始 `r037-gacha-reveal-v2-raw.mp4`，同步至 pipeline `evidence/12-shipping/rev-005/`（history event `bf33dd8b-77d4-44e3-8f7d-e0ede3fec250`；驳回 rev-004 event `a936294b-73d5-4d8a-bf1b-c204de832cf3`）。
+- 偏差 / 待办：① 洞穴 saturation 0.6→1.0 未做（仅 brightness，dimmer quad 无法去饱和；需 URP Volume ColorAdjustments）。② 叶片点亮为 `ThreeBladeInsets` 单网格一次 220 ms，非三叶 0/90/180 ms 交错。③ §8 卡面资产（完整陀螺渲染 + rarity emissive 边光、卡背 roughness 0.35）未开始；prize prefab 本身含 RotorCore/HubVisual/TopCap，"缺盖体" 是暗材质在盒内读不出，属材质/灯光工作。④ 撕纸音效：产品尚无 gacha 音频通道。⑤ 命名：gacha 流程内名称均来自 receipt（`三叶金属陀螺`），「三叶尖金属」是 Library 当前模型标题，抽卡期间顶栏已隐藏，需用户在录屏中确认无残留。⑥ Simulator 中 Unity 首帧仍偶有短暂掉帧，真机待验。
+
+## 2026-09-05 Pack tear R036 release-beat：对齐 Sweeps 的 commit 拍点（闪白 + 放射线），并列对比（已被 R037 v2 取代：commit 闪白/放射线移至揭晓帧）
+
+> **当前状态：用户指出与 Sweeps 现有实现仍有差距。逐帧对比 `Artifacts/SweepsReference/videos/section-2.mp4` 后，native 侧可补的已补：commit 时全屏闪白（峰值 0.82、约 0.45 s 内衰减）+ 44 条从袋口向外射出的放射线（0.60 s），封条飞出更高更快（抬升 176 pt、旋转 22°）。其余差距在 Unity／产品层，需要决策（见下）。视觉批准待确认，未推送手机。**
+
+- Sweeps 拍点（60 fps 逐帧）：剪断 1.43 s → 同帧全屏闪白 + 放射线，封条 0.2 s 飞出；Pack 在剪断同一拍立即下落（约 0.35 s），卡牌随 Pack 下落露出，再下沉到屏幕中央并放大回弹；背景保持暖色 wash，随后转为稀有度色并淡入名称／SAVE。剪断→稳定约 1.2 s，无空拍。
+- R036 native 侧改动：`ProductPackReleaseBurst`（全舞台闪白 + `ProductPackBurstStreaks` 确定性放射线，绕 `ProductPackTearLayout.seamCenter` 发射，不随下退移动）取代原 7 条小射线；`releasePulseDurationSeconds 0.26→0.60`、rise `0.04`、peak `0.06`、`releaseFlashOpacity = 0.82·s^2.4`；`sealExitLiftPoints 132→176`、`exitRotationDegrees 14→22`、`exitDriftPoints -10→-16`。`nativeHybridContainmentHoldNanoseconds` 试过 40 ms：Simulator 下收藏盒首帧仍阻塞主线程，Pack 下退变成硬切，已回到 120 ms。
+- 仍存在的差距（不是 native 层能单独解决的）：① Pack 下落与剪断同拍——我们的 draw／receipt／isolation／case setup 只能在 commit 之后发生，R030 门禁要求收藏盒 ready 才允许 Pack 下退，因此下退比 Sweeps 晚约 0.3 s（Simulator 约 0.5 s）；要同拍需在 commit 前预实例化收藏盒并在 receipt 到达后再挂 prize（Unity 架构 + 门禁变更）。② 舞台颜色——R030 isolation 把相机清屏为纯黑，Sweeps 全程暖色 wash；改相机清屏色为 Pack 色相是 C# 改动，且属设计圣经层决策。③ 收藏盒出场——Unity 起始 Y 偏移夹在 `[-0.20, -0.04] m`、缩放 `0.94→1`，几乎看不到升起；Sweeps 卡牌大幅位移 + 放大 + 回弹，需要改 `GachaNativeHybridCandidateMotion` 常量并重新 export Simulator 工程。④ Pack 底座——Sweeps 的 Pack 留在屏幕底部作底座，我们的滑出屏幕（`departureDistance ≥ 72% 屏高`）。⑤ 结果信息／CTA 淡入属 reveal 完成态，不在撕包范围。
+- 并行任务冲突：R030 export 的 `FidgetGachaShippingStorefront.swift`／`FidgetGachaNativeHybridR030Candidate.swift` 副本在 14:54／15:00 被另一任务写入了 `ProductPackReleaseFlash`／`nativeHybridStageDim*` 实现（源码在 15:03 已不含这些改动），导致 export 编译失败；本任务已用源码覆盖 export 副本（旧副本备份在 `/tmp/pack-tear-redo/foreign-export-copies/`）。同一 feature 请只保留一个执行任务。
+- 验证：rules harness `117/117`（hold／drawAfterLidClear／flash 衰减断言已更新）；GachaShippingNativePreview 与 R030 export Xcode `BUILD SUCCEEDED`；EditMode 三个测试类 `30 passed / 2 ignored / 0 failed`；R030 trace F1–F4 齐全。
+- 预览：`Artifacts/PackTearNativeCandidate/r036-sweeps-release-beat/r036-vs-sweeps-side-by-side.mp4`（左 Sweeps、右 R036，以剪断／commit 对齐，实速 + 0.4×）、`r036-release-beat-hybrid-clear.mp4`、`r036-vs-sweeps-sheet.png`、`r036-release-beat-hybrid-sheet.png`、原始录屏 `r036-hybrid-raw.mp4`。
+
+## 2026-09-05 Pack tear R035 seal-fin：静态 Pack 补全、封条即顶盖、去描边、动作连贯
+
+> **当前状态：用户对 R034 提出三点：静态 Pack 素材不完整、动作不连贯、封口出现不明物体。R035 已修：Pack 恢复为 body + flap（封条）合成；顶盖改为 authored 封条本体，沿袋身顶边（row 92）撕下，袋身永不裁切；删除亮色撕边描边与腔体描边；修掉三处让动画掉帧的主线程阻塞。R030 Simulator hybrid 全程重录。视觉批准待确认，未推送手机。**
+
+- 根因①「素材不完整」：`gacha-pack-*-flap.png` 是 Pack 顶部封条（rows 45–101，锯齿顶边），`-body.png` 从 row 92 起、顶边平切；二者叠加才是完整 Pack。R034 停止绘制 flap，静态 Pack 因此顶部被削平。现 `ProductPackSealedArtwork` 统一渲染 body + flap，撕包层、carousel `PackArtwork`、预览工具同源。
+- 根因②「不明物体」：R034 在袋口画了一个带亮色渐变描边（`Color.white 0.82`）的深色腔体 slab，isolation 黑底上读成一块悬浮的板。现 `ProductPackMouthLip`／`ProductPackTornEdge` 已删除；腔体为不透明深色 sliver（R033 `opaqueLocalCavity` 合同），紧贴袋身顶边、两端 `openingEndTaperFraction=0.07` 收进袋肩、无描边，黑底上自然消失。
+- 根因③「动作不连贯」（Simulator 实测帧间隔）：a) `GachaNativeHybridR030Diagnostics.capture` 在每个 layer-update／F1／F2 做 3× 全屏 `layer.render` + PNG 编码 + 落盘，主线程卡 100–300 ms，撕开首 0.25 s 与顶盖飞出全程只剩 ~10 fps；现仅 checkpoint 运行保留像素捕获，全程模式只写 trace。b) commit 同帧发起 draw → receipt → isolation → case setup，Simulator 主线程阻塞 ~0.28 s，顶盖飞出被冻结再跳变；现 `GachaPackHandoffRules.drawAfterLidClearNanoseconds`（= flapExit 0.30 s）之后才 `model.draw`，storefront 与 R030 同步（Reduce Motion／checkpoint 模式仍立即 draw）。c) 顶盖飞出改为 `.linear` 驱动（pose 内部已 smoothstep，叠加 easeOut 读成跳切）；Pack 下退改 `.easeIn`。
+- 几何：`authoredSeamYFraction 120/512→92/512`（= body 顶边 = 封条／袋身分界）；新增 `authoredPackTopYFraction=45/512`（封条顶）、`authoredFlapSpanFraction=24/384…360/384`；`peelHingeDegrees 4.5→3.5`（封条 47 行高，顶边错位 <2 pt）；`compactTopAreaBottomFraction 0.26→0.21`。lid 由 flap raster 按 `ProductPackTornAwayTopShape`（inset→撕裂前沿列，顶到 seam+1.6 pt 纹理）裁出，铰链在前沿；未撕部分由 `ProductPackSlitBodyMask` 显式补集遮罩保留——原 even-odd 减法在此处让整段未撕封条消失，已改为 `FillStyle(eoFill: false)` 的三块多边形。
+- Simulator 实测帧节律（`hybrid11`，60 fps 采样）：撕开 4.53–4.87 s 连续；顶盖飞出 4.93–5.13 s 连续；isolation 切黑 5.47 s（静止画面上，不可见卡顿）；Pack 下退 + 收藏盒升起 5.65–6.28 s 连续。
+- 验证：Swift rules harness `117/117 PASS`（新增封条几何、end taper、lid 上下边 4 项）；GachaShippingNativePreview Xcode `BUILD SUCCEEDED`；R030 export 增量 Xcode `BUILD SUCCEEDED`；EditMode `GachaNativeHybridCandidateTests`+`PremiumDisplayCaseGate12Tests`+`GachaStorefrontIntegrationTests`=`30 passed / 2 ignored / 0 failed`（含 GPU 光效测试，有图形运行）；R030 trace F1–F4 齐全。字符串测试已同步：lid 资产改为 `flapAssetName`、`ProductPackSealedArtwork`、无 `ProductPackMouthLip`／`ProductPackTornEdge`、seam `92.0 / 512.0`。
+- 预览：`Artifacts/PackTearNativeCandidate/r035-seal-fin-hybrid/r035-seal-fin-hybrid-clear.mp4`（1206×2622、60 fps、16.9 s：实速 → 0.4× → 封口特写 0.33×）、`r035-seal-fin-hybrid-sheet.png`、原始录屏 `r035-hybrid-raw.mp4`。R034 预览目录保留为历史。
+- 已知限制：`verify_hybrid_r029.py` 的静态 F0–F4 overlay 校验未在本轮重跑（几何已变，需重采 checkpoint 捕获）；Simulator 下 Unity 主线程仍比真机慢，真机节律待验证；Unity 收藏盒起始 Y 偏移夹在 `[-0.20, -0.04] m`，升起位移短。
+
+## 2026-09-05 Pack tear R034 whole-lid：Sweeps 节奏、整块顶盖、hybrid 全程预览（已被 R035 取代）
+
+> **当前状态：用户拒绝 R033 分段封条（"碎纸片"）。R034 改为单块刚性顶盖：撕开时沿撕裂前沿铰链抬起 `4.5°`，commit 后整块以 `14°` 旋转、`132 pt` 抬升、`0.30 s` 飞出并在越过袋口后淡出；无剪刀元素。R030 Simulator hybrid 全程（native 撕包 → 顶盖飞出 → 隔离 → 真实 Unity 收藏盒从袋口升起、Pack 下退）已录屏。视觉批准待确认，未推送手机。**
+
+- 节奏（源自 `section-2.mp4` 分析，无剪刀）：lead-in `80 ms` → 撕开 `0.36 s`（左→右）→ commit：顶盖 `0.30 s` 飞出 + 爆点 `0.26 s`（7 条上半球射线，避开标题文字）→ receipt／Unity 两帧稳定 → 停顿 `120 ms` → Pack `0.24 s` 下退，同时收藏盒 `0.64 s` 升起（`0.94→1.0` 缩放）。
+- 几何：`authoredPackFaceTopYFraction`／`authoredSeamYFraction` 按 `gacha-pack-standard-body.png` 像素重新定位到 crimp／面板边界；`openingInsetFraction 0.09→0.05` 去掉两侧 crimp 耳；`maximumOpeningHeightPoints 34→10` 保持窄缝；顶盖由 body raster 遮罩切出，飞出的像素与被移除的像素一致。
+- 本轮修复的两处运行时缺陷：① `GachaNativeHybridR030CandidateView` 全程模式此前把 `tearProgress` 停在 commit=`0.62`，顶盖永不飞出、无爆点；现 `playLidRelease()` 复用 shipping commit 拍点（capture checkpoint F0–F4 仍停在 commit，不改既有 overlay 证据）。② R030 与 `GachaStoreView` 的 `packRetreatProgress` 在 `withAnimation` 中作为 model 值立即变 1，`if` 分支同帧卸载 Pack，下退动画从未渲染；现以 `packDeparted` 在时长结束后才卸载。`ProductLiveUnityPackRevealLayer` 新增默认 `0` 的 `releasePulseStrength`。
+- 验证：Swift rules harness `113/113 PASS`；R030 Simulator export 增量 Xcode `BUILD SUCCEEDED`；EditMode `GachaNativeHybridCandidateTests`+`PremiumDisplayCaseGate12Tests`=`28 passed / 2 ignored(R031、R032 superseded) / 0 failed`（GPU 光效测试在 `-nographics` 下不可运行，单独有图形运行为 `1/1`）。`PremiumDisplayCaseGate12Tests.NativePackTearUsesRealLayersMaskAndReadyGatedCoverage` 的过期字符串（`0.48/0.68` 排练、`OuterFoilMask`、`MouthCavity`、flap offset helpers）已改为当前 R033/R034 实现。R030 trace：F1–F4 齐全、`callbackResult=accepted`、F4 `packForeground=false`、`nativeHybridProgress=1`。
+- 预览证据（真实 shipping Swift 源 + R030 Simulator export，iPhone 17 Pro Simulator `5BF378DF-…`）：`Artifacts/PackTearNativeCandidate/r034-whole-lid-hybrid/r034-whole-lid-hybrid-preview.mp4`（`3.2 s` 实速）、`…-preview-slow.mp4`（`0.4×`）、`…-closeup-slow.mp4`（袋口特写 `0.33×`）、`r034-whole-lid-hybrid-sheet.png`、原始录屏 `r034-hybrid-raw.mp4`／`r034-native-raw.mp4`。
+- 已知限制：Unity 收藏盒起始 Y 偏移被夹在 `[-0.20, -0.04] m`，升起位移本身很短，可见的"升起"主要由 Pack 下退揭开；R030 export 内 `FidgetGachaShippingStorefront.swift` 此前为旧版，本轮已同步补丁，但 `GachaStoreView` 的 candidate 分支在 handoff 阶段仍绘制 `Color.black`，非 R030 路径下 Unity 收藏盒不可见（既有状态，未在本轮改动）。
+
+## 2026-09-04 Build 44 provisioning refresh installed, launch blocked on device trust
+
+> **当前状态：Build 44（0.1.0/44）已用新的 7 天 Team profile 重签并覆盖安装到 iPhone 15 Pro Max。启动被系统拒绝：开发者证书尚未被用户明确信任。未改 Unity 源码、未升 Build 号、未 App Store submission。**
+
+- 根因：旧 profile `47873acc-04e8-4f0a-bbd1-7996c45c9109` 于 `2026-09-03T06:47:45Z` 过期。Mac 上 codesign 仍通过，但设备拒绝启动。
+- 新 profile UUID=`199b8813-919d-49c3-b7ed-9e82c88d4c49`，创建 `2026-09-04T03:39:25Z`，到期 `2026-09-11T03:39:25Z`。`codesign --verify --deep --strict` 通过；Xcode `BUILD SUCCEEDED`。
+- 设备库存回读=`com.jiaweizhou.fidgetspinner.codex 0.1.0 (44)`。`devicectl` launch 报 `FBSOpenApplicationErrorDomain` Security：profile 未被用户明确信任。
+- 证据：`evidence/12-shipping/runtime-recovery-build42/device-delivery/magnetic-slide-build44-resign-20260904/`。Device Acceptance 仍待用户信任后打开 App。
+
+## 2026-09-03 Magnetic Fan Card front-axis no-ring hard rule
+
+> **当前状态：旧 `CommonAxis_BearingCap_Chrome` 已从 Blender、两个 Fan Card FBX、shipping Unity scene 和重建入口移除。正面只保留下沉 `M_FanCardAxisMatte` 哑光轴芯。视觉批准待确认，未推送手机。**
+
+- 根因：旧合同和测试强制保留低矮铬帽。峡谷顶光使帽体中心接近牌面颜色，边缘产生蓝白 Fresnel，因此读成银色圆环；旧测试只验证名字和尺寸，反而锁住缺陷。
+- 权威合同现只允许 `CommonAxis_RecessedMatteSpindle`：半径 `2.00 mm`、下沉 `0.12 mm`、metallic／smoothness=`0`，specular highlights／environment reflections 均关闭。`BearingCap`、`Ring`、`Washer`、`AxisSeat`、`CoverDisc`、`ChromeBall`、`BallSeat` 在场景与 dormant FBX mesh 中均阻断。
+- `fan_card_guardrails.json`、Blender builder、export、C# 规格、Unity scene builder、geometry validator、acceptance tests、AGENTS、Cursor hard rule、专项门禁和设计圣经已同步。未改变 `63.5 × 88.9 × 3.5 mm` 牌身、`1.0 mm` 层隙、共同轴心、Bottom/Middle/Top 运动归属、正背面隔离、角标父子关系、Collider、四档物理、音频或 Haptic。
+- 2026-09-03 重建验证：source/full Fan Card guardrail=`ALL PASS`，完整轨道外轮廓净距=`7.590 mm`；`CardGeometryValidator`=`ALL PASS`，三张牌均 `open/nonmanifold=0, degenerate=0`；`FanCardAcceptanceTests=23/23`。
+- 真实 shipping Unity scene 刷新 27 张 Canyon 视图，路径为 `Artifacts/EnvironmentIntegration/magnetic-fan-card-canyon-multiangle-r011-matte-axis/`，覆盖 top、hero、左右斜视、low、back、track closeup 和轴心特写。当前 Gate 12=`stale`、`11/12`；等待当前 shipping 视觉明确批准。未 build、install、launch 或操作物理 iPhone。
+- Fan Card pipeline validator=`errors/missingFiles/unhashed 0/0/0`。Model Provenance Explorer 全量测试仍被并行 Magnetic Slide 与 Premium Display Case 的历史状态断言阻塞；本任务未修改或放宽这些测试。
+
+## 2026-09-03 Magnetic Slide Tile Build 44 installed
+
+> **当前状态：Build 44（0.1.0/44）已 export、签名、安装并启动到 iPhone 15 Pro Max。包含 Gate 11 rev 14 hybrid 材质、Variant B 灯光、旋转方向修复与完整 production interaction stack。真机验收待用户确认。**
+
+- Job=`magnetic-slide-build44-20260903T003750Z-snapshot`；buildKey=`7c4bc41cef913c799797b32d0a195e6da07d84d750a5a095c360a67bf63310b4`；source digest 在 snapshot 与 export 后一致。
+- Preflight：pipeline=`12/12`；EditMode=`43/43`；PlayMode=`5/5`；无 App Store submission。
+- Device：wired tunnel、DDI 可用、Developer Mode=`enabled`、passcodeRequired=`false`；UDID=`00008130-001A00361EE0001C`。
+- Unity export 成功；Xcode `BUILD SUCCEEDED`；install/launch 成功；进程 PID=`16125` 在 delivery 后仍存活。
+- 设备 console 捕获 Unity/Metal/Input System 初始化，但未在 18s 窗口内捕获 `[MagneticSlideRuntime]` interaction/audio markers；`runtimeStartupMarkersCaptured=false`。
+- 证据目录：`evidence/12-shipping/runtime-recovery-build42/device-delivery/magnetic-slide-build44-20260903T003750Z-snapshot/`。pipeline rev=`309`。
+
+## 2026-09-03 Magnetic Slide Tile rev 14 approval and Build 44 block
+
+> **历史：用户以原话“批准 rev 14，构建并安装 Build 44”批准 Gate 11 rev 14。此前因 CoreDevice provider 不可用而阻塞；该阻塞已在 wired 重连后解除。**
+
+- Rev 14 shipping source 组合 rev 12 的 authored RGB、`28/85` mica/microflake、上下 albedo／roughness／normal／motif detail，与 rev 13 的 `0.28/0.14/0.00 mm` substrate／motif／crystal 三层结构。晶体 IOR=`1.52`、transmission=`0.985`、refraction=`0.35 px`。
+- Shipping scene 上下各三张 cap-only renderer 已绑定 `M_G11R014_*` 六个材质；dark side 无图案、silver rim、外部 bounds、collider、固定轴、端点互锁、clockwise/counterclockwise 修复、Pinch/Orbit、audio/Haptic 与 Variant B 灯光保持。
+- Approval 进入 pipeline rev=`305` 与 `history.ndjson`；DecisionState=`Gate 11 rev 14 approved`。DeliveryState=`Build 44 authorized but not started`；Device Acceptance=`pending-build44-install-and-user-validation`。
+- 构建前检查：本机可用空间=`159 GiB`，无 Unity/Xcode writer。`devicectl` 返回 iPhone 15 Pro Max=`paired/unavailable`。依用户的设备阻塞规则，未启动 Unity preflight、PlayerSettings 归一化、source snapshot、export、Xcode、签名、安装或启动；无 App Store submission。
+- 2026-09-03 解锁后重试仍被连接层阻塞：physical iPhone 15 Pro Max、UDID=`00008130-001A00361EE0001C`、pairing=`paired`、Developer Mode=`enabled`，但 tunnel=`unavailable`、DDI=`false`，`device info details` 报 `CoreDeviceError 1002: No provider was found`。最后连接时间为 `2026-09-02T08:37:00Z`；因设备不可达，`passcodeRequired=false` 无法查询。pipeline rev=`306`。Build 44 编号未消费，未创建 export。
+- 2026-09-03 08:18 再次连接重试结果不变：CoreDevice provider 仍不存在，tunnel=`unavailable`、DDI=`false`，最后连接时间未更新；本机可用空间=`157 GiB`，无 Unity/Xcode writer。pipeline rev=`307`；Build 44 仍未消费，未获取构建锁、未运行 Unity preflight 或创建任何新 export。
+- 2026-09-03 08:23 用户报告有线连接后，本机实时复核仍返回 `CoreDeviceError 1002: No provider was found`；lock-state 查询另报 `CoreDeviceError 1011`，无法匹配 `ecid_7318581840707612`。本机 `devicectl` 状态仍为 pairing=`paired`、Developer Mode=`enabled`、tunnel=`unavailable`、DDI=`false`。pipeline rev=`308`；Build 44 仍未消费，未获取锁、未运行 preflight/export/Xcode/sign/install/launch。
+
+## 2026-09-02 Magnetic Slide Tile layered material correction
+
+> **当前状态：Build 42 因红面材质被压平而判定视觉验收失败。Gate 11 rev 12 分层材质已生成真实 shipping 预览，等待视觉批准；Build 44 未构建、未安装。**
+
+- 根因：Gate 10/11 的 `PortablePBRR011` 为 OPAQUE、transmission=`0`，把 base color、单一 roughness/normal 和弱 clearcoat 合并进同一 BRDF。它避免了白化，却丢失了 Blender 获批材质的基底、黑图案和清漆独立响应。
+- 修复采用单 pass 自定义 URP shader，不增加透明 shell、renderer、draw call、overdraw 或 bounds。血红基底使用原贴图、`28/85` 两级 mica/microflake、roughness `0.022–0.11` 和强度 `0.12` 的角度色移；黑图案使用上下独立 mask、roughness `0.18`、metallic `0.24`、UV relief `0.0012`；清漆使用 IOR `1.52`、roughness `0.035`、strength `0.78`、depth cue `0.0016`。Emission=`0`。
+- 真实 `MeshyEDC.unity` 同机位包含 Front、Hero、左右斜视、Grazing、Low、Phone 和 max-open。6 秒 `1280×720@30 fps` 录屏展示相机移动时的颗粒、角度色移和清漆反射。四方权威对照包含原始产品、Blender、当前平涂 Unity 和修正 Unity。
+- 图像门禁：对象 P50 `0.135→0.217`；红区饱和度 `0.393→0.500`；红区局部变化 P90 `0.0133→0.0322`；黑区中位亮度 `0.110`；clipping=`0%`。
+- 七个 interaction/mechanism/settings/prefab/audio/Haptic 文件、mesh identity、renderer count、material slot count 和 bounds 均未改变。dark side、silver rim、underside 与 top-only artwork 分区保持。
+- 验证：Metal shader target `3.5` 编译无 error/warning；SRP Batcher 使用单一 `UnityPerMaterial` CBUFFER。Focused EditMode=`3/3`；真实 shipping Input System PlayMode=`5/5`。
+- 证据位于 `evidence/11-unity-parity/rev-012-layered-material/`。视觉批准待确认，未推送手机。Build 42 保持 rejected；Build 44 的 export、签名、安装、启动和 App Store submission 均未执行。
+
+## 2026-09-01 Magnetic Slide Tile Build 42 rotation-direction rejection
+
+> **当前状态：Build 42 真机验收因“现在旋转方向是反的”失败。方向修复已通过 Unity 测试；Build 43 仍永久不可复用。Build 44 未构建，等待 iPhone 重新连接。**
+
+- 根因：`EdcSliderController` 把屏幕 `atan2` 的正角直接用于模型 local `+Z`。shipping 相机从轴线另一侧观察，因此手指与 `TopPlate` 的视觉方向相反。
+- 修复：触点先由 screen ray 投到固定轴交互平面，再围绕 `RotatingCarrier` 的有向 world `+Z` 用 `Vector3.SignedAngle` 累计。该映射不依赖固定屏幕符号，并跨 `0/360°` 连续。
+- 仲裁：端点手势以切向弧长和径向位移判定旋转或闭合直推。Slide 方向、空白区右拖 Orbit 正 yaw、Pinch、端点互锁、Variant B 灯光和音频／Haptic recipe 未改。
+- 方向语义：每次 `DetentCrossed` 记录 signed direction 和 unwrapped detent index；同一同步事件把该元数据送到音频 renderer 与 Haptic router telemetry。
+- 验证：focused EditMode=`37/37`；真实 Input System PlayMode=`4/4`。真实 touch arc 覆盖 authored camera 顺时针 `12°`、Orbit 后逆时针 `36°`、Pinch 后顺时针完整 `360°`、30 个 `12°` detent 顺序、音频／Haptic 方向和 index、闭合对齐、无自运动及 Pinch／Orbit 仲裁。
+- Pipeline rev=`293`；证据位于 `evidence/12-shipping/runtime-recovery-rotation-direction/`。本机可用空间=`57 GiB`；iPhone=`paired/disconnected`。未执行 Build 44 export、Xcode、签名、安装、启动或 App Store submission。Device Acceptance=`pending-build44-install-and-user-validation`。
+
+## 2026-09-01 Magnetic Slide Tile Build 42 lighting rejection and Gate 12 rev 4
+
+> **当前状态：Build 42 交互为 partial device success，但暗灯光被拒绝。Gate 12 lighting rev 4 Variant B 已获 review UI 视觉批准并进入 shipping source。Build 43 Unity export 成功，但 Xcode 因本机磁盘只剩 `119 MiB` 失败；未签名、安装或启动。真机验收待执行。**
+
+- Build 42 使用 `MainCamera HDR=false`，没有 URP Volume、曝光或 tone map。场景 key/fill=`0.54/0.42`，reflection=`0.56`；近黑环境与未校准的设备亮度/HDR 假设使暗侧和血红中间调在 iPhone 上不足。贴图、材质和 emission 不是根因。
+- A 保留 Build 42：`0 EV`、HDR off、无 tone map、ambient `1.00×`、reflection/key/fill=`0.56/0.54/0.42`。
+- B 已获 shipping 视觉批准：`+0.55 EV`、HDR on、Neutral tone map、ambient `1.25×`、reflection/key/fill=`0.70/0.68/0.54`、white balance `0/0`。模型 P50 提升 `27.8%`，黑色细节 P25 提升 `38.9%`，红色饱和保留 `94.7%`，测得 clipping=`0%`。
+- C 为更亮 D65：`+2.35 EV`、HDR on、ACES、ambient `1.80×`、reflection/key/fill=`1.00/1.08/0.86`、white balance `0/0`。模型 P50 提升 `31.8%`，黑色细节 P25 提升 `3.7%`，测得 clipping=`0%`。
+- 真实 `MeshyEDC.unity` 同机位生成 A/B/C 的 Library、Hero、Top、左右斜视、Low、Phone、max-open 和 endpoint-36°。比较板、phone 板、histogram 与 `26.6 s` Unity-only 视频位于 `evidence/12-shipping/rev-004-lighting/`。
+- 七个 input/mechanism/settings/prefab/audio/Haptic source hash 与 Build 42 后状态一致。geometry、material、artwork、camera recipe、endpoint interlock、gesture、audio 和 Haptics 均未改。
+- 验证：Unity focused EDC EditMode=`37/37`；真实 Input System PlayMode=`3/3`；magnetic-slide provenance=`168/168`；图像质量门禁通过。七个 protected runtime/model source 与 Build 42 snapshot SHA-256 逐文件一致。
+- `MeshyEDC.unity` 已保存 `MagneticSlideShippingLightingController.variant=BalancedBrighter`、key/fill=`0.68/0.54`，approved magnetic-slide model 仍默认 active，fallback 仍 disabled。批准记录为 `variant-b-shipping-approval.json`；pipeline rev=`289`，`12/12 approved`。
+- Build 43 job=`magnetic-slide-build43-20260901T075038Z-snapshot`，build key=`431edcc2…3365`，source digest=`7a3d4875…1e74`。ProjectSettings 与 source 分别稳定 `5 s/3 s`；Unity BuildReport=`Success`，export 后 protected hashes 完全一致。
+- Xcode 在 `GenerateDSYMFile` 报 `LLVM ERROR: No space left on device`，随后 `build.db: database or disk is full`；当时本机仅余 `119 MiB`。未产生有效 `.app`，所以 sign/install/launch/runtime logs 均未发生。Build 43 job 永久 `reusable=false`；下一次必须为 Build 44 或更高的新目录。
+- Build 43 preflight 时 `passcodeRequired=false`、tunnel=`connected`、transport=`localNetwork`；失败后设备状态变为 paired/disconnected。无 App Store submission。Device Acceptance=`pending-valid-build-install-and-user-validation`。
+
+## 2026-09-01 Magnetic Slide Tile Build 41 rejection and Build 42 recovery
+
+> **当前状态：Gate 12 rev 3 视觉批准不变；Build 41=`rejected-low-fi-noninteractive`。运行时修复当前复测 EditMode `33/33`、真实 PlayMode Input System touch `3/3`、build-number/compile `1/1`。Build 42 已完成稳定 source snapshot、Unity export、Xcode build/sign、安装与启动；真机日志已捕获 production input、Orbit、Slide 和语义音频播放。Device Acceptance 待用户验收。**
+
+- Build 41 仅直推可用；端点旋转、Pinch、空白区拖动 Orbit／重定位和声音均失效。该 build 保留为已导出、签名、安装、启动但用户拒绝的历史，绝不复用。
+- 根因一：旧 `ShippingInteractionSurface` 属于 `MovingTop`，没有随 `TopLocalSlide` 的直推 transform 移动；顶片到达端点后，屏幕可见顶片与命中体分离。
+- 根因二：`EdcPortraitCameraFramer.target` 仍指向 inactive fallback `EDC_Root`。bounds 查询失败，因此 `SharedPresentationGestureController` 收到 Pinch／Orbit 后无法更新有效相机姿态。
+- 根因三：候选没有 active `MagneticSlideDetentAudio`；旧音频仍在 inactive fallback。机制语义又绕过 `EdcSliderController` 直达 generic Router，导致 production `FidgetAppCoordinator.EmitMagneticSlider` 与音频订阅都收不到同一事件流。
+- 根因四：Build 41 测试用 mouse state、`SendMessage("Update")` 和直接 controller API，未覆盖真实 PlayMode touch、双指 Pinch、手势竞争、AudioSource 或 App coordinator。
+- 修复复用 shipping 组件：`EdcSliderController` 负责玩具触控；`SharedPresentationGestureController` 负责空白区 Orbit 与双指 Pinch；`EdcPortraitCameraFramer` 绑定 active candidate 与稳定闭合 bounds；`MagneticSlideDetentAudio` 使用 6 个 active 2D `AudioSource`；`FidgetAppCoordinator` 消费同一语义流并进入 `FidgetHapticRouter.EmitMagneticSlider`。没有 raw input→`IosHaptics`。
+- 手势映射：单指命中顶片=`Slide`；只有 `sMax/0°` 才按切向拖动进入 `Rotate`；非零角保持 `sMax`；回到 `0°/360°` 后向内拖动闭合。单指从模型外开始=`Orbit/reposition`；双指=`Pinch`；Pinch 后必须全部抬起才允许新玩具手势。
+- 机制使用 unwrapped angle，完整一圈严格产生 `30 × 12°`；4 个空间 slide step、endpoint unlock、旋转 detent 与 lock 共享机制事件。PlayMode 日志记录 touch receipt、zoom、angle、audio-ready 与 `PlayOneShot`。
+- 场景证据：`MeshyEDC.unity` SHA-256=`b6452b14…6bebfd`；活动 collider 唯一且父级=`TopLocalSlide`；hidden/debug enabled colliders=`0`；active audio voices=`6`；相机 target=`MagneticSlideTileGate12R002Candidate`，并保留 Build 41 默认相机 pose。geometry／materials／默认构图未改。
+- 验证：focused EditMode=`33/33`；dedicated PlayMode=`3/3`；Build 42 number/compile=`1/1`。覆盖 hit/layer/Input actions/no EventSystem blocker、直推、禁转、端点 360°、闭合互锁、Pinch、Orbit、仲裁、音频事件计数、Haptic telemetry、reload/reset/no-self-motion 与默认 scene registry。
+- 首次 Build 42 delivery job=`magnetic-slide-build42-20260901T034218Z-380ac0e4`：paired=`true`、Developer Mode=`enabled`、tunnel=`connected`、DDI=`true`、transport=`wired`、`passcodeRequired=false`。Unity BuildReport=`Success`，并生成完整 Xcode project、`Info.plist` 与 `FidgetingBuildManifest.json`。根因不是并发 writer：export log 明确显示 coordinator 在 snapshot 后调用 `ConfigureIosBuild → PlayerSettings.SetGraphicsAPIs → SaveAssets`；`ProjectSettings.asset` mtime 随该 Unity PID 更新。
+- snapshot 语义已改：外层同时持有 iOS pipeline 与 canonical Unity writer 锁；等待 canonical writer 连续三次为空；先集中分配并写入 Build 42、切换 iOS、保存／同步刷新，再计算 build key。snapshot 前后记录逐文件 hash；`ProjectSettings.asset` 必须稳定 5 秒，全 source digest 必须稳定 3 秒；export 路径只验证准备值，不再调用 coordinator setter。
+- 第二次 job=`magnetic-slide-build42-20260901T035013Z-snapshot`：`ProjectSettings.asset` 准备前 hash=`c49f391e…`，snapshot hash=`fc6985e3…`；5 秒与 3 秒稳定窗口均通过。无其他 canonical Unity／Xcode writer。Unity BuildReport 与 Xcode markers 再次成功，但 export 后 hash=`1ba80562…`。逐文件比较只发现 `ProjectSettings.asset`；重现实验证明唯一字段是 `m_BuildTargetGraphicsAPIs[iOSSupport].m_Automatic: 0 → 1`。第二次 export log 没有 `ConfigureIosBuild` setter 调用，因此 writer 是 Unity BuildPipeline 的 graphics API 归一化，不是并发任务。
+- 前两个 Xcode export 均永久标记 `reusable=false`。稳定方案沿用项目自 Build 21／40 的成功约定：`m_Automatic=1`，Unity 6 iOS default/automatic graphics APIs 只解析出 Metal；snapshot 验证 `GetUseDefaultGraphicsAPIs=true` 且唯一 API=`GraphicsDeviceType.Metal`，不放宽 post-snapshot source guard。
+- 成功 job=`magnetic-slide-build42-20260901T035903Z-snapshot`，build key=`97e42cf2…a59b25d`，source digest=`471b633c…1b9aa`。`ProjectSettings.asset` snapshot hash=`1ba80562…`，5 秒稳定；全 protected source 3 秒稳定，export 后逐文件 hash 完全一致。Unity BuildReport=`Success`，Xcode project／plist／manifest 完整。
+- Xcode Release=`BUILD SUCCEEDED`；Apple Development 签名与 provisioning profile 生效，`codesign --verify --deep --strict` 通过。设备 install receipt 成功，inventory 回读=`com.jiaweizhou.fidgetspinner.codex 0.1.0 (42)`。
+- 首轮 console collector 结束时的 SIGINT 同时终止 attached app，因此旧 liveness check 得到 0 个进程；这不是 app crash。runner 已在 console capture 后显式 relaunch。最终 launch receipt 成功，5 秒后 PID=`7593` 仍在运行。
+- 真机 console 捕获 `audio-ready`（6 voices、24 kHz、1024×4）、`shipping-coordinator-ready candidate=True fallback=False`、`input-ready`、touch receipt、空白区 Orbit、顶片 Slide，以及 `MagneticEdgeProbe`／`Breakaway`／`DetentCaptured` 的 audible `audio-play`。Device Acceptance 仍待用户确认完整 360°／30 档、闭合互锁、Pinch、Haptic 与静置零自运动。
+- 最终 relaunch 后 5 秒进程回读确认 PID=`7593`；稍后的再次确认时设备仍在 paired inventory，但 tunnel 已变为 `unavailable`，因此不能继续声称当前在线。已完成的 install／launch／runtime log 证据不受影响；后续真机验收需重新连接设备。
+- 未执行 commit／push、archive、App Store upload 或 submission。
+
+## 2026-08-31 Magnetic Slide Tile Gate 12 rev 3 connected motion correction
+
+> **当前状态：Gate 12 rev 2 的七个静态视图已获确认。rev 3 只修正 max-open／端点／录屏运动，现为 `ready_for_review`，未批准。视觉批准待确认，未推送手机。**
+
+- 用户反馈截图已归档为 `evidence/12-shipping/rev-003/user-feedback-exploded-motion-r002.png`，SHA-256=`d36fb987…1015b`。rev 2 的 Library／Hero／Top／左右斜视／Low／Phone 原图逐字节复制，七组 SHA-256 全部一致。
+- 根因是坐标转换后轴向错误：旧 runtime 用 local `+Z` 平移，实际映射为 world-up；又用 local `Y` 旋转，实际成为离面旋转。当前改为 `TopLocalSlide local -Y` 平面滑动，以及 `MovingTop`／`RotatingCarrier local +Z` 固定轴旋转。没有 explode／lift 参数。
+- 240 帧实测最大顶片高度残差=`2.7939677e-9 m`，离面 slide residual=`0 m`，固定轴 matrix residual=`0`；renderer 每帧保持连接。max-open 为 `sMax/0°`，12°／36°／360° 与全部 30 档均保持 `s=sMax`。
+- 非法中段旋转、非零角回推、对齐后闭合、零初始／reset 速度、无 pitch／roll／flip 和 Haptic 共享 settings 均保持。Unity focused EditMode／UnityTest=`6/6`；motion image／transform／video validator=`pass`。Gate 12 deep link 在 `390×844 @3x` mobile viewport 恢复正确，asset modal 打开且横向 overflow=`0`。
+- 新评审板为 `gate12-shipping-board-r003.png` 与 `gate12-motion-board-r003.png`；Unity-only 录屏为 `magnetic-slide-gate12-r003-unity-playmode.mp4`，H.264 `640×360 / 30 fps / 240 frames / 8.0 s`。
+- DecisionState：rev 2 static views=`Approved`，rev 2 motion=`Revision Requested`，rev 3 motion=`Ready for Review / Approval Pending`。DeliveryState：`Real Shipping Scene Candidate Preview Only`。旧 `EDC_Root` 默认 active；候选默认 inactive。没有 build、archive、install、launch 或 phone push；Device Haptic Acceptance pending。
+
+## 2026-08-31 Magnetic Slide Tile Gate 12 rev 2 shipping review
+
+> **当前状态：用户以原话“可以的，继续”批准 Gate 11 rev 11。Gate 12 rev 2=`ready_for_review`，未批准。视觉批准待确认，未推送手机。**
+
+- `Assets/_EDC/Scenes/MeshyEDC.unity` 已接入新建 `MagneticSlideTileGate12R002` 候选。保存场景 SHA-256=`b73676a2…17c`；旧 `EDC_Root` 默认 active，候选默认 inactive。
+- 候选直接继承 Gate 11 rev 11 的 `99,280` triangles、固定底片／单轴／旋转载体／四槽、top-only artwork、dark side、silver rim、blood-red crystal、`RGBAHalf` HDR 和 corrected URP decode。没有复用已拒绝 Gate 12 rev 1 几何或材质。
+- 唯一 `MagneticSlideTileMechanismSettingsR002.asset` 同时提供 `sMax=18.076433 mm`、endpoint tolerance=`0.001 mm`、`30` detents 和 `12°`。输入经 mechanism state 产生 `FidgetSemanticEvent`，再由 `FidgetHapticRouter` 交给 iOS renderer；新增代码没有直接调用 `IosHaptics`。
+- 端点状态机覆盖闭合／重置零线速度和零角速度、中段禁止旋转、sMax 解锁、breakaway、最近档 capture、非零角禁止回推、对齐后闭合。固定底片和轴 matrix 不变，整机 pitch／roll／flip=`0`。
+- 真实 shipping scene 生成 Library、Hero、Top、左右斜视、Low、Phone、max-open、`12°`、`36°` 和 endpoint `360°`。Unity-only PlayMode 为 H.264 `640×360 / 30 fps / 240 frames / 8.0 s`，覆盖完整 `30×12°` 与非法输入。
+- 验证：focused Unity EditMode／UnityTest=`5/5`；shipping image／color／geometry／video checks=`pass`；pipeline rev=`258`。iOS Haptic 仅完成架构与自动化验证，真机触感验收 pending。
+- DecisionState：Gate 11 rev 11 `Approved`；Gate 12 rev 2 `Ready for Review / Approval Pending`。DeliveryState：`Real Shipping Scene Candidate Preview Only`。没有 app build、archive、install、launch 或 phone push。
+
+## 2026-08-31 Magnetic Slide Tile Gate 11 rev 11 Unity parity
+
+> **当前状态：用户以原话“可以的，继续”批准 Gate 11 rev 11。该批准已进入 Gate 12 rev 2；未推送手机。**
+
+- 新隔离候选位于 `Assets/_EDC/Candidates/MagneticSlideTileGate11R011/`。源 GLB／FBX SHA-256=`e9f90e9e…c2ca / 816ac0a2…1222`；旧 shipping scene SHA-256 前后均为 `99083a32…850d`。
+- Unity 6000.5.6f1 URP 导入为 `8` meshes、`100,896` vertices、`99,280` triangles；bounds=`31×12×50 mm`。唯一固定轴、四槽、平底、无 cavity／proxy、端点互锁与闭合零速度均通过。
+- 材质保持 top-only artwork，side／underside artwork triangles=`0/0`，上下 mask 独立。六张已定向 EXR 打包后由 Unity 导入为 `512² RGBAHalf` specular cubemap；强度=`0.85`，零 light、零 reflection probe、零重复反射。修正了旧路径的重复坐标翻转、box mip 和 metallic IBL 能量不足；新 strip 首次导入时的 `RGB24` 截断被验证器拦截并改为 `RGBAHalf`。
+- `1000×620` 同相机原始整帧：Blender／GLB silhouette IoU=`1.0`；GLB／Unity IoU=`0.999924`；full-frame SSIM=`0.944199 > 0.90`；object SSIM=`0.926276 > 0.80`；silver median DeltaE76=`7.21 < 12`；hotspot area error=`2.42%`、centroid error=`9.44 px`。隔离 silver SSIM=`0.98049`／median DeltaE76=`5.10`；隔离 blood-red SSIM=`0.80790`／median DeltaE76=`5.66`。人工整板检查通过。
+- Unity-only PlayMode 录屏为 H.264 High／yuv420p、`1920×1080`、`30 fps`、`18.0 s`、`540` frames。它覆盖闭合、中段旋转锁定、sMax 解锁、`30×12°` 全周、非零角回推锁定、对齐与闭合；整机 pitch／roll／flip=`0`。
+- Focused Unity EditMode／UnityTest=`5/5 passed`，覆盖 HDR `RGBAHalf`、linear import、shader、零 emission 与端点互锁。Gate 11 已获批准。
+- 该轮没有 Simulator、shipping promotion、build、install、launch 或 phone。后续 Gate 12 rev 2 仍保持旧 shipping 模型默认；Device Accepted pending。
+
+## 2026-08-31 Magnetic Slide Tile Gate 10 rev 11 GLB 白化修正
+
+> **当前状态：Gate 10 rev 10 已拒绝并不可变保留。用户以原话“继续”批准 Gate 10 rev 11；该包已被 Gate 11 rev 11 消费。未推送手机。**
+
+- 拒绝图归档 SHA-256=`4f13f111…ac6`。根因同时来自 GLB transport 与预览：rev 10 顶面 `specularColorFactor=1.16`、transmission=`0.08`；重导板用约 `0.10 m` 近场 `75 W + 42 W`；查看器可继承 exposure=`2.0` 且未载入批准 HDR。原深红 baseColor、roughness G、geometry、UV、分区和 emission=`0` 均不是根因。
+- Rev 11 GLB SHA-256=`e9f90e9e…c2ca`。顶面显式使用 `620×1000` sRGB baseColor、linear roughness G、linear tangent normal scale=`0.35`、metallic=`0.08`、specular=`0.55`、clearcoat=`0.32/0.10`、transmission=`0`。side=`[0.014,0.016,0.020] / 0.20 / 0.30`；rim=`[0.68,0.66,0.62] / 1.0 / 0.16`。全部 OPAQUE、emission=`0`。
+- 几何 accessor bytes、primitive material IDs、node transforms、geometry digest=`2fcf6d2b…1952`、UV digest=`c1c00c09…d9df` 与 rev 10 一致。上下 cap 贴图保持独立；side／underside artwork=`0`；唯一 FixedAxis、四槽、非渲染 MinimumOverlapDisk、闭合零速度和端点互锁不变。
+- 受控 Blender／GLB 同机位 MAE=`0.0043`。拒绝图白区=`15.83%`，GLB 重导=`0.25%`，真实 Three.js GLB=`0.09%`；查看器红色占比=`39.72%`，银色受控高亮=`2.36%`。Three.js 固定 neutral HDR、sRGB output、ACES、exposure=`0.9`，并隔离旧 exposure。
+- 真实 GLB 已完成 load／orbit／zoom；桌面、`390×844` 移动、图片 modal、24 帧 H.264 录屏、runtime/loading=`0/0` 均通过。导出与查看器独立 audit 均通过。Focused Node=`149/149`；全量 Node=`225/226`，唯一失败是并行 Premium Display Case 仍断言旧 Gate 12 approved；pipeline、Python／JavaScript syntax、H.264 全解码与 focused diff=`pass`。
+- Unity import／ASTC 计划更新为 `package/unity-import-contract-r011.json`，但未应用。没有 Simulator、Unity scene、Build、安装或 phone 操作。
+
+## 2026-08-30 Magnetic Slide Tile Gate 09 rev 9 当前环境
+
+> **批准状态：Gate 09 rev 9 已由用户以原话“继续”批准，并被 Gate 10 rev 10 消费。旧 shipping 模型仍为默认，未推送手机。**
+
+- 本轮只消费 Gate 08 rev 6 Blend SHA-256=`897484bd…80fe`、Gate 07 rev 13 material SHA-256=`8538b414…b10c`、geometry digest=`2fcf6d2b…1952` 与机制合同 SHA-256=`9cd7a08f…ea571`。
+- 中性／目标闭合、最大打开 0° 与侧面反射三组对比保持 camera、pose、material、light、Raw display、`neutral-display-v1`、exposure 和背景相同；只更换环境纹理。源材质槽、逐面 index、UV、geometry 与 zone attribute 前后逐元素一致。
+- 目标 `2048×1024` OpenEXR 为 scene-linear Rec.709／D65，SHA-256=`2fe029be…3d13`，RGB nonzero=`100%`、seam=`0`、P01–P99 dynamic range=`5.766 stops`。六张 `512×512` Unity cubemap EXR 全部 RGB nonzero；Blender `(X,Y,Z)`→Unity `(X,Z,-Y)` 最亮方向误差=`0.063°`。
+- Blend／GLB 重导继续保持两片 side artwork triangles=`0`、underside artwork triangles=`0`、每片 cap artwork=`511 triangles`，亮银 rim 存在，sampler=`CLAMP_TO_EDGE`，emission=`0`。
+- 已生成 closed、max-open 0°／12°／36°／360°、侧面／银边近照、环境对比板、运动板、反射板、可移植板和真实 Blender 双环境端点转台。转台每个环境 `60` 个源帧，H.264 High、`1600×600`、30 fps、150 encoded frames、5.0 s，SHA-256=`3a8e8aec…6369`。
+- Unity portability contract SHA-256=`d172c64c…fd13` 锁定当前 geometry、四个材质分区、neutral／target HDR、cubemap 朝向、display mapping、端点互锁、导入规则与容差。Gate 10 才允许生成正式导出纹理和导入包。
+- 验证：Blender environment/HDR/cubemap/GLB、图像／色彩／反射／clipping、端点运动、portability contract=`pass`；focused Node=`15/15`；全量 Node=`219/220`，唯一失败为并行 Premium Display Case 当前 Gate 04=`draft` 的既有断言；browser desktop/mobile/GLB orbit+zoom/video/image modal/reload/direct deep link=`pass`，runtime/loading failures=`0/0`；Python／JavaScript syntax、JUnit XML、H.264 全解码与单模型／全模型 pipeline validator=`pass`。
+- 本轮没有 Simulator、Gate 10、Unity import、最终 Unity、shipping scene、build、install 或 phone 操作。
+
+## 2026-08-30 Magnetic Slide Tile Gate 08 rev 6 分区安全灯光
+
+> **批准状态：Gate 08 rev 6 已由用户以原话“你开始吧”批准，并被 Gate 09 rev 9 消费。旧 shipping 模型仍为默认，未推送手机。**
+
+- 当前轮只消费 Gate 07 rev 13 Blend SHA-256=`8538b414…b10c`、geometry digest=`2fcf6d2b…1952` 与机制合同 SHA-256=`9cd7a08f…ea571`。
+- 复用 portable rev 4 shared-HDR 与 `neutral-display-v1` 配方，但从已纠正的 cap／side／rim／underside 分区重新生成全部灯光证据。
+- Clay／Normal／Depth／Roughness 诊断必须在复制 scene、object 与 mesh data 上运行。源材质槽、逐面 `material_index`、UV、几何与分区 hash 前后必须逐元素一致。
+- `blender-lighting-report.json` 证明四个诊断 pass 均使用复制 scene／object／mesh data；源材质槽、polygon indices、UV、zone attribute 与 geometry 的 before／after digest 全部一致。
+- `lighting-material-audit.json` 证明 Blend 与 GLB 侧壁／底面 artwork 都为 `0`，两片 cap artwork 与亮银 rim 均存在；GLB sampler 为 `CLAMP_TO_EDGE`；shared HDR SHA-256=`a5b310c8…a872`。
+- 已生成 Hero／左右斜视／低角、Beauty／Clay／Normal／Depth／Roughness、top／side／rim closeup、交互 GLB 与 90 源帧合法端点转台。MP4 为 H.264 High、`960×720`、30 fps、180 encoded frames、6.0 s，SHA-256=`4092e07a…0f25`。
+- 验证：focused Node=`7/7`；全量 Node=`211/212`，唯一失败来自并行 Premium Display Case Gate 12 当前为 draft 的既有断言，与本 feature 无关；单模型与全模型 pipeline validator 均为 errors/missing/unhashed=`0/0/0`；browser desktop/mobile/GLB orbit+zoom/video/image modal/reload/direct deep link=`pass`，runtime/loading failures=`0/0`；Python／JavaScript syntax、JUnit XML、H.264 全解码=`pass`。
+- 本轮禁止 Simulator、Unity、shipping scene、build、install 与手机操作。
+
+## 2026-08-30 Magnetic Slide Tile Gate 07 rev 13 侧壁图案归零
+
+> **批准状态：Gate 07 rev 13 已由用户以原话“通过”批准。pipeline rev=`238` 后进入 Gate 08 rev 6；旧 shipping 模型仍为默认，未推送手机。**
+
+- 用户拒绝证据按原字节归档为 `evidence/07-material/rev-013/user-rejection-side-artwork-wrap.png`，SHA-256=`a7859940ee1d956755c07a810bc5aeccee75136da092cb8f1891bf9fe6dc8b1b`，原话“边缘没有图案填充”。
+- 根因不是 Gate 07 原始 UV 或 GLB exporter。Gate 07 rev 12 Blend 的两片仍各有四个有效分区；Gate 08 rev 5 `render_roughness()` 在 `build_gate08_endpoint_lighting.py:304/310` 清空材质槽。Blender 将全部 polygon `material_index` 重置为 `0`；代码只挂回四个材质，没有恢复逐面索引，然后保存 Blend。slot 0 正是上下 artwork，故 `BottomExterior 8,723` 面与 `MovingTopBody 10,783` 面全部采样图案。报告：`root-cause-report.json`。
+- rev 13 固定 slot ID：`0=top artwork`、`1=solid dark side`、`2=polished bright silver rim`、`3=neutral underside`。Blender 原面数：Bottom=`1 / 3,078 / 2,052 / 3,592`；MovingTop=`1 / 5,130 / 2,052 / 3,600`。每面另存 `M07R13_MaterialZone`，分区 digest 分别为 `91fecf38…2e26`、`e256f01a…bb12`。
+- 上下 cap 使用独立 `ArtworkUV` 与独立材质／贴图。cap UV 范围共同为 `U 0.014516–0.985484 / V 0.009000–0.991000`；非 cap loop 写入 `(-1,-1)`。图像节点使用 `EXTEND`；GLB sampler `wrapS=wrapT=33071`，即 `CLAMP_TO_EDGE`／no-wrap。深色 side、银 rim 与 neutral underside 都没有 image node。
+- Blend、GLB 重导、FBX 重导对两片均为 side artwork faces=`0`、underside artwork faces=`0`、non-cap textured faces=`0`。GLB 与 FBX 的每片 top artwork 都为 `511` triangles，且各分区 triangle counts 逐项一致。GLB 为 `2 meshes / 5 materials / 8 primitives / 4 embedded images`；每片固定四个 material primitive。报告：`material-transport-audit.json`。
+- 上下 albedo／roughness 与已批准 rev 12 逐字节相同；upper/lower mask SHA-256=`8250df70…1c36 / 7bf5921f…a7c2`，继续独立替换。图案只在平面顶面；竖直侧壁为深色实体，细 bevel 为亮银；底面与隐藏技术件无图案。
+- 几何 digest 在材质前后保持 `2fcf6d2b4344511bc6b86ce940a927576f9cdb4988f4022959a3372f4d3c1952`。固定轴方差=`0 mm`，底片顶面偏差=`0 mm`，轴座凸出=`0.2 mm`，四条顶片底槽保留；密集状态=`4,359`，拦截中段旋转=`4,000`、非零角回推=`359`，最小覆盖漏点／穿透／flip／同时速度违规=`0/0/0/0`。
+- 真实 Blender 合法运动成片为 `gate07-r013-legal-motion-turntable.mp4`：`960×720 / 30 fps / 180 encoded frames / 6.0 s`；先在 `θ=0°` 推到 `sMax`，只在端点转满 360°，回到对齐后才回推。交互主资产为 `magnetic-slide-tile-material-r013-lookdev.glb`。
+- 评审：`gate07-r013-material-review-board.png`、`gate07-r013-top-side-rim-closeups.png`、`gate07-r013-rejection-correction.png`。工作台深链：`?model=magnetic-slide-tile&tab=materials&gate=07-material&asset=magnetic-slide-tile-material-lookdev-r013`。
+- 验证：Gate 07 focused Node=`6/6`；全 Model Provenance Explorer=`204/205`，唯一失败为并发 Premium Display Case 测试仍期待 Gate 12 approved，而当前该模型 Gate 04 rev 23=`draft`，本任务未改其测试。model／全 pipeline validators 对 magnetic slide 均为 errors／missingFiles／unhashed=`0/0/0`。桌面、`390×844` 移动、GLB load/orbit/zoom、6 秒视频、图片 modal、reload 和 direct deep link 均通过，runtime／loading failure=`0/0`。Blender／GLB／FBX、material／UV／sampler／video、Python／JavaScript／XML 和 focused diff 均通过。
+- DeliveryState：仅完成 Gate 07 材质候选及审批证据。未进入 Gate 08、Simulator、最终 Unity、shipping build、安装、启动或物理手机；Device Accepted pending。
+
+## 2026-09-01 Pack Opening Gate 04 R025 technical visual rejection
+
+> **当前状态：pipeline rev=`102`。Gate 01–03=`approved`；Gate 04 stage rev=`34`=`draft` / `technical-visual-rejected`；R025=`isolated technical candidate, rejected`；`approvalRequestAllowed=false`；primary review artifacts=`[]`；Gate 05–12=`stale`；`shippingReady=false`；未 build／install／launch／测试物理手机。**
+
+- 技术视觉否决，不是用户否决：直接全尺寸审查优先于候选的投影、ID/bounds 与测试断言。
+- `full-proof/normal/seven-pose-contact-sheet.png`（SHA-256=`d7410b46a3f1f311db496b319fca38267b7103d0ac601b533d462db1161e22ff`）显示平坦 Pack 正面和大斜切，不是窄的实体 foil mouth；真实 case 读成宽大的深色矩形后板，而不是在 front lip／inner liner 后方被容纳的对象。
+- 主要帧仍有 rail/strip-like artifacts，未建立 outer foil → inner liner/cavity → contained case 的因果。`r025-full-proof-full-size-review.json`（SHA-256=`b83be1faf77e8ad6965c81e4822b1539e5ba789022ad7668648bad2af2c477b4`）与 normal proof（SHA-256=`e4f0fddd6d39565a655f87c59082388f11fe1474f9b745fe9af1df497d7c0376`）作为 immutable rejected history 保留。
+- 验证与视觉结论分开：target-aspect preflight=`23/23`、isolated structural checks=`7/7`、filtered EditMode=`17/17`、scrub=`11/11` 均通过；这些实现检查不能推翻直接全尺寸视觉失败。
+- 保留 prior ready event=`2682f14a-2bd6-44ad-8ad1-31f9bf1a55aa`；rejection event=`20a6deb0-4981-44c0-8256-de79ae23c7db`，issue=`6b530dff-1861-49b2-900a-6159f726be4e`。R025 未获批准、未进入 shipping、未做 device test。
+- 未改 Pack、Case、Toy、FBX、Blender、shader、Unity runtime/candidate、`contentSlot`、FanCard、packages、build artifacts 或用户资产；没有 build、install、commit、push、delete 或新视觉 iteration。
+
+## 2026-08-31 Pack Opening Gate 04 R015 isolated candidate 自我拒绝
+
+> **当前状态：pipeline rev=`94`。Gate 01–03=`approved`；Gate 04 stage rev=`26`=`draft`；R015=`self-rejected`；`approvalRequestAllowed=false`；Gate 05–12=`stale`；approved count=`3/12`；`shippingReady=false`。视觉批准待确认，未推送手机。**
+
+- 用户已批准的 motion/reference 选择“卡包的容纳／抽出因果＋箔层双层剥离”已记录。三个外部 URL 仅作动作参考；未导入视频帧、图像、模型、音频或品牌资产。
+- R015 是隔离 Unity `6000.5.6f1 / URP 17.5.0` candidate：Pack-only Blender FBX 有 `49` 个手作 guide stations、`11` 个 Pack mesh、六个 blend shape；真实 `384×512` body/flap 未改。场景只预实例化一个不变的 assembled case，caller-owned `ContentSlot` 未改，没有 case bake、swap、proxy、particles、VFX Graph、CTA、Haptic 或 shipping wiring。
+- 实际 Unity Camera capture 为 `1206×2622 / 60 fps / 96 frames / 1.60 s`。首次 capture 的 Pack edge-on；唯一允许的 root-orientation micro-polish 后 Pack 正面可见但 artwork 倒置，frames `14–68` 仍是密封矩形，没有可读 tear、袋口、容纳或连续抽出。case 只在 Pack 消失后可读，故该候选不符合中性评审者因果判断。两个 attempt 和七张 full-size pose 均保存在 `evidence/04-architecture/rev-015/`；没有生成待审批 MP4。
+- 验证：isolated emitted C# checks=`5/5 pass`（`isolated-r015-check-results.xml`）；capture structural checks=`25/25`，仅证明同一 case ID、constant scale、状态／反向回弹和 zero-VFX 路径，不能替代视觉验收。Premium Display Case 与 all-pipeline provenance validators 均为 errors／missingFiles／unhashed=`0/0/0`，最早问题保持 Gate 04=`draft`且有一个视觉失败。Model Provenance Explorer full test=`197/226 pass`、`29` fail；失败属于并行 magnetic-slide / historical-stage assertions，本任务未修改或修复。
+- Gate 04 rev `8–14` rejected evidence 保持 immutable。R015 self-rejection event=`c657b24f-183c-4236-a756-dbd21e38289a`；source mapping、runtime representation 和 concise verdict 均在 rev-015。未修改 Fan Card、canonical shipping prefab／coordinator、native UI、receipt/ACK、skip、interruption 或任何物理设备。
+
+## 2026-08-30 Pack Opening Gate 04 rev 13 Pack-only Blender 自我拒绝
+
+> **当前状态：pipeline rev=`93`。Gate 01–03=`approved`；Gate 04 stage rev=`25`=`draft`；R013 iteration 11=`self-rejected`；`approvalRequestAllowed=false`；Gate 05–12=`stale`；approved count=`3/12`；`shippingReady=false`。未 build／install／launch 物理设备。视觉批准待确认，未推送手机。**
+
+- R013 选择首选运行时表示：真实 `384×512` Pack artwork 的 Blender Pack-only FBX，相对 blend shape `0/0.15/0.35/0.55/0.75/1.0` 由 normalized drag 成对插值；`96` 条纵向撕裂列。FBX 不含 case 几何或烘焙 case 图像。Unity 只预实例化一个不变的 assembled Premium Display Case，capture 保留同一 root/renderer ID、constant scale、mouth containment、physical crossing、无 early travel／black／white frame／bounds jump。
+- 实际 Unity PlayMode Camera 证据为 `1206×2622 / 60 fps / 210 frames / 3.50 s`。主图和技术媒体分别归档在 `evidence/04-architecture/rev-013/iterations/iteration-11-full-size-self-rejection/primary-contact-sheet.png`、`continuity-contact-sheet.png`、`technical-continuity-sheet.svg`、`source-target-side-by-side.png` 和 `runtime-footprint-editor-estimate.json`。Blender closed/open rig render 及 build report 保留在 rev-013 根目录。
+- CC0 mapping 保留 source commit `88842be0063b5b0b75e82ed6572752a37a13c82b`、CC0-1.0、Timeline／`Booster_Discarded.anim`／`SG_BoosterPack`／`SG_Title_Kyle`／`SG_LightingStrike`／flare／noise 的 direct-copy、adapted、rejected SHA-256 记录：`iterations/iteration-11-full-size-self-rejection/source-to-canonical-mapping.json`。R013 没有 VFX Graph、sample Pack、sample case 或 Python/PIL 合成帧。
+- 全尺寸视觉检查拒绝：`frames/frame-0065.png` 的 strip/lip 读成刚性蓝色 U 形轨条；`frame-0083.png`／`0100.png` 的开口读成硬边 scallop；tear close-up 的 CC0 Shuriken 读成叠加红色矩形，而非窄暖中性 torn-contour sweep。技术连续性通过不能替代这三项视觉失败。记录：`self-rejection.json`。
+- 编码与测试受存储阻塞：本机仅余 `119 MiB`，ffmpeg 无法创建 MP4；所有真实 Unity PNG 序列仍已归档。为避免 Unity reimport／log 写满卷并污染项目，R013 focused EditMode 未重跑，不能声称其通过。后续必须先获得可用存储，再重做物理 lip/strip 与 source particle layout 并 capture/test。
+- 资产完整性验证通过：`validate_model_pipeline.mjs premium-display-case` 与全 `validate-pipelines.mjs` 均为 errors／missingFiles／unhashed=`0/0/0`；最早问题正确保持 Gate 04=`draft`，有 `4` 项失败验证。history event=`0990cc21-5336-46ce-93f2-a104fff8c08b`；R013 主媒体不在 `reviewArtifactIds`。
+- 未接 shipping prefab／coordinator／native UI；未改 case prefab、`contentSlot` toy、semantic Haptic、receipt/ACK、stale request、skip、interruption restoration 或 Reduce Motion。
+
+## 2026-08-30 Pack Opening Gate 04 rev 12 物理撕口自我拒绝
+
+> **当前状态：pipeline rev=`92`。Gate 01–03=`approved`；Gate 04 stage rev=`24`=`draft`；R012=`self-rejected`；`approvalRequestAllowed=false`；Gate 05–12=`stale`；approved count=`3/12`；`shippingReady=false`。物理 iPhone／Android 未 build／install／launch。视觉批准待确认，未推送手机。**
+
+- R012 是一次真实 Unity Mesh API 架构重做：真实 `384×512` Pack、`128` 个纵向撕裂段、前／后封层、前唇／后缘／侧壁／后壁、窄双面 foil strip、一个预实例化 assembled case 与不变的 caller-owned `contentSlot`。未改 shipping prefab、toy、semantic Haptic、receipt/ACK、stale-request、interruption、skip、Reduce Motion 或 native CTA。
+- CC0 原始 Timeline、discard curve、`SG_BoosterPack`、`SG_Title_Kyle`、`SG_LightingStrike`、flare/noise 均以 hash 保留。R012 只适配 torn-contour discard 与 Shuriken sphere-mask sweep；不使用 VFX Graph、像素噪点 dissolve、紫雾、圆环或合成帧。映射：`evidence/04-architecture/rev-012/source-to-canonical-mapping.json`。
+- 全尺寸检查拒绝：`frame-0055`–`0103` 的后壁和侧壁读成刚性盒盖；`frame-0062`–`0096` 的 case 未在穿出前清晰占据袋口；`frame-0050`–`0103` 的自由 strip 读成平直长带；source flare/sweep 被暗腔体压没。记录：`evidence/04-architecture/rev-012/self-rejection.json`。该媒体不进入 `reviewArtifactIds`，未向用户请求批准。
+- 实际 Unity PlayMode 证据：`1206×2622 / 60 fps / 216 frames / 3.60 s`；0.25× tear=`250` 帧、impact=`202` 帧，均由 Unity PNG 编码。capture report 的单 case ID、constant scale、连续 bounds、`0.002382` 最大白像素比例、无黑帧与 source comparison 均通过，但不替代视觉结论。
+- 验证：focused EditMode=`12/12 pass`（`Logs/PackOpeningGate04R012Results-r012final.xml`）。history self-rejection event=`5b8ea86e-496e-4c2d-8035-c489f4c8b3e5`；state normalization event 追加 Gate 05–12 全部 stale。下一步必须先重定袋口占位／后壁策略；不得进入 Gate 05、shipping wiring、build 或物理手机。
+
+## 2026-08-30 Pack Opening Gate 04 rev 11 iterations 11–12 自我拒绝
+
+> **当前状态：pipeline rev=`90`。Gate 01–03=`approved`；Gate 04 stage rev=`23`=`draft`；iteration 11 与单次 correction iteration 12=`self-rejected`；`approvalRequestAllowed=false`；Gate 05–12=`stale`；approved count=`3/12`；`shippingReady=false`。物理 iPhone／Android 未 build／install／launch。视觉批准待确认，未推送手机。**
+
+- iteration 11 全尺寸检查：袋口变成宽平矩形切口，释放 foil 是硬暗三角楔；盒体身份连续，但读成在被切开的面板后方。记录：`ArtSource/ModelPipeline/premium-display-case/evidence/04-architecture/rev-011/iterations/iteration-11/self-rejection.json`。
+- iteration 12 是唯一执行的 corrective pass。真实 `384×512` Pack、同一 preloaded assembled case、CC0 source Timeline／discard curve／`SG_BoosterPack` edge math／`SG_LightingStrike` mask and flare atlas 保留；只收窄袋口、限制侧壁并改变 foil mesh/material。未改 shipping prefab、`contentSlot` toy、semantic Haptic、receipt/ACK、stale rejection、skip、interruption restore、Reduce Motion 或原生 CTA。
+- iteration 12 全尺寸检查仍不合格：袋口只剩暗缝，无法作为有内壁／接触遮挡的成形开口；foil 从刀片变为重复阶梯边，仍非可读卷箔；source flare/streak 有粒子计数却在 impact 帧不可辨。记录：`ArtSource/ModelPipeline/premium-display-case/evidence/04-architecture/rev-011/iterations/iteration-12/self-rejection.json`。
+- 实际 Unity PlayMode 证据：`1206×2622 / 60 fps / 207 frames / 3.45 s`；normal、tear `0.25×` 和 impact `0.25×` 视频均只由相应 Unity PNG 编码。primary sheets：`iterations/iteration-12/tear-contact-sheet.png`、`source-impact-contact-sheet.png`、`continuity-contact-sheet.png`、`source-target-side-by-side.png`；诊断独立于主图：`technical-continuity-sheet.svg`。capture report 的单 case ID、constant scale、bounds continuity、no-black／no-white、no rarity leak 与 no placeholder checks 均通过，但不替代视觉验收。
+- 验证：首次 `i12` focused EditMode=`35/36`，任务造成的 cavity back-wall normal discontinuity=`16.13°` 已以平滑 hidden support wall 修正；复跑=`36/36 pass`（`Logs/PackOpeningGate04R011Results-i12fix.xml`）。Premium Display Case 与全 pipeline validators 均为 errors／missingFiles／unhashed=`0/0/0`，最早问题正确为 Gate 04=`draft` 且有 `2` 项视觉 self-rejection validation fail。
+- pipeline history event=`93f096c8-a6d6-4456-98e4-62f4ef189ab5`，保留 rev 8／rev 9、iteration 01–10 和 iteration 11／12 全部记录；iteration 11／12 primary media 不在 `reviewArtifactIds`。
+- 下一门禁：等待新的用户视觉方向后才允许再做 Gate 04 iteration。不得进入 Gate 05、shipping wiring、build 或物理手机。
+
+## 历史：2026-08-28 Pack Opening Gate 04 rev 11 iteration 10 CC0 复用重定向
+
+> **历史状态：pipeline rev=`89`。Gate 04 iteration 10 曾为 `ready_for_review`，后由 iteration 11／12 self-rejection 取代。未获得用户视觉批准、未进入 Gate 05、未 build／install／launch 物理设备。**
+
+- 本轮修的是 parent 指出的最高优先缺陷：**Pack 从未真正打开**。iteration 09 确实让前面板轮廓下退了，但**袋子没有内部**——没有背壁、没有侧壁、没有撕裂前沿横壁、没有边缘厚度。前面板让开的区域直接露出背景，所以剪影只是"变矮"，读起来像盒子从一个完好袋子**后面**滑上来。空腔当时只是一条贴着下退边缘移动的 `19 mm` 细带，而不是被那条边缘揭开的体积。
+- ① 可见开口（已修）：空腔改为真实袋口。背壁置于 `InteriorBackWallZ=0.082`，在被藏起的盒子（`z=0.060`）之后，所以盒子在升起之前**确实在腔体之内**；撕裂前沿加横壁封住未撕开的一侧；释放端加侧壁保住袋口边缘；撕裂前缘加 `TornEdgeLipDepth=0.0115` / `TornEdgeLipDrop=0.0042` 的内折唇给出箔材厚度。另设独立 submesh 的接触遮挡带（`ContactBandFraction=0.34`，材质 `0.014`）覆盖唇口正后方，其上背壁按 `InteriorRimTilt=0.018` 向袋口倾斜以获得光照梯度。证据：`frames/frame-0060.png` 左半仍密封在原袋口高度、右半已开且内部有遮挡；`frame-0084.png` 全宽袋口下唇口后方为暗接触带，盒子的 `TactileBackgroundInsert` 竖纹与外壳轮廓在腔内可见；`tear-contact-sheet.png` 显示开口自右向左推进且每一步都在剪影中可读。
+- ② 撕裂期的源 edge sweep（已修）：前面板新增 uv2 承载 **torn-contour 空间**——`x` 为该列到撕裂顶边的归一化深度、`y` 为到撕裂前沿的接近度；发光带改在 `uv2.x` 上求值，因此几何上不可能退化为全宽横矩形，且在任意 tear progress 都紧贴撕裂线。强度由 `TearSweepStrength(tearProgress)` 驱动并以"已开度"门控，未撕开的封边不会发光。`_EdgeWidth` 回到 `0.022`，discard 边界改由 uv3 逐列抖动（`_DissolveJitter=0.052`）以不规则撕开。证据：`frame-0060`／`frame-0084` 中 `packDissolve` 仍为 `0.00`、`STANDARD` 全不透明时暖色带已沿不规则撕裂轮廓点亮；`frame-0136` 为锯齿状轮廓相关边，**两条奶油色横矩形已消失**。
+- ③ 箔材而非刀片（已修，有残留）：带宽 `0.026`→`0.045 m`；正面 metallic `0.72`→`0.28`、smoothness `0.58`→`0.24`；内侧基值 `0.105`→`0.068`；卷曲 bezier 改为在 Pack 自身宽度内翻卷而不再伸出右缘；逐列宽度缩放与三个非公倍项的表面波纹打断自由边；`GenerateTearOffsets` 新增未平滑的 micro 项（3-tap 平滑权重 `0.235`→`0.170`），使撕裂边在列尺度上反向。残留：卷曲末端仍读成一块硬的暗色楔形。
+- ④ 去除彩色 sparkle（已修）：两个独立成因，且各自的第一次修法都是错的。洋红来自源 lifetime gradient 在 `0.333` 的紫键与 `0.667` 的饱和青键——**打散发射只能让它出现在更少粒子上**，本轮直接把这两个色键从 gradient 中排除，同时保留源的键位与暖→冷走向。字形则来自 flare 材质**完全没有 atlas 平铺**，每个 billboard 同时采样四格（含右上四角星）；修好平铺后字形仍在，因为 `rotationOverLifetime` 把剩下那格转过了读成对称星形的角度；而且**源 atlas 没有任何一格是纯水平条纹**。最终：所有 flare 端口经材质平铺各自只寻址一格、flare 与 activation 用水平主导格、旋转仅保留给径向光晕端口、flare billboard 压扁为 `1.55 × 0.16` 让未修改的源贴图读成条纹。证据：`frame-0114` 的 2× 最近邻放大只见两道干净水平条纹（一暖一中性），无四臂字形、无洋红与青色。
+- 连续性未退化（并有一处改进）：207 帧仅一个 `caseRootId`；case 投影高度 `0.4369`→`0.5545`，相邻帧最大步进 `0.00384`。**如实说明**：最小步进为 `-0.0026`，负步进只出现在收尾 settle 的既定 overshoot 松弛段，撕裂／dissolve／reveal 全程单调；该数值与 iteration 09 完全相同，非本轮引入。改进项：主体可见性原先由 `PackRetreat` 门控，会在 `packDissolve=0.9984` 就关掉 renderer；现改由 discard 曲线门控，`packVisible` 只可能在 `packDissolve=1.0` 时（frame `152`）翻为 `false`。
+- 自检（作为证据，不代表通过视觉验收）：capture report `status=pass`，`26/26` check 全通过。真实 Unity capture：`1206×2622 / 60 fps / 207 frames`。ffmpeg 只编码真实 Unity PNG；无 Python／PIL 合成帧。
+- 逐帧全尺寸自检结论：四项优先缺陷均判定为已修，故本轮**请求**用户视觉批准。同时如实披露四项 polish 级残留（不破坏因果读法）：袋口上缘是近直线而非压花封边轮廓，开口略显矩形；释放端侧壁在 `frame-0084` 露出一条位于前面板剪影外的细条；卷曲末端读成硬楔形；条纹粒子在联系表缩略尺度下像小斑点（全尺寸下是干净条纹）。记录见 `iterations/iteration-10/self-review.json`。
+- **证据丢失（如实记录）**：iteration 09 的像素证据（207 帧、四张联系表、capture report、三段 mp4）在本轮 capture 与重新编码中被覆盖，因为它此前**从未**归档到 `iterations/iteration-09/`，而 capture 入口就地重写 live 目录；git 对该证据目录未跟踪，无法恢复。其**书面结论完整存活**于 `iterations/iteration-09/self-rejection.json`，iteration 10 正是依据它推进的。记录见 `iterations/iteration-09/EVIDENCE-LOSS.json`。为防复发，iteration 10 的证据已在本任务内立即归档到 `iterations/iteration-10/`；但 capture 入口仍无逐 iteration 输出槽、也不会在 live 目录存在未归档证据时拒绝运行，归档仍是可被后续 agent 跳过的手工步骤。
+- asset id 命名已修：`…-i09-self-rejection`→`…-iteration08-self-rejection`、`…-i09-EVIDENCE-LOSS`→`…-iteration02-evidence-loss`，与其实际指向的 iteration-08／iteration-02 文件一致。history 为 append-only，旧事件原文保留。
+- 验证：focused Unity EditMode=`34/34 pass`（`Logs/PackOpeningGate04R011Results-r24.xml`），新增 `Pack_VisiblyOpensInsteadOfBeingSlicedShort`、`CaseIsConcealedInsideTheCavityNotBehindTheBag`、`SourceEdgeSweep_IsLitWhileThePackIsStillFullyOpaque`、`TornEdge_IsIrregularRatherThanASmoothCurve`、`PackStaysVisibleUntilTheDiscardCurveReachesOne` 五项回归；`Scene_UsesSourceShurikenCapacitiesAndNoGenericRing` 中"sheet animation 必须开启"的断言已改为"每个端口只寻址单格 atlas + 仅径向光晕可旋转 + flare 必须压扁"，以匹配新的机制。`node skills/fidgeting-model-pipeline/scripts/validate_model_pipeline.mjs premium-display-case` 与 `node tools/model-provenance-explorer/validate-pipelines.mjs` 全部 7 个 model 均为 errors／missingFiles／unhashed=`0/0/0`；earliest problem 正确指向 Gate 04 `ready_for_review` / “等待用户审批。”。无并发失败需要单独报告（除 Unity Hub 外无 Unity／Xcode 进程，批处理沿用 `run-gate04-r011.sh` 锁）。
+- 当前仍是 candidate：代码、场景、材质、mesh、profile、shader 与 review media 全在 `Assets/_DisplayCase/Candidates/PackOpeningGate04R011/` 与 Gate 04 rev-011 evidence 路径。未接 shipping prefab／coordinator／native UI；整盒／`contentSlot` toy、语义 Haptic、`FidgetProductUIComponents.swift` 原生 CTA 归属、exact-once receipt/ACK、stale-request 拒绝、中断恢复、skip 与 Reduce Motion 边界均未改，enclosed toy 未编辑，shipping case prefab 未编辑（腔内可见的竖纹是该 prefab 自带的 `TactileBackgroundInsert`，因内部足够暗才显现）。
+- 残余 gap：重定向配色仍比源偏冷，因为源的暖色主导来自 rarity card emissive，而它不得在权威 receipt 之前出现；这一约束正确，不得通过泄漏 rarity 解决。
+- 下一门禁：等待用户对 iteration 10 的明确视觉批准。获批后才处理最早 stale Gate 05。当前不进入 CTA、四 rarity tier、shipping wiring、build 或物理手机。
+
+<details>
+<summary>历史：2026-08-28 Pack Opening Gate 04 rev 11 iteration 09 已自我拒绝</summary>
+
+> **历史状态：pipeline rev=`88` 时 Gate 04 stage rev=`21`／evidence rev 11 iteration 09=`draft · 自我拒绝`，`approvalRequestAllowed=false`，从未向用户请求视觉批准；其后由 iteration 10 取代。其像素证据已被覆盖丢失，见 `iterations/iteration-09/EVIDENCE-LOSS.json`；书面结论保留于 `iterations/iteration-09/self-rejection.json`。**
+
+- 自我拒绝结论：iteration 09 在逐帧全尺寸检查后不合格，需要 iteration 10。它没有、也不得被送去请求用户视觉批准。记录见 `iteration-09-self-rejection.json`；self-rejection event=`507f03a4-51d4-43d2-a26b-e08adf3de2a9`。
+
+- 方向纠正：用户以原话“你之前做过的这个，从 GitHub 上找到的这些 example，你不能直接用吗？你为什么要重新做一个转场的光效呢？”否决了从零重画转场光效。本轮不再自研光效，改为直接复用已审计 CC0 Make It Shine 示例（commit `88842be0063b5b0b75e82ed6572752a37a13c82b`，CC0-1.0），只写 URP `17.5.0` / Unity `6000.5.6f1`、portrait、真实对象绑定与 VFX Graph→Shuriken 的最小适配层。见 `FDB-GAC-028`。
+- 复用账目（`source-to-canonical-mapping.json`，25 条，逐条带 source／destination SHA-256）：`direct-copy=13`、`adapted=6`、`rejected=6`。direct-copy 含 `Booster to Card Timeline.playable`（`baec0abc…9b086`）、`Booster_Discarded.anim` 归一化 discard 曲线、`SG_BoosterPack` / `SG_LightingStrike` / `SG_Title_Kyle` / `SG_SelectedBooster` / `CardMask` 图与源贴图 `TX_Flare_2x2_M.png`、`TX_Noise_M.tga`，全部按字节存入 `source-raw/`。
+- adapted 6 项及原因：Timeline→`MakeItShineRetargetedR011.playable`（保留源 effect 顺序与 matched timestamp，产品对象只剩 Pack 与一枚预实例化真盒）；`SG_LightingStrike`→`MakeItShineCc0PortR011.shader`（VFX-targeted 图不能直接绑 Shuriken，保留 Reveal/Erode/Speed 契约与源 flare 贴图）；`SG_BoosterPack`→`MakeItShineCc0PackR011.shader`（源图依赖源 mesh 顶点色／UV，改为在真实 `384×512` Pack 上承载 discard 曲线与 emissive torn-edge sweep）；`VFX_BoosterActivation`／`VFXG_LightingStrike`／`VFX_BoosterExplosion`→Shuriken 端口（VFX Graph 被禁，沿用源 curve、gradient family 与贴图）。
+- rejected 6 项及原因：`Opening_Booster.prefab`（含 sample Booster、fracture 模型与 object-swap 归属）、`BoosterFractured_B.fbx`（sample 几何与 fracture swap 被禁）、`Spawn Cards Timeline.playable`（三卡 proxy 交接由同一枚真盒取代）、`M_BoosterPack.mat`／`MV_Pack_A.mat`／`TX_Title_Kyle.png`（绑定 sample 贴图与 sample 标题美术，不导入、不显示）。`vfxGraphDependency=false`、`sampleModelsImported=false`、`sampleArtworkImported=false`。
+- 自我拒绝 iteration 01–08 全部保留为 immutable labeled history（`iterations/iteration-01 … iteration-08`）。主线为：01 Pack 退场摊成平面大片、flare 变洋红团；02 源 noise 贴图暴露像素孔洞违反 no-pixel-noise；03 wipe 修好但 flare 仍同步走 atlas；04 源 atlas 出现但被柔性 dust 压过；05 源图正确但原始尺度让 trail 铺满视口；06 aperture 绑定修好但 512 spark 变亮方块 confetti；07 25 条 trail 的 billboard head 仍是白方块；08 曝光不匹配（Pack unlit 对真盒 URP Lit）、freed foil 因 `UpdateStripMesh` 局部偏移而脱离、`168°` 扭转让 foil 读成宽平板。iteration-02 的像素 artifact 曾被误覆盖，损失已在 `iterations/iteration-02/EVIDENCE-LOSS.json` 如实记录，其 `self-rejection.json` 与 mapping 保留。
+- iteration 09 修复：Pack 主材 `_EdgeWidth`／`_EdgeStrength` 提高并改暖近白 `_EdgeColor`，让获批 discard edge sweep 成为转场身份主载体；directional light 与 ambient sky／equator／ground、reflection intensity 整体提高以消除 Pack 与真盒的曝光断层；flare 起始色改白热、由源 lifetime gradient 驱动色相，并把发射拆成多次 burst、加大 shape radius 与 `radiusThickness=1`，消除同步造成的洋红团；spark 改 `velocityScale`／`lengthScale` 读成细长条纹而非箭头字形；cavity 材质提亮以在 0.25× 特写下给出内部深度；freed foil 局部偏移下调避免脱离，最大扭转由 `168°` 降到 `94°`；pack retreat 位移设 `MaximumPackRetreatTravelMeters` 上限，让退场由 dissolve 而非平移完成；`GenerateTearOffsets` 降低确定性正弦项并叠加两个非公倍低频项、加大幅度，得到非锯齿不规则撕裂边。
+- 真实 Unity capture（`PackOpeningGate04R011.unity` PlayMode + Camera，非离线合成）：normal=`normal-speed-sequence.mp4`，H.264 `1206×2622 / 60 fps / 207 frames / 3.45 s`；tear 特写=`tear-quarter-speed-closeup.mp4`，`0.25×`、`1206×2622 / 60 fps / 197 frames`；impact/reveal=`impact-reveal-quarter-speed.mp4`，`0.25×`、`1206×2622 / 60 fps / 187 frames`。三段均为 `1206×2622` shipping portrait。ffmpeg 只编码并用 ffprobe 测量 Unity PNG；无 Python／PIL 合成帧。
+- 联系表：`tear-contact-sheet.png`（撕裂剪影）、`source-impact-contact-sheet.png`（impact 连续性）、`continuity-contact-sheet.png`、`source-target-side-by-side.png`（源与重定向在 `matched-timestamps.json` 对齐时间戳并排）。
+- 自我拒绝的四项根因（criterion 编号对应用户验收标准）：①criterion 4 失败——获批的 Make It Shine discard edge sweep 在撕裂阶段不可读：frames `54–96` 的 `packDissolve=0.00`，emissive edge 只在 `108–150` 的 dissolve 斜坡上被驱动，所以本轮唯一存在理由的源身份在撕裂主体阶段毫无贡献（见 `frames/frame-0114.png`，Pack 全不透明、`STANDARD` 清晰、torn 轮廓无发光）。②criterion 2 失败——freed foil 读成一把刚性镀铬刀片／鞋拔：长而光滑、硬边、镜面条纹、轮廓平直，没有内侧、厚度与不规则撕裂边；根因是 strip 过于 smooth／metallic，且 `GenerateTearOffsets` 的偏移仍是平滑 C1 曲线，缺高频微观细节与逐列深度变化。③criterion 5 失败——aperture 内仍有四角星 sparkle 字形与残留洋红污点：加大 lifetime 离散与 burst 只是让洋红一次出现在更少粒子上，并未从源 gradient 中排除洋红段，且 2×2 atlas 仍以对称星形帧为主。④criterion 5 在 dissolve 中段失败——加宽的暖近白 edge band 退化成两条与 torn 轮廓无关的横向奶油色矩形（见 `frames/frame-0136.png`）。另有 major 项：成形空腔在 `0.25×` 下仍是细暗带而非有遮挡的内部体积，根因是空腔缺内侧壁与接触遮挡，提亮只是抬高平带亮度。
+- 非拒绝项说明：真盒渲染为半透明烟灰亚克力、可透视看到退场的 Pack，这来自未修改的 shipping prefab `PresentationRoot.prefab`，对亚克力展示盒是正确的，不计入拒绝原因，prefab 未编辑。但它确实让低对比交接更难读，应通过盒后 key 分离而非改 prefab 解决。
+- iteration 09 确有的真实进步：Pack 与真盒的曝光断层已消除；freed foil 不再脱离 `packRoot`，最大扭转由 `168°` 降到 `94°`；pack retreat 变为有界 settle，退场由 `packDissolve` 而非平移完成；连续性是真实而非模拟——207 帧只有一个 `caseRootId`，case 投影高度由 `0.4369` 单调增至 `0.5545`、相邻帧最大步进 `0.0038`，`packVisible` 仅在 `packDissolve` 达 `1.0` 后翻为 `false`，无 hard pop、黑帧、白帧、identity swap 或 bounds jump；iteration 05–07 的 512 spark 与铺满视口 streak 继续被抑制。
+- iteration 10 必做项：让获批 discard edge sweep 由 `tearProgress` 沿 torn 轮廓驱动，使源身份在 frames `54–96` 就存在；把 emissive edge band 与 torn 轮廓相关联，使其在 dissolve 中段不可能退化为全宽横矩形；降低 strip smoothness／metallic 并加入高频逐列微偏移；从源 lifetime gradient 中排除洋红段并优先使用源水平条纹 atlas 帧而非对称星形帧；给空腔加内侧壁与接触遮挡。
+- 自检（作为证据，不代表通过视觉验收）：capture report `status=pass`，`26/26` 结构／来源／禁用项 check 通过，含 `realUnityPlayModeCapture`、`shippingPortrait1206x2622`、`exact60Fps`、`sameCaseIdentityEveryFrame`、`sameCaseScaleEveryFrame`、`sameCaseVisibleThroughAperture`、`sameCaseCrossesPhysicalPack`、`sourceShurikenCapacitiesExact`、`sourceDiscardCurveDrivesPack`、`aheadOfTearFrontRemainsWelded`、`noBlankWhiteFrame`、`noBlackFrame`、`noPlaceholderRingWashOrSampleEntity`、`noReceiptRarityLeak`、`reduceMotionPreservesCausality`、`shippingReadyFalse`、`physicalPhoneInstalledFalse`。度量：flash 后 maximum white fraction=`0.002928`；minimum visible fraction=`0.851821`；maximum projected center step=`0.002438`；maximum projected height step=`0.003838`；maximum root position step=`0.00946 m`；maximum ahead-of-front separation=`0.0 m`。这些数值只作证据，不替代视觉判断——本轮正是 `26/26` 全通过但逐帧检查仍不合格的例子，度量通过不等于视觉合格。
+- 残余 gap：重定向配色仍比源偏冷，因为源的暖色主导来自 rarity card emissive，而它不得在权威 receipt 之前出现；这一约束正确，不得通过泄漏 rarity 解决。
+- 当前仍是 candidate：代码、场景、材质、mesh、profile、shader 与 review media 全在 `Assets/_DisplayCase/Candidates/PackOpeningGate04R011/` 与 Gate 04 rev-011 evidence 路径。未接 shipping prefab／coordinator／native UI；整盒／`contentSlot` toy、语义 Haptic、`FidgetProductUIComponents.swift` 原生 CTA 归属、exact-once receipt/ACK、stale-request 拒绝、中断恢复、skip 与 Reduce Motion 边界均未改，enclosed toy 未编辑。
+- 验证：focused Unity EditMode=`29/29 pass`（`Logs/PackOpeningGate04R011Results-r11.xml`），新增 `PackRetreat_StaysASettleAndLetsTheDiscardCurveRemoveThePack` 与 `FreedFoil_CurlsWithoutPresentingItsWidthToCamera` 两项回归。`node skills/fidgeting-model-pipeline/scripts/validate_model_pipeline.mjs premium-display-case` 与 `node tools/model-provenance-explorer/validate-pipelines.mjs` 全部 7 个 model 均为 errors／missingFiles／unhashed=`0/0/0`。两者 earliest problem 均正确指向 Gate 04 `draft` / “仍有 3 项验证未通过。”，即上述三项 blocking 视觉验证被如实记为 `fail`，未被掩盖。无并发失败需要单独报告。
+- pipeline：先由 realignment event=`162af5ae-7904-4646-b18c-c3eb718e6a11` 把 Gate 04 从残留的 rev-9 `rejected` 状态与 iteration-09 证据对齐（stage rev `20`），并把 rev-9 拒绝决定完整存入 `historicalDecisions`／`historicalRevisions`；随后 self-rejection event=`507f03a4-51d4-43d2-a26b-e08adf3de2a9` 把 stage 降为 rev `21` `draft`、`approvalRequestAllowed=false`、`reviewArtifactIds=[]`，避免把自我拒绝的证据挂成待审批。pipeline rev `86`→`87`→`88`。iteration-09 原 ready 记录 event=`6452e421-7f75-45e8-8544-cd7e832808cc` 保留为历史。
+- 已知登记瑕疵（不影响 validator）：`premium-display-case-gate04-r011-i09-self-rejection` 与 `…-i09-EVIDENCE-LOSS` 两个 asset id 带 `i09` 前缀，但实际指向 `iterations/iteration-08/self-rejection.json` 与 `iterations/iteration-02/EVIDENCE-LOSS.json`。路径与 hash 正确，仅命名易误读；iteration 09 自身的记录是 `iteration-09-self-rejection.json`。（已在 iteration 10 更名修复，见上文。）
+- 下一门禁：iteration 10 先修上述四项 blocking 根因并重新 capture、重新逐帧全尺寸自检；只有自检合格后才向用户请求视觉批准，只有获得明确视觉批准后才能处理最早 stale Gate 05。当前不进入 CTA、四 rarity tier、shipping wiring、build 或物理手机。
+
+</details>
+
+## 历史：2026-08-28 Pack Opening Gate 04 rev 9 已技术拒绝
+
+> **历史状态：pipeline rev=`84` 时 Gate 04 rev 9=`ready_for_review`；其后被 parent 视觉检查技术拒绝，并由 rev 11 iteration 09 的 CC0 复用重定向取代（`FDB-GAC-028`）。物理手机从未 build／install／launch。**
+
+- 技术拒绝根因四项：顶封仍读成一整块刚性盖子飘走，不是渐进 tear front；body 边缘是均匀卡通锯齿，缺厚度、内侧、折叠张力与接触阴影；袋内小盒变成全尺寸盒存在视觉断裂，连续性是模拟而非真实；背景与 impact 语言浑浊无力，整体像技术 demo 而非高级 gacha 序列。
+- rev 9 全部 artifact、hash、录屏与逐帧图保持 immutable rejected history，不得恢复为当前要求，也不得再送审批。rejection event=`794facd7-3c15-4c6c-bc32-4617cf4de882`；原 ready event=`53979405-e1c6-4cd5-b132-b1e25eaf1474`。
+- DecisionState：`Technically Rejected / Superseded by FDB-GAC-028`。DeliveryState：`Immutable Rejected Evidence`。
+
+<details>
+<summary>历史 rev 9 原始条目（保留原文）</summary>
+
+> **历史状态：pipeline rev=`84`。Gate 01–03=`approved`；Gate 04 rev 9=`ready_for_review`；Gate 05–12=`stale`；approved count=`3/12`；`shippingReady=false`。物理 iPhone／Android 未 build／install／launch。**
+
+- 用户连续两次以原文“纯纯垃圾。”明确拒绝 rev 8。pipeline rev 83 / event=`f32ea87c-9bc2-4911-b796-dfe6e72e4fee` 记录 `rejectionCount=2` 与两个 exact quote；rev 8 全部 artifact/hash 保持 immutable rejected history。
+- rev 8 根因固定为五项：Pack 变成噪点／dither 矩形；impact 是长时间平面淡紫洗屏与通用同心环；“九层同时运动”代替了视觉层级；白帧后盒体 hard pop；整体像 debug/procedural placeholder，不是 shipping animation。
+- 当前实际 Unity：`Assets/_DisplayCase/Candidates/PackOpeningGate04R009/Scenes/PackOpeningGate04R009.unity` 在 Unity `6000.5.6f1` + URP `17.5.0` PlayMode 运行。`PackOpeningGate04R009Controller`、profile、三个 URP shader、三个 Shuriken system、真实场景和 Camera capture 均已生成；没有 Python／PIL／Canvas／ffmpeg frame synthesis、VFX Graph、PrimeTween 或 DOTween。
+- 当前仍是 candidate：代码、场景、材质、mesh、profile 与 review media 全在 immutable Gate 04 rev 9 candidate/evidence 路径。未接 shipping prefab／coordinator／native UI；CTA、四 rarity tier、receipt、award、ACK、skip 与产品发布路径未改。
+- 源素材：Standard Pack body／flap 使用原始 `384×512` canvas，SHA-256=`ebc17bb2…4681d6 / b031fc5c…b33d49`。真实 assembled case prefab SHA-256=`7a96aae6…c6a67e2c`；真实 caller-owned `ThreeBladeDisplayPrize` SHA-256=`d68f51b0…9395a8e1`，toy geometry/material/art/pivot/physics/Haptics/mechanism 均未编辑。
+- 撕裂：top-trailing 接触点沿封边从右向左推进；front 前方保持连接。连续 foil mesh 按列产生 bend/curl/fold highlight；`650–950 ms` resistance 后用 `950–1000 ms` 的 `50 ms` snap，再到 `1750 ms` 完成。body shader 从 torn edge 形成有厚度的非规则开口与 coherent retreat，不使用 noise dissolve 或 opacity crossfade。
+- Impact：`1750–1930 ms` 固定 `180 ms`。能量从开口内产生；近白 flash 只占 Unity frame `105 / 1750 ms`，随后立即清除。产品后方只有一枚细、快 shockwave；Shuriken 只发少量三角 foil shard、warm glint 与定向 violet streak。无紫雾、full-screen lavender fill、ring stack、starfield、随机 confetti、Bloom、CA 或 lens distortion。
+- 连续性：dark mineral environment 从 frame 0 预载。开口先露环境深度，真实盒在 `1480 ms` 已从同 aperture 进入，Pack 在 `1600–2180 ms` 从 torn edge 退场；两者只做遮挡 handoff。每帧保留 Pack 或 whole-case hero；无 black frame、blank white frame 或 case replacement。
+- Reveal：同一 assembled case 只做一次约 `-25°→0°` settle；release 快、deceleration 受控，`2420 ms` 到 authored pose。case sweep 只在 `1930–2140 ms` 出现一次。相机只有 anticipation push、短 impact kick 与立即恢复；没有持续 shake 或 back-facing turntable。
+- Reduce Motion／Sensory Effects 保持相同撕裂→impact→reveal 因果；关闭 kick、shockwave、streak/particle，缩小单帧 flash 并缩短 case rotation。Haptic 只定义 `TearResistance / TearSnap / Impact / CaseSettled` semantic event；没有 raw `IosHaptics` 或 native bridge 调用。
+- 真实 Unity capture：normal=`gate04-r009-full-signature-60fps.mp4`，H.264 `804×1748 / 60 fps / 186 frames / 3.10 s`；tear close-up=`gate04-r009-tear-closeup-quarter-speed.mp4`，`15 fps / 67 frames / 4.466667 s`；impact close-up=`gate04-r009-impact-1700-1950ms-quarter-speed.mp4`，`15 fps / 16 frames / 1.066667 s`。ffmpeg 只编码并用 ffprobe 测量 Unity PNG。
+- 联系表：`tear-silhouette-contact-sheet.png` 使用 Unity frames `39/54/57/58/60/75/90/104`；`impact-continuity-contact-sheet.png` 使用 `102/104/105/106/108/111/114/117`。每格由 Unity compositor 写入真实 `F### / T####MS`，画面无 debug layer-count bar。
+- 自检：`35/35` 架构／来源／视觉禁用项通过。单帧 flash=`1`；flash 后 maximum white fraction=`0.005439`；maximum lavender fraction=`0.001360`；minimum hero fraction after flash=`0.921946`；maximum consecutive case-entry step=`0.075797`。这些数值只作证据，不替代视觉判断。
+- 验证：focused Unity EditMode=`18/18 pass`；capture report=`pass`；三段视频 metadata 与 source frame count 精确匹配；Premium Display Case validator 与 all-pipeline validator 均为 errors／missing／unhashed=`0/0/0`。Model Provenance Explorer 全量为 `180/183`；两项失败仍断言旧 Gate 04／Gate 12 状态，一项读取并发 magnetic-slide 旧 snapshot，未修改该并发 test 文件。rev 9 ready event=`53979405-e1c6-4cd5-b132-b1e25eaf1474`。
+- 下一门禁：用户先评审真实 Unity normal/slow-motion media。只有 Gate 04 rev 9 获得明确视觉批准后，才能处理最早 stale Gate 05；当前不进入 CTA、四 rarity tier、shipping wiring 或物理手机。
+
+</details>
+
+## 历史：2026-08-28 Pack Opening Gate 04 rev 8 已明确拒绝
+
+> **历史状态：pipeline rev=`82` 时 Gate 04 rev 8=`ready_for_review`；rev 83 已保存两次 exact rejection，rev 84 已以真实 Unity rev 9 取代当前候选。物理手机从未 build／install／launch。**
+
+- rev 8 的 `720×1280 / 60 fps / 186 frames` 录屏由 `generate_epic_timing_prototype.py` 离线合成；它不是实际运行的 Unity scene/Game view。
+- `candidate-texture-manifest.json` 的 noise dissolve、rarity ramp、soft-disc particle、radial line 与 shockwave 素材全部保持 `finalMaterialDelivery=false`，不得进入 rev 9 或 shipping。
+- 原 `13/13` EditMode 只验证 timing profile，不证明视觉质量。“九层同时运动”与 signalstats 是已否决 measurement，不得恢复为完成标准。
+- DecisionState：`Rejected Twice / Superseded by Gate 04 Rev 9`。DeliveryState：`Immutable Rejected Evidence`。
+
+## 历史：2026-08-28 Premium Display Case Gate 12 rev 4 已拒绝
+
+> **历史状态：pipeline rev=`80` 时 Gate 01–11=`approved`，Gate 12 rev 4=`ready_for_review`。pipeline rev 81 已将该候选记录为 rejected/superseded history。物理 iPhone 从未 build／install／launch。**
+
+- 用户拒绝 rev 3 的精确选择为 Pack tear“撕包仍然有问题”、light“仍然太弱”、gacha energy“仍需加强蓄力与冲击”；rejection event=`580beed5-ae76-41e0-b800-601cf505bb93`。rev 1–3 全部证据保留；Gate 01–11 未失效。
+- rev 3 根因：整条 seal 以刚性 lid 方式竖移；cut seam 与锚点路径不匹配；合成 contact label 比首个真实变化早 `0.203 s`；commit 时 opacity＋裁切只剩 partial flap 面积 `4.4%`。arrival 是透明 wash，rotation rim 是静态 virtual-light；无 release pulse；sheen 对 hold mean absolute=`7.84/255`。
+- Pack rev 4：组件库 `ProductTearablePackArtwork` 使用真实 `384×512` body/flap、full-width 比例与最后可用 shipping Pack 的 `topTrailing` 变换依据。`<0.62` 有可见水平跟手、lift、3D bend、progressive opening/seam 和回弹；`≥0.62` exact-once。可见 opening 先于 case；一次 `0.18 s` neutral pulse 只在 opening/interior。
+- 交接：Pack 保持前景，直到同 request receipt 与真实 case/prize/camera 连续两帧 ready。当前下退候选=`0.14 s`；transition minimum foreground fraction=`0.3853`，case-before-opening fraction=`0`，无黑／空帧或对象替换。
+- 盒体 rev 4：one arrival rim、two object-bound rotation-rim passes、one crossing sheen、zero persistent light。三个 shell renderer 只使用 mesh fragment；所有 isolated cue external pixels=`0`。无 halo、rarity color、Bloom dependency、particle、VFX Graph、shake、loop、explode、assembly 或第二盒。
+- 当前 timing 候选：handoff／entry／first 360／second 360／overlap／arrival／sheen／hold=`0.14/0.56/0.50/1.10/0.18/0.28/0.34/0.62 s`；profile=`2.94 s`。两圈平均=`720/327.27°/s`，速度比=`2.2×`；边界前后保持正角速度，无 hard stop。全部仍可编辑，未锁定为获批视觉值。
+- Pack 视觉测量：full-width fraction=`0.9361`，partial flap horizontal travel=`146.75 px`，partial／commit opening gap=`13/105 px`，rebound MAD=`0.948/255`；seam p95−median=`166/255`，release mean／p95 delta=`105.32/123/255`。
+- 盒体 isolated GPU cue mean delta：arrival／first rim／second rim／sheen=`8.13/13.39/9.23/18.16/255`；p95=`20.07/36.77/25.35/173.94/255`。实际成片 final sheen 对 hold mean absolute=`39.92/255`、p95=`161/255`；hold 后 residual mean／p95=`1.17/5/255`。
+- 回归：Unity EditMode=`53/53`；Swift exact-once/rules=`42/42`；六份 touched shipping Swift 通过 `arm64-apple-ios15.0-simulator -warnings-as-errors -typecheck`。全局 Xcode `-Werror` 会把 Unity 6000.5 自动生成 umbrella header 的四项非模块化 warning 升级为错误，因此只对 touched Swift 严格门禁；canonical Release Simulator Xcode 正常构建=`BUILD SUCCEEDED`。
+- 来源：只继续已批准的 `MakeItShineCc0EffectCurves.cs`、`MakeItShineCc0Masks.hlsl`、contract 与 notice；source commit=`88842be0063b5b0b75e82ed6572752a37a13c82b`。外部 FBX/prefab/Timeline/VFX/three-card/sample material 仍未导入。
+- 证据：`ArtSource/ModelPipeline/premium-display-case/evidence/12-shipping/rev-004/app-simulator-pack-to-case-r4.mp4` 为 H.264 `1206×2622 / 60 fps / 339 frames / 5.65 s`。同目录 `app-simulator-contact-sheet.png`、`pack-tear-rebound-contact-sheet.png`、`pack-seam-release-contact-sheet.png`、`case-cue-contact-sheet.png`、`standard-views-contact-sheet.png` 与 `visual-regression-report.json` 提供标签和阈值。ready event=`efb848ba-7aac-4707-8902-0dd14bcb525d`。
+- DecisionState：whole-case、因果接力、exact-once、有限 mesh-clipped cue 与全部禁止项保持 locked；rev 4 timing/light amplitude 为 `Decision Pending`。DeliveryState：`Integrated & Tested · Release Simulator Rev 4 Ready for Review`；不是 physical-phone `Installed` 或 `Device Accepted`。
+
+## 历史：2026-08-27 Premium Display Case Gate 12 rev 3 已拒绝
+
+> **历史状态：pipeline rev=`78` 时 Gate 12 rev 3=`ready_for_review`。用户随后以三项精确选择拒绝该轮；pipeline rev=`79` 将其保存为 rejected history。物理 iPhone 未 build／install／launch。**
+
+- 用户反馈：精确保留“光效在哪里啊，完全没有实现啊，然后pack撕开的效果又坏了”。rev 2 rejection 和全部证据保持 immutable history；rev 3 event=`651f8bed-ae06-4bca-93f3-8c63b81c8384`。这是 Gate 12 implementation defect revision，不改变 Gates 01–11。
+- 光效根因：rev 2 测试只验证 source 曲线非零和 shader 文本存在，未验证 prefab renderer、material property、MaterialPropertyBlock 或真实 GPU 像素。`FidgetingCc0DiagonalBand` 又做一次 reveal threshold，透明 alpha 再压低 `0.10` arrival 与 `0.18` sheen，最终几乎不可见；两圈也没有独立 `_RotationRimStrength`。
+- Pack 根因：真实 flap 是 `400×512` 透明 canvas，却被放进 `238×82` frame，实际撕条被缩窄；body 没有随 progress 打开的遮罩，也没有 seam light。Rive 只负责选择反馈，不是撕包层。
+- Runtime 修复：`PremiumDisplayCaseGate12R003` 使用三个真实 shell renderer；profile/runtime/shader 共同验证 CC0 曲线、property support 和 MPB 写入。arrival=`0.68`、rotation rim=`0.52`、sheen width/intensity/falloff=`0.10/0.78/0.42`；GPU 回归要求三类盒体 cue 都产生可读差值且 case fragment 外变化像素=`0`。无 Point Light、Bloom、particle、VFX Graph、rarity flash、shake、外扩 halo 或 loop。
+- Pack 修复：业务 View 只组合组件库 `ProductTearablePackArtwork`。同 tier body/flap 使用同一 `238×350` canvas；`<0.62` flap/opening/seam 连续跟手并回弹，`≥0.62` exact-once commit。receipt 等待时 seam 不常亮；真实 case/prize/camera 连续两帧 ready 后，Pack 才按 `0.18 s` 下退并启动同 request Unity reveal。
+- 节奏未改：handoff `0.18 s`、entry `0.82 s`、第一圈 `360° / 0.72 s`、第二圈 `360° / 1.18 s`、overlap `0.22 s`、sheen `0.42 s`、hold `0.68 s`、Y `-0.18 m`、camera-depth Z `0.11 m`、profile `3.60 s`。两圈边界角速度连续；第一／第二圈平均=`500 / 305.08°/s`。这些值与新光强都仍待视觉批准。
+- 回归：相关 Unity EditMode=`53/53`；其中真实 GPU arrival／rotation-rim／sheen 可见性与 fragment 外 `0 px`、module/prefab/material wiring、Pack source/mask、premature dismissal、no-empty-frame、same-instance、Reduce Motion、中断恢复和 stale request 全部通过。Swift gate=`37/37`；六份 touched shipping Swift `arm64-apple-ios15.0-simulator -warnings-as-errors -typecheck` 通过。Model Provenance Explorer=`165/165`；all/model pipeline validators errors／missingFiles／unhashed=`0/0/0`。
+- Release Simulator：canonical bundle=`com.jiaweizhou.fidgetspinner.codex`，`development=false`，Xcode=`BUILD SUCCEEDED`。R003 prefab SHA-256=`ca7d6d1f…6919c`，profile=`75536764…8378`，shader=`40a4d225…023c`，Gate 10 FBX 仍为 `21c9db68…47ae`。外部 CC0 源 commit 及三份 source hash 匹配；excluded FBX/prefab/Timeline/VFX/three-card assets 仍为 `0` 导入。
+- 证据：连续视频=`ArtSource/ModelPipeline/premium-display-case/evidence/12-shipping/rev-003/app-simulator-pack-to-case-r3.mp4`，H.264 `1206×2622 / 60 fps / 504 frames / 8.4 s`，SHA-256=`1153f2d4…39c3`，无空帧。总联系表=`app-simulator-contact-sheet.png`；Pack 近景=`pack-tear-contact-sheet.png`；光效近景=`light-closeup-contact-sheet.png`；标准视角=`standard-views-contact-sheet.png`。完整 hash 见 `asset-hash-manifest.json` 与 `gate12-evidence-report.json`。
+- 历史 DecisionState：whole-case、两圈、因果接力与零外扩 halo 边界继续有效；rev 3 tear/light/energy visual 已拒绝。DeliveryState：`Integrated & Tested Simulator Candidate · Rejected for Shipping Visual`；不是 physical-phone `Installed` 或 `Device Accepted`。
+
+## 历史：2026-08-27 Premium Display Case Gate 12 rev 2 已拒绝
+
+> **历史状态：pipeline rev=`77`。Gate 12 rev 2=`rejected / revision-requested`。后续具体缺陷反馈与 rev 3 已替代“等待具体反馈”状态；本节只保留 rev 2 快照。物理 iPhone 从未 build／install／launch。**
+
+- 拒绝事件：workflow event=`decc3d37-68df-40fc-bc6c-3c0f9e472566`，用户原话为“节奏或光效仍需修改”。后续问卷被取消；事件明确记录 `parameterAttribution=unspecified-do-not-infer` 与 `nextState=awaiting-specific-user-feedback`。不得判断是哪一项 timing/light 参数有误。
+- 影响范围：最早受影响门禁仍为 Gate 04 presentation architecture。Gate 05–11 的 geometry、material、lighting、environment、export、FBX 与 Unity parity 均未改变，继续有效。Gate 12 rev 1 approval event=`8754e752-90ca-4b53-b4ff-0df6bbdae478` 及原证据保留为 superseded history。
+- 被拒绝的 rev 2 快照：handoff `0.18 s`、entry `0.82 s`、第一圈 `360° / 0.72 s`、第二圈 `360° / 1.18 s`、entry/first-spin overlap `0.22 s`、sheen `0.42 s`、hold `0.68 s`、Y `-0.18 m`、camera-depth Z `0.11 m`。profile 总长=`3.60 s`；第一／第二圈平均角速度=`500 / 305.08°/s`。这些值只用于保存 rev 2 历史，不是获批默认值。
+- 交接：receipt、same-request、stale rejection、interruption restore、exact-once ACK 和真实 case／prize／camera 连续两帧 ready 不变。两帧 ready 后，Unity 把 profile 的 handoff 时长传给 Swift；Swift 开始隐包时再以同 request exact-once 调用 `StartGachaRevealFromNativeUi`。这避免 Swift MainActor 调度让 Pack 遮住前半段 Unity 动画。
+- CC0 提取：源固定为 `remi-chapelain/Unite2025-MakeItShine-Release@88842be0063b5b0b75e82ed6572752a37a13c82b`，license=`CC0-1.0`。模块 `Assets/_DisplayCase/Runtime/MakeItShineCc0Effects/` 只含 `MakeItShineCc0EffectCurves.cs`、`MakeItShineCc0Masks.hlsl`、`SOURCE_CONTRACT.json` 与 `CC0-NOTICE.md`。提取内容仅为 `Booster_Discarded.anim` dissolve 曲线、`SG_Title_Kyle` Sphere Mask 思路和 `SG_LightingStrike._Reveal` 数学。
+- 排除项：未导入 Booster/Card FBX、Pack/Card prefab、三卡布局、品牌 artwork、完整 Timeline、sample material、fracture/explosion、VFX Graph、Cinemachine、额外 mask camera、RenderTexture 或 particle。光效只由 MaterialPropertyBlock 驱动 object-local mesh mask；outside-mesh pixels／Point Light／full-screen flash／rarity cue／persistent loop=`0`。
+- Runtime／场景：代码中仍保留 `Assets/Resources/Gacha/PremiumDisplayCaseGate12R002/PresentationRoot.prefab` 与 `PremiumDisplayCaseGate12R002Profile.asset`，但该组合已被拒绝为当前 shipping 视觉。本次只持久化决定；未改 runtime、未回退参数、未生成 rev 3。盒体、真实三叶奖品、标签内容、静态相机／背景和 Gate 10 FBX SHA-256=`21c9db68…47ae` 未变。
+- 自动验证：相关 Unity EditMode=`50/50`，包含 Reduce Motion 因果静态路径；Swift exact-once gate=`25/25`；十份 shipping Swift `arm64-apple-ios15.0-simulator -warnings-as-errors -typecheck` 通过；Xcode Release Simulator=`BUILD SUCCEEDED`。evidence validator=`20/20 checks pass`；source commit／三份原文件 SHA-256／excluded-assets contract 均通过；Premium Display Case model validator=`11/12`、errors／missingFiles／unhashed=`0/0/0`。validation refresh event=`5ee11660-92a8-4141-b9ce-bc2015e9c9cf`；六张 Unity motion samples registration event=`341c1adc-7778-4a6b-90db-48ec8f249374`。
+- Simulator：canonical bundle=`com.jiaweizhou.fidgetspinner.codex` 曾仅安装并启动于 iPhone 17 Pro Simulator。rev 2 评审视频与联系表继续作为 rejected revision 证据保存在 `evidence/12-shipping/rev-002/`。本次未重新构建或启动 Simulator。
+- 工具验证：Gate 12 rev 2 current-state + rejection workflow focused Node=`2/2`；Premium Display Case model validator rev=`77`、approved=`11/12`、earliest=`12-shipping rejected`、errors／missingFiles／unhashed=`0/0/0`；all-pipeline validator 对全部模型均为零 schema、missing-file 或 unhashed 错误。全 Model Provenance Explorer=`151/160`；`9` 项既有失败均来自并发 Magnetic Slide 已推进到 rev `197`，而旧测试仍期待较早 `ready_for_review` 状态。本任务未改该 feature。
+- DecisionState：whole-case、mesh-clipped、no-external-entity 和因果接力边界继续锁定；Gate 12 rev 2 visual=`Rejected / Revision Requested`。拒绝原因只记录为“节奏或光效仍需修改”，未归因到具体参数。DeliveryState：`Integrated & Tested Simulator Candidate · Rejected for Shipping Visual · Awaiting Specific User Feedback`；不是 physical-phone `Installed` 或 `Device Accepted`。
+
+## 历史：2026-08-27 Premium Display Case Gate 12 rev 1 视觉批准
+
+> **历史状态：pipeline rev=`73`。Gate 01–12=`approved`；`shippingReady=true`。该视觉随后被 rev 2 节奏请求替代；批准事件与证据保留，但不再代表当前 shipping 视觉。物理 iPhone 从未 build／install／launch，Device Accepted pending。**
+
+- Gate 11：用户选择“一致，批准并生成 App 预览（推荐）”，approval event=`c14b967f-6399-4cff-8baa-78a0eb6169dc`。Gate 10 FBX SHA-256=`21c9db68723f0006d7c6bfec5280cafe55c16cf5392ff97c365c966e91f847ae` 继续是 Unity authority。
+- Gate 12：ready event=`ec5f162a-ebbe-4c33-aa4c-d485044c95a3`；approval event=`8754e752-90ca-4b53-b4ff-0df6bbdae478`。用户原话“视觉批准，但暂不推手机（推荐）”已通过 workflow 持久化。canonical App 使用 `Assets/Resources/Gacha/PremiumDisplayCaseGate12R001/PresentationRoot.prefab`；旧 `Assets/Resources/Gacha/PremiumDisplayCase.prefab` 保留为 rollback。
+- Runtime：`GachaShippingRevealDirector` 保持同一 assembled case 和 caller-owned Toy；`FidgetAppCoordinator` 在真实 case／prize／camera 连续两个 `WaitForEndOfFrame` 后才交接。durable receipt、same-request gate、stale rejection、exact-once ACK 与 interruption restore 保留。
+- 动效：`PremiumDisplayCaseGate12R001Profile` 是可调 ScriptableObject + AnimationCurve。获批 rev 1 视觉快照为 entry `1.30 s`、rotation `2.10 s`、overlap `0.28 s`、sheen `0.58 s`、hold `0.90 s`、Y `-0.22 m`、camera-depth Z `0.16 m`、local-Y `360°`、sheen `0.055/0.20/0.34`。这些值只随当前 shipping 视觉修订获批；未来 tuning 必须形成新修订并重新审批。
+- 光效：Gate 12 shader 按每个 mesh 的 object-local bounds 归一化，使用 MaterialPropertyBlock 驱动一次有限 sheen。Point Light、外部 halo、Bloom、粒子、VFX Graph 与持续循环均为 `0`。
+- 标签：产品名、edition／finish、acquired date、rarity／level 与 `FDT-*` collectible ID 来自 catalog、progression 和 durable pending receipt；shipping preview 无 placeholder 文字。结果 UI 只组合 `ProductScreenHeading`、`ProductStatusTag`、`ProductBottomActionDock` 与唯一 `ProductPrimaryActionButton("收下")`。
+- 自动验证：focused Unity EditMode=`63/63`；Swift gate harness=`23/23`；shipping Swift `-warnings-as-errors -typecheck` 通过；Xcode Release Simulator=`BUILD SUCCEEDED`；evidence validator=`pass`；model validator rev `73`、errors／missingFiles／unhashed=`0/0/0`。
+- Simulator：bundle=`com.jiaweizhou.fidgetspinner.codex`，只安装／启动于 iPhone 17 Pro Simulator。preview token 只为 Simulator 提供一张真实 durable draw；receipt、ownership 与 ACK 仍走生产事务代码。它不是 StoreKit sandbox purchase，也不证明 iPhone 性能、Haptic 或 Device Accepted。
+- 证据：完整 App Simulator 录屏、handoff／standard 联系表、Phone 与原始 Gate 12 报告继续保存在 `ArtSource/ModelPipeline/premium-display-case/evidence/12-shipping/rev-001/`。rev 1 已是 superseded history，不再复制到当前 DesignBible approved asset set。
+- 当时验证：Model Provenance Explorer=`144/144`；Premium Display Case model validator=`12/12`、`shippingReady=true`；全 pipeline validator 的 schema／missing file／unhashed 均为 `0`。这些数值只描述 rev 73 历史快照。
+- 历史 DecisionState：Gate 11 parity=`Approved`；Gate 12 rev 1 visual=`Approved then superseded`。DeliveryState 不是 physical-phone `Installed` 或 `Device Accepted`。
+
+## 2026-08-27 环境光与陀螺仪响应收束到中间档
+
+> **当前状态：`FDB-SCN-011`。用户要求按 GitHub 产品灯光／reference-calibration 流程实测。Canyon 静止态现使用中性顶光、低能量岩壁反弹和低频环境反射；已移除无对应光源的前缘白色三角亮点及 2D glow。视觉批准待确认，未推送手机。Device Accepted 仍为 pending。**
+
+- 推牌 `M_EDC_Meshy_URP_Lit` 打开实时高光；环境反射保持开启。原先 `_SPECULARHIGHLIGHTS_OFF` 让陀螺仪 view-highlight 无法在金属上移动。Library 灯光尺度 `0.20→0.48`。
+- 扇牌 Satin／Gunmetal／Chrome 增加 `_ADDITIONAL_LIGHTS` 与 cubemap 采样，固定 studio 假光减弱。
+- 转子：ambient 去饱和保留亮度、环境染色 `0.34→0.14`、亮金属 albedo 缩放 `0.68→0.90`，高光偏中性白。未改转子 `SoftBrightMetalAlbedoScale` 或 `EnvironmentColorCoupling`。
+- 扇牌库页几乎正对扇面，旧反射 `0.28 × 0.40` 加恒定 fill 让银面像贴图。扇牌反射 `0.42`、库页反射尺度 `0.80`、库页灯光 `0.70`。Editor PC 为 Forward+，扇牌 shader 含 `_CLUSTER_LIGHT_LOOP`。几何与珠喷 smoothness `0.24` 未改。
+- 扇牌峡谷侧向耦合（2026-08-28 早，已否决）：Satin 曾加 `satinBand`，主光对准视口 `(0.72, 0.82)`，接触阴影偏到 `0.412`，背景 glow radius `0.24`／intensity `0.42`，前景左右墙 glow `0.32`。用户否决后不再作为当前方向。
+- 扇牌峡谷首轮顶光（2026-08-28，已被 audit r001 替代）：去掉 `satinBand`，但仍保留石台点光；其前缘白三角在用户截图中被识别为无来源高光。
+- GPU Editor 捕获（无 `-nographics`，`CaptureFanCardAppScene` 后 `ApplyTheme(CanyonId)`，Unity `6000.5.6f1`，双 `SubmitRenderRequest`，mtime 2026-08-28 10:37）。路径：`Artifacts/EnvironmentIntegration/magnetic-fan-card-canyon-library.png`（1,798,102）、`magnetic-fan-card-canyon-detail.png`（1,733,912）、`magnetic-fan-card-canyon-library-ibl-left.png`（1,797,666）、`magnetic-fan-card-canyon-library-ibl-right.png`（1,796,481）、`magnetic-fan-card-canyon-detail-ibl-left.png`（1,736,837）、`magnetic-fan-card-shipping-scene-sheet.png`（1,587,216）。视觉批准待确认，未推送手机。Device Accepted 仍为 pending。
+- 定向 EditMode：`25` 例中 `24` 通过，报告 `Logs/FanCardCanyonTopKeyTests.xml`。唯一失败为既有 `ShippingGeometryPassesTheFrozenStructuralGate`（BottomCard／MiddleCard watertight degenerate=1512），本轮未改几何。`ShippingMaterialsUseIndependentBeadBlastedMetalAndReadableFaceMarks` 与 `SoftLightingPolicy` 通过。
+- GitHub 方法实测（2026-08-28）：使用 [RobLe3/cc-blender-skill](https://github.com/RobLe3/cc-blender-skill) 的 `blender-lighting`／`reference-look-calibration` 原则，但没有导入 Blender 脚本。先拆分 key、fill、环境反射、相机侧点光、石台点光和 2D glow，再以真实 Unity 静帧比较。
+- 光源隔离证据：关顶光、关反射、关岩壁反弹和关背景后，白三角仍在；全部灯光关闭时消失；只开 `SpinnerModelColorBounce` 时复现。因此它来自石台位置的 Unity 点光，不是背景、顶光或 cubemap。扇牌现禁用 `SpinnerModelColorBounce` 与 `SpinnerViewResponsiveHighlight`；姿态只以 `0.10 / 0.07 rad` 小幅旋转低频 reflection sample，不改 albedo。
+- 当前静止 rig：`CanyonTopKey`=`(0.92,0.95,1.00) @ 0.92`、`CanyonRockBounce`=`(1.00,0.82,0.64) @ 0.18`；`FanCardReflectionBaseScale=0.72`、peak=`0.58`、key/fill=`0.14/0.06`，不使用合成 panel／strip、前景／背景 glow 或 camera-side fill。Satin 保持 smoothness=`0.24`；直接高光=`0.22`、环境高光=`0.42` 上限。接触阴影仅保留小范围 `0.46` 遮罩。转子未改。
+- GPU Editor captures（无 `-nographics`，Canyon `ApplyTheme`，双 `SubmitRenderRequest`，mtime 2026-08-28 16:10）：`Artifacts/EnvironmentIntegration/magnetic-fan-card-canyon-toplight-audit-r002-library.png`（1,796,074 B）、`...-detail.png`（1,731,887 B）、`...-sheet.png`（1,002,214 B）。三角和前景色洗已消失；Canyon 仍是 2.5D unlit plate，静帧不能证明真实体积遮挡或陀螺仪效果。
+- 验证：source/full guardrail=`ALL PASS (7.590 mm)`；`FanCardAcceptanceTests`=`22/23`。已改光相关的 materials、shader、scene tests 均通过；仅既有 `ShippingGeometryPassesTheFrozenStructuralGate` 失败（3 张牌各 `degenerate=1512`），本轮未改几何。`ArtSource/ModelPipeline/.../10-export/rev-003/magnetic-fan-card.fbx` 缺失，故完整 `BuildScene()` 无法重建权威 FBX；本轮只对已导入的 shipping scene 应用灯光迁移，未将其报为几何重建或可推机。
+
+## 2026-08-28 扇牌峡谷顶光 audit r008 多光源重排
+
+> **当前状态：`FDB-SCN-011`。顶光改为离轴上左方向，加入三向可解释光源（顶光／冷天光／暖岩壁反弹）。视觉批准待确认，未推送手机。Device Accepted 仍为 pending。**
+
+- 问题：r002 之前顶光 yaw span 只有 `8°`，且 `FanCardVisibleKeyViewportX=0.50`，实际 yaw=`0°`。顶光几乎正对镜头轴，银面上既无方向性高光带，也无与之对应的可见投影方向。用户反馈“完全看不出来有顶光”由此而来。
+- 本轮 rig（`ApplyCanyonTopLightRig`，未调用 `BuildScene`，未重建几何）：
+  - `CanyonTopKey`：Directional，`(0.95,0.97,1.00)`，intensity `1.10→1.55`，rotation `Euler(57.6, 19.2, 0)`（`FanCardKeyPitchMin/Max=52/58`、`FanCardKeyYawSpan=8→60`、`FanCardVisibleKeyViewportX=0.50→0.34`）。Soft shadow 保留。
+  - `CanyonSkyFill`：Directional，`(0.62,0.74,1.00)`，intensity `0.20→0.34`，rotation `Euler(72, -60, 0)`（`FanCardSkyFillPitch=58→72`、`FanCardSkyFillYaw=-24→-60`）。
+  - `CanyonRockBounce`：Directional，`(1.00,0.82,0.64)`，intensity `0.14→0.18`，rotation `Euler(45.6, -84.8, 0)`。yaw 偏移由 `+168°` 改为 `-104°`，让暖反弹从顶光对侧进入正面，而不是打在卡背形成 rim。
+  - `CanyonApertureTopLight`：Spot，`0.04` 保持不变。r001 隔离对比（`0.04/0.08/0.12`）显示它只整体抬亮、不产生方向性顶光读数，提高只会让银面更平，因此不上调。
+  - `SoftFrontLift` 保持 `0` 并 disabled；`SpinnerViewResponsiveHighlight` 与 `SpinnerModelColorBounce` 在扇牌路径继续禁用。
+- Satin shader：`_Smoothness` 仍为 `0.24`，albedo 未改。降低平坦底光 `ambientIrradiance 0.68→0.46`、`hemisphere 0.16→0.17`；宽 lobe 改 `lerp(2.0, 9.0, _Smoothness)` 系数 `lerp(0.10, 0.30, _Metallic)`；新增窄带 `bandSpecular=lerp(9.0, 34.0, _Smoothness)` 系数 `lerp(0.12, 0.62, _Metallic)` 以形成可读缎面高光带。环境高光上限 `lerp(0.12, 0.42, _Metallic)` 未改，未恢复 reflection `0.82`／SH floor／`softPanel`。
+- 耦合：`FanCardEnvironmentColorCoupling 0.22→0.26`、`FanCardCubemapKeyScale 0.25→0.34`。暖冷仍只经 SH／cubemap 宽渐变进入，不做岩壁镜像反射。
+- 背景 glow 仍为 `FanCardPedestalGlowIntensity=0`、`FanCardForegroundGlowIntensity=0`，前景两根近景石柱无泛光洗白。接触阴影 `FanCardContactShadowStrength=0.46`，`ResolveFanCardContactShadowCenterX(0.34, 0.94)=0.564`，随顶光偏左而向右偏移，方向与顶光一致。
+- GPU Editor captures（Unity `6000.5.6f1`，无 `-nographics`，Canyon `ApplyTheme`，双 `SubmitRenderRequest`，mtime 2026-08-28 17:5x）。首次带 `-nographics` 的一轮产出 5 张完全相同的空白灰图（各 `28,214 B`，同一 SHA-256），已作废并重跑：
+  - `Artifacts/EnvironmentIntegration/magnetic-fan-card-canyon-toplight-audit-r008-library.png`（1,845,501 B）
+  - `...-r008-library-ibl-left.png`（1,845,565 B）
+  - `...-r008-library-ibl-right.png`（1,845,725 B）
+  - `...-r008-detail.png`（1,755,551 B）
+  - `...-r008-detail-ibl-left.png`（1,755,611 B）
+  - `...-r008-sheet.png`（1,036,221 B）
+- 实际看图结论（未获批准）：库页视图现有从左上到右下的可读柔和方向性渐变，方向与顶光一致，接触阴影偏向右侧一致；三角形无源高光在五张图中均已消失；背景泛光仍限制在中央石台缝隙，未洗白近景石柱。仍不足：亮度差仍偏大，银面整体比岩石亮；detail（近乎水平小面）视图仍接近均匀，方向性读数弱；暖冷分割在银面上仍偏弱。Canyon 依旧是 2.5D unlit plate，静帧无法证明真实体积遮挡或陀螺仪响应。
+- 验证：`python3 unity/FidgetingApp/ArtSource/FanCard/validate_fan_card_guardrails.py`=`ALL PASS (7.590 mm)`。`FanCardAcceptanceTests`=`22/23`，唯一失败为既有 `ShippingGeometryPassesTheFrozenStructuralGate`（BottomCard／MiddleCard／TopCard 各 `open/nonmanifold=0, degenerate=1512`），本轮未改任何 mesh asset，几何缺陷早于本轮且需 Blender 重建与缺失 FBX 才能修。
+- `SpinnerEnvironmentTests`=`9/10`。已同步两处过期断言：`_ShadowStrength` 允许扇牌石台值 `FanCardContactShadowStrength`；`FanCardEnvironmentColorCoupling` 范围由 `0.34–0.50` 改为 `0.20–0.34`（旧范围属被否决的 digital-IBL 档）。剩余失败 `EveryProductSceneInstallsItsBackgroundAndHarmonizedModelLights` 断言 `_GlowScaleB.y=2.8`，而 adaptive backdrop 在 HEAD 即写入 `1.08`，属既有 adaptive-backdrop 断言漂移，与扇牌灯光无关。
+- `ArtSource/ModelPipeline/magnetic-fan-card/evidence/10-export/rev-003/magnetic-fan-card.fbx` 仍缺失，`BuildScene()` 无法运行；本轮只对已导入 shipping scene 应用灯光迁移，未报为几何重建或可推机。
+
+## 2026-08-30 扇牌峡谷 audit r009 多机位补拍
+
+> **当前状态：用户指出 r008 只有两个真实机位，角度不足。当前 shipping Unity 场景补拍 27 张 Canyon 图后，用户以原话“通过”批准 r009 静态视觉。未构建、未安装、未推送手机；Gate 12 仍为 stale，Device Accepted 仍为 pending。**
+
+- `FanCardSceneBuilder.CaptureFaceReflectionAngles()` 现明确应用 Canyon theme，并只在未保存的 Editor 会话内移动相机。shipping 相机、模型 Transform、材质、灯光、Collider、四档机械、音频和 Haptic 均未改。
+- 核心八机位总览：`Artifacts/EnvironmentIntegration/magnetic-fan-card-canyon-multiangle-r009/r009-core-angle-sheet.png`。
+- 核心原图：`fanned-overhead.png`、`fanned-hero.png`、`fanned-left-38.png`、`fanned-right-38.png`、`fanned-low-left.png`、`fanned-low-right.png`、`fanned-back.png`、`fanned-track-closeup.png`。同目录另含 high／grazing、正面局部、左右 `42°`、IBL 左右偏转及闭合状态，共 27 张。
+- 逐图检查：顶视、hero、左右斜视和左右低机位均完整构图；低机位可见三片真实厚度及两道空气间隙；正面看不到背轨或背面角标。背面和轨道特写明显过暗，说明当前顶光 rig 只适合正面 shipping 构图，不能把背面图当作灯光通过证据。
+- 不变门禁：轨道外轮廓净距、`3.5 mm` 单片厚度、`1.0 mm` 层间隙、共同轴心、底片固定／中顶片运动、正背面可见性和角标父子关系均未改。source-only 与 full guardrail 均为 `ALL PASS (7.590 mm)`。
+- Unity `6000.5.6f1` batch capture 编译并执行成功。`FanCardAcceptanceTests`=`22/23`；唯一失败仍是既有三张 body 各 `degenerate=1512` 的 structural gate，本轮未改任何 mesh asset。
+- 单模型 pipeline validator=`11/12`，Gate 12 继续为 stale。Model Provenance Explorer=`199/205`；6 项失败均指向并行中的 Magnetic Slide／Premium Display Case 状态断言，没有 Fan Card 失败。
+- 2026-08-30 r009 approval：用户原话“通过”。批准总览已复制为 `Docs/DesignBibleAssets/fan-card-canyon-r009-approved.png`，SHA-256=`f7173b900cb6e238714b08468c611110511f31cf9798b16eaab4d7ab5a4297a7`；对应 `FDB-SCN-012`／`V10`。该批准仅覆盖静态视觉，不替代 Gate 12 交互证据、安装、陀螺仪或 iPhone 验收。
+- iPhone Simulator：真实 App 已在 iOS `26.4` 的 iPhone 17 Pro Simulator（UDID `8E396082-0B97-4484-A30B-4DD125318319`）完成 Unity export、Xcode Release build、安装与启动。Bundle=`com.jiaweizhou.fidgetspinner.codex`，Build=`40`，manifest sdk=`SimulatorSDK`、source=`local-preview`、`physicalPhoneInstallAuthorized=false`。通过 launch arguments 进入 `magnetic-fan-card`／`canyon`；运行截图为 `Artifacts/EnvironmentIntegration/fan-card-gate12-r009-simulator-launch.png`。
+- 首次 export 因磁盘仅余 `117 MB` 在 IL2CPP 阶段报 `No space left on device`。用户明确选择清理后，仅删除 5 个可重建的旧 Xcode DerivedData 缓存，释放约 `15 GB`；未删除源码、预览或 Xcode export。重跑日志 `Logs/FanCardGate12R009SimulatorExport.log` 明确为 `Build Finished, Result: Success`。
+- Simulator 已打开供交互检查；用户交互验收、Core Motion 陀螺仪和物理 iPhone Device Accepted 仍未完成。
+
+## 2026-08-28 Magnetic Slide Tile Gate 08 rev 5 端点互锁灯光复核
+
+> **当前状态：pipeline rev=`232`。Gate 07 rev 12 已由用户以原话“继续”批准；Gate 08 rev 5=`ready_for_review`；Gate 09–12=`stale/blocked`。旧 shipping 模型仍为默认。视觉批准待确认，未推送手机。**
+
+- 本轮直接消费 Gate 07 rev 12 blend SHA-256=`95392904…588`、geometry digest=`2fcf6d2b…1952` 和机制合同 rev 17 SHA-256=`9cd7a08f…ea571`。几何与材质快照在全部 Blender 灯光渲染前后不变。
+- 灯光沿用 portable rev 4 recipe：单张 `2048×1024` scene-linear Rec.709/D65 equirectangular HDR，strength=`0.85`、rotation=`0°`、seam delta=`0`、radiance max=`5.6643`、动态范围=`5.2105 stops`。两端零 direct light、ground、probe、reflection card 和 synthetic highlight。
+- Blender 与隔离 Unity URP 都输出 `1400×1100` scene-linear HDR EXR，再共同应用 `neutral-display-v1`。Unity 以 `R16G16B16A16_SFloat` 导入同一 EXR；source max=`5.6641`、cubemap max=`4.8164`。
+- 必需证据包含 Hero、left/right oblique、low、Beauty、Clay、camera-space Normal、camera-space Depth 和 Roughness。完整整帧不裁切、不独立对齐：SSIM=`0.9241`、silhouette IoU=`0.8641`、MAE=`4.46/255`。
+- 外观检查：Blender／Unity blood-red fraction=`18.17% / 10.61%`；dark-pattern fraction=`59.03% / 74.83%`；Unity display clipping=`0`，批准材质 emission=`0`。该跨引擎候选只验证共享 HDR 可移植性，不是 Gate 11 parity 或 shipping 资产。
+- 真实 Blender 转台为 `90` 个源帧、H.264 `960×720 / 30 fps / 6.0 s`。前 15 帧只在 `θ=0°` 推至 `sMax`；60 帧只在 `sMax` 完成 `0°→360°`；最后 15 帧只在 `360°` 对齐后回推。固定轴方差=`0 mm`，pitch/roll=`0 rad`，非法中段旋转帧=`0`。
+- 隔离 Unity candidate 位于 `Assets/_EDC/Candidates/MagneticSlideTileGate08R005EndpointLighting/`。shipping scene SHA 前后均为 `99083a32…850d`；未运行 Simulator、shipping build、安装或手机。
+- 评审证据：`gate08-r005-endpoint-lighting-turntable.mp4`、`gate08-r005-lighting-review-board.png`、`gate08-r005-blender-unity-comparison.png`。DecisionState=`Gate 08 Review Pending`；DeliveryState=`Validated Isolated Lighting Candidate · Not Shipping · Not Device Accepted`。
+
+## 2026-08-28 Magnetic Slide Tile Gate 07 rev 12 端点互锁材质复核
+
+> **历史状态：Gate 06 rev 5 已由用户以原话“继续，继续”批准；Gate 07 rev 12 后由用户以原话“继续”批准，并被 Gate 08 rev 5 消费。**
+
+- 本轮直接消费 Gate 06 rev 5 blend SHA-256=`a2aaf83a…0ef4`、geometry digest=`2fcf6d2b…1952` 和机制合同 rev 17 SHA-256=`9cd7a08f…ea571`。材质前后及全部合法姿态 geometry digest 不变。
+- rev 11 四张 `620×1000` 贴图逐字节复用：upper albedo／roughness=`c0e9305d…453a5 / 854f1dbc…df6a`；lower=`968c1e87…0eb / ca269756…8245`。上／下 mask=`8250df70…1c36 / 7bf5921f…a7c2`，64 px 黑边 mask=`2179bf26…4fc`。
+- 材质值保持：银边 metallic=`1`、roughness=`0.075`；晶体 IOR=`1.52`、coat=`0.48 @ 0.035`、granular=`28`、microflake=`85`；深色侧壁 metallic=`0.24`、roughness=`0.18`；全部 emission=`0`。球材料继续为 unknown。
+- 当前证据只含闭合、中段 `0°`、最大打开端点 `0°/12°/36°` 和端点 12° 转台。密集状态审计=`4,359` 样本，其中中段旋转拦截=`4,000`、非零角回推拦截=`359`；固定轴方差=`0 mm`，最大槽点残差=`0.000002884 mm`，覆盖漏点／表面交叉=`0/0`。
+- 真实 Blender 材质板、原图对照、晶体／图案／银边／四槽／内部近照、交互 GLB 与 24 帧 H.264 转台均已生成。交互 GLB 是主评审资产；静态图只作补充。
+- DeliveryState：只完成 Gate 07 材质评审证据。未运行 Simulator、最终 Unity、Build、安装或手机；Device Accepted pending。
+
+## 2026-08-28 Magnetic Slide Tile Gate 06 rev 5 端点互锁同源几何
+
+> **当前状态：Gate 05 rev 12 已由用户以原话“可以，可以继续推进。”批准；Gate 06 rev 5=`ready_for_review`；Gate 07–12=`stale`。旧 shipping 模型仍为默认。视觉批准待确认，未推送手机。**
+
+- 本轮从 Gate 05 rev 12 blend SHA-256=`f587be80…1a2` 重建几何证据，机制合同固定为 rev 17 SHA-256=`9cd7a08f…ea571`。网格未改，canonical geometry digest 仍为 `2fcf6d2b…1952`。
+- 六正交、Workbench、尺寸／固定轴叠图、A–A 剖面、爆炸、四槽底面、平底凸轴近照、闭合、最大打开 `0°/12°/36°/360°` 与中段旋转禁用图均来自同一 Blender 5.2 scene。交互 GLB 为主要审批资产。
+- 密集验证覆盖 `1,362` 个合法姿态、`4,000` 次中段旋转请求和 `359` 次非零角回推请求。固定轴方差=`0 mm`，最大 `M_top·q(s)=P` 残差=`0.000002884 mm`，最小重叠圆盘实际网格射线漏点=`0`，完整 360° 闭合矩阵误差≤`1e-9`。
+- 六个内部件对 `BottomExterior`／`MovingTopBody` 的代表姿态 BVH 表面交叉均为 `0`。产品 renderer whitelist 仍仅含 `BottomExterior` 与 `MovingTopBody`；`MinimumOverlapDisk` 为非渲染 Empty；中段禁用图只渲染解析后的 `θ=0°` 合法姿态，不含 50% 行程旋转。
+- 闭合暂定 bounds=`31×50×12 mm`；底片顶面最大偏差=`0 mm`；轴座凸出=`0.2 mm`；四槽宽度和球候选继续保持用户授权范围 `1.8–3.0 mm`／`2–3 mm`。八个核心 mesh 的 nonmanifold edge 与 invalid polygon normal 均为 `0`。
+- 验证：Gate 06 定向 Node=`14/14`；全量 Node=`186/188`，两项失败均为并行 Premium Display Case 旧状态断言；model／全 pipeline errors、missingFiles、unhashed=`0/0/0`。桌面、`390×844` 移动、GLB、图片 modal、历史恢复通过，runtime／loading failure=`0/0`。标准视图 wrapper 使用 Blender bpy fallback，missing views=`0`；端点互锁视频 QuickTime 解码=`450/450`。
+- DeliveryState：Gate 06 几何评审证据已生成并验证。未推进材质、Simulator、最终 Unity、Build、安装或手机。
+
+## 2026-08-28 Magnetic Slide Tile Gate 05 rev 12 固定轴／遮挡纠正
+
+> **当前状态：Gate 05 rev 12=`ready_for_review`；Gate 06–12=`stale`。旧 shipping 模型仍为默认。视觉批准待确认，未推送手机。**
+
+- 用户否决 Gate 08 rev 4 Unity-only 录屏中的轴位跳变、内部件穿壳和底片顶面圆盘。两张原图按原字节归档，SHA-256=`d2222151…dfe3`、`57c1efc2…14cd`。
+- 最早失效实现是 Gate 05。旧层级同时使用 `FixedAxisBoss` 与 `FixedAxis` 表达轴，产品渲染又包含内部 mesh；旧验证没有检查槽点锁轴方程。
+- 修正版只有一个 pivot ID：`FixedAxis`，固定世界点 `P=(0,-9,5.875) mm`。顶片满足 `M_top=T(P)·Rz(θ)·T(-q(s))`，`q(s)=(0,-9+s,-3.1875) mm`。
+- `MinimumOverlapDisk` 是半径 `15.0 mm` 的非渲染 Empty。产品 renderer whitelist 只有 `BottomExterior` 与 `MovingTopBody`；轴座、载体、followers 和球只在技术层显示。
+- Blender 共验证 `13,357` 个 `s×θ` 样本：`P` 方差=`0`，最大锁轴残差=`0.000000954 mm`。五个代表姿态的真实网格表面交叉=`0`，最小覆盖圆 `64×5` 个实际顶片射线检查零漏点；底片顶面偏差=`0 mm`。
+- 隔离 Unity `6000.5.6f1` 白模录屏共 `300` 帧／`10 s`。固定轴方差=`0 m`，最大槽点残差=`5.11e-9 m`，pitch／roll=`0°`；红色世界轴在全部帧的屏幕 centroid 范围=`0×0 px`。没有 final material、shipping scene、Build、安装或手机操作。
+- 用户最新原话：“上片只有在推到顶部的时候，才可以进行360度旋转”。合同 rev 17 SHA-256=`9cd7a08f34d7d8dfc3c6f89f6c80a5c5c2dcae48bc0d5c54ebf455a0727ea571` 将机构改为串行状态机：`θ=0` 时直推；仅 `s=sMax` 旋转；非零角锁住行程；对齐后回推。Gate 04 rev 14 只标注端点／槽对齐，不臆造隐藏锁扣。几何未变。
+- 旧 `570` 帧录屏因在 50% 行程旋转被判定为 rejected invalid evidence，只保留历史。新隔离 Unity 白模录屏为 `450` 帧／`15 s`／`1920×1080`／`30 fps`：闭合、直推、中途旋转失败、端点解锁、30 档整周、非零角回推失败、对齐后闭合均有中文标注。
+- 新逐帧验证：固定轴屏幕 centroid 范围=`0×0 px`；BottomExterior／整机 transform 方差=`0`；槽点残差≤`1e-7 m`；`1000` 个 CAD 中途位置旋转均被锁定；30 档仅在 `sMax`；非零角回推和同时速度违规均为 `0`；最小圆盘漏点、相机移动、隐藏 renderer、pitch／roll 均为 `0`；整周闭合误差=`0°`，首末模型 ROI 最大像素差=`1`。ffprobe 与 macOS AVFoundation `450/450` 帧解码通过。
+
+## 2026-08-28 Magnetic Slide Tile Gate 08 rev 4 中性跨引擎基准
+
+> **当前状态：pipeline rev=`211`。Gate 01–07=`approved`；Gate 08 rev 4=`blocked`，等待 Unity-only PlayMode 录屏视觉确认；rev 3=`superseded history`；Gate 09–12=`stale`。视觉批准待确认，未推送手机。**
+
+- 用户明确判定 rev 3 信息有用但视觉不可接受，禁止继续作为批准候选。rev 3 文件与哈希完整保留，只从当前评审清单移除。
+- 用户否决首次补充录屏中的不可能竖直／卡片翻转。任务在编码前中断；反馈截图 SHA-256=`556c91e8…0609` 与拒绝记录只作为 internal history，未注册成批准视频。
+- 修正版硬约束：底座、底轴和整机固定且 world-up；产品 pitch／roll=`0°`；顶片只沿局部槽轴平移并作 `+Z` yaw；carrier 只绕 `+Z`；相机只作 `±35°` 水平环绕，恒 elevation、zero roll、稳定 up；禁止负 scale／倒置。Blender／Unity 每帧编码前都验证这些约束。
+- 新确认的传输错误：Unity 曾把线性 EXR 导入为 `R8G8B8A8_UNorm`，把 HDR `>1` 值截断；equirectangular→cubemap 还缺少 Blender `(X,Y,Z)`→Unity `(X,Z,Y)` 的完整横向符号与纵向翻转。
+- rev 4 只使用一个 `2048×1024` seamless scene-linear Rec.709/D65 EXR。Unity 固定 `R16G16B16A16_SFloat`；source max=`5.664`、cubemap max=`4.816`、方向 marker 最大误差=`0.000171`、seam=`0`。
+- 两端均为零 direct light、零 ground、零 contact shadow、零 reflection probe、零 SH、零 reflection card 和零 synthetic highlight。唯一环境同时提供 diffuse／glossy PBR 响应，不存在第二反射源。
+- Blender 与 Unity 都输出线性 HDR EXR，再共同应用 `neutral-display-v1`：exposure multiplier=`1`、shoulder=`x/(1+0.18x)`、IEC 61966-2-1 sRGB。没有 Blender AgX 对 Unity ACES／Neutral 的混比。
+- 相机固定为 `1400×1100`、76 mm、36 mm 横向 sensor、同一 transform。五组 A/B 为 reflection sphere/strip、无地面 clay、silver、blood-red crystal 和 full model；每格保留原始整帧，无 crop／resize／post-align，背景像素完全一致。
+- 指标：silver SSIM=`0.9890`、DeltaE76 median=`2.24`、heatmap >24=`0.20%`；crystal SSIM=`0.9563`、median=`11.0`；full-model SSIM=`0.9510`、MAE=`2.54`、heatmap >24=`4.56%`、median=`12.04`。display clipping：full Blender=`0.279%`、Unity=`0.278%`。
+- 人工并排检查确认 rev 3 的整体过暗、背景／接触阴影和重复高光失败已移除；亮银、深血红与黑纹可读。该判断仅允许发起 Gate 08 复审，不等于用户批准。
+- 修正版录屏：`gate08-r004-synchronized-portable-parity.mp4`，H.264 High／yuv420p、`2800×1180`、`30 fps`、`12.0 s`、`360` frames、fast-start。165 对渲染帧 silhouette IoU 最低=`0.999902`，centroid delta 最大=`0.019 px`；`180/180` source frames 通过 transform validator。
+- Unity-only 补充录屏：`unity-playmode-preview/gate08-r004-unity-playmode-runtime.mp4`。Unity `6000.5.6f1`、URP `Mobile_RPAsset`、隔离 PlayMode scene `MagneticSlideTileUnityOnlyPlayModePreview.unity`、Camera `CAM_Gate08R004NeutralParity`；使用四轨 FBX `d15e5c94…2179`、geometry digest `e2a838c2…02fe` 和共享 HDR EXR `e0a2d012…3d90`。H.264 High／yuv420p=`1920×1080`、`30 fps`、`15.0 s`、`450` frames；画面内标注 `Unity URP PlayMode · 不是 iPhone Build`。
+- Unity-only 验证：`450/450` 帧通过固定底座／固定轴、无整机 pitch-roll／翻转、合法直推／12°／36°、正 scale 与 camera roll=`0`。Blender frame=`0`、offline composite=`0`；非切点相邻帧最大 MAE=`2.492`。ffprobe、macOS AVFoundation、Spotlight metadata、桌面和 `390×844` 移动浏览器播放均为 `15.0 s / 1920×1080 / 30 fps`，runtime/loading failure=`0/0`。
+- 验证：`MagneticSlideTileNeutralParityTests`=`4/4 passed`；Gate 08 focused Node=`2/2`；pipeline validator 对 magnetic-slide-tile 为 revision `211`、errors／missing／unhashed=`0/0/0`；全 Node suite=`174/174 passed`。
+- 当前评审证据：Unity-only PlayMode 录屏与 poster、修正版同步录屏、`gate08-r004-neutral-parity-board.png`、Blender／Unity full frame；旧 `gate08-r004-neutral-parity-review.mp4` 保留但不再是当前录屏入口。审计为 `neutral-parity-audit.json`。
+- 未修改 `Assets/_EDC/Scenes/MeshyEDC.unity`，未推进 Gate 09／11／12，未 promotion、build、install、launch 或 phone。Device Accepted pending。
+
+## 2026-08-28 Magnetic Slide Tile Gate 08 rev 3 跨引擎灯光可移植性纠正（已被 rev 4 取代）
+
+> **历史状态：pipeline rev=`207`。用户已明确判定该轮视觉不可接受；只保留为 superseded history，不得再请求批准。**
+
+- 最早根因在 Gate 08：rev 2 使用四个 `18–32 mm`、`16–50 kW` Blender AREA 灯和四张隐藏 reflection card。它们定义的高光形状、面积和功率没有移动 URP 的直接映射。
+- Gate 09 rev 8 的获批 EXR 经 Blender 5.2 重读确认 RGB 全零，仅 alpha=`1`。旧 metadata 声称的亮度范围来自生成数组，不是写盘后像素。Gate 11 因此用 global cubemap、local probe、analytic panel 和 world-space broad-softbox 重造高光，又与 direct specular 重叠。
+- 色彩链也未落地：Gate 09 只计划在 ACES 失败后拟合 AgX LUT；Gate 11 rev 10 直接使用 ACES，未生成或应用 LUT。Blender Eevee ground/shadow 也被 Unity ground fill 与不同 shadow response 取代。
+- rev 3 保持 geometry digest=`e2a838c2…02fe`、material digest=`366b788b…9aa8`、core matrices、血红／黑纹／银边、mask 与 emission=`0` 不变。新 recipe 只含一个 `2048×1024` scene-linear Rec.709/D65 EXR、rotation=`0°`、strength=`0.125`、一个 D65 directional light、shadow-map contact、零 AREA light、零 reflection card、零 synthetic highlight 和 identity display LUT。
+- 新 EXR 用 OpenImageIO 写盘并回读：RGB nonzero=`100%`、range=`0.0170–1.1377`、seam delta=`0`。Blender 与 Unity 都使用同一 EXR hash、方向、强度、76 mm／36 mm 横向 sensor、相同物体 transform 和原始 `1400×1100` 整帧。
+- 当前整帧指标：SSIM=`0.7807`；MAE=`11.46`；background MAE=`13.85`；heatmap >24=`2.24%`；object DeltaE76 median=`3.0`、p95=`18.71`；blood-red median=`8.31`；Clay gradient magnitude error=`4.58%`；Blender clipping=`0`、Unity=`0.0043%`。Unity 接触阴影方向和背景仍可见不同，因此未声明 Gate 11 parity。
+- 评审证据：`evidence/08-lighting/rev-003/gate08-r003-portability-board.png` 保持每格原始 `1400×1100`，无独立 crop／resize；`gate08-r003-old-new-unity-review.mp4` 依次比较旧获批 Blender、新 portable Blender 和同合同 Unity；`unity-portable-orbit.mp4` 为隔离 Unity 轨道录屏。
+- 工作台深链：`?model=magnetic-slide-tile&tab=materials&gate=08-lighting&asset=magnetic-slide-tile-lighting-comparison-recording-r003`。本轮只请求重新确认共同灯光方向；不自动批准 Gate 08，不推进 Gate 09、Gate 11 或 Gate 12。
+- 未修改 `Assets/_EDC/Scenes/MeshyEDC.unity`，未 promotion、build、install、launch 或 phone。Device Accepted pending。
+- 验证：Blender 5.2 重开确认 `1` 个 SUN、零 AREA、Standard／None、`1400×1100`；portable Unity EditMode=`4/4`；Node／pipeline=`173/173`；model 与全 pipeline validator errors／missingFiles／unhashed=`0/0/0`；桌面、`390×844` 移动、三个评审 modal 和深链 runtime／loading failure=`0/0`；Python／JavaScript／XML syntax 与 focused diff 通过。全 Unity EditMode=`352/356`，四个失败属于既有 Fan Card geometry、native copy、shipping environment 和 progression UI，不涉及此隔离候选。
+
+## 2026-08-28 Magnetic Slide Tile Gate 11 rev 10 整帧质量阻塞
+
+> **当前状态：pipeline rev=`206`。Gate 01–10=`approved`；Gate 11 rev 9=`rejected history`；Gate 11 rev 10=`draft / blocked-not-ready-for-review`；Gate 12=`stale / not started`。不请求视觉批准，未推送手机。**
+
+- rev 9 拒绝：旧 silhouette／局部色差报告通过，但整帧仍有过曝白斑、构图／背景偏差、扁平 Clay、弱接触阴影和大面积 heatmap。44 个 rev 9 scene／render／report／recording／process 文件继续匹配原 SHA-256 并保留为 rejected history；共享 EditMode 源是后续修订使用的 mutable harness。
+- 根因：rev 9 将环境反射又叠加为世界空间 synthetic softbox，形成双重白斑；Unity point-light 功率未按 Blender W→Unity intensity 校准；point shadow 被禁用；ground 过大且 flat ambient 过强；ACES／post exposure 与 Blender AgX 不同；相机轴映射、sensor fit 和板图独立裁剪隐藏了整帧误差。
+- rev 10 修复：继续使用 Gate 10 rev 9 原四轨 FBX、collision、mask、EXR、geometry digest 和 artwork placement。候选只在 `Assets/_EDC/Candidates/MagneticSlideTileGate11R010/`。相机固定 `1400×1100`、76 mm、36 mm sensor width；输出禁止独立 crop／post-align。ground 改为有限 0.22 m 接收面；启用阴影，降低 ambient／EXR／post exposure；重新标定 key／fill／rim；降低晶体 reflection／clearcoat／smoothness，降低银色 direct specular，并缩小 synthetic hotspot。
+- 原始同帧几何：silhouette IoU=`0.999069`、bbox centroid error=`0.02 px`、bbox scale relative error=`0.041%`，camera matrix、object transform／bounds 在报告中保存。Unity transport、8 render meshes、80,102 vertices、99,280 triangles、两份 108-triangle collision、`18.076433 mm` 和 `30×12°` 全通过；shipping scene SHA-256 仍为 `99083a32…850d`。
+- 整帧结果：SSIM=`0.7088`（门限 `≥0.78`）；perceptual proxy=`0.0722`（`≤0.065`）；MAE=`15.88`；background MAE=`11.10`；heatmap >24 area=`16.10%`（`≤12%`）。区域 DeltaE76、完整 heatmap 和相同尺寸原图记录在 `full-frame-parity-report.json`。
+- 仍阻塞：hotspot area error=`9.87%`、centroid error=`48.21 px`、aspect error=`129.31%`；Clay gradient direction cosine=`0.949`，但 magnitude error=`39.17%`；contact-shadow error=`101.23%`。因此没有把 rev 10 标为 `ready_for_review`。
+- 交互证据：`unity-gate11-r010-interactive-review.mp4` 是真实 Unity H.264 `960×720`、72 帧、6 秒录屏，含 matched camera、orbit、closed、max-open、12°与36°姿态。整帧板为 `gate11-r010-full-frame-board.png`；默认不独立裁剪。
+- 工作台：深链 `?model=magnetic-slide-tile&tab=unity&gate=11-unity-parity&asset=magnetic-slide-tile-unity-parity-interactive-recording-r010` 直接打开真实录屏。桌面 `1440×1000`、移动 `390×844`、modal 返回、12 Gates、七页签、三个 blocker、无批准控件均通过；runtime/loading failure=`0/0`。截图：`Artifacts/ModelProvenanceExplorer/magnetic-slide-gate11-r010-blocked-workbench.png`。
+- 验证：focused Unity EditMode=`7/7`；full-frame validator 与 final blocked-state validator 通过；Model Provenance Explorer=`171/171`；browser desktop/mobile/modal=`pass`。视觉批准待确认状态不适用：本轮明确阻塞且未请求批准。未进入 Gate 12、shipping promotion、build、install、launch 或 phone；Device Accepted pending。
+
+## 2026-08-27 Magnetic Slide Tile Gate 10 rev 9 导出包
+
+> **历史状态：Gate 09 rev 8 已由用户以原话“你给我看一下最终在 Unity 里边的呈现吧。”批准。Gate 10 rev 9 后由用户明确批准并被 Gate 11 rev 9 消费。**
+
+- Gate 10 只导出批准的四轨模型。geometry digest=`e2a838c2…02fe`、material digest=`366b788b…9aa8`、UV digest=`48fe1836…f062`、机制合同=`5aee7181…7ea`、Gate 09 portability contract=`fce83a96…2134` 均锁定。
+- 闭合 bounds=`31×50×12 mm`，仍为 `user-authorized-provisional`。平底顶面=`5.875 mm`、凸轴=`0.2 mm`；固定底片／轴、旋转载体、followers、球候选、移动顶片和四条顶片底槽保持命名 hierarchy。
+- 导出包包含 authoritative Blend、FBX、GLB、独立 collision FBX、21 个纹理／环境／合同／metadata 文件。FBX／GLB 独立 re-import 均为 `0.031×0.050×0.012 m`；GLB=`20 nodes / 8 meshes / 7 materials / 4 embedded images / 0 animations`。
+- FBX 使用 `mesh_smooth_type=FACE`。导出前临时三角化，不改权威源拓扑；GLB 含 NORMAL／TANGENT／TEXCOORD_0。侧壁平滑、平面 cap 硬边；没有 `mesh_smooth_type=OFF`、旧双壳 cavity、reflection-band 环境或未批准 LOD／高低模对。
+- collision 只存在于单独 FBX，含 `COL_BottomExterior` 与 `COL_MovingTop`，无材质且 `rendering=false`。它不出现在 authoritative Blend 或产品 GLB 中。
+- 上下图案 mask hash 分别为 `8250df70…1c36` 与 `7bf5921f…a7c2`。BaseColor 保持 sRGB；MaskMap／Normal／artwork mask 为 linear。原生 `620×1000` 使用 NPOT `None`，禁止缩放或拉伸为 `512×1024`。ASTC 只在 Gate 11 对比后应用。
+- `unity-export-manifest.json` SHA-256=`d56b2e41a3156ffe8cd1a358892d1aaff0ec56dee6364e3c8a4dd909b9952152`。它固定坐标轴／单位、pivot 两套坐标空间、transforms、30×12°、最大行程、有限端点／最小覆盖、PBR mapping、AgX→ACES 校准和 Gate 09 parity 容差。
+- 验证：authoritative Blend audit、FBX／GLB／collision re-import、GLB header／embedded images／split normals／tangents／UV、纹理 hash／NPOT、EXR byte hash 和 export manifest 均通过。默认闭合，线速度／角速度=`0`，无 action、driver、animation 或 self-motion。Node=`159/159`；all/model pipeline、Python／JavaScript／五个 XML、focused diff 通过。final validation SHA-256=`1b1b1502…9fd8`。
+- 主批准证据为 `package/magnetic-slide-tile-render-r009.glb`；`export-review-summary.png` 只作摘要。工作台在桌面 `1440 px` 与移动 `390 px` 通过；真实 GLB `load/orbit/zoom` 后才解锁批准，reload 保留进度，runtime/loading failure=`0/0`。真实 GLB 预览：`Artifacts/ModelProvenanceExplorer/magnetic-slide-gate10-rev9-glb-viewer.png`；工作台：`magnetic-slide-gate10-rev9-persistent-workbench.png`。
+- DeliveryState：没有 Unity import settings、URP scene、Build、安装或 iPhone 运行；旧 shipping Unity 模型仍为默认。Gate 11 只在 Gate 10 明确批准后开始。
+
+## 2026-08-27 Magnetic Slide Tile Gate 09 rev 8 环境与 Unity 可移植合同
+
+> **历史状态：Gate 08 rev 2 已由用户以原话“进行下一步吧”批准。Gate 09 rev 8 后由用户以原话“你给我看一下最终在 Unity 里边的呈现吧。”批准，并被 Gate 10 rev 9 消费。**
+
+- 用户锁定最终目标：`transfer to Unity with no avoidable loss and run on iPhone`。这里的 `lossless` 分两类：几何、层级、轴心、UV、上下图案 mask 必须确定性精确保留；Blender 程序材质节点不能逐节点转成 URP，因此材质、灯光和色彩管理用量化视觉一致验收，不虚称 shader graph 字节一致。
+- Gate 09 直接消费批准 Gate 08 blend `547055f5…21b1`、geometry digest `e2a838c2…02fe`、material digest `366b788b…9aa8`、light digest `890e1f12…a36c`、camera digest `916c5b3b…0259` 和机制合同 `5aee7181…7ea`。neutral／shipping 前后 geometry、UV、hierarchy、material、light、source camera 均一致；7 个批准材质 emission=`0`。
+- Shipping 环境是确定性生成的 `2048×1024` equirectangular OpenEXR：scene-linear Rec.709、D65、SHA-256=`7f1c9fded84c453efbc5300a6a71fe2948534055d3f4ae5052696909f30be6ab`，seam max linear delta=`0`，P01–P99 dynamic range=`6.21756 stops`。World strength=`0.65`、rotation=`0°`；只使用 Environment Texture → Background → World Output，无 Blender-only 程序 world 节点。
+- Ground 为 `[0.018,0.016,0.017] linear`、metallic=`0`、roughness=`0.42`。neutral／shipping 对比保持同机位、姿态、四灯和 exposure=`-0.35 EV`，只允许 world／reflection／background／ground 变化。闭合、最大打开及反射近照 changed-pixel fraction 分别为 `0.02408/0.10357/0.20429`。
+- 目标环境证据覆盖闭合、最大打开、12°、36°、左右斜视、低角度、平底凸轴、四槽底面和载体／followers／球候选。血红中位 hue=`0–2.61°`，关键视图 crystal variation `≥15.226`，最大 clipped fraction=`0.00040195`。`3600` 个包含样本继续通过，无 action、driver 或 self-motion。
+- `unity-portability-contract.json` SHA-256=`fce83a968df4f978e84ffbab7f026c57d7b60e762d70f7cdb2f2a1aa5cf22134`。它记录 14 个源资产 hash、精确 hierarchy／pivot／UV／mask、上下独立 artwork、PBR `BaseMap + MaskMap(R metallic/G AO/B detail/A smoothness) + Normal + 独立 ArtworkMask`、silver／black／blood-red／thin-film Fresnel 参数、box-projected Reflection Probe 预期，以及 Blender AgX 和 Unity ACES 的 matched-camera 线性 EXR／24 色块／可选 32³ LUT 校准计划。
+- 下游容差：closed bounds max error=`0.001 mm`；vertex/index、hierarchy、artwork mask hash exact；pivot=`0.001 mm`；UV=`1e-6`；silhouette SSIM=`≥0.995` 且 1400×1100 边缘误差=`≤1 px`；median ΔE2000 silver／blood-red／black=`≤3/4/2.5`；P95=`≤6`；reflection highlight centroid=`≤2 px`、亮度相对误差=`≤5%`；clipping=`≤0.001`。
+- 交互 GLB 支持 orbit、zoom、中性／Shipping 环境响应与曝光。24 帧 matched neutral/shipping 真实 Blender 双画面转台为完整 fallback recording；静态 board 只作补充。
+- 验证：Blender environment、EXR seam／dynamic range／color space、图像、motion containment、GLB、portable texture byte hashes 和 contract asset hashes 已通过。上下 albedo／roughness 从批准 blend 按原始 packed bytes 提取，四个 SHA 与 Gate 07 完全一致。
+- 最终验证：Node=`152/152`；model/all-pipeline、Python／JavaScript syntax、五个 XML、focused diff 通过。桌面 `1440 px`、移动 `390 px`、Neutral／Shipping 持久化、GLB、24 帧 H.264 转台、modal、reload、deep-link 均通过，runtime/loading failure=`0/0`。final validation SHA-256=`d120eaa8…1d75`。
+- 工作台预览：`Artifacts/ModelProvenanceExplorer/magnetic-slide-gate09-rev8-persistent-workbench.png`；聚焦预览：`magnetic-slide-gate09-rev8-workbench-focused.png`。
+- DeliveryState：只完成 Gate 09 Blender 环境和 Unity 可移植规格。没有 Unity 导入设置、Build、安装或 iPhone 运行；旧 shipping Unity 模型仍为默认。iPhone 性能与 Device Accepted 在 Gate 12 视觉批准后执行。
+
+## 2026-08-27 Magnetic Slide Tile Gate 08 rev 2 灯光
+
+> **历史状态：Gate 07 rev 11 已由用户以原话“继续”批准。Gate 08 rev 2 后由用户以原话“进行下一步吧”批准，并被 Gate 09 rev 8 消费。**
+
+- Gate 08 直接消费批准 Gate 07 blend `fdf6e962…d274` 与机制合同 `5aee7181…7ea`。灯光前后 geometry digest=`e2a838c2…02fe`，material digest=`366b788b…9aa8`；核心矩阵恢复一致，7 个批准材质 emission 均为 `0`。
+- 四灯：Key `(58,-72,96) mm`、`20 mm`、Neutral/Studio/Daylight=`42/48/44 kW`、`6504/5600/6504 K`；Fill `(-54,-12,58) mm`、`32 mm`、`24/26/34 kW`、`6504/7000/7500 K`；Rim `(44,70,62) mm`、`18 mm`、`42/50/39 kW`、`6504 K`；Mechanism Reveal `(-26,20,28) mm`、`18 mm`、`16/22/20 kW`、`5600/5200/6504 K`。
+- World 为中性均匀色，Neutral/Studio/Daylight strength=`0.35/0.18/0.65`；HDRI=`null`。四张 camera-hidden 反射卡独立记录。AgX Medium High Contrast、exposure=`-0.35 EV`、gamma=`1`、white balance=`6504 K`、tint=`10`。
+- 真实 Blender 证据：Hero、左右斜视、低角度、三灯光同机位对比、闭合／最大打开／12°／36°、平底凸轴、四槽底面、载体与 follower clearance。Beauty／Clay／World Normal／View Depth／Roughness 共用 Hero 相机与闭合姿态。
+- 交互 GLB 支持 orbit、zoom、中性／影棚／日光切换、环境开关与曝光；24 帧真实 Blender 转台为补充证据。工作台仍使用固定七页签、12 Gate、持久路由与历史。
+- 图像 audit：最大 Beauty clipped fraction=`0.00003831`；血红中位 hue=`0–6°`；magenta fraction=`0–0.0073`；中性高光 chroma=`1–8`；blue-gray fraction=`0`。Clay／Normal／Depth／Roughness 均有独立 hash 和有效动态范围。
+- 验证：Node=`144/144`；pipeline/model、Blender reopen、GLB、turntable、Python/JavaScript/XML syntax 与 focused diff 通过。桌面 `1440 px`、移动 `390 px`、三灯光持久化、modal、reload、deep-link 均通过，runtime/loading failure=`0/0`。
+- 工作台预览：`Artifacts/ModelProvenanceExplorer/magnetic-slide-gate08-rev2-persistent-workbench.png`；聚焦预览：`magnetic-slide-gate08-rev2-workbench-focused.png`。
+- DeliveryState：仅完成 Gate 08 Blender 灯光评审证据。未运行 Simulator、Unity、build、install 或 device；旧 shipping Unity 模型仍为默认。
+
+## 2026-08-27 Magnetic Slide Tile Gate 07 rev 11 材质
+
+> **历史状态：Gate 06 rev 4 已由用户以原话“那你继续呗”批准。Gate 07 rev 11 已由用户以原话“继续”批准并被 Gate 08 rev 2 消费。**
+
+- 唯一外观权威仍为用户血红实拍。复用上片 mask `8250df70…1c36`、下片 direct/reconstructed mask `7bf5921f…a7c2`、完整黑边 mask `2179bf26…4fc` 和 rev 10 中性材质配方；上下图案保持独立可替换。
+- Gate 07 直接消费 Gate 06 blend `8047be52…7085` 和机制合同 `5aee7181…7ea`。材质前、材质后、闭合／打开／0°／12°／36°的 evaluated geometry digest 均为 `e2a838c2…02fe`。
+- 晶体：IOR=`1.52`、coat=`0.48/0.035`、transmission=`0.08`、thin film=`1.38/410 nm`、granular scale=`28`、microflake scale=`85`、emission=`0`。银边：metallic=`1`、roughness=`0.075`、anisotropy=`0.16`。深色侧壁：metallic=`0.24`、roughness=`0.18`、coat=`0.55`。
+- `BottomExterior` 与 `MovingTopBody` 各有独立 artwork top cap、深色侧壁、细银边和中性底面 slot。轴座／载体为银白技术区；四槽、followers 与 2–3 mm 球候选只显示中性技术材质，球准确材质仍标 `unknown`。
+- 纹理为 `620×1000 px`，打包进 blend 和 GLB。上下 albedo SHA 分别为 `c0e9305d…53a5`、`968c1e87…50eb`；上下 red σ=`40.39/41.06`，microflake pixels=`1589/1685`；黑边 mask 内黑色比例=`1/1`。
+- 真实 Blender 证据：neutral PBR board、source comparison、闭合／打开、下片 artwork、银边反射、四槽底面、内部材料隔离、0°／12°／36°晶体和 microflake closeup。完整 24 帧真实渲染转台已编码为 MP4。
+- 独立 Blender 5.2 audit 通过：6 个必需材质存在，4 张纹理均内嵌 GLB，8 个 mesh、7 个 GLB 材质、无 animation/driver/self-motion。图像 audit 通过；最大 clipped fraction=`0.0005266`，无可见材质 clipping。
+- 验证：Node=`136/136`；pipeline/model validator、Python/JavaScript/XML syntax 通过。桌面 `1440 px`、移动 `390 px`、GLB orbit/zoom、环境／曝光状态、真实转台、modal、reload、deep-link 和来源视频通过，runtime/loading failure=`0/0`。
+- 工作台预览：`Artifacts/ModelProvenanceExplorer/magnetic-slide-gate07-rev11-persistent-workbench.png`；聚焦预览：`magnetic-slide-gate07-rev11-workbench-focused.png`。
+- DeliveryState：仅完成 Gate 07 材质评审证据。未运行 Simulator、Unity、build、install 或 device；旧 shipping Unity 模型仍为默认。
+
+## 2026-08-27 Magnetic Slide Tile Gate 06 rev 4 同源几何
+
+> **历史状态：Gate 05 rev 6 已由用户以原话“可以的”批准；Gate 06 rev 4 后由用户以原话“那你继续呗”批准并被 Gate 07 rev 11 消费。**
+
+- Gate 06 消费机制合同 `5aee7181…7ea` 和已批准 Gate 05 blend `fc067610…f7b`。核心 evaluated geometry digest 为 `e2a838c2…02fe`，全部视图与姿态一致。
+- 闭合 bounds=`50×31×12 mm`，仍是用户授权暂定值。厚度栈=`5.875 + 0.25 + 5.875 = 12 mm`；底片顶面 Z=`5.875 mm`，最大偏差=`0 mm`；凸轴=`0.2 mm`；carrier 净藏深度=`0.049999714 mm`。
+- 四条有限槽保持外二直推、内二轴联动；球候选=`2–3 mm`，槽宽=`1.8–3.0 mm`。左右 follower 的 X 对齐误差=`0 mm`；`3600/3600` 个 0.5°／五行程包含样本通过。
+- Blender 5.2 独立 audit：8 个核心 mesh nonmanifold edges=`0`、invalid normals=`0`、均有 UV；无 action、driver 或 self-motion。极细三角形的 Blender MikkTSpace 有 12 个退化 loop，几何 longest-edge tangent audit 为 `0` 失败，未修改已批准 topology。
+- 证据：六视图、Workbench、尺寸／轴心／切线叠图、爆炸、四槽底面、平面凸轴、A–A 剖面、闭合／最大行程／12°／36°、authoritative blend 和交互 GLB，均位于 `evidence/06-geometry/rev-004/`。
+- 验证：Node=`128/128`；pipeline/model validator、GLB、Python/JavaScript/HTML syntax 通过。桌面 `1440 px`、移动 `390 px`、七页签、12 Gate、modal、reload、deep-link、history、过期材质和原视频播放通过，runtime/loading failure=`0/0`。
+- 工作台预览：`Artifacts/ModelProvenanceExplorer/magnetic-slide-gate06-rev4-persistent-workbench.png`；聚焦预览：`magnetic-slide-gate06-rev4-workbench-focused.png`。
+- DeliveryState：仅完成 Gate 06 几何评审证据。未推进材质、Simulator、Unity、build、install 或 device；旧 shipping Unity 模型仍为默认。
 
 ## 2026-08-27 Magnetic Slide Tile Gate 05 rev 6 平底片顶面
 
@@ -51,11 +1049,12 @@
 
 ## 2026-08-27 Magnetic Fan Card 材质批准并推进 App
 
-> **当前状态：用户原话“可以，然后看看能不能推进 app 里面吧。”视觉已批准。shipping 场景已是这版材质。正在签名安装到已连接 iPhone。真机手感／外观验收仍待用户在手机上确认。**
+> **当前状态：用户原话“可以，然后看看能不能推进 app 里面吧。”视觉已批准。Release 已安装到已连接 iPhone（JW，Build 40，source `62d8bcd`）。自动启动被系统拒绝：开发者证书尚未在设备上信任。Device Accepted 仍待用户在手机上确认。**
 
 - 批准对象：2026-08-27 14:03 shipping 预览（hero/top/left/right/low/back/track）。几何、72 段 FBX、弱反射 `0.28`、暖银 smoothness `0.24`。
 - 批准预览副本：`Docs/DesignBibleAssets/fan-card-shipping-hero-20260827.png` 等 7 张。
-- DecisionState：`FDB-FAN-018/019/020/021` locked and visually approved。DeliveryState：安装进行中；安装成功后为 Installed，不等于 Device Accepted。
+- 安装证据：`scripts/ios_build_and_install.sh` Unity 导出 + Xcode Release `BUILD SUCCEEDED`；`devicectl` install `info.outcome=success`，bundle `com.jiaweizhou.fidgetspinner.codex`，设备 `00008130-001A00361EE0001C`。Launch 失败：`FBSOpenApplicationErrorDomain` Security，profile 未显式信任。
+- DecisionState：`FDB-FAN-018/019/020/021` locked and visually approved。DeliveryState：Installed。不等于 Device Accepted。
 - 验证：guardrail=`ALL PASS (7.590 mm)`；`FanCardAcceptanceTests`=`23/23`。
 
 ## 2026-08-27 Magnetic Fan Card 材质／反射去数字感
@@ -81,21 +1080,18 @@
 - 验证：source + full guardrail=`ALL PASS (7.590 mm)`；`CardGeometryValidator`=`ALL PASS`；`FanCardAcceptanceTests`=`23/23`。shipping 预览：`../../../Artifacts/FanCardMaterialPreview/fan-card-hero.png`、`fan-card-top.png`、`fan-card-left.png`、`fan-card-right.png`、`fan-card-low.png`、`fan-card-back.png`、`fan-card-back-track-closeup.png`。
 - DecisionState：`FDB-FAN-021` locked。DeliveryState：shipping 场景已换模型，Gate 12 视觉批准未确认。没有 Build、没有安装、没有推送手机。
 
-## 2026-08-27 Premium Display Case Gate 09 批准／Gate 10 rev 1 待审批
+## 2026-08-27 Premium Display Case Gate 10 批准／Gate 11 rev 1 待审批
 
-> **当前状态：pipeline rev=`68`。Gate 01–09=`approved`；Gate 10 export rev 1=`ready_for_review`；Gate 11+=`blocked`；approved count=`9/12`。视觉批准待确认，未推送手机。**
+> **当前状态：pipeline rev=`70`。Gate 01–10=`approved`；Gate 11 Unity parity rev 1=`ready_for_review`；Gate 12=`blocked`；approved count=`10/12`。视觉批准待确认，未推送手机。**
 
-- 用户选择“环境正确，批准并继续（推荐）”已由 approval event=`04560468-01da-4a1f-8bc8-a324966490d6` 持久化。批准只锁定静态低细节环境方向；无 color cast、detached halo、bright blob、background motion、particle 或 competing detail。Blender 值不自动成为 Unity runtime constants。
-- Gate 10 rev 1 event=`d93631b1-61dc-4f8f-8ee5-24e61d38a790`。product-only Blender、Unity-ready FBX 和 portable GLB 保持 `228 × 304 × 59 mm`、Y=`99 mm` 标签、同心圆角、connected tube、`PresentationRoot`／`CaseAssembly`／空 `ContentSlot` hierarchy 与材质 assignment。
-- 包含 `12` nodes、`5` meshes、`100,016` triangles。approved Blender geometry digest=`a3d1e9fe3c6d26c957c7ad1584cc489b9091a1a79e435a660aa89bcf6acc3951`；round-trip canonical digest=`c4a8e0dbf0bc5825ebc1fe283d2f069ff63826e16a738fdf875a952e8317ee8b`。
-- 文件 SHA-256：Blend=`453874ba2edf75fb90449702ef9b50fb059010ee6eefcc2c4e603f034fd0c0eb`；FBX=`21c9db68723f0006d7c6bfec5280cafe55c16cf5392ff97c365c966e91f847ae`；GLB=`fb22fc333c0c5fbc715385ca510dbf0ee4a18b9847f64764b4511e0278ba4df8`。
-- Fresh-scene round-trip：FBX／GLB 最大 vertex error=`0.000041788 / 0.000017166 mm`；bounds、hierarchy、material slots、triangle count 与 canonical geometry digest 一致。五个 mesh 的 signed material volume 保持正；FBX／GLB triangulated surface 与 winding digest 一致。
-- blank `PhysicalLabel` 保留 `LabelUV 0–1`、paper geometry、transparent-cover／foil contour metadata。placeholder text、fake ID、toy/prize、proxy、exploded、light、halo、particle、VFX、camera、background、runtime timing/easing/Y-Z path/360°/light cues 均未打包。
-- 没有已批准 collision／selection proxy，因此未新造碰撞；`collision-policy.json` 明确记录 not applicable。`100,016` triangles 不在 Gate 10 擅自 decimate；Gate 11 Unity profiling 必须验证 60 FPS。
-- 评审：`ArtSource/ModelPipeline/premium-display-case/evidence/10-export/rev-001/premium-display-case-product-r001.glb` 与 `export-review.png`。manifest／validation links：同目录 `export-manifest.json`、`validation-links.json`、`export-roundtrip-validation.json`。
-- 验证：Blender 5.2.0 LTS build、FBX/GLB fresh-scene round-trip、GLB structure、三格式整盒 render、QA、Python/Node syntax、focused Premium Display Case test=`1/1 passed`。Model validator rev=`68`、approved=`9/12`、earliest=`10-export ready_for_review`、errors／missingFiles／unhashed=`0/0/0`；全 pipeline validator无 schema、missing file 或 unhashed 错误。
-- 全 Model Provenance Explorer=`112/113 passed`。唯一失败属于并发 Magnetic Slide Tile fixture：测试期待 artifact count `63`，live state 为 `64`；本任务未修改该模型。
-- DeliveryState：Gate 09 决策和 Gate 10 export evidence 已完成；Gate 10 尚未视觉批准。shipping Unity、Simulator、build、install 和 phone 均未触碰。视觉批准待确认，未推送手机。
+- 用户选择“正确，批准并导入 Unity（推荐）”已由 Gate 10 approval event=`2aa2212a-7c62-4357-8539-46cef2b84955` 持久化。FBX SHA-256=`21c9db68723f0006d7c6bfec5280cafe55c16cf5392ff97c365c966e91f847ae` 是 Unity authority；GLB SHA-256=`fb22fc333c0c5fbc715385ca510dbf0ee4a18b9847f64764b4511e0278ba4df8` 只作 portable validation evidence。
+- Gate 11 event=`dce81b8b-061e-493d-a44b-14c50a4784cd`。获批 FBX 以 byte-identical 副本导入独立 `Assets/_DisplayCase/Candidates/PremiumDisplayCaseGate11R001/`；candidate prefab=`Prefabs/PresentationRoot.prefab`，neutral parity scene=`Scenes/PremiumDisplayCaseGate11Parity.unity`。未替换 `Assets/Resources/Gacha/PremiumDisplayCase.prefab` 或 shipping scene／coordinator wiring。
+- candidate 保持 `PresentationRoot → CaseAssembly`、空 `ContentSlot`、`12` nodes、`5` meshes、`100,016` triangles、`0.228 × 0.304 × 0.059 m` bounds、origin pivot、connected tube、blank runtime label zones 与材质 assignment。未捆绑 toy/prize、proxy、explode、Collider、动画、timing 或文字。
+- FBX↔Unity 五个 mesh 顶点映射为双射；authority digest 与 Unity matched digest 均为 `4cffa449d4ed129cedd4575a9a33ec0e2ab76790d73807d9688522fc796d1e58`，最大 vertex error=`0.000096222 mm`。Unity geometry digest=`222a9ab01cd51fd7293664ed8b3b55778f26745ec8b8df2c570f547dfb0205e2`；bounds、triangle count、normals／winding 与透明排序通过。
+- frosted shells／connected tube 使用 candidate-only `Gate11MeshClippedFrosted` mesh fragment shader；label 保持 blank runtime zone。Point Light=`0`、external halo=`0`、silhouette 外 sheen pixels=`0`。三盏中性 Directional Light 只服务 parity scene，不是 shipping timing／light constants。
+- 真实 Unity neutral=`ArtSource/ModelPipeline/premium-display-case/evidence/11-unity-parity/rev-001/unity-neutral.png`；Blender 对照=`blender-vs-unity-neutral.png`；完整 Unity inspection recording=`unity-orbit-review.mp4`（H.264、`820 × 1000`、`48` frames、`4.0 s`、inspection-only）。hierarchy／pivot／material、bounds／digest 与总 parity 报告在同目录。
+- Unity 6000.5.6f1 完成编译；`PremiumDisplayCaseGate11ParityTests`=`8/8 passed`。Blender 5.2.0 FBX↔Unity correspondence=`pass`；Model Provenance Explorer=`128/128 passed`；model validator rev=`70`、approved=`10/12`、earliest=`11-unity-parity ready_for_review`、errors／missingFiles／unhashed=`0/0/0`；全 pipeline validator 零 schema、missing file 或 unhashed 错误。
+- shipping prefab／scene／旧 model SHA-256 仍为 `88cf4f4a...`／`f83df832...`／`41c71ffc...`。Gate 11 只到 `ready_for_review`；Gate 12、shipping replacement、final animation timing、build、install、launch 和 phone 全部未开始。视觉批准待确认，未推送手机。
 
 ## 历史／已拒绝：2026-08-27 Magnetic Slide Tile Gate 05 rev 4 CAD 白模
 
@@ -2406,6 +3402,55 @@ typecheck 通过。独立 EDC 优化构建已固定使用 `.edcopt` Bundle ID，
 - 当前状态：shipping runtime、本地自动化、真实 shipping GPU 预览和 Simulator 连续手势验收完成；
   仍处于“视觉批准待确认，未推送手机”。只有用户批准本组真实预览/录屏后，才进入统一 iPhone Build；
   真机触摸延迟、跟手性与连续快速往返仍需在手机上验收。
+
+## 2026-09-02 磁吸推牌细节／层距 hybrid rev 14（视觉批准待确认，未推送手机）
+
+- 用户以原话“我感觉明显还是rev 12细节更多吧”否决 Gate 11 rev 13 的表面细节。判断正确：
+  rev 13 将 rev 12 authored RGB 压为单一 luminance，改动 mica/microflake 与 roughness 范围，
+  motif 层未采样 roughness/normal；透明 cap 以 `2.8 px` 重采样 scene color，进一步压低高频细节。
+  rev 12／13 证据均保留为 immutable history。
+- rev 14 保留 rev 13 的真实层距：substrate=`-0.28 mm`、motif=`-0.14 mm`、crystal=`0 mm`，
+  cap 光学厚度=`0.28 mm`、IOR=`1.52`。上下 albedo、roughness、normal、motif mask 与 perimeter
+  mask 直接引用 rev 12 同一 Unity asset；没有复制或重采样。九个 SHA-256 见
+  `rev-014-detail-depth-hybrid/unity-hybrid-report.json`。
+- substrate 恢复 rev 12 的 authored RGB、mica=`28`、microflake=`85/0.16`、
+  roughness=`0.022–0.11`、normal=`0.32`、iridescence=`0.12`。motif 使用独立 LOD0 mask，
+  并采样 rev 12 roughness/normal。crystal transmission=`0.985`、refraction=`0.35 px`，
+  防止 broad white wash 和 mip blur。
+- 同机位 macro 的 hybrid/rev12 对齐红区比值：Laplacian mean=`1.022`、
+  local variance=`1.268`、edge density=`0.972`；门限均为 `>=0.95`。rev 13 相同区域
+  Laplacian mean 仅为 rev 12 的 `0.535`。clipped fraction=`0.0000444`；microflake
+  local difference P90=`0.0123`。
+- 15°、`1280×960` macro 投影视差=`4.21 px`，高于 rev 13 `~2.1 px` 目标。外部 bounds
+  center/size delta=`0/0 m`；collider identity、protected mechanism/gesture/audio/Haptic hash
+  不变；endpoint interlock 合法；side/underside artwork triangles=`0/0`；emission=`0`。
+- 移动对照为真实 Unity 各 `150` 帧，组合后 H.264 High、`1920×400`、30 fps、5 s。
+  相对 rev 12 仍约增加 `4` draw calls 和一层透明 overdraw；没有手机 GPU timing。
+  orbit 的最大逐帧红区覆盖跳变 `<0.02`，没有空白、白化、sorting 或 z-fighting 跳帧。
+- 验证：Unity EditMode=`3/3`、PlayMode=`5/5`；focused Node=`1/1`；browser desktop/mobile、
+  video/image modal、H.264 全解码、Python/Node syntax、JUnit XML、单模型与全模型 pipeline
+  errors/missing/unhashed=`0/0/0`。当前仅为 Gate 11 rev 14 `ready_for_review`。
+  Build 44 继续禁止 build／install／phone／App Store。
+
+## 历史：2026-09-02 磁吸推牌真实三层红面 rev 13
+
+- 用户以原话“我还是没看出层次感”否决 Gate 11 rev 12。根因是 rev 12 仍只有一个 opaque surface；
+  UV relief、Fresnel 和 BRDF 混合没有真实层距、透明晶体 renderer 或屏幕视差。rev 12 现为 rejected
+  history。Build 42 视觉验收失败继续保留，Build 44 仍禁止 build／install。
+- rev 13 在上下装饰面各生成三张 cap-only 网格。血红基底内嵌 `0.28 mm`；黑图案内嵌 `0.14 mm`，
+  图案视觉厚度暂定 `0.05 mm`；透明晶体 cap 位于原外边界，光学厚度暂定 `0.28 mm`、IOR `1.52`。
+  这些数值是 visual estimate，不是生产实测。基底、图案、晶体分别使用独立 URP shader 和 renderer。
+- 基底使用上下独立贴图、mica/microflake、roughness/normal 变化和克制角度色移；图案使用独立 mask、
+  alpha-test queue `2480` 与 ZWrite；晶体使用 queue `3090`、DepthOnly prepass、透明 forward、
+  Fresnel、环境反射和受控屏幕折射。Emission=`0`。上下 cap 的 15° macro 几何投影视差为 `2.10 px`。
+- 每个可见面新增 substrate、motif、crystal 三次绘制。相对 rev 12 估算增加约 `4` draw calls，
+  并增加一层透明 cap overdraw；未取得 iPhone GPU timing。shader target `3.5`，三个 shader 均无
+  compiler error。外部 bounds center/size delta=`0`，collider identity 与 protected runtime hash
+  不变；侧壁／底面仍无 artwork。
+- 真实 `MeshyEDC.unity` 已输出同机位 rev 12／13、front、15°／30°／60°、side macro、closed、
+  max-open、上下 artwork 和 phone 视图。8 秒 H.264 反射移动录屏位于
+  `evidence/11-unity-parity/rev-013-true-layers/magnetic-slide-true-layer-reflection-r013.mp4`。
+  当前仅为 Gate 11 rev 13 `ready_for_review`；没有 build、sign、install、phone 或 App Store 操作。
 
 ## 每次合入的检查方式
 

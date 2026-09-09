@@ -44,7 +44,7 @@ namespace FidgetingApp.EDC.EditorTools
         public const float SilverRoughnessInfluence = 0.58f;
         public const float SilverNormalScale = 0.28f;
         public const float SilverGlossMapScale = 0.68f;
-        public const float SilverRealtimeSpecular = 0f;
+        public const float SilverRealtimeSpecular = 1f;
         public const float SilverTintRed = 0.66f;
         public const float SilverTintGreen = 0.70f;
         public const float SilverTintBlue = 0.72f;
@@ -966,10 +966,10 @@ namespace FidgetingApp.EDC.EditorTools
             material.EnableKeyword("_NORMALMAP");
             material.SetFloat("_EnvironmentReflections", 1f);
             material.SetFloat("_SpecularHighlights", SilverRealtimeSpecular);
-            material.EnableKeyword("_SPECULARHIGHLIGHTS_OFF");
-            // This is a passive physical product. The source emission texture
-            // made the silver strips glow independently of exposure and clip
-            // to white at oblique angles, so it must not participate at runtime.
+            material.DisableKeyword("_SPECULARHIGHLIGHTS_OFF");
+            // Realtime specular is the gyro-tracked environment highlight.
+            // Emission still stays off so silver never self-glows or clips
+            // independently of the scene lights.
             material.SetColor("_EmissionColor", Color.black);
             material.SetTexture("_EmissionMap", null);
             material.DisableKeyword("_EMISSION");

@@ -12,32 +12,68 @@ namespace
         });
         return manager;
     }
+
+    // Two clients share the single CMMotionManager: the Unity spinner
+    // controllers and the native gacha Pack sheen. Updates stop only when
+    // neither still needs them, so one side leaving never cuts the other.
+    BOOL unityClientActive = NO;
+    BOOL nativeUiClientActive = NO;
+
+    int StartSharedUpdates()
+    {
+        CMMotionManager *manager = MotionManager();
+        if (!manager.deviceMotionAvailable)
+        {
+            return 0;
+        }
+
+        manager.deviceMotionUpdateInterval = 1.0 / 60.0;
+        if (!manager.deviceMotionActive)
+        {
+            [manager startDeviceMotionUpdatesUsingReferenceFrame:CMAttitudeReferenceFrameXArbitraryZVertical];
+        }
+
+        return 1;
+    }
+
+    void StopSharedUpdatesIfIdle()
+    {
+        if (unityClientActive || nativeUiClientActive)
+        {
+            return;
+        }
+        CMMotionManager *manager = MotionManager();
+        if (manager.deviceMotionActive)
+        {
+            [manager stopDeviceMotionUpdates];
+        }
+    }
 }
 
 extern "C" int CodexIosDeviceMotionStart()
 {
-    CMMotionManager *manager = MotionManager();
-    if (!manager.deviceMotionAvailable)
-    {
-        return 0;
-    }
-
-    manager.deviceMotionUpdateInterval = 1.0 / 60.0;
-    if (!manager.deviceMotionActive)
-    {
-        [manager startDeviceMotionUpdatesUsingReferenceFrame:CMAttitudeReferenceFrameXArbitraryZVertical];
-    }
-
-    return 1;
+    int started = StartSharedUpdates();
+    unityClientActive = started != 0;
+    return started;
 }
 
 extern "C" void CodexIosDeviceMotionStop()
 {
-    CMMotionManager *manager = MotionManager();
-    if (manager.deviceMotionActive)
-    {
-        [manager stopDeviceMotionUpdates];
-    }
+    unityClientActive = NO;
+    StopSharedUpdatesIfIdle();
+}
+
+extern "C" int CodexIosDeviceMotionNativeUiStart()
+{
+    int started = StartSharedUpdates();
+    nativeUiClientActive = started != 0;
+    return started;
+}
+
+extern "C" void CodexIosDeviceMotionNativeUiStop()
+{
+    nativeUiClientActive = NO;
+    StopSharedUpdatesIfIdle();
 }
 
 extern "C" int CodexIosReduceMotionEnabled()

@@ -11,20 +11,29 @@ namespace FidgetingApp.Tests.Editor
     public sealed class SpinnerProgressionTests
     {
         [Test]
-        public void CatalogMigrationMovesLegacyBlueProgressionAndCollectorIdentityOnce()
+        public void CatalogMigrationConsolidatesRetiredRotorsIntoGeeoneWithoutLosingState()
         {
+            const string Prog = "fidgeting.progression.v1.";
+            const string Coll = "fidgeting.collector.v1.";
+            const string Sticker = "fidgeting.appearance.sticker.v1.";
             string[] keys =
             {
                 "fidgeting.catalog.migration.version",
-                "fidgeting.progression.v1.blue-classic.experience",
-                "fidgeting.progression.v1.pointed-three-blade.experience",
-                "fidgeting.progression.v1.activeModel",
-                "fidgeting.collector.v1.focusModel",
-                "fidgeting.collector.v1.discoveredModels",
-                "fidgeting.collector.v1.awardedToyMilestones",
-                "fidgeting.collector.v1.highestToyLevels",
-                "fidgeting.appearance.sticker.v1.blue-classic",
-                "fidgeting.appearance.sticker.v1.pointed-three-blade"
+                Prog + "blue-classic.experience",
+                Prog + "pointed-three-blade.experience",
+                Prog + "gold-four-wing.experience",
+                Prog + "metal-three-blade.experience",
+                Prog + "gold-four-wing.todayGestures",
+                Prog + "metal-three-blade.todayGestures",
+                Prog + "activeModel",
+                Coll + "focusModel",
+                Coll + "discoveredModels",
+                Coll + "awardedToyMilestones",
+                Coll + "highestToyLevels",
+                Sticker + "blue-classic",
+                Sticker + "pointed-three-blade",
+                Sticker + "gold-four-wing",
+                Sticker + "metal-three-blade"
             };
             foreach (string key in keys)
             {
@@ -33,63 +42,118 @@ namespace FidgetingApp.Tests.Editor
 
             try
             {
+                // v1 legacy install: blue-classic was the active rotor.
+                PlayerPrefs.SetString(Prog + "blue-classic.experience", "1234.5");
+                PlayerPrefs.SetString(Prog + "activeModel", "blue-classic");
+                PlayerPrefs.SetString(Coll + "focusModel", "blue-classic");
                 PlayerPrefs.SetString(
-                    "fidgeting.progression.v1.blue-classic.experience",
-                    "1234.5");
+                    Coll + "discoveredModels",
+                    "blue-classic|gold-four-wing|magnetic-fan-card");
                 PlayerPrefs.SetString(
-                    "fidgeting.progression.v1.activeModel",
-                    "blue-classic");
+                    Coll + "awardedToyMilestones",
+                    "blue-classic@20|gold-four-wing@10");
                 PlayerPrefs.SetString(
-                    "fidgeting.collector.v1.focusModel",
-                    "blue-classic");
-                PlayerPrefs.SetString(
-                    "fidgeting.collector.v1.discoveredModels",
-                    "blue-classic|gold-four-wing");
-                PlayerPrefs.SetString(
-                    "fidgeting.collector.v1.awardedToyMilestones",
-                    "blue-classic@20");
-                PlayerPrefs.SetString(
-                    "fidgeting.collector.v1.highestToyLevels",
-                    "blue-classic@35");
-                PlayerPrefs.SetString(
-                    "fidgeting.appearance.sticker.v1.blue-classic",
-                    "orbit-mark");
+                    Coll + "highestToyLevels",
+                    "blue-classic@35|gold-four-wing@41|metal-three-blade@12");
+                PlayerPrefs.SetString(Sticker + "blue-classic", "orbit-mark");
+                // The player also spun the other two rotors.
+                PlayerPrefs.SetString(Prog + "gold-four-wing.experience", "5000");
+                PlayerPrefs.SetInt(Prog + "gold-four-wing.todayGestures", 7);
+                PlayerPrefs.SetString(Prog + "metal-three-blade.experience", "800");
+                PlayerPrefs.SetInt(Prog + "metal-three-blade.todayGestures", 30);
 
                 ProductCatalogMigration.Apply();
 
                 Assert.That(
-                    PlayerPrefs.GetString(
-                        "fidgeting.progression.v1.pointed-three-blade.experience"),
+                    PlayerPrefs.GetInt("fidgeting.catalog.migration.version"),
+                    Is.EqualTo(ProductCatalogMigration.CurrentMigrationVersion));
+                // v1 chained into v2: blue -> pointed -> metal, keeping the
+                // best value on every field rather than the first one seen.
+                Assert.That(
+                    PlayerPrefs.GetString(Prog + "pointed-three-blade.experience"),
                     Is.EqualTo("1234.5"));
                 Assert.That(
-                    PlayerPrefs.GetString("fidgeting.progression.v1.activeModel"),
-                    Is.EqualTo("pointed-three-blade"));
+                    PlayerPrefs.GetString(Prog + "metal-three-blade.experience"),
+                    Is.EqualTo("5000"),
+                    "Consolidation keeps the highest experience of the three rotors.");
                 Assert.That(
-                    PlayerPrefs.GetString("fidgeting.collector.v1.focusModel"),
-                    Is.EqualTo("pointed-three-blade"));
-                StringAssert.Contains(
-                    "pointed-three-blade",
-                    PlayerPrefs.GetString("fidgeting.collector.v1.discoveredModels"));
+                    PlayerPrefs.GetInt(Prog + "metal-three-blade.todayGestures"),
+                    Is.EqualTo(30),
+                    "A smaller retired value never overwrites GEEONE's own progress.");
                 Assert.That(
-                    PlayerPrefs.GetString("fidgeting.collector.v1.awardedToyMilestones"),
-                    Is.EqualTo("pointed-three-blade@20"));
+                    PlayerPrefs.GetString(Prog + "activeModel"),
+                    Is.EqualTo("metal-three-blade"));
                 Assert.That(
-                    PlayerPrefs.GetString("fidgeting.collector.v1.highestToyLevels"),
-                    Is.EqualTo("pointed-three-blade@35"));
+                    PlayerPrefs.GetString(Coll + "focusModel"),
+                    Is.EqualTo("metal-three-blade"));
                 Assert.That(
-                    PlayerPrefs.GetString(
-                        "fidgeting.appearance.sticker.v1.pointed-three-blade"),
+                    PlayerPrefs.GetString(Coll + "discoveredModels"),
+                    Is.EqualTo("magnetic-fan-card|metal-three-blade"));
+                Assert.That(
+                    PlayerPrefs.GetString(Coll + "awardedToyMilestones"),
+                    Is.EqualTo("metal-three-blade@10|metal-three-blade@20"));
+                Assert.That(
+                    PlayerPrefs.GetString(Coll + "highestToyLevels"),
+                    Is.EqualTo("metal-three-blade@41"));
+                Assert.That(
+                    PlayerPrefs.GetString(Sticker + "metal-three-blade"),
                     Is.EqualTo("orbit-mark"));
 
-                PlayerPrefs.SetString(
-                    "fidgeting.progression.v1.blue-classic.experience",
-                    "9999");
+                PlayerPrefs.SetString(Prog + "gold-four-wing.experience", "99999");
                 ProductCatalogMigration.Apply();
                 Assert.That(
-                    PlayerPrefs.GetString(
-                        "fidgeting.progression.v1.pointed-three-blade.experience"),
-                    Is.EqualTo("1234.5"),
-                    "The migration must be idempotent and never overwrite new data.");
+                    PlayerPrefs.GetString(Prog + "metal-three-blade.experience"),
+                    Is.EqualTo("5000"),
+                    "The migration must be idempotent once the version is recorded.");
+            }
+            finally
+            {
+                foreach (string key in keys)
+                {
+                    PlayerPrefs.DeleteKey(key);
+                }
+                PlayerPrefs.Save();
+            }
+        }
+
+        [Test]
+        public void CatalogMigrationVersionTwoUpgradesAnExistingVersionOneInstall()
+        {
+            const string Prog = "fidgeting.progression.v1.";
+            string[] keys =
+            {
+                "fidgeting.catalog.migration.version",
+                Prog + "pointed-three-blade.experience",
+                Prog + "metal-three-blade.experience",
+                Prog + "activeModel",
+                Prog + "suspendedModel"
+            };
+            foreach (string key in keys)
+            {
+                PlayerPrefs.DeleteKey(key);
+            }
+
+            try
+            {
+                PlayerPrefs.SetInt("fidgeting.catalog.migration.version", 1);
+                PlayerPrefs.SetString(Prog + "pointed-three-blade.experience", "2500");
+                PlayerPrefs.SetString(Prog + "activeModel", "pointed-three-blade");
+                PlayerPrefs.SetString(Prog + "suspendedModel", "gold-four-wing");
+
+                ProductCatalogMigration.Apply();
+
+                Assert.That(
+                    PlayerPrefs.GetString(Prog + "metal-three-blade.experience"),
+                    Is.EqualTo("2500"));
+                Assert.That(
+                    PlayerPrefs.GetString(Prog + "activeModel"),
+                    Is.EqualTo("metal-three-blade"));
+                Assert.That(
+                    PlayerPrefs.GetString(Prog + "suspendedModel"),
+                    Is.EqualTo("metal-three-blade"));
+                Assert.That(
+                    PlayerPrefs.GetInt("fidgeting.catalog.migration.version"),
+                    Is.EqualTo(2));
             }
             finally
             {
@@ -514,56 +578,45 @@ namespace FidgetingApp.Tests.Editor
         }
 
         [Test]
-        public void VisualAssembly_AppliesFiveRealMaterialAndComponentStagesWithoutPhysics()
+        public void ProgressionNeverAttachesRingGeometryToAnyToy()
         {
-            var rotor = new GameObject("ProgressionVisualTestRotor");
-            GameObject sourceVisual = GameObject.CreatePrimitive(PrimitiveType.Cube);
-            sourceVisual.name = "SourceSpinnerVisual";
-            sourceVisual.transform.SetParent(rotor.transform, false);
-            sourceVisual.transform.localScale = new Vector3(0.12f, 0.012f, 0.12f);
+            // 2026-09-08 user: "现在每一个模型上面都有一个奇怪的圆环". The shared
+            // SpinnerProgressionVisuals collar/weight-ring/bearing/crown tori
+            // were removed; progression must stay surface-only (FDB-TRI-005).
+            Assert.That(
+                File.Exists("Assets/Scripts/Product/SpinnerProgressionVisuals.cs"),
+                Is.False,
+                "The floating progression ring assembly must not come back.");
+            Assert.That(
+                File.Exists("Assets/Editor/ProgressionVisualPreviewCapture.cs"),
+                Is.False);
 
+            string coordinator = File.ReadAllText(
+                "Assets/Scripts/Product/FidgetAppCoordinator.cs");
+            StringAssert.DoesNotContain("AddComponent<SpinnerProgressionVisuals>", coordinator);
+            StringAssert.Contains("RemoveLegacyProgressionRingRoot(rotor)", coordinator);
+
+            foreach (string source in Directory.GetFiles(
+                "Assets/Scripts", "*.cs", SearchOption.AllDirectories))
+            {
+                string text = File.ReadAllText(source);
+                Assert.That(
+                    text.Contains("CreateTorus(") || text.Contains("PrecisionSteelWeightRing"),
+                    Is.False,
+                    $"{source} must not generate torus rings on a toy.");
+            }
+
+            var rotor = new GameObject("ProgressionRingGuardRotor");
+            var stale = new GameObject(FidgetAppCoordinator.LegacyProgressionRingRootName);
+            stale.transform.SetParent(rotor.transform, false);
             try
             {
-                SpinnerProgressionVisuals visuals =
-                    rotor.AddComponent<SpinnerProgressionVisuals>();
-
-                visuals.Apply("test-model", 1);
-                Assert.That(visuals.ActiveStageIndex, Is.EqualTo(0));
-                Assert.That(visuals.ActiveMaterialName, Does.Contain("001"));
-                Assert.That(visuals.WeightRingVisible, Is.False);
-
-                visuals.Apply("test-model", 20);
-                Assert.That(visuals.ActiveStageIndex, Is.EqualTo(1));
-                Assert.That(visuals.WeightRingVisible, Is.True);
-                Assert.That(visuals.AuxiliaryBearingsVisible, Is.False);
-
-                visuals.Apply("test-model", 50);
-                Assert.That(visuals.ActiveStageIndex, Is.EqualTo(2));
-                Assert.That(visuals.AuxiliaryBearingsVisible, Is.True);
-                Assert.That(visuals.LowResistanceCageVisible, Is.False);
-
-                visuals.Apply("test-model", 75);
-                Assert.That(visuals.ActiveStageIndex, Is.EqualTo(3));
-                Assert.That(visuals.LowResistanceCageVisible, Is.True);
-                Assert.That(visuals.FinalCrownVisible, Is.False);
-
-                visuals.Apply("test-model", 100);
-                Assert.That(visuals.ActiveStageIndex, Is.EqualTo(4));
-                Assert.That(visuals.ActiveMaterialName, Does.Contain("100"));
-                Assert.That(visuals.FinalCrownVisible, Is.True);
-                Assert.That(visuals.GeneratedColliderCount, Is.Zero);
-                Assert.That(rotor.GetComponent<Rigidbody>(), Is.Null);
-
-                Transform generatedRoot = rotor.transform.Find(
-                    SpinnerProgressionVisuals.VisualRootName);
-                Assert.That(generatedRoot, Is.Not.Null);
                 Assert.That(
-                    generatedRoot.GetComponentsInChildren<Renderer>(true)
-                        .Any(renderer => renderer.sharedMaterial != null
-                            && renderer.sharedMaterial.name ==
-                            "Progression_100_CeramicBearing"),
-                    Is.True,
-                    "The final stage must visibly replace steel bearing balls with ceramic ones.");
+                    FidgetAppCoordinator.RemoveLegacyProgressionRingRoot(rotor.transform),
+                    Is.EqualTo(1));
+                Assert.That(
+                    rotor.transform.Find(FidgetAppCoordinator.LegacyProgressionRingRootName),
+                    Is.Null);
             }
             finally
             {
@@ -985,14 +1038,12 @@ namespace FidgetingApp.Tests.Editor
                 .First(root => root.name == "ThreeBladeEDC_Root");
             Transform rotor = productRoot.transform.Find("RotorDynamic");
             Transform legacyTopCap = productRoot.transform.Find("HubStatic/TopCap");
+            // GEEONE 龙鳞三叶 (2026-09-08): the imported top cap is one mesh, Cap_Top.
             Transform visibleTopCap = productRoot.transform.Find(
-                "HubStatic/TopCap/TopCap_Root/FingerCapTop_BrushedFace");
-            Transform structuralTopCap = productRoot.transform.Find(
-                "HubStatic/TopCap/TopCap_Root/FingerCap_Top");
+                "HubStatic/TopCap/Cap_Top");
             Assert.That(rotor, Is.Not.Null);
             Assert.That(legacyTopCap, Is.Not.Null);
             Assert.That(visibleTopCap, Is.Not.Null);
-            Assert.That(structuralTopCap, Is.Not.Null);
             Assert.That(
                 legacyTopCap.GetComponent<MeshRenderer>().enabled,
                 Is.False,
@@ -1000,11 +1051,7 @@ namespace FidgetingApp.Tests.Editor
             Assert.That(
                 visibleTopCap.GetComponent<MeshRenderer>().enabled,
                 Is.True,
-                "The imported brushed face is the physical top surface the user sees.");
-            Assert.That(
-                visibleTopCap.localPosition.z,
-                Is.GreaterThan(structuralTopCap.localPosition.z),
-                "The engraving receiver must be above the structural cap shell.");
+                "The imported GEEONE cap is the physical top surface the user sees.");
 
             ProductStickerPresenter presenter =
                 productRoot.AddComponent<ProductStickerPresenter>();
@@ -1039,7 +1086,7 @@ namespace FidgetingApp.Tests.Editor
                     Assert.That(
                         surface.IsChildOf(visibleTopCap),
                         Is.True,
-                        "The mark must sit on the topmost imported metal face, not the occluded shell.");
+                        "The mark must sit on the imported top cap, not the hidden procedural shell.");
                 }
             }
             finally
@@ -1163,7 +1210,7 @@ namespace FidgetingApp.Tests.Editor
         }
 
         [Test]
-        public void ThreeBladeMetalSkins_TargetEnabledDragonScaleModelInMetalScene()
+        public void ThreeBladeMetalSkins_TargetEnabledGeeoneModelInMetalScene()
         {
             UnityEngine.SceneManagement.Scene scene =
                 UnityEditor.SceneManagement.EditorSceneManager.OpenScene(
@@ -1176,10 +1223,10 @@ namespace FidgetingApp.Tests.Editor
                 .Find("ThreeBladeFrame")
                 .GetComponent<MeshRenderer>();
             MeshRenderer visibleBody = rotor
-                .Find("Rotor_Root/RotorBody_OnePiece")
+                .Find("Rotor_Root/Rotor_Body")
                 .GetComponent<MeshRenderer>();
             MeshRenderer visibleTopCap = productRoot.transform
-                .Find("HubStatic/TopCap/TopCap_Root/FingerCap_Top")
+                .Find("HubStatic/TopCap/Cap_Top")
                 .GetComponent<MeshRenderer>();
             Assert.That(hiddenLegacyFrame.enabled, Is.False);
             Assert.That(visibleBody.enabled, Is.True);
@@ -1193,7 +1240,8 @@ namespace FidgetingApp.Tests.Editor
                 skins.Apply(10, "night-cyan-index");
 
                 Assert.That(skins.ActiveSkinId, Is.EqualTo("night-cyan-index"));
-                Assert.That(skins.AppliedRendererCount, Is.GreaterThan(8));
+                // GEEONE ships four visible surfaces: rotor, two caps, hub core.
+                Assert.That(skins.AppliedRendererCount, Is.GreaterThanOrEqualTo(4));
                 Assert.That(skins.HasAppliedSkin, Is.True);
                 Assert.That(visibleBody.sharedMaterial, Is.Not.SameAs(originalVisibleBody));
                 StringAssert.Contains("night-cyan-index", visibleBody.sharedMaterial.name);
@@ -1206,7 +1254,7 @@ namespace FidgetingApp.Tests.Editor
                     rotor.Find(ThreeBladeMetalSkinProgression.DecorationRootName),
                     Is.Null);
                 Assert.That(
-                    rotor.Find(SpinnerProgressionVisuals.VisualRootName),
+                    rotor.Find(FidgetAppCoordinator.LegacyProgressionRingRootName),
                     Is.Null);
                 Assert.That(hiddenLegacyFrame.sharedMaterial, Is.Not.SameAs(visibleBody.sharedMaterial));
             }
@@ -1229,8 +1277,9 @@ namespace FidgetingApp.Tests.Editor
             StringAssert.Contains("SetThreeBladeMetalSkinFromNativeUi", coordinator);
             StringAssert.Contains("ThreeBladeMetalSkinSelectionKey", coordinator);
             StringAssert.Contains("usesIntegratedThreeBladeSkins", coordinator);
-            StringAssert.Contains("if (!usesIntegratedThreeBladeSkins)", coordinator,
-                "The three-blade model must not receive generic floating progression geometry.");
+            StringAssert.Contains("RemoveLegacyProgressionRingRoot(rotor)", coordinator,
+                "No model may receive generic floating progression geometry.");
+            StringAssert.DoesNotContain("AddComponent<SpinnerProgressionVisuals>", coordinator);
             StringAssert.Contains("FidgetHapticRouter.Emit(FidgetSemanticEvent.Selection)", coordinator);
             StringAssert.DoesNotContain("IosHaptics", File.ReadAllText(
                 "Assets/Scripts/Product/ThreeBladeMetalSkinProgression.cs"));
