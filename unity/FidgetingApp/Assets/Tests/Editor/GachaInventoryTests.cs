@@ -158,7 +158,9 @@ namespace FidgetingApp.Tests.Editor
                     Is.False);
                 Assert.That(reason, Is.EqualTo("unknown-prize"));
 
-                Assert.That(inventory.TryRedeemShards("canyon-heir-aurora-vein", out reason),
+                Assert.That(inventory.TryRedeemShards(
+                    "canyon-heir-metal-three-blade",
+                    out reason),
                     Is.False);
                 Assert.That(reason, Is.EqualTo("not-redeemable"),
                     "Heirloom prizes must never be purchasable with shards.");

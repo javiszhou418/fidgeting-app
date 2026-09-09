@@ -40,19 +40,25 @@ namespace FidgetingApp.Product
         public const string MagneticSlideTileModelId = "magnetic-slide-tile";
         public const string MagneticFanCardModelId = "magnetic-fan-card";
 
+        /// <summary>
+        /// FDB-PREF-032 consolidation (user 2026-09-09 "前两张图的陀螺去掉"):
+        /// the two older three-blade rotors are retired from the shipping
+        /// catalog. Their scenes stay in source; saved progression, collector
+        /// state and selection migrate into <see cref="MetalThreeBladeModelId"/>.
+        /// </summary>
+        public static readonly string[] RetiredModelIds =
+        {
+            PointedThreeBladeModelId,
+            GoldFourWingModelId
+        };
+
+        public const string DefaultModelId = MetalThreeBladeModelId;
+
         private static readonly ProductCatalogEntry[] shippingEntries =
         {
             new ProductCatalogEntry(
-                PointedThreeBladeModelId,
-                SpinnerEnvironmentCatalog.PointedScenePath,
-                ProductMechanismKind.Rotor),
-            new ProductCatalogEntry(
                 MetalThreeBladeModelId,
                 SpinnerEnvironmentCatalog.MetalScenePath,
-                ProductMechanismKind.Rotor),
-            new ProductCatalogEntry(
-                GoldFourWingModelId,
-                SpinnerEnvironmentCatalog.ImportedScenePath,
                 ProductMechanismKind.Rotor),
             new ProductCatalogEntry(
                 GraphiteTwoLobeModelId,

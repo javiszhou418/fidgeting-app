@@ -10,6 +10,7 @@ using ThreeBladeEDC.Presentation;
 using UnityEditor;
 using UnityEditor.SceneManagement;
 using UnityEngine;
+using UnityEngine.Rendering.Universal;
 
 namespace FidgetingApp.Tests.Editor
 {
@@ -61,21 +62,25 @@ namespace FidgetingApp.Tests.Editor
             IReadOnlyList<SpinnerEnvironmentThemeProfile> themes =
                 SpinnerEnvironmentThemeCatalog.Profiles;
 
-            Assert.That(themes.Count, Is.EqualTo(2));
-            Assert.That(themes[0].Id, Is.EqualTo(SpinnerEnvironmentThemeCatalog.CanyonId));
-            Assert.That(themes[0].DisplayName, Is.EqualTo("星岩峡谷"));
-            Assert.That(themes[0].HasForegroundLayers, Is.True);
-            Assert.That(themes[1].Id, Is.EqualTo(SpinnerEnvironmentThemeCatalog.CyberpunkId));
-            Assert.That(themes[1].DisplayName, Is.EqualTo("霓虹都市"));
-            Assert.That(themes[1].LayeredMidground, Is.True);
-            Assert.That(themes[1].DynamicStarfield, Is.True);
-            Assert.That(themes[1].HasForegroundLayers, Is.False);
+            Assert.That(themes.Count, Is.EqualTo(4));
+            Assert.That(themes[0].Id, Is.EqualTo(SpinnerEnvironmentThemeCatalog.AdaptiveId));
+            Assert.That(themes[0].DisplayName, Is.EqualTo("随形微光"));
+            Assert.That(themes[0].ModelReactiveBackdrop, Is.True);
+            Assert.That(themes[1].Id, Is.EqualTo(SpinnerEnvironmentThemeCatalog.CanyonId));
+            Assert.That(themes[1].DisplayName, Is.EqualTo("星岩峡谷"));
+            Assert.That(themes[1].HasForegroundLayers, Is.True);
+            Assert.That(themes[2].Id, Is.EqualTo(SpinnerEnvironmentThemeCatalog.CyberpunkId));
+            Assert.That(themes[2].DisplayName, Is.EqualTo("霓虹都市"));
+            Assert.That(themes[2].LayeredMidground, Is.True);
+            Assert.That(themes[2].DynamicStarfield, Is.True);
+            Assert.That(themes[2].HasForegroundLayers, Is.False);
+            Assert.That(themes[3].Id, Is.EqualTo(SpinnerEnvironmentThemeCatalog.MineralRidgeId));
             Assert.That(
                 SpinnerEnvironmentThemeCatalog.NormalizeId("CYBERPUNK"),
                 Is.EqualTo(SpinnerEnvironmentThemeCatalog.CyberpunkId));
             Assert.That(
                 SpinnerEnvironmentThemeCatalog.NormalizeId("unknown"),
-                Is.EqualTo(SpinnerEnvironmentThemeCatalog.CanyonId));
+                Is.EqualTo(SpinnerEnvironmentThemeCatalog.AdaptiveId));
 
             const string cyberAssetPath =
                 "Assets/Resources/EnvironmentBackgrounds/"
@@ -333,7 +338,9 @@ namespace FidgetingApp.Tests.Editor
                 Assert.That(presenter.BackgroundTexture, Is.Not.Null);
                 Assert.That(
                     presenter.BackgroundTexture.name,
-                    Is.EqualTo(Path.GetFileNameWithoutExtension(profile.TextureAssetPath)));
+                    Is.EqualTo(Path.GetFileNameWithoutExtension(profile.TextureAssetPath))
+                        .Or.EqualTo("adaptive-dark-neutral-runtime"),
+                    profile.ModelId);
                 Assert.That(presenter.BackgroundRenderer, Is.Not.Null);
                 Assert.That(presenter.ParallaxController, Is.Not.Null);
                 Assert.That(
@@ -372,21 +379,32 @@ namespace FidgetingApp.Tests.Editor
 
                 var backgroundProperties = new MaterialPropertyBlock();
                 presenter.BackgroundRenderer.GetPropertyBlock(backgroundProperties);
+                float expectedSaturation =
+                    SpinnerEnvironmentThemeCatalog.Default.ModelReactiveBackdrop
+                        ? 0f
+                        : profile.Saturation;
                 Assert.That(
                     backgroundProperties.GetFloat("_Saturation"),
-                    Is.EqualTo(profile.Saturation).Within(0.0001f));
+                    Is.EqualTo(expectedSaturation).Within(0.0001f),
+                    profile.ModelId);
                 Assert.That(
                     backgroundProperties.GetFloat("_GlowEnabled"),
                     Is.EqualTo(1f));
                 Assert.That(
                     backgroundProperties.GetFloat("_GlowIntensity"),
-                    Is.EqualTo(0.42f).Within(0.0001f));
+                    Is.EqualTo(0.42f).Within(0.0001f)
+                        .Or.EqualTo(0.26f).Within(0.0001f),
+                    profile.ModelId);
                 Assert.That(
                     backgroundProperties.GetFloat("_ShadowEnabled"),
                     Is.EqualTo(1f));
                 Assert.That(
                     backgroundProperties.GetFloat("_ShadowStrength"),
-                    Is.EqualTo(0.88f).Within(0.0001f),
+                    Is.EqualTo(0.88f).Within(0.0001f)
+                        .Or.EqualTo(
+                            SpinnerImageBasedLightingController
+                                .FanCardContactShadowStrength)
+                            .Within(0.0001f),
                     "The baked ledge must visibly receive the model contact shadow.");
                 Assert.That(
                     backgroundProperties.GetVector("_GlowScaleB").y,
@@ -622,23 +640,46 @@ namespace FidgetingApp.Tests.Editor
                     properties.GetTexture("_BaseMap"),
                     Is.EqualTo(presenter.BackgroundTexture));
 
+                bool geeoneRecipe = SpinnerImageBasedLightingController
+                    .UsesGeeonePresentationRecipe(profile.ModelId);
+                SpinnerEnvironmentPalette palette =
+                    presenter.ImageBasedLighting.CurrentPalette;
                 AssertColor(
                     RenderSettings.ambientSkyColor,
-                    presenter.ImageBasedLighting.CurrentPalette.Sky
-                        * ambientScale);
+                    ExpectedAmbient(
+                        palette.Sky * ambientScale,
+                        geeoneRecipe,
+                        SpinnerImageBasedLightingController.GeeoneAmbientFloorSky));
                 AssertColor(
                     RenderSettings.ambientEquatorColor,
-                    presenter.ImageBasedLighting.CurrentPalette.Equator
-                        * ambientScale);
+                    ExpectedAmbient(
+                        palette.Equator * ambientScale,
+                        geeoneRecipe,
+                        SpinnerImageBasedLightingController.GeeoneAmbientFloorEquator));
                 AssertColor(
                     RenderSettings.ambientGroundColor,
-                    presenter.ImageBasedLighting.CurrentPalette.Ground
-                        * ambientScale);
+                    ExpectedAmbient(
+                        palette.Ground * ambientScale,
+                        geeoneRecipe,
+                        SpinnerImageBasedLightingController.GeeoneAmbientFloorGround));
+                float geeoneReflectionBoost = geeoneRecipe
+                    ? SpinnerImageBasedLightingController.GeeoneReflectionBoost
+                    : 1f;
+                float geeoneLightBoost = geeoneRecipe
+                    ? SpinnerImageBasedLightingController.GeeoneDirectLightBoost
+                    : 1f;
+                if (geeoneRecipe)
+                {
+                    // 2026-09-08 "内外一定要一致": GEEONE must not dim in the library.
+                    Assert.That(profile.LibraryLightScale, Is.EqualTo(1f));
+                    Assert.That(profile.LibraryReflectionScale, Is.EqualTo(1f));
+                }
                 Assert.That(
                     RenderSettings.reflectionIntensity,
                     Is.EqualTo(profile.ReflectionIntensity
                         * reflectionScale
-                        * profile.LibraryReflectionScale)
+                        * profile.LibraryReflectionScale
+                        * geeoneReflectionBoost)
                         .Within(0.0001f));
 
                 Light[] lights = Object.FindObjectsByType<Light>();
@@ -649,9 +690,12 @@ namespace FidgetingApp.Tests.Editor
                     Assert.That(actual, Is.Not.Null, $"{profile.ModelId}/{expected.ObjectName}");
                     Assert.That(
                         actual.intensity,
-                        Is.EqualTo(expected.Intensity
-                            * directScale
-                            * profile.LibraryLightScale)
+                        Is.EqualTo(SpinnerImageBasedLightingController
+                            .ResolveAuthoredLightIntensity(
+                                profile.ModelId,
+                                expected.ObjectName,
+                                expected.Intensity * directScale,
+                                profile.LibraryLightScale * geeoneLightBoost))
                             .Within(0.0001f));
                     Assert.That(actual.useColorTemperature, Is.False);
                     Color.RGBToHSV(actual.color, out _, out float saturation, out _);
@@ -666,13 +710,15 @@ namespace FidgetingApp.Tests.Editor
                         $"Environment setup must not inject spin into {bodies[index].name}.");
                 }
 
+                Color librarySky = RenderSettings.ambientSkyColor;
                 presenter.SetLibraryPreviewActive(false, true);
                 Assert.That(presenter.GroundingStage.StageRenderer.enabled, Is.False);
                 Assert.That(presenter.GroundingStage.SupportRenderer.enabled, Is.False);
                 Assert.That(
                     RenderSettings.reflectionIntensity,
                     Is.EqualTo(profile.ReflectionIntensity
-                        * reflectionScale)
+                        * reflectionScale
+                        * geeoneReflectionBoost)
                         .Within(0.0001f));
                 foreach (SpinnerEnvironmentLightPreset expected in profile.Lights)
                 {
@@ -680,9 +726,23 @@ namespace FidgetingApp.Tests.Editor
                         .Single(light => light.name == expected.ObjectName);
                     Assert.That(
                         restored.intensity,
-                        Is.EqualTo(expected.Intensity
-                            * directScale)
+                        Is.EqualTo(SpinnerImageBasedLightingController
+                            .ResolveAuthoredLightIntensity(
+                                profile.ModelId,
+                                expected.ObjectName,
+                                expected.Intensity * directScale,
+                                geeoneLightBoost))
                             .Within(0.0001f));
+                }
+                if (geeoneRecipe)
+                {
+                    AssertColor(RenderSettings.ambientSkyColor, librarySky);
+                    Assert.That(
+                        presenter.ImageBasedLighting.ResolvePresentationState(true).LightScale,
+                        Is.EqualTo(presenter.ImageBasedLighting
+                            .ResolvePresentationState(false).LightScale)
+                            .Within(0.0001f),
+                        "GEEONE library and detail must light identically.");
                 }
                 presenter.SetLibraryPreviewActive(true, true);
                 Assert.That(presenter.GroundingStage.StageRenderer.enabled, Is.False);
@@ -691,9 +751,301 @@ namespace FidgetingApp.Tests.Editor
                     RenderSettings.reflectionIntensity,
                     Is.EqualTo(profile.ReflectionIntensity
                         * reflectionScale
-                        * profile.LibraryReflectionScale)
+                        * profile.LibraryReflectionScale
+                        * geeoneReflectionBoost)
                         .Within(0.0001f));
             }
+        }
+
+        private static Color ExpectedAmbient(Color scaled, bool geeoneRecipe, Color floor)
+        {
+            if (!geeoneRecipe)
+            {
+                return scaled;
+            }
+
+            Color boosted = scaled * SpinnerImageBasedLightingController.GeeoneAmbientBoost;
+            floor = GeeoneLightingPresetCatalog.ScaleFloor(
+                floor,
+                SpinnerImageBasedLightingController.GeeoneAmbientFloorScale);
+            return new Color(
+                Mathf.Max(boosted.r, floor.r),
+                Mathf.Max(boosted.g, floor.g),
+                Mathf.Max(boosted.b, floor.b),
+                1f);
+        }
+
+        [Test]
+        public void GeeoneLightingPresets_ShipSoftStudioAndKeepStudioBrightOnlyForReview()
+        {
+            GeeoneLightingPresetCatalog.ResetActive();
+            GeeoneLightingPreset shipping = GeeoneLightingPresetCatalog.Active;
+
+            // User 2026-09-09 "我感觉柔光棚好看一点" after the mobile HDR switch.
+            Assert.That(shipping.Id, Is.EqualTo(GeeoneLightingPresetCatalog.ShippingId));
+            Assert.That(shipping.Id, Is.EqualTo(GeeoneLightingPresetCatalog.SoftStudioId));
+            Assert.That(
+                shipping.StudioSoftboxIntensity,
+                Is.EqualTo(SpinnerImageBasedLightingController.GeeoneStudioSoftboxIntensity));
+            Assert.That(
+                shipping.AmbientFloorScale,
+                Is.EqualTo(SpinnerImageBasedLightingController.GeeoneAmbientFloorScale));
+            Assert.That(
+                shipping.DirectLightBoost,
+                Is.EqualTo(SpinnerImageBasedLightingController.GeeoneDirectLightBoost));
+            Assert.That(
+                shipping.ReflectionBoost,
+                Is.EqualTo(SpinnerImageBasedLightingController.GeeoneReflectionBoost));
+            Assert.That(
+                shipping.AmbientBoost,
+                Is.EqualTo(SpinnerImageBasedLightingController.GeeoneAmbientBoost));
+            Assert.That(
+                shipping.VisibilityFillIntensity,
+                Is.EqualTo(SpinnerImageBasedLightingController.GeeoneVisibilityFillIntensity));
+            Assert.That(
+                shipping.KeyLightFloor,
+                Is.EqualTo(SpinnerImageBasedLightingController.GeeoneKeyLightFloor));
+            Assert.That(
+                SpinnerImageBasedLightingController.ResolveGeeoneLightFloor("Key_5000K"),
+                Is.EqualTo(SpinnerImageBasedLightingController.GeeoneKeyLightFloor));
+
+            Assert.That(GeeoneLightingPresetCatalog.All.Count, Is.EqualTo(4));
+            Assert.That(
+                GeeoneLightingPresetCatalog.All.Select(preset => preset.Id).Distinct().Count(),
+                Is.EqualTo(4));
+            // The superseded Build 47 recipe stays only as the A/B reference:
+            // brighter on every direct lever, no softbox. It must not ship.
+            GeeoneLightingPreset old = GeeoneLightingPresetCatalog.StudioBright;
+            Assert.That(old.Id, Is.Not.EqualTo(GeeoneLightingPresetCatalog.ShippingId));
+            Assert.That(old.StudioSoftboxIntensity, Is.EqualTo(0f));
+            Assert.That(shipping.DirectLightBoost, Is.LessThan(old.DirectLightBoost));
+            Assert.That(shipping.ReflectionBoost, Is.LessThan(old.ReflectionBoost));
+            Assert.That(shipping.KeyLightFloor, Is.LessThan(old.KeyLightFloor));
+            // The camera-aligned fill is what flattens the facets into one
+            // white plane on metallic steel; Soft Studio cuts it to ~30%.
+            Assert.That(
+                shipping.VisibilityFillIntensity,
+                Is.LessThan(old.VisibilityFillIntensity * 0.35f));
+            Assert.That(shipping.TotalDirectEnergy, Is.LessThan(old.TotalDirectEnergy * 0.40f));
+            // The steel's only large soft source; shipping now carries it.
+            Assert.That(shipping.StudioSoftboxIntensity, Is.GreaterThan(0f));
+
+            foreach (GeeoneLightingPreset preset in GeeoneLightingPresetCatalog.All)
+            {
+                Assert.That(preset.DirectLightBoost, Is.GreaterThan(0f), preset.Id);
+                Assert.That(preset.TotalDirectEnergy, Is.GreaterThan(0f), preset.Id);
+            }
+            Assert.That(
+                GeeoneLightingPresetCatalog.Overcast.StudioSoftboxIntensity,
+                Is.GreaterThan(shipping.StudioSoftboxIntensity));
+            Assert.That(
+                GeeoneLightingPresetCatalog.Overcast.TotalDirectEnergy,
+                Is.LessThan(shipping.TotalDirectEnergy));
+            Assert.That(
+                GeeoneLightingPresetCatalog.LowKey.TotalDirectEnergy,
+                Is.LessThan(shipping.TotalDirectEnergy));
+
+            try
+            {
+                GeeoneLightingPresetCatalog.SetActiveForPreview(GeeoneLightingPresetCatalog.Overcast);
+                Assert.That(
+                    SpinnerImageBasedLightingController.ResolveGeeoneLightFloor("Key_5000K"),
+                    Is.EqualTo(GeeoneLightingPresetCatalog.Overcast.KeyLightFloor));
+                // Preset values are the spots' final GEEONE intensities, not a
+                // floor under the authored value; otherwise softer presets
+                // could not lower the key below authored*boost.
+                Assert.That(
+                    SpinnerImageBasedLightingController.ResolveAuthoredLightIntensity(
+                        "metal-three-blade",
+                        "Key_5000K",
+                        1.4f,
+                        1f),
+                    Is.EqualTo(GeeoneLightingPresetCatalog.Overcast.KeyLightFloor).Within(1e-5f));
+            }
+            finally
+            {
+                GeeoneLightingPresetCatalog.ResetActive();
+            }
+
+            Assert.That(
+                GeeoneLightingPresetCatalog.Active.Id,
+                Is.EqualTo(GeeoneLightingPresetCatalog.ShippingId),
+                "A preview capture must never leave a review preset active.");
+        }
+
+        [Test]
+        public void GeeoneLightingPreset_LaunchArgumentsSelectPresetAndScaleOnlyDirectLights()
+        {
+            GeeoneLightingPreset none = GeeoneLightingPresetCatalog.ResolveLaunchPreset(
+                new[] { "--unrelated" });
+            Assert.That(none.Id, Is.EqualTo(GeeoneLightingPresetCatalog.ShippingId));
+
+            GeeoneLightingPreset scaled = GeeoneLightingPresetCatalog.ResolveLaunchPreset(
+                new[]
+                {
+                    GeeoneLightingPresetCatalog.PresetLaunchArgumentPrefix
+                        + GeeoneLightingPresetCatalog.SoftStudioId,
+                    GeeoneLightingPresetCatalog.DirectScaleLaunchArgumentPrefix + "0.5",
+                });
+            GeeoneLightingPreset soft = GeeoneLightingPresetCatalog.SoftStudio;
+            Assert.That(scaled.Id, Is.EqualTo(soft.Id));
+            Assert.That(scaled.KeyLightFloor, Is.EqualTo(soft.KeyLightFloor * 0.5f).Within(0.0001f));
+            Assert.That(scaled.VisibilityFillIntensity, Is.EqualTo(soft.VisibilityFillIntensity * 0.5f).Within(0.0001f));
+            Assert.That(scaled.StudioSoftboxIntensity, Is.EqualTo(soft.StudioSoftboxIntensity));
+            Assert.That(scaled.AmbientBoost, Is.EqualTo(soft.AmbientBoost));
+
+            GeeoneLightingPreset bad = GeeoneLightingPresetCatalog.ResolveLaunchPreset(
+                new[] { GeeoneLightingPresetCatalog.DirectScaleLaunchArgumentPrefix + "-1" });
+            Assert.That(bad.KeyLightFloor, Is.EqualTo(GeeoneLightingPresetCatalog.Shipping.KeyLightFloor));
+        }
+
+        [Test]
+        public void EveryProductSceneSharesOneSubtleCameraGrading()
+        {
+            // Post exposure lifts the shared canyon backdrop as well as the toy,
+            // so the four scenes may only differ in model lights, never in EV.
+            Assert.That(SpinnerSharedPresentationGrading.PostExposureEv, Is.EqualTo(0.15f));
+            Assert.That(
+                SpinnerSharedPresentationGrading.PostExposureLinearGain,
+                Is.EqualTo(1.11f).Within(0.01f));
+            Assert.That(
+                MagneticSlideShippingLighting.BalancedPostExposureEv,
+                Is.EqualTo(SpinnerSharedPresentationGrading.PostExposureEv));
+
+            // Backdrop glow energy must be the same behind every canyon toy.
+            Assert.That(
+                SpinnerImageBasedLightingController.ResolveEnvironmentGlowScale(
+                    ProductCatalog.MagneticSlideTileModelId),
+                Is.EqualTo(SpinnerImageBasedLightingController.ResolveEnvironmentGlowScale(
+                    ProductCatalog.MetalThreeBladeModelId)));
+            Assert.That(
+                SpinnerImageBasedLightingController.ResolveEnvironmentGlowScale(
+                    ProductCatalog.MagneticSlideTileModelId),
+                Is.EqualTo(SpinnerImageBasedLightingController.SoftEnvironmentGlowScale));
+            // Backdrop glow energy must not depend on accent hue.
+            float[] glowLuminance = ProductCatalog.ShippingModelIds()
+                .Select(SpinnerEnvironmentAccentCatalog.Resolve)
+                .Select(SpinnerAdaptiveBackdropRules.Luminance)
+                .ToArray();
+            Assert.That(glowLuminance.Max(), Is.LessThanOrEqualTo(SpinnerAdaptiveBackdropRules.MaximumLuminance + 0.001f));
+            Assert.That(glowLuminance.Max() - glowLuminance.Min(), Is.LessThan(0.01f));
+
+            foreach (string scenePath in ProductCatalog.ShippingScenePaths())
+            {
+                EditorSceneManager.OpenScene(scenePath, OpenSceneMode.Single);
+                SpinnerEnvironmentPresenter presenter =
+                    SpinnerEnvironmentPresenter.Install(scenePath);
+                Assert.That(presenter, Is.Not.Null, scenePath);
+                Camera camera = presenter.GetComponent<Camera>();
+                Assert.That(camera.allowHDR, Is.True, scenePath);
+                Assert.That(
+                    camera.GetUniversalAdditionalCameraData().renderPostProcessing,
+                    Is.True,
+                    scenePath);
+                Assert.That(
+                    SpinnerSharedPresentationGrading.TryReadExposure(
+                        camera,
+                        out float exposure,
+                        out UnityEngine.Rendering.Universal.TonemappingMode mode),
+                    Is.True,
+                    scenePath);
+                Assert.That(
+                    exposure,
+                    Is.EqualTo(SpinnerSharedPresentationGrading.PostExposureEv),
+                    scenePath);
+                Assert.That(
+                    mode,
+                    Is.EqualTo(SpinnerSharedPresentationGrading.Tonemapping),
+                    scenePath);
+                // Exactly one camera volume: the slide's controller must reuse
+                // the shared one instead of stacking a second exposure.
+                Assert.That(
+                    camera.GetComponents<UnityEngine.Rendering.Volume>().Length,
+                    Is.EqualTo(1),
+                    scenePath);
+            }
+        }
+
+        [Test]
+        public void GeeoneLightsIdenticallyInLibraryAndDetail()
+        {
+            SpinnerEnvironmentProfile profile = SpinnerEnvironmentCatalog.Profiles
+                .Single(candidate => candidate.ModelId == ProductCatalog.MetalThreeBladeModelId);
+            Assert.That(profile.LibraryLightScale, Is.EqualTo(1f));
+            Assert.That(profile.LibraryReflectionScale, Is.EqualTo(1f));
+
+            EditorSceneManager.OpenScene(profile.ScenePath, OpenSceneMode.Single);
+            SpinnerEnvironmentPresenter presenter =
+                SpinnerEnvironmentPresenter.Install(profile.ScenePath);
+            SpinnerImageBasedLightingController ibl = presenter.ImageBasedLighting;
+            Assert.That(ibl, Is.Not.Null);
+
+            presenter.SetLibraryPreviewActive(true, true);
+            float[] libraryIntensities = ReadAuthoredIntensities(profile);
+            float libraryReflection = RenderSettings.reflectionIntensity;
+            Color librarySky = RenderSettings.ambientSkyColor;
+            float libraryFill = ibl.VisibilityFillLight.intensity;
+
+            presenter.SetLibraryPreviewActive(false, true);
+            float[] detailIntensities = ReadAuthoredIntensities(profile);
+            Assert.That(detailIntensities, Is.EqualTo(libraryIntensities).Within(0.0001f));
+            Assert.That(RenderSettings.reflectionIntensity, Is.EqualTo(libraryReflection).Within(0.0001f));
+            AssertColor(RenderSettings.ambientSkyColor, librarySky);
+            Assert.That(ibl.VisibilityFillLight.intensity, Is.EqualTo(libraryFill).Within(0.0001f));
+
+            // The recipe itself: boosted soft-metal with per-light floors.
+            Assert.That(
+                ibl.VisibilityFillLight.intensity,
+                Is.EqualTo(SpinnerImageBasedLightingController.GeeoneVisibilityFillIntensity)
+                    .Within(0.0001f));
+            Assert.That(
+                detailIntensities[0],
+                Is.GreaterThanOrEqualTo(SpinnerImageBasedLightingController.GeeoneKeyLightFloor));
+            Assert.That(
+                RenderSettings.ambientSkyColor.r,
+                Is.GreaterThanOrEqualTo(
+                    SpinnerImageBasedLightingController.GeeoneAmbientFloorSky.r
+                        * SpinnerImageBasedLightingController.GeeoneAmbientFloorScale
+                        - 0.0001f));
+            Assert.That(ibl.PresentationTransitionActive, Is.False);
+        }
+
+        private static float[] ReadAuthoredIntensities(SpinnerEnvironmentProfile profile)
+        {
+            Light[] lights = Object.FindObjectsByType<Light>();
+            return profile.Lights
+                .Select(preset => lights.Single(light => light.name == preset.ObjectName).intensity)
+                .ToArray();
+        }
+
+        [Test]
+        public void LibraryDetailLightingSwitchTweensOnTheSharedPresentationCurve()
+        {
+            var from = new SpinnerImageBasedLightingController.PresentationLightingState(
+                0.48f, 0.42f, 0.10f, 0.6f, Color.black, Color.black, Color.black);
+            var to = new SpinnerImageBasedLightingController.PresentationLightingState(
+                1f, 1f, 0.30f, 1f, Color.white, Color.gray, Color.red);
+            var mid = SpinnerImageBasedLightingController.PresentationLightingState.Lerp(
+                from, to, 0.5f);
+            Assert.That(mid.LightScale, Is.EqualTo(0.74f).Within(0.0001f));
+            Assert.That(mid.ReflectionScale, Is.EqualTo(0.71f).Within(0.0001f));
+            Assert.That(mid.VisibilityFillIntensity, Is.EqualTo(0.20f).Within(0.0001f));
+            Assert.That(mid.AmbientSky.r, Is.EqualTo(0.5f).Within(0.0001f));
+
+            string ibl = File.ReadAllText(
+                "Assets/Scripts/Product/SpinnerImageBasedLightingController.cs");
+            StringAssert.Contains("SpinnerPresentationTransition.ResolveProgress(", ibl);
+            StringAssert.Contains("AdvancePresentationTransition(Time.unscaledDeltaTime)", ibl);
+            StringAssert.DoesNotContain("libraryPreviewActive ? 1.28f : 1f", ibl);
+            string presenter = File.ReadAllText(
+                "Assets/Scripts/Product/SpinnerEnvironmentPresenter.cs");
+            StringAssert.Contains(
+                "ImageBasedLighting?.SetLibraryPreviewActive(active, immediate)",
+                presenter);
+            string capture = File.ReadAllText(
+                "Assets/Editor/GeeoneShippingPreviewCapture.cs");
+            StringAssert.DoesNotContain("SetLightIntensity(\"Key_5000K\"", capture);
+            StringAssert.DoesNotContain("RenderSettings.reflectionIntensity = 0.62f", capture);
         }
 
         [Test]
@@ -738,6 +1090,8 @@ namespace FidgetingApp.Tests.Editor
             StringAssert.Contains("usesBakedSupportSurface", groundingStage);
             StringAssert.Contains("SetExperienceTint", presenter);
             StringAssert.Contains("ConfigureBackgroundSubjectGlow", presenter);
+            StringAssert.Contains("fanCardPedestalVolume", presenter);
+            StringAssert.Contains("FanCardForegroundGlowIntensity", presenter);
             StringAssert.DoesNotContain("angularVelocity", presenter);
             StringAssert.DoesNotContain("IosHaptics", presenter);
             StringAssert.DoesNotContain("FidgetHapticRouter", presenter);
@@ -827,8 +1181,22 @@ namespace FidgetingApp.Tests.Editor
                 "profile.BackgroundResourcePath",
                 imageBasedLighting);
             StringAssert.Contains("TryResolvePalette", imageBasedLighting);
+            StringAssert.Contains("weightChroma", imageBasedLighting);
+            StringAssert.Contains("|chroma-key", imageBasedLighting);
             StringAssert.Contains("ResolveModelAccent", imageBasedLighting);
             StringAssert.Contains("ResolveCoupledGlowColors", imageBasedLighting);
+            StringAssert.Contains("EnvironmentColorCoupling", imageBasedLighting);
+            StringAssert.Contains("FanCardEnvironmentColorCoupling", imageBasedLighting);
+            StringAssert.Contains("CoupleFanCardPalette", imageBasedLighting);
+            StringAssert.Contains("ResolveFanCardSampleMix", imageBasedLighting);
+            StringAssert.Contains("FanCardVisibleKeyViewportX", imageBasedLighting);
+            StringAssert.Contains("FanCardKeyPitchMin", imageBasedLighting);
+            StringAssert.Contains("FanCardForegroundGlowIntensity", imageBasedLighting);
+            StringAssert.Contains("FanCardPedestalGlowRadius", imageBasedLighting);
+            StringAssert.Contains("ResolveFanCardKeyRotation", imageBasedLighting);
+            StringAssert.Contains("ResolveFanCardContactShadowCenterX", imageBasedLighting);
+            StringAssert.Contains("FanCardAmbientChromaRetention", imageBasedLighting);
+            StringAssert.Contains("RetainAmbientLuminance", imageBasedLighting);
             StringAssert.Contains("_GlowScaleB", parallaxShader);
             StringAssert.Contains("_ShadowStrength", parallaxShader);
             StringAssert.Contains("color *= 1.0h - shadow", parallaxShader);
@@ -942,6 +1310,39 @@ namespace FidgetingApp.Tests.Editor
 
                 camera.aspect = 1290f / 2796f;
                 setLibraryPreview(false);
+                if (edc != null && edc.PreservesAuthoredDefaultPose)
+                {
+                    // The slide tile detail camera is an authored fixed pose, so
+                    // the library must keep that magnification instead of
+                    // refilling a boundary that scales with the phone aspect.
+                    float authored = edc.AuthoredDefaultDistance;
+                    Assert.That(
+                        edc.FramedDistance,
+                        Is.EqualTo(authored).Within(0.0005f),
+                        environment.ModelId + " detail must sit at the authored distance.");
+                    setLibraryPreview(true);
+                    Assert.That(
+                        edc.FramedDistance,
+                        Is.GreaterThanOrEqualTo(
+                            authored * EdcPortraitCameraFramer.LibraryDistanceScale - 0.0005f),
+                        environment.ModelId + " library must not be closer than detail.");
+                    Assert.That(
+                        edc.FramedDistance,
+                        Is.LessThanOrEqualTo(authored * 1.35f),
+                        environment.ModelId + " library must stay near the detail magnification.");
+                    Assert.That(
+                        ProductCameraFraming.TryGetProductBounds(target, out Bounds libraryBounds),
+                        Is.True);
+                    Vector2 projected = ProductCameraFraming.ProjectedViewportSize(
+                        camera,
+                        libraryBounds);
+                    Assert.That(projected.x, Is.LessThanOrEqualTo(
+                        EdcPortraitCameraFramer.LibrarySafetyFraction + 0.03f));
+                    Assert.That(projected.y, Is.LessThanOrEqualTo(
+                        EdcPortraitCameraFramer.LibrarySafetyFraction + 0.03f));
+                    continue;
+                }
+
                 AssertViewportBoundary(
                     environment.ModelId + " detail",
                     camera,
@@ -986,6 +1387,13 @@ namespace FidgetingApp.Tests.Editor
                     pixels,
                     width,
                     height);
+            SpinnerEnvironmentPalette chromaWeighted =
+                SpinnerImageBasedLightingController.AnalyzePixels(
+                    pixels,
+                    width,
+                    height,
+                    true);
+            Assert.That(chromaWeighted.Key.r, Is.GreaterThan(chromaWeighted.Key.b));
             Assert.That(palette.KeyViewport.x, Is.LessThan(0.5f));
             Assert.That(palette.KeyViewport.y, Is.GreaterThan(0.5f));
             Assert.That(palette.Sky.maxColorComponent, Is.GreaterThan(
@@ -1051,12 +1459,12 @@ namespace FidgetingApp.Tests.Editor
                 Is.LessThan(SpinnerImageBasedLightingController
                     .ResolveSoftSpinnerLightTrim(
                         ProductCatalog.MetalThreeBladeModelId)));
+            // GEEONE keeps the full soft trim and layers its own boosted recipe
+            // on top in both library and detail (rev-007, device accepted).
             Assert.That(
                 SpinnerImageBasedLightingController.ResolveSoftSpinnerLightTrim(
                     ProductCatalog.MetalThreeBladeModelId),
-                Is.LessThan(SpinnerImageBasedLightingController
-                    .ResolveSoftSpinnerLightTrim(
-                        ProductCatalog.GoldFourWingModelId)));
+                Is.EqualTo(1f));
             Assert.That(
                 SpinnerImageBasedLightingController.ResolveSoftSpinnerLightTrim(
                     ProductCatalog.GraphiteTwoLobeModelId),
@@ -1067,10 +1475,27 @@ namespace FidgetingApp.Tests.Editor
                 Is.EqualTo(1f));
             Assert.That(
                 SpinnerImageBasedLightingController.SoftBrightMetalAlbedoScale,
-                Is.InRange(0.6f, 0.75f));
+                Is.InRange(0.85f, 0.95f));
             Assert.That(
                 SpinnerImageBasedLightingController.SoftBrightMetalSmoothnessCap,
                 Is.InRange(0.6f, 0.75f));
+            Assert.That(
+                SpinnerImageBasedLightingController.EnvironmentColorCoupling,
+                Is.InRange(0.10f, 0.18f));
+            Assert.That(
+                SpinnerImageBasedLightingController.FanCardEnvironmentColorCoupling,
+                Is.InRange(0.20f, 0.34f));
+            Assert.That(
+                SpinnerImageBasedLightingController.FanCardEnvironmentColorCoupling,
+                Is.GreaterThan(
+                    SpinnerImageBasedLightingController.EnvironmentColorCoupling));
+            Assert.That(
+                SpinnerImageBasedLightingController.AmbientChromaRetention,
+                Is.InRange(0.24f, 0.40f));
+            Assert.That(
+                SpinnerImageBasedLightingController.FanCardAmbientChromaRetention,
+                Is.GreaterThan(
+                    SpinnerImageBasedLightingController.AmbientChromaRetention));
 
             Color brightMetal = new Color(0.80f, 0.40f, 0.20f, 0.65f);
             Color softenedMetal = SpinnerImageBasedLightingController
@@ -1081,6 +1506,71 @@ namespace FidgetingApp.Tests.Editor
             Assert.That(softenedMetal.b / softenedMetal.r,
                 Is.EqualTo(brightMetal.b / brightMetal.r).Within(0.0001f));
             Assert.That(softenedMetal.a, Is.EqualTo(brightMetal.a));
+
+            Color saturatedAmbient = new Color(0.20f, 0.55f, 0.90f, 1f);
+            Color restrainedAmbient = SpinnerImageBasedLightingController
+                .RetainAmbientLuminance(saturatedAmbient);
+            Color fanAmbient = SpinnerImageBasedLightingController
+                .RetainAmbientLuminance(
+                    saturatedAmbient,
+                    SpinnerImageBasedLightingController.FanCardAmbientChromaRetention);
+            float sourceChroma = Mathf.Max(saturatedAmbient.r, saturatedAmbient.g, saturatedAmbient.b)
+                - Mathf.Min(saturatedAmbient.r, saturatedAmbient.g, saturatedAmbient.b);
+            float restrainedChroma = Mathf.Max(restrainedAmbient.r, restrainedAmbient.g, restrainedAmbient.b)
+                - Mathf.Min(restrainedAmbient.r, restrainedAmbient.g, restrainedAmbient.b);
+            float fanChroma = Mathf.Max(fanAmbient.r, fanAmbient.g, fanAmbient.b)
+                - Mathf.Min(fanAmbient.r, fanAmbient.g, fanAmbient.b);
+            Assert.That(restrainedChroma, Is.LessThan(sourceChroma));
+            Assert.That(fanChroma, Is.GreaterThan(restrainedChroma));
+
+            var warmPalette = new SpinnerEnvironmentPalette(
+                new Color(0.22f, 0.18f, 0.14f),
+                new Color(0.16f, 0.12f, 0.10f),
+                new Color(0.06f, 0.04f, 0.03f),
+                new Color(1.00f, 0.52f, 0.22f),
+                new Color(0.42f, 0.58f, 0.78f),
+                new Vector2(0.78f, 0.84f));
+            Color model = new Color(0.40f, 0.385f, 0.36f, 1f);
+            SpinnerImageBasedLightingController.ResolveCoupledGlowColors(
+                warmPalette,
+                model,
+                Vector2.zero,
+                out Color rotorLeft,
+                out _);
+            SpinnerImageBasedLightingController.ResolveCoupledGlowColors(
+                warmPalette,
+                model,
+                Vector2.zero,
+                SpinnerImageBasedLightingController.FanCardEnvironmentColorCoupling,
+                out Color fanLeft,
+                out _);
+            Assert.That(fanLeft.r - fanLeft.b, Is.GreaterThan(rotorLeft.r - rotorLeft.b));
+
+            var greyCanyonSample = new SpinnerEnvironmentPalette(
+                new Color(0.12f, 0.13f, 0.12f),
+                new Color(0.08f, 0.09f, 0.08f),
+                new Color(0.02f, 0.02f, 0.02f),
+                new Color(0.26f, 0.28f, 0.25f),
+                new Color(0.22f, 0.24f, 0.23f),
+                new Vector2(0.50f, 0.38f));
+            var authoredFanLights = new SpinnerEnvironmentPalette(
+                new Color(0.22f, 0.205f, 0.185f),
+                new Color(0.10f, 0.092f, 0.082f),
+                new Color(0.028f, 0.025f, 0.022f),
+                new Color(1.00f, 0.88f, 0.76f),
+                new Color(0.58f, 0.68f, 0.78f),
+                new Vector2(0.50f, 0.94f));
+            SpinnerEnvironmentPalette coupledGrey =
+                SpinnerImageBasedLightingController.CoupleFanCardPalette(
+                    greyCanyonSample,
+                    authoredFanLights);
+            Assert.That(coupledGrey.Key.r - coupledGrey.Key.b,
+                Is.GreaterThan(0.18f));
+            Assert.That(
+                coupledGrey.KeyViewport.x,
+                Is.EqualTo(
+                    SpinnerImageBasedLightingController.FanCardVisibleKeyViewportX)
+                    .Within(0.001f));
 
             Color source = new Color(3f, 1.5f, 0.75f, 0.2f);
             Color limited = SpinnerImageBasedLightingController

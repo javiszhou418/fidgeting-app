@@ -3,6 +3,7 @@ using System.Linq;
 using CodexUnityLab;
 using FidgetingApp.EDC.EditorTools;
 using FidgetingApp.EDC;
+using FidgetingApp.EDC.Gate12R002;
 using FidgetingApp.Product;
 using NUnit.Framework;
 using UnityEditor;
@@ -73,7 +74,7 @@ namespace FidgetingApp.EDC.Tests.Editor
         }
 
         [Test]
-        public void AlloyClick766HzAudio_IsWiredToAuthorizedDetentCrossingsOnly()
+        public void AlloyClick766HzAudio_RendersOnlyAuthorizedMechanismSemantics()
         {
             EdcSliderController controller = root.GetComponent<EdcSliderController>();
             MagneticSlideDetentAudio[] renderers =
@@ -113,11 +114,17 @@ namespace FidgetingApp.EDC.Tests.Editor
                 Is.True);
             Assert.That(
                 MagneticSlideAudioModel.ShouldRender(FidgetSemanticEvent.Breakaway),
-                Is.False);
+                Is.True);
             Assert.That(
                 MagneticSlideAudioModel.ShouldRender(FidgetSemanticEvent.DetentCaptured),
-                Is.False,
-                "Capture must not create a second click after the crossing sound.");
+                Is.True);
+            Assert.That(
+                MagneticSlideAudioModel.ShouldRender(
+                    FidgetSemanticEvent.MagneticEdgeProbe),
+                Is.True);
+            Assert.That(
+                MagneticSlideAudioModel.ShouldRender(FidgetSemanticEvent.Reset),
+                Is.False);
         }
 
         [Test]
@@ -242,7 +249,8 @@ namespace FidgetingApp.EDC.Tests.Editor
             Assert.That(EdcImportPipeline.SilverNormalScale, Is.EqualTo(0.28f));
             Assert.That(silver.GetFloat("_SpecularHighlights"),
                 Is.EqualTo(EdcImportPipeline.SilverRealtimeSpecular));
-            Assert.That(silver.IsKeywordEnabled("_SPECULARHIGHLIGHTS_OFF"), Is.True);
+            Assert.That(silver.IsKeywordEnabled("_SPECULARHIGHLIGHTS_OFF"), Is.False);
+            Assert.That(EdcImportPipeline.SilverRealtimeSpecular, Is.EqualTo(1f));
             Assert.That(EdcImportPipeline.SilverRoughnessInfluence, Is.EqualTo(0.58f));
             Color silverColor = silver.GetColor("_BaseColor");
             Assert.That(silverColor.r,
@@ -298,7 +306,8 @@ namespace FidgetingApp.EDC.Tests.Editor
                     out SpinnerEnvironmentProfile environment),
                 Is.True);
             Assert.That(environment.ReflectionIntensity, Is.EqualTo(0.56f));
-            Assert.That(environment.LibraryReflectionScale, Is.EqualTo(0.28f));
+            Assert.That(environment.LibraryLightScale, Is.EqualTo(0.48f));
+            Assert.That(environment.LibraryReflectionScale, Is.EqualTo(0.42f));
             Assert.That(environment.Lights.Count, Is.EqualTo(2));
             Assert.That(environment.Lights[0].ObjectName, Is.EqualTo("Key_UpperLeft"));
             Assert.That(environment.Lights[0].Intensity, Is.EqualTo(0.54f));
@@ -309,19 +318,19 @@ namespace FidgetingApp.EDC.Tests.Editor
                 .ToArray();
             Assert.That(
                 serializedLights.Single(light => light.name == "Key_UpperLeft").intensity,
-                Is.EqualTo(0.54f));
+                Is.EqualTo(MagneticSlideShippingLighting.BalancedKeyIntensity));
             Assert.That(
                 serializedLights.Single(light => light.name == "CoolFill").intensity,
-                Is.EqualTo(0.42f));
+                Is.EqualTo(MagneticSlideShippingLighting.BalancedFillIntensity));
             Assert.That(
                 SpinnerImageBasedLightingController.MagneticSlideSoftboxIntensity,
-                Is.EqualTo(0.26f));
+                Is.EqualTo(0.40f));
             Assert.That(
                 SpinnerImageBasedLightingController.MagneticSlideReflectionBaseScale,
                 Is.EqualTo(1f));
             Assert.That(
                 SpinnerImageBasedLightingController.MagneticSlideOpposingStripIntensity,
-                Is.EqualTo(0.18f));
+                Is.EqualTo(0.26f));
             Assert.That(
                 SpinnerImageBasedLightingController.MagneticSlideSoftboxHorizontalCore,
                 Is.EqualTo(0.22f));
@@ -371,13 +380,19 @@ namespace FidgetingApp.EDC.Tests.Editor
         [Test]
         public void DetailCamera_UsesFrontTopProductScaleAndExpandedTouchSurface()
         {
-            Camera camera = scene.GetRootGameObjects()
-                .SelectMany(sceneRoot => sceneRoot.GetComponentsInChildren<Camera>(true))
-                .Single();
+            Camera camera = Camera.main;
             Assert.That(camera, Is.Not.Null);
             EdcPortraitCameraFramer framer = camera.GetComponent<EdcPortraitCameraFramer>();
             Assert.That(framer, Is.Not.Null);
-            Assert.That(framer.Target, Is.EqualTo(root));
+            MagneticSlideTileShippingCoordinator coordinator =
+                UnityEngine.Object.FindFirstObjectByType<
+                    MagneticSlideTileShippingCoordinator>(
+                    FindObjectsInactive.Include);
+            Assert.That(coordinator, Is.Not.Null);
+            Assert.That(
+                framer.Target,
+                Is.EqualTo(coordinator.CandidateModel.transform));
+            Assert.That(framer.UsesStableLocalBounds, Is.True);
             Assert.That(
                 framer.ScreenWidthFraction,
                 Is.EqualTo(EdcPortraitCameraFramer.DefaultScreenWidthFraction));
@@ -391,10 +406,11 @@ namespace FidgetingApp.EDC.Tests.Editor
                 Is.EqualTo(EdcPortraitCameraFramer.DefaultFocalLengthMillimeters));
 
             camera.aspect = 1290f / 2796f;
-            Require(root, "SliderGroup").localPosition = Vector3.zero;
             framer.FrameNow();
             Assert.That(
-                ProductCameraFraming.TryGetProductBounds(root, out Bounds bounds),
+                ProductCameraFraming.TryGetProductBounds(
+                    coordinator.CandidateModel.transform,
+                    out Bounds bounds),
                 Is.True);
             Vector2 viewportSize = ProductCameraFraming.ProjectedViewportSize(
                 camera,
@@ -409,7 +425,14 @@ namespace FidgetingApp.EDC.Tests.Editor
                 Mathf.Max(
                     viewportSize.x / framer.ScreenWidthFraction,
                     viewportSize.y / framer.ScreenHeightFraction),
-                Is.InRange(0.90f, 1.03f));
+                Is.InRange(0.30f, 1.03f),
+                "Runtime wiring must preserve the approved Build 41 camera pose.");
+            Assert.That(
+                camera.transform.position,
+                Is.EqualTo(new Vector3(
+                    0f,
+                    0.07940412f,
+                    -0.1366955f)));
 
             Vector3 detailBackward = (camera.transform.position - bounds.center).normalized;
             Assert.That(
@@ -431,24 +454,22 @@ namespace FidgetingApp.EDC.Tests.Editor
                 Is.LessThan(0.001f),
                 "The rail must read as a horizontal gesture in the detail view.");
 
-            Transform interactionSurface = Require(
-                root,
-                "SliderGroup/InteractionSurface");
-            BoxCollider surface = interactionSurface.GetComponent<BoxCollider>();
+            EdcSliderController controller =
+                coordinator.CandidateModel.GetComponent<EdcSliderController>();
+            BoxCollider surface = controller.InteractionSurface as BoxCollider;
             Assert.That(surface, Is.Not.Null);
             Assert.That(
-                surface.size,
-                Is.EqualTo(EdcSliderController.DefaultInteractionSurfaceSize));
-            Assert.That(surface.size.x, Is.GreaterThan(0.08f));
-            Assert.That(surface.size.z, Is.GreaterThan(0.047f));
+                surface.transform.parent,
+                Is.SameAs(coordinator.Mechanism.TopLocalSlide));
+            Assert.That(surface.size.x, Is.GreaterThanOrEqualTo(0.030f));
+            Assert.That(surface.size.y, Is.GreaterThanOrEqualTo(0.049f));
+            Assert.That(surface.size.z, Is.GreaterThanOrEqualTo(0.004f));
         }
 
         [Test]
         public void LibraryPreview_UsesReducedMagneticSlideOccupancy()
         {
-            Camera camera = scene.GetRootGameObjects()
-                .SelectMany(sceneRoot => sceneRoot.GetComponentsInChildren<Camera>(true))
-                .Single();
+            Camera camera = Camera.main;
             EdcPortraitCameraFramer framer = camera.GetComponent<EdcPortraitCameraFramer>();
             ProductFramingProfile framing = ProductFramingCatalog.Resolve(
                 SpinnerEnvironmentCatalog.EdcScenePath);

@@ -15,6 +15,11 @@ namespace ThreeBladeEDC.EditorTools
             public Material inset;
             public Material floor;
             public Cubemap studioReflection;
+            // GEEONE 龙鳞三叶 (metal-three-blade, ModelPipeline Gate 07 rev-005): satin steel roughness 0.36 -> smoothness 0.64,
+            // turned 14-sector dish roughness 0.30 -> 0.70 (URP has no anisotropy; the radial-brushed shader stands in), dark static hub core.
+            public Material geeoneSatin;
+            public Material geeoneDisc;
+            public Material geeoneHubDark;
         }
 
         private const string GeneratedRoot = "Assets/_Fidgeting/Generated";
@@ -56,7 +61,15 @@ namespace ThreeBladeEDC.EditorTools
                 floor = CreateOrUpdateMaterial(
                     "M_StudioFloor", new Color32(0x01, 0x02, 0x03, 0xFF), 0f, 0.08f, null, null, 0f),
                 studioReflection = CreateOrUpdateStudioReflection(
-                    TexturesFolder + "/C_StudioReflection.asset")
+                    TexturesFolder + "/C_StudioReflection.asset"),
+                geeoneSatin = CreateOrUpdateMaterial(
+                    "M_GeeoneSatin", new Color32(0xC6, 0xC8, 0xCA, 0xFF), 1f, 0.64f, sandblast, sandblastNormal, 0.10f),
+                // Plain URP Lit on purpose: the 14 planar dish sectors must read as facets (tonal steps between
+                // neighbouring planes); the radial-brushed shader flattened them into one grey disc.
+                geeoneDisc = CreateOrUpdateMaterial(
+                    "M_GeeoneDiscTurned", new Color32(0xCC, 0xCE, 0xD0, 0xFF), 1f, 0.68f, radialBrush, radialNormal, 0.05f),
+                geeoneHubDark = CreateOrUpdateMaterial(
+                    "M_GeeoneHubDark", new Color32(0x14, 0x15, 0x18, 0xFF), 1f, 0.55f, sandblast, sandblastNormal, 0.06f)
             };
 
             // URP strips emission variants unless the source material opts

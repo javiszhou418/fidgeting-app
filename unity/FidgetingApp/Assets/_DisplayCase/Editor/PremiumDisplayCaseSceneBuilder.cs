@@ -521,7 +521,93 @@ namespace FidgetingApp.DisplayCase.Editor
             Debug.Log($"Transparent exploded view: {outputDirectory}");
         }
 
+        /// <summary>
+        /// R053 (user 2026-09-09): the reveal shows the shipping GEEONE
+        /// dragon-scale tri-spinner (ModelPipeline metal-three-blade Gate 10
+        /// export) with its approved Gate 07 materials, not the retired
+        /// procedural three-blade frame. Same two kinematic groups as the
+        /// product scene: Rotor_Root under RotorVisual, caps + hub core under
+        /// HubVisual. No bearing is visible on the GEEONE design.
+        /// </summary>
         private static GameObject BuildThreeBladeDisplayPrize()
+        {
+            GameObject modelAsset = AssetDatabase.LoadAssetAtPath<GameObject>(
+                ThreeBladeEDC.EditorTools.ThreeBladeSceneBuilder.GeeoneModelPath);
+            if (modelAsset == null)
+            {
+                throw new FileNotFoundException(
+                    "The GEEONE tri-spinner FBX is missing.",
+                    ThreeBladeEDC.EditorTools.ThreeBladeSceneBuilder.GeeoneModelPath);
+            }
+
+            GameObject root = new GameObject("ThreeBladeDisplayPrize");
+            Transform rotor = Child(root.transform, "RotorVisual");
+            Transform hub = Child(root.transform, "HubVisual");
+
+            GameObject instance = (GameObject)PrefabUtility.InstantiatePrefab(modelAsset);
+            instance.name = "GeeoneTriSpinner_Source";
+            // The case slot rotates content +90° about X, so local -Y faces
+            // the viewer and local -Z points to the top of the screen. The
+            // GEEONE bottom is a recessed cup that shows the dark hub core
+            // (diag 2026-09-09), so flip the spinner: Cap_Top toward the
+            // viewer, the Blender twelve-o'clock blade (Unity -Z) screen-up.
+            instance.transform.localRotation = Quaternion.Euler(0f, 0f, 180f);
+            PrefabUtility.UnpackPrefabInstance(
+                instance,
+                PrefabUnpackMode.Completely,
+                InteractionMode.AutomatedAction);
+
+            Material satin = RequireThreeBladeMaterial("M_GeeoneSatin");
+            Material disc = RequireThreeBladeMaterial("M_GeeoneDiscTurned");
+            Material hubDark = RequireThreeBladeMaterial("M_GeeoneHubDark");
+
+            ReparentGeeonePart(instance.transform, "Rotor_Root", rotor);
+            ReparentGeeonePart(instance.transform, "Cap_Top", hub);
+            ReparentGeeonePart(instance.transform, "Cap_Bottom", hub);
+            ReparentGeeonePart(instance.transform, "Hub_Core", hub);
+            UnityEngine.Object.DestroyImmediate(instance);
+
+            foreach (Renderer renderer in root.GetComponentsInChildren<Renderer>(true))
+            {
+                renderer.enabled = true;
+                renderer.shadowCastingMode = ShadowCastingMode.On;
+                Material[] assigned = renderer.sharedMaterials;
+                for (int index = 0; index < assigned.Length; index++)
+                {
+                    string name = assigned[index] != null ? assigned[index].name : string.Empty;
+                    assigned[index] = name.Contains("DiscTurned")
+                        ? disc
+                        : name.Contains("HubDark") ? hubDark : satin;
+                }
+                renderer.sharedMaterials = assigned;
+            }
+            foreach (Collider collider in root.GetComponentsInChildren<Collider>(true))
+            {
+                UnityEngine.Object.DestroyImmediate(collider);
+            }
+            return root;
+        }
+
+        private static void ReparentGeeonePart(Transform source, string name, Transform parent)
+        {
+            Transform part = null;
+            foreach (Transform candidate in source.GetComponentsInChildren<Transform>(true))
+            {
+                if (candidate.name == name)
+                {
+                    part = candidate;
+                    break;
+                }
+            }
+            if (part == null)
+            {
+                throw new MissingReferenceException(
+                    $"GEEONE FBX has no '{name}' node.");
+            }
+            part.SetParent(parent, true);
+        }
+
+        private static GameObject BuildLegacyProceduralThreeBladeDisplayPrize()
         {
             GameObject root = new GameObject("ThreeBladeDisplayPrize");
             Transform rotor = Child(root.transform, "RotorVisual");

@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using CodexUnityLab;
+using FidgetingApp.EDC.Gate12R002;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
@@ -17,6 +18,10 @@ namespace FidgetingApp.EDC
         [SerializeField] private Transform sliderGroup;
         [SerializeField] private Camera interactionCamera;
         [SerializeField] private Collider interactionSurface;
+        [SerializeField] private MagneticSlideTileShippingCoordinator
+            shippingCoordinator;
+        [SerializeField] private SharedPresentationGestureController
+            presentationGestures;
         [SerializeField] private LinearMagneticDetentProfile magneticProfile;
         [SerializeField, Min(0.001f)] private float travelDistance =
             LinearMagneticDetentProfile.HeavyTravelMeters;
@@ -64,12 +69,36 @@ namespace FidgetingApp.EDC
         private Transform[] recoilVisuals = Array.Empty<Transform>();
         private Vector3[] recoilClosedPositions = Array.Empty<Vector3>();
         private Quaternion[] recoilClosedRotations = Array.Empty<Quaternion>();
+        private ShippingGestureMode shippingGestureMode;
+        private float shippingGestureStartTravelMeters;
+        private float shippingGestureStartAngleDegrees;
+        private Vector3 shippingGestureStartRadialWorld;
+        private Vector3 shippingGestureLastRadialWorld;
+        private Vector3 shippingGestureRotationAxisWorld;
+        private bool shippingGestureHasRotationSample;
+        private float shippingGestureAccumulatedAngleDegrees;
+        private float shippingGestureLastAngleDegrees;
+        private float shippingGestureLastTime;
+        private bool shippingWaitForTouchesToClear;
+        private MagneticSlideTileShippingMechanism subscribedShippingMechanism;
+        private bool lastPointerHitProduct;
+        private bool lastPointerBlockedByUi;
+        private readonly MagneticSlideTileDeviceDrive deviceDrive = new();
+        private Vector3 deviceGravityWorld;
+        private Vector3 deviceAccelerationWorld;
+        private Vector3 devicePhoneAngularVelocityWorld;
+        private bool deviceSampleAvailable;
 
         public event Action<float> InteractionGestureCompleted;
         public event Action<FidgetSemanticEvent, float> SemanticEventRaised;
 
-        public float SlideProgress => slideProgress;
-        public float TravelDistance => travelDistance;
+        public float SlideProgress => shippingCoordinator != null
+            ? shippingCoordinator.Mechanism.TravelMeters
+                / shippingCoordinator.Settings.MaximumTravelMeters
+            : slideProgress;
+        public float TravelDistance => shippingCoordinator != null
+            ? shippingCoordinator.Settings.MaximumTravelMeters
+            : travelDistance;
         public bool IsDragging => dragging;
         public bool IsSettling => poweredDriveActive
             || (magneticTrack != null
@@ -87,7 +116,23 @@ namespace FidgetingApp.EDC
         public float GestureFrequencyNormalized => gestureFrequencyNormalized;
         public Camera InteractionCamera => interactionCamera;
         public Collider InteractionSurface => interactionSurface;
+        public MagneticSlideTileShippingCoordinator ShippingCoordinator =>
+            shippingCoordinator;
+        public bool UsesShippingMechanism => shippingCoordinator != null;
+        public bool LastPointerHitProduct => lastPointerHitProduct;
+        public bool LastPointerBlockedByUi => lastPointerBlockedByUi;
+        public SharedPresentationGestureController PresentationGestures =>
+            presentationGestures;
+        public int TouchReceiptCount { get; private set; }
+        public int InputUpdateCount { get; private set; }
+        public int SlideInputCount { get; private set; }
+        public int RotationInputCount { get; private set; }
+        public int SemanticEventCount { get; private set; }
+        public int LastSemanticDetentDirection { get; private set; }
+        public int LastSemanticDetentIndex { get; private set; }
         public bool IsAssistantDriving => assistantDriveActive;
+        public bool IsDeviceDriving => deviceDrive.IsActive;
+        public MagneticSlideTileDeviceSample LastDeviceSample { get; private set; }
         public LinearMagneticDetentProfile Profile => magneticProfile;
         public MagneticDetentState MotionState => magneticTrack != null
             ? magneticTrack.State
@@ -135,8 +180,44 @@ namespace FidgetingApp.EDC
             InitializeTrack(slideProgress);
         }
 
+        public void ConfigureShipping(
+            MagneticSlideTileShippingCoordinator coordinator,
+            Camera camera,
+            Collider surface,
+            LinearMagneticDetentProfile hapticProfile,
+            SharedPresentationGestureController sharedPresentationGestures)
+        {
+            UnsubscribeShippingMechanism();
+            shippingCoordinator = coordinator;
+            sliderGroup = coordinator != null
+                ? coordinator.Mechanism.transform
+                : null;
+            interactionCamera = camera;
+            interactionSurface = surface;
+            magneticProfile = hapticProfile;
+            presentationGestures = sharedPresentationGestures;
+            dragging = false;
+            pointerWasPressed = false;
+            shippingWaitForTouchesToClear = false;
+            shippingGestureMode = ShippingGestureMode.None;
+            ResetGestureTelemetry(false);
+            SubscribeShippingMechanism();
+        }
+
         private void Awake()
         {
+            if (shippingCoordinator != null)
+            {
+                dragging = false;
+                pointerWasPressed = false;
+                shippingGestureMode = ShippingGestureMode.None;
+                SubscribeShippingMechanism();
+                Debug.Log(
+                    "[MagneticSlideRuntime] input-ready "
+                    + $"surface={interactionSurface?.name ?? "missing"} "
+                    + $"profile={magneticProfile?.name ?? "missing"}");
+                return;
+            }
             if (sliderGroup != null)
             {
                 closedLocalPosition = sliderGroup.localPosition;
@@ -147,8 +228,28 @@ namespace FidgetingApp.EDC
             InitializeTrack(slideProgress);
         }
 
+        private void OnEnable()
+        {
+            SubscribeShippingMechanism();
+        }
+
         private void Update()
         {
+            if (shippingCoordinator != null)
+            {
+                InputUpdateCount++;
+                UpdateShippingInput();
+                AdvanceShippingDeviceDrive(Mathf.Max(0f, Time.unscaledDeltaTime));
+                DecayGestureTelemetry(Mathf.Max(0f, Time.unscaledDeltaTime));
+                if (!dragging)
+                {
+                    activitySpeedRadians = Mathf.Lerp(
+                        activitySpeedRadians,
+                        0f,
+                        1f - Mathf.Exp(-Time.unscaledDeltaTime / 0.22f));
+                }
+                return;
+            }
             if (TryReadTouch(out Vector2 touchPosition, out bool touchPressed))
             {
                 UpdatePointer(touchPosition, touchPressed);
@@ -195,6 +296,11 @@ namespace FidgetingApp.EDC
             poweredDriveActive = false;
             assistantDriveActive = false;
             interactionHapticsAuthorized = false;
+            shippingGestureMode = ShippingGestureMode.None;
+            shippingWaitForTouchesToClear = false;
+            deviceDrive.Cancel();
+            deviceSampleAvailable = false;
+            UnsubscribeShippingMechanism();
             ResetEdgeProbeState();
             ResetFingerIntent();
             ResetGestureTelemetry(false);
@@ -230,6 +336,14 @@ namespace FidgetingApp.EDC
 
         public void SetSlideProgress(float progress)
         {
+            if (shippingCoordinator != null)
+            {
+                shippingCoordinator.TryApplySlideInput(
+                    Mathf.Clamp01(progress)
+                    * shippingCoordinator.Settings.MaximumTravelMeters,
+                    false);
+                return;
+            }
             EnsureProfile();
             EnsureTrack();
             dragging = false;
@@ -257,12 +371,25 @@ namespace FidgetingApp.EDC
         /// </summary>
         public void ResetToDefaultDetent()
         {
+            if (shippingCoordinator != null)
+            {
+                shippingCoordinator.ResetShippingPose();
+                accumulatedActivityDegrees = 0f;
+                activitySpeedRadians = 0f;
+                dragging = false;
+                pointerWasPressed = false;
+                shippingGestureMode = ShippingGestureMode.None;
+                ResetGestureTelemetry(false);
+                return;
+            }
             EnsureProfile();
             SetSlideProgress(magneticProfile.DefaultPositionMeters / travelDistance);
         }
 
         public void SetAssistantDrive(bool active, float targetSpeedMetersPerSecond)
         {
+            if (shippingCoordinator != null)
+                return;
             assistantDriveActive = active;
             assistantTargetSpeedMetersPerSecond = Mathf.Clamp(
                 Mathf.Abs(targetSpeedMetersPerSecond),
@@ -299,7 +426,136 @@ namespace FidgetingApp.EDC
             ResetEdgeProbeState();
             ResetFingerIntent();
             ResetGestureTelemetry(false);
+            shippingGestureMode = ShippingGestureMode.None;
             magneticTrack?.Release();
+        }
+
+        /// <summary>
+        /// World-space Core Motion sample (gravity and user acceleration in g,
+        /// phone angular velocity in Unity sign) from the device motion
+        /// controller. The controller only supplies samples; the shipping
+        /// mechanism keeps pose, interlock, and semantic-event authority.
+        /// </summary>
+        public void SetDeviceMotionSample(
+            Vector3 gravityWorld,
+            Vector3 userAccelerationWorld,
+            Vector3 phoneAngularVelocityWorld,
+            bool available)
+        {
+            deviceGravityWorld = gravityWorld;
+            deviceAccelerationWorld = userAccelerationWorld;
+            devicePhoneAngularVelocityWorld = phoneAngularVelocityWorld;
+            if (deviceSampleAvailable && !available)
+            {
+                deviceDrive.Cancel();
+            }
+            deviceSampleAvailable = available;
+        }
+
+        /// <summary>
+        /// Maps the world sample onto the mechanism: gravity torque on the
+        /// moving top about the carrier axis, phone twist about that axis in
+        /// the mechanism's angle sign, and acceleration along the slide.
+        /// </summary>
+        public static MagneticSlideTileDeviceSample ResolveDeviceSample(
+            Vector3 gravityWorld,
+            Vector3 userAccelerationWorld,
+            Vector3 phoneAngularVelocityWorld,
+            Vector3 rotationAxisWorld,
+            Vector3 movingTopLeverWorld,
+            Vector3 slideDirectionWorld)
+        {
+            float torque = FidgetingApp.Product.DeviceMotionMechanismCoupling
+                .ResolveGravityTorqueNormalized(
+                    movingTopLeverWorld,
+                    gravityWorld,
+                    rotationAxisWorld);
+            torque = FidgetingApp.Product.DeviceMotionMechanismCoupling.ApplyDeadZone(
+                torque,
+                FidgetingApp.Product.DeviceMotionMechanismCoupling.GravityTorqueDeadZone);
+            float phoneRate = rotationAxisWorld.sqrMagnitude > Mathf.Epsilon
+                ? Vector3.Dot(phoneAngularVelocityWorld, rotationAxisWorld.normalized)
+                : 0f;
+            phoneRate = Mathf.Clamp(
+                FidgetingApp.Product.DeviceMotionMechanismCoupling.ApplyDeadZone(
+                    phoneRate,
+                    FidgetingApp.Product.DeviceMotionMechanismCoupling
+                        .RotationRateDeadZoneRadians),
+                -FidgetingApp.Product.DeviceMotionMechanismCoupling.MaximumRotationRateRadians,
+                FidgetingApp.Product.DeviceMotionMechanismCoupling.MaximumRotationRateRadians);
+            float slideAcceleration = slideDirectionWorld.sqrMagnitude > Mathf.Epsilon
+                ? Vector3.Dot(userAccelerationWorld, slideDirectionWorld.normalized)
+                : 0f;
+            return new MagneticSlideTileDeviceSample(
+                torque,
+                phoneRate * Mathf.Rad2Deg,
+                slideAcceleration);
+        }
+
+        private void AdvanceShippingDeviceDrive(float deltaTime)
+        {
+            if (shippingCoordinator == null
+                || shippingCoordinator.Mechanism == null
+                || !shippingCoordinator.CandidatePreviewEnabled)
+            {
+                return;
+            }
+            if (!deviceSampleAvailable
+                || dragging
+                || pointerWasPressed
+                || shippingWaitForTouchesToClear
+                || presentationGestures?.IsPinching == true
+                || presentationGestures?.IsOrbiting == true)
+            {
+                deviceDrive.Cancel();
+                return;
+            }
+
+            MagneticSlideTileShippingMechanism mechanism = shippingCoordinator.Mechanism;
+            MagneticSlideTileMechanismSettings settings = shippingCoordinator.Settings;
+            MagneticSlideTileDeviceSample sample = ResolveDeviceSample(
+                deviceGravityWorld,
+                deviceAccelerationWorld,
+                devicePhoneAngularVelocityWorld,
+                mechanism.RotationAxisWorld,
+                mechanism.ResolveMovingTopLeverWorld(),
+                mechanism.SlideDirectionWorld);
+            LastDeviceSample = sample;
+            MagneticSlideTileDeviceState state = new(
+                mechanism.TravelMeters,
+                settings.MaximumTravelMeters,
+                mechanism.AtMaximumTravel,
+                mechanism.IsAngleAligned,
+                mechanism.RotationBrokenAway,
+                mechanism.UnwrappedAngleDegrees,
+                settings.DetentStepDegrees,
+                settings.BreakawayDegrees,
+                settings.CaptureRadiusDegrees);
+            MagneticSlideTileDeviceCommand command = deviceDrive.Step(deltaTime, sample, state);
+            ApplyDeviceCommand(command);
+        }
+
+        private void ApplyDeviceCommand(in MagneticSlideTileDeviceCommand command)
+        {
+            // Device tilt, twist, and flick are explicit user input, so every
+            // resulting pose change is user-authorized and may emit semantics.
+            switch (command.Kind)
+            {
+                case MagneticSlideTileDeviceCommandKind.BeginRotation:
+                    shippingCoordinator.Mechanism.TryBeginRotation(
+                        command.BreakawaySignDegrees,
+                        true);
+                    break;
+                case MagneticSlideTileDeviceCommandKind.SetAngle:
+                    shippingCoordinator.Mechanism.TrySetAngle(command.Value, true);
+                    break;
+                case MagneticSlideTileDeviceCommandKind.CaptureAngle:
+                    shippingCoordinator.Mechanism.TryCaptureNearestDetent(command.Value, true);
+                    break;
+                case MagneticSlideTileDeviceCommandKind.SetTravel:
+                    shippingCoordinator.Mechanism.TrySetTravel(command.Value, true);
+                    break;
+            }
         }
 
         private void SetProfile(LinearMagneticDetentProfile profile)
@@ -347,6 +603,419 @@ namespace FidgetingApp.EDC
             {
                 InitializeTrack(slideProgress);
             }
+        }
+
+        private void UpdateShippingInput()
+        {
+            Touchscreen touchscreen = Touchscreen.current;
+            if (touchscreen != null)
+            {
+                TouchControl firstPressedTouch = null;
+                int pressedTouchCount = 0;
+                foreach (TouchControl touch in touchscreen.touches)
+                {
+                    if (!touch.press.isPressed)
+                        continue;
+                    pressedTouchCount++;
+                    firstPressedTouch ??= touch;
+                }
+
+                if (pressedTouchCount >= 2
+                    || presentationGestures?.IsPinching == true)
+                {
+                    shippingWaitForTouchesToClear = true;
+                    CancelShippingPointerForPresentation();
+                    return;
+                }
+
+                if (shippingWaitForTouchesToClear)
+                {
+                    if (pressedTouchCount == 0)
+                        shippingWaitForTouchesToClear = false;
+                    else
+                        return;
+                }
+
+                if (firstPressedTouch != null)
+                {
+                    UpdateShippingPointer(
+                        firstPressedTouch.position.ReadValue(),
+                        true);
+                    return;
+                }
+
+                if (pointerWasPressed)
+                {
+                    UpdateShippingPointer(previousPointerPosition, false);
+                    return;
+                }
+            }
+
+            if (shippingWaitForTouchesToClear)
+                return;
+
+            Mouse mouse = Mouse.current;
+            if (mouse != null)
+            {
+                UpdateShippingPointer(
+                    mouse.position.ReadValue(),
+                    mouse.leftButton.isPressed);
+                return;
+            }
+
+            if (pointerWasPressed)
+                UpdateShippingPointer(previousPointerPosition, false);
+        }
+
+        private void CancelShippingPointerForPresentation()
+        {
+            bool hadToyPointer = dragging || pointerWasPressed;
+            dragging = false;
+            pointerWasPressed = false;
+            shippingGestureMode = ShippingGestureMode.None;
+            activitySpeedRadians = 0f;
+            ResetGestureTelemetry(false);
+            if (hadToyPointer)
+            {
+                Debug.Log(
+                    "[MagneticSlideRuntime] toy-input-cancelled-for-pinch");
+            }
+        }
+
+        private void UpdateShippingPointer(Vector2 position, bool pressed)
+        {
+            if (pressed && !pointerWasPressed)
+            {
+                BeginShippingPointer(position);
+            }
+            else if (pressed && pointerWasPressed && dragging)
+            {
+                MoveShippingPointer(position);
+            }
+            else if (!pressed && pointerWasPressed)
+            {
+                EndShippingPointer(position);
+            }
+
+            previousPointerPosition = position;
+            pointerWasPressed = pressed;
+        }
+
+        private void BeginShippingPointer(Vector2 position)
+        {
+            lastPointerBlockedByUi = EventSystem.current != null
+                && EventSystem.current.IsPointerOverGameObject();
+            lastPointerHitProduct = ContainsScreenPoint(position);
+            bool presentationOwnsPointer =
+                presentationGestures?.IsOrbiting == true
+                || presentationGestures?.IsPinching == true;
+            TouchReceiptCount++;
+            Debug.Log(
+                "[MagneticSlideRuntime] touch-begin "
+                + $"x={position.x:F1} y={position.y:F1} "
+                + $"hit={lastPointerHitProduct} "
+                + $"ui={lastPointerBlockedByUi} "
+                + $"presentation={presentationGestures?.CurrentMode}");
+            if (lastPointerBlockedByUi
+                || !lastPointerHitProduct
+                || presentationOwnsPointer)
+                return;
+
+            MagneticSlideTileShippingMechanism mechanism =
+                shippingCoordinator.Mechanism;
+            deviceDrive.Cancel();
+            dragging = true;
+            pointerStartPosition = position;
+            previousPointerPosition = position;
+            pointerStartTime = Time.unscaledTime;
+            shippingGestureStartTravelMeters = mechanism.TravelMeters;
+            shippingGestureStartAngleDegrees =
+                mechanism.UnwrappedAngleDegrees;
+            shippingGestureHasRotationSample = TryShippingRotationSample(
+                position,
+                out shippingGestureRotationAxisWorld,
+                out shippingGestureStartRadialWorld);
+            shippingGestureLastRadialWorld =
+                shippingGestureStartRadialWorld;
+            shippingGestureAccumulatedAngleDegrees = 0f;
+            shippingGestureLastAngleDegrees =
+                mechanism.UnwrappedAngleDegrees;
+            shippingGestureLastTime = Time.unscaledTime;
+            shippingGestureMode = mechanism.AtMaximumTravel
+                ? Mathf.Abs(Mathf.DeltaAngle(
+                    mechanism.AngleDegrees, 0f)) <= 0.001f
+                    ? ShippingGestureMode.Undecided
+                    : ShippingGestureMode.Rotate
+                : ShippingGestureMode.Slide;
+            ResetGestureTelemetry(true);
+            Debug.Log(
+                "[MagneticSlideRuntime] toy-gesture-begin "
+                + $"mode={shippingGestureMode} "
+                + $"travel={mechanism.TravelMeters:F6} "
+                + $"angle={mechanism.AngleDegrees:F1}");
+        }
+
+        private void MoveShippingPointer(Vector2 position)
+        {
+            if (shippingGestureMode == ShippingGestureMode.Undecided)
+            {
+                float slidePixels = SignedShippingSlidePixels(
+                    position - pointerStartPosition);
+                float rotationDegrees = 0f;
+                bool rotationIntentDominates = false;
+                if (shippingGestureHasRotationSample
+                    && TryShippingRotationSample(
+                    position,
+                    out Vector3 currentAxis,
+                    out Vector3 currentRadial))
+                {
+                    rotationDegrees = Mathf.Abs(Vector3.SignedAngle(
+                        shippingGestureStartRadialWorld,
+                        currentRadial,
+                        currentAxis));
+                    float tangentialTravel = rotationDegrees
+                        * Mathf.Deg2Rad
+                        * Mathf.Min(
+                            shippingGestureStartRadialWorld.magnitude,
+                            currentRadial.magnitude);
+                    float radialTravel = Mathf.Abs(
+                        currentRadial.magnitude
+                        - shippingGestureStartRadialWorld.magnitude);
+                    rotationIntentDominates = rotationDegrees >= 2f
+                        && tangentialTravel
+                            > Mathf.Max(0.0001f, radialTravel * 1.25f);
+                }
+                if (rotationIntentDominates)
+                {
+                    shippingGestureMode = ShippingGestureMode.Rotate;
+                    Debug.Log(
+                        "[MagneticSlideRuntime] toy-gesture-mode=rotate");
+                }
+                else if (slidePixels <= -8f)
+                {
+                    shippingGestureMode = ShippingGestureMode.Slide;
+                    Debug.Log(
+                        "[MagneticSlideRuntime] toy-gesture-mode=slide");
+                }
+                else
+                    return;
+            }
+
+            if (shippingGestureMode == ShippingGestureMode.Slide)
+            {
+                float screenTravel = ShippingScreenTravelPixels();
+                float slidePixels = SignedShippingSlidePixels(
+                    position - pointerStartPosition);
+                float requested = shippingGestureStartTravelMeters
+                    + slidePixels / screenTravel
+                    * shippingCoordinator.Settings.MaximumTravelMeters;
+                float previousTravel =
+                    shippingCoordinator.Mechanism.TravelMeters;
+                shippingCoordinator.TryApplySlideInput(requested);
+                float travelDelta = Mathf.Abs(
+                    shippingCoordinator.Mechanism.TravelMeters
+                    - previousTravel);
+                if (travelDelta > 0.0000001f)
+                {
+                    SlideInputCount++;
+                    float now = Time.unscaledTime;
+                    float elapsed = Mathf.Max(
+                        0.0001f,
+                        now - shippingGestureLastTime);
+                    filteredFingerSpeedMetersPerSecond =
+                        travelDelta / elapsed;
+                    gestureSpeedNormalized = Mathf.Clamp01(
+                        filteredFingerSpeedMetersPerSecond / 0.12f);
+                    accumulatedActivityDegrees += travelDelta
+                        / shippingCoordinator.Settings.MaximumTravelMeters
+                        * 360f;
+                    activitySpeedRadians = travelDelta
+                        / shippingCoordinator.Settings.MaximumTravelMeters
+                        * Mathf.PI * 2f
+                        / elapsed;
+                    shippingGestureLastTime = now;
+                }
+            }
+            else if (shippingGestureMode == ShippingGestureMode.Rotate)
+            {
+                if (!TryShippingRotationSample(
+                    position,
+                    out Vector3 currentAxis,
+                    out Vector3 currentRadial))
+                {
+                    return;
+                }
+                if (!shippingGestureHasRotationSample)
+                {
+                    shippingGestureRotationAxisWorld = currentAxis;
+                    shippingGestureStartRadialWorld = currentRadial;
+                    shippingGestureLastRadialWorld = currentRadial;
+                    shippingGestureHasRotationSample = true;
+                    return;
+                }
+                shippingGestureAccumulatedAngleDegrees += Vector3.SignedAngle(
+                    shippingGestureLastRadialWorld,
+                    currentRadial,
+                    shippingGestureRotationAxisWorld);
+                shippingGestureLastRadialWorld = currentRadial;
+                float requested = shippingGestureStartAngleDegrees
+                    + shippingGestureAccumulatedAngleDegrees;
+                shippingCoordinator.TryApplyRotationInput(requested);
+                float now = Time.unscaledTime;
+                float elapsed = Mathf.Max(0.0001f, now - shippingGestureLastTime);
+                float angleDelta = Mathf.Abs(
+                    shippingCoordinator.Mechanism.UnwrappedAngleDegrees
+                    - shippingGestureLastAngleDegrees);
+                activitySpeedRadians = angleDelta * Mathf.Deg2Rad / elapsed;
+                accumulatedActivityDegrees += angleDelta;
+                shippingGestureLastAngleDegrees =
+                    shippingCoordinator.Mechanism.UnwrappedAngleDegrees;
+                shippingGestureLastTime = now;
+                if (angleDelta > 0.001f)
+                    RotationInputCount++;
+            }
+        }
+
+        private void EndShippingPointer(Vector2 position)
+        {
+            if (!dragging)
+                return;
+            if (shippingGestureMode == ShippingGestureMode.Rotate)
+            {
+                shippingCoordinator.TryCaptureRotationInput(
+                    shippingCoordinator.Mechanism.UnwrappedAngleDegrees);
+            }
+            dragging = false;
+            shippingGestureMode = ShippingGestureMode.None;
+            float travelPixels = Vector2.Distance(pointerStartPosition, position);
+            gestureIntensityNormalized = Mathf.Clamp01(
+                travelPixels / Mathf.Max(1f, Screen.width * 0.34f));
+            InteractionGestureCompleted?.Invoke(
+                Mathf.Max(0.18f, gestureIntensityNormalized));
+            UpdateCompletedGestureFrequency(Time.unscaledTime);
+        }
+
+        private float SignedShippingSlidePixels(Vector2 screenDelta)
+        {
+            Vector2 screenDirection = ShippingScreenDirection();
+            return Vector2.Dot(screenDelta, screenDirection);
+        }
+
+        private float ShippingScreenTravelPixels()
+        {
+            MagneticSlideTileShippingMechanism mechanism =
+                shippingCoordinator.Mechanism;
+            Camera camera = interactionCamera != null
+                ? interactionCamera
+                : Camera.main;
+            if (camera == null || mechanism.TopLocalSlide == null)
+                return Mathf.Max(1f, Screen.height * 0.28f);
+            Transform slide = mechanism.TopLocalSlide;
+            Vector3 origin = slide.position;
+            Vector3 offset = slide.parent != null
+                ? slide.parent.TransformVector(
+                    Vector3.down
+                    * shippingCoordinator.Settings.MaximumTravelMeters)
+                : Vector3.down
+                    * shippingCoordinator.Settings.MaximumTravelMeters;
+            Vector2 start = camera.WorldToScreenPoint(origin);
+            Vector2 end = camera.WorldToScreenPoint(origin + offset);
+            return Mathf.Max(1f, Vector2.Distance(start, end));
+        }
+
+        private Vector2 ShippingScreenDirection()
+        {
+            MagneticSlideTileShippingMechanism mechanism =
+                shippingCoordinator.Mechanism;
+            Camera camera = interactionCamera != null
+                ? interactionCamera
+                : Camera.main;
+            if (camera == null || mechanism.TopLocalSlide == null)
+                return Vector2.down;
+            Transform slide = mechanism.TopLocalSlide;
+            Vector3 origin = slide.position;
+            Vector3 offset = slide.parent != null
+                ? slide.parent.TransformVector(Vector3.down)
+                : Vector3.down;
+            Vector2 start = camera.WorldToScreenPoint(origin);
+            Vector2 end = camera.WorldToScreenPoint(origin + offset);
+            Vector2 direction = end - start;
+            return direction.sqrMagnitude >= 0.0001f
+                ? direction.normalized
+                : Vector2.down;
+        }
+
+        private bool TryShippingRotationSample(
+            Vector2 position,
+            out Vector3 orientedAxisWorld,
+            out Vector3 radialWorld)
+        {
+            Camera camera = interactionCamera != null
+                ? interactionCamera
+                : Camera.main;
+            MagneticSlideTileShippingMechanism mechanism =
+                shippingCoordinator?.Mechanism;
+            orientedAxisWorld = mechanism?.RotatingCarrier != null
+                ? mechanism.RotatingCarrier.TransformDirection(Vector3.forward)
+                    .normalized
+                : Vector3.forward;
+            radialWorld = Vector3.zero;
+            if (camera == null || mechanism?.FixedAxis == null)
+                return false;
+
+            Vector3 pivotWorld = mechanism.FixedAxis.position;
+            Plane interactionPlane =
+                new(orientedAxisWorld, pivotWorld);
+            Ray ray = camera.ScreenPointToRay(position);
+            if (!interactionPlane.Raycast(ray, out float distance))
+                return false;
+            radialWorld = Vector3.ProjectOnPlane(
+                ray.GetPoint(distance) - pivotWorld,
+                orientedAxisWorld);
+            return radialWorld.sqrMagnitude >= 0.00000001f;
+        }
+
+        private void SubscribeShippingMechanism()
+        {
+            MagneticSlideTileShippingMechanism mechanism =
+                shippingCoordinator?.Mechanism;
+            if (mechanism == null
+                || subscribedShippingMechanism == mechanism)
+            {
+                return;
+            }
+            UnsubscribeShippingMechanism();
+            subscribedShippingMechanism = mechanism;
+            subscribedShippingMechanism.SemanticEventRaised +=
+                HandleShippingSemanticEvent;
+        }
+
+        private void UnsubscribeShippingMechanism()
+        {
+            if (subscribedShippingMechanism == null)
+                return;
+            subscribedShippingMechanism.SemanticEventRaised -=
+                HandleShippingSemanticEvent;
+            subscribedShippingMechanism = null;
+        }
+
+        private void HandleShippingSemanticEvent(
+            FidgetSemanticEvent semanticEvent,
+            float normalizedSignal)
+        {
+            if (semanticEvent == FidgetSemanticEvent.DetentCrossed
+                && subscribedShippingMechanism != null)
+            {
+                LastSemanticDetentDirection =
+                    subscribedShippingMechanism.LastDetentCrossingDirection;
+                LastSemanticDetentIndex =
+                    subscribedShippingMechanism
+                        .LastDetentCrossingUnwrappedIndex;
+            }
+            SemanticEventCount++;
+            SemanticEventRaised?.Invoke(
+                semanticEvent,
+                normalizedSignal);
         }
 
         private bool TryReadTouch(out Vector2 position, out bool pressed)
@@ -400,6 +1069,14 @@ namespace FidgetingApp.EDC
             position = default;
             pressed = false;
             return false;
+        }
+
+        private enum ShippingGestureMode
+        {
+            None,
+            Undecided,
+            Slide,
+            Rotate,
         }
 
         private void ReadMouse()

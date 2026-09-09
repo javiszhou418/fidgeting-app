@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Security.Cryptography;
 using UnityEditor;
 using UnityEditor.Build;
 using UnityEditor.Build.Reporting;
@@ -17,10 +18,28 @@ namespace CodexUnityLabEditor
         private const string RelativeBuildPath = "Builds/iOS/FidgetingApp";
         private const string RelativeDevelopmentBuildPath = "Builds/iOS/FidgetingAppDevelopment";
         private const string RelativeSimulatorBuildPath = "Builds/iOS/FidgetingAppSimulator";
+        private const string RelativeGate12SimulatorBuildPath =
+            "Builds/iOS/PremiumDisplayCaseGate12Rev4Simulator";
+        private const string RelativeGate04NativeHybridSimulatorBuildPath =
+            "Builds/iOS/PackTearNativeHybridGate04R026H1Simulator";
+        private const string RelativeGate04NativeHybridR027SimulatorBuildPath =
+            "Builds/iOS/PackTearNativeHybridGate04R027Simulator";
+        private const string RelativeGate04NativeHybridR028SimulatorBuildPath =
+            "Builds/iOS/PackTearNativeHybridGate04R028Simulator";
+        private const string RelativeGate04NativeHybridR029SimulatorBuildPath =
+            "Builds/iOS/PackTearNativeHybridGate04R029Simulator";
+        private const string RelativeGate04NativeHybridR030SimulatorBuildPath =
+            "Builds/iOS/PackTearNativeHybridGate04R030Simulator";
+        private const string RelativeGate04NativeHybridR031SimulatorBuildPath =
+            "Builds/iOS/PackTearNativeHybridGate04R031Simulator";
         private const string ProductName = "Fidget Spinner";
         private const string BundleIdentifier = "com.jiaweizhou.fidgetspinner.codex";
         private const string MinimumIosVersion = "15.0";
         private const string SourceCommitEnvironmentKey = "FIDGET_SOURCE_COMMIT";
+        private const string UniqueExportPathEnvironmentKey =
+            "FIDGET_IOS_EXPORT_RELATIVE_PATH";
+        private const string BuildNumberEnvironmentKey =
+            "FIDGET_IOS_BUILD_NUMBER";
         private const string BuildManifestFileName = "FidgetingBuildManifest.json";
         private const string PersonalTeamIdentifier = "2RJ2CW6NK5";
         private const string OxaniumFontAssetPath =
@@ -32,10 +51,18 @@ namespace CodexUnityLabEditor
             "Assets/Plugins/iOS/SceneWallpapers";
         private const string ProductBadgeArtworkAssetRootPath =
             "Assets/Plugins/iOS/BadgeArtwork";
+        private const string GachaPackArtworkAssetRootPath =
+            "Assets/Plugins/iOS/GachaPacks";
         private const string ProductStickerArtworkAssetRootPath =
             "Assets/Resources/ProductStickers/BackdropWhite";
         private const string MobileRenderPipelineAssetPath =
             "Assets/Settings/Mobile_RPAsset.asset";
+        private const string Gate12DisplayCasePrefabPath =
+            "Assets/Resources/Gacha/PremiumDisplayCaseGate12R004/PresentationRoot.prefab";
+        private const string Gate12DisplayCaseProfilePath =
+            "Assets/Resources/Gacha/PremiumDisplayCaseGate12R004Profile.asset";
+        private const string Gate11DisplayCaseFbxPath =
+            "Assets/_DisplayCase/Candidates/PremiumDisplayCaseGate11R001/Models/PremiumDisplayCaseGate11R001.fbx";
         private const int SimulatorMsaaSampleCount = 4;
 
         private static readonly string[] ProductScenes =
@@ -53,15 +80,25 @@ namespace CodexUnityLabEditor
             ConfigureIosBuild(development: false);
         }
 
-        private static void ConfigureIosBuild(bool development)
+        private static void ConfigureIosBuild(
+            bool development,
+            string buildNumber = null,
+            iOSSdkVersion? sdkVersion = null)
         {
             PlayerSettings.productName = ProductName;
             PlayerSettings.SetApplicationIdentifier(NamedBuildTarget.iOS, BundleIdentifier);
             PlayerSettings.bundleVersion = "0.1.0";
-            PlayerSettings.iOS.buildNumber = "40";
+            if (!string.IsNullOrWhiteSpace(buildNumber))
+            {
+                PlayerSettings.iOS.buildNumber = buildNumber;
+            }
             PlayerSettings.iOS.targetOSVersionString = MinimumIosVersion;
             PlayerSettings.iOS.targetDevice = iOSTargetDevice.iPhoneOnly;
             PlayerSettings.SetScriptingBackend(NamedBuildTarget.iOS, ScriptingImplementation.IL2CPP);
+            if (sdkVersion.HasValue)
+            {
+                PlayerSettings.iOS.sdkVersion = sdkVersion.Value;
+            }
 
             PlayerSettings.defaultInterfaceOrientation = UIOrientation.Portrait;
             PlayerSettings.allowedAutorotateToPortrait = true;
@@ -72,8 +109,9 @@ namespace CodexUnityLabEditor
             PlayerSettings.iOS.requiresFullScreen = true;
             PlayerSettings.fullScreenMode = FullScreenMode.FullScreenWindow;
 
-            PlayerSettings.SetUseDefaultGraphicsAPIs(BuildTarget.iOS, false);
-            PlayerSettings.SetGraphicsAPIs(BuildTarget.iOS, new[] { GraphicsDeviceType.Metal });
+            // Unity 6 normalizes iOS to automatic mode during BuildPipeline.
+            // iOS automatic mode resolves to Metal as its sole supported API.
+            PlayerSettings.SetUseDefaultGraphicsAPIs(BuildTarget.iOS, true);
             PlayerSettings.enableFrameTimingStats = true;
 
             EditorBuildSettings.scenes = Array.ConvertAll(
@@ -92,6 +130,38 @@ namespace CodexUnityLabEditor
             Debug.Log($"[Codex] iOS settings configured: {ProductName}, {BundleIdentifier}, iOS {MinimumIosVersion}+");
         }
 
+        public static void PrepareUniqueIosDevelopmentSnapshot()
+        {
+            string buildNumber = RequireBuildNumberEnvironment();
+            if (!BuildPipeline.IsBuildTargetSupported(
+                    BuildTargetGroup.iOS,
+                    BuildTarget.iOS))
+            {
+                throw new BuildFailedException(
+                    "iOS Build Support is not installed for this Unity editor.");
+            }
+            if (!EditorUserBuildSettings.SwitchActiveBuildTarget(
+                    BuildTargetGroup.iOS,
+                    BuildTarget.iOS))
+            {
+                throw new BuildFailedException(
+                    "Unity could not switch the active build target to iOS.");
+            }
+
+            ConfigureIosBuild(
+                development: true,
+                buildNumber,
+                iOSSdkVersion.DeviceSDK);
+            AssetDatabase.SaveAssets();
+            AssetDatabase.Refresh(ImportAssetOptions.ForceSynchronousImport);
+            EnsurePreparedIosSnapshot(
+                iOSSdkVersion.DeviceSDK,
+                development: true,
+                buildNumber);
+            Debug.Log(
+                $"[Codex] iOS immutable snapshot prepared for Build {buildNumber}");
+        }
+
         [MenuItem("Tools/Codex/Build iOS Development Project")]
         public static void BuildIosDevelopmentProject()
         {
@@ -100,6 +170,30 @@ namespace CodexUnityLabEditor
                 RelativeDevelopmentBuildPath,
                 configureSigning: true,
                 development: true);
+        }
+
+        [MenuItem("Tools/Codex/Build Unique iOS Development Project")]
+        public static void BuildUniqueIosDevelopmentProject()
+        {
+            string relativePath = Environment.GetEnvironmentVariable(
+                UniqueExportPathEnvironmentKey);
+            string buildNumber = RequireBuildNumberEnvironment();
+            if (string.IsNullOrWhiteSpace(relativePath)
+                || !relativePath.StartsWith(
+                    "Builds/iOS/DeviceJobs/", StringComparison.Ordinal)
+                || relativePath.Contains(".."))
+            {
+                throw new BuildFailedException(
+                    $"{UniqueExportPathEnvironmentKey} must name a unique "
+                    + "Builds/iOS/DeviceJobs/ child.");
+            }
+            BuildIosProject(
+                iOSSdkVersion.DeviceSDK,
+                relativePath,
+                configureSigning: true,
+                development: true,
+                usePreparedSnapshot: true,
+                expectedBuildNumber: buildNumber);
         }
 
         [MenuItem("Tools/Codex/Build iOS Performance Project")]
@@ -130,11 +224,244 @@ namespace CodexUnityLabEditor
                 development: false);
         }
 
+        [MenuItem("Tools/Codex/Build Premium Display Case Gate 12 Simulator")]
+        public static void BuildPremiumDisplayCaseGate12SimulatorProject()
+        {
+            NamedBuildTarget target = NamedBuildTarget.iOS;
+            string previousDefines =
+                PlayerSettings.GetScriptingDefineSymbols(target);
+            string previewDefines = string.IsNullOrWhiteSpace(previousDefines)
+                ? "FIDGET_GATE12_SIMULATOR_PREVIEW"
+                : previousDefines + ";FIDGET_GATE12_SIMULATOR_PREVIEW";
+            try
+            {
+                PlayerSettings.SetScriptingDefineSymbols(
+                    target,
+                    previewDefines);
+                BuildIosProject(
+                    iOSSdkVersion.SimulatorSDK,
+                    RelativeGate12SimulatorBuildPath,
+                    configureSigning: false,
+                    development: false);
+            }
+            finally
+            {
+                PlayerSettings.SetScriptingDefineSymbols(
+                    target,
+                    previousDefines);
+            }
+        }
+
+        [MenuItem("Tools/Codex/Build Pack Tear Native Hybrid Gate 04 Simulator")]
+        public static void BuildPackTearNativeHybridGate04SimulatorProject()
+        {
+            NamedBuildTarget target = NamedBuildTarget.iOS;
+            string previousDefines =
+                PlayerSettings.GetScriptingDefineSymbols(target);
+            string previewDefines = string.IsNullOrWhiteSpace(previousDefines)
+                ? "FIDGET_GATE12_SIMULATOR_PREVIEW;FIDGET_GATE04_NATIVE_HYBRID_CANDIDATE"
+                : previousDefines
+                    + ";FIDGET_GATE12_SIMULATOR_PREVIEW"
+                    + ";FIDGET_GATE04_NATIVE_HYBRID_CANDIDATE";
+            try
+            {
+                PlayerSettings.SetScriptingDefineSymbols(
+                    target,
+                    previewDefines);
+                BuildIosProject(
+                    iOSSdkVersion.SimulatorSDK,
+                    RelativeGate04NativeHybridSimulatorBuildPath,
+                    configureSigning: false,
+                    development: false);
+                ConfigureNativeHybridCandidateSwiftPreview();
+            }
+            finally
+            {
+                PlayerSettings.SetScriptingDefineSymbols(
+                    target,
+                    previousDefines);
+            }
+        }
+
+        [MenuItem(
+            "Tools/Codex/Build Pack Tear Isolated Native Hybrid Gate 04 R027 Simulator")]
+        public static void BuildPackTearNativeHybridGate04R027SimulatorProject()
+        {
+            NamedBuildTarget target = NamedBuildTarget.iOS;
+            string previousDefines =
+                PlayerSettings.GetScriptingDefineSymbols(target);
+            string previewDefines = string.IsNullOrWhiteSpace(previousDefines)
+                ? "FIDGET_GATE12_SIMULATOR_PREVIEW;FIDGET_GATE04_NATIVE_HYBRID_CANDIDATE"
+                : previousDefines
+                    + ";FIDGET_GATE12_SIMULATOR_PREVIEW"
+                    + ";FIDGET_GATE04_NATIVE_HYBRID_CANDIDATE";
+            try
+            {
+                PlayerSettings.SetScriptingDefineSymbols(
+                    target,
+                    previewDefines);
+                BuildIosProject(
+                    iOSSdkVersion.SimulatorSDK,
+                    RelativeGate04NativeHybridR027SimulatorBuildPath,
+                    configureSigning: false,
+                    development: false);
+            }
+            finally
+            {
+                PlayerSettings.SetScriptingDefineSymbols(
+                    target,
+                    previousDefines);
+            }
+        }
+
+        [MenuItem(
+            "Tools/Codex/Build Pack Tear Isolated Native Hybrid Gate 04 R028 Simulator")]
+        public static void BuildPackTearNativeHybridGate04R028SimulatorProject()
+        {
+            NamedBuildTarget target = NamedBuildTarget.iOS;
+            string previousDefines =
+                PlayerSettings.GetScriptingDefineSymbols(target);
+            string previewDefines = string.IsNullOrWhiteSpace(previousDefines)
+                ? "FIDGET_GATE12_SIMULATOR_PREVIEW;FIDGET_GATE04_NATIVE_HYBRID_CANDIDATE"
+                : previousDefines
+                    + ";FIDGET_GATE12_SIMULATOR_PREVIEW"
+                    + ";FIDGET_GATE04_NATIVE_HYBRID_CANDIDATE";
+            try
+            {
+                PlayerSettings.SetScriptingDefineSymbols(
+                    target,
+                    previewDefines);
+                BuildIosProject(
+                    iOSSdkVersion.SimulatorSDK,
+                    RelativeGate04NativeHybridR028SimulatorBuildPath,
+                    configureSigning: false,
+                    development: false);
+            }
+            finally
+            {
+                PlayerSettings.SetScriptingDefineSymbols(
+                    target,
+                    previousDefines);
+            }
+        }
+
+        [MenuItem(
+            "Tools/Codex/Build Pack Tear Isolated Native Hybrid Gate 04 R029 Simulator")]
+        public static void BuildPackTearNativeHybridGate04R029SimulatorProject()
+        {
+            NamedBuildTarget target = NamedBuildTarget.iOS;
+            string previousDefines =
+                PlayerSettings.GetScriptingDefineSymbols(target);
+            string previewDefines = string.IsNullOrWhiteSpace(previousDefines)
+                ? "FIDGET_GATE12_SIMULATOR_PREVIEW;FIDGET_GATE04_NATIVE_HYBRID_CANDIDATE"
+                : previousDefines
+                    + ";FIDGET_GATE12_SIMULATOR_PREVIEW"
+                    + ";FIDGET_GATE04_NATIVE_HYBRID_CANDIDATE";
+            try
+            {
+                PlayerSettings.SetScriptingDefineSymbols(
+                    target,
+                    previewDefines);
+                BuildIosProject(
+                    iOSSdkVersion.SimulatorSDK,
+                    RelativeGate04NativeHybridR029SimulatorBuildPath,
+                    configureSigning: false,
+                    development: false);
+            }
+            finally
+            {
+                PlayerSettings.SetScriptingDefineSymbols(
+                    target,
+                    previousDefines);
+            }
+        }
+
+        [MenuItem(
+            "Tools/Codex/Build Pack Tear Isolated Native Hybrid Gate 04 R030 Simulator")]
+        public static void BuildPackTearNativeHybridGate04R030SimulatorProject()
+        {
+            NamedBuildTarget target = NamedBuildTarget.iOS;
+            string previousDefines =
+                PlayerSettings.GetScriptingDefineSymbols(target);
+            string previewDefines = string.IsNullOrWhiteSpace(previousDefines)
+                ? "FIDGET_GATE12_SIMULATOR_PREVIEW;FIDGET_GATE04_NATIVE_HYBRID_CANDIDATE"
+                : previousDefines
+                    + ";FIDGET_GATE12_SIMULATOR_PREVIEW"
+                    + ";FIDGET_GATE04_NATIVE_HYBRID_CANDIDATE";
+            try
+            {
+                PlayerSettings.SetScriptingDefineSymbols(
+                    target,
+                    previewDefines);
+                BuildIosProject(
+                    iOSSdkVersion.SimulatorSDK,
+                    RelativeGate04NativeHybridR030SimulatorBuildPath,
+                    configureSigning: false,
+                    development: false);
+            }
+            finally
+            {
+                PlayerSettings.SetScriptingDefineSymbols(
+                    target,
+                    previousDefines);
+            }
+        }
+
+        [MenuItem(
+            "Tools/Codex/Build Pack Tear Isolated Native Hybrid Gate 04 R031 Simulator")]
+        public static void BuildPackTearNativeHybridGate04R031SimulatorProject()
+        {
+            NamedBuildTarget target = NamedBuildTarget.iOS;
+            string previousDefines =
+                PlayerSettings.GetScriptingDefineSymbols(target);
+            string previewDefines = string.IsNullOrWhiteSpace(previousDefines)
+                ? "FIDGET_GATE12_SIMULATOR_PREVIEW;FIDGET_GATE04_NATIVE_HYBRID_CANDIDATE"
+                : previousDefines
+                    + ";FIDGET_GATE12_SIMULATOR_PREVIEW"
+                    + ";FIDGET_GATE04_NATIVE_HYBRID_CANDIDATE";
+            try
+            {
+                PlayerSettings.SetScriptingDefineSymbols(
+                    target,
+                    previewDefines);
+                BuildIosProject(
+                    iOSSdkVersion.SimulatorSDK,
+                    RelativeGate04NativeHybridR031SimulatorBuildPath,
+                    configureSigning: false,
+                    development: false);
+            }
+            finally
+            {
+                PlayerSettings.SetScriptingDefineSymbols(
+                    target,
+                    previousDefines);
+            }
+        }
+
+        private static void ConfigureNativeHybridCandidateSwiftPreview()
+        {
+            string projectRoot = Path.GetFullPath(
+                Path.Combine(Application.dataPath, ".."));
+            string outputPath = Path.Combine(
+                projectRoot,
+                RelativeGate04NativeHybridSimulatorBuildPath);
+            string projectPath = PBXProject.GetPBXProjectPath(outputPath);
+            var project = new PBXProject();
+            project.ReadFromFile(projectPath);
+            project.AddBuildProperty(
+                project.GetUnityFrameworkTargetGuid(),
+                "SWIFT_ACTIVE_COMPILATION_CONDITIONS",
+                "FIDGET_GATE04_NATIVE_HYBRID_CANDIDATE");
+            project.WriteToFile(projectPath);
+        }
+
         private static void BuildIosProject(
             iOSSdkVersion sdkVersion,
             string relativeBuildPath,
             bool configureSigning,
-            bool development)
+            bool development,
+            bool usePreparedSnapshot = false,
+            string expectedBuildNumber = null)
         {
             string projectRoot = Path.GetFullPath(Path.Combine(Application.dataPath, ".."));
             QuarantineGeneratedCacheDuplicates(projectRoot);
@@ -144,14 +471,28 @@ namespace CodexUnityLabEditor
                 throw new BuildFailedException("iOS Build Support is not installed for this Unity editor.");
             }
 
-            if (!EditorUserBuildSettings.SwitchActiveBuildTarget(BuildTargetGroup.iOS, BuildTarget.iOS))
+            if (usePreparedSnapshot)
             {
-                throw new BuildFailedException("Unity could not switch the active build target to iOS.");
+                EnsurePreparedIosSnapshot(
+                    sdkVersion,
+                    development,
+                    expectedBuildNumber);
+            }
+            else
+            {
+                if (!EditorUserBuildSettings.SwitchActiveBuildTarget(
+                        BuildTargetGroup.iOS,
+                        BuildTarget.iOS))
+                {
+                    throw new BuildFailedException(
+                        "Unity could not switch the active build target to iOS.");
+                }
+                ConfigureIosBuild(
+                    development,
+                    sdkVersion: sdkVersion);
             }
 
-            ConfigureIosBuild(development);
             EnsureCanonicalProductIdentity();
-            PlayerSettings.iOS.sdkVersion = sdkVersion;
             if (sdkVersion == iOSSdkVersion.SimulatorSDK)
             {
                 // Apple-silicon Simulator devices reject x86_64-only apps.
@@ -208,6 +549,54 @@ namespace CodexUnityLabEditor
             Debug.Log($"[Codex] iOS {sdkLabel} Xcode project created at {outputPath}");
         }
 
+        private static string RequireBuildNumberEnvironment()
+        {
+            string buildNumber = Environment.GetEnvironmentVariable(
+                BuildNumberEnvironmentKey);
+            if (!int.TryParse(buildNumber, out int numericBuildNumber)
+                || numericBuildNumber <= 0)
+            {
+                throw new BuildFailedException(
+                    $"{BuildNumberEnvironmentKey} must be a positive integer.");
+            }
+            return numericBuildNumber.ToString();
+        }
+
+        private static void EnsurePreparedIosSnapshot(
+            iOSSdkVersion sdkVersion,
+            bool development,
+            string expectedBuildNumber)
+        {
+            if (EditorUserBuildSettings.activeBuildTarget != BuildTarget.iOS)
+            {
+                throw new BuildFailedException(
+                    "The immutable snapshot was not prepared for iOS.");
+            }
+            if (string.IsNullOrWhiteSpace(expectedBuildNumber)
+                || PlayerSettings.iOS.buildNumber != expectedBuildNumber)
+            {
+                throw new BuildFailedException(
+                    "The prepared iOS build number changed after snapshot setup.");
+            }
+            if (PlayerSettings.bundleVersion != "0.1.0"
+                || PlayerSettings.iOS.sdkVersion != sdkVersion
+                || EditorUserBuildSettings.development != development)
+            {
+                throw new BuildFailedException(
+                    "Prepared iOS PlayerSettings do not match the requested build.");
+            }
+            GraphicsDeviceType[] graphicsApis =
+                PlayerSettings.GetGraphicsAPIs(BuildTarget.iOS);
+            if (!PlayerSettings.GetUseDefaultGraphicsAPIs(BuildTarget.iOS)
+                || graphicsApis.Length != 1
+                || graphicsApis[0] != GraphicsDeviceType.Metal)
+            {
+                throw new BuildFailedException(
+                    "Prepared iOS graphics APIs must be automatic Metal-only.");
+            }
+            EnsureCanonicalProductIdentity();
+        }
+
         private static BuildReport BuildPlayerWithSimulatorMsaaWorkaround(
             BuildPlayerOptions options,
             iOSSdkVersion sdkVersion)
@@ -260,6 +649,11 @@ namespace CodexUnityLabEditor
             public string sdk;
             public bool development;
             public string[] scenes;
+            public string gate12DisplayCasePrefab;
+            public string gate12DisplayCasePrefabSha256;
+            public string gate12DisplayCaseProfileSha256;
+            public string gate11DisplayCaseFbxSha256;
+            public bool physicalPhoneInstallAuthorized;
         }
 
         private static void WriteBuildManifest(
@@ -276,6 +670,9 @@ namespace CodexUnityLabEditor
                     $"Release builds require {SourceCommitEnvironmentKey}; use the guarded repository build script.");
             }
 
+            string projectRoot = Path.GetFullPath(Path.Combine(
+                Application.dataPath,
+                ".."));
             var manifest = new IosBuildManifest
             {
                 bundleIdentifier = BundleIdentifier,
@@ -287,11 +684,36 @@ namespace CodexUnityLabEditor
                 generatedAtUtc = DateTime.UtcNow.ToString("O"),
                 sdk = sdkVersion.ToString(),
                 development = development,
-                scenes = (string[])ProductScenes.Clone()
+                scenes = (string[])ProductScenes.Clone(),
+                gate12DisplayCasePrefab = Gate12DisplayCasePrefabPath,
+                gate12DisplayCasePrefabSha256 = Sha256File(Path.Combine(
+                    projectRoot,
+                    Gate12DisplayCasePrefabPath)),
+                gate12DisplayCaseProfileSha256 = Sha256File(Path.Combine(
+                    projectRoot,
+                    Gate12DisplayCaseProfilePath)),
+                gate11DisplayCaseFbxSha256 = Sha256File(Path.Combine(
+                    projectRoot,
+                    Gate11DisplayCaseFbxPath)),
+                physicalPhoneInstallAuthorized = false
             };
             File.WriteAllText(
                 Path.Combine(outputPath, BuildManifestFileName),
                 JsonUtility.ToJson(manifest, true));
+        }
+
+        private static string Sha256File(string path)
+        {
+            if (!File.Exists(path))
+            {
+                throw new BuildFailedException(
+                    "Build provenance source is missing: " + path);
+            }
+            using SHA256 sha = SHA256.Create();
+            byte[] digest = sha.ComputeHash(File.ReadAllBytes(path));
+            return BitConverter.ToString(digest)
+                .Replace("-", string.Empty)
+                .ToLowerInvariant();
         }
 
         private static void EnsureCanonicalProductIdentity()
@@ -533,6 +955,14 @@ namespace CodexUnityLabEditor
             {
                 project.SetBuildProperty(frameworkTarget, "SWIFT_VERSION", "5.0");
                 project.SetBuildProperty(frameworkTarget, "CLANG_ENABLE_MODULES", "YES");
+                project.AddBuildProperty(
+                    frameworkTarget,
+                    "OTHER_SWIFT_FLAGS",
+                    "-Xcc -Wno-incomplete-umbrella");
+                project.AddBuildProperty(
+                    frameworkTarget,
+                    "OTHER_SWIFT_FLAGS",
+                    "-Xfrontend -module-interface-preserve-types-as-written");
                 project.AddFrameworkToProject(frameworkTarget, "SwiftUI.framework", false);
                 project.AddFrameworkToProject(frameworkTarget, "CoreHaptics.framework", false);
             }
@@ -584,7 +1014,8 @@ namespace CodexUnityLabEditor
                 Path.Combine(projectRoot, ProductThumbnailAssetRootPath),
                 Path.Combine(projectRoot, SceneWallpaperAssetRootPath),
                 Path.Combine(projectRoot, ProductStickerArtworkAssetRootPath),
-                Path.Combine(projectRoot, ProductBadgeArtworkAssetRootPath)
+                Path.Combine(projectRoot, ProductBadgeArtworkAssetRootPath),
+                Path.Combine(projectRoot, GachaPackArtworkAssetRootPath)
             };
 
             var allThumbnailPaths = new List<string>();
