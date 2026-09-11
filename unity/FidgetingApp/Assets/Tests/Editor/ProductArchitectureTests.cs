@@ -20,27 +20,35 @@ namespace FidgetingApp.Tests.Editor
             "com.jiaweizhou.fidgetspinner.codex";
 
         [Test]
-        public void ReleaseBuildContainsOnlyTheSixApprovedProductScenes()
+        public void ReleaseBuildContainsOnlyTheFourApprovedProductScenes()
         {
             string[] scenes = EditorBuildSettings.scenes
                 .Where(scene => scene.enabled)
                 .Select(scene => scene.path)
                 .ToArray();
 
+            // FDB-PREF-032 consolidation: the two older three-blade rotors
+            // are retired; GEEONE (metal-three-blade) is the only rotor of
+            // that family and boots first.
             CollectionAssert.AreEqual(
                 new[]
                 {
-                    "Assets/_Fidgeting/Scenes/ThreeBladeEDC.unity",
                     "Assets/_Fidgeting/Scenes/ThreeBladeMetalOriginal.unity",
-                    "Assets/_ImportedSpinner/Scenes/ImportedSpinner.unity",
                     "Assets/_TwoLobeBar/Scenes/TwoLobeBar.unity",
                     "Assets/_EDC/Scenes/MeshyEDC.unity",
                     "Assets/_FanCard/Scenes/MagneticFanCard.unity"
                 },
                 scenes);
+            CollectionAssert.AreEqual(ProductCatalog.ShippingScenePaths(), scenes);
             CollectionAssert.DoesNotContain(
                 scenes,
                 SpinnerEnvironmentCatalog.BlueScenePath);
+            CollectionAssert.DoesNotContain(
+                scenes,
+                SpinnerEnvironmentCatalog.PointedScenePath);
+            CollectionAssert.DoesNotContain(
+                scenes,
+                SpinnerEnvironmentCatalog.ImportedScenePath);
             CollectionAssert.Contains(
                 scenes,
                 SpinnerEnvironmentCatalog.FanCardScenePath);
@@ -76,7 +84,7 @@ namespace FidgetingApp.Tests.Editor
         }
 
         [Test]
-        public void PointedThreeBladeReplacesBlueWithoutReplacingOriginalMetal()
+        public void RetiredThreeBladeRotorsConsolidateIntoGeeoneWithoutLosingState()
         {
             string swift = File.ReadAllText(
                 "Assets/Plugins/iOS/CodexSwiftUIOverlay.swift");
@@ -84,32 +92,79 @@ namespace FidgetingApp.Tests.Editor
                 "Assets/Scripts/Product/ProductCatalog.cs");
             string migration = File.ReadAllText(
                 "Assets/Scripts/Product/ProductCatalogMigration.cs");
+            string coordinator = File.ReadAllText(
+                "Assets/Scripts/Product/FidgetAppCoordinator.cs");
 
+            CollectionAssert.AreEqual(
+                new[]
+                {
+                    ProductCatalog.MetalThreeBladeModelId,
+                    ProductCatalog.GraphiteTwoLobeModelId,
+                    ProductCatalog.MagneticSlideTileModelId,
+                    ProductCatalog.MagneticFanCardModelId
+                },
+                ProductCatalog.ShippingModelIds());
+            CollectionAssert.AreEquivalent(
+                new[]
+                {
+                    ProductCatalog.PointedThreeBladeModelId,
+                    ProductCatalog.GoldFourWingModelId
+                },
+                ProductCatalog.RetiredModelIds);
             Assert.That(
-                swift.IndexOf("case pointedThreeBlade = \"pointed-three-blade\""),
-                Is.LessThan(swift.IndexOf("case metalThreeBlade = \"metal-three-blade\"")),
-                "The pointed replacement must own the retired blue model's first slot.");
+                ProductCatalog.DefaultModelId,
+                Is.EqualTo(ProductCatalog.MetalThreeBladeModelId));
+            foreach (string retired in ProductCatalog.RetiredModelIds)
+            {
+                Assert.That(
+                    ProductCatalog.TryGetScenePath(retired, out _),
+                    Is.False,
+                    retired + " must not be selectable from the native library.");
+            }
+
+            // Native library mirrors the Unity catalog and migrates old picks.
             StringAssert.Contains(
-                "persistedModelId == \"blue-classic\"",
+                "static let shippingCases: [SpinnerModel] = [\n"
+                + "        .metalThreeBlade,\n"
+                + "        .graphiteTwoLobe,\n"
+                + "        .magneticSlideTile,\n"
+                + "        .magneticFanCard\n"
+                + "    ]",
                 swift);
-            StringAssert.Contains("let migratedModel =", swift);
+            StringAssert.Contains(
+                "static let retiredCases: [SpinnerModel] = [.pointedThreeBlade, .goldFourWing]",
+                swift);
+            StringAssert.Contains(
+                "static let defaultModel: SpinnerModel = .metalThreeBlade",
+                swift);
+            StringAssert.Contains(
+                "let migratedModel = SpinnerModel.resolveShipping(rawValue: persistedModelId)",
+                swift);
             StringAssert.Contains("selectedModel = migratedModel", swift);
+            StringAssert.DoesNotContain("?? .pointedThreeBlade", swift);
+            StringAssert.DoesNotContain("SpinnerModel = .pointedThreeBlade", swift);
+
+            // Retired scenes stay out of the catalog but remain in source.
             StringAssert.DoesNotContain(
-                "persistedModelId != selectedModel.rawValue",
-                swift);
-            StringAssert.DoesNotContain("primaryModelCatalogVersion", swift);
-            StringAssert.Contains(
                 "SpinnerEnvironmentCatalog.PointedScenePath",
                 catalog);
-            StringAssert.Contains(
-                "SpinnerEnvironmentCatalog.MetalScenePath",
+            StringAssert.DoesNotContain(
+                "SpinnerEnvironmentCatalog.ImportedScenePath",
                 catalog);
+            Assert.That(File.Exists(SpinnerEnvironmentCatalog.PointedScenePath));
+            Assert.That(File.Exists(SpinnerEnvironmentCatalog.ImportedScenePath));
+
+            // Saved progression is merged, never discarded.
+            Assert.That(ProductCatalogMigration.CurrentMigrationVersion, Is.EqualTo(2));
             StringAssert.Contains(
-                "MigrateProgression(LegacyBlueModelId, PointedThreeBladeModelId)",
+                "MigrateProgression(LegacyBlueModelId, PointedThreeBladeModelId, false)",
                 migration);
-            Assert.That(
-                SpinnerEnvironmentCatalog.PointedScenePath,
-                Is.Not.EqualTo(SpinnerEnvironmentCatalog.MetalScenePath));
+            StringAssert.Contains(
+                "MigrateProgression(retired, ConsolidatedRotorModelId, true)",
+                migration);
+            StringAssert.Contains(
+                "new SpinnerProgressionRuntime(DefaultModelId, badgeRewards)",
+                coordinator);
 
             string[] scenes = EditorBuildSettings.scenes
                 .Where(scene => scene.enabled)
@@ -117,8 +172,8 @@ namespace FidgetingApp.Tests.Editor
                 .ToArray();
             Assert.That(
                 scenes.First(),
-                Is.EqualTo("Assets/_Fidgeting/Scenes/ThreeBladeEDC.unity"),
-                "The shipping app must boot directly into the replacement first spinner.");
+                Is.EqualTo(SpinnerEnvironmentCatalog.MetalScenePath),
+                "The shipping app must boot directly into GEEONE.");
         }
 
         [Test]
@@ -133,7 +188,7 @@ namespace FidgetingApp.Tests.Editor
                 Object.FindObjectsByType<Transform>(
                         FindObjectsInactive.Include,
                         FindObjectsSortMode.None)
-                    .Any(candidate => candidate.name == "FingerCapTop_BrushedFace"),
+                    .Any(candidate => candidate.name == "Cap_Top"),
                 Is.False);
 
             EditorSceneManager.OpenScene(
@@ -142,8 +197,8 @@ namespace FidgetingApp.Tests.Editor
             Transform metalBrushFace = Object.FindObjectsByType<Transform>(
                     FindObjectsInactive.Include,
                     FindObjectsSortMode.None)
-                .FirstOrDefault(candidate => candidate.name == "FingerCapTop_BrushedFace");
-            Assert.That(metalBrushFace, Is.Not.Null);
+                .FirstOrDefault(candidate => candidate.name == "Cap_Top");
+            Assert.That(metalBrushFace, Is.Not.Null, "The GEEONE cap is the metal scene's visible top cap.");
             Assert.That(metalBrushFace.GetComponent<Renderer>().enabled, Is.True);
             Assert.That(FindRenderer("ThreeBladeFrame").enabled, Is.False);
         }
@@ -195,7 +250,24 @@ namespace FidgetingApp.Tests.Editor
                 "mobilePipeline.msaaSampleCount = originalPipelineMsaa;",
                 buildPipeline,
                 "Simulator preview export must restore the iPhone 2x MSAA source of truth.");
-            StringAssert.Contains("PlayerSettings.iOS.buildNumber = \"40\";", buildPipeline);
+            StringAssert.Contains(
+                "PrepareUniqueIosDevelopmentSnapshot",
+                buildPipeline);
+            StringAssert.Contains(
+                "FIDGET_IOS_BUILD_NUMBER",
+                buildPipeline);
+            StringAssert.Contains(
+                "SetUseDefaultGraphicsAPIs(BuildTarget.iOS, true)",
+                buildPipeline);
+            StringAssert.Contains(
+                "graphicsApis[0] != GraphicsDeviceType.Metal",
+                buildPipeline);
+            StringAssert.DoesNotContain(
+                "PlayerSettings.iOS.buildNumber = \"42\";",
+                buildPipeline);
+            StringAssert.DoesNotContain(
+                "SetUseDefaultGraphicsAPIs(BuildTarget.iOS, false)",
+                buildPipeline);
         }
 
         [Test]
@@ -396,21 +468,20 @@ namespace FidgetingApp.Tests.Editor
         }
 
         [Test]
-        public void ProgressionBearingVisuals_DoNotCreateStrippedRuntimeColliders()
+        public void ProgressionRingAssembly_IsRemovedFromEveryToy()
         {
-            string source = File.ReadAllText(
-                "Assets/Scripts/Product/SpinnerProgressionVisuals.cs");
-
-            StringAssert.DoesNotContain(
-                "GameObject.CreatePrimitive(PrimitiveType.Sphere)",
-                source,
-                "Release stripping may remove SphereCollider even when the bearing is visual-only.");
-            StringAssert.Contains("BuildSphereMesh(", source);
-            StringAssert.Contains("ball.AddComponent<MeshRenderer>()", source);
+            Assert.That(
+                File.Exists("Assets/Scripts/Product/SpinnerProgressionVisuals.cs"),
+                Is.False,
+                "Shared collar/weight-ring/bearing/crown tori were the ring on every model.");
+            string coordinator = File.ReadAllText(
+                "Assets/Scripts/Product/FidgetAppCoordinator.cs");
+            StringAssert.DoesNotContain("SpinnerProgressionVisuals progressionVisuals", coordinator);
+            StringAssert.Contains("RemoveLegacyProgressionRingRoot", coordinator);
         }
 
         [Test]
-        public void ReleaseKeepsBothThreeBladeProductsAndExistingApprovedModels()
+        public void ReleaseKeepsGeeoneAsTheOnlyThreeBladeProductWithExistingApprovedModels()
         {
             string[] scenes = EditorBuildSettings.scenes
                 .Where(scene => scene.enabled)
@@ -420,13 +491,19 @@ namespace FidgetingApp.Tests.Editor
             CollectionAssert.IsSubsetOf(
                 new[]
                 {
-                    "Assets/_Fidgeting/Scenes/ThreeBladeEDC.unity",
                     "Assets/_Fidgeting/Scenes/ThreeBladeMetalOriginal.unity",
-                    "Assets/_ImportedSpinner/Scenes/ImportedSpinner.unity",
                     "Assets/_TwoLobeBar/Scenes/TwoLobeBar.unity"
                 },
                 scenes,
-                "Recovery must keep both distinct three-blade products and approved existing models.");
+                "GEEONE and the approved existing models must stay in the release.");
+            CollectionAssert.DoesNotContain(
+                scenes,
+                "Assets/_Fidgeting/Scenes/ThreeBladeEDC.unity",
+                "pointed-three-blade was retired into GEEONE (FDB-PREF-032).");
+            CollectionAssert.DoesNotContain(
+                scenes,
+                "Assets/_ImportedSpinner/Scenes/ImportedSpinner.unity",
+                "gold-four-wing was retired into GEEONE (FDB-PREF-032).");
         }
 
         [Test]
@@ -726,9 +803,10 @@ namespace FidgetingApp.Tests.Editor
             Assert.That(
                 ProductCatalog.TryGetScenePath(
                     ProductCatalog.PointedThreeBladeModelId,
-                    out string pointedScene),
-                Is.True);
-            Assert.That(pointedScene, Is.EqualTo(pointed));
+                    out _),
+                Is.False,
+                "pointed-three-blade is retired (FDB-PREF-032).");
+            Assert.That(SpinnerEnvironmentCatalog.PointedScenePath, Is.EqualTo(pointed));
             Assert.That(
                 ProductCatalog.TryGetScenePath(
                     ProductCatalog.MetalThreeBladeModelId,
@@ -738,10 +816,9 @@ namespace FidgetingApp.Tests.Editor
             Assert.That(
                 ProductCatalog.TryGetScenePath(
                     ProductCatalog.GoldFourWingModelId,
-                    out string replacedScene),
-                Is.True);
-            Assert.That(replacedScene, Is.EqualTo(
-                "Assets/_ImportedSpinner/Scenes/ImportedSpinner.unity"));
+                    out _),
+                Is.False,
+                "gold-four-wing is retired (FDB-PREF-032).");
             CollectionAssert.DoesNotContain(
                 AssetDatabase.GetDependencies(pointed, true),
                 dragonScale);
@@ -987,6 +1064,9 @@ namespace FidgetingApp.Tests.Editor
             StringAssert.Contains("case .magneticFanCard: return \"磁吸扇牌\"", source);
             StringAssert.Contains(
                 ".magneticSlideTile,\n        .magneticFanCard\n    ]",
+                source);
+            StringAssert.DoesNotContain(
+                ".pointedThreeBlade,\n        .metalThreeBlade,",
                 source);
             StringAssert.Contains("setModeBarVisible(true)", source);
             StringAssert.DoesNotContain(
@@ -1402,7 +1482,7 @@ namespace FidgetingApp.Tests.Editor
 
             StringAssert.Contains("badgeRewards = new BadgeRewardLedger()", coordinator);
             StringAssert.Contains(
-                "new SpinnerProgressionRuntime(PointedModelId, badgeRewards)",
+                "new SpinnerProgressionRuntime(DefaultModelId, badgeRewards)",
                 coordinator);
             StringAssert.Contains("CollectorProgressionRuntime(", coordinator);
             StringAssert.Contains("badgeRewards);", coordinator);

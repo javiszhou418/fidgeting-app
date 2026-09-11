@@ -9,7 +9,7 @@ namespace FidgetingApp.Tests.Editor
     public sealed class MobilePerformanceBudgetTests
     {
         [Test]
-        public void MobilePipeline_PreservesSixtyFpsHeadroomWithoutHdrBuffer()
+        public void MobilePipeline_PreservesSixtyFpsHeadroomWithCheapHdrBuffer()
         {
             UniversalRenderPipelineAsset pipeline =
                 AssetDatabase.LoadAssetAtPath<UniversalRenderPipelineAsset>(
@@ -18,7 +18,14 @@ namespace FidgetingApp.Tests.Editor
             Assert.That(pipeline, Is.Not.Null);
             Assert.That(pipeline.msaaSampleCount, Is.EqualTo(2));
             Assert.That(pipeline.renderScale, Is.EqualTo(0.9f).Within(0.001f));
-            Assert.That(pipeline.supportsHDR, Is.False);
+            // User 2026-09-09 16:42 "切吧": HDR so metal highlights above 1.0
+            // survive to the tonemapper instead of clipping to flat white.
+            // 32-bit R11G11B10 keeps bandwidth equal to the old RGBA8 target.
+            Assert.That(pipeline.supportsHDR, Is.True);
+            Assert.That(
+                pipeline.hdrColorBufferPrecision,
+                Is.EqualTo(HDRColorBufferPrecision._32Bits));
+            Assert.That(pipeline.colorGradingMode, Is.EqualTo(ColorGradingMode.HighDynamicRange));
         }
 
         [Test]

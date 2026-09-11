@@ -1,0 +1,138 @@
+{
+  "policy": {
+    "team_id": "T0C00P256DA",
+    "user_id": "U0BV4S23X8B",
+    "conversation_id": "D0C0RELGU56"
+  },
+  "now": "2026-09-08T00:00:00Z",
+  "batches": {
+    "first": {
+      "schemaVersion": "1.0",
+      "source": {
+        "kind": "slack-native-cua",
+        "team_id": "T0C00P256DA",
+        "user_id": "U0BV4S23X8B",
+        "conversation_id": "D0C0RELGU56",
+        "workspace_host": "jw-qgi5008.slack.com",
+        "authorProof": "native-from-me-self-dm-verified-user-map-v1"
+      },
+      "baseObservedThrough": "1788825580.000000",
+      "observedThrough": "1788825595.000002",
+      "pollProof": {
+        "pollId": "poll_FIRST0001",
+        "result": "verified",
+        "anchorSeen": true,
+        "chronologyComplete": true,
+        "stableBottomSeen": true
+      },
+      "rows": [
+        {
+          "message_ts": "1788825590.000001",
+          "kind": "self-message",
+          "permalink": "https://jw-qgi5008.slack.com/archives/D0C0RELGU56/p1788825590000001"
+        },
+        {
+          "message_ts": "1788825595.000002",
+          "kind": "self-message",
+          "permalink": "https://jw-qgi5008.slack.com/archives/D0C0RELGU56/p1788825595000002"
+        }
+      ],
+      "events": [
+        {
+          "schemaVersion": "1.0",
+          "team_id": "T0C00P256DA",
+          "user_id": "U0BV4S23X8B",
+          "conversation_id": "D0C0RELGU56",
+          "event_id": "Ev-cua-status-001",
+          "message_ts": "1788825590.000001",
+          "text": "fidget status"
+        },
+        {
+          "schemaVersion": "1.0",
+          "team_id": "T0C00P256DA",
+          "user_id": "U0BV4S23X8B",
+          "conversation_id": "D0C0RELGU56",
+          "event_id": "Ev-cua-pause-001",
+          "message_ts": "1788825595.000002",
+          "text": "fidget pause"
+        }
+      ]
+    },
+    "second": {
+      "schemaVersion": "1.0",
+      "source": {
+        "kind": "slack-native-cua",
+        "team_id": "T0C00P256DA",
+        "user_id": "U0BV4S23X8B",
+        "conversation_id": "D0C0RELGU56",
+        "workspace_host": "jw-qgi5008.slack.com",
+        "authorProof": "native-from-me-self-dm-verified-user-map-v1"
+      },
+      "baseObservedThrough": "1788825595.000002",
+      "observedThrough": "1788825598.000003",
+      "pollProof": {
+        "pollId": "poll_SECOND001",
+        "result": "verified",
+        "anchorSeen": true,
+        "chronologyComplete": true,
+        "stableBottomSeen": true
+      },
+      "rows": [
+        {
+          "message_ts": "1788825598.000003",
+          "kind": "self-message",
+          "permalink": "https://jw-qgi5008.slack.com/archives/D0C0RELGU56/p1788825598000003"
+        }
+      ],
+      "events": [
+        {
+          "schemaVersion": "1.0",
+          "team_id": "T0C00P256DA",
+          "user_id": "U0BV4S23X8B",
+          "conversation_id": "D0C0RELGU56",
+          "event_id": "Ev-cua-approve-001",
+          "message_ts": "1788825598.000003",
+          "text": "fidget approve-safe safe_CUA001"
+        }
+      ]
+    },
+    "stale": {
+      "schemaVersion": "1.0",
+      "source": {
+        "kind": "slack-native-cua",
+        "team_id": "T0C00P256DA",
+        "user_id": "U0BV4S23X8B",
+        "conversation_id": "D0C0RELGU56",
+        "workspace_host": "jw-qgi5008.slack.com",
+        "authorProof": "native-from-me-self-dm-verified-user-map-v1"
+      },
+      "baseObservedThrough": "1788824600.000000",
+      "observedThrough": "1788824699.000001",
+      "pollProof": {
+        "pollId": "poll_STALE0001",
+        "result": "verified",
+        "anchorSeen": true,
+        "chronologyComplete": true,
+        "stableBottomSeen": true
+      },
+      "rows": [
+        {
+          "message_ts": "1788824699.000001",
+          "kind": "self-message",
+          "permalink": "https://jw-qgi5008.slack.com/archives/D0C0RELGU56/p1788824699000001"
+        }
+      ],
+      "events": [
+        {
+          "schemaVersion": "1.0",
+          "team_id": "T0C00P256DA",
+          "user_id": "U0BV4S23X8B",
+          "conversation_id": "D0C0RELGU56",
+          "event_id": "Ev-cua-stale-001",
+          "message_ts": "1788824699.000001",
+          "text": "fidget status"
+        }
+      ]
+    }
+  }
+}

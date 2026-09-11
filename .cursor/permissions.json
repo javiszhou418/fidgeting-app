@@ -1,0 +1,26 @@
+{
+  "autoRun": {
+    "allow_instructions": [
+      "Auto-review only. Never switch Cursor to Run Everything. Read-only inspection is allowed with pwd, ls, cat, head, tail, wc, rg, find, stat, shasum, git status, git diff, git log, pmset -g, df, and tools/cursor-night-supervisor/preflight.py. File reads must stay inside this repository, the approved Obsidian vault's YYYY-MM-DD Markdown notes and their directly referenced media, or the two bounded /tmp research roots.",
+      "Known focused tests and read-only validators are allowed: python3 -m unittest discover -s tools/cursor-night-supervisor/tests, npm test inside tools/model-provenance-explorer, and node skills/fidgeting-model-pipeline/scripts/validate_model_pipeline.mjs <model-id>. Validators must not use a refresh, update, approve, accept, or write flag.",
+      "Deterministic Blender background builds and renders are allowed only through repository scripts under tools/blender/ and only when outputs stay in /tmp, the current model's candidate directory, or the current revision directory under unity/FidgetingApp/ArtSource/ModelPipeline/<model-id>/evidence/. Do not overwrite an approved revision.",
+      "Deterministic Simulator-only preview builds, tests, captures, installs, and launches are allowed when DerivedData and temporary products stay under /tmp. This permission never applies to a physical iPhone, a shipping archive, or an App Store operation.",
+      "Current-revision evidence registration scripts are allowed only when they write beneath unity/FidgetingApp/ArtSource/ModelPipeline/<model-id>/evidence/<gate>/<current-revision>/ and do not record or imply Gate, visual, device, or product approval. This includes recording the user's explicit 85 mm provisional claim as superseding the prior 65 mm claim while preserving history; it is evidence lineage, not a Gate approval.",
+      "ffmpeg and ffprobe frame extraction, inspection, contact sheets, and media encodes are allowed only when every generated output stays under /tmp/fidgeting-edc-research/ or /tmp/dragon-scale-gate02/.",
+      "yt-dlp and python3 -m yt_dlp are allowed only for a public reference URL already recorded in the research source, with every output, fragment, cache, subtitle, thumbnail, and metadata file constrained to /tmp/fidgeting-edc-research/ or /tmp/dragon-scale-gate02/. Stop on login, CAPTCHA, or platform risk-control prompts.",
+      "mkdir -p is allowed only beneath /tmp/fidgeting-edc-research/, /tmp/dragon-scale-gate02/, or the current unapproved revision's evidence directory."
+    ],
+    "block_instructions": [
+      "Never auto-run node tools/model-provenance-explorer/validate-pipelines.mjs --refresh, or any equivalent refresh, rewrite, repair, normalize, migrate, update-hash, or regenerate-manifest operation. Read-only validation without --refresh is the maximum unattended scope.",
+      "Never auto-run or auto-click any Gate approval, visual approval, product-direction choice, acceptance, rejection, approval-state supersession, device acceptance, approval script, or workbench approval control. These require the user's latest explicit decision.",
+      "Never auto-run git commit, git push, git reset, git clean, git checkout, git switch, git restore, git rebase, git merge, git cherry-pick, git revert, tag creation, branch deletion, force operations, or any history rewrite.",
+      "Never auto-delete, move to Trash, overwrite, or bulk-replace repository files or directories. Deletion inside /tmp is also not part of unattended night work.",
+      "Never auto-install or update applications, packages, plugins, runtimes, SDKs, command-line tools, certificates, profiles, or dependencies.",
+      "Never auto-read, reveal, edit, rotate, grant, revoke, or otherwise change credentials, API keys, passwords, signing identities, provisioning profiles, privacy permissions, security settings, developer trust, or account settings.",
+      "Never auto-read Obsidian .claudian or .obsidian trees, plugin data, private configuration, any .git metadata, hidden credential directories, or unrelated files outside the repository and the approved source-note/media boundary.",
+      "Never auto-run a Unity shipping build or archive, Xcode archive/export/upload, App Store operation, signing change, or any command that writes a shipping product under Builds/.",
+      "Never auto-install to, launch on, pair with, trust, or change settings on a physical iPhone. ios-deploy, devicectl, xcrun devicectl install/launch, and physical-device xcodebuild destinations always require explicit user approval after the visual gate.",
+      "Never let any two of Card draw scene research, Mobile app version issue, and Conversation freezing issue write concurrently. Card draw scene research remains paused at R037 visual review. At most one of Mobile app version issue and Conversation freezing issue may be the active overnight writer, and only for an exact, freshly inspected, allowlisted safe action."
+    ]
+  }
+}

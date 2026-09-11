@@ -1,0 +1,129 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#0a0d11">
+  <link rel="icon" href="data:,">
+  <title>Fidgeting 模型制作</title>
+  <meta name="description" content="从参考图到 Blender、Unity 和手机成品的模型制作工具。">
+  <link rel="stylesheet" href="styles.css">
+  <script type="importmap">
+    { "imports": { "three": "/vendor/three-build/three.module.js" } }
+  </script>
+  <script>
+    window.addEventListener("error", (event) => {
+      const target = document.getElementById("current-model-title");
+      if (target) target.textContent = `载入失败 · ${event.message || "模块错误"}`;
+    });
+    window.addEventListener("unhandledrejection", (event) => {
+      const target = document.getElementById("current-model-title");
+      if (target) target.textContent = `载入失败 · ${event.reason?.message || event.reason || "异步错误"}`;
+    });
+  </script>
+</head>
+<body>
+  <div class="app-shell">
+    <header class="topbar">
+      <div class="studio-brand">
+        <p class="brand">Fidgeting <span>Model Studio</span></p>
+        <h1 id="current-model-title">载入模型…</h1>
+      </div>
+      <div id="studio-header-meta" class="studio-header-meta" aria-label="当前进度"></div>
+    </header>
+
+    <div class="workspace">
+      <aside class="sidebar" aria-label="模型与工作区">
+        <section class="studio-section">
+          <h2 class="section-label">模型</h2>
+          <nav id="model-nav" class="model-nav" aria-label="模型列表"></nav>
+        </section>
+        <section class="studio-section">
+          <h2 class="section-label">步骤</h2>
+          <nav id="workspace-tabs" class="workspace-tabs" aria-label="固定模型工作区"></nav>
+        </section>
+        <div class="sidebar-foot">
+          <button type="button" class="button button-primary" id="new-model-button">＋ 新建模型</button>
+        </div>
+      </aside>
+
+      <main class="main-content">
+        <section id="current-task-banner" class="current-task-banner" aria-live="polite"></section>
+        <section class="pipeline-section" aria-label="12-Gate 制作流程">
+          <div class="stage-rail" id="stage-rail"></div>
+        </section>
+        <section id="stage-detail" class="stage-detail studio-canvas"></section>
+      </main>
+
+      <aside class="studio-rail" aria-label="决策、材质与导出">
+        <section id="decision-panel" class="studio-section studio-decision" aria-live="polite"></section>
+        <section id="material-library-panel" class="studio-section"></section>
+        <section id="export-panel" class="studio-section"></section>
+      </aside>
+    </div>
+  </div>
+
+  <dialog class="new-model-dialog" id="new-model-dialog" aria-labelledby="new-model-title">
+    <form id="new-model-form" class="new-model-form" novalidate>
+      <h2 id="new-model-title">新建模型</h2>
+      <label>Obsidian 链接<input id="new-model-obsidian" type="text" autocomplete="off" spellcheck="false" placeholder="obsidian://open?vault=…&file=…（可选，自动带出名称与图片）"></label>
+      <p class="obsidian-note-summary" id="new-model-obsidian-summary" hidden></p>
+      <label>名称<input id="new-model-name" type="text" autocomplete="off" placeholder="例如：黄铜陀螺" required></label>
+      <div class="new-model-row">
+        <label>ID<input id="new-model-id" type="text" autocomplete="off" spellcheck="false" pattern="[a-z0-9][a-z0-9-]{1,47}" placeholder="brass-spinner" required></label>
+        <label>机构<select id="new-model-mechanism"></select></label>
+      </div>
+      <div class="intake-drop" id="new-model-drop" tabindex="0" role="button" aria-label="拖入或选择参考文件">
+        <strong>拖入原图或视频</strong>
+        <span>照片、视频、PDF · 也可以点击选择</span>
+        <input id="new-model-files" type="file" multiple hidden accept="image/*,video/*,.pdf,.heic,.heif">
+      </div>
+      <ul class="intake-file-list" id="new-model-file-list"></ul>
+      <p class="new-model-status" id="new-model-status" role="status"></p>
+      <div class="new-model-actions">
+        <button type="button" class="button" id="new-model-cancel">取消</button>
+        <button type="submit" class="button button-primary" id="new-model-submit">创建并进入 Gate 01</button>
+      </div>
+    </form>
+  </dialog>
+
+  <dialog class="material-dialog" id="material-dialog">
+    <div class="dialog-bar">
+      <div>
+        <span id="material-dialog-status" class="asset-slot"></span>
+        <strong id="material-dialog-title"></strong>
+        <code id="material-dialog-id"></code>
+      </div>
+      <button type="button" class="button dialog-return" id="material-dialog-close" aria-label="关闭材质详情并返回工作台">← 返回工作台</button>
+    </div>
+    <div class="material-dialog-body" id="material-dialog-body"></div>
+  </dialog>
+
+  <dialog class="asset-dialog" id="asset-dialog">
+    <div class="dialog-bar">
+      <div>
+        <span id="dialog-slot" class="asset-slot"></span>
+        <strong id="dialog-title"></strong>
+        <code id="dialog-path"></code>
+      </div>
+      <button type="button" class="button dialog-return" id="dialog-close" aria-label="关闭大图并返回工作台">← 返回工作台</button>
+    </div>
+    <div class="asset-stage" id="asset-stage"></div>
+    <div class="dialog-actions">
+      <button type="button" class="button button-secondary" id="annotate-button">框选问题</button>
+      <a class="button button-secondary" id="open-file" target="_blank" rel="noreferrer">打开原文件</a>
+      <button type="button" class="button" id="copy-path">复制路径</button>
+    </div>
+    <form id="issue-form" class="issue-form" hidden>
+      <div class="selection-preview" id="selection-preview">请在图片上拖拽框选问题区域</div>
+      <label>问题说明<textarea id="issue-note" rows="3" required placeholder="例如：中心盖比参考图大，遮住了翼片根部。"></textarea></label>
+      <label>严重度<select id="issue-severity"><option value="warning">警告</option><option value="blocker">阻断</option><option value="note">备注</option></select></label>
+      <label>关联分析项<select id="issue-claim"><option value="">不关联</option></select></label>
+      <button type="submit" class="button">保存问题</button>
+    </form>
+  </dialog>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  <script type="module" src="app.js"></script>
+</body>
+</html>

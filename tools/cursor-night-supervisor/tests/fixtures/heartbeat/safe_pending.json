@@ -1,0 +1,33 @@
+{
+  "observationId": "fixture-safe-pending",
+  "repoRoot": "/fixture/Fidgeting app",
+  "taskTitle": "Mobile app version issue",
+  "state": "safe_pending",
+  "preflightStatus": "warning",
+  "pendingAction": {
+    "control": "run",
+    "approvalRequestId": "safe_ABCDE1",
+    "command": [
+      "node",
+      "skills/fidgeting-model-pipeline/scripts/validate_model_pipeline.mjs",
+      "metal-three-blade"
+    ],
+    "workingDirectory": "/fixture/Fidgeting app",
+    "outputPaths": []
+  },
+  "slackControlState": {
+    "schemaVersion": "1.0",
+    "generatedAt": "2026-09-07T12:00:00Z",
+    "paused": false,
+    "pending": [
+      {
+        "eventId": "Ev-approve-001",
+        "command": "approve-safe",
+        "requestId": "safe_ABCDE1",
+        "receivedAt": "2026-09-07T11:59:59Z",
+        "expiresAt": "2026-09-07T12:04:58Z",
+        "expired": false
+      }
+    ]
+  }
+}

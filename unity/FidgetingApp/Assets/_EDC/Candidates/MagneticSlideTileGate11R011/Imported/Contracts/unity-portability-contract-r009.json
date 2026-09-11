@@ -1,0 +1,374 @@
+{
+  "schemaVersion": 1,
+  "gate": "09-environment",
+  "revision": 9,
+  "modelId": "magnetic-slide-tile",
+  "status": "portable-input-contract-not-unity-import-settings",
+  "approvalAuthority": {
+    "gate08ExactUserWording": "\u4f60\u5f00\u59cb\u5427",
+    "decisionSource": "latest-explicit-chat"
+  },
+  "currentInputs": {
+    "geometryDigest": "2fcf6d2b4344511bc6b86ce940a927576f9cdb4988f4022959a3372f4d3c1952",
+    "materialSourceSha256": "8538b4142c9d6b5c89e30e3f915f99a33dfff8eab158db449278d9cca605b10c",
+    "lightingSourceSha256": "897484bd6e740454ee23c6a891eb8faa2fdf48af543792f08c3f4b78ff8780fe",
+    "mechanismContractSha256": "9cd7a08f34d7d8dfc3c6f89f6c80a5c5c2dcae48bc0d5c54ebf455a0727ea571",
+    "oldGate09AssetsCurrent": false,
+    "oldGate09Policy": "immutable history only; no stale environment asset is a current input"
+  },
+  "assets": {
+    "gate07MaterialBlend": {
+      "path": "Fidgeting app/unity/FidgetingApp/ArtSource/ModelPipeline/magnetic-slide-tile/evidence/07-material/rev-013/magnetic-slide-tile-material-r013.blend",
+      "sha256": "8538b4142c9d6b5c89e30e3f915f99a33dfff8eab158db449278d9cca605b10c",
+      "role": "approved-corrected-material-source"
+    },
+    "gate08LightingBlend": {
+      "path": "Fidgeting app/unity/FidgetingApp/ArtSource/ModelPipeline/magnetic-slide-tile/evidence/08-lighting/rev-006/magnetic-slide-tile-lighting-r006.blend",
+      "sha256": "897484bd6e740454ee23c6a891eb8faa2fdf48af543792f08c3f4b78ff8780fe",
+      "role": "approved-portable-lighting-source"
+    },
+    "gate09EnvironmentBlend": {
+      "path": "Fidgeting app/unity/FidgetingApp/ArtSource/ModelPipeline/magnetic-slide-tile/evidence/09-environment/rev-009/magnetic-slide-tile-environment-r009.blend",
+      "sha256": "d4d6a9701281e493b4459d3b1f9a9c67382c3d7b22e21632233184276de8ebf2",
+      "role": "current-environment-source"
+    },
+    "interactiveReviewGlb": {
+      "path": "Fidgeting app/unity/FidgetingApp/ArtSource/ModelPipeline/magnetic-slide-tile/evidence/09-environment/rev-009/magnetic-slide-tile-environment-r009-lookdev.glb",
+      "sha256": "a7c96f0a5f74b07c23ffdb11d5ce4068465db99edeca5d8a509e2b031a04e3fb",
+      "role": "interactive-review-model-not-export-approved"
+    },
+    "neutralControl": {
+      "path": "Fidgeting app/unity/FidgetingApp/ArtSource/ModelPipeline/magnetic-slide-tile/evidence/09-environment/rev-009/neutral-control-r009.exr",
+      "sha256": "a5b310c8c7fc17bda4110adb80e68913f1b5d623ffe01d935574813b80d1a872",
+      "role": "revalidated-current-lighting-control",
+      "colorSpace": "scene-linear Rec.709/D65"
+    },
+    "targetEquirectangular": {
+      "path": "Fidgeting app/unity/FidgetingApp/ArtSource/ModelPipeline/magnetic-slide-tile/evidence/09-environment/rev-009/target-shipping-studio-r009.exr",
+      "sha256": "2fe029beb803d7f9a26d229a1969914f210a7b5c4f311bfe9878cb52c7d73d13",
+      "role": "portable-target-environment",
+      "colorSpace": "scene-linear Rec.709/D65"
+    },
+    "cubemapContract": {
+      "path": "Fidgeting app/unity/FidgetingApp/ArtSource/ModelPipeline/magnetic-slide-tile/evidence/09-environment/rev-009/cubemap-r009/cubemap-contract.json",
+      "sha256": "14dc65a7f6e2ea036e6a0c9ba640cb04c46b5ab28e4a4f88110cb643a8608c8e",
+      "role": "unity-cubemap-orientation-contract"
+    },
+    "comparisonTurntable": {
+      "path": "Fidgeting app/unity/FidgetingApp/ArtSource/ModelPipeline/magnetic-slide-tile/evidence/09-environment/rev-009/gate09-r009-neutral-target-turntable.mp4",
+      "sha256": "3a8e8aecc4e615e538239a041c68d254415e6be514341d5a65fc9c68675c6369",
+      "role": "matched-real-render-comparison"
+    }
+  },
+  "cubemapFaces": {
+    "positive-x": {
+      "path": "Fidgeting app/unity/FidgetingApp/ArtSource/ModelPipeline/magnetic-slide-tile/evidence/09-environment/rev-009/cubemap-r009/positive-x.exr",
+      "sha256": "59edaf2b250d962e196f91a2df6aa36f40a7f4273f588748459648574b7f73c5",
+      "role": "unity-cubemap-positive-x",
+      "colorSpace": "scene-linear Rec.709/D65"
+    },
+    "negative-x": {
+      "path": "Fidgeting app/unity/FidgetingApp/ArtSource/ModelPipeline/magnetic-slide-tile/evidence/09-environment/rev-009/cubemap-r009/negative-x.exr",
+      "sha256": "77354b794e7dba2fb7149766ef2962a09d8ca8486a3a60404421344f72809882",
+      "role": "unity-cubemap-negative-x",
+      "colorSpace": "scene-linear Rec.709/D65"
+    },
+    "positive-y": {
+      "path": "Fidgeting app/unity/FidgetingApp/ArtSource/ModelPipeline/magnetic-slide-tile/evidence/09-environment/rev-009/cubemap-r009/positive-y.exr",
+      "sha256": "a826165174802c8573f80bc57654858820a7184a520bc53713e556c8ba292cc9",
+      "role": "unity-cubemap-positive-y",
+      "colorSpace": "scene-linear Rec.709/D65"
+    },
+    "negative-y": {
+      "path": "Fidgeting app/unity/FidgetingApp/ArtSource/ModelPipeline/magnetic-slide-tile/evidence/09-environment/rev-009/cubemap-r009/negative-y.exr",
+      "sha256": "eeb99a271ea2e70a102395f314fb80a4c20d7980decb6426a94eb9574145615d",
+      "role": "unity-cubemap-negative-y",
+      "colorSpace": "scene-linear Rec.709/D65"
+    },
+    "positive-z": {
+      "path": "Fidgeting app/unity/FidgetingApp/ArtSource/ModelPipeline/magnetic-slide-tile/evidence/09-environment/rev-009/cubemap-r009/positive-z.exr",
+      "sha256": "8ba2447c400ae53111b3089dd35d892d71416ca99e6f8612d6ddaf31f8f9c572",
+      "role": "unity-cubemap-positive-z",
+      "colorSpace": "scene-linear Rec.709/D65"
+    },
+    "negative-z": {
+      "path": "Fidgeting app/unity/FidgetingApp/ArtSource/ModelPipeline/magnetic-slide-tile/evidence/09-environment/rev-009/cubemap-r009/negative-z.exr",
+      "sha256": "a805391a7161d718f55e4b13fc8b053eca3f9eb5c97ab290ae1208429a634875",
+      "role": "unity-cubemap-negative-z",
+      "colorSpace": "scene-linear Rec.709/D65"
+    }
+  },
+  "exactPreservation": {
+    "geometry": "ordered vertex/index digest exact",
+    "hierarchyAndPivot": "exact names, parents, and fixed-axis transform",
+    "materialPartitions": {
+      "BottomExterior": {
+        "slotNames": [
+          "M07R13_LowerTopArtwork",
+          "M07R13_SolidDarkSide",
+          "M07R13_PolishedBrightSilverRim",
+          "M07R13_NeutralUnderside"
+        ],
+        "faceCounts": [
+          1,
+          3078,
+          2052,
+          3592
+        ],
+        "partitionDigest": "91fecf3892ef4ecc3a2ae5805ace8443fd31fd38451b5b444ed8f249c36c2e26",
+        "materialIndexDigest": "b0b271fcad16f2075854f32d2f6b1eb5a2e63cad77b9afd8407754270b58e52e",
+        "verticalSideArtworkFaces": 0,
+        "undersideArtworkFaces": 0,
+        "artworkImageExtensions": [
+          "EXTEND",
+          "EXTEND"
+        ],
+        "nonArtworkTextureNodeCount": 0,
+        "checks": {
+          "slotOrderExact": true,
+          "faceCountsExact": true,
+          "partitionDigestExact": true,
+          "sideWallArtworkFacesZero": true,
+          "undersideArtworkFacesZero": true,
+          "topArtworkPresent": true,
+          "rimSilverPresent": true,
+          "artworkClampNoWrap": true,
+          "nonArtworkSlotsHaveNoTextures": true
+        },
+        "pass": true
+      },
+      "MovingTopBody": {
+        "slotNames": [
+          "M07R13_UpperTopArtwork",
+          "M07R13_SolidDarkSide",
+          "M07R13_PolishedBrightSilverRim",
+          "M07R13_NeutralUnderside"
+        ],
+        "faceCounts": [
+          1,
+          5130,
+          2052,
+          3600
+        ],
+        "partitionDigest": "e256f01a909a8efd55455a67bdeccac2c0191d7d3be597c162f2119ae289bb12",
+        "materialIndexDigest": "4a2c246561d69d297891709a381c19310ed600c179fbad24fd40fbe9d48871e1",
+        "verticalSideArtworkFaces": 0,
+        "undersideArtworkFaces": 0,
+        "artworkImageExtensions": [
+          "EXTEND",
+          "EXTEND"
+        ],
+        "nonArtworkTextureNodeCount": 0,
+        "checks": {
+          "slotOrderExact": true,
+          "faceCountsExact": true,
+          "partitionDigestExact": true,
+          "sideWallArtworkFacesZero": true,
+          "undersideArtworkFacesZero": true,
+          "topArtworkPresent": true,
+          "rimSilverPresent": true,
+          "artworkClampNoWrap": true,
+          "nonArtworkSlotsHaveNoTextures": true
+        },
+        "pass": true
+      }
+    },
+    "materialSlotOrder": "exact",
+    "polygonMaterialIndices": "exact",
+    "artworkUvs": "exact; cap within 0..1; non-cap sentinel remains -1,-1",
+    "artworkMasks": "upper and lower remain independent",
+    "sideArtworkTriangles": 0,
+    "undersideArtworkTriangles": 0,
+    "emission": 0
+  },
+  "environmentComparison": {
+    "identical": [
+      "camera matrix and lens",
+      "model transforms",
+      "mesh and UV data",
+      "material slots and polygon indices",
+      "light count and settings",
+      "Raw scene-linear render",
+      "neutral-display-v1 mapping",
+      "exposure and background composite"
+    ],
+    "onlyChanged": "environment texture input",
+    "neutral": {
+      "path": "neutral-control-r009.exr",
+      "sha256": "a5b310c8c7fc17bda4110adb80e68913f1b5d623ffe01d935574813b80d1a872",
+      "resolution": [
+        2048,
+        1024
+      ],
+      "nonzeroRgbFraction": 1.0,
+      "seamMaximumLinearDelta": 0.0,
+      "minimum": 0.13065268099308014,
+      "maximum": 5.664282321929932,
+      "revalidatedFromCurrentGate08": true
+    },
+    "target": {
+      "path": "target-shipping-studio-r009.exr",
+      "sha256": "2fe029beb803d7f9a26d229a1969914f210a7b5c4f311bfe9878cb52c7d73d13",
+      "resolution": [
+        2048,
+        1024
+      ],
+      "projection": "equirectangular",
+      "colorSpace": "scene-linear Rec.709/D65",
+      "nonzeroRgbFraction": 1.0,
+      "minimum": 0.03271095082163811,
+      "maximum": 3.2771968841552734,
+      "seamMaximumLinearDelta": 0.0,
+      "dynamicRangeStopsP01P99": 5.765967845916748,
+      "brightestDirectionBlenderDegrees": [
+        -51.96873473375672,
+        27.888563049853367
+      ]
+    },
+    "matchedPairState": {
+      "closed": true,
+      "max0": true,
+      "side-reflection": true
+    }
+  },
+  "unityEnvironmentImport": {
+    "preferredSource": {
+      "path": "Fidgeting app/unity/FidgetingApp/ArtSource/ModelPipeline/magnetic-slide-tile/evidence/09-environment/rev-009/target-shipping-studio-r009.exr",
+      "sha256": "2fe029beb803d7f9a26d229a1969914f210a7b5c4f311bfe9878cb52c7d73d13",
+      "role": "portable-target-environment",
+      "colorSpace": "scene-linear Rec.709/D65"
+    },
+    "projection": "latitude-longitude equirectangular",
+    "textureShape": "Cube",
+    "sRGB": false,
+    "alphaSource": "None",
+    "generateMipmaps": true,
+    "wrapMode": "Clamp",
+    "filterMode": "Trilinear",
+    "hdrFormat": "RGBAHalf or BC6H after measured iPhone comparison",
+    "compressionAtGate09": "None",
+    "worldStrength": 0.85,
+    "rotationDegrees": 0,
+    "fallbackFaces": {
+      "positive-x": {
+        "path": "Fidgeting app/unity/FidgetingApp/ArtSource/ModelPipeline/magnetic-slide-tile/evidence/09-environment/rev-009/cubemap-r009/positive-x.exr",
+        "sha256": "59edaf2b250d962e196f91a2df6aa36f40a7f4273f588748459648574b7f73c5",
+        "role": "unity-cubemap-positive-x",
+        "colorSpace": "scene-linear Rec.709/D65"
+      },
+      "negative-x": {
+        "path": "Fidgeting app/unity/FidgetingApp/ArtSource/ModelPipeline/magnetic-slide-tile/evidence/09-environment/rev-009/cubemap-r009/negative-x.exr",
+        "sha256": "77354b794e7dba2fb7149766ef2962a09d8ca8486a3a60404421344f72809882",
+        "role": "unity-cubemap-negative-x",
+        "colorSpace": "scene-linear Rec.709/D65"
+      },
+      "positive-y": {
+        "path": "Fidgeting app/unity/FidgetingApp/ArtSource/ModelPipeline/magnetic-slide-tile/evidence/09-environment/rev-009/cubemap-r009/positive-y.exr",
+        "sha256": "a826165174802c8573f80bc57654858820a7184a520bc53713e556c8ba292cc9",
+        "role": "unity-cubemap-positive-y",
+        "colorSpace": "scene-linear Rec.709/D65"
+      },
+      "negative-y": {
+        "path": "Fidgeting app/unity/FidgetingApp/ArtSource/ModelPipeline/magnetic-slide-tile/evidence/09-environment/rev-009/cubemap-r009/negative-y.exr",
+        "sha256": "eeb99a271ea2e70a102395f314fb80a4c20d7980decb6426a94eb9574145615d",
+        "role": "unity-cubemap-negative-y",
+        "colorSpace": "scene-linear Rec.709/D65"
+      },
+      "positive-z": {
+        "path": "Fidgeting app/unity/FidgetingApp/ArtSource/ModelPipeline/magnetic-slide-tile/evidence/09-environment/rev-009/cubemap-r009/positive-z.exr",
+        "sha256": "8ba2447c400ae53111b3089dd35d892d71416ca99e6f8612d6ddaf31f8f9c572",
+        "role": "unity-cubemap-positive-z",
+        "colorSpace": "scene-linear Rec.709/D65"
+      },
+      "negative-z": {
+        "path": "Fidgeting app/unity/FidgetingApp/ArtSource/ModelPipeline/magnetic-slide-tile/evidence/09-environment/rev-009/cubemap-r009/negative-z.exr",
+        "sha256": "a805391a7161d718f55e4b13fc8b053eca3f9eb5c97ab290ae1208429a634875",
+        "role": "unity-cubemap-negative-z",
+        "colorSpace": "scene-linear Rec.709/D65"
+      }
+    },
+    "coordinateMapping": "Blender(X,Y,Z) -> Unity(X,Z,-Y)",
+    "orientationConvention": "Unity cubemap; raster top-left; +X=(1,-b,-a), -X=(-1,-b,a), +Y=(a,1,b), -Y=(a,-1,-b), +Z=(a,-b,1), -Z=(-a,-b,-1)",
+    "orientationValidation": {
+      "brightestDirectionUnity": [
+        0.5446992516517639,
+        0.4686315059661865,
+        0.6954763531684875
+      ],
+      "angularErrorDegrees": 0.06250933211021503,
+      "maximumAllowedDegrees": 1
+    }
+  },
+  "materialTransport": {
+    "shaderTarget": "URP Lit-compatible custom material at Gate 10/11",
+    "zones": {
+      "topArtwork": "blood-red crystal plus independent black artwork",
+      "solidDarkSide": "zero texture sampling",
+      "polishedSilverRim": "bright neutral metal reflection response",
+      "neutralUnderside": "zero artwork sampling"
+    },
+    "sampling": {
+      "artwork": "Clamp; linear mask; no wrap",
+      "baseColor": "sRGB",
+      "roughnessMetallicAo": "linear",
+      "normal": "linear tangent-space MikkTSpace"
+    },
+    "gate10Requirement": "Bake and hash portable BaseMap, MaskMap, Normal, and independent artwork masks without merging material zones."
+  },
+  "displayMapping": {
+    "reference": "neutral-display-v1",
+    "blenderRender": "Raw scene-linear HDR EXR",
+    "mapping": "rgb=max(rgb,0); rgb=rgb/(1+0.18*rgb); IEC 61966-2-1 sRGB encode",
+    "unityStartingPoint": "URP linear HDR; apply the same mapping in parity capture",
+    "fallback": "If runtime display differs, Gate 11 must fit and hash a LUT from linear matched frames."
+  },
+  "motion": {
+    "fixed": [
+      "BottomExterior",
+      "InternalAxisBoss"
+    ],
+    "rotationOnlyAt": "sMax",
+    "fullRotationDegrees": 360,
+    "slideReturnOnlyAtDegrees": [
+      0,
+      360
+    ],
+    "reviewStates": [
+      "closed-0",
+      "max-open-0",
+      "max-open-12",
+      "max-open-36",
+      "max-open-360"
+    ],
+    "noPitchRollFlip": true,
+    "noPenetration": true,
+    "noDebugProxy": true,
+    "recording": {
+      "path": "Fidgeting app/unity/FidgetingApp/ArtSource/ModelPipeline/magnetic-slide-tile/evidence/09-environment/rev-009/gate09-r009-neutral-target-turntable.mp4",
+      "sha256": "3a8e8aecc4e615e538239a041c68d254415e6be514341d5a65fc9c68675c6369",
+      "role": "matched-real-render-comparison"
+    }
+  },
+  "acceptanceTolerances": {
+    "environmentRgbNonzeroFraction": 1,
+    "equirectangularSeamMaxLinearDelta": 1e-06,
+    "cubemapOrientationMaxDegrees": 1,
+    "geometryDigest": "exact",
+    "materialSlotAndIndexDigest": "exact",
+    "uvDigest": "exact",
+    "sideAndUndersideArtworkTriangles": 0,
+    "standardViewClippingMaxFraction": 0.001,
+    "reflectionCloseupClippingMaxFraction": 0.002,
+    "fixedAxisVarianceMm": 1e-09,
+    "pitchRollRadians": 1e-09,
+    "emission": 0
+  },
+  "deferred": {
+    "gate10Export": true,
+    "unityImport": true,
+    "unityParity": true,
+    "shippingScene": true,
+    "buildInstallPhone": true,
+    "deviceAcceptance": true
+  }
+}

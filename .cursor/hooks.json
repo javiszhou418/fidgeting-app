@@ -1,0 +1,12 @@
+{
+  "version": 1,
+  "hooks": {
+    "stop": [
+      {
+        "command": ".cursor/hooks/slack-progress.py",
+        "timeout": 20,
+        "failClosed": false
+      }
+    ]
+  }
+}

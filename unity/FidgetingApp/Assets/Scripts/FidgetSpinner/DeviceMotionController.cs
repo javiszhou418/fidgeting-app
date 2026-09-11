@@ -1,9 +1,20 @@
+using System;
 using System.Globalization;
+using FidgetingApp.Product;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
 namespace CodexUnityLab
 {
+    /// <summary>
+    /// Core Motion input for the classic blue scene. Tilt drives parallax and
+    /// framing only. Rotation about the spin axis couples into the classic
+    /// rotor's real angular velocity, a shake above threshold becomes a rotor
+    /// impulse, and twisting the phone turns the Device Twist dial. The rotor
+    /// raises its own DetentCrossed / ShakeBurst; this component only raises
+    /// the dial's TwistDetentCrossed as a mechanism event and never calls the
+    /// haptic router for either. InertiaShift remains the legacy channel.
+    /// </summary>
     [DisallowMultipleComponent]
     public sealed class DeviceMotionController : MonoBehaviour
     {
@@ -24,10 +35,19 @@ namespace CodexUnityLab
         private bool enabledGyroscope;
         private readonly FidgetInertiaHapticDetector inertiaHapticDetector =
             new FidgetInertiaHapticDetector();
+        private readonly DeviceTwistDial twistDial = new DeviceTwistDial();
+        private readonly FidgetShakeDetector shakeDetector = new FidgetShakeDetector();
+        private FidgetSpinnerController spinner;
+        private bool mechanismDriveEnabled = true;
+
+        /// <summary>Mechanism events from the Device Twist dial.</summary>
+        public event Action<FidgetSemanticEvent, float> SemanticEventRaised;
 
         public float MaximumInputAngle => maximumInputAngle;
         public float Response => response;
         public float GyroscopeLead => gyroscopeLead;
+        public DeviceTwistDial TwistDial => twistDial;
+        public bool MechanismDriveEnabled => mechanismDriveEnabled;
 
         private void Awake()
         {
@@ -67,6 +87,10 @@ namespace CodexUnityLab
                         FidgetSemanticEvent.InertiaShift,
                         inertiaStrength);
                 }
+                UpdateMechanismDrive(
+                    nativeRotationRate,
+                    userAcceleration,
+                    Time.unscaledDeltaTime);
                 return;
             }
 
@@ -124,6 +148,94 @@ namespace CodexUnityLab
             ApplyTilt(targetTilt);
         }
 
+        private void UpdateMechanismDrive(
+            Vector3 rotationRate,
+            Vector3 userAcceleration,
+            float deltaTime)
+        {
+            if (spinner == null)
+            {
+                spinner = FindAnyObjectByType<FidgetSpinnerController>();
+            }
+
+            float rateAboutSpinAxis = 0f;
+            if (mechanismDriveEnabled && spinner != null)
+            {
+                Transform basis = cameraFramer != null ? cameraFramer.transform : transform;
+                rateAboutSpinAxis = DeviceMotionMechanismCoupling.ResolvePhoneRateAboutAxis(
+                    rotationRate,
+                    basis.right,
+                    basis.up,
+                    basis.forward,
+                    spinner.SpinAxisWorld);
+                spinner.SetDeviceFrameRotationRate(rateAboutSpinAxis);
+            }
+
+            UpdateTwistDial(rotationRate.z, deltaTime);
+
+            if (shakeDetector.Update(userAcceleration, deltaTime, out float shakeStrength)
+                && mechanismDriveEnabled
+                && spinner != null)
+            {
+                // A free rotor lags the phone, so the shake spins it against
+                // the phone's own twist; fall back to lateral acceleration.
+                float lagDirection = -rateAboutSpinAxis;
+                float directionSource = Mathf.Abs(lagDirection) > 0.2f
+                    ? lagDirection
+                    : userAcceleration.x;
+                float direction = Mathf.Approximately(directionSource, 0f)
+                    ? 1f
+                    : Mathf.Sign(directionSource);
+                spinner.ApplyDeviceShakeImpulse(
+                    direction * Mathf.Lerp(4f, 10f, shakeStrength),
+                    shakeStrength);
+            }
+        }
+
+        private void UpdateTwistDial(float rateAboutScreenNormal, float deltaTime)
+        {
+            if (!mechanismDriveEnabled)
+            {
+                return;
+            }
+
+            DeviceTwistDialStep twist = twistDial.Update(rateAboutScreenNormal, deltaTime);
+            if (!twist.EmitTick)
+            {
+                return;
+            }
+
+            // The finger-driven ratchet owns ticks while a finger is down.
+            if (spinner != null && spinner.IsFingerControlling)
+            {
+                return;
+            }
+
+            SemanticEventRaised?.Invoke(
+                FidgetSemanticEvent.TwistDetentCrossed,
+                twist.NormalizedIntensity);
+        }
+
+        /// <summary>
+        /// Library browsing keeps parallax but must not let the phone spin,
+        /// shake, or tick the mechanism.
+        /// </summary>
+        public void SetMechanismDriveEnabled(bool enabled)
+        {
+            mechanismDriveEnabled = enabled;
+            if (!enabled)
+            {
+                ClearMechanismDrive();
+            }
+        }
+
+        private void ClearMechanismDrive()
+        {
+            twistDial.Recenter();
+            shakeDetector.Reset();
+            spinner?.ClearDeviceFrameRotation();
+        }
+
         private void ApplyTilt(Vector2 targetTilt)
         {
             float blend = 1f - Mathf.Exp(-response * Time.unscaledDeltaTime);
@@ -179,6 +291,7 @@ namespace CodexUnityLab
             nativeMotionAvailable = false;
             IosDeviceMotion.Stop();
             DisableFallbackSensors();
+            ClearMechanismDrive();
         }
 
         private void EnableFallbackSensors()
@@ -221,6 +334,7 @@ namespace CodexUnityLab
             hasNativeReference = false;
             filteredTilt = Vector2.zero;
             inertiaHapticDetector.Reset();
+            ClearMechanismDrive();
             SceneParallaxInput.Reset();
             cameraFramer?.SetMotionTilt(Vector2.zero);
         }

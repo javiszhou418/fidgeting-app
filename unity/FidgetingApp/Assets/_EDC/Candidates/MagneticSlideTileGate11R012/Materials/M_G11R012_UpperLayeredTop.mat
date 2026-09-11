@@ -1,0 +1,71 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!21 &2100000
+Material:
+  serializedVersion: 8
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: M_G11R012_UpperLayeredTop
+  m_Shader: {fileID: 4800000, guid: 11af06931ef2a4f0d8d226c5953301bd, type: 3}
+  m_Parent: {fileID: 0}
+  m_ModifiedSerializedProperties: 0
+  m_ValidKeywords: []
+  m_InvalidKeywords: []
+  m_LightmapFlags: 4
+  m_EnableInstancingVariants: 0
+  m_DoubleSidedGI: 0
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
+  disabledShaderPasses: []
+  m_LockedProperties: 
+  m_SavedProperties:
+    serializedVersion: 3
+    m_TexEnvs:
+    - _BaseMap:
+        m_Texture: {fileID: 2800000, guid: 24ed80253ff6f40bfbf7c958b7d4bf9e, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _MotifMask:
+        m_Texture: {fileID: 2800000, guid: 09356e76bc1b44b4b937392303f1f56d, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _NormalMap:
+        m_Texture: {fileID: 2800000, guid: 701c7709ce7674ba0bb3580d155165c0, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _PerimeterMask:
+        m_Texture: {fileID: 2800000, guid: 8e8be420578414ef0a7fd0bddb416cbf, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _RoughnessMap:
+        m_Texture: {fileID: 2800000, guid: 02072b3a28d444c289a4408a58687084, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _SharedEnvironment:
+        m_Texture: {fileID: 8900000, guid: af240477dbc3042059903bedbae54dcb, type: 2}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    m_Ints: []
+    m_Floats:
+    - _CoatIor: 1.52
+    - _CoatRoughness: 0.035
+    - _CoatStrength: 0.78
+    - _EnvironmentIntensity: 0.85
+    - _IridescenceStrength: 0.12
+    - _LayerDepth: 0.0016
+    - _MicaScale: 28
+    - _MicroflakeScale: 85
+    - _MicroflakeStrength: 0.16
+    - _MotifMetallic: 0.24
+    - _MotifRelief: 0.0012
+    - _MotifRoughness: 0.18
+    - _NormalScale: 0.32
+    - _SubstrateRoughnessMax: 0.11
+    - _SubstrateRoughnessMin: 0.022
+    m_Colors:
+    - _MotifColor: {r: 0.018, g: 0.02, b: 0.024, a: 1}
+    - _SubstrateTint: {r: 1, g: 0.62, b: 0.7, a: 1}
+  m_BuildTextureStacks: []
+  m_AllowLocking: 1

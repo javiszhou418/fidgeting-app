@@ -1,0 +1,477 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 77;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		10B64AD4F65CF2CF25E83FCC /* FidgetGachaPackPresentation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85306A7D8AF85505FCAFC6CF /* FidgetGachaPackPresentation.swift */; };
+		1CA89EA7A195F21BE1DABF63 /* gacha-pack-chase-print.png in Resources */ = {isa = PBXBuildFile; fileRef = 525E626C1892FA5F4472959C /* gacha-pack-chase-print.png */; };
+		23FA6337523656AA6398DDA0 /* GachaShippingNativePreviewApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23AC09F8D39E69046B800863 /* GachaShippingNativePreviewApp.swift */; };
+		24B18A1249107B70BAD33A2D /* gacha-pack-chase-flap.png in Resources */ = {isa = PBXBuildFile; fileRef = F6A1C05439841D7ACF2C9354 /* gacha-pack-chase-flap.png */; };
+		2851B4CBE770C2CA1D658E6D /* gacha-pack-grail-body.png in Resources */ = {isa = PBXBuildFile; fileRef = 70E5B9A5DE803E435731E465 /* gacha-pack-grail-body.png */; };
+		3000FE982637377A64373988 /* gacha-pack-one-of-one-body.png in Resources */ = {isa = PBXBuildFile; fileRef = 1DC4BFAD02E909A7286E2B1C /* gacha-pack-one-of-one-body.png */; };
+		375A5E0FC4A81603BB885198 /* FidgetGachaRiveGateRules.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B27A334FD871C6F257AD1C6 /* FidgetGachaRiveGateRules.swift */; };
+		3D638F9998C42ABF52FEA08E /* gacha-pack-chase-foil.png in Resources */ = {isa = PBXBuildFile; fileRef = E8BE09BA09D730A034C93397 /* gacha-pack-chase-foil.png */; };
+		495B5F52B1F1CDB5971A3F0F /* gacha-pack-signature-emblem.png in Resources */ = {isa = PBXBuildFile; fileRef = F2DB7E5C56DE2D96B36A6624 /* gacha-pack-signature-emblem.png */; };
+		4BAD66ED8DAEC4DD59BBB603 /* gacha-pack-standard-flap.png in Resources */ = {isa = PBXBuildFile; fileRef = D51E368FCD001A64948B37A3 /* gacha-pack-standard-flap.png */; };
+		4D5FFBDD614141CFC954F1B2 /* gacha-pack-refined-foil.png in Resources */ = {isa = PBXBuildFile; fileRef = 4037159C67462932AFFC34E5 /* gacha-pack-refined-foil.png */; };
+		5524691C116D463F74785992 /* gacha-pack-signature-foil.png in Resources */ = {isa = PBXBuildFile; fileRef = 492B6E1D8DF93FCE8CB6FE7D /* gacha-pack-signature-foil.png */; };
+		56A0F574680A43D8DDFBC237 /* FidgetGachaPackMotionFeed.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47139909576121798BE5AEE3 /* FidgetGachaPackMotionFeed.swift */; };
+		5FCF11E8B6CDB1FD6ECBF386 /* FidgetStoreKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62B28375807B309E64AE9FB7 /* FidgetStoreKit.swift */; };
+		6506C77141CE5621334F900E /* gacha-pack-one-of-one-foil.png in Resources */ = {isa = PBXBuildFile; fileRef = C923235AD0DDE9F587B1CD4C /* gacha-pack-one-of-one-foil.png */; };
+		672359679E583A695CEB9159 /* gacha-pack-one-of-one-emblem.png in Resources */ = {isa = PBXBuildFile; fileRef = 95992D9000EAB39E71B70188 /* gacha-pack-one-of-one-emblem.png */; };
+		7A245C6D2EB56FCEFFF04A7D /* gacha-pack-standard-body.png in Resources */ = {isa = PBXBuildFile; fileRef = D70CDA46E849EAC71376EA94 /* gacha-pack-standard-body.png */; };
+		7BBA80FB503038F184FB3208 /* gacha-pack-refined-flap.png in Resources */ = {isa = PBXBuildFile; fileRef = F502280680C3037C566F924D /* gacha-pack-refined-flap.png */; };
+		9B04A5EB9738F1E25663399F /* gacha-pack-grail-emblem.png in Resources */ = {isa = PBXBuildFile; fileRef = D0E500293D9EEFBEADD2095D /* gacha-pack-grail-emblem.png */; };
+		9D0FD3D745248C415580DB67 /* gacha-pack-standard-print.png in Resources */ = {isa = PBXBuildFile; fileRef = E0327358A3B810F262FE147E /* gacha-pack-standard-print.png */; };
+		9E5CA938B66A4B2056357575 /* gacha-pack-refined-emblem.png in Resources */ = {isa = PBXBuildFile; fileRef = 060F7BD1E730008EB9013D8A /* gacha-pack-refined-emblem.png */; };
+		A2AA7D07C965A2412EAC5A06 /* FidgetGachaShippingStorefront.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F53BC0A86FAA4E00659A88C /* FidgetGachaShippingStorefront.swift */; };
+		AC4F5F83D4ADB70E74D413E1 /* gacha-pack-standard-emblem.png in Resources */ = {isa = PBXBuildFile; fileRef = 6BB8816AC2AD0A316BC7F82F /* gacha-pack-standard-emblem.png */; };
+		AD686291080AD9CA623F0FA0 /* Oxanium-VariableFont_wght.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D8C9F3230DFF61BEE809BEAF /* Oxanium-VariableFont_wght.ttf */; };
+		AE7890EBEDB3DA83538A940F /* gacha-pack-signature-flap.png in Resources */ = {isa = PBXBuildFile; fileRef = 96119FE28CA9F2265C722362 /* gacha-pack-signature-flap.png */; };
+		B29DA679448F49F604ADF544 /* gacha-pack-grail-flap.png in Resources */ = {isa = PBXBuildFile; fileRef = 5FFB2BC371C9247257288B01 /* gacha-pack-grail-flap.png */; };
+		BE9E5AC259E8AC0CCF8774BC /* gacha-pack-refined-body.png in Resources */ = {isa = PBXBuildFile; fileRef = BAFDB258CB524611B4363A19 /* gacha-pack-refined-body.png */; };
+		C3A2F75860809F80CFC4E2C7 /* gacha-pack-signature-print.png in Resources */ = {isa = PBXBuildFile; fileRef = DCCE59D74A2A3D1ED63A299A /* gacha-pack-signature-print.png */; };
+		C748AE4C81066FF76914D553 /* gacha-pack-chase-emblem.png in Resources */ = {isa = PBXBuildFile; fileRef = 612BED52865A9A13C0A28DF4 /* gacha-pack-chase-emblem.png */; };
+		CBD50DEACCA0ACBC8C8CC7FD /* gacha-pack-one-of-one-print.png in Resources */ = {isa = PBXBuildFile; fileRef = 8F377574ADA3384B45C9435B /* gacha-pack-one-of-one-print.png */; };
+		D356B5A62129E7020F7802F8 /* gacha-pack-one-of-one-flap.png in Resources */ = {isa = PBXBuildFile; fileRef = 8CDFE69812F47007EA519C70 /* gacha-pack-one-of-one-flap.png */; };
+		D3A5425A8B8C5FFA844B3218 /* gacha-pack-standard-foil.png in Resources */ = {isa = PBXBuildFile; fileRef = 42F3AC966C973A497FC9908A /* gacha-pack-standard-foil.png */; };
+		D8C24A4DF193D0187B3CFABC /* gacha-pack-refined-print.png in Resources */ = {isa = PBXBuildFile; fileRef = 6AF9F6A82F856AC1F25AECB0 /* gacha-pack-refined-print.png */; };
+		D9C9E53A3E27FB0FE996DB94 /* FidgetGachaStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71C085A602343C5262F08D3B /* FidgetGachaStore.swift */; };
+		DC91D42E98E93723437E0F6A /* gacha-pack-signature-body.png in Resources */ = {isa = PBXBuildFile; fileRef = C261CAE41FB41C0BE6473EB5 /* gacha-pack-signature-body.png */; };
+		E54E5D57C763EFC40F56D489 /* FidgetProductUIComponents.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D1DF5A5E681C2F667FCAE70 /* FidgetProductUIComponents.swift */; };
+		F4FD6523A929599E3DB6E5BD /* gacha-pack-grail-foil.png in Resources */ = {isa = PBXBuildFile; fileRef = EAE1A612DA060E6D362538D9 /* gacha-pack-grail-foil.png */; };
+		F99BF8F6D77F44690B9F762E /* gacha-pack-chase-body.png in Resources */ = {isa = PBXBuildFile; fileRef = EBD2FCBCC5E5305C3351BCE2 /* gacha-pack-chase-body.png */; };
+		FAF76695C54B5599A4774736 /* gacha-pack-grail-print.png in Resources */ = {isa = PBXBuildFile; fileRef = 78845874B82442DE7BF21C4E /* gacha-pack-grail-print.png */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		060F7BD1E730008EB9013D8A /* gacha-pack-refined-emblem.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "gacha-pack-refined-emblem.png"; sourceTree = "<group>"; };
+		1DC4BFAD02E909A7286E2B1C /* gacha-pack-one-of-one-body.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "gacha-pack-one-of-one-body.png"; sourceTree = "<group>"; };
+		23AC09F8D39E69046B800863 /* GachaShippingNativePreviewApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GachaShippingNativePreviewApp.swift; sourceTree = "<group>"; };
+		2F53BC0A86FAA4E00659A88C /* FidgetGachaShippingStorefront.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FidgetGachaShippingStorefront.swift; sourceTree = "<group>"; };
+		3D1DF5A5E681C2F667FCAE70 /* FidgetProductUIComponents.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FidgetProductUIComponents.swift; sourceTree = "<group>"; };
+		4037159C67462932AFFC34E5 /* gacha-pack-refined-foil.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "gacha-pack-refined-foil.png"; sourceTree = "<group>"; };
+		42F3AC966C973A497FC9908A /* gacha-pack-standard-foil.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "gacha-pack-standard-foil.png"; sourceTree = "<group>"; };
+		47139909576121798BE5AEE3 /* FidgetGachaPackMotionFeed.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FidgetGachaPackMotionFeed.swift; sourceTree = "<group>"; };
+		492B6E1D8DF93FCE8CB6FE7D /* gacha-pack-signature-foil.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "gacha-pack-signature-foil.png"; sourceTree = "<group>"; };
+		525E626C1892FA5F4472959C /* gacha-pack-chase-print.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "gacha-pack-chase-print.png"; sourceTree = "<group>"; };
+		5FFB2BC371C9247257288B01 /* gacha-pack-grail-flap.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "gacha-pack-grail-flap.png"; sourceTree = "<group>"; };
+		612BED52865A9A13C0A28DF4 /* gacha-pack-chase-emblem.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "gacha-pack-chase-emblem.png"; sourceTree = "<group>"; };
+		62B28375807B309E64AE9FB7 /* FidgetStoreKit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FidgetStoreKit.swift; sourceTree = "<group>"; };
+		6AF9F6A82F856AC1F25AECB0 /* gacha-pack-refined-print.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "gacha-pack-refined-print.png"; sourceTree = "<group>"; };
+		6B27A334FD871C6F257AD1C6 /* FidgetGachaRiveGateRules.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FidgetGachaRiveGateRules.swift; sourceTree = "<group>"; };
+		6BB8816AC2AD0A316BC7F82F /* gacha-pack-standard-emblem.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "gacha-pack-standard-emblem.png"; sourceTree = "<group>"; };
+		70E5B9A5DE803E435731E465 /* gacha-pack-grail-body.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "gacha-pack-grail-body.png"; sourceTree = "<group>"; };
+		71C085A602343C5262F08D3B /* FidgetGachaStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FidgetGachaStore.swift; sourceTree = "<group>"; };
+		78845874B82442DE7BF21C4E /* gacha-pack-grail-print.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "gacha-pack-grail-print.png"; sourceTree = "<group>"; };
+		85306A7D8AF85505FCAFC6CF /* FidgetGachaPackPresentation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FidgetGachaPackPresentation.swift; sourceTree = "<group>"; };
+		8CDFE69812F47007EA519C70 /* gacha-pack-one-of-one-flap.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "gacha-pack-one-of-one-flap.png"; sourceTree = "<group>"; };
+		8F377574ADA3384B45C9435B /* gacha-pack-one-of-one-print.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "gacha-pack-one-of-one-print.png"; sourceTree = "<group>"; };
+		95992D9000EAB39E71B70188 /* gacha-pack-one-of-one-emblem.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "gacha-pack-one-of-one-emblem.png"; sourceTree = "<group>"; };
+		96119FE28CA9F2265C722362 /* gacha-pack-signature-flap.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "gacha-pack-signature-flap.png"; sourceTree = "<group>"; };
+		BAFDB258CB524611B4363A19 /* gacha-pack-refined-body.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "gacha-pack-refined-body.png"; sourceTree = "<group>"; };
+		C261CAE41FB41C0BE6473EB5 /* gacha-pack-signature-body.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "gacha-pack-signature-body.png"; sourceTree = "<group>"; };
+		C923235AD0DDE9F587B1CD4C /* gacha-pack-one-of-one-foil.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "gacha-pack-one-of-one-foil.png"; sourceTree = "<group>"; };
+		C9F666C1F4A99B6CE718FA19 /* GachaShippingNativePreview.app */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.application; path = GachaShippingNativePreview.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		D0E500293D9EEFBEADD2095D /* gacha-pack-grail-emblem.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "gacha-pack-grail-emblem.png"; sourceTree = "<group>"; };
+		D51E368FCD001A64948B37A3 /* gacha-pack-standard-flap.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "gacha-pack-standard-flap.png"; sourceTree = "<group>"; };
+		D70CDA46E849EAC71376EA94 /* gacha-pack-standard-body.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "gacha-pack-standard-body.png"; sourceTree = "<group>"; };
+		D8C9F3230DFF61BEE809BEAF /* Oxanium-VariableFont_wght.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Oxanium-VariableFont_wght.ttf"; sourceTree = "<group>"; };
+		DCCE59D74A2A3D1ED63A299A /* gacha-pack-signature-print.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "gacha-pack-signature-print.png"; sourceTree = "<group>"; };
+		E0327358A3B810F262FE147E /* gacha-pack-standard-print.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "gacha-pack-standard-print.png"; sourceTree = "<group>"; };
+		E8BE09BA09D730A034C93397 /* gacha-pack-chase-foil.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "gacha-pack-chase-foil.png"; sourceTree = "<group>"; };
+		EAE1A612DA060E6D362538D9 /* gacha-pack-grail-foil.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "gacha-pack-grail-foil.png"; sourceTree = "<group>"; };
+		EBD2FCBCC5E5305C3351BCE2 /* gacha-pack-chase-body.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "gacha-pack-chase-body.png"; sourceTree = "<group>"; };
+		F2DB7E5C56DE2D96B36A6624 /* gacha-pack-signature-emblem.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "gacha-pack-signature-emblem.png"; sourceTree = "<group>"; };
+		F502280680C3037C566F924D /* gacha-pack-refined-flap.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "gacha-pack-refined-flap.png"; sourceTree = "<group>"; };
+		F6A1C05439841D7ACF2C9354 /* gacha-pack-chase-flap.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "gacha-pack-chase-flap.png"; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXGroup section */
+		03B8EE32A0DB73CC1C994DF1 /* GachaShippingNativePreview */ = {
+			isa = PBXGroup;
+			children = (
+				23AC09F8D39E69046B800863 /* GachaShippingNativePreviewApp.swift */,
+			);
+			name = GachaShippingNativePreview;
+			path = .;
+			sourceTree = "<group>";
+		};
+		091250BB5D5D6ABAB5BF2343 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				C9F666C1F4A99B6CE718FA19 /* GachaShippingNativePreview.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		525A2E58B4C4CB6492603984 = {
+			isa = PBXGroup;
+			children = (
+				03B8EE32A0DB73CC1C994DF1 /* GachaShippingNativePreview */,
+				F8FF585C85217FE030048091 /* iOS */,
+				091250BB5D5D6ABAB5BF2343 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		5342B05082C36BCA14E8EBB3 /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+				D8C9F3230DFF61BEE809BEAF /* Oxanium-VariableFont_wght.ttf */,
+			);
+			path = Fonts;
+			sourceTree = "<group>";
+		};
+		C8052FB53EED56AAD39AFA35 /* GachaPacks */ = {
+			isa = PBXGroup;
+			children = (
+				EBD2FCBCC5E5305C3351BCE2 /* gacha-pack-chase-body.png */,
+				612BED52865A9A13C0A28DF4 /* gacha-pack-chase-emblem.png */,
+				F6A1C05439841D7ACF2C9354 /* gacha-pack-chase-flap.png */,
+				E8BE09BA09D730A034C93397 /* gacha-pack-chase-foil.png */,
+				525E626C1892FA5F4472959C /* gacha-pack-chase-print.png */,
+				70E5B9A5DE803E435731E465 /* gacha-pack-grail-body.png */,
+				D0E500293D9EEFBEADD2095D /* gacha-pack-grail-emblem.png */,
+				5FFB2BC371C9247257288B01 /* gacha-pack-grail-flap.png */,
+				EAE1A612DA060E6D362538D9 /* gacha-pack-grail-foil.png */,
+				78845874B82442DE7BF21C4E /* gacha-pack-grail-print.png */,
+				1DC4BFAD02E909A7286E2B1C /* gacha-pack-one-of-one-body.png */,
+				95992D9000EAB39E71B70188 /* gacha-pack-one-of-one-emblem.png */,
+				8CDFE69812F47007EA519C70 /* gacha-pack-one-of-one-flap.png */,
+				C923235AD0DDE9F587B1CD4C /* gacha-pack-one-of-one-foil.png */,
+				8F377574ADA3384B45C9435B /* gacha-pack-one-of-one-print.png */,
+				BAFDB258CB524611B4363A19 /* gacha-pack-refined-body.png */,
+				060F7BD1E730008EB9013D8A /* gacha-pack-refined-emblem.png */,
+				F502280680C3037C566F924D /* gacha-pack-refined-flap.png */,
+				4037159C67462932AFFC34E5 /* gacha-pack-refined-foil.png */,
+				6AF9F6A82F856AC1F25AECB0 /* gacha-pack-refined-print.png */,
+				C261CAE41FB41C0BE6473EB5 /* gacha-pack-signature-body.png */,
+				F2DB7E5C56DE2D96B36A6624 /* gacha-pack-signature-emblem.png */,
+				96119FE28CA9F2265C722362 /* gacha-pack-signature-flap.png */,
+				492B6E1D8DF93FCE8CB6FE7D /* gacha-pack-signature-foil.png */,
+				DCCE59D74A2A3D1ED63A299A /* gacha-pack-signature-print.png */,
+				D70CDA46E849EAC71376EA94 /* gacha-pack-standard-body.png */,
+				6BB8816AC2AD0A316BC7F82F /* gacha-pack-standard-emblem.png */,
+				D51E368FCD001A64948B37A3 /* gacha-pack-standard-flap.png */,
+				42F3AC966C973A497FC9908A /* gacha-pack-standard-foil.png */,
+				E0327358A3B810F262FE147E /* gacha-pack-standard-print.png */,
+			);
+			path = GachaPacks;
+			sourceTree = "<group>";
+		};
+		F8FF585C85217FE030048091 /* iOS */ = {
+			isa = PBXGroup;
+			children = (
+				47139909576121798BE5AEE3 /* FidgetGachaPackMotionFeed.swift */,
+				85306A7D8AF85505FCAFC6CF /* FidgetGachaPackPresentation.swift */,
+				6B27A334FD871C6F257AD1C6 /* FidgetGachaRiveGateRules.swift */,
+				2F53BC0A86FAA4E00659A88C /* FidgetGachaShippingStorefront.swift */,
+				71C085A602343C5262F08D3B /* FidgetGachaStore.swift */,
+				3D1DF5A5E681C2F667FCAE70 /* FidgetProductUIComponents.swift */,
+				62B28375807B309E64AE9FB7 /* FidgetStoreKit.swift */,
+				5342B05082C36BCA14E8EBB3 /* Fonts */,
+				C8052FB53EED56AAD39AFA35 /* GachaPacks */,
+			);
+			name = iOS;
+			path = ../../Assets/Plugins/iOS;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		E59C0F08E8D7D1E4A214881A /* GachaShippingNativePreview */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = E2BD46A68389B3FCC64A2C57 /* Build configuration list for PBXNativeTarget "GachaShippingNativePreview" */;
+			buildPhases = (
+				AC4D4AD690C973595EE99E0D /* Sources */,
+				B43E7E0BC0AAE22A9769081E /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = GachaShippingNativePreview;
+			packageProductDependencies = (
+			);
+			productName = GachaShippingNativePreview;
+			productReference = C9F666C1F4A99B6CE718FA19 /* GachaShippingNativePreview.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		C8CE950724B7184BD8105669 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = YES;
+				LastUpgradeCheck = 1430;
+				TargetAttributes = {
+				};
+			};
+			buildConfigurationList = 963EB9ABD0F3977F14F60661 /* Build configuration list for PBXProject "GachaShippingNativePreview" */;
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				Base,
+				en,
+			);
+			mainGroup = 525A2E58B4C4CB6492603984;
+			minimizedProjectReferenceProxies = 1;
+			preferredProjectObjectVersion = 77;
+			productRefGroup = 091250BB5D5D6ABAB5BF2343 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				E59C0F08E8D7D1E4A214881A /* GachaShippingNativePreview */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		B43E7E0BC0AAE22A9769081E /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				AD686291080AD9CA623F0FA0 /* Oxanium-VariableFont_wght.ttf in Resources */,
+				F99BF8F6D77F44690B9F762E /* gacha-pack-chase-body.png in Resources */,
+				C748AE4C81066FF76914D553 /* gacha-pack-chase-emblem.png in Resources */,
+				24B18A1249107B70BAD33A2D /* gacha-pack-chase-flap.png in Resources */,
+				3D638F9998C42ABF52FEA08E /* gacha-pack-chase-foil.png in Resources */,
+				1CA89EA7A195F21BE1DABF63 /* gacha-pack-chase-print.png in Resources */,
+				2851B4CBE770C2CA1D658E6D /* gacha-pack-grail-body.png in Resources */,
+				9B04A5EB9738F1E25663399F /* gacha-pack-grail-emblem.png in Resources */,
+				B29DA679448F49F604ADF544 /* gacha-pack-grail-flap.png in Resources */,
+				F4FD6523A929599E3DB6E5BD /* gacha-pack-grail-foil.png in Resources */,
+				FAF76695C54B5599A4774736 /* gacha-pack-grail-print.png in Resources */,
+				3000FE982637377A64373988 /* gacha-pack-one-of-one-body.png in Resources */,
+				672359679E583A695CEB9159 /* gacha-pack-one-of-one-emblem.png in Resources */,
+				D356B5A62129E7020F7802F8 /* gacha-pack-one-of-one-flap.png in Resources */,
+				6506C77141CE5621334F900E /* gacha-pack-one-of-one-foil.png in Resources */,
+				CBD50DEACCA0ACBC8C8CC7FD /* gacha-pack-one-of-one-print.png in Resources */,
+				BE9E5AC259E8AC0CCF8774BC /* gacha-pack-refined-body.png in Resources */,
+				9E5CA938B66A4B2056357575 /* gacha-pack-refined-emblem.png in Resources */,
+				7BBA80FB503038F184FB3208 /* gacha-pack-refined-flap.png in Resources */,
+				4D5FFBDD614141CFC954F1B2 /* gacha-pack-refined-foil.png in Resources */,
+				D8C24A4DF193D0187B3CFABC /* gacha-pack-refined-print.png in Resources */,
+				DC91D42E98E93723437E0F6A /* gacha-pack-signature-body.png in Resources */,
+				495B5F52B1F1CDB5971A3F0F /* gacha-pack-signature-emblem.png in Resources */,
+				AE7890EBEDB3DA83538A940F /* gacha-pack-signature-flap.png in Resources */,
+				5524691C116D463F74785992 /* gacha-pack-signature-foil.png in Resources */,
+				C3A2F75860809F80CFC4E2C7 /* gacha-pack-signature-print.png in Resources */,
+				7A245C6D2EB56FCEFFF04A7D /* gacha-pack-standard-body.png in Resources */,
+				AC4F5F83D4ADB70E74D413E1 /* gacha-pack-standard-emblem.png in Resources */,
+				4BAD66ED8DAEC4DD59BBB603 /* gacha-pack-standard-flap.png in Resources */,
+				D3A5425A8B8C5FFA844B3218 /* gacha-pack-standard-foil.png in Resources */,
+				9D0FD3D745248C415580DB67 /* gacha-pack-standard-print.png in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		AC4D4AD690C973595EE99E0D /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				56A0F574680A43D8DDFBC237 /* FidgetGachaPackMotionFeed.swift in Sources */,
+				10B64AD4F65CF2CF25E83FCC /* FidgetGachaPackPresentation.swift in Sources */,
+				375A5E0FC4A81603BB885198 /* FidgetGachaRiveGateRules.swift in Sources */,
+				A2AA7D07C965A2412EAC5A06 /* FidgetGachaShippingStorefront.swift in Sources */,
+				D9C9E53A3E27FB0FE996DB94 /* FidgetGachaStore.swift in Sources */,
+				E54E5D57C763EFC40F56D489 /* FidgetProductUIComponents.swift in Sources */,
+				5FCF11E8B6CDB1FD6ECBF386 /* FidgetStoreKit.swift in Sources */,
+				23FA6337523656AA6398DDA0 /* GachaShippingNativePreviewApp.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		42DD900CDC19B30AFE3408DF /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Release;
+		};
+		8A6DEA11CBB3CB4F44604A10 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"$(inherited)",
+					"DEBUG=1",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
+		CB4A2086E28CDBF15BC9006E /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGNING_ALLOWED = NO;
+				CODE_SIGNING_REQUIRED = NO;
+				CODE_SIGN_IDENTITY = "";
+				INFOPLIST_FILE = Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "com.jiaweizhou.fidgeting.gacha-shipping-preview";
+				PRODUCT_NAME = GachaShippingNativePreview;
+				SDKROOT = iphoneos;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Release;
+		};
+		FD87F453C94093A7FC09EFEE /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGNING_ALLOWED = NO;
+				CODE_SIGNING_REQUIRED = NO;
+				CODE_SIGN_IDENTITY = "";
+				INFOPLIST_FILE = Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "com.jiaweizhou.fidgeting.gacha-shipping-preview";
+				PRODUCT_NAME = GachaShippingNativePreview;
+				SDKROOT = iphoneos;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Debug;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		963EB9ABD0F3977F14F60661 /* Build configuration list for PBXProject "GachaShippingNativePreview" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				8A6DEA11CBB3CB4F44604A10 /* Debug */,
+				42DD900CDC19B30AFE3408DF /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		E2BD46A68389B3FCC64A2C57 /* Build configuration list for PBXNativeTarget "GachaShippingNativePreview" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				FD87F453C94093A7FC09EFEE /* Debug */,
+				CB4A2086E28CDBF15BC9006E /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = C8CE950724B7184BD8105669 /* Project object */;
+}

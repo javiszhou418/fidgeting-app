@@ -1,0 +1,445 @@
+{
+  "schemaVersion": 1,
+  "gate": "10-export",
+  "revision": 11,
+  "status": "validation-pending-registration",
+  "rejectedRevision": {
+    "revision": 10,
+    "glbSha256": "ca174b340c87e58a6b76aa367baf910650546bc69c5f2794c52aff3268da1100",
+    "exactUserWording": "almost entirely white/washed out",
+    "evidencePath": "../user-rejection-washed-out-r010.jpg",
+    "evidenceSha256": "4f13f111d44b19c12b014a171fa118e97820fdc1ec9ac881246af66fddf90ac6",
+    "preservedImmutable": true
+  },
+  "rootCause": {
+    "baseColorTexture": "Deep blood-red and black source pixels are correct.",
+    "metallicRoughness": "Roughness is correctly packed in glTF G and treated as linear data.",
+    "emission": "Zero; not a washout source.",
+    "alpha": "Source is opaque; rev 11 makes OPAQUE explicit.",
+    "proceduralConversion": "Blender procedural bump/film cannot transfer exactly; rev 11 uses explicit baked baseColor and tangent normal.",
+    "glbMaterialFactors": "Rev 10 exported specularColorFactor 1.16 and transmission 0.08. Rev 11 bounds specular and removes transmission.",
+    "blenderReimportPreview": "Rev 10 evidence used 75 W + 42 W area lights about 0.10 m from a meter-scale import, causing the attached white board.",
+    "threeViewer": "Rev 10 used additive high-intensity lights and inherited exposure up to 2.0 without loading the approved HDR. Rev 11 requires neutral HDR and asset-specific exposure.",
+    "rootCause": "Both preview calibration and unbounded/unsupported portable material extensions; geometry, UVs, partitions, deep-red pixels, and emission were not the cause."
+  },
+  "correction": {
+    "scope": "portable GLB PBR transport and neutral review calibration only",
+    "authoritativeBlenderPreserved": true,
+    "explicitTransportApproximation": true,
+    "baseColor": "upper/lower 620x1000 sRGB; deep blood-red, black motif/perimeter",
+    "metallicRoughness": "linear glTF data; roughness G; metallic factor 0.08 top",
+    "normal": "linear tangent-space; scale 0.35",
+    "topSpecularFactor": 0.55,
+    "topClearcoat": [
+      0.32,
+      0.1
+    ],
+    "topTransmission": 0,
+    "sidePbr": {
+      "baseColor": [
+        0.014,
+        0.016,
+        0.02,
+        1
+      ],
+      "metallic": 0.2,
+      "roughness": 0.3
+    },
+    "rimPbr": {
+      "baseColor": [
+        0.68,
+        0.66,
+        0.62,
+        1
+      ],
+      "metallic": 1.0,
+      "roughness": 0.16
+    },
+    "alphaMode": "OPAQUE",
+    "emissiveFactor": [
+      0,
+      0,
+      0
+    ],
+    "viewer": {
+      "environment": "environment/neutral-control-r009.exr",
+      "toneMapping": "ACESFilmic",
+      "exposure": 0.9,
+      "environmentIntensity": 0.42,
+      "directLights": {
+        "hemisphere": 0.34,
+        "key": 1.05,
+        "fill": 0.28,
+        "rim": 0.42
+      }
+    }
+  },
+  "preserved": {
+    "geometryDigest": "2fcf6d2b4344511bc6b86ce940a927576f9cdb4988f4022959a3372f4d3c1952",
+    "materialStateDigest": "c876a0c4186ac2ce8364a309508c74c8a93a53bf57f993e36256cab2eaed2905",
+    "uvDigest": "c1c00c094735dfd28750f8b894b9f14c8e4bdfea9d3510791d95c1bb6908d9df",
+    "geometryAccessorBytesMatchRejectedExport": true,
+    "materialAssignmentsMatchRejectedExport": true,
+    "hierarchyMatchRejectedExport": true,
+    "endpointInterlock": true,
+    "closedZeroMotion": true
+  },
+  "objectiveVisual": {
+    "rejectedWhiteFraction": 0.15830913558186285,
+    "correctedGlbWhiteFraction": 0.0024797012262424965,
+    "correctedTopRedFraction": 0.42597809739668285,
+    "correctedSideMedianLuminance": 0.0117647061124444,
+    "correctedRimControlledHighlightFraction": 0.003229350937499449,
+    "sourceReimportMeanAbsoluteError": 0.004325436893850565,
+    "sameCamera": "M08R6_Hero",
+    "sameEnvironment": {
+      "camera": "M08R6_Hero",
+      "resolution": [
+        1000,
+        620
+      ],
+      "renderEngine": "BLENDER_EEVEE",
+      "world": "World",
+      "lights": [
+        {
+          "name": "G10R11_NeutralKey",
+          "irradiance": 1.4,
+          "angleDegrees": 18.0,
+          "directionAnchor": [
+            70,
+            -90,
+            105
+          ]
+        },
+        {
+          "name": "G10R11_NeutralFill",
+          "irradiance": 0.35,
+          "angleDegrees": 28.0,
+          "directionAnchor": [
+            -75,
+            -35,
+            58
+          ]
+        },
+        {
+          "name": "G10R11_NeutralRim",
+          "irradiance": 0.55,
+          "angleDegrees": 12.000000000000002,
+          "directionAnchor": [
+            32,
+            72,
+            68
+          ]
+        }
+      ],
+      "viewTransform": "Raw",
+      "look": "None",
+      "exposure": 0.0,
+      "gamma": 1.0
+    },
+    "viewerIndependent": {
+      "pass": true,
+      "redFraction": 0.3972145580690725,
+      "whiteFraction": 0.0009075007867446336,
+      "calibration": {
+        "assetId": "magnetic-slide-tile-export-glb-r011",
+        "environment": "unity/FidgetingApp/ArtSource/ModelPipeline/magnetic-slide-tile/evidence/10-export/rev-011/package/environment/neutral-control-r009.exr",
+        "environmentIntensity": 0.58,
+        "outputColorSpace": "SRGBColorSpace",
+        "toneMapping": "ACESFilmicToneMapping",
+        "exposure": 0.9,
+        "directLights": {
+          "hemisphere": 1,
+          "key": 2.2,
+          "fill": 0.7,
+          "rim": 0.9
+        },
+        "horizontalFovDegrees": 26.6,
+        "ready": true,
+        "exposureControl": 0.9,
+        "exposureMin": 0.7,
+        "exposureMax": 1.1,
+        "environmentChecked": true
+      }
+    }
+  },
+  "validations": {
+    "portableGlbBuild": {
+      "pass": true,
+      "checks": {
+        "sourceRev10Immutable": true,
+        "authoritativeBlendExact": true,
+        "fbxExact": true,
+        "collisionExact": true,
+        "deepRedBaseColor": true,
+        "blackMotifAndPerimeter": true,
+        "nativeNpot": true,
+        "normalMapsLinearTagged": true,
+        "allOpaque": true,
+        "zeroEmission": true,
+        "noTransmission": true,
+        "specularBounded": true,
+        "normalTextures": true,
+        "geometryMetadata": true,
+        "noAnimations": true,
+        "unityNotApplied": true
+      }
+    },
+    "rawGlbAudit": {
+      "pass": true,
+      "checks": {
+        "geometryAccessorBytesUnchanged": true,
+        "meshMaterialAssignmentsUnchanged": true,
+        "hierarchyUnchanged": true,
+        "geometryDigest": true,
+        "exactOneFixedAxis": true,
+        "fourTopGrooves": true,
+        "minimumOverlapNotMesh": true,
+        "noAnimations": true,
+        "topPartitions": true,
+        "sideArtworkCoverageZero": true,
+        "topArtworkPresent": true,
+        "independentTopTextures": true,
+        "topUsesCapUv": true,
+        "nativeNpot": true,
+        "opaqueImages": true,
+        "clampSampler": true,
+        "explicitOpaque": true,
+        "zeroEmission": true,
+        "noTransmission": true,
+        "boundedSpecular": true,
+        "deepRedPbr": true,
+        "darkSidePbr": true,
+        "silverRimPbr": true,
+        "normalMapsTagged": true,
+        "endpointInterlock": true,
+        "closedZeroMotion": true
+      }
+    },
+    "controlledBlenderComparison": {
+      "pass": true,
+      "checks": {
+        "sameCamera": true,
+        "sameEnvironment": true,
+        "scaleRecovered": true,
+        "boundsMatch": true,
+        "sourceMaterialSlotsUnchanged": true,
+        "sourceMaterialIndicesUnchanged": true,
+        "topArtworkPresent": true,
+        "sideArtworkZero": true,
+        "undersideArtworkZero": true,
+        "baseColorSRGB": true,
+        "dataMapsLinear": true,
+        "endpointMetadata": true,
+        "deepRedTop": true,
+        "darkBody": true,
+        "silverHighlightControlled": true,
+        "whiteClippingControlled": true,
+        "luminanceWithinTargetTolerance": true
+      }
+    },
+    "visualMetrics": {
+      "pass": true,
+      "checks": {
+        "sameCameraSimilarity": true,
+        "deepRedTop": true,
+        "darkSide": true,
+        "controlledSilver": true,
+        "noWhiteAreaExcess": true,
+        "rejectionWashedOut": true,
+        "reimportDarkerThanRejected": true
+      }
+    },
+    "threeViewer": {
+      "pass": true,
+      "checks": {
+        "browserPass": true,
+        "realGlbLoaded": true,
+        "orbitCompleted": true,
+        "zoomCompleted": true,
+        "neutralHdr": true,
+        "colorPipeline": true,
+        "exposureIsolated": true,
+        "deepBloodRedVisible": true,
+        "darkBodyVisible": true,
+        "silverControlled": true,
+        "noWhiteAreaExcess": true,
+        "rejectionWhiteAreaExcess": true,
+        "videoDimensions": true,
+        "videoFrames": true,
+        "videoNontrivial": true,
+        "runtimeClean": true
+      }
+    }
+  },
+  "files": [
+    {
+      "path": "environment/cubemap/cubemap-contract.json",
+      "sha256": "14dc65a7f6e2ea036e6a0c9ba640cb04c46b5ab28e4a4f88110cb643a8608c8e",
+      "sizeBytes": 1901
+    },
+    {
+      "path": "environment/cubemap/negative-x.exr",
+      "sha256": "77354b794e7dba2fb7149766ef2962a09d8ca8486a3a60404421344f72809882",
+      "sizeBytes": 2688276
+    },
+    {
+      "path": "environment/cubemap/negative-y.exr",
+      "sha256": "eeb99a271ea2e70a102395f314fb80a4c20d7980decb6426a94eb9574145615d",
+      "sizeBytes": 2959339
+    },
+    {
+      "path": "environment/cubemap/negative-z.exr",
+      "sha256": "a805391a7161d718f55e4b13fc8b053eca3f9eb5c97ab290ae1208429a634875",
+      "sizeBytes": 2964710
+    },
+    {
+      "path": "environment/cubemap/positive-x.exr",
+      "sha256": "59edaf2b250d962e196f91a2df6aa36f40a7f4273f588748459648574b7f73c5",
+      "sizeBytes": 2976526
+    },
+    {
+      "path": "environment/cubemap/positive-y.exr",
+      "sha256": "a826165174802c8573f80bc57654858820a7184a520bc53713e556c8ba292cc9",
+      "sizeBytes": 3012386
+    },
+    {
+      "path": "environment/cubemap/positive-z.exr",
+      "sha256": "8ba2447c400ae53111b3089dd35d892d71416ca99e6f8612d6ddaf31f8f9c572",
+      "sizeBytes": 2794890
+    },
+    {
+      "path": "environment/neutral-control-r009.exr",
+      "sha256": "a5b310c8c7fc17bda4110adb80e68913f1b5d623ffe01d935574813b80d1a872",
+      "sizeBytes": 8120546
+    },
+    {
+      "path": "environment/target-shipping-studio-r009-preview.png",
+      "sha256": "09f6da7b201c03e0b116029d02ceb57efefb1b1600f9e905684a557d82263281",
+      "sizeBytes": 376681
+    },
+    {
+      "path": "environment/target-shipping-studio-r009.exr",
+      "sha256": "2fe029beb803d7f9a26d229a1969914f210a7b5c4f311bfe9878cb52c7d73d13",
+      "sizeBytes": 21680897
+    },
+    {
+      "path": "environment/unity-portability-contract-r009.json",
+      "sha256": "d172c64ce56f89170b9f072e8efe61c3c7e8277235228bac957229ea319ffd13",
+      "sizeBytes": 15920
+    },
+    {
+      "path": "hierarchy-motion-metadata-r011.json",
+      "sha256": "f968443f921727b73efb0ff5954f3b4cade2d1bc2342f34a2f070a096bf18059",
+      "sizeBytes": 18363
+    },
+    {
+      "path": "magnetic-slide-tile-authoritative-r011.blend",
+      "sha256": "68a1173faa8bc9023ba51a048f50c4a622898a8af72fc75fae6b087b113af11a",
+      "sizeBytes": 1430724
+    },
+    {
+      "path": "magnetic-slide-tile-collision-r011.fbx",
+      "sha256": "893ccfda54f7b15a3648e5997291340ec1bb027ed0492d5f136eb140ee674813",
+      "sizeBytes": 27292
+    },
+    {
+      "path": "magnetic-slide-tile-glb-reimport-r011.blend",
+      "sha256": "3526ea298928d7ed89068c59b4a68d97a84cb77c6a2713272082606dede54f51",
+      "sizeBytes": 5637226
+    },
+    {
+      "path": "magnetic-slide-tile-glb-reimport-r011.blend1",
+      "sha256": "0cbd3d5dd2687d4e6b51dee18bf44dca758a4742016daf2cdccbc0b899fc44cf",
+      "sizeBytes": 5637261
+    },
+    {
+      "path": "magnetic-slide-tile-render-r011.fbx",
+      "sha256": "816ac0a268e06958331fe3a49d5ce5ef234dcb1ae84660253e70a708c4db1222",
+      "sizeBytes": 8779708
+    },
+    {
+      "path": "magnetic-slide-tile-render-r011.glb",
+      "sha256": "e9f90e9e77756b33857726f95a01194996469f16101dbad91fdb7024b679c2ca",
+      "sizeBytes": 12410684
+    },
+    {
+      "path": "textures/lower-albedo.png",
+      "sha256": "968c1e87ca2d5ea7c8fc57106e42bcd09dc95395fac7dd3be569e580ea8850eb",
+      "sizeBytes": 195875
+    },
+    {
+      "path": "textures/lower-artwork-mask.png",
+      "sha256": "7bf5921f469a217b850ff2ea94dc5ae6c251091b8de60bd81c1b88ec42dfa7c2",
+      "sizeBytes": 22609
+    },
+    {
+      "path": "textures/lower-maskmap.png",
+      "sha256": "02899afebda3b2d508a229725e6eb08860f81e2d0b6a27b45cef87fd93893970",
+      "sizeBytes": 106739
+    },
+    {
+      "path": "textures/lower-normal.png",
+      "sha256": "b700dc78abc6db8b2a491d3faf7e4ef0e07767bda0257ad0ca0c7225d5cebb75",
+      "sizeBytes": 3835
+    },
+    {
+      "path": "textures/lower-roughness.png",
+      "sha256": "ca2697560a2e57685a71c423f15f70a72ebb47c93c53cae0e3a8dae0b3248245",
+      "sizeBytes": 72142
+    },
+    {
+      "path": "textures/lower-transport-normal-r011.png",
+      "sha256": "20385e93bb43b1b843ae990474380943be2c00a42277d27958854c04ebfd9d46",
+      "sizeBytes": 92320
+    },
+    {
+      "path": "textures/top-perimeter-mask.png",
+      "sha256": "2179bf26210994c8b3d279337bf6ad0f4beaee3c7285ae97d1cd888db2bd64fc",
+      "sizeBytes": 5632
+    },
+    {
+      "path": "textures/upper-albedo.png",
+      "sha256": "c0e9305d475cd2c591efc8a833a0aafb1aef4ccc437d84a3417674e6d1b453a5",
+      "sizeBytes": 207914
+    },
+    {
+      "path": "textures/upper-artwork-mask.png",
+      "sha256": "8250df70d2286849db353862283b0d3db9c66e1ac92bed3795bcb5377a431c36",
+      "sizeBytes": 20641
+    },
+    {
+      "path": "textures/upper-maskmap.png",
+      "sha256": "312609ae272c3634337e9af5f6e2b84819025ddb2529cfc03b5ef533b0d790d1",
+      "sizeBytes": 116847
+    },
+    {
+      "path": "textures/upper-normal.png",
+      "sha256": "b700dc78abc6db8b2a491d3faf7e4ef0e07767bda0257ad0ca0c7225d5cebb75",
+      "sizeBytes": 3835
+    },
+    {
+      "path": "textures/upper-roughness.png",
+      "sha256": "854f1dbc393585ff9b88f808c1a46a35b091088ac8b83894763f502876e3df6a",
+      "sizeBytes": 80494
+    },
+    {
+      "path": "textures/upper-transport-normal-r011.png",
+      "sha256": "72db9aeac0f012cb931add1bb5fb7d0a4db029f193d2deee34468ae9ebe155ad",
+      "sizeBytes": 117279
+    },
+    {
+      "path": "unity-import-contract-r011.json",
+      "sha256": "7bc4602766321b41b0297b781ac30db7dc63c8e68cf4f65d7c664d7fd91b38be",
+      "sizeBytes": 7603
+    }
+  ],
+  "scope": {
+    "simulatorUsed": false,
+    "unityImportApplied": false,
+    "unitySceneModified": false,
+    "buildRun": false,
+    "installed": false,
+    "deviceRun": false
+  }
+}

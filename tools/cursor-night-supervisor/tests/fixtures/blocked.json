@@ -1,0 +1,65 @@
+{
+  "now": "2026-09-05T16:00:00Z",
+  "repoRoot": "/fixture/Fidgeting app",
+  "terminalLogDiscovery": "explicit",
+  "commands": {
+    "pmsetBattery": {
+      "exitCode": 0,
+      "stdout": "Now drawing from 'Battery Power'\n -InternalBattery-0\t40%; discharging\n",
+      "stderr": ""
+    },
+    "pmsetAssertions": {
+      "exitCode": 0,
+      "stdout": "Assertion status system-wide:\n   PreventUserIdleDisplaySleep    0\n   PreventSystemSleep             0\n   PreventUserIdleSystemSleep     1\n",
+      "stderr": ""
+    },
+    "disk": {
+      "exitCode": 0,
+      "stdout": "Filesystem 1024-blocks Used Available Capacity Mounted on\n/dev/disk3s5 100000000 99000000 1000000 99% /System/Volumes/Data\n",
+      "stderr": ""
+    },
+    "gitStatus": {
+      "exitCode": 0,
+      "stdout": "UU tools/model-provenance-explorer/pipeline-core.mjs\n M another-file\n?? new-file\n",
+      "stderr": ""
+    },
+    "pipelineStatus": {
+      "exitCode": 0,
+      "stdout": "UU tools/model-provenance-explorer/pipeline-core.mjs\n",
+      "stderr": ""
+    },
+    "pipelineDiff": {
+      "exitCode": 0,
+      "stdout": "diff --git a/tools/model-provenance-explorer/pipeline-core.mjs b/tools/model-provenance-explorer/pipeline-core.mjs\n",
+      "stderr": ""
+    }
+  },
+  "files": {
+    "unityLock": {
+      "path": "/fixture/Fidgeting app/unity/FidgetingApp/Temp/UnityLockfile",
+      "exists": true,
+      "sizeBytes": 0,
+      "modifiedAt": "2026-09-05T15:58:00Z"
+    },
+    "pipelineCore": {
+      "path": "/fixture/Fidgeting app/tools/model-provenance-explorer/pipeline-core.mjs",
+      "exists": true,
+      "sizeBytes": 42,
+      "modifiedAt": "2026-09-05T15:30:00Z",
+      "contentSha256": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"
+    },
+    "terminalLogs": [
+      {
+        "path": "/fixture/logs/mobile-app-terminal.log",
+        "exists": true,
+        "sizeBytes": 240,
+        "modifiedAt": "2026-09-05T15:59:00Z",
+        "tail": "build failed\nexit status: 65\n"
+      },
+      {
+        "path": "/fixture/logs/card-draw-terminal.log",
+        "exists": false
+      }
+    ]
+  }
+}

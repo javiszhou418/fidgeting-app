@@ -3,6 +3,7 @@ using System.IO;
 using System.Linq;
 using System.Reflection;
 using FidgetingApp.Product;
+using FidgetingApp.Product.Gacha;
 using NUnit.Framework;
 using UnityEditor;
 using UnityEngine;
@@ -122,21 +123,21 @@ namespace FidgetingApp.DisplayCase.Tests.Editor
         }
 
         [Test]
-        public void ProductProfiles_CoverAllSixShippingModelsAndPreserveBaseline()
+        public void ProductProfiles_CoverAllFourShippingModelsAndPreserveBaseline()
         {
             PremiumDisplayCaseProductProfile[] profiles =
                 PremiumDisplayCaseProductProfiles.Profiles.ToArray();
 
-            Assert.That(profiles.Length, Is.EqualTo(6));
+            Assert.That(profiles.Length, Is.EqualTo(4));
             Assert.That(profiles.Select(profile => profile.ModelId),
                 Is.EquivalentTo(ProductCatalog.ShippingModelIds()));
             Assert.That(profiles.Select(profile => profile.ModelId).Distinct().Count(),
-                Is.EqualTo(6));
+                Is.EqualTo(4));
             Assert.That(profiles.Select(profile => profile.EnglishDisplayName),
                 Has.All.Not.Empty);
             Assert.That(profiles.Select(profile => profile.EnglishDisplayName)
                     .Distinct().Count(),
-                Is.EqualTo(6));
+                Is.EqualTo(4));
             Assert.That(profiles.All(profile =>
                     profile.EnglishDisplayName
                         == profile.EnglishDisplayName.ToUpperInvariant()),
@@ -177,14 +178,8 @@ namespace FidgetingApp.DisplayCase.Tests.Editor
                 Has.All.EqualTo(magneticBaseline.ContentOptions.InitialEulerAngles));
 
             Assert.That(PremiumDisplayCaseProductProfiles.Resolve(
-                    ProductCatalog.PointedThreeBladeModelId).SceneRootName,
-                Is.EqualTo("ThreeBladeEDC_Root"));
-            Assert.That(PremiumDisplayCaseProductProfiles.Resolve(
                     ProductCatalog.MetalThreeBladeModelId).SceneRootName,
                 Is.EqualTo("ThreeBladeEDC_Root"));
-            Assert.That(PremiumDisplayCaseProductProfiles.Resolve(
-                    ProductCatalog.GoldFourWingModelId).SceneRootName,
-                Is.EqualTo("ImportedSpinner_Root"));
             Assert.That(PremiumDisplayCaseProductProfiles.Resolve(
                     ProductCatalog.GraphiteTwoLobeModelId).SceneRootName,
                 Is.EqualTo("TwoLobeBar_Root"));
@@ -790,7 +785,10 @@ namespace FidgetingApp.DisplayCase.Tests.Editor
                 coordinator);
             StringAssert.Contains("activeDisplayCase.SetFeaturedBadge", coordinator);
             StringAssert.Contains("activeDisplayCase.ClearFeaturedBadge", coordinator);
-            StringAssert.DoesNotContain(
+            StringAssert.Contains(
+                "receipt-prize-not-canonical-toy",
+                coordinator);
+            StringAssert.Contains(
                 "ThreeBladeDisplayPrizeFactory.Instantiate()",
                 coordinator);
             StringAssert.Contains("activeDisplayCase.setContent", coordinator);
@@ -804,21 +802,34 @@ namespace FidgetingApp.DisplayCase.Tests.Editor
             Assert.That(prefab, Is.Not.Null,
                 "Run the three-blade display-prize builder first.");
 
-            MeshFilter frame = prefab.GetComponentsInChildren<MeshFilter>(true)
-                .Single(item => item.name == "ThreeBladeFrame");
-            MeshFilter insets = prefab.GetComponentsInChildren<MeshFilter>(true)
-                .Single(item => item.name == "ThreeBladeInsets");
-            MeshFilter cap = prefab.GetComponentsInChildren<MeshFilter>(true)
-                .Single(item => item.name == "TopCap");
-            Assert.That(frame.sharedMesh.name, Is.EqualTo("M_ThreeBladeFrame"));
-            Assert.That(insets.sharedMesh.name, Is.EqualTo("M_ThreeBladeInsets"));
-            Assert.That(cap.sharedMesh.name, Is.EqualTo("M_ScallopedTopCap"));
-            Assert.That(frame.GetComponent<MeshRenderer>().sharedMaterials
-                .Select(material => material.name),
-                Is.EquivalentTo(new[] { "M_BladeSandblast", "M_BevelPolished" }));
-            Assert.That(cap.GetComponent<MeshRenderer>().sharedMaterials
-                .Select(material => material.name),
-                Is.EquivalentTo(new[] { "M_CapRadialBrushed", "M_BevelPolished" }));
+            // R053 (user 2026-09-09 18:58): the reveal shows the approved
+            // GEEONE dragon-scale tri-spinner, not the legacy procedural blades.
+            MeshRenderer[] renderers = prefab.GetComponentsInChildren<MeshRenderer>(true);
+            Assert.That(renderers.Select(item => item.name),
+                Does.Not.Contain("ThreeBladeFrame").And.Not.Contain("ThreeBladeInsets"));
+            MeshRenderer body = renderers.Single(item => item.name == "Rotor_Body");
+            MeshRenderer capTop = renderers.Single(item => item.name == "Cap_Top");
+            MeshRenderer capBottom = renderers.Single(item => item.name == "Cap_Bottom");
+            MeshRenderer hubCore = renderers.Single(item => item.name == "Hub_Core");
+            Assert.That(body.transform.IsChildOf(prefab.transform.Find("RotorVisual")),
+                Is.True);
+            Assert.That(capTop.transform.IsChildOf(prefab.transform.Find("HubVisual")),
+                Is.True);
+            Assert.That(capBottom.transform.IsChildOf(prefab.transform.Find("HubVisual")),
+                Is.True);
+            Assert.That(hubCore.transform.IsChildOf(prefab.transform.Find("HubVisual")),
+                Is.True);
+            Assert.That(body.sharedMaterial.name, Is.EqualTo("M_GeeoneSatin"));
+            Assert.That(capTop.sharedMaterial.name, Is.EqualTo("M_GeeoneDiscTurned"));
+            Assert.That(capBottom.sharedMaterial.name, Is.EqualTo("M_GeeoneDiscTurned"));
+            Assert.That(hubCore.sharedMaterial.name, Is.EqualTo("M_GeeoneHubDark"));
+            Assert.That(prefab.GetComponentsInChildren<Collider>(true), Is.Empty);
+            Assert.That(prefab.GetComponentsInChildren<ReflectionProbe>(true), Is.Empty,
+                "the studio cubemap reads black from the case's horizontal view (diag 09-09)");
+            Assert.That(
+                GachaShippingRevealDirector.GeeoneBodyEmissiveScale,
+                Is.LessThan(0.3f).And.GreaterThan(0f),
+                "rarity glow tints the satin body without the white blob");
         }
 
         [Test]

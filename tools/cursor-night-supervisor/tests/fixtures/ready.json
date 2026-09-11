@@ -1,0 +1,59 @@
+{
+  "now": "2026-09-05T16:00:00Z",
+  "repoRoot": "/fixture/Fidgeting app",
+  "terminalLogDiscovery": "fixture",
+  "commands": {
+    "pmsetBattery": {
+      "exitCode": 0,
+      "stdout": "Now drawing from 'AC Power'\n -InternalBattery-0\t80%; AC attached; not charging present: true\n",
+      "stderr": ""
+    },
+    "pmsetAssertions": {
+      "exitCode": 0,
+      "stdout": "Assertion status system-wide:\n   PreventUserIdleDisplaySleep    1\n   PreventSystemSleep             1\n   PreventUserIdleSystemSleep     1\n",
+      "stderr": ""
+    },
+    "disk": {
+      "exitCode": 0,
+      "stdout": "Filesystem 1024-blocks Used Available Capacity Mounted on\n/dev/disk3s5 100000000 10000000 90000000 10% /System/Volumes/Data\n",
+      "stderr": ""
+    },
+    "gitStatus": {
+      "exitCode": 0,
+      "stdout": " M unity/FidgetingApp/Docs/IMPLEMENTATION_STATUS.md\n?? scratch-note.txt\n",
+      "stderr": ""
+    },
+    "pipelineStatus": {
+      "exitCode": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    "pipelineDiff": {
+      "exitCode": 0,
+      "stdout": "",
+      "stderr": ""
+    }
+  },
+  "files": {
+    "unityLock": {
+      "path": "/fixture/Fidgeting app/unity/FidgetingApp/Temp/UnityLockfile",
+      "exists": false
+    },
+    "pipelineCore": {
+      "path": "/fixture/Fidgeting app/tools/model-provenance-explorer/pipeline-core.mjs",
+      "exists": true,
+      "sizeBytes": 42,
+      "modifiedAt": "2026-09-05T15:30:00Z",
+      "contentSha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+    },
+    "terminalLogs": [
+      {
+        "path": "/fixture/logs/mobile-app-terminal.log",
+        "exists": true,
+        "sizeBytes": 120,
+        "modifiedAt": "2026-09-05T15:59:30Z",
+        "tail": "focused tests passed\nProcess exited with code 0\n"
+      }
+    ]
+  }
+}

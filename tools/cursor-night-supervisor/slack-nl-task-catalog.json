@@ -1,0 +1,35 @@
+{
+  "schemaVersion": "1.0",
+  "catalogVersion": "fidgeting-slack-routing-v2",
+  "controller": {
+    "backend": "codex",
+    "threadId": "01a07200-0cde-7762-8831-4141fb9cd88b",
+    "projectId": "c819ead1-bab4-4e4b-8733-c7774d7f51d7",
+    "hostId": "local",
+    "projectRoot": "/Users/jiawei.zhou/Documents/Fidgeting app",
+    "exactTitle": "规划 EDC 玩具自动化工作流"
+  },
+  "targets": [
+    {
+      "targetKey": "card-draw-scene-research",
+      "backend": "cursor-native",
+      "threadId": null,
+      "exactTitle": "Card draw scene research",
+      "authority": "inspect-only"
+    },
+    {
+      "targetKey": "mobile-app-version-issue",
+      "backend": "cursor-native",
+      "threadId": null,
+      "exactTitle": "Mobile app version issue",
+      "authority": "allowlisted-safe"
+    },
+    {
+      "targetKey": "conversation-freezing-issue",
+      "backend": "cursor-native",
+      "threadId": null,
+      "exactTitle": "Conversation freezing issue",
+      "authority": "allowlisted-safe"
+    }
+  ]
+}

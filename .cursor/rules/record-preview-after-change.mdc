@@ -1,0 +1,15 @@
+---
+description: Record a short Simulator screen capture after every visible UI or artwork change
+alwaysApply: true
+---
+
+# Record a preview after every change
+
+User request 2026-09-08 19:57: "你每次做改动之后，都稍微录个屏".
+
+- After any change that affects what the user sees (SwiftUI, Unity presentation, pack artwork, motion, copy), rebuild the shipping-source preview and record it before reporting.
+- Use the real preview host, not a mockup: `xcrun simctl io <device> recordVideo --codec=h264`, re-encode with `ffmpeg -c:v libx264 -crf 17 -pix_fmt yuv420p -movflags +faststart`.
+- Save under `Artifacts/<Feature>/<round-id>/<round-id>-<topic>-clear.mp4` with at least one extracted frame PNG. Delete the raw capture.
+- A screenshot alone is acceptable only for static, non-animated changes; say so explicitly.
+- Reference the recording path in `unity/FidgetingApp/Docs/IMPLEMENTATION_STATUS.md` and in the reply. Keep "视觉批准待确认，未推送手机" until the user approves.
+- Rule-only or test-only edits with no visible effect need no recording; state that no visible change occurred.

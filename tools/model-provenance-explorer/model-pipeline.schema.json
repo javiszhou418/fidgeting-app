@@ -1,0 +1,108 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://fidgeting.local/schema/model-pipeline.schema.json",
+  "title": "Fidgeting Model Pipeline Manifest",
+  "type": "object",
+  "required": ["schemaVersion", "revision", "model", "route", "currentState", "assets", "claims", "stages", "issues"],
+  "properties": {
+    "schemaVersion": { "const": 1 },
+    "revision": { "type": "integer", "minimum": 1 },
+    "model": {
+      "type": "object",
+      "required": ["id", "name", "mechanism", "status"],
+      "properties": {
+        "id": { "type": "string", "pattern": "^[a-z0-9][a-z0-9-]*$" },
+        "name": { "type": "string", "minLength": 1 },
+        "mechanism": { "type": "string" },
+        "status": { "type": "string" }
+      }
+    },
+    "route": {
+      "type": "object",
+      "required": ["primary", "rodinPolicy"],
+      "properties": {
+        "primary": { "const": "blender-cli" },
+        "rodinPolicy": { "const": "concept-only" }
+      }
+    },
+    "assets": { "type": "array", "items": { "$ref": "#/$defs/asset" } },
+    "claims": { "type": "array", "items": { "$ref": "#/$defs/claim" } },
+    "referenceDiscovery": { "$ref": "#/$defs/referenceDiscovery" },
+    "stages": { "type": "array", "minItems": 12, "maxItems": 12, "items": { "$ref": "#/$defs/stage" } },
+    "issues": { "type": "array", "items": { "$ref": "#/$defs/issue" } }
+  },
+  "$defs": {
+    "asset": {
+      "type": "object",
+      "required": ["id", "stageId", "slot", "path", "role", "producer", "sourceAssetIds"],
+      "properties": {
+        "id": { "type": "string" },
+        "stageId": { "type": "string" },
+        "slot": { "type": "string" },
+        "path": { "type": "string" },
+        "sha256": { "type": ["string", "null"] },
+        "role": { "type": "string" },
+        "producer": { "type": "object" },
+        "provenance": {
+          "type": "object",
+          "required": ["origin", "contentClass", "assertedBy"],
+          "properties": {
+            "origin": { "enum": ["user-provided", "assistant-generated", "external", "repository-generated", "unknown-legacy"] },
+            "contentClass": { "type": "string", "minLength": 1 },
+            "assertedBy": { "enum": ["user", "assistant", "repository", "legacy-record"] },
+            "note": { "type": "string" }
+          }
+        },
+        "sourceAssetIds": { "type": "array", "items": { "type": "string" } },
+        "view": { "type": ["object", "null"] },
+        "reviewState": { "enum": ["active", "rejected", "superseded", "internal-only"] },
+        "supersededBy": { "type": "string" },
+        "supersededAt": { "type": "string" },
+        "dispositionNote": { "type": "string" },
+        "usagePolicy": { "type": "string" },
+        "productAnimationEligible": { "type": "boolean" }
+      }
+    },
+    "claim": {
+      "type": "object",
+      "required": ["id", "stageId", "category", "statement", "confidence", "sourceAssetIds"],
+      "properties": {
+        "confidence": { "enum": ["measured", "high", "medium", "low", "unknown"] },
+        "sourceRegions": { "type": "array" }
+      }
+    },
+    "stage": {
+      "type": "object",
+      "required": ["id", "revision", "status", "artifactIds", "validations"],
+      "properties": {
+        "status": { "enum": ["missing", "blocked", "draft", "ready_for_review", "approved", "rejected", "stale", "legacy"] }
+      }
+    },
+    "referenceDiscovery": {
+      "type": "object",
+      "required": ["status", "keywords", "queries", "candidates", "guardrail"],
+      "properties": {
+        "status": { "enum": ["not-started", "pending-stage-2", "ready-for-stage-2-review", "approved", "rejected", "stale"] },
+        "keywords": { "type": "array", "items": { "type": "object", "required": ["term", "kind", "sourceAssetIds"] } },
+        "queries": { "type": "array", "items": { "type": "object", "required": ["query", "language", "status"] } },
+        "candidates": { "type": "array", "items": { "type": "object", "required": ["id", "title", "url", "matchStatus", "rationale"] } },
+        "guardrail": { "type": "string", "minLength": 1 }
+      }
+    },
+    "issue": {
+      "type": "object",
+      "required": ["id", "stageId", "assetId", "severity", "status", "note"],
+      "properties": {
+        "region": {
+          "type": ["object", "null"],
+          "properties": {
+            "x": { "type": "number", "minimum": 0, "maximum": 1 },
+            "y": { "type": "number", "minimum": 0, "maximum": 1 },
+            "width": { "type": "number", "exclusiveMinimum": 0, "maximum": 1 },
+            "height": { "type": "number", "exclusiveMinimum": 0, "maximum": 1 }
+          }
+        }
+      }
+    }
+  }
+}

@@ -666,6 +666,16 @@ namespace FidgetingApp.Product
                 return 300;
             }
 
+            // GEEONE 龙鳞三叶: the top cap is one mesh (14-sector dish + crown + skirt); it is both the
+            // structural shell and the visible face.
+            if (string.Equals(
+                candidate.gameObject.name,
+                "Cap_Top",
+                StringComparison.Ordinal))
+            {
+                return 300;
+            }
+
             if (string.Equals(
                 candidate.gameObject.name,
                 "FingerCap_Top",

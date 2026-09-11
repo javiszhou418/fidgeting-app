@@ -1,0 +1,98 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://fidgeting.local/schemas/mechanism-evidence-contract.schema.json",
+  "title": "Fidgeting Mechanism Evidence Contract",
+  "type": "object",
+  "required": [
+    "schemaVersion",
+    "modelId",
+    "gate",
+    "revision",
+    "sourceInventory",
+    "constraints",
+    "coverageMatrix",
+    "conclusions",
+    "unknowns",
+    "downstreamPolicy"
+  ],
+  "properties": {
+    "schemaVersion": { "const": 1 },
+    "modelId": { "type": "string" },
+    "gate": { "const": "02-analysis" },
+    "revision": { "type": "integer", "minimum": 1 },
+    "sourceInventory": {
+      "type": "object",
+      "required": ["assetIds", "groups", "counts", "allFilesExistAndHashed"],
+      "properties": {
+        "assetIds": { "type": "array", "items": { "type": "string" }, "minItems": 1, "uniqueItems": true },
+        "groups": { "type": "object" },
+        "counts": { "type": "object" },
+        "allFilesExistAndHashed": { "const": true }
+      }
+    },
+    "constraints": {
+      "type": "array",
+      "minItems": 12,
+      "items": {
+        "type": "object",
+        "required": [
+          "id",
+          "value",
+          "units",
+          "state",
+          "confidence",
+          "sourceAssetIds",
+          "regions",
+          "decisionNote",
+          "downstreamConsumers"
+        ],
+        "properties": {
+          "id": { "type": "string", "pattern": "^MEC-" },
+          "value": {},
+          "units": { "type": "string" },
+          "state": { "enum": ["user-authoritative", "video-measured", "inferred", "unknown"] },
+          "confidence": { "enum": ["locked", "high", "medium", "low", "unknown"] },
+          "sourceAssetIds": { "type": "array", "items": { "type": "string" }, "minItems": 1, "uniqueItems": true },
+          "regions": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "required": ["assetId"],
+              "properties": {
+                "assetId": { "type": "string" },
+                "frameIndex": { "type": "integer", "minimum": 0 },
+                "ptsSeconds": { "type": "number", "minimum": 0 },
+                "normalizedRect": {
+                  "type": "array",
+                  "items": { "type": "number", "minimum": 0, "maximum": 1 },
+                  "minItems": 4,
+                  "maxItems": 4
+                },
+                "note": { "type": "string" }
+              }
+            }
+          },
+          "decisionNote": { "type": "string", "minLength": 1 },
+          "downstreamConsumers": {
+            "type": "array",
+            "items": { "enum": ["interactive-cad", "blender", "unity", "haptics", "tests", "shipping-review"] },
+            "minItems": 1,
+            "uniqueItems": true
+          }
+        }
+      }
+    },
+    "coverageMatrix": { "type": "array", "minItems": 13 },
+    "conclusions": { "type": "array", "minItems": 5, "maxItems": 7 },
+    "unknowns": { "type": "array", "minItems": 1 },
+    "downstreamPolicy": {
+      "type": "object",
+      "required": ["gate02ApprovalRequired", "contractHashRequired", "duplicateDefaultsForbidden"],
+      "properties": {
+        "gate02ApprovalRequired": { "const": true },
+        "contractHashRequired": { "const": true },
+        "duplicateDefaultsForbidden": { "const": true }
+      }
+    }
+  }
+}

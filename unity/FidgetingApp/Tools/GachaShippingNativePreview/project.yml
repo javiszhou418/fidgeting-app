@@ -1,0 +1,35 @@
+name: GachaShippingNativePreview
+options:
+  minimumXcodeGenVersion: 2.38.0
+targets:
+  GachaShippingNativePreview:
+    type: application
+    platform: iOS
+    deploymentTarget: "15.0"
+    sources:
+      - path: .
+        includes:
+          - GachaShippingNativePreviewApp.swift
+      - path: ../../Assets/Plugins/iOS
+        includes:
+          - FidgetProductUIComponents.swift
+          - FidgetStoreKit.swift
+          - FidgetGachaPackPresentation.swift
+          - FidgetGachaRiveGateRules.swift
+          - FidgetGachaStore.swift
+          - FidgetGachaShippingStorefront.swift
+          - FidgetGachaPackMotionFeed.swift
+          - Fonts/Oxanium-VariableFont_wght.ttf
+          - GachaPacks/*.png
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.jiaweizhou.fidgeting.gacha-shipping-preview
+        PRODUCT_NAME: GachaShippingNativePreview
+        INFOPLIST_FILE: Info.plist
+        TARGETED_DEVICE_FAMILY: "1"
+        SWIFT_VERSION: "5.0"
+        CODE_SIGNING_ALLOWED: "NO"
+        CODE_SIGNING_REQUIRED: "NO"
+        CODE_SIGN_IDENTITY: ""
+    scheme:
+      testTargets: []

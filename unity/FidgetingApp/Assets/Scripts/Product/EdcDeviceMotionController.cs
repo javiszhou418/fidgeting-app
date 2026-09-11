@@ -6,10 +6,14 @@ using UnityEngine;
 namespace FidgetingApp.Product
 {
     /// <summary>
-    /// Gives the linear slider and magnetic fan card the same Core Motion
-    /// presentation response as the rotor scenes. It only publishes visual
-    /// tilt and camera orbit; it never writes mechanism progress, physics,
-    /// progression, or Haptics.
+    /// Core Motion input for the slide tile and magnetic fan card. Tilt drives
+    /// only visual parallax and camera orbit. The same 60 Hz sample is also
+    /// mapped into world space (gravity, user acceleration, phone angular
+    /// velocity) and handed to the two mechanisms, which own every resulting
+    /// load, breakaway, travel, capture, and semantic event. This component
+    /// never writes mechanism progress, physics, progression, or Haptics.
+    /// While a finger owns the model, Core Motion stops and the mechanisms
+    /// receive no device sample.
     /// </summary>
     [DisallowMultipleComponent]
     [RequireComponent(typeof(EdcPortraitCameraFramer))]
@@ -24,6 +28,7 @@ namespace FidgetingApp.Product
         private Vector2 filteredTilt;
         private bool hasReference;
         private bool motionAvailable;
+        private bool mechanismDriveEnabled = true;
         private EdcSliderController sliderController;
         private FanCardController fanCardController;
         private bool productInteractionSuppressed;
@@ -31,6 +36,7 @@ namespace FidgetingApp.Product
 
         public bool IsProductInteractionSuppressed =>
             productInteractionSuppressed;
+        public bool MechanismDriveEnabled => mechanismDriveEnabled;
 
         private void Awake()
         {
@@ -71,6 +77,7 @@ namespace FidgetingApp.Product
                     motionSuspendedForInteraction = true;
                     motionAvailable = false;
                     IosDeviceMotion.Stop();
+                    PublishDeviceSampleUnavailable();
                 }
                 // SpinnerSceneParallaxController treats an old sample as an
                 // instruction to ease back to zero. Republishing the frozen
@@ -94,10 +101,15 @@ namespace FidgetingApp.Product
             if (!motionAvailable
                 || !IosDeviceMotion.TryRead(
                     out Vector3 attitude,
-                    out Vector3 rotationRate))
+                    out Vector3 rotationRate,
+                    out Vector3 gravity,
+                    out Vector3 userAcceleration))
             {
+                PublishDeviceSampleUnavailable();
                 return;
             }
+
+            PublishDeviceSample(gravity, userAcceleration, rotationRate);
 
             Vector3 attitudeDegrees = attitude * Mathf.Rad2Deg;
             if (!hasReference)
@@ -156,6 +168,19 @@ namespace FidgetingApp.Product
             cameraFramer?.SetMotionTilt(filteredTilt, maximumMotionOrbit);
         }
 
+        /// <summary>
+        /// Library browsing keeps parallax but must not tilt, twist, or flick
+        /// the mechanism until the toy is the active detail page.
+        /// </summary>
+        public void SetMechanismDriveEnabled(bool enabled)
+        {
+            mechanismDriveEnabled = enabled;
+            if (!enabled)
+            {
+                PublishDeviceSampleUnavailable();
+            }
+        }
+
         public void ResetReference()
         {
             hasReference = false;
@@ -184,6 +209,55 @@ namespace FidgetingApp.Product
             productInteractionSuppressed = false;
             motionSuspendedForInteraction = false;
             IosDeviceMotion.Stop();
+            PublishDeviceSampleUnavailable();
+        }
+
+        private void PublishDeviceSample(
+            Vector3 gravityDevice,
+            Vector3 userAccelerationDevice,
+            Vector3 rotationRateDevice)
+        {
+            if (!mechanismDriveEnabled)
+            {
+                PublishDeviceSampleUnavailable();
+                return;
+            }
+
+            Vector3 right = transform.right;
+            Vector3 up = transform.up;
+            Vector3 forward = transform.forward;
+            Vector3 gravityWorld = DeviceMotionMechanismCoupling.ResolveDeviceVectorWorld(
+                gravityDevice,
+                right,
+                up,
+                forward);
+            Vector3 accelerationWorld = DeviceMotionMechanismCoupling.ResolveDeviceVectorWorld(
+                userAccelerationDevice,
+                right,
+                up,
+                forward);
+            Vector3 phoneAngularVelocityWorld =
+                DeviceMotionMechanismCoupling.ResolvePhoneAngularVelocityWorld(
+                    rotationRateDevice,
+                    right,
+                    up,
+                    forward);
+            sliderController?.SetDeviceMotionSample(
+                gravityWorld,
+                accelerationWorld,
+                phoneAngularVelocityWorld,
+                true);
+            fanCardController?.SetDeviceGravity(gravityWorld, true);
+        }
+
+        private void PublishDeviceSampleUnavailable()
+        {
+            sliderController?.SetDeviceMotionSample(
+                Vector3.zero,
+                Vector3.zero,
+                Vector3.zero,
+                false);
+            fanCardController?.SetDeviceGravity(Vector3.zero, false);
         }
 
         private void ResolveInteractionSources()

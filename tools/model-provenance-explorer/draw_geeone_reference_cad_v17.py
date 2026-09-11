@@ -1,0 +1,911 @@
+"""Reference CAD v17 (user 2026-09-07 18:33 on blockout r006: the cap rim overhangs a recessed rotating hub seat — the ≈0.057 R ring under the skirt
+moves inward by ≈0.03 R (provisional) and the top/bottom concave discs slightly cover it; dark seam = shadow under the lip). v16 was: (14:01 mark-up of relief v16: the edge transition is a WIDE multi-gradient stack — tier A large
+staggered quads 0.09 R @14° then the kite/Λ side facets — not a thin band; the root pocket is a sloped funnel (mouth 0.03 R outside, floor 0.03 R inside
+the traced outline) with a deeper stepped floor (0.38 t per side) and rounded corners). v15 kept: blade top = hard-cut planes T/F/C. v15 was: (13:27 facet drawing on f0132: the blade top is the lower envelope of a few large hard-cut planes —
+per half-blade a tip facet T, a pocket-flank facet F whose upper edge is the pocket rim, and a root-corner facet C — meeting at straight creases;
+the stem crease falls toward the tip). v14 kept: blade side = interlocking kite / Λ facets. Based on v13: blade sides are convex circular arcs (R≈1.37 R, centre on
+the blade's perpendicular through the cap centre at 0.92 R). Near the root each
+arc blends (R≈0.15 R) inward and ENDS on the cap circle at polar ≈52°; adjacent
+blades do not touch — the cap crown/skirt is exposed over ≈16° per notch (user
+2026-09-07 07:53: “这个部分是有些间隔的，不需要连接在一起”). No straight side,
+no shoulder. Tip: ≈90° included angle with a 0.03 R fillet. Cap: the central
+disc is a shallow CONCAVE 14-gon pyramid — 14 equal planar sectors from the
+centre apex to a 14-gon rim at 0.82 cap (user 2026-09-07 08:25 “以圆心为中心…切分
+成14片。均分”); the rim vertices coincide with the 14-wedge crown ring's inner
+vertices (28 triangles, sloping outward-down); 14-scale skirt in two rows.
+
+Reads surface-detail-spec.json (planformProfile.parametric, D01-D10). Ratios of
+R; millimetres only as the 85 mm user-authorized-provisional label.
+"""
+
+from __future__ import annotations
+
+import json
+import math
+import sys
+from datetime import date
+from pathlib import Path
+
+import matplotlib
+
+matplotlib.use("Agg")
+import matplotlib.pyplot as plt  # noqa: E402
+import numpy as np  # noqa: E402
+from matplotlib.patches import Arc, Polygon  # noqa: E402
+
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+from draw_unified_tri_spinner_cad import ALT, CENTER, DIM, FONT, HIDDEN, INK, centerlines, circle, dim, leader, poly, setup  # noqa: E402
+
+REPO = Path("/Users/jiawei.zhou/Documents/Fidgeting app")
+A02 = REPO / "unity/FidgetingApp/ArtSource/ModelPipeline/metal-three-blade/evidence/02-analysis/rev-006"
+SPEC = json.loads((A02 / "surface-detail-spec.json").read_text(encoding="utf-8"))
+D = {d["id"]: d for d in SPEC["details"]}
+PF = SPEC["planformProfile"]
+PM = PF["parametric"]
+S = 42.5  # 1 R = 42.5 provisional mm (85 mm width label)
+CAP = PF["rootAtCap"]["capRadiusToR"]
+TABLE = D["UTS-D01"]["params"]["tableToCap"]
+RS = PM["sideArcRadiusToR"]
+CY = -PM["sideArcCentreToR"][1]
+RT = PM["tipFilletRadiusToR"]
+XC = PM["tipFilletCentreToR"][0]
+BAND_W = D["UTS-D05"]["params"]["bandWidthToR"]  # kite / Λ side band (0.07 R)
+TIER_A_W = D["UTS-D05"]["params"]["topTierWidthToR"]  # large top tier (0.09 R)
+BEVEL_W = D["UTS-D05"]["params"]["transitionWidthToR"]  # whole transition, top facets -> mid-plane (0.16 R)
+FACETS = D["UTS-D05"]["params"]["facetsPerRowPerEdge"]
+EDGE_TIERS = D["UTS-D05"]["params"]["tiers"]  # blade edge rows, top face -> wall
+EDGE_DROP = sum(t_["widthToR"] * math.tan(math.radians(t_["slopeDeg"])) for t_ in EDGE_TIERS)
+CAP_TIERS = D["UTS-D02"]["params"]["capEdgeTiers"]  # crown / upper skirt / lower skirt
+TIER_COLORS = ("#7CC144", "#E2452B", "#3B8BEB")  # user's green / red / blue (disc -> vertical side)
+ROW_COLORS = ("#2E8B57", "#C0392B", "#2C6FBF")  # blade edge rows 1-3 (top face -> wall)
+N_WEDGE = D["UTS-D02"]["params"]["wedges"]
+N_SKIRT = D["UTS-D03"]["params"]["facets"]
+PK = D["UTS-D08"]["params"]
+BODY_T = 0.17
+WALL_H = D["UTS-D06"]["params"]["wallToThickness"]
+CAP_SIDE_H = D["UTS-D03"]["params"]["sideHeightToR"]
+CAP_OVERHANG = D["UTS-D03"]["params"].get("capOverhangToR", 0.03)  # cap rim overhangs the hub seat (user 18:33, provisional)
+HUB_SEAT_R = D["UTS-D03"]["params"].get("hubSeatRadiusToR", CAP - CAP_OVERHANG)
+HUB_SEAT_H = D["UTS-D03"]["params"].get("hubSeatHeightToR", 0.057)
+DISH_SLOPE_DEG = float(D["UTS-D01"]["params"]["dishSlopeDegProvisional"])  # provisional; depth unknown
+N_SECTOR = D["UTS-D01"]["params"]["sectors"]
+YR = D["UTS-D04"]["params"]
+Y_JX = YR["junctionX"]
+Y_END = math.radians(YR["armEndPolarDeg"])
+Y_MID = tuple(YR["armMidpoint"])
+CREST = 0.025  # provisional crest rise (R)
+POCKET_DEPTH_FRACTION = PK["depthFractionOfThicknessPerSide"]  # 0.38 provisional per side; depth unknown
+MOUTH_OFF = PK["mouthOffsetToR"]
+FLOOR_OFF = PK["floorOffsetToR"]
+
+
+def pocket_triangle():
+    bx = CAP * math.cos(math.asin(PK["baseHalfWidthToR"] / CAP))
+    return [(PK["apexRadiusToR"], 0.0), (bx, PK["baseHalfWidthToR"]), (bx, -PK["baseHalfWidthToR"])]
+
+
+def _area(poly_):
+    return 0.5 * sum(poly_[i][0] * poly_[(i + 1) % len(poly_)][1] - poly_[(i + 1) % len(poly_)][0] * poly_[i][1] for i in range(len(poly_)))
+
+
+def offset_triangle(tri, d):
+    """Offset a convex polygon by d (positive = outward): move each vertex along its interior bisector by d / sin(half-angle)."""
+    n = len(tri)
+    cands = []
+    for sign in (1.0, -1.0):
+        out = []
+        for i in range(n):
+            p0, p1, p2 = tri[i - 1], tri[i], tri[(i + 1) % n]
+            a = math.atan2(p0[1] - p1[1], p0[0] - p1[0])
+            b = math.atan2(p2[1] - p1[1], p2[0] - p1[0])
+            half = ((b - a) % (2 * math.pi)) / 2
+            bis = a + half
+            m = abs(d) / max(abs(math.sin(half)), 1e-6)
+            out.append((p1[0] + sign * m * math.cos(bis), p1[1] + sign * m * math.sin(bis)))
+        cands.append(out)
+    cands.sort(key=lambda q: abs(_area(q)))
+    return cands[-1] if d > 0 else cands[0]  # outward = larger area
+
+
+def round_polygon(poly_, r, n_arc=14):
+    """True circular fillets: replace every corner by an arc of radius r tangent to both edges (r clipped to the edges)."""
+    out = []
+    n = len(poly_)
+    for i in range(n):
+        p0, p1, p2 = poly_[i - 1], poly_[i], poly_[(i + 1) % n]
+        v1 = (p0[0] - p1[0], p0[1] - p1[1])
+        v2 = (p2[0] - p1[0], p2[1] - p1[1])
+        L1, L2 = math.hypot(*v1), math.hypot(*v2)
+        u1, u2 = (v1[0] / L1, v1[1] / L1), (v2[0] / L2, v2[1] / L2)
+        cosang = max(-1.0, min(1.0, u1[0] * u2[0] + u1[1] * u2[1]))
+        theta = math.acos(cosang)  # interior angle
+        if theta < 1e-6 or abs(theta - math.pi) < 1e-6:
+            out.append(p1)
+            continue
+        rr = min(r, 0.45 * min(L1, L2) * math.tan(theta / 2))
+        t = rr / math.tan(theta / 2)  # tangent distance from the corner
+        tp1 = (p1[0] + u1[0] * t, p1[1] + u1[1] * t)
+        tp2 = (p1[0] + u2[0] * t, p1[1] + u2[1] * t)
+        bis = (u1[0] + u2[0], u1[1] + u2[1])
+        bl = math.hypot(*bis)
+        bis = (bis[0] / bl, bis[1] / bl)
+        c = (p1[0] + bis[0] * rr / math.sin(theta / 2), p1[1] + bis[1] * rr / math.sin(theta / 2))
+        a1 = math.atan2(tp1[1] - c[1], tp1[0] - c[0])
+        a2 = math.atan2(tp2[1] - c[1], tp2[0] - c[0])
+        da = (a2 - a1 + math.pi) % (2 * math.pi) - math.pi  # shortest sweep
+        for k in range(n_arc + 1):
+            a = a1 + da * k / n_arc
+            out.append((c[0] + rr * math.cos(a), c[1] + rr * math.sin(a)))
+    return out
+
+
+def funnel_profile(u, run, z_top, depth, r_top, r_floor):
+    """Height across the pocket wall: u = 0 at the mouth edge (negative = on the top face), u = run at the floor edge.
+    Straight slope with a convex fillet (r_top) at the mouth edge and a concave fillet (r_floor) at the floor edge."""
+    import numpy as _np
+    u = _np.asarray(u, dtype=float)
+    run = _np.asarray(run, dtype=float)
+    z_top = _np.asarray(z_top, dtype=float)
+    phi = _np.arctan2(depth, _np.maximum(run, 1e-9))
+    t1 = r_top * _np.tan(phi / 2)
+    t2 = r_floor * _np.tan(phi / 2)
+    z_lin = z_top - depth * u / _np.maximum(run, 1e-9)
+    z_arc1 = z_top - r_top + _np.sqrt(_np.clip(r_top ** 2 - (u + t1) ** 2, 0, None))
+    z_arc2 = (z_top - depth) + r_floor - _np.sqrt(_np.clip(r_floor ** 2 - (u - run - t2) ** 2, 0, None))
+    z = _np.where(u < -t1, z_top, _np.where(u < t1 * _np.cos(phi), z_arc1, _np.where(u <= run - t2 * _np.cos(phi), z_lin, _np.where(u < run + t2, z_arc2, z_top - depth))))
+    return z
+
+
+POCKET_FILLET_TOP = PK.get("edgeFilletTopToR", 0.03)
+POCKET_FILLET_FLOOR = PK.get("edgeFilletFloorToR", 0.03)
+
+
+def mouth_polygon():
+    return round_polygon(offset_triangle(pocket_triangle(), MOUTH_OFF), PK["cornerRadiusToR"])
+
+
+def floor_polygon():
+    return round_polygon(offset_triangle(pocket_triangle(), -FLOOR_OFF), PK["floorCornerRadiusToR"])
+
+
+def pocket_half_widths(x):
+    """(mouth, floor) half-widths of the funnel at blade-local x (straight offset sides of the traced triangle)."""
+    tri = pocket_triangle()
+    ax_, ay_ = tri[0]
+    bx_, by_ = tri[1]
+    slope = by_ / (ax_ - bx_)
+    ang = math.atan(slope)
+    traced = max(0.0, slope * (ax_ - x))
+    return traced + MOUTH_OFF / math.cos(ang), max(0.0, traced - FLOOR_OFF / math.cos(ang))
+
+
+def cap_edge_profile(top: float) -> list[tuple[float, float]]:
+    """(r, z) from the disc rim outward through the three cap-edge tiers: crown -> upper skirt -> lower skirt."""
+    pts = [(CAP * TABLE, top)]
+    r, z = pts[0]
+    for tier in CAP_TIERS:
+        r += tier["radialToCap"] * CAP
+        z -= tier["radialToCap"] * CAP * math.tan(math.radians(tier["slopeDeg"]))
+        pts.append((r, z))
+    return pts
+
+
+def edge_profile_upper_right(hw: float, t: float) -> list[tuple[float, float]]:
+    """(y, z) of the upper-right blade edge: top-face edge -> row 1 -> row 2 -> row 3 -> wall top (D05 multi-row)."""
+    pts = [(hw - BEVEL_W, t / 2)]
+    y, z = pts[0]
+    for tier in EDGE_TIERS:
+        y += tier["widthToR"]
+        z -= tier["widthToR"] * math.tan(math.radians(tier["slopeDeg"]))
+        pts.append((y, z))
+    # provisional slopes are normalised so the last tier ends exactly on the mid-plane (drops scaled together)
+    total = pts[0][1] - pts[-1][1]
+    if total > 1e-9:
+        k = pts[0][1] / total
+        pts = [(yy, pts[0][1] - (pts[0][1] - zz) * k) for yy, zz in pts]
+    return pts
+
+
+def wall_half(t: float) -> float:
+    return t / 2 - EDGE_DROP
+
+
+def y_crest_arm() -> list[tuple[float, float]]:
+    """Upper arm of the Y crest: quadratic Bezier junction -> (bulging) -> root corner on the cap."""
+    p0 = (Y_JX, 0.0)
+    p2 = (CAP * math.cos(Y_END), CAP * math.sin(Y_END))
+    m = Y_MID
+    # control point so the curve passes through the midpoint at t=0.5: c = 2m - (p0+p2)/2
+    c = (2 * m[0] - (p0[0] + p2[0]) / 2, 2 * m[1] - (p0[1] + p2[1]) / 2)
+    pts = []
+    for k in range(17):
+        t = k / 16
+        x = (1 - t) ** 2 * p0[0] + 2 * (1 - t) * t * c[0] + t * t * p2[0]
+        y = (1 - t) ** 2 * p0[1] + 2 * (1 - t) * t * c[1] + t * t * p2[1]
+        pts.append((x, y))
+    return pts
+
+
+def y_crest_stem() -> list[tuple[float, float]]:
+    return [(Y_JX, 0.0), (1.0 - RT * 1.5, 0.0)]
+
+
+# ---- D04 v16: blade top = lower envelope (min) of a few large hard-cut planes (user 2026-09-07 13:27 drawing on f0132) ----
+TOPZ = BODY_T / 2
+ZC = TOPZ + CREST  # pocket apex / rim height (highest points of the blade top)
+FP = D["UTS-D04"]["params"]["facetPlanes"]
+PT_A = (offset_triangle(pocket_triangle(), MOUTH_OFF)[0][0], 0.0)  # mouth apex = junction of the three creases on the axis
+_mc = offset_triangle(pocket_triangle(), MOUTH_OFF)[1]
+PT_CP = (math.sqrt(max(CAP ** 2 - _mc[1] ** 2, 0.0)), _mc[1])  # mouth root corner on the cap circle = rim end
+PT_K = tuple(FP["creaseJunctionK"]["xy"])  # where T, F and C meet (user's red junction), provisional
+PT_TT = (FP["stemEnd"]["x"], 0.0)  # stem crease end near the tip fillet
+PT_R0 = tuple(FP["rootCornerLevelPoint"]["xy"])  # root-corner facet reaches the top-face level here (provisional)
+ZK = ZC - FP["creaseJunctionK"]["dropToR"]
+ZTT = ZC - FP["stemEnd"]["dropToR"]
+
+
+def plane_through(p1, p2, p3):
+    """z = a x + b y + c through three (x, y, z) points."""
+    (x1, y1, z1), (x2, y2, z2), (x3, y3, z3) = p1, p2, p3
+    det = (x1 - x3) * (y2 - y3) - (x2 - x3) * (y1 - y3)
+    a = ((z1 - z3) * (y2 - y3) - (z2 - z3) * (y1 - y3)) / det
+    b = ((x1 - x3) * (z2 - z3) - (x2 - x3) * (z1 - z3)) / det
+    c = z3 - a * x3 - b * y3
+    return a, b, c
+
+
+_PL_U = {
+    "T": plane_through((*PT_A, ZC), (*PT_TT, ZTT), (*PT_K, ZK)),  # tip facet: contains the stem crease, falls to the tip and outward
+    "F": plane_through((*PT_A, ZC), (*PT_CP, ZC), (*PT_K, ZK)),  # pocket-flank facet: its upper edge IS the pocket rim (horizontal at ZC)
+    "C": plane_through((*PT_CP, ZC), (*PT_K, ZK), (*PT_R0, TOPZ + FP["rootCornerLevelPoint"].get("zAboveTopToR", 0.0))),  # root-corner facet: from the mouth corner / K down to the root edge
+}
+TOP_PLANES = [(n, a, b, c) for n, (a, b, c) in _PL_U.items()] + [(n + "'", a, -b, c) for n, (a, b, c) in _PL_U.items()]
+
+
+def top_z(x, y):
+    """Blade-top height in blade-local coordinates: the lowest of the six planes (convex hard-cut top, no valleys)."""
+    import numpy as _np
+    zs = [a * _np.asarray(x) + b * _np.asarray(y) + c for _, a, b, c in TOP_PLANES]
+    return _np.min(_np.stack(zs), axis=0)
+
+
+def top_label(x, y):
+    import numpy as _np
+    zs = _np.stack([a * _np.asarray(x) + b * _np.asarray(y) + c for _, a, b, c in TOP_PLANES])
+    return _np.argmin(zs, axis=0)
+
+
+def crease_segments(inside=None, n=400):
+    """Crease polylines = pairwise plane intersections restricted to where both planes are the lowest (and inside the plateau)."""
+    import numpy as _np
+    segs = []
+    for i in range(len(TOP_PLANES)):
+        for j in range(i + 1, len(TOP_PLANES)):
+            _, a1, b1, c1 = TOP_PLANES[i]
+            _, a2, b2, c2 = TOP_PLANES[j]
+            da, db, dc = a1 - a2, b1 - b2, c1 - c2
+            if abs(da) < 1e-12 and abs(db) < 1e-12:
+                continue
+            # line da x + db y + dc = 0, parametrised along its direction
+            nrm = math.hypot(da, db)
+            px, py = -dc * da / nrm ** 2, -dc * db / nrm ** 2
+            dx, dy = -db / nrm, da / nrm
+            ts = _np.linspace(-1.2, 1.2, n)
+            xs, ys = px + ts * dx, py + ts * dy
+            zs = _np.stack([a * xs + b * ys + c for _, a, b, c in TOP_PLANES])
+            zmin = zs.min(axis=0)
+            ok = (_np.abs(zs[i] - zmin) < 1e-9) & (_np.abs(zs[j] - zmin) < 1e-9) & (xs > CAP * 0.9) & (xs < 1.0)
+            if inside is not None:
+                ok &= inside(xs, ys)
+            run = []
+            for k in range(n):
+                if ok[k]:
+                    run.append((float(xs[k]), float(ys[k])))
+                elif run:
+                    if len(run) > 2:
+                        segs.append((TOP_PLANES[i][0], TOP_PLANES[j][0], run))
+                    run = []
+            if len(run) > 2:
+                segs.append((TOP_PLANES[i][0], TOP_PLANES[j][0], run))
+    return segs
+
+
+def inside_plateau(xs, ys):
+    """Point-in-polygon test for the top face (plateau) in blade-local coordinates."""
+    import numpy as _np
+    from matplotlib.path import Path as _Path
+    half = offset_inward(planform_half(), BEVEL_W)
+    full = half + [(x, -y) for x, y in reversed(half) if y > 1e-9]
+    return _Path(full).contains_points(_np.c_[xs, ys])
+RB = PM["rootBlend"]
+ROOT_POLAR = math.radians(RB["meetsCapAtPolarDeg"])
+XB = RB["startX"]
+RB_R = RB["radiusToR"]
+ENV = PF["sideEnvelope"]
+CLEAN_SIDES = [0, 2, 3, 5]  # blade@80 upper (f77,f78), blade@207 lower (f77,f78)
+
+
+def sc(x, y):
+    return (S * x, S * y)
+
+
+def rot(pts, deg):
+    a = math.radians(deg)
+    return [(S * (x * math.cos(a) - y * math.sin(a)), S * (x * math.sin(a) + y * math.cos(a))) for x, y in pts]
+
+
+def side_y(x: float) -> float:
+    """Upper side arc: circle centre (0, -CY), radius RS."""
+    return math.sqrt(max(0.0, RS * RS - x * x)) - CY
+
+
+def root_point() -> tuple[float, float]:
+    """Where the blade edge ends on the cap circle (polar ROOT_POLAR)."""
+    return (CAP * math.cos(ROOT_POLAR), CAP * math.sin(ROOT_POLAR))
+
+
+def blend_geometry():
+    """Root blend: circle tangent to the big side arc at x=XB and passing through root_point()."""
+    yb = side_y(XB)
+    nx, ny = XB / RS, (yb + CY) / RS  # outward normal of the big circle at the blend start
+    tx, ty = root_point()
+    dx, dy = XB - tx, yb - ty
+    rb = (dx * dx + dy * dy) / (2.0 * (dx * nx + dy * ny))
+    centre = (XB - rb * nx, yb - rb * ny)
+    return (XB, yb), centre, rb
+
+
+def notch_apex() -> tuple[float, float]:
+    """Compatibility: the v6 V-apex (adjacent arcs meeting on the bisector) — superseded, drawn dashed only."""
+    b = 2.0 * math.sqrt(3.0) * CY
+    c = CY * CY - RS * RS
+    x = (-b + math.sqrt(b * b - 16.0 * c)) / 8.0
+    return (x, math.sqrt(3.0) * x)
+
+
+def fillet_tangent() -> tuple[float, float]:
+    L = math.hypot(XC, CY)
+    return (XC / L * RS, -CY + CY / L * RS)
+
+
+def v6_half() -> list[tuple[float, float]]:
+    """Superseded v6 outline (adjacent arcs meeting on the bisector), for contrast only."""
+    ax_, ay_ = notch_apex()
+    tx, ty = fillet_tangent()
+    a0 = math.atan2(ay_ + CY, ax_)
+    a1 = math.atan2(ty + CY, tx)
+    pts = []
+    for k in range(41):
+        a = a0 + (a1 - a0) * k / 40
+        pts.append((RS * math.cos(a), RS * math.sin(a) - CY))
+    f0 = math.atan2(ty, tx - XC)
+    for k in range(1, 7):
+        a = f0 * (1 - k / 6)
+        pts.append((XC + RT * math.cos(a), RT * math.sin(a)))
+    return pts
+
+
+def planform_half() -> list[tuple[float, float]]:
+    """Upper half outline, root (on the cap circle, polar ROOT_POLAR) -> blend -> big arc -> tip fillet -> (1, 0)."""
+    (xb, yb), cb, rb = blend_geometry()
+    rx, ry = root_point()
+    b0 = math.atan2(ry - cb[1], rx - cb[0])
+    b1 = math.atan2(yb - cb[1], xb - cb[0])
+    sweep = (b1 - b0 + math.pi) % (2 * math.pi) - math.pi  # shortest signed sweep
+    pts = []
+    for k in range(13):
+        a = b0 + sweep * k / 12
+        pts.append((cb[0] + rb * math.cos(a), cb[1] + rb * math.sin(a)))
+    tx, ty = fillet_tangent()
+    a0 = math.atan2(yb + CY, xb)
+    a1 = math.atan2(ty + CY, tx)
+    n = 40
+    for k in range(1, n + 1):
+        a = a0 + (a1 - a0) * k / n
+        pts.append((RS * math.cos(a), RS * math.sin(a) - CY))
+    f0 = math.atan2(ty, tx - XC)
+    for k in range(1, 7):
+        a = f0 * (1 - k / 6)
+        pts.append((XC + RT * math.cos(a), RT * math.sin(a)))
+    return pts
+
+
+def half_width(x: float) -> float:
+    tx, _ = fillet_tangent()
+    if x >= tx:
+        return math.sqrt(max(0.0, RT * RT - (x - XC) ** 2))
+    if x < XB:
+        (_, _), cb, rb = blend_geometry()
+        return cb[1] + math.sqrt(max(0.0, rb * rb - (x - cb[0]) ** 2))
+    return side_y(x)
+
+
+def offset_inward(half: list[tuple[float, float]], w: float) -> list[tuple[float, float]]:
+    out = []
+    n = len(half)
+    for i in range(1, n - 1):
+        (x0, y0), (x1, y1), (x2, y2) = half[i - 1], half[i], half[i + 1]
+        tx, ty = x2 - x0, y2 - y0
+        L = math.hypot(tx, ty) or 1.0
+        nx, ny = ty / L, -tx / L
+        if nx * x1 + ny * y1 < 0:
+            nx, ny = -nx, -ny
+        out.append((x1 - w * nx, y1 - w * ny))
+    return out
+
+
+def v5_half() -> list[tuple[float, float]]:
+    """Superseded v4/v5 outline (rounded triangle + radial notch + 0.09 R shoulder fillet), for contrast only."""
+    old = PM["superseded"]["v4v5"]
+    xv = old["virtualVertexRadiusToR"]
+    side = math.radians(old["sideAngleToBladeAxisDeg"])
+    tip_r = old["cornerArcRadiusToR"]
+    root_polar = math.radians(39.0)
+    fil = old.get("shoulderFilletRadiusToR", 0.09)
+    root = (CAP * math.cos(root_polar), CAP * math.sin(root_polar))
+    xs_ = xv * math.tan(side) / (math.tan(root_polar) + math.tan(side))
+    vertex = (xs_, xs_ * math.tan(root_polar))
+    d1 = (math.cos(root_polar), math.sin(root_polar))
+    d2 = (math.cos(-side), math.sin(-side))
+    turn = math.acos(d1[0] * d2[0] + d1[1] * d2[1])
+    tlen = fil * math.tan(turn / 2)
+    t1 = (vertex[0] - d1[0] * tlen, vertex[1] - d1[1] * tlen)
+    t2 = (vertex[0] + d2[0] * tlen, vertex[1] + d2[1] * tlen)
+    n1 = (d1[1], -d1[0])
+    centre = (t1[0] + n1[0] * fil, t1[1] + n1[1] * fil)
+    a1 = math.atan2(t1[1] - centre[1], t1[0] - centre[0])
+    a2 = math.atan2(t2[1] - centre[1], t2[0] - centre[0])
+    while a2 > a1:
+        a2 -= 2 * math.pi
+    pts = [root, t1]
+    for k in range(1, 8):
+        a = a1 + (a2 - a1) * k / 8
+        pts.append((centre[0] + fil * math.cos(a), centre[1] + fil * math.sin(a)))
+    t_tan = tip_r / math.tan(side)
+    tangent = (xv - t_tan * math.cos(side), t_tan * math.sin(side))
+    pts.append(t2)
+    pts.append(tangent)
+    cx = 1.0 - tip_r
+    a0 = math.pi / 2 - side
+    for k in range(1, 13):
+        a = a0 * (1 - k / 12)
+        pts.append((cx + tip_r * math.cos(a), tip_r * math.sin(a)))
+    return pts
+
+
+def draw_cap_plan(ax, scale=S, lw=1.3):
+    skirt = [(CAP * math.cos(2 * math.pi * (j + 0.5) / N_SKIRT), CAP * math.sin(2 * math.pi * (j + 0.5) / N_SKIRT)) for j in range(N_SKIRT)]
+    poly(ax, [(scale * x, scale * y) for x, y in skirt], lw=lw)
+    r1 = CAP * (TABLE + CAP_TIERS[0]["radialToCap"])  # crown outer radius (tier 1 / tier 2 boundary)
+    r2 = r1 + CAP_TIERS[1]["radialToCap"] * CAP  # tier 2 / tier 3 boundary
+    for rr, col in ((r1, TIER_COLORS[0]), (r2, TIER_COLORS[1])):
+        ring = [(rr * math.cos(2 * math.pi * (j + 0.5) / N_SKIRT), rr * math.sin(2 * math.pi * (j + 0.5) / N_SKIRT)) for j in range(N_SKIRT)]
+        poly(ax, [(scale * x, scale * y) for x, y in ring], lw=0.7, color=col)
+    for j in range(N_WEDGE):
+        a_in = 2 * math.pi * j / N_WEDGE
+        a_out = 2 * math.pi * (j + 0.5) / N_WEDGE
+        i0 = (scale * CAP * TABLE * math.cos(a_in), scale * CAP * TABLE * math.sin(a_in))
+        i1 = (scale * CAP * TABLE * math.cos(a_in + 2 * math.pi / N_WEDGE), scale * CAP * TABLE * math.sin(a_in + 2 * math.pi / N_WEDGE))
+        o = (scale * r1 * math.cos(a_out), scale * r1 * math.sin(a_out))
+        ax.plot([i0[0], o[0], i1[0]], [i0[1], o[1], i1[1]], color=INK, lw=0.45)
+        # skirt scale side edges (rows 2 and 3) run radially at the wedge tips
+        ax.plot([o[0], scale * CAP * math.cos(a_out)], [o[1], scale * CAP * math.sin(a_out)], color=INK, lw=0.35)
+    rim = [(CAP * TABLE * math.cos(2 * math.pi * j / N_SECTOR), CAP * TABLE * math.sin(2 * math.pi * j / N_SECTOR)) for j in range(N_SECTOR)]
+    poly(ax, [(scale * x, scale * y) for x, y in rim], lw=0.9)
+    for x, y in rim:  # sector creases: centre apex -> rim vertices (= crown inner vertices)
+        ax.plot([0.0, scale * x], [0.0, scale * y], color=INK, lw=0.35)
+    ax.plot([0.0], [0.0], marker="o", ms=2.2, color=INK)
+
+
+def plan(ax):
+    setup(ax, "REFERENCE PLAN v17  顶视 — 凸弧叶边止于盖圈 52° · 叶顶 T/F/C 硬切 · 叶边宽多梯度过渡（A 层 + 鸢形/Λ）· 凹坑漏斗 + 深台阶 · 盘 14 扇区 · 剖切线 A/C/F", (-1.5 * S, 1.5 * S), (-1.42 * S, 1.36 * S))
+    centerlines(ax, 1.2 * S)
+    circle(ax, S, lw=0.5, color=CENTER, ls=(0, (8, 2, 1.5, 2)))
+    half = planform_half()
+    full = half + [(x, -y) for x, y in reversed(half) if y > 1e-9]
+    plateau_all = offset_inward(half, BEVEL_W)
+    plateau_u = [p for p in plateau_all if math.hypot(*p) > CAP * 1.03]  # clip under the cap
+    root = root_point()
+    (xb, yb), cb, rb = blend_geometry()
+    for ang in (90, 210, 330):
+        poly(ax, rot(full, ang), lw=1.3, close=False)
+        for s_ in (1, -1):
+            poly(ax, rot([(x, s_ * y) for x, y in plateau_u], ang), lw=0.7, color=HIDDEN, close=False)
+        cum = 0.0
+        for tier, col in zip(EDGE_TIERS[:-1], ROW_COLORS):  # row boundaries inside the band
+            cum += tier["widthToR"]
+            row = [p for p in offset_inward(half, BEVEL_W - cum) if math.hypot(*p) > CAP * 1.03]
+            for s_ in (1, -1):
+                poly(ax, rot([(x, s_ * y) for x, y in row], ang), lw=0.5, color=col, close=False)
+        edge_pts = [p for p in half[2:-6] if math.hypot(*p) > CAP * 1.08]
+        kite_in = [p for p in offset_inward(half, BAND_W) if math.hypot(*p) > CAP * 1.03]  # tier-A / kite boundary
+        idxs = np.linspace(0, len(edge_pts) - 1, FACETS + 2).astype(int)
+        for k, i in enumerate(idxs):  # kite / Λ band divisions (outline -> tier-A boundary)
+            ex, ey = edge_pts[i]
+            j = min(range(len(kite_in)), key=lambda jj: (kite_in[jj][0] - ex) ** 2 + (kite_in[jj][1] - ey) ** 2)
+            px, py = kite_in[j]
+            skew = 0.006 * (1 if k % 2 == 0 else -1)
+            for s_ in (1, -1):
+                poly(ax, rot([(ex, s_ * ey), (px + skew, s_ * py)], ang), lw=0.5, color=INK, close=False)
+        idxA = np.linspace(0, len(kite_in) - 1, 5).astype(int)[1:-1]  # tier A: 3 large quads per edge, staggered half a facet
+        for k, i in enumerate(idxA):
+            qx, qy = kite_in[i]
+            j = min(range(len(plateau_u)), key=lambda jj: (plateau_u[jj][0] - qx) ** 2 + (plateau_u[jj][1] - qy) ** 2)
+            px, py = plateau_u[j]
+            for s_ in (1, -1):
+                poly(ax, rot([(qx, s_ * qy), (px, s_ * py)], ang), lw=0.5, color=INK, close=False)
+        # D04 v16: hard-cut top facets — creases = intersections of the lowest planes (T tip / F flank / C root corner, mirrored)
+        crest_style = dict(lw=1.4, color="#6a3d9a", ls=(0, (6, 2, 1, 2)), close=False)
+        for n1, n2, run in crease_segments(inside_plateau):
+            poly(ax, rot(run, ang), **crest_style)
+        if ang == 330:
+            for name, (lx, ly) in (("T", (0.805, 0.03)), ("F", (0.60, 0.13)), ("C", (0.455, 0.215)), ("T'", (0.805, -0.03)), ("F'", (0.60, -0.13)), ("C'", (0.455, -0.215))):
+                px_, py_ = rot([(lx, ly)], ang)[0]
+                ax.text(px_, py_, name, fontsize=7, color="#6a3d9a", ha="center", va="center", fontweight="bold", bbox=dict(boxstyle="circle,pad=0.15", fc="white", ec="#6a3d9a", lw=0.5))
+        # pocket (D08 v17): sloped funnel mouth (light) -> deeper stepped floor (dark, dotted); traced outline dashed
+        ax.add_patch(Polygon(rot(mouth_polygon(), ang), closed=True, fill=True, fc="#e3e3e3", ec=INK, lw=0.9, zorder=2))
+        ax.add_patch(Polygon(rot(floor_polygon(), ang), closed=True, fill=True, fc="#a8a8a8", ec=INK, lw=0.6, hatch="....", zorder=3))
+        poly(ax, rot(round_polygon(pocket_triangle(), PK["cornerRadiusToR"]) + [round_polygon(pocket_triangle(), PK["cornerRadiusToR"])[0]], ang), lw=0.5, color=ALT, ls=(0, (3, 2)), close=False)
+    draw_cap_plan(ax)
+    # section cut lines on the 330° blade: A-A along the axis, C-C at x=0.58, F-F at x=0.85
+    def cut(p1, p2, letter):
+        (x1, y1), (x2, y2) = rot([p1], 330)[0], rot([p2], 330)[0]
+        ax.plot([x1, x2], [y1, y2], color=INK, lw=1.2, ls=(0, (10, 3, 2, 3)), zorder=6)
+        dx, dy = x2 - x1, y2 - y1
+        L = math.hypot(dx, dy)
+        ux, uy = dx / L, dy / L
+        for (x, y), sgn in (((x1, y1), -1), ((x2, y2), 1)):
+            ax.text(x + ux * sgn * 0.06 * S, y + uy * sgn * 0.06 * S, letter, fontsize=9, fontweight="bold", color=INK, ha="center", va="center", zorder=7,
+                    bbox=dict(boxstyle="circle,pad=0.15", fc="white", ec=INK, lw=0.6))
+    cut((0.28, 0.0), (1.10, 0.0), "A")
+    cut((0.58, -0.50), (0.58, 0.50), "C")
+    cut((0.85, -0.34), (0.85, 0.34), "F")
+    # side-arc construction for the 330° blade (upper side): centre marker + radius line
+    c_local = (0.0, -CY)
+    cpt = rot([c_local], 330)[0]
+    mid = rot([(0.62, side_y(0.62))], 330)[0]
+    ax.plot([cpt[0], mid[0]], [cpt[1], mid[1]], color=ALT, lw=0.5, ls=(0, (4, 2)))
+    ax.plot([cpt[0]], [cpt[1]], marker="+", color=ALT, ms=7, mew=0.8)
+    leader(ax, ((cpt[0] + mid[0]) / 2, (cpt[1] + mid[1]) / 2), f"叶边凸弧 R≈{RS:.2f} R（≈{RS * S:.0f} mm @85）\n圆心距盖心 {CY:.2f} R（叶轴垂线上）", sc(0.96, -0.64), color=ALT)
+    # dimensions / callouts
+    dim(ax, (-S, -1.27 * S), (S, -1.27 * S), 0.0, "2R = 85 mm  user-authorized-provisional（非 measured；仅供未来 Gate 03–05）", ext=False)
+    for xx in (-S, S):
+        ax.plot([xx, xx], [-1.27 * S, -0.3 * S], color=DIM, lw=0.4, ls=(0, (3, 2)))
+    a_pt = rot([(xb, yb)], 90)[0]
+    a_pt2 = rot([(xb, -yb)], 90)[0]
+    dim(ax, a_pt2, a_pt, -0.92 * S, f"最宽处 x≈{xb:.2f} R：宽 ≈{2 * yb:.2f} R（≈{2 * yb / (2 * CAP):.2f}×盖径）；叶根止于盖圈处宽 ≈{2 * root[1]:.2f} R")
+    leader(ax, rot([root], 210)[0], f"叶边止于盖圈极角 ±{RB['meetsCapAtPolarDeg']:.0f}°：根部以 R≈{rb:.2f} R 内收圆弧接入盖圈（与盖圈切线夹 ≈{RB['angleToCapTangentDeg']:.0f}°，锐角）；相邻叶片不相接，缺口露盖 ≈{RB['exposedCapArcPerNotchDeg']:.0f}°（用户 09-07：“有些间隔，不需要连接在一起”）", sc(-1.47, -0.80))
+    leader(ax, rot([(1.0, 0.0)], 330)[0], f"D07 叶尖：两弧夹角 ≈{PM['tipIncludedAngleDeg']:.0f}°\n圆角 R≈{RT:.2f} R（≈{RT * S:.1f} mm @85）", sc(0.60, -1.12))
+    leader(ax, rot([(PK['apexRadiusToR'] - 0.03, 0.0)], 210)[0], f"D08 叶根凹坑 = 斜面漏斗 + 深台阶，全部真圆角：口沿在描迹线外 {MOUTH_OFF:.2f} R、平底在内 {FLOOR_OFF:.2f} R\n深 {POCKET_DEPTH_FRACTION:.0%} 厚/侧（占位）、壁 ≈47°；顶视角圆弧 R{PK['cornerRadiusToR']:.3f}/{PK['floorCornerRadiusToR']:.3f}，剖面口沿凸圆角 R{POCKET_FILLET_TOP:.2f}、底凹圆角 R{POCKET_FILLET_FLOOR:.2f}；橙虚线 = 顶视描迹", sc(-1.47, -1.05))
+    leader(ax, rot([(0.60, side_y(0.60) - BEVEL_W * 0.5)], 330)[0], f"D05 叶边宽多梯度过渡 ≈{BEVEL_W:.2f} R：顶面 T/F/C（≈15°）→ A 层大斜面 {TIER_A_W:.2f} R（{EDGE_TIERS[0]['slopeDeg']}°，每边 3 片错位）\n→ 亮鸢形（38°）/ 暗 Λ（53°）咬合到中面（{BAND_W:.2f} R，每边 {FACETS}±1 片）；角度/宽度占位\n用户 14:01“不同的梯度…不是轻轻雕一层”；f0116/f0124；见 Detail H", sc(0.30, -0.90))
+    leader(ax, rot([(0.85, 0.0)], 330)[0], f"D04 叶顶 = 几块大平面硬切（紫 = 折边）\n每半叶 3 面：叶尖面 T（含主脊，向叶尖下落 {FP['stemEnd']['dropToR']:.3f} R）\n坑侧面 F（上边 = 坑缘，最高 {CREST:.3f} R）、根角面 C\n三面交于 K；凸包络、无谷\n（用户 11:47、13:27 f0132 描线）；高度均占位", sc(-0.52, -1.10), color="#6a3d9a", fs=6.5)
+    leader(ax, sc(CAP * math.cos(math.radians(195)), CAP * math.sin(math.radians(195))), f"D03 盖裙 {N_SKIRT}±1 鳞面 ×2 排 · D02 冠环 {N_WEDGE}±1 楔 = {2 * N_WEDGE} 三角 · 盘/冠环/裙共用一套 14 等分", sc(-1.47, 0.62))
+    leader(ax, sc(CAP * TABLE * math.cos(math.radians(160)), CAP * TABLE * math.sin(math.radians(160))), f"D01 盘 = {N_SECTOR} 等分平面扇区（以圆心为中心均分）→ 凹 14 棱锥拇指位\n盘缘 14 边形 {TABLE:.2f}×盖 = 最高圈，顶点与冠环内顶点重合；凹深未知（{DISH_SLOPE_DEG:.0f}° 占位）", sc(-1.47, 0.22))
+    leader(ax, rot([(0.30, side_y(0.30))], 90)[0], f"D09 缺口：露盖弧 ≈{RB['exposedCapArcPerNotchDeg']:.0f}°（极角 {RB['meetsCapAtPolarDeg']:.0f}°→{120 - RB['meetsCapAtPolarDeg']:.0f}°）\n冠环+裙在此外露；暗缝宽未知", sc(0.62, 1.06))
+    ax.text(-1.47 * S, -1.38 * S, "细线 = 顶面/鳞面带分界；紫点划线 = 叶顶大平面之间的折边（D04 v16：T 叶尖面 / F 坑侧面 / C 根角面，取最低平面 → 凸包络无谷）；灰 = 凹坑（点状 = 平底）；v6 的 V 交点已作废（见 Detail D）。", fontsize=6.5, color=HIDDEN)
+
+
+def section_aa(ax):
+    setup(ax, "SECTION A—A v17  沿右下叶叶轴剖；左为对侧缺口；盖缘三层（绿/红/蓝）逐层变陡→竖壁", (-1.25 * S, 1.3 * S), (-0.46 * S, 0.50 * S))
+    ax.plot([-1.25 * S, 1.3 * S], [0, 0], color=CENTER, lw=0.5, ls=(0, (8, 2, 1.5, 2)))
+    t = BODY_T
+    wall = 2 * wall_half(t)
+    corner_x = 1.0 - RT - BEVEL_W * 1.2
+    body = [sc(CAP, t / 2), sc(PK["apexRadiusToR"], t / 2), sc(PT_A[0], ZC), sc(PT_TT[0], ZTT), sc(1.0 - RT * 0.5, wall / 2), sc(1.0, wall / 2 * 0.5), sc(1.0, -wall / 2 * 0.5), sc(1.0 - RT * 0.5, -wall / 2), sc(PT_TT[0], -ZTT), sc(PT_A[0], -ZC), sc(PK["apexRadiusToR"], -t / 2), sc(CAP, -t / 2)]
+    poly(ax, body, lw=1.2, hatch="////")
+    leader(ax, sc((PT_A[0] + PT_TT[0]) / 2, (ZC + ZTT) / 2), f"D04 主脊 = T/T' 两面折边：坑尖 ≈{CREST:.3f} R → 叶尖处 ≈{ZTT - t / 2:.3f} R（占位，向叶尖下落）", sc(0.55, -0.42), color="#6a3d9a", fs=6)
+    pd = POCKET_DEPTH_FRACTION * t
+    fl_apex = offset_triangle(pocket_triangle(), -FLOOR_OFF)[0][0]
+    import numpy as _np
+    run_ax = PT_A[0] - fl_apex
+    us_ax = _np.linspace(-0.02, run_ax + 0.02, 60)
+    zs_ax = funnel_profile(us_ax, run_ax, ZC, pd + CREST, POCKET_FILLET_TOP, POCKET_FILLET_FLOOR)
+    for sgn in (1, -1):
+        rec = [sc(CAP, sgn * float(top_z(CAP, 0.0))), sc(CAP, sgn * (t / 2 - pd))] + [sc(PT_A[0] - float(uu), sgn * float(zz)) for uu, zz in zip(us_ax[::-1], zs_ax[::-1])]
+        ax.add_patch(Polygon(rec, closed=True, fill=True, fc="white", ec=ALT, lw=0.9, ls=(0, (4, 2)), zorder=4))
+    # opposite notch: body sliver only up to the notch apex radius
+    top = t / 2 + CAP_SIDE_H
+    crown_h = 0.45 * CAP_SIDE_H
+    dish_d = CAP * TABLE * math.tan(math.radians(DISH_SLOPE_DEG))
+    for sgn in (1, -1):
+        prof = cap_edge_profile(top)
+        cap_pts = [sc(-r, sgn * z) for r, z in reversed(prof)] + [sc(0.0, sgn * (top - dish_d))] + [sc(r, sgn * z) for r, z in prof] + [sc(CAP, sgn * prof[-1][1]), sc(-CAP, sgn * prof[-1][1])]
+        poly(ax, cap_pts, lw=1.2, hatch="\\\\\\\\")
+        z_lip = prof[-1][1]  # skirt bottom = cap underside lip
+        hub = [sc(-HUB_SEAT_R, sgn * z_lip), sc(HUB_SEAT_R, sgn * z_lip), sc(HUB_SEAT_R, sgn * (t / 2)), sc(-HUB_SEAT_R, sgn * (t / 2))]  # recessed rotating hub seat (user 18:33)
+        poly(ax, hub, lw=1.0, hatch="xxxx")
+        if sgn == 1:
+            leader(ax, sc(HUB_SEAT_R, (z_lip + t / 2) / 2), f"轴心承托（毂座）R {HUB_SEAT_R:.3f} R：盖缘外悬 {CAP_OVERHANG:.2f} R（占位）\n盖缘半径 > 毂座，暗缝 = 外悬下的阴影（用户 18:33）", sc(-1.22, 0.44), fs=6)
+        for i in range(3):
+            (r0, z0), (r1, z1) = prof[i], prof[i + 1]
+            for side in (1, -1):
+                ax.plot([S * side * r0, S * side * r1], [S * sgn * z0, S * sgn * z1], color=TIER_COLORS[i], lw=2.4, solid_capstyle="butt", zorder=5)
+    dim(ax, sc(corner_x - 0.05, -t / 2), sc(corner_x - 0.05, t / 2), -0.62 * S, f"厚 ≈{BODY_T:.2f} R（占位）")
+    dim(ax, sc(CAP * 0.5, t / 2), sc(CAP * 0.5, top), -0.95 * S, f"D03 盖侧 ≈{CAP_SIDE_H:.2f} R")
+    dim(ax, sc(0.0, top - dish_d), sc(0.0, top), 0.78 * S, f"凹深 ≈{dish_d:.3f} R（{DISH_SLOPE_DEG:.0f}° 占位；视频上限 ≈2°）", color=ALT)
+    leader(ax, sc(CAP * TABLE, top), "盘缘 = 盖最高点（f0077 远侧冠环被压缩 → 冠环面背向相机 → 向外向下）", sc(0.30, 0.44), fs=6)
+    leader(ax, sc(fl_apex + 0.02, t / 2 - pd), f"D08 漏斗坑：口尖 {PT_A[0]:.2f} R → 斜壁 → 平底尖 {fl_apex:.2f} R，深 {POCKET_DEPTH_FRACTION:.0%} t/侧（占位）", sc(-1.22, -0.40), color=ALT, fs=6)
+    leader(ax, sc(-CAP, t / 2 * 0.3), f"对侧缺口：机身在此不超出盖圈（露盖 ≈{RB['exposedCapArcPerNotchDeg']:.0f}°），盖裙与暗缝外露", sc(-1.22, 0.30), fs=6)
+
+
+def section_cc(ax):
+    """Transverse section at x≈0.58 R (cut line C-C on the plan): pocket between the two Y arms; three-tier edges."""
+    setup(ax, "SECTION C—C v17  沿顶视 C—C 线（x≈0.58 R）横剖，看向叶尖", (-0.56 * S, 0.56 * S), (-0.22 * S, 0.30 * S))
+    ax.plot([-0.56 * S, 0.56 * S], [0, 0], color=CENTER, lw=0.5, ls=(0, (8, 2, 1.5, 2)))
+    t = BODY_T
+    x0 = 0.58
+    hw = half_width(x0)
+    arm_y = Y_MID[1]
+    pk_hw, fl_hw = pocket_half_widths(x0)  # mouth / floor half-widths of the funnel at this x
+    pd = POCKET_DEPTH_FRACTION * t
+    tiers_r = edge_profile_upper_right(hw, t)  # (y,z) from top-surface edge to wall top
+    pw = tiers_r[0][0]
+    wh = wall_half(t)
+    upper_right = [sc(y, z) for y, z in tiers_r]  # pw -> hw
+    import numpy as _np
+    ys_r = _np.linspace(pk_hw, pw, 40)
+    prof_r = [(float(yy), float(top_z(x0, yy))) for yy in ys_r]  # hard-cut top: F then C (piecewise linear)
+    z_edge = prof_r[-1][1]
+    tiers_r = [(y_, z_ - t / 2 + z_edge) for y_, z_ in tiers_r]  # band hangs from the actual top-face edge height
+    upper_right = [sc(y, z) for y, z in tiers_r]
+    # funnel wall with true fillets: sample from just outside the mouth edge (on the top facet) to just inside the floor
+    z_top_edge = float(top_z(x0, pk_hw))
+    us = _np.linspace(-0.02, (pk_hw - fl_hw) + 0.02, 60)
+    zs_f = funnel_profile(us, pk_hw - fl_hw, z_top_edge, pd, POCKET_FILLET_TOP, POCKET_FILLET_FLOOR)
+    wall_r = [(pk_hw - float(uu), float(zz)) for uu, zz in zip(us, zs_f)]  # y from outside the mouth (pk_hw+0.02) inward to the floor
+    prof_r = [(y_, z_) for y_, z_ in prof_r if y_ > pk_hw + 0.02]  # top facet beyond the fillet
+    top = ([sc(-y, z) for y, z in reversed(tiers_r)] + [sc(-y, z) for y, z in reversed(prof_r)] + [sc(-y, z) for y, z in wall_r] + [sc(y, z) for y, z in reversed(wall_r)] + [sc(y, z) for y, z in prof_r] + upper_right)
+    bottom = [sc(y, -z) for (y, z) in reversed(tiers_r)] + [sc(y, -z) for y, z in reversed(prof_r)] + [sc(y, -z) for y, z in wall_r] + [sc(-y, -z) for y, z in reversed(wall_r)] + [sc(-y, -z) for y, z in prof_r] + [sc(-y, -z) for y, z in tiers_r]
+    poly(ax, top + bottom, lw=1.3, hatch="////")
+    lab = top_label(x0, ys_r)
+    for kk in range(1, len(ys_r)):
+        if lab[kk] != lab[kk - 1]:
+            ax.plot([S * ys_r[kk], S * ys_r[kk]], [S * (top_z(x0, ys_r[kk]) - 0.006), S * (top_z(x0, ys_r[kk]) + 0.006)], color="#6a3d9a", lw=1.2)
+            ax.plot([-S * ys_r[kk], -S * ys_r[kk]], [S * (top_z(x0, ys_r[kk]) - 0.006), S * (top_z(x0, ys_r[kk]) + 0.006)], color="#6a3d9a", lw=1.2)
+    for k in range(len(EDGE_TIERS)):
+        (y0, z0), (y1, z1) = tiers_r[k], tiers_r[k + 1]
+        ax.plot([S * y0, S * y1], [S * z0, S * z1], color=ROW_COLORS[k], lw=3.0, solid_capstyle="butt", zorder=5)
+    # labels
+    leader(ax, sc(pk_hw, float(top_z(x0, pk_hw))), f"口沿 = F 面上边 = 最高线（≈{CREST:.3f} R 占位）", sc(0.06, 0.285), color="#6a3d9a", fs=6)
+    leader(ax, sc((pk_hw + fl_hw) / 2, (float(top_z(x0, pk_hw)) + t / 2 - pd) / 2), f"D08 斜壁 ≈47°（占位）\n口宽 {2 * pk_hw:.2f} → 底宽 {2 * fl_hw:.2f} R\n口沿凸圆角 R{POCKET_FILLET_TOP:.2f}、底凹圆角 R{POCKET_FILLET_FLOOR:.2f}（占位）", sc(0.12, -0.20), color=ALT, fs=6)
+    leader(ax, sc((pk_hw + pw) / 2, float(top_z(x0, (pk_hw + pw) / 2))), "F 坑侧面 → 折边 → C 根角面（平面，硬折边）", sc(0.30, 0.22), fs=6)
+    leader(ax, sc((tiers_r[0][0] + tiers_r[1][0]) / 2, (tiers_r[0][1] + tiers_r[1][1]) / 2), f"D05 A 层大斜面 {TIER_A_W:.2f} R · {EDGE_TIERS[0]['slopeDeg']}°（占位）", sc(0.20, 0.17), fs=6)
+    leader(ax, sc((tiers_r[2][0] + tiers_r[3][0]) / 2, (tiers_r[2][1] + tiers_r[3][1]) / 2), f"鸢形 38° / Λ 53° 到中面（占位）", sc(0.24, 0.10), fs=6)
+    leader(ax, sc(hw, 0.0), "中面：Λ 底边相接（D06 ≈0）", sc(0.34, -0.14), fs=6)
+    leader(ax, sc(0.0, t / 2 - pd), f"D08 平底台阶（上下镜像 D10）\n深度未知，占位 {POCKET_DEPTH_FRACTION:.0%} t/侧（用户 14:01“更深一些”）", sc(-0.54, -0.20), color=ALT, fs=6)
+    leader(ax, sc(-(pk_hw + pw) / 2, float(top_z(x0, (pk_hw + pw) / 2))), "F' / C'（镜像）", sc(-0.54, 0.26), fs=6)
+    dim(ax, sc(-hw, -wh), sc(hw, -wh), -0.06 * S, f"叶宽 ≈{2 * hw:.2f} R", fs=6)
+    dim(ax, sc(hw + 0.02, -t / 2 - CREST), sc(hw + 0.02, t / 2 + CREST), -0.05 * S, f"总厚 ≈{t + 2 * CREST:.2f} R（占位）", fs=6)
+
+
+def section_ff(ax):
+    """Transverse section at x≈0.85 R (cut line F-F): single crowned ridge, three-tier edges."""
+    setup(ax, "SECTION F—F v17  沿 F—F 线（x≈0.85 R）", (-0.36 * S, 0.36 * S), (-0.22 * S, 0.30 * S))
+    ax.plot([-0.36 * S, 0.36 * S], [0, 0], color=CENTER, lw=0.5, ls=(0, (8, 2, 1.5, 2)))
+    t = BODY_T
+    hw = half_width(0.85)
+    tiers_r = edge_profile_upper_right(hw, t)
+    wh = wall_half(t)
+    import numpy as _np
+    pw = tiers_r[0][0]
+    ys_r = _np.linspace(0.0, pw, 30)
+    prof_r = [(float(yy), float(top_z(0.85, yy))) for yy in ys_r]
+    z_edge = prof_r[-1][1]
+    tiers_r = [(y_, z_ - t / 2 + z_edge) for y_, z_ in tiers_r]
+    top = [sc(-y, z) for y, z in reversed(tiers_r)] + [sc(-y, z) for y, z in reversed(prof_r)] + [sc(y, z) for y, z in prof_r[1:]] + [sc(y, z) for y, z in tiers_r]
+    bottom = [sc(y, -z) for y, z in reversed(tiers_r)] + [sc(y, -z) for y, z in reversed(prof_r)] + [sc(-y, -z) for y, z in prof_r[1:]] + [sc(-y, -z) for y, z in tiers_r]
+    poly(ax, top + bottom, lw=1.3, hatch="////")
+    for k in range(len(EDGE_TIERS)):
+        (y0, z0), (y1, z1) = tiers_r[k], tiers_r[k + 1]
+        ax.plot([S * y0, S * y1], [S * z0, S * z1], color=ROW_COLORS[k], lw=3.0, solid_capstyle="butt", zorder=5)
+    leader(ax, sc(0.0, float(top_z(0.85, 0.0))), f"主脊（T/T' 折边）此处 ≈{float(top_z(0.85, 0.0)) - t / 2:.3f} R（占位，向叶尖下落）", sc(-0.34, 0.285), color="#6a3d9a", fs=6)
+    leader(ax, sc((tiers_r[0][0] + tiers_r[1][0]) / 2, (tiers_r[0][1] + tiers_r[1][1]) / 2), "A 层 14°", sc(0.20, 0.24), fs=6)
+    leader(ax, sc((tiers_r[2][0] + tiers_r[3][0]) / 2, (tiers_r[2][1] + tiers_r[3][1]) / 2), "鸢形/Λ 鳞", sc(0.20, 0.17), fs=6)
+    dim(ax, sc(-hw, -wh), sc(hw, -wh), -0.06 * S, f"叶宽 ≈{2 * hw:.2f} R", fs=6)
+
+
+def detail_edge(ax):
+    """Detail G: cap edge, half-section through a wedge tip — disc rim -> crown -> upper skirt -> lower skirt -> vertical side -> seam."""
+    k = 4.0
+    setup(ax, "DETAIL G (4:1) 盖缘三层过渡（盘面→外悬缘）+ 内收毂座", (0.30 * S * k, 0.64 * S * k), (0.05 * S * k, 0.325 * S * k))
+    t = BODY_T
+    top = t / 2 + CAP_SIDE_H
+    prof = cap_edge_profile(top)  # (r, z): disc rim -> t1 -> t2 -> t3
+    base = t / 2 + 0.005
+    z_lip = prof[-1][1]
+    pts = [(CAP * 0.62, top - 0.004)] + prof + [(CAP, z_lip), (HUB_SEAT_R, z_lip), (HUB_SEAT_R, base), (CAP * 0.62, base)]
+    xs = [x * S * k for x, _ in pts]
+    ys = [y * S * k for _, y in pts]
+    ax.add_patch(Polygon(list(zip(xs, ys)), closed=True, fill=False, hatch="////", edgecolor=INK, lw=1.3))
+    names = ("第 1 层（绿）冠环 D02", "第 2 层（红）裙上排 D03", "第 3 层（蓝）裙下排 D03")
+    for i in range(3):
+        (r0, z0), (r1, z1) = prof[i], prof[i + 1]
+        ax.plot([S * k * r0, S * k * r1], [S * k * z0, S * k * z1], color=TIER_COLORS[i], lw=5, solid_capstyle="butt", zorder=5)
+        tier = CAP_TIERS[i]
+        ax.annotate(f"{names[i]}  径向 ≈{tier['radialToCap']:.2f}×盖径  斜 ≈{tier['slopeDeg']}°（占位）", xy=(S * k * (r0 + r1) / 2, S * k * (z0 + z1) / 2), xytext=(0.305 * S * k, (0.312 - 0.018 * i) * S * k), fontsize=6, color=TIER_COLORS[i], arrowprops=dict(arrowstyle="->", color=TIER_COLORS[i], lw=0.7), bbox=dict(boxstyle="round,pad=0.15", fc="white", ec=TIER_COLORS[i], lw=0.4))
+    ax.annotate(f"盘缘 14 边形 = 盖最高点（{TABLE:.2f}×盖）", xy=(S * k * prof[0][0], S * k * prof[0][1]), xytext=(0.305 * S * k, 0.255 * S * k), fontsize=6, color=INK, arrowprops=dict(arrowstyle="->", color=INK, lw=0.7))
+    ax.annotate(f"盖缘外悬 {CAP_OVERHANG:.2f} R（占位）→ 毂座 R {HUB_SEAT_R:.3f} R 内收\n毂座高 ≈{max(z_lip - base, 0):.3f} R；暗缝 = 外悬下阴影（用户 18:33）", xy=(S * k * HUB_SEAT_R, S * k * (z_lip + base) / 2), xytext=(0.50 * S * k, 0.10 * S * k), fontsize=6, color=INK, arrowprops=dict(arrowstyle="->", color=INK, lw=0.7))
+    ax.text(0.305 * S * k, 0.235 * S * k, "第 1 层 = 冠环 D02；第 2/3 层 = 盖裙两排 D03", fontsize=6, color=INK)
+    ax.plot([S * k * CAP, S * k * CAP * 1.06], [S * k * base] * 2, color=ALT, lw=1.0, ls=(0, (4, 2)))
+    ax.text(S * k * CAP * 1.005, S * k * (base + 0.006), "叶根 / 暗缝", fontsize=5.5, color=ALT)
+    ax.text(0.305 * S * k, 0.062 * S * k, "视频确认：三层、逐层变陡（用户圈图 + f0128–f0140）；缘下为内收毂座（用户 18:33）\n占位：各层径向宽与角度、外悬量。Gate 06 检查：三行平面、斜度递增、盖缘半径 > 毂座", fontsize=5.5, color=HIDDEN)
+
+
+def detail_blade_edge(ax):
+    """Detail H: blade edge, 4:1 — kite plane (top face -> zigzag) and Λ plane (zigzag -> mid-plane), plus the unrolled facet layout."""
+    k = 4.0
+    setup(ax, "DETAIL H (4:1) 叶边宽多梯度过渡：A 层大斜面 → 亮鸢形 / 暗 Λ 咬合到中面，下半镜像", (-0.02 * S * k, 0.27 * S * k), (-0.015 * S * k, 0.165 * S * k))
+    t = BODY_T
+    hw = half_width(0.85)
+    tiers_r = edge_profile_upper_right(hw, t)
+    pts = [(0.0, float(top_z(0.85, 0.0))), (tiers_r[0][0], float(top_z(0.85, tiers_r[0][0])))] + [(y_, z_ - t / 2 + float(top_z(0.85, tiers_r[0][0]))) for y_, z_ in tiers_r[1:]] + [(hw, 0.0)]
+    xs = [x * S * k for x, _ in pts]
+    ys = [y * S * k for _, y in pts]
+    ax.add_patch(Polygon(list(zip(xs, ys)) + [(xs[0], 0.0)], closed=True, fill=False, hatch="////", edgecolor=INK, lw=1.3))
+    fam = D["UTS-D05"]["params"]["facetFamilies"]
+    names = [f"A 层大斜面 {TIER_A_W:.2f} R · 斜 ≈{EDGE_TIERS[0]['slopeDeg']}°（每边 3 片错位）", f"鸢形面（亮）斜 ≈{fam['kite']['slopeDeg']}°", f"Λ 面（暗）斜 ≈{fam['lambda']['slopeDeg']}°"]
+    for i, tier in enumerate(EDGE_TIERS):
+        (y0, z0), (y1, z1) = tiers_r[i], tiers_r[i + 1]
+        ax.plot([S * k * y0, S * k * y1], [S * k * z0, S * k * z1], color=ROW_COLORS[i], lw=5, solid_capstyle="butt", zorder=5)
+        ax.annotate(f"{names[i]}（占位）", xy=(S * k * (y0 + y1) / 2, S * k * (z0 + z1) / 2), xytext=(-0.01 * S * k, (0.158 - 0.015 * i) * S * k), fontsize=6, color=ROW_COLORS[i], arrowprops=dict(arrowstyle="->", color=ROW_COLORS[i], lw=0.7), bbox=dict(boxstyle="round,pad=0.15", fc="white", ec=ROW_COLORS[i], lw=0.4))
+    ax.annotate("鸢形/Λ 交点在 25%–85% 带宽间来回；此处画平均", xy=(S * k * tiers_r[2][0], S * k * tiers_r[2][1]), xytext=(0.0 * S * k, 0.108 * S * k), fontsize=5.5, color=HIDDEN, arrowprops=dict(arrowstyle="->", color=HIDDEN, lw=0.6))
+    ax.annotate("顶面：大平面硬切（D04 v16，T 面）", xy=(S * k * (tiers_r[0][0] - 0.02), S * k * (float(top_z(0.85, tiers_r[0][0] - 0.02)))), xytext=(0.07 * S * k, 0.126 * S * k), fontsize=6, color=INK, arrowprops=dict(arrowstyle="->", color=INK, lw=0.7))
+    ax.annotate("中面 = 最宽处，上下两组 Λ 底边相接\nD06 竖壁 ≈0（f0148/f0150/f0154）", xy=(S * k * hw, 0.0), xytext=(0.13 * S * k, 0.028 * S * k), fontsize=6, color=INK, arrowprops=dict(arrowstyle="->", color=INK, lw=0.7))
+    # unrolled side view of the band (s along the edge, d across): kites hang from the top edge, Λ facets rise from the mid-plane
+    bx0, by0 = 0.178 * S * k, 0.060 * S * k
+    L, Wd = 0.028 * S * k, 0.028 * S * k  # drawing pitch and band height (not to scale)
+    zt, zb = fam["lambda"]["tipAtBandFraction"], fam["kite"]["tipAtBandFraction"]
+    top, bot = by0 + Wd, by0
+    for c in range(3):
+        x0 = bx0 + c * L
+        kite = [(x0, top), (x0 + L, top), (x0 + L, top - zt * Wd), (x0 + L / 2, top - zb * Wd), (x0, top - zt * Wd)]
+        ax.add_patch(Polygon(kite, closed=True, fill=True, fc="#f2f2f2", ec=INK, lw=0.6))
+    for c in range(4):
+        xc = bx0 + c * L
+        lam = [(xc - L / 2, bot), (xc + L / 2, bot), (xc + L / 2, top - zb * Wd), (xc, top - zt * Wd), (xc - L / 2, top - zb * Wd)]
+        lam = [(min(max(x, bx0), bx0 + 3 * L), y) for x, y in lam]
+        ax.add_patch(Polygon(lam, closed=True, fill=True, fc="#8a8a8a", ec=INK, lw=0.6))
+    ax.plot([bx0, bx0 + 3 * L], [top, top], color=ROW_COLORS[0], lw=1.6)
+    ax.plot([bx0, bx0 + 3 * L], [bot, bot], color=ROW_COLORS[1], lw=1.6)
+    ax.text(bx0, top + 0.004 * S * k, f"侧视展开：鸢形到 {zb:.0%}、Λ 到 {zt:.0%} 带宽\n每边 {FACETS}±1 片；独立平面、硬折边", fontsize=5.5, color=INK)
+    ax.text(bx0, bot - 0.010 * S * k, "上 = 顶面边（绿）· 下 = 中面（红）", fontsize=5.5, color=HIDDEN)
+    ax.text(-0.01 * S * k, -0.012 * S * k, f"用户 14:01“用不同的梯度过渡…不是轻轻雕一层”→ 鸢形/Λ 之上加 A 层大斜面 {TIER_A_W:.2f} R，整段过渡 {BEVEL_W:.2f} R；角度/宽度占位，斜度按到中面归一", fontsize=5.5, color=HIDDEN)
+
+
+def detail_notch(ax):
+    """Detail D: notch between the 90° and 210° blades, bisector rotated to +y. 3x scale."""
+    k = 3.0
+    setup(ax, "DETAIL D (3:1) 缺口：两叶边各自止于盖圈，中间留出露盖间隔\n虚线 = 作废的 v6（相邻弧相交成 V）", (-0.42 * S * k, 0.42 * S * k), (0.28 * S * k, 0.92 * S * k))
+    # local frame: bisector along +y. Blade A axis at -60° from +y, blade B at +60°.
+    def to_local(pts, blade_rot_deg):
+        out = []
+        for x, y in pts:
+            a = math.radians(blade_rot_deg)
+            xr, yr = x * math.cos(a) - y * math.sin(a), x * math.sin(a) + y * math.cos(a)
+            out.append((xr * S * k, yr * S * k))
+        return out
+    half = planform_half()
+    full = half + [(x, -y) for x, y in reversed(half) if y > 1e-9]
+    v6 = v6_half()
+    v6full = v6 + [(x, -y) for x, y in reversed(v6) if y > 1e-9]
+    for blade_rot in (30, 150):  # blade axes at ±60° around the +y bisector (90° ± 60°)
+        poly(ax, to_local(full, blade_rot), lw=1.4, close=False)
+        poly(ax, to_local(v6full, blade_rot), lw=0.7, color=ALT, ls=(0, (4, 2)), close=False)
+    # cap
+    circle(ax, CAP * S * k, lw=1.2)
+    rim = [(CAP * TABLE * math.cos(2 * math.pi * j / N_SECTOR + math.pi / 2), CAP * TABLE * math.sin(2 * math.pi * j / N_SECTOR + math.pi / 2)) for j in range(N_SECTOR)]
+    poly(ax, [(x * S * k, y * S * k) for x, y in rim], lw=0.8)
+    for x, y in rim:
+        ax.plot([0.0, x * S * k], [0.0, y * S * k], color=INK, lw=0.3)
+    skirt = [(CAP * math.cos(2 * math.pi * (j + 0.5) / N_SKIRT + math.pi / 2), CAP * math.sin(2 * math.pi * (j + 0.5) / N_SKIRT + math.pi / 2)) for j in range(N_SKIRT)]
+    poly(ax, [(x * S * k, y * S * k) for x, y in skirt], lw=0.6, color=HIDDEN)
+    for j in range(N_WEDGE):
+        a_in = 2 * math.pi * j / N_WEDGE + math.pi / 2
+        a_out = 2 * math.pi * (j + 0.5) / N_WEDGE + math.pi / 2
+        i0 = (S * k * CAP * TABLE * math.cos(a_in), S * k * CAP * TABLE * math.sin(a_in))
+        i1 = (S * k * CAP * TABLE * math.cos(a_in + 2 * math.pi / N_WEDGE), S * k * CAP * TABLE * math.sin(a_in + 2 * math.pi / N_WEDGE))
+        o = (S * k * CAP * math.cos(a_out), S * k * CAP * math.sin(a_out))
+        ax.plot([i0[0], o[0], i1[0]], [i0[1], o[1], i1[1]], color=INK, lw=0.4)
+    apex = notch_apex()
+    apt = (0.0, math.hypot(*apex) * S * k)
+    ax.plot([apt[0]], [apt[1]], marker="x", ms=5, color=ALT)
+    rA = to_local([root_point()], 30)[0]
+    rB = to_local([root_point()], 150)[0]
+    for r_ in (rA, rB):
+        ax.plot([r_[0]], [r_[1]], marker="o", ms=3.5, color=INK)
+    # exposed cap arc between the two root points
+    from matplotlib.patches import Arc as _Arc
+    a0 = 90.0 - (60.0 - RB["meetsCapAtPolarDeg"])
+    a1 = 90.0 + (60.0 - RB["meetsCapAtPolarDeg"])
+    ax.add_patch(_Arc((0, 0), 2 * CAP * S * k * 1.04, 2 * CAP * S * k * 1.04, angle=0, theta1=a0, theta2=a1, color=DIM, lw=0.8))
+    ax.text(0.0, CAP * S * k * 1.075, f"露盖 ≈{RB['exposedCapArcPerNotchDeg']:.0f}°", fontsize=6, color=DIM, ha="center")
+    (xb, yb), cb, rb = blend_geometry()
+    bstart = to_local([(xb, yb)], 30)[0]
+    ax.plot([bstart[0]], [bstart[1]], marker="|", ms=6, color=HIDDEN)
+    leader(ax, apt, "v6：两弧相交成 V（红箭头处）— 作废", (-0.41 * S * k, 0.88 * S * k), color=ALT, fs=6)
+    leader(ax, rA, f"叶边止于盖圈 {RB['meetsCapAtPolarDeg']:.0f}°；根部内收弧 R≈{rb:.2f} R\n（起于 ≈{RB['startPolarDeg']:.0f}°），与盖圈切线夹 ≈{RB['angleToCapTangentDeg']:.0f}°", (0.02 * S * k, 0.88 * S * k), fs=6)
+    leader(ax, (0.0, CAP * TABLE * S * k), f"D01 盘缘 {TABLE:.2f}×盖 · D02 冠环 {N_WEDGE} 楔 · D09 缺口内冠环+裙+暗缝外露", (-0.41 * S * k, 0.31 * S * k), fs=6)
+
+
+def detail_cap(ax):
+    """Detail E: half section of the cap top, adopted (E1) and alternative (E2) readings."""
+    k = 3.0
+    setup(ax, "DETAIL E (3:1) 盖顶半剖（过扇区中线）— 请二选一\nE1 实线：盘缘最高 + 三层外低  E2 虚线：整顶内凹", (-0.02 * S * k, 0.62 * S * k), (-0.06 * S * k, 0.26 * S * k))
+    base = 0.0
+    top = CAP_SIDE_H
+    crown_h = 0.45 * CAP_SIDE_H
+    dish_d = CAP * TABLE * math.tan(math.radians(DISH_SLOPE_DEG))
+    prof = cap_edge_profile(top)
+    e1 = [(0.0, base), (CAP, base)] + [(r, z) for r, z in reversed(prof)] + [(0.0, top - dish_d)]
+    poly(ax, [(x * S * k, y * S * k) for x, y in e1], lw=1.3, hatch="\\\\\\\\")
+    for i in range(3):
+        (r0, z0), (r1, z1) = prof[i], prof[i + 1]
+        ax.plot([S * k * r0, S * k * r1], [S * k * z0, S * k * z1], color=TIER_COLORS[i], lw=3.5, solid_capstyle="butt", zorder=5)
+    # E2 alternative: ring slopes inward-down from the rim to the disc, disc flat/dished lower
+    e2 = [(CAP, top), (CAP * TABLE, top - crown_h * 0.8), (0.0, top - crown_h * 0.8 - dish_d)]
+    ax.plot([x * S * k for x, _ in e2], [y * S * k for _, y in e2], color=ALT, lw=1.0, ls=(0, (4, 2)))
+    ax.plot([CAP * S * k] * 2, [(top - crown_h) * S * k, top * S * k], color=ALT, lw=1.0, ls=(0, (4, 2)))
+    # concentric turning marks on the dish
+    dim(ax, (CAP * TABLE * S * k, top * S * k), (CAP * S * k, top * S * k), 0.02 * S * k, f"三层总径向 {CAP * (1 - TABLE):.3f} R", fs=6)
+    dim(ax, (CAP * S * k, prof[-1][1] * S * k), (CAP * S * k, top * S * k), -0.10 * S * k, f"三层总落差 ≈{top - prof[-1][1]:.3f} R（占位）", fs=6)
+    dim(ax, (0.0, (top - dish_d) * S * k), (0.0, top * S * k), -0.52 * S * k, f"凹深 ≈{dish_d:.3f} R（{DISH_SLOPE_DEG:.0f}° 占位）", color=ALT, fs=6)
+    leader(ax, (CAP * TABLE * S * k, top * S * k), "E1 盘缘 = 最高点（f0077 远侧冠环被压缩\n⇒ 冠环面背向相机 ⇒ 向外向下）", (0.02 * S * k, 0.235 * S * k), fs=6)
+    leader(ax, (CAP * TABLE * S * k, (top - crown_h * 0.8) * S * k), "E2 备选：冠环 14 楔向内向下，整个顶面成碟形\n（若“14 片有内凹效果”指的是冠环）", (0.06 * S * k, -0.04 * S * k), color=ALT, fs=6)
+    leader(ax, (0.0, (top - dish_d) * S * k), f"D01 {N_SECTOR} 等分平面扇区凹棱锥（拇指位）\n各扇区为平面，剖面为直线；深度未知", (0.02 * S * k, 0.06 * S * k), color=ALT, fs=6)
+
+
+def profile_table(ax):
+    setup(ax, "实测叶边半宽（4 条干净边）vs v7+ 凸弧+根部内收模型", (0, 10), (0, 10))
+    xs = ENV["x"]
+    per = ENV["perSide"]
+    rows = [("x/R", "实测均值", "v7 模型", "差", "v5 直边模型")]
+    old = PM["superseded"]["v4v5"]
+    xv = old["virtualVertexRadiusToR"]
+    for i, x in enumerate(xs):
+        vals = [per[j][i] for j in CLEAN_SIDES if per[j][i] is not None]
+        m = sum(vals) / len(vals)
+        mod = half_width(x)
+        v5m = (xv - x) * math.tan(math.radians(30.0))
+        if x > xv - old["cornerArcRadiusToR"] / math.tan(math.radians(30.0)) * math.cos(math.radians(30.0)):
+            cx = 1.0 - old["cornerArcRadiusToR"]
+            v5m = math.sqrt(max(0.0, old["cornerArcRadiusToR"] ** 2 - (x - cx) ** 2))
+        rows.append((f"{x:.2f}", f"{m:.3f}", f"{mod:.3f}", f"{mod - m:+.3f}", f"{v5m:.3f}"))
+    for i, r in enumerate(rows):
+        y = 9.5 - i * 0.60
+        col = INK if i else DIM
+        for j, txt in enumerate(r):
+            ax.text(0.3 + j * 2.0, y, txt, fontsize=5.5, color=col, family=FONT)
+    ax.text(0.3, 0.35, f"弧拟合 rms 0.0006–0.0010 R，直线 0.011–0.015 R（f0077/f0078）。R_s={RS:.3f} R，圆心 (0, −{CY:.2f} R)；根部 x<{XB:.2f} 内收弧 R {RB_R:.2f} R 止于盖圈 {RB['meetsCapAtPolarDeg']:.0f}°（4 边实测 51–53°）；叶尖圆角 {RT:.2f} R。", fontsize=6.5, color=ALT, family=FONT)
+
+
+def main() -> None:
+    fig = plt.figure(figsize=(16.5, 14.0), dpi=220)
+    fig.patch.set_facecolor("white")
+    ax_plan = fig.add_axes([0.02, 0.09, 0.50, 0.88])
+    ax_aa = fig.add_axes([0.53, 0.80, 0.46, 0.17])
+    ax_cc = fig.add_axes([0.53, 0.585, 0.29, 0.20])
+    ax_ff = fig.add_axes([0.825, 0.585, 0.165, 0.20])
+    ax_gg = fig.add_axes([0.53, 0.355, 0.225, 0.215])
+    ax_dd = fig.add_axes([0.765, 0.355, 0.225, 0.215])
+    ax_ee = fig.add_axes([0.53, 0.13, 0.225, 0.21])
+    ax_hh = fig.add_axes([0.765, 0.13, 0.225, 0.21])
+    plan(ax_plan)
+    section_aa(ax_aa)
+    section_cc(ax_cc)
+    section_ff(ax_ff)
+    detail_edge(ax_gg)
+    detail_notch(ax_dd)
+    detail_cap(ax_ee)
+    detail_blade_edge(ax_hh)
+    fig.text(0.012, 0.045, "GEEONE 龙鳞三叶 · REFERENCE CAD v17 (cap rim overhangs a recessed hub seat, user 18:33; v16: edge = wide multi-gradient transition 0.14 R: tier A 14° + kite/Λ; root pocket = sloped funnel + deeper stepped floor + rounded corners — user 14:01, f0116/f0124; blade top = hard-cut planes T/F/C; v15 10:40/10:55) · metal-three-blade · Gate 02 rev-006", fontsize=11, fontweight="bold", color=INK)
+    fig.text(0.012, 0.028, f"UNITS: R 比例；mm 仅 85 mm user-authorized-provisional · 叶边凸弧 R {RS:.2f} R、圆心距 {CY:.2f} R；根部内收弧 R {RB_R:.2f} R 止于盖圈 {RB['meetsCapAtPolarDeg']:.0f}°，缺口露盖 {RB['exposedCapArcPerNotchDeg']:.0f}° · 叶尖 90°+{RT:.2f} R · 冠环 {N_WEDGE} 楔 · 盘 {N_SECTOR} 等分扇区凹棱锥、{TABLE:.2f}×盖、凹深未知 · 叶顶 Y 形隆起脊（脊高 {CREST:.3f} R 占位）· 盖缘三层过渡 冠 {CAP_TIERS[0]['slopeDeg']}°/裙 {CAP_TIERS[1]['slopeDeg']}°/{CAP_TIERS[2]['slopeDeg']}°（占位）· 叶边 {len(EDGE_TIERS)} 排大鳞 {BEVEL_W:.2f} R 宽到中面（宽/斜度占位）· 无独立竖壁 · 凹坑深/缝宽未知 · 未推手机", fontsize=8, color=INK)
+    fig.text(0.012, 0.013, f"SOURCE surface-detail-spec.json (planformProfile.parametric v7, D01 v8, D04 v16, D02 v10, D03 v18, D05/D06 v17, D08 v17, D09 v18) ← traces / arc fits / disc unwrap / user drawings ← f0077 f0078 f0108 f0132 → draw_geeone_reference_cad_v17.py · {date.today().isoformat()} · v1–v12 保留为历史", fontsize=8, color=HIDDEN)
+    fig.patches.append(plt.Rectangle((0.005, 0.005), 0.99, 0.055, transform=fig.transFigure, fill=False, ec=INK, lw=0.8))
+    for ext in ("png", "pdf"):
+        fig.savefig(A02 / f"reference-cad-from-video-v17.{ext}", dpi=220, facecolor="white")
+    plt.close(fig)
+    print(A02 / "reference-cad-from-video-v17.png")
+
+
+if __name__ == "__main__":
+    main()

@@ -1,0 +1,13 @@
+{
+  "observationId": "fixture-risky-pending",
+  "repoRoot": "/fixture/Fidgeting app",
+  "taskTitle": "Mobile app version issue",
+  "state": "risky_pending",
+  "preflightStatus": "ready",
+  "pendingAction": {
+    "control": "approve",
+    "command": "node tools/model-provenance-explorer/validate-pipelines.mjs --refresh",
+    "workingDirectory": "/fixture/Fidgeting app",
+    "outputPaths": []
+  }
+}

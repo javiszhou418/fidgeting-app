@@ -1,0 +1,14 @@
+---
+description: Prevent any visible ring or cap on the Fan Card common axis
+alwaysApply: true
+---
+
+# Fan Card axis hard rule
+
+- The front common axis may render only `CommonAxis_RecessedMatteSpindle`.
+- Keep that spindle at radius `2.00 mm` and inset `0.12 mm`.
+- It must use `M_FanCardAxisMatte`: metallic/smoothness `0`, with specular highlights and environment reflections disabled.
+- Never create, import, enable, or preserve a bearing cap, chrome disc, annular ring, washer, axis seat, cover disc, or ball.
+- Reject forbidden dormant meshes in both `MagneticFanCardVisual.fbx` and `FanCardBackMechanism.fbx`.
+- Update `fan_card_guardrails.json` first, then synchronize Blender, C#, the Unity scene, validators, tests, and docs.
+- Block previews, builds, and device installation if any forbidden axis object or renderer exists.

@@ -5,6 +5,14 @@ using UnityEngine.InputSystem.Controls;
 
 namespace FidgetingApp.EDC
 {
+    public enum SharedPresentationGestureMode
+    {
+        None,
+        ReservedForProduct,
+        Orbit,
+        Pinch
+    }
+
     /// <summary>
     /// Gives the fifth product the same presentation gestures as the rotor
     /// products while reserving touches that begin on the sliding lid.
@@ -13,25 +21,29 @@ namespace FidgetingApp.EDC
     [DefaultExecutionOrder(-45)]
     public sealed class SharedPresentationGestureController : MonoBehaviour
     {
-        private enum GestureMode
-        {
-            None,
-            ReservedForProduct,
-            Orbit,
-            Pinch
-        }
-
         [SerializeField] private EdcPortraitCameraFramer presentationCamera;
         [SerializeField] private Camera interactionCamera;
         [SerializeField] private Collider productInteractionSurface;
         [SerializeField, Min(0.1f)] private float maximumRayDistance = 5f;
 
-        private GestureMode mode;
+        private SharedPresentationGestureMode mode;
         private Vector2 previousPosition;
         private float previousPinchDistance;
         private bool waitForTouchesToClear;
 
-        public bool IsInteracting => mode == GestureMode.Orbit || mode == GestureMode.Pinch;
+        public bool IsInteracting =>
+            mode == SharedPresentationGestureMode.Orbit
+            || mode == SharedPresentationGestureMode.Pinch;
+        public bool IsPinching => mode == SharedPresentationGestureMode.Pinch;
+        public bool IsOrbiting => mode == SharedPresentationGestureMode.Orbit;
+        public bool IsProductReserved =>
+            mode == SharedPresentationGestureMode.ReservedForProduct;
+        public SharedPresentationGestureMode CurrentMode => mode;
+        public Collider ProductInteractionSurface => productInteractionSurface;
+        public int TouchReceiptCount { get; private set; }
+        public int InputUpdateCount { get; private set; }
+        public int PinchUpdateCount { get; private set; }
+        public int OrbitUpdateCount { get; private set; }
 
         public void Configure(
             EdcPortraitCameraFramer cameraFramer,
@@ -58,6 +70,7 @@ namespace FidgetingApp.EDC
 
         private void Update()
         {
+            InputUpdateCount++;
             Touchscreen touchscreen = Touchscreen.current;
             if (touchscreen != null && ReadTouches(touchscreen))
             {
@@ -104,21 +117,26 @@ namespace FidgetingApp.EDC
                 float distance = Vector2.Distance(
                     first.position.ReadValue(),
                     second.position.ReadValue());
-                if (mode != GestureMode.Pinch)
+                if (mode != SharedPresentationGestureMode.Pinch)
                 {
-                    mode = GestureMode.Pinch;
+                    mode = SharedPresentationGestureMode.Pinch;
                     previousPinchDistance = distance;
+                    TouchReceiptCount += 2;
+                    Debug.Log(
+                        "[MagneticSlideRuntime] pinch-begin "
+                        + $"distance={distance:F1}");
                     return true;
                 }
                 if (previousPinchDistance > 1f && distance > 1f)
                 {
                     presentationCamera?.ZoomByScale(distance / previousPinchDistance);
+                    PinchUpdateCount++;
                 }
                 previousPinchDistance = distance;
                 return true;
             }
 
-            if (mode == GestureMode.Pinch)
+            if (mode == SharedPresentationGestureMode.Pinch)
             {
                 waitForTouchesToClear = true;
                 CancelGesture();
@@ -126,23 +144,31 @@ namespace FidgetingApp.EDC
             }
 
             Vector2 position = first.position.ReadValue();
-            if (mode == GestureMode.None)
+            if (mode == SharedPresentationGestureMode.None)
             {
+                TouchReceiptCount++;
                 int touchId = first.touchId.ReadValue();
                 if (IsPointerOverUi(touchId) || HitsProductSurface(position))
                 {
-                    mode = GestureMode.ReservedForProduct;
+                    mode = SharedPresentationGestureMode.ReservedForProduct;
+                    Debug.Log(
+                        "[MagneticSlideRuntime] presentation-reserved-for-product "
+                        + $"touch={touchId}");
                     return true;
                 }
-                mode = GestureMode.Orbit;
+                mode = SharedPresentationGestureMode.Orbit;
                 previousPosition = position;
+                Debug.Log(
+                    "[MagneticSlideRuntime] orbit-begin "
+                    + $"touch={touchId} x={position.x:F1} y={position.y:F1}");
                 return true;
             }
 
-            if (mode == GestureMode.Orbit)
+            if (mode == SharedPresentationGestureMode.Orbit)
             {
                 presentationCamera?.OrbitByPixels(position - previousPosition);
                 previousPosition = position;
+                OrbitUpdateCount++;
             }
             return true;
         }
@@ -161,14 +187,16 @@ namespace FidgetingApp.EDC
             }
             if (mouse.rightButton.wasPressedThisFrame)
             {
-                mode = GestureMode.Orbit;
+                mode = SharedPresentationGestureMode.Orbit;
                 previousPosition = mouse.position.ReadValue();
             }
-            if (mouse.rightButton.isPressed && mode == GestureMode.Orbit)
+            if (mouse.rightButton.isPressed
+                && mode == SharedPresentationGestureMode.Orbit)
             {
                 Vector2 position = mouse.position.ReadValue();
                 presentationCamera?.OrbitByPixels(position - previousPosition);
                 previousPosition = position;
+                OrbitUpdateCount++;
             }
             if (mouse.rightButton.wasReleasedThisFrame)
             {
@@ -198,7 +226,7 @@ namespace FidgetingApp.EDC
 
         private void CancelGesture()
         {
-            mode = GestureMode.None;
+            mode = SharedPresentationGestureMode.None;
             previousPinchDistance = 0f;
         }
 

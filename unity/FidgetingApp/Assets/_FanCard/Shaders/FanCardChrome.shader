@@ -27,9 +27,12 @@ Shader "FidgetingApp/FanCardChrome"
             #pragma vertex Vert
             #pragma fragment Frag
             #pragma target 3.0
+            #pragma multi_compile _ _ADDITIONAL_LIGHTS_VERTEX _ADDITIONAL_LIGHTS
+            #pragma multi_compile _ _CLUSTER_LIGHT_LOOP
 
             #include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Core.hlsl"
             #include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Lighting.hlsl"
+            #include "FanCardMovingLights.hlsl"
 
             CBUFFER_START(UnityPerMaterial)
                 half4 _BaseColor;
@@ -62,7 +65,8 @@ Shader "FidgetingApp/FanCardChrome"
             {
                 float3 normalWS = normalize(input.normalWS);
                 float3 viewWS = SafeNormalize(GetWorldSpaceViewDir(input.positionWS));
-                float3 reflectionWS = reflect(-viewWS, normalWS);
+                float3 reflectionWS = FanCardRotateReflection(
+                    reflect(-viewWS, normalWS));
                 Light mainLight = GetMainLight();
                 float3 halfVector = SafeNormalize(mainLight.direction + viewWS);
                 float nDotH = saturate(dot(normalWS, halfVector));
@@ -98,9 +102,22 @@ Shader "FidgetingApp/FanCardChrome"
                     half3(0.045, 0.050, 0.056),
                     half3(0.22, 0.24, 0.27) * _BaseColor.rgb,
                     vertical);
-                chrome += half3(0.92, 0.90, 0.86) * softbox * 0.42;
+                chrome += half3(0.92, 0.90, 0.86) * softbox * 0.24;
                 chrome += half3(0.28, 0.40, 0.52) * coolStrip * 0.10;
                 chrome += mainLight.color * spec * 0.18;
+                chrome += FanCardSampleAdditionalLights(
+                    input.positionWS,
+                    input.positionCS,
+                    _BaseColor.rgb,
+                    normalWS,
+                    viewWS,
+                    1.0h,
+                    _Smoothness);
+                half3 environmentSpecular = GlossyEnvironmentReflection(
+                    reflectionWS,
+                    saturate(1.0 - _Smoothness),
+                    1.0);
+                chrome += environmentSpecular * fresnel * 0.28;
                 chrome += fresnel * half3(0.10, 0.11, 0.13);
                 return half4(chrome, 1.0);
             }
