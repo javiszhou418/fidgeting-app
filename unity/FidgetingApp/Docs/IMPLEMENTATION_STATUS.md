@@ -15,7 +15,7 @@
 
 > **状态：用户授权「推」后已完成首次上传。产品视觉/真机仍按各 feature 条目的「视觉批准待确认，未推送手机」；本段只记录 git/LFS 镜像证据。**
 
-- 远程：**私有** [jiaweizhou0418/fidgeting-app](https://github.com/jiaweizhou0418/fidgeting-app)，默认分支 `main`，`main` tip `93038a7ea`（`chore: snapshot artifacts and pipeline evidence for GitHub upload`）。
+- 远程：**私有** [jiaweizhou0418/fidgeting-app](https://github.com/jiaweizhou0418/fidgeting-app)，默认分支 `main`，`main` tip `e1bcd782f`（含本段镜像记录）。
 - LFS：`git lfs push origin --all` 上传 **18030** 对象、约 **12 GB**（日志 `/tmp/fidget-github-push-20260911.log`）；GitHub 曾提示 GH010 抽样校验 10000/18030，属大推送常见警告。
 - 分支：**15** 条 `refs/heads/*`（`main`、`codex/gacha-build42`、`recovery/*`、`wip/stash-*`）。`refs/stash` 未推送（仍含历史 Builds 大 blob，仅本地）。
 - 设备 IPA：**不进 git**；Release [device-ipas-20260911](https://github.com/jiaweizhou0418/fidgeting-app/releases/tag/device-ipas-20260911) 含 build **44×2、45、46、47** 五个 `.ipa`（源备份 `~/Documents/FidgetingApp-git-backup-20260911/ipa/`）。
