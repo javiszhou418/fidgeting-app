@@ -11,9 +11,31 @@
 - `仅规格`：只有设计规格，不能对外称为已实现。
 - `待真机验收`：自动化能验证结构，但触感仍必须在 iPhone 上确认。
 
+## 2026-09-11 GitHub 私有镜像（仓库备份，非产品交付）
+
+> **状态：用户授权「推」后已完成首次上传。产品视觉/真机仍按各 feature 条目的「视觉批准待确认，未推送手机」；本段只记录 git/LFS 镜像证据。**
+
+- 远程：**私有** [jiaweizhou0418/fidgeting-app](https://github.com/jiaweizhou0418/fidgeting-app)，默认分支 `main`，`main` tip `93038a7ea`（`chore: snapshot artifacts and pipeline evidence for GitHub upload`）。
+- LFS：`git lfs push origin --all` 上传 **18030** 对象、约 **12 GB**（日志 `/tmp/fidget-github-push-20260911.log`）；GitHub 曾提示 GH010 抽样校验 10000/18030，属大推送常见警告。
+- 分支：**15** 条 `refs/heads/*`（`main`、`codex/gacha-build42`、`recovery/*`、`wip/stash-*`）。`refs/stash` 未推送（仍含历史 Builds 大 blob，仅本地）。
+- 设备 IPA：**不进 git**；Release [device-ipas-20260911](https://github.com/jiaweizhou0418/fidgeting-app/releases/tag/device-ipas-20260911) 含 build **44×2、45、46、47** 五个 `.ipa`（源备份 `~/Documents/FidgetingApp-git-backup-20260911/ipa/`）。
+- 本地 APFS 备份：`.git` 快照 `~/Documents/FidgetingApp-git-backup-20260911/dot-git-before-lfs-migrate/`（迁移前 `62d8bcd` 时代）。
+
+## 2026-09-11 22:5x Premium Display Case · tri-spinner-slab-v3-cmf R009 退回 → R010 内容 fit + rarity CMF 候选
+
+> **状态：用户 22:25 明确退回 R009 的偏心 pocket macro 与四产品乱序矩阵。R010 已用真实 shipping renderer 重做四款内容与四档 CMF，构建报告 pass，定向 EditMode 75/75，Fan Card 完整门禁 pass。该轮是静态构图、朝向、比例与材质变化，因此按录屏规则使用真实 Unity 静态截图；没有动画变化，无需录屏。视觉批准待确认，未推送手机。**
+
+- R009 退回证据：`ArtSource/ModelPipeline/premium-display-case/evidence/12-shipping/v3-rev-009/rejected-20260911T222500+0800/`。确认根因：斜视 macro 的凸出视差被误当作居中证明；R004 ±90° 与 V3 −90° 重复旋转；来源产品场景未在 capture 前关闭；单一厚度 fit 把真实玩具缩小。旧图保留为 rejected history，不得进入 `reviewArtifactIds`。
+- R010 runtime：`PremiumDisplayCaseV3PocketProfiles` 为四个 shipping model 定义 V3 本地朝向与 anchor；`AttachContentToCircularPocket` 用真实 mesh 顶点做径向 fit。三叶对齐机械轴心；双叶／推牌／扇牌对齐可见中心。四款中心误差 `≤0.00002 mm`、正视屏幕误差 `≤0.0003 px`；圆井占比依次 `90.2% / 79.3% / 100.0% / 100.0%`，均匀缩放，无来源场景几何混入。
+- R010 rarity：`PremiumDisplayCaseV3RarityCmf` 由 `SetLabel` 的 rarity 驱动。zone 2/5/6/7 依锁定 muted 表切换冷钢／玫瑰青铜／灰蓝钛／香槟；header 仅用近黑同色相底色提案，几何、玩具比例、灯光和机制不变。候选 prefab：`Assets/Resources/Gacha/PremiumDisplayCaseGate12R010/PresentationRoot.prefab`；场景：`Assets/_DisplayCase/Scenes/PremiumDisplayCaseGate12R010.unity`。
+- 真 Unity 证据：`ArtSource/ModelPipeline/premium-display-case/evidence/12-shipping/v3-rev-010/`。审阅图：`Artifacts/TriSpinnerSlab/gate12-r010/gate12-r010-content-phone-matrix-20260911T145551Z.png`、`gate12-r010-content-center-proof-20260911T145551Z.png`、`gate12-r010-content-quarter-matrix-20260911T145551Z.png`、`gate12-r010-rarity-cmf-matrix-20260911T145551Z.png`；自动图像审查：`gate12-r010-review-audit-20260911T145551Z.json`。
+- 验证：`PremiumDisplayCaseGate12R010Tests` 6/6；连同 R009、Gate11 parity、既有 DisplayCase、Gate12、Gacha choreography 共 75/75（`~/Library/Caches/fidgeting-renders/gate12-r010-prep/unity-r010-tests-20260911T145422Z.xml`）。`validate_fan_card_guardrails.py` 完整门禁 pass，轨道净距 `7.590 mm`；Fan Card 几何、轴心、三层、正背面 artwork 和机构未改。
+- 仍未实现：contract Gate 08 可见档 soft-focus renderer feature；R010 只沿用现有 Bloom/Neutral/Vignette。不得把本轮截图说成柔焦已完成。
+- 发布门禁：`PremiumDisplayCaseShippingFactory.ResourcesPath` 仍为 `Gacha/PremiumDisplayCaseGate12R004/PresentationRoot`；R010 未 build/install/launch。视觉批准前不得切换或推手机。
+
 ## 2026-09-11 21:0x Premium Display Case · tri-spinner-slab-v3-cmf Gate 12 R009 Unity shipping 候选预览（manifest rev 138，stage 12 draft）
 
-> **状态：Gate 12 R009 候选已在 Unity 6000.5.6f1 真场景出图（`PremiumDisplayCaseGate12R009Builder.BuildAndCapture`，report `status=pass`）。`PremiumDisplayCaseShippingFactory.ResourcesPath` 仍指向 Gate12R004；轨道 A 真机安装未开始。视觉批准待确认，未推送手机。**
+> **状态：R009 构建报告曾为 `pass`，但用户 22:25 的直接视觉检查推翻该技术结论。偏心 macro 与四产品矩阵已明确 `Rejected` 并由 R010 取代；不得再请求批准或推送手机。**
 
 - 候选资源：`Assets/Resources/Gacha/PremiumDisplayCaseGate12R009/`（`PresentationRoot.prefab`、`Gate12R009BeautyVolume.asset`、header TextMesh 深度测试材质/着色器）；场景 `Assets/_DisplayCase/Scenes/PremiumDisplayCaseGate12R009.unity`。Gate 11 FBX 哈希 `51bdbd4a…` 未动；38 件 GEO、无 explode；口袋 `ContentFit` 65.4×65.4×14.5 mm、三叶奖品 62.9×59.8×14.5 mm、凸出 6.09 mm；运行时 receipt 驱动 Oxanium 顶栏（`LabelTextDepthTested` 修复背面透字）。
 - 预览证据（整盒 only）：`ArtSource/ModelPipeline/premium-display-case/evidence/12-shipping/v3-rev-009/` — `shipping-hero.png`、六向标准视角、`phone-rest-{front,rear,quarter}.png`、`app-rig-current-yaw*` vs `app-rig-gate09-yaw*`（真 App 场景 `ThreeBladeMetalOriginal` 内 A=现有三盏方向光 / B=Gate09 棚灯+美化 Volume）、`turntable-frames/`（72f）、`app-turntable-frames/`（48f）、`gate12-r009-report.json`。本地对照拼图：`~/Library/Caches/fidgeting-renders/gate12-r009-review/{hero-4way,phone-3way,app-rig-ab}.png`。`Artifacts/TriSpinnerSlab/gate12-r009/*.mp4` 尚未 encode。
