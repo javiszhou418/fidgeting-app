@@ -1,0 +1,109 @@
+{
+  "schemaVersion": 1,
+  "modelId": "model-hhax",
+  "units": "meters in files; millimeter contract retained",
+  "publishedNominalBoundsMm": [
+    30.9,
+    50.5,
+    13.6
+  ],
+  "evaluatedClosedBounds": {
+    "minimumMm": [
+      -15.45,
+      -25.25,
+      0.0
+    ],
+    "maximumMm": [
+      15.45,
+      25.25,
+      13.6
+    ],
+    "sizeMm": [
+      30.9,
+      50.5,
+      13.6
+    ]
+  },
+  "motion": {
+    "upperSlideMm": [
+      0,
+      18.7
+    ],
+    "rearRotorAxis": "+Z",
+    "magneticDrive": false
+  },
+  "triangleCountEvaluated": 20022,
+  "triangleBudgetMax": 120000,
+  "sourceProvenance": {
+    "manifestRevisionAtBuild": 56,
+    "contractAssetId": "model-hhax-measurement-modeling-contract-r001",
+    "contractSha256": "e7aadf84cd589b0f69cec93eb866c6169af932560ed9e4e95369ece45c253911",
+    "architectureAssetId": "hhax-gate04-architecture-snapshot-r002",
+    "architectureSha256": "ae4611e6701a2947f5493da855ab311218985994799a7de70cfa6f93c4d02fac",
+    "hiddenBoundary": "exact hidden linkage curve, counts, tolerances and hole depths",
+    "gate09": {
+      "manifestRevisionAtBuild": 56,
+      "stageId": "09-environment",
+      "assetId": "hhax-gate09-environment-source-r001",
+      "sha256": "1dc5cab0acdd8becb0c4831ea5120eed4b4fa7aee62bcdc3bdbaf790b0f65092",
+      "path": "unity/FidgetingApp/ArtSource/ModelPipeline/model-hhax/evidence/09-environment/rev-001/model-hhax-environment.blend"
+    }
+  },
+  "hierarchyMetadata": "hierarchy-motion-metadata.json",
+  "cameraRecipe": "neutral-camera-recipe.json",
+  "unityImportContract": "unity-import-contract.json",
+  "materials": [
+    "MAT_BackMOP",
+    "MAT_ClearSeal",
+    "MAT_ClearSealEdge",
+    "MAT_FrontMOP",
+    "MAT_GrooveDark",
+    "MAT_LowerMOP",
+    "MAT_PolishedSteel",
+    "MAT_TrackBronze",
+    "MAT_Zirconium_PurpleBlack"
+  ],
+  "files": [
+    {
+      "name": "model-hhax-final.blend",
+      "sha256": "bd7eeb81b48ecf3ae646974eead7a827c5372b97b760732e9fb9e05c06b4e3ea",
+      "bytes": 10864230
+    },
+    {
+      "name": "model-hhax-final.fbx",
+      "sha256": "d8585e19573d00c9e3ba2ba30c8cbc4ed224f035270f342bb526521a28b62d34",
+      "bytes": 6242364
+    },
+    {
+      "name": "model-hhax-final.glb",
+      "sha256": "8f00f57e2b952ab1734c6e342b17a0aab75fc55c49f8c5c1346b93f7f4938ca6",
+      "bytes": 12058852
+    },
+    {
+      "name": "model-hhax-collision.fbx",
+      "sha256": "53329498e605e3eb844905636d878c2d26eb5ccf45dab7c89dfda77bda0a7dfa",
+      "bytes": 83276
+    },
+    {
+      "name": "hierarchy-motion-metadata.json",
+      "sha256": "8753f7eccfccf225a15568ebb52f302e77bfb925963f06193c4465349d9465f1",
+      "bytes": 1772
+    },
+    {
+      "name": "neutral-camera-recipe.json",
+      "sha256": "70c716af85e6e30b0c40ef30bc2b16eeb384fb1661157404f4b3e9482703e76b",
+      "bytes": 397
+    },
+    {
+      "name": "unity-import-contract.json",
+      "sha256": "be42605a0e5aea75e3aded381a30c119eff3a3df7d9342254bd935c27d1baefb",
+      "bytes": 817
+    },
+    {
+      "name": "export-validation.json",
+      "sha256": "b8c7f72fb13f0dc7c2157d70e9091b92260f96d66c4d88793744f695e685fb1e",
+      "bytes": 3334
+    }
+  ],
+  "provisionalBoundary": "Internal calibrated targets remain reversible digital reconstruction values; no manufacturing claim."
+}

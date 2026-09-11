@@ -1,0 +1,393 @@
+{
+  "schemaVersion": 1,
+  "modelId": "premium-display-case",
+  "variantId": "tri-spinner-slab-v3-cmf",
+  "gate": "10-export",
+  "exportRevision": 2,
+  "status": "pass",
+  "notice": "READY FOR EXPORT REVIEW · NOT IMPORTED INTO UNITY YET",
+  "pipelineRevisionAtBuild": 136,
+  "governingContract": {
+    "sha256": "e9a6f14a61e823274c716f3b3c26ee63e0bbc8e5879145e7b98c65aa9ea88294",
+    "revision": 13
+  },
+  "sourceGate07": {
+    "blendPath": "unity/FidgetingApp/ArtSource/ModelPipeline/premium-display-case/evidence/07-material/rev-003/tri-spinner-slab-material-r003.blend",
+    "blendSha256": "6653d6e76129fe6458848c45207f8bc88a3398dbbaae3564d422dc143df588bb"
+  },
+  "sourceGate06GeometryIdentity": {
+    "vertexPositionDigest": "d1f8a9541a714615ac6b3cff44a35dfc97d17f23a0b3c973a7d17cf8c0a71f29",
+    "objectMatrixDigest": "9f2efbec239d74d9154a044152755a461320202dfb2d6ba60c3163989dba047d",
+    "topologyDigest": "5ddda0c0b08cd49b11bef6dcd6caacb95573cd24008e8712ff70262312f122bf"
+  },
+  "upstreamApprovals": {
+    "06-geometry": {
+      "revision": 11,
+      "userApprovalQuote": "批准",
+      "approvedAt": "2026-09-11T14:45:00+08:00"
+    },
+    "07-material": {
+      "revision": 6,
+      "userApprovalQuote": "确认",
+      "approvedAt": "2026-09-11T15:26:00+08:00"
+    },
+    "08-lighting": {
+      "revision": 5,
+      "userApprovalQuote": "可以，但是有两个地方未来可能会有变化：- 顶上那个 TriSpinner 的背景色，现在用的是黑色。未来我将会用这一块来表示这个陀螺的稀有程度，所以它的颜色可能会有对应的变化。- 中间这个陀螺，它不是总是这一款。你可以用我们现在已经 build 了的，比如说什么石墨双叶、四七推牌，还有扑克牌的，以及农民EDC的，都组合一下。其实它是一个 slide 加指尖陀螺模型的组合，它可以分开，然后可以根据程序的要求去做适配。然后我不知道你在建模的时候，现在是否把他们已经合成了一个模型，在法线贴图上面。可能我不知道你要做多少改动。我希望你来分为两个子页面去做这件事情：- 你先把现有的、你做好的这个 Slab build 推到手机版本里面，我要在手机中预览一下效果。- 另外一个子页面去把我刚刚说的 TriSpinner 的背景卡颜色和可更换、可替换的陀螺剑这两件事情落实一下。",
+      "approvedAt": "2026-09-11T16:14:00+08:00"
+    },
+    "09-environment": {
+      "revision": 4,
+      "userApprovalQuote": "批准 09，并授权 10–11 校验通过就自动继续，到 Gate 12 Unity 预览再停下来给我看（推荐）",
+      "approvedAt": "2026-09-11T16:3x:00+08:00"
+    }
+  },
+  "package": {
+    "blend": {
+      "path": "unity/FidgetingApp/ArtSource/ModelPipeline/premium-display-case/evidence/10-export/rev-002/tri-spinner-slab-product-r002.blend",
+      "sha256": "e645efbf84b781128f91076bc1cb98510c313b4162ff7b1b32219c6e21bd5bc2",
+      "sizeBytes": 1015372
+    },
+    "fbx": {
+      "path": "unity/FidgetingApp/ArtSource/ModelPipeline/premium-display-case/evidence/10-export/rev-002/tri-spinner-slab-product-r002.fbx",
+      "sha256": "85829f4e32518252459dd974e4fd4ab3ef6d318bd2ce6ecaea252b5e0abbf20a",
+      "sizeBytes": 2574764,
+      "axes": "-Z forward / Y up, FBX_SCALE_NONE, triangulated, custom props (cmf_zone_id)"
+    },
+    "glb": {
+      "path": "unity/FidgetingApp/ArtSource/ModelPipeline/premium-display-case/evidence/10-export/rev-002/tri-spinner-slab-product-r002.glb",
+      "sha256": "1faa42ab35a769f5e6aa252a2d6f3e54550963360727e330226520fe888837e4",
+      "sizeBytes": 3871124,
+      "attributes": "COLOR_0 = COLOR0 (edge/iridescence/finish masks), TEXCOORD_0 = UV2 (brushing angle, zone/255)"
+    },
+    "labelDecal": {
+      "path": "unity/FidgetingApp/ArtSource/ModelPipeline/premium-display-case/evidence/10-export/rev-002/header-label-decal.png",
+      "sha256": "3fdc093913f5cb60dc16642d0ab28d33f1d60d9e8b57c0ae606d8c1b1b82135f",
+      "layout": "unity/FidgetingApp/ArtSource/ModelPipeline/premium-display-case/evidence/10-export/rev-002/header-label-decal.json",
+      "note": "apply in Unity on GEO_PDC_HEADER_GRAPHITE_PLANE (planar x/z over the plate bounds); copy is placeholder, runtime-owned"
+    }
+  },
+  "product": {
+    "removed": [
+      "CAM_G07_HEADER_MACRO",
+      "CAM_G07_MAIN_CMF_MACRO",
+      "CAM_PDC_BACK",
+      "CAM_PDC_BOTTOM",
+      "CAM_PDC_CORNER_MACRO",
+      "CAM_PDC_FRONT",
+      "CAM_PDC_HERO",
+      "CAM_PDC_LEFT",
+      "CAM_PDC_LEFT_OBLIQUE",
+      "CAM_PDC_LOW_OBLIQUE",
+      "CAM_PDC_POCKET_RIM_MACRO",
+      "CAM_PDC_RIGHT",
+      "CAM_PDC_RIGHT_OBLIQUE",
+      "CAM_PDC_SIDE_THICKNESS_MACRO",
+      "CAM_PDC_TOP",
+      "GEO_PDC_LOOKDEV_FLOOR",
+      "GEO_PDC_REVIEW_SPINNER_BEARINGASSEMBLY_ROOT",
+      "GEO_PDC_REVIEW_SPINNER_BEARINGBALL_01",
+      "GEO_PDC_REVIEW_SPINNER_BEARINGBALL_02",
+      "GEO_PDC_REVIEW_SPINNER_BEARINGBALL_03",
+      "GEO_PDC_REVIEW_SPINNER_BEARINGBALL_04",
+      "GEO_PDC_REVIEW_SPINNER_BEARINGBALL_05",
+      "GEO_PDC_REVIEW_SPINNER_BEARINGBALL_06",
+      "GEO_PDC_REVIEW_SPINNER_BEARINGBALL_07",
+      "GEO_PDC_REVIEW_SPINNER_BEARINGBALL_08",
+      "GEO_PDC_REVIEW_SPINNER_BEARINGINNERRACE",
+      "GEO_PDC_REVIEW_SPINNER_BEARINGOUTERRACE",
+      "GEO_PDC_REVIEW_SPINNER_BOTTOMCAP_ROOT",
+      "GEO_PDC_REVIEW_SPINNER_CAPSTEM_BOTTOM",
+      "GEO_PDC_REVIEW_SPINNER_CAPSTEM_TOP",
+      "GEO_PDC_REVIEW_SPINNER_FINGERCAP_BOTTOM",
+      "GEO_PDC_REVIEW_SPINNER_FINGERCAP_TOP",
+      "GEO_PDC_REVIEW_SPINNER_FIXED_ROOT",
+      "GEO_PDC_REVIEW_SPINNER_ROTOR_ROOT",
+      "GEO_PDC_REVIEW_SPINNER_ROTORBODY_ONEPIECE",
+      "GEO_PDC_REVIEW_SPINNER_TOPCAP_ROOT",
+      "GEO_PDC_REVIEW_SPINNER_UNIFIEDTRISPINNER_ROOT",
+      "LGT_PDC_NEUTRAL_FILL",
+      "LGT_PDC_NEUTRAL_KEY",
+      "LGT_PDC_NEUTRAL_REAR",
+      "PIVOT_PDC_TURNTABLE"
+    ],
+    "source": {
+      "objectCount": 41,
+      "meshCount": 38,
+      "emptyCount": 3,
+      "parentMap": {
+        "GEO_PDC_FRAME_BOLT_00": "ROOT_PDC_CASE_ASSEMBLY",
+        "GEO_PDC_FRAME_BOLT_00_SOCKET_FLOOR": "ROOT_PDC_CASE_ASSEMBLY",
+        "GEO_PDC_FRAME_BOLT_01": "ROOT_PDC_CASE_ASSEMBLY",
+        "GEO_PDC_FRAME_BOLT_01_SOCKET_FLOOR": "ROOT_PDC_CASE_ASSEMBLY",
+        "GEO_PDC_FRAME_BOLT_02": "ROOT_PDC_CASE_ASSEMBLY",
+        "GEO_PDC_FRAME_BOLT_02_SOCKET_FLOOR": "ROOT_PDC_CASE_ASSEMBLY",
+        "GEO_PDC_FRAME_BOLT_03": "ROOT_PDC_CASE_ASSEMBLY",
+        "GEO_PDC_FRAME_BOLT_03_SOCKET_FLOOR": "ROOT_PDC_CASE_ASSEMBLY",
+        "GEO_PDC_FRAME_BOLT_04": "ROOT_PDC_CASE_ASSEMBLY",
+        "GEO_PDC_FRAME_BOLT_04_SOCKET_FLOOR": "ROOT_PDC_CASE_ASSEMBLY",
+        "GEO_PDC_FRAME_BOLT_05": "ROOT_PDC_CASE_ASSEMBLY",
+        "GEO_PDC_FRAME_BOLT_05_SOCKET_FLOOR": "ROOT_PDC_CASE_ASSEMBLY",
+        "GEO_PDC_HEADER_GOLD_INLAY_L": "ROOT_PDC_CASE_ASSEMBLY",
+        "GEO_PDC_HEADER_GOLD_INLAY_R": "ROOT_PDC_CASE_ASSEMBLY",
+        "GEO_PDC_HEADER_GRAPHITE_PLANE": "ROOT_PDC_CASE_ASSEMBLY",
+        "GEO_PDC_HEADER_MIRROR_BEVEL": "ROOT_PDC_CASE_ASSEMBLY",
+        "GEO_PDC_HEADER_SATIN_SHELF": "ROOT_PDC_CASE_ASSEMBLY",
+        "GEO_PDC_MAIN_GOLD_CHAMFER_BL": "ROOT_PDC_CASE_ASSEMBLY",
+        "GEO_PDC_MAIN_GOLD_CHAMFER_BR": "ROOT_PDC_CASE_ASSEMBLY",
+        "GEO_PDC_MAIN_GOLD_CHAMFER_TL": "ROOT_PDC_CASE_ASSEMBLY",
+        "GEO_PDC_MAIN_GOLD_CHAMFER_TR": "ROOT_PDC_CASE_ASSEMBLY",
+        "GEO_PDC_MAIN_GOLD_INDEX_TAB_L": "ROOT_PDC_CASE_ASSEMBLY",
+        "GEO_PDC_MAIN_GOLD_INDEX_TAB_R": "ROOT_PDC_CASE_ASSEMBLY",
+        "GEO_PDC_MAIN_GOLD_RAIL_L": "ROOT_PDC_CASE_ASSEMBLY",
+        "GEO_PDC_MAIN_GOLD_RAIL_R": "ROOT_PDC_CASE_ASSEMBLY",
+        "GEO_PDC_MAIN_MICROBLAST_FIELD": "ROOT_PDC_CASE_ASSEMBLY",
+        "GEO_PDC_MAIN_MIRROR_SEAM": "ROOT_PDC_CASE_ASSEMBLY",
+        "GEO_PDC_MAIN_SATIN_SHELF": "ROOT_PDC_CASE_ASSEMBLY",
+        "GEO_PDC_MAIN_TRAIT_PLAQUE": "ROOT_PDC_CASE_ASSEMBLY",
+        "GEO_PDC_OUTER_CRYSTAL_FRAME": "ROOT_PDC_CASE_ASSEMBLY",
+        "GEO_PDC_POCKET_CLIP_00": "ROOT_PDC_CASE_ASSEMBLY",
+        "GEO_PDC_POCKET_CLIP_01": "ROOT_PDC_CASE_ASSEMBLY",
+        "GEO_PDC_POCKET_CLIP_02": "ROOT_PDC_CASE_ASSEMBLY",
+        "GEO_PDC_POCKET_GRAPHITE_FLOOR": "ROOT_PDC_CASE_ASSEMBLY",
+        "GEO_PDC_POCKET_POLISHED_LIP": "ROOT_PDC_CASE_ASSEMBLY",
+        "GEO_PDC_POCKET_SMOKE_WALL": "ROOT_PDC_CASE_ASSEMBLY",
+        "GEO_PDC_REAR_PLATE": "ROOT_PDC_CASE_ASSEMBLY",
+        "GEO_PDC_SMOKE_INNER_LINER": "ROOT_PDC_CASE_ASSEMBLY",
+        "PIVOT_PDC_CONTENT_SLOT": "ROOT_PDC_CASE_ASSEMBLY",
+        "ROOT_PDC_CASE_ASSEMBLY": "ROOT_PDC_PRESENTATION",
+        "ROOT_PDC_PRESENTATION": null
+      },
+      "boundsMm": {
+        "min": [
+          -50.64,
+          -2.435,
+          -85.89
+        ],
+        "max": [
+          50.64,
+          8.525,
+          85.89
+        ],
+        "size": [
+          101.28,
+          10.96,
+          171.78
+        ]
+      },
+      "triangles": 91008
+    },
+    "materials": {
+      "1": {
+        "name": "M_PDC_Export_ClearCrystal",
+        "gate07": "M_PDC_ClearCrystal"
+      },
+      "2": {
+        "name": "M_PDC_Export_SmokeLiner",
+        "gate07": "M_PDC_SmokeLiner"
+      },
+      "3": {
+        "name": "M_PDC_Export_DarkSandblast",
+        "gate07": "M_PDC_DarkSandblast"
+      },
+      "4": {
+        "name": "M_PDC_Export_PianoBlack",
+        "gate07": "M_PDC_PianoBlack"
+      },
+      "5": {
+        "name": "M_PDC_Export_BrushedSteel",
+        "gate07": "M_PDC_BrushedSteel"
+      },
+      "6": {
+        "name": "M_PDC_Export_Mirror",
+        "gate07": "M_PDC_Mirror"
+      },
+      "7": {
+        "name": "M_PDC_Export_AccentMetal",
+        "gate07": "M_PDC_AccentMetal"
+      }
+    },
+    "unityNames": "GEO_PDC_* names kept; architecture unity_path mapping in evidence/04-architecture/rev-035/part-tree.json"
+  },
+  "collision": {
+    "included": false,
+    "policy": "Unity BoxCollider from the case bounds (101.28 x 171.78 x 10.96 mm); no mesh collider; no invented proxy geometry"
+  },
+  "roundTrip": {
+    "FBX": {
+      "objectCount": 41,
+      "meshCount": 38,
+      "emptyCount": 3,
+      "parentMap": {
+        "GEO_PDC_FRAME_BOLT_00": "ROOT_PDC_CASE_ASSEMBLY",
+        "GEO_PDC_FRAME_BOLT_00_SOCKET_FLOOR": "ROOT_PDC_CASE_ASSEMBLY",
+        "GEO_PDC_FRAME_BOLT_01": "ROOT_PDC_CASE_ASSEMBLY",
+        "GEO_PDC_FRAME_BOLT_01_SOCKET_FLOOR": "ROOT_PDC_CASE_ASSEMBLY",
+        "GEO_PDC_FRAME_BOLT_02": "ROOT_PDC_CASE_ASSEMBLY",
+        "GEO_PDC_FRAME_BOLT_02_SOCKET_FLOOR": "ROOT_PDC_CASE_ASSEMBLY",
+        "GEO_PDC_FRAME_BOLT_03": "ROOT_PDC_CASE_ASSEMBLY",
+        "GEO_PDC_FRAME_BOLT_03_SOCKET_FLOOR": "ROOT_PDC_CASE_ASSEMBLY",
+        "GEO_PDC_FRAME_BOLT_04": "ROOT_PDC_CASE_ASSEMBLY",
+        "GEO_PDC_FRAME_BOLT_04_SOCKET_FLOOR": "ROOT_PDC_CASE_ASSEMBLY",
+        "GEO_PDC_FRAME_BOLT_05": "ROOT_PDC_CASE_ASSEMBLY",
+        "GEO_PDC_FRAME_BOLT_05_SOCKET_FLOOR": "ROOT_PDC_CASE_ASSEMBLY",
+        "GEO_PDC_HEADER_GOLD_INLAY_L": "ROOT_PDC_CASE_ASSEMBLY",
+        "GEO_PDC_HEADER_GOLD_INLAY_R": "ROOT_PDC_CASE_ASSEMBLY",
+        "GEO_PDC_HEADER_GRAPHITE_PLANE": "ROOT_PDC_CASE_ASSEMBLY",
+        "GEO_PDC_HEADER_MIRROR_BEVEL": "ROOT_PDC_CASE_ASSEMBLY",
+        "GEO_PDC_HEADER_SATIN_SHELF": "ROOT_PDC_CASE_ASSEMBLY",
+        "GEO_PDC_MAIN_GOLD_CHAMFER_BL": "ROOT_PDC_CASE_ASSEMBLY",
+        "GEO_PDC_MAIN_GOLD_CHAMFER_BR": "ROOT_PDC_CASE_ASSEMBLY",
+        "GEO_PDC_MAIN_GOLD_CHAMFER_TL": "ROOT_PDC_CASE_ASSEMBLY",
+        "GEO_PDC_MAIN_GOLD_CHAMFER_TR": "ROOT_PDC_CASE_ASSEMBLY",
+        "GEO_PDC_MAIN_GOLD_INDEX_TAB_L": "ROOT_PDC_CASE_ASSEMBLY",
+        "GEO_PDC_MAIN_GOLD_INDEX_TAB_R": "ROOT_PDC_CASE_ASSEMBLY",
+        "GEO_PDC_MAIN_GOLD_RAIL_L": "ROOT_PDC_CASE_ASSEMBLY",
+        "GEO_PDC_MAIN_GOLD_RAIL_R": "ROOT_PDC_CASE_ASSEMBLY",
+        "GEO_PDC_MAIN_MICROBLAST_FIELD": "ROOT_PDC_CASE_ASSEMBLY",
+        "GEO_PDC_MAIN_MIRROR_SEAM": "ROOT_PDC_CASE_ASSEMBLY",
+        "GEO_PDC_MAIN_SATIN_SHELF": "ROOT_PDC_CASE_ASSEMBLY",
+        "GEO_PDC_MAIN_TRAIT_PLAQUE": "ROOT_PDC_CASE_ASSEMBLY",
+        "GEO_PDC_OUTER_CRYSTAL_FRAME": "ROOT_PDC_CASE_ASSEMBLY",
+        "GEO_PDC_POCKET_CLIP_00": "ROOT_PDC_CASE_ASSEMBLY",
+        "GEO_PDC_POCKET_CLIP_01": "ROOT_PDC_CASE_ASSEMBLY",
+        "GEO_PDC_POCKET_CLIP_02": "ROOT_PDC_CASE_ASSEMBLY",
+        "GEO_PDC_POCKET_GRAPHITE_FLOOR": "ROOT_PDC_CASE_ASSEMBLY",
+        "GEO_PDC_POCKET_POLISHED_LIP": "ROOT_PDC_CASE_ASSEMBLY",
+        "GEO_PDC_POCKET_SMOKE_WALL": "ROOT_PDC_CASE_ASSEMBLY",
+        "GEO_PDC_REAR_PLATE": "ROOT_PDC_CASE_ASSEMBLY",
+        "GEO_PDC_SMOKE_INNER_LINER": "ROOT_PDC_CASE_ASSEMBLY",
+        "PIVOT_PDC_CONTENT_SLOT": "ROOT_PDC_CASE_ASSEMBLY",
+        "ROOT_PDC_CASE_ASSEMBLY": "ROOT_PDC_PRESENTATION",
+        "ROOT_PDC_PRESENTATION": null
+      },
+      "boundsMm": {
+        "min": [
+          -50.64,
+          -2.435,
+          -85.89
+        ],
+        "max": [
+          50.64,
+          8.525,
+          85.89
+        ],
+        "size": [
+          101.28,
+          10.96,
+          171.78
+        ]
+      },
+      "triangles": 91008,
+      "meshNames": [
+        "GEO_PDC_FRAME_BOLT_00",
+        "GEO_PDC_FRAME_BOLT_00_SOCKET_FLOOR",
+        "GEO_PDC_FRAME_BOLT_01",
+        "GEO_PDC_FRAME_BOLT_01_SOCKET_FLOOR",
+        "GEO_PDC_FRAME_BOLT_02",
+        "GEO_PDC_FRAME_BOLT_02_SOCKET_FLOOR",
+        "..."
+      ],
+      "checks": {
+        "mesh_count_matches": true,
+        "triangles_match": true,
+        "extents_match_0p5mm": true,
+        "has_presentation_root": true,
+        "has_content_slot": true
+      },
+      "pass": true
+    },
+    "GLB": {
+      "objectCount": 41,
+      "meshCount": 38,
+      "emptyCount": 3,
+      "parentMap": {
+        "GEO_PDC_FRAME_BOLT_00": "ROOT_PDC_CASE_ASSEMBLY",
+        "GEO_PDC_FRAME_BOLT_00_SOCKET_FLOOR": "ROOT_PDC_CASE_ASSEMBLY",
+        "GEO_PDC_FRAME_BOLT_01": "ROOT_PDC_CASE_ASSEMBLY",
+        "GEO_PDC_FRAME_BOLT_01_SOCKET_FLOOR": "ROOT_PDC_CASE_ASSEMBLY",
+        "GEO_PDC_FRAME_BOLT_02": "ROOT_PDC_CASE_ASSEMBLY",
+        "GEO_PDC_FRAME_BOLT_02_SOCKET_FLOOR": "ROOT_PDC_CASE_ASSEMBLY",
+        "GEO_PDC_FRAME_BOLT_03": "ROOT_PDC_CASE_ASSEMBLY",
+        "GEO_PDC_FRAME_BOLT_03_SOCKET_FLOOR": "ROOT_PDC_CASE_ASSEMBLY",
+        "GEO_PDC_FRAME_BOLT_04": "ROOT_PDC_CASE_ASSEMBLY",
+        "GEO_PDC_FRAME_BOLT_04_SOCKET_FLOOR": "ROOT_PDC_CASE_ASSEMBLY",
+        "GEO_PDC_FRAME_BOLT_05": "ROOT_PDC_CASE_ASSEMBLY",
+        "GEO_PDC_FRAME_BOLT_05_SOCKET_FLOOR": "ROOT_PDC_CASE_ASSEMBLY",
+        "GEO_PDC_HEADER_GOLD_INLAY_L": "ROOT_PDC_CASE_ASSEMBLY",
+        "GEO_PDC_HEADER_GOLD_INLAY_R": "ROOT_PDC_CASE_ASSEMBLY",
+        "GEO_PDC_HEADER_GRAPHITE_PLANE": "ROOT_PDC_CASE_ASSEMBLY",
+        "GEO_PDC_HEADER_MIRROR_BEVEL": "ROOT_PDC_CASE_ASSEMBLY",
+        "GEO_PDC_HEADER_SATIN_SHELF": "ROOT_PDC_CASE_ASSEMBLY",
+        "GEO_PDC_MAIN_GOLD_CHAMFER_BL": "ROOT_PDC_CASE_ASSEMBLY",
+        "GEO_PDC_MAIN_GOLD_CHAMFER_BR": "ROOT_PDC_CASE_ASSEMBLY",
+        "GEO_PDC_MAIN_GOLD_CHAMFER_TL": "ROOT_PDC_CASE_ASSEMBLY",
+        "GEO_PDC_MAIN_GOLD_CHAMFER_TR": "ROOT_PDC_CASE_ASSEMBLY",
+        "GEO_PDC_MAIN_GOLD_INDEX_TAB_L": "ROOT_PDC_CASE_ASSEMBLY",
+        "GEO_PDC_MAIN_GOLD_INDEX_TAB_R": "ROOT_PDC_CASE_ASSEMBLY",
+        "GEO_PDC_MAIN_GOLD_RAIL_L": "ROOT_PDC_CASE_ASSEMBLY",
+        "GEO_PDC_MAIN_GOLD_RAIL_R": "ROOT_PDC_CASE_ASSEMBLY",
+        "GEO_PDC_MAIN_MICROBLAST_FIELD": "ROOT_PDC_CASE_ASSEMBLY",
+        "GEO_PDC_MAIN_MIRROR_SEAM": "ROOT_PDC_CASE_ASSEMBLY",
+        "GEO_PDC_MAIN_SATIN_SHELF": "ROOT_PDC_CASE_ASSEMBLY",
+        "GEO_PDC_MAIN_TRAIT_PLAQUE": "ROOT_PDC_CASE_ASSEMBLY",
+        "GEO_PDC_OUTER_CRYSTAL_FRAME": "ROOT_PDC_CASE_ASSEMBLY",
+        "GEO_PDC_POCKET_CLIP_00": "ROOT_PDC_CASE_ASSEMBLY",
+        "GEO_PDC_POCKET_CLIP_01": "ROOT_PDC_CASE_ASSEMBLY",
+        "GEO_PDC_POCKET_CLIP_02": "ROOT_PDC_CASE_ASSEMBLY",
+        "GEO_PDC_POCKET_GRAPHITE_FLOOR": "ROOT_PDC_CASE_ASSEMBLY",
+        "GEO_PDC_POCKET_POLISHED_LIP": "ROOT_PDC_CASE_ASSEMBLY",
+        "GEO_PDC_POCKET_SMOKE_WALL": "ROOT_PDC_CASE_ASSEMBLY",
+        "GEO_PDC_REAR_PLATE": "ROOT_PDC_CASE_ASSEMBLY",
+        "GEO_PDC_SMOKE_INNER_LINER": "ROOT_PDC_CASE_ASSEMBLY",
+        "PIVOT_PDC_CONTENT_SLOT": "ROOT_PDC_CASE_ASSEMBLY",
+        "ROOT_PDC_CASE_ASSEMBLY": "ROOT_PDC_PRESENTATION",
+        "ROOT_PDC_PRESENTATION": null
+      },
+      "boundsMm": {
+        "min": [
+          -50.64,
+          -2.435,
+          -85.89
+        ],
+        "max": [
+          50.64,
+          8.525,
+          85.89
+        ],
+        "size": [
+          101.28,
+          10.96,
+          171.78
+        ]
+      },
+      "triangles": 91008,
+      "meshNames": [
+        "GEO_PDC_FRAME_BOLT_00",
+        "GEO_PDC_FRAME_BOLT_00_SOCKET_FLOOR",
+        "GEO_PDC_FRAME_BOLT_01",
+        "GEO_PDC_FRAME_BOLT_01_SOCKET_FLOOR",
+        "GEO_PDC_FRAME_BOLT_02",
+        "GEO_PDC_FRAME_BOLT_02_SOCKET_FLOOR",
+        "..."
+      ],
+      "checks": {
+        "mesh_count_matches": true,
+        "triangles_match": true,
+        "extents_match_0p5mm": true,
+        "has_presentation_root": true,
+        "has_content_slot": true
+      },
+      "pass": true
+    }
+  },
+  "review": {
+    "path": "unity/FidgetingApp/ArtSource/ModelPipeline/premium-display-case/evidence/10-export/rev-002/export-review-glb-roundtrip.png",
+    "engine": "Workbench, material colours"
+  },
+  "knownLimitations": [
+    "procedural brushing / sandblast / thin film are not in the files: Unity materials re-author them (Gate 11)",
+    "bolt heads keep 9 888 triangles each (91 k total, under the 120 k budget); decimation deferred",
+    "FBX carries base colour / metallic / roughness only; GLB additionally carries COLOR_0 and TEXCOORD_0"
+  ]
+}

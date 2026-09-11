@@ -385,6 +385,8 @@ def build_lights(scene, hero_cam, target, diag):
             ob = bpy.data.objects.new(spec["id"], data); col.objects.link(ob)
             x, y, z = spec["position_b"]; ob.location = target + right * x * diag - toward * y * diag + up * z * diag
             ob.rotation_euler = (target - ob.location).normalized().to_track_quat("-Z", "Y").to_euler(); lights.append(ob)
+    for ob in lights:
+        ob.visible_camera = False                # rig lights shape reflections and edge glow; they must never appear as emissive quads in frame (low views)
     if REVIEW_BRIGHT:
         # review aid only (user 2026-09-10 12:22: "光照还是有点黑…环境光射得更亮一些"): a large soft card above the case
         data = bpy.data.lights.new("LGT_PDC_REVIEW_TOP_FILL", "AREA")
@@ -398,6 +400,7 @@ def build_lights(scene, hero_cam, target, diag):
         col.objects.link(ob)
         ob.location = target + Vector((0, 0, 1)) * 1.6 * diag - toward * 0.4 * diag
         ob.rotation_euler = (target - ob.location).normalized().to_track_quat("-Z", "Y").to_euler()
+        ob.visible_camera = False
         lights.append(ob)
     return lights
 
@@ -666,4 +669,5 @@ def main():
     print("CMF_PREVIEW_RESULT=" + json.dumps(report))
 
 
-main()
+if __name__ == "__main__":
+    main()

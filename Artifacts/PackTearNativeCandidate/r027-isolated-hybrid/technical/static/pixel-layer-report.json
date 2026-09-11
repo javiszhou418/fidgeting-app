@@ -1,0 +1,42 @@
+{
+  "candidate": "R027 isolated native hybrid",
+  "captures": {
+    "sealed": "Artifacts/PackTearNativeCandidate/r027-isolated-hybrid/technical/static/sealed.png",
+    "partial": "Artifacts/PackTearNativeCandidate/r027-isolated-hybrid/technical/static/partial.png",
+    "empty_mouth": "Artifacts/PackTearNativeCandidate/r027-isolated-hybrid/technical/static/empty-mouth.png",
+    "contained_case": "Artifacts/PackTearNativeCandidate/r027-isolated-hybrid/technical/static/contained-case.png",
+    "case_crossing": "Artifacts/PackTearNativeCandidate/r027-isolated-hybrid/technical/static/case-crossing-live.png",
+    "empty_overlay": "Artifacts/PackTearNativeCandidate/r027-isolated-hybrid/technical/static/empty-mouth-overlay.png",
+    "contained_overlay": "Artifacts/PackTearNativeCandidate/r027-isolated-hybrid/technical/static/contained-case-overlay.png",
+    "crossing_overlay": "Artifacts/PackTearNativeCandidate/r027-isolated-hybrid/technical/static/case-crossing-overlay.png",
+    "empty_diagnostic": "Artifacts/PackTearNativeCandidate/r027-isolated-hybrid/technical/static/empty-mouth-overlay.json",
+    "contained_diagnostic": "Artifacts/PackTearNativeCandidate/r027-isolated-hybrid/technical/static/contained-case-overlay.json",
+    "crossing_diagnostic": "Artifacts/PackTearNativeCandidate/r027-isolated-hybrid/technical/static/case-crossing-overlay.json"
+  },
+  "metrics": {
+    "mouthTransparentPixels": 47415,
+    "frontLipOpaquePixels": 21300,
+    "emptyMouthLuminance": 76.78904706668072,
+    "containedCaseDeltaInsideMouth": 29.491068227354212,
+    "caseCrossingDeltaInsideMouth": 34.05329537066329,
+    "frontLipDelta": 0.0,
+    "containedCaseCentroid": [
+      587.1128389906708,
+      1079.0069768223877
+    ],
+    "caseCrossingCentroid": [
+      579.1683406232488,
+      1082.3224185656768
+    ]
+  },
+  "checks": {
+    "transparentHost": true,
+    "transparentMouth": true,
+    "emptyMouthShowsUnityPixels": true,
+    "caseAppearsOnlyAfterReadiness": true,
+    "packLipOccludesCase": true,
+    "caseMovesContinuously": true
+  },
+  "failures": [],
+  "verdict": "pass"
+}

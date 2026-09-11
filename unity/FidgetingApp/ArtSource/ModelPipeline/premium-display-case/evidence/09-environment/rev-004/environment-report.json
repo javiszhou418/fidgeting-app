@@ -1,0 +1,107 @@
+{
+  "schemaVersion": 1,
+  "modelId": "premium-display-case",
+  "variantId": "tri-spinner-slab-v3-cmf",
+  "gate": "09-environment",
+  "environmentRevision": 4,
+  "contractSha256": "e9a6f14a61e823274c716f3b3c26ee63e0bbc8e5879145e7b98c65aa9ea88294",
+  "sourceLightingBlendSha256": "d5d4b5840b8655f9384b52c6395de93e87decba5831d3910dbc5909a61be9ec8",
+  "sourceMaterialBlendSha256": "6653d6e76129fe6458848c45207f8bc88a3398dbbaae3564d422dc143df588bb",
+  "sets": {
+    "review": {
+      "files": [
+        "env-review-hero.png",
+        "env-review-front.png",
+        "env-review-low-oblique.png"
+      ],
+      "world": "review_fill grey at half review strength",
+      "review_aids": true
+    },
+    "shipping": {
+      "files": [
+        "env-shipping-hero.png",
+        "env-shipping-front.png",
+        "env-shipping-low-oblique.png"
+      ],
+      "world": "#000103 strength 0.55",
+      "review_aids": false,
+      "lights": [
+        "LGT_PDC_COOL_RIM",
+        "LGT_PDC_EDGE_B_PINK",
+        "LGT_PDC_EDGE_L_CYAN",
+        "LGT_PDC_EDGE_R_MAGENTA",
+        "LGT_PDC_EDGE_T_BLUE",
+        "LGT_PDC_FRONT_FILL",
+        "LGT_PDC_LILAC_RIM",
+        "LGT_PDC_RIGHT_STRIP",
+        "LGT_PDC_SOFT_KEY",
+        "LGT_PDC_SPARKLE_00",
+        "LGT_PDC_SPARKLE_01",
+        "LGT_PDC_SPARKLE_02",
+        "LGT_PDC_SPARKLE_03",
+        "LGT_PDC_SPARKLE_04",
+        "LGT_PDC_SPARKLE_05",
+        "LGT_PDC_SPARKLE_06",
+        "LGT_PDC_SPARKLE_07",
+        "LGT_PDC_TOP_RAIL"
+      ]
+    },
+    "neutral": {
+      "files": [
+        "env-neutral-hero.png",
+        "env-neutral-front.png",
+        "env-neutral-low-oblique.png"
+      ],
+      "world": "#050608",
+      "review_aids": false
+    }
+  },
+  "metrics": {
+    "hero": {
+      "review_vs_shipping": {
+        "pixels_gt8_percent": 43.38,
+        "mean_abs": 12.08
+      },
+      "neutral_vs_shipping": {
+        "pixels_gt8_percent": 30.58,
+        "mean_abs": 11.63
+      },
+      "mean_luma": {
+        "neutral": 21.0,
+        "review": 36.56,
+        "shipping": 24.89
+      }
+    },
+    "front": {
+      "review_vs_shipping": {
+        "pixels_gt8_percent": 24.44,
+        "mean_abs": 8.86
+      },
+      "neutral_vs_shipping": {
+        "pixels_gt8_percent": 39.19,
+        "mean_abs": 19.5
+      },
+      "mean_luma": {
+        "neutral": 44.32,
+        "review": 39.03,
+        "shipping": 30.53
+      }
+    },
+    "low-oblique": {
+      "review_vs_shipping": {
+        "pixels_gt8_percent": 9.16,
+        "mean_abs": 7.58
+      },
+      "neutral_vs_shipping": {
+        "pixels_gt8_percent": 20.26,
+        "mean_abs": 10.54
+      },
+      "mean_luma": {
+        "neutral": 28.0,
+        "review": 34.77,
+        "shipping": 27.74
+      }
+    }
+  },
+  "conclusion": "Review aids (grey world x0.5 + top fill) lift the brushed flats and the field; the shipping world (#000103) darkens the flats and makes the crystal edge glow and sparkle read stronger. Unity parity (Gate 11) must reproduce the SHIPPING set, not the REVIEW set; the neutral set is the material reference."
+}

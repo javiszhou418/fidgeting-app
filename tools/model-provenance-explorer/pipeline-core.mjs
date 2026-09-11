@@ -1296,8 +1296,8 @@ const GENERIC_STAGE_OUTPUT_ROLES = Object.freeze({
   "05-blockout": new Set(["source-model", "blender-render", "validation", "process"]),
   "06-geometry": new Set(["source-model", "blender-render", "validation", "process"]),
   "07-material": new Set(["source-model", "blender-render", "validation", "process"]),
-  "08-lighting": new Set(["blender-render", "validation", "process"]),
-  "09-environment": new Set(["blender-render", "validation", "process"]),
+  "08-lighting": new Set(["source-model", "blender-render", "validation", "process"]),
+  "09-environment": new Set(["source-model", "blender-render", "validation", "process"]),
   "10-export": new Set(["source-model", "export", "validation", "process"]),
   "11-unity-parity": new Set(["blender-render", "unity-render", "validation", "process"]),
   "12-shipping": new Set(["unity-render", "shipping-render", "validation", "process"])

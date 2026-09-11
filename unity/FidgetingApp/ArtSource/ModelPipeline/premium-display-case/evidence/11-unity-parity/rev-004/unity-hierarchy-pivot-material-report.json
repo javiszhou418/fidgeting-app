@@ -1,0 +1,1093 @@
+{
+    "status": "pass",
+    "candidatePrefab": "Assets/_DisplayCase/Candidates/TriSpinnerSlabGate11R004/Prefabs/PresentationRoot.prefab",
+    "sourceFbxSha256": "51bdbd4a0a1b9d7914f37fd08a311d42c744cefed936103ae435546800343a89",
+    "governingContractSha256": "e9a6f14a61e823274c716f3b3c26ee63e0bbc8e5879145e7b98c65aa9ea88294",
+    "meshCount": 38,
+    "triangles": 91008,
+    "caseMaterialSlots": 7,
+    "caseMaterialSlotBudget": 7,
+    "materials": [
+        {
+            "cmfZoneId": 1,
+            "name": "M_PDC_ClearCrystal",
+            "shader": "Universal Render Pipeline/Lit",
+            "surface": "TransparentPremultiplied",
+            "baseColorLinear": [
+                0.9387000203132629,
+                0.9646999835968018,
+                1.0
+            ],
+            "alpha": 0.07999999821186066,
+            "metallic": 0.0,
+            "smoothness": 0.9700000286102295,
+            "renderQueue": 3000,
+            "note": "case-clear-crystal: URP Lit premultiplied stand-in for PDC/ClearCrystal (no refraction); broad-plane alpha 0.08 (contract 0.08-0.16)"
+        },
+        {
+            "cmfZoneId": 2,
+            "name": "M_PDC_SmokeLiner",
+            "shader": "Universal Render Pipeline/Lit",
+            "surface": "TransparentPremultiplied",
+            "baseColorLinear": [
+                0.6866854429244995,
+                0.6444797515869141,
+                0.7454043626785278
+            ],
+            "alpha": 0.25,
+            "metallic": 0.0,
+            "smoothness": 0.8399999737739563,
+            "renderQueue": 2990,
+            "note": "case-smoke-lilac-liner: contract unity spec #D8D2E0, alpha 0.25 (= 1 - Blender transmission 0.775; contract 0.25-0.45)"
+        },
+        {
+            "cmfZoneId": 3,
+            "name": "M_PDC_DarkSandblast",
+            "shader": "Universal Render Pipeline/Lit",
+            "surface": "Opaque",
+            "baseColorLinear": [
+                0.10700000077486038,
+                0.12210000306367874,
+                0.13289999961853028
+            ],
+            "alpha": 1.0,
+            "metallic": 1.0,
+            "smoothness": 0.550000011920929,
+            "renderQueue": 2000,
+            "note": "case-dark-sandblast: #5C6266 metallic, roughness 0.45; procedural microblast deferred"
+        },
+        {
+            "cmfZoneId": 4,
+            "name": "M_PDC_PianoBlack",
+            "shader": "Universal Render Pipeline/Lit",
+            "surface": "Opaque",
+            "baseColorLinear": [
+                0.011599999852478505,
+                0.013000000268220902,
+                0.01600000075995922
+            ],
+            "alpha": 1.0,
+            "metallic": 0.05000000074505806,
+            "smoothness": 0.9200000166893005,
+            "renderQueue": 2000,
+            "note": "case-piano-black: coat 1.0 / coat roughness 0.03 folded into smoothness 0.92"
+        },
+        {
+            "cmfZoneId": 5,
+            "name": "M_PDC_BrushedSteel",
+            "shader": "Universal Render Pipeline/Lit",
+            "surface": "Opaque",
+            "baseColorLinear": [
+                0.7799999713897705,
+                0.7900000214576721,
+                0.800000011920929
+            ],
+            "alpha": 1.0,
+            "metallic": 1.0,
+            "smoothness": 0.699999988079071,
+            "renderQueue": 2000,
+            "note": "steel-satin: roughness 0.30; anisotropic brushing deferred (URP Lit has no anisotropy)"
+        },
+        {
+            "cmfZoneId": 6,
+            "name": "M_PDC_Mirror",
+            "shader": "Universal Render Pipeline/Lit",
+            "surface": "Opaque",
+            "baseColorLinear": [
+                0.5841000080108643,
+                0.6308000087738037,
+                0.6723999977111816
+            ],
+            "alpha": 1.0,
+            "metallic": 1.0,
+            "smoothness": 0.9599999785423279,
+            "renderQueue": 2000,
+            "note": "case-bright-mirror: #C9D0D6 roughness 0.04"
+        },
+        {
+            "cmfZoneId": 7,
+            "name": "M_PDC_AccentMetal",
+            "shader": "Universal Render Pipeline/Lit",
+            "surface": "Opaque",
+            "baseColorLinear": [
+                0.5776000022888184,
+                0.4564000070095062,
+                0.2581999897956848
+            ],
+            "alpha": 1.0,
+            "metallic": 1.0,
+            "smoothness": 0.7400000095367432,
+            "renderQueue": 2000,
+            "note": "case-champagne-gold-inlay: #C8B48B roughness 0.26"
+        }
+    ],
+    "transforms": [
+        {
+            "name": "DECAL_PDC_HEADER_LABEL",
+            "parent": "GEO_PDC_HEADER_GRAPHITE_PLANE",
+            "role": "header-label-decal (runtime-owned copy, placeholder)",
+            "cmfZoneId": 0,
+            "material": "M_PDC_HeaderLabelDecal",
+            "triangles": 2,
+            "localPosition": [
+                0.0,
+                0.055775001645088199,
+                0.001724999980069697
+            ],
+            "localEuler": [
+                0.0,
+                0.0,
+                0.0
+            ],
+            "localScale": [
+                0.0814799964427948,
+                0.04042999818921089,
+                1.0
+            ]
+        },
+        {
+            "name": "GEO_PDC_FRAME_BOLT_00",
+            "parent": "ROOT_PDC_CASE_ASSEMBLY",
+            "role": "case mesh",
+            "cmfZoneId": 5,
+            "material": "M_PDC_BrushedSteel",
+            "triangles": 9840,
+            "localPosition": [
+                0.0,
+                0.0,
+                0.0
+            ],
+            "localEuler": [
+                0.0,
+                0.0,
+                0.0
+            ],
+            "localScale": [
+                1.0,
+                1.0,
+                1.0
+            ]
+        },
+        {
+            "name": "GEO_PDC_FRAME_BOLT_00_SOCKET_FLOOR",
+            "parent": "ROOT_PDC_CASE_ASSEMBLY",
+            "role": "case mesh",
+            "cmfZoneId": 5,
+            "material": "M_PDC_BrushedSteel",
+            "triangles": 20,
+            "localPosition": [
+                0.0,
+                0.0,
+                0.0
+            ],
+            "localEuler": [
+                0.0,
+                0.0,
+                0.0
+            ],
+            "localScale": [
+                1.0,
+                1.0,
+                1.0
+            ]
+        },
+        {
+            "name": "GEO_PDC_FRAME_BOLT_01",
+            "parent": "ROOT_PDC_CASE_ASSEMBLY",
+            "role": "case mesh",
+            "cmfZoneId": 5,
+            "material": "M_PDC_BrushedSteel",
+            "triangles": 9840,
+            "localPosition": [
+                0.0,
+                0.0,
+                0.0
+            ],
+            "localEuler": [
+                0.0,
+                0.0,
+                0.0
+            ],
+            "localScale": [
+                1.0,
+                1.0,
+                1.0
+            ]
+        },
+        {
+            "name": "GEO_PDC_FRAME_BOLT_01_SOCKET_FLOOR",
+            "parent": "ROOT_PDC_CASE_ASSEMBLY",
+            "role": "case mesh",
+            "cmfZoneId": 5,
+            "material": "M_PDC_BrushedSteel",
+            "triangles": 20,
+            "localPosition": [
+                0.0,
+                0.0,
+                0.0
+            ],
+            "localEuler": [
+                0.0,
+                0.0,
+                0.0
+            ],
+            "localScale": [
+                1.0,
+                1.0,
+                1.0
+            ]
+        },
+        {
+            "name": "GEO_PDC_FRAME_BOLT_02",
+            "parent": "ROOT_PDC_CASE_ASSEMBLY",
+            "role": "case mesh",
+            "cmfZoneId": 5,
+            "material": "M_PDC_BrushedSteel",
+            "triangles": 9840,
+            "localPosition": [
+                0.0,
+                0.0,
+                0.0
+            ],
+            "localEuler": [
+                0.0,
+                0.0,
+                0.0
+            ],
+            "localScale": [
+                1.0,
+                1.0,
+                1.0
+            ]
+        },
+        {
+            "name": "GEO_PDC_FRAME_BOLT_02_SOCKET_FLOOR",
+            "parent": "ROOT_PDC_CASE_ASSEMBLY",
+            "role": "case mesh",
+            "cmfZoneId": 5,
+            "material": "M_PDC_BrushedSteel",
+            "triangles": 20,
+            "localPosition": [
+                0.0,
+                0.0,
+                0.0
+            ],
+            "localEuler": [
+                0.0,
+                0.0,
+                0.0
+            ],
+            "localScale": [
+                1.0,
+                1.0,
+                1.0
+            ]
+        },
+        {
+            "name": "GEO_PDC_FRAME_BOLT_03",
+            "parent": "ROOT_PDC_CASE_ASSEMBLY",
+            "role": "case mesh",
+            "cmfZoneId": 5,
+            "material": "M_PDC_BrushedSteel",
+            "triangles": 9840,
+            "localPosition": [
+                0.0,
+                0.0,
+                0.0
+            ],
+            "localEuler": [
+                0.0,
+                0.0,
+                0.0
+            ],
+            "localScale": [
+                1.0,
+                1.0,
+                1.0
+            ]
+        },
+        {
+            "name": "GEO_PDC_FRAME_BOLT_03_SOCKET_FLOOR",
+            "parent": "ROOT_PDC_CASE_ASSEMBLY",
+            "role": "case mesh",
+            "cmfZoneId": 5,
+            "material": "M_PDC_BrushedSteel",
+            "triangles": 20,
+            "localPosition": [
+                0.0,
+                0.0,
+                0.0
+            ],
+            "localEuler": [
+                0.0,
+                0.0,
+                0.0
+            ],
+            "localScale": [
+                1.0,
+                1.0,
+                1.0
+            ]
+        },
+        {
+            "name": "GEO_PDC_FRAME_BOLT_04",
+            "parent": "ROOT_PDC_CASE_ASSEMBLY",
+            "role": "case mesh",
+            "cmfZoneId": 5,
+            "material": "M_PDC_BrushedSteel",
+            "triangles": 9840,
+            "localPosition": [
+                0.0,
+                0.0,
+                0.0
+            ],
+            "localEuler": [
+                0.0,
+                0.0,
+                0.0
+            ],
+            "localScale": [
+                1.0,
+                1.0,
+                1.0
+            ]
+        },
+        {
+            "name": "GEO_PDC_FRAME_BOLT_04_SOCKET_FLOOR",
+            "parent": "ROOT_PDC_CASE_ASSEMBLY",
+            "role": "case mesh",
+            "cmfZoneId": 5,
+            "material": "M_PDC_BrushedSteel",
+            "triangles": 20,
+            "localPosition": [
+                0.0,
+                0.0,
+                0.0
+            ],
+            "localEuler": [
+                0.0,
+                0.0,
+                0.0
+            ],
+            "localScale": [
+                1.0,
+                1.0,
+                1.0
+            ]
+        },
+        {
+            "name": "GEO_PDC_FRAME_BOLT_05",
+            "parent": "ROOT_PDC_CASE_ASSEMBLY",
+            "role": "case mesh",
+            "cmfZoneId": 5,
+            "material": "M_PDC_BrushedSteel",
+            "triangles": 9840,
+            "localPosition": [
+                0.0,
+                0.0,
+                0.0
+            ],
+            "localEuler": [
+                0.0,
+                0.0,
+                0.0
+            ],
+            "localScale": [
+                1.0,
+                1.0,
+                1.0
+            ]
+        },
+        {
+            "name": "GEO_PDC_FRAME_BOLT_05_SOCKET_FLOOR",
+            "parent": "ROOT_PDC_CASE_ASSEMBLY",
+            "role": "case mesh",
+            "cmfZoneId": 5,
+            "material": "M_PDC_BrushedSteel",
+            "triangles": 20,
+            "localPosition": [
+                0.0,
+                0.0,
+                0.0
+            ],
+            "localEuler": [
+                0.0,
+                0.0,
+                0.0
+            ],
+            "localScale": [
+                1.0,
+                1.0,
+                1.0
+            ]
+        },
+        {
+            "name": "GEO_PDC_HEADER_GOLD_INLAY_L",
+            "parent": "ROOT_PDC_CASE_ASSEMBLY",
+            "role": "case mesh",
+            "cmfZoneId": 7,
+            "material": "M_PDC_AccentMetal",
+            "triangles": 12,
+            "localPosition": [
+                0.0,
+                0.0,
+                0.0
+            ],
+            "localEuler": [
+                0.0,
+                0.0,
+                0.0
+            ],
+            "localScale": [
+                1.0,
+                1.0,
+                1.0
+            ]
+        },
+        {
+            "name": "GEO_PDC_HEADER_GOLD_INLAY_R",
+            "parent": "ROOT_PDC_CASE_ASSEMBLY",
+            "role": "case mesh",
+            "cmfZoneId": 7,
+            "material": "M_PDC_AccentMetal",
+            "triangles": 12,
+            "localPosition": [
+                0.0,
+                0.0,
+                0.0
+            ],
+            "localEuler": [
+                0.0,
+                0.0,
+                0.0
+            ],
+            "localScale": [
+                1.0,
+                1.0,
+                1.0
+            ]
+        },
+        {
+            "name": "GEO_PDC_HEADER_GRAPHITE_PLANE",
+            "parent": "ROOT_PDC_CASE_ASSEMBLY",
+            "role": "case mesh",
+            "cmfZoneId": 4,
+            "material": "M_PDC_PianoBlack",
+            "triangles": 236,
+            "localPosition": [
+                0.0,
+                0.0,
+                0.0
+            ],
+            "localEuler": [
+                0.0,
+                0.0,
+                0.0
+            ],
+            "localScale": [
+                1.0,
+                1.0,
+                1.0
+            ]
+        },
+        {
+            "name": "GEO_PDC_HEADER_MIRROR_BEVEL",
+            "parent": "ROOT_PDC_CASE_ASSEMBLY",
+            "role": "case mesh",
+            "cmfZoneId": 6,
+            "material": "M_PDC_Mirror",
+            "triangles": 480,
+            "localPosition": [
+                0.0,
+                0.0,
+                0.0
+            ],
+            "localEuler": [
+                0.0,
+                0.0,
+                0.0
+            ],
+            "localScale": [
+                1.0,
+                1.0,
+                1.0
+            ]
+        },
+        {
+            "name": "GEO_PDC_HEADER_SATIN_SHELF",
+            "parent": "ROOT_PDC_CASE_ASSEMBLY",
+            "role": "case mesh",
+            "cmfZoneId": 5,
+            "material": "M_PDC_BrushedSteel",
+            "triangles": 1920,
+            "localPosition": [
+                0.0,
+                0.0,
+                0.0
+            ],
+            "localEuler": [
+                0.0,
+                0.0,
+                0.0
+            ],
+            "localScale": [
+                1.0,
+                1.0,
+                1.0
+            ]
+        },
+        {
+            "name": "GEO_PDC_MAIN_GOLD_CHAMFER_BL",
+            "parent": "ROOT_PDC_CASE_ASSEMBLY",
+            "role": "case mesh",
+            "cmfZoneId": 7,
+            "material": "M_PDC_AccentMetal",
+            "triangles": 12,
+            "localPosition": [
+                0.0,
+                0.0,
+                0.0
+            ],
+            "localEuler": [
+                0.0,
+                0.0,
+                0.0
+            ],
+            "localScale": [
+                1.0,
+                1.0,
+                1.0
+            ]
+        },
+        {
+            "name": "GEO_PDC_MAIN_GOLD_CHAMFER_BR",
+            "parent": "ROOT_PDC_CASE_ASSEMBLY",
+            "role": "case mesh",
+            "cmfZoneId": 7,
+            "material": "M_PDC_AccentMetal",
+            "triangles": 12,
+            "localPosition": [
+                0.0,
+                0.0,
+                0.0
+            ],
+            "localEuler": [
+                0.0,
+                0.0,
+                0.0
+            ],
+            "localScale": [
+                1.0,
+                1.0,
+                1.0
+            ]
+        },
+        {
+            "name": "GEO_PDC_MAIN_GOLD_CHAMFER_TL",
+            "parent": "ROOT_PDC_CASE_ASSEMBLY",
+            "role": "case mesh",
+            "cmfZoneId": 7,
+            "material": "M_PDC_AccentMetal",
+            "triangles": 12,
+            "localPosition": [
+                0.0,
+                0.0,
+                0.0
+            ],
+            "localEuler": [
+                0.0,
+                0.0,
+                0.0
+            ],
+            "localScale": [
+                1.0,
+                1.0,
+                1.0
+            ]
+        },
+        {
+            "name": "GEO_PDC_MAIN_GOLD_CHAMFER_TR",
+            "parent": "ROOT_PDC_CASE_ASSEMBLY",
+            "role": "case mesh",
+            "cmfZoneId": 7,
+            "material": "M_PDC_AccentMetal",
+            "triangles": 12,
+            "localPosition": [
+                0.0,
+                0.0,
+                0.0
+            ],
+            "localEuler": [
+                0.0,
+                0.0,
+                0.0
+            ],
+            "localScale": [
+                1.0,
+                1.0,
+                1.0
+            ]
+        },
+        {
+            "name": "GEO_PDC_MAIN_GOLD_INDEX_TAB_L",
+            "parent": "ROOT_PDC_CASE_ASSEMBLY",
+            "role": "case mesh",
+            "cmfZoneId": 7,
+            "material": "M_PDC_AccentMetal",
+            "triangles": 236,
+            "localPosition": [
+                0.0,
+                0.0,
+                0.0
+            ],
+            "localEuler": [
+                0.0,
+                0.0,
+                0.0
+            ],
+            "localScale": [
+                1.0,
+                1.0,
+                1.0
+            ]
+        },
+        {
+            "name": "GEO_PDC_MAIN_GOLD_INDEX_TAB_R",
+            "parent": "ROOT_PDC_CASE_ASSEMBLY",
+            "role": "case mesh",
+            "cmfZoneId": 7,
+            "material": "M_PDC_AccentMetal",
+            "triangles": 236,
+            "localPosition": [
+                0.0,
+                0.0,
+                0.0
+            ],
+            "localEuler": [
+                0.0,
+                0.0,
+                0.0
+            ],
+            "localScale": [
+                1.0,
+                1.0,
+                1.0
+            ]
+        },
+        {
+            "name": "GEO_PDC_MAIN_GOLD_RAIL_L",
+            "parent": "ROOT_PDC_CASE_ASSEMBLY",
+            "role": "case mesh",
+            "cmfZoneId": 7,
+            "material": "M_PDC_AccentMetal",
+            "triangles": 12,
+            "localPosition": [
+                0.0,
+                0.0,
+                0.0
+            ],
+            "localEuler": [
+                0.0,
+                0.0,
+                0.0
+            ],
+            "localScale": [
+                1.0,
+                1.0,
+                1.0
+            ]
+        },
+        {
+            "name": "GEO_PDC_MAIN_GOLD_RAIL_R",
+            "parent": "ROOT_PDC_CASE_ASSEMBLY",
+            "role": "case mesh",
+            "cmfZoneId": 7,
+            "material": "M_PDC_AccentMetal",
+            "triangles": 12,
+            "localPosition": [
+                0.0,
+                0.0,
+                0.0
+            ],
+            "localEuler": [
+                0.0,
+                0.0,
+                0.0
+            ],
+            "localScale": [
+                1.0,
+                1.0,
+                1.0
+            ]
+        },
+        {
+            "name": "GEO_PDC_MAIN_MICROBLAST_FIELD",
+            "parent": "ROOT_PDC_CASE_ASSEMBLY",
+            "role": "case mesh",
+            "cmfZoneId": 3,
+            "material": "M_PDC_DarkSandblast",
+            "triangles": 6736,
+            "localPosition": [
+                0.0,
+                0.0,
+                0.0
+            ],
+            "localEuler": [
+                0.0,
+                0.0,
+                0.0
+            ],
+            "localScale": [
+                1.0,
+                1.0,
+                1.0
+            ]
+        },
+        {
+            "name": "GEO_PDC_MAIN_MIRROR_SEAM",
+            "parent": "ROOT_PDC_CASE_ASSEMBLY",
+            "role": "case mesh",
+            "cmfZoneId": 6,
+            "material": "M_PDC_Mirror",
+            "triangles": 480,
+            "localPosition": [
+                0.0,
+                0.0,
+                0.0
+            ],
+            "localEuler": [
+                0.0,
+                0.0,
+                0.0
+            ],
+            "localScale": [
+                1.0,
+                1.0,
+                1.0
+            ]
+        },
+        {
+            "name": "GEO_PDC_MAIN_SATIN_SHELF",
+            "parent": "ROOT_PDC_CASE_ASSEMBLY",
+            "role": "case mesh",
+            "cmfZoneId": 5,
+            "material": "M_PDC_BrushedSteel",
+            "triangles": 1920,
+            "localPosition": [
+                0.0,
+                0.0,
+                0.0
+            ],
+            "localEuler": [
+                0.0,
+                0.0,
+                0.0
+            ],
+            "localScale": [
+                1.0,
+                1.0,
+                1.0
+            ]
+        },
+        {
+            "name": "GEO_PDC_MAIN_TRAIT_PLAQUE",
+            "parent": "ROOT_PDC_CASE_ASSEMBLY",
+            "role": "case mesh",
+            "cmfZoneId": 4,
+            "material": "M_PDC_PianoBlack",
+            "triangles": 956,
+            "localPosition": [
+                0.0,
+                0.0,
+                0.0
+            ],
+            "localEuler": [
+                0.0,
+                0.0,
+                0.0
+            ],
+            "localScale": [
+                1.0,
+                1.0,
+                1.0
+            ]
+        },
+        {
+            "name": "GEO_PDC_OUTER_CRYSTAL_FRAME",
+            "parent": "ROOT_PDC_CASE_ASSEMBLY",
+            "role": "case mesh",
+            "cmfZoneId": 1,
+            "material": "M_PDC_ClearCrystal",
+            "triangles": 5756,
+            "localPosition": [
+                0.0,
+                0.0,
+                0.0
+            ],
+            "localEuler": [
+                0.0,
+                0.0,
+                0.0
+            ],
+            "localScale": [
+                1.0,
+                1.0,
+                1.0
+            ]
+        },
+        {
+            "name": "GEO_PDC_POCKET_CLIP_00",
+            "parent": "ROOT_PDC_CASE_ASSEMBLY",
+            "role": "case mesh",
+            "cmfZoneId": 1,
+            "material": "M_PDC_ClearCrystal",
+            "triangles": 444,
+            "localPosition": [
+                0.0,
+                0.0,
+                0.0
+            ],
+            "localEuler": [
+                0.0,
+                0.0,
+                0.0
+            ],
+            "localScale": [
+                1.0,
+                1.0,
+                1.0
+            ]
+        },
+        {
+            "name": "GEO_PDC_POCKET_CLIP_01",
+            "parent": "ROOT_PDC_CASE_ASSEMBLY",
+            "role": "case mesh",
+            "cmfZoneId": 1,
+            "material": "M_PDC_ClearCrystal",
+            "triangles": 444,
+            "localPosition": [
+                0.0,
+                0.0,
+                0.0
+            ],
+            "localEuler": [
+                0.0,
+                0.0,
+                0.0
+            ],
+            "localScale": [
+                1.0,
+                1.0,
+                1.0
+            ]
+        },
+        {
+            "name": "GEO_PDC_POCKET_CLIP_02",
+            "parent": "ROOT_PDC_CASE_ASSEMBLY",
+            "role": "case mesh",
+            "cmfZoneId": 1,
+            "material": "M_PDC_ClearCrystal",
+            "triangles": 444,
+            "localPosition": [
+                0.0,
+                0.0,
+                0.0
+            ],
+            "localEuler": [
+                0.0,
+                0.0,
+                0.0
+            ],
+            "localScale": [
+                1.0,
+                1.0,
+                1.0
+            ]
+        },
+        {
+            "name": "GEO_PDC_POCKET_GRAPHITE_FLOOR",
+            "parent": "ROOT_PDC_CASE_ASSEMBLY",
+            "role": "case mesh",
+            "cmfZoneId": 4,
+            "material": "M_PDC_PianoBlack",
+            "triangles": 764,
+            "localPosition": [
+                0.0,
+                0.0,
+                0.0
+            ],
+            "localEuler": [
+                0.0,
+                0.0,
+                0.0
+            ],
+            "localScale": [
+                1.0,
+                1.0,
+                1.0
+            ]
+        },
+        {
+            "name": "GEO_PDC_POCKET_POLISHED_LIP",
+            "parent": "ROOT_PDC_CASE_ASSEMBLY",
+            "role": "case mesh",
+            "cmfZoneId": 6,
+            "material": "M_PDC_Mirror",
+            "triangles": 8448,
+            "localPosition": [
+                0.0,
+                0.0,
+                0.0
+            ],
+            "localEuler": [
+                0.0,
+                0.0,
+                0.0
+            ],
+            "localScale": [
+                1.0,
+                1.0,
+                1.0
+            ]
+        },
+        {
+            "name": "GEO_PDC_POCKET_SMOKE_WALL",
+            "parent": "ROOT_PDC_CASE_ASSEMBLY",
+            "role": "case mesh",
+            "cmfZoneId": 2,
+            "material": "M_PDC_SmokeLiner",
+            "triangles": 1536,
+            "localPosition": [
+                0.0,
+                0.0,
+                0.0
+            ],
+            "localEuler": [
+                0.0,
+                0.0,
+                0.0
+            ],
+            "localScale": [
+                1.0,
+                1.0,
+                1.0
+            ]
+        },
+        {
+            "name": "GEO_PDC_REAR_PLATE",
+            "parent": "ROOT_PDC_CASE_ASSEMBLY",
+            "role": "case mesh",
+            "cmfZoneId": 3,
+            "material": "M_PDC_DarkSandblast",
+            "triangles": 236,
+            "localPosition": [
+                0.0,
+                0.0,
+                0.0
+            ],
+            "localEuler": [
+                0.0,
+                0.0,
+                0.0
+            ],
+            "localScale": [
+                1.0,
+                1.0,
+                1.0
+            ]
+        },
+        {
+            "name": "GEO_PDC_SMOKE_INNER_LINER",
+            "parent": "ROOT_PDC_CASE_ASSEMBLY",
+            "role": "case mesh",
+            "cmfZoneId": 2,
+            "material": "M_PDC_SmokeLiner",
+            "triangles": 480,
+            "localPosition": [
+                0.0,
+                0.0,
+                0.0
+            ],
+            "localEuler": [
+                0.0,
+                0.0,
+                0.0
+            ],
+            "localScale": [
+                1.0,
+                1.0,
+                1.0
+            ]
+        },
+        {
+            "name": "PIVOT_PDC_CONTENT_SLOT",
+            "parent": "ROOT_PDC_CASE_ASSEMBLY",
+            "role": "empty",
+            "cmfZoneId": 0,
+            "material": "",
+            "triangles": 0,
+            "localPosition": [
+                0.0,
+                -0.020679999142885209,
+                -0.0012750000460073352
+            ],
+            "localEuler": [
+                0.0,
+                0.0,
+                0.0
+            ],
+            "localScale": [
+                1.0,
+                1.0,
+                1.0
+            ]
+        },
+        {
+            "name": "PresentationRoot",
+            "parent": "",
+            "role": "presentation root (ROOT_PDC_PRESENTATION)",
+            "cmfZoneId": 0,
+            "material": "",
+            "triangles": 0,
+            "localPosition": [
+                0.0,
+                0.0,
+                0.0
+            ],
+            "localEuler": [
+                0.0,
+                0.0,
+                0.0
+            ],
+            "localScale": [
+                1.0,
+                1.0,
+                1.0
+            ]
+        },
+        {
+            "name": "ROOT_PDC_CASE_ASSEMBLY",
+            "parent": "PresentationRoot",
+            "role": "empty",
+            "cmfZoneId": 0,
+            "material": "",
+            "triangles": 0,
+            "localPosition": [
+                0.0,
+                0.0,
+                0.0
+            ],
+            "localEuler": [
+                0.0,
+                0.0,
+                0.0
+            ],
+            "localScale": [
+                1.0,
+                1.0,
+                1.0
+            ]
+        }
+    ],
+    "failures": []
+}

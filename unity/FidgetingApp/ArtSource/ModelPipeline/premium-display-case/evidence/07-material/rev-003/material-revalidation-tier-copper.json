@@ -1,0 +1,280 @@
+{
+  "schemaVersion": 1,
+  "modelId": "premium-display-case",
+  "variantId": "tri-spinner-slab-v3-cmf",
+  "gate": "07-material",
+  "materialRevision": 3,
+  "sourceBlend": "unity/FidgetingApp/ArtSource/ModelPipeline/premium-display-case/evidence/06-geometry/rev-011/tri-spinner-slab-geometry-r011.blend",
+  "sourceBlendSha256": "3b39c2d3b0f0648d85297189cc576496f379358375caaaad328ae211ba03279b",
+  "contractSha256": "e9a6f14a61e823274c716f3b3c26ee63e0bbc8e5879145e7b98c65aa9ea88294",
+  "geometryUnchanged": true,
+  "tier": "copper",
+  "rig": "neutral (contract lighting.neutral)",
+  "calibration": {
+    "target_scene_linear": 0.18,
+    "tolerance": 0.02,
+    "passes": [
+      {
+        "card_luminance": 0.0287,
+        "factor": 6.2696
+      },
+      {
+        "card_luminance": 0.182,
+        "factor": 0.9893
+      }
+    ],
+    "energies_w": {
+      "LGT_PDC_NEUTRAL_KEY": 0.601,
+      "LGT_PDC_NEUTRAL_FILL": 0.529,
+      "LGT_PDC_NEUTRAL_REAR": 0.053
+    },
+    "within_tolerance": true
+  },
+  "materials_by_zone": {
+    "1": {
+      "material": "M_PDC_ClearCrystal",
+      "base_color_linear": [
+        0.9387,
+        0.9647,
+        1.0
+      ],
+      "metallic": 0.0,
+      "roughness_base": 0.035,
+      "anisotropic": 0.0,
+      "coat_weight": 0.08,
+      "transmission": 1.0,
+      "detail": {
+        "thin_film_nm": [
+          300,
+          650
+        ],
+        "thin_film_ior": 1.355,
+        "mask": "whole crystal (contract rev-011+)"
+      }
+    },
+    "2": {
+      "material": "M_PDC_SmokeLiner",
+      "base_color_linear": [
+        0.7874,
+        0.7106,
+        0.6739
+      ],
+      "metallic": 0.0,
+      "roughness_base": 0.15,
+      "anisotropic": 0.0,
+      "coat_weight": 0.0,
+      "transmission": 0.775,
+      "detail": null
+    },
+    "3": {
+      "material": "M_PDC_DarkSandblast",
+      "base_color_linear": [
+        0.107,
+        0.1221,
+        0.1329
+      ],
+      "metallic": 1.0,
+      "roughness_base": 0.5,
+      "anisotropic": 0.0,
+      "coat_weight": 0.0,
+      "transmission": 0.0,
+      "detail": {
+        "feature_mm": 0.13,
+        "bump_mm": 0.010499999999999999,
+        "roughness": 0.45,
+        "roughness_delta": 0.03,
+        "seed": 4107
+      }
+    },
+    "4": {
+      "material": "M_PDC_PianoBlack",
+      "base_color_linear": [
+        0.0116,
+        0.013,
+        0.016
+      ],
+      "metallic": 0.05,
+      "roughness_base": 0.25,
+      "anisotropic": 0.0,
+      "coat_weight": 1.0,
+      "transmission": 0.0,
+      "detail": {
+        "coat_weight": 1.0,
+        "coat_roughness": 0.03,
+        "roughness": 0.25
+      }
+    },
+    "5": {
+      "material": "M_PDC_BrushedSteel_copper",
+      "base_color_linear": [
+        0.448,
+        0.2957,
+        0.233
+      ],
+      "metallic": 1.0,
+      "roughness_base": 0.3,
+      "anisotropic": 0.8,
+      "coat_weight": 0.0,
+      "transmission": 0.0,
+      "detail": {
+        "brushing_angle_normalized": 0.0,
+        "brush_pitch_mm": 0.06,
+        "roughness_delta": 0.015,
+        "bump_mm": 0.0015
+      }
+    },
+    "6": {
+      "material": "M_PDC_Mirror_copper",
+      "base_color_linear": [
+        0.4704,
+        0.3105,
+        0.2447
+      ],
+      "metallic": 1.0,
+      "roughness_base": 0.04,
+      "anisotropic": 0.0,
+      "coat_weight": 0.0,
+      "transmission": 0.0,
+      "detail": {
+        "base_srgb_hex": "#C9D0D6",
+        "roughness": 0.04,
+        "visible_grain": false
+      }
+    },
+    "7": {
+      "material": "M_PDC_AccentMetal_copper",
+      "base_color_linear": [
+        0.448,
+        0.2957,
+        0.233
+      ],
+      "metallic": 1.0,
+      "roughness_base": 0.26,
+      "anisotropic": 0.15,
+      "coat_weight": 0.0,
+      "transmission": 0.0,
+      "detail": {
+        "brushing_angle_normalized": 0.0,
+        "brush_pitch_mm": 0.05,
+        "roughness_delta": 0.015,
+        "bump_mm": 0.0015
+      }
+    }
+  },
+  "header_label": {
+    "decal": "header-label-decal.png",
+    "decal_sha256": "3fdc093913f5cb60dc16642d0ab28d33f1d60d9e8b57c0ae606d8c1b1b82135f",
+    "layout": {
+      "plate_mm": [
+        81.48,
+        40.43
+      ],
+      "px_per_mm": 25.0,
+      "font": "unity/FidgetingApp/Assets/Plugins/iOS/Fonts/Oxanium-VariableFont_wght.ttf",
+      "weights": {
+        "title": "SemiBold",
+        "series": "Medium",
+        "spec_label": "Medium",
+        "spec_value": "SemiBold"
+      },
+      "sizes_mm": {
+        "title": 7.4,
+        "series": 3.6,
+        "spec": 2.6
+      },
+      "margin_mm": 6.0,
+      "rule_y_mm": 22.0,
+      "rule_width_mm": 0.18,
+      "copy": {
+        "title": "TRI-SPINNER",
+        "series": "SERIES 01 / TITANIUM",
+        "specs": [
+          [
+            "MATERIAL",
+            "TITANIUM"
+          ],
+          [
+            "WEIGHT",
+            "42.8 G"
+          ],
+          [
+            "S/N",
+            "0017"
+          ],
+          [
+            "EDITION",
+            "01/500"
+          ]
+        ]
+      },
+      "copy_status": "PLACEHOLDER from the V3 concept; runtime-owned values (toy name / series / material / weight / S/N / edition)",
+      "ink_srgb": [
+        222,
+        226,
+        230
+      ],
+      "tracking": "none (native kerning only, per FDB-GAC-009 type rule)"
+    },
+    "status": "placeholder copy; runtime-owned; Oxanium per FDB-GAC-009 type rule"
+  },
+  "trait_plaque": "flat runtime-UI region, no placeholder UI drawn (contract trait.render_mode)",
+  "scheme_a_values_adopted": {
+    "3": {
+      "base_srgb_hex": "#5C6266",
+      "roughness": 0.45
+    },
+    "6": {
+      "base_srgb_hex": "#C9D0D6",
+      "roughness": 0.04
+    },
+    "4": {
+      "coat_weight": 1.0,
+      "coat_roughness": 0.03,
+      "roughness": 0.25
+    },
+    "5": {
+      "anisotropic": 0.8,
+      "anisotropic_rotation": 0.0,
+      "roughness": 0.3
+    }
+  },
+  "library_registration_proposals": [
+    {
+      "id": "case-clear-crystal",
+      "slot": 1
+    },
+    {
+      "id": "case-smoke-lilac-liner",
+      "slot": 2
+    },
+    {
+      "id": "case-dark-sandblast",
+      "slot": 3,
+      "note": "supersedes spec #AEB3B6 with the approved scheme-A #5C6266"
+    },
+    {
+      "id": "case-piano-black",
+      "slot": 4
+    },
+    {
+      "id": "steel-satin",
+      "slot": 5,
+      "note": "library values verbatim + scheme-A anisotropy 0.8"
+    },
+    {
+      "id": "case-bright-mirror",
+      "slot": 6,
+      "note": "supersedes smoked-mirror #667078 with scheme-A #C9D0D6"
+    },
+    {
+      "id": "case-champagne-gold-inlay",
+      "slot": 7,
+      "note": "+ rarity tiers rose bronze / grey-blue titanium / champagne"
+    }
+  ],
+  "rendered": [
+    "material-hero-tier-copper.png"
+  ],
+  "turntable": null,
+  "status": "gate07_candidate_ready_for_review; not Gate 08 lighting"
+}

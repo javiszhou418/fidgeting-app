@@ -1,0 +1,140 @@
+{
+  "schemaVersion": 1,
+  "modelId": "model-hhax",
+  "gate": "07-material",
+  "input": {
+    "manifestRevisionAtBuild": 43,
+    "stageId": "06-geometry",
+    "assetId": "hhax-gate06-geometry-source-r003",
+    "sha256": "f5030494ad78cef6bc7ec43ada34f57337d5f534c696422b34b4b649095be50e",
+    "path": "unity/FidgetingApp/ArtSource/ModelPipeline/model-hhax/evidence/06-geometry/rev-003/model-hhax-geometry.blend"
+  },
+  "evaluatedClosedBounds": {
+    "minimumMm": [
+      -15.45,
+      -25.25,
+      0.0
+    ],
+    "maximumMm": [
+      15.45,
+      25.25,
+      13.6
+    ],
+    "sizeMm": [
+      30.9,
+      50.5,
+      13.6
+    ]
+  },
+  "materials": [
+    {
+      "id": "hhax-zirconium-purple-black",
+      "surface": "near-black purple-gray metal",
+      "metallic": 0.96,
+      "roughness": 0.18,
+      "edgeColor": "view-dependent shader; no envelope geometry"
+    },
+    {
+      "id": "hhax-front-mop-sealed",
+      "surface": "front mother-of-pearl cells and coral knight beneath clear seal",
+      "daylightValue": 0.7,
+      "daylightSaturation": 1.06,
+      "emission": "cyan cells and orange knight only"
+    },
+    {
+      "id": "hhax-lower-mop-sealed",
+      "surface": "lower revealed mother-of-pearl field",
+      "daylightValue": 0.7,
+      "daylightSaturation": 1.06,
+      "emission": "non-emissive in the supplied lower-art crop"
+    },
+    {
+      "id": "hhax-back-mop-sealed",
+      "surface": "rear medallion and spine artwork",
+      "daylightValue": 0.7,
+      "daylightSaturation": 1.06,
+      "emission": "cyan cells and orange knight only"
+    },
+    {
+      "id": "hhax-clear-crystal-seal",
+      "ior": 1.46,
+      "roughness": 0.015,
+      "transmission": 0.08,
+      "alpha": 0.045,
+      "coatWeight": 0.95
+    }
+  ],
+  "textureInputs": {
+    "back-basecolor.png": {
+      "sha256": "df5c6d263ee36fe9945cbbaff430aa9183e1bc11a23d1a892d8a629dc9ba3672",
+      "bytes": 2026998
+    },
+    "back-emission-mask.png": {
+      "sha256": "4547ce83890dd68b3cc115bb95bab05827251ff4825a460e4f15a7ad91b2a907",
+      "bytes": 46772
+    },
+    "back-emission.png": {
+      "sha256": "52b3a68917352a9cbd9eba6dc78d901f41dc55b3320f8b90086353e7b65b008a",
+      "bytes": 96136
+    },
+    "back-normal.png": {
+      "sha256": "3ef7366a2c2ef3d32c1305104be509551ad4c7c65cb0e91b080dc23a0cb58413",
+      "bytes": 1867948
+    },
+    "back-roughness.png": {
+      "sha256": "9c212e88b133dd46418b1da2264afdd1dc97d6281fa7566348a2533a4ff74d0e",
+      "bytes": 317862
+    },
+    "front-basecolor.png": {
+      "sha256": "330623fd942ccd3f28cafebe7508c31cc58e6e47dad45e00284401f8132bf15a",
+      "bytes": 1997882
+    },
+    "front-emission-mask.png": {
+      "sha256": "a74637f79b30a8723f52cbe9ad69497e208ffc53f8c0948a9227a6b27a1827f2",
+      "bytes": 81903
+    },
+    "front-emission.png": {
+      "sha256": "fecf44ef3cd982c44fa8c84bb8936c28e96dfa9792d1e4cb9b5536a84852686b",
+      "bytes": 168700
+    },
+    "front-normal.png": {
+      "sha256": "1540c7baa73aa9470413dc6c8b1d033d9727cb24e6344cabdefe4e92410c1057",
+      "bytes": 1955165
+    },
+    "front-roughness.png": {
+      "sha256": "2b2239559d39144893ee12b24d8e881de9b15ac12715e1c040ba9c3d817bb917",
+      "bytes": 314269
+    },
+    "lower-basecolor.png": {
+      "sha256": "6ff04a9b30f411dd740aefcaa113ae5f087a7c1ce7611caf87da47db60434a77",
+      "bytes": 868369
+    },
+    "lower-emission-mask.png": {
+      "sha256": "d3da11e2d4f931f44ead3f8605d321b1b9f0ef0f0d71da99b61baae58abdc80f",
+      "bytes": 1741
+    },
+    "lower-emission.png": {
+      "sha256": "67da301370fba08efac8c07527a1f2fb3b6e25decdbad92d45ad8ec1d5c96044",
+      "bytes": 5070
+    },
+    "lower-normal.png": {
+      "sha256": "6a29d01e17599e799c0174e31e394f22d3fa6d8116004ca72fa7a41b68c5febb",
+      "bytes": 923159
+    },
+    "lower-roughness.png": {
+      "sha256": "59a18517f21f376a0d29fc41e3f7fdedcd274281944a1299f046c82541b05625",
+      "bytes": 144078
+    },
+    "texture-source-board.png": {
+      "sha256": "91599fbf43f032474a3dea669a840cc0d538a1512b3d9186d2d8e1787ab515a8",
+      "bytes": 767847
+    }
+  },
+  "checks": {
+    "closedEnvelopeUnchanged": "pass",
+    "pbrChannelsConnected": "pass",
+    "dayNightEmissionSeparated": "pass",
+    "oversizedEdgeGeometryAbsent": "pass"
+  },
+  "appearanceBoundary": "Custom imagery controls visible artwork; hidden material construction is not asserted."
+}

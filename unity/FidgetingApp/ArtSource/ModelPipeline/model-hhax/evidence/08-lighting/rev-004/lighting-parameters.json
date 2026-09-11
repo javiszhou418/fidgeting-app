@@ -1,0 +1,86 @@
+{
+  "schemaVersion": 1,
+  "modelId": "model-hhax",
+  "gate": "08-lighting",
+  "input": {
+    "manifestRevisionAtBuild": 50,
+    "stageId": "07-material",
+    "assetId": "hhax-gate07-lookdev-source-r004",
+    "sha256": "edb4c1220f90545374292a56cacb42ab0726dd754b78ddc85a33ded83ee35886",
+    "path": "unity/FidgetingApp/ArtSource/ModelPipeline/model-hhax/evidence/07-material/rev-004/model-hhax-lookdev.blend"
+  },
+  "contractDimensionsMm": {
+    "closedOverallLength": 50.5,
+    "overallWidth": 30.9,
+    "totalClosedThickness": 13.6,
+    "topPlateThickness": 6.55,
+    "bottomPlateThickness": 6.55,
+    "maximumSlideTravel": 18.7,
+    "fixedAxisOffsetFromNearestEnd": 14.2,
+    "rotatingCarrierDiameter": 21.6,
+    "closedSeamGap": 0.5
+  },
+  "evaluatedClosedBounds": {
+    "minimumMm": [
+      -15.45,
+      -25.25,
+      0.0
+    ],
+    "maximumMm": [
+      15.45,
+      25.25,
+      13.6
+    ],
+    "sizeMm": [
+      30.9,
+      50.5,
+      13.6
+    ]
+  },
+  "inputProvenance": {
+    "manifestRevisionAtBuild": 50,
+    "contractAssetId": "model-hhax-measurement-modeling-contract-r001",
+    "contractSha256": "e7aadf84cd589b0f69cec93eb866c6169af932560ed9e4e95369ece45c253911",
+    "architectureAssetId": "hhax-gate04-architecture-snapshot-r002",
+    "architectureSha256": "ae4611e6701a2947f5493da855ab311218985994799a7de70cfa6f93c4d02fac",
+    "hiddenBoundary": "exact hidden linkage curve, counts, tolerances and hole depths"
+  },
+  "provisionalBoundary": "Hidden linkage timing, detents, forces and tolerances remain unknown and are not manufacturing claims.",
+  "camera": {
+    "locationM": [
+      0.092,
+      -0.119,
+      0.094
+    ],
+    "targetM": [
+      0,
+      0,
+      0.006
+    ],
+    "lensMm": 62
+  },
+  "lighting": {
+    "worldStrength": 0.12,
+    "key": 0.92,
+    "neutralSideFill": 0.46,
+    "neutralRearStrip": 0.28,
+    "verticalMetalReflection": 1.28,
+    "cyanRim": 0.045,
+    "magentaRim": 0.04,
+    "topStrip": 0.32,
+    "floorRoughness": 0.32,
+    "temporalSamples": 1024
+  },
+  "renderPasses": {
+    "beauty": "authored PBR materials",
+    "clay": "uniform neutral material override",
+    "normal": "true evaluated geometry normal mapped from -1..1 to 0..1",
+    "depth": "true camera View Z Depth normalized from 0.135..0.205 m",
+    "roughness": "each authored Principled roughness value or texture emitted without relighting"
+  },
+  "checks": {
+    "sameCameraForPasses": "pass",
+    "realNormalDepthRoughnessSources": "pass",
+    "lightingArtifactsReviewed": "pass"
+  }
+}

@@ -1,0 +1,957 @@
+Command line invocation:
+    /Applications/Xcode.app/Contents/Developer/usr/bin/xcodebuild test -project /tmp/fidget-gacha-continuous-harness.qthi2T/Harness/GachaContinuousPreviewHarness.xcodeproj -scheme GachaContinuousPreviewUITests -configuration Debug -destination id=4DA35F9D-187A-4C8A-8AD5-B335932F4525 -derivedDataPath /tmp/fidget-gacha-continuous-harness.qthi2T/HarnessDerivedData -resultBundlePath /tmp/fidget-gacha-continuous-harness.qthi2T/GachaContinuousPreview.xcresult "-only-testing:GachaContinuousPreviewUITests/GachaContinuousPreviewUITests/testRecordShippingCarouselRivePackAndRealUnityReveal" CODE_SIGNING_ALLOWED=NO
+
+Build settings from command line:
+    CODE_SIGNING_ALLOWED = NO
+
+Writing result bundle at path:
+	/tmp/fidget-gacha-continuous-harness.qthi2T/GachaContinuousPreview.xcresult
+
+ComputePackagePrebuildTargetDependencyGraph
+
+Prepare packages
+
+CreateBuildRequest
+
+SendProjectDescription
+
+CreateBuildOperation
+
+ComputeTargetDependencyGraph
+note: Building targets in dependency order
+note: Target dependency graph (1 target)
+    Target 'GachaContinuousPreviewUITests' in project 'GachaContinuousPreviewHarness' (no dependencies)
+
+GatherProvisioningInputs
+
+CreateBuildDescription
+
+ExecuteExternalTool /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang -v -E -dM -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator26.4.sdk -x c -c /dev/null
+
+ExecuteExternalTool /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/swiftc --version
+
+ExecuteExternalTool /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/ld -version_details
+
+Build description signature: e7474d506fc9aca494a29a9cf9d12972
+Build description path: /tmp/fidget-gacha-continuous-harness.qthi2T/HarnessDerivedData/Build/Intermediates.noindex/XCBuildData/e7474d506fc9aca494a29a9cf9d12972.xcbuilddata
+CreateBuildDirectory /tmp/fidget-gacha-continuous-harness.qthi2T/HarnessDerivedData/Build/Products
+    cd /tmp/fidget-gacha-continuous-harness.qthi2T/Harness/GachaContinuousPreviewHarness.xcodeproj
+    builtin-create-build-directory /tmp/fidget-gacha-continuous-harness.qthi2T/HarnessDerivedData/Build/Products
+
+CreateBuildDirectory /tmp/fidget-gacha-continuous-harness.qthi2T/HarnessDerivedData/Build/Intermediates.noindex
+    cd /tmp/fidget-gacha-continuous-harness.qthi2T/Harness/GachaContinuousPreviewHarness.xcodeproj
+    builtin-create-build-directory /tmp/fidget-gacha-continuous-harness.qthi2T/HarnessDerivedData/Build/Intermediates.noindex
+
+ClangStatCache /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang-stat-cache /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator26.4.sdk /tmp/fidget-gacha-continuous-harness.qthi2T/HarnessDerivedData/SDKStatCaches.noindex/iphonesimulator26.4-23E237-686eebb5dc1d8ecb277353a59184f4aa.sdkstatcache
+    cd /tmp/fidget-gacha-continuous-harness.qthi2T/Harness/GachaContinuousPreviewHarness.xcodeproj
+    /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang-stat-cache /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator26.4.sdk -o /tmp/fidget-gacha-continuous-harness.qthi2T/HarnessDerivedData/SDKStatCaches.noindex/iphonesimulator26.4-23E237-686eebb5dc1d8ecb277353a59184f4aa.sdkstatcache
+
+CreateBuildDirectory /tmp/fidget-gacha-continuous-harness.qthi2T/HarnessDerivedData/Build/Intermediates.noindex/SwiftExplicitPrecompiledModules
+    cd /tmp/fidget-gacha-continuous-harness.qthi2T/Harness/GachaContinuousPreviewHarness.xcodeproj
+    builtin-create-build-directory /tmp/fidget-gacha-continuous-harness.qthi2T/HarnessDerivedData/Build/Intermediates.noindex/SwiftExplicitPrecompiledModules
+
+CreateBuildDirectory /tmp/fidget-gacha-continuous-harness.qthi2T/HarnessDerivedData/Build/Products/Debug-iphonesimulator
+    cd /tmp/fidget-gacha-continuous-harness.qthi2T/Harness/GachaContinuousPreviewHarness.xcodeproj
+    builtin-create-build-directory /tmp/fidget-gacha-continuous-harness.qthi2T/HarnessDerivedData/Build/Products/Debug-iphonesimulator
+
+CreateBuildDirectory /tmp/fidget-gacha-continuous-harness.qthi2T/HarnessDerivedData/Build/Intermediates.noindex/ExplicitPrecompiledModules
+    cd /tmp/fidget-gacha-continuous-harness.qthi2T/Harness/GachaContinuousPreviewHarness.xcodeproj
+    builtin-create-build-directory /tmp/fidget-gacha-continuous-harness.qthi2T/HarnessDerivedData/Build/Intermediates.noindex/ExplicitPrecompiledModules
+
+CreateBuildDirectory /tmp/fidget-gacha-continuous-harness.qthi2T/HarnessDerivedData/Build/Intermediates.noindex/EagerLinkingTBDs/Debug-iphonesimulator
+    cd /tmp/fidget-gacha-continuous-harness.qthi2T/Harness/GachaContinuousPreviewHarness.xcodeproj
+    builtin-create-build-directory /tmp/fidget-gacha-continuous-harness.qthi2T/HarnessDerivedData/Build/Intermediates.noindex/EagerLinkingTBDs/Debug-iphonesimulator
+
+WriteAuxiliaryFile /tmp/fidget-gacha-continuous-harness.qthi2T/HarnessDerivedData/Build/Intermediates.noindex/GachaContinuousPreviewHarness.build/Debug-iphonesimulator/GachaContinuousPreviewHarness-f226b2048477c4712249acd531beffc5-VFS-iphonesimulator/all-product-headers.yaml
+    cd /tmp/fidget-gacha-continuous-harness.qthi2T/Harness/GachaContinuousPreviewHarness.xcodeproj
+    write-file /tmp/fidget-gacha-continuous-harness.qthi2T/HarnessDerivedData/Build/Intermediates.noindex/GachaContinuousPreviewHarness.build/Debug-iphonesimulator/GachaContinuousPreviewHarness-f226b2048477c4712249acd531beffc5-VFS-iphonesimulator/all-product-headers.yaml
+
+WriteAuxiliaryFile /tmp/fidget-gacha-continuous-harness.qthi2T/HarnessDerivedData/Build/Intermediates.noindex/GachaContinuousPreviewHarness.build/Debug-iphonesimulator/GachaContinuousPreviewUITests.build/ProductTypeInfoPlistAdditions.plist (in target 'GachaContinuousPreviewUITests' from project 'GachaContinuousPreviewHarness')
+    cd /tmp/fidget-gacha-continuous-harness.qthi2T/Harness
+    write-file /tmp/fidget-gacha-continuous-harness.qthi2T/HarnessDerivedData/Build/Intermediates.noindex/GachaContinuousPreviewHarness.build/Debug-iphonesimulator/GachaContinuousPreviewUITests.build/ProductTypeInfoPlistAdditions.plist
+
+WriteAuxiliaryFile /tmp/fidget-gacha-continuous-harness.qthi2T/HarnessDerivedData/Build/Intermediates.noindex/GachaContinuousPreviewHarness.build/Debug-iphonesimulator/GachaContinuousPreviewUITests.build/empty-GachaContinuousPreviewUITests.plist (in target 'GachaContinuousPreviewUITests' from project 'GachaContinuousPreviewHarness')
+    cd /tmp/fidget-gacha-continuous-harness.qthi2T/Harness
+    write-file /tmp/fidget-gacha-continuous-harness.qthi2T/HarnessDerivedData/Build/Intermediates.noindex/GachaContinuousPreviewHarness.build/Debug-iphonesimulator/GachaContinuousPreviewUITests.build/empty-GachaContinuousPreviewUITests.plist
+
+WriteAuxiliaryFile /tmp/fidget-gacha-continuous-harness.qthi2T/HarnessDerivedData/Build/Intermediates.noindex/GachaContinuousPreviewHarness.build/Debug-iphonesimulator/GachaContinuousPreviewUITests.build/GachaContinuousPreviewUITests.hmap (in target 'GachaContinuousPreviewUITests' from project 'GachaContinuousPreviewHarness')
+    cd /tmp/fidget-gacha-continuous-harness.qthi2T/Harness
+    write-file /tmp/fidget-gacha-continuous-harness.qthi2T/HarnessDerivedData/Build/Intermediates.noindex/GachaContinuousPreviewHarness.build/Debug-iphonesimulator/GachaContinuousPreviewUITests.build/GachaContinuousPreviewUITests.hmap
+
+WriteAuxiliaryFile /tmp/fidget-gacha-continuous-harness.qthi2T/HarnessDerivedData/Build/Intermediates.noindex/GachaContinuousPreviewHarness.build/Debug-iphonesimulator/GachaContinuousPreviewUITests.build/GachaContinuousPreviewUITests.DependencyStaticMetadataFileList (in target 'GachaContinuousPreviewUITests' from project 'GachaContinuousPreviewHarness')
+    cd /tmp/fidget-gacha-continuous-harness.qthi2T/Harness
+    write-file /tmp/fidget-gacha-continuous-harness.qthi2T/HarnessDerivedData/Build/Intermediates.noindex/GachaContinuousPreviewHarness.build/Debug-iphonesimulator/GachaContinuousPreviewUITests.build/GachaContinuousPreviewUITests.DependencyStaticMetadataFileList
+
+WriteAuxiliaryFile /tmp/fidget-gacha-continuous-harness.qthi2T/HarnessDerivedData/Build/Intermediates.noindex/GachaContinuousPreviewHarness.build/Debug-iphonesimulator/GachaContinuousPreviewUITests.build/GachaContinuousPreviewUITests.DependencyMetadataFileList (in target 'GachaContinuousPreviewUITests' from project 'GachaContinuousPreviewHarness')
+    cd /tmp/fidget-gacha-continuous-harness.qthi2T/Harness
+    write-file /tmp/fidget-gacha-continuous-harness.qthi2T/HarnessDerivedData/Build/Intermediates.noindex/GachaContinuousPreviewHarness.build/Debug-iphonesimulator/GachaContinuousPreviewUITests.build/GachaContinuousPreviewUITests.DependencyMetadataFileList
+
+WriteAuxiliaryFile /tmp/fidget-gacha-continuous-harness.qthi2T/HarnessDerivedData/Build/Intermediates.noindex/GachaContinuousPreviewHarness.build/Debug-iphonesimulator/GachaContinuousPreviewUITests.build/GachaContinuousPreviewUITests-all-non-framework-target-headers.hmap (in target 'GachaContinuousPreviewUITests' from project 'GachaContinuousPreviewHarness')
+    cd /tmp/fidget-gacha-continuous-harness.qthi2T/Harness
+    write-file /tmp/fidget-gacha-continuous-harness.qthi2T/HarnessDerivedData/Build/Intermediates.noindex/GachaContinuousPreviewHarness.build/Debug-iphonesimulator/GachaContinuousPreviewUITests.build/GachaContinuousPreviewUITests-all-non-framework-target-headers.hmap
+
+WriteAuxiliaryFile /tmp/fidget-gacha-continuous-harness.qthi2T/HarnessDerivedData/Build/Intermediates.noindex/GachaContinuousPreviewHarness.build/Debug-iphonesimulator/GachaContinuousPreviewUITests.build/GachaContinuousPreviewUITests-generated-files.hmap (in target 'GachaContinuousPreviewUITests' from project 'GachaContinuousPreviewHarness')
+    cd /tmp/fidget-gacha-continuous-harness.qthi2T/Harness
+    write-file /tmp/fidget-gacha-continuous-harness.qthi2T/HarnessDerivedData/Build/Intermediates.noindex/GachaContinuousPreviewHarness.build/Debug-iphonesimulator/GachaContinuousPreviewUITests.build/GachaContinuousPreviewUITests-generated-files.hmap
+
+WriteAuxiliaryFile /tmp/fidget-gacha-continuous-harness.qthi2T/HarnessDerivedData/Build/Intermediates.noindex/GachaContinuousPreviewHarness.build/Debug-iphonesimulator/GachaContinuousPreviewUITests.build/GachaContinuousPreviewUITests-project-headers.hmap (in target 'GachaContinuousPreviewUITests' from project 'GachaContinuousPreviewHarness')
+    cd /tmp/fidget-gacha-continuous-harness.qthi2T/Harness
+    write-file /tmp/fidget-gacha-continuous-harness.qthi2T/HarnessDerivedData/Build/Intermediates.noindex/GachaContinuousPreviewHarness.build/Debug-iphonesimulator/GachaContinuousPreviewUITests.build/GachaContinuousPreviewUITests-project-headers.hmap
+
+WriteAuxiliaryFile /tmp/fidget-gacha-continuous-harness.qthi2T/HarnessDerivedData/Build/Intermediates.noindex/GachaContinuousPreviewHarness.build/Debug-iphonesimulator/GachaContinuousPreviewUITests.build/GachaContinuousPreviewUITests-own-target-headers.hmap (in target 'GachaContinuousPreviewUITests' from project 'GachaContinuousPreviewHarness')
+    cd /tmp/fidget-gacha-continuous-harness.qthi2T/Harness
+    write-file /tmp/fidget-gacha-continuous-harness.qthi2T/HarnessDerivedData/Build/Intermediates.noindex/GachaContinuousPreviewHarness.build/Debug-iphonesimulator/GachaContinuousPreviewUITests.build/GachaContinuousPreviewUITests-own-target-headers.hmap
+
+WriteAuxiliaryFile /tmp/fidget-gacha-continuous-harness.qthi2T/HarnessDerivedData/Build/Intermediates.noindex/GachaContinuousPreviewHarness.build/Debug-iphonesimulator/GachaContinuousPreviewUITests.build/GachaContinuousPreviewUITests-all-target-headers.hmap (in target 'GachaContinuousPreviewUITests' from project 'GachaContinuousPreviewHarness')
+    cd /tmp/fidget-gacha-continuous-harness.qthi2T/Harness
+    write-file /tmp/fidget-gacha-continuous-harness.qthi2T/HarnessDerivedData/Build/Intermediates.noindex/GachaContinuousPreviewHarness.build/Debug-iphonesimulator/GachaContinuousPreviewUITests.build/GachaContinuousPreviewUITests-all-target-headers.hmap
+
+WriteAuxiliaryFile /tmp/fidget-gacha-continuous-harness.qthi2T/HarnessDerivedData/Build/Intermediates.noindex/GachaContinuousPreviewHarness.build/Debug-iphonesimulator/GachaContinuousPreviewUITests.build/Objects-normal/arm64/GachaContinuousPreviewUITests.SwiftConstValuesFileList (in target 'GachaContinuousPreviewUITests' from project 'GachaContinuousPreviewHarness')
+    cd /tmp/fidget-gacha-continuous-harness.qthi2T/Harness
+    write-file /tmp/fidget-gacha-continuous-harness.qthi2T/HarnessDerivedData/Build/Intermediates.noindex/GachaContinuousPreviewHarness.build/Debug-iphonesimulator/GachaContinuousPreviewUITests.build/Objects-normal/arm64/GachaContinuousPreviewUITests.SwiftConstValuesFileList
+
+WriteAuxiliaryFile /tmp/fidget-gacha-continuous-harness.qthi2T/HarnessDerivedData/Build/Intermediates.noindex/GachaContinuousPreviewHarness.build/Debug-iphonesimulator/GachaContinuousPreviewUITests.build/Objects-normal/arm64/GachaContinuousPreviewUITests.LinkFileList (in target 'GachaContinuousPreviewUITests' from project 'GachaContinuousPreviewHarness')
+    cd /tmp/fidget-gacha-continuous-harness.qthi2T/Harness
+    write-file /tmp/fidget-gacha-continuous-harness.qthi2T/HarnessDerivedData/Build/Intermediates.noindex/GachaContinuousPreviewHarness.build/Debug-iphonesimulator/GachaContinuousPreviewUITests.build/Objects-normal/arm64/GachaContinuousPreviewUITests.LinkFileList
+
+WriteAuxiliaryFile /tmp/fidget-gacha-continuous-harness.qthi2T/HarnessDerivedData/Build/Intermediates.noindex/GachaContinuousPreviewHarness.build/Debug-iphonesimulator/GachaContinuousPreviewUITests.build/Objects-normal/arm64/GachaContinuousPreviewUITests-OutputFileMap.json (in target 'GachaContinuousPreviewUITests' from project 'GachaContinuousPreviewHarness')
+    cd /tmp/fidget-gacha-continuous-harness.qthi2T/Harness
+    write-file /tmp/fidget-gacha-continuous-harness.qthi2T/HarnessDerivedData/Build/Intermediates.noindex/GachaContinuousPreviewHarness.build/Debug-iphonesimulator/GachaContinuousPreviewUITests.build/Objects-normal/arm64/GachaContinuousPreviewUITests-OutputFileMap.json
+
+WriteAuxiliaryFile /tmp/fidget-gacha-continuous-harness.qthi2T/HarnessDerivedData/Build/Intermediates.noindex/GachaContinuousPreviewHarness.build/Debug-iphonesimulator/GachaContinuousPreviewUITests.build/Objects-normal/arm64/GachaContinuousPreviewUITests.SwiftFileList (in target 'GachaContinuousPreviewUITests' from project 'GachaContinuousPreviewHarness')
+    cd /tmp/fidget-gacha-continuous-harness.qthi2T/Harness
+    write-file /tmp/fidget-gacha-continuous-harness.qthi2T/HarnessDerivedData/Build/Intermediates.noindex/GachaContinuousPreviewHarness.build/Debug-iphonesimulator/GachaContinuousPreviewUITests.build/Objects-normal/arm64/GachaContinuousPreviewUITests.SwiftFileList
+
+WriteAuxiliaryFile /tmp/fidget-gacha-continuous-harness.qthi2T/HarnessDerivedData/Build/Intermediates.noindex/GachaContinuousPreviewHarness.build/Debug-iphonesimulator/GachaContinuousPreviewUITests.build/Objects-normal/arm64/GachaContinuousPreviewUITests_const_extract_protocols.json (in target 'GachaContinuousPreviewUITests' from project 'GachaContinuousPreviewHarness')
+    cd /tmp/fidget-gacha-continuous-harness.qthi2T/Harness
+    write-file /tmp/fidget-gacha-continuous-harness.qthi2T/HarnessDerivedData/Build/Intermediates.noindex/GachaContinuousPreviewHarness.build/Debug-iphonesimulator/GachaContinuousPreviewUITests.build/Objects-normal/arm64/GachaContinuousPreviewUITests_const_extract_protocols.json
+
+MkDir /tmp/fidget-gacha-continuous-harness.qthi2T/HarnessDerivedData/Build/Products/Debug-iphonesimulator/GachaContinuousPreviewUITests-Runner.app/PlugIns/GachaContinuousPreviewUITests.xctest (in target 'GachaContinuousPreviewUITests' from project 'GachaContinuousPreviewHarness')
+    cd /tmp/fidget-gacha-continuous-harness.qthi2T/Harness
+    /bin/mkdir -p /tmp/fidget-gacha-continuous-harness.qthi2T/HarnessDerivedData/Build/Products/Debug-iphonesimulator/GachaContinuousPreviewUITests-Runner.app/PlugIns/GachaContinuousPreviewUITests.xctest
+
+ProcessInfoPlistFile /tmp/fidget-gacha-continuous-harness.qthi2T/HarnessDerivedData/Build/Products/Debug-iphonesimulator/GachaContinuousPreviewUITests-Runner.app/PlugIns/GachaContinuousPreviewUITests.xctest/Info.plist /tmp/fidget-gacha-continuous-harness.qthi2T/HarnessDerivedData/Build/Intermediates.noindex/GachaContinuousPreviewHarness.build/Debug-iphonesimulator/GachaContinuousPreviewUITests.build/empty-GachaContinuousPreviewUITests.plist (in target 'GachaContinuousPreviewUITests' from project 'GachaContinuousPreviewHarness')
+    cd /tmp/fidget-gacha-continuous-harness.qthi2T/Harness
+    builtin-infoPlistUtility /tmp/fidget-gacha-continuous-harness.qthi2T/HarnessDerivedData/Build/Intermediates.noindex/GachaContinuousPreviewHarness.build/Debug-iphonesimulator/GachaContinuousPreviewUITests.build/empty-GachaContinuousPreviewUITests.plist -producttype com.apple.product-type.bundle.ui-testing -expandbuildsettings -format binary -platform iphonesimulator -additionalcontentfile /tmp/fidget-gacha-continuous-harness.qthi2T/HarnessDerivedData/Build/Intermediates.noindex/GachaContinuousPreviewHarness.build/Debug-iphonesimulator/GachaContinuousPreviewUITests.build/ProductTypeInfoPlistAdditions.plist -o /tmp/fidget-gacha-continuous-harness.qthi2T/HarnessDerivedData/Build/Products/Debug-iphonesimulator/GachaContinuousPreviewUITests-Runner.app/PlugIns/GachaContinuousPreviewUITests.xctest/Info.plist
+
+SwiftDriver GachaContinuousPreviewUITests normal arm64 com.apple.xcode.tools.swift.compiler (in target 'GachaContinuousPreviewUITests' from project 'GachaContinuousPreviewHarness')
+    cd /tmp/fidget-gacha-continuous-harness.qthi2T/Harness
+    builtin-SwiftDriver -- /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/swiftc -module-name GachaContinuousPreviewUITests -Onone @/tmp/fidget-gacha-continuous-harness.qthi2T/HarnessDerivedData/Build/Intermediates.noindex/GachaContinuousPreviewHarness.build/Debug-iphonesimulator/GachaContinuousPreviewUITests.build/Objects-normal/arm64/GachaContinuousPreviewUITests.SwiftFileList -DDEBUG -module-alias Testing\=_Testing_Unavailable -plugin-path /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/host/plugins/testing -enable-bare-slash-regex -enable-experimental-feature DebugDescriptionMacro -sdk /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator26.4.sdk -target arm64-apple-ios15.0-simulator -g -module-cache-path /tmp/fidget-gacha-continuous-harness.qthi2T/HarnessDerivedData/ModuleCache.noindex -Xfrontend -serialize-debugging-options -enable-testing -index-store-path /tmp/fidget-gacha-continuous-harness.qthi2T/HarnessDerivedData/Index.noindex/DataStore -Xcc -D_LIBCPP_HARDENING_MODE\=_LIBCPP_HARDENING_MODE_DEBUG -swift-version 5 -I /tmp/fidget-gacha-continuous-harness.qthi2T/HarnessDerivedData/Build/Products/Debug-iphonesimulator -Isystem /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/lib -F /tmp/fidget-gacha-continuous-harness.qthi2T/HarnessDerivedData/Build/Products/Debug-iphonesimulator -F /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/Library/Frameworks -F /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator26.4.sdk/Developer/Library/Frameworks -parse-as-library -c -j16 -enable-batch-mode -incremental -Xcc -ivfsstatcache -Xcc /tmp/fidget-gacha-continuous-harness.qthi2T/HarnessDerivedData/SDKStatCaches.noindex/iphonesimulator26.4-23E237-686eebb5dc1d8ecb277353a59184f4aa.sdkstatcache -output-file-map /tmp/fidget-gacha-continuous-harness.qthi2T/HarnessDerivedData/Build/Intermediates.noindex/GachaContinuousPreviewHarness.build/Debug-iphonesimulator/GachaContinuousPreviewUITests.build/Objects-normal/arm64/GachaContinuousPreviewUITests-OutputFileMap.json -use-frontend-parseable-output -save-temps -no-color-diagnostics -explicit-module-build -module-cache-path /tmp/fidget-gacha-continuous-harness.qthi2T/HarnessDerivedData/Build/Intermediates.noindex/SwiftExplicitPrecompiledModules -clang-scanner-module-cache-path /tmp/fidget-gacha-continuous-harness.qthi2T/HarnessDerivedData/ModuleCache.noindex -sdk-module-cache-path /tmp/fidget-gacha-continuous-harness.qthi2T/HarnessDerivedData/ModuleCache.noindex -serialize-diagnostics -emit-dependencies -emit-module -emit-module-path /tmp/fidget-gacha-continuous-harness.qthi2T/HarnessDerivedData/Build/Intermediates.noindex/GachaContinuousPreviewHarness.build/Debug-iphonesimulator/GachaContinuousPreviewUITests.build/Objects-normal/arm64/GachaContinuousPreviewUITests.swiftmodule -validate-clang-modules-once -clang-build-session-file /tmp/fidget-gacha-continuous-harness.qthi2T/HarnessDerivedData/ModuleCache.noindex/Session.modulevalidation -Xcc -I/tmp/fidget-gacha-continuous-harness.qthi2T/HarnessDerivedData/Build/Intermediates.noindex/GachaContinuousPreviewHarness.build/Debug-iphonesimulator/GachaContinuousPreviewUITests.build/swift-overrides.hmap -emit-const-values -Xfrontend -const-gather-protocols-file -Xfrontend /tmp/fidget-gacha-continuous-harness.qthi2T/HarnessDerivedData/Build/Intermediates.noindex/GachaContinuousPreviewHarness.build/Debug-iphonesimulator/GachaContinuousPreviewUITests.build/Objects-normal/arm64/GachaContinuousPreviewUITests_const_extract_protocols.json -Xcc -iquote -Xcc /tmp/fidget-gacha-continuous-harness.qthi2T/HarnessDerivedData/Build/Intermediates.noindex/GachaContinuousPreviewHarness.build/Debug-iphonesimulator/GachaContinuousPreviewUITests.build/GachaContinuousPreviewUITests-generated-files.hmap -Xcc -I/tmp/fidget-gacha-continuous-harness.qthi2T/HarnessDerivedData/Build/Intermediates.noindex/GachaContinuousPreviewHarness.build/Debug-iphonesimulator/GachaContinuousPreviewUITests.build/GachaContinuousPreviewUITests-own-target-headers.hmap -Xcc -I/tmp/fidget-gacha-continuous-harness.qthi2T/HarnessDerivedData/Build/Intermediates.noindex/GachaContinuousPreviewHarness.build/Debug-iphonesimulator/GachaContinuousPreviewUITests.build/GachaContinuousPreviewUITests-all-target-headers.hmap -Xcc -iquote -Xcc /tmp/fidget-gacha-continuous-harness.qthi2T/HarnessDerivedData/Build/Intermediates.noindex/GachaContinuousPreviewHarness.build/Debug-iphonesimulator/GachaContinuousPreviewUITests.build/GachaContinuousPreviewUITests-project-headers.hmap -Xcc -I/tmp/fidget-gacha-continuous-harness.qthi2T/HarnessDerivedData/Build/Products/Debug-iphonesimulator/include -Xcc -I/tmp/fidget-gacha-continuous-harness.qthi2T/HarnessDerivedData/Build/Intermediates.noindex/GachaContinuousPreviewHarness.build/Debug-iphonesimulator/GachaContinuousPreviewUITests.build/DerivedSources-normal/arm64 -Xcc -I/tmp/fidget-gacha-continuous-harness.qthi2T/HarnessDerivedData/Build/Intermediates.noindex/GachaContinuousPreviewHarness.build/Debug-iphonesimulator/GachaContinuousPreviewUITests.build/DerivedSources/arm64 -Xcc -I/tmp/fidget-gacha-continuous-harness.qthi2T/HarnessDerivedData/Build/Intermediates.noindex/GachaContinuousPreviewHarness.build/Debug-iphonesimulator/GachaContinuousPreviewUITests.build/DerivedSources -Xcc -DDEBUG\=1 -emit-objc-header -emit-objc-header-path /tmp/fidget-gacha-continuous-harness.qthi2T/HarnessDerivedData/Build/Intermediates.noindex/GachaContinuousPreviewHarness.build/Debug-iphonesimulator/GachaContinuousPreviewUITests.build/Objects-normal/arm64/GachaContinuousPreviewUITests-Swift.h -working-directory /tmp/fidget-gacha-continuous-harness.qthi2T/Harness -experimental-emit-module-separately -disable-cmo
+
+SwiftExplicitDependencyGeneratePcm arm64 /tmp/fidget-gacha-continuous-harness.qthi2T/HarnessDerivedData/ModuleCache.noindex/_Builtin_stddef-AA4TN2ZJLC66W7TKWMJBWLQNI.pcm
+
+SwiftExplicitDependencyGeneratePcm arm64 /tmp/fidget-gacha-continuous-harness.qthi2T/HarnessDerivedData/ModuleCache.noindex/_AvailabilityInternal-E86P6KVV3D7MOXMENYJLVI1ID.pcm
+
+SwiftExplicitDependencyGeneratePcm arm64 /tmp/fidget-gacha-continuous-harness.qthi2T/HarnessDerivedData/ModuleCache.noindex/_SwiftConcurrencyShims-CRRJKTWID784QSBHVPWTB8SFV.pcm
+
+SwiftExplicitDependencyGeneratePcm arm64 /tmp/fidget-gacha-continuous-harness.qthi2T/HarnessDerivedData/ModuleCache.noindex/ptrcheck-8WMTUM8ECC5PMXHBR4NYG8UR.pcm
+
+SwiftExplicitDependencyGeneratePcm arm64 /tmp/fidget-gacha-continuous-harness.qthi2T/HarnessDerivedData/ModuleCache.noindex/_Builtin_stdarg-58FIOTY8YOHC6XKJJNUA6C125.pcm
+
+SwiftExplicitDependencyGeneratePcm arm64 /tmp/fidget-gacha-continuous-harness.qthi2T/HarnessDerivedData/ModuleCache.noindex/SwiftShims-BGZLMBWNRNY7B8EFD4NXCXYX0.pcm
+
+SwiftExplicitDependencyGeneratePcm arm64 /tmp/fidget-gacha-continuous-harness.qthi2T/HarnessDerivedData/ModuleCache.noindex/ptrauth-25JJ85GIIXJN95PW1TNOX9WHW.pcm
+
+SwiftExplicitDependencyGeneratePcm arm64 /tmp/fidget-gacha-continuous-harness.qthi2T/HarnessDerivedData/ModuleCache.noindex/_Builtin_float-91IX7ZH3XA38R3VTX9KNJNX5R.pcm
+
+SwiftExplicitDependencyGeneratePcm arm64 /tmp/fidget-gacha-continuous-harness.qthi2T/HarnessDerivedData/ModuleCache.noindex/DeveloperToolsSupport-ABT1GIR3QUYNZXM5O9MEPV5BG.pcm
+
+SwiftExplicitDependencyGeneratePcm arm64 /tmp/fidget-gacha-continuous-harness.qthi2T/HarnessDerivedData/ModuleCache.noindex/_Builtin_stdbool-6TFLQIW24IIY9L8QA2L79X18G.pcm
+
+SwiftExplicitDependencyGeneratePcm arm64 /tmp/fidget-gacha-continuous-harness.qthi2T/HarnessDerivedData/ModuleCache.noindex/_DarwinFoundation1-4X77JZU2GE80Z4TCI1IP387WH.pcm
+
+SwiftExplicitDependencyGeneratePcm arm64 /tmp/fidget-gacha-continuous-harness.qthi2T/HarnessDerivedData/ModuleCache.noindex/_Builtin_limits-970X3CTOGCMPPYPV5SXG36WGY.pcm
+
+SwiftExplicitDependencyGeneratePcm arm64 /tmp/fidget-gacha-continuous-harness.qthi2T/HarnessDerivedData/ModuleCache.noindex/_DarwinFoundation2-4OL3VS4XLSDT7E0I1TEPGTCO9.pcm
+
+SwiftExplicitDependencyGeneratePcm arm64 /tmp/fidget-gacha-continuous-harness.qthi2T/HarnessDerivedData/ModuleCache.noindex/sys_types-18X3WQGK37B3CZDA1VQQS5CKP.pcm
+
+SwiftExplicitDependencyGeneratePcm arm64 /tmp/fidget-gacha-continuous-harness.qthi2T/HarnessDerivedData/ModuleCache.noindex/_Builtin_stdint-8O9GB4E537A6PNGL1HTAM9H3M.pcm
+
+SwiftExplicitDependencyGeneratePcm arm64 /tmp/fidget-gacha-continuous-harness.qthi2T/HarnessDerivedData/ModuleCache.noindex/_Builtin_tgmath-5CR5QDRXNR6QNKC1DDWPYDP8K.pcm
+
+SwiftExplicitDependencyGeneratePcm arm64 /tmp/fidget-gacha-continuous-harness.qthi2T/HarnessDerivedData/ModuleCache.noindex/_Builtin_intrinsics-E78G5S4FA56N0IM8NZ0LD3POE.pcm
+
+SwiftExplicitDependencyGeneratePcm arm64 /tmp/fidget-gacha-continuous-harness.qthi2T/HarnessDerivedData/ModuleCache.noindex/_DarwinFoundation3-DYAHXA75H5REB0L888QMV9YDS.pcm
+
+SwiftExplicitDependencyGeneratePcm arm64 /tmp/fidget-gacha-continuous-harness.qthi2T/HarnessDerivedData/ModuleCache.noindex/_Builtin_stdatomic-C9QWYEQDPXAJJWTLF7BYWYY2S.pcm
+
+SwiftExplicitDependencyGeneratePcm arm64 /tmp/fidget-gacha-continuous-harness.qthi2T/HarnessDerivedData/ModuleCache.noindex/_Builtin_inttypes-2U63UWDHG4XO590YN89A6DWJV.pcm
+
+SwiftExplicitDependencyGeneratePcm arm64 /tmp/fidget-gacha-continuous-harness.qthi2T/HarnessDerivedData/ModuleCache.noindex/Darwin-71FWT752IZZR3MFXEYS30UL21.pcm
+
+SwiftExplicitDependencyGeneratePcm arm64 /tmp/fidget-gacha-continuous-harness.qthi2T/HarnessDerivedData/ModuleCache.noindex/simd-87HQR5NBBMJX8SVH38O8LSOJ2.pcm
+
+SwiftExplicitDependencyGeneratePcm arm64 /tmp/fidget-gacha-continuous-harness.qthi2T/HarnessDerivedData/ModuleCache.noindex/MachO-8A07Y15402NT846YAJ0Y5OJ9H.pcm
+
+SwiftExplicitDependencyGeneratePcm arm64 /tmp/fidget-gacha-continuous-harness.qthi2T/HarnessDerivedData/ModuleCache.noindex/ObjectiveC-EDKZP316S1G9WHHGDDRJOXRHU.pcm
+
+SwiftExplicitDependencyGeneratePcm arm64 /tmp/fidget-gacha-continuous-harness.qthi2T/HarnessDerivedData/ModuleCache.noindex/os_object-3V5HEBL6BGGEXGAMNWBSWSEG9.pcm
+
+SwiftExplicitDependencyGeneratePcm arm64 /tmp/fidget-gacha-continuous-harness.qthi2T/HarnessDerivedData/ModuleCache.noindex/Spatial-D738IVXJJ7B2Q16BSMMRSUZG4.pcm
+
+SwiftExplicitDependencyGeneratePcm arm64 /tmp/fidget-gacha-continuous-harness.qthi2T/HarnessDerivedData/ModuleCache.noindex/os_workgroup-725Q7WVV6D1BZKFE7LDGIYDR0.pcm
+
+SwiftExplicitDependencyGeneratePcm arm64 /tmp/fidget-gacha-continuous-harness.qthi2T/HarnessDerivedData/ModuleCache.noindex/Dispatch-ADCZ1WQQB2YSOJFLVTT7WJOYO.pcm
+
+SwiftExplicitDependencyGeneratePcm arm64 /tmp/fidget-gacha-continuous-harness.qthi2T/HarnessDerivedData/ModuleCache.noindex/CoreFoundation-18UNE56WAPPUAF8EVJUUO09NS.pcm
+
+SwiftExplicitDependencyGeneratePcm arm64 /tmp/fidget-gacha-continuous-harness.qthi2T/HarnessDerivedData/ModuleCache.noindex/XPC-5Y2KKVXP2L51DT5PREK2NCL7D.pcm
+
+SwiftExplicitDependencyGeneratePcm arm64 /tmp/fidget-gacha-continuous-harness.qthi2T/HarnessDerivedData/ModuleCache.noindex/os-3J0MCH79H8Z96QJVLL0CC3R5V.pcm
+
+SwiftExplicitDependencyGeneratePcm arm64 /tmp/fidget-gacha-continuous-harness.qthi2T/HarnessDerivedData/ModuleCache.noindex/Security-D4R57D6GGHHZH6M6C477U4XH6.pcm
+
+SwiftExplicitDependencyGeneratePcm arm64 /tmp/fidget-gacha-continuous-harness.qthi2T/HarnessDerivedData/ModuleCache.noindex/CoreGraphics-AKMV4LYLNNQHL0VY71DKTUDHP.pcm
+
+SwiftExplicitDependencyGeneratePcm arm64 /tmp/fidget-gacha-continuous-harness.qthi2T/HarnessDerivedData/ModuleCache.noindex/CFNetwork-4CC9OF4RJBPX154VE8DZQMPAY.pcm
+
+SwiftExplicitDependencyGeneratePcm arm64 /tmp/fidget-gacha-continuous-harness.qthi2T/HarnessDerivedData/ModuleCache.noindex/Foundation-10M3HNN5FLI5ZJ37KCBVYS6XA.pcm
+
+SwiftExplicitDependencyGeneratePcm arm64 /tmp/fidget-gacha-continuous-harness.qthi2T/HarnessDerivedData/ModuleCache.noindex/ImageIO-909NGFVJTOK0QZN9UXNAXWP7L.pcm
+
+SwiftExplicitDependencyGeneratePcm arm64 /tmp/fidget-gacha-continuous-harness.qthi2T/HarnessDerivedData/ModuleCache.noindex/CoreText-44TWW61TVYN3L00C1PRCXQVE.pcm
+
+SwiftExplicitDependencyGeneratePcm arm64 /tmp/fidget-gacha-continuous-harness.qthi2T/HarnessDerivedData/ModuleCache.noindex/OpenGLES-EDQTBDJTFG9V1H7CHFWQLQHVF.pcm
+
+SwiftExplicitDependencyGeneratePcm arm64 /tmp/fidget-gacha-continuous-harness.qthi2T/HarnessDerivedData/ModuleCache.noindex/CoreTransferable-AT0W37TV0MENZ9ANQ8VVFHMOE.pcm
+
+SwiftExplicitDependencyGeneratePcm arm64 /tmp/fidget-gacha-continuous-harness.qthi2T/HarnessDerivedData/ModuleCache.noindex/UniformTypeIdentifiers-1P1WNYV7M7Q6Z3BMNS6RBSAD2.pcm
+
+SwiftExplicitDependencyGeneratePcm arm64 /tmp/fidget-gacha-continuous-harness.qthi2T/HarnessDerivedData/ModuleCache.noindex/DataDetection-BESOI4RZEMLKEPSB912AOK0VS.pcm
+
+SwiftExplicitDependencyGeneratePcm arm64 /tmp/fidget-gacha-continuous-harness.qthi2T/HarnessDerivedData/ModuleCache.noindex/IOSurface-EK2WRCN4G1BF1RZX380XVL9XL.pcm
+
+SwiftExplicitDependencyGeneratePcm arm64 /tmp/fidget-gacha-continuous-harness.qthi2T/HarnessDerivedData/ModuleCache.noindex/OSLog-B686G2TCCRZ9G6VZOC0JSXWFM.pcm
+
+SwiftExplicitDependencyGeneratePcm arm64 /tmp/fidget-gacha-continuous-harness.qthi2T/HarnessDerivedData/ModuleCache.noindex/FileProvider-2YALJMUUB1PDK6GOX83TNGYCS.pcm
+
+SwiftExplicitDependencyGeneratePcm arm64 /tmp/fidget-gacha-continuous-harness.qthi2T/HarnessDerivedData/ModuleCache.noindex/Accessibility-96Q7F52G6GP9KRW6NG6S4E2XH.pcm
+
+SwiftExplicitDependencyGeneratePcm arm64 /tmp/fidget-gacha-continuous-harness.qthi2T/HarnessDerivedData/ModuleCache.noindex/UIUtilities-88OFKLZZHVE9SHUM0NPY6WK9I.pcm
+
+SwiftExplicitDependencyGeneratePcm arm64 /tmp/fidget-gacha-continuous-harness.qthi2T/HarnessDerivedData/ModuleCache.noindex/Symbols-C6FJGDM16O8WS8YMBQOX1J7VP.pcm
+
+SwiftExplicitDependencyGeneratePcm arm64 /tmp/fidget-gacha-continuous-harness.qthi2T/HarnessDerivedData/ModuleCache.noindex/UserNotifications-DMM3YFAHZHT1G366H2LJ945IH.pcm
+
+SwiftExplicitDependencyGeneratePcm arm64 /tmp/fidget-gacha-continuous-harness.qthi2T/HarnessDerivedData/ModuleCache.noindex/Metal-5QK4AS5DF2WMXRRDNMZGS607F.pcm
+
+SwiftExplicitDependencyGeneratePcm arm64 /tmp/fidget-gacha-continuous-harness.qthi2T/HarnessDerivedData/ModuleCache.noindex/CoreVideo-8AW3TGN5X012RCUOV02Q39WE6.pcm
+
+SwiftExplicitDependencyGeneratePcm arm64 /tmp/fidget-gacha-continuous-harness.qthi2T/HarnessDerivedData/ModuleCache.noindex/CoreImage-3X3JO6QVSJ981G8KVKKF4HQYF.pcm
+
+SwiftExplicitDependencyGeneratePcm arm64 /tmp/fidget-gacha-continuous-harness.qthi2T/HarnessDerivedData/ModuleCache.noindex/QuartzCore-VQHI0G0D5QNKKIN2Y6K8CZA5.pcm
+
+SwiftExplicitDependencyGeneratePcm arm64 /tmp/fidget-gacha-continuous-harness.qthi2T/HarnessDerivedData/ModuleCache.noindex/UIKit-78HB45951N9RP5FEBK2DMCETC.pcm
+
+SwiftExplicitDependencyGeneratePcm arm64 /tmp/fidget-gacha-continuous-harness.qthi2T/HarnessDerivedData/ModuleCache.noindex/SwiftUICore-18QJ4E5CZMTJ2G134KSLZ4NX2.pcm
+
+SwiftExplicitDependencyGeneratePcm arm64 /tmp/fidget-gacha-continuous-harness.qthi2T/HarnessDerivedData/Build/Intermediates.noindex/SwiftExplicitPrecompiledModules/XCUIAutomation-703S28RKFAS5QYRL72USZZ7YU.pcm
+
+SwiftExplicitDependencyCompileModuleFromInterface arm64 /tmp/fidget-gacha-continuous-harness.qthi2T/HarnessDerivedData/Build/Intermediates.noindex/SwiftExplicitPrecompiledModules/XCUIAutomation-188H72SQ76G90.swiftmodule
+
+SwiftExplicitDependencyGeneratePcm arm64 /tmp/fidget-gacha-continuous-harness.qthi2T/HarnessDerivedData/Build/Intermediates.noindex/SwiftExplicitPrecompiledModules/XCTest-BKMSPVFWABQACZXRL371VRIQ2.pcm
+
+SwiftExplicitDependencyCompileModuleFromInterface arm64 /tmp/fidget-gacha-continuous-harness.qthi2T/HarnessDerivedData/Build/Intermediates.noindex/SwiftExplicitPrecompiledModules/XCTest-3BBH5XD24V6C3.swiftmodule
+
+SwiftEmitModule normal arm64 Emitting\ module\ for\ GachaContinuousPreviewUITests (in target 'GachaContinuousPreviewUITests' from project 'GachaContinuousPreviewHarness')
+
+SwiftCompile normal arm64 /tmp/fidget-gacha-continuous-harness.qthi2T/Harness/GachaContinuousPreviewUITests/GachaContinuousPreviewUITests.swift (in target 'GachaContinuousPreviewUITests' from project 'GachaContinuousPreviewHarness')
+    cd /tmp/fidget-gacha-continuous-harness.qthi2T/Harness
+    
+
+SwiftCompile normal arm64 Compiling\ GachaContinuousPreviewUITests.swift /tmp/fidget-gacha-continuous-harness.qthi2T/Harness/GachaContinuousPreviewUITests/GachaContinuousPreviewUITests.swift (in target 'GachaContinuousPreviewUITests' from project 'GachaContinuousPreviewHarness')
+SwiftCompile normal arm64 /tmp/fidget-gacha-continuous-harness.qthi2T/Harness/GachaContinuousPreviewUITests/GachaContinuousPreviewUITests.swift (in target 'GachaContinuousPreviewUITests' from project 'GachaContinuousPreviewHarness')
+    cd /tmp/fidget-gacha-continuous-harness.qthi2T/Harness
+    
+
+SwiftDriverJobDiscovery normal arm64 Emitting module for GachaContinuousPreviewUITests (in target 'GachaContinuousPreviewUITests' from project 'GachaContinuousPreviewHarness')
+
+SwiftDriver\ Compilation\ Requirements GachaContinuousPreviewUITests normal arm64 com.apple.xcode.tools.swift.compiler (in target 'GachaContinuousPreviewUITests' from project 'GachaContinuousPreviewHarness')
+    cd /tmp/fidget-gacha-continuous-harness.qthi2T/Harness
+    builtin-Swift-Compilation-Requirements -- /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/swiftc -module-name GachaContinuousPreviewUITests -Onone @/tmp/fidget-gacha-continuous-harness.qthi2T/HarnessDerivedData/Build/Intermediates.noindex/GachaContinuousPreviewHarness.build/Debug-iphonesimulator/GachaContinuousPreviewUITests.build/Objects-normal/arm64/GachaContinuousPreviewUITests.SwiftFileList -DDEBUG -module-alias Testing\=_Testing_Unavailable -plugin-path /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/host/plugins/testing -enable-bare-slash-regex -enable-experimental-feature DebugDescriptionMacro -sdk /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator26.4.sdk -target arm64-apple-ios15.0-simulator -g -module-cache-path /tmp/fidget-gacha-continuous-harness.qthi2T/HarnessDerivedData/ModuleCache.noindex -Xfrontend -serialize-debugging-options -enable-testing -index-store-path /tmp/fidget-gacha-continuous-harness.qthi2T/HarnessDerivedData/Index.noindex/DataStore -Xcc -D_LIBCPP_HARDENING_MODE\=_LIBCPP_HARDENING_MODE_DEBUG -swift-version 5 -I /tmp/fidget-gacha-continuous-harness.qthi2T/HarnessDerivedData/Build/Products/Debug-iphonesimulator -Isystem /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/lib -F /tmp/fidget-gacha-continuous-harness.qthi2T/HarnessDerivedData/Build/Products/Debug-iphonesimulator -F /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/Library/Frameworks -F /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator26.4.sdk/Developer/Library/Frameworks -parse-as-library -c -j16 -enable-batch-mode -incremental -Xcc -ivfsstatcache -Xcc /tmp/fidget-gacha-continuous-harness.qthi2T/HarnessDerivedData/SDKStatCaches.noindex/iphonesimulator26.4-23E237-686eebb5dc1d8ecb277353a59184f4aa.sdkstatcache -output-file-map /tmp/fidget-gacha-continuous-harness.qthi2T/HarnessDerivedData/Build/Intermediates.noindex/GachaContinuousPreviewHarness.build/Debug-iphonesimulator/GachaContinuousPreviewUITests.build/Objects-normal/arm64/GachaContinuousPreviewUITests-OutputFileMap.json -use-frontend-parseable-output -save-temps -no-color-diagnostics -explicit-module-build -module-cache-path /tmp/fidget-gacha-continuous-harness.qthi2T/HarnessDerivedData/Build/Intermediates.noindex/SwiftExplicitPrecompiledModules -clang-scanner-module-cache-path /tmp/fidget-gacha-continuous-harness.qthi2T/HarnessDerivedData/ModuleCache.noindex -sdk-module-cache-path /tmp/fidget-gacha-continuous-harness.qthi2T/HarnessDerivedData/ModuleCache.noindex -serialize-diagnostics -emit-dependencies -emit-module -emit-module-path /tmp/fidget-gacha-continuous-harness.qthi2T/HarnessDerivedData/Build/Intermediates.noindex/GachaContinuousPreviewHarness.build/Debug-iphonesimulator/GachaContinuousPreviewUITests.build/Objects-normal/arm64/GachaContinuousPreviewUITests.swiftmodule -validate-clang-modules-once -clang-build-session-file /tmp/fidget-gacha-continuous-harness.qthi2T/HarnessDerivedData/ModuleCache.noindex/Session.modulevalidation -Xcc -I/tmp/fidget-gacha-continuous-harness.qthi2T/HarnessDerivedData/Build/Intermediates.noindex/GachaContinuousPreviewHarness.build/Debug-iphonesimulator/GachaContinuousPreviewUITests.build/swift-overrides.hmap -emit-const-values -Xfrontend -const-gather-protocols-file -Xfrontend /tmp/fidget-gacha-continuous-harness.qthi2T/HarnessDerivedData/Build/Intermediates.noindex/GachaContinuousPreviewHarness.build/Debug-iphonesimulator/GachaContinuousPreviewUITests.build/Objects-normal/arm64/GachaContinuousPreviewUITests_const_extract_protocols.json -Xcc -iquote -Xcc /tmp/fidget-gacha-continuous-harness.qthi2T/HarnessDerivedData/Build/Intermediates.noindex/GachaContinuousPreviewHarness.build/Debug-iphonesimulator/GachaContinuousPreviewUITests.build/GachaContinuousPreviewUITests-generated-files.hmap -Xcc -I/tmp/fidget-gacha-continuous-harness.qthi2T/HarnessDerivedData/Build/Intermediates.noindex/GachaContinuousPreviewHarness.build/Debug-iphonesimulator/GachaContinuousPreviewUITests.build/GachaContinuousPreviewUITests-own-target-headers.hmap -Xcc -I/tmp/fidget-gacha-continuous-harness.qthi2T/HarnessDerivedData/Build/Intermediates.noindex/GachaContinuousPreviewHarness.build/Debug-iphonesimulator/GachaContinuousPreviewUITests.build/GachaContinuousPreviewUITests-all-target-headers.hmap -Xcc -iquote -Xcc /tmp/fidget-gacha-continuous-harness.qthi2T/HarnessDerivedData/Build/Intermediates.noindex/GachaContinuousPreviewHarness.build/Debug-iphonesimulator/GachaContinuousPreviewUITests.build/GachaContinuousPreviewUITests-project-headers.hmap -Xcc -I/tmp/fidget-gacha-continuous-harness.qthi2T/HarnessDerivedData/Build/Products/Debug-iphonesimulator/include -Xcc -I/tmp/fidget-gacha-continuous-harness.qthi2T/HarnessDerivedData/Build/Intermediates.noindex/GachaContinuousPreviewHarness.build/Debug-iphonesimulator/GachaContinuousPreviewUITests.build/DerivedSources-normal/arm64 -Xcc -I/tmp/fidget-gacha-continuous-harness.qthi2T/HarnessDerivedData/Build/Intermediates.noindex/GachaContinuousPreviewHarness.build/Debug-iphonesimulator/GachaContinuousPreviewUITests.build/DerivedSources/arm64 -Xcc -I/tmp/fidget-gacha-continuous-harness.qthi2T/HarnessDerivedData/Build/Intermediates.noindex/GachaContinuousPreviewHarness.build/Debug-iphonesimulator/GachaContinuousPreviewUITests.build/DerivedSources -Xcc -DDEBUG\=1 -emit-objc-header -emit-objc-header-path /tmp/fidget-gacha-continuous-harness.qthi2T/HarnessDerivedData/Build/Intermediates.noindex/GachaContinuousPreviewHarness.build/Debug-iphonesimulator/GachaContinuousPreviewUITests.build/Objects-normal/arm64/GachaContinuousPreviewUITests-Swift.h -working-directory /tmp/fidget-gacha-continuous-harness.qthi2T/Harness -experimental-emit-module-separately -disable-cmo
+
+SwiftMergeGeneratedHeaders /tmp/fidget-gacha-continuous-harness.qthi2T/HarnessDerivedData/Build/Intermediates.noindex/GachaContinuousPreviewHarness.build/Debug-iphonesimulator/GachaContinuousPreviewUITests.build/DerivedSources/GachaContinuousPreviewUITests-Swift.h /tmp/fidget-gacha-continuous-harness.qthi2T/HarnessDerivedData/Build/Intermediates.noindex/GachaContinuousPreviewHarness.build/Debug-iphonesimulator/GachaContinuousPreviewUITests.build/Objects-normal/arm64/GachaContinuousPreviewUITests-Swift.h (in target 'GachaContinuousPreviewUITests' from project 'GachaContinuousPreviewHarness')
+    cd /tmp/fidget-gacha-continuous-harness.qthi2T/Harness
+    builtin-swiftHeaderTool -arch arm64 /tmp/fidget-gacha-continuous-harness.qthi2T/HarnessDerivedData/Build/Intermediates.noindex/GachaContinuousPreviewHarness.build/Debug-iphonesimulator/GachaContinuousPreviewUITests.build/Objects-normal/arm64/GachaContinuousPreviewUITests-Swift.h -o /tmp/fidget-gacha-continuous-harness.qthi2T/HarnessDerivedData/Build/Intermediates.noindex/GachaContinuousPreviewHarness.build/Debug-iphonesimulator/GachaContinuousPreviewUITests.build/DerivedSources/GachaContinuousPreviewUITests-Swift.h
+
+Copy /tmp/fidget-gacha-continuous-harness.qthi2T/HarnessDerivedData/Build/Products/Debug-iphonesimulator/GachaContinuousPreviewUITests.swiftmodule/arm64-apple-ios-simulator.abi.json /tmp/fidget-gacha-continuous-harness.qthi2T/HarnessDerivedData/Build/Intermediates.noindex/GachaContinuousPreviewHarness.build/Debug-iphonesimulator/GachaContinuousPreviewUITests.build/Objects-normal/arm64/GachaContinuousPreviewUITests.abi.json (in target 'GachaContinuousPreviewUITests' from project 'GachaContinuousPreviewHarness')
+    cd /tmp/fidget-gacha-continuous-harness.qthi2T/Harness
+    builtin-copy -exclude .DS_Store -exclude CVS -exclude .svn -exclude .git -exclude .hg -resolve-src-symlinks -rename /tmp/fidget-gacha-continuous-harness.qthi2T/HarnessDerivedData/Build/Intermediates.noindex/GachaContinuousPreviewHarness.build/Debug-iphonesimulator/GachaContinuousPreviewUITests.build/Objects-normal/arm64/GachaContinuousPreviewUITests.abi.json /tmp/fidget-gacha-continuous-harness.qthi2T/HarnessDerivedData/Build/Products/Debug-iphonesimulator/GachaContinuousPreviewUITests.swiftmodule/arm64-apple-ios-simulator.abi.json
+
+Copy /tmp/fidget-gacha-continuous-harness.qthi2T/HarnessDerivedData/Build/Products/Debug-iphonesimulator/GachaContinuousPreviewUITests.swiftmodule/arm64-apple-ios-simulator.swiftmodule /tmp/fidget-gacha-continuous-harness.qthi2T/HarnessDerivedData/Build/Intermediates.noindex/GachaContinuousPreviewHarness.build/Debug-iphonesimulator/GachaContinuousPreviewUITests.build/Objects-normal/arm64/GachaContinuousPreviewUITests.swiftmodule (in target 'GachaContinuousPreviewUITests' from project 'GachaContinuousPreviewHarness')
+    cd /tmp/fidget-gacha-continuous-harness.qthi2T/Harness
+    builtin-copy -exclude .DS_Store -exclude CVS -exclude .svn -exclude .git -exclude .hg -resolve-src-symlinks -rename /tmp/fidget-gacha-continuous-harness.qthi2T/HarnessDerivedData/Build/Intermediates.noindex/GachaContinuousPreviewHarness.build/Debug-iphonesimulator/GachaContinuousPreviewUITests.build/Objects-normal/arm64/GachaContinuousPreviewUITests.swiftmodule /tmp/fidget-gacha-continuous-harness.qthi2T/HarnessDerivedData/Build/Products/Debug-iphonesimulator/GachaContinuousPreviewUITests.swiftmodule/arm64-apple-ios-simulator.swiftmodule
+
+Copy /tmp/fidget-gacha-continuous-harness.qthi2T/HarnessDerivedData/Build/Products/Debug-iphonesimulator/GachaContinuousPreviewUITests.swiftmodule/arm64-apple-ios-simulator.swiftdoc /tmp/fidget-gacha-continuous-harness.qthi2T/HarnessDerivedData/Build/Intermediates.noindex/GachaContinuousPreviewHarness.build/Debug-iphonesimulator/GachaContinuousPreviewUITests.build/Objects-normal/arm64/GachaContinuousPreviewUITests.swiftdoc (in target 'GachaContinuousPreviewUITests' from project 'GachaContinuousPreviewHarness')
+    cd /tmp/fidget-gacha-continuous-harness.qthi2T/Harness
+    builtin-copy -exclude .DS_Store -exclude CVS -exclude .svn -exclude .git -exclude .hg -resolve-src-symlinks -rename /tmp/fidget-gacha-continuous-harness.qthi2T/HarnessDerivedData/Build/Intermediates.noindex/GachaContinuousPreviewHarness.build/Debug-iphonesimulator/GachaContinuousPreviewUITests.build/Objects-normal/arm64/GachaContinuousPreviewUITests.swiftdoc /tmp/fidget-gacha-continuous-harness.qthi2T/HarnessDerivedData/Build/Products/Debug-iphonesimulator/GachaContinuousPreviewUITests.swiftmodule/arm64-apple-ios-simulator.swiftdoc
+
+Copy /tmp/fidget-gacha-continuous-harness.qthi2T/HarnessDerivedData/Build/Products/Debug-iphonesimulator/GachaContinuousPreviewUITests.swiftmodule/Project/arm64-apple-ios-simulator.swiftsourceinfo /tmp/fidget-gacha-continuous-harness.qthi2T/HarnessDerivedData/Build/Intermediates.noindex/GachaContinuousPreviewHarness.build/Debug-iphonesimulator/GachaContinuousPreviewUITests.build/Objects-normal/arm64/GachaContinuousPreviewUITests.swiftsourceinfo (in target 'GachaContinuousPreviewUITests' from project 'GachaContinuousPreviewHarness')
+    cd /tmp/fidget-gacha-continuous-harness.qthi2T/Harness
+    builtin-copy -exclude .DS_Store -exclude CVS -exclude .svn -exclude .git -exclude .hg -resolve-src-symlinks -rename /tmp/fidget-gacha-continuous-harness.qthi2T/HarnessDerivedData/Build/Intermediates.noindex/GachaContinuousPreviewHarness.build/Debug-iphonesimulator/GachaContinuousPreviewUITests.build/Objects-normal/arm64/GachaContinuousPreviewUITests.swiftsourceinfo /tmp/fidget-gacha-continuous-harness.qthi2T/HarnessDerivedData/Build/Products/Debug-iphonesimulator/GachaContinuousPreviewUITests.swiftmodule/Project/arm64-apple-ios-simulator.swiftsourceinfo
+
+SwiftDriverJobDiscovery normal arm64 Compiling GachaContinuousPreviewUITests.swift (in target 'GachaContinuousPreviewUITests' from project 'GachaContinuousPreviewHarness')
+
+SwiftDriver\ Compilation GachaContinuousPreviewUITests normal arm64 com.apple.xcode.tools.swift.compiler (in target 'GachaContinuousPreviewUITests' from project 'GachaContinuousPreviewHarness')
+    cd /tmp/fidget-gacha-continuous-harness.qthi2T/Harness
+    builtin-Swift-Compilation -- /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/swiftc -module-name GachaContinuousPreviewUITests -Onone @/tmp/fidget-gacha-continuous-harness.qthi2T/HarnessDerivedData/Build/Intermediates.noindex/GachaContinuousPreviewHarness.build/Debug-iphonesimulator/GachaContinuousPreviewUITests.build/Objects-normal/arm64/GachaContinuousPreviewUITests.SwiftFileList -DDEBUG -module-alias Testing\=_Testing_Unavailable -plugin-path /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/host/plugins/testing -enable-bare-slash-regex -enable-experimental-feature DebugDescriptionMacro -sdk /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator26.4.sdk -target arm64-apple-ios15.0-simulator -g -module-cache-path /tmp/fidget-gacha-continuous-harness.qthi2T/HarnessDerivedData/ModuleCache.noindex -Xfrontend -serialize-debugging-options -enable-testing -index-store-path /tmp/fidget-gacha-continuous-harness.qthi2T/HarnessDerivedData/Index.noindex/DataStore -Xcc -D_LIBCPP_HARDENING_MODE\=_LIBCPP_HARDENING_MODE_DEBUG -swift-version 5 -I /tmp/fidget-gacha-continuous-harness.qthi2T/HarnessDerivedData/Build/Products/Debug-iphonesimulator -Isystem /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/lib -F /tmp/fidget-gacha-continuous-harness.qthi2T/HarnessDerivedData/Build/Products/Debug-iphonesimulator -F /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/Library/Frameworks -F /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator26.4.sdk/Developer/Library/Frameworks -parse-as-library -c -j16 -enable-batch-mode -incremental -Xcc -ivfsstatcache -Xcc /tmp/fidget-gacha-continuous-harness.qthi2T/HarnessDerivedData/SDKStatCaches.noindex/iphonesimulator26.4-23E237-686eebb5dc1d8ecb277353a59184f4aa.sdkstatcache -output-file-map /tmp/fidget-gacha-continuous-harness.qthi2T/HarnessDerivedData/Build/Intermediates.noindex/GachaContinuousPreviewHarness.build/Debug-iphonesimulator/GachaContinuousPreviewUITests.build/Objects-normal/arm64/GachaContinuousPreviewUITests-OutputFileMap.json -use-frontend-parseable-output -save-temps -no-color-diagnostics -explicit-module-build -module-cache-path /tmp/fidget-gacha-continuous-harness.qthi2T/HarnessDerivedData/Build/Intermediates.noindex/SwiftExplicitPrecompiledModules -clang-scanner-module-cache-path /tmp/fidget-gacha-continuous-harness.qthi2T/HarnessDerivedData/ModuleCache.noindex -sdk-module-cache-path /tmp/fidget-gacha-continuous-harness.qthi2T/HarnessDerivedData/ModuleCache.noindex -serialize-diagnostics -emit-dependencies -emit-module -emit-module-path /tmp/fidget-gacha-continuous-harness.qthi2T/HarnessDerivedData/Build/Intermediates.noindex/GachaContinuousPreviewHarness.build/Debug-iphonesimulator/GachaContinuousPreviewUITests.build/Objects-normal/arm64/GachaContinuousPreviewUITests.swiftmodule -validate-clang-modules-once -clang-build-session-file /tmp/fidget-gacha-continuous-harness.qthi2T/HarnessDerivedData/ModuleCache.noindex/Session.modulevalidation -Xcc -I/tmp/fidget-gacha-continuous-harness.qthi2T/HarnessDerivedData/Build/Intermediates.noindex/GachaContinuousPreviewHarness.build/Debug-iphonesimulator/GachaContinuousPreviewUITests.build/swift-overrides.hmap -emit-const-values -Xfrontend -const-gather-protocols-file -Xfrontend /tmp/fidget-gacha-continuous-harness.qthi2T/HarnessDerivedData/Build/Intermediates.noindex/GachaContinuousPreviewHarness.build/Debug-iphonesimulator/GachaContinuousPreviewUITests.build/Objects-normal/arm64/GachaContinuousPreviewUITests_const_extract_protocols.json -Xcc -iquote -Xcc /tmp/fidget-gacha-continuous-harness.qthi2T/HarnessDerivedData/Build/Intermediates.noindex/GachaContinuousPreviewHarness.build/Debug-iphonesimulator/GachaContinuousPreviewUITests.build/GachaContinuousPreviewUITests-generated-files.hmap -Xcc -I/tmp/fidget-gacha-continuous-harness.qthi2T/HarnessDerivedData/Build/Intermediates.noindex/GachaContinuousPreviewHarness.build/Debug-iphonesimulator/GachaContinuousPreviewUITests.build/GachaContinuousPreviewUITests-own-target-headers.hmap -Xcc -I/tmp/fidget-gacha-continuous-harness.qthi2T/HarnessDerivedData/Build/Intermediates.noindex/GachaContinuousPreviewHarness.build/Debug-iphonesimulator/GachaContinuousPreviewUITests.build/GachaContinuousPreviewUITests-all-target-headers.hmap -Xcc -iquote -Xcc /tmp/fidget-gacha-continuous-harness.qthi2T/HarnessDerivedData/Build/Intermediates.noindex/GachaContinuousPreviewHarness.build/Debug-iphonesimulator/GachaContinuousPreviewUITests.build/GachaContinuousPreviewUITests-project-headers.hmap -Xcc -I/tmp/fidget-gacha-continuous-harness.qthi2T/HarnessDerivedData/Build/Products/Debug-iphonesimulator/include -Xcc -I/tmp/fidget-gacha-continuous-harness.qthi2T/HarnessDerivedData/Build/Intermediates.noindex/GachaContinuousPreviewHarness.build/Debug-iphonesimulator/GachaContinuousPreviewUITests.build/DerivedSources-normal/arm64 -Xcc -I/tmp/fidget-gacha-continuous-harness.qthi2T/HarnessDerivedData/Build/Intermediates.noindex/GachaContinuousPreviewHarness.build/Debug-iphonesimulator/GachaContinuousPreviewUITests.build/DerivedSources/arm64 -Xcc -I/tmp/fidget-gacha-continuous-harness.qthi2T/HarnessDerivedData/Build/Intermediates.noindex/GachaContinuousPreviewHarness.build/Debug-iphonesimulator/GachaContinuousPreviewUITests.build/DerivedSources -Xcc -DDEBUG\=1 -emit-objc-header -emit-objc-header-path /tmp/fidget-gacha-continuous-harness.qthi2T/HarnessDerivedData/Build/Intermediates.noindex/GachaContinuousPreviewHarness.build/Debug-iphonesimulator/GachaContinuousPreviewUITests.build/Objects-normal/arm64/GachaContinuousPreviewUITests-Swift.h -working-directory /tmp/fidget-gacha-continuous-harness.qthi2T/Harness -experimental-emit-module-separately -disable-cmo
+
+Ld /tmp/fidget-gacha-continuous-harness.qthi2T/HarnessDerivedData/Build/Products/Debug-iphonesimulator/GachaContinuousPreviewUITests-Runner.app/PlugIns/GachaContinuousPreviewUITests.xctest/GachaContinuousPreviewUITests normal (in target 'GachaContinuousPreviewUITests' from project 'GachaContinuousPreviewHarness')
+    cd /tmp/fidget-gacha-continuous-harness.qthi2T/Harness
+    /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang -Xlinker -reproducible -target arm64-apple-ios15.0-simulator -bundle -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator26.4.sdk -O0 -L/tmp/fidget-gacha-continuous-harness.qthi2T/HarnessDerivedData/Build/Intermediates.noindex/EagerLinkingTBDs/Debug-iphonesimulator -L/tmp/fidget-gacha-continuous-harness.qthi2T/HarnessDerivedData/Build/Products/Debug-iphonesimulator -L/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/lib -F/tmp/fidget-gacha-continuous-harness.qthi2T/HarnessDerivedData/Build/Intermediates.noindex/EagerLinkingTBDs/Debug-iphonesimulator -F/tmp/fidget-gacha-continuous-harness.qthi2T/HarnessDerivedData/Build/Products/Debug-iphonesimulator -iframework /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/Library/Frameworks -iframework /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator26.4.sdk/Developer/Library/Frameworks -filelist /tmp/fidget-gacha-continuous-harness.qthi2T/HarnessDerivedData/Build/Intermediates.noindex/GachaContinuousPreviewHarness.build/Debug-iphonesimulator/GachaContinuousPreviewUITests.build/Objects-normal/arm64/GachaContinuousPreviewUITests.LinkFileList -Xlinker -rpath -Xlinker /usr/lib/swift -Xlinker -rpath -Xlinker @loader_path/Frameworks -Xlinker -rpath -Xlinker @executable_path/Frameworks -Xlinker -dead_strip -Xlinker -object_path_lto -Xlinker /tmp/fidget-gacha-continuous-harness.qthi2T/HarnessDerivedData/Build/Intermediates.noindex/GachaContinuousPreviewHarness.build/Debug-iphonesimulator/GachaContinuousPreviewUITests.build/Objects-normal/arm64/GachaContinuousPreviewUITests_lto.o -rdynamic -Xlinker -no_deduplicate -Xlinker -objc_abi_version -Xlinker 2 -Xlinker -dependency_info -Xlinker /tmp/fidget-gacha-continuous-harness.qthi2T/HarnessDerivedData/Build/Intermediates.noindex/GachaContinuousPreviewHarness.build/Debug-iphonesimulator/GachaContinuousPreviewUITests.build/Objects-normal/arm64/GachaContinuousPreviewUITests_dependency_info.dat -fobjc-link-runtime -L/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/iphonesimulator -L/usr/lib/swift -Xlinker -add_ast_path -Xlinker /tmp/fidget-gacha-continuous-harness.qthi2T/HarnessDerivedData/Build/Intermediates.noindex/GachaContinuousPreviewHarness.build/Debug-iphonesimulator/GachaContinuousPreviewUITests.build/Objects-normal/arm64/GachaContinuousPreviewUITests.swiftmodule @/tmp/fidget-gacha-continuous-harness.qthi2T/HarnessDerivedData/Build/Intermediates.noindex/GachaContinuousPreviewHarness.build/Debug-iphonesimulator/GachaContinuousPreviewUITests.build/Objects-normal/arm64/GachaContinuousPreviewUITests-linker-args.resp -Xlinker -needed_framework -Xlinker XCTest -framework XCTest -Xlinker -needed-lXCTestSwiftSupport -lXCTestSwiftSupport -o /tmp/fidget-gacha-continuous-harness.qthi2T/HarnessDerivedData/Build/Products/Debug-iphonesimulator/GachaContinuousPreviewUITests-Runner.app/PlugIns/GachaContinuousPreviewUITests.xctest/GachaContinuousPreviewUITests
+
+CopySwiftLibs /tmp/fidget-gacha-continuous-harness.qthi2T/HarnessDerivedData/Build/Products/Debug-iphonesimulator/GachaContinuousPreviewUITests-Runner.app/PlugIns/GachaContinuousPreviewUITests.xctest (in target 'GachaContinuousPreviewUITests' from project 'GachaContinuousPreviewHarness')
+    cd /tmp/fidget-gacha-continuous-harness.qthi2T/Harness
+    builtin-swiftStdLibTool --copy --verbose --scan-executable /tmp/fidget-gacha-continuous-harness.qthi2T/HarnessDerivedData/Build/Products/Debug-iphonesimulator/GachaContinuousPreviewUITests-Runner.app/PlugIns/GachaContinuousPreviewUITests.xctest/GachaContinuousPreviewUITests --scan-folder /tmp/fidget-gacha-continuous-harness.qthi2T/HarnessDerivedData/Build/Products/Debug-iphonesimulator/GachaContinuousPreviewUITests-Runner.app/PlugIns/GachaContinuousPreviewUITests.xctest/Frameworks --scan-folder /tmp/fidget-gacha-continuous-harness.qthi2T/HarnessDerivedData/Build/Products/Debug-iphonesimulator/GachaContinuousPreviewUITests-Runner.app/PlugIns/GachaContinuousPreviewUITests.xctest/PlugIns --scan-folder /tmp/fidget-gacha-continuous-harness.qthi2T/HarnessDerivedData/Build/Products/Debug-iphonesimulator/GachaContinuousPreviewUITests-Runner.app/PlugIns/GachaContinuousPreviewUITests.xctest/SystemExtensions --scan-folder /tmp/fidget-gacha-continuous-harness.qthi2T/HarnessDerivedData/Build/Products/Debug-iphonesimulator/GachaContinuousPreviewUITests-Runner.app/PlugIns/GachaContinuousPreviewUITests.xctest/Extensions --platform iphonesimulator --toolchain /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain --destination /tmp/fidget-gacha-continuous-harness.qthi2T/HarnessDerivedData/Build/Products/Debug-iphonesimulator/GachaContinuousPreviewUITests-Runner.app/PlugIns/GachaContinuousPreviewUITests.xctest/Frameworks --strip-bitcode --scan-executable /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/lib/libXCTestSwiftSupport.dylib --strip-bitcode-tool /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/bitcode_strip --emit-dependency-info /tmp/fidget-gacha-continuous-harness.qthi2T/HarnessDerivedData/Build/Intermediates.noindex/GachaContinuousPreviewHarness.build/Debug-iphonesimulator/GachaContinuousPreviewUITests.build/SwiftStdLibToolInputDependencies.dep --filter-for-swift-os
+Ignoring --strip-bitcode because --sign was not passed
+
+ExtractAppIntentsMetadata (in target 'GachaContinuousPreviewUITests' from project 'GachaContinuousPreviewHarness')
+    cd /tmp/fidget-gacha-continuous-harness.qthi2T/Harness
+    /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/appintentsmetadataprocessor --toolchain-dir /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain --module-name GachaContinuousPreviewUITests --sdk-root /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator26.4.sdk --xcode-version 17E192 --platform-family iOS --deployment-target 15.0 --bundle-identifier com.jiaweizhou.codex.GachaContinuousPreviewUITests --output /tmp/fidget-gacha-continuous-harness.qthi2T/HarnessDerivedData/Build/Products/Debug-iphonesimulator/GachaContinuousPreviewUITests-Runner.app/PlugIns/GachaContinuousPreviewUITests.xctest --target-triple arm64-apple-ios15.0-simulator --binary-file /tmp/fidget-gacha-continuous-harness.qthi2T/HarnessDerivedData/Build/Products/Debug-iphonesimulator/GachaContinuousPreviewUITests-Runner.app/PlugIns/GachaContinuousPreviewUITests.xctest/GachaContinuousPreviewUITests --dependency-file /tmp/fidget-gacha-continuous-harness.qthi2T/HarnessDerivedData/Build/Intermediates.noindex/GachaContinuousPreviewHarness.build/Debug-iphonesimulator/GachaContinuousPreviewUITests.build/Objects-normal/arm64/GachaContinuousPreviewUITests_dependency_info.dat --stringsdata-file /tmp/fidget-gacha-continuous-harness.qthi2T/HarnessDerivedData/Build/Intermediates.noindex/GachaContinuousPreviewHarness.build/Debug-iphonesimulator/GachaContinuousPreviewUITests.build/Objects-normal/arm64/ExtractedAppShortcutsMetadata.stringsdata --source-file-list /tmp/fidget-gacha-continuous-harness.qthi2T/HarnessDerivedData/Build/Intermediates.noindex/GachaContinuousPreviewHarness.build/Debug-iphonesimulator/GachaContinuousPreviewUITests.build/Objects-normal/arm64/GachaContinuousPreviewUITests.SwiftFileList --metadata-file-list /tmp/fidget-gacha-continuous-harness.qthi2T/HarnessDerivedData/Build/Intermediates.noindex/GachaContinuousPreviewHarness.build/Debug-iphonesimulator/GachaContinuousPreviewUITests.build/GachaContinuousPreviewUITests.DependencyMetadataFileList --static-metadata-file-list /tmp/fidget-gacha-continuous-harness.qthi2T/HarnessDerivedData/Build/Intermediates.noindex/GachaContinuousPreviewHarness.build/Debug-iphonesimulator/GachaContinuousPreviewUITests.build/GachaContinuousPreviewUITests.DependencyStaticMetadataFileList --swift-const-vals-list /tmp/fidget-gacha-continuous-harness.qthi2T/HarnessDerivedData/Build/Intermediates.noindex/GachaContinuousPreviewHarness.build/Debug-iphonesimulator/GachaContinuousPreviewUITests.build/Objects-normal/arm64/GachaContinuousPreviewUITests.SwiftConstValuesFileList --compile-time-extraction --deployment-aware-processing --validate-assistant-intents --no-app-shortcuts-localization
+2026-08-18 15:16:51.193 appintentsmetadataprocessor[44193:27612406] Starting appintentsmetadataprocessor export
+2026-08-18 15:16:51.195 appintentsmetadataprocessor[44193:27612406] warning: Metadata extraction skipped. No AppIntents.framework dependency found.
+
+AppIntentsSSUTraining (in target 'GachaContinuousPreviewUITests' from project 'GachaContinuousPreviewHarness')
+    cd /tmp/fidget-gacha-continuous-harness.qthi2T/Harness
+    /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/appintentsnltrainingprocessor --infoplist-path /tmp/fidget-gacha-continuous-harness.qthi2T/HarnessDerivedData/Build/Products/Debug-iphonesimulator/GachaContinuousPreviewUITests-Runner.app/PlugIns/GachaContinuousPreviewUITests.xctest/Info.plist --temp-dir-path /tmp/fidget-gacha-continuous-harness.qthi2T/HarnessDerivedData/Build/Intermediates.noindex/GachaContinuousPreviewHarness.build/Debug-iphonesimulator/GachaContinuousPreviewUITests.build/ssu --bundle-id com.jiaweizhou.codex.GachaContinuousPreviewUITests --product-path /tmp/fidget-gacha-continuous-harness.qthi2T/HarnessDerivedData/Build/Products/Debug-iphonesimulator/GachaContinuousPreviewUITests-Runner.app/PlugIns/GachaContinuousPreviewUITests.xctest --extracted-metadata-path /tmp/fidget-gacha-continuous-harness.qthi2T/HarnessDerivedData/Build/Products/Debug-iphonesimulator/GachaContinuousPreviewUITests-Runner.app/PlugIns/GachaContinuousPreviewUITests.xctest/Metadata.appintents --metadata-file-list /tmp/fidget-gacha-continuous-harness.qthi2T/HarnessDerivedData/Build/Intermediates.noindex/GachaContinuousPreviewHarness.build/Debug-iphonesimulator/GachaContinuousPreviewUITests.build/GachaContinuousPreviewUITests.DependencyMetadataFileList --source-file /tmp/fidget-gacha-continuous-harness.qthi2T/HarnessDerivedData/Build/Products/Debug-iphonesimulator/GachaContinuousPreviewUITests-Runner.app/PlugIns/GachaContinuousPreviewUITests.xctest/Info.plist --archive-ssu-assets
+2026-08-18 15:16:51.221 appintentsnltrainingprocessor[44194:27612407] Parsing options for appintentsnltrainingprocessor
+2026-08-18 15:16:51.221 appintentsnltrainingprocessor[44194:27612407] Starting AppIntents SSU YAML Generation
+2026-08-18 15:16:51.221 appintentsnltrainingprocessor[44194:27612407] No AppShortcuts found - Skipping.
+
+CopyPlistFile /tmp/fidget-gacha-continuous-harness.qthi2T/HarnessDerivedData/Build/Products/Debug-iphonesimulator/GachaContinuousPreviewUITests-Runner.app/Info.plist /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/Library/Xcode/Agents/XCTRunner.app/Info.plist (in target 'GachaContinuousPreviewUITests' from project 'GachaContinuousPreviewHarness')
+    cd /tmp/fidget-gacha-continuous-harness.qthi2T/Harness
+    builtin-copyPlist --validate --convert xml1 --macro-expansion WRAPPEDPRODUCTNAME GachaContinuousPreviewUITests-Runner --macro-expansion WRAPPEDPRODUCTBUNDLEIDENTIFIER com.jiaweizhou.codex.GachaContinuousPreviewUITests.xctrunner --macro-expansion TESTPRODUCTNAME GachaContinuousPreviewUITests --macro-expansion TESTPRODUCTBUNDLEIDENTIFIER com.jiaweizhou.codex.GachaContinuousPreviewUITests --copy-value UIDeviceFamily /tmp/fidget-gacha-continuous-harness.qthi2T/HarnessDerivedData/Build/Products/Debug-iphonesimulator/GachaContinuousPreviewUITests-Runner.app/PlugIns/GachaContinuousPreviewUITests.xctest/Info.plist --outdir /tmp/fidget-gacha-continuous-harness.qthi2T/HarnessDerivedData/Build/Products/Debug-iphonesimulator/GachaContinuousPreviewUITests-Runner.app -- /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/Library/Xcode/Agents/XCTRunner.app/Info.plist
+
+CopyAndPreserveArchs /tmp/fidget-gacha-continuous-harness.qthi2T/HarnessDerivedData/Build/Products/Debug-iphonesimulator/GachaContinuousPreviewUITests-Runner.app/GachaContinuousPreviewUITests-Runner (in target 'GachaContinuousPreviewUITests' from project 'GachaContinuousPreviewHarness')
+    cd /tmp/fidget-gacha-continuous-harness.qthi2T/Harness
+    /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/lipo /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/Library/Xcode/Agents/XCTRunner.app/XCTRunner -output /tmp/fidget-gacha-continuous-harness.qthi2T/HarnessDerivedData/Build/Products/Debug-iphonesimulator/GachaContinuousPreviewUITests-Runner.app/GachaContinuousPreviewUITests-Runner -extract arm64
+
+Copy /tmp/fidget-gacha-continuous-harness.qthi2T/HarnessDerivedData/Build/Products/Debug-iphonesimulator/GachaContinuousPreviewUITests-Runner.app/PkgInfo /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/Library/Xcode/Agents/XCTRunner.app/PkgInfo (in target 'GachaContinuousPreviewUITests' from project 'GachaContinuousPreviewHarness')
+    cd /tmp/fidget-gacha-continuous-harness.qthi2T/Harness
+    builtin-copy -exclude .DS_Store -exclude CVS -exclude .svn -exclude .git -exclude .hg -resolve-src-symlinks /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/Library/Xcode/Agents/XCTRunner.app/PkgInfo /tmp/fidget-gacha-continuous-harness.qthi2T/HarnessDerivedData/Build/Products/Debug-iphonesimulator/GachaContinuousPreviewUITests-Runner.app
+
+Copy /tmp/fidget-gacha-continuous-harness.qthi2T/HarnessDerivedData/Build/Products/Debug-iphonesimulator/GachaContinuousPreviewUITests-Runner.app/Frameworks/XCTestSupport.framework /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/Library/PrivateFrameworks/XCTestSupport.framework (in target 'GachaContinuousPreviewUITests' from project 'GachaContinuousPreviewHarness')
+    cd /tmp/fidget-gacha-continuous-harness.qthi2T/Harness
+    builtin-copy -exclude .DS_Store -exclude CVS -exclude .svn -exclude .git -exclude .hg -exclude Headers -exclude PrivateHeaders -exclude Modules -exclude \*.tbd -resolve-src-symlinks /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/Library/PrivateFrameworks/XCTestSupport.framework /tmp/fidget-gacha-continuous-harness.qthi2T/HarnessDerivedData/Build/Products/Debug-iphonesimulator/GachaContinuousPreviewUITests-Runner.app/Frameworks
+
+Copy /tmp/fidget-gacha-continuous-harness.qthi2T/HarnessDerivedData/Build/Products/Debug-iphonesimulator/GachaContinuousPreviewUITests-Runner.app/Frameworks/XCTAutomationSupport.framework /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/Library/PrivateFrameworks/XCTAutomationSupport.framework (in target 'GachaContinuousPreviewUITests' from project 'GachaContinuousPreviewHarness')
+    cd /tmp/fidget-gacha-continuous-harness.qthi2T/Harness
+    builtin-copy -exclude .DS_Store -exclude CVS -exclude .svn -exclude .git -exclude .hg -exclude Headers -exclude PrivateHeaders -exclude Modules -exclude \*.tbd -resolve-src-symlinks /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/Library/PrivateFrameworks/XCTAutomationSupport.framework /tmp/fidget-gacha-continuous-harness.qthi2T/HarnessDerivedData/Build/Products/Debug-iphonesimulator/GachaContinuousPreviewUITests-Runner.app/Frameworks
+
+Copy /tmp/fidget-gacha-continuous-harness.qthi2T/HarnessDerivedData/Build/Products/Debug-iphonesimulator/GachaContinuousPreviewUITests-Runner.app/Frameworks/XCTest.framework /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/Library/Frameworks/XCTest.framework (in target 'GachaContinuousPreviewUITests' from project 'GachaContinuousPreviewHarness')
+    cd /tmp/fidget-gacha-continuous-harness.qthi2T/Harness
+    builtin-copy -exclude .DS_Store -exclude CVS -exclude .svn -exclude .git -exclude .hg -exclude Headers -exclude PrivateHeaders -exclude Modules -exclude \*.tbd -resolve-src-symlinks /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/Library/Frameworks/XCTest.framework /tmp/fidget-gacha-continuous-harness.qthi2T/HarnessDerivedData/Build/Products/Debug-iphonesimulator/GachaContinuousPreviewUITests-Runner.app/Frameworks
+
+Copy /tmp/fidget-gacha-continuous-harness.qthi2T/HarnessDerivedData/Build/Products/Debug-iphonesimulator/GachaContinuousPreviewUITests-Runner.app/Frameworks/Testing.framework /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/Library/Frameworks/Testing.framework (in target 'GachaContinuousPreviewUITests' from project 'GachaContinuousPreviewHarness')
+    cd /tmp/fidget-gacha-continuous-harness.qthi2T/Harness
+    builtin-copy -exclude .DS_Store -exclude CVS -exclude .svn -exclude .git -exclude .hg -exclude Headers -exclude PrivateHeaders -exclude Modules -exclude \*.tbd -resolve-src-symlinks /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/Library/Frameworks/Testing.framework /tmp/fidget-gacha-continuous-harness.qthi2T/HarnessDerivedData/Build/Products/Debug-iphonesimulator/GachaContinuousPreviewUITests-Runner.app/Frameworks
+
+Copy /tmp/fidget-gacha-continuous-harness.qthi2T/HarnessDerivedData/Build/Products/Debug-iphonesimulator/GachaContinuousPreviewUITests-Runner.app/Frameworks/libXCTestSwiftSupport.dylib /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/lib/libXCTestSwiftSupport.dylib (in target 'GachaContinuousPreviewUITests' from project 'GachaContinuousPreviewHarness')
+    cd /tmp/fidget-gacha-continuous-harness.qthi2T/Harness
+    builtin-copy -exclude .DS_Store -exclude CVS -exclude .svn -exclude .git -exclude .hg -exclude Headers -exclude PrivateHeaders -exclude Modules -exclude \*.tbd -resolve-src-symlinks /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/lib/libXCTestSwiftSupport.dylib /tmp/fidget-gacha-continuous-harness.qthi2T/HarnessDerivedData/Build/Products/Debug-iphonesimulator/GachaContinuousPreviewUITests-Runner.app/Frameworks
+
+Copy /tmp/fidget-gacha-continuous-harness.qthi2T/HarnessDerivedData/Build/Products/Debug-iphonesimulator/GachaContinuousPreviewUITests-Runner.app/Frameworks/XCUnit.framework /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/Library/PrivateFrameworks/XCUnit.framework (in target 'GachaContinuousPreviewUITests' from project 'GachaContinuousPreviewHarness')
+    cd /tmp/fidget-gacha-continuous-harness.qthi2T/Harness
+    builtin-copy -exclude .DS_Store -exclude CVS -exclude .svn -exclude .git -exclude .hg -exclude Headers -exclude PrivateHeaders -exclude Modules -exclude \*.tbd -resolve-src-symlinks /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/Library/PrivateFrameworks/XCUnit.framework /tmp/fidget-gacha-continuous-harness.qthi2T/HarnessDerivedData/Build/Products/Debug-iphonesimulator/GachaContinuousPreviewUITests-Runner.app/Frameworks
+
+Copy /tmp/fidget-gacha-continuous-harness.qthi2T/HarnessDerivedData/Build/Products/Debug-iphonesimulator/GachaContinuousPreviewUITests-Runner.app/Frameworks/XCUIAutomation.framework /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/Library/Frameworks/XCUIAutomation.framework (in target 'GachaContinuousPreviewUITests' from project 'GachaContinuousPreviewHarness')
+    cd /tmp/fidget-gacha-continuous-harness.qthi2T/Harness
+    builtin-copy -exclude .DS_Store -exclude CVS -exclude .svn -exclude .git -exclude .hg -exclude Headers -exclude PrivateHeaders -exclude Modules -exclude \*.tbd -resolve-src-symlinks /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/Library/Frameworks/XCUIAutomation.framework /tmp/fidget-gacha-continuous-harness.qthi2T/HarnessDerivedData/Build/Products/Debug-iphonesimulator/GachaContinuousPreviewUITests-Runner.app/Frameworks
+
+MkDir /tmp/fidget-gacha-continuous-harness.qthi2T/HarnessDerivedData/Build/Products/Debug-iphonesimulator/GachaContinuousPreviewUITests-Runner.app (in target 'GachaContinuousPreviewUITests' from project 'GachaContinuousPreviewHarness')
+    cd /tmp/fidget-gacha-continuous-harness.qthi2T/Harness
+    /bin/mkdir -p /tmp/fidget-gacha-continuous-harness.qthi2T/HarnessDerivedData/Build/Products/Debug-iphonesimulator/GachaContinuousPreviewUITests-Runner.app
+
+Copy /tmp/fidget-gacha-continuous-harness.qthi2T/HarnessDerivedData/Build/Products/Debug-iphonesimulator/GachaContinuousPreviewUITests-Runner.app/Frameworks/XCTestCore.framework /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/Library/PrivateFrameworks/XCTestCore.framework (in target 'GachaContinuousPreviewUITests' from project 'GachaContinuousPreviewHarness')
+    cd /tmp/fidget-gacha-continuous-harness.qthi2T/Harness
+    builtin-copy -exclude .DS_Store -exclude CVS -exclude .svn -exclude .git -exclude .hg -exclude Headers -exclude PrivateHeaders -exclude Modules -exclude \*.tbd -resolve-src-symlinks /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/Library/PrivateFrameworks/XCTestCore.framework /tmp/fidget-gacha-continuous-harness.qthi2T/HarnessDerivedData/Build/Products/Debug-iphonesimulator/GachaContinuousPreviewUITests-Runner.app/Frameworks
+
+RegisterExecutionPolicyException /tmp/fidget-gacha-continuous-harness.qthi2T/HarnessDerivedData/Build/Products/Debug-iphonesimulator/GachaContinuousPreviewUITests-Runner.app/PlugIns/GachaContinuousPreviewUITests.xctest (in target 'GachaContinuousPreviewUITests' from project 'GachaContinuousPreviewHarness')
+    cd /tmp/fidget-gacha-continuous-harness.qthi2T/Harness
+    builtin-RegisterExecutionPolicyException /tmp/fidget-gacha-continuous-harness.qthi2T/HarnessDerivedData/Build/Products/Debug-iphonesimulator/GachaContinuousPreviewUITests-Runner.app/PlugIns/GachaContinuousPreviewUITests.xctest
+
+Touch /tmp/fidget-gacha-continuous-harness.qthi2T/HarnessDerivedData/Build/Products/Debug-iphonesimulator/GachaContinuousPreviewUITests-Runner.app/PlugIns/GachaContinuousPreviewUITests.xctest (in target 'GachaContinuousPreviewUITests' from project 'GachaContinuousPreviewHarness')
+    cd /tmp/fidget-gacha-continuous-harness.qthi2T/Harness
+    /usr/bin/touch -c /tmp/fidget-gacha-continuous-harness.qthi2T/HarnessDerivedData/Build/Products/Debug-iphonesimulator/GachaContinuousPreviewUITests-Runner.app/PlugIns/GachaContinuousPreviewUITests.xctest
+
+2026-08-18 15:16:52.762901+0800 GachaContinuousPreviewUITests-Runner[44199:27612549] [Default] Running tests...
+    t =      nans Interface orientation changed to Portrait
+Test Suite 'Selected tests' started at 2026-08-18 15:16:53.270.
+Test Suite 'GachaContinuousPreviewUITests.xctest' started at 2026-08-18 15:16:53.270.
+Test Suite 'GachaContinuousPreviewUITests' started at 2026-08-18 15:16:53.271.
+Test Case '-[GachaContinuousPreviewUITests.GachaContinuousPreviewUITests testRecordShippingCarouselRivePackAndRealUnityReveal]' started.
+    t =     0.00s Start Test at 2026-08-18 15:16:53.271
+    t =     0.02s Set Up
+    t =     0.02s Open com.jiaweizhou.fidgetspinner.codex
+    t =     0.02s     Launch com.jiaweizhou.fidgetspinner.codex
+    t =     0.15s         Setting up automation session
+    t =     0.73s         Wait for com.jiaweizhou.fidgetspinner.codex to idle
+objc[44199]: Class UIAccessibilityLoaderWebShared is implemented in both /Library/Developer/CoreSimulator/Volumes/iOS_23E244/Library/Developer/CoreSimulator/Profiles/Runtimes/iOS 26.4.simruntime/Contents/Resources/RuntimeRoot/System/Library/AccessibilityBundles/WebCore.axbundle/WebCore (0x10afe8310) and /Library/Developer/CoreSimulator/Volumes/iOS_23E244/Library/Developer/CoreSimulator/Profiles/Runtimes/iOS 26.4.simruntime/Contents/Resources/RuntimeRoot/System/Library/AccessibilityBundles/WebKit.axbundle/WebKit (0x10ae24398). This may cause spurious casting failures and mysterious crashes. One of the duplicates must be removed or renamed.
+    t =    11.10s Wait for com.jiaweizhou.fidgetspinner.codex to become Running Foreground
+    t =    11.10s Find the Application 'com.jiaweizhou.fidgetspinner.codex'
+    t =    11.13s Find the Application 'com.jiaweizhou.fidgetspinner.codex'
+    t =    11.14s Find the Application 'com.jiaweizhou.fidgetspinner.codex'
+    t =    11.14s Find the Application 'com.jiaweizhou.fidgetspinner.codex'
+[ContinuousHarness] viewport=393.0x852.0
+    t =    11.14s Waiting 2.0s for "跳过" Button to exist
+    t =    12.18s     Checking `Expect predicate `existsNoRetry == 1` for object "跳过" Button`
+    t =    12.19s         Checking existence of `"跳过" Button`
+    t =    12.72s         Capturing element debug description
+    t =    13.14s     Checking `Expect predicate `existsNoRetry == 1` for object "跳过" Button`
+    t =    13.14s         Checking existence of `"跳过" Button`
+    t =    13.16s         Capturing element debug description
+    t =    13.16s     Checking existence of `"跳过" Button`
+    t =    13.17s Collecting debug information to assist test failure triage
+    t =    13.17s     Requesting snapshot of accessibility hierarchy for app with pid 44209
+    t =    13.19s Checking existence of `"gacha-store-entry" Any`
+    t =    13.21s Checking existence of `"盲盒" Button`
+    t =    13.22s Find the "盲盒" Button
+    t =    13.24s Checking existence of `"gacha-store-entry" Any`
+    t =    13.27s Tap "shippingbox" Button
+    t =    13.27s     Wait for com.jiaweizhou.fidgetspinner.codex to idle
+    t =    13.27s     Find the "shippingbox" Button
+    t =    13.29s     Check for interrupting elements affecting "shippingbox" Button
+    t =    13.30s     Synthesize event
+    t =    13.59s     Wait for com.jiaweizhou.fidgetspinner.codex to idle
+    t =    14.43s Checking existence of `"gacha-store-root" Any`
+    t =    14.53s Checking existence of `"gacha-return-home" Any`
+    t =    14.55s Checking existence of `"gacha-single-draw" Any`
+    t =    14.60s Find the "gacha-single-draw" Any
+    t =    14.64s Find the "gacha-single-draw" Button
+    t =    14.67s Tap "gacha-single-draw" Button
+    t =    14.67s     Wait for com.jiaweizhou.fidgetspinner.codex to idle
+    t =    14.68s     Find the "gacha-single-draw" Button
+    t =    14.72s     Check for interrupting elements affecting "gacha-single-draw" Button
+    t =    14.76s     Synthesize event
+    t =    15.05s     Wait for com.jiaweizhou.fidgetspinner.codex to idle
+    t =    15.05s Checking existence of `"gacha-pack-carousel" Any`
+    t =    15.18s Checking existence of `Any (First Match)`
+    t =    15.21s Checking existence of `"gacha-pack-tier-standard" Any`
+    t =    15.32s Checking existence of `"STANDARD Pack" Button`
+    t =    15.36s Checking existence of `"gacha-pack-tier-refined" Any`
+    t =    15.48s Checking existence of `"REFINED Pack" Button`
+    t =    15.52s Checking existence of `"gacha-pack-tier-signature" Any`
+    t =    15.66s Checking existence of `"SIGNATURE Pack" Button`
+    t =    15.70s Checking existence of `"gacha-pack-tier-chase" Any`
+    t =    15.82s Checking existence of `"CHASE Pack" Button`
+    t =    15.86s Checking existence of `"gacha-pack-tier-grail" Any`
+    t =    15.98s Checking existence of `"GRAIL Pack" Button`
+    t =    16.02s Checking existence of `"gacha-pack-tier-one-of-one" Any`
+    t =    16.22s Checking existence of `"1 OF 1 Pack" Button`
+    t =    16.27s Checking existence of `"gacha-pack-carousel" Any`
+    t =    16.39s Find the Any (First Match)
+[ContinuousHarness] carousel tiers=6 frame=(138.16666666666669, 101.0, 116.66666666666666, 24.0)
+    t =    16.41s Checking existence of `"gacha-pack-tier-signature" Any`
+    t =    16.53s Checking existence of `"SIGNATURE Pack" Button`
+    t =    16.57s Find the "SIGNATURE Pack" Button
+    t =    16.61s Checking existence of `"gacha-pack-tier-signature" Any`
+    t =    16.74s Tap "gacha-single-draw-sequence" Button
+    t =    16.74s     Wait for com.jiaweizhou.fidgetspinner.codex to idle
+    t =    16.74s     Find the "gacha-single-draw-sequence" Button
+    t =    16.78s     Check for interrupting elements affecting "gacha-single-draw-sequence" Button
+    t =    16.82s     Synthesize event
+    t =    17.11s     Wait for com.jiaweizhou.fidgetspinner.codex to idle
+    t =    17.12s Checking existence of `"gacha-pack-select" Any`
+    t =    17.25s Checking existence of `"选择 SIGNATURE" Button`
+    t =    17.30s Find the "选择 SIGNATURE" Button
+    t =    17.35s Find the "gacha-single-draw-sequence" Button
+    t =    17.39s Checking existence of `"gacha-pack-select" Any`
+    t =    17.52s Tap "gacha-single-draw-sequence" Button
+    t =    17.52s     Wait for com.jiaweizhou.fidgetspinner.codex to idle
+    t =    17.52s     Find the "gacha-single-draw-sequence" Button
+    t =    17.56s     Check for interrupting elements affecting "gacha-single-draw-sequence" Button
+    t =    17.60s     Synthesize event
+    t =    17.89s     Wait for com.jiaweizhou.fidgetspinner.codex to idle
+    t =    18.36s Checking existence of `"gacha-selection-rive" Any`
+    t =    18.47s Checking existence of `Any (First Match)`
+    t =    18.49s Checking existence of `"gacha-selection-rive" Any`
+    t =    18.59s Checking existence of `Any (First Match)`
+    t =    18.71s Checking existence of `"gacha-selection-rive" Any`
+    t =    18.82s Checking existence of `Any (First Match)`
+    t =    18.95s Checking existence of `"gacha-selection-rive" Any`
+    t =    19.05s Checking existence of `Any (First Match)`
+    t =    19.18s Checking existence of `"gacha-selection-rive" Any`
+    t =    19.31s Checking existence of `Any (First Match)`
+    t =    19.43s Checking existence of `"gacha-selection-rive" Any`
+    t =    19.54s Checking existence of `Any (First Match)`
+    t =    19.67s Checking existence of `"gacha-selection-rive" Any`
+    t =    19.77s Checking existence of `Any (First Match)`
+    t =    19.90s Checking existence of `"gacha-selection-rive" Any`
+    t =    20.00s Checking existence of `Any (First Match)`
+    t =    20.12s Checking existence of `"gacha-selection-rive" Any`
+    t =    20.22s Checking existence of `Any (First Match)`
+    t =    20.34s Checking existence of `"gacha-selection-rive" Any`
+    t =    20.45s Checking existence of `Any (First Match)`
+    t =    20.57s Checking existence of `"gacha-selection-rive" Any`
+    t =    20.67s Checking existence of `Any (First Match)`
+    t =    20.79s Checking existence of `"gacha-selection-rive" Any`
+    t =    20.90s Checking existence of `Any (First Match)`
+    t =    21.02s Checking existence of `"gacha-selection-rive" Any`
+    t =    21.13s Checking existence of `Any (First Match)`
+    t =    21.26s Checking existence of `"gacha-selection-rive" Any`
+    t =    21.35s Checking existence of `Any (First Match)`
+    t =    21.48s Checking existence of `"gacha-selection-rive" Any`
+    t =    21.59s Checking existence of `Any (First Match)`
+    t =    21.71s Checking existence of `"gacha-selection-rive" Any`
+    t =    21.82s Checking existence of `Any (First Match)`
+    t =    21.94s Checking existence of `"gacha-selection-rive" Any`
+    t =    22.04s Checking existence of `Any (First Match)`
+    t =    22.17s Checking existence of `"gacha-selection-rive" Any`
+    t =    22.27s Checking existence of `Any (First Match)`
+    t =    22.40s Checking existence of `"gacha-selection-rive" Any`
+    t =    22.50s Checking existence of `Any (First Match)`
+    t =    22.62s Checking existence of `"gacha-selection-rive" Any`
+    t =    22.73s Checking existence of `Any (First Match)`
+    t =    22.85s Checking existence of `"gacha-selection-rive" Any`
+    t =    22.96s Checking existence of `Any (First Match)`
+    t =    23.09s Checking existence of `"gacha-selection-rive" Any`
+    t =    23.20s Checking existence of `Any (First Match)`
+    t =    23.33s Checking existence of `"gacha-selection-rive" Any`
+    t =    23.43s Checking existence of `Any (First Match)`
+    t =    23.55s Checking existence of `"gacha-selection-rive" Any`
+    t =    23.65s Checking existence of `Any (First Match)`
+    t =    23.78s Checking existence of `"gacha-selection-rive" Any`
+    t =    23.88s Checking existence of `Any (First Match)`
+    t =    24.01s Checking existence of `"gacha-selection-rive" Any`
+    t =    24.11s Checking existence of `Any (First Match)`
+    t =    24.23s Checking existence of `"gacha-selection-rive" Any`
+    t =    24.34s Checking existence of `Any (First Match)`
+    t =    24.47s Checking existence of `"gacha-selection-rive" Any`
+    t =    24.57s Checking existence of `Any (First Match)`
+    t =    24.70s Checking existence of `"gacha-selection-rive" Any`
+    t =    24.81s Checking existence of `Any (First Match)`
+    t =    24.93s Checking existence of `"gacha-selection-rive" Any`
+    t =    25.04s Checking existence of `Any (First Match)`
+    t =    25.16s Checking existence of `"gacha-selection-rive" Any`
+    t =    25.27s Checking existence of `Any (First Match)`
+    t =    25.39s Checking existence of `"gacha-selection-rive" Any`
+    t =    25.49s Checking existence of `Any (First Match)`
+    t =    25.62s Checking existence of `"gacha-selection-rive" Any`
+    t =    25.71s Checking existence of `Any (First Match)`
+    t =    25.84s Checking existence of `"gacha-selection-rive" Any`
+    t =    25.95s Checking existence of `Any (First Match)`
+    t =    26.07s Checking existence of `"gacha-selection-rive" Any`
+    t =    26.18s Checking existence of `Any (First Match)`
+    t =    26.30s Checking existence of `"gacha-selection-rive" Any`
+    t =    26.40s Checking existence of `Any (First Match)`
+    t =    26.53s Checking existence of `"gacha-selection-rive" Any`
+    t =    26.63s Checking existence of `Any (First Match)`
+    t =    26.76s Checking existence of `"gacha-selection-rive" Any`
+    t =    26.87s Checking existence of `Any (First Match)`
+    t =    26.99s Checking existence of `"gacha-selection-rive" Any`
+    t =    27.08s Checking existence of `Any (First Match)`
+    t =    27.21s Checking existence of `"gacha-selection-rive" Any`
+    t =    27.30s Checking existence of `Any (First Match)`
+    t =    27.42s Checking existence of `"gacha-selection-rive" Any`
+    t =    27.51s Checking existence of `Any (First Match)`
+    t =    27.64s Checking existence of `"gacha-selection-rive" Any`
+    t =    27.73s Checking existence of `Any (First Match)`
+    t =    27.84s Checking existence of `"gacha-selection-rive" Any`
+    t =    27.94s Checking existence of `Any (First Match)`
+    t =    28.06s Checking existence of `"gacha-selection-rive" Any`
+    t =    28.17s Checking existence of `Any (First Match)`
+    t =    28.29s Checking existence of `"gacha-selection-rive" Any`
+    t =    28.41s Checking existence of `Any (First Match)`
+    t =    28.54s Checking existence of `"gacha-selection-rive" Any`
+    t =    28.63s Checking existence of `Any (First Match)`
+    t =    28.75s Checking existence of `"gacha-selection-rive" Any`
+    t =    28.84s Checking existence of `Any (First Match)`
+    t =    28.97s Checking existence of `"gacha-selection-rive" Any`
+    t =    29.07s Checking existence of `Any (First Match)`
+    t =    29.20s Checking existence of `"gacha-selection-rive" Any`
+    t =    29.30s Checking existence of `Any (First Match)`
+    t =    29.42s Checking existence of `"gacha-selection-rive" Any`
+    t =    29.52s Checking existence of `Any (First Match)`
+    t =    29.64s Checking existence of `"gacha-selection-rive" Any`
+    t =    29.74s Checking existence of `Any (First Match)`
+    t =    29.86s Checking existence of `"gacha-selection-rive" Any`
+    t =    29.96s Checking existence of `Any (First Match)`
+    t =    30.09s Checking existence of `"gacha-selection-rive" Any`
+    t =    30.19s Checking existence of `Any (First Match)`
+    t =    30.31s Checking existence of `"gacha-selection-rive" Any`
+    t =    30.41s Checking existence of `Any (First Match)`
+    t =    30.46s Checking existence of `Any (First Match)`
+    t =    30.51s Checking existence of `"gacha-pack-tear-target" Any`
+    t =    30.60s Checking existence of `Any (First Match)`
+    t =    30.62s Checking existence of `"gacha-pack-tear-target" Any`
+    t =    30.71s Find the Any (First Match)
+[ContinuousHarness] sealed-pack-frame=(74.66666666666666, 256.3333333333333, 243.99999999999997, 325.3333333333333)
+    t =    30.74s Press "gacha-single-draw-sequence" Image[0.20, 0.50] for 0.1 seconds, then drag to "gacha-single-draw-sequence" Image[0.20, 0.50] -> (121.0, 0.0) with velocity of 250.00 pixels per second, and then hold for 0.1 seconds 
+    t =    30.74s     Wait for com.jiaweizhou.fidgetspinner.codex to idle
+    t =    30.74s     Find the "gacha-single-draw-sequence" Image
+    t =    30.76s     Check for interrupting elements affecting "gacha-single-draw-sequence" Image
+    t =    30.83s     Synthesize event
+    t =    30.83s         Find the "gacha-single-draw-sequence" Image
+    t =    30.86s         Find the "gacha-single-draw-sequence" Image
+    t =    30.89s         Find the "gacha-single-draw-sequence" Image
+    t =    30.91s         Find the "gacha-single-draw-sequence" Image
+    t =    30.94s         Find the "gacha-single-draw-sequence" Image
+    t =    31.87s     Wait for com.jiaweizhou.fidgetspinner.codex to idle
+    t =    32.88s Checking existence of `"gacha-single-draw-sequence" Image`
+    t =    32.90s Checking existence of `"gacha-pack-state" Any`
+    t =    33.02s Checking existence of `Any (First Match)`
+    t =    33.04s Find the Any (First Match)
+[ContinuousHarness] tear-rebound progress=0.55 threshold=0.62
+    t =    33.06s Press "gacha-single-draw-sequence" Image[0.20, 0.50] for 0.1 seconds, then drag to "gacha-single-draw-sequence" Image[0.20, 0.50] -> (165.0, 0.0) with velocity of 250.00 pixels per second, and then hold for 0.1 seconds 
+    t =    33.06s     Wait for com.jiaweizhou.fidgetspinner.codex to idle
+    t =    33.07s     Find the "gacha-single-draw-sequence" Image
+    t =    33.09s     Check for interrupting elements affecting "gacha-single-draw-sequence" Image
+    t =    33.16s     Synthesize event
+    t =    33.16s         Find the "gacha-single-draw-sequence" Image
+    t =    33.19s         Find the "gacha-single-draw-sequence" Image
+    t =    33.21s         Find the "gacha-single-draw-sequence" Image
+    t =    33.24s         Find the "gacha-single-draw-sequence" Image
+    t =    33.27s         Find the "gacha-single-draw-sequence" Image
+    t =    34.36s     Wait for com.jiaweizhou.fidgetspinner.codex to idle
+    t =    34.37s Waiting 10.0s for "gacha-single-draw-sequence" Image to not exist
+    t =    35.41s     Checking `Expect predicate `existsNoRetry == 0` for object "gacha-single-draw-sequence" Image`
+    t =    35.41s         Checking existence of `"gacha-single-draw-sequence" Image`
+[ContinuousHarness] tear-commit progress=0.75 threshold=0.62
+    t =    35.46s Checking existence of `"gacha-holder-rive" Any`
+    t =    35.56s Checking existence of `Any (First Match)`
+    t =    35.58s Checking existence of `"gacha-holder-rive" Any`
+    t =    35.69s Checking existence of `Any (First Match)`
+    t =    35.81s Checking existence of `"gacha-holder-rive" Any`
+    t =    35.92s Checking existence of `Any (First Match)`
+    t =    36.05s Checking existence of `"gacha-holder-rive" Any`
+    t =    36.15s Checking existence of `Any (First Match)`
+    t =    36.27s Checking existence of `"gacha-holder-rive" Any`
+    t =    36.37s Checking existence of `Any (First Match)`
+    t =    36.49s Checking existence of `"gacha-holder-rive" Any`
+    t =    36.59s Checking existence of `Any (First Match)`
+    t =    36.72s Checking existence of `"gacha-holder-rive" Any`
+    t =    36.82s Checking existence of `Any (First Match)`
+    t =    36.95s Checking existence of `"gacha-holder-rive" Any`
+    t =    37.05s Checking existence of `Any (First Match)`
+    t =    37.18s Checking existence of `"gacha-holder-rive" Any`
+    t =    37.27s Checking existence of `Any (First Match)`
+    t =    37.39s Checking existence of `"gacha-holder-rive" Any`
+    t =    37.50s Checking existence of `Any (First Match)`
+    t =    37.62s Checking existence of `"gacha-holder-rive" Any`
+    t =    37.73s Checking existence of `Any (First Match)`
+    t =    37.85s Checking existence of `"gacha-holder-rive" Any`
+    t =    37.95s Checking existence of `Any (First Match)`
+    t =    38.08s Checking existence of `"gacha-holder-rive" Any`
+    t =    38.19s Checking existence of `Any (First Match)`
+    t =    38.32s Checking existence of `"gacha-holder-rive" Any`
+    t =    38.42s Checking existence of `Any (First Match)`
+    t =    38.55s Checking existence of `"gacha-holder-rive" Any`
+    t =    38.65s Checking existence of `Any (First Match)`
+    t =    38.77s Checking existence of `"gacha-holder-rive" Any`
+    t =    38.87s Checking existence of `Any (First Match)`
+    t =    39.00s Checking existence of `"gacha-holder-rive" Any`
+    t =    39.10s Checking existence of `Any (First Match)`
+    t =    39.22s Checking existence of `"gacha-holder-rive" Any`
+    t =    39.32s Checking existence of `Any (First Match)`
+    t =    39.45s Checking existence of `"gacha-holder-rive" Any`
+    t =    39.55s Checking existence of `Any (First Match)`
+    t =    39.67s Checking existence of `"gacha-holder-rive" Any`
+    t =    39.76s Checking existence of `Any (First Match)`
+    t =    39.89s Checking existence of `"gacha-holder-rive" Any`
+    t =    40.00s Checking existence of `Any (First Match)`
+    t =    40.12s Checking existence of `"gacha-holder-rive" Any`
+    t =    40.22s Checking existence of `Any (First Match)`
+    t =    40.35s Checking existence of `"gacha-holder-rive" Any`
+    t =    40.45s Checking existence of `Any (First Match)`
+    t =    40.58s Checking existence of `"gacha-holder-rive" Any`
+    t =    40.68s Checking existence of `Any (First Match)`
+    t =    40.80s Checking existence of `"gacha-holder-rive" Any`
+    t =    40.90s Checking existence of `Any (First Match)`
+    t =    41.02s Checking existence of `"gacha-holder-rive" Any`
+    t =    41.13s Checking existence of `Any (First Match)`
+    t =    41.25s Checking existence of `"gacha-holder-rive" Any`
+    t =    41.35s Checking existence of `Any (First Match)`
+    t =    41.47s Checking existence of `"gacha-holder-rive" Any`
+    t =    41.57s Checking existence of `Any (First Match)`
+    t =    41.69s Checking existence of `"gacha-holder-rive" Any`
+    t =    41.79s Checking existence of `Any (First Match)`
+    t =    41.92s Checking existence of `"gacha-holder-rive" Any`
+    t =    42.02s Checking existence of `Any (First Match)`
+    t =    42.14s Checking existence of `"gacha-holder-rive" Any`
+    t =    42.25s Checking existence of `Any (First Match)`
+    t =    42.37s Checking existence of `"gacha-holder-rive" Any`
+    t =    42.47s Checking existence of `Any (First Match)`
+    t =    42.60s Checking existence of `"gacha-holder-rive" Any`
+    t =    42.72s Checking existence of `Any (First Match)`
+    t =    42.85s Checking existence of `"gacha-holder-rive" Any`
+    t =    42.95s Checking existence of `Any (First Match)`
+    t =    43.07s Checking existence of `"gacha-holder-rive" Any`
+    t =    43.18s Checking existence of `Any (First Match)`
+    t =    43.31s Checking existence of `"gacha-holder-rive" Any`
+    t =    43.41s Checking existence of `Any (First Match)`
+    t =    43.53s Checking existence of `"gacha-holder-rive" Any`
+    t =    43.63s Checking existence of `Any (First Match)`
+    t =    43.75s Checking existence of `"gacha-holder-rive" Any`
+    t =    43.84s Checking existence of `Any (First Match)`
+    t =    43.97s Checking existence of `"gacha-holder-rive" Any`
+    t =    44.07s Checking existence of `Any (First Match)`
+    t =    44.20s Checking existence of `"gacha-holder-rive" Any`
+    t =    44.29s Checking existence of `Any (First Match)`
+    t =    44.41s Checking existence of `"gacha-holder-rive" Any`
+    t =    44.49s Checking existence of `Any (First Match)`
+    t =    44.61s Checking existence of `"gacha-holder-rive" Any`
+    t =    44.70s Checking existence of `Any (First Match)`
+    t =    44.82s Checking existence of `"gacha-holder-rive" Any`
+    t =    44.91s Checking existence of `Any (First Match)`
+    t =    45.03s Checking existence of `"gacha-holder-rive" Any`
+    t =    45.13s Checking existence of `Any (First Match)`
+    t =    45.26s Checking existence of `"gacha-holder-rive" Any`
+    t =    45.35s Checking existence of `Any (First Match)`
+    t =    45.47s Checking existence of `"gacha-holder-rive" Any`
+    t =    45.57s Checking existence of `Any (First Match)`
+    t =    45.68s Checking existence of `"gacha-holder-rive" Any`
+    t =    45.78s Checking existence of `Any (First Match)`
+    t =    45.91s Checking existence of `"gacha-holder-rive" Any`
+    t =    45.99s Checking existence of `Any (First Match)`
+    t =    46.11s Checking existence of `"gacha-holder-rive" Any`
+    t =    46.20s Checking existence of `Any (First Match)`
+    t =    46.32s Checking existence of `"gacha-holder-rive" Any`
+    t =    46.41s Checking existence of `Any (First Match)`
+    t =    46.53s Checking existence of `"gacha-holder-rive" Any`
+    t =    46.62s Checking existence of `Any (First Match)`
+    t =    46.74s Checking existence of `"gacha-holder-rive" Any`
+    t =    46.85s Checking existence of `Any (First Match)`
+    t =    46.97s Checking existence of `"gacha-holder-rive" Any`
+    t =    47.08s Checking existence of `Any (First Match)`
+    t =    47.20s Checking existence of `"gacha-holder-rive" Any`
+    t =    47.30s Checking existence of `Any (First Match)`
+    t =    47.35s Checking existence of `"gacha-3d-reveal-root" Any`
+    t =    47.53s Checking existence of `"gacha-3d-reveal-root" Any`
+    t =    47.73s Checking existence of `"gacha-3d-reveal-root" Any`
+    t =    47.94s Checking existence of `"gacha-3d-reveal-root" Any`
+    t =    48.14s Checking existence of `"gacha-3d-reveal-root" Any`
+    t =    48.36s Checking existence of `"gacha-3d-reveal-root" Any`
+    t =    48.57s Checking existence of `"gacha-3d-reveal-root" Any`
+    t =    48.77s Checking existence of `"gacha-3d-reveal-root" Any`
+    t =    48.97s Checking existence of `"gacha-3d-reveal-root" Any`
+    t =    49.16s Checking existence of `"gacha-3d-reveal-root" Any`
+    t =    49.36s Checking existence of `"gacha-3d-reveal-root" Any`
+    t =    49.56s Checking existence of `"gacha-3d-reveal-root" Any`
+    t =    49.76s Checking existence of `"gacha-3d-reveal-root" Any`
+    t =    49.96s Checking existence of `"gacha-3d-reveal-root" Any`
+    t =    50.16s Checking existence of `"gacha-3d-reveal-root" Any`
+    t =    50.37s Checking existence of `"gacha-3d-reveal-root" Any`
+    t =    50.57s Checking existence of `"gacha-3d-reveal-root" Any`
+    t =    50.77s Checking existence of `"gacha-3d-reveal-root" Any`
+    t =    50.96s Checking existence of `"gacha-3d-reveal-root" Any`
+    t =    51.16s Checking existence of `"gacha-3d-reveal-root" Any`
+    t =    51.35s Checking existence of `"gacha-3d-reveal-root" Any`
+    t =    51.55s Checking existence of `"gacha-3d-reveal-root" Any`
+    t =    51.74s Checking existence of `"gacha-3d-reveal-root" Any`
+    t =    51.95s Checking existence of `"gacha-3d-reveal-root" Any`
+    t =    52.14s Checking existence of `"gacha-3d-reveal-root" Any`
+    t =    52.34s Checking existence of `"gacha-3d-reveal-root" Any`
+    t =    52.54s Checking existence of `"gacha-3d-reveal-root" Any`
+    t =    52.73s Checking existence of `"gacha-3d-reveal-root" Any`
+    t =    52.93s Checking existence of `"gacha-3d-reveal-root" Any`
+    t =    53.12s Checking existence of `"gacha-3d-reveal-root" Any`
+    t =    53.32s Checking existence of `"gacha-3d-reveal-root" Any`
+    t =    53.51s Checking existence of `"gacha-3d-reveal-root" Any`
+    t =    53.70s Checking existence of `"gacha-3d-reveal-root" Any`
+    t =    53.90s Checking existence of `"gacha-3d-reveal-root" Any`
+    t =    54.08s Checking existence of `"gacha-3d-reveal-root" Any`
+    t =    54.28s Checking existence of `"gacha-3d-reveal-root" Any`
+    t =    54.48s Checking existence of `"gacha-3d-reveal-root" Any`
+    t =    54.68s Checking existence of `"gacha-3d-reveal-root" Any`
+    t =    54.87s Checking existence of `"gacha-3d-reveal-root" Any`
+    t =    55.07s Checking existence of `"gacha-3d-reveal-root" Any`
+    t =    55.25s Checking existence of `"gacha-3d-reveal-root" Any`
+    t =    55.45s Checking existence of `"gacha-3d-reveal-root" Any`
+    t =    55.65s Checking existence of `"gacha-3d-reveal-root" Any`
+    t =    55.83s Checking existence of `"gacha-3d-reveal-root" Any`
+    t =    56.02s Checking existence of `"gacha-3d-reveal-root" Any`
+    t =    56.21s Checking existence of `"gacha-3d-reveal-root" Any`
+    t =    56.40s Checking existence of `"gacha-3d-reveal-root" Any`
+    t =    56.59s Checking existence of `"gacha-3d-reveal-root" Any`
+    t =    56.79s Checking existence of `"gacha-3d-reveal-root" Any`
+    t =    56.98s Checking existence of `"gacha-3d-reveal-root" Any`
+    t =    57.20s Checking existence of `"gacha-3d-reveal-root" Any`
+    t =    57.40s Checking existence of `"gacha-3d-reveal-root" Any`
+    t =    57.59s Checking existence of `"gacha-3d-reveal-root" Any`
+    t =    57.80s Checking existence of `"gacha-3d-reveal-root" Any`
+    t =    57.99s Checking existence of `"gacha-3d-reveal-root" Any`
+    t =    58.20s Checking existence of `"gacha-3d-reveal-root" Any`
+    t =    58.39s Checking existence of `"gacha-3d-reveal-root" Any`
+    t =    58.60s Checking existence of `"gacha-3d-reveal-root" Any`
+    t =    58.80s Checking existence of `"gacha-3d-reveal-root" Any`
+    t =    59.00s Checking existence of `"gacha-3d-reveal-root" Any`
+    t =    59.21s Checking existence of `"gacha-3d-reveal-root" Any`
+    t =    59.45s Checking existence of `"gacha-3d-reveal-root" Any`
+    t =    59.66s Checking existence of `"gacha-3d-reveal-root" Any`
+    t =    59.86s Checking existence of `"gacha-3d-reveal-root" Any`
+    t =    60.06s Checking existence of `"gacha-3d-reveal-root" Any`
+    t =    60.26s Checking existence of `"gacha-3d-reveal-root" Any`
+    t =    60.46s Checking existence of `"gacha-3d-reveal-root" Any`
+    t =    60.67s Checking existence of `"gacha-3d-reveal-root" Any`
+    t =    60.86s Checking existence of `"gacha-3d-reveal-root" Any`
+    t =    61.05s Checking existence of `"gacha-3d-reveal-root" Any`
+    t =    61.24s Checking existence of `"gacha-3d-reveal-root" Any`
+    t =    61.44s Checking existence of `"gacha-3d-reveal-root" Any`
+    t =    61.64s Checking existence of `"gacha-3d-reveal-root" Any`
+    t =    61.84s Checking existence of `"gacha-3d-reveal-root" Any`
+    t =    62.04s Checking existence of `"gacha-3d-reveal-root" Any`
+    t =    62.24s Checking existence of `"gacha-3d-reveal-root" Any`
+    t =    62.44s Requesting snapshot of accessibility hierarchy for app with pid 44209
+    t =    62.63s Requesting snapshot of accessibility hierarchy for app with pid 44209
+/tmp/fidget-gacha-continuous-harness.qthi2T/Harness/GachaContinuousPreviewUITests/GachaContinuousPreviewUITests.swift:284: error: -[GachaContinuousPreviewUITests.GachaContinuousPreviewUITests testRecordShippingCarouselRivePackAndRealUnityReveal] : failed - real Unity reveal root never mounted. Hierarchy:
+Optional(Attributes: Application, 0x116e69040, pid: 44209, label: 'Fidget Spinner'
+Element subtree:
+ →Application, 0x116e69040, pid: 44209, label: 'Fidget Spinner'
+    Window (Main), 0x116e68140, {{0.0, 0.0}, {393.0, 852.0}}
+      Other, 0x116e69540, {{0.0, 0.0}, {393.0, 852.0}}
+        Other, 0x116e69680, {{0.0, 0.0}, {393.0, 852.0}}
+          Other, 0x116e68000, {{-393.0, -852.0}, {1179.0, 2556.0}}
+          Other, 0x116e68dc0, {{0.0, 0.0}, {393.0, 852.0}}
+            Other, 0x116e6a080, {{0.0, 0.0}, {393.0, 108.0}}
+              Other, 0x116e692c0, {{0.0, 0.0}, {393.0, 108.0}}
+                StaticText, 0x116e69900, {{158.7, 72.0}, {75.7, 17.0}}, label: 'Fidgeting'
+                Button, 0x116e69a40, {{20.0, 58.7}, {44.0, 44.0}}, identifier: 'progression-top-avatar', label: '成长头像，等级 1，本级进度 0%'
+                  Other, 0x116e69b80, {{20.0, 58.7}, {44.0, 44.0}}
+                  Image, 0x116e69cc0, {{32.0, 70.7}, {20.0, 20.0}}, identifier: 'person.crop.circle', label: 'Account'
+                  StaticText, 0x116e69e00, {{50.7, 89.7}, {4.7, 8.0}}, label: '1'
+                Button, 0x116e69f40, {{282.0, 61.7}, {38.0, 38.0}}, identifier: 'shippingbox', label: '盲盒'
+                Button, 0x116e68b40, {{332.0, 61.7}, {38.0, 38.0}}, identifier: 'gearshape', label: '设置'
+            Other, 0x116e68c80, {{0.0, 0.0}, {393.0, 852.0}}
+              Other, 0x116e68280, {{0.0, 0.0}, {393.0, 852.0}}
+            Other, 0x116e683c0, {{0.0, 108.0}, {393.0, 744.0}}
+              Other, 0x116e68500, {{0.0, 108.0}, {393.0, 744.0}}
+                StaticText, 0x116e68640, {{146.5, 126.0}, {100.0, 39.0}}, label: '三叶尖金属, 基础合金 · LV.1'
+                  StaticText, 0x116e68780, {{146.5, 126.0}, {100.0, 20.0}}, label: '三叶尖金属'
+                  StaticText, 0x116e688c0, {{146.8, 150.0}, {99.3, 15.0}}, label: '基础合金 · LV.1'
+                CollectionView, 0x116e69400, {{0.0, 165.0}, {393.0, 537.0}}, identifier: 'library-model-carousel'
+                  Cell, 0x116e6a300, {{0.0, 165.0}, {393.0, 537.0}}
+                    Other, 0x116e6a440, {{0.0, 165.0}, {393.0, 537.0}}
+                      Other, 0x116e6a580, {{0.0, 165.0}, {393.0, 537.0}}
+                        Other, 0x116e6a6c0, {{0.0, 165.0}, {393.0, 537.0}}
+                          Other, 0x116e6a800, {{0.0, 165.0}, {393.0, 537.0}}
+                  Other, 0x116e6a940, {{360.0, 165.0}, {30.0, 537.0}}, label: 'Vertical scroll bar, 6 pages', value: 0%
+                    Other, 0x116e6aa80, {{387.0, 692.0}, {3.0, 7.0}}
+                  Other, 0x116e6abc0, {{360.0, 165.0}, {30.0, 537.0}}, label: 'Vertical scroll bar, 6 pages', value: 0%
+                    Other, 0x116e6ad00, {{387.0, 692.0}, {3.0, 7.0}}
+                PageIndicator, 0x116e6ae40, {{0.0, 680.3}, {393.0, 14.7}}, identifier: 'library-model-carousel', value: page 1 of 6
+                Button, 0x116e6af80, {{23.6, 701.7}, {345.7, 42.7}}, label: '查看收藏盒'
+                Button, 0x116e6b0c0, {{24.0, 752.0}, {345.0, 52.0}}, label: '进入 三叶尖金属'
+                  StaticText, 0x116e6b200, {{24.0, 752.0}, {345.0, 52.0}}, label: '进入 三叶尖金属'
+      Other, 0x116e6b340, {{0.0, 0.0}, {393.0, 852.0}}
+        Other, 0x116e6b480, {{-393.0, -852.0}, {1179.0, 2556.0}}
+        Other, 0x116e6b5c0, {{0.0, 59.0}, {393.0, 793.0}}
+          Other, 0x116e6b700, {{0.0, 59.0}, {393.0, 793.0}}
+            Other, 0x116e6b840, {{0.0, 59.0}, {393.0, 793.0}}
+              Other, 0x116e6b980, {{0.0, 59.0}, {393.0, 793.0}}
+                Other, 0x116e6bac0, {{0.0, 59.0}, {393.0, 793.0}}
+                  Button, 0x116e6bc00, {{20.0, 71.0}, {56.0, 14.0}}, identifier: 'gacha-return-home', label: '返回主页', Disabled
+                    StaticText, 0x116e6bd40, {{20.0, 71.0}, {56.0, 14.0}}, label: '返回主页', Disabled
+                  StaticText, 0x116e6be80, {{325.0, 72.0}, {48.0, 12.0}}, label: '机巧工坊'
+                  StaticText, 0x116c83d40, {{20.0, 102.5}, {135.0, 27.0}}, label: '抽取与收藏'
+                  StaticText, 0x116c835c0, {{20.0, 132.5}, {148.7, 11.0}}, label: '票券抽取 · 外观收藏 · 图纸兑换'
+                  Image, 0x116c83700, {{232.0, 117.7}, {15.0, 10.7}}, identifier: 'ticket.fill', label: 'Trailers'
+                  StaticText, 0x116c83840, {{254.3, 112.0}, {7.7, 13.0}}, label: '0'
+                  StaticText, 0x116c83980, {{254.3, 125.0}, {27.0, 9.0}}, label: '抽取券'
+                  Image, 0x116c83ac0, {{312.3, 116.3}, {16.7, 13.3}}, identifier: 'gearshape.2.fill', label: 'Advanced'
+                  StaticText, 0x116c83c00, {{336.0, 112.0}, {7.7, 13.0}}, label: '0'
+                  StaticText, 0x116d4a6c0, {{336.0, 125.0}, {27.0, 9.0}}, label: '齿轮币'
+                  Button, 0x116d4a800, {{20.0, 163.0}, {99.7, 32.0}}, label: '抽取 / 兑换', Selected
+                    Image, 0x116d4a940, {{33.3, 174.3}, {10.0, 9.7}}, identifier: 'checkmark', label: 'Selected', Selected
+                    StaticText, 0x116d4aa80, {{48.7, 173.0}, {59.0, 12.0}}, label: '抽取 / 兑换'
+                  Button, 0x116d4abc0, {{127.7, 163.0}, {48.0, 32.0}}, label: '收藏'
+                    StaticText, 0x116d4ad00, {{139.7, 173.0}, {24.0, 12.0}}, label: '收藏'
+                  CollectionView, 0x116d4bd40, {{0.0, 209.0}, {393.0, 609.0}}
+                    Cell, 0x10767ed00, {{0.0, 209.0}, {393.0, 609.0}}
+                      Other, 0x10767ee40, {{0.0, 209.0}, {393.0, 609.0}}
+                        Other, 0x116fec000, {{0.0, 209.0}, {393.0, 609.0}}
+                          Other, 0x116fec140, {{0.0, 209.0}, {393.0, 609.0}}
+                            ScrollView, 0x116fec280, {{0.0, 209.0}, {393.0, 609.0}}
+                              Other, 0x116fec3c0, {{0.0, 209.0}, {393.0, 1326.0}}
+                                StaticText, 0x116fec500, {{-2.0, 188.3}, {375.0, 246.7}}, identifier: 'gacha-pack-entry', label: '峡谷矿脉，STANDARD 抽取包装，消耗一张抽取券'
+                                  Image, 0x116fec640, {{20.3, 217.0}, {157.3, 210.0}}
+                                  Image, 0x116fec780, {{20.3, 217.0}, {157.3, 210.0}}
+                                  Other, 0x116fec8c0, {{-2.0, 188.3}, {202.0, 1.3}}
+                                  StaticText, 0x116feca00, {{186.0, 279.0}, {102.0, 13.0}}, label: 'FIDGET ARCHIVE'
+                                  StaticText, 0x116fecb40, {{186.0, 300.0}, {92.0, 23.0}}, label: '峡谷矿脉'
+                                  StaticText, 0x116fecc80, {{186.0, 331.0}, {119.7, 15.0}}, label: 'STANDARD PACK'
+                                  StaticText, 0x116fecdc0, {{186.0, 354.0}, {127.3, 11.0}}, label: '1 张抽取券 · 向右撕开封边'
+                                Other, 0x116fecf00, {{20.0, 391.7}, {353.0, 353.0}}, label: '本期主推，三叶金属，商品展示尚未开放购买'
+                                  Image, 0x116fed040, {{20.0, 391.7}, {353.0, 353.0}}
+                                  Other, 0x116fed180, {{36.0, 560.0}, {60.0, 26.0}}, label: '本期主推'
+                                    StaticText, 0x116fed2c0, {{46.0, 568.0}, {40.0, 10.0}}, label: '本期主推'
+                                  Other, 0x116fed400, {{104.0, 560.0}, {60.0, 26.0}}, label: '精选陀螺'
+                                    StaticText, 0x116fed540, {{114.0, 568.0}, {40.0, 10.0}}, label: '精选陀螺'
+                                  StaticText, 0x116fed680, {{36.0, 594.0}, {108.0, 27.0}}, label: '三叶金属'
+                                  StaticText, 0x116fed7c0, {{36.0, 629.0}, {192.0, 13.0}}, label: '全尺寸金属转子 · 十档同系列皮肤'
+                                  StaticText, 0x116fed900, {{36.0, 650.0}, {118.3, 11.0}}, label: '商品展示 · 尚未开放购买'
+                                StaticText, 0x116feda40, {{20.0, 701.0}, {90.0, 18.0}}, label: '同系列皮肤'
+                                StaticText, 0x116fedb80, {{329.0, 704.5}, {44.0, 11.0}}, label: '三叶金属'
+                                ScrollView, 0x116fedcc0, {{20.0, 729.0}, {353.0, 182.0}}
+                                  Other, 0x116fede00, {{20.0, 729.0}, {516.0, 182.0}}
+                                    Image, 0x116fedf40, {{30.0, 729.0}, {144.0, 144.0}}
+                                    Image, 0x116fee080, {{206.0, 729.0}, {144.0, 144.0}}
+                                    Image, 0x116fee1c0, {{382.0, 729.0}, {144.0, 144.0}}
+                                    StaticText, 0x116fee300, {{30.0, 870.0}, {56.0, 14.0}}, label: '镜铬极光'
+                                    StaticText, 0x116fee440, {{206.0, 870.0}, {56.0, 14.0}}, label: '星陨黑曜'
+                                    StaticText, 0x116fee580, {{382.0, 870.0}, {56.0, 14.0}}, label: '钛虹热变'
+                                    StaticText, 0x116fee6c0, {{30.0, 891.0}, {78.0, 10.0}}, label: 'LV.100 · 镜面精钢'
+                                    StaticText, 0x116fee800, {{206.0, 891.0}, {73.0, 10.0}}, label: 'LV.90 · 黑曜 DLC'
+                                    StaticText, 0x116fee940, {{382.0, 891.0}, {82.3, 10.0}}, label: 'LV.75 · 阳极氧化钛'
+                                StaticText, 0x116feea80, {{36.0, 951.0}, {112.0, 14.0}}, label: '齿轮币不用于抽取'
+                                StaticText, 0x116feebc0, {{36.0, 969.0}, {297.0, 11.0}}, label: '抽取只消耗抽取券；齿轮币保留给打造和已拥有外观的定制。'
+                                Button, 0x116feed00, {{36.0, 1042.0}, {84.0, 32.0}}, label: '概率与保底'
+                                Other, 0x116feee40, {{297.0, 1045.0}, {60.0, 26.0}}, label: '峡谷矿脉'
+                                  StaticText, 0x116feef80, {{305.0, 1052.5}, {44.0, 11.0}}, label: '峡谷矿脉'
+                                StaticText, 0x116fef0c0, {{36.0, 1088.0}, {198.0, 11.0}}, label: '查看抽取概率、保底进度与重复兑换规则'
+                                StaticText, 0x116fef200, {{36.0, 1155.0}, {36.0, 18.0}}, label: '兑换'
+                                StaticText, 0x116fef340, {{315.0, 1158.5}, {42.0, 11.0}}, label: '合金屑 0'
+                                StaticText, 0x116fef480, {{49.0, 1193.5}, {52.0, 13.0}}, label: '板岩内衬'
+                                Button, 0x116fef5c0, {{331.7, 1200.0}, {7.0, 12.0}}, label: '4', Disabled
+                                StaticText, 0x116fef700, {{49.0, 1208.5}, {67.7, 10.0}}, label: '标准 · 展示底座'
+                                StaticText, 0x116fef840, {{49.0, 1248.5}, {65.0, 13.0}}, label: '岩层纹贴纸'
+                                Button, 0x116fef980, {{331.7, 1255.0}, {7.0, 12.0}}, label: '4', Disabled
+                                StaticText, 0x116fefac0, {{49.0, 1263.5}, {47.7, 10.0}}, label: '标准 · 贴纸'
+                                StaticText, 0x116fefc00, {{49.0, 1303.5}, {52.0, 13.0}}, label: '矿尘贴纸'
+                                Button, 0x116fefd40, {{331.7, 1310.0}, {7.0, 12.0}}, label: '4', Disabled
+                                StaticText, 0x116fefe80, {{49.0, 1318.5}, {47.7, 10.0}}, label: '标准 · 贴纸'
+                                StaticText, 0x116ff4000, {{49.0, 1358.5}, {65.0, 13.0}}, label: '玄武岩底座'
+                                Button, 0x116ff4140, {{331.7, 1365.0}, {7.0, 12.0}}, label: '4', Disabled
+                                StaticText, 0x116ff4280, {{49.0, 1373.5}, {67.7, 10.0}}, label: '标准 · 展示底座'
+                    Other, 0x116ff43c0, {{360.0, 209.0}, {30.0, 588.0}}, label: 'Vertical scroll bar, 2 pages', value: 0%
+                      Other, 0x116ff4500, {{387.0, 801.0}, {3.0, 7.0}}
+                    Other, 0x116ff4640, {{360.0, 209.0}, {30.0, 588.0}}, label: 'Vertical scroll bar, 2 pages', value: 0%
+                      Other, 0x116ff4780, {{387.0, 801.0}, {3.0, 7.0}}
+                  StaticText, 0x116ff48c0, {{20.0, 715.0}, {85.0, 12.0}}, label: '消耗 1 张抽取券'
+                  StaticText, 0x116ff4a00, {{20.0, 731.0}, {44.7, 11.0}}, label: '剩余 0 张'
+                  Other, 0x116ff4b40, {{291.0, 715.7}, {82.0, 26.0}}, label: '十抽后续开放'
+                    StaticText, 0x116ff4c80, {{299.0, 723.0}, {66.0, 11.0}}, label: '十抽后续开放'
+                  Button, 0x116ff4dc0, {{20.0, 754.0}, {353.0, 52.0}}, identifier: 'gacha-single-draw', label: '抽取中', value: 处理中, Disabled
+                    Other, 0x116ff4f00, {{20.0, 754.0}, {353.0, 52.0}}, label: '抽取中', value: 处理中, Disabled
+                      ActivityIndicator, 0x116ff5040, {{160.0, 773.0}, {14.0, 14.0}}, value: 1, Disabled
+                        ActivityIndicator, 0x116ff5180, {{160.0, 773.0}, {14.0, 14.0}}, value: 1
+                      StaticText, 0x116ff52c0, {{20.0, 754.0}, {353.0, 52.0}}, label: '抽取中', Disabled
+                  Alert, 0x116ff5400, {{0.0, 59.0}, {393.0, 793.0}}, identifier: 'gacha-single-draw-sequence'
+                  StaticText, 0x116ff5540, {{196.0, 816.5}, {1.0, 1.0}}, identifier: 'gacha-active-request-id', label: '79856aad-757c-49e3-845a-03e92b512bf9', value: 79856aad-757c-49e3...
+                  StaticText, 0x116ff5680, {{196.0, 817.5}, {1.0, 1.0}}, identifier: 'gacha-pending-prize-id', label: 'canyon-heir-metal-three-blade', value: canyon-heir-metal-...
+Path to element:
+ →Application, 0x116e69040, pid: 44209, label: 'Fidget Spinner'
+Query chain:
+ →Find: Application 'com.jiaweizhou.fidgetspinner.codex'
+  Output: {
+    Application, 0x116ff57c0, pid: 44209, label: 'Fidget Spinner'
+  }
+)
+    t =    62.72s Tear Down
+Test Case '-[GachaContinuousPreviewUITests.GachaContinuousPreviewUITests testRecordShippingCarouselRivePackAndRealUnityReveal]' failed (63.015 seconds).
+Test Suite 'GachaContinuousPreviewUITests' failed at 2026-08-18 15:17:56.286.
+	 Executed 1 test, with 1 failure (0 unexpected) in 63.015 (63.015) seconds
+Test Suite 'GachaContinuousPreviewUITests.xctest' failed at 2026-08-18 15:17:56.286.
+	 Executed 1 test, with 1 failure (0 unexpected) in 63.015 (63.016) seconds
+Test Suite 'Selected tests' failed at 2026-08-18 15:17:56.286.
+	 Executed 1 test, with 1 failure (0 unexpected) in 63.015 (63.016) seconds
+2026-08-18 15:18:11.364 xcodebuild[44056:27611237] [MT] IDETestOperationsObserverDebug: 80.104 elapsed -- Testing started completed.
+2026-08-18 15:18:11.364 xcodebuild[44056:27611237] [MT] IDETestOperationsObserverDebug: 0.000 sec, +0.000 sec -- start
+2026-08-18 15:18:11.364 xcodebuild[44056:27611237] [MT] IDETestOperationsObserverDebug: 80.104 sec, +80.104 sec -- end
+
+Test session results, code coverage, and logs:
+	/tmp/fidget-gacha-continuous-harness.qthi2T/GachaContinuousPreview.xcresult
+
+** TEST FAILED **
+
+Testing started

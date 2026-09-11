@@ -1,0 +1,46 @@
+{
+  "schema": "premium-display-case-gate04-r031-native-swiftui-evenodd-self-rejection.v1",
+  "candidate": "R031 native SwiftUI even-odd mouth ring using the existing R030 Unity isolation and trace route",
+  "artifactClass": "actual-iOS-Simulator-Unity-player-static-capture",
+  "decision": "technical-self-rejected",
+  "reason": "F2 does not meet the full-size visual gate. The Pack reads as a black upper-mouth opening instead of a bounded opening that visibly contains the live case.",
+  "evidence": {
+    "staticFrames": [
+      "F0.png",
+      "F1.png",
+      "F2.png",
+      "F3.png",
+      "F4.png"
+    ],
+    "integrationReport": "r031-static-integration-report.json",
+    "f2ExactInsetZeroAlphaPixels": 12778,
+    "f2ExactInsetPathPixels": 33554,
+    "f1ExactInsetZeroAlphaPixels": 4832,
+    "f2PackRingZeroAlphaPixels": 1695,
+    "f2LipZeroAlphaPixels": 2326,
+    "f2FrontZeroAlphaPixels": 0,
+    "f2ProtectedOuterZeroAlphaPixels": 0
+  },
+  "trace": {
+    "sameRequestReceipt": true,
+    "twoActualUnityEndOfFrameChecks": true,
+    "canonicalCaseRoot": "PremiumDisplayCaseGate12R004",
+    "foreignRendererCount": 0,
+    "f2PublishSetupSucceeded": true,
+    "f3CrossingRecorded": true,
+    "f4DepartureRecorded": true
+  },
+  "scope": {
+    "blenderRevisited": false,
+    "fanCardChanged": false,
+    "premiumDisplayCasePrefabChanged": false,
+    "toyOrContentSlotChanged": false,
+    "unityPackagesChanged": false,
+    "economyRulesChanged": false,
+    "physicalDeviceInstalled": false,
+    "normalVideoCaptured": false,
+    "gateAdvanced": false,
+    "shippingReady": false
+  },
+  "nextStep": "Wait for a new explicit repair request. Do not use this candidate as an approval artifact."
+}

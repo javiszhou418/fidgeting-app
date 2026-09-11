@@ -1,0 +1,60 @@
+{
+  "artifactClass": "real-ios-simulator-unity-player-integration",
+  "candidate": "R030 isolated native hybrid",
+  "checks": {
+    "actualUnityBridge": true,
+    "actualUnityCallback": true,
+    "canonicalCaseOnly": true,
+    "exactInsetPathTransparentAtF2": true,
+    "liveCaseInsideExactInsetAtF2": true,
+    "noCrossfade": true,
+    "packDepartsAfterCrossing": true,
+    "packForegroundOpaqueAtF2": false,
+    "packRingOccludesCaseAtF2": false,
+    "preReadyApertureClosed": true,
+    "sameLiveCaseCrossesLip": true,
+    "twoEndOfFrameReadiness": true
+  },
+  "failures": [
+    "F1 exact inset mouth path contains transparent pixels",
+    "F2 Pack ring, lip, front, or protected outer region lost alpha",
+    "F2 Pack ring does not occlude the live case"
+  ],
+  "frames": {
+    "f0": "Artifacts/PackTearNativeCandidate/r031-native-swiftui-evenodd-hybrid/static/F0.png",
+    "f1": "Artifacts/PackTearNativeCandidate/r031-native-swiftui-evenodd-hybrid/static/F1.png",
+    "f2": "Artifacts/PackTearNativeCandidate/r031-native-swiftui-evenodd-hybrid/static/F2.png",
+    "f3": "Artifacts/PackTearNativeCandidate/r031-native-swiftui-evenodd-hybrid/static/F3.png",
+    "f4": "Artifacts/PackTearNativeCandidate/r031-native-swiftui-evenodd-hybrid/static/F4.png",
+    "partial": "Artifacts/PackTearNativeCandidate/r031-native-swiftui-evenodd-hybrid/static/partial.png",
+    "sealed": "Artifacts/PackTearNativeCandidate/r031-native-swiftui-evenodd-hybrid/static/sealed.png"
+  },
+  "metrics": {
+    "f1ExactInsetZeroAlphaPixels": 4832,
+    "f1ToF2ExactInsetDelta": 7.6504142576145915,
+    "f1ToF2MouthDelta": 11.81591138951421,
+    "f1ToF2PackRingDelta": 11.93823417961349,
+    "f2ExactInsetAlpha": {
+      "exactInsetPathPixels": 33554,
+      "exactInsetZeroAlphaPixels": 12778,
+      "frontPixels": 200490,
+      "frontZeroAlphaPixels": 0,
+      "lipPixels": 3454,
+      "lipZeroAlphaPixels": 2326,
+      "protectedOuterPixels": 86436,
+      "protectedOuterZeroAlphaPixels": 0,
+      "ringPixels": 2639,
+      "ringZeroAlphaPixels": 1695
+    },
+    "f2ExactInsetLuminanceRange": 100.9226,
+    "f2ToF3MouthDelta": 2.6580861962089326,
+    "staticCheckpointFrameCounts": {
+      "F0": 24,
+      "F1": 23,
+      "F2": 26,
+      "F3": 25,
+      "F4": 62
+    }
+  },
+  "verdict": "fail"
+}

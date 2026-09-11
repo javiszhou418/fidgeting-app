@@ -1,0 +1,58 @@
+{
+  "schemaVersion": 1,
+  "modelId": "model-hhax",
+  "coordinateSystem": {
+    "width": "+X",
+    "slideAndLength": "+Y",
+    "rearRotation": "+Z"
+  },
+  "hierarchy": {
+    "ModelHhax_Root": null,
+    "FixedLowerAssembly": "ModelHhax_Root",
+    "MovingUpperAssembly": "ModelHhax_Root",
+    "RearRotorAssembly": "FixedLowerAssembly",
+    "MechanicalTrackAssembly": "FixedLowerAssembly",
+    "LowerShell": "FixedLowerAssembly",
+    "LowerFrontArtwork": "FixedLowerAssembly",
+    "BackArtwork": "FixedLowerAssembly",
+    "UpperShell": "MovingUpperAssembly",
+    "FrontArtwork": "MovingUpperAssembly",
+    "ClearSealCap": "MovingUpperAssembly",
+    "StraightTrack_1": "MechanicalTrackAssembly",
+    "StraightTrack_2": "MechanicalTrackAssembly",
+    "RotaryCarrierTrack": "MechanicalTrackAssembly",
+    "CentralAdjustmentScrew": "MechanicalTrackAssembly",
+    "IllustrativeFollower_A": "MechanicalTrackAssembly",
+    "IllustrativeFollower_B": "MechanicalTrackAssembly",
+    "RearReplaceablePatch": "RearRotorAssembly",
+    "RearClearCap": "RearRotorAssembly",
+    "RearRotationOrientationMark": "RearRotorAssembly",
+    "FrontScrew_1": "MovingUpperAssembly",
+    "FrontScrewSlot_1": "MovingUpperAssembly",
+    "FrontScrew_2": "MovingUpperAssembly",
+    "FrontScrewSlot_2": "MovingUpperAssembly"
+  },
+  "motion": {
+    "FixedLowerAssembly": {
+      "mode": "fixed"
+    },
+    "MovingUpperAssembly": {
+      "mode": "translation-only",
+      "axis": "+Y",
+      "rangeMm": [
+        0,
+        18.7
+      ]
+    },
+    "RearRotorAssembly": {
+      "mode": "rotation-only",
+      "axis": "+Z",
+      "pivotMm": [
+        0,
+        11.05,
+        0
+      ]
+    }
+  },
+  "runtimeBoundary": "No detent count, force curve, slide-to-rotation timing or automatic motion is authored."
+}

@@ -163,6 +163,29 @@ test("plain models can review Gate 02, fill Gate 03, and request Gate 04 without
   assert.doesNotMatch(app, /已关联 \$\{result\.assetId\}/, "business UI must not expose an internal asset id");
 });
 
+test("plain models keep a purpose, visible output, one primary path and Chinese labels through Gate 12", () => {
+  assert.match(app, /const bespoke = state\.manifest\.model\.id === "magnetic-slide-tile"[\s\S]*stage\.analysisSpec : stage\.architectureSpec/,
+    "ordinary model outputs are not hidden merely because an optional spec exists");
+  assert.match(app, /const generic = agentStepCopy\[stage\.id\];[\s\S]*plainStagePurpose\(generic\.does\)/,
+    "generic Gate 05–12 views explain the current step");
+  assert.match(app, /!bespokeSlider[\s\S]*agentStepPanel\(stage\)/,
+    "a plain empty gate keeps its start or retry primary even when it has a purpose header");
+  assert.match(app, /stage\.id === "04-architecture"[\s\S]*state\.manifest\.model\.id === "magnetic-slide-tile"[\s\S]*motion-evidence-mapping/,
+    "special Gate 04 approval suppression stays isolated to its owning model");
+  for (const [slot, label] of [
+    ["interactive-lighting", "交互灯光"],
+    ["lighting-comparison-review", "灯光对照"],
+    ["interactive-environment", "交互环境"],
+    ["environment-source", "环境源文件"],
+    ["environment-comparison-review", "环境对照"],
+    ["unity-runtime-recording", "Unity 交互录屏"],
+    ["shipping-library", "库列表"],
+    ["shipping-runtime-recording", "成品交互录屏"]
+  ]) {
+    assert.match(app, new RegExp(`"${slot}": "${label}"`), `${slot} is user-facing Chinese`);
+  }
+});
+
 test("Gate 03 records auditable official specs and teardown calibration without exposing ids", () => {
   for (const label of ["我实测的", "同款正式规格", "同款公开拆解校准", "公开链接", "正式规格锚点", "锚点正式值 mm", "锚点像素跨度", "目标像素跨度"]) {
     assert.match(app, new RegExp(label), `${label} is available in the measurement form`);

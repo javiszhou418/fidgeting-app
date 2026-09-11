@@ -1,0 +1,27 @@
+{
+  "candidate": "R028 isolated native hybrid",
+  "artifactClass": "technical-diagnostic-not-reviewable",
+  "visualVerdict": "fail",
+  "approvalRequestAllowed": false,
+  "capturedStaticFrames": [
+    "static/sealed.png",
+    "static/partial.png",
+    "static/pre-ready-mouth.png",
+    "static/contained-case.png"
+  ],
+  "technicalChecks": {
+    "swiftRulesHarness": "67/67 pass",
+    "unityEditMode": "7/7 pass",
+    "isolatedXcodeSimulatorBuild": "pass with Swift warnings as errors"
+  },
+  "confirmed": [
+    "The pre-ready Pack mouth remained opaque with transparentMouthPixels=0.",
+    "The staged Unity object reported the canonical PremiumDisplayCaseGate12R004 root and PremiumDisplayCaseShippingPresentation type."
+  ],
+  "blockingFailures": [
+    "The detached top seal still reads as a floating straight rigid strip in partial and pre-ready native-size frames.",
+    "The contained-case static run never reached two-frame readiness: hasStableUnityCase=false, apertureAuthorized=false, and transparentMouthPixels=0.",
+    "No ready-contained or crossing proof exists, so this run cannot prove post-ready live-case-only pixels or the absence of a default-scene leak through the aperture."
+  ],
+  "nextAction": "Stop. Do not tune the tear, record review media, promote Gate 04, or update FDB or implementation status."
+}

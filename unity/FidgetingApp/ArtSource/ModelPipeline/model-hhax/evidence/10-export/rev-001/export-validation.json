@@ -1,0 +1,138 @@
+{
+  "schemaVersion": 1,
+  "modelId": "model-hhax",
+  "gate": "10-export",
+  "input": {
+    "manifestRevisionAtBuild": 56,
+    "stageId": "09-environment",
+    "assetId": "hhax-gate09-environment-source-r001",
+    "sha256": "1dc5cab0acdd8becb0c4831ea5120eed4b4fa7aee62bcdc3bdbaf790b0f65092",
+    "path": "unity/FidgetingApp/ArtSource/ModelPipeline/model-hhax/evidence/09-environment/rev-001/model-hhax-environment.blend"
+  },
+  "sourceClosedBounds": {
+    "minimumMm": [
+      -15.45,
+      -25.25,
+      0.0
+    ],
+    "maximumMm": [
+      15.45,
+      25.25,
+      13.6
+    ],
+    "sizeMm": [
+      30.9,
+      50.5,
+      13.6
+    ]
+  },
+  "triangleCountEvaluated": 20022,
+  "triangleBudgetMax": 120000,
+  "glbRoundTrip": {
+    "path": "unity/FidgetingApp/ArtSource/ModelPipeline/model-hhax/evidence/10-export/rev-001/model-hhax-final.glb",
+    "sha256": "8f00f57e2b952ab1734c6e342b17a0aab75fc55c49f8c5c1346b93f7f4938ca6",
+    "bounds": {
+      "minimumMm": [
+        -15.45,
+        -25.25,
+        0.0
+      ],
+      "maximumMm": [
+        15.45,
+        25.25,
+        13.6
+      ],
+      "sizeMm": [
+        30.9,
+        50.5,
+        13.6
+      ],
+      "meshCount": 19
+    },
+    "objectCount": 24,
+    "materialCount": 9,
+    "materials": [
+      "MAT_BackMOP",
+      "MAT_ClearSeal",
+      "MAT_ClearSealEdge",
+      "MAT_FrontMOP",
+      "MAT_GrooveDark",
+      "MAT_LowerMOP",
+      "MAT_PolishedSteel",
+      "MAT_TrackBronze",
+      "MAT_Zirconium_PurpleBlack"
+    ],
+    "requiredHierarchyNodes": {
+      "FixedLowerAssembly": "pass",
+      "MovingUpperAssembly": "pass",
+      "RearRotorAssembly": "pass"
+    },
+    "actionCount": 2
+  },
+  "fbxRoundTrip": {
+    "path": "unity/FidgetingApp/ArtSource/ModelPipeline/model-hhax/evidence/10-export/rev-001/model-hhax-final.fbx",
+    "sha256": "d8585e19573d00c9e3ba2ba30c8cbc4ed224f035270f342bb526521a28b62d34",
+    "bounds": {
+      "minimumMm": [
+        -15.45,
+        -25.25,
+        -0.0
+      ],
+      "maximumMm": [
+        15.45,
+        25.25,
+        13.6
+      ],
+      "sizeMm": [
+        30.9,
+        50.5,
+        13.6
+      ],
+      "meshCount": 19
+    },
+    "objectCount": 24,
+    "materialCount": 9,
+    "materials": [
+      "MAT_BackMOP",
+      "MAT_ClearSeal",
+      "MAT_ClearSealEdge",
+      "MAT_FrontMOP",
+      "MAT_GrooveDark",
+      "MAT_LowerMOP",
+      "MAT_PolishedSteel",
+      "MAT_TrackBronze",
+      "MAT_Zirconium_PurpleBlack"
+    ],
+    "requiredHierarchyNodes": {
+      "FixedLowerAssembly": "pass",
+      "MovingUpperAssembly": "pass",
+      "RearRotorAssembly": "pass"
+    },
+    "actionCount": 0
+  },
+  "collisionRoundTrip": {
+    "path": "unity/FidgetingApp/ArtSource/ModelPipeline/model-hhax/evidence/10-export/rev-001/model-hhax-collision.fbx",
+    "sha256": "53329498e605e3eb844905636d878c2d26eb5ccf45dab7c89dfda77bda0a7dfa",
+    "meshCount": 3,
+    "names": [
+      "UCX_FixedLower",
+      "UCX_MovingUpper",
+      "UCX_RearRotor"
+    ],
+    "requiredOwnershipProxies": {
+      "UCX_FixedLower": "pass",
+      "UCX_MovingUpper": "pass",
+      "UCX_RearRotor": "pass"
+    }
+  },
+  "checks": {
+    "sourceBounds": "pass",
+    "triangleBudget": "pass",
+    "glbRoundTrip": "pass",
+    "fbxRoundTrip": "pass",
+    "hierarchy": "pass",
+    "materials": "pass",
+    "pivotOwnership": "pass",
+    "collisionOwnership": "pass"
+  }
+}

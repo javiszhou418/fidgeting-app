@@ -1,0 +1,740 @@
+{
+    "status": "pass",
+    "axisMapping": "Blender (x, y, z) Z-up / front -Y  ->  Unity (x, z, y) Y-up / front -Z (FBX -Z forward, Y up, bakeAxisConversion)",
+    "unityRenderPipeline": "Mobile_RPAsset",
+    "colorSpace": "Linear",
+    "postProcessing": "none (contract unity_urp.post_processing_beauty_start.validation_volume_disabled)",
+    "blenderViewTransform": "AgX / AgX - Medium High Contrast",
+    "shippingResolution": [
+        2048,
+        1365
+    ],
+    "cameras": [
+        {
+            "name": "CAM_PDC_FRONT",
+            "projection": "ORTHO",
+            "unityPosition": [
+                0.0,
+                0.0,
+                -0.42945000529289248
+            ],
+            "unityForward": [
+                0.0,
+                -7.549790126404332e-8,
+                1.0
+            ],
+            "unityUp": [
+                0.0,
+                1.0,
+                7.549790126404332e-8
+            ],
+            "focalLengthMm": 50.0,
+            "sensorMm": [
+                36.0,
+                24.0
+            ],
+            "orthoScale": 0.19520455598831178
+        },
+        {
+            "name": "CAM_PDC_HERO",
+            "projection": "PERSP",
+            "unityPosition": [
+                0.3159947097301483,
+                0.06541590392589569,
+                -0.677652895450592
+            ],
+            "unityForward": [
+                -0.42101001739501955,
+                -0.08715580403804779,
+                0.9028590321540833
+            ],
+            "unityUp": [
+                -0.03683360666036606,
+                0.9961947202682495,
+                0.07898999005556107
+            ],
+            "focalLengthMm": 85.0,
+            "sensorMm": [
+                36.0,
+                24.0
+            ],
+            "orthoScale": 6.0
+        },
+        {
+            "name": "CAM_PDC_LEFT_OBLIQUE",
+            "projection": "PERSP",
+            "unityPosition": [
+                -0.488962858915329,
+                0.161689892411232,
+                -0.5827232599258423
+            ],
+            "unityForward": [
+                0.6287411451339722,
+                -0.20791155099868775,
+                0.7493045926094055
+            ],
+            "unityUp": [
+                0.13364295661449433,
+                0.9781476259231567,
+                0.15926948189735413
+            ],
+            "focalLengthMm": 85.0,
+            "sensorMm": [
+                36.0,
+                24.0
+            ],
+            "orthoScale": 6.0
+        },
+        {
+            "name": "CAM_PDC_LOW_OBLIQUE",
+            "projection": "PERSP",
+            "unityPosition": [
+                0.24559378623962403,
+                -0.23331449925899507,
+                -0.6747633814811707
+            ],
+            "unityForward": [
+                -0.32528048753738406,
+                0.30901703238487246,
+                0.8937007784843445
+            ],
+            "unityUp": [
+                0.10569003969430924,
+                0.9510564804077148,
+                -0.2903810441493988
+            ],
+            "focalLengthMm": 85.0,
+            "sensorMm": [
+                36.0,
+                24.0
+            ],
+            "orthoScale": 6.0
+        },
+        {
+            "name": "CAM_PDC_RIGHT_OBLIQUE",
+            "projection": "PERSP",
+            "unityPosition": [
+                0.488962858915329,
+                0.161689892411232,
+                -0.5827232599258423
+            ],
+            "unityForward": [
+                -0.6287411451339722,
+                -0.20791155099868775,
+                0.7493045926094055
+            ],
+            "unityUp": [
+                -0.13364295661449433,
+                0.9781476259231567,
+                0.15926948189735413
+            ],
+            "focalLengthMm": 85.0,
+            "sensorMm": [
+                36.0,
+                24.0
+            ],
+            "orthoScale": 6.0
+        },
+        {
+            "name": "CAM_PDC_TOP",
+            "projection": "ORTHO",
+            "unityPosition": [
+                0.0,
+                0.42945000529289248,
+                -1.3969838619232178e-9
+            ],
+            "unityForward": [
+                0.0,
+                -1.0,
+                0.0
+            ],
+            "unityUp": [
+                0.0,
+                0.0,
+                1.0
+            ],
+            "focalLengthMm": 50.0,
+            "sensorMm": [
+                36.0,
+                24.0
+            ],
+            "orthoScale": 0.11509090662002564
+        }
+    ],
+    "shippingRig": {
+        "worldColorLinear": [
+            0.0,
+            0.0003035269910469651,
+            0.0009105809731408954
+        ],
+        "worldStrength": 0.550000011920929,
+        "cubemapAsset": "Assets/_DisplayCase/Candidates/TriSpinnerSlabGate11R004/Cubemaps/TriSpinnerSlabStudioShipping.asset",
+        "cubemapSize": 256,
+        "emitters": [
+            {
+                "name": "LGT_PDC_COOL_RIM",
+                "energyW": 0.027486860752105714,
+                "colorLinear": [
+                    0.18447498977184297,
+                    0.68668532371521,
+                    1.0
+                ],
+                "unityPosition": [
+                    -0.0785931944847107,
+                    -0.09376419335603714,
+                    -0.06477521359920502
+                ],
+                "unityForward": [
+                    0.5618360042572022,
+                    0.6702882647514343,
+                    0.48482367396354678
+                ],
+                "sizeM": [
+                    0.008987180888652802,
+                    0.11583477258682251
+                ],
+                "radiance": 8.404518127441407,
+                "irradianceAtCase": 0.14532127976417542,
+                "directRole": "candidate spot"
+            },
+            {
+                "name": "LGT_PDC_EDGE_B_PINK",
+                "energyW": 0.0674007311463356,
+                "colorLinear": [
+                    1.0,
+                    0.2541520893573761,
+                    0.577580451965332
+                ],
+                "unityPosition": [
+                    0.004819179885089397,
+                    -0.14308401942253114,
+                    0.040144458413124087
+                ],
+                "unityForward": [
+                    -0.032585229724645618,
+                    0.9674769043922424,
+                    -0.25085175037384035
+                ],
+                "sizeM": [
+                    0.1597720980644226,
+                    0.005991453770548105
+                ],
+                "radiance": 22.412050247192384,
+                "irradianceAtCase": 0.3089004456996918,
+                "directRole": "candidate spot"
+            },
+            {
+                "name": "LGT_PDC_EDGE_L_CYAN",
+                "energyW": 0.16428928077220918,
+                "colorLinear": [
+                    0.07818742096424103,
+                    0.6444796919822693,
+                    1.0
+                ],
+                "unityPosition": [
+                    -0.14586849510669709,
+                    0.016080109402537347,
+                    -0.014757744036614895
+                ],
+                "unityForward": [
+                    0.9867445826530457,
+                    -0.10877568274736405,
+                    0.12042856216430664
+                ],
+                "sizeM": [
+                    0.005991453770548105,
+                    0.2396581470966339
+                ],
+                "radiance": 36.419578552246097,
+                "irradianceAtCase": 0.7651925683021545,
+                "directRole": "candidate spot"
+            },
+            {
+                "name": "LGT_PDC_EDGE_R_MAGENTA",
+                "energyW": 0.15165165066719056,
+                "colorLinear": [
+                    1.0,
+                    0.11443537473678589,
+                    0.672443151473999
+                ],
+                "unityPosition": [
+                    0.10871320962905884,
+                    -0.015752721577882768,
+                    0.10088272392749787
+                ],
+                "unityForward": [
+                    -0.739034116268158,
+                    0.10708719491958618,
+                    -0.6651021838188171
+                ],
+                "sizeM": [
+                    0.005991453770548105,
+                    0.2396581470966339
+                ],
+                "radiance": 33.61807632446289,
+                "irradianceAtCase": 0.6907706260681152,
+                "directRole": "candidate spot"
+            },
+            {
+                "name": "LGT_PDC_EDGE_T_BLUE",
+                "energyW": 0.07582582533359528,
+                "colorLinear": [
+                    0.15896083414554597,
+                    0.3915724754333496,
+                    1.0
+                ],
+                "unityPosition": [
+                    -0.041680216789245608,
+                    0.13545319437980653,
+                    0.04534950107336044
+                ],
+                "unityForward": [
+                    0.28181296586990359,
+                    -0.9158416986465454,
+                    -0.2860339879989624
+                ],
+                "sizeM": [
+                    0.1597720980644226,
+                    0.005991453770548105
+                ],
+                "radiance": 25.21355628967285,
+                "irradianceAtCase": 0.34698647260665896,
+                "directRole": "candidate spot"
+            },
+            {
+                "name": "LGT_PDC_FRONT_FILL",
+                "energyW": 0.16007672250270844,
+                "colorLinear": [
+                    1.0,
+                    0.9652869701385498,
+                    0.9287833571434021
+                ],
+                "unityPosition": [
+                    -0.031181061640381814,
+                    0.20404691994190217,
+                    0.07013906538486481
+                ],
+                "unityForward": [
+                    0.14366117119789124,
+                    -0.9401084780693054,
+                    -0.3091237246990204
+                ],
+                "sizeM": [
+                    0.18972936272621156,
+                    0.11982907354831696
+                ],
+                "radiance": 2.2412047386169435,
+                "irradianceAtCase": 0.3412628173828125,
+                "directRole": "candidate directional"
+            },
+            {
+                "name": "LGT_PDC_LILAC_RIM",
+                "energyW": 0.020536160096526147,
+                "colorLinear": [
+                    0.5840784311294556,
+                    0.38642942905426028,
+                    1.0
+                ],
+                "unityPosition": [
+                    0.08903136104345322,
+                    -0.10380353033542633,
+                    0.03896456956863403
+                ],
+                "unityForward": [
+                    -0.629673182964325,
+                    0.734149158000946,
+                    -0.2540407180786133
+                ],
+                "sizeM": [
+                    0.008987180888652802,
+                    0.09985756129026413
+                ],
+                "radiance": 7.283915996551514,
+                "irradianceAtCase": 0.10290545970201493,
+                "directRole": "candidate spot"
+            },
+            {
+                "name": "LGT_PDC_RIGHT_STRIP",
+                "energyW": 0.08253955841064453,
+                "colorLinear": [
+                    1.0,
+                    0.9965101480484009,
+                    0.9805564880371094
+                ],
+                "unityPosition": [
+                    0.1363295167684555,
+                    0.11150646209716797,
+                    0.0508362352848053
+                ],
+                "unityForward": [
+                    -0.7470426559448242,
+                    -0.6110202074050903,
+                    -0.26188087463378909
+                ],
+                "sizeM": [
+                    0.010984331369400025,
+                    0.18972936272621156
+                ],
+                "radiance": 12.60677719116211,
+                "irradianceAtCase": 0.24887116253376008,
+                "directRole": "candidate directional"
+            },
+            {
+                "name": "LGT_PDC_SOFT_KEY",
+                "energyW": 1.1935546398162842,
+                "colorLinear": [
+                    1.0,
+                    0.9383741021156311,
+                    0.8834899067878723
+                ],
+                "unityPosition": [
+                    -0.07226927578449249,
+                    0.17165091633796693,
+                    -0.17335063219070435
+                ],
+                "unityForward": [
+                    0.2817300260066986,
+                    -0.6691532731056213,
+                    0.687649667263031
+                ],
+                "sizeM": [
+                    0.16975785791873933,
+                    0.0798860490322113
+                ],
+                "radiance": 28.01506233215332,
+                "irradianceAtCase": 1.8680471181869507,
+                "directRole": "candidate directional"
+            },
+            {
+                "name": "LGT_PDC_SPARKLE_00",
+                "energyW": 0.021092772483825685,
+                "colorLinear": [
+                    0.21223075687885285,
+                    0.7454041838645935,
+                    1.0
+                ],
+                "unityPosition": [
+                    -0.1073702946305275,
+                    0.019486285746097566,
+                    -0.16680297255516053
+                ],
+                "unityForward": [
+                    0.5318462252616882,
+                    -0.09652305394411087,
+                    0.841322124004364
+                ],
+                "sizeM": [
+                    0.005991453770548105,
+                    0.005991453770548105
+                ],
+                "radiance": 187.03347778320313,
+                "irradianceAtCase": 0.053789909929037097,
+                "directRole": "candidate spot"
+            },
+            {
+                "name": "LGT_PDC_SPARKLE_01",
+                "energyW": 0.021092772483825685,
+                "colorLinear": [
+                    1.0,
+                    1.0,
+                    1.0
+                ],
+                "unityPosition": [
+                    -0.06052948534488678,
+                    0.08848239481449127,
+                    -0.19360099732875825
+                ],
+                "unityForward": [
+                    0.27025696635246279,
+                    -0.39506325125694277,
+                    0.8780012726783752
+                ],
+                "sizeM": [
+                    0.005991453770548105,
+                    0.005991453770548105
+                ],
+                "radiance": 187.03347778320313,
+                "irradianceAtCase": 0.04363808408379555,
+                "directRole": "candidate directional"
+            },
+            {
+                "name": "LGT_PDC_SPARKLE_02",
+                "energyW": 0.021092772483825685,
+                "colorLinear": [
+                    1.0,
+                    0.1946178376674652,
+                    0.7454041838645935
+                ],
+                "unityPosition": [
+                    -0.04052457585930824,
+                    0.14880713820457459,
+                    -0.12314856052398682
+                ],
+                "unityForward": [
+                    0.20335985720157624,
+                    -0.7467417120933533,
+                    0.6332626342773438
+                ],
+                "sizeM": [
+                    0.005991453770548105,
+                    0.005991453770548105
+                ],
+                "radiance": 187.03347778320313,
+                "irradianceAtCase": 0.054866984486579898,
+                "directRole": "candidate spot"
+            },
+            {
+                "name": "LGT_PDC_SPARKLE_03",
+                "energyW": 0.021092772483825685,
+                "colorLinear": [
+                    1.0,
+                    1.0,
+                    1.0
+                ],
+                "unityPosition": [
+                    0.03836444020271301,
+                    0.02382197231054306,
+                    -0.15372788906097413
+                ],
+                "unityForward": [
+                    -0.23515217006206513,
+                    -0.14601491391658784,
+                    0.9609282612800598
+                ],
+                "sizeM": [
+                    0.005991453770548105,
+                    0.005991453770548105
+                ],
+                "radiance": 187.03347778320313,
+                "irradianceAtCase": 0.08324943482875824,
+                "directRole": "candidate directional"
+            },
+            {
+                "name": "LGT_PDC_SPARKLE_04",
+                "energyW": 0.021092772483825685,
+                "colorLinear": [
+                    0.21223075687885285,
+                    0.7454041838645935,
+                    1.0
+                ],
+                "unityPosition": [
+                    0.07160552591085434,
+                    0.08414670079946518,
+                    -0.07710330933332443
+                ],
+                "unityForward": [
+                    -0.5245894193649292,
+                    -0.6164672374725342,
+                    0.587174654006958
+                ],
+                "sizeM": [
+                    0.005991453770548105,
+                    0.005991453770548105
+                ],
+                "radiance": 187.03347778320313,
+                "irradianceAtCase": 0.11772994697093964,
+                "directRole": "candidate spot"
+            },
+            {
+                "name": "LGT_PDC_SPARKLE_05",
+                "energyW": 0.021092772483825685,
+                "colorLinear": [
+                    1.0,
+                    1.0,
+                    1.0
+                ],
+                "unityPosition": [
+                    0.14332221448421479,
+                    0.15314282476902009,
+                    -0.09230153262615204
+                ],
+                "unityForward": [
+                    -0.6220538020133972,
+                    -0.6646773815155029,
+                    0.4138273000717163
+                ],
+                "sizeM": [
+                    0.005991453770548105,
+                    0.005991453770548105
+                ],
+                "radiance": 187.03347778320313,
+                "irradianceAtCase": 0.04069701209664345,
+                "directRole": "candidate directional"
+            },
+            {
+                "name": "LGT_PDC_SPARKLE_06",
+                "energyW": 0.021092772483825685,
+                "colorLinear": [
+                    1.0,
+                    0.1946178376674652,
+                    0.7454041838645935
+                ],
+                "unityPosition": [
+                    0.17049945890903474,
+                    0.01948627643287182,
+                    -0.03723020479083061
+                ],
+                "unityForward": [
+                    -0.9672512412071228,
+                    -0.1105465218424797,
+                    0.22848296165466309
+                ],
+                "sizeM": [
+                    0.005991453770548105,
+                    0.005991453770548105
+                ],
+                "radiance": 187.03347778320313,
+                "irradianceAtCase": 0.06930708885192871,
+                "directRole": "candidate spot"
+            },
+            {
+                "name": "LGT_PDC_SPARKLE_07",
+                "energyW": 0.021092772483825685,
+                "colorLinear": [
+                    1.0,
+                    1.0,
+                    1.0
+                ],
+                "unityPosition": [
+                    0.21734026074409486,
+                    0.08848238736391068,
+                    -0.06402823328971863
+                ],
+                "unityForward": [
+                    -0.8905238509178162,
+                    -0.3625452518463135,
+                    0.27482402324676516
+                ],
+                "sizeM": [
+                    0.005991453770548105,
+                    0.005991453770548105
+                ],
+                "radiance": 187.03347778320313,
+                "irradianceAtCase": 0.036121442914009097,
+                "directRole": "candidate directional"
+            },
+            {
+                "name": "LGT_PDC_TOP_RAIL",
+                "energyW": 0.016492117196321489,
+                "colorLinear": [
+                    1.0,
+                    0.8941666483879089,
+                    0.8075702786445618
+                ],
+                "unityPosition": [
+                    0.06356847286224365,
+                    0.04510490968823433,
+                    -0.1576167643070221
+                ],
+                "unityForward": [
+                    -0.3559843599796295,
+                    -0.2525879442691803,
+                    0.8997079730033875
+                ],
+                "sizeM": [
+                    0.11583477258682251,
+                    0.008987180888652802
+                ],
+                "radiance": 5.04271125793457,
+                "irradianceAtCase": 0.0540454238653183,
+                "directRole": "candidate directional"
+            }
+        ]
+    },
+    "neutralRig": {
+        "worldColorLinear": [
+            0.0015176349552348257,
+            0.0018211619462817908,
+            0.002428215928375721
+        ],
+        "worldStrength": 1.0,
+        "cubemapAsset": "Assets/_DisplayCase/Candidates/TriSpinnerSlabGate11R004/Cubemaps/TriSpinnerSlabStudioNeutral.asset",
+        "cubemapSize": 256,
+        "emitters": [
+            {
+                "name": "LGT_PDC_NEUTRAL_FILL",
+                "energyW": 0.5301695466041565,
+                "colorLinear": [
+                    1.0,
+                    0.9383741021156311,
+                    0.8834899067878723
+                ],
+                "unityPosition": [
+                    0.11186699569225311,
+                    0.08957848697900772,
+                    -0.1905263215303421
+                ],
+                "unityForward": [
+                    -0.4644688069820404,
+                    -0.37192752957344057,
+                    0.8037030696868897
+                ],
+                "sizeM": [
+                    0.3794587254524231,
+                    0.2995726764202118
+                ],
+                "radiance": 1.4845613241195679,
+                "irradianceAtCase": 0.9450832009315491,
+                "directRole": "candidate directional"
+            },
+            {
+                "name": "LGT_PDC_NEUTRAL_KEY",
+                "energyW": 0.6027191877365112,
+                "colorLinear": [
+                    1.0,
+                    0.9383741021156311,
+                    0.8834899067878723
+                ],
+                "unityPosition": [
+                    -0.05584445968270302,
+                    0.17130406200885774,
+                    -0.16130104660987855
+                ],
+                "unityForward": [
+                    0.2289912849664688,
+                    -0.7024357914924622,
+                    0.6739042401313782
+                ],
+                "sizeM": [
+                    0.17974361777305604,
+                    0.17974361777305604
+                ],
+                "radiance": 5.93824577331543,
+                "irradianceAtCase": 1.0442274808883668,
+                "directRole": "candidate directional"
+            },
+            {
+                "name": "LGT_PDC_NEUTRAL_REAR",
+                "energyW": 0.05357503518462181,
+                "colorLinear": [
+                    1.0,
+                    0.9383741021156311,
+                    0.8834899067878723
+                ],
+                "unityPosition": [
+                    -0.045817501842975619,
+                    0.16345113515853883,
+                    0.19654078781604768
+                ],
+                "unityForward": [
+                    0.17799939215183259,
+                    -0.6350015997886658,
+                    -0.751724123954773
+                ],
+                "sizeM": [
+                    0.1597720980644226,
+                    0.09985756129026413
+                ],
+                "radiance": 1.068884253501892,
+                "irradianceAtCase": 0.08048606663942337,
+                "directRole": "candidate directional"
+            }
+        ]
+    },
+    "notes": [
+        "Blender area lights become HDR rectangles in a procedural reflection cubemap (radiance P/(pi*A)).",
+        "Two brightest white emitters -> directional lights (irradiance P/(pi*d^2)); two strongest coloured strips -> spot lights (P/pi).",
+        "URP additional realtime lights used: 3 (contract performance_budget.additional_realtime_lights_max = 3).",
+        "No tonemapping: Blender uses AgX; absolute colour parity is not claimed, geometry/silhouette/composition are."
+    ]
+}

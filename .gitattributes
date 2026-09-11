@@ -783,6 +783,9 @@
 *.env filter=lfs diff=lfs merge=lfs -text
 *.tmp-c34eb6d9-baaf-49ab-a8ca-48040599fba7 filter=lfs diff=lfs merge=lfs -text
 *.vfx filter=lfs diff=lfs merge=lfs -text
+*.capture-round filter=lfs diff=lfs merge=lfs -text
+*.pipeline-candidate filter=lfs diff=lfs merge=lfs -text
+*.runtime filter=lfs diff=lfs merge=lfs -text
 *.anim !text !filter !merge !diff
 *.asmdef !text !filter !merge !diff
 *.asset !text !filter !merge !diff

@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "title": "Fidgeting 材质库",
-  "updatedAt": "2026-09-09",
+  "updatedAt": "2026-09-11",
   "authority": "unity/FidgetingApp/ArtSource/MaterialLibrary/materials.json",
   "generatedMarkdown": "unity/FidgetingApp/ArtSource/MaterialLibrary/materials.md",
   "thumbnailDirectory": "unity/FidgetingApp/ArtSource/MaterialLibrary/spheres",
@@ -45,6 +45,11 @@
       "id": "control",
       "label": "对照",
       "labelEn": "Control"
+    },
+    {
+      "id": "glass",
+      "label": "透明 / 半透明",
+      "labelEn": "Glass & translucent"
     }
   ],
   "statusLabels": {
@@ -110,6 +115,16 @@
             "Cap_Top (非车削区)",
             "Cap_Bottom (非车削区)"
           ]
+        },
+        {
+          "model": "premium-display-case",
+          "variant": "tri-spinner-slab-v3-cmf",
+          "parts": [
+            "GEO_PDC_HEADER_SATIN_SHELF",
+            "GEO_PDC_MAIN_SATIN_SHELF",
+            "GEO_PDC_FRAME_BOLT_*"
+          ],
+          "note": "library values verbatim + scheme-A anisotropy 0.8 / brushing along UV2.x (Gate 07 rev-003 approved 2026-09-11)"
         }
       ],
       "sources": [
@@ -1271,6 +1286,552 @@
         "path": "unity/FidgetingApp/ArtSource/MaterialLibrary/spheres/clay-control.png",
         "sha256": "14442bc52391d9fe6e8157837a6686f00f77356418bb3cc09e353ffa4288c10c"
       }
+    },
+    {
+      "id": "case-clear-crystal",
+      "name": {
+        "zh": "透明水晶外壳",
+        "en": "Clear crystal shell"
+      },
+      "family": "glass",
+      "status": "approved-gate07",
+      "description": "展示盒最外层的透明聚碳酸酯水晶框：IOR 1.49，极低粗糙度，薄清漆层，整片 300–650 nm 薄膜虹彩让边缘在彩色边光下泛出青/品红。",
+      "imageGen": {
+        "phrases": [
+          "clear polycarbonate crystal frame",
+          "thin-film iridescent edge sheen",
+          "sharp glass-like bevels",
+          "IOR 1.49 transmission"
+        ],
+        "avoid": [
+          "frosted glass",
+          "tinted acrylic",
+          "rainbow across flat faces under neutral light"
+        ]
+      },
+      "blender": {
+        "authority": "blender-lookdev",
+        "materialName": "M_PDC_ClearCrystal",
+        "baseColor": [
+          0.9387,
+          0.9647,
+          1.0
+        ],
+        "metallic": 0,
+        "roughness": 0.035,
+        "transmission": 1.0,
+        "ior": 1.49,
+        "coatWeight": 0.08,
+        "coatRoughness": 0.03,
+        "thinFilmThicknessNm": [
+          300,
+          650
+        ],
+        "thinFilmIor": 1.355,
+        "thinFilmMask": "whole crystal; COLOR0.g edge boost optional"
+      },
+      "unity": null,
+      "usedBy": [
+        {
+          "model": "premium-display-case",
+          "variant": "tri-spinner-slab-v3-cmf",
+          "parts": [
+            "GEO_PDC_OUTER_CRYSTAL_FRAME",
+            "GEO_PDC_POCKET_CLIP_*"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "path": "unity/FidgetingApp/ArtSource/ModelPipeline/premium-display-case/evidence/07-material/rev-003/lookdev_tri_spinner_slab_materials.r003.py",
+          "note": "Gate 07 rev-003 lookdev, user approval “确认” 2026-09-11T15:26:00+08:00"
+        },
+        {
+          "path": "unity/FidgetingApp/ArtSource/ModelPipeline/premium-display-case/evidence/03-contract/rev-013/modeling-contract.json",
+          "note": "contract rev-013 materials / cmf.scheme A / cmf.rarity_tier_map"
+        }
+      ]
+    },
+    {
+      "id": "case-smoke-lilac-liner",
+      "name": {
+        "zh": "烟紫内衬",
+        "en": "Smoke-lilac liner"
+      },
+      "family": "glass",
+      "status": "approved-gate07",
+      "description": "盒体内圈与凹槽壁的半透明烟紫内衬：透射 0.775，带体积吸收，随稀有度档位微调基色。",
+      "imageGen": {
+        "phrases": [
+          "smoked lilac translucent liner",
+          "soft volumetric absorption",
+          "matte-satin translucency"
+        ],
+        "avoid": [
+          "clear glass",
+          "opaque plastic",
+          "saturated purple"
+        ]
+      },
+      "blender": {
+        "authority": "blender-lookdev",
+        "materialName": "M_PDC_SmokeLiner",
+        "baseColor": [
+          0.855,
+          0.8228,
+          0.9047
+        ],
+        "metallic": 0,
+        "roughness": 0.15,
+        "transmission": 0.775,
+        "ior": 1.49,
+        "volumeAbsorptionColor": [
+          0.55,
+          0.48,
+          0.66
+        ],
+        "volumeAbsorptionDensity": 180
+      },
+      "unity": null,
+      "usedBy": [
+        {
+          "model": "premium-display-case",
+          "variant": "tri-spinner-slab-v3-cmf",
+          "parts": [
+            "GEO_PDC_SMOKE_INNER_LINER",
+            "GEO_PDC_POCKET_SMOKE_WALL"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "path": "unity/FidgetingApp/ArtSource/ModelPipeline/premium-display-case/evidence/07-material/rev-003/lookdev_tri_spinner_slab_materials.r003.py",
+          "note": "Gate 07 rev-003 lookdev, user approval “确认” 2026-09-11T15:26:00+08:00"
+        },
+        {
+          "path": "unity/FidgetingApp/ArtSource/ModelPipeline/premium-display-case/evidence/03-contract/rev-013/modeling-contract.json",
+          "note": "contract rev-013 materials / cmf.scheme A / cmf.rarity_tier_map"
+        }
+      ]
+    },
+    {
+      "id": "case-dark-sandblast",
+      "name": {
+        "zh": "深色喷砂钢",
+        "en": "Dark sandblasted steel"
+      },
+      "family": "dark-metal",
+      "status": "approved-gate07",
+      "description": "主舱 field 与后板的深灰喷砂钢面：scheme A 用 #5C6266 取代规格 #AEB3B6，微凸粒度 0.13 mm、高度 0.0105 mm，粗糙度 0.45±0.03。",
+      "imageGen": {
+        "phrases": [
+          "dark bead-blasted steel",
+          "fine even micro-grain",
+          "low diffuse sheen",
+          "no directional brushing"
+        ],
+        "avoid": [
+          "brushed lines",
+          "mirror",
+          "light silver sandblast"
+        ]
+      },
+      "blender": {
+        "authority": "blender-lookdev",
+        "materialName": "M_PDC_DarkSandblast",
+        "baseColor": [
+          0.107,
+          0.1221,
+          0.1329
+        ],
+        "metallic": 1,
+        "roughness": 0.45,
+        "roughnessDelta": 0.03,
+        "sandblastFeatureMm": 0.13,
+        "sandblastBumpMm": 0.0105,
+        "supersedesSpecBaseColorHex": "#AEB3B6"
+      },
+      "unity": null,
+      "usedBy": [
+        {
+          "model": "premium-display-case",
+          "variant": "tri-spinner-slab-v3-cmf",
+          "parts": [
+            "GEO_PDC_MAIN_MICROBLAST_FIELD",
+            "GEO_PDC_REAR_PLATE"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "path": "unity/FidgetingApp/ArtSource/ModelPipeline/premium-display-case/evidence/07-material/rev-003/lookdev_tri_spinner_slab_materials.r003.py",
+          "note": "Gate 07 rev-003 lookdev, user approval “确认” 2026-09-11T15:26:00+08:00"
+        },
+        {
+          "path": "unity/FidgetingApp/ArtSource/ModelPipeline/premium-display-case/evidence/03-contract/rev-013/modeling-contract.json",
+          "note": "contract rev-013 materials / cmf.scheme A / cmf.rarity_tier_map"
+        }
+      ]
+    },
+    {
+      "id": "case-piano-black",
+      "name": {
+        "zh": "钢琴黑板",
+        "en": "Piano-black plate"
+      },
+      "family": "dark-metal",
+      "status": "approved-gate07",
+      "description": "header 石墨板、数值板与凹槽底的钢琴黑：深炭底色加满强清漆（coat 1.0 / 0.03），基础粗糙度 0.25；header 板叠印刷标签（油墨粗糙度 0.55）。",
+      "imageGen": {
+        "phrases": [
+          "piano black lacquer",
+          "deep gloss clear coat",
+          "crisp reflections",
+          "near-black charcoal base"
+        ],
+        "avoid": [
+          "matte black",
+          "plastic sheen",
+          "dust or fingerprints"
+        ]
+      },
+      "blender": {
+        "authority": "blender-lookdev",
+        "materialName": "M_PDC_PianoBlack",
+        "baseColor": [
+          0.0116,
+          0.013,
+          0.016
+        ],
+        "metallic": 0.05,
+        "roughness": 0.25,
+        "coatWeight": 1.0,
+        "coatRoughness": 0.03,
+        "labelInkRoughness": 0.55
+      },
+      "unity": null,
+      "usedBy": [
+        {
+          "model": "premium-display-case",
+          "variant": "tri-spinner-slab-v3-cmf",
+          "parts": [
+            "GEO_PDC_HEADER_GRAPHITE_PLANE (+ label decal)",
+            "GEO_PDC_MAIN_TRAIT_PLAQUE",
+            "GEO_PDC_POCKET_GRAPHITE_FLOOR"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "path": "unity/FidgetingApp/ArtSource/ModelPipeline/premium-display-case/evidence/07-material/rev-003/lookdev_tri_spinner_slab_materials.r003.py",
+          "note": "Gate 07 rev-003 lookdev, user approval “确认” 2026-09-11T15:26:00+08:00"
+        },
+        {
+          "path": "unity/FidgetingApp/ArtSource/ModelPipeline/premium-display-case/evidence/03-contract/rev-013/modeling-contract.json",
+          "note": "contract rev-013 materials / cmf.scheme A / cmf.rarity_tier_map"
+        }
+      ]
+    },
+    {
+      "id": "case-bright-mirror",
+      "name": {
+        "zh": "亮镜面银",
+        "en": "Bright mirror silver"
+      },
+      "family": "steel",
+      "status": "approved-gate07",
+      "description": "斜边、凹槽抛光唇等凸起抛光件的亮镜面：scheme A 以 #C9D0D6、粗糙度 0.04 取代规格烟色镜面 #667078；宽口径下随稀有度换金属。",
+      "imageGen": {
+        "phrases": [
+          "bright mirror-polished steel",
+          "razor-sharp reflections",
+          "narrow polished bevels"
+        ],
+        "avoid": [
+          "smoked mirror",
+          "brushed",
+          "visible grain"
+        ]
+      },
+      "blender": {
+        "authority": "blender-lookdev",
+        "materialName": "M_PDC_Mirror",
+        "baseColor": [
+          0.5841,
+          0.6308,
+          0.6724
+        ],
+        "metallic": 1,
+        "roughness": 0.04,
+        "visibleGrain": false,
+        "supersedesSpecBaseColorHex": "#667078"
+      },
+      "unity": null,
+      "usedBy": [
+        {
+          "model": "premium-display-case",
+          "variant": "tri-spinner-slab-v3-cmf",
+          "parts": [
+            "GEO_PDC_HEADER_MIRROR_BEVEL",
+            "GEO_PDC_MAIN_MIRROR_SEAM",
+            "GEO_PDC_POCKET_POLISHED_LIP"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "path": "unity/FidgetingApp/ArtSource/ModelPipeline/premium-display-case/evidence/07-material/rev-003/lookdev_tri_spinner_slab_materials.r003.py",
+          "note": "Gate 07 rev-003 lookdev, user approval “确认” 2026-09-11T15:26:00+08:00"
+        },
+        {
+          "path": "unity/FidgetingApp/ArtSource/ModelPipeline/premium-display-case/evidence/03-contract/rev-013/modeling-contract.json",
+          "note": "contract rev-013 materials / cmf.scheme A / cmf.rarity_tier_map"
+        }
+      ]
+    },
+    {
+      "id": "case-champagne-gold-inlay",
+      "name": {
+        "zh": "香槟金饰条",
+        "en": "Champagne gold inlay"
+      },
+      "family": "gold",
+      "status": "approved-gate07",
+      "description": "Standard 档的金色饰条、竖轨与索引块：#C8B48B，各向异性 0.15，沿饰条长轴拉丝，永不成闭环。",
+      "imageGen": {
+        "phrases": [
+          "champagne gold inlay",
+          "fine directional brushing along the inlay",
+          "restrained warm metal"
+        ],
+        "avoid": [
+          "yellow gold",
+          "mirror gold",
+          "closed gold loop"
+        ]
+      },
+      "blender": {
+        "authority": "blender-lookdev",
+        "materialName": "M_PDC_AccentMetal",
+        "baseColor": [
+          0.5776,
+          0.4564,
+          0.2582
+        ],
+        "metallic": 1,
+        "roughness": 0.26,
+        "anisotropic": 0.15,
+        "brushingAxis": "inlay long axis (UV2.x)"
+      },
+      "unity": null,
+      "usedBy": [
+        {
+          "model": "premium-display-case",
+          "variant": "tri-spinner-slab-v3-cmf",
+          "parts": [
+            "GEO_PDC_*GOLD*"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "path": "unity/FidgetingApp/ArtSource/ModelPipeline/premium-display-case/evidence/07-material/rev-003/lookdev_tri_spinner_slab_materials.r003.py",
+          "note": "Gate 07 rev-003 lookdev, user approval “确认” 2026-09-11T15:26:00+08:00"
+        },
+        {
+          "path": "unity/FidgetingApp/ArtSource/ModelPipeline/premium-display-case/evidence/03-contract/rev-013/modeling-contract.json",
+          "note": "contract rev-013 materials / cmf.scheme A / cmf.rarity_tier_map"
+        }
+      ]
+    },
+    {
+      "id": "case-rose-bronze-tier",
+      "name": {
+        "zh": "玫瑰青铜档位金属",
+        "en": "Rose-bronze tier metal"
+      },
+      "family": "gold",
+      "status": "approved-gate07",
+      "description": "Refined 档（宽口径）：边框、抛光件与饰条整体换为低饱和玫瑰青铜，sRGB 0.70/0.58/0.52，饱和度约为原铜色 40%。",
+      "imageGen": {
+        "phrases": [
+          "muted rose bronze",
+          "low-saturation warm metal",
+          "brushed on frames, polished on bevels"
+        ],
+        "avoid": [
+          "orange copper",
+          "saturated bronze",
+          "rose gold jewelry pink"
+        ]
+      },
+      "blender": {
+        "authority": "blender-lookdev",
+        "materialName": "M_PDC_BrushedSteel_copper",
+        "baseColor": [
+          0.448,
+          0.2957,
+          0.233
+        ],
+        "metallic": 1,
+        "roughness": 0.3,
+        "rarity": "Refined",
+        "requirement": "FDB-DSP-059/061",
+        "linerSrgb": [
+          0.9,
+          0.86,
+          0.84
+        ]
+      },
+      "unity": null,
+      "usedBy": [
+        {
+          "model": "premium-display-case",
+          "variant": "tri-spinner-slab-v3-cmf",
+          "parts": [
+            "bezels (5)",
+            "polished parts (6)",
+            "accents (7)",
+            "liner tint (2)"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "path": "unity/FidgetingApp/ArtSource/ModelPipeline/premium-display-case/evidence/07-material/rev-003/lookdev_tri_spinner_slab_materials.r003.py",
+          "note": "Gate 07 rev-003 lookdev, user approval “确认” 2026-09-11T15:26:00+08:00"
+        },
+        {
+          "path": "unity/FidgetingApp/ArtSource/ModelPipeline/premium-display-case/evidence/03-contract/rev-013/modeling-contract.json",
+          "note": "contract rev-013 materials / cmf.scheme A / cmf.rarity_tier_map"
+        }
+      ]
+    },
+    {
+      "id": "case-grey-blue-titanium-tier",
+      "name": {
+        "zh": "灰蓝钛档位金属",
+        "en": "Grey-blue titanium tier metal"
+      },
+      "family": "steel",
+      "status": "approved-gate07",
+      "description": "Signature 档（宽口径）：灰蓝钛，sRGB 0.58/0.63/0.70，与 Standard 冷钢的差别只在偏蓝色相。",
+      "imageGen": {
+        "phrases": [
+          "grey-blue titanium PVD",
+          "cool desaturated metal",
+          "brushed frames, polished bevels"
+        ],
+        "avoid": [
+          "saturated blue",
+          "cobalt",
+          "chrome blue"
+        ]
+      },
+      "blender": {
+        "authority": "blender-lookdev",
+        "materialName": "M_PDC_BrushedSteel_titanium",
+        "baseColor": [
+          0.2957,
+          0.3547,
+          0.448
+        ],
+        "metallic": 1,
+        "roughness": 0.3,
+        "rarity": "Signature",
+        "requirement": "FDB-DSP-059/061",
+        "linerSrgb": [
+          0.86,
+          0.88,
+          0.93
+        ]
+      },
+      "unity": null,
+      "usedBy": [
+        {
+          "model": "premium-display-case",
+          "variant": "tri-spinner-slab-v3-cmf",
+          "parts": [
+            "bezels (5)",
+            "polished parts (6)",
+            "accents (7)",
+            "liner tint (2)"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "path": "unity/FidgetingApp/ArtSource/ModelPipeline/premium-display-case/evidence/07-material/rev-003/lookdev_tri_spinner_slab_materials.r003.py",
+          "note": "Gate 07 rev-003 lookdev, user approval “确认” 2026-09-11T15:26:00+08:00"
+        },
+        {
+          "path": "unity/FidgetingApp/ArtSource/ModelPipeline/premium-display-case/evidence/03-contract/rev-013/modeling-contract.json",
+          "note": "contract rev-013 materials / cmf.scheme A / cmf.rarity_tier_map"
+        }
+      ]
+    },
+    {
+      "id": "case-champagne-tier",
+      "name": {
+        "zh": "香槟档位金属",
+        "en": "Champagne tier metal"
+      },
+      "family": "gold",
+      "status": "approved-gate07",
+      "description": "Heirloom 档（宽口径）：香槟色，sRGB 0.80/0.73/0.60，取代饱和黄金。",
+      "imageGen": {
+        "phrases": [
+          "pale champagne metal",
+          "warm desaturated gold",
+          "brushed frames, polished bevels"
+        ],
+        "avoid": [
+          "yellow gold",
+          "brass",
+          "saturated gold"
+        ]
+      },
+      "blender": {
+        "authority": "blender-lookdev",
+        "materialName": "M_PDC_BrushedSteel_gold",
+        "baseColor": [
+          0.6038,
+          0.4919,
+          0.3185
+        ],
+        "metallic": 1,
+        "roughness": 0.3,
+        "rarity": "Heirloom",
+        "requirement": "FDB-DSP-059/061",
+        "linerSrgb": [
+          0.9,
+          0.88,
+          0.9
+        ]
+      },
+      "unity": null,
+      "usedBy": [
+        {
+          "model": "premium-display-case",
+          "variant": "tri-spinner-slab-v3-cmf",
+          "parts": [
+            "bezels (5)",
+            "polished parts (6)",
+            "accents (7)",
+            "liner tint (2)"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "path": "unity/FidgetingApp/ArtSource/ModelPipeline/premium-display-case/evidence/07-material/rev-003/lookdev_tri_spinner_slab_materials.r003.py",
+          "note": "Gate 07 rev-003 lookdev, user approval “确认” 2026-09-11T15:26:00+08:00"
+        },
+        {
+          "path": "unity/FidgetingApp/ArtSource/ModelPipeline/premium-display-case/evidence/03-contract/rev-013/modeling-contract.json",
+          "note": "contract rev-013 materials / cmf.scheme A / cmf.rarity_tier_map"
+        }
+      ]
     }
   ],
   "pendingEntries": [

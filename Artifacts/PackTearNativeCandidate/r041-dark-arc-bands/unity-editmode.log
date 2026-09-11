@@ -1,0 +1,757 @@
+Unity Editor version:    6000.5.6f1 (0e0577a1a2ac)
+Branch:                  6000.5/staging
+Build type:              Release
+Batch mode:              YES
+macOS version:           Version 26.6.2 (Build 25G83)
+Darwin version:          25.6.0
+Architecture:            arm64
+Running under Rosetta:   NO
+Available memory:        65536 MB
+Date:                    2026-09-07T01:22:04Z
+[Licensing::Module] Trying to connect to existing licensing client channel...
+[Licensing::IpcConnector] Successfully connected to: "LicenseClient-jiawei.zhou" at "2026-09-07T01:22:04.875233Z"
+Launching external process: /Applications/Unity/Hub/Editor/6000.5.6f1/Unity.app/Contents/Helpers/PackageManager/Server/UnityPackageManager
+
+COMMAND LINE ARGUMENTS:
+/Applications/Unity/Hub/Editor/6000.5.6f1/Unity.app/Contents/MacOS/Unity
+-batchmode
+-nographics
+-projectPath
+/Users/jiawei.zhou/Documents/Fidgeting app/unity/FidgetingApp
+-runTests
+-testPlatform
+EditMode
+-testFilter
+FidgetingApp.Tests.Editor.GachaStorefrontIntegrationTests
+-testResults
+/tmp/r041-dark-arc-gacha-storefront-editmode-final-results.xml
+-logFile
+/tmp/r041-dark-arc-gacha-storefront-editmode-final.log
+Successfully changed project path to: /Users/jiawei.zhou/Documents/Fidgeting app/unity/FidgetingApp
+/Users/jiawei.zhou/Documents/Fidgeting app/unity/FidgetingApp
+[UnityMemory] Configuration Parameters - Can be set up in boot.config
+    "memorysetup-temp-allocator-size-gi-baking-worker=262144"
+    "memorysetup-temp-allocator-size-gi-baking-worker=262144"
+    "memorysetup-temp-allocator-size-gi-baking-worker=262144"
+    "memorysetup-temp-allocator-size-gi-baking-worker=262144"
+    "memorysetup-temp-allocator-size-gi-baking-worker=262144"
+    "memorysetup-temp-allocator-size-nav-mesh-worker=65536"
+    "memorysetup-temp-allocator-size-audio-worker=65536"
+    "memorysetup-temp-allocator-size-cloud-worker=32768"
+    "memorysetup-allocator-temp-initial-block-size-main=262144"
+    "memorysetup-allocator-temp-initial-block-size-worker=262144"
+    "memorysetup-temp-allocator-size-preload-manager=33554432"
+    "memorysetup-temp-allocator-size-gfx=262144"
+    "memorysetup-temp-allocator-size-background-worker=32768"
+    "memorysetup-temp-allocator-size-job-worker=262144"
+    "memorysetup-bucket-allocator-granularity=16"
+    "memorysetup-bucket-allocator-bucket-count=8"
+    "memorysetup-bucket-allocator-block-size=33554432"
+    "memorysetup-bucket-allocator-block-count=8"
+    "memorysetup-main-allocator-block-size=16777216"
+    "memorysetup-thread-allocator-block-size=16777216"
+    "memorysetup-main-allocator-mimalloc-enabled=0"
+    "memorysetup-gfx-main-allocator-block-size=16777216"
+    "memorysetup-gfx-thread-allocator-block-size=16777216"
+    "memorysetup-cache-allocator-block-size=4194304"
+    "memorysetup-typetree-allocator-block-size=2097152"
+    "memorysetup-profiler-bucket-allocator-granularity=16"
+    "memorysetup-profiler-bucket-allocator-bucket-count=8"
+    "memorysetup-profiler-bucket-allocator-block-size=33554432"
+    "memorysetup-profiler-bucket-allocator-block-count=8"
+    "memorysetup-profiler-allocator-block-size=16777216"
+    "memorysetup-profiler-editor-allocator-block-size=1048576"
+    "memorysetup-temp-allocator-size-main=16777216"
+    "memorysetup-job-temp-allocator-block-size=2097152"
+    "memorysetup-job-temp-allocator-block-size-background=1048576"
+    "memorysetup-job-temp-allocator-reduction-small-platforms=262144"
+Logging is directed to a specific file, skipping project log.Player connection [8345100672]  Target information:
+
+Player connection [8345100672]  * "[IP] 172.30.215.248 [Port] 55504 [Flags] 2 [Guid] 2040161488 [EditorId] 2040161488 [Version] 1048832 [Id] OSXEditor(0,WhatnotMacBook-Pro-16-inch-2024-KDX49F6RHV) [Debug] 1 [PackageName] OSXEditor [ProjectName] Editor" 
+
+Player connection [8345100672]  * "[IP] 192.168.3.18 [Port] 55504 [Flags] 2 [Guid] 2040161488 [EditorId] 2040161488 [Version] 1048832 [Id] OSXEditor(0,WhatnotMacBook-Pro-16-inch-2024-KDX49F6RHV) [Debug] 1 [PackageName] OSXEditor [ProjectName] Editor" 
+
+Player connection [8345100672]  * "[IP] 240.0.0.1 [Port] 55504 [Flags] 2 [Guid] 2040161488 [EditorId] 2040161488 [Version] 1048832 [Id] OSXEditor(0,WhatnotMacBook-Pro-16-inch-2024-KDX49F6RHV) [Debug] 1 [PackageName] OSXEditor [ProjectName] Editor" 
+
+Player connection [8345100672] Host joined multi-casting on [225.0.0.222:54997]...
+Player connection [8345100672] Host joined alternative multi-casting on [225.0.0.222:34997]...
+Input System module state changed to: Initialized.
+[Physics::Module] Initialized fallback backend.
+[Physics::Module] Id: 0xdecafbad
+[Licensing::Client] Handshaking with LicensingClient:
+  Version:                 1.18.1+9fbee8e
+  Session Id:              b4c9b4fa74cc48b09bf7c11fb74536f0
+  Correlation Id:          6361d098b99a6f08b826243d53c4e660
+  External correlation Id: 2724056483103664270
+  Machine Id:              /KH2BGG6vZf7t7D/yU/ppmcrnfI=
+[Licensing::Module] Successfully connected to LicensingClient on channel: "LicenseClient-jiawei.zhou" (connect: 0.00s, validation: 0.00s, handshake: 0.20s)
+[Licensing::IpcConnector] Successfully connected to: "LicenseClient-jiawei.zhou-notifications" at "2026-09-07T01:22:05.08072Z"
+[Licensing::Module] Error: Access token is unavailable; failed to update
+[Licensing::Client] Successfully resolved entitlement details
+[Licensing::Module] License group:
+  Id: 18968260060310-UnityPersXXXX
+  Product: Unity Personal
+  Type: Assigned
+  Expiration: Unlimited
+[Licensing::Client] Successfully updated license, isAsync: True, time: 0.00
+[Licensing::Module] Licensing Background thread has ended after 0.23s
+[Package Manager] Connected to IPC stream "Upm-21243" after 0.2 seconds.
+[Licensing::Client] Successfully resolved entitlement details
+Library Redirect Path: Library/
+[Physics::Module] Selected backend.
+[Physics::Module] Name: PhysX
+[Physics::Module] Id: 0xf2b8ea05
+[Physics::Module] SDK Version: 4.1.2
+[Physics::Module] Integration Version: 1.0.0
+[Physics::Module] Threading Mode: Multi-Threaded
+[Licensing::Client] Successfully resolved entitlement details
+Refreshing native plugins compatible for Editor in 4.21 ms, found 0 plugins.
+Initialize engine version: 6000.5.6f1 (0e0577a1a2ac)
+[Subsystems] Discovering subsystems at path /Applications/Unity/Hub/Editor/6000.5.6f1/Unity.app/Contents/Resources/UnitySubsystems
+[Subsystems] Discovering subsystems at path /Users/jiawei.zhou/Documents/Fidgeting app/unity/FidgetingApp/Assets
+Forcing GfxDevice: Null
+GfxDevice: creating device client; kGfxThreadingModeNonThreaded
+NullGfxDevice:
+    Version:  NULL 1.0 [1.0]
+    Renderer: Null Device
+    Vendor:   Unity Technologies
+Initialize mono
+Mono path[0] = '/Applications/Unity/Hub/Editor/6000.5.6f1/Unity.app/Contents/Resources/Scripting/Managed'
+Mono path[1] = '/Applications/Unity/Hub/Editor/6000.5.6f1/Unity.app/Contents/Resources/Scripting/BCLExtensions/runtime/netstandard2.1'
+Mono path[2] = '/Applications/Unity/Hub/Editor/6000.5.6f1/Unity.app/Contents/Resources/Scripting/MonoBleedingEdge/lib/mono/unityjit-macos'
+Mono config path = '/Applications/Unity/Hub/Editor/6000.5.6f1/Unity.app/Contents/Resources/Scripting/MonoBleedingEdge/etc'
+Using monoOptions --debugger-agent=transport=dt_socket,embedding=1,server=y,suspend=n,address=127.0.0.1:56243
+CodeReloadManager initialized
+ImportWorker Server TCP listen port: 0
+AcceleratorClientConnectionCallback - disconnected - :0
+Begin MonoManager ReloadAssembly
+Registering precompiled unity dll's ...
+Trying to register platform support module: /Applications/Unity/Hub/Editor/6000.5.6f1/PlaybackEngines/WebGLSupport/UnityEditor.WebGL.Extensions.dll (that doesn't exist). Retrying without overrides.
+Platform support module is not available: /Applications/Unity/Hub/Editor/6000.5.6f1/PlaybackEngines/WebGLSupport/UnityEditor.WebGL.Extensions.dll
+Register platform support module: /Applications/Unity/Hub/Editor/6000.5.6f1/PlaybackEngines/MacStandaloneSupport/UnityEditor.OSXStandalone.Extensions.dll
+Register platform support module: /Applications/Unity/Hub/Editor/6000.5.6f1/PlaybackEngines/iOSSupport/UnityEditor.iOS.Extensions.dll
+Registered in 0.001357 seconds.
+[usbmuxd] Start listen thread
+[usbmuxd] Listen thread started
+[usbmuxd] Send listen message
+Native extension for iOS target not found
+Native extension for OSXStandalone target not found
+Package Manager log level set to [2]
+ScheduleIndexationOnStartup MainProcess:False IndexOnStartup:True
+Mono: successfully reloaded assembly
+- Finished resetting the current domain, in  0.255 seconds
+Domain Reload Profiling: 553ms
+	BeginReloadAssembly (73ms)
+		CreateAndSetChildDomain (4ms)
+	RebuildCommonClasses (3ms)
+	RebuildNativeTypeToScriptingClass (14ms)
+	initialDomainReloadingComplete (35ms)
+	LoadAllAssembliesAndSetupDomain (173ms)
+		LoadAssemblies (70ms)
+		AnalyzeDomain (132ms)
+			TypeCache.Refresh (131ms)
+				TypeCache.ScanAssembly (121ms)
+	FinalizeReload (255ms)
+		SetupLoadedEditorAssemblies (0ms)
+			InitializePlatformSupportModulesInManaged (39ms)
+			BeforeProcessingInitializeOnLoad (46ms)
+			ProcessInitializeOnLoadAttributes (52ms)
+			ProcessInitializeOnLoadMethodAttributes (79ms)
+[Licensing::Client] Successfully resolved entitlement details
+[Licensing::Client] Successfully resolved entitlement details
+Application.AssetDatabase Initial Refresh Start
+[Package Manager] Restoring resolved packages state from cache
+[Licensing::Client] Successfully resolved entitlement details
+[Package Manager] Registered 62 packages:
+  Packages from [https://packages.unity.com]:
+    com.unity.ai.navigation@2.0.14 (location: /Users/jiawei.zhou/Documents/Fidgeting app/unity/FidgetingApp/Library/PackageCache/com.unity.ai.navigation@134dd6a3b97b)
+    com.unity.collab-proxy@2.13.3 (location: /Users/jiawei.zhou/Documents/Fidgeting app/unity/FidgetingApp/Library/PackageCache/com.unity.collab-proxy@4f3be89e8675)
+    com.unity.ide.rider@3.0.38 (location: /Users/jiawei.zhou/Documents/Fidgeting app/unity/FidgetingApp/Library/PackageCache/com.unity.ide.rider@1f60b3138684)
+    com.unity.ide.visualstudio@2.0.26 (location: /Users/jiawei.zhou/Documents/Fidgeting app/unity/FidgetingApp/Library/PackageCache/com.unity.ide.visualstudio@a99d56dec63f)
+    com.unity.inputsystem@1.20.0 (location: /Users/jiawei.zhou/Documents/Fidgeting app/unity/FidgetingApp/Library/PackageCache/com.unity.inputsystem@7a4e1a2a8194)
+    com.unity.timeline@1.8.12 (location: /Users/jiawei.zhou/Documents/Fidgeting app/unity/FidgetingApp/Library/PackageCache/com.unity.timeline@8cd8509afae5)
+    com.unity.visualscripting@1.9.11 (location: /Users/jiawei.zhou/Documents/Fidgeting app/unity/FidgetingApp/Library/PackageCache/com.unity.visualscripting@8bed5ad90189)
+    com.unity.ai.assistant@2.17.0-pre.1 (location: /Users/jiawei.zhou/Documents/Fidgeting app/unity/FidgetingApp/Library/PackageCache/com.unity.ai.assistant@284c75a8d208)
+    com.unity.ai.inference@2.6.1 (location: /Users/jiawei.zhou/Documents/Fidgeting app/unity/FidgetingApp/Library/PackageCache/com.unity.ai.inference@9a123aee5df7)
+    com.unity.burst@1.8.29 (location: /Users/jiawei.zhou/Documents/Fidgeting app/unity/FidgetingApp/Library/PackageCache/com.unity.burst@6bb9aca3ef38)
+    com.unity.dt.app-ui@2.1.7 (location: /Users/jiawei.zhou/Documents/Fidgeting app/unity/FidgetingApp/Library/PackageCache/com.unity.dt.app-ui@b097002a00c2)
+    com.unity.nuget.newtonsoft-json@3.2.2 (location: /Users/jiawei.zhou/Documents/Fidgeting app/unity/FidgetingApp/Library/PackageCache/com.unity.nuget.newtonsoft-json@4dfd81071c64)
+    com.unity.nuget.mono-cecil@1.11.6 (location: /Users/jiawei.zhou/Documents/Fidgeting app/unity/FidgetingApp/Library/PackageCache/com.unity.nuget.mono-cecil@ecb9724e46ff)
+    com.unity.test-framework.performance@3.5.0 (location: /Users/jiawei.zhou/Documents/Fidgeting app/unity/FidgetingApp/Library/PackageCache/com.unity.test-framework.performance@8b56083ec0f0)
+    com.unity.searcher@4.9.4 (location: /Users/jiawei.zhou/Documents/Fidgeting app/unity/FidgetingApp/Library/PackageCache/com.unity.searcher@d45a78918735)
+  Built-in packages:
+    com.unity.multiplayer.center@1.0.1 (location: /Users/jiawei.zhou/Documents/Fidgeting app/unity/FidgetingApp/Library/PackageCache/com.unity.multiplayer.center@b860850997d0)
+    com.unity.render-pipelines.universal@17.5.0 (location: /Users/jiawei.zhou/Documents/Fidgeting app/unity/FidgetingApp/Library/PackageCache/com.unity.render-pipelines.universal@73b4c4ff130e)
+    com.unity.test-framework@1.7.0 (location: /Users/jiawei.zhou/Documents/Fidgeting app/unity/FidgetingApp/Library/PackageCache/com.unity.test-framework@1405238725ab)
+    com.unity.ugui@2.5.0 (location: /Users/jiawei.zhou/Documents/Fidgeting app/unity/FidgetingApp/Library/PackageCache/com.unity.ugui@67707a67a4ab)
+    com.unity.modules.accessibility@1.0.0 (location: /Users/jiawei.zhou/Documents/Fidgeting app/unity/FidgetingApp/Library/PackageCache/com.unity.modules.accessibility)
+    com.unity.modules.adaptiveperformance@1.0.0 (location: /Users/jiawei.zhou/Documents/Fidgeting app/unity/FidgetingApp/Library/PackageCache/com.unity.modules.adaptiveperformance)
+    com.unity.modules.ai@1.0.0 (location: /Users/jiawei.zhou/Documents/Fidgeting app/unity/FidgetingApp/Library/PackageCache/com.unity.modules.ai)
+    com.unity.modules.androidjni@1.0.0 (location: /Users/jiawei.zhou/Documents/Fidgeting app/unity/FidgetingApp/Library/PackageCache/com.unity.modules.androidjni)
+    com.unity.modules.animation@1.0.0 (location: /Users/jiawei.zhou/Documents/Fidgeting app/unity/FidgetingApp/Library/PackageCache/com.unity.modules.animation)
+    com.unity.modules.assetbundle@1.0.0 (location: /Users/jiawei.zhou/Documents/Fidgeting app/unity/FidgetingApp/Library/PackageCache/com.unity.modules.assetbundle)
+    com.unity.modules.audio@1.0.0 (location: /Users/jiawei.zhou/Documents/Fidgeting app/unity/FidgetingApp/Library/PackageCache/com.unity.modules.audio)
+    com.unity.modules.cloth@1.0.0 (location: /Users/jiawei.zhou/Documents/Fidgeting app/unity/FidgetingApp/Library/PackageCache/com.unity.modules.cloth)
+    com.unity.modules.director@1.0.0 (location: /Users/jiawei.zhou/Documents/Fidgeting app/unity/FidgetingApp/Library/PackageCache/com.unity.modules.director)
+    com.unity.modules.imageconversion@1.0.0 (location: /Users/jiawei.zhou/Documents/Fidgeting app/unity/FidgetingApp/Library/PackageCache/com.unity.modules.imageconversion)
+    com.unity.modules.imgui@1.0.0 (location: /Users/jiawei.zhou/Documents/Fidgeting app/unity/FidgetingApp/Library/PackageCache/com.unity.modules.imgui)
+    com.unity.modules.jsonserialize@1.0.0 (location: /Users/jiawei.zhou/Documents/Fidgeting app/unity/FidgetingApp/Library/PackageCache/com.unity.modules.jsonserialize)
+    com.unity.modules.particlesystem@1.0.0 (location: /Users/jiawei.zhou/Documents/Fidgeting app/unity/FidgetingApp/Library/PackageCache/com.unity.modules.particlesystem)
+    com.unity.modules.physics@1.0.0 (location: /Users/jiawei.zhou/Documents/Fidgeting app/unity/FidgetingApp/Library/PackageCache/com.unity.modules.physics)
+    com.unity.modules.physics2d@1.0.0 (location: /Users/jiawei.zhou/Documents/Fidgeting app/unity/FidgetingApp/Library/PackageCache/com.unity.modules.physics2d)
+    com.unity.modules.physicscore2d@1.0.0 (location: /Users/jiawei.zhou/Documents/Fidgeting app/unity/FidgetingApp/Library/PackageCache/com.unity.modules.physicscore2d)
+    com.unity.modules.screencapture@1.0.0 (location: /Users/jiawei.zhou/Documents/Fidgeting app/unity/FidgetingApp/Library/PackageCache/com.unity.modules.screencapture)
+    com.unity.modules.terrain@1.0.0 (location: /Users/jiawei.zhou/Documents/Fidgeting app/unity/FidgetingApp/Library/PackageCache/com.unity.modules.terrain)
+    com.unity.modules.terrainphysics@1.0.0 (location: /Users/jiawei.zhou/Documents/Fidgeting app/unity/FidgetingApp/Library/PackageCache/com.unity.modules.terrainphysics)
+    com.unity.modules.tilemap@1.0.0 (location: /Users/jiawei.zhou/Documents/Fidgeting app/unity/FidgetingApp/Library/PackageCache/com.unity.modules.tilemap)
+    com.unity.modules.ui@1.0.0 (location: /Users/jiawei.zhou/Documents/Fidgeting app/unity/FidgetingApp/Library/PackageCache/com.unity.modules.ui)
+    com.unity.modules.uielements@1.0.0 (location: /Users/jiawei.zhou/Documents/Fidgeting app/unity/FidgetingApp/Library/PackageCache/com.unity.modules.uielements)
+    com.unity.modules.umbra@1.0.0 (location: /Users/jiawei.zhou/Documents/Fidgeting app/unity/FidgetingApp/Library/PackageCache/com.unity.modules.umbra)
+    com.unity.modules.unityanalytics@1.0.0 (location: /Users/jiawei.zhou/Documents/Fidgeting app/unity/FidgetingApp/Library/PackageCache/com.unity.modules.unityanalytics)
+    com.unity.modules.unitywebrequest@1.0.0 (location: /Users/jiawei.zhou/Documents/Fidgeting app/unity/FidgetingApp/Library/PackageCache/com.unity.modules.unitywebrequest)
+    com.unity.modules.unitywebrequestassetbundle@1.0.0 (location: /Users/jiawei.zhou/Documents/Fidgeting app/unity/FidgetingApp/Library/PackageCache/com.unity.modules.unitywebrequestassetbundle)
+    com.unity.modules.unitywebrequestaudio@1.0.0 (location: /Users/jiawei.zhou/Documents/Fidgeting app/unity/FidgetingApp/Library/PackageCache/com.unity.modules.unitywebrequestaudio)
+    com.unity.modules.unitywebrequesttexture@1.0.0 (location: /Users/jiawei.zhou/Documents/Fidgeting app/unity/FidgetingApp/Library/PackageCache/com.unity.modules.unitywebrequesttexture)
+    com.unity.modules.unitywebrequestwww@1.0.0 (location: /Users/jiawei.zhou/Documents/Fidgeting app/unity/FidgetingApp/Library/PackageCache/com.unity.modules.unitywebrequestwww)
+    com.unity.modules.vectorgraphics@1.0.0 (location: /Users/jiawei.zhou/Documents/Fidgeting app/unity/FidgetingApp/Library/PackageCache/com.unity.modules.vectorgraphics)
+    com.unity.modules.vehicles@1.0.0 (location: /Users/jiawei.zhou/Documents/Fidgeting app/unity/FidgetingApp/Library/PackageCache/com.unity.modules.vehicles)
+    com.unity.modules.video@1.0.0 (location: /Users/jiawei.zhou/Documents/Fidgeting app/unity/FidgetingApp/Library/PackageCache/com.unity.modules.video)
+    com.unity.modules.wind@1.0.0 (location: /Users/jiawei.zhou/Documents/Fidgeting app/unity/FidgetingApp/Library/PackageCache/com.unity.modules.wind)
+    com.unity.modules.xr@1.0.0 (location: /Users/jiawei.zhou/Documents/Fidgeting app/unity/FidgetingApp/Library/PackageCache/com.unity.modules.xr)
+    com.unity.collections@6.5.0 (location: /Users/jiawei.zhou/Documents/Fidgeting app/unity/FidgetingApp/Library/PackageCache/com.unity.collections@a43cabe808ca)
+    com.unity.2d.sprite@1.0.0 (location: /Users/jiawei.zhou/Documents/Fidgeting app/unity/FidgetingApp/Library/PackageCache/com.unity.2d.sprite@053a968eab56)
+    com.unity.mathematics@1.4.0 (location: /Users/jiawei.zhou/Documents/Fidgeting app/unity/FidgetingApp/Library/PackageCache/com.unity.mathematics@981956d94fb6)
+    com.unity.modules.subsystems@1.0.0 (location: /Users/jiawei.zhou/Documents/Fidgeting app/unity/FidgetingApp/Library/PackageCache/com.unity.modules.subsystems)
+    com.unity.modules.hierarchycore@1.0.0 (location: /Users/jiawei.zhou/Documents/Fidgeting app/unity/FidgetingApp/Library/PackageCache/com.unity.modules.hierarchycore)
+    com.unity.ext.nunit@2.1.0 (location: /Users/jiawei.zhou/Documents/Fidgeting app/unity/FidgetingApp/Library/PackageCache/com.unity.ext.nunit@44f7d31723bd)
+    com.unity.render-pipelines.core@17.5.0 (location: /Users/jiawei.zhou/Documents/Fidgeting app/unity/FidgetingApp/Library/PackageCache/com.unity.render-pipelines.core@645717f21c5f)
+    com.unity.shadergraph@17.5.0 (location: /Users/jiawei.zhou/Documents/Fidgeting app/unity/FidgetingApp/Library/PackageCache/com.unity.shadergraph@8d7376ec43ee)
+    com.unity.render-pipelines.universal-config@17.5.0 (location: /Users/jiawei.zhou/Documents/Fidgeting app/unity/FidgetingApp/Library/PackageCache/com.unity.render-pipelines.universal-config@fdda01c80fe3)
+[Subsystems] No new subsystems found in resolved package list.
+[Package Manager] Done registering packages in 0.01 seconds
+The GUID inside 'Assets/StreamingAssets/ThirdPartyNotices.meta' cannot be extracted by the YAML Parser. Attempting to extract it via string matching instead. Please verify the file does not contain unexpected data.
+The .meta file Assets/StreamingAssets/ThirdPartyNotices.meta does not have a valid GUID and its corresponding Asset file will be ignored. If this file is not malformed, please add a GUID, or delete the .meta file and it will be recreated correctly
+[ScriptCompilation] Requested script compilation because: AssetDatabase observed changes in script compilation related files
+info: Microsoft.Hosting.Lifetime[14]
+      Now listening on: http://unix:/tmp/ilpp.sock-82459902276d5e08e7b0a2b4f2bc76a1
+info: Microsoft.Hosting.Lifetime[0]
+      Application started. Press Ctrl+C to shut down.
+info: Microsoft.Hosting.Lifetime[0]
+      Hosting environment: Production
+info: Microsoft.Hosting.Lifetime[0]
+      Content root path: /Users/jiawei.zhou/Documents/Fidgeting app/unity/FidgetingApp
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/2 POST http://ilpp/UnityILPP.PostProcessing/Ping - application/grpc -
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[0]
+      Executing endpoint 'gRPC - /UnityILPP.PostProcessing/Ping'
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[1]
+      Executed endpoint 'gRPC - /UnityILPP.PostProcessing/Ping'
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/2 POST http://ilpp/UnityILPP.PostProcessing/Ping - 200 - application/grpc 22.9244ms
+Refreshing native plugins compatible for Editor in 3.95 ms, found 3 plugins.
+Starting: /Applications/Unity/Hub/Editor/6000.5.6f1/Unity.app/Contents/Resources/BuildPipeline/bee_backend --ipc --defer-dag-verification --dagfile="Library/Bee/900b0aE.dag" --continue-on-failure --profile="Library/Bee/backend1.traceevents" ScriptAssemblies
+WorkingDir: /Users/jiawei.zhou/Documents/Fidgeting app/unity/FidgetingApp
+DisplayProgressbar: Compiling Scripts
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/2 POST http://ilpp/UnityILPP.PostProcessing/ConfigurePostProcessors - application/grpc -
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[0]
+      Executing endpoint 'gRPC - /UnityILPP.PostProcessing/ConfigurePostProcessors'
+warn: Unity.ILPP.Runner.PostProcessingAssemblyLoadContext[0]
+      Assembly unityeditor.ios.extensions.xcode has duplicate hint path. Ignoring "/Applications/Unity/Hub/Editor/6000.5.6f1/PlaybackEngines/iOSSupport/UnityEditor.iOS.Extensions.Xcode.dll" in favor of "/Applications/Unity/Hub/Editor/6000.5.6f1/PlaybackEngines/MacStandaloneSupport/UnityEditor.iOS.Extensions.Xcode.dll"
+warn: Unity.ILPP.Runner.PostProcessingAssemblyLoadContext[0]
+      Assembly system.runtime.interopservices.windowsruntime has duplicate hint path. Ignoring "/Applications/Unity/Hub/Editor/6000.5.6f1/Unity.app/Contents/Resources/Scripting/UnityReferenceAssemblies/unity-4.8-api/Facades/System.Runtime.InteropServices.WindowsRuntime.dll" in favor of "/Applications/Unity/Hub/Editor/6000.5.6f1/Unity.app/Contents/Resources/Scripting/NetStandard/Extensions/2.0.0/System.Runtime.InteropServices.WindowsRuntime.dll"
+warn: Unity.ILPP.Runner.PostProcessingAssemblyLoadContext[0]
+      Assembly system.componentmodel.composition has duplicate hint path. Ignoring "/Applications/Unity/Hub/Editor/6000.5.6f1/Unity.app/Contents/Resources/Scripting/UnityReferenceAssemblies/unity-4.8-api/System.ComponentModel.Composition.dll" in favor of "/Applications/Unity/Hub/Editor/6000.5.6f1/Unity.app/Contents/Resources/Scripting/NetStandard/compat/2.1.0/shims/netfx/System.ComponentModel.Composition.dll"
+info: Unity.ILPP.Runner.PostProcessingAssemblyLoadContext[0]
+      Resolved Unity.Burst.Cecil, Version=0.11.6.0, Culture=neutral, PublicKeyToken=50cebf1cceb9d05e with Library/PackageCache/com.unity.burst@6bb9aca3ef38/Unity.Burst.CodeGen/Unity.Burst.Cecil.dll
+info: Unity.ILPP.Runner.PostProcessingAssemblyLoadContext[0]
+      Resolved Mono.Cecil, Version=0.11.5.0, Culture=neutral, PublicKeyToken=50cebf1cceb9d05e with Library/PackageCache/com.unity.nuget.mono-cecil@ecb9724e46ff/Mono.Cecil.dll
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[1]
+      Executed endpoint 'gRPC - /UnityILPP.PostProcessing/ConfigurePostProcessors'
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/2 POST http://ilpp/UnityILPP.PostProcessing/ConfigurePostProcessors - 200 - application/grpc 16.7634ms
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/2 POST http://ilpp/UnityILPP.PostProcessing/PostProcessAssembly - application/grpc -
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[0]
+      Executing endpoint 'gRPC - /UnityILPP.PostProcessing/PostProcessAssembly'
+info: Unity.ILPP.Runner.PostProcessingPipeline[0]
+      Processing assembly Library/Bee/artifacts/900b0aE.dag/Assembly-CSharp-Editor.dll, with 145 defines and 395 references
+info: Unity.ILPP.Runner.PostProcessingPipeline[0]
+      processors: Unity.Jobs.CodeGen.JobsILPostProcessor, zzzUnity.Burst.CodeGen.BurstILPostProcessor
+info: Unity.ILPP.Runner.PostProcessingPipeline[0]
+      running Unity.Jobs.CodeGen.JobsILPostProcessor
+info: Unity.ILPP.Runner.PostProcessingAssemblyLoadContext[0]
+      Resolved Unity.Collections, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null with Library/Bee/artifacts/900b0aE.dag/Unity.Collections.dll
+info: Unity.ILPP.Runner.PostProcessingAssemblyLoadContext[0]
+      Resolved UnityEditor.CoreModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null with /Applications/Unity/Hub/Editor/6000.5.6f1/Unity.app/Contents/Resources/Scripting/Managed/UnityEngine/UnityEditor.CoreModule.dll
+info: Unity.ILPP.Runner.PostProcessingAssemblyLoadContext[0]
+      Resolved UnityEngine.CoreModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null with /Applications/Unity/Hub/Editor/6000.5.6f1/Unity.app/Contents/Resources/Scripting/Managed/UnityEngine/UnityEngine.CoreModule.dll
+info: Unity.ILPP.Runner.PostProcessingAssemblyLoadContext[0]
+      Resolved Unity.Scripting, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null with /Applications/Unity/Hub/Editor/6000.5.6f1/Unity.app/Contents/Resources/Scripting/Managed/UnityEngine/Unity.Scripting.dll
+info: Unity.ILPP.Runner.PostProcessingPipeline[0]
+      running zzzUnity.Burst.CodeGen.BurstILPostProcessor
+info: Unity.ILPP.Runner.PostProcessingAssemblyLoadContext[0]
+      Resolved Unity.Burst.Cecil.Rocks, Version=0.11.6.0, Culture=neutral, PublicKeyToken=50cebf1cceb9d05e with Library/PackageCache/com.unity.burst@6bb9aca3ef38/Unity.Burst.CodeGen/Unity.Burst.Cecil.Rocks.dll
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[1]
+      Executed endpoint 'gRPC - /UnityILPP.PostProcessing/PostProcessAssembly'
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/2 POST http://ilpp/UnityILPP.PostProcessing/PostProcessAssembly - 200 - application/grpc 299.6663ms
+ExitCode: 0 Duration: 3s305ms
+[1090/1470  0s] ILPP-Configuration Library/ilpp-configuration.nevergeneratedoutput
+[1466/1470  2s] Csc Library/Bee/artifacts/900b0aE.dag/Assembly-CSharp-Editor.dll (+2 others)
+Assets/_EDC/Candidates/MagneticSlideTileGate12R002/Editor/MagneticSlideTileGate12R004LightingReviewBuilder.cs(86,17): warning CS0618: 'Object.FindFirstObjectByType<T>(FindObjectsInactive)' is obsolete: 'FindFirstObjectByType has been deprecated because it relies on instance ID ordering. Use FindAnyObjectByType instead, which does not depend on ordering.'
+Assets/_EDC/Candidates/MagneticSlideTileGate12R002/Editor/MagneticSlideTileGate12R004LightingReviewBuilder.cs(272,21): warning CS0618: 'FindObjectsSortMode' is obsolete: 'FindObjectsSortMode has been deprecated. Use the FindObjectsByType overloads that do not take a FindObjectsSortMode parameter.'
+Assets/_EDC/Candidates/MagneticSlideTileGate12R002/Editor/MagneticSlideTileGate12R004LightingReviewBuilder.cs(270,20): warning CS0618: 'Object.FindObjectsByType<T>(FindObjectsInactive, FindObjectsSortMode)' is obsolete: 'FindObjectsByType with FindObjectsSortMode parameter has been deprecated. Use FindObjectsByType<T>() or FindObjectsByType<T>(FindObjectsInactive) instead. InstanceID will be replaced in the future with EntityId and previous sort order cannot be maintained.'
+Assets/_EDC/Tests/Editor/MagneticSlideLightingRevisionTests.cs(24,17): warning CS0618: 'Object.FindFirstObjectByType<T>(FindObjectsInactive)' is obsolete: 'FindFirstObjectByType has been deprecated because it relies on instance ID ordering. Use FindAnyObjectByType instead, which does not depend on ordering.'
+Assets/_EDC/Tests/Editor/MagneticSlideLightingRevisionTests.cs(79,17): warning CS0618: 'Object.FindFirstObjectByType<T>(FindObjectsInactive)' is obsolete: 'FindFirstObjectByType has been deprecated because it relies on instance ID ordering. Use FindAnyObjectByType instead, which does not depend on ordering.'
+Assets/_EDC/Candidates/MagneticSlideTileGate12R002/Tests/Editor/MagneticSlideTileGate12R002Tests.cs(50,17): warning CS0618: 'Object.FindFirstObjectByType<T>(FindObjectsInactive)' is obsolete: 'FindFirstObjectByType has been deprecated because it relies on instance ID ordering. Use FindAnyObjectByType instead, which does not depend on ordering.'
+Assets/_TwoLobeBar/Editor/TwoLobeBarSceneBuilder.cs(636,13): warning CS0618: 'RenderSettings.customReflection' is obsolete: 'RenderSettings.customReflection has been deprecated in favor of RenderSettings.customReflectionTexture.'
+Assets/_EDC/Candidates/MagneticSlideTileGate12R002/Editor/MagneticSlideTileGate12R003MotionReviewBuilder.cs(45,17): warning CS0618: 'Object.FindFirstObjectByType<T>(FindObjectsInactive)' is obsolete: 'FindFirstObjectByType has been deprecated because it relies on instance ID ordering. Use FindAnyObjectByType instead, which does not depend on ordering.'
+Assets/_EDC/Candidates/MagneticSlideTileGate12R002/Editor/MagneticSlideTileGate12R003MotionReviewBuilder.cs(51,17): warning CS0618: 'Object.FindFirstObjectByType<T>(FindObjectsInactive)' is obsolete: 'FindFirstObjectByType has been deprecated because it relies on instance ID ordering. Use FindAnyObjectByType instead, which does not depend on ordering.'
+Assets/_EDC/Candidates/MagneticSlideTileGate12R002/Editor/MagneticSlideTileGate12R003MotionReviewBuilder.cs(58,50): warning CS0618: 'FindObjectsSortMode' is obsolete: 'FindObjectsSortMode has been deprecated. Use the FindObjectsByType overloads that do not take a FindObjectsSortMode parameter.'
+Assets/_EDC/Candidates/MagneticSlideTileGate12R002/Editor/MagneticSlideTileGate12R003MotionReviewBuilder.cs(57,20): warning CS0618: 'Object.FindObjectsByType<T>(FindObjectsInactive, FindObjectsSortMode)' is obsolete: 'FindObjectsByType with FindObjectsSortMode parameter has been deprecated. Use FindObjectsByType<T>() or FindObjectsByType<T>(FindObjectsInactive) instead. InstanceID will be replaced in the future with EntityId and previous sort order cannot be maintained.'
+Assets/_EDC/Candidates/MagneticSlideTileGate12R002/Editor/MagneticSlideTileGate12R003MotionReviewBuilder.cs(93,17): warning CS0618: 'Object.FindFirstObjectByType<T>(FindObjectsInactive)' is obsolete: 'FindFirstObjectByType has been deprecated because it relies on instance ID ordering. Use FindAnyObjectByType instead, which does not depend on ordering.'
+Assets/_EDC/Candidates/MagneticSlideTileGate12R002/Editor/MagneticSlideTileGate12R003MotionReviewBuilder.cs(97,17): warning CS0618: 'Object.FindFirstObjectByType<T>(FindObjectsInactive)' is obsolete: 'FindFirstObjectByType has been deprecated because it relies on instance ID ordering. Use FindAnyObjectByType instead, which does not depend on ordering.'
+Assets/_EDC/Candidates/MagneticSlideTileGate12R002/Editor/MagneticSlideTileGate12R003MotionReviewBuilder.cs(107,50): warning CS0618: 'FindObjectsSortMode' is obsolete: 'FindObjectsSortMode has been deprecated. Use the FindObjectsByType overloads that do not take a FindObjectsSortMode parameter.'
+Assets/_EDC/Candidates/MagneticSlideTileGate12R002/Editor/MagneticSlideTileGate12R003MotionReviewBuilder.cs(106,17): warning CS0618: 'Object.FindObjectsByType<T>(FindObjectsInactive, FindObjectsSortMode)' is obsolete: 'FindObjectsByType with FindObjectsSortMode parameter has been deprecated. Use FindObjectsByType<T>() or FindObjectsByType<T>(FindObjectsInactive) instead. InstanceID will be replaced in the future with EntityId and previous sort order cannot be maintained.'
+Assets/_EDC/Candidates/MagneticSlideTileGate12R002/Tests/Editor/MagneticSlideTileGate12R002Tests.cs(68,17): warning CS0618: 'Object.FindFirstObjectByType<T>(FindObjectsInactive)' is obsolete: 'FindFirstObjectByType has been deprecated because it relies on instance ID ordering. Use FindAnyObjectByType instead, which does not depend on ordering.'
+Assets/_EDC/Candidates/MagneticSlideTileGate12R002/Tests/Editor/MagneticSlideTileGate12R002Tests.cs(103,17): warning CS0618: 'Object.FindFirstObjectByType<T>(FindObjectsInactive)' is obsolete: 'FindFirstObjectByType has been deprecated because it relies on instance ID ordering. Use FindAnyObjectByType instead, which does not depend on ordering.'
+Assets/_EDC/Candidates/MagneticSlideTileGate12R002/Tests/Editor/MagneticSlideTileGate12R002Tests.cs(128,17): warning CS0618: 'Object.FindFirstObjectByType<T>(FindObjectsInactive)' is obsolete: 'FindFirstObjectByType has been deprecated because it relies on instance ID ordering. Use FindAnyObjectByType instead, which does not depend on ordering.'
+Assets/_EDC/Tests/Editor/MagneticSlideTrueLayerRevisionTests.cs(26,17): warning CS0618: 'Object.FindFirstObjectByType<T>(FindObjectsInactive)' is obsolete: 'FindFirstObjectByType has been deprecated because it relies on instance ID ordering. Use FindAnyObjectByType instead, which does not depend on ordering.'
+Assets/_EDC/Candidates/MagneticSlideTileGate12R002/Editor/MagneticSlideTileGate12R003MotionReviewBuilder.cs(121,17): warning CS0618: 'Object.FindFirstObjectByType<T>(FindObjectsInactive)' is obsolete: 'FindFirstObjectByType has been deprecated because it relies on instance ID ordering. Use FindAnyObjectByType instead, which does not depend on ordering.'
+Assets/_EDC/Candidates/MagneticSlideTileGate12R002/Editor/MagneticSlideTileGate12R003MotionReviewBuilder.cs(131,50): warning CS0618: 'FindObjectsSortMode' is obsolete: 'FindObjectsSortMode has been deprecated. Use the FindObjectsByType overloads that do not take a FindObjectsSortMode parameter.'
+Assets/_EDC/Candidates/MagneticSlideTileGate12R002/Editor/MagneticSlideTileGate12R003MotionReviewBuilder.cs(129,17): warning CS0618: 'Object.FindObjectsByType<T>(FindObjectsInactive, FindObjectsSortMode)' is obsolete: 'FindObjectsByType with FindObjectsSortMode parameter has been deprecated. Use FindObjectsByType<T>() or FindObjectsByType<T>(FindObjectsInactive) instead. InstanceID will be replaced in the future with EntityId and previous sort order cannot be maintained.'
+Assets/_EDC/Candidates/MagneticSlideTileGate12R002/Editor/MagneticSlideTileGate12R003MotionReviewBuilder.cs(136,46): warning CS0618: 'FindObjectsSortMode' is obsolete: 'FindObjectsSortMode has been deprecated. Use the FindObjectsByType overloads that do not take a FindObjectsSortMode parameter.'
+Assets/_EDC/Candidates/MagneticSlideTileGate12R002/Editor/MagneticSlideTileGate12R003MotionReviewBuilder.cs(135,39): warning CS0618: 'Object.FindObjectsByType<T>(FindObjectsInactive, FindObjectsSortMode)' is obsolete: 'FindObjectsByType with FindObjectsSortMode parameter has been deprecated. Use FindObjectsByType<T>() or FindObjectsByType<T>(FindObjectsInactive) instead. InstanceID will be replaced in the future with EntityId and previous sort order cannot be maintained.'
+Assets/_EDC/Candidates/MagneticSlideTileGate08R003PortableValidation/Editor/MagneticSlideTilePortableLightingBuilder.cs(326,13): warning CS0618: 'RenderSettings.customReflection' is obsolete: 'RenderSettings.customReflection has been deprecated in favor of RenderSettings.customReflectionTexture.'
+Assets/_EDC/Tests/Editor/MagneticSlideTrueLayerRevisionTests.cs(89,17): warning CS0618: 'Object.FindFirstObjectByType<T>(FindObjectsInactive)' is obsolete: 'FindFirstObjectByType has been deprecated because it relies on instance ID ordering. Use FindAnyObjectByType instead, which does not depend on ordering.'
+Assets/_EDC/Candidates/MagneticSlideTileGate12R002/Editor/MagneticSlideTileGate12R003MotionReviewBuilder.cs(188,17): warning CS0618: 'Object.FindFirstObjectByType<T>(FindObjectsInactive)' is obsolete: 'FindFirstObjectByType has been deprecated because it relies on instance ID ordering. Use FindAnyObjectByType instead, which does not depend on ordering.'
+Assets/_EDC/Candidates/MagneticSlideTileGate12R002/Editor/MagneticSlideTileGate12R003MotionReviewBuilder.cs(255,17): warning CS0618: 'Object.FindFirstObjectByType<T>(FindObjectsInactive)' is obsolete: 'FindFirstObjectByType has been deprecated because it relies on instance ID ordering. Use FindAnyObjectByType instead, which does not depend on ordering.'
+Assets/_EDC/Candidates/MagneticSlideTileGate08R004NeutralParity/Editor/MagneticSlideTileNeutralParityBuilder.cs(285,13): warning CS0618: 'RenderSettings.customReflection' is obsolete: 'RenderSettings.customReflection has been deprecated in favor of RenderSettings.customReflectionTexture.'
+Assets/_EDC/Candidates/MagneticSlideTileGate12R002/Tests/Editor/MagneticSlideTileGate12R002Tests.cs(143,17): warning CS0618: 'Object.FindFirstObjectByType<T>()' is obsolete: 'FindFirstObjectByType has been deprecated because it relies on instance ID ordering. Use FindAnyObjectByType instead, which does not depend on ordering.'
+Assets/_EDC/Candidates/MagneticSlideTileGate12R002/Editor/MagneticSlideTileGate12R002Builder.cs(49,17): warning CS0618: 'Object.FindFirstObjectByType<T>(FindObjectsInactive)' is obsolete: 'FindFirstObjectByType has been deprecated because it relies on instance ID ordering. Use FindAnyObjectByType instead, which does not depend on ordering.'
+Assets/_EDC/Candidates/MagneticSlideTileGate12R002/Editor/MagneticSlideTileGate12R002Builder.cs(70,17): warning CS0618: 'Object.FindFirstObjectByType<T>(FindObjectsInactive)' is obsolete: 'FindFirstObjectByType has been deprecated because it relies on instance ID ordering. Use FindAnyObjectByType instead, which does not depend on ordering.'
+Assets/_EDC/Candidates/MagneticSlideTileGate11R010/Editor/MagneticSlideTileGate11R010Builder.cs(387,13): warning CS0618: 'RenderSettings.customReflection' is obsolete: 'RenderSettings.customReflection has been deprecated in favor of RenderSettings.customReflectionTexture.'
+Assets/_EDC/Candidates/MagneticSlideTileGate08R005EndpointLighting/Editor/MagneticSlideTileEndpointLightingBuilder.cs(314,13): warning CS0618: 'RenderSettings.customReflection' is obsolete: 'RenderSettings.customReflection has been deprecated in favor of RenderSettings.customReflectionTexture.'
+Assets/Editor/HubCapSizePreviewCapture.cs(371,17): warning CS0618: 'FindObjectsSortMode' is obsolete: 'FindObjectsSortMode has been deprecated. Use the FindObjectsByType overloads that do not take a FindObjectsSortMode parameter.'
+Assets/Editor/HubCapSizePreviewCapture.cs(369,40): warning CS0618: 'Object.FindObjectsByType<T>(FindObjectsInactive, FindObjectsSortMode)' is obsolete: 'FindObjectsByType with FindObjectsSortMode parameter has been deprecated. Use FindObjectsByType<T>() or FindObjectsByType<T>(FindObjectsInactive) instead. InstanceID will be replaced in the future with EntityId and previous sort order cannot be maintained.'
+Assets/_EDC/Tests/Editor/EdcSliderAcceptanceTests.cs(388,17): warning CS0618: 'Object.FindFirstObjectByType<T>(FindObjectsInactive)' is obsolete: 'FindFirstObjectByType has been deprecated because it relies on instance ID ordering. Use FindAnyObjectByType instead, which does not depend on ordering.'
+Assets/Editor/HubCapSizePreviewCapture.cs(474,17): warning CS0618: 'FindObjectsSortMode' is obsolete: 'FindObjectsSortMode has been deprecated. Use the FindObjectsByType overloads that do not take a FindObjectsSortMode parameter.'
+Assets/Editor/HubCapSizePreviewCapture.cs(472,30): warning CS0618: 'Object.FindObjectsByType<T>(FindObjectsInactive, FindObjectsSortMode)' is obsolete: 'FindObjectsByType with FindObjectsSortMode parameter has been deprecated. Use FindObjectsByType<T>() or FindObjectsByType<T>(FindObjectsInactive) instead. InstanceID will be replaced in the future with EntityId and previous sort order cannot be maintained.'
+Assets/Editor/HubCapSizePreviewCapture.cs(494,17): warning CS0618: 'FindObjectsSortMode' is obsolete: 'FindObjectsSortMode has been deprecated. Use the FindObjectsByType overloads that do not take a FindObjectsSortMode parameter.'
+Assets/Editor/HubCapSizePreviewCapture.cs(492,31): warning CS0618: 'Object.FindObjectsByType<T>(FindObjectsInactive, FindObjectsSortMode)' is obsolete: 'FindObjectsByType with FindObjectsSortMode parameter has been deprecated. Use FindObjectsByType<T>() or FindObjectsByType<T>(FindObjectsInactive) instead. InstanceID will be replaced in the future with EntityId and previous sort order cannot be maintained.'
+Assets/_EDC/Candidates/MagneticSlideTileGate11R012/Editor/MagneticSlideTileGate11R012MaterialReviewBuilder.cs(87,17): warning CS0618: 'Object.FindFirstObjectByType<T>(FindObjectsInactive)' is obsolete: 'FindFirstObjectByType has been deprecated because it relies on instance ID ordering. Use FindAnyObjectByType instead, which does not depend on ordering.'
+Assets/_EDC/Candidates/MagneticSlideTileGate11R009/Editor/MagneticSlideTileGate11Builder.cs(637,13): warning CS0618: 'RenderSettings.customReflection' is obsolete: 'RenderSettings.customReflection has been deprecated in favor of RenderSettings.customReflectionTexture.'
+Assets/_Fidgeting/Editor/ThreeBladeStaticAuditReporter.cs(46,21): warning CS0618: 'FindObjectsSortMode' is obsolete: 'FindObjectsSortMode has been deprecated. Use the FindObjectsByType overloads that do not take a FindObjectsSortMode parameter.'
+Assets/_Fidgeting/Editor/ThreeBladeStaticAuditReporter.cs(43,40): warning CS0618: 'Object.FindObjectsByType<T>(FindObjectsInactive, FindObjectsSortMode)' is obsolete: 'FindObjectsByType with FindObjectsSortMode parameter has been deprecated. Use FindObjectsByType<T>() or FindObjectsByType<T>(FindObjectsInactive) instead. InstanceID will be replaced in the future with EntityId and previous sort order cannot be maintained.'
+Assets/_Fidgeting/Editor/ThreeBladeStaticAuditReporter.cs(82,17): warning CS0618: 'FindObjectsSortMode' is obsolete: 'FindObjectsSortMode has been deprecated. Use the FindObjectsByType overloads that do not take a FindObjectsSortMode parameter.'
+Assets/_Fidgeting/Editor/ThreeBladeStaticAuditReporter.cs(80,40): warning CS0618: 'Object.FindObjectsByType<T>(FindObjectsInactive, FindObjectsSortMode)' is obsolete: 'FindObjectsByType with FindObjectsSortMode parameter has been deprecated. Use FindObjectsByType<T>() or FindObjectsByType<T>(FindObjectsInactive) instead. InstanceID will be replaced in the future with EntityId and previous sort order cannot be maintained.'
+Assets/_EDC/Candidates/MagneticSlideTileGate11R011/Editor/MagneticSlideTileGate11R011Builder.cs(724,25): warning CS0618: 'FindObjectsSortMode' is obsolete: 'FindObjectsSortMode has been deprecated. Use the FindObjectsByType overloads that do not take a FindObjectsSortMode parameter.'
+Assets/_EDC/Candidates/MagneticSlideTileGate11R011/Editor/MagneticSlideTileGate11R011Builder.cs(723,21): warning CS0618: 'Object.FindObjectsByType<T>(FindObjectsSortMode)' is obsolete: 'FindObjectsByType with FindObjectsSortMode parameter has been deprecated. Use FindObjectsByType<T>() or FindObjectsByType<T>(FindObjectsInactive) instead. InstanceID will be replaced in the future with EntityId and previous sort order cannot be maintained.'
+Assets/_EDC/Candidates/MagneticSlideTileGate11R011/Editor/MagneticSlideTileGate11R011Builder.cs(726,21): warning CS0618: 'FindObjectsSortMode' is obsolete: 'FindObjectsSortMode has been deprecated. Use the FindObjectsByType overloads that do not take a FindObjectsSortMode parameter.'
+Assets/_EDC/Candidates/MagneticSlideTileGate11R011/Editor/MagneticSlideTileGate11R011Builder.cs(725,30): warning CS0618: 'Object.FindObjectsByType<T>(FindObjectsSortMode)' is obsolete: 'FindObjectsByType with FindObjectsSortMode parameter has been deprecated. Use FindObjectsByType<T>() or FindObjectsByType<T>(FindObjectsInactive) instead. InstanceID will be replaced in the future with EntityId and previous sort order cannot be maintained.'
+Assets/_EDC/Candidates/MagneticSlideTileGate11R014/Editor/MagneticSlideTileGate11R014HybridBuilder.cs(786,20): warning CS0618: 'Object.FindFirstObjectByType<T>(FindObjectsInactive)' is obsolete: 'FindFirstObjectByType has been deprecated because it relies on instance ID ordering. Use FindAnyObjectByType instead, which does not depend on ordering.'
+Assets/_EDC/Candidates/MagneticSlideTileGate11R014/Editor/MagneticSlideTileGate11R014HybridBuilder.cs(866,21): warning CS0618: 'FindObjectsSortMode' is obsolete: 'FindObjectsSortMode has been deprecated. Use the FindObjectsByType overloads that do not take a FindObjectsSortMode parameter.'
+Assets/_EDC/Candidates/MagneticSlideTileGate11R014/Editor/MagneticSlideTileGate11R014HybridBuilder.cs(864,20): warning CS0618: 'Object.FindObjectsByType<T>(FindObjectsInactive, FindObjectsSortMode)' is obsolete: 'FindObjectsByType with FindObjectsSortMode parameter has been deprecated. Use FindObjectsByType<T>() or FindObjectsByType<T>(FindObjectsInactive) instead. InstanceID will be replaced in the future with EntityId and previous sort order cannot be maintained.'
+Assets/_DisplayCase/Candidates/PackOpeningGate04R010/Tests/Editor/PackOpeningGate04R010Tests.cs(509,21): warning CS0618: 'FindObjectsSortMode' is obsolete: 'FindObjectsSortMode has been deprecated. Use the FindObjectsByType overloads that do not take a FindObjectsSortMode parameter.'
+Assets/_DisplayCase/Candidates/PackOpeningGate04R010/Tests/Editor/PackOpeningGate04R010Tests.cs(506,31): warning CS0618: 'Object.FindObjectsByType<T>(FindObjectsInactive, FindObjectsSortMode)' is obsolete: 'FindObjectsByType with FindObjectsSortMode parameter has been deprecated. Use FindObjectsByType<T>() or FindObjectsByType<T>(FindObjectsInactive) instead. InstanceID will be replaced in the future with EntityId and previous sort order cannot be maintained.'
+Assets/_DisplayCase/Candidates/PackOpeningGate04R011/Tests/Editor/PackOpeningGate04R011Tests.cs(771,21): warning CS0618: 'FindObjectsSortMode' is obsolete: 'FindObjectsSortMode has been deprecated. Use the FindObjectsByType overloads that do not take a FindObjectsSortMode parameter.'
+Assets/_DisplayCase/Candidates/PackOpeningGate04R011/Tests/Editor/PackOpeningGate04R011Tests.cs(768,31): warning CS0618: 'Object.FindObjectsByType<T>(FindObjectsInactive, FindObjectsSortMode)' is obsolete: 'FindObjectsByType with FindObjectsSortMode parameter has been deprecated. Use FindObjectsByType<T>() or FindObjectsByType<T>(FindObjectsInactive) instead. InstanceID will be replaced in the future with EntityId and previous sort order cannot be maintained.'
+Assets/_EDC/Candidates/MagneticSlideTileGate11R013/Editor/MagneticSlideTileGate11R013TrueLayerBuilder.cs(900,20): warning CS0618: 'Object.FindFirstObjectByType<T>(FindObjectsInactive)' is obsolete: 'FindFirstObjectByType has been deprecated because it relies on instance ID ordering. Use FindAnyObjectByType instead, which does not depend on ordering.'
+Assets/_EDC/Candidates/MagneticSlideTileGate11R013/Editor/MagneticSlideTileGate11R013TrueLayerBuilder.cs(937,21): warning CS0618: 'FindObjectsSortMode' is obsolete: 'FindObjectsSortMode has been deprecated. Use the FindObjectsByType overloads that do not take a FindObjectsSortMode parameter.'
+Assets/_EDC/Candidates/MagneticSlideTileGate11R013/Editor/MagneticSlideTileGate11R013TrueLayerBuilder.cs(935,20): warning CS0618: 'Object.FindObjectsByType<T>(FindObjectsInactive, FindObjectsSortMode)' is obsolete: 'FindObjectsByType with FindObjectsSortMode parameter has been deprecated. Use FindObjectsByType<T>() or FindObjectsByType<T>(FindObjectsInactive) instead. InstanceID will be replaced in the future with EntityId and previous sort order cannot be maintained.'
+Assets/_DisplayCase/Candidates/PackOpeningGate04R012/Tests/Editor/PackOpeningGate04R012Tests.cs(310,21): warning CS0618: 'FindObjectsSortMode' is obsolete: 'FindObjectsSortMode has been deprecated. Use the FindObjectsByType overloads that do not take a FindObjectsSortMode parameter.'
+Assets/_DisplayCase/Candidates/PackOpeningGate04R012/Tests/Editor/PackOpeningGate04R012Tests.cs(307,31): warning CS0618: 'Object.FindObjectsByType<T>(FindObjectsInactive, FindObjectsSortMode)' is obsolete: 'FindObjectsByType with FindObjectsSortMode parameter has been deprecated. Use FindObjectsByType<T>() or FindObjectsByType<T>(FindObjectsInactive) instead. InstanceID will be replaced in the future with EntityId and previous sort order cannot be maintained.'
+Assets/Tests/Editor/ProductArchitectureTests.cs(135,25): warning CS0618: 'FindObjectsSortMode' is obsolete: 'FindObjectsSortMode has been deprecated. Use the FindObjectsByType overloads that do not take a FindObjectsSortMode parameter.'
+Assets/Tests/Editor/ProductArchitectureTests.cs(133,17): warning CS0618: 'Object.FindObjectsByType<T>(FindObjectsInactive, FindObjectsSortMode)' is obsolete: 'FindObjectsByType with FindObjectsSortMode parameter has been deprecated. Use FindObjectsByType<T>() or FindObjectsByType<T>(FindObjectsInactive) instead. InstanceID will be replaced in the future with EntityId and previous sort order cannot be maintained.'
+Assets/Tests/Editor/ProductArchitectureTests.cs(144,21): warning CS0618: 'FindObjectsSortMode' is obsolete: 'FindObjectsSortMode has been deprecated. Use the FindObjectsByType overloads that do not take a FindObjectsSortMode parameter.'
+Assets/Tests/Editor/ProductArchitectureTests.cs(142,40): warning CS0618: 'Object.FindObjectsByType<T>(FindObjectsInactive, FindObjectsSortMode)' is obsolete: 'FindObjectsByType with FindObjectsSortMode parameter has been deprecated. Use FindObjectsByType<T>() or FindObjectsByType<T>(FindObjectsInactive) instead. InstanceID will be replaced in the future with EntityId and previous sort order cannot be maintained.'
+Assets/Tests/Editor/SpinnerEnvironmentTests.cs(624,29): warning CS0618: 'FindObjectsSortMode' is obsolete: 'FindObjectsSortMode has been deprecated. Use the FindObjectsByType overloads that do not take a FindObjectsSortMode parameter.'
+Assets/Tests/Editor/SpinnerEnvironmentTests.cs(621,48): warning CS0618: 'Object.FindObjectsByType<T>(FindObjectsInactive, FindObjectsSortMode)' is obsolete: 'FindObjectsByType with FindObjectsSortMode parameter has been deprecated. Use FindObjectsByType<T>() or FindObjectsByType<T>(FindObjectsInactive) instead. InstanceID will be replaced in the future with EntityId and previous sort order cannot be maintained.'
+Assets/Tests/Editor/ProductArchitectureTests.cs(1515,21): warning CS0618: 'FindObjectsSortMode' is obsolete: 'FindObjectsSortMode has been deprecated. Use the FindObjectsByType overloads that do not take a FindObjectsSortMode parameter.'
+Assets/Tests/Editor/ProductArchitectureTests.cs(1513,48): warning CS0618: 'Object.FindObjectsByType<T>(FindObjectsInactive, FindObjectsSortMode)' is obsolete: 'FindObjectsByType with FindObjectsSortMode parameter has been deprecated. Use FindObjectsByType<T>() or FindObjectsByType<T>(FindObjectsInactive) instead. InstanceID will be replaced in the future with EntityId and previous sort order cannot be maintained.'
+Assets/Tests/Editor/ProductArchitectureTests.cs(1931,21): warning CS0618: 'FindObjectsSortMode' is obsolete: 'FindObjectsSortMode has been deprecated. Use the FindObjectsByType overloads that do not take a FindObjectsSortMode parameter.'
+Assets/Tests/Editor/ProductArchitectureTests.cs(1929,33): warning CS0618: 'Object.FindObjectsByType<T>(FindObjectsInactive, FindObjectsSortMode)' is obsolete: 'FindObjectsByType with FindObjectsSortMode parameter has been deprecated. Use FindObjectsByType<T>() or FindObjectsByType<T>(FindObjectsInactive) instead. InstanceID will be replaced in the future with EntityId and previous sort order cannot be maintained.'
+[1467/1470  0s] ILPostProcess Library/Bee/artifacts/900b0aE.dag/post-processed/Assembly-CSharp-Editor.dll (+pdb)
+Processing assembly Library/Bee/artifacts/900b0aE.dag/Assembly-CSharp-Editor.dll, with 145 defines and 395 references
+processors: Unity.Jobs.CodeGen.JobsILPostProcessor, zzzUnity.Burst.CodeGen.BurstILPostProcessor
+running Unity.Jobs.CodeGen.JobsILPostProcessor
+running zzzUnity.Burst.CodeGen.BurstILPostProcessor
+[1468/1470  0s] CopyFiles Library/ScriptAssemblies/Assembly-CSharp-Editor.pdb
+[1469/1470  0s] CopyFiles Library/ScriptAssemblies/Assembly-CSharp-Editor.dll
+*** Tundra build success (3.28 seconds), 5 items updated, 1470 evaluated
+Assets/_EDC/Candidates/MagneticSlideTileGate12R002/Editor/MagneticSlideTileGate12R004LightingReviewBuilder.cs(86,17): warning CS0618: 'Object.FindFirstObjectByType<T>(FindObjectsInactive)' is obsolete: 'FindFirstObjectByType has been deprecated because it relies on instance ID ordering. Use FindAnyObjectByType instead, which does not depend on ordering.'
+Assets/_EDC/Candidates/MagneticSlideTileGate12R002/Editor/MagneticSlideTileGate12R004LightingReviewBuilder.cs(272,21): warning CS0618: 'FindObjectsSortMode' is obsolete: 'FindObjectsSortMode has been deprecated. Use the FindObjectsByType overloads that do not take a FindObjectsSortMode parameter.'
+Assets/_EDC/Candidates/MagneticSlideTileGate12R002/Editor/MagneticSlideTileGate12R004LightingReviewBuilder.cs(270,20): warning CS0618: 'Object.FindObjectsByType<T>(FindObjectsInactive, FindObjectsSortMode)' is obsolete: 'FindObjectsByType with FindObjectsSortMode parameter has been deprecated. Use FindObjectsByType<T>() or FindObjectsByType<T>(FindObjectsInactive) instead. InstanceID will be replaced in the future with EntityId and previous sort order cannot be maintained.'
+Assets/_EDC/Tests/Editor/MagneticSlideLightingRevisionTests.cs(24,17): warning CS0618: 'Object.FindFirstObjectByType<T>(FindObjectsInactive)' is obsolete: 'FindFirstObjectByType has been deprecated because it relies on instance ID ordering. Use FindAnyObjectByType instead, which does not depend on ordering.'
+Assets/_EDC/Tests/Editor/MagneticSlideLightingRevisionTests.cs(79,17): warning CS0618: 'Object.FindFirstObjectByType<T>(FindObjectsInactive)' is obsolete: 'FindFirstObjectByType has been deprecated because it relies on instance ID ordering. Use FindAnyObjectByType instead, which does not depend on ordering.'
+Assets/_EDC/Candidates/MagneticSlideTileGate12R002/Tests/Editor/MagneticSlideTileGate12R002Tests.cs(50,17): warning CS0618: 'Object.FindFirstObjectByType<T>(FindObjectsInactive)' is obsolete: 'FindFirstObjectByType has been deprecated because it relies on instance ID ordering. Use FindAnyObjectByType instead, which does not depend on ordering.'
+Assets/_TwoLobeBar/Editor/TwoLobeBarSceneBuilder.cs(636,13): warning CS0618: 'RenderSettings.customReflection' is obsolete: 'RenderSettings.customReflection has been deprecated in favor of RenderSettings.customReflectionTexture.'
+Assets/_EDC/Candidates/MagneticSlideTileGate12R002/Editor/MagneticSlideTileGate12R003MotionReviewBuilder.cs(45,17): warning CS0618: 'Object.FindFirstObjectByType<T>(FindObjectsInactive)' is obsolete: 'FindFirstObjectByType has been deprecated because it relies on instance ID ordering. Use FindAnyObjectByType instead, which does not depend on ordering.'
+Assets/_EDC/Candidates/MagneticSlideTileGate12R002/Editor/MagneticSlideTileGate12R003MotionReviewBuilder.cs(51,17): warning CS0618: 'Object.FindFirstObjectByType<T>(FindObjectsInactive)' is obsolete: 'FindFirstObjectByType has been deprecated because it relies on instance ID ordering. Use FindAnyObjectByType instead, which does not depend on ordering.'
+Assets/_EDC/Candidates/MagneticSlideTileGate12R002/Editor/MagneticSlideTileGate12R003MotionReviewBuilder.cs(58,50): warning CS0618: 'FindObjectsSortMode' is obsolete: 'FindObjectsSortMode has been deprecated. Use the FindObjectsByType overloads that do not take a FindObjectsSortMode parameter.'
+Assets/_EDC/Candidates/MagneticSlideTileGate12R002/Editor/MagneticSlideTileGate12R003MotionReviewBuilder.cs(57,20): warning CS0618: 'Object.FindObjectsByType<T>(FindObjectsInactive, FindObjectsSortMode)' is obsolete: 'FindObjectsByType with FindObjectsSortMode parameter has been deprecated. Use FindObjectsByType<T>() or FindObjectsByType<T>(FindObjectsInactive) instead. InstanceID will be replaced in the future with EntityId and previous sort order cannot be maintained.'
+Assets/_EDC/Candidates/MagneticSlideTileGate12R002/Editor/MagneticSlideTileGate12R003MotionReviewBuilder.cs(93,17): warning CS0618: 'Object.FindFirstObjectByType<T>(FindObjectsInactive)' is obsolete: 'FindFirstObjectByType has been deprecated because it relies on instance ID ordering. Use FindAnyObjectByType instead, which does not depend on ordering.'
+Assets/_EDC/Candidates/MagneticSlideTileGate12R002/Editor/MagneticSlideTileGate12R003MotionReviewBuilder.cs(97,17): warning CS0618: 'Object.FindFirstObjectByType<T>(FindObjectsInactive)' is obsolete: 'FindFirstObjectByType has been deprecated because it relies on instance ID ordering. Use FindAnyObjectByType instead, which does not depend on ordering.'
+Assets/_EDC/Candidates/MagneticSlideTileGate12R002/Editor/MagneticSlideTileGate12R003MotionReviewBuilder.cs(107,50): warning CS0618: 'FindObjectsSortMode' is obsolete: 'FindObjectsSortMode has been deprecated. Use the FindObjectsByType overloads that do not take a FindObjectsSortMode parameter.'
+Assets/_EDC/Candidates/MagneticSlideTileGate12R002/Editor/MagneticSlideTileGate12R003MotionReviewBuilder.cs(106,17): warning CS0618: 'Object.FindObjectsByType<T>(FindObjectsInactive, FindObjectsSortMode)' is obsolete: 'FindObjectsByType with FindObjectsSortMode parameter has been deprecated. Use FindObjectsByType<T>() or FindObjectsByType<T>(FindObjectsInactive) instead. InstanceID will be replaced in the future with EntityId and previous sort order cannot be maintained.'
+Assets/_EDC/Candidates/MagneticSlideTileGate12R002/Tests/Editor/MagneticSlideTileGate12R002Tests.cs(68,17): warning CS0618: 'Object.FindFirstObjectByType<T>(FindObjectsInactive)' is obsolete: 'FindFirstObjectByType has been deprecated because it relies on instance ID ordering. Use FindAnyObjectByType instead, which does not depend on ordering.'
+Assets/_EDC/Candidates/MagneticSlideTileGate12R002/Tests/Editor/MagneticSlideTileGate12R002Tests.cs(103,17): warning CS0618: 'Object.FindFirstObjectByType<T>(FindObjectsInactive)' is obsolete: 'FindFirstObjectByType has been deprecated because it relies on instance ID ordering. Use FindAnyObjectByType instead, which does not depend on ordering.'
+Assets/_EDC/Candidates/MagneticSlideTileGate12R002/Tests/Editor/MagneticSlideTileGate12R002Tests.cs(128,17): warning CS0618: 'Object.FindFirstObjectByType<T>(FindObjectsInactive)' is obsolete: 'FindFirstObjectByType has been deprecated because it relies on instance ID ordering. Use FindAnyObjectByType instead, which does not depend on ordering.'
+Assets/_EDC/Tests/Editor/MagneticSlideTrueLayerRevisionTests.cs(26,17): warning CS0618: 'Object.FindFirstObjectByType<T>(FindObjectsInactive)' is obsolete: 'FindFirstObjectByType has been deprecated because it relies on instance ID ordering. Use FindAnyObjectByType instead, which does not depend on ordering.'
+Assets/_EDC/Candidates/MagneticSlideTileGate12R002/Editor/MagneticSlideTileGate12R003MotionReviewBuilder.cs(121,17): warning CS0618: 'Object.FindFirstObjectByType<T>(FindObjectsInactive)' is obsolete: 'FindFirstObjectByType has been deprecated because it relies on instance ID ordering. Use FindAnyObjectByType instead, which does not depend on ordering.'
+Assets/_EDC/Candidates/MagneticSlideTileGate12R002/Editor/MagneticSlideTileGate12R003MotionReviewBuilder.cs(131,50): warning CS0618: 'FindObjectsSortMode' is obsolete: 'FindObjectsSortMode has been deprecated. Use the FindObjectsByType overloads that do not take a FindObjectsSortMode parameter.'
+Assets/_EDC/Candidates/MagneticSlideTileGate12R002/Editor/MagneticSlideTileGate12R003MotionReviewBuilder.cs(129,17): warning CS0618: 'Object.FindObjectsByType<T>(FindObjectsInactive, FindObjectsSortMode)' is obsolete: 'FindObjectsByType with FindObjectsSortMode parameter has been deprecated. Use FindObjectsByType<T>() or FindObjectsByType<T>(FindObjectsInactive) instead. InstanceID will be replaced in the future with EntityId and previous sort order cannot be maintained.'
+Assets/_EDC/Candidates/MagneticSlideTileGate12R002/Editor/MagneticSlideTileGate12R003MotionReviewBuilder.cs(136,46): warning CS0618: 'FindObjectsSortMode' is obsolete: 'FindObjectsSortMode has been deprecated. Use the FindObjectsByType overloads that do not take a FindObjectsSortMode parameter.'
+Assets/_EDC/Candidates/MagneticSlideTileGate12R002/Editor/MagneticSlideTileGate12R003MotionReviewBuilder.cs(135,39): warning CS0618: 'Object.FindObjectsByType<T>(FindObjectsInactive, FindObjectsSortMode)' is obsolete: 'FindObjectsByType with FindObjectsSortMode parameter has been deprecated. Use FindObjectsByType<T>() or FindObjectsByType<T>(FindObjectsInactive) instead. InstanceID will be replaced in the future with EntityId and previous sort order cannot be maintained.'
+Assets/_EDC/Candidates/MagneticSlideTileGate08R003PortableValidation/Editor/MagneticSlideTilePortableLightingBuilder.cs(326,13): warning CS0618: 'RenderSettings.customReflection' is obsolete: 'RenderSettings.customReflection has been deprecated in favor of RenderSettings.customReflectionTexture.'
+Assets/_EDC/Tests/Editor/MagneticSlideTrueLayerRevisionTests.cs(89,17): warning CS0618: 'Object.FindFirstObjectByType<T>(FindObjectsInactive)' is obsolete: 'FindFirstObjectByType has been deprecated because it relies on instance ID ordering. Use FindAnyObjectByType instead, which does not depend on ordering.'
+Assets/_EDC/Candidates/MagneticSlideTileGate12R002/Editor/MagneticSlideTileGate12R003MotionReviewBuilder.cs(188,17): warning CS0618: 'Object.FindFirstObjectByType<T>(FindObjectsInactive)' is obsolete: 'FindFirstObjectByType has been deprecated because it relies on instance ID ordering. Use FindAnyObjectByType instead, which does not depend on ordering.'
+Assets/_EDC/Candidates/MagneticSlideTileGate12R002/Editor/MagneticSlideTileGate12R003MotionReviewBuilder.cs(255,17): warning CS0618: 'Object.FindFirstObjectByType<T>(FindObjectsInactive)' is obsolete: 'FindFirstObjectByType has been deprecated because it relies on instance ID ordering. Use FindAnyObjectByType instead, which does not depend on ordering.'
+Assets/_EDC/Candidates/MagneticSlideTileGate08R004NeutralParity/Editor/MagneticSlideTileNeutralParityBuilder.cs(285,13): warning CS0618: 'RenderSettings.customReflection' is obsolete: 'RenderSettings.customReflection has been deprecated in favor of RenderSettings.customReflectionTexture.'
+Assets/_EDC/Candidates/MagneticSlideTileGate12R002/Tests/Editor/MagneticSlideTileGate12R002Tests.cs(143,17): warning CS0618: 'Object.FindFirstObjectByType<T>()' is obsolete: 'FindFirstObjectByType has been deprecated because it relies on instance ID ordering. Use FindAnyObjectByType instead, which does not depend on ordering.'
+Assets/_EDC/Candidates/MagneticSlideTileGate12R002/Editor/MagneticSlideTileGate12R002Builder.cs(49,17): warning CS0618: 'Object.FindFirstObjectByType<T>(FindObjectsInactive)' is obsolete: 'FindFirstObjectByType has been deprecated because it relies on instance ID ordering. Use FindAnyObjectByType instead, which does not depend on ordering.'
+Assets/_EDC/Candidates/MagneticSlideTileGate12R002/Editor/MagneticSlideTileGate12R002Builder.cs(70,17): warning CS0618: 'Object.FindFirstObjectByType<T>(FindObjectsInactive)' is obsolete: 'FindFirstObjectByType has been deprecated because it relies on instance ID ordering. Use FindAnyObjectByType instead, which does not depend on ordering.'
+Assets/_EDC/Candidates/MagneticSlideTileGate11R010/Editor/MagneticSlideTileGate11R010Builder.cs(387,13): warning CS0618: 'RenderSettings.customReflection' is obsolete: 'RenderSettings.customReflection has been deprecated in favor of RenderSettings.customReflectionTexture.'
+Assets/_EDC/Candidates/MagneticSlideTileGate08R005EndpointLighting/Editor/MagneticSlideTileEndpointLightingBuilder.cs(314,13): warning CS0618: 'RenderSettings.customReflection' is obsolete: 'RenderSettings.customReflection has been deprecated in favor of RenderSettings.customReflectionTexture.'
+Assets/Editor/HubCapSizePreviewCapture.cs(371,17): warning CS0618: 'FindObjectsSortMode' is obsolete: 'FindObjectsSortMode has been deprecated. Use the FindObjectsByType overloads that do not take a FindObjectsSortMode parameter.'
+Assets/Editor/HubCapSizePreviewCapture.cs(369,40): warning CS0618: 'Object.FindObjectsByType<T>(FindObjectsInactive, FindObjectsSortMode)' is obsolete: 'FindObjectsByType with FindObjectsSortMode parameter has been deprecated. Use FindObjectsByType<T>() or FindObjectsByType<T>(FindObjectsInactive) instead. InstanceID will be replaced in the future with EntityId and previous sort order cannot be maintained.'
+Assets/_EDC/Tests/Editor/EdcSliderAcceptanceTests.cs(388,17): warning CS0618: 'Object.FindFirstObjectByType<T>(FindObjectsInactive)' is obsolete: 'FindFirstObjectByType has been deprecated because it relies on instance ID ordering. Use FindAnyObjectByType instead, which does not depend on ordering.'
+Assets/Editor/HubCapSizePreviewCapture.cs(474,17): warning CS0618: 'FindObjectsSortMode' is obsolete: 'FindObjectsSortMode has been deprecated. Use the FindObjectsByType overloads that do not take a FindObjectsSortMode parameter.'
+Assets/Editor/HubCapSizePreviewCapture.cs(472,30): warning CS0618: 'Object.FindObjectsByType<T>(FindObjectsInactive, FindObjectsSortMode)' is obsolete: 'FindObjectsByType with FindObjectsSortMode parameter has been deprecated. Use FindObjectsByType<T>() or FindObjectsByType<T>(FindObjectsInactive) instead. InstanceID will be replaced in the future with EntityId and previous sort order cannot be maintained.'
+Assets/Editor/HubCapSizePreviewCapture.cs(494,17): warning CS0618: 'FindObjectsSortMode' is obsolete: 'FindObjectsSortMode has been deprecated. Use the FindObjectsByType overloads that do not take a FindObjectsSortMode parameter.'
+Assets/Editor/HubCapSizePreviewCapture.cs(492,31): warning CS0618: 'Object.FindObjectsByType<T>(FindObjectsInactive, FindObjectsSortMode)' is obsolete: 'FindObjectsByType with FindObjectsSortMode parameter has been deprecated. Use FindObjectsByType<T>() or FindObjectsByType<T>(FindObjectsInactive) instead. InstanceID will be replaced in the future with EntityId and previous sort order cannot be maintained.'
+Assets/_EDC/Candidates/MagneticSlideTileGate11R012/Editor/MagneticSlideTileGate11R012MaterialReviewBuilder.cs(87,17): warning CS0618: 'Object.FindFirstObjectByType<T>(FindObjectsInactive)' is obsolete: 'FindFirstObjectByType has been deprecated because it relies on instance ID ordering. Use FindAnyObjectByType instead, which does not depend on ordering.'
+Assets/_EDC/Candidates/MagneticSlideTileGate11R009/Editor/MagneticSlideTileGate11Builder.cs(637,13): warning CS0618: 'RenderSettings.customReflection' is obsolete: 'RenderSettings.customReflection has been deprecated in favor of RenderSettings.customReflectionTexture.'
+Assets/_Fidgeting/Editor/ThreeBladeStaticAuditReporter.cs(46,21): warning CS0618: 'FindObjectsSortMode' is obsolete: 'FindObjectsSortMode has been deprecated. Use the FindObjectsByType overloads that do not take a FindObjectsSortMode parameter.'
+Assets/_Fidgeting/Editor/ThreeBladeStaticAuditReporter.cs(43,40): warning CS0618: 'Object.FindObjectsByType<T>(FindObjectsInactive, FindObjectsSortMode)' is obsolete: 'FindObjectsByType with FindObjectsSortMode parameter has been deprecated. Use FindObjectsByType<T>() or FindObjectsByType<T>(FindObjectsInactive) instead. InstanceID will be replaced in the future with EntityId and previous sort order cannot be maintained.'
+Assets/_Fidgeting/Editor/ThreeBladeStaticAuditReporter.cs(82,17): warning CS0618: 'FindObjectsSortMode' is obsolete: 'FindObjectsSortMode has been deprecated. Use the FindObjectsByType overloads that do not take a FindObjectsSortMode parameter.'
+Assets/_Fidgeting/Editor/ThreeBladeStaticAuditReporter.cs(80,40): warning CS0618: 'Object.FindObjectsByType<T>(FindObjectsInactive, FindObjectsSortMode)' is obsolete: 'FindObjectsByType with FindObjectsSortMode parameter has been deprecated. Use FindObjectsByType<T>() or FindObjectsByType<T>(FindObjectsInactive) instead. InstanceID will be replaced in the future with EntityId and previous sort order cannot be maintained.'
+Assets/_EDC/Candidates/MagneticSlideTileGate11R011/Editor/MagneticSlideTileGate11R011Builder.cs(724,25): warning CS0618: 'FindObjectsSortMode' is obsolete: 'FindObjectsSortMode has been deprecated. Use the FindObjectsByType overloads that do not take a FindObjectsSortMode parameter.'
+Assets/_EDC/Candidates/MagneticSlideTileGate11R011/Editor/MagneticSlideTileGate11R011Builder.cs(723,21): warning CS0618: 'Object.FindObjectsByType<T>(FindObjectsSortMode)' is obsolete: 'FindObjectsByType with FindObjectsSortMode parameter has been deprecated. Use FindObjectsByType<T>() or FindObjectsByType<T>(FindObjectsInactive) instead. InstanceID will be replaced in the future with EntityId and previous sort order cannot be maintained.'
+Assets/_EDC/Candidates/MagneticSlideTileGate11R011/Editor/MagneticSlideTileGate11R011Builder.cs(726,21): warning CS0618: 'FindObjectsSortMode' is obsolete: 'FindObjectsSortMode has been deprecated. Use the FindObjectsByType overloads that do not take a FindObjectsSortMode parameter.'
+Assets/_EDC/Candidates/MagneticSlideTileGate11R011/Editor/MagneticSlideTileGate11R011Builder.cs(725,30): warning CS0618: 'Object.FindObjectsByType<T>(FindObjectsSortMode)' is obsolete: 'FindObjectsByType with FindObjectsSortMode parameter has been deprecated. Use FindObjectsByType<T>() or FindObjectsByType<T>(FindObjectsInactive) instead. InstanceID will be replaced in the future with EntityId and previous sort order cannot be maintained.'
+Assets/_EDC/Candidates/MagneticSlideTileGate11R014/Editor/MagneticSlideTileGate11R014HybridBuilder.cs(786,20): warning CS0618: 'Object.FindFirstObjectByType<T>(FindObjectsInactive)' is obsolete: 'FindFirstObjectByType has been deprecated because it relies on instance ID ordering. Use FindAnyObjectByType instead, which does not depend on ordering.'
+Assets/_EDC/Candidates/MagneticSlideTileGate11R014/Editor/MagneticSlideTileGate11R014HybridBuilder.cs(866,21): warning CS0618: 'FindObjectsSortMode' is obsolete: 'FindObjectsSortMode has been deprecated. Use the FindObjectsByType overloads that do not take a FindObjectsSortMode parameter.'
+Assets/_EDC/Candidates/MagneticSlideTileGate11R014/Editor/MagneticSlideTileGate11R014HybridBuilder.cs(864,20): warning CS0618: 'Object.FindObjectsByType<T>(FindObjectsInactive, FindObjectsSortMode)' is obsolete: 'FindObjectsByType with FindObjectsSortMode parameter has been deprecated. Use FindObjectsByType<T>() or FindObjectsByType<T>(FindObjectsInactive) instead. InstanceID will be replaced in the future with EntityId and previous sort order cannot be maintained.'
+Assets/_DisplayCase/Candidates/PackOpeningGate04R010/Tests/Editor/PackOpeningGate04R010Tests.cs(509,21): warning CS0618: 'FindObjectsSortMode' is obsolete: 'FindObjectsSortMode has been deprecated. Use the FindObjectsByType overloads that do not take a FindObjectsSortMode parameter.'
+Assets/_DisplayCase/Candidates/PackOpeningGate04R010/Tests/Editor/PackOpeningGate04R010Tests.cs(506,31): warning CS0618: 'Object.FindObjectsByType<T>(FindObjectsInactive, FindObjectsSortMode)' is obsolete: 'FindObjectsByType with FindObjectsSortMode parameter has been deprecated. Use FindObjectsByType<T>() or FindObjectsByType<T>(FindObjectsInactive) instead. InstanceID will be replaced in the future with EntityId and previous sort order cannot be maintained.'
+Assets/_DisplayCase/Candidates/PackOpeningGate04R011/Tests/Editor/PackOpeningGate04R011Tests.cs(771,21): warning CS0618: 'FindObjectsSortMode' is obsolete: 'FindObjectsSortMode has been deprecated. Use the FindObjectsByType overloads that do not take a FindObjectsSortMode parameter.'
+Assets/_DisplayCase/Candidates/PackOpeningGate04R011/Tests/Editor/PackOpeningGate04R011Tests.cs(768,31): warning CS0618: 'Object.FindObjectsByType<T>(FindObjectsInactive, FindObjectsSortMode)' is obsolete: 'FindObjectsByType with FindObjectsSortMode parameter has been deprecated. Use FindObjectsByType<T>() or FindObjectsByType<T>(FindObjectsInactive) instead. InstanceID will be replaced in the future with EntityId and previous sort order cannot be maintained.'
+Assets/_EDC/Candidates/MagneticSlideTileGate11R013/Editor/MagneticSlideTileGate11R013TrueLayerBuilder.cs(900,20): warning CS0618: 'Object.FindFirstObjectByType<T>(FindObjectsInactive)' is obsolete: 'FindFirstObjectByType has been deprecated because it relies on instance ID ordering. Use FindAnyObjectByType instead, which does not depend on ordering.'
+Assets/_EDC/Candidates/MagneticSlideTileGate11R013/Editor/MagneticSlideTileGate11R013TrueLayerBuilder.cs(937,21): warning CS0618: 'FindObjectsSortMode' is obsolete: 'FindObjectsSortMode has been deprecated. Use the FindObjectsByType overloads that do not take a FindObjectsSortMode parameter.'
+Assets/_EDC/Candidates/MagneticSlideTileGate11R013/Editor/MagneticSlideTileGate11R013TrueLayerBuilder.cs(935,20): warning CS0618: 'Object.FindObjectsByType<T>(FindObjectsInactive, FindObjectsSortMode)' is obsolete: 'FindObjectsByType with FindObjectsSortMode parameter has been deprecated. Use FindObjectsByType<T>() or FindObjectsByType<T>(FindObjectsInactive) instead. InstanceID will be replaced in the future with EntityId and previous sort order cannot be maintained.'
+Assets/_DisplayCase/Candidates/PackOpeningGate04R012/Tests/Editor/PackOpeningGate04R012Tests.cs(310,21): warning CS0618: 'FindObjectsSortMode' is obsolete: 'FindObjectsSortMode has been deprecated. Use the FindObjectsByType overloads that do not take a FindObjectsSortMode parameter.'
+Assets/_DisplayCase/Candidates/PackOpeningGate04R012/Tests/Editor/PackOpeningGate04R012Tests.cs(307,31): warning CS0618: 'Object.FindObjectsByType<T>(FindObjectsInactive, FindObjectsSortMode)' is obsolete: 'FindObjectsByType with FindObjectsSortMode parameter has been deprecated. Use FindObjectsByType<T>() or FindObjectsByType<T>(FindObjectsInactive) instead. InstanceID will be replaced in the future with EntityId and previous sort order cannot be maintained.'
+Assets/Tests/Editor/ProductArchitectureTests.cs(135,25): warning CS0618: 'FindObjectsSortMode' is obsolete: 'FindObjectsSortMode has been deprecated. Use the FindObjectsByType overloads that do not take a FindObjectsSortMode parameter.'
+Assets/Tests/Editor/ProductArchitectureTests.cs(133,17): warning CS0618: 'Object.FindObjectsByType<T>(FindObjectsInactive, FindObjectsSortMode)' is obsolete: 'FindObjectsByType with FindObjectsSortMode parameter has been deprecated. Use FindObjectsByType<T>() or FindObjectsByType<T>(FindObjectsInactive) instead. InstanceID will be replaced in the future with EntityId and previous sort order cannot be maintained.'
+Assets/Tests/Editor/ProductArchitectureTests.cs(144,21): warning CS0618: 'FindObjectsSortMode' is obsolete: 'FindObjectsSortMode has been deprecated. Use the FindObjectsByType overloads that do not take a FindObjectsSortMode parameter.'
+Assets/Tests/Editor/ProductArchitectureTests.cs(142,40): warning CS0618: 'Object.FindObjectsByType<T>(FindObjectsInactive, FindObjectsSortMode)' is obsolete: 'FindObjectsByType with FindObjectsSortMode parameter has been deprecated. Use FindObjectsByType<T>() or FindObjectsByType<T>(FindObjectsInactive) instead. InstanceID will be replaced in the future with EntityId and previous sort order cannot be maintained.'
+Assets/Tests/Editor/SpinnerEnvironmentTests.cs(624,29): warning CS0618: 'FindObjectsSortMode' is obsolete: 'FindObjectsSortMode has been deprecated. Use the FindObjectsByType overloads that do not take a FindObjectsSortMode parameter.'
+Assets/Tests/Editor/SpinnerEnvironmentTests.cs(621,48): warning CS0618: 'Object.FindObjectsByType<T>(FindObjectsInactive, FindObjectsSortMode)' is obsolete: 'FindObjectsByType with FindObjectsSortMode parameter has been deprecated. Use FindObjectsByType<T>() or FindObjectsByType<T>(FindObjectsInactive) instead. InstanceID will be replaced in the future with EntityId and previous sort order cannot be maintained.'
+Assets/Tests/Editor/ProductArchitectureTests.cs(1515,21): warning CS0618: 'FindObjectsSortMode' is obsolete: 'FindObjectsSortMode has been deprecated. Use the FindObjectsByType overloads that do not take a FindObjectsSortMode parameter.'
+Assets/Tests/Editor/ProductArchitectureTests.cs(1513,48): warning CS0618: 'Object.FindObjectsByType<T>(FindObjectsInactive, FindObjectsSortMode)' is obsolete: 'FindObjectsByType with FindObjectsSortMode parameter has been deprecated. Use FindObjectsByType<T>() or FindObjectsByType<T>(FindObjectsInactive) instead. InstanceID will be replaced in the future with EntityId and previous sort order cannot be maintained.'
+Assets/Tests/Editor/ProductArchitectureTests.cs(1931,21): warning CS0618: 'FindObjectsSortMode' is obsolete: 'FindObjectsSortMode has been deprecated. Use the FindObjectsByType overloads that do not take a FindObjectsSortMode parameter.'
+Assets/Tests/Editor/ProductArchitectureTests.cs(1929,33): warning CS0618: 'Object.FindObjectsByType<T>(FindObjectsInactive, FindObjectsSortMode)' is obsolete: 'FindObjectsByType with FindObjectsSortMode parameter has been deprecated. Use FindObjectsByType<T>() or FindObjectsByType<T>(FindObjectsInactive) instead. InstanceID will be replaced in the future with EntityId and previous sort order cannot be maintained.'
+AssetDatabase: script compilation time: 3.805593s
+The GUID inside 'Assets/StreamingAssets/ThirdPartyNotices.meta' cannot be extracted by the YAML Parser. Attempting to extract it via string matching instead. Please verify the file does not contain unexpected data.
+The .meta file Assets/StreamingAssets/ThirdPartyNotices.meta does not have a valid GUID and its corresponding Asset file will be ignored. If this file is not malformed, please add a GUID, or delete the .meta file and it will be recreated correctly
+Begin MonoManager ReloadAssembly
+Total cache size 268326852
+Total cache size after purge 268326852, took 00:00:00.1801493
+Symbol file LoadedFromMemory is not a mono symbol file
+Symbol file LoadedFromMemory is not a mono symbol file
+The GUID inside 'Assets/StreamingAssets/ThirdPartyNotices.meta' cannot be extracted by the YAML Parser. Attempting to extract it via string matching instead. Please verify the file does not contain unexpected data.
+The .meta file Assets/StreamingAssets/ThirdPartyNotices.meta does not have a valid GUID and its corresponding Asset file will be ignored. If this file is not malformed, please add a GUID, or delete the .meta file and it will be recreated correctly
+Importing 'GUID: d239c3463c984a099dd2cb67817a41fc - Path: Assets/StreamingAssets' with importer (DefaultImporter)
+Imported 'GUID: d239c3463c984a099dd2cb67817a41fc' -> (Import Result ID: '18267cfc62195a7db52aade1023768b1') in 0.015 seconds [static dependencies only]. Details - ImportResultOutputID=9f4636edc729af8dbaa586c38be7e2f0 DependenciesID=b685ff5fff4a7e8aa55498fc337dec67 StaticDependenciesID=0c5df32b13eb7b603815692b7e117e47 
+Refreshing native plugins compatible for Editor in 2.01 ms, found 3 plugins.
+Native extension for iOS target not found
+Native extension for OSXStandalone target not found
+Refreshing native plugins compatible for Editor in 2.16 ms, found 3 plugins.
+[Licensing::Client] Error: Code 404 while processing request (status: Found 0 entitlement groups and 0 free entitlements matching requested entitlement ids)
+[Licensing::Client] Error: Code 404 while processing request (status: Found 0 entitlement groups and 0 free entitlements matching requested entitlement ids)
+[Licensing::Client] Error: Code 404 while processing request (status: Found 0 entitlement groups and 0 free entitlements matching requested entitlement ids)
+ScheduleIndexationOnStartup MainProcess:True IndexOnStartup:True
+Mono: successfully reloaded assembly
+- Finished resetting the current domain, in  3.421 seconds
+Domain Reload Profiling: 4070ms
+	BeginReloadAssembly (94ms)
+		DisableScriptedObjects (13ms)
+		CreateAndSetChildDomain (21ms)
+	RebuildCommonClasses (5ms)
+	RebuildNativeTypeToScriptingClass (9ms)
+	initialDomainReloadingComplete (41ms)
+	LoadAllAssembliesAndSetupDomain (501ms)
+		LoadAssemblies (208ms)
+		AnalyzeDomain (262ms)
+			TypeCache.Refresh (212ms)
+				TypeCache.ScanAssembly (195ms)
+			BuildScriptInfoCaches (45ms)
+			ResolveRequiredComponents (4ms)
+	FinalizeReload (3421ms)
+		SetupLoadedEditorAssemblies (0ms)
+			InitializePlatformSupportModulesInManaged (8ms)
+			BeforeProcessingInitializeOnLoad (69ms)
+			ProcessInitializeOnLoadAttributes (2674ms)
+			ProcessInitializeOnLoadMethodAttributes (416ms)
+		AwakeInstancesAfterBackupRestoration (11ms)
+The GUID inside 'Assets/StreamingAssets/ThirdPartyNotices.meta' cannot be extracted by the YAML Parser. Attempting to extract it via string matching instead. Please verify the file does not contain unexpected data.
+The .meta file Assets/StreamingAssets/ThirdPartyNotices.meta does not have a valid GUID and its corresponding Asset file will be ignored. If this file is not malformed, please add a GUID, or delete the .meta file and it will be recreated correctly
+The GUID inside 'Assets/StreamingAssets/ThirdPartyNotices.meta' cannot be extracted by the YAML Parser. Attempting to extract it via string matching instead. Please verify the file does not contain unexpected data.
+The .meta file Assets/StreamingAssets/ThirdPartyNotices.meta does not have a valid GUID and its corresponding Asset file will be ignored. If this file is not malformed, please add a GUID, or delete the .meta file and it will be recreated correctly
+Importing 'GUID: c77a3fb843d9446dbd063be202609071 - Path: Assets/StreamingAssets/ThirdPartyNotices/OpenSourceUI-DarkArcBands-MIT.txt' with importer (DefaultImporter)
+Imported 'GUID: c77a3fb843d9446dbd063be202609071' -> (Import Result ID: '052b9a1a330ac15cf4e3d064a7a57e84') in 0.589 seconds [static dependencies only]. Details - ImportResultOutputID=adfc3678ee20b9eb8197a5590e93597f DependenciesID=95028cbeaf069c11aae85c0589179737 StaticDependenciesID=117818eb977b649e2794f76e5dad443d 
+Starting new worker id: 0 with log in /Users/jiawei.zhou/Documents/Fidgeting app/unity/FidgetingApp/Logs/AssetImportWorkerHW0.log
+
+Asset Pipeline Refresh (id=5e912f09165424f739f33e521af94852): Total: 10.373 seconds - Initiated by InitialRefreshV2(ForceSynchronousImport)
+	(Values over 0.05ms)
+	Summary:
+		Imports: total=2 (actual=2, local cache=0, cache server=0)
+		Asset DB Process Time: managed=1 ms, native=5225 ms
+		Asset DB Callback time: managed=607 ms, native=14 ms
+		Scripting: domain reloads=1, domain reload time=675 ms, compile time=3806 ms, other=40 ms
+		Project Asset Count: scripts=2438, non-scripts=6042
+		Asset File Changes: new=2, changed=5, moved=0, deleted=0
+		Scan Filter Count: 1
+	InvokePackagesCallback: 8.475ms
+	ApplyChangesToAssetFolders: 0.228ms
+	Scan: 750.317ms
+	Collect global state as custom dependencies: 10.259ms
+	OnSourceAssetsModified: 0.404ms
+	CategorizeScriptCompilationAssets: 52.115ms
+	ProcessAssetsWithTransientArtifactChanges: 62.920ms
+	CategorizeAssets: 104.619ms
+	CompileScripts: 3806.334ms
+	ImportOutOfDateAssets: 4124.387ms (3442.893ms without children)
+		ImportManagerImport: 608.656ms (1.896ms without children)
+		ReloadNativeAssets: 0.057ms
+		UnloadImportedAssets: 2.166ms
+		EnsureUptoDateAssetsAreRegisteredWithGuidPM: 0.952ms
+		ImportSchedulerStart: 69.648ms
+	PostProcessAllAssets: 608.535ms
+		VCAutoAddAssetPostprocess 1.508ms
+		XRBuildSystem.XRAssetImported 0.209ms
+		MonoPostProcessAllAssets: 606.270ms
+			AssetPostprocessor.OnPostprocessAllAssets 154.365ms
+			UniversalRenderPipelineGlobalSettingsPostprocessor.OnPostprocessAllAssets 141.148ms
+			ShaderGraphAssetPostProcessor.OnPostprocessAllAssets 86.725ms
+			StyleCatalogPostProcessor.OnPostprocessAllAssets 30.159ms
+			AssetReferenceReimportMonitor.OnPostprocessAllAssets 18.844ms
+			BuilderAssetPostprocessor.OnPostprocessAllAssets 18.127ms
+			GraphRefreshPostprocessor.OnPostprocessAllAssets 1.336ms
+			SpriteSlicePostprocessor.OnPostprocessAllAssets 1.236ms
+			SpeedTree9Postprocessor.OnPostprocessAllAssets 1.210ms
+			WindowAssetPostprocessingWatcher.OnPostprocessAllAssets 1.089ms
+			RetainedModeAssetPostprocessor.OnPostprocessAllAssets 0.903ms
+			AssetChangedListener.OnPostprocessAllAssets 0.879ms
+			EditModeScopePostprocessor.OnPostprocessAllAssets 0.564ms
+			AssetChangeDetector.OnPostprocessAllAssets 0.490ms
+			SpriteEditorTexturePostprocessor.OnPostprocessAllAssets 0.440ms
+			MaterialPostprocessor.OnPostprocessAllAssets 0.405ms
+			RenderPipelineGlobalSettingsPostprocessor.OnPostprocessAllAssets 0.381ms
+			ArtifactBrowserPostProcessor.OnPostprocessAllAssets 0.316ms
+			TextAssetPostProcessor.OnPostprocessAllAssets 0.295ms
+			TMPro_TexturePostProcessor.OnPostprocessAllAssets 0.284ms
+			SkillsProjectAssetPostprocessor.OnPostprocessAllAssets 0.278ms
+			UVCSAssetPostprocessor.OnPostprocessAllAssets 0.209ms
+			SampleDependencyImporterPostProcessor.OnPostprocessAllAssets 0.199ms
+			InputActionAssetPostprocessor.OnPostprocessAllAssets 0.185ms
+			ShaderReflectionAssetPostProcessor.OnPostprocessAllAssets 0.171ms
+			ReferencedClipsPostProcessor.OnPostprocessAllAssets 0.168ms
+			AudioMixerPostprocessor.OnPostprocessAllAssets 0.161ms
+			ModelAssetProcessor.OnPostprocessAllAssets 0.160ms
+			ProjectSettingsPostprocessor.OnPostprocessAllAssets 0.156ms
+			PostProcessor.OnPostprocessAllAssets 0.148ms
+			AssetEvents.OnPostprocessAllAssets 0.146ms
+			InputActionJsonNameModifierAssetProcessor.OnPostprocessAllAssets 0.141ms
+			TerrainToolbarOverlayPostProcessor.OnPostprocessAllAssets 0.128ms
+			AssetDatabaseCallbacks.OnPostprocessAllAssets 0.110ms
+			SamplePostprocessor.OnPostprocessAllAssets 0.101ms
+			SpeedTreePostProcessor.OnPostprocessAllAssets 0.095ms
+			SyncVS.PostprocessSyncProject 0.065ms
+			AssetReloadNotifier.OnPostprocessAllAssets 0.062ms
+			ConfigAssetsTracker.OnPostprocessAllAssets 0.061ms
+			TrackSelectedAssetsProcessor.OnPostprocessAllAssets 0.056ms
+			ScenarioDriftAssetsTracker.OnPostprocessAllAssets 0.054ms
+	PostAssetChangesProfiler: 6.159ms
+	UnloadStreamsBegin: 0.952ms
+	PersistCurrentRevisions: 0.220ms
+	GenerateScriptTypeHashes: 1.510ms
+	GenerateScriptTypeSerializationHashes: 2.433ms
+	Untracked: 834.376ms
+
+Application.AssetDatabase Initial Refresh End
+Shader Hidden/ChartRasterizerHardware is not supported: GPU does not support conservative rasterization
+Shader Hidden/ChartRasterizerHardware is not supported: GPU does not support conservative rasterization
+Scanning for USB devices : 0.036ms
+Initializing Unity extensions:
+[MODES] ModeService[none].Initialize
+[MODES] ModeService[none].LoadModes
+[MODES] Loading mode Default (0) for mode-current-id-Fidget Spinner
+Unloading 215 Unused Serialized files (Serialized files now loaded: 0)
+Unloading 10666 unused Assets / (18.3 MB). Loaded Objects now: 11337.
+Memory consumption went from 370.8 MB to 352.6 MB.
+Total: 24.746334 ms (FindLiveObjects: 0.408833 ms CreateObjectMapping: 2.448833 ms MarkObjects: 14.274584 ms  DeleteObjects: 7.613875 ms)
+
+[Project] Loading completed in 12.205 seconds
+	Project init time: 				11.980 seconds
+		Template init time: 		0.000 seconds
+		Package Manager init time: 		0.212 seconds
+		Asset Database init time: 		0.382 seconds
+		Global illumination init time: 	0.001 seconds
+		Assemblies load time: 			0.598 seconds
+		Unity extensions init time: 	0.017 seconds
+		Asset Database refresh time: 	10.373 seconds
+	Scene opening time: 			0.157 seconds
+##utp:{"type":"ProjectInfo","version":2,"phase":"Immediate","time":1788744137064,"processId":21243,"projectLoad":12.204560375000002,"projectInit":11.979685417,"templateInit":0.0,"packageManagerInit":0.212039125,"assetDatabaseInit":0.381612333,"globalIlluminationInit":0.0006985,"assembliesLoad":0.597876792,"unityExtensionsInit":0.016657792,"assetDatabaseRefresh":10.373354125,"sceneOpening":0.157402833}
+##utp:{"type":"EditorInfo","version":2,"phase":"Immediate","time":1788744137064,"processId":21243,"editorVersion":"6000.5.6f1 (0e0577a1a2ac)","branch":"6000.5/staging","buildType":"Release","platform":"OSX"}
+Worker ready: AssetImportWorkerHW0 0
+[Licensing::Client] Error: Code 404 while processing request (status: Found 0 entitlement groups and 0 free entitlements matching requested entitlement ids)
+[Licensing::Client] Error: Code 404 while processing request (status: Found 0 entitlement groups and 0 free entitlements matching requested entitlement ids)
+[Licensing::Client] Successfully resolved entitlement details
+Running tests for ExecutionSettings with details:
+targetPlatform = 
+playerHeartbeatTimeout = 600
+filters[0] = 
+   Filter with settings:
+   testMode = EditMode
+   targetPlatform = 
+   testNames = null
+   groupNames = FidgetingApp.Tests.Editor.GachaStorefrontIntegrationTests
+   categoryNames = null
+   assemblyNames = null
+ignoreTests = {}
+featureFlags = null
+
+UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+UnityEngine.StackTraceUtility:ExtractStackTrace () (at /Users/bokken/build/output/unity/unity/Runtime/Export/Scripting/StackTrace.cs:35)
+UnityEngine.DebugLogHandler:Internal_Log (UnityEngine.LogType,UnityEngine.LogOption,string,UnityEngine.Object)
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
+UnityEngine.Logger:Log (UnityEngine.LogType,object)
+UnityEngine.Debug:Log (object)
+UnityEditor.TestTools.TestRunner.CommandLineTest.Executer:InitializeAndExecuteRun (string[]) (at ./Library/PackageCache/com.unity.test-framework@1405238725ab/UnityEditor.TestRunner/CommandLineTest/Executer.cs:53)
+UnityEditor.TestTools.TestRunner.CommandLineTest.TestStarter:InitializeAndExecuteRun () (at ./Library/PackageCache/com.unity.test-framework@1405238725ab/UnityEditor.TestRunner/CommandLineTest/TestStarter.cs:64)
+UnityEditor.EditorApplication:Internal_CallUpdateFunctions () (at /Users/bokken/build/output/unity/unity/Editor/Mono/EditorApplication.cs:403)
+
+(Filename: ./Library/PackageCache/com.unity.test-framework@1405238725ab/UnityEditor.TestRunner/CommandLineTest/Executer.cs Line: 53)
+
+Start Indexing on Editor startup
+[Indexing] Starting Initial Indexing for Assets
+[UnityConnectServicesConfig] config is NOT valid, switching to default
+Created GICache directory at /Users/jiawei.zhou/Library/Caches/com.unity3d.UnityEditor/GiCache. Took: 0.002s, timestamps: [12.210 - 12.212]
+[Licensing::Client] Successfully resolved entitlement details
+Unloading 6 Unused Serialized files (Serialized files now loaded: 0)
+Unloading 4 unused Assets / (63.1 KB). Loaded Objects now: 11363.
+Memory consumption went from 307.0 MB to 306.9 MB.
+Total: 19.299541 ms (FindLiveObjects: 0.267125 ms CreateObjectMapping: 0.954833 ms MarkObjects: 17.993500 ms  DeleteObjects: 0.083625 ms)
+
+Executing IPrebuildSetup for: Unity.PerformanceTesting.Editor.TestRunBuilder.
+UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+UnityEngine.StackTraceUtility:ExtractStackTrace () (at /Users/bokken/build/output/unity/unity/Runtime/Export/Scripting/StackTrace.cs:35)
+UnityEngine.DebugLogHandler:Internal_Log (UnityEngine.LogType,UnityEngine.LogOption,string,UnityEngine.Object)
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
+UnityEngine.Logger:Log (UnityEngine.LogType,object)
+UnityEngine.Debug:Log (object)
+UnityEditor.TestTools.TestRunner.TestRun.Tasks.BuildActionTaskBase`1/<ExecuteMethods>d__8<UnityEngine.TestTools.IPrebuildSetup>:MoveNext () (at ./Library/PackageCache/com.unity.test-framework@1405238725ab/UnityEditor.TestRunner/TestRun/Tasks/BuildActionTaskBase.cs:48)
+UnityEditor.TestTools.TestRunner.TestRun.Tasks.BuildActionTaskBase`1/<Execute>d__7<UnityEngine.TestTools.IPrebuildSetup>:MoveNext () (at ./Library/PackageCache/com.unity.test-framework@1405238725ab/UnityEditor.TestRunner/TestRun/Tasks/BuildActionTaskBase.cs:34)
+UnityEditor.TestTools.TestRunner.TestRun.TestJobRunner:ExecuteStep () (at ./Library/PackageCache/com.unity.test-framework@1405238725ab/UnityEditor.TestRunner/TestRun/TestJobRunner.cs:194)
+UnityEditor.TestTools.TestRunner.TestRun.TestJobRunner:ExecuteCallback () (at ./Library/PackageCache/com.unity.test-framework@1405238725ab/UnityEditor.TestRunner/TestRun/TestJobRunner.cs:129)
+UnityEditor.EditorApplication:Internal_CallUpdateFunctions () (at /Users/bokken/build/output/unity/unity/Editor/Mono/EditorApplication.cs:403)
+
+(Filename: ./Library/PackageCache/com.unity.test-framework@1405238725ab/UnityEditor.TestRunner/TestRun/Tasks/BuildActionTaskBase.cs Line: 48)
+
+Saving results to: /Users/jiawei.zhou/Library/Application Support/DefaultCompany/Fidget Spinner/TestResults.xml
+Saving results to: /tmp/r041-dark-arc-gacha-storefront-editmode-final-results.xml
+Executing IPostBuildCleanup for: Unity.PerformanceTesting.Editor.TestRunBuilder.
+UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+UnityEngine.StackTraceUtility:ExtractStackTrace () (at /Users/bokken/build/output/unity/unity/Runtime/Export/Scripting/StackTrace.cs:35)
+UnityEngine.DebugLogHandler:Internal_Log (UnityEngine.LogType,UnityEngine.LogOption,string,UnityEngine.Object)
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
+UnityEngine.Logger:Log (UnityEngine.LogType,object)
+UnityEngine.Debug:Log (object)
+UnityEditor.TestTools.TestRunner.TestRun.Tasks.BuildActionTaskBase`1/<ExecuteMethods>d__8<UnityEngine.TestTools.IPostBuildCleanup>:MoveNext () (at ./Library/PackageCache/com.unity.test-framework@1405238725ab/UnityEditor.TestRunner/TestRun/Tasks/BuildActionTaskBase.cs:48)
+UnityEditor.TestTools.TestRunner.TestRun.Tasks.BuildActionTaskBase`1/<Execute>d__7<UnityEngine.TestTools.IPostBuildCleanup>:MoveNext () (at ./Library/PackageCache/com.unity.test-framework@1405238725ab/UnityEditor.TestRunner/TestRun/Tasks/BuildActionTaskBase.cs:34)
+UnityEditor.TestTools.TestRunner.TestRun.TestJobRunner:ExecuteStep () (at ./Library/PackageCache/com.unity.test-framework@1405238725ab/UnityEditor.TestRunner/TestRun/TestJobRunner.cs:194)
+UnityEditor.TestTools.TestRunner.TestRun.TestJobRunner:ExecuteCallback () (at ./Library/PackageCache/com.unity.test-framework@1405238725ab/UnityEditor.TestRunner/TestRun/TestJobRunner.cs:129)
+UnityEditor.EditorApplication:Internal_CallUpdateFunctions () (at /Users/bokken/build/output/unity/unity/Editor/Mono/EditorApplication.cs:403)
+
+(Filename: ./Library/PackageCache/com.unity.test-framework@1405238725ab/UnityEditor.TestRunner/TestRun/Tasks/BuildActionTaskBase.cs Line: 48)
+
+Unloading 0 Unused Serialized files (Serialized files now loaded: 0)
+Unloading 0 unused Assets / (0 B). Loaded Objects now: 11364.
+Memory consumption went from 297.2 MB to 297.2 MB.
+Total: 16.034375 ms (FindLiveObjects: 0.172208 ms CreateObjectMapping: 0.876333 ms MarkObjects: 14.976625 ms  DeleteObjects: 0.008875 ms)
+
+DisplayProgressbar: Undo
+Test run completed. Exiting with code 0 (Ok). Run completed.
+UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+UnityEngine.StackTraceUtility:ExtractStackTrace () (at /Users/bokken/build/output/unity/unity/Runtime/Export/Scripting/StackTrace.cs:35)
+UnityEngine.DebugLogHandler:Internal_Log (UnityEngine.LogType,UnityEngine.LogOption,string,UnityEngine.Object)
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
+UnityEngine.Logger:Log (UnityEngine.LogType,object)
+UnityEngine.Debug:Log (object)
+UnityEditor.TestTools.TestRunner.CommandLineTest.Executer:ExitApplication (UnityEditor.TestTools.TestRunner.CommandLineTest.Executer/ReturnCodes,string) (at ./Library/PackageCache/com.unity.test-framework@1405238725ab/UnityEditor.TestRunner/CommandLineTest/Executer.cs:81)
+UnityEditor.TestTools.TestRunner.CommandLineTest.Executer:ExitIfRunIsCompleted () (at ./Library/PackageCache/com.unity.test-framework@1405238725ab/UnityEditor.TestRunner/CommandLineTest/Executer.cs:74)
+UnityEditor.EditorApplication:Internal_CallUpdateFunctions () (at /Users/bokken/build/output/unity/unity/Editor/Mono/EditorApplication.cs:403)
+
+(Filename: ./Library/PackageCache/com.unity.test-framework@1405238725ab/UnityEditor.TestRunner/CommandLineTest/Executer.cs Line: 81)
+
+MonoPathRemapper: Attempts to remap: 108216; Successful remaps: 33424
+Serialized file version minimum: 23, current 23
+[INFO ] [relay] relay.startup port=9001 mcpClientPort=9002 editorPid=21243
+[INFO ] [relay] log === RELAY SERVER STARTED === (unity-ai-relay v1.0.12-build.97)
+[INFO ] [relay] log Starting relay server...
+[INFO ] [relay] log Command line arguments: ["bun","/$bunfs/root/relay_mac_arm64","--relay","--port","9001","--mcp-client-port","9002","--editor-pid","21243","--shutdown-delay","180","--log-dir","/Users/jiawei.zhou/Documents/Fidgeting app/unity/FidgetingApp/Logs"]
+[INFO ] [relay] log Parsed config: {"port":9001,"mcpClientPort":9002,"editorPid":"21243","shutdownDelaySeconds":180}
+[INFO ] [relay] log Initializing relay components...
+[INFO ] [relay] log Creating RelayEditor...
+[INFO ] [relay] log WebSocket server started
+[INFO ] [relay] log Relay server initialization completed
+[INFO ] [relay] log MCP Client initialized at port: 9002
+[INFO ] [relay] log Unity MCP Relay server started | Port: 9002 | Endpoints: /mcp/start-server, /mcp/stop-server, /mcp/server-status, /mcp/call-tool
+[INFO ] [relay] log Unity client connected with ID: editor-21243-a40kk7 (relay 1.0.12-build.97)
+[INFO ] [relay] connection.established clientId=editor-21243-a40kk7 port=9001
+Request timed out while processing request "https://public-cdn.cloud.unity3d.com/config/production", HTTP error code 0
+.[UnityConnect] Request timed out.
+An error occurred while processing request "https://public-cdn.cloud.unity3d.com/config/production", HTTP error code 299
+.[UnityConnect] An error occurred.
+[INFO ] [relay] log Shutdown request received from client editor-21243-a40kk7
+[INFO ] [relay] log Unity client requested immediate shutdown - shutting down now, reason: Shutdown requested by client
+[INFO ] [relay] log Shutdown: Initiating graceful shutdown: Shutdown requested by client
+Importing 'GUID: 0000000000000000b000000000000000 - Path: ProjectSettings/EditorBuildSettings.asset' with importer (LibraryAssetImporter)
+Imported 'GUID: 0000000000000000b000000000000000' -> (Import Result ID: '091f01172f8655a8627d93ccb227d598') in 0.001 seconds [static dependencies only]. Details - ImportResultOutputID=4647dd083cfc32cebcd7526e8846440c DependenciesID=7800f3c207c2d8ad17557fb06a234284 StaticDependenciesID=c42002aae32c8b947165ca2571755f3a 
+Shutting down MSBuild server...
+Shutting down VB/C# compiler server...
+Refreshing native plugins compatible for Editor in 2.14 ms, found 3 plugins.
+Asset Pipeline Refresh (id=369ad904c48054a57a0445e95b32c602): Total: 0.159 seconds - Initiated by StopAssetImportingV2(NoUpdateAssetOptions)
+Thread 0x34d8c7000 may have been prematurely finalized
+VB/C# compiler server shut down successfully.
+MSBuild server shut down successfully.
+Input System module state changed to: ShutdownInProgress.
+Input Polling Thread exited.
+Input System module state changed to: Shutdown.
+[Physics::Module] Cleanup current backend.
+[Physics::Module] Id: 0xf2b8ea05
+[Licensing::IpcConnector] LicenseClient-jiawei.zhou-notifications channel disconnected successfully.
+[Licensing::IpcConnector] LicenseClient-jiawei.zhou channel disconnected successfully.
+Thread 0x170ccb000 may have been prematurely finalized
+Thread 0x171013000 may have been prematurely finalized
+Thread 0x170e6f000 may have been prematurely finalized
+Thread 0x170de3000 may have been prematurely finalized
+Thread 0x170f87000 may have been prematurely finalized
+Thread 0x170efb000 may have been prematurely finalized
+Thread 0x17109f000 may have been prematurely finalized
+Thread 0x170d57000 may have been prematurely finalized
+AcceleratorClientConnectionCallback - disconnected - :0
+Thread 0x17350b000 may have been prematurely finalized
+info: Microsoft.Hosting.Lifetime[0]
+      Application is shutting down...
+Cleanup mono
+CodeReloadManager destroyed
+info: Unity.ILPP.Runner.PostProcessingAssemblyLoadContext[0]
+      ALC ILPP context 1 is unloading
+debugger-agent: Unable to listen on 44
+[usbmuxd] Stop listen thread
+[usbmuxd] Error: 
+[usbmuxd] Listen thread exiting

@@ -1,0 +1,82 @@
+{
+  "schemaVersion": 1,
+  "modelId": "premium-display-case",
+  "variantId": "tri-spinner-slab-v3-cmf",
+  "gate": "11-unity-parity",
+  "revision": 4,
+  "silhouette": {
+    "unityMask": "unity-silhouette-front.png (unlit white on black, ortho CAM_PDC_FRONT recipe, 2048^2; holes filled)",
+    "blenderMask": "09-environment/rev-004/env-shipping-front.png (Cycles, CAM_PDC_FRONT = the camera the Unity reference table was extracted from; luma>0.035, top 64 stamp rows ignored, holes filled)",
+    "iouRaw": 0.99795,
+    "unityBboxPx": [
+      493,
+      123,
+      1555,
+      1925
+    ],
+    "blenderBboxPx": [
+      492,
+      122,
+      1556,
+      1926
+    ],
+    "maxBboxEdgeDeltaPx": 1,
+    "acceptance": {
+      "front_silhouette_iou_min": 0.995,
+      "anchor_delta_px_max_at_2048": 2
+    },
+    "pass": true,
+    "gate06WorkbenchCrossCheck": {
+      "mask": "06-geometry/rev-011/ortho-front.png, background-colour mask",
+      "iou": 0.97036,
+      "bboxPx": [
+        484,
+        109,
+        1563,
+        1937
+      ],
+      "note": "informative only: the Gate 06 fixed-view pack frames the case ~1.7% larger (different margin recipe), so bbox and IoU are not like-for-like"
+    },
+    "knownNit": "a few 1-px voids at the bolt socket clearance (socket floor disc is 20 tris vs the finer hole) show the background; ~0.05 mm, cosmetic, tracked for a later geometry revision"
+  },
+  "luminance": {
+    "hero": {
+      "blenderMeanLuma": 0.0976,
+      "unityMeanLuma": 0.0627,
+      "blenderP97": 0.6975,
+      "unityP97": 0.3955,
+      "pixelsDifferingOver8of255Percent": 37.84
+    },
+    "front": {
+      "blenderMeanLuma": 0.1197,
+      "unityMeanLuma": 0.1197,
+      "blenderP97": 0.7386,
+      "unityP97": 0.4557,
+      "pixelsDifferingOver8of255Percent": 40.99
+    },
+    "low-oblique": {
+      "blenderMeanLuma": 0.1088,
+      "unityMeanLuma": 0.1047,
+      "blenderP97": 0.8703,
+      "unityP97": 0.8325,
+      "pixelsDifferingOver8of255Percent": 22.43
+    },
+    "neutral-hero": {
+      "blenderMeanLuma": 0.0824,
+      "unityMeanLuma": 0.0785,
+      "blenderP97": 0.5212,
+      "unityP97": 0.3756,
+      "pixelsDifferingOver8of255Percent": 35.31
+    }
+  },
+  "notes": [
+    "Luminance columns are informative only: Blender renders through AgX (Medium High Contrast) with the review toy and lookdev floor present; Unity renders linear->sRGB without post-processing and without the caller-owned toy.",
+    "Geometry parity is asserted by unity-bounds-digest-validation.json (0.000 mm per-object delta) and the silhouette IoU above."
+  ],
+  "sources": {
+    "unity-silhouette-front.png": "9ae905cfc6daa992b491ffb2b11304972ea4aad464fbc5b6c51f93301da50144",
+    "ortho-front.png": "5adfba91eb40e1c1c2b766dd9e11591e0d619ecf442a3254faa9e9420bb411a8",
+    "unity-shipping-hero.png": "20b0b17e5fa2e948da36966d92b84854e3ec74e406a67e91de5dee769a080f41",
+    "env-shipping-hero.png": "13dada7473bd8620dce34e924a40a211512d8bb47b4e9868fcfc832eb0efa8a8"
+  }
+}

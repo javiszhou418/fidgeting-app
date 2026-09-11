@@ -1,6 +1,6 @@
 # Fidgeting Interaction Integration Status
 
-最后更新：2026-09-10
+最后更新：2026-09-11
 
 本文件回答一个问题：规格中的能力是否已经进入可运行代码。状态只按代码、场景接线和测试证据填写，不按聊天结论或文档完成度填写。
 
@@ -10,6 +10,59 @@
 - `部分集成`：已有部分代码或接线，但还缺语义、生命周期、测试或真机环节。
 - `仅规格`：只有设计规格，不能对外称为已实现。
 - `待真机验收`：自动化能验证结构，但触感仍必须在 iPhone 上确认。
+
+## 2026-09-11 21:0x Premium Display Case · tri-spinner-slab-v3-cmf Gate 12 R009 Unity shipping 候选预览（manifest rev 138，stage 12 draft）
+
+> **状态：Gate 12 R009 候选已在 Unity 6000.5.6f1 真场景出图（`PremiumDisplayCaseGate12R009Builder.BuildAndCapture`，report `status=pass`）。`PremiumDisplayCaseShippingFactory.ResourcesPath` 仍指向 Gate12R004；轨道 A 真机安装未开始。视觉批准待确认，未推送手机。**
+
+- 候选资源：`Assets/Resources/Gacha/PremiumDisplayCaseGate12R009/`（`PresentationRoot.prefab`、`Gate12R009BeautyVolume.asset`、header TextMesh 深度测试材质/着色器）；场景 `Assets/_DisplayCase/Scenes/PremiumDisplayCaseGate12R009.unity`。Gate 11 FBX 哈希 `51bdbd4a…` 未动；38 件 GEO、无 explode；口袋 `ContentFit` 65.4×65.4×14.5 mm、三叶奖品 62.9×59.8×14.5 mm、凸出 6.09 mm；运行时 receipt 驱动 Oxanium 顶栏（`LabelTextDepthTested` 修复背面透字）。
+- 预览证据（整盒 only）：`ArtSource/ModelPipeline/premium-display-case/evidence/12-shipping/v3-rev-009/` — `shipping-hero.png`、六向标准视角、`phone-rest-{front,rear,quarter}.png`、`app-rig-current-yaw*` vs `app-rig-gate09-yaw*`（真 App 场景 `ThreeBladeMetalOriginal` 内 A=现有三盏方向光 / B=Gate09 棚灯+美化 Volume）、`turntable-frames/`（72f）、`app-turntable-frames/`（48f）、`gate12-r009-report.json`。本地对照拼图：`~/Library/Caches/fidgeting-renders/gate12-r009-review/{hero-4way,phone-3way,app-rig-ab}.png`。`Artifacts/TriSpinnerSlab/gate12-r009/*.mp4` 尚未 encode。
+- 测试：`PremiumDisplayCaseGate12R009Tests`（候选 prefab、口袋 fit、标签、Beauty Volume 合约范围、工厂仍 R004、报告 pass）；与 Gate11 parity / 既有 Gate12 / Gacha choreography 同批回归见 `~/Library/Caches/fidgeting-renders/gate12-r009-prep/latest-test-results.txt`。
+- 已知局限：URP Lit 代替 crystal/薄膜；无 soft-focus renderer feature；Neutral tonemap vs Blender AgX；正面手机构图可见 header 板柔光反射；Unity 无 Blender 反射地板。
+- **轨道 A 真机推送路径（交付子任务 [Map Unity display-case delivery path](c736cc69-dbf9-44d2-acba-2b2f2c3ada93) 结论）**：用户明确批准 Gate 12 预览后，一步改 `PremiumDisplayCaseShippingFactory.ResourcesPath` → `Gacha/PremiumDisplayCaseGate12R009/PresentationRoot`（及可选：Gacha 灯组 A vs B）；再按 `scripts/device_delivery_geeone_tri_spinner.sh` / `device_delivery_gyro_haptics.sh` 同一套流程（Unity `6000.5.6f1`、`/tmp/fidgeting-app-ios-pipeline.lock` + `/tmp/fidgeting-app-unity-canonical.lock`、唯一 `Builds/iOS/DeviceJobs/<job>/`、单调 build 号、`delivery-result.json`）。仓库尚无专用 `premium-display-case` delivery 脚本——需在批准后新建或复制上述脚本并收窄 `SOURCE_FILES` 到 R009 候选 + 工厂 + Gacha 揭示接线。Gate 10 产物仍只留在 evidence；勿在未批准时覆盖 shipping `PremiumDisplayCaseGate12R004` 或 legacy `Assets/Resources/Gacha/PremiumDisplayCase.prefab`。
+- 待定：用户 Gate 12 视觉批准；App 内灯组选 A 或 B；pipeline stage 12 `ready_for_review` 登记；`Artifacts/` 录屏；Track B（header 稀有度色 + 可换凹槽内容）。
+
+## 2026-09-11 18:0x Premium Display Case · tri-spinner-slab-v3-cmf Gate 10 rev-003 重打包 + Gate 11 rev-004 Unity parity（manifest rev 138，Gate 12 draft）
+
+> **状态：Gate 10 r5 / Gate 11 r4 按用户 16:3x 批量授权（原话「批准 09，并授权 10–11 校验通过就自动继续，到 Gate 12 Unity 预览再停下来给我看（推荐）」）在全部校验通过后记为 approved。Gate 12 r9 已开 draft。批量授权到此为止：真实 Unity shipping 预览待用户明确视觉批准；未构建、未推送手机。视觉批准待确认，未推送手机。**
+
+- Gate 10 rev-003（stage r5，evidence `evidence/10-export/rev-003/`）：rev-002 FBX 把 Blender 空间变换烘在 `ROOT_PDC_PRESENTATION`（-90° X，×100），Unity 导入后根节点非 identity，被 Gate 11 `root_rotation_zero / root_scale_one` 拒。r5 只改 FBX 打包（`use_space_transform=False, axis_forward=Y, axis_up=Z, apply_unit_scale=True, FBX_SCALE_UNITS`），几何/材质/GLB/贴花与 rev-002 逐字节同源；往返校验、三角 91 008、无陀螺、碰撞策略全部 pass。r4 入 `historicalRevisions`。
+- Gate 11 rev-004（stage r4，evidence `evidence/11-unity-parity/rev-004/`）：`Assets/_DisplayCase/Candidates/TriSpinnerSlabGate11R004/`（FBX 逐字节 = Gate 10 r5，`Editor/TriSpinnerSlabGate11ParityBuilder.cs`，`Reference/blender-parity-reference.json` 由 Blender 提取的 41 件 / 6 机位 / 18+3 面光表）。Unity 6000.5.6f1 URP batchmode：导入 `useFileScale + bakeAxisConversion` → 全节点 identity、Blender (x,y,z)→Unity (x,z,y)；7 区 URP Lit 材质（透明预乘 crystal α0.08 q3000 / liner α0.25 q2990，`_QueueOffset`）+ 标签贴花；面光 → 程序化 HDR 反射 cubemap（256，clamp 40）+ 1 主方向光 + 3 补光（预算 3/3）；相机按 Blender 物理参数（85 mm，36×24，front 正交 0.1952）。指标：逐件包围盒 Δ 0.000 mm、盒体尺寸 Δ 0.0 %、正面剪影 IoU **0.99795**（bbox Δ 1 px，对 Gate 09 `env-shipping-front.png`；Gate 06 Workbench 0.970 仅参考）；亮度列仅参考（Blender AgX vs Unity 线性）。EditMode `TriSpinnerSlabGate11ParityTests` 7/7（字节一致、shipping 资产哈希未动、identity/pivot、材质槽 7/7、透明排序、包围盒、报告 pass）。已知局限：URP Lit 代替 crystal 折射/薄膜、拉丝各向异性、钢琴黑清漆；无 tonemapping；螺栓孔 1 px 空洞。
+- 证据/录屏：`Artifacts/TriSpinnerSlab/gate11-r004/gate11-r004-unity-parity-turntable-clear.mp4`（48f @24，真实 Unity 出货灯组，无后处理）+ `…-frame012.png`/`…-frame036.png`；`gate11-r004-blender-vs-unity-shipping-hero.png`、`gate11-r004-blender-vs-unity-front-and-silhouette.png`、`gate11-r004-blender-vs-unity-neutral.png`、`gate11-r004-unity-standard-views-sheet.png`（hero/top/left/right/low）。
+- 登记：`tools/model-provenance-explorer/register_tri_spinner_slab_v3_gate10_rev005_gate11_rev004.py`（manifest rev 138；stage 11/12 legacy r3/r8 入历史；`currentState.batchAuthorization.consumed = [10, 11]`）；validate premium-display-case 0 error，11/12 approved，earliestProblem = 12-shipping draft「等待用户审批」。
+- 未改动：`Assets/Resources/Gacha/PremiumDisplayCase.prefab`、`Assets/_DisplayCase/Scenes/PremiumDisplayCase.unity`、`Assets/_DisplayCase/Models/PremiumDisplayCase.fbx`、`PremiumDisplayCaseShippingFactory.ResourcesPath`（仍 Gate12R004）。轨道 A 的 iOS 构建/安装只能在 Gate 12 预览批准后进行。
+
+## 2026-09-11 16:14 Premium Display Case · tri-spinner-slab-v3-cmf Gate 08 批准 + 两条轨道 → Gate 09 rev-004 环境（manifest rev 135，ready_for_review）
+
+> **状态：用户 16:14「可以」批准 Gate 08 r5（rev 134，原话含两条未来变更说明），并要求分两条轨道：A = 把现有 slab 推到手机预览；B = 落实 header 背景色随稀有度 + 凹槽内容可替换。Gate 09 环境 rev-004 已出并登记 `ready_for_review`。Gate 10–12 与真机推送尚未开始；未推送手机。**
+
+- 用户两点回答：① 陀螺**没有**合成进盒体网格或法线贴图——它是 `PIVOT_PDC_CONTENT_SLOT` 上的 caller-owned 内容，盒体导出不含它，凹槽是 Ø71.5 mm 通用圆井（按最大玩具 65 mm 定）；替换为石墨双叶 / 磁吸推牌 / 扑克牌 / EDC 属于 Unity 侧 content-fit 表 + slot 接线，不动盒体几何。② header 板背景色随稀有度 = zone 4 材质层面的每档基色（几何不变），需 contract rev 增加 `cmf.header_plate_rarity_map` 并重验 Gate 07。两项记入 `currentState.plannedChanges.trackB`；实施会重开 Gate 03/07，因此安排在轨道 A 手机预览之后。
+- Gate 09 rev-004（`tools/blender/environment_tri_spinner_slab.py`）：同机位（hero/front/low）三种环境——NEUTRAL（Gate 07 中性灯）、REVIEW（Gate 08 灯组 + 审阅补光/灰世界）、SHIPPING（同灯组去审阅辅助 + 合约世界 `#000103`）。差异指标写入 `environment-report.json`（hero：review vs shipping 43.4% 像素 >8、neutral vs shipping 30.6%）。结论：Unity parity 目标是 SHIPPING 集，不是 REVIEW 集。合成表 `Artifacts/TriSpinnerSlab/gate09-r004/gate09-r004-environment-compare.png`。登记 stage 09 r4（legacy r3 入历史），13 资产，validate 无 error。
+- 轨道 A 路线：Gate 09 批准 → Gate 10 导出 → Gate 11 parity → Gate 12 Unity 预览 → 用户明确视觉批准 → iOS 构建/安装。按 AGENTS 规则，未经 Gate 12 预览批准不得安装。交付工具链见上文 2026-09-11 21:0x 节（子任务 [Map Unity display-case delivery path](c736cc69-dbf9-44d2-acba-2b2f2c3ada93)）。
+- 待定：Gate 09 批准；是否授权 Gate 10–11 通过校验即自动继续、只在 Gate 12 Unity 预览处停下来审批。
+- **16:3x 用户选「批准 09，并授权 10–11 校验通过就自动继续，到 Gate 12 Unity 预览再停下来给我看」**（rev 136，`currentState.batchAuthorization`）。Gate 10 rev-002（`tools/blender/export_tri_spinner_slab_package.py`）：从批准的 Gate 07 blend 剥离灯/相机/地板/陀螺/切刀，38 件 + 3 个 empty，简化导出材质（Gate 07 每区常数 PBR，命名 `M_PDC_Export_*`），FBX（-Z/Y，FBX_SCALE_NONE，三角化，custom props）+ GLB（Y-up，COLOR_0=COLOR0，TEXCOORD_0=UV2）+ 标签 decal PNG/JSON + `export-manifest.json`（哈希、上游批准原话、合约 sha）+ `collision-policy.json`（Unity BoxCollider，无网格碰撞）；FBX/GLB 新场景往返校验全部通过（网格数、三角 91 008、外形 0.5 mm 内、根/slot 存在）；`export-review-glb-roundtrip.png`。按授权记为 approved（rev 137），Gate 11 开为 draft，导入目标 `Assets/_DisplayCase/Candidates/TriSpinnerSlabGate11R002/`。
+
+## 2026-09-11 15:26 Premium Display Case · tri-spinner-slab-v3-cmf Gate 07 批准 + 材质库注册 → Gate 08 rev-005 灯光（manifest rev 133，ready_for_review）
+
+> **状态：用户 15:26「确认」（IDE 打开 `gate07-r003-material-id-vs-render.png`）→ Gate 07 r6 `approved`（rev 132，原话 + 审阅资产 SHA + 合约 SHA + 清单）。按合约要求批准后把 9 条材质写入 `MaterialLibrary/materials.json`（`approved-gate07`），`materials.md` 重新生成，`validate-material-library` ok（27 材质）。Gate 08 灯光 rev-005 已在批准材质上出证据并登记 `ready_for_review`。未构建、未推送手机。**
+
+- 材质库新增：`case-clear-crystal`、`case-smoke-lilac-liner`（新 family `glass`）、`case-dark-sandblast`（scheme A `#5C6266` 取代规格 `#AEB3B6`）、`case-piano-black`、`case-bright-mirror`（取代烟色镜面 `#667078`）、`case-champagne-gold-inlay`、三档稀有度金属 `case-rose-bronze-tier` / `case-grey-blue-titanium-tier` / `case-champagne-tier`；`steel-satin` 增加本变体 usedBy（各向异性 0.8）。均 `unity: null`（Gate 10/11 再补 Unity 块）；球体缩略图未渲染。
+- Gate 08 脚本 `tools/blender/light_tri_spinner_slab_beauty.py`：核对 `pdc-v3-g07-material-blend` SHA；删除中性灯；以 `render_tri_spinner_slab_cmf_preview.py`（main 已加 `__main__` 守卫，可 import）构建合约 rev-013 `lighting.beauty` 灯组（主光/条光/顶轨/冷紫 rim 30/26%/四条彩色边光/8 颗 sparkle/前补/审阅补光，glossy filter 0），p97 校准到 0.86（0.2535×14.69 → 0.7922×1.198）；所有灯 `Object.visible_camera=False`（低角机位曾直接看到底部粉色边光成一大块品红，修正后重渲三张斜/低视图；低角机位在 lookdev 地板之下，该视图隐藏地板）。输出：`beauty-hero-{clean,soft}.png`（合约 soft_focus：阈值 0.7–1.5、模糊 15/61 px、混合 0.30/0.075，3.44% 像素）、`beauty-{left,right,low}-oblique.png`、诊断通道 `pass-{clay,normal,depth,roughness}-hero.png`（clay 材质覆盖；normal 世界空间；depth 用 mist 覆盖盒体范围；roughness 为每个材质写入的 AOV，陀螺无 AOV 为黑）、四档 clean+soft、144 帧 beauty 转台（合约 2.5°/帧）与 0/25/90/200/335° 静帧。
+- 事故：两次局部重渲覆盖了完整跑的 `lighting-report.json`；已用最终局部跑的 hero/soft/passes 数据 + 完整跑的转台目录重组报告并注明；脚本改为局部运行写 `lighting-report-partial.json`、不再覆盖 blend。
+- 证据/录屏：`evidence/08-lighting/rev-005/`；`Artifacts/TriSpinnerSlab/gate08-r005/gate08-r005-beauty-turntable-clear.mp4`（144f 1440×960）+ 五个角度静帧；`gate08-r005-beauty-board.png`、`gate08-r005-diagnostic-passes.png`、`gate08-r005-rarity-muted-tiers-beauty.png`。
+- 登记：`register_tri_spinner_slab_v3_gate07_approval.py`（rev 132）、`register_tri_spinner_slab_v3_gate08_rev005.py`（rev 133，stage 08 r5，legacy r4 入历史，34 资产、14 review）。validate 无 error。
+- 待定：Gate 08 rev-005 用户批准（beauty 板 + 转台 + 诊断通道）；之后 Gate 09 环境（中性 vs shipping 环境同机位对比）。
+
+## 2026-09-11 14:45 Premium Display Case · tri-spinner-slab-v3-cmf Gate 03–06 批准 → Gate 07 rev-003 材质（manifest rev 131，ready_for_review）
+
+> **状态：用户 14:45「批准」（回应「认可就说“批准 03–06”」，IDE 打开 `gate06-r011-geometry-turntable-clear.mp4`）→ Gate 03 r17 / 04 r44 / 05 r17 / 06 r11 `approved`（rev 130，`register_tri_spinner_slab_v3_rev013_approval.py`，原话 + 审阅资产 SHA + 合约 SHA + 清单）。Gate 07 材质 rev-003 已在批准几何上出证据并登记 `ready_for_review`。材质库未写入，未构建、未推送手机。**
+
+- 脚本：`tools/blender/make_tri_spinner_slab_label_decal.py`（Pillow + `Oxanium-VariableFont_wght.ttf`：标题 SemiBold 7.4 mm、系列行 Medium 3.6 mm、0.18 mm 横线、两栏规格 2.6 mm，原生字距无 tracking，遵循 FDB-GAC-009 字体规则；文案为 V3 概念占位，运行时由 App 填真实值）与 `tools/blender/lookdev_tri_spinner_slab_materials.py`（快照入 evidence）。后者先核对 `pdc-v3-g06-geometry-blend` SHA，再在不改几何的前提下建七区材质：zone 5 拉丝钢（材质库 `steel-satin` 数值 + scheme A 各向异性 0.8、UV2.x 方向细纹 ±0.015 粗糙度/0.0015 mm 微凸，按库「远看不见拉丝纹」的要求压低）、zone 3 深喷砂（scheme A `#5C6266`，合约 feature 0.13 mm / bump 0.0105 mm / 粗糙度 0.45±0.03）、zone 6 亮镜面 `#C9D0D6` 0.04、zone 4 钢琴黑清漆（coat 1.0/0.03）、zone 7 香槟金各向异性沿饰条长轴、zone 1 整片薄膜 300–650 nm、zone 2 烟色内衬吸收；header 板 = 钢琴黑 + 标签 decal（平面映射到板面范围，油墨粗糙度 0.55）；数值板留白不画任何占位 UI。
+- 灯光：合约 `lighting.neutral`（key/fill/rear 5600 K，1.0/0.25/0.18，黑背景，无彩色无 bloom），按 `lighting.calibration` 用 18% 灰卡校准到 0.18 场景线性（两轮，最终 0.1749×1.029）。fill 放在相机后方大面积，让正面拉丝平面反射灰场而不是黑世界。
+- 证据：`evidence/07-material/rev-003/`：`material-{hero,front,header-macro,main-cmf-macro,crystal-bevel-macro,pocket-rim-macro}.png`、`material-id-{hero,front}.png`、`material-hero-tier-{steel,copper,titanium,gold}.png`、`header-label-decal.{png,json}`、`material-revalidation*.json`、`tri-spinner-slab-material-r003.blend`。录屏：`Artifacts/TriSpinnerSlab/gate07-r003/gate07-r003-material-neutral-turntable-clear.mp4`（72f）+ frame；合成表 `gate07-r003-material-board.png`、`gate07-r003-material-id-vs-render.png`、`gate07-r003-rarity-muted-tiers-neutral.png`。
+- 登记：`register_tri_spinner_slab_v3_gate07_rev003.py` → manifest rev 131，stage 07 r6（legacy r5 入历史），27 资产、11 review；validate `errors: []`。材质库注册提案 7 条写在 revalidation（批准后再写 `materials.json`）。
+- 已知限制：标签文案占位；拉丝/喷砂为程序纹理，Gate 10 需烘或改 URP detail；薄膜在 URP Lit 无对应项，Gate 11 需自定义 shader 或近似；中性板比 Gate 05 美术预览更暗（设计如此）。
+- 待定：Gate 07 rev-003 用户批准（材质板 + 中性转台 + 分区图）；批准后写材质库并进 Gate 08 灯光（rev-013 合约灯光方向正式校准）。
 
 ## 2026-09-11 09:20 Premium Display Case · tri-spinner-slab-v3-cmf 缝透底 → Gate 03–05 rev-013 + Gate 06 rev-011（manifest rev 129）
 

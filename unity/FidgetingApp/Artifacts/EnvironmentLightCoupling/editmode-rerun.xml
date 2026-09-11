@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="utf-8"?>
+<test-run id="2" testcasecount="10" result="Failed(Child)" total="10" passed="9" failed="1" inconclusive="0" skipped="0" asserts="0" engine-version="3.5.0.0" clr-version="4.0.30319.42000" start-time="2026-08-27 08:43:51Z" end-time="2026-08-27 08:43:54Z" duration="2.8264283">
+  <test-suite type="TestSuite" id="1000" name="Fidget Spinner" fullname="Fidget Spinner" runstate="Runnable" testcasecount="329" result="Failed" site="Child" start-time="2026-08-27 08:43:51Z" end-time="2026-08-27 08:43:54Z" duration="2.826428" total="10" passed="9" failed="1" inconclusive="0" skipped="0" asserts="0">
+    <properties>
+      <property name="platform" value="EditMode" />
+    </properties>
+    <failure>
+      <message><![CDATA[One or more child tests had errors]]></message>
+    </failure>
+    <test-suite type="Assembly" id="1368" name="Assembly-CSharp-Editor.dll" fullname="/Users/jiawei.zhou/Documents/Fidgeting app/unity/FidgetingApp/Library/ScriptAssemblies/Assembly-CSharp-Editor.dll" runstate="Runnable" testcasecount="329" result="Failed" site="Child" start-time="2026-08-27 08:43:51Z" end-time="2026-08-27 08:43:54Z" duration="2.818210" total="10" passed="9" failed="1" inconclusive="0" skipped="0" asserts="0">
+      <properties>
+        <property name="_PID" value="7146" />
+        <property name="_APPDOMAIN" value="Unity Child Domain" />
+        <property name="platform" value="EditMode" />
+        <property name="EditorOnly" value="True" />
+      </properties>
+      <failure>
+        <message><![CDATA[One or more child tests had errors]]></message>
+      </failure>
+      <test-suite type="TestSuite" id="1372" name="FidgetingApp" fullname="FidgetingApp" runstate="Runnable" testcasecount="250" result="Failed" site="Child" start-time="2026-08-27 08:43:51Z" end-time="2026-08-27 08:43:54Z" duration="2.805941" total="10" passed="9" failed="1" inconclusive="0" skipped="0" asserts="0">
+        <properties />
+        <failure>
+          <message><![CDATA[One or more child tests had errors]]></message>
+        </failure>
+        <test-suite type="TestSuite" id="1376" name="EDC" fullname="FidgetingApp.EDC" runstate="Runnable" testcasecount="25" result="Passed" start-time="2026-08-27 08:43:51Z" end-time="2026-08-27 08:43:53Z" duration="2.345570" total="9" passed="9" failed="0" inconclusive="0" skipped="0" asserts="0">
+          <properties />
+          <test-suite type="TestSuite" id="1377" name="Tests" fullname="FidgetingApp.EDC.Tests" runstate="Runnable" testcasecount="25" result="Passed" start-time="2026-08-27 08:43:51Z" end-time="2026-08-27 08:43:53Z" duration="2.344243" total="9" passed="9" failed="0" inconclusive="0" skipped="0" asserts="0">
+            <properties />
+            <test-suite type="TestSuite" id="1378" name="Editor" fullname="FidgetingApp.EDC.Tests.Editor" runstate="Runnable" testcasecount="25" result="Passed" start-time="2026-08-27 08:43:51Z" end-time="2026-08-27 08:43:53Z" duration="2.342230" total="9" passed="9" failed="0" inconclusive="0" skipped="0" asserts="0">
+              <properties />
+              <test-suite type="TestFixture" id="1098" name="EdcSliderAcceptanceTests" fullname="FidgetingApp.EDC.Tests.Editor.EdcSliderAcceptanceTests" classname="FidgetingApp.EDC.Tests.Editor.EdcSliderAcceptanceTests" runstate="Runnable" testcasecount="9" result="Passed" start-time="2026-08-27 08:43:51Z" end-time="2026-08-27 08:43:53Z" duration="2.339761" total="9" passed="9" failed="0" inconclusive="0" skipped="0" asserts="0">
+                <properties />
+                <test-case id="1101" name="AlloyClick766HzAudio_HasOneTransientAndNoSecondClick" fullname="FidgetingApp.EDC.Tests.Editor.EdcSliderAcceptanceTests.AlloyClick766HzAudio_HasOneTransientAndNoSecondClick" methodname="AlloyClick766HzAudio_HasOneTransientAndNoSecondClick" classname="FidgetingApp.EDC.Tests.Editor.EdcSliderAcceptanceTests" runstate="Runnable" seed="918463049" result="Passed" start-time="2026-08-27 08:43:51Z" end-time="2026-08-27 08:43:51Z" duration="0.422491" asserts="0">
+                  <properties>
+                    <property name="retryIteration" value="0" />
+                    <property name="repeatIteration" value="0" />
+                  </properties>
+                </test-case>
+                <test-case id="1100" name="AlloyClick766HzAudio_IsWiredToAuthorizedDetentCrossingsOnly" fullname="FidgetingApp.EDC.Tests.Editor.EdcSliderAcceptanceTests.AlloyClick766HzAudio_IsWiredToAuthorizedDetentCrossingsOnly" methodname="AlloyClick766HzAudio_IsWiredToAuthorizedDetentCrossingsOnly" classname="FidgetingApp.EDC.Tests.Editor.EdcSliderAcceptanceTests" runstate="Runnable" seed="1297156927" result="Passed" start-time="2026-08-27 08:43:51Z" end-time="2026-08-27 08:43:51Z" duration="0.245235" asserts="0">
+                  <properties>
+                    <property name="retryIteration" value="0" />
+                    <property name="repeatIteration" value="0" />
+                  </properties>
+                </test-case>
+                <test-case id="1104" name="Controller_MovesOnlySliderGroupAlongLocalXAndExposesToggleContract" fullname="FidgetingApp.EDC.Tests.Editor.EdcSliderAcceptanceTests.Controller_MovesOnlySliderGroupAlongLocalXAndExposesToggleContract" methodname="Controller_MovesOnlySliderGroupAlongLocalXAndExposesToggleContract" classname="FidgetingApp.EDC.Tests.Editor.EdcSliderAcceptanceTests" runstate="Runnable" seed="1795044945" result="Passed" start-time="2026-08-27 08:43:51Z" end-time="2026-08-27 08:43:52Z" duration="0.247457" asserts="0">
+                  <properties>
+                    <property name="retryIteration" value="0" />
+                    <property name="repeatIteration" value="0" />
+                  </properties>
+                </test-case>
+                <test-case id="1103" name="CutLayers_PreserveCenteredPivotsUvsAndExplicitUrpMaterials" fullname="FidgetingApp.EDC.Tests.Editor.EdcSliderAcceptanceTests.CutLayers_PreserveCenteredPivotsUvsAndExplicitUrpMaterials" methodname="CutLayers_PreserveCenteredPivotsUvsAndExplicitUrpMaterials" classname="FidgetingApp.EDC.Tests.Editor.EdcSliderAcceptanceTests" runstate="Runnable" seed="1146859303" result="Passed" start-time="2026-08-27 08:43:52Z" end-time="2026-08-27 08:43:52Z" duration="0.308265" asserts="0">
+                  <properties>
+                    <property name="retryIteration" value="0" />
+                    <property name="repeatIteration" value="0" />
+                  </properties>
+                </test-case>
+                <test-case id="1105" name="DetailCamera_UsesFrontTopProductScaleAndExpandedTouchSurface" fullname="FidgetingApp.EDC.Tests.Editor.EdcSliderAcceptanceTests.DetailCamera_UsesFrontTopProductScaleAndExpandedTouchSurface" methodname="DetailCamera_UsesFrontTopProductScaleAndExpandedTouchSurface" classname="FidgetingApp.EDC.Tests.Editor.EdcSliderAcceptanceTests" runstate="Runnable" seed="1558990003" result="Passed" start-time="2026-08-27 08:43:52Z" end-time="2026-08-27 08:43:52Z" duration="0.226887" asserts="0">
+                  <properties>
+                    <property name="retryIteration" value="0" />
+                    <property name="repeatIteration" value="0" />
+                  </properties>
+                </test-case>
+                <test-case id="1106" name="LibraryPreview_UsesReducedMagneticSlideOccupancy" fullname="FidgetingApp.EDC.Tests.Editor.EdcSliderAcceptanceTests.LibraryPreview_UsesReducedMagneticSlideOccupancy" methodname="LibraryPreview_UsesReducedMagneticSlideOccupancy" classname="FidgetingApp.EDC.Tests.Editor.EdcSliderAcceptanceTests" runstate="Runnable" seed="580555831" result="Passed" start-time="2026-08-27 08:43:52Z" end-time="2026-08-27 08:43:52Z" duration="0.216219" asserts="0">
+                  <properties>
+                    <property name="retryIteration" value="0" />
+                    <property name="repeatIteration" value="0" />
+                  </properties>
+                </test-case>
+                <test-case id="1099" name="MagneticProfile_DefinesSixHeavyDetentsAnd68MillimeterTravel" fullname="FidgetingApp.EDC.Tests.Editor.EdcSliderAcceptanceTests.MagneticProfile_DefinesSixHeavyDetentsAnd68MillimeterTravel" methodname="MagneticProfile_DefinesSixHeavyDetentsAnd68MillimeterTravel" classname="FidgetingApp.EDC.Tests.Editor.EdcSliderAcceptanceTests" runstate="Runnable" seed="972027839" result="Passed" start-time="2026-08-27 08:43:52Z" end-time="2026-08-27 08:43:53Z" duration="0.213470" asserts="0">
+                  <properties>
+                    <property name="retryIteration" value="0" />
+                    <property name="repeatIteration" value="0" />
+                  </properties>
+                </test-case>
+                <test-case id="1102" name="SceneHierarchy_ContainsSevenLayersSixMagnetsAndFourScrews" fullname="FidgetingApp.EDC.Tests.Editor.EdcSliderAcceptanceTests.SceneHierarchy_ContainsSevenLayersSixMagnetsAndFourScrews" methodname="SceneHierarchy_ContainsSevenLayersSixMagnetsAndFourScrews" classname="FidgetingApp.EDC.Tests.Editor.EdcSliderAcceptanceTests" runstate="Runnable" seed="1819464218" result="Passed" start-time="2026-08-27 08:43:53Z" end-time="2026-08-27 08:43:53Z" duration="0.217660" asserts="0">
+                  <properties>
+                    <property name="retryIteration" value="0" />
+                    <property name="repeatIteration" value="0" />
+                  </properties>
+                </test-case>
+                <test-case id="1107" name="SceneTriangleCount_IsSourceFaithfulAndExplicitlyNotMobileOptimized" fullname="FidgetingApp.EDC.Tests.Editor.EdcSliderAcceptanceTests.SceneTriangleCount_IsSourceFaithfulAndExplicitlyNotMobileOptimized" methodname="SceneTriangleCount_IsSourceFaithfulAndExplicitlyNotMobileOptimized" classname="FidgetingApp.EDC.Tests.Editor.EdcSliderAcceptanceTests" runstate="Runnable" seed="903979353" result="Passed" start-time="2026-08-27 08:43:53Z" end-time="2026-08-27 08:43:53Z" duration="0.228938" asserts="0">
+                  <properties>
+                    <property name="retryIteration" value="0" />
+                    <property name="repeatIteration" value="0" />
+                  </properties>
+                </test-case>
+              </test-suite>
+            </test-suite>
+          </test-suite>
+        </test-suite>
+        <test-suite type="TestSuite" id="1382" name="Tests" fullname="FidgetingApp.Tests" runstate="Runnable" testcasecount="181" result="Failed" site="Child" start-time="2026-08-27 08:43:53Z" end-time="2026-08-27 08:43:54Z" duration="0.453854" total="1" passed="0" failed="1" inconclusive="0" skipped="0" asserts="0">
+          <properties />
+          <failure>
+            <message><![CDATA[One or more child tests had errors]]></message>
+          </failure>
+          <test-suite type="TestSuite" id="1383" name="Editor" fullname="FidgetingApp.Tests.Editor" runstate="Runnable" testcasecount="181" result="Failed" site="Child" start-time="2026-08-27 08:43:53Z" end-time="2026-08-27 08:43:54Z" duration="0.435547" total="1" passed="0" failed="1" inconclusive="0" skipped="0" asserts="0">
+            <properties />
+            <failure>
+              <message><![CDATA[One or more child tests had errors]]></message>
+            </failure>
+            <test-suite type="TestFixture" id="1287" name="SpinnerEnvironmentTests" fullname="FidgetingApp.Tests.Editor.SpinnerEnvironmentTests" classname="FidgetingApp.Tests.Editor.SpinnerEnvironmentTests" runstate="Runnable" testcasecount="10" result="Failed" site="Child" start-time="2026-08-27 08:43:53Z" end-time="2026-08-27 08:43:54Z" duration="0.424056" total="1" passed="0" failed="1" inconclusive="0" skipped="0" asserts="0">
+              <properties />
+              <failure>
+                <message><![CDATA[One or more child tests had errors]]></message>
+              </failure>
+              <test-case id="1292" name="EveryProductSceneInstallsItsBackgroundAndHarmonizedModelLights" fullname="FidgetingApp.Tests.Editor.SpinnerEnvironmentTests.EveryProductSceneInstallsItsBackgroundAndHarmonizedModelLights" methodname="EveryProductSceneInstallsItsBackgroundAndHarmonizedModelLights" classname="FidgetingApp.Tests.Editor.SpinnerEnvironmentTests" runstate="Runnable" seed="1809041957" result="Failed" start-time="2026-08-27 08:43:53Z" end-time="2026-08-27 08:43:54Z" duration="0.421576" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+                <failure>
+                  <message><![CDATA[  Expected: 0.419999987f +/- 9.99999975E-05f
+  But was:  0.25999999f
+]]></message>
+                  <stack-trace><![CDATA[at FidgetingApp.Tests.Editor.SpinnerEnvironmentTests.EveryProductSceneInstallsItsBackgroundAndHarmonizedModelLights () [0x00395] in /Users/jiawei.zhou/Documents/Fidgeting app/unity/FidgetingApp/Assets/Tests/Editor/SpinnerEnvironmentTests.cs:392
+]]></stack-trace>
+                </failure>
+                <output><![CDATA[Saving results to: /Users/jiawei.zhou/Library/Application Support/DefaultCompany/Fidget Spinner/TestResults.xml
+]]></output>
+              </test-case>
+            </test-suite>
+          </test-suite>
+        </test-suite>
+      </test-suite>
+    </test-suite>
+  </test-suite>
+</test-run>

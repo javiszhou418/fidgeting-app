@@ -113,9 +113,20 @@ const slotLabels = {
   "02-analysis": "参考分析", "03-contract": "尺寸合同", "04-architecture": "结构方案",
   "original-reference": "原始参考", "discovery-log": "发现记录", "analysis-board": "分析板", "modeling-contract": "建模合同", "measurement-source": "尺寸来源",
   "part-tree": "零件树", "exploded-plan": "结构方案", "white-model-source": "白模源文件", "white-model-hero": "白模主视图",
-  "material-board": "材质板", "material-closeup": "材质特写", "neutral-environment": "中性环境", "shipping-environment": "成品环境",
+  "white-model-closed": "闭合白模", "white-model-open": "全开白模", "white-model-rotation": "旋转姿态", "white-model-underside": "底面白模", "interactive-white-model": "交互白模", "interactive-white-model-review": "交互白模",
+  "view-front": "正视", "view-back": "背视", "view-top": "顶视", "view-bottom": "底视", "view-left": "左视", "view-right": "右视", "workbench": "几何总览", "dimension-overlay": "尺寸图", "pivot-overlay": "运动轴图", "exploded-geometry": "爆炸图", "interactive-geometry": "交互几何", "interactive-geometry-review": "交互几何",
+  "material-board": "材质板", "material-closeup": "材质特写", "material-day-hero": "日光材质", "material-open": "打开材质", "material-dark-emission": "暗场夜光", "interactive-lookdev": "交互材质", "interactive-material-review": "交互材质",
+  "hero": "主视角", "left-oblique": "左斜视", "right-oblique": "右斜视", "low-angle": "低角度",
+  "pass-beauty": "成品检查层", "pass-clay": "素模检查层", "pass-normal": "法线检查层", "pass-depth": "深度检查层", "pass-roughness": "粗糙度检查层",
+  "interactive-lighting": "交互灯光", "lighting-comparison-review": "灯光对照", "lighting-source": "灯光源文件",
+  "neutral-environment": "中性环境", "shipping-environment": "成品环境", "interactive-environment": "交互环境", "environment-source": "环境源文件", "environment-comparison-review": "环境对照",
+  "parameter-snapshot": "参数记录",
   "blend-source": "Blender 源", "fbx-export": "FBX", "glb-export": "GLB", "collision-export": "碰撞体", "export-manifest": "导出清单",
-  "blender-neutral": "Blender 中性图", "unity-neutral": "Unity 中性图", "parity-report": "对齐报告"
+  "export-validation": "导出检查", "glb-interaction-review": "GLB 交互检查", "hierarchy-motion-metadata": "层级与运动记录", "neutral-camera-recipe": "中性相机参数", "unity-import-contract": "Unity 导入规则",
+  "blender-neutral": "Blender 中性图", "unity-neutral": "Unity 中性图", "parity-report": "对齐报告",
+  "unity-runtime-recording": "Unity 交互录屏", "unity-dark": "Unity 暗场", "unity-back": "Unity 背面", "unity-open-track": "Unity 打开与轨道",
+  "shipping-library": "库列表", "shipping-hero": "主视角", "shipping-top": "顶视", "shipping-left-oblique": "左斜视", "shipping-right-oblique": "右斜视", "shipping-low": "低角度", "shipping-phone": "手机构图",
+  "shipping-dark": "暗场", "shipping-back": "背面", "shipping-open": "打开状态", "shipping-track-closeup": "轨道近景", "shipping-runtime-recording": "成品交互录屏", "shipping-report": "成品检查"
 };
 
 function humanizeSlots(text) {
@@ -192,6 +203,16 @@ const assetSlotLabels = {
   "white-model-source": "白模源文件",
   "white-model-hero": "白模 Hero",
   "white-model-support": "辅助姿态",
+  "white-model-closed": "闭合白模",
+  "white-model-open": "全开白模",
+  "white-model-rotation": "旋转姿态",
+  "white-model-underside": "底面白模",
+  "interactive-white-model": "交互白模",
+  "interactive-white-model-review": "交互白模",
+  "interactive-geometry": "交互几何",
+  "interactive-geometry-review": "交互几何",
+  "geometry-source": "Blender 几何源",
+  "parameter-snapshot": "参数记录",
   "pivot-axis-review": "轴心对照",
   "view-front": "正视",
   "view-back": "背视",
@@ -212,6 +233,11 @@ const assetSlotLabels = {
   "material-process-board": "可替换图案层流程板",
   "material-board": "中性 PBR 材质板",
   "material-closeup": "材质近景",
+  "material-day-hero": "日光材质",
+  "material-open": "打开材质",
+  "material-dark-emission": "暗场夜光",
+  "interactive-lookdev": "交互材质",
+  "interactive-material-review": "交互材质",
   "round-edge-location": "先看检查位置",
   "round-edge-comparison": "再看放大对比",
   "round-edge-wireframe": "最后看圆边细分",
@@ -1113,13 +1139,14 @@ function referenceDiscoveryPanel(stage) {
 
 function userFacingStageAssets(stage, assets) {
   const internalExtensions = new Set(["json", "md", "ndjson", "txt", "cs", "unity", "xml", "py", "sh", "js", "mjs", "meta", "asset", "log", "env", "csv"]);
-  const currentArtifactIds = new Set(stage.reviewArtifactIds?.length ? stage.reviewArtifactIds : (stage.artifactIds || []));
+  const currentArtifactIds = new Set([...(stage.artifactIds || []), ...(stage.reviewArtifactIds || [])]);
   const currentRevisionAssets = currentArtifactIds.size
     ? assets.filter((asset) => currentArtifactIds.has(asset.id))
     : assets;
   if (["02-analysis", "04-architecture"].includes(stage.id)) {
     // Slide-tile research rounds render their own review components; plain models show their board.
-    const bespoke = stage.id === "02-analysis" ? stage.analysisSpec : stage.architectureSpec;
+    const bespoke = state.manifest.model.id === "magnetic-slide-tile"
+      && (stage.id === "02-analysis" ? stage.analysisSpec : stage.architectureSpec);
     if (bespoke) return [];
     return currentRevisionAssets.filter((asset) => !internalExtensions.has(String(asset.path).split(".").pop().toLowerCase()));
   }
@@ -1129,6 +1156,8 @@ function userFacingStageAssets(stage, assets) {
       "blockout-spin", "blockout-compound", "blockout-underside",
       "blockout-mechanism-closeup", "blockout-exploded", "pivot-overlay",
       "white-model-hero", "white-model-support", "pivot-axis-review",
+      "white-model-closed", "white-model-open", "white-model-rotation", "white-model-underside",
+      "interactive-white-model", "interactive-white-model-review",
       "unity-motion-recording", "technical-view", "technical-interactive-model"
     ]);
     return currentRevisionAssets.filter((asset) => blockoutSlots.has(asset.slot));
@@ -1138,7 +1167,7 @@ function userFacingStageAssets(stage, assets) {
     if (userReview.length) return userReview;
     const geometrySlots = new Set([
       "view-front", "view-back", "view-top", "view-bottom", "view-left", "view-right",
-      "interactive-model", "workbench", "dimension-overlay", "pivot-overlay", "exploded-geometry",
+      "interactive-model", "interactive-geometry", "interactive-geometry-review", "workbench", "dimension-overlay", "pivot-overlay", "exploded-geometry",
       "underside-four-groove", "flat-plane-raised-axis", "section-aa", "tangency-step",
       "state-closed", "state-max-open", "state-detent-12", "state-detent-36",
       "state-machine-overlay", "state-max-open-0", "state-max-open-12",
@@ -1160,6 +1189,11 @@ function userFacingStageAssets(stage, assets) {
     "material-front",
     "material-board",
     "material-closeup",
+    "material-day-hero",
+    "material-open",
+    "material-dark-emission",
+    "interactive-lookdev",
+    "interactive-material-review",
     "material-second-light",
     "material-side-reflection",
     "material-open-artwork",
@@ -4423,7 +4457,8 @@ function stageTaskHeader(stage) {
       </section>
     `;
   }
-  return "";
+  const generic = agentStepCopy[stage.id];
+  return generic ? plainStagePurpose(generic.does) : "";
 }
 
 function approvalPanel(stage) {
@@ -4563,7 +4598,11 @@ function approvalPanel(stage) {
       </section>
     `;
   }
-  if (stage.id === "04-architecture" && ["motion-evidence-mapping", "concealed-circular-overlap"].includes(stage.architectureSpec?.reviewMode)) return "";
+  if (
+    stage.id === "04-architecture"
+    && state.manifest.model.id === "magnetic-slide-tile"
+    && ["motion-evidence-mapping", "concealed-circular-overlap"].includes(stage.architectureSpec?.reviewMode)
+  ) return "";
   const analysis = stage.id === "02-analysis";
   const officialAnalysis = analysis && stage.artifactIds.includes("slider-analysis-official-mechanism-board-r002");
   const activeClaims = analysis ? (state.manifest.claims || []).filter((claim) => claim.stageId === "02-analysis" && claim.state === "active").length : 0;
@@ -4799,7 +4838,9 @@ function renderStageDetail() {
       ? ""
       : genericEarlyGate
         ? agentStepPanel(stage) || `<p class="studio-empty studio-empty--canvas">本关还没有可看的素材。</p>`
-        : header ? "" : agentStepPanel(stage) || `<p class="studio-empty studio-empty--canvas">本关还没有可看的素材。</p>`)
+        : !bespokeSlider
+          ? agentStepPanel(stage) || `<p class="studio-empty studio-empty--canvas">本关还没有可看的素材。</p>`
+          : header ? "" : agentStepPanel(stage) || `<p class="studio-empty studio-empty--canvas">本关还没有可看的素材。</p>`)
     : guidedGrid
       ? `
       <section class="panel asset-panel">
@@ -5421,7 +5462,7 @@ async function openGlbAsset(asset, { container = els.assetStage, height = () => 
   const exposureRange = isGate10CorrectedExport
     ? `min="0.7" max="1.1" step="0.05" value="0.9"`
     : `min="0.5" max="2" step="0.1" value="1"`;
-  root.innerHTML = `<div class="viewer-controls"><button type="button" data-view="front">正</button><button type="button" data-view="back">背</button><button type="button" data-view="top">上</button><button type="button" data-view="left">左</button><button type="button" data-view="right">右</button><button type="button" data-view="hero">Hero</button><label><input type="checkbox" data-wireframe> 线框</label><label>${isGate09Environment ? "环境" : "灯光"} <select data-lighting-mode>${lightingOptions}</select></label><label><input type="checkbox" data-environment checked> 环境响应</label><label>曝光 <input type="range" data-exposure ${exposureRange}></label></div>`;
+  root.innerHTML = `<div class="viewer-controls"><button type="button" data-view="front">正</button><button type="button" data-view="back">背</button><button type="button" data-view="top">上</button><button type="button" data-view="bottom">下</button><button type="button" data-view="left">左</button><button type="button" data-view="right">右</button><button type="button" data-view="hero">Hero</button><span data-animation-controls hidden><button type="button" data-animation-toggle>暂停动作</button><input type="range" data-animation-time min="0" max="1" step="0.001" value="0" aria-label="动作进度"></span><label><input type="checkbox" data-wireframe> 线框</label><label>${isGate09Environment ? "环境" : "灯光"} <select data-lighting-mode>${lightingOptions}</select></label><label><input type="checkbox" data-environment checked> 环境响应</label><label>曝光 <input type="range" data-exposure ${exposureRange}></label></div>`;
   container.appendChild(root);
   const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: false });
   renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
@@ -5484,6 +5525,11 @@ async function openGlbAsset(asset, { container = els.assetStage, height = () => 
     renderer.setClearColor(environmentEnabled ? preset.clear : 0x34383f, 1);
   };
   let model = null;
+  let mixer = null;
+  let animationAction = null;
+  let animationActions = [];
+  let animationDuration = 0;
+  const animationClock = new THREE.Clock();
   let center = new THREE.Vector3();
   let radius = 1;
   let frame = 0;
@@ -5501,7 +5547,7 @@ async function openGlbAsset(asset, { container = els.assetStage, height = () => 
   const placeCamera = (view) => {
     const distance = radius * (isGate10CorrectedExport ? 5.2 : 3.1);
     const directions = {
-      front: [0, 0, 1], back: [0, 0, -1], top: [0, 1, .001],
+      front: [0, 0, 1], back: [0, 0, -1], top: [0, 1, .001], bottom: [0, -1, .001],
       left: [-1, 0, 0], right: [1, 0, 0], hero: isGate10CorrectedExport ? [74, 66, 116] : [1.2, .9, 1.4]
     };
     const direction = new THREE.Vector3(...(directions[view] || directions.hero)).normalize();
@@ -5540,6 +5586,23 @@ async function openGlbAsset(asset, { container = els.assetStage, height = () => 
   const environmentControl = root.querySelector("[data-environment]");
   const lightingModeControl = root.querySelector("[data-lighting-mode]");
   const exposureControl = root.querySelector("[data-exposure]");
+  const animationControls = root.querySelector("[data-animation-controls]");
+  const animationToggle = root.querySelector("[data-animation-toggle]");
+  const animationTime = root.querySelector("[data-animation-time]");
+  animationToggle.addEventListener("click", () => {
+    if (!animationAction) return;
+    const paused = !animationAction.paused;
+    animationActions.forEach((action) => { action.paused = paused; });
+    animationToggle.textContent = paused ? "播放动作" : "暂停动作";
+  });
+  animationTime.addEventListener("input", () => {
+    if (!mixer || !animationAction || !animationDuration) return;
+    animationActions.forEach((action) => { action.paused = false; });
+    mixer.setTime(Number(animationTime.value) * animationDuration);
+    mixer.update(0);
+    animationActions.forEach((action) => { action.paused = true; });
+    animationToggle.textContent = "播放动作";
+  });
   if (!isGate10CorrectedExport && lightingPresets[state.workspaceMemory?.viewerLightingMode]) {
     lightingModeControl.value = state.workspaceMemory.viewerLightingMode;
   }
@@ -5578,6 +5641,14 @@ async function openGlbAsset(asset, { container = els.assetStage, height = () => 
   new GLTFLoader().load(modelUrl, (gltf) => {
     model = gltf.scene;
     scene.add(model);
+    if (gltf.animations.length) {
+      mixer = new THREE.AnimationMixer(model);
+      animationActions = gltf.animations.map((clip) => mixer.clipAction(clip));
+      animationAction = animationActions[0];
+      animationDuration = Math.max(...gltf.animations.map((clip) => clip.duration || 0));
+      animationActions.forEach((action) => action.play());
+      animationControls.hidden = false;
+    }
     const box = new THREE.Box3().setFromObject(model);
     box.getCenter(center);
     const modelSize = box.getSize(new THREE.Vector3());
@@ -5599,6 +5670,11 @@ async function openGlbAsset(asset, { container = els.assetStage, height = () => 
     updateGate10Checklist("loaded");
   }, undefined, (error) => showToast(`GLB 载入失败：${error.message}`));
   const animate = () => {
+    const delta = animationClock.getDelta();
+    if (mixer) mixer.update(delta);
+    if (animationAction && animationDuration && !animationAction.paused) {
+      animationTime.value = String((animationAction.time % animationDuration) / animationDuration);
+    }
     controls.update();
     renderer.render(scene, camera);
     frame = requestAnimationFrame(animate);

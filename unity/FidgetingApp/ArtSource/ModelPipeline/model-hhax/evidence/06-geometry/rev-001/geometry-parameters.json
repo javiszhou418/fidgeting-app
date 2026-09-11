@@ -1,0 +1,100 @@
+{
+  "schemaVersion": 1,
+  "modelId": "model-hhax",
+  "gate": "06-geometry",
+  "input": {
+    "manifestRevisionAtBuild": 36,
+    "stageId": "05-blockout",
+    "assetId": "hhax-gate05-white-source-r006",
+    "sha256": "ce342b7a8b11871ce9900adea1441ebf9ea56c8a03761e5731eadff4af405dba",
+    "path": "unity/FidgetingApp/ArtSource/ModelPipeline/model-hhax/evidence/05-blockout/rev-006/model-hhax-white.blend"
+  },
+  "contractDimensionsMm": {
+    "closedOverallLength": 50.5,
+    "overallWidth": 30.9,
+    "totalClosedThickness": 13.6,
+    "topPlateThickness": 6.55,
+    "bottomPlateThickness": 6.55,
+    "maximumSlideTravel": 18.7,
+    "fixedAxisOffsetFromNearestEnd": 14.2,
+    "rotatingCarrierDiameter": 21.6,
+    "closedSeamGap": 0.5
+  },
+  "evaluatedClosedBounds": {
+    "minimumMm": [
+      -15.45,
+      -25.25,
+      0.0
+    ],
+    "maximumMm": [
+      15.45,
+      25.25,
+      13.6
+    ],
+    "sizeMm": [
+      30.9,
+      50.5,
+      13.6
+    ]
+  },
+  "coordinateSystem": {
+    "width": "+X",
+    "lengthAndSlide": "+Y",
+    "thicknessAndRearRotationAxis": "+Z"
+  },
+  "pivotsMm": {
+    "fixedLower": [
+      0,
+      0,
+      0
+    ],
+    "movingUpper": [
+      0,
+      0,
+      0
+    ],
+    "rearCarrier": [
+      0,
+      11.05,
+      0
+    ]
+  },
+  "motionOwnership": {
+    "MovingUpperAssembly": {
+      "mode": "translation-only",
+      "axis": "+Y",
+      "rangeMm": [
+        0,
+        18.7
+      ]
+    },
+    "RearRotorAssembly": {
+      "mode": "rotation-only",
+      "axis": "+Z",
+      "rangeDegrees": [
+        0,
+        360
+      ]
+    },
+    "FixedLowerAssembly": {
+      "mode": "fixed"
+    }
+  },
+  "hierarchy": {
+    "ModelHhax_Root": null,
+    "FixedLowerAssembly": "ModelHhax_Root",
+    "MovingUpperAssembly": "ModelHhax_Root",
+    "RearRotorAssembly": "FixedLowerAssembly",
+    "MechanicalTrackAssembly": "FixedLowerAssembly"
+  },
+  "meshCount": 19,
+  "evaluatedTriangleCount": 20022,
+  "checks": {
+    "closedEnvelope": "pass",
+    "sixOrthographicViews": "pass",
+    "dimensionOverlay": "pass",
+    "pivotOverlay": "pass",
+    "explodedOwnership": "pass"
+  },
+  "hiddenGeometryBoundary": "Internal cavity, rail profile, follower count and coupling remain reversible digital reconstruction, not measured or manufacturing geometry."
+}

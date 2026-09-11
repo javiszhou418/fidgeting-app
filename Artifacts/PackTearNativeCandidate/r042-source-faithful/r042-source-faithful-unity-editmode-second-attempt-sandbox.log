@@ -1,0 +1,112 @@
+attempt to write a readonly database
+attempt to write a readonly database
+Unity Editor version:    6000.5.6f1 (0e0577a1a2ac)
+Branch:                  6000.5/staging
+Build type:              Release
+Batch mode:              YES
+macOS version:           Version 26.6.2 (Build 25G83)
+Darwin version:          25.6.0
+Architecture:            arm64
+Running under Rosetta:   NO
+Available memory:        65536 MB
+Date:                    2026-09-07T02:54:18Z
+[Licensing::Module] Trying to connect to existing licensing client channel...
+[Licensing::IpcConnector] Successfully connected to: "LicenseClient-jiawei.zhou" at "2026-09-07T02:54:18.315561Z"
+Launching external process: /Applications/Unity/Hub/Editor/6000.5.6f1/Unity.app/Contents/Helpers/PackageManager/Server/UnityPackageManager
+
+COMMAND LINE ARGUMENTS:
+/Applications/Unity/Hub/Editor/6000.5.6f1/Unity.app/Contents/MacOS/Unity
+-batchmode
+-nographics
+-projectPath
+/Users/jiawei.zhou/Documents/Fidgeting app/unity/FidgetingApp
+-runTests
+-testPlatform
+EditMode
+-testFilter
+FidgetingApp.Tests.Editor.GachaStorefrontIntegrationTests
+-testResults
+/Users/jiawei.zhou/Documents/Fidgeting app/Artifacts/PackTearNativeCandidate/r042-source-faithful/r042-source-faithful-unity-editmode-results.xml
+-logFile
+/Users/jiawei.zhou/Documents/Fidgeting app/Artifacts/PackTearNativeCandidate/r042-source-faithful/r042-source-faithful-unity-editmode.log
+Successfully changed project path to: /Users/jiawei.zhou/Documents/Fidgeting app/unity/FidgetingApp
+/Users/jiawei.zhou/Documents/Fidgeting app/unity/FidgetingApp
+[UnityMemory] Configuration Parameters - Can be set up in boot.config
+    "memorysetup-temp-allocator-size-gi-baking-worker=262144"
+    "memorysetup-temp-allocator-size-gi-baking-worker=262144"
+    "memorysetup-temp-allocator-size-gi-baking-worker=262144"
+    "memorysetup-temp-allocator-size-gi-baking-worker=262144"
+    "memorysetup-temp-allocator-size-gi-baking-worker=262144"
+    "memorysetup-temp-allocator-size-nav-mesh-worker=65536"
+    "memorysetup-temp-allocator-size-audio-worker=65536"
+    "memorysetup-temp-allocator-size-cloud-worker=32768"
+    "memorysetup-allocator-temp-initial-block-size-main=262144"
+    "memorysetup-allocator-temp-initial-block-size-worker=262144"
+    "memorysetup-temp-allocator-size-preload-manager=33554432"
+    "memorysetup-temp-allocator-size-gfx=262144"
+    "memorysetup-temp-allocator-size-background-worker=32768"
+    "memorysetup-temp-allocator-size-job-worker=262144"
+    "memorysetup-bucket-allocator-granularity=16"
+    "memorysetup-bucket-allocator-bucket-count=8"
+    "memorysetup-bucket-allocator-block-size=33554432"
+    "memorysetup-bucket-allocator-block-count=8"
+    "memorysetup-main-allocator-block-size=16777216"
+    "memorysetup-thread-allocator-block-size=16777216"
+    "memorysetup-main-allocator-mimalloc-enabled=0"
+    "memorysetup-gfx-main-allocator-block-size=16777216"
+    "memorysetup-gfx-thread-allocator-block-size=16777216"
+    "memorysetup-cache-allocator-block-size=4194304"
+    "memorysetup-typetree-allocator-block-size=2097152"
+    "memorysetup-profiler-bucket-allocator-granularity=16"
+    "memorysetup-profiler-bucket-allocator-bucket-count=8"
+    "memorysetup-profiler-bucket-allocator-block-size=33554432"
+    "memorysetup-profiler-bucket-allocator-block-count=8"
+    "memorysetup-profiler-allocator-block-size=16777216"
+    "memorysetup-profiler-editor-allocator-block-size=1048576"
+    "memorysetup-temp-allocator-size-main=16777216"
+    "memorysetup-job-temp-allocator-block-size=2097152"
+    "memorysetup-job-temp-allocator-block-size-background=1048576"
+    "memorysetup-job-temp-allocator-reduction-small-platforms=262144"
+Logging is directed to a specific file, skipping project log.Player connection [8345100672]  Target information:
+
+Player connection [8345100672]  * "[IP] 172.30.215.248 [Port] 55504 [Flags] 2 [Guid] 937372295 [EditorId] 937372295 [Version] 1048832 [Id] OSXEditor(0,WhatnotMacBook-Pro-16-inch-2024-KDX49F6RHV) [Debug] 1 [PackageName] OSXEditor [ProjectName] Editor" 
+
+Player connection [8345100672]  * "[IP] 192.168.3.18 [Port] 55504 [Flags] 2 [Guid] 937372295 [EditorId] 937372295 [Version] 1048832 [Id] OSXEditor(0,WhatnotMacBook-Pro-16-inch-2024-KDX49F6RHV) [Debug] 1 [PackageName] OSXEditor [ProjectName] Editor" 
+
+Player connection [8345100672]  * "[IP] 240.0.0.1 [Port] 55504 [Flags] 2 [Guid] 937372295 [EditorId] 937372295 [Version] 1048832 [Id] OSXEditor(0,WhatnotMacBook-Pro-16-inch-2024-KDX49F6RHV) [Debug] 1 [PackageName] OSXEditor [ProjectName] Editor" 
+
+Player connection [8345100672] Host joined multi-casting on [225.0.0.222:54997]...
+Player connection [8345100672] Host joined alternative multi-casting on [225.0.0.222:34997]...
+Input System module state changed to: Initialized.
+[Physics::Module] Initialized fallback backend.
+[Physics::Module] Id: 0xdecafbad
+[Package Manager] Connected to IPC stream "Upm-17554" after 0.1 seconds.
+[Licensing::Module] Licensing is not yet initialized.
+[Licensing::Client] Error: HandshakeResponse reported an error:
+	ResponseCode: 505
+	ResponseStatus: Unsupported protocol version '1.18.1'.
+[Licensing::Module] Error: Failed to handshake to channel: "LicenseClient-jiawei.zhou"
+[Licensing::IpcConnector] LicenseClient-jiawei.zhou channel disconnected successfully.
+[Licensing::IpcConnector] Channel LicenseClient-jiawei.zhou-6000.5.6 doesn't exist
+Launching external process: /Applications/Unity/Hub/Editor/6000.5.6f1/Unity.app/Contents/Helpers/UnityLicensingClient.app/Contents/MacOS/Unity.Licensing.Client
+[Licensing::Module] Successfully launched the LicensingClient (PId: 17567)
+[Licensing::IpcConnector] Successfully connected to: "LicenseClient-jiawei.zhou-6000.5.6" at "2026-09-07T02:54:18.796775Z"
+[Licensing::Client] Handshaking with LicensingClient:
+  Version:                 1.18.1+9fbee8e
+  Session Id:              0891155a8ad149d9bf57f3f01186abe3
+  Correlation Id:          03ca39bee5b1771e70f3f547d4cd5497
+  External correlation Id: 98771768423779271
+  Machine Id:              /KH2BGG6vZf7t7D/yU/ppmcrnfI=
+[Licensing::Module] Successfully connected to LicensingClient on channel: "LicenseClient-jiawei.zhou-6000.5.6" (connect: 0.17s, validation: 0.02s, handshake: 0.21s)
+[Licensing::IpcConnector] Successfully connected to: "LicenseClient-jiawei.zhou-6000.5.6-notifications" at "2026-09-07T02:54:19.028915Z"
+[Licensing::Module] Connected to LicensingClient (PId: 17567, launch time: 0.00, total connection time: 0.40s)
+[Licensing::Module] Error: Access token is unavailable; failed to update
+[Licensing::Client] Error: Code 404 while processing request (status: Found 0 entitlement groups and 0 free entitlements matching requested entitlement ids)
+[Licensing::Client] Successfully updated license, isAsync: False, time: 0.01
+[Licensing::Module] Licensing Background thread has ended after 0.73s
+[Licensing::Module] Licensing is initialized (took 0.49s).
+[Licensing::Client] Error: Code 404 while processing request (status: Found 0 entitlement groups and 0 free entitlements matching requested entitlement ids)
+[Licensing::Module] Error: 'com.unity.editor.headless' was not found.
+[Licensing::Client] Error: Code 404 while processing request (status: Found 0 entitlement groups and 0 free entitlements matching requested entitlement ids)
+No valid Unity Editor license found. Please activate your license.
+[Package Manager] Server process was shutdown

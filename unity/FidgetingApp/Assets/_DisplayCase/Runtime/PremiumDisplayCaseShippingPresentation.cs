@@ -92,6 +92,12 @@ namespace FidgetingApp.DisplayCase
         [SerializeField] private TextMesh acquiredDateLabel;
         [SerializeField] private TextMesh rarityLevelLabel;
         [SerializeField] private TextMesh collectibleIdLabel;
+        // Defaults are the R004 case's chamber; the V3 slab overrides them
+        // with its pocket well (ConfigureContentFit). Older prefabs carry no
+        // value for these fields and keep the R004 fit.
+        [SerializeField] private Vector3 contentFitAvailableSize =
+            new Vector3(0.165f, 0.182f, 0.040f);
+        [SerializeField] private float contentFitDepthOffsetMeters = 0.015f;
 
         private readonly List<RigidbodyState> rigidbodyStates =
             new List<RigidbodyState>();
@@ -232,6 +238,23 @@ namespace FidgetingApp.DisplayCase
                 ? revealProfile.FinalSample()
                 : default);
         }
+
+        /// <summary>
+        /// Box (metres, slot-local axes) the attached content must fit, and
+        /// how far the content centre sits in front of the slot pivot.
+        /// </summary>
+        public void ConfigureContentFit(Vector3 availableSize, float depthOffsetMeters)
+        {
+            if (availableSize.x <= 0f || availableSize.y <= 0f || availableSize.z <= 0f)
+            {
+                throw new ArgumentOutOfRangeException(nameof(availableSize));
+            }
+            contentFitAvailableSize = availableSize;
+            contentFitDepthOffsetMeters = depthOffsetMeters;
+        }
+
+        public Vector3 ContentFitAvailableSize => contentFitAvailableSize;
+        public float ContentFitDepthOffsetMeters => contentFitDepthOffsetMeters;
 
         public void SetLabel(PremiumDisplayCaseLabelData data)
         {
@@ -601,7 +624,7 @@ namespace FidgetingApp.DisplayCase
             {
                 return;
             }
-            Vector3 available = new Vector3(0.165f, 0.182f, 0.040f);
+            Vector3 available = contentFitAvailableSize;
             float scale = Mathf.Min(
                 available.x / Mathf.Max(bounds.size.x, 0.0001f),
                 Mathf.Min(
@@ -613,7 +636,7 @@ namespace FidgetingApp.DisplayCase
             {
                 contentFitRoot.position +=
                     contentSlot.position
-                    + Vector3.back * 0.015f
+                    + Vector3.back * contentFitDepthOffsetMeters
                     - scaledBounds.center;
             }
         }

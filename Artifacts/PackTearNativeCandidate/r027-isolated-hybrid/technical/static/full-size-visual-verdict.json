@@ -1,0 +1,22 @@
+{
+  "candidate": "R027 isolated native hybrid",
+  "artifactClass": "technical-diagnostic-not-reviewable",
+  "visualVerdict": "fail",
+  "approvalRequestAllowed": false,
+  "staticFrames": [
+    "sealed.png",
+    "partial.png",
+    "empty-mouth.png",
+    "contained-case.png",
+    "case-crossing-live.png"
+  ],
+  "technicalPixelLayerReport": "pixel-layer-report.json",
+  "technicalChecks": "pass",
+  "visualFailures": [
+    "The opened Pack reads as a wide black U-shaped rigid strip.",
+    "The separated flap reads as a floating straight strip.",
+    "The Pack front remains a flat overlay instead of a narrow local foil lip.",
+    "The contained and crossing case views expose only a small, unreadable sliver."
+  ],
+  "nextAction": "Stop before video. Do not add review artifacts or update pipeline, FDB, or implementation status."
+}

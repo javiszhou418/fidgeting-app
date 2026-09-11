@@ -1,0 +1,39 @@
+{
+  "info" : {
+    "arguments" : [
+      "devicectl",
+      "device",
+      "install",
+      "app",
+      "--device",
+      "00008130-001A00361EE0001C",
+      "/Users/jiawei.zhou/Documents/Fidgeting app/unity/FidgetingApp/Builds/iOS/DeviceJobs/gyro-haptic-linkage-build45-20260907T111808Z-snapshot/DerivedData/Build/Products/Release-iphoneos/FidgetSpinner.app",
+      "--timeout",
+      "120",
+      "--json-output",
+      "/Users/jiawei.zhou/Documents/Fidgeting app/Artifacts/DeviceDelivery/gyro-haptic-linkage/device-delivery/gyro-haptic-linkage-build45-20260907T111808Z-snapshot/install.json"
+    ],
+    "commandType" : "devicectl.device.install.app",
+    "environment" : {
+      "TERM" : "dumb"
+    },
+    "jsonVersion" : 3,
+    "outcome" : "success",
+    "version" : "518.27"
+  },
+  "result" : {
+    "deviceIdentifier" : "556E86BF-7295-5622-AA58-02DF84A8E93F",
+    "installedApplications" : [
+      {
+        "bundleID" : "com.jiaweizhou.fidgetspinner.codex",
+        "databaseSequenceNumber" : 3888,
+        "databaseUUID" : "AC5A34AB-5B26-4F3D-9314-A489E7F12A68",
+        "installationURL" : "file:///private/var/containers/Bundle/Application/017FD363-B948-416C-88EF-064594BD609C/FidgetSpinner.app/",
+        "launchServicesIdentifier" : "unknown",
+        "options" : {
+
+        }
+      }
+    ]
+  }
+}

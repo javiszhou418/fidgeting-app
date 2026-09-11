@@ -1,6 +1,6 @@
 # Fidgeting 材质库
 
-> 由 `unity/FidgetingApp/ArtSource/MaterialLibrary/materials.json` 生成，不要手改。运行 `node tools/model-provenance-explorer/validate-material-library.mjs --write-md` 重新生成。更新日期 2026-09-09。
+> 由 `unity/FidgetingApp/ArtSource/MaterialLibrary/materials.json` 生成，不要手改。运行 `node tools/model-provenance-explorer/validate-material-library.mjs --write-md` 重新生成。更新日期 2026-09-11。
 
 ## 用法
 
@@ -33,6 +33,15 @@ Premium 3D studio product render of a real manufactured fidget object. Single he
 - ![groove-dark](spheres/groove-dark.png) `groove-dark` · 凹槽近黑 / Groove near-black · #050506 · Shipping Unity 材质
 - ![studio-floor-matte](spheres/studio-floor-matte.png) `studio-floor-matte` · 影棚哑光地面 / Matte studio floor · #353537 · Gate 07 已批准
 - ![clay-control](spheres/clay-control.png) `clay-control` · 中性粘土对照 / Neutral clay control · #C2C7CB · 过期证据
+- `case-clear-crystal` · 透明水晶外壳 / Clear crystal shell · #F8FBFF · Gate 07 已批准
+- `case-smoke-lilac-liner` · 烟紫内衬 / Smoke-lilac liner · #EEEAF4 · Gate 07 已批准
+- `case-dark-sandblast` · 深色喷砂钢 / Dark sandblasted steel · #5C6266 · Gate 07 已批准
+- `case-piano-black` · 钢琴黑板 / Piano-black plate · #1C1E22 · Gate 07 已批准
+- `case-bright-mirror` · 亮镜面银 / Bright mirror silver · #C9D0D6 · Gate 07 已批准
+- `case-champagne-gold-inlay` · 香槟金饰条 / Champagne gold inlay · #C8B48B · Gate 07 已批准
+- `case-rose-bronze-tier` · 玫瑰青铜档位金属 / Rose-bronze tier metal · #B39485 · Gate 07 已批准
+- `case-grey-blue-titanium-tier` · 灰蓝钛档位金属 / Grey-blue titanium tier metal · #94A1B3 · Gate 07 已批准
+- `case-champagne-tier` · 香槟档位金属 / Champagne tier metal · #CCBA99 · Gate 07 已批准
 
 ## 拉丝缎面钢 · Satin steel (`steel-satin`, #E5E6E7)
 
@@ -75,6 +84,7 @@ Premium 3D studio product render of a real manufactured fidget object. Single he
 **使用位置**
 
 - metal-three-blade：Rotor_Body、Cap_Top (非车削区)、Cap_Bottom (非车削区)
+- premium-display-case：GEO_PDC_HEADER_SATIN_SHELF、GEO_PDC_MAIN_SATIN_SHELF、GEO_PDC_FRAME_BOLT_*
 
 **来源**
 
@@ -795,6 +805,334 @@ Gate 05–06 白模与 Gate 07 对照渲染用的中性灰粘土。非金属、�
 **来源**
 
 - `unity/FidgetingApp/ArtSource/ModelPipeline/premium-display-case/evidence/07-material/rev-001/build_material_lookdev.py` — MAT_M07_ClayControl；display case pipeline 当前全部 stale
+
+## 透明水晶外壳 · Clear crystal shell (`case-clear-crystal`, #F8FBFF)
+
+状态：Gate 07 已批准 · 家族：透明 / 半透明
+
+展示盒最外层的透明聚碳酸酯水晶框：IOR 1.49，极低粗糙度，薄清漆层，整片 300–650 nm 薄膜虹彩让边缘在彩色边光下泛出青/品红。
+
+**Blender（Principled BSDF，线性）**
+
+- 权威：blender-lookdev · M_PDC_ClearCrystal
+- Base Color 0.9387 / 0.9647 / 1 · Metallic 0 · Roughness 0.035
+
+**Unity（URP）**
+
+- 无 Unity 对应材质。
+
+**可用短语**
+
+- clear polycarbonate crystal frame
+- thin-film iridescent edge sheen
+- sharp glass-like bevels
+- IOR 1.49 transmission
+
+**避免**
+
+- frosted glass
+- tinted acrylic
+- rainbow across flat faces under neutral light
+
+**使用位置**
+
+- premium-display-case：GEO_PDC_OUTER_CRYSTAL_FRAME、GEO_PDC_POCKET_CLIP_*
+
+**来源**
+
+- `unity/FidgetingApp/ArtSource/ModelPipeline/premium-display-case/evidence/07-material/rev-003/lookdev_tri_spinner_slab_materials.r003.py` — Gate 07 rev-003 lookdev, user approval “确认” 2026-09-11T15:26:00+08:00
+- `unity/FidgetingApp/ArtSource/ModelPipeline/premium-display-case/evidence/03-contract/rev-013/modeling-contract.json` — contract rev-013 materials / cmf.scheme A / cmf.rarity_tier_map
+
+## 烟紫内衬 · Smoke-lilac liner (`case-smoke-lilac-liner`, #EEEAF4)
+
+状态：Gate 07 已批准 · 家族：透明 / 半透明
+
+盒体内圈与凹槽壁的半透明烟紫内衬：透射 0.775，带体积吸收，随稀有度档位微调基色。
+
+**Blender（Principled BSDF，线性）**
+
+- 权威：blender-lookdev · M_PDC_SmokeLiner
+- Base Color 0.855 / 0.8228 / 0.9047 · Metallic 0 · Roughness 0.15
+
+**Unity（URP）**
+
+- 无 Unity 对应材质。
+
+**可用短语**
+
+- smoked lilac translucent liner
+- soft volumetric absorption
+- matte-satin translucency
+
+**避免**
+
+- clear glass
+- opaque plastic
+- saturated purple
+
+**使用位置**
+
+- premium-display-case：GEO_PDC_SMOKE_INNER_LINER、GEO_PDC_POCKET_SMOKE_WALL
+
+**来源**
+
+- `unity/FidgetingApp/ArtSource/ModelPipeline/premium-display-case/evidence/07-material/rev-003/lookdev_tri_spinner_slab_materials.r003.py` — Gate 07 rev-003 lookdev, user approval “确认” 2026-09-11T15:26:00+08:00
+- `unity/FidgetingApp/ArtSource/ModelPipeline/premium-display-case/evidence/03-contract/rev-013/modeling-contract.json` — contract rev-013 materials / cmf.scheme A / cmf.rarity_tier_map
+
+## 深色喷砂钢 · Dark sandblasted steel (`case-dark-sandblast`, #5C6266)
+
+状态：Gate 07 已批准 · 家族：深色金属
+
+主舱 field 与后板的深灰喷砂钢面：scheme A 用 #5C6266 取代规格 #AEB3B6，微凸粒度 0.13 mm、高度 0.0105 mm，粗糙度 0.45±0.03。
+
+**Blender（Principled BSDF，线性）**
+
+- 权威：blender-lookdev · M_PDC_DarkSandblast
+- Base Color 0.107 / 0.1221 / 0.1329 · Metallic 1 · Roughness 0.45
+
+**Unity（URP）**
+
+- 无 Unity 对应材质。
+
+**可用短语**
+
+- dark bead-blasted steel
+- fine even micro-grain
+- low diffuse sheen
+- no directional brushing
+
+**避免**
+
+- brushed lines
+- mirror
+- light silver sandblast
+
+**使用位置**
+
+- premium-display-case：GEO_PDC_MAIN_MICROBLAST_FIELD、GEO_PDC_REAR_PLATE
+
+**来源**
+
+- `unity/FidgetingApp/ArtSource/ModelPipeline/premium-display-case/evidence/07-material/rev-003/lookdev_tri_spinner_slab_materials.r003.py` — Gate 07 rev-003 lookdev, user approval “确认” 2026-09-11T15:26:00+08:00
+- `unity/FidgetingApp/ArtSource/ModelPipeline/premium-display-case/evidence/03-contract/rev-013/modeling-contract.json` — contract rev-013 materials / cmf.scheme A / cmf.rarity_tier_map
+
+## 钢琴黑板 · Piano-black plate (`case-piano-black`, #1C1E22)
+
+状态：Gate 07 已批准 · 家族：深色金属
+
+header 石墨板、数值板与凹槽底的钢琴黑：深炭底色加满强清漆（coat 1.0 / 0.03），基础粗糙度 0.25；header 板叠印刷标签（油墨粗糙度 0.55）。
+
+**Blender（Principled BSDF，线性）**
+
+- 权威：blender-lookdev · M_PDC_PianoBlack
+- Base Color 0.0116 / 0.013 / 0.016 · Metallic 0.05 · Roughness 0.25
+
+**Unity（URP）**
+
+- 无 Unity 对应材质。
+
+**可用短语**
+
+- piano black lacquer
+- deep gloss clear coat
+- crisp reflections
+- near-black charcoal base
+
+**避免**
+
+- matte black
+- plastic sheen
+- dust or fingerprints
+
+**使用位置**
+
+- premium-display-case：GEO_PDC_HEADER_GRAPHITE_PLANE (+ label decal)、GEO_PDC_MAIN_TRAIT_PLAQUE、GEO_PDC_POCKET_GRAPHITE_FLOOR
+
+**来源**
+
+- `unity/FidgetingApp/ArtSource/ModelPipeline/premium-display-case/evidence/07-material/rev-003/lookdev_tri_spinner_slab_materials.r003.py` — Gate 07 rev-003 lookdev, user approval “确认” 2026-09-11T15:26:00+08:00
+- `unity/FidgetingApp/ArtSource/ModelPipeline/premium-display-case/evidence/03-contract/rev-013/modeling-contract.json` — contract rev-013 materials / cmf.scheme A / cmf.rarity_tier_map
+
+## 亮镜面银 · Bright mirror silver (`case-bright-mirror`, #C9D0D6)
+
+状态：Gate 07 已批准 · 家族：钢 / 金属
+
+斜边、凹槽抛光唇等凸起抛光件的亮镜面：scheme A 以 #C9D0D6、粗糙度 0.04 取代规格烟色镜面 #667078；宽口径下随稀有度换金属。
+
+**Blender（Principled BSDF，线性）**
+
+- 权威：blender-lookdev · M_PDC_Mirror
+- Base Color 0.5841 / 0.6308 / 0.6724 · Metallic 1 · Roughness 0.04
+
+**Unity（URP）**
+
+- 无 Unity 对应材质。
+
+**可用短语**
+
+- bright mirror-polished steel
+- razor-sharp reflections
+- narrow polished bevels
+
+**避免**
+
+- smoked mirror
+- brushed
+- visible grain
+
+**使用位置**
+
+- premium-display-case：GEO_PDC_HEADER_MIRROR_BEVEL、GEO_PDC_MAIN_MIRROR_SEAM、GEO_PDC_POCKET_POLISHED_LIP
+
+**来源**
+
+- `unity/FidgetingApp/ArtSource/ModelPipeline/premium-display-case/evidence/07-material/rev-003/lookdev_tri_spinner_slab_materials.r003.py` — Gate 07 rev-003 lookdev, user approval “确认” 2026-09-11T15:26:00+08:00
+- `unity/FidgetingApp/ArtSource/ModelPipeline/premium-display-case/evidence/03-contract/rev-013/modeling-contract.json` — contract rev-013 materials / cmf.scheme A / cmf.rarity_tier_map
+
+## 香槟金饰条 · Champagne gold inlay (`case-champagne-gold-inlay`, #C8B48B)
+
+状态：Gate 07 已批准 · 家族：金色
+
+Standard 档的金色饰条、竖轨与索引块：#C8B48B，各向异性 0.15，沿饰条长轴拉丝，永不成闭环。
+
+**Blender（Principled BSDF，线性）**
+
+- 权威：blender-lookdev · M_PDC_AccentMetal
+- Base Color 0.5776 / 0.4564 / 0.2582 · Metallic 1 · Roughness 0.26
+- Anisotropic 0.15 · Tangent —
+
+**Unity（URP）**
+
+- 无 Unity 对应材质。
+
+**可用短语**
+
+- champagne gold inlay
+- fine directional brushing along the inlay
+- restrained warm metal
+
+**避免**
+
+- yellow gold
+- mirror gold
+- closed gold loop
+
+**使用位置**
+
+- premium-display-case：GEO_PDC_*GOLD*
+
+**来源**
+
+- `unity/FidgetingApp/ArtSource/ModelPipeline/premium-display-case/evidence/07-material/rev-003/lookdev_tri_spinner_slab_materials.r003.py` — Gate 07 rev-003 lookdev, user approval “确认” 2026-09-11T15:26:00+08:00
+- `unity/FidgetingApp/ArtSource/ModelPipeline/premium-display-case/evidence/03-contract/rev-013/modeling-contract.json` — contract rev-013 materials / cmf.scheme A / cmf.rarity_tier_map
+
+## 玫瑰青铜档位金属 · Rose-bronze tier metal (`case-rose-bronze-tier`, #B39485)
+
+状态：Gate 07 已批准 · 家族：金色
+
+Refined 档（宽口径）：边框、抛光件与饰条整体换为低饱和玫瑰青铜，sRGB 0.70/0.58/0.52，饱和度约为原铜色 40%。
+
+**Blender（Principled BSDF，线性）**
+
+- 权威：blender-lookdev · M_PDC_BrushedSteel_copper
+- Base Color 0.448 / 0.2957 / 0.233 · Metallic 1 · Roughness 0.3
+
+**Unity（URP）**
+
+- 无 Unity 对应材质。
+
+**可用短语**
+
+- muted rose bronze
+- low-saturation warm metal
+- brushed on frames, polished on bevels
+
+**避免**
+
+- orange copper
+- saturated bronze
+- rose gold jewelry pink
+
+**使用位置**
+
+- premium-display-case：bezels (5)、polished parts (6)、accents (7)、liner tint (2)
+
+**来源**
+
+- `unity/FidgetingApp/ArtSource/ModelPipeline/premium-display-case/evidence/07-material/rev-003/lookdev_tri_spinner_slab_materials.r003.py` — Gate 07 rev-003 lookdev, user approval “确认” 2026-09-11T15:26:00+08:00
+- `unity/FidgetingApp/ArtSource/ModelPipeline/premium-display-case/evidence/03-contract/rev-013/modeling-contract.json` — contract rev-013 materials / cmf.scheme A / cmf.rarity_tier_map
+
+## 灰蓝钛档位金属 · Grey-blue titanium tier metal (`case-grey-blue-titanium-tier`, #94A1B3)
+
+状态：Gate 07 已批准 · 家族：钢 / 金属
+
+Signature 档（宽口径）：灰蓝钛，sRGB 0.58/0.63/0.70，与 Standard 冷钢的差别只在偏蓝色相。
+
+**Blender（Principled BSDF，线性）**
+
+- 权威：blender-lookdev · M_PDC_BrushedSteel_titanium
+- Base Color 0.2957 / 0.3547 / 0.448 · Metallic 1 · Roughness 0.3
+
+**Unity（URP）**
+
+- 无 Unity 对应材质。
+
+**可用短语**
+
+- grey-blue titanium PVD
+- cool desaturated metal
+- brushed frames, polished bevels
+
+**避免**
+
+- saturated blue
+- cobalt
+- chrome blue
+
+**使用位置**
+
+- premium-display-case：bezels (5)、polished parts (6)、accents (7)、liner tint (2)
+
+**来源**
+
+- `unity/FidgetingApp/ArtSource/ModelPipeline/premium-display-case/evidence/07-material/rev-003/lookdev_tri_spinner_slab_materials.r003.py` — Gate 07 rev-003 lookdev, user approval “确认” 2026-09-11T15:26:00+08:00
+- `unity/FidgetingApp/ArtSource/ModelPipeline/premium-display-case/evidence/03-contract/rev-013/modeling-contract.json` — contract rev-013 materials / cmf.scheme A / cmf.rarity_tier_map
+
+## 香槟档位金属 · Champagne tier metal (`case-champagne-tier`, #CCBA99)
+
+状态：Gate 07 已批准 · 家族：金色
+
+Heirloom 档（宽口径）：香槟色，sRGB 0.80/0.73/0.60，取代饱和黄金。
+
+**Blender（Principled BSDF，线性）**
+
+- 权威：blender-lookdev · M_PDC_BrushedSteel_gold
+- Base Color 0.6038 / 0.4919 / 0.3185 · Metallic 1 · Roughness 0.3
+
+**Unity（URP）**
+
+- 无 Unity 对应材质。
+
+**可用短语**
+
+- pale champagne metal
+- warm desaturated gold
+- brushed frames, polished bevels
+
+**避免**
+
+- yellow gold
+- brass
+- saturated gold
+
+**使用位置**
+
+- premium-display-case：bezels (5)、polished parts (6)、accents (7)、liner tint (2)
+
+**来源**
+
+- `unity/FidgetingApp/ArtSource/ModelPipeline/premium-display-case/evidence/07-material/rev-003/lookdev_tri_spinner_slab_materials.r003.py` — Gate 07 rev-003 lookdev, user approval “确认” 2026-09-11T15:26:00+08:00
+- `unity/FidgetingApp/ArtSource/ModelPipeline/premium-display-case/evidence/03-contract/rev-013/modeling-contract.json` — contract rev-013 materials / cmf.scheme A / cmf.rarity_tier_map
 
 ## 待收录
 

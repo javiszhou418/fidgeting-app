@@ -1,0 +1,30 @@
+{
+  "schemaVersion": 1,
+  "source": {
+    "manifestRevisionAtBuild": 56,
+    "stageId": "09-environment",
+    "assetId": "hhax-gate09-environment-source-r001",
+    "sha256": "1dc5cab0acdd8becb0c4831ea5120eed4b4fa7aee62bcdc3bdbaf790b0f65092",
+    "path": "unity/FidgetingApp/ArtSource/ModelPipeline/model-hhax/evidence/09-environment/rev-001/model-hhax-environment.blend"
+  },
+  "modelScale": 1,
+  "useFileScale": true,
+  "importAnimation": false,
+  "importCameras": false,
+  "importLights": false,
+  "normals": "import",
+  "materials": "import by stable material name then remap to HHAX URP materials",
+  "collision": {
+    "renderersEnabled": false,
+    "ownership": [
+      "UCX_FixedLower",
+      "UCX_MovingUpper",
+      "UCX_RearRotor"
+    ]
+  },
+  "expectedClosedBoundsMm": [
+    30.9,
+    50.5,
+    13.6
+  ]
+}

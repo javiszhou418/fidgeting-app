@@ -1,0 +1,100 @@
+Failed to load provisioning paramter list due to error: Error Domain=com.apple.dt.CoreDeviceError Code=1002 "No provider was found." UserInfo={NSLocalizedDescription=No provider was found.}.
+`devicectl manage create` may support a reduced set of arguments.
+19:22:19  Acquired tunnel connection to device.
+19:22:19  Enabling developer disk image services.
+19:22:19  Acquired usage assertion.
+Launched application with com.jiaweizhou.fidgetspinner.codex bundle identifier.
+Waiting for the application to terminate…
+2026-09-07 19:22:21.478 FidgetSpinner[40942:6802015] Built from '6000.5/staging' branch, Version '6000.5.6f1 (0e0577a1a2ac)', Build type 'Development', Scripting Backend 'il2cpp'
+[UnityMemory] Configuration Parameters - Can be set up in boot.config
+    "memorysetup-temp-allocator-size-nav-mesh-worker=65536"
+    "memorysetup-temp-allocator-size-cloud-worker=32768"
+    "memorysetup-temp-allocator-size-audio-worker=65536"
+    "memorysetup-allocator-temp-initial-block-size-main=262144"
+    "memorysetup-allocator-temp-initial-block-size-worker=262144"
+2026-09-07 19:22:21.483 FidgetSpinner[40942:6802015] MemoryManager: Using 'Default' Allocator.
+    "memorysetup-temp-allocator-size-preload-manager=262144"
+    "memorysetup-temp-allocator-size-gfx=262144"
+    "memorysetup-temp-allocator-size-background-worker=32768"
+    "memorysetup-temp-allocator-size-job-worker=262144"
+    "memorysetup-bucket-allocator-granularity=16"
+    "memorysetup-bucket-allocator-bucket-count=8"
+    "memorysetup-bucket-allocator-block-size=4194304"
+    "memorysetup-bucket-allocator-block-count=1"
+    "memorysetup-main-allocator-block-size=16777216"
+    "memorysetup-thread-allocator-block-size=16777216"
+    "memorysetup-main-allocator-mimalloc-enabled=0"
+    "memorysetup-gfx-main-allocator-block-size=16777216"
+    "memorysetup-gfx-thread-allocator-block-size=16777216"
+    "memorysetup-cache-allocator-block-size=4194304"
+    "memorysetup-typetree-allocator-block-size=2097152"
+    "memorysetup-profiler-bucket-allocator-granularity=16"
+    "memorysetup-profiler-bucket-allocator-bucket-count=8"
+    "memorysetup-profiler-bucket-allocator-block-size=4194304"
+    "memorysetup-profiler-bucket-allocator-block-count=1"
+    "memorysetup-profiler-allocator-block-size=16777216"
+    "memorysetup-profiler-editor-allocator-block-size=1048576"
+    "memorysetup-temp-allocator-size-main=4194304"
+    "memorysetup-job-temp-allocator-block-size=2097152"
+    "memorysetup-job-temp-allocator-block-size-background=1048576"
+    "memorysetup-job-temp-allocator-reduction-small-platforms=262144"
+-> applicationDidFinishLaunching()
+-> sceneWillEnterForeground()
+Remaining time:29s
+Found 4 interfaces on host : 0) 10.152.77.109 1) 192.168.31.237 2) 169.254.74.189 3) 240.0.0.1
+Player connection [8750244288]  Target information:
+
+Player connection [8750244288]  * "[IP] 10.152.77.109 [Port] 55000 [Flags] 19 [Guid] 3718649659 [EditorId] 23368646 [Version] 1048832 [Id] iPhonePlayer(8,localhost):56000 [Debug] 0 [PackageName] iPhonePlayer [ProjectName] Fidget Spinner" 
+
+Player connection [8750244288]  * "[IP] 192.168.31.237 [Port] 55000 [Flags] 19 [Guid] 3718649659 [EditorId] 23368646 [Version] 1048832 [Id] iPhonePlayer(8,localhost):56000 [Debug] 0 [PackageName] iPhonePlayer [ProjectName] Fidget Spinner" 
+
+Player connection [8750244288]  * "[IP] 169.254.74.189 [Port] 55000 [Flags] 19 [Guid] 3718649659 [EditorId] 23368646 [Version] 1048832 [Id] iPhonePlayer(8,localhost):56000 [Debug] 0 [PackageName] iPhonePlayer [ProjectName] Fidget Spinner" 
+
+Player connection [8750244288]  * "[IP] 240.0.0.1 [Port] 55000 [Flags] 19 [Guid] 3718649659 [EditorId] 23368646 [Version] 1048832 [Id] iPhonePlayer(8,localhost):56000 [Debug] 0 [PackageName] iPhonePlayer [ProjectName] Fidget Spinner" 
+
+Player connection [8750244288] Started UDP target info broadcast (1) on [225.0.0.222:54997].
+
+CodeReloadManager initialized
+Input System module state changed to: Initialized.
+[Physics::Module] Initialized fallback backend.
+[Physics::Module] Id: 0xdecafbad
+-> applicationWillEnterForeground()
+-> sceneDidBecomeActive()
+-> applicationDidBecomeActive()
+[Subsystems] Discovering subsystems at path /private/var/containers/Bundle/Application/017FD363-B948-416C-88EF-064594BD609C/FidgetSpinner.app/Data/UnitySubsystems
+GfxDevice: creating device client; kGfxThreadingModeThreaded
+Initializing Metal device caps: Apple A17 Pro GPU
+Apple GPU Family: 9
+MSL Version: 3.0
+Has Float MSAA: 1
+Has Float Filtering: 1
+ReadWrite Texture Tier: 2
+Initialize engine version: 6000.5.6f1 (0e0577a1a2ac)
+[Physics::Module] Selected backend.
+[Physics::Module] Name: PhysX
+[Physics::Module] Id: 0xf2b8ea05
+[Physics::Module] SDK Version: 4.1.2
+[Physics::Module] Integration Version: 1.0.0
+[Physics::Module] Threading Mode: Multi-Threaded
+CADisplayLink created
+Player Setting 'Adjust iOS FPS based on thermal state' is OFF
+thermalStateDidChange: Nominal
+UnloadTime: 3.318708 ms
+Unloading 6 Unused Serialized files (Serialized files now loaded: 0)
+UnloadTime: 2.672000 ms
+[MagneticSlideRuntime] audio-ready clip=MagneticSlide_AlloyClick_766Hz voices=6 sampleRate=24000 dspBuffer=1024x4
+UnityEngine.DebugLogHandler:Internal_Log(LogType, LogOption, String, Object)
+FidgetingApp.EDC.MagneticSlideDetentAudio:ReportAudioReady()
+
+[MagneticSlideRuntime] shipping-coordinator-ready candidate=True fallback=False
+UnityEngine.DebugLogHandler:Internal_Log(LogType, LogOption, String, Object)
+FidgetingApp.EDC.Gate12R002.MagneticSlideTileShippingCoordinator:Awake()
+
+[MagneticSlideRuntime] input-ready surface=ShippingInteractionSurface profile=LinearMagneticDetentProfile
+UnityEngine.DebugLogHandler:Internal_Log(LogType, LogOption, String, Object)
+
+Unloading 34 unused Assets / (144.2 KB). Loaded Objects now: 3337.
+Memory consumption went from 155.1 MB to 155.0 MB.
+Total: 2.149000 ms (FindLiveObjects: 0.113125 ms CreateObjectMapping: 0.234666 ms MarkObjects: 1.264625 ms  DeleteObjects: 0.536375 ms)
+
+App terminated due to signal 2.

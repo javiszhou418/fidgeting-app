@@ -1,0 +1,26 @@
+{
+  "candidate": "R033 narrow-slit pack tear + storefront hue",
+  "revision": "r033",
+  "simulatorDevice": "iPhone 17 Pro (5BF378DF-5EAB-4885-87E1-2838F6DA6E46)",
+  "previewApp": "GachaShippingNativePreview + R030 Unity hybrid",
+  "physicalDeviceInstalled": false,
+  "shippingReady": false,
+  "visualApprovalPending": true,
+  "screenshots": {
+    "storefront": "storefront-hue-caption.png",
+    "tearSlitPartial": "tear-slit-partial.png",
+    "tearSealPeeled": "tear-seal-peeled.png",
+    "packRetreat": "pack-retreat-down.png",
+    "hybridPartialTear": "../r033-narrow-slit-motion/r033-partial-tear.png",
+    "hybridCaseRise": "../r033-narrow-slit-motion/r033-f3-case-rise.png",
+    "hybridRevealComplete": "../r033-narrow-slit-motion/r033-f4-complete.png"
+  },
+  "rejectedArtifacts": {
+    "hybrid-partial-tear.png": "Simulator home screen; not a tear frame"
+  },
+  "tests": {
+    "swiftHarness": "111/111",
+    "unityEditModeGachaNativeHybrid": "13 passed, 2 skipped (R031/R032)"
+  },
+  "notes": "Slit tear uses 10pt top band + peeled seal displacement. No transparent Unity aperture. Background bloom out of scope."
+}
