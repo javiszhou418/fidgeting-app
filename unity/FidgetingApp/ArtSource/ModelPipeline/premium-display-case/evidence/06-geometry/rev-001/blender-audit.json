@@ -1,0 +1,134 @@
+{
+  "schemaVersion": 1,
+  "modelId": "premium-display-case",
+  "gate": "06-geometry",
+  "geometryRevision": 1,
+  "status": "pass",
+  "sourceFiles": {
+    "gate05Blend": {
+      "path": "/Users/jiawei.zhou/Documents/Fidgeting app/unity/FidgetingApp/ArtSource/ModelPipeline/premium-display-case/evidence/05-blockout/rev-002/premium-display-case-blockout.blend",
+      "sha256": "3f0411e43900e9ff67a8f52ee4af9d630147acb46251985baf8b2a1a06936e31"
+    },
+    "gate05Builder": {
+      "path": "/Users/jiawei.zhou/Documents/Fidgeting app/unity/FidgetingApp/ArtSource/ModelPipeline/premium-display-case/evidence/05-blockout/rev-002/build_blockout.py",
+      "sha256": "8a0cb6c3b14edb171fa5fdfe992c1665689c6a3e7f4cd8f87093f537bd3e8f2c"
+    },
+    "gate05Validator": {
+      "path": "/Users/jiawei.zhou/Documents/Fidgeting app/unity/FidgetingApp/ArtSource/ModelPipeline/premium-display-case/evidence/05-blockout/rev-002/validate_blockout.py",
+      "sha256": "6a63dcf75922510db9bdea293ef50af10110c562cfeb547eeac0fd2b612d14df"
+    }
+  },
+  "evidenceBlend": {
+    "path": "/Users/jiawei.zhou/Documents/Fidgeting app/unity/FidgetingApp/ArtSource/ModelPipeline/premium-display-case/evidence/06-geometry/rev-001/premium-display-case-geometry-r001.blend",
+    "sha256": "cc902f929926cdf9fbaac76c278da21b6fc394228ac58c44d97f16b05c259618"
+  },
+  "geometryDigest": "6656ebb6f9003092d2d771a774ec006683347e01c4f12d0c994cc66fc603877f",
+  "boundsMm": {
+    "width": 228.0,
+    "height": 304.0,
+    "depth": 59.0
+  },
+  "portraitWidthHeightRatio": 0.75,
+  "labelCenterYmm": 99.0,
+  "labelDownshiftMm": 6.0,
+  "outerRadiusMm": 20.0,
+  "maximumCornerCenterDriftMm": 0.0,
+  "meshAudit": {
+    "RearPolycarbonateShell": {
+      "openBoundaryEdgeCount": 0,
+      "nonManifoldEdgeCount": 0,
+      "badContiguousEdgeCount": 0,
+      "invalidPolygonNormalCount": 0,
+      "zeroLengthEdgeCount": 0,
+      "zeroAreaFaceCount": 0,
+      "zeroAreaTriangleCount": 0,
+      "duplicateVertexCount": 0,
+      "selfIntersectionPairCount": 0,
+      "signedVolumeMm3": 468326.105887,
+      "pass": true
+    },
+    "TactileBackgroundInsert": {
+      "openBoundaryEdgeCount": 0,
+      "nonManifoldEdgeCount": 0,
+      "badContiguousEdgeCount": 0,
+      "invalidPolygonNormalCount": 0,
+      "zeroLengthEdgeCount": 0,
+      "zeroAreaFaceCount": 0,
+      "zeroAreaTriangleCount": 0,
+      "duplicateVertexCount": 0,
+      "selfIntersectionPairCount": 0,
+      "signedVolumeMm3": 354364.868649,
+      "pass": true
+    },
+    "FrontPolycarbonateShell": {
+      "openBoundaryEdgeCount": 0,
+      "nonManifoldEdgeCount": 0,
+      "badContiguousEdgeCount": 0,
+      "invalidPolygonNormalCount": 0,
+      "zeroLengthEdgeCount": 0,
+      "zeroAreaFaceCount": 0,
+      "zeroAreaTriangleCount": 0,
+      "duplicateVertexCount": 0,
+      "selfIntersectionPairCount": 0,
+      "signedVolumeMm3": 401422.373356,
+      "pass": true
+    },
+    "ContinuousTubePerimeter": {
+      "openBoundaryEdgeCount": 0,
+      "nonManifoldEdgeCount": 0,
+      "badContiguousEdgeCount": 0,
+      "invalidPolygonNormalCount": 0,
+      "zeroLengthEdgeCount": 0,
+      "zeroAreaFaceCount": 0,
+      "zeroAreaTriangleCount": 0,
+      "duplicateVertexCount": 0,
+      "selfIntersectionPairCount": 0,
+      "signedVolumeMm3": -52932.982745,
+      "pass": true
+    },
+    "PhysicalLabel": {
+      "openBoundaryEdgeCount": 0,
+      "nonManifoldEdgeCount": 0,
+      "badContiguousEdgeCount": 0,
+      "invalidPolygonNormalCount": 0,
+      "zeroLengthEdgeCount": 0,
+      "zeroAreaFaceCount": 0,
+      "zeroAreaTriangleCount": 0,
+      "duplicateVertexCount": 0,
+      "selfIntersectionPairCount": 0,
+      "signedVolumeMm3": 31914.650074,
+      "pass": true
+    }
+  },
+  "tubeFloodFill": {
+    "method": "independent evaluated-mesh BVH audit",
+    "sampleCount": 384,
+    "validVolumetricSampleCount": 384,
+    "visitedSamples": 384,
+    "wallThicknessMinimumMm": 1.995617,
+    "wallThicknessMaximumMm": 1.995784,
+    "pass": true
+  },
+  "checks": {
+    "validationReportPassed": true,
+    "sourceHashesMatchBuildReport": true,
+    "sourceBlendUnchanged": true,
+    "geometryDigestExact": true,
+    "boundsExact": true,
+    "portraitRatioExact": true,
+    "labelAndConcentricValues": true,
+    "allMeshesClean": true,
+    "tubeOneConnectedMaterialBody": true,
+    "tubeFloodFillAndWall": true,
+    "presentationRootOwnsMotion": true,
+    "contentSlotPreserved": true,
+    "explodedEvidenceUsesExactTubeData": true,
+    "explodedAndAnnotationsHiddenInCanonicalScene": true,
+    "noHiddenStructureInvented": true,
+    "shippingRevealAlwaysAssembled": true,
+    "gate07NotEntered": true,
+    "shippingUnityUnchanged": true,
+    "noBuildInstallPhonePush": true
+  },
+  "blender": "5.2.0 LTS"
+}

@@ -1,0 +1,54 @@
+{
+  "schema": "premium-display-case-gate04-r011-iteration-self-review.v1",
+  "iteration": 12,
+  "evidenceRevision": 11,
+  "gateId": "04-architecture",
+  "decision": "self-rejected",
+  "decidedBy": "agent-full-size-frame-inspection",
+  "decidedAt": "2026-08-30T01:38:00.000Z",
+  "reviewedAtFullSize": [
+    "tear-contact-sheet.png",
+    "source-impact-contact-sheet.png",
+    "continuity-contact-sheet.png",
+    "source-target-side-by-side.png",
+    "frames/frame-0054.png",
+    "frames/frame-0060.png",
+    "frames/frame-0072.png",
+    "frames/frame-0084.png",
+    "frames/frame-0112.png",
+    "frames/frame-0126.png",
+    "frames/frame-0132.png",
+    "normal-speed-sequence.mp4",
+    "tear-quarter-speed-closeup.mp4",
+    "impact-reveal-quarter-speed.mp4"
+  ],
+  "blockingVisibleReasons": [
+    {
+      "criterion": "unmistakable small Pack aperture",
+      "evidence": "frames/frame-0072.png, frames/frame-0084.png and tear-contact-sheet.png",
+      "reason": "The reduced opening is now a dark slit. It does not show enough inner foil wall or contact occlusion for the case to read as emerging from a formed mouth."
+    },
+    {
+      "criterion": "freed foil reads as curled foil",
+      "evidence": "frames/frame-0060.png, frames/frame-0072.png and tear-quarter-speed-closeup.mp4",
+      "reason": "The released strip no longer forms a blade, but it reads as repeated stepped trim. Its front, underside and changing curl do not separate clearly at shipping scale."
+    },
+    {
+      "criterion": "recognizable restrained source flare and streak",
+      "evidence": "source-impact-contact-sheet.png and source-target-side-by-side.png",
+      "reason": "The source-effect particle counts are present, but the target's flare and streak contribution is not visually recognizable in the impact frames."
+    }
+  ],
+  "passesNotSufficientForReview": [
+    "The real Unity report records one case root, constant scale, continuous projected bounds, no blank white frame and no black frame.",
+    "The contour sweep is visible while packDissolve is zero, and no cyan four-point glyph or magenta wash is visible."
+  ],
+  "approvalRequestAllowed": false,
+  "userVisualApprovalObtained": false,
+  "shippingRuntimeWired": false,
+  "shippingReady": false,
+  "physicalPhoneInstalled": false,
+  "deviceAccepted": false,
+  "nextStep": "Hold Gate 04 at draft. A new user-directed visual correction is required before another iteration.",
+  "statusText": "视觉批准待确认，未推送手机"
+}

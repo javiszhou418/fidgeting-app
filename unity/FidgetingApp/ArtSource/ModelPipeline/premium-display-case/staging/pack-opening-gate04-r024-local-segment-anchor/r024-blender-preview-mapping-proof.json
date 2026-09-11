@@ -1,0 +1,86 @@
+{
+  "schema": "premium-display-case-gate04-r024-preview-mapping-proof.v1",
+  "repairScope": "Blender preview material mapping only",
+  "input": {
+    "r024Blend": "/Users/jiawei.zhou/Documents/Fidgeting app/unity/FidgetingApp/ArtSource/ModelPipeline/premium-display-case/staging/pack-opening-gate04-r024-local-segment-anchor/PackOpeningGate04R024PackOnlyRig.blend",
+    "r024BlendSha256": "65b792a5cad8490b51ad3e762349255ae46fce54ce4b3c50981e368fdc986368",
+    "r024Fbx": "/Users/jiawei.zhou/Documents/Fidgeting app/unity/FidgetingApp/ArtSource/ModelPipeline/premium-display-case/staging/pack-opening-gate04-r024-local-segment-anchor/PackOpeningGate04R024PackOnlyRig.fbx",
+    "r024FbxSha256": "a7a8c6ae76a89355cb2f74978f896bdcedba062b8fa02624ffae07803f4f8810"
+  },
+  "output": {
+    "r024PreviewBlend": "/Users/jiawei.zhou/Documents/Fidgeting app/unity/FidgetingApp/ArtSource/ModelPipeline/premium-display-case/staging/pack-opening-gate04-r024-local-segment-anchor/PackOpeningGate04R024PreviewOnlyMapping.blend",
+    "r024PreviewBlendSha256": "e5ddc7f6a50ee579cdfa23779ddf4fe13f7480ee2e3b1c7d28a5184249e2c449",
+    "r024UnityFbx": "/Users/jiawei.zhou/Documents/Fidgeting app/unity/FidgetingApp/ArtSource/ModelPipeline/premium-display-case/staging/pack-opening-gate04-r024-local-segment-anchor/PackOpeningGate04R024PreviewOnlyMapping.fbx",
+    "r024UnityFbxSha256": "a7a8c6ae76a89355cb2f74978f896bdcedba062b8fa02624ffae07803f4f8810"
+  },
+  "previewMaterialOnly": {
+    "material": "MI_R024_ActualPackArtwork",
+    "image": "//../../../../../../../../../../../private/tmp/FidgetingApp-PackOpening-R023-PreviewMapping-20260901-r01/Assets/Source/Pack/gacha-pack-standard-body.png",
+    "imageCanvas": [
+      384,
+      512
+    ],
+    "mapping": {
+      "coordinate": "UV",
+      "location": [
+        0.0,
+        1.0,
+        0.0
+      ],
+      "scale": [
+        1.0,
+        -1.0,
+        1.0
+      ],
+      "formula": "source-v -> 1-source-v"
+    }
+  },
+  "exportInvariants": {
+    "exportedFbxByteIdenticalToR024": true,
+    "uvStreamUnchanged": true,
+    "geometryStreamUnchanged": true,
+    "r024PhysicalUToSourceU": "1-to-0",
+    "unityMaterialMappingChanged": false,
+    "rootCoordinatesChanged": false,
+    "artTextureChanged": false,
+    "packGeometryChanged": false,
+    "tearProgressionChanged": false,
+    "caseChanged": false
+  },
+  "uvStreamSha256": "8b873fd1f03c67e073e731234bb58092bdd078af05963687f20aab5cd59556b0",
+  "geometryStreamSha256": "263cf41f60a6929a705f80a5a3f72f7a5fd019ce4f37c6f7d6386d1b316f797f",
+  "previews": {
+    "sealed": {
+      "path": "/Users/jiawei.zhou/Documents/Fidgeting app/unity/FidgetingApp/ArtSource/ModelPipeline/premium-display-case/staging/pack-opening-gate04-r024-local-segment-anchor/blender-preview-mapped/sealed-state.png",
+      "sha256": "26d5bac1ae7ddaab5d46836a78b598e92edbca28e1f14c008e8fc23ee1faf78e",
+      "dimensions": [
+        1206,
+        2622
+      ]
+    },
+    "tear050": {
+      "path": "/Users/jiawei.zhou/Documents/Fidgeting app/unity/FidgetingApp/ArtSource/ModelPipeline/premium-display-case/staging/pack-opening-gate04-r024-local-segment-anchor/blender-preview-mapped/tear-front-050.png",
+      "sha256": "ffbb37314cf82a2e7bfcffd830116d0f88ec72681461c874e7282ae727ada5c7",
+      "dimensions": [
+        1206,
+        2622
+      ]
+    },
+    "formed070": {
+      "path": "/Users/jiawei.zhou/Documents/Fidgeting app/unity/FidgetingApp/ArtSource/ModelPipeline/premium-display-case/staging/pack-opening-gate04-r024-local-segment-anchor/blender-preview-mapped/formed-mouth-070.png",
+      "sha256": "2e91dbdfc4afe6a3a32e7082ab1dceebd971ebba38f33556afbc7916be25b276",
+      "dimensions": [
+        1206,
+        2622
+      ]
+    },
+    "contained090": {
+      "path": "/Users/jiawei.zhou/Documents/Fidgeting app/unity/FidgetingApp/ArtSource/ModelPipeline/premium-display-case/staging/pack-opening-gate04-r024-local-segment-anchor/blender-preview-mapped/case-contained-090.png",
+      "sha256": "493d8a25a103c07f975a4a6aa06451e4ecdd7d4a1dea11641e8c60a0166fc382",
+      "dimensions": [
+        1206,
+        2622
+      ]
+    }
+  }
+}

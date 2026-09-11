@@ -1,0 +1,348 @@
+{
+  "schemaVersion": 1,
+  "gate": "05-blockout",
+  "revision": 12,
+  "source": "real Unity 6000.5.6f1 Camera frames",
+  "recipe": {
+    "camera": "fixed",
+    "material": "white-clay-only",
+    "frames": 570,
+    "fps": 30,
+    "phases": [
+      "closed/open transition",
+      "0-360 degrees at 50% legal slide",
+      "open to maximum legal slide",
+      "0-360 degrees at maximum legal slide",
+      "compound slide and rotation",
+      "return to closed at 360 degrees"
+    ],
+    "detents": "30 unique positions at 12-degree intervals",
+    "fixedAxisOverlay": "red world-up line through FixedAxis"
+  },
+  "frameCount": 570,
+  "axisOverlayCentroidRangePx": {
+    "x": 0.0,
+    "y": 0.0
+  },
+  "closureModelRoiMaxPixelDelta": 1,
+  "sourceGeometry": {
+    "path": "unity/FidgetingApp/ArtSource/ModelPipeline/magnetic-slide-tile/evidence/05-blockout/rev-012/magnetic-slide-tile-fixed-axis-r012.fbx",
+    "sha256": "016716f581ef12fd2537d33ba70eff4be9832e3b050728ae6fced1828da88f4e",
+    "registeredSha256": "016716f581ef12fd2537d33ba70eff4be9832e3b050728ae6fced1828da88f4e"
+  },
+  "unityTransformValidation": {
+    "schemaVersion": 1,
+    "unityVersion": "6000.5.6f1",
+    "scenePath": "Assets/_EDC/Candidates/MagneticSlideTileGate05R012Geometry/MagneticSlideTileGate05R012FullRotationPreview.unity",
+    "modelPath": "Assets/_EDC/Candidates/MagneticSlideTileGate05R012Geometry/Imported/magnetic-slide-tile-fixed-axis-r012.fbx",
+    "width": 1920,
+    "height": 1080,
+    "frames": 570,
+    "fps": 30,
+    "durationSeconds": 19.0,
+    "transform": "M_top(s,theta)=T(P)*R_worldUp(theta)*T(-q(s))",
+    "fixedPivotMeters": [
+      0.0,
+      0.0058750007301568985,
+      0.008999998681247234
+    ],
+    "q0LocalMeters": [
+      0.0,
+      -0.008999998681247234,
+      -0.0031875011045485735
+    ],
+    "partialSlideMeters": 0.009038216434419155,
+    "maximumSlideMeters": 0.01807643286883831,
+    "maxPivotVarianceMeters": 0.0,
+    "maxConstraintResidualMeters": 6.247772965650711e-09,
+    "maxBottomPositionVarianceMeters": 0.0,
+    "maxBottomRotationVarianceDegrees": 0.0,
+    "maxProductPositionVarianceMeters": 0.0,
+    "maxProductRotationVarianceDegrees": 0.0,
+    "maxPitchRollDegrees": 0.0,
+    "minimumVerticalGapMeters": 0.0002499897964298725,
+    "containmentRayMisses": 0,
+    "illegalSlideFrames": 0,
+    "cameraMotionFrames": 0,
+    "visitedDetentIndices": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12,
+      13,
+      14,
+      15,
+      16,
+      17,
+      18,
+      19,
+      20,
+      21,
+      22,
+      23,
+      24,
+      25,
+      26,
+      27,
+      28,
+      29
+    ],
+    "partialRevolution": {
+      "slideMeters": 0.009038216434419155,
+      "startUnwrappedDegrees": 0.0,
+      "endUnwrappedDegrees": 360.0,
+      "orientationClosureDegrees": 0.0
+    },
+    "maximumRevolution": {
+      "slideMeters": 0.01807643286883831,
+      "startUnwrappedDegrees": 0.0,
+      "endUnwrappedDegrees": 360.0,
+      "orientationClosureDegrees": 0.0
+    },
+    "finalOrientationClosureDegrees": 0.0,
+    "rendererWhitelist": [
+      "BottomExterior",
+      "MovingTopBody"
+    ],
+    "keyPoses": [
+      {
+        "frame": 0,
+        "phase": "CLOSED \u00b7 ZERO MOTION",
+        "slideMeters": 0.0,
+        "unwrappedAngleDegrees": 0.0,
+        "pivot": [
+          0.0,
+          0.0058750007301568985,
+          0.008999998681247234
+        ],
+        "lockedSlotPoint": [
+          0.0,
+          0.005874998867511749,
+          0.00899999774992466
+        ]
+      },
+      {
+        "frame": 29,
+        "phase": "CLOSED \u00b7 ZERO MOTION",
+        "slideMeters": 0.0,
+        "unwrappedAngleDegrees": 0.0,
+        "pivot": [
+          0.0,
+          0.0058750007301568985,
+          0.008999998681247234
+        ],
+        "lockedSlotPoint": [
+          0.0,
+          0.005874998867511749,
+          0.00899999774992466
+        ]
+      },
+      {
+        "frame": 59,
+        "phase": "OPEN TO 50% SLIDE",
+        "slideMeters": 0.009038216434419155,
+        "unwrappedAngleDegrees": 0.0,
+        "pivot": [
+          0.0,
+          0.0058750007301568985,
+          0.008999998681247234
+        ],
+        "lockedSlotPoint": [
+          0.0,
+          0.005874999798834324,
+          0.008999996818602085
+        ]
+      },
+      {
+        "frame": 60,
+        "phase": "FULL 360\u00b0 \u00b7 50% LEGAL SLIDE",
+        "slideMeters": 0.009038216434419155,
+        "unwrappedAngleDegrees": 0.0,
+        "pivot": [
+          0.0,
+          0.0058750007301568985,
+          0.008999998681247234
+        ],
+        "lockedSlotPoint": [
+          0.0,
+          0.005874999798834324,
+          0.008999996818602085
+        ]
+      },
+      {
+        "frame": 240,
+        "phase": "FULL 360\u00b0 \u00b7 50% LEGAL SLIDE",
+        "slideMeters": 0.009038216434419155,
+        "unwrappedAngleDegrees": 360.0,
+        "pivot": [
+          0.0,
+          0.0058750007301568985,
+          0.008999998681247234
+        ],
+        "lockedSlotPoint": [
+          0.0,
+          0.005874999798834324,
+          0.008999996818602085
+        ]
+      },
+      {
+        "frame": 269,
+        "phase": "OPEN TO MAXIMUM LEGAL SLIDE",
+        "slideMeters": 0.01807643286883831,
+        "unwrappedAngleDegrees": 360.0,
+        "pivot": [
+          0.0,
+          0.0058750007301568985,
+          0.008999998681247234
+        ],
+        "lockedSlotPoint": [
+          0.0,
+          0.005874999798834324,
+          0.008999994955956936
+        ]
+      },
+      {
+        "frame": 270,
+        "phase": "FULL 360\u00b0 \u00b7 MAXIMUM LEGAL SLIDE",
+        "slideMeters": 0.01807643286883831,
+        "unwrappedAngleDegrees": 0.0,
+        "pivot": [
+          0.0,
+          0.0058750007301568985,
+          0.008999998681247234
+        ],
+        "lockedSlotPoint": [
+          0.0,
+          0.005874999798834324,
+          0.008999994955956936
+        ]
+      },
+      {
+        "frame": 450,
+        "phase": "FULL 360\u00b0 \u00b7 MAXIMUM LEGAL SLIDE",
+        "slideMeters": 0.01807643286883831,
+        "unwrappedAngleDegrees": 360.0,
+        "pivot": [
+          0.0,
+          0.0058750007301568985,
+          0.008999998681247234
+        ],
+        "lockedSlotPoint": [
+          0.0,
+          0.005874999798834324,
+          0.008999994955956936
+        ]
+      },
+      {
+        "frame": 509,
+        "phase": "COMPOUND SLIDE + ROTATION",
+        "slideMeters": 0.008134394884109497,
+        "unwrappedAngleDegrees": 300.0,
+        "pivot": [
+          0.0,
+          0.0058750007301568985,
+          0.008999998681247234
+        ],
+        "lockedSlotPoint": [
+          5.820766091346741e-11,
+          0.005874998867511749,
+          0.00899999588727951
+        ]
+      },
+      {
+        "frame": 539,
+        "phase": "RETURN TO CLOSED + 360\u00b0",
+        "slideMeters": 0.0,
+        "unwrappedAngleDegrees": 360.0,
+        "pivot": [
+          0.0,
+          0.0058750007301568985,
+          0.008999998681247234
+        ],
+        "lockedSlotPoint": [
+          -1.1102230246251565e-16,
+          0.005874998867511749,
+          0.00899999774992466
+        ]
+      },
+      {
+        "frame": 569,
+        "phase": "FINAL LOOP CLOSURE \u00b7 360\u00b0 = 0\u00b0",
+        "slideMeters": 0.0,
+        "unwrappedAngleDegrees": 360.0,
+        "pivot": [
+          0.0,
+          0.0058750007301568985,
+          0.008999998681247234
+        ],
+        "lockedSlotPoint": [
+          -1.1102230246251565e-16,
+          0.005874998867511749,
+          0.00899999774992466
+        ]
+      }
+    ],
+    "priorRecordingStatus": "valid-partial-evidence-superseded-for-full-rotation-approval",
+    "build": false,
+    "install": false,
+    "phone": false,
+    "pass": true
+  },
+  "video": {
+    "path": "gate05-r012-unity-full-360-motion.mp4",
+    "sha256": "ebb9229e3628de1472206fb534458c9506c41a01de47fbb37676d991a5d7faeb",
+    "sizeBytes": 738333,
+    "codec": "h264",
+    "profile": "High",
+    "pixelFormat": "yuv420p",
+    "width": 1920,
+    "height": 1080,
+    "frameRate": "30/1",
+    "frames": 570,
+    "durationSeconds": 19.0,
+    "fastStart": true
+  },
+  "quickTime": {
+    "durationSeconds": 19,
+    "frameRate": 29.999998092651367,
+    "height": 1080,
+    "isPlayable": true,
+    "readerStatus": "completed",
+    "videoSampleCount": 570,
+    "width": 1920
+  },
+  "checks": {
+    "realUnityFrames": true,
+    "h264High1920x1080": true,
+    "thirtyFpsNineteenSeconds": true,
+    "quickTimePlayable": true,
+    "allFrameDimensionsExact": true,
+    "fixedWorldAxisOverlay": true,
+    "singleFixedPivot": true,
+    "slotPointLockedEveryFrame": true,
+    "bottomStaticHorizontal": true,
+    "productStaticHorizontal": true,
+    "partialFullRevolution": true,
+    "maximumFullRevolution": true,
+    "allThirtyDetentsVisited": true,
+    "finalOrientationClosure": true,
+    "legalSlideOnly": true,
+    "minimumDiskContained": true,
+    "topAboveBottom": true,
+    "rendererWhitelistExact": true,
+    "fixedCamera": true,
+    "geometryUnchanged": true,
+    "priorRecordingSupersededOnlyForFullRotation": true,
+    "noBuildInstallPhone": true
+  },
+  "pass": true
+}

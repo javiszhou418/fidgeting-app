@@ -1,0 +1,391 @@
+{
+  "schemaVersion": 1,
+  "modelId": "premium-display-case",
+  "gate": "05-blockout",
+  "blockoutRevision": 2,
+  "evidenceClass": "supplementary-material-diagnostic",
+  "status": "pass",
+  "notice": "DIAGNOSTIC MATERIAL PROXY · NOT GATE 07 APPROVAL",
+  "approvalEffect": "none-not-gate07-material-approval",
+  "pipelineState": {
+    "gate05": "ready_for_review",
+    "gate06": "blocked",
+    "gate07": "blocked",
+    "shippingUnityChanged": false,
+    "buildInstallPhonePush": false
+  },
+  "sourceFiles": {
+    "gate05Rev2Blockout": {
+      "path": "unity/FidgetingApp/ArtSource/ModelPipeline/premium-display-case/evidence/05-blockout/rev-002/premium-display-case-blockout.blend",
+      "sha256Before": "3f0411e43900e9ff67a8f52ee4af9d630147acb46251985baf8b2a1a06936e31",
+      "sha256After": "3f0411e43900e9ff67a8f52ee4af9d630147acb46251985baf8b2a1a06936e31"
+    },
+    "formalMaterialBlend": {
+      "path": "unity/FidgetingApp/ArtSource/DisplayCase/PremiumDisplayCase.blend",
+      "sha256Before": "e165f6ae0e5da0329a561608752ae6913957ff028ca55ad4ec3f2796de6e6539",
+      "sha256After": "e165f6ae0e5da0329a561608752ae6913957ff028ca55ad4ec3f2796de6e6539"
+    },
+    "formalMaterialRecipe": {
+      "path": "unity/FidgetingApp/ArtSource/DisplayCase/build_premium_display_case.py",
+      "sha256Before": "36addb0c29b0ee0475c820a4f1febc2f6f8acc15080107849f3668b80b87570c",
+      "sha256After": "36addb0c29b0ee0475c820a4f1febc2f6f8acc15080107849f3668b80b87570c"
+    }
+  },
+  "materialAssignments": {
+    "RearPolycarbonateShell": "MAT_FrostedPolycarbonate",
+    "FrontPolycarbonateShell": "MAT_FrostedPolycarbonate",
+    "ContinuousTubePerimeter": "MAT_FrostedPolycarbonateEdge",
+    "TactileBackgroundInsert": "MAT_BlackFlocking",
+    "PhysicalLabel": "MAT_LabelPaper"
+  },
+  "formalMaterialPbr": {
+    "MAT_FrostedPolycarbonate": {
+      "baseColor": [
+        0.61,
+        0.65,
+        0.68,
+        0.1
+      ],
+      "metallic": 0.0,
+      "roughness": 0.22,
+      "transmissionWeight": 0.92,
+      "ior": 1.585,
+      "alpha": 0.1,
+      "emissionStrength": 0.0,
+      "imageTextures": []
+    },
+    "MAT_FrostedPolycarbonateEdge": {
+      "baseColor": [
+        0.72,
+        0.75,
+        0.77,
+        0.21
+      ],
+      "metallic": 0.0,
+      "roughness": 0.18,
+      "transmissionWeight": 0.78,
+      "ior": 1.585,
+      "alpha": 0.21,
+      "emissionStrength": 0.0,
+      "imageTextures": []
+    },
+    "MAT_BlackFlocking": {
+      "baseColor": [
+        0.009,
+        0.011,
+        0.014,
+        1.0
+      ],
+      "metallic": 0.0,
+      "roughness": 0.91,
+      "transmissionWeight": 0.0,
+      "ior": 1.5,
+      "alpha": 1.0,
+      "emissionStrength": 0.0,
+      "imageTextures": []
+    },
+    "MAT_RarityFoilSilver": {
+      "baseColor": [
+        0.58,
+        0.62,
+        0.66,
+        1.0
+      ],
+      "metallic": 0.96,
+      "roughness": 0.3,
+      "transmissionWeight": 0.0,
+      "ior": 1.5,
+      "alpha": 1.0,
+      "emissionStrength": 0.0,
+      "imageTextures": []
+    },
+    "MAT_LabelPaper": {
+      "baseColor": [
+        0.74,
+        0.72,
+        0.68,
+        1.0
+      ],
+      "metallic": 0.0,
+      "roughness": 0.73,
+      "transmissionWeight": 0.0,
+      "ior": 1.5,
+      "alpha": 1.0,
+      "emissionStrength": 0.0,
+      "imageTextures": []
+    },
+    "MAT_LabelGraphite": {
+      "baseColor": [
+        0.055,
+        0.06,
+        0.066,
+        1.0
+      ],
+      "metallic": 0.22,
+      "roughness": 0.52,
+      "transmissionWeight": 0.0,
+      "ior": 1.5,
+      "alpha": 1.0,
+      "emissionStrength": 0.0,
+      "imageTextures": []
+    }
+  },
+  "formalSourceImageTextureCount": 0,
+  "formalSourceTextureTruth": "The approved Blender material source uses Principled PBR parameters and contains no image-texture nodes. No bitmap material was invented.",
+  "geometryPreservation": {
+    "subjectObjects": [
+      "RearPolycarbonateShell",
+      "TactileBackgroundInsert",
+      "FrontPolycarbonateShell",
+      "ContinuousTubePerimeter",
+      "PhysicalLabel"
+    ],
+    "digestBefore": "6656ebb6f9003092d2d771a774ec006683347e01c4f12d0c994cc66fc603877f",
+    "digestAfterMaterialAssignment": "6656ebb6f9003092d2d771a774ec006683347e01c4f12d0c994cc66fc603877f",
+    "digestAfterRenders": "6656ebb6f9003092d2d771a774ec006683347e01c4f12d0c994cc66fc603877f",
+    "boundsBeforeMm": {
+      "minimum": [
+        -114.0,
+        -152.0,
+        -29.5
+      ],
+      "maximum": [
+        114.0,
+        152.0,
+        29.5
+      ],
+      "size": [
+        228.0,
+        304.0,
+        59.0
+      ]
+    },
+    "boundsAfterMm": {
+      "minimum": [
+        -114.0,
+        -152.0,
+        -29.5
+      ],
+      "maximum": [
+        114.0,
+        152.0,
+        29.5
+      ],
+      "size": [
+        228.0,
+        304.0,
+        59.0
+      ]
+    },
+    "labelCenterYmm": 99.0,
+    "maximumCornerCenterDriftMm": 0.0,
+    "openBoundaryEdgeCount": 0,
+    "nonManifoldEdgeCount": 0,
+    "channelFloodFillVisited": 384,
+    "channelFloodFillTotal": 384
+  },
+  "diagnosticProxySurfaces": {
+    "objects": [
+      {
+        "name": "DIAGNOSTIC_NarrowFoilProxy",
+        "kind": "zero-thickness-existing-narrow-foil-material-zone",
+        "type": "MESH",
+        "thicknessMm": 0.0,
+        "gate05SubjectGeometry": false,
+        "gate07ApprovalEligible": false
+      },
+      {
+        "name": "DIAGNOSTIC_IdentityPlaceholder",
+        "kind": "neutral-identity-placeholder-area",
+        "type": "MESH",
+        "thicknessMm": 0.0,
+        "gate05SubjectGeometry": false,
+        "gate07ApprovalEligible": false
+      },
+      {
+        "name": "DIAGNOSTIC_AchievementPlaceholder",
+        "kind": "neutral-achievement-placeholder-area",
+        "type": "MESH",
+        "thicknessMm": 0.0,
+        "gate05SubjectGeometry": false,
+        "gate07ApprovalEligible": false
+      },
+      {
+        "name": "DIAGNOSTIC_LabelPrimary",
+        "kind": "neutral-label-print-placeholder",
+        "type": "FONT",
+        "thicknessMm": null,
+        "gate05SubjectGeometry": false,
+        "gate07ApprovalEligible": false
+      },
+      {
+        "name": "DIAGNOSTIC_LabelSecondary",
+        "kind": "neutral-label-print-placeholder",
+        "type": "FONT",
+        "thicknessMm": null,
+        "gate05SubjectGeometry": false,
+        "gate07ApprovalEligible": false
+      },
+      {
+        "name": "DIAGNOSTIC_NeutralPrintBarPrimary",
+        "kind": "neutral-label-print-bar",
+        "type": "MESH",
+        "thicknessMm": 0.0,
+        "gate05SubjectGeometry": false,
+        "gate07ApprovalEligible": false
+      },
+      {
+        "name": "DIAGNOSTIC_NeutralPrintBarSecondary",
+        "kind": "neutral-label-print-bar",
+        "type": "MESH",
+        "thicknessMm": 0.0,
+        "gate05SubjectGeometry": false,
+        "gate07ApprovalEligible": false
+      },
+      {
+        "name": "DIAGNOSTIC_NeutralPrintBarMetadata",
+        "kind": "neutral-label-print-bar",
+        "type": "MESH",
+        "thicknessMm": 0.0,
+        "gate05SubjectGeometry": false,
+        "gate07ApprovalEligible": false
+      },
+      {
+        "name": "DIAGNOSTIC_IdentityAreaText",
+        "kind": "neutral-label-print-placeholder",
+        "type": "FONT",
+        "thicknessMm": null,
+        "gate05SubjectGeometry": false,
+        "gate07ApprovalEligible": false
+      },
+      {
+        "name": "DIAGNOSTIC_AchievementAreaText",
+        "kind": "neutral-label-print-placeholder",
+        "type": "FONT",
+        "thicknessMm": null,
+        "gate05SubjectGeometry": false,
+        "gate07ApprovalEligible": false
+      },
+      {
+        "name": "DIAGNOSTIC_TransparentCoverProxy",
+        "kind": "zero-thickness-existing-transparent-cover-contour",
+        "type": "MESH",
+        "thicknessMm": 0.0,
+        "gate05SubjectGeometry": false,
+        "gate07ApprovalEligible": false
+      }
+    ],
+    "reason": "Gate 05 rev 2 stores TransparentCover and NarrowFoil as contour/material zones. Zero-thickness render surfaces expose the approved materials without inventing cover thickness or changing subject geometry."
+  },
+  "transparentOrderingPreflight": {
+    "labelSurfaceMaxZmm": 25.5,
+    "printProxyZmm": 26.35,
+    "foilProxyZmm": 26.2,
+    "coverProxyZmm": 26.62,
+    "cameraSide": "+Z",
+    "pass": true,
+    "note": "The cover and foil remain zero-thickness diagnostic surfaces because Gate 05 rev 2 defers cover thickness and treats foil as a material zone."
+  },
+  "neutralStudio": {
+    "lights": {
+      "key": {
+        "name": "DIAGNOSTIC_Key_5000K",
+        "energy": 1800000.0,
+        "color": [
+          1.0,
+          0.965,
+          0.93
+        ],
+        "colorChroma": 0.07,
+        "rarityLight": false
+      },
+      "fill": {
+        "name": "DIAGNOSTIC_Fill_6200K",
+        "energy": 850000.0,
+        "color": [
+          0.945,
+          0.965,
+          1.0
+        ],
+        "colorChroma": 0.055,
+        "rarityLight": false
+      },
+      "rim": {
+        "name": "DIAGNOSTIC_Rim_5600K",
+        "energy": 550000.0,
+        "color": [
+          0.965,
+          0.98,
+          1.0
+        ],
+        "colorChroma": 0.035,
+        "rarityLight": false
+      }
+    },
+    "background": {
+      "type": "continuous-procedural-world",
+      "node": "DIAGNOSTIC_ContinuousMatteBackground",
+      "noiseScale": 420.0,
+      "localNoiseMasks": 0,
+      "imageTextureCount": 0
+    },
+    "backgroundRule": "continuous low-saturation fine-grain studio field; no image texture, local mask, emission, radial halo, or wide cyan/teal rarity light"
+  },
+  "render": {
+    "engine": "CYCLES",
+    "device": "CPU",
+    "samples": 96,
+    "adaptiveThreshold": 0.02500000037252903,
+    "denoiser": "OPENIMAGEDENOISE",
+    "transmissionBounces": 18,
+    "colorManagement": {
+      "viewTransform": "AgX",
+      "look": "AgX - Medium High Contrast",
+      "exposure": 0.0
+    },
+    "rawViews": {
+      "hero": "unity/FidgetingApp/ArtSource/ModelPipeline/premium-display-case/evidence/05-blockout/rev-002/material-diagnostic/raw/hero.png",
+      "left-oblique": "unity/FidgetingApp/ArtSource/ModelPipeline/premium-display-case/evidence/05-blockout/rev-002/material-diagnostic/raw/left-oblique.png",
+      "right-oblique": "unity/FidgetingApp/ArtSource/ModelPipeline/premium-display-case/evidence/05-blockout/rev-002/material-diagnostic/raw/right-oblique.png",
+      "low": "unity/FidgetingApp/ArtSource/ModelPipeline/premium-display-case/evidence/05-blockout/rev-002/material-diagnostic/raw/low.png",
+      "side": "unity/FidgetingApp/ArtSource/ModelPipeline/premium-display-case/evidence/05-blockout/rev-002/material-diagnostic/raw/side.png",
+      "label-closeup": "unity/FidgetingApp/ArtSource/ModelPipeline/premium-display-case/evidence/05-blockout/rev-002/material-diagnostic/raw/label-closeup.png",
+      "concentric-closeup": "unity/FidgetingApp/ArtSource/ModelPipeline/premium-display-case/evidence/05-blockout/rev-002/material-diagnostic/raw/concentric-closeup.png"
+    },
+    "clayHeroSameCamera": "unity/FidgetingApp/ArtSource/ModelPipeline/premium-display-case/evidence/05-blockout/rev-002/material-diagnostic/raw/clay-hero-same-camera.png"
+  },
+  "identityBoundary": {
+    "labelText": "material proxy\nneutral label · gate 05\nidentity\narea\nachievement\narea",
+    "neutralIdentityPlaceholder": true,
+    "neutralAchievementPlaceholder": true,
+    "formalLogoRedrawn": false,
+    "formalAchievementRedrawn": false,
+    "forbiddenHits": []
+  },
+  "checks": {
+    "sourceBlockoutFileUnchanged": true,
+    "formalMaterialBlendUnchanged": true,
+    "formalMaterialBuildRecipeUnchanged": true,
+    "subjectGeometryDigestUnchanged": true,
+    "subjectBoundsUnchanged": true,
+    "subjectMatricesUnchanged": true,
+    "labelCenterYUnchanged": true,
+    "concentricErrorUnchanged": true,
+    "allSubjectSurfacesManifold": true,
+    "tubeManifold": true,
+    "tubeChannelFloodFill": true,
+    "transparentLayerOrderPreflight": true,
+    "formalSourceMaterialsOnly": true,
+    "noWideRarityLight": true,
+    "neutralStudioLightChroma": true,
+    "keyFillRatioInContract": true,
+    "rimToKeyWithinContract": true,
+    "noForbiddenReferenceIdentity": true,
+    "gate05StatusPreserved": true,
+    "gate06And07NotEntered": true,
+    "shippingUnityUnchanged": true,
+    "noBuildInstallPhonePush": true
+  },
+  "blender": "5.2.0 LTS",
+  "outputBlend": "unity/FidgetingApp/ArtSource/ModelPipeline/premium-display-case/evidence/05-blockout/rev-002/material-diagnostic/premium-display-case-gate05-r2-material-diagnostic.blend"
+}

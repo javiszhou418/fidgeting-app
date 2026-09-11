@@ -1,0 +1,376 @@
+{
+  "schema": "premium-display-case-gate04-mesh-clipped-light-architecture.v1",
+  "modelId": "premium-display-case",
+  "gate": "04-architecture",
+  "architectureRevision": 2,
+  "evidenceRevision": 7,
+  "status": "ready_for_review",
+  "sourceContract": {
+    "path": "unity/FidgetingApp/ArtSource/ModelPipeline/premium-display-case/evidence/03-contract/rev-003/modeling-contract.json",
+    "sha256": "1aea4db5fb45e61b936c5145d83d39a2e2a4abfe000dddb46cfdb200f76023f3",
+    "contractRevision": 3,
+    "sourceAnalysisRevision": 6,
+    "sourceClaimIds": [
+      "premium-display-case-analysis-balanced-entry-r005",
+      "premium-display-case-analysis-serial-showcase-r005",
+      "premium-display-case-analysis-no-simultaneous-clutter-r005",
+      "premium-display-case-analysis-balanced-highlight-r005",
+      "premium-display-case-analysis-balanced-timing-r005",
+      "premium-display-case-analysis-pack-seam-light-r006",
+      "premium-display-case-analysis-arrival-rim-r006",
+      "premium-display-case-analysis-rotation-rim-r006",
+      "premium-display-case-analysis-final-light-stop-r006",
+      "premium-display-case-analysis-light-forbidden-r006"
+    ]
+  },
+  "ownership": {
+    "pack": "external/native NativePackOwner",
+    "presentation": "PresentationRoot",
+    "case": "one rigid CaseAssembly instance",
+    "toy": "caller-owned ContentSlot child",
+    "light": "MeshClippedLightController"
+  },
+  "nodes": [
+    {
+      "id": "native-pack-owner",
+      "parentId": null,
+      "kind": "external-native-owner",
+      "physical": false,
+      "reviewVisible": true,
+      "responsibilities": [
+        "Pack foreground",
+        "tear progress",
+        "authoritative handoff trigger"
+      ]
+    },
+    {
+      "id": "presentation-root",
+      "parentId": null,
+      "kind": "transform-root",
+      "physical": false,
+      "reviewVisible": true,
+      "responsibilities": [
+        "serial phase ownership",
+        "Y+Z entry",
+        "local-Y 360 showcase"
+      ]
+    },
+    {
+      "id": "reveal-sequence-controller",
+      "parentId": "presentation-root",
+      "kind": "logic-controller",
+      "physical": false,
+      "reviewVisible": true,
+      "responsibilities": [
+        "ENTRY",
+        "ENTRY_SHOWCASE_OVERLAP",
+        "SHOWCASE",
+        "FINAL_LIGHT",
+        "HOLD"
+      ]
+    },
+    {
+      "id": "mesh-clipped-light-controller",
+      "parentId": "presentation-root",
+      "kind": "logic-controller",
+      "physical": false,
+      "reviewVisible": true,
+      "responsibilities": [
+        "pack-seam-light-owned-by-NativePackOwner",
+        "arrival-rim-inside-case-mask",
+        "rotation-rim-inside-case-mask",
+        "final-mesh-clipped-sheen"
+      ]
+    },
+    {
+      "id": "case-assembly",
+      "parentId": "presentation-root",
+      "kind": "rigid-transform-group",
+      "physical": false,
+      "reviewVisible": true,
+      "responsibilities": [
+        "one assembled instance",
+        "same identity through ACK"
+      ]
+    },
+    {
+      "id": "rear-polycarbonate-shell",
+      "parentId": "case-assembly",
+      "kind": "physical-part",
+      "physical": true,
+      "reviewVisible": false
+    },
+    {
+      "id": "tactile-background-insert",
+      "parentId": "case-assembly",
+      "kind": "physical-part",
+      "physical": true,
+      "reviewVisible": false
+    },
+    {
+      "id": "content-slot",
+      "parentId": "case-assembly",
+      "kind": "caller-anchor",
+      "physical": false,
+      "reviewVisible": true
+    },
+    {
+      "id": "toy-content",
+      "parentId": "content-slot",
+      "kind": "external-caller-owned-content",
+      "physical": true,
+      "reviewVisible": true,
+      "independentAngularVelocity": 0
+    },
+    {
+      "id": "front-polycarbonate-shell",
+      "parentId": "case-assembly",
+      "kind": "physical-part",
+      "physical": true,
+      "reviewVisible": false
+    },
+    {
+      "id": "continuous-tube-perimeter",
+      "parentId": "case-assembly",
+      "kind": "one-connected-physical-part",
+      "physical": true,
+      "reviewVisible": false
+    },
+    {
+      "id": "physical-label",
+      "parentId": "case-assembly",
+      "kind": "physical-part",
+      "physical": true,
+      "reviewVisible": false
+    },
+    {
+      "id": "transparent-cover",
+      "parentId": "case-assembly",
+      "kind": "physical-part",
+      "physical": true,
+      "reviewVisible": false
+    }
+  ],
+  "phaseArchitecture": [
+    {
+      "id": "prepare",
+      "owner": "NativePackOwner + RevealSequenceController",
+      "visible": "Pack only",
+      "completion": "receipt + same request + case/prize/camera stable for 2 frames"
+    },
+    {
+      "id": "entry",
+      "owner": "PresentationRoot",
+      "motion": [
+        "screen-y",
+        "camera-depth-z"
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "concurrentPackAction": "Pack retreats for 0.28 s",
+      "lightCue": "pack-seam-light",
+      "completion": "case clears Pack and entry enters deceleration tail"
+    },
+    {
+      "id": "entry-showcase-overlap",
+      "owner": "PresentationRoot",
+      "translation": "late decelerating Y+Z tail",
+      "rotation": "early local-Y 360 onset",
+      "bounded": true,
+      "count": 1,
+      "approvalState": "architecture-locked-window-runtime-values-pending",
+      "lightCue": "arrival-rim-inside-case-mask transitions to rotation-rim-inside-case-mask"
+    },
+    {
+      "id": "showcase",
+      "owner": "PresentationRoot",
+      "motion": "continue one local-Y 360",
+      "translation": "locked after entry tail ends",
+      "lightCue": "rotation-rim-inside-case-mask"
+    },
+    {
+      "id": "final-light",
+      "owner": "MeshClippedLightController",
+      "motion": "none",
+      "lightCue": "final-mesh-clipped-sheen"
+    },
+    {
+      "id": "hold",
+      "owner": "RevealSequenceController",
+      "motion": "none",
+      "light": "all cues zero",
+      "completion": "user ACK"
+    }
+  ],
+  "lightCues": [
+    {
+      "id": "pack-seam-light",
+      "owner": "NativePackOwner",
+      "renderOwner": "Pack shader",
+      "mask": "Pack opening seam only",
+      "finite": true
+    },
+    {
+      "id": "arrival-rim-inside-case-mask",
+      "owner": "MeshClippedLightController",
+      "renderOwner": "Case shader",
+      "mask": "object-local inner silhouette edge",
+      "finite": true
+    },
+    {
+      "id": "rotation-rim-inside-case-mask",
+      "owner": "MeshClippedLightController",
+      "renderOwner": "Case shader",
+      "mask": "object-local surface orientation clipped to case",
+      "finite": true
+    },
+    {
+      "id": "final-mesh-clipped-sheen",
+      "owner": "MeshClippedLightController",
+      "renderOwner": "Case shader",
+      "mask": "UV or object-space case silhouette",
+      "driver": "MaterialPropertyBlock _SheenProgress 0..1 once",
+      "finite": true
+    }
+  ],
+  "invariants": {
+    "oneCaseInstance": true,
+    "wholeCaseOnly": true,
+    "packProxyAllowed": false,
+    "entryRotationDegrees": [
+      0,
+      0,
+      0
+    ],
+    "showcaseDegrees": 360,
+    "entryAndShowcaseOverlap": true,
+    "toyIndependentAngularVelocity": 0,
+    "particleEmitterCount": 0,
+    "persistentLightLoop": false,
+    "explodeEligible": false,
+    "overlapWindowCount": 1,
+    "overlapBounded": true,
+    "entryTailOnly": true,
+    "caseLightOutsideSilhouettePixels": 0,
+    "externalSettleHalo": false,
+    "externalPointLightFinalSheen": false,
+    "vfxGraphDependency": false,
+    "bloomDependency": false
+  },
+  "tunableRuntimeParameters": {
+    "decisionState": "explicitly-unlocked-for-later-gates-and-shipping-tuning",
+    "previewDurationSeconds": 3.4,
+    "shippingTotalDurationSeconds": null,
+    "phaseDurationsSeconds": null,
+    "phaseEasing": null,
+    "entryScreenYDistance": null,
+    "entryCameraDepthZDistance": null,
+    "rotationAngularVelocityCurve": null,
+    "seamLightWidth": null,
+    "seamLightIntensity": null,
+    "arrivalRimWidth": null,
+    "arrivalRimIntensity": null,
+    "lightColorTemperatureKelvin": null,
+    "lightFalloff": null,
+    "finalSheenWidth": null,
+    "finalSheenIntensity": null,
+    "shippingCameraFovDegrees": null,
+    "note": "The overlap shown in review is a pending demonstration. Shipping duration, threshold, easing, distance and light values remain unlocked.",
+    "overlapStartThreshold": null,
+    "overlapDurationSeconds": null,
+    "rotationOnsetCurve": null,
+    "finalSheenMaskSpace": "object-local-or-uv-candidate",
+    "finalSheenDriver": "MaterialPropertyBlock",
+    "finalSheenShaderProperty": "_SheenProgress"
+  },
+  "internalEvidence": {
+    "partTreeAssetId": "premium-display-case-part-tree-internal-r005",
+    "explodedPlanAssetId": "premium-display-case-exploded-plan-internal-r005",
+    "reviewEligible": false,
+    "productAnimationEligible": false,
+    "changedByRev6": false
+  },
+  "userReview": {
+    "board": "mesh-clipped-light-architecture-review.png",
+    "gif": "whole-case-mesh-clipped-light-motion.gif",
+    "contactSheet": "whole-case-mesh-clipped-light-contact-sheet.png",
+    "assembledOnly": true,
+    "explodedVisible": false,
+    "externalHaloVisible": false
+  },
+  "route": {
+    "gate05Status": "blocked",
+    "shippingUnityEdit": false,
+    "buildInstallPhonePush": false,
+    "nextGatePolicy": "Do not enter Gate 05 before explicit Gate 04 approval."
+  },
+  "sourceFeedback": {
+    "quote": "尤其是你的过光，不应该超过这个物体本身。",
+    "accepted": [
+      "same-case-identity",
+      "bounded-entry-rotation-overlap",
+      "Unity-runtime-authoring"
+    ],
+    "rejected": [
+      "external-settle-halo",
+      "light-outside-case-silhouette",
+      "external-point-light-final-sheen"
+    ]
+  },
+  "overlapContract": {
+    "enabled": true,
+    "count": 1,
+    "entryTailOnly": true,
+    "caseMustClearPackBeforeRotation": true,
+    "entryTranslationMustBeDecelerating": true,
+    "unboundedSimultaneousMotion": false,
+    "reviewDemonstrationCandidate": {
+      "entryProgressAtRotationStart": 0.82,
+      "durationSeconds": 0.16,
+      "approvalEffect": "none-pending-runtime-tuning"
+    },
+    "lockedValues": {
+      "startThreshold": null,
+      "durationSeconds": null,
+      "rotationOnsetCurve": null
+    }
+  },
+  "toolOwnership": {
+    "Blender": [
+      "geometry",
+      "pivot",
+      "UV",
+      "material zones"
+    ],
+    "Unity": [
+      "runtime motion",
+      "timing and easing",
+      "entry Z travel",
+      "360 showcase",
+      "mesh-clipped light",
+      "camera",
+      "performance"
+    ],
+    "SwiftUI/Rive": [
+      "Pack selection",
+      "tear",
+      "foreground retreat",
+      "ready/handoff bridge"
+    ],
+    "React": [
+      "pipeline review tooling only"
+    ]
+  },
+  "unityRuntimeArchitecture": {
+    "stateAuthority": "GachaRevealDirector",
+    "profile": "RevealMotionProfile ScriptableObject",
+    "curves": "AnimationCurve per phase and cue",
+    "materialDriver": "MaterialPropertyBlock",
+    "timelineRole": "editor-preview-and-scrub-only",
+    "timelineTransactionAuthority": false,
+    "shippingRuntimeParameterApproval": "pending"
+  }
+}

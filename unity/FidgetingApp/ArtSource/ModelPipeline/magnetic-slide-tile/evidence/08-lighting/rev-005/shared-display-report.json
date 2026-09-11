@@ -1,0 +1,71 @@
+{
+  "schemaVersion": 1,
+  "transform": {
+    "name": "neutral-display-v1",
+    "input": "scene-linear Rec.709/D65",
+    "exposureMultiplier": 1.0,
+    "shoulder": "x/(1+0.18x)",
+    "encoding": "IEC 61966-2-1 sRGB",
+    "backgroundLinear": [
+      0.03500000014901161,
+      0.03500000014901161,
+      0.03500000014901161
+    ]
+  },
+  "images": [
+    {
+      "source": "blender-full-model-linear.exr",
+      "output": "blender-full-model-display.png",
+      "linearMinimum": 0.022125244140625,
+      "linearMaximum": 3.365234375,
+      "linearMean": 0.05479021742939949,
+      "alphaObjectFraction": 0.2519,
+      "displayClippedFraction": 0.002794805194805195
+    },
+    {
+      "source": "unity-clay-linear.exr",
+      "output": "unity-clay-display.png",
+      "linearMinimum": 0.03500000014901161,
+      "linearMaximum": 1.919921875,
+      "linearMean": 0.13419099152088165,
+      "alphaObjectFraction": 0.25854220779220777,
+      "displayClippedFraction": 7.727272727272727e-05
+    },
+    {
+      "source": "unity-crystal-linear.exr",
+      "output": "unity-crystal-display.png",
+      "linearMinimum": 0.03500000014901161,
+      "linearMaximum": 0.03500000014901161,
+      "linearMean": 0.03499988839030266,
+      "alphaObjectFraction": 0.0,
+      "displayClippedFraction": 0.0
+    },
+    {
+      "source": "unity-full-model-linear.exr",
+      "output": "unity-full-model-display.png",
+      "linearMinimum": 0.0107879638671875,
+      "linearMaximum": 0.63818359375,
+      "linearMean": 0.04520820826292038,
+      "alphaObjectFraction": 0.25854220779220777,
+      "displayClippedFraction": 0.0
+    },
+    {
+      "source": "unity-reflection-only-linear.exr",
+      "output": "unity-reflection-only-display.png",
+      "linearMinimum": 0.03500000014901161,
+      "linearMaximum": 2.4609375,
+      "linearMean": 0.10114096850156784,
+      "alphaObjectFraction": 0.18676233766233766,
+      "displayClippedFraction": 0.009255844155844156
+    },
+    {
+      "source": "unity-silver-linear.exr",
+      "output": "unity-silver-display.png",
+      "linearMinimum": 0.03500000014901161,
+      "linearMaximum": 3.783203125,
+      "linearMean": 0.13467229902744293,
+      "alphaObjectFraction": 0.18676233766233766,
+      "displayClippedFraction": 0.019072727272727272
+    }
+  ]
+}

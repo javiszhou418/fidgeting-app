@@ -1,0 +1,123 @@
+{
+  "schemaVersion": 1,
+  "kind": "approved-cad-architecture-migration",
+  "modelId": "magnetic-slide-tile",
+  "gate": "04-architecture",
+  "architectureRevision": 11,
+  "createdAt": "2026-08-27T02:43:57.498Z",
+  "decisionSource": {
+    "authority": "latest-explicit-chat-instruction",
+    "exactUserWording": "你直接来吧…leverage 我们之前所有做过的工作，包括图案，材质，灯光和细节调整.",
+    "noNewAssumptions": true
+  },
+  "governingContractSha256": "b4318452f163ef7c105c826d4466a739a1dd0d942d4d74d921c29c39e02a84f2",
+  "hierarchy": [
+    {
+      "id": "BottomExterior",
+      "parent": "Root",
+      "render": true,
+      "transform": "identity",
+      "notes": "smooth rail-free exterior"
+    },
+    {
+      "id": "FixedAxis",
+      "parent": "BottomExterior",
+      "render": true,
+      "transform": "identity",
+      "notes": "embedded and invariant"
+    },
+    {
+      "id": "MinimumOverlapDisk",
+      "parent": "BottomExterior",
+      "render": false,
+      "transform": "identity",
+      "notes": "validation metadata/overlay only"
+    },
+    {
+      "id": "RotatingCarrier",
+      "parent": "BottomExterior",
+      "render": true,
+      "transform": "R_fixedAxis(theta)",
+      "notes": "circular with bilateral CAD-provisional side clearances"
+    },
+    {
+      "id": "CarrierFollowerLeft",
+      "parent": "RotatingCarrier",
+      "render": false,
+      "transform": "R_fixedAxis(theta)",
+      "notes": "unknown size; metadata proxy"
+    },
+    {
+      "id": "CarrierFollowerRight",
+      "parent": "RotatingCarrier",
+      "render": false,
+      "transform": "R_fixedAxis(theta)",
+      "notes": "unknown size; metadata proxy"
+    },
+    {
+      "id": "TopPlate",
+      "parent": "Root",
+      "render": true,
+      "transform": "R_fixedAxis(theta) * T_local(s)",
+      "notes": "always above bottom"
+    },
+    {
+      "id": "TopGrooveLeft",
+      "parent": "TopPlate",
+      "render": false,
+      "transform": "R_fixedAxis(theta) * T_local(s)",
+      "notes": "centerline/extent metadata; width and depth unknown"
+    },
+    {
+      "id": "TopGrooveRight",
+      "parent": "TopPlate",
+      "render": false,
+      "transform": "R_fixedAxis(theta) * T_local(s)",
+      "notes": "centerline/extent metadata; width and depth unknown"
+    },
+    {
+      "id": "UnknownContacts",
+      "parent": "TopPlate",
+      "render": false,
+      "transform": "metadata-only",
+      "notes": "never render as invented geometry"
+    }
+  ],
+  "kinematics": {
+    "top": "R_fixedAxis(theta) * T_local(s)",
+    "rangeSmm": [
+      0,
+      18.076433121019107
+    ],
+    "finiteGrooveEndpoints": true,
+    "minimumOverlapDiskRadiusMm": 15.92356687898089,
+    "minimumOverlapRequired": true,
+    "detentCount": 30,
+    "detentStepDegrees": 12,
+    "simultaneousSlideRotation": true,
+    "initialVelocity": 0,
+    "selfMotion": false
+  },
+  "requiredReviewPoses": [
+    {
+      "id": "closed",
+      "sMm": 0,
+      "thetaDeg": 0
+    },
+    {
+      "id": "max-open",
+      "sMm": 18.076433121019107,
+      "thetaDeg": 0
+    },
+    {
+      "id": "detent-01",
+      "sMm": 8.134394904458599,
+      "thetaDeg": 12
+    },
+    {
+      "id": "detent-03",
+      "sMm": 12.653503184713374,
+      "thetaDeg": 36
+    }
+  ]
+}

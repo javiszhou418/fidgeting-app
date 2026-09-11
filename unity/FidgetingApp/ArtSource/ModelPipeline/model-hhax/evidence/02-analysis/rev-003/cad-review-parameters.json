@@ -1,0 +1,23 @@
+{
+  "schemaVersion": 1,
+  "stage": "02-analysis",
+  "modelId": "model-hhax",
+  "carrier": "interactive-cad.glb",
+  "units": "millimeters",
+  "publishedEnvelopeMm": [50.5, 30.9, 13.6],
+  "reviewedGeometry": [
+    "two capsule exterior shells",
+    "long-axis straight track",
+    "circular carrier track",
+    "central adjustment region",
+    "representative bead locations",
+    "translucent unknown linkage envelope"
+  ],
+  "motionTest": {
+    "linearAxis": "+Y",
+    "openPoseOffsetMm": 17.8,
+    "rotationLinkage": "mechanical; exact hidden curve unresolved",
+    "magneticDrive": false
+  },
+  "reviewBoundary": "Representative hidden geometry is deliberately translucent and cannot be used as a measured, manufacturing or exact-count claim."
+}

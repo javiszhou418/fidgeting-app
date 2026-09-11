@@ -1,0 +1,349 @@
+{
+  "schemaVersion": 2,
+  "gate": "07-material",
+  "materialRevision": 2,
+  "sourceGate06": {
+    "geometryRevision": 1,
+    "blendPath": "unity/FidgetingApp/ArtSource/ModelPipeline/magnetic-slide-tile/evidence/06-geometry/rev-001/magnetic-slide-tile-geometry-r001.blend",
+    "sha256Before": "dae227b2810e4c264b856bd4539e10d6a96d807e8ec68ca9b0a8e371d1be72ae",
+    "sha256After": "dae227b2810e4c264b856bd4539e10d6a96d807e8ec68ca9b0a8e371d1be72ae",
+    "unchanged": true,
+    "evaluatedGeometryDigest": "85bd7dd237c6822c72e575c9a23085eec9a2f28d7afea3a5bf0f13fdc4ebd90f"
+  },
+  "geometryPreservation": {
+    "digestBefore": "85bd7dd237c6822c72e575c9a23085eec9a2f28d7afea3a5bf0f13fdc4ebd90f",
+    "digestAfterMaterialAssignment": "85bd7dd237c6822c72e575c9a23085eec9a2f28d7afea3a5bf0f13fdc4ebd90f",
+    "digestAfterRenders": "85bd7dd237c6822c72e575c9a23085eec9a2f28d7afea3a5bf0f13fdc4ebd90f",
+    "unchanged": true,
+    "boundsMm": [
+      50.0,
+      31.0,
+      12.0
+    ],
+    "axisPointWorldMm": [
+      0.0,
+      -9.5,
+      0.0
+    ],
+    "matricesUnchanged": true,
+    "envelopeType": "EMPTY",
+    "envelopeHideRender": true,
+    "envelopeGeometry": "none",
+    "smoothProfileSegmentsPerSemicircle": 256,
+    "visibleModelMeshes": [
+      "LowerBody_Fixed_CleanPlane",
+      "UpperCapsule_Moving"
+    ],
+    "hiddenMechanismMeshes": [],
+    "artworkOrnamentGeometryCount": 0,
+    "animatedOrConstrainedObjects": [],
+    "pass": true
+  },
+  "materialZones": {
+    "mirror-silver-exterior-body": {
+      "material": "M07R2_MirrorSilver_VisualApprox",
+      "baseColor": [
+        0.72,
+        0.78,
+        0.86,
+        1.0
+      ],
+      "metallic": 1.0,
+      "roughness": 0.095,
+      "ior": 1.5,
+      "coatWeight": 0.32,
+      "coatRoughness": 0.055,
+      "transmissionWeight": 0.0,
+      "objects": [
+        "LowerBody_Fixed_CleanPlane",
+        "UpperCapsule_Moving side-and-bottom"
+      ],
+      "support": "Official exact product page confirms Steel. Images support a bright mirror-silver response; alloy and finishing process remain unknown.",
+      "certainty": "confirmed-steel-visual-finish-provisional",
+      "actualPbr": {
+        "metallic": 1.0,
+        "roughness": 0.0949999988079071,
+        "ior": 1.5,
+        "coatWeight": 0.3199999928474426,
+        "coatRoughness": 0.054999999701976776,
+        "transmissionWeight": 0.0,
+        "thinFilmIor": 1.3300000429153442,
+        "thinFilmThicknessNm": 0.0
+      }
+    },
+    "source-derived-dark-etched-motif": {
+      "material": "M07R2_DarkEtch_CrystalIridescent_Recommended",
+      "faces": "UpperCapsule_Moving top-cap shader only",
+      "method": "image-mask-to-base-color-and-inverted-bump; no mesh displacement",
+      "motifKind": "visual-trace-not-production-vector",
+      "motifMaskSha256": "8250df70d2286849db353862283b0d3db9c66e1ac92bed3795bcb5377a431c36",
+      "motifMixFactor": 0.94,
+      "etchBumpStrength": 0.24,
+      "etchDepthIllusionMm": 0.06,
+      "certainty": "source-derived-visual-trace-production-process-unknown"
+    },
+    "crystal-iridescent-face": {
+      "material": "M07R2_DarkEtch_CrystalIridescent_Recommended",
+      "baseColor": [
+        0.19,
+        0.075,
+        0.44,
+        1.0
+      ],
+      "metallic": 0.0,
+      "roughness": 0.075,
+      "ior": 1.46,
+      "coatWeight": 0.88,
+      "coatRoughness": 0.035,
+      "transmissionWeight": 0.48,
+      "thinFilmIor": 1.38,
+      "thinFilmThicknessNm": 520.0,
+      "etchBumpStrength": 0.24,
+      "etchDepthIllusionMm": 0.06,
+      "motifDarkColor": [
+        0.006,
+        0.008,
+        0.014,
+        1.0
+      ],
+      "motifMixFactor": 0.94,
+      "faces": "UpperCapsule_Moving top-cap shader only",
+      "method": "clear-coat/transmission over procedural purple-blue-green interference with Principled thin film",
+      "support": "Exact-product images show bright specular highlights, depth/parallax cues, and purple-blue-green angle-dependent color.",
+      "certainty": "visual-approximation",
+      "actualPbr": {
+        "metallic": 0.0,
+        "roughness": 0.07500000298023224,
+        "ior": 1.4600000381469727,
+        "coatWeight": 0.8799999952316284,
+        "coatRoughness": 0.03500000014901161,
+        "transmissionWeight": 0.47999998927116394,
+        "thinFilmIor": 1.3799999952316284,
+        "thinFilmThicknessNm": 520.0
+      }
+    }
+  },
+  "materialAssignments": {
+    "slots": {
+      "LowerBody_Fixed_CleanPlane": [
+        "M07R2_MirrorSilver_VisualApprox"
+      ],
+      "UpperCapsule_Moving": [
+        "M07R2_MirrorSilver_VisualApprox",
+        "M07R2_DarkEtch_CrystalIridescent_Recommended"
+      ]
+    },
+    "upperFaces": {
+      "topCapFaceCount": 1,
+      "frameFaceCount": 514
+    },
+    "zoneCount": 3,
+    "pass": true
+  },
+  "motifProvenance": {
+    "schemaVersion": 1,
+    "kind": "visual-trace-not-production-vector",
+    "sourceAssetIds": [
+      "slider-intake-nxedc-ref-01"
+    ],
+    "sourcePath": "unity/FidgetingApp/ArtSource/ModelPipeline/magnetic-slide-tile/evidence/01-intake/rev-002/external-nxedc/reference-01.jpg",
+    "sourceSha256": "381f518f2ad4a58f96f99ed8152b9503360b4681cc0b2424e5f24aea38dfd97f",
+    "sourceCropNormalized": [
+      0.2890625,
+      0.142578125,
+      0.7109375,
+      0.8369140625
+    ],
+    "sourceCropPixels": [
+      370,
+      182,
+      910,
+      1071
+    ],
+    "recipe": {
+      "outputSizePx": [
+        620,
+        1000
+      ],
+      "grayscale": "Pillow ImageOps.grayscale",
+      "localContrast": "GaussianBlur radius 12; localMean - gray >= 20",
+      "absoluteDark": "gray <= 70",
+      "interiorMask": "analytic capsule inset 45 px",
+      "cleanup": "MaxFilter 3; MedianFilter 3; MinFilter 3; MaxFilter 3"
+    },
+    "outputPath": "source-derived-motif-visual-trace.png",
+    "outputSha256": "8250df70d2286849db353862283b0d3db9c66e1ac92bed3795bcb5377a431c36",
+    "foregroundCoverage": 0.387056,
+    "limitations": [
+      "The mask is a visual trace from a raster closeup, not an exact production vector.",
+      "Dark low-luma substrate regions can enter the trace; the Blender shader uses restrained strength.",
+      "No hidden manufacturing path, engraving depth, or production tolerance is asserted."
+    ],
+    "pass": true,
+    "registeredAs": "visual-trace-not-production-vector"
+  },
+  "sourceLinks": [
+    {
+      "assetId": "slider-intake-haloo-official-03",
+      "role": "official three-color face lineup; silver perimeter, opaque motif, bright angle-varying face",
+      "path": "unity/FidgetingApp/ArtSource/ModelPipeline/magnetic-slide-tile/evidence/01-intake/rev-002/haloo-official/03.png"
+    },
+    {
+      "assetId": "slider-intake-haloo-official-04",
+      "role": "official high-resolution purple face closeup; motif boundaries and face highlights",
+      "path": "unity/FidgetingApp/ArtSource/ModelPipeline/magnetic-slide-tile/evidence/01-intake/rev-002/haloo-official/04.png"
+    },
+    {
+      "assetId": "slider-intake-haloo-official-06",
+      "role": "official oblique open view; edge stacking and purple-blue interference",
+      "path": "unity/FidgetingApp/ArtSource/ModelPipeline/magnetic-slide-tile/evidence/01-intake/rev-002/haloo-official/06.png"
+    },
+    {
+      "assetId": "slider-intake-haloo-official-08",
+      "role": "official front/open view; bright crystalline highlight breakup",
+      "path": "unity/FidgetingApp/ArtSource/ModelPipeline/magnetic-slide-tile/evidence/01-intake/rev-002/haloo-official/08.png"
+    },
+    {
+      "assetId": "slider-intake-nxedc-ref-01",
+      "role": "exact-product front closeup used for deterministic motif visual trace",
+      "path": "unity/FidgetingApp/ArtSource/ModelPipeline/magnetic-slide-tile/evidence/01-intake/rev-002/external-nxedc/reference-01.jpg"
+    },
+    {
+      "assetId": "slider-intake-nxedc-ref-05",
+      "role": "exact-product macro oblique closeup; parallax, edge stack, green-blue-pink response",
+      "path": "unity/FidgetingApp/ArtSource/ModelPipeline/magnetic-slide-tile/evidence/01-intake/rev-002/external-nxedc/reference-05.jpg"
+    }
+  ],
+  "sourceClaimIds": [
+    "slider-analysis-claim-material-language"
+  ],
+  "manufacturingAnalysis": {
+    "confirmed": [
+      {
+        "claim": "The exact HALOOPLAYER product page lists Material: Steel.",
+        "confidence": "high",
+        "url": "https://www.halooplayer.com/halo-heart-rhythm-haloo-player-edc-push-slider--high-tech-stress-relief-toy-fingertip-gyro--hand-fidget-gadget-p6875695.html"
+      }
+    ],
+    "visualCues": [
+      "Narrow white mirror highlights and a bright perimeter support polished metal, but do not identify alloy or plating.",
+      "The opaque dark motif keeps crisp edges over changing purple-blue-green fields.",
+      "Oblique closeups show highlight separation and apparent depth between motif, color field, and perimeter.",
+      "Color shifts and patchy organic cells fit nacre/abalone; smooth angle-dependent bands also fit dichroic film or interference pigment."
+    ],
+    "recommendedProvisionalStack": [
+      {
+        "layer": "mirror-polished steel frame/body",
+        "confidence": "medium",
+        "alternatives": [
+          "polished steel with clear protective finish",
+          "steel substrate with bright plating"
+        ]
+      },
+      {
+        "layer": "opaque dark motif",
+        "confidence": "medium",
+        "alternatives": [
+          "blackened/annealed steel mark",
+          "etched and dark-filled recess",
+          "laser-cut black overlay"
+        ]
+      },
+      {
+        "layer": "iridescent substrate",
+        "confidence": "medium-low",
+        "alternatives": [
+          "mother-of-pearl/abalone inlay",
+          "dichroic multilayer film",
+          "interference-pigment layer"
+        ]
+      },
+      {
+        "layer": "clear protective cap",
+        "confidence": "medium-low",
+        "alternatives": [
+          "clear resin",
+          "clear polymer lens",
+          "glass/crystal cover"
+        ]
+      }
+    ],
+    "researchLinks": [
+      "https://doi.org/10.1038/s41598-021-99327-4",
+      "https://www.antalis.fr/mediashare/g4media/pdf/TS_EN_3M_GLASS_FINISHES_DICHROIC_TECH_DATASHEET_00_11022026.pdf",
+      "https://www.troteclaser.com/en/helpcenter/materials/application-techniques/laser-marking-steel-through-annealing-process"
+    ],
+    "productionSpecificationEstablished": false
+  },
+  "variants": {
+    "A": {
+      "label": "A  MIRROR SILVER + MONO ETCH",
+      "material": "M07R2_VariantA_MonochromeEtch",
+      "transmissionWeight": 0.0,
+      "roughness": 0.12,
+      "thinFilmThicknessNm": 0.0,
+      "motifMixFactor": 0.82
+    },
+    "B": {
+      "label": "B  DARK ETCH + CRYSTAL IRIDESCENCE\nRECOMMENDED / SOURCE-FAITHFUL",
+      "material": "M07R2_DarkEtch_CrystalIridescent_Recommended",
+      "transmissionWeight": 0.48,
+      "roughness": 0.075,
+      "thinFilmThicknessNm": 520.0,
+      "motifMixFactor": 0.94
+    },
+    "C": {
+      "label": "C  CLEARER CRYSTAL-HEAVY",
+      "material": "M07R2_VariantC_ClearCrystal",
+      "transmissionWeight": 0.62,
+      "roughness": 0.045,
+      "thinFilmThicknessNm": 610.0,
+      "motifMixFactor": 0.68
+    }
+  },
+  "uncertaintyPolicy": {
+    "pbrValuesAreProductionSpecifications": false,
+    "motifIsExactProductionVector": false,
+    "alloyKnown": false,
+    "coatingKnown": false,
+    "clearLayerMaterialKnown": false,
+    "iridescentSubstrateKnown": false,
+    "hiddenRatchetConstructionKnown": false
+  },
+  "mechanismDecisionMetadata": {
+    "decisionState": "locked-user-authoritative",
+    "deliveryState": "specified-only-runtime-and-hardware-validation-pending",
+    "rotationRangeDegrees": 360,
+    "detentStepDegrees": 12,
+    "detentCount": 30,
+    "semantics": "ratchet",
+    "physicalAndHapticConsumeSameSetting": true,
+    "runtimeChanged": false,
+    "hapticsChanged": false,
+    "unityChanged": false,
+    "hiddenConstruction": "unknown"
+  },
+  "neutralReveal": {
+    "lights": [
+      "M07R2_Key_Softbox",
+      "M07R2_Fill_Softbox",
+      "M07R2_Rim_Strip",
+      "M07R2_Face_Reveal"
+    ],
+    "worldStrength": 0.9,
+    "finalLightingOrEnvironment": false,
+    "variantBoard": "material-process-variant-board.png",
+    "materialBoard": "neutral-pbr-material-board.png",
+    "materialCloseup": "neutral-pbr-material-closeup.png"
+  },
+  "scope": {
+    "geometryChanged": false,
+    "artworkGeometryAdded": false,
+    "hiddenMechanismAdded": false,
+    "runtimeChanged": false,
+    "hapticsChanged": false,
+    "unityAssetChanged": false,
+    "gate08Entered": false
+  },
+  "blender": "5.2.0 LTS"
+}

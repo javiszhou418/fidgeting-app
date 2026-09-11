@@ -1,0 +1,29 @@
+{
+  "schema": "premium-display-case-entry-motion-quality.v1",
+  "status": "pass",
+  "reviewState": "ready_for_review",
+  "metrics": {
+    "primaryMotionCount": 1,
+    "movingAxes": [
+      "screen-y"
+    ],
+    "rotationKeyCount": 0,
+    "scaleKeyCount": 0,
+    "highlightCount": 1,
+    "objectReplacementCount": 0
+  },
+  "artifacts": {
+    "gif": {
+      "path": "entry-only-motion.gif",
+      "sha256": "69dcdc6e7af71eab22df70d6e7ef302f590ff3ebdbfd4390c058ade04bccfc31"
+    },
+    "contact": {
+      "path": "entry-only-contact-sheet.png",
+      "sha256": "c55ccba05450fc7ee0cb3c0ffcaf816bf0edb106f932fb195be1a7fb855bd3cb"
+    },
+    "board": {
+      "path": "entry-only-analysis-board.png",
+      "sha256": "63195456b020bca20c55a1c1291ce10a05604877f4b55a70bd95fbf220a08dc1"
+    }
+  }
+}

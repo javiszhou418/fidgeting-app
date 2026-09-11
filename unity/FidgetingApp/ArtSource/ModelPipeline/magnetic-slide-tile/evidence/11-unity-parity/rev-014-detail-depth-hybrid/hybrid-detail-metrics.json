@@ -1,0 +1,69 @@
+{
+  "schemaVersion": 1,
+  "source": "same-camera real MeshyEDC.unity macro renders",
+  "comparisonMask": "pixel-aligned intersection of rev12 and rev14 red regions",
+  "tolerance": "hybrid/rev12 >= 0.95 for primary detail metrics",
+  "metrics": {
+    "rev12": {
+      "redPixelFraction": 0.23165375,
+      "comparisonPixelFraction": 0.154538125,
+      "laplacianMean": 0.010685576125979424,
+      "laplacianP90": 0.03326663374900818,
+      "localVariance": 0.00010246932652080432,
+      "localDifferenceP90": 0.008337259292602539,
+      "edgeDensity": 0.13661272905957672,
+      "clippedFraction": 4.4375e-05
+    },
+    "rev13": {
+      "redPixelFraction": 0.24599125,
+      "comparisonPixelFraction": 0.154538125,
+      "laplacianMean": 0.005717907566577196,
+      "laplacianP90": 0.015007063746452332,
+      "localVariance": 3.807739994954318e-05,
+      "localDifferenceP90": 0.0013843178749084473,
+      "edgeDensity": 0.07970120641751025,
+      "clippedFraction": 4.4375e-05
+    },
+    "hybrid": {
+      "redPixelFraction": 0.1920775,
+      "comparisonPixelFraction": 0.154538125,
+      "laplacianMean": 0.01092320866882801,
+      "laplacianP90": 0.033245474100112915,
+      "localVariance": 0.00012988699018023908,
+      "localDifferenceP90": 0.012315288186073303,
+      "edgeDensity": 0.1328434326480925,
+      "clippedFraction": 4.4375e-05
+    }
+  },
+  "hybridPhoneMetrics": {
+    "redPixelFraction": 0.08285757061582992,
+    "comparisonPixelFraction": 0.08285757061582992,
+    "laplacianMean": 0.013316304422914982,
+    "laplacianP90": 0.04100625962018967,
+    "localVariance": 9.565349319018424e-05,
+    "localDifferenceP90": 0.008337259292602539,
+    "edgeDensity": 0.16354808702577178,
+    "clippedFraction": 0.0002595069368200419
+  },
+  "hybridToRev12Ratios": {
+    "laplacianMean": 1.022238627103207,
+    "laplacianP90": 0.9993639377805729,
+    "localVariance": 1.2675694726447544,
+    "localDifferenceP90": 1.477138679973691,
+    "edgeDensity": 0.9724088930992629
+  },
+  "checks": {
+    "laplacianAtLeastRev12": true,
+    "localVarianceAtLeastRev12": true,
+    "edgeDensityAtLeastRev12": true,
+    "microflakeDetailVisible": true,
+    "phoneDistanceMicroflakeVisible": true,
+    "noWashout": true,
+    "parallaxAtLeastRev13Target": true,
+    "boundsUnchanged": true,
+    "collidersAndRuntimeUnchanged": true,
+    "sideAndUndersideArtworkZero": true,
+    "build44Blocked": true
+  },
+  "pass": true
+}

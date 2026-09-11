@@ -1,0 +1,643 @@
+{
+  "schemaVersion": 1,
+  "gate": "08-lighting",
+  "revision": 4,
+  "status": "ready-for-interactive-review-not-approved",
+  "rootCauseCorrection": {
+    "rev3Preserved": true,
+    "hdrImport": "Rev 3 let Unity import the EXR as R8G8B8A8_UNorm, clipping all radiance above 1. Rev 4 pins RGBAHalf.",
+    "orientation": "Rev 4 maps Blender (X,Y,Z) to Unity (X,Z,Y), including the equirectangular horizontal sign and vertical flip verified by cardinal direction probes.",
+    "groundAndDirectLight": "Removed from both parity scenes. Gate 09 owns shipping ground and environment.",
+    "display": "Both engines emit scene-linear HDR EXR and use neutral-display-v1 after render."
+  },
+  "alignmentPolicy": {
+    "resolution": [
+      1400,
+      1100
+    ],
+    "sameFullFrame": true,
+    "independentCropping": false,
+    "postAlignment": false,
+    "groundCount": 0
+  },
+  "environment": {
+    "sha256": "e0a2d012a06e599f00bfbdd152351a726df186e212c1bad394284db1de1c3d90",
+    "singleReflectionSource": true,
+    "nonzeroRgb": true,
+    "seamMaxLinearDelta": 0.0,
+    "minimum": 0.13065268099308014,
+    "maximum": 5.664282321929932,
+    "dynamicRangeStopsP01P99": 5.210478916272989,
+    "directionProbe": {
+      "blenderPositiveX": [
+        0.8818359375,
+        0.88330078125,
+        0.88525390625
+      ],
+      "blenderNegativeX": [
+        0.33447265625,
+        0.33740234375,
+        0.33984375
+      ],
+      "blenderPositiveY": [
+        0.70703125,
+        0.7109375,
+        0.71240234375
+      ],
+      "blenderNegativeY": [
+        0.83447265625,
+        0.83642578125,
+        0.8388671875
+      ],
+      "blenderPositiveZ": [
+        0.08331298828125,
+        0.08642578125,
+        0.08856201171875
+      ],
+      "blenderNegativeZ": [
+        0.12646484375,
+        0.12646484375,
+        0.12646484375
+      ]
+    },
+    "unityDirectionMarkerMaxAbsoluteDelta": 0.000171065331,
+    "unitySourceTextureFormat": "R16G16B16A16_SFloat",
+    "unitySourceMaximum": 5.6640625,
+    "unityCubemapMaximum": 4.81640625
+  },
+  "cameraAndBounds": {
+    "blenderRecipe": {
+      "resolution": [
+        1400,
+        1100
+      ],
+      "locationMm": [
+        74.0,
+        -116.0,
+        72.0
+      ],
+      "targetMm": [
+        0.0,
+        -2.0,
+        5.0
+      ],
+      "lensMm": 76.0,
+      "sensorWidthMm": 36.0,
+      "sensorFit": "HORIZONTAL"
+    },
+    "unity": {
+      "position": [
+        0.074,
+        0.072,
+        -0.116
+      ],
+      "rotation": [
+        0.217664659,
+        -0.276507169,
+        0.0644515,
+        0.933815837
+      ],
+      "focalLengthMm": 76,
+      "sensorSizeMm": [
+        36,
+        28.2857151
+      ],
+      "viewMatrix": [
+        0.838779569,
+        -1.49011612e-08,
+        0.5444712,
+        0.00108897313,
+        -0.240743339,
+        0.8969362,
+        0.370874822,
+        -0.00374292023,
+        0.488355935,
+        0.44216,
+        -0.752331734,
+        -0.155244336,
+        0,
+        0,
+        0,
+        1
+      ],
+      "projectionMatrix": [
+        4.03030252,
+        0,
+        0,
+        0,
+        0,
+        5.373737,
+        0,
+        0,
+        0,
+        0,
+        -1.002002,
+        -0.02002002,
+        0,
+        0,
+        -1,
+        0
+      ]
+    },
+    "fullModelAlignment": {
+      "blender": {
+        "bbox": [
+          293,
+          252,
+          1110,
+          856
+        ],
+        "centroid": [
+          698.0442842191552,
+          549.1336079561565
+        ],
+        "pixels": 387926
+      },
+      "unity": {
+        "bbox": [
+          293,
+          252,
+          1110,
+          856
+        ],
+        "centroid": [
+          698.0415306885263,
+          549.1274559843271
+        ],
+        "pixels": 387930
+      },
+      "intersectionOverUnion": 0.9999432900533332
+    }
+  },
+  "displayTransform": {
+    "name": "neutral-display-v1",
+    "input": "scene-linear Rec.709/D65",
+    "exposureMultiplier": 1.0,
+    "shoulder": "x/(1+0.18x)",
+    "encoding": "IEC 61966-2-1 sRGB",
+    "backgroundLinear": [
+      0.03500000014901161,
+      0.03500000014901161,
+      0.03500000014901161
+    ]
+  },
+  "diagnostics": {
+    "reflection-only": {
+      "alignment": {
+        "blender": {
+          "bbox": [
+            218,
+            222,
+            1248,
+            770
+          ],
+          "centroid": [
+            650.2181250474921,
+            516.065922451489
+          ],
+          "pixels": 289522
+        },
+        "unity": {
+          "bbox": [
+            218,
+            223,
+            1249,
+            770
+          ],
+          "centroid": [
+            651.495003720264,
+            516.206561572107
+          ],
+          "pixels": 287614
+        },
+        "intersectionOverUnion": 0.993340977853916
+      },
+      "fullFrame": {
+        "ssim": 0.9864734027280476,
+        "meanAbsoluteError": 3.9253745079040527,
+        "heatmapAreaFractionOver24": 0.04885909090909091,
+        "deltaE76": {
+          "mean": 20.034475326538086,
+          "median": 21.0,
+          "p95": 29.017236709594727
+        }
+      },
+      "background": {
+        "meanAbsoluteError": 0.0,
+        "identical": true
+      },
+      "hotspot": {
+        "blender": {
+          "bbox": [
+            280,
+            264,
+            668,
+            523
+          ],
+          "centroid": [
+            483.78080383435895,
+            383.31852799610067
+          ],
+          "pixels": 49239,
+          "aspect": 1.4961538461538462
+        },
+        "unity": {
+          "bbox": [
+            294,
+            280,
+            659,
+            501
+          ],
+          "centroid": [
+            511.13368908364845,
+            390.44654910414533
+          ],
+          "pixels": 28297,
+          "aspect": 1.6486486486486487
+        }
+      },
+      "clipping": {
+        "blender": 0.017670779220779222,
+        "unity": 0.009358441558441559
+      }
+    },
+    "clay": {
+      "alignment": {
+        "blender": {
+          "bbox": [
+            293,
+            252,
+            1110,
+            856
+          ],
+          "centroid": [
+            698.0442842191552,
+            549.1336079561565
+          ],
+          "pixels": 387926
+        },
+        "unity": {
+          "bbox": [
+            293,
+            252,
+            1110,
+            856
+          ],
+          "centroid": [
+            698.0415306885263,
+            549.1274559843271
+          ],
+          "pixels": 387930
+        },
+        "intersectionOverUnion": 0.9999432900533332
+      },
+      "fullFrame": {
+        "ssim": 0.9863911028521898,
+        "meanAbsoluteError": 6.347598075866699,
+        "heatmapAreaFractionOver24": 0.07109805194805195,
+        "deltaE76": {
+          "mean": 24.223918914794922,
+          "median": 20.0,
+          "p95": 48.010414123535156
+        }
+      },
+      "background": {
+        "meanAbsoluteError": 0.0,
+        "identical": true
+      },
+      "hotspot": {
+        "blender": {
+          "pixels": 0,
+          "centroid": null,
+          "bbox": null,
+          "aspect": null
+        },
+        "unity": {
+          "bbox": [
+            293,
+            288,
+            1110,
+            699
+          ],
+          "centroid": [
+            704.2586477987421,
+            515.5338050314465
+          ],
+          "pixels": 1272,
+          "aspect": 1.9854368932038835
+        }
+      },
+      "clipping": {
+        "blender": 0.0,
+        "unity": 8.181818181818182e-05
+      },
+      "gradient": {
+        "blender": {
+          "mean": 184.35452270507812,
+          "x": 0.017806488047055025,
+          "y": -0.08087787772057817,
+          "magnitude": 0.08281486654674212
+        },
+        "unity": {
+          "mean": 165.1858367919922,
+          "x": -0.007368735042110015,
+          "y": -0.10117959827327315,
+          "magnitude": 0.10144756952663657
+        },
+        "contactShadow": "not-applicable-no-ground"
+      }
+    },
+    "silver": {
+      "alignment": {
+        "blender": {
+          "bbox": [
+            218,
+            222,
+            1248,
+            770
+          ],
+          "centroid": [
+            650.2181250474921,
+            516.065922451489
+          ],
+          "pixels": 289522
+        },
+        "unity": {
+          "bbox": [
+            218,
+            223,
+            1249,
+            770
+          ],
+          "centroid": [
+            651.495003720264,
+            516.206561572107
+          ],
+          "pixels": 287614
+        },
+        "intersectionOverUnion": 0.993340977853916
+      },
+      "fullFrame": {
+        "ssim": 0.9890445285257121,
+        "meanAbsoluteError": 0.6032036542892456,
+        "heatmapAreaFractionOver24": 0.0020006493506493504,
+        "deltaE76": {
+          "mean": 3.011913537979126,
+          "median": 2.2360680103302,
+          "p95": 8.062257766723633
+        }
+      },
+      "background": {
+        "meanAbsoluteError": 0.0,
+        "identical": true
+      },
+      "hotspot": {
+        "blender": {
+          "bbox": [
+            278,
+            263,
+            668,
+            523
+          ],
+          "centroid": [
+            481.89951506018275,
+            383.20962537916114
+          ],
+          "pixels": 51759,
+          "aspect": 1.4980842911877394
+        },
+        "unity": {
+          "bbox": [
+            282,
+            267,
+            667,
+            519
+          ],
+          "centroid": [
+            482.21865008880997,
+            383.9837773830669
+          ],
+          "pixels": 50670,
+          "aspect": 1.5256916996047432
+        }
+      },
+      "clipping": {
+        "blender": 0.019078571428571427,
+        "unity": 0.01921103896103896
+      }
+    },
+    "crystal": {
+      "alignment": {
+        "blender": {
+          "bbox": [
+            293,
+            252,
+            1110,
+            739
+          ],
+          "centroid": [
+            698.615123685776,
+            493.37852325666887
+          ],
+          "pixels": 299226
+        },
+        "unity": {
+          "bbox": [
+            293,
+            252,
+            1110,
+            739
+          ],
+          "centroid": [
+            698.6172784632454,
+            493.370787493149
+          ],
+          "pixels": 299228
+        },
+        "intersectionOverUnion": 0.9999131132201577
+      },
+      "fullFrame": {
+        "ssim": 0.956330424764838,
+        "meanAbsoluteError": 1.8309268951416016,
+        "heatmapAreaFractionOver24": 0.04351883116883117,
+        "deltaE76": {
+          "mean": 12.016706466674805,
+          "median": 11.0,
+          "p95": 31.827661514282227
+        }
+      },
+      "background": {
+        "meanAbsoluteError": 0.0,
+        "identical": true
+      },
+      "hotspot": {
+        "blender": {
+          "bbox": [
+            362,
+            388,
+            1104,
+            626
+          ],
+          "centroid": [
+            794.2769130998703,
+            546.2992866407263
+          ],
+          "pixels": 3084,
+          "aspect": 3.1087866108786613
+        },
+        "unity": {
+          "bbox": [
+            362,
+            382,
+            1106,
+            626
+          ],
+          "centroid": [
+            785.8949848535847,
+            548.0945809491753
+          ],
+          "pixels": 2971,
+          "aspect": 3.0408163265306123
+        }
+      },
+      "clipping": {
+        "blender": 0.0014487012987012987,
+        "unity": 0.0014428571428571429
+      }
+    },
+    "full-model": {
+      "alignment": {
+        "blender": {
+          "bbox": [
+            293,
+            252,
+            1110,
+            856
+          ],
+          "centroid": [
+            698.0442842191552,
+            549.1336079561565
+          ],
+          "pixels": 387926
+        },
+        "unity": {
+          "bbox": [
+            293,
+            252,
+            1110,
+            856
+          ],
+          "centroid": [
+            698.0415306885263,
+            549.1274559843271
+          ],
+          "pixels": 387930
+        },
+        "intersectionOverUnion": 0.9999432900533332
+      },
+      "fullFrame": {
+        "ssim": 0.951044335828324,
+        "meanAbsoluteError": 2.543285369873047,
+        "heatmapAreaFractionOver24": 0.04559350649350649,
+        "deltaE76": {
+          "mean": 12.45745849609375,
+          "median": 12.041594505310059,
+          "p95": 30.610456466674805
+        }
+      },
+      "background": {
+        "meanAbsoluteError": 0.0,
+        "identical": true
+      },
+      "hotspot": {
+        "blender": {
+          "bbox": [
+            362,
+            388,
+            1104,
+            747
+          ],
+          "centroid": [
+            793.0481301358377,
+            602.0134160657387
+          ],
+          "pixels": 5963,
+          "aspect": 2.063888888888889
+        },
+        "unity": {
+          "bbox": [
+            362,
+            382,
+            1106,
+            747
+          ],
+          "centroid": [
+            785.6590592334495,
+            603.6634146341463
+          ],
+          "pixels": 5740,
+          "aspect": 2.0355191256830603
+        }
+      },
+      "clipping": {
+        "blender": 0.0028064935064935066,
+        "unity": 0.0027987012987012987
+      }
+    },
+    "regional": {
+      "silver": {
+        "blender": {
+          "luminanceMean": 69.20457458496094,
+          "luminanceMedian": 67.8431396484375,
+          "chromaMean": 1.541544795036316,
+          "chromaP95": 2.2360680103302
+        },
+        "unity": {
+          "luminanceMean": 69.46404266357422,
+          "luminanceMedian": 68.23529052734375,
+          "chromaMean": 2.761047840118408,
+          "chromaP95": 4.123105525970459
+        },
+        "deltaE76": {
+          "mean": 3.011913537979126,
+          "median": 2.2360680103302,
+          "p95": 8.062257766723633
+        }
+      },
+      "bloodRed": {
+        "pixelCount": 79586,
+        "blender": {
+          "luminanceMean": 37.56028747558594,
+          "luminanceMedian": 37.64706039428711,
+          "chromaMean": 12.804241180419922,
+          "chromaP95": 23.76972770690918
+        },
+        "unity": {
+          "luminanceMean": 36.768531799316406,
+          "luminanceMedian": 36.07843017578125,
+          "chromaMean": 11.22883415222168,
+          "chromaP95": 34.1760139465332
+        },
+        "deltaE76": {
+          "mean": 15.619688034057617,
+          "median": 14.0,
+          "p95": 32.2916374206543
+        }
+      }
+    }
+  },
+  "humanVisualGate": {
+    "tooDark": false,
+    "brightNeutralSilverVisible": true,
+    "deepBloodRedVisible": true,
+    "motifCrisp": true,
+    "visiblySameObject": true,
+    "reviewable": true,
+    "approved": false,
+    "note": "Direct inspection of the lossless board found no dark-object, ground, background, duplicate-highlight, or gross material mismatch."
+  },
+  "shippingUntouched": true,
+  "gate09Advanced": false,
+  "gate11Advanced": false,
+  "gate12Advanced": false
+}

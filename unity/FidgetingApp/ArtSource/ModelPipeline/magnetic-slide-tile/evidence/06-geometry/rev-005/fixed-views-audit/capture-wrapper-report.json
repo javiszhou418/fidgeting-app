@@ -1,0 +1,27 @@
+{
+  "cli_anything": {
+    "installed": true,
+    "preview_available": false,
+    "path": "/Users/jiawei.zhou/.local/bin/cli-anything-blender",
+    "help_returncode": 0,
+    "preview_returncode": 2
+  },
+  "capture_backend": "blender-bpy-fallback",
+  "blender": "/opt/homebrew/bin/blender",
+  "command": [
+    "/opt/homebrew/bin/blender",
+    "--background",
+    "/Users/jiawei.zhou/Documents/Fidgeting app/unity/FidgetingApp/ArtSource/ModelPipeline/magnetic-slide-tile/evidence/06-geometry/rev-005/magnetic-slide-tile-geometry-r005.blend",
+    "--python",
+    "/Users/jiawei.zhou/Documents/Fidgeting app/skills/fidgeting-model-pipeline/scripts/blender_capture_standard_views.py",
+    "--",
+    "--output",
+    "/Users/jiawei.zhou/Documents/Fidgeting app/unity/FidgetingApp/ArtSource/ModelPipeline/magnetic-slide-tile/evidence/06-geometry/rev-005/fixed-views-audit",
+    "--run-id",
+    "6414ae1e-cc35-4ace-8402-be498a74b6e7"
+  ],
+  "blender_returncode": 0,
+  "verified_capture": true,
+  "missing_views": [],
+  "run_id": "6414ae1e-cc35-4ace-8402-be498a74b6e7"
+}

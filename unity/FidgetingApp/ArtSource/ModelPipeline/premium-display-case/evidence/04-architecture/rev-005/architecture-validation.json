@@ -1,0 +1,61 @@
+{
+  "schema": "premium-display-case-gate04-serial-architecture-validation.v1",
+  "modelId": "premium-display-case",
+  "gate": "04-architecture",
+  "architectureRevision": 2,
+  "evidenceRevision": 5,
+  "status": "pass",
+  "checks": {
+    "sourceContractRevision3": true,
+    "tenSourceClaims": true,
+    "presentationRootMotionOwner": true,
+    "oneRigidCaseInstance": true,
+    "wholeCaseOnly": true,
+    "nativePackExternal": true,
+    "toyCallerOwned": true,
+    "toyAngularVelocityZero": true,
+    "phaseOrder": true,
+    "entryRotationZero": true,
+    "showcaseAfterSettle": true,
+    "showcaseTranslationLocked": true,
+    "fourFiniteLightCues": true,
+    "noParticleEmitter": true,
+    "noPersistentLight": true,
+    "noProxy": true,
+    "noExplode": true,
+    "shippingDurationUnknown": true,
+    "phaseTimingUnknown": true,
+    "easingUnknown": true,
+    "zDistanceUnknown": true,
+    "lightTuningUnknown": true,
+    "internalExplodedNotReview": true,
+    "userReviewAssembledOnly": true,
+    "gate05Blocked": true,
+    "shippingBoundary": true
+  },
+  "metrics": {
+    "nodeCount": 13,
+    "phaseCount": 6,
+    "finiteLightCueCount": 4,
+    "reviewArtifactExplodedPartCount": 0,
+    "tunableRuntimeParameterCount": 17
+  },
+  "imageReport": {
+    "path": "unity/FidgetingApp/ArtSource/ModelPipeline/premium-display-case/evidence/04-architecture/rev-005/whole-case-architecture-review.png",
+    "width": 3200,
+    "height": 3900,
+    "nonBlank": true
+  },
+  "truth": {
+    "architectureOnly": true,
+    "internalExplodedPlanOnly": true,
+    "shippingUnityChanged": false,
+    "buildInstallPhonePush": false
+  },
+  "artifactHashes": {
+    "architecture": "c6c179202ed7f964bb59796b26763693cb4f8a1a12e5604cb85aecdb0cd12feb",
+    "partTree": "c65af74c650923f7ed72dfe3b1257d76b7e49742990c855256579cc4037832be",
+    "explodedPlan": "e02f8ec2f4bf8e75b497f191cb2724ca4e8a8cbf2f1cadb4df9dbb81cfad87be",
+    "review": "4e552a35cd0c97c2e43c9f214d6ee8ccec173a2ff64eadea4509e437e68f78e7"
+  }
+}

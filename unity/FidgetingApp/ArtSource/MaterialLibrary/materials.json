@@ -1,0 +1,1290 @@
+{
+  "schemaVersion": 1,
+  "title": "Fidgeting 材质库",
+  "updatedAt": "2026-09-09",
+  "authority": "unity/FidgetingApp/ArtSource/MaterialLibrary/materials.json",
+  "generatedMarkdown": "unity/FidgetingApp/ArtSource/MaterialLibrary/materials.md",
+  "thumbnailDirectory": "unity/FidgetingApp/ArtSource/MaterialLibrary/spheres",
+  "colorConvention": {
+    "blenderBaseColor": "linear RGB 0-1, exactly what goes into Principled BSDF Base Color default_value",
+    "unityBaseColorHex": "sRGB hex. Unity treats non-HDR Color properties as sRGB and converts to linear on upload; the .mat stores the sRGB floats (Color32 in ThreeBladeMaterialFactory.cs, Color(...) in FanCardSceneBuilder.cs).",
+    "swatchHex": "derived: linear blender.baseColor converted to sRGB; a human anchor only, never a render target"
+  },
+  "promptTarget": {
+    "imageGenModel": "ChatGPT Image Gen",
+    "note": "唯一可用的图像生成模型。概念图属于 concept-only 分支，与 Rodin 同策略：永不晋升为几何或材质真值。",
+    "fixedStyleBlock": "Premium 3D studio product render of a real manufactured fidget object. Single hero object, centred, floating 2 mm above a matte dark studio floor with a soft contact shadow. Three-light rig: large soft key upper-left, soft fill right, thin top strip for edge sparkle. Neutral colour balance, AgX-like tone mapping, no lens flare, no bloom, no text, no logo, no hands, no background props. Materials exactly as called out; never glossy where the callout says satin or matte."
+  },
+  "families": [
+    {
+      "id": "steel",
+      "label": "钢 / 金属",
+      "labelEn": "Steel & metal"
+    },
+    {
+      "id": "dark-metal",
+      "label": "深色金属",
+      "labelEn": "Dark metal"
+    },
+    {
+      "id": "gold",
+      "label": "金色",
+      "labelEn": "Gold"
+    },
+    {
+      "id": "matte",
+      "label": "哑光 / 无反射",
+      "labelEn": "Matte"
+    },
+    {
+      "id": "environment",
+      "label": "环境",
+      "labelEn": "Environment"
+    },
+    {
+      "id": "control",
+      "label": "对照",
+      "labelEn": "Control"
+    }
+  ],
+  "statusLabels": {
+    "approved-gate07": "Gate 07 已批准",
+    "contract-locked": "合同锁定",
+    "shipping-unity": "Shipping Unity 材质",
+    "stale": "过期证据",
+    "proposed": "提案"
+  },
+  "materials": [
+    {
+      "id": "steel-satin",
+      "name": {
+        "zh": "拉丝缎面钢",
+        "en": "Satin steel"
+      },
+      "family": "steel",
+      "status": "approved-gate07",
+      "description": "均匀的缎面不锈钢。高光宽而柔，反射里能看见形体但读不出环境细节。是三叶金属陀螺主体（Rotor_Body）和盖面非车削区域的基础材质。",
+      "edgeBehavior": "倒角处高光收窄变亮，平面上高光扩散成柔和亮带；不出现镜面式清晰倒影。",
+      "imageGen": {
+        "phrases": [
+          "satin brushed stainless steel",
+          "soft wide specular highlight",
+          "fine uniform micro-grain",
+          "cool neutral grey metal, slightly warm in shadow"
+        ],
+        "avoid": [
+          "mirror polish",
+          "chrome",
+          "sharp environment reflections",
+          "brushed streaks visible from far away",
+          "blue tint"
+        ]
+      },
+      "blender": {
+        "authority": "blender-lookdev",
+        "materialName": "M_Steel_Satin",
+        "baseColor": [
+          0.78,
+          0.79,
+          0.8
+        ],
+        "metallic": 1,
+        "roughness": 0.36
+      },
+      "unity": {
+        "material": "M_GeeoneSatin",
+        "path": "unity/FidgetingApp/Assets/_Fidgeting/Generated/Materials/M_GeeoneSatin.mat",
+        "shader": "Universal Render Pipeline/Lit",
+        "baseColorHex": "#C6C8CA",
+        "metallic": 1,
+        "smoothness": 0.64,
+        "specularHighlights": true,
+        "environmentReflections": true,
+        "detail": "sandblast detail albedo + normal 0.10"
+      },
+      "usedBy": [
+        {
+          "model": "metal-three-blade",
+          "parts": [
+            "Rotor_Body",
+            "Cap_Top (非车削区)",
+            "Cap_Bottom (非车削区)"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "path": "unity/FidgetingApp/ArtSource/ModelPipeline/metal-three-blade/evidence/07-material/rev-005/lookdev_geeone.py",
+          "note": "mat_satin()"
+        },
+        {
+          "path": "unity/FidgetingApp/Assets/_Fidgeting/Editor/ThreeBladeMaterialFactory.cs",
+          "note": "M_GeeoneSatin"
+        }
+      ],
+      "parityNote": "Blender linear 0.78 ≈ sRGB #E5E6E7；Unity 存的是 sRGB #C6C8CA（linear ≈ 0.56）。两端数值未对齐，Gate 11 批准的是视觉结果。同名数值被当成不同色彩空间复制，是已知漂移。",
+      "thumbnail": {
+        "path": "unity/FidgetingApp/ArtSource/MaterialLibrary/spheres/steel-satin.png",
+        "sha256": "8c7588feea0eb3deb4720888947609b2c204b1929c2560c7cf5c25a5c6f48418"
+      }
+    },
+    {
+      "id": "steel-turned-disc",
+      "name": {
+        "zh": "车削同心纹钢盘",
+        "en": "Turned steel disc"
+      },
+      "family": "steel",
+      "status": "approved-gate07",
+      "description": "车床车出的同心圆纹钢面。高光沿径向拉成一条旋转的亮带，14 个平面切分区之间有明显的明暗台阶。只允许出现在盖面圆盘上（用户 2026-09-05）。",
+      "edgeBehavior": "亮带随视角围绕圆心转动；靛面不能被 sunburst 高光洗白，切分面之间的色阶必须保留。",
+      "imageGen": {
+        "phrases": [
+          "lathe-turned concentric rings",
+          "radial anisotropic highlight sweeping around the centre",
+          "14 faint planar sector facets",
+          "satin steel disc"
+        ],
+        "avoid": [
+          "sunburst washout",
+          "flat mirror disc",
+          "random scratches",
+          "brushed linear grain"
+        ]
+      },
+      "blender": {
+        "authority": "blender-lookdev",
+        "materialName": "M_Disc_Turned",
+        "baseColor": [
+          0.8,
+          0.81,
+          0.82
+        ],
+        "metallic": 1,
+        "roughness": 0.3,
+        "anisotropic": 0.4,
+        "anisotropicTangent": "radial Z (ShaderNodeTangent RADIAL)",
+        "bump": {
+          "type": "wave rings, 0.12 mm pitch",
+          "strength": 0.12,
+          "distance": 0.004
+        }
+      },
+      "unity": {
+        "material": "M_GeeoneDiscTurned",
+        "path": "unity/FidgetingApp/Assets/_Fidgeting/Generated/Materials/M_GeeoneDiscTurned.mat",
+        "shader": "Universal Render Pipeline/Lit",
+        "baseColorHex": "#CCCED0",
+        "metallic": 1,
+        "smoothness": 0.68,
+        "specularHighlights": true,
+        "environmentReflections": true,
+        "detail": "radial brush albedo + normal 0.05; URP Lit 无各向异性，靠贴图近似"
+      },
+      "usedBy": [
+        {
+          "model": "metal-three-blade",
+          "parts": [
+            "Cap_Top disc sectors",
+            "Cap_Bottom disc sectors"
+          ]
+        }
+      ],
+      "restrictions": [
+        "各向异性只允许出现在盖面圆盘，不得扩散到主体或轮毂。"
+      ],
+      "sources": [
+        {
+          "path": "unity/FidgetingApp/ArtSource/ModelPipeline/metal-three-blade/evidence/07-material/rev-005/lookdev_geeone.py",
+          "note": "mat_disc_turned(); rev-003 把 anisotropic 0.7 降到 0.4"
+        },
+        {
+          "path": "unity/FidgetingApp/Assets/_Fidgeting/Editor/ThreeBladeMaterialFactory.cs",
+          "note": "M_GeeoneDiscTurned"
+        }
+      ],
+      "parityNote": "同 steel-satin：Blender linear 0.80 vs Unity sRGB #CCCED0。URP Lit 无各向异性，Unity 用径向法线贴图近似。",
+      "thumbnail": {
+        "path": "unity/FidgetingApp/ArtSource/MaterialLibrary/spheres/steel-turned-disc.png",
+        "sha256": "497a3efe8bc6481e2fb4a74ada67cc93c24cb0d5c5ba029277ca922fe4e9eec7"
+      }
+    },
+    {
+      "id": "steel-bearing-dark",
+      "name": {
+        "zh": "深色轴承钢",
+        "en": "Dark bearing steel"
+      },
+      "family": "dark-metal",
+      "status": "approved-gate07",
+      "description": "接近黑色的轴承钢，用于轮毂芯和轴承座。金属度满，但因为颜色深，读起来更像深色缎面而不是亮金属；高光是一条窄而干净的冷灰线。",
+      "edgeBehavior": "只有边缘和曲率最大处出现细亮线；大面保持深灰，不反射环境色。",
+      "imageGen": {
+        "phrases": [
+          "dark bearing steel",
+          "near-black satin metal",
+          "thin cool highlight along the rim",
+          "recessed hub"
+        ],
+        "avoid": [
+          "glossy black plastic",
+          "pure black void",
+          "blue chrome",
+          "visible reflections of the room"
+        ]
+      },
+      "blender": {
+        "authority": "blender-lookdev",
+        "materialName": "M_Hub_Dark",
+        "baseColor": [
+          0.06,
+          0.06,
+          0.065
+        ],
+        "metallic": 1,
+        "roughness": 0.45
+      },
+      "unity": {
+        "material": "M_GeeoneHubDark",
+        "path": "unity/FidgetingApp/Assets/_Fidgeting/Generated/Materials/M_GeeoneHubDark.mat",
+        "shader": "Universal Render Pipeline/Lit",
+        "baseColorHex": "#141518",
+        "metallic": 1,
+        "smoothness": 0.55,
+        "specularHighlights": true,
+        "environmentReflections": true
+      },
+      "usedBy": [
+        {
+          "model": "metal-three-blade",
+          "parts": [
+            "Hub_Core",
+            "Hub_Seat_Top",
+            "Hub_Seat_Bottom"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "path": "unity/FidgetingApp/ArtSource/ModelPipeline/metal-three-blade/evidence/07-material/rev-005/lookdev_geeone.py",
+          "note": "mat_hub_dark()"
+        },
+        {
+          "path": "unity/FidgetingApp/Assets/_Fidgeting/Editor/ThreeBladeMaterialFactory.cs",
+          "note": "M_GeeoneHubDark"
+        }
+      ],
+      "parityNote": "Blender linear 0.06 ≈ sRGB #434344；Unity sRGB #141518（linear ≈ 0.007）。Unity 明显更黑。",
+      "thumbnail": {
+        "path": "unity/FidgetingApp/ArtSource/MaterialLibrary/spheres/steel-bearing-dark.png",
+        "sha256": "f987025211ccdabfbc4c06aab158162b5090ce2aae433abbffd5203f1e30939c"
+      }
+    },
+    {
+      "id": "bearing-steel",
+      "name": {
+        "zh": "轴承钢",
+        "en": "Bearing steel"
+      },
+      "family": "steel",
+      "status": "shipping-unity",
+      "description": "中灰色的抛光轴承钢，用于三叶结构里外露的轴承环。比缎面钢更亮、更冷，高光更集中。",
+      "imageGen": {
+        "phrases": [
+          "polished bearing steel ring",
+          "cool mid-grey metal",
+          "tight specular highlight",
+          "machined edge"
+        ],
+        "avoid": [
+          "chrome mirror",
+          "rust",
+          "warm brass tint"
+        ]
+      },
+      "blender": {
+        "authority": "derived-from-unity",
+        "derivation": "baseColor = sRGB→linear(unity.baseColorHex); roughness = 1 − smoothness",
+        "baseColor": [
+          0.1384,
+          0.162,
+          0.1845
+        ],
+        "metallic": 1,
+        "roughness": 0.24
+      },
+      "unity": {
+        "material": "M_BearingSteel",
+        "path": "unity/FidgetingApp/Assets/_Fidgeting/Generated/Materials/M_BearingSteel.mat",
+        "shader": "Universal Render Pipeline/Lit",
+        "baseColorHex": "#687077",
+        "metallic": 1,
+        "smoothness": 0.76,
+        "specularHighlights": true,
+        "environmentReflections": true
+      },
+      "usedBy": [
+        {
+          "model": "metal-three-blade",
+          "parts": [
+            "bearing ring"
+          ]
+        },
+        {
+          "model": "premium-display-case",
+          "parts": [
+            "enclosed three-blade toy (caller-owned)"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "path": "unity/FidgetingApp/Assets/_Fidgeting/Editor/ThreeBladeMaterialFactory.cs",
+          "note": "M_BearingSteel Color32(0x68,0x70,0x77) metallic 1 smoothness 0.76"
+        }
+      ],
+      "thumbnail": {
+        "path": "unity/FidgetingApp/ArtSource/MaterialLibrary/spheres/bearing-steel.png",
+        "sha256": "6887a5aae4849d52c2870fa9a2d21b27a2ab8e2b61c09d96bed1b42e21d38b81"
+      }
+    },
+    {
+      "id": "blade-sandblast",
+      "name": {
+        "zh": "喷砂叶片钢",
+        "en": "Sandblasted blade steel"
+      },
+      "family": "steel",
+      "status": "shipping-unity",
+      "description": "喷砂处理的浅灰钢面，颗粒感均匀，高光比缎面钢更散、更亮。是三叶陀螺叶片大面的 Shipping 材质。",
+      "imageGen": {
+        "phrases": [
+          "bead-blasted stainless steel",
+          "even fine grain",
+          "diffuse silvery highlight",
+          "no directional brushing"
+        ],
+        "avoid": [
+          "brushed lines",
+          "mirror",
+          "rough cast texture"
+        ]
+      },
+      "blender": {
+        "authority": "derived-from-unity",
+        "derivation": "baseColor = sRGB→linear(unity.baseColorHex); roughness = 1 − smoothness",
+        "baseColor": [
+          0.4233,
+          0.4508,
+          0.4678
+        ],
+        "metallic": 1,
+        "roughness": 0.28
+      },
+      "unity": {
+        "material": "M_BladeSandblast",
+        "path": "unity/FidgetingApp/Assets/_Fidgeting/Generated/Materials/M_BladeSandblast.mat",
+        "shader": "Universal Render Pipeline/Lit",
+        "baseColorHex": "#AEB3B6",
+        "metallic": 1,
+        "smoothness": 0.72,
+        "specularHighlights": true,
+        "environmentReflections": true,
+        "detail": "sandblast detail albedo + normal 0.16"
+      },
+      "usedBy": [
+        {
+          "model": "metal-three-blade",
+          "parts": [
+            "blade faces"
+          ]
+        },
+        {
+          "model": "premium-display-case",
+          "parts": [
+            "enclosed three-blade toy (caller-owned)"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "path": "unity/FidgetingApp/Assets/_Fidgeting/Editor/ThreeBladeMaterialFactory.cs",
+          "note": "M_BladeSandblast Color32(0xAE,0xB3,0xB6) metallic 1 smoothness 0.72"
+        }
+      ],
+      "thumbnail": {
+        "path": "unity/FidgetingApp/ArtSource/MaterialLibrary/spheres/blade-sandblast.png",
+        "sha256": "722510e85111200526ea21e3d17616f0ee76bb8d373af2eeb9a9067ed62490f3"
+      }
+    },
+    {
+      "id": "bevel-polished",
+      "name": {
+        "zh": "抛光倒角",
+        "en": "Polished bevel"
+      },
+      "family": "steel",
+      "status": "shipping-unity",
+      "description": "叶片倒角上的高抛光带。用途是切出一条亮边，让喷砂大面和倒角形成明暗对比；面积小，高光锐。",
+      "edgeBehavior": "只存在于倒角窄带；亮带随视角滑动，是全模型最亮的金属。",
+      "imageGen": {
+        "phrases": [
+          "mirror-polished chamfer edge",
+          "thin bright bevel line",
+          "high-contrast against bead-blasted face"
+        ],
+        "avoid": [
+          "polish spreading onto the blade face",
+          "soft blurry highlight"
+        ]
+      },
+      "blender": {
+        "authority": "derived-from-unity",
+        "derivation": "baseColor = sRGB→linear(unity.baseColorHex); roughness = 1 − smoothness",
+        "baseColor": [
+          0.6724,
+          0.7011,
+          0.7231
+        ],
+        "metallic": 1,
+        "roughness": 0.1
+      },
+      "unity": {
+        "material": "M_BevelPolished",
+        "path": "unity/FidgetingApp/Assets/_Fidgeting/Generated/Materials/M_BevelPolished.mat",
+        "shader": "Universal Render Pipeline/Lit",
+        "baseColorHex": "#D6DADD",
+        "metallic": 1,
+        "smoothness": 0.9,
+        "specularHighlights": true,
+        "environmentReflections": true
+      },
+      "usedBy": [
+        {
+          "model": "metal-three-blade",
+          "parts": [
+            "blade chamfers"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "path": "unity/FidgetingApp/Assets/_Fidgeting/Editor/ThreeBladeMaterialFactory.cs",
+          "note": "M_BevelPolished Color32(0xD6,0xDA,0xDD) metallic 1 smoothness 0.90"
+        }
+      ],
+      "thumbnail": {
+        "path": "unity/FidgetingApp/ArtSource/MaterialLibrary/spheres/bevel-polished.png",
+        "sha256": "6b6d67006c87ef0f5c0b1cc83532f2aadedb8372c4e85abd255fb5c8b02806f9"
+      }
+    },
+    {
+      "id": "cap-radial-brushed",
+      "name": {
+        "zh": "径向拉丝盖",
+        "en": "Radial brushed cap"
+      },
+      "family": "steel",
+      "status": "shipping-unity",
+      "description": "以圆心为中心的径向拉丝盖面。和车削钢盘同属径向纹理，但拉丝更细更密，没有 14 个切分面。Unity 用自定义 brushed shader 加径向法线贴图实现。",
+      "imageGen": {
+        "phrases": [
+          "radial brushed steel cap",
+          "fine sunburst grain",
+          "highlight rotating with the viewer",
+          "flat cap"
+        ],
+        "avoid": [
+          "sector facets",
+          "coarse scratches",
+          "linear brushing"
+        ]
+      },
+      "blender": {
+        "authority": "derived-from-unity",
+        "derivation": "baseColor = sRGB→linear(unity.baseColorHex); roughness = 1 − smoothness; Blender 各向异性值尚未创作，缩略图不含拉丝",
+        "baseColor": [
+          0.5395,
+          0.5583,
+          0.5711
+        ],
+        "metallic": 1,
+        "roughness": 0.21
+      },
+      "unity": {
+        "material": "M_CapRadialBrushed",
+        "path": "unity/FidgetingApp/Assets/_Fidgeting/Generated/Materials/M_CapRadialBrushed.mat",
+        "shader": "custom brushed (guid 058030c3abf3944cdbae35ef6b036b76)",
+        "baseColorHex": "#C2C5C7",
+        "metallic": 1,
+        "smoothness": 0.79,
+        "specularHighlights": true,
+        "environmentReflections": true,
+        "detail": "radial brush albedo + normal 0.10"
+      },
+      "usedBy": [
+        {
+          "model": "metal-three-blade",
+          "parts": [
+            "cap"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "path": "unity/FidgetingApp/Assets/_Fidgeting/Editor/ThreeBladeMaterialFactory.cs",
+          "note": "M_CapRadialBrushed Color32(0xC2,0xC5,0xC7) metallic 1 smoothness 0.79"
+        }
+      ],
+      "thumbnail": {
+        "path": "unity/FidgetingApp/ArtSource/MaterialLibrary/spheres/cap-radial-brushed.png",
+        "sha256": "f6708d21f4ea88f763962124924e58b3480f80713743b0b7078788bbe55a1ed8"
+      }
+    },
+    {
+      "id": "blade-inset-dark",
+      "name": {
+        "zh": "深色叶片内嵌",
+        "en": "Dark blade inset"
+      },
+      "family": "dark-metal",
+      "status": "shipping-unity",
+      "description": "叶片凹槽内的深灰半金属面。比轴承钢更暗、更哑，用来让凹槽退后，突出外圈亮边。",
+      "imageGen": {
+        "phrases": [
+          "dark graphite-grey recessed inlay",
+          "semi-matte metal",
+          "sits visually behind the bright rim"
+        ],
+        "avoid": [
+          "glossy black",
+          "pure matte plastic look",
+          "colour tint"
+        ]
+      },
+      "blender": {
+        "authority": "derived-from-unity",
+        "derivation": "baseColor = sRGB→linear(unity.baseColorHex); roughness = 1 − smoothness",
+        "baseColor": [
+          0.0212,
+          0.0262,
+          0.0319
+        ],
+        "metallic": 0.85,
+        "roughness": 0.52
+      },
+      "unity": {
+        "material": "M_BladeInset",
+        "path": "unity/FidgetingApp/Assets/_Fidgeting/Generated/Materials/M_BladeInset.mat",
+        "shader": "Universal Render Pipeline/Lit",
+        "baseColorHex": "#282D32",
+        "metallic": 0.85,
+        "smoothness": 0.48,
+        "specularHighlights": true,
+        "environmentReflections": true,
+        "detail": "sandblast detail albedo + normal 0.08"
+      },
+      "usedBy": [
+        {
+          "model": "metal-three-blade",
+          "parts": [
+            "blade insets"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "path": "unity/FidgetingApp/Assets/_Fidgeting/Editor/ThreeBladeMaterialFactory.cs",
+          "note": "M_BladeInset Color32(0x28,0x2D,0x32) metallic 0.85 smoothness 0.48"
+        }
+      ],
+      "thumbnail": {
+        "path": "unity/FidgetingApp/ArtSource/MaterialLibrary/spheres/blade-inset-dark.png",
+        "sha256": "9c109f2f4cc449388b15dadb52c4b4dfda9d029a5b4fb56253854f7ddeeacb1f"
+      }
+    },
+    {
+      "id": "dark-ring",
+      "name": {
+        "zh": "深色哑光环",
+        "en": "Dark matte ring"
+      },
+      "family": "matte",
+      "status": "shipping-unity",
+      "description": "非金属的近黑色环，微弱高光。用作轴承外围的视觉分隔环，让金属和金属之间有一条不反光的暗缝。",
+      "imageGen": {
+        "phrases": [
+          "near-black matte ring",
+          "non-metallic",
+          "barely-there soft highlight",
+          "separates the steel parts"
+        ],
+        "avoid": [
+          "rubber sheen",
+          "glossy black",
+          "metallic reflection"
+        ]
+      },
+      "blender": {
+        "authority": "derived-from-unity",
+        "derivation": "baseColor = sRGB→linear(unity.baseColorHex); roughness = 1 − smoothness",
+        "baseColor": [
+          0.0033,
+          0.004,
+          0.0052
+        ],
+        "metallic": 0,
+        "roughness": 0.55
+      },
+      "unity": {
+        "material": "M_DarkRing",
+        "path": "unity/FidgetingApp/Assets/_Fidgeting/Generated/Materials/M_DarkRing.mat",
+        "shader": "Universal Render Pipeline/Lit",
+        "baseColorHex": "#0B0D10",
+        "metallic": 0,
+        "smoothness": 0.45,
+        "specularHighlights": true,
+        "environmentReflections": true,
+        "detail": "sandblast detail albedo + normal 0.08"
+      },
+      "usedBy": [
+        {
+          "model": "metal-three-blade",
+          "parts": [
+            "dark ring"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "path": "unity/FidgetingApp/Assets/_Fidgeting/Editor/ThreeBladeMaterialFactory.cs",
+          "note": "M_DarkRing Color32(0x0B,0x0D,0x10) metallic 0 smoothness 0.45"
+        }
+      ],
+      "thumbnail": {
+        "path": "unity/FidgetingApp/ArtSource/MaterialLibrary/spheres/dark-ring.png",
+        "sha256": "3dc1d52899eecd3e619691d2dc8af728237d3ed73a25933a834ff4bbb7d2879e"
+      }
+    },
+    {
+      "id": "axis-matte",
+      "name": {
+        "zh": "凹陷哑光旋轴",
+        "en": "Recessed matte spindle"
+      },
+      "family": "matte",
+      "status": "contract-locked",
+      "description": "扑克扇牌正面唯一允许的轴心外观：一枚完全不反光的近黑哑光旋轴，半径 2.00 mm，内缩 0.12 mm。它必须读成一个“洞里的哑光点”，而不是任何金属件。",
+      "edgeBehavior": "没有高光、没有环境反射、没有边缘亮线；只靠内缩产生的阴影表现深度。",
+      "imageGen": {
+        "phrases": [
+          "tiny recessed matte black spindle",
+          "zero specular",
+          "reads as a soft dark dot inside a shallow hole"
+        ],
+        "avoid": [
+          "chrome bearing cap",
+          "metal disc",
+          "ring",
+          "washer",
+          "ball",
+          "any highlight or reflection on the spindle"
+        ]
+      },
+      "blender": {
+        "authority": "contract-locked",
+        "derivation": "Unity 合同：metallic 0、smoothness 0、关闭高光与环境反射 → Blender Principled metallic 0、roughness 1、Specular IOR Level 0",
+        "baseColor": [
+          0.0015,
+          0.0015,
+          0.0018
+        ],
+        "metallic": 0,
+        "roughness": 1,
+        "specularIorLevel": 0
+      },
+      "unity": {
+        "material": "M_FanCardAxisMatte",
+        "path": "unity/FidgetingApp/Assets/_FanCard/Generated/Materials/M_FanCardAxisMatte.mat",
+        "shader": "Universal Render Pipeline/Lit",
+        "baseColorHex": "#050506",
+        "metallic": 0,
+        "smoothness": 0,
+        "specularHighlights": false,
+        "environmentReflections": false,
+        "baseColorSrgb": [
+          0.018,
+          0.02,
+          0.022
+        ]
+      },
+      "usedBy": [
+        {
+          "model": "magnetic-fan-card",
+          "parts": [
+            "CommonAxis_RecessedMatteSpindle"
+          ]
+        }
+      ],
+      "restrictions": [
+        "只能用于 CommonAxis_RecessedMatteSpindle，半径 2.00 mm，内缩 0.12 mm。",
+        "任何 bearing cap / chrome disc / ring / washer / axis seat / cover disc / ball 都是禁止对象，两份 Fan Card FBX 中的休眠网格同样禁止。"
+      ],
+      "sources": [
+        {
+          "path": "unity/FidgetingApp/ArtSource/FanCard/fan_card_guardrails.json",
+          "note": "mechanism.front_visible_axis_*"
+        },
+        {
+          "path": "unity/FidgetingApp/Docs/FanCardModelingGuardrails.md",
+          "note": "front axis hard rule"
+        },
+        {
+          "path": "unity/FidgetingApp/Assets/_FanCard/Generated/Materials/M_FanCardAxisMatte.mat",
+          "note": "_BaseColor 0.018/0.02/0.022, _Metallic 0, _Smoothness 0, _SpecularHighlights 0, _EnvironmentReflections 0"
+        }
+      ],
+      "thumbnail": {
+        "path": "unity/FidgetingApp/ArtSource/MaterialLibrary/spheres/axis-matte.png",
+        "sha256": "40291ee14dbe31e4a7dc8c8eff43b58c32adadd99bc4bff8c51923a983d467d2"
+      }
+    },
+    {
+      "id": "gunmetal",
+      "name": {
+        "zh": "枪灰金属",
+        "en": "Gunmetal"
+      },
+      "family": "dark-metal",
+      "status": "shipping-unity",
+      "description": "深枪灰色的半哑金属，用于扇牌后侧机构件。比轴承钢暗、比哑光旋轴亮，高光宽而钝。",
+      "imageGen": {
+        "phrases": [
+          "gunmetal grey",
+          "semi-matte dark alloy",
+          "broad dull highlight",
+          "machined bracket"
+        ],
+        "avoid": [
+          "black chrome",
+          "blue steel",
+          "glossy paint"
+        ]
+      },
+      "blender": {
+        "authority": "derived-from-unity",
+        "derivation": "baseColor = sRGB→linear(unity.baseColorHex); roughness = 1 − smoothness",
+        "baseColor": [
+          0.0212,
+          0.0232,
+          0.0252
+        ],
+        "metallic": 0.9,
+        "roughness": 0.72
+      },
+      "unity": {
+        "material": "M_FanCardGunmetal",
+        "path": "unity/FidgetingApp/Assets/_FanCard/Generated/Materials/M_FanCardGunmetal.mat",
+        "shader": "custom (guid fe0a39ea0875648c2a4eabd8959710f0)",
+        "baseColorHex": "#282A2C",
+        "metallic": 0.9,
+        "smoothness": 0.28,
+        "specularHighlights": true,
+        "environmentReflections": true,
+        "baseColorSrgb": [
+          0.155,
+          0.163,
+          0.172
+        ]
+      },
+      "usedBy": [
+        {
+          "model": "magnetic-fan-card",
+          "parts": [
+            "back mechanism"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "path": "unity/FidgetingApp/Assets/_FanCard/Editor/FanCardSceneBuilder.cs",
+          "note": "M_FanCardGunmetal"
+        }
+      ],
+      "thumbnail": {
+        "path": "unity/FidgetingApp/ArtSource/MaterialLibrary/spheres/gunmetal.png",
+        "sha256": "8090db3962c59d5ab3695fe3913251a13d5583da9784c64126cf5e6704ab33ec"
+      }
+    },
+    {
+      "id": "warm-silver",
+      "name": {
+        "zh": "暖银",
+        "en": "Warm silver"
+      },
+      "family": "steel",
+      "status": "shipping-unity",
+      "description": "带一点暖调的哑银，用于扇牌金属边和后轨。金属度满但粗糙度高，读成磨砂银而不是抛光银。",
+      "imageGen": {
+        "phrases": [
+          "warm satin silver",
+          "matte brushed nickel feel",
+          "slightly warm grey",
+          "soft broad highlight"
+        ],
+        "avoid": [
+          "cold blue silver",
+          "mirror",
+          "yellow gold"
+        ]
+      },
+      "blender": {
+        "authority": "derived-from-unity",
+        "derivation": "baseColor = sRGB→linear(unity.baseColorHex); roughness = 1 − smoothness",
+        "baseColor": [
+          0.1329,
+          0.1221,
+          0.107
+        ],
+        "metallic": 1,
+        "roughness": 0.76
+      },
+      "unity": {
+        "material": "M_FanCardWarmSilver",
+        "path": "unity/FidgetingApp/Assets/_FanCard/Generated/Materials/M_FanCardWarmSilver.mat",
+        "shader": "custom (guid 81a18724176f14d63ab26231b599f47d)",
+        "baseColorHex": "#66625C",
+        "metallic": 1,
+        "smoothness": 0.24,
+        "specularHighlights": true,
+        "environmentReflections": true,
+        "baseColorSrgb": [
+          0.4,
+          0.385,
+          0.36
+        ]
+      },
+      "usedBy": [
+        {
+          "model": "magnetic-fan-card",
+          "parts": [
+            "metal edge",
+            "back track"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "path": "unity/FidgetingApp/Assets/_FanCard/Editor/FanCardSceneBuilder.cs",
+          "note": "M_FanCardWarmSilver"
+        }
+      ],
+      "thumbnail": {
+        "path": "unity/FidgetingApp/ArtSource/MaterialLibrary/spheres/warm-silver.png",
+        "sha256": "0a27d8daf45f7666af1d92771ff8b134b2f2f9e164ad527c3b6b6a5dd0c4c315"
+      }
+    },
+    {
+      "id": "chrome",
+      "name": {
+        "zh": "镀铬",
+        "en": "Chrome"
+      },
+      "family": "steel",
+      "status": "shipping-unity",
+      "description": "高亮镀铬。清晰反射环境，是全库最亮、最镜面的材质。只能出现在允许的后侧或装饰位置。",
+      "imageGen": {
+        "phrases": [
+          "bright chrome plating",
+          "crisp environment reflections",
+          "near-white specular"
+        ],
+        "avoid": [
+          "on any front-facing axis part",
+          "haze",
+          "warm tint"
+        ]
+      },
+      "blender": {
+        "authority": "derived-from-unity",
+        "derivation": "baseColor = sRGB→linear(unity.baseColorHex); roughness = 1 − smoothness",
+        "baseColor": [
+          0.8469,
+          0.8879,
+          0.956
+        ],
+        "metallic": 1,
+        "roughness": 0.22
+      },
+      "unity": {
+        "material": "M_FanCardChrome",
+        "path": "unity/FidgetingApp/Assets/_FanCard/Generated/Materials/M_FanCardChrome.mat",
+        "shader": "custom (guid 04a8dff4a76454c6a88db88065e9d423)",
+        "baseColorHex": "#EDF2FA",
+        "metallic": 1,
+        "smoothness": 0.78,
+        "specularHighlights": true,
+        "environmentReflections": true,
+        "baseColorSrgb": [
+          0.93,
+          0.95,
+          0.98
+        ]
+      },
+      "usedBy": [
+        {
+          "model": "magnetic-fan-card",
+          "parts": [
+            "FanCardSceneBuilder chrome slots"
+          ]
+        }
+      ],
+      "restrictions": [
+        "扇牌正面公共轴上禁止出现任何镀铬件（fan-card-axis-no-ring 规则）。"
+      ],
+      "sources": [
+        {
+          "path": "unity/FidgetingApp/Assets/_FanCard/Editor/FanCardSceneBuilder.cs",
+          "note": "M_FanCardChrome"
+        }
+      ],
+      "thumbnail": {
+        "path": "unity/FidgetingApp/ArtSource/MaterialLibrary/spheres/chrome.png",
+        "sha256": "83a11dea736c094c92e09ec7526e847932b09c150aae08d5062e4941d8d727f2"
+      }
+    },
+    {
+      "id": "gold-mesh",
+      "name": {
+        "zh": "金色网格",
+        "en": "Gold mesh"
+      },
+      "family": "gold",
+      "status": "shipping-unity",
+      "description": "偏铜的暗金，粗糙度高，用于扇牌后侧格栅金属丝网。远看是一层暖金色雾，近看是细丝。",
+      "imageGen": {
+        "phrases": [
+          "dull antique gold wire mesh",
+          "warm copper-gold",
+          "matte, no mirror",
+          "fine woven grille"
+        ],
+        "avoid": [
+          "shiny yellow gold",
+          "brass bling",
+          "smooth solid gold surface"
+        ]
+      },
+      "blender": {
+        "authority": "derived-from-unity",
+        "derivation": "baseColor = sRGB→linear(unity.baseColorHex); roughness = 1 − smoothness",
+        "baseColor": [
+          0.3564,
+          0.1195,
+          0.0091
+        ],
+        "metallic": 0.82,
+        "roughness": 0.78
+      },
+      "unity": {
+        "material": "M_FanCardGoldMesh",
+        "path": "unity/FidgetingApp/Assets/_FanCard/Generated/Materials/M_FanCardGoldMesh.mat",
+        "shader": "Universal Render Pipeline/Lit",
+        "baseColorHex": "#A16118",
+        "metallic": 0.82,
+        "smoothness": 0.22,
+        "specularHighlights": true,
+        "environmentReflections": true,
+        "baseColorSrgb": [
+          0.63,
+          0.38,
+          0.095
+        ]
+      },
+      "usedBy": [
+        {
+          "model": "magnetic-fan-card",
+          "parts": [
+            "back grille wires"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "path": "unity/FidgetingApp/Assets/_FanCard/Editor/FanCardSceneBuilder.cs",
+          "note": "M_FanCardGoldMesh (line ~96)"
+        }
+      ],
+      "thumbnail": {
+        "path": "unity/FidgetingApp/ArtSource/MaterialLibrary/spheres/gold-mesh.png",
+        "sha256": "dbd126d4c2f91583938cb232eb838096d33c08a71d6b2fde47acdd592146f58b"
+      }
+    },
+    {
+      "id": "etched-dark",
+      "name": {
+        "zh": "蚀刻深灰",
+        "en": "Etched dark"
+      },
+      "family": "dark-metal",
+      "status": "shipping-unity",
+      "description": "蚀刻纹样的深灰金属面，用于扇牌面上的蚀刻标记层。粗糙度高，高光几乎不成形，只提供和主面之间的明度差。",
+      "imageGen": {
+        "phrases": [
+          "dark etched metal marking",
+          "matte graphite grey",
+          "recessed engraving",
+          "no sheen"
+        ],
+        "avoid": [
+          "paint fill",
+          "glossy ink",
+          "raised emboss"
+        ]
+      },
+      "blender": {
+        "authority": "derived-from-unity",
+        "derivation": "baseColor = sRGB→linear(unity.baseColorHex); roughness = 1 − smoothness",
+        "baseColor": [
+          0.004,
+          0.004,
+          0.0044
+        ],
+        "metallic": 0.76,
+        "roughness": 0.77
+      },
+      "unity": {
+        "material": "M_FanCardEtching",
+        "path": "unity/FidgetingApp/Assets/_FanCard/Generated/Materials/M_FanCardEtching.mat",
+        "shader": "Universal Render Pipeline/Lit",
+        "baseColorHex": "#0D0D0E",
+        "metallic": 0.76,
+        "smoothness": 0.23,
+        "specularHighlights": true,
+        "environmentReflections": true,
+        "baseColorSrgb": [
+          0.05,
+          0.052,
+          0.054
+        ]
+      },
+      "usedBy": [
+        {
+          "model": "magnetic-fan-card",
+          "parts": [
+            "etching layer"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "path": "unity/FidgetingApp/Assets/_FanCard/Editor/FanCardSceneBuilder.cs",
+          "note": "M_FanCardEtching (line ~77)"
+        }
+      ],
+      "thumbnail": {
+        "path": "unity/FidgetingApp/ArtSource/MaterialLibrary/spheres/etched-dark.png",
+        "sha256": "6281d63fdd1eb2e37413e55123055dcfb9437fbf93b203f7603cf881753e7ff4"
+      }
+    },
+    {
+      "id": "groove-dark",
+      "name": {
+        "zh": "凹槽近黑",
+        "en": "Groove near-black"
+      },
+      "family": "dark-metal",
+      "status": "shipping-unity",
+      "description": "扇牌后侧凹槽底部的近黑材质。和哑光旋轴同一个基色，但保留少量金属度和高光，让槽底在低角度能被读出深度。",
+      "imageGen": {
+        "phrases": [
+          "deep near-black groove floor",
+          "faint metallic sheen at grazing angle",
+          "reads as depth not paint"
+        ],
+        "avoid": [
+          "flat black fill",
+          "chrome groove",
+          "visible reflections"
+        ]
+      },
+      "blender": {
+        "authority": "derived-from-unity",
+        "derivation": "baseColor = sRGB→linear(unity.baseColorHex); roughness = 1 − smoothness",
+        "baseColor": [
+          0.0015,
+          0.0015,
+          0.0018
+        ],
+        "metallic": 0.64,
+        "roughness": 0.84
+      },
+      "unity": {
+        "material": "M_FanCardGroove",
+        "path": "unity/FidgetingApp/Assets/_FanCard/Generated/Materials/M_FanCardGroove.mat",
+        "shader": "Universal Render Pipeline/Lit",
+        "baseColorHex": "#050506",
+        "metallic": 0.64,
+        "smoothness": 0.16,
+        "specularHighlights": true,
+        "environmentReflections": true,
+        "baseColorSrgb": [
+          0.018,
+          0.02,
+          0.022
+        ]
+      },
+      "usedBy": [
+        {
+          "model": "magnetic-fan-card",
+          "parts": [
+            "back track groove"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "path": "unity/FidgetingApp/Assets/_FanCard/Editor/FanCardSceneBuilder.cs",
+          "note": "M_FanCardGroove (line ~86)"
+        }
+      ],
+      "thumbnail": {
+        "path": "unity/FidgetingApp/ArtSource/MaterialLibrary/spheres/groove-dark.png",
+        "sha256": "d9d52f658be599a87642e11f5fb55c08bf18194c5edf32f37a057c8e0b4a6fbc"
+      }
+    },
+    {
+      "id": "studio-floor-matte",
+      "name": {
+        "zh": "影棚哑光地面",
+        "en": "Matte studio floor"
+      },
+      "family": "environment",
+      "status": "approved-gate07",
+      "description": "Gate 09 中性环境的地面：近黑哑光，只承接柔和接触阴影，不反射产品。产品悬浮 2 mm，阴影边缘软。",
+      "imageGen": {
+        "phrases": [
+          "matte near-black studio floor",
+          "soft contact shadow",
+          "no reflection of the product",
+          "seamless dark backdrop"
+        ],
+        "avoid": [
+          "glossy floor reflection",
+          "visible horizon line",
+          "coloured gradient backdrop"
+        ]
+      },
+      "blender": {
+        "authority": "blender-lookdev",
+        "materialName": "M_Studio_Floor",
+        "baseColor": [
+          0.035,
+          0.035,
+          0.038
+        ],
+        "metallic": 0,
+        "roughness": 0.85
+      },
+      "unity": {
+        "material": "M_StudioFloor",
+        "path": "unity/FidgetingApp/Assets/_Fidgeting/Generated/Materials/M_StudioFloor.mat",
+        "shader": "Universal Render Pipeline/Lit",
+        "baseColorHex": "#010203",
+        "metallic": 0,
+        "smoothness": 0.08,
+        "specularHighlights": true,
+        "environmentReflections": true
+      },
+      "usedBy": [
+        {
+          "model": "metal-three-blade",
+          "parts": [
+            "studio floor (Gate 09)"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "path": "unity/FidgetingApp/ArtSource/ModelPipeline/metal-three-blade/evidence/07-material/rev-005/lookdev_geeone.py",
+          "note": "mat_floor()"
+        },
+        {
+          "path": "unity/FidgetingApp/Assets/_Fidgeting/Editor/ThreeBladeMaterialFactory.cs",
+          "note": "M_StudioFloor"
+        }
+      ],
+      "parityNote": "Blender linear 0.035 ≈ sRGB #333335；Unity sRGB #010203。Unity 地面几乎纯黑。",
+      "thumbnail": {
+        "path": "unity/FidgetingApp/ArtSource/MaterialLibrary/spheres/studio-floor-matte.png",
+        "sha256": "3d9a7bafa13526e63ca1947d8de4fc3eca2e2ca61ddd1910ace82c96444d64de"
+      }
+    },
+    {
+      "id": "clay-control",
+      "name": {
+        "zh": "中性粘土对照",
+        "en": "Neutral clay control"
+      },
+      "family": "control",
+      "status": "stale",
+      "description": "Gate 05–06 白模与 Gate 07 对照渲染用的中性灰粘土。非金属、中等粗糙，只用来看形体和光照，不代表任何成品外观。",
+      "imageGen": {
+        "phrases": [
+          "neutral grey clay render",
+          "matte, non-metallic",
+          "form study"
+        ],
+        "avoid": [
+          "any colour",
+          "specular sparkle",
+          "texture"
+        ]
+      },
+      "blender": {
+        "authority": "blender-lookdev",
+        "materialName": "MAT_M07_ClayControl",
+        "baseColor": [
+          0.54,
+          0.57,
+          0.6
+        ],
+        "metallic": 0,
+        "roughness": 0.62
+      },
+      "unity": null,
+      "usedBy": [
+        {
+          "model": "premium-display-case",
+          "parts": [
+            "clay-vs-pbr control"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "path": "unity/FidgetingApp/ArtSource/ModelPipeline/premium-display-case/evidence/07-material/rev-001/build_material_lookdev.py",
+          "note": "MAT_M07_ClayControl；display case pipeline 当前全部 stale"
+        }
+      ],
+      "thumbnail": {
+        "path": "unity/FidgetingApp/ArtSource/MaterialLibrary/spheres/clay-control.png",
+        "sha256": "14442bc52391d9fe6e8157837a6686f00f77356418bb3cc09e353ffa4288c10c"
+      }
+    }
+  ],
+  "pendingEntries": [
+    {
+      "id": "blood-red-crystal",
+      "model": "magnetic-slide-tile",
+      "reason": "基色由 albedo 贴图驱动，没有常数色；rev-013 参数：metallic 0.08、IOR 1.52、Specular IOR Level 0.58、Coat 0.48/0.035、Transmission 0.08、Thin Film IOR 1.38。pipeline 全部 stale，待 Gate 07 重新批准后收录。",
+      "source": "unity/FidgetingApp/ArtSource/ModelPipeline/magnetic-slide-tile/evidence/07-material/rev-013/build_gate07_side_partition_fix.py"
+    },
+    {
+      "id": "matte-friction-plastic",
+      "model": "premium-display-case",
+      "reason": "MAT_M07_ContinuousNeutralFriction 基色由 noise ramp 驱动；Gate 04 被退回，材质证据 stale。",
+      "source": "unity/FidgetingApp/ArtSource/ModelPipeline/premium-display-case/evidence/07-material/rev-001/build_material_lookdev.py"
+    }
+  ]
+}

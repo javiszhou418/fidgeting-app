@@ -1,0 +1,118 @@
+{
+  "schemaVersion": 1,
+  "gate": "10-export",
+  "revision": 10,
+  "manifest": {
+    "path": "/Users/jiawei.zhou/Documents/Fidgeting app/unity/FidgetingApp/ArtSource/ModelPipeline/magnetic-slide-tile/evidence/10-export/rev-010/package/export-manifest-r010.json",
+    "sha256": "30e41e0d883beee892823f9d2a616d54ed676a9b913ecb65dd31391c522047c4"
+  },
+  "glbTransportAudit": {
+    "images": {
+      "lower-albedo": {
+        "embeddedSha256": "968c1e87ca2d5ea7c8fc57106e42bcd09dc95395fac7dd3be569e580ea8850eb",
+        "sourceSha256": "968c1e87ca2d5ea7c8fc57106e42bcd09dc95395fac7dd3be569e580ea8850eb",
+        "dimensions": [
+          620,
+          1000
+        ],
+        "mode": "RGBA",
+        "pixelIdentity": true,
+        "transport": "byte-decoded RGBA identity"
+      },
+      "lower-roughness": {
+        "embeddedSha256": "8e1e2df8191ca735fdddd68df76227b9a2afd91bdecf070f8e3dd8e9de95952b",
+        "sourceSha256": "ca2697560a2e57685a71c423f15f70a72ebb47c93c53cae0e3a8dae0b3248245",
+        "dimensions": [
+          620,
+          1000
+        ],
+        "mode": "RGBA",
+        "pixelIdentity": true,
+        "transport": "glTF metallicRoughness: source roughness preserved exactly in G; R/B/A=255"
+      },
+      "upper-albedo": {
+        "embeddedSha256": "c0e9305d475cd2c591efc8a833a0aafb1aef4ccc437d84a3417674e6d1b453a5",
+        "sourceSha256": "c0e9305d475cd2c591efc8a833a0aafb1aef4ccc437d84a3417674e6d1b453a5",
+        "dimensions": [
+          620,
+          1000
+        ],
+        "mode": "RGBA",
+        "pixelIdentity": true,
+        "transport": "byte-decoded RGBA identity"
+      },
+      "upper-roughness": {
+        "embeddedSha256": "b68762a8cae838db6476dd7feb64ba092f4d0069da847f082dc9524a627298ab",
+        "sourceSha256": "854f1dbc393585ff9b88f808c1a46a35b091088ac8b83894763f502876e3df6a",
+        "dimensions": [
+          620,
+          1000
+        ],
+        "mode": "RGBA",
+        "pixelIdentity": true,
+        "transport": "glTF metallicRoughness: source roughness preserved exactly in G; R/B/A=255"
+      }
+    },
+    "rootExtras": {
+      "governing_contract_sha256": "5aee71817c2c033ed92b770126ba0ecb6d79c2f032d786743b214b79078a47ea",
+      "source_rev5_builder_sha256": "f04579dbc8f1e92dbbcca9a3b17cd050558c467e2c82f8b345d690ebc68fde73",
+      "reuse_plan_sha256": "c51ae42560eb488d41eb457e851e377da056f98d845fbef2cf829db5cc89f316",
+      "mechanism_contract_sha256": "9cd7a08f34d7d8dfc3c6f89f6c80a5c5c2dcae48bc0d5c54ebf455a0727ea571",
+      "gate05_source_sha256": "f587be803cf98e134f173e961fe4e096708f08916af51d971b0ef381d51c11a2",
+      "geometry_digest": "2fcf6d2b4344511bc6b86ce940a927576f9cdb4988f4022959a3372f4d3c1952",
+      "endpoint_interlock": "0<=s<sMax:theta=0;s=sMax:theta=0..360;theta!=0:slide locked",
+      "legal_pose_ids": "closed,max-open-0,max-open-12,max-open-36,max-open-360",
+      "prohibited_pose": "mid-slide rotation",
+      "interactive_view": "technical-exploded-endpoint-12deg",
+      "gate10Revision": 10,
+      "sourceGate09Revision": 9,
+      "sourceGate09ApprovalExactWording": "继续",
+      "mechanismContractSha256": "9cd7a08f34d7d8dfc3c6f89f6c80a5c5c2dcae48bc0d5c54ebf455a0727ea571",
+      "unityPortabilityContractSha256": "d172c64ce56f89170b9f072e8efe61c3c7e8277235228bac957229ea319ffd13",
+      "canonicalGeometryDigest": "2fcf6d2b4344511bc6b86ce940a927576f9cdb4988f4022959a3372f4d3c1952",
+      "approvedMaterialSourceSha256": "8538b4142c9d6b5c89e30e3f915f99a33dfff8eab158db449278d9cca605b10c",
+      "units": "millimeters-authoring; export conversion to meters",
+      "defaultPose": "closed-zero-motion",
+      "linearVelocityMmPerSecond": 0.0,
+      "angularVelocityDegreesPerSecond": 0.0,
+      "selfMotion": false,
+      "animationClips": 0,
+      "maximumTravelMm": 18.076433121019107,
+      "rotationLockedBelowSMax": true,
+      "detentCount": 30,
+      "detentStepDegrees": 12,
+      "rotationAtSMaxDegrees": 360,
+      "slideLockedAtNonzeroAngle": true,
+      "returnRule": "align theta to 0 then close",
+      "provisionalDimensions": "50x31x12 mm user-authorized-provisional-not-production-measured",
+      "lodPolicy": "single approved model; no unapproved LOD pair",
+      "minimumOverlapDiskRepresentation": "non-rendering-empty-only"
+    },
+    "checks": {
+      "fourImages": true,
+      "pixelIdentity": true,
+      "nativeNpot": true,
+      "clampSampler": true,
+      "geometryMetadata": true,
+      "endpointMetadata": true,
+      "noAnimations": true
+    },
+    "pass": true
+  },
+  "checks": {
+    "authoritativeFormats": true,
+    "sourceHashesCurrent": true,
+    "geometryPreserved": true,
+    "materialStatePreserved": true,
+    "uvStatePreserved": true,
+    "fbxGlbReimport": true,
+    "collisionSeparate": true,
+    "glbPixelIdentity": true,
+    "endpointInterlock": true,
+    "closedNoAnimation": true,
+    "environmentCurrent": true,
+    "astcPlannedNotApplied": true,
+    "scope": true
+  },
+  "pass": true
+}

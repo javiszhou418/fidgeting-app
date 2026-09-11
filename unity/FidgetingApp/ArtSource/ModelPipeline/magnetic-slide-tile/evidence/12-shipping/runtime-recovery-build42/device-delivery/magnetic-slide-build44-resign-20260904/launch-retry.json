@@ -1,0 +1,69 @@
+{
+  "error" : {
+    "code" : 10002,
+    "domain" : "com.apple.dt.CoreDeviceError",
+    "userInfo" : {
+      "BundleIdentifier" : {
+        "string" : "com.jiaweizhou.fidgetspinner.codex"
+      },
+      "NSLocalizedDescription" : {
+        "string" : "The application failed to launch."
+      },
+      "NSUnderlyingError" : {
+        "error" : {
+          "code" : 1,
+          "domain" : "FBSOpenApplicationServiceErrorDomain",
+          "userInfo" : {
+            "BSErrorCodeDescription" : {
+              "string" : "RequestDenied"
+            },
+            "FBSOpenApplicationRequestID" : {
+              "string" : "0x1026"
+            },
+            "NSLocalizedDescription" : {
+              "string" : "The request to open \"com.jiaweizhou.fidgetspinner.codex\" failed."
+            },
+            "NSLocalizedFailureReason" : {
+              "string" : "The request was denied by service delegate (SBMainWorkspace) for reason: Security (\"Unable to launch com.jiaweizhou.fidgetspinner.codex because it has an invalid code signature, inadequate entitlements or its profile has not been explicitly trusted by the user\")."
+            },
+            "NSUnderlyingError" : {
+              "error" : {
+                "code" : 3,
+                "domain" : "FBSOpenApplicationErrorDomain",
+                "userInfo" : {
+                  "BSErrorCodeDescription" : {
+                    "string" : "Security"
+                  },
+                  "NSLocalizedFailureReason" : {
+                    "string" : "Unable to launch com.jiaweizhou.fidgetspinner.codex because it has an invalid code signature, inadequate entitlements or its profile has not been explicitly trusted by the user."
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "info" : {
+    "arguments" : [
+      "devicectl",
+      "device",
+      "process",
+      "launch",
+      "--device",
+      "00008130-001A00361EE0001C",
+      "--terminate-existing",
+      "--json-output",
+      "/Users/jiawei.zhou/Documents/Fidgeting app/unity/FidgetingApp/ArtSource/ModelPipeline/magnetic-slide-tile/evidence/12-shipping/runtime-recovery-build42/device-delivery/magnetic-slide-build44-resign-20260904/launch-retry.json",
+      "com.jiaweizhou.fidgetspinner.codex"
+    ],
+    "commandType" : "devicectl.device.process.launch",
+    "environment" : {
+      "TERM" : "dumb"
+    },
+    "jsonVersion" : 3,
+    "outcome" : "failed",
+    "version" : "518.27"
+  }
+}

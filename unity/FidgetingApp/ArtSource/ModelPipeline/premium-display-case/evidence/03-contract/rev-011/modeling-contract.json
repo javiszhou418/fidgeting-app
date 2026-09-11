@@ -1,0 +1,4645 @@
+{
+  "schemaVersion": 1,
+  "schema_version": "1.0.0",
+  "spec_id": "premium-display-case.tri-spinner-slab-v3-cmf",
+  "modelId": "premium-display-case",
+  "model_id": "premium-display-case",
+  "variant_id": "tri-spinner-slab-v3-cmf",
+  "contractRevision": 11,
+  "revision": 1,
+  "createdDate": "2026-09-10",
+  "stageStatus": "ready_for_review",
+  "approvalEffect": "none-until-explicit-gate-03-user-approval",
+  "status": "gate03_candidate_ready_for_review",
+  "provisional_marker": "PROVISIONAL_DIMENSIONS",
+  "provisional_marker_reason": "Case size derives from the generic pocket plus concept-image ratios; only spinner dimensions are measured.",
+  "revision_reason": {
+    "source_ids": [
+      "src.user_gate05_rev010_lighting_feedback_20260910",
+      "src.user_gate05_rev010_palette_feedback_20260910",
+      "src.user_gate05_rev010_lookdev_decisions_20260910"
+    ],
+    "refined": "03-contract rev-010 lighting / materials[1] / cmf.rarity_tier_map",
+    "summary": "reference-matched lighting direction (colour edge strips, sparkle group, whole-crystal thin film) and muted rarity palette; geometry identical to rev-009/010"
+  },
+  "sourceSpec": {
+    "path": "unity/FidgetingApp/ArtSource/ModelPipeline/premium-display-case/evidence/01-intake/rev-004/tri-spinner-slab-model-spec.v0.json",
+    "sha256": "f20860a226a388a24f20837fa57f3a2d171e85a99ccc3d065f43bf83ebb5fc41",
+    "handoff_spec_path": "unity/FidgetingApp/ArtSource/ModelPipeline/premium-display-case/evidence/01-intake/rev-004/tri-spinner-slab-agent-handoff-spec.md",
+    "handoff_spec_sha256": "523fde4067e0d0acc68df1e996c103df713d570fe1258631f90a4c34270aa9f4"
+  },
+  "sourceAnalysisRevision": 7,
+  "sourceIntakeRevision": 4,
+  "sourceClaimIds": [
+    "pdc-v3-analysis-outer-ratio-r007",
+    "pdc-v3-analysis-header-seam-r007",
+    "pdc-v3-analysis-spinner-placement-r007",
+    "pdc-v3-analysis-pocket-span-r007",
+    "pdc-v3-analysis-spinner-source-dimensions-r007",
+    "pdc-v3-analysis-partial-depth-no-front-cover-r007",
+    "pdc-v3-analysis-old-contract-invalid-r007",
+    "pdc-v3-analysis-unknowns-r007"
+  ],
+  "supersedes": {
+    "contractRevision": 10,
+    "reason": "User chose the reference-matched lighting and the muted palette after the rev-010 lookdev study; geometry unchanged. rev-010 changed soft_focus; rev-009 retired the wings.",
+    "reuse_forbidden_dimensions_mm": [
+      228.0,
+      304.0,
+      59.0
+    ],
+    "retired_rev004_parameters": [
+      "main.pocket_gap_mm",
+      "main.pocket_lobe_radius_mm",
+      "main.pocket_lobe_center_radius_mm",
+      "main.pocket_reach_mm",
+      "main.pocket_height_mm"
+    ],
+    "retired_rev005_parameters": [
+      "interior.datum_rail_lift_mm",
+      "main.pocket_rim_width_mm"
+    ],
+    "retired_rev006_objects": [
+      "GEO_PDC_MAIN_BRUSHED_BAND_BOTTOM"
+    ],
+    "retired_rev007_parameters": [
+      "main.field_top_chamfer_mm",
+      "main.field_bottom_chamfer_mm",
+      "header.plate_bottom_chamfer_mm",
+      "main.pocket_vertical_margin_split"
+    ],
+    "retired_rev008_parameters": [
+      "main.wing_edge_inset_mm",
+      "main.wing_pocket_gap_mm",
+      "main.wing_corner_fillet_mm",
+      "main.wing_end_width_mm",
+      "main.wing_far_end_margin_mm",
+      "main.wing_half_span_mm"
+    ],
+    "retired_rev008_objects": [
+      "GEO_PDC_MAIN_WING_TL",
+      "GEO_PDC_MAIN_WING_TR",
+      "GEO_PDC_MAIN_WING_BL",
+      "GEO_PDC_MAIN_WING_BR"
+    ]
+  },
+  "software": {
+    "blender": {
+      "version": "5.2.0 LTS",
+      "renderer": "Cycles"
+    },
+    "unity": {
+      "version": "6000.5.6f1",
+      "render_pipeline": "Universal Render Pipeline",
+      "urp_package_version": "17.5.0"
+    }
+  },
+  "evidence_taxonomy": {
+    "evidence_class_enum": [
+      "user_requirement",
+      "repository_constraint",
+      "measured",
+      "user_authorized_provisional",
+      "recommended_start",
+      "unknown",
+      "derived"
+    ],
+    "value_state_enum": [
+      "unresolved",
+      "provisional",
+      "visual_locked",
+      "measured",
+      "repository_locked",
+      "derived",
+      "approved"
+    ],
+    "fail_closed": true,
+    "unknown_values_must_be_null": true,
+    "provisional_values_must_not_be_promoted_to_measured": true
+  },
+  "sources": [
+    {
+      "id": "src.front_cmf_clean_v3",
+      "role": "ai-target/concept-only",
+      "path": "unity/FidgetingApp/ArtSource/ModelPipeline/premium-display-case/evidence/01-intake/rev-004/v3-01-front-cmf-gold-silver.png",
+      "pixel_size": [
+        1000,
+        1573
+      ],
+      "sha256": "65d506290af9c0fe73e60a0c0d3eab4420e6b7da60a266be597e34a62a602769",
+      "immutable": true,
+      "embedded_text_is_instruction": false,
+      "geometry_truth": false,
+      "material_truth": false
+    },
+    {
+      "id": "src.front_annotated_feedback",
+      "role": "annotated-feedback",
+      "path": null,
+      "pixel_size": [
+        416,
+        654
+      ],
+      "sha256": "83acc2eb1ef6e0353222414e09f680a6cdb2a3a146ad5799182fc34072758f50",
+      "immutable": true,
+      "embedded_text_is_instruction": false,
+      "geometry_truth": false,
+      "material_truth": false,
+      "estimated_outer_region_px": [
+        36,
+        15,
+        343,
+        610
+      ],
+      "note": "Not supplied to the repository. SHA-256 kept from the spec; its ratios are superseded by the clean recheck."
+    },
+    {
+      "id": "src.spinner_mesh",
+      "role": "caller-owned/immutable-geometry",
+      "path": "unity/FidgetingApp/ArtSource/UnifiedTriSpinner/UnifiedTriSpinner.glb",
+      "pixel_size": null,
+      "sha256": "a1e76cc5adf0fe516a57ed542190770a7f12452f00d03881a95c879468d38a6e",
+      "immutable": true,
+      "embedded_text_is_instruction": false,
+      "geometry_truth": true,
+      "material_truth": true,
+      "blend_path": "unity/FidgetingApp/ArtSource/UnifiedTriSpinner/UnifiedTriSpinner.blend",
+      "blend_sha256": "20ae43fb4ef6ef3a5ca32d05e3db6d30e1f151c807185ef7000878286c2ba4da",
+      "owner_pipeline": "metal-three-blade"
+    },
+    {
+      "id": "src.v3_user_chat_front",
+      "role": "ai-target/concept-only",
+      "path": "unity/FidgetingApp/ArtSource/ModelPipeline/premium-display-case/evidence/01-intake/rev-004/v3-user-chat-front-650x1024.jpg",
+      "sha256": "ee3ffcb397c84ae821927257c8bc667f8d590116c491d663b0153baa206f4052",
+      "pixel_size": [
+        650,
+        1024
+      ],
+      "immutable": true,
+      "geometry_truth": false,
+      "material_truth": false
+    },
+    {
+      "id": "src.v3_user_chat_three_view",
+      "role": "ai-target/concept-only",
+      "path": "unity/FidgetingApp/ArtSource/ModelPipeline/premium-display-case/evidence/01-intake/rev-004/v3-user-chat-three-view-1024x576.jpg",
+      "sha256": "d0031cb06ba0a48174f028e7640069886a47e9d5e3654b1f0ce062cd4e2588d3",
+      "pixel_size": [
+        1024,
+        576
+      ],
+      "immutable": true,
+      "geometry_truth": false,
+      "material_truth": false
+    },
+    {
+      "id": "src.v3_clean_recheck_r007",
+      "role": "analysis",
+      "path": "unity/FidgetingApp/ArtSource/ModelPipeline/premium-display-case/evidence/02-analysis/rev-007/v3-proportion-analysis.json",
+      "sha256": "061339ad7dfaa0c9538fa78071c25fed0206e648bb50d7d789d668856883ef11",
+      "immutable": true,
+      "geometry_truth": false,
+      "material_truth": false
+    },
+    {
+      "id": "src.spinner_measurement_r007",
+      "role": "analysis",
+      "path": "unity/FidgetingApp/ArtSource/ModelPipeline/premium-display-case/evidence/02-analysis/rev-007/spinner-source-measurement.json",
+      "sha256": "0ef86b038da3f3b75c83dd2a662a32a15b84c6cb533821efdba5154e3a55c8ee",
+      "immutable": true,
+      "geometry_truth": true,
+      "material_truth": false
+    },
+    {
+      "id": "src.user_gate05_rev004_rejection_20260910",
+      "role": "user_requirement",
+      "kind": "chat-rejection",
+      "chat_timestamp_local": "2026-09-10T10:01:00+08:00",
+      "rejected_stage": "05-blockout",
+      "rejected_evidence_revision": 4,
+      "wording": "细节还原网还达不到，就是时刻的深度，就是雕刻的深度，包括里面的那些细节还差很多。各种材质的分区我也没有看到。你里面给这个模型留的这个三角的区域应该是不对的。我建议你可以留一个比较通用的、一个形状。这样我们在不同的样式的陀螺的时候才能有不同的表现嘛？才有这个捞下去的东西才能容纳这个3D陀螺本身。它的这个厚度，以及这种光感、倒角、打孔等细节，你现在全都丢失了。现在圆角都不是同心圆，你这个品质简直是太垃圾了。我现在没法相信你就是直接出图的能力了。",
+      "immutable": true,
+      "geometry_truth": false,
+      "material_truth": false,
+      "sha256": "921af6defa4ffc7327c4d888622bd29d9a5e452fa1dca0b8facdeb5c96753f1c"
+    },
+    {
+      "id": "src.user_gate05_rev008_feedback_20260910",
+      "role": "user_requirement",
+      "kind": "chat-refinement",
+      "chat_timestamp_local": "2026-09-10T15:19:00+08:00",
+      "refined_stage": "05-blockout",
+      "refined_evidence_revision": 8,
+      "wording": "把这四个角去掉吧，有点太复杂了，然后柔光效果还是没看到",
+      "immutable": true,
+      "geometry_truth": false,
+      "material_truth": false,
+      "attachment": "render crop, red arrows on the four corner wings around the pocket",
+      "sha256": "d1ae69bd55f607e75fbcc601bf4b2e659f7102308ff1179cb1de3bc5ea3688c5"
+    },
+    {
+      "id": "src.user_gate05_rev010_lighting_feedback_20260910",
+      "role": "user_requirement",
+      "kind": "chat-feedback",
+      "chat_timestamp_local": "2026-09-10T16:27:00+08:00",
+      "wording": "光源是可以调整的吧？根据这个光源，按这个截图对比，我觉得不管是从光源还是光的颜色色相上面，好像我们这个都有点单一，就是没有那种布灵布灵闪闪发光、光泽感的效果。",
+      "attachment": "V3 concept reference screenshot (TRI-SPINNER SERIES 01 / TITANIUM)",
+      "immutable": true,
+      "geometry_truth": false,
+      "material_truth": false,
+      "sha256": "dee2f49fad7615e8c0bcee9b1e3c7b42b22d0f5c1ee8e72be193e621ff823359"
+    },
+    {
+      "id": "src.user_gate05_rev010_palette_feedback_20260910",
+      "role": "user_requirement",
+      "kind": "chat-feedback",
+      "chat_timestamp_local": "2026-09-10T16:31:00+08:00",
+      "wording": "然后，这几个颜色饱和度都有点高，感觉土土的。觉得土豪的感觉。",
+      "immutable": true,
+      "geometry_truth": false,
+      "material_truth": false,
+      "sha256": "a2f3a4c94db7090ae587e43e1fd3bf4064583b3de89825d748529cd8883649f5"
+    },
+    {
+      "id": "src.user_gate05_rev010_lookdev_decisions_20260910",
+      "role": "user_requirement",
+      "kind": "chat-decision",
+      "chat_timestamp_local": "2026-09-10T16:52:00+08:00",
+      "decisions": {
+        "light": "③ 对标参考图：背侧彩色边光 + 整片薄膜虹彩 + 彩色小硬光（改合约灯组）（推荐）",
+        "palette": "采用 muted：玫瑰青铜 / 灰蓝钛 / 香槟（推荐）"
+      },
+      "requirement": "FDB-DSP-061",
+      "immutable": true,
+      "geometry_truth": false,
+      "material_truth": false,
+      "evidence": [
+        "Artifacts/TriSpinnerSlab/gate05-r010/gate05-r010-bling-lighting-proposal-v3-hero.png",
+        "Artifacts/TriSpinnerSlab/gate05-r010/gate05-r010-rarity-palette-saturated-vs-muted.png"
+      ],
+      "sha256": "42821d78cea89bb65143526d639f6f9f0bff4131440a9ca6a69cc60d9050842b"
+    },
+    {
+      "id": "src.user_gate05_rev009_softfocus_decision_20260910",
+      "role": "user_requirement",
+      "kind": "chat-decision",
+      "chat_timestamp_local": "2026-09-10T16:15:00+08:00",
+      "decision": "③ 提案可见档：阈值 0.7–1.5，半径 ×3，混合 ×3（改合约 soft_focus 范围）",
+      "requirement": "FDB-DSP-060",
+      "immutable": true,
+      "geometry_truth": false,
+      "material_truth": false,
+      "evidence": "Artifacts/TriSpinnerSlab/gate05-r009/gate05-r009-softfocus-4way-hero.png",
+      "sha256": "2d3d403a645e76a93c56ec83b2c3b5aab40641157c4a0fb69bdcfd098fd9318d"
+    },
+    {
+      "id": "src.user_gate05_rev008_variation_decisions_20260910",
+      "role": "user_requirement",
+      "kind": "chat-decision",
+      "chat_timestamp_local": "2026-09-10T15:05:00+08:00",
+      "decisions": {
+        "aperture": "宽：边框也换（推翻 FDB-DSP-014 禁止大面积）",
+        "signature": "烧钛蓝（与 Standard 冷钢区分明显）",
+        "softfocus": "留到 Gate 08 灯光定稿时再开，Gate 05–07 审阅图保持 clean"
+      },
+      "requirement": "FDB-DSP-059",
+      "immutable": true,
+      "geometry_truth": false,
+      "material_truth": false,
+      "sha256": "4e60470dd749e1961dd5093fe84296fd1a759707173453b55585a8290ff8ab03"
+    },
+    {
+      "id": "src.user_gate05_rev007_feedback_20260910",
+      "role": "user_requirement",
+      "kind": "chat-rejection",
+      "chat_timestamp_local": "2026-09-10T13:39:00+08:00",
+      "rejected_stage": "05-blockout",
+      "rejected_evidence_revision": 7,
+      "wording": "能不能加一点其他的材质或者是颜色进来？就是有亮面、有磨砂的，然后不要都是统一处理成像一块铝合金板子一样。还有就是被篮筐框住的部分，你不觉得很丑吗？它为什么它的长宽还有倒角，它不是一个平行的呀？你能跟我说一下你是怎么理解的吗？然后你再改。这两个地方就很丑啊，你能不能遵循一些几何和对称这种美感？你先去找一些 Pinterest 上类似的参考，你再来改好吗？你先等一下再回答我。你先找一些，确保你理解我的意思之后，你再开始动手。",
+      "immutable": true,
+      "geometry_truth": false,
+      "material_truth": false,
+      "attachments": [
+        "render crop, blue boxes on the main island upper corners (bezel chamfer / field chamfer / groove not parallel-equal)",
+        "render crop, red circles on the right wing corner and the left wing lower end by the trait plaque"
+      ],
+      "research": "Pinterest pages are JS-only; references taken from Wikimedia Commons Royal Oak photos and AP Chronicles: brushed flats, polished bevels of constant width, bezel and dial opening as exact offsets of one octagon (see reference-board.png).",
+      "sha256": "d9a14c733821ba37fea0ea3433bb6fae670996f8389d3706f73b3636b958d000"
+    },
+    {
+      "id": "src.user_gate05_rev007_decisions_20260910",
+      "role": "user_requirement",
+      "kind": "chat-decision",
+      "chat_timestamp_local": "2026-09-10T13:55:00+08:00",
+      "decisions": {
+        "frame": "接受，等宽等距优先（推荐）",
+        "symmetry": "四角各一片翼板（上下左右都对称）",
+        "cmf": "A：拉丝边框 / 镜面斜边+翼板+唇 / 深色喷砂 field / 钢琴黑板 / 金线（推荐）"
+      },
+      "immutable": true,
+      "geometry_truth": false,
+      "material_truth": false,
+      "sha256": "eb0b4159f23f0ded634f04277673732ea7cbae069203cdc61354f501c34e1723"
+    },
+    {
+      "id": "src.user_gate05_rev006_feedback_fillets_20260910",
+      "role": "user_requirement",
+      "kind": "chat-refinement",
+      "chat_timestamp_local": "2026-09-10T12:22:00+08:00",
+      "refined_stage": "05-blockout",
+      "refined_evidence_revision": 6,
+      "direction_accepted": "感觉差不多吧",
+      "wording": "感觉差不多吧，这个光照还是有点黑。能不能再提亮点，这样细节我看得更清楚一些，或者你把环境光射得更亮一些。然后，这些红色的圈的这些地方感觉过渡得太生硬了，能不能稍微用圆角，就是倒一下角？",
+      "immutable": true,
+      "geometry_truth": false,
+      "material_truth": false,
+      "attachment": "render crop with red circles on the header bezel lower chamfer corners, the field TL/TR chamfer ends and the right wing corner",
+      "sha256": "31dd9d233dc377424a5060f2fc4683aa84b65d429f3489e1496b0dd16c1ef334"
+    },
+    {
+      "id": "src.user_gate05_rev006_feedback_trait_plaque_20260910",
+      "role": "user_requirement",
+      "kind": "chat-refinement",
+      "chat_timestamp_local": "2026-09-10T12:23:00+08:00",
+      "refined_stage": "05-blockout",
+      "refined_evidence_revision": 6,
+      "wording": "然后这个地方可能要稍微注意一下。就到时候我可能要放一个动态的三条数值。就是在d0029833-35d3-499b-9f9d-7156b390f254 这个对话里面我们做过的一个 feature",
+      "immutable": true,
+      "geometry_truth": false,
+      "material_truth": false,
+      "attachment": "render crop of the bottom brushed band",
+      "related_requirement": "FDB-DSP-053",
+      "related_thread": "d0029833-35d3-499b-9f9d-7156b390f254",
+      "sha256": "f6a8b6f99647293b3475f9e2c1a4b994348fca4f2dd353ff87338558c3fd1072"
+    },
+    {
+      "id": "src.user_gate05_rev005_feedback_20260910",
+      "role": "user_requirement",
+      "kind": "chat-rejection",
+      "chat_timestamp_local": "2026-09-10T11:15:00+08:00",
+      "rejected_stage": "05-blockout",
+      "rejected_evidence_revision": 5,
+      "wording": "我现在就是里面笔触和描边的细节，就是不同这个 holder 里面不同层级的台阶，好像没有介绍得很清楚。还是太扁平了，缺少层级，然后笔触和台阶可以增加一些。细节太少了，就是我在这个图里面通过不同颜色的 arrow 给你标注出来的。第二张图里面蓝色框出来的一个部分，我在给你参考图里面应该是没有这部分区域的。它跟线的那个板子是断开的。然后下面那个实际放陀螺的那个承载区细节也是比较缺失，你再仔细对照一下。",
+      "immutable": true,
+      "geometry_truth": false,
+      "material_truth": false,
+      "note": "The user mentions coloured arrows; the attached image carried no arrows, so the reference was re-read directly (crops of junction, left edge, pocket rim, clip, bottom band, header corner).",
+      "sha256": "faf398a08f9fc008ab7d00112301de824a5a2a332d91cd7539e5b200da173f02"
+    }
+  ],
+  "units": {
+    "contract_length": "mm",
+    "blender_length": "m",
+    "unity_length": "m",
+    "mm_to_blender": 0.001,
+    "mm_to_unity": 0.001,
+    "angles": "deg",
+    "colors": {
+      "unity_hex": "sRGB",
+      "blender_numeric": "scene-linear"
+    },
+    "srgb_to_linear_formula": "c<=0.04045 ? c/12.92 : ((c+0.055)/1.055)^2.4"
+  },
+  "coordinate_system": {
+    "canonical_product": {
+      "right": "+X",
+      "up": "+Y",
+      "front": "+Z",
+      "origin": "assembled_outer_envelope_center"
+    },
+    "blender_native": {
+      "right": "+X",
+      "up": "+Z",
+      "front": "-Y",
+      "canonical_to_blender": {
+        "x": "C.x",
+        "y": "-C.z",
+        "z": "C.y",
+        "matrix3x3_row_major": [
+          [
+            1,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            -1
+          ],
+          [
+            0,
+            1,
+            0
+          ]
+        ]
+      }
+    },
+    "unity": {
+      "right": "+X",
+      "up": "+Y",
+      "front": "+Z",
+      "canonical_to_unity": "identity"
+    },
+    "export_axis_policy": "fixed_exporter_recipe_plus_asymmetric_axis_probe",
+    "post_import_rotation_fix_forbidden": true,
+    "negative_scale_forbidden": true
+  },
+  "integration_contract": {
+    "export_hierarchy": [
+      "PresentationRoot",
+      "PresentationRoot/CaseAssembly",
+      "PresentationRoot/CaseAssembly/OuterCrystalFrame",
+      "PresentationRoot/CaseAssembly/SmokeInnerLiner",
+      "PresentationRoot/CaseAssembly/HeaderCompartment",
+      "PresentationRoot/CaseAssembly/MainCompartment",
+      "PresentationRoot/CaseAssembly/RearPlate",
+      "PresentationRoot/CaseAssembly/ContentSlot"
+    ],
+    "motion_owner": "PresentationRoot",
+    "case_owner": "CaseAssembly",
+    "content_anchor": "ContentSlot",
+    "content_owner": "caller",
+    "case_export_contains_spinner_mesh": false,
+    "product_previews_show_whole_assembled_case_only": true,
+    "exploded_view_shipping_forbidden": true,
+    "root_transform_unity": {
+      "position": [
+        0,
+        0,
+        0
+      ],
+      "rotation_euler_deg": [
+        0,
+        0,
+        0
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ]
+    }
+  },
+  "formula_language": {
+    "kind": "typed_json_ast",
+    "allowed_ops": [
+      "add",
+      "sub",
+      "mul",
+      "div",
+      "min",
+      "max",
+      "neg"
+    ],
+    "unit_checking": "required",
+    "cycle_detection": "required",
+    "arbitrary_code_forbidden": true,
+    "evaluation_policy": "measured_value_else_explicit_provisional_else_unresolved"
+  },
+  "parameters": {
+    "inputs": [
+      {
+        "id": "visual.case_width_over_height",
+        "data_type": "number",
+        "unit": "ratio",
+        "value": 0.5896,
+        "evidence_class": "recommended_start",
+        "value_state": "provisional",
+        "tolerance": 0.006,
+        "source_id": "src.v3_clean_recheck_r007",
+        "supersedes": "annotated 416x654 reading",
+        "note": "Spec 0.562 came from the annotated screenshot; both clean images read 0.589-0.590."
+      },
+      {
+        "id": "visual.header_split_from_top",
+        "data_type": "number",
+        "unit": "ratio",
+        "value": 0.3149,
+        "evidence_class": "recommended_start",
+        "value_state": "provisional",
+        "tolerance": 0.006,
+        "source_id": "src.v3_clean_recheck_r007",
+        "supersedes": "annotated 416x654 reading",
+        "note": "Dark seam under the header plate rail. The silver datum rail band runs from this seam to main_bay_start."
+      },
+      {
+        "id": "visual.frame_band_over_width",
+        "data_type": "number",
+        "unit": "ratio",
+        "value": 0.052,
+        "evidence_class": "recommended_start",
+        "value_state": "provisional",
+        "tolerance": 0.006,
+        "source_id": "src.front_annotated_feedback"
+      },
+      {
+        "id": "visual.main_window_side_inset",
+        "data_type": "number",
+        "unit": "ratio",
+        "value": 0.052,
+        "evidence_class": "recommended_start",
+        "value_state": "provisional",
+        "tolerance": 0.006,
+        "source_id": "src.front_annotated_feedback"
+      },
+      {
+        "id": "visual.spinner_span_over_width",
+        "data_type": "number",
+        "unit": "ratio",
+        "value": 0.762,
+        "evidence_class": "recommended_start",
+        "value_state": "provisional",
+        "tolerance": 0.01,
+        "source_id": "src.front_annotated_feedback",
+        "note": "Image reading kept on record. No longer drives case.width_mm: rev-005 derives the width from the generic pocket."
+      },
+      {
+        "id": "visual.spinner_center_x_from_left",
+        "data_type": "number",
+        "unit": "ratio",
+        "value": 0.5,
+        "evidence_class": "recommended_start",
+        "value_state": "provisional",
+        "tolerance": 0.004,
+        "source_id": "src.front_annotated_feedback",
+        "note": "Highlight-biased centroid read 0.484; horizontal centring is the design intent and is kept at 0.500."
+      },
+      {
+        "id": "visual.outer_corner_radius_over_width",
+        "data_type": "number",
+        "unit": "ratio",
+        "value": 0.04,
+        "evidence_class": "recommended_start",
+        "value_state": "provisional",
+        "tolerance": 0.008,
+        "source_id": "src.front_annotated_feedback"
+      },
+      {
+        "id": "visual.inner_corner_radius_over_width",
+        "data_type": "number",
+        "unit": "ratio",
+        "value": 0.028,
+        "evidence_class": "recommended_start",
+        "value_state": "provisional",
+        "tolerance": 0.006,
+        "source_id": "src.front_annotated_feedback"
+      },
+      {
+        "id": "enclosure.front_cover_over_spinner",
+        "data_type": "boolean",
+        "unit": "none",
+        "value": false,
+        "evidence_class": "user_requirement",
+        "value_state": "visual_locked"
+      },
+      {
+        "id": "enclosure.depth_mode",
+        "data_type": "enum",
+        "unit": "none",
+        "value": "partial_depth",
+        "allowed": [
+          "partial_depth"
+        ],
+        "evidence_class": "user_requirement",
+        "value_state": "visual_locked"
+      },
+      {
+        "id": "spinner.orientation",
+        "data_type": "enum",
+        "unit": "none",
+        "value": "one_tip_up",
+        "allowed": [
+          "one_tip_up"
+        ],
+        "evidence_class": "recommended_start",
+        "value_state": "provisional"
+      },
+      {
+        "id": "spinner.geometry_policy",
+        "data_type": "enum",
+        "unit": "none",
+        "value": "caller_owned_immutable_input",
+        "allowed": [
+          "caller_owned_immutable_input"
+        ],
+        "evidence_class": "repository_constraint",
+        "value_state": "repository_locked"
+      },
+      {
+        "id": "spinner.max_span_mm",
+        "data_type": "number",
+        "unit": "mm",
+        "value": 56.56,
+        "provisional_value": null,
+        "evidence_class": "measured",
+        "value_state": "measured",
+        "source_id": "src.spinner_mesh",
+        "measurement": "bbox X of UnifiedTriSpinner.glb in the one-tip-up pose",
+        "span_basis": "bbox_x_one_tip_up",
+        "alternative_tip_circle_diameter_mm": 65.0,
+        "note": "The 85 mm provisional value is retired. Tip-circle 65.0 mm is recorded as the alternative basis for the user's Gate 03 decision."
+      },
+      {
+        "id": "spinner.max_thickness_mm",
+        "data_type": "number",
+        "unit": "mm",
+        "value": 14.5,
+        "provisional_value": null,
+        "evidence_class": "measured",
+        "value_state": "measured",
+        "source_id": "src.spinner_mesh",
+        "measurement": "assembly bbox Z including both finger caps"
+      },
+      {
+        "id": "case.backplate_thickness_mm",
+        "data_type": "number",
+        "unit": "mm",
+        "value": 2.4,
+        "range": [
+          2.0,
+          2.8
+        ],
+        "evidence_class": "recommended_start",
+        "value_state": "provisional"
+      },
+      {
+        "id": "case.crystal_wall_mm",
+        "data_type": "number",
+        "unit": "mm",
+        "value": 1.5,
+        "range": [
+          1.3,
+          1.8
+        ],
+        "evidence_class": "recommended_start",
+        "value_state": "provisional"
+      },
+      {
+        "id": "case.smoke_liner_mm",
+        "data_type": "number",
+        "unit": "mm",
+        "value": 0.85,
+        "range": [
+          0.7,
+          1.0
+        ],
+        "evidence_class": "recommended_start",
+        "value_state": "provisional"
+      },
+      {
+        "id": "case.frame_coverage_of_spinner_thickness",
+        "data_type": "number",
+        "unit": "ratio",
+        "value": 0.58,
+        "range": [
+          0.55,
+          0.65
+        ],
+        "evidence_class": "recommended_start",
+        "value_state": "provisional"
+      },
+      {
+        "id": "content.review_rear_gap_mm",
+        "data_type": "number",
+        "unit": "mm",
+        "value": 0.15,
+        "range": [
+          0.0,
+          0.3
+        ],
+        "evidence_class": "recommended_start",
+        "value_state": "provisional",
+        "construction_alignment_only": true,
+        "manufacturing_clearance": false
+      },
+      {
+        "id": "case.visual_shadow_gap_mm",
+        "data_type": "number",
+        "unit": "mm",
+        "value": 0.2,
+        "range": [
+          0.15,
+          0.3
+        ],
+        "evidence_class": "recommended_start",
+        "value_state": "provisional",
+        "manufacturing_clearance": false
+      },
+      {
+        "id": "case.crystal_bevel_mm",
+        "data_type": "number",
+        "unit": "mm",
+        "value": 1.0,
+        "range": [
+          0.8,
+          1.2
+        ],
+        "evidence_class": "recommended_start",
+        "value_state": "provisional",
+        "source_id": "src.user_gate05_rev004_rejection_20260910"
+      },
+      {
+        "id": "case.inner_bevel_mm",
+        "data_type": "number",
+        "unit": "mm",
+        "value": 0.4,
+        "range": [
+          0.3,
+          0.5
+        ],
+        "evidence_class": "recommended_start",
+        "value_state": "provisional",
+        "source_id": "src.user_gate05_rev004_rejection_20260910"
+      },
+      {
+        "id": "header.recess_depth_mm",
+        "data_type": "number",
+        "unit": "mm",
+        "value": 1.2,
+        "range": [
+          0.8,
+          1.6
+        ],
+        "evidence_class": "recommended_start",
+        "value_state": "provisional",
+        "source_id": "src.user_gate05_rev004_rejection_20260910",
+        "note": "Spec start 0.3 mm read flat at 2048 px; rev-005 raises it."
+      },
+      {
+        "id": "main.recess_depth_mm",
+        "data_type": "number",
+        "unit": "mm",
+        "value": 1.6,
+        "range": [
+          1.2,
+          2.0
+        ],
+        "hard_max": 2.4,
+        "evidence_class": "recommended_start",
+        "value_state": "provisional",
+        "source_id": "src.user_gate05_rev004_rejection_20260910",
+        "note": "Spec start 0.4 mm read flat at 2048 px; rev-005 raises it."
+      },
+      {
+        "id": "cmf.mirror_bevel_width_mm",
+        "data_type": "number",
+        "unit": "mm",
+        "value": 0.9,
+        "range": [
+          0.7,
+          1.2
+        ],
+        "evidence_class": "recommended_start",
+        "value_state": "provisional",
+        "source_id": "src.user_gate05_rev004_rejection_20260910",
+        "note": "45-degree mirror chamfer between shelf top and recessed plane."
+      },
+      {
+        "id": "cmf.gold_inlay_width_mm",
+        "data_type": "number",
+        "unit": "mm",
+        "value": 0.6,
+        "range": [
+          0.4,
+          0.8
+        ],
+        "evidence_class": "recommended_start",
+        "value_state": "provisional",
+        "source_id": "src.user_gate05_rev004_rejection_20260910",
+        "note": "Wider than the spec's 0.18-0.35 range so the inlays read as inlays, not hairlines."
+      },
+      {
+        "id": "cmf.gold_relief_mm",
+        "data_type": "number",
+        "unit": "mm",
+        "value": 0.1,
+        "range": [
+          0.06,
+          0.15
+        ],
+        "evidence_class": "recommended_start",
+        "value_state": "provisional",
+        "source_id": "src.user_gate05_rev004_rejection_20260910"
+      },
+      {
+        "id": "cmf.gold_visible_area_percent",
+        "data_type": "number",
+        "unit": "percent",
+        "value": 6.5,
+        "range": [
+          5.0,
+          8.0
+        ],
+        "hard_max": 8.0,
+        "evidence_class": "recommended_start",
+        "value_state": "provisional"
+      },
+      {
+        "id": "cmf.microblast_area_percent",
+        "data_type": "number",
+        "unit": "percent",
+        "value": 57.5,
+        "range": [
+          55.0,
+          60.0
+        ],
+        "evidence_class": "recommended_start",
+        "value_state": "provisional"
+      },
+      {
+        "id": "cmf.satin_brush_area_percent",
+        "data_type": "number",
+        "unit": "percent",
+        "value": 27.5,
+        "range": [
+          25.0,
+          30.0
+        ],
+        "evidence_class": "recommended_start",
+        "value_state": "provisional"
+      },
+      {
+        "id": "cmf.mirror_area_percent",
+        "data_type": "number",
+        "unit": "percent",
+        "value": 15.0,
+        "range": [
+          12.0,
+          18.0
+        ],
+        "evidence_class": "recommended_start",
+        "value_state": "provisional"
+      },
+      {
+        "id": "retention.mechanism",
+        "data_type": "enum",
+        "unit": "none",
+        "value": null,
+        "evidence_class": "unknown",
+        "value_state": "unresolved",
+        "blocks": [
+          "manufacturing_claims",
+          "shipping_collision_geometry"
+        ]
+      },
+      {
+        "id": "manufacturing.clearance_mm",
+        "data_type": "number",
+        "unit": "mm",
+        "value": null,
+        "evidence_class": "unknown",
+        "value_state": "unresolved",
+        "blocks": [
+          "manufacturing_claims"
+        ]
+      },
+      {
+        "id": "manufacturing.tolerance_mm",
+        "data_type": "number",
+        "unit": "mm",
+        "value": null,
+        "evidence_class": "unknown",
+        "value_state": "unresolved",
+        "blocks": [
+          "manufacturing_claims"
+        ]
+      },
+      {
+        "id": "manufacturing.draft_angle_deg",
+        "data_type": "number",
+        "unit": "deg",
+        "value": null,
+        "evidence_class": "unknown",
+        "value_state": "unresolved",
+        "blocks": [
+          "manufacturing_claims"
+        ]
+      },
+      {
+        "id": "visual.main_bay_start_from_top",
+        "data_type": "number",
+        "unit": "ratio",
+        "value": 0.3424,
+        "evidence_class": "recommended_start",
+        "value_state": "provisional",
+        "tolerance": 0.006,
+        "source_id": "src.v3_clean_recheck_r007",
+        "supersedes": "annotated 416x654 reading"
+      },
+      {
+        "id": "visual.spinner_center_from_top_image_reading",
+        "data_type": "number",
+        "unit": "ratio",
+        "value": 0.6369,
+        "evidence_class": "recommended_start",
+        "value_state": "provisional",
+        "tolerance": 0.008,
+        "source_id": "src.v3_clean_recheck_r007",
+        "supersedes": "annotated 416x654 reading",
+        "note": "Not used for placement: infeasible with the measured spinner. Superseded by derived spinner.center_y_mm."
+      },
+      {
+        "id": "visual.spinner_pocket_span_over_width",
+        "data_type": "number",
+        "unit": "ratio",
+        "value": 0.8023,
+        "evidence_class": "recommended_start",
+        "value_state": "provisional",
+        "tolerance": 0.01,
+        "source_id": "src.v3_clean_recheck_r007",
+        "supersedes": "annotated 416x654 reading",
+        "note": "Dark recess outline around the spinner, not the tip span."
+      },
+      {
+        "id": "spinner.tip_circle_diameter_mm",
+        "data_type": "number",
+        "unit": "mm",
+        "value": 65.0,
+        "evidence_class": "measured",
+        "value_state": "measured",
+        "source_id": "src.spinner_mesh"
+      },
+      {
+        "id": "spinner.rotor_body_thickness_mm",
+        "data_type": "number",
+        "unit": "mm",
+        "value": 11.5,
+        "evidence_class": "measured",
+        "value_state": "measured",
+        "source_id": "src.spinner_mesh"
+      },
+      {
+        "id": "spinner.pivot_at_mid_thickness",
+        "data_type": "boolean",
+        "unit": "none",
+        "value": true,
+        "evidence_class": "measured",
+        "value_state": "measured",
+        "source_id": "src.spinner_mesh"
+      },
+      {
+        "id": "main.perimeter_shelf_over_width",
+        "data_type": "number",
+        "unit": "ratio",
+        "value": 0.045,
+        "range": [
+          0.04,
+          0.052
+        ],
+        "evidence_class": "recommended_start",
+        "value_state": "provisional",
+        "note": "Replaces the fixed 4.5 mm, which was sized for the retired 111.55 mm provisional width."
+      },
+      {
+        "id": "interior.shelf_top_below_frame_front_mm",
+        "data_type": "number",
+        "unit": "mm",
+        "value": 3.0,
+        "range": [
+          2.0,
+          4.5
+        ],
+        "evidence_class": "recommended_start",
+        "value_state": "provisional",
+        "note": "Depth of the crystal lip above the satin shelves."
+      },
+      {
+        "id": "header.plate_side_inset_mm",
+        "data_type": "number",
+        "unit": "mm",
+        "value": 1.5,
+        "range": [
+          1.0,
+          2.5
+        ],
+        "evidence_class": "recommended_start",
+        "value_state": "provisional",
+        "note": "Graphite plate inset from the header shelf edge, in addition to the mirror bevel width."
+      },
+      {
+        "id": "main.pocket_generic_for_any_toy",
+        "data_type": "boolean",
+        "unit": "none",
+        "value": true,
+        "evidence_class": "user_requirement",
+        "value_state": "visual_locked",
+        "source_id": "src.user_gate05_rev004_rejection_20260910",
+        "note": "The pocket must not encode one spinner's silhouette; different toys are shown in the same well."
+      },
+      {
+        "id": "main.pocket_shape",
+        "data_type": "enum",
+        "unit": "none",
+        "value": "circle",
+        "allowed": [
+          "circle"
+        ],
+        "evidence_class": "recommended_start",
+        "value_state": "provisional",
+        "source_id": "src.user_gate05_rev004_rejection_20260910",
+        "note": "Circle chosen as the generic well; matches the shipping case's circular recess precedent."
+      },
+      {
+        "id": "content.design_toy_diameter_mm",
+        "data_type": "number",
+        "unit": "mm",
+        "value": 65.0,
+        "evidence_class": "measured",
+        "value_state": "measured",
+        "source_id": "src.spinner_mesh",
+        "note": "Largest catalog toy footprint (tri-spinner tip circle). Smaller toys are fit-scaled by the runtime, never enlarged."
+      },
+      {
+        "id": "content.fit_clearance_mm",
+        "data_type": "number",
+        "unit": "mm",
+        "value": 1.2,
+        "range": [
+          0.8,
+          2.0
+        ],
+        "evidence_class": "recommended_start",
+        "value_state": "provisional",
+        "source_id": "src.user_gate05_rev004_rejection_20260910",
+        "manufacturing_clearance": false,
+        "note": "Visual gap between the toy tip circle and the smoke wall. Not a retention or manufacturing clearance."
+      },
+      {
+        "id": "main.pocket_wall_mm",
+        "data_type": "number",
+        "unit": "mm",
+        "value": 0.85,
+        "range": [
+          0.7,
+          1.0
+        ],
+        "evidence_class": "recommended_start",
+        "value_state": "provisional",
+        "source_id": "src.user_gate05_rev004_rejection_20260910",
+        "note": "Smoke-liner wall of the well, from the backplate front to the rim underside."
+      },
+      {
+        "id": "main.pocket_floor_mm",
+        "data_type": "number",
+        "unit": "mm",
+        "value": 0.3,
+        "range": [
+          0.2,
+          0.4
+        ],
+        "evidence_class": "recommended_start",
+        "value_state": "provisional",
+        "source_id": "src.user_gate05_rev004_rejection_20260910",
+        "note": "Graphite floor disc laid on the backplate inside the well."
+      },
+      {
+        "id": "main.field_side_margin_mm",
+        "data_type": "number",
+        "unit": "mm",
+        "value": 3.0,
+        "range": [
+          2.5,
+          4.0
+        ],
+        "evidence_class": "recommended_start",
+        "value_state": "provisional",
+        "source_id": "src.user_gate05_rev004_rejection_20260910",
+        "note": "Microblast field left beside the pocket rim; hosts the vertical gold rails and brushed strips."
+      },
+      {
+        "id": "interior.part_lift_mm",
+        "data_type": "number",
+        "unit": "mm",
+        "value": 0.6,
+        "range": [
+          0.4,
+          0.8
+        ],
+        "evidence_class": "recommended_start",
+        "value_state": "provisional",
+        "source_id": "src.user_gate05_rev004_rejection_20260910",
+        "note": "Raised brushed strips and band above the microblast field."
+      },
+      {
+        "id": "header.seam_gap_mm",
+        "data_type": "number",
+        "unit": "mm",
+        "value": 2.4,
+        "range": [
+          1.8,
+          3.2
+        ],
+        "evidence_class": "recommended_start",
+        "value_state": "provisional",
+        "source_id": "src.user_gate05_rev005_feedback_20260910",
+        "note": "Dark gap between the header bezel and the main bezel; the smoke seam floor shows through. Replaces the silver datum rail."
+      },
+      {
+        "id": "header.bezel_corner_chamfer_mm",
+        "data_type": "number",
+        "unit": "mm",
+        "value": 8.0,
+        "range": [
+          6.0,
+          10.0
+        ],
+        "evidence_class": "user_requirement",
+        "value_state": "visual_locked",
+        "source_id": "src.user_gate05_rev007_decisions_20260910",
+        "note": "rev-008: equals interior.island_corner_chamfer_mm (asserted). Kept as an id for the header chain."
+      },
+      {
+        "id": "case.frame_ledge_width_mm",
+        "data_type": "number",
+        "unit": "mm",
+        "value": 0.9,
+        "range": [
+          0.7,
+          1.2
+        ],
+        "evidence_class": "recommended_start",
+        "value_state": "provisional",
+        "source_id": "src.user_gate05_rev005_feedback_20260910",
+        "note": "Inner ledge of the crystal frame stepped below the front face: the double edge seen along the frame."
+      },
+      {
+        "id": "case.frame_ledge_drop_mm",
+        "data_type": "number",
+        "unit": "mm",
+        "value": 0.8,
+        "range": [
+          0.6,
+          1.0
+        ],
+        "evidence_class": "recommended_start",
+        "value_state": "provisional",
+        "source_id": "src.user_gate05_rev005_feedback_20260910"
+      },
+      {
+        "id": "main.field_outline_groove_inset_mm",
+        "data_type": "number",
+        "unit": "mm",
+        "value": 1.6,
+        "range": [
+          1.2,
+          2.2
+        ],
+        "evidence_class": "recommended_start",
+        "value_state": "provisional",
+        "source_id": "src.user_gate05_rev005_feedback_20260910",
+        "note": "Engraved outline groove following the chamfered field edge, cut into the microblast field."
+      },
+      {
+        "id": "main.groove_width_mm",
+        "data_type": "number",
+        "unit": "mm",
+        "value": 0.4,
+        "range": [
+          0.3,
+          0.6
+        ],
+        "evidence_class": "recommended_start",
+        "value_state": "provisional",
+        "source_id": "src.user_gate05_rev005_feedback_20260910"
+      },
+      {
+        "id": "main.groove_depth_mm",
+        "data_type": "number",
+        "unit": "mm",
+        "value": 0.3,
+        "range": [
+          0.2,
+          0.4
+        ],
+        "evidence_class": "recommended_start",
+        "value_state": "provisional",
+        "source_id": "src.user_gate05_rev005_feedback_20260910",
+        "note": "All engraved lines (field outline, band surround, lip foot) are boolean cuts of this depth: geometry, not texture."
+      },
+      {
+        "id": "main.pocket_top_clearance_mm",
+        "data_type": "number",
+        "unit": "mm",
+        "value": 4.14,
+        "range": [
+          3.0,
+          5.0
+        ],
+        "evidence_class": "recommended_start",
+        "value_state": "provisional",
+        "source_id": "src.user_gate05_rev008_feedback_20260910",
+        "note": "rev-009: distance from the field top edge to the upper reference of the pocket-centre midpoint. Equals the retired 0.94 mm seam + 3.2 mm wing offset so the pocket centre stays where rev-008 was reviewed."
+      },
+      {
+        "id": "main.pocket_lip_width_mm",
+        "data_type": "number",
+        "unit": "mm",
+        "value": 1.8,
+        "range": [
+          1.4,
+          2.4
+        ],
+        "evidence_class": "recommended_start",
+        "value_state": "provisional",
+        "source_id": "src.user_gate05_rev005_feedback_20260910",
+        "note": "Polished lip ring around the well, raised above the field (reference: bright raised rim, not a sunken chamfer). Replaces main.pocket_rim_width_mm (retired)."
+      },
+      {
+        "id": "main.pocket_lip_height_mm",
+        "data_type": "number",
+        "unit": "mm",
+        "value": 0.6,
+        "range": [
+          0.4,
+          0.8
+        ],
+        "evidence_class": "recommended_start",
+        "value_state": "provisional",
+        "source_id": "src.user_gate05_rev005_feedback_20260910"
+      },
+      {
+        "id": "main.pocket_lip_outer_chamfer_mm",
+        "data_type": "number",
+        "unit": "mm",
+        "value": 0.5,
+        "range": [
+          0.3,
+          0.7
+        ],
+        "evidence_class": "recommended_start",
+        "value_state": "provisional",
+        "source_id": "src.user_gate05_rev005_feedback_20260910"
+      },
+      {
+        "id": "main.pocket_lip_inner_slope_mm",
+        "data_type": "number",
+        "unit": "mm",
+        "value": 0.6,
+        "range": [
+          0.4,
+          0.9
+        ],
+        "evidence_class": "recommended_start",
+        "value_state": "provisional",
+        "source_id": "src.user_gate05_rev005_feedback_20260910",
+        "note": "Inner face slopes from the lip top down below field level into the smoke wall (horizontal run)."
+      },
+      {
+        "id": "main.pocket_lip_inner_drop_mm",
+        "data_type": "number",
+        "unit": "mm",
+        "value": 1.2,
+        "range": [
+          0.8,
+          1.6
+        ],
+        "evidence_class": "recommended_start",
+        "value_state": "provisional",
+        "source_id": "src.user_gate05_rev005_feedback_20260910",
+        "note": "Vertical drop of the inner slope below the field surface before the smoke wall takes over."
+      },
+      {
+        "id": "hardware.clip_count",
+        "data_type": "number",
+        "unit": "count",
+        "value": 3,
+        "evidence_class": "recommended_start",
+        "value_state": "provisional",
+        "source_id": "src.user_gate05_rev005_feedback_20260910",
+        "note": "Clear clips on the lip at 90/210/330 degrees, as the three clips at the concept pocket tips. Visual only."
+      },
+      {
+        "id": "hardware.clip_size_mm",
+        "data_type": "vector3",
+        "unit": "mm",
+        "value": [
+          4.0,
+          3.2,
+          2.4
+        ],
+        "evidence_class": "recommended_start",
+        "value_state": "provisional",
+        "source_id": "src.user_gate05_rev005_feedback_20260910",
+        "note": "tangential x radial x height; rounded block straddling the lip. Not a retention mechanism (retention.mechanism stays null)."
+      },
+      {
+        "id": "interior.junction_fillet_mm",
+        "data_type": "number",
+        "unit": "mm",
+        "value": 1.5,
+        "range": [
+          1.0,
+          2.0
+        ],
+        "evidence_class": "recommended_start",
+        "value_state": "provisional",
+        "source_id": "src.user_gate05_rev006_feedback_fillets_20260910",
+        "note": "Fillet radius where a 45-degree chamfer meets a straight edge, on the outermost outline of each chain."
+      },
+      {
+        "id": "interior.junction_fillet_min_mm",
+        "data_type": "number",
+        "unit": "mm",
+        "value": 0.8,
+        "range": [
+          0.5,
+          1.0
+        ],
+        "evidence_class": "recommended_start",
+        "value_state": "provisional",
+        "source_id": "src.user_gate05_rev006_feedback_fillets_20260910",
+        "note": "Nested outlines keep at least this junction fillet even when the exact offset (r - d) would be smaller. The only sanctioned deviation from the exact-offset rule; it applies to chamfer-junction fillets only, never to the main corner arcs."
+      },
+      {
+        "id": "main.wing_count",
+        "data_type": "number",
+        "unit": "count",
+        "value": 0,
+        "evidence_class": "user_requirement",
+        "value_state": "visual_locked",
+        "source_id": "src.user_gate05_rev008_feedback_20260910",
+        "note": "rev-009: user 15:19 '把这四个角去掉吧，有点太复杂了' (red arrows on the four wings). The rev-008 four-wing decision is superseded; wing inset / gap / fillet / end width / far-end margin inputs are retired."
+      },
+      {
+        "id": "cmf.gold_layout_mirrored",
+        "data_type": "boolean",
+        "unit": "none",
+        "value": true,
+        "evidence_class": "user_requirement",
+        "value_state": "visual_locked",
+        "source_id": "src.user_gate05_rev007_decisions_20260910",
+        "note": "Gold accents mirrored: a bar along each of the four field chamfers, vertical rails left and right centred on the pocket, index tabs bottom-left and bottom-right. Still never a closed loop."
+      },
+      {
+        "id": "cmf.scheme",
+        "data_type": "enum",
+        "unit": "none",
+        "value": "A",
+        "allowed": [
+          "A"
+        ],
+        "evidence_class": "user_requirement",
+        "value_state": "visual_locked",
+        "source_id": "src.user_gate05_rev007_decisions_20260910",
+        "note": "User decision 'CMF A': brushed bezels (zone 5), mirror bevels + lip + divider (6), dark sandblasted field (3), piano-black plate + plaque + floor (4), gold (7), smoke seam/liner (2), crystal (1). Final material values: Gate 07."
+      },
+      {
+        "id": "cmf.rarity_aperture",
+        "data_type": "enum",
+        "unit": "none",
+        "value": "bold",
+        "allowed": [
+          "narrow",
+          "medium",
+          "bold"
+        ],
+        "evidence_class": "user_requirement",
+        "value_state": "visual_locked",
+        "source_id": "src.user_gate05_rev008_variation_decisions_20260910",
+        "note": "FDB-DSP-059 (user 2026-09-10): bold = bezels (5), polished parts (6), accents + trait fills (7) and the liner tint (2) follow the rarity tier; crystal (1), sandblasted field (3) and piano-black plates (4) stay constant. Supersedes FDB-DSP-014 for this variant only."
+      },
+      {
+        "id": "cmf.rarity_tier_map",
+        "data_type": "table",
+        "unit": "none",
+        "evidence_class": "user_requirement",
+        "value_state": "visual_locked",
+        "source_id": "src.user_gate05_rev010_lookdev_decisions_20260910",
+        "value": {
+          "Standard": {
+            "tier": "steel",
+            "accent_srgb": [
+              0.62,
+              0.65,
+              0.69
+            ],
+            "liner_srgb": [
+              0.86,
+              0.88,
+              0.92
+            ]
+          },
+          "Refined": {
+            "tier": "copper",
+            "accent_srgb": [
+              0.7,
+              0.58,
+              0.52
+            ],
+            "liner_srgb": [
+              0.9,
+              0.86,
+              0.84
+            ],
+            "name": "rose bronze"
+          },
+          "Signature": {
+            "tier": "titanium",
+            "accent_srgb": [
+              0.58,
+              0.63,
+              0.7
+            ],
+            "liner_srgb": [
+              0.86,
+              0.88,
+              0.93
+            ],
+            "name": "grey-blue titanium"
+          },
+          "Heirloom": {
+            "tier": "gold",
+            "accent_srgb": [
+              0.8,
+              0.73,
+              0.6
+            ],
+            "liner_srgb": [
+              0.9,
+              0.88,
+              0.9
+            ],
+            "name": "champagne"
+          }
+        },
+        "note": "rev-011 muted palette (user 16:31 '饱和度都有点高，感觉土土的' -> 16:5x chose muted): same hues, saturation ~40 %, value near the steel base. Superseded saturated rev-010 accents: {\"Refined\": [0.8, 0.5, 0.3], \"Signature\": [0.58, 0.66, 0.8], \"Heirloom\": [0.96, 0.78, 0.38]}. Steel from PremiumDisplayCaseLabelPlate.foilByTier. Preview values; Gate 07 lookdev sets final roughness / anisotropy per tier. Rarity never changes FDB-DSP-053 values."
+      },
+      {
+        "id": "render.lighting_direction",
+        "data_type": "enum",
+        "unit": "none",
+        "value": "reference-bling",
+        "allowed": [
+          "reference-bling"
+        ],
+        "evidence_class": "user_requirement",
+        "value_state": "visual_locked",
+        "source_id": "src.user_gate05_rev010_lookdev_decisions_20260910",
+        "note": "User 16:5x: '③ 对标参考图' -> lighting.beauty carries four backlit colour edge strips, a sparkle group, rims 30/26 %, whole-crystal thin film; review previews build exactly this rig; Gate 08 calibrates exposure and fill."
+      },
+      {
+        "id": "render.soft_focus_stage",
+        "data_type": "enum",
+        "unit": "none",
+        "value": "gate-08-final-beauty-only",
+        "allowed": [
+          "gate-08-final-beauty-only"
+        ],
+        "evidence_class": "user_requirement",
+        "value_state": "visual_locked",
+        "source_id": "src.user_gate05_rev008_variation_decisions_20260910",
+        "note": "User choice: soft focus stays a Gate 08 final-beauty output; Gate 05-07 review renders stay clean (contract.soft_focus)."
+      },
+      {
+        "id": "trait.plaque_hosts_trait_profile",
+        "data_type": "boolean",
+        "unit": "none",
+        "value": true,
+        "evidence_class": "user_requirement",
+        "value_state": "visual_locked",
+        "source_id": "src.user_gate05_rev006_feedback_trait_plaque_20260910",
+        "note": "The plaque reserves three dynamic 0-100 bars. Axis order SPIN / FEEL / CRAFT is fixed by FDB-DSP-053; values come from Assets/Scripts/Product/ToyTalentCatalog.cs at runtime, never from this contract."
+      },
+      {
+        "id": "trait.plaque_height_mm",
+        "data_type": "number",
+        "unit": "mm",
+        "value": 10.0,
+        "range": [
+          9.0,
+          12.0
+        ],
+        "evidence_class": "recommended_start",
+        "value_state": "provisional",
+        "source_id": "src.user_gate05_rev006_feedback_trait_plaque_20260910"
+      },
+      {
+        "id": "trait.plaque_bottom_margin_mm",
+        "data_type": "number",
+        "unit": "mm",
+        "value": 2.2,
+        "range": [
+          1.8,
+          3.0
+        ],
+        "evidence_class": "recommended_start",
+        "value_state": "provisional",
+        "source_id": "src.user_gate05_rev006_feedback_trait_plaque_20260910",
+        "note": "Plaque bottom edge above the field bottom edge."
+      },
+      {
+        "id": "trait.row_pitch_mm",
+        "data_type": "number",
+        "unit": "mm",
+        "value": 3.0,
+        "range": [
+          2.6,
+          3.6
+        ],
+        "evidence_class": "recommended_start",
+        "value_state": "provisional",
+        "source_id": "src.user_gate05_rev006_feedback_trait_plaque_20260910"
+      },
+      {
+        "id": "trait.track_height_mm",
+        "data_type": "number",
+        "unit": "mm",
+        "value": 1.2,
+        "range": [
+          1.0,
+          1.6
+        ],
+        "evidence_class": "recommended_start",
+        "value_state": "provisional",
+        "source_id": "src.user_gate05_rev006_feedback_trait_plaque_20260910"
+      },
+      {
+        "id": "trait.track_depth_mm",
+        "data_type": "number",
+        "unit": "mm",
+        "value": 0.35,
+        "range": [
+          0.25,
+          0.5
+        ],
+        "evidence_class": "recommended_start",
+        "value_state": "provisional",
+        "source_id": "src.user_gate05_rev006_feedback_trait_plaque_20260910",
+        "note": "Trough recess cut into the plaque top (BOOLEAN EXACT); the empty part of a bar is this trough."
+      },
+      {
+        "id": "trait.label_column_mm",
+        "data_type": "number",
+        "unit": "mm",
+        "value": 14.0,
+        "range": [
+          12.0,
+          16.0
+        ],
+        "evidence_class": "recommended_start",
+        "value_state": "provisional",
+        "source_id": "src.user_gate05_rev006_feedback_trait_plaque_20260910",
+        "note": "Reserved for the axis label decal (SPIN / FEEL / CRAFT); no text geometry in the blockout."
+      },
+      {
+        "id": "trait.value_column_mm",
+        "data_type": "number",
+        "unit": "mm",
+        "value": 9.0,
+        "range": [
+          8.0,
+          11.0
+        ],
+        "evidence_class": "recommended_start",
+        "value_state": "provisional",
+        "source_id": "src.user_gate05_rev006_feedback_trait_plaque_20260910",
+        "note": "Reserved for the numeric value decal; no text geometry in the blockout."
+      },
+      {
+        "id": "trait.tick_width_mm",
+        "data_type": "number",
+        "unit": "mm",
+        "value": 0.3,
+        "range": [
+          0.25,
+          0.4
+        ],
+        "evidence_class": "recommended_start",
+        "value_state": "provisional",
+        "source_id": "src.user_gate05_rev006_feedback_trait_plaque_20260910",
+        "note": "Quartile tick notches at 25 / 50 / 75 % cut through the trough edges (printed ink on the paper certificate, geometry here)."
+      },
+      {
+        "id": "trait.fill_inset_mm",
+        "data_type": "number",
+        "unit": "mm",
+        "value": 0.1,
+        "range": [
+          0.05,
+          0.15
+        ],
+        "evidence_class": "recommended_start",
+        "value_state": "provisional",
+        "source_id": "src.user_gate05_rev006_feedback_trait_plaque_20260910",
+        "note": "Runtime fill strip sits inside the trough by this margin and below the plaque top."
+      },
+      {
+        "id": "trait.preview_values",
+        "data_type": "vector3",
+        "unit": "0-100",
+        "value": [
+          88,
+          36,
+          86
+        ],
+        "evidence_class": "repository_authority",
+        "value_state": "preview_only",
+        "source_id": "ToyTalentCatalog.metal-three-blade",
+        "note": "Preview placeholder lengths only (metal-three-blade 88/36/86, sum 210). Runtime authority is ToyTalentCatalog.cs; the exported fill strips are authored at 100 % and shortened by the trait block at runtime."
+      },
+      {
+        "id": "header.divider_from_plate_top",
+        "data_type": "number",
+        "unit": "ratio",
+        "value": 0.58,
+        "range": [
+          0.5,
+          0.65
+        ],
+        "evidence_class": "recommended_start",
+        "value_state": "provisional",
+        "source_id": "src.user_gate05_rev005_feedback_20260910",
+        "note": "Mirror divider line on the graphite plate (reference: rule under the title block)."
+      },
+      {
+        "id": "header.divider_line_width_mm",
+        "data_type": "number",
+        "unit": "mm",
+        "value": 0.3,
+        "range": [
+          0.2,
+          0.4
+        ],
+        "evidence_class": "recommended_start",
+        "value_state": "provisional",
+        "source_id": "src.user_gate05_rev005_feedback_20260910"
+      },
+      {
+        "id": "interior.part_bevel_mm",
+        "data_type": "number",
+        "unit": "mm",
+        "value": 0.25,
+        "range": [
+          0.15,
+          0.35
+        ],
+        "evidence_class": "recommended_start",
+        "value_state": "provisional",
+        "source_id": "src.user_gate05_rev004_rejection_20260910",
+        "note": "Bevel on shelves, rail, strips and band edges."
+      },
+      {
+        "id": "interior.island_corner_chamfer_mm",
+        "data_type": "number",
+        "unit": "mm",
+        "value": 8.0,
+        "range": [
+          6.0,
+          10.0
+        ],
+        "evidence_class": "user_requirement",
+        "value_state": "visual_locked",
+        "source_id": "src.user_gate05_rev007_decisions_20260910",
+        "note": "One 45-degree chamfer for all four corners of both steel islands (user decision 'frame: uniform'). Every nested outline (shelf -> field -> groove -> wing edge; bezel -> mirror bevel -> plate) is an exact inward offset, so band widths are equal and chamfers parallel."
+      },
+      {
+        "id": "interior.bezel_corner_radius_mm",
+        "data_type": "number",
+        "unit": "mm",
+        "value": 6.0,
+        "range": [
+          5.0,
+          7.0
+        ],
+        "evidence_class": "recommended_start",
+        "value_state": "provisional",
+        "source_id": "src.user_gate05_rev004_rejection_20260910",
+        "note": "Outer corner radius of the header and main steel bezels. Large enough that bezel -> mirror chamfer -> plane stay concentric after the shelf inset without clamping."
+      },
+      {
+        "id": "hardware.bolt_count",
+        "data_type": "number",
+        "unit": "count",
+        "value": 6,
+        "evidence_class": "recommended_start",
+        "value_state": "provisional",
+        "source_id": "src.user_gate05_rev004_rejection_20260910",
+        "note": "Four frame corners plus left/right at the header seam, as in the V3 front image."
+      },
+      {
+        "id": "hardware.bolt_head_diameter_mm",
+        "data_type": "number",
+        "unit": "mm",
+        "value": 2.6,
+        "range": [
+          2.2,
+          3.0
+        ],
+        "evidence_class": "recommended_start",
+        "value_state": "provisional",
+        "source_id": "src.user_gate05_rev004_rejection_20260910"
+      },
+      {
+        "id": "hardware.bolt_socket_diameter_mm",
+        "data_type": "number",
+        "unit": "mm",
+        "value": 1.4,
+        "range": [
+          1.2,
+          1.6
+        ],
+        "evidence_class": "recommended_start",
+        "value_state": "provisional",
+        "source_id": "src.user_gate05_rev004_rejection_20260910"
+      },
+      {
+        "id": "hardware.bolt_socket_depth_mm",
+        "data_type": "number",
+        "unit": "mm",
+        "value": 0.6,
+        "range": [
+          0.4,
+          0.8
+        ],
+        "evidence_class": "recommended_start",
+        "value_state": "provisional",
+        "source_id": "src.user_gate05_rev004_rejection_20260910"
+      },
+      {
+        "id": "hardware.bolt_counterbore_diameter_mm",
+        "data_type": "number",
+        "unit": "mm",
+        "value": 3.0,
+        "range": [
+          2.6,
+          3.4
+        ],
+        "evidence_class": "recommended_start",
+        "value_state": "provisional",
+        "source_id": "src.user_gate05_rev004_rejection_20260910"
+      },
+      {
+        "id": "hardware.bolt_counterbore_depth_mm",
+        "data_type": "number",
+        "unit": "mm",
+        "value": 1.0,
+        "range": [
+          0.8,
+          1.4
+        ],
+        "evidence_class": "recommended_start",
+        "value_state": "provisional",
+        "source_id": "src.user_gate05_rev004_rejection_20260910"
+      },
+      {
+        "id": "hardware.bolt_head_below_frame_front_mm",
+        "data_type": "number",
+        "unit": "mm",
+        "value": 0.25,
+        "range": [
+          0.15,
+          0.4
+        ],
+        "evidence_class": "recommended_start",
+        "value_state": "provisional",
+        "source_id": "src.user_gate05_rev004_rejection_20260910"
+      },
+      {
+        "id": "hardware.bolt_on_band_centreline",
+        "data_type": "boolean",
+        "unit": "none",
+        "value": true,
+        "evidence_class": "recommended_start",
+        "value_state": "provisional",
+        "source_id": "src.user_gate05_rev004_rejection_20260910",
+        "note": "Corner bolts sit on the band centreline at the 45-degree point of the corner arc; seam bolts on the centreline at the seam height."
+      },
+      {
+        "id": "case.crystal_frame_is_full_band",
+        "data_type": "boolean",
+        "unit": "none",
+        "value": true,
+        "evidence_class": "recommended_start",
+        "value_state": "provisional",
+        "source_id": "src.user_gate05_rev004_rejection_20260910",
+        "note": "The clear frame ring spans the whole frame band (not only the 1.5 mm wall) so its thickness reads from the front."
+      },
+      {
+        "id": "case.liner_seam_above_shelf_mm",
+        "data_type": "number",
+        "unit": "mm",
+        "value": 0.3,
+        "range": [
+          0.2,
+          0.5
+        ],
+        "evidence_class": "recommended_start",
+        "value_state": "provisional",
+        "source_id": "src.user_gate05_rev004_rejection_20260910",
+        "note": "Smoke liner stands slightly above the shelves, giving the dark seam between crystal and steel."
+      }
+    ],
+    "derived": [
+      {
+        "id": "case.height_mm",
+        "unit": "mm",
+        "expression": {
+          "op": "div",
+          "args": [
+            {
+              "ref": "case.width_mm"
+            },
+            {
+              "ref": "visual.case_width_over_height"
+            }
+          ]
+        },
+        "dependencies": [
+          "case.width_mm",
+          "visual.case_width_over_height"
+        ],
+        "round_to": 0.01,
+        "evidence_class": "derived",
+        "value_state": "derived"
+      },
+      {
+        "id": "header.height_mm",
+        "unit": "mm",
+        "expression": {
+          "op": "mul",
+          "args": [
+            {
+              "ref": "case.height_mm"
+            },
+            {
+              "ref": "visual.header_split_from_top"
+            }
+          ]
+        },
+        "dependencies": [
+          "case.height_mm",
+          "visual.header_split_from_top"
+        ],
+        "round_to": 0.01,
+        "evidence_class": "derived",
+        "value_state": "derived"
+      },
+      {
+        "id": "case.frame_band_mm",
+        "unit": "mm",
+        "expression": {
+          "op": "mul",
+          "args": [
+            {
+              "ref": "case.width_mm"
+            },
+            {
+              "ref": "visual.frame_band_over_width"
+            }
+          ]
+        },
+        "dependencies": [
+          "case.width_mm",
+          "visual.frame_band_over_width"
+        ],
+        "round_to": 0.01,
+        "evidence_class": "derived",
+        "value_state": "derived"
+      },
+      {
+        "id": "case.inner_corner_radius_mm",
+        "unit": "mm",
+        "expression": {
+          "op": "mul",
+          "args": [
+            {
+              "ref": "case.width_mm"
+            },
+            {
+              "ref": "visual.inner_corner_radius_over_width"
+            }
+          ]
+        },
+        "dependencies": [
+          "case.width_mm",
+          "visual.inner_corner_radius_over_width"
+        ],
+        "round_to": 0.01,
+        "evidence_class": "derived",
+        "value_state": "derived"
+      },
+      {
+        "id": "spinner.center_x_mm",
+        "unit": "mm",
+        "expression": {
+          "op": "mul",
+          "args": [
+            {
+              "ref": "case.width_mm"
+            },
+            {
+              "op": "sub",
+              "args": [
+                {
+                  "value": 0.5,
+                  "unit": "ratio"
+                },
+                {
+                  "ref": "visual.spinner_center_x_from_left"
+                }
+              ]
+            }
+          ]
+        },
+        "dependencies": [
+          "case.width_mm",
+          "visual.spinner_center_x_from_left"
+        ],
+        "round_to": 0.01,
+        "evidence_class": "derived",
+        "value_state": "derived"
+      },
+      {
+        "id": "spinner.protrusion_ratio",
+        "unit": "ratio",
+        "expression": {
+          "op": "sub",
+          "args": [
+            {
+              "value": 1.0,
+              "unit": "ratio"
+            },
+            {
+              "ref": "case.frame_coverage_of_spinner_thickness"
+            }
+          ]
+        },
+        "dependencies": [
+          "case.frame_coverage_of_spinner_thickness"
+        ],
+        "round_to": 0.001,
+        "evidence_class": "derived",
+        "value_state": "derived"
+      },
+      {
+        "id": "case.frame_front_height_from_spinner_back_mm",
+        "unit": "mm",
+        "expression": {
+          "op": "mul",
+          "args": [
+            {
+              "ref": "spinner.max_thickness_mm"
+            },
+            {
+              "ref": "case.frame_coverage_of_spinner_thickness"
+            }
+          ]
+        },
+        "dependencies": [
+          "spinner.max_thickness_mm",
+          "case.frame_coverage_of_spinner_thickness"
+        ],
+        "round_to": 0.01,
+        "evidence_class": "derived",
+        "value_state": "derived"
+      },
+      {
+        "id": "spinner.protrusion_mm",
+        "unit": "mm",
+        "expression": {
+          "op": "mul",
+          "args": [
+            {
+              "ref": "spinner.max_thickness_mm"
+            },
+            {
+              "ref": "spinner.protrusion_ratio"
+            }
+          ]
+        },
+        "dependencies": [
+          "spinner.max_thickness_mm",
+          "spinner.protrusion_ratio"
+        ],
+        "round_to": 0.01,
+        "evidence_class": "derived",
+        "value_state": "derived"
+      },
+      {
+        "id": "case.structural_depth_mm",
+        "unit": "mm",
+        "expression": {
+          "op": "add",
+          "args": [
+            {
+              "ref": "case.backplate_thickness_mm"
+            },
+            {
+              "ref": "content.review_rear_gap_mm"
+            },
+            {
+              "ref": "case.frame_front_height_from_spinner_back_mm"
+            }
+          ]
+        },
+        "dependencies": [
+          "case.backplate_thickness_mm",
+          "content.review_rear_gap_mm",
+          "case.frame_front_height_from_spinner_back_mm"
+        ],
+        "round_to": 0.01,
+        "evidence_class": "derived",
+        "value_state": "derived"
+      },
+      {
+        "id": "assembled.envelope_depth_mm",
+        "unit": "mm",
+        "expression": {
+          "op": "add",
+          "args": [
+            {
+              "ref": "case.backplate_thickness_mm"
+            },
+            {
+              "ref": "content.review_rear_gap_mm"
+            },
+            {
+              "ref": "spinner.max_thickness_mm"
+            }
+          ]
+        },
+        "dependencies": [
+          "case.backplate_thickness_mm",
+          "content.review_rear_gap_mm",
+          "spinner.max_thickness_mm"
+        ],
+        "round_to": 0.01,
+        "evidence_class": "derived",
+        "value_state": "derived"
+      },
+      {
+        "id": "case.outer_corner_radius_mm",
+        "unit": "mm",
+        "expression": {
+          "op": "add",
+          "args": [
+            {
+              "ref": "case.frame_band_mm"
+            },
+            {
+              "ref": "case.inner_corner_radius_mm"
+            }
+          ]
+        },
+        "dependencies": [
+          "case.frame_band_mm",
+          "case.inner_corner_radius_mm"
+        ],
+        "round_to": 0.01,
+        "evidence_class": "derived",
+        "value_state": "derived",
+        "note": "Concentric rule: outer radius = band + inner radius, so the frame's inner corner is exactly the 0.028 W reading. Replaces the 0.04 W outer reading, which cannot be concentric with a 0.052 W band."
+      },
+      {
+        "id": "hardware.bolt_corner_inset_mm",
+        "unit": "mm",
+        "expression": {
+          "op": "sub",
+          "args": [
+            {
+              "ref": "case.outer_corner_radius_mm"
+            },
+            {
+              "op": "mul",
+              "args": [
+                {
+                  "value": 0.7071067811865476,
+                  "unit": "ratio"
+                },
+                {
+                  "op": "sub",
+                  "args": [
+                    {
+                      "ref": "case.outer_corner_radius_mm"
+                    },
+                    {
+                      "op": "mul",
+                      "args": [
+                        {
+                          "value": 0.5,
+                          "unit": "ratio"
+                        },
+                        {
+                          "ref": "case.frame_band_mm"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        "dependencies": [
+          "case.outer_corner_radius_mm",
+          "case.frame_band_mm"
+        ],
+        "round_to": 0.01,
+        "evidence_class": "derived",
+        "value_state": "derived",
+        "note": "Corner bolt centre offset from both outer edges = R - (R - band/2)/sqrt(2): the 45-degree point on the band centreline."
+      },
+      {
+        "id": "main.pocket_well_diameter_mm",
+        "unit": "mm",
+        "expression": {
+          "op": "add",
+          "args": [
+            {
+              "ref": "content.design_toy_diameter_mm"
+            },
+            {
+              "op": "mul",
+              "args": [
+                {
+                  "value": 2.0,
+                  "unit": "ratio"
+                },
+                {
+                  "ref": "content.fit_clearance_mm"
+                }
+              ]
+            }
+          ]
+        },
+        "dependencies": [
+          "content.design_toy_diameter_mm",
+          "content.fit_clearance_mm"
+        ],
+        "round_to": 0.01,
+        "evidence_class": "derived",
+        "value_state": "derived",
+        "note": "inside face of the smoke wall"
+      },
+      {
+        "id": "main.pocket_diameter_mm",
+        "unit": "mm",
+        "expression": {
+          "op": "add",
+          "args": [
+            {
+              "ref": "main.pocket_well_diameter_mm"
+            },
+            {
+              "op": "mul",
+              "args": [
+                {
+                  "value": 2.0,
+                  "unit": "ratio"
+                },
+                {
+                  "ref": "main.pocket_wall_mm"
+                }
+              ]
+            },
+            {
+              "op": "mul",
+              "args": [
+                {
+                  "value": 2.0,
+                  "unit": "ratio"
+                },
+                {
+                  "ref": "main.pocket_lip_inner_slope_mm"
+                }
+              ]
+            },
+            {
+              "op": "mul",
+              "args": [
+                {
+                  "value": 2.0,
+                  "unit": "ratio"
+                },
+                {
+                  "ref": "main.pocket_lip_width_mm"
+                }
+              ]
+            }
+          ]
+        },
+        "dependencies": [
+          "main.pocket_well_diameter_mm",
+          "main.pocket_wall_mm",
+          "main.pocket_lip_inner_slope_mm",
+          "main.pocket_lip_width_mm"
+        ],
+        "round_to": 0.01,
+        "evidence_class": "derived",
+        "value_state": "derived",
+        "note": "outer foot of the polished lip at field level = well + 2 wall + 2 inner slope + 2 lip"
+      },
+      {
+        "id": "main.field_width_mm",
+        "unit": "mm",
+        "expression": {
+          "op": "add",
+          "args": [
+            {
+              "ref": "main.pocket_diameter_mm"
+            },
+            {
+              "op": "mul",
+              "args": [
+                {
+                  "value": 2.0,
+                  "unit": "ratio"
+                },
+                {
+                  "ref": "main.field_side_margin_mm"
+                }
+              ]
+            }
+          ]
+        },
+        "dependencies": [
+          "main.pocket_diameter_mm",
+          "main.field_side_margin_mm"
+        ],
+        "round_to": 0.01,
+        "evidence_class": "derived",
+        "value_state": "derived"
+      },
+      {
+        "id": "case.width_mm",
+        "unit": "mm",
+        "expression": {
+          "op": "div",
+          "args": [
+            {
+              "op": "add",
+              "args": [
+                {
+                  "ref": "main.field_width_mm"
+                },
+                {
+                  "op": "mul",
+                  "args": [
+                    {
+                      "value": 2.0,
+                      "unit": "ratio"
+                    },
+                    {
+                      "op": "add",
+                      "args": [
+                        {
+                          "ref": "case.smoke_liner_mm"
+                        },
+                        {
+                          "value": 0.02,
+                          "unit": "ratio"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "op": "sub",
+              "args": [
+                {
+                  "value": 1.0,
+                  "unit": "ratio"
+                },
+                {
+                  "op": "mul",
+                  "args": [
+                    {
+                      "value": 2.0,
+                      "unit": "ratio"
+                    },
+                    {
+                      "op": "add",
+                      "args": [
+                        {
+                          "ref": "visual.frame_band_over_width"
+                        },
+                        {
+                          "ref": "main.perimeter_shelf_over_width"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        "dependencies": [
+          "main.field_width_mm",
+          "case.smoke_liner_mm",
+          "visual.frame_band_over_width",
+          "main.perimeter_shelf_over_width"
+        ],
+        "round_to": 0.01,
+        "evidence_class": "derived",
+        "value_state": "derived",
+        "note": "W = (field + 2*(liner + 0.02 sep)) / (1 - 2*(band ratio + shelf ratio)). Replaces span / span_over_width."
+      },
+      {
+        "id": "content.review_fit_scale",
+        "unit": "ratio",
+        "expression": {
+          "op": "min",
+          "args": [
+            {
+              "value": 1.0,
+              "unit": "ratio"
+            },
+            {
+              "op": "div",
+              "args": [
+                {
+                  "op": "sub",
+                  "args": [
+                    {
+                      "ref": "main.pocket_well_diameter_mm"
+                    },
+                    {
+                      "op": "mul",
+                      "args": [
+                        {
+                          "value": 2.0,
+                          "unit": "ratio"
+                        },
+                        {
+                          "ref": "content.fit_clearance_mm"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "ref": "content.design_toy_diameter_mm"
+                }
+              ]
+            }
+          ]
+        },
+        "dependencies": [
+          "main.pocket_well_diameter_mm",
+          "content.fit_clearance_mm",
+          "content.design_toy_diameter_mm"
+        ],
+        "round_to": 0.0001,
+        "evidence_class": "derived",
+        "value_state": "derived",
+        "note": "Runtime fit scale for the design toy; 1.0 by construction. Smaller toys keep scale 1.0 too (never enlarged)."
+      },
+      {
+        "id": "main.liner_inset_mm",
+        "unit": "mm",
+        "expression": {
+          "op": "add",
+          "args": [
+            {
+              "ref": "case.frame_band_mm"
+            },
+            {
+              "ref": "case.smoke_liner_mm"
+            },
+            {
+              "value": 0.02,
+              "unit": "ratio"
+            }
+          ]
+        },
+        "dependencies": [
+          "case.frame_band_mm",
+          "case.smoke_liner_mm"
+        ],
+        "round_to": 0.01,
+        "evidence_class": "derived",
+        "value_state": "derived",
+        "note": "full crystal band + 0.02 mm render separation + liner"
+      },
+      {
+        "id": "main.field_top_y_mm",
+        "unit": "mm",
+        "expression": {
+          "op": "sub",
+          "args": [
+            {
+              "op": "mul",
+              "args": [
+                {
+                  "value": 0.5,
+                  "unit": "ratio"
+                },
+                {
+                  "ref": "case.height_mm"
+                }
+              ]
+            },
+            {
+              "ref": "header.height_mm"
+            },
+            {
+              "ref": "header.seam_gap_mm"
+            },
+            {
+              "value": 0.02,
+              "unit": "ratio"
+            },
+            {
+              "ref": "main.perimeter_shelf_width_mm"
+            }
+          ]
+        },
+        "dependencies": [
+          "case.height_mm",
+          "header.height_mm",
+          "header.seam_gap_mm",
+          "main.perimeter_shelf_width_mm"
+        ],
+        "round_to": 0.01,
+        "evidence_class": "derived",
+        "value_state": "derived",
+        "note": "rev-008: field top = main bezel top - shelf, so the top band equals the side bands (uniform offset). visual.main_bay_start_from_top is kept on record only."
+      },
+      {
+        "id": "main.field_corner_chamfer_mm",
+        "unit": "mm",
+        "expression": {
+          "op": "sub",
+          "args": [
+            {
+              "ref": "interior.island_corner_chamfer_mm"
+            },
+            {
+              "op": "mul",
+              "args": [
+                {
+                  "ref": "main.perimeter_shelf_width_mm"
+                },
+                {
+                  "value": 0.5857864376269049,
+                  "unit": "ratio"
+                }
+              ]
+            }
+          ]
+        },
+        "dependencies": [
+          "interior.island_corner_chamfer_mm",
+          "main.perimeter_shelf_width_mm"
+        ],
+        "round_to": 0.01,
+        "evidence_class": "derived",
+        "value_state": "derived",
+        "note": "exact offset of a 45-degree chamfer: leg shrinks by d(2 - sqrt 2)"
+      },
+      {
+        "id": "main.field_bottom_y_mm",
+        "unit": "mm",
+        "expression": {
+          "op": "add",
+          "args": [
+            {
+              "op": "mul",
+              "args": [
+                {
+                  "value": -0.5,
+                  "unit": "ratio"
+                },
+                {
+                  "ref": "case.height_mm"
+                }
+              ]
+            },
+            {
+              "ref": "main.liner_inset_mm"
+            },
+            {
+              "ref": "main.perimeter_shelf_width_mm"
+            }
+          ]
+        },
+        "dependencies": [
+          "case.height_mm",
+          "main.liner_inset_mm",
+          "main.perimeter_shelf_width_mm"
+        ],
+        "round_to": 0.01,
+        "evidence_class": "derived",
+        "value_state": "derived"
+      },
+      {
+        "id": "spinner.center_y_mm",
+        "unit": "mm",
+        "expression": {
+          "op": "mul",
+          "args": [
+            {
+              "value": 0.5,
+              "unit": "ratio"
+            },
+            {
+              "op": "add",
+              "args": [
+                {
+                  "op": "sub",
+                  "args": [
+                    {
+                      "ref": "main.field_top_y_mm"
+                    },
+                    {
+                      "ref": "main.pocket_top_clearance_mm"
+                    }
+                  ]
+                },
+                {
+                  "op": "add",
+                  "args": [
+                    {
+                      "ref": "main.field_bottom_y_mm"
+                    },
+                    {
+                      "value": 0.94,
+                      "unit": "ratio"
+                    },
+                    {
+                      "ref": "trait.plaque_bottom_margin_mm"
+                    },
+                    {
+                      "ref": "trait.plaque_height_mm"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        "dependencies": [
+          "main.field_top_y_mm",
+          "main.pocket_top_clearance_mm",
+          "main.field_bottom_y_mm",
+          "trait.plaque_bottom_margin_mm",
+          "trait.plaque_height_mm"
+        ],
+        "round_to": 0.01,
+        "evidence_class": "derived",
+        "value_state": "derived",
+        "note": "rev-009: pocket centre = midpoint between (field top - pocket_top_clearance) and the trait plaque top; numerically identical to rev-008 (0.94 + 3.2 mm wing offset) so the reviewed composition does not move after the wings are retired."
+      },
+      {
+        "id": "case.z_field_mm",
+        "unit": "mm",
+        "expression": {
+          "op": "sub",
+          "args": [
+            {
+              "ref": "case.z_shelf_top_mm"
+            },
+            {
+              "ref": "main.recess_depth_mm"
+            }
+          ]
+        },
+        "dependencies": [
+          "case.z_shelf_top_mm",
+          "main.recess_depth_mm"
+        ],
+        "round_to": 0.01,
+        "evidence_class": "derived",
+        "value_state": "derived",
+        "note": "microblast field surface"
+      },
+      {
+        "id": "case.z_header_plane_mm",
+        "unit": "mm",
+        "expression": {
+          "op": "sub",
+          "args": [
+            {
+              "ref": "case.z_shelf_top_mm"
+            },
+            {
+              "ref": "header.recess_depth_mm"
+            }
+          ]
+        },
+        "dependencies": [
+          "case.z_shelf_top_mm",
+          "header.recess_depth_mm"
+        ],
+        "round_to": 0.01,
+        "evidence_class": "derived",
+        "value_state": "derived",
+        "note": "graphite plane surface"
+      },
+      {
+        "id": "main.pocket_well_depth_mm",
+        "unit": "mm",
+        "expression": {
+          "op": "sub",
+          "args": [
+            {
+              "ref": "case.z_field_mm"
+            },
+            {
+              "ref": "case.backplate_thickness_mm"
+            },
+            {
+              "ref": "main.pocket_floor_mm"
+            }
+          ]
+        },
+        "dependencies": [
+          "case.z_field_mm",
+          "case.backplate_thickness_mm",
+          "main.pocket_floor_mm"
+        ],
+        "round_to": 0.01,
+        "evidence_class": "derived",
+        "value_state": "derived",
+        "note": "field surface down to the graphite floor"
+      },
+      {
+        "id": "visual.spinner_center_from_top",
+        "unit": "ratio",
+        "expression": {
+          "op": "sub",
+          "args": [
+            {
+              "value": 0.5,
+              "unit": "ratio"
+            },
+            {
+              "op": "div",
+              "args": [
+                {
+                  "ref": "spinner.center_y_mm"
+                },
+                {
+                  "ref": "case.height_mm"
+                }
+              ]
+            }
+          ]
+        },
+        "dependencies": [
+          "spinner.center_y_mm",
+          "case.height_mm"
+        ],
+        "round_to": 0.0001,
+        "evidence_class": "derived",
+        "value_state": "derived"
+      },
+      {
+        "id": "main.perimeter_shelf_width_mm",
+        "unit": "mm",
+        "expression": {
+          "op": "mul",
+          "args": [
+            {
+              "ref": "case.width_mm"
+            },
+            {
+              "ref": "main.perimeter_shelf_over_width"
+            }
+          ]
+        },
+        "dependencies": [
+          "case.width_mm",
+          "main.perimeter_shelf_over_width"
+        ],
+        "round_to": 0.01,
+        "evidence_class": "derived",
+        "value_state": "derived"
+      },
+      {
+        "id": "header.rail_band_mm",
+        "unit": "mm",
+        "expression": {
+          "op": "mul",
+          "args": [
+            {
+              "ref": "case.height_mm"
+            },
+            {
+              "op": "sub",
+              "args": [
+                {
+                  "ref": "visual.main_bay_start_from_top"
+                },
+                {
+                  "ref": "visual.header_split_from_top"
+                }
+              ]
+            }
+          ]
+        },
+        "dependencies": [
+          "case.height_mm",
+          "visual.main_bay_start_from_top",
+          "visual.header_split_from_top"
+        ],
+        "round_to": 0.01,
+        "evidence_class": "derived",
+        "value_state": "derived"
+      },
+      {
+        "id": "case.z_frame_front_mm",
+        "unit": "mm",
+        "expression": {
+          "op": "add",
+          "args": [
+            {
+              "ref": "case.backplate_thickness_mm"
+            },
+            {
+              "ref": "content.review_rear_gap_mm"
+            },
+            {
+              "ref": "case.frame_front_height_from_spinner_back_mm"
+            }
+          ]
+        },
+        "dependencies": [
+          "case.backplate_thickness_mm",
+          "content.review_rear_gap_mm",
+          "case.frame_front_height_from_spinner_back_mm"
+        ],
+        "round_to": 0.01,
+        "evidence_class": "derived",
+        "value_state": "derived"
+      },
+      {
+        "id": "case.z_spinner_front_mm",
+        "unit": "mm",
+        "expression": {
+          "op": "add",
+          "args": [
+            {
+              "ref": "case.backplate_thickness_mm"
+            },
+            {
+              "ref": "content.review_rear_gap_mm"
+            },
+            {
+              "ref": "spinner.max_thickness_mm"
+            }
+          ]
+        },
+        "dependencies": [
+          "case.backplate_thickness_mm",
+          "content.review_rear_gap_mm",
+          "spinner.max_thickness_mm"
+        ],
+        "round_to": 0.01,
+        "evidence_class": "derived",
+        "value_state": "derived"
+      },
+      {
+        "id": "case.z_shelf_top_mm",
+        "unit": "mm",
+        "expression": {
+          "op": "sub",
+          "args": [
+            {
+              "ref": "case.z_frame_front_mm"
+            },
+            {
+              "ref": "interior.shelf_top_below_frame_front_mm"
+            }
+          ]
+        },
+        "dependencies": [
+          "case.z_frame_front_mm",
+          "interior.shelf_top_below_frame_front_mm"
+        ],
+        "round_to": 0.01,
+        "evidence_class": "derived",
+        "value_state": "derived"
+      },
+      {
+        "id": "case.root_recentering_z_mm",
+        "unit": "mm",
+        "expression": {
+          "op": "mul",
+          "args": [
+            {
+              "value": -0.5,
+              "unit": "ratio"
+            },
+            {
+              "ref": "assembled.envelope_depth_mm"
+            }
+          ]
+        },
+        "dependencies": [
+          "assembled.envelope_depth_mm"
+        ],
+        "round_to": 0.001,
+        "evidence_class": "derived",
+        "value_state": "derived"
+      }
+    ]
+  },
+  "resolved": {
+    "spinner.protrusion_ratio": {
+      "value": 0.42,
+      "unit": "ratio",
+      "value_state": "derived",
+      "dependencies": [
+        "case.frame_coverage_of_spinner_thickness"
+      ]
+    },
+    "case.frame_front_height_from_spinner_back_mm": {
+      "value": 8.41,
+      "unit": "mm",
+      "value_state": "derived",
+      "dependencies": [
+        "spinner.max_thickness_mm",
+        "case.frame_coverage_of_spinner_thickness"
+      ]
+    },
+    "spinner.protrusion_mm": {
+      "value": 6.09,
+      "unit": "mm",
+      "value_state": "derived",
+      "dependencies": [
+        "spinner.max_thickness_mm",
+        "spinner.protrusion_ratio"
+      ]
+    },
+    "case.structural_depth_mm": {
+      "value": 10.96,
+      "unit": "mm",
+      "value_state": "derived",
+      "dependencies": [
+        "case.backplate_thickness_mm",
+        "content.review_rear_gap_mm",
+        "case.frame_front_height_from_spinner_back_mm"
+      ]
+    },
+    "assembled.envelope_depth_mm": {
+      "value": 17.05,
+      "unit": "mm",
+      "value_state": "derived",
+      "dependencies": [
+        "case.backplate_thickness_mm",
+        "content.review_rear_gap_mm",
+        "spinner.max_thickness_mm"
+      ]
+    },
+    "main.pocket_well_diameter_mm": {
+      "value": 67.4,
+      "unit": "mm",
+      "value_state": "derived",
+      "dependencies": [
+        "content.design_toy_diameter_mm",
+        "content.fit_clearance_mm"
+      ]
+    },
+    "main.pocket_diameter_mm": {
+      "value": 73.9,
+      "unit": "mm",
+      "value_state": "derived",
+      "dependencies": [
+        "main.pocket_well_diameter_mm",
+        "main.pocket_wall_mm",
+        "main.pocket_lip_inner_slope_mm",
+        "main.pocket_lip_width_mm"
+      ]
+    },
+    "main.field_width_mm": {
+      "value": 79.9,
+      "unit": "mm",
+      "value_state": "derived",
+      "dependencies": [
+        "main.pocket_diameter_mm",
+        "main.field_side_margin_mm"
+      ]
+    },
+    "case.width_mm": {
+      "value": 101.29,
+      "unit": "mm",
+      "value_state": "derived",
+      "dependencies": [
+        "main.field_width_mm",
+        "case.smoke_liner_mm",
+        "visual.frame_band_over_width",
+        "main.perimeter_shelf_over_width"
+      ]
+    },
+    "content.review_fit_scale": {
+      "value": 1.0,
+      "unit": "ratio",
+      "value_state": "derived",
+      "dependencies": [
+        "main.pocket_well_diameter_mm",
+        "content.fit_clearance_mm",
+        "content.design_toy_diameter_mm"
+      ]
+    },
+    "main.perimeter_shelf_width_mm": {
+      "value": 4.56,
+      "unit": "mm",
+      "value_state": "derived",
+      "dependencies": [
+        "case.width_mm",
+        "main.perimeter_shelf_over_width"
+      ]
+    },
+    "case.z_frame_front_mm": {
+      "value": 10.96,
+      "unit": "mm",
+      "value_state": "derived",
+      "dependencies": [
+        "case.backplate_thickness_mm",
+        "content.review_rear_gap_mm",
+        "case.frame_front_height_from_spinner_back_mm"
+      ]
+    },
+    "case.z_spinner_front_mm": {
+      "value": 17.05,
+      "unit": "mm",
+      "value_state": "derived",
+      "dependencies": [
+        "case.backplate_thickness_mm",
+        "content.review_rear_gap_mm",
+        "spinner.max_thickness_mm"
+      ]
+    },
+    "case.z_shelf_top_mm": {
+      "value": 7.96,
+      "unit": "mm",
+      "value_state": "derived",
+      "dependencies": [
+        "case.z_frame_front_mm",
+        "interior.shelf_top_below_frame_front_mm"
+      ]
+    },
+    "case.root_recentering_z_mm": {
+      "value": -8.525,
+      "unit": "mm",
+      "value_state": "derived",
+      "dependencies": [
+        "assembled.envelope_depth_mm"
+      ]
+    },
+    "case.height_mm": {
+      "value": 171.79,
+      "unit": "mm",
+      "value_state": "derived",
+      "dependencies": [
+        "case.width_mm",
+        "visual.case_width_over_height"
+      ]
+    },
+    "header.height_mm": {
+      "value": 54.1,
+      "unit": "mm",
+      "value_state": "derived",
+      "dependencies": [
+        "case.height_mm",
+        "visual.header_split_from_top"
+      ]
+    },
+    "case.frame_band_mm": {
+      "value": 5.27,
+      "unit": "mm",
+      "value_state": "derived",
+      "dependencies": [
+        "case.width_mm",
+        "visual.frame_band_over_width"
+      ]
+    },
+    "case.inner_corner_radius_mm": {
+      "value": 2.84,
+      "unit": "mm",
+      "value_state": "derived",
+      "dependencies": [
+        "case.width_mm",
+        "visual.inner_corner_radius_over_width"
+      ]
+    },
+    "spinner.center_x_mm": {
+      "value": 0.0,
+      "unit": "mm",
+      "value_state": "derived",
+      "dependencies": [
+        "case.width_mm",
+        "visual.spinner_center_x_from_left"
+      ]
+    },
+    "case.outer_corner_radius_mm": {
+      "value": 8.11,
+      "unit": "mm",
+      "value_state": "derived",
+      "dependencies": [
+        "case.frame_band_mm",
+        "case.inner_corner_radius_mm"
+      ]
+    },
+    "hardware.bolt_corner_inset_mm": {
+      "value": 4.24,
+      "unit": "mm",
+      "value_state": "derived",
+      "dependencies": [
+        "case.outer_corner_radius_mm",
+        "case.frame_band_mm"
+      ]
+    },
+    "main.liner_inset_mm": {
+      "value": 6.14,
+      "unit": "mm",
+      "value_state": "derived",
+      "dependencies": [
+        "case.frame_band_mm",
+        "case.smoke_liner_mm"
+      ]
+    },
+    "main.field_top_y_mm": {
+      "value": 24.81,
+      "unit": "mm",
+      "value_state": "derived",
+      "dependencies": [
+        "case.height_mm",
+        "header.height_mm",
+        "header.seam_gap_mm",
+        "main.perimeter_shelf_width_mm"
+      ]
+    },
+    "main.field_corner_chamfer_mm": {
+      "value": 5.33,
+      "unit": "mm",
+      "value_state": "derived",
+      "dependencies": [
+        "interior.island_corner_chamfer_mm",
+        "main.perimeter_shelf_width_mm"
+      ]
+    },
+    "main.field_bottom_y_mm": {
+      "value": -75.19,
+      "unit": "mm",
+      "value_state": "derived",
+      "dependencies": [
+        "case.height_mm",
+        "main.liner_inset_mm",
+        "main.perimeter_shelf_width_mm"
+      ]
+    },
+    "spinner.center_y_mm": {
+      "value": -20.69,
+      "unit": "mm",
+      "value_state": "derived",
+      "dependencies": [
+        "main.field_top_y_mm",
+        "main.pocket_top_clearance_mm",
+        "main.field_bottom_y_mm",
+        "trait.plaque_bottom_margin_mm",
+        "trait.plaque_height_mm"
+      ]
+    },
+    "case.z_field_mm": {
+      "value": 6.36,
+      "unit": "mm",
+      "value_state": "derived",
+      "dependencies": [
+        "case.z_shelf_top_mm",
+        "main.recess_depth_mm"
+      ]
+    },
+    "case.z_header_plane_mm": {
+      "value": 6.76,
+      "unit": "mm",
+      "value_state": "derived",
+      "dependencies": [
+        "case.z_shelf_top_mm",
+        "header.recess_depth_mm"
+      ]
+    },
+    "main.pocket_well_depth_mm": {
+      "value": 3.66,
+      "unit": "mm",
+      "value_state": "derived",
+      "dependencies": [
+        "case.z_field_mm",
+        "case.backplate_thickness_mm",
+        "main.pocket_floor_mm"
+      ]
+    },
+    "visual.spinner_center_from_top": {
+      "value": 0.6204,
+      "unit": "ratio",
+      "value_state": "derived",
+      "dependencies": [
+        "spinner.center_y_mm",
+        "case.height_mm"
+      ]
+    },
+    "header.rail_band_mm": {
+      "value": 4.72,
+      "unit": "mm",
+      "value_state": "derived",
+      "dependencies": [
+        "case.height_mm",
+        "visual.main_bay_start_from_top",
+        "visual.header_split_from_top"
+      ]
+    }
+  },
+  "depth_stack_mm": {
+    "z_rear_outer": 0.0,
+    "z_backplate_front": 2.4,
+    "z_spinner_back": 2.55,
+    "z_pocket_floor": 2.7,
+    "z_field": 6.36,
+    "z_pocket_lip_top": 6.96,
+    "z_groove_floor": 6.06,
+    "z_header_plane": 6.76,
+    "z_frame_ledge": 10.16,
+    "z_shelf_top": 7.96,
+    "z_frame_front": 10.96,
+    "pocket_well_depth": 3.66,
+    "z_spinner_front": 17.05,
+    "spinner_protrusion": 6.09,
+    "assembled_envelope_depth": 17.05,
+    "root_recentering_z": -8.525
+  },
+  "assertions": [
+    {
+      "id": "pocket-is-generic-circle",
+      "status": "pass",
+      "detail": "shape circle, generic True"
+    },
+    {
+      "id": "design-toy-fits-at-scale-one",
+      "status": "pass",
+      "detail": "fit scale 1.0 for 65.0 mm tip circle in 67.4 mm well"
+    },
+    {
+      "id": "pocket-side-margin-equals-input",
+      "status": "pass",
+      "detail": "field half-width 39.95 mm, pocket radius 36.95 mm, margin 2.99 mm"
+    },
+    {
+      "id": "room-below-pocket-for-trait-plaque",
+      "status": "pass",
+      "detail": "17.55 mm below the pocket foot; plaque 2.2 + 10.0 mm, lip groove 0.4: 4.95 mm of plain field left (>= 1.0)"
+    },
+    {
+      "id": "trait-rows-fit-plaque",
+      "status": "pass",
+      "detail": "3 rows: 2 x pitch 3.0 + track 1.2 + 2 x 1.4 margin <= plaque 10.0 mm"
+    },
+    {
+      "id": "trait-preview-budget",
+      "status": "pass",
+      "detail": "preview values [88, 36, 86] sum 210 (FDB-DSP-053 budget 210)"
+    },
+    {
+      "id": "junction-fillet-fits-chamfer",
+      "status": "pass",
+      "detail": "2 x tangent 1.24 mm < chamfer length 11.31 mm"
+    },
+    {
+      "id": "corner-bolt-inside-crystal-band",
+      "status": "pass",
+      "detail": "counterbore edge clearance 1.13 mm to band edges (band 5.27 mm, inset 4.24 mm, R 8.11 mm)"
+    },
+    {
+      "id": "seam-bolt-inside-crystal-band",
+      "status": "pass",
+      "detail": "band 5.27 mm vs counterbore 3.0 mm"
+    },
+    {
+      "id": "reliefs-above-structural-threshold",
+      "status": "pass",
+      "detail": "header/main recess, part lift, pocket lip and groove depth are real geometry, not normal-map relief"
+    },
+    {
+      "id": "field-chamfer-chain-never-clamps",
+      "status": "pass",
+      "detail": "field chamfer 5.33 -> groove inner 3.61 mm, (min 0.4; rev-009: no wing offset in the chain)"
+    },
+    {
+      "id": "header-chamfer-chain-never-clamps",
+      "status": "pass",
+      "detail": "bezel chamfer 8.0 mm -> plane chamfer 4.77 mm (min 0.4)"
+    },
+    {
+      "id": "frame-bands-uniform",
+      "status": "pass",
+      "detail": "main bezel top band = 4.56 mm = side band 4.56 mm; diagonal band equals by construction (exact offset)"
+    },
+    {
+      "id": "island-chamfers-equal",
+      "status": "pass",
+      "detail": "header 8.0 mm = main 8.0 mm; field chamfer derives to 5.33 mm"
+    },
+    {
+      "id": "no-wings-rev009",
+      "status": "pass",
+      "detail": "user 15:19: the four corner wings are removed; field around the pocket is plain sandblast + outline groove + gold accents"
+    },
+    {
+      "id": "pocket-centre-unchanged-from-rev008",
+      "status": "pass",
+      "detail": "pocket_top_clearance 4.14 mm = rev-008 0.94 + 3.2; centre y -20.69 mm"
+    },
+    {
+      "id": "rarity-map-covers-four-tiers",
+      "status": "pass",
+      "detail": "FDB-DSP-059 bold aperture; Signature = blue titanium"
+    },
+    {
+      "id": "rarity-palette-muted",
+      "status": "pass",
+      "detail": "every tier accent keeps channel spread <= 0.21 (saturated rev-010 copper was 0.50, gold 0.58)"
+    },
+    {
+      "id": "lighting-reference-bling-recorded",
+      "status": "pass",
+      "detail": "four backlit edge strips + sparkle group + rims 30/26 %; coloured cap 8 % -> 300 % recorded as superseded, not deleted"
+    },
+    {
+      "id": "soft-focus-user-visible-level",
+      "status": "pass",
+      "detail": "threshold 0.7-1.5, radii x3 (0.75 % / 3 % of long edge), mix x3 (24-36 % + 6-9 %); highlight-only masks and final-beauty-only unchanged"
+    },
+    {
+      "id": "frame-ledge-clears-counterbore",
+      "status": "pass",
+      "detail": "band/2 2.63 - bore r 1.5 - ledge 0.9 = 0.23 mm"
+    },
+    {
+      "id": "no-datum-rail",
+      "status": "pass",
+      "detail": "GEO_PDC_HEADER_SILVER_DATUM_RAIL retired; header and main bezels are separate islands"
+    },
+    {
+      "id": "concentric-chain-never-clamps",
+      "status": "pass",
+      "detail": "frame inner R 2.84 -> interior R 1.95 mm; bezel R 6.0 -> plane R 0.48 mm (min 0.4)"
+    },
+    {
+      "id": "hub-near-image-reading",
+      "status": "pass",
+      "detail": "derived 0.6204H vs image 0.6369H"
+    },
+    {
+      "id": "coverage-plus-protrusion-equals-one",
+      "status": "pass",
+      "detail": "0.58 + 0.42 = 1.0000"
+    },
+    {
+      "id": "frame-height-plus-protrusion-equals-thickness",
+      "status": "pass",
+      "detail": "8.41 + 6.09 vs 14.5"
+    },
+    {
+      "id": "protrusion-ratio-in-range",
+      "status": "pass",
+      "detail": "protrusion_ratio 0.42"
+    },
+    {
+      "id": "no-old-contract-dimensions",
+      "status": "pass",
+      "detail": "W 101.29 H 171.79 D 17.05 vs 228x304x59"
+    },
+    {
+      "id": "unknowns-preserved",
+      "status": "pass",
+      "detail": "retention and manufacturing fields stay null"
+    },
+    {
+      "id": "no-provisional-promoted-to-measured",
+      "status": "pass",
+      "detail": "every measured input cites src.spinner_mesh"
+    }
+  ],
+  "scene": {
+    "name_regex": "^(COL|ROOT|GEO|CUT|PIVOT|COLLIDER|CAM|LGT|DECAL|MAT|NG|TEX)_PDC_[A-Z0-9_]+$",
+    "forbid_blender_numeric_suffix": true,
+    "collections": [
+      {
+        "id": "COL_PDC_ROOT",
+        "export": false
+      },
+      {
+        "id": "COL_PDC_REFERENCE_LOCKED",
+        "export": false
+      },
+      {
+        "id": "COL_PDC_CUTTERS",
+        "export": false
+      },
+      {
+        "id": "COL_PDC_GEOMETRY_STATIC",
+        "export": true
+      },
+      {
+        "id": "COL_PDC_DECALS",
+        "export": true
+      },
+      {
+        "id": "COL_PDC_CONTROLS",
+        "export": true
+      },
+      {
+        "id": "COL_PDC_COLLISION",
+        "export": true
+      },
+      {
+        "id": "COL_PDC_CAMERAS",
+        "export": false
+      },
+      {
+        "id": "COL_PDC_LIGHTS_NEUTRAL",
+        "export": false
+      },
+      {
+        "id": "COL_PDC_LIGHTS_BEAUTY",
+        "export": false
+      },
+      {
+        "id": "COL_PDC_LOOKDEV",
+        "export": false
+      },
+      {
+        "id": "COL_PDC_EXPORT",
+        "export": true
+      },
+      {
+        "id": "COL_PDC_DEBUG",
+        "export": false
+      }
+    ],
+    "required_object_custom_properties": [
+      "asset_id",
+      "variant_id",
+      "contract_sha256",
+      "geometry_source",
+      "evidence_class",
+      "export_role",
+      "immutable_geometry",
+      "cmf_zone_id",
+      "softfocus_eligible"
+    ],
+    "core_geometry_objects": [
+      "GEO_PDC_REAR_PLATE",
+      "GEO_PDC_OUTER_CRYSTAL_FRAME",
+      "GEO_PDC_SMOKE_INNER_LINER",
+      "GEO_PDC_HEADER_SATIN_SHELF",
+      "GEO_PDC_HEADER_MIRROR_BEVEL",
+      "GEO_PDC_HEADER_GRAPHITE_PLANE",
+      "GEO_PDC_HEADER_DIVIDER_LINE",
+      "GEO_PDC_COMPARTMENT_SEAM",
+      "GEO_PDC_HEADER_GOLD_INLAY_L",
+      "GEO_PDC_HEADER_GOLD_INLAY_R",
+      "GEO_PDC_MAIN_SATIN_SHELF",
+      "GEO_PDC_MAIN_MIRROR_SEAM",
+      "GEO_PDC_MAIN_MICROBLAST_FIELD",
+      "GEO_PDC_POCKET_POLISHED_LIP",
+      "GEO_PDC_POCKET_SMOKE_WALL",
+      "GEO_PDC_POCKET_GRAPHITE_FLOOR",
+      "GEO_PDC_POCKET_CLIP_00",
+      "GEO_PDC_POCKET_CLIP_01",
+      "GEO_PDC_POCKET_CLIP_02",
+      "GEO_PDC_MAIN_TRAIT_PLAQUE",
+      "GEO_PDC_TRAIT_FILL_00",
+      "GEO_PDC_TRAIT_FILL_01",
+      "GEO_PDC_TRAIT_FILL_02",
+      "GEO_PDC_MAIN_GOLD_RAIL_L",
+      "GEO_PDC_MAIN_GOLD_RAIL_R",
+      "GEO_PDC_MAIN_GOLD_CHAMFER_TL",
+      "GEO_PDC_MAIN_GOLD_CHAMFER_TR",
+      "GEO_PDC_MAIN_GOLD_CHAMFER_BL",
+      "GEO_PDC_MAIN_GOLD_CHAMFER_BR",
+      "GEO_PDC_MAIN_GOLD_INDEX_TAB_L",
+      "GEO_PDC_MAIN_GOLD_INDEX_TAB_R",
+      "GEO_PDC_FRAME_BOLT_00",
+      "GEO_PDC_FRAME_BOLT_01",
+      "GEO_PDC_FRAME_BOLT_02",
+      "GEO_PDC_FRAME_BOLT_03",
+      "GEO_PDC_FRAME_BOLT_04",
+      "GEO_PDC_FRAME_BOLT_05"
+    ],
+    "controls": [
+      "ROOT_PDC_PRESENTATION",
+      "ROOT_PDC_CASE_ASSEMBLY",
+      "PIVOT_PDC_CONTENT_SLOT",
+      "PIVOT_PDC_TURNTABLE"
+    ],
+    "retired_objects_rev005": {
+      "GEO_PDC_MAIN_CORNER_FACETS": "replaced by the chamfered field outline itself"
+    },
+    "retired_objects_rev006": {
+      "GEO_PDC_HEADER_SILVER_DATUM_RAIL": "not in the reference; header and main are separate islands with a dark seam",
+      "GEO_PDC_POCKET_MIRROR_RIM": "sunken chamfer replaced by the raised GEO_PDC_POCKET_POLISHED_LIP"
+    },
+    "engraved_lines_rev006": [
+      "field outline groove",
+      "bottom band surround groove",
+      "pocket lip foot groove"
+    ],
+    "retired_objects_rev007": {
+      "GEO_PDC_MAIN_BRUSHED_BAND_BOTTOM": "replaced by GEO_PDC_MAIN_TRAIT_PLAQUE (three 0-100 tracks, FDB-DSP-053)"
+    },
+    "runtime_dynamic_objects_rev007": {
+      "GEO_PDC_TRAIT_FILL_00": "SPIN",
+      "GEO_PDC_TRAIT_FILL_01": "FEEL",
+      "GEO_PDC_TRAIT_FILL_02": "CRAFT",
+      "rule": "exported at 100 % length; PremiumDisplayCaseTraitBlock-equivalent shortens to ToyTalentCatalog values"
+    },
+    "engraved_lines_rev007": [
+      "trait plaque surround groove",
+      "3 trait troughs",
+      "9 quartile tick notches"
+    ],
+    "retired_objects_rev008": {
+      "GEO_PDC_MAIN_BRUSHED_PANEL_L": "replaced by four mirrored wings GEO_PDC_MAIN_WING_{TL,TR,BL,BR}",
+      "GEO_PDC_MAIN_BRUSHED_PANEL_R": "idem",
+      "GEO_PDC_MAIN_GOLD_RAIL_00": "-> GEO_PDC_MAIN_GOLD_RAIL_L",
+      "GEO_PDC_MAIN_GOLD_RAIL_01": "-> GEO_PDC_MAIN_GOLD_RAIL_R",
+      "GEO_PDC_MAIN_GOLD_INDEX_TAB": "-> _L and _R"
+    },
+    "retired_objects_rev009": {
+      "GEO_PDC_MAIN_WING_TL": "removed; user 15:19 '把这四个角去掉吧，有点太复杂了'",
+      "GEO_PDC_MAIN_WING_TR": "removed; user 15:19 '把这四个角去掉吧，有点太复杂了'",
+      "GEO_PDC_MAIN_WING_BL": "removed; user 15:19 '把这四个角去掉吧，有点太复杂了'",
+      "GEO_PDC_MAIN_WING_BR": "removed; user 15:19 '把这四个角去掉吧，有点太复杂了'"
+    },
+    "rarity_cmf_rev009": {
+      "source_id": "src.user_gate05_rev008_variation_decisions_20260910",
+      "decisions": {
+        "aperture": "宽：边框也换（推翻 FDB-DSP-014 禁止大面积）",
+        "signature": "烧钛蓝（与 Standard 冷钢区分明显）",
+        "softfocus": "留到 Gate 08 灯光定稿时再开，Gate 05–07 审阅图保持 clean"
+      },
+      "aperture": "bold",
+      "tier_zones": {
+        "follow_tier": [
+          5,
+          6,
+          7,
+          "2 (liner tint)"
+        ],
+        "constant": [
+          1,
+          3,
+          4
+        ]
+      },
+      "requirement": "FDB-DSP-059"
+    },
+    "cmf_scheme_a_zone_map": {
+      "1": [
+        "GEO_PDC_OUTER_CRYSTAL_FRAME",
+        "GEO_PDC_POCKET_CLIP_*"
+      ],
+      "2": [
+        "GEO_PDC_SMOKE_INNER_LINER",
+        "GEO_PDC_COMPARTMENT_SEAM",
+        "GEO_PDC_POCKET_SMOKE_WALL"
+      ],
+      "3": [
+        "GEO_PDC_REAR_PLATE",
+        "GEO_PDC_MAIN_MICROBLAST_FIELD"
+      ],
+      "4": [
+        "GEO_PDC_HEADER_GRAPHITE_PLANE",
+        "GEO_PDC_MAIN_TRAIT_PLAQUE",
+        "GEO_PDC_POCKET_GRAPHITE_FLOOR"
+      ],
+      "5": [
+        "GEO_PDC_HEADER_SATIN_SHELF",
+        "GEO_PDC_MAIN_SATIN_SHELF",
+        "GEO_PDC_FRAME_BOLT_*"
+      ],
+      "6": [
+        "GEO_PDC_HEADER_MIRROR_BEVEL",
+        "GEO_PDC_MAIN_MIRROR_SEAM",
+        "GEO_PDC_POCKET_POLISHED_LIP",
+        "GEO_PDC_HEADER_DIVIDER_LINE"
+      ],
+      "7": [
+        "GEO_PDC_*GOLD*",
+        "GEO_PDC_TRAIT_FILL_*"
+      ],
+      "finish_intent": {
+        "3": "dark sandblast (matte, recessed)",
+        "4": "piano-black gloss (plates)",
+        "5": "directional brushed steel (flats)",
+        "6": "bright mirror polish (bevels, lip, divider)",
+        "7": "champagne gold (Standard base; rarity tiers per cmf.rarity_tier_map)"
+      },
+      "rule": "raised = polished, flats = brushed, recessed = sandblasted; finishes meet on crisp geometric edges (Royal Oak anglage principle)"
+    }
+  },
+  "geometry_builder": {
+    "method": "deterministic_bpy",
+    "manual_final_vertex_dragging_forbidden": true,
+    "transparent_shell_must_be_watertight": true,
+    "single_sided_alpha_shell_forbidden": true,
+    "coplanar_transparent_faces_forbidden": true,
+    "minimum_render_separation_mm": 0.02,
+    "structural_relief_geometry_threshold_mm": 0.2,
+    "subdivision_for_dimension_creation_forbidden": true,
+    "bevel": {
+      "profile": 0.5,
+      "clamp_overlap": true,
+      "max_fraction_of_local_min_width": 0.35,
+      "outer_segments": 6,
+      "inner_segments": 3,
+      "micro_segments": 2
+    },
+    "smooth_by_angle_deg": 30,
+    "modifier_order": [
+      "010_MIRROR_X",
+      "020_BOOLEAN_MAIN_CUT_EXACT",
+      "021_BOOLEAN_HEADER_CUT_EXACT",
+      "022_BOOLEAN_DETAIL_CUT_EXACT",
+      "030_BEVEL_PRIMARY",
+      "040_BEVEL_MICRO",
+      "050_WEIGHTED_NORMAL",
+      "060_WRITE_FACE_ATTRIBUTES",
+      "090_TRIANGULATE_EXPORT"
+    ],
+    "source_triangulation_enabled": false,
+    "export_duplicate_triangulation_enabled": true,
+    "gold_inlay_components": [
+      "rail_00",
+      "rail_01",
+      "chamfer_tl",
+      "index_tab",
+      "header_inlay_l",
+      "header_inlay_r"
+    ],
+    "closed_gold_loop_forbidden": true,
+    "nested_offset_rule": {
+      "rule": "Every nested outline is the exact inward offset of its parent outline by the local wall/shelf width; corner arcs share the parent's arc centre (concentric) and chamfers stay parallel.",
+      "min_corner_radius_mm": 0.4,
+      "source_id": "src.user_gate05_rev004_rejection_20260910",
+      "validation": "05-blockout validation asserts every rounded-rect pair reports concentric=true"
+    },
+    "bolt_construction": "cylindrical head with hexagonal socket, seated in a counterbore cut into the crystal band (BOOLEAN EXACT, applied before bevel)",
+    "uniform_offset_rule": {
+      "source_id": "src.user_gate05_rev007_decisions_20260910",
+      "rule": "Each steel island has ONE master outline (four equal 45-degree chamfers, interior.island_corner_chamfer_mm, junction fillets). Every nested contour is an exact inward offset: main bezel -> field (shelf) -> groove (+inset, +width); header bezel -> mirror bevel -> plate. Band widths are therefore equal on the sides, top, bottom and diagonals.",
+      "symmetry": "rev-009: no wings; gold accents mirrored L/R and T/B; trait plaque centred; pocket centred on the field width."
+    },
+    "junction_fillet_rule": {
+      "source_id": "src.user_gate05_rev006_feedback_fillets_20260910",
+      "rule": "Every vertex where a 45-degree chamfer meets a straight edge is filleted (interior.junction_fillet_mm on the outer outline). Insets keep max(r - d, interior.junction_fillet_min_mm). Wing polygons are filleted at every vertex (main.wing_corner_fillet_mm).",
+      "sampling": "each corner still emits seg+1 points, resampled by arc length over fillet-chamfer-fillet, so nested outlines bridge 1:1"
+    },
+    "trait_plaque_rule": {
+      "source_id": "src.user_gate05_rev006_feedback_trait_plaque_20260910",
+      "requirement": "FDB-DSP-053",
+      "rule": "Raised brushed plaque with surround groove; three troughs (label column | 0-100 track | value column) top-down SPIN, FEEL, CRAFT; quartile tick notches; fill strips as separate runtime-dynamic objects authored at 100 % and shown at preview lengths."
+    },
+    "level_stack_rule": {
+      "source_id": "src.user_gate05_rev005_feedback_20260910",
+      "rule": "Inside each compartment the holder must read as distinct steps: bezel top -> 45-degree mirror chamfer -> recessed field -> engraved outline groove -> raised brushed wings/band (with surround groove) -> raised polished lip (outer chamfer, inner slope) -> smoke wall -> graphite floor. Every step is geometry with its own bevel; no step may be implied by shading alone.",
+      "engraving": "grooves are BOOLEAN EXACT cuts of main.groove_width_mm x main.groove_depth_mm, applied before bevel",
+      "frame_profile": "outer rounded lip + inner ledge stepped down case.frame_ledge_drop_mm (stepped ring, one watertight mesh)"
+    }
+  },
+  "vertex_channels": {
+    "COLOR0.r": "edge_thickness_mask",
+    "COLOR0.g": "edge_iridescence_mask",
+    "COLOR0.b": "finish_mix_mask",
+    "COLOR0.a": "constant_1",
+    "UV2.x": "brushing_angle_normalized",
+    "UV2.y": "cmf_zone_id_div_255"
+  },
+  "materials": {
+    "case_material_slot_budget": 7,
+    "caller_owned_spinner_materials_excluded_from_case_export": true,
+    "new_materials_require_library_registration_after_approval": true,
+    "materials": [
+      {
+        "id": "case-clear-crystal",
+        "slot": 1,
+        "library_status": "proposed",
+        "evidence_class": "recommended_start",
+        "blender": {
+          "shader": "Principled BSDF",
+          "base_color_srgb_hex": "#F8FBFF",
+          "base_color_linear": [
+            0.938686,
+            0.964686,
+            1.0
+          ],
+          "metallic": 0.0,
+          "roughness_range": [
+            0.025,
+            0.045
+          ],
+          "transmission_weight": 1.0,
+          "ior": 1.49,
+          "coat_weight": 0.08,
+          "coat_roughness": 0.03,
+          "thin_walled": false,
+          "emission": 0.0,
+          "thin_film_mask": "constant_1 (whole crystal); COLOR0.g = optional edge boost, baked at Gate 06",
+          "thin_film_thickness_nm_range": [
+            300,
+            650
+          ],
+          "thin_film_ior_range": [
+            1.33,
+            1.38
+          ],
+          "thin_film_mask_superseded": "COLOR0.g",
+          "thin_film_thickness_nm_range_superseded": [
+            280,
+            380
+          ],
+          "thin_film_variation": "soft noise scale 18 across the range",
+          "rev011_note": "user 16:5x chose the reference-matched iridescence; previous edge-only 280-380 nm read invisible"
+        },
+        "unity": {
+          "shader": "PDC/ClearCrystal",
+          "surface": "transparent",
+          "blend": "premultiplied",
+          "queue": 3000,
+          "zwrite_color_pass": false,
+          "cull": "back",
+          "ior": 1.49,
+          "f0": 0.0387,
+          "smoothness_range": [
+            0.96,
+            0.98
+          ],
+          "broad_plane_alpha_range": [
+            0.08,
+            0.16
+          ],
+          "edge_alpha_range": [
+            0.2,
+            0.32
+          ],
+          "reflection_weight_range": [
+            0.75,
+            1.0
+          ],
+          "refraction_offset_range": [
+            0.003,
+            0.01
+          ],
+          "emission": 0.0
+        }
+      },
+      {
+        "id": "case-smoke-lilac-liner",
+        "slot": 2,
+        "library_status": "proposed",
+        "evidence_class": "recommended_start",
+        "blender": {
+          "shader": "Principled BSDF plus Volume Absorption",
+          "base_color_srgb_hex": "#EEEAF4",
+          "base_color_linear": [
+            0.854993,
+            0.822786,
+            0.904661
+          ],
+          "metallic": 0.0,
+          "roughness_range": [
+            0.12,
+            0.18
+          ],
+          "transmission_weight_range": [
+            0.7,
+            0.85
+          ],
+          "ior": 1.49,
+          "emission": 0.0
+        },
+        "unity": {
+          "shader": "PDC/SmokeLiner",
+          "surface": "transparent",
+          "blend": "premultiplied",
+          "queue": 2990,
+          "base_color_srgb_hex": "#D8D2E0",
+          "alpha_range": [
+            0.25,
+            0.45
+          ],
+          "smoothness_range": [
+            0.8,
+            0.88
+          ],
+          "emission": 0.0
+        }
+      },
+      {
+        "id": "case-backplate-microblast",
+        "slot": 3,
+        "library_status": "proposed_from_blade-sandblast",
+        "evidence_class": "recommended_start",
+        "blender": {
+          "base_color_srgb_hex": "#AEB3B6",
+          "base_color_linear": [
+            0.423268,
+            0.450786,
+            0.467784
+          ],
+          "metallic": 1.0,
+          "roughness_range": [
+            0.4,
+            0.5
+          ],
+          "feature_mm_range": [
+            0.08,
+            0.18
+          ],
+          "bump_mm_range": [
+            0.006,
+            0.015
+          ],
+          "roughness_delta": 0.03,
+          "seed": 4107,
+          "mapping_axis": "object_local"
+        },
+        "unity": {
+          "shader": "Universal Render Pipeline/Lit",
+          "base_color_srgb_hex": "#AEB3B6",
+          "metallic": 1.0,
+          "smoothness_range": [
+            0.5,
+            0.6
+          ],
+          "detail_normal_strength_range": [
+            0.12,
+            0.18
+          ]
+        }
+      },
+      {
+        "id": "case-header-graphite",
+        "slot": 4,
+        "library_status": "proposed",
+        "evidence_class": "recommended_start",
+        "blender": {
+          "base_color_srgb_hex": "#1C1E22",
+          "base_color_linear": [
+            0.011612,
+            0.012983,
+            0.015996
+          ],
+          "metallic": 0.05,
+          "roughness_range": [
+            0.38,
+            0.48
+          ],
+          "emission": 0.0
+        },
+        "unity": {
+          "shader": "Universal Render Pipeline/Lit",
+          "base_color_srgb_hex": "#1C1E22",
+          "metallic": 0.05,
+          "smoothness_range": [
+            0.52,
+            0.62
+          ],
+          "emission": 0.0
+        }
+      },
+      {
+        "id": "steel-satin",
+        "slot": 5,
+        "library_status": "reuse_existing",
+        "evidence_class": "repository_constraint",
+        "use_material_library_values_verbatim": true,
+        "blender_reference": {
+          "base_color_registered": [
+            0.78,
+            0.79,
+            0.8
+          ],
+          "metallic": 1.0,
+          "roughness": 0.36,
+          "anisotropy_start_range": [
+            0.2,
+            0.3
+          ],
+          "brush_pitch_mm_range": [
+            0.04,
+            0.08
+          ]
+        },
+        "unity_reference": {
+          "material_name": "M_GeeoneSatin",
+          "base_color_srgb_hex": "#C6C8CA",
+          "metallic": 1.0,
+          "smoothness": 0.64
+        }
+      },
+      {
+        "id": "case-smoked-mirror-silver",
+        "slot": 6,
+        "library_status": "proposed",
+        "evidence_class": "recommended_start",
+        "blender": {
+          "base_color_srgb_hex": "#667078",
+          "base_color_linear": [
+            0.132868,
+            0.162029,
+            0.187821
+          ],
+          "metallic": 1.0,
+          "roughness_range": [
+            0.06,
+            0.1
+          ],
+          "visible_grain": false
+        },
+        "unity": {
+          "shader": "Universal Render Pipeline/Lit",
+          "base_color_srgb_hex": "#667078",
+          "metallic": 1.0,
+          "smoothness_range": [
+            0.9,
+            0.94
+          ]
+        }
+      },
+      {
+        "id": "case-champagne-gold-inlay",
+        "slot": 7,
+        "library_status": "proposed",
+        "evidence_class": "recommended_start",
+        "forbid_reuse_material_id": "gold-mesh",
+        "blender": {
+          "base_color_srgb_hex": "#C8B48B",
+          "base_color_linear": [
+            0.57758,
+            0.456411,
+            0.258183
+          ],
+          "metallic": 1.0,
+          "roughness_range": [
+            0.22,
+            0.3
+          ],
+          "anisotropy_range": [
+            0.1,
+            0.2
+          ],
+          "brushing_axis": "inlay_long_axis",
+          "emission": 0.0
+        },
+        "unity": {
+          "shader": "Universal Render Pipeline/Lit",
+          "base_color_srgb_hex": "#C8B48B",
+          "metallic": 1.0,
+          "smoothness_range": [
+            0.7,
+            0.78
+          ],
+          "emission": 0.0
+        }
+      }
+    ]
+  },
+  "cameras": {
+    "recipe_space": "canonical_product",
+    "orthographic": {
+      "projection": "orthographic",
+      "resolution_px": [
+        2048,
+        2048
+      ],
+      "margin_each_side_ratio": 0.06,
+      "dof": false,
+      "motion_blur": false,
+      "target": "render_bounds_center",
+      "distance_in_max_bound": 2.5,
+      "near_clip_formula": "max(0.1mm, 0.001*max_render_bound)",
+      "far_clip_in_max_bound": 10.0,
+      "fit_bounds_excludes": [
+        "lights",
+        "floor",
+        "cutters",
+        "debug",
+        "references"
+      ],
+      "views": [
+        {
+          "id": "front",
+          "view_direction": [
+            0,
+            0,
+            -1
+          ],
+          "image_up": [
+            0,
+            1,
+            0
+          ]
+        },
+        {
+          "id": "back",
+          "view_direction": [
+            0,
+            0,
+            1
+          ],
+          "image_up": [
+            0,
+            1,
+            0
+          ]
+        },
+        {
+          "id": "left",
+          "view_direction": [
+            1,
+            0,
+            0
+          ],
+          "image_up": [
+            0,
+            1,
+            0
+          ]
+        },
+        {
+          "id": "right",
+          "view_direction": [
+            -1,
+            0,
+            0
+          ],
+          "image_up": [
+            0,
+            1,
+            0
+          ]
+        },
+        {
+          "id": "top",
+          "view_direction": [
+            0,
+            -1,
+            0
+          ],
+          "image_up": [
+            0,
+            0,
+            -1
+          ]
+        },
+        {
+          "id": "bottom",
+          "view_direction": [
+            0,
+            1,
+            0
+          ],
+          "image_up": [
+            0,
+            0,
+            1
+          ]
+        }
+      ]
+    },
+    "hero": {
+      "projection": "perspective",
+      "sensor_mm": [
+        36,
+        24
+      ],
+      "focal_length_mm": 85,
+      "yaw_deg": 25,
+      "elevation_deg": 5,
+      "roll_deg": 0,
+      "margin_ratio": 0.08,
+      "dof_for_parity": false,
+      "beauty_dof_after_parity_only": true,
+      "beauty_f_stop_start": 8.0
+    },
+    "required_view_ids": [
+      "front",
+      "back",
+      "top",
+      "bottom",
+      "left",
+      "right",
+      "hero",
+      "left-oblique",
+      "right-oblique",
+      "low-oblique",
+      "side-thickness-macro",
+      "header-macro",
+      "main-cmf-macro",
+      "crystal-bevel-macro"
+    ]
+  },
+  "lighting": {
+    "calibration": {
+      "target": "18_percent_lambert_gray_card",
+      "scene_linear_luminance": 0.18,
+      "tolerance": 0.02,
+      "absolute_power_must_be_written_after_calibration": true
+    },
+    "neutral": {
+      "background_srgb_range": [
+        "#050608",
+        "#0A0B0D"
+      ],
+      "lights": [
+        {
+          "id": "key",
+          "temperature_k": 5600,
+          "relative_power": 1.0
+        },
+        {
+          "id": "fill",
+          "temperature_k": 5600,
+          "relative_power": 0.25
+        },
+        {
+          "id": "rear",
+          "temperature_k": 5600,
+          "relative_power": 0.18
+        }
+      ],
+      "colored_lights": false,
+      "bloom": false,
+      "dof": false,
+      "reflective_floor": false
+    },
+    "beauty": {
+      "position_space": "hero_camera_local",
+      "position_vector_semantics": [
+        "camera_right",
+        "camera_to_target",
+        "camera_up"
+      ],
+      "scale_reference": "assembled_bbox_diagonal_B",
+      "world_srgb_hex": "#000103",
+      "world_strength_range": [
+        0.003,
+        0.008
+      ],
+      "colored_light_energy_hard_max_percent_of_white": 300.0,
+      "lights": [
+        {
+          "id": "LGT_PDC_SOFT_KEY",
+          "position_b": [
+            -0.7,
+            0.72,
+            0.8
+          ],
+          "size_b": [
+            0.85,
+            0.4
+          ],
+          "temperature_k": 5600,
+          "relative_power": 1.0
+        },
+        {
+          "id": "LGT_PDC_RIGHT_STRIP",
+          "position_b": [
+            0.72,
+            0.12,
+            0.55
+          ],
+          "size_b": [
+            0.055,
+            0.95
+          ],
+          "temperature_k": 6500,
+          "relative_power_range": [
+            0.35,
+            0.45
+          ]
+        },
+        {
+          "id": "LGT_PDC_TOP_RAIL",
+          "position_b": [
+            -0.05,
+            0.88,
+            0.15
+          ],
+          "size_b": [
+            0.58,
+            0.045
+          ],
+          "temperature_k": 5000,
+          "relative_power_range": [
+            0.12,
+            0.18
+          ]
+        },
+        {
+          "id": "LGT_PDC_COOL_RIM",
+          "optional": true,
+          "position_b": [
+            -0.5,
+            0.1,
+            -0.48
+          ],
+          "size_b": [
+            0.045,
+            0.58
+          ],
+          "color_srgb_hex": "#77D8FF",
+          "relative_power_max": 0.3,
+          "rev011_note": "raised from 0.05 (user 16:5x)"
+        },
+        {
+          "id": "LGT_PDC_LILAC_RIM",
+          "optional": true,
+          "position_b": [
+            0.48,
+            -0.02,
+            -0.52
+          ],
+          "size_b": [
+            0.045,
+            0.5
+          ],
+          "color_srgb_hex": "#C9A7FF",
+          "relative_power_max": 0.26,
+          "rev011_note": "raised from 0.03 (user 16:5x)"
+        },
+        {
+          "id": "LGT_PDC_FRONT_FILL",
+          "position_b": [
+            0,
+            -0.28,
+            1.05
+          ],
+          "size_b": [
+            0.95,
+            0.6
+          ],
+          "temperature_k": 6000,
+          "relative_power_range": [
+            0.05,
+            0.08
+          ]
+        },
+        {
+          "id": "LGT_PDC_EDGE_L_CYAN",
+          "position_b": [
+            -0.7,
+            -0.22,
+            0.1
+          ],
+          "size_b": [
+            0.03,
+            1.2
+          ],
+          "color_srgb_hex": "#4FD2FF",
+          "relative_power": 1.3,
+          "role": "backlit grazing edge strip"
+        },
+        {
+          "id": "LGT_PDC_EDGE_T_BLUE",
+          "position_b": [
+            -0.1,
+            -0.22,
+            0.7
+          ],
+          "size_b": [
+            0.8,
+            0.03
+          ],
+          "color_srgb_hex": "#6FA8FF",
+          "relative_power": 0.9,
+          "role": "backlit grazing edge strip"
+        },
+        {
+          "id": "LGT_PDC_EDGE_R_MAGENTA",
+          "position_b": [
+            0.7,
+            -0.22,
+            -0.06
+          ],
+          "size_b": [
+            0.03,
+            1.2
+          ],
+          "color_srgb_hex": "#FF5FD6",
+          "relative_power": 1.2,
+          "role": "backlit grazing edge strip"
+        },
+        {
+          "id": "LGT_PDC_EDGE_B_PINK",
+          "position_b": [
+            0.1,
+            -0.22,
+            -0.7
+          ],
+          "size_b": [
+            0.8,
+            0.03
+          ],
+          "color_srgb_hex": "#FF8AC8",
+          "relative_power": 0.8,
+          "role": "backlit grazing edge strip"
+        }
+      ],
+      "each_light_has_separate_light_group": true,
+      "iteration_order": [
+        "exposure",
+        "material_roughness",
+        "light_position_and_size",
+        "soft_focus"
+      ],
+      "sparkle_group": {
+        "id_prefix": "LGT_PDC_SPARKLE_",
+        "count": 8,
+        "shape": "SQUARE",
+        "size_b": 0.03,
+        "relative_power_each": 0.16,
+        "colors_srgb_hex_cycle": [
+          "#7FE0FF",
+          "#FFFFFF",
+          "#FF7AE0",
+          "#FFFFFF"
+        ],
+        "placement": "camera-side hemisphere, azimuth -70..70 deg, x = sin(az) * 0.9, y = -(0.55 + 0.25 * (i % 2)), z = 0.05 + 0.65 * ((i % 3) / 2)",
+        "purpose": "many small hard specular hits on facets, bevels, bolts and clips (user: 布灵布灵)"
+      },
+      "review_fill": {
+        "top_fill_relative_power": 0.25,
+        "world_srgb": [
+          0.3,
+          0.31,
+          0.34
+        ],
+        "world_strength_factor_of_review": 0.5,
+        "note": "review-preview fill so the case is readable; Gate 08 calibrates the shipping fill"
+      },
+      "colored_light_energy_hard_max_percent_of_white_superseded": 8.0,
+      "colored_light_note": "rev-011: user chose the reference-matched look; coloured strips total ~4.8 x key vs white ~1.7 x key (~280 %). The spec's 8 % accent rule is superseded for this variant (FDB-DSP-061).",
+      "render_glossy_filter": 0.0,
+      "decision_source_id": "src.user_gate05_rev010_lookdev_decisions_20260910"
+    }
+  },
+  "blender_render": {
+    "engine": "CYCLES",
+    "device": "record_in_manifest",
+    "seed": 4107,
+    "animated_seed": false,
+    "light_tree": true,
+    "samples": {
+      "orthographic_and_material_board": 512,
+      "hero": 1024,
+      "hero_final_optional": 2048,
+      "turntable": 1024
+    },
+    "adaptive_threshold": {
+      "orthographic_and_material_board": 0.005,
+      "hero": 0.0025,
+      "turntable": 0.004
+    },
+    "minimum_samples": {
+      "orthographic_and_material_board": 64,
+      "hero": 128,
+      "turntable": 64
+    },
+    "denoiser": "OIDN_albedo_normal",
+    "bounces": {
+      "total": 20,
+      "diffuse": 4,
+      "glossy": 8,
+      "transmission": 16,
+      "transparent": 16,
+      "volume": 2,
+      "minimum": 3
+    },
+    "caustics": {
+      "reflective_beauty": true,
+      "refractive_beauty": true,
+      "parity_state_must_be_recorded": true
+    },
+    "clamp_direct": 0,
+    "clamp_indirect_range": [
+      8,
+      10
+    ],
+    "filter_glossy_range": [
+      0.2,
+      0.3
+    ],
+    "pixel_filter": {
+      "type": "BLACKMAN_HARRIS",
+      "width_px": 1.0
+    },
+    "motion_blur": false,
+    "dof_validation": false,
+    "color_management": {
+      "view_transform": "AgX",
+      "look": "Medium High Contrast",
+      "exposure_ev": -0.25,
+      "evidence_class": "recommended_start",
+      "parity_authority": "scene_linear_exr"
+    },
+    "outputs": {
+      "master": "32_bit_multilayer_openexr_zip_scene_linear",
+      "review": "16_bit_png",
+      "passes": [
+        "combined_raw",
+        "combined_denoised",
+        "diffuse",
+        "glossy",
+        "transmission",
+        "normal",
+        "depth",
+        "position",
+        "cryptomatte_object",
+        "cryptomatte_material",
+        "aov_roughness",
+        "aov_metallic",
+        "aov_iridescence_mask",
+        "aov_cmf_zone_id"
+      ],
+      "macro_requires_raw_and_denoised": true
+    }
+  },
+  "soft_focus": {
+    "enabled_only_for_final_beauty": true,
+    "disabled_for_validation_and_parity": true,
+    "working_space": "scene_linear",
+    "luminance_weights": [
+      0.2126,
+      0.7152,
+      0.0722
+    ],
+    "highlight_smoothstep": [
+      0.7,
+      1.5
+    ],
+    "object_masks": [
+      "outer_crystal",
+      "mirror_bevel",
+      "spinner_facets"
+    ],
+    "excluded_masks": [
+      "typography",
+      "backplate",
+      "large_light_surfaces",
+      "silhouette_validation"
+    ],
+    "blur_radius_relative_to_long_edge": [
+      0.0075,
+      0.03
+    ],
+    "blur_mix_weight_ranges": [
+      [
+        0.24,
+        0.36
+      ],
+      [
+        0.06,
+        0.09
+      ]
+    ],
+    "blur_beauty_directly": false,
+    "blur_alpha": false,
+    "global_blur_forbidden": true,
+    "chromatic_aberration_forbidden": true,
+    "required_outputs": [
+      "beauty-clean",
+      "beauty-soft"
+    ],
+    "revision_note": "rev-010: spec ranges (0.9-1.8 / 0.25-1 % / 8-12 % + 2-3 %) changed <= 1.5 % of hero pixels and were invisible to the user; chosen level measured 4.83 % on the rev-009 hero. Still highlight-only, masked, final-beauty-only.",
+    "decision_source_id": "src.user_gate05_rev009_softfocus_decision_20260910",
+    "spec_ranges_superseded": {
+      "highlight_smoothstep": [
+        0.9,
+        1.8
+      ],
+      "blur_radius_relative_to_long_edge": [
+        0.0025,
+        0.01
+      ],
+      "blur_mix_weight_ranges": [
+        [
+          0.08,
+          0.12
+        ],
+        [
+          0.02,
+          0.03
+        ]
+      ]
+    }
+  },
+  "turntable": {
+    "rotation_owner": "PresentationRoot",
+    "camera_fixed": true,
+    "lights_fixed": true,
+    "frame_count": 144,
+    "degrees_per_frame": 2.5,
+    "fps": 24,
+    "duration_seconds": 6,
+    "required_still_angles_deg": [
+      0,
+      25,
+      90,
+      200,
+      335
+    ]
+  },
+  "unity_urp": {
+    "project_upgrade_forbidden": true,
+    "render_order": [
+      "opaque_case_and_content",
+      "smoke_liner",
+      "clear_crystal"
+    ],
+    "render_queues": {
+      "opaque": 2000,
+      "smoke_liner": 2990,
+      "clear_crystal": 3000
+    },
+    "arbitrary_per_camera_sorting_fix_forbidden": true,
+    "urp_asset": {
+      "hdr": true,
+      "opaque_texture_if_refraction_enabled": true,
+      "depth_texture": true,
+      "msaa_start": 4,
+      "render_scale": 1.0
+    },
+    "camera": {
+      "physical": true,
+      "sensor_mm": [
+        36,
+        24
+      ],
+      "hero_focal_length_mm": 85,
+      "must_use_shared_camera_recipe": true
+    },
+    "reflection_environment": {
+      "must_match_blender_studio_intent": true,
+      "reflection_probe_or_cubemap_required": true,
+      "baked_highlights_in_albedo_forbidden": true
+    },
+    "post_processing_beauty_start": {
+      "validation_volume_disabled": true,
+      "bloom_threshold_range": [
+        1.1,
+        1.4
+      ],
+      "bloom_intensity_range": [
+        0.05,
+        0.12
+      ],
+      "bloom_scatter_range": [
+        0.45,
+        0.55
+      ],
+      "bloom_clamp_range": [
+        8,
+        12
+      ],
+      "lens_dirt": 0,
+      "vignette_intensity_range": [
+        0.08,
+        0.12
+      ],
+      "vignette_smoothness_range": [
+        0.25,
+        0.35
+      ],
+      "chromatic_aberration": 0,
+      "film_grain_range": [
+        0,
+        0.02
+      ],
+      "soft_focus_implementation": "custom_highlight_only_scriptable_renderer_feature"
+    },
+    "transparent_sorting_validation": {
+      "full_turn_degrees": 360,
+      "allowed_pops": 0,
+      "allowed_disappearances": 0,
+      "allowed_wrong_occlusions": 0,
+      "preferred_repairs": [
+        "remove_coplanar_faces",
+        "fix_watertightness_and_winding",
+        "split_front_and_back_shells_if_proven",
+        "bounded_depth_prepass_if_proven"
+      ]
+    }
+  },
+  "performance_budget": {
+    "case_triangles_max": 120000,
+    "case_material_slots_max": 7,
+    "project_material_slots_hard_max": 8,
+    "additional_realtime_lights_max": 3,
+    "cpu_incremental_ms_max": 0.2,
+    "gpu_incremental_ms_max": 1.5,
+    "managed_allocations_bytes_per_frame": 0,
+    "target_fps": 60,
+    "target_device": "target_iPhone_release_build",
+    "simulator_can_pass_gpu_budget": false
+  },
+  "acceptance": {
+    "geometry": {
+      "imported_bounds_delta_percent_max": 0.1,
+      "front_silhouette_iou_min": 0.995,
+      "anchor_delta_px_max_at_2048": 2,
+      "spinner_pivot_delta_mm_max": 0.1,
+      "spinner_protrusion_error_mm_max": 0.25,
+      "root_rotation_zero": true,
+      "root_scale_one": true,
+      "negative_scale_forbidden": true,
+      "normals_and_tangents_valid": true
+    },
+    "materials_and_light": {
+      "transparent_mean_transmission_luma_delta_percent_max": 5,
+      "bevel_highlight_center_drift_product_width_percent_max": 1,
+      "gold_visible_area_percent_range": [
+        5,
+        8
+      ],
+      "iridescent_edge_visible_area_percent_max": 8,
+      "transparent_sorting_pops_allowed": 0,
+      "coplanar_transparent_overlaps_allowed": 0,
+      "emissive_case_pixels_allowed": 0
+    },
+    "soft_focus": {
+      "clean_output_required": true,
+      "soft_output_required": true,
+      "differences_outside_registered_highlight_mask_allowed": false,
+      "typography_blur_allowed": false,
+      "silhouette_blur_allowed": false,
+      "backplate_texture_blur_allowed": false
+    },
+    "human_approval_required": [
+      "blockout_proportion_and_depth",
+      "geometry_layering_and_protrusion",
+      "neutral_light_material_hierarchy",
+      "unity_target_device_visual_and_performance",
+      "gate12_shipping"
+    ]
+  },
+  "required_artifacts": {
+    "views": [
+      "front",
+      "back",
+      "top",
+      "bottom",
+      "left",
+      "right",
+      "hero",
+      "left-oblique",
+      "right-oblique",
+      "low-oblique",
+      "side-thickness-macro",
+      "header-macro",
+      "main-cmf-macro",
+      "crystal-bevel-macro"
+    ],
+    "diagnostic_passes": [
+      "clay",
+      "wireframe",
+      "normal",
+      "depth",
+      "roughness",
+      "transmission",
+      "material_id"
+    ],
+    "manifest_fields": [
+      "artifact_id",
+      "gate",
+      "slot",
+      "role",
+      "repository_relative_path",
+      "producer",
+      "producer_version",
+      "recipe",
+      "camera_id",
+      "render_pass",
+      "sha256",
+      "byte_size",
+      "input_contract_sha256",
+      "status"
+    ]
+  },
+  "validation_rules": [
+    "Unresolved blocking inputs fail closed.",
+    "Spinner source path and SHA-256 are required before Gate 04 approval.",
+    "Orthographic camera IDs must be exactly front, back, top, bottom, left, right.",
+    "Scene names and material IDs must be unique and must not contain Blender numeric suffixes.",
+    "Formula graph must be unit-safe and acyclic.",
+    "Transparent meshes must be watertight and must not contain coplanar nested faces.",
+    "frame_coverage_of_spinner_thickness plus spinner.protrusion_ratio must equal 1 within 0.001.",
+    "frame front height plus protrusion must equal spinner thickness within 0.01 mm.",
+    "Gold visible area must be between 5 and 8 percent and must not form a closed loop.",
+    "Soft focus may modify Beauty only and must ship with a clean comparison.",
+    "Any source or contract hash change marks the owning gate and all downstream gates stale.",
+    "Shipping previews must show the whole assembled case, never an exploded technical view."
+  ],
+  "hashing": {
+    "algorithm": "sha256",
+    "canonical_json": "RFC8785-style: sorted keys, no whitespace, integral floats as integers (see resolve_contract.py)",
+    "contract_sha256": "f102ac87fbcc8c961e3b5103271ae640dc04c60b9dcbf85a80e17c1ffa7ce138",
+    "invalidation": "changed_source_or_contract_marks_owner_and_all_downstream_stale"
+  }
+}

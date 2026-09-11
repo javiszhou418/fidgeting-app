@@ -1,0 +1,53 @@
+{
+  "schemaVersion": 1,
+  "gate": "05-blockout",
+  "revision": 12,
+  "pipelineRevisionAfterRegistration": 218,
+  "decisionState": "motion-principle-accepted-evidence-incomplete",
+  "exactUserWording": "current motion principle accepted, evidence incomplete because preview did not demonstrate full 360°.",
+  "checks": {
+    "geometryPreserved": true,
+    "realUnityCapture": true,
+    "twoCompleteRevolutions": true,
+    "thirtyDetents": true,
+    "perFrameTransformValidation": true,
+    "containmentAndVisibility": true,
+    "finalClosure": true,
+    "ffprobeAndQuickTime": true,
+    "browserDesktopMobileVideoModal": true,
+    "focusedNodeTests": "3/3 passed",
+    "pipelineValidators": "magnetic-slide-tile revision 217 errors/missingFiles/unhashed=0/0/0",
+    "fullNodeSuite": "175/177 passed; two failures are concurrent Premium Display Case state expectations outside this feature",
+    "syntaxAndXml": "Python, JavaScript, Swift and focused XML checks passed",
+    "buildInstallPhone": false
+  },
+  "metrics": {
+    "frames": 570,
+    "durationSeconds": 19,
+    "dimensions": [
+      1920,
+      1080
+    ],
+    "fps": "30/1",
+    "maxConstraintResidualMeters": 6.247772965650711e-9,
+    "axisOverlayCentroidRangePx": {
+      "x": 0,
+      "y": 0
+    },
+    "minimumVerticalGapMeters": 0.0002499897964298725,
+    "containmentRayMisses": 0,
+    "finalOrientationClosureDegrees": 0,
+    "quickTimeDecodedFrames": 570
+  },
+  "scope": {
+    "geometryChanged": false,
+    "finalMaterialsApplied": false,
+    "shippingSceneModified": false,
+    "simulator": false,
+    "build": false,
+    "install": false,
+    "phone": false
+  },
+  "featurePass": true,
+  "visualApprovalPending": true
+}

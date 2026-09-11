@@ -1,0 +1,247 @@
+{
+    "pass": true,
+    "failures": [],
+    "unityVersion": "6000.5.6f1",
+    "urpVersion": "17.5.0",
+    "shippingScenePath": "Assets/_EDC/Scenes/MeshyEDC.unity",
+    "shippingSceneHash": "c87e269f9f44f254797294444c0a2e64dd037177a2fa4e29d1bc1f9a530068fb",
+    "candidatePrefabPath": "Assets/_EDC/Candidate/Prefabs/MagneticSlideTileCandidate.prefab",
+    "candidateDefaultActive": false,
+    "currentShippingModelDefaultActive": true,
+    "candidateActivationControl": "MagneticSlideTile_CandidateSwitch",
+    "sourceModelPath": "Assets/ModelPipeline/MagneticSlideTile/Gate11Rev001/Imported/magnetic-slide-tile-r002.fbx",
+    "sourceModelSha256": "3b9e62440b87f7765e8290b048ec327c724b97efc0caa955069f5c0d5906c3c1",
+    "upperArtworkPath": "Assets/ModelPipeline/MagneticSlideTile/Gate11Rev001/Imported/face-upper-transport-basecolor.png",
+    "upperArtworkSha256": "5c1504dab48df4ee6e71aca80f6d9831ce5b23fff6c534563a8ecc3d4ffcfcc2",
+    "lowerArtworkPath": "Assets/ModelPipeline/MagneticSlideTile/Gate11Rev001/Imported/face-lower-transport-basecolor.png",
+    "lowerArtworkSha256": "5c1504dab48df4ee6e71aca80f6d9831ce5b23fff6c534563a8ecc3d4ffcfcc2",
+    "upperLowerArtworkIndependent": true,
+    "renderMeshes": 2,
+    "vertices": 4124,
+    "triangles": 4096,
+    "sortedBoundsMeters": [
+        0.012000005692243576,
+        0.03100000135600567,
+        0.04999999701976776
+    ],
+    "slideTravelMeters": 0.020999999716877939,
+    "detentCount": 30,
+    "detentStepDegrees": 12.0,
+    "zeroInitialAndResetVelocity": true,
+    "runtimeInputIntegrated": false,
+    "hapticsIntegrated": false,
+    "reflectionProbe": {
+        "mode": "Custom",
+        "boxProjection": false,
+        "mipCount": 9,
+        "filterMode": "Trilinear"
+    },
+    "materials": [
+        {
+            "name": "M_Gate12_PolishedSilver",
+            "shader": "Universal Render Pipeline/Lit",
+            "emissionEnabled": false
+        },
+        {
+            "name": "M_Gate12_CrystalLower",
+            "shader": "FidgetingApp/EDC/MagneticCrystalMobile",
+            "emissionEnabled": false
+        },
+        {
+            "name": "M_Gate12_CrystalUpper",
+            "shader": "FidgetingApp/EDC/MagneticCrystalMobile",
+            "emissionEnabled": false
+        }
+    ],
+    "materialGaps": [
+        "Mobile custom crystal shader approximates clearcoat, back-light transmission and Fresnel iridescence in one opaque pass.",
+        "It does not provide ray-traced refraction, physical volume absorption or Blender thin-film spectral transport.",
+        "No device HDR, thermal, memory or Haptic acceptance has been measured."
+    ],
+    "views": [
+        {
+            "id": "library",
+            "output": "library.png",
+            "cameraPosition": {
+                "x": 0.0,
+                "y": 0.07000000029802323,
+                "z": -0.13500000536441804
+            },
+            "lookAt": {
+                "x": 0.0,
+                "y": 0.0,
+                "z": 0.0
+            },
+            "verticalFovDegrees": 42.0,
+            "resolution": {
+                "x": 1600,
+                "y": 1000
+            },
+            "candidateActive": true
+        },
+        {
+            "id": "hero",
+            "output": "hero.png",
+            "cameraPosition": {
+                "x": 0.04399999976158142,
+                "y": 0.03999999910593033,
+                "z": -0.06400000303983689
+            },
+            "lookAt": {
+                "x": 0.0,
+                "y": 0.0,
+                "z": 0.0
+            },
+            "verticalFovDegrees": 36.0,
+            "resolution": {
+                "x": 1600,
+                "y": 1000
+            },
+            "candidateActive": true
+        },
+        {
+            "id": "top",
+            "output": "top.png",
+            "cameraPosition": {
+                "x": 0.0,
+                "y": 0.11500000208616257,
+                "z": -0.006000000052154064
+            },
+            "lookAt": {
+                "x": 0.0,
+                "y": 0.0,
+                "z": 0.0
+            },
+            "verticalFovDegrees": 38.0,
+            "resolution": {
+                "x": 1600,
+                "y": 1000
+            },
+            "candidateActive": true
+        },
+        {
+            "id": "left-oblique",
+            "output": "left-oblique.png",
+            "cameraPosition": {
+                "x": -0.054999999701976779,
+                "y": 0.03999999910593033,
+                "z": -0.054999999701976779
+            },
+            "lookAt": {
+                "x": 0.0,
+                "y": 0.0,
+                "z": 0.0
+            },
+            "verticalFovDegrees": 36.0,
+            "resolution": {
+                "x": 1600,
+                "y": 1000
+            },
+            "candidateActive": true
+        },
+        {
+            "id": "right-oblique",
+            "output": "right-oblique.png",
+            "cameraPosition": {
+                "x": 0.054999999701976779,
+                "y": 0.03999999910593033,
+                "z": -0.054999999701976779
+            },
+            "lookAt": {
+                "x": 0.0,
+                "y": 0.0,
+                "z": 0.0
+            },
+            "verticalFovDegrees": 36.0,
+            "resolution": {
+                "x": 1600,
+                "y": 1000
+            },
+            "candidateActive": true
+        },
+        {
+            "id": "low",
+            "output": "low.png",
+            "cameraPosition": {
+                "x": 0.04500000178813934,
+                "y": 0.017999999225139619,
+                "z": -0.07000000029802323
+            },
+            "lookAt": {
+                "x": 0.0,
+                "y": 0.0020000000949949028,
+                "z": 0.0
+            },
+            "verticalFovDegrees": 36.0,
+            "resolution": {
+                "x": 1600,
+                "y": 1000
+            },
+            "candidateActive": true
+        },
+        {
+            "id": "phone",
+            "output": "phone.png",
+            "cameraPosition": {
+                "x": 0.029999999329447748,
+                "y": 0.029999999329447748,
+                "z": -0.05000000074505806
+            },
+            "lookAt": {
+                "x": 0.0,
+                "y": 0.0,
+                "z": 0.0
+            },
+            "verticalFovDegrees": 38.0,
+            "resolution": {
+                "x": 1290,
+                "y": 2796
+            },
+            "candidateActive": true
+        },
+        {
+            "id": "slide-open",
+            "output": "slide-open.png",
+            "cameraPosition": {
+                "x": 0.054999999701976779,
+                "y": 0.054999999701976779,
+                "z": -0.07800000160932541
+            },
+            "lookAt": {
+                "x": -0.004999999888241291,
+                "y": 0.0,
+                "z": 0.0
+            },
+            "verticalFovDegrees": 40.0,
+            "resolution": {
+                "x": 1600,
+                "y": 1000
+            },
+            "candidateActive": true
+        },
+        {
+            "id": "ratchet-60deg",
+            "output": "ratchet-60deg.png",
+            "cameraPosition": {
+                "x": 0.04399999976158142,
+                "y": 0.03999999910593033,
+                "z": -0.06400000303983689
+            },
+            "lookAt": {
+                "x": 0.0,
+                "y": 0.0,
+                "z": 0.0
+            },
+            "verticalFovDegrees": 36.0,
+            "resolution": {
+                "x": 1600,
+                "y": 1000
+            },
+            "candidateActive": true
+        }
+    ],
+    "deliveryState": "real-shipping-scene-candidate-preview-only",
+    "gate12Approval": "pending",
+    "deviceAcceptance": "pending",
+    "buildInstallPhonePush": "not-started"
+}

@@ -1,0 +1,29 @@
+{
+  "schemaVersion": 1,
+  "modelId": "magnetic-slide-tile",
+  "gate": "12-shipping",
+  "rejectedEvidenceRevision": 2,
+  "exactFeedback": "all other views are correct, but `最大滑开` and `端点 12°` are wrong because top and bottom are shown vertically separated/exploded and rotation is not represented correctly.",
+  "screenshotPath": "unity/FidgetingApp/ArtSource/ModelPipeline/magnetic-slide-tile/evidence/12-shipping/rev-003/user-feedback-exploded-motion-r002.png",
+  "screenshotSha256": "d36fb987ee46313fe401337a61552d6e80c3310f9ccdb9852938edee4191015b",
+  "acceptedViews": [
+    "library",
+    "hero",
+    "top",
+    "left-oblique",
+    "right-oblique",
+    "low",
+    "phone"
+  ],
+  "rejectedViews": [
+    "max-open",
+    "endpoint-12deg",
+    "endpoint-36deg",
+    "endpoint-360deg",
+    "unity-playmode-video",
+    "shipping-board",
+    "motion-board"
+  ],
+  "requiredFix": "Keep one connected product. Preserve stack height and use in-plane translation plus rotation about the fixed axis.",
+  "buildInstallPhone": false
+}

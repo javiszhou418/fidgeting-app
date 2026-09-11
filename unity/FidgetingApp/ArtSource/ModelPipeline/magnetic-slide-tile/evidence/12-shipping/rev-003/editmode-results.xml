@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<test-run id="2" testcasecount="6" result="Passed" total="6" passed="6" failed="0" inconclusive="0" skipped="0" asserts="0" engine-version="3.5.0.0" clr-version="4.0.30319.42000" start-time="2026-08-31 09:16:44Z" end-time="2026-08-31 09:16:44Z" duration="0.4419113">
+  <test-suite type="TestSuite" id="1000" name="Fidget Spinner" fullname="Fidget Spinner" runstate="Runnable" testcasecount="499" result="Passed" start-time="2026-08-31 09:16:44Z" end-time="2026-08-31 09:16:44Z" duration="0.441911" total="6" passed="6" failed="0" inconclusive="0" skipped="0" asserts="0">
+    <properties>
+      <property name="platform" value="EditMode" />
+    </properties>
+    <test-suite type="Assembly" id="1556" name="Assembly-CSharp-Editor.dll" fullname="/Users/jiawei.zhou/Documents/Fidgeting app/unity/FidgetingApp/Library/ScriptAssemblies/Assembly-CSharp-Editor.dll" runstate="Runnable" testcasecount="499" result="Passed" start-time="2026-08-31 09:16:44Z" end-time="2026-08-31 09:16:44Z" duration="0.423441" total="6" passed="6" failed="0" inconclusive="0" skipped="0" asserts="0">
+      <properties>
+        <property name="_PID" value="97601" />
+        <property name="_APPDOMAIN" value="Unity Child Domain" />
+        <property name="platform" value="EditMode" />
+        <property name="EditorOnly" value="True" />
+      </properties>
+      <test-suite type="TestSuite" id="1560" name="FidgetingApp" fullname="FidgetingApp" runstate="Runnable" testcasecount="420" result="Passed" start-time="2026-08-31 09:16:44Z" end-time="2026-08-31 09:16:44Z" duration="0.418021" total="6" passed="6" failed="0" inconclusive="0" skipped="0" asserts="0">
+        <properties />
+        <test-suite type="TestSuite" id="1564" name="EDC" fullname="FidgetingApp.EDC" runstate="Runnable" testcasecount="31" result="Passed" start-time="2026-08-31 09:16:44Z" end-time="2026-08-31 09:16:44Z" duration="0.411502" total="6" passed="6" failed="0" inconclusive="0" skipped="0" asserts="0">
+          <properties />
+          <test-suite type="TestSuite" id="1565" name="Tests" fullname="FidgetingApp.EDC.Tests" runstate="Runnable" testcasecount="31" result="Passed" start-time="2026-08-31 09:16:44Z" end-time="2026-08-31 09:16:44Z" duration="0.410844" total="6" passed="6" failed="0" inconclusive="0" skipped="0" asserts="0">
+            <properties />
+            <test-suite type="TestFixture" id="1098" name="MagneticSlideTileGate12R002Tests" fullname="FidgetingApp.EDC.Tests.MagneticSlideTileGate12R002Tests" classname="FidgetingApp.EDC.Tests.MagneticSlideTileGate12R002Tests" runstate="Runnable" testcasecount="6" result="Passed" start-time="2026-08-31 09:16:44Z" end-time="2026-08-31 09:16:44Z" duration="0.409679" total="6" passed="6" failed="0" inconclusive="0" skipped="0" asserts="0">
+              <properties />
+              <test-case id="1101" name="ApprovedGeometryAndMaterialsRemainExact" fullname="FidgetingApp.EDC.Tests.MagneticSlideTileGate12R002Tests.ApprovedGeometryAndMaterialsRemainExact" methodname="ApprovedGeometryAndMaterialsRemainExact" classname="FidgetingApp.EDC.Tests.MagneticSlideTileGate12R002Tests" runstate="Runnable" seed="1439816880" result="Passed" start-time="2026-08-31 09:16:44Z" end-time="2026-08-31 09:16:44Z" duration="0.023375" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1102" name="EndpointInterlockStopsAllUnauthorizedMotion" fullname="FidgetingApp.EDC.Tests.MagneticSlideTileGate12R002Tests.EndpointInterlockStopsAllUnauthorizedMotion" methodname="EndpointInterlockStopsAllUnauthorizedMotion" classname="FidgetingApp.EDC.Tests.MagneticSlideTileGate12R002Tests" runstate="Runnable" seed="1276296315" result="Passed" start-time="2026-08-31 09:16:44Z" end-time="2026-08-31 09:16:44Z" duration="0.003965" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1103" name="FullMotionKeepsOneConnectedInPlaneStack" fullname="FidgetingApp.EDC.Tests.MagneticSlideTileGate12R002Tests.FullMotionKeepsOneConnectedInPlaneStack" methodname="FullMotionKeepsOneConnectedInPlaneStack" classname="FidgetingApp.EDC.Tests.MagneticSlideTileGate12R002Tests" runstate="Runnable" seed="1038078117" result="Passed" start-time="2026-08-31 09:16:44Z" end-time="2026-08-31 09:16:44Z" duration="0.002759" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1104" name="HapticsOnlyConsumeSemanticMechanismEvents" fullname="FidgetingApp.EDC.Tests.MagneticSlideTileGate12R002Tests.HapticsOnlyConsumeSemanticMechanismEvents" methodname="HapticsOnlyConsumeSemanticMechanismEvents" classname="FidgetingApp.EDC.Tests.MagneticSlideTileGate12R002Tests" runstate="Runnable" seed="421168607" result="Passed" start-time="2026-08-31 09:16:44Z" end-time="2026-08-31 09:16:44Z" duration="0.001898" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1099" name="SharedSettingsOwnAllEndpointAndDetentValues" fullname="FidgetingApp.EDC.Tests.MagneticSlideTileGate12R002Tests.SharedSettingsOwnAllEndpointAndDetentValues" methodname="SharedSettingsOwnAllEndpointAndDetentValues" classname="FidgetingApp.EDC.Tests.MagneticSlideTileGate12R002Tests" runstate="Runnable" seed="342326597" result="Passed" start-time="2026-08-31 09:16:44Z" end-time="2026-08-31 09:16:44Z" duration="0.000296" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1100" name="ShippingSceneSavesOldModelAsDefault" fullname="FidgetingApp.EDC.Tests.MagneticSlideTileGate12R002Tests.ShippingSceneSavesOldModelAsDefault" methodname="ShippingSceneSavesOldModelAsDefault" classname="FidgetingApp.EDC.Tests.MagneticSlideTileGate12R002Tests" runstate="Runnable" seed="1335587544" result="Passed" start-time="2026-08-31 09:16:44Z" end-time="2026-08-31 09:16:44Z" duration="0.361910" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+                <output><![CDATA[Saving results to: /Users/jiawei.zhou/Library/Application Support/DefaultCompany/Fidget Spinner/TestResults.xml
+]]></output>
+              </test-case>
+            </test-suite>
+          </test-suite>
+        </test-suite>
+      </test-suite>
+    </test-suite>
+  </test-suite>
+</test-run>

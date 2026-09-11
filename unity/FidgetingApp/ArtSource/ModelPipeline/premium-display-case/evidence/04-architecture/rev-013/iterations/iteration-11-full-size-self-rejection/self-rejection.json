@@ -1,0 +1,53 @@
+{
+  "schema": "premium-display-case-gate04-r013-iteration-11-self-rejection.v1",
+  "decision": "self-rejected",
+  "reviewedSource": "actual Unity PlayMode Camera PNG capture at 1206x2622/60 fps",
+  "fullSizeFramesReviewed": [
+    "frames/frame-0000.png",
+    "frames/frame-0039.png",
+    "frames/frame-0055.png",
+    "frames/frame-0065.png",
+    "frames/frame-0083.png",
+    "frames/frame-0100.png",
+    "frames/frame-0121.png",
+    "frames/frame-0169.png",
+    "frames-tear-quarter/frame-0060.png",
+    "frames-impact-quarter/frame-0060.png"
+  ],
+  "passedTechnicalChecks": [
+    "One pre-instantiated assembled case retains its entity ID and scale.",
+    "The case stays contained before it crosses the physical mouth.",
+    "No early case travel, black frame, white frame, identity swap, or bounds jump was detected.",
+    "The Blender Pack-only FBX imported with 96 tear columns and six relative blend-shape samples.",
+    "The Pack remains a candidate and is not wired into shipping runtime or native UI."
+  ],
+  "rejectionReasons": [
+    "The released strip and lip form a rigid blue U-shaped rail. They do not read as a narrow double-sided, creased foil strip with a local curl near the pull tab.",
+    "The mouth silhouette is a broad symmetric scallop with dark hard-edged end pieces. It does not read as a credible foil pouch with an irregular torn edge and rolled contact lip.",
+    "The CC0-derived Shuriken output appears as stacked red rectangular streaks, not a restrained warm-neutral torn-contour sweep. The direct source identity is not visually preserved at portrait scale."
+  ],
+  "missingRequiredDeliverables": [
+    "Normal-speed and 0.25x MP4 encodes could not be written because the volume had only 119 MiB available. The original Unity PNG sequences remain preserved.",
+    "Focused Unity EditMode re-run was not started because the same volume is full and a Unity reimport/log write could corrupt the project."
+  ],
+  "correctiveScope": "Do not advance Gate 04. A future revision must redesign the physical lip/strip and source-port particle layout from real Pack foil behavior, then re-capture only after durable storage is available.",
+  "movedArtifacts": [
+    "frames",
+    "frames-tear-quarter",
+    "frames-impact-quarter",
+    "primary-contact-sheet.png",
+    "continuity-contact-sheet.png",
+    "technical-continuity-sheet.svg",
+    "source-target-side-by-side.png",
+    "matched-timestamps.json",
+    "runtime-footprint-editor-estimate.json",
+    "unity-capture-report.json",
+    "unity-source-manifest.json",
+    "source-to-canonical-mapping.json"
+  ],
+  "approvalRequestAllowed": false,
+  "shippingReady": false,
+  "physicalPhoneInstalled": false,
+  "deviceAccepted": false,
+  "statusText": "\u89c6\u89c9\u6279\u51c6\u5f85\u786e\u8ba4\uff0c\u672a\u63a8\u9001\u624b\u673a"
+}

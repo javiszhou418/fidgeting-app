@@ -1,0 +1,34 @@
+{
+  "schemaVersion": 1,
+  "gate": "07-material",
+  "materialRevision": 7,
+  "geometryDigest": "85bd7dd237c6822c72e575c9a23085eec9a2f28d7afea3a5bf0f13fdc4ebd90f",
+  "reuseClass": "user-authorized-prior-material-design-reuse-with-editable-border-overlay",
+  "notNewExactTraceClaim": true,
+  "slots": {
+    "Artwork_Upper": {
+      "mask": "artwork-upper-mask.png",
+      "maskSha256": "8250df70d2286849db353862283b0d3db9c66e1ac92bed3795bcb5377a431c36",
+      "independentlyEditable": true,
+      "sourceAssetIds": [
+        "magnetic-slide-tile-motif-mask-r002"
+      ]
+    },
+    "Artwork_Lower": {
+      "mask": "artwork-lower-mask.png",
+      "maskSha256": "8250df70d2286849db353862283b0d3db9c66e1ac92bed3795bcb5377a431c36",
+      "independentlyEditable": true,
+      "sourceAssetIds": [
+        "magnetic-slide-tile-motif-mask-r002"
+      ]
+    }
+  },
+  "topPerimeterBorder": {
+    "mask": "artwork-top-perimeter-border-mask.png",
+    "maskSha256": "2179bf26210994c8b3d279337bf6ad0f4beaee3c7285ae97d1cd888db2bd64fc",
+    "settings": "border-settings.json",
+    "independentlyEditable": true,
+    "compositionOperation": "maximum(cleanMotifMask, topPerimeterBorderMask)"
+  },
+  "swapContract": "Upper/lower clean motif paths remain separate. The shared initial border overlay is a third external mask and parameterized setting."
+}

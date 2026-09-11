@@ -1,0 +1,167 @@
+{
+  "schemaVersion": 1,
+  "gate": "10-export",
+  "revision": 9,
+  "pass": true,
+  "commandCount": 9,
+  "commands": [
+    {
+      "program": "npm",
+      "args": [
+        "--prefix",
+        "tools/model-provenance-explorer",
+        "test"
+      ],
+      "pass": true,
+      "stdout": "\n> fidgeting-model-provenance-explorer@2.0.0 test\n> node --test tests/*.test.mjs\n\n✔ binds the current CAD to its exact contract hash (0.804208ms)\n✔ exposes four finite tracks with separate roles (0.977542ms)\n✔ requires a raised axis boss and forbids the rejected cavity (0.268ms)\n✔ keeps ball and track estimates inside authorized ranges (0.117167ms)\n✔ fails closed for track count, cavity, ball, width or hash drift (1.651ms)\n✔ preserves containment, top order and direct pointer direction (8.350834ms)\n✔ records anthropometric provenance and unresolved engineering values (0.930875ms)\n✔ uses explicit provisional dimensions without production claims (0.58ms)\n✔ migrates only the approved CAD hierarchy (0.449333ms)\n✔ records reuse lineage and excludes stale geometry (0.17ms)\n✔ passes Gate 05 geometry and motion invariants (0.156917ms)\n✔ preserves rejected Gate 05 rev 4 evidence after Gate 07 advances (21.467ms)\n✔ preserves the approved white model after materials advance (0.93525ms)\n✔ consumes the exact four-track raised-axis contract (0.4085ms)\n✔ keeps provisional ranges and unknown engineering explicit (0.073125ms)\n✔ passes dense containment, hierarchy, manifold and self-motion checks (0.067041ms)\n✔ preserves approved look inputs without reusing rejected geometry (0.068292ms)\n✔ exports a real interactive GLB and authoritative blend (4.652459ms)\n✔ persists rev 5 partial approval and Gate 05 rev 6 approval (0.478333ms)\n✔ proves the visible bottom top skin is one flat plane (0.066ms)\n✔ blocks every rejected recess representation (0.202875ms)\n✔ keeps the axis raised and carrier under the plane (0.092208ms)\n✔ changes only rejected bottom geometry (0.853291ms)\n✔ preserves four grooves, transforms and containment (0.093666ms)\n✔ exports immutable blend, GLB and real Blender views (5.56425ms)\n✔ keeps downstream and device scope unchanged (0.086666ms)\n✔ persists exact Gate 05 and Gate 06 approvals before materials (0.411875ms)\n✔ consumes approved source and current mechanism contract hashes (0.371625ms)\n✔ keeps exact provisional envelope and flat raised-axis stack (1.410292ms)\n✔ preserves four grooves, followers, balls and compound motion (0.327833ms)\n✔ passes manifold, normal, UV, tangent and self-motion audits (0.540167ms)\n✔ registers the primary GLB and every required view (29.122708ms)\n✔ keeps material, Simulator, Unity and device scope untouched (0.119917ms)\n✔ Gate 06 rev 4 approval remains preserved after Gate 07 approval (0.49425ms)\n✔ Gate 07 rev 11 preserves exact material approval (0.082375ms)\n✔ Gate 07 preserves approved geometry across every material pose (0.22825ms)\n✔ source-backed masks remain distinct, editable and immutable (0.121792ms)\n✔ material and image audits pass without emission or visible clipping (0.199ms)\n✔ interactive GLB, real turntable and source boards are registered (5.182833ms)\n✔ workbench exposes material environment and exposure controls (0.665334ms)\n✔ docs record Gate 07 approval and no device work (1.444792ms)\n✔ Gate 07 rev 11 approval preserves exact chat wording and review hashes (0.415416ms)\n✔ Gate 08 rev 2 remains approved after Gate 10 opens (0.31625ms)\n✔ lighting preserves approved geometry and material hashes (0.268584ms)\n✔ required views, passes and lighting modes pass image audit (0.135625ms)\n✔ independent Blender audit confirms rig and embedded GLB (0.106916ms)\n✔ interactive lookdev, turntable, boards and pass evidence are registered (4.528458ms)\n✔ workbench exposes three lighting modes, orbit, zoom and exposure (0.828042ms)\n✔ docs record lighting approval and no device work (1.073125ms)\n✔ Gate 08 rev 2 exact chat approval and final goal are persisted (24.57875ms)\n✔ Gate 09 preserves approved model, material, light and source cameras (0.760333ms)\n✔ portable EXR is seamless, linear, dynamic and hash-locked (0.542542ms)\n✔ matched environment renders preserve readability without clipping (0.154834ms)\n✔ Unity portability contract defines exact and measured parity boundaries (0.34175ms)\n✔ portable texture bytes retain approved Gate 07 hashes (0.55425ms)\n✔ workbench exposes Gate 09 and conditional Neutral/Shipping lookdev (0.6565ms)\n✔ design authority and delivery status record Gate 09 truthfully (1.457292ms)\n✔ Gate 09 exact approval advances only to Gate 10 (15.756125ms)\n✔ authoritative source preserves approved geometry and material (0.675ms)\n✔ FBX GLB and collision independently re-import (0.224625ms)\n✔ export package hashes and Unity portability rules are locked (12.812791ms)\n✔ closed motion metadata preserves four-track mechanism (0.245792ms)\n✔ workbench requires real GLB load orbit and zoom (0.701292ms)\n✔ design and delivery records stop before Unity (1.245208ms)\n✔ defines exactly nine required core measurements (0.684834ms)\n✔ keeps optional and manufacturing-only fields nonblocking (0.747042ms)\n✔ blocks a thickness stack outside stated uncertainty (0.121084ms)\n✔ blocks carrier geometry that cannot fit the bottom footprint (0.082041ms)\n✔ blocks travel beyond the approved finite-groove and overlap limit (0.089291ms)\n✔ treats video aspect as a warning instead of overriding measurements (0.083292ms)\n✔ requires value uncertainty source and method for each core field (0.111042ms)\n✔ loads minimum-overlap disk and dual-bound values from rev 15 contract (2.398792ms)\n✔ defines exact closed overlap and clamps all negative travel (1.001958ms)\n✔ keeps nonzero-angle closed poses nonnegative without claiming aligned silhouettes (0.167083ms)\n✔ blocks inward pointer penetration but preserves tangential rotation at closed (0.891333ms)\n✔ returns from open to exact zero without floating undershoot (0.293125ms)\n✔ retains finite groove endpoint as the non-active candidate bound (0.092292ms)\n✔ keeps followers inside finite grooves for representative full travel (1.205541ms)\n✔ keeps the top above the bottom across all 30 detents and slide samples (1.055125ms)\n✔ clamps at the overlap-disk boundary while rotation remains legal (0.355333ms)\n✔ derives actual travel from groove and analytic disk-containment bounds (0.133458ms)\n✔ keeps the full minimum overlap disk contained at closed and exact max tangency (0.474333ms)\n✔ proves dense full-360 containment and rejects any boundary penetration (6.839125ms)\n✔ switches the active sMax source and responds to normalized parameters (0.100917ms)\n✔ builds a normalized tangent capsule (0.040333ms)\n✔ keeps smooth bottom exterior and fixed axis invariant (0.120208ms)\n✔ rotates carrier without translation (0.06275ms)\n✔ keeps two top grooves parallel to two carrier followers (0.081291ms)\n✔ uses carrier-local translation after fixed-axis rotation (0.3315ms)\n✔ preserves fixed-axis coverage at maximum travel (0.077291ms)\n✔ exposes the required ten-part component tree (0.060334ms)\n✔ direct drag follows screen direction at cardinal carrier angles (0.218375ms)\n✔ diagonal direct drag changes local slide and angle together (0.106417ms)\n✔ keeps physical dimensions unknown until entered (0.139ms)\n✔ zooms, pans and inverses CAD coordinates (0.120542ms)\n✔ matches the evidence contract schema-required shape (1.616125ms)\n✔ links every constraint and region to hashed repository sources (0.434375ms)\n✔ contains the required source-to-constraint mappings (0.122208ms)\n✔ archives both user-selected bottom-base images immutably (1.669333ms)\n✔ archives the user-authoritative finite-groove correction (0.604916ms)\n✔ archives the user screenshot and minimum-overlap interpretation immutably (0.930667ms)\n✔ covers every Gate 01 asset and preserves source boundaries (0.606375ms)\n✔ binds CAD to the contract and keeps Simulator separate (0.354166ms)\n✔ keeps the stable 12-gate status contract (6.929875ms)\n✔ rejects active downstream artifacts without the contract hash (22.447334ms)\n✔ starts and resets with zero velocities and no self-motion (3.042458ms)\n✔ uses frame-rate-independent half-life damping (0.132167ms)\n✔ holds angular motion below breakaway while slide remains available (0.201791ms)\n✔ supports simultaneous slide and rotation above breakaway (0.111791ms)\n✔ preserves finite grooves and minimum-overlap containment at stops (0.124166ms)\n✔ captures the nearest 12-degree detent at low speed (2.958208ms)\n✔ records deterministic parameter snapshots and audio toggles (0.411625ms)\n✔ rejects contract hash drift (0.1955ms)\n✔ maps exactly 30 detents at 12 degrees (1.407208ms)\n✔ loads authoritative mechanism values and rejects duplicate drift (0.514125ms)\n✔ starts and resets with no self-spin (0.357334ms)\n✔ uses frame-rate-independent half-life damping (0.137583ms)\n✔ holds below breakaway and captures a detent (0.208917ms)\n✔ slides only outward from closed and reverses to close (0.14125ms)\n✔ supports soft stops and hard maximum clamp (0.113084ms)\n✔ wraps angles in both directions (0.068417ms)\n✔ applies parameter changes and restores contract-derived configuration (0.095583ms)\n✔ keeps the upper plate transform fixed (0.090958ms)\n✔ moves the lower carrier and axis together (0.070375ms)\n✔ keeps one endpoint axis fixed to the lower carrier (0.073125ms)\n✔ rotates the lower carrier around its translated axis without inventing rail geometry (0.042958ms)\n✔ keeps the evidence-backed bilateral rail ownership without guessed positions (0.034416ms)\n✔ keeps detent review poses separate from normalized slide (0.276167ms)\n✔ updates slide and rotation in one compound pointer step (0.086834ms)\n✔ supports compound motion at partial and maximum slide (0.069ms)\n✔ reverses rotation while closing (0.049458ms)\n✔ captures angular detent while slide remains active (0.061125ms)\n✔ reset zeros both compound velocities (0.04825ms)\n✔ tracked shipping models load and derive current readiness (37.43175ms)\n✔ Premium Display Case records Gate 12 canonical App approval (20.935667ms)\n✔ Premium Display Case motion rejection restarts at Gate 02 (45.163167ms)\n✔ magnetic slider advances approved environment into Gate 10 (24.248666ms)\n✔ CAD evidence does not create a pre-Blender Simulator requirement (65.874583ms)\n✔ backfill exposes honest first-stage gaps (1.385ms)\n✔ assistant-generated targets remain distinguishable from user originals (0.238042ms)\n✔ repository path whitelist blocks traversal (0.249542ms)\n✔ digests are stable regardless of input ordering (0.0785ms)\n✔ exact-product references invalidate downstream work and produce a source-linked analysis revision (5.472792ms)\n✔ asset refresh preserves a genuinely missing intake stage (1.488666ms)\n✔ modeling contract must consume every approved analysis claim (1.006708ms)\n✔ modeling contract saves immutable drafts and becomes reviewable only when complete (14.304459ms)\n✔ architecture plan consumes an approved contract and registers a reviewable visual pair (4.013042ms)\n✔ approval gates enforce hashes, prerequisites, revisions and stale propagation (3.521417ms)\n✔ Premium Display Case preserves direction across explode and speed-only rejections (51.881458ms)\n✔ keeps exactly 12 gates mapped once into three user phases (1.254833ms)\n✔ removes standalone Simulator as an active pre-Blender requirement (0.672667ms)\n✔ consumes approved geometry before opening material review (0.175166ms)\n✔ active Gate 03 contract labels anthropometric estimates and blockers (0.260542ms)\n✔ records the latest workflow decision in the design bible and history (1.55625ms)\n✔ keeps the fixed seven-tab information architecture (0.873791ms)\n✔ prefers deep links, then memory, then the current task (0.196292ms)\n✔ never redirects an explicit historical selection to the earliest problem (0.650666ms)\n✔ labels current, approved, stale and rejected tabs (0.168625ms)\n✔ round-trips direct model, tab, gate and asset routes (0.144375ms)\nℹ tests 159\nℹ suites 0\nℹ pass 159\nℹ fail 0\nℹ cancelled 0\nℹ skipped 0\nℹ todo 0\nℹ duration_ms 509.052167\n"
+    },
+    {
+      "program": "node",
+      "args": [
+        "tools/model-provenance-explorer/validate-pipelines.mjs"
+      ],
+      "pass": true,
+      "stdout": "{\n  \"refresh\": false,\n  \"models\": [\n    {\n      \"modelId\": \"blue-classic\",\n      \"revision\": 10,\n      \"approved\": \"0/12\",\n      \"earliestProblem\": {\n        \"stageId\": \"01-intake\",\n        \"title\": \"原始参考归档\",\n        \"status\": \"missing\",\n        \"reasons\": [\n          \"缺少必需素材：original-reference。\"\n        ]\n      },\n      \"errors\": [],\n      \"missingFiles\": [],\n      \"unhashed\": []\n    },\n    {\n      \"modelId\": \"gold-four-wing\",\n      \"revision\": 10,\n      \"approved\": \"0/12\",\n      \"earliestProblem\": {\n        \"stageId\": \"01-intake\",\n        \"title\": \"原始参考归档\",\n        \"status\": \"missing\",\n        \"reasons\": [\n          \"缺少必需素材：original-reference。\"\n        ]\n      },\n      \"errors\": [],\n      \"missingFiles\": [],\n      \"unhashed\": []\n    },\n    {\n      \"modelId\": \"graphite-two-lobe\",\n      \"revision\": 12,\n      \"approved\": \"0/12\",\n      \"earliestProblem\": {\n        \"stageId\": \"01-intake\",\n        \"title\": \"原始参考归档\",\n        \"status\": \"missing\",\n        \"reasons\": [\n          \"缺少必需素材：original-reference。\",\n          \"仍有 1 项验证未通过。\"\n        ]\n      },\n      \"errors\": [],\n      \"missingFiles\": [],\n      \"unhashed\": []\n    },\n    {\n      \"modelId\": \"magnetic-fan-card\",\n      \"revision\": 137,\n      \"approved\": \"11/12\",\n      \"earliestProblem\": {\n        \"stageId\": \"12-shipping\",\n        \"title\": \"真实 Shipping / 手机构图\",\n        \"status\": \"stale\",\n        \"reasons\": [\n          \"仍有 1 项验证未通过。\",\n          \"该阶段因上游变化已经过期。\"\n        ]\n      },\n      \"errors\": [],\n      \"missingFiles\": [],\n      \"unhashed\": []\n    },\n    {\n      \"modelId\": \"magnetic-slide-tile\",\n      \"revision\": 194,\n      \"approved\": \"9/12\",\n      \"earliestProblem\": {\n        \"stageId\": \"10-export\",\n        \"title\": \"导出包\",\n        \"status\": \"ready_for_review\",\n        \"reasons\": [\n          \"等待用户审批。\"\n        ]\n      },\n      \"errors\": [],\n      \"missingFiles\": [],\n      \"unhashed\": []\n    },\n    {\n      \"modelId\": \"metal-three-blade\",\n      \"revision\": 11,\n      \"approved\": \"0/12\",\n      \"earliestProblem\": {\n        \"stageId\": \"01-intake\",\n        \"title\": \"原始参考归档\",\n        \"status\": \"draft\",\n        \"reasons\": [\n          \"等待用户审批。\"\n        ]\n      },\n      \"errors\": [],\n      \"missingFiles\": [],\n      \"unhashed\": []\n    },\n    {\n      \"modelId\": \"premium-display-case\",\n      \"revision\": 73,\n      \"approved\": \"12/12\",\n      \"earliestProblem\": null,\n      \"errors\": [],\n      \"missingFiles\": [],\n      \"unhashed\": []\n    }\n  ]\n}\n"
+    },
+    {
+      "program": "node",
+      "args": [
+        "skills/fidgeting-model-pipeline/scripts/validate_model_pipeline.mjs",
+        "magnetic-slide-tile"
+      ],
+      "pass": true,
+      "stdout": "{\n  \"modelId\": \"magnetic-slide-tile\",\n  \"revision\": 194,\n  \"shippingReady\": false,\n  \"approved\": \"9/12\",\n  \"earliestProblem\": {\n    \"stageId\": \"10-export\",\n    \"title\": \"导出包\",\n    \"status\": \"ready_for_review\",\n    \"reasons\": [\n      \"等待用户审批。\"\n    ]\n  },\n  \"errors\": [],\n  \"missingFiles\": [],\n  \"unhashed\": []\n}\n"
+    },
+    {
+      "program": "python3",
+      "args": [
+        "-m",
+        "py_compile",
+        "/Users/jiawei.zhou/Documents/Fidgeting app/unity/FidgetingApp/ArtSource/ModelPipeline/magnetic-slide-tile/evidence/10-export/rev-009/prepare_export_assets.py",
+        "/Users/jiawei.zhou/Documents/Fidgeting app/unity/FidgetingApp/ArtSource/ModelPipeline/magnetic-slide-tile/evidence/10-export/rev-009/build_export_package.py",
+        "/Users/jiawei.zhou/Documents/Fidgeting app/unity/FidgetingApp/ArtSource/ModelPipeline/magnetic-slide-tile/evidence/10-export/rev-009/validate_export_reimports.py",
+        "/Users/jiawei.zhou/Documents/Fidgeting app/unity/FidgetingApp/ArtSource/ModelPipeline/magnetic-slide-tile/evidence/10-export/rev-009/build_export_manifest.py",
+        "/Users/jiawei.zhou/Documents/Fidgeting app/unity/FidgetingApp/ArtSource/ModelPipeline/magnetic-slide-tile/evidence/10-export/rev-009/audit_authoritative_blend.py",
+        "/Users/jiawei.zhou/Documents/Fidgeting app/unity/FidgetingApp/ArtSource/ModelPipeline/magnetic-slide-tile/evidence/10-export/rev-009/build_export_summary.py"
+      ],
+      "pass": true,
+      "stdout": ""
+    },
+    {
+      "program": "node",
+      "args": [
+        "--check",
+        "tools/model-provenance-explorer/app.js"
+      ],
+      "pass": true,
+      "stdout": ""
+    },
+    {
+      "program": "node",
+      "args": [
+        "--check",
+        "tools/model-provenance-explorer/tests/browser-persistent-workspace-gate10.mjs"
+      ],
+      "pass": true,
+      "stdout": ""
+    },
+    {
+      "program": "node",
+      "args": [
+        "--check",
+        "tools/model-provenance-explorer/tests/magnetic-slide-gate10-rev9.test.mjs"
+      ],
+      "pass": true,
+      "stdout": ""
+    },
+    {
+      "program": "xmllint",
+      "args": [
+        "--noout",
+        "unity/FidgetingApp/ArtSource/ModelPipeline/magnetic-slide-tile/evidence/11-unity-parity/rev-001/editmode-results.xml",
+        "unity/FidgetingApp/ArtSource/ModelPipeline/magnetic-slide-tile/evidence/11-unity-parity/rev-002/editmode-results.xml",
+        "unity/FidgetingApp/ArtSource/ModelPipeline/magnetic-slide-tile/evidence/11-unity-parity/rev-003/editmode-results.xml",
+        "unity/FidgetingApp/ArtSource/ModelPipeline/magnetic-slide-tile/evidence/12-shipping/rev-001/editmode-results.xml",
+        "unity/FidgetingApp/ArtSource/ModelPipeline/magnetic-slide-tile/evidence/12-shipping/rev-001/playmode-results.xml"
+      ],
+      "pass": true,
+      "stdout": ""
+    },
+    {
+      "program": "git",
+      "args": [
+        "diff",
+        "--check",
+        "--",
+        "tools/model-provenance-explorer/app.js",
+        "tools/model-provenance-explorer/tests",
+        "unity/FidgetingApp/Docs/FidgetingAppProductDesignBible.md",
+        "unity/FidgetingApp/Docs/IMPLEMENTATION_STATUS.md",
+        "unity/FidgetingApp/ArtSource/ModelPipeline/magnetic-slide-tile/pipeline.json",
+        "unity/FidgetingApp/ArtSource/ModelPipeline/magnetic-slide-tile/history.ndjson",
+        "unity/FidgetingApp/ArtSource/ModelPipeline/magnetic-slide-tile/evidence/10-export/rev-009"
+      ],
+      "pass": true,
+      "stdout": ""
+    }
+  ],
+  "evidence": [
+    {
+      "name": "export-build-report.json",
+      "pass": true,
+      "sha256": "d75f97340e9f1e3a965de01a3cda9ef80e27a70b872fe1e08ef2b3836c29777a"
+    },
+    {
+      "name": "reimport-validation.json",
+      "pass": true,
+      "sha256": "0302a762b62d107c82c3004de335454ec05af5a0110ded8ae5cf3d3e4d681173"
+    },
+    {
+      "name": "authoritative-blend-audit.json",
+      "pass": true,
+      "sha256": "514a8ee11ff6a122bab2ee1207d8d64627a44c994f32aa90b47507c46018fe25"
+    },
+    {
+      "name": "texture-export-manifest.json",
+      "pass": true,
+      "sha256": "b17ebc66367c51e8674c92bc7c80fe305ecd7fb68a28c3d1f8552aaab8e1d965"
+    },
+    {
+      "name": "portability-manifest-validation.json",
+      "pass": true,
+      "sha256": "8305374a3816d37b64141b73030081d2738962f73416019157a617ebb519529e"
+    },
+    {
+      "name": "export-summary-validation.json",
+      "pass": true,
+      "sha256": "0e4ff4b81f2f76e123fc05e0f31ee4a18b8d33c008f64178f29eb5b23d22b273"
+    },
+    {
+      "name": "browser-workspace-validation.json",
+      "pass": true,
+      "sha256": "c91cae20025f2a1cfe1760df1273fbf2958c4bb810c8d90b60e6a462fccd8821"
+    }
+  ],
+  "metrics": {
+    "nodeTests": 159,
+    "browserRuntimeExceptions": 0,
+    "browserLoadingFailures": 0,
+    "closedBoundsMm": [
+      31,
+      50,
+      12
+    ],
+    "glbNodes": 20,
+    "glbMeshes": 8,
+    "glbMaterials": 7,
+    "glbAnimations": 0
+  },
+  "scope": {
+    "simulator": false,
+    "unityImport": false,
+    "build": false,
+    "install": false,
+    "device": false
+  },
+  "completedAt": "2026-08-27T13:49:41.262Z"
+}

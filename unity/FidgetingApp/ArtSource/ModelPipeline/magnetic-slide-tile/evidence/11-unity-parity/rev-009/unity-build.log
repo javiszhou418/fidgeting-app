@@ -1,0 +1,597 @@
+Unity Editor version:    6000.5.6f1 (0e0577a1a2ac)
+Branch:                  6000.5/staging
+Build type:              Release
+Batch mode:              YES
+macOS version:           Version 26.6 (Build 25G72)
+Darwin version:          25.6.0
+Architecture:            arm64
+Running under Rosetta:   NO
+Available memory:        65536 MB
+Date:                    2026-08-27T16:08:13Z
+[Licensing::Module] Trying to connect to existing licensing client channel...
+[Licensing::IpcConnector] Channel LicenseClient-jiawei.zhou@whatnot.com doesn't exist
+Launching external process: /Applications/Unity/Hub/Editor/6000.5.6f1/Unity.app/Contents/Helpers/UnityLicensingClient.app/Contents/MacOS/Unity.Licensing.Client
+[Licensing::Module] Successfully launched the LicensingClient (PId: 75756)
+Launching external process: /Applications/Unity/Hub/Editor/6000.5.6f1/Unity.app/Contents/Helpers/PackageManager/Server/UnityPackageManager
+
+COMMAND LINE ARGUMENTS:
+/Applications/Unity/Hub/Editor/6000.5.6f1/Unity.app/Contents/MacOS/Unity
+-batchmode
+-quit
+-projectPath
+/Users/jiawei.zhou/Documents/Fidgeting app/unity/FidgetingApp
+-executeMethod
+FidgetingApp.EDC.Editor.MagneticSlideTileGate11Builder.BuildAndCapture
+-logFile
+/Users/jiawei.zhou/Documents/Fidgeting app/unity/FidgetingApp/ArtSource/ModelPipeline/magnetic-slide-tile/evidence/11-unity-parity/rev-009/unity-build.log
+Successfully changed project path to: /Users/jiawei.zhou/Documents/Fidgeting app/unity/FidgetingApp
+/Users/jiawei.zhou/Documents/Fidgeting app/unity/FidgetingApp
+[UnityMemory] Configuration Parameters - Can be set up in boot.config
+    "memorysetup-temp-allocator-size-gi-baking-worker=262144"
+    "memorysetup-temp-allocator-size-gi-baking-worker=262144"
+    "memorysetup-temp-allocator-size-gi-baking-worker=262144"
+    "memorysetup-temp-allocator-size-gi-baking-worker=262144"
+    "memorysetup-temp-allocator-size-gi-baking-worker=262144"
+    "memorysetup-temp-allocator-size-nav-mesh-worker=65536"
+    "memorysetup-temp-allocator-size-audio-worker=65536"
+    "memorysetup-temp-allocator-size-cloud-worker=32768"
+    "memorysetup-allocator-temp-initial-block-size-main=262144"
+    "memorysetup-allocator-temp-initial-block-size-worker=262144"
+    "memorysetup-temp-allocator-size-preload-manager=33554432"
+    "memorysetup-temp-allocator-size-gfx=262144"
+    "memorysetup-temp-allocator-size-background-worker=32768"
+    "memorysetup-temp-allocator-size-job-worker=262144"
+    "memorysetup-bucket-allocator-granularity=16"
+    "memorysetup-bucket-allocator-bucket-count=8"
+    "memorysetup-bucket-allocator-block-size=33554432"
+    "memorysetup-bucket-allocator-block-count=8"
+    "memorysetup-main-allocator-block-size=16777216"
+    "memorysetup-thread-allocator-block-size=16777216"
+    "memorysetup-main-allocator-mimalloc-enabled=0"
+    "memorysetup-gfx-main-allocator-block-size=16777216"
+    "memorysetup-gfx-thread-allocator-block-size=16777216"
+    "memorysetup-cache-allocator-block-size=4194304"
+    "memorysetup-typetree-allocator-block-size=2097152"
+    "memorysetup-profiler-bucket-allocator-granularity=16"
+    "memorysetup-profiler-bucket-allocator-bucket-count=8"
+    "memorysetup-profiler-bucket-allocator-block-size=33554432"
+    "memorysetup-profiler-bucket-allocator-block-count=8"
+    "memorysetup-profiler-allocator-block-size=16777216"
+    "memorysetup-profiler-editor-allocator-block-size=1048576"
+    "memorysetup-temp-allocator-size-main=16777216"
+    "memorysetup-job-temp-allocator-block-size=2097152"
+    "memorysetup-job-temp-allocator-block-size-background=1048576"
+    "memorysetup-job-temp-allocator-reduction-small-platforms=262144"
+Logging is directed to a specific file, skipping project log.Player connection [8516968832]  Target information:
+
+Player connection [8516968832]  * "[IP] 172.30.215.248 [Port] 55504 [Flags] 2 [Guid] 3085232252 [EditorId] 3085232252 [Version] 1048832 [Id] OSXEditor(0,WhatnotMacBook-Pro-16-inch-2024-KDX49F6RHV) [Debug] 1 [PackageName] OSXEditor [ProjectName] Editor" 
+
+Player connection [8516968832]  * "[IP] 192.168.31.143 [Port] 55504 [Flags] 2 [Guid] 3085232252 [EditorId] 3085232252 [Version] 1048832 [Id] OSXEditor(0,WhatnotMacBook-Pro-16-inch-2024-KDX49F6RHV) [Debug] 1 [PackageName] OSXEditor [ProjectName] Editor" 
+
+Player connection [8516968832]  * "[IP] 7.8.30.210 [Port] 55504 [Flags] 2 [Guid] 3085232252 [EditorId] 3085232252 [Version] 1048832 [Id] OSXEditor(0,WhatnotMacBook-Pro-16-inch-2024-KDX49F6RHV) [Debug] 1 [PackageName] OSXEditor [ProjectName] Editor" 
+
+Player connection [8516968832] Host joined multi-casting on [225.0.0.222:54997]...
+Player connection [8516968832] Host joined alternative multi-casting on [225.0.0.222:34997]...
+Input System module state changed to: Initialized.
+[Physics::Module] Initialized fallback backend.
+[Physics::Module] Id: 0xdecafbad
+[Licensing::IpcConnector] Successfully connected to: "LicenseClient-jiawei.zhou@whatnot.com" at "2026-08-27T16:08:13.984764Z"
+[Package Manager] Connected to IPC stream "Upm-75755" after 0.1 seconds.
+[Licensing::Module] Licensing is not yet initialized.
+[Licensing::Client] Handshaking with LicensingClient:
+  Version:                 1.18.1+9fbee8e
+  Session Id:              0a67c9883ddb4d599ca0bc18bc511a6c
+  Correlation Id:          c628bfea007d52455cff7f1ebda705d0
+  External correlation Id: 846812990956897403
+  Machine Id:              /KH2BGG6vZf7t7D/yU/ppmcrnfI=
+[Licensing::Module] Successfully connected to LicensingClient on channel: "LicenseClient-jiawei.zhou@whatnot.com" (connect: 0.17s, validation: 0.01s, handshake: 0.18s)
+[Licensing::IpcConnector] Successfully connected to: "LicenseClient-jiawei.zhou@whatnot.com-notifications" at "2026-08-27T16:08:14.179701Z"
+[Licensing::Module] Connected to LicensingClient (PId: 75756, launch time: 0.00, total connection time: 0.36s)
+[Licensing::Module] Error: Access token is unavailable; failed to update
+[Licensing::Client] Successfully resolved entitlement details
+[Licensing::Module] License group:
+  Id: 18968260060310-UnityPersXXXX
+  Product: Unity Personal
+  Type: Assigned
+  Expiration: Unlimited
+[Licensing::Client] Successfully updated license, isAsync: True, time: 0.00
+[Licensing::Client] Successfully resolved entitlement details
+[Licensing::Module] Licensing Background thread has ended after 0.37s
+[Licensing::Module] Licensing is initialized (took 0.19s).
+[Licensing::Client] Successfully resolved entitlement details
+Library Redirect Path: Library/
+[Physics::Module] Selected backend.
+[Physics::Module] Name: PhysX
+[Physics::Module] Id: 0xf2b8ea05
+[Physics::Module] SDK Version: 4.1.2
+[Physics::Module] Integration Version: 1.0.0
+[Physics::Module] Threading Mode: Multi-Threaded
+Artifact Garbage Collection - Removed 1 unused hashed content files
+[Licensing::Client] Successfully resolved entitlement details
+Initialize engine version: 6000.5.6f1 (0e0577a1a2ac)
+[Subsystems] Discovering subsystems at path /Applications/Unity/Hub/Editor/6000.5.6f1/Unity.app/Contents/Resources/UnitySubsystems
+[Subsystems] Discovering subsystems at path /Users/jiawei.zhou/Documents/Fidgeting app/unity/FidgetingApp/Assets
+GfxDevice: creating device client; kGfxThreadingModeNonThreaded
+ preferred device: Apple M4 Max (high power)
+Metal devices available: 1
+0: Apple M4 Max (high power)
+Using device Apple M4 Max (high power)
+Initializing Metal device caps: Apple M4 Max
+Mac GPU Family: 2
+Apple GPU Family: 9
+MSL Version: 3.0
+Has Float MSAA: 1
+Has Float Filtering: 1
+ReadWrite Texture Tier: 2
+Initialize mono
+Mono path[0] = '/Applications/Unity/Hub/Editor/6000.5.6f1/Unity.app/Contents/Resources/Scripting/Managed'
+Mono path[1] = '/Applications/Unity/Hub/Editor/6000.5.6f1/Unity.app/Contents/Resources/Scripting/BCLExtensions/runtime/netstandard2.1'
+Mono path[2] = '/Applications/Unity/Hub/Editor/6000.5.6f1/Unity.app/Contents/Resources/Scripting/MonoBleedingEdge/lib/mono/unityjit-macos'
+Mono config path = '/Applications/Unity/Hub/Editor/6000.5.6f1/Unity.app/Contents/Resources/Scripting/MonoBleedingEdge/etc'
+Using monoOptions --debugger-agent=transport=dt_socket,embedding=1,server=y,suspend=n,address=127.0.0.1:56755
+CodeReloadManager initialized
+ImportWorker Server TCP listen port: 0
+AcceleratorClientConnectionCallback - disconnected - :0
+Begin MonoManager ReloadAssembly
+Registering precompiled unity dll's ...
+Trying to register platform support module: /Applications/Unity/Hub/Editor/6000.5.6f1/PlaybackEngines/WebGLSupport/UnityEditor.WebGL.Extensions.dll (that doesn't exist). Retrying without overrides.
+Platform support module is not available: /Applications/Unity/Hub/Editor/6000.5.6f1/PlaybackEngines/WebGLSupport/UnityEditor.WebGL.Extensions.dll
+Register platform support module: /Applications/Unity/Hub/Editor/6000.5.6f1/PlaybackEngines/MacStandaloneSupport/UnityEditor.OSXStandalone.Extensions.dll
+Register platform support module: /Applications/Unity/Hub/Editor/6000.5.6f1/PlaybackEngines/iOSSupport/UnityEditor.iOS.Extensions.dll
+Registered in 0.000356 seconds.
+[usbmuxd] Start listen thread
+[usbmuxd] Listen thread started
+[usbmuxd] Send listen message
+Native extension for iOS target not found
+Native extension for OSXStandalone target not found
+Package Manager log level set to [2]
+ScheduleIndexationOnStartup MainProcess:False IndexOnStartup:True
+Mono: successfully reloaded assembly
+- Finished resetting the current domain, in  0.213 seconds
+Domain Reload Profiling: 428ms
+	BeginReloadAssembly (49ms)
+		CreateAndSetChildDomain (12ms)
+	RebuildNativeTypeToScriptingClass (8ms)
+	initialDomainReloadingComplete (24ms)
+	LoadAllAssembliesAndSetupDomain (131ms)
+		LoadAssemblies (36ms)
+		AnalyzeDomain (98ms)
+			TypeCache.Refresh (98ms)
+				TypeCache.ScanAssembly (90ms)
+	FinalizeReload (214ms)
+		SetupLoadedEditorAssemblies (0ms)
+			InitializePlatformSupportModulesInManaged (33ms)
+			BeforeProcessingInitializeOnLoad (40ms)
+			ProcessInitializeOnLoadAttributes (42ms)
+			ProcessInitializeOnLoadMethodAttributes (62ms)
+[Licensing::Client] Successfully resolved entitlement details
+[Licensing::Client] Successfully resolved entitlement details
+Application.AssetDatabase Initial Refresh Start
+[Package Manager] Restoring resolved packages state from cache
+[Licensing::Client] Successfully resolved entitlement details
+[Package Manager] Registered 62 packages:
+  Packages from [https://packages.unity.com]:
+    com.unity.ai.navigation@2.0.14 (location: /Users/jiawei.zhou/Documents/Fidgeting app/unity/FidgetingApp/Library/PackageCache/com.unity.ai.navigation@134dd6a3b97b)
+    com.unity.collab-proxy@2.13.3 (location: /Users/jiawei.zhou/Documents/Fidgeting app/unity/FidgetingApp/Library/PackageCache/com.unity.collab-proxy@4f3be89e8675)
+    com.unity.ide.rider@3.0.38 (location: /Users/jiawei.zhou/Documents/Fidgeting app/unity/FidgetingApp/Library/PackageCache/com.unity.ide.rider@1f60b3138684)
+    com.unity.ide.visualstudio@2.0.26 (location: /Users/jiawei.zhou/Documents/Fidgeting app/unity/FidgetingApp/Library/PackageCache/com.unity.ide.visualstudio@a99d56dec63f)
+    com.unity.inputsystem@1.20.0 (location: /Users/jiawei.zhou/Documents/Fidgeting app/unity/FidgetingApp/Library/PackageCache/com.unity.inputsystem@7a4e1a2a8194)
+    com.unity.timeline@1.8.12 (location: /Users/jiawei.zhou/Documents/Fidgeting app/unity/FidgetingApp/Library/PackageCache/com.unity.timeline@8cd8509afae5)
+    com.unity.visualscripting@1.9.11 (location: /Users/jiawei.zhou/Documents/Fidgeting app/unity/FidgetingApp/Library/PackageCache/com.unity.visualscripting@8bed5ad90189)
+    com.unity.ai.assistant@2.17.0-pre.1 (location: /Users/jiawei.zhou/Documents/Fidgeting app/unity/FidgetingApp/Library/PackageCache/com.unity.ai.assistant@284c75a8d208)
+    com.unity.ai.inference@2.6.1 (location: /Users/jiawei.zhou/Documents/Fidgeting app/unity/FidgetingApp/Library/PackageCache/com.unity.ai.inference@9a123aee5df7)
+    com.unity.burst@1.8.29 (location: /Users/jiawei.zhou/Documents/Fidgeting app/unity/FidgetingApp/Library/PackageCache/com.unity.burst@6bb9aca3ef38)
+    com.unity.dt.app-ui@2.1.7 (location: /Users/jiawei.zhou/Documents/Fidgeting app/unity/FidgetingApp/Library/PackageCache/com.unity.dt.app-ui@b097002a00c2)
+    com.unity.nuget.newtonsoft-json@3.2.2 (location: /Users/jiawei.zhou/Documents/Fidgeting app/unity/FidgetingApp/Library/PackageCache/com.unity.nuget.newtonsoft-json@4dfd81071c64)
+    com.unity.nuget.mono-cecil@1.11.6 (location: /Users/jiawei.zhou/Documents/Fidgeting app/unity/FidgetingApp/Library/PackageCache/com.unity.nuget.mono-cecil@ecb9724e46ff)
+    com.unity.test-framework.performance@3.5.0 (location: /Users/jiawei.zhou/Documents/Fidgeting app/unity/FidgetingApp/Library/PackageCache/com.unity.test-framework.performance@8b56083ec0f0)
+    com.unity.searcher@4.9.4 (location: /Users/jiawei.zhou/Documents/Fidgeting app/unity/FidgetingApp/Library/PackageCache/com.unity.searcher@d45a78918735)
+  Built-in packages:
+    com.unity.multiplayer.center@1.0.1 (location: /Users/jiawei.zhou/Documents/Fidgeting app/unity/FidgetingApp/Library/PackageCache/com.unity.multiplayer.center@b860850997d0)
+    com.unity.render-pipelines.universal@17.5.0 (location: /Users/jiawei.zhou/Documents/Fidgeting app/unity/FidgetingApp/Library/PackageCache/com.unity.render-pipelines.universal@73b4c4ff130e)
+    com.unity.test-framework@1.7.0 (location: /Users/jiawei.zhou/Documents/Fidgeting app/unity/FidgetingApp/Library/PackageCache/com.unity.test-framework@1405238725ab)
+    com.unity.ugui@2.5.0 (location: /Users/jiawei.zhou/Documents/Fidgeting app/unity/FidgetingApp/Library/PackageCache/com.unity.ugui@67707a67a4ab)
+    com.unity.modules.accessibility@1.0.0 (location: /Users/jiawei.zhou/Documents/Fidgeting app/unity/FidgetingApp/Library/PackageCache/com.unity.modules.accessibility)
+    com.unity.modules.adaptiveperformance@1.0.0 (location: /Users/jiawei.zhou/Documents/Fidgeting app/unity/FidgetingApp/Library/PackageCache/com.unity.modules.adaptiveperformance)
+    com.unity.modules.ai@1.0.0 (location: /Users/jiawei.zhou/Documents/Fidgeting app/unity/FidgetingApp/Library/PackageCache/com.unity.modules.ai)
+    com.unity.modules.androidjni@1.0.0 (location: /Users/jiawei.zhou/Documents/Fidgeting app/unity/FidgetingApp/Library/PackageCache/com.unity.modules.androidjni)
+    com.unity.modules.animation@1.0.0 (location: /Users/jiawei.zhou/Documents/Fidgeting app/unity/FidgetingApp/Library/PackageCache/com.unity.modules.animation)
+    com.unity.modules.assetbundle@1.0.0 (location: /Users/jiawei.zhou/Documents/Fidgeting app/unity/FidgetingApp/Library/PackageCache/com.unity.modules.assetbundle)
+    com.unity.modules.audio@1.0.0 (location: /Users/jiawei.zhou/Documents/Fidgeting app/unity/FidgetingApp/Library/PackageCache/com.unity.modules.audio)
+    com.unity.modules.cloth@1.0.0 (location: /Users/jiawei.zhou/Documents/Fidgeting app/unity/FidgetingApp/Library/PackageCache/com.unity.modules.cloth)
+    com.unity.modules.director@1.0.0 (location: /Users/jiawei.zhou/Documents/Fidgeting app/unity/FidgetingApp/Library/PackageCache/com.unity.modules.director)
+    com.unity.modules.imageconversion@1.0.0 (location: /Users/jiawei.zhou/Documents/Fidgeting app/unity/FidgetingApp/Library/PackageCache/com.unity.modules.imageconversion)
+    com.unity.modules.imgui@1.0.0 (location: /Users/jiawei.zhou/Documents/Fidgeting app/unity/FidgetingApp/Library/PackageCache/com.unity.modules.imgui)
+    com.unity.modules.jsonserialize@1.0.0 (location: /Users/jiawei.zhou/Documents/Fidgeting app/unity/FidgetingApp/Library/PackageCache/com.unity.modules.jsonserialize)
+    com.unity.modules.particlesystem@1.0.0 (location: /Users/jiawei.zhou/Documents/Fidgeting app/unity/FidgetingApp/Library/PackageCache/com.unity.modules.particlesystem)
+    com.unity.modules.physics@1.0.0 (location: /Users/jiawei.zhou/Documents/Fidgeting app/unity/FidgetingApp/Library/PackageCache/com.unity.modules.physics)
+    com.unity.modules.physics2d@1.0.0 (location: /Users/jiawei.zhou/Documents/Fidgeting app/unity/FidgetingApp/Library/PackageCache/com.unity.modules.physics2d)
+    com.unity.modules.physicscore2d@1.0.0 (location: /Users/jiawei.zhou/Documents/Fidgeting app/unity/FidgetingApp/Library/PackageCache/com.unity.modules.physicscore2d)
+    com.unity.modules.screencapture@1.0.0 (location: /Users/jiawei.zhou/Documents/Fidgeting app/unity/FidgetingApp/Library/PackageCache/com.unity.modules.screencapture)
+    com.unity.modules.terrain@1.0.0 (location: /Users/jiawei.zhou/Documents/Fidgeting app/unity/FidgetingApp/Library/PackageCache/com.unity.modules.terrain)
+    com.unity.modules.terrainphysics@1.0.0 (location: /Users/jiawei.zhou/Documents/Fidgeting app/unity/FidgetingApp/Library/PackageCache/com.unity.modules.terrainphysics)
+    com.unity.modules.tilemap@1.0.0 (location: /Users/jiawei.zhou/Documents/Fidgeting app/unity/FidgetingApp/Library/PackageCache/com.unity.modules.tilemap)
+    com.unity.modules.ui@1.0.0 (location: /Users/jiawei.zhou/Documents/Fidgeting app/unity/FidgetingApp/Library/PackageCache/com.unity.modules.ui)
+    com.unity.modules.uielements@1.0.0 (location: /Users/jiawei.zhou/Documents/Fidgeting app/unity/FidgetingApp/Library/PackageCache/com.unity.modules.uielements)
+    com.unity.modules.umbra@1.0.0 (location: /Users/jiawei.zhou/Documents/Fidgeting app/unity/FidgetingApp/Library/PackageCache/com.unity.modules.umbra)
+    com.unity.modules.unityanalytics@1.0.0 (location: /Users/jiawei.zhou/Documents/Fidgeting app/unity/FidgetingApp/Library/PackageCache/com.unity.modules.unityanalytics)
+    com.unity.modules.unitywebrequest@1.0.0 (location: /Users/jiawei.zhou/Documents/Fidgeting app/unity/FidgetingApp/Library/PackageCache/com.unity.modules.unitywebrequest)
+    com.unity.modules.unitywebrequestassetbundle@1.0.0 (location: /Users/jiawei.zhou/Documents/Fidgeting app/unity/FidgetingApp/Library/PackageCache/com.unity.modules.unitywebrequestassetbundle)
+    com.unity.modules.unitywebrequestaudio@1.0.0 (location: /Users/jiawei.zhou/Documents/Fidgeting app/unity/FidgetingApp/Library/PackageCache/com.unity.modules.unitywebrequestaudio)
+    com.unity.modules.unitywebrequesttexture@1.0.0 (location: /Users/jiawei.zhou/Documents/Fidgeting app/unity/FidgetingApp/Library/PackageCache/com.unity.modules.unitywebrequesttexture)
+    com.unity.modules.unitywebrequestwww@1.0.0 (location: /Users/jiawei.zhou/Documents/Fidgeting app/unity/FidgetingApp/Library/PackageCache/com.unity.modules.unitywebrequestwww)
+    com.unity.modules.vectorgraphics@1.0.0 (location: /Users/jiawei.zhou/Documents/Fidgeting app/unity/FidgetingApp/Library/PackageCache/com.unity.modules.vectorgraphics)
+    com.unity.modules.vehicles@1.0.0 (location: /Users/jiawei.zhou/Documents/Fidgeting app/unity/FidgetingApp/Library/PackageCache/com.unity.modules.vehicles)
+    com.unity.modules.video@1.0.0 (location: /Users/jiawei.zhou/Documents/Fidgeting app/unity/FidgetingApp/Library/PackageCache/com.unity.modules.video)
+    com.unity.modules.wind@1.0.0 (location: /Users/jiawei.zhou/Documents/Fidgeting app/unity/FidgetingApp/Library/PackageCache/com.unity.modules.wind)
+    com.unity.modules.xr@1.0.0 (location: /Users/jiawei.zhou/Documents/Fidgeting app/unity/FidgetingApp/Library/PackageCache/com.unity.modules.xr)
+    com.unity.collections@6.5.0 (location: /Users/jiawei.zhou/Documents/Fidgeting app/unity/FidgetingApp/Library/PackageCache/com.unity.collections@a43cabe808ca)
+    com.unity.2d.sprite@1.0.0 (location: /Users/jiawei.zhou/Documents/Fidgeting app/unity/FidgetingApp/Library/PackageCache/com.unity.2d.sprite@053a968eab56)
+    com.unity.mathematics@1.4.0 (location: /Users/jiawei.zhou/Documents/Fidgeting app/unity/FidgetingApp/Library/PackageCache/com.unity.mathematics@981956d94fb6)
+    com.unity.modules.subsystems@1.0.0 (location: /Users/jiawei.zhou/Documents/Fidgeting app/unity/FidgetingApp/Library/PackageCache/com.unity.modules.subsystems)
+    com.unity.modules.hierarchycore@1.0.0 (location: /Users/jiawei.zhou/Documents/Fidgeting app/unity/FidgetingApp/Library/PackageCache/com.unity.modules.hierarchycore)
+    com.unity.ext.nunit@2.1.0 (location: /Users/jiawei.zhou/Documents/Fidgeting app/unity/FidgetingApp/Library/PackageCache/com.unity.ext.nunit@44f7d31723bd)
+    com.unity.render-pipelines.core@17.5.0 (location: /Users/jiawei.zhou/Documents/Fidgeting app/unity/FidgetingApp/Library/PackageCache/com.unity.render-pipelines.core@645717f21c5f)
+    com.unity.shadergraph@17.5.0 (location: /Users/jiawei.zhou/Documents/Fidgeting app/unity/FidgetingApp/Library/PackageCache/com.unity.shadergraph@8d7376ec43ee)
+    com.unity.render-pipelines.universal-config@17.5.0 (location: /Users/jiawei.zhou/Documents/Fidgeting app/unity/FidgetingApp/Library/PackageCache/com.unity.render-pipelines.universal-config@fdda01c80fe3)
+[Subsystems] No new subsystems found in resolved package list.
+[Package Manager] Done registering packages in 0.01 seconds
+info: Microsoft.Hosting.Lifetime[14]
+      Now listening on: http://unix:/tmp/ilpp.sock-82459902276d5e08e7b0a2b4f2bc76a1
+info: Microsoft.Hosting.Lifetime[0]
+      Application started. Press Ctrl+C to shut down.
+info: Microsoft.Hosting.Lifetime[0]
+      Hosting environment: Production
+info: Microsoft.Hosting.Lifetime[0]
+      Content root path: /Users/jiawei.zhou/Documents/Fidgeting app/unity/FidgetingApp
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/2 POST http://ilpp/UnityILPP.PostProcessing/Ping - application/grpc -
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[0]
+      Executing endpoint 'gRPC - /UnityILPP.PostProcessing/Ping'
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[1]
+      Executed endpoint 'gRPC - /UnityILPP.PostProcessing/Ping'
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/2 POST http://ilpp/UnityILPP.PostProcessing/Ping - 200 - application/grpc 13.3182ms
+Starting: /Applications/Unity/Hub/Editor/6000.5.6f1/Unity.app/Contents/Resources/BuildPipeline/bee_backend --ipc --defer-dag-verification --dagfile="Library/Bee/900b0aE.dag" --continue-on-failure --profile="Library/Bee/backend1.traceevents" ScriptAssemblies
+WorkingDir: /Users/jiawei.zhou/Documents/Fidgeting app/unity/FidgetingApp
+DisplayProgressbar: Compiling Scripts
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/2 POST http://ilpp/UnityILPP.PostProcessing/ConfigurePostProcessors - application/grpc -
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[0]
+      Executing endpoint 'gRPC - /UnityILPP.PostProcessing/ConfigurePostProcessors'
+warn: Unity.ILPP.Runner.PostProcessingAssemblyLoadContext[0]
+      Assembly unityeditor.ios.extensions.xcode has duplicate hint path. Ignoring "/Applications/Unity/Hub/Editor/6000.5.6f1/PlaybackEngines/iOSSupport/UnityEditor.iOS.Extensions.Xcode.dll" in favor of "/Applications/Unity/Hub/Editor/6000.5.6f1/PlaybackEngines/MacStandaloneSupport/UnityEditor.iOS.Extensions.Xcode.dll"
+warn: Unity.ILPP.Runner.PostProcessingAssemblyLoadContext[0]
+      Assembly system.runtime.interopservices.windowsruntime has duplicate hint path. Ignoring "/Applications/Unity/Hub/Editor/6000.5.6f1/Unity.app/Contents/Resources/Scripting/UnityReferenceAssemblies/unity-4.8-api/Facades/System.Runtime.InteropServices.WindowsRuntime.dll" in favor of "/Applications/Unity/Hub/Editor/6000.5.6f1/Unity.app/Contents/Resources/Scripting/NetStandard/Extensions/2.0.0/System.Runtime.InteropServices.WindowsRuntime.dll"
+warn: Unity.ILPP.Runner.PostProcessingAssemblyLoadContext[0]
+      Assembly system.componentmodel.composition has duplicate hint path. Ignoring "/Applications/Unity/Hub/Editor/6000.5.6f1/Unity.app/Contents/Resources/Scripting/UnityReferenceAssemblies/unity-4.8-api/System.ComponentModel.Composition.dll" in favor of "/Applications/Unity/Hub/Editor/6000.5.6f1/Unity.app/Contents/Resources/Scripting/NetStandard/compat/2.1.0/shims/netfx/System.ComponentModel.Composition.dll"
+info: Unity.ILPP.Runner.PostProcessingAssemblyLoadContext[0]
+      Resolved Unity.Burst.Cecil, Version=0.11.6.0, Culture=neutral, PublicKeyToken=50cebf1cceb9d05e with Library/PackageCache/com.unity.burst@6bb9aca3ef38/Unity.Burst.CodeGen/Unity.Burst.Cecil.dll
+info: Unity.ILPP.Runner.PostProcessingAssemblyLoadContext[0]
+      Resolved Mono.Cecil, Version=0.11.5.0, Culture=neutral, PublicKeyToken=50cebf1cceb9d05e with Library/PackageCache/com.unity.nuget.mono-cecil@ecb9724e46ff/Mono.Cecil.dll
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[1]
+      Executed endpoint 'gRPC - /UnityILPP.PostProcessing/ConfigurePostProcessors'
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/2 POST http://ilpp/UnityILPP.PostProcessing/ConfigurePostProcessors - 200 - application/grpc 12.4545ms
+ExitCode: 0 Duration: 0s442ms
+[1079/1452  0s] ILPP-Configuration Library/ilpp-configuration.nevergeneratedoutput
+*** Tundra build success (0.42 seconds), 1 items updated, 1452 evaluated
+AssetDatabase: script compilation time: 0.735774s
+Total cache size 267348784
+Total cache size after purge 267348784, took 00:00:00.1529129
+Begin MonoManager ReloadAssembly
+Symbol file LoadedFromMemory is not a mono symbol file
+Symbol file LoadedFromMemory is not a mono symbol file
+Native extension for iOS target not found
+Native extension for OSXStandalone target not found
+Refreshing native plugins compatible for Editor in 2.08 ms, found 3 plugins.
+[Licensing::Client] Error: Code 404 while processing request (status: Found 0 entitlement groups and 0 free entitlements matching requested entitlement ids)
+[Licensing::Client] Error: Code 404 while processing request (status: Found 0 entitlement groups and 0 free entitlements matching requested entitlement ids)
+[Licensing::Client] Error: Code 404 while processing request (status: Found 0 entitlement groups and 0 free entitlements matching requested entitlement ids)
+ScheduleIndexationOnStartup MainProcess:True IndexOnStartup:True
+Mono: successfully reloaded assembly
+- Finished resetting the current domain, in  2.594 seconds
+Domain Reload Profiling: 3132ms
+	BeginReloadAssembly (88ms)
+		DisableScriptedObjects (12ms)
+		CreateAndSetChildDomain (22ms)
+	RebuildCommonClasses (4ms)
+	RebuildNativeTypeToScriptingClass (8ms)
+	initialDomainReloadingComplete (36ms)
+	LoadAllAssembliesAndSetupDomain (402ms)
+		LoadAssemblies (141ms)
+		AnalyzeDomain (231ms)
+			TypeCache.Refresh (184ms)
+				TypeCache.ScanAssembly (171ms)
+			BuildScriptInfoCaches (42ms)
+			ResolveRequiredComponents (4ms)
+	FinalizeReload (2594ms)
+		SetupLoadedEditorAssemblies (0ms)
+			InitializePlatformSupportModulesInManaged (8ms)
+			BeforeProcessingInitializeOnLoad (60ms)
+			ProcessInitializeOnLoadAttributes (2209ms)
+			ProcessInitializeOnLoadMethodAttributes (130ms)
+		AwakeInstancesAfterBackupRestoration (11ms)
+Importing 'GUID: be8622c221f1e43d6a0624969eac2349 - Path: Assets/_EDC/Candidates/MagneticSlideTileGate11R009/Shaders/MagneticSlideTileCrystal.shader' with importer (ShaderImporter)
+Launching external process: /Applications/Unity/Hub/Editor/6000.5.6f1/Unity.app/Contents/Helpers/UnityShaderCompiler
+Launched and connected shader compiler UnityShaderCompiler after 0.02 seconds
+Imported 'GUID: be8622c221f1e43d6a0624969eac2349' -> (Import Result ID: 'ce06804a94cb7056e10656978c34daae') in 0.044 seconds [static and dynamic dependencies]. Details - ImportResultOutputID=2519631b3d46c96c4b5f26255d8524e8 DependenciesID=22ef5660a3647752b156a6e2f5ad8779 StaticDependenciesID=b56d6edb5ed26b13de9336a6500f60b0 
+Starting new worker id: 0 with log in /Users/jiawei.zhou/Documents/Fidgeting app/unity/FidgetingApp/Logs/AssetImportWorkerHW0.log
+
+Asset Pipeline Refresh (id=242ad90407fd84a439cd9f38bace114a): Total: 5.251 seconds - Initiated by InitialRefreshV2(ForceSynchronousImport)
+	(Values over 0.05ms)
+	Summary:
+		Imports: total=1 (actual=1, local cache=0, cache server=0)
+		Asset DB Process Time: managed=0 ms, native=3552 ms
+		Asset DB Callback time: managed=329 ms, native=30 ms
+		Scripting: domain reloads=1, domain reload time=563 ms, compile time=737 ms, other=37 ms
+		Project Asset Count: scripts=2294, non-scripts=5810
+		Asset File Changes: new=0, changed=1, moved=0, deleted=0
+		Scan Filter Count: 1
+	InvokePackagesCallback: 9.619ms
+	ApplyChangesToAssetFolders: 0.201ms
+	Scan: 589.653ms
+	Collect global state as custom dependencies: 20.050ms
+	OnSourceAssetsModified: 0.497ms
+	CategorizeScriptCompilationAssets: 34.341ms
+	ProcessAssetsWithTransientArtifactChanges: 54.318ms
+	CategorizeAssets: 70.271ms
+	CompileScripts: 737.227ms
+	ImportOutOfDateAssets: 2717.967ms (2616.029ms without children)
+		ImportManagerImport: 45.239ms (0.732ms without children)
+			UpdateCategorizedAssets: 0.112ms
+		UnloadImportedAssets: 1.193ms
+		EnsureUptoDateAssetsAreRegisteredWithGuidPM: 0.744ms
+		ImportSchedulerStart: 54.726ms
+	PostProcessAllAssets: 346.512ms
+		ShaderAssetModifiedCallback 16.675ms
+		VCAutoAddAssetPostprocess 0.484ms
+		XRBuildSystem.XRAssetImported 0.199ms
+		MonoPostProcessAllAssets: 328.964ms
+			AssetPostprocessor.OnPostprocessAllAssets 111.572ms
+			StyleCatalogPostProcessor.OnPostprocessAllAssets 14.033ms
+			AssetReferenceReimportMonitor.OnPostprocessAllAssets 12.172ms
+			UniversalRenderPipelineGlobalSettingsPostprocessor.OnPostprocessAllAssets 5.078ms
+			BuilderAssetPostprocessor.OnPostprocessAllAssets 3.630ms
+			SpriteSlicePostprocessor.OnPostprocessAllAssets 1.013ms
+			GraphRefreshPostprocessor.OnPostprocessAllAssets 0.940ms
+			WindowAssetPostprocessingWatcher.OnPostprocessAllAssets 0.828ms
+			SpeedTree9Postprocessor.OnPostprocessAllAssets 0.763ms
+			ShaderGraphAssetPostProcessor.OnPostprocessAllAssets 0.598ms
+			AssetChangedListener.OnPostprocessAllAssets 0.587ms
+			RetainedModeAssetPostprocessor.OnPostprocessAllAssets 0.540ms
+			AssetChangeDetector.OnPostprocessAllAssets 0.481ms
+			EditModeScopePostprocessor.OnPostprocessAllAssets 0.469ms
+			MaterialPostprocessor.OnPostprocessAllAssets 0.339ms
+			RenderPipelineGlobalSettingsPostprocessor.OnPostprocessAllAssets 0.284ms
+			ArtifactBrowserPostProcessor.OnPostprocessAllAssets 0.266ms
+			SpriteEditorTexturePostprocessor.OnPostprocessAllAssets 0.218ms
+			SkillsProjectAssetPostprocessor.OnPostprocessAllAssets 0.167ms
+			SampleDependencyImporterPostProcessor.OnPostprocessAllAssets 0.158ms
+			UVCSAssetPostprocessor.OnPostprocessAllAssets 0.150ms
+			ModelAssetProcessor.OnPostprocessAllAssets 0.150ms
+			InputActionAssetPostprocessor.OnPostprocessAllAssets 0.146ms
+			AudioMixerPostprocessor.OnPostprocessAllAssets 0.144ms
+			TMPro_TexturePostProcessor.OnPostprocessAllAssets 0.141ms
+			TextAssetPostProcessor.OnPostprocessAllAssets 0.134ms
+			ReferencedClipsPostProcessor.OnPostprocessAllAssets 0.132ms
+			ShaderReflectionAssetPostProcessor.OnPostprocessAllAssets 0.126ms
+			AssetEvents.OnPostprocessAllAssets 0.124ms
+			InputActionJsonNameModifierAssetProcessor.OnPostprocessAllAssets 0.111ms
+			PostProcessor.OnPostprocessAllAssets 0.095ms
+			ProjectSettingsPostprocessor.OnPostprocessAllAssets 0.080ms
+			TerrainToolbarOverlayPostProcessor.OnPostprocessAllAssets 0.079ms
+			AssetDatabaseCallbacks.OnPostprocessAllAssets 0.063ms
+			SpeedTreePostProcessor.OnPostprocessAllAssets 0.057ms
+			ScenarioDriftAssetsTracker.OnPostprocessAllAssets 0.053ms
+			SyncVS.PostprocessSyncProject 0.052ms
+			ConfigAssetsTracker.OnPostprocessAllAssets 0.051ms
+	PostAssetChangesProfiler: 3.918ms
+	UnloadStreamsBegin: 0.927ms
+	PersistCurrentRevisions: 0.221ms
+	GenerateScriptTypeHashes: 2.695ms
+	GenerateScriptTypeSerializationHashes: 4.835ms
+	Untracked: 663.790ms
+
+Application.AssetDatabase Initial Refresh End
+Shader Hidden/ChartRasterizerHardware is not supported: GPU does not support conservative rasterization
+Shader Hidden/ChartRasterizerHardware is not supported: GPU does not support conservative rasterization
+Scanning for USB devices : 0.148ms
+Initializing Unity extensions:
+[MODES] ModeService[none].Initialize
+[MODES] ModeService[none].LoadModes
+[MODES] Loading mode Default (0) for mode-current-id-Fidget Spinner
+2026-08-28 00:08:20.801 Unity[75755:14805781] NSEventModifierFlagFunction specified to -setKeyEquivalentModifierMask: for item <NSMenuItem: 0xcb0611860 SDF, ke='Command-F12'>, but is only supported for system-provided menu items; will not be used
+Unloading 196 Unused Serialized files (Serialized files now loaded: 0)
+Worker ready: AssetImportWorkerHW0 0
+Unloading 10569 unused Assets / (24.5 MB). Loaded Objects now: 11250.
+Memory consumption went from 379.9 MB to 355.4 MB.
+Total: 24.360209 ms (FindLiveObjects: 0.440208 ms CreateObjectMapping: 2.590708 ms MarkObjects: 14.419167 ms  DeleteObjects: 6.909875 ms)
+
+2026-08-28 00:08:20.884 Unity[75755:14805781] NSEventModifierFlagFunction specified to -setKeyEquivalentModifierMask: for item <NSMenuItem: 0xcb0612bc0 SDF, ke='Command-F12'>, but is only supported for system-provided menu items; will not be used
+Importing 'GUID: 971d267cf52344cc5805d6181159c20d - Path: Assets/_EDC/Candidates/MagneticSlideTileGate11R009/Imported/magnetic-slide-tile-render-r009.fbx' with importer (FBXImporter)
+Imported 'GUID: 971d267cf52344cc5805d6181159c20d' -> (Import Result ID: '156fd8bcaa3ac9be78cc0121a1854ac9') in 0.071 seconds [static and dynamic dependencies]. Details - ImportResultOutputID=67a077c6eff4a3ec6932e8a1e744b759 DependenciesID=a25d6614c1876b9492792f5860d84b87 StaticDependenciesID=49422f9422cbb1b74fedab13356de952 
+Asset Pipeline Refresh (id=7ccf45be4034345fc910dfe598d1c7e6): Total: 0.192 seconds - Initiated by StopAssetImportingV2(NoUpdateAssetOptions)
+Importing 'GUID: 971d267cf52344cc5805d6181159c20d - Path: Assets/_EDC/Candidates/MagneticSlideTileGate11R009/Imported/magnetic-slide-tile-render-r009.fbx' with importer (FBXImporter)
+Imported 'GUID: 971d267cf52344cc5805d6181159c20d' -> (Import Result ID: '156fd8bcaa3ac9be78cc0121a1854ac9') in 0.051 seconds [static and dynamic dependencies]. Details - ImportResultOutputID=67a077c6eff4a3ec6932e8a1e744b759 DependenciesID=a25d6614c1876b9492792f5860d84b87 StaticDependenciesID=49422f9422cbb1b74fedab13356de952 
+Refreshing native plugins compatible for Editor in 2.48 ms, found 3 plugins.
+Asset Pipeline Refresh (id=e92a72257cb254bf3b56aed3a5d0331c): Total: 0.122 seconds - Initiated by StopAssetImportingV2(NoUpdateAssetOptions)
+Importing 'GUID: f29386c4d134a4e61811470fe9a92eeb - Path: Assets/_EDC/Candidates/MagneticSlideTileGate11R009/Imported/magnetic-slide-tile-collision-r009.fbx' with importer (FBXImporter)
+Imported 'GUID: f29386c4d134a4e61811470fe9a92eeb' -> (Import Result ID: 'cb4f38afc8bb0074f4fc2e61284e71d8') in 0.012 seconds [static and dynamic dependencies]. Details - ImportResultOutputID=e4216b169133014b98f6d6c2ef50c8d8 DependenciesID=679ec07829134f6250c14e0649bb80a8 StaticDependenciesID=67d8e8c89734642837b0d6bbeb3931aa 
+Asset Pipeline Refresh (id=f9e1c4a6ff2ad4a20b4bda3d5d37d68f): Total: 0.095 seconds - Initiated by StopAssetImportingV2(NoUpdateAssetOptions)
+Importing 'GUID: f29386c4d134a4e61811470fe9a92eeb - Path: Assets/_EDC/Candidates/MagneticSlideTileGate11R009/Imported/magnetic-slide-tile-collision-r009.fbx' with importer (FBXImporter)
+Imported 'GUID: f29386c4d134a4e61811470fe9a92eeb' -> (Import Result ID: 'cb4f38afc8bb0074f4fc2e61284e71d8') in 0.009 seconds [static and dynamic dependencies]. Details - ImportResultOutputID=e4216b169133014b98f6d6c2ef50c8d8 DependenciesID=679ec07829134f6250c14e0649bb80a8 StaticDependenciesID=67d8e8c89734642837b0d6bbeb3931aa 
+Asset Pipeline Refresh (id=752dcaecd6a954b18bc9e25888d31c6f): Total: 0.081 seconds - Initiated by StopAssetImportingV2(NoUpdateAssetOptions)
+Importing 'GUID: 9c9d9d1d4fbeb4e86984f2ea5704c0d2 - Path: Assets/_EDC/Candidates/MagneticSlideTileGate11R009/Imported/Textures/upperBaseColor.png' with importer (TextureImporter)
+Imported 'GUID: 9c9d9d1d4fbeb4e86984f2ea5704c0d2' -> (Import Result ID: 'e7ca4af98c309876393cc318f6791bf0') in 0.009 seconds [static and dynamic dependencies]. Details - ImportResultOutputID=8d3a8487ce0d7d4dc05feca0881a5c05 DependenciesID=88e68b5e30e3baf4be47324b77721ef0 StaticDependenciesID=1c1219e40737d31d1b94057b70e0f4d2 
+Asset Pipeline Refresh (id=4050357f6820e43739bed080c4880e32): Total: 0.080 seconds - Initiated by StopAssetImportingV2(NoUpdateAssetOptions)
+Importing 'GUID: 9c9d9d1d4fbeb4e86984f2ea5704c0d2 - Path: Assets/_EDC/Candidates/MagneticSlideTileGate11R009/Imported/Textures/upperBaseColor.png' with importer (TextureImporter)
+Imported 'GUID: 9c9d9d1d4fbeb4e86984f2ea5704c0d2' -> (Import Result ID: 'e7ca4af98c309876393cc318f6791bf0') in 0.007 seconds [static and dynamic dependencies]. Details - ImportResultOutputID=8d3a8487ce0d7d4dc05feca0881a5c05 DependenciesID=88e68b5e30e3baf4be47324b77721ef0 StaticDependenciesID=1c1219e40737d31d1b94057b70e0f4d2 
+Asset Pipeline Refresh (id=b241221ddcf6e48fbb8f3d9e0e9e9fb3): Total: 0.075 seconds - Initiated by StopAssetImportingV2(NoUpdateAssetOptions)
+Importing 'GUID: ad744566b902c4e6285c951bc0447345 - Path: Assets/_EDC/Candidates/MagneticSlideTileGate11R009/Imported/Textures/lowerBaseColor.png' with importer (TextureImporter)
+Imported 'GUID: ad744566b902c4e6285c951bc0447345' -> (Import Result ID: '6e14df687289908aa3dbf0e33c8db7a4') in 0.006 seconds [static and dynamic dependencies]. Details - ImportResultOutputID=53c68cf0d9cde11f2b3a98ee03ef724a DependenciesID=149e3db19d0d00edabee772db0851a2c StaticDependenciesID=0381ec29e83bd458fe6d363564f7fced 
+Asset Pipeline Refresh (id=7d9be8a3975414199932bbcd7fd53e17): Total: 0.070 seconds - Initiated by StopAssetImportingV2(NoUpdateAssetOptions)
+Importing 'GUID: ad744566b902c4e6285c951bc0447345 - Path: Assets/_EDC/Candidates/MagneticSlideTileGate11R009/Imported/Textures/lowerBaseColor.png' with importer (TextureImporter)
+Imported 'GUID: ad744566b902c4e6285c951bc0447345' -> (Import Result ID: '6e14df687289908aa3dbf0e33c8db7a4') in 0.006 seconds [static and dynamic dependencies]. Details - ImportResultOutputID=53c68cf0d9cde11f2b3a98ee03ef724a DependenciesID=149e3db19d0d00edabee772db0851a2c StaticDependenciesID=0381ec29e83bd458fe6d363564f7fced 
+Asset Pipeline Refresh (id=04ec2662c346f41cda0b5049ef5c6191): Total: 0.070 seconds - Initiated by StopAssetImportingV2(NoUpdateAssetOptions)
+Importing 'GUID: dd4951a18855b4b29a0e1dfab1c6a9ed - Path: Assets/_EDC/Candidates/MagneticSlideTileGate11R009/Imported/Textures/upperArtworkMask.png' with importer (TextureImporter)
+Imported 'GUID: dd4951a18855b4b29a0e1dfab1c6a9ed' -> (Import Result ID: 'bbc8d25abc260bd5ebec537f7fd15215') in 0.003 seconds [static and dynamic dependencies]. Details - ImportResultOutputID=4f8800d6f1dad8fdefcab09c37237e9d DependenciesID=e3a2db944a35476c57ee0ccbf2685cb4 StaticDependenciesID=4710e6e89aa44545cde531b4b37b4e9d 
+Asset Pipeline Refresh (id=36f0f5fed27cc4c039b370c4100e21c1): Total: 0.069 seconds - Initiated by StopAssetImportingV2(NoUpdateAssetOptions)
+Importing 'GUID: dd4951a18855b4b29a0e1dfab1c6a9ed - Path: Assets/_EDC/Candidates/MagneticSlideTileGate11R009/Imported/Textures/upperArtworkMask.png' with importer (TextureImporter)
+Imported 'GUID: dd4951a18855b4b29a0e1dfab1c6a9ed' -> (Import Result ID: 'bbc8d25abc260bd5ebec537f7fd15215') in 0.003 seconds [static and dynamic dependencies]. Details - ImportResultOutputID=4f8800d6f1dad8fdefcab09c37237e9d DependenciesID=e3a2db944a35476c57ee0ccbf2685cb4 StaticDependenciesID=4710e6e89aa44545cde531b4b37b4e9d 
+Asset Pipeline Refresh (id=8746e16952a3a4405b65fe536cc6f21b): Total: 0.069 seconds - Initiated by StopAssetImportingV2(NoUpdateAssetOptions)
+Importing 'GUID: 48ad5b6534d1e4c76a0c313d6cf5c28f - Path: Assets/_EDC/Candidates/MagneticSlideTileGate11R009/Imported/Textures/lowerArtworkMask.png' with importer (TextureImporter)
+Imported 'GUID: 48ad5b6534d1e4c76a0c313d6cf5c28f' -> (Import Result ID: '9373a8e1327e3a5048f3d3b0aaaaf3c5') in 0.004 seconds [static and dynamic dependencies]. Details - ImportResultOutputID=6768ad2d755c9235e4e4a35b1784e949 DependenciesID=d7ed83f3162fd61d5d15389434a514ad StaticDependenciesID=60e0f934b33fcad94d3bc9cd52a0d1c6 
+Asset Pipeline Refresh (id=a1dd05d3c7a314658ba7330b16998277): Total: 0.066 seconds - Initiated by StopAssetImportingV2(NoUpdateAssetOptions)
+Importing 'GUID: 48ad5b6534d1e4c76a0c313d6cf5c28f - Path: Assets/_EDC/Candidates/MagneticSlideTileGate11R009/Imported/Textures/lowerArtworkMask.png' with importer (TextureImporter)
+Imported 'GUID: 48ad5b6534d1e4c76a0c313d6cf5c28f' -> (Import Result ID: '9373a8e1327e3a5048f3d3b0aaaaf3c5') in 0.004 seconds [static and dynamic dependencies]. Details - ImportResultOutputID=6768ad2d755c9235e4e4a35b1784e949 DependenciesID=d7ed83f3162fd61d5d15389434a514ad StaticDependenciesID=60e0f934b33fcad94d3bc9cd52a0d1c6 
+Asset Pipeline Refresh (id=9a4a25e7dd1ed4a4f8c9992811b2a8b6): Total: 0.067 seconds - Initiated by StopAssetImportingV2(NoUpdateAssetOptions)
+Importing 'GUID: 3897133d401fb49ec877657104440311 - Path: Assets/_EDC/Candidates/MagneticSlideTileGate11R009/Imported/Textures/perimeterMask.png' with importer (TextureImporter)
+Imported 'GUID: 3897133d401fb49ec877657104440311' -> (Import Result ID: '08cdd19fa09482ead54781cba91c3802') in 0.003 seconds [static and dynamic dependencies]. Details - ImportResultOutputID=6bd62cb4afe3e2a6a4ab812d85dde37d DependenciesID=2ef77b5eaec2d0d17260e572ab737327 StaticDependenciesID=092ced11fe91b10c28f60501aee8ee70 
+Asset Pipeline Refresh (id=506fe5e155dc44016988237564a2168e): Total: 0.068 seconds - Initiated by StopAssetImportingV2(NoUpdateAssetOptions)
+Importing 'GUID: 3897133d401fb49ec877657104440311 - Path: Assets/_EDC/Candidates/MagneticSlideTileGate11R009/Imported/Textures/perimeterMask.png' with importer (TextureImporter)
+Imported 'GUID: 3897133d401fb49ec877657104440311' -> (Import Result ID: '08cdd19fa09482ead54781cba91c3802') in 0.003 seconds [static and dynamic dependencies]. Details - ImportResultOutputID=6bd62cb4afe3e2a6a4ab812d85dde37d DependenciesID=2ef77b5eaec2d0d17260e572ab737327 StaticDependenciesID=092ced11fe91b10c28f60501aee8ee70 
+Asset Pipeline Refresh (id=036f970a8efc44c2bbbb728e103d9a5b): Total: 0.068 seconds - Initiated by StopAssetImportingV2(NoUpdateAssetOptions)
+Importing 'GUID: edfddd7c9a88a4fc1bf8bbe1a95a2d8c - Path: Assets/_EDC/Candidates/MagneticSlideTileGate11R009/Imported/Textures/upper-maskmap-r009.png' with importer (TextureImporter)
+Imported 'GUID: edfddd7c9a88a4fc1bf8bbe1a95a2d8c' -> (Import Result ID: '62d444931a70aa131f008824688c354c') in 0.007 seconds [static and dynamic dependencies]. Details - ImportResultOutputID=c48ca6a69093e5190b1784218a037df9 DependenciesID=f1cc31687e42c72559da4c458c80990f StaticDependenciesID=af060c7578667c4bf29068bf62ed8d41 
+Asset Pipeline Refresh (id=8093a8babdafb4cf7838e77de919da22): Total: 0.071 seconds - Initiated by StopAssetImportingV2(NoUpdateAssetOptions)
+Importing 'GUID: edfddd7c9a88a4fc1bf8bbe1a95a2d8c - Path: Assets/_EDC/Candidates/MagneticSlideTileGate11R009/Imported/Textures/upper-maskmap-r009.png' with importer (TextureImporter)
+Imported 'GUID: edfddd7c9a88a4fc1bf8bbe1a95a2d8c' -> (Import Result ID: '62d444931a70aa131f008824688c354c') in 0.007 seconds [static and dynamic dependencies]. Details - ImportResultOutputID=c48ca6a69093e5190b1784218a037df9 DependenciesID=f1cc31687e42c72559da4c458c80990f StaticDependenciesID=af060c7578667c4bf29068bf62ed8d41 
+Asset Pipeline Refresh (id=a50e5c81dc18f45889565091d0447292): Total: 0.072 seconds - Initiated by StopAssetImportingV2(NoUpdateAssetOptions)
+Importing 'GUID: 0b2ff286ef1c74570b02ea573d701f09 - Path: Assets/_EDC/Candidates/MagneticSlideTileGate11R009/Imported/Textures/lower-maskmap-r009.png' with importer (TextureImporter)
+Imported 'GUID: 0b2ff286ef1c74570b02ea573d701f09' -> (Import Result ID: '653e49ee7550566dc938d4d014328750') in 0.007 seconds [static and dynamic dependencies]. Details - ImportResultOutputID=f346f5fc6e2e1b4c1f94826698c1222a DependenciesID=5c81c9f716f598bae1b8e415d640d6fc StaticDependenciesID=aab382b7eb7f16cde119e4d5ff6677f6 
+Asset Pipeline Refresh (id=02266c09d9e9b4956a13f07215132df9): Total: 0.071 seconds - Initiated by StopAssetImportingV2(NoUpdateAssetOptions)
+Importing 'GUID: 0b2ff286ef1c74570b02ea573d701f09 - Path: Assets/_EDC/Candidates/MagneticSlideTileGate11R009/Imported/Textures/lower-maskmap-r009.png' with importer (TextureImporter)
+Imported 'GUID: 0b2ff286ef1c74570b02ea573d701f09' -> (Import Result ID: '653e49ee7550566dc938d4d014328750') in 0.007 seconds [static and dynamic dependencies]. Details - ImportResultOutputID=f346f5fc6e2e1b4c1f94826698c1222a DependenciesID=5c81c9f716f598bae1b8e415d640d6fc StaticDependenciesID=aab382b7eb7f16cde119e4d5ff6677f6 
+Asset Pipeline Refresh (id=1b2a7c353e80e40ebaf86c51957224d0): Total: 0.071 seconds - Initiated by StopAssetImportingV2(NoUpdateAssetOptions)
+Importing 'GUID: a41d3d02364c54e0c89e3645fcfa02ba - Path: Assets/_EDC/Candidates/MagneticSlideTileGate11R009/Imported/Textures/upperRoughness.png' with importer (TextureImporter)
+Imported 'GUID: a41d3d02364c54e0c89e3645fcfa02ba' -> (Import Result ID: '7e2a67130e19e455a5744b8177bd29ab') in 0.004 seconds [static and dynamic dependencies]. Details - ImportResultOutputID=07176bd9d64afa2c0858019c14479d2c DependenciesID=bb5f35036e7067d458e9a6126c1070e8 StaticDependenciesID=f4c75b2f3b8cb7f92c0496033e0b04f5 
+Asset Pipeline Refresh (id=d7d4ecdf450f44263b1da197ffffa4d2): Total: 0.068 seconds - Initiated by StopAssetImportingV2(NoUpdateAssetOptions)
+Importing 'GUID: a41d3d02364c54e0c89e3645fcfa02ba - Path: Assets/_EDC/Candidates/MagneticSlideTileGate11R009/Imported/Textures/upperRoughness.png' with importer (TextureImporter)
+Imported 'GUID: a41d3d02364c54e0c89e3645fcfa02ba' -> (Import Result ID: '7e2a67130e19e455a5744b8177bd29ab') in 0.005 seconds [static and dynamic dependencies]. Details - ImportResultOutputID=07176bd9d64afa2c0858019c14479d2c DependenciesID=bb5f35036e7067d458e9a6126c1070e8 StaticDependenciesID=f4c75b2f3b8cb7f92c0496033e0b04f5 
+Asset Pipeline Refresh (id=6275f086c37be4710b0388f645b3edef): Total: 0.070 seconds - Initiated by StopAssetImportingV2(NoUpdateAssetOptions)
+Importing 'GUID: 85d68559d591e44a0a4998ca11240f0b - Path: Assets/_EDC/Candidates/MagneticSlideTileGate11R009/Imported/Textures/lowerRoughness.png' with importer (TextureImporter)
+Imported 'GUID: 85d68559d591e44a0a4998ca11240f0b' -> (Import Result ID: '772e5ada1fc4864d71277ef717ed9b15') in 0.005 seconds [static and dynamic dependencies]. Details - ImportResultOutputID=a272d20e197cf96e13bb96e49c1262b3 DependenciesID=6d021dd87bb3479b5946ead12d27108d StaticDependenciesID=028fe001d93557b50d1b2169ee7a7030 
+Asset Pipeline Refresh (id=ace5ed2b8d32348a487137848e3de137): Total: 0.066 seconds - Initiated by StopAssetImportingV2(NoUpdateAssetOptions)
+Importing 'GUID: 85d68559d591e44a0a4998ca11240f0b - Path: Assets/_EDC/Candidates/MagneticSlideTileGate11R009/Imported/Textures/lowerRoughness.png' with importer (TextureImporter)
+Imported 'GUID: 85d68559d591e44a0a4998ca11240f0b' -> (Import Result ID: '772e5ada1fc4864d71277ef717ed9b15') in 0.005 seconds [static and dynamic dependencies]. Details - ImportResultOutputID=a272d20e197cf96e13bb96e49c1262b3 DependenciesID=6d021dd87bb3479b5946ead12d27108d StaticDependenciesID=028fe001d93557b50d1b2169ee7a7030 
+Asset Pipeline Refresh (id=abeb6ac4d5aab4732a2b1888a58876a5): Total: 0.067 seconds - Initiated by StopAssetImportingV2(NoUpdateAssetOptions)
+Importing 'GUID: 09ed626baa0074c31b6b9acb6f0029e9 - Path: Assets/_EDC/Candidates/MagneticSlideTileGate11R009/Imported/Textures/upper-normal-r009.png' with importer (TextureImporter)
+Imported 'GUID: 09ed626baa0074c31b6b9acb6f0029e9' -> (Import Result ID: '32c8bb37f594ae2781fce61bf96f0646') in 0.007 seconds [static and dynamic dependencies]. Details - ImportResultOutputID=fdc041a1840e78890556a6ce0ea02131 DependenciesID=bc09830b82328f9b63544a75a4d8c522 StaticDependenciesID=0d3a8e73762ddd684d27b414f9cc2ebb 
+Asset Pipeline Refresh (id=ed93041ebc57841b7b3e9a52b93b2601): Total: 0.072 seconds - Initiated by StopAssetImportingV2(NoUpdateAssetOptions)
+Importing 'GUID: 09ed626baa0074c31b6b9acb6f0029e9 - Path: Assets/_EDC/Candidates/MagneticSlideTileGate11R009/Imported/Textures/upper-normal-r009.png' with importer (TextureImporter)
+Imported 'GUID: 09ed626baa0074c31b6b9acb6f0029e9' -> (Import Result ID: '32c8bb37f594ae2781fce61bf96f0646') in 0.010 seconds [static and dynamic dependencies]. Details - ImportResultOutputID=fdc041a1840e78890556a6ce0ea02131 DependenciesID=bc09830b82328f9b63544a75a4d8c522 StaticDependenciesID=0d3a8e73762ddd684d27b414f9cc2ebb 
+Asset Pipeline Refresh (id=e33448052141f4d3a9932704e44d25e9): Total: 0.074 seconds - Initiated by StopAssetImportingV2(NoUpdateAssetOptions)
+Importing 'GUID: 81442662edc494b71a0732e3207e77a5 - Path: Assets/_EDC/Candidates/MagneticSlideTileGate11R009/Imported/Textures/lower-normal-r009.png' with importer (TextureImporter)
+Imported 'GUID: 81442662edc494b71a0732e3207e77a5' -> (Import Result ID: 'ef8f40dcd788bbc59a086f6fd4a8c2dd') in 0.007 seconds [static and dynamic dependencies]. Details - ImportResultOutputID=6bee611e6f7bed003575605238ad26bf DependenciesID=291ac92a206291e386d95c97539b0ce4 StaticDependenciesID=a80e57c3800dbe5ec1ba1c40a6fdb4b9 
+Asset Pipeline Refresh (id=4cec26ad50fb64f9d9b3baeebf15ece9): Total: 0.069 seconds - Initiated by StopAssetImportingV2(NoUpdateAssetOptions)
+Importing 'GUID: 81442662edc494b71a0732e3207e77a5 - Path: Assets/_EDC/Candidates/MagneticSlideTileGate11R009/Imported/Textures/lower-normal-r009.png' with importer (TextureImporter)
+Imported 'GUID: 81442662edc494b71a0732e3207e77a5' -> (Import Result ID: 'ef8f40dcd788bbc59a086f6fd4a8c2dd') in 0.007 seconds [static and dynamic dependencies]. Details - ImportResultOutputID=6bee611e6f7bed003575605238ad26bf DependenciesID=291ac92a206291e386d95c97539b0ce4 StaticDependenciesID=a80e57c3800dbe5ec1ba1c40a6fdb4b9 
+Asset Pipeline Refresh (id=8f0c9a5bd01b94babb4909f678a959ab): Total: 0.069 seconds - Initiated by StopAssetImportingV2(NoUpdateAssetOptions)
+Importing 'GUID: e9e41608e9f0a41948399d480191be08 - Path: Assets/_EDC/Candidates/MagneticSlideTileGate11R009/Imported/Environment/magnetic-slide-tile-shipping-studio-r008.exr' with importer (TextureImporter)
+Imported 'GUID: e9e41608e9f0a41948399d480191be08' -> (Import Result ID: 'dca0df66684243bc87703cf81a05fed5') in 0.017 seconds [static and dynamic dependencies]. Details - ImportResultOutputID=75743c10c2e3cf0a95dcc92d744cd9b5 DependenciesID=fe15ebd445b435b79d5509ac637d7d4e StaticDependenciesID=4424f3e29a95b2d80fc3c4c854d05cb2 
+Asset Pipeline Refresh (id=1afcda024d6fb487dae16b6e609900a0): Total: 0.078 seconds - Initiated by StopAssetImportingV2(NoUpdateAssetOptions)
+Importing 'GUID: e9e41608e9f0a41948399d480191be08 - Path: Assets/_EDC/Candidates/MagneticSlideTileGate11R009/Imported/Environment/magnetic-slide-tile-shipping-studio-r008.exr' with importer (TextureImporter)
+Imported 'GUID: e9e41608e9f0a41948399d480191be08' -> (Import Result ID: 'dca0df66684243bc87703cf81a05fed5') in 0.016 seconds [static and dynamic dependencies]. Details - ImportResultOutputID=75743c10c2e3cf0a95dcc92d744cd9b5 DependenciesID=fe15ebd445b435b79d5509ac637d7d4e StaticDependenciesID=4424f3e29a95b2d80fc3c4c854d05cb2 
+Asset Pipeline Refresh (id=70a7faea520bb4c46a02742e2916017e): Total: 0.077 seconds - Initiated by StopAssetImportingV2(NoUpdateAssetOptions)
+Asset Pipeline Refresh (id=5d2bda1d1e4d64924a22a1a4ff33b909): Total: 0.111 seconds - Initiated by RefreshV2(NoUpdateAssetOptions)
+Unloading 0 Unused Serialized files (Serialized files now loaded: 0)
+Unloading 49 unused Assets / (16.4 KB). Loaded Objects now: 11250.
+Memory consumption went from 273.7 MB to 273.6 MB.
+Total: 13.683417 ms (FindLiveObjects: 0.181458 ms CreateObjectMapping: 0.804667 ms MarkObjects: 12.656750 ms  DeleteObjects: 0.040333 ms)
+
+Asset Pipeline Refresh (id=d5deffba2f2474076891b5ff6f0a42f3): Total: 0.093 seconds - Initiated by StopAssetImportingV2(NoUpdateAssetOptions)
+Asset Pipeline Refresh (id=a88d0098cc2ad490cbf8506395b8f89a): Total: 0.085 seconds - Initiated by StopAssetImportingV2(NoUpdateAssetOptions)
+Refreshing native plugins compatible for Editor in 2.31 ms, found 3 plugins.
+Asset Pipeline Refresh (id=4e1d54988104e4183b21bddc66554d56): Total: 0.084 seconds - Initiated by StopAssetImportingV2(NoUpdateAssetOptions)
+Asset Pipeline Refresh (id=efa51afc7ace3499d9384b1e78b24a4a): Total: 0.090 seconds - Initiated by StopAssetImportingV2(NoUpdateAssetOptions)
+Asset Pipeline Refresh (id=bdc1aef0f3a6d42ef99b8b21923ed237): Total: 0.078 seconds - Initiated by StopAssetImportingV2(NoUpdateAssetOptions)
+Asset Pipeline Refresh (id=57606effed2f54ba5b8a2238cc218461): Total: 0.081 seconds - Initiated by StopAssetImportingV2(NoUpdateAssetOptions)
+Asset Pipeline Refresh (id=54402b8c786a64a1e9d38526fd1242f4): Total: 0.073 seconds - Initiated by StopAssetImportingV2(NoUpdateAssetOptions)
+Asset Pipeline Refresh (id=ef9bcd050681d48bfa1334d50af3740f): Total: 0.078 seconds - Initiated by StopAssetImportingV2(NoUpdateAssetOptions)
+Asset Pipeline Refresh (id=e4a6ad5953b094622801a054c452d178): Total: 0.074 seconds - Initiated by StopAssetImportingV2(NoUpdateAssetOptions)
+Importing 'GUID: 7e32d1e9c91d34f8a909d04378b72dfb - Path: Assets/_EDC/Candidates/MagneticSlideTileGate11R009/Materials/M_G11R009_DarkExterior.mat' with importer (NativeFormatImporter)
+Imported 'GUID: 7e32d1e9c91d34f8a909d04378b72dfb' -> (Import Result ID: '9ab3c8388923c6c7b59693888c2ecfe4') in 0.001 seconds [static dependencies only]. Details - ImportResultOutputID=d93c884609eacf5e34ee3eca6d18ee97 DependenciesID=1e4e0f4641a7a567fa858a497405b88c StaticDependenciesID=008c3e40f1c2510c91576aa527597959 
+Asset Pipeline Refresh (id=ab90e6e6afcdd4723866bc081f990d32): Total: 0.081 seconds - Initiated by StopAssetImportingV2(NoUpdateAssetOptions)
+Asset Pipeline Refresh (id=ead99339230e848b7a4a39ec35dd5a3a): Total: 0.074 seconds - Initiated by StopAssetImportingV2(NoUpdateAssetOptions)
+Importing 'GUID: d92e0eab1b6b74530b6126cea291636a - Path: Assets/_EDC/Candidates/MagneticSlideTileGate11R009/Materials/M_G11R009_Technical.mat' with importer (NativeFormatImporter)
+Imported 'GUID: d92e0eab1b6b74530b6126cea291636a' -> (Import Result ID: 'bd3184e470a7eeeb52065ffab7df0bca') in 0.001 seconds [static dependencies only]. Details - ImportResultOutputID=80e7e06a69ee0b25db515f86bac67f58 DependenciesID=bda55fec9ca153b10343ee9518d35661 StaticDependenciesID=2775e1337483289a2cdbc8b628e9b6d5 
+Asset Pipeline Refresh (id=6bac7c076e1d545e795d1627d3ba17c9): Total: 0.081 seconds - Initiated by StopAssetImportingV2(NoUpdateAssetOptions)
+Asset Pipeline Refresh (id=ce543a1bb0e824b8b8422aac8b01af15): Total: 0.074 seconds - Initiated by StopAssetImportingV2(NoUpdateAssetOptions)
+Importing 'GUID: b5de2ebd94c10475ca6f02f945ffe1cc - Path: Assets/_EDC/Candidates/MagneticSlideTileGate11R009/Materials/M_G11R009_BallUnknown.mat' with importer (NativeFormatImporter)
+Imported 'GUID: b5de2ebd94c10475ca6f02f945ffe1cc' -> (Import Result ID: '999f33cb2027a5aad6b2cf64ec9fca3b') in 0.001 seconds [static dependencies only]. Details - ImportResultOutputID=7d17ea7058d238f89d6c7c88a83b49cf DependenciesID=a9513f9d7ac926f78c38e1f29e81b560 StaticDependenciesID=12e1c638294fd5d3cf9791c9526f73bf 
+Asset Pipeline Refresh (id=e6cdf21ca8d4a427c97f321be98e7e09): Total: 0.081 seconds - Initiated by StopAssetImportingV2(NoUpdateAssetOptions)
+Asset Pipeline Refresh (id=d1358ce56b69f43b6a44c434705a7b40): Total: 0.078 seconds - Initiated by StopAssetImportingV2(NoUpdateAssetOptions)
+Asset Pipeline Refresh (id=66e51fdc41b7d4cb1a63419b4b0f8a4b): Total: 0.080 seconds - Initiated by StopAssetImportingV2(NoUpdateAssetOptions)
+Asset Pipeline Refresh (id=36a909b67195c463593305bfbbf5232a): Total: 0.073 seconds - Initiated by StopAssetImportingV2(NoUpdateAssetOptions)
+Asset Pipeline Refresh (id=a8c18451c88e3413f84537304cbef45a): Total: 0.080 seconds - Initiated by StopAssetImportingV2(NoUpdateAssetOptions)
+Asset Pipeline Refresh (id=3a0fe3f62bc764856a4e098c8d6314e8): Total: 0.074 seconds - Initiated by StopAssetImportingV2(NoUpdateAssetOptions)
+Importing 'GUID: c72ac200db58c4b5dba661229061e051 - Path: Assets/_EDC/Candidates/MagneticSlideTileGate11R009/Materials/M_G11R009_Ground.mat' with importer (NativeFormatImporter)
+Imported 'GUID: c72ac200db58c4b5dba661229061e051' -> (Import Result ID: '9293e18ea0804ea5c1b5b2f30f45be11') in 0.001 seconds [static dependencies only]. Details - ImportResultOutputID=04787cefa1ab005651445dbe0e89b835 DependenciesID=52239cb433d107b91c2cadee97f700dd StaticDependenciesID=186438a7db117320d7178668ae8b2671 
+Asset Pipeline Refresh (id=ebf4b9c38b4944dfbb7822e70fcfa914): Total: 0.080 seconds - Initiated by StopAssetImportingV2(NoUpdateAssetOptions)
+Asset Pipeline Refresh (id=aca94c71af5fe45e1bad6a66ee81f8ae): Total: 0.073 seconds - Initiated by StopAssetImportingV2(NoUpdateAssetOptions)
+Asset Pipeline Refresh (id=8e438cef6e26c4d42a46437b33759fc2): Total: 0.079 seconds - Initiated by StopAssetImportingV2(NoUpdateAssetOptions)
+Importing 'GUID: 0000000000000000b000000000000000 - Path: ProjectSettings/EditorBuildSettings.asset' with importer (LibraryAssetImporter)
+Imported 'GUID: 0000000000000000b000000000000000' -> (Import Result ID: '091f01172f8655a8627d93ccb227d598') in 0.001 seconds [static dependencies only]. Details - ImportResultOutputID=4647dd083cfc32cebcd7526e8846440c DependenciesID=7800f3c207c2d8ad17557fb06a234284 StaticDependenciesID=c42002aae32c8b947165ca2571755f3a 
+Importing 'GUID: b5de2ebd94c10475ca6f02f945ffe1cc - Path: Assets/_EDC/Candidates/MagneticSlideTileGate11R009/Materials/M_G11R009_BallUnknown.mat' with importer (NativeFormatImporter)
+Imported 'GUID: b5de2ebd94c10475ca6f02f945ffe1cc' -> (Import Result ID: '83330a54309bd931c292ae6618bd2055') in 0.000 seconds [static dependencies only]. Details - ImportResultOutputID=7d17ea7058d238f89d6c7c88a83b49cf DependenciesID=34d406291719e95c543040b6f49e9256 StaticDependenciesID=8235cafa5e64240d97aeffba6ee04237 
+Importing 'GUID: c72ac200db58c4b5dba661229061e051 - Path: Assets/_EDC/Candidates/MagneticSlideTileGate11R009/Materials/M_G11R009_Ground.mat' with importer (NativeFormatImporter)
+Imported 'GUID: c72ac200db58c4b5dba661229061e051' -> (Import Result ID: '141d33ec47a4309633a4dc196bdcd4e7') in 0.000 seconds [static dependencies only]. Details - ImportResultOutputID=04787cefa1ab005651445dbe0e89b835 DependenciesID=4e966b55af0bfca4742c20ec9832ac83 StaticDependenciesID=d3f7982dd8986990b46c34ac2d1af10a 
+Importing 'GUID: d92e0eab1b6b74530b6126cea291636a - Path: Assets/_EDC/Candidates/MagneticSlideTileGate11R009/Materials/M_G11R009_Technical.mat' with importer (NativeFormatImporter)
+Imported 'GUID: d92e0eab1b6b74530b6126cea291636a' -> (Import Result ID: '0a96cad15dfee0f72925c91d431726d8') in 0.000 seconds [static dependencies only]. Details - ImportResultOutputID=80e7e06a69ee0b25db515f86bac67f58 DependenciesID=5c6d7e94cf9c7044ecaf837049d3ccbc StaticDependenciesID=dc2406015bf29b6dcd2e53e56bc6c15c 
+Importing 'GUID: 7e32d1e9c91d34f8a909d04378b72dfb - Path: Assets/_EDC/Candidates/MagneticSlideTileGate11R009/Materials/M_G11R009_DarkExterior.mat' with importer (NativeFormatImporter)
+Imported 'GUID: 7e32d1e9c91d34f8a909d04378b72dfb' -> (Import Result ID: '1e1332e0daa76fb784dd1ac4df5d6901') in 0.000 seconds [static dependencies only]. Details - ImportResultOutputID=d93c884609eacf5e34ee3eca6d18ee97 DependenciesID=ab3862e96fb5a45f70b246ddadec1d1d StaticDependenciesID=a99eb9fb78811e747f74ddc0d2720360 
+Asset Pipeline Refresh (id=c5c90a21a7d014b7ca9ca5723c13288c): Total: 0.078 seconds - Initiated by StopAssetImportingV2(NoUpdateAssetOptions)
+Importing 'GUID: f1a2cd8b6ae614d74986168f3f4ce287 - Path: Assets/_EDC/Candidates/MagneticSlideTileGate11R009/Scenes/MagneticSlideTileGate11R009Parity.unity' with importer (DefaultImporter)
+Imported 'GUID: f1a2cd8b6ae614d74986168f3f4ce287' -> (Import Result ID: 'da5a84688aaea397f5dfa9c3eccf1ae9') in 0.001 seconds [static dependencies only]. Details - ImportResultOutputID=13d3244dacb8d9d28eb0fe2006985afa DependenciesID=a31a2f01be29aa29e6b22a742c359219 StaticDependenciesID=ec38831010fb9523e6c95cb8ec2d6739 
+Asset Pipeline Refresh (id=9b3efaf7238bc4ac48ea47aab5f9141f): Total: 0.075 seconds - Initiated by StopAssetImportingV2(NoUpdateAssetOptions)
+Importing 'GUID: f1a2cd8b6ae614d74986168f3f4ce287 - Path: Assets/_EDC/Candidates/MagneticSlideTileGate11R009/Scenes/MagneticSlideTileGate11R009Parity.unity' with importer (DefaultImporter)
+Imported 'GUID: f1a2cd8b6ae614d74986168f3f4ce287' -> (Import Result ID: '95ab49c80e60a27215b49d2f2475bbef') in 0.001 seconds [static dependencies only]. Details - ImportResultOutputID=13d3244dacb8d9d28eb0fe2006985afa DependenciesID=513409ccad5c1f253752c6cf6e6e279c StaticDependenciesID=2b4cca4d23acc6e649857a507ef3bd5c 
+Asset Pipeline Refresh (id=1c68f745130fc4c7f95e0a1cdec9239f): Total: 0.078 seconds - Initiated by StopAssetImportingV2(NoUpdateAssetOptions)
+Asset Pipeline Refresh (id=9982b8bdb96dc4e0db54002ab520684b): Total: 0.121 seconds - Initiated by RefreshV2(NoUpdateAssetOptions)
+[MagneticSlideTile] Gate 11 R009 built. Scene=Assets/_EDC/Candidates/MagneticSlideTileGate11R009/Scenes/MagneticSlideTileGate11R009Parity.unity; bounds=0.031000000×0.012000010×0.050000000; meshes=8; triangles=99280.
+UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+UnityEngine.StackTraceUtility:ExtractStackTrace () (at /Users/bokken/build/output/unity/unity/Runtime/Export/Scripting/StackTrace.cs:35)
+UnityEngine.DebugLogHandler:Internal_Log (UnityEngine.LogType,UnityEngine.LogOption,string,UnityEngine.Object)
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
+UnityEngine.Logger:Log (UnityEngine.LogType,object)
+UnityEngine.Debug:Log (object)
+FidgetingApp.EDC.Editor.MagneticSlideTileGate11Builder:BuildAndCapture () (at Assets/_EDC/Candidates/MagneticSlideTileGate11R009/Editor/MagneticSlideTileGate11Builder.cs:193)
+
+(Filename: Assets/_EDC/Candidates/MagneticSlideTileGate11R009/Editor/MagneticSlideTileGate11Builder.cs Line: 193)
+
+Batchmode quit successfully invoked - shutting down!
+Thread 0x16bc33000 may have been prematurely finalized
+Shutting down MSBuild server...
+Shutting down VB/C# compiler server...
+VB/C# compiler server shut down successfully.
+MSBuild server shut down successfully.
+Input System module state changed to: ShutdownInProgress.
+Input Polling Thread exited.
+Input System module state changed to: Shutdown.
+[Physics::Module] Cleanup current backend.
+[Physics::Module] Id: 0xf2b8ea05
+[Licensing::IpcConnector] LicenseClient-jiawei.zhou@whatnot.com-notifications channel disconnected successfully.
+[Licensing::IpcConnector] LicenseClient-jiawei.zhou@whatnot.com channel disconnected successfully.
+Thread 0x16be63000 may have been prematurely finalized
+Thread 0x16beef000 may have been prematurely finalized
+Thread 0x16bf7b000 may have been prematurely finalized
+Thread 0x16c007000 may have been prematurely finalized
+Thread 0x16c093000 may have been prematurely finalized
+Thread 0x16c237000 may have been prematurely finalized
+Thread 0x16c1ab000 may have been prematurely finalized
+Thread 0x16c11f000 may have been prematurely finalized
+AcceleratorClientConnectionCallback - disconnected - :0
+Thread 0x1786ff000 may have been prematurely finalized
+info: Microsoft.Hosting.Lifetime[0]
+      Application is shutting down...
+Cleanup mono
+CodeReloadManager destroyed
+info: Unity.ILPP.Runner.PostProcessingAssemblyLoadContext[0]
+      ALC ILPP context 1 is unloading
+debugger-agent: Unable to listen on 46
+[usbmuxd] Stop listen thread
+[usbmuxd] Error: 
+[usbmuxd] Listen thread exiting
+Exiting batchmode successfully now!
+[Package Manager] Server process was shutdown

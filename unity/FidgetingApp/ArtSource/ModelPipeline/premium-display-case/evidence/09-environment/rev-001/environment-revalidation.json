@@ -1,0 +1,573 @@
+{
+  "schemaVersion": 1,
+  "modelId": "premium-display-case",
+  "gate": "09-environment",
+  "environmentRevision": 1,
+  "status": "pass",
+  "notice": "GATE 09 REV 1 ENVIRONMENT · READY FOR REVIEW · NOT APPROVED",
+  "blender": "5.2.0 LTS",
+  "pipelineRevisionAtBuild": 65,
+  "sourceGate08": {
+    "lightingRevision": 2,
+    "approvalQuote": "灯光方向正确，批准并继续（推荐）",
+    "approvalScope": [
+      "current-gate08-lighting-rev2",
+      "neutral-lighting-direction",
+      "frosted-shell-tube-black-insert-label-zones-readable",
+      "no-green-rarity-halo-bloom-particles-flash-shake-persistent-emission",
+      "placeholder-label-content-excluded",
+      "mesh-clipped-sheen-zero-outside-silhouette",
+      "blender-values-lookdev-candidates-only",
+      "unity-runtime-values-remain-tunable"
+    ],
+    "blendPath": "/Users/jiawei.zhou/Documents/Fidgeting app/unity/FidgetingApp/ArtSource/ModelPipeline/premium-display-case/evidence/08-lighting/rev-002/premium-display-case-lighting-r002.blend",
+    "blendSha256": "612e99ea9e9895a7848dc408728ac89ae1db23a55aad08fb60600e42170e15b6",
+    "geometryDigest": "a3d1e9fe3c6d26c957c7ad1584cc489b9091a1a79e435a660aa89bcf6acc3951",
+    "materialDigest": "8358cfdb12e49f87adbbafd96f33f2beb3415f9b920cb62732c73173c7799210",
+    "reviewedArtifactId": "premium-display-case-lighting-turntable-mp4-r002",
+    "reviewedArtifactSha256": "7b099cc0de6743fff8e98dea3cb14407687c93ebab7d9bcea1587bf7b05cd195"
+  },
+  "neutralEnvironment": {
+    "classification": "approved-gate08-neutral-control",
+    "worldColor": [
+      0.032,
+      0.033,
+      0.035,
+      1.0
+    ],
+    "worldStrength": 0.2800000011920929,
+    "cyclorama": "M07_StudioCyclorama",
+    "frames": {
+      "hero": {
+        "sourcePath": "/Users/jiawei.zhou/Documents/Fidgeting app/unity/FidgetingApp/ArtSource/ModelPipeline/premium-display-case/evidence/08-lighting/rev-002/raw/hero.png",
+        "sourceSha256": "e0fd12e03f90aa437dbb09e927deea185ef4f6c1160b75ffba97881b5752bb98",
+        "path": "/Users/jiawei.zhou/Documents/Fidgeting app/unity/FidgetingApp/ArtSource/ModelPipeline/premium-display-case/evidence/09-environment/rev-001/raw/neutral-hero.png",
+        "sha256": "e0fd12e03f90aa437dbb09e927deea185ef4f6c1160b75ffba97881b5752bb98",
+        "byteExactCopy": true
+      },
+      "left-oblique": {
+        "sourcePath": "/Users/jiawei.zhou/Documents/Fidgeting app/unity/FidgetingApp/ArtSource/ModelPipeline/premium-display-case/evidence/08-lighting/rev-002/raw/left-oblique.png",
+        "sourceSha256": "fee5c78dcad68b5fe0cb957396b7a5045d577379eff2b972e56eadbb6b3f19e9",
+        "path": "/Users/jiawei.zhou/Documents/Fidgeting app/unity/FidgetingApp/ArtSource/ModelPipeline/premium-display-case/evidence/09-environment/rev-001/raw/neutral-left-oblique.png",
+        "sha256": "fee5c78dcad68b5fe0cb957396b7a5045d577379eff2b972e56eadbb6b3f19e9",
+        "byteExactCopy": true
+      },
+      "right-oblique": {
+        "sourcePath": "/Users/jiawei.zhou/Documents/Fidgeting app/unity/FidgetingApp/ArtSource/ModelPipeline/premium-display-case/evidence/08-lighting/rev-002/raw/right-oblique.png",
+        "sourceSha256": "7816c8291a13214fb81e65c7e63440b2e524faa7beb0caa095088ce201865e1a",
+        "path": "/Users/jiawei.zhou/Documents/Fidgeting app/unity/FidgetingApp/ArtSource/ModelPipeline/premium-display-case/evidence/09-environment/rev-001/raw/neutral-right-oblique.png",
+        "sha256": "7816c8291a13214fb81e65c7e63440b2e524faa7beb0caa095088ce201865e1a",
+        "byteExactCopy": true
+      },
+      "low": {
+        "sourcePath": "/Users/jiawei.zhou/Documents/Fidgeting app/unity/FidgetingApp/ArtSource/ModelPipeline/premium-display-case/evidence/08-lighting/rev-002/raw/low.png",
+        "sourceSha256": "168ebbf67a34a5c2c96e1effee8a48e31a0d32cd3a0b96cf63cd3f48395f1553",
+        "path": "/Users/jiawei.zhou/Documents/Fidgeting app/unity/FidgetingApp/ArtSource/ModelPipeline/premium-display-case/evidence/09-environment/rev-001/raw/neutral-low.png",
+        "sha256": "168ebbf67a34a5c2c96e1effee8a48e31a0d32cd3a0b96cf63cd3f48395f1553",
+        "byteExactCopy": true
+      }
+    }
+  },
+  "shippingEnvironment": {
+    "classification": "static-low-saturation-low-detail-physical-friction-cyclorama",
+    "worldColor": [
+      0.0085,
+      0.0095,
+      0.012,
+      1.0
+    ],
+    "worldStrength": 0.12,
+    "cyclorama": "M09_ShippingCyclorama",
+    "material": "MAT_M09_StaticNeutralFriction",
+    "metallic": 0.0,
+    "roughness": 0.86,
+    "ior": 1.46,
+    "grainIntensity": 0.012,
+    "grainCoordinateSpace": "environment-object-generated-static",
+    "emission": 0.0,
+    "frames": {
+      "hero": {
+        "path": "/Users/jiawei.zhou/Documents/Fidgeting app/unity/FidgetingApp/ArtSource/ModelPipeline/premium-display-case/evidence/09-environment/rev-001/raw/shipping-hero.png",
+        "sha256": "4db5ad20ff46705cb718b54dc65c606d64ad7ffca485d6d4b5384d0c2abec320",
+        "resolution": [
+          1400,
+          1600
+        ]
+      },
+      "left-oblique": {
+        "path": "/Users/jiawei.zhou/Documents/Fidgeting app/unity/FidgetingApp/ArtSource/ModelPipeline/premium-display-case/evidence/09-environment/rev-001/raw/shipping-left-oblique.png",
+        "sha256": "d34dbf6699fb3191803334e7b8b97c25d00d88b7cef8213b8527974885b2a6cd",
+        "resolution": [
+          1400,
+          1600
+        ]
+      },
+      "right-oblique": {
+        "path": "/Users/jiawei.zhou/Documents/Fidgeting app/unity/FidgetingApp/ArtSource/ModelPipeline/premium-display-case/evidence/09-environment/rev-001/raw/shipping-right-oblique.png",
+        "sha256": "93e055a7908e71f0737c0aadc4800a593ae8a380828c82821a6b940356929ebb",
+        "resolution": [
+          1400,
+          1600
+        ]
+      },
+      "low": {
+        "path": "/Users/jiawei.zhou/Documents/Fidgeting app/unity/FidgetingApp/ArtSource/ModelPipeline/premium-display-case/evidence/09-environment/rev-001/raw/shipping-low.png",
+        "sha256": "a7459d704786a588552c600f2997740786cd572f5ead349d9fcdeccb4ff399bb",
+        "resolution": [
+          1400,
+          1600
+        ]
+      },
+      "label-closeup": {
+        "path": "/Users/jiawei.zhou/Documents/Fidgeting app/unity/FidgetingApp/ArtSource/ModelPipeline/premium-display-case/evidence/09-environment/rev-001/raw/shipping-label-closeup.png",
+        "sha256": "a5ef85dbf1b98114c7b0474272165b9f252f96edfe55bb61fa44acc65b2fdb0a",
+        "resolution": [
+          1600,
+          1100
+        ]
+      },
+      "black-panel": {
+        "path": "/Users/jiawei.zhou/Documents/Fidgeting app/unity/FidgetingApp/ArtSource/ModelPipeline/premium-display-case/evidence/09-environment/rev-001/raw/shipping-black-panel.png",
+        "sha256": "ea215345746345374ef3912cc536580a4466e575ac915780efe2090e38ee7082",
+        "resolution": [
+          1500,
+          1200
+        ]
+      }
+    },
+    "backgroundFrames": {
+      "a": {
+        "path": "/Users/jiawei.zhou/Documents/Fidgeting app/unity/FidgetingApp/ArtSource/ModelPipeline/premium-display-case/evidence/09-environment/rev-001/raw/shipping-background-hero-a.png",
+        "sha256": "a33fce0b2792c07cb1ee39872feb71015db9b0c7cc3dc307282e58b620fdb0fc"
+      },
+      "b": {
+        "path": "/Users/jiawei.zhou/Documents/Fidgeting app/unity/FidgetingApp/ArtSource/ModelPipeline/premium-display-case/evidence/09-environment/rev-001/raw/shipping-background-hero-b.png",
+        "sha256": "ced9e50f931e0f2d3566dddbd1e9ac504cd015d88eecce489dcf31d91d90de91"
+      }
+    }
+  },
+  "matchedCamera": {
+    "snapshot": {
+      "hero": {
+        "name": "M08_HeroCamera",
+        "matrixWorld": [
+          [
+            0.951057,
+            -0.048341,
+            0.305212,
+            274.691223
+          ],
+          [
+            -0.0,
+            0.987688,
+            0.156434,
+            140.791016
+          ],
+          [
+            -0.309017,
+            -0.148778,
+            0.939347,
+            849.412659
+          ],
+          [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        ],
+        "lensMm": 60.0,
+        "sensorWidthMm": 36.0,
+        "sensorHeightMm": 32.0,
+        "sensorFit": "VERTICAL",
+        "resolution": [
+          1400,
+          1600
+        ],
+        "animationData": false
+      },
+      "left-oblique": {
+        "name": "M08_Left_ObliqueCamera",
+        "matrixWorld": [
+          [
+            0.913545,
+            0.042516,
+            -0.404509,
+            -368.102722
+          ],
+          [
+            0.0,
+            0.994522,
+            0.104528,
+            95.120903
+          ],
+          [
+            0.406737,
+            -0.095492,
+            0.908541,
+            830.772278
+          ],
+          [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        ],
+        "lensMm": 60.0,
+        "sensorWidthMm": 36.0,
+        "sensorHeightMm": 32.0,
+        "sensorFit": "VERTICAL",
+        "resolution": [
+          1400,
+          1600
+        ],
+        "animationData": false
+      },
+      "right-oblique": {
+        "name": "M08_Right_ObliqueCamera",
+        "matrixWorld": [
+          [
+            0.913545,
+            -0.042516,
+            0.404509,
+            368.102722
+          ],
+          [
+            -0.0,
+            0.994522,
+            0.104528,
+            95.120903
+          ],
+          [
+            -0.406737,
+            -0.095492,
+            0.908541,
+            830.772278
+          ],
+          [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        ],
+        "lensMm": 60.0,
+        "sensorWidthMm": 36.0,
+        "sensorHeightMm": 32.0,
+        "sensorFit": "VERTICAL",
+        "resolution": [
+          1400,
+          1600
+        ],
+        "animationData": false
+      },
+      "low": {
+        "name": "M08_LowCamera",
+        "matrixWorld": [
+          [
+            0.939693,
+            0.041682,
+            0.339471,
+            312.31311
+          ],
+          [
+            -0.0,
+            0.992546,
+            -0.121869,
+            -122.119797
+          ],
+          [
+            -0.34202,
+            0.11452,
+            0.932688,
+            860.073242
+          ],
+          [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        ],
+        "lensMm": 60.0,
+        "sensorWidthMm": 36.0,
+        "sensorHeightMm": 32.0,
+        "sensorFit": "VERTICAL",
+        "resolution": [
+          1400,
+          1600
+        ],
+        "animationData": false
+      },
+      "label-closeup": {
+        "name": "M08_Label_CloseupCamera",
+        "matrixWorld": [
+          [
+            1.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            0.999975,
+            0.007042,
+            102.0
+          ],
+          [
+            0.0,
+            -0.007042,
+            0.999975,
+            450.0
+          ],
+          [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        ],
+        "lensMm": 92.0,
+        "sensorWidthMm": 36.0,
+        "sensorHeightMm": 32.0,
+        "sensorFit": "VERTICAL",
+        "resolution": [
+          1600,
+          1100
+        ],
+        "animationData": false
+      },
+      "black-panel": {
+        "name": "M08_Black_PanelCamera",
+        "matrixWorld": [
+          [
+            0.89094,
+            0.013742,
+            0.453912,
+            210.0
+          ],
+          [
+            -0.0,
+            0.999542,
+            -0.030261,
+            -72.0
+          ],
+          [
+            -0.45412,
+            0.026961,
+            0.890532,
+            430.0
+          ],
+          [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        ],
+        "lensMm": 96.0,
+        "sensorWidthMm": 36.0,
+        "sensorHeightMm": 32.0,
+        "sensorFit": "VERTICAL",
+        "resolution": [
+          1500,
+          1200
+        ],
+        "animationData": false
+      }
+    },
+    "digestBefore": "fbe50b0b20b056af5c3c12529af5a59449ee43316d9c4e0a5fc8bde661ac777b",
+    "digestAfter": "fbe50b0b20b056af5c3c12529af5a59449ee43316d9c4e0a5fc8bde661ac777b",
+    "unchanged": true
+  },
+  "approvedLighting": {
+    "snapshot": [
+      {
+        "name": "M08_FillSoftbox_6200K",
+        "matrixWorld": [
+          [
+            -0.247833,
+            0.736876,
+            -0.628962,
+            -430.0
+          ],
+          [
+            -0.968803,
+            -0.188503,
+            0.160897,
+            100.0
+          ],
+          [
+            -0.0,
+            0.649215,
+            0.760605,
+            530.0
+          ],
+          [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        ],
+        "type": "AREA",
+        "energy": 720000.0,
+        "color": [
+          0.955,
+          0.972,
+          1.0
+        ],
+        "shape": "RECTANGLE",
+        "size": 620.0,
+        "sizeY": 460.0,
+        "animationData": false
+      },
+      {
+        "name": "M08_KeyStrip_5000K",
+        "matrixWorld": [
+          [
+            -0.599455,
+            -0.605036,
+            0.524008,
+            470.0
+          ],
+          [
+            0.800408,
+            -0.453134,
+            0.392449,
+            360.0
+          ],
+          [
+            0.0,
+            0.654676,
+            0.75591,
+            690.0
+          ],
+          [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        ],
+        "type": "AREA",
+        "energy": 2400000.0,
+        "color": [
+          1.0,
+          0.975,
+          0.95
+        ],
+        "shape": "RECTANGLE",
+        "size": 560.0,
+        "sizeY": 150.0,
+        "animationData": false
+      },
+      {
+        "name": "M08_RimStrip_5600K",
+        "matrixWorld": [
+          [
+            -0.73994,
+            -0.466896,
+            -0.484249,
+            -300.0
+          ],
+          [
+            -0.672673,
+            0.513585,
+            0.532674,
+            340.0
+          ],
+          [
+            -0.0,
+            0.719888,
+            -0.69409,
+            -430.0
+          ],
+          [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        ],
+        "type": "AREA",
+        "energy": 960000.0,
+        "color": [
+          0.975,
+          0.985,
+          1.0
+        ],
+        "shape": "RECTANGLE",
+        "size": 460.0,
+        "sizeY": 105.0,
+        "animationData": false
+      }
+    ],
+    "digestBefore": "baa21c3cd8ba49c344db28f8c2e00488b57b5b49edd8007b09719f1b001b4395",
+    "digestAfter": "baa21c3cd8ba49c344db28f8c2e00488b57b5b49edd8007b09719f1b001b4395",
+    "unchanged": true
+  },
+  "geometry": {
+    "digestBefore": "a3d1e9fe3c6d26c957c7ad1584cc489b9091a1a79e435a660aa89bcf6acc3951",
+    "digestAfter": "a3d1e9fe3c6d26c957c7ad1584cc489b9091a1a79e435a660aa89bcf6acc3951",
+    "unchanged": true
+  },
+  "materials": {
+    "digestBefore": "8358cfdb12e49f87adbbafd96f33f2beb3415f9b920cb62732c73173c7799210",
+    "digestAfter": "8358cfdb12e49f87adbbafd96f33f2beb3415f9b920cb62732c73173c7799210",
+    "unchanged": true
+  },
+  "policy": {
+    "wholeAssembledCaseOnly": true,
+    "reviewExplodedPartCount": 0,
+    "backgroundStaticThroughoutReveal": true,
+    "cameraMotion": false,
+    "backgroundMotion": false,
+    "toyPrizeOwnership": "caller-owned-static",
+    "labelContentState": "placeholder-not-approved",
+    "meshClippedSheen": "material-runtime-cue-inside-case-only",
+    "environmentReflection": "surface-shaping-only-no-detached-light-effect",
+    "forbiddenEffects": {
+      "fixedGreenCast": false,
+      "rarityColor": false,
+      "externalHalo": false,
+      "fullScreenBloom": false,
+      "particles": false,
+      "streaks": false,
+      "noisePatch": false,
+      "localBrightBlob": false,
+      "persistentEmission": false
+    },
+    "unityTunableUntilParityAndShipping": [
+      "environment",
+      "IBL intensity",
+      "exposure",
+      "camera values"
+    ],
+    "blenderValuesAreUnityRuntimeConstants": false
+  },
+  "checks": {
+    "approvedGate08Rev2": true,
+    "sourceBlendHashMatched": true,
+    "geometryDigestUnchanged": true,
+    "materialDigestUnchanged": true,
+    "approvedLightRigUnchanged": true,
+    "approvedCamerasUnchanged": true,
+    "neutralFramesByteExact": true,
+    "shippingViewsRendered": true,
+    "backgroundStatic": true,
+    "camerasStatic": true,
+    "repeatedBackgroundRendersPresent": true,
+    "onlyApprovedLightsActive": true,
+    "environmentHasNoEmission": true,
+    "presentationRootHasNoBakedAnimation": true,
+    "contentSlotCallerOwnedAndEmpty": true,
+    "wholeCaseOnly": true,
+    "reviewExplodedPartCountZero": true,
+    "shippingUnityUnchanged": true,
+    "buildInstallPhonePushFalse": true
+  },
+  "outputBlendPath": "/Users/jiawei.zhou/Documents/Fidgeting app/unity/FidgetingApp/ArtSource/ModelPipeline/premium-display-case/evidence/09-environment/rev-001/premium-display-case-environment-r001.blend",
+  "outputBlendSha256": "022f306d17c354cbe356df1e8cecd65ad8dbb7855d0b75aca5f79a55d9cc109f"
+}

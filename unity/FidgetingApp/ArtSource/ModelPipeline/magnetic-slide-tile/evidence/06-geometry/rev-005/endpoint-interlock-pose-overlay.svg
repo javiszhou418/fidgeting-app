@@ -1,0 +1,46 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="900" viewBox="0 0 1600 900">
+  <rect width="1600" height="900" fill="#111821"/>
+  <style>
+    .title{font:700 38px -apple-system,sans-serif;fill:#f4f7fa}
+    .sub{font:22px -apple-system,sans-serif;fill:#aebbc8}
+    .card{fill:#1b2733;stroke:#607080;stroke-width:2}
+    .legal{stroke:#65d6ae}.blocked{stroke:#ff6b63}
+    .h{font:700 24px -apple-system,sans-serif;fill:#f4f7fa}
+    .p{font:18px -apple-system,sans-serif;fill:#bdc8d2}
+    .ok{fill:#65d6ae}.no{fill:#ff6b63}
+    .arrow{stroke:#f2b95f;stroke-width:4;fill:none;marker-end:url(#a)}
+  </style>
+  <defs><marker id="a" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto"><path d="M0,0 L0,6 L9,3 z" fill="#f2b95f"/></marker></defs>
+  <text x="70" y="70" class="title">Gate 06 rev 5 - Endpoint rotation interlock poses</text>
+  <text x="70" y="108" class="sub">Contract rev 17 - One fixed axis P=[0,-9,5.875] mm - Geometry digest 2fcf6d2b...1952</text>
+  <g transform="translate(70 180)">
+    <rect width="260" height="250" rx="24" class="card legal"/>
+    <text x="24" y="48" class="h">Closed</text><text x="24" y="85" class="p">s=0, theta=0 deg</text>
+    <text x="24" y="130" class="p ok">Allowed: slide open</text><text x="24" y="170" class="p">Rotation locked</text>
+  </g>
+  <g transform="translate(390 180)">
+    <rect width="260" height="250" rx="24" class="card legal"/>
+    <text x="24" y="48" class="h">Mid-slide aligned</text><text x="24" y="85" class="p">0&lt;s&lt;sMax, theta=0 deg</text>
+    <text x="24" y="130" class="p ok">Allowed: slide</text><text x="24" y="170" class="p no">Blocked: rotate</text>
+  </g>
+  <g transform="translate(710 180)">
+    <rect width="260" height="250" rx="24" class="card legal"/>
+    <text x="24" y="48" class="h">Endpoint aligned</text><text x="24" y="85" class="p">s=sMax, theta=0/360</text>
+    <text x="24" y="130" class="p ok">Rotation unlocked</text><text x="24" y="170" class="p">30 x 12 deg detents</text>
+  </g>
+  <g transform="translate(1030 180)">
+    <rect width="260" height="250" rx="24" class="card legal"/>
+    <text x="24" y="48" class="h">Endpoint rotating</text><text x="24" y="85" class="p">s=sMax, theta != 0</text>
+    <text x="24" y="130" class="p ok">Allowed: rotate 360</text><text x="24" y="170" class="p no">Blocked: slide</text>
+  </g>
+  <path d="M330 305 H382" class="arrow"/><path d="M650 305 H702" class="arrow"/><path d="M970 305 H1022" class="arrow"/>
+  <g transform="translate(390 540)">
+    <rect width="580" height="200" rx="24" class="card blocked"/>
+    <text x="30" y="54" class="h no">PROHIBITED: mid-slide rotation</text>
+    <text x="30" y="98" class="p">Request: s=0.5 x sMax, theta=36 deg</text>
+    <text x="30" y="138" class="p">Resolved: s=0.5 x sMax, theta=0 deg</text>
+    <text x="30" y="174" class="p">No current evidence renders rotation at 50% travel.</text>
+  </g>
+  <path d="M1160 445 C1160 790 920 790 840 745" class="arrow"/>
+  <text x="70" y="838" class="sub">Unchanged: BottomExterior, FixedAxis, MinimumOverlapDisk metadata, top z-order, four finite grooves, hidden product proxies.</text>
+</svg>

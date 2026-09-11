@@ -1,0 +1,286 @@
+{
+  "schemaVersion": 2,
+  "gate": "11-unity-parity",
+  "revision": 10,
+  "status": "blocked-not-ready-for-review",
+  "alignmentPolicy": {
+    "resolution": [
+      1400,
+      1100
+    ],
+    "sameFullFrame": true,
+    "independentCropping": false,
+    "postAlignment": false,
+    "metricSpace": "raw camera output"
+  },
+  "files": {
+    "blender-shipping-closed.png": {
+      "sha256": "b9159f08b334e411e75336a40d499cc324984fa66955f96e1088795d30a33877",
+      "bytes": 1503998
+    },
+    "unity-shipping-closed.png": {
+      "sha256": "e82b668bf1699821f1e6a11edfaf41d57aade08bbf3825eaad4bea80f2dcc209",
+      "bytes": 419735
+    },
+    "blender-clay.png": {
+      "sha256": "0d2c52d552e78585a6916b292f4096c38d3ecedca6163b155824348aac1f381e",
+      "bytes": 1743921
+    },
+    "unity-clay.png": {
+      "sha256": "4474f57337ed2a9e227e1cff58feee06a0c376f38a5b35de3dcd2429c8c4d4d2",
+      "bytes": 423407
+    },
+    "blender-silhouette.png": {
+      "sha256": "5a02671f1a7a30d0b5092e95c93fa7aa0d5325565b896faf8760408c0821f17d",
+      "bytes": 551668
+    },
+    "unity-silhouette.png": {
+      "sha256": "ad3e59c4c37a6ad5e65d91226613e85eca2ea1403206013b0eaae01a6d913a0b",
+      "bytes": 113077
+    },
+    "unity-import-parity-report.json": {
+      "sha256": "b7c1b7d1ab9d0e1440ff5ae168b2ae4aa56f409878498069a2d48f27343f9d8b",
+      "bytes": 2424
+    }
+  },
+  "cameraAndObjectBeforeAlignment": {
+    "unityCamera": {
+      "position": {
+        "x": 0.07400000095367432,
+        "y": 0.07199999690055847,
+        "z": -0.11599999666213989
+      },
+      "rotation": {
+        "x": 0.2176646590232849,
+        "y": -0.276507169008255,
+        "z": 0.06445150077342987,
+        "w": 0.9338158369064331
+      },
+      "focalLengthMm": 76.0,
+      "sensorSizeMm": {
+        "x": 36.0,
+        "y": 28.285715103149414
+      },
+      "viewMatrix": [
+        0.8387795686721802,
+        -1.4901161193847656e-08,
+        0.5444712042808533,
+        0.0010889731347560883,
+        -0.24074333906173706,
+        0.8969361782073975,
+        0.37087482213974,
+        -0.003742920234799385,
+        0.48835593461990356,
+        0.4421600103378296,
+        -0.7523317337036133,
+        -0.15524433553218842,
+        0.0,
+        0.0,
+        0.0,
+        1.0
+      ],
+      "projectionMatrix": [
+        4.03030252456665,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        5.37373685836792,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        -1.0020020008087158,
+        -0.0200200192630291,
+        0.0,
+        0.0,
+        -1.0,
+        0.0
+      ]
+    },
+    "approvedBlenderCamera": {
+      "positionMm": [
+        74.0,
+        -116.0,
+        72.0
+      ],
+      "focalLengthMm": 76.0,
+      "sensorWidthMm": 36.0,
+      "sourceMatrixSha256": "916c5b3bd1e07ac91c7b6725fe79d3b339d7eaa722ae0c617c74c3f59f2f0259"
+    },
+    "objectBoundsMeters": {
+      "center": {
+        "x": 0.0,
+        "y": 0.006000002846121788,
+        "z": 0.0
+      },
+      "size": {
+        "x": 0.03100000135600567,
+        "y": 0.012000005692243576,
+        "z": 0.04999999701976776
+      }
+    },
+    "targetBbox": [
+      292,
+      251,
+      1112,
+      858
+    ],
+    "unityBbox": [
+      292,
+      251,
+      1112,
+      858
+    ],
+    "bboxSizeErrorPixels": [
+      0,
+      0
+    ],
+    "centroidErrorPixels": 0.02453657436799957,
+    "silhouetteIou": 0.9990678426190549,
+    "edgeDistancePixels": {
+      "p95": 0.9550018310546875,
+      "max": 0.9550018310546875
+    }
+  },
+  "fullFrame": {
+    "globalSsim": 0.7087752637429913,
+    "objectSsim": 0.7014069425934877,
+    "perceptualProxy": {
+      "method": "224x176 Lab plus luminance-gradient RMSE; LPIPS unavailable",
+      "colorRmseNormalized": 0.08260692656040192,
+      "gradientRmseNormalized": 0.04778733476996422,
+      "combined": 0.07216104902327061
+    },
+    "meanAbsoluteError": 15.878938674926758,
+    "backgroundMeanAbsoluteError": 11.101669311523438,
+    "heatmapAreaFractionOver24": 0.16097727272727272,
+    "regionalDeltaE76": {
+      "fullFrame": {
+        "pixelCount": 1540000,
+        "median": 7.071067810058594,
+        "mean": 16.94230842590332,
+        "p95": 60.01666259765625
+      },
+      "object": {
+        "pixelCount": 390128,
+        "median": 1.0,
+        "mean": 31.31297492980957,
+        "p95": 186.00445556640625
+      },
+      "background": {
+        "pixelCount": 1149508,
+        "median": 7.280109882354736,
+        "mean": 12.063523292541504,
+        "p95": 48.05205535888672
+      },
+      "bloodRed": {
+        "pixelCount": 113328,
+        "median": 26.324893951416016,
+        "mean": 69.55354309082031,
+        "p95": 236.0084686279297
+      },
+      "black": {
+        "pixelCount": 240536,
+        "median": 0.0,
+        "mean": 4.471297740936279,
+        "p95": 11.575837135314941
+      }
+    }
+  },
+  "hotspot": {
+    "blender": {
+      "threshold": "mean RGB > 180 inside raw silhouette",
+      "pixels": 70033,
+      "centroid": [
+        547.8811274684791,
+        457.5867234018248
+      ],
+      "bbox": [
+        392,
+        290,
+        691,
+        750
+      ],
+      "bboxAspect": 0.65,
+      "compactness": 2.814615601054602
+    },
+    "unity": {
+      "threshold": "mean RGB > 180 inside raw silhouette",
+      "pixels": 63120,
+      "centroid": [
+        596.087896070976,
+        457.5368979721166
+      ],
+      "bbox": [
+        327,
+        345,
+        877,
+        714
+      ],
+      "bboxAspect": 1.4905149051490514,
+      "compactness": 8.599343062946684
+    },
+    "relativeAreaError": 0.09871060785629632,
+    "centroidErrorPixels": 48.20679435171062,
+    "aspectRelativeError": 1.2930998540754637,
+    "compactnessRelativeError": 2.055246002233703
+  },
+  "clay": {
+    "blenderGradient": {
+      "mean": 115.76973454866095,
+      "std": 68.24035943918346,
+      "gradientX": -191.4786587818979,
+      "gradientY": -415.84091889686044,
+      "gradientMagnitude": 457.80754318588913
+    },
+    "unityGradient": {
+      "mean": 94.76321104868146,
+      "std": 49.10183513106573,
+      "gradientX": -31.065596017897597,
+      "gradientY": -276.741734420882,
+      "gradientMagnitude": 278.4799074012795
+    },
+    "gradientDirectionCosine": 0.9493195059515558,
+    "gradientMagnitudeRelativeError": 0.39170965715563816,
+    "blenderContactShadow": {
+      "nearObjectMean": 89.31020733652312,
+      "farGroundMean": 85.18641700261688,
+      "contrast": -4.123790333906243
+    },
+    "unityContactShadow": {
+      "nearObjectMean": 18.11070289359763,
+      "farGroundMean": 18.161238418558597,
+      "contrast": 0.05053552496096714
+    },
+    "contactShadowRelativeError": 1.0122546300536812
+  },
+  "tolerances": {
+    "silhouetteIouMin": 0.995,
+    "bboxCentroidErrorMaxPx": 2.0,
+    "fullFrameSsimMin": 0.78,
+    "perceptualProxyMax": 0.065,
+    "backgroundMaeMax": 12.0,
+    "heatmapAreaOver24Max": 0.12,
+    "hotspotAreaRelativeErrorMax": 0.08,
+    "hotspotCentroidErrorMaxPx": 12.0,
+    "hotspotAspectRelativeErrorMax": 0.15,
+    "clayGradientDirectionCosineMin": 0.8,
+    "clayGradientMagnitudeRelativeErrorMax": 0.3,
+    "contactShadowRelativeErrorMax": 0.35
+  },
+  "checks": {
+    "sameFullFrame": true,
+    "cameraAndBbox": true,
+    "fullFrameSsim": false,
+    "perceptual": false,
+    "background": true,
+    "heatmapArea": false,
+    "hotspot": false,
+    "clayGradient": false,
+    "contactShadow": false,
+    "zeroEmission": true,
+    "shippingUntouched": true
+  },
+  "pass": false
+}

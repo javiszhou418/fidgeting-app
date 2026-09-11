@@ -1,0 +1,37 @@
+{
+  "schema": "premium-display-case-gate04-r014-isolated-self-rejection.v1",
+  "isolatedUnityCandidate": true,
+  "shippingIntegration": false,
+  "shippingReady": false,
+  "deviceInstalled": false,
+  "outcome": "self-rejected",
+  "reviewedAt": "2026-08-31T03:02:41.379Z",
+  "visualBlocker": "All 1206×2622 captured Unity frames are black, so the foil tear, pouch cavity, and contained live case are not visually inspectable.",
+  "correctionPassesUsed": 1,
+  "correction": "Replaced unsupported Camera.Render capture with URP StandardRequest capture; output remained black because the isolated URP asset has no default renderer.",
+  "nonPromotedCapture": {
+    "width": 1206,
+    "height": 2622,
+    "frameRate": 60,
+    "durationSeconds": 1.6,
+    "representativeFrameSha256": "c6830d8e1990e24f9fd94b66481d9066108804f378e6e2999fb0a8bef136bd9e",
+    "sourceImportManifestSha256": "c8ac6a89f3d68257e829fca9f7c6c29b072160b92b2047be049e47ca338b6559",
+    "retention": "not promoted as a primary or approval artifact"
+  },
+  "sourceMapping": {
+    "direct": [
+      "R014 Pack-only Blender FBX",
+      "384×512 standard Pack artwork",
+      "Gate 11 assembled Premium Display Case FBX/prefab with empty caller-owned ContentSlot",
+      "Make It Shine CC0 curves and masks"
+    ],
+    "adapted": [
+      "R014 sequence capture code adapted into the isolated URP project"
+    ],
+    "rejected": [
+      "Make It Shine sample VFX, particles, sample Booster/Card models, and branded artwork"
+    ]
+  },
+  "approvalRequestAllowed": false,
+  "statusText": "视觉批准待确认，未推送手机"
+}

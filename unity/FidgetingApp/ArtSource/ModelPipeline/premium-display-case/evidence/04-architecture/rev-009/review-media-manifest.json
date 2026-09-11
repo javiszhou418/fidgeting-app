@@ -1,0 +1,129 @@
+{
+  "schema": "premium-display-case-gate04-r009-review-media.v1",
+  "source": "actual Unity PlayMode Camera frames",
+  "entries": [
+    {
+      "id": "normal-speed-full-signature",
+      "path": "unity/FidgetingApp/ArtSource/ModelPipeline/premium-display-case/evidence/04-architecture/rev-009/gate04-r009-full-signature-60fps.mp4",
+      "sha256": "7cf217aed6fd09add14cf6608e0911fe3d2d1e9f503c338fb4a70b86ff503394",
+      "codec": "h264",
+      "width": 804,
+      "height": 1748,
+      "fps": "60/1",
+      "frames": 186,
+      "durationSeconds": 3.1,
+      "sourceFrames": "frames/frame-0000.png through frame-0185.png",
+      "producer": "Unity PlayMode capture + ffmpeg H.264 encode"
+    },
+    {
+      "id": "quarter-speed-tear-closeup",
+      "path": "unity/FidgetingApp/ArtSource/ModelPipeline/premium-display-case/evidence/04-architecture/rev-009/gate04-r009-tear-closeup-quarter-speed.mp4",
+      "sha256": "29b3712d1420dcd8105700518f560e8bd73ab062c96b16eec25fed1ffaa58484",
+      "codec": "h264",
+      "width": 804,
+      "height": 1748,
+      "fps": "15/1",
+      "frames": 67,
+      "durationSeconds": 4.466667,
+      "sourceFrames": "tear-closeup-frames/frame-0039.png through frame-0105.png",
+      "producer": "Unity PlayMode capture + ffmpeg H.264 encode"
+    },
+    {
+      "id": "quarter-speed-impact-1700-1950ms",
+      "path": "unity/FidgetingApp/ArtSource/ModelPipeline/premium-display-case/evidence/04-architecture/rev-009/gate04-r009-impact-1700-1950ms-quarter-speed.mp4",
+      "sha256": "4ad560ac72d90b484b73fd5cd2fa8afa5b86051b08b43e93efc8f1670b1743f8",
+      "codec": "h264",
+      "width": 804,
+      "height": 1748,
+      "fps": "15/1",
+      "frames": 16,
+      "durationSeconds": 1.066667,
+      "sourceFrames": "impact-closeup-frames/frame-0102.png through frame-0117.png",
+      "producer": "Unity PlayMode capture + ffmpeg H.264 encode"
+    },
+    {
+      "id": "tear-silhouette-contact-sheet",
+      "path": "unity/FidgetingApp/ArtSource/ModelPipeline/premium-display-case/evidence/04-architecture/rev-009/tear-silhouette-contact-sheet.png",
+      "sha256": "17217d6a9801706052479d2ded460213b279288933e3cacfcdca8e94e0d459a3",
+      "unityFrames": [
+        {
+          "frame": 39,
+          "timeMilliseconds": 650
+        },
+        {
+          "frame": 54,
+          "timeMilliseconds": 900
+        },
+        {
+          "frame": 57,
+          "timeMilliseconds": 950
+        },
+        {
+          "frame": 58,
+          "timeMilliseconds": 967
+        },
+        {
+          "frame": 60,
+          "timeMilliseconds": 1000
+        },
+        {
+          "frame": 75,
+          "timeMilliseconds": 1250
+        },
+        {
+          "frame": 90,
+          "timeMilliseconds": 1500
+        },
+        {
+          "frame": 104,
+          "timeMilliseconds": 1733
+        }
+      ],
+      "producer": "Unity runtime contact-sheet compositor"
+    },
+    {
+      "id": "impact-continuity-contact-sheet",
+      "path": "unity/FidgetingApp/ArtSource/ModelPipeline/premium-display-case/evidence/04-architecture/rev-009/impact-continuity-contact-sheet.png",
+      "sha256": "f59025abf020213946172395f94a2c1d633092c2fbce8dba51fe69841b2be62a",
+      "unityFrames": [
+        {
+          "frame": 102,
+          "timeMilliseconds": 1700
+        },
+        {
+          "frame": 104,
+          "timeMilliseconds": 1733
+        },
+        {
+          "frame": 105,
+          "timeMilliseconds": 1750
+        },
+        {
+          "frame": 106,
+          "timeMilliseconds": 1767
+        },
+        {
+          "frame": 108,
+          "timeMilliseconds": 1800
+        },
+        {
+          "frame": 111,
+          "timeMilliseconds": 1850
+        },
+        {
+          "frame": 114,
+          "timeMilliseconds": 1900
+        },
+        {
+          "frame": 117,
+          "timeMilliseconds": 1950
+        }
+      ],
+      "producer": "Unity runtime contact-sheet compositor"
+    }
+  ],
+  "labels": "Every contact-sheet tile is stamped by Unity with F### and the captured timeline T####MS.",
+  "ffmpegRole": "H.264 encoding and stream measurement only",
+  "shippingReady": false,
+  "physicalPhoneInstalled": false
+}

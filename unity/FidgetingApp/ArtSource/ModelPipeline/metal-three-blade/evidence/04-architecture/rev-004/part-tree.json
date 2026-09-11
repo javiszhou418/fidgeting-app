@@ -1,0 +1,44 @@
+{
+  "modelId": "metal-three-blade",
+  "stageId": "04-architecture",
+  "revision": 4,
+  "recordedAt": "2026-09-05T14:19:14.147971+00:00",
+  "root": "UnifiedTriSpinner_Root",
+  "tree": {
+    "Rotor_Root (rotates)": {
+      "RotorBody_OnePiece": [
+        "Blade_01/02/03 petals (convex hull: 2 roof planes + end plane + vertical walls, 0.5 mm bevel, counterbored)",
+        "HubCore ring Ø35.8 x 4.4 (hidden; bore Ø12.7)"
+      ]
+    },
+    "Fixed_Root (static)": {
+      "TopCap_Root": [
+        "FingerCap_Top (flat table / 48-triangle cone crown / dark skirt)",
+        "CapStem_Top"
+      ],
+      "BottomCap_Root": [
+        "FingerCap_Bottom",
+        "CapStem_Bottom"
+      ]
+    },
+    "BearingAssembly_Root (hidden)": [
+      "BearingOuterRace",
+      "BearingInnerRace",
+      "BearingBall_01..08"
+    ],
+    "Collision_Root (export only)": [
+      "COL_Blade_01..03",
+      "COL_Hub"
+    ]
+  },
+  "removedSinceRev3": [
+    "HubCollar (visible body cylinder outside the seam)"
+  ],
+  "explodedOrder": [
+    "TopCap_Root +30 mm",
+    "BearingAssembly_Root +12 mm",
+    "RotorBody 0",
+    "BottomCap_Root -28 mm"
+  ],
+  "materialZones": 7
+}

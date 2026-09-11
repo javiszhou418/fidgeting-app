@@ -1,0 +1,360 @@
+{
+  "schemaVersion": 1,
+  "modelId": "premium-display-case",
+  "gate": "07-material",
+  "materialRevision": 1,
+  "status": "pass",
+  "rawMetrics": {
+    "hero": {
+      "width": 1400,
+      "height": 1120,
+      "meanLuma": 36.372219,
+      "p01Luma": 11.7874,
+      "p99Luma": 168.136398,
+      "lowClipFraction": 0.0,
+      "highClipFraction": 0.0,
+      "meanChannelChroma": 0.00845253
+    },
+    "left-oblique": {
+      "width": 1280,
+      "height": 1080,
+      "meanLuma": 35.81633,
+      "p01Luma": 6.0722,
+      "p99Luma": 167.208603,
+      "lowClipFraction": 0.0,
+      "highClipFraction": 0.0,
+      "meanChannelChroma": 0.00781899
+    },
+    "right-oblique": {
+      "width": 1280,
+      "height": 1080,
+      "meanLuma": 37.098919,
+      "p01Luma": 11.8596,
+      "p99Luma": 168.208588,
+      "lowClipFraction": 0.0,
+      "highClipFraction": 0.0,
+      "meanChannelChroma": 0.00846973
+    },
+    "side": {
+      "width": 1100,
+      "height": 1320,
+      "meanLuma": 21.567425,
+      "p01Luma": 3.0722,
+      "p99Luma": 49.931801,
+      "lowClipFraction": 0.00366598,
+      "highClipFraction": 0.0,
+      "meanChannelChroma": 0.00361743
+    },
+    "back": {
+      "width": 1280,
+      "height": 1080,
+      "meanLuma": 11.335481,
+      "p01Luma": 0.0,
+      "p99Luma": 110.855591,
+      "lowClipFraction": 0.15228443,
+      "highClipFraction": 0.0,
+      "meanChannelChroma": 0.00471298
+    },
+    "tube-corner": {
+      "width": 1400,
+      "height": 1060,
+      "meanLuma": 61.039719,
+      "p01Luma": 25.072199,
+      "p99Luma": 169.208603,
+      "lowClipFraction": 0.0,
+      "highClipFraction": 0.0,
+      "meanChannelChroma": 0.01029133
+    },
+    "label-closeup": {
+      "width": 1500,
+      "height": 980,
+      "meanLuma": 103.532387,
+      "p01Luma": 12.647,
+      "p99Luma": 169.996002,
+      "lowClipFraction": 0.0,
+      "highClipFraction": 0.0,
+      "meanChannelChroma": 0.01653139
+    },
+    "tactile-closeup": {
+      "width": 1400,
+      "height": 1040,
+      "meanLuma": 52.098801,
+      "p01Luma": 26.931799,
+      "p99Luma": 127.0,
+      "lowClipFraction": 0.0,
+      "highClipFraction": 0.0,
+      "meanChannelChroma": 0.01635824
+    },
+    "clay-hero-same-camera": {
+      "width": 1400,
+      "height": 1120,
+      "meanLuma": 71.329819,
+      "p01Luma": 6.0,
+      "p99Luma": 161.859604,
+      "lowClipFraction": 0.00097959,
+      "highClipFraction": 0.0,
+      "meanChannelChroma": 0.01115125
+    },
+    "rotation-000": {
+      "width": 900,
+      "height": 980,
+      "meanLuma": 36.100494,
+      "p01Luma": 6.0722,
+      "p99Luma": 167.208603,
+      "lowClipFraction": 0.0,
+      "highClipFraction": 0.0,
+      "meanChannelChroma": 0.00836878
+    },
+    "rotation-090": {
+      "width": 900,
+      "height": 980,
+      "meanLuma": 28.555208,
+      "p01Luma": 9.8596,
+      "p99Luma": 67.931801,
+      "lowClipFraction": 1.247e-05,
+      "highClipFraction": 0.0,
+      "meanChannelChroma": 0.00572693
+    },
+    "rotation-180": {
+      "width": 900,
+      "height": 980,
+      "meanLuma": 32.974087,
+      "p01Luma": 6.0722,
+      "p99Luma": 152.923798,
+      "lowClipFraction": 0.0,
+      "highClipFraction": 0.0,
+      "meanChannelChroma": 0.00753229
+    },
+    "rotation-270": {
+      "width": 900,
+      "height": 980,
+      "meanLuma": 28.411331,
+      "p01Luma": 9.647,
+      "p99Luma": 67.7192,
+      "lowClipFraction": 3.4e-06,
+      "highClipFraction": 0.0,
+      "meanChannelChroma": 0.00575753
+    },
+    "rotation-360": {
+      "width": 900,
+      "height": 980,
+      "meanLuma": 36.100513,
+      "p01Luma": 6.0722,
+      "p99Luma": 167.208603,
+      "lowClipFraction": 0.0,
+      "highClipFraction": 0.0,
+      "meanChannelChroma": 0.00836915
+    }
+  },
+  "backgroundMetrics": {
+    "patchMeanLuma": {
+      "topLeft": 28.071743,
+      "topRight": 31.352211,
+      "midLeft": 26.371262,
+      "midRight": 25.283234
+    },
+    "patchMeanLumaRange": 6.068977,
+    "patchMeanChannelChroma": {
+      "topLeft": 0.00718741,
+      "topRight": 0.00440512,
+      "midLeft": 0.00763102,
+      "midRight": 0.00280269
+    },
+    "maximumPatchMeanChannelChroma": 0.00763102,
+    "fineResidualOutlierFractions": {
+      "topLeft": 0.0,
+      "topRight": 0.0,
+      "midLeft": 0.0,
+      "midRight": 0.0
+    },
+    "maximumFineResidualOutlierFraction": 0.0
+  },
+  "labelMetrics": {
+    "crop": [
+      60,
+      147,
+      1440,
+      803
+    ],
+    "p10Luma": 40.859604,
+    "p90Luma": 168.136398,
+    "p10P90Contrast": 127.276794,
+    "blackoutFraction": 0.0,
+    "yellowReferenceFraction": 0.0
+  },
+  "tactileGrainMetrics": {
+    "crop": [
+      168,
+      124,
+      1092,
+      915
+    ],
+    "residualRms": 0.65054232,
+    "residualP95Absolute": 1.0,
+    "meanLuma": 45.318882
+  },
+  "tubeHighlightContinuity": {
+    "roi": [
+      0,
+      127,
+      868,
+      1038
+    ],
+    "thresholdLuma": 45.0,
+    "topHorizontalBrightFraction": 0.24888839,
+    "largestBrightComponent": {
+      "pixelCount": 4562,
+      "touchesTopHorizontal": false,
+      "touchesCorner": true,
+      "touchesRightVertical": true
+    },
+    "pass": true
+  },
+  "grainRotationImageMatch": {
+    "meanAbsoluteChannelDelta": 0.0012736206,
+    "maximumChannelDelta": 2,
+    "differentPixelFraction": 0.0035793651
+  },
+  "artifacts": {
+    "material-board": {
+      "path": "unity/FidgetingApp/ArtSource/ModelPipeline/premium-display-case/evidence/07-material/rev-001/material-board.png",
+      "sha256": "c8a2af12f660179edad73144b24b2eb1b1ca94745ed4ab7afeb5d55e32d5899b",
+      "sizeBytes": 6378719,
+      "dimensions": [
+        4800,
+        4020
+      ]
+    },
+    "material-closeup": {
+      "path": "unity/FidgetingApp/ArtSource/ModelPipeline/premium-display-case/evidence/07-material/rev-001/material-closeup.png",
+      "sha256": "f4d1a00b5fe44615b3afebfa1abacb8336edcdc00c93943ec873046d6c1c7ff2",
+      "sizeBytes": 2807535,
+      "dimensions": [
+        4380,
+        2900
+      ]
+    },
+    "hero": {
+      "path": "unity/FidgetingApp/ArtSource/ModelPipeline/premium-display-case/evidence/07-material/rev-001/hero-review.png",
+      "sha256": "84402af38bbe55ea240977d9d8051aee0eef48278b9ed0294376a01caabc5f20",
+      "sizeBytes": 960908,
+      "dimensions": [
+        1400,
+        1382
+      ]
+    },
+    "left-oblique": {
+      "path": "unity/FidgetingApp/ArtSource/ModelPipeline/premium-display-case/evidence/07-material/rev-001/left-oblique-review.png",
+      "sha256": "fe96b51bc3d3437bb5f5a13b0f10ffa23f9b0ec250f8224fe3118d91fb51f3f5",
+      "sizeBytes": 846419,
+      "dimensions": [
+        1280,
+        1342
+      ]
+    },
+    "right-oblique": {
+      "path": "unity/FidgetingApp/ArtSource/ModelPipeline/premium-display-case/evidence/07-material/rev-001/right-oblique-review.png",
+      "sha256": "c0b722fb1887d106b7b3b1f558458a681d81433b9e57c68b18265629f2bb592c",
+      "sizeBytes": 848179,
+      "dimensions": [
+        1280,
+        1342
+      ]
+    },
+    "side-back": {
+      "path": "unity/FidgetingApp/ArtSource/ModelPipeline/premium-display-case/evidence/07-material/rev-001/side-back-review.png",
+      "sha256": "be04e54bcce3aec4e382584f876dc29d2c4a64281511d2ad6e711fd30d30f4eb",
+      "sizeBytes": 1565813,
+      "dimensions": [
+        3000,
+        1700
+      ]
+    },
+    "tube-corner-highlight": {
+      "path": "unity/FidgetingApp/ArtSource/ModelPipeline/premium-display-case/evidence/07-material/rev-001/tube-corner-continuous-highlight.png",
+      "sha256": "fd94c9b9f4a13b11cbddcc6993e0d2b642675e08ce9738497bb43159ffbad8f4",
+      "sizeBytes": 951142,
+      "dimensions": [
+        1400,
+        1322
+      ]
+    },
+    "label-closeup": {
+      "path": "unity/FidgetingApp/ArtSource/ModelPipeline/premium-display-case/evidence/07-material/rev-001/label-closeup-review.png",
+      "sha256": "1aaf4ade3a88eb220d22718fd699af6bbe3646ad1076c66ffedab08a2ac71309",
+      "sizeBytes": 879680,
+      "dimensions": [
+        1500,
+        1242
+      ]
+    },
+    "tactile-grain-closeup": {
+      "path": "unity/FidgetingApp/ArtSource/ModelPipeline/premium-display-case/evidence/07-material/rev-001/tactile-grain-closeup-review.png",
+      "sha256": "278b2d353c1a9d3972aa32a9a7840f0ca17a1ed5e782bca02cd41f80084e648e",
+      "sizeBytes": 923430,
+      "dimensions": [
+        1400,
+        1302
+      ]
+    },
+    "clay-vs-pbr": {
+      "path": "unity/FidgetingApp/ArtSource/ModelPipeline/premium-display-case/evidence/07-material/rev-001/clay-vs-pbr-same-camera.png",
+      "sha256": "29f4d666c1e31703ba0e2c71051ce8cb36fd4cd0ac25d08266eb2b8ac21297e0",
+      "sizeBytes": 2056696,
+      "dimensions": [
+        3100,
+        1550
+      ]
+    },
+    "grain-stability": {
+      "path": "unity/FidgetingApp/ArtSource/ModelPipeline/premium-display-case/evidence/07-material/rev-001/grain-stability-rotation.png",
+      "sha256": "32d9903b015c0a0c17a665f59909d892c766f921aafd842d4f3d44c1903fcbfe",
+      "sizeBytes": 1718163,
+      "dimensions": [
+        4200,
+        1220
+      ]
+    },
+    "parameter-board": {
+      "path": "unity/FidgetingApp/ArtSource/ModelPipeline/premium-display-case/evidence/07-material/rev-001/material-parameters-board.png",
+      "sha256": "e48fabe729cd8483ecc1eff30000163fe73aed9f86a20867c5bfacc696334201",
+      "sizeBytes": 283733,
+      "dimensions": [
+        3800,
+        2780
+      ]
+    }
+  },
+  "checks": {
+    "buildReportPassed": true,
+    "blenderAuditPassed": true,
+    "surfaceCoveragePassed": true,
+    "assetOptimizationPassed": true,
+    "qaReadyForMaterialReview": true,
+    "allRawViewsPresent": true,
+    "allReviewArtifactsPresent": true,
+    "requiredMaterialBoardPresent": true,
+    "requiredMaterialCloseupPresent": true,
+    "noSevereChannelClipping": true,
+    "backgroundLowSaturation": true,
+    "backgroundContinuous": true,
+    "backgroundNoLocalizedNoiseSpots": true,
+    "labelContrastVisible": true,
+    "labelNotBlackedOutByCover": true,
+    "noYellowReferenceField": true,
+    "tactileGrainVisible": true,
+    "tubeHighlightContinuous": true,
+    "grainLocalCoordinateAudit": true,
+    "grainStableAtFiveAngles": true,
+    "zeroAnd360PixelMatch": true,
+    "transparentOrderingPreflight": true,
+    "pbrChannelsAndColorSpace": true,
+    "geometryPreserved": true,
+    "wholeCaseOnlyNoExplode": true,
+    "gate07NotApproved": true,
+    "gate08NotEntered": true,
+    "finalLightingNotApproved": true,
+    "shippingUnityUnchanged": true,
+    "noBuildInstallPhonePush": true
+  }
+}

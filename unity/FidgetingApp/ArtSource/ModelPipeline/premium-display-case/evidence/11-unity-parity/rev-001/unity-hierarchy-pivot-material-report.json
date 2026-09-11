@@ -1,0 +1,131 @@
+{
+    "schemaVersion": 1,
+    "modelId": "premium-display-case",
+    "gate": "11-unity-parity",
+    "parityRevision": 1,
+    "status": "pass",
+    "candidatePrefabPath": "Assets/_DisplayCase/Candidates/PremiumDisplayCaseGate11R001/Prefabs/PresentationRoot.prefab",
+    "candidateScenePath": "Assets/_DisplayCase/Candidates/PremiumDisplayCaseGate11R001/Scenes/PremiumDisplayCaseGate11Parity.unity",
+    "root": "PresentationRoot",
+    "parents": [
+        {
+            "name": "AchievementZone",
+            "parent": "PhysicalLabel"
+        },
+        {
+            "name": "CaseAssembly",
+            "parent": "PresentationRoot"
+        },
+        {
+            "name": "ContentSlot",
+            "parent": "RearPolycarbonateShell"
+        },
+        {
+            "name": "ContinuousTubePerimeter",
+            "parent": "FrontPolycarbonateShell"
+        },
+        {
+            "name": "FrontPolycarbonateShell",
+            "parent": "CaseAssembly"
+        },
+        {
+            "name": "LogoZone",
+            "parent": "PhysicalLabel"
+        },
+        {
+            "name": "NarrowFoil",
+            "parent": "PhysicalLabel"
+        },
+        {
+            "name": "PhysicalLabel",
+            "parent": "FrontPolycarbonateShell"
+        },
+        {
+            "name": "PresentationRoot",
+            "parent": ""
+        },
+        {
+            "name": "RearPolycarbonateShell",
+            "parent": "CaseAssembly"
+        },
+        {
+            "name": "TactileBackgroundInsert",
+            "parent": "RearPolycarbonateShell"
+        },
+        {
+            "name": "TransparentCover",
+            "parent": "FrontPolycarbonateShell"
+        }
+    ],
+    "materials": [
+        {
+            "objectName": "ContinuousTubePerimeter",
+            "materialName": "Gate11ConnectedTube",
+            "materialPath": "Assets/_DisplayCase/Candidates/PremiumDisplayCaseGate11R001/Materials/Gate11ConnectedTube.mat",
+            "shaderName": "FidgetingApp/Gate11MeshClippedFrosted",
+            "renderQueue": 3030,
+            "sortingOrder": 30
+        },
+        {
+            "objectName": "FrontPolycarbonateShell",
+            "materialName": "Gate11FrontFrosted",
+            "materialPath": "Assets/_DisplayCase/Candidates/PremiumDisplayCaseGate11R001/Materials/Gate11FrontFrosted.mat",
+            "shaderName": "FidgetingApp/Gate11MeshClippedFrosted",
+            "renderQueue": 3020,
+            "sortingOrder": 20
+        },
+        {
+            "objectName": "PhysicalLabel",
+            "materialName": "Gate11RuntimeLabel",
+            "materialPath": "Assets/_DisplayCase/Candidates/PremiumDisplayCaseGate11R001/Materials/Gate11RuntimeLabel.mat",
+            "shaderName": "Universal Render Pipeline/Unlit",
+            "renderQueue": 2000,
+            "sortingOrder": 10
+        },
+        {
+            "objectName": "RearPolycarbonateShell",
+            "materialName": "Gate11RearFrosted",
+            "materialPath": "Assets/_DisplayCase/Candidates/PremiumDisplayCaseGate11R001/Materials/Gate11RearFrosted.mat",
+            "shaderName": "FidgetingApp/Gate11MeshClippedFrosted",
+            "renderQueue": 3000,
+            "sortingOrder": -20
+        },
+        {
+            "objectName": "TactileBackgroundInsert",
+            "materialName": "Gate11BlackFlocking",
+            "materialPath": "Assets/_DisplayCase/Candidates/PremiumDisplayCaseGate11R001/Materials/Gate11BlackFlocking.mat",
+            "shaderName": "Universal Render Pipeline/Lit",
+            "renderQueue": 2000,
+            "sortingOrder": 0
+        }
+    ],
+    "objectCount": 12,
+    "meshCount": 5,
+    "contentSlotChildCount": 0,
+    "pointLightCount": 0,
+    "externalHaloCount": 0,
+    "textComponentCount": 0,
+    "animationComponentCount": 0,
+    "candidateFbxSha256": "21c9db68723f0006d7c6bfec5280cafe55c16cf5392ff97c365c966e91f847ae",
+    "shippingPrefabSha256": "88cf4f4a369cae1f370e5c47cebf6d1119d2698fcd0f4de70095314c5993a811",
+    "shippingSceneSha256": "f83df832a7f1f7b057b59abfdba2528c0bee617b56422887291ac21db6fd8bbb",
+    "shippingModelSha256": "41c71ffce320acdaa65ea5931b791361695afef88cd091fa9796514ec5c5c819",
+    "checks": {
+        "objectCountExact": true,
+        "meshCountExact": true,
+        "hierarchyExact": true,
+        "presentationRootAtOrigin": true,
+        "presentationRootUnitScale": true,
+        "contentSlotEmpty": true,
+        "noToyPrizeProxyExplode": true,
+        "noTextComponents": true,
+        "noAnimation": true,
+        "materialAssignmentsExact": true,
+        "transparentSortingPass": true,
+        "pointLightCountZero": true,
+        "externalHaloCountZero": true,
+        "shippingPrefabUnchanged": true,
+        "shippingSceneUnchanged": true,
+        "shippingModelUnchanged": true
+    }
+}

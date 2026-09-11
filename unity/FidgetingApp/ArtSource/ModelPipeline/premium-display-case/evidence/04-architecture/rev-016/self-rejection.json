@@ -1,0 +1,64 @@
+{
+  "schema": "premium-display-case-gate04-r016-pre-capture-static-self-rejection.v1",
+  "outcome": "self-rejected",
+  "reviewedAt": "2026-08-31T06:52:54.982Z",
+  "exactUserMotionChoice": "卡包的容纳／抽出因果＋箔层双层剥离",
+  "failure": {
+    "test": "front-foil-baked-delta-at-070-at-least-0045m",
+    "requiredMeters": 0.045,
+    "actualMeters": 0.04488760232925415,
+    "shortfallMeters": 0.00011239767074584794,
+    "evidence": "unity/FidgetingApp/ArtSource/ModelPipeline/premium-display-case/evidence/04-architecture/rev-016/r016-pre-capture-static-results.xml"
+  },
+  "passedStaticChecks": [
+    {
+      "id": "upright-art-fidget-archive-above-standard",
+      "evidence": "archiveY=0.093312, standardY=-0.075625"
+    },
+    {
+      "id": "pack-root-retains-identity-rotation",
+      "evidence": "(0.00, 0.00, 0.00)"
+    },
+    {
+      "id": "live-case-id-readable-behind-physical-mouth-at-090",
+      "evidence": "case=46604, lip=1762, behindLip=27278, pack=True, dissolve=0.000000"
+    },
+    {
+      "id": "actual-unity-frame-advanced-before-static-renders",
+      "evidence": "captures=3, advanced=3"
+    }
+  ],
+  "actualFrameEvidence": {
+    "basis": "unity/FidgetingApp/ArtSource/ModelPipeline/premium-display-case/evidence/04-architecture/rev-016/preflight/basis-frame.png",
+    "formedMouth": "unity/FidgetingApp/ArtSource/ModelPipeline/premium-display-case/evidence/04-architecture/rev-016/preflight/formed-mouth-frame.png",
+    "liveCaseIdAt090": "unity/FidgetingApp/ArtSource/ModelPipeline/premium-display-case/evidence/04-architecture/rev-016/preflight/live-case-mouth-id-090.png",
+    "frameBarrier": {
+      "basis": [
+        2,
+        3
+      ],
+      "formedMouth": [
+        3,
+        4
+      ],
+      "liveCaseId": [
+        4,
+        6
+      ]
+    }
+  },
+  "visualVerdict": "No visual candidate verdict. Gate A failed its required imported-mesh threshold before the 0.5-second scrub. Gate B and the full proof were not run.",
+  "prohibitedFollowUpsNotRun": [
+    "curve tuning",
+    "material tuning",
+    "effect tuning",
+    "geometry redesign",
+    "additional visual iteration",
+    "device installation"
+  ],
+  "r015RejectedEvidencePreserved": true,
+  "approvalRequestAllowed": false,
+  "shippingReady": false,
+  "physicalPhoneInstalled": false,
+  "statusText": "视觉批准待确认，未推送手机"
+}

@@ -1,0 +1,39 @@
+{
+  "info" : {
+    "arguments" : [
+      "devicectl",
+      "device",
+      "install",
+      "app",
+      "--device",
+      "00008130-001A00361EE0001C",
+      "/Users/jiawei.zhou/Documents/Fidgeting app/unity/FidgetingApp/Builds/iOS/DeviceJobs/geeone-tri-spinner-build47-20260908T103620Z-snapshot/DerivedData/Build/Products/Release-iphoneos/FidgetSpinner.app",
+      "--timeout",
+      "120",
+      "--json-output",
+      "/Users/jiawei.zhou/Documents/Fidgeting app/unity/FidgetingApp/ArtSource/ModelPipeline/metal-three-blade/evidence/12-shipping/rev-007/device-delivery/geeone-tri-spinner-build47-20260908T103620Z-snapshot/install.json"
+    ],
+    "commandType" : "devicectl.device.install.app",
+    "environment" : {
+      "TERM" : "dumb"
+    },
+    "jsonVersion" : 3,
+    "outcome" : "success",
+    "version" : "518.27"
+  },
+  "result" : {
+    "deviceIdentifier" : "556E86BF-7295-5622-AA58-02DF84A8E93F",
+    "installedApplications" : [
+      {
+        "bundleID" : "com.jiaweizhou.fidgetspinner.codex",
+        "databaseSequenceNumber" : 4224,
+        "databaseUUID" : "AC5A34AB-5B26-4F3D-9314-A489E7F12A68",
+        "installationURL" : "file:///private/var/containers/Bundle/Application/FB6F9BA0-22D9-4045-BE79-2C8DB2AB3AB2/FidgetSpinner.app/",
+        "launchServicesIdentifier" : "unknown",
+        "options" : {
+
+        }
+      }
+    ]
+  }
+}

@@ -1,0 +1,64 @@
+{
+  "schemaVersion": 1,
+  "modelId": "magnetic-slide-tile",
+  "gate": "04-architecture",
+  "revision": 14,
+  "title": "最大端点旋转解锁架构",
+  "exactUserWording": "上片只有在推到顶部的时候，才可以进行360度旋转",
+  "contractAssetId": "slider-analysis-mechanism-evidence-contract-r017",
+  "contractSha256": "9cd7a08f34d7d8dfc3c6f89f6c80a5c5c2dcae48bc0d5c54ebf455a0727ea571",
+  "geometryChanged": false,
+  "stateMachine": [
+    {
+      "id": "closed-aligned",
+      "predicate": "s=0 and theta=0",
+      "allows": [
+        "slide-open"
+      ]
+    },
+    {
+      "id": "sliding-aligned",
+      "predicate": "0<s<sMax and theta=0",
+      "allows": [
+        "slide-open",
+        "slide-close"
+      ],
+      "blocks": [
+        "rotate"
+      ]
+    },
+    {
+      "id": "endpoint-aligned",
+      "predicate": "s=sMax and theta=0/360",
+      "allows": [
+        "rotate",
+        "slide-close"
+      ]
+    },
+    {
+      "id": "endpoint-rotating",
+      "predicate": "s=sMax and theta mod 360!=0",
+      "allows": [
+        "rotate"
+      ],
+      "blocks": [
+        "slide"
+      ]
+    }
+  ],
+  "transforms": {
+    "fixed": [
+      "BottomExterior",
+      "FixedAxis",
+      "MinimumOverlapDisk"
+    ],
+    "slidingAligned": "TopPlate=T_local(s), RotatingCarrier=identity, theta=0",
+    "endpointRotating": "TopPlate=R_fixedAxis(theta)*T_local(sMax), RotatingCarrier=R_fixedAxis(theta)"
+  },
+  "annotations": {
+    "endpointUnlock": "s=sMax 时旋转已解锁",
+    "grooveAlignment": "theta=0/360 时四轨重新对齐，可回推",
+    "hiddenLatchGeometry": "unknown-not-modeled"
+  },
+  "supersedesAssetId": "magnetic-slide-tile-approved-four-track-architecture-r013"
+}

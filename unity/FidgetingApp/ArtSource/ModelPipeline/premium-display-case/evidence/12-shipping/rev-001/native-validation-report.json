@@ -1,0 +1,33 @@
+{
+  "status": "pass",
+  "swiftGateHarness": {
+    "command": "xcrun swiftc FidgetGachaPackPresentation.swift FidgetGachaRiveGateRules.swift GachaGate12RulesHarness.swift && GachaGate12RulesHarness",
+    "passed": 23,
+    "failed": 0
+  },
+  "swiftWarningsAsErrors": {
+    "target": "arm64-apple-ios15.0-simulator",
+    "sources": [
+      "FidgetProductUIComponents.swift",
+      "FidgetComboHalo.swift",
+      "FidgetStoreKit.swift",
+      "FidgetGachaPackPresentation.swift",
+      "FidgetGachaRiveGateRules.swift",
+      "FidgetGachaRivePresentation.swift",
+      "FidgetGachaStore.swift",
+      "FidgetGachaStorefront.swift",
+      "FidgetGachaShippingStorefront.swift",
+      "CodexSwiftUIOverlay.swift"
+    ],
+    "result": "pass"
+  },
+  "xcode": {
+    "configuration": "Release",
+    "sdk": "iphonesimulator",
+    "result": "BUILD SUCCEEDED",
+    "touchedGachaSwiftWarnings": 0
+  },
+  "packToCaseHandoffSeconds": 0.28,
+  "physicalPhoneInstalled": false,
+  "deviceAccepted": false
+}

@@ -1,0 +1,364 @@
+{
+  "schemaVersion": 1,
+  "modelId": "premium-display-case",
+  "contractRevision": 1,
+  "createdAt": "2026-08-24T13:24:27Z",
+  "stageStatus": "ready_for_review",
+  "approvalEffect": "none-until-explicit-gate-03-user-approval",
+  "scope": "Premium Display Case portrait envelope, connected tube geometry, physical label, background, material zones, reveal motion, camera, lighting, accessibility, and mobile performance",
+  "sourceClaimIds": [
+    "display-case-analysis-closed-loop-r002",
+    "display-case-analysis-manifold-r002",
+    "display-case-analysis-background-r002",
+    "display-case-analysis-label-r002",
+    "display-case-analysis-portrait-r002",
+    "display-case-analysis-flow-r002",
+    "display-case-analysis-environment-r002"
+  ],
+  "sourceAssetIds": [
+    "display-case-analysis-discovery-r001",
+    "display-case-analysis-correction-r002",
+    "display-case-motion-recipe-r002",
+    "display-case-motion-preview-r002",
+    "display-case-motion-contact-sheet-r002",
+    "display-case-motion-validation-r002",
+    "display-case-analysis-board-r002"
+  ],
+  "decisionLegend": {
+    "locked": "Already approved upstream or locked by an existing product requirement.",
+    "proposed_pending_user_approval": "A Gate 03 candidate. It is not approved until the user approves this revision.",
+    "deferred_validation": "The contract fixes the test, while the measured result remains for the named downstream gate."
+  },
+  "units": {
+    "geometry": "millimeters",
+    "angles": "degrees",
+    "time": "seconds",
+    "screenTypography": "points"
+  },
+  "coordinateSystem": {
+    "decisionState": "locked",
+    "handedness": "Unity-compatible right-handed authoring contract",
+    "x": "case width, positive right",
+    "y": "case height and showcase rotation axis, positive up",
+    "z": "case depth, positive toward the viewer in the authored front view",
+    "origin": "center of the assembled outer envelope",
+    "showcasePivot": "case root at the outer-envelope center; the prize keeps zero independent angular velocity"
+  },
+  "portraitEnvelope": {
+    "approvedUpstream": {
+      "decisionState": "locked",
+      "orientation": "portrait",
+      "targetAspectDescription": "approximately 3:4 width-to-height",
+      "invalid": [
+        "landscape envelope",
+        "non-uniform scale",
+        "presentation-only stretch"
+      ]
+    },
+    "historicalShippingReference": {
+      "decisionState": "reference_only_not_current_approval",
+      "widthMm": 216,
+      "heightMm": 304,
+      "overallWorldDepthMm": 59,
+      "authoredBodySpanDepthMm": 50,
+      "widthHeightRatio": 0.7105,
+      "sourcePaths": [
+        "unity/FidgetingApp/Docs/DisplayCase/PremiumDisplayCaseSpecification.md",
+        "unity/FidgetingApp/ArtSource/DisplayCase/premium_display_case_manifest.json"
+      ],
+      "note": "The 50 mm authored body span and 59 mm world envelope describe different extents; Gate 03 must not merge them silently."
+    },
+    "candidate": {
+      "decisionState": "proposed_pending_user_approval",
+      "widthMm": 228,
+      "heightMm": 304,
+      "overallDepthMm": 59,
+      "widthHeightRatio": 0.75,
+      "basis": "Retain the shipping height and world depth while making the approved analysis proportion exactly 3:4.",
+      "buildUse": "Only after explicit Gate 03 approval."
+    }
+  },
+  "closedTubeFrame": {
+    "topology": {
+      "decisionState": "locked",
+      "path": "one cyclic perimeter through four tangent-continuous 90-degree bends",
+      "profile": "one closed rounded-rectangle profile swept around the cyclic path",
+      "connectivity": "one connected manifold",
+      "openBoundaryEdges": 0,
+      "channelTest": "a flood-fill from any passage sample must visit all four sides and all four bends",
+      "invalid": [
+        "four joined bars",
+        "hidden butt joints",
+        "overlapping shells",
+        "disconnected corner caps"
+      ]
+    },
+    "candidateSection": {
+      "decisionState": "proposed_pending_user_approval",
+      "outerWidthMm": 10,
+      "outerDepthMm": 9,
+      "wallThicknessMm": 2,
+      "passageWidthMm": 6,
+      "passageDepthMm": 5,
+      "profileCornerRadiusMm": 3
+    },
+    "candidateCorners": {
+      "decisionState": "proposed_pending_user_approval",
+      "outerRadiusMm": 20,
+      "centerlineRadiusMm": 15,
+      "innerRadiusMm": 10,
+      "continuity": "G1 tangent continuity at every straight-to-bend transition"
+    }
+  },
+  "physicalLabel": {
+    "contentHierarchy": {
+      "decisionState": "locked",
+      "order": [
+        "canonical product name",
+        "edition or finish",
+        "authoritative acquired date and level",
+        "authoritative collectible ID when present",
+        "existing official logo and snowflake-like achievement artwork"
+      ],
+      "invalid": [
+        "floating screen-space identity overlay",
+        "invented logo",
+        "invented date or collectible number"
+      ]
+    },
+    "candidateGeometry": {
+      "decisionState": "proposed_pending_user_approval",
+      "widthMm": 184,
+      "heightMm": 58,
+      "safeInsetMm": 8,
+      "basis": "Retain the current physical label size inside the proposed 228 mm case width."
+    },
+    "phoneProjection": {
+      "decisionState": "proposed_pending_user_approval",
+      "productNameMinimumPt": 17,
+      "metadataMinimumPt": 11,
+      "logoAndAchievementMinimumProjectedBoxPt": 20,
+      "test": "Measure the real shipping phone hero at 100% scale; no conceptual board can pass this test."
+    }
+  },
+  "backgroundPbr": {
+    "approvedUpstream": {
+      "decisionState": "locked",
+      "appearance": "continuous low-saturation fine matte friction grain",
+      "invalid": [
+        "flat burgundy",
+        "local noise patch",
+        "radial halo",
+        "emission",
+        "copied external generated texture"
+      ]
+    },
+    "candidate": {
+      "decisionState": "proposed_pending_user_approval",
+      "metallic": 0,
+      "roughnessRange": [
+        0.78,
+        0.88
+      ],
+      "linearLuminanceRange": [
+        0.035,
+        0.08
+      ],
+      "maximumSaturation": 0.12,
+      "grainFeatureSizeMm": [
+        0.35,
+        0.8
+      ],
+      "normalPeakToPeakMmMax": 0.12,
+      "tilingRule": "No visible seams or local texture islands in the phone hero."
+    }
+  },
+  "materialZones": {
+    "zoneTopology": {
+      "decisionState": "locked",
+      "zones": [
+        "closed frosted-polycarbonate tube and shell",
+        "clearer polycarbonate edge response",
+        "black flocked chamber",
+        "warm neutral physical label stock",
+        "dark physical print",
+        "one narrow non-emissive rarity foil",
+        "unchanged canonical prize materials"
+      ],
+      "invalid": [
+        "fixed green base material",
+        "broad cyan rarity wash",
+        "extra decorative glow zone",
+        "material-driven prize geometry change"
+      ]
+    },
+    "numericPbrTuning": {
+      "decisionState": "deferred_validation",
+      "gate": "07-material",
+      "rule": "Gate 07 may tune channel values inside these zones, but may not add or merge zones without invalidating Gate 03."
+    }
+  },
+  "revealMotion": {
+    "sequence": {
+      "decisionState": "locked",
+      "events": [
+        "assembled real case appears from behind the ready Pack",
+        "case root completes one unwrapped 0-to-360-degree turn around Y",
+        "case settles at zero angular velocity",
+        "one highlight plays",
+        "case root enters low-frequency hover until explicit acceptance"
+      ],
+      "prizeAngularVelocity": 0,
+      "invalid": [
+        "Euler shortest-path reversal",
+        "idle prize spin",
+        "looping highlight",
+        "explosion or reassembly",
+        "automatic acceptance"
+      ]
+    },
+    "turnCandidate": {
+      "decisionState": "proposed_pending_user_approval",
+      "durationSeconds": 1.8,
+      "easing": "sine-in-out over an unwrapped scalar angle",
+      "sampleAngles": [
+        0,
+        90,
+        180,
+        270,
+        360
+      ],
+      "completionAngularVelocityDegreesPerSecond": 0
+    },
+    "highlightCandidate": {
+      "decisionState": "proposed_pending_user_approval",
+      "durationSeconds": 0.55,
+      "count": 1,
+      "bandWidthFractionOfFace": 0.1,
+      "peakLightMultiplierMax": 1.15,
+      "startsAfterTurnCompletion": true
+    },
+    "hoverCandidate": {
+      "decisionState": "proposed_pending_user_approval",
+      "axis": "world Y only",
+      "amplitudeMm": 2,
+      "periodSeconds": 3.2,
+      "wave": "sine",
+      "rotationalHoverDegrees": 0,
+      "owner": "case root, never prize mechanism state"
+    }
+  },
+  "camera": {
+    "compositionRules": {
+      "decisionState": "locked",
+      "initialView": "strict front",
+      "turnPivotProjection": "stable at screen center",
+      "label": "fully inside the safe frame through the complete turn",
+      "invalid": [
+        "dramatic wide-angle distortion",
+        "crop during edge-on frames",
+        "framing that hides the label"
+      ]
+    },
+    "candidateRange": {
+      "decisionState": "proposed_pending_user_approval",
+      "referenceAspect": 0.75,
+      "verticalFieldOfViewDegrees": [
+        27,
+        31
+      ],
+      "preferredVerticalFieldOfViewDegrees": 29,
+      "caseHeightFractionOfViewport": [
+        0.78,
+        0.84
+      ],
+      "screenCenterToleranceFraction": 0.01,
+      "depthOfField": "off"
+    }
+  },
+  "lighting": {
+    "environmentRules": {
+      "decisionState": "locked",
+      "subjectIsolation": "attenuate broad source-scene light and IBL contamination while retaining environment identity",
+      "cyberCue": "restrained low-saturation blue reflection only",
+      "restoreRule": "restore every modified RenderSettings and light property on close or cancellation"
+    },
+    "candidateRange": {
+      "decisionState": "proposed_pending_user_approval",
+      "keyColorTemperatureKelvin": [
+        4300,
+        5200
+      ],
+      "fillColorTemperatureKelvin": [
+        5600,
+        6800
+      ],
+      "keyToFillRatio": [
+        2,
+        3
+      ],
+      "rimToKeyMaximum": 0.35,
+      "additionalRealtimeLightsMax": 3,
+      "exposure": "fixed through appear, turn, highlight, and hover"
+    }
+  },
+  "reduceMotion": {
+    "invariants": {
+      "decisionState": "locked",
+      "causalOrder": "receipt ready -> real case ready -> Pack handoff -> presentation complete -> explicit acceptance",
+      "noPrizeMotion": true,
+      "noAutomaticAcceptance": true
+    },
+    "candidate": {
+      "decisionState": "proposed_pending_user_approval",
+      "turnReplacement": "0.20-second static front-view hold with no case rotation",
+      "highlightReplacement": "0.25-second non-spatial luminance pulse, once",
+      "hoverReplacement": "static settled pose",
+      "parallax": "disabled"
+    }
+  },
+  "performanceBudget": {
+    "lockedProductTargets": {
+      "decisionState": "locked",
+      "targetFramesPerSecond": 60,
+      "msaa": "2x",
+      "renderScale": 0.9,
+      "perFrameManagedAllocationsBytes": 0,
+      "offscreenUpdates": 0
+    },
+    "candidateGateBudget": {
+      "decisionState": "proposed_pending_user_approval",
+      "caseTrianglesMax": 120000,
+      "caseMaterialSlotsMax": 8,
+      "additionalRealtimeLightsMax": 3,
+      "presentationCpuMillisecondsMax": 0.2,
+      "incrementalGpuMillisecondsMax": 1.5,
+      "measurement": "Target iPhone Release build; Simulator and static screenshots cannot pass."
+    }
+  },
+  "route": {
+    "decisionState": "locked",
+    "primary": "deterministic bpy through Blender CLI",
+    "rodinPolicy": "concept-only; prohibited from promotion to Unity",
+    "shippingAssetPolicy": "current shipping asset remains unchanged until downstream gates pass",
+    "nextGatePolicy": "Do not enter Gate 04 before explicit Gate 03 approval."
+  },
+  "claimDisposition": {
+    "display-case-analysis-closed-loop-r002": "lock cyclic closed-profile tube topology; proposed section and radii await Gate 03 approval",
+    "display-case-analysis-manifold-r002": "lock one connected manifold, zero boundary edges, and full passage flood-fill",
+    "display-case-analysis-background-r002": "lock matte low-saturation background language; proposed PBR ranges await Gate 03 approval",
+    "display-case-analysis-label-r002": "lock label hierarchy and phone readability; proposed physical and projected sizes await Gate 03 approval",
+    "display-case-analysis-portrait-r002": "lock portrait and reject landscape; proposed 228 x 304 x 59 mm envelope awaits Gate 03 approval",
+    "display-case-analysis-flow-r002": "lock assembled appear-turn-highlight-hover order; proposed timing and amplitudes await Gate 03 approval",
+    "display-case-analysis-environment-r002": "lock environment isolation and no broad color wash; proposed camera and light ranges await Gate 03 approval"
+  },
+  "validationPlan": [
+    "The modeling-contract asset and review board both declare all seven active Gate 02 sourceClaimIds.",
+    "Gate 05 may not start until every proposed_pending_user_approval item is approved or replaced by a new Gate 03 revision.",
+    "Gate 06 must prove one connected manifold, zero open boundary edges, full passage flood-fill, envelope dimensions, radii, wall thickness, and centered Y pivot.",
+    "Gate 07 must validate PBR values without changing the locked zone topology.",
+    "Gate 08 must sample 0, 90, 180, 270, and 360 degrees and prove one highlight plus zero final angular velocity.",
+    "Gate 12 must prove label projection, Reduce Motion, framing, and performance in the real shipping implementation before any phone installation."
+  ],
+  "approvalQuestion": "是否批准 Gate 03 Rev 1 的整套候选值：228 x 304 x 59 mm 外包络；10 x 9 mm、2 mm 壁厚的单一闭环管；20 mm 外角半径；184 x 58 mm 实体标签；1.8 s Y 轴 360 度；0.55 s 单次高光；正负 2 mm / 3.2 s 悬浮，以及图中 PBR、相机、灯光、Reduce Motion 与性能范围？未明确批准前，这些数值都只是候选。"
+}

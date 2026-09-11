@@ -1,0 +1,140 @@
+{
+  "schemaVersion": 1,
+  "gate": "11-unity-parity",
+  "revision": 9,
+  "files": {
+    "blender-shipping-closed.png": {
+      "sha256": "b9159f08b334e411e75336a40d499cc324984fa66955f96e1088795d30a33877",
+      "bytes": 1503998
+    },
+    "unity-shipping-closed.png": {
+      "sha256": "19a74b5a4351aa9c63e0ed47ef8ae0e971e0651c4539076950a93fa8b24249fa",
+      "bytes": 370132
+    },
+    "blender-clay.png": {
+      "sha256": "0d2c52d552e78585a6916b292f4096c38d3ecedca6163b155824348aac1f381e",
+      "bytes": 1743921
+    },
+    "unity-clay.png": {
+      "sha256": "b53617bad971f92599709d42801945ca0f81c8ff0819e0a1989b0be753b4ff59",
+      "bytes": 237024
+    },
+    "blender-silhouette.png": {
+      "sha256": "5a02671f1a7a30d0b5092e95c93fa7aa0d5325565b896faf8760408c0821f17d",
+      "bytes": 551668
+    },
+    "unity-silhouette.png": {
+      "sha256": "f6b736df64eea425e2a0cbf424d89b69b1d5ba8dd31b71a3971db5e8446957c7",
+      "bytes": 108993
+    }
+  },
+  "visual": {
+    "targetBoundingBox": [
+      292,
+      251,
+      1112,
+      858
+    ],
+    "unityBoundingBox": [
+      292,
+      251,
+      1112,
+      858
+    ],
+    "silhouetteIoU": 0.9989171754406174,
+    "edgeDistancePixels": {
+      "p95": 0.9550018310546875,
+      "max": 0.9550018310546875
+    },
+    "silhouetteSsim": 0.9992758374027652,
+    "objectSsim": 0.615034158643437
+  },
+  "material": {
+    "deltaE76": {
+      "median": 10.72380542755127,
+      "p95": 203.0615692138672
+    },
+    "bloodRed": {
+      "pixelCount": 13084,
+      "blenderMedianRgb": [
+        43,
+        0,
+        0
+      ],
+      "unityMedianRgb": [
+        49,
+        4,
+        4
+      ],
+      "deltaE2000": 1.9580703030758657
+    },
+    "brightReflection": {
+      "pixelCount": 70033,
+      "blenderMedianRgb": [
+        236,
+        232,
+        229
+      ],
+      "unityMedianRgb": [
+        231,
+        224,
+        229
+      ],
+      "deltaE2000": 4.848598610576322
+    },
+    "black": {
+      "pixelCount": 240590,
+      "blenderMedianRgb": [
+        0,
+        0,
+        0
+      ],
+      "unityMedianRgb": [
+        0,
+        0,
+        0
+      ],
+      "deltaE2000": 0.0
+    },
+    "highlightCoverage": {
+      "blenderPixels": 70033,
+      "unityPixels": 71716,
+      "relativeError": 0.02403152799394571,
+      "blenderCentroid": [
+        547.8811274684791,
+        457.5867234018248
+      ],
+      "unityCentroid": [
+        546.6715098443862,
+        456.6445144737576
+      ],
+      "centroidMaxAxisErrorPixels": 1.2096176240929708,
+      "centroidEuclideanErrorPixels": 1.5332750766401542
+    },
+    "clippedUnityPixelFraction": 0.0,
+    "zeroEmission": true
+  },
+  "tolerances": {
+    "silhouetteIouMin": 0.995,
+    "edgeMaxPixels": 1.0,
+    "silhouetteSsimMin": 0.995,
+    "bloodRedDeltaE2000Max": 4.0,
+    "brightReflectionDeltaE2000Max": 6.0,
+    "blackDeltaE2000Max": 2.5,
+    "highlightCoverageRelativeErrorMax": 0.05,
+    "highlightCentroidMaxAxisErrorPixels": 2.0,
+    "clippedPixelFractionMax": 0.001
+  },
+  "checks": {
+    "silhouette": true,
+    "edge": true,
+    "silhouetteSsim": true,
+    "bloodRed": true,
+    "brightReflection": true,
+    "black": true,
+    "highlightCoverage": true,
+    "highlightCentroid": true,
+    "clipping": true
+  },
+  "pass": true
+}

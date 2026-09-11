@@ -1,0 +1,71 @@
+{
+  "contract_sha256": "916e863c0e8559189898f8c4597603756f646f56822ab6e57d1a9138779fe39b",
+  "assertions": [
+    {
+      "id": "coverage-plus-protrusion-equals-one",
+      "status": "pass",
+      "detail": "0.58 + 0.42 = 1.0000"
+    },
+    {
+      "id": "frame-height-plus-protrusion-equals-thickness",
+      "status": "pass",
+      "detail": "8.41 + 6.09 vs 14.5"
+    },
+    {
+      "id": "protrusion-ratio-in-range",
+      "status": "pass",
+      "detail": "protrusion_ratio 0.42"
+    },
+    {
+      "id": "no-old-contract-dimensions",
+      "status": "pass",
+      "detail": "W 74.23 H 125.9 D 17.05 vs 228x304x59"
+    },
+    {
+      "id": "spinner-pocket-fits-inside-field",
+      "status": "pass",
+      "detail": "field half-width 31.43 mm, pocket half-span 30.41 mm, margin 0.66 mm each side"
+    },
+    {
+      "id": "spinner-pocket-fits-vertically",
+      "status": "pass",
+      "detail": "field height 73.74 mm, pocket height 53.75 mm, spinner centre -28.0 mm (0.7224H; image read 0.6369H)"
+    },
+    {
+      "id": "unknowns-preserved",
+      "status": "pass",
+      "detail": "retention and manufacturing fields stay null"
+    },
+    {
+      "id": "no-provisional-promoted-to-measured",
+      "status": "pass",
+      "detail": "every measured input cites src.spinner_mesh"
+    }
+  ],
+  "resolved_key_values_mm": {
+    "case.width_mm": 74.23,
+    "case.height_mm": 125.9,
+    "header.height_mm": 39.65,
+    "header.rail_band_mm": 3.46,
+    "case.frame_band_mm": 3.86,
+    "case.outer_corner_radius_mm": 2.97,
+    "case.inner_corner_radius_mm": 2.08,
+    "main.perimeter_shelf_width_mm": 3.34,
+    "spinner.center_x_mm": 0.0,
+    "spinner.center_y_mm": -28.0,
+    "case.frame_front_height_from_spinner_back_mm": 8.41,
+    "spinner.protrusion_mm": 6.09,
+    "case.z_frame_front_mm": 10.96,
+    "case.z_shelf_top_mm": 7.96,
+    "case.z_spinner_front_mm": 17.05,
+    "assembled.envelope_depth_mm": 17.05,
+    "case.root_recentering_z_mm": -8.525,
+    "main.pocket_lobe_center_radius_mm": 30.5,
+    "main.field_top_y_mm": 16.5,
+    "main.field_bottom_y_mm": -57.24,
+    "main.pocket_height_mm": 53.75,
+    "visual.spinner_center_from_top": 0.7224
+  },
+  "all_pass": true,
+  "warnings": []
+}

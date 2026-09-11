@@ -1,0 +1,146 @@
+{
+  "schema": "premium-display-case-gate04-r025-isolated-source.v1",
+  "isolatedUnityCandidate": true,
+  "canonicalIntegration": false,
+  "sourceProject": "/tmp/FidgetingApp-PackOpening-R024-LocalSegmentAnchors-20260901-r01",
+  "isolatedProject": "/tmp/FidgetingApp-PackOpening-R025-PortraitProjection-20260901-r04",
+  "r024Rig": {
+    "source": "unity/FidgetingApp/ArtSource/ModelPipeline/premium-display-case/evidence/04-architecture/rev-024/source/PackOpeningGate04R024PackOnlyRig.fbx",
+    "destination": "Assets/Source/R024/PackOpeningGate04R024PackOnlyRig.fbx",
+    "sha256": "a7a8c6ae76a89355cb2f74978f896bdcedba062b8fa02624ffae07803f4f8810",
+    "expectedSha256": "a7a8c6ae76a89355cb2f74978f896bdcedba062b8fa02624ffae07803f4f8810"
+  },
+  "sourceFiles": [
+    {
+      "path": "Assets/IsolatedProofR025/Editor/IsolatedR025ProofBuilder.cs",
+      "sha256": "b361793a09fb73631173d241490bb88041b203e7de701476e4d154c2613ad18b"
+    },
+    {
+      "path": "Assets/IsolatedProofR025/Editor/IsolatedR025ProofRunner.cs",
+      "sha256": "a0eb4029aa6288e21587fd0486d96d01e2ae40ff1ebb516d4ae60f3fef3bf432"
+    },
+    {
+      "path": "Assets/IsolatedProofR025/Runtime/IsolatedR025OrientationCalibration.cs",
+      "sha256": "b359506eeccb31950b5f258b8e59de29db47377dedee35f01b7895cf51761493"
+    },
+    {
+      "path": "Assets/IsolatedProofR025/Runtime/IsolatedR025PortraitRenderSession.cs",
+      "sha256": "affdcfa8cb32d0fd6f352559262bbb8e8a277a2fddc1caf574c38bd7030834fc"
+    },
+    {
+      "path": "Assets/IsolatedProofR025/Runtime/IsolatedR025Preflight.cs",
+      "sha256": "be42a43db9d4ca620659bedcb1670497f595cabeb5de37c378f216f5e34e9643"
+    },
+    {
+      "path": "Assets/IsolatedProofR025/Runtime/IsolatedR025Profile.cs",
+      "sha256": "d771430fe06170f6016c29b6b3a720bc86add6ed6160728fdd9e822f631a47f0"
+    },
+    {
+      "path": "Assets/IsolatedProofR025/Runtime/IsolatedR025ProofCapture.cs",
+      "sha256": "d7c82f1a470b91dbc9ec023f46c43c9f2df86171e6236c9f676b215af268a316"
+    },
+    {
+      "path": "Assets/IsolatedProofR025/Runtime/IsolatedR025ProofRuntimeDriver.cs",
+      "sha256": "8180c5afda60cc6534805b120a855dd6340476b0ccce54dd56a1f16d9acf38ac"
+    },
+    {
+      "path": "Assets/IsolatedProofR025/Runtime/IsolatedR025ProofSequence.cs",
+      "sha256": "79199a8eca143d6db3210af66d2908ee780c885cda67832e3b1c8b7ee06bd778"
+    },
+    {
+      "path": "Assets/IsolatedProofR025/Runtime/IsolatedR025SegmentDiagnostics.cs",
+      "sha256": "fdc43c8e20f75abbab57ee8c80d6953b17f20bd217dcdc994a1d67c933183f37"
+    },
+    {
+      "path": "Assets/IsolatedProofR025/Shaders/MakeItShineCc0ContourSweepR025.shader",
+      "sha256": "060829b4c8ded1cf916862594843d28ed7536944ef71a81dfd89ab2eeef1de1f"
+    },
+    {
+      "path": "Assets/IsolatedProofR025/Shaders/MakeItShineCc0PackR025.shader",
+      "sha256": "2a3dec9520c9247053f5dae9ccb3bb943e7730080574ec4b0e4cbd4805d2a0a1"
+    },
+    {
+      "path": "Assets/IsolatedProofR025/Shaders/OrientationCalibrationUnlitR025.shader",
+      "sha256": "716ebc45db73e464812d41bab07c8f4cff0927f99e1405fb9c5c98c9874a59f3"
+    },
+    {
+      "path": "Assets/IsolatedProofR025/Shaders/RenderedBandMaskUnlitR025.shader",
+      "sha256": "08db534fd4a5dc01e704bd2cf4a11593fbc8440740708061281aa775cb2d8d57"
+    },
+    {
+      "path": "Assets/IsolatedProofR025/Tests/Editor/IsolatedR025ProofTests.cs",
+      "sha256": "47971ed7fa030c3a82fae8d9894cbd1828f9e5ace91ecf19a101f1029b6cd670"
+    }
+  ],
+  "sourceBoundary": {
+    "casePrefabChanged": false,
+    "contentSlotChanged": false,
+    "canonicalScenesChanged": false,
+    "shippingAssetsChanged": false,
+    "sourceCc0EffectsChanged": false,
+    "packGeometryChanged": false,
+    "packUvChanged": false,
+    "segmentTopologyChanged": false,
+    "cameraPoseChanged": false,
+    "cameraProjectionGuardAdded": true,
+    "blenderRigChanged": false,
+    "timingChanged": false,
+    "visualEffectsIntensityDuringValidation": 0,
+    "fanCardChanged": false,
+    "packagesChanged": false,
+    "userAssetsChanged": false
+  },
+  "diagnosticChange": {
+    "targetAspect": [
+      1206,
+      2622
+    ],
+    "bakedBoundsToExactIdTolerance": 0.0015,
+    "segmentProjectionAllowance": 0.0015,
+    "caseContrastThreshold": 0.04,
+    "oldFourByThreeCarryForward": false
+  },
+  "shippingReady": false,
+  "physicalDeviceInstalled": false,
+  "testOnlySourceSyncs": [
+    {
+      "at": "2026-09-01T03:46:14.555Z",
+      "files": [
+        "Editor/IsolatedR025ProofRunner.cs",
+        "Tests/Editor/IsolatedR025ProofTests.cs"
+      ],
+      "reason": "Tighten the forbidden UV-property scan without changing runtime projection, geometry, or captures.",
+      "staticCaptureUnchanged": true
+    },
+    {
+      "at": "2026-09-01T03:48:17.949Z",
+      "files": [
+        "Editor/IsolatedR025ProofRunner.cs",
+        "Tests/Editor/IsolatedR025ProofTests.cs",
+        "Runtime/IsolatedR025PortraitRenderSession.cs"
+      ],
+      "reason": "Tighten the forbidden UV-property scan and use edit-mode-safe object disposal; PlayMode projection and captures stay unchanged.",
+      "staticCaptureUnchanged": true
+    },
+    {
+      "at": "2026-09-01T03:48:59.211Z",
+      "files": [
+        "Editor/IsolatedR025ProofRunner.cs",
+        "Tests/Editor/IsolatedR025ProofTests.cs",
+        "Runtime/IsolatedR025PortraitRenderSession.cs"
+      ],
+      "reason": "Tighten the forbidden UV-property scan and use edit-mode-safe object disposal; PlayMode projection and captures stay unchanged.",
+      "staticCaptureUnchanged": true
+    }
+  ],
+  "postStaticSourceSyncs": [
+    {
+      "at": "2026-09-01T03:49:52.944Z",
+      "files": [
+        "Runtime/IsolatedR025ProofCapture.cs"
+      ],
+      "reason": "Add scrub-only identity, duplicate, crossfade, pop, and blank-frame assertions; static capture code stays unchanged.",
+      "staticCaptureUnchanged": true
+    }
+  ]
+}

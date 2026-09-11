@@ -1,0 +1,49 @@
+{
+ "source": {
+  "blockout": "05-blockout/rev-007/geeone-blockout-r007.blend",
+  "contract": "geeone-gate02-geometry-contract.json"
+ },
+ "rotor_after_booleans": {
+  "verts": 2125,
+  "faces": 2012,
+  "non_manifold_edges": 0,
+  "max_face_planarity_dev_R": 2e-06,
+  "top_local_minima": 0,
+  "mirror_unmatched_xyz_of": [
+   0,
+   1077
+  ]
+ },
+ "pocket_mouth_fillet": {
+  "tagged_edges": 30,
+  "radius_R": 0.03,
+  "radius_mm": 1.275,
+  "segments": 6
+ },
+ "edge_break": {
+  "width_mm": 0.15,
+  "segments": 2,
+  "angle_limit_deg": 40
+ },
+ "rotor_final": {
+  "verts": 3393,
+  "faces": 3208,
+  "non_manifold_edges": 0
+ },
+ "cap": {
+  "dish_sectors": 14,
+  "expected": 14,
+  "rim_R": 0.485,
+  "hub_seat_R": 0.455,
+  "rim_gt_hub": true
+ },
+ "gate06Check_results": {
+  "D04 top convex, no valley": true,
+  "D04/D05 planar facets (dev < 1e-4 R)": true,
+  "D08 mouth fillet applied": true,
+  "D10 mirror": true,
+  "D01 14 sectors": true,
+  "D03 cap rim > hub seat": true,
+  "manifold after fillets": true
+ }
+}

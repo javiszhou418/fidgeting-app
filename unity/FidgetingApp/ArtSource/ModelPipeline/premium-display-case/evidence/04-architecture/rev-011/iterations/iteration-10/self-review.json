@@ -1,0 +1,105 @@
+{
+  "schema": "premium-display-case-gate04-r011-iteration-self-review.v1",
+  "iteration": 10,
+  "evidenceRevision": 11,
+  "gateId": "04-architecture",
+  "decision": "ready-for-user-visual-review",
+  "decidedBy": "agent-full-size-frame-inspection",
+  "decidedAt": "2026-08-28T12:25:00.000Z",
+  "reviewedAtFullSize": [
+    "frames/frame-0060.png",
+    "frames/frame-0084.png",
+    "frames/frame-0114.png",
+    "frames/frame-0136.png",
+    "tear-contact-sheet.png",
+    "flare glyph crop of frame-0114 at 2x nearest-neighbour"
+  ],
+  "prioritiesFromParent": [
+    {
+      "priority": 1,
+      "requirement": "Visible aperture: receding front-face contour, visible inner foil wall, contact-occluded cavity interior, case first appearing inside the cavity, legible in silhouette at normal speed.",
+      "verdict": "met",
+      "rootCauseOfPriorFailure": "Iteration 09 did recede the front face, but the bag had no interior. There was no back wall, no side wall, no tear-front cross wall and no lip, so the vacated region showed background and the silhouette simply became shorter. The cavity was a 19 mm ribbon that tracked the receding edge instead of a volume the edge uncovers.",
+      "changeMade": "The interior is now built as a real mouth: a back wall at z 0.082 behind the concealed case at z 0.060, a cross wall at the tear front, a side wall at the released end, and a lip with thickness on the torn front edge. A separate near-black occlusion submesh covers the band directly behind the lip, and the back wall above it tilts toward the rim so it takes a lighting gradient.",
+      "evidence": "frame-0060 shows the left half still sealed at full rim height while the right half is open with an occluded interior. frame-0084 shows the full-width mouth with the dark contact band under the lip and the case's ribbed tactile insert and shell outline visible inside it. tear-contact-sheet shows the opening growing right to left and reading in silhouette at every step."
+    },
+    {
+      "priority": 2,
+      "requirement": "Drive the audited discard edge sweep from tearProgress along the torn contour, visible while the Pack is still opaque, correlated to the contour so it cannot degenerate into full-width horizontal rectangles.",
+      "verdict": "met",
+      "rootCauseOfPriorFailure": "The edge term was evaluated only in dissolve-sweep space and scaled by packDissolve, which is 0.00 for the whole tear. Widening _EdgeWidth to compensate turned the mid-dissolve band into a flat cream rectangle because the sweep line is near-horizontal by construction.",
+      "changeMade": "The front face now carries torn-contour space in uv2: x is normalized depth below that column's torn top edge, y is proximity to the tear front. The emissive band is evaluated against uv2.x, so it hugs the tear at any tear progress and is geometrically incapable of becoming a horizontal rectangle. Intensity comes from TearSweepStrength(tearProgress), gated by opened-ness so the still-sealed seam does not glow. _EdgeWidth is back to 0.022 and the discard boundary is offset per column via uv3 so it tears irregularly.",
+      "evidence": "frame-0060 and frame-0084 show the warm band following the irregular torn contour while STANDARD is still fully opaque and packDissolve is 0.00. frame-0136 shows a jagged contour-correlated edge with no cream rectangles."
+    },
+    {
+      "priority": 3,
+      "requirement": "Foil, not a blade: shorter, wider, less smooth, darker underside, edge thickness, per-column micro-offsets, high-frequency irregularity, curling over itself.",
+      "verdict": "met-with-residual",
+      "changeMade": "Band width 0.026 to 0.045 m. Front foil metallic 0.72 to 0.28 and smoothness 0.58 to 0.24; underside base value 0.105 to 0.068. The curl bezier now turns over inside the Pack's own width instead of reaching past the right edge. Per-column width scaling and a surface ripple from three incommensurate terms break the free edge, and GenerateTearOffsets gained an unsmoothed micro term so the torn edge reverses at column scale.",
+      "residual": "The curled tip still resolves as a hard dark wedge at the top-left, which reads harder than the corrugated body of the strip."
+    },
+    {
+      "priority": 4,
+      "requirement": "Exclude the magenta segment of the source gradient rather than desynchronising bursts, prefer horizontal streak atlas frames, remove the four-point cyan sparkle glyphs.",
+      "verdict": "met",
+      "rootCauseOfPriorFailure": "Two independent causes, and the first fix for each was wrong. The magenta came from the source lifetime gradient's purple key at 0.333 and saturated cyan key at 0.667, which desynchronising emission could only spread thinner. The glyph came from the flare material having no atlas tiling at all, so every billboard sampled all four cells including the four-point star; and after that was fixed the glyph persisted because rotationOverLifetime spun the remaining cell through the angles that read as a symmetric star. No cell of the source atlas is a pure horizontal streak.",
+      "changeMade": "The purple and saturated cyan keys are excluded from the flare lifetime gradient while its key positions and warm-to-cool travel are kept. All flare ports now address one atlas cell via material tiling, the flare and activation ports use the horizontally dominant cell, rotationOverLifetime is limited to the radial glow port, and the flare billboard is flattened to a 1.55 by 0.16 aspect so the unmodified source texture reads as a streak.",
+      "evidence": "The 2x nearest-neighbour crop of frame-0114 shows two clean horizontal streaks, one warm and one neutral, with no four-armed glyph and no magenta or cyan."
+    }
+  ],
+  "continuityNotRegressed": {
+    "distinctCaseRootIds": 1,
+    "caseProjectedHeight": "0.4369 to 0.5545",
+    "maximumConsecutiveHeightStep": 0.00384,
+    "minimumConsecutiveHeightStep": -0.0026,
+    "monotonicityNote": "Growth is monotonic through the tear, dissolve and reveal. The only negative steps occur in the closing settle, where the authored overshoot relaxes. This is the same behaviour and the same numbers as iteration 09, not a regression.",
+    "packVisibleFalseFirstAtFrame": 152,
+    "packDissolveAtThatFrame": 1.0,
+    "improvementOverIteration09": "Body visibility was gated on PackRetreat, which switched the renderer off at packDissolve 0.9984. It is now gated on the discard curve, so packVisible can only become false at packDissolve 1.0 exactly."
+  },
+  "constraintsHeld": {
+    "directCc0Reuse": "Source Timeline beats, discard dissolve curve, flare atlas and Shader Graph math remain the source assets. Changes are adapter-level: which atlas cell a port addresses, billboard aspect, gradient key exclusion, and the space the emissive edge is evaluated in.",
+    "noFromScratchEffectRedraw": true,
+    "noVfxGraph": true,
+    "realUnityCaptureOnly": "1206x2622 at 60 fps, 207 frames, all 26 capture assertions pass. ffmpeg only encoded the real frames.",
+    "noCommit": true,
+    "noDeviceInstall": true,
+    "enclosedToyUnchanged": true,
+    "shippingCasePrefabUnchanged": "The vertical ribbing now visible inside the mouth is the shipping case's own TactileBackgroundInsert, revealed because the interior is dark enough. The prefab was not edited.",
+    "noRarityLeakBeforeReceipt": "noReceiptRarityLeak passes. The palette remains cooler than the source and was not warmed by leaking rarity.",
+    "rejectedHistoryPreserved": "Iterations 01 to 09 remain as labeled rejected history."
+  },
+  "residualDefectsDisclosed": [
+    {
+      "item": "The interior rim, where the mouth meets the background, is a near-straight horizontal line rather than a crimped seal contour, so at full size the opening reads slightly rectangular.",
+      "severity": "polish",
+      "blocksCausalRead": false
+    },
+    {
+      "item": "The released-end side wall shows as a thin blue-grey vertical sliver just outside the front face silhouette at frame 0084.",
+      "severity": "polish",
+      "blocksCausalRead": false
+    },
+    {
+      "item": "The curled foil tip reads as a hard dark wedge.",
+      "severity": "polish",
+      "blocksCausalRead": false
+    },
+    {
+      "item": "At contact-sheet scale the streak particles read as small specks. At full size they are clean streaks.",
+      "severity": "cosmetic",
+      "blocksCausalRead": false
+    }
+  ],
+  "notFixedByThisIteration": [
+    "The retarget palette remains cooler than the source, because the source's warm dominance comes from rarity card emissive which must not appear before the authoritative receipt. This constraint is correct and was not solved by leaking rarity."
+  ],
+  "evidenceLossRecorded": "iterations/iteration-09/EVIDENCE-LOSS.json. Iteration 09 pixel evidence was overwritten by the iteration-10 captures because it had never been archived. Its written verdict survives.",
+  "approvalRequestAllowed": true,
+  "userVisualApprovalObtained": false,
+  "shippingRuntimeWired": false,
+  "shippingReady": false,
+  "physicalPhoneInstalled": false,
+  "deviceAccepted": false,
+  "statusText": "视觉批准待确认，未推送手机"
+}

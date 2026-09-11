@@ -1,0 +1,443 @@
+{
+  "contract_sha256": "f6efa458dc89dc57acdacd38296bba4fcae023a752652c303bd243dcbe4a7301",
+  "engine": "CYCLES",
+  "samples": 128,
+  "calibration": {
+    "target_p97_display": 0.86,
+    "passes": [
+      {
+        "p97": 0.2156,
+        "factor": 20.988
+      },
+      {
+        "p97": 0.8136,
+        "factor": 1.13
+      }
+    ],
+    "energies_w": {
+      "LGT_PDC_SOFT_KEY": 1.6148,
+      "LGT_PDC_RIGHT_STRIP": 0.1117,
+      "LGT_PDC_TOP_RAIL": 0.0223,
+      "LGT_PDC_COOL_RIM": 0.0372,
+      "LGT_PDC_LILAC_RIM": 0.0278,
+      "LGT_PDC_FRONT_FILL": 0.2166,
+      "LGT_PDC_SPARKLE_00": 0.0285,
+      "LGT_PDC_SPARKLE_01": 0.0285,
+      "LGT_PDC_SPARKLE_02": 0.0285,
+      "LGT_PDC_SPARKLE_03": 0.0285,
+      "LGT_PDC_SPARKLE_04": 0.0285,
+      "LGT_PDC_SPARKLE_05": 0.0285,
+      "LGT_PDC_SPARKLE_06": 0.0285,
+      "LGT_PDC_SPARKLE_07": 0.0285,
+      "LGT_PDC_BLING_EDGE_L_CYAN": 0.2223,
+      "LGT_PDC_BLING_EDGE_T_BLUE": 0.1026,
+      "LGT_PDC_BLING_EDGE_R_MAGENTA": 0.2052,
+      "LGT_PDC_BLING_EDGE_B_PINK": 0.0912,
+      "LGT_PDC_REVIEW_TOP_FILL": 5.6892
+    },
+    "cmf_scheme_a_preview_overrides": {
+      "3": {
+        "base_color_srgb_hex": "#5C6266",
+        "roughness": 0.55,
+        "bump_strength": 0.6,
+        "intent": "dark sandblast, recessed field"
+      },
+      "4": {
+        "roughness": 0.12,
+        "coat_weight": 0.35,
+        "coat_roughness": 0.05,
+        "intent": "piano-black gloss plates"
+      },
+      "5": {
+        "roughness": 0.3,
+        "anisotropic": 0.8,
+        "anisotropic_rotation": 0.0,
+        "intent": "directional brushed steel flats"
+      },
+      "6": {
+        "base_color_srgb_hex": "#C9D0D6",
+        "roughness": 0.04,
+        "intent": "bright mirror polish: bevels, lip, wings, divider"
+      }
+    },
+    "review_bright": {
+      "enabled": true,
+      "world_strength": 0.05,
+      "top_fill_relative_power": 0.45,
+      "note": "review aid; contract beauty rig unchanged; not Gate 08 lighting"
+    }
+  },
+  "materials_by_zone": {
+    "1": "MAT_PDC_CLEAR_CRYSTAL",
+    "2": "MAT_PDC_SMOKE_LINER",
+    "3": "MAT_PDC_MICROBLAST",
+    "4": "MAT_PDC_GRAPHITE",
+    "5": "MAT_PDC_STEEL_SATIN",
+    "6": "MAT_PDC_SMOKED_MIRROR",
+    "7": "MAT_PDC_CHAMPAGNE_GOLD",
+    "0": "MAT_PDC_REVIEW_SPINNER_TITANIUM",
+    "floor": "MAT_PDC_PREVIEW_FLOOR"
+  },
+  "lights": [
+    {
+      "name": "LGT_PDC_SOFT_KEY",
+      "energy_w": 1.61,
+      "size_m": [
+        0.1701,
+        0.0801
+      ],
+      "location_m": [
+        -0.0722,
+        -0.1767,
+        0.1721
+      ]
+    },
+    {
+      "name": "LGT_PDC_RIGHT_STRIP",
+      "energy_w": 0.11,
+      "size_m": [
+        0.011,
+        0.1901
+      ],
+      "location_m": [
+        0.1367,
+        0.0479,
+        0.1118
+      ]
+    },
+    {
+      "name": "LGT_PDC_TOP_RAIL",
+      "energy_w": 0.02,
+      "size_m": [
+        0.1161,
+        0.009
+      ],
+      "location_m": [
+        0.064,
+        -0.1609,
+        0.0453
+      ]
+    },
+    {
+      "name": "LGT_PDC_COOL_RIM",
+      "energy_w": 0.04,
+      "size_m": [
+        0.009,
+        0.1161
+      ],
+      "location_m": [
+        -0.0787,
+        -0.068,
+        -0.094
+      ]
+    },
+    {
+      "name": "LGT_PDC_LILAC_RIM",
+      "energy_w": 0.03,
+      "size_m": [
+        0.009,
+        0.1001
+      ],
+      "location_m": [
+        0.0892,
+        0.036,
+        -0.104
+      ]
+    },
+    {
+      "name": "LGT_PDC_FRONT_FILL",
+      "energy_w": 0.22,
+      "size_m": [
+        0.1901,
+        0.1201
+      ],
+      "location_m": [
+        -0.0313,
+        0.0672,
+        0.2045
+      ]
+    },
+    {
+      "name": "LGT_PDC_SPARKLE_00",
+      "energy_w": 0.03,
+      "size_m": [
+        0.006,
+        0.25
+      ],
+      "location_m": [
+        -0.1074,
+        -0.1701,
+        0.0196
+      ]
+    },
+    {
+      "name": "LGT_PDC_SPARKLE_01",
+      "energy_w": 0.03,
+      "size_m": [
+        0.006,
+        0.25
+      ],
+      "location_m": [
+        -0.0604,
+        -0.197,
+        0.0887
+      ]
+    },
+    {
+      "name": "LGT_PDC_SPARKLE_02",
+      "energy_w": 0.03,
+      "size_m": [
+        0.006,
+        0.25
+      ],
+      "location_m": [
+        -0.0404,
+        -0.1264,
+        0.1492
+      ]
+    },
+    {
+      "name": "LGT_PDC_SPARKLE_03",
+      "energy_w": 0.03,
+      "size_m": [
+        0.006,
+        0.25
+      ],
+      "location_m": [
+        0.0387,
+        -0.157,
+        0.0239
+      ]
+    },
+    {
+      "name": "LGT_PDC_SPARKLE_04",
+      "energy_w": 0.03,
+      "size_m": [
+        0.006,
+        0.25
+      ],
+      "location_m": [
+        0.0719,
+        -0.0802,
+        0.0844
+      ]
+    },
+    {
+      "name": "LGT_PDC_SPARKLE_05",
+      "energy_w": 0.03,
+      "size_m": [
+        0.006,
+        0.25
+      ],
+      "location_m": [
+        0.1439,
+        -0.0954,
+        0.1535
+      ]
+    },
+    {
+      "name": "LGT_PDC_SPARKLE_06",
+      "energy_w": 0.03,
+      "size_m": [
+        0.006,
+        0.25
+      ],
+      "location_m": [
+        0.171,
+        -0.0403,
+        0.0196
+      ]
+    },
+    {
+      "name": "LGT_PDC_SPARKLE_07",
+      "energy_w": 0.03,
+      "size_m": [
+        0.006,
+        0.25
+      ],
+      "location_m": [
+        0.2181,
+        -0.0671,
+        0.0887
+      ]
+    },
+    {
+      "name": "LGT_PDC_BLING_EDGE_L_CYAN",
+      "energy_w": 0.22,
+      "size_m": [
+        0.006,
+        0.2402
+      ],
+      "location_m": [
+        -0.1463,
+        -0.0179,
+        0.0161
+      ]
+    },
+    {
+      "name": "LGT_PDC_BLING_EDGE_T_BLUE",
+      "energy_w": 0.1,
+      "size_m": [
+        0.1601,
+        0.006
+      ],
+      "location_m": [
+        -0.0418,
+        0.0424,
+        0.1357
+      ]
+    },
+    {
+      "name": "LGT_PDC_BLING_EDGE_R_MAGENTA",
+      "energy_w": 0.21,
+      "size_m": [
+        0.006,
+        0.2402
+      ],
+      "location_m": [
+        0.1089,
+        0.098,
+        -0.0158
+      ]
+    },
+    {
+      "name": "LGT_PDC_BLING_EDGE_B_PINK",
+      "energy_w": 0.09,
+      "size_m": [
+        0.1601,
+        0.006
+      ],
+      "location_m": [
+        0.0048,
+        0.0371,
+        -0.1434
+      ]
+    },
+    {
+      "name": "LGT_PDC_REVIEW_TOP_FILL",
+      "energy_w": 5.69,
+      "size_m": [
+        0.4403,
+        0.4403
+      ],
+      "location_m": [
+        0.0337,
+        -0.0723,
+        0.3272
+      ]
+    }
+  ],
+  "stills": [
+    "cmf-preview-hero-bling-reference.png",
+    "cmf-preview-front-bling-reference.png",
+    "cmf-preview-low-oblique-bling-reference.png",
+    "cmf-preview-corner-macro-bling-reference.png",
+    "cmf-preview-pocket-rim-macro-bling-reference.png"
+  ],
+  "turntable_frames": 0,
+  "tier": null,
+  "soft_focus": null,
+  "bling": {
+    "mode": "reference",
+    "thin_film": {
+      "thickness_nm_range": [
+        280,
+        380
+      ],
+      "ior": 1.355,
+      "mask": "pointiness+facing stand-in for COLOR0.g"
+    },
+    "sparkle_lights": {
+      "count": 8,
+      "size_b": 0.03,
+      "relative_power_each": 0.16,
+      "temperature_k": [
+        5200,
+        7200
+      ],
+      "reference_colors_srgb": [
+        "#7FE0FF",
+        "#FFFFFF",
+        "#FF7AE0",
+        "#FFFFFF"
+      ]
+    },
+    "rim_power_override": {
+      "LGT_PDC_COOL_RIM": 0.3,
+      "LGT_PDC_LILAC_RIM": 0.26
+    },
+    "environment": "neutral dark grey, half review strength",
+    "edge_strips": [
+      {
+        "id": "LGT_PDC_BLING_EDGE_L_CYAN",
+        "position_b": [
+          -0.7,
+          -0.22,
+          0.1
+        ],
+        "size_b": [
+          0.03,
+          1.2
+        ],
+        "color_srgb_hex": "#4FD2FF",
+        "relative_power": 1.3
+      },
+      {
+        "id": "LGT_PDC_BLING_EDGE_T_BLUE",
+        "position_b": [
+          -0.1,
+          -0.22,
+          0.7
+        ],
+        "size_b": [
+          0.8,
+          0.03
+        ],
+        "color_srgb_hex": "#6FA8FF",
+        "relative_power": 0.9
+      },
+      {
+        "id": "LGT_PDC_BLING_EDGE_R_MAGENTA",
+        "position_b": [
+          0.7,
+          -0.22,
+          -0.06
+        ],
+        "size_b": [
+          0.03,
+          1.2
+        ],
+        "color_srgb_hex": "#FF5FD6",
+        "relative_power": 1.2
+      },
+      {
+        "id": "LGT_PDC_BLING_EDGE_B_PINK",
+        "position_b": [
+          0.1,
+          -0.22,
+          -0.7
+        ],
+        "size_b": [
+          0.8,
+          0.03
+        ],
+        "color_srgb_hex": "#FF8AC8",
+        "relative_power": 0.8
+      }
+    ],
+    "film": {
+      "thickness_nm_range": [
+        300,
+        650
+      ],
+      "pointiness": [
+        0.5,
+        0.56
+      ],
+      "mask": "none"
+    },
+    "within_contract_lighting": false,
+    "note": "lookdev proposal for Gate 08; thin film itself is in the contract material"
+  },
+  "status": "supplementary CMF preview; not Gate 07 lookdev"
+}

@@ -1,0 +1,101 @@
+{
+  "status": "pass",
+  "sampleTimesVideoSeconds": {
+    "sealed": 1.4,
+    "partial": 1.7,
+    "rebound": 2.0,
+    "committedOpenBeforeCase": 2.55,
+    "releasePulse": 2.6,
+    "caseFirstVisible": 2.583,
+    "finalSheen": 4.75,
+    "hold": 5.3
+  },
+  "pack": {
+    "authoredAspect": "384:512",
+    "flapAnchor": "topTrailing",
+    "flapWidthVersusBodyFraction": 0.9361370716510904,
+    "flapHorizontalTravelPixels": 146.7473419594313,
+    "partialOpeningGapPixels": 13,
+    "committedOpeningGapPixels": 105,
+    "reboundMeanAbsoluteDelta": 0.9477479614529281,
+    "seamP95MinusMedianLuma255": 166.0,
+    "seamFractionAbove40": 0.33431983385254416,
+    "releaseMeanLumaDelta255": 105.32394859813084,
+    "releaseP95LumaDelta255": 123.0,
+    "maximumCaseFractionBeforeOpening": 0.0,
+    "caseFractionFirstVisible": 0.5164136363636364,
+    "minimumTransitionForegroundFraction": 0.3852812241521919
+  },
+  "caseCuesIsolatedGpu": {
+    "arrival": {
+      "changedPixels": 18668,
+      "changedFraction": 0.4292,
+      "meanLumaDelta": 0.0319,
+      "meanLumaDelta255": 8.1345,
+      "p95LumaDelta": 0.0787,
+      "p95LumaDelta255": 20.0685,
+      "maximumLumaDelta": 0.7737,
+      "maximumLumaDelta255": 197.29350000000002,
+      "externalPixels": 0
+    },
+    "first-rotation-rim": {
+      "changedPixels": 23042,
+      "changedFraction": 0.5251,
+      "meanLumaDelta": 0.0525,
+      "meanLumaDelta255": 13.3875,
+      "p95LumaDelta": 0.1442,
+      "p95LumaDelta255": 36.771,
+      "maximumLumaDelta": 0.7448,
+      "maximumLumaDelta255": 189.924,
+      "externalPixels": 0
+    },
+    "second-rotation-rim": {
+      "changedPixels": 22745,
+      "changedFraction": 0.5183,
+      "meanLumaDelta": 0.0362,
+      "meanLumaDelta255": 9.231000000000002,
+      "p95LumaDelta": 0.0994,
+      "p95LumaDelta255": 25.347,
+      "maximumLumaDelta": 0.6235,
+      "maximumLumaDelta255": 158.9925,
+      "externalPixels": 0
+    },
+    "final-sheen": {
+      "changedPixels": 6586,
+      "changedFraction": 0.1255,
+      "meanLumaDelta": 0.0712,
+      "meanLumaDelta255": 18.156,
+      "p95LumaDelta": 0.6821,
+      "p95LumaDelta255": 173.93550000000002,
+      "maximumLumaDelta": 0.902,
+      "maximumLumaDelta255": 230.01000000000002,
+      "externalPixels": 0
+    }
+  },
+  "finalSheenVersusHold": {
+    "meanSignedLumaDelta255": 36.03968048095703,
+    "meanAbsoluteLumaDelta255": 39.92144012451172,
+    "p95AbsoluteLumaDelta255": 161.0,
+    "fractionPositiveDeltaAbove10": 0.32978122843340235
+  },
+  "persistentLightAfterSheen": {
+    "meanAbsoluteLumaDelta255": 1.171877145767212,
+    "p95AbsoluteLumaDelta255": 5.0
+  },
+  "checks": {
+    "fullWidthAuthoredFlap": true,
+    "flapMotionNotTooSmall": true,
+    "partialTearOpeningVisible": true,
+    "committedTearOpeningVisible": true,
+    "belowThresholdReboundsToSealed": true,
+    "caseDoesNotAppearBeforeOpening": true,
+    "caseAppearsAfterOpening": true,
+    "transitionNeverEmpty": true,
+    "seamContrastReadable": true,
+    "releasePulseContrastReadable": true,
+    "everyCaseCueHasMeasuredContrast": true,
+    "finalSheenCrossingVisible": true,
+    "allCaseLightStaysMeshClipped": true,
+    "noPersistentLight": true
+  }
+}

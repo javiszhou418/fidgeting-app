@@ -1,0 +1,109 @@
+{
+    "schema": "premium-display-case-gate04-r017-pre-capture-static.v1",
+    "source": "actual isolated Unity 6000.5.6f1 URP Play Mode frames",
+    "scene": "Assets/IsolatedProofR017/Generated/PackOpeningGate04R017Isolated.unity",
+    "artworkCanvasWidth": 384,
+    "artworkCanvasHeight": 512,
+    "archiveArtworkV": 0.7350000143051148,
+    "standardArtworkV": 0.2150000035762787,
+    "archiveObjectY": 0.09331247955560684,
+    "standardObjectY": -0.0756249651312828,
+    "packRootIdentity": true,
+    "frontFoilMaxBakedDeltaMeters": 0.04488760232925415,
+    "sourceExportedExpectedFrontFoilDeltaMeters": 0.04488760232925415,
+    "frontFoilDeltaToleranceFraction": 0.004999999888241291,
+    "frontFoilDeltaRelativeError": 0.0,
+    "mouthScreenVisibility": {
+        "viewportRegion": {
+            "x": 0.272889107465744,
+            "y": 0.19466939568519593,
+            "width": 0.45422181487083437,
+            "height": 0.21959304809570313
+        },
+        "sampleCount": 317350,
+        "meanRgbDelta": 0.08420126140117645,
+        "changedPixelFraction": 0.5721064805984497
+    },
+    "basisStateSetFrame": 2,
+    "basisRenderedAfterFrame": 3,
+    "openStateSetFrame": 3,
+    "openRenderedAfterFrame": 4,
+    "liveCaseId": {
+        "stateSetFrame": 4,
+        "renderedAfterFrame": 6,
+        "width": 1206,
+        "height": 2622,
+        "packVisible": true,
+        "packDissolve": 0.0,
+        "mouthContactOcclusion": true,
+        "caseContainedInMouth": true,
+        "caseIdPixels": 186429,
+        "lipIdPixels": 7002,
+        "casePixelsBehindLip": 109574,
+        "caseIdBounds": {
+            "x": 0.1344398409128189,
+            "y": 0.23884013295173646,
+            "width": 0.7311203479766846,
+            "height": 0.13658908009529115
+        },
+        "lipIdBounds": {
+            "x": 0.0,
+            "y": 0.24036626517772675,
+            "width": 1.0,
+            "height": 0.10988174378871918
+        },
+        "packBounds": {
+            "x": 0.29578229784965517,
+            "y": 0.1941230297088623,
+            "width": 0.3998930752277374,
+            "height": 0.5844665169715881
+        },
+        "mouthBounds": {
+            "x": 0.31288909912109377,
+            "y": 0.23466938734054566,
+            "width": 0.3742218017578125,
+            "height": 0.13959306478500367
+        },
+        "physicalMouthRegion": {
+            "x": 0.2857823073863983,
+            "y": 0.18412302434444428,
+            "width": 0.4198930561542511,
+            "height": 0.23513944447040559
+        }
+    },
+    "frameBarrierCaptureCount": 3,
+    "frameBarrierAdvancedCount": 3,
+    "checks": [
+        {
+            "id": "upright-art-fidget-archive-above-standard",
+            "passed": true,
+            "evidence": "archiveY=0.093312, standardY=-0.075625"
+        },
+        {
+            "id": "pack-root-retains-identity-rotation",
+            "passed": true,
+            "evidence": "(0.00, 0.00, 0.00)"
+        },
+        {
+            "id": "front-foil-baked-delta-at-070-matches-source-export-within-05-percent",
+            "passed": true,
+            "evidence": "actual=0.044887600m, expected=0.044887600m, relativeError=0.000000 %"
+        },
+        {
+            "id": "formed-mouth-render-differs-visibly-from-sealed",
+            "passed": true,
+            "evidence": "region=0.2729,0.1947 0.4542x0.2196, samples=317350, meanRgbDelta=0.084201, changedFraction=57.211 %"
+        },
+        {
+            "id": "live-case-id-readable-behind-physical-mouth-at-090",
+            "passed": true,
+            "evidence": "case=186429, lip=7002, behindLip=109574, pack=True, dissolve=0.000000"
+        },
+        {
+            "id": "actual-unity-frame-advanced-before-static-renders",
+            "passed": true,
+            "evidence": "captures=3, advanced=3"
+        }
+    ],
+    "passed": true
+}

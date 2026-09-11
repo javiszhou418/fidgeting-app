@@ -1,0 +1,64 @@
+{
+  "schemaVersion": 1,
+  "modelId": "magnetic-slide-tile",
+  "gate": "06-geometry",
+  "revision": 5,
+  "pass": true,
+  "contractSha256": "9cd7a08f34d7d8dfc3c6f89f6c80a5c5c2dcae48bc0d5c54ebf455a0727ea571",
+  "gate05SourceSha256": "f587be803cf98e134f173e961fe4e096708f08916af51d971b0ef381d51c11a2",
+  "geometryDigest": "2fcf6d2b4344511bc6b86ce940a927576f9cdb4988f4022959a3372f4d3c1952",
+  "verification": {
+    "blenderBuilder": "pass",
+    "independentBlenderAudit": "pass",
+    "standardViewCapture": {
+      "pass": true,
+      "backend": "blender-bpy-fallback",
+      "missingViews": []
+    },
+    "focusedNode": {
+      "pass": 14,
+      "total": 14
+    },
+    "fullNode": {
+      "pass": 186,
+      "total": 188,
+      "unrelatedFailures": [
+        "Premium Display Case rebuildRequested expectation",
+        "Premium Display Case Gate 12 historical status expectation"
+      ]
+    },
+    "modelPipeline": {
+      "errors": 0,
+      "missingFiles": 0,
+      "unhashed": 0
+    },
+    "browser": {
+      "desktop": "pass",
+      "mobile": "pass",
+      "glb": "pass",
+      "modal": "pass",
+      "history": "pass",
+      "runtimeExceptions": 0,
+      "loadingFailures": 0
+    },
+    "endpointVideo": {
+      "pass": true,
+      "frames": 450,
+      "quickTimeDecodedFrames": 450,
+      "durationSeconds": 15,
+      "dimensions": [1920, 1080]
+    },
+    "syntaxXmlAndDiff": "pass"
+  },
+  "scope": {
+    "geometryChanged": false,
+    "materials": false,
+    "simulator": false,
+    "finalUnity": false,
+    "build": false,
+    "install": false,
+    "phone": false
+  },
+  "status": "ready_for_review",
+  "visualApprovalPending": true
+}

@@ -1,0 +1,506 @@
+{
+  "schemaVersion": 1,
+  "revision": 12,
+  "createdAt": "2026-09-10T02:43:07.751Z",
+  "updatedAt": "2026-09-10T02:43:07.806Z",
+  "model": {
+    "id": "edc-slide-demo",
+    "name": "edc 解压玩具",
+    "mechanism": "linear-magnetic-slider",
+    "status": "candidate",
+    "scenePath": ""
+  },
+  "route": {
+    "primary": "blender-cli",
+    "rodinPolicy": "concept-only",
+    "note": "Mechanical model default."
+  },
+  "currentState": {
+    "rebuildRequested": true,
+    "shippingAssetUnchanged": true,
+    "visualApproval": "pending",
+    "deviceStatus": "not-approved",
+    "diagnosis": "Gate 01 已有 11 个用户参考，等待确认原图归档。"
+  },
+  "assets": [
+    {
+      "id": "edc-slide-demo-intake-r1-6d80fa7b",
+      "stageId": "01-intake",
+      "slot": "original-reference",
+      "path": "unity/FidgetingApp/ArtSource/ModelPipeline/edc-slide-demo/evidence/01-intake/rev-001/obsidian-note.md",
+      "sha256": "a3e9fecf2e71ff91b9d34af24322e3259e333294efb917391f7bb888b444ba75",
+      "exists": true,
+      "sizeBytes": 14990,
+      "role": "external-reference",
+      "producer": {
+        "name": "model-provenance-explorer",
+        "version": "3",
+        "recipe": "Gate 01 Obsidian note import"
+      },
+      "provenance": {
+        "origin": "external",
+        "contentClass": "external-reference-document",
+        "assertedBy": "user",
+        "originalFilename": "obsidian-note.md",
+        "sourceLocator": "obsidian://open?vault=Obsidian%20Vault&file=%E7%AC%94%E8%AE%B0%E5%90%8C%E6%AD%A5%E5%8A%A9%E6%89%8B%2F2026-08-20%2F%23edc%20%E8%A7%A3%E5%8E%8B%E7%8E%A9%E5%85%B7",
+        "sourceNote": "edc 解压玩具",
+        "sourceUrl": "https://v.douyin.com/5oELvcy8hAU/",
+        "vaultPath": "笔记同步助手/2026-08-20/#edc 解压玩具.md",
+        "note": "Obsidian 笔记原文「edc 解压玩具」，来源 https://v.douyin.com/5oELvcy8hAU/"
+      },
+      "sourceAssetIds": [],
+      "sourceClaimIds": []
+    },
+    {
+      "id": "edc-slide-demo-intake-r1-cdedbdc3",
+      "stageId": "01-intake",
+      "slot": "original-reference",
+      "path": "unity/FidgetingApp/ArtSource/ModelPipeline/edc-slide-demo/evidence/01-intake/rev-001/17e258f2a11a4b3cfa59ca59836969da_MD5.jpg",
+      "sha256": "7dab36969a2a9d91f690b07959dd99a02de0558d5471b2bd99cef2f90b12eb5e",
+      "exists": true,
+      "sizeBytes": 121884,
+      "role": "external-reference",
+      "producer": {
+        "name": "model-provenance-explorer",
+        "version": "3",
+        "recipe": "Gate 01 Obsidian note import"
+      },
+      "provenance": {
+        "origin": "external",
+        "contentClass": "external-reference-photo",
+        "assertedBy": "user",
+        "originalFilename": "17e258f2a11a4b3cfa59ca59836969da_MD5.jpg",
+        "sourceLocator": "obsidian://open?vault=Obsidian%20Vault&file=%E7%AC%94%E8%AE%B0%E5%90%8C%E6%AD%A5%E5%8A%A9%E6%89%8B%2F2026-08-20%2F%23edc%20%E8%A7%A3%E5%8E%8B%E7%8E%A9%E5%85%B7",
+        "sourceNote": "edc 解压玩具",
+        "sourceUrl": "https://v.douyin.com/5oELvcy8hAU/",
+        "vaultPath": "笔记同步助手/images/17e258f2a11a4b3cfa59ca59836969da_MD5.jpg",
+        "note": "来自 Obsidian 笔记「edc 解压玩具」的外部参考。"
+      },
+      "sourceAssetIds": [],
+      "sourceClaimIds": []
+    },
+    {
+      "id": "edc-slide-demo-intake-r1-22beb1c2",
+      "stageId": "01-intake",
+      "slot": "original-reference",
+      "path": "unity/FidgetingApp/ArtSource/ModelPipeline/edc-slide-demo/evidence/01-intake/rev-001/f532176fd8b43d1fce1fd2bb826af03d_MD5.jpg",
+      "sha256": "6e3fc38d17bc1309cb16cf8ce25fe162bddcfbcf189fc46115c0703a0b6153a8",
+      "exists": true,
+      "sizeBytes": 107598,
+      "role": "external-reference",
+      "producer": {
+        "name": "model-provenance-explorer",
+        "version": "3",
+        "recipe": "Gate 01 Obsidian note import"
+      },
+      "provenance": {
+        "origin": "external",
+        "contentClass": "external-reference-photo",
+        "assertedBy": "user",
+        "originalFilename": "f532176fd8b43d1fce1fd2bb826af03d_MD5.jpg",
+        "sourceLocator": "obsidian://open?vault=Obsidian%20Vault&file=%E7%AC%94%E8%AE%B0%E5%90%8C%E6%AD%A5%E5%8A%A9%E6%89%8B%2F2026-08-20%2F%23edc%20%E8%A7%A3%E5%8E%8B%E7%8E%A9%E5%85%B7",
+        "sourceNote": "edc 解压玩具",
+        "sourceUrl": "https://v.douyin.com/5oELvcy8hAU/",
+        "vaultPath": "笔记同步助手/images/f532176fd8b43d1fce1fd2bb826af03d_MD5.jpg",
+        "note": "来自 Obsidian 笔记「edc 解压玩具」的外部参考。"
+      },
+      "sourceAssetIds": [],
+      "sourceClaimIds": []
+    },
+    {
+      "id": "edc-slide-demo-intake-r1-9931e7e0",
+      "stageId": "01-intake",
+      "slot": "original-reference",
+      "path": "unity/FidgetingApp/ArtSource/ModelPipeline/edc-slide-demo/evidence/01-intake/rev-001/0339a3e8f6dda5a5fdd8477c0e1a43bf_MD5.jpg",
+      "sha256": "d1ea980fb74424cc196de61a437cade4a8b3360b2140c4d7f6df9ad54abecb26",
+      "exists": true,
+      "sizeBytes": 103046,
+      "role": "external-reference",
+      "producer": {
+        "name": "model-provenance-explorer",
+        "version": "3",
+        "recipe": "Gate 01 Obsidian note import"
+      },
+      "provenance": {
+        "origin": "external",
+        "contentClass": "external-reference-photo",
+        "assertedBy": "user",
+        "originalFilename": "0339a3e8f6dda5a5fdd8477c0e1a43bf_MD5.jpg",
+        "sourceLocator": "obsidian://open?vault=Obsidian%20Vault&file=%E7%AC%94%E8%AE%B0%E5%90%8C%E6%AD%A5%E5%8A%A9%E6%89%8B%2F2026-08-20%2F%23edc%20%E8%A7%A3%E5%8E%8B%E7%8E%A9%E5%85%B7",
+        "sourceNote": "edc 解压玩具",
+        "sourceUrl": "https://v.douyin.com/5oELvcy8hAU/",
+        "vaultPath": "笔记同步助手/images/0339a3e8f6dda5a5fdd8477c0e1a43bf_MD5.jpg",
+        "note": "来自 Obsidian 笔记「edc 解压玩具」的外部参考。"
+      },
+      "sourceAssetIds": [],
+      "sourceClaimIds": []
+    },
+    {
+      "id": "edc-slide-demo-intake-r1-b9ce4379",
+      "stageId": "01-intake",
+      "slot": "original-reference",
+      "path": "unity/FidgetingApp/ArtSource/ModelPipeline/edc-slide-demo/evidence/01-intake/rev-001/f63e611d4fdef82796b401d28fe4adae_MD5.jpg",
+      "sha256": "4cb2ee3db35643ca6ac1e9f84a579b07db1f5ea8f9dc76c954ab00f61de1162d",
+      "exists": true,
+      "sizeBytes": 96703,
+      "role": "external-reference",
+      "producer": {
+        "name": "model-provenance-explorer",
+        "version": "3",
+        "recipe": "Gate 01 Obsidian note import"
+      },
+      "provenance": {
+        "origin": "external",
+        "contentClass": "external-reference-photo",
+        "assertedBy": "user",
+        "originalFilename": "f63e611d4fdef82796b401d28fe4adae_MD5.jpg",
+        "sourceLocator": "obsidian://open?vault=Obsidian%20Vault&file=%E7%AC%94%E8%AE%B0%E5%90%8C%E6%AD%A5%E5%8A%A9%E6%89%8B%2F2026-08-20%2F%23edc%20%E8%A7%A3%E5%8E%8B%E7%8E%A9%E5%85%B7",
+        "sourceNote": "edc 解压玩具",
+        "sourceUrl": "https://v.douyin.com/5oELvcy8hAU/",
+        "vaultPath": "笔记同步助手/images/f63e611d4fdef82796b401d28fe4adae_MD5.jpg",
+        "note": "来自 Obsidian 笔记「edc 解压玩具」的外部参考。"
+      },
+      "sourceAssetIds": [],
+      "sourceClaimIds": []
+    },
+    {
+      "id": "edc-slide-demo-intake-r1-cf0af2f3",
+      "stageId": "01-intake",
+      "slot": "original-reference",
+      "path": "unity/FidgetingApp/ArtSource/ModelPipeline/edc-slide-demo/evidence/01-intake/rev-001/ef4ebb72a38bfafcbb33020f2793a5a1_MD5.jpg",
+      "sha256": "6dabf128d0c946902787f8eb6e0fcf3a9a2bbd7b69253b8ae72a20a49f45e5fb",
+      "exists": true,
+      "sizeBytes": 96068,
+      "role": "external-reference",
+      "producer": {
+        "name": "model-provenance-explorer",
+        "version": "3",
+        "recipe": "Gate 01 Obsidian note import"
+      },
+      "provenance": {
+        "origin": "external",
+        "contentClass": "external-reference-photo",
+        "assertedBy": "user",
+        "originalFilename": "ef4ebb72a38bfafcbb33020f2793a5a1_MD5.jpg",
+        "sourceLocator": "obsidian://open?vault=Obsidian%20Vault&file=%E7%AC%94%E8%AE%B0%E5%90%8C%E6%AD%A5%E5%8A%A9%E6%89%8B%2F2026-08-20%2F%23edc%20%E8%A7%A3%E5%8E%8B%E7%8E%A9%E5%85%B7",
+        "sourceNote": "edc 解压玩具",
+        "sourceUrl": "https://v.douyin.com/5oELvcy8hAU/",
+        "vaultPath": "笔记同步助手/images/ef4ebb72a38bfafcbb33020f2793a5a1_MD5.jpg",
+        "note": "来自 Obsidian 笔记「edc 解压玩具」的外部参考。"
+      },
+      "sourceAssetIds": [],
+      "sourceClaimIds": []
+    },
+    {
+      "id": "edc-slide-demo-intake-r1-4962bcaf",
+      "stageId": "01-intake",
+      "slot": "original-reference",
+      "path": "unity/FidgetingApp/ArtSource/ModelPipeline/edc-slide-demo/evidence/01-intake/rev-001/6a6e0de4fdf332803b65540382252136_MD5.jpg",
+      "sha256": "1f54fbcd6181058ebfa5ebd48a6757c473a60470f7d4b91ef41ac465f69b5415",
+      "exists": true,
+      "sizeBytes": 87196,
+      "role": "external-reference",
+      "producer": {
+        "name": "model-provenance-explorer",
+        "version": "3",
+        "recipe": "Gate 01 Obsidian note import"
+      },
+      "provenance": {
+        "origin": "external",
+        "contentClass": "external-reference-photo",
+        "assertedBy": "user",
+        "originalFilename": "6a6e0de4fdf332803b65540382252136_MD5.jpg",
+        "sourceLocator": "obsidian://open?vault=Obsidian%20Vault&file=%E7%AC%94%E8%AE%B0%E5%90%8C%E6%AD%A5%E5%8A%A9%E6%89%8B%2F2026-08-20%2F%23edc%20%E8%A7%A3%E5%8E%8B%E7%8E%A9%E5%85%B7",
+        "sourceNote": "edc 解压玩具",
+        "sourceUrl": "https://v.douyin.com/5oELvcy8hAU/",
+        "vaultPath": "笔记同步助手/images/6a6e0de4fdf332803b65540382252136_MD5.jpg",
+        "note": "来自 Obsidian 笔记「edc 解压玩具」的外部参考。"
+      },
+      "sourceAssetIds": [],
+      "sourceClaimIds": []
+    },
+    {
+      "id": "edc-slide-demo-intake-r1-509755a2",
+      "stageId": "01-intake",
+      "slot": "original-reference",
+      "path": "unity/FidgetingApp/ArtSource/ModelPipeline/edc-slide-demo/evidence/01-intake/rev-001/08fe4b490c21d55d078c0eeb4d527901_MD5.jpg",
+      "sha256": "ee005523e9651128ccca11c368257a069ba93836ebbe7715768374fdbfd23cff",
+      "exists": true,
+      "sizeBytes": 85427,
+      "role": "external-reference",
+      "producer": {
+        "name": "model-provenance-explorer",
+        "version": "3",
+        "recipe": "Gate 01 Obsidian note import"
+      },
+      "provenance": {
+        "origin": "external",
+        "contentClass": "external-reference-photo",
+        "assertedBy": "user",
+        "originalFilename": "08fe4b490c21d55d078c0eeb4d527901_MD5.jpg",
+        "sourceLocator": "obsidian://open?vault=Obsidian%20Vault&file=%E7%AC%94%E8%AE%B0%E5%90%8C%E6%AD%A5%E5%8A%A9%E6%89%8B%2F2026-08-20%2F%23edc%20%E8%A7%A3%E5%8E%8B%E7%8E%A9%E5%85%B7",
+        "sourceNote": "edc 解压玩具",
+        "sourceUrl": "https://v.douyin.com/5oELvcy8hAU/",
+        "vaultPath": "笔记同步助手/images/08fe4b490c21d55d078c0eeb4d527901_MD5.jpg",
+        "note": "来自 Obsidian 笔记「edc 解压玩具」的外部参考。"
+      },
+      "sourceAssetIds": [],
+      "sourceClaimIds": []
+    },
+    {
+      "id": "edc-slide-demo-intake-r1-9c645425",
+      "stageId": "01-intake",
+      "slot": "original-reference",
+      "path": "unity/FidgetingApp/ArtSource/ModelPipeline/edc-slide-demo/evidence/01-intake/rev-001/896faa6d0cfd0876d11c0a466e8608e6_MD5.jpg",
+      "sha256": "1330602f173fbb0690a3862b0be5171d8318b162bb49604768d17e3c9c8fe45e",
+      "exists": true,
+      "sizeBytes": 85491,
+      "role": "external-reference",
+      "producer": {
+        "name": "model-provenance-explorer",
+        "version": "3",
+        "recipe": "Gate 01 Obsidian note import"
+      },
+      "provenance": {
+        "origin": "external",
+        "contentClass": "external-reference-photo",
+        "assertedBy": "user",
+        "originalFilename": "896faa6d0cfd0876d11c0a466e8608e6_MD5.jpg",
+        "sourceLocator": "obsidian://open?vault=Obsidian%20Vault&file=%E7%AC%94%E8%AE%B0%E5%90%8C%E6%AD%A5%E5%8A%A9%E6%89%8B%2F2026-08-20%2F%23edc%20%E8%A7%A3%E5%8E%8B%E7%8E%A9%E5%85%B7",
+        "sourceNote": "edc 解压玩具",
+        "sourceUrl": "https://v.douyin.com/5oELvcy8hAU/",
+        "vaultPath": "笔记同步助手/images/896faa6d0cfd0876d11c0a466e8608e6_MD5.jpg",
+        "note": "来自 Obsidian 笔记「edc 解压玩具」的外部参考。"
+      },
+      "sourceAssetIds": [],
+      "sourceClaimIds": []
+    },
+    {
+      "id": "edc-slide-demo-intake-r1-e4868ed8",
+      "stageId": "01-intake",
+      "slot": "original-reference",
+      "path": "unity/FidgetingApp/ArtSource/ModelPipeline/edc-slide-demo/evidence/01-intake/rev-001/64706de56f32d79aea20b1ad54cc417c_MD5.jpg",
+      "sha256": "3d9fdc9dedbdfc1c5462dade64e9bdb337618b1ce8816e78e248b3c3211c0c6d",
+      "exists": true,
+      "sizeBytes": 102453,
+      "role": "external-reference",
+      "producer": {
+        "name": "model-provenance-explorer",
+        "version": "3",
+        "recipe": "Gate 01 Obsidian note import"
+      },
+      "provenance": {
+        "origin": "external",
+        "contentClass": "external-reference-photo",
+        "assertedBy": "user",
+        "originalFilename": "64706de56f32d79aea20b1ad54cc417c_MD5.jpg",
+        "sourceLocator": "obsidian://open?vault=Obsidian%20Vault&file=%E7%AC%94%E8%AE%B0%E5%90%8C%E6%AD%A5%E5%8A%A9%E6%89%8B%2F2026-08-20%2F%23edc%20%E8%A7%A3%E5%8E%8B%E7%8E%A9%E5%85%B7",
+        "sourceNote": "edc 解压玩具",
+        "sourceUrl": "https://v.douyin.com/5oELvcy8hAU/",
+        "vaultPath": "笔记同步助手/images/64706de56f32d79aea20b1ad54cc417c_MD5.jpg",
+        "note": "来自 Obsidian 笔记「edc 解压玩具」的外部参考。"
+      },
+      "sourceAssetIds": [],
+      "sourceClaimIds": []
+    },
+    {
+      "id": "edc-slide-demo-intake-r1-0166a129",
+      "stageId": "01-intake",
+      "slot": "original-reference",
+      "path": "unity/FidgetingApp/ArtSource/ModelPipeline/edc-slide-demo/evidence/01-intake/rev-001/2bcb35bbb15d3f630b0975664012ffe9_MD5.jpg",
+      "sha256": "b179cc306d11a0e1652723de09fdd9052b163494e98df767b2ea63f30758ba78",
+      "exists": true,
+      "sizeBytes": 115618,
+      "role": "external-reference",
+      "producer": {
+        "name": "model-provenance-explorer",
+        "version": "3",
+        "recipe": "Gate 01 Obsidian note import"
+      },
+      "provenance": {
+        "origin": "external",
+        "contentClass": "external-reference-photo",
+        "assertedBy": "user",
+        "originalFilename": "2bcb35bbb15d3f630b0975664012ffe9_MD5.jpg",
+        "sourceLocator": "obsidian://open?vault=Obsidian%20Vault&file=%E7%AC%94%E8%AE%B0%E5%90%8C%E6%AD%A5%E5%8A%A9%E6%89%8B%2F2026-08-20%2F%23edc%20%E8%A7%A3%E5%8E%8B%E7%8E%A9%E5%85%B7",
+        "sourceNote": "edc 解压玩具",
+        "sourceUrl": "https://v.douyin.com/5oELvcy8hAU/",
+        "vaultPath": "笔记同步助手/images/2bcb35bbb15d3f630b0975664012ffe9_MD5.jpg",
+        "note": "来自 Obsidian 笔记「edc 解压玩具」的外部参考。"
+      },
+      "sourceAssetIds": [],
+      "sourceClaimIds": []
+    }
+  ],
+  "claims": [],
+  "stages": [
+    {
+      "id": "01-intake",
+      "revision": 1,
+      "status": "ready_for_review",
+      "artifactIds": [
+        "edc-slide-demo-intake-r1-6d80fa7b",
+        "edc-slide-demo-intake-r1-cdedbdc3",
+        "edc-slide-demo-intake-r1-22beb1c2",
+        "edc-slide-demo-intake-r1-9931e7e0",
+        "edc-slide-demo-intake-r1-b9ce4379",
+        "edc-slide-demo-intake-r1-cf0af2f3",
+        "edc-slide-demo-intake-r1-4962bcaf",
+        "edc-slide-demo-intake-r1-509755a2",
+        "edc-slide-demo-intake-r1-9c645425",
+        "edc-slide-demo-intake-r1-e4868ed8",
+        "edc-slide-demo-intake-r1-0166a129"
+      ],
+      "inputDigest": "1884e9db34a7828b7b82574eac1c103b7d73ffdec3e7b1b1ab9cf5682bd23a84",
+      "outputDigest": "1884e9db34a7828b7b82574eac1c103b7d73ffdec3e7b1b1ab9cf5682bd23a84",
+      "validations": [
+        {
+          "id": "user-reference-archived",
+          "status": "pass",
+          "evidence": "11 个用户原始参考已归档并记录 SHA-256。"
+        },
+        {
+          "id": "source-class-labeled",
+          "status": "pass",
+          "evidence": "用户上传标 user-provided，Obsidian 导入标 external；未混入 AI 目标图。"
+        }
+      ],
+      "decision": null,
+      "approvalRequirement": "interactive-source-inspector-or-complete-recording",
+      "reviewArtifactIds": [
+        "edc-slide-demo-intake-r1-cdedbdc3",
+        "edc-slide-demo-intake-r1-22beb1c2",
+        "edc-slide-demo-intake-r1-9931e7e0",
+        "edc-slide-demo-intake-r1-b9ce4379",
+        "edc-slide-demo-intake-r1-cf0af2f3",
+        "edc-slide-demo-intake-r1-4962bcaf",
+        "edc-slide-demo-intake-r1-509755a2",
+        "edc-slide-demo-intake-r1-9c645425",
+        "edc-slide-demo-intake-r1-e4868ed8",
+        "edc-slide-demo-intake-r1-0166a129"
+      ]
+    },
+    {
+      "id": "02-analysis",
+      "revision": 1,
+      "status": "blocked",
+      "artifactIds": [],
+      "inputDigest": "1884e9db34a7828b7b82574eac1c103b7d73ffdec3e7b1b1ab9cf5682bd23a84",
+      "outputDigest": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "validations": [],
+      "decision": null,
+      "approvalRequirement": "reference-research-then-interactive-cad-approval"
+    },
+    {
+      "id": "03-contract",
+      "revision": 1,
+      "status": "blocked",
+      "artifactIds": [],
+      "inputDigest": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "outputDigest": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "validations": [],
+      "decision": null,
+      "approvalRequirement": "source-linked-contract-and-explicit-user-decision"
+    },
+    {
+      "id": "04-architecture",
+      "revision": 1,
+      "status": "blocked",
+      "artifactIds": [],
+      "inputDigest": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "outputDigest": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "validations": [],
+      "decision": null,
+      "approvalRequirement": "approved-cad-migration-or-interactive-3d"
+    },
+    {
+      "id": "05-blockout",
+      "revision": 1,
+      "status": "blocked",
+      "artifactIds": [],
+      "inputDigest": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "outputDigest": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "validations": [],
+      "decision": null,
+      "approvalRequirement": "interactive-3d-or-complete-turntable-recording"
+    },
+    {
+      "id": "06-geometry",
+      "revision": 1,
+      "status": "blocked",
+      "artifactIds": [],
+      "inputDigest": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "outputDigest": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "validations": [],
+      "decision": null,
+      "approvalRequirement": "interactive-3d-or-complete-turntable-recording"
+    },
+    {
+      "id": "07-material",
+      "revision": 1,
+      "status": "blocked",
+      "artifactIds": [],
+      "inputDigest": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "outputDigest": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "validations": [],
+      "decision": null,
+      "approvalRequirement": "interactive-lookdev-or-real-turntable-recording"
+    },
+    {
+      "id": "08-lighting",
+      "revision": 1,
+      "status": "blocked",
+      "artifactIds": [],
+      "inputDigest": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "outputDigest": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "validations": [],
+      "decision": null,
+      "approvalRequirement": "interactive-lookdev-or-real-comparison-recording"
+    },
+    {
+      "id": "09-environment",
+      "revision": 1,
+      "status": "blocked",
+      "artifactIds": [],
+      "inputDigest": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "outputDigest": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "validations": [],
+      "decision": null,
+      "approvalRequirement": "interactive-lookdev-or-real-comparison-recording"
+    },
+    {
+      "id": "10-export",
+      "revision": 1,
+      "status": "blocked",
+      "artifactIds": [],
+      "inputDigest": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "outputDigest": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "validations": [],
+      "decision": null,
+      "approvalRequirement": "real-glb-interaction"
+    },
+    {
+      "id": "11-unity-parity",
+      "revision": 1,
+      "status": "blocked",
+      "artifactIds": [],
+      "inputDigest": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "outputDigest": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "validations": [],
+      "decision": null,
+      "approvalRequirement": "real-unity-runtime-preview-or-complete-recording"
+    },
+    {
+      "id": "12-shipping",
+      "revision": 1,
+      "status": "blocked",
+      "artifactIds": [],
+      "inputDigest": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "outputDigest": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "validations": [],
+      "decision": null,
+      "approvalRequirement": "real-unity-runtime-preview-or-complete-recording"
+    }
+  ],
+  "issues": []
+}

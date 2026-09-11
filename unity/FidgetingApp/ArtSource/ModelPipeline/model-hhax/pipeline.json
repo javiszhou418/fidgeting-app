@@ -1,0 +1,2755 @@
+{
+  "schemaVersion": 1,
+  "revision": 30,
+  "createdAt": "2026-09-10T03:16:48.459Z",
+  "updatedAt": "2026-09-11T06:57:46.066Z",
+  "model": {
+    "id": "model-hhax",
+    "name": "视频号笔记",
+    "mechanism": "linear-magnetic-slider",
+    "status": "candidate",
+    "scenePath": ""
+  },
+  "route": {
+    "primary": "blender-cli",
+    "rodinPolicy": "concept-only",
+    "note": "Mechanical model default."
+  },
+  "currentState": {
+    "rebuildRequested": true,
+    "shippingAssetUnchanged": true,
+    "visualApproval": "pending",
+    "deviceStatus": "not-approved",
+    "diagnosis": "Gate 05 第二次预检暴露静帧关键帧求值问题；保留版本，改用非关键帧增量姿态后重做。",
+    "workRequests": {
+      "02-analysis": {
+        "status": "delivered",
+        "requestedAt": "2026-09-10T07:30:01.845Z",
+        "note": "",
+        "deliverables": [
+          "discovery-log",
+          "analysis-board"
+        ],
+        "deliveredAt": "2026-09-11T00:23:03.890Z"
+      }
+    },
+    "approvalDelegation": {
+      "authorizationId": "90861ce4-8ca8-4753-b398-607c3759b307",
+      "authority": "latest-explicit-chat-instruction",
+      "mode": "agent-self-approve-after-evidence",
+      "exactUserWording": "目标是完整的把这款材质做出来，通过设计圣经的判断和自我审查，一步步的自我通过，通过CAD/白模/blender/unity的流程，不需要人工approve，自我进行下一步，最终出成品",
+      "fromStageId": "01-intake",
+      "toStageId": "12-shipping",
+      "authorizedAt": "2026-09-11T00:16:46.348Z",
+      "constraints": {
+        "separateDecisionPerGate": true,
+        "stageMustBeReadyForReview": true,
+        "immutableRevisionEvidenceRequired": true,
+        "hashBoundApprovalEvidenceRequired": true,
+        "interactionOrRecordingEvidenceRequired": true,
+        "unknownMillimetersRemainBlocking": true,
+        "genericInferenceForbidden": true,
+        "allowedNonUserDimensionBasisTypes": [
+          "same-model-official-spec",
+          "same-model-public-teardown-calibration"
+        ],
+        "hashLinkedSameModelOfficialSpecificationsAllowed": true,
+        "hashLinkedCalibratedDigitalReconstructionTargetsAllowed": true,
+        "calibratedTargetsMustRemainProvisionalAndReversible": true,
+        "physicalOrManufacturingClaimsFromNonUserDimensionsForbidden": true,
+        "blenderBeforeGate04Forbidden": true,
+        "physicalPhoneInstallAuthorized": false
+      }
+    },
+    "requiredPhysicalDimensions": [
+      "closedOverallLength",
+      "overallWidth",
+      "totalClosedThickness",
+      "topPlateThickness",
+      "bottomPlateThickness",
+      "maximumSlideTravel",
+      "fixedAxisOffsetFromNearestEnd",
+      "rotatingCarrierDiameter",
+      "closedSeamGap"
+    ],
+    "optionalEngineeringDimensions": [
+      "bilateralGrooveCenterSpacing",
+      "grooveWidth",
+      "grooveDepth",
+      "fixedAxisDiameter",
+      "upperStepHeight",
+      "lowerStepHeight",
+      "visibleFollowerDimensions"
+    ],
+    "manufacturingLaterDimensions": [
+      "operatingClearance",
+      "manufacturingAllowance",
+      "manufacturingTolerance"
+    ],
+    "measurementProgress": "9/9"
+  },
+  "assets": [
+    {
+      "id": "model-hhax-intake-r1-a8301672",
+      "stageId": "01-intake",
+      "slot": "original-reference",
+      "path": "unity/FidgetingApp/ArtSource/ModelPipeline/model-hhax/evidence/01-intake/rev-001/obsidian-note.md",
+      "sha256": "d626b3b40b11e2b39dcfb7410ca2fc07d02ccac8cdea359baa1245e007d36f18",
+      "exists": true,
+      "sizeBytes": 2169,
+      "role": "external-reference",
+      "producer": {
+        "name": "model-provenance-explorer",
+        "version": "3",
+        "recipe": "Gate 01 Obsidian note import"
+      },
+      "provenance": {
+        "origin": "external",
+        "contentClass": "external-reference-document",
+        "assertedBy": "user",
+        "originalFilename": "obsidian-note.md",
+        "sourceLocator": "obsidian://open?vault=Obsidian%20Vault&file=%E7%AC%94%E8%AE%B0%E5%90%8C%E6%AD%A5%E5%8A%A9%E6%89%8B%2F2026-09-10%2F%E8%A7%86%E9%A2%91%E5%8F%B7%E7%AC%94%E8%AE%B0",
+        "sourceNote": "视频号笔记",
+        "sourceUrl": "https://www.xiaohongshu.com/discovery/item/6aa182ae000000000b0017b6?app_platform=ios&app_version=9.45&share_from_user_hidden=true&xsec_source=app_share&type=video&xsec_token=CBpDPiwV4lXDxB8i5-Ox-Sh-TbKduZ2qOXimCn4CDHqfM=&author_share=1&xhsshare=WeixinSession&shareRedId=N0c5ODVGNUI3OEdHOjgzPThFQko8NjxL&apptime=1788994940&share_id=a02b6bdf75ba4a118ef4ef4e9ff5e95d&track_code=7vfi8hxAD3c",
+        "vaultPath": "笔记同步助手/2026-09-10/视频号笔记.md",
+        "note": "Obsidian 笔记原文「视频号笔记」，来源 https://www.xiaohongshu.com/discovery/item/6aa182ae000000000b0017b6?app_platform=ios&app_version=9.45&share_from_user_hidden=true&xsec_source=app_share&type=video&xsec_token=CBpDPiwV4lXDxB8i5-Ox-Sh-TbKduZ2qOXimCn4CDHqfM=&author_share=1&xhsshare=WeixinSession&shareRedId=N0c5ODVGNUI3OEdHOjgzPThFQko8NjxL&apptime=1788994940&share_id=a02b6bdf75ba4a118ef4ef4e9ff5e95d&track_code=7vfi8hxAD3c"
+      },
+      "sourceAssetIds": [],
+      "sourceClaimIds": []
+    },
+    {
+      "id": "model-hhax-intake-r1-f2576ce0",
+      "stageId": "01-intake",
+      "slot": "original-reference",
+      "path": "unity/FidgetingApp/ArtSource/ModelPipeline/model-hhax/evidence/01-intake/rev-001/5e1659c986fca1385c68a75261bb7390_MD5.jpg",
+      "sha256": "b7fce5d526d948e1d56df1299ca3c0cef931b4405a4a1f9175c77b3cf8941236",
+      "exists": true,
+      "sizeBytes": 147812,
+      "role": "external-reference",
+      "producer": {
+        "name": "model-provenance-explorer",
+        "version": "3",
+        "recipe": "Gate 01 Obsidian note import"
+      },
+      "provenance": {
+        "origin": "external",
+        "contentClass": "external-reference-photo",
+        "assertedBy": "user",
+        "originalFilename": "5e1659c986fca1385c68a75261bb7390_MD5.jpg",
+        "sourceLocator": "obsidian://open?vault=Obsidian%20Vault&file=%E7%AC%94%E8%AE%B0%E5%90%8C%E6%AD%A5%E5%8A%A9%E6%89%8B%2F2026-09-10%2F%E8%A7%86%E9%A2%91%E5%8F%B7%E7%AC%94%E8%AE%B0",
+        "sourceNote": "视频号笔记",
+        "sourceUrl": "https://www.xiaohongshu.com/discovery/item/6aa182ae000000000b0017b6?app_platform=ios&app_version=9.45&share_from_user_hidden=true&xsec_source=app_share&type=video&xsec_token=CBpDPiwV4lXDxB8i5-Ox-Sh-TbKduZ2qOXimCn4CDHqfM=&author_share=1&xhsshare=WeixinSession&shareRedId=N0c5ODVGNUI3OEdHOjgzPThFQko8NjxL&apptime=1788994940&share_id=a02b6bdf75ba4a118ef4ef4e9ff5e95d&track_code=7vfi8hxAD3c",
+        "vaultPath": "笔记同步助手/images/5e1659c986fca1385c68a75261bb7390_MD5.jpg",
+        "note": "来自 Obsidian 笔记「视频号笔记」的外部参考。"
+      },
+      "sourceAssetIds": [],
+      "sourceClaimIds": []
+    },
+    {
+      "id": "model-hhax-intake-r1-fa5bb900",
+      "stageId": "01-intake",
+      "slot": "original-reference",
+      "path": "unity/FidgetingApp/ArtSource/ModelPipeline/model-hhax/evidence/01-intake/rev-001/3ebb3ff0c166ec3145e1b5d1a68294f7_MD5.jpg",
+      "sha256": "3cc29c0a5d2c79e33e68308bdfbb69ee73d1a20d9f2423a6297a6f55269c21f2",
+      "exists": true,
+      "sizeBytes": 134966,
+      "role": "external-reference",
+      "producer": {
+        "name": "model-provenance-explorer",
+        "version": "3",
+        "recipe": "Gate 01 Obsidian note import"
+      },
+      "provenance": {
+        "origin": "external",
+        "contentClass": "external-reference-photo",
+        "assertedBy": "user",
+        "originalFilename": "3ebb3ff0c166ec3145e1b5d1a68294f7_MD5.jpg",
+        "sourceLocator": "obsidian://open?vault=Obsidian%20Vault&file=%E7%AC%94%E8%AE%B0%E5%90%8C%E6%AD%A5%E5%8A%A9%E6%89%8B%2F2026-09-10%2F%E8%A7%86%E9%A2%91%E5%8F%B7%E7%AC%94%E8%AE%B0",
+        "sourceNote": "视频号笔记",
+        "sourceUrl": "https://www.xiaohongshu.com/discovery/item/6aa182ae000000000b0017b6?app_platform=ios&app_version=9.45&share_from_user_hidden=true&xsec_source=app_share&type=video&xsec_token=CBpDPiwV4lXDxB8i5-Ox-Sh-TbKduZ2qOXimCn4CDHqfM=&author_share=1&xhsshare=WeixinSession&shareRedId=N0c5ODVGNUI3OEdHOjgzPThFQko8NjxL&apptime=1788994940&share_id=a02b6bdf75ba4a118ef4ef4e9ff5e95d&track_code=7vfi8hxAD3c",
+        "vaultPath": "笔记同步助手/images/3ebb3ff0c166ec3145e1b5d1a68294f7_MD5.jpg",
+        "note": "来自 Obsidian 笔记「视频号笔记」的外部参考。"
+      },
+      "sourceAssetIds": [],
+      "sourceClaimIds": []
+    },
+    {
+      "id": "model-hhax-intake-r1-8838e089",
+      "stageId": "01-intake",
+      "slot": "original-reference",
+      "path": "unity/FidgetingApp/ArtSource/ModelPipeline/model-hhax/evidence/01-intake/rev-001/2ddd49897029383d23fe0c58a3627be2_MD5.jpg",
+      "sha256": "9a1bd352fdfdf019deb28852ba44b97f0d83c1ad82f886e0968a1351ab6c0e18",
+      "exists": true,
+      "sizeBytes": 163631,
+      "role": "external-reference",
+      "producer": {
+        "name": "model-provenance-explorer",
+        "version": "3",
+        "recipe": "Gate 01 Obsidian note import"
+      },
+      "provenance": {
+        "origin": "external",
+        "contentClass": "external-reference-photo",
+        "assertedBy": "user",
+        "originalFilename": "2ddd49897029383d23fe0c58a3627be2_MD5.jpg",
+        "sourceLocator": "obsidian://open?vault=Obsidian%20Vault&file=%E7%AC%94%E8%AE%B0%E5%90%8C%E6%AD%A5%E5%8A%A9%E6%89%8B%2F2026-09-10%2F%E8%A7%86%E9%A2%91%E5%8F%B7%E7%AC%94%E8%AE%B0",
+        "sourceNote": "视频号笔记",
+        "sourceUrl": "https://www.xiaohongshu.com/discovery/item/6aa182ae000000000b0017b6?app_platform=ios&app_version=9.45&share_from_user_hidden=true&xsec_source=app_share&type=video&xsec_token=CBpDPiwV4lXDxB8i5-Ox-Sh-TbKduZ2qOXimCn4CDHqfM=&author_share=1&xhsshare=WeixinSession&shareRedId=N0c5ODVGNUI3OEdHOjgzPThFQko8NjxL&apptime=1788994940&share_id=a02b6bdf75ba4a118ef4ef4e9ff5e95d&track_code=7vfi8hxAD3c",
+        "vaultPath": "笔记同步助手/images/2ddd49897029383d23fe0c58a3627be2_MD5.jpg",
+        "note": "来自 Obsidian 笔记「视频号笔记」的外部参考。"
+      },
+      "sourceAssetIds": [],
+      "sourceClaimIds": []
+    },
+    {
+      "id": "model-hhax-intake-r1-da708586",
+      "stageId": "01-intake",
+      "slot": "original-reference",
+      "path": "unity/FidgetingApp/ArtSource/ModelPipeline/model-hhax/evidence/01-intake/rev-001/0c28480ae2d5e95b5fe964b0a9129231_MD5.jpg",
+      "sha256": "b2f506e1d5a32184623c20a4850de1212736612a75b8663e3a22c7285c06cdc2",
+      "exists": true,
+      "sizeBytes": 27577,
+      "role": "external-reference",
+      "producer": {
+        "name": "model-provenance-explorer",
+        "version": "3",
+        "recipe": "Gate 01 Obsidian note import"
+      },
+      "provenance": {
+        "origin": "external",
+        "contentClass": "external-reference-photo",
+        "assertedBy": "user",
+        "originalFilename": "0c28480ae2d5e95b5fe964b0a9129231_MD5.jpg",
+        "sourceLocator": "obsidian://open?vault=Obsidian%20Vault&file=%E7%AC%94%E8%AE%B0%E5%90%8C%E6%AD%A5%E5%8A%A9%E6%89%8B%2F2026-09-10%2F%E8%A7%86%E9%A2%91%E5%8F%B7%E7%AC%94%E8%AE%B0",
+        "sourceNote": "视频号笔记",
+        "sourceUrl": "https://www.xiaohongshu.com/discovery/item/6aa182ae000000000b0017b6?app_platform=ios&app_version=9.45&share_from_user_hidden=true&xsec_source=app_share&type=video&xsec_token=CBpDPiwV4lXDxB8i5-Ox-Sh-TbKduZ2qOXimCn4CDHqfM=&author_share=1&xhsshare=WeixinSession&shareRedId=N0c5ODVGNUI3OEdHOjgzPThFQko8NjxL&apptime=1788994940&share_id=a02b6bdf75ba4a118ef4ef4e9ff5e95d&track_code=7vfi8hxAD3c",
+        "vaultPath": "笔记同步助手/images/0c28480ae2d5e95b5fe964b0a9129231_MD5.jpg",
+        "note": "来自 Obsidian 笔记「视频号笔记」的外部参考。"
+      },
+      "sourceAssetIds": [],
+      "sourceClaimIds": []
+    },
+    {
+      "id": "model-hhax-intake-r1-4b59c226",
+      "stageId": "01-intake",
+      "slot": "original-reference",
+      "path": "unity/FidgetingApp/ArtSource/ModelPipeline/model-hhax/evidence/01-intake/rev-001/550dff93e63dab50674e74353832a5bd_MD5.jpg",
+      "sha256": "2bb550328755be371287dbd0faecfff3a71d71ebc1d6414091f7a0eff7e592f2",
+      "exists": true,
+      "sizeBytes": 34630,
+      "role": "external-reference",
+      "producer": {
+        "name": "model-provenance-explorer",
+        "version": "3",
+        "recipe": "Gate 01 Obsidian note import"
+      },
+      "provenance": {
+        "origin": "external",
+        "contentClass": "external-reference-photo",
+        "assertedBy": "user",
+        "originalFilename": "550dff93e63dab50674e74353832a5bd_MD5.jpg",
+        "sourceLocator": "obsidian://open?vault=Obsidian%20Vault&file=%E7%AC%94%E8%AE%B0%E5%90%8C%E6%AD%A5%E5%8A%A9%E6%89%8B%2F2026-09-10%2F%E8%A7%86%E9%A2%91%E5%8F%B7%E7%AC%94%E8%AE%B0",
+        "sourceNote": "视频号笔记",
+        "sourceUrl": "https://www.xiaohongshu.com/discovery/item/6aa182ae000000000b0017b6?app_platform=ios&app_version=9.45&share_from_user_hidden=true&xsec_source=app_share&type=video&xsec_token=CBpDPiwV4lXDxB8i5-Ox-Sh-TbKduZ2qOXimCn4CDHqfM=&author_share=1&xhsshare=WeixinSession&shareRedId=N0c5ODVGNUI3OEdHOjgzPThFQko8NjxL&apptime=1788994940&share_id=a02b6bdf75ba4a118ef4ef4e9ff5e95d&track_code=7vfi8hxAD3c",
+        "vaultPath": "笔记同步助手/images/550dff93e63dab50674e74353832a5bd_MD5.jpg",
+        "note": "来自 Obsidian 笔记「视频号笔记」的外部参考。"
+      },
+      "sourceAssetIds": [],
+      "sourceClaimIds": []
+    },
+    {
+      "id": "model-hhax-intake-r1-2ed6d6a0",
+      "stageId": "01-intake",
+      "slot": "original-reference",
+      "path": "unity/FidgetingApp/ArtSource/ModelPipeline/model-hhax/evidence/01-intake/rev-001/11f45d5c543d363c007a35c22d820ed3_MD5.jpg",
+      "sha256": "4ef2843a045b174e157f9cc664335820876ac7e156c62e5d658078f239884436",
+      "exists": true,
+      "sizeBytes": 26708,
+      "role": "external-reference",
+      "producer": {
+        "name": "model-provenance-explorer",
+        "version": "3",
+        "recipe": "Gate 01 Obsidian note import"
+      },
+      "provenance": {
+        "origin": "external",
+        "contentClass": "external-reference-photo",
+        "assertedBy": "user",
+        "originalFilename": "11f45d5c543d363c007a35c22d820ed3_MD5.jpg",
+        "sourceLocator": "obsidian://open?vault=Obsidian%20Vault&file=%E7%AC%94%E8%AE%B0%E5%90%8C%E6%AD%A5%E5%8A%A9%E6%89%8B%2F2026-09-10%2F%E8%A7%86%E9%A2%91%E5%8F%B7%E7%AC%94%E8%AE%B0",
+        "sourceNote": "视频号笔记",
+        "sourceUrl": "https://www.xiaohongshu.com/discovery/item/6aa182ae000000000b0017b6?app_platform=ios&app_version=9.45&share_from_user_hidden=true&xsec_source=app_share&type=video&xsec_token=CBpDPiwV4lXDxB8i5-Ox-Sh-TbKduZ2qOXimCn4CDHqfM=&author_share=1&xhsshare=WeixinSession&shareRedId=N0c5ODVGNUI3OEdHOjgzPThFQko8NjxL&apptime=1788994940&share_id=a02b6bdf75ba4a118ef4ef4e9ff5e95d&track_code=7vfi8hxAD3c",
+        "vaultPath": "笔记同步助手/images/11f45d5c543d363c007a35c22d820ed3_MD5.jpg",
+        "note": "来自 Obsidian 笔记「视频号笔记」的外部参考。"
+      },
+      "sourceAssetIds": [],
+      "sourceClaimIds": []
+    },
+    {
+      "id": "model-hhax-intake-r1-f0aebe7c",
+      "stageId": "01-intake",
+      "slot": "original-reference",
+      "path": "unity/FidgetingApp/ArtSource/ModelPipeline/model-hhax/evidence/01-intake/rev-001/7304a975d512104b5a9fa081da06831f_MD5.jpg",
+      "sha256": "48cea7e87ae473246db2a3a92e2e29c58b37d14a454fd85c7bab75670f3f4e82",
+      "exists": true,
+      "sizeBytes": 25073,
+      "role": "external-reference",
+      "producer": {
+        "name": "model-provenance-explorer",
+        "version": "3",
+        "recipe": "Gate 01 Obsidian note import"
+      },
+      "provenance": {
+        "origin": "external",
+        "contentClass": "external-reference-photo",
+        "assertedBy": "user",
+        "originalFilename": "7304a975d512104b5a9fa081da06831f_MD5.jpg",
+        "sourceLocator": "obsidian://open?vault=Obsidian%20Vault&file=%E7%AC%94%E8%AE%B0%E5%90%8C%E6%AD%A5%E5%8A%A9%E6%89%8B%2F2026-09-10%2F%E8%A7%86%E9%A2%91%E5%8F%B7%E7%AC%94%E8%AE%B0",
+        "sourceNote": "视频号笔记",
+        "sourceUrl": "https://www.xiaohongshu.com/discovery/item/6aa182ae000000000b0017b6?app_platform=ios&app_version=9.45&share_from_user_hidden=true&xsec_source=app_share&type=video&xsec_token=CBpDPiwV4lXDxB8i5-Ox-Sh-TbKduZ2qOXimCn4CDHqfM=&author_share=1&xhsshare=WeixinSession&shareRedId=N0c5ODVGNUI3OEdHOjgzPThFQko8NjxL&apptime=1788994940&share_id=a02b6bdf75ba4a118ef4ef4e9ff5e95d&track_code=7vfi8hxAD3c",
+        "vaultPath": "笔记同步助手/images/7304a975d512104b5a9fa081da06831f_MD5.jpg",
+        "note": "来自 Obsidian 笔记「视频号笔记」的外部参考。"
+      },
+      "sourceAssetIds": [],
+      "sourceClaimIds": []
+    },
+    {
+      "id": "hhax-analysis-discovery-log-r001",
+      "stageId": "02-analysis",
+      "slot": "discovery-log",
+      "path": "unity/FidgetingApp/ArtSource/ModelPipeline/model-hhax/evidence/02-analysis/rev-001/discovery-log.json",
+      "sha256": "ac7396aa4e1a13524f7836c458109ea3cd932808e6f688eeeb81c8ac829ded52",
+      "exists": true,
+      "sizeBytes": 3679,
+      "role": "analysis",
+      "producer": {
+        "name": "fidgeting-model-pipeline",
+        "version": "1",
+        "recipe": "Seven user stills from the Obsidian note, annotated by the assistant; no external lookup, no dimension inference"
+      },
+      "provenance": {
+        "origin": "repository-generated",
+        "contentClass": "reference-discovery-log",
+        "assertedBy": "assistant",
+        "note": "笔记关键词、逐帧观察、机构结论与未知清单；未做联网检索。"
+      },
+      "sourceAssetIds": [
+        "model-hhax-intake-r1-a8301672",
+        "model-hhax-intake-r1-f2576ce0",
+        "model-hhax-intake-r1-fa5bb900",
+        "model-hhax-intake-r1-8838e089",
+        "model-hhax-intake-r1-da708586",
+        "model-hhax-intake-r1-4b59c226",
+        "model-hhax-intake-r1-2ed6d6a0",
+        "model-hhax-intake-r1-f0aebe7c"
+      ]
+    },
+    {
+      "id": "hhax-analysis-board-r001",
+      "stageId": "02-analysis",
+      "slot": "analysis-board",
+      "path": "unity/FidgetingApp/ArtSource/ModelPipeline/model-hhax/evidence/02-analysis/rev-001/analysis-board.png",
+      "sha256": "8d3b2a6f8c47a5fc4b3dea332bf1bdb9066b0b2f170a0a13d2ae4694088b8468",
+      "exists": true,
+      "sizeBytes": 1428647,
+      "role": "analysis",
+      "producer": {
+        "name": "fidgeting-model-pipeline",
+        "version": "1",
+        "recipe": "Seven user stills from the Obsidian note, annotated by the assistant; no external lookup, no dimension inference"
+      },
+      "provenance": {
+        "origin": "repository-generated",
+        "contentClass": "annotated-reference-analysis-board",
+        "assertedBy": "assistant",
+        "note": "7 张用户静帧的标注分析板：推开/闭合/夜光对比、结论与未知。"
+      },
+      "sourceAssetIds": [
+        "model-hhax-intake-r1-a8301672",
+        "model-hhax-intake-r1-f2576ce0",
+        "model-hhax-intake-r1-fa5bb900",
+        "model-hhax-intake-r1-8838e089",
+        "model-hhax-intake-r1-da708586",
+        "model-hhax-intake-r1-4b59c226",
+        "model-hhax-intake-r1-2ed6d6a0",
+        "model-hhax-intake-r1-f0aebe7c"
+      ]
+    },
+    {
+      "id": "hhax-intake-nxedc-video-r002",
+      "stageId": "01-intake",
+      "slot": "original-reference",
+      "path": "unity/FidgetingApp/ArtSource/ModelPipeline/model-hhax/evidence/01-intake/rev-002/nxedc-groove-ultra-source.mp4",
+      "sha256": "ad76fcbc0daded98e872920350f47b693109387a00237932c2686670a5a5456f",
+      "exists": true,
+      "sizeBytes": 28878263,
+      "role": "external-reference",
+      "producer": {
+        "name": "NXEDC / same-product public archive",
+        "version": "2026-09-11",
+        "recipe": "Exact-product official reference archive"
+      },
+      "provenance": {
+        "origin": "external",
+        "contentClass": "same-model-public-teardown-video",
+        "assertedBy": "repository",
+        "note": "同款完整演示与公开拆解视频：直推、旋转、调节螺钉、弹簧/珠与可换旋转部分。"
+      },
+      "sourceAssetIds": [],
+      "sourceUrl": "https://nxedc.com/cdn/shop/videos/c/vp/5e07740d4ff24673810186d4e4114541/5e07740d4ff24673810186d4e4114541.HD-1080p-2.5Mbps-88589287.mp4?v=0"
+    },
+    {
+      "id": "hhax-intake-nxedc-teardown-sheet-r002",
+      "stageId": "01-intake",
+      "slot": "original-reference",
+      "path": "unity/FidgetingApp/ArtSource/ModelPipeline/model-hhax/evidence/01-intake/rev-002/nxedc-teardown-contact-sheet.jpg",
+      "sha256": "2258fbcf535977a3d6efa2cc243dba019cbd5acf2897451f24a3b5c739a36344",
+      "exists": true,
+      "sizeBytes": 332879,
+      "role": "external-reference",
+      "producer": {
+        "name": "NXEDC / same-product public archive",
+        "version": "2026-09-11",
+        "recipe": "Exact-product official reference archive"
+      },
+      "provenance": {
+        "origin": "external",
+        "contentClass": "same-model-public-teardown-image",
+        "assertedBy": "repository",
+        "note": "同款公开拆解视频逐帧联系表；保留动作与内部结构时间顺序。"
+      },
+      "sourceAssetIds": [],
+      "sourceUrl": "https://nxedc.com/products/groove-ultra"
+    },
+    {
+      "id": "hhax-intake-nxedc-open-front-r002",
+      "stageId": "01-intake",
+      "slot": "original-reference",
+      "path": "unity/FidgetingApp/ArtSource/ModelPipeline/model-hhax/evidence/01-intake/rev-002/nxedc-open-front.jpg",
+      "sha256": "9b5ebf29ddc5ea8b89b46a1c9065731865d23b62f3b049aaaef19fd236b61219",
+      "exists": true,
+      "sizeBytes": 239399,
+      "role": "external-reference",
+      "producer": {
+        "name": "NXEDC / same-product public archive",
+        "version": "2026-09-11",
+        "recipe": "Exact-product official reference archive"
+      },
+      "provenance": {
+        "origin": "external",
+        "contentClass": "same-model-public-teardown-image",
+        "assertedBy": "repository",
+        "note": "同款直推开启外观；用于校验胶囊主壳与行程比例。"
+      },
+      "sourceAssetIds": [],
+      "sourceUrl": "https://nxedc.com/products/groove-ultra"
+    },
+    {
+      "id": "hhax-intake-nxedc-open-track-r002",
+      "stageId": "01-intake",
+      "slot": "original-reference",
+      "path": "unity/FidgetingApp/ArtSource/ModelPipeline/model-hhax/evidence/01-intake/rev-002/nxedc-open-track.jpg",
+      "sha256": "bb39c4df9e6d0b6a87613874bfa16198400c40b418bec5e49b8215101ea5830f",
+      "exists": true,
+      "sizeBytes": 198060,
+      "role": "external-reference",
+      "producer": {
+        "name": "NXEDC / same-product public archive",
+        "version": "2026-09-11",
+        "recipe": "Exact-product official reference archive"
+      },
+      "provenance": {
+        "origin": "external",
+        "contentClass": "same-model-public-teardown-image",
+        "assertedBy": "repository",
+        "note": "同款开启轨道；用于校验直线轨与圆形旋转载体的可见拓扑。"
+      },
+      "sourceAssetIds": [],
+      "sourceUrl": "https://nxedc.com/products/groove-ultra"
+    },
+    {
+      "id": "hhax-intake-nxedc-rear-patch-r002",
+      "stageId": "01-intake",
+      "slot": "original-reference",
+      "path": "unity/FidgetingApp/ArtSource/ModelPipeline/model-hhax/evidence/01-intake/rev-002/nxedc-rear-patch.jpg",
+      "sha256": "388cd0b80b06fc6ef5c9726eae3713acb9537c108ff1edce0667ba3c252108d0",
+      "exists": true,
+      "sizeBytes": 281153,
+      "role": "external-reference",
+      "producer": {
+        "name": "NXEDC / same-product public archive",
+        "version": "2026-09-11",
+        "recipe": "Exact-product official reference archive"
+      },
+      "provenance": {
+        "origin": "external",
+        "contentClass": "same-model-public-teardown-image",
+        "assertedBy": "repository",
+        "note": "同款后部可换圆贴与中心区域；磁性只作为可换贴片固定。"
+      },
+      "sourceAssetIds": [],
+      "sourceUrl": "https://nxedc.com/products/groove-ultra"
+    },
+    {
+      "id": "hhax-intake-nxedc-open-overview-r002",
+      "stageId": "01-intake",
+      "slot": "original-reference",
+      "path": "unity/FidgetingApp/ArtSource/ModelPipeline/model-hhax/evidence/01-intake/rev-002/nxedc-open-overview.jpg",
+      "sha256": "4a105bb4cc9b9a98446cedd62feb3fd83f652ae6eced5b10e46786db89247808",
+      "exists": true,
+      "sizeBytes": 476845,
+      "role": "external-reference",
+      "producer": {
+        "name": "NXEDC / same-product public archive",
+        "version": "2026-09-11",
+        "recipe": "Exact-product official reference archive"
+      },
+      "provenance": {
+        "origin": "external",
+        "contentClass": "same-model-public-teardown-image",
+        "assertedBy": "repository",
+        "note": "同款直推与旋转结构总览。"
+      },
+      "sourceAssetIds": [],
+      "sourceUrl": "https://nxedc.com/products/groove-ultra"
+    },
+    {
+      "id": "hhax-intake-nxedc-source-notes-r002",
+      "stageId": "01-intake",
+      "slot": "original-reference",
+      "path": "unity/FidgetingApp/ArtSource/ModelPipeline/model-hhax/evidence/01-intake/rev-002/source-notes.md",
+      "sha256": "c7cd323ef2b5dea35f98819ffbca0a24541e9271953e713e29bb6fcb6a3fc454",
+      "exists": true,
+      "sizeBytes": 2615,
+      "role": "external-reference",
+      "producer": {
+        "name": "NXEDC / same-product public archive",
+        "version": "2026-09-11",
+        "recipe": "Exact-product official reference archive"
+      },
+      "provenance": {
+        "origin": "external",
+        "contentClass": "same-model-official-spec",
+        "assertedBy": "repository",
+        "note": "同款官网与经销商交叉核对记录，区分公开标称、拆解观察与未知。"
+      },
+      "sourceAssetIds": [],
+      "sourceUrl": "https://nxedc.com/products/groove-ultra"
+    },
+    {
+      "id": "hhax-intake-nxedc-source-metadata-r002",
+      "stageId": "01-intake",
+      "slot": "original-reference",
+      "path": "unity/FidgetingApp/ArtSource/ModelPipeline/model-hhax/evidence/01-intake/rev-002/source-metadata.json",
+      "sha256": "b51ccd78dad87b40c4e568b02349d946f4aa7a81854aef7bd472e309f8a1c38f",
+      "exists": true,
+      "sizeBytes": 1562,
+      "role": "external-reference",
+      "producer": {
+        "name": "NXEDC / same-product public archive",
+        "version": "2026-09-11",
+        "recipe": "Exact-product official reference archive"
+      },
+      "provenance": {
+        "origin": "external",
+        "contentClass": "same-model-official-product-spec",
+        "assertedBy": "repository",
+        "note": "同款公开标称 50.5 × 30.9 × 13.6 mm、88 g 与来源 URL 元数据。"
+      },
+      "sourceAssetIds": [],
+      "sourceUrl": "https://nxedc.com/products/groove-ultra"
+    },
+    {
+      "id": "hhax-intake-mechanical-drive-classification-r002",
+      "stageId": "01-intake",
+      "slot": "original-reference",
+      "path": "unity/FidgetingApp/ArtSource/ModelPipeline/model-hhax/evidence/01-intake/rev-002/mechanism-classification.json",
+      "sha256": "85289693b2320fa7c23be0e2bc1547a6c2e20c7935a8ac1bb0c3114c02835099",
+      "exists": true,
+      "sizeBytes": 504,
+      "role": "external-reference",
+      "producer": {
+        "name": "NXEDC / same-product public archive",
+        "version": "2026-09-11",
+        "recipe": "Exact-product official reference archive"
+      },
+      "provenance": {
+        "origin": "external",
+        "contentClass": "same-model-internal-mechanism",
+        "assertedBy": "repository",
+        "note": "Exact-product internal mechanism classification: mechanical straight push, rotation linkage, spring and bead modules; magnetic retention is limited to replaceable patches."
+      },
+      "sourceAssetIds": [],
+      "sourceUrl": "https://nxedc.com/products/groove-ultra"
+    },
+    {
+      "id": "hhax-gate01-source-inspector-recording-r003",
+      "stageId": "01-intake",
+      "slot": "source-inspector-recording",
+      "path": "unity/FidgetingApp/ArtSource/ModelPipeline/model-hhax/evidence/01-intake/rev-003/source-inspector-recording.mp4",
+      "sha256": "0f7971aa73765b304af051164e089a13bb0501690e9baf8052e09e3b958f3478",
+      "exists": true,
+      "sizeBytes": 1248804,
+      "role": "validation",
+      "producer": {
+        "name": "fidgeting-model-pipeline",
+        "version": "3",
+        "recipe": "Gate 01 complete source inspector review"
+      },
+      "provenance": {
+        "origin": "repository-generated",
+        "contentClass": "complete-source-inspector-recording",
+        "assertedBy": "assistant",
+        "approvedGate02EvidenceSha256": "7e134adf5ec1fba1226c00fb606830f3a23433ecd87b332b3356c44972dd2d10",
+        "note": "完整浏览同款拆解联系表、演示视频、开启结构与用户定制外观来源。"
+      },
+      "sourceAssetIds": [
+        "hhax-intake-nxedc-source-metadata-r002",
+        "hhax-intake-nxedc-video-r002",
+        "model-hhax-intake-r1-f2576ce0"
+      ],
+      "sourceClaimIds": [],
+      "reviewState": "approved"
+    },
+    {
+      "id": "hhax-gate01-source-review-snapshot-r003",
+      "stageId": "01-intake",
+      "slot": "parameter-snapshot",
+      "path": "unity/FidgetingApp/ArtSource/ModelPipeline/model-hhax/evidence/01-intake/rev-003/source-review-parameters.json",
+      "sha256": "9623d8bc8e3dcd6185307b1ef6212503680b184c46b0890c5460fb193d6218a8",
+      "exists": true,
+      "sizeBytes": 665,
+      "role": "validation",
+      "producer": {
+        "name": "fidgeting-model-pipeline",
+        "version": "3",
+        "recipe": "Gate 01 complete source inspector review"
+      },
+      "provenance": {
+        "origin": "repository-generated",
+        "contentClass": "source-review-parameter-snapshot",
+        "assertedBy": "assistant",
+        "approvedGate02EvidenceSha256": "7e134adf5ec1fba1226c00fb606830f3a23433ecd87b332b3356c44972dd2d10",
+        "note": "来源分类、数量、公开标称资格和链接核对快照。"
+      },
+      "sourceAssetIds": [
+        "hhax-intake-nxedc-source-metadata-r002",
+        "hhax-intake-nxedc-video-r002",
+        "model-hhax-intake-r1-f2576ce0"
+      ],
+      "sourceClaimIds": [],
+      "reviewState": "approved"
+    },
+    {
+      "id": "hhax-gate01-published-source-qualification-r003",
+      "stageId": "01-intake",
+      "slot": "source-qualification",
+      "path": "unity/FidgetingApp/ArtSource/ModelPipeline/model-hhax/evidence/01-intake/rev-003/published-source-qualification.json",
+      "sha256": "f2edf2d0f0bbb81d638c442c355278cd09e38596cbdcb1a91a2efdd4bfe3a6b9",
+      "exists": true,
+      "sizeBytes": 576,
+      "role": "validation",
+      "producer": {
+        "name": "fidgeting-model-pipeline",
+        "version": "3",
+        "recipe": "Gate 01 complete source inspector review"
+      },
+      "provenance": {
+        "origin": "repository-generated",
+        "contentClass": "published-source-qualification",
+        "assertedBy": "assistant",
+        "approvedGate02EvidenceSha256": "7e134adf5ec1fba1226c00fb606830f3a23433ecd87b332b3356c44972dd2d10",
+        "note": "把零售页数值限定为同款公开标称，禁止解释成独立实测或制造公差。"
+      },
+      "sourceAssetIds": [
+        "hhax-intake-nxedc-source-metadata-r002",
+        "hhax-intake-nxedc-source-notes-r002"
+      ],
+      "sourceClaimIds": [],
+      "reviewState": "approved"
+    },
+    {
+      "id": "hhax-gate01-source-inspector-frame-r003",
+      "stageId": "01-intake",
+      "slot": "source-inspector-frame",
+      "path": "unity/FidgetingApp/ArtSource/ModelPipeline/model-hhax/evidence/01-intake/rev-003/source-inspector-frame.png",
+      "sha256": "eed4a8d3d56a6716014c3e74ccea74538200e56d8d150466200836e1753ec1ed",
+      "exists": true,
+      "sizeBytes": 678291,
+      "role": "validation",
+      "producer": {
+        "name": "fidgeting-model-pipeline",
+        "version": "3",
+        "recipe": "Gate 01 complete source inspector review"
+      },
+      "provenance": {
+        "origin": "repository-generated",
+        "contentClass": "source-inspector-still",
+        "assertedBy": "assistant",
+        "approvedGate02EvidenceSha256": "7e134adf5ec1fba1226c00fb606830f3a23433ecd87b332b3356c44972dd2d10",
+        "note": "来源检查工作台静帧。"
+      },
+      "sourceAssetIds": [
+        "hhax-intake-nxedc-teardown-sheet-r002"
+      ],
+      "sourceClaimIds": [],
+      "reviewState": "approved"
+    },
+    {
+      "id": "hhax-analysis-discovery-log-r002",
+      "stageId": "02-analysis",
+      "slot": "discovery-log",
+      "path": "unity/FidgetingApp/ArtSource/ModelPipeline/model-hhax/evidence/02-analysis/rev-002/discovery-log.json",
+      "sha256": "6efb36a42eb73d3c279e10c1d9c0cc835d9e0ec67e5b356cbed5a346cba463dd",
+      "exists": true,
+      "sizeBytes": 2441,
+      "role": "analysis",
+      "producer": {
+        "name": "fidgeting-model-pipeline",
+        "version": "1",
+        "recipe": "Exact-product public mechanism research cross-checked against the user's custom day/night appearance references"
+      },
+      "provenance": {
+        "origin": "repository-generated",
+        "contentClass": "source-linked-analysis-log",
+        "assertedBy": "assistant",
+        "note": "同款身份、公开标称、机械动作、定制材质与未知边界。"
+      },
+      "sourceAssetIds": [
+        "model-hhax-intake-r1-a8301672",
+        "model-hhax-intake-r1-f2576ce0",
+        "model-hhax-intake-r1-fa5bb900",
+        "model-hhax-intake-r1-8838e089",
+        "model-hhax-intake-r1-da708586",
+        "model-hhax-intake-r1-4b59c226",
+        "model-hhax-intake-r1-2ed6d6a0",
+        "model-hhax-intake-r1-f0aebe7c",
+        "hhax-intake-nxedc-video-r002",
+        "hhax-intake-nxedc-teardown-sheet-r002",
+        "hhax-intake-nxedc-open-front-r002",
+        "hhax-intake-nxedc-open-track-r002",
+        "hhax-intake-nxedc-rear-patch-r002",
+        "hhax-intake-nxedc-open-overview-r002",
+        "hhax-intake-nxedc-source-notes-r002",
+        "hhax-intake-nxedc-source-metadata-r002",
+        "hhax-intake-mechanical-drive-classification-r002"
+      ]
+    },
+    {
+      "id": "hhax-analysis-board-r002",
+      "stageId": "02-analysis",
+      "slot": "analysis-board",
+      "path": "unity/FidgetingApp/ArtSource/ModelPipeline/model-hhax/evidence/02-analysis/rev-002/analysis-board.svg",
+      "sha256": "b4e574bcc5be88ca68f301a4ff40fe2be6e735511d3f49745e5fd69e7c5cbc13",
+      "exists": true,
+      "sizeBytes": 4312,
+      "role": "analysis",
+      "producer": {
+        "name": "fidgeting-model-pipeline",
+        "version": "1",
+        "recipe": "Exact-product public mechanism research cross-checked against the user's custom day/night appearance references"
+      },
+      "provenance": {
+        "origin": "repository-generated",
+        "contentClass": "annotated-structure-and-material-board",
+        "assertedBy": "assistant",
+        "note": "结构与定制日夜材质判断板。"
+      },
+      "sourceAssetIds": [
+        "model-hhax-intake-r1-a8301672",
+        "model-hhax-intake-r1-f2576ce0",
+        "model-hhax-intake-r1-fa5bb900",
+        "model-hhax-intake-r1-8838e089",
+        "model-hhax-intake-r1-da708586",
+        "model-hhax-intake-r1-4b59c226",
+        "model-hhax-intake-r1-2ed6d6a0",
+        "model-hhax-intake-r1-f0aebe7c",
+        "hhax-intake-nxedc-video-r002",
+        "hhax-intake-nxedc-teardown-sheet-r002",
+        "hhax-intake-nxedc-open-front-r002",
+        "hhax-intake-nxedc-open-track-r002",
+        "hhax-intake-nxedc-rear-patch-r002",
+        "hhax-intake-nxedc-open-overview-r002",
+        "hhax-intake-nxedc-source-notes-r002",
+        "hhax-intake-nxedc-source-metadata-r002",
+        "hhax-intake-mechanical-drive-classification-r002"
+      ]
+    },
+    {
+      "id": "hhax-analysis-parameter-snapshot-r002",
+      "stageId": "02-analysis",
+      "slot": "parameter-snapshot",
+      "path": "unity/FidgetingApp/ArtSource/ModelPipeline/model-hhax/evidence/02-analysis/rev-002/parameter-snapshot.json",
+      "sha256": "a98a25acac558cd09a4c40861d71ad0d01bf88e686ab1248f06cb30a631ab925",
+      "exists": true,
+      "sizeBytes": 491,
+      "role": "analysis",
+      "producer": {
+        "name": "fidgeting-model-pipeline",
+        "version": "1",
+        "recipe": "Exact-product public mechanism research cross-checked against the user's custom day/night appearance references"
+      },
+      "provenance": {
+        "origin": "repository-generated",
+        "contentClass": "analysis-parameter-snapshot",
+        "assertedBy": "assistant",
+        "note": "第 2 关动作、公开外廓和不确定性边界快照。"
+      },
+      "sourceAssetIds": [
+        "model-hhax-intake-r1-a8301672",
+        "model-hhax-intake-r1-f2576ce0",
+        "model-hhax-intake-r1-fa5bb900",
+        "model-hhax-intake-r1-8838e089",
+        "model-hhax-intake-r1-da708586",
+        "model-hhax-intake-r1-4b59c226",
+        "model-hhax-intake-r1-2ed6d6a0",
+        "model-hhax-intake-r1-f0aebe7c",
+        "hhax-intake-nxedc-video-r002",
+        "hhax-intake-nxedc-teardown-sheet-r002",
+        "hhax-intake-nxedc-open-front-r002",
+        "hhax-intake-nxedc-open-track-r002",
+        "hhax-intake-nxedc-rear-patch-r002",
+        "hhax-intake-nxedc-open-overview-r002",
+        "hhax-intake-nxedc-source-notes-r002",
+        "hhax-intake-nxedc-source-metadata-r002",
+        "hhax-intake-mechanical-drive-classification-r002"
+      ]
+    },
+    {
+      "id": "hhax-analysis-interactive-cad-r002",
+      "stageId": "02-analysis",
+      "slot": "interactive-cad",
+      "path": "unity/FidgetingApp/ArtSource/ModelPipeline/model-hhax/evidence/02-analysis/rev-002/interactive-cad.glb",
+      "sha256": "728936c0fe74df6a6fd34f143239044cb2fc9b5694469bb17153f2700f0bba38",
+      "exists": true,
+      "sizeBytes": 730676,
+      "role": "analysis",
+      "producer": {
+        "name": "fidgeting-model-pipeline",
+        "version": "1",
+        "recipe": "Exact-product public mechanism research cross-checked against the user's custom day/night appearance references"
+      },
+      "provenance": {
+        "origin": "repository-generated",
+        "contentClass": "interactive-structural-cad",
+        "assertedBy": "assistant",
+        "note": "可旋转检查的结构 CAD：两个胶囊主壳、直线轨、圆轨、调节区与半透明未知联动包络。"
+      },
+      "sourceAssetIds": [
+        "model-hhax-intake-r1-a8301672",
+        "model-hhax-intake-r1-f2576ce0",
+        "model-hhax-intake-r1-fa5bb900",
+        "model-hhax-intake-r1-8838e089",
+        "model-hhax-intake-r1-da708586",
+        "model-hhax-intake-r1-4b59c226",
+        "model-hhax-intake-r1-2ed6d6a0",
+        "model-hhax-intake-r1-f0aebe7c",
+        "hhax-intake-nxedc-video-r002",
+        "hhax-intake-nxedc-teardown-sheet-r002",
+        "hhax-intake-nxedc-open-front-r002",
+        "hhax-intake-nxedc-open-track-r002",
+        "hhax-intake-nxedc-rear-patch-r002",
+        "hhax-intake-nxedc-open-overview-r002",
+        "hhax-intake-nxedc-source-notes-r002",
+        "hhax-intake-nxedc-source-metadata-r002",
+        "hhax-intake-mechanical-drive-classification-r002"
+      ]
+    },
+    {
+      "id": "hhax-gate02-interactive-cad-review-r003",
+      "stageId": "02-analysis",
+      "slot": "interactive-cad-review",
+      "path": "unity/FidgetingApp/ArtSource/ModelPipeline/model-hhax/evidence/02-analysis/rev-003/interactive-cad-review.glb",
+      "sha256": "728936c0fe74df6a6fd34f143239044cb2fc9b5694469bb17153f2700f0bba38",
+      "exists": true,
+      "sizeBytes": 730676,
+      "role": "validation",
+      "producer": {
+        "name": "fidgeting-model-pipeline",
+        "version": "3",
+        "recipe": "Gate 02 interactive structural CAD review"
+      },
+      "provenance": {
+        "origin": "repository-generated",
+        "contentClass": "interactive-structural-cad-review",
+        "assertedBy": "assistant",
+        "approvedGate02EvidenceSha256": "a0dc75416426464b89f97892abfe374e112d59482ba67fc56451ccb2ecae06c4",
+        "note": "可旋转结构 CAD，自审两个主壳、直轨、圆轨、中央调节区和未知包络。"
+      },
+      "sourceAssetIds": [
+        "hhax-analysis-discovery-log-r002",
+        "hhax-analysis-interactive-cad-r002"
+      ],
+      "sourceClaimIds": [],
+      "reviewState": "approved"
+    },
+    {
+      "id": "hhax-gate02-cad-review-snapshot-r003",
+      "stageId": "02-analysis",
+      "slot": "parameter-snapshot",
+      "path": "unity/FidgetingApp/ArtSource/ModelPipeline/model-hhax/evidence/02-analysis/rev-003/cad-review-parameters.json",
+      "sha256": "b43bf76f1b718fcab6b5c3070e790c5d9bfa9579356785d0c31d385e715b825a",
+      "exists": true,
+      "sizeBytes": 748,
+      "role": "validation",
+      "producer": {
+        "name": "fidgeting-model-pipeline",
+        "version": "3",
+        "recipe": "Gate 02 interactive structural CAD review"
+      },
+      "provenance": {
+        "origin": "repository-generated",
+        "contentClass": "cad-review-parameter-snapshot",
+        "assertedBy": "assistant",
+        "approvedGate02EvidenceSha256": "a0dc75416426464b89f97892abfe374e112d59482ba67fc56451ccb2ecae06c4",
+        "note": "交互 CAD 的尺寸、动作与未知边界快照。"
+      },
+      "sourceAssetIds": [
+        "hhax-analysis-discovery-log-r002",
+        "hhax-analysis-parameter-snapshot-r002"
+      ],
+      "sourceClaimIds": [],
+      "reviewState": "approved"
+    },
+    {
+      "id": "model-hhax-measurement-modeling-contract-r001",
+      "stageId": "03-contract",
+      "slot": "modeling-contract",
+      "path": "unity/FidgetingApp/ArtSource/ModelPipeline/model-hhax/evidence/03-contract/rev-001/measurement-modeling-contract.json",
+      "sha256": "e7aadf84cd589b0f69cec93eb866c6169af932560ed9e4e95369ece45c253911",
+      "exists": true,
+      "sizeBytes": 39236,
+      "role": "contract",
+      "producer": {
+        "name": "fidgeting-model-pipeline",
+        "version": "2",
+        "recipe": "Gate 03 guided nine-core-measurement contract"
+      },
+      "provenance": {
+        "origin": "repository-generated",
+        "contentClass": "modeling-contract",
+        "assertedBy": "assistant",
+        "approvedGate02EvidenceSha256": "dce9a12aca2fe2a1639f0144fab515660cea80acc834fdea1be13732dc63854b",
+        "measurementProvenanceVersion": 1,
+        "officialSpecificationFieldIds": [
+          "closedOverallLength",
+          "overallWidth",
+          "totalClosedThickness"
+        ],
+        "calibratedDigitalTargetFieldIds": [
+          "topPlateThickness",
+          "bottomPlateThickness",
+          "maximumSlideTravel",
+          "fixedAxisOffsetFromNearestEnd",
+          "rotatingCarrierDiameter",
+          "closedSeamGap"
+        ],
+        "note": "Values are either user supplied, hash-linked same-model official specifications, or reversible same-model public-teardown calibrated digital reconstruction targets. Calibrated targets are not measured or manufacturing dimensions."
+      },
+      "sourceAssetIds": [
+        "hhax-analysis-discovery-log-r002",
+        "hhax-analysis-board-r002",
+        "hhax-analysis-parameter-snapshot-r002",
+        "hhax-analysis-interactive-cad-r002",
+        "hhax-gate02-interactive-cad-review-r003",
+        "hhax-gate02-cad-review-snapshot-r003",
+        "hhax-intake-nxedc-source-metadata-r002",
+        "hhax-intake-nxedc-source-notes-r002",
+        "hhax-intake-nxedc-video-r002",
+        "hhax-intake-nxedc-teardown-sheet-r002",
+        "model-hhax-intake-r1-f2576ce0",
+        "hhax-intake-nxedc-open-overview-r002",
+        "hhax-intake-nxedc-rear-patch-r002",
+        "hhax-intake-nxedc-open-track-r002"
+      ],
+      "sourceClaimIds": [
+        "hhax-claim-product-envelope-r002",
+        "hhax-claim-mechanical-linkage-r002",
+        "hhax-claim-shell-topology-r002",
+        "hhax-claim-service-topology-r002",
+        "hhax-claim-custom-day-material-r002",
+        "hhax-claim-three-art-surfaces-r002",
+        "hhax-claim-dark-emission-r002",
+        "hhax-claim-hidden-boundary-r002"
+      ]
+    },
+    {
+      "id": "hhax-gate03-form-review-recording-r002",
+      "stageId": "03-contract",
+      "slot": "workbench-form-review-recording",
+      "path": "unity/FidgetingApp/ArtSource/ModelPipeline/model-hhax/evidence/03-contract/rev-002/workbench-form-review-recording.mp4",
+      "sha256": "2ea88c67764a7594a38d70852151eba02907cfadf93dbc7251c5b921bb4b384c",
+      "exists": true,
+      "sizeBytes": 2280646,
+      "role": "validation",
+      "producer": {
+        "name": "fidgeting-model-pipeline",
+        "version": "3",
+        "recipe": "Gate 03 nine-field workbench form review"
+      },
+      "provenance": {
+        "origin": "repository-generated",
+        "contentClass": "complete-contract-workbench-recording",
+        "assertedBy": "assistant",
+        "approvedGate02EvidenceSha256": "dce9a12aca2fe2a1639f0144fab515660cea80acc834fdea1be13732dc63854b",
+        "note": "完整滚动复核九项数值、来源、不确定度和比例校准。"
+      },
+      "sourceAssetIds": [
+        "model-hhax-measurement-modeling-contract-r001"
+      ],
+      "sourceClaimIds": [
+        "hhax-claim-product-envelope-r002",
+        "hhax-claim-hidden-boundary-r002"
+      ],
+      "reviewState": "approved"
+    },
+    {
+      "id": "hhax-gate03-contract-review-snapshot-r002",
+      "stageId": "03-contract",
+      "slot": "parameter-snapshot",
+      "path": "unity/FidgetingApp/ArtSource/ModelPipeline/model-hhax/evidence/03-contract/rev-002/contract-review-parameters.json",
+      "sha256": "3036184b78898e24e62a210081feac16de5254fe9dd38e0094fa6287d1f39da6",
+      "exists": true,
+      "sizeBytes": 870,
+      "role": "validation",
+      "producer": {
+        "name": "fidgeting-model-pipeline",
+        "version": "3",
+        "recipe": "Gate 03 nine-field workbench form review"
+      },
+      "provenance": {
+        "origin": "repository-generated",
+        "contentClass": "contract-review-parameter-snapshot",
+        "assertedBy": "assistant",
+        "approvedGate02EvidenceSha256": "dce9a12aca2fe2a1639f0144fab515660cea80acc834fdea1be13732dc63854b",
+        "note": "九项完整性、分类、堆叠、包含关系与保留警告快照。"
+      },
+      "sourceAssetIds": [
+        "model-hhax-measurement-modeling-contract-r001"
+      ],
+      "sourceClaimIds": [
+        "hhax-claim-product-envelope-r002",
+        "hhax-claim-hidden-boundary-r002"
+      ],
+      "reviewState": "approved"
+    },
+    {
+      "id": "hhax-gate03-form-review-frame-r002",
+      "stageId": "03-contract",
+      "slot": "workbench-form-review-frame",
+      "path": "unity/FidgetingApp/ArtSource/ModelPipeline/model-hhax/evidence/03-contract/rev-002/workbench-form-review-frame.png",
+      "sha256": "870c0a77f437085d4fb6759034abc12fa6ea02c523d042154999721a83912420",
+      "exists": true,
+      "sizeBytes": 203404,
+      "role": "validation",
+      "producer": {
+        "name": "fidgeting-model-pipeline",
+        "version": "3",
+        "recipe": "Gate 03 nine-field workbench form review"
+      },
+      "provenance": {
+        "origin": "repository-generated",
+        "contentClass": "contract-review-still",
+        "assertedBy": "assistant",
+        "approvedGate02EvidenceSha256": "dce9a12aca2fe2a1639f0144fab515660cea80acc834fdea1be13732dc63854b",
+        "note": "拆解比例字段与校准证据静帧。"
+      },
+      "sourceAssetIds": [
+        "model-hhax-measurement-modeling-contract-r001"
+      ],
+      "sourceClaimIds": [
+        "hhax-claim-hidden-boundary-r002"
+      ],
+      "reviewState": "approved"
+    },
+    {
+      "id": "model-hhax-part-tree-r001",
+      "stageId": "04-architecture",
+      "slot": "part-tree",
+      "path": "unity/FidgetingApp/ArtSource/ModelPipeline/model-hhax/evidence/04-architecture/rev-001/part-tree.svg",
+      "sha256": "8dfbbbd1230abd9cf30e60e9c9e1010021adc9747a300eaa5a1c65df5f79afaa",
+      "exists": true,
+      "sizeBytes": 4498,
+      "role": "process",
+      "producer": {
+        "name": "fidgeting-model-pipeline",
+        "version": "1",
+        "recipe": "Gate 04 source-linked two-shell, mechanical-track and three-art-surface architecture"
+      },
+      "provenance": {
+        "origin": "repository-generated",
+        "contentClass": "annotated-part-hierarchy",
+        "assertedBy": "assistant",
+        "note": "依据已批准建模合同和实拍可见结构生成；隐藏硬件数量保持未知。"
+      },
+      "sourceAssetIds": [
+        "model-hhax-measurement-modeling-contract-r001",
+        "hhax-gate03-form-review-recording-r002",
+        "hhax-gate03-contract-review-snapshot-r002",
+        "hhax-gate03-form-review-frame-r002"
+      ],
+      "sourceClaimIds": [
+        "hhax-claim-product-envelope-r002",
+        "hhax-claim-mechanical-linkage-r002",
+        "hhax-claim-shell-topology-r002",
+        "hhax-claim-service-topology-r002",
+        "hhax-claim-custom-day-material-r002",
+        "hhax-claim-three-art-surfaces-r002",
+        "hhax-claim-dark-emission-r002",
+        "hhax-claim-hidden-boundary-r002"
+      ]
+    },
+    {
+      "id": "model-hhax-exploded-plan-r001",
+      "stageId": "04-architecture",
+      "slot": "exploded-plan",
+      "path": "unity/FidgetingApp/ArtSource/ModelPipeline/model-hhax/evidence/04-architecture/rev-001/exploded-plan.svg",
+      "sha256": "6603fc0fd40263b639ccafedad3672057150c60d6e5973fc9c2a084160b3b501",
+      "exists": true,
+      "sizeBytes": 4459,
+      "role": "process",
+      "producer": {
+        "name": "fidgeting-model-pipeline",
+        "version": "1",
+        "recipe": "Gate 04 source-linked two-shell, mechanical-track and three-art-surface architecture"
+      },
+      "provenance": {
+        "origin": "repository-generated",
+        "contentClass": "annotated-exploded-assembly-plan",
+        "assertedBy": "assistant",
+        "note": "依据已批准建模合同和实拍可见结构生成；隐藏硬件数量保持未知。"
+      },
+      "sourceAssetIds": [
+        "model-hhax-measurement-modeling-contract-r001",
+        "hhax-gate03-form-review-recording-r002",
+        "hhax-gate03-contract-review-snapshot-r002",
+        "hhax-gate03-form-review-frame-r002"
+      ],
+      "sourceClaimIds": [
+        "hhax-claim-product-envelope-r002",
+        "hhax-claim-mechanical-linkage-r002",
+        "hhax-claim-shell-topology-r002",
+        "hhax-claim-service-topology-r002",
+        "hhax-claim-custom-day-material-r002",
+        "hhax-claim-three-art-surfaces-r002",
+        "hhax-claim-dark-emission-r002",
+        "hhax-claim-hidden-boundary-r002"
+      ]
+    },
+    {
+      "id": "hhax-gate04-interactive-architecture-r002",
+      "stageId": "04-architecture",
+      "slot": "interactive-architecture",
+      "path": "unity/FidgetingApp/ArtSource/ModelPipeline/model-hhax/evidence/04-architecture/rev-002/exploded-architecture-review.glb",
+      "sha256": "fa6d2b4371b89ba8426d6ac3ddd06d2182fa8db767f26779d98144d7453855ef",
+      "exists": true,
+      "sizeBytes": 871464,
+      "role": "validation",
+      "producer": {
+        "name": "fidgeting-model-pipeline",
+        "version": "3",
+        "recipe": "Gate 04 interactive exploded architecture review"
+      },
+      "provenance": {
+        "origin": "repository-generated",
+        "contentClass": "interactive-exploded-architecture",
+        "assertedBy": "assistant",
+        "approvedGate02EvidenceSha256": "dce9a12aca2fe2a1639f0144fab515660cea80acc834fdea1be13732dc63854b",
+        "note": "可旋转爆炸装配，检查两壳、轨道、载体、三表面和封晶层。"
+      },
+      "sourceAssetIds": [
+        "model-hhax-measurement-modeling-contract-r001",
+        "model-hhax-part-tree-r001",
+        "model-hhax-exploded-plan-r001"
+      ],
+      "sourceClaimIds": [
+        "hhax-claim-shell-topology-r002",
+        "hhax-claim-mechanical-linkage-r002",
+        "hhax-claim-three-art-surfaces-r002"
+      ],
+      "reviewState": "approved"
+    },
+    {
+      "id": "hhax-gate04-architecture-snapshot-r002",
+      "stageId": "04-architecture",
+      "slot": "parameter-snapshot",
+      "path": "unity/FidgetingApp/ArtSource/ModelPipeline/model-hhax/evidence/04-architecture/rev-002/architecture-review-parameters.json",
+      "sha256": "ae4611e6701a2947f5493da855ab311218985994799a7de70cfa6f93c4d02fac",
+      "exists": true,
+      "sizeBytes": 738,
+      "role": "validation",
+      "producer": {
+        "name": "fidgeting-model-pipeline",
+        "version": "3",
+        "recipe": "Gate 04 interactive exploded architecture review"
+      },
+      "provenance": {
+        "origin": "repository-generated",
+        "contentClass": "architecture-parameter-snapshot",
+        "assertedBy": "assistant",
+        "approvedGate02EvidenceSha256": "dce9a12aca2fe2a1639f0144fab515660cea80acc834fdea1be13732dc63854b",
+        "note": "零件所有权、运动轴、材质区和未知边界快照。"
+      },
+      "sourceAssetIds": [
+        "model-hhax-measurement-modeling-contract-r001",
+        "model-hhax-part-tree-r001",
+        "model-hhax-exploded-plan-r001"
+      ],
+      "sourceClaimIds": [
+        "hhax-claim-hidden-boundary-r002"
+      ],
+      "reviewState": "approved"
+    },
+    {
+      "id": "hhax-gate05-preflight-source-r001",
+      "stageId": "05-blockout",
+      "slot": "white-model-source",
+      "path": "unity/FidgetingApp/ArtSource/ModelPipeline/model-hhax/evidence/05-blockout/rev-001/model-hhax-white.blend",
+      "sha256": "3048975c4278422de56c39725afe7d371dec066bb66c3b3871d40c315360f25c",
+      "exists": true,
+      "sizeBytes": 170937,
+      "role": "source-model",
+      "producer": {
+        "name": "fidgeting-model-pipeline",
+        "version": "3",
+        "recipe": "model-hhax Blender 5.2 Gate 05 preflight failure retained for audit"
+      },
+      "provenance": {
+        "origin": "repository-generated",
+        "contentClass": "preflight-white-blend",
+        "assertedBy": "assistant",
+        "approvedGate02EvidenceSha256": "dce9a12aca2fe2a1639f0144fab515660cea80acc834fdea1be13732dc63854b",
+        "note": "白模预检产物；几何与尺寸检查通过，但渲染曝光导致主体不可读，明确不允许进入交互批准。"
+      },
+      "sourceAssetIds": [
+        "model-hhax-measurement-modeling-contract-r001",
+        "model-hhax-part-tree-r001",
+        "model-hhax-exploded-plan-r001",
+        "hhax-gate04-architecture-snapshot-r002"
+      ],
+      "sourceClaimIds": [
+        "hhax-claim-product-envelope-r002",
+        "hhax-claim-mechanical-linkage-r002",
+        "hhax-claim-shell-topology-r002",
+        "hhax-claim-service-topology-r002",
+        "hhax-claim-three-art-surfaces-r002",
+        "hhax-claim-hidden-boundary-r002"
+      ],
+      "reviewState": "active"
+    },
+    {
+      "id": "hhax-gate05-preflight-hero-r001",
+      "stageId": "05-blockout",
+      "slot": "white-model-hero",
+      "path": "unity/FidgetingApp/ArtSource/ModelPipeline/model-hhax/evidence/05-blockout/rev-001/white-model-hero.png",
+      "sha256": "035661e898207bdb78fb02ea2dcc8a6ecc3c9fd0994271fc894167e4aa87047b",
+      "exists": true,
+      "sizeBytes": 325266,
+      "role": "blender-render",
+      "producer": {
+        "name": "fidgeting-model-pipeline",
+        "version": "3",
+        "recipe": "model-hhax Blender 5.2 Gate 05 preflight failure retained for audit"
+      },
+      "provenance": {
+        "origin": "repository-generated",
+        "contentClass": "preflight-white-render",
+        "assertedBy": "assistant",
+        "approvedGate02EvidenceSha256": "dce9a12aca2fe2a1639f0144fab515660cea80acc834fdea1be13732dc63854b",
+        "note": "白模预检产物；几何与尺寸检查通过，但渲染曝光导致主体不可读，明确不允许进入交互批准。"
+      },
+      "sourceAssetIds": [
+        "model-hhax-measurement-modeling-contract-r001",
+        "model-hhax-part-tree-r001",
+        "model-hhax-exploded-plan-r001",
+        "hhax-gate04-architecture-snapshot-r002"
+      ],
+      "sourceClaimIds": [
+        "hhax-claim-product-envelope-r002",
+        "hhax-claim-mechanical-linkage-r002",
+        "hhax-claim-shell-topology-r002",
+        "hhax-claim-service-topology-r002",
+        "hhax-claim-three-art-surfaces-r002",
+        "hhax-claim-hidden-boundary-r002"
+      ],
+      "reviewState": "active"
+    },
+    {
+      "id": "hhax-gate05-preflight-closed-r001",
+      "stageId": "05-blockout",
+      "slot": "white-model-closed",
+      "path": "unity/FidgetingApp/ArtSource/ModelPipeline/model-hhax/evidence/05-blockout/rev-001/white-model-closed.png",
+      "sha256": "67eccd34a5ac637b51fb65e2f9fc4df0fc32e8369f4491faa22344b048493026",
+      "exists": true,
+      "sizeBytes": 322016,
+      "role": "blender-render",
+      "producer": {
+        "name": "fidgeting-model-pipeline",
+        "version": "3",
+        "recipe": "model-hhax Blender 5.2 Gate 05 preflight failure retained for audit"
+      },
+      "provenance": {
+        "origin": "repository-generated",
+        "contentClass": "preflight-white-render",
+        "assertedBy": "assistant",
+        "approvedGate02EvidenceSha256": "dce9a12aca2fe2a1639f0144fab515660cea80acc834fdea1be13732dc63854b",
+        "note": "白模预检产物；几何与尺寸检查通过，但渲染曝光导致主体不可读，明确不允许进入交互批准。"
+      },
+      "sourceAssetIds": [
+        "model-hhax-measurement-modeling-contract-r001",
+        "model-hhax-part-tree-r001",
+        "model-hhax-exploded-plan-r001",
+        "hhax-gate04-architecture-snapshot-r002"
+      ],
+      "sourceClaimIds": [
+        "hhax-claim-product-envelope-r002",
+        "hhax-claim-mechanical-linkage-r002",
+        "hhax-claim-shell-topology-r002",
+        "hhax-claim-service-topology-r002",
+        "hhax-claim-three-art-surfaces-r002",
+        "hhax-claim-hidden-boundary-r002"
+      ],
+      "reviewState": "active"
+    },
+    {
+      "id": "hhax-gate05-preflight-open-r001",
+      "stageId": "05-blockout",
+      "slot": "white-model-open",
+      "path": "unity/FidgetingApp/ArtSource/ModelPipeline/model-hhax/evidence/05-blockout/rev-001/white-model-open.png",
+      "sha256": "ee6f1fa29cbb44bb18a5da6df869d87c1c1b811e2637539919abffcd9644809a",
+      "exists": true,
+      "sizeBytes": 340381,
+      "role": "blender-render",
+      "producer": {
+        "name": "fidgeting-model-pipeline",
+        "version": "3",
+        "recipe": "model-hhax Blender 5.2 Gate 05 preflight failure retained for audit"
+      },
+      "provenance": {
+        "origin": "repository-generated",
+        "contentClass": "preflight-white-render",
+        "assertedBy": "assistant",
+        "approvedGate02EvidenceSha256": "dce9a12aca2fe2a1639f0144fab515660cea80acc834fdea1be13732dc63854b",
+        "note": "白模预检产物；几何与尺寸检查通过，但渲染曝光导致主体不可读，明确不允许进入交互批准。"
+      },
+      "sourceAssetIds": [
+        "model-hhax-measurement-modeling-contract-r001",
+        "model-hhax-part-tree-r001",
+        "model-hhax-exploded-plan-r001",
+        "hhax-gate04-architecture-snapshot-r002"
+      ],
+      "sourceClaimIds": [
+        "hhax-claim-product-envelope-r002",
+        "hhax-claim-mechanical-linkage-r002",
+        "hhax-claim-shell-topology-r002",
+        "hhax-claim-service-topology-r002",
+        "hhax-claim-three-art-surfaces-r002",
+        "hhax-claim-hidden-boundary-r002"
+      ],
+      "reviewState": "active"
+    },
+    {
+      "id": "hhax-gate05-preflight-rotation-r001",
+      "stageId": "05-blockout",
+      "slot": "white-model-rotation",
+      "path": "unity/FidgetingApp/ArtSource/ModelPipeline/model-hhax/evidence/05-blockout/rev-001/white-model-rotation.png",
+      "sha256": "99aaa463aea4617b36aaa09bacb8461242e7ffd6caef737781fe63c75af348ff",
+      "exists": true,
+      "sizeBytes": 317074,
+      "role": "blender-render",
+      "producer": {
+        "name": "fidgeting-model-pipeline",
+        "version": "3",
+        "recipe": "model-hhax Blender 5.2 Gate 05 preflight failure retained for audit"
+      },
+      "provenance": {
+        "origin": "repository-generated",
+        "contentClass": "preflight-white-render",
+        "assertedBy": "assistant",
+        "approvedGate02EvidenceSha256": "dce9a12aca2fe2a1639f0144fab515660cea80acc834fdea1be13732dc63854b",
+        "note": "白模预检产物；几何与尺寸检查通过，但渲染曝光导致主体不可读，明确不允许进入交互批准。"
+      },
+      "sourceAssetIds": [
+        "model-hhax-measurement-modeling-contract-r001",
+        "model-hhax-part-tree-r001",
+        "model-hhax-exploded-plan-r001",
+        "hhax-gate04-architecture-snapshot-r002"
+      ],
+      "sourceClaimIds": [
+        "hhax-claim-product-envelope-r002",
+        "hhax-claim-mechanical-linkage-r002",
+        "hhax-claim-shell-topology-r002",
+        "hhax-claim-service-topology-r002",
+        "hhax-claim-three-art-surfaces-r002",
+        "hhax-claim-hidden-boundary-r002"
+      ],
+      "reviewState": "active"
+    },
+    {
+      "id": "hhax-gate05-preflight-glb-r001",
+      "stageId": "05-blockout",
+      "slot": "interactive-white-model",
+      "path": "unity/FidgetingApp/ArtSource/ModelPipeline/model-hhax/evidence/05-blockout/rev-001/white-model-interactive.glb",
+      "sha256": "60374caaed196df99eac4ca5e39ee00a7d235d2b7f1945fa072b0645255321d2",
+      "exists": true,
+      "sizeBytes": 632836,
+      "role": "validation",
+      "producer": {
+        "name": "fidgeting-model-pipeline",
+        "version": "3",
+        "recipe": "model-hhax Blender 5.2 Gate 05 preflight failure retained for audit"
+      },
+      "provenance": {
+        "origin": "repository-generated",
+        "contentClass": "preflight-interactive-white-model",
+        "assertedBy": "assistant",
+        "approvedGate02EvidenceSha256": "dce9a12aca2fe2a1639f0144fab515660cea80acc834fdea1be13732dc63854b",
+        "note": "白模预检产物；几何与尺寸检查通过，但渲染曝光导致主体不可读，明确不允许进入交互批准。"
+      },
+      "sourceAssetIds": [
+        "model-hhax-measurement-modeling-contract-r001",
+        "model-hhax-part-tree-r001",
+        "model-hhax-exploded-plan-r001",
+        "hhax-gate04-architecture-snapshot-r002"
+      ],
+      "sourceClaimIds": [
+        "hhax-claim-product-envelope-r002",
+        "hhax-claim-mechanical-linkage-r002",
+        "hhax-claim-shell-topology-r002",
+        "hhax-claim-service-topology-r002",
+        "hhax-claim-three-art-surfaces-r002",
+        "hhax-claim-hidden-boundary-r002"
+      ],
+      "reviewState": "active"
+    },
+    {
+      "id": "hhax-gate05-preflight-snapshot-r001",
+      "stageId": "05-blockout",
+      "slot": "parameter-snapshot",
+      "path": "unity/FidgetingApp/ArtSource/ModelPipeline/model-hhax/evidence/05-blockout/rev-001/blockout-parameters.json",
+      "sha256": "f7e32422b52cc39cdc0207c7e1ee346c8f0a75b953f48662a3b56a6ae11abe88",
+      "exists": true,
+      "sizeBytes": 1747,
+      "role": "validation",
+      "producer": {
+        "name": "fidgeting-model-pipeline",
+        "version": "3",
+        "recipe": "model-hhax Blender 5.2 Gate 05 preflight failure retained for audit"
+      },
+      "provenance": {
+        "origin": "repository-generated",
+        "contentClass": "preflight-parameter-snapshot",
+        "assertedBy": "assistant",
+        "approvedGate02EvidenceSha256": "dce9a12aca2fe2a1639f0144fab515660cea80acc834fdea1be13732dc63854b",
+        "note": "白模预检产物；几何与尺寸检查通过，但渲染曝光导致主体不可读，明确不允许进入交互批准。"
+      },
+      "sourceAssetIds": [
+        "model-hhax-measurement-modeling-contract-r001",
+        "model-hhax-part-tree-r001",
+        "model-hhax-exploded-plan-r001",
+        "hhax-gate04-architecture-snapshot-r002"
+      ],
+      "sourceClaimIds": [
+        "hhax-claim-product-envelope-r002",
+        "hhax-claim-mechanical-linkage-r002",
+        "hhax-claim-shell-topology-r002",
+        "hhax-claim-service-topology-r002",
+        "hhax-claim-three-art-surfaces-r002",
+        "hhax-claim-hidden-boundary-r002"
+      ],
+      "reviewState": "active"
+    },
+    {
+      "id": "hhax-gate05-motion-preflight-source-r002",
+      "stageId": "05-blockout",
+      "slot": "white-model-source",
+      "path": "unity/FidgetingApp/ArtSource/ModelPipeline/model-hhax/evidence/05-blockout/rev-002/model-hhax-white.blend",
+      "sha256": "9ac5b37a088f4c29da2201e431b5fa48c10e1fe3c919be1518fc39ad74b02faf",
+      "exists": true,
+      "sizeBytes": 170965,
+      "role": "source-model",
+      "producer": {
+        "name": "fidgeting-model-pipeline",
+        "version": "3",
+        "recipe": "model-hhax Gate 05 visible-motion preflight retained for audit"
+      },
+      "provenance": {
+        "origin": "repository-generated",
+        "contentClass": "gate05-motion-preflight",
+        "assertedBy": "assistant",
+        "approvedGate02EvidenceSha256": "dce9a12aca2fe2a1639f0144fab515660cea80acc834fdea1be13732dc63854b",
+        "note": "第二次白模预检；轮廓和尺寸可读，但静帧渲染被关键帧重新求值，未呈现直推全行程。"
+      },
+      "sourceAssetIds": [
+        "model-hhax-measurement-modeling-contract-r001",
+        "model-hhax-part-tree-r001",
+        "model-hhax-exploded-plan-r001",
+        "hhax-gate04-architecture-snapshot-r002"
+      ],
+      "sourceClaimIds": [
+        "hhax-claim-product-envelope-r002",
+        "hhax-claim-mechanical-linkage-r002",
+        "hhax-claim-shell-topology-r002",
+        "hhax-claim-service-topology-r002",
+        "hhax-claim-three-art-surfaces-r002",
+        "hhax-claim-hidden-boundary-r002"
+      ],
+      "reviewState": "active"
+    },
+    {
+      "id": "hhax-gate05-motion-preflight-hero-r002",
+      "stageId": "05-blockout",
+      "slot": "white-model-hero",
+      "path": "unity/FidgetingApp/ArtSource/ModelPipeline/model-hhax/evidence/05-blockout/rev-002/white-model-hero.png",
+      "sha256": "99916b266e7b854c618944169c7f286dc7cbdaf181aa0d81c99e437192aa806a",
+      "exists": true,
+      "sizeBytes": 797264,
+      "role": "blender-render",
+      "producer": {
+        "name": "fidgeting-model-pipeline",
+        "version": "3",
+        "recipe": "model-hhax Gate 05 visible-motion preflight retained for audit"
+      },
+      "provenance": {
+        "origin": "repository-generated",
+        "contentClass": "gate05-motion-preflight",
+        "assertedBy": "assistant",
+        "approvedGate02EvidenceSha256": "dce9a12aca2fe2a1639f0144fab515660cea80acc834fdea1be13732dc63854b",
+        "note": "第二次白模预检；轮廓和尺寸可读，但静帧渲染被关键帧重新求值，未呈现直推全行程。"
+      },
+      "sourceAssetIds": [
+        "model-hhax-measurement-modeling-contract-r001",
+        "model-hhax-part-tree-r001",
+        "model-hhax-exploded-plan-r001",
+        "hhax-gate04-architecture-snapshot-r002"
+      ],
+      "sourceClaimIds": [
+        "hhax-claim-product-envelope-r002",
+        "hhax-claim-mechanical-linkage-r002",
+        "hhax-claim-shell-topology-r002",
+        "hhax-claim-service-topology-r002",
+        "hhax-claim-three-art-surfaces-r002",
+        "hhax-claim-hidden-boundary-r002"
+      ],
+      "reviewState": "active"
+    },
+    {
+      "id": "hhax-gate05-motion-preflight-closed-r002",
+      "stageId": "05-blockout",
+      "slot": "white-model-closed",
+      "path": "unity/FidgetingApp/ArtSource/ModelPipeline/model-hhax/evidence/05-blockout/rev-002/white-model-closed.png",
+      "sha256": "3427b1f624606ef4639c66d0ba304d3aed388f3951d6bec0cece33cefd9603f7",
+      "exists": true,
+      "sizeBytes": 796949,
+      "role": "blender-render",
+      "producer": {
+        "name": "fidgeting-model-pipeline",
+        "version": "3",
+        "recipe": "model-hhax Gate 05 visible-motion preflight retained for audit"
+      },
+      "provenance": {
+        "origin": "repository-generated",
+        "contentClass": "gate05-motion-preflight",
+        "assertedBy": "assistant",
+        "approvedGate02EvidenceSha256": "dce9a12aca2fe2a1639f0144fab515660cea80acc834fdea1be13732dc63854b",
+        "note": "第二次白模预检；轮廓和尺寸可读，但静帧渲染被关键帧重新求值，未呈现直推全行程。"
+      },
+      "sourceAssetIds": [
+        "model-hhax-measurement-modeling-contract-r001",
+        "model-hhax-part-tree-r001",
+        "model-hhax-exploded-plan-r001",
+        "hhax-gate04-architecture-snapshot-r002"
+      ],
+      "sourceClaimIds": [
+        "hhax-claim-product-envelope-r002",
+        "hhax-claim-mechanical-linkage-r002",
+        "hhax-claim-shell-topology-r002",
+        "hhax-claim-service-topology-r002",
+        "hhax-claim-three-art-surfaces-r002",
+        "hhax-claim-hidden-boundary-r002"
+      ],
+      "reviewState": "active"
+    },
+    {
+      "id": "hhax-gate05-motion-preflight-open-r002",
+      "stageId": "05-blockout",
+      "slot": "white-model-open",
+      "path": "unity/FidgetingApp/ArtSource/ModelPipeline/model-hhax/evidence/05-blockout/rev-002/white-model-open.png",
+      "sha256": "b71bbcf9cfc555548d0b5305f093e6935998ee2c6cfde9de74dd62eb11702619",
+      "exists": true,
+      "sizeBytes": 796093,
+      "role": "blender-render",
+      "producer": {
+        "name": "fidgeting-model-pipeline",
+        "version": "3",
+        "recipe": "model-hhax Gate 05 visible-motion preflight retained for audit"
+      },
+      "provenance": {
+        "origin": "repository-generated",
+        "contentClass": "gate05-motion-preflight",
+        "assertedBy": "assistant",
+        "approvedGate02EvidenceSha256": "dce9a12aca2fe2a1639f0144fab515660cea80acc834fdea1be13732dc63854b",
+        "note": "第二次白模预检；轮廓和尺寸可读，但静帧渲染被关键帧重新求值，未呈现直推全行程。"
+      },
+      "sourceAssetIds": [
+        "model-hhax-measurement-modeling-contract-r001",
+        "model-hhax-part-tree-r001",
+        "model-hhax-exploded-plan-r001",
+        "hhax-gate04-architecture-snapshot-r002"
+      ],
+      "sourceClaimIds": [
+        "hhax-claim-product-envelope-r002",
+        "hhax-claim-mechanical-linkage-r002",
+        "hhax-claim-shell-topology-r002",
+        "hhax-claim-service-topology-r002",
+        "hhax-claim-three-art-surfaces-r002",
+        "hhax-claim-hidden-boundary-r002"
+      ],
+      "reviewState": "active"
+    },
+    {
+      "id": "hhax-gate05-motion-preflight-rotation-r002",
+      "stageId": "05-blockout",
+      "slot": "white-model-rotation",
+      "path": "unity/FidgetingApp/ArtSource/ModelPipeline/model-hhax/evidence/05-blockout/rev-002/white-model-rotation.png",
+      "sha256": "3e3a04bc139147956bcc7a7a31da61d3489a592bee397930164e4013039b196e",
+      "exists": true,
+      "sizeBytes": 855194,
+      "role": "blender-render",
+      "producer": {
+        "name": "fidgeting-model-pipeline",
+        "version": "3",
+        "recipe": "model-hhax Gate 05 visible-motion preflight retained for audit"
+      },
+      "provenance": {
+        "origin": "repository-generated",
+        "contentClass": "gate05-motion-preflight",
+        "assertedBy": "assistant",
+        "approvedGate02EvidenceSha256": "dce9a12aca2fe2a1639f0144fab515660cea80acc834fdea1be13732dc63854b",
+        "note": "第二次白模预检；轮廓和尺寸可读，但静帧渲染被关键帧重新求值，未呈现直推全行程。"
+      },
+      "sourceAssetIds": [
+        "model-hhax-measurement-modeling-contract-r001",
+        "model-hhax-part-tree-r001",
+        "model-hhax-exploded-plan-r001",
+        "hhax-gate04-architecture-snapshot-r002"
+      ],
+      "sourceClaimIds": [
+        "hhax-claim-product-envelope-r002",
+        "hhax-claim-mechanical-linkage-r002",
+        "hhax-claim-shell-topology-r002",
+        "hhax-claim-service-topology-r002",
+        "hhax-claim-three-art-surfaces-r002",
+        "hhax-claim-hidden-boundary-r002"
+      ],
+      "reviewState": "active"
+    },
+    {
+      "id": "hhax-gate05-motion-preflight-glb-r002",
+      "stageId": "05-blockout",
+      "slot": "interactive-white-model",
+      "path": "unity/FidgetingApp/ArtSource/ModelPipeline/model-hhax/evidence/05-blockout/rev-002/white-model-interactive.glb",
+      "sha256": "b3f6f66f575859a42b856a59374a379bd7c4f32f80e2407f8e1678f5c8dd1398",
+      "exists": true,
+      "sizeBytes": 632840,
+      "role": "validation",
+      "producer": {
+        "name": "fidgeting-model-pipeline",
+        "version": "3",
+        "recipe": "model-hhax Gate 05 visible-motion preflight retained for audit"
+      },
+      "provenance": {
+        "origin": "repository-generated",
+        "contentClass": "gate05-motion-preflight",
+        "assertedBy": "assistant",
+        "approvedGate02EvidenceSha256": "dce9a12aca2fe2a1639f0144fab515660cea80acc834fdea1be13732dc63854b",
+        "note": "第二次白模预检；轮廓和尺寸可读，但静帧渲染被关键帧重新求值，未呈现直推全行程。"
+      },
+      "sourceAssetIds": [
+        "model-hhax-measurement-modeling-contract-r001",
+        "model-hhax-part-tree-r001",
+        "model-hhax-exploded-plan-r001",
+        "hhax-gate04-architecture-snapshot-r002"
+      ],
+      "sourceClaimIds": [
+        "hhax-claim-product-envelope-r002",
+        "hhax-claim-mechanical-linkage-r002",
+        "hhax-claim-shell-topology-r002",
+        "hhax-claim-service-topology-r002",
+        "hhax-claim-three-art-surfaces-r002",
+        "hhax-claim-hidden-boundary-r002"
+      ],
+      "reviewState": "active"
+    },
+    {
+      "id": "hhax-gate05-motion-preflight-snapshot-r002",
+      "stageId": "05-blockout",
+      "slot": "parameter-snapshot",
+      "path": "unity/FidgetingApp/ArtSource/ModelPipeline/model-hhax/evidence/05-blockout/rev-002/blockout-parameters.json",
+      "sha256": "cd4115d2694e1623f1c2dddd143e2f15b5fdeb37c1052a2d9df81fd797863e75",
+      "exists": true,
+      "sizeBytes": 1747,
+      "role": "validation",
+      "producer": {
+        "name": "fidgeting-model-pipeline",
+        "version": "3",
+        "recipe": "model-hhax Gate 05 visible-motion preflight retained for audit"
+      },
+      "provenance": {
+        "origin": "repository-generated",
+        "contentClass": "gate05-motion-preflight",
+        "assertedBy": "assistant",
+        "approvedGate02EvidenceSha256": "dce9a12aca2fe2a1639f0144fab515660cea80acc834fdea1be13732dc63854b",
+        "note": "第二次白模预检；轮廓和尺寸可读，但静帧渲染被关键帧重新求值，未呈现直推全行程。"
+      },
+      "sourceAssetIds": [
+        "model-hhax-measurement-modeling-contract-r001",
+        "model-hhax-part-tree-r001",
+        "model-hhax-exploded-plan-r001",
+        "hhax-gate04-architecture-snapshot-r002"
+      ],
+      "sourceClaimIds": [
+        "hhax-claim-product-envelope-r002",
+        "hhax-claim-mechanical-linkage-r002",
+        "hhax-claim-shell-topology-r002",
+        "hhax-claim-service-topology-r002",
+        "hhax-claim-three-art-surfaces-r002",
+        "hhax-claim-hidden-boundary-r002"
+      ],
+      "reviewState": "active"
+    }
+  ],
+  "claims": [
+    {
+      "id": "hhax-claim-mechanism-slider-r001",
+      "stageId": "02-analysis",
+      "category": "mechanism",
+      "statement": "线性磁吸推牌：上片沿长轴滑动，闭合时完全覆盖下片，推开约露出下片 1/3；与 magnetic-slide-tile 同一机构族。",
+      "confidence": "medium",
+      "sourceAssetIds": [
+        "model-hhax-intake-r1-f2576ce0",
+        "model-hhax-intake-r1-fa5bb900",
+        "model-hhax-intake-r1-8838e089"
+      ],
+      "sourceRegions": [],
+      "state": "superseded",
+      "analysisRevision": "002",
+      "supersededBy": "analysis-rev-003",
+      "supersededAt": "2026-09-11T00:22:10.234Z"
+    },
+    {
+      "id": "hhax-claim-silhouette-capsule-r001",
+      "stageId": "02-analysis",
+      "category": "silhouette",
+      "statement": "胶囊形轮廓（两端半圆 + 直边），目测长宽比约 1.6:1，仅作白模比例参考，不是尺寸。",
+      "confidence": "medium",
+      "sourceAssetIds": [
+        "model-hhax-intake-r1-fa5bb900",
+        "model-hhax-intake-r1-8838e089"
+      ],
+      "sourceRegions": [],
+      "state": "superseded",
+      "analysisRevision": "002",
+      "supersededBy": "analysis-rev-003",
+      "supersededAt": "2026-09-11T00:22:10.234Z"
+    },
+    {
+      "id": "hhax-claim-layers-r001",
+      "stageId": "02-analysis",
+      "category": "structure",
+      "statement": "至少三层：金属壳上片、上片顶面的一体封晶棋格面、下片圆牌。",
+      "confidence": "medium",
+      "sourceAssetIds": [
+        "model-hhax-intake-r1-f2576ce0",
+        "model-hhax-intake-r1-da708586",
+        "model-hhax-intake-r1-2ed6d6a0"
+      ],
+      "sourceRegions": [],
+      "state": "superseded",
+      "analysisRevision": "002",
+      "supersededBy": "analysis-rev-003",
+      "supersededAt": "2026-09-11T00:22:10.234Z"
+    },
+    {
+      "id": "hhax-claim-material-r001",
+      "stageId": "02-analysis",
+      "category": "material",
+      "statement": "壳体深色高抛光金属（笔记称锆），边缘彩虹镀色；贝母棋格镶嵌填夜光颜料（蓝绿）；骑士红色珐琅夜光橙；铭牌金属不发光。",
+      "confidence": "medium",
+      "sourceAssetIds": [
+        "model-hhax-intake-r1-fa5bb900",
+        "model-hhax-intake-r1-da708586",
+        "model-hhax-intake-r1-4b59c226",
+        "model-hhax-intake-r1-a8301672"
+      ],
+      "sourceRegions": [],
+      "state": "superseded",
+      "analysisRevision": "002",
+      "supersededBy": "analysis-rev-003",
+      "supersededAt": "2026-09-11T00:22:10.234Z"
+    },
+    {
+      "id": "hhax-claim-artwork-r001",
+      "stageId": "02-analysis",
+      "category": "artwork",
+      "statement": "正面：棋格 + 红骑士 + MORE THAN CLASSIC 铭牌；背面：KNIGHT IN CHESS 环形字 + 圆形骑士 + 两侧棋格条 + MOT STUDIO。",
+      "confidence": "high",
+      "sourceAssetIds": [
+        "model-hhax-intake-r1-f2576ce0",
+        "model-hhax-intake-r1-fa5bb900"
+      ],
+      "sourceRegions": [],
+      "state": "superseded",
+      "analysisRevision": "002",
+      "supersededBy": "analysis-rev-003",
+      "supersededAt": "2026-09-11T00:22:10.234Z"
+    },
+    {
+      "id": "hhax-claim-unknown-dimensions-r001",
+      "stageId": "02-analysis",
+      "category": "unknown",
+      "statement": "全部真实尺寸（闭合长宽厚、片厚、推程、封晶厚）、下片是否可旋转、磁铁布置均未知；7 张静帧无动作信息。",
+      "confidence": "high",
+      "sourceAssetIds": [
+        "model-hhax-intake-r1-a8301672",
+        "model-hhax-intake-r1-f2576ce0",
+        "model-hhax-intake-r1-fa5bb900",
+        "model-hhax-intake-r1-8838e089",
+        "model-hhax-intake-r1-da708586",
+        "model-hhax-intake-r1-4b59c226",
+        "model-hhax-intake-r1-2ed6d6a0",
+        "model-hhax-intake-r1-f0aebe7c"
+      ],
+      "sourceRegions": [],
+      "state": "superseded",
+      "analysisRevision": "002",
+      "supersededBy": "analysis-rev-003",
+      "supersededAt": "2026-09-11T00:22:10.234Z"
+    },
+    {
+      "id": "hhax-claim-product-envelope-r002",
+      "stageId": "02-analysis",
+      "category": "dimension",
+      "statement": "同款公开标称闭合外形为 50.5 × 30.9 × 13.6 mm、88 g；它是数字复原外廓依据，不是本定制封晶件的独立实测或制造公差。",
+      "confidence": "high",
+      "sourceAssetIds": [
+        "hhax-intake-nxedc-source-metadata-r002",
+        "hhax-intake-nxedc-source-notes-r002"
+      ],
+      "sourceRegions": [],
+      "state": "active",
+      "analysisRevision": "003"
+    },
+    {
+      "id": "hhax-claim-mechanical-linkage-r002",
+      "stageId": "02-analysis",
+      "category": "mechanism",
+      "statement": "工作台兼容分类为线性磁吸推牌（linear-magnetic-slider），但产品真实动作驱动是长轴直推与旋转联动机械轨道；磁性只固定可换贴片，不驱动动作。",
+      "confidence": "high",
+      "sourceAssetIds": [
+        "hhax-intake-nxedc-video-r002",
+        "hhax-intake-nxedc-teardown-sheet-r002",
+        "hhax-intake-mechanical-drive-classification-r002",
+        "hhax-intake-nxedc-source-notes-r002"
+      ],
+      "sourceRegions": [],
+      "state": "active",
+      "analysisRevision": "003"
+    },
+    {
+      "id": "hhax-claim-shell-topology-r002",
+      "stageId": "02-analysis",
+      "category": "structure",
+      "statement": "外观由两个胶囊主壳叠合；推开后露出的是下壳胶囊尾部及其独立图案，不是单独圆牌。",
+      "confidence": "high",
+      "sourceAssetIds": [
+        "model-hhax-intake-r1-f2576ce0",
+        "hhax-intake-nxedc-open-front-r002",
+        "hhax-intake-nxedc-open-overview-r002"
+      ],
+      "sourceRegions": [],
+      "state": "active",
+      "analysisRevision": "003"
+    },
+    {
+      "id": "hhax-claim-service-topology-r002",
+      "stageId": "02-analysis",
+      "category": "structure",
+      "statement": "后部圆贴可拆，中央螺钉调节直推/旋转阻尼；公开拆解还显示长直轨、圆形旋转载体、可换弹簧/珠与隐藏挂绳孔。",
+      "confidence": "high",
+      "sourceAssetIds": [
+        "hhax-intake-nxedc-video-r002",
+        "hhax-intake-nxedc-teardown-sheet-r002",
+        "hhax-intake-nxedc-open-track-r002",
+        "hhax-intake-nxedc-rear-patch-r002"
+      ],
+      "sourceRegions": [],
+      "state": "active",
+      "analysisRevision": "003"
+    },
+    {
+      "id": "hhax-claim-custom-day-material-r002",
+      "stageId": "02-analysis",
+      "category": "material",
+      "statement": "定制外观以用户原图为最高依据：近黑紫灰高抛金属、窄幅局部虹彩边、贝母棋格、珊瑚红骑士及透明封晶；公共普通版本的颜色和图案不得替换它。",
+      "confidence": "high",
+      "sourceAssetIds": [
+        "model-hhax-intake-r1-f2576ce0",
+        "model-hhax-intake-r1-fa5bb900",
+        "model-hhax-intake-r1-8838e089",
+        "model-hhax-intake-r1-a8301672"
+      ],
+      "sourceRegions": [],
+      "state": "active",
+      "analysisRevision": "003"
+    },
+    {
+      "id": "hhax-claim-three-art-surfaces-r002",
+      "stageId": "02-analysis",
+      "category": "artwork",
+      "statement": "图案分为正面上壳、推开露出的下壳正面、背面三套独立表面；字样为 MORE THAN CLASSIC、KNIGHT IN CHESS、MOT STUDIO。",
+      "confidence": "high",
+      "sourceAssetIds": [
+        "model-hhax-intake-r1-f2576ce0",
+        "model-hhax-intake-r1-fa5bb900",
+        "model-hhax-intake-r1-8838e089"
+      ],
+      "sourceRegions": [],
+      "state": "active",
+      "analysisRevision": "003"
+    },
+    {
+      "id": "hhax-claim-dark-emission-r002",
+      "stageId": "02-analysis",
+      "category": "material",
+      "statement": "暗处仅棋格发青蓝光、骑士发橙光；金属壳、铭牌和文字保持不发光。",
+      "confidence": "high",
+      "sourceAssetIds": [
+        "model-hhax-intake-r1-da708586",
+        "model-hhax-intake-r1-4b59c226",
+        "model-hhax-intake-r1-2ed6d6a0",
+        "model-hhax-intake-r1-f0aebe7c"
+      ],
+      "sourceRegions": [],
+      "state": "active",
+      "analysisRevision": "003"
+    },
+    {
+      "id": "hhax-claim-hidden-boundary-r002",
+      "stageId": "02-analysis",
+      "category": "unknown",
+      "statement": "隐藏联动曲线、弹簧/珠精确数量、孔深、公差和本定制封晶件真实厚度仍未知；后续内部数值只能作为绑定同款公开拆解的可回退数字复原目标，不得称实测或生产尺寸。",
+      "confidence": "high",
+      "sourceAssetIds": [
+        "hhax-intake-nxedc-video-r002",
+        "hhax-intake-nxedc-teardown-sheet-r002",
+        "hhax-intake-nxedc-source-notes-r002",
+        "model-hhax-intake-r1-f2576ce0"
+      ],
+      "sourceRegions": [],
+      "state": "active",
+      "analysisRevision": "003"
+    }
+  ],
+  "stages": [
+    {
+      "id": "01-intake",
+      "revision": 6,
+      "status": "approved",
+      "artifactIds": [
+        "model-hhax-intake-r1-a8301672",
+        "model-hhax-intake-r1-f2576ce0",
+        "model-hhax-intake-r1-fa5bb900",
+        "model-hhax-intake-r1-8838e089",
+        "model-hhax-intake-r1-da708586",
+        "model-hhax-intake-r1-4b59c226",
+        "model-hhax-intake-r1-2ed6d6a0",
+        "model-hhax-intake-r1-f0aebe7c",
+        "hhax-intake-nxedc-video-r002",
+        "hhax-intake-nxedc-teardown-sheet-r002",
+        "hhax-intake-nxedc-open-front-r002",
+        "hhax-intake-nxedc-open-track-r002",
+        "hhax-intake-nxedc-rear-patch-r002",
+        "hhax-intake-nxedc-open-overview-r002",
+        "hhax-intake-nxedc-source-notes-r002",
+        "hhax-intake-nxedc-source-metadata-r002",
+        "hhax-intake-mechanical-drive-classification-r002",
+        "hhax-gate01-source-inspector-recording-r003",
+        "hhax-gate01-source-review-snapshot-r003",
+        "hhax-gate01-published-source-qualification-r003",
+        "hhax-gate01-source-inspector-frame-r003"
+      ],
+      "inputDigest": "f55c610d2550492db003a0ee32a8a9d75a5a5e9cc9c5e5ac1bb6b0f61045c5dd",
+      "outputDigest": "f55c610d2550492db003a0ee32a8a9d75a5a5e9cc9c5e5ac1bb6b0f61045c5dd",
+      "validations": [
+        {
+          "id": "external-source-archived",
+          "status": "pass",
+          "evidence": "1 exact-product files are archived with repository paths and SHA-256."
+        },
+        {
+          "id": "source-class-separated",
+          "status": "pass",
+          "evidence": "External product imagery remains labeled external-reference and does not replace the user's original video or frames."
+        },
+        {
+          "id": "mechanism-evidence-present",
+          "status": "pass",
+          "evidence": "The pack includes exact-product gameplay and internal-mechanism imagery."
+        },
+        {
+          "id": "interactive-review-evidence",
+          "status": "pass",
+          "evidence": "complete-source-inspector-recording is hash-bound to hhax-gate01-source-inspector-recording-r003, hhax-intake-nxedc-source-metadata-r002, and hhax-gate01-source-review-snapshot-r003."
+        }
+      ],
+      "decision": {
+        "action": "approve",
+        "notes": "来源归档、分类、公开链接和公开标称边界均经完整录屏复核；用户定制外观与公共机构资料未混用。",
+        "decidedBy": "agent-under-user-delegation",
+        "decidedAt": "2026-09-11T00:21:21.850Z",
+        "finalAuthority": "latest-explicit-chat-instruction",
+        "exactUserWording": "目标是完整的把这款材质做出来，通过设计圣经的判断和自我审查，一步步的自我通过，通过CAD/白模/blender/unity的流程，不需要人工approve，自我进行下一步，最终出成品",
+        "approvalDelegationId": "90861ce4-8ca8-4753-b398-607c3759b307",
+        "humanReviewed": false,
+        "individualUserApproval": false,
+        "decisionMode": "standing-user-delegation-after-evidence-validation"
+      },
+      "approvalRequirement": "interactive-source-inspector-or-complete-recording",
+      "reviewArtifactIds": [
+        "hhax-gate01-source-inspector-recording-r003",
+        "hhax-gate01-source-review-snapshot-r003",
+        "hhax-gate01-published-source-qualification-r003",
+        "hhax-gate01-source-inspector-frame-r003"
+      ],
+      "delegatedApprovalRequiresReviewEvidence": true,
+      "reviewEvidenceSpec": {
+        "revision": 1,
+        "approvalRequirement": "interactive-source-inspector-or-complete-recording",
+        "artifactIds": [
+          "hhax-gate01-source-inspector-recording-r003",
+          "hhax-gate01-source-review-snapshot-r003",
+          "hhax-gate01-published-source-qualification-r003",
+          "hhax-gate01-source-inspector-frame-r003"
+        ],
+        "coreArtifactDigest": "02f42e16ba2b342e924f849d616f117ecb8ca533b729a8b567083b95bfc7edf5",
+        "reviewedArtifactId": "hhax-gate01-source-inspector-recording-r003",
+        "reviewedArtifactSha256": "0f7971aa73765b304af051164e089a13bb0501690e9baf8052e09e3b958f3478",
+        "governingContractAssetId": "hhax-intake-nxedc-source-metadata-r002",
+        "governingContractSha256": "b51ccd78dad87b40c4e568b02349d946f4aa7a81854aef7bd472e309f8a1c38f",
+        "parameterSnapshotAssetId": "hhax-gate01-source-review-snapshot-r003",
+        "parameterSnapshotSha256": "9623d8bc8e3dcd6185307b1ef6212503680b184c46b0890c5460fb193d6218a8",
+        "requiredChecklist": [
+          "original-user-sources-preserved",
+          "external-source-classification-reviewed",
+          "source-links-reviewed"
+        ],
+        "completedChecklist": [
+          "original-user-sources-preserved",
+          "external-source-classification-reviewed",
+          "source-links-reviewed"
+        ],
+        "allowedInteractionModes": [
+          "complete-source-inspector-recording"
+        ],
+        "interactionMode": "complete-source-inspector-recording",
+        "browserTimestamp": "2026-09-11T00:21:21.840Z",
+        "reviewDevice": "Chromium desktop 1440×1000",
+        "recordedAt": "2026-09-11T00:21:21.846Z",
+        "finalAuthorityRequired": "latest-explicit-chat-instruction",
+        "approval": {
+          "approvalDelegationId": "90861ce4-8ca8-4753-b398-607c3759b307",
+          "authority": "latest-explicit-chat-instruction",
+          "exactUserWording": "目标是完整的把这款材质做出来，通过设计圣经的判断和自我审查，一步步的自我通过，通过CAD/白模/blender/unity的流程，不需要人工approve，自我进行下一步，最终出成品",
+          "approvedBy": "agent-under-user-delegation",
+          "humanReviewed": false,
+          "individualUserApproval": false,
+          "decisionMode": "standing-user-delegation-after-evidence-validation",
+          "reviewedArtifactId": "hhax-gate01-source-inspector-recording-r003",
+          "reviewedArtifactSha256": "0f7971aa73765b304af051164e089a13bb0501690e9baf8052e09e3b958f3478",
+          "governingContractAssetId": "hhax-intake-nxedc-source-metadata-r002",
+          "governingContractSha256": "b51ccd78dad87b40c4e568b02349d946f4aa7a81854aef7bd472e309f8a1c38f",
+          "parameterSnapshotAssetId": "hhax-gate01-source-review-snapshot-r003",
+          "parameterSnapshotSha256": "9623d8bc8e3dcd6185307b1ef6212503680b184c46b0890c5460fb193d6218a8",
+          "completedChecklist": [
+            "original-user-sources-preserved",
+            "external-source-classification-reviewed",
+            "source-links-reviewed"
+          ],
+          "interactionMode": "complete-source-inspector-recording",
+          "browserTimestamp": "2026-09-11T00:21:21.840Z",
+          "reviewDevice": "Chromium desktop 1440×1000",
+          "approvedAt": "2026-09-11T00:21:21.850Z",
+          "physicalPhoneInstallAuthorized": false
+        }
+      },
+      "reviewEvidenceRequired": true,
+      "delegatedApproval": {
+        "approvalDelegationId": "90861ce4-8ca8-4753-b398-607c3759b307",
+        "authority": "latest-explicit-chat-instruction",
+        "exactUserWording": "目标是完整的把这款材质做出来，通过设计圣经的判断和自我审查，一步步的自我通过，通过CAD/白模/blender/unity的流程，不需要人工approve，自我进行下一步，最终出成品",
+        "approvedBy": "agent-under-user-delegation",
+        "humanReviewed": false,
+        "individualUserApproval": false,
+        "decisionMode": "standing-user-delegation-after-evidence-validation",
+        "reviewedArtifactId": "hhax-gate01-source-inspector-recording-r003",
+        "reviewedArtifactSha256": "0f7971aa73765b304af051164e089a13bb0501690e9baf8052e09e3b958f3478",
+        "governingContractAssetId": "hhax-intake-nxedc-source-metadata-r002",
+        "governingContractSha256": "b51ccd78dad87b40c4e568b02349d946f4aa7a81854aef7bd472e309f8a1c38f",
+        "parameterSnapshotAssetId": "hhax-gate01-source-review-snapshot-r003",
+        "parameterSnapshotSha256": "9623d8bc8e3dcd6185307b1ef6212503680b184c46b0890c5460fb193d6218a8",
+        "completedChecklist": [
+          "original-user-sources-preserved",
+          "external-source-classification-reviewed",
+          "source-links-reviewed"
+        ],
+        "interactionMode": "complete-source-inspector-recording",
+        "browserTimestamp": "2026-09-11T00:21:21.840Z",
+        "reviewDevice": "Chromium desktop 1440×1000",
+        "approvedAt": "2026-09-11T00:21:21.850Z",
+        "physicalPhoneInstallAuthorized": false
+      }
+    },
+    {
+      "id": "02-analysis",
+      "revision": 5,
+      "status": "approved",
+      "artifactIds": [
+        "hhax-analysis-discovery-log-r002",
+        "hhax-analysis-board-r002",
+        "hhax-analysis-parameter-snapshot-r002",
+        "hhax-analysis-interactive-cad-r002",
+        "hhax-gate02-interactive-cad-review-r003",
+        "hhax-gate02-cad-review-snapshot-r003"
+      ],
+      "inputDigest": "f55c610d2550492db003a0ee32a8a9d75a5a5e9cc9c5e5ac1bb6b0f61045c5dd",
+      "outputDigest": "dce9a12aca2fe2a1639f0144fab515660cea80acc834fdea1be13732dc63854b",
+      "validations": [
+        {
+          "id": "exact-product-source-linked",
+          "status": "pass",
+          "evidence": "每条当前判断都绑定用户原图或同款公开素材；公共版本只决定外廓/机构，用户原图决定定制外观。"
+        },
+        {
+          "id": "mechanical-drive-corrected",
+          "status": "pass",
+          "evidence": "已移除磁吸驱动误判；直推与旋转按机械联动轨道处理，磁铁仅用于可换贴片。"
+        },
+        {
+          "id": "custom-day-night-separated",
+          "status": "pass",
+          "evidence": "日光贝母/珊瑚红与暗处青蓝/橙发光被拆成独立、非全局发光的材质状态。"
+        },
+        {
+          "id": "unknowns-preserved",
+          "status": "pass",
+          "evidence": "隐藏曲线、数量、公差、孔深与定制封晶真实厚度未冒充实测；只允许可逆数字校准。"
+        },
+        {
+          "id": "interactive-cad-present",
+          "status": "pass",
+          "evidence": "真实 GLB CAD 可旋转查看可见模块与半透明未知包络；未启动 Blender。"
+        },
+        {
+          "id": "interactive-review-evidence",
+          "status": "pass",
+          "evidence": "interactive-cad is hash-bound to hhax-gate02-interactive-cad-review-r003, hhax-analysis-discovery-log-r002, and hhax-gate02-cad-review-snapshot-r003."
+        }
+      ],
+      "decision": {
+        "action": "approve",
+        "notes": "已在真实交互 CAD 中旋转并切换正面、顶面和斜视检查；两个主壳、直轨、圆轨、中央调节区与未知边界符合当前来源，磁吸驱动旧判断已排除。",
+        "decidedBy": "agent-under-user-delegation",
+        "decidedAt": "2026-09-11T00:24:04.681Z",
+        "finalAuthority": "latest-explicit-chat-instruction",
+        "exactUserWording": "目标是完整的把这款材质做出来，通过设计圣经的判断和自我审查，一步步的自我通过，通过CAD/白模/blender/unity的流程，不需要人工approve，自我进行下一步，最终出成品",
+        "approvalDelegationId": "90861ce4-8ca8-4753-b398-607c3759b307",
+        "humanReviewed": false,
+        "individualUserApproval": false,
+        "decisionMode": "standing-user-delegation-after-evidence-validation"
+      },
+      "approvalRequirement": "reference-research-then-interactive-cad-approval",
+      "reviewArtifactIds": [
+        "hhax-analysis-board-r002",
+        "hhax-gate02-interactive-cad-review-r003",
+        "hhax-gate02-cad-review-snapshot-r003"
+      ],
+      "delegatedApprovalRequiresReviewEvidence": true,
+      "reviewEvidenceSpec": {
+        "revision": 1,
+        "approvalRequirement": "reference-research-then-interactive-cad-approval",
+        "artifactIds": [
+          "hhax-gate02-interactive-cad-review-r003",
+          "hhax-gate02-cad-review-snapshot-r003"
+        ],
+        "coreArtifactDigest": "8fbd730b4dc42e376829da9a4cb949aa545188996586628931da949aaae31f1a",
+        "reviewedArtifactId": "hhax-gate02-interactive-cad-review-r003",
+        "reviewedArtifactSha256": "728936c0fe74df6a6fd34f143239044cb2fc9b5694469bb17153f2700f0bba38",
+        "governingContractAssetId": "hhax-analysis-discovery-log-r002",
+        "governingContractSha256": "6efb36a42eb73d3c279e10c1d9c0cc835d9e0ec67e5b356cbed5a346cba463dd",
+        "parameterSnapshotAssetId": "hhax-gate02-cad-review-snapshot-r003",
+        "parameterSnapshotSha256": "b43bf76f1b718fcab6b5c3070e790c5d9bfa9579356785d0c31d385e715b825a",
+        "requiredChecklist": [
+          "all-sources-inspected",
+          "mechanism-motion-tested",
+          "uncertainties-reviewed"
+        ],
+        "completedChecklist": [
+          "all-sources-inspected",
+          "mechanism-motion-tested",
+          "uncertainties-reviewed"
+        ],
+        "allowedInteractionModes": [
+          "interactive-cad",
+          "recording-fallback"
+        ],
+        "interactionMode": "interactive-cad",
+        "browserTimestamp": "2026-09-11T00:23:03.885Z",
+        "reviewDevice": "Chromium desktop WebGL",
+        "recordedAt": "2026-09-11T00:23:03.889Z",
+        "finalAuthorityRequired": "latest-explicit-chat-instruction",
+        "approval": {
+          "approvalDelegationId": "90861ce4-8ca8-4753-b398-607c3759b307",
+          "authority": "latest-explicit-chat-instruction",
+          "exactUserWording": "目标是完整的把这款材质做出来，通过设计圣经的判断和自我审查，一步步的自我通过，通过CAD/白模/blender/unity的流程，不需要人工approve，自我进行下一步，最终出成品",
+          "approvedBy": "agent-under-user-delegation",
+          "humanReviewed": false,
+          "individualUserApproval": false,
+          "decisionMode": "standing-user-delegation-after-evidence-validation",
+          "reviewedArtifactId": "hhax-gate02-interactive-cad-review-r003",
+          "reviewedArtifactSha256": "728936c0fe74df6a6fd34f143239044cb2fc9b5694469bb17153f2700f0bba38",
+          "governingContractAssetId": "hhax-analysis-discovery-log-r002",
+          "governingContractSha256": "6efb36a42eb73d3c279e10c1d9c0cc835d9e0ec67e5b356cbed5a346cba463dd",
+          "parameterSnapshotAssetId": "hhax-gate02-cad-review-snapshot-r003",
+          "parameterSnapshotSha256": "b43bf76f1b718fcab6b5c3070e790c5d9bfa9579356785d0c31d385e715b825a",
+          "completedChecklist": [
+            "all-sources-inspected",
+            "mechanism-motion-tested",
+            "uncertainties-reviewed"
+          ],
+          "interactionMode": "interactive-cad",
+          "browserTimestamp": "2026-09-11T00:23:03.885Z",
+          "reviewDevice": "Chromium desktop WebGL",
+          "approvedAt": "2026-09-11T00:24:04.680Z",
+          "physicalPhoneInstallAuthorized": false
+        }
+      },
+      "reviewEvidenceRequired": true,
+      "delegatedApproval": {
+        "approvalDelegationId": "90861ce4-8ca8-4753-b398-607c3759b307",
+        "authority": "latest-explicit-chat-instruction",
+        "exactUserWording": "目标是完整的把这款材质做出来，通过设计圣经的判断和自我审查，一步步的自我通过，通过CAD/白模/blender/unity的流程，不需要人工approve，自我进行下一步，最终出成品",
+        "approvedBy": "agent-under-user-delegation",
+        "humanReviewed": false,
+        "individualUserApproval": false,
+        "decisionMode": "standing-user-delegation-after-evidence-validation",
+        "reviewedArtifactId": "hhax-gate02-interactive-cad-review-r003",
+        "reviewedArtifactSha256": "728936c0fe74df6a6fd34f143239044cb2fc9b5694469bb17153f2700f0bba38",
+        "governingContractAssetId": "hhax-analysis-discovery-log-r002",
+        "governingContractSha256": "6efb36a42eb73d3c279e10c1d9c0cc835d9e0ec67e5b356cbed5a346cba463dd",
+        "parameterSnapshotAssetId": "hhax-gate02-cad-review-snapshot-r003",
+        "parameterSnapshotSha256": "b43bf76f1b718fcab6b5c3070e790c5d9bfa9579356785d0c31d385e715b825a",
+        "completedChecklist": [
+          "all-sources-inspected",
+          "mechanism-motion-tested",
+          "uncertainties-reviewed"
+        ],
+        "interactionMode": "interactive-cad",
+        "browserTimestamp": "2026-09-11T00:23:03.885Z",
+        "reviewDevice": "Chromium desktop WebGL",
+        "approvedAt": "2026-09-11T00:24:04.680Z",
+        "physicalPhoneInstallAuthorized": false
+      }
+    },
+    {
+      "id": "03-contract",
+      "revision": 4,
+      "status": "approved",
+      "artifactIds": [
+        "model-hhax-measurement-modeling-contract-r001",
+        "hhax-gate03-form-review-recording-r002",
+        "hhax-gate03-contract-review-snapshot-r002",
+        "hhax-gate03-form-review-frame-r002"
+      ],
+      "inputDigest": "dce9a12aca2fe2a1639f0144fab515660cea80acc834fdea1be13732dc63854b",
+      "outputDigest": "0f738b7ac06d521425db231d2d776cdd73e1005b9960ab10b3df6379cfe902b0",
+      "validations": [
+        {
+          "id": "approved-analysis-consumed",
+          "status": "pass",
+          "evidence": "Contract consumes all 8 active Gate 02 claims."
+        },
+        {
+          "id": "nine-core-measurements",
+          "status": "pass",
+          "evidence": "9/9 required dimension entries include value, uncertainty, source and method; explicit unknowns remain incomplete."
+        },
+        {
+          "id": "measurement-consistency",
+          "status": "pass",
+          "evidence": "Thickness stack, axis/carrier fit and travel containment pass."
+        },
+        {
+          "id": "measurement-provenance",
+          "status": "pass",
+          "evidence": "3 official fields, 6 calibrated digital targets, and 0 user-measured fields are classified and hash-linked."
+        },
+        {
+          "id": "optional-unknowns-nonblocking",
+          "status": "pass",
+          "evidence": "Optional engineering and manufacturing-only fields remain unknown and do not block initial Blender modeling."
+        },
+        {
+          "id": "strict-dimension-bases",
+          "status": "pass",
+          "evidence": "Generic inference is forbidden. Only same-model official specifications and hash-linked public-teardown calibrations may supply non-user dimensions; calibrated values remain reversible digital targets, never measured or manufacturing claims."
+        },
+        {
+          "id": "interactive-review-evidence",
+          "status": "pass",
+          "evidence": "workbench-form-review-recording is hash-bound to hhax-gate03-form-review-recording-r002, model-hhax-measurement-modeling-contract-r001, and hhax-gate03-contract-review-snapshot-r002."
+        }
+      ],
+      "decision": {
+        "action": "approve",
+        "notes": "九项均经完整工作台录屏逐卡复核：3 项同款公开标称、6 项哈希绑定公开拆解数字校准；所有非用户值均不作实测、物理定值或加工尺寸声明。",
+        "decidedBy": "agent-under-user-delegation",
+        "decidedAt": "2026-09-11T00:26:15.328Z",
+        "finalAuthority": "latest-explicit-chat-instruction",
+        "exactUserWording": "目标是完整的把这款材质做出来，通过设计圣经的判断和自我审查，一步步的自我通过，通过CAD/白模/blender/unity的流程，不需要人工approve，自我进行下一步，最终出成品",
+        "approvalDelegationId": "90861ce4-8ca8-4753-b398-607c3759b307",
+        "humanReviewed": false,
+        "individualUserApproval": false,
+        "decisionMode": "standing-user-delegation-after-evidence-validation"
+      },
+      "approvalRequirement": "source-linked-contract-and-explicit-user-decision",
+      "delegatedApprovalRequiresReviewEvidence": true,
+      "requiredPhysicalDimensions": [
+        "closedOverallLength",
+        "overallWidth",
+        "totalClosedThickness",
+        "topPlateThickness",
+        "bottomPlateThickness",
+        "maximumSlideTravel",
+        "fixedAxisOffsetFromNearestEnd",
+        "rotatingCarrierDiameter",
+        "closedSeamGap"
+      ],
+      "optionalEngineeringDimensions": [
+        "bilateralGrooveCenterSpacing",
+        "grooveWidth",
+        "grooveDepth",
+        "fixedAxisDiameter",
+        "upperStepHeight",
+        "lowerStepHeight",
+        "visibleFollowerDimensions"
+      ],
+      "manufacturingLaterDimensions": [
+        "operatingClearance",
+        "manufacturingAllowance",
+        "manufacturingTolerance"
+      ],
+      "measurementProgress": {
+        "complete": 9,
+        "total": 9
+      },
+      "blockedReason": null,
+      "reviewArtifactIds": [
+        "hhax-gate03-form-review-recording-r002",
+        "hhax-gate03-contract-review-snapshot-r002",
+        "hhax-gate03-form-review-frame-r002"
+      ],
+      "reviewEvidenceSpec": {
+        "revision": 1,
+        "approvalRequirement": "source-linked-contract-and-explicit-user-decision",
+        "artifactIds": [
+          "hhax-gate03-form-review-recording-r002",
+          "hhax-gate03-contract-review-snapshot-r002",
+          "hhax-gate03-form-review-frame-r002"
+        ],
+        "coreArtifactDigest": "a0f76d32da03f778ef1f1a5b6c436d7d91d254a0e5951ffb28925b260df02bb8",
+        "reviewedArtifactId": "hhax-gate03-form-review-recording-r002",
+        "reviewedArtifactSha256": "2ea88c67764a7594a38d70852151eba02907cfadf93dbc7251c5b921bb4b384c",
+        "governingContractAssetId": "model-hhax-measurement-modeling-contract-r001",
+        "governingContractSha256": "e7aadf84cd589b0f69cec93eb866c6169af932560ed9e4e95369ece45c253911",
+        "parameterSnapshotAssetId": "hhax-gate03-contract-review-snapshot-r002",
+        "parameterSnapshotSha256": "3036184b78898e24e62a210081feac16de5254fe9dd38e0094fa6287d1f39da6",
+        "requiredChecklist": [
+          "all-required-dimensions-reviewed",
+          "measurement-sources-reviewed",
+          "measurement-uncertainties-reviewed"
+        ],
+        "completedChecklist": [
+          "all-required-dimensions-reviewed",
+          "measurement-sources-reviewed",
+          "measurement-uncertainties-reviewed"
+        ],
+        "allowedInteractionModes": [
+          "workbench-form-review-recording"
+        ],
+        "interactionMode": "workbench-form-review-recording",
+        "browserTimestamp": "2026-09-11T00:26:15.309Z",
+        "reviewDevice": "Chromium desktop 1440×1000",
+        "recordedAt": "2026-09-11T00:26:15.318Z",
+        "finalAuthorityRequired": "latest-explicit-chat-instruction",
+        "approval": {
+          "approvalDelegationId": "90861ce4-8ca8-4753-b398-607c3759b307",
+          "authority": "latest-explicit-chat-instruction",
+          "exactUserWording": "目标是完整的把这款材质做出来，通过设计圣经的判断和自我审查，一步步的自我通过，通过CAD/白模/blender/unity的流程，不需要人工approve，自我进行下一步，最终出成品",
+          "approvedBy": "agent-under-user-delegation",
+          "humanReviewed": false,
+          "individualUserApproval": false,
+          "decisionMode": "standing-user-delegation-after-evidence-validation",
+          "reviewedArtifactId": "hhax-gate03-form-review-recording-r002",
+          "reviewedArtifactSha256": "2ea88c67764a7594a38d70852151eba02907cfadf93dbc7251c5b921bb4b384c",
+          "governingContractAssetId": "model-hhax-measurement-modeling-contract-r001",
+          "governingContractSha256": "e7aadf84cd589b0f69cec93eb866c6169af932560ed9e4e95369ece45c253911",
+          "parameterSnapshotAssetId": "hhax-gate03-contract-review-snapshot-r002",
+          "parameterSnapshotSha256": "3036184b78898e24e62a210081feac16de5254fe9dd38e0094fa6287d1f39da6",
+          "completedChecklist": [
+            "all-required-dimensions-reviewed",
+            "measurement-sources-reviewed",
+            "measurement-uncertainties-reviewed"
+          ],
+          "interactionMode": "workbench-form-review-recording",
+          "browserTimestamp": "2026-09-11T00:26:15.309Z",
+          "reviewDevice": "Chromium desktop 1440×1000",
+          "approvedAt": "2026-09-11T00:26:15.327Z",
+          "physicalPhoneInstallAuthorized": false
+        }
+      },
+      "reviewEvidenceRequired": true,
+      "delegatedApproval": {
+        "approvalDelegationId": "90861ce4-8ca8-4753-b398-607c3759b307",
+        "authority": "latest-explicit-chat-instruction",
+        "exactUserWording": "目标是完整的把这款材质做出来，通过设计圣经的判断和自我审查，一步步的自我通过，通过CAD/白模/blender/unity的流程，不需要人工approve，自我进行下一步，最终出成品",
+        "approvedBy": "agent-under-user-delegation",
+        "humanReviewed": false,
+        "individualUserApproval": false,
+        "decisionMode": "standing-user-delegation-after-evidence-validation",
+        "reviewedArtifactId": "hhax-gate03-form-review-recording-r002",
+        "reviewedArtifactSha256": "2ea88c67764a7594a38d70852151eba02907cfadf93dbc7251c5b921bb4b384c",
+        "governingContractAssetId": "model-hhax-measurement-modeling-contract-r001",
+        "governingContractSha256": "e7aadf84cd589b0f69cec93eb866c6169af932560ed9e4e95369ece45c253911",
+        "parameterSnapshotAssetId": "hhax-gate03-contract-review-snapshot-r002",
+        "parameterSnapshotSha256": "3036184b78898e24e62a210081feac16de5254fe9dd38e0094fa6287d1f39da6",
+        "completedChecklist": [
+          "all-required-dimensions-reviewed",
+          "measurement-sources-reviewed",
+          "measurement-uncertainties-reviewed"
+        ],
+        "interactionMode": "workbench-form-review-recording",
+        "browserTimestamp": "2026-09-11T00:26:15.309Z",
+        "reviewDevice": "Chromium desktop 1440×1000",
+        "approvedAt": "2026-09-11T00:26:15.327Z",
+        "physicalPhoneInstallAuthorized": false
+      }
+    },
+    {
+      "id": "04-architecture",
+      "revision": 4,
+      "status": "approved",
+      "artifactIds": [
+        "model-hhax-part-tree-r001",
+        "model-hhax-exploded-plan-r001",
+        "hhax-gate04-interactive-architecture-r002",
+        "hhax-gate04-architecture-snapshot-r002"
+      ],
+      "inputDigest": "0f738b7ac06d521425db231d2d776cdd73e1005b9960ab10b3df6379cfe902b0",
+      "outputDigest": "fd058241ea88d83563e86ad289ca1d5060c68392d2cd1a7cbe1a42073e972b09",
+      "validations": [
+        {
+          "id": "approved-contract-consumed",
+          "status": "pass",
+          "evidence": "Both architecture views directly consume 4 current Gate 03 contract artifact(s)."
+        },
+        {
+          "id": "approved-claims-consumed",
+          "status": "pass",
+          "evidence": "Both architecture views carry all 8 active Gate 02 source-linked decisions."
+        },
+        {
+          "id": "part-hierarchy-explicit",
+          "status": "pass",
+          "evidence": "A hashed part-tree view is registered for review."
+        },
+        {
+          "id": "exploded-plan-explicit",
+          "status": "pass",
+          "evidence": "A hashed exploded-plan view is registered for review."
+        },
+        {
+          "id": "gate-05-remains-blocked",
+          "status": "pass",
+          "evidence": "Gate 04 has no decision and Gate 05 remains blocked pending explicit architecture approval."
+        },
+        {
+          "id": "two-shell-ownership",
+          "status": "pass",
+          "evidence": "下壳固定，上壳沿 +Y 位移；外观不再拆成圆牌式第三主壳。"
+        },
+        {
+          "id": "mechanical-drive-owned",
+          "status": "pass",
+          "evidence": "直线轨、圆形载体和中央调节区属于机械手感总成；磁性只属于可换后贴。"
+        },
+        {
+          "id": "three-art-surfaces-separated",
+          "status": "pass",
+          "evidence": "上壳正面、露出下壳正面、背面三套图案和日夜掩膜各自独立。"
+        },
+        {
+          "id": "hidden-boundary-preserved",
+          "status": "pass",
+          "evidence": "隐藏联动曲线、内部数量、孔深和公差未被固化为生产结构。"
+        },
+        {
+          "id": "interactive-review-evidence",
+          "status": "pass",
+          "evidence": "interactive-3d is hash-bound to hhax-gate04-interactive-architecture-r002, model-hhax-measurement-modeling-contract-r001, and hhax-gate04-architecture-snapshot-r002."
+        }
+      ],
+      "decision": {
+        "action": "approve",
+        "notes": "已在交互爆炸装配中检查正面、顶面和斜视，并核对零件树：下壳固定、上壳直推、背部圆载体旋转；三套图案与透明封晶分区独立，隐藏联动仍保持未知。",
+        "decidedBy": "agent-under-user-delegation",
+        "decidedAt": "2026-09-11T00:29:40.862Z",
+        "finalAuthority": "latest-explicit-chat-instruction",
+        "exactUserWording": "目标是完整的把这款材质做出来，通过设计圣经的判断和自我审查，一步步的自我通过，通过CAD/白模/blender/unity的流程，不需要人工approve，自我进行下一步，最终出成品",
+        "approvalDelegationId": "90861ce4-8ca8-4753-b398-607c3759b307",
+        "humanReviewed": false,
+        "individualUserApproval": false,
+        "decisionMode": "standing-user-delegation-after-evidence-validation"
+      },
+      "approvalRequirement": "approved-cad-migration-or-interactive-3d",
+      "delegatedApprovalRequiresReviewEvidence": true,
+      "reviewArtifactIds": [
+        "model-hhax-part-tree-r001",
+        "model-hhax-exploded-plan-r001",
+        "hhax-gate04-interactive-architecture-r002",
+        "hhax-gate04-architecture-snapshot-r002"
+      ],
+      "reviewEvidenceSpec": {
+        "revision": 1,
+        "approvalRequirement": "approved-cad-migration-or-interactive-3d",
+        "artifactIds": [
+          "hhax-gate04-interactive-architecture-r002",
+          "hhax-gate04-architecture-snapshot-r002"
+        ],
+        "coreArtifactDigest": "195be41686426f4a4f33bb18fe8f964107ff2b3c4a0a9cc5644a283d4081c884",
+        "reviewedArtifactId": "hhax-gate04-interactive-architecture-r002",
+        "reviewedArtifactSha256": "fa6d2b4371b89ba8426d6ac3ddd06d2182fa8db767f26779d98144d7453855ef",
+        "governingContractAssetId": "model-hhax-measurement-modeling-contract-r001",
+        "governingContractSha256": "e7aadf84cd589b0f69cec93eb866c6169af932560ed9e4e95369ece45c253911",
+        "parameterSnapshotAssetId": "hhax-gate04-architecture-snapshot-r002",
+        "parameterSnapshotSha256": "ae4611e6701a2947f5493da855ab311218985994799a7de70cfa6f93c4d02fac",
+        "requiredChecklist": [
+          "part-tree-reviewed",
+          "assembly-motion-reviewed",
+          "material-zones-reviewed"
+        ],
+        "completedChecklist": [
+          "part-tree-reviewed",
+          "assembly-motion-reviewed",
+          "material-zones-reviewed"
+        ],
+        "allowedInteractionModes": [
+          "interactive-3d",
+          "complete-turntable-recording"
+        ],
+        "interactionMode": "interactive-3d",
+        "browserTimestamp": "2026-09-11T00:28:52.344Z",
+        "reviewDevice": "Chromium desktop WebGL",
+        "recordedAt": "2026-09-11T00:28:52.353Z",
+        "finalAuthorityRequired": "latest-explicit-chat-instruction",
+        "approval": {
+          "approvalDelegationId": "90861ce4-8ca8-4753-b398-607c3759b307",
+          "authority": "latest-explicit-chat-instruction",
+          "exactUserWording": "目标是完整的把这款材质做出来，通过设计圣经的判断和自我审查，一步步的自我通过，通过CAD/白模/blender/unity的流程，不需要人工approve，自我进行下一步，最终出成品",
+          "approvedBy": "agent-under-user-delegation",
+          "humanReviewed": false,
+          "individualUserApproval": false,
+          "decisionMode": "standing-user-delegation-after-evidence-validation",
+          "reviewedArtifactId": "hhax-gate04-interactive-architecture-r002",
+          "reviewedArtifactSha256": "fa6d2b4371b89ba8426d6ac3ddd06d2182fa8db767f26779d98144d7453855ef",
+          "governingContractAssetId": "model-hhax-measurement-modeling-contract-r001",
+          "governingContractSha256": "e7aadf84cd589b0f69cec93eb866c6169af932560ed9e4e95369ece45c253911",
+          "parameterSnapshotAssetId": "hhax-gate04-architecture-snapshot-r002",
+          "parameterSnapshotSha256": "ae4611e6701a2947f5493da855ab311218985994799a7de70cfa6f93c4d02fac",
+          "completedChecklist": [
+            "part-tree-reviewed",
+            "assembly-motion-reviewed",
+            "material-zones-reviewed"
+          ],
+          "interactionMode": "interactive-3d",
+          "browserTimestamp": "2026-09-11T00:28:52.344Z",
+          "reviewDevice": "Chromium desktop WebGL",
+          "approvedAt": "2026-09-11T00:29:40.861Z",
+          "physicalPhoneInstallAuthorized": false
+        }
+      },
+      "reviewEvidenceRequired": true,
+      "delegatedApproval": {
+        "approvalDelegationId": "90861ce4-8ca8-4753-b398-607c3759b307",
+        "authority": "latest-explicit-chat-instruction",
+        "exactUserWording": "目标是完整的把这款材质做出来，通过设计圣经的判断和自我审查，一步步的自我通过，通过CAD/白模/blender/unity的流程，不需要人工approve，自我进行下一步，最终出成品",
+        "approvedBy": "agent-under-user-delegation",
+        "humanReviewed": false,
+        "individualUserApproval": false,
+        "decisionMode": "standing-user-delegation-after-evidence-validation",
+        "reviewedArtifactId": "hhax-gate04-interactive-architecture-r002",
+        "reviewedArtifactSha256": "fa6d2b4371b89ba8426d6ac3ddd06d2182fa8db767f26779d98144d7453855ef",
+        "governingContractAssetId": "model-hhax-measurement-modeling-contract-r001",
+        "governingContractSha256": "e7aadf84cd589b0f69cec93eb866c6169af932560ed9e4e95369ece45c253911",
+        "parameterSnapshotAssetId": "hhax-gate04-architecture-snapshot-r002",
+        "parameterSnapshotSha256": "ae4611e6701a2947f5493da855ab311218985994799a7de70cfa6f93c4d02fac",
+        "completedChecklist": [
+          "part-tree-reviewed",
+          "assembly-motion-reviewed",
+          "material-zones-reviewed"
+        ],
+        "interactionMode": "interactive-3d",
+        "browserTimestamp": "2026-09-11T00:28:52.344Z",
+        "reviewDevice": "Chromium desktop WebGL",
+        "approvedAt": "2026-09-11T00:29:40.861Z",
+        "physicalPhoneInstallAuthorized": false
+      }
+    },
+    {
+      "id": "05-blockout",
+      "revision": 3,
+      "status": "draft",
+      "artifactIds": [
+        "hhax-gate05-motion-preflight-source-r002",
+        "hhax-gate05-motion-preflight-hero-r002",
+        "hhax-gate05-motion-preflight-closed-r002",
+        "hhax-gate05-motion-preflight-open-r002",
+        "hhax-gate05-motion-preflight-rotation-r002",
+        "hhax-gate05-motion-preflight-glb-r002",
+        "hhax-gate05-motion-preflight-snapshot-r002"
+      ],
+      "inputDigest": "fd058241ea88d83563e86ad289ca1d5060c68392d2cd1a7cbe1a42073e972b09",
+      "outputDigest": "a63e3dfc22e58dc02c740ce91fc6385be5f30bba3177c9a0ce66992b9517685c",
+      "validations": [
+        {
+          "id": "contract-and-architecture-hash-lock",
+          "status": "pass",
+          "evidence": "已核对 Gate 03/04 文件哈希并从九项合同取值。"
+        },
+        {
+          "id": "closed-envelope",
+          "status": "pass",
+          "evidence": "evaluated bounds 为 30.9 × 50.5 × 13.6 mm。"
+        },
+        {
+          "id": "white-model-legibility",
+          "status": "pass",
+          "evidence": "主体、上下壳接缝和胶囊轮廓可读。"
+        },
+        {
+          "id": "full-motion-range-visible",
+          "status": "fail",
+          "evidence": "打开静帧未呈现 18.7 mm 位移，不能证明完整运动范围；本版本不得批准。"
+        }
+      ],
+      "decision": null,
+      "approvalRequirement": "interactive-3d-or-complete-turntable-recording",
+      "delegatedApprovalRequiresReviewEvidence": true,
+      "reviewArtifactIds": [],
+      "reviewEvidenceRequired": true
+    },
+    {
+      "id": "06-geometry",
+      "revision": 1,
+      "status": "blocked",
+      "artifactIds": [],
+      "inputDigest": "a63e3dfc22e58dc02c740ce91fc6385be5f30bba3177c9a0ce66992b9517685c",
+      "outputDigest": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "validations": [],
+      "decision": null,
+      "approvalRequirement": "interactive-3d-or-complete-turntable-recording",
+      "staleReason": "05-blockout produced a new immutable evidence revision.",
+      "delegatedApprovalRequiresReviewEvidence": true
+    },
+    {
+      "id": "07-material",
+      "revision": 1,
+      "status": "blocked",
+      "artifactIds": [],
+      "inputDigest": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "outputDigest": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "validations": [],
+      "decision": null,
+      "approvalRequirement": "interactive-lookdev-or-real-turntable-recording",
+      "staleReason": "05-blockout produced a new immutable evidence revision.",
+      "delegatedApprovalRequiresReviewEvidence": true
+    },
+    {
+      "id": "08-lighting",
+      "revision": 1,
+      "status": "blocked",
+      "artifactIds": [],
+      "inputDigest": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "outputDigest": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "validations": [],
+      "decision": null,
+      "approvalRequirement": "interactive-lookdev-or-real-comparison-recording",
+      "staleReason": "05-blockout produced a new immutable evidence revision.",
+      "delegatedApprovalRequiresReviewEvidence": true
+    },
+    {
+      "id": "09-environment",
+      "revision": 1,
+      "status": "blocked",
+      "artifactIds": [],
+      "inputDigest": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "outputDigest": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "validations": [],
+      "decision": null,
+      "approvalRequirement": "interactive-lookdev-or-real-comparison-recording",
+      "staleReason": "05-blockout produced a new immutable evidence revision.",
+      "delegatedApprovalRequiresReviewEvidence": true
+    },
+    {
+      "id": "10-export",
+      "revision": 1,
+      "status": "blocked",
+      "artifactIds": [],
+      "inputDigest": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "outputDigest": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "validations": [],
+      "decision": null,
+      "approvalRequirement": "real-glb-interaction",
+      "staleReason": "05-blockout produced a new immutable evidence revision.",
+      "delegatedApprovalRequiresReviewEvidence": true
+    },
+    {
+      "id": "11-unity-parity",
+      "revision": 1,
+      "status": "blocked",
+      "artifactIds": [],
+      "inputDigest": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "outputDigest": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "validations": [],
+      "decision": null,
+      "approvalRequirement": "real-unity-runtime-preview-or-complete-recording",
+      "staleReason": "05-blockout produced a new immutable evidence revision.",
+      "delegatedApprovalRequiresReviewEvidence": true
+    },
+    {
+      "id": "12-shipping",
+      "revision": 1,
+      "status": "blocked",
+      "artifactIds": [],
+      "inputDigest": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "outputDigest": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "validations": [],
+      "decision": null,
+      "approvalRequirement": "real-unity-runtime-preview-or-complete-recording",
+      "staleReason": "05-blockout produced a new immutable evidence revision.",
+      "delegatedApprovalRequiresReviewEvidence": true
+    }
+  ],
+  "issues": [],
+  "currentStageId": "05-blockout"
+}

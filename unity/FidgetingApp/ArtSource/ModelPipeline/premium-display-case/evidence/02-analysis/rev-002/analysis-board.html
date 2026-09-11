@@ -1,0 +1,120 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Premium Display Case · Gate 02 Rev 2</title>
+  <style>
+    * { box-sizing: border-box; }
+    html, body { margin: 0; width: 100%; height: 100%; background: #090a0c; color: #f4f5f6; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", sans-serif;
+      padding: 38px 46px;
+    }
+    header { display: flex; justify-content: space-between; align-items: end; margin-bottom: 22px; }
+    h1 { margin: 0; font-size: 32px; }
+    .stage { color: #b3b8c0; font-size: 20px; }
+    .top { display: grid; grid-template-columns: 0.64fr 1.36fr; gap: 16px; }
+    .panel { border: 1px solid #30343b; background: #111318; padding: 18px; }
+    .panel h2 { margin: 0 0 12px; font-size: 22px; }
+    .ratio-stage {
+      height: 500px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      align-items: center;
+      background: #0d0f13;
+      padding: 22px;
+    }
+    .ratio-item { text-align: center; }
+    .portrait {
+      width: 150px;
+      height: 200px;
+      margin: auto;
+      border-radius: 24px;
+      border: 15px solid #d1d5d9;
+      background: #23262a;
+      position: relative;
+    }
+    .portrait.pack { border-width: 0; border-radius: 13px; background: #676c72; }
+    .portrait.pack::before {
+      content: "";
+      position: absolute;
+      left: 0; right: 0; top: 25px;
+      border-top: 6px solid #c8ccd0;
+    }
+    .ratio-item strong { display: block; margin-top: 14px; font-size: 21px; }
+    .ratio-item span { color: #aeb4bc; font-size: 17px; }
+    .reject {
+      margin-top: 18px;
+      color: #efb8b8;
+      font-size: 18px;
+      line-height: 1.4;
+      border-top: 1px solid #4a3434;
+      padding-top: 12px;
+    }
+    .contact { width: 100%; height: 500px; object-fit: contain; background: #0d0f13; }
+    .note { margin-top: 10px; color: #c0c5cc; font-size: 17px; line-height: 1.45; }
+    .flow { margin-top: 16px; border: 1px solid #30343b; background: #111318; padding: 17px 20px; }
+    .flow h2 { margin: 0 0 12px; font-size: 22px; }
+    .beats { display: grid; grid-template-columns: repeat(5, 1fr); gap: 12px; }
+    .beat { text-align: center; border-top: 2px solid #373c44; padding-top: 10px; }
+    .beat strong { display: block; font-size: 19px; }
+    .beat span { display: block; color: #aeb4bc; font-size: 15px; margin-top: 4px; line-height: 1.35; }
+    .arrow { color: #78b6df; font-size: 28px; margin-bottom: 4px; }
+    .retained { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-top: 16px; }
+    .rule { border-top: 2px solid #383d45; padding-top: 10px; }
+    .rule strong { display: block; margin-bottom: 5px; font-size: 18px; }
+    .rule span { color: #bbc0c7; font-size: 16px; line-height: 1.4; }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Premium Display Case · Gate 02 Rev 2</h1>
+    <div class="stage">Portrait 比例 + 竖直 Y 轴 360° 展示</div>
+  </header>
+
+  <div class="top">
+    <section class="panel">
+      <h2>01 · 比例修正</h2>
+      <div class="ratio-stage">
+        <div class="ratio-item">
+          <div class="portrait pack"></div>
+          <strong>PACK</strong>
+          <span>384:512 · 3:4 Portrait</span>
+        </div>
+        <div class="ratio-item">
+          <div class="portrait"></div>
+          <strong>CASE</strong>
+          <span>分析基线约 3:4 Portrait</span>
+        </div>
+      </div>
+      <div class="reject">Landscape 盒体比例已拒绝。精确毫米尺寸、厚度和圆角半径留到 Gate 03。</div>
+    </section>
+
+    <section class="panel">
+      <h2>02 · 360° 竖直轴转动接触表</h2>
+      <img class="contact" src="file:///Users/jiawei.zhou/Documents/Fidgeting%20app/unity/FidgetingApp/ArtSource/ModelPipeline/premium-display-case/evidence/02-analysis/rev-002/portrait-y-turn-contact-sheet.png" alt="0 到 360 度竖直轴旋转接触表">
+      <div class="note">绕盒体竖直 Y 轴：0° 正面 → 90° 侧面 → 180° 背面 → 270° 侧面 → 360° 回正。使用中间关键帧，禁止 Euler 最短路径翻转。完成整圈后才播放单次高光。</div>
+    </section>
+  </div>
+
+  <section class="flow">
+    <h2>03 · 修正后的完整节奏</h2>
+    <div class="beats">
+      <div class="beat"><div class="arrow">01</div><strong>Pack 撕开</strong><span>同一 request<br>Pack 保持前景</span></div>
+      <div class="beat"><div class="arrow">02</div><strong>Portrait 真盒出现</strong><span>Unity 连续两帧 ready<br>同一 assembled 实例</span></div>
+      <div class="beat"><div class="arrow">03</div><strong>Y 轴 360°</strong><span>展示正面、侧厚、背面<br>不写奖品角速度</span></div>
+      <div class="beat"><div class="arrow">04</div><strong>单次高光</strong><span>整圈完成后一次<br>不拆解、不重组</span></div>
+      <div class="beat"><div class="arrow">05</div><strong>悬浮等待</strong><span>Reduce Motion 静态<br>唯一“收下”</span></div>
+    </div>
+  </section>
+
+  <div class="retained">
+    <div class="rule"><strong>闭环外框</strong><span>Gate 01 已批准：一根可贯通管路、相切圆角、零开放边。</span></div>
+    <div class="rule"><strong>背景</strong><span>连续低饱和微颗粒磨砂，不使用局部噪斑。</span></div>
+    <div class="rule"><strong>标签</strong><span>产品名 ≥17 pt、metadata ≥11 pt phone 投影；复用原 Logo／成就。</span></div>
+    <div class="rule"><strong>视觉门禁</strong><span>GIF 与接触表仅是运动分析；真实模型、材质、灯光仍需后续关卡预览。</span></div>
+  </div>
+</body>
+</html>

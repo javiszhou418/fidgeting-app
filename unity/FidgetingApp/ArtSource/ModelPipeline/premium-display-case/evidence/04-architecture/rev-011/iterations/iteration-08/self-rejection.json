@@ -1,0 +1,38 @@
+{
+  "schema": "premium-display-case-gate04-r011-self-rejection.v1",
+  "iteration": 8,
+  "status": "visual-self-rejected-before-registration",
+  "registeredForApproval": false,
+  "source": "actual Unity 6000.5.6f1 PlayMode frames at 1206x2622 and 60 fps",
+  "captureLog": "Logs/PackOpeningGate04R011Capture-r8.log",
+  "automatedReport": "unity-capture-report.json",
+  "automatedStatus": "pass",
+  "note": "The automated capture report passed every programmatic check. Full-size visual inspection of frames 0033-0186 rejected the result. The automated gate set does not measure the four faults below, which is why seven prior iterations did not surface them.",
+  "iteration07CorrectionVerified": "Confirmed fixed. Hiding the 25 lightning particle heads (ParticleSystemRenderMode.None) removed the white square heads and the confetti field.",
+  "reasons": [
+    "Exposure mismatch: the Pack body renders through an unlit pass while the real case renders URP Lit under ambient sky 0.095 / equator 0.042 / ground 0.012. The Pack reads bright and the case reads as a near-black translucent slab, so criterion 1 (one recognizable real assembled Premium Display Case) and criterion 5 (product readable every frame) both fail.",
+    "The freed foil detaches. UpdateStripMesh adds a local offset of retreat*(+0.055..+0.130, +0.085..+0.180) to a strip that is already a child of packRoot, while packRoot itself translates (-0.220, -0.180, -0.012)*retreat. The two motions oppose, so the foil separates into a free-floating rigid ribbon with no attached material ahead of the tear front. Criterion 2 fails.",
+    "The 168-degree maximum twist on a 26 mm strip makes the foil read as a wide flat plate rather than curling foil with underside and thickness. Criterion 2 fails.",
+    "The Pack leaves by sliding 0.220 x 0.180 world units (about 86 percent of Pack width) in 0.81 s rather than dissolving from the torn edge. It reads as a flat panel translating away from a separate object, so criterion 3 (single-instance continuity, no bounds jump) fails. This is the same fault iteration-03 called a static rectangular side panel and iteration-04 called one large front panel; the iteration-04 correction increased the translation instead of removing it.",
+    "The lavender blob persists for the third time (also iteration-01 and iteration-03). Explosion flare startColor is randomised between crimson (0.99, 0.01, 0.24) and pale cyan (0.46, 1.00, 1.00), and the explosion dust tint is blue (0.34, 0.58, 0.92). Sixteen flares emitted on the same deterministic frame average additively to a centred magenta orb. Criterion 5 (no lavender wash, no effect soup) fails.",
+    "Source effect identity does not survive. The audit lists VFX_BoosterExplosion and the 512-spark VFXG_LightingStrike under do-not-reuse, while the approved identity carriers are the SG_BoosterPack _Dissolve/_Emissive edge sweep and the SG_Title_Kyle Sphere Mask sweep. The port made the rejected particle systems dominant and left the approved edge sweep at _EdgeStrength 0.36 with a blue _EdgeColor (0.58, 0.78, 1). The side-by-side shows warm crimson-orange-white source frames against a grey-and-magenta retarget. Criterion 4 fails."
+  ],
+  "rootCauseOfRepeatedFailure": "Iterations 01 through 07 tuned particle atlas tiles, spark shapes, trail heads, and spatial scale. The four faults above are in lighting, pack transform, strip transform, and reuse balance. None of them is a particle parameter, so particle iteration could not converge.",
+  "corrections": [
+    "Raise scene exposure so the URP Lit case reads through the aperture without losing the dark mineral mood.",
+    "Remove the opposing local offset on the released strip so the foil stays welded to the Pack, and cap the twist so thickness and underside read.",
+    "Cut the Pack retreat translation to a small settle and let the audited discard curve remove the Pack from the torn edge.",
+    "Make the audited SG_BoosterPack discard edge sweep the dominant identity carrier: warm near-white edge, higher strength and width.",
+    "Move the audited source flare gradient from random start colour to colour-over-lifetime and set the flare start colour to the source white-hot core, so crimson-purple-cyan reads as flare accents over time instead of one averaged magenta orb.",
+    "Keep every direct-copy hash, the exact 3/25/512/512/16 capacities, and the same-case handoff unchanged."
+  ],
+  "preservedInvariants": [
+    "whole-case only, no explode or assembly",
+    "enclosed toy untouched",
+    "no VFX Graph dependency",
+    "no sample IP or sample artwork imported"
+  ],
+  "shippingRuntimeWired": false,
+  "shippingReady": false,
+  "physicalPhoneInstalled": false
+}

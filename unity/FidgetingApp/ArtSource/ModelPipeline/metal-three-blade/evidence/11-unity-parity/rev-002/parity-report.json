@@ -1,0 +1,278 @@
+{
+ "schemaVersion": 1,
+ "gate": "11-unity-parity",
+ "revision": 2,
+ "modelId": "metal-three-blade",
+ "source": {
+  "exportManifest": "10-export/rev-002/export-manifest.json",
+  "fbxSha256": "b428a03e4141ef4091cdce679941eadcdda71e683d80bf3ea32cf149437a866a",
+  "unityScene": "Assets/_Fidgeting/Scenes/ThreeBladeMetalOriginal.unity",
+  "unityAsset": "Assets/_Fidgeting/Models/GeeoneTriSpinner/GeeoneTriSpinner.fbx"
+ },
+ "camera": {
+  "topOrthoWidthR": 2.3,
+  "blenderHeroR": [
+   1.2,
+   -1.6,
+   1.5
+  ],
+  "unityHeroM": [
+   -0.051,
+   0.06375,
+   -0.068
+  ],
+  "note": "Blender (x,y,z) -> Unity (x,z,-y) by FBX, then 180° yaw in the scene builder"
+ },
+ "silhouette": {
+  "top-ortho": {
+   "blender": {
+    "file": "glb-top-ortho-silhouette.png",
+    "area_frac": 0.28724,
+    "centroid_frac": [
+     0.49933,
+     0.49939
+    ],
+    "bbox_frac": [
+     0.12333,
+     0.065,
+     0.87667,
+     0.74833
+    ],
+    "width_R": 1.7327,
+    "height_R": 1.5717
+   },
+   "unity": {
+    "file": "unity-neutral-top-ortho.png",
+    "area_frac": 0.28774,
+    "centroid_frac": [
+     0.49961,
+     0.49956
+    ],
+    "bbox_frac": [
+     0.12333,
+     0.06583,
+     0.87667,
+     0.74833
+    ],
+    "width_R": 1.7327,
+    "height_R": 1.5697
+   },
+   "iou": 0.9976,
+   "mirrored_to_match": false,
+   "area_ratio_unity_over_blender": 1.0017,
+   "centroid_offset_frac": [
+    0.00028,
+    0.00017
+   ],
+   "overlay": "silhouette-overlay-top-ortho.png"
+  },
+  "hero": {
+   "blender": {
+    "file": "glb-hero-silhouette.png",
+    "area_frac": 0.34217,
+    "centroid_frac": [
+     0.50669,
+     0.56807
+    ],
+    "bbox_frac": [
+     0.0,
+     0.28333,
+     0.84417,
+     0.94667
+    ],
+    "width_R": 1.9416,
+    "height_R": 1.5257
+   },
+   "unity": {
+    "file": "unity-neutral-hero.png",
+    "area_frac": 0.34275,
+    "centroid_frac": [
+     0.50678,
+     0.5683
+    ],
+    "bbox_frac": [
+     0.0,
+     0.28333,
+     0.84417,
+     0.94667
+    ],
+    "width_R": 1.9416,
+    "height_R": 1.5257
+   },
+   "iou": 0.9953,
+   "mirrored_to_match": true,
+   "area_ratio_unity_over_blender": 1.0017,
+   "centroid_offset_frac": [
+    9e-05,
+    0.00023
+   ],
+   "overlay": "silhouette-overlay-hero.png"
+  }
+ },
+ "triangles": {
+  "Rotor_Body": {
+   "exported_tris": 9474,
+   "unity_tris": 9474,
+   "ratio": 1.0
+  },
+  "Cap_Top": {
+   "exported_tris": 166,
+   "unity_tris": 166,
+   "ratio": 1.0
+  },
+  "Cap_Bottom": {
+   "exported_tris": 166,
+   "unity_tris": 166,
+   "ratio": 1.0
+  },
+  "Hub_Core": {
+   "exported_tris": 1148,
+   "unity_tris": 1148,
+   "ratio": 1.0
+  }
+ },
+ "unityImport": {
+  "gate": "11-unity-parity",
+  "revision": 2,
+  "scene": "Assets/_Fidgeting/Scenes/ThreeBladeMetalOriginal.unity",
+  "rotorBody": {
+   "path": "RotorDynamic/Rotor_Root/Rotor_Body",
+   "rotates": true,
+   "rendererEnabled": true,
+   "materials": [
+    "M_GeeoneSatin"
+   ],
+   "mesh": "Assets/_Fidgeting/Models/GeeoneTriSpinner/GeeoneTriSpinner.fbx",
+   "triangles": 9474,
+   "worldBoundsMin": [
+    -0.03679,
+    0.04696,
+    -0.02425
+   ],
+   "worldBoundsMax": [
+    0.03679,
+    0.05704,
+    0.0425
+   ],
+   "localPosition": [
+    0.0,
+    0.0,
+    0.0
+   ]
+  },
+  "capTop": {
+   "path": "HubStatic/TopCap/Cap_Top",
+   "rotates": false,
+   "rendererEnabled": true,
+   "materials": [
+    "M_GeeoneDiscTurned",
+    "M_GeeoneSatin"
+   ],
+   "mesh": "Assets/_Fidgeting/Models/GeeoneTriSpinner/GeeoneTriSpinner.fbx",
+   "triangles": 166,
+   "worldBoundsMin": [
+    -0.02003,
+    0.05755,
+    -0.02055
+   ],
+   "worldBoundsMax": [
+    0.02003,
+    0.06244,
+    0.02055
+   ],
+   "localPosition": [
+    0.0,
+    -0.0056,
+    0.0
+   ]
+  },
+  "capBottom": {
+   "path": "HubStatic/BottomCap/Cap_Bottom",
+   "rotates": false,
+   "rendererEnabled": true,
+   "materials": [
+    "M_GeeoneDiscTurned",
+    "M_GeeoneSatin"
+   ],
+   "mesh": "Assets/_Fidgeting/Models/GeeoneTriSpinner/GeeoneTriSpinner.fbx",
+   "triangles": 166,
+   "worldBoundsMin": [
+    -0.02003,
+    0.04156,
+    -0.02055
+   ],
+   "worldBoundsMax": [
+    0.02003,
+    0.04645,
+    0.02055
+   ],
+   "localPosition": [
+    0.0,
+    0.0054,
+    0.0
+   ]
+  },
+  "hubCore": {
+   "path": "HubStatic/Hub_Core",
+   "rotates": false,
+   "rendererEnabled": true,
+   "materials": [
+    "M_GeeoneHubDark"
+   ],
+   "mesh": "Assets/_Fidgeting/Models/GeeoneTriSpinner/GeeoneTriSpinner.fbx",
+   "triangles": 1148,
+   "worldBoundsMin": [
+    -0.01743,
+    0.04636,
+    -0.01743
+   ],
+   "worldBoundsMax": [
+    0.01743,
+    0.05764,
+    0.01743
+   ],
+   "localPosition": [
+    0.0,
+    0.0,
+    0.0
+   ]
+  },
+  "rotorController": true,
+  "rotorAngularVelocityAtLoad": 0.0,
+  "rotorYaw180Applied": true,
+  "rotorBoundsSizeM": [
+   0.07357,
+   0.01007,
+   0.06675
+  ],
+  "neutralCamera": {
+   "topOrthoWidthM": 0.09775,
+   "heroPositionM": [
+    -0.051,
+    0.06375,
+    -0.068
+   ],
+   "heroFocalLengthMm": 50,
+   "blenderHeroPositionR": [
+    1.2,
+    -1.6,
+    1.5
+   ]
+  }
+ },
+ "checks": {
+  "top-ortho silhouette IoU >= 0.97": true,
+  "top-ortho planar extent 2R within 1 % (Unity vs Blender)": true,
+  "hero silhouette IoU >= 0.93": true,
+  "ownership: rotor rotates, caps + hub core static": true,
+  "all four renderers enabled": true,
+  "materials remapped (Satin / DiscTurned / HubDark)": true,
+  "triangle counts within 1 % of the export": true,
+  "rotor AABB 2R sin60 x thickness (m)": true,
+  "rotor at zero angular velocity on load": true,
+  "authored yaw 180 (blade at twelve o'clock)": true,
+  "rotor controller present": true
+ },
+ "pass": true,
+ "humanInspection": "visual approval of the shipping previews (12-shipping/rev-006) is a separate user decision; this report only proves the Unity scene shows the exported geometry with the approved ownership"
+}

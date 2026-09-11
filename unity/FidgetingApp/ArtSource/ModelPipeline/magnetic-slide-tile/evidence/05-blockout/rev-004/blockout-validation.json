@@ -1,0 +1,368 @@
+{
+  "schemaVersion": 1,
+  "modelId": "magnetic-slide-tile",
+  "gate": "05-blockout",
+  "revision": 4,
+  "contractSha256": "b4318452f163ef7c105c826d4466a739a1dd0d942d4d74d921c29c39e02a84f2",
+  "inputs": {
+    "provisionalContract": "unity/FidgetingApp/ArtSource/ModelPipeline/magnetic-slide-tile/evidence/03-contract/rev-009/provisional-modeling-contract.json",
+    "architecture": "unity/FidgetingApp/ArtSource/ModelPipeline/magnetic-slide-tile/evidence/04-architecture/rev-011/approved-cad-architecture.json",
+    "reusePlanSha256": "da9ec1466a67a7627138532a2770cbb7afff793f542193089a043dbdfcae2506",
+    "reusedAssetCount": 9
+  },
+  "dimensionsMm": {
+    "length": 50,
+    "width": 31,
+    "totalThickness": 12,
+    "topThickness": 5.875,
+    "bottomThickness": 5.875,
+    "closedSeamGap": 0.25,
+    "maxTravel": 18.076433121019107,
+    "axisOffsetFromNearestEnd": 16,
+    "carrierDiameter": 23,
+    "state": "user-authorized-provisional-not-production-measured"
+  },
+  "overlapScaleReconciliation": {
+    "cadNormalizedRadiusMm": 15.92356687898089,
+    "appliedRadiusMm": 15.5,
+    "reason": "50\u00d731 provisional width is narrower than CAD midpoint aspect; clamp disk to W/2 while retaining the more conservative approved 0.361529L travel.",
+    "maxTravelLongitudinalMarginMm": 0.4235668789808926
+  },
+  "hierarchy": [
+    "BottomExterior",
+    "FixedAxis",
+    "MinimumOverlapDisk",
+    "RotatingCarrier",
+    "CarrierFollowerLeft",
+    "CarrierFollowerRight",
+    "TopPlate",
+    "TopGrooveLeft",
+    "TopGrooveRight",
+    "UnknownContacts"
+  ],
+  "poses": [
+    {
+      "id": "closed",
+      "travelMm": 0.0,
+      "angleDeg": 0.0,
+      "fixedAxisWorldMm": [
+        0.0,
+        -9.0,
+        5.875
+      ],
+      "axisDriftMm": 0.0,
+      "carrierMatrixWorld": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          -9.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "topMatrixWorld": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          9.0625
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "topZMinMm": 6.125,
+      "bottomZMaxMm": 5.875
+    },
+    {
+      "id": "max-open",
+      "travelMm": 18.076433121019107,
+      "angleDeg": 0.0,
+      "fixedAxisWorldMm": [
+        0.0,
+        -9.0,
+        5.875
+      ],
+      "axisDriftMm": 0.0,
+      "carrierMatrixWorld": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          -9.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "topMatrixWorld": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          -18.076433182
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          9.0625
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "topZMinMm": 6.125,
+      "bottomZMaxMm": 5.875
+    },
+    {
+      "id": "detent-01",
+      "travelMm": 8.134394904458599,
+      "angleDeg": 12.0,
+      "fixedAxisWorldMm": [
+        0.0,
+        -9.0,
+        5.875
+      ],
+      "axisDriftMm": 0.0,
+      "carrierMatrixWorld": [
+        [
+          0.978147626,
+          -0.2079117,
+          0.0,
+          0.0
+        ],
+        [
+          0.2079117,
+          0.978147626,
+          0.0,
+          -9.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "topMatrixWorld": [
+        [
+          0.978147626,
+          -0.2079117,
+          0.0,
+          -0.179969549
+        ],
+        [
+          0.2079117,
+          0.978147626,
+          0.0,
+          -8.153309822
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          9.0625
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "topZMinMm": 6.125,
+      "bottomZMaxMm": 5.875
+    },
+    {
+      "id": "detent-03",
+      "travelMm": 12.653503184713374,
+      "angleDeg": 36.0,
+      "fixedAxisWorldMm": [
+        0.0,
+        -9.0,
+        5.875
+      ],
+      "axisDriftMm": 0.0,
+      "carrierMatrixWorld": [
+        [
+          0.809017003,
+          -0.587785244,
+          0.0,
+          0.0
+        ],
+        [
+          0.587785244,
+          0.809017003,
+          0.0,
+          -9.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "topMatrixWorld": [
+        [
+          0.809017003,
+          -0.587785244,
+          0.0,
+          2.147475243
+        ],
+        [
+          0.587785244,
+          0.809017003,
+          0.0,
+          -11.955747604
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          9.0625
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "topZMinMm": 6.125,
+      "bottomZMaxMm": 5.875
+    }
+  ],
+  "meshAudit": {
+    "BottomExterior": {
+      "vertices": 1026,
+      "polygons": 515,
+      "triangles": 2048,
+      "nonmanifoldEdges": 0,
+      "signedVolumeMm3": 7894.457524200607,
+      "meshValidationChanged": false
+    },
+    "TopPlate": {
+      "vertices": 1026,
+      "polygons": 515,
+      "triangles": 2048,
+      "nonmanifoldEdges": 0,
+      "signedVolumeMm3": 7894.457524200607,
+      "meshValidationChanged": false
+    },
+    "RotatingCarrierBody": {
+      "vertices": 256,
+      "polygons": 130,
+      "triangles": 508,
+      "nonmanifoldEdges": 0,
+      "signedVolumeMm3": 394.543346070995,
+      "meshValidationChanged": false
+    }
+  },
+  "denseSweep": {
+    "sampleCount": 1800,
+    "allValid": true,
+    "minimumMarginMm": 0.0,
+    "angleInvariant": true
+  },
+  "checks": {
+    "contractHashConsumed": true,
+    "provisionalBoundaryExplicit": true,
+    "hierarchyExact": true,
+    "axisInvariant": true,
+    "topAlwaysAboveBottom": true,
+    "finiteEndpoints": true,
+    "minimumOverlapDenseSweep": true,
+    "detents": true,
+    "noRenderableUnknownProxy": true,
+    "zeroAnimationAndSelfMotion": true,
+    "capsuleSmoothness": true,
+    "closedSilhouetteOverlap": true,
+    "glbWritten": true
+  },
+  "animatedObjects": [],
+  "outputs": {
+    "blend": "magnetic-slide-tile-blockout-r004.blend",
+    "glb": "magnetic-slide-tile-blockout-r004-review.glb",
+    "renders": [
+      "white-hero.png",
+      "white-closed.png",
+      "white-max-open.png",
+      "white-detent-12.png",
+      "white-detent-36.png",
+      "white-underside-grooves.png",
+      "white-exploded-hierarchy.png",
+      "pivot-overlap-overlay.png"
+    ]
+  },
+  "pass": true
+}

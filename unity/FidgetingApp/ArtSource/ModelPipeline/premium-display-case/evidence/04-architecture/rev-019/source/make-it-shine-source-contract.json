@@ -1,0 +1,66 @@
+{
+  "schemaVersion": 1,
+  "module": "FidgetingApp.DisplayCase.MakeItShineCc0",
+  "license": "CC0-1.0",
+  "source": {
+    "repository": "https://github.com/remi-chapelain/Unite2025-MakeItShine-Release",
+    "commit": "88842be0063b5b0b75e82ed6572752a37a13c82b",
+    "pinnedClone": "/Users/jiawei.zhou/Documents/Fidgeting app External Research/Unite2025-MakeItShine-Release",
+    "licenseSha256": "a2010f343487d3f7618affe54f789f5487602331c0a8d03f49e9a7c547cf0499"
+  },
+  "extractedSources": [
+    {
+      "path": "Assets/Animation/Clips/Booster/Booster_Discarded.anim",
+      "sha256": "be661fe81b095f7f1ad08fb2a1c003b15f8690ee08d43f9f705dc849924fb2c6",
+      "extraction": "material._Dissolve normalized 0-to-1 AnimationCurve keys and tangents only"
+    },
+    {
+      "path": "Assets/Art/Kyle/Materials/SG_Title_Kyle.shadergraph",
+      "sha256": "6a7718d6ae1eba360c03a1ea16b207ada5ae80f1a4dc2df0d004453bf94e2067",
+      "extraction": "Sphere Mask sweep idea rebuilt as object-local HLSL"
+    },
+    {
+      "path": "Assets/Art/Booster/SG_LightingStrike.shadergraph",
+      "sha256": "a4eb3922e72a3dadb436902d2c4a57c3fbd6768e4b137104abeed6167e1f4f7d",
+      "extraction": "_Reveal saturate/subtract mask math rebuilt as object-local HLSL"
+    }
+  ],
+  "runtimeFiles": [
+    "MakeItShineCc0EffectCurves.cs",
+    "MakeItShineCc0Masks.hlsl"
+  ],
+  "dependencies": [
+    "UnityEngine.AnimationCurve",
+    "Unity MaterialPropertyBlock",
+    "URP Core.hlsl"
+  ],
+  "excludedAssets": [
+    "Assets/Animation/Timelines/Booster to Card Timeline.playable",
+    "Assets/Animation/Timelines/Spawn Cards Timeline.playable",
+    "Assets/Prefabs/Cinematic/Opening_Booster.prefab",
+    "Assets/Art/Booster/BoosterFractured_B.fbx",
+    "Assets/Art/Booster/VFX_BoosterExplosion.vfx",
+    "Assets/Art/Booster/VFX_BoosterActivation.vfx",
+    "Assets/Art/Booster/VFXG_LightingStrike.vfx",
+    "Assets/Art/Common/Graphs/CardMask_Camera.shadergraph",
+    "Assets/Art/Common/RenderTextures/CardMaskLarge.asset",
+    "all Booster, Card and proxy FBX files",
+    "all three-card layouts and card prefabs",
+    "all branded artwork and sample materials"
+  ],
+  "shippingBoundaries": {
+    "externalModelsImported": false,
+    "externalPrefabsImported": false,
+    "externalTimelinesImported": false,
+    "externalMaterialsImported": false,
+    "externalArtworkImported": false,
+    "particlesImported": false,
+    "particlesEnabled": false,
+    "vfxGraphDependency": false,
+    "cinemachineDependency": false,
+    "extraMaskCamera": false,
+    "renderTextureMask": false,
+    "screenSpaceEffect": false,
+    "objectLocalMeshClipping": true
+  }
+}

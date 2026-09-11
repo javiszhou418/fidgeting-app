@@ -1,0 +1,232 @@
+{
+  "schemaVersion": 1,
+  "modelId": "premium-display-case",
+  "gate": "11-unity-parity",
+  "parityRevision": 1,
+  "status": "pass",
+  "notice": "GATE 11 CANDIDATE PARITY ONLY · VISUAL APPROVAL PENDING · NOT SHIPPING · NOT PUSHED TO PHONE",
+  "sourceGate10": {
+    "approvalEventId": "2aa2212a-7c62-4357-8539-46cef2b84955",
+    "approvalQuote": "正确，批准并导入 Unity（推荐）",
+    "fbxArtifactId": "premium-display-case-product-fbx-r001",
+    "fbxPath": "unity/FidgetingApp/ArtSource/ModelPipeline/premium-display-case/evidence/10-export/rev-001/premium-display-case-product-r001.fbx",
+    "fbxSha256": "21c9db68723f0006d7c6bfec5280cafe55c16cf5392ff97c365c966e91f847ae",
+    "glbArtifactId": "premium-display-case-product-glb-r001",
+    "glbPath": "unity/FidgetingApp/ArtSource/ModelPipeline/premium-display-case/evidence/10-export/rev-001/premium-display-case-product-r001.glb",
+    "glbSha256": "fb22fc333c0c5fbc715385ca510dbf0ee4a18b9847f64764b4511e0278ba4df8",
+    "governingContractSha256": "1aea4db5fb45e61b936c5145d83d39a2e2a4abfe000dddb46cfdb200f76023f3",
+    "fbxIsUnityAuthority": true,
+    "glbPortableEvidenceOnly": true
+  },
+  "candidate": {
+    "fbxPath": "unity/FidgetingApp/Assets/_DisplayCase/Candidates/PremiumDisplayCaseGate11R001/Models/PremiumDisplayCaseGate11R001.fbx",
+    "fbxSha256": "21c9db68723f0006d7c6bfec5280cafe55c16cf5392ff97c365c966e91f847ae",
+    "prefabPath": "unity/FidgetingApp/Assets/_DisplayCase/Candidates/PremiumDisplayCaseGate11R001/Prefabs/PresentationRoot.prefab",
+    "prefabSha256": "b578c70b78fecb61936f289094e38012078195de6473c705a277b9d5c8583519",
+    "scenePath": "unity/FidgetingApp/Assets/_DisplayCase/Candidates/PremiumDisplayCaseGate11R001/Scenes/PremiumDisplayCaseGate11Parity.unity",
+    "sceneSha256": "4e99f5b01c043f6144a7e059b7b890403def9b27f340c24df74d1facd13bc9ad",
+    "root": "PresentationRoot",
+    "objectCount": 12,
+    "meshCount": 5,
+    "triangleCount": 100016,
+    "boundsMeters": {
+      "width": 0.228,
+      "height": 0.304,
+      "depth": 0.059
+    },
+    "pivotErrorMeters": 0.0,
+    "hierarchyExact": true,
+    "unityGeometryDigest": "222a9ab01cd51fd7293664ed8b3b55778f26745ec8b8df2c570f547dfb0205e2",
+    "perObjectDigestsMatch": true,
+    "fbxAuthorityCorrespondenceDigest": "4cffa449d4ed129cedd4575a9a33ec0e2ab76790d73807d9688522fc796d1e58",
+    "unityMatchedAuthorityDigest": "4cffa449d4ed129cedd4575a9a33ec0e2ab76790d73807d9688522fc796d1e58",
+    "maximumVertexErrorMm": 9.6222e-05,
+    "normalsAndWindingPreserved": true,
+    "connectedTubePreserved": true,
+    "contentSlotChildCount": 0,
+    "toyPrizeBundled": false,
+    "labelTextBaked": false,
+    "animationBaked": false
+  },
+  "materials": {
+    "assignmentsExact": true,
+    "records": [
+      {
+        "objectName": "ContinuousTubePerimeter",
+        "materialName": "Gate11ConnectedTube",
+        "materialPath": "Assets/_DisplayCase/Candidates/PremiumDisplayCaseGate11R001/Materials/Gate11ConnectedTube.mat",
+        "shaderName": "FidgetingApp/Gate11MeshClippedFrosted",
+        "renderQueue": 3030,
+        "sortingOrder": 30
+      },
+      {
+        "objectName": "FrontPolycarbonateShell",
+        "materialName": "Gate11FrontFrosted",
+        "materialPath": "Assets/_DisplayCase/Candidates/PremiumDisplayCaseGate11R001/Materials/Gate11FrontFrosted.mat",
+        "shaderName": "FidgetingApp/Gate11MeshClippedFrosted",
+        "renderQueue": 3020,
+        "sortingOrder": 20
+      },
+      {
+        "objectName": "PhysicalLabel",
+        "materialName": "Gate11RuntimeLabel",
+        "materialPath": "Assets/_DisplayCase/Candidates/PremiumDisplayCaseGate11R001/Materials/Gate11RuntimeLabel.mat",
+        "shaderName": "Universal Render Pipeline/Unlit",
+        "renderQueue": 2000,
+        "sortingOrder": 10
+      },
+      {
+        "objectName": "RearPolycarbonateShell",
+        "materialName": "Gate11RearFrosted",
+        "materialPath": "Assets/_DisplayCase/Candidates/PremiumDisplayCaseGate11R001/Materials/Gate11RearFrosted.mat",
+        "shaderName": "FidgetingApp/Gate11MeshClippedFrosted",
+        "renderQueue": 3000,
+        "sortingOrder": -20
+      },
+      {
+        "objectName": "TactileBackgroundInsert",
+        "materialName": "Gate11BlackFlocking",
+        "materialPath": "Assets/_DisplayCase/Candidates/PremiumDisplayCaseGate11R001/Materials/Gate11BlackFlocking.mat",
+        "shaderName": "Universal Render Pipeline/Lit",
+        "renderQueue": 2000,
+        "sortingOrder": 0
+      }
+    ],
+    "materialAssets": [
+      {
+        "path": "unity/FidgetingApp/Assets/_DisplayCase/Candidates/PremiumDisplayCaseGate11R001/Materials/Gate11RearFrosted.mat",
+        "sha256": "fe89b8cdb7b62441891a3509add1f7351f530a69f61584492fd547a6fc1fb4d6"
+      },
+      {
+        "path": "unity/FidgetingApp/Assets/_DisplayCase/Candidates/PremiumDisplayCaseGate11R001/Materials/Gate11FrontFrosted.mat",
+        "sha256": "615d631268cb6f06d63e182d14322881a3ac10c44733ca93394aaad32844866d"
+      },
+      {
+        "path": "unity/FidgetingApp/Assets/_DisplayCase/Candidates/PremiumDisplayCaseGate11R001/Materials/Gate11ConnectedTube.mat",
+        "sha256": "f0b656c29085f7409693ff55628154c2c26bad3f369707b42e2955cb4548bb97"
+      },
+      {
+        "path": "unity/FidgetingApp/Assets/_DisplayCase/Candidates/PremiumDisplayCaseGate11R001/Materials/Gate11BlackFlocking.mat",
+        "sha256": "413d8a49a535a2528b58d75c746b0b6d8d4c4270daf4a3683baf3896f73b84ff"
+      },
+      {
+        "path": "unity/FidgetingApp/Assets/_DisplayCase/Candidates/PremiumDisplayCaseGate11R001/Materials/Gate11RuntimeLabel.mat",
+        "sha256": "f4d0ae04c21dbc4f6eefcbf9312037f93d2fb839fa8eccb03590c7f7e8318873"
+      }
+    ],
+    "blankRuntimeLabel": true,
+    "transparentSortingPass": true,
+    "meshClippedSheen": true,
+    "outsideSilhouettePixels": 0,
+    "outsideSilhouetteReason": "Sheen executes only in the three case mesh fragment passes; the scene has no full-screen sheen, Point Light, or halo node.",
+    "pointLightCount": 0,
+    "externalHaloCount": 0
+  },
+  "camera": {
+    "blenderPositionMm": {
+      "x": 330.0,
+      "y": 185.0,
+      "z": 690.0
+    },
+    "unityPositionMeters": {
+      "x": 0.33000001311302185,
+      "y": 0.1850000023841858,
+      "z": -0.6899999976158142
+    },
+    "blenderLookAtMm": {
+      "x": 0.0,
+      "y": 8.0,
+      "z": 0.0
+    },
+    "unityLookAtMeters": {
+      "x": 0.0,
+      "y": 0.00800000037997961,
+      "z": 0.0
+    },
+    "focalLengthMm": 62.0,
+    "sensorWidthMm": 36.0,
+    "sensorHeightMm": 32.0,
+    "gateFit": "Vertical",
+    "mirroredAxis": "z",
+    "unityUp": {
+      "x": -0.7745293378829956,
+      "y": -0.4154292941093445,
+      "z": -0.47699373960494995
+    },
+    "matchedToBlenderNeutral": true,
+    "renderWidth": 820,
+    "renderHeight": 1000
+  },
+  "capture": {
+    "unityNeutralPath": "unity/FidgetingApp/ArtSource/ModelPipeline/premium-display-case/evidence/11-unity-parity/rev-001/unity-neutral.png",
+    "unityNeutralSha256": "8e48782810430dcc4b97a2c0a4fb032b88eaeb5f2e7c5038c0cc40d83cf8014b",
+    "blenderNeutralPath": "unity/FidgetingApp/ArtSource/ModelPipeline/premium-display-case/evidence/11-unity-parity/rev-001/blender-neutral.png",
+    "blenderNeutralSha256": "cf743b826285f0788591d7728a6f8f7f3a5f6651994ec02ebb8ceb647d1f9c98",
+    "comparisonPath": "unity/FidgetingApp/ArtSource/ModelPipeline/premium-display-case/evidence/11-unity-parity/rev-001/blender-vs-unity-neutral.png",
+    "comparisonSha256": "d8494e86d4522a354b23d7d8169252d06cceec04d37529c931020899afae08b1",
+    "recording": {
+      "path": "unity/FidgetingApp/ArtSource/ModelPipeline/premium-display-case/evidence/11-unity-parity/rev-001/unity-orbit-review.mp4",
+      "sha256": "637dfc6fc5d5bb728018aabf5876bb79ca6cee918a1244302ace52cf785808e6",
+      "codec": "h264",
+      "width": 820,
+      "height": 1000,
+      "frameCount": 48,
+      "framesPerSecond": 12,
+      "durationSeconds": 4.0
+    },
+    "contactSheetPath": "unity/FidgetingApp/ArtSource/ModelPipeline/premium-display-case/evidence/11-unity-parity/rev-001/unity-orbit-contact-sheet.png",
+    "contactSheetSha256": "d5b4eb23e5afdd3036d0a26ef1fc17e31bf56d11c8e9c4572d6c58e9097376a9",
+    "unityNeutralExists": true,
+    "comparisonExists": true,
+    "completeRecordingExists": true
+  },
+  "shippingBoundary": {
+    "shippingPrefabPath": "unity/FidgetingApp/Assets/Resources/Gacha/PremiumDisplayCase.prefab",
+    "shippingPrefabSha256": "88cf4f4a369cae1f370e5c47cebf6d1119d2698fcd0f4de70095314c5993a811",
+    "shippingPrefabUnchanged": true,
+    "shippingScenePath": "unity/FidgetingApp/Assets/_DisplayCase/Scenes/PremiumDisplayCase.unity",
+    "shippingSceneSha256": "f83df832a7f1f7b057b59abfdba2528c0bee617b56422887291ac21db6fd8bbb",
+    "shippingSceneUnchanged": true,
+    "shippingWiringChanged": false,
+    "gate12Blocked": true,
+    "phoneBuiltInstalledLaunched": false
+  },
+  "checks": {
+    "fbxHashExact": true,
+    "prefabExists": true,
+    "sceneExists": true,
+    "objectCountExact": true,
+    "meshCountExact": true,
+    "triangleCountExact": true,
+    "boundsExact": true,
+    "pivotExact": true,
+    "hierarchyExact": true,
+    "perObjectDigestsMatch": true,
+    "normalsAndWindingPreserved": true,
+    "connectedTubePreserved": true,
+    "contentSlotEmpty": true,
+    "noTextBaked": true,
+    "noAnimationBaked": true,
+    "noToyPrizeProxyExplode": true,
+    "materialAssignmentsExact": true,
+    "transparentSortingPass": true,
+    "allMaterialAssetsExist": true,
+    "meshClippedSheen": true,
+    "outsideSilhouettePixelsZero": true,
+    "pointLightCountZero": true,
+    "externalHaloCountZero": true,
+    "shippingPrefabUnchanged": true,
+    "shippingSceneUnchanged": true,
+    "shippingModelUnchanged": true,
+    "shippingWiringChangedFalse": true,
+    "gate12Blocked": true,
+    "phoneBuiltInstalledLaunchedFalse": true,
+    "unityNeutralExists": true,
+    "comparisonExists": true,
+    "completeRecordingExists": true,
+    "contactSheetExists": true,
+    "matchedCameraRecipe": true,
+    "inspectionOnlyNotShippingTiming": true,
+    "focusedUnityTestsPass": true
+  }
+}

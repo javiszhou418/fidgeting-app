@@ -1,0 +1,129 @@
+{
+  "schemaVersion": 1,
+  "modelId": "magnetic-slide-tile",
+  "gate": "07-material",
+  "revision": 13,
+  "rootCause": {
+    "category": "Blender per-polygon material-index mutation",
+    "exact": "Gate 07 rev 12 stored correct face assignments. Gate 08 rev 5 render_roughness() cleared each product mesh's material slots. Blender reset every polygon.material_index to 0. The function reattached the four materials but never restored the saved face indices, then saved the lighting Blend. Slot 0 was the upper or lower artwork material, so cap, side, rim, and underside all sampled artwork in the later turntable.",
+    "sourcePath": "unity/FidgetingApp/ArtSource/ModelPipeline/magnetic-slide-tile/evidence/08-lighting/rev-005/build_gate08_endpoint_lighting.py",
+    "function": "render_roughness",
+    "lineRange": [
+      292,
+      314
+    ],
+    "destructiveClearLines": [
+      304,
+      310
+    ],
+    "polygonIndexRestoreLines": [],
+    "notUvRootCause": "Gate 07 side faces had the solid dark slot before the destructive pass. UVs became visible only after those faces were reassigned to artwork slot 0.",
+    "notExporterRootCause": "The corrupt Gate 08 Blend already had all faces on slot 0 before any later review render. GLB/FBX transport can preserve the new rev 13 partition and is audited independently."
+  },
+  "historicalEvidence": {
+    "gate07Blend": {
+      "path": "unity/FidgetingApp/ArtSource/ModelPipeline/magnetic-slide-tile/evidence/07-material/rev-012/magnetic-slide-tile-material-r012.blend",
+      "sha256": "953929045453e1d9c3bb46612da85a70eb1a078a115a103040778d2703988588",
+      "objects": {
+        "BottomExterior": {
+          "materialIndexCounts": {
+            "0": 1,
+            "1": 3078,
+            "2": 2052,
+            "3": 3592
+          },
+          "materialNameCounts": {
+            "M07R12_Crystal_LowerDistinct": 1,
+            "M07R12_DarkExteriorSide": 3078,
+            "M07R12_NeutralTechnical": 3592,
+            "M07R12_PolishedSilver": 2052
+          },
+          "polygonCount": 8723,
+          "slotNames": [
+            "M07R12_Crystal_LowerDistinct",
+            "M07R12_DarkExteriorSide",
+            "M07R12_PolishedSilver",
+            "M07R12_NeutralTechnical"
+          ]
+        },
+        "MovingTopBody": {
+          "materialIndexCounts": {
+            "0": 1,
+            "1": 5130,
+            "2": 2052,
+            "3": 3600
+          },
+          "materialNameCounts": {
+            "M07R12_Crystal_Upper": 1,
+            "M07R12_DarkExteriorSide": 5130,
+            "M07R12_NeutralTechnical": 3600,
+            "M07R12_PolishedSilver": 2052
+          },
+          "polygonCount": 10783,
+          "slotNames": [
+            "M07R12_Crystal_Upper",
+            "M07R12_DarkExteriorSide",
+            "M07R12_PolishedSilver",
+            "M07R12_NeutralTechnical"
+          ]
+        }
+      }
+    },
+    "gate08Blend": {
+      "path": "unity/FidgetingApp/ArtSource/ModelPipeline/magnetic-slide-tile/evidence/08-lighting/rev-005/magnetic-slide-tile-lighting-r005.blend",
+      "sha256": "fa98f9ec7a74391892fa5848635a95ea48e23d65b9c217c034fb7c1c222ed46f",
+      "objects": {
+        "BottomExterior": {
+          "materialIndexCounts": {
+            "0": 8723,
+            "1": 0,
+            "2": 0,
+            "3": 0
+          },
+          "materialNameCounts": {
+            "M07R12_Crystal_LowerDistinct": 8723,
+            "M07R12_DarkExteriorSide": 0,
+            "M07R12_NeutralTechnical": 0,
+            "M07R12_PolishedSilver": 0
+          },
+          "polygonCount": 8723,
+          "slotNames": [
+            "M07R12_Crystal_LowerDistinct",
+            "M07R12_DarkExteriorSide",
+            "M07R12_PolishedSilver",
+            "M07R12_NeutralTechnical"
+          ]
+        },
+        "MovingTopBody": {
+          "materialIndexCounts": {
+            "0": 10783,
+            "1": 0,
+            "2": 0,
+            "3": 0
+          },
+          "materialNameCounts": {
+            "M07R12_Crystal_Upper": 10783,
+            "M07R12_DarkExteriorSide": 0,
+            "M07R12_NeutralTechnical": 0,
+            "M07R12_PolishedSilver": 0
+          },
+          "polygonCount": 10783,
+          "slotNames": [
+            "M07R12_Crystal_Upper",
+            "M07R12_DarkExteriorSide",
+            "M07R12_PolishedSilver",
+            "M07R12_NeutralTechnical"
+          ]
+        }
+      }
+    }
+  },
+  "checks": {
+    "gate07SourceHadFourLivePartitions": true,
+    "gate08SavedBlendCollapsedEveryFaceToSlotZero": true,
+    "materialSlotsWereReattachedButFaceIndicesWereNot": true,
+    "roughnessPassClearsMaterialSlots": true,
+    "roughnessPassDoesNotRestorePolygonMaterialIndices": true
+  },
+  "pass": true
+}

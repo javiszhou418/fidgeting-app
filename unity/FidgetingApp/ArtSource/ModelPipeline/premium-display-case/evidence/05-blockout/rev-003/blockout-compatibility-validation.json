@@ -1,0 +1,111 @@
+{
+  "schemaVersion": 1,
+  "modelId": "premium-display-case",
+  "gate": "05-blockout",
+  "blockoutRevision": 3,
+  "sourceBlockoutRevision": 2,
+  "sourceGate04EvidenceRevision": 7,
+  "status": "pass",
+  "compatibilityConclusion": "geometry-unchanged-and-compatible",
+  "geometryDigest": "6656ebb6f9003092d2d771a774ec006683347e01c4f12d0c994cc66fc603877f",
+  "boundsMm": {
+    "width": 228.0,
+    "height": 304.0,
+    "depth": 59.0
+  },
+  "labelCenterYmm": 99.0,
+  "maximumCornerCenterDriftMm": 0.0,
+  "closedTube": {
+    "object": "ContinuousTubePerimeter",
+    "connectedMaterialBodyCount": 1,
+    "openBoundaryEdgeCount": 0,
+    "nonManifoldEdgeCount": 0,
+    "channelSamplesVisited": 384,
+    "channelSampleCount": 384
+  },
+  "contentSlot": {
+    "objectType": "EMPTY",
+    "parent": "RearPolycarbonateShell",
+    "childCount": 0,
+    "callerOwned": true
+  },
+  "pivot": {
+    "object": "PresentationRoot",
+    "locationMm": [
+      0.0,
+      0.0,
+      0.0
+    ],
+    "rotationEulerRadians": [
+      0.0,
+      0.0,
+      0.0
+    ],
+    "scale": [
+      1.0,
+      1.0,
+      1.0
+    ]
+  },
+  "forbiddenGeometry": {
+    "halo": false,
+    "vfx": false,
+    "particle": false,
+    "proxy": false,
+    "explode": false,
+    "toy": false
+  },
+  "metrics": {
+    "reviewArtifactExplodedPartCount": 0,
+    "haloGeometryCount": 0,
+    "vfxGeometryCount": 0,
+    "particleEmitterCount": 0,
+    "proxyGeometryCount": 0,
+    "toyGeometryCount": 0,
+    "bakedRuntimeAnimationCount": 0
+  },
+  "imageSizes": {
+    "white-model-hero.png": [
+      1800,
+      1400
+    ],
+    "white-model-front.png": [
+      1200,
+      1600
+    ],
+    "blockout-pivot-root-hierarchy.png": [
+      1600,
+      1200
+    ],
+    "blockout-architecture-compatibility-review.png": [
+      2560,
+      1600
+    ]
+  },
+  "checks": {
+    "blenderAuditPassed": true,
+    "geometryDigestUnchanged": true,
+    "outputBlendHashMatchesAudit": true,
+    "boundsExact": true,
+    "portraitExact": true,
+    "labelCenterExact": true,
+    "concentricCentersExact": true,
+    "closedTubeExact": true,
+    "subjectSurfacesManifold": true,
+    "contentSlotPreserved": true,
+    "pivotPreserved": true,
+    "runtimeAnimationNotBaked": true,
+    "forbiddenGeometryAbsent": true,
+    "wholeCaseReviewOnly": true,
+    "reviewArtifactExplodedPartCount": true,
+    "heroSize": true,
+    "frontSize": true,
+    "hierarchySize": true,
+    "reviewSize": true,
+    "gate06Blocked": true,
+    "shippingBoundaryPreserved": true
+  },
+  "gate06Status": "blocked",
+  "shippingUnityChanged": false,
+  "buildInstallPhonePush": false
+}

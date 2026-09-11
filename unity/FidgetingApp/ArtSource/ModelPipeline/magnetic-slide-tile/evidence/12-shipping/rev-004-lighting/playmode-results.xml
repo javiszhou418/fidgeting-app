@@ -1,0 +1,240 @@
+<?xml version="1.0" encoding="utf-8"?>
+<test-run id="2" testcasecount="3" result="Passed" total="3" passed="3" failed="0" inconclusive="0" skipped="0" asserts="0" engine-version="3.5.0.0" clr-version="4.0.30319.42000" start-time="2026-09-01 07:49:46Z" end-time="2026-09-01 07:49:50Z" duration="4.1665444">
+  <test-suite type="TestSuite" id="1012" name="Fidget Spinner" fullname="Fidget Spinner" runstate="Runnable" testcasecount="3" result="Passed" start-time="2026-09-01 07:49:46Z" end-time="2026-09-01 07:49:50Z" duration="4.166544" total="3" passed="3" failed="0" inconclusive="0" skipped="0" asserts="0">
+    <properties>
+      <property name="platform" value="PlayMode" />
+    </properties>
+    <test-suite type="Assembly" id="1005" name="FidgetingApp.MagneticSlide.PlayModeTests.dll" fullname="/Users/jiawei.zhou/Documents/Fidgeting app/unity/FidgetingApp/Library/ScriptAssemblies/FidgetingApp.MagneticSlide.PlayModeTests.dll" runstate="Runnable" testcasecount="3" result="Passed" start-time="2026-09-01 07:49:46Z" end-time="2026-09-01 07:49:50Z" duration="4.154431" total="3" passed="3" failed="0" inconclusive="0" skipped="0" asserts="0">
+      <properties>
+        <property name="_PID" value="40215" />
+        <property name="_APPDOMAIN" value="Unity Child Domain" />
+        <property name="platform" value="PlayMode" />
+        <property name="EditorOnly" value="False" />
+      </properties>
+      <test-suite type="TestSuite" id="1006" name="FidgetingApp" fullname="FidgetingApp" runstate="Runnable" testcasecount="3" result="Passed" start-time="2026-09-01 07:49:46Z" end-time="2026-09-01 07:49:50Z" duration="4.139865" total="3" passed="3" failed="0" inconclusive="0" skipped="0" asserts="0">
+        <properties />
+        <test-suite type="TestSuite" id="1007" name="MagneticSlide" fullname="FidgetingApp.MagneticSlide" runstate="Runnable" testcasecount="3" result="Passed" start-time="2026-09-01 07:49:46Z" end-time="2026-09-01 07:49:50Z" duration="4.123196" total="3" passed="3" failed="0" inconclusive="0" skipped="0" asserts="0">
+          <properties />
+          <test-suite type="TestSuite" id="1008" name="PlayModeTests" fullname="FidgetingApp.MagneticSlide.PlayModeTests" runstate="Runnable" testcasecount="3" result="Passed" start-time="2026-09-01 07:49:46Z" end-time="2026-09-01 07:49:50Z" duration="4.106541" total="3" passed="3" failed="0" inconclusive="0" skipped="0" asserts="0">
+            <properties />
+            <test-suite type="TestFixture" id="1001" name="MagneticSlideTileInputPlayModeTests" fullname="FidgetingApp.MagneticSlide.PlayModeTests.MagneticSlideTileInputPlayModeTests" classname="FidgetingApp.MagneticSlide.PlayModeTests.MagneticSlideTileInputPlayModeTests" runstate="Runnable" testcasecount="3" result="Passed" start-time="2026-09-01 07:49:46Z" end-time="2026-09-01 07:49:50Z" duration="4.089377" total="3" passed="3" failed="0" inconclusive="0" skipped="0" asserts="0">
+              <properties />
+              <test-case id="1004" name="ReloadAndIdleFramesPreserveZeroMotion" fullname="FidgetingApp.MagneticSlide.PlayModeTests.MagneticSlideTileInputPlayModeTests.ReloadAndIdleFramesPreserveZeroMotion" methodname="ReloadAndIdleFramesPreserveZeroMotion" classname="FidgetingApp.MagneticSlide.PlayModeTests.MagneticSlideTileInputPlayModeTests" runstate="Runnable" seed="13674117" result="Passed" start-time="2026-09-01 07:49:46Z" end-time="2026-09-01 07:49:47Z" duration="1.281597" asserts="0">
+                <properties>
+                  <property name="_JOINTYPE" value="UnityCombinatorial" />
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+                <output><![CDATA[[MagneticSlideRuntime] audio-ready clip=MagneticSlide_AlloyClick_766Hz voices=6 sampleRate=48000 dspBuffer=1024x4
+[MagneticSlideRuntime] shipping-coordinator-ready candidate=True fallback=False
+[MagneticSlideRuntime] input-ready surface=ShippingInteractionSurface profile=LinearMagneticDetentProfile
+[MagneticSlideRuntime] audio-ready clip=MagneticSlide_AlloyClick_766Hz voices=6 sampleRate=48000 dspBuffer=1024x4
+[MagneticSlideRuntime] shipping-coordinator-ready candidate=True fallback=False
+[MagneticSlideRuntime] input-ready surface=ShippingInteractionSurface profile=LinearMagneticDetentProfile
+]]></output>
+              </test-case>
+              <test-case id="1003" name="TouchEventsArbitrateToyOrbitAndPinch" fullname="FidgetingApp.MagneticSlide.PlayModeTests.MagneticSlideTileInputPlayModeTests.TouchEventsArbitrateToyOrbitAndPinch" methodname="TouchEventsArbitrateToyOrbitAndPinch" classname="FidgetingApp.MagneticSlide.PlayModeTests.MagneticSlideTileInputPlayModeTests" runstate="Runnable" seed="1677800824" result="Passed" start-time="2026-09-01 07:49:47Z" end-time="2026-09-01 07:49:48Z" duration="0.641729" asserts="0">
+                <properties>
+                  <property name="_JOINTYPE" value="UnityCombinatorial" />
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+                <output><![CDATA[[MagneticSlideRuntime] audio-ready clip=MagneticSlide_AlloyClick_766Hz voices=6 sampleRate=48000 dspBuffer=1024x4
+[MagneticSlideRuntime] shipping-coordinator-ready candidate=True fallback=False
+[MagneticSlideRuntime] input-ready surface=ShippingInteractionSurface profile=LinearMagneticDetentProfile
+[MagneticSlideRuntime] orbit-begin touch=21 x=8.0 y=249.6
+[MagneticSlideRuntime] touch-begin x=8.0 y=249.6 hit=False ui=False presentation=Orbit
+[MagneticSlideRuntime] orbit-update yaw=4.48 pitch=-1.92
+[MagneticSlideRuntime] orbit-update yaw=8.96 pitch=-3.84
+[MagneticSlideRuntime] orbit-update yaw=13.44 pitch=-5.76
+[MagneticSlideRuntime] orbit-update yaw=17.92 pitch=-7.68
+[MagneticSlideRuntime] pinch-begin distance=384.0
+[MagneticSlideRuntime] zoom-update scale=1.2083 target=0.828
+[MagneticSlideRuntime] presentation-reserved-for-product touch=24
+[MagneticSlideRuntime] touch-begin x=315.4 y=287.3 hit=True ui=False presentation=ReservedForProduct
+[MagneticSlideRuntime] toy-gesture-begin mode=Slide travel=0.000000 angle=0.0
+[MagneticSlideRuntime] audio-play event=MagneticEdgeProbe count=1 volume=0.312 pitch=0.880
+]]></output>
+              </test-case>
+              <test-case id="1002" name="TouchEventsDriveInterlockFullTurnAudioAndHaptics" fullname="FidgetingApp.MagneticSlide.PlayModeTests.MagneticSlideTileInputPlayModeTests.TouchEventsDriveInterlockFullTurnAudioAndHaptics" methodname="TouchEventsDriveInterlockFullTurnAudioAndHaptics" classname="FidgetingApp.MagneticSlide.PlayModeTests.MagneticSlideTileInputPlayModeTests" runstate="Runnable" seed="1135532931" result="Passed" start-time="2026-09-01 07:49:48Z" end-time="2026-09-01 07:49:50Z" duration="2.146286" asserts="0">
+                <properties>
+                  <property name="_JOINTYPE" value="UnityCombinatorial" />
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+                <output><![CDATA[[MagneticSlideRuntime] audio-ready clip=MagneticSlide_AlloyClick_766Hz voices=6 sampleRate=48000 dspBuffer=1024x4
+[MagneticSlideRuntime] shipping-coordinator-ready candidate=True fallback=False
+[MagneticSlideRuntime] input-ready surface=ShippingInteractionSurface profile=LinearMagneticDetentProfile
+[MagneticSlideRuntime] presentation-reserved-for-product touch=1
+[MagneticSlideRuntime] touch-begin x=320.0 y=283.0 hit=True ui=False presentation=ReservedForProduct
+[MagneticSlideRuntime] toy-gesture-begin mode=Slide travel=0.000000 angle=0.0
+[MagneticSlideRuntime] presentation-reserved-for-product touch=2
+[MagneticSlideRuntime] touch-begin x=320.0 y=285.5 hit=True ui=False presentation=ReservedForProduct
+[MagneticSlideRuntime] toy-gesture-begin mode=Slide travel=0.000943 angle=0.0
+[MagneticSlideRuntime] presentation-reserved-for-product touch=3
+[MagneticSlideRuntime] touch-begin x=320.0 y=283.0 hit=True ui=False presentation=ReservedForProduct
+[MagneticSlideRuntime] toy-gesture-begin mode=Slide travel=0.000000 angle=0.0
+[MagneticSlideRuntime] audio-play event=MagneticEdgeProbe count=1 volume=0.312 pitch=0.880
+[MagneticSlideRuntime] audio-play event=MagneticEdgeProbe count=2 volume=0.359 pitch=0.880
+[MagneticSlideRuntime] audio-play event=MagneticEdgeProbe count=3 volume=0.406 pitch=0.880
+[MagneticSlideRuntime] audio-play event=MagneticEdgeProbe count=4 volume=0.452 pitch=0.880
+[MagneticSlideRuntime] audio-play event=Breakaway count=5 volume=0.640 pitch=0.760
+[MagneticSlideRuntime] presentation-reserved-for-product touch=4
+[MagneticSlideRuntime] touch-begin x=320.0 y=326.5 hit=True ui=False presentation=ReservedForProduct
+[MagneticSlideRuntime] toy-gesture-begin mode=Undecided travel=0.018076 angle=0.0
+[MagneticSlideRuntime] toy-gesture-mode=rotate
+[MagneticSlideRuntime] audio-play event=DetentCrossed count=6 volume=0.562 pitch=1.000
+[MagneticSlideRuntime] angle-update unwrapped=12.0 angle=12.0 detent=01
+[MagneticSlideRuntime] audio-play event=DetentCaptured count=7 volume=0.530 pitch=0.820
+[MagneticSlideRuntime] presentation-reserved-for-product touch=5
+[MagneticSlideRuntime] touch-begin x=329.9 y=326.1 hit=True ui=False presentation=ReservedForProduct
+[MagneticSlideRuntime] toy-gesture-begin mode=Rotate travel=0.018076 angle=12.0
+[MagneticSlideRuntime] audio-play event=DetentCrossed count=8 volume=0.562 pitch=1.000
+[MagneticSlideRuntime] angle-update unwrapped=24.0 angle=24.0 detent=02
+[MagneticSlideRuntime] audio-play event=DetentCrossed count=9 volume=0.562 pitch=1.000
+[MagneticSlideRuntime] angle-update unwrapped=36.0 angle=36.0 detent=03
+[MagneticSlideRuntime] audio-play event=DetentCrossed count=10 volume=0.562 pitch=1.000
+[MagneticSlideRuntime] audio-play event=DetentCrossed count=11 volume=0.562 pitch=1.000
+[MagneticSlideRuntime] angle-update unwrapped=60.0 angle=60.0 detent=05
+[MagneticSlideRuntime] audio-play event=DetentCrossed count=12 volume=0.562 pitch=1.000
+[MagneticSlideRuntime] audio-play event=DetentCrossed count=13 volume=0.562 pitch=1.000
+[MagneticSlideRuntime] audio-play event=DetentCrossed count=14 volume=0.562 pitch=1.000
+[MagneticSlideRuntime] audio-play event=DetentCrossed count=15 volume=0.562 pitch=1.000
+[MagneticSlideRuntime] audio-play event=DetentCrossed count=16 volume=0.562 pitch=1.000
+[MagneticSlideRuntime] angle-update unwrapped=120.0 angle=120.0 detent=10
+[MagneticSlideRuntime] audio-play event=DetentCrossed count=17 volume=0.562 pitch=1.000
+[MagneticSlideRuntime] audio-play event=DetentCrossed count=18 volume=0.562 pitch=1.000
+[MagneticSlideRuntime] audio-play event=DetentCrossed count=19 volume=0.562 pitch=1.000
+[MagneticSlideRuntime] angle-update unwrapped=156.0 angle=156.0 detent=13
+[MagneticSlideRuntime] audio-play event=DetentCaptured count=20 volume=0.530 pitch=0.820
+[MagneticSlideRuntime] presentation-reserved-for-product touch=6
+[MagneticSlideRuntime] touch-begin x=341.3 y=284.9 hit=True ui=False presentation=ReservedForProduct
+[MagneticSlideRuntime] toy-gesture-begin mode=Rotate travel=0.018076 angle=156.0
+[MagneticSlideRuntime] audio-play event=DetentCrossed count=21 volume=0.562 pitch=1.000
+[MagneticSlideRuntime] angle-update unwrapped=144.0 angle=144.0 detent=12
+[MagneticSlideRuntime] audio-play event=DetentCrossed count=22 volume=0.562 pitch=1.000
+[MagneticSlideRuntime] angle-update unwrapped=132.0 angle=132.0 detent=11
+[MagneticSlideRuntime] audio-play event=DetentCrossed count=23 volume=0.562 pitch=1.000
+[MagneticSlideRuntime] angle-update unwrapped=120.0 angle=120.0 detent=10
+[MagneticSlideRuntime] audio-play event=DetentCrossed count=24 volume=0.562 pitch=1.000
+[MagneticSlideRuntime] angle-update unwrapped=108.0 angle=108.0 detent=09
+[MagneticSlideRuntime] audio-play event=DetentCrossed count=25 volume=0.562 pitch=1.000
+[MagneticSlideRuntime] angle-update unwrapped=96.0 angle=96.0 detent=08
+[MagneticSlideRuntime] audio-play event=DetentCrossed count=26 volume=0.562 pitch=1.000
+[MagneticSlideRuntime] angle-update unwrapped=84.0 angle=84.0 detent=07
+[MagneticSlideRuntime] audio-play event=DetentCrossed count=27 volume=0.562 pitch=1.000
+[MagneticSlideRuntime] angle-update unwrapped=72.0 angle=72.0 detent=06
+[MagneticSlideRuntime] audio-play event=DetentCrossed count=28 volume=0.562 pitch=1.000
+[MagneticSlideRuntime] angle-update unwrapped=60.0 angle=60.0 detent=05
+[MagneticSlideRuntime] audio-play event=DetentCrossed count=29 volume=0.562 pitch=1.000
+[MagneticSlideRuntime] angle-update unwrapped=48.0 angle=48.0 detent=04
+[MagneticSlideRuntime] audio-play event=DetentCrossed count=30 volume=0.562 pitch=1.000
+[MagneticSlideRuntime] angle-update unwrapped=36.0 angle=36.0 detent=03
+[MagneticSlideRuntime] audio-play event=DetentCrossed count=31 volume=0.562 pitch=1.000
+[MagneticSlideRuntime] angle-update unwrapped=24.0 angle=24.0 detent=02
+[MagneticSlideRuntime] audio-play event=DetentCrossed count=32 volume=0.562 pitch=1.000
+[MagneticSlideRuntime] angle-update unwrapped=12.0 angle=12.0 detent=01
+[MagneticSlideRuntime] audio-play event=DetentCrossed count=33 volume=0.562 pitch=1.000
+[MagneticSlideRuntime] angle-update unwrapped=0.0 angle=0.0 detent=00
+[MagneticSlideRuntime] audio-play event=DetentCaptured count=34 volume=0.530 pitch=0.820
+[MagneticSlideRuntime] presentation-reserved-for-product touch=7
+[MagneticSlideRuntime] touch-begin x=320.0 y=326.5 hit=True ui=False presentation=ReservedForProduct
+[MagneticSlideRuntime] toy-gesture-begin mode=Undecided travel=0.018076 angle=0.0
+[MagneticSlideRuntime] toy-gesture-mode=slide
+[MagneticSlideRuntime] audio-play event=MagneticEdgeProbe count=35 volume=0.406 pitch=0.880
+[MagneticSlideRuntime] audio-play event=MagneticEdgeProbe count=36 volume=0.359 pitch=0.880
+[MagneticSlideRuntime] audio-play event=DetentCaptured count=37 volume=0.530 pitch=0.820
+[MagneticSlideRuntime] audio-play event=MagneticEdgeProbe count=38 volume=0.312 pitch=0.880
+[MagneticSlideRuntime] audio-play event=MagneticEdgeProbe count=39 volume=0.265 pitch=0.880
+[MagneticSlideRuntime] presentation-reserved-for-product touch=8
+[MagneticSlideRuntime] touch-begin x=320.0 y=283.0 hit=True ui=False presentation=ReservedForProduct
+[MagneticSlideRuntime] toy-gesture-begin mode=Slide travel=0.000000 angle=0.0
+[MagneticSlideRuntime] audio-play event=MagneticEdgeProbe count=40 volume=0.312 pitch=0.880
+[MagneticSlideRuntime] audio-play event=MagneticEdgeProbe count=41 volume=0.359 pitch=0.880
+[MagneticSlideRuntime] audio-play event=MagneticEdgeProbe count=42 volume=0.406 pitch=0.880
+[MagneticSlideRuntime] audio-play event=MagneticEdgeProbe count=43 volume=0.452 pitch=0.880
+[MagneticSlideRuntime] audio-play event=Breakaway count=44 volume=0.640 pitch=0.760
+[MagneticSlideRuntime] presentation-reserved-for-product touch=9
+[MagneticSlideRuntime] touch-begin x=320.0 y=326.5 hit=True ui=False presentation=ReservedForProduct
+[MagneticSlideRuntime] toy-gesture-begin mode=Undecided travel=0.018076 angle=0.0
+[MagneticSlideRuntime] toy-gesture-mode=rotate
+[MagneticSlideRuntime] audio-play event=DetentCrossed count=45 volume=0.562 pitch=1.000
+[MagneticSlideRuntime] angle-update unwrapped=12.0 angle=12.0 detent=01
+[MagneticSlideRuntime] audio-play event=DetentCrossed count=46 volume=0.562 pitch=1.000
+[MagneticSlideRuntime] angle-update unwrapped=24.0 angle=24.0 detent=02
+[MagneticSlideRuntime] audio-play event=DetentCrossed count=47 volume=0.562 pitch=1.000
+[MagneticSlideRuntime] angle-update unwrapped=36.0 angle=36.0 detent=03
+[MagneticSlideRuntime] audio-play event=DetentCrossed count=48 volume=0.562 pitch=1.000
+[MagneticSlideRuntime] angle-update unwrapped=48.0 angle=48.0 detent=04
+[MagneticSlideRuntime] audio-play event=DetentCrossed count=49 volume=0.562 pitch=1.000
+[MagneticSlideRuntime] angle-update unwrapped=60.0 angle=60.0 detent=05
+[MagneticSlideRuntime] audio-play event=DetentCrossed count=50 volume=0.562 pitch=1.000
+[MagneticSlideRuntime] angle-update unwrapped=72.0 angle=72.0 detent=06
+[MagneticSlideRuntime] audio-play event=DetentCrossed count=51 volume=0.562 pitch=1.000
+[MagneticSlideRuntime] angle-update unwrapped=84.0 angle=84.0 detent=07
+[MagneticSlideRuntime] audio-play event=DetentCrossed count=52 volume=0.562 pitch=1.000
+[MagneticSlideRuntime] angle-update unwrapped=96.0 angle=96.0 detent=08
+[MagneticSlideRuntime] audio-play event=DetentCrossed count=53 volume=0.562 pitch=1.000
+[MagneticSlideRuntime] angle-update unwrapped=108.0 angle=108.0 detent=09
+[MagneticSlideRuntime] audio-play event=DetentCrossed count=54 volume=0.562 pitch=1.000
+[MagneticSlideRuntime] angle-update unwrapped=120.0 angle=120.0 detent=10
+[MagneticSlideRuntime] audio-play event=DetentCrossed count=55 volume=0.562 pitch=1.000
+[MagneticSlideRuntime] angle-update unwrapped=132.0 angle=132.0 detent=11
+[MagneticSlideRuntime] audio-play event=DetentCrossed count=56 volume=0.562 pitch=1.000
+[MagneticSlideRuntime] angle-update unwrapped=144.0 angle=144.0 detent=12
+[MagneticSlideRuntime] audio-play event=DetentCrossed count=57 volume=0.562 pitch=1.000
+[MagneticSlideRuntime] angle-update unwrapped=156.0 angle=156.0 detent=13
+[MagneticSlideRuntime] audio-play event=DetentCrossed count=58 volume=0.562 pitch=1.000
+[MagneticSlideRuntime] angle-update unwrapped=168.0 angle=168.0 detent=14
+[MagneticSlideRuntime] audio-play event=DetentCrossed count=59 volume=0.562 pitch=1.000
+[MagneticSlideRuntime] angle-update unwrapped=180.0 angle=180.0 detent=15
+[MagneticSlideRuntime] audio-play event=DetentCrossed count=60 volume=0.562 pitch=1.000
+[MagneticSlideRuntime] angle-update unwrapped=192.0 angle=192.0 detent=16
+[MagneticSlideRuntime] audio-play event=DetentCrossed count=61 volume=0.562 pitch=1.000
+[MagneticSlideRuntime] angle-update unwrapped=204.0 angle=204.0 detent=17
+[MagneticSlideRuntime] audio-play event=DetentCrossed count=62 volume=0.562 pitch=1.000
+[MagneticSlideRuntime] angle-update unwrapped=216.0 angle=216.0 detent=18
+[MagneticSlideRuntime] audio-play event=DetentCrossed count=63 volume=0.562 pitch=1.000
+[MagneticSlideRuntime] angle-update unwrapped=228.0 angle=228.0 detent=19
+[MagneticSlideRuntime] audio-play event=DetentCrossed count=64 volume=0.562 pitch=1.000
+[MagneticSlideRuntime] angle-update unwrapped=240.0 angle=240.0 detent=20
+[MagneticSlideRuntime] audio-play event=DetentCrossed count=65 volume=0.562 pitch=1.000
+[MagneticSlideRuntime] angle-update unwrapped=252.0 angle=252.0 detent=21
+[MagneticSlideRuntime] audio-play event=DetentCrossed count=66 volume=0.562 pitch=1.000
+[MagneticSlideRuntime] angle-update unwrapped=264.0 angle=264.0 detent=22
+[MagneticSlideRuntime] audio-play event=DetentCrossed count=67 volume=0.562 pitch=1.000
+[MagneticSlideRuntime] angle-update unwrapped=276.0 angle=276.0 detent=23
+[MagneticSlideRuntime] audio-play event=DetentCrossed count=68 volume=0.562 pitch=1.000
+[MagneticSlideRuntime] angle-update unwrapped=288.0 angle=288.0 detent=24
+[MagneticSlideRuntime] audio-play event=DetentCrossed count=69 volume=0.562 pitch=1.000
+[MagneticSlideRuntime] angle-update unwrapped=300.0 angle=300.0 detent=25
+[MagneticSlideRuntime] audio-play event=DetentCrossed count=70 volume=0.562 pitch=1.000
+[MagneticSlideRuntime] angle-update unwrapped=312.0 angle=312.0 detent=26
+[MagneticSlideRuntime] audio-play event=DetentCrossed count=71 volume=0.562 pitch=1.000
+[MagneticSlideRuntime] angle-update unwrapped=324.0 angle=324.0 detent=27
+[MagneticSlideRuntime] audio-play event=DetentCrossed count=72 volume=0.562 pitch=1.000
+[MagneticSlideRuntime] angle-update unwrapped=336.0 angle=336.0 detent=28
+[MagneticSlideRuntime] audio-play event=DetentCrossed count=73 volume=0.562 pitch=1.000
+[MagneticSlideRuntime] angle-update unwrapped=348.0 angle=348.0 detent=29
+[MagneticSlideRuntime] audio-play event=DetentCrossed count=74 volume=0.562 pitch=1.000
+[MagneticSlideRuntime] angle-update unwrapped=360.0 angle=0.0 detent=00
+[MagneticSlideRuntime] audio-play event=DetentCaptured count=75 volume=0.530 pitch=0.820
+[MagneticSlideRuntime] presentation-reserved-for-product touch=10
+[MagneticSlideRuntime] touch-begin x=320.0 y=326.5 hit=True ui=False presentation=ReservedForProduct
+[MagneticSlideRuntime] toy-gesture-begin mode=Undecided travel=0.018076 angle=0.0
+[MagneticSlideRuntime] toy-gesture-mode=slide
+[MagneticSlideRuntime] audio-play event=MagneticEdgeProbe count=76 volume=0.406 pitch=0.880
+[MagneticSlideRuntime] audio-play event=MagneticEdgeProbe count=77 volume=0.359 pitch=0.880
+[MagneticSlideRuntime] audio-play event=DetentCaptured count=78 volume=0.530 pitch=0.820
+[MagneticSlideRuntime] audio-play event=MagneticEdgeProbe count=79 volume=0.312 pitch=0.880
+[MagneticSlideRuntime] audio-play event=MagneticEdgeProbe count=80 volume=0.265 pitch=0.880
+Saving results to: /Users/jiawei.zhou/Library/Application Support/DefaultCompany/Fidget Spinner/TestResults.xml
+]]></output>
+              </test-case>
+            </test-suite>
+          </test-suite>
+        </test-suite>
+      </test-suite>
+    </test-suite>
+  </test-suite>
+</test-run>

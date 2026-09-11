@@ -1,0 +1,121 @@
+{
+  "status": "rejected-source-diagnosis",
+  "rejectedShippingRevision": 3,
+  "pipelineRejectionEventId": "580beed5-ae76-41e0-b800-601cf505bb93",
+  "sourceVideo": "unity/FidgetingApp/ArtSource/ModelPipeline/premium-display-case/evidence/12-shipping/rev-003/app-simulator-pack-to-case-r3.mp4",
+  "sourceVideoSha256": "1153f2d42188f7bdab1ba365037602e0a12bf3931c70c4bfbb42f0840d3239c3",
+  "video": {
+    "width": 1206,
+    "height": 2622,
+    "fps": 60,
+    "frames": 504,
+    "durationSeconds": 8.4
+  },
+  "packTear": {
+    "sealedComponentAt1_50s": {
+      "x": 290,
+      "y": 960,
+      "width": 626,
+      "height": 786,
+      "thresholdedPixels": 474208
+    },
+    "partialAt2_02s": {
+      "body": {
+        "x": 290,
+        "y": 1047,
+        "width": 626,
+        "height": 699,
+        "thresholdedPixels": 416433
+      },
+      "flap": {
+        "x": 293,
+        "y": 901,
+        "width": 627,
+        "height": 113,
+        "thresholdedPixels": 66182
+      }
+    },
+    "maximumVerticalFlapTravelPixels": 133,
+    "measuredHorizontalFlapTravelPixelsThroughCommit": 14,
+    "commitAt3_02s": {
+      "flapVisibleWidthPixels": 400,
+      "flapVisibleHeightPixels": 14,
+      "flapThresholdedPixels": 2915,
+      "retainedAreaVersusPartialFraction": 0.044
+    },
+    "firstSubstantiveFrameChangeSeconds": 1.983,
+    "contactSheetPartialLabelSeconds": 1.78,
+    "diagnosis": [
+      "The whole authored seal detaches at once and moves vertically, so it reads as a rigid lid instead of a tear front following the top seam.",
+      "The source flap is anchored from its top-leading corner, although the authored cut line is at the flap bottom near source y=97/512.",
+      "The synthetic opening is full-width from the first readable movement. It does not expose progressively along the gesture path.",
+      "Opacity decay plus view clipping retains only 4.4% of the thresholded flap area at commit, creating the user-visible sliver.",
+      "The automatic evidence labels partial follow at 1.78 s, but the first substantial Pack change is at 1.983 s."
+    ]
+  },
+  "light": {
+    "seamCandidateStripe": {
+      "screenAreaFraction": 0.001297,
+      "peakMeanLumaDeltaVersusAdjacentAt2_28s": 78.77,
+      "commitMeanLumaDeltaVersusAdjacentAt3_02s": -48.4,
+      "interpretation": "The stripe can be seen only in an enlarged crop. It occupies 0.13% of the frame and disappears at commit."
+    },
+    "releasePulse": {
+      "implemented": false,
+      "visiblePeaks": 0
+    },
+    "arrivalRim": {
+      "borderMinusInteriorMeanLumaAt3_38s": -7.21,
+      "borderMinusInteriorMeanLumaAt3_58s": -10.88,
+      "interpretation": "The effect produces a broad transparent wash, not a brighter separating object rim."
+    },
+    "rotationRim": {
+      "borderMinusInteriorMeanLumaAt3_80s": -28.54,
+      "borderMinusInteriorMeanLumaAt4_22s": -24.29,
+      "interpretation": "The shader uses one fixed virtual normal response. It does not author one traveling mesh-local pass for each circle."
+    },
+    "finalSheenVersusHold": {
+      "caseRoiMeanSignedLumaDelta": 3.85,
+      "caseRoiMeanAbsoluteLumaDelta": 7.84,
+      "caseRoiP95AbsoluteLumaDelta": 27,
+      "caseRoiFractionPositiveDeltaAbove10": 0.2281,
+      "interpretation": "A broad low-frequency change exists, but the normal-scale frame lacks a clear crossing edge and reads as ordinary material variation."
+    },
+    "rootCauses": [
+      "Rev 3 tests gated only changed pixels and one maximum pixel. They did not gate changed area, average contrast, p95 contrast, or the normal-scale recording.",
+      "Arrival uses a diagonal transparent wash instead of a dedicated object rim.",
+      "Rotation uses a static virtual-light response instead of two traveling mesh-local passes.",
+      "The final sheen is too narrow and too attenuated by transparent alpha to read as a single crossing event.",
+      "No separate commit release pulse exists."
+    ]
+  },
+  "workingPackComparison": {
+    "sourceCommit": "8f16791",
+    "sourcePath": "unity/FidgetingApp/Assets/Plugins/iOS/FidgetGachaStorefront.swift",
+    "authoredAspect": "384:512",
+    "gestureAxis": "horizontal",
+    "flapOffsetAtCommitCandidatePoints": {
+      "x": 132,
+      "y": -34
+    },
+    "anchor": "topTrailing",
+    "opacityAtFullProgress": 0.88,
+    "boundary": "Use the prior physical path as implementation evidence only. Do not restore its holder, branded art, entity, colors, or obsolete transition."
+  },
+  "benchmarkApplication": {
+    "borrow": [
+      "Pokemon-style same-frame seam-following causality",
+      "Arknights-style container-clipped seam light",
+      "CC0 Make It Shine timing curves and object-local mask math"
+    ],
+    "exclude": [
+      "game IP and art",
+      "external entities",
+      "three-card composition",
+      "explosion",
+      "particles",
+      "full-screen flash",
+      "rarity-color leak"
+    ]
+  }
+}

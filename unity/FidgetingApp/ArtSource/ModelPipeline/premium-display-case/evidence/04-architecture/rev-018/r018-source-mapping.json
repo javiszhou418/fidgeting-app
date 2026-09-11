@@ -1,0 +1,64 @@
+{
+  "schema": "premium-display-case-gate04-r018-source-mapping.v1",
+  "repairScope": [
+    "replace ambiguous lower-edge SEAM_Y with PACK_BOTTOM_Y and PACK_TOP_Y",
+    "attach the tear seam and all mouth parts to physical PACK_TOP_Y",
+    "preserve bottom-to-top rows and negative-Z camera-facing winding",
+    "compensate the observed Unity FBX horizontal mirror through front source U"
+  ],
+  "unchanged": [
+    "seven authored pose values",
+    "CC0 effect sources",
+    "main camera",
+    "unchanged assembled Premium Display Case",
+    "particle settings",
+    "timing",
+    "canonical product and shipping assets"
+  ],
+  "r017DiagnosisConfirmed": {
+    "priorFrame": {
+      "path": "unity/FidgetingApp/ArtSource/ModelPipeline/premium-display-case/evidence/04-architecture/rev-018/before/r017-mirror-lower-mouth-090.png",
+      "sha256": "f82d45ebef0497218092241fef02d74dbae3fe67b99488b451e120cad924868d",
+      "sizeBytes": 845488
+    },
+    "r018BlenderProbe": {
+      "path": "unity/FidgetingApp/ArtSource/ModelPipeline/premium-display-case/evidence/04-architecture/rev-018/blender-coordinate-probe.json",
+      "sha256": "555ed59eebd4b5c5f0bf3109eea2d68ee189e9cdc2bbad8baf9d618a9154d117",
+      "sizeBytes": 2047
+    },
+    "result": "R017 used physical-top artwork V at the lower mouth anchor; R018 moves the seam to PACK_TOP_Y."
+  },
+  "orientationCalibration": {
+    "path": "unity/FidgetingApp/ArtSource/ModelPipeline/premium-display-case/evidence/04-architecture/rev-018/orientation/r018-orientation-calibration.json",
+    "sha256": "57474d6f19e405d04459b2b43455233fdf90633df256283031b8c7836e095d4f",
+    "sizeBytes": 2269
+  },
+  "preflight": {
+    "path": "unity/FidgetingApp/ArtSource/ModelPipeline/premium-display-case/evidence/04-architecture/rev-018/r018-preflight-report.json",
+    "sha256": "1dfc384f8b1366ed2bd6ca0356629da611525cd15952c3cc8af6f0ec8462cf97",
+    "sizeBytes": 10317
+  },
+  "priorRejectedEvidence": [
+    {
+      "revision": "R015",
+      "path": "unity/FidgetingApp/ArtSource/ModelPipeline/premium-display-case/evidence/04-architecture/rev-015/self-rejection.json",
+      "sha256": "374739f96ee0966f359e3feff2321958499a8d1aac8e69ff5985ba2d72020841"
+    },
+    {
+      "revision": "R016",
+      "path": "unity/FidgetingApp/ArtSource/ModelPipeline/premium-display-case/evidence/04-architecture/rev-016/self-rejection.json",
+      "sha256": "2d7f69263f38c406e1b4085fecd89e076099e9462c899c19af411a9f535dc299"
+    },
+    {
+      "revision": "R017",
+      "path": "unity/FidgetingApp/ArtSource/ModelPipeline/premium-display-case/evidence/04-architecture/rev-017/r017-scrub-visual-self-rejection.json",
+      "sha256": "4cb87135652baf98d0b08ea5d4f52fa91eec8c442d869099bcf9701ba4dc2fbc"
+    }
+  ],
+  "sourceControl": {
+    "r017ControlFbxSha256": "1a9c8f5b066cc2a24cf629c0a0ffa9eaaec05279af0e0171ab2f341731dabe66",
+    "r018FbxSha256": "affe0a519712596660800dffb7d6b33126886defcaee9a33a658e97a79ca2f46"
+  },
+  "shippingReady": false,
+  "physicalPhoneInstalled": false
+}

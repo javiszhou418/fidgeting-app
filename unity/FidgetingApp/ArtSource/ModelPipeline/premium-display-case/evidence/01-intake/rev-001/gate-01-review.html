@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Premium Display Case · Gate 01</title>
+  <style>
+    * { box-sizing: border-box; }
+    html, body { margin: 0; width: 100%; height: 100%; background: #0b0c0e; color: #f4f4f2; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", sans-serif;
+      padding: 54px 62px;
+    }
+    header { display: flex; justify-content: space-between; align-items: end; margin-bottom: 34px; }
+    h1 { margin: 0; font-size: 30px; font-weight: 700; letter-spacing: -0.4px; }
+    .stage { color: #aeb3bb; font-size: 16px; }
+    main { display: grid; grid-template-columns: 1.2fr 0.8fr; gap: 38px; height: 950px; }
+    figure { margin: 0; display: flex; flex-direction: column; min-width: 0; }
+    figure img {
+      width: 100%;
+      height: 850px;
+      object-fit: contain;
+      background: #101216;
+      border: 1px solid #292d34;
+    }
+    figcaption { margin-top: 13px; color: #aeb3bb; font-size: 15px; line-height: 1.45; }
+    aside { display: flex; flex-direction: column; gap: 18px; }
+    section { border-top: 1px solid #30343b; padding-top: 16px; }
+    h2 { margin: 0 0 10px; font-size: 16px; font-weight: 650; color: #d8dbe0; }
+    ul { margin: 0; padding-left: 21px; color: #b8bdc5; font-size: 16px; line-height: 1.65; }
+    .keep h2 { color: #dfe8dd; }
+    .change h2 { color: #d8e4f2; }
+    .remove h2 { color: #eed8d8; }
+    .question {
+      margin-top: auto;
+      padding: 20px 22px;
+      background: #17191d;
+      border: 1px solid #343840;
+      font-size: 18px;
+      line-height: 1.5;
+    }
+    .warning { display: block; margin-top: 8px; color: #9ea4ad; font-size: 14px; }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Premium Display Case · Gate 01</h1>
+    <div class="stage">原始输入与现有基线确认</div>
+  </header>
+  <main>
+    <figure>
+      <img src="file:///Users/jiawei.zhou/Documents/Fidgeting%20app/unity/FidgetingApp/Docs/DesignBibleAssets/collector-slab-six-products-approved.png" alt="六款 Collector Slab 当前批准基线">
+      <figcaption>
+        当前已批准的真实 shipping 基线。此图只锁定现有 Collector Slab 几何、共享 prefab、
+        content slot 与材质语言；它不代表本轮转场、灯光或镜头已经批准。
+      </figcaption>
+    </figure>
+    <aside>
+      <section class="keep">
+        <h2>保留</h2>
+        <ul>
+          <li>现有正式 Collector Slab 几何和真实材质</li>
+          <li>六款共用同一 prefab 与 content slot</li>
+          <li>真实奖品比例、轴心、层级与标签数据</li>
+        </ul>
+      </section>
+      <section class="change">
+        <h2>本轮修改</h2>
+        <ul>
+          <li>Pack 撕开后，同一个真实 3D 盒从 Pack 内连续出现</li>
+          <li>入场后只播放一次克制高光</li>
+          <li>完成态为完整盒轻悬浮，奖品不自主旋转</li>
+          <li>产品灯光与环境隔离，提高暗色奖品和标签可读性</li>
+          <li>赛博蓝环境只保留低饱和蓝反射，不产生固定绿偏</li>
+        </ul>
+      </section>
+      <section class="remove">
+        <h2>永久移出产品流程</h2>
+        <ul>
+          <li>Rive／SwiftUI magnetic holder 中转物体</li>
+          <li>盒体爆炸、拆层、只留奖品与重新装配</li>
+          <li>固定 0.34 秒盲等和未 ready 就切场</li>
+          <li>宽范围青绿 rarity 点光与手写业务 UI</li>
+        </ul>
+      </section>
+      <div class="question">
+        Gate 01 只确认：以上输入和保留边界是否正确？
+        <span class="warning">批准后才进入分析关；本图不是新灯光或新动画的最终预览。</span>
+      </div>
+    </aside>
+  </main>
+</body>
+</html>

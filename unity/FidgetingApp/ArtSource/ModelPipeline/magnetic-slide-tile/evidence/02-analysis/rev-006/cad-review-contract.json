@@ -1,0 +1,99 @@
+{
+  "schemaVersion": 1,
+  "modelId": "magnetic-slide-tile",
+  "gate": "02-analysis",
+  "revision": 6,
+  "priorRevision": {
+    "revision": 5,
+    "disposition": "rejected-requested-revision",
+    "reason": "Normal browser mouse/touch users could not reliably reach or discover rotation."
+  },
+  "rotationFailure": {
+    "reproducedWith": "Chrome DevTools real Input.dispatchMouseEvent",
+    "viewport": [756, 469],
+    "result": {
+      "slideTravelL": 0,
+      "angleDeg": 0
+    },
+    "rootCauses": [
+      "The old SVG was 520×560 and exceeded the visible 469 px browser height.",
+      "The tested drag start and translated axis could lie below the real viewport.",
+      "Tests dispatched synthetic PointerEvent objects directly to the SVG and bypassed viewport hit testing.",
+      "There was no large independent rotation-ring hit area."
+    ]
+  },
+  "motionModel": {
+    "upper": "M_upper=I",
+    "lower": "M_lower=T(s)*R_about(A_lower,theta)",
+    "axis": "A_world=A_lower+T(s)",
+    "rails": "two bilateral longitudinal regions owned by lower",
+    "detents": "30×12 degrees",
+    "pivotDrift": 0,
+    "degreesOfFreedom": {
+      "count": 2,
+      "simultaneous": true,
+      "directManipulation": "one body drag decomposes longitudinal motion into s and tangential motion into theta",
+      "rotationAtEveryAuthorizedSlidePosition": {
+        "status": "user-authoritative",
+        "videoBoundary": "Individual videos prove rotation at partial and near-maximum travel, not every exact position."
+      }
+    }
+  },
+  "cadCapabilities": [
+    "Synchronized top, side and rail/axis section A–A views",
+    "Evidence-only component tree with unknown placeholders",
+    "Exact normalized capsule arcs and tangent points",
+    "Translated lower axis, bilateral rails, 30-detent ring and slide limits",
+    "Side-layer thickness, seam, step and offset placeholders",
+    "Solid observed/user-authoritative geometry, amber video ranges and red dashed hidden candidates",
+    "One mouse/touch body drag updates slide and rotation together; the rotation ring remains a precision handle",
+    "Pan mode, wheel/buttons zoom and keyboard detent controls",
+    "Optional blank physical inputs with guarded derived dimensions"
+  ],
+  "evidenceParameters": {
+    "aspectRatioLW": {
+      "status": "视频比例",
+      "range": [1.52, 1.62]
+    },
+    "travelL": {
+      "status": "视频比例",
+      "range": [0.38, 0.46],
+      "peak": 0.5
+    },
+    "detents": {
+      "status": "实测",
+      "count": 30,
+      "stepDeg": 12
+    },
+    "motionOwnership": {
+      "status": "用户输入",
+      "upper": "fixed",
+      "lower": "slide-and-rotate",
+      "axis": "lower-owned"
+    }
+  },
+  "optionalPhysicalInputs": [
+    "overallLength",
+    "overallWidth",
+    "totalThickness",
+    "upperThickness",
+    "lowerThickness",
+    "closedGap",
+    "railSpacing",
+    "railWidth",
+    "axisDiameter",
+    "upperStepHeight",
+    "lowerStepHeight",
+    "clearance",
+    "manufacturingAllowance",
+    "tolerance",
+    "maxTravelMm"
+  ],
+  "unknowns": [
+    "Upper follower/contact geometry",
+    "Pin, slot and ratchet cross-sections",
+    "Physical thicknesses, seam, steps, clearances, allowance and tolerance",
+    "Newton force, magnetism, friction and phone Haptic"
+  ],
+  "reviewQuestion": "现在旋转能正常操作，CAD 机构图是否符合实物？"
+}

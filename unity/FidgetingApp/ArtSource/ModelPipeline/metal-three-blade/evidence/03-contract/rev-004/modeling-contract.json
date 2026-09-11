@@ -1,0 +1,129 @@
+{
+  "modelId": "metal-three-blade",
+  "stageId": "03-contract",
+  "revision": 4,
+  "recordedAt": "2026-09-05T14:19:14.147971+00:00",
+  "contractState": "user-authorized-provisional",
+  "route": "deterministic-bpy-builder",
+  "builder": "tools/blender/build_unified_tri_spinner.py",
+  "units": "metres in Blender; mm here",
+  "spinAxis": {
+    "blender": "+Z",
+    "unity": "+Y"
+  },
+  "origin": "bearing centre",
+  "overall": {
+    "tipCircleDiameterMm": 65.0,
+    "boundingWidthMm": 59.51,
+    "bladeThicknessMm": 11.5,
+    "assembledDepthMm": 14.5
+  },
+  "hub": {
+    "visible": false,
+    "coreRingDiameterMm": 35.84,
+    "coreThicknessMm": 4.4,
+    "counterboreDiameterMm": 36.44,
+    "counterboreFloorZMm": 2.2,
+    "boreDiameterMm": 12.7,
+    "material": "dark seam steel (wall + floor + bore)"
+  },
+  "cap": {
+    "outerDiameterMm": 34.84,
+    "capToTipCircle": 0.536,
+    "tableDiameterMm": 24.39,
+    "tableToCap": 0.7,
+    "tableAboveBladeFaceMm": 1.5,
+    "tableIsHighestPoint": true,
+    "wedges": 24,
+    "wedgeTriangles": 48,
+    "wedgeRingSlopeDeg": 25.0,
+    "rimZigzagMm": 0.55,
+    "rimMeanBelowBladeFaceMm": 0.94,
+    "seamWidthMm": 0.8,
+    "anisotropy": "table only (radial tangent) + concentric bump"
+  },
+  "blades": {
+    "count": 3,
+    "anglesDeg": [
+      90,
+      210,
+      330
+    ],
+    "solid": true,
+    "outline": "teardrop / rounded triangle",
+    "notchVDeg": 60.0,
+    "notchApexOnSeam": true,
+    "tipArcRadiusMm": 12.0,
+    "tipArcSpanDeg": 120,
+    "maxHalfWidthMm": 16.43,
+    "roofPlanes": 2,
+    "roofSlopeDeg": 10.2,
+    "endPlaneSlopeDeg": 32.0,
+    "sideWalls": "vertical, 5.59 mm at widest",
+    "bevelMm": 0.5,
+    "bevelSegments": 2
+  },
+  "bearing": {
+    "standard": "R188",
+    "odMm": 12.7,
+    "idMm": 6.35,
+    "widthMm": 4.76,
+    "visibility": "hidden"
+  },
+  "materials": {
+    "body": {
+      "metallic": 1.0,
+      "roughness": 0.36
+    },
+    "capTable": {
+      "metallic": 1.0,
+      "roughness": 0.3,
+      "anisotropic": 0.85,
+      "tangent": "radial",
+      "ringBump": 0.09
+    },
+    "capWedge": {
+      "metallic": 1.0,
+      "roughness": 0.34
+    },
+    "seam": "dark steel 0.085 / gunmetal 0.03"
+  },
+  "forbidden": [
+    "random scales",
+    "wedges across the table",
+    "rectangular wedge strips",
+    "blade pockets",
+    "anisotropy on wedges",
+    "bright annulus",
+    "visible hub collar",
+    "cap under Rotor_Root",
+    "subdivision",
+    "smooth-by-angle on facets",
+    "non-zero initial angular velocity"
+  ],
+  "unknowns": [
+    "official width/thickness mm",
+    "table ratio 0.70 (user) vs 0.797 (photo) — decides rim height vs blade face",
+    "root dark triangles (photo) vs solid (user)",
+    "turning-mark pitch"
+  ],
+  "consumedClaimIds": [
+    "tri-r2-cap-size-was-never-wrong",
+    "tri-r2-no-bright-annulus",
+    "tri-r2-body-is-one-solid",
+    "tri-r2-dimensions-unmeasured",
+    "tri-r3-shadow-gap-not-race",
+    "tri-r3-one-model-decision",
+    "tri-r3-dimensions-provisional",
+    "tri-r4-cap-low-profile",
+    "tri-r4-satin-material",
+    "tri-r4-table-ratio-discrepancy",
+    "tri-r5-cone-zigzag-crown",
+    "tri-r5-petal-blades",
+    "tri-r5-blade-volume",
+    "tri-r5-table-finish",
+    "tri-r5-seam-08",
+    "tri-r5-vault-rescan-negative",
+    "tri-r5-notch-interpretation"
+  ]
+}

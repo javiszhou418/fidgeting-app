@@ -1,0 +1,31 @@
+{
+  "schemaVersion": 1,
+  "stage": "03-contract",
+  "modelId": "model-hhax",
+  "units": "millimeters",
+  "requiredFieldsReviewed": 9,
+  "unknownFields": 0,
+  "publishedNominalFields": [
+    "closedOverallLength",
+    "overallWidth",
+    "totalClosedThickness"
+  ],
+  "provisionalReversibleFields": [
+    "topPlateThickness",
+    "bottomPlateThickness",
+    "maximumSlideTravel",
+    "fixedAxisOffsetFromNearestEnd",
+    "rotatingCarrierDiameter",
+    "closedSeamGap"
+  ],
+  "manufacturingClaims": 0,
+  "physicalMeasuredClaims": 0,
+  "consistency": {
+    "thicknessStackMm": 13.6,
+    "carrierFitsWidth": true,
+    "travelContained": true,
+    "aspectWarningRetained": "L/W=1.634; published values were not altered"
+  },
+  "reviewDevice": "Chromium desktop 1440×1000",
+  "recordingCoverage": "all nine cards, evidence choices, calibration math and uncertainty fields"
+}

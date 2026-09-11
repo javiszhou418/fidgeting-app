@@ -1,0 +1,657 @@
+{
+  "schemaVersion": 1,
+  "modelId": "premium-display-case",
+  "gate": "05-blockout",
+  "blockoutRevision": 2,
+  "status": "pass",
+  "artifactTruth": {
+    "realBlenderBlockout": true,
+    "schematic": false,
+    "shippingUnityChanged": false,
+    "finalGeometry": false,
+    "candidateValuesApproved": false
+  },
+  "upstreamDisposition": {
+    "earliestAffectedGate": "05-blockout",
+    "gate03Conflict": false,
+    "gate04Conflict": false,
+    "basis": "Gate 03 locks label size, envelope, tube section and R20 outer radius, but not label center Y or nested corner-center construction. Gate 04 locks hierarchy and motion ownership only."
+  },
+  "coordinateSystem": {
+    "x": "width",
+    "y": "height",
+    "z": "depth-positive-front",
+    "origin": "assembled outer-envelope center"
+  },
+  "dimensionsMm": {
+    "target": {
+      "width": 228.0,
+      "height": 304.0,
+      "depth": 59.0
+    },
+    "measured": {
+      "width": 228.0,
+      "height": 304.0,
+      "depth": 59.0
+    },
+    "minimum": [
+      -114.0,
+      -152.0,
+      -29.5
+    ],
+    "maximum": [
+      114.0,
+      152.0,
+      29.5
+    ],
+    "toleranceMm": 0.01,
+    "pass": true
+  },
+  "portrait": {
+    "widthHeightRatio": 0.75,
+    "target": 0.75,
+    "pass": true
+  },
+  "cornerCenterFamilies": {
+    "caseTubeShell": {
+      "family": "case-tube-shell",
+      "construction": "analytic-radius-offset; no independent bevel radius",
+      "contours": [
+        {
+          "name": "outerEnvelopeAndTubeOuter",
+          "widthMm": 228.0,
+          "heightMm": 304.0,
+          "radiusMm": 20.0,
+          "centerYmm": 0.0,
+          "cornerCentersMm": [
+            [
+              94.0,
+              132.0
+            ],
+            [
+              -94.0,
+              132.0
+            ],
+            [
+              -94.0,
+              -132.0
+            ],
+            [
+              94.0,
+              -132.0
+            ]
+          ],
+          "maximumDriftFromFamilyReferenceMm": 0.0
+        },
+        {
+          "name": "frontRearShellInset",
+          "widthMm": 224.0,
+          "heightMm": 300.0,
+          "radiusMm": 18.0,
+          "centerYmm": 0.0,
+          "cornerCentersMm": [
+            [
+              94.0,
+              132.0
+            ],
+            [
+              -94.0,
+              132.0
+            ],
+            [
+              -94.0,
+              -132.0
+            ],
+            [
+              94.0,
+              -132.0
+            ]
+          ],
+          "maximumDriftFromFamilyReferenceMm": 0.0
+        },
+        {
+          "name": "tubeCenterline",
+          "widthMm": 218.0,
+          "heightMm": 294.0,
+          "radiusMm": 15.0,
+          "centerYmm": 0.0,
+          "cornerCentersMm": [
+            [
+              94.0,
+              132.0
+            ],
+            [
+              -94.0,
+              132.0
+            ],
+            [
+              -94.0,
+              -132.0
+            ],
+            [
+              94.0,
+              -132.0
+            ]
+          ],
+          "maximumDriftFromFamilyReferenceMm": 0.0
+        },
+        {
+          "name": "tubeInner",
+          "widthMm": 208.0,
+          "heightMm": 284.0,
+          "radiusMm": 10.0,
+          "centerYmm": 0.0,
+          "cornerCentersMm": [
+            [
+              94.0,
+              132.0
+            ],
+            [
+              -94.0,
+              132.0
+            ],
+            [
+              -94.0,
+              -132.0
+            ],
+            [
+              94.0,
+              -132.0
+            ]
+          ],
+          "maximumDriftFromFamilyReferenceMm": 0.0
+        }
+      ],
+      "maximumCornerCenterDriftMm": 0.0,
+      "toleranceMm": 0.01,
+      "pass": true
+    },
+    "mainDisplayChamber": {
+      "family": "main-display-chamber",
+      "construction": "analytic-radius-offset; no independent bevel radius",
+      "contours": [
+        {
+          "name": "mainChamberRim",
+          "widthMm": 190.0,
+          "heightMm": 210.0,
+          "radiusMm": 20.0,
+          "centerYmm": -42.0,
+          "cornerCentersMm": [
+            [
+              75.0,
+              43.0
+            ],
+            [
+              -75.0,
+              43.0
+            ],
+            [
+              -75.0,
+              -127.0
+            ],
+            [
+              75.0,
+              -127.0
+            ]
+          ],
+          "maximumDriftFromFamilyReferenceMm": 0.0
+        },
+        {
+          "name": "tactileInsertFace",
+          "widthMm": 182.0,
+          "heightMm": 202.0,
+          "radiusMm": 16.0,
+          "centerYmm": -42.0,
+          "cornerCentersMm": [
+            [
+              75.0,
+              43.0
+            ],
+            [
+              -75.0,
+              43.0
+            ],
+            [
+              -75.0,
+              -127.0
+            ],
+            [
+              75.0,
+              -127.0
+            ]
+          ],
+          "maximumDriftFromFamilyReferenceMm": 0.0
+        }
+      ],
+      "maximumCornerCenterDriftMm": 0.0,
+      "toleranceMm": 0.01,
+      "pass": true
+    },
+    "physicalLabel": {
+      "family": "physical-label",
+      "construction": "analytic-radius-offset; no independent bevel radius",
+      "contours": [
+        {
+          "name": "labelFrame",
+          "widthMm": 188.0,
+          "heightMm": 62.0,
+          "radiusMm": 8.0,
+          "centerYmm": 99.0,
+          "cornerCentersMm": [
+            [
+              86.0,
+              122.0
+            ],
+            [
+              -86.0,
+              122.0
+            ],
+            [
+              -86.0,
+              76.0
+            ],
+            [
+              86.0,
+              76.0
+            ]
+          ],
+          "maximumDriftFromFamilyReferenceMm": 0.0
+        },
+        {
+          "name": "transparentLabelCover",
+          "widthMm": 186.0,
+          "heightMm": 60.0,
+          "radiusMm": 7.0,
+          "centerYmm": 99.0,
+          "cornerCentersMm": [
+            [
+              86.0,
+              122.0
+            ],
+            [
+              -86.0,
+              122.0
+            ],
+            [
+              -86.0,
+              76.0
+            ],
+            [
+              86.0,
+              76.0
+            ]
+          ],
+          "maximumDriftFromFamilyReferenceMm": 0.0
+        },
+        {
+          "name": "physicalLabelPaper",
+          "widthMm": 184.0,
+          "heightMm": 58.0,
+          "radiusMm": 6.0,
+          "centerYmm": 99.0,
+          "cornerCentersMm": [
+            [
+              86.0,
+              122.0
+            ],
+            [
+              -86.0,
+              122.0
+            ],
+            [
+              -86.0,
+              76.0
+            ],
+            [
+              86.0,
+              76.0
+            ]
+          ],
+          "maximumDriftFromFamilyReferenceMm": 0.0
+        }
+      ],
+      "maximumCornerCenterDriftMm": 0.0,
+      "toleranceMm": 0.01,
+      "pass": true
+    },
+    "maximumDriftMm": 0.0,
+    "toleranceMm": 0.01,
+    "pass": true
+  },
+  "labelPosition": {
+    "baselineCenterYmm": 105.0,
+    "candidateCenterYmm": 99.0,
+    "candidateDownshiftMm": 6.0,
+    "approvalState": "pending-user-approval-not-locked-millimeters",
+    "caseHeightFraction": 0.019737,
+    "minimumLabelFrameToChamberRimMm": 7.31328,
+    "minimumLabelFrameToTubeInnerMm": 12.591362,
+    "minimumLabelPaperToInsertFaceMm": 13.155361,
+    "minimumRequiredClearanceMm": 5.0,
+    "pass": true
+  },
+  "closedTube": {
+    "object": "ContinuousTubePerimeter",
+    "meshObjectCount": 1,
+    "pathClosed": true,
+    "pathSampleCount": 384,
+    "outerSectionMm": {
+      "width": 10.0,
+      "depth": 9.0
+    },
+    "wallThicknessMm": 2.0,
+    "passageSectionMm": {
+      "width": 6.0,
+      "depth": 5.0
+    },
+    "profileCornerRadiusMm": 3.0,
+    "passageCornerRadiusMm": 1.0,
+    "cornerRadiiMm": {
+      "outer": 20.0,
+      "centerline": 15.0,
+      "inner": 10.0
+    },
+    "tangentContinuity": {
+      "sampleJoinCount": 384,
+      "maximumSampleTangentDeltaDegrees": 1.40625,
+      "analyticStraightArcJoinDeltaDegrees": 0.0,
+      "continuity": "G1",
+      "pass": true
+    },
+    "topology": {
+      "vertices": 49152,
+      "edges": 98304,
+      "faces": 49152,
+      "openBoundaryEdgeCount": 0,
+      "nonManifoldEdgeCount": 0,
+      "surfaceConnectedComponentCount": 2,
+      "surfaceComponents": [
+        {
+          "vertices": 24576,
+          "edges": 49152,
+          "faces": 24576,
+          "eulerCharacteristic": 0
+        },
+        {
+          "vertices": 24576,
+          "edges": 49152,
+          "faces": 24576,
+          "eulerCharacteristic": 0
+        }
+      ],
+      "manifoldSurfacePass": true,
+      "expectedBoundarySurfaceComponents": 2,
+      "connectedMaterialBodyCount": 1,
+      "materialBodyBasis": "One cyclic annular section swept around one closed centerline.",
+      "manifoldPreflightPass": true
+    },
+    "channelFloodFill": {
+      "method": "cyclic-centerline-construction-graph-preflight",
+      "sampleCount": 384,
+      "visitedSamples": 384,
+      "regionsVisited": [
+        "bottom",
+        "bottom-left-bend",
+        "bottom-right-bend",
+        "left",
+        "right",
+        "top",
+        "top-left-bend",
+        "top-right-bend"
+      ],
+      "expectedRegions": [
+        "bottom",
+        "bottom-left-bend",
+        "bottom-right-bend",
+        "left",
+        "right",
+        "top",
+        "top-left-bend",
+        "top-right-bend"
+      ],
+      "pass": true,
+      "gateBoundary": "Construction preflight; exported volumetric flow remains Gate 06."
+    }
+  },
+  "subjectTopology": {
+    "objects": {
+      "RearPolycarbonateShell": {
+        "vertices": 192,
+        "edges": 288,
+        "faces": 98,
+        "openBoundaryEdgeCount": 0,
+        "nonManifoldEdgeCount": 0,
+        "surfaceConnectedComponentCount": 1,
+        "surfaceComponents": [
+          {
+            "vertices": 192,
+            "edges": 288,
+            "faces": 98,
+            "eulerCharacteristic": 2
+          }
+        ],
+        "manifoldSurfacePass": true
+      },
+      "TactileBackgroundInsert": {
+        "vertices": 288,
+        "edges": 480,
+        "faces": 194,
+        "openBoundaryEdgeCount": 0,
+        "nonManifoldEdgeCount": 0,
+        "surfaceConnectedComponentCount": 1,
+        "surfaceComponents": [
+          {
+            "vertices": 288,
+            "edges": 480,
+            "faces": 194,
+            "eulerCharacteristic": 2
+          }
+        ],
+        "manifoldSurfacePass": true
+      },
+      "FrontPolycarbonateShell": {
+        "vertices": 192,
+        "edges": 288,
+        "faces": 98,
+        "openBoundaryEdgeCount": 0,
+        "nonManifoldEdgeCount": 0,
+        "surfaceConnectedComponentCount": 1,
+        "surfaceComponents": [
+          {
+            "vertices": 192,
+            "edges": 288,
+            "faces": 98,
+            "eulerCharacteristic": 2
+          }
+        ],
+        "manifoldSurfacePass": true
+      },
+      "ContinuousTubePerimeter": {
+        "vertices": 49152,
+        "edges": 98304,
+        "faces": 49152,
+        "openBoundaryEdgeCount": 0,
+        "nonManifoldEdgeCount": 0,
+        "surfaceConnectedComponentCount": 2,
+        "surfaceComponents": [
+          {
+            "vertices": 24576,
+            "edges": 49152,
+            "faces": 24576,
+            "eulerCharacteristic": 0
+          },
+          {
+            "vertices": 24576,
+            "edges": 49152,
+            "faces": 24576,
+            "eulerCharacteristic": 0
+          }
+        ],
+        "manifoldSurfacePass": true
+      },
+      "PhysicalLabel": {
+        "vertices": 192,
+        "edges": 288,
+        "faces": 98,
+        "openBoundaryEdgeCount": 0,
+        "nonManifoldEdgeCount": 0,
+        "surfaceConnectedComponentCount": 1,
+        "surfaceComponents": [
+          {
+            "vertices": 192,
+            "edges": 288,
+            "faces": 98,
+            "eulerCharacteristic": 2
+          }
+        ],
+        "manifoldSurfacePass": true
+      }
+    },
+    "allOpenBoundaryEdgeCount": 0,
+    "allNonManifoldEdgeCount": 0,
+    "pass": true
+  },
+  "hierarchy": {
+    "expected": {
+      "PresentationRoot": null,
+      "CaseAssembly": "PresentationRoot",
+      "RearPolycarbonateShell": "CaseAssembly",
+      "TactileBackgroundInsert": "RearPolycarbonateShell",
+      "ContentSlot": "RearPolycarbonateShell",
+      "FrontPolycarbonateShell": "CaseAssembly",
+      "ContinuousTubePerimeter": "FrontPolycarbonateShell",
+      "PhysicalLabel": "FrontPolycarbonateShell",
+      "LogoZone": "PhysicalLabel",
+      "AchievementZone": "PhysicalLabel",
+      "NarrowFoil": "PhysicalLabel",
+      "TransparentCover": "FrontPolycarbonateShell"
+    },
+    "actual": {
+      "PresentationRoot": null,
+      "CaseAssembly": "PresentationRoot",
+      "RearPolycarbonateShell": "CaseAssembly",
+      "TactileBackgroundInsert": "RearPolycarbonateShell",
+      "ContentSlot": "RearPolycarbonateShell",
+      "FrontPolycarbonateShell": "CaseAssembly",
+      "ContinuousTubePerimeter": "FrontPolycarbonateShell",
+      "PhysicalLabel": "FrontPolycarbonateShell",
+      "LogoZone": "PhysicalLabel",
+      "AchievementZone": "PhysicalLabel",
+      "NarrowFoil": "PhysicalLabel",
+      "TransparentCover": "FrontPolycarbonateShell"
+    },
+    "requiredNodesPresent": true,
+    "contentSlotType": "EMPTY",
+    "transparentCoverType": "EMPTY"
+  },
+  "secondaryDimensions": {
+    "provenance": "retained-approved-shipping-baseline-with-gate05-concentric-correction",
+    "sourcePaths": [
+      "unity/FidgetingApp/Docs/DisplayCase/PremiumDisplayCaseSpecification.md",
+      "unity/FidgetingApp/ArtSource/DisplayCase/build_premium_display_case.py",
+      "unity/FidgetingApp/ArtSource/DisplayCase/premium_display_case_manifest.json"
+    ],
+    "frontShellMm": {
+      "width": 224,
+      "height": 300,
+      "depth": 6,
+      "cornerRadius": 18
+    },
+    "rearShellMm": {
+      "width": 224,
+      "height": 300,
+      "depth": 7,
+      "cornerRadius": 18
+    },
+    "labelPaperMm": {
+      "width": 184,
+      "height": 58,
+      "depth": 3,
+      "centerY": 99.0,
+      "cornerRadius": 6
+    },
+    "labelCoverContourMm": {
+      "width": 186,
+      "height": 60,
+      "centerY": 99.0,
+      "cornerRadius": 7,
+      "thickness": "deferred"
+    },
+    "labelFrameContourMm": {
+      "width": 188,
+      "height": 62,
+      "centerY": 99.0,
+      "cornerRadius": 8,
+      "geometry": "existing NarrowFoil zone"
+    },
+    "mainChamberRimMm": {
+      "width": 190,
+      "height": 210,
+      "centerY": -42.0,
+      "cornerRadius": 20
+    },
+    "tactileInsertMm": {
+      "width": 182,
+      "height": 202,
+      "depth": 9,
+      "centerY": -42.0,
+      "cornerRadius": 16
+    },
+    "contentSlotMm": {
+      "width": 180,
+      "height": 198,
+      "depth": 48,
+      "centerY": -42.0,
+      "cornerRadius": 16
+    }
+  },
+  "scope": {
+    "finalMaterials": false,
+    "branding": false,
+    "logos": false,
+    "badges": false,
+    "hiddenFasteners": false,
+    "inventedInternalParts": false,
+    "subjectBevelModifiers": [],
+    "analyticRoundedProfilesOnly": true,
+    "transparentCoverGeometry": "contour-only-thickness-deferred",
+    "diagnosticMaterialNames": [
+      "MAT_DIAGNOSTIC_InsertClay",
+      "MAT_DIAGNOSTIC_LabelClay",
+      "MAT_DIAGNOSTIC_ShellClay",
+      "MAT_DIAGNOSTIC_TubeClay"
+    ]
+  },
+  "checks": {
+    "approvedEnvelopeExact": true,
+    "portraitRatioExact": true,
+    "tubeSingleMesh": true,
+    "tubeSingleConnectedMaterialBody": true,
+    "tubeManifoldPreflight": true,
+    "allSubjectSurfacesClosedAndManifold": true,
+    "tubeChannelFloodFill": true,
+    "tubeTangentContinuity": true,
+    "cornerCentersConcentric": true,
+    "noIndependentBevelConstruction": true,
+    "labelCandidateDownshiftAndClearance": true,
+    "approvedHierarchy": true,
+    "contentSlotIsRuntimeAnchor": true,
+    "coverThicknessNotGuessed": true,
+    "noFinalMaterials": true,
+    "noIdentityArtwork": true,
+    "noInventedHardware": true
+  },
+  "validationContext": {
+    "stage": "blockout-preflight",
+    "fullGate06ValidationDeferred": true,
+    "gate06Entered": false,
+    "fullGate06Requirements": [
+      "exported-mesh structural parity",
+      "volumetric passage flood-fill",
+      "dimension and pivot overlays on final geometry",
+      "exploded final geometry"
+    ]
+  },
+  "blender": "5.2.0 LTS",
+  "sourceBlend": "premium-display-case-blockout.blend"
+}

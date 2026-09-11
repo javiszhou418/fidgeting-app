@@ -1,0 +1,181 @@
+{
+  "schemaVersion": 1,
+  "gate": "05-blockout",
+  "revision": 12,
+  "source": {
+    "path": "/Users/jiawei.zhou/Documents/Fidgeting app/unity/FidgetingApp/ArtSource/ModelPipeline/magnetic-slide-tile/evidence/06-geometry/rev-004/magnetic-slide-tile-geometry-r004.blend",
+    "sha256": "8047be52ce635d9bd18d5f2be3c3e223ac04c3101aec10221849d97b6e867085"
+  },
+  "contractSha256": "5aee71817c2c033ed92b770126ba0ecb6d79c2f032d786743b214b79078a47ea",
+  "geometryDigest": "2fcf6d2b4344511bc6b86ce940a927576f9cdb4988f4022959a3372f4d3c1952",
+  "kinematics": {
+    "fixedPivotMm": [
+      0.0,
+      -9.0,
+      5.875
+    ],
+    "qFormulaMm": [
+      "0",
+      "-9+s",
+      "-3.1875"
+    ],
+    "topTransform": "M_top(s,theta)=T(P)*Rz(theta)*T(-q(s))",
+    "carrierTransform": "T(P)*Rz(theta), translation=0",
+    "slideRangeMm": [
+      0,
+      18.076433121019107
+    ],
+    "angleSweepDegrees": [
+      0,
+      360
+    ]
+  },
+  "denseValidation": {
+    "samples": 13357,
+    "maxPivotVarianceMm": 0.0,
+    "maxResidualMm": 9.5367431640625e-07,
+    "minimumHiddenEnvelopeMarginMm": -2.861022947442393e-07
+  },
+  "representativeActualMeshValidation": [
+    {
+      "id": "closed",
+      "slideMm": 0,
+      "angleDeg": 0,
+      "surfaceIntersectionPairs": {
+        "RotatingCarrierBody:BottomExterior": 0,
+        "RotatingCarrierBody:MovingTopBody": 0,
+        "CarrierFollowerLeft:BottomExterior": 0,
+        "CarrierFollowerLeft:MovingTopBody": 0,
+        "BallCandidateRight:BottomExterior": 0,
+        "BallCandidateRight:MovingTopBody": 0,
+        "BallCandidateLeft:BottomExterior": 0,
+        "BallCandidateLeft:MovingTopBody": 0,
+        "InternalAxisBoss:BottomExterior": 0,
+        "InternalAxisBoss:MovingTopBody": 0,
+        "CarrierFollowerRight:BottomExterior": 0,
+        "CarrierFollowerRight:MovingTopBody": 0
+      },
+      "minimumDiskActualMeshCoverageMisses": 0,
+      "topConstraintResidualMm": 0.0
+    },
+    {
+      "id": "open",
+      "slideMm": 18.076433121019107,
+      "angleDeg": 0,
+      "surfaceIntersectionPairs": {
+        "RotatingCarrierBody:BottomExterior": 0,
+        "RotatingCarrierBody:MovingTopBody": 0,
+        "CarrierFollowerLeft:BottomExterior": 0,
+        "CarrierFollowerLeft:MovingTopBody": 0,
+        "BallCandidateRight:BottomExterior": 0,
+        "BallCandidateRight:MovingTopBody": 0,
+        "BallCandidateLeft:BottomExterior": 0,
+        "BallCandidateLeft:MovingTopBody": 0,
+        "InternalAxisBoss:BottomExterior": 0,
+        "InternalAxisBoss:MovingTopBody": 0,
+        "CarrierFollowerRight:BottomExterior": 0,
+        "CarrierFollowerRight:MovingTopBody": 0
+      },
+      "minimumDiskActualMeshCoverageMisses": 0,
+      "topConstraintResidualMm": 0.0
+    },
+    {
+      "id": "12deg",
+      "slideMm": 8.134394904458599,
+      "angleDeg": 12,
+      "surfaceIntersectionPairs": {
+        "RotatingCarrierBody:BottomExterior": 0,
+        "RotatingCarrierBody:MovingTopBody": 0,
+        "CarrierFollowerLeft:BottomExterior": 0,
+        "CarrierFollowerLeft:MovingTopBody": 0,
+        "BallCandidateRight:BottomExterior": 0,
+        "BallCandidateRight:MovingTopBody": 0,
+        "BallCandidateLeft:BottomExterior": 0,
+        "BallCandidateLeft:MovingTopBody": 0,
+        "InternalAxisBoss:BottomExterior": 0,
+        "InternalAxisBoss:MovingTopBody": 0,
+        "CarrierFollowerRight:BottomExterior": 0,
+        "CarrierFollowerRight:MovingTopBody": 0
+      },
+      "minimumDiskActualMeshCoverageMisses": 0,
+      "topConstraintResidualMm": 0.0
+    },
+    {
+      "id": "36deg",
+      "slideMm": 12.653503184713374,
+      "angleDeg": 36,
+      "surfaceIntersectionPairs": {
+        "RotatingCarrierBody:BottomExterior": 0,
+        "RotatingCarrierBody:MovingTopBody": 0,
+        "CarrierFollowerLeft:BottomExterior": 0,
+        "CarrierFollowerLeft:MovingTopBody": 0,
+        "BallCandidateRight:BottomExterior": 0,
+        "BallCandidateRight:MovingTopBody": 0,
+        "BallCandidateLeft:BottomExterior": 0,
+        "BallCandidateLeft:MovingTopBody": 0,
+        "InternalAxisBoss:BottomExterior": 0,
+        "InternalAxisBoss:MovingTopBody": 0,
+        "CarrierFollowerRight:BottomExterior": 0,
+        "CarrierFollowerRight:MovingTopBody": 0
+      },
+      "minimumDiskActualMeshCoverageMisses": 0,
+      "topConstraintResidualMm": 0.0
+    },
+    {
+      "id": "combined",
+      "slideMm": 11.74968152866242,
+      "angleDeg": 24,
+      "surfaceIntersectionPairs": {
+        "RotatingCarrierBody:BottomExterior": 0,
+        "RotatingCarrierBody:MovingTopBody": 0,
+        "CarrierFollowerLeft:BottomExterior": 0,
+        "CarrierFollowerLeft:MovingTopBody": 0,
+        "BallCandidateRight:BottomExterior": 0,
+        "BallCandidateRight:MovingTopBody": 0,
+        "BallCandidateLeft:BottomExterior": 0,
+        "BallCandidateLeft:MovingTopBody": 0,
+        "InternalAxisBoss:BottomExterior": 0,
+        "InternalAxisBoss:MovingTopBody": 0,
+        "CarrierFollowerRight:BottomExterior": 0,
+        "CarrierFollowerRight:MovingTopBody": 0
+      },
+      "minimumDiskActualMeshCoverageMisses": 0,
+      "topConstraintResidualMm": 0.0
+    }
+  ],
+  "renderLayers": {
+    "productWhitelist": [
+      "BottomExterior",
+      "MovingTopBody"
+    ],
+    "technicalOnly": [
+      "BallCandidateLeft",
+      "BallCandidateRight",
+      "CarrierFollowerLeft",
+      "CarrierFollowerRight",
+      "InternalAxisBoss",
+      "RotatingCarrierBody"
+    ],
+    "minimumOverlapDisk": "EMPTY/non-rendering"
+  },
+  "bottomTopPlaneDeviationMm": 0.0,
+  "pivotObjects": [
+    "FixedAxis"
+  ],
+  "checks": {
+    "exactlyOnePivotObject": true,
+    "fixedPivotVarianceZero": true,
+    "topConstraintResidualTight": true,
+    "hiddenMeshesInsideEnvelope": true,
+    "actualMeshSurfaceIntersectionsZero": true,
+    "minimumDiskCoveredByActualTopMesh": true,
+    "bottomTopPlaneWithinTolerance": true,
+    "productRendererWhitelistExact": true,
+    "minimumOverlapDiskNonRenderingEmpty": true,
+    "internalMeshesTechnicalOnly": true,
+    "noPitchRollOrFlip": true,
+    "fourInternalGrooves": true,
+    "outputsWritten": true
+  },
+  "pass": true
+}

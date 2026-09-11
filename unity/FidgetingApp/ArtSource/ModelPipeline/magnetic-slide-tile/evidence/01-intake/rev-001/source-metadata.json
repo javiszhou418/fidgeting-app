@@ -1,0 +1,110 @@
+{
+  "schemaVersion": 1,
+  "modelId": "magnetic-slide-tile",
+  "intakeRevision": 1,
+  "recordedAt": "2026-08-20T21:35:00+08:00",
+  "sourceAssertions": [
+    {
+      "assertedBy": "user",
+      "statement": "IMG_5961.MOV was personally recorded by the user and shows the same physical model as the toy in the Obsidian/Douyin reference.",
+      "scope": "identity-and-mechanism"
+    },
+    {
+      "assertedBy": "user",
+      "statement": "The two examples differ only in custom color and surface artwork; those differences must not be treated as geometry differences.",
+      "scope": "appearance-variant"
+    },
+    {
+      "assertedBy": "user",
+      "statement": "The target is a fidgeting toy for the Fidgeting app.",
+      "scope": "product-context"
+    }
+  ],
+  "sources": [
+    {
+      "id": "obsidian-note",
+      "kind": "reference-note",
+      "origin": "user-provided-link-to-external-content",
+      "originalLocator": "obsidian://open?vault=Obsidian%20Vault&file=%E7%AC%94%E8%AE%B0%E5%90%8C%E6%AD%A5%E5%8A%A9%E6%89%8B%2F2026-08-20%2F%23edc%20%E8%A7%A3%E5%8E%8B%E7%8E%A9%E5%85%B7",
+      "archivedPath": "unity/FidgetingApp/ArtSource/ModelPipeline/magnetic-slide-tile/evidence/01-intake/rev-001/obsidian-note.md",
+      "sha256": "a3e9fecf2e71ff91b9d34af24322e3259e333294efb917391f7bb888b444ba75",
+      "douyinShortUrl": "https://v.douyin.com/5oELvcy8hAU/",
+      "resolvedVideoId": "7670335530581037285",
+      "availability": "The current anonymous Douyin page could not be archived; the ten frames embedded in the note were preserved separately.",
+      "classification": "external-reference-container"
+    },
+    {
+      "id": "user-video",
+      "kind": "user-recorded-video",
+      "origin": "user-provided",
+      "originalLocator": "/Users/jiawei.zhou/Downloads/IMG_5961.MOV",
+      "archivedPath": "unity/FidgetingApp/ArtSource/ModelPipeline/magnetic-slide-tile/evidence/01-intake/rev-001/IMG_5961.MOV",
+      "sha256": "c5b7da2bb5938367202de593ee6dcf7bc39573dad1330cc3740b1cf281f91550",
+      "sizeBytes": 82377285,
+      "durationSeconds": 75.3067,
+      "video": {
+        "codec": "hevc",
+        "width": 1920,
+        "height": 1080,
+        "frameRate": "30000/1001"
+      },
+      "audio": {
+        "codec": "aac",
+        "sampleRate": 48000,
+        "channels": 2
+      },
+      "classification": "authoritative-user-input"
+    }
+  ],
+  "derivations": [
+    {
+      "id": "obsidian-frame-set",
+      "sourceId": "obsidian-note",
+      "count": 10,
+      "dimensions": "720x1280",
+      "note": "Exact copies of the ten JPEG frames embedded in the Obsidian note."
+    },
+    {
+      "id": "user-video-frame-set",
+      "sourceId": "user-video",
+      "count": 12,
+      "timestampsSeconds": [0, 6.25, 12.5, 18.75, 25, 31.25, 37.5, 43.75, 50, 56.25, 62.5, 68.75],
+      "recipe": "ffmpeg 8.1.1; fps=1/6.25, scale=960:-2, JPEG q=2"
+    },
+    {
+      "id": "user-video-audio-waveform",
+      "sourceId": "user-video",
+      "recipe": "ffmpeg 8.1.1; mono showwavespic 1600x300",
+      "note": "Visualization only; the archived MOV remains the audio authority."
+    }
+  ],
+  "discoverySeed": {
+    "status": "pending-stage-2",
+    "keywords": [
+      "EDC 推牌",
+      "机械推牌",
+      "旋转推牌",
+      "直推",
+      "胶囊形",
+      "双层",
+      "双侧珠道",
+      "磁吸",
+      "mother-of-pearl crystal sealed",
+      "Haloo Player",
+      "Chrome Hearts fidget slider"
+    ],
+    "candidate": {
+      "name": "Chrome Hearts",
+      "studio": "Haloo Player",
+      "url": "https://nxedc.com/products/chrome-hearts-fidget-slider",
+      "matchStatus": "high-visual-similarity-not-yet-stage-2-approved",
+      "knownDescription": "Classic rhythm rotating-push and straight-push structure with staggered bilateral bead grooves and mother-of-pearl/crystal-sealed surface treatment."
+    },
+    "guardrail": "Search results are external exploration references. They cannot overwrite user input or become geometry claims until Stage 2 review."
+  },
+  "toolCapabilities": {
+    "blender": "5.2.0 LTS",
+    "cliAnythingBlender": "1.0.0 installed; no preview command exposed by the current CLI help",
+    "captureFallback": "Use controlled Blender bpy scripts for real visual captures when later gates are approved."
+  }
+}

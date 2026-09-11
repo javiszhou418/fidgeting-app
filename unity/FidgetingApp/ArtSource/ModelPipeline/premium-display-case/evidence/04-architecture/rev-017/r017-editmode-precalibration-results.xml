@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+<test-run id="2" testcasecount="7" result="Failed(Child)" total="7" passed="6" failed="1" inconclusive="0" skipped="0" asserts="0" engine-version="3.5.0.0" clr-version="4.0.30319.42000" start-time="2026-08-31 07:24:38Z" end-time="2026-08-31 07:24:38Z" duration="0.3592081">
+  <test-suite type="TestSuite" id="1000" name="FidgetingApp-PackOpening-R014-Isolated-20260831" fullname="FidgetingApp-PackOpening-R014-Isolated-20260831" runstate="Runnable" testcasecount="21" result="Failed" site="Child" start-time="2026-08-31 07:24:38Z" end-time="2026-08-31 07:24:38Z" duration="0.359208" total="7" passed="6" failed="1" inconclusive="0" skipped="0" asserts="0">
+    <properties>
+      <property name="platform" value="EditMode" />
+    </properties>
+    <failure>
+      <message><![CDATA[One or more child tests had errors]]></message>
+    </failure>
+    <test-suite type="Assembly" id="1026" name="Assembly-CSharp-Editor.dll" fullname="/private/tmp/FidgetingApp-PackOpening-R017-Calibration-20260831/Library/ScriptAssemblies/Assembly-CSharp-Editor.dll" runstate="Runnable" testcasecount="21" result="Failed" site="Child" start-time="2026-08-31 07:24:38Z" end-time="2026-08-31 07:24:38Z" duration="0.355526" total="7" passed="6" failed="1" inconclusive="0" skipped="0" asserts="0">
+      <properties>
+        <property name="_PID" value="83054" />
+        <property name="_APPDOMAIN" value="Unity Child Domain" />
+        <property name="platform" value="EditMode" />
+        <property name="EditorOnly" value="True" />
+      </properties>
+      <failure>
+        <message><![CDATA[One or more child tests had errors]]></message>
+      </failure>
+      <test-suite type="TestSuite" id="1027" name="FidgetingApp" fullname="FidgetingApp" runstate="Runnable" testcasecount="21" result="Failed" site="Child" start-time="2026-08-31 07:24:38Z" end-time="2026-08-31 07:24:38Z" duration="0.355068" total="7" passed="6" failed="1" inconclusive="0" skipped="0" asserts="0">
+        <properties />
+        <failure>
+          <message><![CDATA[One or more child tests had errors]]></message>
+        </failure>
+        <test-suite type="TestSuite" id="1028" name="DisplayCase" fullname="FidgetingApp.DisplayCase" runstate="Runnable" testcasecount="21" result="Failed" site="Child" start-time="2026-08-31 07:24:38Z" end-time="2026-08-31 07:24:38Z" duration="0.354784" total="7" passed="6" failed="1" inconclusive="0" skipped="0" asserts="0">
+          <properties />
+          <failure>
+            <message><![CDATA[One or more child tests had errors]]></message>
+          </failure>
+          <test-suite type="TestSuite" id="1029" name="IsolatedCandidate" fullname="FidgetingApp.DisplayCase.IsolatedCandidate" runstate="Runnable" testcasecount="21" result="Failed" site="Child" start-time="2026-08-31 07:24:38Z" end-time="2026-08-31 07:24:38Z" duration="0.354463" total="7" passed="6" failed="1" inconclusive="0" skipped="0" asserts="0">
+            <properties />
+            <failure>
+              <message><![CDATA[One or more child tests had errors]]></message>
+            </failure>
+            <test-suite type="TestSuite" id="1030" name="R017" fullname="FidgetingApp.DisplayCase.IsolatedCandidate.R017" runstate="Runnable" testcasecount="7" result="Failed" site="Child" start-time="2026-08-31 07:24:38Z" end-time="2026-08-31 07:24:38Z" duration="0.354049" total="7" passed="6" failed="1" inconclusive="0" skipped="0" asserts="0">
+              <properties />
+              <failure>
+                <message><![CDATA[One or more child tests had errors]]></message>
+              </failure>
+              <test-suite type="TestSuite" id="1031" name="Tests" fullname="FidgetingApp.DisplayCase.IsolatedCandidate.R017.Tests" runstate="Runnable" testcasecount="7" result="Failed" site="Child" start-time="2026-08-31 07:24:38Z" end-time="2026-08-31 07:24:38Z" duration="0.353813" total="7" passed="6" failed="1" inconclusive="0" skipped="0" asserts="0">
+                <properties />
+                <failure>
+                  <message><![CDATA[One or more child tests had errors]]></message>
+                </failure>
+                <test-suite type="TestFixture" id="1001" name="IsolatedR017ProofTests" fullname="FidgetingApp.DisplayCase.IsolatedCandidate.R017.Tests.IsolatedR017ProofTests" classname="FidgetingApp.DisplayCase.IsolatedCandidate.R017.Tests.IsolatedR017ProofTests" runstate="Runnable" testcasecount="7" result="Failed" site="Child" start-time="2026-08-31 07:24:38Z" end-time="2026-08-31 07:24:38Z" duration="0.353288" total="7" passed="6" failed="1" inconclusive="0" skipped="0" asserts="0">
+                  <properties />
+                  <failure>
+                    <message><![CDATA[One or more child tests had errors]]></message>
+                  </failure>
+                  <test-case id="1008" name="CandidateHasNoParticlesVfxHapticsOrBusinessUi" fullname="FidgetingApp.DisplayCase.IsolatedCandidate.R017.Tests.IsolatedR017ProofTests.CandidateHasNoParticlesVfxHapticsOrBusinessUi" methodname="CandidateHasNoParticlesVfxHapticsOrBusinessUi" classname="FidgetingApp.DisplayCase.IsolatedCandidate.R017.Tests.IsolatedR017ProofTests" runstate="Runnable" seed="438441696" result="Passed" start-time="2026-08-31 07:24:38Z" end-time="2026-08-31 07:24:38Z" duration="0.012953" asserts="0">
+                    <properties>
+                      <property name="retryIteration" value="0" />
+                      <property name="repeatIteration" value="0" />
+                    </properties>
+                  </test-case>
+                  <test-case id="1005" name="ImportedFrontFoilMapsFidgetArchiveAboveStandard" fullname="FidgetingApp.DisplayCase.IsolatedCandidate.R017.Tests.IsolatedR017ProofTests.ImportedFrontFoilMapsFidgetArchiveAboveStandard" methodname="ImportedFrontFoilMapsFidgetArchiveAboveStandard" classname="FidgetingApp.DisplayCase.IsolatedCandidate.R017.Tests.IsolatedR017ProofTests" runstate="Runnable" seed="2019041525" result="Failed" start-time="2026-08-31 07:24:38Z" end-time="2026-08-31 07:24:38Z" duration="0.005622" asserts="0">
+                    <properties>
+                      <property name="retryIteration" value="0" />
+                      <property name="repeatIteration" value="0" />
+                    </properties>
+                    <failure>
+                      <message><![CDATA[  Expected: 384
+  But was:  512
+]]></message>
+                      <stack-trace><![CDATA[at FidgetingApp.DisplayCase.IsolatedCandidate.R017.Tests.IsolatedR017ProofTests.ImportedFrontFoilMapsFidgetArchiveAboveStandard () [0x0001a] in /private/tmp/FidgetingApp-PackOpening-R017-Calibration-20260831/Assets/IsolatedProofR017/Tests/Editor/IsolatedR017ProofTests.cs:69
+]]></stack-trace>
+                    </failure>
+                  </test-case>
+                  <test-case id="1004" name="ImportedRigIsPackOnlyAndPreservesAuthoredPoses" fullname="FidgetingApp.DisplayCase.IsolatedCandidate.R017.Tests.IsolatedR017ProofTests.ImportedRigIsPackOnlyAndPreservesAuthoredPoses" methodname="ImportedRigIsPackOnlyAndPreservesAuthoredPoses" classname="FidgetingApp.DisplayCase.IsolatedCandidate.R017.Tests.IsolatedR017ProofTests" runstate="Runnable" seed="507277160" result="Passed" start-time="2026-08-31 07:24:38Z" end-time="2026-08-31 07:24:38Z" duration="0.003463" asserts="0">
+                    <properties>
+                      <property name="retryIteration" value="0" />
+                      <property name="repeatIteration" value="0" />
+                    </properties>
+                  </test-case>
+                  <test-case id="1007" name="OneLiveCaseRemainsContainedBeforeVerticalExtraction" fullname="FidgetingApp.DisplayCase.IsolatedCandidate.R017.Tests.IsolatedR017ProofTests.OneLiveCaseRemainsContainedBeforeVerticalExtraction" methodname="OneLiveCaseRemainsContainedBeforeVerticalExtraction" classname="FidgetingApp.DisplayCase.IsolatedCandidate.R017.Tests.IsolatedR017ProofTests" runstate="Runnable" seed="986142414" result="Passed" start-time="2026-08-31 07:24:38Z" end-time="2026-08-31 07:24:38Z" duration="0.219082" asserts="0">
+                    <properties>
+                      <property name="retryIteration" value="0" />
+                      <property name="repeatIteration" value="0" />
+                    </properties>
+                  </test-case>
+                  <test-case id="1003" name="PreflightDeltaUsesSourceExportedRelativeTolerance" fullname="FidgetingApp.DisplayCase.IsolatedCandidate.R017.Tests.IsolatedR017ProofTests.PreflightDeltaUsesSourceExportedRelativeTolerance" methodname="PreflightDeltaUsesSourceExportedRelativeTolerance" classname="FidgetingApp.DisplayCase.IsolatedCandidate.R017.Tests.IsolatedR017ProofTests" runstate="Runnable" seed="1103868555" result="Passed" start-time="2026-08-31 07:24:38Z" end-time="2026-08-31 07:24:38Z" duration="0.000283" asserts="0">
+                    <properties>
+                      <property name="retryIteration" value="0" />
+                      <property name="repeatIteration" value="0" />
+                    </properties>
+                  </test-case>
+                  <test-case id="1002" name="ProfileLocksShortProofSevenPosesAndCompactSeal" fullname="FidgetingApp.DisplayCase.IsolatedCandidate.R017.Tests.IsolatedR017ProofTests.ProfileLocksShortProofSevenPosesAndCompactSeal" methodname="ProfileLocksShortProofSevenPosesAndCompactSeal" classname="FidgetingApp.DisplayCase.IsolatedCandidate.R017.Tests.IsolatedR017ProofTests" runstate="Runnable" seed="1157153098" result="Passed" start-time="2026-08-31 07:24:38Z" end-time="2026-08-31 07:24:38Z" duration="0.000168" asserts="0">
+                    <properties>
+                      <property name="retryIteration" value="0" />
+                      <property name="repeatIteration" value="0" />
+                    </properties>
+                  </test-case>
+                  <test-case id="1006" name="ReversedProgressReturnsEveryPackStateToSealed" fullname="FidgetingApp.DisplayCase.IsolatedCandidate.R017.Tests.IsolatedR017ProofTests.ReversedProgressReturnsEveryPackStateToSealed" methodname="ReversedProgressReturnsEveryPackStateToSealed" classname="FidgetingApp.DisplayCase.IsolatedCandidate.R017.Tests.IsolatedR017ProofTests" runstate="Runnable" seed="783121305" result="Passed" start-time="2026-08-31 07:24:38Z" end-time="2026-08-31 07:24:38Z" duration="0.105855" asserts="0">
+                    <properties>
+                      <property name="retryIteration" value="0" />
+                      <property name="repeatIteration" value="0" />
+                    </properties>
+                    <output><![CDATA[Saving results to: /Users/jiawei.zhou/Library/Application Support/DefaultCompany/FidgetingApp-PackOpening-R014-Isolated-20260831/TestResults.xml
+]]></output>
+                  </test-case>
+                </test-suite>
+              </test-suite>
+            </test-suite>
+          </test-suite>
+        </test-suite>
+      </test-suite>
+    </test-suite>
+  </test-suite>
+</test-run>

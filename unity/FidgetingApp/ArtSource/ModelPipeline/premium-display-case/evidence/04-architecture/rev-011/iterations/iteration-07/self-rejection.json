@@ -1,0 +1,20 @@
+{
+  "schema": "premium-display-case-gate04-r011-self-rejection.v1",
+  "iteration": 7,
+  "status": "visual-self-rejected-before-registration",
+  "registeredForApproval": false,
+  "source": "actual Unity 6000.5.6f1 PlayMode frames at 1206x2622 and 60 fps",
+  "reasons": [
+    "The 512 spark port was no longer the visible confetti source.",
+    "The 25 SG_LightingStrike trail particles still rendered their billboard heads as white squares.",
+    "The exact source red-purple-blue flare sequence and continuous Pack-to-case occlusion remained valid."
+  ],
+  "corrections": [
+    "Hide the 25 lightning particle heads and render only their exact-graph trail material.",
+    "Keep the bounded source trail timing and all direct-copy hashes unchanged.",
+    "Do not change the Pack, case, toy, transaction, UI, or Haptic boundaries."
+  ],
+  "shippingRuntimeWired": false,
+  "shippingReady": false,
+  "physicalPhoneInstalled": false
+}

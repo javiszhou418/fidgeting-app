@@ -1,0 +1,407 @@
+{
+  "schemaVersion": 1,
+  "modelId": "magnetic-slide-tile",
+  "gate": "06-geometry",
+  "revision": 4,
+  "contractSha256": "5aee71817c2c033ed92b770126ba0ecb6d79c2f032d786743b214b79078a47ea",
+  "gate05Source": {
+    "path": "unity/FidgetingApp/ArtSource/ModelPipeline/magnetic-slide-tile/evidence/05-blockout/rev-006/magnetic-slide-tile-blockout-r006.blend",
+    "sha256": "fc0676107d7d9846959a6495edd808e0ffe7dbb7e7625ba2dcc5c7a7287c4f7b",
+    "geometryDigest": "e2a838c22b743c7b0a05a20df060817f4e324bad5c84c11592c673c25ee002fe",
+    "approvalWording": "\u53ef\u4ee5\u7684"
+  },
+  "dimensions": {
+    "bounds": {
+      "minimumMm": [
+        -15.5,
+        -25.0,
+        0.0
+      ],
+      "maximumMm": [
+        15.5,
+        25.0,
+        12.0
+      ],
+      "sizeMm": [
+        31.0,
+        50.0,
+        12.0
+      ]
+    },
+    "thicknessStack": {
+      "bottomMm": 5.875,
+      "gapMm": 0.25,
+      "topMm": 5.875,
+      "sumMm": 12.0
+    },
+    "state": "user-authorized-provisional-not-production-measured",
+    "bottomTopPlaneZMm": 5.875,
+    "axisBossProtrusionMm": 0.2,
+    "carrierClearanceBelowPlaneMm": 0.04999971389770508,
+    "grooveWidthRangeMm": [
+      1.8,
+      3.0
+    ],
+    "ballCandidateRangeMm": [
+      2.0,
+      3.0
+    ],
+    "maxTravelMm": 18.076433121019107
+  },
+  "canonicalGeometryDigest": "e2a838c22b743c7b0a05a20df060817f4e324bad5c84c11592c673c25ee002fe",
+  "viewGeometryDigests": {
+    "front": "e2a838c22b743c7b0a05a20df060817f4e324bad5c84c11592c673c25ee002fe",
+    "back": "e2a838c22b743c7b0a05a20df060817f4e324bad5c84c11592c673c25ee002fe",
+    "top": "e2a838c22b743c7b0a05a20df060817f4e324bad5c84c11592c673c25ee002fe",
+    "bottom": "e2a838c22b743c7b0a05a20df060817f4e324bad5c84c11592c673c25ee002fe",
+    "left": "e2a838c22b743c7b0a05a20df060817f4e324bad5c84c11592c673c25ee002fe",
+    "right": "e2a838c22b743c7b0a05a20df060817f4e324bad5c84c11592c673c25ee002fe",
+    "workbench": "e2a838c22b743c7b0a05a20df060817f4e324bad5c84c11592c673c25ee002fe",
+    "dimensions": "e2a838c22b743c7b0a05a20df060817f4e324bad5c84c11592c673c25ee002fe",
+    "pivot": "e2a838c22b743c7b0a05a20df060817f4e324bad5c84c11592c673c25ee002fe",
+    "exploded": "e2a838c22b743c7b0a05a20df060817f4e324bad5c84c11592c673c25ee002fe",
+    "underside": "e2a838c22b743c7b0a05a20df060817f4e324bad5c84c11592c673c25ee002fe",
+    "flat-plane-axis": "e2a838c22b743c7b0a05a20df060817f4e324bad5c84c11592c673c25ee002fe",
+    "section-aa": "e2a838c22b743c7b0a05a20df060817f4e324bad5c84c11592c673c25ee002fe",
+    "tangency-step": "e2a838c22b743c7b0a05a20df060817f4e324bad5c84c11592c673c25ee002fe"
+  },
+  "geometryMetrics": {
+    "BottomExterior": {
+      "vertices": 9234,
+      "polygons": 8723,
+      "triangles": 18464
+    },
+    "FixedAxisBoss": {
+      "vertices": 256,
+      "polygons": 130,
+      "triangles": 508
+    },
+    "RotatingCarrierBody": {
+      "vertices": 252,
+      "polygons": 128,
+      "triangles": 500
+    },
+    "CarrierFollowerLeft": {
+      "vertices": 5130,
+      "polygons": 4619,
+      "triangles": 10256
+    },
+    "CarrierFollowerRight": {
+      "vertices": 5130,
+      "polygons": 4619,
+      "triangles": 10256
+    },
+    "BallCandidateLeft": {
+      "vertices": 1986,
+      "polygons": 2048,
+      "triangles": 3968
+    },
+    "BallCandidateRight": {
+      "vertices": 1986,
+      "polygons": 2048,
+      "triangles": 3968
+    },
+    "MovingTopBody": {
+      "vertices": 25682,
+      "polygons": 23119,
+      "triangles": 51360
+    }
+  },
+  "uvTangentAudit": {
+    "BottomExterior": {
+      "uvLayer": "Gate06_DeterministicUV",
+      "uvLoopCount": 35910,
+      "loopCount": 35910,
+      "finiteTangents": true,
+      "blenderInvalidTangentLoopsOnTinyTriangles": 0,
+      "invalidGeometricTangents": 0,
+      "tangentAuditMethod": "triangulated UV basis with longest-edge geometric fallback",
+      "auditedTangentLoops": 55392,
+      "skippedZeroAreaLoops": 0,
+      "invalidPolygonNormals": 0
+    },
+    "FixedAxisBoss": {
+      "uvLayer": "UVMap",
+      "uvLoopCount": 768,
+      "loopCount": 768,
+      "finiteTangents": true,
+      "blenderInvalidTangentLoopsOnTinyTriangles": 0,
+      "invalidGeometricTangents": 0,
+      "tangentAuditMethod": "triangulated UV basis with longest-edge geometric fallback",
+      "auditedTangentLoops": 1524,
+      "skippedZeroAreaLoops": 0,
+      "invalidPolygonNormals": 0
+    },
+    "RotatingCarrierBody": {
+      "uvLayer": "UVMap",
+      "uvLoopCount": 756,
+      "loopCount": 756,
+      "finiteTangents": true,
+      "blenderInvalidTangentLoopsOnTinyTriangles": 0,
+      "invalidGeometricTangents": 0,
+      "tangentAuditMethod": "triangulated UV basis with longest-edge geometric fallback",
+      "auditedTangentLoops": 1500,
+      "skippedZeroAreaLoops": 0,
+      "invalidPolygonNormals": 0
+    },
+    "CarrierFollowerLeft": {
+      "uvLayer": "Gate06_DeterministicUV",
+      "uvLoopCount": 3078,
+      "loopCount": 3078,
+      "finiteTangents": true,
+      "blenderInvalidTangentLoopsOnTinyTriangles": 0,
+      "invalidGeometricTangents": 0,
+      "tangentAuditMethod": "triangulated UV basis with longest-edge geometric fallback",
+      "auditedTangentLoops": 6144,
+      "skippedZeroAreaLoops": 0,
+      "invalidPolygonNormals": 0
+    },
+    "CarrierFollowerRight": {
+      "uvLayer": "Gate06_DeterministicUV",
+      "uvLoopCount": 3078,
+      "loopCount": 3078,
+      "finiteTangents": true,
+      "blenderInvalidTangentLoopsOnTinyTriangles": 0,
+      "invalidGeometricTangents": 0,
+      "tangentAuditMethod": "triangulated UV basis with longest-edge geometric fallback",
+      "auditedTangentLoops": 6144,
+      "skippedZeroAreaLoops": 0,
+      "invalidPolygonNormals": 0
+    },
+    "BallCandidateLeft": {
+      "uvLayer": "UVMap",
+      "uvLoopCount": 8064,
+      "loopCount": 8064,
+      "finiteTangents": true,
+      "blenderInvalidTangentLoopsOnTinyTriangles": 0,
+      "invalidGeometricTangents": 0,
+      "tangentAuditMethod": "triangulated UV basis with longest-edge geometric fallback",
+      "auditedTangentLoops": 11904,
+      "skippedZeroAreaLoops": 0,
+      "invalidPolygonNormals": 0
+    },
+    "BallCandidateRight": {
+      "uvLayer": "UVMap",
+      "uvLoopCount": 8064,
+      "loopCount": 8064,
+      "finiteTangents": true,
+      "blenderInvalidTangentLoopsOnTinyTriangles": 0,
+      "invalidGeometricTangents": 0,
+      "tangentAuditMethod": "triangulated UV basis with longest-edge geometric fallback",
+      "auditedTangentLoops": 11904,
+      "skippedZeroAreaLoops": 0,
+      "invalidPolygonNormals": 0
+    },
+    "MovingTopBody": {
+      "uvLayer": "Gate06_DeterministicUV",
+      "uvLoopCount": 48254,
+      "loopCount": 48254,
+      "finiteTangents": true,
+      "blenderInvalidTangentLoopsOnTinyTriangles": 12,
+      "invalidGeometricTangents": 0,
+      "tangentAuditMethod": "triangulated UV basis with longest-edge geometric fallback",
+      "auditedTangentLoops": 80064,
+      "skippedZeroAreaLoops": 0,
+      "invalidPolygonNormals": 0
+    }
+  },
+  "nonmanifoldEdges": {
+    "BottomExterior": 0,
+    "FixedAxisBoss": 0,
+    "RotatingCarrierBody": 0,
+    "CarrierFollowerLeft": 0,
+    "CarrierFollowerRight": 0,
+    "BallCandidateLeft": 0,
+    "BallCandidateRight": 0,
+    "MovingTopBody": 0
+  },
+  "topPlane": {
+    "toleranceMm": 0.001,
+    "vertexCount": 513,
+    "minimumZMm": 5.875,
+    "maximumZMm": 5.875,
+    "maximumDeviationMm": 0.0
+  },
+  "carrierPacking": {
+    "maximumZMm": 5.825000286102295,
+    "clearanceBelowPlaneMm": 0.04999971389770508,
+    "exteriorVisible": false
+  },
+  "followerAlignment": {
+    "CarrierFollowerLeft": {
+      "followerWorldX": -6.0,
+      "grooveWorldX": -6.0,
+      "xErrorMm": 0.0,
+      "followerWorldY": -9.0,
+      "finiteStartY": -9.0,
+      "finiteEndY": 14.0
+    },
+    "CarrierFollowerRight": {
+      "followerWorldX": 6.0,
+      "grooveWorldX": 6.0,
+      "xErrorMm": 0.0,
+      "followerWorldY": -9.0,
+      "finiteStartY": -9.0,
+      "finiteEndY": 14.0
+    }
+  },
+  "poses": [
+    {
+      "id": "closed",
+      "travelMm": 0.0,
+      "angleDeg": 0.0,
+      "geometryDigest": "e2a838c22b743c7b0a05a20df060817f4e324bad5c84c11592c673c25ee002fe",
+      "fixedAxisWorld": [
+        0.0,
+        -9.0,
+        5.074999809265137
+      ],
+      "topZMinMm": 6.125
+    },
+    {
+      "id": "max-open",
+      "travelMm": 18.076433121019107,
+      "angleDeg": 0.0,
+      "geometryDigest": "e2a838c22b743c7b0a05a20df060817f4e324bad5c84c11592c673c25ee002fe",
+      "fixedAxisWorld": [
+        0.0,
+        -9.0,
+        5.074999809265137
+      ],
+      "topZMinMm": 6.125
+    },
+    {
+      "id": "detent-12",
+      "travelMm": 8.134394904458599,
+      "angleDeg": 12.0,
+      "geometryDigest": "e2a838c22b743c7b0a05a20df060817f4e324bad5c84c11592c673c25ee002fe",
+      "fixedAxisWorld": [
+        0.0,
+        -9.0,
+        5.074999809265137
+      ],
+      "topZMinMm": 6.125
+    },
+    {
+      "id": "detent-36",
+      "travelMm": 12.653503184713374,
+      "angleDeg": 36.0,
+      "geometryDigest": "e2a838c22b743c7b0a05a20df060817f4e324bad5c84c11592c673c25ee002fe",
+      "fixedAxisWorld": [
+        0.0,
+        -9.0,
+        5.074999809265137
+      ],
+      "topZMinMm": 6.125
+    }
+  ],
+  "detents": {
+    "count": 30,
+    "stepDegrees": 12
+  },
+  "denseSweep": {
+    "sampleCount": 3600,
+    "angularStepDegrees": 0.5,
+    "allValid": true
+  },
+  "sectionMetrics": {
+    "SectionAA_BottomExterior": {
+      "vertices": 72,
+      "polygons": 38
+    },
+    "SectionAA_FixedAxisBoss": {
+      "vertices": 20,
+      "polygons": 12
+    },
+    "SectionAA_RotatingCarrierBody": {
+      "vertices": 8,
+      "polygons": 6
+    },
+    "SectionAA_CarrierFollowerLeft": {
+      "vertices": 40,
+      "polygons": 22
+    },
+    "SectionAA_CarrierFollowerRight": {
+      "vertices": 40,
+      "polygons": 22
+    },
+    "SectionAA_BallCandidateLeft": {
+      "vertices": 640,
+      "polygons": 546
+    },
+    "SectionAA_BallCandidateRight": {
+      "vertices": 640,
+      "polygons": 546
+    },
+    "SectionAA_MovingTopBody": {
+      "vertices": 3272,
+      "polygons": 2790
+    }
+  },
+  "unknownEngineering": {
+    "springs": "unknown",
+    "preload": "unknown",
+    "crossSections": "unknown",
+    "ballMaterialAndExactCount": "unknown",
+    "manufacturingTolerance": "unknown"
+  },
+  "animatedObjects": [],
+  "checks": {
+    "gate05SourceHashConsumed": true,
+    "mechanismContractHashConsumed": true,
+    "sameGeometryDigestAcrossViews": true,
+    "sourceGeometryDigestPreserved": true,
+    "exactProvisionalBounds": true,
+    "thicknessStackExact": true,
+    "flatBottomPlane": true,
+    "noCavity": true,
+    "axisBossPositive": true,
+    "carrierHiddenBelowPlane": true,
+    "fourGrooves": true,
+    "grooveRoles": true,
+    "grooveWidthAuthorized": true,
+    "ballCandidatesAuthorized": true,
+    "followersAligned": true,
+    "fixedAxisInvariant": true,
+    "compoundTransform": true,
+    "finiteEndpoints": true,
+    "minimumOverlapDenseSweep": true,
+    "topAlwaysAboveBottom": true,
+    "manifold": true,
+    "normals": true,
+    "tangents": true,
+    "uvs": true,
+    "smoothSilhouette": true,
+    "hiddenProxyNotExposed": true,
+    "unknownEngineeringPreserved": true,
+    "sectionEvidenceGenerated": true,
+    "zeroSelfMotion": true,
+    "glbWritten": true,
+    "blendWritten": true
+  },
+  "outputs": {
+    "blend": "magnetic-slide-tile-geometry-r004.blend",
+    "glb": "magnetic-slide-tile-geometry-r004-review.glb",
+    "renders": [
+      "orthographic-front.png",
+      "orthographic-back.png",
+      "orthographic-top.png",
+      "orthographic-bottom.png",
+      "orthographic-left.png",
+      "orthographic-right.png",
+      "geometry-workbench.png",
+      "dimension-overlay.png",
+      "fixed-axis-pivot-overlay.png",
+      "exploded-geometry.png",
+      "top-underside-four-groove-closeup.png",
+      "bottom-flat-plane-raised-axis-closeup.png",
+      "section-aa-carrier-followers-grooves.png",
+      "tangency-step-overlay.png",
+      "state-closed.png",
+      "state-max-open.png",
+      "state-detent-12.png",
+      "state-detent-36.png"
+    ]
+  },
+  "pass": true
+}

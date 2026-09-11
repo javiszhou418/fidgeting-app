@@ -1,0 +1,101 @@
+{
+  "schema": "pack-opening-compatibility-provenance-audit.v1",
+  "date": "2026-08-28",
+  "sourceTask": "43ca0cec-1fb6-43dc-b651-2418c0df3ddf",
+  "status": "pass-with-delivery-gates",
+  "canonicalProject": {
+    "unity": "6000.5.6f1",
+    "urp": "17.5.0",
+    "timeline": "1.8.12",
+    "shaderGraph": "17.5.0",
+    "requestedUnity2022ApisAdapted": true,
+    "downgrade": false,
+    "packageChurn": false
+  },
+  "adaptations": [
+    "Use URP 17 Volume overrides and renderer capabilities instead of copying URP 14 serialized data.",
+    "Use ScriptableObject plus AnimationCurve for shipping timing authority; Timeline remains preview and scrub only.",
+    "Use Shuriken ParticleSystem for the candidate burst; VFX Graph stays absent.",
+    "Use unscaled-time sampling for the short hitstop so transaction and native clocks continue."
+  ],
+  "nativeUnityBoundary": {
+    "native": [
+      "Pack selection and tear gesture",
+      "receipt and award authority",
+      "stale request rejection",
+      "exact-once ACK",
+      "business metadata and CTA"
+    ],
+    "unity": [
+      "assembled case",
+      "preloaded environment",
+      "effect rendering",
+      "camera impulse and FOV response",
+      "phase events"
+    ],
+    "componentLibrary": "Assets/Plugins/iOS/FidgetProductUIComponents.swift",
+    "secondCtaSystemAllowed": false
+  },
+  "earliestAffectedGate": "04-architecture",
+  "staleGates": [
+    "05-blockout",
+    "06-geometry",
+    "07-material",
+    "08-lighting",
+    "09-environment",
+    "10-export",
+    "11-unity-parity",
+    "12-shipping"
+  ],
+  "preservedStaticInputs": [
+    "228 x 304 x 59 mm whole-case geometry",
+    "PresentationRoot -> CaseAssembly -> ContentSlot",
+    "Gate 10 FBX sha256 21c9db68723f0006d7c6bfec5280cafe55c16cf5392ff97c365c966e91f847ae",
+    "rev 1-4 evidence and decision history"
+  ],
+  "haptics": {
+    "pipeline": "input -> mechanism state -> semantic event -> recipe -> iOS renderer",
+    "rawHapticBridgeAdded": false
+  },
+  "accessibility": {
+    "sameCausalSequence": true,
+    "disabled": [
+      "camera shake",
+      "chromatic aberration",
+      "lens distortion",
+      "speed lines",
+      "hitstop"
+    ],
+    "reduced": [
+      "flash",
+      "bloom"
+    ]
+  },
+  "specReconciliation": {
+    "namedFivePhasesButSlashListHasSixGroups": "Recorded as nine measurable windows; Epic fake-out overlaps escalating tear.",
+    "resultProfiles": 4,
+    "packDisplayTiers": 6,
+    "mapping": "independent axes; sealed Pack tier never derives result rarity",
+    "textureRows": 7,
+    "physicalTextureFiles": 10,
+    "optionalMaskIncluded": true
+  },
+  "localEvidenceBoundary": {
+    "canVerify": [
+      "timing windows",
+      "effect order",
+      "whole-case source use",
+      "Pack source use",
+      "Reduce Motion rules",
+      "deterministic candidate texture manifest",
+      "Unity compilation and focused EditMode tests"
+    ],
+    "cannotVerify": [
+      "physical iPhone 60 fps",
+      "Android performance",
+      "Taptic Engine feel",
+      "shipping visual approval",
+      "Device Accepted"
+    ]
+  }
+}

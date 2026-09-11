@@ -1,0 +1,54 @@
+{
+  "schemaVersion": 1,
+  "modelId": "premium-display-case",
+  "gate": "11-unity-parity",
+  "parityRevision": 1,
+  "status": "pass",
+  "sourceFbxSha256": "21c9db68723f0006d7c6bfec5280cafe55c16cf5392ff97c365c966e91f847ae",
+  "unityGeometryDigest": "222a9ab01cd51fd7293664ed8b3b55778f26745ec8b8df2c570f547dfb0205e2",
+  "reports": {
+    "hierarchy": {
+      "path": "unity/FidgetingApp/ArtSource/ModelPipeline/premium-display-case/evidence/11-unity-parity/rev-001/unity-hierarchy-pivot-material-report.json",
+      "sha256": "34c57e761493a9b75550094714333325a06310d8c489495aad5aebb5b7d801eb"
+    },
+    "bounds": {
+      "path": "unity/FidgetingApp/ArtSource/ModelPipeline/premium-display-case/evidence/11-unity-parity/rev-001/unity-bounds-digest-validation.json",
+      "sha256": "b4fc0b55ccce8c2b967dc0b71452a7836b42bf922c1ce71c70c36cc0d26c11b1"
+    },
+    "capture": {
+      "path": "unity/FidgetingApp/ArtSource/ModelPipeline/premium-display-case/evidence/11-unity-parity/rev-001/unity-capture-report.json",
+      "sha256": "2e58c779429ceb054a7c9823f37ae8bfe29654e3ac099385b20217d5916a6803"
+    },
+    "correspondence": {
+      "path": "unity/FidgetingApp/ArtSource/ModelPipeline/premium-display-case/evidence/11-unity-parity/rev-001/unity-geometry-correspondence.json",
+      "sha256": "1ddd71389364b9b82964048d615e4d337f212d78da6f193c446d9c338885ca99"
+    },
+    "parity": {
+      "path": "unity/FidgetingApp/ArtSource/ModelPipeline/premium-display-case/evidence/11-unity-parity/rev-001/unity-parity-report.json",
+      "sha256": "8e3f4e31938fbb6e381913dacdc0ad98c282cdfd3a2c943de5c559a1ae3d2cf2"
+    },
+    "tests": {
+      "path": "unity/FidgetingApp/ArtSource/ModelPipeline/premium-display-case/evidence/11-unity-parity/rev-001/unity-test-summary.json",
+      "sha256": "0de8d8bb849893cfaa557b3113449f155cd30f79938f7dc66b3a41ee1787a0e0"
+    }
+  },
+  "checks": {
+    "sourceGate10ApprovalExact": true,
+    "sourceFbxHashExact": true,
+    "sourceGlbHashExact": true,
+    "candidateFbxHashExact": true,
+    "hierarchyReportPass": true,
+    "boundsReportPass": true,
+    "captureReportPass": true,
+    "geometryCorrespondencePass": true,
+    "focusedUnityTestsPass": true,
+    "candidateChecksPass": true,
+    "materialChecksPass": true,
+    "captureChecksPass": true,
+    "shippingBoundaryPass": true,
+    "parityChecksPass": true,
+    "gate12Blocked": true,
+    "phonePushFalse": true
+  },
+  "result": "READY_FOR_GATE11_REVIEW_NOT_SHIPPING"
+}

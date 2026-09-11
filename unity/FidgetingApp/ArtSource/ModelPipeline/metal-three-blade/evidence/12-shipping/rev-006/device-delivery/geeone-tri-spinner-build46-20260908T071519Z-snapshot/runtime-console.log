@@ -1,0 +1,105 @@
+Failed to load provisioning paramter list due to error: Error Domain=com.apple.dt.CoreDeviceError Code=1002 "No provider was found." UserInfo={NSLocalizedDescription=No provider was found.}.
+`devicectl manage create` may support a reduced set of arguments.
+15:19:58  Acquired tunnel connection to device.
+15:19:58  Enabling developer disk image services.
+15:19:58  Acquired usage assertion.
+Launched application with com.jiaweizhou.fidgetspinner.codex bundle identifier.
+Waiting for the application to terminate…
+2026-09-08 15:20:00.416 FidgetSpinner[44388:7493900] Built from '6000.5/staging' branch, Version '6000.5.6f1 (0e0577a1a2ac)', Build type 'Development', Scripting Backend 'il2cpp'
+2026-09-08 15:20:00.418 FidgetSpinner[44388:7493900] MemoryManager: Using 'Default' Allocator.
+[UnityMemory] Configuration Parameters - Can be set up in boot.config
+    "memorysetup-temp-allocator-size-nav-mesh-worker=65536"
+    "memorysetup-temp-allocator-size-cloud-worker=32768"
+    "memorysetup-temp-allocator-size-audio-worker=65536"
+    "memorysetup-allocator-temp-initial-block-size-main=262144"
+    "memorysetup-allocator-temp-initial-block-size-worker=262144"
+    "memorysetup-temp-allocator-size-preload-manager=262144"
+    "memorysetup-temp-allocator-size-gfx=262144"
+    "memorysetup-temp-allocator-size-background-worker=32768"
+    "memorysetup-temp-allocator-size-job-worker=262144"
+    "memorysetup-bucket-allocator-granularity=16"
+    "memorysetup-bucket-allocator-bucket-count=8"
+    "memorysetup-bucket-allocator-block-size=4194304"
+    "memorysetup-bucket-allocator-block-count=1"
+    "memorysetup-main-allocator-block-size=16777216"
+    "memorysetup-thread-allocator-block-size=16777216"
+    "memorysetup-main-allocator-mimalloc-enabled=0"
+    "memorysetup-gfx-main-allocator-block-size=16777216"
+    "memorysetup-gfx-thread-allocator-block-size=16777216"
+    "memorysetup-cache-allocator-block-size=4194304"
+    "memorysetup-typetree-allocator-block-size=2097152"
+    "memorysetup-profiler-bucket-allocator-granularity=16"
+    "memorysetup-profiler-bucket-allocator-bucket-count=8"
+    "memorysetup-profiler-bucket-allocator-block-size=4194304"
+    "memorysetup-profiler-bucket-allocator-block-count=1"
+    "memorysetup-profiler-allocator-block-size=16777216"
+    "memorysetup-profiler-editor-allocator-block-size=1048576"
+    "memorysetup-temp-allocator-size-main=4194304"
+    "memorysetup-job-temp-allocator-block-size=2097152"
+    "memorysetup-job-temp-allocator-block-size-background=1048576"
+    "memorysetup-job-temp-allocator-reduction-small-platforms=262144"
+-> applicationDidFinishLaunching()
+-> sceneWillEnterForeground()
+Remaining time:30s
+Found 4 interfaces on host : 0) 10.96.140.207 1) 192.168.31.237 2) 169.254.74.189 3) 7.8.30.36
+Player connection [8750244288]  Target information:
+
+Player connection [8750244288]  * "[IP] 10.96.140.207 [Port] 55000 [Flags] 19 [Guid] 3811257286 [EditorId] 171960988 [Version] 1048832 [Id] iPhonePlayer(8,localhost):56000 [Debug] 0 [PackageName] iPhonePlayer [ProjectName] Fidget Spinner" 
+
+Player connection [8750244288]  * "[IP] 192.168.31.237 [Port] 55000 [Flags] 19 [Guid] 3811257286 [EditorId] 171960988 [Version] 1048832 [Id] iPhonePlayer(8,localhost):56000 [Debug] 0 [PackageName] iPhonePlayer [ProjectName] Fidget Spinner" 
+
+Player connection [8750244288]  * "[IP] 169.254.74.189 [Port] 55000 [Flags] 19 [Guid] 3811257286 [EditorId] 171960988 [Version] 1048832 [Id] iPhonePlayer(8,localhost):56000 [Debug] 0 [PackageName] iPhonePlayer [ProjectName] Fidget Spinner" 
+
+Player connection [8750244288]  * "[IP] 7.8.30.36 [Port] 55000 [Flags] 19 [Guid] 3811257286 [EditorId] 171960988 [Version] 1048832 [Id] iPhonePlayer(8,localhost):56000 [Debug] 0 [PackageName] iPhonePlayer [ProjectName] Fidget Spinner" 
+
+Player connection [8750244288] Started UDP target info broadcast (1) on [225.0.0.222:54997].
+
+Direct connection to host time out.
+Stopping profiler. Profiler is not able to send data to the Unity Editor or a file fast enough!
+Please reduce frame rate using VSync Quality Settings or Application.targetFrameRate api. Use wired connection to a device.
+Buffered 134250496 bytes while maximum allowed value by Profiler.maxUsedMemory is 134217728 bytes.
+CodeReloadManager initialized
+Input System module state changed to: Initialized.
+[Physics::Module] Initialized fallback backend.
+[Physics::Module] Id: 0xdecafbad
+-> applicationWillEnterForeground()
+-> sceneDidBecomeActive()
+-> applicationDidBecomeActive()
+[Subsystems] Discovering subsystems at path /private/var/containers/Bundle/Application/D2FAD707-4B2D-405E-A295-DD43D1EA397D/FidgetSpinner.app/Data/UnitySubsystems
+GfxDevice: creating device client; kGfxThreadingModeThreaded
+Initializing Metal device caps: Apple A17 Pro GPU
+Apple GPU Family: 9
+MSL Version: 3.0
+Has Float MSAA: 1
+Has Float Filtering: 1
+ReadWrite Texture Tier: 2
+Initialize engine version: 6000.5.6f1 (0e0577a1a2ac)
+[Physics::Module] Selected backend.
+[Physics::Module] Name: PhysX
+[Physics::Module] Id: 0xf2b8ea05
+[Physics::Module] SDK Version: 4.1.2
+[Physics::Module] Integration Version: 1.0.0
+[Physics::Module] Threading Mode: Multi-Threaded
+CADisplayLink created
+Player Setting 'Adjust iOS FPS based on thermal state' is OFF
+thermalStateDidChange: Nominal
+UnloadTime: 3.784791 ms
+Unloading 6 Unused Serialized files (Serialized files now loaded: 0)
+UnloadTime: 3.448333 ms
+Metal: Cannot read pixels from write-only backbuffer. Uncheck 'Metal Write-Only Backbuffer' in PlayerSettings.
+Unloading 29 unused Assets / (77.8 KB). Loaded Objects now: 3149.
+Memory consumption went from 121.8 MB to 121.8 MB.
+Total: 1.808250 ms (FindLiveObjects: 0.140042 ms CreateObjectMapping: 0.232709 ms MarkObjects: 1.306292 ms  DeleteObjects: 0.128833 ms)
+
+Metal: Cannot read pixels from write-only backbuffer. Uncheck 'Metal Write-Only Backbuffer' in PlayerSettings.
+Metal: Cannot read pixels from write-only backbuffer. Uncheck 'Metal Write-Only Backbuffer' in PlayerSettings.
+Metal: Cannot read pixels from write-only backbuffer. Uncheck 'Metal Write-Only Backbuffer' in PlayerSettings.
+Metal: Cannot read pixels from write-only backbuffer. Uncheck 'Metal Write-Only Backbuffer' in PlayerSettings.
+Metal: Cannot read pixels from write-only backbuffer. Uncheck 'Metal Write-Only Backbuffer' in PlayerSettings.
+Metal: Cannot read pixels from write-only backbuffer. Uncheck 'Metal Write-Only Backbuffer' in PlayerSettings.
+Metal: Cannot read pixels from write-only backbuffer. Uncheck 'Metal Write-Only Backbuffer' in PlayerSettings.
+Metal: Cannot read pixels from write-only backbuffer. Uncheck 'Metal Write-Only Backbuffer' in PlayerSettings.
+Metal: Cannot read pixels from write-only backbuffer. Uncheck 'Metal Write-Only Backbuffer' in PlayerSettings.
+Metal: Cannot read pixels from write-only backbuffer. Uncheck 'Metal Write-Only Backbuffer' in PlayerSettings.
+Metal: Cannot read pixels from write-only backbuffer. Uncheck 'Metal Write-Only Backbuffer' in PlayerSettings.
+App terminated due to signal 2.

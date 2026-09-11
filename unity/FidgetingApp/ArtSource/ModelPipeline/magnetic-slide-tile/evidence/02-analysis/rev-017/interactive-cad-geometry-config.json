@@ -1,0 +1,127 @@
+{
+  "schemaVersion": 2,
+  "modelId": "magnetic-slide-tile",
+  "gate": "02-analysis",
+  "revision": 17,
+  "contractAssetId": "slider-analysis-mechanism-evidence-contract-r017",
+  "contractSha256": "9cd7a08f34d7d8dfc3c6f89f6c80a5c5c2dcae48bc0d5c54ebf455a0727ea571",
+  "expectedContractSha256": "9cd7a08f34d7d8dfc3c6f89f6c80a5c5c2dcae48bc0d5c54ebf455a0727ea571",
+  "diagrammaticGeometry": {
+    "axisNormalizedY": 0.32,
+    "carrierRadiusL": 0.23,
+    "carrierSideCutoutHalfWidthL": 0.08,
+    "followerOffsetXL": 0.12,
+    "innerGrooveOffsetXL": 0.12,
+    "outerGrooveOffsetXL": 0.235,
+    "grooveStartYL": -0.34,
+    "grooveEndYL": 0.34,
+    "grooveStartFromTopL": 0.32,
+    "grooveEndFromTopL": 0.78,
+    "minimumOverlapDiskRadiusL": 0.3184713375796178,
+    "axisBossProtrusionMm": 2,
+    "ballDiameterMm": 2.5,
+    "trackWidthMm": 2.4
+  },
+  "componentLayers": [
+    "BottomExterior",
+    "FixedAxisBoss",
+    "MinimumOverlapDisk",
+    "RotatingCarrier",
+    "CarrierFollowerLeft",
+    "CarrierFollowerRight",
+    "BallCandidateLeft",
+    "BallCandidateRight",
+    "MovingTop",
+    "TopOuterGrooveLeft",
+    "TopInnerGrooveLeft",
+    "TopInnerGrooveRight",
+    "TopOuterGrooveRight",
+    "UnknownSprings",
+    "UnknownPreload"
+  ],
+  "geometryBlockers": {
+    "trackCountMustEqual": 4,
+    "requiredTrackRoles": [
+      "fore-aft-slide",
+      "central-axis-link"
+    ],
+    "axisBossProtrusionMustExceedMm": 0,
+    "recessedAxisFlagForbidden": true,
+    "ballDiameterAuthorizedMm": [
+      2,
+      3
+    ],
+    "trackWidthMaximumMm": 3,
+    "contractHashMustMatch": "9cd7a08f34d7d8dfc3c6f89f6c80a5c5c2dcae48bc0d5c54ebf455a0727ea571",
+    "rotationUnlockTravel": "sMax-only",
+    "belowMaximumRotationDegrees": 0,
+    "nonAlignedSlideLock": "sMax",
+    "simultaneousMotionForbidden": true
+  },
+  "cadApprovalChecklist": [
+    "fourTracks",
+    "outerInnerRoles",
+    "raisedAxisBoss",
+    "ballRange",
+    "trackWidth",
+    "minimumOverlapDisk",
+    "finiteGrooveEndpoints",
+    "pointerDirection",
+    "fixedAxisCoverage",
+    "topAboveBottom",
+    "sourceMapping",
+    "midTravelRotationBlocked",
+    "endpointRotationUnlock",
+    "nonzeroAngleSlideLock",
+    "alignedReturn"
+  ],
+  "simulator": {
+    "locked": true,
+    "current": false
+  },
+  "kinematicInterlock": {
+    "stateMachine": [
+      {
+        "id": "closed-aligned",
+        "predicate": "s=0 and theta=0",
+        "allows": [
+          "slide-open"
+        ]
+      },
+      {
+        "id": "sliding-aligned",
+        "predicate": "0<s<sMax and theta=0",
+        "allows": [
+          "slide-open",
+          "slide-close"
+        ],
+        "blocks": [
+          "rotate"
+        ]
+      },
+      {
+        "id": "endpoint-aligned",
+        "predicate": "s=sMax and theta=0/360",
+        "allows": [
+          "rotate",
+          "slide-close"
+        ]
+      },
+      {
+        "id": "endpoint-rotating",
+        "predicate": "s=sMax and theta mod 360!=0",
+        "allows": [
+          "rotate"
+        ],
+        "blocks": [
+          "slide"
+        ]
+      }
+    ],
+    "alignmentToleranceDegrees": 0.1,
+    "detentCount": 30,
+    "detentStepDegrees": 12,
+    "noSimultaneousVelocitiesBelowEndpoint": true,
+    "hiddenLatchGeometry": "unknown-not-modeled"
+  }
+}

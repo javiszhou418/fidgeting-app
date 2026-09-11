@@ -1,0 +1,85 @@
+{
+  "schema": "make-it-shine-cc0-source-mapping.r016.v1",
+  "sourceCommit": "88842be0063b5b0b75e82ed6572752a37a13c82b",
+  "license": "CC0-1.0",
+  "exactUserMotionChoice": "卡包的容纳／抽出因果＋箔层双层剥离",
+  "direct": [
+    {
+      "source": "Assets/Animation/Clips/Booster/Booster_Discarded.anim",
+      "sourceSha256": "be661fe81b095f7f1ad08fb2a1c003b15f8690ee08d43f9f705dc849924fb2c6",
+      "destination": "unity/FidgetingApp/Assets/_DisplayCase/Runtime/MakeItShineCc0Effects/MakeItShineCc0EffectCurves.cs",
+      "use": "unchanged exact normalized discard curve"
+    },
+    {
+      "source": "Assets/Art/Kyle/Materials/SG_Title_Kyle.shadergraph",
+      "sourceSha256": "6a7718d6ae1eba360c03a1ea16b207ada5ae80f1a4dc2df0d004453bf94e2067",
+      "destination": "unity/FidgetingApp/Assets/_DisplayCase/Runtime/MakeItShineCc0Effects/MakeItShineCc0Masks.hlsl",
+      "use": "unchanged object-local contour mask"
+    },
+    {
+      "source": "Assets/Plugins/iOS/GachaPacks/gacha-pack-standard-body.png",
+      "sourceSha256": "ebc17bb238ebbcb82d36134bb2781838df610f8a3d1750c27b8ade10fc4681d6",
+      "destination": "unity/FidgetingApp/ArtSource/ModelPipeline/premium-display-case/staging/pack-opening-gate04-r016-repair/PackOpeningGate04R016PackOnlyRig.fbx",
+      "use": "unmodified 384x512 Pack artwork with corrected front V polarity"
+    }
+  ],
+  "adapted": [
+    {
+      "source": "unity/FidgetingApp/ArtSource/ModelPipeline/premium-display-case/staging/pack-opening-gate04-r016-repair/build_pack_only_rig.py",
+      "sourceSha256": "903df921280b55350413d168be5cf73fbe0d24ab9ce6ceaf5533f361ff6b4980",
+      "destination": "isolated Unity R016 candidate",
+      "use": "bounded UV, frame-barrier, or static-proof repair"
+    },
+    {
+      "source": "unity/FidgetingApp/ArtSource/ModelPipeline/premium-display-case/staging/pack-opening-gate04-r016-repair/isolated-template/Assets/IsolatedProofR016/Editor/IsolatedR016ProofBuilder.cs",
+      "sourceSha256": "1588dbaf997d9f16c5fadd5322a11a9878af2f8ff0fa31ac4a85af41cc0eefbc",
+      "destination": "isolated Unity R016 candidate",
+      "use": "bounded UV, frame-barrier, or static-proof repair"
+    },
+    {
+      "source": "unity/FidgetingApp/ArtSource/ModelPipeline/premium-display-case/staging/pack-opening-gate04-r016-repair/isolated-template/Assets/IsolatedProofR016/Editor/IsolatedR016ProofRunner.cs",
+      "sourceSha256": "bce045283de0a0ca6518fdcd05245ef8a1c1074269d84a03744c116f920f0bf3",
+      "destination": "isolated Unity R016 candidate",
+      "use": "bounded UV, frame-barrier, or static-proof repair"
+    },
+    {
+      "source": "unity/FidgetingApp/ArtSource/ModelPipeline/premium-display-case/staging/pack-opening-gate04-r016-repair/isolated-template/Assets/IsolatedProofR016/Runtime/IsolatedR016ProofSequence.cs",
+      "sourceSha256": "37c9965f608f71817e041b214a01921a835b623e76ee1781a02af8597e5f1bb7",
+      "destination": "isolated Unity R016 candidate",
+      "use": "bounded UV, frame-barrier, or static-proof repair"
+    },
+    {
+      "source": "unity/FidgetingApp/ArtSource/ModelPipeline/premium-display-case/staging/pack-opening-gate04-r016-repair/isolated-template/Assets/IsolatedProofR016/Runtime/IsolatedR016ProofCapture.cs",
+      "sourceSha256": "47dd8a225d600ee9e5a25923e7e5dc902e30e0957f527be66d91efe1661d74fb",
+      "destination": "isolated Unity R016 candidate",
+      "use": "bounded UV, frame-barrier, or static-proof repair"
+    },
+    {
+      "source": "unity/FidgetingApp/ArtSource/ModelPipeline/premium-display-case/staging/pack-opening-gate04-r016-repair/isolated-template/Assets/IsolatedProofR016/Runtime/IsolatedR016ProofRuntimeDriver.cs",
+      "sourceSha256": "ec89af05b6a3f33e53ebb9ef90135cf43189c429771409ec76b906af54e40d48",
+      "destination": "isolated Unity R016 candidate",
+      "use": "bounded UV, frame-barrier, or static-proof repair"
+    },
+    {
+      "source": "unity/FidgetingApp/ArtSource/ModelPipeline/premium-display-case/staging/pack-opening-gate04-r016-repair/isolated-template/Assets/IsolatedProofR016/Tests/Editor/IsolatedR016ProofTests.cs",
+      "sourceSha256": "9a7ba92aa680df68e7687d516e1b0b6d548a04235ff6f2910b26651f414180dc",
+      "destination": "isolated Unity R016 candidate",
+      "use": "bounded UV, frame-barrier, or static-proof repair"
+    }
+  ],
+  "rejected": [
+    {
+      "source": "Assets/Prefabs/Cinematic/Opening_Booster.prefab",
+      "reason": "sample Pack and object swaps are forbidden"
+    },
+    {
+      "source": "Assets/Art/Booster/BoosterFractured_B.fbx",
+      "reason": "surrogate geometry is forbidden"
+    },
+    {
+      "source": "Assets/Art/Booster/VFX_BoosterExplosion.vfx",
+      "reason": "particles and VFX Graph are forbidden"
+    }
+  ],
+  "shippingReady": false
+}

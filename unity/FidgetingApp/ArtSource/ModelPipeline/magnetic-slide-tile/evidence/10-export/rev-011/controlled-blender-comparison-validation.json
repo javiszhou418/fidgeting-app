@@ -1,0 +1,287 @@
+{
+  "schemaVersion": 1,
+  "gate": "10-export",
+  "revision": 11,
+  "pass": true,
+  "controlledSetup": {
+    "camera": "M08R6_Hero",
+    "resolution": [
+      1000,
+      620
+    ],
+    "renderEngine": "BLENDER_EEVEE",
+    "world": "World",
+    "lights": [
+      {
+        "name": "G10R11_NeutralKey",
+        "irradiance": 1.4,
+        "angleDegrees": 18.0,
+        "directionAnchor": [
+          70,
+          -90,
+          105
+        ]
+      },
+      {
+        "name": "G10R11_NeutralFill",
+        "irradiance": 0.35,
+        "angleDegrees": 28.0,
+        "directionAnchor": [
+          -75,
+          -35,
+          58
+        ]
+      },
+      {
+        "name": "G10R11_NeutralRim",
+        "irradiance": 0.55,
+        "angleDegrees": 12.000000000000002,
+        "directionAnchor": [
+          32,
+          72,
+          68
+        ]
+      }
+    ],
+    "viewTransform": "Raw",
+    "look": "None",
+    "exposure": 0.0,
+    "gamma": 1.0
+  },
+  "sourceBoundsMm": {
+    "min": [
+      -15.5,
+      -25.0,
+      0.0
+    ],
+    "max": [
+      15.5,
+      25.0,
+      12.0
+    ],
+    "size": [
+      31.0,
+      50.0,
+      12.0
+    ]
+  },
+  "reimportBoundsMm": {
+    "min": [
+      -15.5,
+      -25.0,
+      0.0
+    ],
+    "max": [
+      15.5,
+      25.0,
+      12.0
+    ],
+    "size": [
+      31.0,
+      50.0,
+      12.0
+    ]
+  },
+  "importScaleCorrection": 1.0,
+  "sourceMetrics": {
+    "objectPixelCount": 198411,
+    "coverage": 0.3200177419354839,
+    "luminanceP05P50P95": [
+      0.0007804780034348369,
+      0.0011640804586932063,
+      0.0032504156697541475
+    ],
+    "redFractionOfObject": 0.23181174430853127,
+    "darkFractionOfObject": 0.9898392730241771,
+    "silverHighlightFractionOfObject": 0.0012801709582634028,
+    "clippedWhiteFractionOfObject": 0.0033768289056554323
+  },
+  "reimportMetrics": {
+    "objectPixelCount": 198411,
+    "coverage": 0.3200177419354839,
+    "luminanceP05P50P95": [
+      0.0006135781877674162,
+      0.0009658520575612783,
+      0.0031751603819429874
+    ],
+    "redFractionOfObject": 0.23783963590728335,
+    "darkFractionOfObject": 0.9900055944478885,
+    "silverHighlightFractionOfObject": 0.001718654711684332,
+    "clippedWhiteFractionOfObject": 0.00209665794739203
+  },
+  "materialPartitions": {
+    "BallCandidateLeft.001": {
+      "slots": [
+        "M07R13_BallCandidateUnknownMaterial.001"
+      ],
+      "triangles": [
+        3968
+      ],
+      "topArtwork": 0,
+      "sideArtwork": 0,
+      "undersideArtwork": 0
+    },
+    "BallCandidateRight.001": {
+      "slots": [
+        "M07R13_BallCandidateUnknownMaterial.001"
+      ],
+      "triangles": [
+        3968
+      ],
+      "topArtwork": 0,
+      "sideArtwork": 0,
+      "undersideArtwork": 0
+    },
+    "BottomExterior.001": {
+      "slots": [
+        "M07R13_LowerTopArtwork.001",
+        "M07R13_SolidDarkSide.001",
+        "M07R13_PolishedBrightSilverRim.001",
+        "M07R13_NeutralUnderside.001"
+      ],
+      "triangles": [
+        511,
+        6156,
+        4104,
+        7693
+      ],
+      "topArtwork": 511,
+      "sideArtwork": 0,
+      "undersideArtwork": 0
+    },
+    "CarrierFollowerLeft.001": {
+      "slots": [
+        "M07R13_NeutralUnderside.001"
+      ],
+      "triangles": [
+        10256
+      ],
+      "topArtwork": 0,
+      "sideArtwork": 0,
+      "undersideArtwork": 0
+    },
+    "CarrierFollowerRight.001": {
+      "slots": [
+        "M07R13_NeutralUnderside.001"
+      ],
+      "triangles": [
+        10256
+      ],
+      "topArtwork": 0,
+      "sideArtwork": 0,
+      "undersideArtwork": 0
+    },
+    "InternalAxisBoss.001": {
+      "slots": [
+        "M07R13_PolishedBrightSilverRim.001"
+      ],
+      "triangles": [
+        508
+      ],
+      "topArtwork": 0,
+      "sideArtwork": 0,
+      "undersideArtwork": 0
+    },
+    "MovingTopBody.001": {
+      "slots": [
+        "M07R13_UpperTopArtwork.001",
+        "M07R13_SolidDarkSide.001",
+        "M07R13_PolishedBrightSilverRim.001",
+        "M07R13_NeutralUnderside.001"
+      ],
+      "triangles": [
+        511,
+        18492,
+        4104,
+        28253
+      ],
+      "topArtwork": 511,
+      "sideArtwork": 0,
+      "undersideArtwork": 0
+    },
+    "RotatingCarrierBody.001": {
+      "slots": [
+        "M07R13_InternalSilverReference.001"
+      ],
+      "triangles": [
+        500
+      ],
+      "topArtwork": 0,
+      "sideArtwork": 0,
+      "undersideArtwork": 0
+    }
+  },
+  "imageColorSpaces": {
+    "lower-albedo": "sRGB",
+    "lower-albedo.png": "sRGB",
+    "lower-roughness": "Non-Color",
+    "lower-roughness.png": "Non-Color",
+    "lower-transport-normal-r011": "Non-Color",
+    "upper-albedo": "sRGB",
+    "upper-albedo.png": "sRGB",
+    "upper-roughness": "Non-Color",
+    "upper-roughness.png": "Non-Color",
+    "upper-transport-normal-r011": "Non-Color"
+  },
+  "checks": {
+    "sameCamera": true,
+    "sameEnvironment": true,
+    "scaleRecovered": true,
+    "boundsMatch": true,
+    "sourceMaterialSlotsUnchanged": true,
+    "sourceMaterialIndicesUnchanged": true,
+    "topArtworkPresent": true,
+    "sideArtworkZero": true,
+    "undersideArtworkZero": true,
+    "baseColorSRGB": true,
+    "dataMapsLinear": true,
+    "endpointMetadata": true,
+    "deepRedTop": true,
+    "darkBody": true,
+    "silverHighlightControlled": true,
+    "whiteClippingControlled": true,
+    "luminanceWithinTargetTolerance": true
+  },
+  "artifacts": {
+    "reimportBlend": {
+      "path": "/Users/jiawei.zhou/Documents/Fidgeting app/unity/FidgetingApp/ArtSource/ModelPipeline/magnetic-slide-tile/evidence/10-export/rev-011/package/magnetic-slide-tile-glb-reimport-r011.blend",
+      "sha256": "3526ea298928d7ed89068c59b4a68d97a84cb77c6a2713272082606dede54f51"
+    },
+    "approvedBlender": {
+      "hero": {
+        "path": "/Users/jiawei.zhou/Documents/Fidgeting app/unity/FidgetingApp/ArtSource/ModelPipeline/magnetic-slide-tile/evidence/10-export/rev-011/controlled-neutral/approved-blender-hero-r011.png",
+        "sha256": "e1e8860d858e1757217ad6338f5cedda75f19e3491a57201f0ddc64b4271c698"
+      },
+      "top-closeup": {
+        "path": "/Users/jiawei.zhou/Documents/Fidgeting app/unity/FidgetingApp/ArtSource/ModelPipeline/magnetic-slide-tile/evidence/10-export/rev-011/controlled-neutral/approved-blender-top-closeup-r011.png",
+        "sha256": "20657abd81d89f40f4d97e727b96fa104ef78aee33be3747cfd05b4f7159e8e5"
+      },
+      "side-closeup": {
+        "path": "/Users/jiawei.zhou/Documents/Fidgeting app/unity/FidgetingApp/ArtSource/ModelPipeline/magnetic-slide-tile/evidence/10-export/rev-011/controlled-neutral/approved-blender-side-closeup-r011.png",
+        "sha256": "dfec9ece0666b1afe967deb1a84b94900178be48aac1adf7547c3221361634f9"
+      },
+      "rim-closeup": {
+        "path": "/Users/jiawei.zhou/Documents/Fidgeting app/unity/FidgetingApp/ArtSource/ModelPipeline/magnetic-slide-tile/evidence/10-export/rev-011/controlled-neutral/approved-blender-rim-closeup-r011.png",
+        "sha256": "1149aa3a75a599bc4684144fabe3dcb3da952ac3e2472a7477adfce280b7b9eb"
+      }
+    },
+    "glbReimport": {
+      "hero": {
+        "path": "/Users/jiawei.zhou/Documents/Fidgeting app/unity/FidgetingApp/ArtSource/ModelPipeline/magnetic-slide-tile/evidence/10-export/rev-011/controlled-neutral/glb-reimport-hero-r011.png",
+        "sha256": "e682ab672e7ea93b9126c6a49db2a260794a927f929f9cdbc2e389188049b5e1"
+      },
+      "top-closeup": {
+        "path": "/Users/jiawei.zhou/Documents/Fidgeting app/unity/FidgetingApp/ArtSource/ModelPipeline/magnetic-slide-tile/evidence/10-export/rev-011/controlled-neutral/glb-reimport-top-closeup-r011.png",
+        "sha256": "3dfbb7219aacd3a028f400de4bc54680492b7074c7f418bda51d07b5d14a3b5a"
+      },
+      "side-closeup": {
+        "path": "/Users/jiawei.zhou/Documents/Fidgeting app/unity/FidgetingApp/ArtSource/ModelPipeline/magnetic-slide-tile/evidence/10-export/rev-011/controlled-neutral/glb-reimport-side-closeup-r011.png",
+        "sha256": "3d67b8fd76c869c9a1a32c8113651597202c904295425e8d8b076a304c837ebe"
+      },
+      "rim-closeup": {
+        "path": "/Users/jiawei.zhou/Documents/Fidgeting app/unity/FidgetingApp/ArtSource/ModelPipeline/magnetic-slide-tile/evidence/10-export/rev-011/controlled-neutral/glb-reimport-rim-closeup-r011.png",
+        "sha256": "2973ab1c72e2db822a53ed4a19f5d7b91cf8a115709b290930e458d4aecb6a39"
+      }
+    }
+  }
+}

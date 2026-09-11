@@ -1,0 +1,119 @@
+{
+  "schema": "premium-display-case-gate04-r025-full-proof-review.v1",
+  "reviewedAt": "2026-09-01T03:57:20.233Z",
+  "source": "actual isolated Unity 6000.5.6f1 URP PNG frames",
+  "nativeSize": [
+    1206,
+    2622
+  ],
+  "reviewMode": "full-size Unity PNG and source-derived H.264 review",
+  "proof": {
+    "path": "full-proof/unity-capture-report.json",
+    "sha256": "5d8e75186d0f479768914791eb0fd47bd3d3008022debf97bcca0791759726b5",
+    "sizeBytes": 159899
+  },
+  "normalSpeed": {
+    "recording": {
+      "path": "full-proof/normal/normal-speed-proof.mp4",
+      "sha256": "e4f0fddd6d39565a655f87c59082388f11fe1474f9b745fe9af1df497d7c0376",
+      "sizeBytes": 334761
+    },
+    "contactSheet": {
+      "path": "full-proof/normal/seven-pose-contact-sheet.png",
+      "sha256": "d7410b46a3f1f311db496b319fca38267b7103d0ac601b533d462db1161e22ff",
+      "sizeBytes": 862389
+    },
+    "sampleFrames": [
+      {
+        "path": "full-proof/normal/primary/frame-0038.png",
+        "sha256": "1d6f3e2f43c1bbd3a27cb4c06a4514c52295c32bef867e2cc2011dc600661b55",
+        "sizeBytes": 1954816
+      },
+      {
+        "path": "full-proof/normal/primary/frame-0046.png",
+        "sha256": "4a256f006937e9a7768c3c3823ffb7aeb48e8c88fcd67d86ca6360da8d092acb",
+        "sizeBytes": 1961308
+      },
+      {
+        "path": "full-proof/normal/primary/frame-0062.png",
+        "sha256": "a911f77e254eac89eca017d1e52f08897ee20fc0c8052c0fa26591d91e63b096",
+        "sizeBytes": 1946431
+      }
+    ],
+    "probe": {
+      "programs": [],
+      "stream_groups": [],
+      "streams": [
+        {
+          "codec_name": "h264",
+          "profile": "High",
+          "width": 1206,
+          "height": 2622,
+          "r_frame_rate": "60/1",
+          "nb_frames": "96"
+        }
+      ],
+      "format": {
+        "duration": "1.600000"
+      }
+    }
+  },
+  "quarterSpeedCloseup": {
+    "recording": {
+      "path": "full-proof/tear-quarter-speed/tear-quarter-speed-closeup.mp4",
+      "sha256": "3be94a54b4541260a0d7b018aff1324354a4b6d7453286ed5bc9632959d44130",
+      "sizeBytes": 361405
+    },
+    "sampleFrames": [
+      {
+        "path": "full-proof/tear-quarter-speed/frames/frame-0000.png",
+        "sha256": "2d1b19a3e5bf226522ac0086cd7ba28d05f74939997ed8c06edcc1904ce48a7d",
+        "sizeBytes": 1221683
+      },
+      {
+        "path": "full-proof/tear-quarter-speed/frames/frame-0096.png",
+        "sha256": "2499fa76b8e75fdb0c4d034c4890fd7df52f86cf0468437af40b9a96f80d6c61",
+        "sizeBytes": 1306655
+      },
+      {
+        "path": "full-proof/tear-quarter-speed/frames/frame-0172.png",
+        "sha256": "76e9af2384ab19a3831f4e86ebe81e02e408bba8e481165d41f0e34b98b7bcfe",
+        "sizeBytes": 1222797
+      }
+    ],
+    "sourceSpeed": "0.25x",
+    "probe": {
+      "programs": [],
+      "stream_groups": [],
+      "streams": [
+        {
+          "codec_name": "h264",
+          "profile": "High",
+          "width": 1206,
+          "height": 2622,
+          "r_frame_rate": "60/1",
+          "nb_frames": "173"
+        }
+      ],
+      "format": {
+        "duration": "2.883333"
+      }
+    }
+  },
+  "continuity": {
+    "caseInstances": 1,
+    "caseGeometryBaked": false,
+    "maximumProjectedCenterStep": 0.011992037296295166,
+    "maximumProjectedHeightStep": 0.00047135353088378906,
+    "maximumRootPositionStepMeters": 0.006485864520072937,
+    "frameBarrier": [
+      277,
+      277
+    ],
+    "visualEffectsIntensity": 0
+  },
+  "verdict": "gate04-candidate-awaiting-user-visual-approval",
+  "shippingReady": false,
+  "physicalPhoneInstalled": false,
+  "statusText": "视觉批准待确认，未推送手机"
+}

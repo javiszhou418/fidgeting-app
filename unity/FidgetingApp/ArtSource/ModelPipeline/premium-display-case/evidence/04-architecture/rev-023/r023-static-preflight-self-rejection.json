@@ -1,0 +1,183 @@
+{
+  "schema": "premium-display-case-gate04-r023-static-preflight-self-rejection.v1",
+  "outcome": "self-rejected",
+  "reviewedAt": "2026-09-01T01:08:09.480Z",
+  "candidateScope": "isolated R022 segmented physical Pack-mouth rig with R023 Blender preview-only V mapping",
+  "correctionProof": {
+    "previewMapping": {
+      "path": "unity/FidgetingApp/ArtSource/ModelPipeline/premium-display-case/evidence/04-architecture/rev-023/r023-preview-mapping-proof.json",
+      "sha256": "4d628dabc011da8096259c3125e7e31eccc092d35211e8511ca93bd97306e59d",
+      "sizeBytes": 4105
+    },
+    "exportedFbxByteIdenticalToR022": true,
+    "uvStreamUnchanged": true,
+    "geometryStreamUnchanged": true,
+    "physicalUToSourceU": "1-to-0"
+  },
+  "unityOrientation": {
+    "calibration": {
+      "path": "unity/FidgetingApp/ArtSource/ModelPipeline/premium-display-case/evidence/04-architecture/rev-023/preflight/orientation-calibration/r022-orientation-calibration.json",
+      "sha256": "9d5ab938db70017d70d74598128d1ba66d1dd1a693d1a118a0c48099e39f73c6",
+      "sizeBytes": 2269
+    },
+    "winner": "Identity",
+    "identityMargin": 0.07657098770141602,
+    "r017ControlWinner": "HorizontalFlip"
+  },
+  "staticTarget": {
+    "report": {
+      "path": "unity/FidgetingApp/ArtSource/ModelPipeline/premium-display-case/evidence/04-architecture/rev-023/preflight/r023-preflight-report.json",
+      "sha256": "47b967a6d96e5c239194cb5c5fefda134cece81dadb081cdf74eee929cc8dc63",
+      "sizeBytes": 28954
+    },
+    "results": {
+      "path": "unity/FidgetingApp/ArtSource/ModelPipeline/premium-display-case/evidence/04-architecture/rev-023/preflight/r023-preflight-results.xml",
+      "sha256": "87a06fc93651b50c9ca063aae08c7c338035c8ef084d2fa88958143ef85f8277",
+      "sizeBytes": 1959
+    },
+    "primaryStaticSheet": {
+      "path": "unity/FidgetingApp/ArtSource/ModelPipeline/premium-display-case/evidence/04-architecture/rev-023/preflight/primary-static-sheet.png",
+      "sha256": "0452e7186e31aa4c3d8bbd1c79fc0348132c060a9baf9cedda111b92ff38cca7",
+      "sizeBytes": 1997933
+    },
+    "effectsIntensity": 0,
+    "frameBarrier": {
+      "captures": 23,
+      "advanced": 23
+    }
+  },
+  "failedConditions": [
+    {
+      "id": "top-seal-and-component-segment-diagnostics-stay-within-pack",
+      "evidence": "At t=0.700 the top-seal mask starts at x=0.0000 and component masks extend outside Pack bounds x=0.3127..0.6873.",
+      "frames": [
+        {
+          "path": "unity/FidgetingApp/ArtSource/ModelPipeline/premium-display-case/evidence/04-architecture/rev-023/preflight/diagnostics/cavity-back-segments-id-0.700.png",
+          "sha256": "effa2def4273e35b8f4f7ed572fb5c4f5305bf528c3ac0cb32d06feeba244417",
+          "sizeBytes": 1397426
+        },
+        {
+          "path": "unity/FidgetingApp/ArtSource/ModelPipeline/premium-display-case/evidence/04-architecture/rev-023/preflight/diagnostics/inner-liner-segments-id-0.700.png",
+          "sha256": "d82606a6d429839942340bdf9b1a81104f288472ac8fe7d28ffb338cbe9f9179",
+          "sizeBytes": 1431778
+        },
+        {
+          "path": "unity/FidgetingApp/ArtSource/ModelPipeline/premium-display-case/evidence/04-architecture/rev-023/preflight/diagnostics/top-seal-segments-id-0.700.png",
+          "sha256": "9ab82b819631e8ab614f973cb3c128880e549c321b8fbf60d7a97ff14bdc47b5",
+          "sizeBytes": 1425313
+        }
+      ]
+    },
+    {
+      "id": "formed-mouth-shows-narrow-liner-and-contiguous-deep-cavity",
+      "evidence": "At t=0.700 the material capture has liner=173 below 384, cavity=0, and contiguous cavity=0 below 128.",
+      "beautyFrame": {
+        "path": "unity/FidgetingApp/ArtSource/ModelPipeline/premium-display-case/evidence/04-architecture/rev-023/preflight/formed-mouth-070.png",
+        "sha256": "d4ff93ad622c2114a59eda77c8ef6c9ed332e25304791419b27e97cb82a65594",
+        "sizeBytes": 1964439
+      },
+      "diagnosticFrame": {
+        "path": "unity/FidgetingApp/ArtSource/ModelPipeline/premium-display-case/evidence/04-architecture/rev-023/preflight/diagnostics/mouth-material-id-0.700.png",
+        "sha256": "d166add5115d664c88493c2a6ff377fcd233a6ef2aaab7480bae61a4ff6c3fe2",
+        "sizeBytes": 873037
+      }
+    },
+    {
+      "id": "contained-mouth-shows-both-liner-and-cavity",
+      "evidence": "At t=0.900 the material capture has liner=0 below 384 despite cavity=480.",
+      "beautyFrame": {
+        "path": "unity/FidgetingApp/ArtSource/ModelPipeline/premium-display-case/evidence/04-architecture/rev-023/preflight/case-contained-090.png",
+        "sha256": "933261ad0c2eefa486d9ad22a244e27531b688bf7e00b258565c71c6ee3aa7b2",
+        "sizeBytes": 1959775
+      },
+      "diagnosticFrame": {
+        "path": "unity/FidgetingApp/ArtSource/ModelPipeline/premium-display-case/evidence/04-architecture/rev-023/preflight/diagnostics/mouth-material-id-0.900.png",
+        "sha256": "1ff3d86d95036c0703bcb50c5b4b01d5586e4224ccb72021047fe3a9267f8d59",
+        "sizeBytes": 899322
+      }
+    },
+    {
+      "id": "case-reads-as-one-case-inside-upper-mouth",
+      "evidence": "At t=0.900 case boundary contrast is 0.0132 below 0.0400; the native-size beauty frame reads as a large rear frame, not a case held behind the front lip.",
+      "beautyFrame": {
+        "path": "unity/FidgetingApp/ArtSource/ModelPipeline/premium-display-case/evidence/04-architecture/rev-023/preflight/case-contained-090.png",
+        "sha256": "933261ad0c2eefa486d9ad22a244e27531b688bf7e00b258565c71c6ee3aa7b2",
+        "sizeBytes": 1959775
+      },
+      "diagnosticFrame": {
+        "path": "unity/FidgetingApp/ArtSource/ModelPipeline/premium-display-case/evidence/04-architecture/rev-023/preflight/diagnostics/case-visible-id-090.png",
+        "sha256": "a939df4e32126d155342b84d7790b4212e6098303b75c07083f973b58b38d487",
+        "sizeBytes": 1878845
+      }
+    }
+  ],
+  "fullSizeBeautyInspection": {
+    "mode": "native-size 1206x2622 isolated Unity frames without resampling",
+    "verdict": "Rejected. The .70 frame lacks a narrow liner with a visible deep cavity. The .90 frame shows a broad rear case silhouette, not one legible unchanged case contained by the upper mouth."
+  },
+  "passedBeforeStop": {
+    "unityOrientationIdentity": "Identity margin=0.076571",
+    "topCrimpAboveArchive": "passed in the full-resolution Unity preflight",
+    "compactTopRightCurl": "passed in the full-resolution Unity preflight",
+    "caseIdContainment": "visibleWithPack=85212; frontOcclusion=5771; contiguous=5771",
+    "visualEffectsIntensity": 0,
+    "capturesFollowedFrameAdvance": "23/23"
+  },
+  "notRunAfterStaticFailure": [
+    "isolated structural checks",
+    "isolated EditMode tests",
+    "canonical provenance validators",
+    "Unity scrub",
+    "normal-speed proof capture",
+    "quarter-speed closeup capture",
+    "Gate 04 candidate registration",
+    "FDB update",
+    "implementation-status update",
+    "canonical project change",
+    "build, install, or device work"
+  ],
+  "hostProcess": {
+    "result": "Unity emitted the complete static report, then did not terminate after the preflight exception; the isolated batch process received SIGTERM.",
+    "affectsRenderedEvidence": false
+  },
+  "preservedRejections": [
+    {
+      "revision": "R015",
+      "path": "unity/FidgetingApp/ArtSource/ModelPipeline/premium-display-case/evidence/04-architecture/rev-015/self-rejection.json",
+      "sha256": "374739f96ee0966f359e3feff2321958499a8d1aac8e69ff5985ba2d72020841"
+    },
+    {
+      "revision": "R016",
+      "path": "unity/FidgetingApp/ArtSource/ModelPipeline/premium-display-case/evidence/04-architecture/rev-016/self-rejection.json",
+      "sha256": "2d7f69263f38c406e1b4085fecd89e076099e9462c899c19af411a9f535dc299"
+    },
+    {
+      "revision": "R017",
+      "path": "unity/FidgetingApp/ArtSource/ModelPipeline/premium-display-case/evidence/04-architecture/rev-017/r017-scrub-visual-self-rejection.json",
+      "sha256": "4cb87135652baf98d0b08ea5d4f52fa91eec8c442d869099bcf9701ba4dc2fbc"
+    },
+    {
+      "revision": "R018",
+      "path": "unity/FidgetingApp/ArtSource/ModelPipeline/premium-display-case/evidence/04-architecture/rev-018/r018-preflight-self-rejection.json",
+      "sha256": "3e1fa94329ab3ccb50359228aa5ee875a2b2bf08e295ff675952ac61e0e1b630"
+    },
+    {
+      "revision": "R019",
+      "path": "unity/FidgetingApp/ArtSource/ModelPipeline/premium-display-case/evidence/04-architecture/rev-019/r019-preflight-self-rejection.json",
+      "sha256": "7be49ea95520999c9b4233770a7b17140da2e9a3eec4293cc87cf259e22c18c3"
+    },
+    {
+      "revision": "R021",
+      "path": "unity/FidgetingApp/ArtSource/ModelPipeline/premium-display-case/evidence/04-architecture/rev-021/r021-preflight-self-rejection.json",
+      "sha256": "2e668cd86c2c88fdb3ab22ebcd802254c63c461df2cbc2c6ac3bf8b2ced79ea3"
+    },
+    {
+      "revision": "R022",
+      "path": "unity/FidgetingApp/ArtSource/ModelPipeline/premium-display-case/evidence/04-architecture/rev-022/r022-preflight-self-rejection.json",
+      "sha256": "c582fce43706311fef496bc58ca5451763f662bb04065b2be6610d1f9612c414"
+    }
+  ],
+  "shippingReady": false,
+  "physicalPhoneInstalled": false,
+  "statusText": "视觉批准待确认，未推送手机"
+}

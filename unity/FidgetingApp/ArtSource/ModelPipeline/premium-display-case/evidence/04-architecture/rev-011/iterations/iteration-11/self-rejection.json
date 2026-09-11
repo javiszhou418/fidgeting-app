@@ -1,0 +1,50 @@
+{
+  "schema": "premium-display-case-gate04-r011-iteration-self-review.v1",
+  "iteration": 11,
+  "evidenceRevision": 11,
+  "gateId": "04-architecture",
+  "decision": "self-rejected",
+  "decidedBy": "agent-full-size-frame-inspection",
+  "decidedAt": "2026-08-30T01:31:00.000Z",
+  "reviewedAtFullSize": [
+    "frames/frame-0060.png",
+    "frames/frame-0084.png",
+    "frames/frame-0114.png",
+    "frames/frame-0136.png",
+    "tear-contact-sheet.png",
+    "continuity-contact-sheet.png",
+    "source-target-side-by-side.png",
+    "source-impact-contact-sheet.png",
+    "normal-speed-sequence.mp4"
+  ],
+  "blockingVisibleReasons": [
+    {
+      "criterion": "small, irregular Pack aperture",
+      "evidence": "frames/frame-0060.png and frames/frame-0084.png",
+      "reason": "The opening becomes a wide, near-horizontal rectangular cutout. It exposes a large flat case-label area instead of a small torn mouth with readable depth."
+    },
+    {
+      "criterion": "freed foil reads as curled foil",
+      "evidence": "frames/frame-0060.png, frames/frame-0084.png and tear-contact-sheet.png",
+      "reason": "The released strip collapses at upper left into a rigid dark triangular wedge. Its segmented front, underside, narrow thickness and changing curl are not legible."
+    },
+    {
+      "criterion": "case appears through the same aperture",
+      "evidence": "frames/frame-0060.png, frames/frame-0084.png and continuity-contact-sheet.png",
+      "reason": "The case identity is continuous, but the mouth's flat back and the bright right-side wall make the early reveal read as a case behind a cut panel rather than inside a foil cavity."
+    }
+  ],
+  "continuityAssessment": {
+    "caseRootId": "568105589213755968",
+    "verdict": "not rejected for identity continuity",
+    "note": "The report records one case root, continuous projected bounds and no black or white frame. Those checks do not make the visual handoff reviewable."
+  },
+  "approvalRequestAllowed": false,
+  "userVisualApprovalObtained": false,
+  "shippingRuntimeWired": false,
+  "shippingReady": false,
+  "physicalPhoneInstalled": false,
+  "deviceAccepted": false,
+  "nextIterationScope": "Narrow the mouth, contour its interior, and replace the collapsed wedge with an anchored segmented foil curl in the existing Unity candidate.",
+  "statusText": "视觉批准待确认，未推送手机"
+}

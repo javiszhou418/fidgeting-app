@@ -1,0 +1,140 @@
+{
+  "schema": "make-it-shine-cc0-source-mapping.v2",
+  "sourceCommit": "88842be0063b5b0b75e82ed6572752a37a13c82b",
+  "license": "CC0-1.0",
+  "entries": [
+    {
+      "source": "Assets/Animation/Timelines/Booster to Card Timeline.playable",
+      "sourceSha256": "baec0abcf084db64a2b353947a9e67408e6b41ec27d5c645621d8f93aec9b086",
+      "destination": "ArtSource/ModelPipeline/premium-display-case/evidence/04-architecture/rev-012/source-raw/Booster to Card Timeline.playable",
+      "destinationSha256": "baec0abcf084db64a2b353947a9e67408e6b41ec27d5c645621d8f93aec9b086",
+      "decision": "direct-copy",
+      "reason": "The exact source Timeline remains an immutable audit source. Its proxy and VFX Graph bindings are not a runtime dependency."
+    },
+    {
+      "source": "Assets/Animation/Clips/Booster/Booster_Discarded.anim",
+      "sourceSha256": "be661fe81b095f7f1ad08fb2a1c003b15f8690ee08d43f9f705dc849924fb2c6",
+      "destination": "Assets/_DisplayCase/Candidates/PackOpeningGate04R012/ImportedSource/Animation/Booster_Discarded.anim",
+      "destinationSha256": "be661fe81b095f7f1ad08fb2a1c003b15f8690ee08d43f9f705dc849924fb2c6",
+      "decision": "direct-copy",
+      "reason": "Exact source discard curve copied before the R012 profile evaluates its normalized keys."
+    },
+    {
+      "source": "Assets/Art/Environment/Shaders/SG_BoosterPack.shadergraph",
+      "sourceSha256": "e1de0669f3f7c8ade21f656ab17c5e14e6d45cd5e689c79ddb983f27e61f6c34",
+      "destination": "ArtSource/ModelPipeline/premium-display-case/evidence/04-architecture/rev-012/source-raw/SG_BoosterPack.shadergraph",
+      "destinationSha256": "e1de0669f3f7c8ade21f656ab17c5e14e6d45cd5e689c79ddb983f27e61f6c34",
+      "decision": "direct-copy",
+      "reason": "Exact source shader graph retained before the torn-contour discard adapter."
+    },
+    {
+      "source": "Assets/Art/Kyle/Materials/SG_Title_Kyle.shadergraph",
+      "sourceSha256": "6a7718d6ae1eba360c03a1ea16b207ada5ae80f1a4dc2df0d004453bf94e2067",
+      "destination": "ArtSource/ModelPipeline/premium-display-case/evidence/04-architecture/rev-012/source-raw/SG_Title_Kyle.shadergraph",
+      "destinationSha256": "6a7718d6ae1eba360c03a1ea16b207ada5ae80f1a4dc2df0d004453bf94e2067",
+      "decision": "direct-copy",
+      "reason": "Exact source Sphere Mask graph retained before the Shuriken flare sweep adapter."
+    },
+    {
+      "source": "Assets/Art/Booster/SG_LightingStrike.shadergraph",
+      "sourceSha256": "a4eb3922e72a3dadb436902d2c4a57c3fbd6768e4b137104abeed6167e1f4f7d",
+      "destination": "ArtSource/ModelPipeline/premium-display-case/evidence/04-architecture/rev-012/source-raw/SG_LightingStrike.shadergraph",
+      "destinationSha256": "a4eb3922e72a3dadb436902d2c4a57c3fbd6768e4b137104abeed6167e1f4f7d",
+      "decision": "direct-copy",
+      "reason": "Exact source Reveal/Erode graph retained before the Shuriken-compatible port."
+    },
+    {
+      "source": "Assets/Art/Booster/TX_Flare_2x2_M.png",
+      "sourceSha256": "bbf7c86f5435ec3097717ef092e531214916e9cbb7db2b71f059e3d12f90ffa3",
+      "destination": "Assets/_DisplayCase/Candidates/PackOpeningGate04R012/ImportedSource/Textures/TX_Flare_2x2_M.png",
+      "destinationSha256": "bbf7c86f5435ec3097717ef092e531214916e9cbb7db2b71f059e3d12f90ffa3",
+      "decision": "direct-copy",
+      "reason": "Exact flare atlas drives the visible source sweep and contour accent."
+    },
+    {
+      "source": "Assets/Art/Common/Textures/TX_Noise_M.tga",
+      "sourceSha256": "2303e1fb3c86af9e9b6a4ccd4ecb615b9cdd172253eea8988c7a6ac4a165e886",
+      "destination": "Assets/_DisplayCase/Candidates/PackOpeningGate04R012/ImportedSource/Textures/TX_Noise_M.tga",
+      "destinationSha256": "2303e1fb3c86af9e9b6a4ccd4ecb615b9cdd172253eea8988c7a6ac4a165e886",
+      "decision": "direct-copy",
+      "reason": "Exact source noise is retained for audit only. It does not create pixel-noise dissolve."
+    },
+    {
+      "source": "Assets/Animation/Clips/Booster/Booster_Discarded.anim",
+      "sourceSha256": "be661fe81b095f7f1ad08fb2a1c003b15f8690ee08d43f9f705dc849924fb2c6",
+      "destination": "Assets/_DisplayCase/Candidates/PackOpeningGate04R012/Runtime/PackOpeningGate04R012Profile.cs",
+      "destinationSha256": "f924157ffdfd32304bb67fcbd3173e2f972f6f0e389739a33489e6efba5cf2bc",
+      "decision": "adapted",
+      "reason": "The normalized source curve drives a physical Pack discard after the same case begins its continuous exit."
+    },
+    {
+      "source": "Assets/Art/Environment/Shaders/SG_BoosterPack.shadergraph",
+      "sourceSha256": "e1de0669f3f7c8ade21f656ab17c5e14e6d45cd5e689c79ddb983f27e61f6c34",
+      "destination": "Assets/_DisplayCase/Candidates/PackOpeningGate04R012/Shaders/MakeItShineCc0PackR012.shader",
+      "destinationSha256": "2a1a823340b982b5dba5008732859bae8c7df22d4f6d3ffa7697b6d26d11f7a6",
+      "decision": "adapted",
+      "reason": "The source dissolve/emissive edge is evaluated from the fine per-column torn contour, not a screen-wide rectangle."
+    },
+    {
+      "source": "Assets/Art/Kyle/Materials/SG_Title_Kyle.shadergraph",
+      "sourceSha256": "6a7718d6ae1eba360c03a1ea16b207ada5ae80f1a4dc2df0d004453bf94e2067",
+      "destination": "Assets/_DisplayCase/Candidates/PackOpeningGate04R012/Shaders/MakeItShineCc0PortR012.shader",
+      "destinationSha256": "8b54c705d16f6b55235037804d43e96a275e9cd9c0dabafacc096fe88d4c1724",
+      "decision": "adapted",
+      "reason": "The source Sphere Mask sweep gates a portrait Shuriken flare sweep after the aperture appears."
+    },
+    {
+      "source": "Assets/Art/Booster/SG_LightingStrike.shadergraph",
+      "sourceSha256": "a4eb3922e72a3dadb436902d2c4a57c3fbd6768e4b137104abeed6167e1f4f7d",
+      "destination": "Assets/_DisplayCase/Candidates/PackOpeningGate04R012/Shaders/MakeItShineCc0PortR012.shader",
+      "destinationSha256": "8b54c705d16f6b55235037804d43e96a275e9cd9c0dabafacc096fe88d4c1724",
+      "decision": "adapted",
+      "reason": "The source Reveal/Erode structure ports to an additive URP Shuriken material with the source flare atlas."
+    },
+    {
+      "source": "Assets/Art/Booster/VFX_BoosterActivation.vfx",
+      "sourceSha256": "c56ed7a46cc1276b16e5e6e47879e4c7a665425df9d8e2e6693ac8ef1924ff67",
+      "destination": "Assets/_DisplayCase/Candidates/PackOpeningGate04R012/Editor/PackOpeningGate04R012Builder.cs",
+      "destinationSha256": "99f316c7aff85f127dd4eef28c76e3fa90dd892f71b975a6bcd44916b2567fef",
+      "decision": "adapted",
+      "reason": "VFX Graph is forbidden. The source timing language is retargeted as a bounded Shuriken sphere-mask sweep."
+    },
+    {
+      "source": "Assets/Art/Booster/VFXG_LightingStrike.vfx",
+      "sourceSha256": "4f4da1d0038cee4e4599467b754a429263286073233bb8ac0f259e908635d7b5",
+      "destination": "Assets/_DisplayCase/Candidates/PackOpeningGate04R012/Editor/PackOpeningGate04R012Builder.cs",
+      "destinationSha256": "99f316c7aff85f127dd4eef28c76e3fa90dd892f71b975a6bcd44916b2567fef",
+      "decision": "adapted",
+      "reason": "VFX Graph is forbidden. The source strike is reduced to a Shuriken contour accent with no magenta or cyan sparkle atlas cells."
+    },
+    {
+      "source": "Assets/Prefabs/Cinematic/Opening_Booster.prefab",
+      "sourceSha256": "b155b76ffe54ac737651adbbfa177e284b22175733096e279e056316bf5aa978",
+      "destination": null,
+      "destinationSha256": null,
+      "decision": "rejected",
+      "reason": "The sample uses a surrogate Pack and object swaps."
+    },
+    {
+      "source": "Assets/Art/Booster/BoosterFractured_B.fbx",
+      "sourceSha256": "fd78b007802a1966a1dfb1a1c6b8c7c36cec2f3622dcbaf480fe039967ded602",
+      "destination": null,
+      "destinationSha256": null,
+      "decision": "rejected",
+      "reason": "The sample has no physical tear mesh and its fractured Pack is forbidden."
+    },
+    {
+      "source": "Assets/Art/Booster/VFX_BoosterExplosion.vfx",
+      "sourceSha256": "d6af66e7b91e7097d50fbef376bf7b33b63dd9e6738a4c99084cb46460aaac2f",
+      "destination": null,
+      "destinationSha256": null,
+      "decision": "rejected",
+      "reason": "Source explosion and generic particulate burst are not a permitted product effect."
+    }
+  ],
+  "vfxGraphDependency": false,
+  "shurikenAdapter": true,
+  "sampleModelsImported": false,
+  "sampleArtworkImported": false,
+  "shippingReady": false
+}

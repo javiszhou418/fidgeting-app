@@ -1,0 +1,269 @@
+<?xml version="1.0" encoding="utf-8"?>
+<testsuites>
+	<testcase name="binds endpoint interlock to the current contract hash" time="0.000844" classname="test" file="/Users/jiawei.zhou/Documents/Fidgeting app/tools/model-provenance-explorer/tests/magnetic-slide-endpoint-interlock.test.mjs"/>
+	<testcase name="blocks rotation at every sampled position below sMax" time="0.000742" classname="test" file="/Users/jiawei.zhou/Documents/Fidgeting app/tools/model-provenance-explorer/tests/magnetic-slide-endpoint-interlock.test.mjs"/>
+	<testcase name="unlocks exactly 30 detents only at sMax" time="0.000445" classname="test" file="/Users/jiawei.zhou/Documents/Fidgeting app/tools/model-provenance-explorer/tests/magnetic-slide-endpoint-interlock.test.mjs"/>
+	<testcase name="locks slide while rotated and permits return after alignment" time="0.000095" classname="test" file="/Users/jiawei.zhou/Documents/Fidgeting app/tools/model-provenance-explorer/tests/magnetic-slide-endpoint-interlock.test.mjs"/>
+	<testcase name="allows only legal serial poses in the current sweep" time="0.001429" classname="test" file="/Users/jiawei.zhou/Documents/Fidgeting app/tools/model-provenance-explorer/tests/magnetic-slide-endpoint-interlock.test.mjs"/>
+	<testcase name="keeps fixed pivot, containment and render metadata unchanged" time="0.000545" classname="test" file="/Users/jiawei.zhou/Documents/Fidgeting app/tools/model-provenance-explorer/tests/magnetic-slide-endpoint-interlock.test.mjs"/>
+	<testcase name="binds the current CAD to its exact contract hash" time="0.000945" classname="test" file="/Users/jiawei.zhou/Documents/Fidgeting app/tools/model-provenance-explorer/tests/magnetic-slide-four-track-cad.test.mjs"/>
+	<testcase name="exposes four finite tracks with separate roles" time="0.000914" classname="test" file="/Users/jiawei.zhou/Documents/Fidgeting app/tools/model-provenance-explorer/tests/magnetic-slide-four-track-cad.test.mjs"/>
+	<testcase name="requires a raised axis boss and forbids the rejected cavity" time="0.000157" classname="test" file="/Users/jiawei.zhou/Documents/Fidgeting app/tools/model-provenance-explorer/tests/magnetic-slide-four-track-cad.test.mjs"/>
+	<testcase name="keeps ball and track estimates inside authorized ranges" time="0.000058" classname="test" file="/Users/jiawei.zhou/Documents/Fidgeting app/tools/model-provenance-explorer/tests/magnetic-slide-four-track-cad.test.mjs"/>
+	<testcase name="fails closed for track count, cavity, ball, width or hash drift" time="0.008358" classname="test" file="/Users/jiawei.zhou/Documents/Fidgeting app/tools/model-provenance-explorer/tests/magnetic-slide-four-track-cad.test.mjs"/>
+	<testcase name="preserves containment, top order and direct pointer direction" time="0.014363" classname="test" file="/Users/jiawei.zhou/Documents/Fidgeting app/tools/model-provenance-explorer/tests/magnetic-slide-four-track-cad.test.mjs"/>
+	<testcase name="records anthropometric provenance and unresolved engineering values" time="0.000334" classname="test" file="/Users/jiawei.zhou/Documents/Fidgeting app/tools/model-provenance-explorer/tests/magnetic-slide-four-track-cad.test.mjs"/>
+	<testcase name="uses explicit provisional dimensions without production claims" time="0.000693" classname="test" file="/Users/jiawei.zhou/Documents/Fidgeting app/tools/model-provenance-explorer/tests/magnetic-slide-gate05-rebuild.test.mjs"/>
+	<testcase name="migrates only the approved CAD hierarchy" time="0.000448" classname="test" file="/Users/jiawei.zhou/Documents/Fidgeting app/tools/model-provenance-explorer/tests/magnetic-slide-gate05-rebuild.test.mjs"/>
+	<testcase name="records reuse lineage and excludes stale geometry" time="0.000140" classname="test" file="/Users/jiawei.zhou/Documents/Fidgeting app/tools/model-provenance-explorer/tests/magnetic-slide-gate05-rebuild.test.mjs"/>
+	<testcase name="passes Gate 05 geometry and motion invariants" time="0.000157" classname="test" file="/Users/jiawei.zhou/Documents/Fidgeting app/tools/model-provenance-explorer/tests/magnetic-slide-gate05-rebuild.test.mjs"/>
+	<testcase name="preserves rejected Gate 05 rev 4 evidence after Gate 05 reopens" time="0.065834" classname="test" file="/Users/jiawei.zhou/Documents/Fidgeting app/tools/model-provenance-explorer/tests/magnetic-slide-gate05-rebuild.test.mjs"/>
+	<testcase name="Gate 05 rev 12 returns to one fixed pivot" time="0.001466" classname="test" file="/Users/jiawei.zhou/Documents/Fidgeting app/tools/model-provenance-explorer/tests/magnetic-slide-gate05-rev12.test.mjs"/>
+	<testcase name="dense Blender and Unity motion validations pass" time="0.001845" classname="test" file="/Users/jiawei.zhou/Documents/Fidgeting app/tools/model-provenance-explorer/tests/magnetic-slide-gate05-rev12.test.mjs"/>
+	<testcase name="rejection evidence and plain geometry review remain registered" time="0.003120" classname="test" file="/Users/jiawei.zhou/Documents/Fidgeting app/tools/model-provenance-explorer/tests/magnetic-slide-gate05-rev12.test.mjs"/>
+	<testcase name="preserves historical white models after Gate 05 reopens" time="0.000890" classname="test" file="/Users/jiawei.zhou/Documents/Fidgeting app/tools/model-provenance-explorer/tests/magnetic-slide-gate05-rev5.test.mjs"/>
+	<testcase name="consumes the exact four-track raised-axis contract" time="0.000600" classname="test" file="/Users/jiawei.zhou/Documents/Fidgeting app/tools/model-provenance-explorer/tests/magnetic-slide-gate05-rev5.test.mjs"/>
+	<testcase name="keeps provisional ranges and unknown engineering explicit" time="0.000095" classname="test" file="/Users/jiawei.zhou/Documents/Fidgeting app/tools/model-provenance-explorer/tests/magnetic-slide-gate05-rev5.test.mjs"/>
+	<testcase name="passes dense containment, hierarchy, manifold and self-motion checks" time="0.000084" classname="test" file="/Users/jiawei.zhou/Documents/Fidgeting app/tools/model-provenance-explorer/tests/magnetic-slide-gate05-rev5.test.mjs"/>
+	<testcase name="preserves approved look inputs without reusing rejected geometry" time="0.000161" classname="test" file="/Users/jiawei.zhou/Documents/Fidgeting app/tools/model-provenance-explorer/tests/magnetic-slide-gate05-rev5.test.mjs"/>
+	<testcase name="exports a real interactive GLB and authoritative blend" time="0.025551" classname="test" file="/Users/jiawei.zhou/Documents/Fidgeting app/tools/model-provenance-explorer/tests/magnetic-slide-gate05-rev5.test.mjs"/>
+	<testcase name="persists rev 5 and rev 6 evidence after Gate 05 reopens" time="0.004212" classname="test" file="/Users/jiawei.zhou/Documents/Fidgeting app/tools/model-provenance-explorer/tests/magnetic-slide-gate05-rev6.test.mjs"/>
+	<testcase name="proves the visible bottom top skin is one flat plane" time="0.000098" classname="test" file="/Users/jiawei.zhou/Documents/Fidgeting app/tools/model-provenance-explorer/tests/magnetic-slide-gate05-rev6.test.mjs"/>
+	<testcase name="blocks every rejected recess representation" time="0.000068" classname="test" file="/Users/jiawei.zhou/Documents/Fidgeting app/tools/model-provenance-explorer/tests/magnetic-slide-gate05-rev6.test.mjs"/>
+	<testcase name="keeps the axis raised and carrier under the plane" time="0.000089" classname="test" file="/Users/jiawei.zhou/Documents/Fidgeting app/tools/model-provenance-explorer/tests/magnetic-slide-gate05-rev6.test.mjs"/>
+	<testcase name="changes only rejected bottom geometry" time="0.000380" classname="test" file="/Users/jiawei.zhou/Documents/Fidgeting app/tools/model-provenance-explorer/tests/magnetic-slide-gate05-rev6.test.mjs"/>
+	<testcase name="preserves four grooves, transforms and containment" time="0.000053" classname="test" file="/Users/jiawei.zhou/Documents/Fidgeting app/tools/model-provenance-explorer/tests/magnetic-slide-gate05-rev6.test.mjs"/>
+	<testcase name="exports immutable blend, GLB and real Blender views" time="0.007252" classname="test" file="/Users/jiawei.zhou/Documents/Fidgeting app/tools/model-provenance-explorer/tests/magnetic-slide-gate05-rev6.test.mjs"/>
+	<testcase name="keeps downstream and device scope unchanged" time="0.000104" classname="test" file="/Users/jiawei.zhou/Documents/Fidgeting app/tools/model-provenance-explorer/tests/magnetic-slide-gate05-rev6.test.mjs"/>
+	<testcase name="preserves Gate 06 rev 4 evidence after Gate 06 rev 5 opens" time="0.000485" classname="test" file="/Users/jiawei.zhou/Documents/Fidgeting app/tools/model-provenance-explorer/tests/magnetic-slide-gate06-rev4.test.mjs"/>
+	<testcase name="consumes approved source and current mechanism contract hashes" time="0.000314" classname="test" file="/Users/jiawei.zhou/Documents/Fidgeting app/tools/model-provenance-explorer/tests/magnetic-slide-gate06-rev4.test.mjs"/>
+	<testcase name="keeps exact provisional envelope and flat raised-axis stack" time="0.000510" classname="test" file="/Users/jiawei.zhou/Documents/Fidgeting app/tools/model-provenance-explorer/tests/magnetic-slide-gate06-rev4.test.mjs"/>
+	<testcase name="preserves four grooves, followers, balls and compound motion" time="0.000135" classname="test" file="/Users/jiawei.zhou/Documents/Fidgeting app/tools/model-provenance-explorer/tests/magnetic-slide-gate06-rev4.test.mjs"/>
+	<testcase name="passes manifold, normal, UV, tangent and self-motion audits" time="0.000194" classname="test" file="/Users/jiawei.zhou/Documents/Fidgeting app/tools/model-provenance-explorer/tests/magnetic-slide-gate06-rev4.test.mjs"/>
+	<testcase name="registers the primary GLB and every required view" time="0.027447" classname="test" file="/Users/jiawei.zhou/Documents/Fidgeting app/tools/model-provenance-explorer/tests/magnetic-slide-gate06-rev4.test.mjs"/>
+	<testcase name="keeps material, Simulator, Unity and device scope untouched" time="0.000089" classname="test" file="/Users/jiawei.zhou/Documents/Fidgeting app/tools/model-provenance-explorer/tests/magnetic-slide-gate06-rev4.test.mjs"/>
+	<testcase name="binds Gate 06 rev 5 to the approved endpoint contract" time="0.160314" classname="test" file="/Users/jiawei.zhou/Documents/Fidgeting app/tools/model-provenance-explorer/tests/magnetic-slide-gate06-rev5.test.mjs"/>
+	<testcase name="allows rotation only at sMax and closure only after alignment" time="0.000134" classname="test" file="/Users/jiawei.zhou/Documents/Fidgeting app/tools/model-provenance-explorer/tests/magnetic-slide-gate06-rev5.test.mjs"/>
+	<testcase name="preserves geometry quality containment and product visibility" time="0.000403" classname="test" file="/Users/jiawei.zhou/Documents/Fidgeting app/tools/model-provenance-explorer/tests/magnetic-slide-gate06-rev5.test.mjs"/>
+	<testcase name="exports an interactive GLB with interlock metadata" time="0.001002" classname="test" file="/Users/jiawei.zhou/Documents/Fidgeting app/tools/model-provenance-explorer/tests/magnetic-slide-gate06-rev5.test.mjs"/>
+	<testcase name="updates the stable workbench and decision records" time="0.001432" classname="test" file="/Users/jiawei.zhou/Documents/Fidgeting app/tools/model-provenance-explorer/tests/magnetic-slide-gate06-rev5.test.mjs"/>
+	<testcase name="Gate 06 rev 4 approval evidence remains preserved under rev 5" time="0.001387" classname="test" file="/Users/jiawei.zhou/Documents/Fidgeting app/tools/model-provenance-explorer/tests/magnetic-slide-gate07-rev11.test.mjs"/>
+	<testcase name="Gate 07 rev 11 assets remain preserved under rev 13" time="0.000197" classname="test" file="/Users/jiawei.zhou/Documents/Fidgeting app/tools/model-provenance-explorer/tests/magnetic-slide-gate07-rev11.test.mjs"/>
+	<testcase name="Gate 07 preserves approved geometry across every material pose" time="0.000270" classname="test" file="/Users/jiawei.zhou/Documents/Fidgeting app/tools/model-provenance-explorer/tests/magnetic-slide-gate07-rev11.test.mjs"/>
+	<testcase name="source-backed masks remain distinct, editable and immutable" time="0.000139" classname="test" file="/Users/jiawei.zhou/Documents/Fidgeting app/tools/model-provenance-explorer/tests/magnetic-slide-gate07-rev11.test.mjs"/>
+	<testcase name="material and image audits pass without emission or visible clipping" time="0.000189" classname="test" file="/Users/jiawei.zhou/Documents/Fidgeting app/tools/model-provenance-explorer/tests/magnetic-slide-gate07-rev11.test.mjs"/>
+	<testcase name="interactive GLB, real turntable and source boards are registered" time="0.009163" classname="test" file="/Users/jiawei.zhou/Documents/Fidgeting app/tools/model-provenance-explorer/tests/magnetic-slide-gate07-rev11.test.mjs"/>
+	<testcase name="workbench exposes material environment and exposure controls" time="0.000774" classname="test" file="/Users/jiawei.zhou/Documents/Fidgeting app/tools/model-provenance-explorer/tests/magnetic-slide-gate07-rev11.test.mjs"/>
+	<testcase name="docs record Gate 07 approval and no device work" time="0.025466" classname="test" file="/Users/jiawei.zhou/Documents/Fidgeting app/tools/model-provenance-explorer/tests/magnetic-slide-gate07-rev11.test.mjs"/>
+	<testcase name="approves Gate 06 with exact chat wording" time="0.000385" classname="test" file="/Users/jiawei.zhou/Documents/Fidgeting app/tools/model-provenance-explorer/tests/magnetic-slide-gate07-rev12.test.mjs"/>
+	<testcase name="preserves Gate 07 rev 12 geometry and contract history" time="0.000086" classname="test" file="/Users/jiawei.zhou/Documents/Fidgeting app/tools/model-provenance-explorer/tests/magnetic-slide-gate07-rev12.test.mjs"/>
+	<testcase name="reuses approved textures byte for byte" time="0.000199" classname="test" file="/Users/jiawei.zhou/Documents/Fidgeting app/tools/model-provenance-explorer/tests/magnetic-slide-gate07-rev12.test.mjs"/>
+	<testcase name="permits rotation only at the maximum slide endpoint" time="0.000153" classname="test" file="/Users/jiawei.zhou/Documents/Fidgeting app/tools/model-provenance-explorer/tests/magnetic-slide-gate07-rev12.test.mjs"/>
+	<testcase name="registers interactive lookdev, turntable and review boards" time="0.048270" classname="test" file="/Users/jiawei.zhou/Documents/Fidgeting app/tools/model-provenance-explorer/tests/magnetic-slide-gate07-rev12.test.mjs"/>
+	<testcase name="keeps downstream stale and device work pending" time="0.000177" classname="test" file="/Users/jiawei.zhou/Documents/Fidgeting app/tools/model-provenance-explorer/tests/magnetic-slide-gate07-rev12.test.mjs"/>
+	<testcase name="archives the exact side-wrap rejection" time="0.003776" classname="test" file="/Users/jiawei.zhou/Documents/Fidgeting app/tools/model-provenance-explorer/tests/magnetic-slide-gate07-rev13.test.mjs"/>
+	<testcase name="proves the historical material-index collapse" time="0.000485" classname="test" file="/Users/jiawei.zhou/Documents/Fidgeting app/tools/model-provenance-explorer/tests/magnetic-slide-gate07-rev13.test.mjs"/>
+	<testcase name="keeps approved geometry while assigning deterministic face zones" time="0.000241" classname="test" file="/Users/jiawei.zhou/Documents/Fidgeting app/tools/model-provenance-explorer/tests/magnetic-slide-gate07-rev13.test.mjs"/>
+	<testcase name="preserves partitions through GLB and FBX re-import" time="0.000215" classname="test" file="/Users/jiawei.zhou/Documents/Fidgeting app/tools/model-provenance-explorer/tests/magnetic-slide-gate07-rev13.test.mjs"/>
+	<testcase name="keeps legal endpoint-only motion and hidden mechanics" time="0.000123" classname="test" file="/Users/jiawei.zhou/Documents/Fidgeting app/tools/model-provenance-explorer/tests/magnetic-slide-gate07-rev13.test.mjs"/>
+	<testcase name="preserves approved Gate 07 rev 13" time="0.008687" classname="test" file="/Users/jiawei.zhou/Documents/Fidgeting app/tools/model-provenance-explorer/tests/magnetic-slide-gate07-rev13.test.mjs"/>
+	<testcase name="Gate 07 rev 11 and rev 12 approvals remain preserved during rev 13" time="0.002585" classname="test" file="/Users/jiawei.zhou/Documents/Fidgeting app/tools/model-provenance-explorer/tests/magnetic-slide-gate08-rev2.test.mjs"/>
+	<testcase name="Gate 08 rev 2 remains approved stale history after geometry rejection" time="0.000428" classname="test" file="/Users/jiawei.zhou/Documents/Fidgeting app/tools/model-provenance-explorer/tests/magnetic-slide-gate08-rev2.test.mjs"/>
+	<testcase name="lighting preserves approved geometry and material hashes" time="0.000267" classname="test" file="/Users/jiawei.zhou/Documents/Fidgeting app/tools/model-provenance-explorer/tests/magnetic-slide-gate08-rev2.test.mjs"/>
+	<testcase name="required views, passes and lighting modes pass image audit" time="0.000133" classname="test" file="/Users/jiawei.zhou/Documents/Fidgeting app/tools/model-provenance-explorer/tests/magnetic-slide-gate08-rev2.test.mjs"/>
+	<testcase name="independent Blender audit confirms rig and embedded GLB" time="0.000108" classname="test" file="/Users/jiawei.zhou/Documents/Fidgeting app/tools/model-provenance-explorer/tests/magnetic-slide-gate08-rev2.test.mjs"/>
+	<testcase name="interactive lookdev, turntable, boards and pass evidence are registered" time="0.007898" classname="test" file="/Users/jiawei.zhou/Documents/Fidgeting app/tools/model-provenance-explorer/tests/magnetic-slide-gate08-rev2.test.mjs"/>
+	<testcase name="workbench exposes three lighting modes, orbit, zoom and exposure" time="0.001037" classname="test" file="/Users/jiawei.zhou/Documents/Fidgeting app/tools/model-provenance-explorer/tests/magnetic-slide-gate08-rev2.test.mjs"/>
+	<testcase name="docs record lighting approval and no device work" time="0.001608" classname="test" file="/Users/jiawei.zhou/Documents/Fidgeting app/tools/model-provenance-explorer/tests/magnetic-slide-gate08-rev2.test.mjs"/>
+	<testcase name="Gate 08 rev 4 remains immutable history under rev 5" time="0.032903" classname="test" file="/Users/jiawei.zhou/Documents/Fidgeting app/tools/model-provenance-explorer/tests/magnetic-slide-gate08-rev3-portability.test.mjs"/>
+	<testcase name="portable review evidence remains full-frame and parity-blocked" time="0.000269" classname="test" file="/Users/jiawei.zhou/Documents/Fidgeting app/tools/model-provenance-explorer/tests/magnetic-slide-gate08-rev3-portability.test.mjs"/>
+	<testcase name="persists Gate 07 rev 12 approval wording as history" time="0.000404" classname="test" file="/Users/jiawei.zhou/Documents/Fidgeting app/tools/model-provenance-explorer/tests/magnetic-slide-gate08-rev5.test.mjs"/>
+	<testcase name="preserves Gate 08 rev 5 as stale evidence" time="0.000070" classname="test" file="/Users/jiawei.zhou/Documents/Fidgeting app/tools/model-provenance-explorer/tests/magnetic-slide-gate08-rev5.test.mjs"/>
+	<testcase name="preserves the shared HDR and measures full-frame parity" time="0.000075" classname="test" file="/Users/jiawei.zhou/Documents/Fidgeting app/tools/model-provenance-explorer/tests/magnetic-slide-gate08-rev5.test.mjs"/>
+	<testcase name="records only legal endpoint motion" time="0.000052" classname="test" file="/Users/jiawei.zhou/Documents/Fidgeting app/tools/model-provenance-explorer/tests/magnetic-slide-gate08-rev5.test.mjs"/>
+	<testcase name="blocks every gate after current environment review" time="0.000098" classname="test" file="/Users/jiawei.zhou/Documents/Fidgeting app/tools/model-provenance-explorer/tests/magnetic-slide-gate08-rev5.test.mjs"/>
+	<testcase name="persists the exact Gate 07 rev 13 approval" time="0.000384" classname="test" file="/Users/jiawei.zhou/Documents/Fidgeting app/tools/model-provenance-explorer/tests/magnetic-slide-gate08-rev6.test.mjs"/>
+	<testcase name="uses only the approved corrected material source" time="0.000063" classname="test" file="/Users/jiawei.zhou/Documents/Fidgeting app/tools/model-provenance-explorer/tests/magnetic-slide-gate08-rev6.test.mjs"/>
+	<testcase name="keeps every diagnostic pass non-destructive" time="0.000063" classname="test" file="/Users/jiawei.zhou/Documents/Fidgeting app/tools/model-provenance-explorer/tests/magnetic-slide-gate08-rev6.test.mjs"/>
+	<testcase name="preserves cap side rim and underside partitions" time="0.000072" classname="test" file="/Users/jiawei.zhou/Documents/Fidgeting app/tools/model-provenance-explorer/tests/magnetic-slide-gate08-rev6.test.mjs"/>
+	<testcase name="reuses the portable shared HDR and valid cameras" time="0.000046" classname="test" file="/Users/jiawei.zhou/Documents/Fidgeting app/tools/model-provenance-explorer/tests/magnetic-slide-gate08-rev6.test.mjs"/>
+	<testcase name="records only legal endpoint motion" time="0.000042" classname="test" file="/Users/jiawei.zhou/Documents/Fidgeting app/tools/model-provenance-explorer/tests/magnetic-slide-gate08-rev6.test.mjs"/>
+	<testcase name="preserves Gate 08 approval through current Gate 10 review" time="0.000101" classname="test" file="/Users/jiawei.zhou/Documents/Fidgeting app/tools/model-provenance-explorer/tests/magnetic-slide-gate08-rev6.test.mjs"/>
+	<testcase name="Gate 08 rev 2 exact chat approval and final goal are persisted" time="0.029365" classname="test" file="/Users/jiawei.zhou/Documents/Fidgeting app/tools/model-provenance-explorer/tests/magnetic-slide-gate09-rev8.test.mjs"/>
+	<testcase name="Gate 09 preserves approved model, material, light and source cameras" time="0.000718" classname="test" file="/Users/jiawei.zhou/Documents/Fidgeting app/tools/model-provenance-explorer/tests/magnetic-slide-gate09-rev8.test.mjs"/>
+	<testcase name="portable EXR is seamless, linear, dynamic and hash-locked" time="0.001519" classname="test" file="/Users/jiawei.zhou/Documents/Fidgeting app/tools/model-provenance-explorer/tests/magnetic-slide-gate09-rev8.test.mjs"/>
+	<testcase name="matched environment renders preserve readability without clipping" time="0.000390" classname="test" file="/Users/jiawei.zhou/Documents/Fidgeting app/tools/model-provenance-explorer/tests/magnetic-slide-gate09-rev8.test.mjs"/>
+	<testcase name="Unity portability contract defines exact and measured parity boundaries" time="0.000592" classname="test" file="/Users/jiawei.zhou/Documents/Fidgeting app/tools/model-provenance-explorer/tests/magnetic-slide-gate09-rev8.test.mjs"/>
+	<testcase name="portable texture bytes retain approved Gate 07 hashes" time="0.001960" classname="test" file="/Users/jiawei.zhou/Documents/Fidgeting app/tools/model-provenance-explorer/tests/magnetic-slide-gate09-rev8.test.mjs"/>
+	<testcase name="workbench exposes Gate 09 and conditional Neutral/Shipping lookdev" time="0.001395" classname="test" file="/Users/jiawei.zhou/Documents/Fidgeting app/tools/model-provenance-explorer/tests/magnetic-slide-gate09-rev8.test.mjs"/>
+	<testcase name="design authority and delivery status record Gate 09 truthfully" time="0.001715" classname="test" file="/Users/jiawei.zhou/Documents/Fidgeting app/tools/model-provenance-explorer/tests/magnetic-slide-gate09-rev8.test.mjs"/>
+	<testcase name="persists the exact Gate 08 rev 6 approval" time="0.000627" classname="test" file="/Users/jiawei.zhou/Documents/Fidgeting app/tools/model-provenance-explorer/tests/magnetic-slide-gate09-rev9.test.mjs"/>
+	<testcase name="uses current geometry material lighting and contract hashes" time="0.000090" classname="test" file="/Users/jiawei.zhou/Documents/Fidgeting app/tools/model-provenance-explorer/tests/magnetic-slide-gate09-rev9.test.mjs"/>
+	<testcase name="changes only the environment input in matched pairs" time="0.000108" classname="test" file="/Users/jiawei.zhou/Documents/Fidgeting app/tools/model-provenance-explorer/tests/magnetic-slide-gate09-rev9.test.mjs"/>
+	<testcase name="provides revalidated seamless HDR and Unity cubemap" time="0.000078" classname="test" file="/Users/jiawei.zhou/Documents/Fidgeting app/tools/model-provenance-explorer/tests/magnetic-slide-gate09-rev9.test.mjs"/>
+	<testcase name="preserves top side rim and underside partitions" time="0.000077" classname="test" file="/Users/jiawei.zhou/Documents/Fidgeting app/tools/model-provenance-explorer/tests/magnetic-slide-gate09-rev9.test.mjs"/>
+	<testcase name="records legal endpoint motion in both environments" time="0.000044" classname="test" file="/Users/jiawei.zhou/Documents/Fidgeting app/tools/model-provenance-explorer/tests/magnetic-slide-gate09-rev9.test.mjs"/>
+	<testcase name="locks the downstream Unity portability contract" time="0.000113" classname="test" file="/Users/jiawei.zhou/Documents/Fidgeting app/tools/model-provenance-explorer/tests/magnetic-slide-gate09-rev9.test.mjs"/>
+	<testcase name="preserves Gate 09 approval before Unity and device work" time="0.000059" classname="test" file="/Users/jiawei.zhou/Documents/Fidgeting app/tools/model-provenance-explorer/tests/magnetic-slide-gate09-rev9.test.mjs"/>
+	<testcase name="Gate 09 exact approval advances only to Gate 10 review" time="0.051820" classname="test" file="/Users/jiawei.zhou/Documents/Fidgeting app/tools/model-provenance-explorer/tests/magnetic-slide-gate10-rev10.test.mjs"/>
+	<testcase name="authoritative Blend preserves current geometry material and UV state" time="0.000665" classname="test" file="/Users/jiawei.zhou/Documents/Fidgeting app/tools/model-provenance-explorer/tests/magnetic-slide-gate10-rev10.test.mjs"/>
+	<testcase name="FBX GLB and collision independently reimport" time="0.000186" classname="test" file="/Users/jiawei.zhou/Documents/Fidgeting app/tools/model-provenance-explorer/tests/magnetic-slide-gate10-rev10.test.mjs"/>
+	<testcase name="manifest locks package pixels environment and endpoint interlock" time="0.050758" classname="test" file="/Users/jiawei.zhou/Documents/Fidgeting app/tools/model-provenance-explorer/tests/magnetic-slide-gate10-rev10.test.mjs"/>
+	<testcase name="workbench requires real rev 10 GLB interaction" time="0.000694" classname="test" file="/Users/jiawei.zhou/Documents/Fidgeting app/tools/model-provenance-explorer/tests/magnetic-slide-gate10-rev10.test.mjs"/>
+	<testcase name="design and delivery records stop before Unity" time="0.001379" classname="test" file="/Users/jiawei.zhou/Documents/Fidgeting app/tools/model-provenance-explorer/tests/magnetic-slide-gate10-rev10.test.mjs"/>
+	<testcase name="Gate 10 export evidence remains preserved during Gate 09 review" time="0.032318" classname="test" file="/Users/jiawei.zhou/Documents/Fidgeting app/tools/model-provenance-explorer/tests/magnetic-slide-gate10-rev9.test.mjs"/>
+	<testcase name="authoritative source preserves approved geometry and material" time="0.000667" classname="test" file="/Users/jiawei.zhou/Documents/Fidgeting app/tools/model-provenance-explorer/tests/magnetic-slide-gate10-rev9.test.mjs"/>
+	<testcase name="FBX GLB and collision independently re-import" time="0.000208" classname="test" file="/Users/jiawei.zhou/Documents/Fidgeting app/tools/model-provenance-explorer/tests/magnetic-slide-gate10-rev9.test.mjs"/>
+	<testcase name="export package hashes and Unity portability rules are locked" time="0.016238" classname="test" file="/Users/jiawei.zhou/Documents/Fidgeting app/tools/model-provenance-explorer/tests/magnetic-slide-gate10-rev9.test.mjs"/>
+	<testcase name="closed motion metadata preserves four-track mechanism" time="0.000235" classname="test" file="/Users/jiawei.zhou/Documents/Fidgeting app/tools/model-provenance-explorer/tests/magnetic-slide-gate10-rev9.test.mjs"/>
+	<testcase name="workbench requires real GLB load orbit and zoom" time="0.000459" classname="test" file="/Users/jiawei.zhou/Documents/Fidgeting app/tools/model-provenance-explorer/tests/magnetic-slide-gate10-rev9.test.mjs"/>
+	<testcase name="design and delivery records stop before Gate 12 and device work" time="0.001737" classname="test" file="/Users/jiawei.zhou/Documents/Fidgeting app/tools/model-provenance-explorer/tests/magnetic-slide-gate10-rev9.test.mjs"/>
+	<testcase name="Gate 11 rev 10 remains blocked stale history" time="0.000754" classname="test" file="/Users/jiawei.zhou/Documents/Fidgeting app/tools/model-provenance-explorer/tests/magnetic-slide-gate11-rev10.test.mjs"/>
+	<testcase name="raw full-frame validator measures camera, background, hotspot and clay" time="0.000510" classname="test" file="/Users/jiawei.zhou/Documents/Fidgeting app/tools/model-provenance-explorer/tests/magnetic-slide-gate11-rev10.test.mjs"/>
+	<testcase name="Unity transport passes while visual parity remains blocked" time="0.000227" classname="test" file="/Users/jiawei.zhou/Documents/Fidgeting app/tools/model-provenance-explorer/tests/magnetic-slide-gate11-rev10.test.mjs"/>
+	<testcase name="registered Unity review evidence is complete and hashed" time="0.009371" classname="test" file="/Users/jiawei.zhou/Documents/Fidgeting app/tools/model-provenance-explorer/tests/magnetic-slide-gate11-rev10.test.mjs"/>
+	<testcase name="rev 9 render evidence remains immutable rejected history" time="0.002060" classname="test" file="/Users/jiawei.zhou/Documents/Fidgeting app/tools/model-provenance-explorer/tests/magnetic-slide-gate11-rev10.test.mjs"/>
+	<testcase name="Gate 11 rev 9 remains rejected immutable history" time="0.000488" classname="test" file="/Users/jiawei.zhou/Documents/Fidgeting app/tools/model-provenance-explorer/tests/magnetic-slide-gate11-rev9.test.mjs"/>
+	<testcase name="Unity import preserves exact four-track transport and provisional envelope" time="0.000487" classname="test" file="/Users/jiawei.zhou/Documents/Fidgeting app/tools/model-provenance-explorer/tests/magnetic-slide-gate11-rev9.test.mjs"/>
+	<testcase name="rev 9 keeps its measured metrics without claiming full-frame parity" time="0.000176" classname="test" file="/Users/jiawei.zhou/Documents/Fidgeting app/tools/model-provenance-explorer/tests/magnetic-slide-gate11-rev9.test.mjs"/>
+	<testcase name="final validation covers interactive recording and focused Unity tests" time="0.000136" classname="test" file="/Users/jiawei.zhou/Documents/Fidgeting app/tools/model-provenance-explorer/tests/magnetic-slide-gate11-rev9.test.mjs"/>
+	<testcase name="Gate 11 rev 9 visual review assets keep their original hashes" time="0.001790" classname="test" file="/Users/jiawei.zhou/Documents/Fidgeting app/tools/model-provenance-explorer/tests/magnetic-slide-gate11-rev9.test.mjs"/>
+	<testcase name="stable Unity workbench gates approval on the complete runtime recording" time="0.000546" classname="test" file="/Users/jiawei.zhou/Documents/Fidgeting app/tools/model-provenance-explorer/tests/magnetic-slide-gate11-rev9.test.mjs"/>
+	<testcase name="defines exactly nine required core measurements" time="0.000642" classname="test" file="/Users/jiawei.zhou/Documents/Fidgeting app/tools/model-provenance-explorer/tests/measurement-contract.test.mjs"/>
+	<testcase name="keeps optional and manufacturing-only fields nonblocking" time="0.000754" classname="test" file="/Users/jiawei.zhou/Documents/Fidgeting app/tools/model-provenance-explorer/tests/measurement-contract.test.mjs"/>
+	<testcase name="blocks a thickness stack outside stated uncertainty" time="0.000097" classname="test" file="/Users/jiawei.zhou/Documents/Fidgeting app/tools/model-provenance-explorer/tests/measurement-contract.test.mjs"/>
+	<testcase name="blocks carrier geometry that cannot fit the bottom footprint" time="0.000075" classname="test" file="/Users/jiawei.zhou/Documents/Fidgeting app/tools/model-provenance-explorer/tests/measurement-contract.test.mjs"/>
+	<testcase name="blocks travel beyond the approved finite-groove and overlap limit" time="0.000085" classname="test" file="/Users/jiawei.zhou/Documents/Fidgeting app/tools/model-provenance-explorer/tests/measurement-contract.test.mjs"/>
+	<testcase name="treats video aspect as a warning instead of overriding measurements" time="0.000077" classname="test" file="/Users/jiawei.zhou/Documents/Fidgeting app/tools/model-provenance-explorer/tests/measurement-contract.test.mjs"/>
+	<testcase name="requires value uncertainty source and method for each core field" time="0.000074" classname="test" file="/Users/jiawei.zhou/Documents/Fidgeting app/tools/model-provenance-explorer/tests/measurement-contract.test.mjs"/>
+	<testcase name="loads minimum-overlap disk and dual-bound values from rev 15 contract" time="0.001543" classname="test" file="/Users/jiawei.zhou/Documents/Fidgeting app/tools/model-provenance-explorer/tests/mechanism-cad.test.mjs"/>
+	<testcase name="defines exact closed overlap and clamps all negative travel" time="0.000993" classname="test" file="/Users/jiawei.zhou/Documents/Fidgeting app/tools/model-provenance-explorer/tests/mechanism-cad.test.mjs"/>
+	<testcase name="keeps nonzero-angle closed poses nonnegative without claiming aligned silhouettes" time="0.000161" classname="test" file="/Users/jiawei.zhou/Documents/Fidgeting app/tools/model-provenance-explorer/tests/mechanism-cad.test.mjs"/>
+	<testcase name="blocks inward pointer penetration but preserves tangential rotation at closed" time="0.000644" classname="test" file="/Users/jiawei.zhou/Documents/Fidgeting app/tools/model-provenance-explorer/tests/mechanism-cad.test.mjs"/>
+	<testcase name="returns from open to exact zero without floating undershoot" time="0.000192" classname="test" file="/Users/jiawei.zhou/Documents/Fidgeting app/tools/model-provenance-explorer/tests/mechanism-cad.test.mjs"/>
+	<testcase name="retains finite groove endpoint as the non-active candidate bound" time="0.000105" classname="test" file="/Users/jiawei.zhou/Documents/Fidgeting app/tools/model-provenance-explorer/tests/mechanism-cad.test.mjs"/>
+	<testcase name="keeps followers inside finite grooves for representative full travel" time="0.001842" classname="test" file="/Users/jiawei.zhou/Documents/Fidgeting app/tools/model-provenance-explorer/tests/mechanism-cad.test.mjs"/>
+	<testcase name="keeps the top above the bottom across all 30 detents and slide samples" time="0.001645" classname="test" file="/Users/jiawei.zhou/Documents/Fidgeting app/tools/model-provenance-explorer/tests/mechanism-cad.test.mjs"/>
+	<testcase name="clamps at the overlap-disk boundary while rotation remains legal" time="0.000222" classname="test" file="/Users/jiawei.zhou/Documents/Fidgeting app/tools/model-provenance-explorer/tests/mechanism-cad.test.mjs"/>
+	<testcase name="derives actual travel from groove and analytic disk-containment bounds" time="0.000970" classname="test" file="/Users/jiawei.zhou/Documents/Fidgeting app/tools/model-provenance-explorer/tests/mechanism-cad.test.mjs"/>
+	<testcase name="keeps the full minimum overlap disk contained at closed and exact max tangency" time="0.000436" classname="test" file="/Users/jiawei.zhou/Documents/Fidgeting app/tools/model-provenance-explorer/tests/mechanism-cad.test.mjs"/>
+	<testcase name="proves dense full-360 containment and rejects any boundary penetration" time="0.010191" classname="test" file="/Users/jiawei.zhou/Documents/Fidgeting app/tools/model-provenance-explorer/tests/mechanism-cad.test.mjs"/>
+	<testcase name="switches the active sMax source and responds to normalized parameters" time="0.000100" classname="test" file="/Users/jiawei.zhou/Documents/Fidgeting app/tools/model-provenance-explorer/tests/mechanism-cad.test.mjs"/>
+	<testcase name="builds a normalized tangent capsule" time="0.000048" classname="test" file="/Users/jiawei.zhou/Documents/Fidgeting app/tools/model-provenance-explorer/tests/mechanism-cad.test.mjs"/>
+	<testcase name="keeps smooth bottom exterior and fixed axis invariant" time="0.000160" classname="test" file="/Users/jiawei.zhou/Documents/Fidgeting app/tools/model-provenance-explorer/tests/mechanism-cad.test.mjs"/>
+	<testcase name="rotates carrier without translation" time="0.000065" classname="test" file="/Users/jiawei.zhou/Documents/Fidgeting app/tools/model-provenance-explorer/tests/mechanism-cad.test.mjs"/>
+	<testcase name="keeps two top grooves parallel to two carrier followers" time="0.000086" classname="test" file="/Users/jiawei.zhou/Documents/Fidgeting app/tools/model-provenance-explorer/tests/mechanism-cad.test.mjs"/>
+	<testcase name="uses carrier-local translation after fixed-axis rotation" time="0.000161" classname="test" file="/Users/jiawei.zhou/Documents/Fidgeting app/tools/model-provenance-explorer/tests/mechanism-cad.test.mjs"/>
+	<testcase name="preserves fixed-axis coverage at maximum travel" time="0.000055" classname="test" file="/Users/jiawei.zhou/Documents/Fidgeting app/tools/model-provenance-explorer/tests/mechanism-cad.test.mjs"/>
+	<testcase name="exposes the required ten-part component tree" time="0.000045" classname="test" file="/Users/jiawei.zhou/Documents/Fidgeting app/tools/model-provenance-explorer/tests/mechanism-cad.test.mjs"/>
+	<testcase name="direct drag follows screen direction at cardinal carrier angles" time="0.000221" classname="test" file="/Users/jiawei.zhou/Documents/Fidgeting app/tools/model-provenance-explorer/tests/mechanism-cad.test.mjs"/>
+	<testcase name="diagonal direct drag changes local slide and angle together" time="0.000119" classname="test" file="/Users/jiawei.zhou/Documents/Fidgeting app/tools/model-provenance-explorer/tests/mechanism-cad.test.mjs"/>
+	<testcase name="keeps physical dimensions unknown until entered" time="0.000132" classname="test" file="/Users/jiawei.zhou/Documents/Fidgeting app/tools/model-provenance-explorer/tests/mechanism-cad.test.mjs"/>
+	<testcase name="zooms, pans and inverses CAD coordinates" time="0.000125" classname="test" file="/Users/jiawei.zhou/Documents/Fidgeting app/tools/model-provenance-explorer/tests/mechanism-cad.test.mjs"/>
+	<testcase name="matches the evidence contract schema-required shape" time="0.000595" classname="test" file="/Users/jiawei.zhou/Documents/Fidgeting app/tools/model-provenance-explorer/tests/mechanism-evidence-contract.test.mjs"/>
+	<testcase name="links every constraint and region to hashed repository sources" time="0.000668" classname="test" file="/Users/jiawei.zhou/Documents/Fidgeting app/tools/model-provenance-explorer/tests/mechanism-evidence-contract.test.mjs"/>
+	<testcase name="contains the required source-to-constraint mappings" time="0.000151" classname="test" file="/Users/jiawei.zhou/Documents/Fidgeting app/tools/model-provenance-explorer/tests/mechanism-evidence-contract.test.mjs"/>
+	<testcase name="archives both user-selected bottom-base images immutably" time="0.001576" classname="test" file="/Users/jiawei.zhou/Documents/Fidgeting app/tools/model-provenance-explorer/tests/mechanism-evidence-contract.test.mjs"/>
+	<testcase name="archives the user-authoritative finite-groove correction" time="0.000327" classname="test" file="/Users/jiawei.zhou/Documents/Fidgeting app/tools/model-provenance-explorer/tests/mechanism-evidence-contract.test.mjs"/>
+	<testcase name="archives the user screenshot and minimum-overlap interpretation immutably" time="0.000745" classname="test" file="/Users/jiawei.zhou/Documents/Fidgeting app/tools/model-provenance-explorer/tests/mechanism-evidence-contract.test.mjs"/>
+	<testcase name="covers every Gate 01 asset and preserves source boundaries" time="0.000549" classname="test" file="/Users/jiawei.zhou/Documents/Fidgeting app/tools/model-provenance-explorer/tests/mechanism-evidence-contract.test.mjs"/>
+	<testcase name="binds CAD to the contract and keeps Simulator separate" time="0.000194" classname="test" file="/Users/jiawei.zhou/Documents/Fidgeting app/tools/model-provenance-explorer/tests/mechanism-evidence-contract.test.mjs"/>
+	<testcase name="keeps the stable 12-gate status contract" time="0.009640" classname="test" file="/Users/jiawei.zhou/Documents/Fidgeting app/tools/model-provenance-explorer/tests/mechanism-evidence-contract.test.mjs"/>
+	<testcase name="rejects active downstream artifacts without the contract hash" time="0.030143" classname="test" file="/Users/jiawei.zhou/Documents/Fidgeting app/tools/model-provenance-explorer/tests/mechanism-evidence-contract.test.mjs"/>
+	<testcase name="starts and resets with zero velocities and no self-motion" time="0.002846" classname="test" file="/Users/jiawei.zhou/Documents/Fidgeting app/tools/model-provenance-explorer/tests/mechanism-feel-simulator.test.mjs"/>
+	<testcase name="uses frame-rate-independent half-life damping" time="0.000107" classname="test" file="/Users/jiawei.zhou/Documents/Fidgeting app/tools/model-provenance-explorer/tests/mechanism-feel-simulator.test.mjs"/>
+	<testcase name="holds angular motion below breakaway while slide remains available" time="0.000193" classname="test" file="/Users/jiawei.zhou/Documents/Fidgeting app/tools/model-provenance-explorer/tests/mechanism-feel-simulator.test.mjs"/>
+	<testcase name="supports simultaneous slide and rotation above breakaway" time="0.000106" classname="test" file="/Users/jiawei.zhou/Documents/Fidgeting app/tools/model-provenance-explorer/tests/mechanism-feel-simulator.test.mjs"/>
+	<testcase name="preserves finite grooves and minimum-overlap containment at stops" time="0.000129" classname="test" file="/Users/jiawei.zhou/Documents/Fidgeting app/tools/model-provenance-explorer/tests/mechanism-feel-simulator.test.mjs"/>
+	<testcase name="captures the nearest 12-degree detent at low speed" time="0.003312" classname="test" file="/Users/jiawei.zhou/Documents/Fidgeting app/tools/model-provenance-explorer/tests/mechanism-feel-simulator.test.mjs"/>
+	<testcase name="records deterministic parameter snapshots and audio toggles" time="0.000419" classname="test" file="/Users/jiawei.zhou/Documents/Fidgeting app/tools/model-provenance-explorer/tests/mechanism-feel-simulator.test.mjs"/>
+	<testcase name="rejects contract hash drift" time="0.000177" classname="test" file="/Users/jiawei.zhou/Documents/Fidgeting app/tools/model-provenance-explorer/tests/mechanism-feel-simulator.test.mjs"/>
+	<testcase name="maps exactly 30 detents at 12 degrees" time="0.001619" classname="test" file="/Users/jiawei.zhou/Documents/Fidgeting app/tools/model-provenance-explorer/tests/mechanism-sandbox.test.mjs"/>
+	<testcase name="loads authoritative mechanism values and rejects duplicate drift" time="0.000422" classname="test" file="/Users/jiawei.zhou/Documents/Fidgeting app/tools/model-provenance-explorer/tests/mechanism-sandbox.test.mjs"/>
+	<testcase name="starts and resets with no self-spin" time="0.000752" classname="test" file="/Users/jiawei.zhou/Documents/Fidgeting app/tools/model-provenance-explorer/tests/mechanism-sandbox.test.mjs"/>
+	<testcase name="uses frame-rate-independent half-life damping" time="0.000111" classname="test" file="/Users/jiawei.zhou/Documents/Fidgeting app/tools/model-provenance-explorer/tests/mechanism-sandbox.test.mjs"/>
+	<testcase name="holds below breakaway and captures a detent" time="0.000180" classname="test" file="/Users/jiawei.zhou/Documents/Fidgeting app/tools/model-provenance-explorer/tests/mechanism-sandbox.test.mjs"/>
+	<testcase name="slides only outward from closed and reverses to close" time="0.000127" classname="test" file="/Users/jiawei.zhou/Documents/Fidgeting app/tools/model-provenance-explorer/tests/mechanism-sandbox.test.mjs"/>
+	<testcase name="supports soft stops and hard maximum clamp" time="0.000083" classname="test" file="/Users/jiawei.zhou/Documents/Fidgeting app/tools/model-provenance-explorer/tests/mechanism-sandbox.test.mjs"/>
+	<testcase name="wraps angles in both directions" time="0.000061" classname="test" file="/Users/jiawei.zhou/Documents/Fidgeting app/tools/model-provenance-explorer/tests/mechanism-sandbox.test.mjs"/>
+	<testcase name="applies parameter changes and restores contract-derived configuration" time="0.000087" classname="test" file="/Users/jiawei.zhou/Documents/Fidgeting app/tools/model-provenance-explorer/tests/mechanism-sandbox.test.mjs"/>
+	<testcase name="keeps the upper plate transform fixed" time="0.000085" classname="test" file="/Users/jiawei.zhou/Documents/Fidgeting app/tools/model-provenance-explorer/tests/mechanism-sandbox.test.mjs"/>
+	<testcase name="moves the lower carrier and axis together" time="0.000066" classname="test" file="/Users/jiawei.zhou/Documents/Fidgeting app/tools/model-provenance-explorer/tests/mechanism-sandbox.test.mjs"/>
+	<testcase name="keeps one endpoint axis fixed to the lower carrier" time="0.000101" classname="test" file="/Users/jiawei.zhou/Documents/Fidgeting app/tools/model-provenance-explorer/tests/mechanism-sandbox.test.mjs"/>
+	<testcase name="rotates the lower carrier around its translated axis without inventing rail geometry" time="0.000100" classname="test" file="/Users/jiawei.zhou/Documents/Fidgeting app/tools/model-provenance-explorer/tests/mechanism-sandbox.test.mjs"/>
+	<testcase name="keeps the evidence-backed bilateral rail ownership without guessed positions" time="0.000080" classname="test" file="/Users/jiawei.zhou/Documents/Fidgeting app/tools/model-provenance-explorer/tests/mechanism-sandbox.test.mjs"/>
+	<testcase name="keeps detent review poses separate from normalized slide" time="0.000186" classname="test" file="/Users/jiawei.zhou/Documents/Fidgeting app/tools/model-provenance-explorer/tests/mechanism-sandbox.test.mjs"/>
+	<testcase name="updates slide and rotation in one compound pointer step" time="0.000090" classname="test" file="/Users/jiawei.zhou/Documents/Fidgeting app/tools/model-provenance-explorer/tests/mechanism-sandbox.test.mjs"/>
+	<testcase name="supports compound motion at partial and maximum slide" time="0.000060" classname="test" file="/Users/jiawei.zhou/Documents/Fidgeting app/tools/model-provenance-explorer/tests/mechanism-sandbox.test.mjs"/>
+	<testcase name="reverses rotation while closing" time="0.000056" classname="test" file="/Users/jiawei.zhou/Documents/Fidgeting app/tools/model-provenance-explorer/tests/mechanism-sandbox.test.mjs"/>
+	<testcase name="captures angular detent while slide remains active" time="0.000066" classname="test" file="/Users/jiawei.zhou/Documents/Fidgeting app/tools/model-provenance-explorer/tests/mechanism-sandbox.test.mjs"/>
+	<testcase name="reset zeros both compound velocities" time="0.000055" classname="test" file="/Users/jiawei.zhou/Documents/Fidgeting app/tools/model-provenance-explorer/tests/mechanism-sandbox.test.mjs"/>
+	<testcase name="tracked shipping models load and derive current readiness" time="0.055389" classname="test" file="/Users/jiawei.zhou/Documents/Fidgeting app/tools/model-provenance-explorer/tests/pipeline-core.test.mjs"/>
+	<testcase name="Premium Display Case records Gate 12 rev 4 and preserves prior revisions" time="0.016120" classname="test" file="/Users/jiawei.zhou/Documents/Fidgeting app/tools/model-provenance-explorer/tests/pipeline-core.test.mjs" failure="Expected values to be strictly equal:&#10;+ actual - expected&#10;&#10;+ 'draft'&#10;- 'approved'&#10;">
+		<failure type="testCodeFailure" message="Expected values to be strictly equal:&#10;+ actual - expected&#10;&#10;+ 'draft'&#10;- 'approved'">
+[Error [ERR_TEST_FAILURE]: Expected values to be strictly equal:
++ actual - expected
+
++ 'draft'
+- 'approved'
+] {
+  code: 'ERR_TEST_FAILURE',
+  failureType: 'testCodeFailure',
+  cause: AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  + actual - expected
+  
+  + 'draft'
+  - 'approved'
+  
+      at TestContext.&lt;anonymous> (file:///Users/jiawei.zhou/Documents/Fidgeting%20app/tools/model-provenance-explorer/tests/pipeline-core.test.mjs:205:10)
+      at Test.runInAsyncScope (node:async_hooks:226:14)
+      at Test.run (node:internal/test_runner/test:1382:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:960:18)
+      at Test.postRun (node:internal/test_runner/test:1522:19)
+      at Test.run (node:internal/test_runner/test:1447:12)
+      at async startSubtestAfterBootstrap (node:internal/test_runner/harness:387:3) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 'draft',
+    expected: 'approved',
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+}
+		</failure>
+	</testcase>
+	<testcase name="Premium Display Case Gate 12 rev 2 rejection waits for specific feedback" time="0.063137" classname="test" file="/Users/jiawei.zhou/Documents/Fidgeting app/tools/model-provenance-explorer/tests/pipeline-core.test.mjs"/>
+	<testcase name="Premium Display Case Gate 12 rev 3 rejection preserves exact selections" time="0.055382" classname="test" file="/Users/jiawei.zhou/Documents/Fidgeting app/tools/model-provenance-explorer/tests/pipeline-core.test.mjs"/>
+	<testcase name="Premium Display Case motion rejection restarts at Gate 02" time="0.046920" classname="test" file="/Users/jiawei.zhou/Documents/Fidgeting app/tools/model-provenance-explorer/tests/pipeline-core.test.mjs"/>
+	<testcase name="magnetic slider advances to current export review" time="0.039011" classname="test" file="/Users/jiawei.zhou/Documents/Fidgeting app/tools/model-provenance-explorer/tests/pipeline-core.test.mjs"/>
+	<testcase name="CAD evidence does not create a pre-Blender Simulator requirement" time="0.091743" classname="test" file="/Users/jiawei.zhou/Documents/Fidgeting app/tools/model-provenance-explorer/tests/pipeline-core.test.mjs"/>
+	<testcase name="backfill exposes honest first-stage gaps" time="0.000744" classname="test" file="/Users/jiawei.zhou/Documents/Fidgeting app/tools/model-provenance-explorer/tests/pipeline-core.test.mjs"/>
+	<testcase name="assistant-generated targets remain distinguishable from user originals" time="0.000213" classname="test" file="/Users/jiawei.zhou/Documents/Fidgeting app/tools/model-provenance-explorer/tests/pipeline-core.test.mjs"/>
+	<testcase name="repository path whitelist blocks traversal" time="0.000130" classname="test" file="/Users/jiawei.zhou/Documents/Fidgeting app/tools/model-provenance-explorer/tests/pipeline-core.test.mjs"/>
+	<testcase name="digests are stable regardless of input ordering" time="0.000103" classname="test" file="/Users/jiawei.zhou/Documents/Fidgeting app/tools/model-provenance-explorer/tests/pipeline-core.test.mjs"/>
+	<testcase name="exact-product references invalidate downstream work and produce a source-linked analysis revision" time="0.003531" classname="test" file="/Users/jiawei.zhou/Documents/Fidgeting app/tools/model-provenance-explorer/tests/pipeline-core.test.mjs"/>
+	<testcase name="asset refresh preserves a genuinely missing intake stage" time="0.001089" classname="test" file="/Users/jiawei.zhou/Documents/Fidgeting app/tools/model-provenance-explorer/tests/pipeline-core.test.mjs"/>
+	<testcase name="modeling contract must consume every approved analysis claim" time="0.000815" classname="test" file="/Users/jiawei.zhou/Documents/Fidgeting app/tools/model-provenance-explorer/tests/pipeline-core.test.mjs"/>
+	<testcase name="modeling contract saves immutable drafts and becomes reviewable only when complete" time="0.007255" classname="test" file="/Users/jiawei.zhou/Documents/Fidgeting app/tools/model-provenance-explorer/tests/pipeline-core.test.mjs"/>
+	<testcase name="architecture plan consumes an approved contract and registers a reviewable visual pair" time="0.002836" classname="test" file="/Users/jiawei.zhou/Documents/Fidgeting app/tools/model-provenance-explorer/tests/pipeline-core.test.mjs"/>
+	<testcase name="approval gates enforce hashes, prerequisites, revisions and stale propagation" time="0.002634" classname="test" file="/Users/jiawei.zhou/Documents/Fidgeting app/tools/model-provenance-explorer/tests/pipeline-core.test.mjs"/>
+	<testcase name="Premium Display Case preserves direction across explode and speed-only rejections" time="0.044578" classname="test" file="/Users/jiawei.zhou/Documents/Fidgeting app/tools/model-provenance-explorer/tests/pipeline-core.test.mjs"/>
+	<testcase name="keeps exactly 12 gates mapped once into three user phases" time="0.000998" classname="test" file="/Users/jiawei.zhou/Documents/Fidgeting app/tools/model-provenance-explorer/tests/workflow-three-phase.test.mjs"/>
+	<testcase name="removes standalone Simulator as an active pre-Blender requirement" time="0.000745" classname="test" file="/Users/jiawei.zhou/Documents/Fidgeting app/tools/model-provenance-explorer/tests/workflow-three-phase.test.mjs"/>
+	<testcase name="continues from corrected geometry into material review" time="0.000135" classname="test" file="/Users/jiawei.zhou/Documents/Fidgeting app/tools/model-provenance-explorer/tests/workflow-three-phase.test.mjs"/>
+	<testcase name="active Gate 03 contract labels anthropometric estimates and blockers" time="0.000269" classname="test" file="/Users/jiawei.zhou/Documents/Fidgeting app/tools/model-provenance-explorer/tests/workflow-three-phase.test.mjs"/>
+	<testcase name="records the latest workflow decision in the design bible and history" time="0.000708" classname="test" file="/Users/jiawei.zhou/Documents/Fidgeting app/tools/model-provenance-explorer/tests/workflow-three-phase.test.mjs"/>
+	<testcase name="keeps the fixed seven-tab information architecture" time="0.000724" classname="test" file="/Users/jiawei.zhou/Documents/Fidgeting app/tools/model-provenance-explorer/tests/workspace-navigation.test.mjs"/>
+	<testcase name="prefers deep links, then memory, then the current task" time="0.000163" classname="test" file="/Users/jiawei.zhou/Documents/Fidgeting app/tools/model-provenance-explorer/tests/workspace-navigation.test.mjs"/>
+	<testcase name="never redirects an explicit historical selection to the earliest problem" time="0.000416" classname="test" file="/Users/jiawei.zhou/Documents/Fidgeting app/tools/model-provenance-explorer/tests/workspace-navigation.test.mjs"/>
+	<testcase name="labels current, approved, stale and rejected tabs" time="0.000183" classname="test" file="/Users/jiawei.zhou/Documents/Fidgeting app/tools/model-provenance-explorer/tests/workspace-navigation.test.mjs"/>
+	<testcase name="round-trips direct model, tab, gate and asset routes" time="0.000153" classname="test" file="/Users/jiawei.zhou/Documents/Fidgeting app/tools/model-provenance-explorer/tests/workspace-navigation.test.mjs"/>
+	<!-- tests 226 -->
+	<!-- suites 0 -->
+	<!-- pass 225 -->
+	<!-- fail 1 -->
+	<!-- cancelled 0 -->
+	<!-- skipped 0 -->
+	<!-- todo 0 -->
+	<!-- duration_ms 883.914417 -->
+</testsuites>

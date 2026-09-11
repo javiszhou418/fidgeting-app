@@ -1,0 +1,38 @@
+{
+  "schemaVersion": 1,
+  "gate": "05-blockout",
+  "revision": 12,
+  "blendSha256": "f587be803cf98e134f173e961fe4e096708f08916af51d971b0ef381d51c11a2",
+  "productMeshes": [
+    "BottomExterior",
+    "MovingTopBody"
+  ],
+  "technicalMeshes": [
+    "BallCandidateLeft",
+    "BallCandidateRight",
+    "CarrierFollowerLeft",
+    "CarrierFollowerRight",
+    "InternalAxisBoss",
+    "RotatingCarrierBody"
+  ],
+  "pivotObjects": [
+    "FixedAxis"
+  ],
+  "bottomTopPlaneDeviationMm": 0.0,
+  "animations": [],
+  "checks": {
+    "sceneIdentity": true,
+    "contractHash": true,
+    "exactTransformRecorded": true,
+    "singlePivot": true,
+    "fixedPivotParent": true,
+    "carrierOwnsNoTranslation": true,
+    "productWhitelist": true,
+    "internalTechnicalOnly": true,
+    "minimumDiskMetadataOnly": true,
+    "bottomPlane": true,
+    "noAnimations": true,
+    "clayOnly": true
+  },
+  "pass": true
+}

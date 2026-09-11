@@ -1,0 +1,365 @@
+{
+  "schemaVersion": 1,
+  "modelId": "premium-display-case",
+  "gate": "08-lighting",
+  "lightingRevision": 2,
+  "status": "pass",
+  "rawMetrics": {
+    "hero": {
+      "width": 1400,
+      "height": 1600,
+      "meanLuma": 31.365772,
+      "p01Luma": 8.5066,
+      "p99Luma": 160.584,
+      "highlightClipFraction": 0.0,
+      "blackClipFraction": 0.0
+    },
+    "leftOblique": {
+      "width": 1400,
+      "height": 1600,
+      "meanLuma": 31.7262,
+      "p01Luma": 3.8596,
+      "p99Luma": 160.584,
+      "highlightClipFraction": 0.0,
+      "blackClipFraction": 2.2321e-06
+    },
+    "rightOblique": {
+      "width": 1400,
+      "height": 1600,
+      "meanLuma": 31.535803,
+      "p01Luma": 8.5066,
+      "p99Luma": 160.584,
+      "highlightClipFraction": 0.0,
+      "blackClipFraction": 1.78571e-05
+    },
+    "low": {
+      "width": 1400,
+      "height": 1600,
+      "meanLuma": 31.960468,
+      "p01Luma": 5.7192,
+      "p99Luma": 159.868805,
+      "highlightClipFraction": 0.0,
+      "blackClipFraction": 0.0
+    },
+    "beauty": {
+      "width": 1400,
+      "height": 1600,
+      "meanLuma": 31.365772,
+      "p01Luma": 8.5066,
+      "p99Luma": 160.584,
+      "highlightClipFraction": 0.0,
+      "blackClipFraction": 0.0
+    },
+    "labelCloseup": {
+      "width": 1600,
+      "height": 1100,
+      "meanLuma": 69.509285,
+      "p01Luma": 11.3662,
+      "p99Luma": 161.584,
+      "highlightClipFraction": 0.0,
+      "blackClipFraction": 0.0
+    },
+    "tubeCorner": {
+      "width": 1500,
+      "height": 1200,
+      "meanLuma": 49.593143,
+      "p01Luma": 21.293999,
+      "p99Luma": 161.86879,
+      "highlightClipFraction": 0.0,
+      "blackClipFraction": 0.0
+    },
+    "blackPanel": {
+      "width": 1500,
+      "height": 1200,
+      "meanLuma": 25.386671,
+      "p01Luma": 14.366199,
+      "p99Luma": 100.741608,
+      "highlightClipFraction": 0.0,
+      "blackClipFraction": 0.0
+    }
+  },
+  "greenBiasMetrics": {
+    "hero": {
+      "selectedPixels": 2175836,
+      "meanGreenExcess": 0.99043566,
+      "p95AbsoluteGreenExcess": 2.5,
+      "greenExcessAbove8Fraction": 0.0
+    },
+    "leftOblique": {
+      "selectedPixels": 2032349,
+      "meanGreenExcess": 1.04086852,
+      "p95AbsoluteGreenExcess": 2.5,
+      "greenExcessAbove8Fraction": 0.0
+    },
+    "rightOblique": {
+      "selectedPixels": 2195390,
+      "meanGreenExcess": 0.98672903,
+      "p95AbsoluteGreenExcess": 2.5,
+      "greenExcessAbove8Fraction": 0.0
+    },
+    "low": {
+      "selectedPixels": 2161020,
+      "meanGreenExcess": 1.00093591,
+      "p95AbsoluteGreenExcess": 2.5,
+      "greenExcessAbove8Fraction": 0.0
+    },
+    "beauty": {
+      "selectedPixels": 2175836,
+      "meanGreenExcess": 0.99043566,
+      "p95AbsoluteGreenExcess": 2.5,
+      "greenExcessAbove8Fraction": 0.0
+    }
+  },
+  "labelMetrics": {
+    "cropPx": [
+      80,
+      132,
+      1520,
+      968
+    ],
+    "p10Luma": 20.2258,
+    "p90Luma": 159.584,
+    "p10P90Contrast": 139.3582,
+    "centerMeanLuma": 132.770111,
+    "borderMeanLuma": 30.376045,
+    "labelBackgroundMeanContrast": 102.394066,
+    "blackoutFraction": 0.0004477339
+  },
+  "blackPanelMetrics": {
+    "p05Luma": 16.4384,
+    "medianLuma": 21.153601,
+    "p95Luma": 41.872799,
+    "p05P95Range": 25.434399,
+    "crushedBelow4Fraction": 0.0
+  },
+  "tubeHighlightContinuity": {
+    "thresholdLuma": 50.0,
+    "brightFraction": 0.252,
+    "largestBrightComponent": {
+      "pixelCount": 14091,
+      "boundsPx": [
+        0,
+        106,
+        151,
+        239
+      ],
+      "widthFraction": 0.50666667,
+      "heightFraction": 0.55833333
+    },
+    "pass": true
+  },
+  "boundaryMetrics": {
+    "hero": {
+      "p99Gradient": 6.787399,
+      "gradientAbove8Fraction": 0.008040966,
+      "p05P95LumaRange": 138.936981
+    },
+    "leftOblique": {
+      "p99Gradient": 7.715199,
+      "gradientAbove8Fraction": 0.0093363162,
+      "p05P95LumaRange": 139.936981
+    },
+    "rightOblique": {
+      "p99Gradient": 7.574802,
+      "gradientAbove8Fraction": 0.0092555596,
+      "p05P95LumaRange": 136.293991
+    },
+    "low": {
+      "p99Gradient": 8.144398,
+      "gradientAbove8Fraction": 0.0103550181,
+      "p05P95LumaRange": 135.864807
+    }
+  },
+  "passMetrics": {
+    "clay": {
+      "selectedPixels": 601691,
+      "channelStd": [
+        21.327698,
+        21.327953,
+        21.335615
+      ],
+      "medianChannelChroma": 0.0,
+      "p05Luma": 59.0,
+      "p95Luma": 127.0,
+      "p05P95LumaRange": 68.0
+    },
+    "normal": {
+      "selectedPixels": 604768,
+      "channelStd": [
+        15.018363,
+        13.926105,
+        12.352354
+      ],
+      "medianChannelChroma": 25.0,
+      "p05Luma": 184.752808,
+      "p95Luma": 210.654984,
+      "p05P95LumaRange": 25.902176
+    },
+    "depth": {
+      "selectedPixels": 604568,
+      "channelStd": [
+        11.312799,
+        11.312779,
+        11.312805
+      ],
+      "medianChannelChroma": 0.0,
+      "p05Luma": 190.0,
+      "p95Luma": 212.0,
+      "p05P95LumaRange": 22.0
+    },
+    "roughness": {
+      "selectedPixels": 604039,
+      "channelStd": [
+        8.387758,
+        8.387714,
+        8.388857
+      ],
+      "medianChannelChroma": 0.0,
+      "p05Luma": 142.0,
+      "p95Luma": 155.0,
+      "p05P95LumaRange": 13.0
+    }
+  },
+  "viewDifferences": {
+    "leftVsRight": 8.095306,
+    "heroVsLow": 8.528748
+  },
+  "framing": {
+    "hero": {
+      "normalizedBounds": [
+        0.2224538,
+        0.16041361,
+        0.78567946,
+        0.82271969
+      ],
+      "minimumMargin": 0.16041361,
+      "notCropped": true,
+      "comfortableMargin": true
+    },
+    "left-oblique": {
+      "normalizedBounds": [
+        0.21815014,
+        0.15944456,
+        0.76434869,
+        0.82542229
+      ],
+      "minimumMargin": 0.15944456,
+      "notCropped": true,
+      "comfortableMargin": true
+    },
+    "right-oblique": {
+      "normalizedBounds": [
+        0.23565133,
+        0.15944456,
+        0.78190112,
+        0.82542229
+      ],
+      "minimumMargin": 0.15944456,
+      "notCropped": true,
+      "comfortableMargin": true
+    },
+    "low": {
+      "normalizedBounds": [
+        0.23047742,
+        0.20320985,
+        0.77727121,
+        0.85542792
+      ],
+      "minimumMargin": 0.14457208,
+      "notCropped": true,
+      "comfortableMargin": true
+    }
+  },
+  "artifacts": {
+    "lighting-review": {
+      "path": "unity/FidgetingApp/ArtSource/ModelPipeline/premium-display-case/evidence/08-lighting/rev-002/lighting-review.png",
+      "sha256": "a5b48a480ccf45f95fd7e278b2fcfa3cc3f30125bdfc83d31483970eee2091dc",
+      "sizeBytes": 4172193
+    },
+    "lighting-details": {
+      "path": "unity/FidgetingApp/ArtSource/ModelPipeline/premium-display-case/evidence/08-lighting/rev-002/lighting-details-contact-sheet.png",
+      "sha256": "ea4a05f030aa0248254ddd5f62e6d1fc5c0235c5cebd2186e1f6b7459d753d90",
+      "sizeBytes": 3039409
+    },
+    "lighting-passes": {
+      "path": "unity/FidgetingApp/ArtSource/ModelPipeline/premium-display-case/evidence/08-lighting/rev-002/lighting-passes-contact-sheet.png",
+      "sha256": "f153af3066d7eaaef4d01b6fbe5d664edcbb6aea545fd722b78110979e7ab1c5",
+      "sizeBytes": 3818588
+    },
+    "lighting-parameters": {
+      "path": "unity/FidgetingApp/ArtSource/ModelPipeline/premium-display-case/evidence/08-lighting/rev-002/lighting-parameters-board.png",
+      "sha256": "f7cf3aca2d54ebd94cb8452281ce52dc52d83dcc81c9970dcd9a057c789944ad",
+      "sizeBytes": 210646
+    },
+    "label-placeholder": {
+      "path": "unity/FidgetingApp/ArtSource/ModelPipeline/premium-display-case/evidence/08-lighting/rev-002/label-placeholder-review.png",
+      "sha256": "b58768f2fc7553da0b57828aef8b55b4e03e169db329f684e5e3318c43b4895c",
+      "sizeBytes": 1118974
+    },
+    "mesh-clipped-sheen": {
+      "path": "unity/FidgetingApp/ArtSource/ModelPipeline/premium-display-case/evidence/08-lighting/rev-002/mesh-clipped-sheen-compatibility.png",
+      "sha256": "f29214d21e08fc56667518a400d2839650114bf7f54d950d51494fbe731c88d3",
+      "sizeBytes": 432092
+    },
+    "lighting-turntable": {
+      "path": "unity/FidgetingApp/ArtSource/ModelPipeline/premium-display-case/evidence/08-lighting/rev-002/lighting-turntable.mp4",
+      "sha256": "7b099cc0de6743fff8e98dea3cb14407687c93ebab7d9bcea1587bf7b05cd195",
+      "sizeBytes": 99105
+    },
+    "lighting-turntable-contact": {
+      "path": "unity/FidgetingApp/ArtSource/ModelPipeline/premium-display-case/evidence/08-lighting/rev-002/lighting-turntable-contact-sheet.png",
+      "sha256": "8ee2d3975acc5a4a3407e5f73d7c470a16753ff5bef53f39103a0d581f2da588",
+      "sizeBytes": 1038345
+    }
+  },
+  "checks": {
+    "builderPassed": true,
+    "requiredViewsAndPassesPresent": true,
+    "reviewBoardsPresent": true,
+    "highlightClippingBelowHalfPercent": true,
+    "labelBackgroundContrast": true,
+    "darkSubjectBoundariesVisible": true,
+    "blackFlockingNotCrushed": true,
+    "greenBiasControlled": true,
+    "tubeCornerHighlightContinuous": true,
+    "mainViewsUncropped": true,
+    "distinctAuthoredViews": true,
+    "clayPassValid": true,
+    "normalPassValid": true,
+    "depthPassValid": true,
+    "roughnessPassValid": true,
+    "geometryAndMaterialDigestsUnchanged": true,
+    "grainStableAtFiveAngles": true,
+    "transparentOrderingPreflight": true,
+    "wholeCaseOnlyNoExplode": true,
+    "gate08ReadyNotApproved": true,
+    "gate09NotEntered": true,
+    "shippingUnityUnchanged": true,
+    "noBuildInstallPhonePush": true,
+    "requiredHeroLeftRightLowPresent": true,
+    "requiredBeautyClayNormalDepthRoughnessPresent": true,
+    "whitesNotClipped": true,
+    "blackInsertNotCrushed": true,
+    "placeholderLabelMarkedNotApproved": true,
+    "meshClippedSheenOutsideSubjectZero": true,
+    "meshClippedSheenOutsideAllowedZonesZero": true,
+    "noExternalHaloBloomParticlesOrPersistentEmission": true,
+    "lookdevValuesRemainCandidates": true,
+    "runtimeTimingAndEasingNotBaked": true,
+    "realLightingTurntablePassed": true
+  },
+  "notice": "GATE 08 REV 2 LIGHTING · READY FOR REVIEW · NOT APPROVED",
+  "labelPolicy": {
+    "visibleMarker": "placeholder-not-approved",
+    "authoritativeRuntimeOwner": "Unity",
+    "approvalQuote": "材质与扫光批准，标签文字后续由 Unity 替换为真实数据",
+    "reviewArtifact": "unity/FidgetingApp/ArtSource/ModelPipeline/premium-display-case/evidence/08-lighting/rev-002/label-placeholder-review.png"
+  },
+  "sheenCompatibility": {
+    "outsideSubjectPixels": 0,
+    "outsideAllowedMaterialZonePixels": 0,
+    "classification": "material-runtime compatibility frame",
+    "externalLightSpill": false,
+    "reviewArtifact": "unity/FidgetingApp/ArtSource/ModelPipeline/premium-display-case/evidence/08-lighting/rev-002/mesh-clipped-sheen-compatibility.png"
+  }
+}

@@ -1,0 +1,131 @@
+{
+  "schemaVersion": 1,
+  "modelId": "premium-display-case",
+  "gate": "05-blockout",
+  "blockoutRevision": 3,
+  "sourceBlockoutRevision": 2,
+  "sourceGate04EvidenceRevision": 7,
+  "status": "pass",
+  "compatibilityConclusion": "geometry-unchanged-metadata-rebound-to-unity-runtime",
+  "source": {
+    "blend": "unity/FidgetingApp/ArtSource/ModelPipeline/premium-display-case/evidence/05-blockout/rev-002/premium-display-case-blockout.blend",
+    "sha256": "3f0411e43900e9ff67a8f52ee4af9d630147acb46251985baf8b2a1a06936e31",
+    "geometryDigest": "6656ebb6f9003092d2d771a774ec006683347e01c4f12d0c994cc66fc603877f"
+  },
+  "output": {
+    "blend": "unity/FidgetingApp/ArtSource/ModelPipeline/premium-display-case/evidence/05-blockout/rev-003/premium-display-case-blockout-r003.blend",
+    "sha256": "ed6d54899f53451634685e59d975c7ab16a9fbdfe5b94053a8d115f7d3a31c76",
+    "geometryDigest": "6656ebb6f9003092d2d771a774ec006683347e01c4f12d0c994cc66fc603877f"
+  },
+  "dimensionsMm": {
+    "width": 228.0,
+    "height": 304.0,
+    "depth": 59.0
+  },
+  "portraitWidthHeightRatio": 0.75,
+  "labelCenterYmm": 99.0,
+  "maximumCornerCenterDriftMm": 0.0,
+  "closedTube": {
+    "object": "ContinuousTubePerimeter",
+    "connectedMaterialBodyCount": 1,
+    "openBoundaryEdgeCount": 0,
+    "nonManifoldEdgeCount": 0,
+    "channelSamplesVisited": 384,
+    "channelSampleCount": 384
+  },
+  "subjectTopology": {
+    "openBoundaryEdgeCount": 0,
+    "nonManifoldEdgeCount": 0
+  },
+  "hierarchy": {
+    "PresentationRoot": null,
+    "CaseAssembly": "PresentationRoot",
+    "RearPolycarbonateShell": "CaseAssembly",
+    "TactileBackgroundInsert": "RearPolycarbonateShell",
+    "ContentSlot": "RearPolycarbonateShell",
+    "FrontPolycarbonateShell": "CaseAssembly",
+    "ContinuousTubePerimeter": "FrontPolycarbonateShell",
+    "PhysicalLabel": "FrontPolycarbonateShell",
+    "LogoZone": "PhysicalLabel",
+    "AchievementZone": "PhysicalLabel",
+    "NarrowFoil": "PhysicalLabel",
+    "TransparentCover": "FrontPolycarbonateShell"
+  },
+  "pivot": {
+    "object": "PresentationRoot",
+    "locationMm": [
+      0.0,
+      0.0,
+      0.0
+    ],
+    "rotationEulerRadians": [
+      0.0,
+      0.0,
+      0.0
+    ],
+    "scale": [
+      1.0,
+      1.0,
+      1.0
+    ]
+  },
+  "contentSlot": {
+    "objectType": "EMPTY",
+    "parent": "RearPolycarbonateShell",
+    "childCount": 0,
+    "callerOwned": true
+  },
+  "ownership": {
+    "Blender": [
+      "geometry",
+      "pivot",
+      "UV",
+      "material zones"
+    ],
+    "Unity": [
+      "runtime timing",
+      "easing",
+      "entry Z travel",
+      "local-Y rotation",
+      "mesh-clipped light"
+    ]
+  },
+  "bakedRuntimeAnimation": false,
+  "forbiddenGeometry": {
+    "halo": false,
+    "vfx": false,
+    "particle": false,
+    "proxy": false,
+    "explode": false,
+    "toy": false
+  },
+  "removedStaleRuntimeProperties": [
+    "motion_owner",
+    "locked_total_duration_seconds"
+  ],
+  "checks": {
+    "sourceBlendHashMatches": true,
+    "sourceValidationPassed": true,
+    "boundsUnchanged": true,
+    "portraitRatioUnchanged": true,
+    "labelCenterYUnchanged": true,
+    "concentricCentersUnchanged": true,
+    "singleClosedTube": true,
+    "tubeManifold": true,
+    "channelFloodFillComplete": true,
+    "allSubjectSurfacesManifold": true,
+    "hierarchyUnchanged": true,
+    "contentSlotPreservedEmpty": true,
+    "presentationPivotPreserved": true,
+    "geometryDigestUnchanged": true,
+    "noBakedRuntimeAnimation": true,
+    "noHaloVfxProxyGeometry": true,
+    "noToyGeometry": true,
+    "staleRuntimeMetadataRemoved": true,
+    "blenderOwnershipBounded": true,
+    "geometryDigestAfterSaveUnchanged": true
+  },
+  "shippingUnityChanged": false,
+  "buildInstallPhonePush": false,
+  "gate06Status": "blocked"
+}

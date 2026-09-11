@@ -1,0 +1,18 @@
+{
+  "schemaVersion": 1,
+  "modelId": "magnetic-slide-tile",
+  "gate": "03-contract",
+  "baseRevision": 11,
+  "amendment": "endpoint-rotation-interlock",
+  "mechanismEvidenceContractAssetId": "slider-analysis-mechanism-evidence-contract-r017",
+  "mechanismEvidenceContractSha256": "9cd7a08f34d7d8dfc3c6f89f6c80a5c5c2dcae48bc0d5c54ebf455a0727ea571",
+  "dimensionsChanged": false,
+  "geometryChanged": false,
+  "stateMachine": {
+    "belowMaximum": "0 <= s < sMax requires theta=0",
+    "endpoint": "s=sMax unlocks 0-360 degrees",
+    "rotated": "theta mod 360 != 0 locks s=sMax",
+    "aligned": "theta=0/360 permits return slide"
+  },
+  "exactUserWording": "上片只有在推到顶部的时候，才可以进行360度旋转"
+}

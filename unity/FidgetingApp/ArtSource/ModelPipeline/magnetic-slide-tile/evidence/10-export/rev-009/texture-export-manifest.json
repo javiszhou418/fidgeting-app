@@ -1,0 +1,168 @@
+{
+  "schemaVersion": 1,
+  "gate": "10-export",
+  "revision": 9,
+  "pass": true,
+  "textures": {
+    "upperBaseColor": {
+      "path": "package/textures/upperBaseColor.png",
+      "sha256": "c0e9305d475cd2c591efc8a833a0aafb1aef4ccc437d84a3417674e6d1b453a5",
+      "bytes": 207914,
+      "resolutionPx": [
+        620,
+        1000
+      ]
+    },
+    "upperRoughness": {
+      "path": "package/textures/upperRoughness.png",
+      "sha256": "854f1dbc393585ff9b88f808c1a46a35b091088ac8b83894763f502876e3df6a",
+      "bytes": 80494,
+      "resolutionPx": [
+        620,
+        1000
+      ]
+    },
+    "lowerBaseColor": {
+      "path": "package/textures/lowerBaseColor.png",
+      "sha256": "968c1e87ca2d5ea7c8fc57106e42bcd09dc95395fac7dd3be569e580ea8850eb",
+      "bytes": 195875,
+      "resolutionPx": [
+        620,
+        1000
+      ]
+    },
+    "lowerRoughness": {
+      "path": "package/textures/lowerRoughness.png",
+      "sha256": "ca2697560a2e57685a71c423f15f70a72ebb47c93c53cae0e3a8dae0b3248245",
+      "bytes": 72142,
+      "resolutionPx": [
+        620,
+        1000
+      ]
+    },
+    "upperArtworkMask": {
+      "path": "package/textures/upperArtworkMask.png",
+      "sha256": "8250df70d2286849db353862283b0d3db9c66e1ac92bed3795bcb5377a431c36",
+      "bytes": 20641,
+      "resolutionPx": [
+        620,
+        1000
+      ]
+    },
+    "lowerArtworkMask": {
+      "path": "package/textures/lowerArtworkMask.png",
+      "sha256": "7bf5921f469a217b850ff2ea94dc5ae6c251091b8de60bd81c1b88ec42dfa7c2",
+      "bytes": 22609,
+      "resolutionPx": [
+        620,
+        1000
+      ]
+    },
+    "perimeterMask": {
+      "path": "package/textures/perimeterMask.png",
+      "sha256": "2179bf26210994c8b3d279337bf6ad0f4beaee3c7285ae97d1cd888db2bd64fc",
+      "bytes": 5632,
+      "resolutionPx": [
+        620,
+        1000
+      ]
+    }
+  },
+  "channelPacks": {
+    "upper": {
+      "maskMap": {
+        "path": "package/textures/upper-maskmap-r009.png",
+        "sha256": "b1a53ac88c20a7a90ee221264a5037e39f0c4b5ad5fbafbb421601f5b5ea7a82",
+        "channels": {
+          "R": "metallic",
+          "G": "ambient-occlusion",
+          "B": "crystal-detail",
+          "A": "smoothness"
+        }
+      },
+      "normal": {
+        "path": "package/textures/upper-normal-r009.png",
+        "sha256": "360efc6e7fbc400687f43b269857eb49b4ae9c0d776fd38756daceccebe37c5d",
+        "basis": "tangent-space transport approximation; source procedural detail remains the parity authority"
+      },
+      "resolutionPx": [
+        620,
+        1000
+      ]
+    },
+    "lower": {
+      "maskMap": {
+        "path": "package/textures/lower-maskmap-r009.png",
+        "sha256": "921f640f023050e174cf058ca05ebb391447931ebecd0a1b2264bc74ea00f66b",
+        "channels": {
+          "R": "metallic",
+          "G": "ambient-occlusion",
+          "B": "crystal-detail",
+          "A": "smoothness"
+        }
+      },
+      "normal": {
+        "path": "package/textures/lower-normal-r009.png",
+        "sha256": "1a412036ead25fb603b4677423f628395af0524372468111a210bacb0b5d288e",
+        "basis": "tangent-space transport approximation; source procedural detail remains the parity authority"
+      },
+      "resolutionPx": [
+        620,
+        1000
+      ]
+    }
+  },
+  "environment": {
+    "exr": {
+      "path": "package/environment/magnetic-slide-tile-shipping-studio-r008.exr",
+      "sha256": "7f1c9fded84c453efbc5300a6a71fe2948534055d3f4ae5052696909f30be6ab",
+      "bytes": 77085
+    },
+    "preview": {
+      "path": "package/environment/magnetic-slide-tile-shipping-studio-r008-preview.png",
+      "sha256": "168af1ce0e72966237f8e21ddc0c14e8f8a4a7f719e43ca0406cfc7a9ac67b6d",
+      "bytes": 581514
+    },
+    "metadata": {
+      "path": "package/environment/portable-hdri-metadata.json",
+      "sha256": "bca3abcb5f8f7d46a8a1e0274f76a8faa291ec4ee700469c8976a4cc95d926cb",
+      "bytes": 885
+    }
+  },
+  "rules": {
+    "baseColor": {
+      "sRGB": true,
+      "wrap": "clamp",
+      "filter": "trilinear",
+      "mipmaps": true
+    },
+    "maskMapAndNormal": {
+      "sRGB": false,
+      "wrap": "clamp",
+      "filter": "trilinear",
+      "mipmaps": true
+    },
+    "artworkMasks": {
+      "sRGB": false,
+      "wrap": "clamp",
+      "filter": "bilinear",
+      "mipmaps": true,
+      "independentUpperLower": true
+    },
+    "npot": {
+      "sourceResolutionPx": [
+        620,
+        1000
+      ],
+      "policy": "None / preserve dimensions",
+      "forbidden": "Do not rescale to 512x1024 or stretch aspect ratio.",
+      "unityImportApplied": false
+    },
+    "astc": {
+      "baseColorCandidate": "ASTC 6x6 after Gate 11 visual comparison",
+      "maskNormalCandidate": "ASTC 4x4 after Gate 11 channel-error comparison",
+      "sourceForParity": "lossless PNG",
+      "applied": false
+    }
+  }
+}

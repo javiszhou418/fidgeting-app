@@ -1,0 +1,130 @@
+{
+  "schemaVersion": 1,
+  "gate": "09-environment",
+  "revision": 8,
+  "pass": true,
+  "completedAt": "2026-08-27T13:26:38.983Z",
+  "checks": [
+    {
+      "command": "npm --prefix tools/model-provenance-explorer test",
+      "pass": true,
+      "stdout": "8.224ms)\n✔ starts and resets with zero velocities and no self-motion (2.57875ms)\n✔ uses frame-rate-independent half-life damping (0.106583ms)\n✔ holds angular motion below breakaway while slide remains available (0.177208ms)\n✔ supports simultaneous slide and rotation above breakaway (0.099792ms)\n✔ preserves finite grooves and minimum-overlap containment at stops (0.112708ms)\n✔ captures the nearest 12-degree detent at low speed (3.415708ms)\n✔ records deterministic parameter snapshots and audio toggles (0.871125ms)\n✔ rejects contract hash drift (0.214333ms)\n✔ maps exactly 30 detents at 12 degrees (0.983334ms)\n✔ loads authoritative mechanism values and rejects duplicate drift (0.389ms)\n✔ starts and resets with no self-spin (0.708666ms)\n✔ uses frame-rate-independent half-life damping (0.096333ms)\n✔ holds below breakaway and captures a detent (0.141708ms)\n✔ slides only outward from closed and reverses to close (0.116083ms)\n✔ supports soft stops and hard maximum clamp (0.088166ms)\n✔ wraps angles in both directions (0.061375ms)\n✔ applies parameter changes and restores contract-derived configuration (0.087375ms)\n✔ keeps the upper plate transform fixed (0.084708ms)\n✔ moves the lower carrier and axis together (0.068625ms)\n✔ keeps one endpoint axis fixed to the lower carrier (0.072ms)\n✔ rotates the lower carrier around its translated axis without inventing rail geometry (0.041875ms)\n✔ keeps the evidence-backed bilateral rail ownership without guessed positions (0.036167ms)\n✔ keeps detent review poses separate from normalized slide (0.158792ms)\n✔ updates slide and rotation in one compound pointer step (0.084959ms)\n✔ supports compound motion at partial and maximum slide (0.059042ms)\n✔ reverses rotation while closing (0.047625ms)\n✔ captures angular detent while slide remains active (0.059167ms)\n✔ reset zeros both compound velocities (0.055292ms)\n✔ tracked shipping models load and derive current readiness (35.088667ms)\n✔ Premium Display Case records Gate 12 canonical App approval (20.278917ms)\n✔ Premium Display Case motion rejection restarts at Gate 02 (47.538083ms)\n✔ magnetic slider advances approved lighting into Gate 09 (23.718167ms)\n✔ CAD evidence does not create a pre-Blender Simulator requirement (48.57475ms)\n✔ backfill exposes honest first-stage gaps (0.896125ms)\n✔ assistant-generated targets remain distinguishable from user originals (0.227875ms)\n✔ repository path whitelist blocks traversal (0.242667ms)\n✔ digests are stable regardless of input ordering (0.077ms)\n✔ exact-product references invalidate downstream work and produce a source-linked analysis revision (4.176708ms)\n✔ asset refresh preserves a genuinely missing intake stage (1.613166ms)\n✔ modeling contract must consume every approved analysis claim (0.981167ms)\n✔ modeling contract saves immutable drafts and becomes reviewable only when complete (6.885916ms)\n✔ architecture plan consumes an approved contract and registers a reviewable visual pair (3.120416ms)\n✔ approval gates enforce hashes, prerequisites, revisions and stale propagation (3.69475ms)\n✔ Premium Display Case preserves direction across explode and speed-only rejections (42.311ms)\n✔ keeps exactly 12 gates mapped once into three user phases (0.992333ms)\n✔ removes standalone Simulator as an active pre-Blender requirement (0.588708ms)\n✔ consumes approved geometry before opening material review (0.103042ms)\n✔ active Gate 03 contract labels anthropometric estimates and blockers (0.209625ms)\n✔ records the latest workflow decision in the design bible and history (0.621875ms)\n✔ keeps the fixed seven-tab information architecture (0.748792ms)\n✔ prefers deep links, then memory, then the current task (0.174125ms)\n✔ never redirects an explicit historical selection to the earliest problem (0.445959ms)\n✔ labels current, approved, stale and rejected tabs (0.19275ms)\n✔ round-trips direct model, tab, gate and asset routes (0.240125ms)\nℹ tests 152\nℹ suites 0\nℹ pass 152\nℹ fail 0\nℹ cancelled 0\nℹ skipped 0\nℹ todo 0\nℹ duration_ms 365.099292"
+    },
+    {
+      "command": "node skills/fidgeting-model-pipeline/scripts/validate_model_pipeline.mjs magnetic-slide-tile",
+      "pass": true,
+      "stdout": "{\n  \"modelId\": \"magnetic-slide-tile\",\n  \"revision\": 190,\n  \"shippingReady\": false,\n  \"approved\": \"8/12\",\n  \"earliestProblem\": {\n    \"stageId\": \"09-environment\",\n    \"title\": \"环境合成\",\n    \"status\": \"ready_for_review\",\n    \"reasons\": [\n      \"等待用户审批。\"\n    ]\n  },\n  \"errors\": [],\n  \"missingFiles\": [],\n  \"unhashed\": []\n}"
+    },
+    {
+      "command": "node tools/model-provenance-explorer/validate-pipelines.mjs",
+      "pass": true,
+      "stdout": "{\n  \"refresh\": false,\n  \"models\": [\n    {\n      \"modelId\": \"blue-classic\",\n      \"revision\": 10,\n      \"approved\": \"0/12\",\n      \"earliestProblem\": {\n        \"stageId\": \"01-intake\",\n        \"title\": \"原始参考归档\",\n        \"status\": \"missing\",\n        \"reasons\": [\n          \"缺少必需素材：original-reference。\"\n        ]\n      },\n      \"errors\": [],\n      \"missingFiles\": [],\n      \"unhashed\": []\n    },\n    {\n      \"modelId\": \"gold-four-wing\",\n      \"revision\": 10,\n      \"approved\": \"0/12\",\n      \"earliestProblem\": {\n        \"stageId\": \"01-intake\",\n        \"title\": \"原始参考归档\",\n        \"status\": \"missing\",\n        \"reasons\": [\n          \"缺少必需素材：original-reference。\"\n        ]\n      },\n      \"errors\": [],\n      \"missingFiles\": [],\n      \"unhashed\": []\n    },\n    {\n      \"modelId\": \"graphite-two-lobe\",\n      \"revision\": 12,\n      \"approved\": \"0/12\",\n      \"earliestProblem\": {\n        \"stageId\": \"01-intake\",\n        \"title\": \"原始参考归档\",\n        \"status\": \"missing\",\n        \"reasons\": [\n          \"缺少必需素材：original-reference。\",\n          \"仍有 1 项验证未通过。\"\n        ]\n      },\n      \"errors\": [],\n      \"missingFiles\": [],\n      \"unhashed\": []\n    },\n    {\n      \"modelId\": \"magnetic-fan-card\",\n      \"revision\": 137,\n      \"approved\": \"11/12\",\n      \"earliestProblem\": {\n        \"stageId\": \"12-shipping\",\n        \"title\": \"真实 Shipping / 手机构图\",\n        \"status\": \"stale\",\n        \"reasons\": [\n          \"仍有 1 项验证未通过。\",\n          \"该阶段因上游变化已经过期。\"\n        ]\n      },\n      \"errors\": [],\n      \"missingFiles\": [],\n      \"unhashed\": []\n    },\n    {\n      \"modelId\": \"magnetic-slide-tile\",\n      \"revision\": 190,\n      \"approved\": \"8/12\",\n      \"earliestProblem\": {\n        \"stageId\": \"09-environment\",\n        \"title\": \"环境合成\",\n        \"status\": \"ready_for_review\",\n        \"reasons\": [\n          \"等待用户审批。\"\n        ]\n      },\n      \"errors\": [],\n      \"missingFiles\": [],\n      \"unhashed\": []\n    },\n    {\n      \"modelId\": \"metal-three-blade\",\n      \"revision\": 11,\n      \"approved\": \"0/12\",\n      \"earliestProblem\": {\n        \"stageId\": \"01-intake\",\n        \"title\": \"原始参考归档\",\n        \"status\": \"draft\",\n        \"reasons\": [\n          \"等待用户审批。\"\n        ]\n      },\n      \"errors\": [],\n      \"missingFiles\": [],\n      \"unhashed\": []\n    },\n    {\n      \"modelId\": \"premium-display-case\",\n      \"revision\": 73,\n      \"approved\": \"12/12\",\n      \"earliestProblem\": null,\n      \"errors\": [],\n      \"missingFiles\": [],\n      \"unhashed\": []\n    }\n  ]\n}"
+    },
+    {
+      "command": "python3 -m py_compile /Users/jiawei.zhou/Documents/Fidgeting app/unity/FidgetingApp/ArtSource/ModelPipeline/magnetic-slide-tile/evidence/09-environment/rev-008/build_gate09_environment.py /Users/jiawei.zhou/Documents/Fidgeting app/unity/FidgetingApp/ArtSource/ModelPipeline/magnetic-slide-tile/evidence/09-environment/rev-008/extract_portable_textures.py /Users/jiawei.zhou/Documents/Fidgeting app/unity/FidgetingApp/ArtSource/ModelPipeline/magnetic-slide-tile/evidence/09-environment/rev-008/build_unity_portability_contract.py /Users/jiawei.zhou/Documents/Fidgeting app/unity/FidgetingApp/ArtSource/ModelPipeline/magnetic-slide-tile/evidence/09-environment/rev-008/assemble_and_audit_gate09.py /Users/jiawei.zhou/Documents/Fidgeting app/unity/FidgetingApp/ArtSource/ModelPipeline/magnetic-slide-tile/evidence/09-environment/rev-008/audit_gate09_blender.py",
+      "pass": true,
+      "stdout": ""
+    },
+    {
+      "command": "node --check tools/model-provenance-explorer/app.js",
+      "pass": true,
+      "stdout": ""
+    },
+    {
+      "command": "node --check unity/FidgetingApp/ArtSource/ModelPipeline/magnetic-slide-tile/evidence/09-environment/rev-008/prepare_gate09.mjs",
+      "pass": true,
+      "stdout": ""
+    },
+    {
+      "command": "node --check unity/FidgetingApp/ArtSource/ModelPipeline/magnetic-slide-tile/evidence/09-environment/rev-008/register_gate09_review.mjs",
+      "pass": true,
+      "stdout": ""
+    },
+    {
+      "command": "node --check unity/FidgetingApp/ArtSource/ModelPipeline/magnetic-slide-tile/evidence/09-environment/rev-008/register_browser_evidence.mjs",
+      "pass": true,
+      "stdout": ""
+    },
+    {
+      "command": "node --check unity/FidgetingApp/ArtSource/ModelPipeline/magnetic-slide-tile/evidence/09-environment/rev-008/run_and_register_final_validation.mjs",
+      "pass": true,
+      "stdout": ""
+    },
+    {
+      "command": "ffprobe -v error -show_entries format=duration:stream=codec_name,width,height,pix_fmt,nb_frames -of json /Users/jiawei.zhou/Documents/Fidgeting app/unity/FidgetingApp/ArtSource/ModelPipeline/magnetic-slide-tile/evidence/09-environment/rev-008/magnetic-slide-tile-environment-comparison-r008.mp4",
+      "pass": true,
+      "stdout": "{\n    \"programs\": [\n\n    ],\n    \"stream_groups\": [\n\n    ],\n    \"streams\": [\n        {\n            \"codec_name\": \"h264\",\n            \"width\": 1440,\n            \"height\": 590,\n            \"pix_fmt\": \"yuv420p\",\n            \"nb_frames\": \"24\"\n        }\n    ],\n    \"format\": {\n        \"duration\": \"3.000000\"\n    }\n}"
+    },
+    {
+      "command": "xmllint --noout unity/FidgetingApp/ArtSource/ModelPipeline/magnetic-slide-tile/evidence/11-unity-parity/rev-001/editmode-results.xml unity/FidgetingApp/ArtSource/ModelPipeline/magnetic-slide-tile/evidence/11-unity-parity/rev-002/editmode-results.xml unity/FidgetingApp/ArtSource/ModelPipeline/magnetic-slide-tile/evidence/11-unity-parity/rev-003/editmode-results.xml unity/FidgetingApp/ArtSource/ModelPipeline/magnetic-slide-tile/evidence/12-shipping/rev-001/editmode-results.xml unity/FidgetingApp/ArtSource/ModelPipeline/magnetic-slide-tile/evidence/12-shipping/rev-001/playmode-results.xml",
+      "pass": true,
+      "stdout": ""
+    },
+    {
+      "command": "git diff --check -- tools/model-provenance-explorer/app.js tools/model-provenance-explorer/tests unity/FidgetingApp/Docs/FidgetingAppProductDesignBible.md unity/FidgetingApp/Docs/IMPLEMENTATION_STATUS.md unity/FidgetingApp/ArtSource/ModelPipeline/magnetic-slide-tile/pipeline.json unity/FidgetingApp/ArtSource/ModelPipeline/magnetic-slide-tile/history.ndjson",
+      "pass": true,
+      "stdout": ""
+    }
+  ],
+  "reports": {
+    "environment-validation.json": {
+      "pass": true,
+      "sha256": "b3f9397bb6b048457be2f1c7161019a7d61d5745a95ab995491067ce02971cef"
+    },
+    "image-environment-audit.json": {
+      "pass": true,
+      "sha256": "da930e0bc7b443f905872aba0c92e7649a343968d34f365e051eed40cdfcbf8a"
+    },
+    "blender-environment-audit.json": {
+      "pass": true,
+      "sha256": "f8acd5e90fb2b411912bc9c5aa4200e2c25c52a93319af234dd75416f94e1bbd"
+    },
+    "portable-texture-extraction.json": {
+      "pass": true,
+      "sha256": "ff59d45c20cc3e7f6ee90260c960e5f718edf9cbe516c16a9b3d9efc663e82a3"
+    },
+    "portability-validation.json": {
+      "pass": true,
+      "sha256": "38d52e930829ffa5bb694084da9e128712bb84c83b5057feda80bf62d80cc0d8"
+    },
+    "browser-workspace-validation.json": {
+      "pass": true,
+      "sha256": "e138a31c2f4bc017d972f1e93a9732d263477a3c3beb6fb2a7208d8203d86426"
+    }
+  },
+  "nodeTests": {
+    "passed": 152,
+    "failed": 0
+  },
+  "browser": {
+    "desktopWidthPx": 1440,
+    "mobileWidthPx": 390,
+    "environmentModes": [
+      "neutral",
+      "shipping"
+    ],
+    "modalClose": true,
+    "recordingPlayback": true,
+    "runtimeExceptionCount": 0,
+    "loadingFailureCount": 0
+  },
+  "recording": {
+    "codec": "h264",
+    "dimensionsPx": [
+      1440,
+      590
+    ],
+    "pixelFormat": "yuv420p",
+    "frames": 24,
+    "durationSeconds": 3,
+    "sha256": "bfc2e659b558c8b3039804098c61407a3b97d5b248ea91110196238489b899af"
+  },
+  "scope": {
+    "simulator": false,
+    "unityImportSettings": false,
+    "build": false,
+    "install": false,
+    "iphoneRun": false,
+    "oldShippingModelDefault": true
+  }
+}

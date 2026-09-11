@@ -1,0 +1,20 @@
+{
+  "schema": "premium-display-case-gate04-r011-self-rejection.v1",
+  "iteration": 6,
+  "status": "visual-self-rejected-before-registration",
+  "registeredForApproval": false,
+  "source": "actual Unity 6000.5.6f1 PlayMode frames at 1206x2622 and 60 fps",
+  "reasons": [
+    "Aperture binding removed the viewport-wide streaks.",
+    "The 512 lightning sparks now read as bright square confetti around the opening.",
+    "The source flare color sequence and same-case handoff remained continuous."
+  ],
+  "corrections": [
+    "Use the exact source atlas horizontal-flare tile for sparks.",
+    "Render sparks as low-alpha stretched Shuriken billboards rather than square points.",
+    "Keep the exact SG_LightingStrike graph on the 25 bounded trail particles."
+  ],
+  "shippingRuntimeWired": false,
+  "shippingReady": false,
+  "physicalPhoneInstalled": false
+}

@@ -1,0 +1,36 @@
+{
+  "schemaVersion": 1,
+  "modelId": "magnetic-slide-tile",
+  "gate": "07-material",
+  "revision": 13,
+  "outputs": {
+    "gate07-r013-material-review-board.png": {
+      "sha256": "e9a6073b23fba34a7b9a1a632bfc79d1c3f262c44033134e2fbccc93e927ce40",
+      "sizePx": [
+        2280,
+        1124
+      ]
+    },
+    "gate07-r013-top-side-rim-closeups.png": {
+      "sha256": "a7f2dd69197a5051fceedcc52891d1324129d67e3da53cfb4982c41f9a0317c3",
+      "sizePx": [
+        2280,
+        604
+      ]
+    },
+    "gate07-r013-rejection-correction.png": {
+      "sha256": "bca716af7cb89064337f49c60b45daf066052f7cb6d65de78e5feabafbb92f70",
+      "sizePx": [
+        1800,
+        720
+      ]
+    }
+  },
+  "checks": {
+    "rejectionArchived": true,
+    "reviewBoard": true,
+    "topSideRimCloseups": true,
+    "beforeAfterComparison": true
+  },
+  "pass": true
+}

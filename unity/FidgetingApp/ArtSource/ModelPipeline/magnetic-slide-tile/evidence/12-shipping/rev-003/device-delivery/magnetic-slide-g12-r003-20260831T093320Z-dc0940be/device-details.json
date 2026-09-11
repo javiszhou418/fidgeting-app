@@ -1,0 +1,148 @@
+{
+  "info" : {
+    "arguments" : [
+      "devicectl",
+      "device",
+      "info",
+      "details",
+      "--device",
+      "556E86BF-7295-5622-AA58-02DF84A8E93F",
+      "--timeout",
+      "30",
+      "--json-output",
+      "/Users/jiawei.zhou/Documents/Fidgeting app/unity/FidgetingApp/ArtSource/ModelPipeline/magnetic-slide-tile/evidence/12-shipping/rev-003/device-delivery/magnetic-slide-g12-r003-20260831T093320Z-dc0940be/device-details.json"
+    ],
+    "commandType" : "devicectl.device.info.details",
+    "environment" : {
+      "TERM" : "dumb"
+    },
+    "jsonVersion" : 3,
+    "outcome" : "success",
+    "version" : "518.27"
+  },
+  "result" : {
+    "capabilities" : [
+      {
+        "featureIdentifier" : "com.apple.coredevice.feature.acquireusageassertion",
+        "name" : "Acquire Usage Assertion"
+      },
+      {
+        "featureIdentifier" : "com.apple.dt.serviceconnection.create",
+        "name" : "Create Service Connection"
+      },
+      {
+        "featureIdentifier" : "com.apple.dt.servicesocket.create",
+        "name" : "Create Service Socket"
+      },
+      {
+        "featureIdentifier" : "com.apple.coredevice.feature.disconnectdevice",
+        "name" : "Disconnect from Device"
+      },
+      {
+        "featureIdentifier" : "com.apple.coredevice.feature.enableddiservices",
+        "name" : "Enable Developer Disk Image Services"
+      },
+      {
+        "featureIdentifier" : "com.apple.coredevice.feature.getlockstate",
+        "name" : "Get Lock State"
+      },
+      {
+        "featureIdentifier" : "com.apple.coredevice.feature.tags",
+        "name" : "Modify Tags"
+      },
+      {
+        "featureIdentifier" : "com.apple.coredevice.feature.default.user.credentials",
+        "name" : "Modify credentials for default users for a device"
+      },
+      {
+        "featureIdentifier" : "com.apple.dt.customer.postdarwinnotification",
+        "name" : "Post Darwin Notification"
+      },
+      {
+        "featureIdentifier" : "com.apple.dt.profile",
+        "name" : "Service Hub Profile"
+      },
+      {
+        "featureIdentifier" : "com.apple.coredevice.feature.unpairdevice",
+        "name" : "Unpair Device"
+      },
+      {
+        "featureIdentifier" : "com.apple.coredevice.feature.viewdevicescreen",
+        "name" : "View Device Screen"
+      }
+    ],
+    "connectionProperties" : {
+      "authenticationType" : "manualPairing",
+      "isMobileDeviceOnly" : false,
+      "lastConnectionDate" : "2026-08-31T09:33:00.000Z",
+      "localHostnames" : [
+        "JW.coredevice.local",
+        "556E86BF-7295-5622-AA58-02DF84A8E93F.coredevice.local",
+        "00008130-001A00361EE0001C.coredevice.local"
+      ],
+      "pairingState" : "paired",
+      "potentialHostnames" : [
+        "JW.coredevice.local",
+        "556E86BF-7295-5622-AA58-02DF84A8E93F.coredevice.local",
+        "00008130-001A00361EE0001C.coredevice.local"
+      ],
+      "transportType" : "localNetwork",
+      "tunnelIPAddress" : "fd65:8637:9ca2::1",
+      "tunnelState" : "connected",
+      "tunnelTransportProtocol" : "tcp"
+    },
+    "deviceProperties" : {
+      "bootState" : "booted",
+      "bootedFromSnapshot" : true,
+      "bootedSnapshotName" : "com.apple.os.update-5CC54351C8520CBC723685715B4F95BF66D35B234ED4C1B1365F0B628D60EE79",
+      "ddiServicesAvailable" : false,
+      "developerModeStatus" : "enabled",
+      "hasInternalOSBuild" : false,
+      "name" : "JW",
+      "osBuildUpdate" : "23G83",
+      "osVersionNumber" : "26.6.1",
+      "rootFileSystemIsWritable" : false,
+      "screenViewingURL" : "devices://device/open?id=556E86BF-7295-5622-AA58-02DF84A8E93F",
+      "supportsCheckedAllocations" : false
+    },
+    "hardwareProperties" : {
+      "cpuType" : {
+        "name" : "arm64e",
+        "subType" : 2,
+        "type" : 16777228
+      },
+      "deviceType" : "iPhone",
+      "ecid" : 7318581840707612,
+      "hardwareModel" : "D84AP",
+      "internalStorageCapacity" : 256000000000,
+      "isProductionFused" : true,
+      "marketingName" : "iPhone 15 Pro Max",
+      "platform" : "iOS",
+      "productType" : "iPhone16,2",
+      "reality" : "physical",
+      "serialNumber" : "LQRX46YR3K",
+      "supportedCPUTypes" : [
+        {
+          "name" : "arm64e",
+          "subType" : 2,
+          "type" : 16777228
+        },
+        {
+          "name" : "arm64",
+          "subType" : 0,
+          "type" : 16777228
+        }
+      ],
+      "supportedDeviceFamilies" : [
+        1
+      ],
+      "thinningProductType" : "iPhone16,2",
+      "udid" : "00008130-001A00361EE0001C"
+    },
+    "identifier" : "556E86BF-7295-5622-AA58-02DF84A8E93F",
+    "tags" : [
+
+    ],
+    "visibilityClass" : "default"
+  }
+}

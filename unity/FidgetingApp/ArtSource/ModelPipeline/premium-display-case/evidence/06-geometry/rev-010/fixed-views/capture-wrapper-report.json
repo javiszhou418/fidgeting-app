@@ -1,0 +1,27 @@
+{
+  "cli_anything": {
+    "installed": true,
+    "preview_available": false,
+    "path": "/Users/jiawei.zhou/.local/bin/cli-anything-blender",
+    "help_returncode": 0,
+    "preview_returncode": 2
+  },
+  "capture_backend": "blender-bpy-fallback",
+  "blender": "/opt/homebrew/bin/blender",
+  "command": [
+    "/opt/homebrew/bin/blender",
+    "--background",
+    "/Users/jiawei.zhou/Documents/Fidgeting app/unity/FidgetingApp/ArtSource/ModelPipeline/premium-display-case/evidence/06-geometry/rev-010/tri-spinner-slab-geometry-r010.blend",
+    "--python",
+    "/Users/jiawei.zhou/Documents/Fidgeting app/skills/fidgeting-model-pipeline/scripts/blender_capture_standard_views.py",
+    "--",
+    "--output",
+    "/Users/jiawei.zhou/Documents/Fidgeting app/unity/FidgetingApp/ArtSource/ModelPipeline/premium-display-case/evidence/06-geometry/rev-010/fixed-views",
+    "--run-id",
+    "fb05364b-af26-43c9-a90c-e5477cadf557"
+  ],
+  "blender_returncode": 0,
+  "verified_capture": true,
+  "missing_views": [],
+  "run_id": "fb05364b-af26-43c9-a90c-e5477cadf557"
+}

@@ -1,0 +1,69 @@
+{
+  "schemaVersion": 1,
+  "kind": "premium-display-case-motion-reference-manifest",
+  "sourceFiles": [
+    {
+      "path": "unity/FidgetingApp/ArtSource/ModelPipeline/premium-display-case/evidence/02-analysis/rev-003/user-motion-rejection-reference.png",
+      "role": "user-provided-motion-rejection-screenshot",
+      "bytes": 172761,
+      "sha256": "7bd29fd5e5d9cd6b016865fbeb6f040eb4400daa461769f34c7a31908bbe1fdf"
+    },
+    {
+      "path": "unity/FidgetingApp/Assets/Plugins/iOS/Rive/gacha-single-draw-jumbotron.riv",
+      "role": "canonical-rive-source",
+      "bytes": 357120,
+      "sha256": "da5ba78f63c09ea538d214f7bcdd520a852fc77232bf47ef31606106136c7717"
+    },
+    {
+      "path": "unity/FidgetingApp/Assets/Plugins/iOS/FidgetGachaRivePresentation.swift",
+      "role": "shipping-swift-binding",
+      "bytes": 36960,
+      "sha256": "68b19f0cb27bd20d21f5df20764ea2e05791d8d55efc96cebb5e2b53df8ae661"
+    },
+    {
+      "path": "unity/FidgetingApp/Artifacts/GachaPackRiveUnityContinuousPreview/gacha-pack-rive-unity-continuous-combined.log",
+      "role": "main-app-runtime-log",
+      "bytes": 2218006,
+      "sha256": "6613f8c82f79626aad7bbe5fd78570a9670196787dccd75f4da70a7035e62ac5"
+    },
+    {
+      "path": "unity/FidgetingApp/Artifacts/GachaRiveShippingPreview/gacha-rive-shipping-flow.log",
+      "role": "standalone-runtime-log",
+      "bytes": 16213,
+      "sha256": "9307ebf92e31be304178ecb8572de4af615b5dd955bbb2c99f62ee1e5663e59e"
+    },
+    {
+      "path": "unity/FidgetingApp/ArtSource/ModelPipeline/premium-display-case/evidence/02-analysis/rev-003/rive-authored-motion-extract.json",
+      "role": "authored-motion-binary-extract",
+      "bytes": 236182,
+      "sha256": "9329778cd36d3cfdebd6e5cc51763ea185f3cd5684949c2e1f49601be0ea28b0"
+    }
+  ],
+  "primaryView": "user-motion-rejection-screenshot",
+  "expectedPrimaryParts": {
+    "count": 1,
+    "labels": [
+      "assembled whole case"
+    ]
+  },
+  "structuralParts": [
+    "assembled whole case"
+  ],
+  "decorativeParts": [
+    "Rive orbit lines",
+    "source-only labels and artwork"
+  ],
+  "validationThresholds": {
+    "wholeCaseComponentCountExact": 1,
+    "contactSheetRequired": true,
+    "unknown3DAxisMustRemainExplicit": true,
+    "pureYAxisCosineWidthForbidden": true
+  },
+  "prohibitedTargetIdentity": [
+    "WHATNOT",
+    "yellow field",
+    "smiley",
+    "barcode",
+    "sample number"
+  ]
+}

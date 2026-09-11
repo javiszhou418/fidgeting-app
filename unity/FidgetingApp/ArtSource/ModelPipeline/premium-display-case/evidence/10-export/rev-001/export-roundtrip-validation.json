@@ -1,0 +1,582 @@
+{
+  "schemaVersion": 1,
+  "modelId": "premium-display-case",
+  "gate": "10-export",
+  "exportRevision": 1,
+  "status": "pass",
+  "notice": "FRESH-SCENE FBX/GLB ROUND-TRIP PASS · NOT UNITY PARITY",
+  "source": {
+    "format": "BLEND",
+    "path": "premium-display-case-product-r001.blend",
+    "sha256": "453874ba2edf75fb90449702ef9b50fb059010ee6eefcc2c4e603f034fd0c0eb",
+    "objectCount": 12,
+    "typeCounts": {
+      "EMPTY": 7,
+      "MESH": 5,
+      "CAMERA": 0,
+      "LIGHT": 0,
+      "FONT": 0,
+      "CURVE": 0
+    },
+    "parentMap": {
+      "PresentationRoot": null,
+      "CaseAssembly": "PresentationRoot",
+      "RearPolycarbonateShell": "CaseAssembly",
+      "TactileBackgroundInsert": "RearPolycarbonateShell",
+      "ContentSlot": "RearPolycarbonateShell",
+      "FrontPolycarbonateShell": "CaseAssembly",
+      "ContinuousTubePerimeter": "FrontPolycarbonateShell",
+      "PhysicalLabel": "FrontPolycarbonateShell",
+      "LogoZone": "PhysicalLabel",
+      "AchievementZone": "PhysicalLabel",
+      "NarrowFoil": "PhysicalLabel",
+      "TransparentCover": "FrontPolycarbonateShell"
+    },
+    "canonicalBounds": {
+      "minimumMm": [
+        -114.0,
+        -152.0,
+        -29.5
+      ],
+      "maximumMm": [
+        114.0,
+        152.0,
+        29.5
+      ],
+      "sizeMm": {
+        "width": 228.0,
+        "height": 304.0,
+        "depth": 59.0
+      }
+    },
+    "materials": {
+      "RearPolycarbonateShell": [
+        "MAT_FrostedPolycarbonate"
+      ],
+      "TactileBackgroundInsert": [
+        "MAT_BlackFlocking"
+      ],
+      "FrontPolycarbonateShell": [
+        "MAT_FrostedPolycarbonate"
+      ],
+      "ContinuousTubePerimeter": [
+        "MAT_FrostedPolycarbonateEdge"
+      ],
+      "PhysicalLabel": [
+        "MAT_LabelPaper"
+      ]
+    },
+    "labelUv": {
+      "layers": [
+        "LabelUV"
+      ],
+      "coordinateCount": 576,
+      "minimum": [
+        0.0,
+        0.0
+      ],
+      "maximum": [
+        1.0,
+        1.0
+      ]
+    },
+    "triangleCount": 100016,
+    "signedVolumesMm3": {
+      "RearPolycarbonateShell": 468326.085,
+      "TactileBackgroundInsert": 354364.869,
+      "FrontPolycarbonateShell": 401422.368,
+      "ContinuousTubePerimeter": 52932.983,
+      "PhysicalLabel": 31914.666
+    },
+    "geometryDigest": "c4a8e0dbf0bc5825ebc1fe283d2f069ff63826e16a738fdf875a952e8317ee8b",
+    "rawQuantizedVertexDigest": "5652d1812a0935cd67f0fd4fcfb07acb0b30afbe1efbeeb74b8561b1f136cd53",
+    "vertexCorrespondence": {
+      "normalizedDigest": "c4a8e0dbf0bc5825ebc1fe283d2f069ff63826e16a738fdf875a952e8317ee8b",
+      "allObjectsBijective": true,
+      "maximumErrorMm": 0.0
+    },
+    "perObjectVertexDigests": {
+      "RearPolycarbonateShell": {
+        "uniquePositionCount": 192,
+        "digest": "ee145adba3c3c25e6ebc62ca57a386f331d21e69920aa7b7560a2ac944788d74"
+      },
+      "TactileBackgroundInsert": {
+        "uniquePositionCount": 288,
+        "digest": "10e0afc1bd0eee2785d096705005e49ee3f9217bc661f5d473d2b5ed0eec402b"
+      },
+      "FrontPolycarbonateShell": {
+        "uniquePositionCount": 192,
+        "digest": "2f395793bf6e8d8cbc82128799b4b3403ff66f8693c4b8ff19c4d812a2ff1f30"
+      },
+      "ContinuousTubePerimeter": {
+        "uniquePositionCount": 49152,
+        "digest": "b0fd67b7bba63d846065985f94b0ac5a7ab4edddab5f2c2e4e2b809de39ade6b"
+      },
+      "PhysicalLabel": {
+        "uniquePositionCount": 192,
+        "digest": "d58991ab5c51c4e451a5b288576294495440c0f55fd23de5b67a79eee1e1380d"
+      }
+    },
+    "triangulatedSurfaceDigest": "2e49667d4bdafae41a7115106703f10d9d2d52c283c93576fb150a1fc11df05b",
+    "triangulatedWindingDigest": "f3ddddf2ccc0dc5941f316e61edd703e485a722756a7fa4e26c4cd164d09e7e8",
+    "checks": {
+      "objectSetExact": true,
+      "hierarchyExact": true,
+      "boundsExact": true,
+      "materialAssignmentsExact": true,
+      "labelUvExact": true,
+      "positiveSignedMaterialVolumes": true,
+      "noDegenerateTriangles": true,
+      "noAnimation": true,
+      "noCameraLightFontOrCurve": true,
+      "runtimeContentNotBaked": true
+    },
+    "pass": true
+  },
+  "fbx": {
+    "format": "FBX",
+    "objects": [
+      "AchievementZone",
+      "CaseAssembly",
+      "ContentSlot",
+      "ContinuousTubePerimeter",
+      "FrontPolycarbonateShell",
+      "LogoZone",
+      "NarrowFoil",
+      "PhysicalLabel",
+      "PresentationRoot",
+      "RearPolycarbonateShell",
+      "TactileBackgroundInsert",
+      "TransparentCover"
+    ],
+    "objectCount": 12,
+    "typeCounts": {
+      "EMPTY": 7,
+      "MESH": 5,
+      "CAMERA": 0,
+      "LIGHT": 0,
+      "FONT": 0,
+      "CURVE": 0
+    },
+    "parentMap": {
+      "PresentationRoot": null,
+      "CaseAssembly": "PresentationRoot",
+      "RearPolycarbonateShell": "CaseAssembly",
+      "TactileBackgroundInsert": "RearPolycarbonateShell",
+      "ContentSlot": "RearPolycarbonateShell",
+      "FrontPolycarbonateShell": "CaseAssembly",
+      "ContinuousTubePerimeter": "FrontPolycarbonateShell",
+      "PhysicalLabel": "FrontPolycarbonateShell",
+      "LogoZone": "PhysicalLabel",
+      "AchievementZone": "PhysicalLabel",
+      "NarrowFoil": "PhysicalLabel",
+      "TransparentCover": "FrontPolycarbonateShell"
+    },
+    "rawImportedBounds": [
+      0.228,
+      0.0590001,
+      0.304
+    ],
+    "canonicalMapping": "canonical=(X*1,Z*1,Y*-1)*1000",
+    "canonicalMappingAnchorErrorMm": 2.866e-05,
+    "canonicalBounds": {
+      "minimumMm": [
+        -114.00001,
+        -152.00002,
+        -29.50004
+      ],
+      "maximumMm": [
+        114.00001,
+        152.00002,
+        29.50004
+      ],
+      "sizeMm": {
+        "width": 228.000015,
+        "height": 304.000031,
+        "depth": 59.000076
+      }
+    },
+    "labelCenterMm": [
+      0.0,
+      99.000015,
+      23.999977
+    ],
+    "presentationRootPivotMm": [
+      0.0,
+      0.0,
+      -0.0
+    ],
+    "materials": {
+      "RearPolycarbonateShell": [
+        "MAT_FrostedPolycarbonate"
+      ],
+      "TactileBackgroundInsert": [
+        "MAT_BlackFlocking"
+      ],
+      "FrontPolycarbonateShell": [
+        "MAT_FrostedPolycarbonate"
+      ],
+      "ContinuousTubePerimeter": [
+        "MAT_FrostedPolycarbonateEdge"
+      ],
+      "PhysicalLabel": [
+        "MAT_LabelPaper"
+      ]
+    },
+    "labelUv": {
+      "layers": [
+        "LabelUV"
+      ],
+      "coordinateCount": 576,
+      "minimum": [
+        0.0,
+        0.0
+      ],
+      "maximum": [
+        1.0,
+        1.0
+      ]
+    },
+    "triangleCount": 100016,
+    "signedVolumesMm3": {
+      "RearPolycarbonateShell": 468326.061,
+      "TactileBackgroundInsert": 354364.913,
+      "FrontPolycarbonateShell": 401422.468,
+      "ContinuousTubePerimeter": 52931.068,
+      "PhysicalLabel": 31914.702
+    },
+    "signedVolumeRelativeErrors": {
+      "RearPolycarbonateShell": 5.1e-08,
+      "TactileBackgroundInsert": 1.24e-07,
+      "FrontPolycarbonateShell": 2.49e-07,
+      "ContinuousTubePerimeter": 3.6178e-05,
+      "PhysicalLabel": 1.128e-06
+    },
+    "geometryDigest": "c4a8e0dbf0bc5825ebc1fe283d2f069ff63826e16a738fdf875a952e8317ee8b",
+    "rawQuantizedVertexDigest": "14bfd25e46692806a1d30d56755847383541f351a57e0cc8da8d0fb127d4b649",
+    "vertexCorrespondence": {
+      "normalizedDigest": "c4a8e0dbf0bc5825ebc1fe283d2f069ff63826e16a738fdf875a952e8317ee8b",
+      "allObjectsBijective": true,
+      "maximumErrorMm": 4.1788e-05,
+      "perObject": {
+        "RearPolycarbonateShell": {
+          "expectedUniquePositions": 192,
+          "actualUniquePositions": 192,
+          "bijective": true,
+          "maximumErrorMm": 4.0054e-05
+        },
+        "TactileBackgroundInsert": {
+          "expectedUniquePositions": 288,
+          "actualUniquePositions": 288,
+          "bijective": true,
+          "maximumErrorMm": 3.9194e-05
+        },
+        "FrontPolycarbonateShell": {
+          "expectedUniquePositions": 192,
+          "actualUniquePositions": 192,
+          "bijective": true,
+          "maximumErrorMm": 4.1788e-05
+        },
+        "ContinuousTubePerimeter": {
+          "expectedUniquePositions": 49152,
+          "actualUniquePositions": 49152,
+          "bijective": true,
+          "maximumErrorMm": 4.1788e-05
+        },
+        "PhysicalLabel": {
+          "expectedUniquePositions": 192,
+          "actualUniquePositions": 192,
+          "bijective": true,
+          "maximumErrorMm": 3.7425e-05
+        }
+      }
+    },
+    "perObjectVertexDigests": {
+      "RearPolycarbonateShell": {
+        "uniquePositionCount": 192,
+        "digest": "ee145adba3c3c25e6ebc62ca57a386f331d21e69920aa7b7560a2ac944788d74"
+      },
+      "TactileBackgroundInsert": {
+        "uniquePositionCount": 288,
+        "digest": "10e0afc1bd0eee2785d096705005e49ee3f9217bc661f5d473d2b5ed0eec402b"
+      },
+      "FrontPolycarbonateShell": {
+        "uniquePositionCount": 192,
+        "digest": "2f395793bf6e8d8cbc82128799b4b3403ff66f8693c4b8ff19c4d812a2ff1f30"
+      },
+      "ContinuousTubePerimeter": {
+        "uniquePositionCount": 49152,
+        "digest": "545ec7f57cac144220b27df19e6252f0bb90fe1976071c17723677150c752c21"
+      },
+      "PhysicalLabel": {
+        "uniquePositionCount": 192,
+        "digest": "d58991ab5c51c4e451a5b288576294495440c0f55fd23de5b67a79eee1e1380d"
+      }
+    },
+    "triangulatedSurfaceDigest": "a7be5d35d2a4028cc7e8c1e1c88b184c113a113bdd17b52171426505c8e638bf",
+    "triangulatedWindingDigest": "3c197f9b0473e30af1b0a1eb518dfbd7ed9e6b5a07a04e80634586afdbb1d3d1",
+    "checks": {
+      "objectSetExact": true,
+      "objectCountExact": true,
+      "fiveMeshesSevenEmpties": true,
+      "hierarchyExact": true,
+      "canonicalMappingProperRotation": true,
+      "boundsExact": true,
+      "labelCenterExact": true,
+      "pivotAtOrigin": true,
+      "materialAssignmentsExact": true,
+      "labelUvPresent": true,
+      "labelUvNormalized": true,
+      "geometryDigestIdentity": true,
+      "vertexCorrespondenceWithinPoint001Mm": true,
+      "windingOrientationPreserved": true,
+      "positiveSignedMaterialVolumes": true,
+      "noDegenerateTriangles": true,
+      "noAnimation": true,
+      "noCameraLightOrEnvironmentObjects": true,
+      "contentSlotEmpty": true,
+      "noToyPrizeProxyExplodedOrCollision": true,
+      "noPlaceholderTextOrIdObjects": true
+    },
+    "pass": true,
+    "path": "premium-display-case-product-r001.fbx",
+    "sha256": "21c9db68723f0006d7c6bfec5280cafe55c16cf5392ff97c365c966e91f847ae"
+  },
+  "glb": {
+    "format": "GLB",
+    "objects": [
+      "AchievementZone",
+      "CaseAssembly",
+      "ContentSlot",
+      "ContinuousTubePerimeter",
+      "FrontPolycarbonateShell",
+      "LogoZone",
+      "NarrowFoil",
+      "PhysicalLabel",
+      "PresentationRoot",
+      "RearPolycarbonateShell",
+      "TactileBackgroundInsert",
+      "TransparentCover"
+    ],
+    "objectCount": 12,
+    "typeCounts": {
+      "EMPTY": 7,
+      "MESH": 5,
+      "CAMERA": 0,
+      "LIGHT": 0,
+      "FONT": 0,
+      "CURVE": 0
+    },
+    "parentMap": {
+      "PresentationRoot": null,
+      "CaseAssembly": "PresentationRoot",
+      "RearPolycarbonateShell": "CaseAssembly",
+      "TactileBackgroundInsert": "RearPolycarbonateShell",
+      "ContentSlot": "RearPolycarbonateShell",
+      "FrontPolycarbonateShell": "CaseAssembly",
+      "ContinuousTubePerimeter": "FrontPolycarbonateShell",
+      "PhysicalLabel": "FrontPolycarbonateShell",
+      "LogoZone": "PhysicalLabel",
+      "AchievementZone": "PhysicalLabel",
+      "NarrowFoil": "PhysicalLabel",
+      "TransparentCover": "FrontPolycarbonateShell"
+    },
+    "rawImportedBounds": [
+      0.228,
+      0.059,
+      0.304
+    ],
+    "canonicalMapping": "canonical=(X*1,Z*1,Y*-1)*1000",
+    "canonicalMappingAnchorErrorMm": 8.09e-06,
+    "canonicalBounds": {
+      "minimumMm": [
+        -114.00001,
+        -152.00002,
+        -29.5
+      ],
+      "maximumMm": [
+        114.00001,
+        152.00002,
+        29.5
+      ],
+      "sizeMm": {
+        "width": 228.000015,
+        "height": 304.000031,
+        "depth": 59.0
+      }
+    },
+    "labelCenterMm": [
+      0.0,
+      99.000008,
+      24.000002
+    ],
+    "presentationRootPivotMm": [
+      0.0,
+      0.0,
+      -0.0
+    ],
+    "materials": {
+      "RearPolycarbonateShell": [
+        "MAT_FrostedPolycarbonate"
+      ],
+      "TactileBackgroundInsert": [
+        "MAT_BlackFlocking"
+      ],
+      "FrontPolycarbonateShell": [
+        "MAT_FrostedPolycarbonate"
+      ],
+      "ContinuousTubePerimeter": [
+        "MAT_FrostedPolycarbonateEdge"
+      ],
+      "PhysicalLabel": [
+        "MAT_LabelPaper"
+      ]
+    },
+    "labelUv": {
+      "layers": [
+        "UVMap"
+      ],
+      "coordinateCount": 1140,
+      "minimum": [
+        0.0,
+        0.0
+      ],
+      "maximum": [
+        1.0,
+        1.0
+      ]
+    },
+    "triangleCount": 100016,
+    "signedVolumesMm3": {
+      "RearPolycarbonateShell": 468326.028,
+      "TactileBackgroundInsert": 354364.878,
+      "FrontPolycarbonateShell": 401422.518,
+      "ContinuousTubePerimeter": 52931.21,
+      "PhysicalLabel": 31914.637
+    },
+    "signedVolumeRelativeErrors": {
+      "RearPolycarbonateShell": 1.22e-07,
+      "TactileBackgroundInsert": 2.5e-08,
+      "FrontPolycarbonateShell": 3.74e-07,
+      "ContinuousTubePerimeter": 3.3495e-05,
+      "PhysicalLabel": 9.09e-07
+    },
+    "geometryDigest": "c4a8e0dbf0bc5825ebc1fe283d2f069ff63826e16a738fdf875a952e8317ee8b",
+    "rawQuantizedVertexDigest": "14bfd25e46692806a1d30d56755847383541f351a57e0cc8da8d0fb127d4b649",
+    "vertexCorrespondence": {
+      "normalizedDigest": "c4a8e0dbf0bc5825ebc1fe283d2f069ff63826e16a738fdf875a952e8317ee8b",
+      "allObjectsBijective": true,
+      "maximumErrorMm": 1.7166e-05,
+      "perObject": {
+        "RearPolycarbonateShell": {
+          "expectedUniquePositions": 192,
+          "actualUniquePositions": 192,
+          "bijective": true,
+          "maximumErrorMm": 1.706e-05
+        },
+        "TactileBackgroundInsert": {
+          "expectedUniquePositions": 288,
+          "actualUniquePositions": 288,
+          "bijective": true,
+          "maximumErrorMm": 1.706e-05
+        },
+        "FrontPolycarbonateShell": {
+          "expectedUniquePositions": 192,
+          "actualUniquePositions": 192,
+          "bijective": true,
+          "maximumErrorMm": 1.7166e-05
+        },
+        "ContinuousTubePerimeter": {
+          "expectedUniquePositions": 49152,
+          "actualUniquePositions": 49152,
+          "bijective": true,
+          "maximumErrorMm": 1.7166e-05
+        },
+        "PhysicalLabel": {
+          "expectedUniquePositions": 192,
+          "actualUniquePositions": 192,
+          "bijective": true,
+          "maximumErrorMm": 1.7166e-05
+        }
+      }
+    },
+    "perObjectVertexDigests": {
+      "RearPolycarbonateShell": {
+        "uniquePositionCount": 192,
+        "digest": "ee145adba3c3c25e6ebc62ca57a386f331d21e69920aa7b7560a2ac944788d74"
+      },
+      "TactileBackgroundInsert": {
+        "uniquePositionCount": 288,
+        "digest": "10e0afc1bd0eee2785d096705005e49ee3f9217bc661f5d473d2b5ed0eec402b"
+      },
+      "FrontPolycarbonateShell": {
+        "uniquePositionCount": 192,
+        "digest": "2f395793bf6e8d8cbc82128799b4b3403ff66f8693c4b8ff19c4d812a2ff1f30"
+      },
+      "ContinuousTubePerimeter": {
+        "uniquePositionCount": 49152,
+        "digest": "545ec7f57cac144220b27df19e6252f0bb90fe1976071c17723677150c752c21"
+      },
+      "PhysicalLabel": {
+        "uniquePositionCount": 192,
+        "digest": "d58991ab5c51c4e451a5b288576294495440c0f55fd23de5b67a79eee1e1380d"
+      }
+    },
+    "triangulatedSurfaceDigest": "a7be5d35d2a4028cc7e8c1e1c88b184c113a113bdd17b52171426505c8e638bf",
+    "triangulatedWindingDigest": "3c197f9b0473e30af1b0a1eb518dfbd7ed9e6b5a07a04e80634586afdbb1d3d1",
+    "checks": {
+      "objectSetExact": true,
+      "objectCountExact": true,
+      "fiveMeshesSevenEmpties": true,
+      "hierarchyExact": true,
+      "canonicalMappingProperRotation": true,
+      "boundsExact": true,
+      "labelCenterExact": true,
+      "pivotAtOrigin": true,
+      "materialAssignmentsExact": true,
+      "labelUvPresent": true,
+      "labelUvNormalized": true,
+      "geometryDigestIdentity": true,
+      "vertexCorrespondenceWithinPoint001Mm": true,
+      "windingOrientationPreserved": true,
+      "positiveSignedMaterialVolumes": true,
+      "noDegenerateTriangles": true,
+      "noAnimation": true,
+      "noCameraLightOrEnvironmentObjects": true,
+      "contentSlotEmpty": true,
+      "noToyPrizeProxyExplodedOrCollision": true,
+      "noPlaceholderTextOrIdObjects": true
+    },
+    "pass": true,
+    "path": "premium-display-case-product-r001.glb",
+    "sha256": "fb22fc333c0c5fbc715385ca510dbf0ee4a18b9847f64764b4511e0278ba4df8"
+  },
+  "glbStructure": {
+    "path": "glb-structure-validation.json",
+    "sha256": "cb9f629831b38cb248e85234e19fb4af0e43e6a54f21b6fb88e84e8f8dfe03b8",
+    "status": "pass"
+  },
+  "crossFormat": {
+    "geometryDigestIdentity": true,
+    "exportTriangulatedSurfaceDigestIdentity": true,
+    "exportTriangulatedWindingDigestIdentity": true,
+    "sourceAndExportWindingOrientationPositive": true,
+    "sourceToExportVolumeErrorWithinPoint005Percent": true,
+    "triangleCountIdentity": true,
+    "boundsIdentity": true,
+    "materialAssignmentsIdentity": true,
+    "hierarchyIdentity": true,
+    "fileHashesMatchBuildReport": true
+  },
+  "checks": {
+    "sourcePass": true,
+    "fbxPass": true,
+    "glbPass": true,
+    "glbStructurePass": true,
+    "crossFormatPass": true,
+    "approvedGeometryDigestCarried": true,
+    "collisionPolicyExplicitNoApprovedProxy": true,
+    "shippingUnityUnchanged": true,
+    "buildInstallPhonePushFalse": true
+  }
+}

@@ -1,0 +1,56 @@
+{
+  "schema": "premium-display-case-gate04-r018-preflight-self-rejection.v1",
+  "outcome": "self-rejected",
+  "reviewedAt": "2026-08-31T08:52:29.266Z",
+  "repairPassed": {
+    "orientationIdentityMargin": 0.07657098770141602,
+    "r017HorizontalFlipMargin": 0.07660126686096191,
+    "physicalTopFrontDropMeters": 0.017737053334712982,
+    "mouthBoundsInUpperThird": true
+  },
+  "failedConditions": [
+    {
+      "id": "sealed-top-crimp-is-above-fidget-archive",
+      "evidence": "Rendered Unity bounds report topCrimpMinY=0.066100 below archiveY=0.093312."
+    },
+    {
+      "id": "released-seal-is-compact-top-right-strip",
+      "evidence": "Rendered bounds place the strip left of the Pack center and its 0.0781 viewport width exceeds the 0.34 Pack-width limit."
+    },
+    {
+      "id": "contained-case-renders-inside-upper-mouth",
+      "evidence": "The actual ID render shows 86,325 visible case pixels in the upper mouth but only 7 pixels occluded by the front lip/sidewalls; required minimum is 16."
+    }
+  ],
+  "beforeAfterScreenEvidence": {
+    "beforeR017": {
+      "path": "unity/FidgetingApp/ArtSource/ModelPipeline/premium-display-case/evidence/04-architecture/rev-018/before/r017-mirror-lower-mouth-090.png",
+      "sha256": "f82d45ebef0497218092241fef02d74dbae3fe67b99488b451e120cad924868d",
+      "sizeBytes": 845488
+    },
+    "afterR018Sealed": {
+      "path": "unity/FidgetingApp/ArtSource/ModelPipeline/premium-display-case/evidence/04-architecture/rev-018/preflight/sealed-state.png",
+      "sha256": "3be23f7fd13a7599a15b48326293df80aa56c978e577df5e9f7f8fc587f48bd2",
+      "sizeBytes": 1860517
+    },
+    "afterR018FormedMouth": {
+      "path": "unity/FidgetingApp/ArtSource/ModelPipeline/premium-display-case/evidence/04-architecture/rev-018/preflight/formed-mouth-070.png",
+      "sha256": "3cd26d85796feca27cb23dd6408ac4add10f354c79d346c936cd1fb128c520d6",
+      "sizeBytes": 1914893
+    },
+    "afterR018ContainedCase": {
+      "path": "unity/FidgetingApp/ArtSource/ModelPipeline/premium-display-case/evidence/04-architecture/rev-018/preflight/case-contained-090.png",
+      "sha256": "b260b17e809613fafbb370bc9f1a38cd358275cbc079e7df1343dc1501272652",
+      "sizeBytes": 1909110
+    },
+    "technicalOcclusion": {
+      "path": "unity/FidgetingApp/ArtSource/ModelPipeline/premium-display-case/evidence/04-architecture/rev-018/diagnostics/case-front-occlusion-id-090.png",
+      "sha256": "c78ddedf47c7d7616e5befe4adb01329d792468583d919f011027c15cc5ea723",
+      "sizeBytes": 1071299
+    }
+  },
+  "stopCondition": "Preflight failed. No scrub, full proof, visual tuning, candidate registration, canonical asset change, build, install, or device work ran.",
+  "shippingReady": false,
+  "physicalPhoneInstalled": false,
+  "statusText": "视觉批准待确认，未推送手机"
+}

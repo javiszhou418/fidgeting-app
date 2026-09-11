@@ -1,0 +1,256 @@
+{
+ "schemaVersion": 1,
+ "gate": "10-export",
+ "revision": 2,
+ "glb": {
+  "file": "geeone-tri-spinner.glb",
+  "sha256": "dbcb4eaa5b6cc35f0bd82168c0503525af97d5d5ff0ac9722ddc61b04fa4a7e2",
+  "objects": [
+   "Cap_Bottom",
+   "Cap_Top",
+   "Fixed_Root",
+   "GEEONE_TriSpinner",
+   "Hub_Core",
+   "Rotor_Body",
+   "Rotor_Root"
+  ],
+  "meshes": {
+   "Cap_Bottom": {
+    "verts": 420,
+    "faces": 166,
+    "tris": 166,
+    "materials": [
+     "M_Geeone_Satin",
+     "M_Geeone_DiscTurned"
+    ],
+    "bounds_m": {
+     "min": [
+      -0.02003,
+      -0.02055,
+      -0.01044
+     ],
+     "max": [
+      0.02003,
+      0.02055,
+      -0.00555
+     ]
+    }
+   },
+   "Cap_Top": {
+    "verts": 420,
+    "faces": 166,
+    "tris": 166,
+    "materials": [
+     "M_Geeone_Satin",
+     "M_Geeone_DiscTurned"
+    ],
+    "bounds_m": {
+     "min": [
+      -0.02003,
+      -0.02055,
+      0.00555
+     ],
+     "max": [
+      0.02003,
+      0.02055,
+      0.01044
+     ]
+    }
+   },
+   "Hub_Core": {
+    "verts": 2112,
+    "faces": 1148,
+    "tris": 1148,
+    "materials": [
+     "M_Geeone_HubDark"
+    ],
+    "bounds_m": {
+     "min": [
+      -0.01743,
+      -0.01743,
+      -0.00564
+     ],
+     "max": [
+      0.01743,
+      0.01743,
+      0.00564
+     ]
+    }
+   },
+   "Rotor_Body": {
+    "verts": 18100,
+    "faces": 9474,
+    "tris": 9474,
+    "materials": [
+     "M_Geeone_Satin"
+    ],
+    "bounds_m": {
+     "min": [
+      -0.03679,
+      -0.02425,
+      -0.00504
+     ],
+     "max": [
+      0.03679,
+      0.0425,
+      0.00504
+     ]
+    }
+   }
+  },
+  "hierarchy": {
+   "Cap_Bottom": "Fixed_Root",
+   "Cap_Top": "Fixed_Root",
+   "Fixed_Root": "GEEONE_TriSpinner",
+   "GEEONE_TriSpinner": null,
+   "Hub_Core": "Fixed_Root",
+   "Rotor_Body": "Rotor_Root",
+   "Rotor_Root": "GEEONE_TriSpinner"
+  },
+  "rotor_planar_m": 0.085,
+  "rotor_bore_radius_m": 0.01806,
+  "rotor_thickness_m": 0.01007,
+  "fixed_planar_m": 0.0411,
+  "fixed_height_m": 0.02089,
+  "checks": {
+   "rotor circumscribed diameter 0.085 m (±0.5 mm)": true,
+   "rotor thickness 0.17 R + crest (≤ 0.0110 m)": true,
+   "rotor bore 0.425 R centred on the axis (min vertex radius ±0.2 mm)": true,
+   "rotor origin = spin axis": true,
+   "cap diameter 0.485 R (±0.5 mm)": true,
+   "four shipping meshes": true,
+   "rotor under Rotor_Root, fixed parts under Fixed_Root": true,
+   "hub core centred (fixed AABB centre on the axis)": true,
+   "materials survived": true
+  },
+  "pass": true
+ },
+ "fbx": {
+  "file": "geeone-tri-spinner.fbx",
+  "sha256": "b428a03e4141ef4091cdce679941eadcdda71e683d80bf3ea32cf149437a866a",
+  "objects": [
+   "Cap_Bottom",
+   "Cap_Top",
+   "Fixed_Root",
+   "GEEONE_TriSpinner",
+   "Hub_Core",
+   "Rotor_Body",
+   "Rotor_Root"
+  ],
+  "meshes": {
+   "Cap_Bottom": {
+    "verts": 85,
+    "faces": 127,
+    "tris": 166,
+    "materials": [
+     "M_Geeone_Satin",
+     "M_Geeone_DiscTurned"
+    ],
+    "bounds_m": {
+     "min": [
+      -0.02003,
+      -0.02055,
+      -0.01044
+     ],
+     "max": [
+      0.02003,
+      0.02055,
+      -0.00555
+     ]
+    }
+   },
+   "Cap_Top": {
+    "verts": 85,
+    "faces": 127,
+    "tris": 166,
+    "materials": [
+     "M_Geeone_Satin",
+     "M_Geeone_DiscTurned"
+    ],
+    "bounds_m": {
+     "min": [
+      -0.02003,
+      -0.02055,
+      0.00555
+     ],
+     "max": [
+      0.02003,
+      0.02055,
+      0.01044
+     ]
+    }
+   },
+   "Hub_Core": {
+    "verts": 576,
+    "faces": 482,
+    "tris": 1148,
+    "materials": [
+     "M_Geeone_HubDark"
+    ],
+    "bounds_m": {
+     "min": [
+      -0.01743,
+      -0.01743,
+      -0.00564
+     ],
+     "max": [
+      0.01743,
+      0.01743,
+      0.00564
+     ]
+    }
+   },
+   "Rotor_Body": {
+    "verts": 4737,
+    "faces": 4316,
+    "tris": 9474,
+    "materials": [
+     "M_Geeone_Satin"
+    ],
+    "bounds_m": {
+     "min": [
+      -0.03679,
+      -0.02425,
+      -0.00504
+     ],
+     "max": [
+      0.03679,
+      0.0425,
+      0.00504
+     ]
+    }
+   }
+  },
+  "hierarchy": {
+   "Cap_Bottom": "Fixed_Root",
+   "Cap_Top": "Fixed_Root",
+   "Fixed_Root": "GEEONE_TriSpinner",
+   "GEEONE_TriSpinner": null,
+   "Hub_Core": "Fixed_Root",
+   "Rotor_Body": "Rotor_Root",
+   "Rotor_Root": "GEEONE_TriSpinner"
+  },
+  "rotor_planar_m": 0.085,
+  "rotor_bore_radius_m": 0.01806,
+  "rotor_thickness_m": 0.01007,
+  "fixed_planar_m": 0.0411,
+  "fixed_height_m": 0.02089,
+  "checks": {
+   "rotor circumscribed diameter 0.085 m (±0.5 mm)": true,
+   "rotor thickness 0.17 R + crest (≤ 0.0110 m)": true,
+   "rotor bore 0.425 R centred on the axis (min vertex radius ±0.2 mm)": true,
+   "rotor origin = spin axis": true,
+   "cap diameter 0.485 R (±0.5 mm)": true,
+   "four shipping meshes": true,
+   "rotor under Rotor_Root, fixed parts under Fixed_Root": true,
+   "hub core centred (fixed AABB centre on the axis)": true,
+   "materials survived": true
+  },
+  "pass": true
+ },
+ "manifest": {
+  "path": "export-manifest.json",
+  "sha256": "f94471900f84d0e651174b198a19b2e2c529fd48a07c0a019d606b9263d02d77"
+ },
+ "pass": true
+}

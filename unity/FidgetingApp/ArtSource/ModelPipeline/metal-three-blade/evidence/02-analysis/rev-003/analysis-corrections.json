@@ -1,0 +1,63 @@
+{
+  "modelId": "metal-three-blade",
+  "stageId": "02-analysis",
+  "revision": 3,
+  "recordedAt": "2026-09-05T07:29:57.260880+00:00",
+  "basis": "高倍裁切 geeone-01 / geeone-02 / geeone-07 + 用户贴入分析",
+  "corrections": [
+    {
+      "topic": "放射楔位置",
+      "userAnalysis": "切面环（冠部）为 22–24 规则楔，圆盘为年轮",
+      "photoReading": "放射楔在顶面台面上，收敛于圆心；冠环为不规则多边形鳞片；年轮纹是楔面上的表面处理",
+      "resolution": "台面 = 真几何脊谷交替楔；冠环 = seeded 抖动网格三角化"
+    },
+    {
+      "topic": "楔数",
+      "userAnalysis": "22–24",
+      "photoReading": "每楔 10–12°，28–36",
+      "resolution": "N=32，±6，正俯视图前不锁"
+    },
+    {
+      "topic": "台面/盖径",
+      "userAnalysis": "≈0.70 (20–22 / 28–32)",
+      "photoReading": "0.797 ±0.03",
+      "resolution": "0.797"
+    },
+    {
+      "topic": "盖径/外接圆",
+      "userAnalysis": "≈0.45–0.50",
+      "photoReading": "0.536 ±0.02",
+      "resolution": "0.536"
+    },
+    {
+      "topic": "黑色一圈",
+      "userAnalysis": "轴承外圈/垫片",
+      "photoReading": "盖 >32 mm 遮住 R188/608 外圈；黑圈是盖底与毂面之间的阴影缝",
+      "resolution": "沉孔 Ø36.8 深 2.2 暗色 + 盖悬浮 0.4 mm；无任何亮环"
+    },
+    {
+      "topic": "叶尖",
+      "userAnalysis": "大圆角",
+      "photoReading": "小圆角 R≈1.5–2 mm",
+      "resolution": "尖端 half-width 2.0 mm → 0"
+    },
+    {
+      "topic": "叶片刻面",
+      "userAnalysis": "4–5 个规则大平面",
+      "photoReading": "不规则龙鳞 6–10 面/侧",
+      "resolution": "凸包 + 抖动控制点"
+    },
+    {
+      "topic": "橙色",
+      "userAnalysis": "未提",
+      "photoReading": "暖色轮廓光在口袋抛光倒角上的反射，非镶嵌",
+      "resolution": "口袋壁抛光材质，底面暗色"
+    },
+    {
+      "topic": "尺寸",
+      "userAnalysis": "60–65 mm 典型",
+      "photoReading": "剪藏无官方参数",
+      "resolution": "65 mm user-authorized-provisional；所有 mm 不标 measured"
+    }
+  ]
+}

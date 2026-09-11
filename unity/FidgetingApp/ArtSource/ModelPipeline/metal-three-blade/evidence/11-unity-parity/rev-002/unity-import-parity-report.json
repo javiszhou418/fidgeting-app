@@ -1,0 +1,14 @@
+{
+  "gate": "11-unity-parity",
+  "revision": 2,
+  "scene": "Assets/_Fidgeting/Scenes/ThreeBladeMetalOriginal.unity",
+  "rotorBody": {"path": "RotorDynamic/Rotor_Root/Rotor_Body", "rotates": true, "rendererEnabled": true, "materials": ["M_GeeoneSatin"], "mesh": "Assets/_Fidgeting/Models/GeeoneTriSpinner/GeeoneTriSpinner.fbx", "triangles": 9474, "worldBoundsMin": [-0.03679, 0.04696, -0.02425], "worldBoundsMax": [0.03679, 0.05704, 0.04250], "localPosition": [0.00000, 0.00000, 0.00000]},
+  "capTop": {"path": "HubStatic/TopCap/Cap_Top", "rotates": false, "rendererEnabled": true, "materials": ["M_GeeoneDiscTurned","M_GeeoneSatin"], "mesh": "Assets/_Fidgeting/Models/GeeoneTriSpinner/GeeoneTriSpinner.fbx", "triangles": 166, "worldBoundsMin": [-0.02003, 0.05755, -0.02055], "worldBoundsMax": [0.02003, 0.06244, 0.02055], "localPosition": [0.00000, -0.00560, 0.00000]},
+  "capBottom": {"path": "HubStatic/BottomCap/Cap_Bottom", "rotates": false, "rendererEnabled": true, "materials": ["M_GeeoneDiscTurned","M_GeeoneSatin"], "mesh": "Assets/_Fidgeting/Models/GeeoneTriSpinner/GeeoneTriSpinner.fbx", "triangles": 166, "worldBoundsMin": [-0.02003, 0.04156, -0.02055], "worldBoundsMax": [0.02003, 0.04645, 0.02055], "localPosition": [0.00000, 0.00540, 0.00000]},
+  "hubCore": {"path": "HubStatic/Hub_Core", "rotates": false, "rendererEnabled": true, "materials": ["M_GeeoneHubDark"], "mesh": "Assets/_Fidgeting/Models/GeeoneTriSpinner/GeeoneTriSpinner.fbx", "triangles": 1148, "worldBoundsMin": [-0.01743, 0.04636, -0.01743], "worldBoundsMax": [0.01743, 0.05764, 0.01743], "localPosition": [0.00000, 0.00000, 0.00000]},
+  "rotorController": true,
+  "rotorAngularVelocityAtLoad": 0.000000,
+  "rotorYaw180Applied": true,
+  "rotorBoundsSizeM": [0.07357, 0.01007, 0.06675],
+  "neutralCamera": {"topOrthoWidthM": 0.09775, "heroPositionM": [-0.05100, 0.06375, -0.06800], "heroFocalLengthMm": 50, "blenderHeroPositionR": [1.2, -1.6, 1.5]}
+}

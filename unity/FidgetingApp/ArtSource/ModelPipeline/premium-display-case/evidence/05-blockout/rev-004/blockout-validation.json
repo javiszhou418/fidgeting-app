@@ -1,0 +1,438 @@
+{
+  "objects": {
+    "GEO_PDC_REAR_PLATE": {
+      "non_manifold_edges": 0,
+      "boundary_edges": 0,
+      "triangles": 204,
+      "vertices": 104,
+      "faces": 54
+    },
+    "GEO_PDC_OUTER_CRYSTAL_FRAME": {
+      "non_manifold_edges": 0,
+      "boundary_edges": 0,
+      "triangles": 416,
+      "vertices": 208,
+      "faces": 208
+    },
+    "GEO_PDC_SMOKE_INNER_LINER": {
+      "non_manifold_edges": 0,
+      "boundary_edges": 0,
+      "triangles": 416,
+      "vertices": 208,
+      "faces": 208
+    },
+    "GEO_PDC_HEADER_SATIN_SHELF": {
+      "non_manifold_edges": 0,
+      "boundary_edges": 0,
+      "triangles": 416,
+      "vertices": 208,
+      "faces": 208
+    },
+    "GEO_PDC_HEADER_MIRROR_BEVEL": {
+      "non_manifold_edges": 0,
+      "boundary_edges": 0,
+      "triangles": 416,
+      "vertices": 208,
+      "faces": 208
+    },
+    "GEO_PDC_HEADER_GRAPHITE_PLANE": {
+      "non_manifold_edges": 0,
+      "boundary_edges": 0,
+      "triangles": 204,
+      "vertices": 104,
+      "faces": 54
+    },
+    "GEO_PDC_HEADER_SILVER_DATUM_RAIL": {
+      "non_manifold_edges": 0,
+      "boundary_edges": 0,
+      "triangles": 204,
+      "vertices": 104,
+      "faces": 54
+    },
+    "GEO_PDC_HEADER_GOLD_INLAY_L": {
+      "non_manifold_edges": 0,
+      "boundary_edges": 0,
+      "triangles": 12,
+      "vertices": 8,
+      "faces": 6
+    },
+    "GEO_PDC_HEADER_GOLD_INLAY_R": {
+      "non_manifold_edges": 0,
+      "boundary_edges": 0,
+      "triangles": 12,
+      "vertices": 8,
+      "faces": 6
+    },
+    "GEO_PDC_MAIN_SATIN_SHELF": {
+      "non_manifold_edges": 0,
+      "boundary_edges": 0,
+      "triangles": 416,
+      "vertices": 208,
+      "faces": 208
+    },
+    "GEO_PDC_MAIN_MIRROR_SEAM": {
+      "non_manifold_edges": 0,
+      "boundary_edges": 0,
+      "triangles": 416,
+      "vertices": 208,
+      "faces": 208
+    },
+    "GEO_PDC_MAIN_MICROBLAST_FIELD": {
+      "non_manifold_edges": 0,
+      "boundary_edges": 0,
+      "triangles": 3840,
+      "vertices": 1920,
+      "faces": 1920
+    },
+    "GEO_PDC_MAIN_BRUSHED_PANEL_L": {
+      "non_manifold_edges": 0,
+      "boundary_edges": 0,
+      "triangles": 28,
+      "vertices": 16,
+      "faces": 10
+    },
+    "GEO_PDC_MAIN_BRUSHED_PANEL_R": {
+      "non_manifold_edges": 0,
+      "boundary_edges": 0,
+      "triangles": 28,
+      "vertices": 16,
+      "faces": 10
+    },
+    "GEO_PDC_MAIN_BRUSHED_BAND_BOTTOM": {
+      "non_manifold_edges": 0,
+      "boundary_edges": 0,
+      "triangles": 204,
+      "vertices": 104,
+      "faces": 54
+    },
+    "GEO_PDC_MAIN_CORNER_FACETS": {
+      "non_manifold_edges": 0,
+      "boundary_edges": 0,
+      "triangles": 48,
+      "vertices": 32,
+      "faces": 24
+    },
+    "GEO_PDC_MAIN_GOLD_RAIL_00": {
+      "non_manifold_edges": 0,
+      "boundary_edges": 0,
+      "triangles": 12,
+      "vertices": 8,
+      "faces": 6
+    },
+    "GEO_PDC_MAIN_GOLD_RAIL_01": {
+      "non_manifold_edges": 0,
+      "boundary_edges": 0,
+      "triangles": 12,
+      "vertices": 8,
+      "faces": 6
+    },
+    "GEO_PDC_MAIN_GOLD_INDEX_TAB": {
+      "non_manifold_edges": 0,
+      "boundary_edges": 0,
+      "triangles": 204,
+      "vertices": 104,
+      "faces": 54
+    }
+  },
+  "contract_sha256": "916e863c0e8559189898f8c4597603756f646f56822ab6e57d1a9138779fe39b",
+  "provisional_marker": "PROVISIONAL_DIMENSIONS",
+  "checks": [
+    {
+      "id": "case-width",
+      "status": "pass",
+      "detail": "74.230 vs 74.23"
+    },
+    {
+      "id": "case-height",
+      "status": "pass",
+      "detail": "125.900 vs 125.9"
+    },
+    {
+      "id": "case-structural-depth",
+      "status": "pass",
+      "detail": "10.960 vs 10.96"
+    },
+    {
+      "id": "envelope-depth",
+      "status": "pass",
+      "detail": "17.050 vs 17.05"
+    },
+    {
+      "id": "frame-front-z",
+      "status": "pass",
+      "detail": "10.960 vs 10.96"
+    },
+    {
+      "id": "spinner-front-z",
+      "status": "pass",
+      "detail": "17.050 vs 17.05"
+    },
+    {
+      "id": "spinner-protrusion",
+      "status": "pass",
+      "detail": "6.090 vs 6.09"
+    },
+    {
+      "id": "envelope-centred-on-origin",
+      "status": "pass",
+      "detail": "lo [-37.115, -8.525, -62.95] hi [37.115, 8.525, 62.95]"
+    },
+    {
+      "id": "all-case-meshes-watertight",
+      "status": "pass",
+      "detail": "0 non-manifold, 0 boundary edges expected"
+    },
+    {
+      "id": "required-core-objects-present",
+      "status": "pass",
+      "detail": ""
+    },
+    {
+      "id": "no-numeric-suffix-names",
+      "status": "pass",
+      "detail": ""
+    },
+    {
+      "id": "name-regex",
+      "status": "pass",
+      "detail": ""
+    },
+    {
+      "id": "triangle-budget",
+      "status": "pass",
+      "detail": "7508 triangles (pre-bevel)"
+    },
+    {
+      "id": "content-slot-empty-in-case-collection",
+      "status": "pass",
+      "detail": ""
+    },
+    {
+      "id": "spinner-only-in-reference-collection",
+      "status": "pass",
+      "detail": ""
+    }
+  ],
+  "case_size_mm": [
+    74.23,
+    10.96,
+    125.9
+  ],
+  "envelope_size_mm": [
+    74.23,
+    17.05,
+    125.9
+  ],
+  "cameras": {
+    "front": {
+      "projection": "orthographic",
+      "view_direction": [
+        0,
+        0,
+        -1
+      ],
+      "image_up": [
+        0,
+        1,
+        0
+      ],
+      "margin": 0.06,
+      "resolution": [
+        2048,
+        2048
+      ]
+    },
+    "back": {
+      "projection": "orthographic",
+      "view_direction": [
+        0,
+        0,
+        1
+      ],
+      "image_up": [
+        0,
+        1,
+        0
+      ],
+      "margin": 0.06,
+      "resolution": [
+        2048,
+        2048
+      ]
+    },
+    "left": {
+      "projection": "orthographic",
+      "view_direction": [
+        1,
+        0,
+        0
+      ],
+      "image_up": [
+        0,
+        1,
+        0
+      ],
+      "margin": 0.06,
+      "resolution": [
+        2048,
+        2048
+      ]
+    },
+    "right": {
+      "projection": "orthographic",
+      "view_direction": [
+        -1,
+        0,
+        0
+      ],
+      "image_up": [
+        0,
+        1,
+        0
+      ],
+      "margin": 0.06,
+      "resolution": [
+        2048,
+        2048
+      ]
+    },
+    "top": {
+      "projection": "orthographic",
+      "view_direction": [
+        0,
+        -1,
+        0
+      ],
+      "image_up": [
+        0,
+        0,
+        -1
+      ],
+      "margin": 0.06,
+      "resolution": [
+        2048,
+        2048
+      ]
+    },
+    "bottom": {
+      "projection": "orthographic",
+      "view_direction": [
+        0,
+        1,
+        0
+      ],
+      "image_up": [
+        0,
+        0,
+        1
+      ],
+      "margin": 0.06,
+      "resolution": [
+        2048,
+        2048
+      ]
+    },
+    "hero": {
+      "projection": "perspective",
+      "sensor_mm": [
+        36,
+        24
+      ],
+      "focal_length_mm": 85,
+      "yaw_deg": 25,
+      "elevation_deg": 5,
+      "margin": 0.08,
+      "resolution": [
+        2048,
+        1365
+      ],
+      "distance_m": 0.55214
+    },
+    "left-oblique": {
+      "projection": "perspective",
+      "sensor_mm": [
+        36,
+        24
+      ],
+      "focal_length_mm": 85,
+      "yaw_deg": -40.0,
+      "elevation_deg": 12.0,
+      "margin": 0.08,
+      "resolution": [
+        2048,
+        1365
+      ],
+      "distance_m": 0.57313
+    },
+    "right-oblique": {
+      "projection": "perspective",
+      "sensor_mm": [
+        36,
+        24
+      ],
+      "focal_length_mm": 85,
+      "yaw_deg": 40.0,
+      "elevation_deg": 12.0,
+      "margin": 0.08,
+      "resolution": [
+        2048,
+        1365
+      ],
+      "distance_m": 0.57313
+    },
+    "low-oblique": {
+      "projection": "perspective",
+      "sensor_mm": [
+        36,
+        24
+      ],
+      "focal_length_mm": 85,
+      "yaw_deg": 20.0,
+      "elevation_deg": -18.0,
+      "margin": 0.08,
+      "resolution": [
+        2048,
+        1365
+      ],
+      "distance_m": 0.55894
+    },
+    "side-thickness-macro": {
+      "projection": "orthographic",
+      "view_direction": [
+        1,
+        0,
+        0
+      ],
+      "image_up": [
+        0,
+        1,
+        0
+      ],
+      "margin": 0.06,
+      "resolution": [
+        2048,
+        1024
+      ]
+    }
+  },
+  "turntable": {
+    "frames": 144,
+    "degrees_per_frame": 2.5,
+    "fps": 24,
+    "camera": "hero",
+    "rotation_owner": "ROOT_PDC_PRESENTATION",
+    "raw_frame_dir": "/tmp/tri-spinner-slab-g05-r004-turntable"
+  },
+  "stills": [
+    "white-model-front.png",
+    "white-model-back.png",
+    "white-model-top.png",
+    "white-model-left.png",
+    "white-model-hero.png",
+    "white-model-left-oblique.png",
+    "white-model-right-oblique.png",
+    "white-model-low-oblique.png",
+    "white-model-side-thickness-macro.png"
+  ],
+  "all_pass": true
+}

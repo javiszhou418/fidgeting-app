@@ -1,0 +1,99 @@
+{
+  "schema": "premium-display-case-gate04-r021-isolated-source.v1",
+  "isolatedUnityCandidate": true,
+  "canonicalIntegration": false,
+  "sourceProject": "/tmp/FidgetingApp-PackOpening-R019-PackMouth-20260831",
+  "isolatedProject": "/tmp/FidgetingApp-PackOpening-R021-OpenMouth-20260901-r02",
+  "r021Rig": {
+    "source": "unity/FidgetingApp/ArtSource/ModelPipeline/premium-display-case/staging/pack-opening-gate04-r021-open-mouth-repair/PackOpeningGate04R021PackOnlyRig.fbx",
+    "destination": "Assets/Source/R021/PackOpeningGate04R021PackOnlyRig.fbx",
+    "sha256": "b06fd0ac333f12297937dce39de9f87c25ecc5e64d400ec8d38ca495a82339ba"
+  },
+  "r018LeftStripControl": {
+    "source": "unity/FidgetingApp/ArtSource/ModelPipeline/premium-display-case/staging/pack-opening-gate04-r018-coordinate-orientation/PackOpeningGate04R018PackOnlyRig.fbx",
+    "destination": "Assets/Source/R018Control/PackOpeningGate04R018LeftStripControl.fbx",
+    "sha256": "affe0a519712596660800dffb7d6b33126886defcaee9a33a658e97a79ca2f46",
+    "expectedR018Hash": "affe0a519712596660800dffb7d6b33126886defcaee9a33a658e97a79ca2f46"
+  },
+  "r017MirrorControl": {
+    "source": "inherited from immutable isolated R018 source project",
+    "destination": "Assets/Source/R017Control/PackOpeningGate04R017MirrorControl.fbx",
+    "sha256": "1a9c8f5b066cc2a24cf629c0a0ffa9eaaec05279af0e0171ab2f341731dabe66",
+    "expectedR017Hash": "1a9c8f5b066cc2a24cf629c0a0ffa9eaaec05279af0e0171ab2f341731dabe66"
+  },
+  "sourceFiles": [
+    {
+      "path": "Assets/IsolatedProofR021/Editor/IsolatedR021ProofBuilder.cs",
+      "sha256": "83a455440e8c0be9ec23e10c89d8a92d0b3425f2d7915e7586785f15d29e0cdc"
+    },
+    {
+      "path": "Assets/IsolatedProofR021/Editor/IsolatedR021ProofRunner.cs",
+      "sha256": "5fa22663507da8d733d0a9199eb75c86830bf05bc768acb4b4f07c84d8266d25"
+    },
+    {
+      "path": "Assets/IsolatedProofR021/Runtime/IsolatedR021OrientationCalibration.cs",
+      "sha256": "c6a2515016b9003a9e76cbaf7fc82f1ed53cf7a9b3f4d7c75a35c71878f6f621"
+    },
+    {
+      "path": "Assets/IsolatedProofR021/Runtime/IsolatedR021Preflight.cs",
+      "sha256": "77133d5434f3a2f23cc500cd7ff158fcc9932c150022c89406ccbd4c1d7d9892"
+    },
+    {
+      "path": "Assets/IsolatedProofR021/Runtime/IsolatedR021Profile.cs",
+      "sha256": "4feef0568d5a213949e341f43e13483374affe2f6c28d71b5bcac9d15978d412"
+    },
+    {
+      "path": "Assets/IsolatedProofR021/Runtime/IsolatedR021ProofCapture.cs",
+      "sha256": "c8ce2469df1d3e6a1cf14febb7e7deb46a04d435358fa04c3c37e5ca9aaaa749"
+    },
+    {
+      "path": "Assets/IsolatedProofR021/Runtime/IsolatedR021ProofRuntimeDriver.cs",
+      "sha256": "66a65c19a11bc02c54cc09d7beed82dd6efd2a9c0fbf0540f6f88bf6b118cd67"
+    },
+    {
+      "path": "Assets/IsolatedProofR021/Runtime/IsolatedR021ProofSequence.cs",
+      "sha256": "896d2a04367162c2167f7a94da52d07ef1c6ba1ed4b0815710615b109f2c234c"
+    },
+    {
+      "path": "Assets/IsolatedProofR021/Shaders/MakeItShineCc0ContourSweepR021.shader",
+      "sha256": "21e3d86c35bfd983e9add91f7dab83e05a577cf01262d54bb9b7b074cabf1808"
+    },
+    {
+      "path": "Assets/IsolatedProofR021/Shaders/MakeItShineCc0PackR021.shader",
+      "sha256": "763f8815ea9ac6cd30f0d0aa13ffb4b573f302ceb3a206bd0f34745aa6b3e8ac"
+    },
+    {
+      "path": "Assets/IsolatedProofR021/Shaders/OrientationCalibrationUnlitR021.shader",
+      "sha256": "42ccdbf29b9bd6cc8bd8c6cb7bd41f6261a74f31807e59a487f8c814d3c78bc5"
+    },
+    {
+      "path": "Assets/IsolatedProofR021/Shaders/RenderedBandMaskUnlitR021.shader",
+      "sha256": "03fa363ca46df9d45d5f5c961a87e31542f03b3a258f299a4d248ac14d6c40e7"
+    },
+    {
+      "path": "Assets/IsolatedProofR021/Shaders/TopSealTearClipR021.shader",
+      "sha256": "11a85b09fb76c97a02f3b3f26c9d0e87c3c21ff950146d9a840931443e3c542b"
+    },
+    {
+      "path": "Assets/IsolatedProofR021/Tests/Editor/IsolatedR021ProofTests.cs",
+      "sha256": "d03cad4c0aec914666fd26ad62bab0a34d214ae52356be08790dc948ad2e03d9"
+    }
+  ],
+  "sourceBoundary": {
+    "casePrefabChanged": false,
+    "contentSlotChanged": false,
+    "canonicalScenesChanged": false,
+    "shippingAssetsChanged": false,
+    "sourceCc0EffectsChanged": false,
+    "camerasChanged": false,
+    "candidateCaseRelationChanged": true,
+    "candidateMouthBounceLightChanged": true,
+    "topSealUvClipChanged": true,
+    "cavityBackWallFiniteDepthChanged": true,
+    "particleSettingsChanged": false,
+    "timingChanged": false,
+    "visualEffectsIntensityDuringPreflight": 0
+  },
+  "shippingReady": false,
+  "physicalDeviceInstalled": false
+}

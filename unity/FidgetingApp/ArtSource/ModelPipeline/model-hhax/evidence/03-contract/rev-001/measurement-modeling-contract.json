@@ -1,0 +1,907 @@
+{
+  "schemaVersion": 2,
+  "kind": "guided-core-measurement-modeling-contract",
+  "modelId": "model-hhax",
+  "gate": "03-contract",
+  "contractRevision": 1,
+  "createdAt": "2026-09-11T00:24:41.200Z",
+  "units": "millimeters",
+  "measurementProvenanceVersion": 1,
+  "approvedGate02EvidenceSha256": "dce9a12aca2fe2a1639f0144fab515660cea80acc834fdea1be13732dc63854b",
+  "sourceClaimIds": [
+    "hhax-claim-product-envelope-r002",
+    "hhax-claim-mechanical-linkage-r002",
+    "hhax-claim-shell-topology-r002",
+    "hhax-claim-service-topology-r002",
+    "hhax-claim-custom-day-material-r002",
+    "hhax-claim-three-art-surfaces-r002",
+    "hhax-claim-dark-emission-r002",
+    "hhax-claim-hidden-boundary-r002"
+  ],
+  "sourceAssetIds": [
+    "hhax-analysis-discovery-log-r002",
+    "hhax-analysis-board-r002",
+    "hhax-analysis-parameter-snapshot-r002",
+    "hhax-analysis-interactive-cad-r002",
+    "hhax-gate02-interactive-cad-review-r003",
+    "hhax-gate02-cad-review-snapshot-r003",
+    "hhax-intake-nxedc-source-metadata-r002",
+    "hhax-intake-nxedc-source-notes-r002",
+    "hhax-intake-nxedc-video-r002",
+    "hhax-intake-nxedc-teardown-sheet-r002",
+    "model-hhax-intake-r1-f2576ce0",
+    "hhax-intake-nxedc-open-overview-r002",
+    "hhax-intake-nxedc-rear-patch-r002",
+    "hhax-intake-nxedc-open-track-r002"
+  ],
+  "policy": {
+    "requiredCoreFieldIds": [
+      "closedOverallLength",
+      "overallWidth",
+      "totalClosedThickness",
+      "topPlateThickness",
+      "bottomPlateThickness",
+      "maximumSlideTravel",
+      "fixedAxisOffsetFromNearestEnd",
+      "rotatingCarrierDiameter",
+      "closedSeamGap"
+    ],
+    "optionalEngineeringFieldIds": [
+      "bilateralGrooveCenterSpacing",
+      "grooveWidth",
+      "grooveDepth",
+      "fixedAxisDiameter",
+      "upperStepHeight",
+      "lowerStepHeight",
+      "visibleFollowerDimensions"
+    ],
+    "manufacturingLaterFieldIds": [
+      "operatingClearance",
+      "manufacturingAllowance",
+      "manufacturingTolerance"
+    ],
+    "optionalFieldsBlockInitialBlender": false,
+    "manufacturingFieldsBlockInitialBlender": false,
+    "rejectedDefaults": [
+      "50×31×12 mm",
+      "21 mm"
+    ],
+    "allowedNonUserBasisTypes": [
+      "same-model-official-spec",
+      "same-model-public-teardown-calibration"
+    ],
+    "genericInferenceForbidden": true,
+    "calibratedValuesAreDigitalReconstructionTargetsOnly": true,
+    "nonUserValuesMayNotClaimMeasuredOrManufacturingStatus": true
+  },
+  "definitions": {
+    "requiredCore": [
+      {
+        "id": "closedOverallLength",
+        "label": "闭合总长 L",
+        "method": "正交俯视；卡尺或同平面毫米尺照片"
+      },
+      {
+        "id": "overallWidth",
+        "label": "总宽 W",
+        "method": "正交俯视；测最宽处"
+      },
+      {
+        "id": "totalClosedThickness",
+        "label": "闭合总厚 T",
+        "method": "正交侧视；测闭合总厚"
+      },
+      {
+        "id": "topPlateThickness",
+        "label": "顶片厚度",
+        "method": "正交侧视；避开台阶测主体厚度"
+      },
+      {
+        "id": "bottomPlateThickness",
+        "label": "底片厚度",
+        "method": "正交侧视；避开台阶测主体厚度"
+      },
+      {
+        "id": "maximumSlideTravel",
+        "label": "最大直推行程",
+        "method": "闭合/全开同机位同尺；比较固定端点"
+      },
+      {
+        "id": "fixedAxisOffsetFromNearestEnd",
+        "label": "轴心距最近圆端",
+        "method": "俯视内部近照；圆端外缘到轴心中心"
+      },
+      {
+        "id": "rotatingCarrierDiameter",
+        "label": "旋转载体直径",
+        "method": "俯视内部近照；测圆形载体最大外径"
+      },
+      {
+        "id": "closedSeamGap",
+        "label": "闭合接缝/间隙",
+        "method": "正交侧视微距；测两片闭合可见间隙"
+      }
+    ],
+    "optionalEngineering": [
+      {
+        "id": "bilateralGrooveCenterSpacing",
+        "label": "双槽中心距"
+      },
+      {
+        "id": "grooveWidth",
+        "label": "槽宽"
+      },
+      {
+        "id": "grooveDepth",
+        "label": "槽深"
+      },
+      {
+        "id": "fixedAxisDiameter",
+        "label": "固定轴直径"
+      },
+      {
+        "id": "upperStepHeight",
+        "label": "顶片台阶高度"
+      },
+      {
+        "id": "lowerStepHeight",
+        "label": "底片台阶高度"
+      },
+      {
+        "id": "visibleFollowerDimensions",
+        "label": "可见随动/接触尺寸"
+      }
+    ],
+    "manufacturingLater": [
+      {
+        "id": "operatingClearance",
+        "label": "工作间隙"
+      },
+      {
+        "id": "manufacturingAllowance",
+        "label": "加工余量"
+      },
+      {
+        "id": "manufacturingTolerance",
+        "label": "制造公差"
+      }
+    ]
+  },
+  "measurements": {
+    "required": {
+      "closedOverallLength": {
+        "state": "known",
+        "unknown": false,
+        "valueMm": 50.5,
+        "uncertaintyMm": 0.5,
+        "source": "同款正式规格",
+        "basisType": "same-model-official-spec",
+        "method": "逐字抄录同款公开零售标称；多站可能共用同一商品 feed，不作独立测量计数。",
+        "sourceAssetIds": [
+          "hhax-intake-nxedc-source-metadata-r002",
+          "hhax-intake-nxedc-source-notes-r002"
+        ],
+        "calibration": null,
+        "measured": false,
+        "manufacturingDimension": false,
+        "physicalClaim": false,
+        "photoAssetIds": [],
+        "sourceEvidence": [
+          {
+            "assetId": "hhax-intake-nxedc-source-metadata-r002",
+            "sha256": "b51ccd78dad87b40c4e568b02349d946f4aa7a81854aef7bd472e309f8a1c38f",
+            "path": "unity/FidgetingApp/ArtSource/ModelPipeline/model-hhax/evidence/01-intake/rev-002/source-metadata.json",
+            "contentClass": "same-model-official-product-spec",
+            "sourceUrl": "https://nxedc.com/products/groove-ultra"
+          },
+          {
+            "assetId": "hhax-intake-nxedc-source-notes-r002",
+            "sha256": "c7cd323ef2b5dea35f98819ffbca0a24541e9271953e713e29bb6fcb6a3fc454",
+            "path": "unity/FidgetingApp/ArtSource/ModelPipeline/model-hhax/evidence/01-intake/rev-002/source-notes.md",
+            "contentClass": "same-model-official-spec",
+            "sourceUrl": "https://nxedc.com/products/groove-ultra"
+          }
+        ],
+        "claimClass": "published-same-model-specification",
+        "provisional": false,
+        "reversible": false
+      },
+      "overallWidth": {
+        "state": "known",
+        "unknown": false,
+        "valueMm": 30.9,
+        "uncertaintyMm": 0.5,
+        "source": "同款正式规格",
+        "basisType": "same-model-official-spec",
+        "method": "逐字抄录同款公开零售标称；保留 L/W=1.634 的来源值及比例警告。",
+        "sourceAssetIds": [
+          "hhax-intake-nxedc-source-metadata-r002",
+          "hhax-intake-nxedc-source-notes-r002"
+        ],
+        "calibration": null,
+        "measured": false,
+        "manufacturingDimension": false,
+        "physicalClaim": false,
+        "photoAssetIds": [],
+        "sourceEvidence": [
+          {
+            "assetId": "hhax-intake-nxedc-source-metadata-r002",
+            "sha256": "b51ccd78dad87b40c4e568b02349d946f4aa7a81854aef7bd472e309f8a1c38f",
+            "path": "unity/FidgetingApp/ArtSource/ModelPipeline/model-hhax/evidence/01-intake/rev-002/source-metadata.json",
+            "contentClass": "same-model-official-product-spec",
+            "sourceUrl": "https://nxedc.com/products/groove-ultra"
+          },
+          {
+            "assetId": "hhax-intake-nxedc-source-notes-r002",
+            "sha256": "c7cd323ef2b5dea35f98819ffbca0a24541e9271953e713e29bb6fcb6a3fc454",
+            "path": "unity/FidgetingApp/ArtSource/ModelPipeline/model-hhax/evidence/01-intake/rev-002/source-notes.md",
+            "contentClass": "same-model-official-spec",
+            "sourceUrl": "https://nxedc.com/products/groove-ultra"
+          }
+        ],
+        "claimClass": "published-same-model-specification",
+        "provisional": false,
+        "reversible": false
+      },
+      "totalClosedThickness": {
+        "state": "known",
+        "unknown": false,
+        "valueMm": 13.6,
+        "uncertaintyMm": 1.5,
+        "source": "同款正式规格",
+        "basisType": "same-model-official-spec",
+        "method": "普通同款公开标称作为数字外廓基线；定制封晶可能正向增厚，故扩大复原不确定度。",
+        "sourceAssetIds": [
+          "hhax-intake-nxedc-source-metadata-r002",
+          "hhax-intake-nxedc-source-notes-r002"
+        ],
+        "calibration": null,
+        "measured": false,
+        "manufacturingDimension": false,
+        "physicalClaim": false,
+        "photoAssetIds": [],
+        "sourceEvidence": [
+          {
+            "assetId": "hhax-intake-nxedc-source-metadata-r002",
+            "sha256": "b51ccd78dad87b40c4e568b02349d946f4aa7a81854aef7bd472e309f8a1c38f",
+            "path": "unity/FidgetingApp/ArtSource/ModelPipeline/model-hhax/evidence/01-intake/rev-002/source-metadata.json",
+            "contentClass": "same-model-official-product-spec",
+            "sourceUrl": "https://nxedc.com/products/groove-ultra"
+          },
+          {
+            "assetId": "hhax-intake-nxedc-source-notes-r002",
+            "sha256": "c7cd323ef2b5dea35f98819ffbca0a24541e9271953e713e29bb6fcb6a3fc454",
+            "path": "unity/FidgetingApp/ArtSource/ModelPipeline/model-hhax/evidence/01-intake/rev-002/source-notes.md",
+            "contentClass": "same-model-official-spec",
+            "sourceUrl": "https://nxedc.com/products/groove-ultra"
+          }
+        ],
+        "claimClass": "published-same-model-specification",
+        "provisional": false,
+        "reversible": false
+      },
+      "topPlateThickness": {
+        "state": "known",
+        "unknown": false,
+        "valueMm": 6.55,
+        "uncertaintyMm": 1.1,
+        "source": "同款公开拆解校准",
+        "basisType": "same-model-public-teardown-calibration",
+        "method": "公开视频 4–5 秒侧视：两主层合计投影 46.2/48 px；上下归属不可分，均取 0.50T 的可逆数字目标。",
+        "sourceAssetIds": [
+          "hhax-intake-nxedc-source-metadata-r002",
+          "hhax-intake-nxedc-source-notes-r002",
+          "hhax-intake-nxedc-video-r002",
+          "hhax-intake-nxedc-teardown-sheet-r002"
+        ],
+        "calibration": {
+          "anchorFieldId": "totalClosedThickness",
+          "anchorOfficialValueMm": 13.6,
+          "imagePixelSpan": 48,
+          "targetPixelSpan": 23.12,
+          "sourceAssetId": "hhax-intake-nxedc-video-r002",
+          "note": "可回退的数字复原比例；不是物理实测或加工尺寸。",
+          "scaleMmPerPixel": 0.2833333333333333,
+          "derivedValueMm": 6.550666666666667,
+          "deltaFromEnteredValueMm": 0.0006666666666674814
+        },
+        "measured": false,
+        "manufacturingDimension": false,
+        "physicalClaim": false,
+        "photoAssetIds": [],
+        "sourceEvidence": [
+          {
+            "assetId": "hhax-intake-nxedc-source-metadata-r002",
+            "sha256": "b51ccd78dad87b40c4e568b02349d946f4aa7a81854aef7bd472e309f8a1c38f",
+            "path": "unity/FidgetingApp/ArtSource/ModelPipeline/model-hhax/evidence/01-intake/rev-002/source-metadata.json",
+            "contentClass": "same-model-official-product-spec",
+            "sourceUrl": "https://nxedc.com/products/groove-ultra"
+          },
+          {
+            "assetId": "hhax-intake-nxedc-source-notes-r002",
+            "sha256": "c7cd323ef2b5dea35f98819ffbca0a24541e9271953e713e29bb6fcb6a3fc454",
+            "path": "unity/FidgetingApp/ArtSource/ModelPipeline/model-hhax/evidence/01-intake/rev-002/source-notes.md",
+            "contentClass": "same-model-official-spec",
+            "sourceUrl": "https://nxedc.com/products/groove-ultra"
+          },
+          {
+            "assetId": "hhax-intake-nxedc-video-r002",
+            "sha256": "ad76fcbc0daded98e872920350f47b693109387a00237932c2686670a5a5456f",
+            "path": "unity/FidgetingApp/ArtSource/ModelPipeline/model-hhax/evidence/01-intake/rev-002/nxedc-groove-ultra-source.mp4",
+            "contentClass": "same-model-public-teardown-video",
+            "sourceUrl": "https://nxedc.com/cdn/shop/videos/c/vp/5e07740d4ff24673810186d4e4114541/5e07740d4ff24673810186d4e4114541.HD-1080p-2.5Mbps-88589287.mp4?v=0"
+          },
+          {
+            "assetId": "hhax-intake-nxedc-teardown-sheet-r002",
+            "sha256": "2258fbcf535977a3d6efa2cc243dba019cbd5acf2897451f24a3b5c739a36344",
+            "path": "unity/FidgetingApp/ArtSource/ModelPipeline/model-hhax/evidence/01-intake/rev-002/nxedc-teardown-contact-sheet.jpg",
+            "contentClass": "same-model-public-teardown-image",
+            "sourceUrl": "https://nxedc.com/products/groove-ultra"
+          }
+        ],
+        "claimClass": "provisional-digital-reconstruction-target",
+        "provisional": true,
+        "reversible": true
+      },
+      "bottomPlateThickness": {
+        "state": "known",
+        "unknown": false,
+        "valueMm": 6.55,
+        "uncertaintyMm": 1.1,
+        "source": "同款公开拆解校准",
+        "basisType": "same-model-public-teardown-calibration",
+        "method": "公开视频 4–5 秒侧视：两主层约 48:52 但归属不可可靠判定；采用对称 0.50T 可逆数字目标。",
+        "sourceAssetIds": [
+          "hhax-intake-nxedc-source-metadata-r002",
+          "hhax-intake-nxedc-source-notes-r002",
+          "hhax-intake-nxedc-video-r002",
+          "hhax-intake-nxedc-teardown-sheet-r002"
+        ],
+        "calibration": {
+          "anchorFieldId": "totalClosedThickness",
+          "anchorOfficialValueMm": 13.6,
+          "imagePixelSpan": 48,
+          "targetPixelSpan": 23.12,
+          "sourceAssetId": "hhax-intake-nxedc-video-r002",
+          "note": "可回退的数字复原比例；不是物理实测或加工尺寸。",
+          "scaleMmPerPixel": 0.2833333333333333,
+          "derivedValueMm": 6.550666666666667,
+          "deltaFromEnteredValueMm": 0.0006666666666674814
+        },
+        "measured": false,
+        "manufacturingDimension": false,
+        "physicalClaim": false,
+        "photoAssetIds": [],
+        "sourceEvidence": [
+          {
+            "assetId": "hhax-intake-nxedc-source-metadata-r002",
+            "sha256": "b51ccd78dad87b40c4e568b02349d946f4aa7a81854aef7bd472e309f8a1c38f",
+            "path": "unity/FidgetingApp/ArtSource/ModelPipeline/model-hhax/evidence/01-intake/rev-002/source-metadata.json",
+            "contentClass": "same-model-official-product-spec",
+            "sourceUrl": "https://nxedc.com/products/groove-ultra"
+          },
+          {
+            "assetId": "hhax-intake-nxedc-source-notes-r002",
+            "sha256": "c7cd323ef2b5dea35f98819ffbca0a24541e9271953e713e29bb6fcb6a3fc454",
+            "path": "unity/FidgetingApp/ArtSource/ModelPipeline/model-hhax/evidence/01-intake/rev-002/source-notes.md",
+            "contentClass": "same-model-official-spec",
+            "sourceUrl": "https://nxedc.com/products/groove-ultra"
+          },
+          {
+            "assetId": "hhax-intake-nxedc-video-r002",
+            "sha256": "ad76fcbc0daded98e872920350f47b693109387a00237932c2686670a5a5456f",
+            "path": "unity/FidgetingApp/ArtSource/ModelPipeline/model-hhax/evidence/01-intake/rev-002/nxedc-groove-ultra-source.mp4",
+            "contentClass": "same-model-public-teardown-video",
+            "sourceUrl": "https://nxedc.com/cdn/shop/videos/c/vp/5e07740d4ff24673810186d4e4114541/5e07740d4ff24673810186d4e4114541.HD-1080p-2.5Mbps-88589287.mp4?v=0"
+          },
+          {
+            "assetId": "hhax-intake-nxedc-teardown-sheet-r002",
+            "sha256": "2258fbcf535977a3d6efa2cc243dba019cbd5acf2897451f24a3b5c739a36344",
+            "path": "unity/FidgetingApp/ArtSource/ModelPipeline/model-hhax/evidence/01-intake/rev-002/nxedc-teardown-contact-sheet.jpg",
+            "contentClass": "same-model-public-teardown-image",
+            "sourceUrl": "https://nxedc.com/products/groove-ultra"
+          }
+        ],
+        "claimClass": "provisional-digital-reconstruction-target",
+        "provisional": true,
+        "reversible": true
+      },
+      "maximumSlideTravel": {
+        "state": "known",
+        "unknown": false,
+        "valueMm": 18.7,
+        "uncertaintyMm": 2.1,
+        "source": "同款公开拆解校准",
+        "basisType": "same-model-public-teardown-calibration",
+        "method": "用户开启图与同款公开视频交叉校准：上壳长轴约 360 px，端点位移目标约 133.3 px，即约 0.37L；止点未知。",
+        "sourceAssetIds": [
+          "hhax-intake-nxedc-source-metadata-r002",
+          "hhax-intake-nxedc-source-notes-r002",
+          "hhax-intake-nxedc-video-r002",
+          "model-hhax-intake-r1-f2576ce0",
+          "hhax-intake-nxedc-open-overview-r002"
+        ],
+        "calibration": {
+          "anchorFieldId": "closedOverallLength",
+          "anchorOfficialValueMm": 50.5,
+          "imagePixelSpan": 360,
+          "targetPixelSpan": 133.3,
+          "sourceAssetId": "hhax-intake-nxedc-video-r002",
+          "note": "可回退的数字复原比例；不是物理实测或加工尺寸。",
+          "scaleMmPerPixel": 0.14027777777777778,
+          "derivedValueMm": 18.69902777777778,
+          "deltaFromEnteredValueMm": 0.0009722222222201538
+        },
+        "measured": false,
+        "manufacturingDimension": false,
+        "physicalClaim": false,
+        "photoAssetIds": [],
+        "sourceEvidence": [
+          {
+            "assetId": "hhax-intake-nxedc-source-metadata-r002",
+            "sha256": "b51ccd78dad87b40c4e568b02349d946f4aa7a81854aef7bd472e309f8a1c38f",
+            "path": "unity/FidgetingApp/ArtSource/ModelPipeline/model-hhax/evidence/01-intake/rev-002/source-metadata.json",
+            "contentClass": "same-model-official-product-spec",
+            "sourceUrl": "https://nxedc.com/products/groove-ultra"
+          },
+          {
+            "assetId": "hhax-intake-nxedc-source-notes-r002",
+            "sha256": "c7cd323ef2b5dea35f98819ffbca0a24541e9271953e713e29bb6fcb6a3fc454",
+            "path": "unity/FidgetingApp/ArtSource/ModelPipeline/model-hhax/evidence/01-intake/rev-002/source-notes.md",
+            "contentClass": "same-model-official-spec",
+            "sourceUrl": "https://nxedc.com/products/groove-ultra"
+          },
+          {
+            "assetId": "hhax-intake-nxedc-video-r002",
+            "sha256": "ad76fcbc0daded98e872920350f47b693109387a00237932c2686670a5a5456f",
+            "path": "unity/FidgetingApp/ArtSource/ModelPipeline/model-hhax/evidence/01-intake/rev-002/nxedc-groove-ultra-source.mp4",
+            "contentClass": "same-model-public-teardown-video",
+            "sourceUrl": "https://nxedc.com/cdn/shop/videos/c/vp/5e07740d4ff24673810186d4e4114541/5e07740d4ff24673810186d4e4114541.HD-1080p-2.5Mbps-88589287.mp4?v=0"
+          },
+          {
+            "assetId": "model-hhax-intake-r1-f2576ce0",
+            "sha256": "b7fce5d526d948e1d56df1299ca3c0cef931b4405a4a1f9175c77b3cf8941236",
+            "path": "unity/FidgetingApp/ArtSource/ModelPipeline/model-hhax/evidence/01-intake/rev-001/5e1659c986fca1385c68a75261bb7390_MD5.jpg",
+            "contentClass": "external-reference-photo",
+            "sourceUrl": "https://www.xiaohongshu.com/discovery/item/6aa182ae000000000b0017b6?app_platform=ios&app_version=9.45&share_from_user_hidden=true&xsec_source=app_share&type=video&xsec_token=CBpDPiwV4lXDxB8i5-Ox-Sh-TbKduZ2qOXimCn4CDHqfM=&author_share=1&xhsshare=WeixinSession&shareRedId=N0c5ODVGNUI3OEdHOjgzPThFQko8NjxL&apptime=1788994940&share_id=a02b6bdf75ba4a118ef4ef4e9ff5e95d&track_code=7vfi8hxAD3c"
+          },
+          {
+            "assetId": "hhax-intake-nxedc-open-overview-r002",
+            "sha256": "4a105bb4cc9b9a98446cedd62feb3fd83f652ae6eced5b10e46786db89247808",
+            "path": "unity/FidgetingApp/ArtSource/ModelPipeline/model-hhax/evidence/01-intake/rev-002/nxedc-open-overview.jpg",
+            "contentClass": "same-model-public-teardown-image",
+            "sourceUrl": "https://nxedc.com/products/groove-ultra"
+          }
+        ],
+        "claimClass": "provisional-digital-reconstruction-target",
+        "provisional": true,
+        "reversible": true
+      },
+      "fixedAxisOffsetFromNearestEnd": {
+        "state": "known",
+        "unknown": false,
+        "valueMm": 14.2,
+        "uncertaintyMm": 2,
+        "source": "同款公开拆解校准",
+        "basisType": "same-model-public-teardown-calibration",
+        "method": "同款公开视频约 64 秒近俯视：圆端到中央螺钉约 64.3 px，本体宽约 140 px，以 W 校准。",
+        "sourceAssetIds": [
+          "hhax-intake-nxedc-source-metadata-r002",
+          "hhax-intake-nxedc-source-notes-r002",
+          "hhax-intake-nxedc-video-r002",
+          "hhax-intake-nxedc-rear-patch-r002"
+        ],
+        "calibration": {
+          "anchorFieldId": "overallWidth",
+          "anchorOfficialValueMm": 30.9,
+          "imagePixelSpan": 140,
+          "targetPixelSpan": 64.3,
+          "sourceAssetId": "hhax-intake-nxedc-video-r002",
+          "note": "可回退的数字复原比例；不是物理实测或加工尺寸。",
+          "scaleMmPerPixel": 0.2207142857142857,
+          "derivedValueMm": 14.191928571428571,
+          "deltaFromEnteredValueMm": 0.008071428571428285
+        },
+        "measured": false,
+        "manufacturingDimension": false,
+        "physicalClaim": false,
+        "photoAssetIds": [],
+        "sourceEvidence": [
+          {
+            "assetId": "hhax-intake-nxedc-source-metadata-r002",
+            "sha256": "b51ccd78dad87b40c4e568b02349d946f4aa7a81854aef7bd472e309f8a1c38f",
+            "path": "unity/FidgetingApp/ArtSource/ModelPipeline/model-hhax/evidence/01-intake/rev-002/source-metadata.json",
+            "contentClass": "same-model-official-product-spec",
+            "sourceUrl": "https://nxedc.com/products/groove-ultra"
+          },
+          {
+            "assetId": "hhax-intake-nxedc-source-notes-r002",
+            "sha256": "c7cd323ef2b5dea35f98819ffbca0a24541e9271953e713e29bb6fcb6a3fc454",
+            "path": "unity/FidgetingApp/ArtSource/ModelPipeline/model-hhax/evidence/01-intake/rev-002/source-notes.md",
+            "contentClass": "same-model-official-spec",
+            "sourceUrl": "https://nxedc.com/products/groove-ultra"
+          },
+          {
+            "assetId": "hhax-intake-nxedc-video-r002",
+            "sha256": "ad76fcbc0daded98e872920350f47b693109387a00237932c2686670a5a5456f",
+            "path": "unity/FidgetingApp/ArtSource/ModelPipeline/model-hhax/evidence/01-intake/rev-002/nxedc-groove-ultra-source.mp4",
+            "contentClass": "same-model-public-teardown-video",
+            "sourceUrl": "https://nxedc.com/cdn/shop/videos/c/vp/5e07740d4ff24673810186d4e4114541/5e07740d4ff24673810186d4e4114541.HD-1080p-2.5Mbps-88589287.mp4?v=0"
+          },
+          {
+            "assetId": "hhax-intake-nxedc-rear-patch-r002",
+            "sha256": "388cd0b80b06fc6ef5c9726eae3713acb9537c108ff1edce0667ba3c252108d0",
+            "path": "unity/FidgetingApp/ArtSource/ModelPipeline/model-hhax/evidence/01-intake/rev-002/nxedc-rear-patch.jpg",
+            "contentClass": "same-model-public-teardown-image",
+            "sourceUrl": "https://nxedc.com/products/groove-ultra"
+          }
+        ],
+        "claimClass": "provisional-digital-reconstruction-target",
+        "provisional": true,
+        "reversible": true
+      },
+      "rotatingCarrierDiameter": {
+        "state": "known",
+        "unknown": false,
+        "valueMm": 21.6,
+        "uncertaintyMm": 2,
+        "source": "同款公开拆解校准",
+        "basisType": "same-model-public-teardown-calibration",
+        "method": "同款公开视频 58–68 秒：圆轨外径约 98 px，本体宽约 140 px，以 W 校准；透视与外缘选择纳入误差。",
+        "sourceAssetIds": [
+          "hhax-intake-nxedc-source-metadata-r002",
+          "hhax-intake-nxedc-source-notes-r002",
+          "hhax-intake-nxedc-video-r002",
+          "hhax-intake-nxedc-rear-patch-r002",
+          "hhax-intake-nxedc-open-track-r002"
+        ],
+        "calibration": {
+          "anchorFieldId": "overallWidth",
+          "anchorOfficialValueMm": 30.9,
+          "imagePixelSpan": 140,
+          "targetPixelSpan": 98,
+          "sourceAssetId": "hhax-intake-nxedc-video-r002",
+          "note": "可回退的数字复原比例；不是物理实测或加工尺寸。",
+          "scaleMmPerPixel": 0.2207142857142857,
+          "derivedValueMm": 21.63,
+          "deltaFromEnteredValueMm": 0.029999999999997584
+        },
+        "measured": false,
+        "manufacturingDimension": false,
+        "physicalClaim": false,
+        "photoAssetIds": [],
+        "sourceEvidence": [
+          {
+            "assetId": "hhax-intake-nxedc-source-metadata-r002",
+            "sha256": "b51ccd78dad87b40c4e568b02349d946f4aa7a81854aef7bd472e309f8a1c38f",
+            "path": "unity/FidgetingApp/ArtSource/ModelPipeline/model-hhax/evidence/01-intake/rev-002/source-metadata.json",
+            "contentClass": "same-model-official-product-spec",
+            "sourceUrl": "https://nxedc.com/products/groove-ultra"
+          },
+          {
+            "assetId": "hhax-intake-nxedc-source-notes-r002",
+            "sha256": "c7cd323ef2b5dea35f98819ffbca0a24541e9271953e713e29bb6fcb6a3fc454",
+            "path": "unity/FidgetingApp/ArtSource/ModelPipeline/model-hhax/evidence/01-intake/rev-002/source-notes.md",
+            "contentClass": "same-model-official-spec",
+            "sourceUrl": "https://nxedc.com/products/groove-ultra"
+          },
+          {
+            "assetId": "hhax-intake-nxedc-video-r002",
+            "sha256": "ad76fcbc0daded98e872920350f47b693109387a00237932c2686670a5a5456f",
+            "path": "unity/FidgetingApp/ArtSource/ModelPipeline/model-hhax/evidence/01-intake/rev-002/nxedc-groove-ultra-source.mp4",
+            "contentClass": "same-model-public-teardown-video",
+            "sourceUrl": "https://nxedc.com/cdn/shop/videos/c/vp/5e07740d4ff24673810186d4e4114541/5e07740d4ff24673810186d4e4114541.HD-1080p-2.5Mbps-88589287.mp4?v=0"
+          },
+          {
+            "assetId": "hhax-intake-nxedc-rear-patch-r002",
+            "sha256": "388cd0b80b06fc6ef5c9726eae3713acb9537c108ff1edce0667ba3c252108d0",
+            "path": "unity/FidgetingApp/ArtSource/ModelPipeline/model-hhax/evidence/01-intake/rev-002/nxedc-rear-patch.jpg",
+            "contentClass": "same-model-public-teardown-image",
+            "sourceUrl": "https://nxedc.com/products/groove-ultra"
+          },
+          {
+            "assetId": "hhax-intake-nxedc-open-track-r002",
+            "sha256": "bb39c4df9e6d0b6a87613874bfa16198400c40b418bec5e49b8215101ea5830f",
+            "path": "unity/FidgetingApp/ArtSource/ModelPipeline/model-hhax/evidence/01-intake/rev-002/nxedc-open-track.jpg",
+            "contentClass": "same-model-public-teardown-image",
+            "sourceUrl": "https://nxedc.com/products/groove-ultra"
+          }
+        ],
+        "claimClass": "provisional-digital-reconstruction-target",
+        "provisional": true,
+        "reversible": true
+      },
+      "closedSeamGap": {
+        "state": "known",
+        "unknown": false,
+        "valueMm": 0.5,
+        "uncertaintyMm": 0.3,
+        "source": "同款公开拆解校准",
+        "basisType": "same-model-public-teardown-calibration",
+        "method": "公开视频 4–5 秒暗线约 1.76/48 总厚投影；混入倒角、反光和抗锯齿，仅作为渲染接缝目标。",
+        "sourceAssetIds": [
+          "hhax-intake-nxedc-source-metadata-r002",
+          "hhax-intake-nxedc-source-notes-r002",
+          "hhax-intake-nxedc-video-r002",
+          "hhax-intake-nxedc-teardown-sheet-r002"
+        ],
+        "calibration": {
+          "anchorFieldId": "totalClosedThickness",
+          "anchorOfficialValueMm": 13.6,
+          "imagePixelSpan": 48,
+          "targetPixelSpan": 1.76,
+          "sourceAssetId": "hhax-intake-nxedc-video-r002",
+          "note": "可回退的数字复原比例；不是物理实测或加工尺寸。",
+          "scaleMmPerPixel": 0.2833333333333333,
+          "derivedValueMm": 0.49866666666666665,
+          "deltaFromEnteredValueMm": 0.001333333333333353
+        },
+        "measured": false,
+        "manufacturingDimension": false,
+        "physicalClaim": false,
+        "photoAssetIds": [],
+        "sourceEvidence": [
+          {
+            "assetId": "hhax-intake-nxedc-source-metadata-r002",
+            "sha256": "b51ccd78dad87b40c4e568b02349d946f4aa7a81854aef7bd472e309f8a1c38f",
+            "path": "unity/FidgetingApp/ArtSource/ModelPipeline/model-hhax/evidence/01-intake/rev-002/source-metadata.json",
+            "contentClass": "same-model-official-product-spec",
+            "sourceUrl": "https://nxedc.com/products/groove-ultra"
+          },
+          {
+            "assetId": "hhax-intake-nxedc-source-notes-r002",
+            "sha256": "c7cd323ef2b5dea35f98819ffbca0a24541e9271953e713e29bb6fcb6a3fc454",
+            "path": "unity/FidgetingApp/ArtSource/ModelPipeline/model-hhax/evidence/01-intake/rev-002/source-notes.md",
+            "contentClass": "same-model-official-spec",
+            "sourceUrl": "https://nxedc.com/products/groove-ultra"
+          },
+          {
+            "assetId": "hhax-intake-nxedc-video-r002",
+            "sha256": "ad76fcbc0daded98e872920350f47b693109387a00237932c2686670a5a5456f",
+            "path": "unity/FidgetingApp/ArtSource/ModelPipeline/model-hhax/evidence/01-intake/rev-002/nxedc-groove-ultra-source.mp4",
+            "contentClass": "same-model-public-teardown-video",
+            "sourceUrl": "https://nxedc.com/cdn/shop/videos/c/vp/5e07740d4ff24673810186d4e4114541/5e07740d4ff24673810186d4e4114541.HD-1080p-2.5Mbps-88589287.mp4?v=0"
+          },
+          {
+            "assetId": "hhax-intake-nxedc-teardown-sheet-r002",
+            "sha256": "2258fbcf535977a3d6efa2cc243dba019cbd5acf2897451f24a3b5c739a36344",
+            "path": "unity/FidgetingApp/ArtSource/ModelPipeline/model-hhax/evidence/01-intake/rev-002/nxedc-teardown-contact-sheet.jpg",
+            "contentClass": "same-model-public-teardown-image",
+            "sourceUrl": "https://nxedc.com/products/groove-ultra"
+          }
+        ],
+        "claimClass": "provisional-digital-reconstruction-target",
+        "provisional": true,
+        "reversible": true
+      }
+    },
+    "optional": {
+      "bilateralGrooveCenterSpacing": {
+        "state": "unanswered",
+        "unknown": false,
+        "valueMm": null,
+        "uncertaintyMm": null,
+        "source": null,
+        "basisType": null,
+        "method": null,
+        "sourceAssetIds": [],
+        "calibration": null,
+        "measured": false,
+        "manufacturingDimension": false,
+        "physicalClaim": false,
+        "photoAssetIds": [],
+        "sourceEvidence": []
+      },
+      "grooveWidth": {
+        "state": "unanswered",
+        "unknown": false,
+        "valueMm": null,
+        "uncertaintyMm": null,
+        "source": null,
+        "basisType": null,
+        "method": null,
+        "sourceAssetIds": [],
+        "calibration": null,
+        "measured": false,
+        "manufacturingDimension": false,
+        "physicalClaim": false,
+        "photoAssetIds": [],
+        "sourceEvidence": []
+      },
+      "grooveDepth": {
+        "state": "unanswered",
+        "unknown": false,
+        "valueMm": null,
+        "uncertaintyMm": null,
+        "source": null,
+        "basisType": null,
+        "method": null,
+        "sourceAssetIds": [],
+        "calibration": null,
+        "measured": false,
+        "manufacturingDimension": false,
+        "physicalClaim": false,
+        "photoAssetIds": [],
+        "sourceEvidence": []
+      },
+      "fixedAxisDiameter": {
+        "state": "unanswered",
+        "unknown": false,
+        "valueMm": null,
+        "uncertaintyMm": null,
+        "source": null,
+        "basisType": null,
+        "method": null,
+        "sourceAssetIds": [],
+        "calibration": null,
+        "measured": false,
+        "manufacturingDimension": false,
+        "physicalClaim": false,
+        "photoAssetIds": [],
+        "sourceEvidence": []
+      },
+      "upperStepHeight": {
+        "state": "unanswered",
+        "unknown": false,
+        "valueMm": null,
+        "uncertaintyMm": null,
+        "source": null,
+        "basisType": null,
+        "method": null,
+        "sourceAssetIds": [],
+        "calibration": null,
+        "measured": false,
+        "manufacturingDimension": false,
+        "physicalClaim": false,
+        "photoAssetIds": [],
+        "sourceEvidence": []
+      },
+      "lowerStepHeight": {
+        "state": "unanswered",
+        "unknown": false,
+        "valueMm": null,
+        "uncertaintyMm": null,
+        "source": null,
+        "basisType": null,
+        "method": null,
+        "sourceAssetIds": [],
+        "calibration": null,
+        "measured": false,
+        "manufacturingDimension": false,
+        "physicalClaim": false,
+        "photoAssetIds": [],
+        "sourceEvidence": []
+      },
+      "visibleFollowerDimensions": {
+        "state": "unanswered",
+        "unknown": false,
+        "valueMm": null,
+        "uncertaintyMm": null,
+        "source": null,
+        "basisType": null,
+        "method": null,
+        "sourceAssetIds": [],
+        "calibration": null,
+        "measured": false,
+        "manufacturingDimension": false,
+        "physicalClaim": false,
+        "photoAssetIds": [],
+        "sourceEvidence": []
+      }
+    },
+    "manufacturingLater": {
+      "operatingClearance": {
+        "valueMm": null,
+        "state": "unknown-manufacturing-later",
+        "blocking": false
+      },
+      "manufacturingAllowance": {
+        "valueMm": null,
+        "state": "unknown-manufacturing-later",
+        "blocking": false
+      },
+      "manufacturingTolerance": {
+        "valueMm": null,
+        "state": "unknown-manufacturing-later",
+        "blocking": false
+      }
+    }
+  },
+  "consistency": {
+    "thicknessStack": "topPlateThickness + bottomPlateThickness + closedSeamGap ≈ totalClosedThickness within stated uncertainty",
+    "axisCarrierFit": "carrier circle must fit the bottom footprint at the measured axis offset",
+    "travelContainment": "No normalized Gate 02 travel limit exists; preserve the supplied maximum travel and validate finite grooves/overlap at Gate 04.",
+    "aspectEvidenceWarningRange": [
+      1.52,
+      1.62
+    ],
+    "errors": [],
+    "warnings": [
+      {
+        "id": "video-aspect",
+        "message": "L/W=1.634，超出视频证据 1.52–1.62；保留实测值并复核拍摄是否正交。"
+      }
+    ]
+  },
+  "completeness": {
+    "complete": true,
+    "requiredComplete": 9,
+    "requiredTotal": 9,
+    "fieldErrors": {},
+    "optionalFieldErrors": {}
+  },
+  "provenance": {
+    "sourceEvidence": [
+      {
+        "assetId": "hhax-intake-nxedc-source-metadata-r002",
+        "sha256": "b51ccd78dad87b40c4e568b02349d946f4aa7a81854aef7bd472e309f8a1c38f",
+        "path": "unity/FidgetingApp/ArtSource/ModelPipeline/model-hhax/evidence/01-intake/rev-002/source-metadata.json",
+        "contentClass": "same-model-official-product-spec",
+        "sourceUrl": "https://nxedc.com/products/groove-ultra"
+      },
+      {
+        "assetId": "hhax-intake-nxedc-source-notes-r002",
+        "sha256": "c7cd323ef2b5dea35f98819ffbca0a24541e9271953e713e29bb6fcb6a3fc454",
+        "path": "unity/FidgetingApp/ArtSource/ModelPipeline/model-hhax/evidence/01-intake/rev-002/source-notes.md",
+        "contentClass": "same-model-official-spec",
+        "sourceUrl": "https://nxedc.com/products/groove-ultra"
+      },
+      {
+        "assetId": "hhax-intake-nxedc-video-r002",
+        "sha256": "ad76fcbc0daded98e872920350f47b693109387a00237932c2686670a5a5456f",
+        "path": "unity/FidgetingApp/ArtSource/ModelPipeline/model-hhax/evidence/01-intake/rev-002/nxedc-groove-ultra-source.mp4",
+        "contentClass": "same-model-public-teardown-video",
+        "sourceUrl": "https://nxedc.com/cdn/shop/videos/c/vp/5e07740d4ff24673810186d4e4114541/5e07740d4ff24673810186d4e4114541.HD-1080p-2.5Mbps-88589287.mp4?v=0"
+      },
+      {
+        "assetId": "hhax-intake-nxedc-teardown-sheet-r002",
+        "sha256": "2258fbcf535977a3d6efa2cc243dba019cbd5acf2897451f24a3b5c739a36344",
+        "path": "unity/FidgetingApp/ArtSource/ModelPipeline/model-hhax/evidence/01-intake/rev-002/nxedc-teardown-contact-sheet.jpg",
+        "contentClass": "same-model-public-teardown-image",
+        "sourceUrl": "https://nxedc.com/products/groove-ultra"
+      },
+      {
+        "assetId": "model-hhax-intake-r1-f2576ce0",
+        "sha256": "b7fce5d526d948e1d56df1299ca3c0cef931b4405a4a1f9175c77b3cf8941236",
+        "path": "unity/FidgetingApp/ArtSource/ModelPipeline/model-hhax/evidence/01-intake/rev-001/5e1659c986fca1385c68a75261bb7390_MD5.jpg",
+        "contentClass": "external-reference-photo",
+        "sourceUrl": "https://www.xiaohongshu.com/discovery/item/6aa182ae000000000b0017b6?app_platform=ios&app_version=9.45&share_from_user_hidden=true&xsec_source=app_share&type=video&xsec_token=CBpDPiwV4lXDxB8i5-Ox-Sh-TbKduZ2qOXimCn4CDHqfM=&author_share=1&xhsshare=WeixinSession&shareRedId=N0c5ODVGNUI3OEdHOjgzPThFQko8NjxL&apptime=1788994940&share_id=a02b6bdf75ba4a118ef4ef4e9ff5e95d&track_code=7vfi8hxAD3c"
+      },
+      {
+        "assetId": "hhax-intake-nxedc-open-overview-r002",
+        "sha256": "4a105bb4cc9b9a98446cedd62feb3fd83f652ae6eced5b10e46786db89247808",
+        "path": "unity/FidgetingApp/ArtSource/ModelPipeline/model-hhax/evidence/01-intake/rev-002/nxedc-open-overview.jpg",
+        "contentClass": "same-model-public-teardown-image",
+        "sourceUrl": "https://nxedc.com/products/groove-ultra"
+      },
+      {
+        "assetId": "hhax-intake-nxedc-rear-patch-r002",
+        "sha256": "388cd0b80b06fc6ef5c9726eae3713acb9537c108ff1edce0667ba3c252108d0",
+        "path": "unity/FidgetingApp/ArtSource/ModelPipeline/model-hhax/evidence/01-intake/rev-002/nxedc-rear-patch.jpg",
+        "contentClass": "same-model-public-teardown-image",
+        "sourceUrl": "https://nxedc.com/products/groove-ultra"
+      },
+      {
+        "assetId": "hhax-intake-nxedc-open-track-r002",
+        "sha256": "bb39c4df9e6d0b6a87613874bfa16198400c40b418bec5e49b8215101ea5830f",
+        "path": "unity/FidgetingApp/ArtSource/ModelPipeline/model-hhax/evidence/01-intake/rev-002/nxedc-open-track.jpg",
+        "contentClass": "same-model-public-teardown-image",
+        "sourceUrl": "https://nxedc.com/products/groove-ultra"
+      }
+    ],
+    "officialSpecificationFields": [
+      "closedOverallLength",
+      "overallWidth",
+      "totalClosedThickness"
+    ],
+    "calibratedDigitalTargetFields": [
+      "topPlateThickness",
+      "bottomPlateThickness",
+      "maximumSlideTravel",
+      "fixedAxisOffsetFromNearestEnd",
+      "rotatingCarrierDiameter",
+      "closedSeamGap"
+    ],
+    "userMeasuredFields": []
+  }
+}

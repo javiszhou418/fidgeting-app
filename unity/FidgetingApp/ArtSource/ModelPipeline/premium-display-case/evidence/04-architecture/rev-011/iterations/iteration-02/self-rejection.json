@@ -1,0 +1,20 @@
+{
+  "schema": "premium-display-case-gate04-r011-self-rejection.v1",
+  "iteration": 2,
+  "status": "visual-self-rejected-before-registration",
+  "registeredForApproval": false,
+  "source": "actual Unity 6000.5.6f1 PlayMode frames at 1206x2622 and 60 fps",
+  "reasons": [
+    "The source noise texture exposed pixel-sized holes across the Pack body and violated the no-pixel-noise rule.",
+    "The activation port still read as a small soft orb instead of the source horizontal white-blue flare.",
+    "The source lightning system remained subordinate to generic spark points."
+  ],
+  "corrections": [
+    "Keep the exact source discard curve but apply it to a coherent top-down torn-edge sweep.",
+    "Render the three source activation particles as restrained horizontal flare billboards using the exact source texture.",
+    "Increase the 25 Shuriken trails without adding rings, wash, or new procedural effect language."
+  ],
+  "shippingRuntimeWired": false,
+  "shippingReady": false,
+  "physicalPhoneInstalled": false
+}

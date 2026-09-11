@@ -1,0 +1,151 @@
+{
+  "schemaVersion": 1,
+  "gate": "07-material",
+  "revision": 10,
+  "metrics": {
+    "front": {
+      "redPixelCount": 205543,
+      "redLumaStd": 16.134800074537697,
+      "redLumaP05P95": [
+        46.0,
+        98.0
+      ],
+      "sparklePixelCount": 19117,
+      "sparkleQuadrantCounts": [
+        5161,
+        5764,
+        4778,
+        3414
+      ],
+      "sparkleQuadrantsPopulated": 4,
+      "crystalEdgeDensity": 0.15574843220153448,
+      "highlightClippingFraction": 0.0
+    },
+    "macro": {
+      "redPixelCount": 713896,
+      "redLumaStd": 7.976135856460653,
+      "redLumaP05P95": [
+        20.0,
+        45.0
+      ],
+      "sparklePixelCount": 1049,
+      "sparkleQuadrantCounts": [
+        139,
+        153,
+        194,
+        563
+      ],
+      "sparkleQuadrantsPopulated": 4,
+      "crystalEdgeDensity": 0.03353989936909578,
+      "highlightClippingFraction": 0.0
+    },
+    "oblique": {
+      "redPixelCount": 129839,
+      "redLumaStd": 28.987179545519282,
+      "redLumaP05P95": [
+        40.0,
+        133.0
+      ],
+      "sparklePixelCount": 4719,
+      "sparkleQuadrantCounts": [
+        1398,
+        941,
+        2097,
+        283
+      ],
+      "sparkleQuadrantsPopulated": 4,
+      "crystalEdgeDensity": 0.13757037561903587,
+      "highlightClippingFraction": 0.00020677083333333333
+    },
+    "lowerOpen": {
+      "redPixelCount": 348662,
+      "redLumaStd": 23.695231942936903,
+      "redLumaP05P95": [
+        25.0,
+        94.0
+      ],
+      "sparklePixelCount": 2120,
+      "sparkleQuadrantCounts": [
+        84,
+        1016,
+        149,
+        871
+      ],
+      "sparkleQuadrantsPopulated": 4,
+      "crystalEdgeDensity": 0.03255014885476479,
+      "highlightClippingFraction": 0.00010555555555555555
+    },
+    "side": {
+      "neutralP05P95Range": 72.0,
+      "darkFraction": 0.5627848958333334,
+      "brightReflectionFraction": 0.0126546875
+    },
+    "sourceFront": {
+      "redPixelCount": 51238,
+      "redLumaStd": 56.83421140645824,
+      "redLumaP05P95": [
+        27.0,
+        189.0
+      ],
+      "sparklePixelCount": 6320,
+      "sparkleQuadrantCounts": [
+        1765,
+        2552,
+        1770,
+        233
+      ],
+      "sparkleQuadrantsPopulated": 4,
+      "crystalEdgeDensity": 0.11356805495920996,
+      "highlightClippingFraction": 0.0
+    },
+    "sourceOblique": {
+      "redPixelCount": 41553,
+      "redLumaStd": 43.42980268631032,
+      "redLumaP05P95": [
+        23.0,
+        167.0
+      ],
+      "sparklePixelCount": 2387,
+      "sparkleQuadrantCounts": [
+        108,
+        446,
+        1088,
+        745
+      ],
+      "sparkleQuadrantsPopulated": 4,
+      "crystalEdgeDensity": 0.07611965441725026,
+      "highlightClippingFraction": 0.0
+    },
+    "rangeRatios": {
+      "frontVsSource": 0.32098765432098764,
+      "obliqueVsSource": 0.6458333333333334
+    }
+  },
+  "checks": {
+    "geometryDigestUnchanged": true,
+    "maskHashesDistinct": true,
+    "maskIndependentSlots": true,
+    "directReconstructedProvenance": true,
+    "lowerCompositionDifference": true,
+    "sourceColorRange": true,
+    "crystalLocalVariation": true,
+    "microflakeDistribution": true,
+    "mosaicDepthEdges": true,
+    "zeroHighlightClipping": true,
+    "silverBrightDarkResponse": true,
+    "darkSideResponse": true,
+    "lowerArtworkVisible": true,
+    "zeroEmissionBloom": true,
+    "sourceLinksComplete": true,
+    "detentAnglesExact": true,
+    "detentIndicesExact": true,
+    "detentEquationExact": true,
+    "axisPointExact": true,
+    "spinTranslationZero": true,
+    "spinPivotDriftZero": true,
+    "slidePoseExact": true,
+    "noFortyFivePrimaryPose": true,
+    "renderRecipeConsistent": true
+  },
+  "pass": true
+}

@@ -1,0 +1,125 @@
+{
+  "schemaVersion": 3,
+  "kind": "user-authorized-provisional-modeling-contract",
+  "modelId": "magnetic-slide-tile",
+  "gate": "03-contract",
+  "contractRevision": 9,
+  "createdAt": "2026-08-27T02:43:57.498Z",
+  "decisionSource": {
+    "authority": "latest-explicit-chat-instruction",
+    "exactUserWording": "你直接来吧…leverage 我们之前所有做过的工作，包括图案，材质，灯光和细节调整."
+  },
+  "statusBoundary": {
+    "userAuthorizedProvisional": true,
+    "productionMeasured": false,
+    "officialPublishedDimensions": false,
+    "fabricationReady": false
+  },
+  "approvedMechanismContract": {
+    "assetId": "slider-analysis-mechanism-evidence-contract-r015",
+    "sha256": "b4318452f163ef7c105c826d4466a739a1dd0d942d4d74d921c29c39e02a84f2",
+    "cadArtifactId": "slider-analysis-interactive-cad-geometry-config-r015",
+    "cadArtifactSha256": "494d2d908740f42be7b74947a0d77373bd99b3346af8f72d6452f18655a98ded"
+  },
+  "units": "millimeters",
+  "dimensions": {
+    "closedOverallLength": {
+      "value": 50,
+      "state": "user-authorized-provisional",
+      "sourceAssetIds": [
+        "magnetic-slide-tile-modeling-contract-r007"
+      ]
+    },
+    "overallWidth": {
+      "value": 31,
+      "state": "user-authorized-provisional",
+      "sourceAssetIds": [
+        "magnetic-slide-tile-modeling-contract-r007"
+      ]
+    },
+    "totalClosedThickness": {
+      "value": 12,
+      "state": "user-authorized-provisional",
+      "sourceAssetIds": [
+        "magnetic-slide-tile-modeling-contract-r007"
+      ]
+    },
+    "topPlateThickness": {
+      "value": 5.875,
+      "state": "derived-user-authorized-provisional",
+      "derivation": "(totalClosedThickness - closedSeamGap) / 2; prior Blender used equal 6 mm layers"
+    },
+    "bottomPlateThickness": {
+      "value": 5.875,
+      "state": "derived-user-authorized-provisional",
+      "derivation": "(totalClosedThickness - closedSeamGap) / 2; prior Blender used equal 6 mm layers"
+    },
+    "maximumSlideTravel": {
+      "value": 18.076433121019107,
+      "state": "derived-from-approved-cad-and-user-authorized-provisional-L",
+      "derivation": "0.3615286624203821 × 50"
+    },
+    "fixedAxisOffsetFromNearestEnd": {
+      "value": 16,
+      "state": "diagrammatic-cad-provisional",
+      "derivation": "axisNormalizedY 0.32 × 50"
+    },
+    "rotatingCarrierDiameter": {
+      "value": 23,
+      "state": "diagrammatic-cad-provisional",
+      "derivation": "carrierRadiusL 0.23 × 2 × 50"
+    },
+    "closedSeamGap": {
+      "value": 0.25,
+      "state": "user-authorized-provisional",
+      "sourceAssetIds": [
+        "magnetic-slide-tile-modeling-contract-r007"
+      ]
+    }
+  },
+  "derivedChecks": {
+    "thicknessStackMm": 12,
+    "thicknessStackMatchesTotal": true,
+    "carrierFitsWidth": true,
+    "axisCarrierFitsLength": true,
+    "maximumSlideTravelL": 0.3615286624203822,
+    "matchesApprovedActualSMaxL": true
+  },
+  "unknownEngineeringDimensions": [
+    "groove width",
+    "groove depth",
+    "follower size",
+    "contact cross-section",
+    "operating clearance",
+    "manufacturing allowance",
+    "manufacturing tolerance"
+  ],
+  "sourceClaimIds": [
+    "slider-analysis-evidence-contract-authority-r008",
+    "slider-analysis-mec-silhouette-aspect-r008",
+    "slider-analysis-mec-plate-upper-fixed-r008",
+    "slider-analysis-mec-plate-lower-moving-r008",
+    "slider-analysis-mec-pivot-endpoint-attachment-r008",
+    "slider-analysis-mec-compound-transform-r008",
+    "slider-analysis-mec-rails-bilateral-lower-reverse-r008",
+    "slider-analysis-mec-slide-direction-and-closed-stop-r008",
+    "slider-analysis-mec-travel-normalized-r008",
+    "slider-analysis-mec-rotation-range-r008",
+    "slider-analysis-mec-detents-r008",
+    "slider-analysis-mec-rotation-during-slide-r008",
+    "slider-analysis-mec-resistance-semantics-r008",
+    "slider-analysis-mec-visible-hardware-r008",
+    "slider-analysis-mec-artwork-mechanism-boundary-r008",
+    "slider-analysis-mec-physical-dimensions-r008",
+    "slider-analysis-minimum-overlap-disk-r015"
+  ],
+  "sourceAssetIds": [
+    "magnetic-slide-tile-modeling-contract-r007",
+    "slider-analysis-mechanism-evidence-contract-r015",
+    "slider-analysis-interactive-cad-geometry-config-r015"
+  ],
+  "completeness": {
+    "complete": true,
+    "authorizedFor": "Gate 04 architecture migration and Gate 05 white blockout only"
+  }
+}

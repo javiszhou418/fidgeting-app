@@ -1,0 +1,101 @@
+{
+  "schema": "premium-display-case-gate04-r023-preview-mapping-isolated-source.v1",
+  "isolatedUnityCandidate": true,
+  "canonicalIntegration": false,
+  "sourceProject": "/tmp/FidgetingApp-PackOpening-R021-OpenMouth-20260901-r02",
+  "isolatedProject": "/tmp/FidgetingApp-PackOpening-R023-PreviewMapping-20260901-r01",
+  "r022Rig": {
+    "source": "unity/FidgetingApp/ArtSource/ModelPipeline/premium-display-case/staging/pack-opening-gate04-r023-preview-mapping-validation/PackOpeningGate04R022PackOnlyRig.fbx",
+    "destination": "Assets/Source/R022/PackOpeningGate04R022PackOnlyRig.fbx",
+    "sha256": "9b3ef4c2e5ca77cd0f53b5ff07c9e47bf2d9f0d367e037a5e711099d7b8ee89a"
+  },
+  "r018LeftStripControl": {
+    "source": "unity/FidgetingApp/ArtSource/ModelPipeline/premium-display-case/staging/pack-opening-gate04-r018-coordinate-orientation/PackOpeningGate04R018PackOnlyRig.fbx",
+    "destination": "Assets/Source/R018Control/PackOpeningGate04R018LeftStripControl.fbx",
+    "sha256": "affe0a519712596660800dffb7d6b33126886defcaee9a33a658e97a79ca2f46",
+    "expectedR018Hash": "affe0a519712596660800dffb7d6b33126886defcaee9a33a658e97a79ca2f46"
+  },
+  "r017MirrorControl": {
+    "source": "inherited from immutable isolated R018 source project",
+    "destination": "Assets/Source/R017Control/PackOpeningGate04R017MirrorControl.fbx",
+    "sha256": "1a9c8f5b066cc2a24cf629c0a0ffa9eaaec05279af0e0171ab2f341731dabe66",
+    "expectedR017Hash": "1a9c8f5b066cc2a24cf629c0a0ffa9eaaec05279af0e0171ab2f341731dabe66"
+  },
+  "sourceFiles": [
+    {
+      "path": "Assets/IsolatedProofR022/Editor/IsolatedR022ProofBuilder.cs",
+      "sha256": "864ecc25b2d2c8fd499659947242f302158e0420936bae31d43fe39d6d83aa74"
+    },
+    {
+      "path": "Assets/IsolatedProofR022/Editor/IsolatedR022ProofRunner.cs",
+      "sha256": "ec05352110e87c8830741ee91e7d145ab1fb85ec4b481243397b5adb13fc6c69"
+    },
+    {
+      "path": "Assets/IsolatedProofR022/Runtime/IsolatedR022OrientationCalibration.cs",
+      "sha256": "8ef97177450b627a3d44b8f58a348c3f06ca9314b36a4dd913eb56bf3a844c5d"
+    },
+    {
+      "path": "Assets/IsolatedProofR022/Runtime/IsolatedR022Preflight.cs",
+      "sha256": "31eb0ffaa7e20e0a346464082b3233e910fc11d5fd04c3ccb87fddafb61d6ffc"
+    },
+    {
+      "path": "Assets/IsolatedProofR022/Runtime/IsolatedR022Profile.cs",
+      "sha256": "a0f8d086b677eee6ef15afdd11bfc1f1dd433e584b5c89bbb087d133276eef28"
+    },
+    {
+      "path": "Assets/IsolatedProofR022/Runtime/IsolatedR022ProofCapture.cs",
+      "sha256": "5a4b77cc2b6172796e376fec1cdd218115c5424cf8fdd92d1b27f04c694012e2"
+    },
+    {
+      "path": "Assets/IsolatedProofR022/Runtime/IsolatedR022ProofRuntimeDriver.cs",
+      "sha256": "2ddbdc0f66e6c9b41d094f066c9e08b382d26298fa0ad5eb547eb800e58c0976"
+    },
+    {
+      "path": "Assets/IsolatedProofR022/Runtime/IsolatedR022ProofSequence.cs",
+      "sha256": "aa3c688601348401e285d516dda53d599162eb2d556e382829de1e17a9d375b0"
+    },
+    {
+      "path": "Assets/IsolatedProofR022/Shaders/MakeItShineCc0ContourSweepR022.shader",
+      "sha256": "f24b5704648fe519e28633570798e79252d1e2835ad13961d7218a28b644de14"
+    },
+    {
+      "path": "Assets/IsolatedProofR022/Shaders/MakeItShineCc0PackR022.shader",
+      "sha256": "fc047dffc2ee785a3430ad2fa4226d34e362ac15d79354f9913dab1cbf4e5843"
+    },
+    {
+      "path": "Assets/IsolatedProofR022/Shaders/OrientationCalibrationUnlitR022.shader",
+      "sha256": "7b793f74b0cab1b10389f972390cc4721c9832e7d5567d6a4eec51bc9a23e464"
+    },
+    {
+      "path": "Assets/IsolatedProofR022/Shaders/RenderedBandMaskUnlitR022.shader",
+      "sha256": "700086e7c4134639813c6414cc18a800efa7b0c5798f9ea33234ca580a84a550"
+    },
+    {
+      "path": "Assets/IsolatedProofR022/Tests/Editor/IsolatedR022ProofTests.cs",
+      "sha256": "5389d7941011eb2ad47c04527e793a34e875b141f77f59910632c1891f1751cf"
+    }
+  ],
+  "sourceBoundary": {
+    "casePrefabChanged": false,
+    "contentSlotChanged": false,
+    "canonicalScenesChanged": false,
+    "shippingAssetsChanged": false,
+    "sourceCc0EffectsChanged": false,
+    "camerasChanged": false,
+    "candidateCaseRelationChanged": false,
+    "candidateMouthBounceLightChanged": false,
+    "topSealUvClipRemoved": true,
+    "mouthGeometryChanged": "independent physical 48-segment mouth",
+    "cavityBackWallSegmented": true,
+    "linerDepthMeters": 0.0055,
+    "topSealUsesGeometryOnly": true,
+    "blenderPreviewMappingOnly": true,
+    "exportedFbxByteIdenticalToR022": true,
+    "unityMaterialMappingChanged": false,
+    "particleSettingsChanged": false,
+    "timingChanged": false,
+    "visualEffectsIntensityDuringPreflight": 0
+  },
+  "shippingReady": false,
+  "physicalDeviceInstalled": false
+}

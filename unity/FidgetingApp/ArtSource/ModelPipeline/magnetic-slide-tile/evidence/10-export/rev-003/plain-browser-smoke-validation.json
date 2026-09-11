@@ -1,0 +1,42 @@
+{
+  "schemaVersion": 1,
+  "modelId": "magnetic-slide-tile",
+  "gate": "10-export",
+  "exportRevision": 2,
+  "reviewRevision": 3,
+  "defaultReview": {
+    "question": "圆弧看起来还会不会一节一节？",
+    "evidenceCards": 2,
+    "locationAsset": "magnetic-slide-tile-round-edge-location-r003",
+    "comparisonAsset": "magnetic-slide-tile-round-edge-before-after-r003",
+    "technicalDetailsCollapsed": true,
+    "defaultJargonRemoved": true
+  },
+  "desktop": {
+    "modalOpenClose": true,
+    "escapeClose": true,
+    "backdropClose": true,
+    "browserBackClose": true
+  },
+  "mobile": {
+    "viewport": [390, 844],
+    "noHorizontalOverflow": true,
+    "sidebarAboveMain": true,
+    "assetColumns": 1
+  },
+  "technicalDetails": {
+    "realGlbViewerLoaded": true,
+    "cameraControls": 6,
+    "collisionRemovedFromPrimaryReview": true
+  },
+  "screenshot": "gate10-plain-workbench-browser.png",
+  "checks": {
+    "onePlainQuestion": true,
+    "twoPrimaryImages": true,
+    "technicalDetailsCollapsed": true,
+    "modalBehavior": true,
+    "mobileLayout": true,
+    "realGlbViewer": true
+  },
+  "pass": true
+}

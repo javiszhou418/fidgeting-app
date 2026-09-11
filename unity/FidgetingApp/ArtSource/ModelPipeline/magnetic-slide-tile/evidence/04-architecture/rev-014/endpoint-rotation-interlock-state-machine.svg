@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="720" viewBox="0 0 1280 720">
+<rect width="1280" height="720" fill="#11151c"/>
+<style>.t{font:28px -apple-system,BlinkMacSystemFont,sans-serif;fill:#eef3f8}.s{font:18px -apple-system,BlinkMacSystemFont,sans-serif;fill:#aeb9c5}.b{fill:#1e2733;stroke:#72d6b2;stroke-width:3}.a{stroke:#f5b95f;stroke-width:4;fill:none;marker-end:url(#m)}.r{fill:#ff756b}</style>
+<defs><marker id="m" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto"><path d="M0,0 L0,6 L9,3 z" fill="#f5b95f"/></marker></defs>
+<text x="64" y="64" class="t">Gate 04 rev 14 · 最大端点旋转解锁</text>
+<text x="64" y="98" class="s">只表达槽端对齐条件；不推断隐藏锁扣几何</text>
+<rect x="60" y="230" width="250" height="190" rx="24" class="b"/><text x="80" y="275" class="t">1. 闭合对齐</text><text x="80" y="315" class="s">s=0 and theta=0</text><text x="80" y="350" class="s">允许：slide-open</text><rect x="360" y="230" width="250" height="190" rx="24" class="b"/><text x="380" y="275" class="t">2. 直推对齐</text><text x="380" y="315" class="s">0&lt;s&lt;sMax and theta=0</text><text x="380" y="350" class="s">允许：slide-open / slide-close</text><text x="380" y="385" class="s r">禁止：rotate</text><rect x="660" y="230" width="250" height="190" rx="24" class="b"/><text x="680" y="275" class="t">3. 端点对齐</text><text x="680" y="315" class="s">s=sMax and theta=0/360</text><text x="680" y="350" class="s">允许：rotate / slide-close</text><rect x="960" y="230" width="250" height="190" rx="24" class="b"/><text x="980" y="275" class="t">4. 端点旋转</text><text x="980" y="315" class="s">s=sMax and theta mod 360!=0</text><text x="980" y="350" class="s">允许：rotate</text><text x="980" y="385" class="s r">禁止：slide</text>
+<path d="M310 325 H355" class="a"/><path d="M610 325 H655" class="a"/><path d="M910 325 H955" class="a"/>
+<path d="M1080 440 C1080 560 780 560 780 440" class="a"/>
+<text x="720" y="610" class="t">θ 回到 0° / 360° → 四轨对齐 → 允许回推</text>
+<text x="64" y="665" class="s">固定不变：BottomExterior · FixedAxis · MinimumOverlapDisk · Top z-order · 几何 digest</text>
+</svg>

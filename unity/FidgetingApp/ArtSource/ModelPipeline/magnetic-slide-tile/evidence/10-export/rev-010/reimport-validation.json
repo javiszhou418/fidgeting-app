@@ -1,0 +1,465 @@
+{
+  "schemaVersion": 1,
+  "gate": "10-export",
+  "revision": 10,
+  "results": {
+    "fbx": {
+      "format": "fbx",
+      "boundsMeters": {
+        "min": [
+          -0.015500000678002834,
+          -0.02500000037252903,
+          -4.073017478845031e-09
+        ],
+        "max": [
+          0.015500000678002834,
+          0.02500000223517418,
+          0.012000004760921001
+        ],
+        "size": [
+          0.03100000135600567,
+          0.05000000260770321,
+          0.01200000883393848
+        ]
+      },
+      "hierarchy": {
+        "TopOuterGrooveRight": "MovingTopBody",
+        "MinimumOverlapDisk": "BottomExterior",
+        "MovingTop": "MagneticSlideTile_G06_R005",
+        "MagneticSlideTile_G06_R005": null,
+        "TopLocalSlide": "MovingTop",
+        "BottomExterior": "MagneticSlideTile_G06_R005",
+        "InternalAxisBoss": "BottomExterior",
+        "UnknownSprings": "RotatingCarrier",
+        "FixedAxis": "BottomExterior",
+        "TopOuterGrooveLeft": "MovingTopBody",
+        "TopInnerGrooveRight": "MovingTopBody",
+        "UnknownPreload": "RotatingCarrier",
+        "CarrierFollowerLeft": "RotatingCarrier",
+        "TopInnerGrooveLeft": "MovingTopBody",
+        "CarrierFollowerRight": "RotatingCarrier",
+        "BallCandidateLeft": "RotatingCarrier",
+        "RotatingCarrierBody": "RotatingCarrier",
+        "RotatingCarrier": "FixedAxis",
+        "MovingTopBody": "TopLocalSlide",
+        "BallCandidateRight": "RotatingCarrier"
+      },
+      "meshes": {
+        "BottomExterior": {
+          "vertices": 9234,
+          "polygons": 18464,
+          "materials": [
+            "M07R13_LowerTopArtwork",
+            "M07R13_SolidDarkSide",
+            "M07R13_PolishedBrightSilverRim",
+            "M07R13_NeutralUnderside"
+          ],
+          "uvLayers": 2,
+          "normalLengthsValid": true
+        },
+        "InternalAxisBoss": {
+          "vertices": 256,
+          "polygons": 508,
+          "materials": [
+            "M07R13_PolishedBrightSilverRim"
+          ],
+          "uvLayers": 1,
+          "normalLengthsValid": true
+        },
+        "RotatingCarrierBody": {
+          "vertices": 252,
+          "polygons": 500,
+          "materials": [
+            "M07R13_InternalSilverReference"
+          ],
+          "uvLayers": 1,
+          "normalLengthsValid": true
+        },
+        "CarrierFollowerLeft": {
+          "vertices": 5130,
+          "polygons": 10256,
+          "materials": [
+            "M07R13_NeutralUnderside"
+          ],
+          "uvLayers": 1,
+          "normalLengthsValid": true
+        },
+        "CarrierFollowerRight": {
+          "vertices": 5130,
+          "polygons": 10256,
+          "materials": [
+            "M07R13_NeutralUnderside"
+          ],
+          "uvLayers": 1,
+          "normalLengthsValid": true
+        },
+        "BallCandidateLeft": {
+          "vertices": 1986,
+          "polygons": 3968,
+          "materials": [
+            "M07R13_BallCandidateUnknownMaterial"
+          ],
+          "uvLayers": 1,
+          "normalLengthsValid": true
+        },
+        "BallCandidateRight": {
+          "vertices": 1986,
+          "polygons": 3968,
+          "materials": [
+            "M07R13_BallCandidateUnknownMaterial"
+          ],
+          "uvLayers": 1,
+          "normalLengthsValid": true
+        },
+        "MovingTopBody": {
+          "vertices": 25682,
+          "polygons": 51360,
+          "materials": [
+            "M07R13_UpperTopArtwork",
+            "M07R13_SolidDarkSide",
+            "M07R13_PolishedBrightSilverRim",
+            "M07R13_NeutralUnderside"
+          ],
+          "uvLayers": 2,
+          "normalLengthsValid": true
+        }
+      },
+      "partitions": {
+        "BottomExterior": {
+          "slots": [
+            "M07R13_LowerTopArtwork",
+            "M07R13_SolidDarkSide",
+            "M07R13_PolishedBrightSilverRim",
+            "M07R13_NeutralUnderside"
+          ],
+          "triangleCounts": [
+            511,
+            6156,
+            4104,
+            7693
+          ]
+        },
+        "MovingTopBody": {
+          "slots": [
+            "M07R13_UpperTopArtwork",
+            "M07R13_SolidDarkSide",
+            "M07R13_PolishedBrightSilverRim",
+            "M07R13_NeutralUnderside"
+          ],
+          "triangleCounts": [
+            511,
+            18492,
+            4104,
+            28253
+          ]
+        }
+      },
+      "checks": {
+        "coreMeshes": true,
+        "fourGrooves": true,
+        "singlePivot": true,
+        "hierarchy": true,
+        "boundsMeters": true,
+        "normals": true,
+        "uvs": true,
+        "partitionSlots": true,
+        "partitionTriangles": true,
+        "topArtworkPresent": true,
+        "sideArtworkZero": true,
+        "undersideArtworkZero": true,
+        "silverRimPresent": true,
+        "metadata": true,
+        "raisedBossNoRecess": true,
+        "minimumOverlapNotMesh": true,
+        "noCavityMesh": true,
+        "closedZeroMotion": true,
+        "noAnimations": true
+      },
+      "pass": true
+    },
+    "glb": {
+      "format": "glb",
+      "boundsMeters": {
+        "min": [
+          -0.015500000678002834,
+          -0.02500000037252903,
+          0.0
+        ],
+        "max": [
+          0.015500000678002834,
+          0.02500000037252903,
+          0.012000001035630703
+        ],
+        "size": [
+          0.03100000135600567,
+          0.05000000074505806,
+          0.012000001035630703
+        ]
+      },
+      "hierarchy": {
+        "TopOuterGrooveRight": "MovingTopBody",
+        "MinimumOverlapDisk": "BottomExterior",
+        "MovingTop": "MagneticSlideTile_G06_R005",
+        "MagneticSlideTile_G06_R005": null,
+        "TopLocalSlide": "MovingTop",
+        "BottomExterior": "MagneticSlideTile_G06_R005",
+        "InternalAxisBoss": "BottomExterior",
+        "UnknownSprings": "RotatingCarrier",
+        "FixedAxis": "BottomExterior",
+        "TopOuterGrooveLeft": "MovingTopBody",
+        "TopInnerGrooveRight": "MovingTopBody",
+        "UnknownPreload": "RotatingCarrier",
+        "CarrierFollowerLeft": "RotatingCarrier",
+        "TopInnerGrooveLeft": "MovingTopBody",
+        "CarrierFollowerRight": "RotatingCarrier",
+        "BallCandidateLeft": "RotatingCarrier",
+        "RotatingCarrierBody": "RotatingCarrier",
+        "RotatingCarrier": "FixedAxis",
+        "MovingTopBody": "TopLocalSlide",
+        "BallCandidateRight": "RotatingCarrier"
+      },
+      "meshes": {
+        "BottomExterior": {
+          "vertices": 25542,
+          "polygons": 18464,
+          "materials": [
+            "M07R13_LowerTopArtwork",
+            "M07R13_SolidDarkSide",
+            "M07R13_PolishedBrightSilverRim",
+            "M07R13_NeutralUnderside"
+          ],
+          "uvLayers": 2,
+          "normalLengthsValid": true
+        },
+        "InternalAxisBoss": {
+          "vertices": 768,
+          "polygons": 508,
+          "materials": [
+            "M07R13_PolishedBrightSilverRim"
+          ],
+          "uvLayers": 1,
+          "normalLengthsValid": true
+        },
+        "RotatingCarrierBody": {
+          "vertices": 756,
+          "polygons": 500,
+          "materials": [
+            "M07R13_InternalSilverReference"
+          ],
+          "uvLayers": 1,
+          "normalLengthsValid": true
+        },
+        "CarrierFollowerLeft": {
+          "vertices": 24862,
+          "polygons": 10256,
+          "materials": [
+            "M07R13_NeutralUnderside"
+          ],
+          "uvLayers": 1,
+          "normalLengthsValid": true
+        },
+        "CarrierFollowerRight": {
+          "vertices": 24862,
+          "polygons": 10256,
+          "materials": [
+            "M07R13_NeutralUnderside"
+          ],
+          "uvLayers": 1,
+          "normalLengthsValid": true
+        },
+        "BallCandidateLeft": {
+          "vertices": 8154,
+          "polygons": 3968,
+          "materials": [
+            "M07R13_BallCandidateUnknownMaterial"
+          ],
+          "uvLayers": 1,
+          "normalLengthsValid": true
+        },
+        "BallCandidateRight": {
+          "vertices": 8154,
+          "polygons": 3968,
+          "materials": [
+            "M07R13_BallCandidateUnknownMaterial"
+          ],
+          "uvLayers": 1,
+          "normalLengthsValid": true
+        },
+        "MovingTopBody": {
+          "vertices": 111866,
+          "polygons": 51360,
+          "materials": [
+            "M07R13_UpperTopArtwork",
+            "M07R13_SolidDarkSide",
+            "M07R13_PolishedBrightSilverRim",
+            "M07R13_NeutralUnderside"
+          ],
+          "uvLayers": 2,
+          "normalLengthsValid": true
+        }
+      },
+      "partitions": {
+        "BottomExterior": {
+          "slots": [
+            "M07R13_LowerTopArtwork",
+            "M07R13_SolidDarkSide",
+            "M07R13_PolishedBrightSilverRim",
+            "M07R13_NeutralUnderside"
+          ],
+          "triangleCounts": [
+            511,
+            6156,
+            4104,
+            7693
+          ]
+        },
+        "MovingTopBody": {
+          "slots": [
+            "M07R13_UpperTopArtwork",
+            "M07R13_SolidDarkSide",
+            "M07R13_PolishedBrightSilverRim",
+            "M07R13_NeutralUnderside"
+          ],
+          "triangleCounts": [
+            511,
+            18492,
+            4104,
+            28253
+          ]
+        }
+      },
+      "checks": {
+        "coreMeshes": true,
+        "fourGrooves": true,
+        "singlePivot": true,
+        "hierarchy": true,
+        "boundsMeters": true,
+        "normals": true,
+        "uvs": true,
+        "partitionSlots": true,
+        "partitionTriangles": true,
+        "topArtworkPresent": true,
+        "sideArtworkZero": true,
+        "undersideArtworkZero": true,
+        "silverRimPresent": true,
+        "metadata": true,
+        "raisedBossNoRecess": true,
+        "minimumOverlapNotMesh": true,
+        "noCavityMesh": true,
+        "closedZeroMotion": true,
+        "noAnimations": true
+      },
+      "pass": true
+    },
+    "glbStructure": {
+      "counts": {
+        "nodes": 20,
+        "meshes": 8,
+        "materials": 7,
+        "textures": 4,
+        "images": 4,
+        "animations": 0
+      },
+      "embeddedImages": {
+        "lower-albedo": {
+          "sha256": "968c1e87ca2d5ea7c8fc57106e42bcd09dc95395fac7dd3be569e580ea8850eb",
+          "dimensions": [
+            620,
+            1000
+          ],
+          "expectedSha256": "968c1e87ca2d5ea7c8fc57106e42bcd09dc95395fac7dd3be569e580ea8850eb",
+          "exact": true
+        },
+        "lower-roughness": {
+          "sha256": "8e1e2df8191ca735fdddd68df76227b9a2afd91bdecf070f8e3dd8e9de95952b",
+          "dimensions": [
+            620,
+            1000
+          ],
+          "expectedSha256": "ca2697560a2e57685a71c423f15f70a72ebb47c93c53cae0e3a8dae0b3248245",
+          "exact": false
+        },
+        "upper-albedo": {
+          "sha256": "c0e9305d475cd2c591efc8a833a0aafb1aef4ccc437d84a3417674e6d1b453a5",
+          "dimensions": [
+            620,
+            1000
+          ],
+          "expectedSha256": "c0e9305d475cd2c591efc8a833a0aafb1aef4ccc437d84a3417674e6d1b453a5",
+          "exact": true
+        },
+        "upper-roughness": {
+          "sha256": "b68762a8cae838db6476dd7feb64ba092f4d0069da847f082dc9524a627298ab",
+          "dimensions": [
+            620,
+            1000
+          ],
+          "expectedSha256": "854f1dbc393585ff9b88f808c1a46a35b091088ac8b83894763f502876e3df6a",
+          "exact": false
+        }
+      },
+      "samplers": [
+        {
+          "magFilter": 9729,
+          "minFilter": 9987,
+          "wrapS": 33071,
+          "wrapT": 33071
+        }
+      ],
+      "checks": {
+        "eightMeshes": true,
+        "hierarchyNodes": true,
+        "materials": true,
+        "embeddedImages": true,
+        "nativeImageDimensions": true,
+        "clampSamplers": true,
+        "normals": true,
+        "tangents": true,
+        "uvs": true,
+        "noAnimations": true
+      },
+      "pass": true
+    },
+    "reviewRenders": {
+      "hero": {
+        "path": "/Users/jiawei.zhou/Documents/Fidgeting app/unity/FidgetingApp/ArtSource/ModelPipeline/magnetic-slide-tile/evidence/10-export/rev-010/gate10-r010-glb-hero.png",
+        "sha256": "092de4634338c848e1c52df2aec7303be9d60a4d9d4012da17491e0e9d51341a"
+      },
+      "top": {
+        "path": "/Users/jiawei.zhou/Documents/Fidgeting app/unity/FidgetingApp/ArtSource/ModelPipeline/magnetic-slide-tile/evidence/10-export/rev-010/gate10-r010-glb-top.png",
+        "sha256": "7394d5e04e5c3299d98054765903f86d79aeb44421c31232f6737185109fd035"
+      }
+    },
+    "collision": {
+      "names": [
+        "COL_BottomExterior",
+        "COL_MovingTop"
+      ],
+      "bounds": {
+        "min": [
+          -0.015200000256299973,
+          -0.024700002744793892,
+          9.99960393528454e-05
+        ],
+        "max": [
+          0.015200000256299973,
+          0.024700002744793892,
+          0.011800005100667477
+        ],
+        "size": [
+          0.030400000512599945,
+          0.049400005489587784,
+          0.011700009061314631
+        ]
+      },
+      "checks": {
+        "separateTwoMeshes": true,
+        "nonRenderingMetadata": true,
+        "noMaterials": true,
+        "noAnimations": true
+      },
+      "pass": true
+    }
+  },
+  "pass": true
+}

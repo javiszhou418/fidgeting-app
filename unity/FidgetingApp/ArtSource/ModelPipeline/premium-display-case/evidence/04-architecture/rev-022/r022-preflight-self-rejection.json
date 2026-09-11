@@ -1,0 +1,74 @@
+{
+  "schema": "premium-display-case-gate04-r022-preflight-self-rejection.v1",
+  "outcome": "self-rejected",
+  "reviewedAt": "2026-09-01T00:34:49Z",
+  "candidateScope": "isolated R022 segmented physical Pack-mouth repair only",
+  "failedConditions": [
+    {
+      "id": "actual-blender-pack-artwork-is-identity-oriented",
+      "frame": "preflight/blender/sealed-000.png",
+      "sha256": "e70fc01d2af232ba7eef88d5b244f2ccb7f41d6bf9caa67f10d8709cb94ec551",
+      "dimensions": [1206, 2622],
+      "cause": "Native-size review shows STANDARD upside down. The unmodified R021 outer-front UV export compensation renders the Pack artwork vertically inverted in Blender, so this R022 physical preflight cannot prove identity-oriented art."
+    }
+  ],
+  "emittedBlenderEvidence": {
+    "rigReport": {
+      "path": "unity/FidgetingApp/ArtSource/ModelPipeline/premium-display-case/evidence/04-architecture/rev-022/blender-rig-build-report.json",
+      "sha256": "84093c373f5280bade68e9a665c8a711093d28d75f645695df013d52ec1d4536"
+    },
+    "packOnlyFbx": {
+      "path": "unity/FidgetingApp/ArtSource/ModelPipeline/premium-display-case/evidence/04-architecture/rev-022/source/PackOpeningGate04R022PackOnlyRig.fbx",
+      "sha256": "9b3ef4c2e5ca77cd0f53b5ff07c9e47bf2d9f0d367e037a5e711099d7b8ee89a"
+    },
+    "staticFrames": [
+      {
+        "timeSeconds": 0.0,
+        "path": "preflight/blender/sealed-000.png",
+        "sha256": "e70fc01d2af232ba7eef88d5b244f2ccb7f41d6bf9caa67f10d8709cb94ec551"
+      },
+      {
+        "timeSeconds": 0.5,
+        "path": "preflight/blender/tear-050.png",
+        "sha256": "38ea3016752d5592772d9cefc99584e2b66615fb3653f58c68accc57a67b565a"
+      },
+      {
+        "timeSeconds": 0.7,
+        "path": "preflight/blender/formed-mouth-070.png",
+        "sha256": "29a76b96e00af962445f1ede360522705c15c4b284df60b5a354eaf8182016d9"
+      },
+      {
+        "timeSeconds": 0.9,
+        "path": "preflight/blender/case-contained-090-pack-only.png",
+        "sha256": "f6990f5ed2244d94643fe52f7bb73705c1eae2420478dbdba441f130208f9ced"
+      }
+    ]
+  },
+  "geometryAttempt": {
+    "independentSegments": 48,
+    "linerMaximumDepthMeters": 0.0055,
+    "cavityBackWallDepthMeters": 0.107,
+    "topSealUvOrAlphaClip": false,
+    "geometryProbeRun": false
+  },
+  "notRunAfterStaticFailure": [
+    "isolated Unity static preflight",
+    "isolated emitted checks",
+    "canonical provenance validators",
+    "Unity scrub",
+    "normal-speed proof capture",
+    "quarter-speed tear capture",
+    "pipeline candidate registration",
+    "FDB update",
+    "implementation-status update",
+    "build, install, or device work"
+  ],
+  "historyPreservation": {
+    "r015ThroughR021EvidenceModified": false,
+    "r022EvidenceIsImmutable": true
+  },
+  "stopCondition": "The first native-size static physical preflight failed. Do not tune artwork, UVs, timing, effects, or geometry in R022. Do not create R023.",
+  "shippingReady": false,
+  "physicalPhoneInstalled": false,
+  "statusText": "视觉批准待确认，未推送手机"
+}

@@ -1,0 +1,126 @@
+{
+  "contract_sha256": "cac2c7c2d66061a1924269e72e07a4285e68ee281bae32750d46f515e9041559",
+  "engine": "CYCLES",
+  "samples": 96,
+  "calibration": {
+    "target_p97_display": 0.8,
+    "passes": [
+      {
+        "p97": 0.2936,
+        "factor": 9.076
+      },
+      {
+        "p97": 0.7456,
+        "factor": 1.167
+      }
+    ],
+    "energies_w": {
+      "LGT_PDC_SOFT_KEY": 0.7216,
+      "LGT_PDC_RIGHT_STRIP": 0.0499,
+      "LGT_PDC_TOP_RAIL": 0.01,
+      "LGT_PDC_COOL_RIM": 0.0028,
+      "LGT_PDC_LILAC_RIM": 0.0014,
+      "LGT_PDC_FRONT_FILL": 0.0968
+    }
+  },
+  "materials_by_zone": {
+    "1": "MAT_PDC_CLEAR_CRYSTAL",
+    "2": "MAT_PDC_SMOKE_LINER",
+    "3": "MAT_PDC_MICROBLAST",
+    "4": "MAT_PDC_GRAPHITE",
+    "5": "MAT_PDC_STEEL_SATIN",
+    "6": "MAT_PDC_SMOKED_MIRROR",
+    "7": "MAT_PDC_CHAMPAGNE_GOLD",
+    "0": "MAT_PDC_REVIEW_SPINNER_TITANIUM",
+    "floor": "MAT_PDC_PREVIEW_FLOOR"
+  },
+  "lights": [
+    {
+      "name": "LGT_PDC_SOFT_KEY",
+      "energy_w": 0.72,
+      "size_m": [
+        0.1701,
+        0.0801
+      ],
+      "location_m": [
+        -0.0722,
+        -0.1767,
+        0.1721
+      ]
+    },
+    {
+      "name": "LGT_PDC_RIGHT_STRIP",
+      "energy_w": 0.05,
+      "size_m": [
+        0.011,
+        0.1901
+      ],
+      "location_m": [
+        0.1367,
+        0.0479,
+        0.1118
+      ]
+    },
+    {
+      "name": "LGT_PDC_TOP_RAIL",
+      "energy_w": 0.01,
+      "size_m": [
+        0.1161,
+        0.009
+      ],
+      "location_m": [
+        0.064,
+        -0.1609,
+        0.0453
+      ]
+    },
+    {
+      "name": "LGT_PDC_COOL_RIM",
+      "energy_w": 0.0,
+      "size_m": [
+        0.009,
+        0.1161
+      ],
+      "location_m": [
+        -0.0787,
+        -0.068,
+        -0.094
+      ]
+    },
+    {
+      "name": "LGT_PDC_LILAC_RIM",
+      "energy_w": 0.0,
+      "size_m": [
+        0.009,
+        0.1001
+      ],
+      "location_m": [
+        0.0892,
+        0.036,
+        -0.104
+      ]
+    },
+    {
+      "name": "LGT_PDC_FRONT_FILL",
+      "energy_w": 0.1,
+      "size_m": [
+        0.1901,
+        0.1201
+      ],
+      "location_m": [
+        -0.0313,
+        0.0672,
+        0.2045
+      ]
+    }
+  ],
+  "stills": [
+    "cmf-preview-hero.png",
+    "cmf-preview-front.png",
+    "cmf-preview-low-oblique.png",
+    "cmf-preview-corner-macro.png",
+    "cmf-preview-pocket-rim-macro.png"
+  ],
+  "turntable_frames": 72,
+  "status": "supplementary CMF preview; not Gate 07 lookdev"
+}

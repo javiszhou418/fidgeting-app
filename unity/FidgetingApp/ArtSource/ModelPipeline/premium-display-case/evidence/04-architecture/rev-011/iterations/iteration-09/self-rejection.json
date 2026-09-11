@@ -1,0 +1,75 @@
+{
+  "schema": "premium-display-case-gate04-r011-iteration-self-rejection.v1",
+  "iteration": 9,
+  "evidenceRevision": 11,
+  "gateId": "04-architecture",
+  "decision": "self-rejected",
+  "decidedBy": "agent-full-size-frame-inspection",
+  "decidedAt": "2026-08-28T09:41:00.000Z",
+  "reviewedAtFullSize": [
+    "frames/frame-0114.png",
+    "frames/frame-0136.png",
+    "tear-contact-sheet.png",
+    "continuity-contact-sheet.png"
+  ],
+  "whatImprovedFromIteration08": [
+    "Exposure no longer splits the Pack from the real case. The URP Lit case and the unlit Pack body now sit in one readable range.",
+    "The freed foil no longer detaches from packRoot, and maximum twist dropped from 168 to 94 degrees.",
+    "Pack retreat is now a bounded settle, so packDissolve rather than translation removes the Pack.",
+    "Continuity is genuinely real, not simulated: one distinct caseRootId across all 207 frames, case projected height grows monotonically 0.4369 to 0.5545 with maximum consecutive step 0.0038, packVisible flips false only after packDissolve reaches 1.0. No hard pop, black frame, blank white frame, identity swap or bounds jump.",
+    "The 512-spark and viewport-wide streak ports from iterations 05 to 07 remain suppressed."
+  ],
+  "rejectionReasons": [
+    {
+      "criterion": "4-source-effect-identity-must-survive-retargeting",
+      "severity": "blocking",
+      "observation": "The recognizable Make It Shine dissolve and light transition is not readable in the capture. At frame 0114 the Pack front is fully opaque with STANDARD legible and no emissive edge sweep anywhere along the tear contour. The audited SG_BoosterPack discard edge sweep, which this whole revision exists to preserve, does not register as the dominant identity carrier.",
+      "rootCause": "The iteration-09 change raised _EdgeWidth and _EdgeStrength and set a warm near-white _EdgeColor on Gate04R011RealPackSourceDissolve, but the edge term is still driven only during the packDissolve ramp at frames 108 to 150. During the tear phase, frames 54 to 96, packDissolve stays 0.00, so the sweep contributes nothing while the tear is the subject. The sweep must be driven by tearProgress along the torn contour, not only by packDissolve."
+    },
+    {
+      "criterion": "2-tear-reads-physically",
+      "severity": "blocking",
+      "observation": "The freed foil reads as one rigid chrome blade or shoehorn: a long smooth hard-edged metallic ribbon with clean specular striations and a straight silhouette. It does not read as foil with underside, thickness and irregular torn edge. The tear line left on the Pack is a soft low-frequency scallop that reads as decorative waviness rather than a physical tear.",
+      "rootCause": "Two independent causes. First, the strip surface is too smooth and too metallic, so it resolves as a single hard specular sheet instead of foil. Second, the GenerateTearOffsets amplitude increase raised the low-frequency terms but the offsets still form a smooth C1 curve with no high-frequency micro-detail and no per-column depth variation, so no torn fibre or nick structure exists at any scale."
+    },
+    {
+      "criterion": "5-product-readable-no-effect-soup",
+      "severity": "blocking",
+      "observation": "During handoff the aperture carries a cluster of four-point cyan sparkle glyphs plus a small magenta-violet smudge, visible at frame 0114 and in continuity-contact-sheet.png top row. These read as generic decorative sparkles rather than the audited source flare family, and the magenta tint that iterations 01 and 03 were rejected for is still present at reduced size.",
+      "rootCause": "The flare start colour was set white-hot and emission was split into multiple bursts with a wider shape radius, which desynchronised the gradient and removed the large uniform blob. But the source 2x2 flare atlas frame that reads as a symmetric four-point star is still selected for most of the lifetime, and the tail of the source gradient still passes through magenta. Desynchronising spread does not remove the magenta segment; it only makes it appear on fewer particles at a time."
+    },
+    {
+      "criterion": "2-shaped-cavity-with-occlusion",
+      "severity": "major",
+      "observation": "At 0.25x the shaped cavity still reads as a thin dark band rather than an occluding interior volume. Brightening the cavity base colour in iteration 09 did not create depth.",
+      "rootCause": "The cavity is a shallow generated surface with no interior side walls and no ambient occlusion contact against the Pack inner face, so brightening only raises a flat band's value instead of revealing volume."
+    },
+    {
+      "criterion": "5-product-readable",
+      "severity": "major",
+      "observation": "At frame 0136 the remaining Pack dissolve resolves as two flat cream horizontal bars clipping through the case silhouette. They read as a rendering artifact rather than a torn-edge dissolve, and they visually compete with the case label.",
+      "rootCause": "The widened warm near-white edge band is applied across the full Pack width as the dissolve threshold sweeps vertically, so at mid dissolve the band degenerates into a horizontal rectangle uncorrelated with the torn contour. This is the same _EdgeWidth change that failed to help the tear phase, now producing a false positive during dissolve."
+    }
+  ],
+  "nonBlockingObservation": {
+    "caseTranslucency": "The real case renders as translucent smoky acrylic and the dissolving Pack is visible through it. This is inherent to the unmodified shipping prefab PresentationRoot.prefab and is correct for an acrylic display case. It is not counted as a rejection reason, and the prefab was not edited. It does, however, make the low-contrast handoff harder to read and argues for more key separation behind the case rather than any prefab change."
+  },
+  "notFixedByThisIteration": [
+    "The retarget palette remains cooler than the source because the source warm dominance comes from rarity card emissive, which must not appear before the authoritative receipt. This constraint is correct and must not be solved by leaking rarity."
+  ],
+  "requiredForIteration10": [
+    "Drive the audited SG_BoosterPack discard edge sweep from tearProgress along the torn contour so the source identity is present during frames 54 to 96, not only during packDissolve.",
+    "Correlate the emissive edge band with the torn contour so it can never degenerate into a full-width horizontal rectangle at mid dissolve.",
+    "Reduce strip smoothness and metallic response and add high-frequency per-column micro-offsets so the freed foil reads as foil rather than a chrome blade.",
+    "Exclude the magenta segment of the source lifetime gradient and prefer the source horizontal streak atlas frames over the symmetric four-point star frame.",
+    "Give the cavity interior side walls and contact occlusion instead of a brighter flat band."
+  ],
+  "immutability": "Iteration 09 code, capture, frames, videos, contact sheets, mapping and report are preserved unchanged as labeled self-rejected history. They must not be shown to the user for visual approval and must not be restored as a current requirement.",
+  "stageStatusAfterSelfRejection": "draft",
+  "approvalRequestAllowed": false,
+  "shippingRuntimeWired": false,
+  "shippingReady": false,
+  "physicalPhoneInstalled": false,
+  "deviceAccepted": false,
+  "statusText": "视觉批准待确认，未推送手机"
+}

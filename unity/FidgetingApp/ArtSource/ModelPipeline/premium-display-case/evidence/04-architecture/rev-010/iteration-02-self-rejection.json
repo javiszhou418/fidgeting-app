@@ -1,0 +1,25 @@
+{
+  "schema": "premium-display-case-gate04-r010-self-rejection.v1",
+  "iteration": 2,
+  "date": "2026-08-28",
+  "status": "visual-self-rejected-before-registration",
+  "registeredForApproval": false,
+  "source": "actual Unity 6000.5.6f1 PlayMode frames at 1206x2622 and 60 fps",
+  "automaticChecks": "27/27 pass",
+  "visualReasons": [
+    "The one-frame flash was a large flat oval behind the product and still read as a generic effect plate.",
+    "Small bright foil particles crossed the case label and read as confetti instead of authored material release.",
+    "The full foil strip and cavity remained visible until the last handoff frame, then disappeared too abruptly.",
+    "The case sheen was a broad bright vertical band rather than one restrained material pass.",
+    "The moving foil highlight read as a small rectangular sticker instead of a narrow traveling specular line."
+  ],
+  "corrections": [
+    "Shrink the flash to the aperture and retain the same dark case silhouette.",
+    "Move three foil shards, three glints, and two streaks behind the product.",
+    "Move the strip out of frame during Pack retreat and clear cavity/contact layers before handoff end.",
+    "Reduce sheen strength and width.",
+    "Lengthen and narrow the specular geometry."
+  ],
+  "shippingRuntimeWired": false,
+  "physicalPhoneInstalled": false
+}

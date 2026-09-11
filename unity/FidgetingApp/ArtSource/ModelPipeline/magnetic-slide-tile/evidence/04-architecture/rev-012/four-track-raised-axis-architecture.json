@@ -1,0 +1,116 @@
+{
+  "schemaVersion": 2,
+  "kind": "four-track-raised-axis-architecture",
+  "modelId": "magnetic-slide-tile",
+  "gate": "04-architecture",
+  "revision": 12,
+  "createdAt": "2026-08-27T03:23:27.220Z",
+  "governingMechanismContractSha256": "5aee71817c2c033ed92b770126ba0ecb6d79c2f032d786743b214b79078a47ea",
+  "hierarchy": [
+    {
+      "id": "BottomExterior",
+      "parent": "Root",
+      "transform": "identity",
+      "note": "smooth, no exterior cavity or rail"
+    },
+    {
+      "id": "FixedAxisBoss",
+      "parent": "BottomExterior",
+      "transform": "identity",
+      "note": "positive protrusion"
+    },
+    {
+      "id": "MinimumOverlapDisk",
+      "parent": "BottomExterior",
+      "transform": "identity",
+      "note": "validation overlay only"
+    },
+    {
+      "id": "RotatingCarrier",
+      "parent": "FixedAxisBoss",
+      "transform": "R_fixedAxis(theta)",
+      "note": "no translation"
+    },
+    {
+      "id": "CarrierFollowerLeft",
+      "parent": "RotatingCarrier",
+      "transform": "R_fixedAxis(theta)",
+      "note": "inner-track link"
+    },
+    {
+      "id": "CarrierFollowerRight",
+      "parent": "RotatingCarrier",
+      "transform": "R_fixedAxis(theta)",
+      "note": "inner-track link"
+    },
+    {
+      "id": "BallCandidateLeft",
+      "parent": "RotatingCarrier",
+      "transform": "R_fixedAxis(theta)",
+      "note": "2–3 mm candidate"
+    },
+    {
+      "id": "BallCandidateRight",
+      "parent": "RotatingCarrier",
+      "transform": "R_fixedAxis(theta)",
+      "note": "2–3 mm candidate"
+    },
+    {
+      "id": "MovingTop",
+      "parent": "Root",
+      "transform": "R_fixedAxis(theta)*T_local(s)",
+      "note": "always above bottom"
+    },
+    {
+      "id": "TopOuterGrooveLeft",
+      "parent": "MovingTop",
+      "transform": "R*T",
+      "note": "fore/aft slide"
+    },
+    {
+      "id": "TopInnerGrooveLeft",
+      "parent": "MovingTop",
+      "transform": "R*T",
+      "note": "axis linkage"
+    },
+    {
+      "id": "TopInnerGrooveRight",
+      "parent": "MovingTop",
+      "transform": "R*T",
+      "note": "axis linkage"
+    },
+    {
+      "id": "TopOuterGrooveRight",
+      "parent": "MovingTop",
+      "transform": "R*T",
+      "note": "fore/aft slide"
+    },
+    {
+      "id": "UnknownSprings",
+      "parent": "RotatingCarrier",
+      "transform": "metadata-only",
+      "note": "count/layout unknown"
+    },
+    {
+      "id": "UnknownPreload",
+      "parent": "RotatingCarrier",
+      "transform": "metadata-only",
+      "note": "unknown"
+    }
+  ],
+  "blockers": {
+    "trackCountMustEqual": 4,
+    "requiredTrackRoles": [
+      "fore-aft-slide",
+      "central-axis-link"
+    ],
+    "axisBossProtrusionMustExceedMm": 0,
+    "recessedAxisFlagForbidden": true,
+    "ballDiameterAuthorizedMm": [
+      2,
+      3
+    ],
+    "trackWidthMaximumMm": 3,
+    "contractHashMustMatch": "5aee71817c2c033ed92b770126ba0ecb6d79c2f032d786743b214b79078a47ea"
+  }
+}

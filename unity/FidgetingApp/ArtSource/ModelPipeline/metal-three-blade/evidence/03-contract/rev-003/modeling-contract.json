@@ -1,0 +1,119 @@
+{
+  "modelId": "metal-three-blade",
+  "stageId": "03-contract",
+  "revision": 3,
+  "recordedAt": "2026-09-05T08:08:12.538091+00:00",
+  "contractState": "user-authorized-provisional",
+  "route": "deterministic-bpy-builder",
+  "builder": "tools/blender/build_unified_tri_spinner.py",
+  "units": "metres in Blender; mm here",
+  "spinAxis": {
+    "blender": "+Z",
+    "unity": "+Y"
+  },
+  "origin": "bearing centre",
+  "overall": {
+    "tipCircleDiameterMm": 65.0,
+    "boundingWidthMm": 64.0,
+    "bodyThicknessMm": 10.0,
+    "bladeThicknessMm": 9.9,
+    "assembledDepthMm": 13.0
+  },
+  "hub": {
+    "hubDiameterMm": 37.6,
+    "counterboreDiameterMm": 36.8,
+    "counterboreDepthMm": 2.2,
+    "boreDiameterMm": 12.7,
+    "lipWidthMm": 0.4,
+    "hubMaterial": "body satin; counterbore wall+floor dark"
+  },
+  "cap": {
+    "outerDiameterMm": 34.84,
+    "capToTipCircle": 0.536,
+    "tableDiameterMm": 24.39,
+    "tableToCap": 0.7,
+    "tableAboveBladeFaceMm": 1.5,
+    "tableFlat": true,
+    "wedges": 24,
+    "planarHalfFaces": 48,
+    "wedgeRingSlopeDeg": 24.7,
+    "outerEdgeLiftMm": 0.22,
+    "adjacentNormalAngleDeg": [
+      18.7,
+      25.0
+    ],
+    "seamWidthMm": 0.98,
+    "anisotropy": "table only"
+  },
+  "blades": {
+    "count": 3,
+    "anglesDeg": [
+      90,
+      210,
+      330
+    ],
+    "solid": true,
+    "rootHalfWidthMm": 12.0,
+    "outerEnd": "arc on tip circle from ±14.6 mm",
+    "topPlanesPerBlade": "4-5 large + chamfers (measured 7)",
+    "sideWalls": "vertical, 3.8 mm",
+    "bevelMm": 0.5,
+    "bevelSegments": 2
+  },
+  "bearing": {
+    "standard": "R188",
+    "odMm": 12.7,
+    "idMm": 6.35,
+    "widthMm": 4.76,
+    "visibility": "hidden"
+  },
+  "materials": {
+    "body": {
+      "metallic": 1.0,
+      "roughness": 0.36
+    },
+    "capTable": {
+      "metallic": 1.0,
+      "roughness": 0.32,
+      "anisotropic": 0.7,
+      "tangent": "radial",
+      "ringBump": 0.035
+    },
+    "capWedge": {
+      "metallic": 1.0,
+      "roughness": 0.34
+    },
+    "seam": "dark steel 0.085 / gunmetal 0.03"
+  },
+  "forbidden": [
+    "random scales",
+    "wedges across the table",
+    "blade pockets",
+    "anisotropy on wedges",
+    "bright annulus",
+    "cap under Rotor_Root",
+    "subdivision",
+    "smooth-by-angle on facets",
+    "non-zero initial angular velocity"
+  ],
+  "unknowns": [
+    "official width/thickness mm",
+    "table ratio 0.70 (user) vs 0.797 (photo)",
+    "root dark triangles (photo) vs solid (user)",
+    "turning-mark pitch"
+  ],
+  "consumedClaimIds": [
+    "tri-r2-cap-size-was-never-wrong",
+    "tri-r2-no-bright-annulus",
+    "tri-r2-body-is-one-solid",
+    "tri-r2-dimensions-unmeasured",
+    "tri-r3-shadow-gap-not-race",
+    "tri-r3-one-model-decision",
+    "tri-r3-dimensions-provisional",
+    "tri-r4-two-layer-cap",
+    "tri-r4-cap-low-profile",
+    "tri-r4-solid-faceted-blades",
+    "tri-r4-satin-material",
+    "tri-r4-table-ratio-discrepancy"
+  ]
+}

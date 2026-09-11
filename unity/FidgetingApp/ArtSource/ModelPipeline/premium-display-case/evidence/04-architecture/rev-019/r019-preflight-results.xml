@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<testsuite name="IsolatedR019Preflight" tests="15" failures="1" errors="0">
+  <testcase name="r017-mirror-regression-is-observed" />
+  <testcase name="r019-artwork-identity-wins-calibration" />
+  <testcase name="front-winding-faces-calibration-camera" />
+  <testcase name="sealed-artwork-maps-archive-above-standard" />
+  <testcase name="sealed-top-crimp-rendered-above-fidget-archive" />
+  <testcase name="sealed-bottom-crimp-is-below-standard" />
+  <testcase name="formed-mouth-bounds-stay-in-upper-third" />
+  <testcase name="contained-mouth-bounds-stay-in-upper-third" />
+  <testcase name="formed-mouth-liner-and-cavity-separate"><failure message="liner=11063, cavity=0, liner-cavity=0.3245, liner-outer=0.0998, cavity-background=0.0798" /></testcase>
+  <testcase name="contained-mouth-liner-and-cavity-separate" />
+  <testcase name="physical-top-front-edge-moves-downward" />
+  <testcase name="released-seal-is-compact-top-right-strip" />
+  <testcase name="contained-case-renders-inside-upper-mouth" />
+  <testcase name="preflight-effects-remain-zero" />
+  <testcase name="every-capture-follows-a-unity-frame" />
+</testsuite>

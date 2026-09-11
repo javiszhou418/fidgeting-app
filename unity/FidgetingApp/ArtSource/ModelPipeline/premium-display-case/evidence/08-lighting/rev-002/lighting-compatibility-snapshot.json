@@ -1,0 +1,471 @@
+{
+  "schemaVersion": 1,
+  "modelId": "premium-display-case",
+  "gate": "08-lighting",
+  "lightingRevision": 2,
+  "sourceMaterialRevision": 2,
+  "sourceArchitectureEvidenceRevision": 7,
+  "geometryDigest": "a3d1e9fe3c6d26c957c7ad1584cc489b9091a1a79e435a660aa89bcf6acc3951",
+  "materialDigest": "8358cfdb12e49f87adbbafd96f33f2beb3415f9b920cb62732c73173c7799210",
+  "wholeAssembledCaseOnly": true,
+  "reviewExplodedPartCount": 0,
+  "labelContentApproved": false,
+  "labelRuntimeAuthority": "Unity real product data",
+  "meshClippedSheen": {
+    "classification": "material-runtime compatibility cue; not external light spill",
+    "owner": "Unity MaterialPropertyBlock",
+    "outsideSubjectPixels": 0,
+    "outsideAllowedMaterialZonePixels": 0,
+    "externalHalo": false,
+    "pointLight": false,
+    "runtimeTimingIncluded": false
+  },
+  "candidateBoundary": {
+    "blenderLookdevCandidatesOnly": true,
+    "automaticUnityRuntimeConstants": false,
+    "tunableUntilShippingUnityPreview": [
+      "intensity",
+      "color temperature",
+      "exposure",
+      "field of view",
+      "light width",
+      "falloff"
+    ]
+  },
+  "animationBoundary": {
+    "gate04StructurePreserved": true,
+    "timingBaked": false,
+    "easingBaked": false,
+    "presentationRootAnimationAction": null
+  },
+  "forbiddenEffects": {
+    "fixedGreenCast": false,
+    "rarityLight": false,
+    "externalHalo": false,
+    "largeBloom": false,
+    "particles": false,
+    "flash": false,
+    "shake": false,
+    "persistentEmission": false
+  },
+  "lightingCandidates": {
+    "classification": "professional neutral controlled Blender product lookdev; not Unity runtime lighting",
+    "ratios": {
+      "key": 1.0,
+      "fill": 0.3,
+      "rim": 0.4
+    },
+    "lights": [
+      {
+        "name": "M08_KeyStrip_5000K",
+        "role": "key",
+        "locationMm": [
+          470.0,
+          360.0,
+          690.0
+        ],
+        "targetMm": [
+          0.0,
+          8.0,
+          12.0
+        ],
+        "energy": 2400000.0,
+        "ratioToKey": 1.0,
+        "sizeMm": 560.0,
+        "sizeYmm": 150.0,
+        "linearRgb": [
+          1.0,
+          0.975,
+          0.95
+        ],
+        "colorTemperatureKelvin": 5000,
+        "rotationEulerDegrees": [
+          40.895081,
+          -1.2e-05,
+          126.830876
+        ],
+        "type": "AREA",
+        "shape": "RECTANGLE",
+        "rarityLight": false,
+        "shippingRuntimeParameter": false
+      },
+      {
+        "name": "M08_FillSoftbox_6200K",
+        "role": "fill",
+        "locationMm": [
+          -430.0,
+          100.0,
+          530.0
+        ],
+        "targetMm": [
+          0.0,
+          -10.0,
+          10.0
+        ],
+        "energy": 720000.0,
+        "ratioToKey": 0.3,
+        "sizeMm": 620.0,
+        "sizeYmm": 460.0,
+        "linearRgb": [
+          0.955,
+          0.972,
+          1.0
+        ],
+        "colorTemperatureKelvin": 6200,
+        "rotationEulerDegrees": [
+          40.482466,
+          5e-06,
+          -104.349335
+        ],
+        "type": "AREA",
+        "shape": "RECTANGLE",
+        "rarityLight": false,
+        "shippingRuntimeParameter": false
+      },
+      {
+        "name": "M08_RimStrip_5600K",
+        "role": "rim",
+        "locationMm": [
+          -300.0,
+          340.0,
+          -430.0
+        ],
+        "targetMm": [
+          0.0,
+          10.0,
+          0.0
+        ],
+        "energy": 960000.0,
+        "ratioToKey": 0.4,
+        "sizeMm": 460.0,
+        "sizeYmm": 105.0,
+        "linearRgb": [
+          0.975,
+          0.985,
+          1.0
+        ],
+        "colorTemperatureKelvin": 5600,
+        "rotationEulerDegrees": [
+          -46.045232,
+          179.999991,
+          42.273687
+        ],
+        "type": "AREA",
+        "shape": "RECTANGLE",
+        "rarityLight": false,
+        "shippingRuntimeParameter": false
+      }
+    ],
+    "world": {
+      "linearRgb": [
+        0.03200000151991844,
+        0.032999999821186066,
+        0.03500000014901161,
+        1.0
+      ],
+      "sourceStrength": 0.2800000011920929,
+      "renderStrength": 0.2,
+      "hdri": null,
+      "fixedGreenBias": false,
+      "rarityLight": false
+    }
+  },
+  "cameraCandidates": {
+    "hero": {
+      "name": "M08_HeroCamera",
+      "locationMm": [
+        274.691223,
+        140.791016,
+        849.412659
+      ],
+      "rotationEulerDegrees": [
+        -9.0,
+        18.000001,
+        -0.0
+      ],
+      "targetMm": [
+        0.0,
+        0.0,
+        4.0
+      ],
+      "lensMm": 60.0,
+      "sensorWidthMm": 36.0,
+      "sensorHeightMm": 32.0,
+      "sensorFit": "VERTICAL",
+      "verticalFovDegrees": 29.862834,
+      "depthOfField": false,
+      "resolution": [
+        1400,
+        1600
+      ],
+      "assemblyState": "assembled",
+      "shippingRuntimeParameter": false,
+      "framing": {
+        "normalizedBounds": [
+          0.2224538,
+          0.16041361,
+          0.78567946,
+          0.82271969
+        ],
+        "minimumMargin": 0.16041361,
+        "notCropped": true,
+        "comfortableMargin": true
+      }
+    },
+    "left-oblique": {
+      "name": "M08_Left_ObliqueCamera",
+      "locationMm": [
+        -368.102722,
+        95.120903,
+        830.772278
+      ],
+      "rotationEulerDegrees": [
+        -6.0,
+        -24.000002,
+        0.0
+      ],
+      "targetMm": [
+        0.0,
+        0.0,
+        4.0
+      ],
+      "lensMm": 60.0,
+      "sensorWidthMm": 36.0,
+      "sensorHeightMm": 32.0,
+      "sensorFit": "VERTICAL",
+      "verticalFovDegrees": 29.862834,
+      "depthOfField": false,
+      "resolution": [
+        1400,
+        1600
+      ],
+      "assemblyState": "assembled",
+      "shippingRuntimeParameter": false,
+      "framing": {
+        "normalizedBounds": [
+          0.21815014,
+          0.15944456,
+          0.76434869,
+          0.82542229
+        ],
+        "minimumMargin": 0.15944456,
+        "notCropped": true,
+        "comfortableMargin": true
+      }
+    },
+    "right-oblique": {
+      "name": "M08_Right_ObliqueCamera",
+      "locationMm": [
+        368.102722,
+        95.120903,
+        830.772278
+      ],
+      "rotationEulerDegrees": [
+        -6.0,
+        24.000002,
+        -0.0
+      ],
+      "targetMm": [
+        0.0,
+        0.0,
+        4.0
+      ],
+      "lensMm": 60.0,
+      "sensorWidthMm": 36.0,
+      "sensorHeightMm": 32.0,
+      "sensorFit": "VERTICAL",
+      "verticalFovDegrees": 29.862834,
+      "depthOfField": false,
+      "resolution": [
+        1400,
+        1600
+      ],
+      "assemblyState": "assembled",
+      "shippingRuntimeParameter": false,
+      "framing": {
+        "normalizedBounds": [
+          0.23565133,
+          0.15944456,
+          0.78190112,
+          0.82542229
+        ],
+        "minimumMargin": 0.15944456,
+        "notCropped": true,
+        "comfortableMargin": true
+      }
+    },
+    "low": {
+      "name": "M08_LowCamera",
+      "locationMm": [
+        312.31311,
+        -122.119797,
+        860.073242
+      ],
+      "rotationEulerDegrees": [
+        7.000001,
+        19.999999,
+        -0.0
+      ],
+      "targetMm": [
+        0.0,
+        -10.0,
+        2.0
+      ],
+      "lensMm": 60.0,
+      "sensorWidthMm": 36.0,
+      "sensorHeightMm": 32.0,
+      "sensorFit": "VERTICAL",
+      "verticalFovDegrees": 29.862834,
+      "depthOfField": false,
+      "resolution": [
+        1400,
+        1600
+      ],
+      "assemblyState": "assembled",
+      "shippingRuntimeParameter": false,
+      "framing": {
+        "normalizedBounds": [
+          0.23047742,
+          0.20320985,
+          0.77727121,
+          0.85542792
+        ],
+        "minimumMargin": 0.14457208,
+        "notCropped": true,
+        "comfortableMargin": true
+      }
+    },
+    "label-closeup": {
+      "name": "M08_Label_CloseupCamera",
+      "locationMm": [
+        0.0,
+        102.0,
+        450.0
+      ],
+      "rotationEulerDegrees": [
+        -0.403485,
+        0.0,
+        0.0
+      ],
+      "targetMm": [
+        0.0,
+        99.0,
+        24.0
+      ],
+      "lensMm": 92.0,
+      "sensorWidthMm": 36.0,
+      "sensorHeightMm": 32.0,
+      "sensorFit": "VERTICAL",
+      "verticalFovDegrees": 19.731614,
+      "depthOfField": false,
+      "resolution": [
+        1600,
+        1100
+      ],
+      "assemblyState": "assembled",
+      "shippingRuntimeParameter": false
+    },
+    "tube-corner": {
+      "name": "M08_Tube_CornerCamera",
+      "locationMm": [
+        270.0,
+        270.0,
+        520.0
+      ],
+      "rotationEulerDegrees": [
+        -14.903445,
+        19.77838,
+        0.0
+      ],
+      "targetMm": [
+        92.0,
+        130.0,
+        25.0
+      ],
+      "lensMm": 104.0,
+      "sensorWidthMm": 36.0,
+      "sensorHeightMm": 32.0,
+      "sensorFit": "VERTICAL",
+      "verticalFovDegrees": 17.492325,
+      "depthOfField": false,
+      "resolution": [
+        1500,
+        1200
+      ],
+      "assemblyState": "assembled",
+      "shippingRuntimeParameter": false
+    },
+    "black-panel": {
+      "name": "M08_Black_PanelCamera",
+      "locationMm": [
+        210.0,
+        -72.0,
+        430.0
+      ],
+      "rotationEulerDegrees": [
+        1.734082,
+        27.008337,
+        -0.0
+      ],
+      "targetMm": [
+        0.0,
+        -58.0,
+        18.0
+      ],
+      "lensMm": 96.0,
+      "sensorWidthMm": 36.0,
+      "sensorHeightMm": 32.0,
+      "sensorFit": "VERTICAL",
+      "verticalFovDegrees": 18.924644,
+      "depthOfField": false,
+      "resolution": [
+        1500,
+        1200
+      ],
+      "assemblyState": "assembled",
+      "shippingRuntimeParameter": false
+    }
+  },
+  "renderCandidates": {
+    "engine": "CYCLES",
+    "device": "Apple M4 Max (GPU - 40 cores)",
+    "samples": 96,
+    "adaptiveThreshold": 0.017999999225139618,
+    "denoiser": "OPENIMAGEDENOISE",
+    "transmissionBounces": 20,
+    "viewTransform": "AgX",
+    "look": "AgX - Medium High Contrast",
+    "exposureEv": 0.550000011920929,
+    "gamma": 1.0,
+    "whiteBalanceKelvin": 5600.0,
+    "whiteBalanceTint": 0.0,
+    "shutterSeconds": null,
+    "iso": null,
+    "unityRuntimeMapping": "not claimed; Blender exposure, camera, and lights are Gate 08 review parameters only",
+    "technicalPassEngine": "BLENDER_EEVEE"
+  },
+  "realLightingTurntable": {
+    "frameCount": 13,
+    "angleStepDegrees": 30,
+    "durationSeconds": 2.166667,
+    "videoSha256": "7b099cc0de6743fff8e98dea3cb14407687c93ebab7d9bcea1587bf7b05cd195",
+    "contactSheetSha256": "8ee2d3975acc5a4a3407e5f73d7c470a16753ff5bef53f39103a0d581f2da588",
+    "assemblyState": "assembled",
+    "runtimeTimingBaked": false
+  },
+  "approvalChecklist": [
+    "inspect-hero-left-right-low",
+    "inspect-beauty-clay-normal-depth-roughness",
+    "inspect-frosted-shell-closed-tube-black-insert-label-zones",
+    "confirm-no-clipped-whites-or-crushed-darks",
+    "confirm-neutral-no-green-rarity-halo-bloom-particles",
+    "confirm-placeholder-label-not-approved",
+    "confirm-mesh-clipped-sheen-zero-outside-silhouette",
+    "confirm-lookdev-values-remain-candidates",
+    "confirm-no-blender-timing-or-easing-bake"
+  ],
+  "gate08Status": "ready_for_review",
+  "gate09Status": "blocked",
+  "shippingUnityChanged": false,
+  "buildInstallPhonePush": false
+}

@@ -1,0 +1,54 @@
+{
+  "schemaVersion": 2,
+  "modelId": "model-hhax",
+  "productIdentity": {
+    "name": "MOT Groove Ultra — Gambit / Knight custom appearance",
+    "confidence": "high",
+    "evidenceBoundary": "User imagery controls the custom appearance. Exact-product public sources control only published envelope, mass, motion family, removable rear patch and visible teardown topology."
+  },
+  "publishedEnvelope": {
+    "lengthMm": 50.5,
+    "widthMm": 30.9,
+    "thicknessMm": 13.6,
+    "massG": 88,
+    "status": "same-model published specification; not a user measurement"
+  },
+  "mechanism": {
+    "primary": "straight push along the long axis",
+    "secondary": "rotation through a mechanical linkage track",
+    "magnetRole": "removable decorative patch retention only; not motion drive",
+    "visibleModules": [
+      "two capsule exterior shells",
+      "long straight track region",
+      "circular rotary carrier / track region",
+      "central adjustment screw",
+      "replaceable spring / bead elements",
+      "hidden lanyard aperture"
+    ],
+    "unknowns": [
+      "exact hidden linkage profile",
+      "exact spring and bead count",
+      "manufacturing tolerances and hole depths",
+      "exact rotation-to-translation timing"
+    ]
+  },
+  "appearance": {
+    "body": "near-black polished purple-gray metal with a narrow local spectral edge highlight",
+    "frontUpper": "mother-of-pearl chess cells, coral-red knight and MORE THAN CLASSIC plaque below a clear cap",
+    "frontLowerExposed": "separate mother-of-pearl cells and round MOT crest revealed by the push",
+    "back": "KNIGHT IN CHESS circular knight medallion, twin chess-cell rails and MOT STUDIO spine",
+    "emission": "in darkness only cyan/blue chess cells and the orange knight emit; metal, plaques and text remain non-emissive"
+  },
+  "modelingDecision": {
+    "classificationCompatibilityId": "linear-magnetic-slider",
+    "classificationCaveat": "Workbench compatibility name only; the true motion drive is mechanical.",
+    "digitalReconstructionPolicy": "Published outer dimensions are fixed. Hidden dimensions derived from same-product teardown imagery remain hash-linked, provisional, reversible and non-manufacturing."
+  },
+  "sources": [
+    "all eight original Obsidian intake assets",
+    "NXEDC exact-product page and archived product video",
+    "WANEDC exact-product listing",
+    "TRB Creation exact-product listing",
+    "EDC Radar issue 002"
+  ]
+}

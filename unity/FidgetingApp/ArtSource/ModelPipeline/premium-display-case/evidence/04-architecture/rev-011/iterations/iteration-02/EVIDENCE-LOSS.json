@@ -1,0 +1,28 @@
+{
+  "schema": "premium-display-case-gate04-r011-evidence-loss.v1",
+  "iteration": 2,
+  "lostAt": "2026-08-28T17:46:00+08:00",
+  "cause": "A takeover agent copied the r8 capture output into this directory before listing existing iterations, overwriting iteration-02 pixel artifacts.",
+  "lostArtifacts": [
+    "frames/frame-0000.png through frames/frame-0206.png",
+    "continuity-contact-sheet.png",
+    "matched-timestamps.json",
+    "source-impact-contact-sheet.png",
+    "source-target-side-by-side.png",
+    "tear-contact-sheet.png",
+    "unity-capture-report.json"
+  ],
+  "survivingArtifacts": [
+    "self-rejection.json",
+    "source-to-canonical-mapping.json",
+    "unity-source-manifest.json"
+  ],
+  "recoveryAttempted": [
+    "git: evidence tree is untracked, no object available",
+    "tmutil: no Time Machine destination configured, only OS update snapshots present"
+  ],
+  "recovered": false,
+  "impact": "The iteration-02 rejection reason and provenance mapping remain intact, so the labeled history chain is unbroken. The iteration-02 rendered pixels are permanently unavailable.",
+  "misattributionRisk": "None remaining. The overwriting r8 pixels were moved to iteration-08, which is their correct slot.",
+  "reportedToUser": true
+}

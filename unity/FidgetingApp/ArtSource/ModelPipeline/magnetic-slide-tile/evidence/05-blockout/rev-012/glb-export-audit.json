@@ -1,0 +1,37 @@
+{
+  "schemaVersion": 1,
+  "product": {
+    "nodes": 7,
+    "meshes": 2,
+    "meshNodes": [
+      "BottomExterior",
+      "MovingTopBody"
+    ]
+  },
+  "technical": {
+    "nodes": 19,
+    "meshes": 9,
+    "meshNodes": [
+      "BallCandidateLeft",
+      "BallCandidateRight",
+      "BottomExterior",
+      "CarrierFollowerLeft",
+      "CarrierFollowerRight",
+      "InternalAxisBoss",
+      "MovingTopBody",
+      "RotatingCarrierBody",
+      "Technical_FixedAxisOverlay"
+    ]
+  },
+  "pivotNodes": [
+    "FixedAxis"
+  ],
+  "checks": {
+    "productHasTwoMeshes": true,
+    "technicalHasNineMeshes": true,
+    "exactlyOnePivotNode": true,
+    "minimumDiskHasNoMesh": true,
+    "noAnimations": true
+  },
+  "pass": true
+}

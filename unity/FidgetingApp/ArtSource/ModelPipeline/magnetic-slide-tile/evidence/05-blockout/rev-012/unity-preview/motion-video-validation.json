@@ -1,0 +1,40 @@
+{
+  "schemaVersion": 1,
+  "gate": "05-blockout",
+  "revision": 12,
+  "source": "real Unity 6000.5.6f1 Camera frames",
+  "frameCount": 300,
+  "axisOverlayCentroidRangePx": {
+    "x": 0.0,
+    "y": 0.0
+  },
+  "unityTransformValidation": {
+    "fixedPivotVarianceMeters": 0.0,
+    "constraintResidualMeters": 5.101064015633483e-09,
+    "pitchRollDegrees": 0.0,
+    "rendererWhitelist": [
+      "BottomExterior",
+      "MovingTopBody"
+    ]
+  },
+  "video": {
+    "path": "gate05-r012-unity-fixed-axis-motion.mp4",
+    "sha256": "62fd78edcce101e30cbfdff28cf23831d1b4c56dc84fb6ae7a639f09603ef107",
+    "codec": "h264",
+    "pixelFormat": "yuv420p",
+    "width": 960,
+    "height": 720,
+    "frameRate": "30/1",
+    "durationSeconds": 10.0
+  },
+  "checks": {
+    "allFramesPresent": true,
+    "fixedWorldAxisOverlay": true,
+    "pivotVarianceZero": true,
+    "slotPointLocked": true,
+    "noPitchRoll": true,
+    "productWhitelistExact": true,
+    "videoTenSeconds": true
+  },
+  "pass": true
+}

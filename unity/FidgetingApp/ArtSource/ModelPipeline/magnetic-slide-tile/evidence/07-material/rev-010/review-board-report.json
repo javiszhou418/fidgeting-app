@@ -1,0 +1,108 @@
+{
+  "schemaVersion": 1,
+  "gate": "07-material",
+  "revision": 10,
+  "reviewQuestion": "现在这个 Blender 材质和下片图案像原来的实物吗？",
+  "technicalDetailsCollapsed": true,
+  "boards": [
+    "source-fidelity-review-board.png",
+    "material-closeups-board.png",
+    "axis-angle-evidence-board.png"
+  ],
+  "axisEvidence": {
+    "axisPointWorldMm": [
+      0.0,
+      -9.5,
+      0.0
+    ],
+    "axisDirection": "+Z",
+    "spin": [
+      {
+        "angleDeg": 0,
+        "detentIndex": 0,
+        "pivotWorldMm": [
+          0.0,
+          -9.5,
+          0.0
+        ],
+        "pivotDriftMm": 0.0,
+        "translationWorldMm": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "translationMagnitudeMm": 0.0,
+        "axisDirection": "+Z",
+        "axisPixel": [
+          800.0,
+          833.636
+        ],
+        "render": "spin-00deg.png"
+      },
+      {
+        "angleDeg": 12,
+        "detentIndex": 1,
+        "pivotWorldMm": [
+          0.0,
+          -9.5,
+          0.0
+        ],
+        "pivotDriftMm": 0.0,
+        "translationWorldMm": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "translationMagnitudeMm": 0.0,
+        "axisDirection": "+Z",
+        "axisPixel": [
+          800.0,
+          833.636
+        ],
+        "render": "spin-12deg.png"
+      },
+      {
+        "angleDeg": 36,
+        "detentIndex": 3,
+        "pivotWorldMm": [
+          0.0,
+          -9.5,
+          0.0
+        ],
+        "pivotDriftMm": 0.0,
+        "translationWorldMm": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "translationMagnitudeMm": 0.0,
+        "axisDirection": "+Z",
+        "axisPixel": [
+          800.0,
+          833.636
+        ],
+        "render": "spin-36deg.png"
+      }
+    ],
+    "slide": {
+      "translationLocalMm": [
+        0.0,
+        21.0,
+        0.0
+      ],
+      "rotationDeg": 0,
+      "pivotWorldMm": [
+        0.0,
+        11.5,
+        0.0
+      ],
+      "upperRotationDeg": 0.0,
+      "render": "slide-open-21mm-0deg.png"
+    },
+    "detentEquation": "360° / 12° = 30",
+    "allSpinAnglesDetentAligned": true,
+    "allSpinTranslationsZero": true,
+    "allPivotDriftZero": true,
+    "fortyFiveDegreePrimaryPoseUsed": false
+  }
+}

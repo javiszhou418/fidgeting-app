@@ -1,0 +1,152 @@
+{
+  "schema": "make-it-shine-cc0-source-mapping.r015.v1",
+  "sourceCommit": "88842be0063b5b0b75e82ed6572752a37a13c82b",
+  "license": "CC0-1.0",
+  "exactUserMotionChoice": "卡包的容纳／抽出因果＋箔层双层剥离",
+  "referenceOnlySources": [
+    {
+      "url": "https://www.youtube.com/watch?v=gnNSHeoUHRQ&t=710s",
+      "use": "physical Pack containment and extraction causality",
+      "imported": false
+    },
+    {
+      "url": "https://www.storyblocks.com/video/stock/hands-detail-white-man-unwrapping-red-wrapper-seated-on-bench-outdoors-in-casual-jacket-fingers-peeling-foil-and-plastic-layers-tactile-353739590",
+      "use": "outer printed foil and delayed inner liner separation",
+      "imported": false
+    },
+    {
+      "url": "https://www.storyblocks.com/video/stock/man-on-bench-opens-treat-pouch-carefully-removes-small-red-snack-from-foil-wrapper-hands-closeup-showing-zipper-and-jacket-detail-urban-353739580",
+      "use": "pouch mouth before content extraction",
+      "imported": false
+    }
+  ],
+  "direct": [
+    {
+      "source": "Assets/Animation/Clips/Booster/Booster_Discarded.anim",
+      "sourceSha256": "be661fe81b095f7f1ad08fb2a1c003b15f8690ee08d43f9f705dc849924fb2c6",
+      "destination": "Assets/_DisplayCase/Runtime/MakeItShineCc0Effects/MakeItShineCc0EffectCurves.cs",
+      "destinationSha256": "d611185f98b453263c80d93d7467d77945b537804210cd55501eb19368ad86b3",
+      "use": "exact normalized discard curve after physical containment"
+    },
+    {
+      "source": "Assets/Art/Kyle/Materials/SG_Title_Kyle.shadergraph",
+      "sourceSha256": "6a7718d6ae1eba360c03a1ea16b207ada5ae80f1a4dc2df0d004453bf94e2067",
+      "destination": "Assets/_DisplayCase/Runtime/MakeItShineCc0Effects/MakeItShineCc0Masks.hlsl",
+      "destinationSha256": "b97707d266aecbcfadb583967d7186a508126066ce348e104281fe6f4ab78b7d",
+      "use": "object-local sphere-mask contour timing"
+    },
+    {
+      "source": "Assets/Plugins/iOS/GachaPacks/gacha-pack-standard-body.png",
+      "sourceSha256": "ebc17bb238ebbcb82d36134bb2781838df610f8a3d1750c27b8ade10fc4681d6",
+      "destination": "unity/FidgetingApp/ArtSource/ModelPipeline/premium-display-case/staging/pack-opening-gate04-r015/PackOpeningGate04R015PackOnlyRig.fbx",
+      "destinationSha256": "8cdfb4ba7177946527b01388e33ab4f5dd6b9094130d951303e2d0c9c3f1cfa1",
+      "use": "unmodified 384x512 Pack artwork"
+    },
+    {
+      "source": "Assets/Plugins/iOS/GachaPacks/gacha-pack-standard-flap.png",
+      "sourceSha256": "b031fc5c57d194e9603e9b32e1cd603285aa564490f599f29bb0cd67dab33d49",
+      "destination": "unity/FidgetingApp/ArtSource/ModelPipeline/premium-display-case/staging/pack-opening-gate04-r015/pack-opening-gate04-r015.blend",
+      "destinationSha256": "c63454b7effa1c2ca253c0fca091e1bf111656bfa356fb596d25a469a35c71f0",
+      "use": "unmodified crimp and released-strip artwork"
+    }
+  ],
+  "adapted": [
+    {
+      "source": "unity/FidgetingApp/ArtSource/ModelPipeline/premium-display-case/staging/pack-opening-gate04-r015/build_pack_only_rig.py",
+      "sourceSha256": "8e4431a371f1279e968d24d522a122cb1ccf495110e67c8f9587828037c0fbd2",
+      "destination": "isolated Unity R015 candidate",
+      "use": "minimal Pack-only rig, real-case binding, or local contour adaptation"
+    },
+    {
+      "source": "unity/FidgetingApp/ArtSource/ModelPipeline/premium-display-case/staging/pack-opening-gate04-r015/motion-reference-decision.json",
+      "sourceSha256": "305f52b957b29a78ecb6ff087ba46739af47f6ef82e05fb009fa6ff8439ffc1d",
+      "destination": "isolated Unity R015 candidate",
+      "use": "minimal Pack-only rig, real-case binding, or local contour adaptation"
+    },
+    {
+      "source": "unity/FidgetingApp/ArtSource/ModelPipeline/premium-display-case/staging/pack-opening-gate04-r015/isolated-template/Assets/IsolatedProofR015/Editor/IsolatedR015ProofBuilder.cs",
+      "sourceSha256": "7b4d6ae1ec3ab1226643493ca06eb84c5055f1c126d36d7ec5842bf29da736cd",
+      "destination": "isolated Unity R015 candidate",
+      "use": "minimal Pack-only rig, real-case binding, or local contour adaptation"
+    },
+    {
+      "source": "unity/FidgetingApp/ArtSource/ModelPipeline/premium-display-case/staging/pack-opening-gate04-r015/isolated-template/Assets/IsolatedProofR015/Editor/IsolatedR015ProofRunner.cs",
+      "sourceSha256": "6ddc6dba124a1d1641adc85542f53df631ead7c983072a72a360a1862b6e8859",
+      "destination": "isolated Unity R015 candidate",
+      "use": "minimal Pack-only rig, real-case binding, or local contour adaptation"
+    },
+    {
+      "source": "unity/FidgetingApp/ArtSource/ModelPipeline/premium-display-case/staging/pack-opening-gate04-r015/isolated-template/Assets/IsolatedProofR015/Runtime/IsolatedR015Profile.cs",
+      "sourceSha256": "084fced3b8b9bdfa36823f7830f7340b6af9c1b21775e139c17860a1745874e0",
+      "destination": "isolated Unity R015 candidate",
+      "use": "minimal Pack-only rig, real-case binding, or local contour adaptation"
+    },
+    {
+      "source": "unity/FidgetingApp/ArtSource/ModelPipeline/premium-display-case/staging/pack-opening-gate04-r015/isolated-template/Assets/IsolatedProofR015/Runtime/IsolatedR015ProofSequence.cs",
+      "sourceSha256": "e0a25d2bec12f97f971c0559c95f0382ba1d5d5d6bc1ece888ce778a32419002",
+      "destination": "isolated Unity R015 candidate",
+      "use": "minimal Pack-only rig, real-case binding, or local contour adaptation"
+    },
+    {
+      "source": "unity/FidgetingApp/ArtSource/ModelPipeline/premium-display-case/staging/pack-opening-gate04-r015/isolated-template/Assets/IsolatedProofR015/Runtime/IsolatedR015ProofCapture.cs",
+      "sourceSha256": "d4fcc7387f6bc6531cb6ba29b168d17f5657e8bc1c32be1af6747e808e8bb883",
+      "destination": "isolated Unity R015 candidate",
+      "use": "minimal Pack-only rig, real-case binding, or local contour adaptation"
+    },
+    {
+      "source": "unity/FidgetingApp/ArtSource/ModelPipeline/premium-display-case/staging/pack-opening-gate04-r015/isolated-template/Assets/IsolatedProofR015/Shaders/MakeItShineCc0PackR015.shader",
+      "sourceSha256": "5e78ef5dbd888b563d43c9617623c7b7121c72bf4e983101ac066a9591905ba3",
+      "destination": "isolated Unity R015 candidate",
+      "use": "minimal Pack-only rig, real-case binding, or local contour adaptation"
+    },
+    {
+      "source": "unity/FidgetingApp/ArtSource/ModelPipeline/premium-display-case/staging/pack-opening-gate04-r015/isolated-template/Assets/IsolatedProofR015/Shaders/MakeItShineCc0ContourSweepR015.shader",
+      "sourceSha256": "79fa28c0a6003c1af5fc8354768f52d87e93f9e77b99aeea47510d5f21802981",
+      "destination": "isolated Unity R015 candidate",
+      "use": "minimal Pack-only rig, real-case binding, or local contour adaptation"
+    },
+    {
+      "source": "unity/FidgetingApp/ArtSource/ModelPipeline/premium-display-case/staging/pack-opening-gate04-r015/isolated-template/Assets/IsolatedProofR015/Tests/Editor/IsolatedR015ProofTests.cs",
+      "sourceSha256": "dc58f4c8544e08c265abce2522fc7c768e592521fbe5ccf20f7e49ae20858550",
+      "destination": "isolated Unity R015 candidate",
+      "use": "minimal Pack-only rig, real-case binding, or local contour adaptation"
+    }
+  ],
+  "rejected": [
+    {
+      "source": "Assets/Prefabs/Cinematic/Opening_Booster.prefab",
+      "sourceSha256": "b155b76ffe54ac737651adbbfa177e284b22175733096e279e056316bf5aa978",
+      "reason": "sample Pack and object swaps are forbidden"
+    },
+    {
+      "source": "Assets/Art/Booster/BoosterFractured_B.fbx",
+      "sourceSha256": "fd78b007802a1966a1dfb1a1c6b8c7c36cec2f3622dcbaf480fe039967ded602",
+      "reason": "sample surrogate geometry is forbidden"
+    },
+    {
+      "source": "Assets/Art/Booster/VFX_BoosterExplosion.vfx",
+      "sourceSha256": "d6af66e7b91e7097d50fbef376bf7b33b63dd9e6738a4c99084cb46460aaac2f",
+      "reason": "particles and VFX Graph are forbidden"
+    },
+    {
+      "source": "Assets/Art/Booster/VFXG_LightingStrike.vfx",
+      "sourceSha256": "4f4da1d0038cee4e4599467b754a429263286073233bb8ac0f259e908635d7b5",
+      "reason": "512-spark source behavior is forbidden"
+    },
+    {
+      "source": "user-provided motion-reference URLs",
+      "reason": "reference only; no copyrighted source asset was imported"
+    }
+  ],
+  "candidates": {
+    "sourceRig": "unity/FidgetingApp/ArtSource/ModelPipeline/premium-display-case/staging/pack-opening-gate04-r015/PackOpeningGate04R015PackOnlyRig.fbx",
+    "sourceRigSha256": "8cdfb4ba7177946527b01388e33ab4f5dd6b9094130d951303e2d0c9c3f1cfa1",
+    "casePrefab": "unity/FidgetingApp/Assets/_DisplayCase/Candidates/PremiumDisplayCaseGate11R001/Prefabs/PresentationRoot.prefab",
+    "isolatedRenderer": "R014 recovered Unity 6000.5.6f1 URP17 default renderer",
+    "caseGeometryBaked": false,
+    "caseInstances": 1,
+    "particles": false,
+    "vfxGraph": false,
+    "shippingReady": false
+  }
+}

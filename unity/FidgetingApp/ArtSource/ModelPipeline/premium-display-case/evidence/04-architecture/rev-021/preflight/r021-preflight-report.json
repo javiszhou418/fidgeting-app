@@ -1,0 +1,655 @@
+{
+    "schema": "premium-display-case-gate04-r021-preflight.v1",
+    "source": "actual isolated Unity 6000.5.6f1 URP 17.5 Play Mode frames",
+    "scene": "Assets/IsolatedProofR021/Generated/PackOpeningGate04R021Isolated.unity",
+    "width": 1206,
+    "height": 2622,
+    "visualEffectsIntensity": 0.0,
+    "orientationCalibration": {
+        "schema": "premium-display-case-gate04-r021-orientation-calibration.v1",
+        "sourceArtwork": "Assets/Source/Pack/gacha-pack-standard-body.png",
+        "sourceCanvasWidth": 384,
+        "sourceCanvasHeight": 512,
+        "calibrationWidth": 768,
+        "calibrationHeight": 1024,
+        "background": "neutral-unlit-rgb-46-48-52",
+        "minimumIdentityMargin": 0.012500000186264515,
+        "r021": {
+            "id": "R021",
+            "capturePath": "r021-pack-artwork.png",
+            "stateSetFrame": 2,
+            "renderedAfterFrame": 3,
+            "frontFaceCameraFacing": true,
+            "comparedPixels": 410240,
+            "visiblePixels": 409992,
+            "scores": [
+                {
+                    "transform": "Identity",
+                    "score": 0.9842247366905212
+                },
+                {
+                    "transform": "HorizontalFlip",
+                    "score": 0.9076537489891052
+                },
+                {
+                    "transform": "VerticalFlip",
+                    "score": 0.8954966068267822
+                },
+                {
+                    "transform": "Rotate180",
+                    "score": 0.8575043082237244
+                }
+            ],
+            "winner": "Identity",
+            "winnerMargin": 0.07657098770141602,
+            "identityMargin": 0.07657098770141602,
+            "identityWins": true
+        },
+        "r017Control": {
+            "id": "R017-control",
+            "capturePath": "r017-mirror-control.png",
+            "stateSetFrame": 3,
+            "renderedAfterFrame": 4,
+            "frontFaceCameraFacing": true,
+            "comparedPixels": 410240,
+            "visiblePixels": 409986,
+            "scores": [
+                {
+                    "transform": "Identity",
+                    "score": 0.9076410531997681
+                },
+                {
+                    "transform": "HorizontalFlip",
+                    "score": 0.98424232006073
+                },
+                {
+                    "transform": "VerticalFlip",
+                    "score": 0.8575564622879028
+                },
+                {
+                    "transform": "Rotate180",
+                    "score": 0.8955271244049072
+                }
+            ],
+            "winner": "HorizontalFlip",
+            "winnerMargin": 0.07660126686096192,
+            "identityMargin": -0.07660126686096192,
+            "identityWins": false
+        },
+        "r017MirrorRegressionObserved": true,
+        "passed": true
+    },
+    "sealedState": {
+        "archiveY": 0.09331247955560684,
+        "standardY": -0.0756249651312828,
+        "bottomCrimpY": -0.1263062059879303,
+        "topCrimpMinY": 0.12133429944515228,
+        "topCrimpMaxY": 0.1370999962091446
+    },
+    "sealedRender": {
+        "topCrimpPixels": 33768,
+        "topCrimpBounds": {
+            "x": 0.0,
+            "y": 0.7764211893081665,
+            "width": 1.0,
+            "height": 0.010301411151885987
+        },
+        "topCrimpLowestViewportY": 0.7764211893081665,
+        "titleBandPixels": 116810,
+        "titleBandBounds": {
+            "x": 0.03236514702439308,
+            "y": 0.6982067823410034,
+            "width": 0.9352697134017944,
+            "height": 0.03929799795150757
+        },
+        "archiveTitleTopViewportY": 0.737504780292511,
+        "topCrimpStateSetFrame": 5,
+        "topCrimpRenderedAfterFrame": 6,
+        "titleBandStateSetFrame": 6,
+        "titleBandRenderedAfterFrame": 7
+    },
+    "topSealMasks": {
+        "physicalUZeroScreenX": 0.6865605115890503,
+        "physicalUOneScreenX": 0.3134394586086273,
+        "states": [
+            {
+                "timeSeconds": 0.5,
+                "normalizedTearProgress": 0.2800000011920929,
+                "normalizedTearFront": 0.125,
+                "packBounds": {
+                    "x": 0.3127239942550659,
+                    "y": 0.23913556337356568,
+                    "width": 0.37455201148986819,
+                    "height": 0.5293667912483215
+                },
+                "bounds": {
+                    "x": 0.0,
+                    "y": 0.7436093091964722,
+                    "width": 0.8829875588417053,
+                    "height": 0.04311329126358032
+                },
+                "occupiedPixels": 30045,
+                "occupiedViewportArea": 0.0380684994161129,
+                "expectedSealedWidth": 0.32773301005363467,
+                "transitionAllowance": 0.016854841262102128,
+                "residualOpenedSidePixels": 7841,
+                "noFullWidthBand": false,
+                "boundedToSealedSegment": false,
+                "openedSideIsScreenRight": false,
+                "stateSetFrame": 9,
+                "renderedAfterFrame": 10
+            },
+            {
+                "timeSeconds": 0.699999988079071,
+                "normalizedTearProgress": 0.6432225108146668,
+                "normalizedTearFront": 0.5987851619720459,
+                "packBounds": {
+                    "x": 0.3127239942550659,
+                    "y": 0.23913556337356568,
+                    "width": 0.37455201148986819,
+                    "height": 0.5293667912483215
+                },
+                "bounds": {
+                    "x": 0.0,
+                    "y": 0.7531476616859436,
+                    "width": 0.30207470059394839,
+                    "height": 0.03357493877410889
+                },
+                "occupiedPixels": 9962,
+                "occupiedViewportArea": 0.010142139159142971,
+                "expectedSealedWidth": 0.1502758264541626,
+                "transitionAllowance": 0.016854841262102128,
+                "residualOpenedSidePixels": 0,
+                "noFullWidthBand": true,
+                "boundedToSealedSegment": false,
+                "openedSideIsScreenRight": false,
+                "stateSetFrame": 11,
+                "renderedAfterFrame": 12
+            },
+            {
+                "timeSeconds": 0.8999999761581421,
+                "normalizedTearProgress": 0.7844424247741699,
+                "normalizedTearFront": 0.8084461688995361,
+                "packBounds": {
+                    "x": 0.3127239942550659,
+                    "y": 0.23913556337356568,
+                    "width": 0.37455201148986819,
+                    "height": 0.5293667912483215
+                },
+                "bounds": {
+                    "x": 0.0,
+                    "y": 0.7516215443611145,
+                    "width": 0.1253112107515335,
+                    "height": 0.03510105609893799
+                },
+                "occupiedPixels": 2814,
+                "occupiedViewportArea": 0.004398555960506201,
+                "expectedSealedWidth": 0.07174687087535858,
+                "transitionAllowance": 0.016854841262102128,
+                "residualOpenedSidePixels": 0,
+                "noFullWidthBand": true,
+                "boundedToSealedSegment": false,
+                "openedSideIsScreenRight": false,
+                "stateSetFrame": 13,
+                "renderedAfterFrame": 14
+            }
+        ],
+        "directionPassed": false,
+        "sealedSegmentsOnly": false,
+        "passed": false
+    },
+    "formedMouth": {
+        "timeSeconds": 0.699999988079071,
+        "packBounds": {
+            "x": 0.3127239942550659,
+            "y": 0.23913556337356568,
+            "width": 0.37455201148986819,
+            "height": 0.5293667912483215
+        },
+        "upperThirdStart": 0.5920467376708984,
+        "lowerThirdEnd": 0.41559115052223208,
+        "mouthComponentBounds": [
+            {
+                "name": "Pack_RearInnerFoil",
+                "bounds": {
+                    "x": 0.31456854939460757,
+                    "y": 0.6403433084487915,
+                    "width": 0.3708629310131073,
+                    "height": 0.12551450729370118
+                }
+            },
+            {
+                "name": "Pack_InnerFoilMouth",
+                "bounds": {
+                    "x": 0.31352680921554568,
+                    "y": 0.6106937527656555,
+                    "width": 0.3729463815689087,
+                    "height": 0.15869289636611939
+                }
+            },
+            {
+                "name": "Pack_InnerBackFoilRim",
+                "bounds": {
+                    "x": 0.31352680921554568,
+                    "y": 0.686571478843689,
+                    "width": 0.3729463815689087,
+                    "height": 0.08858007192611695
+                }
+            },
+            {
+                "name": "Pack_RolledCrimpLip",
+                "bounds": {
+                    "x": 0.3127906024456024,
+                    "y": 0.6112136840820313,
+                    "width": 0.3744187653064728,
+                    "height": 0.15719318389892579
+                }
+            },
+            {
+                "name": "Pack_TornContourSweepCarrier",
+                "bounds": {
+                    "x": 0.31280818581581118,
+                    "y": 0.615752637386322,
+                    "width": 0.3743836581707001,
+                    "height": 0.1529814600944519
+                }
+            },
+            {
+                "name": "Pack_TearFrontSidewall",
+                "bounds": {
+                    "x": 0.3122832477092743,
+                    "y": 0.7028366923332214,
+                    "width": 0.3754284679889679,
+                    "height": 0.06467235088348389
+                }
+            },
+            {
+                "name": "Pack_TabSidewall",
+                "bounds": {
+                    "x": 0.5,
+                    "y": 0.598927915096283,
+                    "width": 0.18966901302337647,
+                    "height": 0.16904431581497193
+                }
+            },
+            {
+                "name": "Pack_ReleasedSealStrip",
+                "bounds": {
+                    "x": 0.6257780194282532,
+                    "y": 0.7527998685836792,
+                    "width": 0.05491030216217041,
+                    "height": 0.0559503436088562
+                }
+            },
+            {
+                "name": "Pack_TopRightPullTab",
+                "bounds": {
+                    "x": 0.6259253621101379,
+                    "y": 0.7715692520141602,
+                    "width": 0.057406485080718997,
+                    "height": 0.05241036415100098
+                }
+            },
+            {
+                "name": "Pack_TopSealRemaining",
+                "bounds": {
+                    "x": 0.0,
+                    "y": 0.7531476616859436,
+                    "width": 0.30207470059394839,
+                    "height": 0.03357493877410889
+                }
+            }
+        ],
+        "upperMouthRegion": {
+            "x": 0.3127239942550659,
+            "y": 0.5949279069900513,
+            "width": 0.37455201148986819,
+            "height": 0.17357444763183595
+        },
+        "allMouthBoundsInUpperThird": true,
+        "frontTopDropMeters": 0.023886114358901979,
+        "seamBounds": {
+            "x": 0.0,
+            "y": 0.7531476616859436,
+            "width": 0.30207470059394839,
+            "height": 0.03357493877410889
+        },
+        "releasedSealBounds": {
+            "x": 0.6257780194282532,
+            "y": 0.7527998685836792,
+            "width": 0.05491030216217041,
+            "height": 0.0559503436088562
+        },
+        "pullTabBounds": {
+            "x": 0.6259253621101379,
+            "y": 0.7715692520141602,
+            "width": 0.057406485080718997,
+            "height": 0.05241036415100098
+        },
+        "releasedSealRootViewport": {
+            "x": 0.626983642578125,
+            "y": 0.7579700946807861
+        },
+        "releasedSealIsCompactTopRight": true
+    },
+    "formedMouthMaterials": {
+        "timeSeconds": 0.699999988079071,
+        "visibleInnerLinerPixels": 6331,
+        "visibleCavityPixels": 0,
+        "largestCavityClusterPixels": 0,
+        "innerLinerLuminance": 0.3689960539340973,
+        "recessedCavityLuminance": 0.0,
+        "outerPackLuminance": 0.22949373722076417,
+        "backgroundLuminance": 0.0834132507443428,
+        "linerCavityLuminanceDelta": 0.3689960539340973,
+        "linerOuterLuminanceDelta": 0.13950231671333314,
+        "cavityBackgroundLuminanceDelta": 0.0834132507443428,
+        "stateSetFrame": 16,
+        "renderedAfterFrame": 17,
+        "passed": false
+    },
+    "containedMouth": {
+        "timeSeconds": 0.8999999761581421,
+        "packBounds": {
+            "x": 0.3127239942550659,
+            "y": 0.23913556337356568,
+            "width": 0.37455201148986819,
+            "height": 0.5293667912483215
+        },
+        "upperThirdStart": 0.5920467376708984,
+        "lowerThirdEnd": 0.41559115052223208,
+        "mouthComponentBounds": [
+            {
+                "name": "Pack_RearInnerFoil",
+                "bounds": {
+                    "x": 0.31456854939460757,
+                    "y": 0.6403433084487915,
+                    "width": 0.3708629310131073,
+                    "height": 0.12551450729370118
+                }
+            },
+            {
+                "name": "Pack_InnerFoilMouth",
+                "bounds": {
+                    "x": 0.31352680921554568,
+                    "y": 0.6106937527656555,
+                    "width": 0.3729463815689087,
+                    "height": 0.15869289636611939
+                }
+            },
+            {
+                "name": "Pack_InnerBackFoilRim",
+                "bounds": {
+                    "x": 0.31352680921554568,
+                    "y": 0.686571478843689,
+                    "width": 0.3729463815689087,
+                    "height": 0.08858007192611695
+                }
+            },
+            {
+                "name": "Pack_RolledCrimpLip",
+                "bounds": {
+                    "x": 0.3127906024456024,
+                    "y": 0.6112136840820313,
+                    "width": 0.3744187653064728,
+                    "height": 0.15719318389892579
+                }
+            },
+            {
+                "name": "Pack_TornContourSweepCarrier",
+                "bounds": {
+                    "x": 0.31280818581581118,
+                    "y": 0.615752637386322,
+                    "width": 0.3743836581707001,
+                    "height": 0.1529814600944519
+                }
+            },
+            {
+                "name": "Pack_TearFrontSidewall",
+                "bounds": {
+                    "x": 0.3122832477092743,
+                    "y": 0.7028366923332214,
+                    "width": 0.3754284679889679,
+                    "height": 0.06467235088348389
+                }
+            },
+            {
+                "name": "Pack_TabSidewall",
+                "bounds": {
+                    "x": 0.5,
+                    "y": 0.598927915096283,
+                    "width": 0.18966901302337647,
+                    "height": 0.16904431581497193
+                }
+            },
+            {
+                "name": "Pack_ReleasedSealStrip",
+                "bounds": {
+                    "x": 0.6257780194282532,
+                    "y": 0.7527998685836792,
+                    "width": 0.05491030216217041,
+                    "height": 0.0559503436088562
+                }
+            },
+            {
+                "name": "Pack_TopRightPullTab",
+                "bounds": {
+                    "x": 0.6259253621101379,
+                    "y": 0.7715692520141602,
+                    "width": 0.057406485080718997,
+                    "height": 0.05241036415100098
+                }
+            },
+            {
+                "name": "Pack_TopSealRemaining",
+                "bounds": {
+                    "x": 0.0,
+                    "y": 0.7516215443611145,
+                    "width": 0.1253112107515335,
+                    "height": 0.03510105609893799
+                }
+            }
+        ],
+        "upperMouthRegion": {
+            "x": 0.3127239942550659,
+            "y": 0.5949279069900513,
+            "width": 0.37455201148986819,
+            "height": 0.17357444763183595
+        },
+        "allMouthBoundsInUpperThird": true,
+        "frontTopDropMeters": 0.037275202572345737,
+        "seamBounds": {
+            "x": 0.0,
+            "y": 0.7516215443611145,
+            "width": 0.1253112107515335,
+            "height": 0.03510105609893799
+        },
+        "releasedSealBounds": {
+            "x": 0.6257780194282532,
+            "y": 0.7527998685836792,
+            "width": 0.05491030216217041,
+            "height": 0.0559503436088562
+        },
+        "pullTabBounds": {
+            "x": 0.6259253621101379,
+            "y": 0.7715692520141602,
+            "width": 0.057406485080718997,
+            "height": 0.05241036415100098
+        },
+        "releasedSealRootViewport": {
+            "x": 0.6270467638969421,
+            "y": 0.756613552570343
+        },
+        "releasedSealIsCompactTopRight": true
+    },
+    "containedMouthMaterials": {
+        "timeSeconds": 0.8999999761581421,
+        "visibleInnerLinerPixels": 16054,
+        "visibleCavityPixels": 102,
+        "largestCavityClusterPixels": 102,
+        "innerLinerLuminance": 0.3653157949447632,
+        "recessedCavityLuminance": 0.28690266609191897,
+        "outerPackLuminance": 0.22962412238121034,
+        "backgroundLuminance": 0.08439838141202927,
+        "linerCavityLuminanceDelta": 0.07841312885284424,
+        "linerOuterLuminanceDelta": 0.13569167256355287,
+        "cavityBackgroundLuminanceDelta": 0.20250427722930909,
+        "stateSetFrame": 18,
+        "renderedAfterFrame": 19,
+        "passed": false
+    },
+    "caseContainment": {
+        "packVisible": true,
+        "packDissolve": 0.0,
+        "caseRootId": "568105589213756006",
+        "caseRendererIds": [
+            "568105589213755988",
+            "568105589213755980",
+            "568105589213755972",
+            "568105589213755948",
+            "568105589213755936"
+        ],
+        "upperMouthRegion": {
+            "x": 0.3127239942550659,
+            "y": 0.5949279069900513,
+            "width": 0.37455201148986819,
+            "height": 0.17357444763183595
+        },
+        "unoccludedCasePixelsInUpperMouth": 205660,
+        "visibleCasePixelsInUpperMouth": 200935,
+        "visibleCasePixelsWithPackInUpperMouth": 69370,
+        "occludedCasePixelsByFront": 4725,
+        "largestFrontOcclusionClusterPixels": 4725,
+        "caseProjectedBounds": {
+            "x": 0.3735322654247284,
+            "y": 0.3454284071922302,
+            "width": 0.2529354393482208,
+            "height": 0.44966286420822146
+        },
+        "frontLipProjectedBounds": {
+            "x": 0.3127906024456024,
+            "y": 0.6112136840820313,
+            "width": 0.3744187653064728,
+            "height": 0.15719318389892579
+        },
+        "frontLipCaseProjectedOverlapPixels": 125726,
+        "visibleWithPackStateSetFrame": 19,
+        "visibleWithPackRenderedAfterFrame": 20,
+        "unoccludedStateSetFrame": 20,
+        "unoccludedRenderedAfterFrame": 21,
+        "occludedStateSetFrame": 21,
+        "occludedRenderedAfterFrame": 22
+    },
+    "caseLegibility": {
+        "visibleCasePixels": 69370,
+        "visibleCaseBounds": {
+            "x": 0.3128630816936493,
+            "y": 0.6657764315605164,
+            "width": 0.3742738664150238,
+            "height": 0.10263258218765259
+        },
+        "averageBoundaryContrast": 0.06583969295024872,
+        "passed": true
+    },
+    "primaryStaticSheet": "primary-static-sheet.png",
+    "frameBarrierCaptureCount": 14,
+    "frameBarrierAdvancedCount": 14,
+    "checks": [
+        {
+            "id": "r017-mirror-regression-is-observed",
+            "passed": true,
+            "evidence": "The immutable R017 control must select horizontal-flip."
+        },
+        {
+            "id": "r021-artwork-identity-wins-calibration",
+            "passed": true,
+            "evidence": "margin=0.076571"
+        },
+        {
+            "id": "front-winding-faces-calibration-camera",
+            "passed": true,
+            "evidence": "R021 front material rendered with Cull Back."
+        },
+        {
+            "id": "sealed-artwork-maps-archive-above-standard",
+            "passed": true,
+            "evidence": "archive=0.093312, standard=-0.075625, topCrimp=0.121334, bottomCrimp=-0.126306"
+        },
+        {
+            "id": "sealed-top-crimp-rendered-above-fidget-archive",
+            "passed": true,
+            "evidence": "crimpPixels=33768, titlePixels=116810, crimpBottom=0.77642, titleTop=0.73750"
+        },
+        {
+            "id": "sealed-bottom-crimp-is-below-standard",
+            "passed": true,
+            "evidence": "archive=0.093312, standard=-0.075625, topCrimp=0.121334, bottomCrimp=-0.126306"
+        },
+        {
+            "id": "tear-front-opens-from-screen-right",
+            "passed": false,
+            "evidence": "u0=0.6866, u1=0.3134, states=3, direction=False, sealed=False"
+        },
+        {
+            "id": "top-seal-covers-only-sealed-segments",
+            "passed": false,
+            "evidence": "u0=0.6866, u1=0.3134, states=3, direction=False, sealed=False"
+        },
+        {
+            "id": "formed-mouth-bounds-stay-in-upper-third",
+            "passed": true,
+            "evidence": "upperStart=0.5920, drop=0.023886, strip=0.6258,0.7528 0.0549x0.0560, root=0.6270,0.7580"
+        },
+        {
+            "id": "contained-mouth-bounds-stay-in-upper-third",
+            "passed": true,
+            "evidence": "upperStart=0.5920, drop=0.037275, strip=0.6258,0.7528 0.0549x0.0560, root=0.6270,0.7566"
+        },
+        {
+            "id": "formed-mouth-liner-and-cavity-separate",
+            "passed": false,
+            "evidence": "liner=6331, cavity=0, cluster=0, liner-cavity=0.3690, liner-outer=0.1395, cavity-background=0.0834"
+        },
+        {
+            "id": "contained-mouth-liner-and-cavity-separate",
+            "passed": false,
+            "evidence": "liner=16054, cavity=102, cluster=102, liner-cavity=0.0784, liner-outer=0.1357, cavity-background=0.2025"
+        },
+        {
+            "id": "physical-top-front-edge-moves-downward",
+            "passed": true,
+            "evidence": "upperStart=0.5920, drop=0.023886, strip=0.6258,0.7528 0.0549x0.0560, root=0.6270,0.7580"
+        },
+        {
+            "id": "released-seal-is-compact-top-right-strip",
+            "passed": true,
+            "evidence": "upperStart=0.5920, drop=0.023886, strip=0.6258,0.7528 0.0549x0.0560, root=0.6270,0.7580"
+        },
+        {
+            "id": "contained-case-renders-inside-upper-mouth",
+            "passed": true,
+            "evidence": "visible=69370, lipOcclusion=4725, contiguous=4725, projected=125726, pack=True, dissolve=0.000000"
+        },
+        {
+            "id": "contained-case-has-readable-contrast-and-bounds",
+            "passed": true,
+            "evidence": "pixels=69370, bounds=0.3129,0.6658 0.3743x0.1026, contrast=0.0658"
+        },
+        {
+            "id": "primary-static-sheet-emits-four-unity-frames",
+            "passed": true,
+            "evidence": "primary-static-sheet.png"
+        },
+        {
+            "id": "preflight-effects-remain-zero",
+            "passed": true,
+            "evidence": "0.000000"
+        },
+        {
+            "id": "every-capture-follows-a-unity-frame",
+            "passed": true,
+            "evidence": "captures=14, advanced=14"
+        }
+    ],
+    "passed": false
+}

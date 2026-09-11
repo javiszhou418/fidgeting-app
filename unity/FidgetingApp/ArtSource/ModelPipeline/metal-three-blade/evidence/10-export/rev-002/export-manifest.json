@@ -1,0 +1,174 @@
+{
+ "modelId": "metal-three-blade",
+ "stage": "10-export",
+ "revision": 2,
+ "source": {
+  "geometryBlend": "geeone-geometry-r008.blend",
+  "geometryBlendSha256": "bdbd12fa46e689e6c8f831cf50d971e1d02068ba8dddfb69cb717d3c94282141",
+  "contract": "geeone-gate02-geometry-contract.json",
+  "contractSha256": "cfb3c94dab290224856ba62674538fde1338ce0dbbaf9383275be052d5d4934d",
+  "specSha256": "24c3c201eb3e2befb63fddb46404285bf17e31f0ac6ad54b6b10c08fb2170b63"
+ },
+ "units": {
+  "authored": {
+   "system": "METRIC",
+   "scale_length": 0.0010000000474974513,
+   "length_unit": "MILLIMETERS"
+  },
+  "exported": "metres (mesh x 0.001); FBX apply_unit_scale FBX_SCALE_UNITS; GLB Y-up",
+  "planarDiameterM": 0.085,
+  "provisional": "2R = 85 mm user-authorized-provisional"
+ },
+ "axes": {
+  "blender": "Z up (spin axis)",
+  "fbx": "-Z forward / Y up",
+  "unity": "spin axis = local +Y of Rotor_Root"
+ },
+ "hierarchy": {
+  "GEEONE_TriSpinner": {
+   "Rotor_Root": [
+    "Rotor_Body"
+   ],
+   "Fixed_Root": [
+    "Cap_Top",
+    "Cap_Bottom",
+    "Hub_Core"
+   ]
+  }
+ },
+ "kinematics": {
+  "fixed": [
+   "Cap_Top",
+   "Cap_Bottom",
+   "Hub_Core"
+  ],
+  "rotating": [
+   "Rotor_Body"
+  ],
+  "axis": "Z",
+  "note": "Fixed group = Cap_Top + Cap_Bottom + Hub_Core (held by the fingers). Rotating group = Rotor_Body only (three blades + connecting ring under the cap, min ring width cap − bore = 0.06 R ≈ 2.5 mm at the notch bisectors). Rotor spins about Z around the hub; clearances: radial 0.015 R (0.64 mm), vertical cap-lip-to-rotor-face = hubSeatHeightToR"
+ },
+ "materials": {
+  "M_Geeone_Satin": "rotor + cap crown/skirt: metallic 1, roughness 0.36",
+  "M_Geeone_DiscTurned": "cap 14-sector dish: metallic 1, roughness 0.30 (Unity: isotropic satin, no anisotropy)",
+  "M_Geeone_HubDark": "static hub core: dark steel 0.06, roughness 0.45"
+ },
+ "meshes": {
+  "Rotor_Body": {
+   "verts": 4737,
+   "faces": 4316,
+   "tris": 9474,
+   "materials": [
+    "M_Geeone_Satin"
+   ],
+   "group": "Rotor_Root",
+   "bounds_m": {
+    "min": [
+     -0.03679,
+     -0.02425,
+     -0.00504
+    ],
+    "max": [
+     0.03679,
+     0.0425,
+     0.00504
+    ]
+   }
+  },
+  "Cap_Top": {
+   "verts": 85,
+   "faces": 127,
+   "tris": 166,
+   "materials": [
+    "M_Geeone_Satin",
+    "M_Geeone_DiscTurned"
+   ],
+   "group": "Fixed_Root",
+   "bounds_m": {
+    "min": [
+     -0.02003,
+     -0.02055,
+     0.00555
+    ],
+    "max": [
+     0.02003,
+     0.02055,
+     0.01044
+    ]
+   }
+  },
+  "Cap_Bottom": {
+   "verts": 85,
+   "faces": 127,
+   "tris": 166,
+   "materials": [
+    "M_Geeone_Satin",
+    "M_Geeone_DiscTurned"
+   ],
+   "group": "Fixed_Root",
+   "bounds_m": {
+    "min": [
+     -0.02003,
+     -0.02055,
+     -0.01044
+    ],
+    "max": [
+     0.02003,
+     0.02055,
+     -0.00555
+    ]
+   }
+  },
+  "Hub_Core": {
+   "verts": 576,
+   "faces": 482,
+   "tris": 1148,
+   "materials": [
+    "M_Geeone_HubDark"
+   ],
+   "group": "Fixed_Root",
+   "bounds_m": {
+    "min": [
+     -0.01743,
+     -0.01743,
+     -0.00564
+    ],
+    "max": [
+     0.01743,
+     0.01743,
+     0.00564
+    ]
+   }
+  }
+ },
+ "collision": {
+  "Rotor_Collision": {
+   "verts": 251,
+   "faces": 498,
+   "parent": "Rotor_Root"
+  },
+  "Fixed_Collision": {
+   "verts": 96,
+   "faces": 50,
+   "parent": "Fixed_Root"
+  }
+ },
+ "files": {
+  "geeone-tri-spinner.fbx": {
+   "sha256": "b428a03e4141ef4091cdce679941eadcdda71e683d80bf3ea32cf149437a866a",
+   "bytes": 179980
+  },
+  "geeone-tri-spinner.glb": {
+   "sha256": "dbcb4eaa5b6cc35f0bd82168c0503525af97d5d5ff0ac9722ddc61b04fa4a7e2",
+   "bytes": 575776
+  },
+  "geeone-tri-spinner-collision.fbx": {
+   "sha256": "59a9a4d5249bacf0b5d8338cb075dee50bf15da04d023d69c53fcfa2675906ce",
+   "bytes": 29708
+  },
+  "geeone-tri-spinner-export-ready.blend": {
+   "sha256": "46d4ec4cdc47da97bbc43dc5e58dbc14627aeab742cfebb376ec6d4a5d1631cb",
+   "bytes": 235620
+  }
+ }
+}

@@ -1,0 +1,52 @@
+{
+  "schemaVersion": 1,
+  "modelId": "magnetic-slide-tile",
+  "gate": "02-analysis",
+  "revision": 14,
+  "validatedAt": "2026-08-27T00:56:00+08:00",
+  "contractSha256": "aa5762b30bde0c754eb3fbd34dbd6f98d7ba3dd50e30cf95fb4a5fc081879930",
+  "results": {
+    "nodeTests": {
+      "passed": 65,
+      "failed": 0
+    },
+    "cadGeometry": {
+      "grooveCount": 2,
+      "followerCount": 2,
+      "grooveStartFromTopL": 0.32,
+      "grooveEndFromTopL": 0.78,
+      "derivedMaximumTravelL": 0.46,
+      "closedEndpointAligned": true,
+      "maximumEndpointEngaged": true,
+      "maximumEndpointAxisCovered": true
+    },
+    "sweptEnvelope": {
+      "detentAngles": 30,
+      "slideSamplesPerAngle": 5,
+      "sampleCount": 150,
+      "invalidSamples": 0,
+      "topAlwaysAboveBottom": true,
+      "bottomMasksTop": false
+    },
+    "browser": {
+      "desktopPointer": "pass",
+      "mobileTouch": "pass",
+      "zoomPan": "pass",
+      "sourceModalVideo": "pass",
+      "finiteEndpointClampWithRotation": "pass",
+      "svgDomTopAfterBottom": "pass",
+      "clipMasks": 0,
+      "approvalChecklist": "11/11"
+    },
+    "simulator": {
+      "locked": true,
+      "activeControls": 0,
+      "recording": false
+    },
+    "downstream": {
+      "blender": "not-started",
+      "unity": "not-started",
+      "buildInstallPhone": "not-started"
+    }
+  }
+}

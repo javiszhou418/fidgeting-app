@@ -1,0 +1,294 @@
+{
+    "schema": "premium-display-case-gate04-r018-preflight.v1",
+    "source": "actual isolated Unity 6000.5.6f1 URP 17.5 Play Mode frames",
+    "scene": "Assets/IsolatedProofR018/Generated/PackOpeningGate04R018Isolated.unity",
+    "width": 1206,
+    "height": 2622,
+    "visualEffectsIntensity": 0.0,
+    "orientationCalibration": {
+        "schema": "premium-display-case-gate04-r018-orientation-calibration.v1",
+        "sourceArtwork": "Assets/Source/Pack/gacha-pack-standard-body.png",
+        "sourceCanvasWidth": 384,
+        "sourceCanvasHeight": 512,
+        "calibrationWidth": 768,
+        "calibrationHeight": 1024,
+        "background": "neutral-unlit-rgb-46-48-52",
+        "minimumIdentityMargin": 0.012500000186264515,
+        "r018": {
+            "id": "R018",
+            "capturePath": "r018-pack-artwork.png",
+            "stateSetFrame": 2,
+            "renderedAfterFrame": 3,
+            "frontFaceCameraFacing": true,
+            "comparedPixels": 410240,
+            "visiblePixels": 409992,
+            "scores": [
+                {
+                    "transform": "Identity",
+                    "score": 0.9842247366905212
+                },
+                {
+                    "transform": "HorizontalFlip",
+                    "score": 0.9076537489891052
+                },
+                {
+                    "transform": "VerticalFlip",
+                    "score": 0.8954966068267822
+                },
+                {
+                    "transform": "Rotate180",
+                    "score": 0.8575043082237244
+                }
+            ],
+            "winner": "Identity",
+            "winnerMargin": 0.07657098770141602,
+            "identityMargin": 0.07657098770141602,
+            "identityWins": true
+        },
+        "r017Control": {
+            "id": "R017-control",
+            "capturePath": "r017-mirror-control.png",
+            "stateSetFrame": 3,
+            "renderedAfterFrame": 4,
+            "frontFaceCameraFacing": true,
+            "comparedPixels": 410240,
+            "visiblePixels": 409986,
+            "scores": [
+                {
+                    "transform": "Identity",
+                    "score": 0.9076410531997681
+                },
+                {
+                    "transform": "HorizontalFlip",
+                    "score": 0.98424232006073
+                },
+                {
+                    "transform": "VerticalFlip",
+                    "score": 0.8575564622879028
+                },
+                {
+                    "transform": "Rotate180",
+                    "score": 0.8955271244049072
+                }
+            ],
+            "winner": "HorizontalFlip",
+            "winnerMargin": 0.07660126686096192,
+            "identityMargin": -0.07660126686096192,
+            "identityWins": false
+        },
+        "r017MirrorRegressionObserved": true,
+        "passed": true
+    },
+    "sealedState": {
+        "archiveY": 0.09331247955560684,
+        "standardY": -0.0756249651312828,
+        "bottomCrimpY": -0.1263062059879303,
+        "topCrimpMinY": 0.06610000133514404,
+        "topCrimpMaxY": 0.13410000503063203
+    },
+    "formedMouth": {
+        "timeSeconds": 0.699999988079071,
+        "packBounds": {
+            "x": 0.3127239942550659,
+            "y": 0.23913556337356568,
+            "width": 0.37455201148986819,
+            "height": 0.5293667912483215
+        },
+        "upperThirdStart": 0.5920467376708984,
+        "lowerThirdEnd": 0.41559115052223208,
+        "mouthComponentBounds": [
+            {
+                "name": "Pack_TopSealRemaining",
+                "bounds": {
+                    "x": 0.31300151348114016,
+                    "y": 0.6484680771827698,
+                    "width": 0.3739969730377197,
+                    "height": 0.13332515954971314
+                }
+            },
+            {
+                "name": "Pack_InnerFoilMouth",
+                "bounds": {
+                    "x": 0.3134394586086273,
+                    "y": 0.6277405619621277,
+                    "width": 0.373121052980423,
+                    "height": 0.14207720756530763
+                }
+            },
+            {
+                "name": "Pack_InnerBackFoilRim",
+                "bounds": {
+                    "x": 0.330507755279541,
+                    "y": 0.6955248713493347,
+                    "width": 0.33898448944091799,
+                    "height": 0.05457031726837158
+                }
+            },
+            {
+                "name": "Pack_RolledCrimpLip",
+                "bounds": {
+                    "x": 0.31288909912109377,
+                    "y": 0.6461454033851624,
+                    "width": 0.3742218017578125,
+                    "height": 0.12255078554153443
+                }
+            },
+            {
+                "name": "Pack_TornContourSweepCarrier",
+                "bounds": {
+                    "x": 0.31280818581581118,
+                    "y": 0.6470001935958862,
+                    "width": 0.3743836581707001,
+                    "height": 0.1217339038848877
+                }
+            },
+            {
+                "name": "Pack_TearFrontSidewall",
+                "bounds": {
+                    "x": 0.31210121512413027,
+                    "y": 0.7039881348609924,
+                    "width": 0.3757908046245575,
+                    "height": 0.06351995468139649
+                }
+            },
+            {
+                "name": "Pack_TabSidewall",
+                "bounds": {
+                    "x": 0.30957427620887759,
+                    "y": 0.6188412308692932,
+                    "width": 0.19042572379112245,
+                    "height": 0.14913684129714967
+                }
+            },
+            {
+                "name": "Pack_ReleasedSealStrip",
+                "bounds": {
+                    "x": 0.3094984292984009,
+                    "y": 0.7330276966094971,
+                    "width": 0.07814279198646546,
+                    "height": 0.07942897081375122
+                }
+            },
+            {
+                "name": "Pack_TopRightPullTab",
+                "bounds": {
+                    "x": 0.30006659030914309,
+                    "y": 0.763759970664978,
+                    "width": 0.05058005452156067,
+                    "height": 0.05974626541137695
+                }
+            }
+        ],
+        "upperMouthRegion": {
+            "x": 0.3127239942550659,
+            "y": 0.6148412227630615,
+            "width": 0.37455201148986819,
+            "height": 0.15366113185882569
+        },
+        "allMouthBoundsInUpperThird": true,
+        "frontTopDropMeters": 0.017737053334712983,
+        "releasedSealBounds": {
+            "x": 0.3094984292984009,
+            "y": 0.7330276966094971,
+            "width": 0.07814279198646546,
+            "height": 0.07942897081375122
+        },
+        "pullTabBounds": {
+            "x": 0.30006659030914309,
+            "y": 0.763759970664978,
+            "width": 0.05058005452156067,
+            "height": 0.05974626541137695
+        },
+        "releasedSealIsCompactTopRight": false
+    },
+    "caseContainment": {
+        "packVisible": true,
+        "packDissolve": 0.0,
+        "caseRootId": "568105589213756012",
+        "caseRendererIds": [
+            "568105589213755994",
+            "568105589213755986",
+            "568105589213755978",
+            "568105589213755954",
+            "568105589213755942"
+        ],
+        "upperMouthRegion": {
+            "x": 0.3127239942550659,
+            "y": 0.6148412227630615,
+            "width": 0.37455201148986819,
+            "height": 0.15366113185882569
+        },
+        "unoccludedCasePixelsInUpperMouth": 86332,
+        "visibleCasePixelsInUpperMouth": 86325,
+        "occludedCasePixelsByFront": 7,
+        "unoccludedStateSetFrame": 7,
+        "unoccludedRenderedAfterFrame": 8,
+        "occludedStateSetFrame": 8,
+        "occludedRenderedAfterFrame": 9
+    },
+    "frameBarrierCaptureCount": 5,
+    "frameBarrierAdvancedCount": 5,
+    "checks": [
+        {
+            "id": "r017-mirror-regression-is-observed",
+            "passed": true,
+            "evidence": "The immutable R017 control must select horizontal-flip."
+        },
+        {
+            "id": "r018-artwork-identity-wins-calibration",
+            "passed": true,
+            "evidence": "margin=0.076571"
+        },
+        {
+            "id": "front-winding-faces-calibration-camera",
+            "passed": true,
+            "evidence": "R018 front material rendered with Cull Back."
+        },
+        {
+            "id": "sealed-artwork-maps-archive-above-standard",
+            "passed": true,
+            "evidence": "archive=0.093312, standard=-0.075625, topCrimp=0.066100, bottomCrimp=-0.126306"
+        },
+        {
+            "id": "sealed-top-crimp-is-above-fidget-archive",
+            "passed": false,
+            "evidence": "archive=0.093312, standard=-0.075625, topCrimp=0.066100, bottomCrimp=-0.126306"
+        },
+        {
+            "id": "sealed-bottom-crimp-is-below-standard",
+            "passed": true,
+            "evidence": "archive=0.093312, standard=-0.075625, topCrimp=0.066100, bottomCrimp=-0.126306"
+        },
+        {
+            "id": "formed-mouth-bounds-stay-in-upper-third",
+            "passed": true,
+            "evidence": "upperStart=0.5920, drop=0.017737, strip=0.3095,0.7330 0.0781x0.0794"
+        },
+        {
+            "id": "physical-top-front-edge-moves-downward",
+            "passed": true,
+            "evidence": "upperStart=0.5920, drop=0.017737, strip=0.3095,0.7330 0.0781x0.0794"
+        },
+        {
+            "id": "released-seal-is-compact-top-right-strip",
+            "passed": false,
+            "evidence": "upperStart=0.5920, drop=0.017737, strip=0.3095,0.7330 0.0781x0.0794"
+        },
+        {
+            "id": "contained-case-renders-inside-upper-mouth",
+            "passed": false,
+            "evidence": "visible=86325, occluded=7, pack=True, dissolve=0.000000"
+        },
+        {
+            "id": "preflight-effects-remain-zero",
+            "passed": true,
+            "evidence": "0.000000"
+        },
+        {
+            "id": "every-capture-follows-a-unity-frame",
+            "passed": true,
+            "evidence": "captures=5, advanced=5"
+        }
+    ],
+    "passed": false
+}

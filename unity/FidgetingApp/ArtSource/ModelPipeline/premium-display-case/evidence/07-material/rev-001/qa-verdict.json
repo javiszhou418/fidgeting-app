@@ -1,0 +1,25 @@
+{
+  "schemaVersion": 1,
+  "modelId": "premium-display-case",
+  "gate": "07-material",
+  "result": "READY_FOR_MATERIAL_REVIEW_NOT_SHIPPING",
+  "status": "pass",
+  "blockers": [],
+  "majors": [],
+  "minors": [],
+  "expectedPending": [
+    "User material approval",
+    "Gate 08 final lighting review",
+    "Gate 12 shipping-source visual approval",
+    "iPhone acceptance after permitted installation"
+  ],
+  "wholeCaseOnly": true,
+  "explode": false,
+  "shippingUnityChanged": false,
+  "buildInstallPhonePush": false,
+  "evidence": {
+    "blenderAudit": "unity/FidgetingApp/ArtSource/ModelPipeline/premium-display-case/evidence/07-material/rev-001/blender-audit.json",
+    "surfaceCoverage": "unity/FidgetingApp/ArtSource/ModelPipeline/premium-display-case/evidence/07-material/rev-001/surface-coverage-report.json",
+    "assetOptimization": "unity/FidgetingApp/ArtSource/ModelPipeline/premium-display-case/evidence/07-material/rev-001/asset-optimization-report.json"
+  }
+}

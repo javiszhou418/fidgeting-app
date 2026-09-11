@@ -1,0 +1,89 @@
+{
+  "model": "model-hhax",
+  "stage": "02-analysis",
+  "revision": "001",
+  "sourceNote": "model-hhax-intake-r1-a8301672",
+  "keywords": {
+    "fromNote": [
+      "MOT STUDIO",
+      "锆律动 Ultra",
+      "夜光贝母封晶",
+      "MORE THAN CLASSIC",
+      "KNIGHT IN CHESS",
+      "主轴组件",
+      "封晶盖",
+      "#EDC玩具",
+      "#封晶"
+    ],
+    "fromImages": [
+      "磁吸推牌",
+      "胶囊形",
+      "棋格贝母镶嵌",
+      "夜光颜料",
+      "红色珐琅骑士",
+      "彩虹镀色边缘",
+      "环形刻字"
+    ]
+  },
+  "externalDiscovery": {
+    "performed": false,
+    "note": "本轮未做任何联网检索；结论只来自用户提供的 7 张静帧与笔记文字。避免把外部信息与用户输入混淆。"
+  },
+  "frames": [
+    {
+      "assetId": "model-hhax-intake-r1-f2576ce0",
+      "file": "5e1659c986fca1385c68a75261bb7390_MD5.jpg",
+      "panel": "A · 正面 · 推开状态",
+      "observation": "上片沿长轴推开，露出下层圆牌（小骑士徽记）。上片：棋格贝母 + 红色骑士 + MORE THAN CLASSIC 铭牌。"
+    },
+    {
+      "assetId": "model-hhax-intake-r1-fa5bb900",
+      "file": "3ebb3ff0c166ec3145e1b5d1a68294f7_MD5.jpg",
+      "panel": "B · 背面 · 闭合",
+      "observation": "KNIGHT IN CHESS 环形字，中心圆形红底骑士，两侧棋格贝母条，中央 MOT STUDIO。边缘可见彩虹镀色。"
+    },
+    {
+      "assetId": "model-hhax-intake-r1-8838e089",
+      "file": "2ddd49897029383d23fe0c58a3627be2_MD5.jpg",
+      "panel": "C · 背面 · 闭合 ②",
+      "observation": "胶囊轮廓：两端半圆、直边。壳体深色高抛光；闭合时上下片完全重叠，看不到下片。"
+    },
+    {
+      "assetId": "model-hhax-intake-r1-da708586",
+      "file": "0c28480ae2d5e95b5fe964b0a9129231_MD5.jpg",
+      "panel": "D · 夜光 · 正面",
+      "observation": "棋格贝母发蓝绿光，骑士发橙光；铭牌与金属壳不发光。"
+    },
+    {
+      "assetId": "model-hhax-intake-r1-4b59c226",
+      "file": "550dff93e63dab50674e74353832a5bd_MD5.jpg",
+      "panel": "E · 夜光 · 正面 ②",
+      "observation": "同 D；确认棋格与骑士为两种夜光颜料，边界清晰。"
+    },
+    {
+      "assetId": "model-hhax-intake-r1-2ed6d6a0",
+      "file": "11f45d5c543d363c007a35c22d820ed3_MD5.jpg",
+      "panel": "F · 夜光 · 侧倾",
+      "observation": "低角度；封晶面为一体平面，未见分段。"
+    },
+    {
+      "assetId": "model-hhax-intake-r1-f0aebe7c",
+      "file": "7304a975d512104b5a9fa081da06831f_MD5.jpg",
+      "panel": "G · 夜光 · 远",
+      "observation": "过曝模糊，仅作发光强度参考。"
+    }
+  ],
+  "mechanismConclusion": {
+    "family": "linear-magnetic-slider",
+    "confidence": "medium",
+    "relatedRepoModel": "magnetic-slide-tile",
+    "evidence": "A（推开）与 B/C（闭合）对比：上片沿长轴位移，闭合时完全覆盖下片。"
+  },
+  "unknowns": [
+    "全部真实尺寸：闭合长 / 宽 / 厚、上下片各自厚度、最大推程、封晶层厚度 —— 没有任何参照物，不做推断。",
+    "下片是否可旋转、是否有磁吸档位、推到底是否有止点 —— 7 张静帧没有动作信息，需要视频或实物。",
+    "磁铁数量与布置、导轨结构 —— 需要拆解图或官方资料。",
+    "建议：把模型机构从「其他」改为「磁吸推牌」，Gate 03 可复用 magnetic-slide-tile 的九项核心尺寸清单来提问。"
+  ],
+  "recommendation": "确认机构判断后，把 model.mechanism 从 other 改为 linear-magnetic-slider；Gate 03 按九项核心尺寸向用户提问。"
+}

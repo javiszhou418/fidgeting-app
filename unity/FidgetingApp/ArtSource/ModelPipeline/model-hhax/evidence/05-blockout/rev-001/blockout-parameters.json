@@ -1,0 +1,64 @@
+{
+  "schemaVersion": 1,
+  "modelId": "model-hhax",
+  "gate": "05-blockout",
+  "contractDimensionsMm": {
+    "closedOverallLength": 50.5,
+    "overallWidth": 30.9,
+    "totalClosedThickness": 13.6,
+    "topPlateThickness": 6.55,
+    "bottomPlateThickness": 6.55,
+    "maximumSlideTravel": 18.7,
+    "fixedAxisOffsetFromNearestEnd": 14.2,
+    "rotatingCarrierDiameter": 21.6,
+    "closedSeamGap": 0.5
+  },
+  "evaluatedClosedBounds": {
+    "minimumMm": [
+      -15.45,
+      -25.25,
+      0.0
+    ],
+    "maximumMm": [
+      15.45,
+      25.25,
+      13.6
+    ],
+    "sizeMm": [
+      30.9,
+      50.5,
+      13.6
+    ]
+  },
+  "coordinateSystem": {
+    "width": "+X",
+    "lengthAndSlide": "+Y",
+    "thicknessAndRearRotationAxis": "+Z"
+  },
+  "motion": {
+    "upperShellTravelMm": [
+      0,
+      18.7
+    ],
+    "rearCarrierRotationDegrees": [
+      0,
+      360
+    ]
+  },
+  "inputProvenance": {
+    "manifestRevisionAtBuild": 28,
+    "contractAssetId": "model-hhax-measurement-modeling-contract-r001",
+    "contractSha256": "e7aadf84cd589b0f69cec93eb866c6169af932560ed9e4e95369ece45c253911",
+    "architectureAssetId": "hhax-gate04-architecture-snapshot-r002",
+    "architectureSha256": "ae4611e6701a2947f5493da855ab311218985994799a7de70cfa6f93c4d02fac",
+    "hiddenBoundary": "exact hidden linkage curve, counts, tolerances and hole depths"
+  },
+  "hiddenGeometryBoundary": "Internal cavity, rail profile, follower count and linkage remain provisional reversible visualization; not measured or manufacturing geometry.",
+  "checks": {
+    "publishedClosedEnvelope": "pass",
+    "rearCarrierOwnAxis": "pass",
+    "upperShellPureTranslation": "pass",
+    "internalTrackContainedByLowerCavity": "pass",
+    "materialState": "white clay only"
+  }
+}

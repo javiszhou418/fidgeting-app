@@ -1,0 +1,20 @@
+{
+  "schema": "premium-display-case-gate04-r011-self-rejection.v1",
+  "iteration": 5,
+  "status": "technical-self-rejected-before-registration",
+  "registeredForApproval": false,
+  "source": "actual Unity 6000.5.6f1 PlayMode frames at 1206x2622 and 60 fps",
+  "reasons": [
+    "The exact SG_LightingStrike graph rendered correctly, but raw source scale sent trails and sparks across the viewport.",
+    "The off-aperture streak field read as an effects demo and competed with the Pack and case.",
+    "The source red-purple-blue flare sequence and same-case occlusion were otherwise retained."
+  ],
+  "corrections": [
+    "Keep the exact graph on the 25 Shuriken trails but retarget its spatial scale and lifetime to the Pack aperture.",
+    "Use the source flare texture compatibility shader for the 512 sparks so they stay small and local.",
+    "Do not alter the same-case handoff, source flare sequence, Pack art, case, or caller-owned toy."
+  ],
+  "shippingRuntimeWired": false,
+  "shippingReady": false,
+  "physicalPhoneInstalled": false
+}

@@ -1,0 +1,28 @@
+{
+  "info" : {
+    "arguments" : [
+      "devicectl",
+      "device",
+      "info",
+      "lockState",
+      "--device",
+      "556E86BF-7295-5622-AA58-02DF84A8E93F",
+      "--timeout",
+      "30",
+      "--json-output",
+      "/Users/jiawei.zhou/Documents/Fidgeting app/unity/FidgetingApp/ArtSource/ModelPipeline/magnetic-slide-tile/evidence/12-shipping/runtime-recovery-build42/device-delivery/magnetic-slide-build44-20260903T003604Z-snapshot/device-lock.json"
+    ],
+    "commandType" : "devicectl.device.info.lockState",
+    "environment" : {
+      "TERM" : "dumb"
+    },
+    "jsonVersion" : 3,
+    "outcome" : "success",
+    "version" : "518.27"
+  },
+  "result" : {
+    "deviceIdentifier" : "556E86BF-7295-5622-AA58-02DF84A8E93F",
+    "passcodeRequired" : false,
+    "unlockedSinceBoot" : true
+  }
+}

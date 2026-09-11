@@ -1,0 +1,134 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Premium Display Case · Continuous Tube Target</title>
+  <style>
+    * { box-sizing: border-box; }
+    html, body { margin: 0; width: 100%; height: 100%; background: #090a0c; color: #f3f4f5; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", sans-serif;
+      padding: 44px 54px;
+    }
+    header { display: flex; justify-content: space-between; align-items: end; margin-bottom: 24px; }
+    h1 { margin: 0; font-size: 34px; font-weight: 720; }
+    .stage { color: #b6bbc3; font-size: 21px; }
+    main { display: grid; grid-template-columns: 0.72fr 1.28fr; gap: 28px; height: 1010px; }
+    .panel { border: 1px solid #30343b; background: #111318; padding: 22px; }
+    .panel h2 { margin: 0 0 14px; font-size: 24px; }
+    .rejected h2 { color: #efcaca; }
+    .target h2 { color: #dbe8f3; }
+    svg { width: 100%; height: auto; display: block; }
+    .caption { margin-top: 15px; color: #c2c6cd; font-size: 20px; line-height: 1.5; }
+    .checks { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-top: 16px; }
+    .check { border-top: 2px solid #343941; padding-top: 12px; }
+    .check strong { display: block; margin-bottom: 6px; font-size: 20px; }
+    .check span { color: #bcc1c9; font-size: 18px; line-height: 1.45; }
+    .question {
+      margin-top: 16px;
+      padding: 16px 18px;
+      border: 1px solid #41464f;
+      background: #191b20;
+      font-size: 21px;
+      line-height: 1.45;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>外框目标结构 · 闭环管状周边</h1>
+    <div class="stage">Gate 01 · Rev 3 · 拓扑目标预览</div>
+  </header>
+  <main>
+    <section class="panel rejected">
+      <h2>拒绝：四条独立边拼接</h2>
+      <svg viewBox="0 0 560 760" aria-label="四条独立边和断开的角">
+        <rect x="0" y="0" width="560" height="760" fill="#0d0f13"/>
+        <path d="M130 110 H430" stroke="#aeb4bc" stroke-width="46" stroke-linecap="round"/>
+        <path d="M470 150 V610" stroke="#aeb4bc" stroke-width="46" stroke-linecap="round"/>
+        <path d="M430 650 H130" stroke="#aeb4bc" stroke-width="46" stroke-linecap="round"/>
+        <path d="M90 610 V150" stroke="#aeb4bc" stroke-width="46" stroke-linecap="round"/>
+        <g fill="none" stroke="#d66a6a" stroke-width="5">
+          <circle cx="110" cy="130" r="38"/>
+          <circle cx="450" cy="130" r="38"/>
+          <circle cx="450" cy="630" r="38"/>
+          <circle cx="110" cy="630" r="38"/>
+        </g>
+        <g fill="#efb0b0" font-size="23" font-weight="650">
+          <text x="152" y="205">角部断开</text>
+          <text x="152" y="238">不是同一通道</text>
+        </g>
+        <path d="M188 248 L124 166" stroke="#d66a6a" stroke-width="4"/>
+      </svg>
+      <div class="caption">不能靠重叠、盖缝或材质把四个独立 mesh 假装成连续外框。</div>
+    </section>
+
+    <section class="panel target">
+      <h2>目标：一根闭合、可贯通的连续管路</h2>
+      <svg viewBox="0 0 980 700" aria-label="连续圆角闭环管路与水流箭头">
+        <defs>
+          <marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto">
+            <path d="M0,0 L9,3 L0,6 Z" fill="#78b6df"/>
+          </marker>
+        </defs>
+        <rect x="0" y="0" width="980" height="700" fill="#0d0f13"/>
+
+        <rect x="105" y="74" width="620" height="548" rx="104"
+              fill="none" stroke="#d0d5dc" stroke-width="68"/>
+        <rect x="105" y="74" width="620" height="548" rx="104"
+              fill="none" stroke="#26323c" stroke-width="25"/>
+        <rect x="105" y="74" width="620" height="548" rx="104"
+              fill="none" stroke="#78b6df" stroke-width="8" stroke-dasharray="9 12"/>
+
+        <g fill="none" stroke="#78b6df" stroke-width="8" marker-end="url(#arrow)">
+          <path d="M245 74 H520"/>
+          <path d="M725 205 V420"/>
+          <path d="M585 622 H310"/>
+          <path d="M105 480 V265"/>
+        </g>
+
+        <circle cx="105" cy="348" r="17" fill="#78b6df"/>
+        <path d="M72 348 H20" stroke="#78b6df" stroke-width="8" marker-end="url(#arrow)"/>
+        <text x="18" y="318" fill="#bde2f8" font-size="24" font-weight="650">任意注入口</text>
+
+        <g fill="#dce3e8" font-size="24" font-weight="650">
+          <text x="155" y="48">四角相切连续</text>
+          <text x="180" y="355">同一内部通道贯通整圈</text>
+          <text x="238" y="392">无 butt joint · 无开放断口</text>
+        </g>
+
+        <g transform="translate(790 110)">
+          <circle cx="80" cy="80" r="72" fill="#d0d5dc"/>
+          <circle cx="80" cy="80" r="34" fill="#26323c"/>
+          <circle cx="80" cy="80" r="8" fill="#78b6df"/>
+          <text x="0" y="185" fill="#dce3e8" font-size="22" font-weight="650">连续管截面</text>
+          <text x="-10" y="216" fill="#aeb5bd" font-size="18">中空通道不间断</text>
+        </g>
+      </svg>
+
+      <div class="checks">
+        <div class="check">
+          <strong>拓扑</strong>
+          <span>周边为一个 connected component；四角不是独立 bar 的拼接点。</span>
+        </div>
+        <div class="check">
+          <strong>圆角</strong>
+          <span>中心线与截面在四个 90° 弯头保持相切连续，不出现尖角或错位。</span>
+        </div>
+        <div class="check">
+          <strong>封闭性</strong>
+          <span>零开放 boundary edge、零裂缝、零重叠壳体冒充连接。</span>
+        </div>
+        <div class="check">
+          <strong>流路验证</strong>
+          <span>从任一注入采样点 flood-fill，必须访问四条边和四个角的完整通道。</span>
+        </div>
+      </div>
+      <div class="question">
+        这张图确认的是外框真实拓扑目标。批准后，后续白模必须按此闭环构建并提供剖面与连通性验证。
+      </div>
+    </section>
+  </main>
+</body>
+</html>

@@ -1,0 +1,246 @@
+{
+  "schemaVersion": 1,
+  "gate": "07-material",
+  "revision": 8,
+  "auditType": "three-way-source-of-truth",
+  "authorityOrder": [
+    "original user/exact-product appearance references",
+    "Blender implementation",
+    "Unity implementation"
+  ],
+  "sourceAssetIds": [
+    "slider-intake-obs-frame-01",
+    "slider-intake-obs-frame-10",
+    "slider-intake-haloo-official-03",
+    "magnetic-slide-tile-unity-parity-rev3-blender-target-r003",
+    "magnetic-slide-tile-unity-parity-rev4-unity-final-r004"
+  ],
+  "regions": {
+    "original_user": {
+      "object": [
+        180,
+        420,
+        405,
+        760
+      ],
+      "face": [
+        198,
+        445,
+        383,
+        714
+      ],
+      "silver": [
+        188,
+        438,
+        405,
+        735
+      ]
+    },
+    "original_open": {
+      "object": [
+        175,
+        275,
+        435,
+        735
+      ],
+      "lower_artwork": [
+        215,
+        548,
+        387,
+        714
+      ]
+    },
+    "official_red": {
+      "object": [
+        430,
+        385,
+        684,
+        790
+      ],
+      "face": [
+        452,
+        420,
+        669,
+        732
+      ],
+      "silver": [
+        430,
+        385,
+        684,
+        790
+      ]
+    },
+    "blender": {
+      "object": [
+        150,
+        70,
+        875,
+        545
+      ],
+      "face": [
+        215,
+        82,
+        852,
+        335
+      ],
+      "silver": [
+        160,
+        250,
+        870,
+        535
+      ]
+    },
+    "unity": {
+      "object": [
+        145,
+        55,
+        885,
+        550
+      ],
+      "face": [
+        205,
+        72,
+        852,
+        328
+      ],
+      "silver": [
+        165,
+        240,
+        870,
+        545
+      ]
+    }
+  },
+  "metrics": {
+    "originalFace": {
+      "sizePx": [
+        185,
+        269
+      ],
+      "redPixelCount": 38266,
+      "redMedianRgb": [
+        169.0,
+        91.0,
+        80.0
+      ],
+      "redLumaStd": 60.555,
+      "neutralPixelCount": 2891,
+      "neutralMedianLStar": 40.392,
+      "laplacianVariance": 510.511
+    },
+    "officialFaceCrossCheck": {
+      "sizePx": [
+        217,
+        312
+      ],
+      "redPixelCount": 313,
+      "redMedianRgb": [
+        54.0,
+        25.0,
+        23.0
+      ],
+      "redLumaStd": 27.288,
+      "neutralPixelCount": 5821,
+      "neutralMedianLStar": 94.51,
+      "laplacianVariance": 1694.48
+    },
+    "blenderFace": {
+      "sizePx": [
+        637,
+        253
+      ],
+      "redPixelCount": 19978,
+      "redMedianRgb": [
+        125.0,
+        70.0,
+        72.0
+      ],
+      "redLumaStd": 4.744,
+      "neutralPixelCount": 39219,
+      "neutralMedianLStar": 30.196,
+      "laplacianVariance": 45.189
+    },
+    "unityFace": {
+      "sizePx": [
+        647,
+        256
+      ],
+      "redPixelCount": 28507,
+      "redMedianRgb": [
+        109.0,
+        55.0,
+        57.0
+      ],
+      "redLumaStd": 13.405,
+      "neutralPixelCount": 634,
+      "neutralMedianLStar": 13.725,
+      "laplacianVariance": 94.183
+    },
+    "blenderSilver": {
+      "sizePx": [
+        710,
+        285
+      ],
+      "redPixelCount": 49905,
+      "redMedianRgb": [
+        125.0,
+        63.0,
+        65.0
+      ],
+      "redLumaStd": 5.588,
+      "neutralPixelCount": 105230,
+      "neutralMedianLStar": 27.451,
+      "laplacianVariance": 126.947
+    },
+    "unitySilver": {
+      "sizePx": [
+        705,
+        305
+      ],
+      "redPixelCount": 60755,
+      "redMedianRgb": [
+        111.0,
+        55.0,
+        57.0
+      ],
+      "redLumaStd": 13.311,
+      "neutralPixelCount": 28457,
+      "neutralMedianLStar": 38.039,
+      "laplacianVariance": 142.645
+    }
+  },
+  "diagnosis": {
+    "geometry": "hold-constant",
+    "artworkPlacement": "hold-constant",
+    "earliestDivergenceGate": "07-material",
+    "bloodRedCrystal": "Blender already lacks the source's fractured highlight variation, apparent transparent depth and restrained iridescence.",
+    "silver": "Blender already reduces the source's layered polished reflection to broad flat gray; Unity darkens it further.",
+    "border": "The full perimeter decision remains locked, but reflectance and separation must be rebuilt at Gate 07.",
+    "lightingColorManagement": "Gate 08-09 metrics validated Blender against its own numeric target, not against normalized original-reference regions.",
+    "unity": "Gate 11 is downstream evidence, not the root correction gate."
+  },
+  "lockedDecisionsPreserved": [
+    "deep blood red, not pink",
+    "bright polished silver-white",
+    "crisp clean prior motif mask",
+    "full black top perimeter with silver side wall",
+    "crystalline brightness/depth",
+    "independently replaceable upper/lower artwork",
+    "exact geometry/pivot/slide semantics"
+  ],
+  "stageAction": {
+    "gate07": "ready_for_review-authority-correction",
+    "gates08To11": "stale",
+    "gate12": "blocked-rejected-preserved",
+    "buildInstallPhone": "not-started"
+  },
+  "reviewQuestion": "是否同意退回第 7 关，以原图为标准重做 Blender 材质？",
+  "normalizedCropPolicy": "Original references provide material cues. Blender and Unity share a camera for parity. Different cameras are not used for silhouette pixel metrics.",
+  "artifacts": {
+    "normalized-original-authority.png": "08184b315918a850eab8a40d91e004628e625ef52f204d7ebf2f836f7dd2ee26",
+    "normalized-blender-current.png": "ea57a54cfe8accbda3eed099f79aa1780278bf20124f5a84c4f828858b515570",
+    "normalized-unity-current.png": "fe5fbc17e1d87ba785fe21fe701cc51844d79fc18f2b20db205c098f9005cbab",
+    "gate07-rev8-three-way-authority-audit.png": "eba6dfa6d1c64d8fa8336a37b8075e0503b2f96638f17041a8ed70f0efe217ff"
+  },
+  "pass": true
+}

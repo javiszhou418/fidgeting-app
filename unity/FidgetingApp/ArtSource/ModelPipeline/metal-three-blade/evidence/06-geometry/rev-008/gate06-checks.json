@@ -1,0 +1,140 @@
+{
+ "source": {
+  "blockout": "05-blockout/rev-007/geeone-blockout-r007.blend",
+  "contract": "geeone-gate02-geometry-contract.json"
+ },
+ "rotor_after_booleans": {
+  "verts": 2545,
+  "faces": 2196,
+  "non_manifold_edges": 0,
+  "max_face_planarity_dev_R": 2e-06,
+  "top_local_minima": 0,
+  "mirror_unmatched_xyz_of": [
+   0,
+   1077
+  ]
+ },
+ "pocket_mouth_fillet": {
+  "tagged_edges": 30,
+  "radius_R": 0.03,
+  "radius_mm": 1.275,
+  "segments": 6
+ },
+ "edge_break": {
+  "width_mm": 0.15,
+  "segments": 2,
+  "angle_limit_deg": 40
+ },
+ "rotor_final": {
+  "verts": 4737,
+  "faces": 4316,
+  "non_manifold_edges": 0
+ },
+ "rotor_bore": {
+  "radius_R": 0.425,
+  "radius_mm": 18.06,
+  "min_radius_after_cut_R": 0.4249,
+  "non_manifold_after_cut": 0
+ },
+ "kinematics": {
+  "fixed_group": [
+   "Cap_Top",
+   "Cap_Bottom",
+   "Hub_Core"
+  ],
+  "rotating_group": [
+   "Rotor_Body"
+  ],
+  "spin_axis": "Z",
+  "rotor_bore_R": 0.425,
+  "hub_core_R": 0.41,
+  "radial_clearance_R": 0.015,
+  "radial_clearance_mm": 0.638,
+  "rotor_min_radius_R": 0.4249,
+  "rotor_max_abs_z_under_cap_R": 0.1185,
+  "cap_lip_R": 0.1307,
+  "vertical_clearance_mm": 0.516,
+  "ring_width_at_notch_min_R": 0.07,
+  "ring_width_at_notch_min_mm": 2.97,
+  "ring_at_bisectors": [
+   {
+    "bisector_deg": 150.0,
+    "outer_R": 0.495,
+    "bore_R": 0.425
+   },
+   {
+    "bisector_deg": 270.0,
+    "outer_R": 0.495,
+    "bore_R": 0.425
+   },
+   {
+    "bisector_deg": 30.0,
+    "outer_R": 0.4953,
+    "bore_R": 0.425
+   }
+  ],
+  "rotor_volume_mm3": 9031.0,
+  "rotor_centroid_offset_from_axis_R": 7.2e-05,
+  "rotor_inertia_offdiag_over_Izz": 0.0,
+  "rotor_Izz_over_Ixx": 1.9781,
+  "results": {
+   "rotor clears hub (min r >= bore - 1e-4)": true,
+   "radial clearance >= 0.01 R": true,
+   "rotor stays below cap lip inside cap footprint": true,
+   "hub inside cap (hub r < cap r)": true,
+   "rotor ring at notches >= 0.05 R": true,
+   "rotor centroid on axis (< 1e-3 R)": true,
+   "Z is a principal axis (|Ixz|,|Iyz| < 1e-3 Izz)": true,
+   "Izz is the largest moment (stable spin)": true
+  }
+ },
+ "cap": {
+  "dish_sectors": 14,
+  "expected": 14,
+  "rim_R": 0.485,
+  "hub_seat_R": 0.41,
+  "rim_gt_hub": true,
+  "dish_slope_deg": 8.0,
+  "dish_depth_mm": 2.318,
+  "sector_alt_tilt_deg": 0.5,
+  "radial_creases": 14,
+  "crease_bevel_mm": 0.0,
+  "non_manifold_edges": [
+   0,
+   0
+  ],
+  "table_to_cap": 0.8,
+  "side_height_R": 0.16,
+  "tier_drops_R": [
+   0.0142,
+   0.0405,
+   0.0597
+  ],
+  "tiers_drop_R": 0.1144,
+  "skirt_rows_drop_mm": 4.26,
+  "hub_seat_height_R": 0.0457,
+  "hub_seat_height_mm": 1.94
+ },
+ "gate06Check_results": {
+  "D04 top convex, no valley": true,
+  "D04/D05 planar facets (dev < 1e-4 R)": true,
+  "D08 mouth fillet applied": true,
+  "D10 mirror": true,
+  "D01 14 sectors": true,
+  "D01 dish visibly concave (>= 4 deg)": true,
+  "D03 cap rim > hub seat": true,
+  "manifold after fillets": true,
+  "D01 caps manifold": true,
+  "D02/D03 each tier steeper than the one above": true,
+  "D03 tiers drop <= cap side height (lip above rotor top)": true,
+  "D03/D09 rotor bore manifold": true,
+  "KIN rotor clears hub (min r >= bore - 1e-4)": true,
+  "KIN radial clearance >= 0.01 R": true,
+  "KIN rotor stays below cap lip inside cap footprint": true,
+  "KIN hub inside cap (hub r < cap r)": true,
+  "KIN rotor ring at notches >= 0.05 R": true,
+  "KIN rotor centroid on axis (< 1e-3 R)": true,
+  "KIN Z is a principal axis (|Ixz|,|Iyz| < 1e-3 Izz)": true,
+  "KIN Izz is the largest moment (stable spin)": true
+ }
+}

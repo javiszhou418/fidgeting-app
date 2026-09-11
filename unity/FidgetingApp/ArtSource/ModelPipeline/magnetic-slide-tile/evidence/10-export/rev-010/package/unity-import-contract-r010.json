@@ -1,0 +1,73 @@
+{
+  "schemaVersion": 1,
+  "gate": "10-export",
+  "revision": 10,
+  "purpose": "Unity Gate 11 import and ASTC comparison plan; not applied in this gate",
+  "sourceGate09PortabilityContractSha256": "d172c64ce56f89170b9f072e8efe61c3c7e8277235228bac957229ea319ffd13",
+  "units": {
+    "authoring": "millimeters",
+    "fbxAndGlb": "meters"
+  },
+  "modelImport": {
+    "preserveHierarchy": true,
+    "readWrite": false,
+    "importAnimation": false,
+    "generateColliders": false,
+    "normals": "Import",
+    "tangents": "Import",
+    "meshCompression": "Off for Gate 11 parity",
+    "optimizeMeshPolygons": false,
+    "optimizeMeshVertices": false,
+    "weldVertices": false
+  },
+  "textureImport": {
+    "nativeDimensions": [
+      620,
+      1000
+    ],
+    "npotScale": "None",
+    "wrapMode": "Clamp",
+    "mipMaps": true,
+    "baseColorSRGB": true,
+    "maskMapSRGB": false,
+    "normalTextureType": "NormalMap",
+    "environmentSRGB": false
+  },
+  "astcPlan": {
+    "applied": false,
+    "gate": "11-unity-parity",
+    "baseColorCandidates": [
+      "ASTC_4x4",
+      "ASTC_6x6"
+    ],
+    "maskAndNormalCandidates": [
+      "ASTC_4x4"
+    ],
+    "environment": "RGBAHalf cubemap; no ASTC before HDR parity",
+    "acceptance": "Compare against uncompressed import at native NPOT dimensions before selecting compression."
+  },
+  "materialPartitions": {
+    "topArtwork": "upper/lower independent BaseColor + MaskMap; Clamp",
+    "sideWall": "solid dark material; no image sampler and exactly zero artwork",
+    "rim": "polished bright silver material; no artwork",
+    "underside": "neutral technical material; no artwork"
+  },
+  "environment": {
+    "source": {
+      "path": "package/environment/target-shipping-studio-r009.exr",
+      "sha256": "2fe029beb803d7f9a26d229a1969914f210a7b5c4f311bfe9878cb52c7d73d13",
+      "bytes": 21680897
+    },
+    "cubemapContract": {
+      "path": "package/environment/cubemap/cubemap-contract.json",
+      "sha256": "14dc65a7f6e2ea036e6a0c9ba640cb04c46b5ab28e4a4f88110cb643a8608c8e",
+      "bytes": 1901
+    },
+    "displayMapping": "neutral-display-v1"
+  },
+  "scope": {
+    "unityImportApplied": false,
+    "unitySceneModified": false,
+    "buildInstallDevice": false
+  }
+}

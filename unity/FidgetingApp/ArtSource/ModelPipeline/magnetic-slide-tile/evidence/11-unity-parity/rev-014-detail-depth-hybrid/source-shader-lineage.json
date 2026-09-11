@@ -1,0 +1,29 @@
+{
+  "schemaVersion": 1,
+  "shaderSha256": {
+    "rev12OnePass": "4b084961f631d8d33a3e20bfbf01301056c3dd7442f1e1e339d68f741c8a0ee5",
+    "rev13Substrate": "d82f2538b63b037d1c3487e98f4f9fdf3f9c601724cb36c9d50de8a9ff6fc4ba",
+    "rev13Motif": "9da65ca318933413018c45b144ece591616010e8ef115a918e6cfe070b91e1ac",
+    "rev13Crystal": "1902bb2f9354d7a4aba48117ce005206ab5058a8f2948cc39dc5bf87d943a0a7",
+    "rev14Substrate": "601b49f3c689c7578ad5ad01403b99f7857c1289f21160304cbea83b2c924f5a",
+    "rev14Motif": "8b5dce5a4e6b661ef1c7ff4263858210c566c44f0e90a0948c028c0486090a70",
+    "rev14Crystal": "dde928720f713b5ed5472abfaffcaa2eab5e56c66cd5cbc905212845d69188f8"
+  },
+  "reusedTextureSha256": {
+    "upperAlbedo": "c0e9305d475cd2c591efc8a833a0aafb1aef4ccc437d84a3417674e6d1b453a5",
+    "lowerAlbedo": "968c1e87ca2d5ea7c8fc57106e42bcd09dc95395fac7dd3be569e580ea8850eb",
+    "upperRoughness": "854f1dbc393585ff9b88f808c1a46a35b091088ac8b83894763f502876e3df6a",
+    "lowerRoughness": "ca2697560a2e57685a71c423f15f70a72ebb47c93c53cae0e3a8dae0b3248245",
+    "upperNormal": "72db9aeac0f012cb931add1bb5fb7d0a4db029f193d2deee34468ae9ebe155ad",
+    "lowerNormal": "20385e93bb43b1b843ae990474380943be2c00a42277d27958854c04ebfd9d46",
+    "upperMotifMask": "8250df70d2286849db353862283b0d3db9c66e1ac92bed3795bcb5377a431c36",
+    "lowerMotifMask": "7bf5921f469a217b850ff2ea94dc5ae6c251091b8de60bd81c1b88ec42dfa7c2",
+    "perimeterMask": "2179bf26210994c8b3d279337bf6ad0f4beaee3c7285ae97d1cd888db2bd64fc"
+  },
+  "rev13Loss": {
+    "droppedMaps": "No substrate files were removed, but authored albedo RGB was collapsed to luminance. Motif stopped sampling the roughness and normal maps.",
+    "proceduralChanges": "Mica 28->26, microflake 85/0.16->92/0.19 with a narrower sparkle threshold, roughness 0.022-0.11->0.035-0.13, normal 0.32->0.36, iridescence 0.12->0.10.",
+    "filtering": "Texture importer stayed bilinear with mipmaps. Rev13 crystal additionally sampled scene color at 2.8 px distortion, which hid high-frequency substrate detail."
+  },
+  "rev14Restoration": "Same texture asset paths and hashes as rev12; authored RGB and rev12 tuning restored. Motif masks sample LOD0. Crystal transmission is 0.985 with 0.35 px refraction."
+}

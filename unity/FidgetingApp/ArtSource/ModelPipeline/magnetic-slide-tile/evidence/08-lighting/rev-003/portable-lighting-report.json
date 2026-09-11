@@ -1,0 +1,113 @@
+{
+  "schemaVersion": 1,
+  "gate": "08-lighting",
+  "revision": 3,
+  "status": "portable-lighting-candidate-review-required",
+  "source": {
+    "gate07Blend": "/Users/jiawei.zhou/Documents/Fidgeting app/unity/FidgetingApp/ArtSource/ModelPipeline/magnetic-slide-tile/evidence/07-material/rev-011/magnetic-slide-tile-material-r011.blend",
+    "sha256": "fdf6e96206b6d048aa88fbd049a8af1a4d7a391d65ed74791c3acaca2767d274"
+  },
+  "contractSha256": "5aee71817c2c033ed92b770126ba0ecb6d79c2f032d786743b214b79078a47ea",
+  "geometryDigest": {
+    "before": "e2a838c22b743c7b0a05a20df060817f4e324bad5c84c11592c673c25ee002fe",
+    "after": "e2a838c22b743c7b0a05a20df060817f4e324bad5c84c11592c673c25ee002fe",
+    "expected": "e2a838c22b743c7b0a05a20df060817f4e324bad5c84c11592c673c25ee002fe"
+  },
+  "materialDigest": {
+    "before": "366b788bfb329d806ffbffaa3ff9c4789deab3967943fa43dc7f42c9b6609aa8",
+    "after": "366b788bfb329d806ffbffaa3ff9c4789deab3967943fa43dc7f42c9b6609aa8",
+    "expected": "366b788bfb329d806ffbffaa3ff9c4789deab3967943fa43dc7f42c9b6609aa8"
+  },
+  "matrixDigest": {
+    "before": "04716c7e4df7be9d2242ecddaf2e9c6f80a94fe817d233361c7f83b1af29aec4",
+    "after": "04716c7e4df7be9d2242ecddaf2e9c6f80a94fe817d233361c7f83b1af29aec4"
+  },
+  "portableRecipe": {
+    "environment": {
+      "projection": "equirectangular",
+      "resolution": [
+        2048,
+        1024
+      ],
+      "linearColorSpace": "Rec.709/D65",
+      "worldStrength": 0.125,
+      "rotationDegrees": 0.0,
+      "seamMaxAbsoluteLinearDelta": 0.0,
+      "p01Luminance": 0.017407726496458054,
+      "p99Luminance": 0.8071429133415222,
+      "sha256": "d52f0eb70f9d26bc870c078c1ced35fa38f8b743144c421a6c9917d1dcd2bd60"
+    },
+    "directLight": {
+      "type": "directional",
+      "color": "D65",
+      "blenderEnergy": 0.75,
+      "angularDiameterDegrees": 7.0,
+      "rotationEulerDegrees": [
+        31.0,
+        -24.0,
+        -38.0
+      ],
+      "unityMapping": "same direction/color; intensity calibrated in isolated parity scene"
+    },
+    "reflectionCards": 0,
+    "areaLights": 0,
+    "duplicateSyntheticHighlights": 0,
+    "ground": {
+      "sizeMm": 220.0,
+      "zMm": -0.6,
+      "baseColorLinear": [
+        0.018,
+        0.017,
+        0.019,
+        1.0
+      ],
+      "roughness": 0.46
+    },
+    "contactShadow": "shared directional shadow map; baked model AO only; no Blender-only contact shadow",
+    "color": {
+      "workingSpace": "scene-linear Rec.709/D65",
+      "viewTransform": "Standard",
+      "look": "None",
+      "exposureEv": -0.35,
+      "agxMigration": "Both comparison renders use the identity display LUT: no AgX look and no Unity ACES stack. A fitted AgX-look LUT may be evaluated only after this Gate 08 direction is approved."
+    },
+    "camera": {
+      "resolution": [
+        1400,
+        1100
+      ],
+      "locationMm": [
+        74.0,
+        -116.0,
+        72.0
+      ],
+      "targetMm": [
+        0.0,
+        -2.0,
+        5.0
+      ],
+      "lensMm": 76.0,
+      "sensorWidthMm": 36.0,
+      "sensorFit": "HORIZONTAL"
+    }
+  },
+  "controlledRenders": {
+    "environmentOnly": "portable-env-only.png",
+    "environmentPlusDirectional": "portable-beauty.png",
+    "clay": "portable-clay.png"
+  },
+  "checks": {
+    "geometryUnchanged": true,
+    "materialsUnchanged": true,
+    "matricesUnchanged": true,
+    "zeroAreaLights": true,
+    "zeroReflectionCards": true,
+    "singleEnvironmentContribution": true,
+    "zeroEmissionPreserved": true,
+    "sameFullFrame": true,
+    "shippingUntouched": true,
+    "outputBlend": true,
+    "outputExr": true
+  },
+  "pass": true
+}

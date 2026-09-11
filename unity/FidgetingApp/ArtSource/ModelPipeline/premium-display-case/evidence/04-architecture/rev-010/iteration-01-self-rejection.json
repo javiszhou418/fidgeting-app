@@ -1,0 +1,36 @@
+{
+  "schema": "premium-display-case-gate04-r010-self-rejection.v1",
+  "iteration": 1,
+  "date": "2026-08-28",
+  "status": "technical-rejected-before-registration",
+  "registeredForApproval": false,
+  "source": "actual Unity 6000.5.6f1 PlayMode frames at 1206x2622 and 60 fps",
+  "reasons": [
+    "Case label TextMesh rendered over the sealed Pack instead of remaining occluded.",
+    "The free foil tail was too wide and too tall, so its curl read as an oversized ribbon.",
+    "The aperture edge opened as a broad diagonal wedge instead of a narrow moving tear front followed by a mated torn edge.",
+    "The impact flash used a pointed star silhouette and the energy ring crossed the viewport, creating an Effects Demo read.",
+    "Pack retreat culled grid cells into visible rectangular chunks instead of a coherent outward release.",
+    "The case root moved 0.075977 m in one frame, above the continuity limit."
+  ],
+  "failedChecks": {
+    "caseRootPositionContinuous": {
+      "measuredMaximumFrameStepMeters": 0.075977,
+      "limitMeters": 0.045
+    },
+    "aheadOfTearFrontRemainsWelded": {
+      "measuredMaximumSeparationMeters": 0.170391,
+      "cause": "The fully torn endpoint was still classified as intact during Pack retreat."
+    }
+  },
+  "corrections": [
+    "Hide the case TextMesh renderers until the physical Pack handoff passes 72 percent while retaining the same case and renderer EntityIds.",
+    "Narrow the physical foil strip and tighten its cubic curl.",
+    "Reach full aperture depth shortly behind the moving front while preserving the shared seeded edge.",
+    "Replace the star with a soft aperture-shaped geometry flash and reduce the single ring radius.",
+    "Retreat coherent full-width body bands instead of individual grid cells.",
+    "Use smoothstep case travel across the same 180 ms handoff."
+  ],
+  "shippingRuntimeWired": false,
+  "physicalPhoneInstalled": false
+}

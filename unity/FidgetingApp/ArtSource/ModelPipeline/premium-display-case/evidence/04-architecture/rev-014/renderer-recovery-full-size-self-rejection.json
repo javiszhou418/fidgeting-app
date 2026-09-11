@@ -1,0 +1,46 @@
+{
+  "schema": "premium-display-case-gate04-r014-isolated-renderer-recovery.v1",
+  "isolatedUnityCandidate": true,
+  "shippingIntegration": false,
+  "shippingReady": false,
+  "outcome": "self-rejected",
+  "reviewedAt": "2026-08-31T03:05:41.473Z",
+  "rendererRecovery": {
+    "pipeline": "IsolatedR014URPFixed.asset",
+    "rendererData": "IsolatedR014Renderer.asset",
+    "unity": "6000.5.6f1",
+    "urp": "17.5.0",
+    "sanityCapture": "passed non-black"
+  },
+  "visualBlocker": "At full size, the Pack reads as a thin horizontal planar strip across the case instead of a visible deep pouch mouth, so the case cannot be visually proven contained before emergence.",
+  "fullSizeFrames": [
+    {
+      "frame": "pose-000.png",
+      "sha256": "0ba294c675ba8848f1dd782c147b6f85d82131732bbaccd116fe109019c9837d"
+    },
+    {
+      "frame": "pose-016.png",
+      "sha256": "53e00b85ecc8047f136bd699a7067167160a19a6a4456d0ef14680c0f0bc5ff1"
+    },
+    {
+      "frame": "pose-029.png",
+      "sha256": "fcc139d849d14b47914d08505b7c0617d797a28e2fd77ad687c4092d089173c1"
+    },
+    {
+      "frame": "pose-043.png",
+      "sha256": "fcc139d849d14b47914d08505b7c0617d797a28e2fd77ad687c4092d089173c1"
+    },
+    {
+      "frame": "pose-059.png",
+      "sha256": "85d08aa20f48da4eb6132f332cf7a182be0d4817b094dd82f11b2a8241f1f537"
+    },
+    {
+      "frame": "pose-074.png",
+      "sha256": "f57d7b5bd2686083e5197b53998e4dd8daa918b7ce0214f319bb716b38a8c37e"
+    }
+  ],
+  "buildManifestSha256": "7f346ff8777f62db65f8d68d9afefa2e3205861e7d7e975b9bf654fe799d69e3",
+  "approvalRequestAllowed": false,
+  "captureRetention": "isolated diagnostic only; no primary evidence promoted",
+  "statusText": "视觉批准待确认，未推送手机"
+}

@@ -1,0 +1,126 @@
+{
+  "schemaVersion": 1,
+  "gate": "08-lighting",
+  "revision": 4,
+  "status": "diagnostic-not-reviewable",
+  "source": {
+    "gate07Blend": "/Users/jiawei.zhou/Documents/Fidgeting app/unity/FidgetingApp/ArtSource/ModelPipeline/magnetic-slide-tile/evidence/07-material/rev-011/magnetic-slide-tile-material-r011.blend",
+    "sha256": "fdf6e96206b6d048aa88fbd049a8af1a4d7a391d65ed74791c3acaca2767d274"
+  },
+  "contractSha256": "5aee71817c2c033ed92b770126ba0ecb6d79c2f032d786743b214b79078a47ea",
+  "geometryDigest": {
+    "before": "e2a838c22b743c7b0a05a20df060817f4e324bad5c84c11592c673c25ee002fe",
+    "after": "e2a838c22b743c7b0a05a20df060817f4e324bad5c84c11592c673c25ee002fe",
+    "expected": "e2a838c22b743c7b0a05a20df060817f4e324bad5c84c11592c673c25ee002fe"
+  },
+  "materialDigest": {
+    "before": "366b788bfb329d806ffbffaa3ff9c4789deab3967943fa43dc7f42c9b6609aa8",
+    "after": "366b788bfb329d806ffbffaa3ff9c4789deab3967943fa43dc7f42c9b6609aa8",
+    "expected": "366b788bfb329d806ffbffaa3ff9c4789deab3967943fa43dc7f42c9b6609aa8"
+  },
+  "matrixDigest": {
+    "before": "04716c7e4df7be9d2242ecddaf2e9c6f80a94fe817d233361c7f83b1af29aec4",
+    "after": "04716c7e4df7be9d2242ecddaf2e9c6f80a94fe817d233361c7f83b1af29aec4"
+  },
+  "portableRecipe": {
+    "environment": {
+      "projection": "equirectangular",
+      "resolution": [
+        2048,
+        1024
+      ],
+      "linearColorSpace": "Rec.709/D65",
+      "strength": 0.85,
+      "rotationDegrees": 0.0,
+      "seamMaxAbsoluteLinearDelta": 0.0,
+      "minimum": 0.13065268099308014,
+      "maximum": 5.664282321929932,
+      "mean": 0.9878857731819153,
+      "p01Luminance": 0.13296036422252655,
+      "p99Luminance": 4.923031806945801,
+      "directionMarkers": {
+        "positiveZ": [
+          1.0871247053146362,
+          1.0871247053146362,
+          1.0871247053146362
+        ],
+        "positiveX": [
+          1.02236008644104,
+          1.02236008644104,
+          1.02236008644104
+        ],
+        "negativeZ": [
+          0.3974045217037201,
+          0.3974045217037201,
+          0.3974045217037201
+        ],
+        "negativeX": [
+          0.8475942015647888,
+          0.8475942015647888,
+          0.8475942015647888
+        ],
+        "up": [
+          1.31805419921875,
+          1.31805419921875,
+          1.31805419921875
+        ],
+        "down": [
+          0.1487286388874054,
+          0.1487286388874054,
+          0.1487286388874054
+        ]
+      },
+      "sha256": "e0a2d012a06e599f00bfbdd152351a726df186e212c1bad394284db1de1c3d90"
+    },
+    "reflectionSourceCount": 1,
+    "directLightCount": 0,
+    "reflectionProbeCount": 0,
+    "reflectionCardCount": 0,
+    "syntheticHighlightCount": 0,
+    "groundCount": 0,
+    "backgroundLinear": [
+      0.03500000014901161,
+      0.03500000014901161,
+      0.03500000014901161
+    ],
+    "displayTransform": "shared post-render neutral-display-v1",
+    "camera": {
+      "resolution": [
+        1400,
+        1100
+      ],
+      "locationMm": [
+        74.0,
+        -116.0,
+        72.0
+      ],
+      "targetMm": [
+        0.0,
+        -2.0,
+        5.0
+      ],
+      "lensMm": 76.0,
+      "sensorWidthMm": 36.0,
+      "sensorFit": "HORIZONTAL"
+    }
+  },
+  "controlledRenders": [
+    "reflection-only",
+    "clay",
+    "silver",
+    "crystal",
+    "full-model"
+  ],
+  "checks": {
+    "geometryUnchanged": true,
+    "materialsUnchanged": true,
+    "matricesUnchanged": true,
+    "singleReflectionSource": true,
+    "zeroDirectLights": true,
+    "zeroGround": true,
+    "zeroEmissionPreserved": true,
+    "linearHdrOutputs": true,
+    "shippingUntouched": true
+  },
+  "pass": true
+}

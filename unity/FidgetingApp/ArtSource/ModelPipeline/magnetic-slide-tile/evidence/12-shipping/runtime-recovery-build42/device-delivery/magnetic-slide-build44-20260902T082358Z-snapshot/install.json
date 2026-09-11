@@ -1,0 +1,36 @@
+{
+  "error" : {
+    "code" : 1011,
+    "domain" : "com.apple.dt.CoreDeviceError",
+    "userInfo" : {
+      "DeviceIdentifier" : {
+        "string" : "ecid_7318581840707612"
+      },
+      "NSLocalizedDescription" : {
+        "string" : "CoreDeviceService was unable to locate a device matching the requested device identifier. (DeviceIdentifier: ecid_7318581840707612)"
+      }
+    }
+  },
+  "info" : {
+    "arguments" : [
+      "devicectl",
+      "device",
+      "install",
+      "app",
+      "--device",
+      "00008130-001A00361EE0001C",
+      "/Users/jiawei.zhou/Documents/Fidgeting app/unity/FidgetingApp/Builds/iOS/DeviceJobs/magnetic-slide-build44-20260902T082358Z-snapshot/DerivedData/Build/Products/Release-iphoneos/FidgetSpinner.app",
+      "--timeout",
+      "60",
+      "--json-output",
+      "/Users/jiawei.zhou/Documents/Fidgeting app/unity/FidgetingApp/ArtSource/ModelPipeline/magnetic-slide-tile/evidence/12-shipping/runtime-recovery-build42/device-delivery/magnetic-slide-build44-20260902T082358Z-snapshot/install.json"
+    ],
+    "commandType" : "devicectl.device.install.app",
+    "environment" : {
+      "TERM" : "dumb"
+    },
+    "jsonVersion" : 3,
+    "outcome" : "failed",
+    "version" : "518.27"
+  }
+}

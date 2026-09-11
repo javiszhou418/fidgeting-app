@@ -1,0 +1,402 @@
+{
+  "contract_sha256": "444c9ca1a9ece0d01a655b75db9c516f2b1e7b8eafe15ad5b148a8a590f0e578",
+  "engine": "CYCLES",
+  "samples": 96,
+  "calibration": {
+    "target_p97_display": 0.86,
+    "passes": [
+      {
+        "p97": 0.1581,
+        "factor": 41.517
+      },
+      {
+        "p97": 0.8479,
+        "factor": 1.032
+      }
+    ],
+    "energies_w": {
+      "LGT_PDC_SOFT_KEY": 2.9166,
+      "LGT_PDC_RIGHT_STRIP": 0.2017,
+      "LGT_PDC_TOP_RAIL": 0.0403,
+      "LGT_PDC_COOL_RIM": 0.0672,
+      "LGT_PDC_LILAC_RIM": 0.0502,
+      "LGT_PDC_FRONT_FILL": 0.3912,
+      "LGT_PDC_EDGE_L_CYAN": 0.4015,
+      "LGT_PDC_EDGE_T_BLUE": 0.1853,
+      "LGT_PDC_EDGE_R_MAGENTA": 0.3706,
+      "LGT_PDC_EDGE_B_PINK": 0.1647,
+      "LGT_PDC_SPARKLE_00": 0.0514,
+      "LGT_PDC_SPARKLE_01": 0.0514,
+      "LGT_PDC_SPARKLE_02": 0.0514,
+      "LGT_PDC_SPARKLE_03": 0.0514,
+      "LGT_PDC_SPARKLE_04": 0.0514,
+      "LGT_PDC_SPARKLE_05": 0.0514,
+      "LGT_PDC_SPARKLE_06": 0.0514,
+      "LGT_PDC_SPARKLE_07": 0.0514,
+      "LGT_PDC_REVIEW_TOP_FILL": 10.3796
+    },
+    "cmf_scheme_a_preview_overrides": {
+      "3": {
+        "base_color_srgb_hex": "#5C6266",
+        "roughness": 0.55,
+        "bump_strength": 0.6,
+        "intent": "dark sandblast, recessed field"
+      },
+      "4": {
+        "roughness": 0.12,
+        "coat_weight": 0.35,
+        "coat_roughness": 0.05,
+        "intent": "piano-black gloss plates"
+      },
+      "5": {
+        "roughness": 0.3,
+        "anisotropic": 0.8,
+        "anisotropic_rotation": 0.0,
+        "intent": "directional brushed steel flats"
+      },
+      "6": {
+        "base_color_srgb_hex": "#C9D0D6",
+        "roughness": 0.04,
+        "intent": "bright mirror polish: bevels, lip, wings, divider"
+      }
+    },
+    "review_bright": {
+      "enabled": true,
+      "world_strength": 0.05,
+      "top_fill_relative_power": 0.45,
+      "note": "review aid; contract beauty rig unchanged; not Gate 08 lighting"
+    }
+  },
+  "materials_by_zone": {
+    "1": "MAT_PDC_CLEAR_CRYSTAL",
+    "2": "MAT_PDC_SMOKE_LINER",
+    "3": "MAT_PDC_MICROBLAST",
+    "4": "MAT_PDC_GRAPHITE",
+    "5": "MAT_PDC_STEEL_SATIN",
+    "6": "MAT_PDC_SMOKED_MIRROR",
+    "7": "MAT_PDC_TIER_ACCENT_TITANIUM",
+    "0": "MAT_PDC_REVIEW_SPINNER_TITANIUM",
+    "floor": "MAT_PDC_PREVIEW_FLOOR"
+  },
+  "lights": [
+    {
+      "name": "LGT_PDC_SOFT_KEY",
+      "energy_w": 2.92,
+      "size_m": [
+        0.1701,
+        0.0801
+      ],
+      "location_m": [
+        -0.0722,
+        -0.1767,
+        0.1721
+      ]
+    },
+    {
+      "name": "LGT_PDC_RIGHT_STRIP",
+      "energy_w": 0.2,
+      "size_m": [
+        0.011,
+        0.1901
+      ],
+      "location_m": [
+        0.1367,
+        0.0479,
+        0.1118
+      ]
+    },
+    {
+      "name": "LGT_PDC_TOP_RAIL",
+      "energy_w": 0.04,
+      "size_m": [
+        0.1161,
+        0.009
+      ],
+      "location_m": [
+        0.064,
+        -0.1609,
+        0.0453
+      ]
+    },
+    {
+      "name": "LGT_PDC_COOL_RIM",
+      "energy_w": 0.07,
+      "size_m": [
+        0.009,
+        0.1161
+      ],
+      "location_m": [
+        -0.0787,
+        -0.068,
+        -0.094
+      ]
+    },
+    {
+      "name": "LGT_PDC_LILAC_RIM",
+      "energy_w": 0.05,
+      "size_m": [
+        0.009,
+        0.1001
+      ],
+      "location_m": [
+        0.0892,
+        0.036,
+        -0.104
+      ]
+    },
+    {
+      "name": "LGT_PDC_FRONT_FILL",
+      "energy_w": 0.39,
+      "size_m": [
+        0.1901,
+        0.1201
+      ],
+      "location_m": [
+        -0.0313,
+        0.0672,
+        0.2045
+      ]
+    },
+    {
+      "name": "LGT_PDC_EDGE_L_CYAN",
+      "energy_w": 0.4,
+      "size_m": [
+        0.006,
+        0.2402
+      ],
+      "location_m": [
+        -0.1462,
+        -0.0179,
+        0.0161
+      ]
+    },
+    {
+      "name": "LGT_PDC_EDGE_T_BLUE",
+      "energy_w": 0.19,
+      "size_m": [
+        0.1601,
+        0.006
+      ],
+      "location_m": [
+        -0.0418,
+        0.0424,
+        0.1357
+      ]
+    },
+    {
+      "name": "LGT_PDC_EDGE_R_MAGENTA",
+      "energy_w": 0.37,
+      "size_m": [
+        0.006,
+        0.2402
+      ],
+      "location_m": [
+        0.1089,
+        0.098,
+        -0.0158
+      ]
+    },
+    {
+      "name": "LGT_PDC_EDGE_B_PINK",
+      "energy_w": 0.16,
+      "size_m": [
+        0.1601,
+        0.006
+      ],
+      "location_m": [
+        0.0048,
+        0.0371,
+        -0.1434
+      ]
+    },
+    {
+      "name": "LGT_PDC_SPARKLE_00",
+      "energy_w": 0.05,
+      "size_m": [
+        0.006,
+        0.25
+      ],
+      "location_m": [
+        -0.1074,
+        -0.1701,
+        0.0196
+      ]
+    },
+    {
+      "name": "LGT_PDC_SPARKLE_01",
+      "energy_w": 0.05,
+      "size_m": [
+        0.006,
+        0.25
+      ],
+      "location_m": [
+        -0.0604,
+        -0.1969,
+        0.0887
+      ]
+    },
+    {
+      "name": "LGT_PDC_SPARKLE_02",
+      "energy_w": 0.05,
+      "size_m": [
+        0.006,
+        0.25
+      ],
+      "location_m": [
+        -0.0404,
+        -0.1264,
+        0.1492
+      ]
+    },
+    {
+      "name": "LGT_PDC_SPARKLE_03",
+      "energy_w": 0.05,
+      "size_m": [
+        0.006,
+        0.25
+      ],
+      "location_m": [
+        0.0387,
+        -0.157,
+        0.0239
+      ]
+    },
+    {
+      "name": "LGT_PDC_SPARKLE_04",
+      "energy_w": 0.05,
+      "size_m": [
+        0.006,
+        0.25
+      ],
+      "location_m": [
+        0.0719,
+        -0.0802,
+        0.0844
+      ]
+    },
+    {
+      "name": "LGT_PDC_SPARKLE_05",
+      "energy_w": 0.05,
+      "size_m": [
+        0.006,
+        0.25
+      ],
+      "location_m": [
+        0.1439,
+        -0.0954,
+        0.1535
+      ]
+    },
+    {
+      "name": "LGT_PDC_SPARKLE_06",
+      "energy_w": 0.05,
+      "size_m": [
+        0.006,
+        0.25
+      ],
+      "location_m": [
+        0.171,
+        -0.0403,
+        0.0196
+      ]
+    },
+    {
+      "name": "LGT_PDC_SPARKLE_07",
+      "energy_w": 0.05,
+      "size_m": [
+        0.006,
+        0.25
+      ],
+      "location_m": [
+        0.2181,
+        -0.0671,
+        0.0887
+      ]
+    },
+    {
+      "name": "LGT_PDC_REVIEW_TOP_FILL",
+      "energy_w": 10.38,
+      "size_m": [
+        0.4403,
+        0.4403
+      ],
+      "location_m": [
+        0.0337,
+        -0.0723,
+        0.3272
+      ]
+    }
+  ],
+  "stills": [
+    "cmf-preview-hero-tier-titanium-bold.png",
+    "cmf-preview-front-tier-titanium-bold.png",
+    "cmf-preview-low-oblique-tier-titanium-bold.png",
+    "cmf-preview-corner-macro-tier-titanium-bold.png",
+    "cmf-preview-pocket-rim-macro-tier-titanium-bold.png"
+  ],
+  "turntable_frames": 0,
+  "tier": {
+    "id": "titanium",
+    "rarity": "Signature",
+    "aperture": "bold",
+    "palette": "muted-proposal",
+    "accent": [
+      0.58,
+      0.63,
+      0.7
+    ],
+    "accent_rough": 0.3,
+    "liner": [
+      0.86,
+      0.88,
+      0.93
+    ],
+    "absorb": [
+      0.48,
+      0.53,
+      0.62
+    ],
+    "source": "PremiumDisplayCaseLabelPlate.foilByTier order Steel/Copper/Silver/Gold; FDB-DSP-014 liner tints"
+  },
+  "soft_focus": null,
+  "bling": {
+    "mode": "contract-rig",
+    "thin_film": {
+      "thickness_nm_range": [
+        300,
+        650
+      ],
+      "ior": 1.355,
+      "mask": "pointiness+facing stand-in for COLOR0.g"
+    },
+    "sparkle_lights": {
+      "count": 8,
+      "size_b": 0.03,
+      "relative_power_each": 0.16,
+      "temperature_k": [
+        5200,
+        7200
+      ],
+      "reference_colors_srgb": [
+        "#7FE0FF",
+        "#FFFFFF",
+        "#FF7AE0",
+        "#FFFFFF"
+      ]
+    },
+    "rim_power_override": null,
+    "environment": "review-bright grey",
+    "edge_strips": null,
+    "film": {
+      "thickness_nm_range": null,
+      "pointiness": [
+        0.5,
+        0.56
+      ],
+      "mask": "none"
+    },
+    "within_contract_lighting": true,
+    "note": "contract rev-011 lighting direction built from lighting.beauty"
+  },
+  "status": "supplementary CMF preview; not Gate 07 lookdev; rarity variation study"
+}

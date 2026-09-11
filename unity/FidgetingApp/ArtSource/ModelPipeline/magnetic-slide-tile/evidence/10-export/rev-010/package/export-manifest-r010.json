@@ -1,0 +1,379 @@
+{
+  "schemaVersion": 1,
+  "gate": "10-export",
+  "revision": 10,
+  "createdFrom": {
+    "gate09Revision": 9,
+    "gate09ApprovalExactWording": "继续",
+    "sourceBlendSha256": "d4d6a9701281e493b4459d3b1f9a9c67382c3d7b22e21632233184276de8ebf2",
+    "geometryDigest": "2fcf6d2b4344511bc6b86ce940a927576f9cdb4988f4022959a3372f4d3c1952",
+    "materialSourceSha256": "8538b4142c9d6b5c89e30e3f915f99a33dfff8eab158db449278d9cca605b10c",
+    "mechanismContractSha256": "9cd7a08f34d7d8dfc3c6f89f6c80a5c5c2dcae48bc0d5c54ebf455a0727ea571",
+    "portabilityContractSha256": "d172c64ce56f89170b9f072e8efe61c3c7e8277235228bac957229ea319ffd13"
+  },
+  "stateDigests": {
+    "geometry": "e9792a1eaf4038b30f19af06573d5d9a7de66e913d9d48c9d736ce0726911a08",
+    "materials": "c876a0c4186ac2ce8364a309508c74c8a93a53bf57f993e36256cab2eaed2905",
+    "uvs": "c1c00c094735dfd28750f8b894b9f14c8e4bdfea9d3510791d95c1bb6908d9df"
+  },
+  "boundsMm": {
+    "minMm": [
+      -15.5,
+      -25.0,
+      0.0
+    ],
+    "maxMm": [
+      15.5,
+      25.0,
+      12.0
+    ],
+    "sizeMm": [
+      31.0,
+      50.0,
+      12.0
+    ]
+  },
+  "formats": {
+    "blend": {
+      "path": "/Users/jiawei.zhou/Documents/Fidgeting app/unity/FidgetingApp/ArtSource/ModelPipeline/magnetic-slide-tile/evidence/10-export/rev-010/package/magnetic-slide-tile-authoritative-r010.blend",
+      "sha256": "68a1173faa8bc9023ba51a048f50c4a622898a8af72fc75fae6b087b113af11a",
+      "bytes": 1430724
+    },
+    "fbx": {
+      "path": "/Users/jiawei.zhou/Documents/Fidgeting app/unity/FidgetingApp/ArtSource/ModelPipeline/magnetic-slide-tile/evidence/10-export/rev-010/package/magnetic-slide-tile-render-r010.fbx",
+      "sha256": "816ac0a268e06958331fe3a49d5ce5ef234dcb1ae84660253e70a708c4db1222",
+      "bytes": 8779708
+    },
+    "glb": {
+      "path": "/Users/jiawei.zhou/Documents/Fidgeting app/unity/FidgetingApp/ArtSource/ModelPipeline/magnetic-slide-tile/evidence/10-export/rev-010/package/magnetic-slide-tile-render-r010.glb",
+      "sha256": "ca174b340c87e58a6b76aa367baf910650546bc69c5f2794c52aff3268da1100",
+      "bytes": 12200332
+    },
+    "collisionFbx": {
+      "path": "/Users/jiawei.zhou/Documents/Fidgeting app/unity/FidgetingApp/ArtSource/ModelPipeline/magnetic-slide-tile/evidence/10-export/rev-010/package/magnetic-slide-tile-collision-r010.fbx",
+      "sha256": "893ccfda54f7b15a3648e5997291340ec1bb027ed0492d5f136eb140ee674813",
+      "bytes": 27292
+    },
+    "hierarchyMotion": {
+      "path": "/Users/jiawei.zhou/Documents/Fidgeting app/unity/FidgetingApp/ArtSource/ModelPipeline/magnetic-slide-tile/evidence/10-export/rev-010/package/hierarchy-motion-metadata-r010.json",
+      "sha256": "d2287b515bc68864884ced5585d67a2fb7adcd77c9945deff0598641adb0e76f",
+      "bytes": 12967
+    }
+  },
+  "glbCounts": {
+    "nodes": 20,
+    "meshes": 8,
+    "materials": 7,
+    "textures": 4,
+    "images": 4,
+    "animations": 0
+  },
+  "glbTransportAudit": {
+    "images": {
+      "lower-albedo": {
+        "embeddedSha256": "968c1e87ca2d5ea7c8fc57106e42bcd09dc95395fac7dd3be569e580ea8850eb",
+        "sourceSha256": "968c1e87ca2d5ea7c8fc57106e42bcd09dc95395fac7dd3be569e580ea8850eb",
+        "dimensions": [
+          620,
+          1000
+        ],
+        "mode": "RGBA",
+        "pixelIdentity": true,
+        "transport": "byte-decoded RGBA identity"
+      },
+      "lower-roughness": {
+        "embeddedSha256": "8e1e2df8191ca735fdddd68df76227b9a2afd91bdecf070f8e3dd8e9de95952b",
+        "sourceSha256": "ca2697560a2e57685a71c423f15f70a72ebb47c93c53cae0e3a8dae0b3248245",
+        "dimensions": [
+          620,
+          1000
+        ],
+        "mode": "RGBA",
+        "pixelIdentity": true,
+        "transport": "glTF metallicRoughness: source roughness preserved exactly in G; R/B/A=255"
+      },
+      "upper-albedo": {
+        "embeddedSha256": "c0e9305d475cd2c591efc8a833a0aafb1aef4ccc437d84a3417674e6d1b453a5",
+        "sourceSha256": "c0e9305d475cd2c591efc8a833a0aafb1aef4ccc437d84a3417674e6d1b453a5",
+        "dimensions": [
+          620,
+          1000
+        ],
+        "mode": "RGBA",
+        "pixelIdentity": true,
+        "transport": "byte-decoded RGBA identity"
+      },
+      "upper-roughness": {
+        "embeddedSha256": "b68762a8cae838db6476dd7feb64ba092f4d0069da847f082dc9524a627298ab",
+        "sourceSha256": "854f1dbc393585ff9b88f808c1a46a35b091088ac8b83894763f502876e3df6a",
+        "dimensions": [
+          620,
+          1000
+        ],
+        "mode": "RGBA",
+        "pixelIdentity": true,
+        "transport": "glTF metallicRoughness: source roughness preserved exactly in G; R/B/A=255"
+      }
+    },
+    "rootExtras": {
+      "governing_contract_sha256": "5aee71817c2c033ed92b770126ba0ecb6d79c2f032d786743b214b79078a47ea",
+      "source_rev5_builder_sha256": "f04579dbc8f1e92dbbcca9a3b17cd050558c467e2c82f8b345d690ebc68fde73",
+      "reuse_plan_sha256": "c51ae42560eb488d41eb457e851e377da056f98d845fbef2cf829db5cc89f316",
+      "mechanism_contract_sha256": "9cd7a08f34d7d8dfc3c6f89f6c80a5c5c2dcae48bc0d5c54ebf455a0727ea571",
+      "gate05_source_sha256": "f587be803cf98e134f173e961fe4e096708f08916af51d971b0ef381d51c11a2",
+      "geometry_digest": "2fcf6d2b4344511bc6b86ce940a927576f9cdb4988f4022959a3372f4d3c1952",
+      "endpoint_interlock": "0<=s<sMax:theta=0;s=sMax:theta=0..360;theta!=0:slide locked",
+      "legal_pose_ids": "closed,max-open-0,max-open-12,max-open-36,max-open-360",
+      "prohibited_pose": "mid-slide rotation",
+      "interactive_view": "technical-exploded-endpoint-12deg",
+      "gate10Revision": 10,
+      "sourceGate09Revision": 9,
+      "sourceGate09ApprovalExactWording": "继续",
+      "mechanismContractSha256": "9cd7a08f34d7d8dfc3c6f89f6c80a5c5c2dcae48bc0d5c54ebf455a0727ea571",
+      "unityPortabilityContractSha256": "d172c64ce56f89170b9f072e8efe61c3c7e8277235228bac957229ea319ffd13",
+      "canonicalGeometryDigest": "2fcf6d2b4344511bc6b86ce940a927576f9cdb4988f4022959a3372f4d3c1952",
+      "approvedMaterialSourceSha256": "8538b4142c9d6b5c89e30e3f915f99a33dfff8eab158db449278d9cca605b10c",
+      "units": "millimeters-authoring; export conversion to meters",
+      "defaultPose": "closed-zero-motion",
+      "linearVelocityMmPerSecond": 0.0,
+      "angularVelocityDegreesPerSecond": 0.0,
+      "selfMotion": false,
+      "animationClips": 0,
+      "maximumTravelMm": 18.076433121019107,
+      "rotationLockedBelowSMax": true,
+      "detentCount": 30,
+      "detentStepDegrees": 12,
+      "rotationAtSMaxDegrees": 360,
+      "slideLockedAtNonzeroAngle": true,
+      "returnRule": "align theta to 0 then close",
+      "provisionalDimensions": "50x31x12 mm user-authorized-provisional-not-production-measured",
+      "lodPolicy": "single approved model; no unapproved LOD pair",
+      "minimumOverlapDiskRepresentation": "non-rendering-empty-only"
+    },
+    "checks": {
+      "fourImages": true,
+      "pixelIdentity": true,
+      "nativeNpot": true,
+      "clampSampler": true,
+      "geometryMetadata": true,
+      "endpointMetadata": true,
+      "noAnimations": true
+    },
+    "pass": true
+  },
+  "materialPartitions": {
+    "topArtworkOnly": true,
+    "sideArtworkTriangles": 0,
+    "undersideArtworkTriangles": 0,
+    "upperLowerMasksIndependent": true,
+    "addressMode": "CLAMP_TO_EDGE",
+    "partitions": {
+      "BottomExterior": {
+        "slots": [
+          "M07R13_LowerTopArtwork",
+          "M07R13_SolidDarkSide",
+          "M07R13_PolishedBrightSilverRim",
+          "M07R13_NeutralUnderside"
+        ],
+        "triangleCounts": [
+          511,
+          6156,
+          4104,
+          7693
+        ],
+        "topArtworkTriangles": 511,
+        "sideArtworkTriangles": 0,
+        "undersideArtworkTriangles": 0,
+        "silverRimTriangles": 4104
+      },
+      "MovingTopBody": {
+        "slots": [
+          "M07R13_UpperTopArtwork",
+          "M07R13_SolidDarkSide",
+          "M07R13_PolishedBrightSilverRim",
+          "M07R13_NeutralUnderside"
+        ],
+        "triangleCounts": [
+          511,
+          18492,
+          4104,
+          28253
+        ],
+        "topArtworkTriangles": 511,
+        "sideArtworkTriangles": 0,
+        "undersideArtworkTriangles": 0,
+        "silverRimTriangles": 4104
+      }
+    }
+  },
+  "endpointInterlock": {
+    "maximumTravelMm": 18.076433121019107,
+    "rotationLockedBelowSMax": true,
+    "rotationAtSMax": {
+      "degrees": 360,
+      "detents": 30,
+      "stepDegrees": 12
+    },
+    "slideLockedAtNonzeroAngle": true,
+    "returnSequence": [
+      "align theta to 0 degrees",
+      "close slide"
+    ],
+    "minimumOverlapDisk": "non-rendering Empty constraint"
+  },
+  "defaultState": {
+    "pose": "closed",
+    "slideMm": 0,
+    "angleDegrees": 0,
+    "linearVelocityMmPerSecond": 0,
+    "angularVelocityDegreesPerSecond": 0,
+    "animationClips": 0
+  },
+  "unityImportContract": {
+    "path": "unity-import-contract-r010.json",
+    "sha256": "f1e086331285b4cea38cc73d90f2ceacedb8e62faf795f5c1c7361dff0793ae1",
+    "astcApplied": false
+  },
+  "files": {
+    "environment/cubemap/cubemap-contract.json": {
+      "sha256": "14dc65a7f6e2ea036e6a0c9ba640cb04c46b5ab28e4a4f88110cb643a8608c8e",
+      "bytes": 1901
+    },
+    "environment/cubemap/negative-x.exr": {
+      "sha256": "77354b794e7dba2fb7149766ef2962a09d8ca8486a3a60404421344f72809882",
+      "bytes": 2688276
+    },
+    "environment/cubemap/negative-y.exr": {
+      "sha256": "eeb99a271ea2e70a102395f314fb80a4c20d7980decb6426a94eb9574145615d",
+      "bytes": 2959339
+    },
+    "environment/cubemap/negative-z.exr": {
+      "sha256": "a805391a7161d718f55e4b13fc8b053eca3f9eb5c97ab290ae1208429a634875",
+      "bytes": 2964710
+    },
+    "environment/cubemap/positive-x.exr": {
+      "sha256": "59edaf2b250d962e196f91a2df6aa36f40a7f4273f588748459648574b7f73c5",
+      "bytes": 2976526
+    },
+    "environment/cubemap/positive-y.exr": {
+      "sha256": "a826165174802c8573f80bc57654858820a7184a520bc53713e556c8ba292cc9",
+      "bytes": 3012386
+    },
+    "environment/cubemap/positive-z.exr": {
+      "sha256": "8ba2447c400ae53111b3089dd35d892d71416ca99e6f8612d6ddaf31f8f9c572",
+      "bytes": 2794890
+    },
+    "environment/neutral-control-r009.exr": {
+      "sha256": "a5b310c8c7fc17bda4110adb80e68913f1b5d623ffe01d935574813b80d1a872",
+      "bytes": 8120546
+    },
+    "environment/target-shipping-studio-r009-preview.png": {
+      "sha256": "09f6da7b201c03e0b116029d02ceb57efefb1b1600f9e905684a557d82263281",
+      "bytes": 376681
+    },
+    "environment/target-shipping-studio-r009.exr": {
+      "sha256": "2fe029beb803d7f9a26d229a1969914f210a7b5c4f311bfe9878cb52c7d73d13",
+      "bytes": 21680897
+    },
+    "environment/unity-portability-contract-r009.json": {
+      "sha256": "d172c64ce56f89170b9f072e8efe61c3c7e8277235228bac957229ea319ffd13",
+      "bytes": 15920
+    },
+    "hierarchy-motion-metadata-r010.json": {
+      "sha256": "d2287b515bc68864884ced5585d67a2fb7adcd77c9945deff0598641adb0e76f",
+      "bytes": 12967
+    },
+    "magnetic-slide-tile-authoritative-r010.blend": {
+      "sha256": "68a1173faa8bc9023ba51a048f50c4a622898a8af72fc75fae6b087b113af11a",
+      "bytes": 1430724
+    },
+    "magnetic-slide-tile-authoritative-r010.blend1": {
+      "sha256": "db9df16b899ce99f2375c31c8af7523c80fda1514b5feb11e8171ee36b6db884",
+      "bytes": 1431069
+    },
+    "magnetic-slide-tile-collision-r010.fbx": {
+      "sha256": "893ccfda54f7b15a3648e5997291340ec1bb027ed0492d5f136eb140ee674813",
+      "bytes": 27292
+    },
+    "magnetic-slide-tile-render-r010.fbx": {
+      "sha256": "816ac0a268e06958331fe3a49d5ce5ef234dcb1ae84660253e70a708c4db1222",
+      "bytes": 8779708
+    },
+    "magnetic-slide-tile-render-r010.glb": {
+      "sha256": "ca174b340c87e58a6b76aa367baf910650546bc69c5f2794c52aff3268da1100",
+      "bytes": 12200332
+    },
+    "textures/lower-albedo.png": {
+      "sha256": "968c1e87ca2d5ea7c8fc57106e42bcd09dc95395fac7dd3be569e580ea8850eb",
+      "bytes": 195875
+    },
+    "textures/lower-artwork-mask.png": {
+      "sha256": "7bf5921f469a217b850ff2ea94dc5ae6c251091b8de60bd81c1b88ec42dfa7c2",
+      "bytes": 22609
+    },
+    "textures/lower-maskmap.png": {
+      "sha256": "02899afebda3b2d508a229725e6eb08860f81e2d0b6a27b45cef87fd93893970",
+      "bytes": 106739
+    },
+    "textures/lower-normal.png": {
+      "sha256": "b700dc78abc6db8b2a491d3faf7e4ef0e07767bda0257ad0ca0c7225d5cebb75",
+      "bytes": 3835
+    },
+    "textures/lower-roughness.png": {
+      "sha256": "ca2697560a2e57685a71c423f15f70a72ebb47c93c53cae0e3a8dae0b3248245",
+      "bytes": 72142
+    },
+    "textures/top-perimeter-mask.png": {
+      "sha256": "2179bf26210994c8b3d279337bf6ad0f4beaee3c7285ae97d1cd888db2bd64fc",
+      "bytes": 5632
+    },
+    "textures/upper-albedo.png": {
+      "sha256": "c0e9305d475cd2c591efc8a833a0aafb1aef4ccc437d84a3417674e6d1b453a5",
+      "bytes": 207914
+    },
+    "textures/upper-artwork-mask.png": {
+      "sha256": "8250df70d2286849db353862283b0d3db9c66e1ac92bed3795bcb5377a431c36",
+      "bytes": 20641
+    },
+    "textures/upper-maskmap.png": {
+      "sha256": "312609ae272c3634337e9af5f6e2b84819025ddb2529cfc03b5ef533b0d790d1",
+      "bytes": 116847
+    },
+    "textures/upper-normal.png": {
+      "sha256": "b700dc78abc6db8b2a491d3faf7e4ef0e07767bda0257ad0ca0c7225d5cebb75",
+      "bytes": 3835
+    },
+    "textures/upper-roughness.png": {
+      "sha256": "854f1dbc393585ff9b88f808c1a46a35b091088ac8b83894763f502876e3df6a",
+      "bytes": 80494
+    },
+    "unity-import-contract-r010.json": {
+      "sha256": "f1e086331285b4cea38cc73d90f2ceacedb8e62faf795f5c1c7361dff0793ae1",
+      "bytes": 2216
+    }
+  },
+  "reviewBoard": {
+    "path": "/Users/jiawei.zhou/Documents/Fidgeting app/unity/FidgetingApp/ArtSource/ModelPipeline/magnetic-slide-tile/evidence/10-export/rev-010/gate10-r010-export-review-board.png",
+    "sha256": "a539df661e4debd26d21abf15d09ad1ea28182bb7df980ce05bd024ce8e7c934",
+    "dimensions": [
+      1840,
+      800
+    ]
+  },
+  "checks": {
+    "authoritativeFormats": true,
+    "sourceHashesCurrent": true,
+    "geometryPreserved": true,
+    "materialStatePreserved": true,
+    "uvStatePreserved": true,
+    "fbxGlbReimport": true,
+    "collisionSeparate": true,
+    "glbPixelIdentity": true,
+    "endpointInterlock": true,
+    "closedNoAnimation": true,
+    "environmentCurrent": true,
+    "astcPlannedNotApplied": true,
+    "scope": true
+  },
+  "pass": true
+}

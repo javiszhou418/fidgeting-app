@@ -1,0 +1,133 @@
+{
+  "schema": "premium-display-case.gate02.v3-proportion-analysis/1",
+  "spec_sha256": "f20860a226a388a24f20837fa57f3a2d171e85a99ccc3d065f43bf83ebb5fc41",
+  "evidence_class": "recommended_start",
+  "value_state": "provisional",
+  "geometry_truth": false,
+  "method": "luminance thresholds on the unannotated concept renders; frame = rows/cols with >=25% pixels above L45, bottom rim separated from the floor reflection by the dark gap row; seam = first dark run followed by >=40px bright run on the centre column; pocket = dark (<L30) region in the main bay; hub = centroid of pixels >L175.",
+  "images": [
+    {
+      "image": "v3-01-front-cmf-gold-silver.png",
+      "sha256": "65d506290af9c0fe73e60a0c0d3eab4420e6b7da60a266be597e34a62a602769",
+      "pixel_size": [
+        1000,
+        1573
+      ],
+      "outer_frame_px": {
+        "x0": 92,
+        "x1": 913,
+        "y0": 55,
+        "y1": 1446,
+        "w": 821,
+        "h": 1391
+      },
+      "ratios": {
+        "case_width_over_height": 0.5902,
+        "header_seam_from_top": 0.3149,
+        "main_bay_start_from_top": 0.3422,
+        "spinner_pocket_span_over_width": 0.8015,
+        "spinner_pocket_top_from_top": 0.4543,
+        "spinner_pocket_bottom_from_top": 0.8462,
+        "spinner_center_x_from_left": 0.4836,
+        "spinner_center_from_top": 0.637
+      },
+      "raw_px": {
+        "header_seam_y": 493,
+        "main_bay_start_y": 531,
+        "pocket": [
+          174,
+          832,
+          687,
+          1232
+        ],
+        "hub": [
+          489.0,
+          941.1
+        ]
+      }
+    },
+    {
+      "image": "v3-user-chat-front-650x1024.jpg",
+      "sha256": "ee3ffcb397c84ae821927257c8bc667f8d590116c491d663b0153baa206f4052",
+      "pixel_size": [
+        650,
+        1024
+      ],
+      "outer_frame_px": {
+        "x0": 60,
+        "x1": 593,
+        "y0": 36,
+        "y1": 941,
+        "w": 533,
+        "h": 905
+      },
+      "ratios": {
+        "case_width_over_height": 0.589,
+        "header_seam_from_top": 0.3149,
+        "main_bay_start_from_top": 0.3425,
+        "spinner_pocket_span_over_width": 0.803,
+        "spinner_pocket_top_from_top": 0.4552,
+        "spinner_pocket_bottom_from_top": 0.8464,
+        "spinner_center_x_from_left": 0.4834,
+        "spinner_center_from_top": 0.6367
+      },
+      "raw_px": {
+        "header_seam_y": 321,
+        "main_bay_start_y": 346,
+        "pocket": [
+          113,
+          541,
+          448,
+          802
+        ],
+        "hub": [
+          317.7,
+          612.2
+        ]
+      }
+    }
+  ],
+  "spec_comparison": [
+    {
+      "spec_id": "visual.case_width_over_height",
+      "spec_value_from_annotated_416x654": 0.562,
+      "clean_1000x1573": 0.5902,
+      "user_chat_650x1024": 0.589,
+      "mean_clean": 0.5896,
+      "within_spec_tolerance": false,
+      "spec_tolerance": 0.006
+    },
+    {
+      "spec_id": "visual.header_split_from_top",
+      "spec_value_from_annotated_416x654": 0.321,
+      "clean_1000x1573": 0.3149,
+      "user_chat_650x1024": 0.3149,
+      "mean_clean": 0.3149,
+      "within_spec_tolerance": false,
+      "spec_tolerance": 0.006
+    },
+    {
+      "spec_id": "visual.spinner_center_x_from_left",
+      "spec_value_from_annotated_416x654": 0.5,
+      "clean_1000x1573": 0.4836,
+      "user_chat_650x1024": 0.4834,
+      "mean_clean": 0.4835,
+      "within_spec_tolerance": false,
+      "spec_tolerance": 0.004
+    },
+    {
+      "spec_id": "visual.spinner_center_from_top",
+      "spec_value_from_annotated_416x654": 0.65,
+      "clean_1000x1573": 0.637,
+      "user_chat_650x1024": 0.6367,
+      "mean_clean": 0.6369,
+      "within_spec_tolerance": false,
+      "spec_tolerance": 0.008
+    }
+  ],
+  "notes": [
+    "The spec's 0.562 W/H came from the annotated 416x654 screenshot. Both clean images read ~0.58-0.59; the annotated estimate is superseded for the contract, which adopts the mean of the two clean readings.",
+    "The dark pocket span (~0.80W) is the recess outline, not the spinner tips. Tip-to-tip span is read visually at ~0.73-0.76W; the spec's 0.762W stays as the contract start value.",
+    "Pixel ratios of an AI image never become `measured`. Physical size enters only through the caller-owned spinner source model (see spinner-source-measurement.json)."
+  ]
+}

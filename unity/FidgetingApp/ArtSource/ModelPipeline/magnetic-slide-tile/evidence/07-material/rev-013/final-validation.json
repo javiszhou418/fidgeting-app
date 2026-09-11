@@ -1,0 +1,120 @@
+{
+  "schemaVersion": 1,
+  "modelId": "magnetic-slide-tile",
+  "gate": "07-material",
+  "revision": 13,
+  "pass": true,
+  "passScope": "All magnetic-slide Gate 07 rev 13 requirements pass. The repository-wide Node suite has one unrelated concurrent Premium Display Case state assertion.",
+  "contractSha256": "9cd7a08f34d7d8dfc3c6f89f6c80a5c5c2dcae48bc0d5c54ebf455a0727ea571",
+  "gate06SourceSha256": "a2aaf83a8e46b013f0ba2e2d859732f20f29bd8cc1dd032e155269cb19ce0ef4",
+  "geometryDigest": "2fcf6d2b4344511bc6b86ce940a927576f9cdb4988f4022959a3372f4d3c1952",
+  "verification": {
+    "rejectionArchive": {
+      "pass": true,
+      "sha256": "a7859940ee1d956755c07a810bc5aeccee75136da092cb8f1891bf9fe6dc8b1b"
+    },
+    "rootCause": {
+      "pass": true,
+      "category": "Blender per-polygon material-index mutation",
+      "historicalGate08SlotZeroFaces": {
+        "BottomExterior": 8723,
+        "MovingTopBody": 10783
+      }
+    },
+    "blenderBuild": {
+      "pass": true,
+      "sideWallArtworkFaces": 0,
+      "undersideArtworkFaces": 0,
+      "geometryChanged": false
+    },
+    "transport": {
+      "pass": true,
+      "formats": [
+        "Blend",
+        "GLB re-import",
+        "FBX re-import"
+      ],
+      "sideWallArtworkFaces": 0,
+      "undersideArtworkFaces": 0,
+      "nonCapTexturedFaces": 0,
+      "topArtworkTrianglesPerPiece": 511,
+      "glbSampler": {
+        "wrapS": 33071,
+        "wrapT": 33071,
+        "mode": "CLAMP_TO_EDGE"
+      }
+    },
+    "motion": {
+      "pass": true,
+      "denseSamples": 4359,
+      "blockedRotationAttempts": 4000,
+      "blockedSlideAttempts": 359,
+      "fixedAxisVarianceMm": 0,
+      "surfaceIntersections": 0,
+      "minimumOverlapMisses": 0,
+      "pitchRollRadians": 0
+    },
+    "recording": {
+      "pass": true,
+      "codec": "H.264",
+      "dimensions": [
+        960,
+        720
+      ],
+      "fps": 30,
+      "encodedFrames": 180,
+      "durationSeconds": 6,
+      "fullDecode": "pass"
+    },
+    "focusedNode": {
+      "pass": 6,
+      "total": 6,
+      "junitXml": "focused-node-results.xml",
+      "xmlSyntax": "pass"
+    },
+    "fullNode": {
+      "pass": 204,
+      "total": 205,
+      "globalSuitePass": false,
+      "unrelatedFailures": [
+        "Premium Display Case records Gate 12 rev 4 and preserves prior revisions: current concurrent pipeline is Gate 04 rev 23 draft, while the old test expects Gate 12 approved."
+      ]
+    },
+    "pipeline": {
+      "modelErrors": 0,
+      "modelMissingFiles": 0,
+      "modelUnhashed": 0,
+      "allPipelineSchemaErrors": 0,
+      "allPipelineMissingFiles": 0,
+      "allPipelineUnhashed": 0
+    },
+    "browser": {
+      "pass": true,
+      "desktop": "pass",
+      "mobile390x844": "pass",
+      "glbLoadOrbitZoom": "pass",
+      "videoPlayback": "pass",
+      "imageModal": "pass",
+      "reloadPersistence": "pass",
+      "directDeepLink": "pass",
+      "runtimeExceptions": 0,
+      "loadingFailures": 0
+    },
+    "syntax": {
+      "python": "pass",
+      "javascript": "pass",
+      "xml": "pass",
+      "focusedDiff": "pass"
+    }
+  },
+  "scope": {
+    "gate08Progression": false,
+    "simulator": false,
+    "finalUnity": false,
+    "build": false,
+    "install": false,
+    "phone": false
+  },
+  "status": "ready_for_review",
+  "visualApprovalPending": true
+}

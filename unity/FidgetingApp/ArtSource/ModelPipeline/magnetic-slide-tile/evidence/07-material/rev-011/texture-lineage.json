@@ -1,0 +1,216 @@
+{
+  "schemaVersion": 1,
+  "gate": "07-material",
+  "revision": 11,
+  "appearanceAuthority": "original-user-blood-red-product-imagery-only",
+  "sourceMasks": {
+    "upper": {
+      "path": "/Users/jiawei.zhou/Documents/Fidgeting app/unity/FidgetingApp/ArtSource/ModelPipeline/magnetic-slide-tile/evidence/07-material/rev-007/artwork-upper-mask.png",
+      "sha256": "8250df70d2286849db353862283b0d3db9c66e1ac92bed3795bcb5377a431c36",
+      "lineage": "clean motif r002\u2192r007"
+    },
+    "lower": {
+      "path": "/Users/jiawei.zhou/Documents/Fidgeting app/unity/FidgetingApp/ArtSource/ModelPipeline/magnetic-slide-tile/evidence/07-material/rev-010/artwork-lower-mask-r010.png",
+      "sha256": "7bf5921f469a217b850ff2ea94dc5ae6c251091b8de60bd81c1b88ec42dfa7c2",
+      "directMaskSha256": "be19e06f9d29e867bb5a92a7a6dcdc7ebb24be7138c7bf2347ec72ff17120b2d",
+      "reconstructedMaskSha256": "6c16a7d85c791e2e730fa150c4e5682e86bf17f14396b8e8021638711910cb24",
+      "lineage": "direct user frames plus labeled reconstructed occlusion"
+    },
+    "border": {
+      "path": "/Users/jiawei.zhou/Documents/Fidgeting app/unity/FidgetingApp/ArtSource/ModelPipeline/magnetic-slide-tile/evidence/07-material/rev-007/artwork-top-perimeter-border-mask.png",
+      "sha256": "2179bf26210994c8b3d279337bf6ad0f4beaee3c7285ae97d1cd888db2bd64fc",
+      "widthPx": 64
+    }
+  },
+  "outputs": {
+    "upper": {
+      "albedo": "upper-albedo.png",
+      "albedoSha256": "c0e9305d475cd2c591efc8a833a0aafb1aef4ccc437d84a3417674e6d1b453a5",
+      "roughness": "upper-roughness.png",
+      "roughnessSha256": "854f1dbc393585ff9b88f808c1a46a35b091088ac8b83894763f502876e3df6a",
+      "resolutionPx": [
+        620,
+        1000
+      ],
+      "redMean": 34.926456451416016,
+      "redStd": 40.39285659790039,
+      "blackFraction": 0.5787887096774194,
+      "microflakePixels": 1589
+    },
+    "lower": {
+      "albedo": "lower-albedo.png",
+      "albedoSha256": "968c1e87ca2d5ea7c8fc57106e42bcd09dc95395fac7dd3be569e580ea8850eb",
+      "roughness": "lower-roughness.png",
+      "roughnessSha256": "ca2697560a2e57685a71c423f15f70a72ebb47c93c53cae0e3a8dae0b3248245",
+      "resolutionPx": [
+        620,
+        1000
+      ],
+      "redMean": 37.294921875,
+      "redStd": 41.062255859375,
+      "blackFraction": 0.5498032258064516,
+      "microflakePixels": 1685
+    }
+  },
+  "independentlyReplaceable": true,
+  "lowerDirectPixels": 118942,
+  "lowerReconstructedPixels": 102670,
+  "materialValues": {
+    "silver": {
+      "baseColorLinear": [
+        0.78,
+        0.77,
+        0.74,
+        1.0
+      ],
+      "metallic": 1.0,
+      "roughness": 0.075,
+      "anisotropy": 0.16,
+      "anisotropyRotation": 0.08,
+      "coatWeight": 0.08,
+      "coatRoughness": 0.018,
+      "microScratchScale": 520.0,
+      "microScratchStrength": 0.012,
+      "emission": 0.0
+    },
+    "crystal": {
+      "deepBloodRedLinear": [
+        0.18,
+        0.003,
+        0.008,
+        1.0
+      ],
+      "darkRubyLinear": [
+        0.018,
+        0.00025,
+        0.0008,
+        1.0
+      ],
+      "highlightRubyLinear": [
+        0.72,
+        0.025,
+        0.045,
+        1.0
+      ],
+      "roughnessMinMax": [
+        0.022,
+        0.11
+      ],
+      "ior": 1.52,
+      "coatWeight": 0.48,
+      "coatRoughness": 0.035,
+      "transmissionMinMax": [
+        0.05,
+        0.3
+      ],
+      "thinFilmIor": 1.38,
+      "thinFilmThicknessNm": [
+        365.0,
+        455.0
+      ],
+      "mosaicScale": 24.0,
+      "mosaicDetailScale": 120.0,
+      "mosaicBumpStrength": 0.22,
+      "mosaicBumpDistanceMm": 0.024,
+      "motifBumpStrength": 0.16,
+      "motifDepthMm": 0.045,
+      "iridescenceMix": 0.08,
+      "emission": 0.0,
+      "microflakeScale": 85.0,
+      "microflakeThreshold": [
+        0.72,
+        0.79
+      ],
+      "microflakeColorLinear": [
+        1.0,
+        0.22,
+        0.28,
+        1.0
+      ],
+      "microflakeMix": 0.7,
+      "microflakeBumpStrength": 0.11,
+      "microflakeBumpDistanceMm": 0.006,
+      "granularVariationScale": 28.0,
+      "granularVariationMix": 0.68
+    },
+    "motif": {
+      "baseColorLinear": [
+        0.004,
+        0.0015,
+        0.0018,
+        1.0
+      ],
+      "metallic": 0.42,
+      "roughness": 0.16,
+      "coatWeight": 0.35
+    },
+    "perimeter": {
+      "baseColorLinear": [
+        0.018,
+        0.02,
+        0.024,
+        1.0
+      ],
+      "metallic": 0.24,
+      "roughness": 0.18,
+      "coatWeight": 0.55,
+      "borderMaskWidthPx": 64,
+      "outerInsetPx": 0
+    },
+    "colorManagement": {
+      "viewTransform": "AgX",
+      "look": "AgX - Medium High Contrast",
+      "exposureEv": 0.0,
+      "gamma": 1.0,
+      "whiteBalanceKelvin": 6504,
+      "whiteBalanceTint": 10
+    },
+    "chemistryClaim": "unknown; visual approximation only",
+    "lowerArtwork": {
+      "upperMaskSha256": "8250df70d2286849db353862283b0d3db9c66e1ac92bed3795bcb5377a431c36",
+      "lowerMaskSha256": "7bf5921f469a217b850ff2ea94dc5ae6c251091b8de60bd81c1b88ec42dfa7c2",
+      "hashesDistinct": true,
+      "directTraceRegionY": [
+        360,
+        965
+      ],
+      "reconstructedRegionY": [
+        0,
+        360
+      ],
+      "reconstructionClaim": "Occluded upper region uses authorized official gothic reference language only; not an exact trace of the red user variant."
+    },
+    "motionEvidence": {
+      "axisPointWorldMm": [
+        0.0,
+        -9.5,
+        0.0
+      ],
+      "axisDirection": "+Z",
+      "spinAnglesDeg": [
+        0,
+        12,
+        36
+      ],
+      "detentIndices": [
+        0,
+        1,
+        3
+      ],
+      "detentEquation": "360\u00b0 / 12\u00b0 = 30",
+      "slidePose": {
+        "translationMm": [
+          0,
+          21,
+          0
+        ],
+        "rotationDeg": 0
+      },
+      "primaryAngleDeg": 12,
+      "fortyFiveDegreePrimaryPoseUsed": false
+    }
+  },
+  "emission": 0,
+  "productionChemistryClaim": "unknown; visual approximation only",
+  "pass": true
+}

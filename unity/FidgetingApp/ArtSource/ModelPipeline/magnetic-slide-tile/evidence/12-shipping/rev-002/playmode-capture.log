@@ -1,0 +1,759 @@
+Unity Editor version:    6000.5.6f1 (0e0577a1a2ac)
+Branch:                  6000.5/staging
+Build type:              Release
+Batch mode:              YES
+macOS version:           Version 26.6 (Build 25G72)
+Darwin version:          25.6.0
+Architecture:            arm64
+Running under Rosetta:   NO
+Available memory:        65536 MB
+Date:                    2026-08-31T08:41:12Z
+[Licensing::Module] Trying to connect to existing licensing client channel...
+[Licensing::IpcConnector] Successfully connected to: "LicenseClient-jiawei.zhou" at "2026-08-31T08:41:12.255985Z"
+Launching external process: /Applications/Unity/Hub/Editor/6000.5.6f1/Unity.app/Contents/Helpers/PackageManager/Server/UnityPackageManager
+
+COMMAND LINE ARGUMENTS:
+/Applications/Unity/Hub/Editor/6000.5.6f1/Unity.app/Contents/MacOS/Unity
+-batchmode
+-projectPath
+/Users/jiawei.zhou/Documents/Fidgeting app/unity/FidgetingApp
+-executeMethod
+FidgetingApp.EDC.Editor.MagneticSlideTileGate12R002Builder.BuildAndRunPlayMode
+-logFile
+/Users/jiawei.zhou/Documents/Fidgeting app/unity/FidgetingApp/ArtSource/ModelPipeline/magnetic-slide-tile/evidence/12-shipping/rev-002/playmode-capture.log
+Successfully changed project path to: /Users/jiawei.zhou/Documents/Fidgeting app/unity/FidgetingApp
+/Users/jiawei.zhou/Documents/Fidgeting app/unity/FidgetingApp
+[UnityMemory] Configuration Parameters - Can be set up in boot.config
+    "memorysetup-temp-allocator-size-gi-baking-worker=262144"
+    "memorysetup-temp-allocator-size-gi-baking-worker=262144"
+    "memorysetup-temp-allocator-size-gi-baking-worker=262144"
+    "memorysetup-temp-allocator-size-gi-baking-worker=262144"
+    "memorysetup-temp-allocator-size-gi-baking-worker=262144"
+    "memorysetup-temp-allocator-size-nav-mesh-worker=65536"
+    "memorysetup-temp-allocator-size-audio-worker=65536"
+    "memorysetup-temp-allocator-size-cloud-worker=32768"
+    "memorysetup-allocator-temp-initial-block-size-main=262144"
+    "memorysetup-allocator-temp-initial-block-size-worker=262144"
+    "memorysetup-temp-allocator-size-preload-manager=33554432"
+    "memorysetup-temp-allocator-size-gfx=262144"
+    "memorysetup-temp-allocator-size-background-worker=32768"
+    "memorysetup-temp-allocator-size-job-worker=262144"
+    "memorysetup-bucket-allocator-granularity=16"
+    "memorysetup-bucket-allocator-bucket-count=8"
+    "memorysetup-bucket-allocator-block-size=33554432"
+    "memorysetup-bucket-allocator-block-count=8"
+    "memorysetup-main-allocator-block-size=16777216"
+    "memorysetup-thread-allocator-block-size=16777216"
+    "memorysetup-main-allocator-mimalloc-enabled=0"
+    "memorysetup-gfx-main-allocator-block-size=16777216"
+    "memorysetup-gfx-thread-allocator-block-size=16777216"
+    "memorysetup-cache-allocator-block-size=4194304"
+    "memorysetup-typetree-allocator-block-size=2097152"
+    "memorysetup-profiler-bucket-allocator-granularity=16"
+    "memorysetup-profiler-bucket-allocator-bucket-count=8"
+    "memorysetup-profiler-bucket-allocator-block-size=33554432"
+    "memorysetup-profiler-bucket-allocator-block-count=8"
+    "memorysetup-profiler-allocator-block-size=16777216"
+    "memorysetup-profiler-editor-allocator-block-size=1048576"
+    "memorysetup-temp-allocator-size-main=16777216"
+    "memorysetup-job-temp-allocator-block-size=2097152"
+    "memorysetup-job-temp-allocator-block-size-background=1048576"
+    "memorysetup-job-temp-allocator-reduction-small-platforms=262144"
+Logging is directed to a specific file, skipping project log.Player connection [8516968832]  Target information:
+
+Player connection [8516968832]  * "[IP] 172.30.215.248 [Port] 55504 [Flags] 2 [Guid] 3771552876 [EditorId] 3771552876 [Version] 1048832 [Id] OSXEditor(0,WhatnotMacBook-Pro-16-inch-2024-KDX49F6RHV) [Debug] 1 [PackageName] OSXEditor [ProjectName] Editor" 
+
+Player connection [8516968832]  * "[IP] 10.18.27.81 [Port] 55504 [Flags] 2 [Guid] 3771552876 [EditorId] 3771552876 [Version] 1048832 [Id] OSXEditor(0,WhatnotMacBook-Pro-16-inch-2024-KDX49F6RHV) [Debug] 1 [PackageName] OSXEditor [ProjectName] Editor" 
+
+Player connection [8516968832]  * "[IP] 7.8.30.36 [Port] 55504 [Flags] 2 [Guid] 3771552876 [EditorId] 3771552876 [Version] 1048832 [Id] OSXEditor(0,WhatnotMacBook-Pro-16-inch-2024-KDX49F6RHV) [Debug] 1 [PackageName] OSXEditor [ProjectName] Editor" 
+
+Player connection [8516968832] Host joined multi-casting on [225.0.0.222:54997]...
+Player connection [8516968832] Host joined alternative multi-casting on [225.0.0.222:34997]...
+Input System module state changed to: Initialized.
+[Physics::Module] Initialized fallback backend.
+[Physics::Module] Id: 0xdecafbad
+[Licensing::Client] Error: HandshakeResponse reported an error:
+	ResponseCode: 505
+	ResponseStatus: Unsupported protocol version '1.18.1'.
+[Licensing::Module] Error: Failed to handshake to channel: "LicenseClient-jiawei.zhou"
+[Licensing::IpcConnector] LicenseClient-jiawei.zhou channel disconnected successfully.
+[Licensing::IpcConnector] Channel LicenseClient-jiawei.zhou-6000.5.6 doesn't exist
+Launching external process: /Applications/Unity/Hub/Editor/6000.5.6f1/Unity.app/Contents/Helpers/UnityLicensingClient.app/Contents/MacOS/Unity.Licensing.Client
+[Licensing::Module] Successfully launched the LicensingClient (PId: 58808)
+[Package Manager] Connected to IPC stream "Upm-58801" after 0.1 seconds.
+[Licensing::Module] Licensing is not yet initialized.
+[Licensing::IpcConnector] Successfully connected to: "LicenseClient-jiawei.zhou-6000.5.6" at "2026-08-31T08:41:12.649223Z"
+[Licensing::Client] Handshaking with LicensingClient:
+  Version:                 1.18.1+9fbee8e
+  Session Id:              a83210d92f0846fead2a9d30444144c8
+  Correlation Id:          e8aa9f432a991560a6644b07e4386633
+  External correlation Id: 2069469084993454575
+  Machine Id:              /KH2BGG6vZf7t7D/yU/ppmcrnfI=
+[Licensing::Module] Successfully connected to LicensingClient on channel: "LicenseClient-jiawei.zhou-6000.5.6" (connect: 0.16s, validation: 0.02s, handshake: 0.19s)
+[Licensing::IpcConnector] Successfully connected to: "LicenseClient-jiawei.zhou-6000.5.6-notifications" at "2026-08-31T08:41:12.859167Z"
+[Licensing::Module] Connected to LicensingClient (PId: 58808, launch time: 0.00, total connection time: 0.37s)
+[Licensing::Module] Error: Access token is unavailable; failed to update
+[Licensing::Client] Successfully resolved entitlement details
+[Licensing::Module] License group:
+  Id: 18968260060310-UnityPersXXXX
+  Product: Unity Personal
+  Type: Assigned
+  Expiration: Unlimited
+[Licensing::Client] Successfully updated license, isAsync: True, time: 0.00
+[Licensing::Client] Successfully resolved entitlement details
+[Licensing::Module] Licensing Background thread has ended after 0.61s
+[Licensing::Module] Licensing is initialized (took 0.38s).
+[Licensing::Client] Successfully resolved entitlement details
+Library Redirect Path: Library/
+[Physics::Module] Selected backend.
+[Physics::Module] Name: PhysX
+[Physics::Module] Id: 0xf2b8ea05
+[Physics::Module] SDK Version: 4.1.2
+[Physics::Module] Integration Version: 1.0.0
+[Physics::Module] Threading Mode: Multi-Threaded
+Artifact Garbage Collection - Removed 1 unused hashed content files
+[Licensing::Client] Successfully resolved entitlement details
+Refreshing native plugins compatible for Editor in 3.97 ms, found 0 plugins.
+Initialize engine version: 6000.5.6f1 (0e0577a1a2ac)
+[Subsystems] Discovering subsystems at path /Applications/Unity/Hub/Editor/6000.5.6f1/Unity.app/Contents/Resources/UnitySubsystems
+[Subsystems] Discovering subsystems at path /Users/jiawei.zhou/Documents/Fidgeting app/unity/FidgetingApp/Assets
+GfxDevice: creating device client; kGfxThreadingModeNonThreaded
+ preferred device: Apple M4 Max (high power)
+Metal devices available: 1
+0: Apple M4 Max (high power)
+Using device Apple M4 Max (high power)
+Initializing Metal device caps: Apple M4 Max
+Mac GPU Family: 2
+Apple GPU Family: 9
+MSL Version: 3.0
+Has Float MSAA: 1
+Has Float Filtering: 1
+ReadWrite Texture Tier: 2
+Initialize mono
+Mono path[0] = '/Applications/Unity/Hub/Editor/6000.5.6f1/Unity.app/Contents/Resources/Scripting/Managed'
+Mono path[1] = '/Applications/Unity/Hub/Editor/6000.5.6f1/Unity.app/Contents/Resources/Scripting/BCLExtensions/runtime/netstandard2.1'
+Mono path[2] = '/Applications/Unity/Hub/Editor/6000.5.6f1/Unity.app/Contents/Resources/Scripting/MonoBleedingEdge/lib/mono/unityjit-macos'
+Mono config path = '/Applications/Unity/Hub/Editor/6000.5.6f1/Unity.app/Contents/Resources/Scripting/MonoBleedingEdge/etc'
+Using monoOptions --debugger-agent=transport=dt_socket,embedding=1,server=y,suspend=n,address=127.0.0.1:56801
+CodeReloadManager initialized
+ImportWorker Server TCP listen port: 0
+AcceleratorClientConnectionCallback - disconnected - :0
+Begin MonoManager ReloadAssembly
+Registering precompiled unity dll's ...
+Trying to register platform support module: /Applications/Unity/Hub/Editor/6000.5.6f1/PlaybackEngines/WebGLSupport/UnityEditor.WebGL.Extensions.dll (that doesn't exist). Retrying without overrides.
+Platform support module is not available: /Applications/Unity/Hub/Editor/6000.5.6f1/PlaybackEngines/WebGLSupport/UnityEditor.WebGL.Extensions.dll
+Register platform support module: /Applications/Unity/Hub/Editor/6000.5.6f1/PlaybackEngines/MacStandaloneSupport/UnityEditor.OSXStandalone.Extensions.dll
+Register platform support module: /Applications/Unity/Hub/Editor/6000.5.6f1/PlaybackEngines/iOSSupport/UnityEditor.iOS.Extensions.dll
+Registered in 0.000471 seconds.
+[usbmuxd] Start listen thread
+[usbmuxd] Listen thread started
+[usbmuxd] Send listen message
+Native extension for iOS target not found
+Native extension for OSXStandalone target not found
+Package Manager log level set to [2]
+ScheduleIndexationOnStartup MainProcess:False IndexOnStartup:True
+Mono: successfully reloaded assembly
+- Finished resetting the current domain, in  0.261 seconds
+Domain Reload Profiling: 536ms
+	BeginReloadAssembly (78ms)
+		CreateAndSetChildDomain (14ms)
+	RebuildCommonClasses (3ms)
+	RebuildNativeTypeToScriptingClass (10ms)
+	initialDomainReloadingComplete (28ms)
+	LoadAllAssembliesAndSetupDomain (156ms)
+		LoadAssemblies (65ms)
+		AnalyzeDomain (118ms)
+			TypeCache.Refresh (118ms)
+				TypeCache.ScanAssembly (110ms)
+	FinalizeReload (262ms)
+		SetupLoadedEditorAssemblies (0ms)
+			InitializePlatformSupportModulesInManaged (37ms)
+			BeforeProcessingInitializeOnLoad (48ms)
+			ProcessInitializeOnLoadAttributes (53ms)
+			ProcessInitializeOnLoadMethodAttributes (84ms)
+[Licensing::Client] Successfully resolved entitlement details
+[Licensing::Client] Successfully resolved entitlement details
+Application.AssetDatabase Initial Refresh Start
+[Package Manager] Restoring resolved packages state from cache
+[Licensing::Client] Successfully resolved entitlement details
+[Package Manager] Registered 62 packages:
+  Packages from [https://packages.unity.com]:
+    com.unity.ai.navigation@2.0.14 (location: /Users/jiawei.zhou/Documents/Fidgeting app/unity/FidgetingApp/Library/PackageCache/com.unity.ai.navigation@134dd6a3b97b)
+    com.unity.collab-proxy@2.13.3 (location: /Users/jiawei.zhou/Documents/Fidgeting app/unity/FidgetingApp/Library/PackageCache/com.unity.collab-proxy@4f3be89e8675)
+    com.unity.ide.rider@3.0.38 (location: /Users/jiawei.zhou/Documents/Fidgeting app/unity/FidgetingApp/Library/PackageCache/com.unity.ide.rider@1f60b3138684)
+    com.unity.ide.visualstudio@2.0.26 (location: /Users/jiawei.zhou/Documents/Fidgeting app/unity/FidgetingApp/Library/PackageCache/com.unity.ide.visualstudio@a99d56dec63f)
+    com.unity.inputsystem@1.20.0 (location: /Users/jiawei.zhou/Documents/Fidgeting app/unity/FidgetingApp/Library/PackageCache/com.unity.inputsystem@7a4e1a2a8194)
+    com.unity.timeline@1.8.12 (location: /Users/jiawei.zhou/Documents/Fidgeting app/unity/FidgetingApp/Library/PackageCache/com.unity.timeline@8cd8509afae5)
+    com.unity.visualscripting@1.9.11 (location: /Users/jiawei.zhou/Documents/Fidgeting app/unity/FidgetingApp/Library/PackageCache/com.unity.visualscripting@8bed5ad90189)
+    com.unity.ai.assistant@2.17.0-pre.1 (location: /Users/jiawei.zhou/Documents/Fidgeting app/unity/FidgetingApp/Library/PackageCache/com.unity.ai.assistant@284c75a8d208)
+    com.unity.ai.inference@2.6.1 (location: /Users/jiawei.zhou/Documents/Fidgeting app/unity/FidgetingApp/Library/PackageCache/com.unity.ai.inference@9a123aee5df7)
+    com.unity.burst@1.8.29 (location: /Users/jiawei.zhou/Documents/Fidgeting app/unity/FidgetingApp/Library/PackageCache/com.unity.burst@6bb9aca3ef38)
+    com.unity.dt.app-ui@2.1.7 (location: /Users/jiawei.zhou/Documents/Fidgeting app/unity/FidgetingApp/Library/PackageCache/com.unity.dt.app-ui@b097002a00c2)
+    com.unity.nuget.newtonsoft-json@3.2.2 (location: /Users/jiawei.zhou/Documents/Fidgeting app/unity/FidgetingApp/Library/PackageCache/com.unity.nuget.newtonsoft-json@4dfd81071c64)
+    com.unity.nuget.mono-cecil@1.11.6 (location: /Users/jiawei.zhou/Documents/Fidgeting app/unity/FidgetingApp/Library/PackageCache/com.unity.nuget.mono-cecil@ecb9724e46ff)
+    com.unity.test-framework.performance@3.5.0 (location: /Users/jiawei.zhou/Documents/Fidgeting app/unity/FidgetingApp/Library/PackageCache/com.unity.test-framework.performance@8b56083ec0f0)
+    com.unity.searcher@4.9.4 (location: /Users/jiawei.zhou/Documents/Fidgeting app/unity/FidgetingApp/Library/PackageCache/com.unity.searcher@d45a78918735)
+  Built-in packages:
+    com.unity.multiplayer.center@1.0.1 (location: /Users/jiawei.zhou/Documents/Fidgeting app/unity/FidgetingApp/Library/PackageCache/com.unity.multiplayer.center@b860850997d0)
+    com.unity.render-pipelines.universal@17.5.0 (location: /Users/jiawei.zhou/Documents/Fidgeting app/unity/FidgetingApp/Library/PackageCache/com.unity.render-pipelines.universal@73b4c4ff130e)
+    com.unity.test-framework@1.7.0 (location: /Users/jiawei.zhou/Documents/Fidgeting app/unity/FidgetingApp/Library/PackageCache/com.unity.test-framework@1405238725ab)
+    com.unity.ugui@2.5.0 (location: /Users/jiawei.zhou/Documents/Fidgeting app/unity/FidgetingApp/Library/PackageCache/com.unity.ugui@67707a67a4ab)
+    com.unity.modules.accessibility@1.0.0 (location: /Users/jiawei.zhou/Documents/Fidgeting app/unity/FidgetingApp/Library/PackageCache/com.unity.modules.accessibility)
+    com.unity.modules.adaptiveperformance@1.0.0 (location: /Users/jiawei.zhou/Documents/Fidgeting app/unity/FidgetingApp/Library/PackageCache/com.unity.modules.adaptiveperformance)
+    com.unity.modules.ai@1.0.0 (location: /Users/jiawei.zhou/Documents/Fidgeting app/unity/FidgetingApp/Library/PackageCache/com.unity.modules.ai)
+    com.unity.modules.androidjni@1.0.0 (location: /Users/jiawei.zhou/Documents/Fidgeting app/unity/FidgetingApp/Library/PackageCache/com.unity.modules.androidjni)
+    com.unity.modules.animation@1.0.0 (location: /Users/jiawei.zhou/Documents/Fidgeting app/unity/FidgetingApp/Library/PackageCache/com.unity.modules.animation)
+    com.unity.modules.assetbundle@1.0.0 (location: /Users/jiawei.zhou/Documents/Fidgeting app/unity/FidgetingApp/Library/PackageCache/com.unity.modules.assetbundle)
+    com.unity.modules.audio@1.0.0 (location: /Users/jiawei.zhou/Documents/Fidgeting app/unity/FidgetingApp/Library/PackageCache/com.unity.modules.audio)
+    com.unity.modules.cloth@1.0.0 (location: /Users/jiawei.zhou/Documents/Fidgeting app/unity/FidgetingApp/Library/PackageCache/com.unity.modules.cloth)
+    com.unity.modules.director@1.0.0 (location: /Users/jiawei.zhou/Documents/Fidgeting app/unity/FidgetingApp/Library/PackageCache/com.unity.modules.director)
+    com.unity.modules.imageconversion@1.0.0 (location: /Users/jiawei.zhou/Documents/Fidgeting app/unity/FidgetingApp/Library/PackageCache/com.unity.modules.imageconversion)
+    com.unity.modules.imgui@1.0.0 (location: /Users/jiawei.zhou/Documents/Fidgeting app/unity/FidgetingApp/Library/PackageCache/com.unity.modules.imgui)
+    com.unity.modules.jsonserialize@1.0.0 (location: /Users/jiawei.zhou/Documents/Fidgeting app/unity/FidgetingApp/Library/PackageCache/com.unity.modules.jsonserialize)
+    com.unity.modules.particlesystem@1.0.0 (location: /Users/jiawei.zhou/Documents/Fidgeting app/unity/FidgetingApp/Library/PackageCache/com.unity.modules.particlesystem)
+    com.unity.modules.physics@1.0.0 (location: /Users/jiawei.zhou/Documents/Fidgeting app/unity/FidgetingApp/Library/PackageCache/com.unity.modules.physics)
+    com.unity.modules.physics2d@1.0.0 (location: /Users/jiawei.zhou/Documents/Fidgeting app/unity/FidgetingApp/Library/PackageCache/com.unity.modules.physics2d)
+    com.unity.modules.physicscore2d@1.0.0 (location: /Users/jiawei.zhou/Documents/Fidgeting app/unity/FidgetingApp/Library/PackageCache/com.unity.modules.physicscore2d)
+    com.unity.modules.screencapture@1.0.0 (location: /Users/jiawei.zhou/Documents/Fidgeting app/unity/FidgetingApp/Library/PackageCache/com.unity.modules.screencapture)
+    com.unity.modules.terrain@1.0.0 (location: /Users/jiawei.zhou/Documents/Fidgeting app/unity/FidgetingApp/Library/PackageCache/com.unity.modules.terrain)
+    com.unity.modules.terrainphysics@1.0.0 (location: /Users/jiawei.zhou/Documents/Fidgeting app/unity/FidgetingApp/Library/PackageCache/com.unity.modules.terrainphysics)
+    com.unity.modules.tilemap@1.0.0 (location: /Users/jiawei.zhou/Documents/Fidgeting app/unity/FidgetingApp/Library/PackageCache/com.unity.modules.tilemap)
+    com.unity.modules.ui@1.0.0 (location: /Users/jiawei.zhou/Documents/Fidgeting app/unity/FidgetingApp/Library/PackageCache/com.unity.modules.ui)
+    com.unity.modules.uielements@1.0.0 (location: /Users/jiawei.zhou/Documents/Fidgeting app/unity/FidgetingApp/Library/PackageCache/com.unity.modules.uielements)
+    com.unity.modules.umbra@1.0.0 (location: /Users/jiawei.zhou/Documents/Fidgeting app/unity/FidgetingApp/Library/PackageCache/com.unity.modules.umbra)
+    com.unity.modules.unityanalytics@1.0.0 (location: /Users/jiawei.zhou/Documents/Fidgeting app/unity/FidgetingApp/Library/PackageCache/com.unity.modules.unityanalytics)
+    com.unity.modules.unitywebrequest@1.0.0 (location: /Users/jiawei.zhou/Documents/Fidgeting app/unity/FidgetingApp/Library/PackageCache/com.unity.modules.unitywebrequest)
+    com.unity.modules.unitywebrequestassetbundle@1.0.0 (location: /Users/jiawei.zhou/Documents/Fidgeting app/unity/FidgetingApp/Library/PackageCache/com.unity.modules.unitywebrequestassetbundle)
+    com.unity.modules.unitywebrequestaudio@1.0.0 (location: /Users/jiawei.zhou/Documents/Fidgeting app/unity/FidgetingApp/Library/PackageCache/com.unity.modules.unitywebrequestaudio)
+    com.unity.modules.unitywebrequesttexture@1.0.0 (location: /Users/jiawei.zhou/Documents/Fidgeting app/unity/FidgetingApp/Library/PackageCache/com.unity.modules.unitywebrequesttexture)
+    com.unity.modules.unitywebrequestwww@1.0.0 (location: /Users/jiawei.zhou/Documents/Fidgeting app/unity/FidgetingApp/Library/PackageCache/com.unity.modules.unitywebrequestwww)
+    com.unity.modules.vectorgraphics@1.0.0 (location: /Users/jiawei.zhou/Documents/Fidgeting app/unity/FidgetingApp/Library/PackageCache/com.unity.modules.vectorgraphics)
+    com.unity.modules.vehicles@1.0.0 (location: /Users/jiawei.zhou/Documents/Fidgeting app/unity/FidgetingApp/Library/PackageCache/com.unity.modules.vehicles)
+    com.unity.modules.video@1.0.0 (location: /Users/jiawei.zhou/Documents/Fidgeting app/unity/FidgetingApp/Library/PackageCache/com.unity.modules.video)
+    com.unity.modules.wind@1.0.0 (location: /Users/jiawei.zhou/Documents/Fidgeting app/unity/FidgetingApp/Library/PackageCache/com.unity.modules.wind)
+    com.unity.modules.xr@1.0.0 (location: /Users/jiawei.zhou/Documents/Fidgeting app/unity/FidgetingApp/Library/PackageCache/com.unity.modules.xr)
+    com.unity.collections@6.5.0 (location: /Users/jiawei.zhou/Documents/Fidgeting app/unity/FidgetingApp/Library/PackageCache/com.unity.collections@a43cabe808ca)
+    com.unity.2d.sprite@1.0.0 (location: /Users/jiawei.zhou/Documents/Fidgeting app/unity/FidgetingApp/Library/PackageCache/com.unity.2d.sprite@053a968eab56)
+    com.unity.mathematics@1.4.0 (location: /Users/jiawei.zhou/Documents/Fidgeting app/unity/FidgetingApp/Library/PackageCache/com.unity.mathematics@981956d94fb6)
+    com.unity.modules.subsystems@1.0.0 (location: /Users/jiawei.zhou/Documents/Fidgeting app/unity/FidgetingApp/Library/PackageCache/com.unity.modules.subsystems)
+    com.unity.modules.hierarchycore@1.0.0 (location: /Users/jiawei.zhou/Documents/Fidgeting app/unity/FidgetingApp/Library/PackageCache/com.unity.modules.hierarchycore)
+    com.unity.ext.nunit@2.1.0 (location: /Users/jiawei.zhou/Documents/Fidgeting app/unity/FidgetingApp/Library/PackageCache/com.unity.ext.nunit@44f7d31723bd)
+    com.unity.render-pipelines.core@17.5.0 (location: /Users/jiawei.zhou/Documents/Fidgeting app/unity/FidgetingApp/Library/PackageCache/com.unity.render-pipelines.core@645717f21c5f)
+    com.unity.shadergraph@17.5.0 (location: /Users/jiawei.zhou/Documents/Fidgeting app/unity/FidgetingApp/Library/PackageCache/com.unity.shadergraph@8d7376ec43ee)
+    com.unity.render-pipelines.universal-config@17.5.0 (location: /Users/jiawei.zhou/Documents/Fidgeting app/unity/FidgetingApp/Library/PackageCache/com.unity.render-pipelines.universal-config@fdda01c80fe3)
+[Subsystems] No new subsystems found in resolved package list.
+[Package Manager] Done registering packages in 0.01 seconds
+[ScriptCompilation] Requested script compilation because: AssetDatabase observed changes in script compilation related files
+info: Microsoft.Hosting.Lifetime[14]
+      Now listening on: http://unix:/tmp/ilpp.sock-82459902276d5e08e7b0a2b4f2bc76a1
+info: Microsoft.Hosting.Lifetime[0]
+      Application started. Press Ctrl+C to shut down.
+info: Microsoft.Hosting.Lifetime[0]
+      Hosting environment: Production
+info: Microsoft.Hosting.Lifetime[0]
+      Content root path: /Users/jiawei.zhou/Documents/Fidgeting app/unity/FidgetingApp
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/2 POST http://ilpp/UnityILPP.PostProcessing/Ping - application/grpc -
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[0]
+      Executing endpoint 'gRPC - /UnityILPP.PostProcessing/Ping'
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[1]
+      Executed endpoint 'gRPC - /UnityILPP.PostProcessing/Ping'
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/2 POST http://ilpp/UnityILPP.PostProcessing/Ping - 200 - application/grpc 15.5708ms
+Refreshing native plugins compatible for Editor in 3.79 ms, found 3 plugins.
+Starting: /Applications/Unity/Hub/Editor/6000.5.6f1/Unity.app/Contents/Resources/BuildPipeline/bee_backend --ipc --defer-dag-verification --dagfile="Library/Bee/900b0aE.dag" --continue-on-failure --profile="Library/Bee/backend1.traceevents" ScriptAssemblies
+WorkingDir: /Users/jiawei.zhou/Documents/Fidgeting app/unity/FidgetingApp
+DisplayProgressbar: Compiling Scripts
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/2 POST http://ilpp/UnityILPP.PostProcessing/ConfigurePostProcessors - application/grpc -
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[0]
+      Executing endpoint 'gRPC - /UnityILPP.PostProcessing/ConfigurePostProcessors'
+warn: Unity.ILPP.Runner.PostProcessingAssemblyLoadContext[0]
+      Assembly unityeditor.ios.extensions.xcode has duplicate hint path. Ignoring "/Applications/Unity/Hub/Editor/6000.5.6f1/PlaybackEngines/iOSSupport/UnityEditor.iOS.Extensions.Xcode.dll" in favor of "/Applications/Unity/Hub/Editor/6000.5.6f1/PlaybackEngines/MacStandaloneSupport/UnityEditor.iOS.Extensions.Xcode.dll"
+warn: Unity.ILPP.Runner.PostProcessingAssemblyLoadContext[0]
+      Assembly system.runtime.interopservices.windowsruntime has duplicate hint path. Ignoring "/Applications/Unity/Hub/Editor/6000.5.6f1/Unity.app/Contents/Resources/Scripting/UnityReferenceAssemblies/unity-4.8-api/Facades/System.Runtime.InteropServices.WindowsRuntime.dll" in favor of "/Applications/Unity/Hub/Editor/6000.5.6f1/Unity.app/Contents/Resources/Scripting/NetStandard/Extensions/2.0.0/System.Runtime.InteropServices.WindowsRuntime.dll"
+warn: Unity.ILPP.Runner.PostProcessingAssemblyLoadContext[0]
+      Assembly system.componentmodel.composition has duplicate hint path. Ignoring "/Applications/Unity/Hub/Editor/6000.5.6f1/Unity.app/Contents/Resources/Scripting/UnityReferenceAssemblies/unity-4.8-api/System.ComponentModel.Composition.dll" in favor of "/Applications/Unity/Hub/Editor/6000.5.6f1/Unity.app/Contents/Resources/Scripting/NetStandard/compat/2.1.0/shims/netfx/System.ComponentModel.Composition.dll"
+info: Unity.ILPP.Runner.PostProcessingAssemblyLoadContext[0]
+      Resolved Unity.Burst.Cecil, Version=0.11.6.0, Culture=neutral, PublicKeyToken=50cebf1cceb9d05e with Library/PackageCache/com.unity.burst@6bb9aca3ef38/Unity.Burst.CodeGen/Unity.Burst.Cecil.dll
+info: Unity.ILPP.Runner.PostProcessingAssemblyLoadContext[0]
+      Resolved Mono.Cecil, Version=0.11.5.0, Culture=neutral, PublicKeyToken=50cebf1cceb9d05e with Library/PackageCache/com.unity.nuget.mono-cecil@ecb9724e46ff/Mono.Cecil.dll
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[1]
+      Executed endpoint 'gRPC - /UnityILPP.PostProcessing/ConfigurePostProcessors'
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/2 POST http://ilpp/UnityILPP.PostProcessing/ConfigurePostProcessors - 200 - application/grpc 15.9329ms
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/2 POST http://ilpp/UnityILPP.PostProcessing/PostProcessAssembly - application/grpc -
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[0]
+      Executing endpoint 'gRPC - /UnityILPP.PostProcessing/PostProcessAssembly'
+info: Unity.ILPP.Runner.PostProcessingPipeline[0]
+      Processing assembly Library/Bee/artifacts/900b0aE.dag/Assembly-CSharp.dll, with 146 defines and 368 references
+info: Unity.ILPP.Runner.PostProcessingPipeline[0]
+      processors: Unity.Jobs.CodeGen.JobsILPostProcessor, zzzUnity.Burst.CodeGen.BurstILPostProcessor
+info: Unity.ILPP.Runner.PostProcessingPipeline[0]
+      running Unity.Jobs.CodeGen.JobsILPostProcessor
+info: Unity.ILPP.Runner.PostProcessingAssemblyLoadContext[0]
+      Resolved Unity.Collections, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null with Library/Bee/artifacts/900b0aE.dag/Unity.Collections.dll
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/2 POST http://ilpp/UnityILPP.PostProcessing/PostProcessAssembly - application/grpc -
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[0]
+      Executing endpoint 'gRPC - /UnityILPP.PostProcessing/PostProcessAssembly'
+info: Unity.ILPP.Runner.PostProcessingPipeline[0]
+      Processing assembly Library/Bee/artifacts/900b0aE.dag/Assembly-CSharp-Editor.dll, with 144 defines and 395 references
+info: Unity.ILPP.Runner.PostProcessingPipeline[0]
+      processors: Unity.Jobs.CodeGen.JobsILPostProcessor, zzzUnity.Burst.CodeGen.BurstILPostProcessor
+info: Unity.ILPP.Runner.PostProcessingPipeline[0]
+      running Unity.Jobs.CodeGen.JobsILPostProcessor
+info: Unity.ILPP.Runner.PostProcessingAssemblyLoadContext[0]
+      Resolved UnityEditor.CoreModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null with /Applications/Unity/Hub/Editor/6000.5.6f1/Unity.app/Contents/Resources/Scripting/Managed/UnityEngine/UnityEditor.CoreModule.dll
+info: Unity.ILPP.Runner.PostProcessingAssemblyLoadContext[0]
+      Resolved UnityEngine.CoreModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null with /Applications/Unity/Hub/Editor/6000.5.6f1/Unity.app/Contents/Resources/Scripting/Managed/UnityEngine/UnityEngine.CoreModule.dll
+info: Unity.ILPP.Runner.PostProcessingAssemblyLoadContext[0]
+      Resolved Unity.Scripting, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null with /Applications/Unity/Hub/Editor/6000.5.6f1/Unity.app/Contents/Resources/Scripting/Managed/UnityEngine/Unity.Scripting.dll
+info: Unity.ILPP.Runner.PostProcessingPipeline[0]
+      running zzzUnity.Burst.CodeGen.BurstILPostProcessor
+info: Unity.ILPP.Runner.PostProcessingPipeline[0]
+      running zzzUnity.Burst.CodeGen.BurstILPostProcessor
+info: Unity.ILPP.Runner.PostProcessingAssemblyLoadContext[0]
+      Resolved Unity.Burst.Cecil.Rocks, Version=0.11.6.0, Culture=neutral, PublicKeyToken=50cebf1cceb9d05e with Library/PackageCache/com.unity.burst@6bb9aca3ef38/Unity.Burst.CodeGen/Unity.Burst.Cecil.Rocks.dll
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[1]
+      Executed endpoint 'gRPC - /UnityILPP.PostProcessing/PostProcessAssembly'
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/2 POST http://ilpp/UnityILPP.PostProcessing/PostProcessAssembly - 200 - application/grpc 332.4757ms
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[1]
+      Executed endpoint 'gRPC - /UnityILPP.PostProcessing/PostProcessAssembly'
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/2 POST http://ilpp/UnityILPP.PostProcessing/PostProcessAssembly - 200 - application/grpc 341.6210ms
+ExitCode: 0 Duration: 1s347ms
+[1077/1452  0s] ILPP-Configuration Library/ilpp-configuration.nevergeneratedoutput
+[1444/1452  0s] Csc Library/Bee/artifacts/900b0aE.dag/Assembly-CSharp.dll (+2 others)
+Assets/Scripts/Product/ProductAppearanceCustomization.cs(910,29): warning CS0108: 'ProductStickerPresenter.DestroyObject(Object)' hides inherited member 'Object.DestroyObject(Object)'. Use the new keyword if hiding was intended.
+Assets/Scripts/Product/SpinnerGroundingStage.cs(162,17): warning CS0618: 'FindObjectsSortMode' is obsolete: 'FindObjectsSortMode has been deprecated. Use the FindObjectsByType overloads that do not take a FindObjectsSortMode parameter.'
+Assets/Scripts/Product/SpinnerGroundingStage.cs(160,34): warning CS0618: 'Object.FindObjectsByType<T>(FindObjectsInactive, FindObjectsSortMode)' is obsolete: 'FindObjectsByType with FindObjectsSortMode parameter has been deprecated. Use FindObjectsByType<T>() or FindObjectsByType<T>(FindObjectsInactive) instead. InstanceID will be replaced in the future with EntityId and previous sort order cannot be maintained.'
+Assets/Scripts/Product/SpinnerImageBasedLightingController.cs(708,17): warning CS0618: 'FindObjectsSortMode' is obsolete: 'FindObjectsSortMode has been deprecated. Use the FindObjectsByType overloads that do not take a FindObjectsSortMode parameter.'
+Assets/Scripts/Product/SpinnerImageBasedLightingController.cs(706,40): warning CS0618: 'Object.FindObjectsByType<T>(FindObjectsInactive, FindObjectsSortMode)' is obsolete: 'FindObjectsByType with FindObjectsSortMode parameter has been deprecated. Use FindObjectsByType<T>() or FindObjectsByType<T>(FindObjectsInactive) instead. InstanceID will be replaced in the future with EntityId and previous sort order cannot be maintained.'
+Assets/Scripts/Product/SpinnerImageBasedLightingController.cs(988,17): warning CS0618: 'FindObjectsSortMode' is obsolete: 'FindObjectsSortMode has been deprecated. Use the FindObjectsByType overloads that do not take a FindObjectsSortMode parameter.'
+Assets/Scripts/Product/SpinnerImageBasedLightingController.cs(986,30): warning CS0618: 'Object.FindObjectsByType<T>(FindObjectsInactive, FindObjectsSortMode)' is obsolete: 'FindObjectsByType with FindObjectsSortMode parameter has been deprecated. Use FindObjectsByType<T>() or FindObjectsByType<T>(FindObjectsInactive) instead. InstanceID will be replaced in the future with EntityId and previous sort order cannot be maintained.'
+Assets/Scripts/Product/SpinnerEnvironmentPresenter.cs(1914,17): warning CS0618: 'FindObjectsSortMode' is obsolete: 'FindObjectsSortMode has been deprecated. Use the FindObjectsByType overloads that do not take a FindObjectsSortMode parameter.'
+Assets/Scripts/Product/SpinnerEnvironmentPresenter.cs(1912,43): warning CS0618: 'Object.FindObjectsByType<T>(FindObjectsInactive, FindObjectsSortMode)' is obsolete: 'FindObjectsByType with FindObjectsSortMode parameter has been deprecated. Use FindObjectsByType<T>() or FindObjectsByType<T>(FindObjectsInactive) instead. InstanceID will be replaced in the future with EntityId and previous sort order cannot be maintained.'
+[1446/1452  0s] ILPostProcess Library/Bee/artifacts/900b0aE.dag/post-processed/Assembly-CSharp.dll (+pdb)
+Processing assembly Library/Bee/artifacts/900b0aE.dag/Assembly-CSharp.dll, with 146 defines and 368 references
+processors: Unity.Jobs.CodeGen.JobsILPostProcessor, zzzUnity.Burst.CodeGen.BurstILPostProcessor
+running Unity.Jobs.CodeGen.JobsILPostProcessor
+running zzzUnity.Burst.CodeGen.BurstILPostProcessor
+[1447/1452  0s] ILPostProcess Library/Bee/artifacts/900b0aE.dag/post-processed/Assembly-CSharp-Editor.dll (+pdb)
+Processing assembly Library/Bee/artifacts/900b0aE.dag/Assembly-CSharp-Editor.dll, with 144 defines and 395 references
+processors: Unity.Jobs.CodeGen.JobsILPostProcessor, zzzUnity.Burst.CodeGen.BurstILPostProcessor
+running Unity.Jobs.CodeGen.JobsILPostProcessor
+running zzzUnity.Burst.CodeGen.BurstILPostProcessor
+[1450/1452  0s] CopyFiles Library/ScriptAssemblies/Assembly-CSharp.pdb
+[1451/1452  0s] CopyFiles Library/ScriptAssemblies/Assembly-CSharp.dll
+*** Tundra build success (1.33 seconds), 6 items updated, 1452 evaluated
+Assets/Scripts/Product/ProductAppearanceCustomization.cs(910,29): warning CS0108: 'ProductStickerPresenter.DestroyObject(Object)' hides inherited member 'Object.DestroyObject(Object)'. Use the new keyword if hiding was intended.
+Assets/Scripts/Product/SpinnerGroundingStage.cs(162,17): warning CS0618: 'FindObjectsSortMode' is obsolete: 'FindObjectsSortMode has been deprecated. Use the FindObjectsByType overloads that do not take a FindObjectsSortMode parameter.'
+Assets/Scripts/Product/SpinnerGroundingStage.cs(160,34): warning CS0618: 'Object.FindObjectsByType<T>(FindObjectsInactive, FindObjectsSortMode)' is obsolete: 'FindObjectsByType with FindObjectsSortMode parameter has been deprecated. Use FindObjectsByType<T>() or FindObjectsByType<T>(FindObjectsInactive) instead. InstanceID will be replaced in the future with EntityId and previous sort order cannot be maintained.'
+Assets/Scripts/Product/SpinnerImageBasedLightingController.cs(708,17): warning CS0618: 'FindObjectsSortMode' is obsolete: 'FindObjectsSortMode has been deprecated. Use the FindObjectsByType overloads that do not take a FindObjectsSortMode parameter.'
+Assets/Scripts/Product/SpinnerImageBasedLightingController.cs(706,40): warning CS0618: 'Object.FindObjectsByType<T>(FindObjectsInactive, FindObjectsSortMode)' is obsolete: 'FindObjectsByType with FindObjectsSortMode parameter has been deprecated. Use FindObjectsByType<T>() or FindObjectsByType<T>(FindObjectsInactive) instead. InstanceID will be replaced in the future with EntityId and previous sort order cannot be maintained.'
+Assets/Scripts/Product/SpinnerImageBasedLightingController.cs(988,17): warning CS0618: 'FindObjectsSortMode' is obsolete: 'FindObjectsSortMode has been deprecated. Use the FindObjectsByType overloads that do not take a FindObjectsSortMode parameter.'
+Assets/Scripts/Product/SpinnerImageBasedLightingController.cs(986,30): warning CS0618: 'Object.FindObjectsByType<T>(FindObjectsInactive, FindObjectsSortMode)' is obsolete: 'FindObjectsByType with FindObjectsSortMode parameter has been deprecated. Use FindObjectsByType<T>() or FindObjectsByType<T>(FindObjectsInactive) instead. InstanceID will be replaced in the future with EntityId and previous sort order cannot be maintained.'
+Assets/Scripts/Product/SpinnerEnvironmentPresenter.cs(1914,17): warning CS0618: 'FindObjectsSortMode' is obsolete: 'FindObjectsSortMode has been deprecated. Use the FindObjectsByType overloads that do not take a FindObjectsSortMode parameter.'
+Assets/Scripts/Product/SpinnerEnvironmentPresenter.cs(1912,43): warning CS0618: 'Object.FindObjectsByType<T>(FindObjectsInactive, FindObjectsSortMode)' is obsolete: 'FindObjectsByType with FindObjectsSortMode parameter has been deprecated. Use FindObjectsByType<T>() or FindObjectsByType<T>(FindObjectsInactive) instead. InstanceID will be replaced in the future with EntityId and previous sort order cannot be maintained.'
+Assets/Scripts/Product/SpinnerGroundingStage.cs(160,34): warning CS0618: 'Object.FindObjectsByType<T>(FindObjectsInactive, FindObjectsSortMode)' is obsolete: 'FindObjectsByType with FindObjectsSortMode parameter has been deprecated. Use FindObjectsByType<T>() or FindObjectsByType<T>(FindObjectsInactive) instead. InstanceID will be replaced in the future with EntityId and previous sort order cannot be maintained.'
+Assets/Scripts/Product/SpinnerImageBasedLightingController.cs(708,17): warning CS0618: 'FindObjectsSortMode' is obsolete: 'FindObjectsSortMode has been deprecated. Use the FindObjectsByType overloads that do not take a FindObjectsSortMode parameter.'
+Assets/Scripts/Product/SpinnerImageBasedLightingController.cs(706,40): warning CS0618: 'Object.FindObjectsByType<T>(FindObjectsInactive, FindObjectsSortMode)' is obsolete: 'FindObjectsByType with FindObjectsSortMode parameter has been deprecated. Use FindObjectsByType<T>() or FindObjectsByType<T>(FindObjectsInactive) instead. InstanceID will be replaced in the future with EntityId and previous sort order cannot be maintained.'
+Assets/Scripts/Product/SpinnerImageBasedLightingController.cs(988,17): warning CS0618: 'FindObjectsSortMode' is obsolete: 'FindObjectsSortMode has been deprecated. Use the FindObjectsByType overloads that do not take a FindObjectsSortMode parameter.'
+Assets/Scripts/Product/SpinnerImageBasedLightingController.cs(986,30): warning CS0618: 'Object.FindObjectsByType<T>(FindObjectsInactive, FindObjectsSortMode)' is obsolete: 'FindObjectsByType with FindObjectsSortMode parameter has been deprecated. Use FindObjectsByType<T>() or FindObjectsByType<T>(FindObjectsInactive) instead. InstanceID will be replaced in the future with EntityId and previous sort order cannot be maintained.'
+Assets/Scripts/Product/SpinnerEnvironmentPresenter.cs(1914,17): warning CS0618: 'FindObjectsSortMode' is obsolete: 'FindObjectsSortMode has been deprecated. Use the FindObjectsByType overloads that do not take a FindObjectsSortMode parameter.'
+Assets/Scripts/Product/SpinnerEnvironmentPresenter.cs(1912,43): warning CS0618: 'Object.FindObjectsByType<T>(FindObjectsInactive, FindObjectsSortMode)' is obsolete: 'FindObjectsByType with FindObjectsSortMode parameter has been deprecated. Use FindObjectsByType<T>() or FindObjectsByType<T>(FindObjectsInactive) instead. InstanceID will be replaced in the future with EntityId and previous sort order cannot be maintained.'
+AssetDatabase: script compilation time: 1.758746s
+Total cache size 268300976
+Total cache size after purge 268300976, took 00:00:00.1887506
+Begin MonoManager ReloadAssembly
+Symbol file LoadedFromMemory is not a mono symbol file
+Symbol file LoadedFromMemory is not a mono symbol file
+Native extension for iOS target not found
+Native extension for OSXStandalone target not found
+Refreshing native plugins compatible for Editor in 2.47 ms, found 3 plugins.
+[Licensing::Client] Error: Code 404 while processing request (status: Found 0 entitlement groups and 0 free entitlements matching requested entitlement ids)
+[Licensing::Client] Error: Code 404 while processing request (status: Found 0 entitlement groups and 0 free entitlements matching requested entitlement ids)
+[Licensing::Client] Error: Code 404 while processing request (status: Found 0 entitlement groups and 0 free entitlements matching requested entitlement ids)
+ScheduleIndexationOnStartup MainProcess:True IndexOnStartup:True
+Mono: successfully reloaded assembly
+- Finished resetting the current domain, in  3.533 seconds
+Domain Reload Profiling: 4215ms
+	BeginReloadAssembly (99ms)
+		DisableScriptedObjects (13ms)
+		CreateAndSetChildDomain (24ms)
+	RebuildCommonClasses (5ms)
+	RebuildNativeTypeToScriptingClass (9ms)
+	initialDomainReloadingComplete (42ms)
+	LoadAllAssembliesAndSetupDomain (527ms)
+		LoadAssemblies (219ms)
+		AnalyzeDomain (273ms)
+			TypeCache.Refresh (223ms)
+				TypeCache.ScanAssembly (209ms)
+			BuildScriptInfoCaches (45ms)
+			ResolveRequiredComponents (4ms)
+	FinalizeReload (3534ms)
+		SetupLoadedEditorAssemblies (0ms)
+			InitializePlatformSupportModulesInManaged (17ms)
+			BeforeProcessingInitializeOnLoad (73ms)
+			ProcessInitializeOnLoadAttributes (2905ms)
+			ProcessInitializeOnLoadMethodAttributes (232ms)
+			EditorAssembliesLoaded (5ms)
+		AwakeInstancesAfterBackupRestoration (51ms)
+Starting new worker id: 0 with log in /Users/jiawei.zhou/Documents/Fidgeting app/unity/FidgetingApp/Logs/AssetImportWorkerHW0.log
+Refreshing native plugins compatible for Editor in 2.02 ms, found 3 plugins.
+
+Asset Pipeline Refresh (id=f8b4187e0eab7466abe592433b0d7eab): Total: 7.982 seconds - Initiated by InitialRefreshV2(ForceSynchronousImport)
+	(Values over 0.05ms)
+	Summary:
+		Imports: total=0 (actual=0, local cache=0, cache server=0)
+		Asset DB Process Time: managed=0 ms, native=4857 ms
+		Asset DB Callback time: managed=583 ms, native=22 ms
+		Scripting: domain reloads=1, domain reload time=711 ms, compile time=1759 ms, other=46 ms
+		Project Asset Count: scripts=2419, non-scripts=6016
+		Asset File Changes: new=0, changed=1, moved=0, deleted=0
+		Scan Filter Count: 1
+	InvokePackagesCallback: 13.887ms
+	ApplyChangesToAssetFolders: 0.238ms
+	Scan: 901.315ms
+	Collect global state as custom dependencies: 10.474ms
+	OnSourceAssetsModified: 0.351ms
+	CategorizeScriptCompilationAssets: 55.088ms
+	ProcessAssetsWithTransientArtifactChanges: 64.596ms
+	CategorizeAssets: 74.220ms
+	CompileScripts: 1759.482ms
+	ImportOutOfDateAssets: 3622.645ms (3555.629ms without children)
+		UnloadImportedAssets: 2.397ms
+		EnsureUptoDateAssetsAreRegisteredWithGuidPM: 0.919ms
+		ImportSchedulerStart: 63.653ms
+	PostProcessAllAssets: 584.601ms
+		VCAutoAddAssetPostprocess 0.867ms
+		XRBuildSystem.XRAssetImported 0.269ms
+		MonoPostProcessAllAssets: 583.220ms
+			AssetPostprocessor.OnPostprocessAllAssets 171.032ms
+			StyleCatalogPostProcessor.OnPostprocessAllAssets 125.333ms
+			AssetReferenceReimportMonitor.OnPostprocessAllAssets 22.865ms
+			UniversalRenderPipelineGlobalSettingsPostprocessor.OnPostprocessAllAssets 6.527ms
+			BuilderAssetPostprocessor.OnPostprocessAllAssets 5.074ms
+			SpriteSlicePostprocessor.OnPostprocessAllAssets 1.693ms
+			SpeedTree9Postprocessor.OnPostprocessAllAssets 1.394ms
+			WindowAssetPostprocessingWatcher.OnPostprocessAllAssets 1.276ms
+			GraphRefreshPostprocessor.OnPostprocessAllAssets 1.056ms
+			RetainedModeAssetPostprocessor.OnPostprocessAllAssets 0.821ms
+			ShaderGraphAssetPostProcessor.OnPostprocessAllAssets 0.760ms
+			AssetChangedListener.OnPostprocessAllAssets 0.752ms
+			EditModeScopePostprocessor.OnPostprocessAllAssets 0.569ms
+			AssetChangeDetector.OnPostprocessAllAssets 0.511ms
+			MaterialPostprocessor.OnPostprocessAllAssets 0.379ms
+			TerrainToolbarOverlayPostProcessor.OnPostprocessAllAssets 0.315ms
+			ArtifactBrowserPostProcessor.OnPostprocessAllAssets 0.312ms
+			RenderPipelineGlobalSettingsPostprocessor.OnPostprocessAllAssets 0.307ms
+			SpriteEditorTexturePostprocessor.OnPostprocessAllAssets 0.300ms
+			ReferencedClipsPostProcessor.OnPostprocessAllAssets 0.292ms
+			TextAssetPostProcessor.OnPostprocessAllAssets 0.232ms
+			SkillsProjectAssetPostprocessor.OnPostprocessAllAssets 0.217ms
+			InputActionAssetPostprocessor.OnPostprocessAllAssets 0.216ms
+			UVCSAssetPostprocessor.OnPostprocessAllAssets 0.205ms
+			AssetEvents.OnPostprocessAllAssets 0.204ms
+			SampleDependencyImporterPostProcessor.OnPostprocessAllAssets 0.203ms
+			ModelAssetProcessor.OnPostprocessAllAssets 0.201ms
+			AudioMixerPostprocessor.OnPostprocessAllAssets 0.182ms
+			ShaderReflectionAssetPostProcessor.OnPostprocessAllAssets 0.173ms
+			TMPro_TexturePostProcessor.OnPostprocessAllAssets 0.160ms
+			ProjectSettingsPostprocessor.OnPostprocessAllAssets 0.155ms
+			InputActionJsonNameModifierAssetProcessor.OnPostprocessAllAssets 0.142ms
+			SpeedTreePostProcessor.OnPostprocessAllAssets 0.138ms
+			PostProcessor.OnPostprocessAllAssets 0.127ms
+			AssetDatabaseCallbacks.OnPostprocessAllAssets 0.085ms
+			SamplePostprocessor.OnPostprocessAllAssets 0.062ms
+			AssetReloadNotifier.OnPostprocessAllAssets 0.057ms
+			ConfigAssetsTracker.OnPostprocessAllAssets 0.056ms
+			ScenarioDriftAssetsTracker.OnPostprocessAllAssets 0.055ms
+	PostAssetChangesProfiler: 8.521ms
+	UnloadStreamsBegin: 1.155ms
+	PersistCurrentRevisions: 0.173ms
+	GenerateScriptTypeHashes: 1.491ms
+	GenerateScriptTypeSerializationHashes: 2.436ms
+	Untracked: 883.209ms
+
+Application.AssetDatabase Initial Refresh End
+Shader Hidden/ChartRasterizerHardware is not supported: GPU does not support conservative rasterization
+Launching external process: /Applications/Unity/Hub/Editor/6000.5.6f1/Unity.app/Contents/Helpers/UnityShaderCompiler
+Launched and connected shader compiler UnityShaderCompiler after 0.05 seconds
+Shader Hidden/ChartRasterizerHardware is not supported: GPU does not support conservative rasterization
+Scanning for USB devices : 0.032ms
+Initializing Unity extensions:
+[MODES] ModeService[none].Initialize
+[MODES] ModeService[none].LoadModes
+[MODES] Loading mode Default (0) for mode-current-id-Fidget Spinner
+2026-08-31 16:41:22.151 Unity[58801:22519787] NSEventModifierFlagFunction specified to -setKeyEquivalentModifierMask: for item <NSMenuItem: 0xcca7af700 SDF, ke='Command-F12'>, but is only supported for system-provided menu items; will not be used
+Unloading 208 Unused Serialized files (Serialized files now loaded: 0)
+Unloading 10638 unused Assets / (34.0 MB). Loaded Objects now: 11318.
+Memory consumption went from 384.5 MB to 350.4 MB.
+Total: 26.584042 ms (FindLiveObjects: 0.458375 ms CreateObjectMapping: 3.200208 ms MarkObjects: 13.697084 ms  DeleteObjects: 9.228208 ms)
+
+2026-08-31 16:41:22.299 Unity[58801:22519787] NSEventModifierFlagFunction specified to -setKeyEquivalentModifierMask: for item <NSMenuItem: 0xcca7b50e0 SDF, ke='Command-F12'>, but is only supported for system-provided menu items; will not be used
+Opening scene 'Assets/_EDC/Candidates/MagneticSlideTileGate11R011/Scenes/MagneticSlideTileGate11R011Parity.unity'
+Unloading 3 Unused Serialized files (Serialized files now loaded: 0)
+Worker ready: AssetImportWorkerHW0 0
+Loaded scene 'Assets/_EDC/Candidates/MagneticSlideTileGate11R011/Scenes/MagneticSlideTileGate11R011Parity.unity'
+	Deserialize:            2.059 ms
+	Integration:            206.704 ms
+	Integration of assets:  0.002 ms
+	Thread Wait Time:       0.007 ms
+	Total Operation Time:   208.771 ms
+Unloading 4 unused Assets / (3.8 KB). Loaded Objects now: 11454.
+Memory consumption went from 304.6 MB to 304.6 MB.
+Total: 14.905625 ms (FindLiveObjects: 0.287208 ms CreateObjectMapping: 0.919208 ms MarkObjects: 13.664667 ms  DeleteObjects: 0.034416 ms)
+
+Asset Pipeline Refresh (id=2cdebc906232c4f9ea566d5f8721a7d7): Total: 0.137 seconds - Initiated by StopAssetImportingV2(NoUpdateAssetOptions)
+Unloading the last loaded scene Assets/_EDC/Candidates/MagneticSlideTileGate11R011/Scenes/MagneticSlideTileGate11R011Parity.unity(build index: -1), is not supported. Please use SceneManager.LoadScene()/EditorSceneManager.OpenScene() to switch to another scene.
+UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+UnityEngine.StackTraceUtility:ExtractStackTrace () (at /Users/bokken/build/output/unity/unity/Runtime/Export/Scripting/StackTrace.cs:35)
+UnityEditor.SceneManagement.EditorSceneManager:CloseScene (UnityEngine.SceneManagement.Scene,bool)
+FidgetingApp.EDC.Editor.MagneticSlideTileGate12R002Builder:BuildCandidatePrefab (FidgetingApp.EDC.Gate12R002.MagneticSlideTileMechanismSettings) (at Assets/_EDC/Candidates/MagneticSlideTileGate12R002/Editor/MagneticSlideTileGate12R002Builder.cs:107)
+FidgetingApp.EDC.Editor.MagneticSlideTileGate12R002Builder:BuildAndCapture () (at Assets/_EDC/Candidates/MagneticSlideTileGate12R002/Editor/MagneticSlideTileGate12R002Builder.cs:38)
+FidgetingApp.EDC.Editor.MagneticSlideTileGate12R002Builder:BuildAndRunPlayMode () (at Assets/_EDC/Candidates/MagneticSlideTileGate12R002/Editor/MagneticSlideTileGate12R002Builder.cs:47)
+
+[Assets/_EDC/Candidates/MagneticSlideTileGate12R002/Editor/MagneticSlideTileGate12R002Builder.cs line 107]
+
+Opening scene 'Assets/_EDC/Scenes/MeshyEDC.unity'
+Unloading 0 Unused Serialized files (Serialized files now loaded: 0)
+Loaded scene 'Assets/_EDC/Scenes/MeshyEDC.unity'
+	Deserialize:            1.544 ms
+	Integration:            243.877 ms
+	Integration of assets:  0.001 ms
+	Thread Wait Time:       0.010 ms
+	Total Operation Time:   245.433 ms
+Unloading 61 unused Assets / (19.9 KB). Loaded Objects now: 11670.
+Memory consumption went from 364.1 MB to 364.1 MB.
+Total: 14.722334 ms (FindLiveObjects: 0.301125 ms CreateObjectMapping: 0.980750 ms MarkObjects: 13.391083 ms  DeleteObjects: 0.048834 ms)
+
+Importing 'GUID: 0000000000000000b000000000000000 - Path: ProjectSettings/EditorBuildSettings.asset' with importer (LibraryAssetImporter)
+Imported 'GUID: 0000000000000000b000000000000000' -> (Import Result ID: '091f01172f8655a8627d93ccb227d598') in 0.008 seconds [static dependencies only]. Details - ImportResultOutputID=4647dd083cfc32cebcd7526e8846440c DependenciesID=7800f3c207c2d8ad17557fb06a234284 StaticDependenciesID=c42002aae32c8b947165ca2571755f3a 
+Refreshing native plugins compatible for Editor in 4.74 ms, found 3 plugins.
+Asset Pipeline Refresh (id=75670f999e1734e5b80076c930fdcb23): Total: 0.104 seconds - Initiated by StopAssetImportingV2(NoUpdateAssetOptions)
+Importing 'GUID: e9086e71021ef45049afcd064456e8e0 - Path: Assets/_EDC/Scenes/MeshyEDC.unity' with importer (DefaultImporter)
+Imported 'GUID: e9086e71021ef45049afcd064456e8e0' -> (Import Result ID: 'c351874dfa4e7ce1cd9e1bad6ca725fc') in 0.001 seconds [static dependencies only]. Details - ImportResultOutputID=eb83155b85c5c0aad356b4b3bba33c84 DependenciesID=0c14026109c1962639a5eaa40920036b StaticDependenciesID=66c6f159647b1fe0a86acb8eebfc42a3 
+Asset Pipeline Refresh (id=0f230e5297ae54028b84b6bcb8f12da8): Total: 0.100 seconds - Initiated by StopAssetImportingV2(NoUpdateAssetOptions)
+Asset Pipeline Refresh (id=e811ef19b01044942b311f7b008ac4eb): Total: 0.173 seconds - Initiated by RefreshV2(NoUpdateAssetOptions)
+Importing 'GUID: e9086e71021ef45049afcd064456e8e0 - Path: Assets/_EDC/Scenes/MeshyEDC.unity' with importer (DefaultImporter)
+Imported 'GUID: e9086e71021ef45049afcd064456e8e0' -> (Import Result ID: '8d945321d8d20fc0c53602cd77275912') in 0.001 seconds [static dependencies only]. Details - ImportResultOutputID=eb83155b85c5c0aad356b4b3bba33c84 DependenciesID=62080a888e1fab3167172974c6a5e089 StaticDependenciesID=1d53839423b900ad8500c23a90643f4b 
+Refreshing native plugins compatible for Editor in 3.28 ms, found 3 plugins.
+Asset Pipeline Refresh (id=0ef2e9fc11d75497688d12fff1ec1d10): Total: 0.105 seconds - Initiated by StopAssetImportingV2(NoUpdateAssetOptions)
+[Project] Loading completed in 12.036 seconds
+	Project init time: 				9.709 seconds
+		Template init time: 		0.000 seconds
+		Package Manager init time: 		0.431 seconds
+		Asset Database init time: 		0.222 seconds
+		Global illumination init time: 	0.001 seconds
+		Assemblies load time: 			0.551 seconds
+		Unity extensions init time: 	0.017 seconds
+		Asset Database refresh time: 	7.982 seconds
+	Scene opening time: 			2.225 seconds
+##utp:{"type":"ProjectInfo","version":2,"phase":"Immediate","time":1788165684288,"processId":58801,"projectLoad":12.036097958000001,"projectInit":9.708947625,"templateInit":0.0,"packageManagerInit":0.431411333,"assetDatabaseInit":0.221587208,"globalIlluminationInit":0.000531167,"assembliesLoad":0.551105667,"unityExtensionsInit":0.017139917,"assetDatabaseRefresh":7.981681042,"sceneOpening":2.225096167}
+##utp:{"type":"EditorInfo","version":2,"phase":"Immediate","time":1788165684288,"processId":58801,"editorVersion":"6000.5.6f1 (0e0577a1a2ac)","branch":"6000.5/staging","buildType":"Release","platform":"OSX"}
+Subscribe to USB device events
+[Licensing::Client] Error: Code 404 while processing request (status: Found 0 entitlement groups and 0 free entitlements matching requested entitlement ids)
+[Licensing::Client] Error: Code 404 while processing request (status: Found 0 entitlement groups and 0 free entitlements matching requested entitlement ids)
+[Licensing::Client] Successfully resolved entitlement details
+Start Indexing on Editor startup
+[Indexing] Starting Initial Indexing for Assets
+Thread 0x36ba87000 may have been prematurely finalized
+Reloading assemblies for play mode.
+Reloading assemblies after forced synchronous recompile.
+Begin MonoManager ReloadAssembly
+2026-08-31 16:41:25.787 Unity[58801:22519787] NSEventModifierFlagFunction specified to -setKeyEquivalentModifierMask: for item <NSMenuItem: 0xcca7ad900 SDF, ke='Command-F12'>, but is only supported for system-provided menu items; will not be used
+2026-08-31 16:41:25.790 Unity[58801:22519787] NSEventModifierFlagFunction specified to -setKeyEquivalentModifierMask: for item <NSMenuItem: 0xcca7b68a0 SDF, ke='Command-F12'>, but is only supported for system-provided menu items; will not be used
+2026-08-31 16:41:25.793 Unity[58801:22519787] NSEventModifierFlagFunction specified to -setKeyEquivalentModifierMask: for item <NSMenuItem: 0xcca7b6ee0 SDF, ke='Command-F12'>, but is only supported for system-provided menu items; will not be used
+2026-08-31 16:41:25.796 Unity[58801:22519787] NSEventModifierFlagFunction specified to -setKeyEquivalentModifierMask: for item <NSMenuItem: 0xccac50780 SDF, ke='Command-F12'>, but is only supported for system-provided menu items; will not be used
+<CFData 0xcb03f4190 [0x1fd0fd3c8]>{length = 6, capacity = 6, bytes = 0x842f575c8b35}
+Symbol file LoadedFromMemory is not a mono symbol file
+Symbol file LoadedFromMemory is not a mono symbol file
+Refreshing native plugins compatible for Editor in 2.02 ms, found 3 plugins.
+Native extension for iOS target not found
+Native extension for OSXStandalone target not found
+[Licensing::Client] Error: Code 404 while processing request (status: Found 0 entitlement groups and 0 free entitlements matching requested entitlement ids)
+[Licensing::Client] Error: Code 404 while processing request (status: Found 0 entitlement groups and 0 free entitlements matching requested entitlement ids)
+[Licensing::Client] Error: Code 404 while processing request (status: Found 0 entitlement groups and 0 free entitlements matching requested entitlement ids)
+Refreshing native plugins compatible for Editor in 2.31 ms, found 3 plugins.
+ScheduleIndexationOnStartup MainProcess:True IndexOnStartup:True
+Mono: successfully reloaded assembly
+- Finished resetting the current domain, in  1.412 seconds
+Domain Reload Profiling: 4560ms
+	BeginReloadAssembly (2901ms)
+		DisableScriptedObjects (21ms)
+		CreateAndSetChildDomain (332ms)
+	RebuildCommonClasses (5ms)
+	RebuildNativeTypeToScriptingClass (9ms)
+	initialDomainReloadingComplete (71ms)
+	LoadAllAssembliesAndSetupDomain (161ms)
+		LoadAssemblies (113ms)
+		AnalyzeDomain (17ms)
+			TypeCache.Refresh (8ms)
+			ResolveRequiredComponents (6ms)
+	FinalizeReload (1413ms)
+		SetupLoadedEditorAssemblies (0ms)
+			InitializePlatformSupportModulesInManaged (9ms)
+			BeforeProcessingInitializeOnLoad (83ms)
+			ProcessInitializeOnLoadAttributes (641ms)
+			ProcessInitializeOnLoadMethodAttributes (204ms)
+		AwakeInstancesAfterBackupRestoration (31ms)
+No restricted APIs configured; Validation skipped.
+Checking 39 assemblies for restricted APIs found 0 usage(s) in 1 ms
+
+Asset Pipeline Refresh (id=6aaa67f326f1e44598ac9ced7579b8fd): Total: 5.985 seconds - Initiated by StopAssetImportingV2(ForceSynchronousImport | ForceDomainReload)
+	(Values over 0.05ms)
+	Summary:
+		Imports: total=0 (actual=0, local cache=0, cache server=0)
+		Asset DB Process Time: managed=0 ms, native=1853 ms
+		Asset DB Callback time: managed=692 ms, native=249 ms
+		Scripting: domain reloads=1, domain reload time=3187 ms, compile time=1 ms, other=0 ms
+		Project Asset Count: scripts=2419, non-scripts=6016
+		Asset File Changes: new=0, changed=0, moved=0, deleted=0
+		Scan Filter Count: 0
+	InvokeCustomDependenciesCallbacks: 0.412ms
+	InvokePackagesCallback: 1.414ms
+	ApplyChangesToAssetFolders: 2.758ms
+	Collect global state as custom dependencies: 1.602ms
+	ProcessAssetsWithTransientArtifactChanges: 205.012ms
+	CategorizeAssets: 93.084ms
+	CompileScripts: 1.149ms
+	ImportOutOfDateAssets: 1491.371ms (1431.762ms without children)
+		CollectScriptTypesHashes: 4.803ms
+		ReloadNativeAssets: 0.766ms
+		UnloadImportedAssets: 0.232ms
+		EnsureUptoDateAssetsAreRegisteredWithGuidPM: 0.972ms
+		ImportSchedulerStart: 57.574ms
+	PostProcessAllAssets: 931.375ms
+		PostProcessCallbackCreateDeferredMaterials 54.143ms
+		AssemblyValidation.PostprocessAllAssets 49.734ms
+		ShaderAssetModifiedCallback 20.727ms
+		ComputeShaderImportPostprocess 12.918ms
+		RaytracingShaderImportPostprocess 11.898ms
+		SpeedTreeImporter.PostprocessAllAssets 11.306ms
+		BlockShaderImporter.PostprocessAllAssets 5.216ms
+		LocalizationDatabase.AssetDatabasePostprocessCallback 4.711ms
+		XRBuildSystem.XRAssetImported 0.215ms
+		MonoPostProcessAllAssets: 691.401ms
+			ShaderGraphAssetPostProcessor.OnPostprocessAllAssets 183.256ms
+			PostProcessor.OnPostprocessAllAssets 47.333ms
+			AssetPostprocessor.OnPostprocessAllAssets 34.826ms
+			InputActionAssetPostprocessor.OnPostprocessAllAssets 31.646ms
+			MaterialPostprocessor.OnPostprocessAllAssets 31.601ms
+			InputActionJsonNameModifierAssetProcessor.OnPostprocessAllAssets 31.527ms
+			AssetReferenceReimportMonitor.OnPostprocessAllAssets 28.994ms
+			TextAssetPostProcessor.OnPostprocessAllAssets 28.205ms
+			SpriteSlicePostprocessor.OnPostprocessAllAssets 22.201ms
+			AssetChangedListener.OnPostprocessAllAssets 16.119ms
+			StyleCatalogPostProcessor.OnPostprocessAllAssets 15.633ms
+			UniversalRenderPipelineGlobalSettingsPostprocessor.OnPostprocessAllAssets 6.343ms
+			BuilderAssetPostprocessor.OnPostprocessAllAssets 4.686ms
+			RenderPipelineGlobalSettingsPostprocessor.OnPostprocessAllAssets 4.281ms
+			SpeedTree9Postprocessor.OnPostprocessAllAssets 2.785ms
+			RetainedModeAssetPostprocessor.OnPostprocessAllAssets 1.654ms
+			GraphRefreshPostprocessor.OnPostprocessAllAssets 1.224ms
+			WindowAssetPostprocessingWatcher.OnPostprocessAllAssets 1.079ms
+			SkillsProjectAssetPostprocessor.OnPostprocessAllAssets 0.630ms
+			AssetChangeDetector.OnPostprocessAllAssets 0.606ms
+			SpriteEditorTexturePostprocessor.OnPostprocessAllAssets 0.404ms
+			ProjectSettingsPostprocessor.OnPostprocessAllAssets 0.370ms
+			ArtifactBrowserPostProcessor.OnPostprocessAllAssets 0.348ms
+			SpeedTreePostProcessor.OnPostprocessAllAssets 0.310ms
+			ShaderReflectionAssetPostProcessor.OnPostprocessAllAssets 0.299ms
+			ModelAssetProcessor.OnPostprocessAllAssets 0.205ms
+			ReferencedClipsPostProcessor.OnPostprocessAllAssets 0.198ms
+			UVCSAssetPostprocessor.OnPostprocessAllAssets 0.194ms
+			TMPro_TexturePostProcessor.OnPostprocessAllAssets 0.183ms
+			SampleDependencyImporterPostProcessor.OnPostprocessAllAssets 0.177ms
+			SamplePostprocessor.OnPostprocessAllAssets 0.164ms
+			EditModeScopePostprocessor.OnPostprocessAllAssets 0.164ms
+			AudioMixerPostprocessor.OnPostprocessAllAssets 0.161ms
+			AssetEvents.OnPostprocessAllAssets 0.148ms
+			TerrainToolbarOverlayPostProcessor.OnPostprocessAllAssets 0.113ms
+			SyncVS.PostprocessSyncProject 0.109ms
+			AssetDatabaseCallbacks.OnPostprocessAllAssets 0.069ms
+			ConfigAssetsTracker.OnPostprocessAllAssets 0.058ms
+			AssetReloadNotifier.OnPostprocessAllAssets 0.051ms
+	PostAssetChangesProfiler: 9.811ms
+	GatherAllCurrentPrimaryImportResultRevisions: 2.225ms
+	UnloadStreamsBegin: 2.323ms
+	PersistCurrentRevisions: 0.173ms
+	GenerateScriptTypeHashes: 3.120ms
+	GenerateScriptTypeSerializationHashes: 4.774ms
+	Untracked: 3235.923ms
+
+Loaded scene 'Temp/__Backupscenes/0.backup'
+	Deserialize:            7.124 ms
+	Integration:            2017.201 ms
+	Integration of assets:  3.115 ms
+	Thread Wait Time:       0.005 ms
+	Total Operation Time:   2027.446 ms
+Created GICache directory at /Users/jiawei.zhou/Library/Caches/com.unity3d.UnityEditor/GiCache. Took: 0.002s, timestamps: [12.045 - 12.048]
+[MODES] ModeService[none].Initialize
+[MODES] ModeService[none].LoadModes
+[Licensing::Client] Successfully resolved entitlement details
+[Licensing::Client] Successfully resolved entitlement details
+[INFO ] [relay] relay.startup port=9002 mcpClientPort=9003 editorPid=58801
+[INFO ] [relay] log === RELAY SERVER STARTED === (unity-ai-relay v1.0.12-build.97)
+[INFO ] [relay] log Starting relay server...
+[INFO ] [relay] log Command line arguments: ["bun","/$bunfs/root/relay_mac_arm64","--relay","--port","9002","--mcp-client-port","9003","--editor-pid","58801","--shutdown-delay","180","--log-dir","/Users/jiawei.zhou/Documents/Fidgeting app/unity/FidgetingApp/Logs"]
+[INFO ] [relay] log Parsed config: {"port":9002,"mcpClientPort":9003,"editorPid":"58801","shutdownDelaySeconds":180}
+[INFO ] [relay] log Initializing relay components...
+[INFO ] [relay] log Creating RelayEditor...
+[INFO ] [relay] log WebSocket server started
+[INFO ] [relay] log Relay server initialization completed
+[INFO ] [relay] log MCP Client initialized at port: 9003
+[INFO ] [relay] log Unity MCP Relay server started | Port: 9003 | Endpoints: /mcp/start-server, /mcp/stop-server, /mcp/server-status, /mcp/call-tool
+[INFO ] [relay] log Unity client connected with ID: editor-58801-ul0h0a (relay 1.0.12-build.97)
+[INFO ] [relay] connection.established clientId=editor-58801-ul0h0a port=9002
+[INFO ] [relay] log [shell-env] PATH augmented with shell environment (17 entries)
+MonoPathRemapper: Attempts to remap: 139255; Successful remaps: 40450
+Thread 0x367507000 may have been prematurely finalized
+Serialized file version minimum: 22, current 23
+[INFO ] [relay] log Shutdown request received from client editor-58801-ul0h0a
+[INFO ] [relay] log Unity client requested immediate shutdown - shutting down now, reason: Shutdown requested by client
+[INFO ] [relay] log Shutdown: Initiating graceful shutdown: Shutdown requested by client
+Shutting down MSBuild server...
+Shutting down VB/C# compiler server...
+Thread 0x307807000 may have been prematurely finalized
+VB/C# compiler server shut down successfully.
+MSBuild server shut down successfully.
+Input System module state changed to: ShutdownInProgress.
+Input Polling Thread exited.
+Input System module state changed to: Shutdown.
+[Physics::Module] Cleanup current backend.
+[Physics::Module] Id: 0xf2b8ea05
+[Licensing::IpcConnector] LicenseClient-jiawei.zhou-6000.5.6-notifications channel disconnected successfully.
+[Licensing::IpcConnector] LicenseClient-jiawei.zhou-6000.5.6 channel disconnected successfully.
+Thread 0x16c2b3000 may have been prematurely finalized
+Thread 0x16c3cb000 may have been prematurely finalized
+Thread 0x16c33f000 may have been prematurely finalized
+Thread 0x16c457000 may have been prematurely finalized
+Thread 0x16c56f000 may have been prematurely finalized
+Thread 0x16c5fb000 may have been prematurely finalized
+Thread 0x16c687000 may have been prematurely finalized
+Thread 0x16c713000 may have been prematurely finalized
+Thread 0x16c4e3000 may have been prematurely finalized
+Thread 0x16c79f000 may have been prematurely finalized
+Thread 0x16c82b000 may have been prematurely finalized
+Thread 0x16c8b7000 may have been prematurely finalized
+Thread 0x16c943000 may have been prematurely finalized
+Thread 0x16ca5b000 may have been prematurely finalized
+Thread 0x16c9cf000 may have been prematurely finalized
+AcceleratorClientConnectionCallback - disconnected - :0
+Thread 0x17ff07000 may have been prematurely finalized
+info: Microsoft.Hosting.Lifetime[0]
+      Application is shutting down...
+Cleanup mono
+CodeReloadManager destroyed
+info: Unity.ILPP.Runner.PostProcessingAssemblyLoadContext[0]
+      ALC ILPP context 1 is unloading
+debugger-agent: Unable to listen on 46
+[usbmuxd] Stop listen thread
+[usbmuxd] Error: 
+[usbmuxd] Listen thread exiting
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 [INFO ] [relay] log Auto-shutdown timer fired after 180s inactivity, shutting down: Dedicated client disconnected
+[INFO ] [relay] log Shutdown: Initiating graceful shutdown: Dedicated client disconnected

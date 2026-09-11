@@ -1,0 +1,67 @@
+{
+  "schemaVersion": 1,
+  "modelId": "magnetic-slide-tile",
+  "gate": "12-shipping",
+  "gateRevision": 5,
+  "evidenceRevision": 4,
+  "decisionState": "approved",
+  "selectedVariant": "B-balanced-brighter",
+  "exactUserDecision": "The user selected lighting Variant B in the review UI: balanced brighter +0.55 EV, Neutral tone map, ambient 1.25×, reflection/key/fill 0.70/0.68/0.54.",
+  "interactionMode": "review-ui",
+  "reviewedAt": "2026-09-01T15:41:00+08:00",
+  "mechanismEvidenceContractSha256": "9cd7a08f34d7d8dfc3c6f89f6c80a5c5c2dcae48bc0d5c54ebf455a0727ea571",
+  "reviewedArtifacts": [
+    {
+      "path": "magnetic-slide-gate12-r004-lighting-comparison.mp4",
+      "sha256": "47e4cd8fd1e7b7fa9685e60577a726d03966fd7b01c8adc08757f51c11a551af"
+    },
+    {
+      "path": "gate12-lighting-comparison-board-r004.png",
+      "sha256": "876edcbc37eba706cd830fc071fed87a90f382a67c62fe816abe035058aa8296"
+    },
+    {
+      "path": "gate12-lighting-phone-board-r004.png",
+      "sha256": "e3b874486736c05bb884bacdcda1be0dd9cd7ac066ced849856ba8fa225d6cf1"
+    }
+  ],
+  "parameters": {
+    "postExposureEv": 0.55,
+    "hdr": true,
+    "tonemapping": "Neutral",
+    "ambientMultiplier": 1.25,
+    "reflectionIntensity": 0.70,
+    "keyIntensity": 0.68,
+    "fillIntensity": 0.54,
+    "whiteBalanceTemperature": 0.0,
+    "whiteBalanceTint": 0.0
+  },
+  "approvedLightingFields": [
+    "MagneticSlideShippingLightingController.variant",
+    "Camera.allowHDR",
+    "UniversalAdditionalCameraData.renderPostProcessing",
+    "Tonemapping.mode",
+    "ColorAdjustments.postExposure",
+    "WhiteBalance.temperature",
+    "WhiteBalance.tint",
+    "RenderSettings.ambientSkyColor",
+    "RenderSettings.ambientEquatorColor",
+    "RenderSettings.ambientGroundColor",
+    "RenderSettings.reflectionIntensity",
+    "Key_UpperLeft.color",
+    "Key_UpperLeft.intensity",
+    "CoolFill.color",
+    "CoolFill.intensity"
+  ],
+  "preserved": {
+    "geometry": true,
+    "materialTexturesAndPartitions": true,
+    "cameraPositionRecipes": true,
+    "runtimeInteraction": true,
+    "endpointInterlock": true,
+    "pinchOrbit": true,
+    "audio": true,
+    "haptics": true
+  },
+  "shippingSceneSha256": "b8ba31854d94f4f51a24720443bc74b38c0ef2ef2bad503f0c8e5154e3968c32",
+  "deviceAcceptance": "pending-new-build-and-user-validation"
+}

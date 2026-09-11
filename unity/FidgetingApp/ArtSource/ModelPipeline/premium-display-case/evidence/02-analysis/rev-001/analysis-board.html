@@ -1,0 +1,160 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Premium Display Case · Gate 02 Analysis</title>
+  <style>
+    @font-face {
+      font-family: "Oxanium Review";
+      src: url("file:///Users/jiawei.zhou/Documents/Fidgeting%20app/unity/FidgetingApp/ArtSource/FanCard/Oxanium-700.ttf");
+      font-weight: 700;
+    }
+    * { box-sizing: border-box; }
+    html, body { margin: 0; width: 100%; height: 100%; background: #090a0c; color: #f4f5f6; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", sans-serif;
+      padding: 38px 46px;
+    }
+    header { display: flex; justify-content: space-between; align-items: end; margin-bottom: 22px; }
+    h1 { margin: 0; font-size: 32px; }
+    .stage { color: #b3b8c0; font-size: 20px; }
+    .grid { display: grid; grid-template-columns: 1fr 0.9fr 1.1fr; gap: 16px; }
+    .panel { border: 1px solid #30343b; background: #111318; padding: 18px; min-width: 0; }
+    .panel h2 { margin: 0 0 12px; font-size: 22px; }
+    .panel p { margin: 10px 0 0; color: #c0c5cc; font-size: 17px; line-height: 1.45; }
+    .topology img { width: 100%; height: 440px; object-fit: cover; object-position: 68% 20%; }
+    .swatch { width: 100%; height: 440px; border: 1px solid #3a3e45; }
+    .label-stage {
+      height: 440px;
+      padding: 26px;
+      background: #17191d;
+      border: 1px solid #3b4048;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+    .physical-label {
+      padding: 24px 26px;
+      background: #afb2b4;
+      color: #202226;
+      border-radius: 18px;
+      border: 2px solid #d6d8da;
+    }
+    .name { font: 700 30px/1.05 "Oxanium Review", sans-serif; }
+    .edition { margin-top: 8px; font: 700 17px/1.2 "Oxanium Review", sans-serif; opacity: 0.8; }
+    .meta { margin-top: 17px; font: 700 15px/1.45 "Oxanium Review", sans-serif; opacity: 0.78; }
+    .identity { display: flex; gap: 12px; margin-top: 18px; }
+    .identity-box {
+      width: 88px;
+      height: 72px;
+      border: 2px solid #51555a;
+      border-radius: 12px;
+      display: grid;
+      place-items: center;
+      font-size: 14px;
+      font-weight: 700;
+      text-align: center;
+      background: #c4c6c7;
+    }
+    .identity-note { color: #d0d4d9; margin-top: 15px; font-size: 16px; line-height: 1.4; }
+    .story { margin-top: 16px; border: 1px solid #30343b; background: #111318; padding: 17px 20px; }
+    .story h2 { margin: 0 0 12px; font-size: 22px; }
+    .story-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; }
+    .beat { text-align: center; }
+    .beat svg { width: 100%; height: 150px; background: #0d0f13; border: 1px solid #2e3238; }
+    .beat strong { display: block; margin-top: 8px; font-size: 18px; }
+    .beat span { color: #aeb4bc; font-size: 15px; }
+    .rules { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-top: 16px; }
+    .rule { border-top: 2px solid #383d45; padding-top: 10px; }
+    .rule strong { display: block; margin-bottom: 5px; font-size: 18px; }
+    .rule span { color: #bbc0c7; font-size: 16px; line-height: 1.4; }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Premium Display Case · Gate 02 分析预览</h1>
+    <div class="stage">结构解释、材质语言、可读性与流程</div>
+  </header>
+
+  <div class="grid">
+    <section class="panel topology">
+      <h2>01 · 外框解释</h2>
+      <img src="file:///Users/jiawei.zhou/Documents/Fidgeting%20app/unity/FidgetingApp/ArtSource/ModelPipeline/premium-display-case/evidence/01-intake/rev-003/gate-01-target-preview.png" alt="闭环管状外框">
+      <p>一条 cyclic path + 一份 closed profile 生成完整周边。四角不设置 bar 接头；后续白模必须提供剖面和 flood-fill 证据。</p>
+    </section>
+
+    <section class="panel">
+      <h2>02 · 背景材质解释</h2>
+      <svg class="swatch" viewBox="0 0 500 440" aria-label="连续细颗粒磨砂背景">
+        <defs>
+          <filter id="grain">
+            <feTurbulence type="fractalNoise" baseFrequency="0.32" numOctaves="3" seed="24"/>
+            <feColorMatrix type="saturate" values="0"/>
+            <feComponentTransfer>
+              <feFuncA type="table" tableValues="0 0.14"/>
+            </feComponentTransfer>
+          </filter>
+          <linearGradient id="light" x1="0" y1="0" x2="0.8" y2="1">
+            <stop offset="0" stop-color="#3b3d3f"/>
+            <stop offset="0.55" stop-color="#292b2e"/>
+            <stop offset="1" stop-color="#1e2023"/>
+          </linearGradient>
+        </defs>
+        <rect width="500" height="440" fill="url(#light)"/>
+        <rect width="500" height="440" filter="url(#grain)" opacity="0.9"/>
+        <path d="M0 305 C130 282 280 318 500 270" fill="none" stroke="#777a7d" stroke-width="2" opacity="0.2"/>
+        <text x="28" y="52" fill="#e5e6e7" font-size="24" font-weight="700">连续细颗粒 · 低饱和 · 无局部噪斑</text>
+        <text x="28" y="84" fill="#b5b9bd" font-size="18">建议方向：炭黑 EVA / fine matte polymer</text>
+      </svg>
+      <p>推荐微细颗粒、非金属、高 roughness 的连续表面。纹理覆盖整张背景，不在模型后方单独堆一块噪点。</p>
+    </section>
+
+    <section class="panel">
+      <h2>03 · 标签可读性解释</h2>
+      <div class="label-stage">
+        <div class="physical-label">
+          <div class="name">MAGNETIC TRINITY</div>
+          <div class="edition">BEAD-BLASTED TITANIUM</div>
+          <div class="meta">ACQUIRED —<br>REFINED · LEVEL 24</div>
+          <div class="identity">
+            <div class="identity-box">复用原<br>LOGO</div>
+            <div class="identity-box">复用原<br>雪花成就</div>
+          </div>
+        </div>
+        <div class="identity-note">只放大并重排现有正式标记，不重画 Logo 或 Badge。Phone hero 投影目标：主名 ≥17 pt；metadata ≥11 pt。</div>
+      </div>
+      <p>信息层级改为产品名优先，edition 第二，日期／等级第三；Logo 与成就拥有独立安全区，不再挤在标签角落。</p>
+    </section>
+  </div>
+
+  <section class="story">
+    <h2>04 · 产品流程解释</h2>
+    <div class="story-grid">
+      <div class="beat">
+        <svg viewBox="0 0 300 150"><rect x="105" y="28" width="90" height="105" rx="12" fill="#64686d"/><path d="M105 48 H195" stroke="#c8ccd0" stroke-width="5"/></svg>
+        <strong>Pack 撕开</strong><span>同一 request</span>
+      </div>
+      <div class="beat">
+        <svg viewBox="0 0 300 150"><rect x="84" y="16" width="132" height="120" rx="24" fill="none" stroke="#d3d7db" stroke-width="14"/><path d="M106 16 H194" stroke="#78b6df" stroke-width="4"/></svg>
+        <strong>真盒出现</strong><span>连续两帧 ready 后交接</span>
+      </div>
+      <div class="beat">
+        <svg viewBox="0 0 300 150"><rect x="84" y="16" width="132" height="120" rx="24" fill="none" stroke="#d3d7db" stroke-width="14"/><path d="M92 126 L204 24" stroke="#ffffff" stroke-width="12" opacity="0.65"/></svg>
+        <strong>单次高光</strong><span>不拆解、不重组</span>
+      </div>
+      <div class="beat">
+        <svg viewBox="0 0 300 150"><ellipse cx="150" cy="130" rx="70" ry="10" fill="#000" opacity="0.65"/><rect x="84" y="10" width="132" height="112" rx="24" fill="none" stroke="#d3d7db" stroke-width="14"/></svg>
+        <strong>悬浮等待</strong><span>奖品零自主角速度</span>
+      </div>
+    </div>
+  </section>
+
+  <div class="rules">
+    <div class="rule"><strong>结构</strong><span>闭环管路，不是四条边盖缝。</span></div>
+    <div class="rule"><strong>材质</strong><span>连续微颗粒背景，不复制外部生成纹理。</span></div>
+    <div class="rule"><strong>可读性</strong><span>最终以真实 393 pt phone hero 投影测量。</span></div>
+    <div class="rule"><strong>流程</strong><span>同一 assembled 实例贯穿出现、高光、悬浮和收下。</span></div>
+  </div>
+</body>
+</html>

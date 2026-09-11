@@ -1,0 +1,57 @@
+{
+  "modelId": "metal-three-blade",
+  "stageId": "02-analysis",
+  "revision": 5,
+  "recordedAt": "2026-09-05T14:19:14.147971+00:00",
+  "basis": "用户 2026-09-05 19:43 驳回原文（tri-r5-user-rejection）+ geeone-01/02 复核",
+  "changes": [
+    {
+      "topic": "楔环",
+      "rev4": "等宽梯形半面 ±11° 扭转，外沿 z=4.1，读成竖直棱条/凹碟",
+      "rev5": "圆锥 25°，内环 24 点在平盘边、外环 24 点错半步且 ±0.55 mm 锯齿，48 三角尖端里外交替，相邻法线 9.3–16.1°",
+      "authority": "user"
+    },
+    {
+      "topic": "平盘为最高点",
+      "rev4": "z=6.5 但视觉被楔环压住",
+      "rev5": "z=7.25，楔环全部低于平盘（tableIsHighestPoint=true）",
+      "authority": "user"
+    },
+    {
+      "topic": "叶片轮廓",
+      "rev4": "外宽内窄扇形、直边外缘、根半宽 12",
+      "rev5": "泪滴：缺口 V 60° 起于暗缝边，凸 Bezier 侧边，R12 外弧占 ±60°，最大半宽 16.4",
+      "authority": "user + photo"
+    },
+    {
+      "topic": "机身可见性",
+      "rev4": "顶视露出 Ø37.6 毂领圆环",
+      "rev5": "毂领删除；三叶根部在暗缝边相接，顶视 hubVisibleInTopView=false",
+      "authority": "user"
+    },
+    {
+      "topic": "叶片厚度与顶面",
+      "rev4": "9.9 mm，平顶 + 小切角",
+      "rev5": "11.5 mm，两屋脊面 10.2° + 端面 32° 斜切，竖直侧壁 5.6 mm",
+      "authority": "user"
+    },
+    {
+      "topic": "暗缝",
+      "rev4": "1.0 mm",
+      "rev5": "0.8 mm",
+      "authority": "user"
+    },
+    {
+      "topic": "平盘纹理",
+      "rev4": "Eevee 不出各向异性",
+      "rev5": "Cycles/Metal 96spp；径向各向异性 0.85 + 同心 Bump 0.09",
+      "authority": "user"
+    },
+    {
+      "topic": "楔环外沿高度（新悬案）",
+      "rev4": "—",
+      "rev5": "台面 0.70 + 25° 斜 ⇒ 外沿低于叶面 0.94 mm，暗缝看起来比 0.8 mm 深；照片值 0.797 ⇒ 外沿与叶面齐平（0.15 mm）。两版同机位对比已出，待用户裁决",
+      "authority": "geometry"
+    }
+  ]
+}

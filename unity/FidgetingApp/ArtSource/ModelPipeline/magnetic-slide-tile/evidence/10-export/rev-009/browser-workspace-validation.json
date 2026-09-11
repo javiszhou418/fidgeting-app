@@ -1,0 +1,74 @@
+{
+  "pass": true,
+  "desktop": {
+    "tabs": [
+      "参考原图",
+      "分析（截图/视频）",
+      "尺寸",
+      "交互 CAD",
+      "白模",
+      "贴图与材质",
+      "Unity 灯光与成品"
+    ],
+    "roadmap": 12,
+    "stage": "10-export",
+    "currentGate": "10",
+    "approvedCount": "9",
+    "text": "\n    \n        \n          Gate 10 rev 9 · Unity 前导出检查\n          真实导出 GLB 是否保持了同一外形、层级和表面？\n          先打开 GLB，完成拖动旋转和滚轮缩放。静态摘要只帮助核对尺寸、层级、材质和动画数量。\n          \n            本轮只确认\n            31×50×12 mm20 nodes／8 meshes／7 materials\n            四槽与凸轴层级平滑侧壁／硬 cap／完整 tangent\n          \n          \n            技术细节\n            \n              FBX 使用 FACE smoothing；GLB 以米为单位并含 NORMAL／TANGENT／TEXCOORD_0。FBX 和 GLB re-import bounds 均为 0.031×0.050×0.012 m。\n              上下 artwork mask 独立。620×1000 贴图保持 NPOT None；禁止拉伸到 512×1024。碰撞只在独立非渲染 FBX。\n              默认闭合、零速度、零 animation/self-motion。没有 Unity import、Build、安装或手机运行。\n            \n          \n        \n      \n    \n    \n      \n        看这两张图2 项\n        \n    \n      GLB\n      \n        interactive-export-glb\n        magnetic-slide-tile-export-glb-r009\n      \n    \n  \n    \n      \n      \n        compact-export-summary\n        magnetic-slide-tile-export-summary-r009\n      \n    \n  \n      \n    \n    \n      \n        历史／过期／被退回证据 · 42 项\n        这些文件保留用于追溯，不代表当前方案。当前 revision 的素材在上方。\n        \n    \n      GLB\n      \n        glb-export未直接承接 09-environment\n        magnetic-slide-tile-export-glb-r001\n      \n    \n  \n    \n      \n      \n        export-review-board未直接承接 09-environment\n        magnetic-slide-tile-export-workbench-r001\n      \n    \n  \n    \n      \n      \n        export-review-board未直接承接 09-environment\n        magnetic-slide-tile-export-package-review-board-r001\n      \n    \n  \n    \n      \n      \n        export-review-board未直接承接 09-environment\n        magnetic-slide-tile-export-texture-channel-board-r001\n      \n    \n  \n    \n      \n      \n        reimport-review未直接承接 09-environment\n        magnetic-slide-tile-export-glb-reimport-workbench-r001\n      \n    \n  \n    \n      \n      \n        reimport-review未直接承接 09-environment\n        magnetic-slide-tile-export-fbx-reimport-workbench-r001\n      \n    \n  \n    \n      \n      \n        collision-review未直接承接 09-environment\n        magnetic-slide-tile-export-collision-reimport-workbench-r001\n      \n    \n  \n    \n      \n      \n        texture-source未直接承接 09-environment\n        magnetic-slide-tile-export-artwork-upper-mask-r001\n      \n    \n  \n    \n      \n      \n        texture-source未直接承接 09-environment\n        magnetic-slide-tile-export-artwork-lower-mask-r001\n      \n    \n  \n    \n      \n      \n        texture-source未直接承接 09-environment\n        magnetic-slide-tile-export-artwork-border-mask-r001\n      \n    \n  \n    \n      \n      \n        texture-pack未直接承接 09-environment\n        magnetic-slide-tile-export-artwork-upper-pack-r001\n      \n    \n  \n    \n      \n      \n        texture-pack未直接承接 09-environment\n        magnetic-slide-tile-export-artwork-lower-pack-r001\n      \n    \n  \n    \n      \n      \n        transport-texture未直接承接 09-environment\n        magnetic-slide-tile-export-upper-transport-basecolor-r001\n      \n    \n  \n    \n      \n      \n        transport-texture未直接承接 09-environment\n        magnetic-slide-tile-export-lower-transport-basecolor-r001\n      \n    \n  \n    \n      \n      \n        browser-workbench未直接承接 09-environment\n        magnetic-slide-tile-browser-export-workbench-r001\n      \n    \n  \n    \n      GLB\n      \n        glb-export未直接承接 09-environment\n        magnetic-slide-tile-export-glb-r002\n      \n    \n  \n    \n      \n      \n        reimport-review未直接承接 09-environment\n        magnetic-slide-tile-export-glb-reimport-workbench-r002\n      \n    \n  \n    \n      \n      \n        reimport-review未直接承接 09-environment\n        magnetic-slide-tile-export-fbx-reimport-workbench-r002\n      \n    \n  \n    \n      \n      \n        collision-review未直接承接 09-environment\n        magnetic-slide-tile-export-collision-reimport-workbench-r002\n      \n    \n  \n    \n      \n      \n        export-review-board未直接承接 09-environment\n        magnetic-slide-tile-export-workbench-r002\n      \n    \n  \n    \n      \n      \n        export-review-board未直接承接 09-environment\n        magnetic-slide-tile-arc-closeup-source-r002\n      \n    \n  \n    \n      \n      \n        export-review-board未直接承接 09-environment\n        magnetic-slide-tile-arc-closeup-rejected-fbx-r002\n      \n    \n  \n    \n      \n      \n        export-review-board未直接承接 09-environment\n        magnetic-slide-tile-arc-closeup-fbx-r002\n      \n    \n  \n    \n      \n      \n        export-review-board未直接承接 09-environment\n        magnetic-slide-tile-arc-closeup-glb-r002\n      \n    \n  \n    \n      \n      \n        collision-review未直接承接 09-environment\n        magnetic-slide-tile-collision-wireframe-r002\n      \n    \n  \n    \n      \n      \n        export-review-board未直接承接 09-environment\n        magnetic-slide-tile-export-shading-review-board-r002\n      \n    \n  \n    \n      \n      \n        export-review-board未直接承接 09-environment\n        magnetic-slide-tile-arc-contour-overlay-r002\n      \n    \n  \n    \n      \n      \n        collision-review未直接承接 09-environment\n        magnetic-slide-tile-collision-non-rendering-panel-r002\n      \n    \n  \n    \n      \n      \n        export-review-board未直接承接 09-environment\n        magnetic-slide-tile-export-texture-channel-board-r002\n      \n    \n  \n    \n      \n      \n        texture-source未直接承接 09-environment\n        magnetic-slide-tile-export-artwork-upper-mask-r002\n      \n    \n  \n    \n      \n      \n        texture-source未直接承接 09-environment\n        magnetic-slide-tile-export-artwork-lower-mask-r002\n      \n    \n  \n    \n      \n      \n        texture-source未直接承接 09-environment\n        magnetic-slide-tile-export-artwork-border-mask-r002\n      \n    \n  \n    \n      \n      \n        texture-pack未直接承接 09-environment\n        magnetic-slide-tile-export-artwork-upper-pack-r002\n      \n    \n  \n    \n      \n      \n        texture-pack未直接承接 09-environment\n        magnetic-slide-tile-export-artwork-lower-pack-r002\n      \n    \n  \n    \n      \n      \n        transport-texture未直接承接 09-environment\n        magnetic-slide-tile-export-upper-transport-basecolor-r002\n      \n    \n  \n    \n      \n      \n        transport-texture未直接承接 09-environment\n        magnetic-slide-tile-export-lower-transport-basecolor-r002\n      \n    \n  \n    \n      \n      \n        browser-review未直接承接 09-environment\n        magnetic-slide-tile-browser-export-workbench-r002\n      \n    \n  \n    \n      \n      \n        reimport-review未直接承接 09-environment\n        magnetic-slide-tile-plain-review-before-full-r003\n      \n    \n  \n    \n      \n      \n        reimport-review未直接承接 09-environment\n        magnetic-slide-tile-plain-review-after-full-r003\n      \n    \n  \n    \n      \n      \n        先看检查位置未直接承接 09-environment\n        先看检查位置\n      \n    \n  \n    \n      \n      \n        再看放大对比未直接承接 09-environment\n        再看放大对比\n      \n    \n  \n    \n      \n      \n        browser-workbench未直接承接 09-environment\n        magnetic-slide-tile-plain-browser-screenshot-r003\n      \n    \n  \n      \n    \n    \n    \n        \n          这个真实 GLB 可以进入 Unity 导入与同机位对比吗？\n          请先完成真实 GLB 的载入、旋转和缩放。\n          如有问题，请指出外形、层级或表面位置\n          导出仍有问题\n          可以进入 Unity\n        \n      \n  ",
+    "glb": true,
+    "summary": true,
+    "approveDisabled": true,
+    "overflow": 0
+  },
+  "viewer": {
+    "checklist": {
+      "loaded": true,
+      "orbit": true,
+      "zoom": true
+    },
+    "approveDisabled": false,
+    "payload": {
+      "reviewedArtifactId": "magnetic-slide-tile-export-glb-r009",
+      "reviewedArtifactSha256": "f95b1b2ebed5859aa185aa4e3ba81dcb7a8de266ac9244f4b3270b35c877cba6",
+      "contractSha256": "5aee71817c2c033ed92b770126ba0ecb6d79c2f032d786743b214b79078a47ea",
+      "parameterSnapshot": {
+        "format": "GLB",
+        "boundsMeters": [
+          0.031,
+          0.05,
+          0.012
+        ],
+        "nodes": 20,
+        "meshes": 8,
+        "materials": 7,
+        "animations": 0
+      },
+      "completedInteractionChecklist": [
+        "loaded",
+        "orbit",
+        "zoom"
+      ],
+      "interactionMode": "real-exported-glb-orbit-zoom",
+      "browserTimestamp": "2026-08-27T13:47:58.063Z"
+    },
+    "canvasWidth": 1118
+  },
+  "reload": {
+    "stage": "10-export",
+    "enabled": true
+  },
+  "mobile": {
+    "tabs": 7,
+    "roadmap": 12,
+    "stage": "10-export",
+    "glb": true,
+    "overflow": 0,
+    "oneColumn": true
+  },
+  "runtimeExceptionCount": 0,
+  "runtimeExceptions": [],
+  "loadingFailureCount": 0,
+  "loadingFailures": [],
+  "screenshotPath": "/Users/jiawei.zhou/Documents/Fidgeting app/Artifacts/ModelProvenanceExplorer/magnetic-slide-gate10-rev9-persistent-workbench.png",
+  "focusedScreenshotPath": "/Users/jiawei.zhou/Documents/Fidgeting app/Artifacts/ModelProvenanceExplorer/magnetic-slide-gate10-rev9-workbench-focused.png"
+}

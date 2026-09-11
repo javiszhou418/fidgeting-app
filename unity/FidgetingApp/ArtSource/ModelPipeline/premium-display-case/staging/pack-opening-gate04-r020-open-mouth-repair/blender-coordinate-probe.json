@@ -1,0 +1,95 @@
+{
+  "schema": "premium-display-case-gate04-r020-blender-coordinate-probe.v1",
+  "source": "actual Blender saved R020 rig",
+  "coordinates": {
+    "packBottomY": -0.1432,
+    "printedTopY": 0.12710000000000002,
+    "packTopY": 0.13710000000000003,
+    "topCrimpBaseY": 0.13160000000000002,
+    "tearSeamY": 0.12710000000000002,
+    "upperThirdStartY": 0.04366666666666666
+  },
+  "front": {
+    "rows": "bottom-to-top",
+    "winding": "negative-z-camera-facing",
+    "uMapping": "physical-left-to-right maps to source-u 1-to-0 to correct the observed Unity FBX horizontal mirror",
+    "basisBottomY": -0.14319999516010284,
+    "basisTopY": 0.12710000574588776,
+    "formedTopY": 0.09759037553959964,
+    "topDropMeters": 0.02950963020628812,
+    "meanNormalZ": -0.9992269853440424,
+    "leftPhysicalXSourceU": 1.0,
+    "rightPhysicalXSourceU": 0.0,
+    "rightOriginDropMeters": 0.03365238555980955,
+    "leftFarDropMeters": -2.7939677238464355e-09
+  },
+  "formedMouthComponents": {
+    "Pack_TopSealRemaining": {
+      "minY": 0.06359999626874924,
+      "maxY": 0.1371000111103058
+    },
+    "Pack_InnerFoilMouth": {
+      "minY": 0.048899997025728226,
+      "maxY": 0.12640000879764557
+    },
+    "Pack_InnerBackFoilRim": {
+      "minY": 0.10157999396324158,
+      "maxY": 0.12710000574588776
+    },
+    "Pack_RolledCrimpLip": {
+      "minY": 0.056049998849630356,
+      "maxY": 0.12690000236034393
+    },
+    "Pack_TornContourSweepCarrier": {
+      "minY": 0.05826999992132187,
+      "maxY": 0.12728001177310944
+    },
+    "Pack_TearFrontSidewall": {
+      "minY": 0.10658684372901917,
+      "maxY": 0.12131565064191818
+    },
+    "Pack_TabSidewall": {
+      "minY": 0.05481567978858948,
+      "maxY": 0.10421638190746307
+    },
+    "Pack_ReleasedSealStrip": {
+      "minY": 0.12063788622617722,
+      "maxY": 0.14198125898838043
+    },
+    "Pack_TopRightPullTab": {
+      "minY": 0.13624998927116394,
+      "maxY": 0.15302199125289917
+    }
+  },
+  "releasedStrip": {
+    "rootX": -0.0860000029206276,
+    "rootY": 0.12077216058969498,
+    "rootZ": -0.022532634437084198,
+    "unityMirrorCompensation": "negative Blender X projects to rendered screen-right"
+  },
+  "sealRepair": {
+    "tearOriginPhysicalU": 0.0,
+    "tearOriginUnityScreen": "right",
+    "openedSide": "physical-u less than or equal to tear front",
+    "rightOpenedCrimpHeightMeters": 0.0,
+    "leftSealedCrimpHeightMeters": 0.005500003695487976
+  },
+  "cavityRepair": {
+    "backWallThicknessMeters": 0.00599999725818634,
+    "backWallFiniteDepth": true
+  },
+  "checks": {
+    "tearSeamMatchesPrintedTop": true,
+    "topCrimpSitsAbovePrintedTop": true,
+    "archiveBandWillMapAboveStandardBand": true,
+    "frontTopMovesDownward": true,
+    "frontWindingFacesNegativeZCamera": true,
+    "tearStartsAtUnityScreenRight": true,
+    "openedCrimpCollapsesIntoFineLip": true,
+    "cavityBackWallHasFiniteDepth": true,
+    "allMouthPartsAttachInUpperThird": true,
+    "stripRootIsReflectedForUnityScreenRight": true,
+    "uCompensationIsExplicit": true
+  },
+  "passed": true
+}

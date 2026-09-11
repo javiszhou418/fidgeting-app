@@ -1,0 +1,110 @@
+{
+  "schemaVersion": 1,
+  "gate": "08-lighting",
+  "revision": 5,
+  "status": "ready_for_review",
+  "approvals": {
+    "gate07Revision": 12,
+    "exactUserWording": "继续",
+    "persisted": true
+  },
+  "immutableInputs": {
+    "materialBlendSha256": "953929045453e1d9c3bb46612da85a70eb1a078a115a103040778d2703988588",
+    "geometryDigest": "2fcf6d2b4344511bc6b86ce940a927576f9cdb4988f4022959a3372f4d3c1952",
+    "mechanismContractSha256": "9cd7a08f34d7d8dfc3c6f89f6c80a5c5c2dcae48bc0d5c54ebf455a0727ea571"
+  },
+  "lighting": {
+    "sharedHdrSha256": "a5b310c8c7fc17bda4110adb80e68913f1b5d623ffe01d935574813b80d1a872",
+    "displayTransform": "neutral-display-v1",
+    "parity": {
+      "ssim": 0.9240663347289435,
+      "meanAbsoluteError": 4.457941055297852,
+      "heatmapAreaFractionOver24": 0.08588441558441559,
+      "alignment": {
+        "blender": {
+          "bbox": [
+            293,
+            252,
+            1110,
+            856
+          ],
+          "centroid": [
+            698.0442842191552,
+            549.1336079561565
+          ],
+          "pixels": 387926
+        },
+        "unity": {
+          "bbox": [
+            267,
+            278,
+            1092,
+            895
+          ],
+          "centroid": [
+            676.2794966784293,
+            581.7874571460864
+          ],
+          "pixels": 398155
+        },
+        "intersectionOverUnion": 0.8641073008088823,
+        "centroidDeltaPixels": 39.242576923688624
+      },
+      "independentCropping": false,
+      "postAlignment": false
+    },
+    "appearance": {
+      "blenderRedFraction": 0.18172538061382842,
+      "unityRedFraction": 0.10606924438974771,
+      "blenderDarkFraction": 0.5903136165144899,
+      "unityDarkFraction": 0.7482965176878351,
+      "blenderClippedFraction": 0.0028064935064935066,
+      "unityClippedFraction": 0
+    }
+  },
+  "motion": {
+    "recordingSha256": "d8c9091d7fc74cfd9994c7c79e3f6f8a04ff44cf7a73c3f6e430f2b87bf5bdb6",
+    "sourceFrames": 90,
+    "encodedFrames": 180,
+    "durationSeconds": 6,
+    "fixedAxisVarianceMm": 0,
+    "pitchRollRadians": 0,
+    "checks": {
+      "sourceLightingBlend": true,
+      "allFramesRendered": true,
+      "rotationOnlyAtEndpoint": true,
+      "slideReturnOnlyAligned": true,
+      "full360Covered": true,
+      "fixedAxisInvariant": true,
+      "noPitchRollFlip": true,
+      "noIllegalMidRotationFrames": true,
+      "productRendererWhitelist": true,
+      "videoWritten": true
+    }
+  },
+  "validation": {
+    "blenderBuilder": "pass",
+    "lightingParityAudit": "pass",
+    "isolatedUnityBuilder": "pass",
+    "unityEditMode": "5/5 pass",
+    "focusedNode": "5/5 pass",
+    "fullNode": "199/199 pass",
+    "pipelineValidator": "errors/missing/unhashed 0/0/0",
+    "allPipelineValidator": "errors/missing/unhashed 0/0/0",
+    "browserDesktopMobileModalVideoDeepLink": "pass",
+    "browserRuntimeExceptions": 0,
+    "browserLoadingFailures": 0,
+    "video": "H.264 High yuv420p 960x720 30 fps 180 frames 6.0 s",
+    "syntax": "Python compile and Node syntax pass",
+    "xml": "xmllint pass",
+    "diffCheck": "pass"
+  },
+  "deliveryState": {
+    "visualApproval": "pending",
+    "shippingSceneModified": false,
+    "simulator": false,
+    "buildInstallPhone": false,
+    "deviceAccepted": false
+  },
+  "pass": true
+}

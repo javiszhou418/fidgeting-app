@@ -1,0 +1,92 @@
+{
+  "schemaVersion": 1,
+  "gate": "10-export",
+  "revision": 11,
+  "pass": true,
+  "viewerMetrics": {
+    "sampledPixels": 136639,
+    "redFraction": 0.3972145580690725,
+    "luminanceP05P50P95": [
+      0.11455921083688736,
+      0.1513717770576477,
+      0.23691345751285553
+    ],
+    "clippedWhiteFraction": 0.0009075007867446336,
+    "controlledSilverFraction": 0.023602339010092288
+  },
+  "sideMetrics": {
+    "sampledPixels": 78192,
+    "redFraction": 0.3703575813382443,
+    "luminanceP05P50P95": [
+      0.11372549086809158,
+      0.14428000152111053,
+      0.3764548897743225
+    ],
+    "clippedWhiteFraction": 0.0015858399836300389,
+    "controlledSilverFraction": 0.03481174544710456
+  },
+  "rejectionWholeImageWhiteFraction": 0.06894867995689655,
+  "calibration": {
+    "assetId": "magnetic-slide-tile-export-glb-r011",
+    "environment": "unity/FidgetingApp/ArtSource/ModelPipeline/magnetic-slide-tile/evidence/10-export/rev-011/package/environment/neutral-control-r009.exr",
+    "environmentIntensity": 0.58,
+    "outputColorSpace": "SRGBColorSpace",
+    "toneMapping": "ACESFilmicToneMapping",
+    "exposure": 0.9,
+    "directLights": {
+      "hemisphere": 1,
+      "key": 2.2,
+      "fill": 0.7,
+      "rim": 0.9
+    },
+    "horizontalFovDegrees": 26.6,
+    "ready": true,
+    "exposureControl": 0.9,
+    "exposureMin": 0.7,
+    "exposureMax": 1.1,
+    "environmentChecked": true
+  },
+  "videoProbe": {
+    "programs": [],
+    "stream_groups": [],
+    "streams": [
+      {
+        "width": 1200,
+        "height": 900,
+        "duration": "2.000000",
+        "nb_frames": "24"
+      }
+    ],
+    "format": {
+      "duration": "2.000000"
+    }
+  },
+  "artifacts": {
+    "viewerScreenshot": {
+      "path": "/Users/jiawei.zhou/Documents/Fidgeting app/unity/FidgetingApp/ArtSource/ModelPipeline/magnetic-slide-tile/evidence/10-export/rev-011/gate10-r011-threejs-neutral-hero.png",
+      "sha256": "9055293216a4a68463555f89d1ad297ff51d0e9bf3c75de1220b98038ff83667"
+    },
+    "orbitRecording": {
+      "path": "/Users/jiawei.zhou/Documents/Fidgeting app/unity/FidgetingApp/ArtSource/ModelPipeline/magnetic-slide-tile/evidence/10-export/rev-011/gate10-r011-real-glb-orbit.mp4",
+      "sha256": "c84bb750d5a31b802289ef39f0efeb2a04a8d58f339af2713698aee5e888e67e"
+    }
+  },
+  "checks": {
+    "browserPass": true,
+    "realGlbLoaded": true,
+    "orbitCompleted": true,
+    "zoomCompleted": true,
+    "neutralHdr": true,
+    "colorPipeline": true,
+    "exposureIsolated": true,
+    "deepBloodRedVisible": true,
+    "darkBodyVisible": true,
+    "silverControlled": true,
+    "noWhiteAreaExcess": true,
+    "rejectionWhiteAreaExcess": true,
+    "videoDimensions": true,
+    "videoFrames": true,
+    "videoNontrivial": true,
+    "runtimeClean": true
+  }
+}

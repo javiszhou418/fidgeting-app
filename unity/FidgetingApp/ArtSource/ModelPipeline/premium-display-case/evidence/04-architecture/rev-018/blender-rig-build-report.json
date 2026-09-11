@@ -1,0 +1,174 @@
+{
+  "schema": "premium-display-case-gate04-r018-pack-only-rig.v1",
+  "producer": {
+    "blender": "5.2.0 LTS",
+    "route": "deterministic-bpy"
+  },
+  "representation": "seven hand-authored Pack-only foil-pouch FBX relative blend-shape poses",
+  "actualPackArtwork": {
+    "bodyPath": "Assets/Plugins/iOS/GachaPacks/gacha-pack-standard-body.png",
+    "bodySha256": "ebc17bb238ebbcb82d36134bb2781838df610f8a3d1750c27b8ade10fc4681d6",
+    "flapPath": "Assets/Plugins/iOS/GachaPacks/gacha-pack-standard-flap.png",
+    "flapSha256": "b031fc5c57d194e9603e9b32e1cd603285aa564490f599f29bb0cd67dab33d49",
+    "canvas": [
+      384,
+      512
+    ],
+    "canvasAspect": 0.75,
+    "visualArtworkUvWindow": [
+      0.0,
+      0.02,
+      1.0,
+      0.815
+    ],
+    "aspectTreatment": "transparent canvas margins omitted without resampling; sampled printed pixels retain authored aspect"
+  },
+  "physicalCoordinates": {
+    "packBottomY": -0.1432,
+    "packTopY": 0.12710000000000002,
+    "tearSeamY": 0.12710000000000002,
+    "frontOpensTowardNegativeY": true
+  },
+  "frontOrientation": {
+    "rows": "bottom-to-top",
+    "basisNormalZ": -0.9992269853440424,
+    "physicalUToSourceU": "1-to-0"
+  },
+  "attachedCrimpHeightFraction": 0.025897151313355533,
+  "releasedSealStripHeightFraction": 0.0776914539400666,
+  "mouthDepthMeters": 0.107,
+  "foilThicknessMeters": 0.00075,
+  "authoredGuideStations": 49,
+  "unityRootRotationEuler": [
+    0.0,
+    0.0,
+    0.0
+  ],
+  "caseGeometryIncluded": false,
+  "caseRenderedOrBaked": false,
+  "poses": [
+    {
+      "key": "Basis",
+      "progress": 0.0,
+      "description": "sealed foil pouch; front and rear meet at an attached crimp seam"
+    },
+    {
+      "key": "Pose_TabCatch",
+      "progress": 0.11,
+      "description": "small upper-right tab catch and local compression"
+    },
+    {
+      "key": "Pose_Resistance",
+      "progress": 0.28,
+      "description": "outer printed foil peels first while inner liner lags"
+    },
+    {
+      "key": "Pose_TearAdvance",
+      "progress": 0.5,
+      "description": "narrow lateral tear front advances across the seam"
+    },
+    {
+      "key": "Pose_FormedMouth",
+      "progress": 0.7,
+      "description": "formed physical mouth with a fine lip and sidewalls"
+    },
+    {
+      "key": "Pose_CaseContained",
+      "progress": 0.86,
+      "description": "deep mouth holds one live case behind the front lip"
+    },
+    {
+      "key": "Pose_ContinuousRise",
+      "progress": 1.0,
+      "description": "same mouth permits vertical case extraction"
+    }
+  ],
+  "objects": [
+    {
+      "name": "Pack_FrontPrintedFoil",
+      "vertices": 833,
+      "polygons": 768,
+      "blendShapeCount": 6,
+      "role": "outer printed foil carrying unmodified 384x512 Pack art"
+    },
+    {
+      "name": "Pack_RearInnerFoil",
+      "vertices": 147,
+      "polygons": 96,
+      "blendShapeCount": 6,
+      "role": "rear reflective foil behind the live case"
+    },
+    {
+      "name": "Pack_TopSealRemaining",
+      "vertices": 98,
+      "polygons": 48,
+      "blendShapeCount": 6,
+      "role": "attached crimped physical-top seam, never a detached lid"
+    },
+    {
+      "name": "Pack_InnerFoilMouth",
+      "vertices": 147,
+      "polygons": 96,
+      "blendShapeCount": 6,
+      "role": "narrow reflective liner bridge at the physical mouth"
+    },
+    {
+      "name": "Pack_InnerBackFoilRim",
+      "vertices": 98,
+      "polygons": 48,
+      "blendShapeCount": 6,
+      "role": "rear foil rim behind the contained case"
+    },
+    {
+      "name": "Pack_RolledCrimpLip",
+      "vertices": 392,
+      "polygons": 384,
+      "blendShapeCount": 6,
+      "role": "fine irregular torn front lip"
+    },
+    {
+      "name": "Pack_TornContourSweepCarrier",
+      "vertices": 98,
+      "polygons": 48,
+      "blendShapeCount": 6,
+      "role": "local warm-neutral CC0 sweep carrier"
+    },
+    {
+      "name": "Pack_TearFrontSidewall",
+      "vertices": 8,
+      "polygons": 6,
+      "blendShapeCount": 6,
+      "role": "moving lateral tear-front cavity wall"
+    },
+    {
+      "name": "Pack_TabSidewall",
+      "vertices": 8,
+      "polygons": 6,
+      "blendShapeCount": 6,
+      "role": "fixed upper-right cavity wall"
+    },
+    {
+      "name": "Pack_ReleasedSealStrip",
+      "vertices": 20,
+      "polygons": 16,
+      "blendShapeCount": 6,
+      "role": "short two-sided curled 7.4-percent Pack-height seal strip"
+    },
+    {
+      "name": "Pack_TopRightPullTab",
+      "vertices": 10,
+      "polygons": 9,
+      "blendShapeCount": 6,
+      "role": "small upper-right tab only"
+    }
+  ],
+  "blend": "/Users/jiawei.zhou/Documents/Fidgeting app/unity/FidgetingApp/ArtSource/ModelPipeline/premium-display-case/staging/pack-opening-gate04-r018-coordinate-orientation/pack-opening-gate04-r018.blend",
+  "blendSha256": "c12b5792dad962cc7b3c2eee6ec37260afe34a303b22b6d5a8422067554d5017",
+  "fbx": "/Users/jiawei.zhou/Documents/Fidgeting app/unity/FidgetingApp/ArtSource/ModelPipeline/premium-display-case/staging/pack-opening-gate04-r018-coordinate-orientation/PackOpeningGate04R018PackOnlyRig.fbx",
+  "fbxSha256": "affe0a519712596660800dffb7d6b33126886defcaee9a33a658e97a79ca2f46",
+  "previews": [
+    "/Users/jiawei.zhou/Documents/Fidgeting app/unity/FidgetingApp/ArtSource/ModelPipeline/premium-display-case/staging/pack-opening-gate04-r018-coordinate-orientation/blender-sealed.png",
+    "/Users/jiawei.zhou/Documents/Fidgeting app/unity/FidgetingApp/ArtSource/ModelPipeline/premium-display-case/staging/pack-opening-gate04-r018-coordinate-orientation/blender-formed-mouth.png",
+    "/Users/jiawei.zhou/Documents/Fidgeting app/unity/FidgetingApp/ArtSource/ModelPipeline/premium-display-case/staging/pack-opening-gate04-r018-coordinate-orientation/blender-continuous-rise.png"
+  ]
+}

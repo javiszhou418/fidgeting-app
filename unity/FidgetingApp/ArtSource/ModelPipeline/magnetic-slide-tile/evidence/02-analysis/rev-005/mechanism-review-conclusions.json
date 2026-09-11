@@ -1,0 +1,97 @@
+{
+  "schemaVersion": 1,
+  "modelId": "magnetic-slide-tile",
+  "gate": "02-analysis",
+  "revision": 5,
+  "reportingMode": "two-layer-conclusion-first-interactive",
+  "userCorrection": {
+    "authority": "user-reference-frame-correction",
+    "priorRevision": 4,
+    "priorDisposition": "requested-revision",
+    "statement": "固定上片保持不动；活动下片、下片轴心与双侧滑轨共同平移，并绕平移后的下片轴心旋转。"
+  },
+  "motionModel": {
+    "upperTransform": "identity",
+    "lowerTranslation": "T_lower(s)=[0,+sL], 0<=s<=maxTravelL",
+    "axisWorld": "A_world(s)=A_lower_local+T_lower(s)",
+    "lowerRotation": "R_lower(theta) about A_world(s)",
+    "composition": "M_lower=T_lower(s)*R_about(A_lower_local,theta)",
+    "pivotDrift": 0,
+    "rails": {
+      "count": 2,
+      "placement": "bilateral longitudinal regions on lower reverse/internal face",
+      "owner": "moving-lower-carrier"
+    }
+  },
+  "userReview": {
+    "conclusions": [
+      {
+        "id": "fixed-upper-moving-lower",
+        "confidence": "user-authoritative",
+        "conclusion": "固定上片不移动，活动下片负责平移和旋转。",
+        "implication": "所有互动状态中，上片 transform 始终为 identity。"
+      },
+      {
+        "id": "axis-attached-to-lower",
+        "confidence": "user-authoritative",
+        "conclusion": "下片轴心固定在活动下片上，并随滑动改变世界位置。",
+        "implication": "轴心世界位移必须与下片平移严格相等。"
+      },
+      {
+        "id": "bilateral-lower-rails",
+        "confidence": "high",
+        "conclusion": "下片反面包含左右两条纵向滑轨区。",
+        "implication": "两条轨道和珠列随下片运动，不再使用中央单轨示意。"
+      },
+      {
+        "id": "one-outward-slide",
+        "confidence": "high",
+        "conclusion": "从闭合止点只朝一个外向方向打开，并可原路关闭。",
+        "implication": "负行程和越过闭合止点均不允许。"
+      },
+      {
+        "id": "normalized-travel",
+        "confidence": "medium",
+        "conclusion": "有效行程约为 0.38–0.46L，峰值约 0.50L。",
+        "implication": "当前只使用归一化长度，不换算毫米。"
+      },
+      {
+        "id": "translated-axis-detent-rotation",
+        "confidence": "high",
+        "conclusion": "活动下片绕已平移的轴心做 30 档 × 12° 旋转。",
+        "implication": "平移与旋转正确合成，轴心漂移为零。"
+      }
+    ],
+    "unknowns": [
+      "上片接触／随动件的真实形状与隐藏耦合。",
+      "槽壁截面，以及每个精确滑位是否允许旋转。",
+      "真实尺寸、力值、磁力、摩擦和 Haptic 手感。"
+    ],
+    "decisionQuestion": "半透明双侧滑轨与随下片移动的轴心，现在是否符合实物？"
+  },
+  "dimensionBoundary": {
+    "aspectRatioLW": [1.52, 1.62],
+    "travelRangeL": [0.38, 0.46],
+    "observedPeakTravelL": 0.5,
+    "physicalDimensions": "unknown-editable-user-measurement-only"
+  },
+  "simulatorBoundary": {
+    "canSimulate": [
+      "pointer-driven lower translation",
+      "rotation around translated lower axis",
+      "bilateral lower rail ownership",
+      "motion lag",
+      "detent snap and capture",
+      "audio cue",
+      "frame-rate-independent damping"
+    ],
+    "cannotValidate": [
+      "upper hidden follower geometry",
+      "Newton force",
+      "magnetic force",
+      "material friction",
+      "phone Haptic"
+    ]
+  },
+  "internalEvidenceRevision": 3
+}

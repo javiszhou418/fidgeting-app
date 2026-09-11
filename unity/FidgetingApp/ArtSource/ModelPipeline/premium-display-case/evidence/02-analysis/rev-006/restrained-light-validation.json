@@ -1,0 +1,84 @@
+{
+  "schema": "premium-display-case-restrained-light-validation.v1",
+  "status": "pass",
+  "checks": [
+    {
+      "id": "one-subject",
+      "status": "pass",
+      "value": 1
+    },
+    {
+      "id": "serial-phases-preserved",
+      "status": "pass"
+    },
+    {
+      "id": "one-360",
+      "status": "pass",
+      "count": 1
+    },
+    {
+      "id": "zero-simultaneous-translation-rotation",
+      "status": "pass",
+      "frames": 0
+    },
+    {
+      "id": "no-object-replacement",
+      "status": "pass",
+      "count": 0
+    },
+    {
+      "id": "no-toy-motion",
+      "status": "pass",
+      "count": 0
+    },
+    {
+      "id": "neutral-color-bound",
+      "status": "pass",
+      "maximumRgbChroma": 25,
+      "limit": 25
+    },
+    {
+      "id": "one-seam-light",
+      "status": "pass",
+      "count": 1
+    },
+    {
+      "id": "one-arrival-rim",
+      "status": "pass",
+      "count": 1
+    },
+    {
+      "id": "object-bound-rotation-rim",
+      "status": "pass"
+    },
+    {
+      "id": "one-final-sheen",
+      "status": "pass",
+      "count": 1
+    },
+    {
+      "id": "one-settle-halo",
+      "status": "pass",
+      "count": 1
+    },
+    {
+      "id": "no-persistent-light-loop",
+      "status": "pass",
+      "finalValues": {
+        "seamLight": 0.0,
+        "arrivalRim": 0.0,
+        "rotationSurfaceRim": 0.0,
+        "finalSheen": 0.0,
+        "settleHalo": 0.0
+      }
+    },
+    {
+      "id": "forbidden-effects-absent",
+      "status": "pass"
+    },
+    {
+      "id": "timing-not-locked",
+      "status": "pass"
+    }
+  ]
+}

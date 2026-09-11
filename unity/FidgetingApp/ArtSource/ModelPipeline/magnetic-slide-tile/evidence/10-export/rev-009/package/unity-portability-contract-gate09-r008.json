@@ -1,0 +1,1145 @@
+{
+  "schemaVersion": 1,
+  "gate": "09-environment",
+  "revision": 8,
+  "modelId": "magnetic-slide-tile",
+  "status": "portable-input-contract-not-unity-import-settings",
+  "finalGoal": {
+    "exactUserGoal": "transfer to Unity with no avoidable loss and run on iPhone",
+    "iphonePerformanceAndDeviceAcceptance": "future work after Gate 12 visual approval"
+  },
+  "losslessDefinition": {
+    "exactDeterministicPreservation": [
+      "geometry vertex/index digest",
+      "hierarchy and parent ownership",
+      "fixed-axis pivot and local transforms",
+      "UV coordinates",
+      "upper/lower/perimeter artwork mask bytes"
+    ],
+    "measuredVisualParity": [
+      "blood-red crystal response",
+      "silver and black material response",
+      "thin-film/iridescence approximation",
+      "lighting response",
+      "AgX-to-Unity tone-mapped output"
+    ],
+    "notPossible": "Blender procedural shader nodes cannot transfer one-to-one into Unity URP or remain byte-identical.",
+    "portableDocumentedInputs": [
+      "equirectangular OpenEXR",
+      "PBR source textures and packing plan",
+      "reflection probe and card expectations",
+      "color-management calibration plan"
+    ]
+  },
+  "assets": {
+    "mechanismContract": {
+      "path": "unity/FidgetingApp/ArtSource/ModelPipeline/magnetic-slide-tile/evidence/02-analysis/rev-016/mechanism-evidence-contract.json",
+      "sha256": "5aee71817c2c033ed92b770126ba0ecb6d79c2f032d786743b214b79078a47ea",
+      "role": "approved-mechanism-contract"
+    },
+    "gate06GeometryValidation": {
+      "path": "unity/FidgetingApp/ArtSource/ModelPipeline/magnetic-slide-tile/evidence/06-geometry/rev-004/geometry-validation.json",
+      "sha256": "52b85855a9bf795c1d5bb01e8f788e2820c1ec552bfd62d31d7282efe3756c38",
+      "role": "geometry-motion-authority"
+    },
+    "gate08LightingValidation": {
+      "path": "unity/FidgetingApp/ArtSource/ModelPipeline/magnetic-slide-tile/evidence/08-lighting/rev-002/lighting-validation.json",
+      "sha256": "8d3f9a590191623c16583c2d41a7056fc1a221e183a3050f68fdafa12f1e778c",
+      "role": "approved-light-camera-authority"
+    },
+    "gate08SourceBlend": {
+      "path": "unity/FidgetingApp/ArtSource/ModelPipeline/magnetic-slide-tile/evidence/08-lighting/rev-002/magnetic-slide-tile-lighting-r002.blend",
+      "sha256": "547055f5c04890575fab4b43e2287a62086ee7b4ee2b0e22fa3f92f0ea2e21b1",
+      "role": "approved-source-blend"
+    },
+    "gate09Blend": {
+      "path": "unity/FidgetingApp/ArtSource/ModelPipeline/magnetic-slide-tile/evidence/09-environment/rev-008/magnetic-slide-tile-environment-r008.blend",
+      "sha256": "d53886f887649e7398808c2938bed081328e11259e772b1420415dc2ffc30408",
+      "role": "environment-source-blend"
+    },
+    "gate09ReviewGlb": {
+      "path": "unity/FidgetingApp/ArtSource/ModelPipeline/magnetic-slide-tile/evidence/09-environment/rev-008/magnetic-slide-tile-environment-r008-lookdev.glb",
+      "sha256": "2d59f04b54c9d8c6ca17a97f0102bdf1d2332292dcb4a6115af86016276e391b",
+      "role": "interactive-review-only-not-export-approved"
+    },
+    "shippingEnvironment": {
+      "path": "unity/FidgetingApp/ArtSource/ModelPipeline/magnetic-slide-tile/evidence/09-environment/rev-008/magnetic-slide-tile-shipping-studio-r008.exr",
+      "sha256": "7f1c9fded84c453efbc5300a6a71fe2948534055d3f4ae5052696909f30be6ab",
+      "role": "portable-equirectangular-environment",
+      "colorSpace": "scene-linear Rec.709/D65"
+    },
+    "upperAlbedo": {
+      "path": "unity/FidgetingApp/ArtSource/ModelPipeline/magnetic-slide-tile/evidence/09-environment/rev-008/portable-textures/upper-albedo.png",
+      "sha256": "c0e9305d475cd2c591efc8a833a0aafb1aef4ccc437d84a3417674e6d1b453a5",
+      "role": "upper-editable-base-color",
+      "colorSpace": "sRGB"
+    },
+    "upperRoughness": {
+      "path": "unity/FidgetingApp/ArtSource/ModelPipeline/magnetic-slide-tile/evidence/09-environment/rev-008/portable-textures/upper-roughness.png",
+      "sha256": "854f1dbc393585ff9b88f808c1a46a35b091088ac8b83894763f502876e3df6a",
+      "role": "upper-roughness-source",
+      "colorSpace": "linear"
+    },
+    "lowerAlbedo": {
+      "path": "unity/FidgetingApp/ArtSource/ModelPipeline/magnetic-slide-tile/evidence/09-environment/rev-008/portable-textures/lower-albedo.png",
+      "sha256": "968c1e87ca2d5ea7c8fc57106e42bcd09dc95395fac7dd3be569e580ea8850eb",
+      "role": "lower-editable-base-color",
+      "colorSpace": "sRGB"
+    },
+    "lowerRoughness": {
+      "path": "unity/FidgetingApp/ArtSource/ModelPipeline/magnetic-slide-tile/evidence/09-environment/rev-008/portable-textures/lower-roughness.png",
+      "sha256": "ca2697560a2e57685a71c423f15f70a72ebb47c93c53cae0e3a8dae0b3248245",
+      "role": "lower-roughness-source",
+      "colorSpace": "linear"
+    },
+    "upperArtworkMask": {
+      "path": "unity/FidgetingApp/ArtSource/ModelPipeline/magnetic-slide-tile/evidence/07-material/rev-007/artwork-upper-mask.png",
+      "sha256": "8250df70d2286849db353862283b0d3db9c66e1ac92bed3795bcb5377a431c36",
+      "role": "upper-independent-artwork-mask",
+      "colorSpace": "linear"
+    },
+    "lowerArtworkMask": {
+      "path": "unity/FidgetingApp/ArtSource/ModelPipeline/magnetic-slide-tile/evidence/07-material/rev-010/artwork-lower-mask-r010.png",
+      "sha256": "7bf5921f469a217b850ff2ea94dc5ae6c251091b8de60bd81c1b88ec42dfa7c2",
+      "role": "lower-independent-artwork-mask",
+      "colorSpace": "linear"
+    },
+    "perimeterMask": {
+      "path": "unity/FidgetingApp/ArtSource/ModelPipeline/magnetic-slide-tile/evidence/07-material/rev-007/artwork-top-perimeter-border-mask.png",
+      "sha256": "2179bf26210994c8b3d279337bf6ad0f4beaee3c7285ae97d1cd888db2bd64fc",
+      "role": "full-black-perimeter-mask",
+      "colorSpace": "linear"
+    }
+  },
+  "geometry": {
+    "digestAlgorithm": "Gate 06 deterministic SHA-256 over ordered core object names, local vertex coordinates and polygon indices",
+    "digest": "e2a838c22b743c7b0a05a20df060817f4e324bad5c84c11592c673c25ee002fe",
+    "closedBoundsMm": [
+      50,
+      31,
+      12
+    ],
+    "measurementState": "user-authorized-provisional; not a production measurement",
+    "flatBottomExteriorTopZMm": 5.875,
+    "fixedAxisBossProtrusionMm": 0.2,
+    "uvDigest": "48fe18368ab074353d693244c1e62ee387f6b52f11f249cf5c8bb38910e3f062",
+    "hierarchy": {
+      "MagneticSlideTile_G05_R006": {
+        "type": "EMPTY",
+        "parent": null,
+        "matrixWorld": [
+          [
+            1.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            1.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            0.0,
+            1.0,
+            0.0
+          ],
+          [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        ]
+      },
+      "BottomExterior": {
+        "type": "MESH",
+        "parent": "MagneticSlideTile_G05_R006",
+        "matrixWorld": [
+          [
+            1.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            1.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            0.0,
+            1.0,
+            2.9375
+          ],
+          [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        ]
+      },
+      "FixedAxis": {
+        "type": "EMPTY",
+        "parent": "FixedAxisBoss",
+        "matrixWorld": [
+          [
+            1.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            1.0,
+            0.0,
+            -9.0
+          ],
+          [
+            0.0,
+            0.0,
+            1.0,
+            5.074999809
+          ],
+          [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        ]
+      },
+      "FixedAxisBoss": {
+        "type": "MESH",
+        "parent": "BottomExterior",
+        "matrixWorld": [
+          [
+            1.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            1.0,
+            0.0,
+            -9.0
+          ],
+          [
+            0.0,
+            0.0,
+            1.0,
+            5.074999809
+          ],
+          [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        ]
+      },
+      "MinimumOverlapDisk": {
+        "type": "EMPTY",
+        "parent": "BottomExterior",
+        "matrixWorld": [
+          [
+            1.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            1.0,
+            0.0,
+            -9.0
+          ],
+          [
+            0.0,
+            0.0,
+            1.0,
+            5.875
+          ],
+          [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        ]
+      },
+      "RotatingCarrier": {
+        "type": "EMPTY",
+        "parent": "FixedAxisBoss",
+        "matrixWorld": [
+          [
+            1.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            1.0,
+            0.0,
+            -9.0
+          ],
+          [
+            0.0,
+            0.0,
+            1.0,
+            5.394999981
+          ],
+          [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        ]
+      },
+      "RotatingCarrierBody": {
+        "type": "MESH",
+        "parent": "RotatingCarrier",
+        "matrixWorld": [
+          [
+            1.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            1.0,
+            0.0,
+            -9.0
+          ],
+          [
+            0.0,
+            0.0,
+            1.0,
+            5.394999981
+          ],
+          [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        ]
+      },
+      "CarrierFollowerLeft": {
+        "type": "MESH",
+        "parent": "RotatingCarrier",
+        "matrixWorld": [
+          [
+            1.0,
+            0.0,
+            0.0,
+            -6.0
+          ],
+          [
+            0.0,
+            1.0,
+            0.0,
+            -9.0
+          ],
+          [
+            0.0,
+            0.0,
+            1.0,
+            5.465000153
+          ],
+          [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        ]
+      },
+      "CarrierFollowerRight": {
+        "type": "MESH",
+        "parent": "RotatingCarrier",
+        "matrixWorld": [
+          [
+            1.0,
+            0.0,
+            0.0,
+            6.0
+          ],
+          [
+            0.0,
+            1.0,
+            0.0,
+            -9.0
+          ],
+          [
+            0.0,
+            0.0,
+            1.0,
+            5.465000153
+          ],
+          [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        ]
+      },
+      "BallCandidateLeft": {
+        "type": "MESH",
+        "parent": "RotatingCarrier",
+        "matrixWorld": [
+          [
+            1.0,
+            0.0,
+            0.0,
+            -11.75
+          ],
+          [
+            0.0,
+            1.0,
+            0.0,
+            -9.0
+          ],
+          [
+            0.0,
+            0.0,
+            1.0,
+            4.574999809
+          ],
+          [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        ]
+      },
+      "BallCandidateRight": {
+        "type": "MESH",
+        "parent": "RotatingCarrier",
+        "matrixWorld": [
+          [
+            1.0,
+            0.0,
+            0.0,
+            11.75
+          ],
+          [
+            0.0,
+            1.0,
+            0.0,
+            -9.0
+          ],
+          [
+            0.0,
+            0.0,
+            1.0,
+            4.574999809
+          ],
+          [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        ]
+      },
+      "UnknownSprings": {
+        "type": "EMPTY",
+        "parent": "RotatingCarrier",
+        "matrixWorld": [
+          [
+            1.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            1.0,
+            0.0,
+            -9.0
+          ],
+          [
+            0.0,
+            0.0,
+            1.0,
+            5.394999981
+          ],
+          [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        ]
+      },
+      "UnknownPreload": {
+        "type": "EMPTY",
+        "parent": "RotatingCarrier",
+        "matrixWorld": [
+          [
+            1.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            1.0,
+            0.0,
+            -9.0
+          ],
+          [
+            0.0,
+            0.0,
+            1.0,
+            5.394999981
+          ],
+          [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        ]
+      },
+      "MovingTop": {
+        "type": "EMPTY",
+        "parent": "MagneticSlideTile_G05_R006",
+        "matrixWorld": [
+          [
+            1.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            1.0,
+            0.0,
+            -9.0
+          ],
+          [
+            0.0,
+            0.0,
+            1.0,
+            0.0
+          ],
+          [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        ]
+      },
+      "TopLocalSlide": {
+        "type": "EMPTY",
+        "parent": "MovingTop",
+        "matrixWorld": [
+          [
+            1.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            1.0,
+            0.0,
+            -9.0
+          ],
+          [
+            0.0,
+            0.0,
+            1.0,
+            0.0
+          ],
+          [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        ]
+      },
+      "MovingTopBody": {
+        "type": "MESH",
+        "parent": "TopLocalSlide",
+        "matrixWorld": [
+          [
+            1.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            1.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            0.0,
+            1.0,
+            9.0625
+          ],
+          [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        ]
+      },
+      "TopOuterGrooveLeft": {
+        "type": "EMPTY",
+        "parent": "MovingTopBody",
+        "matrixWorld": [
+          [
+            1.0,
+            0.0,
+            0.0,
+            -11.75
+          ],
+          [
+            0.0,
+            1.0,
+            0.0,
+            2.5
+          ],
+          [
+            0.0,
+            0.0,
+            1.0,
+            6.125
+          ],
+          [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        ]
+      },
+      "TopInnerGrooveLeft": {
+        "type": "EMPTY",
+        "parent": "MovingTopBody",
+        "matrixWorld": [
+          [
+            1.0,
+            0.0,
+            0.0,
+            -6.0
+          ],
+          [
+            0.0,
+            1.0,
+            0.0,
+            2.5
+          ],
+          [
+            0.0,
+            0.0,
+            1.0,
+            6.125
+          ],
+          [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        ]
+      },
+      "TopInnerGrooveRight": {
+        "type": "EMPTY",
+        "parent": "MovingTopBody",
+        "matrixWorld": [
+          [
+            1.0,
+            0.0,
+            0.0,
+            6.0
+          ],
+          [
+            0.0,
+            1.0,
+            0.0,
+            2.5
+          ],
+          [
+            0.0,
+            0.0,
+            1.0,
+            6.125
+          ],
+          [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        ]
+      },
+      "TopOuterGrooveRight": {
+        "type": "EMPTY",
+        "parent": "MovingTopBody",
+        "matrixWorld": [
+          [
+            1.0,
+            0.0,
+            0.0,
+            11.75
+          ],
+          [
+            0.0,
+            1.0,
+            0.0,
+            2.5
+          ],
+          [
+            0.0,
+            0.0,
+            1.0,
+            6.125
+          ],
+          [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        ]
+      }
+    },
+    "blenderFixedAxisObjectMatrix": [
+      [
+        1.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        1.0,
+        0.0,
+        -9.0
+      ],
+      [
+        0.0,
+        0.0,
+        1.0,
+        5.074999809
+      ],
+      [
+        0.0,
+        0.0,
+        0.0,
+        1.0
+      ]
+    ],
+    "requiredNamedRoots": {
+      "fixed": [
+        "BottomExterior",
+        "FixedAxis",
+        "FixedAxisBoss",
+        "MinimumOverlapDisk"
+      ],
+      "carrier": [
+        "RotatingCarrier",
+        "RotatingCarrierBody",
+        "CarrierFollowerLeft",
+        "CarrierFollowerRight"
+      ],
+      "top": [
+        "MovingTop",
+        "TopLocalSlide",
+        "MovingTopBody",
+        "TopOuterGrooveLeft",
+        "TopInnerGrooveLeft",
+        "TopInnerGrooveRight",
+        "TopOuterGrooveRight"
+      ]
+    }
+  },
+  "motion": {
+    "axisPointWorldMm": [
+      0,
+      -9.5,
+      0
+    ],
+    "axisDirection": "+Z",
+    "coordinateMapping": {
+      "mechanismContractSpace": "2D interaction plane with Z=0",
+      "blenderFixedAxisObjectOriginMm": [
+        0,
+        -9,
+        5.074999809
+      ],
+      "rule": "Gate 10 must preserve the Blender object matrix exactly and retain the mechanism-space axis metadata; do not silently equate the two coordinate spaces."
+    },
+    "fixedObjects": [
+      "BottomExterior",
+      "FixedAxis",
+      "FixedAxisBoss",
+      "MinimumOverlapDisk"
+    ],
+    "carrierTransform": "R_fixedAxis(theta)",
+    "topTransform": "R_fixedAxis(theta) * T_local(slide)",
+    "detentStepDegrees": 12,
+    "detentCount": 30,
+    "reviewAnglesDegrees": [
+      0,
+      12,
+      36
+    ],
+    "maximumTravelMm": 18.076433121019107,
+    "minimumOverlapContainment": {
+      "source": {
+        "path": "unity/FidgetingApp/ArtSource/ModelPipeline/magnetic-slide-tile/evidence/06-geometry/rev-004/geometry-validation.json",
+        "sha256": "52b85855a9bf795c1d5bb01e8f788e2820c1ec552bfd62d31d7282efe3756c38",
+        "role": "geometry-motion-authority"
+      },
+      "denseSweepSamples": 3600,
+      "angularStepDegrees": 0.5,
+      "allValid": true
+    },
+    "selfMotion": "forbidden; angular velocity starts and resets at zero"
+  },
+  "artworkAndTextures": {
+    "upperAndLowerIndependentlyReplaceable": true,
+    "upperMask": {
+      "path": "unity/FidgetingApp/ArtSource/ModelPipeline/magnetic-slide-tile/evidence/07-material/rev-007/artwork-upper-mask.png",
+      "sha256": "8250df70d2286849db353862283b0d3db9c66e1ac92bed3795bcb5377a431c36",
+      "role": "upper-independent-artwork-mask",
+      "colorSpace": "linear"
+    },
+    "lowerMask": {
+      "path": "unity/FidgetingApp/ArtSource/ModelPipeline/magnetic-slide-tile/evidence/07-material/rev-010/artwork-lower-mask-r010.png",
+      "sha256": "7bf5921f469a217b850ff2ea94dc5ae6c251091b8de60bd81c1b88ec42dfa7c2",
+      "role": "lower-independent-artwork-mask",
+      "colorSpace": "linear"
+    },
+    "perimeterMask": {
+      "path": "unity/FidgetingApp/ArtSource/ModelPipeline/magnetic-slide-tile/evidence/07-material/rev-007/artwork-top-perimeter-border-mask.png",
+      "sha256": "2179bf26210994c8b3d279337bf6ad0f4beaee3c7285ae97d1cd888db2bd64fc",
+      "role": "full-black-perimeter-mask",
+      "colorSpace": "linear"
+    },
+    "rules": {
+      "baseColor": {
+        "sRGB": true,
+        "filter": "trilinear",
+        "wrap": "clamp",
+        "mipmaps": true
+      },
+      "roughnessMaskAO": {
+        "sRGB": false,
+        "filter": "trilinear",
+        "wrap": "clamp",
+        "mipmaps": true
+      },
+      "artworkMasks": {
+        "sRGB": false,
+        "filter": "bilinear",
+        "wrap": "clamp",
+        "mipmaps": true,
+        "alphaIsTransparency": false
+      },
+      "normal": {
+        "textureType": "normal-map",
+        "sRGB": false,
+        "filter": "trilinear",
+        "wrap": "clamp",
+        "mipmaps": true
+      },
+      "compressionDecision": "Gate 10 must compare lossless source against iPhone ASTC candidates; no compression is authorized at Gate 09."
+    }
+  },
+  "pbrBakeAndPackingPlan": {
+    "preserveSourceFiles": [
+      "upperAlbedo",
+      "lowerAlbedo",
+      "upperRoughness",
+      "lowerRoughness",
+      "upperArtworkMask",
+      "lowerArtworkMask",
+      "perimeterMask"
+    ],
+    "perArtworkLayer": {
+      "BaseMap": "RGBA sRGB; approved albedo in RGB; alpha reserved and must not merge upper/lower masks",
+      "MaskMap": "RGBA linear: R metallic, G ambient occlusion, B crystal/detail mask, A smoothness=1-roughness",
+      "NormalMap": "tangent-space linear normal; bake crystal mosaic/microflake normal response at Gate 10",
+      "ArtworkMask": "separate single-channel linear asset; upper and lower remain independent"
+    },
+    "bakeRequirements": {
+      "minimumResolutionPx": [
+        1024,
+        1024
+      ],
+      "supersampling": "4x before downsample",
+      "paddingPxAtFinalResolution": 16,
+      "tangentBasis": "MikkTSpace",
+      "ambientOcclusion": "model-only neutral AO; environment excluded",
+      "proceduralSource": "approved Gate 07 rev 11 Blender nodes",
+      "hashManifest": "Gate 10 records every source and baked output SHA-256"
+    }
+  },
+  "unityUrpShaderTargets": {
+    "silver": {
+      "baseColorLinear": [
+        0.78,
+        0.77,
+        0.74,
+        1.0
+      ],
+      "metallic": 1.0,
+      "roughness": 0.075,
+      "anisotropy": 0.16,
+      "anisotropyRotation": 0.08,
+      "coatWeight": 0.08,
+      "coatRoughness": 0.018,
+      "microScratchScale": 520.0,
+      "microScratchStrength": 0.012,
+      "emission": 0.0
+    },
+    "bloodRedCrystal": {
+      "deepBloodRedLinear": [
+        0.18,
+        0.003,
+        0.008,
+        1.0
+      ],
+      "darkRubyLinear": [
+        0.018,
+        0.00025,
+        0.0008,
+        1.0
+      ],
+      "highlightRubyLinear": [
+        0.72,
+        0.025,
+        0.045,
+        1.0
+      ],
+      "roughnessMinMax": [
+        0.022,
+        0.11
+      ],
+      "ior": 1.52,
+      "coatWeight": 0.48,
+      "coatRoughness": 0.035,
+      "transmissionMinMax": [
+        0.05,
+        0.3
+      ],
+      "thinFilmIor": 1.38,
+      "thinFilmThicknessNm": [
+        365.0,
+        455.0
+      ],
+      "mosaicScale": 24.0,
+      "mosaicDetailScale": 120.0,
+      "mosaicBumpStrength": 0.22,
+      "mosaicBumpDistanceMm": 0.024,
+      "motifBumpStrength": 0.16,
+      "motifDepthMm": 0.045,
+      "iridescenceMix": 0.08,
+      "emission": 0.0,
+      "microflakeScale": 85.0,
+      "microflakeThreshold": [
+        0.72,
+        0.79
+      ],
+      "microflakeColorLinear": [
+        1.0,
+        0.22,
+        0.28,
+        1.0
+      ],
+      "microflakeMix": 0.7,
+      "microflakeBumpStrength": 0.11,
+      "microflakeBumpDistanceMm": 0.006,
+      "granularVariationScale": 28.0,
+      "granularVariationMix": 0.68,
+      "implementation": "URP Lit-compatible custom shader; baked crystal detail plus view-dependent Fresnel/thin-film approximation",
+      "fresnelF0FromIor": 0.04257999
+    },
+    "blackMotif": {
+      "baseColorLinear": [
+        0.004,
+        0.0015,
+        0.0018,
+        1.0
+      ],
+      "metallic": 0.42,
+      "roughness": 0.16,
+      "coatWeight": 0.35
+    },
+    "blackPerimeterAndSide": {
+      "baseColorLinear": [
+        0.018,
+        0.02,
+        0.024,
+        1.0
+      ],
+      "metallic": 0.24,
+      "roughness": 0.18,
+      "coatWeight": 0.55,
+      "borderMaskWidthPx": 64,
+      "outerInsetPx": 0
+    },
+    "iridescenceApproximation": {
+      "thinFilmIor": 1.38,
+      "thicknessNm": [
+        365.0,
+        455.0
+      ],
+      "mix": 0.08,
+      "viewTerm": "Schlick Fresnel using crystal IOR 1.52",
+      "lookup": "bake a 1D spectral-response LUT at Gate 10; do not claim graph identity"
+    },
+    "emission": 0
+  },
+  "environmentAndReflections": {
+    "environment": {
+      "schemaVersion": 1,
+      "asset": "magnetic-slide-tile-shipping-studio-r008.exr",
+      "projection": "equirectangular",
+      "resolutionPx": [
+        2048,
+        1024
+      ],
+      "format": "OpenEXR RGBA half/float scene-linear",
+      "colorPrimaries": "Rec.709",
+      "transfer": "linear",
+      "whitePoint": "D65",
+      "alpha": 1,
+      "wrap": "repeat-u-clamp-v",
+      "seamMaxAbsoluteLinearDelta": 0.0,
+      "minimumLinearLuminance": 0.017865583300590515,
+      "maximumLinearLuminance": 2.504509687423706,
+      "p01LinearLuminance": 0.017926953732967377,
+      "p99LinearLuminance": 1.3340706825256348,
+      "dynamicRangeStopsP01ToP99": 6.217560939337681,
+      "source": "deterministic periodic analytic environment; no external HDRI",
+      "unityIntent": "Import later as linear Cubemap from equirectangular EXR; do not apply settings before Gate 10/11.",
+      "sha256": "7f1c9fded84c453efbc5300a6a71fe2948534055d3f4ae5052696909f30be6ab",
+      "worldStrength": 0.65,
+      "rotationDegrees": 0
+    },
+    "background": "same EXR, directly visible; no Blender-only procedural world nodes",
+    "ground": {
+      "material": "M09R8_PortableGround",
+      "baseColorLinear": [
+        0.018,
+        0.016,
+        0.017,
+        1
+      ],
+      "metallic": 0,
+      "roughness": 0.42
+    },
+    "approvedLightsDigest": "890e1f123a0b2f3cafa53debd2bc2bccd5b36c5a9d689df68875812be320a36c",
+    "approvedSourceCamerasDigest": "916c5b3bd1e07ac91c7b6725fe79d3b339d7eaa722ae0c617c74c3f59f2f0259",
+    "reflectionCards": {
+      "source": "approved Gate 08 rev 2 light rig",
+      "count": 4,
+      "rule": "preserve card transforms and visibility roles; cards may affect reflections but stay hidden from product camera"
+    },
+    "unityProbeExpectation": {
+      "type": "local box-projected Reflection Probe",
+      "centerWorldMm": [
+        0,
+        -3,
+        12
+      ],
+      "sizeMm": [
+        140,
+        140,
+        90
+      ],
+      "blendDistanceMm": 20,
+      "hdr": true,
+      "resolutionCandidatePx": 512,
+      "refresh": "baked",
+      "sourceCubemap": "derive from the hash-locked equirectangular EXR",
+      "probePriority": 1,
+      "performanceAcceptance": "benchmark resolution and ASTC/HDR format on iPhone only after Gate 12 approval"
+    }
+  },
+  "colorManagement": {
+    "blenderReference": {
+      "viewTransform": "AgX",
+      "look": "AgX - Medium High Contrast",
+      "exposureEv": -0.35,
+      "gamma": 1,
+      "whitePoint": "D65"
+    },
+    "unityStartingPoint": {
+      "renderPipeline": "URP linear HDR",
+      "toneMapper": "ACES",
+      "whiteBalanceKelvin": 6504,
+      "whiteBalanceTint": 10,
+      "postExposureEv": 0
+    },
+    "mappingPlan": [
+      "Gate 11 captures matched-camera linear EXR before tone mapping in Blender and Unity.",
+      "Gate 11 captures the same 24 color patches, silver highlight, blood-red crystal and black motif under the hash-locked environment.",
+      "Use Unity ACES directly when DeltaE and clipping tolerances pass.",
+      "Only if ACES fails, fit and hash a 32x32x32 .cube LUT against Blender AgX reference, then re-run every parity metric."
+    ],
+    "claim": "AgX and Unity ACES/Neutral are not identical transforms; acceptance is measured parity."
+  },
+  "acceptanceTolerances": {
+    "closedBoundsMaxAbsoluteErrorMm": 0.001,
+    "vertexIndexDigest": "exact SHA-256 match",
+    "hierarchyParentAndNames": "exact match",
+    "pivotAxisPointMaxAbsoluteErrorMm": 0.001,
+    "uvMaxAbsoluteCoordinateError": 1e-06,
+    "artworkMaskBytes": "exact SHA-256 match",
+    "silhouette": {
+      "minimumSSIM": 0.995,
+      "maximumEdgeDistancePxAt1400x1100": 1
+    },
+    "colorDeltaE2000Median": {
+      "silver": 3,
+      "bloodRed": 4,
+      "black": 2.5
+    },
+    "colorDeltaE2000P95Maximum": 6,
+    "reflectionContinuity": {
+      "hdriSeamMaxAbsoluteLinearDelta": 1e-06,
+      "highlightCentroidMaxErrorPxAt1400x1100": 2,
+      "highlightMeanLuminanceRelativeError": 0.05
+    },
+    "clipping": {
+      "maximumPixelFraction": 0.001,
+      "maximumAbsoluteDifferenceFromBlender": 0.0005
+    },
+    "emission": 0,
+    "containment": "all 3600 dense-sweep samples valid"
+  },
+  "deferred": {
+    "unityImportSettingsApplied": false,
+    "unitySceneChanged": false,
+    "shippingModelChanged": false,
+    "build": false,
+    "install": false,
+    "iphoneRun": false,
+    "iphonePerformanceAndAcceptance": "after Gate 12 visual approval"
+  }
+}

@@ -1,0 +1,62 @@
+{
+  "schema": "premium-display-case-gate04-r021-preflight-self-rejection.v1",
+  "outcome": "self-rejected",
+  "reviewedAt": "2026-09-01T00:19:00Z",
+  "source": "actual isolated Unity 6000.5.6f1 URP 17.5 Play Mode frames",
+  "candidateScope": "isolated Pack-mouth repair only",
+  "failedConditions": [
+    {
+      "id": "top-seal-covers-only-sealed-segments",
+      "frame": "t=0.700 diagnostics/top-seal-id-0.700.png",
+      "cause": "The emitted top-seal mask begins at viewport x=0.0000 and spans width=0.3021, outside the Pack bounds x=0.3127..0.6873. The UV clip plus collapsed mesh still produces an off-Pack diagonal mask, so it does not prove sealed-segment-only coverage."
+    },
+    {
+      "id": "formed-mouth-liner-and-cavity-separate",
+      "frame": "t=0.700 preflight/formed-mouth-070.png",
+      "cause": "The actual material-ID capture has visibleCavityPixels=0 and largestCavityClusterPixels=0. The required contiguous dark cavity is at least 128 pixels."
+    },
+    {
+      "id": "contained-mouth-liner-and-cavity-separate",
+      "frame": "t=0.900 preflight/case-contained-090.png",
+      "cause": "The actual material-ID capture has visibleCavityPixels=102 and largestCavityClusterPixels=102, below the 128-pixel requirement."
+    }
+  ],
+  "fullSizeBeautyInspection": {
+    "mode": "native-size 1206x2622 Unity frame inspection without resampling",
+    "verdict": "Rejected. The t=0.700 frame does not show a dark cavity behind a distinct liner. The t=0.900 frame shows the live case edge, but does not independently read top foil mouth to deep cavity to case inside."
+  },
+  "preservedArtifacts": {
+    "preflightReport": {
+      "path": "unity/FidgetingApp/ArtSource/ModelPipeline/premium-display-case/evidence/04-architecture/rev-021/preflight/r021-preflight-report.json",
+      "sha256": "aaf7b8c682f36a3042570f86fe8902264f10c6072d4c4907fad09db00252e56d"
+    },
+    "preflightResults": {
+      "path": "unity/FidgetingApp/ArtSource/ModelPipeline/premium-display-case/evidence/04-architecture/rev-021/preflight/r021-preflight-results.xml",
+      "sha256": "c3eebc73d396dc23c0d834a19f8ec62b051cbcdf9853c7162ada5cbdb147dbd8"
+    },
+    "formedMouthFrame": {
+      "path": "unity/FidgetingApp/ArtSource/ModelPipeline/premium-display-case/evidence/04-architecture/rev-021/preflight/formed-mouth-070.png",
+      "sha256": "f010c3940d210eeaa21b98f1025a0f23d34e7a769b47eaa0a4d1831f81d857ce"
+    },
+    "containedCaseFrame": {
+      "path": "unity/FidgetingApp/ArtSource/ModelPipeline/premium-display-case/evidence/04-architecture/rev-021/preflight/case-contained-090.png",
+      "sha256": "fbcddec359894200048071c1f2196b07d2e59900526051ed965cd6cbbf1cc60a"
+    },
+    "staticSheet": {
+      "path": "unity/FidgetingApp/ArtSource/ModelPipeline/premium-display-case/evidence/04-architecture/rev-021/preflight/primary-static-sheet.png",
+      "sha256": "5175fd8af8bc8cff2699dd02897b15033dd90f00d3f60afa0621bdbd6a249cc6"
+    }
+  },
+  "passedBeforeStop": {
+    "blenderGeometryProbe": "13/13 checks passed",
+    "isolatedStructuralChecks": "7/7 checks passed",
+    "isolatedEditModeTests": "11/11 tests passed",
+    "artworkIdentity": "identity margin=0.076571",
+    "caseContainment": "visibleWithPack=69370; frontOcclusion=4725; contiguous=4725",
+    "visualEffectsIntensity": 0.0
+  },
+  "stopCondition": "Static preflight failed. No scrub, full proof, pipeline registration, documentation update, canonical project change, device build, or device installation ran.",
+  "shippingReady": false,
+  "physicalPhoneInstalled": false,
+  "statusText": "视觉批准待确认，未推送手机"
+}

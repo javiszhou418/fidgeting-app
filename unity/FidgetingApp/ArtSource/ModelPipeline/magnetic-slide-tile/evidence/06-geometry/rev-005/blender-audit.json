@@ -1,0 +1,63 @@
+{
+  "schemaVersion": 1,
+  "pass": true,
+  "blenderVersion": "5.2.0 LTS",
+  "checks": {
+    "gateAndRevision": true,
+    "contractHash": true,
+    "gate05SourceHash": true,
+    "geometryDigest": true,
+    "exactBounds": true,
+    "flatBottomPlane": true,
+    "singleFixedAxis": true,
+    "endpointInterlockMetadata": true,
+    "productWhitelist": true,
+    "minimumDiskMetadataOnly": true,
+    "internalTechnicalOnly": true,
+    "fourGrooves": true,
+    "manifold": true,
+    "normals": true,
+    "uvs": true,
+    "zeroSelfMotion": true,
+    "noFinalMaterials": true,
+    "noSimulatorOrUnity": true
+  },
+  "contractSha256": "9cd7a08f34d7d8dfc3c6f89f6c80a5c5c2dcae48bc0d5c54ebf455a0727ea571",
+  "gate05SourceSha256": "f587be803cf98e134f173e961fe4e096708f08916af51d971b0ef381d51c11a2",
+  "geometryDigest": "2fcf6d2b4344511bc6b86ce940a927576f9cdb4988f4022959a3372f4d3c1952",
+  "boundsMm": [
+    31.0,
+    50.0,
+    12.0
+  ],
+  "bottomTopPlaneMaximumDeviationMm": 0.0,
+  "fixedPivotMm": [
+    0.0,
+    -9.0,
+    5.875
+  ],
+  "pivotObjects": [
+    "FixedAxis"
+  ],
+  "nonmanifoldEdges": {
+    "BallCandidateLeft": 0,
+    "BallCandidateRight": 0,
+    "BottomExterior": 0,
+    "CarrierFollowerLeft": 0,
+    "CarrierFollowerRight": 0,
+    "InternalAxisBoss": 0,
+    "MovingTopBody": 0,
+    "RotatingCarrierBody": 0
+  },
+  "invalidPolygonNormals": {
+    "BallCandidateLeft": 0,
+    "BallCandidateRight": 0,
+    "BottomExterior": 0,
+    "CarrierFollowerLeft": 0,
+    "CarrierFollowerRight": 0,
+    "InternalAxisBoss": 0,
+    "MovingTopBody": 0,
+    "RotatingCarrierBody": 0
+  },
+  "objectCount": 51
+}

@@ -1,0 +1,54 @@
+{
+  "schema": "premium-display-case-gate04-r017-scrub-visual-self-rejection.v1",
+  "outcome": "self-rejected",
+  "reviewedAt": "2026-08-31T07:30:59.351Z",
+  "reviewMode": "native-pixel, no-resampling inspection",
+  "reviewedFrames": [
+    {
+      "timeSeconds": 0.7,
+      "path": "unity/FidgetingApp/ArtSource/ModelPipeline/premium-display-case/evidence/04-architecture/rev-017/scrub/review-100pct/frame-0000-pack-native-pixels.png",
+      "sha256": "b4a5d3b7a541a42277b5c5895ca06a830429341a4b2306cb2af4baf09acd5fae",
+      "nativePixelDimensions": [
+        1206,
+        1360
+      ]
+    },
+    {
+      "timeSeconds": 0.9,
+      "path": "unity/FidgetingApp/ArtSource/ModelPipeline/premium-display-case/evidence/04-architecture/rev-017/scrub/review-100pct/frame-0012-pack-native-pixels.png",
+      "sha256": "f82d45ebef0497218092241fef02d74dbae3fe67b99488b451e120cad924868d",
+      "nativePixelDimensions": [
+        1206,
+        1360
+      ]
+    },
+    {
+      "timeSeconds": 1.1333333333,
+      "path": "unity/FidgetingApp/ArtSource/ModelPipeline/premium-display-case/evidence/04-architecture/rev-017/scrub/review-100pct/frame-0026-pack-native-pixels.png",
+      "sha256": "c66b2306a2a1c7682367a5b0236d594e0225b81646ba602165fde1292a19cf69",
+      "nativePixelDimensions": [
+        1206,
+        1360
+      ]
+    }
+  ],
+  "failedVisualCriteria": [
+    {
+      "id": "pack-artwork-upright",
+      "evidence": "FIDGET ARCHIVE, SERIES 01, and STANDARD are mirror-reversed in every reviewed frame. The vertical UV order passes, but the front artwork is not readable upright."
+    },
+    {
+      "id": "top-seal-narrow-peeled-foil-strip",
+      "evidence": "The opening is at the lower edge and reads as a broad stepped foil flap/rail. The top seal remains a straight full-width band, not a compact two-sided curl."
+    }
+  ],
+  "structuralScrubEvidence": {
+    "at090": "one stable live case ID, Pack visible, packDissolve=0, CaseContained",
+    "at1133": "same live case ID, Pack visible, packDissolve=0, CaseCrossingMouth",
+    "frameBarrier": "31 captures, 31 post-update Unity frames"
+  },
+  "stopCondition": "Visual criteria failed. No full proof, clip encoding, Gate 04 candidate registration, shipping work, or device installation ran.",
+  "shippingReady": false,
+  "physicalPhoneInstalled": false,
+  "statusText": "视觉批准待确认，未推送手机"
+}

@@ -1,0 +1,19 @@
+{
+  "schemaVersion": 1,
+  "gate": "08-lighting",
+  "revision": 4,
+  "decision": "rejected",
+  "disposition": "internal-never-register-as-approval-evidence",
+  "attemptedVideo": {
+    "status": "interrupted-before-encoding",
+    "registered": false,
+    "approvalEvidence": false
+  },
+  "feedbackImage": {
+    "path": "unity/FidgetingApp/ArtSource/ModelPipeline/magnetic-slide-tile/evidence/08-lighting/rev-004/user-feedback-invalid-vertical-flip.png",
+    "sha256": "556c91e82478f890e52f23e22cbfe701799ccf00eb47050b8168e02059c90609"
+  },
+  "userFeedbackExact": "The user rejects the preview video because it introduces an impossible vertical/card flip. Interrupt the active recording task. Mark the current invalid video as rejected/internal and do not register or present it as approval evidence.",
+  "invariant": "BottomBase and the whole assembly remain fixed, horizontal and world-up. Only approved local-axis slide and in-plane +Z yaw are legal. Camera orbit keeps constant elevation, zero roll and stable world-up.",
+  "recordedAt": "2026-08-27T23:41:23.461Z"
+}

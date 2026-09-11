@@ -1,0 +1,252 @@
+{
+  "schema": "premium-display-case-pack-opening-gate04-architecture.v2",
+  "modelId": "premium-display-case",
+  "gate": "04-architecture",
+  "architectureRevision": 5,
+  "evidenceRevision": 9,
+  "status": "ready_for_review",
+  "decisionState": "current-request-visual-approval-pending",
+  "deliveryState": "real-unity-in-engine-candidate",
+  "engine": {
+    "unity": "6000.5.6f1",
+    "urp": "17.5.0",
+    "vfxGraph": false,
+    "particles": "Shuriken"
+  },
+  "rejectedRevision": {
+    "evidenceRevision": 8,
+    "eventId": "f32ea87c-9bc2-4911-b796-dfe6e72e4fee",
+    "exactUserRejections": [
+      "纯纯垃圾。",
+      "纯纯垃圾。"
+    ],
+    "immutable": true,
+    "rootCause": [
+      "The Pack became a noisy, dithered rectangle instead of a physical foil tear.",
+      "A prolonged flat lavender wash and generic concentric rings erased the hero object.",
+      "Nine moving layers optimized a metric while hierarchy and product readability collapsed.",
+      "White frames preceded a hard case pop instead of an aperture-led continuity handoff.",
+      "The result read as debug or procedural placeholder output."
+    ]
+  },
+  "scope": {
+    "signatureInteractionOnly": true,
+    "sequence": [
+      "physical-pack-tear",
+      "escalation",
+      "180ms-opening-impact",
+      "one-settling-case-reveal"
+    ],
+    "fullTimelineSeconds": 3.1,
+    "ctaWork": false,
+    "allRarityTierWork": false
+  },
+  "timelineMilliseconds": [
+    {
+      "id": "handoff",
+      "startMs": 0,
+      "endMs": 350
+    },
+    {
+      "id": "anticipation",
+      "startMs": 350,
+      "endMs": 650
+    },
+    {
+      "id": "resistance",
+      "startMs": 650,
+      "endMs": 950
+    },
+    {
+      "id": "snap",
+      "startMs": 950,
+      "endMs": 1000
+    },
+    {
+      "id": "progressive-tear",
+      "startMs": 1000,
+      "endMs": 1750
+    },
+    {
+      "id": "opening-impact",
+      "startMs": 1750,
+      "endMs": 1930
+    },
+    {
+      "id": "single-settling-reveal",
+      "startMs": 1780,
+      "endMs": 2530
+    },
+    {
+      "id": "settled-signature-hold",
+      "startMs": 2530,
+      "endMs": 3100
+    }
+  ],
+  "actualUnity": {
+    "scene": "unity/FidgetingApp/Assets/_DisplayCase/Candidates/PackOpeningGate04R009/Scenes/PackOpeningGate04R009.unity",
+    "controller": "unity/FidgetingApp/Assets/_DisplayCase/Candidates/PackOpeningGate04R009/Runtime/PackOpeningGate04R009Controller.cs",
+    "profile": "unity/FidgetingApp/Assets/_DisplayCase/Candidates/PackOpeningGate04R009/Runtime/PackOpeningGate04R009Profile.cs",
+    "actualPack": {
+      "body": "Assets/Plugins/iOS/GachaPacks/gacha-pack-standard-body.png",
+      "bodySha256": "ebc17bb238ebbcb82d36134bb2781838df610f8a3d1750c27b8ade10fc4681d6",
+      "flap": "Assets/Plugins/iOS/GachaPacks/gacha-pack-standard-flap.png",
+      "flapSha256": "b031fc5c57d194e9603e9b32e1cd603285aa564490f599f29bb0cd67dab33d49",
+      "authoredCanvas": [
+        384,
+        512
+      ]
+    },
+    "actualAssembledCase": {
+      "prefab": "Assets/Resources/Gacha/PremiumDisplayCaseGate12R004/PresentationRoot.prefab",
+      "sha256": "7a96aae6245b5a1d5463dabc3cb4518af8693ba8f8328ad9f2fe4ee6c6a67e2c",
+      "callerOwnedContent": "Assets/Resources/Gacha/ThreeBladeDisplayPrize.prefab",
+      "callerOwnedContentSha256": "d68f51b0034199987fa9e0cd44a8e3ba351b70b4289ff4773edc296e9395a8e1",
+      "wholeCaseOnly": true,
+      "toyEdited": false
+    },
+    "capture": {
+      "width": 804,
+      "height": 1748,
+      "fps": 60,
+      "frames": 186,
+      "durationSeconds": 3.1
+    },
+    "shippingRuntimeWired": false,
+    "nativeUiWired": false,
+    "candidateOnly": true
+  },
+  "tear": {
+    "contactPoint": "top-trailing pull point",
+    "direction": "right-to-left across sealed edge",
+    "snapMilliseconds": 50,
+    "aheadOfFrontRemainsAttached": true,
+    "freedFoil": [
+      "segment-bend",
+      "curl",
+      "narrow-fold-highlight"
+    ],
+    "opening": [
+      "irregular-torn-contour",
+      "visible-foil-thickness",
+      "dark-environment-depth"
+    ],
+    "rigidBar": false,
+    "noiseDissolve": false
+  },
+  "impact": {
+    "windowMilliseconds": [
+      1750,
+      1930
+    ],
+    "origin": "inside-pack-opening",
+    "nearWhiteCapturedFrames": 1,
+    "shockwaveCount": 1,
+    "shockwavePlacement": "behind-product",
+    "shockwaveForm": "thin-fast-ring",
+    "authoredParticles": [
+      "foil-shards",
+      "warm-glints",
+      "directional-violet-streaks"
+    ],
+    "fullScreenLavenderFill": false,
+    "genericConcentricRings": false
+  },
+  "continuity": {
+    "environmentPreloaded": true,
+    "openingRevealsDepthFirst": true,
+    "caseEntryStartsBeforePackRetreat": true,
+    "packRetreat": "coherent-torn-edge-chunks-and-edge-burn",
+    "opacityCrossfade": false,
+    "blackFrame": false,
+    "blankWhiteFrame": false,
+    "hardCasePop": false
+  },
+  "reveal": {
+    "rotationDegrees": [
+      -25,
+      0
+    ],
+    "settleCount": 1,
+    "caseSweepCount": 1,
+    "caseSweepTiming": "immediately-after-impact",
+    "repeatedBackView": false,
+    "wholeAssembledCaseOnly": true
+  },
+  "camera": {
+    "anticipationPush": "restrained",
+    "impactKick": "brief",
+    "recovery": "immediate",
+    "sustainedShake": false,
+    "chromaticSmear": false,
+    "lensDistortion": false,
+    "caseBending": false
+  },
+  "accessibility": {
+    "reduceMotion": true,
+    "sameCausalOrder": true,
+    "disabled": [
+      "camera-kick",
+      "shockwave",
+      "directional-streaks"
+    ],
+    "reduced": [
+      "localized-flash",
+      "case-rotation"
+    ]
+  },
+  "ownership": {
+    "nativeUnchanged": [
+      "receipt-readiness",
+      "exact-once-commit-ack",
+      "stale-request-rejection",
+      "interruption-restore",
+      "skip",
+      "business-controls"
+    ],
+    "unityCandidate": [
+      "physical-foil-deformation",
+      "irregular-opening",
+      "coherent-torn-edge-retreat",
+      "preloaded-dark-mineral-environment",
+      "localized-impact",
+      "single-case-settle",
+      "brief-camera-response"
+    ],
+    "haptics": "semantic event -> recipe -> platform renderer"
+  },
+  "reviewArtifacts": [
+    "premium-display-case-pack-opening-full-video-r009",
+    "premium-display-case-pack-opening-tear-quarter-speed-r009",
+    "premium-display-case-pack-opening-impact-quarter-speed-r009",
+    "premium-display-case-pack-opening-tear-contact-r009",
+    "premium-display-case-pack-opening-impact-contact-r009"
+  ],
+  "selfCritique": {
+    "status": "pass",
+    "rejectedSignaturesAbsent": [
+      "rev8-noisy-square",
+      "lavender-full-screen-wash",
+      "generic-concentric-ring-stack",
+      "missing-hero-after-flash",
+      "blank-white-or-black-frame",
+      "hard-case-pop"
+    ],
+    "measurementsAreVisualGoal": false
+  },
+  "downstream": {
+    "staleGateIds": [
+      "05-blockout",
+      "06-geometry",
+      "07-material",
+      "08-lighting",
+      "09-environment",
+      "10-export",
+      "11-unity-parity",
+      "12-shipping"
+    ],
+    "shippingReady": false,
+    "physicalPhoneInstalled": false,
+    "deviceAccepted": false
+  }
+}

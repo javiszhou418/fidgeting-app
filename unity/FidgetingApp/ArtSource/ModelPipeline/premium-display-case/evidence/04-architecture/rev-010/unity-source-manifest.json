@@ -1,0 +1,65 @@
+{
+  "schema": "premium-display-case-gate04-r010-unity-source.v1",
+  "source": "canonical unity/FidgetingApp",
+  "unity": "6000.5.6f1",
+  "urp": "17.5.0",
+  "scene": "Assets/_DisplayCase/Candidates/PackOpeningGate04R010/Scenes/PackOpeningGate04R010.unity",
+  "profile": "Assets/_DisplayCase/Candidates/PackOpeningGate04R010/Profiles/PackOpeningGate04R010Profile.asset",
+  "actualPack": {
+    "body": "Assets/Plugins/iOS/GachaPacks/gacha-pack-standard-body.png",
+    "bodySha256": "ebc17bb238ebbcb82d36134bb2781838df610f8a3d1750c27b8ade10fc4681d6",
+    "flap": "Assets/Plugins/iOS/GachaPacks/gacha-pack-standard-flap.png",
+    "flapSha256": "b031fc5c57d194e9603e9b32e1cd603285aa564490f599f29bb0cd67dab33d49",
+    "authoredCanvas": [384, 512]
+  },
+  "actualAssembledCase": {
+    "prefab": "Assets/Resources/Gacha/PremiumDisplayCaseGate12R004/PresentationRoot.prefab",
+    "sha256": "7a96aae6245b5a1d5463dabc3cb4518af8693ba8f8328ad9f2fe4ee6c6a67e2c",
+    "callerOwnedContent": "Assets/Resources/Gacha/ThreeBladeDisplayPrize.prefab",
+    "callerOwnedContentSha256": "d68f51b0034199987fa9e0cd44a8e3ba351b70b4289ff4773edc296e9395a8e1",
+    "instanceCount": 1,
+    "constantRootScale": 1.02,
+    "wholeCaseOnly": true,
+    "toyEdited": false
+  },
+  "actualShippingEnvironment": {
+    "texture": "Assets/Resources/EnvironmentBackgrounds/canyon-unified-ledgestone-v1-2x.png",
+    "textureSha256": "ed1fc13c9419f350fd772e31f505cabe016995e17c06c576c873b19a2a526d5d",
+    "material": "Assets/Resources/EnvironmentBackgrounds/EnvironmentParallaxMaterial.mat",
+    "materialSha256": "0ead2d5373447be0c5b7d3e12c96962146bf4128741f2070d7348132401a738a",
+    "flatDebugBlocks": false
+  },
+  "foilConstruction": {
+    "longitudinalSegments": 48,
+    "crossRows": 4,
+    "frontMaterial": true,
+    "darkUndersideMaterial": true,
+    "edgeThicknessMeters": 0.00075,
+    "movingSpecularGeometry": true,
+    "contactShadowGeometry": true,
+    "sharedSeededTearEdge": true,
+    "maximumTearAmplitudeMeters": 0.00115,
+    "shapedCavityGeometry": true
+  },
+  "sources": {
+    "controller": "9700e52b737505e4299f6f7a4d2513c0b53778212c650cd8bb3c617a17b0354f",
+    "profile": "0be92ea0cfb642d42f6ff9daa6a2e0f265e3ef64971dfefd95d9602fe3cabd8d",
+    "capture": "e4948138c95469f30ac6b9c821d0ff3f6ca85091411acba1f596c9b524684516",
+    "builder": "a6fc49b7aea32006e7fff2b5a9a415b1e5b1862c3f376ee966ab3ae7086d5dad",
+    "tests": "8049879f22bf4a5c0dad3fbdf43c51adb38dbda361d428843b009054e2a3b6c8",
+    "accentShader": "9f280285644fe386f719a82f67e318c9ef25edb1c057c9eff25a335b9c5efeb7"
+  },
+  "rendering": {
+    "vfxGraph": false,
+    "shuriken": true,
+    "postProcessingBloom": false,
+    "chromaticAberration": false,
+    "lensDistortion": false,
+    "noiseParticles": false,
+    "fullScreenEffect": false
+  },
+  "shippingRuntimeWired": false,
+  "nativeUiWired": false,
+  "shippingReady": false,
+  "physicalPhoneInstalled": false
+}

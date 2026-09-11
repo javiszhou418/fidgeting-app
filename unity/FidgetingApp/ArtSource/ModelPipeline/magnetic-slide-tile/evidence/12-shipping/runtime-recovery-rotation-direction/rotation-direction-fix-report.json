@@ -1,0 +1,69 @@
+{
+  "schemaVersion": 1,
+  "modelId": "magnetic-slide-tile",
+  "reportedBuild": "42",
+  "reportedDefect": "rotation-direction-reversed",
+  "deviceAcceptance": "failed-rotation-direction",
+  "rootCause": "Screen-space atan2 defined positive motion as counterclockwise, then applied that sign directly to local +Z. The shipping camera observes the mechanism from the opposite axis hemisphere, so the resulting TopPlate motion was visually reversed.",
+  "fix": {
+    "mapping": "screen ray -> fixed-axis interaction plane -> world radial -> Vector3.SignedAngle around RotatingCarrier oriented local +Z",
+    "cameraRobust": true,
+    "unwrapped": true,
+    "gestureArbitration": "At maximum travel, compare tangential arc travel with radial travel before choosing rotation. Straight closure remains slide.",
+    "directionMetadata": "Each DetentCrossed publishes its signed direction and unwrapped index to the controller, audio renderer, and Haptic router telemetry."
+  },
+  "preserved": {
+    "visuals": true,
+    "slideDirection": true,
+    "endpointInterlock": true,
+    "pinch": true,
+    "emptySpaceOrbit": true,
+    "lightingVariant": "B-balanced-brighter",
+    "audioRecipe": true,
+    "hapticRecipe": true
+  },
+  "verification": {
+    "editMode": "37/37 passed",
+    "playModeInputSystem": "4/4 passed",
+    "touchArcs": [
+      "clockwise 12 degrees at authored camera",
+      "counterclockwise 36 degrees after positive-yaw empty-space orbit",
+      "clockwise full 360 degrees after pinch zoom"
+    ],
+    "detentsPerTurn": 30,
+    "detentStepDegrees": 12,
+    "checks": [
+      "rotation locked before maximum travel",
+      "clockwise and counterclockwise visual direction",
+      "signed detent order",
+      "audio direction and index",
+      "Haptic direction and index",
+      "0/360 closure alignment",
+      "slide direction",
+      "empty-space orbit direction",
+      "pinch arbitration",
+      "zero linear and angular velocity after release/reset"
+    ]
+  },
+  "sourceHashes": {
+    "EdcSliderController.cs": "56ce40b4daed6f4a3b1b883e29bbbc822f81aef7e8261806c001d4adfc69f006",
+    "MagneticSlideDetentAudio.cs": "f4c95fe6eaf87218117b4e8d61fb4ca8a9f43a5634915ab9a9dcb3e69c0b5c86",
+    "MagneticSlideTileShippingMechanism.cs": "24b57748d99eb22ee693f177109bbd83cc8c13d33843568163ae893f3f437b86",
+    "FidgetAppCoordinator.cs": "f76da06e92a6e5ed2c0802f4e6a29cf72444acf5ee0337b623bc32313fa44394",
+    "IosHaptics.cs": "14a6f11bc1ac0e102888fdae6085a5dbdda25eeda66f94eb2e8d9d7f8b55d277",
+    "MagneticSlideTileInputPlayModeTests.cs": "25657c029ed248b3e94bb8b3383736413c9e6c54d6f5b9082a750018ec5af130"
+  },
+  "preservedHashes": {
+    "MeshyEDC.unity": "b8ba31854d94f4f51a24720443bc74b38c0ef2ef2bad503f0c8e5154e3968c32",
+    "SharedPresentationGestureController.cs": "12b3814c270aa0a26dd9510ba900c7727aa4023520bfc907b4cadcfb2bc90ea8",
+    "MagneticSlideShippingLighting.cs": "e45f5014ef8f5bd6e22b7c7a484c0e3308f14be3732a1c07b94f289ed7b57f47"
+  },
+  "delivery": {
+    "build43Reusable": false,
+    "build44SourceReady": true,
+    "build44Attempted": false,
+    "freeDiskGiB": 57,
+    "deviceState": "paired-disconnected",
+    "blocker": "iPhone is disconnected. No build, sign, install, launch, or App Store submission was attempted."
+  }
+}

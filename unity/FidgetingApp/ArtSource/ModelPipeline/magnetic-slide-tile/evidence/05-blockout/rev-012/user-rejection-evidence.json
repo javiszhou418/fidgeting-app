@@ -1,0 +1,45 @@
+{
+  "schemaVersion": 1,
+  "gate": "05-blockout",
+  "revision": 12,
+  "decision": "reject",
+  "sourceReview": "Gate 08 rev 4 Unity-only PlayMode preview",
+  "files": [
+    {
+      "path": "user-rejection-axis-intent.jpg",
+      "sha256": "d2222151656cc4bae03ec6cab7aa8dd90b104a40794acdabc342b7327012dfe3",
+      "bytes": 76859,
+      "sourcePath": "/Users/jiawei.zhou/.cursor/projects/Users-jiawei-zhou-Documents-Fidgeting-app/assets/image-e6b20dea-b1b3-4176-a4c2-d0e0ac426f40.jpg"
+    },
+    {
+      "path": "user-rejection-penetration-proxy.png",
+      "sha256": "57c1efc26474c56a196ad458208915b1ed9e7e27b9b5cdea9a276ac8840b14cd",
+      "bytes": 71545,
+      "sourcePath": "/Users/jiawei.zhou/.cursor/projects/Users-jiawei-zhou-Documents-Fidgeting-app/assets/image-f2b1eb0c-5f24-42a4-a742-d182a5c61bb5.png"
+    }
+  ],
+  "userConfirmedFailures": [
+    {
+      "id": "axis-drift-jump",
+      "severity": "blocker",
+      "decision": "Exactly one physical fixed axis exists at one BottomBase endpoint and never changes world position."
+    },
+    {
+      "id": "hidden-mechanism-penetration",
+      "severity": "blocker",
+      "decision": "Carrier, followers, balls and rails may not protrude through the shell in any legal pose."
+    },
+    {
+      "id": "spurious-visible-plate",
+      "severity": "blocker",
+      "decision": "MinimumOverlapDisk is non-rendering metadata; BottomExterior remains a clean plane and TopPlate covers the axis region."
+    }
+  ],
+  "earliestAffectedGate": "05-blockout",
+  "reason": "The approved mechanical intent already required one fixed axis and concealed internals. Gate 05 encoded ambiguous pivot ownership and product visibility; later gates propagated it.",
+  "scope": {
+    "build": false,
+    "install": false,
+    "phone": false
+  }
+}

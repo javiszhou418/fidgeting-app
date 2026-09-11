@@ -1,0 +1,194 @@
+{
+  "contract_sha256": "6219e6936624e1cce743eb63ef6248571edb90138007e15c35703c4913a041b6",
+  "engine": "CYCLES",
+  "samples": 96,
+  "calibration": {
+    "target_p97_display": 0.86,
+    "passes": [
+      {
+        "p97": 0.1594,
+        "factor": 40.778
+      },
+      {
+        "p97": 0.8014,
+        "factor": 1.168
+      }
+    ],
+    "energies_w": {
+      "LGT_PDC_SOFT_KEY": 3.2438,
+      "LGT_PDC_RIGHT_STRIP": 0.2243,
+      "LGT_PDC_TOP_RAIL": 0.0448,
+      "LGT_PDC_COOL_RIM": 0.0125,
+      "LGT_PDC_LILAC_RIM": 0.0064,
+      "LGT_PDC_FRONT_FILL": 0.435,
+      "LGT_PDC_REVIEW_TOP_FILL": 20.7793
+    },
+    "cmf_scheme_a_preview_overrides": {
+      "3": {
+        "base_color_srgb_hex": "#5C6266",
+        "roughness": 0.55,
+        "bump_strength": 0.6,
+        "intent": "dark sandblast, recessed field"
+      },
+      "4": {
+        "roughness": 0.12,
+        "coat_weight": 0.35,
+        "coat_roughness": 0.05,
+        "intent": "piano-black gloss plates"
+      },
+      "5": {
+        "roughness": 0.3,
+        "anisotropic": 0.8,
+        "anisotropic_rotation": 0.0,
+        "intent": "directional brushed steel flats"
+      },
+      "6": {
+        "base_color_srgb_hex": "#C9D0D6",
+        "roughness": 0.04,
+        "intent": "bright mirror polish: bevels, lip, wings, divider"
+      }
+    },
+    "review_bright": {
+      "enabled": true,
+      "world_strength": 0.05,
+      "top_fill_relative_power": 0.45,
+      "note": "review aid; contract beauty rig unchanged; not Gate 08 lighting"
+    }
+  },
+  "materials_by_zone": {
+    "1": "MAT_PDC_CLEAR_CRYSTAL",
+    "2": "MAT_PDC_SMOKE_LINER",
+    "3": "MAT_PDC_MICROBLAST",
+    "4": "MAT_PDC_GRAPHITE",
+    "5": "MAT_PDC_STEEL_SATIN",
+    "6": "MAT_PDC_SMOKED_MIRROR",
+    "7": "MAT_PDC_TIER_ACCENT_TITANIUM",
+    "0": "MAT_PDC_REVIEW_SPINNER_TITANIUM",
+    "floor": "MAT_PDC_PREVIEW_FLOOR"
+  },
+  "lights": [
+    {
+      "name": "LGT_PDC_SOFT_KEY",
+      "energy_w": 3.24,
+      "size_m": [
+        0.1701,
+        0.0801
+      ],
+      "location_m": [
+        -0.0722,
+        -0.1767,
+        0.1721
+      ]
+    },
+    {
+      "name": "LGT_PDC_RIGHT_STRIP",
+      "energy_w": 0.22,
+      "size_m": [
+        0.011,
+        0.1901
+      ],
+      "location_m": [
+        0.1367,
+        0.0479,
+        0.1118
+      ]
+    },
+    {
+      "name": "LGT_PDC_TOP_RAIL",
+      "energy_w": 0.04,
+      "size_m": [
+        0.1161,
+        0.009
+      ],
+      "location_m": [
+        0.064,
+        -0.1609,
+        0.0453
+      ]
+    },
+    {
+      "name": "LGT_PDC_COOL_RIM",
+      "energy_w": 0.01,
+      "size_m": [
+        0.009,
+        0.1161
+      ],
+      "location_m": [
+        -0.0787,
+        -0.068,
+        -0.094
+      ]
+    },
+    {
+      "name": "LGT_PDC_LILAC_RIM",
+      "energy_w": 0.01,
+      "size_m": [
+        0.009,
+        0.1001
+      ],
+      "location_m": [
+        0.0892,
+        0.036,
+        -0.104
+      ]
+    },
+    {
+      "name": "LGT_PDC_FRONT_FILL",
+      "energy_w": 0.44,
+      "size_m": [
+        0.1901,
+        0.1201
+      ],
+      "location_m": [
+        -0.0313,
+        0.0672,
+        0.2045
+      ]
+    },
+    {
+      "name": "LGT_PDC_REVIEW_TOP_FILL",
+      "energy_w": 20.78,
+      "size_m": [
+        0.4403,
+        0.4403
+      ],
+      "location_m": [
+        0.0337,
+        -0.0723,
+        0.3272
+      ]
+    }
+  ],
+  "stills": [
+    "cmf-preview-hero-tier-titanium-medium.png",
+    "cmf-preview-front-tier-titanium-medium.png",
+    "cmf-preview-low-oblique-tier-titanium-medium.png",
+    "cmf-preview-corner-macro-tier-titanium-medium.png",
+    "cmf-preview-pocket-rim-macro-tier-titanium-medium.png"
+  ],
+  "turntable_frames": 0,
+  "tier": {
+    "id": "titanium",
+    "rarity": "Signature (alt: blue titanium)",
+    "aperture": "medium",
+    "accent": [
+      0.58,
+      0.66,
+      0.8
+    ],
+    "accent_rough": 0.24,
+    "liner": [
+      0.84,
+      0.88,
+      0.96
+    ],
+    "absorb": [
+      0.42,
+      0.52,
+      0.72
+    ],
+    "source": "PremiumDisplayCaseLabelPlate.foilByTier order Steel/Copper/Silver/Gold; FDB-DSP-014 liner tints"
+  },
+  "soft_focus": null,
+  "status": "supplementary CMF preview; not Gate 07 lookdev; rarity variation study"
+}

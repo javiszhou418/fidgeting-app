@@ -1,0 +1,39 @@
+{
+  "info" : {
+    "arguments" : [
+      "devicectl",
+      "device",
+      "install",
+      "app",
+      "--device",
+      "00008130-001A00361EE0001C",
+      "/Users/jiawei.zhou/Documents/Fidgeting app/unity/FidgetingApp/Builds/iOS/DeviceJobs/magnetic-slide-build42-20260901T035903Z-snapshot/DerivedData/Build/Products/Release-iphoneos/FidgetSpinner.app",
+      "--timeout",
+      "60",
+      "--json-output",
+      "/Users/jiawei.zhou/Documents/Fidgeting app/unity/FidgetingApp/ArtSource/ModelPipeline/magnetic-slide-tile/evidence/12-shipping/runtime-recovery-build42/device-delivery/magnetic-slide-build42-20260901T035903Z-snapshot/install.json"
+    ],
+    "commandType" : "devicectl.device.install.app",
+    "environment" : {
+      "TERM" : "dumb"
+    },
+    "jsonVersion" : 3,
+    "outcome" : "success",
+    "version" : "518.27"
+  },
+  "result" : {
+    "deviceIdentifier" : "556E86BF-7295-5622-AA58-02DF84A8E93F",
+    "installedApplications" : [
+      {
+        "bundleID" : "com.jiaweizhou.fidgetspinner.codex",
+        "databaseSequenceNumber" : 3208,
+        "databaseUUID" : "AC5A34AB-5B26-4F3D-9314-A489E7F12A68",
+        "installationURL" : "file:///private/var/containers/Bundle/Application/AB32B3E9-3D5D-4E8D-8802-D43A3E705105/FidgetSpinner.app/",
+        "launchServicesIdentifier" : "unknown",
+        "options" : {
+
+        }
+      }
+    ]
+  }
+}

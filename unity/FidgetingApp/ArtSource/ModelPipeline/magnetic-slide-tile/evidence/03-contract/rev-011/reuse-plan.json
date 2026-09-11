@@ -1,0 +1,130 @@
+{
+  "schemaVersion": 2,
+  "modelId": "magnetic-slide-tile",
+  "gate": "05-blockout",
+  "createdAt": "2026-08-27T04:02:41.166Z",
+  "contractSha256": "5aee71817c2c033ed92b770126ba0ecb6d79c2f032d786743b214b79078a47ea",
+  "reusedAssets": [
+    {
+      "id": "magnetic-slide-tile-blockout-builder-r003",
+      "path": "unity/FidgetingApp/ArtSource/ModelPipeline/magnetic-slide-tile/evidence/05-blockout/rev-003/build_blockout.py",
+      "sha256": "18d1cf74cc8a8dad1d793336b7a46f64536b9240a7b2320cd2c5ee9c13eda3ce",
+      "reuse": "analytic capsule profile, 256 segments per semicircle, bevel and smooth-normal technique only"
+    },
+    {
+      "id": "magnetic-slide-tile-smoothing-normal-validation-r002",
+      "path": "unity/FidgetingApp/ArtSource/ModelPipeline/magnetic-slide-tile/evidence/10-export/rev-002/smoothing-normal-validation.json",
+      "sha256": "8a1fde725532c6764d40e39468a8a790cf28a416c87517440caa14017588dc33",
+      "reuse": "normal and silhouette audit lessons"
+    },
+    {
+      "id": "magnetic-slide-tile-artwork-upper-mask-r007",
+      "path": "unity/FidgetingApp/ArtSource/ModelPipeline/magnetic-slide-tile/evidence/07-material/rev-007/artwork-upper-mask.png",
+      "sha256": "8250df70d2286849db353862283b0d3db9c66e1ac92bed3795bcb5377a431c36",
+      "reuse": "independent upper artwork slot for later Gate 07"
+    },
+    {
+      "id": "magnetic-slide-tile-material-rev10-lower-mask-r010",
+      "path": "unity/FidgetingApp/ArtSource/ModelPipeline/magnetic-slide-tile/evidence/07-material/rev-010/artwork-lower-mask-r010.png",
+      "sha256": "7bf5921f469a217b850ff2ea94dc5ae6c251091b8de60bd81c1b88ec42dfa7c2",
+      "reuse": "independent corrected lower artwork slot for later Gate 07"
+    },
+    {
+      "id": "magnetic-slide-tile-material-rev10-recipe-r010",
+      "path": "unity/FidgetingApp/ArtSource/ModelPipeline/magnetic-slide-tile/evidence/07-material/rev-010/material-recipe-r010.json",
+      "sha256": "f6de51431cee910502a3dda35c0e32d6577b7a23635ed58c7c68cfe09d59794d",
+      "reuse": "blood-red crystal, black perimeter and polished silver recipes for later Gate 07"
+    },
+    {
+      "id": "magnetic-slide-tile-lighting-validation-r001",
+      "path": "unity/FidgetingApp/ArtSource/ModelPipeline/magnetic-slide-tile/evidence/08-lighting/rev-001/lighting-validation.json",
+      "sha256": "8dc59882af5fd66c031de2871038fb13f3ca73fadb4108e98050bf154bd50b30",
+      "reuse": "approved controlled lighting recipe for later Gate 08"
+    },
+    {
+      "id": "magnetic-slide-tile-open-environment-validation-r002",
+      "path": "unity/FidgetingApp/ArtSource/ModelPipeline/magnetic-slide-tile/evidence/09-environment/rev-002/open-environment-validation.json",
+      "sha256": "76dae4da675d76f7d5e1f316cd210e4541edc0d8fefb6d5e55de0bdfabe390ed",
+      "reuse": "approved environment and reflection lessons for later Gate 09"
+    },
+    {
+      "id": "slider-analysis-mechanism-evidence-contract-r016",
+      "path": "unity/FidgetingApp/ArtSource/ModelPipeline/magnetic-slide-tile/evidence/02-analysis/rev-016/mechanism-evidence-contract.json",
+      "sha256": "5aee71817c2c033ed92b770126ba0ecb6d79c2f032d786743b214b79078a47ea",
+      "reuse": "current four-track, raised-axis, ball-range and track-width authority"
+    },
+    {
+      "id": "slider-analysis-interactive-cad-geometry-config-r016",
+      "path": "unity/FidgetingApp/ArtSource/ModelPipeline/magnetic-slide-tile/evidence/02-analysis/rev-016/interactive-cad-geometry-config.json",
+      "sha256": "896cb0f769715233f88d3427cff8721548f06cc21c8f294d03767b5d97098185",
+      "reuse": "current finite endpoints, overlap limit and component-role configuration"
+    }
+  ],
+  "staleNotReused": [
+    {
+      "gate": "05-blockout",
+      "revision": 3,
+      "reason": "old hierarchy and mutually-exclusive slide/spin conflict with approved compound CAD"
+    },
+    {
+      "gate": "06-geometry",
+      "revision": 1,
+      "reason": "old axis/21 mm travel and stale geometry cannot migrate"
+    },
+    {
+      "gate": "07-material",
+      "revisions": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9
+      ],
+      "reason": "geometry-bound Blender scenes remain stale; only masks and rev 10 recipes are lineage inputs"
+    },
+    {
+      "gate": "08-lighting",
+      "revision": 1,
+      "reason": "recipe retained for later; no lighting promoted into white Gate 05"
+    },
+    {
+      "gate": "09-environment",
+      "revision": 2,
+      "reason": "recipe retained for later; no environment promoted into white Gate 05"
+    },
+    {
+      "gate": "10-export",
+      "revisions": [
+        1,
+        2,
+        3
+      ],
+      "reason": "old export packages remain stale and are not imported"
+    },
+    {
+      "gate": "11-unity-parity",
+      "revisions": [
+        1,
+        2,
+        3,
+        4
+      ],
+      "reason": "Unity remains untouched; lessons only"
+    },
+    {
+      "gate": "05-blockout",
+      "revision": 4,
+      "reason": "rejected recessed circular cavity and obsolete twin-groove hierarchy"
+    }
+  ],
+  "gate05Policy": "reuse capsule/smooth-normal techniques and approved later-stage look inputs; rebuild all visible geometry from rev 16",
+  "revision": 5,
+  "authorization": {
+    "exactUserWording": "Treat the user’s latest four-track/raised-axis feedback as white-model feedback and rebuild Gate 05 now, rather than sending them back to CAD/measurement approval.",
+    "productionMeasured": false
+  }
+}

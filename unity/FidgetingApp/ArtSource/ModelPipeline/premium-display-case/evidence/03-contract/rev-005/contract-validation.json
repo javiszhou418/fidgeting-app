@@ -1,0 +1,112 @@
+{
+  "contract_sha256": "15a1c25922c6691e4e930db340121f5f01580f0623a3042a1edda3c057bd20e6",
+  "assertions": [
+    {
+      "id": "pocket-is-generic-circle",
+      "status": "pass",
+      "detail": "shape circle, generic True"
+    },
+    {
+      "id": "design-toy-fits-at-scale-one",
+      "status": "pass",
+      "detail": "fit scale 1.0 for 65.0 mm tip circle in 67.4 mm well"
+    },
+    {
+      "id": "pocket-side-margin-equals-input",
+      "status": "pass",
+      "detail": "field half-width 38.75 mm, pocket radius 35.75 mm, margin 3.00 mm"
+    },
+    {
+      "id": "room-below-pocket-for-band",
+      "status": "pass",
+      "detail": "16.33 mm below the pocket for the brushed band (>= 12 mm)"
+    },
+    {
+      "id": "corner-bolt-inside-crystal-band",
+      "status": "pass",
+      "detail": "counterbore edge clearance 1.05 mm to band edges (band 5.11 mm, inset 4.11 mm, R 7.86 mm)"
+    },
+    {
+      "id": "seam-bolt-inside-crystal-band",
+      "status": "pass",
+      "detail": "band 5.11 mm vs counterbore 3.0 mm"
+    },
+    {
+      "id": "reliefs-above-structural-threshold",
+      "status": "pass",
+      "detail": "header/main recess, part lift and rail lift are real geometry, not normal-map relief"
+    },
+    {
+      "id": "concentric-chain-never-clamps",
+      "status": "pass",
+      "detail": "frame inner R 2.75 -> interior R 1.86 mm; bezel R 6.0 -> plane R 0.62 mm (min 0.4)"
+    },
+    {
+      "id": "hub-near-image-reading",
+      "status": "pass",
+      "detail": "derived 0.6253H vs image 0.6369H"
+    },
+    {
+      "id": "coverage-plus-protrusion-equals-one",
+      "status": "pass",
+      "detail": "0.58 + 0.42 = 1.0000"
+    },
+    {
+      "id": "frame-height-plus-protrusion-equals-thickness",
+      "status": "pass",
+      "detail": "8.41 + 6.09 vs 14.5"
+    },
+    {
+      "id": "protrusion-ratio-in-range",
+      "status": "pass",
+      "detail": "protrusion_ratio 0.42"
+    },
+    {
+      "id": "no-old-contract-dimensions",
+      "status": "pass",
+      "detail": "W 98.31 H 166.74 D 17.05 vs 228x304x59"
+    },
+    {
+      "id": "unknowns-preserved",
+      "status": "pass",
+      "detail": "retention and manufacturing fields stay null"
+    },
+    {
+      "id": "no-provisional-promoted-to-measured",
+      "status": "pass",
+      "detail": "every measured input cites src.spinner_mesh"
+    }
+  ],
+  "resolved_key_values_mm": {
+    "case.width_mm": 98.31,
+    "case.height_mm": 166.74,
+    "header.height_mm": 52.51,
+    "header.rail_band_mm": 4.59,
+    "case.frame_band_mm": 5.11,
+    "case.outer_corner_radius_mm": 7.86,
+    "case.inner_corner_radius_mm": 2.75,
+    "main.perimeter_shelf_width_mm": 4.42,
+    "spinner.center_x_mm": 0.0,
+    "spinner.center_y_mm": -20.89,
+    "case.frame_front_height_from_spinner_back_mm": 8.41,
+    "spinner.protrusion_mm": 6.09,
+    "case.z_frame_front_mm": 10.96,
+    "case.z_shelf_top_mm": 7.96,
+    "case.z_field_mm": 6.36,
+    "case.z_header_plane_mm": 6.76,
+    "case.z_spinner_front_mm": 17.05,
+    "assembled.envelope_depth_mm": 17.05,
+    "case.root_recentering_z_mm": -8.525,
+    "main.pocket_well_diameter_mm": 67.4,
+    "main.pocket_diameter_mm": 71.5,
+    "main.pocket_well_depth_mm": 3.66,
+    "main.field_width_mm": 77.5,
+    "main.liner_inset_mm": 5.98,
+    "main.field_top_y_mm": 21.86,
+    "main.field_bottom_y_mm": -72.97,
+    "visual.spinner_center_from_top": 0.6253,
+    "content.review_fit_scale": 1.0
+  },
+  "all_pass": true,
+  "warnings": []
+}

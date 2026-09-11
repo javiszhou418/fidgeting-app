@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<testsuite name="IsolatedR024Preflight" tests="21" failures="7" errors="0">
+  <testcase name="r017-mirror-regression-is-observed" />
+  <testcase name="r024-artwork-identity-wins-calibration" />
+  <testcase name="front-winding-faces-calibration-camera" />
+  <testcase name="sealed-artwork-maps-archive-above-standard" />
+  <testcase name="sealed-top-crimp-rendered-above-fidget-archive" />
+  <testcase name="sealed-bottom-crimp-is-below-standard" />
+  <testcase name="tear-front-opens-from-screen-right"><failure message="u0=0.6866, u1=0.3134, states=3, direction=False, sealed=False" /></testcase>
+  <testcase name="top-seal-covers-only-sealed-segments"><failure message="u0=0.6866, u1=0.3134, states=3, direction=False, sealed=False" /></testcase>
+  <testcase name="component-segments-avoid-opened-mouth-spans"><failure message="states=3, pass=False" /></testcase>
+  <testcase name="component-masks-stay-inside-pack-without-full-width-bridges"><failure message="states=3, pass=False" /></testcase>
+  <testcase name="formed-mouth-bounds-stay-in-upper-third" />
+  <testcase name="contained-mouth-bounds-stay-in-upper-third" />
+  <testcase name="formed-mouth-liner-and-cavity-separate"><failure message="liner=144, cavity=0, cluster=0, liner-cavity=0.2900, liner-outer=0.0603, cavity-background=0.0788" /></testcase>
+  <testcase name="contained-mouth-liner-and-cavity-separate"><failure message="liner=0, cavity=480, cluster=480, liner-cavity=0.1772, liner-outer=0.2297, cavity-background=0.0985" /></testcase>
+  <testcase name="physical-top-front-edge-moves-downward" />
+  <testcase name="released-seal-is-compact-top-right-strip" />
+  <testcase name="contained-case-renders-inside-upper-mouth" />
+  <testcase name="contained-case-has-readable-contrast-and-bounds"><failure message="pixels=85212, bounds=0.3129,0.6662 0.3743x0.1023, contrast=0.0134" /></testcase>
+  <testcase name="primary-static-sheet-emits-four-unity-frames" />
+  <testcase name="preflight-effects-remain-zero" />
+  <testcase name="every-capture-follows-a-unity-frame" />
+</testsuite>

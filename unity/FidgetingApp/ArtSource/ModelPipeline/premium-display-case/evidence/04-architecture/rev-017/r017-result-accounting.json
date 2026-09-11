@@ -1,0 +1,13 @@
+{
+  "schema": "premium-display-case-gate04-r017-result-accounting.v1",
+  "r016": {
+    "preflight": "1 failed of 5; 4 passed",
+    "structural": "5 passed of 5",
+    "interpretation": "These are separate suites. The later 5/5 does not overturn the preflight threshold failure."
+  },
+  "r017": {
+    "firstEditModeRun": "1 failed of 7 because the imported non-power-of-two texture reports a resized runtime width.",
+    "correctedEditModeRun": "7 passed of 7 after the assertion read the unchanged 384x512 source PNG bytes.",
+    "visualOrGeometryChanged": false
+  }
+}

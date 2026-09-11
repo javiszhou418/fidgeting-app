@@ -4,10 +4,10 @@
   "card": {
     "width": 63.5,
     "height": 88.9,
-    "thickness": 2.5,
-    "corner_radius_ratio": 0.06,
+    "thickness": 3.5,
+    "corner_radius_ratio": 0.14960629921259844,
     "layer_air_gap": 1.0,
-    "face_inset": 0.5,
+    "face_inset": 1.8,
     "axis_hole_radius": 2.15,
     "axis_hole_bevel": 0.22
   },
@@ -18,14 +18,28 @@
     "fixed_layer": "BottomCard",
     "track_layers": ["TopCard", "MiddleCard"],
     "follower_layers": ["MiddleCard", "BottomCard"],
-    "front_visible_axis_hardware": "low_profile_chrome_bearing_cap",
+    "front_visible_axis_hardware": "recessed_matte_spindle_only",
+    "front_visible_axis_renderer": "CommonAxis_RecessedMatteSpindle",
+    "front_visible_axis_renderer_count": 1,
+    "front_visible_axis_material": "M_FanCardAxisMatte",
+    "front_visible_axis_metallic": 0.0,
+    "front_visible_axis_smoothness": 0.0,
+    "front_visible_axis_specular_highlights": false,
+    "front_visible_axis_environment_reflections": false,
+    "forbidden_front_axis_name_tokens": [
+      "BearingCap",
+      "Ring",
+      "Washer",
+      "AxisSeat",
+      "CoverDisc",
+      "ChromeBall",
+      "BallSeat"
+    ],
     "spindle_radius": 0.002,
-    "spindle_face_inset": 0.00012,
-    "bearing_cap_radius": 0.00207,
-    "bearing_cap_height": 0.00065
+    "spindle_face_inset": 0.00012
   },
   "back_track": {
-    "follower_from_pivot": [-49.0, -27.0],
+    "follower_from_pivot": [-43.31, -21.31],
     "mechanical_sweep_degrees": 45.0,
     "undercut_width": 6.2,
     "grille_width": 4.25,

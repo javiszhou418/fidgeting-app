@@ -1,0 +1,70 @@
+{
+  "schema": "premium-display-case-gate04-r017-test-calibration.v1",
+  "revision": "R017",
+  "scope": "test and reporting calibration only",
+  "immutableInput": {
+    "r016Blend": "unity/FidgetingApp/ArtSource/ModelPipeline/premium-display-case/staging/pack-opening-gate04-r016-repair/pack-opening-gate04-r016.blend",
+    "r016Fbx": "unity/FidgetingApp/ArtSource/ModelPipeline/premium-display-case/staging/pack-opening-gate04-r016-repair/PackOpeningGate04R016PackOnlyRig.fbx",
+    "r016FbxSha256": "1a9c8f5b066cc2a24cf629c0a0ffa9eaaec05279af0e0171ab2f341731dabe66"
+  },
+  "sourceAndExportMeasurement": {
+    "blenderVersion": "5.2.0 LTS",
+    "sourcePoseFormedMouthDeltaMeters": 0.04999999711289994,
+    "fbxReimportPoseFormedMouthDeltaMeters": 0.04999999711289994,
+    "exporter": {
+      "applyScaleOptions": "FBX_SCALE_ALL",
+      "globalScale": "not overridden",
+      "axisConversion": "not overridden",
+      "bakeAnimation": false
+    }
+  },
+  "actualTemporalSample": {
+    "timeSeconds": 0.7,
+    "normalizedTearProgress": 0.6432225762403276,
+    "tearAdvanceWeight": 0.2838871187983617,
+    "formedMouthWeight": 0.7161128812016383,
+    "sourceExportedExpectedDeltaMeters": 0.04488760221271037,
+    "r016UnityObservedDeltaMeters": 0.04488760232925415,
+    "absoluteDifferenceMeters": 1.1654378156977785e-10,
+    "relativeDifference": 2.5963467822920895e-09
+  },
+  "unityImporter": {
+    "globalScale": 1,
+    "useFileUnits": true,
+    "useFileScale": true,
+    "bakeAxisConversion": false,
+    "importBlendShapes": true,
+    "isReadable": true
+  },
+  "meshDeltaAssertion": {
+    "expectedMeters": 0.04488760221271037,
+    "relativeTolerance": 0.005,
+    "minimumMeters": 0.04466316420164682,
+    "maximumMeters": 0.04511204022377392,
+    "reason": "At t=0.70 the profile is a blend of TearAdvance and FormedMouth, not the 0.70 authored pose."
+  },
+  "screenVisibilityAssertion": {
+    "captureWidth": 1206,
+    "captureHeight": 2622,
+    "region": "projected formed-mouth bounds expanded by 0.04 viewport units",
+    "changedPixelChannelDelta": "8/255",
+    "minimumMeanRgbDelta": 0.01,
+    "minimumChangedPixelFraction": 0.05,
+    "reference": "R016 full-frame 603x1311 basis-to-mouth mean RGB delta 0.0181406854; 104310 pixels exceeded 8/255."
+  },
+  "prohibitedChanges": [
+    "Blender geometry",
+    "blend shapes",
+    "materials",
+    "lighting",
+    "camera composition",
+    "case prefab",
+    "ContentSlot",
+    "toy",
+    "Fan Card",
+    "canonical Unity project",
+    "shipping readiness",
+    "device installation"
+  ],
+  "shippingReady": false
+}

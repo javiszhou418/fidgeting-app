@@ -1,0 +1,499 @@
+{
+  "schemaVersion": 1,
+  "modelId": "magnetic-slide-tile",
+  "gate": "07-material",
+  "revision": 13,
+  "blenderVersion": "5.2.0 LTS",
+  "geometryDigest": "2fcf6d2b4344511bc6b86ce940a927576f9cdb4988f4022959a3372f4d3c1952",
+  "assetHashes": {
+    "blend": "8538b4142c9d6b5c89e30e3f915f99a33dfff8eab158db449278d9cca605b10c",
+    "glb": "4d8b5adabc9383fed4d3a066c3a6d90649363cb42a5a79bdd15060fbb43e8e47",
+    "fbx": "88199512519d2ffcf17da9d3c6a968db8a7923a449660baf93541b73c0eb9eb0"
+  },
+  "blend": {
+    "BottomExterior": {
+      "actualObjectName": "BottomExterior",
+      "polygonCount": 8723,
+      "triangleCount": 18464,
+      "materialSlots": [
+        "M07R13_LowerTopArtwork",
+        "M07R13_SolidDarkSide",
+        "M07R13_PolishedBrightSilverRim",
+        "M07R13_NeutralUnderside"
+      ],
+      "materialIds": {
+        "M07R13_LowerTopArtwork": 0,
+        "M07R13_SolidDarkSide": 1,
+        "M07R13_PolishedBrightSilverRim": 2,
+        "M07R13_NeutralUnderside": 3
+      },
+      "faceCounts": {
+        "topArtwork": 1,
+        "solidDarkSide": 3078,
+        "polishedSilverRim": 2052,
+        "neutralUnderside": 3592,
+        "other": 0
+      },
+      "triangleCounts": {
+        "topArtwork": 511,
+        "solidDarkSide": 6156,
+        "polishedSilverRim": 4104,
+        "neutralUnderside": 7693,
+        "other": 0
+      },
+      "sideWallArtworkFaceCount": 0,
+      "sideWallArtworkTriangleCount": 0,
+      "undersideArtworkFaceCount": 0,
+      "nonCapTexturedFaceCount": 0,
+      "topArtworkPresent": true,
+      "artworkUvLayer": "ArtworkUV",
+      "artworkUvMin": [
+        0.014516184106469154,
+        0.009000168181955814
+      ],
+      "artworkUvMax": [
+        0.9854838252067566,
+        0.9909998178482056
+      ],
+      "artworkUvsWithinZeroOne": true,
+      "imageNodeExtensions": {
+        "M07R13_LowerTopArtwork": [
+          "EXTEND",
+          "EXTEND"
+        ],
+        "M07R13_SolidDarkSide": [],
+        "M07R13_PolishedBrightSilverRim": [],
+        "M07R13_NeutralUnderside": []
+      }
+    },
+    "MovingTopBody": {
+      "actualObjectName": "MovingTopBody",
+      "polygonCount": 10783,
+      "triangleCount": 26688,
+      "materialSlots": [
+        "M07R13_UpperTopArtwork",
+        "M07R13_SolidDarkSide",
+        "M07R13_PolishedBrightSilverRim",
+        "M07R13_NeutralUnderside"
+      ],
+      "materialIds": {
+        "M07R13_UpperTopArtwork": 0,
+        "M07R13_SolidDarkSide": 1,
+        "M07R13_PolishedBrightSilverRim": 2,
+        "M07R13_NeutralUnderside": 3
+      },
+      "faceCounts": {
+        "topArtwork": 1,
+        "solidDarkSide": 5130,
+        "polishedSilverRim": 2052,
+        "neutralUnderside": 3600,
+        "other": 0
+      },
+      "triangleCounts": {
+        "topArtwork": 511,
+        "solidDarkSide": 10268,
+        "polishedSilverRim": 4104,
+        "neutralUnderside": 11805,
+        "other": 0
+      },
+      "sideWallArtworkFaceCount": 0,
+      "sideWallArtworkTriangleCount": 0,
+      "undersideArtworkFaceCount": 0,
+      "nonCapTexturedFaceCount": 0,
+      "topArtworkPresent": true,
+      "artworkUvLayer": "ArtworkUV",
+      "artworkUvMin": [
+        0.014516184106469154,
+        0.009000168181955814
+      ],
+      "artworkUvMax": [
+        0.9854838252067566,
+        0.9909998178482056
+      ],
+      "artworkUvsWithinZeroOne": true,
+      "imageNodeExtensions": {
+        "M07R13_UpperTopArtwork": [
+          "EXTEND",
+          "EXTEND"
+        ],
+        "M07R13_SolidDarkSide": [],
+        "M07R13_PolishedBrightSilverRim": [],
+        "M07R13_NeutralUnderside": []
+      }
+    }
+  },
+  "glbContract": {
+    "assetVersion": "2.0",
+    "materials": [
+      {
+        "id": 0,
+        "name": "M07R13_LowerTopArtwork",
+        "baseColorTexture": 0,
+        "normalTexture": null
+      },
+      {
+        "id": 1,
+        "name": "M07R13_SolidDarkSide",
+        "baseColorTexture": null,
+        "normalTexture": null
+      },
+      {
+        "id": 2,
+        "name": "M07R13_PolishedBrightSilverRim",
+        "baseColorTexture": null,
+        "normalTexture": null
+      },
+      {
+        "id": 3,
+        "name": "M07R13_NeutralUnderside",
+        "baseColorTexture": null,
+        "normalTexture": null
+      },
+      {
+        "id": 4,
+        "name": "M07R13_UpperTopArtwork",
+        "baseColorTexture": 2,
+        "normalTexture": null
+      }
+    ],
+    "primitives": [
+      {
+        "meshId": 0,
+        "meshName": "BottomExterior_Mesh",
+        "primitiveId": 0,
+        "materialId": 0,
+        "materialName": "M07R13_LowerTopArtwork",
+        "indexAccessor": 4,
+        "uvAccessor": 2
+      },
+      {
+        "meshId": 0,
+        "meshName": "BottomExterior_Mesh",
+        "primitiveId": 1,
+        "materialId": 1,
+        "materialName": "M07R13_SolidDarkSide",
+        "indexAccessor": 9,
+        "uvAccessor": 7
+      },
+      {
+        "meshId": 0,
+        "meshName": "BottomExterior_Mesh",
+        "primitiveId": 2,
+        "materialId": 2,
+        "materialName": "M07R13_PolishedBrightSilverRim",
+        "indexAccessor": 14,
+        "uvAccessor": 12
+      },
+      {
+        "meshId": 0,
+        "meshName": "BottomExterior_Mesh",
+        "primitiveId": 3,
+        "materialId": 3,
+        "materialName": "M07R13_NeutralUnderside",
+        "indexAccessor": 19,
+        "uvAccessor": 17
+      },
+      {
+        "meshId": 1,
+        "meshName": "MovingTopBody_Mesh",
+        "primitiveId": 0,
+        "materialId": 4,
+        "materialName": "M07R13_UpperTopArtwork",
+        "indexAccessor": 24,
+        "uvAccessor": 22
+      },
+      {
+        "meshId": 1,
+        "meshName": "MovingTopBody_Mesh",
+        "primitiveId": 1,
+        "materialId": 1,
+        "materialName": "M07R13_SolidDarkSide",
+        "indexAccessor": 29,
+        "uvAccessor": 27
+      },
+      {
+        "meshId": 1,
+        "meshName": "MovingTopBody_Mesh",
+        "primitiveId": 2,
+        "materialId": 2,
+        "materialName": "M07R13_PolishedBrightSilverRim",
+        "indexAccessor": 14,
+        "uvAccessor": 32
+      },
+      {
+        "meshId": 1,
+        "meshName": "MovingTopBody_Mesh",
+        "primitiveId": 3,
+        "materialId": 3,
+        "materialName": "M07R13_NeutralUnderside",
+        "indexAccessor": 38,
+        "uvAccessor": 36
+      }
+    ],
+    "samplers": [
+      {
+        "id": 0,
+        "wrapS": 33071,
+        "wrapT": 33071,
+        "minFilter": 9987,
+        "magFilter": 9729
+      }
+    ],
+    "meshCount": 2,
+    "materialCount": 5,
+    "imageCount": 4,
+    "allSamplersClampNoWrap": true,
+    "onlyArtworkMaterialsSampleImages": true,
+    "fourPrimitivesPerProduct": true
+  },
+  "glbReimport": {
+    "BottomExterior": {
+      "actualObjectName": "BottomExterior",
+      "polygonCount": 18464,
+      "triangleCount": 18464,
+      "materialSlots": [
+        "M07R13_LowerTopArtwork",
+        "M07R13_SolidDarkSide",
+        "M07R13_PolishedBrightSilverRim",
+        "M07R13_NeutralUnderside"
+      ],
+      "materialIds": {
+        "M07R13_LowerTopArtwork": 0,
+        "M07R13_SolidDarkSide": 1,
+        "M07R13_PolishedBrightSilverRim": 2,
+        "M07R13_NeutralUnderside": 3
+      },
+      "faceCounts": {
+        "topArtwork": 511,
+        "solidDarkSide": 6156,
+        "polishedSilverRim": 4104,
+        "neutralUnderside": 7693,
+        "other": 0
+      },
+      "triangleCounts": {
+        "topArtwork": 511,
+        "solidDarkSide": 6156,
+        "polishedSilverRim": 4104,
+        "neutralUnderside": 7693,
+        "other": 0
+      },
+      "sideWallArtworkFaceCount": 0,
+      "sideWallArtworkTriangleCount": 0,
+      "undersideArtworkFaceCount": 0,
+      "nonCapTexturedFaceCount": 0,
+      "topArtworkPresent": true,
+      "artworkUvLayer": "UVMap",
+      "artworkUvMin": [
+        0.014516184106469154,
+        0.009000182151794434
+      ],
+      "artworkUvMax": [
+        0.9854838252067566,
+        0.9909998178482056
+      ],
+      "artworkUvsWithinZeroOne": true,
+      "imageNodeExtensions": {
+        "M07R13_LowerTopArtwork": [
+          "EXTEND",
+          "EXTEND"
+        ],
+        "M07R13_SolidDarkSide": [],
+        "M07R13_PolishedBrightSilverRim": [],
+        "M07R13_NeutralUnderside": []
+      }
+    },
+    "MovingTopBody": {
+      "actualObjectName": "MovingTopBody",
+      "polygonCount": 51360,
+      "triangleCount": 51360,
+      "materialSlots": [
+        "M07R13_UpperTopArtwork",
+        "M07R13_SolidDarkSide",
+        "M07R13_PolishedBrightSilverRim",
+        "M07R13_NeutralUnderside"
+      ],
+      "materialIds": {
+        "M07R13_UpperTopArtwork": 0,
+        "M07R13_SolidDarkSide": 1,
+        "M07R13_PolishedBrightSilverRim": 2,
+        "M07R13_NeutralUnderside": 3
+      },
+      "faceCounts": {
+        "topArtwork": 511,
+        "solidDarkSide": 18492,
+        "polishedSilverRim": 4104,
+        "neutralUnderside": 28253,
+        "other": 0
+      },
+      "triangleCounts": {
+        "topArtwork": 511,
+        "solidDarkSide": 18492,
+        "polishedSilverRim": 4104,
+        "neutralUnderside": 28253,
+        "other": 0
+      },
+      "sideWallArtworkFaceCount": 0,
+      "sideWallArtworkTriangleCount": 0,
+      "undersideArtworkFaceCount": 0,
+      "nonCapTexturedFaceCount": 0,
+      "topArtworkPresent": true,
+      "artworkUvLayer": "UVMap",
+      "artworkUvMin": [
+        0.014516184106469154,
+        0.009000182151794434
+      ],
+      "artworkUvMax": [
+        0.9854838252067566,
+        0.9909998178482056
+      ],
+      "artworkUvsWithinZeroOne": true,
+      "imageNodeExtensions": {
+        "M07R13_UpperTopArtwork": [
+          "EXTEND",
+          "EXTEND"
+        ],
+        "M07R13_SolidDarkSide": [],
+        "M07R13_PolishedBrightSilverRim": [],
+        "M07R13_NeutralUnderside": []
+      }
+    }
+  },
+  "fbxReimport": {
+    "BottomExterior": {
+      "actualObjectName": "BottomExterior",
+      "polygonCount": 8723,
+      "triangleCount": 18464,
+      "materialSlots": [
+        "M07R13_LowerTopArtwork",
+        "M07R13_SolidDarkSide",
+        "M07R13_PolishedBrightSilverRim",
+        "M07R13_NeutralUnderside"
+      ],
+      "materialIds": {
+        "M07R13_LowerTopArtwork": 0,
+        "M07R13_SolidDarkSide": 1,
+        "M07R13_PolishedBrightSilverRim": 2,
+        "M07R13_NeutralUnderside": 3
+      },
+      "faceCounts": {
+        "topArtwork": 1,
+        "solidDarkSide": 3078,
+        "polishedSilverRim": 2052,
+        "neutralUnderside": 3592,
+        "other": 0
+      },
+      "triangleCounts": {
+        "topArtwork": 511,
+        "solidDarkSide": 6156,
+        "polishedSilverRim": 4104,
+        "neutralUnderside": 7693,
+        "other": 0
+      },
+      "sideWallArtworkFaceCount": 0,
+      "sideWallArtworkTriangleCount": 0,
+      "undersideArtworkFaceCount": 0,
+      "nonCapTexturedFaceCount": 0,
+      "topArtworkPresent": true,
+      "artworkUvLayer": "ArtworkUV",
+      "artworkUvMin": [
+        0.014516184106469154,
+        0.009000168181955814
+      ],
+      "artworkUvMax": [
+        0.9854838252067566,
+        0.9909998178482056
+      ],
+      "artworkUvsWithinZeroOne": true,
+      "imageNodeExtensions": {
+        "M07R13_LowerTopArtwork": [
+          "EXTEND",
+          "EXTEND"
+        ],
+        "M07R13_SolidDarkSide": [],
+        "M07R13_PolishedBrightSilverRim": [],
+        "M07R13_NeutralUnderside": []
+      }
+    },
+    "MovingTopBody": {
+      "actualObjectName": "MovingTopBody",
+      "polygonCount": 23119,
+      "triangleCount": 51360,
+      "materialSlots": [
+        "M07R13_UpperTopArtwork",
+        "M07R13_SolidDarkSide",
+        "M07R13_PolishedBrightSilverRim",
+        "M07R13_NeutralUnderside"
+      ],
+      "materialIds": {
+        "M07R13_UpperTopArtwork": 0,
+        "M07R13_SolidDarkSide": 1,
+        "M07R13_PolishedBrightSilverRim": 2,
+        "M07R13_NeutralUnderside": 3
+      },
+      "faceCounts": {
+        "topArtwork": 1,
+        "solidDarkSide": 9242,
+        "polishedSilverRim": 2052,
+        "neutralUnderside": 11824,
+        "other": 0
+      },
+      "triangleCounts": {
+        "topArtwork": 511,
+        "solidDarkSide": 18492,
+        "polishedSilverRim": 4104,
+        "neutralUnderside": 28253,
+        "other": 0
+      },
+      "sideWallArtworkFaceCount": 0,
+      "sideWallArtworkTriangleCount": 0,
+      "undersideArtworkFaceCount": 0,
+      "nonCapTexturedFaceCount": 0,
+      "topArtworkPresent": true,
+      "artworkUvLayer": "ArtworkUV",
+      "artworkUvMin": [
+        0.014516184106469154,
+        0.009000168181955814
+      ],
+      "artworkUvMax": [
+        0.9854838252067566,
+        0.9909998178482056
+      ],
+      "artworkUvsWithinZeroOne": true,
+      "imageNodeExtensions": {
+        "M07R13_UpperTopArtwork": [
+          "EXTEND",
+          "EXTEND"
+        ],
+        "M07R13_SolidDarkSide": [],
+        "M07R13_PolishedBrightSilverRim": [],
+        "M07R13_NeutralUnderside": []
+      }
+    }
+  },
+  "checks": {
+    "blendZeroSideArtwork": true,
+    "blendZeroUndersideArtwork": true,
+    "blendTopArtworkPresent": true,
+    "blendNoNonCapTextureSampling": true,
+    "blendArtworkUvsBounded": true,
+    "blendAllZonesPresent": true,
+    "glbReimportZeroSideArtwork": true,
+    "glbReimportZeroUndersideArtwork": true,
+    "glbReimportTopArtworkPresent": true,
+    "glbReimportNoNonCapTextureSampling": true,
+    "glbReimportArtworkUvsBounded": true,
+    "glbReimportAllZonesPresent": true,
+    "fbxReimportZeroSideArtwork": true,
+    "fbxReimportZeroUndersideArtwork": true,
+    "fbxReimportTopArtworkPresent": true,
+    "fbxReimportNoNonCapTextureSampling": true,
+    "fbxReimportArtworkUvsBounded": true,
+    "fbxReimportAllZonesPresent": true,
+    "blendGeometryDigest": true,
+    "glbClampNoWrap": true,
+    "glbOnlyArtworkSamplesImages": true,
+    "glbFourPrimitivesPerProduct": true,
+    "upperLowerArtworkIndependent": true
+  },
+  "pass": true
+}

@@ -1,0 +1,37 @@
+{
+  "schema": "premium-display-case-balanced-motion-quality.v1",
+  "status": "pass",
+  "reviewState": "ready_for_review",
+  "metrics": {
+    "primaryMotion": "entry",
+    "entryAxes": [
+      "screen-y",
+      "camera-depth-z"
+    ],
+    "showcaseRotationCount": 1,
+    "showcaseRotationDegrees": 360,
+    "entryRotationKeyCount": 0,
+    "simultaneousTranslationRotationFrames": 0,
+    "xDrift": 0,
+    "rollDegrees": 0,
+    "pitchDegrees": 0,
+    "modelScale": 1,
+    "highlightCount": 1,
+    "objectReplacementCount": 0,
+    "toyMotionCount": 0
+  },
+  "artifacts": {
+    "gif": {
+      "path": "balanced-entry-showcase-motion.gif",
+      "sha256": "e797c8e570711422c750b35bac66a6e505dc91abf0d3dd6e753b33c2a0f12fc2"
+    },
+    "contact": {
+      "path": "balanced-entry-showcase-contact-sheet.png",
+      "sha256": "262e57d82fd2620a31d6af527ffc8c1307cd5a5469e2e2aa64479569eb69a8c9"
+    },
+    "board": {
+      "path": "balanced-entry-showcase-analysis-board.png",
+      "sha256": "7085d468b807680d6f87d8f334aae4fd19de2c1584165d5dca78153da6e16c72"
+    }
+  }
+}

@@ -1,0 +1,51 @@
+{
+  "schema": "premium-display-case-gate04-mesh-clipped-light-validation.v1",
+  "modelId": "premium-display-case",
+  "gate": "04-architecture",
+  "architectureRevision": 2,
+  "evidenceRevision": 7,
+  "status": "pass",
+  "checks": {
+    "sourceContractRevision3": true,
+    "sameCaseAndBoundedOverlap": true,
+    "caseLightClipped": true,
+    "externalHaloRemoved": true,
+    "externalPointLightRejected": true,
+    "materialPropertyBlockDriver": true,
+    "timelinePreviewOnly": true,
+    "toolOwnershipExplicit": true,
+    "fourFiniteCues": true,
+    "noParticleVfxBloomLoop": true,
+    "toyStatic": true,
+    "wholeCaseNoExplode": true,
+    "timingStillTunable": true,
+    "gate05Blocked": true,
+    "shippingBoundary": true
+  },
+  "metrics": {
+    "caseLightOutsideSilhouetteMaxPixels": 0,
+    "finiteLightCueCount": 4,
+    "lightCueActiveFrameCounts": {
+      "pack-seam-light": 22,
+      "arrival-rim-inside-case-mask": 13,
+      "rotation-rim-inside-case-mask": 48,
+      "final-mesh-clipped-sheen": 16
+    },
+    "particleEmitterCount": 0,
+    "externalPointLightCount": 0,
+    "persistentLightLoopCount": 0,
+    "finalFrameActiveLightCueCount": 0,
+    "reviewArtifactExplodedPartCount": 0
+  },
+  "artifactHashes": {
+    "architecture": "d5afb4eecdb86953cb6d5c28e217e19f88becb6c0aef1316eaffac2ae630fc3e",
+    "gif": "22cb1cd4a1893f991c376bc6be1aae77e4bdfaa9d0713deea5333761b409d8f3",
+    "contact": "24d10563963e598046c3a5a31f4878575408f2eaaa4b4d38c29cd887b35f9593",
+    "review": "9e25435bdafd50ea5d706fcfe901e8e1f410826b5584aaefbec5520a669b9196"
+  },
+  "truth": {
+    "architectureOnly": true,
+    "shippingUnityChanged": false,
+    "buildInstallPhonePush": false
+  }
+}

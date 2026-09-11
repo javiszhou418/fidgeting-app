@@ -1,0 +1,142 @@
+{
+  "schemaVersion": 1,
+  "gate": "11-unity-parity",
+  "revision": 10,
+  "status": "validated-blocked-not-ready-for-review",
+  "checks": {
+    "unityTransportPassed": true,
+    "shippingSceneUnchanged": true,
+    "gate12NotStarted": true,
+    "buildInstallDeviceFalse": true,
+    "sameFullFrameMeasured": true,
+    "cameraAndBboxPassed": true,
+    "visualParityCorrectlyBlocked": true,
+    "hotspotFailureRecorded": true,
+    "clayFailureRecorded": true,
+    "contactShadowFailureRecorded": true,
+    "focusedUnityTestsPassed": true,
+    "recordingIsRealSixSecondUnityCapture": true,
+    "boardExists": true
+  },
+  "tests": {
+    "total": 7,
+    "passed": 7,
+    "failed": 0
+  },
+  "video": {
+    "streams": [
+      {
+        "index": 0,
+        "codec_name": "h264",
+        "codec_long_name": "H.264 / AVC / MPEG-4 AVC / MPEG-4 part 10",
+        "profile": "High",
+        "codec_type": "video",
+        "codec_tag_string": "avc1",
+        "codec_tag": "0x31637661",
+        "mime_codec_string": "avc1.64001f",
+        "width": 960,
+        "height": 720,
+        "coded_width": 960,
+        "coded_height": 720,
+        "has_b_frames": 2,
+        "pix_fmt": "yuv420p",
+        "level": 31,
+        "chroma_location": "left",
+        "field_order": "progressive",
+        "is_avc": "true",
+        "nal_length_size": "4",
+        "id": "0x1",
+        "r_frame_rate": "12/1",
+        "avg_frame_rate": "12/1",
+        "time_base": "1/12288",
+        "start_pts": 0,
+        "start_time": "0.000000",
+        "duration_ts": 73728,
+        "duration": "6.000000",
+        "bit_rate": "592464",
+        "bits_per_raw_sample": "8",
+        "nb_frames": "72",
+        "extradata_size": 45,
+        "disposition": {
+          "default": 1,
+          "dub": 0,
+          "original": 0,
+          "comment": 0,
+          "lyrics": 0,
+          "karaoke": 0,
+          "forced": 0,
+          "hearing_impaired": 0,
+          "visual_impaired": 0,
+          "clean_effects": 0,
+          "attached_pic": 0,
+          "timed_thumbnails": 0,
+          "non_diegetic": 0,
+          "captions": 0,
+          "descriptions": 0,
+          "metadata": 0,
+          "dependent": 0,
+          "still_image": 0,
+          "multilayer": 0
+        },
+        "tags": {
+          "language": "und",
+          "handler_name": "VideoHandler",
+          "encoder": "Lavc62.28.101 libx264"
+        }
+      }
+    ],
+    "format": {
+      "filename": "/Users/jiawei.zhou/Documents/Fidgeting app/unity/FidgetingApp/ArtSource/ModelPipeline/magnetic-slide-tile/evidence/11-unity-parity/rev-010/unity-gate11-r010-interactive-review.mp4",
+      "nb_streams": 1,
+      "nb_programs": 0,
+      "nb_stream_groups": 0,
+      "format_name": "mov,mp4,m4a,3gp,3g2,mj2",
+      "format_long_name": "QuickTime / MOV",
+      "start_time": "0.000000",
+      "duration": "6.000000",
+      "size": "445922",
+      "bit_rate": "594562",
+      "probe_score": 100,
+      "tags": {
+        "major_brand": "isom",
+        "minor_version": "512",
+        "compatible_brands": "isomiso2avc1mp41",
+        "encoder": "Lavf62.12.101"
+      }
+    }
+  },
+  "fullFrameSummary": {
+    "ssim": 0.7087752637429913,
+    "perceptualProxy": 0.07216104902327061,
+    "heatmapAreaFractionOver24": 0.16097727272727272,
+    "backgroundMeanAbsoluteError": 11.101669311523438,
+    "hotspotAreaRelativeError": 0.09871060785629632,
+    "hotspotCentroidErrorPixels": 48.20679435171062,
+    "hotspotAspectRelativeError": 1.2930998540754637,
+    "clayGradientMagnitudeRelativeError": 0.39170965715563816,
+    "contactShadowRelativeError": 1.0122546300536812
+  },
+  "files": {
+    "full-frame-parity-report.json": {
+      "sha256": "08e043a69327b0f0aaf20006a58299362034c983230350f51b0fa7c8402bb9e0",
+      "bytes": 7419
+    },
+    "unity-import-parity-report.json": {
+      "sha256": "b7c1b7d1ab9d0e1440ff5ae168b2ae4aa56f409878498069a2d48f27343f9d8b",
+      "bytes": 2424
+    },
+    "editmode-results.xml": {
+      "sha256": "fc7676fbb2f767c4271f5fbdeb92319cf501327238802088e604161c12e163ed",
+      "bytes": 8225
+    },
+    "unity-gate11-r010-interactive-review.mp4": {
+      "sha256": "805b9692d77baa1958ca984157bcad96618c1b8366e8bbaf5b3b39128b7ac105",
+      "bytes": 445922
+    },
+    "gate11-r010-full-frame-board.png": {
+      "sha256": "828627f583476b7dce98380bb6ec08f7e17593d930706ef11164f6f8e1b9bf39",
+      "bytes": 937800
+    }
+  },
+  "pass": true
+}

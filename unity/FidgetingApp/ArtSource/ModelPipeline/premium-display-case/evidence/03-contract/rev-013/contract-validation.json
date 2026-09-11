@@ -1,0 +1,225 @@
+{
+  "contract_sha256": "e9a6f14a61e823274c716f3b3c26ee63e0bbc8e5879145e7b98c65aa9ea88294",
+  "assertions": [
+    {
+      "id": "pocket-is-generic-circle",
+      "status": "pass",
+      "detail": "shape circle, generic True"
+    },
+    {
+      "id": "design-toy-fits-at-scale-one",
+      "status": "pass",
+      "detail": "fit scale 1.0 for 65.0 mm tip circle in 67.4 mm well"
+    },
+    {
+      "id": "pocket-side-margin-equals-input",
+      "status": "pass",
+      "detail": "field half-width 41.70 mm, pocket radius 36.95 mm, margin 4.75 mm"
+    },
+    {
+      "id": "room-below-pocket-for-trait-plaque",
+      "status": "pass",
+      "detail": "19.32 mm below the pocket foot; plaque 2.2 + 10.0 mm, lip groove 0.4: 6.72 mm of plain field left (>= 1.0)"
+    },
+    {
+      "id": "trait-rows-fit-plaque",
+      "status": "pass",
+      "detail": "3 rows: 2 x pitch 3.0 + track 1.2 + 2 x 1.4 margin <= plaque 10.0 mm"
+    },
+    {
+      "id": "trait-preview-budget",
+      "status": "pass",
+      "detail": "preview values [88, 36, 86] sum 210 (FDB-DSP-053 budget 210)"
+    },
+    {
+      "id": "junction-fillet-fits-chamfer",
+      "status": "pass",
+      "detail": "2 x tangent 1.24 mm < chamfer length 4.95 mm"
+    },
+    {
+      "id": "corner-bolt-inside-crystal-band",
+      "status": "pass",
+      "detail": "counterbore edge clearance 1.13 mm to band edges (band 5.27 mm, inset 4.24 mm, R 8.11 mm)"
+    },
+    {
+      "id": "seam-bolt-inside-crystal-band",
+      "status": "pass",
+      "detail": "band 5.27 mm vs counterbore 3.0 mm"
+    },
+    {
+      "id": "reliefs-above-structural-threshold",
+      "status": "pass",
+      "detail": "header/main recess, part lift, pocket lip and groove depth are real geometry, not normal-map relief"
+    },
+    {
+      "id": "field-chamfer-chain-never-clamps",
+      "status": "pass",
+      "detail": "field chamfer 1.86 -> groove inner 0.49 mm, (min 0.4; rev-009: no wing offset in the chain)"
+    },
+    {
+      "id": "header-chamfer-chain-never-clamps",
+      "status": "pass",
+      "detail": "bezel chamfer 3.5 mm -> plane chamfer 1.30 mm (min 0.4)"
+    },
+    {
+      "id": "frame-bands-uniform",
+      "status": "pass",
+      "detail": "main bezel top band = 2.80 mm = side band 2.8 mm; diagonal band equals by construction (exact offset)"
+    },
+    {
+      "id": "island-chamfers-equal",
+      "status": "pass",
+      "detail": "header 3.5 mm = main 3.5 mm; field chamfer derives to 1.86 mm"
+    },
+    {
+      "id": "no-wings-rev009",
+      "status": "pass",
+      "detail": "user 15:19: the four corner wings are removed; field around the pocket is plain sandblast + outline groove + gold accents"
+    },
+    {
+      "id": "pocket-centre-unchanged-from-rev008",
+      "status": "pass",
+      "detail": "pocket_top_clearance 4.14 mm = rev-008 0.94 + 3.2; centre y -20.68 mm"
+    },
+    {
+      "id": "rarity-map-covers-four-tiers",
+      "status": "pass",
+      "detail": "FDB-DSP-059 bold aperture; Signature = blue titanium"
+    },
+    {
+      "id": "frame-bands-thinner-than-rev011",
+      "status": "pass",
+      "detail": "shelf 2.8 mm (rev-011 4.56); uniform-offset rule keeps every band equal"
+    },
+    {
+      "id": "island-chamfer-sharper-than-rev011",
+      "status": "pass",
+      "detail": "chamfer 3.5 mm (rev-011 8.0); field chamfer derives to 1.86 mm"
+    },
+    {
+      "id": "approved-envelope-kept",
+      "status": "pass",
+      "detail": "case 101.28 x 171.78 vs approved {'width': 101.29, 'height': 171.79}; field side margin 4.76 mm"
+    },
+    {
+      "id": "trait-plaque-not-carved",
+      "status": "pass",
+      "detail": "flat reserved plaque; TRAIT PROFILE drawn at runtime"
+    },
+    {
+      "id": "seam-open-to-backplate",
+      "status": "pass",
+      "detail": "no seam object; 2.4 mm gap open to the rear plate (zone 3) under the crystal"
+    },
+    {
+      "id": "rarity-palette-muted",
+      "status": "pass",
+      "detail": "every tier accent keeps channel spread <= 0.21 (saturated rev-010 copper was 0.50, gold 0.58)"
+    },
+    {
+      "id": "lighting-reference-bling-recorded",
+      "status": "pass",
+      "detail": "four backlit edge strips + sparkle group + rims 30/26 %; coloured cap 8 % -> 300 % recorded as superseded, not deleted"
+    },
+    {
+      "id": "soft-focus-user-visible-level",
+      "status": "pass",
+      "detail": "threshold 0.7-1.5, radii x3 (0.75 % / 3 % of long edge), mix x3 (24-36 % + 6-9 %); highlight-only masks and final-beauty-only unchanged"
+    },
+    {
+      "id": "frame-ledge-clears-counterbore",
+      "status": "pass",
+      "detail": "band/2 2.63 - bore r 1.5 - ledge 0.9 = 0.23 mm"
+    },
+    {
+      "id": "no-datum-rail",
+      "status": "pass",
+      "detail": "GEO_PDC_HEADER_SILVER_DATUM_RAIL retired; header and main bezels are separate islands"
+    },
+    {
+      "id": "concentric-chain-never-clamps",
+      "status": "pass",
+      "detail": "frame inner R 2.84 -> interior R 1.95 mm; bezel R 6.0 -> plane R 2.24 mm (min 0.4)"
+    },
+    {
+      "id": "hub-near-image-reading",
+      "status": "pass",
+      "detail": "derived 0.6204H vs image 0.6369H"
+    },
+    {
+      "id": "coverage-plus-protrusion-equals-one",
+      "status": "pass",
+      "detail": "0.58 + 0.42 = 1.0000"
+    },
+    {
+      "id": "frame-height-plus-protrusion-equals-thickness",
+      "status": "pass",
+      "detail": "8.41 + 6.09 vs 14.5"
+    },
+    {
+      "id": "protrusion-ratio-in-range",
+      "status": "pass",
+      "detail": "protrusion_ratio 0.42"
+    },
+    {
+      "id": "no-old-contract-dimensions",
+      "status": "pass",
+      "detail": "W 101.28 H 171.78 D 17.05 vs 228x304x59"
+    },
+    {
+      "id": "unknowns-preserved",
+      "status": "pass",
+      "detail": "retention and manufacturing fields stay null"
+    },
+    {
+      "id": "no-provisional-promoted-to-measured",
+      "status": "pass",
+      "detail": "every measured input cites src.spinner_mesh"
+    }
+  ],
+  "resolved_key_values_mm": {
+    "case.width_mm": 101.28,
+    "case.height_mm": 171.78,
+    "header.height_mm": 54.09,
+    "header.rail_band_mm": 4.72,
+    "case.frame_band_mm": 5.27,
+    "case.outer_corner_radius_mm": 8.11,
+    "case.inner_corner_radius_mm": 2.84,
+    "main.perimeter_shelf_width_mm": 2.8,
+    "spinner.center_x_mm": 0.0,
+    "spinner.center_y_mm": -20.68,
+    "case.frame_front_height_from_spinner_back_mm": 8.41,
+    "spinner.protrusion_mm": 6.09,
+    "case.z_frame_front_mm": 10.96,
+    "case.z_shelf_top_mm": 7.96,
+    "case.z_field_mm": 6.36,
+    "case.z_header_plane_mm": 6.76,
+    "case.z_spinner_front_mm": 17.05,
+    "assembled.envelope_depth_mm": 17.05,
+    "case.root_recentering_z_mm": -8.525,
+    "main.pocket_well_diameter_mm": 67.4,
+    "main.pocket_diameter_mm": 73.9,
+    "main.pocket_well_depth_mm": 3.66,
+    "main.field_width_mm": 83.42,
+    "main.liner_inset_mm": 6.14,
+    "main.field_top_y_mm": 26.58,
+    "main.field_bottom_y_mm": -76.95,
+    "visual.spinner_center_from_top": 0.6204,
+    "content.review_fit_scale": 1.0,
+    "header.seam_gap_mm": 2.4,
+    "header.bezel_corner_chamfer_mm": 3.5,
+    "main.pocket_lip_width_mm": 1.8,
+    "main.pocket_lip_height_mm": 0.6,
+    "main.groove_depth_mm": 0.3,
+    "case.frame_ledge_drop_mm": 0.8,
+    "interior.junction_fillet_mm": 1.5,
+    "trait.plaque_height_mm": 10.0,
+    "trait.row_pitch_mm": 3.0,
+    "trait.track_height_mm": 1.2,
+    "interior.island_corner_chamfer_mm": 3.5,
+    "main.field_corner_chamfer_mm": 1.86,
+    "main.pocket_top_clearance_mm": 4.14
+  },
+  "all_pass": true,
+  "warnings": []
+}

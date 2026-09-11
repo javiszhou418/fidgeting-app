@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<test-run id="2" testcasecount="1" result="Failed(Child)" total="1" passed="0" failed="1" inconclusive="0" skipped="0" asserts="0" engine-version="3.5.0.0" clr-version="4.0.30319.42000" start-time="2026-09-01 02:17:07Z" end-time="2026-09-01 02:17:07Z" duration="0.4000405">
+  <test-suite type="TestSuite" id="1000" name="Fidget Spinner" fullname="Fidget Spinner" runstate="Runnable" testcasecount="506" result="Failed" site="Child" start-time="2026-09-01 02:17:07Z" end-time="2026-09-01 02:17:07Z" duration="0.400041" total="1" passed="0" failed="1" inconclusive="0" skipped="0" asserts="0">
+    <properties>
+      <property name="platform" value="EditMode" />
+    </properties>
+    <failure>
+      <message><![CDATA[One or more child tests had errors]]></message>
+    </failure>
+    <test-suite type="Assembly" id="1564" name="Assembly-CSharp-Editor.dll" fullname="/Users/jiawei.zhou/Documents/Fidgeting app/unity/FidgetingApp/Library/ScriptAssemblies/Assembly-CSharp-Editor.dll" runstate="Runnable" testcasecount="506" result="Failed" site="Child" start-time="2026-09-01 02:17:07Z" end-time="2026-09-01 02:17:07Z" duration="0.337542" total="1" passed="0" failed="1" inconclusive="0" skipped="0" asserts="0">
+      <properties>
+        <property name="_PID" value="85193" />
+        <property name="_APPDOMAIN" value="Unity Child Domain" />
+        <property name="platform" value="EditMode" />
+        <property name="EditorOnly" value="True" />
+      </properties>
+      <failure>
+        <message><![CDATA[One or more child tests had errors]]></message>
+      </failure>
+      <test-suite type="TestSuite" id="1568" name="FidgetingApp" fullname="FidgetingApp" runstate="Runnable" testcasecount="427" result="Failed" site="Child" start-time="2026-09-01 02:17:07Z" end-time="2026-09-01 02:17:07Z" duration="0.334645" total="1" passed="0" failed="1" inconclusive="0" skipped="0" asserts="0">
+        <properties />
+        <failure>
+          <message><![CDATA[One or more child tests had errors]]></message>
+        </failure>
+        <test-suite type="TestSuite" id="1572" name="EDC" fullname="FidgetingApp.EDC" runstate="Runnable" testcasecount="38" result="Failed" site="Child" start-time="2026-09-01 02:17:07Z" end-time="2026-09-01 02:17:07Z" duration="0.330089" total="1" passed="0" failed="1" inconclusive="0" skipped="0" asserts="0">
+          <properties />
+          <failure>
+            <message><![CDATA[One or more child tests had errors]]></message>
+          </failure>
+          <test-suite type="TestSuite" id="1573" name="Tests" fullname="FidgetingApp.EDC.Tests" runstate="Runnable" testcasecount="38" result="Failed" site="Child" start-time="2026-09-01 02:17:07Z" end-time="2026-09-01 02:17:07Z" duration="0.329265" total="1" passed="0" failed="1" inconclusive="0" skipped="0" asserts="0">
+            <properties />
+            <failure>
+              <message><![CDATA[One or more child tests had errors]]></message>
+            </failure>
+            <test-suite type="TestFixture" id="1107" name="MagneticSlideTileRuntimeInputTests" fullname="FidgetingApp.EDC.Tests.MagneticSlideTileRuntimeInputTests" classname="FidgetingApp.EDC.Tests.MagneticSlideTileRuntimeInputTests" runstate="Runnable" testcasecount="5" result="Failed" site="Child" start-time="2026-09-01 02:17:07Z" end-time="2026-09-01 02:17:07Z" duration="0.327879" total="1" passed="0" failed="1" inconclusive="0" skipped="0" asserts="0">
+              <properties />
+              <failure>
+                <message><![CDATA[One or more child tests had errors]]></message>
+              </failure>
+              <test-case id="1109" name="TouchInputEnforcesEndpointInterlockAndAlignedClose" fullname="FidgetingApp.EDC.Tests.MagneticSlideTileRuntimeInputTests.TouchInputEnforcesEndpointInterlockAndAlignedClose" methodname="TouchInputEnforcesEndpointInterlockAndAlignedClose" classname="FidgetingApp.EDC.Tests.MagneticSlideTileRuntimeInputTests" runstate="Runnable" seed="349230244" result="Failed" start-time="2026-09-01 02:17:01Z" end-time="2026-09-01 02:17:07Z" duration="6.047423" asserts="0">
+                <properties>
+                  <property name="_JOINTYPE" value="UnityCombinatorial" />
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+                <failure>
+                  <message><![CDATA[  Expected: True
+  But was:  False
+]]></message>
+                  <stack-trace><![CDATA[at FidgetingApp.EDC.Tests.MagneticSlideTileRuntimeInputTests+<TouchInputEnforcesEndpointInterlockAndAlignedClose>d__6.MoveNext () [0x00203] in /Users/jiawei.zhou/Documents/Fidgeting app/unity/FidgetingApp/Assets/_EDC/Candidates/MagneticSlideTileGate12R002/Tests/Editor/MagneticSlideTileRuntimeInputTests.cs:147
+at UnityEngine.TestTools.TestEnumerator+<Execute>d__7.MoveNext () [0x0003a] in ./Library/PackageCache/com.unity.test-framework@1405238725ab/UnityEngine.TestRunner/NUnitExtensions/Attributes/TestEnumerator.cs:44
+]]></stack-trace>
+                </failure>
+                <output><![CDATA[[MagneticSlideTest] surface-projection screen=640x480 point=(320.00, 230.43, 0.17) center=(0.00, 0.01, 0.00) camera=(0.00, 0.10, -0.15) forward=(0.00, -0.50, 0.87) directHit=True distance=0.1560
+[MagneticSlideTest] queued-dynamic-touch id=1 phase=Began device=1
+[MagneticSlideTest] queued-dynamic-touch id=1 phase=Moved device=1
+[MagneticSlideTest] queued-dynamic-touch id=1 phase=Moved device=1
+[MagneticSlideTest] queued-dynamic-touch id=1 phase=Ended device=1
+[MagneticSlideTest] controller-updates toy=21 presentation=21 touches=0
+[MagneticSlideTest] surface-projection screen=640x480 point=(320.00, 230.43, 0.17) center=(0.00, 0.01, 0.00) camera=(0.00, 0.10, -0.15) forward=(0.00, -0.50, 0.87) directHit=True distance=0.1560
+[MagneticSlideTest] queued-dynamic-touch id=2 phase=Began device=1
+[MagneticSlideTest] queued-dynamic-touch id=2 phase=Moved device=1
+[MagneticSlideTest] queued-dynamic-touch id=2 phase=Moved device=1
+[MagneticSlideTest] queued-dynamic-touch id=2 phase=Moved device=1
+[MagneticSlideTest] queued-dynamic-touch id=2 phase=Moved device=1
+[MagneticSlideTest] queued-dynamic-touch id=2 phase=Moved device=1
+[MagneticSlideTest] queued-dynamic-touch id=2 phase=Moved device=1
+[MagneticSlideTest] queued-dynamic-touch id=2 phase=Ended device=1
+[MagneticSlideTest] surface-projection screen=640x480 point=(320.00, 230.43, 0.17) center=(0.00, 0.01, 0.00) camera=(0.00, 0.10, -0.15) forward=(0.00, -0.50, 0.87) directHit=True distance=0.1560
+[MagneticSlideTest] queued-dynamic-touch id=3 phase=Began device=1
+[MagneticSlideTest] queued-dynamic-touch id=3 phase=Moved device=1
+[MagneticSlideTest] queued-dynamic-touch id=3 phase=Moved device=1
+[MagneticSlideTest] queued-dynamic-touch id=3 phase=Moved device=1
+[MagneticSlideTest] queued-dynamic-touch id=3 phase=Moved device=1
+[MagneticSlideTest] queued-dynamic-touch id=3 phase=Moved device=1
+[MagneticSlideTest] queued-dynamic-touch id=3 phase=Moved device=1
+[MagneticSlideTest] queued-dynamic-touch id=3 phase=Ended device=1
+Saving results to: /Users/jiawei.zhou/Library/Application Support/DefaultCompany/Fidget Spinner/TestResults.xml
+]]></output>
+              </test-case>
+            </test-suite>
+          </test-suite>
+        </test-suite>
+      </test-suite>
+    </test-suite>
+  </test-suite>
+</test-run>

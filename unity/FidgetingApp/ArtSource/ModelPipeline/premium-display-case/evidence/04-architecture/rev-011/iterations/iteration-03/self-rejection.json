@@ -1,0 +1,20 @@
+{
+  "schema": "premium-display-case-gate04-r011-self-rejection.v1",
+  "iteration": 3,
+  "status": "visual-self-rejected-before-registration",
+  "registeredForApproval": false,
+  "source": "actual Unity 6000.5.6f1 PlayMode frames at 1206x2622 and 60 fps",
+  "reasons": [
+    "The coherent wipe removed pixel noise, but the remaining Pack read as a static rectangular side panel.",
+    "All flare particles advanced through the 2x2 atlas in sync, so the source white core and horizontal streak did not survive.",
+    "The result still emphasized a magenta orb and blue star cluster more than the audited source texture family."
+  ],
+  "corrections": [
+    "Move the coherent Pack occluder out as one wrapper while the exact discard curve removes it.",
+    "Select the source atlas horizontal flare for activation and use varied source atlas frames for the explosion.",
+    "Keep source flare colors and lightning strips visible without adding a ring or screen wash."
+  ],
+  "shippingRuntimeWired": false,
+  "shippingReady": false,
+  "physicalPhoneInstalled": false
+}

@@ -1,0 +1,107 @@
+{
+  "schemaVersion": 1,
+  "transform": {
+    "name": "neutral-display-v1",
+    "input": "scene-linear Rec.709/D65",
+    "exposureMultiplier": 1.0,
+    "shoulder": "x/(1+0.18x)",
+    "encoding": "IEC 61966-2-1 sRGB",
+    "backgroundLinear": [
+      0.03500000014901161,
+      0.03500000014901161,
+      0.03500000014901161
+    ]
+  },
+  "images": [
+    {
+      "source": "blender-clay-linear.exr",
+      "output": "blender-clay-display.png",
+      "linearMinimum": 0.03322306275367737,
+      "linearMaximum": 0.75,
+      "linearMean": 0.16141587495803833,
+      "alphaObjectFraction": 0.2519,
+      "displayClippedFraction": 0.0
+    },
+    {
+      "source": "blender-crystal-linear.exr",
+      "output": "blender-crystal-display.png",
+      "linearMinimum": 0.0225982666015625,
+      "linearMaximum": 3.365234375,
+      "linearMean": 0.04916864261031151,
+      "alphaObjectFraction": 0.1943025974025974,
+      "displayClippedFraction": 0.0014435064935064935
+    },
+    {
+      "source": "blender-full-model-linear.exr",
+      "output": "blender-full-model-display.png",
+      "linearMinimum": 0.022125244140625,
+      "linearMaximum": 3.365234375,
+      "linearMean": 0.054790180176496506,
+      "alphaObjectFraction": 0.2519,
+      "displayClippedFraction": 0.002794805194805195
+    },
+    {
+      "source": "blender-reflection-only-linear.exr",
+      "output": "blender-reflection-only-display.png",
+      "linearMinimum": 0.033133894205093384,
+      "linearMaximum": 3.5234375,
+      "linearMean": 0.13245117664337158,
+      "alphaObjectFraction": 0.1880012987012987,
+      "displayClippedFraction": 0.017579220779220778
+    },
+    {
+      "source": "blender-silver-linear.exr",
+      "output": "blender-silver-display.png",
+      "linearMinimum": 0.033133894205093384,
+      "linearMaximum": 3.7109375,
+      "linearMean": 0.13562548160552979,
+      "alphaObjectFraction": 0.1880012987012987,
+      "displayClippedFraction": 0.019005844155844154
+    },
+    {
+      "source": "unity-clay-linear.exr",
+      "output": "unity-clay-display.png",
+      "linearMinimum": 0.03500000014901161,
+      "linearMaximum": 1.908203125,
+      "linearMean": 0.13182774186134338,
+      "alphaObjectFraction": 0.2519025974025974,
+      "displayClippedFraction": 7.857142857142857e-05
+    },
+    {
+      "source": "unity-crystal-linear.exr",
+      "output": "unity-crystal-display.png",
+      "linearMinimum": 0.00955963134765625,
+      "linearMaximum": 3.78125,
+      "linearMean": 0.04868873581290245,
+      "alphaObjectFraction": 0.19430389610389612,
+      "displayClippedFraction": 0.0014311688311688313
+    },
+    {
+      "source": "unity-full-model-linear.exr",
+      "output": "unity-full-model-display.png",
+      "linearMinimum": 0.009521484375,
+      "linearMaximum": 3.78125,
+      "linearMean": 0.0533902570605278,
+      "alphaObjectFraction": 0.2519025974025974,
+      "displayClippedFraction": 0.0027811688311688313
+    },
+    {
+      "source": "unity-reflection-only-linear.exr",
+      "output": "unity-reflection-only-display.png",
+      "linearMinimum": 0.03500000014901161,
+      "linearMaximum": 2.4609375,
+      "linearMean": 0.10114097595214844,
+      "alphaObjectFraction": 0.18676233766233766,
+      "displayClippedFraction": 0.009255844155844156
+    },
+    {
+      "source": "unity-silver-linear.exr",
+      "output": "unity-silver-display.png",
+      "linearMinimum": 0.03500000014901161,
+      "linearMaximum": 3.783203125,
+      "linearMean": 0.13467231392860413,
+      "alphaObjectFraction": 0.18676233766233766,
+      "displayClippedFraction": 0.019072727272727272
+    }
+  ]
+}

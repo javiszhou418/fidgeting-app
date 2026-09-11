@@ -1,0 +1,44 @@
+{
+  "schemaVersion": 1,
+  "gate": "07-material",
+  "revision": 12,
+  "contractSha256": "9cd7a08f34d7d8dfc3c6f89f6c80a5c5c2dcae48bc0d5c54ebf455a0727ea571",
+  "geometryDigest": "2fcf6d2b4344511bc6b86ce940a927576f9cdb4988f4022959a3372f4d3c1952",
+  "denseSamples": 4359,
+  "blockedRotationAttempts": 4000,
+  "blockedSlideAttempts": 359,
+  "maxPivotVarianceMm": 0.0,
+  "maxTopResidualMm": 2.883288055049854e-06,
+  "minimumDiskCoverageMisses": 0,
+  "maximumSurfaceIntersectionCount": 0,
+  "legalPoseFiles": [
+    "assembled-closed.png",
+    "intermediate-slide-0.png",
+    "max-open-0.png",
+    "max-open-12.png",
+    "max-open-36.png"
+  ],
+  "forbiddenPoseFilesAbsent": [
+    "mid-slide-12.png",
+    "mid-slide-36.png",
+    "intermediate-slide-12.png",
+    "intermediate-slide-36.png"
+  ],
+  "checks": {
+    "contractHash": true,
+    "geometryDigest": true,
+    "legalPoseFiles": true,
+    "noIllegalPoseFiles": true,
+    "rotationBlockedBelowEndpoint": true,
+    "slideBlockedWhileRotated": true,
+    "returnAfterAlignment": true,
+    "fixedPivot": true,
+    "tightTransformResidual": true,
+    "minimumOverlapContained": true,
+    "noPenetration": true,
+    "noFlip": true,
+    "rendererWhitelist": true,
+    "zeroSelfMotion": true
+  },
+  "pass": true
+}

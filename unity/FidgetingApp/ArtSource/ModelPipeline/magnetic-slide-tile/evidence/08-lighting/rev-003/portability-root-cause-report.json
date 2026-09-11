@@ -1,0 +1,144 @@
+{
+  "schemaVersion": 1,
+  "gate": "08-lighting",
+  "revision": 3,
+  "status": "ready-for-interactive-review-not-approved",
+  "alignmentPolicy": {
+    "resolution": [
+      1400,
+      1100
+    ],
+    "sameFullFrame": true,
+    "independentCropping": false,
+    "postAlignment": false
+  },
+  "rootCause": {
+    "earliestPortableFailure": "08-lighting",
+    "gate08AreaLights": "Four 18-32 mm Blender area lights at 16-50 kW define large specular shapes without a direct mobile URP unit/shape mapping.",
+    "gate08ReflectionCards": "Four hidden reflection cards create camera-invisible highlights that the Unity import cannot reproduce directly.",
+    "gate09Exr": "The approved EXR contains alpha 1 but RGB 0 because the Blender foreach_set/save path did not persist generated RGB pixels.",
+    "duplicateHighlights": "Gate 11 added a global cubemap, local probe, analytic panel term and world-space broad-softbox term on top of direct specular.",
+    "toneMapping": "Gate 09 documented AgX-to-Unity fitting as future work; Gate 11 used ACES without a fitted LUT.",
+    "contactShadow": "Blender Eevee ground/shadow response was replaced by Unity ground fill and mismatched shadow response."
+  },
+  "exrAudit": {
+    "approvedGate09": {
+      "minimum": 0.0,
+      "maximum": 0.0,
+      "mean": 0.0,
+      "nonzeroRgbPixelFraction": 0.0
+    },
+    "portableCandidate": {
+      "minimum": 0.017038006335496902,
+      "maximum": 1.137650966644287,
+      "mean": 0.09679926186800003,
+      "nonzeroRgbPixelFraction": 1.0
+    },
+    "approvedSha256": "7f1c9fded84c453efbc5300a6a71fe2948534055d3f4ae5052696909f30be6ab",
+    "portableSha256": "d52f0eb70f9d26bc870c078c1ced35fa38f8b743144c421a6c9917d1dcd2bd60"
+  },
+  "cameraAndBounds": {
+    "rawBbox": [
+      292,
+      251,
+      1111,
+      857
+    ],
+    "rawCentroid": [
+      698.0526182283113,
+      549.1209148233461
+    ],
+    "sameCameraContract": true,
+    "sameGeometrySilhouette": true
+  },
+  "fullFrame": {
+    "ssim": 0.7806746499765953,
+    "meanAbsoluteError": 11.456968307495117,
+    "backgroundMeanAbsoluteError": 13.852938652038574,
+    "heatmapAreaFractionOver24": 0.02238961038961039,
+    "regionalDeltaE76": {
+      "fullFrame": {
+        "mean": 12.933306694030762,
+        "median": 15.033296585083008,
+        "p95": 20.099750518798828
+      },
+      "object": {
+        "mean": 5.019058704376221,
+        "median": 3.0,
+        "p95": 18.70828628540039
+      },
+      "background": {
+        "mean": 15.619873046875,
+        "median": 17.029386520385742,
+        "p95": 20.099750518798828
+      },
+      "bloodRed": {
+        "mean": 9.113313674926758,
+        "median": 8.306623458862305,
+        "p95": 18.788293838500977
+      }
+    }
+  },
+  "hotspot": {
+    "blender": {
+      "pixels": 0,
+      "centroid": null,
+      "bbox": null,
+      "bboxAspect": null
+    },
+    "unity": {
+      "pixels": 117,
+      "centroid": [
+        838.5726495726495,
+        644.1794871794872
+      ],
+      "bbox": [
+        813,
+        574,
+        862,
+        713
+      ],
+      "bboxAspect": 0.35714285714285715
+    }
+  },
+  "clay": {
+    "blenderGradient": {
+      "mean": 48.97208435929825,
+      "std": 26.29320443226036,
+      "x": -66.36175255469021,
+      "y": -160.4835373050761,
+      "magnitude": 173.66302988281555
+    },
+    "unityGradient": {
+      "mean": 56.47686934865213,
+      "std": 32.8507482784686,
+      "x": 46.15103886678196,
+      "y": -159.14534550363192,
+      "magnitude": 165.70201985477908
+    },
+    "gradientMagnitudeRelativeError": 0.045841708701088564,
+    "contactShadow": "still visibly mismatched; Gate 08 review blocks downstream work"
+  },
+  "reflectionContinuity": {
+    "equirectangularSeamMaxLinearDelta": 0.0,
+    "singleEnvironmentContribution": true
+  },
+  "clipping": {
+    "blender": 0.0,
+    "unity": 4.2857142857142856e-05
+  },
+  "checks": {
+    "oldExrRgbNonzero": false,
+    "portableExrRgbNonzero": true,
+    "portableRecipeUsesNoAreaLights": true,
+    "portableRecipeUsesNoReflectionCards": true,
+    "singleEnvironmentContribution": true,
+    "sameRawFrame": true,
+    "geometryMaterialArtworkPreserved": true,
+    "visualParityReady": false,
+    "renewedGate08ReviewRequired": true,
+    "gate09AndDownstreamMustRemainStale": true,
+    "shippingUntouched": true
+  },
+  "pass": true
+}

@@ -1,0 +1,14 @@
+Command line invocation:
+    /Applications/Xcode.app/Contents/Developer/usr/bin/xcodebuild -project "/Users/jiawei.zhou/Documents/Fidgeting app/unity/FidgetingApp/Builds/iOS/DeviceJobs/magnetic-slide-build44-20260902T082358Z-snapshot/Export/Unity-iPhone.xcodeproj" -scheme Unity-iPhone -configuration Release -destination platform=iOS,id=00008130-001A00361EE0001C -derivedDataPath "/Users/jiawei.zhou/Documents/Fidgeting app/unity/FidgetingApp/Builds/iOS/DeviceJobs/magnetic-slide-build44-20260902T082358Z-snapshot/DerivedData" -allowProvisioningUpdates DEVELOPMENT_TEAM=2RJ2CW6NK5 CODE_SIGN_STYLE=Automatic build
+
+Build settings from command line:
+    CODE_SIGN_STYLE = Automatic
+    DEVELOPMENT_TEAM = 2RJ2CW6NK5
+
+2026-09-02 16:25:37.468 xcodebuild[40788:26083733] Writing error result bundle to /var/folders/m0/kts__dws0kj7lj6f_s0pss800000gp/T/ResultBundle_2026-02-09_16-25-0037.xcresult
+xcodebuild: error: Unable to find a destination matching the provided destination specifier:
+		{ platform:iOS, id:00008130-001A00361EE0001C }
+
+	Ineligible destinations for the "Unity-iPhone" scheme:
+		{ platform:iOS, arch:arm64e, id:00008130-001A00361EE0001C, name:JW, error:iOS 26.4 is not installed. Please download and install the platform from Xcode > Settings > Components. }
+		{ platform:iOS, id:dvtdevice-DVTiPhonePlaceholder-iphoneos:placeholder, name:Any iOS Device, error:iOS 26.4 is not installed. Please download and install the platform from Xcode > Settings > Components. }

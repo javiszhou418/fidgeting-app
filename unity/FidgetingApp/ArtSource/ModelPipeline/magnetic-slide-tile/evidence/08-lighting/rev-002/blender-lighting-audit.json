@@ -1,0 +1,99 @@
+{
+  "schemaVersion": 1,
+  "gate": "08-lighting",
+  "revision": 2,
+  "blenderVersion": "5.2.0 LTS",
+  "geometryDigest": "e2a838c22b743c7b0a05a20df060817f4e324bad5c84c11592c673c25ee002fe",
+  "materialDigest": "366b788bfb329d806ffbffaa3ff9c4789deab3967943fa43dc7f42c9b6609aa8",
+  "missingMaterials": [],
+  "emission": {
+    "M07R11_Crystal_Upper": 0.0,
+    "M07R11_Crystal_LowerDistinct": 0.0,
+    "M07R11_PolishedSilver": 0.0,
+    "M07R11_InternalSilverReference": 0.0,
+    "M07R11_DarkExteriorSide": 0.0,
+    "M07R11_NeutralTechnical": 0.0,
+    "M07R11_BallCandidate_UnknownMaterial": 0.0
+  },
+  "lights": {
+    "fill": {
+      "name": "M08R2_FillSoftbox",
+      "type": "AREA",
+      "powerW": 26000.0,
+      "sizeMm": 32.0,
+      "cctK": 7000
+    },
+    "key": {
+      "name": "M08R2_KeySoftbox",
+      "type": "AREA",
+      "powerW": 48000.0,
+      "sizeMm": 20.0,
+      "cctK": 5600
+    },
+    "under": {
+      "name": "M08R2_MechanismReveal",
+      "type": "AREA",
+      "powerW": 22000.0,
+      "sizeMm": 18.0,
+      "cctK": 5200
+    },
+    "rim": {
+      "name": "M08R2_SilverRimStrip",
+      "type": "AREA",
+      "powerW": 50000.0,
+      "sizeMm": 18.0,
+      "cctK": 6504
+    }
+  },
+  "cameras": [
+    "M08R2_Hero",
+    "M08R2_LeftOblique",
+    "M08R2_Low",
+    "M08R2_Mechanism",
+    "M08R2_RightOblique",
+    "M08R2_TopReveal",
+    "M08R2_Underside"
+  ],
+  "reflectionCards": [
+    "M08R2_BlackCard_Back",
+    "M08R2_WhiteCard_Left",
+    "M08R2_WhiteCard_Right",
+    "M08R2_WhiteCard_Top"
+  ],
+  "animatedObjects": [],
+  "glb": {
+    "materials": [
+      "M07R11_BallCandidate_UnknownMaterial",
+      "M07R11_NeutralTechnical",
+      "M07R11_InternalSilverReference",
+      "M07R11_PolishedSilver",
+      "M07R11_Crystal_LowerDistinct",
+      "M07R11_DarkExteriorSide",
+      "M07R11_Crystal_Upper"
+    ],
+    "images": 4,
+    "meshes": 8
+  },
+  "checks": {
+    "sceneIdentity": true,
+    "sourceHash": true,
+    "contractHash": true,
+    "geometryDigest": true,
+    "materialDigestRecorded": true,
+    "approvedMaterialsPresent": true,
+    "approvedEmissionZero": true,
+    "technicalPassIsolation": true,
+    "fourDocumentedLights": true,
+    "requiredCameras": true,
+    "reflectionCards": true,
+    "uniformWorldNoHdri": true,
+    "colorManagement": true,
+    "requiredFiles": true,
+    "turntableFrames": true,
+    "glbMaterials": true,
+    "glbEmbeddedImages": true,
+    "zeroSelfMotion": true,
+    "oldShippingUntouched": true
+  },
+  "pass": true
+}

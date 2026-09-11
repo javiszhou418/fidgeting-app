@@ -1,0 +1,122 @@
+{
+  "schema": "premium-display-case-gate04-r010-quality-contract.v1",
+  "modelId": "premium-display-case",
+  "gate": "04-architecture",
+  "architectureRevision": 6,
+  "evidenceRevision": 10,
+  "sourceThread": "2e7782a0-9389-4652-be92-7193ec0d5425",
+  "sourceTask": "36011d7f-627f-41a0-9c27-6a5dfd92db4b",
+  "engine": {
+    "unity": "6000.5.6f1",
+    "urp": "17.5.0",
+    "vfxGraph": false,
+    "particles": "Shuriken"
+  },
+  "rejectedHistory": {
+    "evidenceRevisions": [
+      8,
+      9
+    ],
+    "rev9EventId": "794facd7-3c15-4c6c-bc32-4617cf4de882",
+    "rev9Disposition": "technical-rejected",
+    "rev9ApprovalRequestAllowed": false,
+    "immutable": true
+  },
+  "scope": {
+    "architectureLookdevCandidate": true,
+    "shippingApproval": false,
+    "shippingRuntimeWired": false,
+    "nativeBusinessUiModified": false,
+    "physicalDeviceAllowed": false
+  },
+  "tear": {
+    "pullOrigin": "authored-top-right-contact-tab",
+    "direction": "right-to-left-across-seam",
+    "longitudinalSegmentsMinimum": 48,
+    "crossRowsMinimum": 4,
+    "aheadOfFrontVisuallyWelded": true,
+    "behindFrontOnlyMaySeparate": true,
+    "tailPath": "cubic-out-of-plane-changing-curvature-curl-back",
+    "frontMaterial": true,
+    "darkUndersideMaterial": true,
+    "physicalEdgeThickness": true,
+    "restrainedContactShadowGeometry": true,
+    "movingNarrowSpecularGeometry": true,
+    "sharedSeededIrregularEdge": true,
+    "maximumTearAmplitudeMeters": 0.00115,
+    "largeTriangularTeethAllowed": false,
+    "shapedCavityWithDepthLayers": true,
+    "belowFrontOccluded": true,
+    "exactReboundRequired": true
+  },
+  "continuity": {
+    "assembledCaseInstances": 1,
+    "twoDimensionalCasePreviewAllowed": false,
+    "caseRootScaleConstant": true,
+    "packIsPhysicalOccluder": true,
+    "sameCaseVisibleThroughAperture": true,
+    "sameCaseCrossesOccluder": true,
+    "rendererInstanceIdsTrackedEveryFrame": true,
+    "rootTransformTrackedEveryFrame": true,
+    "projectedBoundsTrackedEveryFrame": true,
+    "boundsJumpAllowed": false,
+    "packGoneByImpactEnd": true,
+    "impactHandoffMilliseconds": 180
+  },
+  "lookdev": {
+    "environment": "actual-shipping-dark-mineral-ledgestone",
+    "flatBrownOrDebugBlocksAllowed": false,
+    "packViewportHeightTarget": [
+      0.45,
+      0.55
+    ],
+    "caseViewportHeightTarget": [
+      0.50,
+      0.60
+    ],
+    "impactOrigin": "aperture",
+    "blankWhiteFrameAllowed": false,
+    "flashMustRetainDarkHeroSilhouette": true,
+    "energyRingCount": 1,
+    "decorativeConcentricRingsAllowed": false,
+    "authoredEffects": [
+      "foil-shards",
+      "narrow-directional-streaks",
+      "restrained-glints"
+    ],
+    "pixelNoiseAllowed": false,
+    "randomConfettiAllowed": false,
+    "purpleFogAllowed": false,
+    "violetUse": "narrow-edge-accent",
+    "caseExitAngleDegrees": -25,
+    "caseSettleCount": 1,
+    "caseSheenCount": 1
+  },
+  "preservedBoundaries": {
+    "semanticHaptics": true,
+    "nativeBusinessUiOwnership": true,
+    "exactOnceReceiptAck": true,
+    "skip": true,
+    "interruptionRestore": true,
+    "reduceMotion": true,
+    "downstreamShippingUiWired": false
+  },
+  "capture": {
+    "width": 1206,
+    "height": 2622,
+    "fps": 60,
+    "normalSpeedRequired": true,
+    "slowMotionRequired": true,
+    "cleanPrimaryContactSheets": true,
+    "separateTechnicalContinuitySheet": true
+  },
+  "automaticSelfRejectIf": [
+    "strip-can-be-mistaken-for-lid",
+    "tear-edge-resembles-large-saw-teeth",
+    "case-identity-or-projected-bounds-jump",
+    "blank-white-frame",
+    "effects-demo-language"
+  ],
+  "shippingReady": false,
+  "physicalPhoneInstalled": false
+}

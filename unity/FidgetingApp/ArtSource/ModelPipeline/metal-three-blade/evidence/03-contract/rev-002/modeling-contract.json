@@ -1,0 +1,124 @@
+{
+  "modelId": "metal-three-blade",
+  "stageId": "03-contract",
+  "revision": 2,
+  "recordedAt": "2026-09-05T07:29:57.260880+00:00",
+  "contractState": "user-authorized-provisional",
+  "route": "deterministic-bpy-builder",
+  "builder": "tools/blender/build_unified_tri_spinner.py",
+  "units": "metres in Blender; mm in this file",
+  "spinAxis": {
+    "blender": "+Z",
+    "unity": "+Y"
+  },
+  "origin": "bearing centre",
+  "overall": {
+    "tipCircleDiameterMm": 65.0,
+    "boundingWidthMm": 56.9,
+    "bodyThicknessMm": 10.0,
+    "assembledDepthMm": 14.36
+  },
+  "hub": {
+    "hubDiameterMm": 37.6,
+    "counterboreDiameterMm": 36.8,
+    "counterboreDepthMm": 2.2,
+    "boreDiameterMm": 12.7,
+    "lipWidthMm": 0.4,
+    "lipMaterial": "dark gunmetal"
+  },
+  "cap": {
+    "outerDiameterMm": 34.84,
+    "capToTipCircle": 0.536,
+    "tableDiameterMm": 27.77,
+    "tableToCap": 0.797,
+    "floatGapMm": 0.4,
+    "tableHeightMm": 7.0,
+    "crownBaseHeightMm": 5.4,
+    "crownSlopeDeg": 24.3,
+    "starWedges": 32,
+    "starRimAlternationMm": 0.18,
+    "adjacentWedgeNormalAngleDeg": 15.0,
+    "crownScales": "irregular, seeded jittered polar grid, planar triangles",
+    "skirt": "dark, inside counterbore"
+  },
+  "blades": {
+    "count": 3,
+    "anglesDeg": [
+      90,
+      210,
+      330
+    ],
+    "rootThicknessMm": 9.6,
+    "tipThicknessMm": 6.6,
+    "chamferMm": 1.6,
+    "edgeBevelMm": 0.6,
+    "facets": "convex hull of jittered control points",
+    "pocket": "triangular, tapered walls polished, floor dark, both faces",
+    "rootCutRadiusMm": 18.5
+  },
+  "bearing": {
+    "standard": "R188",
+    "odMm": 12.7,
+    "idMm": 6.35,
+    "widthMm": 4.76,
+    "visibility": "hidden under cap",
+    "modelled": "outer race, inner race, 8 balls, stems"
+  },
+  "movingParts": {
+    "Rotor_Root": [
+      "RotorBody_OnePiece"
+    ],
+    "Fixed_Root": [
+      "FingerCap_Top",
+      "FingerCap_Bottom",
+      "CapStem_Top",
+      "CapStem_Bottom"
+    ],
+    "BearingAssembly_Root": [
+      "BearingOuterRace",
+      "BearingInnerRace",
+      "BearingBall_01..08"
+    ]
+  },
+  "materialZones": [
+    "BodySatinSteel",
+    "PocketPolished",
+    "ShadowGapGunmetal",
+    "CapTableTurned(anisotropic radial + ring bump)",
+    "CapCrownSatin",
+    "CapSkirtDark",
+    "BearingSteel"
+  ],
+  "budgets": {
+    "triangleCountMax": 8000,
+    "triangleCountActual": 5660
+  },
+  "forbidden": [
+    "bright annulus between cap and body",
+    "material-faked facets on coplanar faces",
+    "shade-smooth-by-angle on facets",
+    "subdivision",
+    "cap parented under Rotor_Root",
+    "non-zero initial angular velocity"
+  ],
+  "unknowns": [
+    "official width/thickness in mm",
+    "crown facet angle",
+    "bearing standard confirmation",
+    "cap turning-mark pitch"
+  ],
+  "consumedClaimIds": [
+    "tri-r2-cap-size-was-never-wrong",
+    "tri-r2-table-ratio",
+    "tri-r2-no-bright-annulus",
+    "tri-r2-body-is-one-solid",
+    "tri-r2-dimensions-unmeasured",
+    "tri-r2-body-facets-too",
+    "tri-r3-star-on-table",
+    "tri-r3-shadow-gap-not-race",
+    "tri-r3-blade-facets-irregular",
+    "tri-r3-pocket-polished-chamfer",
+    "tri-r3-one-model-decision",
+    "tri-r3-dimensions-provisional"
+  ]
+}

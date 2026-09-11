@@ -1,0 +1,100 @@
+{
+    "pass": true,
+    "sourceScene": "Assets/_EDC/Scenes/MeshyEDC.unity",
+    "sceneSha256Before": "a2e124e1c00d1cfa099cb9e50ae7b8429201c47900c42fb4224b11677281ba15",
+    "sceneSha256After": "b8ba31854d94f4f51a24720443bc74b38c0ef2ef2bad503f0c8e5154e3968c32",
+    "evidenceRevision": 4,
+    "build42FeedbackExactWording": "好多了，但感觉灯光有点奇怪，主要是太暗了.",
+    "build42InteractionAcceptance": "partial-success",
+    "build42VisualAcceptance": "failed-dark-lighting",
+    "recommendation": "B-balanced-brighter",
+    "defaultSourceVariant": "BalancedBrighter",
+    "protectedRuntimeUnchanged": true,
+    "geometryChanged": false,
+    "materialsChanged": false,
+    "artworkChanged": false,
+    "interactionChanged": false,
+    "audioChanged": false,
+    "hapticsChanged": false,
+    "cameraPositionRecipesChanged": false,
+    "whiteBalanceTemperature": 0.0,
+    "whiteBalanceTint": 0.0,
+    "buildInstallPhone": false,
+    "deviceAcceptance": "pending-lighting-approval-and-retest",
+    "build42SourceHashManifest": "ArtSource/ModelPipeline/magnetic-slide-tile/evidence/12-shipping/runtime-recovery-build42/device-delivery/magnetic-slide-build42-20260901T035903Z-snapshot/source-hashes-snapshot.txt",
+    "protectedSources": [
+        {
+            "id": "interaction-controller",
+            "path": "Assets/_EDC/Runtime/EdcSliderController.cs",
+            "sha256": "6630ae36991b956b5f780099f762134eea0bf1fae9ca3c5cb1f624ac88a87243"
+        },
+        {
+            "id": "shipping-coordinator",
+            "path": "Assets/_EDC/Candidates/MagneticSlideTileGate12R002/Runtime/MagneticSlideTileShippingCoordinator.cs",
+            "sha256": "c43266042148ca22deb258bbe828bcc0fa6cc88651668f248066f625ef2003fa"
+        },
+        {
+            "id": "shipping-mechanism",
+            "path": "Assets/_EDC/Candidates/MagneticSlideTileGate12R002/Runtime/MagneticSlideTileShippingMechanism.cs",
+            "sha256": "86c80d33844959b9b8a3d2dca1ebf0dc703992b7e4e49ed4e882855b0881e670"
+        },
+        {
+            "id": "mechanism-settings",
+            "path": "Assets/_EDC/Candidates/MagneticSlideTileGate12R002/Settings/MagneticSlideTileMechanismSettingsR002.asset",
+            "sha256": "2352372cf521fc52458026d6285db1e1c5aaab3a35a1db8031952f7939bd2087"
+        },
+        {
+            "id": "candidate-prefab",
+            "path": "Assets/_EDC/Candidates/MagneticSlideTileGate12R002/Prefabs/MagneticSlideTileGate12R002Candidate.prefab",
+            "sha256": "d01b8c0522295672dfd425d233d85b7812748caf645b80edccdecf112e0658ca"
+        },
+        {
+            "id": "audio-renderer",
+            "path": "Assets/_EDC/Runtime/MagneticSlideDetentAudio.cs",
+            "sha256": "fb5157808385e5d661c2a2c5c777dc9e1d2fb40272f61602751434fc8e23f799"
+        },
+        {
+            "id": "haptic-router",
+            "path": "Assets/Scripts/FidgetSpinner/IosHaptics.cs",
+            "sha256": "d4901faa1dadb1887430f1ece8eb01fc36ec82cad5b794b2143470834063c8c6"
+        }
+    ],
+    "variants": [
+        {
+            "id": "A-build42-baseline",
+            "postExposureEv": 0.0,
+            "ambientMultiplier": 1.0,
+            "reflectionIntensity": 0.5600000023841858,
+            "keyIntensity": 0.5400000214576721,
+            "fillIntensity": 0.41999998688697817,
+            "hdr": false,
+            "tonemapping": "None",
+            "whiteBalanceTemperature": 0.0,
+            "whiteBalanceTint": 0.0
+        },
+        {
+            "id": "B-balanced-brighter",
+            "postExposureEv": 0.550000011920929,
+            "ambientMultiplier": 1.25,
+            "reflectionIntensity": 0.699999988079071,
+            "keyIntensity": 0.6800000071525574,
+            "fillIntensity": 0.5400000214576721,
+            "hdr": true,
+            "tonemapping": "Neutral",
+            "whiteBalanceTemperature": 0.0,
+            "whiteBalanceTint": 0.0
+        },
+        {
+            "id": "C-everyday-d65",
+            "postExposureEv": 2.3499999046325685,
+            "ambientMultiplier": 1.7999999523162842,
+            "reflectionIntensity": 1.0,
+            "keyIntensity": 1.0800000429153443,
+            "fillIntensity": 0.8600000143051148,
+            "hdr": true,
+            "tonemapping": "ACES",
+            "whiteBalanceTemperature": 0.0,
+            "whiteBalanceTint": 0.0
+        }
+    ]
+}

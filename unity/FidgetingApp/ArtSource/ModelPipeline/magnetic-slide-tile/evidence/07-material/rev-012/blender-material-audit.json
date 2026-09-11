@@ -1,0 +1,111 @@
+{
+  "schemaVersion": 1,
+  "gate": "07-material",
+  "revision": 12,
+  "blenderVersion": "5.2.0 LTS",
+  "geometryDigest": "2fcf6d2b4344511bc6b86ce940a927576f9cdb4988f4022959a3372f4d3c1952",
+  "missingMaterials": [],
+  "emission": {
+    "M07R12_Crystal_Upper": 0.0,
+    "M07R12_Crystal_LowerDistinct": 0.0,
+    "M07R12_PolishedSilver": 0.0,
+    "M07R12_DarkExteriorSide": 0.0,
+    "M07R12_NeutralTechnical": 0.0,
+    "M07R12_BallCandidate_UnknownMaterial": 0.0
+  },
+  "textureNodes": {
+    "M07R12_Crystal_Upper": [
+      {
+        "node": "Artwork_Upper_Albedo",
+        "image": "upper-albedo.png",
+        "sizePx": [
+          620,
+          1000
+        ],
+        "packed": true
+      },
+      {
+        "node": "Artwork_Upper_Roughness",
+        "image": "upper-roughness.png",
+        "sizePx": [
+          620,
+          1000
+        ],
+        "packed": true
+      }
+    ],
+    "M07R12_Crystal_LowerDistinct": [
+      {
+        "node": "Artwork_Lower_Albedo",
+        "image": "lower-albedo.png",
+        "sizePx": [
+          620,
+          1000
+        ],
+        "packed": true
+      },
+      {
+        "node": "Artwork_Lower_Roughness",
+        "image": "lower-roughness.png",
+        "sizePx": [
+          620,
+          1000
+        ],
+        "packed": true
+      }
+    ],
+    "M07R12_PolishedSilver": [],
+    "M07R12_DarkExteriorSide": [],
+    "M07R12_NeutralTechnical": [],
+    "M07R12_BallCandidate_UnknownMaterial": []
+  },
+  "boundaryCounts": {
+    "BottomExterior": {
+      "M07R12_Crystal_LowerDistinct": 1,
+      "M07R12_DarkExteriorSide": 3078,
+      "M07R12_PolishedSilver": 2052,
+      "M07R12_NeutralTechnical": 3592
+    },
+    "MovingTopBody": {
+      "M07R12_Crystal_Upper": 1,
+      "M07R12_DarkExteriorSide": 5130,
+      "M07R12_PolishedSilver": 2052,
+      "M07R12_NeutralTechnical": 3600
+    }
+  },
+  "animatedObjects": [],
+  "glb": {
+    "materials": [
+      "M07R12_BallCandidate_UnknownMaterial",
+      "M07R12_NeutralTechnical",
+      "M07R12_InternalSilverReference",
+      "M07R12_PolishedSilver",
+      "M07R12_Crystal_LowerDistinct",
+      "M07R12_DarkExteriorSide",
+      "M07R12_Crystal_Upper"
+    ],
+    "imageCount": 4,
+    "textureCount": 4,
+    "meshCount": 8
+  },
+  "checks": {
+    "sceneGate": true,
+    "sourceHash": true,
+    "contractHash": true,
+    "geometryDigest": true,
+    "materialsPresent": true,
+    "independentMasks": true,
+    "packedTextures": true,
+    "zeroEmission": true,
+    "slotBoundaries": true,
+    "upperLowerArtwork": true,
+    "unknownBallMaterial": true,
+    "zeroSelfMotion": true,
+    "glbMaterials": true,
+    "glbEmbeddedImages": true,
+    "oldShippingUntouched": true,
+    "endpointInterlock": true,
+    "productRendererWhitelist": true
+  },
+  "pass": true
+}

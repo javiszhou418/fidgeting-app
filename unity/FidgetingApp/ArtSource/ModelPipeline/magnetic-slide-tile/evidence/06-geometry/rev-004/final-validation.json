@@ -1,0 +1,260 @@
+{
+  "schemaVersion": 1,
+  "pass": true,
+  "nodeTests": {
+    "total": 128,
+    "passed": 128,
+    "exitCode": 0
+  },
+  "pipelineValidation": {
+    "refresh": false,
+    "models": [
+      {
+        "modelId": "blue-classic",
+        "revision": 10,
+        "approved": "0/12",
+        "earliestProblem": {
+          "stageId": "01-intake",
+          "title": "原始参考归档",
+          "status": "missing",
+          "reasons": [
+            "缺少必需素材：original-reference。"
+          ]
+        },
+        "errors": [],
+        "missingFiles": [],
+        "unhashed": []
+      },
+      {
+        "modelId": "gold-four-wing",
+        "revision": 10,
+        "approved": "0/12",
+        "earliestProblem": {
+          "stageId": "01-intake",
+          "title": "原始参考归档",
+          "status": "missing",
+          "reasons": [
+            "缺少必需素材：original-reference。"
+          ]
+        },
+        "errors": [],
+        "missingFiles": [],
+        "unhashed": []
+      },
+      {
+        "modelId": "graphite-two-lobe",
+        "revision": 12,
+        "approved": "0/12",
+        "earliestProblem": {
+          "stageId": "01-intake",
+          "title": "原始参考归档",
+          "status": "missing",
+          "reasons": [
+            "缺少必需素材：original-reference。",
+            "仍有 1 项验证未通过。"
+          ]
+        },
+        "errors": [],
+        "missingFiles": [],
+        "unhashed": []
+      },
+      {
+        "modelId": "magnetic-fan-card",
+        "revision": 137,
+        "approved": "11/12",
+        "earliestProblem": {
+          "stageId": "12-shipping",
+          "title": "真实 Shipping / 手机构图",
+          "status": "stale",
+          "reasons": [
+            "仍有 1 项验证未通过。",
+            "该阶段因上游变化已经过期。"
+          ]
+        },
+        "errors": [],
+        "missingFiles": [],
+        "unhashed": []
+      },
+      {
+        "modelId": "magnetic-slide-tile",
+        "revision": 176,
+        "approved": "5/12",
+        "earliestProblem": {
+          "stageId": "06-geometry",
+          "title": "几何验收",
+          "status": "ready_for_review",
+          "reasons": [
+            "等待用户审批。"
+          ]
+        },
+        "errors": [],
+        "missingFiles": [],
+        "unhashed": []
+      },
+      {
+        "modelId": "metal-three-blade",
+        "revision": 11,
+        "approved": "0/12",
+        "earliestProblem": {
+          "stageId": "01-intake",
+          "title": "原始参考归档",
+          "status": "draft",
+          "reasons": [
+            "等待用户审批。"
+          ]
+        },
+        "errors": [],
+        "missingFiles": [],
+        "unhashed": []
+      },
+      {
+        "modelId": "premium-display-case",
+        "revision": 68,
+        "approved": "9/12",
+        "earliestProblem": {
+          "stageId": "10-export",
+          "title": "导出包",
+          "status": "ready_for_review",
+          "reasons": [
+            "等待用户审批。"
+          ]
+        },
+        "errors": [],
+        "missingFiles": [],
+        "unhashed": []
+      }
+    ]
+  },
+  "modelValidation": {
+    "modelId": "magnetic-slide-tile",
+    "revision": 176,
+    "shippingReady": false,
+    "approved": "5/12",
+    "earliestProblem": {
+      "stageId": "06-geometry",
+      "title": "几何验收",
+      "status": "ready_for_review",
+      "reasons": [
+        "等待用户审批。"
+      ]
+    },
+    "errors": [],
+    "missingFiles": [],
+    "unhashed": []
+  },
+  "geometry": {
+    "digest": "e2a838c22b743c7b0a05a20df060817f4e324bad5c84c11592c673c25ee002fe",
+    "boundsMm": [
+      50,
+      31,
+      12
+    ],
+    "thicknessStackMm": {
+      "bottomMm": 5.875,
+      "gapMm": 0.25,
+      "topMm": 5.875,
+      "sumMm": 12
+    },
+    "topPlaneZMm": 5.875,
+    "topPlaneMaximumDeviationMm": 0,
+    "axisBossProtrusionMm": 0.2,
+    "carrierClearanceBelowPlaneMm": 0.04999971389770508,
+    "denseSweepSamples": 3600,
+    "nonmanifoldEdges": {
+      "BottomExterior": 0,
+      "FixedAxisBoss": 0,
+      "RotatingCarrierBody": 0,
+      "CarrierFollowerLeft": 0,
+      "CarrierFollowerRight": 0,
+      "BallCandidateLeft": 0,
+      "BallCandidateRight": 0,
+      "MovingTopBody": 0
+    },
+    "invalidGeometricTangents": {
+      "BottomExterior": 0,
+      "FixedAxisBoss": 0,
+      "RotatingCarrierBody": 0,
+      "CarrierFollowerLeft": 0,
+      "CarrierFollowerRight": 0,
+      "BallCandidateLeft": 0,
+      "BallCandidateRight": 0,
+      "MovingTopBody": 0
+    }
+  },
+  "blender": {
+    "pass": true,
+    "version": "5.2.0 LTS",
+    "objectCount": 57,
+    "invalidPolygonNormals": {
+      "BottomExterior": 0,
+      "FixedAxisBoss": 0,
+      "RotatingCarrierBody": 0,
+      "CarrierFollowerLeft": 0,
+      "CarrierFollowerRight": 0,
+      "BallCandidateLeft": 0,
+      "BallCandidateRight": 0,
+      "MovingTopBody": 0
+    },
+    "uvLayerCounts": {
+      "BottomExterior": 1,
+      "FixedAxisBoss": 1,
+      "RotatingCarrierBody": 1,
+      "CarrierFollowerLeft": 1,
+      "CarrierFollowerRight": 1,
+      "BallCandidateLeft": 1,
+      "BallCandidateRight": 1,
+      "MovingTopBody": 1
+    },
+    "animatedObjects": []
+  },
+  "browser": {
+    "pass": true,
+    "desktopWidthPx": 1440,
+    "mobileWidthPx": 390,
+    "fixedTabs": [
+      "参考原图",
+      "分析（截图/视频）",
+      "尺寸",
+      "交互 CAD",
+      "白模",
+      "贴图与材质",
+      "Unity 灯光与成品"
+    ],
+    "roadmapCount": 12,
+    "currentGate": "6",
+    "approvedCount": "5",
+    "glbLoaded": true,
+    "reload": {
+      "stage": "06-geometry",
+      "tab": "blockout",
+      "memoryStage": "06-geometry",
+      "memoryTab": "blockout"
+    },
+    "staleHistory": {
+      "status": "stale",
+      "stage": "07-material",
+      "historicalAssets": 128
+    },
+    "sourcePlayback": true,
+    "runtimeExceptionCount": 0,
+    "loadingFailureCount": 0
+  },
+  "hashes": {
+    "mechanismContractSha256": "5aee71817c2c033ed92b770126ba0ecb6d79c2f032d786743b214b79078a47ea",
+    "gate05SourceSha256": "fc0676107d7d9846959a6495edd808e0ffe7dbb7e7625ba2dcc5c7a7287c4f7b",
+    "gate06BlendSha256": "8047be52ce635d9bd18d5f2be3c3e223ac04c3101aec10221849d97b6e867085",
+    "gate06GlbSha256": "911821f27618d6eae0dc92703486669953252b0aef9962dbd7bc71e77f0f22e9"
+  },
+  "syntax": {
+    "javascript": "pass",
+    "python": "pass",
+    "html5": "pass"
+  },
+  "scope": {
+    "materials": false,
+    "simulator": false,
+    "unity": false,
+    "buildInstallOrDevice": false,
+    "oldShippingModelDefault": true
+  }
+}

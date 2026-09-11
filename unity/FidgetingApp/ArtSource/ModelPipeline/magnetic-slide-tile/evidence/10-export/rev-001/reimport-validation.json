@@ -1,0 +1,631 @@
+{
+  "schemaVersion": 1,
+  "modelId": "magnetic-slide-tile",
+  "gate": "10-export",
+  "exportRevision": 1,
+  "blender": "5.2.0 LTS",
+  "glb": {
+    "kind": "GLB",
+    "bounds": {
+      "minimumMeters": [
+        -0.015500001,
+        -0.025,
+        -0.006
+      ],
+      "maximumMeters": [
+        0.015500001,
+        0.025,
+        0.006
+      ],
+      "sizeMeters": [
+        0.031000001,
+        0.050000001,
+        0.012
+      ]
+    },
+    "objects": {
+      "CentralAxisPivot_Point": {
+        "name": "CentralAxisPivot_Point",
+        "type": "EMPTY",
+        "parent": "UpperTranslation",
+        "location": [
+          0.0,
+          -9.5,
+          0.0
+        ],
+        "rotationRadians": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "scale": [
+          1.0,
+          1.0,
+          1.0
+        ]
+      },
+      "ConcealedCircularEnvelope_Metadata": {
+        "name": "ConcealedCircularEnvelope_Metadata",
+        "type": "EMPTY",
+        "parent": "FixedAssembly",
+        "location": [
+          0.0,
+          -9.5,
+          0.0
+        ],
+        "rotationRadians": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "scale": [
+          1.0,
+          1.0,
+          1.0
+        ]
+      },
+      "FixedAssembly": {
+        "name": "FixedAssembly",
+        "type": "EMPTY",
+        "parent": "MagneticSlideTile_Blockout_R003",
+        "location": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "rotationRadians": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "scale": [
+          1.0,
+          1.0,
+          1.0
+        ]
+      },
+      "LowerBody_Fixed_CleanPlane": {
+        "name": "LowerBody_Fixed_CleanPlane",
+        "type": "MESH",
+        "parent": "FixedAssembly",
+        "location": [
+          0.0,
+          0.0,
+          -2.999999762
+        ],
+        "rotationRadians": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "scale": [
+          1.0,
+          1.0,
+          1.0
+        ]
+      },
+      "MagneticSlideTile_Blockout_R003": {
+        "name": "MagneticSlideTile_Blockout_R003",
+        "type": "EMPTY",
+        "parent": null,
+        "location": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "rotationRadians": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "scale": [
+          0.001,
+          0.001,
+          0.001
+        ]
+      },
+      "UpperCapsule_Moving": {
+        "name": "UpperCapsule_Moving",
+        "type": "MESH",
+        "parent": "CentralAxisPivot_Point",
+        "location": [
+          0.0,
+          9.5,
+          2.999999762
+        ],
+        "rotationRadians": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "scale": [
+          1.0,
+          1.0,
+          1.0
+        ]
+      },
+      "UpperTranslation": {
+        "name": "UpperTranslation",
+        "type": "EMPTY",
+        "parent": "MagneticSlideTile_Blockout_R003",
+        "location": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "rotationRadians": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "scale": [
+          1.0,
+          1.0,
+          1.0
+        ]
+      }
+    },
+    "meshTriangles": {
+      "LowerBody_Fixed_CleanPlane": 2048,
+      "UpperCapsule_Moving": 2048
+    },
+    "materialSlots": {
+      "LowerBody_Fixed_CleanPlane": [
+        "M07R7_DaylightNeutralPolishedSilver",
+        "M07R7_BloodRedCrystal_WideBorder_Lower"
+      ],
+      "UpperCapsule_Moving": [
+        "M07R7_DaylightNeutralPolishedSilver",
+        "M07R7_BloodRedCrystal_WideBorder_Upper"
+      ]
+    },
+    "uvLayers": {
+      "LowerBody_Fixed_CleanPlane": [
+        "UVMap"
+      ],
+      "UpperCapsule_Moving": [
+        "UVMap"
+      ]
+    },
+    "loopNormals": {
+      "LowerBody_Fixed_CleanPlane": 6144,
+      "UpperCapsule_Moving": 6144
+    },
+    "meshLoops": {
+      "LowerBody_Fixed_CleanPlane": 6144,
+      "UpperCapsule_Moving": 6144
+    },
+    "images": {
+      "face-lower-transport-basecolor": {
+        "size": [
+          620,
+          1000
+        ],
+        "filepath": ""
+      },
+      "face-upper-transport-basecolor": {
+        "size": [
+          620,
+          1000
+        ],
+        "filepath": ""
+      }
+    },
+    "actions": [],
+    "constraints": {},
+    "drivers": {},
+    "checks": {
+      "twoRenderMeshes": true,
+      "meterBounds": true,
+      "triangleCount4096": true,
+      "twoMaterialSlotsEach": true,
+      "materialNamesPreserved": true,
+      "uvPresent": true,
+      "normalsPresent": true,
+      "closedDefault": true,
+      "pointPivotPreserved": true,
+      "rootMeterScale": true,
+      "hiddenEnvelopeMetadata": true,
+      "noAnimationsConstraintsDrivers": true,
+      "transportTextures620x1000": true
+    },
+    "pass": true
+  },
+  "fbx": {
+    "kind": "FBX",
+    "bounds": {
+      "minimumMeters": [
+        -0.015500001,
+        -0.025000002,
+        -0.006000004
+      ],
+      "maximumMeters": [
+        0.015500001,
+        0.025000002,
+        0.006000004
+      ],
+      "sizeMeters": [
+        0.031000001,
+        0.050000004,
+        0.012000008
+      ]
+    },
+    "objects": {
+      "CentralAxisPivot_Point": {
+        "name": "CentralAxisPivot_Point",
+        "type": "EMPTY",
+        "parent": "UpperTranslation",
+        "location": [
+          0.0,
+          -9.5,
+          0.0
+        ],
+        "rotationRadians": [
+          0.0,
+          -0.0,
+          0.0
+        ],
+        "scale": [
+          1.0,
+          1.0,
+          1.0
+        ]
+      },
+      "ConcealedCircularEnvelope_Metadata": {
+        "name": "ConcealedCircularEnvelope_Metadata",
+        "type": "EMPTY",
+        "parent": "FixedAssembly",
+        "location": [
+          0.0,
+          -9.5,
+          0.0
+        ],
+        "rotationRadians": [
+          0.0,
+          -0.0,
+          0.0
+        ],
+        "scale": [
+          1.0,
+          1.0,
+          1.0
+        ]
+      },
+      "FixedAssembly": {
+        "name": "FixedAssembly",
+        "type": "EMPTY",
+        "parent": "MagneticSlideTile_Blockout_R003",
+        "location": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "rotationRadians": [
+          0.0,
+          -0.0,
+          0.0
+        ],
+        "scale": [
+          1.0,
+          1.0,
+          1.0
+        ]
+      },
+      "LowerBody_Fixed_CleanPlane": {
+        "name": "LowerBody_Fixed_CleanPlane",
+        "type": "MESH",
+        "parent": "FixedAssembly",
+        "location": [
+          0.0,
+          0.0,
+          -3.0
+        ],
+        "rotationRadians": [
+          0.0,
+          -0.0,
+          0.0
+        ],
+        "scale": [
+          1.0,
+          1.0,
+          1.0
+        ]
+      },
+      "MagneticSlideTile_Blockout_R003": {
+        "name": "MagneticSlideTile_Blockout_R003",
+        "type": "EMPTY",
+        "parent": null,
+        "location": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "rotationRadians": [
+          -1.63e-07,
+          0.0,
+          0.0
+        ],
+        "scale": [
+          0.001,
+          0.001,
+          0.001
+        ]
+      },
+      "UpperCapsule_Moving": {
+        "name": "UpperCapsule_Moving",
+        "type": "MESH",
+        "parent": "CentralAxisPivot_Point",
+        "location": [
+          0.0,
+          9.5,
+          3.0
+        ],
+        "rotationRadians": [
+          0.0,
+          -0.0,
+          0.0
+        ],
+        "scale": [
+          1.0,
+          1.0,
+          1.0
+        ]
+      },
+      "UpperTranslation": {
+        "name": "UpperTranslation",
+        "type": "EMPTY",
+        "parent": "MagneticSlideTile_Blockout_R003",
+        "location": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "rotationRadians": [
+          0.0,
+          -0.0,
+          0.0
+        ],
+        "scale": [
+          1.0,
+          1.0,
+          1.0
+        ]
+      }
+    },
+    "meshTriangles": {
+      "LowerBody_Fixed_CleanPlane": 2048,
+      "UpperCapsule_Moving": 2048
+    },
+    "materialSlots": {
+      "LowerBody_Fixed_CleanPlane": [
+        "M07R7_DaylightNeutralPolishedSilver",
+        "M07R7_BloodRedCrystal_WideBorder_Lower"
+      ],
+      "UpperCapsule_Moving": [
+        "M07R7_DaylightNeutralPolishedSilver",
+        "M07R7_BloodRedCrystal_WideBorder_Upper"
+      ]
+    },
+    "uvLayers": {
+      "LowerBody_Fixed_CleanPlane": [
+        "UV0"
+      ],
+      "UpperCapsule_Moving": [
+        "UV0"
+      ]
+    },
+    "loopNormals": {
+      "LowerBody_Fixed_CleanPlane": 6144,
+      "UpperCapsule_Moving": 6144
+    },
+    "meshLoops": {
+      "LowerBody_Fixed_CleanPlane": 6144,
+      "UpperCapsule_Moving": 6144
+    },
+    "images": {
+      "face-lower-transport-basecolor.png": {
+        "size": [
+          620,
+          1000
+        ],
+        "filepath": "/Users/jiawei.zhou/Documents/Fidgeting app/unity/FidgetingApp/ArtSource/ModelPipeline/magnetic-slide-tile/evidence/10-export/rev-001/textures/face-lower-transport-basecolor.png"
+      },
+      "face-upper-transport-basecolor.png": {
+        "size": [
+          620,
+          1000
+        ],
+        "filepath": "/Users/jiawei.zhou/Documents/Fidgeting app/unity/FidgetingApp/ArtSource/ModelPipeline/magnetic-slide-tile/evidence/10-export/rev-001/textures/face-upper-transport-basecolor.png"
+      }
+    },
+    "actions": [],
+    "constraints": {},
+    "drivers": {},
+    "checks": {
+      "twoRenderMeshes": true,
+      "meterBounds": true,
+      "triangleCount4096": true,
+      "twoMaterialSlotsEach": true,
+      "materialNamesPreserved": true,
+      "uvPresent": true,
+      "normalsPresent": true,
+      "closedDefault": true,
+      "pointPivotPreserved": true,
+      "rootMeterScale": true,
+      "hiddenEnvelopeMetadata": true,
+      "noAnimationsConstraintsDrivers": true,
+      "transportTextures620x1000": true
+    },
+    "pass": true
+  },
+  "collision": {
+    "kind": "collision-FBX",
+    "bounds": {
+      "minimumMeters": [
+        -0.015300001,
+        -0.024800003,
+        -0.005900004
+      ],
+      "maximumMeters": [
+        0.015300001,
+        0.024800003,
+        0.005900004
+      ],
+      "sizeMeters": [
+        0.030600002,
+        0.049600005,
+        0.011800009
+      ]
+    },
+    "objects": {
+      "CentralAxisPivot_Point": {
+        "name": "CentralAxisPivot_Point",
+        "type": "EMPTY",
+        "parent": "UpperTranslation",
+        "location": [
+          0.0,
+          -9.5,
+          0.0
+        ],
+        "rotationRadians": [
+          0.0,
+          -0.0,
+          0.0
+        ],
+        "scale": [
+          1.0,
+          1.0,
+          1.0
+        ]
+      },
+      "FixedAssembly": {
+        "name": "FixedAssembly",
+        "type": "EMPTY",
+        "parent": "MagneticSlideTile_Blockout_R003",
+        "location": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "rotationRadians": [
+          0.0,
+          -0.0,
+          0.0
+        ],
+        "scale": [
+          1.0,
+          1.0,
+          1.0
+        ]
+      },
+      "MagneticSlideTile_Blockout_R003": {
+        "name": "MagneticSlideTile_Blockout_R003",
+        "type": "EMPTY",
+        "parent": null,
+        "location": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "rotationRadians": [
+          -1.63e-07,
+          0.0,
+          0.0
+        ],
+        "scale": [
+          0.001,
+          0.001,
+          0.001
+        ]
+      },
+      "UCX_MagneticSlideTile_Lower_00": {
+        "name": "UCX_MagneticSlideTile_Lower_00",
+        "type": "MESH",
+        "parent": "FixedAssembly",
+        "location": [
+          0.0,
+          0.0,
+          -3.0
+        ],
+        "rotationRadians": [
+          0.0,
+          -0.0,
+          0.0
+        ],
+        "scale": [
+          1.0,
+          1.0,
+          1.0
+        ]
+      },
+      "UCX_MagneticSlideTile_Upper_00": {
+        "name": "UCX_MagneticSlideTile_Upper_00",
+        "type": "MESH",
+        "parent": "CentralAxisPivot_Point",
+        "location": [
+          0.0,
+          9.5,
+          3.0
+        ],
+        "rotationRadians": [
+          0.0,
+          -0.0,
+          0.0
+        ],
+        "scale": [
+          1.0,
+          1.0,
+          1.0
+        ]
+      },
+      "UpperTranslation": {
+        "name": "UpperTranslation",
+        "type": "EMPTY",
+        "parent": "MagneticSlideTile_Blockout_R003",
+        "location": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "rotationRadians": [
+          0.0,
+          -0.0,
+          0.0
+        ],
+        "scale": [
+          1.0,
+          1.0,
+          1.0
+        ]
+      }
+    },
+    "meshTriangles": {
+      "UCX_MagneticSlideTile_Lower_00": 128,
+      "UCX_MagneticSlideTile_Upper_00": 128
+    },
+    "materials": {
+      "UCX_MagneticSlideTile_Lower_00": [],
+      "UCX_MagneticSlideTile_Upper_00": []
+    },
+    "actions": [],
+    "checks": {
+      "twoCapsules": true,
+      "convexBudget": true,
+      "noMaterials": true,
+      "meterBoundsWithinRender": true,
+      "noAnimations": true,
+      "closedDefault": true
+    },
+    "pass": true
+  },
+  "checks": {
+    "exportManifestPasses": true,
+    "glbStructurePasses": true,
+    "glbReimportPasses": true,
+    "fbxReimportPasses": true,
+    "collisionReimportPasses": true,
+    "matchingRenderMetrics": true,
+    "requiredReimportImages": true
+  },
+  "pass": true
+}

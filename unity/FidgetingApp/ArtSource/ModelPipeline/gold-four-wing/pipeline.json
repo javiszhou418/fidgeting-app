@@ -1,0 +1,376 @@
+{
+  "schemaVersion": 1,
+  "revision": 16,
+  "createdAt": "2026-08-20T00:00:00.000Z",
+  "updatedAt": "2026-09-05T14:19:14.651Z",
+  "model": {
+    "id": "gold-four-wing",
+    "name": "镜钢四翼",
+    "mechanism": "rotor",
+    "status": "shipping-current-rebuild-requested",
+    "scenePath": "unity/FidgetingApp/Assets/_ImportedSpinner/Scenes/ImportedSpinner.unity"
+  },
+  "route": {
+    "primary": "blender-cli",
+    "rodinPolicy": "concept-only",
+    "note": "旧导入 FBX 仅作反例和现状记录；新模型必须先补完整参考与四翼建模合同。"
+  },
+  "currentState": {
+    "rebuildRequested": true,
+    "shippingAssetUnchanged": true,
+    "visualApproval": "pending",
+    "deviceStatus": "not-approved",
+    "diagnosis": "只有导入模型和 Unity 输出，没有发现独立原始参考、正交轮廓、侧厚、爆炸拆件或可编辑 Blender 源。"
+  },
+  "assets": [
+    {
+      "id": "gold-contract-design-bible",
+      "stageId": "03-contract",
+      "slot": "modeling-contract",
+      "path": "unity/FidgetingApp/Docs/FidgetingAppProductDesignBible.md",
+      "sha256": "a2ae2446c63b62fc0f5177670445b2f0a74095a04c506fbb6fe6ae33dbb8e4ce",
+      "role": "contract",
+      "producer": {
+        "name": "product-design-bible",
+        "version": "2026-08-20"
+      },
+      "sourceAssetIds": [],
+      "exists": true,
+      "sizeBytes": 317427
+    },
+    {
+      "id": "gold-imported-fbx",
+      "stageId": "10-export",
+      "slot": "fbx-export",
+      "path": "unity/FidgetingApp/Assets/_ImportedSpinner/Models/ImportedSpinner.fbx",
+      "sha256": "0017e84acf6005bc76b19e2c30b6d28dfc4406c7d27b76c5bb183736bee1a030",
+      "role": "historical",
+      "producer": {
+        "name": "unknown-import",
+        "version": "legacy"
+      },
+      "sourceAssetIds": [],
+      "exists": true,
+      "sizeBytes": 119618652
+    },
+    {
+      "id": "gold-runtime-obj",
+      "stageId": "10-export",
+      "slot": "collision-export",
+      "path": "unity/FidgetingApp/Assets/_ImportedSpinner/Models/ImportedSpinner_Runtime.obj",
+      "sha256": "9eeadbffa78ec4d45a6724dc3dfe4c039539cf1aa28ab5542aca025d7673f980",
+      "role": "historical",
+      "producer": {
+        "name": "Unity-editor-export",
+        "version": "legacy"
+      },
+      "sourceAssetIds": [
+        "gold-imported-fbx"
+      ],
+      "exists": true,
+      "sizeBytes": 7092113
+    },
+    {
+      "id": "gold-shipping-hero",
+      "stageId": "12-shipping",
+      "slot": "shipping-hero",
+      "path": "unity/FidgetingApp/Artifacts/PremiumDisplayCaseMagneticSlideBaselineConsistencyPreview/gold-four-wing/01_hero.png",
+      "sha256": "5bf2f28b6fba7bf6df44c9a23c20f3fcb2d5d522fb4d31da89cdb52925139d1f",
+      "role": "historical",
+      "producer": {
+        "name": "Unity",
+        "version": "6000.0.58f2",
+        "recipe": "shipping-hero"
+      },
+      "sourceAssetIds": [
+        "gold-imported-fbx"
+      ],
+      "view": {
+        "id": "hero",
+        "camera": "shipping-hero-v1"
+      },
+      "exists": true,
+      "sizeBytes": 340699
+    },
+    {
+      "id": "gold-shipping-top",
+      "stageId": "12-shipping",
+      "slot": "shipping-top",
+      "path": "unity/FidgetingApp/Artifacts/PremiumDisplayCaseMagneticSlideBaselineConsistencyPreview/gold-four-wing/02_top.png",
+      "sha256": "ec123c1543b6a59b6863f2df3499fd82291c67791f85ee842fc484d19056c9cf",
+      "role": "historical",
+      "producer": {
+        "name": "Unity",
+        "version": "6000.0.58f2",
+        "recipe": "shipping-top"
+      },
+      "sourceAssetIds": [
+        "gold-imported-fbx"
+      ],
+      "view": {
+        "id": "top",
+        "camera": "shipping-top-v1"
+      },
+      "exists": true,
+      "sizeBytes": 499244
+    },
+    {
+      "id": "gold-shipping-left",
+      "stageId": "12-shipping",
+      "slot": "shipping-left-oblique",
+      "path": "unity/FidgetingApp/Artifacts/PremiumDisplayCaseMagneticSlideBaselineConsistencyPreview/gold-four-wing/03_left_oblique.png",
+      "sha256": "6b5a205527bed84b8a6fb971159b9c8c97c0bf23764a42e5a48fbf349f7f7f78",
+      "role": "historical",
+      "producer": {
+        "name": "Unity",
+        "version": "6000.0.58f2",
+        "recipe": "shipping-left"
+      },
+      "sourceAssetIds": [
+        "gold-imported-fbx"
+      ],
+      "view": {
+        "id": "left-oblique",
+        "camera": "shipping-left-v1"
+      },
+      "exists": true,
+      "sizeBytes": 508240
+    },
+    {
+      "id": "gold-shipping-right",
+      "stageId": "12-shipping",
+      "slot": "shipping-right-oblique",
+      "path": "unity/FidgetingApp/Artifacts/PremiumDisplayCaseMagneticSlideBaselineConsistencyPreview/gold-four-wing/04_right_oblique.png",
+      "sha256": "9641b4decdf4a70766dfe61859c54aa5293d1968e93111e4fe090631e7a96a07",
+      "role": "historical",
+      "producer": {
+        "name": "Unity",
+        "version": "6000.0.58f2",
+        "recipe": "shipping-right"
+      },
+      "sourceAssetIds": [
+        "gold-imported-fbx"
+      ],
+      "view": {
+        "id": "right-oblique",
+        "camera": "shipping-right-v1"
+      },
+      "exists": true,
+      "sizeBytes": 385186
+    },
+    {
+      "id": "gold-shipping-low",
+      "stageId": "12-shipping",
+      "slot": "shipping-low",
+      "path": "unity/FidgetingApp/Artifacts/PremiumDisplayCaseMagneticSlideBaselineConsistencyPreview/gold-four-wing/05_low_angle.png",
+      "sha256": "c0a7d539039c817e2bc0723a8f43402aa251531ce78382090d12be34d67ec6f4",
+      "role": "historical",
+      "producer": {
+        "name": "Unity",
+        "version": "6000.0.58f2",
+        "recipe": "shipping-low"
+      },
+      "sourceAssetIds": [
+        "gold-imported-fbx"
+      ],
+      "view": {
+        "id": "low",
+        "camera": "shipping-low-v1"
+      },
+      "exists": true,
+      "sizeBytes": 497177
+    },
+    {
+      "id": "gold-shipping-phone",
+      "stageId": "12-shipping",
+      "slot": "shipping-phone",
+      "path": "unity/FidgetingApp/Artifacts/PremiumDisplayCaseMagneticSlideBaselineConsistencyPreview/gold-four-wing/06_phone_hero.png",
+      "sha256": "e28848ca2952a86c0d977039116843cde1109bac5390565aa4cebeb1c887987a",
+      "role": "historical",
+      "producer": {
+        "name": "Unity",
+        "version": "6000.0.58f2",
+        "recipe": "shipping-phone"
+      },
+      "sourceAssetIds": [
+        "gold-imported-fbx"
+      ],
+      "view": {
+        "id": "phone",
+        "camera": "shipping-phone-v1"
+      },
+      "exists": true,
+      "sizeBytes": 249861
+    }
+  ],
+  "claims": [
+    {
+      "id": "gold-diameter-85mm",
+      "stageId": "03-contract",
+      "category": "scale",
+      "statement": "现行产品基线将外径参考值记录为 85 mm；新参考包到位后必须再次核验。",
+      "value": 85,
+      "unit": "mm",
+      "confidence": "medium",
+      "sourceAssetIds": [
+        "gold-contract-design-bible"
+      ],
+      "sourceRegions": []
+    },
+    {
+      "id": "gold-source-gap",
+      "stageId": "02-analysis",
+      "category": "unknown",
+      "statement": "四翼轮廓、侧面厚度、中心机构、倒角节奏与背面结构缺少外部参考依据。",
+      "confidence": "unknown",
+      "sourceAssetIds": [],
+      "sourceRegions": []
+    }
+  ],
+  "stages": [
+    {
+      "id": "01-intake",
+      "revision": 1,
+      "status": "missing",
+      "artifactIds": [],
+      "inputDigest": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "outputDigest": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "validations": [],
+      "decision": null
+    },
+    {
+      "id": "02-analysis",
+      "revision": 1,
+      "status": "stale",
+      "artifactIds": [],
+      "inputDigest": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "outputDigest": "40331ec0225dbf7b0ff185fad49b5dbe965cd80a70e52853f3129bd3a414b112",
+      "validations": [],
+      "decision": null,
+      "staleReason": "素材文件哈希或存在状态发生变化。"
+    },
+    {
+      "id": "03-contract",
+      "revision": 1,
+      "status": "stale",
+      "artifactIds": [
+        "gold-contract-design-bible"
+      ],
+      "inputDigest": "40331ec0225dbf7b0ff185fad49b5dbe965cd80a70e52853f3129bd3a414b112",
+      "outputDigest": "07c39d4b42b87163b418258cc8d4b1637d33f699121c4b1ae90155c0d1213cdb",
+      "validations": [],
+      "decision": null,
+      "staleReason": "素材文件哈希或存在状态发生变化。"
+    },
+    {
+      "id": "04-architecture",
+      "revision": 1,
+      "status": "missing",
+      "artifactIds": [],
+      "inputDigest": "07c39d4b42b87163b418258cc8d4b1637d33f699121c4b1ae90155c0d1213cdb",
+      "outputDigest": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "validations": [],
+      "decision": null,
+      "staleReason": "上游 03-contract 的素材发生变化。"
+    },
+    {
+      "id": "05-blockout",
+      "revision": 1,
+      "status": "missing",
+      "artifactIds": [],
+      "inputDigest": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "outputDigest": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "validations": [],
+      "decision": null,
+      "staleReason": "上游 03-contract 的素材发生变化。"
+    },
+    {
+      "id": "06-geometry",
+      "revision": 1,
+      "status": "missing",
+      "artifactIds": [],
+      "inputDigest": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "outputDigest": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "validations": [],
+      "decision": null,
+      "staleReason": "上游 03-contract 的素材发生变化。"
+    },
+    {
+      "id": "07-material",
+      "revision": 1,
+      "status": "stale",
+      "artifactIds": [],
+      "inputDigest": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "outputDigest": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "validations": [],
+      "decision": null,
+      "staleReason": "上游 03-contract 的素材发生变化。"
+    },
+    {
+      "id": "08-lighting",
+      "revision": 1,
+      "status": "stale",
+      "artifactIds": [],
+      "inputDigest": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "outputDigest": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "validations": [],
+      "decision": null,
+      "staleReason": "上游 03-contract 的素材发生变化。"
+    },
+    {
+      "id": "09-environment",
+      "revision": 1,
+      "status": "stale",
+      "artifactIds": [],
+      "inputDigest": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "outputDigest": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "validations": [],
+      "decision": null,
+      "staleReason": "上游 03-contract 的素材发生变化。"
+    },
+    {
+      "id": "10-export",
+      "revision": 1,
+      "status": "stale",
+      "artifactIds": [
+        "gold-imported-fbx",
+        "gold-runtime-obj"
+      ],
+      "inputDigest": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "outputDigest": "0e73ee7cf9a0b39307d4cb4d8e55f412a70f87d6ee45a60533d3ed048390aabf",
+      "validations": [],
+      "decision": null,
+      "staleReason": "上游 03-contract 的素材发生变化。"
+    },
+    {
+      "id": "11-unity-parity",
+      "revision": 1,
+      "status": "missing",
+      "artifactIds": [],
+      "inputDigest": "0e73ee7cf9a0b39307d4cb4d8e55f412a70f87d6ee45a60533d3ed048390aabf",
+      "outputDigest": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "validations": [],
+      "decision": null,
+      "staleReason": "上游 03-contract 的素材发生变化。"
+    },
+    {
+      "id": "12-shipping",
+      "revision": 1,
+      "status": "stale",
+      "artifactIds": [
+        "gold-shipping-hero",
+        "gold-shipping-top",
+        "gold-shipping-left",
+        "gold-shipping-right",
+        "gold-shipping-low",
+        "gold-shipping-phone"
+      ],
+      "inputDigest": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "outputDigest": "ad3d118405fa3f9147bd5eb5bc190bd331bbb6fa767166d2b946892bf5184509",
+      "validations": [],
+      "decision": null,
+      "staleReason": "上游 03-contract 的素材发生变化。"
+    }
+  ],
+  "issues": []
+}

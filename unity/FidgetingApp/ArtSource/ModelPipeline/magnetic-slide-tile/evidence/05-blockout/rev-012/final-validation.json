@@ -1,0 +1,29 @@
+{
+  "schemaVersion": 1,
+  "gate": "05-blockout",
+  "revision": 12,
+  "pipelineRevisionAfterRegistration": 215,
+  "checks": {
+    "archivedUserRejection": true,
+    "deterministicBlenderGeometry": true,
+    "independentBlenderAudit": true,
+    "productAndTechnicalGlbAudit": true,
+    "unityFixedAxisMotion": true,
+    "motionVideoTransformAudit": true,
+    "browserDesktopMobileGlbVideoModal": true,
+    "focusedNodeTests": "3/3 passed",
+    "pipelineValidators": "errors/missingFiles/unhashed=0/0/0 at pipeline rev 214",
+    "syntaxAndDiffCheck": "passed",
+    "fullNodeSuite": "175/177 passed at final run; two failures are concurrent Premium Display Case Gate 04 state changes outside this feature. Earlier pre-concurrency run passed 177/177.",
+    "buildInstallPhone": false
+  },
+  "scope": {
+    "finalMaterialsApplied": false,
+    "shippingSceneModified": false,
+    "build": false,
+    "install": false,
+    "phone": false
+  },
+  "featurePass": true,
+  "repositorySuiteExternalFailures": 2
+}

@@ -1,0 +1,43 @@
+{
+  "modelId": "metal-three-blade",
+  "stageId": "04-architecture",
+  "revision": 2,
+  "recordedAt": "2026-09-05T07:29:57.260880+00:00",
+  "root": "UnifiedTriSpinner_Root",
+  "tree": {
+    "Rotor_Root (rotates)": {
+      "RotorBody_OnePiece": [
+        "HubCollar (dark lip, Ø37.6/Ø36.8)",
+        "HubCore (dark counterbore floor, bore Ø12.7)",
+        "Blade_01/02/03 (satin facets, polished pocket walls, dark pocket floors)"
+      ]
+    },
+    "Fixed_Root (static under fingers)": {
+      "TopCap_Root": [
+        "FingerCap_Top (table star / crown scales / dark skirt)",
+        "CapStem_Top"
+      ],
+      "BottomCap_Root": [
+        "FingerCap_Bottom",
+        "CapStem_Bottom"
+      ]
+    },
+    "BearingAssembly_Root (hidden)": [
+      "BearingOuterRace",
+      "BearingInnerRace",
+      "BearingBall_01..08"
+    ],
+    "Collision_Root (export only)": [
+      "COL_Blade_01..03",
+      "COL_Hub"
+    ]
+  },
+  "explodedOrder": [
+    "TopCap_Root +30 mm",
+    "BearingAssembly_Root +12 mm",
+    "RotorBody 0",
+    "BottomCap_Root -28 mm"
+  ],
+  "materialZones": 7,
+  "shadowGap": "counterbore floor + lip + cap skirt all dark; cap floats 0.4 mm"
+}

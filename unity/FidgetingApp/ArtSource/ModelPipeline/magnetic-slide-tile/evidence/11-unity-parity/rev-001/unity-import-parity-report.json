@@ -1,0 +1,326 @@
+{
+    "pass": true,
+    "failures": [],
+    "unityVersion": "6000.5.6f1",
+    "urpVersion": "17.5.0",
+    "productAssetPath": "Assets/ModelPipeline/MagneticSlideTile/Gate11Rev001/Imported/magnetic-slide-tile-r002.fbx",
+    "collisionAssetPath": "Assets/ModelPipeline/MagneticSlideTile/Gate11Rev001/Imported/magnetic-slide-tile-collision-r002.fbx",
+    "parityScenePath": "Assets/ModelPipeline/MagneticSlideTile/Gate11Rev001/MagneticSlideTileNeutralParity.unity",
+    "output": "/Users/jiawei.zhou/Documents/Fidgeting app/unity/FidgetingApp/ArtSource/ModelPipeline/magnetic-slide-tile/evidence/11-unity-parity/rev-001/unity-neutral.png",
+    "renderMeshes": 2,
+    "vertices": 4124,
+    "triangles": 4096,
+    "collisionMeshes": 2,
+    "collisionTriangles": [
+        128,
+        128
+    ],
+    "bounds": {
+        "center": {
+            "x": 0.0,
+            "y": 0.0,
+            "z": 0.0
+        },
+        "extent": {
+            "x": 0.03100000135600567,
+            "y": 0.012000005692243576,
+            "z": 0.04999999701976776
+        }
+    },
+    "sortedBoundsMeters": [
+        0.012000005692243576,
+        0.03100000135600567,
+        0.04999999701976776
+    ],
+    "boundsRelativeError": 4.656610599340638e-7,
+    "hierarchy": [
+        {
+            "name": "LowerBody_Fixed_CleanPlane",
+            "parent": "FixedAssembly"
+        },
+        {
+            "name": "UpperCapsule_Moving",
+            "parent": "CentralAxisPivot_Point"
+        }
+    ],
+    "uv0Valid": true,
+    "normalsValid": true,
+    "tangentsValid": true,
+    "materialSlotsValid": true,
+    "submeshes": [
+        {
+            "mesh": "LowerBody_Fixed_CleanPlane",
+            "submesh": 0,
+            "material": "M_Gate11_PolishedSilver",
+            "triangles": 1537,
+            "capTriangles": 16,
+            "sideTriangles": 1521,
+            "bounds": {
+                "center": {
+                    "x": 0.0,
+                    "y": -0.0029999995604157449,
+                    "z": 0.0
+                },
+                "extent": {
+                    "x": 0.03100000135600567,
+                    "y": 0.0060000065714120869,
+                    "z": 0.04999999701976776
+                }
+            }
+        },
+        {
+            "mesh": "LowerBody_Fixed_CleanPlane",
+            "submesh": 1,
+            "material": "M_Gate11_PolishedSilver",
+            "triangles": 511,
+            "capTriangles": 16,
+            "sideTriangles": 495,
+            "bounds": {
+                "center": {
+                    "x": -9.313225746154786e-10,
+                    "y": 0.0,
+                    "z": 0.0
+                },
+                "extent": {
+                    "x": 0.03099999949336052,
+                    "y": 7.450580596923828e-9,
+                    "z": 0.04999999701976776
+                }
+            }
+        },
+        {
+            "mesh": "UpperCapsule_Moving",
+            "submesh": 0,
+            "material": "M_Gate11_PolishedSilver",
+            "triangles": 1537,
+            "capTriangles": 16,
+            "sideTriangles": 1521,
+            "bounds": {
+                "center": {
+                    "x": 0.0,
+                    "y": 0.0029999995604157449,
+                    "z": 0.0
+                },
+                "extent": {
+                    "x": 0.03100000135600567,
+                    "y": 0.0060000065714120869,
+                    "z": 0.05000000447034836
+                }
+            }
+        },
+        {
+            "mesh": "UpperCapsule_Moving",
+            "submesh": 1,
+            "material": "M_Gate11_PolishedSilver",
+            "triangles": 511,
+            "capTriangles": 16,
+            "sideTriangles": 495,
+            "bounds": {
+                "center": {
+                    "x": -9.313225746154786e-10,
+                    "y": 0.0059999991208314899,
+                    "z": -1.862645149230957e-9
+                },
+                "extent": {
+                    "x": 0.03099999949336052,
+                    "y": 7.450580596923828e-9,
+                    "z": 0.05000000074505806
+                }
+            }
+        }
+    ],
+    "previewArtworkOverlayMeshes": 2,
+    "previewArtworkOverlayState": "isolated-parity-scene-only-not-shipping-geometry",
+    "noAnimationOrSelfMotion": true,
+    "closedDefaultPosition": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": 0.0
+    },
+    "closedDefaultRotation": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": 0.0
+    },
+    "pointAxisMeters": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": 0.009499999694526196
+    },
+    "pointAxisDirection": {
+        "x": 0.0,
+        "y": 1.0,
+        "z": 0.0
+    },
+    "slideDirection": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": -1.0
+    },
+    "slideTravelMeters": 0.020999999716877939,
+    "detentCount": 30,
+    "detentStepDegrees": 12.0,
+    "detentDeliveryState": "specified-only-not-runtime-integrated",
+    "normalMetrics": {
+        "maxSideDuplicateAngleDegrees": 0.0,
+        "minimumCapSideAngleDegrees": 90.0,
+        "smoothSidePass": true,
+        "hardCapSidePass": true
+    },
+    "importer": {
+        "globalScale": 1.0,
+        "useFileScale": true,
+        "preserveHierarchy": true,
+        "importAnimation": false,
+        "normals": "Import",
+        "tangents": "Import",
+        "meshCompression": "Off"
+    },
+    "textures": [
+        {
+            "file": "artwork-lower-channel-pack.png",
+            "assetPath": "Assets/ModelPipeline/MagneticSlideTile/Gate11Rev001/Imported/artwork-lower-channel-pack.png",
+            "width": 512,
+            "height": 1024,
+            "mipmaps": true,
+            "sRgb": false,
+            "alphaSource": "FromInput",
+            "iosOverridden": true,
+            "iosFormat": "ASTC_4x4",
+            "iosMaxSize": 1024,
+            "editorRuntimeMemoryBytes": 1399184,
+            "iosEstimatedTextureBytes": 699072,
+            "deviceMemoryMeasured": false
+        },
+        {
+            "file": "artwork-lower-mask.png",
+            "assetPath": "Assets/ModelPipeline/MagneticSlideTile/Gate11Rev001/Imported/artwork-lower-mask.png",
+            "width": 512,
+            "height": 1024,
+            "mipmaps": false,
+            "sRgb": false,
+            "alphaSource": "None",
+            "iosOverridden": false,
+            "iosFormat": "EditorSource",
+            "iosMaxSize": 1024,
+            "editorRuntimeMemoryBytes": 471600,
+            "iosEstimatedTextureBytes": 0,
+            "deviceMemoryMeasured": false
+        },
+        {
+            "file": "artwork-top-perimeter-border-mask.png",
+            "assetPath": "Assets/ModelPipeline/MagneticSlideTile/Gate11Rev001/Imported/artwork-top-perimeter-border-mask.png",
+            "width": 512,
+            "height": 1024,
+            "mipmaps": false,
+            "sRgb": false,
+            "alphaSource": "None",
+            "iosOverridden": false,
+            "iosFormat": "EditorSource",
+            "iosMaxSize": 1024,
+            "editorRuntimeMemoryBytes": 471634,
+            "iosEstimatedTextureBytes": 0,
+            "deviceMemoryMeasured": false
+        },
+        {
+            "file": "artwork-upper-channel-pack.png",
+            "assetPath": "Assets/ModelPipeline/MagneticSlideTile/Gate11Rev001/Imported/artwork-upper-channel-pack.png",
+            "width": 512,
+            "height": 1024,
+            "mipmaps": true,
+            "sRgb": false,
+            "alphaSource": "FromInput",
+            "iosOverridden": true,
+            "iosFormat": "ASTC_4x4",
+            "iosMaxSize": 1024,
+            "editorRuntimeMemoryBytes": 1399184,
+            "iosEstimatedTextureBytes": 699072,
+            "deviceMemoryMeasured": false
+        },
+        {
+            "file": "artwork-upper-mask.png",
+            "assetPath": "Assets/ModelPipeline/MagneticSlideTile/Gate11Rev001/Imported/artwork-upper-mask.png",
+            "width": 512,
+            "height": 1024,
+            "mipmaps": false,
+            "sRgb": false,
+            "alphaSource": "None",
+            "iosOverridden": false,
+            "iosFormat": "EditorSource",
+            "iosMaxSize": 1024,
+            "editorRuntimeMemoryBytes": 471600,
+            "iosEstimatedTextureBytes": 0,
+            "deviceMemoryMeasured": false
+        },
+        {
+            "file": "face-lower-transport-basecolor.png",
+            "assetPath": "Assets/ModelPipeline/MagneticSlideTile/Gate11Rev001/Imported/face-lower-transport-basecolor.png",
+            "width": 512,
+            "height": 1024,
+            "mipmaps": false,
+            "sRgb": true,
+            "alphaSource": "None",
+            "iosOverridden": true,
+            "iosFormat": "ASTC_6x6",
+            "iosMaxSize": 1024,
+            "editorRuntimeMemoryBytes": 471600,
+            "iosEstimatedTextureBytes": 235296,
+            "deviceMemoryMeasured": false
+        },
+        {
+            "file": "face-upper-transport-basecolor.png",
+            "assetPath": "Assets/ModelPipeline/MagneticSlideTile/Gate11Rev001/Imported/face-upper-transport-basecolor.png",
+            "width": 512,
+            "height": 1024,
+            "mipmaps": false,
+            "sRgb": true,
+            "alphaSource": "None",
+            "iosOverridden": true,
+            "iosFormat": "ASTC_6x6",
+            "iosMaxSize": 1024,
+            "editorRuntimeMemoryBytes": 471600,
+            "iosEstimatedTextureBytes": 235296,
+            "deviceMemoryMeasured": false
+        }
+    ],
+    "upperLowerArtworkIndependent": true,
+    "camera": {
+        "position": {
+            "x": -0.07199999690055847,
+            "y": 0.04600000008940697,
+            "z": 0.09200000017881394
+        },
+        "lookAt": {
+            "x": 0.0,
+            "y": 0.0,
+            "z": 0.0020000000949949028
+        },
+        "verticalFovDegrees": 16.937904357910158,
+        "resolution": {
+            "x": 1600,
+            "y": 900
+        }
+    },
+    "reflection": {
+        "strategy": "static custom local reflection probe + custom neutral cubemap",
+        "mode": "Custom",
+        "boxProjection": true,
+        "realtimeUpdates": false,
+        "approximation": "cubemap approximation; not ray-traced or per-pixel true mirror"
+    },
+    "materialGaps": [
+        "URP Lit has no direct parity for Blender thin-film interference.",
+        "Crystal transmission is approximated with an opaque blood-red artwork layer.",
+        "The isolated artwork overlay uses URP Unlit to prevent the face texture from contaminating polished-side parity; crystal response remains a known Gate 11 approximation.",
+        "Silver reflections use a static cubemap/local probe approximation.",
+        "Artwork uses cap-only preview overlays so imported FBX geometry stays immutable; these overlays are not shipping integration.",
+        "AgX and Unity URP tone mapping are not identical."
+    ],
+    "shippingScenePath": "Assets/_EDC/Scenes/MeshyEDC.unity",
+    "shippingSceneHashBefore": "99083a32fbad262f615707d0904bf68f7989e8e351579f8691066bd4bc97850d",
+    "shippingSceneHashAfter": "99083a32fbad262f615707d0904bf68f7989e8e351579f8691066bd4bc97850d",
+    "shippingSceneModified": false,
+    "shippingIntegrated": false,
+    "deviceMemoryMeasured": false,
+    "deviceAcceptance": "pending"
+}

@@ -1,0 +1,686 @@
+{
+  "schemaVersion": 1,
+  "revision": 18,
+  "createdAt": "2026-08-20T00:00:00.000Z",
+  "updatedAt": "2026-09-05T14:19:14.665Z",
+  "model": {
+    "id": "graphite-two-lobe",
+    "name": "石墨双叶",
+    "mechanism": "rotor",
+    "status": "shipping-current-rebuild-requested",
+    "scenePath": "unity/FidgetingApp/Assets/_TwoLobeBar/Scenes/TwoLobeBar.unity"
+  },
+  "route": {
+    "primary": "blender-cli",
+    "rodinPolicy": "concept-only",
+    "note": "现有几何由 Unity C# 程序生成；新版本必须增加独立 Blender/CLIAnything 源和标准导出包。"
+  },
+  "currentState": {
+    "rebuildRequested": true,
+    "shippingAssetUnchanged": true,
+    "visualApproval": "pending",
+    "deviceStatus": "not-approved",
+    "diagnosis": "用户已确认当前五张所谓参考图其实是助手生成的目标／推导图，不是用户原始输入。第 4 关拆件尚可作为历史概念，但第 5 关白模没有执行该结构，且第 6 关缺少同源六视图、Workbench、尺寸、Pivot 与爆炸验收。新 revision 从缺失的真实原始参考重新开始。"
+  },
+  "assets": [
+    {
+      "id": "two-input-assembled",
+      "stageId": "01-intake",
+      "slot": "ai-target",
+      "path": "unity/FidgetingApp/Artifacts/TwoLobeBar/ModelReferenceSeparate/01-assembled-reference.png",
+      "sha256": "4ef94c19d93cdad664e1e3bd5b140afb8ef204133edf3b8b019bc178f462bc46",
+      "role": "ai-target",
+      "producer": {
+        "name": "OpenAI-imagegen",
+        "version": "legacy-unverified"
+      },
+      "provenance": {
+        "origin": "assistant-generated",
+        "contentClass": "ai-generated-target",
+        "assertedBy": "user",
+        "note": "2026-08-20 用户确认该图不是其提供的原始参考，而是助手理解后生成的图。"
+      },
+      "sourceAssetIds": [],
+      "exists": true,
+      "sizeBytes": 2025939
+    },
+    {
+      "id": "two-input-rotor",
+      "stageId": "01-intake",
+      "slot": "ai-target",
+      "path": "unity/FidgetingApp/Artifacts/TwoLobeBar/ModelReferenceSeparate/02-one-piece-rotor-body.png",
+      "sha256": "73e37a4d83d5abc71e1e149a06a6a387c742456dcb45c31780b4226efcffdc89",
+      "role": "ai-target",
+      "producer": {
+        "name": "OpenAI-imagegen",
+        "version": "legacy-unverified"
+      },
+      "provenance": {
+        "origin": "assistant-generated",
+        "contentClass": "ai-generated-target",
+        "assertedBy": "user",
+        "note": "2026-08-20 用户确认该图不是其提供的原始参考，而是助手理解后生成的图。"
+      },
+      "sourceAssetIds": [],
+      "exists": true,
+      "sizeBytes": 1818860
+    },
+    {
+      "id": "two-input-cap",
+      "stageId": "01-intake",
+      "slot": "ai-target",
+      "path": "unity/FidgetingApp/Artifacts/TwoLobeBar/ModelReferenceSeparate/03-concave-finger-cap.png",
+      "sha256": "680eab5f19325e98e9e9d9eb054bbe6ec5c93ad5a02ba66051949aa64546cf39",
+      "role": "ai-target",
+      "producer": {
+        "name": "OpenAI-imagegen",
+        "version": "legacy-unverified"
+      },
+      "provenance": {
+        "origin": "assistant-generated",
+        "contentClass": "ai-generated-target",
+        "assertedBy": "user",
+        "note": "2026-08-20 用户确认该图不是其提供的原始参考，而是助手理解后生成的图。"
+      },
+      "sourceAssetIds": [],
+      "exists": true,
+      "sizeBytes": 1961612
+    },
+    {
+      "id": "two-input-bearing",
+      "stageId": "01-intake",
+      "slot": "ai-target",
+      "path": "unity/FidgetingApp/Artifacts/TwoLobeBar/ModelReferenceSeparate/04-bearing-and-sleeves.png",
+      "sha256": "bdabe9be3a62d3912f8f8b978cf84bb4b5dabf3de6a7511c85b8c1db43263fd3",
+      "role": "ai-target",
+      "producer": {
+        "name": "OpenAI-imagegen",
+        "version": "legacy-unverified"
+      },
+      "provenance": {
+        "origin": "assistant-generated",
+        "contentClass": "ai-generated-target",
+        "assertedBy": "user",
+        "note": "2026-08-20 用户确认该图不是其提供的原始参考，而是助手理解后生成的图。"
+      },
+      "sourceAssetIds": [],
+      "exists": true,
+      "sizeBytes": 1639024
+    },
+    {
+      "id": "two-input-exploded",
+      "stageId": "01-intake",
+      "slot": "ai-target",
+      "path": "unity/FidgetingApp/Artifacts/TwoLobeBar/ModelReferenceSeparate/05-full-axial-exploded.png",
+      "sha256": "09c64ad41e276a04737af94242e77878750eb482018b8774bc9795b82a774fc0",
+      "role": "ai-target",
+      "producer": {
+        "name": "OpenAI-imagegen",
+        "version": "legacy-unverified"
+      },
+      "provenance": {
+        "origin": "assistant-generated",
+        "contentClass": "ai-generated-target",
+        "assertedBy": "user",
+        "note": "2026-08-20 用户确认该图不是其提供的原始参考，而是助手理解后生成的图。"
+      },
+      "sourceAssetIds": [],
+      "exists": true,
+      "sizeBytes": 1777728
+    },
+    {
+      "id": "two-analysis-structure",
+      "stageId": "02-analysis",
+      "slot": "analysis-board",
+      "path": "unity/FidgetingApp/Artifacts/TwoLobeBar/two-lobe-bar-corrected-structure-concept.png",
+      "sha256": "9cb26bba3c58e95ff5a536bfb1f52bf6d929af07cc924126c5ec6daa4c234146",
+      "role": "analysis",
+      "producer": {
+        "name": "structure-analysis",
+        "version": "legacy"
+      },
+      "provenance": {
+        "origin": "assistant-generated",
+        "contentClass": "ai-generated-analysis",
+        "assertedBy": "user",
+        "note": "由助手生成目标图继续推导，未与用户原始参考逐区绑定。"
+      },
+      "sourceAssetIds": [
+        "two-input-assembled",
+        "two-input-rotor",
+        "two-input-cap",
+        "two-input-bearing"
+      ],
+      "exists": true,
+      "sizeBytes": 2108673
+    },
+    {
+      "id": "two-contract-design-bible",
+      "stageId": "03-contract",
+      "slot": "modeling-contract",
+      "path": "unity/FidgetingApp/Docs/FidgetingAppProductDesignBible.md",
+      "sha256": "a2ae2446c63b62fc0f5177670445b2f0a74095a04c506fbb6fe6ae33dbb8e4ce",
+      "role": "contract",
+      "producer": {
+        "name": "product-design-bible",
+        "version": "2026-08-20"
+      },
+      "provenance": {
+        "origin": "repository-generated",
+        "contentClass": "unverified-modeling-contract",
+        "assertedBy": "repository",
+        "note": "其中石墨双叶尺寸与结构判断因真实原始参考缺失而需要重新核验。"
+      },
+      "sourceAssetIds": [
+        "two-input-assembled"
+      ],
+      "exists": true,
+      "sizeBytes": 317427
+    },
+    {
+      "id": "two-part-tree",
+      "stageId": "04-architecture",
+      "slot": "part-tree",
+      "path": "unity/FidgetingApp/Artifacts/TwoLobeBar/two-lobe-bar-corrected-structure-concept.png",
+      "sha256": "9cb26bba3c58e95ff5a536bfb1f52bf6d929af07cc924126c5ec6daa4c234146",
+      "role": "analysis",
+      "producer": {
+        "name": "structure-analysis",
+        "version": "legacy"
+      },
+      "provenance": {
+        "origin": "assistant-generated",
+        "contentClass": "ai-generated-part-plan",
+        "assertedBy": "user",
+        "note": "可作历史概念，不是已批准的用户原始结构。"
+      },
+      "sourceAssetIds": [
+        "two-input-exploded"
+      ],
+      "exists": true,
+      "sizeBytes": 2108673
+    },
+    {
+      "id": "two-exploded-plan",
+      "stageId": "04-architecture",
+      "slot": "exploded-plan",
+      "path": "unity/FidgetingApp/Artifacts/TwoLobeBar/two-lobe-bar-exploded.png",
+      "sha256": "5b2c86e6cab661146e9a66e746b4cc71667515bb57f28649c2c26e5200104dda",
+      "role": "process",
+      "producer": {
+        "name": "concept-render",
+        "version": "legacy"
+      },
+      "provenance": {
+        "origin": "repository-generated",
+        "contentClass": "legacy-exploded-plan",
+        "assertedBy": "repository",
+        "note": "与上游 AI 目标的指盖、轴承、套筒和一体双叶结构不一致。"
+      },
+      "sourceAssetIds": [
+        "two-input-exploded"
+      ],
+      "exists": true,
+      "sizeBytes": 115063
+    },
+    {
+      "id": "two-runtime-source",
+      "stageId": "05-blockout",
+      "slot": "white-model-source",
+      "path": "unity/FidgetingApp/Assets/_TwoLobeBar/Runtime/Geometry/TwoLobeBarMeshFactory.cs",
+      "sha256": "45f8d426a1e27000ae9f4c73d9ce571b6391f8460925244e746b97b675ce04ad",
+      "role": "historical",
+      "producer": {
+        "name": "Unity-CSharp",
+        "version": "legacy"
+      },
+      "provenance": {
+        "origin": "repository-generated",
+        "contentClass": "legacy-runtime-geometry",
+        "assertedBy": "repository",
+        "note": "不是 Blender 白模，且未直接承接第 4 关拆件计划。"
+      },
+      "sourceAssetIds": [
+        "two-contract-design-bible",
+        "two-analysis-structure"
+      ],
+      "exists": true,
+      "sizeBytes": 21453
+    },
+    {
+      "id": "two-legacy-hero",
+      "stageId": "05-blockout",
+      "slot": "white-model-hero",
+      "path": "unity/FidgetingApp/Artifacts/TwoLobeBar/two-lobe-bar-hero.png",
+      "sha256": "a31dae8192f0025f61cf1e74343db2e9353d737980bf2d051069a5e6e43498ce",
+      "role": "historical",
+      "producer": {
+        "name": "Unity",
+        "version": "legacy"
+      },
+      "provenance": {
+        "origin": "repository-generated",
+        "contentClass": "legacy-runtime-render",
+        "assertedBy": "repository",
+        "note": "历史 Unity 输出；不能作为第 5 关 Blender 白模批准证据。"
+      },
+      "sourceAssetIds": [
+        "two-runtime-source"
+      ],
+      "view": {
+        "id": "hero",
+        "camera": "legacy-unknown"
+      },
+      "exists": true,
+      "sizeBytes": 174836
+    },
+    {
+      "id": "two-shipping-hero",
+      "stageId": "12-shipping",
+      "slot": "shipping-hero",
+      "path": "unity/FidgetingApp/Artifacts/PremiumDisplayCaseMagneticSlideBaselineConsistencyPreview/graphite-two-lobe/01_hero.png",
+      "sha256": "84976d93c98070d82102f39d93a5d655979b248d3df2b2dae2df40a009bf029e",
+      "role": "historical",
+      "producer": {
+        "name": "Unity",
+        "version": "6000.0.58f2",
+        "recipe": "shipping-hero"
+      },
+      "sourceAssetIds": [
+        "two-runtime-source"
+      ],
+      "view": {
+        "id": "hero",
+        "camera": "shipping-hero-v1"
+      },
+      "exists": true,
+      "sizeBytes": 309324
+    },
+    {
+      "id": "two-shipping-top",
+      "stageId": "12-shipping",
+      "slot": "shipping-top",
+      "path": "unity/FidgetingApp/Artifacts/PremiumDisplayCaseMagneticSlideBaselineConsistencyPreview/graphite-two-lobe/02_top.png",
+      "sha256": "3ff95a52d29bb1aaf62f79c0310cd1ea695d52458714e57526b2883dae74610e",
+      "role": "historical",
+      "producer": {
+        "name": "Unity",
+        "version": "6000.0.58f2",
+        "recipe": "shipping-top"
+      },
+      "sourceAssetIds": [
+        "two-runtime-source"
+      ],
+      "view": {
+        "id": "top",
+        "camera": "shipping-top-v1"
+      },
+      "exists": true,
+      "sizeBytes": 491160
+    },
+    {
+      "id": "two-shipping-left",
+      "stageId": "12-shipping",
+      "slot": "shipping-left-oblique",
+      "path": "unity/FidgetingApp/Artifacts/PremiumDisplayCaseMagneticSlideBaselineConsistencyPreview/graphite-two-lobe/03_left_oblique.png",
+      "sha256": "0361ffad32a549aa9be0868699752cd4197f1409e2abdff90fa7d9850cce0602",
+      "role": "historical",
+      "producer": {
+        "name": "Unity",
+        "version": "6000.0.58f2",
+        "recipe": "shipping-left"
+      },
+      "sourceAssetIds": [
+        "two-runtime-source"
+      ],
+      "view": {
+        "id": "left-oblique",
+        "camera": "shipping-left-v1"
+      },
+      "exists": true,
+      "sizeBytes": 465797
+    },
+    {
+      "id": "two-shipping-right",
+      "stageId": "12-shipping",
+      "slot": "shipping-right-oblique",
+      "path": "unity/FidgetingApp/Artifacts/PremiumDisplayCaseMagneticSlideBaselineConsistencyPreview/graphite-two-lobe/04_right_oblique.png",
+      "sha256": "c61b32cdbab2fe56275aef100dec024346de13a80b59113bfcc8c6fc07b05f95",
+      "role": "historical",
+      "producer": {
+        "name": "Unity",
+        "version": "6000.0.58f2",
+        "recipe": "shipping-right"
+      },
+      "sourceAssetIds": [
+        "two-runtime-source"
+      ],
+      "view": {
+        "id": "right-oblique",
+        "camera": "shipping-right-v1"
+      },
+      "exists": true,
+      "sizeBytes": 374329
+    },
+    {
+      "id": "two-shipping-low",
+      "stageId": "12-shipping",
+      "slot": "shipping-low",
+      "path": "unity/FidgetingApp/Artifacts/PremiumDisplayCaseMagneticSlideBaselineConsistencyPreview/graphite-two-lobe/05_low_angle.png",
+      "sha256": "86f90be1169c131f94fd2c7c0693e83ce582851e1fd8294828bdaad96d0a6b30",
+      "role": "historical",
+      "producer": {
+        "name": "Unity",
+        "version": "6000.0.58f2",
+        "recipe": "shipping-low"
+      },
+      "sourceAssetIds": [
+        "two-runtime-source"
+      ],
+      "view": {
+        "id": "low",
+        "camera": "shipping-low-v1"
+      },
+      "exists": true,
+      "sizeBytes": 476129
+    },
+    {
+      "id": "two-shipping-phone",
+      "stageId": "12-shipping",
+      "slot": "shipping-phone",
+      "path": "unity/FidgetingApp/Artifacts/PremiumDisplayCaseMagneticSlideBaselineConsistencyPreview/graphite-two-lobe/06_phone_hero.png",
+      "sha256": "7354b420b4c27a185cf99f0d830f1f3555fb99047e604465f3f7d1617a3d4b8a",
+      "role": "historical",
+      "producer": {
+        "name": "Unity",
+        "version": "6000.0.58f2",
+        "recipe": "shipping-phone"
+      },
+      "sourceAssetIds": [
+        "two-runtime-source"
+      ],
+      "view": {
+        "id": "phone",
+        "camera": "shipping-phone-v1"
+      },
+      "exists": true,
+      "sizeBytes": 229527
+    }
+  ],
+  "claims": [
+    {
+      "id": "two-source-origin-correction",
+      "stageId": "01-intake",
+      "category": "provenance",
+      "statement": "当前登记的五张输入图均为助手生成目标／推导图，不是用户提供的原始参考；真实原始参考目前缺失。",
+      "confidence": "high",
+      "sourceAssetIds": [
+        "two-input-assembled",
+        "two-input-rotor",
+        "two-input-cap",
+        "two-input-bearing",
+        "two-input-exploded"
+      ],
+      "sourceRegions": []
+    },
+    {
+      "id": "two-physical-bounds",
+      "stageId": "03-contract",
+      "category": "scale",
+      "statement": "历史运行规格曾记录 50 × 24 × 18.68 mm、指盖约 Ø24 mm；该数值没有关联到现存用户原始参考，不能直接进入新建模合同。",
+      "value": [
+        50,
+        24,
+        18.68
+      ],
+      "unit": "mm",
+      "confidence": "unknown",
+      "sourceAssetIds": [
+        "two-contract-design-bible",
+        "two-input-assembled"
+      ],
+      "sourceRegions": []
+    },
+    {
+      "id": "two-assembly",
+      "stageId": "03-contract",
+      "category": "mechanism",
+      "statement": "助手生成目标图表达了一体双叶转子、固定凹面指盖以及同轴轴承／套筒；用户尚未把它批准为真实参考结构。",
+      "confidence": "unknown",
+      "sourceAssetIds": [
+        "two-input-rotor",
+        "two-input-cap",
+        "two-input-bearing",
+        "two-input-exploded"
+      ],
+      "sourceRegions": []
+    }
+  ],
+  "stages": [
+    {
+      "id": "01-intake",
+      "revision": 2,
+      "status": "missing",
+      "artifactIds": [
+        "two-input-assembled",
+        "two-input-rotor",
+        "two-input-cap",
+        "two-input-bearing",
+        "two-input-exploded"
+      ],
+      "inputDigest": "f78ef3b49dd7e7c0c82c1a5d21a57553306bf33fba99dd0b48503460f7bbe94f",
+      "outputDigest": "f78ef3b49dd7e7c0c82c1a5d21a57553306bf33fba99dd0b48503460f7bbe94f",
+      "validations": [
+        {
+          "id": "original-reference-present",
+          "status": "fail",
+          "evidence": "五张历史图已改列 ai-target；未找到用户原始图片、视频帧或明确外部来源。"
+        }
+      ],
+      "decision": null,
+      "staleReason": "用户确认历史输入身份标注错误；新 revision 等待真实用户原始参考。"
+    },
+    {
+      "id": "02-analysis",
+      "revision": 1,
+      "status": "stale",
+      "artifactIds": [
+        "two-analysis-structure"
+      ],
+      "inputDigest": "f78ef3b49dd7e7c0c82c1a5d21a57553306bf33fba99dd0b48503460f7bbe94f",
+      "outputDigest": "e32ec550bb0de895d8ba7a31912638adac85ffe89308ad237e2b05f4ac8149e3",
+      "validations": [],
+      "decision": null,
+      "staleReason": "上游 01-intake 的素材发生变化。"
+    },
+    {
+      "id": "03-contract",
+      "revision": 1,
+      "status": "stale",
+      "artifactIds": [
+        "two-contract-design-bible"
+      ],
+      "inputDigest": "e32ec550bb0de895d8ba7a31912638adac85ffe89308ad237e2b05f4ac8149e3",
+      "outputDigest": "a3829002a1ce8136302889e08273bbe3b90348957242d5b27db1de18c531513d",
+      "validations": [],
+      "decision": null,
+      "staleReason": "素材文件哈希或存在状态发生变化。"
+    },
+    {
+      "id": "04-architecture",
+      "revision": 1,
+      "status": "stale",
+      "artifactIds": [
+        "two-part-tree",
+        "two-exploded-plan"
+      ],
+      "inputDigest": "a3829002a1ce8136302889e08273bbe3b90348957242d5b27db1de18c531513d",
+      "outputDigest": "3c9fb2551013634137c831cfcc5e25cda68c267dc6dad1ccbcb9de7b4491784e",
+      "validations": [],
+      "decision": null,
+      "staleReason": "上游 03-contract 的素材发生变化。"
+    },
+    {
+      "id": "05-blockout",
+      "revision": 2,
+      "status": "stale",
+      "artifactIds": [
+        "two-runtime-source",
+        "two-legacy-hero"
+      ],
+      "inputDigest": "3c9fb2551013634137c831cfcc5e25cda68c267dc6dad1ccbcb9de7b4491784e",
+      "outputDigest": "5d461e5f7c697cf72f8608b64504ef41c0619723501161404842e8eabb1662e3",
+      "validations": [
+        {
+          "id": "architecture-to-blockout-fidelity",
+          "status": "fail",
+          "evidence": "历史 Unity 白模未实现第 4 关的一体双叶、凹面指盖、轴承与上下套筒关系，结构、角度和细节均发生漂移。"
+        }
+      ],
+      "decision": null,
+      "staleReason": "上游 03-contract 的素材发生变化。"
+    },
+    {
+      "id": "06-geometry",
+      "revision": 1,
+      "status": "missing",
+      "artifactIds": [],
+      "inputDigest": "5d461e5f7c697cf72f8608b64504ef41c0619723501161404842e8eabb1662e3",
+      "outputDigest": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "validations": [
+        {
+          "id": "same-source-standard-views",
+          "status": "fail",
+          "evidence": "缺少同一 Blender revision 的正、背、上、下、左、右、Workbench、尺寸、Pivot 与爆炸图。"
+        }
+      ],
+      "decision": null,
+      "staleReason": "上游 03-contract 的素材发生变化。"
+    },
+    {
+      "id": "07-material",
+      "revision": 1,
+      "status": "stale",
+      "artifactIds": [],
+      "inputDigest": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "outputDigest": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "validations": [],
+      "decision": null,
+      "staleReason": "上游 03-contract 的素材发生变化。"
+    },
+    {
+      "id": "08-lighting",
+      "revision": 1,
+      "status": "stale",
+      "artifactIds": [],
+      "inputDigest": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "outputDigest": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "validations": [],
+      "decision": null,
+      "staleReason": "上游 03-contract 的素材发生变化。"
+    },
+    {
+      "id": "09-environment",
+      "revision": 1,
+      "status": "stale",
+      "artifactIds": [],
+      "inputDigest": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "outputDigest": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "validations": [],
+      "decision": null,
+      "staleReason": "上游 03-contract 的素材发生变化。"
+    },
+    {
+      "id": "10-export",
+      "revision": 1,
+      "status": "missing",
+      "artifactIds": [],
+      "inputDigest": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "outputDigest": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "validations": [],
+      "decision": null,
+      "staleReason": "上游 03-contract 的素材发生变化。"
+    },
+    {
+      "id": "11-unity-parity",
+      "revision": 1,
+      "status": "missing",
+      "artifactIds": [],
+      "inputDigest": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "outputDigest": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "validations": [],
+      "decision": null,
+      "staleReason": "上游 03-contract 的素材发生变化。"
+    },
+    {
+      "id": "12-shipping",
+      "revision": 1,
+      "status": "stale",
+      "artifactIds": [
+        "two-shipping-hero",
+        "two-shipping-top",
+        "two-shipping-left",
+        "two-shipping-right",
+        "two-shipping-low",
+        "two-shipping-phone"
+      ],
+      "inputDigest": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "outputDigest": "71ee39cdf0e8af1777a90c39a6793f2c029cfb57ecbb4f7d7400f12c8ad7b68e",
+      "validations": [],
+      "decision": null,
+      "staleReason": "上游 03-contract 的素材发生变化。"
+    }
+  ],
+  "issues": [
+    {
+      "id": "graphite-source-origin-mislabeled",
+      "stageId": "01-intake",
+      "assetId": "two-input-assembled",
+      "claimIds": [
+        "two-source-origin-correction"
+      ],
+      "severity": "blocker",
+      "status": "open",
+      "note": "该组五图此前被标为 user-reference／external-reference；用户已确认它们是助手生成图。它们只能作为 AI 目标支线，不能替代真实输入。",
+      "region": null,
+      "createdAt": "2026-08-20T12:17:12.000Z"
+    },
+    {
+      "id": "graphite-architecture-reference-drift",
+      "stageId": "04-architecture",
+      "assetId": "two-exploded-plan",
+      "claimIds": [
+        "two-assembly"
+      ],
+      "severity": "blocker",
+      "status": "open",
+      "note": "历史拆件图把凹面指盖改成平盘，把轴承／套筒层级和一体双叶主体改成互不对应的块体与细轴；只能作为被否决对照。",
+      "region": null,
+      "createdAt": "2026-08-20T12:17:12.000Z"
+    },
+    {
+      "id": "graphite-blockout-breaks-architecture",
+      "stageId": "05-blockout",
+      "assetId": "two-legacy-hero",
+      "claimIds": [
+        "two-assembly"
+      ],
+      "severity": "blocker",
+      "status": "open",
+      "note": "历史白模没有从第 4 关 part tree／exploded plan 生成，结构、角度、中心件与细节均不一致；该 revision 已被用户明确拒绝。",
+      "region": null,
+      "createdAt": "2026-08-20T12:17:12.000Z"
+    },
+    {
+      "id": "graphite-standard-geometry-pack-missing",
+      "stageId": "06-geometry",
+      "assetId": "two-legacy-hero",
+      "claimIds": [],
+      "severity": "blocker",
+      "status": "open",
+      "note": "没有同源六视图、Workbench 线框、尺寸／Pivot 覆盖和爆炸几何，无法证明任何角度来自同一模型版本。",
+      "region": null,
+      "createdAt": "2026-08-20T12:17:12.000Z"
+    }
+  ]
+}

@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1920" height="1080" viewBox="0 0 1920 1080">
+  <defs><linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#0a0d12"/><stop offset="1" stop-color="#17121f"/></linearGradient><filter id="s"><feDropShadow dx="0" dy="10" stdDeviation="14" flood-opacity=".32"/></filter></defs>
+  <rect width="1920" height="1080" fill="url(#bg)"/>
+  <text x="92" y="96" fill="#f7f3f9" font-family="Arial,sans-serif" font-size="44" font-weight="700">零件树 · 谁固定、谁移动、谁发光</text>
+  <text x="94" y="140" fill="#aaa3b2" font-family="Arial,sans-serif" font-size="22">两个主壳保持独立 · 机械轨负责手感 · 三套图案表面互不串色</text>
+  <g font-family="Arial,sans-serif" filter="url(#s)">
+    <rect x="740" y="188" width="440" height="82" rx="24" fill="#312a3d" stroke="#8b7f99" stroke-width="2"/><text x="960" y="240" text-anchor="middle" fill="#fff" font-size="28" font-weight="700">产品根节点</text>
+    <path d="M960 270v52M440 322h1040M440 322v48M960 322v48M1480 322v48" fill="none" stroke="#6b6275" stroke-width="3"/>
+    <rect x="220" y="370" width="440" height="78" rx="22" fill="#26222e" stroke="#777080" stroke-width="2"/><text x="440" y="419" text-anchor="middle" fill="#eee9f0" font-size="27" font-weight="700">固定下壳总成</text>
+    <rect x="740" y="370" width="440" height="78" rx="22" fill="#3a3047" stroke="#a092ae" stroke-width="2"/><text x="960" y="419" text-anchor="middle" fill="#fff" font-size="27" font-weight="700">移动上壳总成</text>
+    <rect x="1260" y="370" width="440" height="78" rx="22" fill="#2e271e" stroke="#9f8051" stroke-width="2"/><text x="1480" y="419" text-anchor="middle" fill="#f7ead5" font-size="27" font-weight="700">机械手感总成</text>
+    <path d="M440 448v54M960 448v54M1480 448v54" stroke="#6b6275" stroke-width="3"/>
+    <g fill="#17151c" stroke="#4f4858" stroke-width="2" font-size="23">
+      <rect x="160" y="502" width="560" height="86" rx="18"/><text x="194" y="539" fill="#eee9f0" font-weight="700">下壳金属体</text><text x="194" y="568" fill="#a9a1af">固定碰撞体 · 近黑紫灰高抛</text>
+      <rect x="160" y="608" width="560" height="86" rx="18"/><text x="194" y="645" fill="#eee9f0" font-weight="700">露出端棋格 + 圆形徽章</text><text x="194" y="674" fill="#a9a1af">独立正面贴花 · 棋格青蓝夜光</text>
+      <rect x="160" y="714" width="560" height="86" rx="18"/><text x="194" y="751" fill="#eee9f0" font-weight="700">背面贝母贴片</text><text x="194" y="780" fill="#a9a1af">磁性可换装饰 · 非动作驱动</text>
+      <rect x="680" y="502" width="560" height="86" rx="18"/><text x="714" y="539" fill="#eee9f0" font-weight="700">上壳金属体</text><text x="714" y="568" fill="#a9a1af">长轴位移 0 → 18.7 mm</text>
+      <rect x="680" y="608" width="560" height="86" rx="18"/><text x="714" y="645" fill="#eee9f0" font-weight="700">贝母棋格 + 珊瑚红骑士</text><text x="714" y="674" fill="#a9a1af">图案分层 · 棋格青蓝、骑士橙光</text>
+      <rect x="680" y="714" width="560" height="86" rx="18"/><text x="714" y="751" fill="#eee9f0" font-weight="700">铭牌 + 透明封晶</text><text x="714" y="780" fill="#a9a1af">文字不发光 · 封晶清漆高光</text>
+      <rect x="1200" y="502" width="560" height="86" rx="18"/><text x="1234" y="539" fill="#f1e6d5" font-weight="700">左右直线轨 / 弹簧珠</text><text x="1234" y="568" fill="#aa9a85">机械直推阻尼 · 数量不锁定</text>
+      <rect x="1200" y="608" width="560" height="86" rx="18"/><text x="1234" y="645" fill="#f1e6d5" font-weight="700">圆形旋转载体</text><text x="1234" y="674" fill="#aa9a85">数字目标 Ø21.6 mm · 可回退</text>
+      <rect x="1200" y="714" width="560" height="86" rx="18"/><text x="1234" y="751" fill="#f1e6d5" font-weight="700">中央调节螺钉 / 隐藏挂绳孔</text><text x="1234" y="780" fill="#aa9a85">可见语义保留 · 孔深与公差未知</text>
+    </g>
+  </g>
+  <rect x="94" y="880" width="1732" height="116" rx="26" fill="#1d1824" stroke="#51495d" stroke-width="2"/>
+  <text x="130" y="927" fill="#f2edf5" font-family="Arial,sans-serif" font-size="26" font-weight="700">动作所有权</text>
+  <text x="130" y="965" fill="#bdb5c5" font-family="Arial,sans-serif" font-size="22">上壳只沿长轴滑动；背部圆形载体绕厚度轴旋转。两者由机械轨产生阻尼反馈；隐藏联动曲线保持未知。</text>
+</svg>

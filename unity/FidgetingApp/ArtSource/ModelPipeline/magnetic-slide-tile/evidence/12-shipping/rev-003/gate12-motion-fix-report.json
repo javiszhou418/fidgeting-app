@@ -1,0 +1,18 @@
+{
+    "pass": true,
+    "shippingScenePath": "Assets/_EDC/Scenes/MeshyEDC.unity",
+    "shippingSceneSha256": "b73676a208659c9f769bae438913cc6bfcba35ba1fb0ef06ae0683687f62117c",
+    "sourceEvidenceRevision": 2,
+    "evidenceRevision": 3,
+    "rootCause": "Travel used converted local +Z, which mapped to world-up; rotation used converted local Y, which mapped off-plane.",
+    "correctedSlideAxis": "TopLocalSlide local -Y",
+    "correctedRotationAxis": "MovingTop/RotatingCarrier local +Z",
+    "travelMeters": 0.01807643286883831,
+    "angleDegrees": 0.0,
+    "topStackHeightResidualMeters": 9.313225746154786e-10,
+    "outOfPlaneSlideResidualMeters": 0.0,
+    "fixedAxisConstraintResidual": 0.0,
+    "renderersRemainAttached": true,
+    "acceptedViewsCopiedByteForByte": true,
+    "buildInstallPhone": false
+}

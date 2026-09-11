@@ -1,0 +1,156 @@
+{
+  "schema": "premium-display-case-gate04-animation-quality.v1",
+  "modelId": "premium-display-case",
+  "gate": "04-architecture",
+  "architectureRevision": 1,
+  "evidenceRevision": 2,
+  "status": "pass",
+  "reviewState": "ready_for_review",
+  "approvalEffect": "none",
+  "gate05Status": "blocked",
+  "feedbackDisposition": "insufficient-evidence-to-judge-not-architecture-rejection",
+  "truth": {
+    "artifactClass": "schematic-architecture-demo",
+    "newGeometry": false,
+    "blenderRender": false,
+    "unityCapture": false,
+    "shippingAnimation": false,
+    "appReveal": false
+  },
+  "animation": {
+    "path": "architecture-schematic-demo.gif",
+    "sha256": "c96feb8193a8348ef3cec3fa12dbb7022e00aefc8e76f4bc2a58ea75c26e75bb",
+    "widthPixels": 1280,
+    "heightPixels": 960,
+    "authoredFrameCount": 126,
+    "quantizedFrameCount": 126,
+    "encodedFrameCount": 65,
+    "fps": 12,
+    "encodedDurationMilliseconds": 10250,
+    "loop": true,
+    "paletteColors": 192,
+    "dither": false,
+    "sourceAssetIds": [
+      "display-case-modeling-contract-r001",
+      "premium-display-case-part-tree-r001",
+      "premium-display-case-exploded-plan-r001",
+      "premium-display-case-architecture-preview-r001"
+    ]
+  },
+  "contactSheet": {
+    "path": "architecture-schematic-contact-sheet.png",
+    "sha256": "c7fd6c10e1018a4aeadf9a29a041768acd6025bc0f2887f031d09e6e6a24b4f6",
+    "sampleCount": 11,
+    "samples": [
+      {
+        "name": "assembled",
+        "frameIndex": 5
+      },
+      {
+        "name": "front-shell",
+        "frameIndex": 20
+      },
+      {
+        "name": "connected-loop",
+        "frameIndex": 32
+      },
+      {
+        "name": "label-cover",
+        "frameIndex": 44
+      },
+      {
+        "name": "tactile-insert",
+        "frameIndex": 56
+      },
+      {
+        "name": "content-slot-prize",
+        "frameIndex": 68
+      },
+      {
+        "name": "rear-shell",
+        "frameIndex": 80
+      },
+      {
+        "name": "complete-exploded",
+        "frameIndex": 86
+      },
+      {
+        "name": "motion-ownership",
+        "frameIndex": 96
+      },
+      {
+        "name": "reassembling",
+        "frameIndex": 108
+      },
+      {
+        "name": "reassembled",
+        "frameIndex": 121
+      }
+    ]
+  },
+  "metrics": {
+    "maximumAdjacentMeanRgbDifference": 9.2591,
+    "meanAdjacentMeanRgbDifference": 1.4037,
+    "assembledHoldDifference": 0.0,
+    "minimumNormalizedDepthGap": 1.1,
+    "minimumBodyFontPixels": 24,
+    "minimumObjectMicrotagPixels": 18
+  },
+  "checks": [
+    {
+      "id": "subject-dominance",
+      "status": "pass",
+      "evidence": "The portrait assembly remains the largest visual object; the sidebar does not overlap it."
+    },
+    {
+      "id": "layer-separation",
+      "status": "pass",
+      "evidence": "Six color-coded architecture groups reach distinct Z offsets; minimum normalized depth gap is 1.1."
+    },
+    {
+      "id": "silhouette-stability",
+      "status": "pass",
+      "evidence": "Every schematic part keeps constant dimensions and only translates along the projected Z axis. Overall expansion is the deliberate exploded-plan action."
+    },
+    {
+      "id": "flicker",
+      "status": "pass",
+      "evidence": "One fixed 192-color palette, no dithering; max adjacent mean RGB difference 9.259, average 1.404, assembled hold difference 0.000."
+    },
+    {
+      "id": "label-readability",
+      "status": "pass",
+      "evidence": "Review narrative text is at least 24px at 1280×960; 18px object microtags repeat in the sidebar at 24px, and every frame carries the 28px internal-review watermark."
+    },
+    {
+      "id": "hierarchy",
+      "status": "pass",
+      "evidence": "The hold frame states the approved PresentationRoot → CaseAssembly tree, both shell branches, label zones, ContentSlot anchor, and PrizeContent child."
+    },
+    {
+      "id": "motion-coherence",
+      "status": "pass",
+      "evidence": "Each rigid separation uses sine-in-out easing, pauses for review, then reassembles. No bounce, morph, part rotation, or prize spin is authored."
+    },
+    {
+      "id": "export-truth",
+      "status": "pass",
+      "evidence": "The GIF and contact sheet state that they are schematic architecture evidence, not Blender, Unity, shipping, or app-reveal footage."
+    },
+    {
+      "id": "connected-perimeter",
+      "status": "pass",
+      "evidence": "The perimeter is drawn as one closed rounded ring and labeled as one connected part with no edge children."
+    },
+    {
+      "id": "shipping-boundary",
+      "status": "pass",
+      "evidence": "Every frame states that shipping stays assembled: whole-case Y 360°, one highlight, then hover; prize independent angular velocity remains zero."
+    },
+    {
+      "id": "contact-sheet-coverage",
+      "status": "pass",
+      "evidence": "The sheet includes assembled, all six separation stages, complete exploded, motion ownership, reassembling, and reassembled states."
+    }
+  ]
+}

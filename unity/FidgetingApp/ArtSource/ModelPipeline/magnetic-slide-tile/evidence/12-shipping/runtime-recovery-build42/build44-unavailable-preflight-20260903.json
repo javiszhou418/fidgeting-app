@@ -1,0 +1,42 @@
+{
+  "schemaVersion": 1,
+  "modelId": "magnetic-slide-tile",
+  "requestedBuildNumber": 44,
+  "timestamp": "2026-09-03T00:10:00Z",
+  "pipelineRevisionBefore": 305,
+  "visualApproval": "gate11-r014-approved-build44-authorized",
+  "shippingMaterial": "gate11-r014-detail-depth-hybrid",
+  "shippingLighting": "B-balanced-brighter",
+  "diskFreeGiB": 158,
+  "activeUnityOrXcodeWriter": false,
+  "device": {
+    "marketingName": "iPhone 15 Pro Max",
+    "reality": "physical",
+    "identifier": "556E86BF-7295-5622-AA58-02DF84A8E93F",
+    "udid": "00008130-001A00361EE0001C",
+    "pairingState": "paired",
+    "developerModeStatus": "enabled",
+    "tunnelState": "unavailable",
+    "ddiServicesAvailable": false,
+    "passcodeRequired": "not-queryable-device-unreachable",
+    "lastConnectionDate": "2026-09-02T08:37:00Z"
+  },
+  "diagnosis": {
+    "phase": "device-preflight",
+    "error": "CoreDeviceError 1002: No provider was found.",
+    "blocker": "The paired physical iPhone is not connected to a CoreDevice provider. DDI and lock-state queries cannot run.",
+    "requiredAction": "Reconnect the iPhone by USB or restore its local-network CoreDevice tunnel, keep it unlocked, then retry."
+  },
+  "build44": {
+    "numberConsumed": false,
+    "snapshotCreated": false,
+    "preflightStarted": false,
+    "unityExportStarted": false,
+    "xcodeBuildStarted": false,
+    "signed": false,
+    "installed": false,
+    "launched": false
+  },
+  "appStoreSubmitted": false,
+  "deviceAcceptance": "pending-build44-install-and-user-validation"
+}

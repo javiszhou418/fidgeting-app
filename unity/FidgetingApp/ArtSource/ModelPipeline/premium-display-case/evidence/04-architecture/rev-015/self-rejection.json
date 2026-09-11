@@ -1,0 +1,76 @@
+{
+  "schema": "premium-display-case-gate04-r015-self-rejection.v1",
+  "outcome": "self-rejected",
+  "reviewedAt": "2026-08-31T06:04:15.591Z",
+  "exactUserMotionChoice": "卡包的容纳／抽出因果＋箔层双层剥离",
+  "visualVerdict": "Rejected. The first capture is edge-on. The one allowed root-orientation correction makes the Pack face visible but upside down; frames 14–68 remain a sealed rectangular pouch with no readable tear, physical mouth, containment, or continuous extraction. The case only reads after the Pack disappears, so a neutral reviewer cannot infer pouch opening → contained case → extraction.",
+  "firstCapture": {
+    "outcome": "rejected-pre-polish",
+    "issue": "Pack rendered edge-on as horizontal strips.",
+    "contactSheet": "unity/FidgetingApp/ArtSource/ModelPipeline/premium-display-case/evidence/04-architecture/rev-015/attempt-01-edge-on/seven-pose-contact-sheet.png"
+  },
+  "onlyMicroPolish": {
+    "change": "Unity Pack root rotation -90° X → identity",
+    "outcome": "rejected",
+    "issue": "Face orientation recovered but printed artwork is upside down and shape-key opening is not visually legible.",
+    "contactSheet": "unity/FidgetingApp/ArtSource/ModelPipeline/premium-display-case/evidence/04-architecture/rev-015/attempt-02-orientation-micro-polish/seven-pose-contact-sheet.png"
+  },
+  "fullSizePosesReviewed": [
+    {
+      "frame": 0,
+      "path": "unity/FidgetingApp/ArtSource/ModelPipeline/premium-display-case/evidence/04-architecture/rev-015/attempt-02-orientation-micro-polish/primary/frame-0000.png",
+      "sha256": "a0ccff174e93b31c5e033e82c9a815476a4c059d45d71695da8352c917d70b35"
+    },
+    {
+      "frame": 14,
+      "path": "unity/FidgetingApp/ArtSource/ModelPipeline/premium-display-case/evidence/04-architecture/rev-015/attempt-02-orientation-micro-polish/primary/frame-0014.png",
+      "sha256": "e40b6f221e5516dba154cb7caf90b87bcb93d1a2649619c924a9ab9290d90dc6"
+    },
+    {
+      "frame": 26,
+      "path": "unity/FidgetingApp/ArtSource/ModelPipeline/premium-display-case/evidence/04-architecture/rev-015/attempt-02-orientation-micro-polish/primary/frame-0026.png",
+      "sha256": "6baa24dbc112ee70b964013cd5b0b68bb2c672650d2e5d51476f9f0972a41e64"
+    },
+    {
+      "frame": 42,
+      "path": "unity/FidgetingApp/ArtSource/ModelPipeline/premium-display-case/evidence/04-architecture/rev-015/attempt-02-orientation-micro-polish/primary/frame-0042.png",
+      "sha256": "6baa24dbc112ee70b964013cd5b0b68bb2c672650d2e5d51476f9f0972a41e64"
+    },
+    {
+      "frame": 56,
+      "path": "unity/FidgetingApp/ArtSource/ModelPipeline/premium-display-case/evidence/04-architecture/rev-015/attempt-02-orientation-micro-polish/primary/frame-0056.png",
+      "sha256": "6baa24dbc112ee70b964013cd5b0b68bb2c672650d2e5d51476f9f0972a41e64"
+    },
+    {
+      "frame": 68,
+      "path": "unity/FidgetingApp/ArtSource/ModelPipeline/premium-display-case/evidence/04-architecture/rev-015/attempt-02-orientation-micro-polish/primary/frame-0068.png",
+      "sha256": "6baa24dbc112ee70b964013cd5b0b68bb2c672650d2e5d51476f9f0972a41e64"
+    },
+    {
+      "frame": 95,
+      "path": "unity/FidgetingApp/ArtSource/ModelPipeline/premium-display-case/evidence/04-architecture/rev-015/attempt-02-orientation-micro-polish/primary/frame-0095.png",
+      "sha256": "515fc61504f2460138dd22ff9c8064e2c4b3f824e981fba44b0a59ebb29682a2"
+    }
+  ],
+  "structuralCapture": "The isolated capture report passed continuity and zero-VFX diagnostics only. Those metrics do not establish the required visual causality.",
+  "tests": {
+    "path": "unity/FidgetingApp/ArtSource/ModelPipeline/premium-display-case/evidence/04-architecture/rev-015/isolated-r015-check-results.xml",
+    "result": "5/5 pass",
+    "scope": "Pack-only geometry, identity, reversibility, containment state, and forbidden-port checks"
+  },
+  "sourceMapping": "unity/FidgetingApp/ArtSource/ModelPipeline/premium-display-case/evidence/04-architecture/rev-015/source-to-canonical-mapping.json",
+  "runtimeRepresentation": "unity/FidgetingApp/ArtSource/ModelPipeline/premium-display-case/evidence/04-architecture/rev-015/runtime-representation.json",
+  "preservedRejectedEvidenceRevisions": [
+    8,
+    9,
+    10,
+    11,
+    12,
+    13,
+    14
+  ],
+  "approvalRequestAllowed": false,
+  "shippingReady": false,
+  "physicalPhoneInstalled": false,
+  "statusText": "视觉批准待确认，未推送手机"
+}

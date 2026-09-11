@@ -1,0 +1,228 @@
+{
+  "schemaVersion": 1,
+  "modelId": "premium-display-case",
+  "gate": "10-export",
+  "exportRevision": 1,
+  "status": "pass",
+  "notice": "READY FOR EXPORT REVIEW · NOT IMPORTED INTO UNITY",
+  "pipelineRevisionAtBuild": 67,
+  "sourceGate09": {
+    "environmentRevision": 1,
+    "approvalEventId": "04560468-01da-4a1f-8bc8-a324966490d6",
+    "approvalQuote": "环境正确，批准并继续（推荐）",
+    "approvalScope": [
+      "current-gate09-environment-rev1",
+      "static-low-detail-environment-direction",
+      "subject-support-no-competing-detail",
+      "no-color-cast-detached-halo-bright-blob",
+      "no-background-motion-particles",
+      "mesh-clipped-sheen-remains-inside-case",
+      "blender-values-lookdev-candidates-only",
+      "unity-runtime-values-remain-tunable",
+      "placeholder-label-content-excluded"
+    ]
+  },
+  "sourceGate07": {
+    "blendPath": "unity/FidgetingApp/ArtSource/ModelPipeline/premium-display-case/evidence/07-material/rev-002/premium-display-case-material-r002.blend",
+    "blendSha256": "076f5dd07f8e611ceaaabb7d1a92790659a7fcf9c1dd04dcd8e1fc7e9684dd49",
+    "materialDigest": "8358cfdb12e49f87adbbafd96f33f2beb3415f9b920cb62732c73173c7799210"
+  },
+  "governingContract": {
+    "id": "premium-display-case-modeling-contract-r003",
+    "sha256": "1aea4db5fb45e61b936c5145d83d39a2e2a4abfe000dddb46cfdb200f76023f3"
+  },
+  "package": {
+    "blend": {
+      "path": "unity/FidgetingApp/ArtSource/ModelPipeline/premium-display-case/evidence/10-export/rev-001/premium-display-case-product-r001.blend",
+      "sha256": "453874ba2edf75fb90449702ef9b50fb059010ee6eefcc2c4e603f034fd0c0eb",
+      "sizeBytes": 1262288
+    },
+    "fbx": {
+      "path": "unity/FidgetingApp/ArtSource/ModelPipeline/premium-display-case/evidence/10-export/rev-001/premium-display-case-product-r001.fbx",
+      "sha256": "21c9db68723f0006d7c6bfec5280cafe55c16cf5392ff97c365c966e91f847ae",
+      "sizeBytes": 1389132
+    },
+    "glb": {
+      "path": "unity/FidgetingApp/ArtSource/ModelPipeline/premium-display-case/evidence/10-export/rev-001/premium-display-case-product-r001.glb",
+      "sha256": "fb22fc333c0c5fbc715385ca510dbf0ee4a18b9847f64764b4511e0278ba4df8",
+      "sizeBytes": 1810676
+    }
+  },
+  "product": {
+    "dimensionsMm": {
+      "width": 228,
+      "height": 304,
+      "depth": 59
+    },
+    "authoringAxis": "X-width/Y-height/Z-front",
+    "pivot": "PresentationRoot at assembled envelope center",
+    "hierarchy": {
+      "parents": {
+        "PresentationRoot": null,
+        "CaseAssembly": "PresentationRoot",
+        "RearPolycarbonateShell": "CaseAssembly",
+        "TactileBackgroundInsert": "RearPolycarbonateShell",
+        "ContentSlot": "RearPolycarbonateShell",
+        "FrontPolycarbonateShell": "CaseAssembly",
+        "ContinuousTubePerimeter": "FrontPolycarbonateShell",
+        "PhysicalLabel": "FrontPolycarbonateShell",
+        "LogoZone": "PhysicalLabel",
+        "AchievementZone": "PhysicalLabel",
+        "NarrowFoil": "PhysicalLabel",
+        "TransparentCover": "FrontPolycarbonateShell"
+      },
+      "runtimeMotionOwner": "PresentationRoot",
+      "rigidAssembly": "CaseAssembly",
+      "contentSlot": "caller-owned-empty",
+      "sameWholeCase": true
+    },
+    "objectCount": 12,
+    "meshCount": 5,
+    "triangleCount": 100016,
+    "geometryDigest": "c4a8e0dbf0bc5825ebc1fe283d2f069ff63826e16a738fdf875a952e8317ee8b",
+    "approvedGeometryDigest": "a3d1e9fe3c6d26c957c7ad1584cc489b9091a1a79e435a660aa89bcf6acc3951",
+    "materialAssignments": {
+      "RearPolycarbonateShell": [
+        "MAT_FrostedPolycarbonate"
+      ],
+      "TactileBackgroundInsert": [
+        "MAT_BlackFlocking"
+      ],
+      "FrontPolycarbonateShell": [
+        "MAT_FrostedPolycarbonate"
+      ],
+      "ContinuousTubePerimeter": [
+        "MAT_FrostedPolycarbonateEdge"
+      ],
+      "PhysicalLabel": [
+        "MAT_LabelPaper"
+      ]
+    },
+    "labelCenterYmm": 99,
+    "labelUv": {
+      "layers": [
+        "LabelUV"
+      ],
+      "coordinateCount": 576,
+      "minimum": [
+        0.0,
+        0.0
+      ],
+      "maximum": [
+        1.0,
+        1.0
+      ]
+    },
+    "labelZones": {
+      "paperGeometry": "PhysicalLabel",
+      "uvLayer": "LabelUV",
+      "transparentCover": "TransparentCover metadata contour",
+      "narrowFoil": "NarrowFoil metadata contour",
+      "runtimeAnchors": [
+        "LogoZone",
+        "AchievementZone"
+      ]
+    },
+    "connectedTubePreserved": true,
+    "concentricCornersPreserved": true
+  },
+  "roundTrip": {
+    "status": "pass",
+    "maximumVertexErrorMm": {
+      "fbx": 4.1788e-05,
+      "glb": 1.7166e-05
+    },
+    "geometryDigestIdentity": true,
+    "triangleCountIdentity": true,
+    "exportWindingDigestIdentity": true,
+    "positiveMaterialVolumes": true,
+    "boundsIdentityWithinMm": 0.001,
+    "materialAssignmentsIdentity": true,
+    "hierarchyIdentity": true
+  },
+  "labelPolicy": {
+    "paperGeometryPreserved": true,
+    "transparentCoverContourPreserved": true,
+    "narrowFoilContourPreserved": true,
+    "placeholderTextBaked": false,
+    "fakeCollectibleIdBaked": false,
+    "authoritativeContent": "Unity runtime data"
+  },
+  "runtimeBoundary": {
+    "labelContentAuthority": "Unity runtime data",
+    "placeholderTextBaked": false,
+    "fakeCollectibleIdBaked": false,
+    "animationBaked": false,
+    "timingBaked": false,
+    "easingBaked": false,
+    "entryPathBaked": false,
+    "showcaseRotationBaked": false,
+    "lightCuesBaked": false
+  },
+  "collision": {
+    "schemaVersion": 1,
+    "modelId": "premium-display-case",
+    "gate": "10-export",
+    "exportRevision": 1,
+    "status": "pass",
+    "included": false,
+    "approvedCollisionProxyFound": false,
+    "selectionProxyFound": false,
+    "inventedGeometry": false,
+    "reason": "No approved simple collision or selection proxy exists. The product package contains no collision geometry.",
+    "requiredSlotDisposition": "This policy record satisfies collision-export evidence without misrepresenting a JSON declaration as collision mesh."
+  },
+  "excluded": {
+    "toyPrize": true,
+    "proxyGeometry": true,
+    "explodedGeometry": true,
+    "lightGeometry": true,
+    "externalHalo": true,
+    "particlesVfx": true,
+    "cameraBackground": true,
+    "collisionGeometry": true
+  },
+  "review": {
+    "interactiveArtifact": "unity/FidgetingApp/ArtSource/ModelPipeline/premium-display-case/evidence/10-export/rev-001/premium-display-case-product-r001.glb",
+    "board": "unity/FidgetingApp/ArtSource/ModelPipeline/premium-display-case/evidence/10-export/rev-001/export-review.png",
+    "boardSha256": "e2c5a70d494989d93cca2f32aa09e411e58318d1b45a4d1edc0c46ccfb07fcb6",
+    "wholeAssembledCaseOnly": true,
+    "reviewExplodedPartCount": 0,
+    "approvalChecklist": [
+      "open-and-orbit-real-exported-glb",
+      "inspect-front-back-top-left-right-hero",
+      "confirm-whole-assembled-case-only",
+      "confirm-228x304x59-mm-and-origin-pivot",
+      "confirm-hierarchy-and-empty-content-slot",
+      "confirm-label-paper-cover-foil-zones-and-runtime-content-boundary",
+      "confirm-no-animation-proxy-explode-toy-light-vfx-camera-background",
+      "confirm-fbx-glb-roundtrip-and-winding"
+    ]
+  },
+  "validation": {
+    "roundTrip": {
+      "path": "unity/FidgetingApp/ArtSource/ModelPipeline/premium-display-case/evidence/10-export/rev-001/export-roundtrip-validation.json",
+      "sha256": "c83359f1249676d1040503b460a71ee0f8965fb85ecfd35552497c3e7091732f"
+    },
+    "glbStructure": {
+      "path": "unity/FidgetingApp/ArtSource/ModelPipeline/premium-display-case/evidence/10-export/rev-001/glb-structure-validation.json",
+      "sha256": "cb9f629831b38cb248e85234e19fb4af0e43e6a54f21b6fb88e84e8f8dfe03b8"
+    },
+    "render": {
+      "path": "unity/FidgetingApp/ArtSource/ModelPipeline/premium-display-case/evidence/10-export/rev-001/export-render-report.json",
+      "sha256": "c56e9e374cb9ed264d1fedfbb40410c1ed8e693f52f8decd0a7dade7e895c4de"
+    },
+    "links": {
+      "path": "unity/FidgetingApp/ArtSource/ModelPipeline/premium-display-case/evidence/10-export/rev-001/validation-links.json",
+      "sha256": "7c38c3fe85eb1e3bb818c555838a41733832a11a7b590ab5b6ead98553a85ce7"
+    },
+    "optimization": {
+      "path": "unity/FidgetingApp/ArtSource/ModelPipeline/premium-display-case/evidence/10-export/rev-001/asset-optimization-report.json",
+      "sha256": "b0a356d6bff3041a33371d72f1d287009479dea84d533eb4c9fb02e5776b2fc8"
+    }
+  },
+  "gate11Entered": false,
+  "shippingUnityChanged": false,
+  "simulatorBuilt": false,
+  "buildInstallPhonePush": false
+}

@@ -1,0 +1,565 @@
+{
+  "schemaVersion": 1,
+  "modelId": "premium-display-case",
+  "contractRevision": 2,
+  "createdDate": "2026-08-26",
+  "stageStatus": "ready_for_review",
+  "approvalEffect": "none-until-explicit-gate-03-user-approval",
+  "sourceTaskId": "504719bf-a4a3-44c2-b1f3-a3bd342e5ae3",
+  "sourceClaimIds": [
+    "premium-display-case-analysis-closed-loop-r003",
+    "premium-display-case-analysis-manifold-r003",
+    "premium-display-case-analysis-background-r003",
+    "premium-display-case-analysis-label-r003",
+    "premium-display-case-analysis-portrait-r003",
+    "premium-display-case-analysis-motion-r003",
+    "premium-display-case-analysis-identity-boundary-r003",
+    "premium-display-case-analysis-environment-r003",
+    "premium-display-case-analysis-static-preservation-r003",
+    "premium-display-case-analysis-rigid-target-r003",
+    "premium-display-case-analysis-duration-lock-r003"
+  ],
+  "sourceAssetIds": [
+    "premium-display-case-user-motion-reference-r003",
+    "premium-display-case-motion-rive-source-r003",
+    "premium-display-case-motion-swift-binding-r003",
+    "premium-display-case-motion-main-app-log-r003",
+    "premium-display-case-motion-standalone-log-r003",
+    "premium-display-case-real-rive-frame-start-r003",
+    "premium-display-case-real-rive-frame-quarter-r003",
+    "premium-display-case-real-rive-frame-userNearest-r003",
+    "premium-display-case-real-rive-frame-half-r003",
+    "premium-display-case-real-rive-frame-threeQuarter-r003",
+    "premium-display-case-real-rive-frame-frontToEdge-r003",
+    "premium-display-case-real-rive-frame-edge-r003",
+    "premium-display-case-real-rive-frame-reverse-r003",
+    "premium-display-case-real-rive-frame-end-r003",
+    "premium-display-case-motion-rejection-r003",
+    "premium-display-case-rive-authored-motion-extract-r003",
+    "premium-display-case-motion-analysis-generator-r003",
+    "premium-display-case-real-rive-motion-contact-sheet-r003",
+    "premium-display-case-motion-axis-analysis-board-r003",
+    "premium-display-case-real-rive-motion-measurements-r003",
+    "premium-display-case-measured-motion-schematic-gif-r003",
+    "premium-display-case-measured-motion-schematic-contact-r003",
+    "premium-display-case-motion-animation-quality-r003",
+    "premium-display-case-motion-reference-manifest-r003",
+    "premium-display-case-user-screenshot-analysis-r003",
+    "premium-display-case-real-rive-frame-analysis-r003",
+    "premium-display-case-motion-landmark-validation-r003",
+    "premium-display-case-gate02-rev3-user-approval"
+  ],
+  "userSelections": {
+    "scope": "只纠正动画；静态结构保留",
+    "targetMotion": "整盒刚性；用 pitch/yaw/roll 复合翻转",
+    "continueQuote": "继续"
+  },
+  "units": {
+    "geometry": "millimeters",
+    "angles": "degrees",
+    "time": "seconds",
+    "imageResidual": "pixels"
+  },
+  "coordinateSystem": {
+    "authoring": "x width-right, y height-up, z depth-front",
+    "origin": "assembled outer-envelope center",
+    "motionOwner": "PresentationRoot",
+    "fitCamera": "OpenCV x-right, y-down, z-forward diagnostic camera",
+    "poseAuthority": "presentationQuaternionWxyz plus camera-space translation; Euler values are decomposition only"
+  },
+  "staticPreservation": {
+    "decisionState": "locked-historical-values-preserved-by-user-motion-only-selection",
+    "geometryMutationAllowed": false,
+    "materialMutationAllowed": false,
+    "portraitEnvelope": {
+      "widthMm": 228.0,
+      "heightMm": 304.0,
+      "depthMm": 59.0,
+      "widthHeightRatio": 0.75
+    },
+    "closedTube": {
+      "outerSectionMm": {
+        "width": 10.0,
+        "depth": 9.0
+      },
+      "passageSectionMm": {
+        "width": 6.0,
+        "depth": 5.0
+      },
+      "wallThicknessMm": 2.0,
+      "profileCornerRadiusMm": 3.0,
+      "passageCornerRadiusMm": 1.0,
+      "outerCornerRadiusMm": 20.0,
+      "centerlineCornerRadiusMm": 15.0,
+      "innerCornerRadiusMm": 10.0,
+      "connectivity": "one connected manifold",
+      "openBoundaryEdgeCount": 0,
+      "channelFloodFill": "384/384"
+    },
+    "physicalLabel": {
+      "widthMm": 184.0,
+      "heightMm": 58.0,
+      "centerYmm": 99.0
+    },
+    "contentSlot": {
+      "widthMm": 180.0,
+      "heightMm": 198.0,
+      "depthMm": 48.0,
+      "owner": "caller"
+    },
+    "concentricCornerFamilies": {
+      "maximumDriftMm": 0.0,
+      "toleranceMm": 0.01,
+      "caseTubeShellCentersMm": [
+        [
+          -94,
+          -132
+        ],
+        [
+          -94,
+          132
+        ],
+        [
+          94,
+          -132
+        ],
+        [
+          94,
+          132
+        ]
+      ],
+      "mainDisplayChamberCentersMm": [
+        [
+          -75,
+          -127
+        ],
+        [
+          -75,
+          43
+        ],
+        [
+          75,
+          -127
+        ],
+        [
+          75,
+          43
+        ]
+      ],
+      "physicalLabelCentersMm": [
+        [
+          -86,
+          76
+        ],
+        [
+          -86,
+          122
+        ],
+        [
+          86,
+          76
+        ],
+        [
+          86,
+          122
+        ]
+      ]
+    },
+    "materialRanges": {
+      "decisionState": "historical-approved-retained-no-material-edit",
+      "zones": [
+        "closed frosted-polycarbonate tube and shell",
+        "clearer polycarbonate edge response",
+        "black flocked chamber",
+        "warm neutral physical label stock",
+        "dark physical print",
+        "one narrow non-emissive rarity foil",
+        "unchanged canonical prize materials"
+      ],
+      "pbrValues": {
+        "frostedPolycarbonateShell": {
+          "ior": 1.585,
+          "roughness": 0.22,
+          "transmissionWeight": 0.92,
+          "micrograinFeatureSizeMm": 0.62,
+          "micrograinCoordinateSpace": "object-local"
+        },
+        "continuousTubeEdge": {
+          "ior": 1.585,
+          "roughness": 0.18,
+          "transmissionWeight": 0.78,
+          "micrograinFeatureSizeMm": 0.58,
+          "micrograinCoordinateSpace": "object-local"
+        },
+        "blackTactileInsert": {
+          "roughness": 0.91,
+          "micrograinFeatureSizeMm": 0.48,
+          "micrograinBumpDistanceMm": 0.16,
+          "micrograinCoordinateSpace": "object-local"
+        },
+        "physicalLabelPaper": {
+          "roughness": 0.73,
+          "micrograinFeatureSizeMm": 0.44,
+          "micrograinCoordinateSpace": "object-local"
+        },
+        "narrowNeutralSilverFoil": {
+          "metallic": 0.96,
+          "roughness": 0.3,
+          "micrograinFeatureSizeMm": 0.38,
+          "micrograinCoordinateSpace": "object-local"
+        }
+      },
+      "background": {
+        "world": {
+          "baseColor": [
+            0.032,
+            0.033,
+            0.035,
+            1
+          ],
+          "strength": 0.28,
+          "imageTextureCount": 0,
+          "proceduralNoiseCount": 0,
+          "radialHalo": false,
+          "fixedGreenBias": false
+        },
+        "surface": {
+          "material": "MAT_M07_ContinuousNeutralFriction",
+          "metallic": 0,
+          "roughness": 0.84,
+          "linearLuminanceRange": [
+            0.045,
+            0.063
+          ],
+          "maximumSaturation": 0.12,
+          "grainFeatureSizeMm": 0.5,
+          "normalPeakToPeakMm": 0.08,
+          "coordinateSource": "Texture Coordinate:Object",
+          "localNoiseMasks": 0,
+          "radialHalo": false,
+          "fixedGreenBias": false
+        }
+      }
+    },
+    "toyScope": {
+      "status": "out-of-scope-caller-owned-content",
+      "attachment": "ContentSlot",
+      "geometryChanged": false,
+      "materialsChanged": false,
+      "artworkChanged": false,
+      "pivotChanged": false,
+      "physicsChanged": false,
+      "hapticsChanged": false,
+      "mechanismChanged": false
+    }
+  },
+  "closedTubeFrame": {
+    "topology": {
+      "connectivity": "one connected manifold",
+      "path": "one cyclic perimeter through four tangent-continuous bends",
+      "openBoundaryEdges": 0
+    }
+  },
+  "motionContract": {
+    "decisionState": "gate03-rev2-pending-user-approval",
+    "target": "one rigid assembled Portrait cuboid",
+    "motionOwner": "PresentationRoot",
+    "poseSamplesAsset": "unity/FidgetingApp/ArtSource/ModelPipeline/premium-display-case/evidence/03-contract/rev-002/rigid-motion-fit.json",
+    "poseRepresentation": "normalized WXYZ quaternion, camera-space translation, uniform scale 1.0, diagnostic framing scale",
+    "interpolation": "piecewise quaternion slerp with adjacent sign continuity; translation and framing follow measured sample times",
+    "physicalAxisClaim": null,
+    "eulerUse": "readable decomposition only",
+    "prohibited": [
+      "pure Y turntable",
+      "pure X rotation replacement",
+      "single-axis physical claim",
+      "non-rigid Rive mesh deformation",
+      "independent foreground/background layer deformation",
+      "non-uniform scale",
+      "explode",
+      "part separation",
+      "assembly",
+      "reassembly"
+    ],
+    "timeline": {
+      "source": {
+        "rootFrames": 210,
+        "fps": 60,
+        "durationMilliseconds": 3500.0,
+        "entryFrames": [
+          0,
+          29
+        ],
+        "visibleFlipFrames": [
+          29,
+          42
+        ],
+        "childTimelineFrames": [
+          0,
+          60
+        ]
+      },
+      "contract": {
+        "durationMilliseconds": 4520.833,
+        "durationSeconds": 4.520833,
+        "uniformTimeScale": 1.291666571429,
+        "policy": "time-scale measured path only",
+        "segments": [
+          {
+            "id": "entry",
+            "sourceFrames": [
+              0,
+              29
+            ],
+            "sourceMilliseconds": [
+              0.0,
+              483.333333
+            ],
+            "contractMilliseconds": [
+              0.0,
+              624.305509
+            ],
+            "sourceBasis": "root transform convergence"
+          },
+          {
+            "id": "front-to-edge",
+            "sourceFrames": [
+              29,
+              36
+            ],
+            "sourceMilliseconds": [
+              483.333333,
+              600.0
+            ],
+            "contractMilliseconds": [
+              624.305509,
+              774.999943
+            ],
+            "sourceBasis": "verified Rive frame landmarks"
+          },
+          {
+            "id": "edge-to-reverse",
+            "sourceFrames": [
+              36,
+              39
+            ],
+            "sourceMilliseconds": [
+              600.0,
+              650.0
+            ],
+            "contractMilliseconds": [
+              774.999943,
+              839.583271
+            ],
+            "sourceBasis": "verified Rive frame landmarks"
+          },
+          {
+            "id": "reverse-to-front",
+            "sourceFrames": [
+              39,
+              42
+            ],
+            "sourceMilliseconds": [
+              650.0,
+              700.0
+            ],
+            "contractMilliseconds": [
+              839.583271,
+              904.1666
+            ],
+            "sourceBasis": "verified Rive frame landmarks"
+          },
+          {
+            "id": "single-highlight-window",
+            "sourceFrames": [
+              42,
+              60
+            ],
+            "sourceMilliseconds": [
+              700.0,
+              1000.0
+            ],
+            "contractMilliseconds": [
+              904.1666,
+              1291.666571
+            ],
+            "sourceBasis": "remaining canonical one-shot child timeline",
+            "implementationState": "deferred-downstream-validation"
+          },
+          {
+            "id": "settled-hold",
+            "sourceFrames": [
+              60,
+              210
+            ],
+            "sourceMilliseconds": [
+              1000.0,
+              3500.0
+            ],
+            "contractMilliseconds": [
+              1291.666571,
+              4520.833
+            ],
+            "sourceBasis": "root timeline remainder"
+          }
+        ]
+      },
+      "hover": {
+        "implementationState": "deferred-downstream-validation",
+        "insideLockedDuration": false,
+        "startsOnlyAfterPresentationCompletion": true,
+        "independentPrizeAngularVelocity": 0.0
+      }
+    },
+    "singleHighlight": {
+      "count": 1,
+      "implementationState": "deferred-downstream-validation",
+      "poseEffect": "none"
+    },
+    "hover": {
+      "implementationState": "deferred-downstream-validation",
+      "insideLockedDuration": false,
+      "startsOnlyAfterPresentationCompletion": true,
+      "independentPrizeAngularVelocity": 0.0
+    },
+    "prize": {
+      "inheritsPresentationRoot": true,
+      "independentAngularVelocity": 0.0,
+      "mechanismStateChanged": false
+    },
+    "fitTruth": {
+      "exactFitClaimed": false,
+      "residualSummaryPixels": {
+        "sampleCount": 9,
+        "cornerCount": 36,
+        "mean": 6.780574,
+        "rmse": 11.241096,
+        "maximum": 38.343513,
+        "maximumSampleLabel": "QUARTER",
+        "clippedSampleLabels": [
+          "QUARTER",
+          "USER-SCREENSHOT NEAREST",
+          "HALF"
+        ],
+        "unclippedMean": 2.938339,
+        "unclippedRmse": 3.809512,
+        "unclippedMaximum": 8.840549,
+        "exact": false
+      },
+      "cameraAssumptions": {
+        "purpose": "diagnostic Rive-quad fit only; not a shipping camera",
+        "model": "fixed pinhole",
+        "imageSizePixels": [
+          968,
+          660
+        ],
+        "principalPointPixels": [
+          484.0,
+          330.0
+        ],
+        "squarePixels": true,
+        "skew": 0.0,
+        "distortionCoefficients": [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "verticalFovDegrees": 71.75,
+        "focalLengthPixels": 456.296151,
+        "selection": "0.25-degree grid search from 20 to 85 degrees minimizing all-sample corner squared error",
+        "shippingCameraRangePreservedForLaterValidationDegrees": [
+          27.0,
+          31.0
+        ]
+      }
+    }
+  },
+  "revealMotion": {
+    "sequence": {
+      "events": [
+        "entry",
+        "front-to-edge",
+        "edge-to-reverse",
+        "reverse-to-front",
+        "single-highlight-window-deferred-validation",
+        "settled-hold"
+      ],
+      "prizeAngularVelocity": 0,
+      "wholeCaseOnly": true,
+      "explode": false
+    }
+  },
+  "camera": {
+    "diagnosticFit": {
+      "purpose": "diagnostic Rive-quad fit only; not a shipping camera",
+      "model": "fixed pinhole",
+      "imageSizePixels": [
+        968,
+        660
+      ],
+      "principalPointPixels": [
+        484.0,
+        330.0
+      ],
+      "squarePixels": true,
+      "skew": 0.0,
+      "distortionCoefficients": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "verticalFovDegrees": 71.75,
+      "focalLengthPixels": 456.296151,
+      "selection": "0.25-degree grid search from 20 to 85 degrees minimizing all-sample corner squared error",
+      "shippingCameraRangePreservedForLaterValidationDegrees": [
+        27.0,
+        31.0
+      ]
+    },
+    "shippingCamera": {
+      "decisionState": "historical-range-preserved-pending-downstream-revalidation",
+      "verticalFovDegrees": [
+        27.0,
+        31.0
+      ],
+      "depthOfField": "off",
+      "note": "The diagnostic fit FOV is not a shipping camera choice."
+    }
+  },
+  "claimDisposition": {
+    "premium-display-case-analysis-closed-loop-r003": "consume-without-expanding-approved-scope",
+    "premium-display-case-analysis-manifold-r003": "consume-without-expanding-approved-scope",
+    "premium-display-case-analysis-background-r003": "consume-without-expanding-approved-scope",
+    "premium-display-case-analysis-label-r003": "consume-without-expanding-approved-scope",
+    "premium-display-case-analysis-portrait-r003": "consume-without-expanding-approved-scope",
+    "premium-display-case-analysis-motion-r003": "lock-rigid-quaternion-best-fit-with-no-axis-overclaim",
+    "premium-display-case-analysis-identity-boundary-r003": "consume-without-expanding-approved-scope",
+    "premium-display-case-analysis-environment-r003": "consume-without-expanding-approved-scope",
+    "premium-display-case-analysis-static-preservation-r003": "preserve-historical-static-values",
+    "premium-display-case-analysis-rigid-target-r003": "lock-rigid-quaternion-best-fit-with-no-axis-overclaim",
+    "premium-display-case-analysis-duration-lock-r003": "lock-4.520833-second-uniform-time-scaled-path"
+  },
+  "route": {
+    "primary": "deterministic Python/OpenCV contract fit; Blender geometry remains unchanged",
+    "blenderGeometryEdit": false,
+    "materialEdit": false,
+    "shippingUnityEdit": false,
+    "buildInstallPhonePush": false,
+    "nextGatePolicy": "Do not enter Gate 04 before explicit Gate 03 approval."
+  },
+  "historyBoundary": {
+    "gate03Rev1": "preserved-stale",
+    "gate04Through08": "preserved-stale",
+    "staticArtifactsDeleted": false
+  },
+  "completeness": {
+    "complete": true,
+    "activeGate02ClaimCount": 11,
+    "allActiveGate02ClaimsConsumed": true
+  },
+  "approvalQuestion": "是否批准 Gate 03 rev 2：保留既有静态盒体与材质范围，并以图中有明确重投影残差的刚性 quaternion 复合翻转合同进入 Gate 04？"
+}

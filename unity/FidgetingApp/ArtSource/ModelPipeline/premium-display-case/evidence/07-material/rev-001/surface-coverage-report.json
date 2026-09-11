@@ -1,0 +1,83 @@
+{
+  "schemaVersion": 1,
+  "modelId": "premium-display-case",
+  "gate": "07-material",
+  "status": "pass",
+  "surfaceTaxonomy": {
+    "RearPolycarbonateShell": {
+      "closedSurface": true,
+      "frontCap": "assigned-formal-principled-material",
+      "backCap": "assigned-formal-principled-material",
+      "sidewall": "assigned-formal-principled-material",
+      "materialSlots": 1,
+      "polygonMaterialIndices": [
+        0
+      ],
+      "coordinatePolicy": "object-local"
+    },
+    "TactileBackgroundInsert": {
+      "closedSurface": true,
+      "frontCap": "assigned-formal-principled-material",
+      "backCap": "assigned-formal-principled-material",
+      "sidewall": "assigned-formal-principled-material",
+      "materialSlots": 1,
+      "polygonMaterialIndices": [
+        0
+      ],
+      "coordinatePolicy": "object-local"
+    },
+    "FrontPolycarbonateShell": {
+      "closedSurface": true,
+      "frontCap": "assigned-formal-principled-material",
+      "backCap": "assigned-formal-principled-material",
+      "sidewall": "assigned-formal-principled-material",
+      "materialSlots": 1,
+      "polygonMaterialIndices": [
+        0
+      ],
+      "coordinatePolicy": "object-local"
+    },
+    "ContinuousTubePerimeter": {
+      "closedSurface": true,
+      "frontCap": "assigned-formal-principled-material",
+      "backCap": "assigned-formal-principled-material",
+      "sidewall": "assigned-formal-principled-material",
+      "materialSlots": 1,
+      "polygonMaterialIndices": [
+        0
+      ],
+      "coordinatePolicy": "object-local"
+    },
+    "PhysicalLabel": {
+      "closedSurface": true,
+      "frontCap": "assigned-formal-principled-material",
+      "backCap": "assigned-formal-principled-material",
+      "sidewall": "assigned-formal-principled-material",
+      "materialSlots": 1,
+      "polygonMaterialIndices": [
+        0
+      ],
+      "coordinatePolicy": "object-local"
+    }
+  },
+  "labelCoverZone": {
+    "type": "MESH",
+    "thicknessMm": 0.0,
+    "policy": "existing transparent material zone; no Gate 06 subject geometry change"
+  },
+  "narrowFoilZone": {
+    "type": "MESH",
+    "thicknessMm": 0.0,
+    "policy": "existing narrow foil material zone; no Gate 06 subject geometry change"
+  },
+  "overlayContextExcluded": true,
+  "imageTextureCoverageRequired": false,
+  "turntableViews": [
+    0,
+    90,
+    180,
+    270,
+    360
+  ],
+  "pass": true
+}

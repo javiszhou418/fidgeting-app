@@ -1,0 +1,1435 @@
+{
+  "schemaVersion": 1,
+  "gate": "10-export",
+  "revision": 9,
+  "pass": true,
+  "source": {
+    "path": "/Users/jiawei.zhou/Documents/Fidgeting app/unity/FidgetingApp/ArtSource/ModelPipeline/magnetic-slide-tile/evidence/09-environment/rev-008/magnetic-slide-tile-environment-r008.blend",
+    "sha256": "d53886f887649e7398808c2938bed081328e11259e772b1420415dc2ffc30408",
+    "gate09ApprovalWording": "\u4f60\u7ed9\u6211\u770b\u4e00\u4e0b\u6700\u7ec8\u5728 Unity \u91cc\u8fb9\u7684\u5448\u73b0\u5427\u3002"
+  },
+  "contractSha256": "5aee71817c2c033ed92b770126ba0ecb6d79c2f032d786743b214b79078a47ea",
+  "portabilityContractSha256": "fce83a968df4f978e84ffbab7f026c57d7b60e762d70f7cdb2f2a1aa5cf22134",
+  "approved": {
+    "geometryDigest": "e2a838c22b743c7b0a05a20df060817f4e324bad5c84c11592c673c25ee002fe",
+    "materialDigest": "366b788bfb329d806ffbffaa3ff9c4789deab3967943fa43dc7f42c9b6609aa8"
+  },
+  "before": {
+    "geometryDigest": "e2a838c22b743c7b0a05a20df060817f4e324bad5c84c11592c673c25ee002fe",
+    "triangleDigest": "ea4a5ae76f3c081f1620a1783936fc0e1ac17c772d90cf1ce394b0a9f47eeff4",
+    "hierarchy": {
+      "MagneticSlideTile_G05_R006": {
+        "type": "EMPTY",
+        "parent": null,
+        "matrixWorld": [
+          [
+            1.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            1.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            0.0,
+            1.0,
+            0.0
+          ],
+          [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        ]
+      },
+      "BottomExterior": {
+        "type": "MESH",
+        "parent": "MagneticSlideTile_G05_R006",
+        "matrixWorld": [
+          [
+            1.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            1.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            0.0,
+            1.0,
+            2.9375
+          ],
+          [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        ]
+      },
+      "FixedAxis": {
+        "type": "EMPTY",
+        "parent": "FixedAxisBoss",
+        "matrixWorld": [
+          [
+            1.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            1.0,
+            0.0,
+            -9.0
+          ],
+          [
+            0.0,
+            0.0,
+            1.0,
+            5.074999809
+          ],
+          [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        ]
+      },
+      "FixedAxisBoss": {
+        "type": "MESH",
+        "parent": "BottomExterior",
+        "matrixWorld": [
+          [
+            1.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            1.0,
+            0.0,
+            -9.0
+          ],
+          [
+            0.0,
+            0.0,
+            1.0,
+            5.074999809
+          ],
+          [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        ]
+      },
+      "MinimumOverlapDisk": {
+        "type": "EMPTY",
+        "parent": "BottomExterior",
+        "matrixWorld": [
+          [
+            1.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            1.0,
+            0.0,
+            -9.0
+          ],
+          [
+            0.0,
+            0.0,
+            1.0,
+            5.875
+          ],
+          [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        ]
+      },
+      "RotatingCarrier": {
+        "type": "EMPTY",
+        "parent": "FixedAxisBoss",
+        "matrixWorld": [
+          [
+            1.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            1.0,
+            0.0,
+            -9.0
+          ],
+          [
+            0.0,
+            0.0,
+            1.0,
+            5.394999981
+          ],
+          [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        ]
+      },
+      "RotatingCarrierBody": {
+        "type": "MESH",
+        "parent": "RotatingCarrier",
+        "matrixWorld": [
+          [
+            1.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            1.0,
+            0.0,
+            -9.0
+          ],
+          [
+            0.0,
+            0.0,
+            1.0,
+            5.394999981
+          ],
+          [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        ]
+      },
+      "CarrierFollowerLeft": {
+        "type": "MESH",
+        "parent": "RotatingCarrier",
+        "matrixWorld": [
+          [
+            1.0,
+            0.0,
+            0.0,
+            -6.0
+          ],
+          [
+            0.0,
+            1.0,
+            0.0,
+            -9.0
+          ],
+          [
+            0.0,
+            0.0,
+            1.0,
+            5.465000153
+          ],
+          [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        ]
+      },
+      "CarrierFollowerRight": {
+        "type": "MESH",
+        "parent": "RotatingCarrier",
+        "matrixWorld": [
+          [
+            1.0,
+            0.0,
+            0.0,
+            6.0
+          ],
+          [
+            0.0,
+            1.0,
+            0.0,
+            -9.0
+          ],
+          [
+            0.0,
+            0.0,
+            1.0,
+            5.465000153
+          ],
+          [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        ]
+      },
+      "BallCandidateLeft": {
+        "type": "MESH",
+        "parent": "RotatingCarrier",
+        "matrixWorld": [
+          [
+            1.0,
+            0.0,
+            0.0,
+            -11.75
+          ],
+          [
+            0.0,
+            1.0,
+            0.0,
+            -9.0
+          ],
+          [
+            0.0,
+            0.0,
+            1.0,
+            4.574999809
+          ],
+          [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        ]
+      },
+      "BallCandidateRight": {
+        "type": "MESH",
+        "parent": "RotatingCarrier",
+        "matrixWorld": [
+          [
+            1.0,
+            0.0,
+            0.0,
+            11.75
+          ],
+          [
+            0.0,
+            1.0,
+            0.0,
+            -9.0
+          ],
+          [
+            0.0,
+            0.0,
+            1.0,
+            4.574999809
+          ],
+          [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        ]
+      },
+      "UnknownSprings": {
+        "type": "EMPTY",
+        "parent": "RotatingCarrier",
+        "matrixWorld": [
+          [
+            1.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            1.0,
+            0.0,
+            -9.0
+          ],
+          [
+            0.0,
+            0.0,
+            1.0,
+            5.394999981
+          ],
+          [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        ]
+      },
+      "UnknownPreload": {
+        "type": "EMPTY",
+        "parent": "RotatingCarrier",
+        "matrixWorld": [
+          [
+            1.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            1.0,
+            0.0,
+            -9.0
+          ],
+          [
+            0.0,
+            0.0,
+            1.0,
+            5.394999981
+          ],
+          [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        ]
+      },
+      "MovingTop": {
+        "type": "EMPTY",
+        "parent": "MagneticSlideTile_G05_R006",
+        "matrixWorld": [
+          [
+            1.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            1.0,
+            0.0,
+            -9.0
+          ],
+          [
+            0.0,
+            0.0,
+            1.0,
+            0.0
+          ],
+          [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        ]
+      },
+      "TopLocalSlide": {
+        "type": "EMPTY",
+        "parent": "MovingTop",
+        "matrixWorld": [
+          [
+            1.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            1.0,
+            0.0,
+            -9.0
+          ],
+          [
+            0.0,
+            0.0,
+            1.0,
+            0.0
+          ],
+          [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        ]
+      },
+      "MovingTopBody": {
+        "type": "MESH",
+        "parent": "TopLocalSlide",
+        "matrixWorld": [
+          [
+            1.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            1.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            0.0,
+            1.0,
+            9.0625
+          ],
+          [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        ]
+      },
+      "TopOuterGrooveLeft": {
+        "type": "EMPTY",
+        "parent": "MovingTopBody",
+        "matrixWorld": [
+          [
+            1.0,
+            0.0,
+            0.0,
+            -11.75
+          ],
+          [
+            0.0,
+            1.0,
+            0.0,
+            2.5
+          ],
+          [
+            0.0,
+            0.0,
+            1.0,
+            6.125
+          ],
+          [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        ]
+      },
+      "TopInnerGrooveLeft": {
+        "type": "EMPTY",
+        "parent": "MovingTopBody",
+        "matrixWorld": [
+          [
+            1.0,
+            0.0,
+            0.0,
+            -6.0
+          ],
+          [
+            0.0,
+            1.0,
+            0.0,
+            2.5
+          ],
+          [
+            0.0,
+            0.0,
+            1.0,
+            6.125
+          ],
+          [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        ]
+      },
+      "TopInnerGrooveRight": {
+        "type": "EMPTY",
+        "parent": "MovingTopBody",
+        "matrixWorld": [
+          [
+            1.0,
+            0.0,
+            0.0,
+            6.0
+          ],
+          [
+            0.0,
+            1.0,
+            0.0,
+            2.5
+          ],
+          [
+            0.0,
+            0.0,
+            1.0,
+            6.125
+          ],
+          [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        ]
+      },
+      "TopOuterGrooveRight": {
+        "type": "EMPTY",
+        "parent": "MovingTopBody",
+        "matrixWorld": [
+          [
+            1.0,
+            0.0,
+            0.0,
+            11.75
+          ],
+          [
+            0.0,
+            1.0,
+            0.0,
+            2.5
+          ],
+          [
+            0.0,
+            0.0,
+            1.0,
+            6.125
+          ],
+          [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        ]
+      }
+    },
+    "bounds": {
+      "minMm": [
+        -15.5,
+        -25.0,
+        0.0
+      ],
+      "maxMm": [
+        15.5,
+        25.0,
+        12.0
+      ],
+      "sizeMm": [
+        31.0,
+        50.0,
+        12.0
+      ]
+    },
+    "meshes": {
+      "BottomExterior": {
+        "vertices": 9234,
+        "polygons": 8723,
+        "materialSlots": [
+          "M07R11_Crystal_LowerDistinct",
+          "M07R11_DarkExteriorSide",
+          "M07R11_PolishedSilver",
+          "M07R11_NeutralTechnical"
+        ],
+        "uvLayers": [
+          "Gate06_DeterministicUV"
+        ],
+        "smoothFaces": 8721,
+        "flatFaces": 2
+      },
+      "FixedAxisBoss": {
+        "vertices": 256,
+        "polygons": 130,
+        "materialSlots": [
+          "M07R11_PolishedSilver"
+        ],
+        "uvLayers": [
+          "UVMap"
+        ],
+        "smoothFaces": 128,
+        "flatFaces": 2
+      },
+      "RotatingCarrierBody": {
+        "vertices": 252,
+        "polygons": 128,
+        "materialSlots": [
+          "M07R11_InternalSilverReference"
+        ],
+        "uvLayers": [
+          "UVMap"
+        ],
+        "smoothFaces": 126,
+        "flatFaces": 2
+      },
+      "CarrierFollowerLeft": {
+        "vertices": 1026,
+        "polygons": 515,
+        "materialSlots": [
+          "M07R11_NeutralTechnical"
+        ],
+        "uvLayers": [
+          "Gate06_DeterministicUV"
+        ],
+        "smoothFaces": 513,
+        "flatFaces": 2
+      },
+      "CarrierFollowerRight": {
+        "vertices": 1026,
+        "polygons": 515,
+        "materialSlots": [
+          "M07R11_NeutralTechnical"
+        ],
+        "uvLayers": [
+          "Gate06_DeterministicUV"
+        ],
+        "smoothFaces": 513,
+        "flatFaces": 2
+      },
+      "BallCandidateLeft": {
+        "vertices": 1986,
+        "polygons": 2048,
+        "materialSlots": [
+          "M07R11_BallCandidate_UnknownMaterial"
+        ],
+        "uvLayers": [
+          "UVMap"
+        ],
+        "smoothFaces": 2048,
+        "flatFaces": 0
+      },
+      "BallCandidateRight": {
+        "vertices": 1986,
+        "polygons": 2048,
+        "materialSlots": [
+          "M07R11_BallCandidate_UnknownMaterial"
+        ],
+        "uvLayers": [
+          "UVMap"
+        ],
+        "smoothFaces": 2048,
+        "flatFaces": 0
+      },
+      "MovingTopBody": {
+        "vertices": 13346,
+        "polygons": 10783,
+        "materialSlots": [
+          "M07R11_Crystal_Upper",
+          "M07R11_DarkExteriorSide",
+          "M07R11_PolishedSilver",
+          "M07R11_NeutralTechnical"
+        ],
+        "uvLayers": [
+          "Gate06_DeterministicUV"
+        ],
+        "smoothFaces": 10773,
+        "flatFaces": 10
+      }
+    }
+  },
+  "after": {
+    "geometryDigest": "e2a838c22b743c7b0a05a20df060817f4e324bad5c84c11592c673c25ee002fe",
+    "triangleDigest": "ea4a5ae76f3c081f1620a1783936fc0e1ac17c772d90cf1ce394b0a9f47eeff4",
+    "hierarchy": {
+      "MagneticSlideTile_G05_R006": {
+        "type": "EMPTY",
+        "parent": null,
+        "matrixWorld": [
+          [
+            1.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            1.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            0.0,
+            1.0,
+            0.0
+          ],
+          [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        ]
+      },
+      "BottomExterior": {
+        "type": "MESH",
+        "parent": "MagneticSlideTile_G05_R006",
+        "matrixWorld": [
+          [
+            1.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            1.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            0.0,
+            1.0,
+            2.9375
+          ],
+          [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        ]
+      },
+      "FixedAxis": {
+        "type": "EMPTY",
+        "parent": "FixedAxisBoss",
+        "matrixWorld": [
+          [
+            1.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            1.0,
+            0.0,
+            -9.0
+          ],
+          [
+            0.0,
+            0.0,
+            1.0,
+            5.074999809
+          ],
+          [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        ]
+      },
+      "FixedAxisBoss": {
+        "type": "MESH",
+        "parent": "BottomExterior",
+        "matrixWorld": [
+          [
+            1.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            1.0,
+            0.0,
+            -9.0
+          ],
+          [
+            0.0,
+            0.0,
+            1.0,
+            5.074999809
+          ],
+          [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        ]
+      },
+      "MinimumOverlapDisk": {
+        "type": "EMPTY",
+        "parent": "BottomExterior",
+        "matrixWorld": [
+          [
+            1.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            1.0,
+            0.0,
+            -9.0
+          ],
+          [
+            0.0,
+            0.0,
+            1.0,
+            5.875
+          ],
+          [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        ]
+      },
+      "RotatingCarrier": {
+        "type": "EMPTY",
+        "parent": "FixedAxisBoss",
+        "matrixWorld": [
+          [
+            1.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            1.0,
+            0.0,
+            -9.0
+          ],
+          [
+            0.0,
+            0.0,
+            1.0,
+            5.394999981
+          ],
+          [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        ]
+      },
+      "RotatingCarrierBody": {
+        "type": "MESH",
+        "parent": "RotatingCarrier",
+        "matrixWorld": [
+          [
+            1.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            1.0,
+            0.0,
+            -9.0
+          ],
+          [
+            0.0,
+            0.0,
+            1.0,
+            5.394999981
+          ],
+          [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        ]
+      },
+      "CarrierFollowerLeft": {
+        "type": "MESH",
+        "parent": "RotatingCarrier",
+        "matrixWorld": [
+          [
+            1.0,
+            0.0,
+            0.0,
+            -6.0
+          ],
+          [
+            0.0,
+            1.0,
+            0.0,
+            -9.0
+          ],
+          [
+            0.0,
+            0.0,
+            1.0,
+            5.465000153
+          ],
+          [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        ]
+      },
+      "CarrierFollowerRight": {
+        "type": "MESH",
+        "parent": "RotatingCarrier",
+        "matrixWorld": [
+          [
+            1.0,
+            0.0,
+            0.0,
+            6.0
+          ],
+          [
+            0.0,
+            1.0,
+            0.0,
+            -9.0
+          ],
+          [
+            0.0,
+            0.0,
+            1.0,
+            5.465000153
+          ],
+          [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        ]
+      },
+      "BallCandidateLeft": {
+        "type": "MESH",
+        "parent": "RotatingCarrier",
+        "matrixWorld": [
+          [
+            1.0,
+            0.0,
+            0.0,
+            -11.75
+          ],
+          [
+            0.0,
+            1.0,
+            0.0,
+            -9.0
+          ],
+          [
+            0.0,
+            0.0,
+            1.0,
+            4.574999809
+          ],
+          [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        ]
+      },
+      "BallCandidateRight": {
+        "type": "MESH",
+        "parent": "RotatingCarrier",
+        "matrixWorld": [
+          [
+            1.0,
+            0.0,
+            0.0,
+            11.75
+          ],
+          [
+            0.0,
+            1.0,
+            0.0,
+            -9.0
+          ],
+          [
+            0.0,
+            0.0,
+            1.0,
+            4.574999809
+          ],
+          [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        ]
+      },
+      "UnknownSprings": {
+        "type": "EMPTY",
+        "parent": "RotatingCarrier",
+        "matrixWorld": [
+          [
+            1.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            1.0,
+            0.0,
+            -9.0
+          ],
+          [
+            0.0,
+            0.0,
+            1.0,
+            5.394999981
+          ],
+          [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        ]
+      },
+      "UnknownPreload": {
+        "type": "EMPTY",
+        "parent": "RotatingCarrier",
+        "matrixWorld": [
+          [
+            1.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            1.0,
+            0.0,
+            -9.0
+          ],
+          [
+            0.0,
+            0.0,
+            1.0,
+            5.394999981
+          ],
+          [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        ]
+      },
+      "MovingTop": {
+        "type": "EMPTY",
+        "parent": "MagneticSlideTile_G05_R006",
+        "matrixWorld": [
+          [
+            1.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            1.0,
+            0.0,
+            -9.0
+          ],
+          [
+            0.0,
+            0.0,
+            1.0,
+            0.0
+          ],
+          [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        ]
+      },
+      "TopLocalSlide": {
+        "type": "EMPTY",
+        "parent": "MovingTop",
+        "matrixWorld": [
+          [
+            1.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            1.0,
+            0.0,
+            -9.0
+          ],
+          [
+            0.0,
+            0.0,
+            1.0,
+            0.0
+          ],
+          [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        ]
+      },
+      "MovingTopBody": {
+        "type": "MESH",
+        "parent": "TopLocalSlide",
+        "matrixWorld": [
+          [
+            1.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            1.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            0.0,
+            1.0,
+            9.0625
+          ],
+          [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        ]
+      },
+      "TopOuterGrooveLeft": {
+        "type": "EMPTY",
+        "parent": "MovingTopBody",
+        "matrixWorld": [
+          [
+            1.0,
+            0.0,
+            0.0,
+            -11.75
+          ],
+          [
+            0.0,
+            1.0,
+            0.0,
+            2.5
+          ],
+          [
+            0.0,
+            0.0,
+            1.0,
+            6.125
+          ],
+          [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        ]
+      },
+      "TopInnerGrooveLeft": {
+        "type": "EMPTY",
+        "parent": "MovingTopBody",
+        "matrixWorld": [
+          [
+            1.0,
+            0.0,
+            0.0,
+            -6.0
+          ],
+          [
+            0.0,
+            1.0,
+            0.0,
+            2.5
+          ],
+          [
+            0.0,
+            0.0,
+            1.0,
+            6.125
+          ],
+          [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        ]
+      },
+      "TopInnerGrooveRight": {
+        "type": "EMPTY",
+        "parent": "MovingTopBody",
+        "matrixWorld": [
+          [
+            1.0,
+            0.0,
+            0.0,
+            6.0
+          ],
+          [
+            0.0,
+            1.0,
+            0.0,
+            2.5
+          ],
+          [
+            0.0,
+            0.0,
+            1.0,
+            6.125
+          ],
+          [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        ]
+      },
+      "TopOuterGrooveRight": {
+        "type": "EMPTY",
+        "parent": "MovingTopBody",
+        "matrixWorld": [
+          [
+            1.0,
+            0.0,
+            0.0,
+            11.75
+          ],
+          [
+            0.0,
+            1.0,
+            0.0,
+            2.5
+          ],
+          [
+            0.0,
+            0.0,
+            1.0,
+            6.125
+          ],
+          [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        ]
+      }
+    },
+    "bounds": {
+      "minMm": [
+        -15.5,
+        -25.0,
+        0.0
+      ],
+      "maxMm": [
+        15.5,
+        25.0,
+        12.0
+      ],
+      "sizeMm": [
+        31.0,
+        50.0,
+        12.0
+      ]
+    }
+  },
+  "formats": {
+    "blend": {
+      "path": "/Users/jiawei.zhou/Documents/Fidgeting app/unity/FidgetingApp/ArtSource/ModelPipeline/magnetic-slide-tile/evidence/10-export/rev-009/package/magnetic-slide-tile-authoritative-r009.blend",
+      "sha256": "44d30e4db3def4a8ab3047fc5faa5e5c8f152f2663f22ac4b69c18e0333e6ca7",
+      "bytes": 1409166
+    },
+    "fbx": {
+      "path": "/Users/jiawei.zhou/Documents/Fidgeting app/unity/FidgetingApp/ArtSource/ModelPipeline/magnetic-slide-tile/evidence/10-export/rev-009/package/magnetic-slide-tile-render-r009.fbx",
+      "sha256": "d15e5c944e10ac61d466668309a2ae3f1069870d3c690b67bfd5595af5e32179",
+      "bytes": 7692556
+    },
+    "glb": {
+      "path": "/Users/jiawei.zhou/Documents/Fidgeting app/unity/FidgetingApp/ArtSource/ModelPipeline/magnetic-slide-tile/evidence/10-export/rev-009/package/magnetic-slide-tile-render-r009.glb",
+      "sha256": "f95b1b2ebed5859aa185aa4e3ba81dcb7a8de266ac9244f4b3270b35c877cba6",
+      "bytes": 7785084
+    },
+    "collisionFbx": {
+      "path": "/Users/jiawei.zhou/Documents/Fidgeting app/unity/FidgetingApp/ArtSource/ModelPipeline/magnetic-slide-tile/evidence/10-export/rev-009/package/magnetic-slide-tile-collision-r009.fbx",
+      "sha256": "b14ea11d8d08d6ff6d5583ccee0a29c6a219247ed7f7bc16182b1f7e0970851b",
+      "bytes": 27292
+    }
+  },
+  "exportSettings": {
+    "fbx": {
+      "meshSmoothType": "FACE",
+      "meshSmoothTypeOff": false,
+      "forward": "-Z",
+      "up": "Y",
+      "applyUnitScale": true,
+      "bakeAnimation": false
+    },
+    "glb": {
+      "format": "GLB",
+      "yUp": true,
+      "tangents": true,
+      "animations": false,
+      "extras": true
+    },
+    "collision": {
+      "separate": true,
+      "rendering": false,
+      "objects": [
+        "COL_BottomExterior",
+        "COL_MovingTop"
+      ],
+      "misleadingDisplayForbidden": true
+    }
+  },
+  "glbVectorRepair": {
+    "zeroNormalsPatched": 0,
+    "zeroTangentsPatched": 70
+  },
+  "checks": {
+    "sourceHash": true,
+    "geometryExact": true,
+    "trianglesExact": true,
+    "hierarchyExact": true,
+    "boundsExact": true,
+    "eightRenderMeshes": true,
+    "fourGrooves": true,
+    "flatBottomNoCavity": true,
+    "raisedAxis": true,
+    "closedZeroMotion": true,
+    "noAnimations": true,
+    "filesWritten": true,
+    "noLodPair": true,
+    "unityNotUsed": true
+  }
+}

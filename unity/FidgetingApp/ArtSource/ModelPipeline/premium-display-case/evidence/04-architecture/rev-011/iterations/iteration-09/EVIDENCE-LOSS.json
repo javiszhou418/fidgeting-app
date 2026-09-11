@@ -1,0 +1,35 @@
+{
+  "schema": "premium-display-case-gate04-r011-evidence-loss.v1",
+  "iteration": 9,
+  "evidenceRevision": 11,
+  "gateId": "04-architecture",
+  "recordedBy": "agent-iteration-10",
+  "recordedAt": "2026-08-28T12:20:00.000Z",
+  "whatWasLost": [
+    "frames/frame-0000.png .. frame-0206.png (207 shipping-portrait frames)",
+    "unity-capture-report.json",
+    "tear-contact-sheet.png",
+    "continuity-contact-sheet.png",
+    "source-impact-contact-sheet.png",
+    "source-target-side-by-side.png",
+    "normal-speed-sequence.mp4",
+    "tear-quarter-speed-closeup.mp4",
+    "impact-reveal-quarter-speed.mp4"
+  ],
+  "whatSurvives": [
+    "iteration-09-self-rejection.json, which holds the full written full-size frame verdict, the five rejection reasons with root causes, and the required-for-iteration-10 list",
+    "The iteration-09 pipeline decision and validations, preserved in pipeline.json historicalDecisions and historicalRevisions",
+    "The iteration-09 history.ndjson events"
+  ],
+  "cause": "Iteration 09 was never archived into iterations/iteration-09/ before iteration 10 began. Its capture artifacts lived only in the live rev-011 directory, and PackOpeningGate04R011Builder.BuildAndRunCapture writes that directory in place. The iteration-10 capture runs overwrote the frames, contact sheets and capture report; the iteration-10 video re-encode overwrote the three mp4 files.",
+  "recoveryAttempted": [
+    "git status and git ls-files: the entire rev-011 evidence directory is untracked, so no blob exists to restore",
+    "No pre-capture copy was taken of the frames, sheets or videos"
+  ],
+  "recoverable": false,
+  "sameFailureAs": "iterations/iteration-02/EVIDENCE-LOSS.json",
+  "preventionApplied": "Iteration 10 evidence is archived into iterations/iteration-10/ in the same task that produced it, before any further capture can overwrite the live directory.",
+  "preventionStillMissing": "The capture entry point still writes the live directory in place with no per-iteration output slot and no refusal when the live directory holds unarchived evidence. Until that is changed, archiving remains a manual step that a later agent can skip again.",
+  "impactOnDecisions": "None of the iteration-09 conclusions depend on re-reading its pixels. The self-rejection was already recorded with per-criterion root causes, and iteration 10 was driven from that written record plus the parent's own full-size review. Iteration 09 remains self-rejected and must not be restored as a current requirement.",
+  "statusText": "视觉批准待确认，未推送手机"
+}

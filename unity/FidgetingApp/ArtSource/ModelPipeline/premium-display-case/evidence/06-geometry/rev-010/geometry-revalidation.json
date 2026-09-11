@@ -1,0 +1,1634 @@
+{
+  "schemaVersion": 1,
+  "modelId": "premium-display-case",
+  "variantId": "tri-spinner-slab-v3-cmf",
+  "gate": "06-geometry",
+  "geometryRevision": 10,
+  "sourceBlend": "unity/FidgetingApp/ArtSource/ModelPipeline/premium-display-case/evidence/05-blockout/rev-012/tri-spinner-slab-blockout-r012.blend",
+  "sourceBlendSha256": "f61c2485c98f4e3579fb4abb1d5cf3cfce57820d141e666d466fe6c3c1682600",
+  "contractSha256": "444c9ca1a9ece0d01a655b75db9c516f2b1e7b8eafe15ad5b148a8a590f0e578",
+  "sourceGate05EvidenceRevision": "rev-012",
+  "designChanged": false,
+  "provisional_marker": "PROVISIONAL_DIMENSIONS",
+  "removed_non_deliverables": [
+    "CUT_PDC_BOLT_COUNTERBORE_00",
+    "CUT_PDC_BOLT_COUNTERBORE_01",
+    "CUT_PDC_BOLT_COUNTERBORE_02",
+    "CUT_PDC_BOLT_COUNTERBORE_03",
+    "CUT_PDC_BOLT_COUNTERBORE_04",
+    "CUT_PDC_BOLT_COUNTERBORE_05",
+    "CUT_PDC_FIELD_OUTLINE_GROOVE",
+    "CUT_PDC_PLAQUE_SURROUND_GROOVE"
+  ],
+  "modifiers_applied": {
+    "GEO_PDC_COMPARTMENT_SEAM": [
+      "030_BEVEL_PRIMARY",
+      "050_WEIGHTED_NORMAL"
+    ],
+    "GEO_PDC_FRAME_BOLT_00": [
+      "030_BEVEL_PRIMARY",
+      "050_WEIGHTED_NORMAL"
+    ],
+    "GEO_PDC_FRAME_BOLT_00_SOCKET_FLOOR": [
+      "050_WEIGHTED_NORMAL"
+    ],
+    "GEO_PDC_FRAME_BOLT_01": [
+      "030_BEVEL_PRIMARY",
+      "050_WEIGHTED_NORMAL"
+    ],
+    "GEO_PDC_FRAME_BOLT_01_SOCKET_FLOOR": [
+      "050_WEIGHTED_NORMAL"
+    ],
+    "GEO_PDC_FRAME_BOLT_02": [
+      "030_BEVEL_PRIMARY",
+      "050_WEIGHTED_NORMAL"
+    ],
+    "GEO_PDC_FRAME_BOLT_02_SOCKET_FLOOR": [
+      "050_WEIGHTED_NORMAL"
+    ],
+    "GEO_PDC_FRAME_BOLT_03": [
+      "030_BEVEL_PRIMARY",
+      "050_WEIGHTED_NORMAL"
+    ],
+    "GEO_PDC_FRAME_BOLT_03_SOCKET_FLOOR": [
+      "050_WEIGHTED_NORMAL"
+    ],
+    "GEO_PDC_FRAME_BOLT_04": [
+      "030_BEVEL_PRIMARY",
+      "050_WEIGHTED_NORMAL"
+    ],
+    "GEO_PDC_FRAME_BOLT_04_SOCKET_FLOOR": [
+      "050_WEIGHTED_NORMAL"
+    ],
+    "GEO_PDC_FRAME_BOLT_05": [
+      "030_BEVEL_PRIMARY",
+      "050_WEIGHTED_NORMAL"
+    ],
+    "GEO_PDC_FRAME_BOLT_05_SOCKET_FLOOR": [
+      "050_WEIGHTED_NORMAL"
+    ],
+    "GEO_PDC_HEADER_GOLD_INLAY_L": [
+      "050_WEIGHTED_NORMAL"
+    ],
+    "GEO_PDC_HEADER_GOLD_INLAY_R": [
+      "050_WEIGHTED_NORMAL"
+    ],
+    "GEO_PDC_HEADER_GRAPHITE_PLANE": [
+      "050_WEIGHTED_NORMAL"
+    ],
+    "GEO_PDC_HEADER_MIRROR_BEVEL": [
+      "050_WEIGHTED_NORMAL"
+    ],
+    "GEO_PDC_HEADER_SATIN_SHELF": [
+      "030_BEVEL_PRIMARY",
+      "050_WEIGHTED_NORMAL"
+    ],
+    "GEO_PDC_MAIN_GOLD_CHAMFER_BL": [
+      "050_WEIGHTED_NORMAL"
+    ],
+    "GEO_PDC_MAIN_GOLD_CHAMFER_BR": [
+      "050_WEIGHTED_NORMAL"
+    ],
+    "GEO_PDC_MAIN_GOLD_CHAMFER_TL": [
+      "050_WEIGHTED_NORMAL"
+    ],
+    "GEO_PDC_MAIN_GOLD_CHAMFER_TR": [
+      "050_WEIGHTED_NORMAL"
+    ],
+    "GEO_PDC_MAIN_GOLD_INDEX_TAB_L": [
+      "050_WEIGHTED_NORMAL"
+    ],
+    "GEO_PDC_MAIN_GOLD_INDEX_TAB_R": [
+      "050_WEIGHTED_NORMAL"
+    ],
+    "GEO_PDC_MAIN_GOLD_RAIL_L": [
+      "050_WEIGHTED_NORMAL"
+    ],
+    "GEO_PDC_MAIN_GOLD_RAIL_R": [
+      "050_WEIGHTED_NORMAL"
+    ],
+    "GEO_PDC_MAIN_MICROBLAST_FIELD": [
+      "050_WEIGHTED_NORMAL"
+    ],
+    "GEO_PDC_MAIN_MIRROR_SEAM": [
+      "050_WEIGHTED_NORMAL"
+    ],
+    "GEO_PDC_MAIN_SATIN_SHELF": [
+      "030_BEVEL_PRIMARY",
+      "050_WEIGHTED_NORMAL"
+    ],
+    "GEO_PDC_MAIN_TRAIT_PLAQUE": [
+      "030_BEVEL_PRIMARY",
+      "050_WEIGHTED_NORMAL"
+    ],
+    "GEO_PDC_OUTER_CRYSTAL_FRAME": [
+      "030_BEVEL_PRIMARY",
+      "050_WEIGHTED_NORMAL"
+    ],
+    "GEO_PDC_POCKET_CLIP_00": [
+      "030_BEVEL_PRIMARY",
+      "050_WEIGHTED_NORMAL"
+    ],
+    "GEO_PDC_POCKET_CLIP_01": [
+      "030_BEVEL_PRIMARY",
+      "050_WEIGHTED_NORMAL"
+    ],
+    "GEO_PDC_POCKET_CLIP_02": [
+      "030_BEVEL_PRIMARY",
+      "050_WEIGHTED_NORMAL"
+    ],
+    "GEO_PDC_POCKET_GRAPHITE_FLOOR": [
+      "050_WEIGHTED_NORMAL"
+    ],
+    "GEO_PDC_POCKET_POLISHED_LIP": [
+      "030_BEVEL_PRIMARY",
+      "050_WEIGHTED_NORMAL"
+    ],
+    "GEO_PDC_POCKET_SMOKE_WALL": [
+      "050_WEIGHTED_NORMAL"
+    ],
+    "GEO_PDC_REAR_PLATE": [
+      "050_WEIGHTED_NORMAL"
+    ],
+    "GEO_PDC_SMOKE_INNER_LINER": [
+      "050_WEIGHTED_NORMAL"
+    ]
+  },
+  "modifier_order_contract": [
+    "010_MIRROR_X",
+    "020_BOOLEAN_MAIN_CUT_EXACT",
+    "021_BOOLEAN_HEADER_CUT_EXACT",
+    "022_BOOLEAN_DETAIL_CUT_EXACT",
+    "030_BEVEL_PRIMARY",
+    "040_BEVEL_MICRO",
+    "050_WEIGHTED_NORMAL",
+    "060_WRITE_FACE_ATTRIBUTES",
+    "090_TRIANGULATE_EXPORT"
+  ],
+  "cleanup": {
+    "GEO_PDC_COMPARTMENT_SEAM": {
+      "vertices_before": 480,
+      "vertices_after": 480,
+      "polygons_before": 422,
+      "polygons_after": 422
+    },
+    "GEO_PDC_FRAME_BOLT_00": {
+      "vertices_before": 4944,
+      "vertices_after": 4920,
+      "polygons_before": 4944,
+      "polygons_after": 4932
+    },
+    "GEO_PDC_FRAME_BOLT_00_SOCKET_FLOOR": {
+      "vertices_before": 12,
+      "vertices_after": 12,
+      "polygons_before": 8,
+      "polygons_after": 8
+    },
+    "GEO_PDC_FRAME_BOLT_01": {
+      "vertices_before": 4944,
+      "vertices_after": 4920,
+      "polygons_before": 4944,
+      "polygons_after": 4932
+    },
+    "GEO_PDC_FRAME_BOLT_01_SOCKET_FLOOR": {
+      "vertices_before": 12,
+      "vertices_after": 12,
+      "polygons_before": 8,
+      "polygons_after": 8
+    },
+    "GEO_PDC_FRAME_BOLT_02": {
+      "vertices_before": 4944,
+      "vertices_after": 4920,
+      "polygons_before": 4944,
+      "polygons_after": 4932
+    },
+    "GEO_PDC_FRAME_BOLT_02_SOCKET_FLOOR": {
+      "vertices_before": 12,
+      "vertices_after": 12,
+      "polygons_before": 8,
+      "polygons_after": 8
+    },
+    "GEO_PDC_FRAME_BOLT_03": {
+      "vertices_before": 4944,
+      "vertices_after": 4920,
+      "polygons_before": 4944,
+      "polygons_after": 4932
+    },
+    "GEO_PDC_FRAME_BOLT_03_SOCKET_FLOOR": {
+      "vertices_before": 12,
+      "vertices_after": 12,
+      "polygons_before": 8,
+      "polygons_after": 8
+    },
+    "GEO_PDC_FRAME_BOLT_04": {
+      "vertices_before": 4944,
+      "vertices_after": 4920,
+      "polygons_before": 4944,
+      "polygons_after": 4932
+    },
+    "GEO_PDC_FRAME_BOLT_04_SOCKET_FLOOR": {
+      "vertices_before": 12,
+      "vertices_after": 12,
+      "polygons_before": 8,
+      "polygons_after": 8
+    },
+    "GEO_PDC_FRAME_BOLT_05": {
+      "vertices_before": 4944,
+      "vertices_after": 4920,
+      "polygons_before": 4944,
+      "polygons_after": 4932
+    },
+    "GEO_PDC_FRAME_BOLT_05_SOCKET_FLOOR": {
+      "vertices_before": 12,
+      "vertices_after": 12,
+      "polygons_before": 8,
+      "polygons_after": 8
+    },
+    "GEO_PDC_HEADER_GOLD_INLAY_L": {
+      "vertices_before": 8,
+      "vertices_after": 8,
+      "polygons_before": 6,
+      "polygons_after": 6
+    },
+    "GEO_PDC_HEADER_GOLD_INLAY_R": {
+      "vertices_before": 8,
+      "vertices_after": 8,
+      "polygons_before": 6,
+      "polygons_after": 6
+    },
+    "GEO_PDC_HEADER_GRAPHITE_PLANE": {
+      "vertices_before": 120,
+      "vertices_after": 120,
+      "polygons_before": 62,
+      "polygons_after": 62
+    },
+    "GEO_PDC_HEADER_MIRROR_BEVEL": {
+      "vertices_before": 240,
+      "vertices_after": 240,
+      "polygons_before": 240,
+      "polygons_after": 240
+    },
+    "GEO_PDC_HEADER_SATIN_SHELF": {
+      "vertices_before": 960,
+      "vertices_after": 960,
+      "polygons_before": 960,
+      "polygons_after": 960
+    },
+    "GEO_PDC_MAIN_GOLD_CHAMFER_BL": {
+      "vertices_before": 8,
+      "vertices_after": 8,
+      "polygons_before": 6,
+      "polygons_after": 6
+    },
+    "GEO_PDC_MAIN_GOLD_CHAMFER_BR": {
+      "vertices_before": 8,
+      "vertices_after": 8,
+      "polygons_before": 6,
+      "polygons_after": 6
+    },
+    "GEO_PDC_MAIN_GOLD_CHAMFER_TL": {
+      "vertices_before": 8,
+      "vertices_after": 8,
+      "polygons_before": 6,
+      "polygons_after": 6
+    },
+    "GEO_PDC_MAIN_GOLD_CHAMFER_TR": {
+      "vertices_before": 8,
+      "vertices_after": 8,
+      "polygons_before": 6,
+      "polygons_after": 6
+    },
+    "GEO_PDC_MAIN_GOLD_INDEX_TAB_L": {
+      "vertices_before": 120,
+      "vertices_after": 120,
+      "polygons_before": 62,
+      "polygons_after": 62
+    },
+    "GEO_PDC_MAIN_GOLD_INDEX_TAB_R": {
+      "vertices_before": 120,
+      "vertices_after": 120,
+      "polygons_before": 62,
+      "polygons_after": 62
+    },
+    "GEO_PDC_MAIN_GOLD_RAIL_L": {
+      "vertices_before": 8,
+      "vertices_after": 8,
+      "polygons_before": 6,
+      "polygons_after": 6
+    },
+    "GEO_PDC_MAIN_GOLD_RAIL_R": {
+      "vertices_before": 8,
+      "vertices_after": 8,
+      "polygons_before": 6,
+      "polygons_after": 6
+    },
+    "GEO_PDC_MAIN_MICROBLAST_FIELD": {
+      "vertices_before": 3368,
+      "vertices_after": 3368,
+      "polygons_before": 2709,
+      "polygons_after": 2709
+    },
+    "GEO_PDC_MAIN_MIRROR_SEAM": {
+      "vertices_before": 240,
+      "vertices_after": 240,
+      "polygons_before": 240,
+      "polygons_after": 240
+    },
+    "GEO_PDC_MAIN_SATIN_SHELF": {
+      "vertices_before": 960,
+      "vertices_after": 960,
+      "polygons_before": 960,
+      "polygons_after": 960
+    },
+    "GEO_PDC_MAIN_TRAIT_PLAQUE": {
+      "vertices_before": 480,
+      "vertices_after": 480,
+      "polygons_before": 422,
+      "polygons_after": 422
+    },
+    "GEO_PDC_OUTER_CRYSTAL_FRAME": {
+      "vertices_before": 2882,
+      "vertices_after": 2878,
+      "polygons_before": 2712,
+      "polygons_after": 2712
+    },
+    "GEO_PDC_POCKET_CLIP_00": {
+      "vertices_before": 224,
+      "vertices_after": 224,
+      "polygons_before": 198,
+      "polygons_after": 198
+    },
+    "GEO_PDC_POCKET_CLIP_01": {
+      "vertices_before": 224,
+      "vertices_after": 224,
+      "polygons_before": 198,
+      "polygons_after": 198
+    },
+    "GEO_PDC_POCKET_CLIP_02": {
+      "vertices_before": 224,
+      "vertices_after": 224,
+      "polygons_before": 198,
+      "polygons_after": 198
+    },
+    "GEO_PDC_POCKET_GRAPHITE_FLOOR": {
+      "vertices_before": 384,
+      "vertices_after": 384,
+      "polygons_before": 194,
+      "polygons_after": 194
+    },
+    "GEO_PDC_POCKET_POLISHED_LIP": {
+      "vertices_before": 4224,
+      "vertices_after": 4224,
+      "polygons_before": 4224,
+      "polygons_after": 4224
+    },
+    "GEO_PDC_POCKET_SMOKE_WALL": {
+      "vertices_before": 768,
+      "vertices_after": 768,
+      "polygons_before": 768,
+      "polygons_after": 768
+    },
+    "GEO_PDC_REAR_PLATE": {
+      "vertices_before": 120,
+      "vertices_after": 120,
+      "polygons_before": 62,
+      "polygons_after": 62
+    },
+    "GEO_PDC_SMOKE_INNER_LINER": {
+      "vertices_before": 240,
+      "vertices_after": 240,
+      "polygons_before": 240,
+      "polygons_after": 240
+    },
+    "_rule": "remove_doubles 1e-6 m + dissolve_degenerate 1e-6 m after modifier apply; no design change"
+  },
+  "vertex_channels": {
+    "spec": {
+      "COLOR0.r": "edge_thickness_mask",
+      "COLOR0.g": "edge_iridescence_mask",
+      "COLOR0.b": "finish_mix_mask",
+      "COLOR0.a": "constant_1",
+      "UV2.x": "brushing_angle_normalized",
+      "UV2.y": "cmf_zone_id_div_255"
+    },
+    "edge_face_area_mm2": 2.5,
+    "domain": "CORNER",
+    "per_object": {
+      "GEO_PDC_COMPARTMENT_SEAM": {
+        "edge_faces": 404,
+        "faces": 422,
+        "edge_area_fraction": 0.0111,
+        "finish_mix": 1.0,
+        "brushing_angle_normalized": 0.0
+      },
+      "GEO_PDC_FRAME_BOLT_00": {
+        "edge_faces": 4932,
+        "faces": 4932,
+        "edge_area_fraction": 1.0,
+        "finish_mix": 0.0,
+        "brushing_angle_normalized": 0.0
+      },
+      "GEO_PDC_FRAME_BOLT_00_SOCKET_FLOOR": {
+        "edge_faces": 8,
+        "faces": 8,
+        "edge_area_fraction": 1.0,
+        "finish_mix": 0.0,
+        "brushing_angle_normalized": 0.0
+      },
+      "GEO_PDC_FRAME_BOLT_01": {
+        "edge_faces": 4932,
+        "faces": 4932,
+        "edge_area_fraction": 1.0,
+        "finish_mix": 0.0,
+        "brushing_angle_normalized": 0.0
+      },
+      "GEO_PDC_FRAME_BOLT_01_SOCKET_FLOOR": {
+        "edge_faces": 8,
+        "faces": 8,
+        "edge_area_fraction": 1.0,
+        "finish_mix": 0.0,
+        "brushing_angle_normalized": 0.0
+      },
+      "GEO_PDC_FRAME_BOLT_02": {
+        "edge_faces": 4932,
+        "faces": 4932,
+        "edge_area_fraction": 1.0,
+        "finish_mix": 0.0,
+        "brushing_angle_normalized": 0.0
+      },
+      "GEO_PDC_FRAME_BOLT_02_SOCKET_FLOOR": {
+        "edge_faces": 8,
+        "faces": 8,
+        "edge_area_fraction": 1.0,
+        "finish_mix": 0.0,
+        "brushing_angle_normalized": 0.0
+      },
+      "GEO_PDC_FRAME_BOLT_03": {
+        "edge_faces": 4932,
+        "faces": 4932,
+        "edge_area_fraction": 1.0,
+        "finish_mix": 0.0,
+        "brushing_angle_normalized": 0.0
+      },
+      "GEO_PDC_FRAME_BOLT_03_SOCKET_FLOOR": {
+        "edge_faces": 8,
+        "faces": 8,
+        "edge_area_fraction": 1.0,
+        "finish_mix": 0.0,
+        "brushing_angle_normalized": 0.0
+      },
+      "GEO_PDC_FRAME_BOLT_04": {
+        "edge_faces": 4932,
+        "faces": 4932,
+        "edge_area_fraction": 1.0,
+        "finish_mix": 0.0,
+        "brushing_angle_normalized": 0.0
+      },
+      "GEO_PDC_FRAME_BOLT_04_SOCKET_FLOOR": {
+        "edge_faces": 8,
+        "faces": 8,
+        "edge_area_fraction": 1.0,
+        "finish_mix": 0.0,
+        "brushing_angle_normalized": 0.0
+      },
+      "GEO_PDC_FRAME_BOLT_05": {
+        "edge_faces": 4932,
+        "faces": 4932,
+        "edge_area_fraction": 1.0,
+        "finish_mix": 0.0,
+        "brushing_angle_normalized": 0.0
+      },
+      "GEO_PDC_FRAME_BOLT_05_SOCKET_FLOOR": {
+        "edge_faces": 8,
+        "faces": 8,
+        "edge_area_fraction": 1.0,
+        "finish_mix": 0.0,
+        "brushing_angle_normalized": 0.0
+      },
+      "GEO_PDC_HEADER_GOLD_INLAY_L": {
+        "edge_faces": 2,
+        "faces": 6,
+        "edge_area_fraction": 0.0231,
+        "finish_mix": 0.0,
+        "brushing_angle_normalized": 0.0
+      },
+      "GEO_PDC_HEADER_GOLD_INLAY_R": {
+        "edge_faces": 2,
+        "faces": 6,
+        "edge_area_fraction": 0.0231,
+        "finish_mix": 0.0,
+        "brushing_angle_normalized": 0.0
+      },
+      "GEO_PDC_HEADER_GRAPHITE_PLANE": {
+        "edge_faces": 56,
+        "faces": 62,
+        "edge_area_fraction": 0.0047,
+        "finish_mix": 0.0,
+        "brushing_angle_normalized": 0.0
+      },
+      "GEO_PDC_HEADER_MIRROR_BEVEL": {
+        "edge_faces": 224,
+        "faces": 240,
+        "edge_area_fraction": 0.0408,
+        "finish_mix": 1.0,
+        "brushing_angle_normalized": 0.0
+      },
+      "GEO_PDC_HEADER_SATIN_SHELF": {
+        "edge_faces": 896,
+        "faces": 960,
+        "edge_area_fraction": 0.0698,
+        "finish_mix": 0.0,
+        "brushing_angle_normalized": 0.0
+      },
+      "GEO_PDC_MAIN_GOLD_CHAMFER_BL": {
+        "edge_faces": 6,
+        "faces": 6,
+        "edge_area_fraction": 1.0,
+        "finish_mix": 0.0,
+        "brushing_angle_normalized": 0.0
+      },
+      "GEO_PDC_MAIN_GOLD_CHAMFER_BR": {
+        "edge_faces": 6,
+        "faces": 6,
+        "edge_area_fraction": 1.0,
+        "finish_mix": 0.0,
+        "brushing_angle_normalized": 0.0
+      },
+      "GEO_PDC_MAIN_GOLD_CHAMFER_TL": {
+        "edge_faces": 6,
+        "faces": 6,
+        "edge_area_fraction": 1.0,
+        "finish_mix": 0.0,
+        "brushing_angle_normalized": 0.0
+      },
+      "GEO_PDC_MAIN_GOLD_CHAMFER_TR": {
+        "edge_faces": 6,
+        "faces": 6,
+        "edge_area_fraction": 1.0,
+        "finish_mix": 0.0,
+        "brushing_angle_normalized": 0.0
+      },
+      "GEO_PDC_MAIN_GOLD_INDEX_TAB_L": {
+        "edge_faces": 60,
+        "faces": 62,
+        "edge_area_fraction": 0.2762,
+        "finish_mix": 0.0,
+        "brushing_angle_normalized": 0.5
+      },
+      "GEO_PDC_MAIN_GOLD_INDEX_TAB_R": {
+        "edge_faces": 60,
+        "faces": 62,
+        "edge_area_fraction": 0.2762,
+        "finish_mix": 0.0,
+        "brushing_angle_normalized": 0.5
+      },
+      "GEO_PDC_MAIN_GOLD_RAIL_L": {
+        "edge_faces": 2,
+        "faces": 6,
+        "edge_area_fraction": 0.0115,
+        "finish_mix": 0.0,
+        "brushing_angle_normalized": 0.5
+      },
+      "GEO_PDC_MAIN_GOLD_RAIL_R": {
+        "edge_faces": 2,
+        "faces": 6,
+        "edge_area_fraction": 0.0115,
+        "finish_mix": 0.0,
+        "brushing_angle_normalized": 0.5
+      },
+      "GEO_PDC_MAIN_MICROBLAST_FIELD": {
+        "edge_faces": 1509,
+        "faces": 2709,
+        "edge_area_fraction": 0.1609,
+        "finish_mix": 0.0,
+        "brushing_angle_normalized": 0.0
+      },
+      "GEO_PDC_MAIN_MIRROR_SEAM": {
+        "edge_faces": 224,
+        "faces": 240,
+        "edge_area_fraction": 0.0272,
+        "finish_mix": 1.0,
+        "brushing_angle_normalized": 0.0
+      },
+      "GEO_PDC_MAIN_SATIN_SHELF": {
+        "edge_faces": 896,
+        "faces": 960,
+        "edge_area_fraction": 0.0472,
+        "finish_mix": 0.0,
+        "brushing_angle_normalized": 0.0
+      },
+      "GEO_PDC_MAIN_TRAIT_PLAQUE": {
+        "edge_faces": 404,
+        "faces": 422,
+        "edge_area_fraction": 0.012,
+        "finish_mix": 0.0,
+        "brushing_angle_normalized": 0.0
+      },
+      "GEO_PDC_OUTER_CRYSTAL_FRAME": {
+        "edge_faces": 2368,
+        "faces": 2712,
+        "edge_area_fraction": 0.0192,
+        "finish_mix": 0.0,
+        "brushing_angle_normalized": 0.0
+      },
+      "GEO_PDC_POCKET_CLIP_00": {
+        "edge_faces": 192,
+        "faces": 198,
+        "edge_area_fraction": 0.3796,
+        "finish_mix": 0.0,
+        "brushing_angle_normalized": 0.0
+      },
+      "GEO_PDC_POCKET_CLIP_01": {
+        "edge_faces": 192,
+        "faces": 198,
+        "edge_area_fraction": 0.3796,
+        "finish_mix": 0.0,
+        "brushing_angle_normalized": 0.0
+      },
+      "GEO_PDC_POCKET_CLIP_02": {
+        "edge_faces": 192,
+        "faces": 198,
+        "edge_area_fraction": 0.3796,
+        "finish_mix": 0.0,
+        "brushing_angle_normalized": 0.0
+      },
+      "GEO_PDC_POCKET_GRAPHITE_FLOOR": {
+        "edge_faces": 192,
+        "faces": 194,
+        "edge_area_fraction": 0.0082,
+        "finish_mix": 0.0,
+        "brushing_angle_normalized": 0.0
+      },
+      "GEO_PDC_POCKET_POLISHED_LIP": {
+        "edge_faces": 3648,
+        "faces": 4224,
+        "edge_area_fraction": 0.3665,
+        "finish_mix": 1.0,
+        "brushing_angle_normalized": 0.0
+      },
+      "GEO_PDC_POCKET_SMOKE_WALL": {
+        "edge_faces": 384,
+        "faces": 768,
+        "edge_area_fraction": 0.2338,
+        "finish_mix": 0.0,
+        "brushing_angle_normalized": 0.0
+      },
+      "GEO_PDC_REAR_PLATE": {
+        "edge_faces": 56,
+        "faces": 62,
+        "edge_area_fraction": 0.0014,
+        "finish_mix": 0.0,
+        "brushing_angle_normalized": 0.0
+      },
+      "GEO_PDC_SMOKE_INNER_LINER": {
+        "edge_faces": 224,
+        "faces": 240,
+        "edge_area_fraction": 0.0303,
+        "finish_mix": 0.0,
+        "brushing_angle_normalized": 0.0
+      }
+    }
+  },
+  "mesh_integrity": {
+    "GEO_PDC_COMPARTMENT_SEAM": {
+      "vertices": 480,
+      "edges": 900,
+      "polygons": 422,
+      "triangles": 956,
+      "non_manifold_edges": 0,
+      "boundary_edges": 0,
+      "zero_length_edges": 0,
+      "zero_area_faces": 0,
+      "duplicate_vertices": 0,
+      "components": 1,
+      "component_vertex_counts": [
+        480
+      ],
+      "signed_volume_mm3": 1160.2878,
+      "watertight": true,
+      "positive_volume": true
+    },
+    "GEO_PDC_FRAME_BOLT_00": {
+      "vertices": 4920,
+      "edges": 9852,
+      "polygons": 4932,
+      "triangles": 9840,
+      "non_manifold_edges": 0,
+      "boundary_edges": 0,
+      "zero_length_edges": 0,
+      "zero_area_faces": 0,
+      "duplicate_vertices": 0,
+      "components": 1,
+      "component_vertex_counts": [
+        4920
+      ],
+      "signed_volume_mm3": 2.92,
+      "watertight": true,
+      "positive_volume": true
+    },
+    "GEO_PDC_FRAME_BOLT_00_SOCKET_FLOOR": {
+      "vertices": 12,
+      "edges": 18,
+      "polygons": 8,
+      "triangles": 20,
+      "non_manifold_edges": 0,
+      "boundary_edges": 0,
+      "zero_length_edges": 0,
+      "zero_area_faces": 0,
+      "duplicate_vertices": 0,
+      "components": 1,
+      "component_vertex_counts": [
+        12
+      ],
+      "signed_volume_mm3": 0.1558,
+      "watertight": true,
+      "positive_volume": true
+    },
+    "GEO_PDC_FRAME_BOLT_01": {
+      "vertices": 4920,
+      "edges": 9852,
+      "polygons": 4932,
+      "triangles": 9840,
+      "non_manifold_edges": 0,
+      "boundary_edges": 0,
+      "zero_length_edges": 0,
+      "zero_area_faces": 0,
+      "duplicate_vertices": 0,
+      "components": 1,
+      "component_vertex_counts": [
+        4920
+      ],
+      "signed_volume_mm3": 2.9265,
+      "watertight": true,
+      "positive_volume": true
+    },
+    "GEO_PDC_FRAME_BOLT_01_SOCKET_FLOOR": {
+      "vertices": 12,
+      "edges": 18,
+      "polygons": 8,
+      "triangles": 20,
+      "non_manifold_edges": 0,
+      "boundary_edges": 0,
+      "zero_length_edges": 0,
+      "zero_area_faces": 0,
+      "duplicate_vertices": 0,
+      "components": 1,
+      "component_vertex_counts": [
+        12
+      ],
+      "signed_volume_mm3": 0.1565,
+      "watertight": true,
+      "positive_volume": true
+    },
+    "GEO_PDC_FRAME_BOLT_02": {
+      "vertices": 4920,
+      "edges": 9852,
+      "polygons": 4932,
+      "triangles": 9840,
+      "non_manifold_edges": 0,
+      "boundary_edges": 0,
+      "zero_length_edges": 0,
+      "zero_area_faces": 0,
+      "duplicate_vertices": 0,
+      "components": 1,
+      "component_vertex_counts": [
+        4920
+      ],
+      "signed_volume_mm3": 2.9309,
+      "watertight": true,
+      "positive_volume": true
+    },
+    "GEO_PDC_FRAME_BOLT_02_SOCKET_FLOOR": {
+      "vertices": 12,
+      "edges": 18,
+      "polygons": 8,
+      "triangles": 20,
+      "non_manifold_edges": 0,
+      "boundary_edges": 0,
+      "zero_length_edges": 0,
+      "zero_area_faces": 0,
+      "duplicate_vertices": 0,
+      "components": 1,
+      "component_vertex_counts": [
+        12
+      ],
+      "signed_volume_mm3": 0.1563,
+      "watertight": true,
+      "positive_volume": true
+    },
+    "GEO_PDC_FRAME_BOLT_03": {
+      "vertices": 4920,
+      "edges": 9852,
+      "polygons": 4932,
+      "triangles": 9840,
+      "non_manifold_edges": 0,
+      "boundary_edges": 0,
+      "zero_length_edges": 0,
+      "zero_area_faces": 0,
+      "duplicate_vertices": 0,
+      "components": 1,
+      "component_vertex_counts": [
+        4920
+      ],
+      "signed_volume_mm3": 2.9225,
+      "watertight": true,
+      "positive_volume": true
+    },
+    "GEO_PDC_FRAME_BOLT_03_SOCKET_FLOOR": {
+      "vertices": 12,
+      "edges": 18,
+      "polygons": 8,
+      "triangles": 20,
+      "non_manifold_edges": 0,
+      "boundary_edges": 0,
+      "zero_length_edges": 0,
+      "zero_area_faces": 0,
+      "duplicate_vertices": 0,
+      "components": 1,
+      "component_vertex_counts": [
+        12
+      ],
+      "signed_volume_mm3": 0.1561,
+      "watertight": true,
+      "positive_volume": true
+    },
+    "GEO_PDC_FRAME_BOLT_04": {
+      "vertices": 4920,
+      "edges": 9852,
+      "polygons": 4932,
+      "triangles": 9840,
+      "non_manifold_edges": 0,
+      "boundary_edges": 0,
+      "zero_length_edges": 0,
+      "zero_area_faces": 0,
+      "duplicate_vertices": 0,
+      "components": 1,
+      "component_vertex_counts": [
+        4920
+      ],
+      "signed_volume_mm3": 2.9271,
+      "watertight": true,
+      "positive_volume": true
+    },
+    "GEO_PDC_FRAME_BOLT_04_SOCKET_FLOOR": {
+      "vertices": 12,
+      "edges": 18,
+      "polygons": 8,
+      "triangles": 20,
+      "non_manifold_edges": 0,
+      "boundary_edges": 0,
+      "zero_length_edges": 0,
+      "zero_area_faces": 0,
+      "duplicate_vertices": 0,
+      "components": 1,
+      "component_vertex_counts": [
+        12
+      ],
+      "signed_volume_mm3": 0.1565,
+      "watertight": true,
+      "positive_volume": true
+    },
+    "GEO_PDC_FRAME_BOLT_05": {
+      "vertices": 4920,
+      "edges": 9852,
+      "polygons": 4932,
+      "triangles": 9840,
+      "non_manifold_edges": 0,
+      "boundary_edges": 0,
+      "zero_length_edges": 0,
+      "zero_area_faces": 0,
+      "duplicate_vertices": 0,
+      "components": 1,
+      "component_vertex_counts": [
+        4920
+      ],
+      "signed_volume_mm3": 2.9196,
+      "watertight": true,
+      "positive_volume": true
+    },
+    "GEO_PDC_FRAME_BOLT_05_SOCKET_FLOOR": {
+      "vertices": 12,
+      "edges": 18,
+      "polygons": 8,
+      "triangles": 20,
+      "non_manifold_edges": 0,
+      "boundary_edges": 0,
+      "zero_length_edges": 0,
+      "zero_area_faces": 0,
+      "duplicate_vertices": 0,
+      "components": 1,
+      "component_vertex_counts": [
+        12
+      ],
+      "signed_volume_mm3": 0.1558,
+      "watertight": true,
+      "positive_volume": true
+    },
+    "GEO_PDC_HEADER_GOLD_INLAY_L": {
+      "vertices": 8,
+      "edges": 12,
+      "polygons": 6,
+      "triangles": 12,
+      "non_manifold_edges": 0,
+      "boundary_edges": 0,
+      "zero_length_edges": 0,
+      "zero_area_faces": 0,
+      "duplicate_vertices": 0,
+      "components": 1,
+      "component_vertex_counts": [
+        8
+      ],
+      "signed_volume_mm3": 2.4307,
+      "watertight": true,
+      "positive_volume": true
+    },
+    "GEO_PDC_HEADER_GOLD_INLAY_R": {
+      "vertices": 8,
+      "edges": 12,
+      "polygons": 6,
+      "triangles": 12,
+      "non_manifold_edges": 0,
+      "boundary_edges": 0,
+      "zero_length_edges": 0,
+      "zero_area_faces": 0,
+      "duplicate_vertices": 0,
+      "components": 1,
+      "component_vertex_counts": [
+        8
+      ],
+      "signed_volume_mm3": 2.4307,
+      "watertight": true,
+      "positive_volume": true
+    },
+    "GEO_PDC_HEADER_GRAPHITE_PLANE": {
+      "vertices": 120,
+      "edges": 180,
+      "polygons": 62,
+      "triangles": 236,
+      "non_manifold_edges": 0,
+      "boundary_edges": 0,
+      "zero_length_edges": 0,
+      "zero_area_faces": 0,
+      "duplicate_vertices": 0,
+      "components": 1,
+      "component_vertex_counts": [
+        120
+      ],
+      "signed_volume_mm3": 14281.9924,
+      "watertight": true,
+      "positive_volume": true
+    },
+    "GEO_PDC_HEADER_MIRROR_BEVEL": {
+      "vertices": 240,
+      "edges": 480,
+      "polygons": 240,
+      "triangles": 480,
+      "non_manifold_edges": 0,
+      "boundary_edges": 0,
+      "zero_length_edges": 0,
+      "zero_area_faces": 0,
+      "duplicate_vertices": 0,
+      "components": 1,
+      "component_vertex_counts": [
+        240
+      ],
+      "signed_volume_mm3": 1113.1283,
+      "watertight": true,
+      "positive_volume": true
+    },
+    "GEO_PDC_HEADER_SATIN_SHELF": {
+      "vertices": 960,
+      "edges": 1920,
+      "polygons": 960,
+      "triangles": 1920,
+      "non_manifold_edges": 0,
+      "boundary_edges": 0,
+      "zero_length_edges": 0,
+      "zero_area_faces": 0,
+      "duplicate_vertices": 0,
+      "components": 1,
+      "component_vertex_counts": [
+        960
+      ],
+      "signed_volume_mm3": 3956.1477,
+      "watertight": true,
+      "positive_volume": true
+    },
+    "GEO_PDC_MAIN_GOLD_CHAMFER_BL": {
+      "vertices": 8,
+      "edges": 12,
+      "polygons": 6,
+      "triangles": 12,
+      "non_manifold_edges": 0,
+      "boundary_edges": 0,
+      "zero_length_edges": 0,
+      "zero_area_faces": 0,
+      "duplicate_vertices": 0,
+      "components": 1,
+      "component_vertex_counts": [
+        8
+      ],
+      "signed_volume_mm3": 0.2411,
+      "watertight": true,
+      "positive_volume": true
+    },
+    "GEO_PDC_MAIN_GOLD_CHAMFER_BR": {
+      "vertices": 8,
+      "edges": 12,
+      "polygons": 6,
+      "triangles": 12,
+      "non_manifold_edges": 0,
+      "boundary_edges": 0,
+      "zero_length_edges": 0,
+      "zero_area_faces": 0,
+      "duplicate_vertices": 0,
+      "components": 1,
+      "component_vertex_counts": [
+        8
+      ],
+      "signed_volume_mm3": 0.2414,
+      "watertight": true,
+      "positive_volume": true
+    },
+    "GEO_PDC_MAIN_GOLD_CHAMFER_TL": {
+      "vertices": 8,
+      "edges": 12,
+      "polygons": 6,
+      "triangles": 12,
+      "non_manifold_edges": 0,
+      "boundary_edges": 0,
+      "zero_length_edges": 0,
+      "zero_area_faces": 0,
+      "duplicate_vertices": 0,
+      "components": 1,
+      "component_vertex_counts": [
+        8
+      ],
+      "signed_volume_mm3": 0.2414,
+      "watertight": true,
+      "positive_volume": true
+    },
+    "GEO_PDC_MAIN_GOLD_CHAMFER_TR": {
+      "vertices": 8,
+      "edges": 12,
+      "polygons": 6,
+      "triangles": 12,
+      "non_manifold_edges": 0,
+      "boundary_edges": 0,
+      "zero_length_edges": 0,
+      "zero_area_faces": 0,
+      "duplicate_vertices": 0,
+      "components": 1,
+      "component_vertex_counts": [
+        8
+      ],
+      "signed_volume_mm3": 0.2413,
+      "watertight": true,
+      "positive_volume": true
+    },
+    "GEO_PDC_MAIN_GOLD_INDEX_TAB_L": {
+      "vertices": 120,
+      "edges": 180,
+      "polygons": 62,
+      "triangles": 236,
+      "non_manifold_edges": 0,
+      "boundary_edges": 0,
+      "zero_length_edges": 0,
+      "zero_area_faces": 0,
+      "duplicate_vertices": 0,
+      "components": 1,
+      "component_vertex_counts": [
+        120
+      ],
+      "signed_volume_mm3": 1.5697,
+      "watertight": true,
+      "positive_volume": true
+    },
+    "GEO_PDC_MAIN_GOLD_INDEX_TAB_R": {
+      "vertices": 120,
+      "edges": 180,
+      "polygons": 62,
+      "triangles": 236,
+      "non_manifold_edges": 0,
+      "boundary_edges": 0,
+      "zero_length_edges": 0,
+      "zero_area_faces": 0,
+      "duplicate_vertices": 0,
+      "components": 1,
+      "component_vertex_counts": [
+        120
+      ],
+      "signed_volume_mm3": 1.5691,
+      "watertight": true,
+      "positive_volume": true
+    },
+    "GEO_PDC_MAIN_GOLD_RAIL_L": {
+      "vertices": 8,
+      "edges": 12,
+      "polygons": 6,
+      "triangles": 12,
+      "non_manifold_edges": 0,
+      "boundary_edges": 0,
+      "zero_length_edges": 0,
+      "zero_area_faces": 0,
+      "duplicate_vertices": 0,
+      "components": 1,
+      "component_vertex_counts": [
+        8
+      ],
+      "signed_volume_mm3": 4.9473,
+      "watertight": true,
+      "positive_volume": true
+    },
+    "GEO_PDC_MAIN_GOLD_RAIL_R": {
+      "vertices": 8,
+      "edges": 12,
+      "polygons": 6,
+      "triangles": 12,
+      "non_manifold_edges": 0,
+      "boundary_edges": 0,
+      "zero_length_edges": 0,
+      "zero_area_faces": 0,
+      "duplicate_vertices": 0,
+      "components": 1,
+      "component_vertex_counts": [
+        8
+      ],
+      "signed_volume_mm3": 4.9473,
+      "watertight": true,
+      "positive_volume": true
+    },
+    "GEO_PDC_MAIN_MICROBLAST_FIELD": {
+      "vertices": 3368,
+      "edges": 6077,
+      "polygons": 2709,
+      "triangles": 6736,
+      "non_manifold_edges": 0,
+      "boundary_edges": 0,
+      "zero_length_edges": 0,
+      "zero_area_faces": 0,
+      "duplicate_vertices": 0,
+      "components": 1,
+      "component_vertex_counts": [
+        3368
+      ],
+      "signed_volume_mm3": 15287.953,
+      "watertight": true,
+      "positive_volume": true
+    },
+    "GEO_PDC_MAIN_MIRROR_SEAM": {
+      "vertices": 240,
+      "edges": 480,
+      "polygons": 240,
+      "triangles": 480,
+      "non_manifold_edges": 0,
+      "boundary_edges": 0,
+      "zero_length_edges": 0,
+      "zero_area_faces": 0,
+      "duplicate_vertices": 0,
+      "components": 1,
+      "component_vertex_counts": [
+        240
+      ],
+      "signed_volume_mm3": 1671.6382,
+      "watertight": true,
+      "positive_volume": true
+    },
+    "GEO_PDC_MAIN_SATIN_SHELF": {
+      "vertices": 960,
+      "edges": 1920,
+      "polygons": 960,
+      "triangles": 1920,
+      "non_manifold_edges": 0,
+      "boundary_edges": 0,
+      "zero_length_edges": 0,
+      "zero_area_faces": 0,
+      "duplicate_vertices": 0,
+      "components": 1,
+      "component_vertex_counts": [
+        960
+      ],
+      "signed_volume_mm3": 5846.9333,
+      "watertight": true,
+      "positive_volume": true
+    },
+    "GEO_PDC_MAIN_TRAIT_PLAQUE": {
+      "vertices": 480,
+      "edges": 900,
+      "polygons": 422,
+      "triangles": 956,
+      "non_manifold_edges": 0,
+      "boundary_edges": 0,
+      "zero_length_edges": 0,
+      "zero_area_faces": 0,
+      "duplicate_vertices": 0,
+      "components": 1,
+      "component_vertex_counts": [
+        480
+      ],
+      "signed_volume_mm3": 641.197,
+      "watertight": true,
+      "positive_volume": true
+    },
+    "GEO_PDC_OUTER_CRYSTAL_FRAME": {
+      "vertices": 2878,
+      "edges": 5590,
+      "polygons": 2712,
+      "triangles": 5756,
+      "non_manifold_edges": 0,
+      "boundary_edges": 0,
+      "zero_length_edges": 0,
+      "zero_area_faces": 0,
+      "duplicate_vertices": 0,
+      "components": 1,
+      "component_vertex_counts": [
+        2878
+      ],
+      "signed_volume_mm3": 29195.8725,
+      "watertight": true,
+      "positive_volume": true
+    },
+    "GEO_PDC_POCKET_CLIP_00": {
+      "vertices": 224,
+      "edges": 420,
+      "polygons": 198,
+      "triangles": 444,
+      "non_manifold_edges": 0,
+      "boundary_edges": 0,
+      "zero_length_edges": 0,
+      "zero_area_faces": 0,
+      "duplicate_vertices": 0,
+      "components": 1,
+      "component_vertex_counts": [
+        224
+      ],
+      "signed_volume_mm3": 29.1622,
+      "watertight": true,
+      "positive_volume": true
+    },
+    "GEO_PDC_POCKET_CLIP_01": {
+      "vertices": 224,
+      "edges": 420,
+      "polygons": 198,
+      "triangles": 444,
+      "non_manifold_edges": 0,
+      "boundary_edges": 0,
+      "zero_length_edges": 0,
+      "zero_area_faces": 0,
+      "duplicate_vertices": 0,
+      "components": 1,
+      "component_vertex_counts": [
+        224
+      ],
+      "signed_volume_mm3": 29.1622,
+      "watertight": true,
+      "positive_volume": true
+    },
+    "GEO_PDC_POCKET_CLIP_02": {
+      "vertices": 224,
+      "edges": 420,
+      "polygons": 198,
+      "triangles": 444,
+      "non_manifold_edges": 0,
+      "boundary_edges": 0,
+      "zero_length_edges": 0,
+      "zero_area_faces": 0,
+      "duplicate_vertices": 0,
+      "components": 1,
+      "component_vertex_counts": [
+        224
+      ],
+      "signed_volume_mm3": 29.1618,
+      "watertight": true,
+      "positive_volume": true
+    },
+    "GEO_PDC_POCKET_GRAPHITE_FLOOR": {
+      "vertices": 384,
+      "edges": 576,
+      "polygons": 194,
+      "triangles": 764,
+      "non_manifold_edges": 0,
+      "boundary_edges": 0,
+      "zero_length_edges": 0,
+      "zero_area_faces": 0,
+      "duplicate_vertices": 0,
+      "components": 1,
+      "component_vertex_counts": [
+        384
+      ],
+      "signed_volume_mm3": 997.6419,
+      "watertight": true,
+      "positive_volume": true
+    },
+    "GEO_PDC_POCKET_POLISHED_LIP": {
+      "vertices": 4224,
+      "edges": 8448,
+      "polygons": 4224,
+      "triangles": 8448,
+      "non_manifold_edges": 0,
+      "boundary_edges": 0,
+      "zero_length_edges": 0,
+      "zero_area_faces": 0,
+      "duplicate_vertices": 0,
+      "components": 1,
+      "component_vertex_counts": [
+        4224
+      ],
+      "signed_volume_mm3": 2618.8491,
+      "watertight": true,
+      "positive_volume": true
+    },
+    "GEO_PDC_POCKET_SMOKE_WALL": {
+      "vertices": 768,
+      "edges": 1536,
+      "polygons": 768,
+      "triangles": 1536,
+      "non_manifold_edges": 0,
+      "boundary_edges": 0,
+      "zero_length_edges": 0,
+      "zero_area_faces": 0,
+      "duplicate_vertices": 0,
+      "components": 1,
+      "component_vertex_counts": [
+        768
+      ],
+      "signed_volume_mm3": 483.8324,
+      "watertight": true,
+      "positive_volume": true
+    },
+    "GEO_PDC_REAR_PLATE": {
+      "vertices": 120,
+      "edges": 180,
+      "polygons": 62,
+      "triangles": 236,
+      "non_manifold_edges": 0,
+      "boundary_edges": 0,
+      "zero_length_edges": 0,
+      "zero_area_faces": 0,
+      "duplicate_vertices": 0,
+      "components": 1,
+      "component_vertex_counts": [
+        120
+      ],
+      "signed_volume_mm3": 35073.5101,
+      "watertight": true,
+      "positive_volume": true
+    },
+    "GEO_PDC_SMOKE_INNER_LINER": {
+      "vertices": 240,
+      "edges": 480,
+      "polygons": 240,
+      "triangles": 480,
+      "non_manifold_edges": 0,
+      "boundary_edges": 0,
+      "zero_length_edges": 0,
+      "zero_area_faces": 0,
+      "duplicate_vertices": 0,
+      "components": 1,
+      "component_vertex_counts": [
+        240
+      ],
+      "signed_volume_mm3": 2463.4214,
+      "watertight": true,
+      "positive_volume": true
+    }
+  },
+  "totals": {
+    "objects": 39,
+    "triangles": 91964,
+    "triangle_budget": 120000,
+    "material_slots_used": 7,
+    "material_slot_budget": 7
+  },
+  "identity": {
+    "vertexPositionDigest": "2389c6c743fdefb4d573c92a9099a58c14eb13eaccdb4f694c493812df9e3313",
+    "objectMatrixDigest": "c6f512416a91ccd94719237ef4b1a0ee90837860432bde46f33771e5b9961d3b",
+    "topologyDigest": "f293674d437dd6156f8744b7279ad971fb6c4b77b25320b50cd93d763204035c"
+  },
+  "dimensions_mm": {
+    "width": 101.28,
+    "depth": 10.96,
+    "height": 171.78
+  },
+  "contract_dimensions_mm": {
+    "width": 101.28,
+    "height": 171.78,
+    "structural_depth": 10.96,
+    "envelope_depth_with_toy": 17.05
+  },
+  "content_slot_location_mm": [
+    0.0,
+    -1.275,
+    -20.68
+  ],
+  "presentation_root_location_mm": [
+    0.0,
+    0.0,
+    0.0
+  ],
+  "checks": [
+    {
+      "id": "source-hash-matches-approved-gate05",
+      "status": "pass",
+      "detail": "f61c2485c98f"
+    },
+    {
+      "id": "all-modifiers-applied",
+      "status": "pass",
+      "detail": "54 modifiers applied"
+    },
+    {
+      "id": "all-case-meshes-watertight",
+      "status": "pass",
+      "detail": "{}"
+    },
+    {
+      "id": "no-degenerate-geometry",
+      "status": "pass",
+      "detail": ""
+    },
+    {
+      "id": "no-duplicate-vertices",
+      "status": "pass",
+      "detail": "{}"
+    },
+    {
+      "id": "positive-material-volume",
+      "status": "pass",
+      "detail": "{}"
+    },
+    {
+      "id": "triangle-budget",
+      "status": "pass",
+      "detail": "91964 <= 120000"
+    },
+    {
+      "id": "material-slot-budget",
+      "status": "pass",
+      "detail": "7 zones"
+    },
+    {
+      "id": "case-width-matches-contract",
+      "status": "pass",
+      "detail": "101.280 vs 101.28"
+    },
+    {
+      "id": "case-height-matches-contract",
+      "status": "pass",
+      "detail": "171.780 vs 171.78"
+    },
+    {
+      "id": "case-structural-depth-matches-contract",
+      "status": "pass",
+      "detail": "10.960 vs 10.96 (envelope 17.05 includes the toy)"
+    },
+    {
+      "id": "vertex-channels-present",
+      "status": "pass",
+      "detail": "COLOR0 + UV2 on every case mesh"
+    },
+    {
+      "id": "crystal-iridescence-mask-edge-limited",
+      "status": "pass",
+      "detail": "{\"edge_faces\": 2368, \"faces\": 2712, \"edge_area_fraction\": 0.0192, \"finish_mix\": 0.0, \"brushing_angle_normalized\": 0.0}"
+    },
+    {
+      "id": "no-wings",
+      "status": "pass",
+      "detail": "rev-009+ contract"
+    },
+    {
+      "id": "content-slot-present",
+      "status": "pass",
+      "detail": "[0.0, -1.275, -20.68]"
+    },
+    {
+      "id": "no-cutters-left",
+      "status": "pass",
+      "detail": "removed 8"
+    }
+  ],
+  "all_pass": true,
+  "orthographic_views": {
+    "front": {
+      "ortho_scale_m": 0.19239360094070435,
+      "extent_w_m": 0.10127999633550644,
+      "extent_h_m": 0.17178000509738922,
+      "resolution": [
+        2048,
+        2048
+      ],
+      "px_per_mm": 10.644844682912261
+    },
+    "back": {
+      "ortho_scale_m": 0.19239360094070435,
+      "extent_w_m": 0.10127999633550644,
+      "extent_h_m": 0.17178000509738922,
+      "resolution": [
+        2048,
+        2048
+      ],
+      "px_per_mm": 10.644844682912261
+    },
+    "top": {
+      "ortho_scale_m": 0.1134335994720459,
+      "extent_w_m": 0.10127999633550644,
+      "extent_h_m": 0.01095999963581562,
+      "resolution": [
+        2048,
+        2048
+      ],
+      "px_per_mm": 18.054615295044925
+    },
+    "bottom": {
+      "ortho_scale_m": 0.1134335994720459,
+      "extent_w_m": 0.10127999633550644,
+      "extent_h_m": 0.01095999963581562,
+      "resolution": [
+        2048,
+        2048
+      ],
+      "px_per_mm": 18.054615295044925
+    },
+    "left": {
+      "ortho_scale_m": 0.19239360094070435,
+      "extent_w_m": 0.01095999963581562,
+      "extent_h_m": 0.17178000509738922,
+      "resolution": [
+        2048,
+        2048
+      ],
+      "px_per_mm": 10.644844682912261
+    },
+    "right": {
+      "ortho_scale_m": 0.19239360094070435,
+      "extent_w_m": 0.01095999963581562,
+      "extent_h_m": 0.17178000509738922,
+      "resolution": [
+        2048,
+        2048
+      ],
+      "px_per_mm": 10.644844682912261
+    }
+  },
+  "turntable": {
+    "frames": 72,
+    "fps": 24,
+    "camera": "CAM_PDC_HERO",
+    "raw_frame_dir": "/tmp/tri-spinner-slab-g06-r010-turntable-20260911T083825"
+  },
+  "review_glb": {
+    "path": "unity/FidgetingApp/ArtSource/ModelPipeline/premium-display-case/evidence/06-geometry/rev-010/tri-spinner-slab-gate06-review-r010.glb",
+    "sha256": "95fc106e83a069530d0035afc92ec0d7e21c590689404ba06bc2753cc6af0950",
+    "purpose": "interactive-review-only-not-gate10-export",
+    "objects": [
+      "GEO_PDC_COMPARTMENT_SEAM",
+      "GEO_PDC_FRAME_BOLT_00",
+      "GEO_PDC_FRAME_BOLT_00_SOCKET_FLOOR",
+      "GEO_PDC_FRAME_BOLT_01",
+      "GEO_PDC_FRAME_BOLT_01_SOCKET_FLOOR",
+      "GEO_PDC_FRAME_BOLT_02",
+      "GEO_PDC_FRAME_BOLT_02_SOCKET_FLOOR",
+      "GEO_PDC_FRAME_BOLT_03",
+      "GEO_PDC_FRAME_BOLT_03_SOCKET_FLOOR",
+      "GEO_PDC_FRAME_BOLT_04",
+      "GEO_PDC_FRAME_BOLT_04_SOCKET_FLOOR",
+      "GEO_PDC_FRAME_BOLT_05",
+      "GEO_PDC_FRAME_BOLT_05_SOCKET_FLOOR",
+      "GEO_PDC_HEADER_GOLD_INLAY_L",
+      "GEO_PDC_HEADER_GOLD_INLAY_R",
+      "GEO_PDC_HEADER_GRAPHITE_PLANE",
+      "GEO_PDC_HEADER_MIRROR_BEVEL",
+      "GEO_PDC_HEADER_SATIN_SHELF",
+      "GEO_PDC_MAIN_GOLD_CHAMFER_BL",
+      "GEO_PDC_MAIN_GOLD_CHAMFER_BR",
+      "GEO_PDC_MAIN_GOLD_CHAMFER_TL",
+      "GEO_PDC_MAIN_GOLD_CHAMFER_TR",
+      "GEO_PDC_MAIN_GOLD_INDEX_TAB_L",
+      "GEO_PDC_MAIN_GOLD_INDEX_TAB_R",
+      "GEO_PDC_MAIN_GOLD_RAIL_L",
+      "GEO_PDC_MAIN_GOLD_RAIL_R",
+      "GEO_PDC_MAIN_MICROBLAST_FIELD",
+      "GEO_PDC_MAIN_MIRROR_SEAM",
+      "GEO_PDC_MAIN_SATIN_SHELF",
+      "GEO_PDC_MAIN_TRAIT_PLAQUE",
+      "GEO_PDC_OUTER_CRYSTAL_FRAME",
+      "GEO_PDC_POCKET_CLIP_00",
+      "GEO_PDC_POCKET_CLIP_01",
+      "GEO_PDC_POCKET_CLIP_02",
+      "GEO_PDC_POCKET_GRAPHITE_FLOOR",
+      "GEO_PDC_POCKET_POLISHED_LIP",
+      "GEO_PDC_POCKET_SMOKE_WALL",
+      "GEO_PDC_REAR_PLATE",
+      "GEO_PDC_SMOKE_INNER_LINER",
+      "PIVOT_PDC_CONTENT_SLOT",
+      "PIVOT_PDC_TURNTABLE",
+      "ROOT_PDC_CASE_ASSEMBLY",
+      "ROOT_PDC_PRESENTATION"
+    ]
+  },
+  "geometry_blend": {
+    "path": "unity/FidgetingApp/ArtSource/ModelPipeline/premium-display-case/evidence/06-geometry/rev-010/tri-spinner-slab-geometry-r010.blend",
+    "sha256": "7bbba856091d90144f56c377234547ac4483e60b522a7d902dfe16167b208e65"
+  }
+}

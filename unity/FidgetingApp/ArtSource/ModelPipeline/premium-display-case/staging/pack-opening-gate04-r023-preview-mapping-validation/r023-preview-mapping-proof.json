@@ -1,0 +1,86 @@
+{
+  "schema": "premium-display-case-gate04-r023-preview-mapping-proof.v1",
+  "repairScope": "Blender preview material mapping only",
+  "input": {
+    "r022Blend": "/Users/jiawei.zhou/Documents/Fidgeting app/unity/FidgetingApp/ArtSource/ModelPipeline/premium-display-case/staging/pack-opening-gate04-r022-segmented-physical-mouth-repair/pack-opening-gate04-r022.blend",
+    "r022BlendSha256": "766a47a795f10dc82e855bcdfbf0a4b6c4fc2b9e1381a6ae14f0f11c416df65f",
+    "r022Fbx": "/Users/jiawei.zhou/Documents/Fidgeting app/unity/FidgetingApp/ArtSource/ModelPipeline/premium-display-case/staging/pack-opening-gate04-r022-segmented-physical-mouth-repair/PackOpeningGate04R022PackOnlyRig.fbx",
+    "r022FbxSha256": "9b3ef4c2e5ca77cd0f53b5ff07c9e47bf2d9f0d367e037a5e711099d7b8ee89a"
+  },
+  "output": {
+    "r023PreviewBlend": "/Users/jiawei.zhou/Documents/Fidgeting app/unity/FidgetingApp/ArtSource/ModelPipeline/premium-display-case/staging/pack-opening-gate04-r023-preview-mapping-validation/pack-opening-gate04-r023-preview-only.blend",
+    "r023PreviewBlendSha256": "54b5898f2a1db5bd9abdffa80275a424040995a03fec474c0cd70b26dc27b6ef",
+    "r023UnityFbx": "/Users/jiawei.zhou/Documents/Fidgeting app/unity/FidgetingApp/ArtSource/ModelPipeline/premium-display-case/staging/pack-opening-gate04-r023-preview-mapping-validation/PackOpeningGate04R022PackOnlyRig.fbx",
+    "r023UnityFbxSha256": "9b3ef4c2e5ca77cd0f53b5ff07c9e47bf2d9f0d367e037a5e711099d7b8ee89a"
+  },
+  "previewMaterialOnly": {
+    "material": "MI_R022_ActualPackArtwork",
+    "image": "//../../../../../../../../../../../private/tmp/FidgetingApp-PackOpening-R021-OpenMouth-20260901-r02/Assets/Source/Pack/gacha-pack-standard-body.png",
+    "imageCanvas": [
+      384,
+      512
+    ],
+    "mapping": {
+      "coordinate": "UV",
+      "location": [
+        0.0,
+        1.0,
+        0.0
+      ],
+      "scale": [
+        1.0,
+        -1.0,
+        1.0
+      ],
+      "formula": "source-v -> 1-source-v"
+    }
+  },
+  "exportInvariants": {
+    "exportedFbxByteIdenticalToR022": true,
+    "uvStreamUnchanged": true,
+    "geometryStreamUnchanged": true,
+    "r022PhysicalUToSourceU": "1-to-0",
+    "unityMaterialMappingChanged": false,
+    "rootCoordinatesChanged": false,
+    "artTextureChanged": false,
+    "packGeometryChanged": false,
+    "tearProgressionChanged": false,
+    "caseChanged": false
+  },
+  "uvStreamSha256": "8b873fd1f03c67e073e731234bb58092bdd078af05963687f20aab5cd59556b0",
+  "geometryStreamSha256": "b3836d785211558cd84797f6bb7ee3ecfd200f97093c13c8ceefcc6e580266e4",
+  "previews": {
+    "sealed": {
+      "path": "/Users/jiawei.zhou/Documents/Fidgeting app/unity/FidgetingApp/ArtSource/ModelPipeline/premium-display-case/staging/pack-opening-gate04-r023-preview-mapping-validation/blender-preflight/sealed-000.png",
+      "sha256": "588b5092c8c3c8f50f2b5d1e3d0942f8836e70cc3355ffd717ecd379f2afc9dc",
+      "dimensions": [
+        1206,
+        2622
+      ]
+    },
+    "tear050": {
+      "path": "/Users/jiawei.zhou/Documents/Fidgeting app/unity/FidgetingApp/ArtSource/ModelPipeline/premium-display-case/staging/pack-opening-gate04-r023-preview-mapping-validation/blender-preflight/tear-050.png",
+      "sha256": "3c621cc57fb0ab6cbba67293799d4f0aa0cfbab98a480ba16e779fb966519e23",
+      "dimensions": [
+        1206,
+        2622
+      ]
+    },
+    "formed070": {
+      "path": "/Users/jiawei.zhou/Documents/Fidgeting app/unity/FidgetingApp/ArtSource/ModelPipeline/premium-display-case/staging/pack-opening-gate04-r023-preview-mapping-validation/blender-preflight/formed-mouth-070.png",
+      "sha256": "a9b0bd7c788c28f1dce65ebf0e341b223f26b4496824664c84c492e26086b807",
+      "dimensions": [
+        1206,
+        2622
+      ]
+    },
+    "contained090": {
+      "path": "/Users/jiawei.zhou/Documents/Fidgeting app/unity/FidgetingApp/ArtSource/ModelPipeline/premium-display-case/staging/pack-opening-gate04-r023-preview-mapping-validation/blender-preflight/case-contained-090.png",
+      "sha256": "78a4cf90e4eb810a599c91747b4d37c744c2c0393b20d22b8d93c5421c19aae8",
+      "dimensions": [
+        1206,
+        2622
+      ]
+    }
+  }
+}

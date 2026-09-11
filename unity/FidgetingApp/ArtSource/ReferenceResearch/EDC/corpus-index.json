@@ -1,0 +1,3470 @@
+{
+  "acceptance": {
+    "checks": [
+      {
+        "actual": 20,
+        "expected": 20,
+        "id": "source-count",
+        "status": "pass"
+      },
+      {
+        "actual": 16,
+        "expected": 16,
+        "id": "xiaohongshu-count",
+        "status": "pass"
+      },
+      {
+        "actual": 4,
+        "expected": 4,
+        "id": "douyin-count",
+        "status": "pass"
+      },
+      {
+        "actual": 143,
+        "expected": 143,
+        "id": "readable-unique-image-count",
+        "status": "pass"
+      },
+      {
+        "actual": 1,
+        "expected": 1,
+        "id": "missing-image-reference-count",
+        "status": "pass"
+      }
+    ],
+    "expected": {
+      "missingImageReferenceCount": 1,
+      "platformCounts": {
+        "douyin": 4,
+        "xiaohongshu": 16
+      },
+      "readableUniqueImageCount": 143,
+      "sourceCount": 20
+    },
+    "status": "pass"
+  },
+  "clusterSummary": [
+    {
+      "clusterId": "chimago-jiangmo-dada-slider",
+      "sourceCount": 1
+    },
+    {
+      "clusterId": "clean-edc-zirconium-rod",
+      "sourceCount": 1
+    },
+    {
+      "clusterId": "finger-ootd-spinner-assortment",
+      "sourceCount": 1
+    },
+    {
+      "clusterId": "gdedc-2026-expo-roundup",
+      "sourceCount": 1
+    },
+    {
+      "clusterId": "gobigger-zhen-dan-edc-figure",
+      "sourceCount": 1
+    },
+    {
+      "clusterId": "jason-yu-mixed-edc-collection",
+      "sourceCount": 1
+    },
+    {
+      "clusterId": "jinxing-amber-two-lobe-spinner",
+      "sourceCount": 1
+    },
+    {
+      "clusterId": "kovo-fuguang",
+      "sourceCount": 1
+    },
+    {
+      "clusterId": "lautie-poker-slider-3",
+      "sourceCount": 1
+    },
+    {
+      "clusterId": "lautie-titanium-blue-chocolate-slider",
+      "sourceCount": 1
+    },
+    {
+      "clusterId": "lbw-circle-n7-spinner",
+      "sourceCount": 1
+    },
+    {
+      "clusterId": "matrix-edc-linjie-infinite-slider",
+      "sourceCount": 1
+    },
+    {
+      "clusterId": "metal-three-blade",
+      "sourceCount": 1
+    },
+    {
+      "clusterId": "nado-segment-scale-slider",
+      "sourceCount": 1
+    },
+    {
+      "clusterId": "pigstol-namro-revolver-edc-roundup",
+      "sourceCount": 1
+    },
+    {
+      "clusterId": "rgb-led-matrix-fidget-slider",
+      "sourceCount": 1
+    },
+    {
+      "clusterId": "showhand-can-coin",
+      "sourceCount": 1
+    },
+    {
+      "clusterId": "tengshun-edc-blind-box-assortment",
+      "sourceCount": 1
+    },
+    {
+      "clusterId": "three-tone-edc-slider-unidentified",
+      "sourceCount": 1
+    },
+    {
+      "clusterId": "tw-linglongyun-tri-spinner",
+      "sourceCount": 1
+    }
+  ],
+  "duplicateAudit": {
+    "exactContentGroups": [],
+    "identicalPHashGroups": []
+  },
+  "imageFingerprint": {
+    "algorithm": "dct-ii-32x32-low8x8-median64-v1",
+    "description": "EXIF transpose; Luma Lanczos 32x32; orthonormal 2-D DCT-II; low 8x8 median excluding DC; 64 bits"
+  },
+  "scanContract": {
+    "excludedTrees": [
+      ".obsidian",
+      ".claudian",
+      ".git",
+      "plugin configuration"
+    ],
+    "incrementalIdentity": [
+      "frontmatter.id",
+      "note.mtimeNs",
+      "note.sha256"
+    ],
+    "mediaDownloads": "none",
+    "networkAccess": "none",
+    "sourceAccess": "read-only",
+    "sourcePattern": "笔记同步助手/YYYY-MM-DD/*.md"
+  },
+  "schemaVersion": 1,
+  "selectionAudit": {
+    "baselineSourceIdCount": 20,
+    "excludedOrUnresolvedCandidates": [
+      {
+        "exclusionReason": "collectible character imagery; no EDC mechanism or EDC tag in the note",
+        "frontmatterId": "c54dcf85-92fc-467b-93a8-c3c3438ab3ac",
+        "imageReferenceCount": 5,
+        "noteRelativePath": "2026-07-31/匪帮宝宝.md",
+        "status": "excluded-or-needs-triage"
+      },
+      {
+        "exclusionReason": "automotive sticker post, not an EDC object",
+        "frontmatterId": "b39aeb7c-2835-4433-adde-0a793a03196c",
+        "imageReferenceCount": 4,
+        "noteRelativePath": "2026-07-31/秋名山车神常有，而路人不常有.md",
+        "status": "excluded-or-needs-triage"
+      },
+      {
+        "exclusionReason": "assistant-derived storyboard/spec; linked as ai-target, never a raw source",
+        "frontmatterId": null,
+        "imageReferenceCount": 3,
+        "noteRelativePath": "2026-08-01/龙鳞（NOVO EDC）分镜与3D生成规范.md",
+        "status": "excluded-or-needs-triage"
+      },
+      {
+        "exclusionReason": "metadata-only Douyin URL with unknown author, no EDC-identifying content, and no frames",
+        "frontmatterId": "97158d73-7bd6-45e7-b22c-173c1f27576b",
+        "imageReferenceCount": 0,
+        "noteRelativePath": "2026-08-06/视频链接.md",
+        "status": "excluded-or-needs-triage"
+      },
+      {
+        "exclusionReason": "inbox aggregate fragment without standalone source frontmatter; manual normalization required",
+        "frontmatterId": null,
+        "imageReferenceCount": 1,
+        "noteRelativePath": "2026-08-09/同步助手_2026-08-09.md",
+        "status": "excluded-or-needs-triage"
+      },
+      {
+        "exclusionReason": "ambiguous OCR-only product note; held for manual EDC/product identification",
+        "frontmatterId": "de5fd808-ade1-43cf-88d5-fc7912eafe24",
+        "imageReferenceCount": 6,
+        "noteRelativePath": "2026-08-10/无界♾️.md",
+        "status": "excluded-or-needs-triage"
+      },
+      {
+        "exclusionReason": "inbox aggregate fragment without standalone source frontmatter; manual normalization required",
+        "frontmatterId": null,
+        "imageReferenceCount": 2,
+        "noteRelativePath": "2026-08-24/同步助手_2026-08-24.md",
+        "status": "excluded-or-needs-triage"
+      }
+    ],
+    "markdownFilesScanned": 73,
+    "missingBaselineFrontmatterIds": [],
+    "platformNotesWithStableId": 62,
+    "selectedSources": [
+      {
+        "imageReferenceCount": 11,
+        "missingImageCount": 0,
+        "noteRelativePath": "2026-07-31/GoBigger震旦😼就问你帅不帅.md",
+        "readableImageCount": 11,
+        "selectionReason": "id-pinned-baseline",
+        "sourceId": "edc:c45de71c-48c5-480c-a790-954c288bcd92"
+      },
+      {
+        "imageReferenceCount": 4,
+        "missingImageCount": 0,
+        "noteRelativePath": "2026-08-01/2026 广州硬核装备展览会逛展攻略.md",
+        "readableImageCount": 4,
+        "selectionReason": "id-pinned-baseline",
+        "sourceId": "edc:3d7a4abf-9a2a-423f-85a8-e2e1aae45842"
+      },
+      {
+        "imageReferenceCount": 5,
+        "missingImageCount": 0,
+        "noteRelativePath": "2026-08-01/手感巴适，声音得劲~【浮光-KOVO】.md",
+        "readableImageCount": 5,
+        "selectionReason": "id-pinned-baseline",
+        "sourceId": "edc:78405f8f-4487-4d11-b463-20a1c75db2b0"
+      },
+      {
+        "imageReferenceCount": 11,
+        "missingImageCount": 0,
+        "noteRelativePath": "2026-08-01/无限旋转的解压玩具？.md",
+        "readableImageCount": 11,
+        "selectionReason": "id-pinned-baseline",
+        "sourceId": "edc:e6186100-5986-4022-aa19-85622f0281ac"
+      },
+      {
+        "imageReferenceCount": 10,
+        "missingImageCount": 1,
+        "noteRelativePath": "2026-08-01/可以玩一整天的小玩意？！.md",
+        "readableImageCount": 9,
+        "selectionReason": "id-pinned-baseline",
+        "sourceId": "edc:764154b2-8f95-4401-9d94-653528f55a8c"
+      },
+      {
+        "imageReferenceCount": 1,
+        "missingImageCount": 0,
+        "noteRelativePath": "2026-08-01/终于有Clean EDC的锆棒子了.md",
+        "readableImageCount": 1,
+        "selectionReason": "id-pinned-baseline",
+        "sourceId": "edc:8c4fbb0e-66f3-4d1e-b87f-93df6d729cc0"
+      },
+      {
+        "imageReferenceCount": 2,
+        "missingImageCount": 0,
+        "noteRelativePath": "2026-08-04/nado【钛金喷砂&锆黑磁洗】沉浸式拆玩.md",
+        "readableImageCount": 2,
+        "selectionReason": "id-pinned-baseline",
+        "sourceId": "edc:52853b24-2670-4bec-89f2-11586d55c76e"
+      },
+      {
+        "imageReferenceCount": 7,
+        "missingImageCount": 0,
+        "noteRelativePath": "2026-08-06/老铁匠3.0扑克推牌.md",
+        "readableImageCount": 7,
+        "selectionReason": "id-pinned-baseline",
+        "sourceId": "edc:00a70dca-9263-4940-887c-eb8f372a938e"
+      },
+      {
+        "imageReferenceCount": 5,
+        "missingImageCount": 0,
+        "noteRelativePath": "2026-08-06/钛蓝巧克力双珠槽高低音.md",
+        "readableImageCount": 5,
+        "selectionReason": "id-pinned-baseline",
+        "sourceId": "edc:7c0595fa-ed89-4d88-937a-00edfda5ca48"
+      },
+      {
+        "imageReferenceCount": 6,
+        "missingImageCount": 0,
+        "noteRelativePath": "2026-08-07/酥酥麻麻还带吸附感？.md",
+        "readableImageCount": 6,
+        "selectionReason": "id-pinned-baseline",
+        "sourceId": "edc:ba6ee43a-a614-4a9b-93ca-f07af6fc7e2f"
+      },
+      {
+        "imageReferenceCount": 3,
+        "missingImageCount": 0,
+        "noteRelativePath": "2026-08-07/三音阶，怎么推都XX-.md",
+        "readableImageCount": 3,
+        "selectionReason": "id-pinned-baseline",
+        "sourceId": "edc:d8915aa1-8f1a-4006-8c27-0faf21d23460"
+      },
+      {
+        "imageReferenceCount": 12,
+        "missingImageCount": 0,
+        "noteRelativePath": "2026-08-08/我的EDC之路。越来越上头，越来越上头.md",
+        "readableImageCount": 12,
+        "selectionReason": "id-pinned-baseline",
+        "sourceId": "edc:b17b9b4a-6e2c-4e9d-9782-db5030890ddf"
+      },
+      {
+        "imageReferenceCount": 5,
+        "missingImageCount": 0,
+        "noteRelativePath": "2026-08-08/看看你指尖的ootd？#edc #玩个很新的东西 #指尖陀螺 #大人也要玩玩具.md",
+        "readableImageCount": 5,
+        "selectionReason": "id-pinned-baseline",
+        "sourceId": "edc:9a7c4af0-9b4a-40c0-bfe2-2cb39e3da477"
+      },
+      {
+        "imageReferenceCount": 14,
+        "missingImageCount": 0,
+        "noteRelativePath": "2026-08-09/解压罐头币！？🥫.md",
+        "readableImageCount": 14,
+        "selectionReason": "id-pinned-baseline",
+        "sourceId": "edc:65a31b87-416a-4a72-8daa-6441cdb4914f"
+      },
+      {
+        "imageReferenceCount": 16,
+        "missingImageCount": 0,
+        "noteRelativePath": "2026-08-09/喊你女朋友给你买！.md",
+        "readableImageCount": 16,
+        "selectionReason": "id-pinned-baseline",
+        "sourceId": "edc:00385e1f-b23c-42d2-9f2d-b9590fdecc8e"
+      },
+      {
+        "imageReferenceCount": 1,
+        "missingImageCount": 0,
+        "noteRelativePath": "2026-08-10/LBW石刻N7陀螺.md",
+        "readableImageCount": 1,
+        "selectionReason": "id-pinned-baseline",
+        "sourceId": "edc:d0f2075d-78e8-44b0-8f8b-5130473ab8be"
+      },
+      {
+        "imageReferenceCount": 5,
+        "missingImageCount": 0,
+        "noteRelativePath": "2026-08-14/金星创玩 EDC 琥珀陀螺——百元价位的高性价比二叶手感陀螺.md",
+        "readableImageCount": 5,
+        "selectionReason": "id-pinned-baseline",
+        "sourceId": "edc:0f13f53f-6bd3-4d5e-9cc8-31b28a7eb334"
+      },
+      {
+        "imageReferenceCount": 15,
+        "missingImageCount": 0,
+        "noteRelativePath": "2026-08-14/全球首款LED矩阵减压玩具.md",
+        "readableImageCount": 15,
+        "selectionReason": "id-pinned-baseline",
+        "sourceId": "edc:441aef98-9d34-4c87-b5ea-9de031b977f6"
+      },
+      {
+        "imageReferenceCount": 1,
+        "missingImageCount": 0,
+        "noteRelativePath": "2026-08-18/这是什么神仙金属啊？TW听闻玲珑云三叶.md",
+        "readableImageCount": 1,
+        "selectionReason": "id-pinned-baseline",
+        "sourceId": "edc:804eee38-c54f-4a49-ae82-0c1957396319"
+      },
+      {
+        "imageReferenceCount": 10,
+        "missingImageCount": 0,
+        "noteRelativePath": "2026-08-20/#edc 解压玩具.md",
+        "readableImageCount": 10,
+        "selectionReason": "id-pinned-baseline",
+        "sourceId": "edc:f85bdfd0-e701-416c-9382-cd3ed8dd4792"
+      }
+    ]
+  },
+  "sources": [
+    {
+      "author": "Voxx的玩具小屋",
+      "canonicalUrl": "https://www.xiaohongshu.com/discovery/item/67b2ccf40000000017039b5b",
+      "frontmatterId": "c45de71c-48c5-480c-a790-954c288bcd92",
+      "imageSummary": {
+        "missingCount": 0,
+        "readableAiTargetCount": 0,
+        "readableCount": 11,
+        "readableSourceFrameCount": 11,
+        "referenceCount": 11,
+        "unreadableCount": 0
+      },
+      "images": [
+        {
+          "contentClass": "source-frame",
+          "height": 1280,
+          "mode": "RGB",
+          "mtimeNs": 1785494672850749783,
+          "pHashAlgorithm": "dct-ii-32x32-low8x8-median64-v1",
+          "pHashDct64": "d326c668aec9b427",
+          "rawReference": "笔记同步助手/images/0b56f7938a45a628d8c0cb88a5afb6f7_MD5.jpg",
+          "relativePath": "images/0b56f7938a45a628d8c0cb88a5afb6f7_MD5.jpg",
+          "sha256": "19e06bccab79b05a928853a4cf471052bc5de5f34fa322c99091a0732bebbe66",
+          "sizeBytes": 75579,
+          "status": "readable",
+          "width": 720
+        },
+        {
+          "contentClass": "source-frame",
+          "height": 1280,
+          "mode": "RGB",
+          "mtimeNs": 1785494675919010287,
+          "pHashAlgorithm": "dct-ii-32x32-low8x8-median64-v1",
+          "pHashDct64": "a3034f329b2cb753",
+          "rawReference": "笔记同步助手/images/17c7c2086a41e73df5ff6b953afaef8b_MD5.jpg",
+          "relativePath": "images/17c7c2086a41e73df5ff6b953afaef8b_MD5.jpg",
+          "sha256": "c0ca37db38ee6df2be77eaad03d900dc1433ad56afda7be6ed6a253b0723231b",
+          "sizeBytes": 85638,
+          "status": "readable",
+          "width": 720
+        },
+        {
+          "contentClass": "source-frame",
+          "height": 1280,
+          "mode": "RGB",
+          "mtimeNs": 1785494677479273899,
+          "pHashAlgorithm": "dct-ii-32x32-low8x8-median64-v1",
+          "pHashDct64": "e782693e8b229d17",
+          "rawReference": "笔记同步助手/images/1cb8c64fc2a078ff17d8000204902704_MD5.jpg",
+          "relativePath": "images/1cb8c64fc2a078ff17d8000204902704_MD5.jpg",
+          "sha256": "4718a54c9d85572950be2e9491030e540b25bdcd83639ebc871a833668f5c4a8",
+          "sizeBytes": 94016,
+          "status": "readable",
+          "width": 720
+        },
+        {
+          "contentClass": "source-frame",
+          "height": 1280,
+          "mode": "RGB",
+          "mtimeNs": 1785494674546016342,
+          "pHashAlgorithm": "dct-ii-32x32-low8x8-median64-v1",
+          "pHashDct64": "eb96c57a9aa09694",
+          "rawReference": "笔记同步助手/images/1cdbcceab918dfe660edc23552f0c17a_MD5.jpg",
+          "relativePath": "images/1cdbcceab918dfe660edc23552f0c17a_MD5.jpg",
+          "sha256": "a9023d8173e6413e4c95d028e3c948f9cb11395c8150ad77d09d672d4b8ef2be",
+          "sizeBytes": 105540,
+          "status": "readable",
+          "width": 720
+        },
+        {
+          "contentClass": "source-frame",
+          "height": 1280,
+          "mode": "RGB",
+          "mtimeNs": 1785494674069980033,
+          "pHashAlgorithm": "dct-ii-32x32-low8x8-median64-v1",
+          "pHashDct64": "e937c268bf309a89",
+          "rawReference": "笔记同步助手/images/34bc1458cd190ccfa8c25ba2673f867c_MD5.jpg",
+          "relativePath": "images/34bc1458cd190ccfa8c25ba2673f867c_MD5.jpg",
+          "sha256": "84f784253fa4a27f51f3ba84e0ca8c026dfe9ab178419617e87beae71a3d10a0",
+          "sizeBytes": 77699,
+          "status": "readable",
+          "width": 720
+        },
+        {
+          "contentClass": "source-frame",
+          "height": 1280,
+          "mode": "RGB",
+          "mtimeNs": 1785494671912626974,
+          "pHashAlgorithm": "dct-ii-32x32-low8x8-median64-v1",
+          "pHashDct64": "ea164db49e28b956",
+          "rawReference": "笔记同步助手/images/9c5c357aa14a34f2755487d32c58471e_MD5.jpg",
+          "relativePath": "images/9c5c357aa14a34f2755487d32c58471e_MD5.jpg",
+          "sha256": "296871dbf9c9fd886bfef6962910a9f5342a47d8287a9aac98a4ae2cb84e1d6d",
+          "sizeBytes": 51120,
+          "status": "readable",
+          "width": 720
+        },
+        {
+          "contentClass": "source-frame",
+          "height": 1280,
+          "mode": "RGB",
+          "mtimeNs": 1785494676790424272,
+          "pHashAlgorithm": "dct-ii-32x32-low8x8-median64-v1",
+          "pHashDct64": "a3014d339eadb752",
+          "rawReference": "笔记同步助手/images/d5a31265cac3c8da6131e5b356492af9_MD5.jpg",
+          "relativePath": "images/d5a31265cac3c8da6131e5b356492af9_MD5.jpg",
+          "sha256": "6cdebceb613ab1df27553f923bb5a5a06ad7a002be34c332420e31f87cf637d2",
+          "sizeBytes": 87251,
+          "status": "readable",
+          "width": 720
+        },
+        {
+          "contentClass": "source-frame",
+          "height": 1280,
+          "mode": "RGB",
+          "mtimeNs": 1785494672331355290,
+          "pHashAlgorithm": "dct-ii-32x32-low8x8-median64-v1",
+          "pHashDct64": "e79e48369ba8b432",
+          "rawReference": "笔记同步助手/images/e0e3df03f0e4997b00bb165a0f265110_MD5.jpg",
+          "relativePath": "images/e0e3df03f0e4997b00bb165a0f265110_MD5.jpg",
+          "sha256": "ab9d0f7ad0153c925d33261bdff6307da8a6f87a62128d0ac931a636046c4fc1",
+          "sizeBytes": 87526,
+          "status": "readable",
+          "width": 720
+        },
+        {
+          "contentClass": "source-frame",
+          "height": 1280,
+          "mode": "RGB",
+          "mtimeNs": 1785494673692868185,
+          "pHashAlgorithm": "dct-ii-32x32-low8x8-median64-v1",
+          "pHashDct64": "8b19786d86b8b726",
+          "rawReference": "笔记同步助手/images/e363ac4179a0bdaf905ba1718f3fe3c6_MD5.jpg",
+          "relativePath": "images/e363ac4179a0bdaf905ba1718f3fe3c6_MD5.jpg",
+          "sha256": "c61e2c04350925e2144bf9dde1f43d294fbea55b72e0f1f93dd9ec384bfc8a88",
+          "sizeBytes": 122530,
+          "status": "readable",
+          "width": 720
+        },
+        {
+          "contentClass": "source-frame",
+          "height": 1280,
+          "mode": "RGB",
+          "mtimeNs": 1785494677808211960,
+          "pHashAlgorithm": "dct-ii-32x32-low8x8-median64-v1",
+          "pHashDct64": "e1a04b3a9fa49ba6",
+          "rawReference": "笔记同步助手/images/f124075d9c5b6ec9542597cf304376e5_MD5.jpg",
+          "relativePath": "images/f124075d9c5b6ec9542597cf304376e5_MD5.jpg",
+          "sha256": "b5b29d425d71d9a936d08eba9d7216fc8ca8594079f990334a306b941bf367ee",
+          "sizeBytes": 98426,
+          "status": "readable",
+          "width": 720
+        },
+        {
+          "contentClass": "source-frame",
+          "height": 1280,
+          "mode": "RGB",
+          "mtimeNs": 1785494675642317072,
+          "pHashAlgorithm": "dct-ii-32x32-low8x8-median64-v1",
+          "pHashDct64": "a3834f338e2cb752",
+          "rawReference": "笔记同步助手/images/fe5f635b971350bf09fb53d2afad502f_MD5.jpg",
+          "relativePath": "images/fe5f635b971350bf09fb53d2afad502f_MD5.jpg",
+          "sha256": "4268d74583773c6c90bd35c8cc5c19d8cd0d065549a2e93f21f87b7392736aec",
+          "sizeBytes": 82823,
+          "status": "readable",
+          "width": 720
+        }
+      ],
+      "media": {
+        "declaredType": "video",
+        "downloadState": "not-requested",
+        "localSourceFrameCount": 11,
+        "remoteAccess": "not-checked",
+        "status": "local-frames-available",
+        "temporaryDownloadCheckpoint": null
+      },
+      "note": {
+        "mtimeNs": 1785494677810801471,
+        "relativePath": "2026-07-31/GoBigger震旦😼就问你帅不帅.md",
+        "sha256": "7ff05ecf25c3922cbdab74d121272858a18242f4d5c82462255c60ace1b3ca95",
+        "sizeBytes": 2280
+      },
+      "originalUrl": "https://www.xiaohongshu.com/discovery/item/67b2ccf40000000017039b5b?app_platform=ios&app_version=9.40.1&share_from_user_hidden=true&xsec_source=app_share&type=video&xsec_token=CBICA6ny8wyvC255csaI5uB564u6rEUdPBD-AfPdQ-hF4=&author_share=1&xhsshare=WeixinSession&shareRedId=N0c5ODVGNUI3OEdHOjgzPThFQko8NjxL&apptime=1785494171&share_id=4ef09319a0ab42c4a2a89cd60a05581d",
+      "platform": "xiaohongshu",
+      "product": {
+        "clusterId": "gobigger-zhen-dan-edc-figure",
+        "clusterLabel": "GoBigger 震旦 EDC figure",
+        "matchStatus": "category-reference",
+        "sameItemAs": []
+      },
+      "relatedDerivedNotes": [],
+      "resumeCheckpoint": {
+        "noteMtimeNs": 1785494677810801471,
+        "noteSha256": "7ff05ecf25c3922cbdab74d121272858a18242f4d5c82462255c60ace1b3ca95",
+        "referencedImageDigestSha256": "47d5d93555f2645449249cea3ee2a060db406a7c20a7e4b89621b9a38ddd4140",
+        "state": "complete"
+      },
+      "rights": {
+        "allowedUse": "internal research and source-linked model provenance",
+        "redistribution": "not-cleared",
+        "status": "third-party-reference-only"
+      },
+      "savedAt": "2026-07-31T18:41:01+08:00",
+      "sourceId": "edc:c45de71c-48c5-480c-a790-954c288bcd92",
+      "title": "GoBigger震旦😼就问你帅不帅",
+      "upstreamItemId": "67b2ccf40000000017039b5b"
+    },
+    {
+      "author": "石头去看看",
+      "canonicalUrl": "https://v.douyin.com/PbQceXwx9NQ/",
+      "frontmatterId": "3d7a4abf-9a2a-423f-85a8-e2e1aae45842",
+      "imageSummary": {
+        "missingCount": 0,
+        "readableAiTargetCount": 0,
+        "readableCount": 4,
+        "readableSourceFrameCount": 4,
+        "referenceCount": 4,
+        "unreadableCount": 0
+      },
+      "images": [
+        {
+          "contentClass": "source-frame",
+          "height": 1280,
+          "mode": "RGB",
+          "mtimeNs": 1785556741471101250,
+          "pHashAlgorithm": "dct-ii-32x32-low8x8-median64-v1",
+          "pHashDct64": "eb9785639aae24c4",
+          "rawReference": "笔记同步助手/images/185ef005d178892450e10937afc13685_MD5.jpg",
+          "relativePath": "images/185ef005d178892450e10937afc13685_MD5.jpg",
+          "sha256": "1b8f0728b8d8cafb9c918106e2835eac4ffadf3ded551e8255a3ff015fdb6df6",
+          "sizeBytes": 94288,
+          "status": "readable",
+          "width": 720
+        },
+        {
+          "contentClass": "source-frame",
+          "height": 1280,
+          "mode": "RGB",
+          "mtimeNs": 1785556740400564002,
+          "pHashAlgorithm": "dct-ii-32x32-low8x8-median64-v1",
+          "pHashDct64": "8d0d2d65e5f2d292",
+          "rawReference": "笔记同步助手/images/654f46fda60f56e9c1325143ac401985_MD5.jpg",
+          "relativePath": "images/654f46fda60f56e9c1325143ac401985_MD5.jpg",
+          "sha256": "27b95be4be95526b226268b0df4071900211a56134d32a827f780bd46df91d21",
+          "sizeBytes": 50472,
+          "status": "readable",
+          "width": 720
+        },
+        {
+          "contentClass": "source-frame",
+          "height": 1280,
+          "mode": "RGB",
+          "mtimeNs": 1785556743350618650,
+          "pHashAlgorithm": "dct-ii-32x32-low8x8-median64-v1",
+          "pHashDct64": "d6968b9296272b2b",
+          "rawReference": "笔记同步助手/images/83f2ee8cb48dd658a982aef6ad5fc7ef_MD5.jpg",
+          "relativePath": "images/83f2ee8cb48dd658a982aef6ad5fc7ef_MD5.jpg",
+          "sha256": "5f8de49865b739c22d2a2b933fdee02c4f6be1014af4cafcb74b916fd1af4292",
+          "sizeBytes": 152319,
+          "status": "readable",
+          "width": 720
+        },
+        {
+          "contentClass": "source-frame",
+          "height": 1280,
+          "mode": "RGB",
+          "mtimeNs": 1785556741470429052,
+          "pHashAlgorithm": "dct-ii-32x32-low8x8-median64-v1",
+          "pHashDct64": "db6ca83905bc945e",
+          "rawReference": "笔记同步助手/images/f49cc549c9c013c42d425ac058ba3357_MD5.jpg",
+          "relativePath": "images/f49cc549c9c013c42d425ac058ba3357_MD5.jpg",
+          "sha256": "8ea0539972a0a4a833d9c8f91860e62c816b3740b83b93a5c410df550011e66e",
+          "sizeBytes": 79656,
+          "status": "readable",
+          "width": 720
+        }
+      ],
+      "media": {
+        "declaredType": "video",
+        "downloadState": "not-requested",
+        "localSourceFrameCount": 4,
+        "remoteAccess": "not-checked",
+        "status": "local-frames-available",
+        "temporaryDownloadCheckpoint": null
+      },
+      "note": {
+        "mtimeNs": 1785556743352776283,
+        "relativePath": "2026-08-01/2026 广州硬核装备展览会逛展攻略.md",
+        "sha256": "61c149a0e632a0a18e1fbfb60064851a8afab49ba9256952d8a7779bd9bb5781",
+        "sizeBytes": 7944
+      },
+      "originalUrl": "https://v.douyin.com/PbQceXwx9NQ/",
+      "platform": "douyin",
+      "product": {
+        "clusterId": "gdedc-2026-expo-roundup",
+        "clusterLabel": "2026 GDEDC expo multi-product roundup",
+        "matchStatus": "multi-product-reference",
+        "sameItemAs": []
+      },
+      "relatedDerivedNotes": [],
+      "resumeCheckpoint": {
+        "noteMtimeNs": 1785556743352776283,
+        "noteSha256": "61c149a0e632a0a18e1fbfb60064851a8afab49ba9256952d8a7779bd9bb5781",
+        "referencedImageDigestSha256": "89b4ab93149ba59e9cfa7c051fdf46f3a12ecb07da6468076e4aa8afb8756226",
+        "state": "complete"
+      },
+      "rights": {
+        "allowedUse": "internal research and source-linked model provenance",
+        "redistribution": "not-cleared",
+        "status": "third-party-reference-only"
+      },
+      "savedAt": "2026-08-01T11:54:02+08:00",
+      "sourceId": "edc:3d7a4abf-9a2a-423f-85a8-e2e1aae45842",
+      "title": "2026 广州硬核装备展览会逛展攻略",
+      "upstreamItemId": "PbQceXwx9NQ"
+    },
+    {
+      "author": "指玩屋",
+      "canonicalUrl": "https://www.xiaohongshu.com/discovery/item/6a642ccf000000001003c55a",
+      "frontmatterId": "78405f8f-4487-4d11-b463-20a1c75db2b0",
+      "imageSummary": {
+        "missingCount": 0,
+        "readableAiTargetCount": 0,
+        "readableCount": 5,
+        "readableSourceFrameCount": 5,
+        "referenceCount": 5,
+        "unreadableCount": 0
+      },
+      "images": [
+        {
+          "contentClass": "source-frame",
+          "height": 1280,
+          "mode": "RGB",
+          "mtimeNs": 1785557347921359730,
+          "pHashAlgorithm": "dct-ii-32x32-low8x8-median64-v1",
+          "pHashDct64": "c13863e4d86b26d7",
+          "rawReference": "笔记同步助手/images/05f2fa572eb9ceea8765b1bc89ac17b4_MD5.jpg",
+          "relativePath": "images/05f2fa572eb9ceea8765b1bc89ac17b4_MD5.jpg",
+          "sha256": "f01623bf4bff2494ce95a8717d3b26f74ed10cd87f7924ddef3d5674b21d32bb",
+          "sizeBytes": 115415,
+          "status": "readable",
+          "width": 720
+        },
+        {
+          "contentClass": "source-frame",
+          "height": 1280,
+          "mode": "RGB",
+          "mtimeNs": 1785557346524327600,
+          "pHashAlgorithm": "dct-ii-32x32-low8x8-median64-v1",
+          "pHashDct64": "c36170617acba5b6",
+          "rawReference": "笔记同步助手/images/57c949d3a3bfe1bfddbea46e16ac6dff_MD5.jpg",
+          "relativePath": "images/57c949d3a3bfe1bfddbea46e16ac6dff_MD5.jpg",
+          "sha256": "f3d355bae0866cedc64237ff56871809ef0eeab73592025c389b2bc6627488d9",
+          "sizeBytes": 94890,
+          "status": "readable",
+          "width": 720
+        },
+        {
+          "contentClass": "source-frame",
+          "height": 1280,
+          "mode": "RGB",
+          "mtimeNs": 1785557346568476539,
+          "pHashAlgorithm": "dct-ii-32x32-low8x8-median64-v1",
+          "pHashDct64": "c7184ae73867931e",
+          "rawReference": "笔记同步助手/images/6b81b2a1847a6e755b49ea5de7e2d390_MD5.jpg",
+          "relativePath": "images/6b81b2a1847a6e755b49ea5de7e2d390_MD5.jpg",
+          "sha256": "7051b40fbc8afc62b39862ca40ed909952d316c5bbb8f401bd637a378770283b",
+          "sizeBytes": 200373,
+          "status": "readable",
+          "width": 720
+        },
+        {
+          "contentClass": "source-frame",
+          "height": 1280,
+          "mode": "RGB",
+          "mtimeNs": 1785557349030717205,
+          "pHashAlgorithm": "dct-ii-32x32-low8x8-median64-v1",
+          "pHashDct64": "875069acb2d36c3e",
+          "rawReference": "笔记同步助手/images/8c3e9f922c447d27c18dbab12b2149b4_MD5.jpg",
+          "relativePath": "images/8c3e9f922c447d27c18dbab12b2149b4_MD5.jpg",
+          "sha256": "ac9a292a44d5fbde1e530cb88135d24d3ce1f9b423c031e0789f460dbcf9b13e",
+          "sizeBytes": 74969,
+          "status": "readable",
+          "width": 720
+        },
+        {
+          "contentClass": "source-frame",
+          "height": 1280,
+          "mode": "RGB",
+          "mtimeNs": 1785557346866558033,
+          "pHashAlgorithm": "dct-ii-32x32-low8x8-median64-v1",
+          "pHashDct64": "c560d3cd34cb259e",
+          "rawReference": "笔记同步助手/images/ab8c24b98f02f87efaa2683b31602323_MD5.jpg",
+          "relativePath": "images/ab8c24b98f02f87efaa2683b31602323_MD5.jpg",
+          "sha256": "09f6b772407988145ea2b0172e5916436fcdc86b0fb82578637686a44e77dfd2",
+          "sizeBytes": 100062,
+          "status": "readable",
+          "width": 720
+        }
+      ],
+      "media": {
+        "declaredType": "video",
+        "downloadState": "not-requested",
+        "localSourceFrameCount": 5,
+        "remoteAccess": "not-checked",
+        "status": "local-frames-available",
+        "temporaryDownloadCheckpoint": null
+      },
+      "note": {
+        "mtimeNs": 1785557349033646118,
+        "relativePath": "2026-08-01/手感巴适，声音得劲~【浮光-KOVO】.md",
+        "sha256": "9bbde42baf3fd6372711f92279d3fd4766358dbc79e0a4dc1cb7e65d7c7d7f20",
+        "sizeBytes": 2450
+      },
+      "originalUrl": "https://www.xiaohongshu.com/discovery/item/6a642ccf000000001003c55a?app_platform=ios&app_version=9.40.1&share_from_user_hidden=true&xsec_source=app_share&type=video&xsec_token=CB_Uk-OV-2zKoIpW7dHMCodIwwCNyYLMEZW6wiSAKXElo=&author_share=1&xhsshare=WeixinSession&shareRedId=N0c5ODVGNUI3OEdHOjgzPThFQko8NjxL&apptime=1785556837&share_id=265aebdf8cea49f990c704c4304c4e0b&code=2ro1RKtxTLr",
+      "platform": "xiaohongshu",
+      "product": {
+        "clusterId": "kovo-fuguang",
+        "clusterLabel": "KOVO 浮光",
+        "matchStatus": "category-reference",
+        "sameItemAs": []
+      },
+      "relatedDerivedNotes": [],
+      "resumeCheckpoint": {
+        "noteMtimeNs": 1785557349033646118,
+        "noteSha256": "9bbde42baf3fd6372711f92279d3fd4766358dbc79e0a4dc1cb7e65d7c7d7f20",
+        "referencedImageDigestSha256": "ec125d8c75149f9a34b0369406e6d1deda929521e45197a777649c6739089f49",
+        "state": "complete"
+      },
+      "rights": {
+        "allowedUse": "internal research and source-linked model provenance",
+        "redistribution": "not-cleared",
+        "status": "third-party-reference-only"
+      },
+      "savedAt": "2026-08-01T12:06:56+08:00",
+      "sourceId": "edc:78405f8f-4487-4d11-b463-20a1c75db2b0",
+      "title": "手感巴适，声音得劲~【浮光-KOVO】",
+      "upstreamItemId": "6a642ccf000000001003c55a"
+    },
+    {
+      "author": "指玩屋",
+      "canonicalUrl": "https://www.xiaohongshu.com/discovery/item/6a5d7dbb0000000011007020",
+      "frontmatterId": "e6186100-5986-4022-aa19-85622f0281ac",
+      "imageSummary": {
+        "missingCount": 0,
+        "readableAiTargetCount": 0,
+        "readableCount": 11,
+        "readableSourceFrameCount": 11,
+        "referenceCount": 11,
+        "unreadableCount": 0
+      },
+      "images": [
+        {
+          "contentClass": "source-frame",
+          "height": 1280,
+          "mode": "RGB",
+          "mtimeNs": 1785557343870964362,
+          "pHashAlgorithm": "dct-ii-32x32-low8x8-median64-v1",
+          "pHashDct64": "c7304ee7384e319e",
+          "rawReference": "笔记同步助手/images/301580be37ec1a32e5e30661d5bf8187_MD5.jpg",
+          "relativePath": "images/301580be37ec1a32e5e30661d5bf8187_MD5.jpg",
+          "sha256": "85fed23392eb91ba73ccd7e456982050f208790b5f0aa36b840c6c3e6b163292",
+          "sizeBytes": 202495,
+          "status": "readable",
+          "width": 720
+        },
+        {
+          "contentClass": "source-frame",
+          "height": 1280,
+          "mode": "RGB",
+          "mtimeNs": 1785557343190757888,
+          "pHashAlgorithm": "dct-ii-32x32-low8x8-median64-v1",
+          "pHashDct64": "873847b5c663986e",
+          "rawReference": "笔记同步助手/images/316151920185a4e697162565f90fe6d3_MD5.jpg",
+          "relativePath": "images/316151920185a4e697162565f90fe6d3_MD5.jpg",
+          "sha256": "e90b0a727267596eb99f6ad1bd82fe0cd7ea0100409624d1d75b2a6285c24a69",
+          "sizeBytes": 82630,
+          "status": "readable",
+          "width": 720
+        },
+        {
+          "contentClass": "source-frame",
+          "height": 1280,
+          "mode": "RGB",
+          "mtimeNs": 1785557345715711287,
+          "pHashAlgorithm": "dct-ii-32x32-low8x8-median64-v1",
+          "pHashDct64": "c73843b1c65b5c63",
+          "rawReference": "笔记同步助手/images/5417afb20a03553c4f24ba1f48faba4a_MD5.jpg",
+          "relativePath": "images/5417afb20a03553c4f24ba1f48faba4a_MD5.jpg",
+          "sha256": "0bc97f59b3201837f9c2e5ea08f18afd2fd103c89fe69bcafa29e0e0b1a08420",
+          "sizeBytes": 74648,
+          "status": "readable",
+          "width": 720
+        },
+        {
+          "contentClass": "source-frame",
+          "height": 1280,
+          "mode": "RGB",
+          "mtimeNs": 1785557344183108722,
+          "pHashAlgorithm": "dct-ii-32x32-low8x8-median64-v1",
+          "pHashDct64": "c75068d5c2e73b2c",
+          "rawReference": "笔记同步助手/images/5ff93d29c1a8a33f8ca29d70e1d09498_MD5.jpg",
+          "relativePath": "images/5ff93d29c1a8a33f8ca29d70e1d09498_MD5.jpg",
+          "sha256": "5969678c3729a58345233c6b707e7b417e8a1512cde830ddeaeec3675a440317",
+          "sizeBytes": 115924,
+          "status": "readable",
+          "width": 720
+        },
+        {
+          "contentClass": "source-frame",
+          "height": 1280,
+          "mode": "RGB",
+          "mtimeNs": 1785557342724809918,
+          "pHashAlgorithm": "dct-ii-32x32-low8x8-median64-v1",
+          "pHashDct64": "873847b9c477584b",
+          "rawReference": "笔记同步助手/images/9307dd912bf5dccc41e2501d9efde100_MD5.jpg",
+          "relativePath": "images/9307dd912bf5dccc41e2501d9efde100_MD5.jpg",
+          "sha256": "e61e49a5dbdccfb77ca52f6ee373f8d7f356f97087f7ebe72f23859dbf532d3d",
+          "sizeBytes": 62587,
+          "status": "readable",
+          "width": 720
+        },
+        {
+          "contentClass": "source-frame",
+          "height": 1280,
+          "mode": "RGB",
+          "mtimeNs": 1785557345376290519,
+          "pHashAlgorithm": "dct-ii-32x32-low8x8-median64-v1",
+          "pHashDct64": "c73842b0c67b78e3",
+          "rawReference": "笔记同步助手/images/9ac8cba1f45ad28a0a20360445867255_MD5.jpg",
+          "relativePath": "images/9ac8cba1f45ad28a0a20360445867255_MD5.jpg",
+          "sha256": "a4f75bdb36d38200c2ae82909b393d95aff32e991aa82e2b87f6de4a22c13d9e",
+          "sizeBytes": 68994,
+          "status": "readable",
+          "width": 720
+        },
+        {
+          "contentClass": "source-frame",
+          "height": 1280,
+          "mode": "RGB",
+          "mtimeNs": 1785557344490982730,
+          "pHashAlgorithm": "dct-ii-32x32-low8x8-median64-v1",
+          "pHashDct64": "db6072c9349b6556",
+          "rawReference": "笔记同步助手/images/a02668e666e55130a9c75d993372cef6_MD5.jpg",
+          "relativePath": "images/a02668e666e55130a9c75d993372cef6_MD5.jpg",
+          "sha256": "6e906d956d98d8850c24b771d84d001beb35ee41479b4a4dc7ae822062469995",
+          "sizeBytes": 105424,
+          "status": "readable",
+          "width": 720
+        },
+        {
+          "contentClass": "source-frame",
+          "height": 1280,
+          "mode": "RGB",
+          "mtimeNs": 1785557342868284772,
+          "pHashAlgorithm": "dct-ii-32x32-low8x8-median64-v1",
+          "pHashDct64": "871867b5924b6cb3",
+          "rawReference": "笔记同步助手/images/c88b97f6c024bc197614c51822e32a6d_MD5.jpg",
+          "relativePath": "images/c88b97f6c024bc197614c51822e32a6d_MD5.jpg",
+          "sha256": "b18bb368a4848d8bfd38c38b2a68c9fae6fd5555237c9632d6fdfdc382c45dc6",
+          "sizeBytes": 67368,
+          "status": "readable",
+          "width": 720
+        },
+        {
+          "contentClass": "source-frame",
+          "height": 1280,
+          "mode": "RGB",
+          "mtimeNs": 1785557343681597721,
+          "pHashAlgorithm": "dct-ii-32x32-low8x8-median64-v1",
+          "pHashDct64": "c760b2c964dba596",
+          "rawReference": "笔记同步助手/images/d5f4520859bdaf2e4d480a9a79084103_MD5.jpg",
+          "relativePath": "images/d5f4520859bdaf2e4d480a9a79084103_MD5.jpg",
+          "sha256": "ce5866e4ced09c8be4d2617b81309f045ad5d4b8ed47f2c0d86b4dd334249dc8",
+          "sizeBytes": 107560,
+          "status": "readable",
+          "width": 720
+        },
+        {
+          "contentClass": "source-frame",
+          "height": 1280,
+          "mode": "RGB",
+          "mtimeNs": 1785557344966598341,
+          "pHashAlgorithm": "dct-ii-32x32-low8x8-median64-v1",
+          "pHashDct64": "b1bcc16c63988bb9",
+          "rawReference": "笔记同步助手/images/fb3019c269f6693ef4686a432ce65502_MD5.jpg",
+          "relativePath": "images/fb3019c269f6693ef4686a432ce65502_MD5.jpg",
+          "sha256": "d3bc4c4cff921381cf125f5d6baf3c5313bd33cdeb2f23f0efe02a1f0819af6b",
+          "sizeBytes": 72220,
+          "status": "readable",
+          "width": 720
+        },
+        {
+          "contentClass": "source-frame",
+          "height": 1280,
+          "mode": "RGB",
+          "mtimeNs": 1785557344762796632,
+          "pHashAlgorithm": "dct-ii-32x32-low8x8-median64-v1",
+          "pHashDct64": "863871e69ab165cd",
+          "rawReference": "笔记同步助手/images/fd7aadc8aa74afabf1bce854e12e68bf_MD5.jpg",
+          "relativePath": "images/fd7aadc8aa74afabf1bce854e12e68bf_MD5.jpg",
+          "sha256": "d7452b96d19ee7766ea3fa774c38b1dab083dafaad2bc038e7e5e309ff489748",
+          "sizeBytes": 88343,
+          "status": "readable",
+          "width": 720
+        }
+      ],
+      "media": {
+        "declaredType": "video",
+        "downloadState": "not-requested",
+        "localSourceFrameCount": 11,
+        "remoteAccess": "not-checked",
+        "status": "local-frames-available",
+        "temporaryDownloadCheckpoint": null
+      },
+      "note": {
+        "mtimeNs": 1785557345719519270,
+        "relativePath": "2026-08-01/无限旋转的解压玩具？.md",
+        "sha256": "66da406a9c1c05a9874eb98e7084a344b75990179d840876cd81189962b5f8f1",
+        "sizeBytes": 2608
+      },
+      "originalUrl": "https://www.xiaohongshu.com/discovery/item/6a5d7dbb0000000011007020?app_platform=ios&app_version=9.40.1&share_from_user_hidden=true&xsec_source=app_share&type=video&xsec_token=CBDYOZzLmQPTZJjyMlOPG5VMYn8AxRMoEJ9Khev55Qccs=&author_share=1&xhsshare=WeixinSession&shareRedId=N0c5ODVGNUI3OEdHOjgzPThFQko8NjxL&apptime=1785556884&share_id=474109bda0b54727a30dd46a5fed6b9f&code=8LRVYv8pix5",
+      "platform": "xiaohongshu",
+      "product": {
+        "clusterId": "matrix-edc-linjie-infinite-slider",
+        "clusterLabel": "矩阵 EDC 临界无限位推牌",
+        "matchStatus": "category-reference",
+        "sameItemAs": []
+      },
+      "relatedDerivedNotes": [],
+      "resumeCheckpoint": {
+        "noteMtimeNs": 1785557345719519270,
+        "noteSha256": "66da406a9c1c05a9874eb98e7084a344b75990179d840876cd81189962b5f8f1",
+        "referencedImageDigestSha256": "ce23cc384b4f860e779c3899f9918f6a3ccabbdd430a6d1a0649e03c08a7c661",
+        "state": "complete"
+      },
+      "rights": {
+        "allowedUse": "internal research and source-linked model provenance",
+        "redistribution": "not-cleared",
+        "status": "third-party-reference-only"
+      },
+      "savedAt": "2026-08-01T12:07:01+08:00",
+      "sourceId": "edc:e6186100-5986-4022-aa19-85622f0281ac",
+      "title": "无限旋转的解压玩具？",
+      "upstreamItemId": "6a5d7dbb0000000011007020"
+    },
+    {
+      "author": "指玩屋",
+      "canonicalUrl": "https://www.xiaohongshu.com/discovery/item/6a5d80be000000000f01dd37",
+      "frontmatterId": "764154b2-8f95-4401-9d94-653528f55a8c",
+      "imageSummary": {
+        "missingCount": 1,
+        "readableAiTargetCount": 2,
+        "readableCount": 9,
+        "readableSourceFrameCount": 7,
+        "referenceCount": 10,
+        "unreadableCount": 0
+      },
+      "images": [
+        {
+          "contentClass": "source-frame",
+          "height": 1280,
+          "mode": "RGB",
+          "mtimeNs": 1785557338941676480,
+          "pHashAlgorithm": "dct-ii-32x32-low8x8-median64-v1",
+          "pHashDct64": "824e7569d893966e",
+          "rawReference": "笔记同步助手/images/793f36060c9f6116b2d1617e8da37682_MD5.jpg",
+          "relativePath": "images/793f36060c9f6116b2d1617e8da37682_MD5.jpg",
+          "sha256": "c1b139d517d2458a0c7913557e4fcf6740b5748bfae3482879653e61c17b38b5",
+          "sizeBytes": 74785,
+          "status": "readable",
+          "width": 720
+        },
+        {
+          "contentClass": "source-frame",
+          "height": 1280,
+          "mode": "RGB",
+          "mtimeNs": 1785557340329537295,
+          "pHashAlgorithm": "dct-ii-32x32-low8x8-median64-v1",
+          "pHashDct64": "899066e9b998d766",
+          "rawReference": "笔记同步助手/images/920db3ce3e1f3fdae7d0dc4f13c29f76_MD5.jpg",
+          "relativePath": "images/920db3ce3e1f3fdae7d0dc4f13c29f76_MD5.jpg",
+          "sha256": "60f63d3bc644d09462a7e411b1f7dc0ac304e0c094a4ce3bed73d9920b80ee35",
+          "sizeBytes": 65568,
+          "status": "readable",
+          "width": 720
+        },
+        {
+          "contentClass": "source-frame",
+          "height": 1280,
+          "mode": "RGB",
+          "mtimeNs": 1785557341156491324,
+          "pHashAlgorithm": "dct-ii-32x32-low8x8-median64-v1",
+          "pHashDct64": "c32070dac5b7396b",
+          "rawReference": "笔记同步助手/images/a366848a0415f56902be9c1b0bba1633_MD5.jpg",
+          "relativePath": "images/a366848a0415f56902be9c1b0bba1633_MD5.jpg",
+          "sha256": "0c279a53a0a383b096b2754af33a0ca26b31d14ac7658547201d9f3e3a5df9ba",
+          "sizeBytes": 51037,
+          "status": "readable",
+          "width": 720
+        },
+        {
+          "contentClass": "source-frame",
+          "height": 1280,
+          "mode": "RGB",
+          "mtimeNs": 1785557340558698235,
+          "pHashAlgorithm": "dct-ii-32x32-low8x8-median64-v1",
+          "pHashDct64": "8c4c72f3c34e3c99",
+          "rawReference": "笔记同步助手/images/aaf44360187ff917e1f13259930dc262_MD5.jpg",
+          "relativePath": "images/aaf44360187ff917e1f13259930dc262_MD5.jpg",
+          "sha256": "da10bf9c2fa92cb2d1227fade290c0c98d009ab7ff213630113c1294c73e74ef",
+          "sizeBytes": 58433,
+          "status": "readable",
+          "width": 720
+        },
+        {
+          "contentClass": "source-frame",
+          "height": 1280,
+          "mode": "RGB",
+          "mtimeNs": 1785557339992577946,
+          "pHashAlgorithm": "dct-ii-32x32-low8x8-median64-v1",
+          "pHashDct64": "c1287c67c190af3f",
+          "rawReference": "笔记同步助手/images/c1e10711a9d8ea4451ceac6ed92203ee_MD5.jpg",
+          "relativePath": "images/c1e10711a9d8ea4451ceac6ed92203ee_MD5.jpg",
+          "sha256": "d8d5c118eb31c6e767b8b7f136cc75c784966bc6c4872e5684cb2f487f62bcc7",
+          "sizeBytes": 52977,
+          "status": "readable",
+          "width": 720
+        },
+        {
+          "contentClass": "source-frame",
+          "height": 1280,
+          "mode": "RGB",
+          "mtimeNs": 1785557341703772030,
+          "pHashAlgorithm": "dct-ii-32x32-low8x8-median64-v1",
+          "pHashDct64": "87b23066c7a97969",
+          "rawReference": "笔记同步助手/images/f3dcb63080bed245a9cf8df76e92599f_MD5.jpg",
+          "relativePath": "images/f3dcb63080bed245a9cf8df76e92599f_MD5.jpg",
+          "sha256": "13eea20c2de5269e4b2fe660917fb97c6e1d0a30c9fcf7a01157cd4e3e8882ba",
+          "sizeBytes": 62304,
+          "status": "readable",
+          "width": 720
+        },
+        {
+          "contentClass": "source-frame",
+          "height": 1280,
+          "mode": "RGB",
+          "mtimeNs": 1785557338944000986,
+          "pHashAlgorithm": "dct-ii-32x32-low8x8-median64-v1",
+          "pHashDct64": "e19862e358e9a3b6",
+          "rawReference": "笔记同步助手/images/f886cf1c5947e3e26210a932412ce29e_MD5.jpg",
+          "relativePath": "images/f886cf1c5947e3e26210a932412ce29e_MD5.jpg",
+          "sha256": "092c952c2fac0bd7ffab87ba23afc07e641ba5a6681e9c6a86730c436c020ffb",
+          "sizeBytes": 78103,
+          "status": "readable",
+          "width": 720
+        },
+        {
+          "contentClass": "ai-target",
+          "rawReference": "笔记同步助手/images/generated/龙鳞EDC-分镜/龙鳞EDC_01_动作分镜_标注版.png",
+          "relativePath": "images/generated/龙鳞EDC-分镜/龙鳞EDC_01_动作分镜_标注版.png",
+          "status": "missing"
+        },
+        {
+          "contentClass": "ai-target",
+          "height": 2570,
+          "mode": "RGB",
+          "mtimeNs": 1785581730552140398,
+          "pHashAlgorithm": "dct-ii-32x32-low8x8-median64-v1",
+          "pHashDct64": "c3e13c4e6c3ec8e1",
+          "rawReference": "笔记同步助手/images/generated/龙鳞EDC-分镜/龙鳞EDC_02_三视图与爆炸图_标注版.png",
+          "relativePath": "images/generated/龙鳞EDC-分镜/龙鳞EDC_02_三视图与爆炸图_标注版.png",
+          "sha256": "b2a27a5e6fe57310aa57fff87f58b1b80f7cf23762346a63d7f1db25e3208d89",
+          "sizeBytes": 4734494,
+          "status": "readable",
+          "width": 3344
+        },
+        {
+          "contentClass": "ai-target",
+          "height": 1882,
+          "mode": "RGB",
+          "mtimeNs": 1785581730789066947,
+          "pHashAlgorithm": "dct-ii-32x32-low8x8-median64-v1",
+          "pHashDct64": "c1e13e1e6fe0e069",
+          "rawReference": "笔记同步助手/images/generated/龙鳞EDC-分镜/龙鳞EDC_03_材质灯光参数卡.png",
+          "relativePath": "images/generated/龙鳞EDC-分镜/龙鳞EDC_03_材质灯光参数卡.png",
+          "sha256": "480d08bb6ab4567f6768be491a76ee5c928270f374971a9bc030e361e6c5886c",
+          "sizeBytes": 1512924,
+          "status": "readable",
+          "width": 3344
+        }
+      ],
+      "media": {
+        "declaredType": "video",
+        "downloadState": "not-requested",
+        "localSourceFrameCount": 7,
+        "remoteAccess": "not-checked",
+        "status": "local-frames-available",
+        "temporaryDownloadCheckpoint": null
+      },
+      "note": {
+        "mtimeNs": 1785581783958217565,
+        "relativePath": "2026-08-01/可以玩一整天的小玩意？！.md",
+        "sha256": "c53a970539bac86e4ca6f22b54ef1dd77794aaea1f01caf8d966b3512e5fddf4",
+        "sizeBytes": 2562
+      },
+      "originalUrl": "https://www.xiaohongshu.com/discovery/item/6a5d80be000000000f01dd37?app_platform=ios&app_version=9.40.1&share_from_user_hidden=true&xsec_source=app_share&type=video&xsec_token=CBDYOZzLmQPTZJjyMlOPG5VPsHdEkGZQ5tT4xUvb6iWco=&author_share=1&xhsshare=WeixinSession&shareRedId=N0c5ODVGNUI3OEdHOjgzPThFQko8NjxL&apptime=1785556866&share_id=6a602439cd744714b27dbd3fd0e09a85&code=9GRXevU7J51",
+      "platform": "xiaohongshu",
+      "product": {
+        "clusterId": "metal-three-blade",
+        "clusterLabel": "GEEONE 龙鳞 / NOVO EDC",
+        "matchStatus": "exact-model",
+        "sameItemAs": [
+          "metal-three-blade"
+        ]
+      },
+      "relatedDerivedNotes": [
+        {
+          "classification": "ai-target",
+          "modelingAuthority": "intent-only-never-measurement",
+          "noteRelativePath": "2026-08-01/龙鳞（NOVO EDC）分镜与3D生成规范.md",
+          "sha256": "1cadc9f4e561b3afd8eab32bd3aa7e84856185d71f0029f48ec43d8b83453afb"
+        }
+      ],
+      "resumeCheckpoint": {
+        "noteMtimeNs": 1785581783958217565,
+        "noteSha256": "c53a970539bac86e4ca6f22b54ef1dd77794aaea1f01caf8d966b3512e5fddf4",
+        "referencedImageDigestSha256": "50d3c2c2d9a54d0be8c1f9a4c957ecbd337c3d8e0818cc10f96c8e34baf43d0c",
+        "state": "blocked-missing-local-image"
+      },
+      "rights": {
+        "allowedUse": "internal research and source-linked model provenance",
+        "redistribution": "not-cleared",
+        "status": "third-party-reference-only"
+      },
+      "savedAt": "2026-08-01T12:07:14+08:00",
+      "sourceId": "edc:764154b2-8f95-4401-9d94-653528f55a8c",
+      "title": "可以玩一整天的小玩意？！",
+      "upstreamItemId": "6a5d80be000000000f01dd37"
+    },
+    {
+      "author": "Arch的新奇玩意",
+      "canonicalUrl": "https://www.xiaohongshu.com/discovery/item/6a587768000000001302ed8d",
+      "frontmatterId": "8c4fbb0e-66f3-4d1e-b87f-93df6d729cc0",
+      "imageSummary": {
+        "missingCount": 0,
+        "readableAiTargetCount": 0,
+        "readableCount": 1,
+        "readableSourceFrameCount": 1,
+        "referenceCount": 1,
+        "unreadableCount": 0
+      },
+      "images": [
+        {
+          "contentClass": "source-frame",
+          "height": 1920,
+          "mode": "RGB",
+          "mtimeNs": 1785566340796029064,
+          "pHashAlgorithm": "dct-ii-32x32-low8x8-median64-v1",
+          "pHashDct64": "d7d85365d412794c",
+          "rawReference": "笔记同步助手/images/aed05ed9309d9c8f960b6a99334d30f7_MD5.jpg",
+          "relativePath": "images/aed05ed9309d9c8f960b6a99334d30f7_MD5.jpg",
+          "sha256": "2d54b5ef0f16c18ce000f9f62864485a318adfdb2e9baab5f1118002951e458e",
+          "sizeBytes": 97116,
+          "status": "readable",
+          "width": 1080
+        }
+      ],
+      "media": {
+        "declaredType": "video",
+        "downloadState": "not-requested",
+        "localSourceFrameCount": 1,
+        "remoteAccess": "not-checked",
+        "status": "local-frames-available",
+        "temporaryDownloadCheckpoint": null
+      },
+      "note": {
+        "mtimeNs": 1785566340802966030,
+        "relativePath": "2026-08-01/终于有Clean EDC的锆棒子了.md",
+        "sha256": "dc196180538433d2bdc2e55661b89703afde5d9001e2fe4aaad831b7aae9f996",
+        "sizeBytes": 1434
+      },
+      "originalUrl": "https://www.xiaohongshu.com/discovery/item/6a587768000000001302ed8d?app_platform=ios&app_version=9.40.1&share_from_user_hidden=true&xsec_source=app_share&type=video&xsec_token=CBdpaWQDhX_k5--_GTB7LFZXyh7rY6nVZMOscgxHhMzNM=&author_share=1&xhsshare=WeixinSession&shareRedId=N0c5ODVGNUI3OEdHOjgzPThFQko8NjxL&apptime=1785565961&share_id=85001972c52a46839777315121710cc4&code=AK6iJw6G6sJ",
+      "platform": "xiaohongshu",
+      "product": {
+        "clusterId": "clean-edc-zirconium-rod",
+        "clusterLabel": "Clean EDC zirconium rod",
+        "matchStatus": "category-reference",
+        "sameItemAs": []
+      },
+      "relatedDerivedNotes": [],
+      "resumeCheckpoint": {
+        "noteMtimeNs": 1785566340802966030,
+        "noteSha256": "dc196180538433d2bdc2e55661b89703afde5d9001e2fe4aaad831b7aae9f996",
+        "referencedImageDigestSha256": "66a8494fa2b3bf068b2b8cb1df047dccb3386e0bd953cca78e2a54cb369dabb6",
+        "state": "complete"
+      },
+      "rights": {
+        "allowedUse": "internal research and source-linked model provenance",
+        "redistribution": "not-cleared",
+        "status": "third-party-reference-only"
+      },
+      "savedAt": "2026-08-01T14:36:44+08:00",
+      "sourceId": "edc:8c4fbb0e-66f3-4d1e-b87f-93df6d729cc0",
+      "title": "终于有Clean EDC的锆棒子了",
+      "upstreamItemId": "6a587768000000001302ed8d"
+    },
+    {
+      "author": "MaC秘密基地",
+      "canonicalUrl": "https://www.xiaohongshu.com/discovery/item/6a413e06000000001003c96c",
+      "frontmatterId": "52853b24-2670-4bec-89f2-11586d55c76e",
+      "imageSummary": {
+        "missingCount": 0,
+        "readableAiTargetCount": 0,
+        "readableCount": 2,
+        "readableSourceFrameCount": 2,
+        "referenceCount": 2,
+        "unreadableCount": 0
+      },
+      "images": [
+        {
+          "contentClass": "source-frame",
+          "height": 1280,
+          "mode": "RGB",
+          "mtimeNs": 1785857024303659478,
+          "pHashAlgorithm": "dct-ii-32x32-low8x8-median64-v1",
+          "pHashDct64": "a13c72e1feb061c6",
+          "rawReference": "笔记同步助手/images/2e6a35480f42f6e95eba09f54bf7dc6a_MD5.jpg",
+          "relativePath": "images/2e6a35480f42f6e95eba09f54bf7dc6a_MD5.jpg",
+          "sha256": "a6055b430fe3a2d4787640ee565db09732f5fb7c926005f605ffbae98f782eb3",
+          "sizeBytes": 62643,
+          "status": "readable",
+          "width": 720
+        },
+        {
+          "contentClass": "source-frame",
+          "height": 1280,
+          "mode": "RGB",
+          "mtimeNs": 1785857024452730841,
+          "pHashAlgorithm": "dct-ii-32x32-low8x8-median64-v1",
+          "pHashDct64": "d02d7864e6735ac9",
+          "rawReference": "笔记同步助手/images/8292b8ad60e6e1639b4ebf3ca8742950_MD5.jpg",
+          "relativePath": "images/8292b8ad60e6e1639b4ebf3ca8742950_MD5.jpg",
+          "sha256": "f501ce94cd4c2824786c37f506d0116010a2642ba311a878a1c5ceb541411b3b",
+          "sizeBytes": 78547,
+          "status": "readable",
+          "width": 720
+        }
+      ],
+      "media": {
+        "declaredType": "video",
+        "downloadState": "not-requested",
+        "localSourceFrameCount": 2,
+        "remoteAccess": "not-checked",
+        "status": "local-frames-available",
+        "temporaryDownloadCheckpoint": null
+      },
+      "note": {
+        "mtimeNs": 1785857024455004523,
+        "relativePath": "2026-08-04/nado【钛金喷砂&锆黑磁洗】沉浸式拆玩.md",
+        "sha256": "6f56a8aa38f6ee8b71de2885a8ed6cb24079d884048d3c305e2de8b1051cdbb4",
+        "sizeBytes": 1552
+      },
+      "originalUrl": "https://www.xiaohongshu.com/discovery/item/6a413e06000000001003c96c?app_platform=ios&app_version=9.40.1&share_from_user_hidden=true&xsec_source=app_share&type=video&xsec_token=CBGvm1XLWtKR73KFV5brh5q_Im3T6XuCvSh8yxDse-SiI=&author_share=1&xhsshare=WeixinSession&shareRedId=N0c5ODVGNUI3OEdHOjgzPThFQko8NjxL&apptime=1785855598&share_id=40e9b6a955bf4ea0a26517618dbcec82&code=AD3iK9VWrUq",
+      "platform": "xiaohongshu",
+      "product": {
+        "clusterId": "nado-segment-scale-slider",
+        "clusterLabel": "NADO 段落音阶轨道",
+        "matchStatus": "category-reference",
+        "sameItemAs": []
+      },
+      "relatedDerivedNotes": [],
+      "resumeCheckpoint": {
+        "noteMtimeNs": 1785857024455004523,
+        "noteSha256": "6f56a8aa38f6ee8b71de2885a8ed6cb24079d884048d3c305e2de8b1051cdbb4",
+        "referencedImageDigestSha256": "0fdc7acc34dc0d5088d7a32677a9ba0066f30857b5815709a945cfc1c5236c1a",
+        "state": "complete"
+      },
+      "rights": {
+        "allowedUse": "internal research and source-linked model provenance",
+        "redistribution": "not-cleared",
+        "status": "third-party-reference-only"
+      },
+      "savedAt": "2026-08-04T23:21:29+08:00",
+      "sourceId": "edc:52853b24-2670-4bec-89f2-11586d55c76e",
+      "title": "nado【钛金喷砂&锆黑磁洗】沉浸式拆玩",
+      "upstreamItemId": "6a413e06000000001003c96c"
+    },
+    {
+      "author": "Terry Teoh",
+      "canonicalUrl": "https://www.xiaohongshu.com/discovery/item/6a706ce1000000001202962d",
+      "frontmatterId": "00a70dca-9263-4940-887c-eb8f372a938e",
+      "imageSummary": {
+        "missingCount": 0,
+        "readableAiTargetCount": 0,
+        "readableCount": 7,
+        "readableSourceFrameCount": 7,
+        "referenceCount": 7,
+        "unreadableCount": 0
+      },
+      "images": [
+        {
+          "contentClass": "source-frame",
+          "height": 1280,
+          "mode": "RGB",
+          "mtimeNs": 1785994126193127964,
+          "pHashAlgorithm": "dct-ii-32x32-low8x8-median64-v1",
+          "pHashDct64": "a1143f7e68d8a98b",
+          "rawReference": "笔记同步助手/images/0c218f5a23960cac59255c7cc1174ae3_MD5.jpg",
+          "relativePath": "images/0c218f5a23960cac59255c7cc1174ae3_MD5.jpg",
+          "sha256": "048269829f7c6dc93794c5f8d6db0090921766eddcf6190e068999b06c2869bd",
+          "sizeBytes": 116492,
+          "status": "readable",
+          "width": 720
+        },
+        {
+          "contentClass": "source-frame",
+          "height": 1280,
+          "mode": "RGB",
+          "mtimeNs": 1785994132209703433,
+          "pHashAlgorithm": "dct-ii-32x32-low8x8-median64-v1",
+          "pHashDct64": "89943d7e6e734823",
+          "rawReference": "笔记同步助手/images/14a005d5fbeb72994873ab68e2aadc16_MD5.jpg",
+          "relativePath": "images/14a005d5fbeb72994873ab68e2aadc16_MD5.jpg",
+          "sha256": "06f135702baa9ab0ccf711a39f944780da656df6101a4e2d109a85b5d8707eec",
+          "sizeBytes": 112526,
+          "status": "readable",
+          "width": 720
+        },
+        {
+          "contentClass": "source-frame",
+          "height": 1280,
+          "mode": "RGB",
+          "mtimeNs": 1785994125975886255,
+          "pHashAlgorithm": "dct-ii-32x32-low8x8-median64-v1",
+          "pHashDct64": "a8d26e347b6552e1",
+          "rawReference": "笔记同步助手/images/5a40d85a6db7a347ed01eddcf295dfbf_MD5.jpg",
+          "relativePath": "images/5a40d85a6db7a347ed01eddcf295dfbf_MD5.jpg",
+          "sha256": "32a81037d17d1ba47a9c3c0a7130f6198cdea359951e504397e298b897ce5a0a",
+          "sizeBytes": 112459,
+          "status": "readable",
+          "width": 720
+        },
+        {
+          "contentClass": "source-frame",
+          "height": 1280,
+          "mode": "RGB",
+          "mtimeNs": 1785994127988458490,
+          "pHashAlgorithm": "dct-ii-32x32-low8x8-median64-v1",
+          "pHashDct64": "ab215e4f725a16d1",
+          "rawReference": "笔记同步助手/images/66652c44bdb02c27abaaa8e4bb03ebe6_MD5.jpg",
+          "relativePath": "images/66652c44bdb02c27abaaa8e4bb03ebe6_MD5.jpg",
+          "sha256": "ce005615eec73a14325bb63d1eff5c7505e4078aa2bca3e237cbe29db52c13dc",
+          "sizeBytes": 84561,
+          "status": "readable",
+          "width": 720
+        },
+        {
+          "contentClass": "source-frame",
+          "height": 1280,
+          "mode": "RGB",
+          "mtimeNs": 1785994128206122911,
+          "pHashAlgorithm": "dct-ii-32x32-low8x8-median64-v1",
+          "pHashDct64": "ea744f608ea3d447",
+          "rawReference": "笔记同步助手/images/ac6464ad9f87b447df3bb82bded2636a_MD5.jpg",
+          "relativePath": "images/ac6464ad9f87b447df3bb82bded2636a_MD5.jpg",
+          "sha256": "7a035d77bbf4649b02d212ecdd4f49818f5e73cc9f287a00e829eb9c27763c55",
+          "sizeBytes": 102084,
+          "status": "readable",
+          "width": 720
+        },
+        {
+          "contentClass": "source-frame",
+          "height": 1280,
+          "mode": "RGB",
+          "mtimeNs": 1785994130016760352,
+          "pHashAlgorithm": "dct-ii-32x32-low8x8-median64-v1",
+          "pHashDct64": "8a977e336864532d",
+          "rawReference": "笔记同步助手/images/b9a2d7ae06e2b732e42e339f1418c626_MD5.jpg",
+          "relativePath": "images/b9a2d7ae06e2b732e42e339f1418c626_MD5.jpg",
+          "sha256": "53b0929d26976b25322b86fc9aa9c33ea93c1c4e3b44b388769d0156af4001e3",
+          "sizeBytes": 97439,
+          "status": "readable",
+          "width": 720
+        },
+        {
+          "contentClass": "source-frame",
+          "height": 1280,
+          "mode": "RGB",
+          "mtimeNs": 1785994130899197930,
+          "pHashAlgorithm": "dct-ii-32x32-low8x8-median64-v1",
+          "pHashDct64": "b61d70336b4c5ec8",
+          "rawReference": "笔记同步助手/images/d2b30198d6ce72216261b73352d67be8_MD5.jpg",
+          "relativePath": "images/d2b30198d6ce72216261b73352d67be8_MD5.jpg",
+          "sha256": "77998ff145a29cc9e387f8f02bb8ccbae0ea0189e6e78d2b52fc2e21a956591d",
+          "sizeBytes": 100689,
+          "status": "readable",
+          "width": 720
+        }
+      ],
+      "media": {
+        "declaredType": "video",
+        "downloadState": "not-requested",
+        "localSourceFrameCount": 7,
+        "remoteAccess": "not-checked",
+        "status": "local-frames-available",
+        "temporaryDownloadCheckpoint": null
+      },
+      "note": {
+        "mtimeNs": 1785994132212067446,
+        "relativePath": "2026-08-06/老铁匠3.0扑克推牌.md",
+        "sha256": "4675e589d2581ecadeb78e3fee5df816234adc3b6cf7e751f19a980a271ee8a5",
+        "sizeBytes": 2097
+      },
+      "originalUrl": "https://www.xiaohongshu.com/discovery/item/6a706ce1000000001202962d?app_platform=ios&app_version=9.40.1&share_from_user_hidden=true&xsec_source=app_share&type=video&xsec_token=CB7wcGaJaIIQvivqaa23gA6olxDw5QEaw1OKPHodZS6Rk=&author_share=1&xhsshare=WeixinSession&shareRedId=N0c5ODVGNUI3OEdHOjgzPThFQko8NjxL&apptime=1785993733&share_id=c2da2d15a71248239666d117e53814af&code=9GwRemau2lI",
+      "platform": "xiaohongshu",
+      "product": {
+        "clusterId": "lautie-poker-slider-3",
+        "clusterLabel": "老铁匠 3.0 扑克推牌",
+        "matchStatus": "category-reference",
+        "sameItemAs": []
+      },
+      "relatedDerivedNotes": [],
+      "resumeCheckpoint": {
+        "noteMtimeNs": 1785994132212067446,
+        "noteSha256": "4675e589d2581ecadeb78e3fee5df816234adc3b6cf7e751f19a980a271ee8a5",
+        "referencedImageDigestSha256": "b789fdc81c65e69330dda13bf901e14c39e5533972b392080136d5d830f73291",
+        "state": "complete"
+      },
+      "rights": {
+        "allowedUse": "internal research and source-linked model provenance",
+        "redistribution": "not-cleared",
+        "status": "third-party-reference-only"
+      },
+      "savedAt": "2026-08-06T13:26:59+08:00",
+      "sourceId": "edc:00a70dca-9263-4940-887c-eb8f372a938e",
+      "title": "老铁匠3.0扑克推牌",
+      "upstreamItemId": "6a706ce1000000001202962d"
+    },
+    {
+      "author": "Terry Teoh",
+      "canonicalUrl": "https://www.xiaohongshu.com/discovery/item/6a740e59000000001201185f",
+      "frontmatterId": "7c0595fa-ed89-4d88-937a-00edfda5ca48",
+      "imageSummary": {
+        "missingCount": 0,
+        "readableAiTargetCount": 0,
+        "readableCount": 5,
+        "readableSourceFrameCount": 5,
+        "referenceCount": 5,
+        "unreadableCount": 0
+      },
+      "images": [
+        {
+          "contentClass": "source-frame",
+          "height": 1280,
+          "mode": "RGB",
+          "mtimeNs": 1785994424894437039,
+          "pHashAlgorithm": "dct-ii-32x32-low8x8-median64-v1",
+          "pHashDct64": "e044731f6338973b",
+          "rawReference": "笔记同步助手/images/0c3198aebcbe4a791d0a14eaa2c2c324_MD5.jpg",
+          "relativePath": "images/0c3198aebcbe4a791d0a14eaa2c2c324_MD5.jpg",
+          "sha256": "aa79af48123e6b886ac628132d911c5aa353c4b1a684fb377b3d75f52d1adffb",
+          "sizeBytes": 67529,
+          "status": "readable",
+          "width": 720
+        },
+        {
+          "contentClass": "source-frame",
+          "height": 1280,
+          "mode": "RGB",
+          "mtimeNs": 1785994424668029998,
+          "pHashAlgorithm": "dct-ii-32x32-low8x8-median64-v1",
+          "pHashDct64": "80463f5f78bca790",
+          "rawReference": "笔记同步助手/images/2f350c72a3c1776b82ebafe0293f8cfe_MD5.jpg",
+          "relativePath": "images/2f350c72a3c1776b82ebafe0293f8cfe_MD5.jpg",
+          "sha256": "8094bb1087ccb58ad029da1acf45fe21de604bcf045df54f2b4ed71ff88ba6a2",
+          "sizeBytes": 56498,
+          "status": "readable",
+          "width": 720
+        },
+        {
+          "contentClass": "source-frame",
+          "height": 1280,
+          "mode": "RGB",
+          "mtimeNs": 1785994425755298702,
+          "pHashAlgorithm": "dct-ii-32x32-low8x8-median64-v1",
+          "pHashDct64": "8f41384b3cbfb483",
+          "rawReference": "笔记同步助手/images/a40941f64aa7b98187431172bd3673da_MD5.jpg",
+          "relativePath": "images/a40941f64aa7b98187431172bd3673da_MD5.jpg",
+          "sha256": "6a87c309cc4e671f1890f158640678c5a1845687d8aed66ae1cf9dc350a073eb",
+          "sizeBytes": 47486,
+          "status": "readable",
+          "width": 720
+        },
+        {
+          "contentClass": "source-frame",
+          "height": 1280,
+          "mode": "RGB",
+          "mtimeNs": 1785994424224021016,
+          "pHashAlgorithm": "dct-ii-32x32-low8x8-median64-v1",
+          "pHashDct64": "e0c5601e47359db7",
+          "rawReference": "笔记同步助手/images/dab9d441747094fb688a87465960b9e2_MD5.jpg",
+          "relativePath": "images/dab9d441747094fb688a87465960b9e2_MD5.jpg",
+          "sha256": "91ac86d7d78df5c874d9491e55261124b77ddb2f356f1f97c5acb499d631632d",
+          "sizeBytes": 67967,
+          "status": "readable",
+          "width": 720
+        },
+        {
+          "contentClass": "source-frame",
+          "height": 1280,
+          "mode": "RGB",
+          "mtimeNs": 1785994427978660119,
+          "pHashAlgorithm": "dct-ii-32x32-low8x8-median64-v1",
+          "pHashDct64": "83447f1e6799c45a",
+          "rawReference": "笔记同步助手/images/e92ddf60e5064557f55159522e34f4fb_MD5.jpg",
+          "relativePath": "images/e92ddf60e5064557f55159522e34f4fb_MD5.jpg",
+          "sha256": "6e68ad096f20fed280dcd9bf75de4cd58530ac42e383c730b78d1817815792a4",
+          "sizeBytes": 68411,
+          "status": "readable",
+          "width": 720
+        }
+      ],
+      "media": {
+        "declaredType": "video",
+        "downloadState": "not-requested",
+        "localSourceFrameCount": 5,
+        "remoteAccess": "not-checked",
+        "status": "local-frames-available",
+        "temporaryDownloadCheckpoint": null
+      },
+      "note": {
+        "mtimeNs": 1785994427982822812,
+        "relativePath": "2026-08-06/钛蓝巧克力双珠槽高低音.md",
+        "sha256": "91191fd0a7569e8e0480025f23c82f93863f5635ac95bca3e489e21f69ff379f",
+        "sizeBytes": 1839
+      },
+      "originalUrl": "https://www.xiaohongshu.com/discovery/item/6a740e59000000001201185f?app_platform=ios&app_version=9.40.1&share_from_user_hidden=true&xsec_source=app_share&type=video&xsec_token=CBxDW4HimodBAsA41gctd8JtVEo9m8adhBoRP-gFfM5LY=&author_share=1&xhsshare=WeixinSession&shareRedId=N0c5ODVGNUI3OEdHOjgzPThFQko8NjxL&apptime=1785993632&share_id=25769b3c1a7146b99db6252e9a440407&code=7MJo016e9cV",
+      "platform": "xiaohongshu",
+      "product": {
+        "clusterId": "lautie-titanium-blue-chocolate-slider",
+        "clusterLabel": "钛蓝巧克力双珠槽推牌",
+        "matchStatus": "category-reference",
+        "sameItemAs": []
+      },
+      "relatedDerivedNotes": [],
+      "resumeCheckpoint": {
+        "noteMtimeNs": 1785994427982822812,
+        "noteSha256": "91191fd0a7569e8e0480025f23c82f93863f5635ac95bca3e489e21f69ff379f",
+        "referencedImageDigestSha256": "50864e38c244bfb4e1bc4cfdbc12ad1a1218fde34450bc043d722ad5d267fa0f",
+        "state": "complete"
+      },
+      "rights": {
+        "allowedUse": "internal research and source-linked model provenance",
+        "redistribution": "not-cleared",
+        "status": "third-party-reference-only"
+      },
+      "savedAt": "2026-08-06T13:32:20+08:00",
+      "sourceId": "edc:7c0595fa-ed89-4d88-937a-00edfda5ca48",
+      "title": "钛蓝巧克力双珠槽高低音",
+      "upstreamItemId": "6a740e59000000001201185f"
+    },
+    {
+      "author": "指玩屋",
+      "canonicalUrl": "https://www.xiaohongshu.com/discovery/item/6a728dbe000000002500afb9",
+      "frontmatterId": "ba6ee43a-a614-4a9b-93ca-f07af6fc7e2f",
+      "imageSummary": {
+        "missingCount": 0,
+        "readableAiTargetCount": 0,
+        "readableCount": 6,
+        "readableSourceFrameCount": 6,
+        "referenceCount": 6,
+        "unreadableCount": 0
+      },
+      "images": [
+        {
+          "contentClass": "source-frame",
+          "height": 1280,
+          "mode": "RGB",
+          "mtimeNs": 1786089832342259480,
+          "pHashAlgorithm": "dct-ii-32x32-low8x8-median64-v1",
+          "pHashDct64": "b81f70a7f01b606e",
+          "rawReference": "笔记同步助手/images/00cf5f35258a23e5937fb2152e3e5634_MD5.jpg",
+          "relativePath": "images/00cf5f35258a23e5937fb2152e3e5634_MD5.jpg",
+          "sha256": "75fd3b94f6b876bc5c743df1f081cd9b88515e60c9dd45a8b213b1235a166e7b",
+          "sizeBytes": 50375,
+          "status": "readable",
+          "width": 720
+        },
+        {
+          "contentClass": "source-frame",
+          "height": 1280,
+          "mode": "RGB",
+          "mtimeNs": 1786089831449566508,
+          "pHashAlgorithm": "dct-ii-32x32-low8x8-median64-v1",
+          "pHashDct64": "e15260c56a71c79f",
+          "rawReference": "笔记同步助手/images/137abe14589b91bdfe0b53c46caf3029_MD5.jpg",
+          "relativePath": "images/137abe14589b91bdfe0b53c46caf3029_MD5.jpg",
+          "sha256": "8bd2c5361fad99c1595c7de4bbb43653acc1bf07e7a574260cb83ec97e1aaec5",
+          "sizeBytes": 80974,
+          "status": "readable",
+          "width": 720
+        },
+        {
+          "contentClass": "source-frame",
+          "height": 1280,
+          "mode": "RGB",
+          "mtimeNs": 1786089834742740862,
+          "pHashAlgorithm": "dct-ii-32x32-low8x8-median64-v1",
+          "pHashDct64": "b81770abf057606e",
+          "rawReference": "笔记同步助手/images/4b00ae906429b8b7cef89f3794107347_MD5.jpg",
+          "relativePath": "images/4b00ae906429b8b7cef89f3794107347_MD5.jpg",
+          "sha256": "cc12e32898a197176da438381d99eb4cf646686a298f44560265fea3c070a3b7",
+          "sizeBytes": 68665,
+          "status": "readable",
+          "width": 720
+        },
+        {
+          "contentClass": "source-frame",
+          "height": 1280,
+          "mode": "RGB",
+          "mtimeNs": 1786089835880862894,
+          "pHashAlgorithm": "dct-ii-32x32-low8x8-median64-v1",
+          "pHashDct64": "b05b68a7d06760bd",
+          "rawReference": "笔记同步助手/images/594296b3018875f4c5c965863b678be7_MD5.jpg",
+          "relativePath": "images/594296b3018875f4c5c965863b678be7_MD5.jpg",
+          "sha256": "75f60344c5798626cd583c792e39887eb29a683aa1542df6481f03683588ae02",
+          "sizeBytes": 69093,
+          "status": "readable",
+          "width": 720
+        },
+        {
+          "contentClass": "source-frame",
+          "height": 1280,
+          "mode": "RGB",
+          "mtimeNs": 1786089833486859040,
+          "pHashAlgorithm": "dct-ii-32x32-low8x8-median64-v1",
+          "pHashDct64": "856072cf24d36f56",
+          "rawReference": "笔记同步助手/images/5d5a40cae6b186f62ed43252fb31c9fe_MD5.jpg",
+          "relativePath": "images/5d5a40cae6b186f62ed43252fb31c9fe_MD5.jpg",
+          "sha256": "78e8c33db2d135bde10b97e38af1557a1e424b5657875f3c19b2a83919a644d7",
+          "sizeBytes": 102192,
+          "status": "readable",
+          "width": 720
+        },
+        {
+          "contentClass": "source-frame",
+          "height": 1280,
+          "mode": "RGB",
+          "mtimeNs": 1786089839102221276,
+          "pHashAlgorithm": "dct-ii-32x32-low8x8-median64-v1",
+          "pHashDct64": "c7f040e738c3b19e",
+          "rawReference": "笔记同步助手/images/96dfc988796c94392e4d0c0e86c44b3e_MD5.jpg",
+          "relativePath": "images/96dfc988796c94392e4d0c0e86c44b3e_MD5.jpg",
+          "sha256": "e23832f1c7806f7d87e7e3291948e93a13c6af666bc5fcb705040c2300e8f6b6",
+          "sizeBytes": 201389,
+          "status": "readable",
+          "width": 720
+        }
+      ],
+      "media": {
+        "declaredType": "video",
+        "downloadState": "not-requested",
+        "localSourceFrameCount": 6,
+        "remoteAccess": "not-checked",
+        "status": "local-frames-available",
+        "temporaryDownloadCheckpoint": null
+      },
+      "note": {
+        "mtimeNs": 1786089839104547021,
+        "relativePath": "2026-08-07/酥酥麻麻还带吸附感？.md",
+        "sha256": "2ecd95422d5b5f85814fc9e78e03be9f8cc885c2111107221f0f01b05a6e7828",
+        "sizeBytes": 1894
+      },
+      "originalUrl": "https://www.xiaohongshu.com/discovery/item/6a728dbe000000002500afb9?app_platform=ios&app_version=9.40.1&share_from_user_hidden=true&xsec_source=app_share&type=video&xsec_token=CBb817r1RC8nb7Mel0mvh8POz-blqBsz3JVDXALbmd3D4=&author_share=1&xhsshare=WeixinSession&shareRedId=N0c5ODVGNUI3OEdHOjgzPThFQko8NjxL&apptime=1786089262&share_id=ad5742eae40a43dbbc9208d73778331e&code=ATm2VGZrdne",
+      "platform": "xiaohongshu",
+      "product": {
+        "clusterId": "chimago-jiangmo-dada-slider",
+        "clusterLabel": "CHIMAGO 降魔达达 / 赤马 EDC",
+        "matchStatus": "category-reference",
+        "sameItemAs": []
+      },
+      "relatedDerivedNotes": [],
+      "resumeCheckpoint": {
+        "noteMtimeNs": 1786089839104547021,
+        "noteSha256": "2ecd95422d5b5f85814fc9e78e03be9f8cc885c2111107221f0f01b05a6e7828",
+        "referencedImageDigestSha256": "b64f887be495152a079684637a04fa337cfc2a6deca0826cb970d06bb1e7a791",
+        "state": "complete"
+      },
+      "rights": {
+        "allowedUse": "internal research and source-linked model provenance",
+        "redistribution": "not-cleared",
+        "status": "third-party-reference-only"
+      },
+      "savedAt": "2026-08-07T16:02:25+08:00",
+      "sourceId": "edc:ba6ee43a-a614-4a9b-93ca-f07af6fc7e2f",
+      "title": "酥酥麻麻还带吸附感？",
+      "upstreamItemId": "6a728dbe000000002500afb9"
+    },
+    {
+      "author": "指玩屋",
+      "canonicalUrl": "https://www.xiaohongshu.com/discovery/item/6a73e5ae000000003300cacc",
+      "frontmatterId": "d8915aa1-8f1a-4006-8c27-0faf21d23460",
+      "imageSummary": {
+        "missingCount": 0,
+        "readableAiTargetCount": 0,
+        "readableCount": 3,
+        "readableSourceFrameCount": 3,
+        "referenceCount": 3,
+        "unreadableCount": 0
+      },
+      "images": [
+        {
+          "contentClass": "source-frame",
+          "height": 1280,
+          "mode": "RGB",
+          "mtimeNs": 1786094925257434030,
+          "pHashAlgorithm": "dct-ii-32x32-low8x8-median64-v1",
+          "pHashDct64": "9c5370ade497582b",
+          "rawReference": "笔记同步助手/images/94c98c4a0760b8ea43bbf4a4a6a0c259_MD5.jpg",
+          "relativePath": "images/94c98c4a0760b8ea43bbf4a4a6a0c259_MD5.jpg",
+          "sha256": "792e603eb553616864e985fe93fb696fd099f179c53fa35fdbf69567d2a5a130",
+          "sizeBytes": 71910,
+          "status": "readable",
+          "width": 720
+        },
+        {
+          "contentClass": "source-frame",
+          "height": 1280,
+          "mode": "RGB",
+          "mtimeNs": 1786094932158618421,
+          "pHashAlgorithm": "dct-ii-32x32-low8x8-median64-v1",
+          "pHashDct64": "9c5760a1f053696f",
+          "rawReference": "笔记同步助手/images/a95da7ae8aba9780fe68d18b46f98a50_MD5.jpg",
+          "relativePath": "images/a95da7ae8aba9780fe68d18b46f98a50_MD5.jpg",
+          "sha256": "8c1d3aa2eb3902f3ea92fe13d80f076d0a0866fa69d68890d58cfb0757a9d04e",
+          "sizeBytes": 72219,
+          "status": "readable",
+          "width": 720
+        },
+        {
+          "contentClass": "source-frame",
+          "height": 1280,
+          "mode": "RGB",
+          "mtimeNs": 1786094925118924323,
+          "pHashAlgorithm": "dct-ii-32x32-low8x8-median64-v1",
+          "pHashDct64": "9c5b70a5b0d36867",
+          "rawReference": "笔记同步助手/images/db6c8a1facc8ece25e55b7864642f9f8_MD5.jpg",
+          "relativePath": "images/db6c8a1facc8ece25e55b7864642f9f8_MD5.jpg",
+          "sha256": "777c2ca614b535f400f11a500fb2cb4685a424ecfd5d39f1b38d800c41176afe",
+          "sizeBytes": 80860,
+          "status": "readable",
+          "width": 720
+        }
+      ],
+      "media": {
+        "declaredType": "video",
+        "downloadState": "not-requested",
+        "localSourceFrameCount": 3,
+        "remoteAccess": "not-checked",
+        "status": "local-frames-available",
+        "temporaryDownloadCheckpoint": null
+      },
+      "note": {
+        "mtimeNs": 1786094932159547801,
+        "relativePath": "2026-08-07/三音阶，怎么推都XX-.md",
+        "sha256": "c55c1df5fc6a95a3905aa148813879b037e23de7abc77847b9001d44d3e01765",
+        "sizeBytes": 1526
+      },
+      "originalUrl": "https://www.xiaohongshu.com/discovery/item/6a73e5ae000000003300cacc?app_platform=ios&app_version=9.40.1&share_from_user_hidden=true&xsec_source=app_share&type=video&xsec_token=CBP-LCdSJ4VOODbN7hPWqMDGntOm2imo-sFLdkbq142iI=&author_share=1&xhsshare=WeixinSession&shareRedId=N0c5ODVGNUI3OEdHOjgzPThFQko8NjxL&apptime=1786093662&share_id=72e3bdadf24e439db606c89e95ff8a6b&code=9FMWOzhWtZ9",
+      "platform": "xiaohongshu",
+      "product": {
+        "clusterId": "three-tone-edc-slider-unidentified",
+        "clusterLabel": "三音阶 EDC 推牌（具体型号待确认）",
+        "matchStatus": "specific-product-unresolved-model",
+        "sameItemAs": []
+      },
+      "relatedDerivedNotes": [],
+      "resumeCheckpoint": {
+        "noteMtimeNs": 1786094932159547801,
+        "noteSha256": "c55c1df5fc6a95a3905aa148813879b037e23de7abc77847b9001d44d3e01765",
+        "referencedImageDigestSha256": "3922a234b50bf2e7b6146d6bddbb7592a12149f4b1f4081730c577773e8c376d",
+        "state": "complete"
+      },
+      "rights": {
+        "allowedUse": "internal research and source-linked model provenance",
+        "redistribution": "not-cleared",
+        "status": "third-party-reference-only"
+      },
+      "savedAt": "2026-08-07T17:23:56+08:00",
+      "sourceId": "edc:d8915aa1-8f1a-4006-8c27-0faf21d23460",
+      "title": "三音阶，怎么推都XX?",
+      "upstreamItemId": "6a73e5ae000000003300cacc"
+    },
+    {
+      "author": "Jason Yu",
+      "canonicalUrl": "https://v.douyin.com/lLwZ957DuJE/",
+      "frontmatterId": "b17b9b4a-6e2c-4e9d-9782-db5030890ddf",
+      "imageSummary": {
+        "missingCount": 0,
+        "readableAiTargetCount": 0,
+        "readableCount": 12,
+        "readableSourceFrameCount": 12,
+        "referenceCount": 12,
+        "unreadableCount": 0
+      },
+      "images": [
+        {
+          "contentClass": "source-frame",
+          "height": 1376,
+          "mode": "RGB",
+          "mtimeNs": 1786179135091884989,
+          "pHashAlgorithm": "dct-ii-32x32-low8x8-median64-v1",
+          "pHashDct64": "aa8b698ee4f1981e",
+          "rawReference": "笔记同步助手/images/0795069fc83b715d6c537baa91452b58_MD5.jpg",
+          "relativePath": "images/0795069fc83b715d6c537baa91452b58_MD5.jpg",
+          "sha256": "5ad39ad7fa6ef53b34e3df4385acbe5e2904c026c6c2b8f4e6634605a693a7a1",
+          "sizeBytes": 378013,
+          "status": "readable",
+          "width": 1918
+        },
+        {
+          "contentClass": "source-frame",
+          "height": 1440,
+          "mode": "RGB",
+          "mtimeNs": 1786179132855489572,
+          "pHashAlgorithm": "dct-ii-32x32-low8x8-median64-v1",
+          "pHashDct64": "eec9954630f5c338",
+          "rawReference": "笔记同步助手/images/1eb7cd565602e7c899915b0a1319bebb_MD5.jpg",
+          "relativePath": "images/1eb7cd565602e7c899915b0a1319bebb_MD5.jpg",
+          "sha256": "fc94dc841164e324f19d2080bfb6a47969462b62df2d79d65f7ac2d91f5fd8aa",
+          "sizeBytes": 844853,
+          "status": "readable",
+          "width": 1920
+        },
+        {
+          "contentClass": "source-frame",
+          "height": 1440,
+          "mode": "RGB",
+          "mtimeNs": 1786179138624782586,
+          "pHashAlgorithm": "dct-ii-32x32-low8x8-median64-v1",
+          "pHashDct64": "bf222059db3db494",
+          "rawReference": "笔记同步助手/images/3d21eee07d2f5452dc1001aebfb89ba1_MD5.jpg",
+          "relativePath": "images/3d21eee07d2f5452dc1001aebfb89ba1_MD5.jpg",
+          "sha256": "2f9db0e0d980c000b587414006029e5736ac21915c70f93b610f47885a4c1eee",
+          "sizeBytes": 711273,
+          "status": "readable",
+          "width": 1920
+        },
+        {
+          "contentClass": "source-frame",
+          "height": 994,
+          "mode": "RGB",
+          "mtimeNs": 1786179141532350156,
+          "pHashAlgorithm": "dct-ii-32x32-low8x8-median64-v1",
+          "pHashDct64": "eeccf19380c69791",
+          "rawReference": "笔记同步助手/images/3f156f313fee675f6a4b7c6c774342cf_MD5.jpg",
+          "relativePath": "images/3f156f313fee675f6a4b7c6c774342cf_MD5.jpg",
+          "sha256": "130c0849061fc6f96b033821a1665fbf64e4ce431bf26bacc801a320ee8f3bca",
+          "sizeBytes": 365336,
+          "status": "readable",
+          "width": 1918
+        },
+        {
+          "contentClass": "source-frame",
+          "height": 1152,
+          "mode": "RGB",
+          "mtimeNs": 1786179133149144221,
+          "pHashAlgorithm": "dct-ii-32x32-low8x8-median64-v1",
+          "pHashDct64": "803ff808371fc53b",
+          "rawReference": "笔记同步助手/images/44fdcb90a90dc546c3336251b26400b6_MD5.jpg",
+          "relativePath": "images/44fdcb90a90dc546c3336251b26400b6_MD5.jpg",
+          "sha256": "2dd3bb2dae4cecf14a5979f71b838b3f22f5daeb63235f99509a33f933707b30",
+          "sizeBytes": 661654,
+          "status": "readable",
+          "width": 1920
+        },
+        {
+          "contentClass": "source-frame",
+          "height": 1140,
+          "mode": "RGB",
+          "mtimeNs": 1786179139771202331,
+          "pHashAlgorithm": "dct-ii-32x32-low8x8-median64-v1",
+          "pHashDct64": "ff7ea0b082279554",
+          "rawReference": "笔记同步助手/images/4dfbbdf72495c594ce2ceedbb0f67b8f_MD5.jpg",
+          "relativePath": "images/4dfbbdf72495c594ce2ceedbb0f67b8f_MD5.jpg",
+          "sha256": "0ff759b05e5208a1cd659eb0a2283a7e451fd94a6801169d6cf1b4c68600e0bb",
+          "sizeBytes": 466396,
+          "status": "readable",
+          "width": 1918
+        },
+        {
+          "contentClass": "source-frame",
+          "height": 1920,
+          "mode": "RGB",
+          "mtimeNs": 1786179129997722229,
+          "pHashAlgorithm": "dct-ii-32x32-low8x8-median64-v1",
+          "pHashDct64": "850ed5341db526b7",
+          "rawReference": "笔记同步助手/images/4e5d9a72e805d4801855daa01b022777_MD5.jpg",
+          "relativePath": "images/4e5d9a72e805d4801855daa01b022777_MD5.jpg",
+          "sha256": "3dbeb83c9b240d8decf4059ee7c3e955bd4ca23f1f3d942f43d2cece802cacc1",
+          "sizeBytes": 327194,
+          "status": "readable",
+          "width": 1440
+        },
+        {
+          "contentClass": "source-frame",
+          "height": 1920,
+          "mode": "RGB",
+          "mtimeNs": 1786179130404808105,
+          "pHashAlgorithm": "dct-ii-32x32-low8x8-median64-v1",
+          "pHashDct64": "f0a2cedb4c9c6896",
+          "rawReference": "笔记同步助手/images/4e5db0e4dce009a0122ffe6ff5f0c728_MD5.jpg",
+          "relativePath": "images/4e5db0e4dce009a0122ffe6ff5f0c728_MD5.jpg",
+          "sha256": "27f4a2ea41f8f65c992f9d099d493adc3496432fbe8d173aa0632bf68e7bbd36",
+          "sizeBytes": 439363,
+          "status": "readable",
+          "width": 1440
+        },
+        {
+          "contentClass": "source-frame",
+          "height": 1450,
+          "mode": "RGB",
+          "mtimeNs": 1786179134947371715,
+          "pHashAlgorithm": "dct-ii-32x32-low8x8-median64-v1",
+          "pHashDct64": "8bec23c9b423d43b",
+          "rawReference": "笔记同步助手/images/757de8337c76cbe224dab5094e3ba966_MD5.jpg",
+          "relativePath": "images/757de8337c76cbe224dab5094e3ba966_MD5.jpg",
+          "sha256": "adc863de396fc98ef80f4fb9cf08174bbcdccf854d62a8d527d6e3c8295fe444",
+          "sizeBytes": 838100,
+          "status": "readable",
+          "width": 1920
+        },
+        {
+          "contentClass": "source-frame",
+          "height": 1294,
+          "mode": "RGB",
+          "mtimeNs": 1786179136910318317,
+          "pHashAlgorithm": "dct-ii-32x32-low8x8-median64-v1",
+          "pHashDct64": "bf203c66b57464a3",
+          "rawReference": "笔记同步助手/images/8572517bece27ff2514245055efd7b38_MD5.jpg",
+          "relativePath": "images/8572517bece27ff2514245055efd7b38_MD5.jpg",
+          "sha256": "2ee075722d1c1a5979311271ba6f603e70b3e7c06fc1a369b2651b8ca6f5594e",
+          "sizeBytes": 722593,
+          "status": "readable",
+          "width": 1920
+        },
+        {
+          "contentClass": "source-frame",
+          "height": 676,
+          "mode": "RGB",
+          "mtimeNs": 1786179129575469277,
+          "pHashAlgorithm": "dct-ii-32x32-low8x8-median64-v1",
+          "pHashDct64": "818117d69d976d93",
+          "rawReference": "笔记同步助手/images/879844478e9d19ca5eb42477d0f29cbf_MD5.jpg",
+          "relativePath": "images/879844478e9d19ca5eb42477d0f29cbf_MD5.jpg",
+          "sha256": "69727acbe3b015658755571490d266d1c2a3b7853537dd9292df4138491b221b",
+          "sizeBytes": 145190,
+          "status": "readable",
+          "width": 868
+        },
+        {
+          "contentClass": "source-frame",
+          "height": 1440,
+          "mode": "RGB",
+          "mtimeNs": 1786179139337627634,
+          "pHashAlgorithm": "dct-ii-32x32-low8x8-median64-v1",
+          "pHashDct64": "be6a89329e3da584",
+          "rawReference": "笔记同步助手/images/c10964e7e2c3265b719ff009f5e2efcf_MD5.jpg",
+          "relativePath": "images/c10964e7e2c3265b719ff009f5e2efcf_MD5.jpg",
+          "sha256": "b65bfc0d0f7bd66edaf2ffc994c542e09e97d3ebc3e66e394565384c7e191810",
+          "sizeBytes": 629030,
+          "status": "readable",
+          "width": 1920
+        }
+      ],
+      "media": {
+        "declaredType": "video",
+        "downloadState": "not-requested",
+        "localSourceFrameCount": 12,
+        "remoteAccess": "not-checked",
+        "status": "local-frames-available",
+        "temporaryDownloadCheckpoint": null
+      },
+      "note": {
+        "mtimeNs": 1786179141533524242,
+        "relativePath": "2026-08-08/我的EDC之路。越来越上头，越来越上头.md",
+        "sha256": "f497738b174cc964784118f499f32a0933cc029b408ff41a04a67ec6064d8178",
+        "sizeBytes": 2012
+      },
+      "originalUrl": "https://v.douyin.com/lLwZ957DuJE/",
+      "platform": "douyin",
+      "product": {
+        "clusterId": "jason-yu-mixed-edc-collection",
+        "clusterLabel": "Jason Yu mixed EDC collection",
+        "matchStatus": "multi-product-reference",
+        "sameItemAs": []
+      },
+      "relatedDerivedNotes": [],
+      "resumeCheckpoint": {
+        "noteMtimeNs": 1786179141533524242,
+        "noteSha256": "f497738b174cc964784118f499f32a0933cc029b408ff41a04a67ec6064d8178",
+        "referencedImageDigestSha256": "f6dcb795c2d0aee9a702eddbfb19b0594ef132d54c652c695a3f86a9ad23bfa6",
+        "state": "complete"
+      },
+      "rights": {
+        "allowedUse": "internal research and source-linked model provenance",
+        "redistribution": "not-cleared",
+        "status": "third-party-reference-only"
+      },
+      "savedAt": "2026-08-08T07:18:23+08:00",
+      "sourceId": "edc:b17b9b4a-6e2c-4e9d-9782-db5030890ddf",
+      "title": "我的EDC之路。越来越上头，越来越上头",
+      "upstreamItemId": "lLwZ957DuJE"
+    },
+    {
+      "author": "五条悟饭",
+      "canonicalUrl": "https://v.douyin.com/yMWWkEWujqw/",
+      "frontmatterId": "9a7c4af0-9b4a-40c0-bfe2-2cb39e3da477",
+      "imageSummary": {
+        "missingCount": 0,
+        "readableAiTargetCount": 0,
+        "readableCount": 5,
+        "readableSourceFrameCount": 5,
+        "referenceCount": 5,
+        "unreadableCount": 0
+      },
+      "images": [
+        {
+          "contentClass": "source-frame",
+          "height": 768,
+          "mode": "RGB",
+          "mtimeNs": 1786179127242793902,
+          "pHashAlgorithm": "dct-ii-32x32-low8x8-median64-v1",
+          "pHashDct64": "9cc8264f9d63661e",
+          "rawReference": "笔记同步助手/images/132026179bdf0f34216103a4f51c98d2_MD5.jpg",
+          "relativePath": "images/132026179bdf0f34216103a4f51c98d2_MD5.jpg",
+          "sha256": "0d8a5ce818441793720b76d05599e3bf3c9977520783e11aa0baf7e47981dd70",
+          "sizeBytes": 66119,
+          "status": "readable",
+          "width": 576
+        },
+        {
+          "contentClass": "source-frame",
+          "height": 768,
+          "mode": "RGB",
+          "mtimeNs": 1786179127568809655,
+          "pHashAlgorithm": "dct-ii-32x32-low8x8-median64-v1",
+          "pHashDct64": "dcc83ae6cb710666",
+          "rawReference": "笔记同步助手/images/313242b7c1c66c9c4626a437622b3d2f_MD5.jpg",
+          "relativePath": "images/313242b7c1c66c9c4626a437622b3d2f_MD5.jpg",
+          "sha256": "85bbdbbac5eb0dd127cb2da9004a24ce5f156bc6b88e2f4e3e7b15c9077e616e",
+          "sizeBytes": 46077,
+          "status": "readable",
+          "width": 576
+        },
+        {
+          "contentClass": "source-frame",
+          "height": 768,
+          "mode": "RGB",
+          "mtimeNs": 1786179127074116263,
+          "pHashAlgorithm": "dct-ii-32x32-low8x8-median64-v1",
+          "pHashDct64": "d8cd3e70cbe30626",
+          "rawReference": "笔记同步助手/images/ba15e211405f4412591a172a21883e0c_MD5.jpg",
+          "relativePath": "images/ba15e211405f4412591a172a21883e0c_MD5.jpg",
+          "sha256": "ee8ead66fd06d85b9b9adbe68645226f333a0a5b6a8bf37933be79fd09d5035a",
+          "sizeBytes": 48260,
+          "status": "readable",
+          "width": 576
+        },
+        {
+          "contentClass": "source-frame",
+          "height": 768,
+          "mode": "RGB",
+          "mtimeNs": 1786179125820312059,
+          "pHashAlgorithm": "dct-ii-32x32-low8x8-median64-v1",
+          "pHashDct64": "9ac82c564b36f2ad",
+          "rawReference": "笔记同步助手/images/ba998ffcd585f384fe12096647e33f2c_MD5.jpg",
+          "relativePath": "images/ba998ffcd585f384fe12096647e33f2c_MD5.jpg",
+          "sha256": "0d2e9587547eb4d61f871bafd9a1dd9417c3d77dc8d8b4e24629ced007a6936c",
+          "sizeBytes": 50605,
+          "status": "readable",
+          "width": 576
+        },
+        {
+          "contentClass": "source-frame",
+          "height": 768,
+          "mode": "RGB",
+          "mtimeNs": 1786179125810144118,
+          "pHashAlgorithm": "dct-ii-32x32-low8x8-median64-v1",
+          "pHashDct64": "aed470e00eeab517",
+          "rawReference": "笔记同步助手/images/ffe305f3a9ea3254cf891e4186f8596c_MD5.jpg",
+          "relativePath": "images/ffe305f3a9ea3254cf891e4186f8596c_MD5.jpg",
+          "sha256": "11418390648884f000d6d0753bb5ce57e8a4dd6f2cc9eaf0d601a7cd647b7b26",
+          "sizeBytes": 68090,
+          "status": "readable",
+          "width": 576
+        }
+      ],
+      "media": {
+        "declaredType": "video",
+        "downloadState": "not-requested",
+        "localSourceFrameCount": 5,
+        "remoteAccess": "not-checked",
+        "status": "local-frames-available",
+        "temporaryDownloadCheckpoint": null
+      },
+      "note": {
+        "mtimeNs": 1786179127570637993,
+        "relativePath": "2026-08-08/看看你指尖的ootd？#edc #玩个很新的东西 #指尖陀螺 #大人也要玩玩具.md",
+        "sha256": "517c7dd981b784f57b795e4a5cc0d9564a3ab42dd00d06f7b86f6c275c430e53",
+        "sizeBytes": 1309
+      },
+      "originalUrl": "https://v.douyin.com/yMWWkEWujqw/",
+      "platform": "douyin",
+      "product": {
+        "clusterId": "finger-ootd-spinner-assortment",
+        "clusterLabel": "指尖 OOTD spinner assortment",
+        "matchStatus": "multi-product-reference",
+        "sameItemAs": []
+      },
+      "relatedDerivedNotes": [],
+      "resumeCheckpoint": {
+        "noteMtimeNs": 1786179127570637993,
+        "noteSha256": "517c7dd981b784f57b795e4a5cc0d9564a3ab42dd00d06f7b86f6c275c430e53",
+        "referencedImageDigestSha256": "d930ed81d03156d23f737de486792c119aa4c35d7c3f14616d546f9ad4350070",
+        "state": "complete"
+      },
+      "rights": {
+        "allowedUse": "internal research and source-linked model provenance",
+        "redistribution": "not-cleared",
+        "status": "third-party-reference-only"
+      },
+      "savedAt": "2026-08-08T07:21:01+08:00",
+      "sourceId": "edc:9a7c4af0-9b4a-40c0-bfe2-2cb39e3da477",
+      "title": "看看你指尖的ootd？#edc #玩个很新的东西 #指尖陀螺 #大人也要玩玩具",
+      "upstreamItemId": "yMWWkEWujqw"
+    },
+    {
+      "author": "傲娇的老铁匠LAUTIE",
+      "canonicalUrl": "https://www.xiaohongshu.com/discovery/item/6a6b44780000000025001155",
+      "frontmatterId": "65a31b87-416a-4a72-8daa-6441cdb4914f",
+      "imageSummary": {
+        "missingCount": 0,
+        "readableAiTargetCount": 0,
+        "readableCount": 14,
+        "readableSourceFrameCount": 14,
+        "referenceCount": 14,
+        "unreadableCount": 0
+      },
+      "images": [
+        {
+          "contentClass": "source-frame",
+          "height": 720,
+          "mode": "RGB",
+          "mtimeNs": 1786257958064739968,
+          "pHashAlgorithm": "dct-ii-32x32-low8x8-median64-v1",
+          "pHashDct64": "cb12e0c4f9613a9f",
+          "rawReference": "笔记同步助手/images/0197adbb9b5c8b40354ec4002d5c5f8b_MD5.jpg",
+          "relativePath": "images/0197adbb9b5c8b40354ec4002d5c5f8b_MD5.jpg",
+          "sha256": "0aaa243457b263a889d36dfe39c4a3d499dbaf223222f6910447d8f3a4afe169",
+          "sizeBytes": 133775,
+          "status": "readable",
+          "width": 1280
+        },
+        {
+          "contentClass": "source-frame",
+          "height": 720,
+          "mode": "RGB",
+          "mtimeNs": 1786257954680265566,
+          "pHashAlgorithm": "dct-ii-32x32-low8x8-median64-v1",
+          "pHashDct64": "ad8f53701a4e6c63",
+          "rawReference": "笔记同步助手/images/26293ed0381fccc191f71bb1f9466111_MD5.jpg",
+          "relativePath": "images/26293ed0381fccc191f71bb1f9466111_MD5.jpg",
+          "sha256": "49f82937d7def1d0114a444f6fb06ab9b5d34d93756f025a4b0e82400cad97e2",
+          "sizeBytes": 82859,
+          "status": "readable",
+          "width": 1280
+        },
+        {
+          "contentClass": "source-frame",
+          "height": 720,
+          "mode": "RGB",
+          "mtimeNs": 1786257955723731219,
+          "pHashAlgorithm": "dct-ii-32x32-low8x8-median64-v1",
+          "pHashDct64": "a93f70696bc06d34",
+          "rawReference": "笔记同步助手/images/27d124aeac6564220e9b809833d37200_MD5.jpg",
+          "relativePath": "images/27d124aeac6564220e9b809833d37200_MD5.jpg",
+          "sha256": "697f79b647a3bf0e6ca860abdc76a907f072a49cedc075182ef06c1e8b94f105",
+          "sizeBytes": 50760,
+          "status": "readable",
+          "width": 1280
+        },
+        {
+          "contentClass": "source-frame",
+          "height": 720,
+          "mode": "RGB",
+          "mtimeNs": 1786257957556036042,
+          "pHashAlgorithm": "dct-ii-32x32-low8x8-median64-v1",
+          "pHashDct64": "cc3439c9c93ce13b",
+          "rawReference": "笔记同步助手/images/291e1a5fae9593cc8cbf4d8f9079e5a9_MD5.jpg",
+          "relativePath": "images/291e1a5fae9593cc8cbf4d8f9079e5a9_MD5.jpg",
+          "sha256": "f4ba3dcce3e9b9411988bf88814490e4956bfe4b30d8454b6cce49d7139c5327",
+          "sizeBytes": 118508,
+          "status": "readable",
+          "width": 1280
+        },
+        {
+          "contentClass": "source-frame",
+          "height": 720,
+          "mode": "RGB",
+          "mtimeNs": 1786257954829261345,
+          "pHashAlgorithm": "dct-ii-32x32-low8x8-median64-v1",
+          "pHashDct64": "c696a3701d4d4e73",
+          "rawReference": "笔记同步助手/images/4d808a7ee077dd31cc76846df18d7fed_MD5.jpg",
+          "relativePath": "images/4d808a7ee077dd31cc76846df18d7fed_MD5.jpg",
+          "sha256": "2f32560dda253d898d5de8dd2023dfbea4fb31e3aa7fd4af8515e0dca0fb9f38",
+          "sizeBytes": 103220,
+          "status": "readable",
+          "width": 1280
+        },
+        {
+          "contentClass": "source-frame",
+          "height": 720,
+          "mode": "RGB",
+          "mtimeNs": 1786257951842177337,
+          "pHashAlgorithm": "dct-ii-32x32-low8x8-median64-v1",
+          "pHashDct64": "c4862f3d33c39c36",
+          "rawReference": "笔记同步助手/images/6b2390d46616d48d8c4d0b6d4b12ec73_MD5.jpg",
+          "relativePath": "images/6b2390d46616d48d8c4d0b6d4b12ec73_MD5.jpg",
+          "sha256": "51debde9870d0b3eb8f231f1c0b553cfb4f4a8b7caafde3103541f00b90473c3",
+          "sizeBytes": 104844,
+          "status": "readable",
+          "width": 1280
+        },
+        {
+          "contentClass": "source-frame",
+          "height": 720,
+          "mode": "RGB",
+          "mtimeNs": 1786257956769337370,
+          "pHashAlgorithm": "dct-ii-32x32-low8x8-median64-v1",
+          "pHashDct64": "951d6a2bc7643c96",
+          "rawReference": "笔记同步助手/images/962ef6eb1260b63463e71ab59332a1ff_MD5.jpg",
+          "relativePath": "images/962ef6eb1260b63463e71ab59332a1ff_MD5.jpg",
+          "sha256": "8f4de54cfd7be55ded1f9856881816d30c550b5fe220b48b17008d4a583922ca",
+          "sizeBytes": 52138,
+          "status": "readable",
+          "width": 1280
+        },
+        {
+          "contentClass": "source-frame",
+          "height": 720,
+          "mode": "RGB",
+          "mtimeNs": 1786257954691431261,
+          "pHashAlgorithm": "dct-ii-32x32-low8x8-median64-v1",
+          "pHashDct64": "97858d387893796c",
+          "rawReference": "笔记同步助手/images/a5588403b7dbe548a1c40bfc5a503757_MD5.jpg",
+          "relativePath": "images/a5588403b7dbe548a1c40bfc5a503757_MD5.jpg",
+          "sha256": "debbf757dfca252f9a725e6f9883e9945cdde29b567223b6220c33dac3b0e6a8",
+          "sizeBytes": 54146,
+          "status": "readable",
+          "width": 1280
+        },
+        {
+          "contentClass": "source-frame",
+          "height": 720,
+          "mode": "RGB",
+          "mtimeNs": 1786257954683163104,
+          "pHashAlgorithm": "dct-ii-32x32-low8x8-median64-v1",
+          "pHashDct64": "96ac4992b4999b67",
+          "rawReference": "笔记同步助手/images/b405eaf9ba03d35d11faa5d13b88074a_MD5.jpg",
+          "relativePath": "images/b405eaf9ba03d35d11faa5d13b88074a_MD5.jpg",
+          "sha256": "832f89846674d0daf20989775db9e4aced14dcd20a7c2818ff4f5c525d2acb75",
+          "sizeBytes": 43056,
+          "status": "readable",
+          "width": 1280
+        },
+        {
+          "contentClass": "source-frame",
+          "height": 720,
+          "mode": "RGB",
+          "mtimeNs": 1786257954695195006,
+          "pHashAlgorithm": "dct-ii-32x32-low8x8-median64-v1",
+          "pHashDct64": "9c87a7cd8c92b296",
+          "rawReference": "笔记同步助手/images/b9127cc1bfea2c4478dae87623a45a1f_MD5.jpg",
+          "relativePath": "images/b9127cc1bfea2c4478dae87623a45a1f_MD5.jpg",
+          "sha256": "472af9b92d7dd0d7ec5efa21b5553e41abd820013ad1f2a4409546938e3e5d5d",
+          "sizeBytes": 81124,
+          "status": "readable",
+          "width": 1280
+        },
+        {
+          "contentClass": "source-frame",
+          "height": 720,
+          "mode": "RGB",
+          "mtimeNs": 1786257951532050503,
+          "pHashAlgorithm": "dct-ii-32x32-low8x8-median64-v1",
+          "pHashDct64": "cc86a58d339999d3",
+          "rawReference": "笔记同步助手/images/dd5a3cd5b2f0a6ccd6a551878ba792b9_MD5.jpg",
+          "relativePath": "images/dd5a3cd5b2f0a6ccd6a551878ba792b9_MD5.jpg",
+          "sha256": "268aefe5ee22ccba46b9c5a87081b5370c5f3a701091d789302f8257bcf284be",
+          "sizeBytes": 80202,
+          "status": "readable",
+          "width": 1280
+        },
+        {
+          "contentClass": "source-frame",
+          "height": 720,
+          "mode": "RGB",
+          "mtimeNs": 1786257954686925975,
+          "pHashAlgorithm": "dct-ii-32x32-low8x8-median64-v1",
+          "pHashDct64": "8f1c769651335267",
+          "rawReference": "笔记同步助手/images/ecf1e601370dcd073f68922ec11c30b0_MD5.jpg",
+          "relativePath": "images/ecf1e601370dcd073f68922ec11c30b0_MD5.jpg",
+          "sha256": "2f223919696ef3145abcf9684171ac31610a69f3ba7f1aab9c0a30fc3e80b5c1",
+          "sizeBytes": 53277,
+          "status": "readable",
+          "width": 1280
+        },
+        {
+          "contentClass": "source-frame",
+          "height": 720,
+          "mode": "RGB",
+          "mtimeNs": 1786257954699492459,
+          "pHashAlgorithm": "dct-ii-32x32-low8x8-median64-v1",
+          "pHashDct64": "989e362598f9299b",
+          "rawReference": "笔记同步助手/images/f8740a8425879639830974b622cb5f83_MD5.jpg",
+          "relativePath": "images/f8740a8425879639830974b622cb5f83_MD5.jpg",
+          "sha256": "b4b349b464961b5f6acfb6e0f9cc2dbc24c07c0b1b756acb7c9e3a6021360bda",
+          "sizeBytes": 47999,
+          "status": "readable",
+          "width": 1280
+        },
+        {
+          "contentClass": "source-frame",
+          "height": 720,
+          "mode": "RGB",
+          "mtimeNs": 1786257959603192772,
+          "pHashAlgorithm": "dct-ii-32x32-low8x8-median64-v1",
+          "pHashDct64": "cc19b38c33366673",
+          "rawReference": "笔记同步助手/images/fe53673ec0b4a798c703c44a217758eb_MD5.jpg",
+          "relativePath": "images/fe53673ec0b4a798c703c44a217758eb_MD5.jpg",
+          "sha256": "8d0111f15d6e088f689e41b8c7e459ab1c6b3420a73f488d7495ba8383665aa6",
+          "sizeBytes": 86391,
+          "status": "readable",
+          "width": 1280
+        }
+      ],
+      "media": {
+        "declaredType": "video",
+        "downloadState": "not-requested",
+        "localSourceFrameCount": 14,
+        "remoteAccess": "not-checked",
+        "status": "local-frames-available",
+        "temporaryDownloadCheckpoint": null
+      },
+      "note": {
+        "mtimeNs": 1786257959610522138,
+        "relativePath": "2026-08-09/解压罐头币！？🥫.md",
+        "sha256": "23460e637b700dae194a029b2a3a2b79db5087c27d8424546d79daa8b8d3a601",
+        "sizeBytes": 2823
+      },
+      "originalUrl": "https://www.xiaohongshu.com/discovery/item/6a6b44780000000025001155?app_platform=ios&app_version=9.41.2&share_from_user_hidden=true&xsec_source=app_share&type=video&xsec_token=CB6B3mxTWgQhn5vLpMIvXlyHGY1KmSSy0k3pE9JUHYX00=&author_share=1&xhsshare=WeixinSession&shareRedId=N0c5ODVGNUI3OEdHOjgzPThFQko8NjxL&apptime=1786257411&share_id=0bba3187fe764cfb8068d3ecb4a28e21&code=7DFkzIYvOP5",
+      "platform": "xiaohongshu",
+      "product": {
+        "clusterId": "showhand-can-coin",
+        "clusterLabel": "SHOWHAND 罐头币",
+        "matchStatus": "category-reference",
+        "sameItemAs": []
+      },
+      "relatedDerivedNotes": [],
+      "resumeCheckpoint": {
+        "noteMtimeNs": 1786257959610522138,
+        "noteSha256": "23460e637b700dae194a029b2a3a2b79db5087c27d8424546d79daa8b8d3a601",
+        "referencedImageDigestSha256": "928a0b4b245ca6a7d8cc5dd35df8318db16bd3de10594a13cba4696a94f9c0a6",
+        "state": "complete"
+      },
+      "rights": {
+        "allowedUse": "internal research and source-linked model provenance",
+        "redistribution": "not-cleared",
+        "status": "third-party-reference-only"
+      },
+      "savedAt": "2026-08-09T14:43:59+08:00",
+      "sourceId": "edc:65a31b87-416a-4a72-8daa-6441cdb4914f",
+      "title": "解压罐头币！？🥫",
+      "upstreamItemId": "6a6b44780000000025001155"
+    },
+    {
+      "author": "NikolatoySY",
+      "canonicalUrl": "https://www.xiaohongshu.com/discovery/item/6a708f1f000000002c004b2b",
+      "frontmatterId": "00385e1f-b23c-42d2-9f2d-b9590fdecc8e",
+      "imageSummary": {
+        "missingCount": 0,
+        "readableAiTargetCount": 0,
+        "readableCount": 16,
+        "readableSourceFrameCount": 16,
+        "referenceCount": 16,
+        "unreadableCount": 0
+      },
+      "images": [
+        {
+          "contentClass": "source-frame",
+          "height": 1280,
+          "mode": "RGB",
+          "mtimeNs": 1786267693806475298,
+          "pHashAlgorithm": "dct-ii-32x32-low8x8-median64-v1",
+          "pHashDct64": "a85551cbe89adaca",
+          "rawReference": "笔记同步助手/images/0834d443fd29fc08945b6973208c2955_MD5.jpg",
+          "relativePath": "images/0834d443fd29fc08945b6973208c2955_MD5.jpg",
+          "sha256": "e84daa8fcd1914154c1a9c201049a2d0515544ed6209f9e128af718dc99a618d",
+          "sizeBytes": 117785,
+          "status": "readable",
+          "width": 720
+        },
+        {
+          "contentClass": "source-frame",
+          "height": 1280,
+          "mode": "RGB",
+          "mtimeNs": 1786267677287175765,
+          "pHashAlgorithm": "dct-ii-32x32-low8x8-median64-v1",
+          "pHashDct64": "b3634f9362a1cd25",
+          "rawReference": "笔记同步助手/images/0bf145afd29b9431c23bbf2071df5993_MD5.jpg",
+          "relativePath": "images/0bf145afd29b9431c23bbf2071df5993_MD5.jpg",
+          "sha256": "e6bd1327a139d4de1588e8c0a6a80e06cfcbe07956322d136a6224bbb17fe43e",
+          "sizeBytes": 71609,
+          "status": "readable",
+          "width": 720
+        },
+        {
+          "contentClass": "source-frame",
+          "height": 1280,
+          "mode": "RGB",
+          "mtimeNs": 1786267683529668822,
+          "pHashAlgorithm": "dct-ii-32x32-low8x8-median64-v1",
+          "pHashDct64": "a55353ada4969969",
+          "rawReference": "笔记同步助手/images/55e6007ad7d378b429678f4018c03314_MD5.jpg",
+          "relativePath": "images/55e6007ad7d378b429678f4018c03314_MD5.jpg",
+          "sha256": "45c1e76c79117a700f032fb71708515b9c92a96a4773918855607ff9c38ac65a",
+          "sizeBytes": 75685,
+          "status": "readable",
+          "width": 720
+        },
+        {
+          "contentClass": "source-frame",
+          "height": 1280,
+          "mode": "RGB",
+          "mtimeNs": 1786267709117890429,
+          "pHashAlgorithm": "dct-ii-32x32-low8x8-median64-v1",
+          "pHashDct64": "ad75926db598a512",
+          "rawReference": "笔记同步助手/images/610b6e73647092ee423e5b184996499a_MD5.jpg",
+          "relativePath": "images/610b6e73647092ee423e5b184996499a_MD5.jpg",
+          "sha256": "b9ca5814f87b6f70b1bea0f189f1957eb96c6b41ba463dc18e53b370f3bfe053",
+          "sizeBytes": 81644,
+          "status": "readable",
+          "width": 720
+        },
+        {
+          "contentClass": "source-frame",
+          "height": 1280,
+          "mode": "RGB",
+          "mtimeNs": 1786267697674426726,
+          "pHashAlgorithm": "dct-ii-32x32-low8x8-median64-v1",
+          "pHashDct64": "f704b5e4c59e700b",
+          "rawReference": "笔记同步助手/images/74cd34252289ce84dc1d3f7d4e1eeb44_MD5.jpg",
+          "relativePath": "images/74cd34252289ce84dc1d3f7d4e1eeb44_MD5.jpg",
+          "sha256": "04c206c6e4ba0ee8950893b375569f1be23388342d30dbcba5a61ad373eb889f",
+          "sizeBytes": 92384,
+          "status": "readable",
+          "width": 720
+        },
+        {
+          "contentClass": "source-frame",
+          "height": 1280,
+          "mode": "RGB",
+          "mtimeNs": 1786267699197458208,
+          "pHashAlgorithm": "dct-ii-32x32-low8x8-median64-v1",
+          "pHashDct64": "dd4dcdc8c8caca4a",
+          "rawReference": "笔记同步助手/images/8ee1d4b1e2e4069e81c840fa9d643391_MD5.jpg",
+          "relativePath": "images/8ee1d4b1e2e4069e81c840fa9d643391_MD5.jpg",
+          "sha256": "32ca5384939782db682ad0529fb5c6f639eb1ff6d7ee6495e2e59859a8f0bba0",
+          "sizeBytes": 151514,
+          "status": "readable",
+          "width": 720
+        },
+        {
+          "contentClass": "source-frame",
+          "height": 1280,
+          "mode": "RGB",
+          "mtimeNs": 1786267700841167634,
+          "pHashAlgorithm": "dct-ii-32x32-low8x8-median64-v1",
+          "pHashDct64": "a755a5a4649dca65",
+          "rawReference": "笔记同步助手/images/92c33fe7bee8a0cc00e8f163a809e4b6_MD5.jpg",
+          "relativePath": "images/92c33fe7bee8a0cc00e8f163a809e4b6_MD5.jpg",
+          "sha256": "e4c0a387dff4a6f847d7da89e0fe1a4bed83a4c34393830a1bb64043413b0b5d",
+          "sizeBytes": 84819,
+          "status": "readable",
+          "width": 720
+        },
+        {
+          "contentClass": "source-frame",
+          "height": 1280,
+          "mode": "RGB",
+          "mtimeNs": 1786267682435488078,
+          "pHashAlgorithm": "dct-ii-32x32-low8x8-median64-v1",
+          "pHashDct64": "b7536ba6a5a1892c",
+          "rawReference": "笔记同步助手/images/9399fa07d63fbb1121e701fdc45e505e_MD5.jpg",
+          "relativePath": "images/9399fa07d63fbb1121e701fdc45e505e_MD5.jpg",
+          "sha256": "204a29d4bb97412610ca837d50826ea16122d2c071aece7f88ccff80b131100c",
+          "sizeBytes": 87728,
+          "status": "readable",
+          "width": 720
+        },
+        {
+          "contentClass": "source-frame",
+          "height": 1280,
+          "mode": "RGB",
+          "mtimeNs": 1786267679508230768,
+          "pHashAlgorithm": "dct-ii-32x32-low8x8-median64-v1",
+          "pHashDct64": "c22563abe5a3a5ac",
+          "rawReference": "笔记同步助手/images/969eb460ae421f2312e473a14a01fa21_MD5.jpg",
+          "relativePath": "images/969eb460ae421f2312e473a14a01fa21_MD5.jpg",
+          "sha256": "a4e958bd3a94179a8b0082c2f26c63ea77b38362bd5ef8fd3f40555fc267a528",
+          "sizeBytes": 115250,
+          "status": "readable",
+          "width": 720
+        },
+        {
+          "contentClass": "source-frame",
+          "height": 1280,
+          "mode": "RGB",
+          "mtimeNs": 1786267704415320423,
+          "pHashAlgorithm": "dct-ii-32x32-low8x8-median64-v1",
+          "pHashDct64": "ecaccccaab934951",
+          "rawReference": "笔记同步助手/images/a42d7b433edfa28346f887ba2c2e4ddf_MD5.jpg",
+          "relativePath": "images/a42d7b433edfa28346f887ba2c2e4ddf_MD5.jpg",
+          "sha256": "ede695926e83b6adbee32aae7d4dfe13e77c7787fb6c59c4102fde66876d9af7",
+          "sizeBytes": 139454,
+          "status": "readable",
+          "width": 720
+        },
+        {
+          "contentClass": "source-frame",
+          "height": 1280,
+          "mode": "RGB",
+          "mtimeNs": 1786267682039476814,
+          "pHashAlgorithm": "dct-ii-32x32-low8x8-median64-v1",
+          "pHashDct64": "b64b2996eaa78ca4",
+          "rawReference": "笔记同步助手/images/b176e12e43561b4cec86fa678b585d62_MD5.jpg",
+          "relativePath": "images/b176e12e43561b4cec86fa678b585d62_MD5.jpg",
+          "sha256": "ff31fd883a609293df7d392cff33ff7f8581a09601157a2eab05895708e7cbf2",
+          "sizeBytes": 106035,
+          "status": "readable",
+          "width": 720
+        },
+        {
+          "contentClass": "source-frame",
+          "height": 1280,
+          "mode": "RGB",
+          "mtimeNs": 1786267705951796478,
+          "pHashAlgorithm": "dct-ii-32x32-low8x8-median64-v1",
+          "pHashDct64": "b5354da4b458a99e",
+          "rawReference": "笔记同步助手/images/c7cd54ae78ea460fca2166e401a7c673_MD5.jpg",
+          "relativePath": "images/c7cd54ae78ea460fca2166e401a7c673_MD5.jpg",
+          "sha256": "f0f0cdb2376ed2a13113a811d7a6f51178c9ffc98968ac73917fd9f7af9dfb5c",
+          "sizeBytes": 147611,
+          "status": "readable",
+          "width": 720
+        },
+        {
+          "contentClass": "source-frame",
+          "height": 1280,
+          "mode": "RGB",
+          "mtimeNs": 1786267694637942004,
+          "pHashAlgorithm": "dct-ii-32x32-low8x8-median64-v1",
+          "pHashDct64": "e3adcab31310a5ad",
+          "rawReference": "笔记同步助手/images/d93a13629671a981ab47419a7d3676a8_MD5.jpg",
+          "relativePath": "images/d93a13629671a981ab47419a7d3676a8_MD5.jpg",
+          "sha256": "baf74ce60a453e679679258d765a4b88a1db22045fa466291d23f480e4db055f",
+          "sizeBytes": 114860,
+          "status": "readable",
+          "width": 720
+        },
+        {
+          "contentClass": "source-frame",
+          "height": 1280,
+          "mode": "RGB",
+          "mtimeNs": 1786267684726534442,
+          "pHashAlgorithm": "dct-ii-32x32-low8x8-median64-v1",
+          "pHashDct64": "e965d0c8a1dacada",
+          "rawReference": "笔记同步助手/images/e413116609ad0cda87444985b241e335_MD5.jpg",
+          "relativePath": "images/e413116609ad0cda87444985b241e335_MD5.jpg",
+          "sha256": "73bfed950d4cd47821222e4707d97dbafd1f0e04e883b680ffbfba700ffa443d",
+          "sizeBytes": 88925,
+          "status": "readable",
+          "width": 720
+        },
+        {
+          "contentClass": "source-frame",
+          "height": 1280,
+          "mode": "RGB",
+          "mtimeNs": 1786267697728860682,
+          "pHashAlgorithm": "dct-ii-32x32-low8x8-median64-v1",
+          "pHashDct64": "e1a9cab31232adad",
+          "rawReference": "笔记同步助手/images/f053f8e3389ceb7eeb80ca39c7e1abd3_MD5.jpg",
+          "relativePath": "images/f053f8e3389ceb7eeb80ca39c7e1abd3_MD5.jpg",
+          "sha256": "9e60ffc84e18ae1ee116e1f8bbf2dd30d94bce38e8e333b196b6931da4cb4973",
+          "sizeBytes": 123776,
+          "status": "readable",
+          "width": 720
+        },
+        {
+          "contentClass": "source-frame",
+          "height": 1280,
+          "mode": "RGB",
+          "mtimeNs": 1786267693814820542,
+          "pHashAlgorithm": "dct-ii-32x32-low8x8-median64-v1",
+          "pHashDct64": "e9a9ca9333b0946d",
+          "rawReference": "笔记同步助手/images/f1eafc7bccc7da6b58b9095a4d2f0b49_MD5.jpg",
+          "relativePath": "images/f1eafc7bccc7da6b58b9095a4d2f0b49_MD5.jpg",
+          "sha256": "a552520cf9b546ef21fcc3ffed1f16fc0e51c32c800be72e27ba01e213915991",
+          "sizeBytes": 96128,
+          "status": "readable",
+          "width": 720
+        }
+      ],
+      "media": {
+        "declaredType": "video",
+        "downloadState": "not-requested",
+        "localSourceFrameCount": 16,
+        "remoteAccess": "not-checked",
+        "status": "local-frames-available",
+        "temporaryDownloadCheckpoint": null
+      },
+      "note": {
+        "mtimeNs": 1786267709133874207,
+        "relativePath": "2026-08-09/喊你女朋友给你买！.md",
+        "sha256": "12987e07006f3f23661bdcea2a0754fbf37422521d7601ff60bc9dafd7109ddb",
+        "sizeBytes": 2612
+      },
+      "originalUrl": "https://www.xiaohongshu.com/discovery/item/6a708f1f000000002c004b2b?app_platform=ios&app_version=9.41.2&share_from_user_hidden=true&xsec_source=app_share&type=video&xsec_token=CB7wcGaJaIIQvivqaa23gA6sInj89cbQNTltLRvDBCVJc=&author_share=1&xhsshare=WeixinSession&shareRedId=N0c5ODVGNUI3OEdHOjgzPThFQko8NjxL&apptime=1786267025&share_id=cfb1ec93798f4d049daf3953d1e2b384&code=13nIaQPMRwU",
+      "platform": "xiaohongshu",
+      "product": {
+        "clusterId": "pigstol-namro-revolver-edc-roundup",
+        "clusterLabel": "PIGSTOL / NAMRO / REVOLVER EDC roundup",
+        "matchStatus": "multi-product-reference",
+        "sameItemAs": []
+      },
+      "relatedDerivedNotes": [],
+      "resumeCheckpoint": {
+        "noteMtimeNs": 1786267709133874207,
+        "noteSha256": "12987e07006f3f23661bdcea2a0754fbf37422521d7601ff60bc9dafd7109ddb",
+        "referencedImageDigestSha256": "4f8a19cde6c015049fd9ce29a5d9bd27970499a69e1ce1e5fa197777d2ee83f9",
+        "state": "complete"
+      },
+      "rights": {
+        "allowedUse": "internal research and source-linked model provenance",
+        "redistribution": "not-cleared",
+        "status": "third-party-reference-only"
+      },
+      "savedAt": "2026-08-09T17:24:06+08:00",
+      "sourceId": "edc:00385e1f-b23c-42d2-9f2d-b9590fdecc8e",
+      "title": "喊你女朋友给你买！",
+      "upstreamItemId": "6a708f1f000000002c004b2b"
+    },
+    {
+      "author": "EDC馆长",
+      "canonicalUrl": "https://www.xiaohongshu.com/discovery/item/692ffc94000000000d03522e",
+      "frontmatterId": "d0f2075d-78e8-44b0-8f8b-5130473ab8be",
+      "imageSummary": {
+        "missingCount": 0,
+        "readableAiTargetCount": 0,
+        "readableCount": 1,
+        "readableSourceFrameCount": 1,
+        "referenceCount": 1,
+        "unreadableCount": 0
+      },
+      "images": [
+        {
+          "contentClass": "source-frame",
+          "height": 1440,
+          "mode": "RGB",
+          "mtimeNs": 1786327434644765802,
+          "pHashAlgorithm": "dct-ii-32x32-low8x8-median64-v1",
+          "pHashDct64": "cb106ce326dcf057",
+          "rawReference": "笔记同步助手/images/6a765485dfc607a14bc38a940e623cd7_MD5.jpg",
+          "relativePath": "images/6a765485dfc607a14bc38a940e623cd7_MD5.jpg",
+          "sha256": "2bdb2384ec2accf68cccb5cb02542bbca0718be06d5c887b1da26eb636b799f3",
+          "sizeBytes": 292769,
+          "status": "readable",
+          "width": 1080
+        }
+      ],
+      "media": {
+        "declaredType": "video",
+        "downloadState": "not-requested",
+        "localSourceFrameCount": 1,
+        "remoteAccess": "not-checked",
+        "status": "local-frames-available",
+        "temporaryDownloadCheckpoint": null
+      },
+      "note": {
+        "mtimeNs": 1786327434646641041,
+        "relativePath": "2026-08-10/LBW石刻N7陀螺.md",
+        "sha256": "e827f24f27108b45ba397ede25cb7ab49ddc3994ad8d587d395a13b995771aed",
+        "sizeBytes": 1521
+      },
+      "originalUrl": "https://www.xiaohongshu.com/discovery/item/692ffc94000000000d03522e?app_platform=ios&app_version=9.41.2&share_from_user_hidden=true&xsec_source=app_share&type=video&xsec_token=CBiKT_DA7HufUVf3WyWd8bT2jq84Ov-rLyFz-Y5VNd0z0=&author_share=1&xhsshare=WeixinSession&shareRedId=N0c5ODVGNUI3OEdHOjgzPThFQko8NjxL&apptime=1786326722&share_id=2ae918f4a1364cff8cbcbfe58cf74cc8&code=3LRAVWBXNVf",
+      "platform": "xiaohongshu",
+      "product": {
+        "clusterId": "lbw-circle-n7-spinner",
+        "clusterLabel": "LBW / 圈子 N7 spinner",
+        "matchStatus": "category-reference",
+        "sameItemAs": []
+      },
+      "relatedDerivedNotes": [],
+      "resumeCheckpoint": {
+        "noteMtimeNs": 1786327434646641041,
+        "noteSha256": "e827f24f27108b45ba397ede25cb7ab49ddc3994ad8d587d395a13b995771aed",
+        "referencedImageDigestSha256": "1e6a70423333263e49aa085f720b7edcb0c5906f315b9a59eb4a07e273caf8d2",
+        "state": "complete"
+      },
+      "rights": {
+        "allowedUse": "internal research and source-linked model provenance",
+        "redistribution": "not-cleared",
+        "status": "third-party-reference-only"
+      },
+      "savedAt": "2026-08-10T09:54:39+08:00",
+      "sourceId": "edc:d0f2075d-78e8-44b0-8f8b-5130473ab8be",
+      "title": "LBW石刻N7陀螺",
+      "upstreamItemId": "692ffc94000000000d03522e"
+    },
+    {
+      "author": "没事E 两下",
+      "canonicalUrl": "https://www.xiaohongshu.com/discovery/item/6a7e67320000000032033025",
+      "frontmatterId": "0f13f53f-6bd3-4d5e-9cc8-31b28a7eb334",
+      "imageSummary": {
+        "missingCount": 0,
+        "readableAiTargetCount": 0,
+        "readableCount": 5,
+        "readableSourceFrameCount": 5,
+        "referenceCount": 5,
+        "unreadableCount": 0
+      },
+      "images": [
+        {
+          "contentClass": "source-frame",
+          "height": 1280,
+          "mode": "RGB",
+          "mtimeNs": 1786675769837507803,
+          "pHashAlgorithm": "dct-ii-32x32-low8x8-median64-v1",
+          "pHashDct64": "f00e79ce231c5573",
+          "rawReference": "笔记同步助手/images/0886f776e971a5797c56028d04ad66fe_MD5.jpg",
+          "relativePath": "images/0886f776e971a5797c56028d04ad66fe_MD5.jpg",
+          "sha256": "7e61a53e32b75fb4057f444d264fe89f19a64dec96dc45c6923925af65ae83f3",
+          "sizeBytes": 86889,
+          "status": "readable",
+          "width": 720
+        },
+        {
+          "contentClass": "source-frame",
+          "height": 1280,
+          "mode": "RGB",
+          "mtimeNs": 1786675761640396170,
+          "pHashAlgorithm": "dct-ii-32x32-low8x8-median64-v1",
+          "pHashDct64": "964b319b475a69a6",
+          "rawReference": "笔记同步助手/images/1649191e139b139f68226af314ee6308_MD5.jpg",
+          "relativePath": "images/1649191e139b139f68226af314ee6308_MD5.jpg",
+          "sha256": "f46c4ff99a42b746d099a60d84a85023eb4d56e0a6e9ec98859c5b2e40be290e",
+          "sizeBytes": 53827,
+          "status": "readable",
+          "width": 720
+        },
+        {
+          "contentClass": "source-frame",
+          "height": 1280,
+          "mode": "RGB",
+          "mtimeNs": 1786675769479336675,
+          "pHashAlgorithm": "dct-ii-32x32-low8x8-median64-v1",
+          "pHashDct64": "8e5b709ac7d65826",
+          "rawReference": "笔记同步助手/images/a27dad3323c61961810d243e8d7ef10b_MD5.jpg",
+          "relativePath": "images/a27dad3323c61961810d243e8d7ef10b_MD5.jpg",
+          "sha256": "d10309063f90e1df650b8800a4c80cd873880f36b9e2a67269ffb6c513f95239",
+          "sizeBytes": 75168,
+          "status": "readable",
+          "width": 720
+        },
+        {
+          "contentClass": "source-frame",
+          "height": 1280,
+          "mode": "RGB",
+          "mtimeNs": 1786675762308552322,
+          "pHashAlgorithm": "dct-ii-32x32-low8x8-median64-v1",
+          "pHashDct64": "ff88006ade356dc8",
+          "rawReference": "笔记同步助手/images/a82177de01964667064036648ffe92c6_MD5.jpg",
+          "relativePath": "images/a82177de01964667064036648ffe92c6_MD5.jpg",
+          "sha256": "1707623c4aac8e8c3dd3dd1c09f58b3c0a27b933d208a419948aed75cb7a9ce6",
+          "sizeBytes": 242954,
+          "status": "readable",
+          "width": 720
+        },
+        {
+          "contentClass": "source-frame",
+          "height": 1280,
+          "mode": "RGB",
+          "mtimeNs": 1786675761625070332,
+          "pHashAlgorithm": "dct-ii-32x32-low8x8-median64-v1",
+          "pHashDct64": "b459269c79661b39",
+          "rawReference": "笔记同步助手/images/cdfdf56394289abd16bd5c1bb59291fd_MD5.jpg",
+          "relativePath": "images/cdfdf56394289abd16bd5c1bb59291fd_MD5.jpg",
+          "sha256": "d209cb6732c7f9ec79cf2d25de517343849ac4e6d8140b84837cb66a935bb2d6",
+          "sizeBytes": 48057,
+          "status": "readable",
+          "width": 720
+        }
+      ],
+      "media": {
+        "declaredType": "video",
+        "downloadState": "not-requested",
+        "localSourceFrameCount": 5,
+        "remoteAccess": "not-checked",
+        "status": "local-frames-available",
+        "temporaryDownloadCheckpoint": null
+      },
+      "note": {
+        "mtimeNs": 1786675769841090428,
+        "relativePath": "2026-08-14/金星创玩 EDC 琥珀陀螺——百元价位的高性价比二叶手感陀螺.md",
+        "sha256": "d2101ec0c7d6d4407f4300ef90d807d013a834fa269f232239ca094f640ca96e",
+        "sizeBytes": 6817
+      },
+      "originalUrl": "https://www.xiaohongshu.com/discovery/item/6a7e67320000000032033025?app_platform=ios&app_version=9.42&share_from_user_hidden=true&xsec_source=app_share&type=video&xsec_token=CB0rHwmxihJSBUyHIIBQ_8T6tw53jHp3VdhLhVQehXu5A=&author_share=1&xhsshare=WeixinSession&shareRedId=N0c5ODVGNUI3OEdHOjgzPThFQko8NjxL&apptime=1786673597&share_id=61cb0ac9a1494c968cb7b07951a4776f&code=3bdJMwHLqaX",
+      "platform": "xiaohongshu",
+      "product": {
+        "clusterId": "jinxing-amber-two-lobe-spinner",
+        "clusterLabel": "金星创玩琥珀二叶 spinner",
+        "matchStatus": "category-reference",
+        "sameItemAs": []
+      },
+      "relatedDerivedNotes": [],
+      "resumeCheckpoint": {
+        "noteMtimeNs": 1786675769841090428,
+        "noteSha256": "d2101ec0c7d6d4407f4300ef90d807d013a834fa269f232239ca094f640ca96e",
+        "referencedImageDigestSha256": "03f02af7050e9b191f1dbb17c94bd2d253fdbaaf02a9df1a465f59cfc24344bd",
+        "state": "complete"
+      },
+      "rights": {
+        "allowedUse": "internal research and source-linked model provenance",
+        "redistribution": "not-cleared",
+        "status": "third-party-reference-only"
+      },
+      "savedAt": "2026-08-14T10:15:11+08:00",
+      "sourceId": "edc:0f13f53f-6bd3-4d5e-9cc8-31b28a7eb334",
+      "title": "金星创玩 EDC 琥珀陀螺——百元价位的高性价比二叶手感陀螺",
+      "upstreamItemId": "6a7e67320000000032033025"
+    },
+    {
+      "author": "GoodWill海外众筹",
+      "canonicalUrl": "https://www.xiaohongshu.com/discovery/item/6a7d6654000000003203167c",
+      "frontmatterId": "441aef98-9d34-4c87-b5ea-9de031b977f6",
+      "imageSummary": {
+        "missingCount": 0,
+        "readableAiTargetCount": 0,
+        "readableCount": 15,
+        "readableSourceFrameCount": 15,
+        "referenceCount": 15,
+        "unreadableCount": 0
+      },
+      "images": [
+        {
+          "contentClass": "source-frame",
+          "height": 1280,
+          "mode": "RGB",
+          "mtimeNs": 1786675728152611950,
+          "pHashAlgorithm": "dct-ii-32x32-low8x8-median64-v1",
+          "pHashDct64": "8495784e2fb2332f",
+          "rawReference": "笔记同步助手/images/074c068dcfaffc2a11830c5d7d0015c3_MD5.jpg",
+          "relativePath": "images/074c068dcfaffc2a11830c5d7d0015c3_MD5.jpg",
+          "sha256": "afeda50c261e53846f5b5df0452c44e032e7ef1f8fa0d47cdf8c61adc0e7c11b",
+          "sizeBytes": 97105,
+          "status": "readable",
+          "width": 720
+        },
+        {
+          "contentClass": "source-frame",
+          "height": 1280,
+          "mode": "RGB",
+          "mtimeNs": 1786675739620833784,
+          "pHashAlgorithm": "dct-ii-32x32-low8x8-median64-v1",
+          "pHashDct64": "849519722fe6723b",
+          "rawReference": "笔记同步助手/images/278bbe006504794419a231ef762c0d4b_MD5.jpg",
+          "relativePath": "images/278bbe006504794419a231ef762c0d4b_MD5.jpg",
+          "sha256": "2042a7dfd40cf1af9f40b5be307c50200d7ecae2fe97b1ec05e37a01df8ecac6",
+          "sizeBytes": 98091,
+          "status": "readable",
+          "width": 720
+        },
+        {
+          "contentClass": "source-frame",
+          "height": 1280,
+          "mode": "RGB",
+          "mtimeNs": 1786675738550865281,
+          "pHashAlgorithm": "dct-ii-32x32-low8x8-median64-v1",
+          "pHashDct64": "c0951ec4376633bb",
+          "rawReference": "笔记同步助手/images/5bf8cdda35bbee2d769942d54412ffe4_MD5.jpg",
+          "relativePath": "images/5bf8cdda35bbee2d769942d54412ffe4_MD5.jpg",
+          "sha256": "55b11805bb1ed534750a7247ff47e14ef7e66455fd0154b64d5b4330bb42c98c",
+          "sizeBytes": 95733,
+          "status": "readable",
+          "width": 720
+        },
+        {
+          "contentClass": "source-frame",
+          "height": 1280,
+          "mode": "RGB",
+          "mtimeNs": 1786675732183617215,
+          "pHashAlgorithm": "dct-ii-32x32-low8x8-median64-v1",
+          "pHashDct64": "c09917c63f62331f",
+          "rawReference": "笔记同步助手/images/5d776768f74667ebb8b4a6bf0a4b3545_MD5.jpg",
+          "relativePath": "images/5d776768f74667ebb8b4a6bf0a4b3545_MD5.jpg",
+          "sha256": "cc77050e6d1e6b221e8fb4b290b424a9cd3c7e16c1f9902d71b64ad41fbebf82",
+          "sizeBytes": 86953,
+          "status": "readable",
+          "width": 720
+        },
+        {
+          "contentClass": "source-frame",
+          "height": 1280,
+          "mode": "RGB",
+          "mtimeNs": 1786675723831515964,
+          "pHashAlgorithm": "dct-ii-32x32-low8x8-median64-v1",
+          "pHashDct64": "c09926263fe2e31f",
+          "rawReference": "笔记同步助手/images/669a0c506b5c530b40e0f3b59dfc6283_MD5.jpg",
+          "relativePath": "images/669a0c506b5c530b40e0f3b59dfc6283_MD5.jpg",
+          "sha256": "17a7234783c405eaade0860dbb4bf8dd0f8eb933fe6858f69a84a9b7d04e2f90",
+          "sizeBytes": 96068,
+          "status": "readable",
+          "width": 720
+        },
+        {
+          "contentClass": "source-frame",
+          "height": 1280,
+          "mode": "RGB",
+          "mtimeNs": 1786675753927047019,
+          "pHashAlgorithm": "dct-ii-32x32-low8x8-median64-v1",
+          "pHashDct64": "d0952f6232b6674b",
+          "rawReference": "笔记同步助手/images/720f3831343902c9973d834d4ac75162_MD5.jpg",
+          "relativePath": "images/720f3831343902c9973d834d4ac75162_MD5.jpg",
+          "sha256": "8170bf0c044170da857170a2a349b9cbb1b986c6a6ef6227c22523f09167e64e",
+          "sizeBytes": 93931,
+          "status": "readable",
+          "width": 720
+        },
+        {
+          "contentClass": "source-frame",
+          "height": 1280,
+          "mode": "RGB",
+          "mtimeNs": 1786675741409325051,
+          "pHashAlgorithm": "dct-ii-32x32-low8x8-median64-v1",
+          "pHashDct64": "d09d0f6232f6272b",
+          "rawReference": "笔记同步助手/images/82d2eee17786fb66678a745ee1217256_MD5.jpg",
+          "relativePath": "images/82d2eee17786fb66678a745ee1217256_MD5.jpg",
+          "sha256": "229e056e52049bc256ee5f3975d185b19d05634cd9b4b6ee0042f99446b01cd6",
+          "sizeBytes": 91643,
+          "status": "readable",
+          "width": 720
+        },
+        {
+          "contentClass": "source-frame",
+          "height": 1280,
+          "mode": "RGB",
+          "mtimeNs": 1786675747099496109,
+          "pHashAlgorithm": "dct-ii-32x32-low8x8-median64-v1",
+          "pHashDct64": "d09527623ab6674b",
+          "rawReference": "笔记同步助手/images/8e7e2a418b0c7c1b3076b3f960eef3e3_MD5.jpg",
+          "relativePath": "images/8e7e2a418b0c7c1b3076b3f960eef3e3_MD5.jpg",
+          "sha256": "1bf15fb9844503099a609fb0a26681f9e33cc72e6d1bc1dcd7a0ff77292d0b6c",
+          "sizeBytes": 93811,
+          "status": "readable",
+          "width": 720
+        },
+        {
+          "contentClass": "source-frame",
+          "height": 1280,
+          "mode": "RGB",
+          "mtimeNs": 1786675723939603722,
+          "pHashAlgorithm": "dct-ii-32x32-low8x8-median64-v1",
+          "pHashDct64": "8495784e6fb2322f",
+          "rawReference": "笔记同步助手/images/990bb9d8832309c17504f3c22ab8fd6f_MD5.jpg",
+          "relativePath": "images/990bb9d8832309c17504f3c22ab8fd6f_MD5.jpg",
+          "sha256": "2bc9d2deb98efdbc7095bc63796b5541070cc4b65ca4fe826618fd34ac8aa0bb",
+          "sizeBytes": 108201,
+          "status": "readable",
+          "width": 720
+        },
+        {
+          "contentClass": "source-frame",
+          "height": 1280,
+          "mode": "RGB",
+          "mtimeNs": 1786675746115133901,
+          "pHashAlgorithm": "dct-ii-32x32-low8x8-median64-v1",
+          "pHashDct64": "c0913d463f76711b",
+          "rawReference": "笔记同步助手/images/bf42e5a331ad29c5e96408c8c8f81c1f_MD5.jpg",
+          "relativePath": "images/bf42e5a331ad29c5e96408c8c8f81c1f_MD5.jpg",
+          "sha256": "08337366e35be8d8f51bb7fbffd08627a2a60bf519187a519699265af9d9351c",
+          "sizeBytes": 93047,
+          "status": "readable",
+          "width": 720
+        },
+        {
+          "contentClass": "source-frame",
+          "height": 1280,
+          "mode": "RGB",
+          "mtimeNs": 1786675746059785797,
+          "pHashAlgorithm": "dct-ii-32x32-low8x8-median64-v1",
+          "pHashDct64": "909d67663ba2661b",
+          "rawReference": "笔记同步助手/images/c1e94c145c09582e490c518010e22eaa_MD5.jpg",
+          "relativePath": "images/c1e94c145c09582e490c518010e22eaa_MD5.jpg",
+          "sha256": "67b9aac7e9a7df30acc9c71a592d4efc0389e9b6b0a919511db70a66fcf9ae70",
+          "sizeBytes": 97698,
+          "status": "readable",
+          "width": 720
+        },
+        {
+          "contentClass": "source-frame",
+          "height": 1280,
+          "mode": "RGB",
+          "mtimeNs": 1786675726601110595,
+          "pHashAlgorithm": "dct-ii-32x32-low8x8-median64-v1",
+          "pHashDct64": "90956f6232b6674b",
+          "rawReference": "笔记同步助手/images/d1444c7738c44abd7910449cc1961f1f_MD5.jpg",
+          "relativePath": "images/d1444c7738c44abd7910449cc1961f1f_MD5.jpg",
+          "sha256": "6cbd40d804bd646315139430664afab494276e33b82be427cc1011b8c4bad1e4",
+          "sizeBytes": 93474,
+          "status": "readable",
+          "width": 720
+        },
+        {
+          "contentClass": "source-frame",
+          "height": 1280,
+          "mode": "RGB",
+          "mtimeNs": 1786675729801199072,
+          "pHashAlgorithm": "dct-ii-32x32-low8x8-median64-v1",
+          "pHashDct64": "909d6ce633b6634a",
+          "rawReference": "笔记同步助手/images/e82b8c5bad3fbeb95e041879f29bbb2d_MD5.jpg",
+          "relativePath": "images/e82b8c5bad3fbeb95e041879f29bbb2d_MD5.jpg",
+          "sha256": "96cf3d97bb5a56b4ce8d885a81d8d1bf8c926398c3cafd6b460bf03e0716d1ca",
+          "sizeBytes": 88844,
+          "status": "readable",
+          "width": 720
+        },
+        {
+          "contentClass": "source-frame",
+          "height": 1280,
+          "mode": "RGB",
+          "mtimeNs": 1786675751049568040,
+          "pHashAlgorithm": "dct-ii-32x32-low8x8-median64-v1",
+          "pHashDct64": "c49d3e462f76700b",
+          "rawReference": "笔记同步助手/images/ebe31d802944301e9ae4cc3619568355_MD5.jpg",
+          "relativePath": "images/ebe31d802944301e9ae4cc3619568355_MD5.jpg",
+          "sha256": "478912f920b1f7deadd7a36cb1f163ef52faf07a02173e669571ca933a04c8c8",
+          "sizeBytes": 93391,
+          "status": "readable",
+          "width": 720
+        },
+        {
+          "contentClass": "source-frame",
+          "height": 1280,
+          "mode": "RGB",
+          "mtimeNs": 1786675731996239775,
+          "pHashAlgorithm": "dct-ii-32x32-low8x8-median64-v1",
+          "pHashDct64": "959546663fa36256",
+          "rawReference": "笔记同步助手/images/fd72ae570e6b3aadaa100d3312b4a882_MD5.jpg",
+          "relativePath": "images/fd72ae570e6b3aadaa100d3312b4a882_MD5.jpg",
+          "sha256": "edb57598cd8b6750bdfcb2933cd4ed31bc014d68170105a2cd367f8f47e75c76",
+          "sizeBytes": 97784,
+          "status": "readable",
+          "width": 720
+        }
+      ],
+      "media": {
+        "declaredType": "video",
+        "downloadState": "not-requested",
+        "localSourceFrameCount": 15,
+        "remoteAccess": "not-checked",
+        "status": "local-frames-available",
+        "temporaryDownloadCheckpoint": null
+      },
+      "note": {
+        "mtimeNs": 1786675753928689920,
+        "relativePath": "2026-08-14/全球首款LED矩阵减压玩具.md",
+        "sha256": "dccd9cab9f364d057f6e2fe28e9c8c1cfab000275968eb593ec0392dd6dd682d",
+        "sizeBytes": 4584
+      },
+      "originalUrl": "https://www.xiaohongshu.com/discovery/item/6a7d6654000000003203167c?app_platform=ios&app_version=9.42&share_from_user_hidden=true&xsec_source=app_share&type=video&xsec_token=CBvvKQ1X4pufR1s_vfhClhuTz40EJiq1UH07IsOy8stNc=&author_share=1&xhsshare=WeixinSession&shareRedId=N0c5ODVGNUI3OEdHOjgzPThFQko8NjxL&apptime=1786673652&share_id=be045821e33f4d528433a6b7e3926d8b&code=6DKCJScYKuh",
+      "platform": "xiaohongshu",
+      "product": {
+        "clusterId": "rgb-led-matrix-fidget-slider",
+        "clusterLabel": "RGB LED matrix fidget slider",
+        "matchStatus": "category-reference",
+        "sameItemAs": []
+      },
+      "relatedDerivedNotes": [],
+      "resumeCheckpoint": {
+        "noteMtimeNs": 1786675753928689920,
+        "noteSha256": "dccd9cab9f364d057f6e2fe28e9c8c1cfab000275968eb593ec0392dd6dd682d",
+        "referencedImageDigestSha256": "769783e7f10f51e69814e28038dec1c063ef984634b5a511f5badf70177ded81",
+        "state": "complete"
+      },
+      "rights": {
+        "allowedUse": "internal research and source-linked model provenance",
+        "redistribution": "not-cleared",
+        "status": "third-party-reference-only"
+      },
+      "savedAt": "2026-08-14T10:23:50+08:00",
+      "sourceId": "edc:441aef98-9d34-4c87-b5ea-9de031b977f6",
+      "title": "全球首款LED矩阵减压玩具",
+      "upstreamItemId": "6a7d6654000000003203167c"
+    },
+    {
+      "author": "ShaneKim1981",
+      "canonicalUrl": "https://www.xiaohongshu.com/discovery/item/6a83d8b0000000002402dd6f",
+      "frontmatterId": "804eee38-c54f-4a49-ae82-0c1957396319",
+      "imageSummary": {
+        "missingCount": 0,
+        "readableAiTargetCount": 0,
+        "readableCount": 1,
+        "readableSourceFrameCount": 1,
+        "referenceCount": 1,
+        "unreadableCount": 0
+      },
+      "images": [
+        {
+          "contentClass": "source-frame",
+          "height": 1280,
+          "mode": "RGB",
+          "mtimeNs": 1787029721030760091,
+          "pHashAlgorithm": "dct-ii-32x32-low8x8-median64-v1",
+          "pHashDct64": "b64a013f15d90bee",
+          "rawReference": "笔记同步助手/images/d718a755175c2bcfcacb7577c262e77a_MD5.jpg",
+          "relativePath": "images/d718a755175c2bcfcacb7577c262e77a_MD5.jpg",
+          "sha256": "3556a1df289b0f1d392d1bfcba94816579bca7916a13ad8ce5c6e3043b3190f0",
+          "sizeBytes": 165476,
+          "status": "readable",
+          "width": 720
+        }
+      ],
+      "media": {
+        "declaredType": "video",
+        "downloadState": "not-requested",
+        "localSourceFrameCount": 1,
+        "remoteAccess": "not-checked",
+        "status": "local-frames-available",
+        "temporaryDownloadCheckpoint": null
+      },
+      "note": {
+        "mtimeNs": 1787029721033600208,
+        "relativePath": "2026-08-18/这是什么神仙金属啊？TW听闻玲珑云三叶.md",
+        "sha256": "eeb18d900ee13632e5d044c97c15b07fed71005cdaee9555ab973adb8f62c2c8",
+        "sizeBytes": 2800
+      },
+      "originalUrl": "https://www.xiaohongshu.com/discovery/item/6a83d8b0000000002402dd6f?app_platform=ios&app_version=9.42&share_from_user_hidden=true&xsec_source=app_share&type=video&xsec_token=CBkjcdCaTRf_JPVVHfXuJXwloWO0cjKBzDHfgZP_BdsyM=&author_share=1&xhsshare=WeixinSession&shareRedId=N0c5ODVGNUI3OEdHOjgzPThFQko8NjxL&apptime=1787029440&share_id=39723b3e33dc4208810924e0e4a1f415&code=3KTwQq7bu8B",
+      "platform": "xiaohongshu",
+      "product": {
+        "clusterId": "tw-linglongyun-tri-spinner",
+        "clusterLabel": "TW 听闻玲珑云三叶",
+        "matchStatus": "similar-category-different-model",
+        "sameItemAs": []
+      },
+      "relatedDerivedNotes": [],
+      "resumeCheckpoint": {
+        "noteMtimeNs": 1787029721033600208,
+        "noteSha256": "eeb18d900ee13632e5d044c97c15b07fed71005cdaee9555ab973adb8f62c2c8",
+        "referencedImageDigestSha256": "ef9778409ffd6214bcf6856cd6a9c53dfef723c879c6176faf7f561a3da13626",
+        "state": "complete"
+      },
+      "rights": {
+        "allowedUse": "internal research and source-linked model provenance",
+        "redistribution": "not-cleared",
+        "status": "third-party-reference-only"
+      },
+      "savedAt": "2026-08-18T13:07:57+08:00",
+      "sourceId": "edc:804eee38-c54f-4a49-ae82-0c1957396319",
+      "title": "这是什么神仙金属啊？TW听闻玲珑云三叶",
+      "upstreamItemId": "6a83d8b0000000002402dd6f"
+    },
+    {
+      "author": "腾顺 EDC 解压玩具",
+      "canonicalUrl": "https://v.douyin.com/5oELvcy8hAU/",
+      "frontmatterId": "f85bdfd0-e701-416c-9382-cd3ed8dd4792",
+      "imageSummary": {
+        "missingCount": 0,
+        "readableAiTargetCount": 0,
+        "readableCount": 10,
+        "readableSourceFrameCount": 10,
+        "referenceCount": 10,
+        "unreadableCount": 0
+      },
+      "images": [
+        {
+          "contentClass": "source-frame",
+          "height": 1280,
+          "mode": "RGB",
+          "mtimeNs": 1787194735934680333,
+          "pHashAlgorithm": "dct-ii-32x32-low8x8-median64-v1",
+          "pHashDct64": "87c0dc3a45596cf6",
+          "rawReference": "笔记同步助手/images/0339a3e8f6dda5a5fdd8477c0e1a43bf_MD5.jpg",
+          "relativePath": "images/0339a3e8f6dda5a5fdd8477c0e1a43bf_MD5.jpg",
+          "sha256": "d1ea980fb74424cc196de61a437cade4a8b3360b2140c4d7f6df9ad54abecb26",
+          "sizeBytes": 103046,
+          "status": "readable",
+          "width": 720
+        },
+        {
+          "contentClass": "source-frame",
+          "height": 1280,
+          "mode": "RGB",
+          "mtimeNs": 1787194740643085658,
+          "pHashAlgorithm": "dct-ii-32x32-low8x8-median64-v1",
+          "pHashDct64": "8740cf8f641a4ded",
+          "rawReference": "笔记同步助手/images/08fe4b490c21d55d078c0eeb4d527901_MD5.jpg",
+          "relativePath": "images/08fe4b490c21d55d078c0eeb4d527901_MD5.jpg",
+          "sha256": "ee005523e9651128ccca11c368257a069ba93836ebbe7715768374fdbfd23cff",
+          "sizeBytes": 85427,
+          "status": "readable",
+          "width": 720
+        },
+        {
+          "contentClass": "source-frame",
+          "height": 1280,
+          "mode": "RGB",
+          "mtimeNs": 1787194734887785808,
+          "pHashAlgorithm": "dct-ii-32x32-low8x8-median64-v1",
+          "pHashDct64": "86c8cc26671a6ebd",
+          "rawReference": "笔记同步助手/images/17e258f2a11a4b3cfa59ca59836969da_MD5.jpg",
+          "relativePath": "images/17e258f2a11a4b3cfa59ca59836969da_MD5.jpg",
+          "sha256": "7dab36969a2a9d91f690b07959dd99a02de0558d5471b2bd99cef2f90b12eb5e",
+          "sizeBytes": 121884,
+          "status": "readable",
+          "width": 720
+        },
+        {
+          "contentClass": "source-frame",
+          "height": 1280,
+          "mode": "RGB",
+          "mtimeNs": 1787194743393571263,
+          "pHashAlgorithm": "dct-ii-32x32-low8x8-median64-v1",
+          "pHashDct64": "87409d8e701e27fd",
+          "rawReference": "笔记同步助手/images/2bcb35bbb15d3f630b0975664012ffe9_MD5.jpg",
+          "relativePath": "images/2bcb35bbb15d3f630b0975664012ffe9_MD5.jpg",
+          "sha256": "b179cc306d11a0e1652723de09fdd9052b163494e98df767b2ea63f30758ba78",
+          "sizeBytes": 115618,
+          "status": "readable",
+          "width": 720
+        },
+        {
+          "contentClass": "source-frame",
+          "height": 1280,
+          "mode": "RGB",
+          "mtimeNs": 1787194747662025898,
+          "pHashAlgorithm": "dct-ii-32x32-low8x8-median64-v1",
+          "pHashDct64": "86418fa45a04fcff",
+          "rawReference": "笔记同步助手/images/64706de56f32d79aea20b1ad54cc417c_MD5.jpg",
+          "relativePath": "images/64706de56f32d79aea20b1ad54cc417c_MD5.jpg",
+          "sha256": "3d9fdc9dedbdfc1c5462dade64e9bdb337618b1ce8816e78e248b3c3211c0c6d",
+          "sizeBytes": 102453,
+          "status": "readable",
+          "width": 720
+        },
+        {
+          "contentClass": "source-frame",
+          "height": 1280,
+          "mode": "RGB",
+          "mtimeNs": 1787194738223620553,
+          "pHashAlgorithm": "dct-ii-32x32-low8x8-median64-v1",
+          "pHashDct64": "8552de8d64164ded",
+          "rawReference": "笔记同步助手/images/6a6e0de4fdf332803b65540382252136_MD5.jpg",
+          "relativePath": "images/6a6e0de4fdf332803b65540382252136_MD5.jpg",
+          "sha256": "1f54fbcd6181058ebfa5ebd48a6757c473a60470f7d4b91ef41ac465f69b5415",
+          "sizeBytes": 87196,
+          "status": "readable",
+          "width": 720
+        },
+        {
+          "contentClass": "source-frame",
+          "height": 1280,
+          "mode": "RGB",
+          "mtimeNs": 1787194747694494940,
+          "pHashAlgorithm": "dct-ii-32x32-low8x8-median64-v1",
+          "pHashDct64": "86c1d46a681c65ff",
+          "rawReference": "笔记同步助手/images/896faa6d0cfd0876d11c0a466e8608e6_MD5.jpg",
+          "relativePath": "images/896faa6d0cfd0876d11c0a466e8608e6_MD5.jpg",
+          "sha256": "1330602f173fbb0690a3862b0be5171d8318b162bb49604768d17e3c9c8fe45e",
+          "sizeBytes": 85491,
+          "status": "readable",
+          "width": 720
+        },
+        {
+          "contentClass": "source-frame",
+          "height": 1280,
+          "mode": "RGB",
+          "mtimeNs": 1787194739130766367,
+          "pHashAlgorithm": "dct-ii-32x32-low8x8-median64-v1",
+          "pHashDct64": "a5c1da2c65116cfb",
+          "rawReference": "笔记同步助手/images/ef4ebb72a38bfafcbb33020f2793a5a1_MD5.jpg",
+          "relativePath": "images/ef4ebb72a38bfafcbb33020f2793a5a1_MD5.jpg",
+          "sha256": "6dabf128d0c946902787f8eb6e0fcf3a9a2bbd7b69253b8ae72a20a49f45e5fb",
+          "sizeBytes": 96068,
+          "status": "readable",
+          "width": 720
+        },
+        {
+          "contentClass": "source-frame",
+          "height": 1280,
+          "mode": "RGB",
+          "mtimeNs": 1787194734606794284,
+          "pHashAlgorithm": "dct-ii-32x32-low8x8-median64-v1",
+          "pHashDct64": "86c0ce2e425c6cff",
+          "rawReference": "笔记同步助手/images/f532176fd8b43d1fce1fd2bb826af03d_MD5.jpg",
+          "relativePath": "images/f532176fd8b43d1fce1fd2bb826af03d_MD5.jpg",
+          "sha256": "6e3fc38d17bc1309cb16cf8ce25fe162bddcfbcf189fc46115c0703a0b6153a8",
+          "sizeBytes": 107598,
+          "status": "readable",
+          "width": 720
+        },
+        {
+          "contentClass": "source-frame",
+          "height": 1280,
+          "mode": "RGB",
+          "mtimeNs": 1787194739444375018,
+          "pHashAlgorithm": "dct-ii-32x32-low8x8-median64-v1",
+          "pHashDct64": "86d0cc8650567bfd",
+          "rawReference": "笔记同步助手/images/f63e611d4fdef82796b401d28fe4adae_MD5.jpg",
+          "relativePath": "images/f63e611d4fdef82796b401d28fe4adae_MD5.jpg",
+          "sha256": "4cb2ee3db35643ca6ac1e9f84a579b07db1f5ea8f9dc76c954ab00f61de1162d",
+          "sizeBytes": 96703,
+          "status": "readable",
+          "width": 720
+        }
+      ],
+      "media": {
+        "declaredType": "video",
+        "downloadState": "not-requested",
+        "localSourceFrameCount": 10,
+        "remoteAccess": "not-checked",
+        "status": "local-frames-available",
+        "temporaryDownloadCheckpoint": null
+      },
+      "note": {
+        "mtimeNs": 1787194747698027694,
+        "relativePath": "2026-08-20/#edc 解压玩具.md",
+        "sha256": "a3e9fecf2e71ff91b9d34af24322e3259e333294efb917391f7bb888b444ba75",
+        "sizeBytes": 14990
+      },
+      "originalUrl": "https://v.douyin.com/5oELvcy8hAU/",
+      "platform": "douyin",
+      "product": {
+        "clusterId": "tengshun-edc-blind-box-assortment",
+        "clusterLabel": "腾顺 EDC blind-box assortment",
+        "matchStatus": "multi-product-reference",
+        "sameItemAs": []
+      },
+      "relatedDerivedNotes": [],
+      "resumeCheckpoint": {
+        "noteMtimeNs": 1787194747698027694,
+        "noteSha256": "a3e9fecf2e71ff91b9d34af24322e3259e333294efb917391f7bb888b444ba75",
+        "referencedImageDigestSha256": "e00739feee45e6868610d42ca15623b50215db4c112f1d8a4471239435a6ef32",
+        "state": "complete"
+      },
+      "rights": {
+        "allowedUse": "internal research and source-linked model provenance",
+        "redistribution": "not-cleared",
+        "status": "third-party-reference-only"
+      },
+      "savedAt": "2026-08-20T10:55:51+08:00",
+      "sourceId": "edc:f85bdfd0-e701-416c-9382-cd3ed8dd4792",
+      "title": "#edc 解压玩具",
+      "upstreamItemId": "5oELvcy8hAU"
+    }
+  ],
+  "summary": {
+    "exactContentDuplicateGroupCount": 0,
+    "identicalPHashGroupCount": 0,
+    "imageReferenceCount": 144,
+    "missingImageReferenceCount": 1,
+    "platformCounts": {
+      "douyin": 4,
+      "xiaohongshu": 16
+    },
+    "readableAiTargetCount": 2,
+    "readableImageReferenceCount": 143,
+    "readableSourceFrameCount": 141,
+    "readableUniqueImageCount": 143,
+    "readableUniquePathCount": 143,
+    "remoteImageReferenceCount": 0,
+    "sourceCount": 20,
+    "unreadableImageReferenceCount": 0
+  }
+}

@@ -1,0 +1,52 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="1100" viewBox="0 0 1600 1100">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#071018"/><stop offset="1" stop-color="#101421"/>
+    </linearGradient>
+    <marker id="cyanArrow" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto">
+      <path d="M0,0 L12,6 L0,12 Z" fill="#5fe4ed"/>
+    </marker>
+    <marker id="amberArrow" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto">
+      <path d="M0,0 L12,6 L0,12 Z" fill="#ffc56d"/>
+    </marker>
+    <clipPath id="pushClip"><rect x="42" y="135" width="735" height="350" rx="20"/></clipPath>
+    <clipPath id="spinClip"><rect x="823" y="135" width="735" height="350" rx="20"/></clipPath>
+    <clipPath id="insideClip"><rect x="42" y="535" width="965" height="520" rx="20"/></clipPath>
+    <clipPath id="tuneClip"><rect x="1035" y="535" width="523" height="520" rx="20"/></clipPath>
+    <style>
+      .title{font:800 35px Inter,-apple-system,"PingFang SC",sans-serif;fill:#f4f8fb}.sub{font:500 18px Inter,-apple-system,"PingFang SC",sans-serif;fill:#93a7b7}
+      .panel{fill:#070b0f;stroke:#263544;stroke-width:2}.tag{fill:#071116;stroke:#5fe4ed;stroke-width:2}.tag2{fill:#171107;stroke:#ffc56d;stroke-width:2}
+      .label{font:800 21px Inter,-apple-system,"PingFang SC",sans-serif;fill:#f5fbff}.small{font:600 17px Inter,-apple-system,"PingFang SC",sans-serif;fill:#d5e3ea}
+      .note{font:500 15px Inter,-apple-system,"PingFang SC",sans-serif;fill:#a8b7c2}.cyan{stroke:#5fe4ed;fill:none;stroke-width:5;stroke-linecap:round}.amber{stroke:#ffc56d;fill:none;stroke-width:5;stroke-linecap:round}
+    </style>
+  </defs>
+  <rect width="1600" height="1100" fill="url(#bg)"/>
+  <text x="42" y="55" class="title">同款官方图纠正后的机构理解</text>
+  <text x="42" y="89" class="sub">HALOOPLAYER Aurora Heart / Chrome Hearts · 只锁定图中能直接看到的玩法与模块</text>
+  <rect x="42" y="135" width="735" height="350" rx="20" class="panel"/>
+  <image href="../../01-intake/rev-002/haloo-official/08.png" x="42" y="135" width="735" height="350" preserveAspectRatio="xMidYMid slice" clip-path="url(#pushClip)"/>
+  <rect x="62" y="157" width="215" height="46" rx="23" class="tag"/><text x="85" y="188" class="label">玩法 A · 直推</text>
+  <path d="M155 420 L155 255" class="cyan" marker-end="url(#cyanArrow)"/>
+  <rect x="306" y="414" width="438" height="50" rx="12" fill="#05090ddd"/><text x="327" y="446" class="small">沿长轴上下往复；官方单独展示这一玩法</text>
+  <rect x="823" y="135" width="735" height="350" rx="20" class="panel"/>
+  <image href="../../01-intake/rev-002/haloo-official/06.png" x="823" y="135" width="735" height="350" preserveAspectRatio="xMidYMid slice" clip-path="url(#spinClip)"/>
+  <rect x="843" y="157" width="265" height="46" rx="23" class="tag"/><text x="866" y="188" class="label">玩法 B · 自由旋转</text>
+  <path d="M1210 384 C1128 317 1162 235 1265 222" class="cyan" marker-end="url(#cyanArrow)"/>
+  <rect x="1085" y="414" width="445" height="50" rx="12" fill="#05090ddd"/><text x="1106" y="446" class="small">不是“推到末端才解锁旋转”的证据</text>
+  <rect x="42" y="535" width="965" height="520" rx="20" class="panel"/>
+  <image href="../../01-intake/rev-002/haloo-official/07.png" x="42" y="535" width="965" height="520" preserveAspectRatio="xMidYMid meet" clip-path="url(#insideClip)"/>
+  <rect x="63" y="555" width="274" height="46" rx="23" class="tag"/><text x="85" y="586" class="label">官方内部 / 拆件总览</text>
+  <rect x="98" y="625" width="350" height="58" rx="12" class="tag"/><text x="119" y="650" class="small">双直线珠轨</text><text x="119" y="673" class="note">两条长轨 + 错位珠槽</text>
+  <path d="M448 655 L555 680" class="cyan" marker-end="url(#cyanArrow)"/>
+  <rect x="98" y="885" width="350" height="58" rx="12" class="tag2"/><text x="119" y="910" class="small">圆形珠轨 + 中央轴区</text><text x="119" y="933" class="note">可见球列与中心柱 / 轴承区域</text>
+  <path d="M448 914 L565 880" class="amber" marker-end="url(#amberArrow)"/>
+  <rect x="617" y="955" width="350" height="72" rx="12" fill="#071116e8" stroke="#5fe4ed" stroke-width="2"/>
+  <text x="638" y="981" class="small">“两片”= 两个外部主壳</text><text x="638" y="1008" class="note">内部仍有可独立识别的功能模块</text>
+  <rect x="1035" y="535" width="523" height="520" rx="20" class="panel"/>
+  <image href="../../01-intake/rev-002/haloo-official/05.png" x="1035" y="535" width="523" height="520" preserveAspectRatio="xMidYMid meet" clip-path="url(#tuneClip)"/>
+  <rect x="1056" y="555" width="286" height="46" rx="23" class="tag2"/><text x="1078" y="586" class="label">手感调节件 · 官方说明</text>
+  <rect x="1062" y="880" width="470" height="145" rx="14" fill="#070b0fee" stroke="#ffc56d" stroke-width="2"/>
+  <text x="1085" y="914" class="small">弹簧：调回弹力度</text><text x="1085" y="948" class="small">钢 / 陶瓷球：调顺滑与声音</text>
+  <text x="1085" y="986" class="note">仍未知：用户定制款的确数、尺寸、孔深、公差</text>
+  <text x="1085" y="1012" class="note">以及直推模块与旋转模块的精确耦合方式</text>
+</svg>

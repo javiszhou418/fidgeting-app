@@ -1,0 +1,146 @@
+{
+  "schema": "premium-display-case-gate04-r014-pack-only-rig.v1",
+  "producer": {
+    "blender": "5.2.0 LTS",
+    "route": "deterministic-bpy"
+  },
+  "representation": "seven hand-authored Pack-only FBX relative blend-shape poses",
+  "poses": [
+    {
+      "key": "Basis",
+      "progress": 0.0,
+      "description": "sealed foil Pack"
+    },
+    {
+      "key": "Pose_TabCatch",
+      "progress": 0.12,
+      "description": "top-right pull tab catches"
+    },
+    {
+      "key": "Pose_NarrowPeel",
+      "progress": 0.28,
+      "description": "narrow top-seal peel; most Pack remains sealed"
+    },
+    {
+      "key": "Pose_TearAdvance",
+      "progress": 0.48,
+      "description": "irregular tear advances with a short curled strip"
+    },
+    {
+      "key": "Pose_FormedMouth",
+      "progress": 0.68,
+      "description": "formed deep mouth with thin crimp lip"
+    },
+    {
+      "key": "Pose_CaseContained",
+      "progress": 0.84,
+      "description": "same live case can be contained behind the mouth"
+    },
+    {
+      "key": "Pose_ContinuousRise",
+      "progress": 1.0,
+      "description": "case rises while Pack retreats from torn contour"
+    }
+  ],
+  "actualPackArtwork": {
+    "bodyPath": "Assets/Plugins/iOS/GachaPacks/gacha-pack-standard-body.png",
+    "bodySha256": "ebc17bb238ebbcb82d36134bb2781838df610f8a3d1750c27b8ade10fc4681d6",
+    "flapPath": "Assets/Plugins/iOS/GachaPacks/gacha-pack-standard-flap.png",
+    "flapSha256": "b031fc5c57d194e9603e9b32e1cd603285aa564490f599f29bb0cd67dab33d49",
+    "canvas": [
+      384,
+      512
+    ],
+    "geometryAspect": [
+      0.255,
+      0.34
+    ]
+  },
+  "topSealHeightFraction": 0.06470588235294117,
+  "mouthDepthMeters": 0.07,
+  "foilThicknessMeters": 0.00075,
+  "authoredGuideStations": 21,
+  "caseGeometryIncluded": false,
+  "caseRenderedOrBaked": false,
+  "objects": [
+    {
+      "name": "Pack_FrontFoil",
+      "vertices": 210,
+      "polygons": 180,
+      "blendShapeCount": 6,
+      "role": "front foil carrying the actual authored Pack artwork"
+    },
+    {
+      "name": "Pack_TopSealRemaining",
+      "vertices": 42,
+      "polygons": 20,
+      "blendShapeCount": 6,
+      "role": "remaining sealed 5.9 percent top seam"
+    },
+    {
+      "name": "Pack_InnerFoilMouth",
+      "vertices": 105,
+      "polygons": 80,
+      "blendShapeCount": 6,
+      "role": "dark finite-depth inner foil cavity"
+    },
+    {
+      "name": "Pack_InnerBackFoilRim",
+      "vertices": 42,
+      "polygons": 20,
+      "blendShapeCount": 6,
+      "role": "separate rear foil layer, never a rectangular back wall"
+    },
+    {
+      "name": "Pack_RolledCrimpLip",
+      "vertices": 126,
+      "polygons": 120,
+      "blendShapeCount": 6,
+      "role": "thin crimped front lip at the torn contour"
+    },
+    {
+      "name": "Pack_TornContourRim",
+      "vertices": 42,
+      "polygons": 20,
+      "blendShapeCount": 6,
+      "role": "local CC0 contour-sweep carrier"
+    },
+    {
+      "name": "Pack_TearLeadingSidewall",
+      "vertices": 8,
+      "polygons": 6,
+      "blendShapeCount": 6,
+      "role": "moving irregular tear-front sidewall"
+    },
+    {
+      "name": "Pack_TabSidewall",
+      "vertices": 8,
+      "polygons": 6,
+      "blendShapeCount": 6,
+      "role": "top-right tab sidewall"
+    },
+    {
+      "name": "Pack_TornSealStrip",
+      "vertices": 24,
+      "polygons": 20,
+      "blendShapeCount": 6,
+      "role": "short double-sided curled 6.2 percent seal strip"
+    },
+    {
+      "name": "Pack_TopRightPullTab",
+      "vertices": 10,
+      "polygons": 9,
+      "blendShapeCount": 6,
+      "role": "top-right pull tab only"
+    }
+  ],
+  "blend": "/Users/jiawei.zhou/Documents/Fidgeting app/unity/FidgetingApp/ArtSource/ModelPipeline/premium-display-case/staging/pack-opening-gate04-r014/pack-opening-gate04-r014.blend",
+  "blendSha256": "f804d8dbc0932e38213fa9c81556f94738a2ccdcd0449b1cfd4b63e2075a28ab",
+  "fbx": "/Users/jiawei.zhou/Documents/Fidgeting app/unity/FidgetingApp/Assets/_DisplayCase/Candidates/PackOpeningGate04R014/Imported/PackOpeningGate04R014PackOnlyRig.fbx",
+  "fbxSha256": "51d719fc0770dc16850fa358f5ecea4f0eaf3e243782409cef80328e5adf03ce",
+  "previews": [
+    "/Users/jiawei.zhou/Documents/Fidgeting app/unity/FidgetingApp/ArtSource/ModelPipeline/premium-display-case/staging/pack-opening-gate04-r014/blender-closed.png",
+    "/Users/jiawei.zhou/Documents/Fidgeting app/unity/FidgetingApp/ArtSource/ModelPipeline/premium-display-case/staging/pack-opening-gate04-r014/blender-formed-mouth.png",
+    "/Users/jiawei.zhou/Documents/Fidgeting app/unity/FidgetingApp/ArtSource/ModelPipeline/premium-display-case/staging/pack-opening-gate04-r014/blender-continuous-rise.png"
+  ]
+}

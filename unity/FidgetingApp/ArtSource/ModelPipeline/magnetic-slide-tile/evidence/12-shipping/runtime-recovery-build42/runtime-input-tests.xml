@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<test-run id="2" testcasecount="5" result="Failed(Child)" total="5" passed="2" failed="3" inconclusive="0" skipped="0" asserts="0" engine-version="3.5.0.0" clr-version="4.0.30319.42000" start-time="2026-09-01 02:08:40Z" end-time="2026-09-01 02:08:41Z" duration="0.3451039">
+  <test-suite type="TestSuite" id="1000" name="Fidget Spinner" fullname="Fidget Spinner" runstate="Runnable" testcasecount="506" result="Failed" site="Child" start-time="2026-09-01 02:08:40Z" end-time="2026-09-01 02:08:41Z" duration="0.345104" total="5" passed="2" failed="3" inconclusive="0" skipped="0" asserts="0">
+    <properties>
+      <property name="platform" value="EditMode" />
+    </properties>
+    <failure>
+      <message><![CDATA[One or more child tests had errors]]></message>
+    </failure>
+    <test-suite type="Assembly" id="1564" name="Assembly-CSharp-Editor.dll" fullname="/Users/jiawei.zhou/Documents/Fidgeting app/unity/FidgetingApp/Library/ScriptAssemblies/Assembly-CSharp-Editor.dll" runstate="Runnable" testcasecount="506" result="Failed" site="Child" start-time="2026-09-01 02:08:40Z" end-time="2026-09-01 02:08:41Z" duration="0.284581" total="5" passed="2" failed="3" inconclusive="0" skipped="0" asserts="0">
+      <properties>
+        <property name="_PID" value="74563" />
+        <property name="_APPDOMAIN" value="Unity Child Domain" />
+        <property name="platform" value="EditMode" />
+        <property name="EditorOnly" value="True" />
+      </properties>
+      <failure>
+        <message><![CDATA[One or more child tests had errors]]></message>
+      </failure>
+      <test-suite type="TestSuite" id="1568" name="FidgetingApp" fullname="FidgetingApp" runstate="Runnable" testcasecount="427" result="Failed" site="Child" start-time="2026-09-01 02:08:40Z" end-time="2026-09-01 02:08:41Z" duration="0.282289" total="5" passed="2" failed="3" inconclusive="0" skipped="0" asserts="0">
+        <properties />
+        <failure>
+          <message><![CDATA[One or more child tests had errors]]></message>
+        </failure>
+        <test-suite type="TestSuite" id="1572" name="EDC" fullname="FidgetingApp.EDC" runstate="Runnable" testcasecount="38" result="Failed" site="Child" start-time="2026-09-01 02:08:40Z" end-time="2026-09-01 02:08:41Z" duration="0.271356" total="5" passed="2" failed="3" inconclusive="0" skipped="0" asserts="0">
+          <properties />
+          <failure>
+            <message><![CDATA[One or more child tests had errors]]></message>
+          </failure>
+          <test-suite type="TestSuite" id="1573" name="Tests" fullname="FidgetingApp.EDC.Tests" runstate="Runnable" testcasecount="38" result="Failed" site="Child" start-time="2026-09-01 02:08:40Z" end-time="2026-09-01 02:08:41Z" duration="0.270558" total="5" passed="2" failed="3" inconclusive="0" skipped="0" asserts="0">
+            <properties />
+            <failure>
+              <message><![CDATA[One or more child tests had errors]]></message>
+            </failure>
+            <test-suite type="TestFixture" id="1107" name="MagneticSlideTileRuntimeInputTests" fullname="FidgetingApp.EDC.Tests.MagneticSlideTileRuntimeInputTests" classname="FidgetingApp.EDC.Tests.MagneticSlideTileRuntimeInputTests" runstate="Runnable" testcasecount="5" result="Failed" site="Child" start-time="2026-09-01 02:08:40Z" end-time="2026-09-01 02:08:41Z" duration="0.269532" total="5" passed="2" failed="3" inconclusive="0" skipped="0" asserts="0">
+              <properties />
+              <failure>
+                <message><![CDATA[One or more child tests had errors]]></message>
+              </failure>
+              <test-case id="1112" name="SceneReloadStartsAtRestWithDefaultWiring" fullname="FidgetingApp.EDC.Tests.MagneticSlideTileRuntimeInputTests.SceneReloadStartsAtRestWithDefaultWiring" methodname="SceneReloadStartsAtRestWithDefaultWiring" classname="FidgetingApp.EDC.Tests.MagneticSlideTileRuntimeInputTests" runstate="Runnable" seed="265046337" result="Passed" start-time="2026-09-01 02:08:17Z" end-time="2026-09-01 02:08:23Z" duration="6.349145" asserts="0">
+                <properties>
+                  <property name="_JOINTYPE" value="UnityCombinatorial" />
+                </properties>
+                <output><![CDATA[[MagneticSlideRuntime] audio-ready clip=MagneticSlide_AlloyClick_766Hz voices=6 sampleRate=48000 dspBuffer=1024x4
+[MagneticSlideRuntime] shipping-coordinator-ready candidate=True fallback=False
+[MagneticSlideRuntime] input-ready surface=ShippingInteractionSurface profile=LinearMagneticDetentProfile
+]]></output>
+              </test-case>
+              <test-case id="1108" name="ShippingSceneUsesProductionInputCameraAudioAndRegistry" fullname="FidgetingApp.EDC.Tests.MagneticSlideTileRuntimeInputTests.ShippingSceneUsesProductionInputCameraAudioAndRegistry" methodname="ShippingSceneUsesProductionInputCameraAudioAndRegistry" classname="FidgetingApp.EDC.Tests.MagneticSlideTileRuntimeInputTests" runstate="Runnable" seed="1474515929" result="Passed" start-time="2026-09-01 02:08:23Z" end-time="2026-09-01 02:08:23Z" duration="0.220106" asserts="0">
+                <properties />
+              </test-case>
+              <test-case id="1110" name="TouchInputCompletesThirtyDetentsWithAudioAndHaptics" fullname="FidgetingApp.EDC.Tests.MagneticSlideTileRuntimeInputTests.TouchInputCompletesThirtyDetentsWithAudioAndHaptics" methodname="TouchInputCompletesThirtyDetentsWithAudioAndHaptics" classname="FidgetingApp.EDC.Tests.MagneticSlideTileRuntimeInputTests" runstate="Runnable" seed="663224331" result="Failed" label="Error" start-time="2026-09-01 02:08:23Z" end-time="2026-09-01 02:08:30Z" duration="6.804681" asserts="0">
+                <properties>
+                  <property name="_JOINTYPE" value="UnityCombinatorial" />
+                </properties>
+                <failure>
+                  <message><![CDATA[System.NullReferenceException : Object reference not set to an instance of an object]]></message>
+                  <stack-trace><![CDATA[  at FidgetingApp.EDC.Tests.MagneticSlideTileRuntimeInputTests+<TouchInputCompletesThirtyDetentsWithAudioAndHaptics>d__5.MoveNext () [0x000c2] in /Users/jiawei.zhou/Documents/Fidgeting app/unity/FidgetingApp/Assets/_EDC/Candidates/MagneticSlideTileGate12R002/Tests/Editor/MagneticSlideTileRuntimeInputTests.cs:196 
+  at UnityEngine.TestTools.TestEnumerator+<Execute>d__7.MoveNext () [0x0003a] in ./Library/PackageCache/com.unity.test-framework@1405238725ab/UnityEngine.TestRunner/NUnitExtensions/Attributes/TestEnumerator.cs:44 ]]></stack-trace>
+                </failure>
+              </test-case>
+              <test-case id="1109" name="TouchInputEnforcesEndpointInterlockAndAlignedClose" fullname="FidgetingApp.EDC.Tests.MagneticSlideTileRuntimeInputTests.TouchInputEnforcesEndpointInterlockAndAlignedClose" methodname="TouchInputEnforcesEndpointInterlockAndAlignedClose" classname="FidgetingApp.EDC.Tests.MagneticSlideTileRuntimeInputTests" runstate="Runnable" seed="373104003" result="Failed" start-time="2026-09-01 02:08:30Z" end-time="2026-09-01 02:08:35Z" duration="5.157596" asserts="0">
+                <properties>
+                  <property name="_JOINTYPE" value="UnityCombinatorial" />
+                </properties>
+                <failure>
+                  <message><![CDATA[  Expected: True
+  But was:  False
+]]></message>
+                  <stack-trace><![CDATA[at FidgetingApp.EDC.Tests.MagneticSlideTileRuntimeInputTests+<TouchInputEnforcesEndpointInterlockAndAlignedClose>d__4.MoveNext () [0x00197] in /Users/jiawei.zhou/Documents/Fidgeting app/unity/FidgetingApp/Assets/_EDC/Candidates/MagneticSlideTileGate12R002/Tests/Editor/MagneticSlideTileRuntimeInputTests.cs:137
+at UnityEngine.TestTools.TestEnumerator+<Execute>d__7.MoveNext () [0x0003a] in ./Library/PackageCache/com.unity.test-framework@1405238725ab/UnityEngine.TestRunner/NUnitExtensions/Attributes/TestEnumerator.cs:44
+]]></stack-trace>
+                </failure>
+              </test-case>
+              <test-case id="1111" name="TouchInputRoutesOrbitPinchAndToyWithoutGestureTheft" fullname="FidgetingApp.EDC.Tests.MagneticSlideTileRuntimeInputTests.TouchInputRoutesOrbitPinchAndToyWithoutGestureTheft" methodname="TouchInputRoutesOrbitPinchAndToyWithoutGestureTheft" classname="FidgetingApp.EDC.Tests.MagneticSlideTileRuntimeInputTests" runstate="Runnable" seed="616051383" result="Failed" start-time="2026-09-01 02:08:35Z" end-time="2026-09-01 02:08:41Z" duration="5.094203" asserts="0">
+                <properties>
+                  <property name="_JOINTYPE" value="UnityCombinatorial" />
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+                <failure>
+                  <message><![CDATA[  Expected: not equal to 0.0f
+  But was:  0.0f
+]]></message>
+                  <stack-trace><![CDATA[at FidgetingApp.EDC.Tests.MagneticSlideTileRuntimeInputTests+<TouchInputRoutesOrbitPinchAndToyWithoutGestureTheft>d__6.MoveNext () [0x00170] in /Users/jiawei.zhou/Documents/Fidgeting app/unity/FidgetingApp/Assets/_EDC/Candidates/MagneticSlideTileGate12R002/Tests/Editor/MagneticSlideTileRuntimeInputTests.cs:298
+at UnityEngine.TestTools.TestEnumerator+<Execute>d__7.MoveNext () [0x0003a] in ./Library/PackageCache/com.unity.test-framework@1405238725ab/UnityEngine.TestRunner/NUnitExtensions/Attributes/TestEnumerator.cs:44
+]]></stack-trace>
+                </failure>
+                <output><![CDATA[Saving results to: /Users/jiawei.zhou/Library/Application Support/DefaultCompany/Fidget Spinner/TestResults.xml
+]]></output>
+              </test-case>
+            </test-suite>
+          </test-suite>
+        </test-suite>
+      </test-suite>
+    </test-suite>
+  </test-suite>
+</test-run>

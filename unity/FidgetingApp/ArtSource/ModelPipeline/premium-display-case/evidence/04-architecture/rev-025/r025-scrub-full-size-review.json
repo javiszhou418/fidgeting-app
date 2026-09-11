@@ -1,0 +1,59 @@
+{
+  "schema": "premium-display-case-gate04-r025-scrub-full-size-review.v1",
+  "reviewedAt": "2026-09-01T03:53:24.183Z",
+  "source": "actual isolated Unity 6000.5.6f1 URP frames",
+  "nativeSize": [
+    1206,
+    2622
+  ],
+  "reviewMode": "native-size Unity PNG inspection without resampling",
+  "scrub": {
+    "path": "scrub/scrub-report.json",
+    "sha256": "94bbace2ae6c9cd874f99548a68fe91f34449d341b3dc9957b5782be51033935",
+    "sizeBytes": 55167
+  },
+  "results": {
+    "path": "scrub/r025-scrub-results.xml",
+    "sha256": "b0928c4f8108a697739af86cd44d81c4d3b168ca4e81d433f133570a2de0fd92",
+    "sizeBytes": 786
+  },
+  "frames": [
+    {
+      "path": "scrub/frames/frame-0000.png",
+      "sha256": "6513a91c7b1a1e8a4e0b44dcdd97e2c4cb9c0d6500d08533a6e79f70b5fa88e1",
+      "sizeBytes": 1965230
+    },
+    {
+      "path": "scrub/frames/frame-0012.png",
+      "sha256": "d81ac7bd627843ab0b9641fc94401804aa05bebfac3cbb087f8b6ed2484774f1",
+      "sizeBytes": 1960823
+    },
+    {
+      "path": "scrub/frames/frame-0026.png",
+      "sha256": "d5e5396b073630f3a825b1f441ef92f1c05d7c32204c05d0954ec78c279d02dd",
+      "sizeBytes": 1947160
+    }
+  ],
+  "inspectedSeconds": [
+    0.7,
+    0.9,
+    1.1333333
+  ],
+  "continuity": {
+    "sameCaseIdentity": true,
+    "noDuplicateCaseRenderers": true,
+    "noPackCrossfade": true,
+    "noBlankFrame": true,
+    "maximumCaseCenterStep": 0.009750962257385254,
+    "maximumCaseHeightStep": 5.960464477539063e-8,
+    "frameBarrier": [
+      31,
+      31
+    ]
+  },
+  "verdict": "pass-for-full-proof",
+  "nextGate": "capture 1.6 s normal proof and 0.25x closeup",
+  "shippingReady": false,
+  "physicalPhoneInstalled": false,
+  "statusText": "视觉批准待确认，未推送手机"
+}

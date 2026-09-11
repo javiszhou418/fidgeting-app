@@ -1,0 +1,157 @@
+{
+  "schemaVersion": 1,
+  "gate": "10-export",
+  "revision": 10,
+  "pass": true,
+  "copied": {
+    "upper-albedo.png": {
+      "path": "package/textures/upper-albedo.png",
+      "sha256": "c0e9305d475cd2c591efc8a833a0aafb1aef4ccc437d84a3417674e6d1b453a5",
+      "bytes": 207914
+    },
+    "lower-albedo.png": {
+      "path": "package/textures/lower-albedo.png",
+      "sha256": "968c1e87ca2d5ea7c8fc57106e42bcd09dc95395fac7dd3be569e580ea8850eb",
+      "bytes": 195875
+    },
+    "upper-roughness.png": {
+      "path": "package/textures/upper-roughness.png",
+      "sha256": "854f1dbc393585ff9b88f808c1a46a35b091088ac8b83894763f502876e3df6a",
+      "bytes": 80494
+    },
+    "lower-roughness.png": {
+      "path": "package/textures/lower-roughness.png",
+      "sha256": "ca2697560a2e57685a71c423f15f70a72ebb47c93c53cae0e3a8dae0b3248245",
+      "bytes": 72142
+    },
+    "upper-artwork-mask.png": {
+      "path": "package/textures/upper-artwork-mask.png",
+      "sha256": "8250df70d2286849db353862283b0d3db9c66e1ac92bed3795bcb5377a431c36",
+      "bytes": 20641
+    },
+    "lower-artwork-mask.png": {
+      "path": "package/textures/lower-artwork-mask.png",
+      "sha256": "7bf5921f469a217b850ff2ea94dc5ae6c251091b8de60bd81c1b88ec42dfa7c2",
+      "bytes": 22609
+    },
+    "top-perimeter-mask.png": {
+      "path": "package/textures/top-perimeter-mask.png",
+      "sha256": "2179bf26210994c8b3d279337bf6ad0f4beaee3c7285ae97d1cd888db2bd64fc",
+      "bytes": 5632
+    },
+    "target-shipping-studio-r009.exr": {
+      "path": "package/environment/target-shipping-studio-r009.exr",
+      "sha256": "2fe029beb803d7f9a26d229a1969914f210a7b5c4f311bfe9878cb52c7d73d13",
+      "bytes": 21680897
+    },
+    "neutral-control-r009.exr": {
+      "path": "package/environment/neutral-control-r009.exr",
+      "sha256": "a5b310c8c7fc17bda4110adb80e68913f1b5d623ffe01d935574813b80d1a872",
+      "bytes": 8120546
+    },
+    "target-shipping-studio-r009-preview.png": {
+      "path": "package/environment/target-shipping-studio-r009-preview.png",
+      "sha256": "09f6da7b201c03e0b116029d02ceb57efefb1b1600f9e905684a557d82263281",
+      "bytes": 376681
+    },
+    "unity-portability-contract-r009.json": {
+      "path": "package/environment/unity-portability-contract-r009.json",
+      "sha256": "d172c64ce56f89170b9f072e8efe61c3c7e8277235228bac957229ea319ffd13",
+      "bytes": 15920
+    },
+    "cubemap-contract.json": {
+      "path": "package/environment/cubemap/cubemap-contract.json",
+      "sha256": "14dc65a7f6e2ea036e6a0c9ba640cb04c46b5ab28e4a4f88110cb643a8608c8e",
+      "bytes": 1901
+    },
+    "positive-x.exr": {
+      "path": "package/environment/cubemap/positive-x.exr",
+      "sha256": "59edaf2b250d962e196f91a2df6aa36f40a7f4273f588748459648574b7f73c5",
+      "bytes": 2976526
+    },
+    "negative-x.exr": {
+      "path": "package/environment/cubemap/negative-x.exr",
+      "sha256": "77354b794e7dba2fb7149766ef2962a09d8ca8486a3a60404421344f72809882",
+      "bytes": 2688276
+    },
+    "positive-y.exr": {
+      "path": "package/environment/cubemap/positive-y.exr",
+      "sha256": "a826165174802c8573f80bc57654858820a7184a520bc53713e556c8ba292cc9",
+      "bytes": 3012386
+    },
+    "negative-y.exr": {
+      "path": "package/environment/cubemap/negative-y.exr",
+      "sha256": "eeb99a271ea2e70a102395f314fb80a4c20d7980decb6426a94eb9574145615d",
+      "bytes": 2959339
+    },
+    "positive-z.exr": {
+      "path": "package/environment/cubemap/positive-z.exr",
+      "sha256": "8ba2447c400ae53111b3089dd35d892d71416ca99e6f8612d6ddaf31f8f9c572",
+      "bytes": 2794890
+    },
+    "negative-z.exr": {
+      "path": "package/environment/cubemap/negative-z.exr",
+      "sha256": "a805391a7161d718f55e4b13fc8b053eca3f9eb5c97ab290ae1208429a634875",
+      "bytes": 2964710
+    }
+  },
+  "generated": {
+    "upper-maskmap.png": {
+      "path": "package/textures/upper-maskmap.png",
+      "sha256": "312609ae272c3634337e9af5f6e2b84819025ddb2529cfc03b5ef533b0d790d1",
+      "dimensions": [
+        620,
+        1000
+      ],
+      "channels": {
+        "R": "metallic=0.08 for top artwork transport baseline",
+        "G": "occlusion=1.0",
+        "B": "detailMask=0.0",
+        "A": "smoothness=1-source roughness"
+      }
+    },
+    "lower-maskmap.png": {
+      "path": "package/textures/lower-maskmap.png",
+      "sha256": "02899afebda3b2d508a229725e6eb08860f81e2d0b6a27b45cef87fd93893970",
+      "dimensions": [
+        620,
+        1000
+      ],
+      "channels": {
+        "R": "metallic=0.08 for top artwork transport baseline",
+        "G": "occlusion=1.0",
+        "B": "detailMask=0.0",
+        "A": "smoothness=1-source roughness"
+      }
+    },
+    "upper-normal.png": {
+      "path": "package/textures/upper-normal.png",
+      "sha256": "b700dc78abc6db8b2a491d3faf7e4ef0e07767bda0257ad0ca0c7225d5cebb75",
+      "dimensions": [
+        620,
+        1000
+      ],
+      "encoding": "OpenGL tangent-space flat normal; textureType NormalMap downstream"
+    },
+    "lower-normal.png": {
+      "path": "package/textures/lower-normal.png",
+      "sha256": "b700dc78abc6db8b2a491d3faf7e4ef0e07767bda0257ad0ca0c7225d5cebb75",
+      "dimensions": [
+        620,
+        1000
+      ],
+      "encoding": "OpenGL tangent-space flat normal; textureType NormalMap downstream"
+    }
+  },
+  "checks": {
+    "independentArtworkMasks": true,
+    "nativeNpotPreserved": true,
+    "clampSpecified": true,
+    "astcNotApplied": true,
+    "environmentCopiedExact": true
+  },
+  "unityImportContract": {
+    "path": "package/unity-import-contract-r010.json",
+    "sha256": "f1e086331285b4cea38cc73d90f2ceacedb8e62faf795f5c1c7361dff0793ae1"
+  }
+}

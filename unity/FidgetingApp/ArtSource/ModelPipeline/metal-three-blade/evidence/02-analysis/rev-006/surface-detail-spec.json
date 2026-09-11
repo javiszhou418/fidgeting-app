@@ -1,0 +1,1255 @@
+{
+  "modelId": "metal-three-blade",
+  "stageId": "02-analysis",
+  "revision": 6,
+  "title": "GEEONE 龙鳞三叶 表面细节规格（Gate 02 → 未来 Gate 03–06 承接清单）",
+  "units": "ratios of R (tip-circle radius); millimetres only as 85 mm user-authorized-provisional (never measured)",
+  "source": "Gate 01 rev-003 video geeone-source.mp4, ffmpeg fps=10 frames (frame N at t=(N-1)/10 s); zooms in frame-zooms/ and surface-detail-atlas.png",
+  "carryOverRule": "Every detail with mustBeGeometry=true must exist as real mesh geometry in the Blender builder (no normal maps, no material fakes). The builder must tag the code that produces each detail with a comment `# detail: <id>`; tools/model-provenance-explorer/check_surface_detail_coverage.py fails Gate 05/06 registration when any id is missing.",
+  "details": [
+    {
+      "id": "UTS-D01",
+      "name": "cap disc: 14-sector concave faceted thumb dish (中央 14 等分扇面凹盘)",
+      "part": "FingerCap_Top/Bottom",
+      "mustBeGeometry": true,
+      "geometry": "the central disc is a shallow CONCAVE 14-gon pyramid: 14 equal planar triangular sectors radiating from the centre apex (lowest point) to a 14-gon rim at 0.82 x cap radius (0.80-0.85); the rim vertices coincide with the crown ring's inner vertices, so disc sectors, crown wedges and skirt scales share one 14-fold division. User 2026-09-07 08:25: '这个圆应该以圆心为中心…被切分成14片。均分'; user 2026-09-06 20:46: concave, for the thumb",
+      "surface": "fine concentric tool marks visible inside the facets (f0077) plus per-facet brightness steps (f0077 high-pass unwrap, f0204/f0208); lookdev: satin with a light radial anisotropy per facet, marks as texture only",
+      "params": {
+        "sectors": 14,
+        "sectorsTolerance": 0,
+        "rimPolygonSides": 14,
+        "tableToCap": 0.8,
+        "tableToCapRange": [
+          0.8,
+          0.85
+        ],
+        "profile": "concave 14-gon pyramid (planar sectors); apex at centre",
+        "dishSlopeDegProvisional": 8.0,
+        "dishSlopeRange": "1-8 (video apex-shift bound ≈ ≤2° at 10 fps/720p; user 19:42 '向内凹一点' → 5°; user 22:51 '内凹的效果还是不够明显' → 8° provisional, top of the earlier 4-8 range)",
+        "dishDepthToR": "≈0.0545 R provisional (0.80·0.485·tan8°) ≈ 2.3 mm @ 85 mm",
+        "userStated": true,
+        "phaseNote": "sector creases run centre -> rim vertices; rim vertices = crown inner vertices (angles 360/14·j)",
+        "sectorAltTiltDegProvisional": 0.5,
+        "sectorCreaseHighlightBevelMm": 0.0,
+        "visibilityNote": "user 2026-09-07 19:42: '中间你那个切分的细节又丢了…像切披萨一样切成了14片…应该是向内凹一点的' — the 14 planar sectors must READ as slices: dish 5° (adjacent sector normals differ ≈2.2°), alternate sectors tilted ±0.5° about their bisector (provisional, set 0 to disable; plan-view division stays exactly 360/14), creases kept SHARP (a 0.12 mm highlight bevel was tried in Gate 06 rev-006 and dropped: it spreads a 2° crease over 0.12 mm and hides it), disc anisotropy reduced (0.7 → 0.4) so per-facet tone is not washed out by the sunburst highlight | v20 (22:51): dish 8°, disc 0.80 cap (low end of the measured 0.80-0.85) so the crown/skirt band reads wider in the top view"
+      },
+      "sourceFrames": [
+        77,
+        78,
+        192,
+        200,
+        204,
+        208
+      ],
+      "confidence": "high (14 sectors: high-pass unwrap boundaries every ≈26° in the lit half; user count) / user-stated (concave) / unknown (depth)",
+      "gate06Check": "disc = 14 planar triangular faces meeting at one centre vertex below the rim; rim is a regular 14-gon at 0.80-0.85 cap radius whose vertices coincide with crown inner vertices; centre lower than rim (concave, slope >= 4°); caps manifold; the 14 radial creases must be visible in the lookdev render (tonal steps between neighbouring sectors), dish visibly concave",
+      "supersedes": [
+        {
+          "geometry": "flat disc, highest point of the cap; diameter 0.80 x cap outer diameter",
+          "reason": "user 2026-09-06 20:46 + f0204/f0208 conical shading"
+        },
+        {
+          "previous": {
+            "name": "cap disc, turned thumb dish (中央车削盘，凹面拇指位)",
+            "geometry": "turned central disc, diameter 0.82 x cap outer diameter (0.80-0.85); its RIM is the crest of the cap; inside the rim the disc is a shallow concave dish (thumb rest) - user-stated 2026-09-06 20:46 ('中间有一个凹下去的…为了放拇指'); dish slope/depth not measurable in the video",
+            "surface": "fine concentric turning marks + radial sunburst highlight (f0204/f0208: conical shading with radial sector boundaries); lookdev = radial anisotropy on the dish",
+            "params": {
+              "tableToCap": 0.82,
+              "tableToCapRange": [
+                0.8,
+                0.85
+              ],
+              "dishProfile": "concave; cone or sphere undecided",
+              "dishSlopeDegProvisional": "4-8 (user-authorized-provisional once approved; unmeasured)",
+              "dishDepthToR": "unknown (≈0.03-0.06 R if slope 4-8°)",
+              "userStated": true
+            },
+            "gate06Check": "disc rim is the highest circle of the cap (crest); dish surface monotonically lower toward the centre; disc radius / cap radius within 0.80-0.85"
+          },
+          "reason": "user 2026-09-07 08:25 (14 equal sectors from the centre) + disc-unwrap-f0077-highpass.png"
+        },
+        {
+          "previous": {
+            "tableToCap": 0.82,
+            "dishSlopeDegProvisional": 5.0,
+            "dishDepthToR": "≈0.035 R provisional (0.82·0.485·tan5°)"
+          },
+          "reason": "user 2026-09-07 22:51: '就这个 bevel 可以再厚一点。就是这两片龙鳞的这个高度可以再高，然后中间的那个内凹的效果感觉还是不够明显。'"
+        }
+      ]
+    },
+    {
+      "id": "UTS-D02",
+      "name": "crown zigzag ring = cap-edge tier 1 (冠环 · 盖缘三层过渡第 1 层)",
+      "part": "FingerCap_Top/Bottom",
+      "mustBeGeometry": true,
+      "geometry": "tier 1 of the cap-edge transition: one ring of planar triangles from the disc 14-gon rim (crest, r=0.82 cap) outward-DOWN to r≈0.89 cap (v20), tips alternating inward/outward (zigzag); 14 ± 1 wedges = 28 ± 2 triangles. The crown is the shallowest of THREE tiers that take the cap from the (near-)flat disc to the vertical side: crown (green) -> upper skirt (red) -> lower skirt (blue). User 2026-09-07 09:36 outlined one facet of each tier on f0132 (located by template match at (336,524)+181x168, NCC 0.92): '红蓝绿色…通过三层过渡完成了从平面到垂直面的变化'",
+      "params": {
+        "wedges": 14,
+        "wedgesTolerance": 1,
+        "triangles": 28,
+        "slopeDegEstimate": "15-30 (unmeasured)",
+        "evidence": "cap-ring-unwrap-f0077-hires.png: ≈14 teeth per 180° between r=0.8 and 1.0 cap; FFT harmonics 12-15 at r=0.88-0.96 cap, none at 24",
+        "phaseNote": "inner vertices at 360/14·j coincide with the disc rim 14-gon vertices; outer vertices at 360/14·(j+0.5)",
+        "tier": 1,
+        "radialToCap": 0.09,
+        "outerRadiusToCap": 0.89,
+        "slopeDegProvisional": 18,
+        "dropToR": 0.0142,
+        "capEdgeTiers": [
+          {
+            "tier": 1,
+            "role": "crown wedges (D02)",
+            "userColor": "green",
+            "radialToCap": 0.09,
+            "slopeDeg": 18,
+            "facets": "14 wedges = 28 triangles"
+          },
+          {
+            "tier": 2,
+            "role": "skirt upper scales (D03 row 1)",
+            "userColor": "red",
+            "radialToCap": 0.07,
+            "slopeDeg": 50,
+            "facets": "14"
+          },
+          {
+            "tier": 3,
+            "role": "skirt lower scales (D03 row 2)",
+            "userColor": "blue",
+            "radialToCap": 0.04,
+            "slopeDeg": 72,
+            "facets": "14"
+          }
+        ],
+        "capEdgeTiersDropToR": 0.1144,
+        "capEdgeTiersNote": "radial widths and slopes provisional; the 3-tier structure and its ordering (each tier steeper) are user-stated and visible on f0128-f0140 | v20 (22:51): rows 2/3 widened 0.06/0.02→0.07/0.04 cap and steepened 45/75→50/72° (row drops 0.0291/0.0362→0.0405/0.0597 R, +53 %), crown 0.10→0.09 cap; disc 0.82→0.80 cap"
+      },
+      "sourceFrames": [
+        77,
+        78,
+        128,
+        132,
+        136,
+        140,
+        148,
+        200,
+        204,
+        208
+      ],
+      "confidence": "medium-high (count) / medium (slope direction)",
+      "gate06Check": "crown faces: planar, 28±2, slope 10-35° outward-down, between r=0.82 and ≈0.92 cap; followed by two steeper 14-facet rows (see D03) before any vertical side",
+      "supersedes": [
+        {
+          "previous": {
+            "geometry": "one ring of planar triangles between the disc rim (crest) and the cap rim, tips alternating inward/outward (zigzag), sloping outward-DOWN (f0077 tilted view: far-side ring foreshortened to ≈1/3 of the side width -> slope faces away from camera); 14 ± 1 wedges = 28 ± 2 triangles",
+            "params": {
+              "wedges": 14,
+              "wedgesTolerance": 1,
+              "triangles": 28,
+              "slopeDegEstimate": "15-30 (unmeasured)",
+              "evidence": "cap-ring-unwrap-f0077-hires.png: ≈14 teeth per 180° between r=0.8 and 1.0 cap; FFT harmonics 12-15 at r=0.88-0.96 cap, none at 24",
+              "phaseNote": "inner vertices at 360/14·j coincide with the disc rim 14-gon vertices; outer vertices at 360/14·(j+0.5)",
+              "tier": 1,
+              "radialToCap": 0.1,
+              "outerRadiusToCap": 0.92,
+              "slopeDegProvisional": 20,
+              "dropToR": 0.0177,
+              "capEdgeTiers": [
+                {
+                  "tier": 1,
+                  "role": "crown wedges (D02)",
+                  "userColor": "green",
+                  "radialToCap": 0.1,
+                  "slopeDeg": 20,
+                  "facets": "14 wedges = 28 triangles"
+                },
+                {
+                  "tier": 2,
+                  "role": "skirt upper scales (D03 row 1)",
+                  "userColor": "red",
+                  "radialToCap": 0.06,
+                  "slopeDeg": 45,
+                  "facets": "14"
+                },
+                {
+                  "tier": 3,
+                  "role": "skirt lower scales (D03 row 2)",
+                  "userColor": "blue",
+                  "radialToCap": 0.02,
+                  "slopeDeg": 75,
+                  "facets": "14"
+                }
+              ],
+              "capEdgeTiersDropToR": 0.083,
+              "capEdgeTiersNote": "radial widths and slopes provisional; the 3-tier structure and its ordering (each tier steeper) are user-stated and visible on f0128-f0140"
+            }
+          },
+          "reason": "user 2026-09-07 09:36 three-tier plane->vertical transition"
+        },
+        {
+          "previous": {
+            "radialToCap": 0.1,
+            "outerRadiusToCap": 0.92,
+            "slopeDegProvisional": 20,
+            "dropToR": 0.0177,
+            "capEdgeTiers": [
+              {
+                "tier": 1,
+                "role": "crown wedges (D02)",
+                "userColor": "green",
+                "radialToCap": 0.1,
+                "slopeDeg": 20,
+                "facets": "14 wedges = 28 triangles"
+              },
+              {
+                "tier": 2,
+                "role": "skirt upper scales (D03 row 1)",
+                "userColor": "red",
+                "radialToCap": 0.06,
+                "slopeDeg": 45,
+                "facets": "14"
+              },
+              {
+                "tier": 3,
+                "role": "skirt lower scales (D03 row 2)",
+                "userColor": "blue",
+                "radialToCap": 0.02,
+                "slopeDeg": 75,
+                "facets": "14"
+              }
+            ],
+            "capEdgeTiersDropToR": 0.083
+          },
+          "reason": "user 2026-09-07 22:51: '就这个 bevel 可以再厚一点。就是这两片龙鳞的这个高度可以再高，然后中间的那个内凹的效果感觉还是不够明显。'"
+        }
+      ]
+    },
+    {
+      "id": "UTS-D03",
+      "name": "faceted skirt = cap-edge tiers 2 and 3 (盖裙两排鳞 · 三层过渡第 2/3 层)",
+      "part": "FingerCap_Top/Bottom",
+      "mustBeGeometry": true,
+      "geometry": "below the crown, two rows of 14 planar 'dragon-scale' facets each, phase-aligned with the crown wedges, each row steeper than the one above: row 1 (red) ≈50° from r≈0.89 to ≈0.96 cap, row 2 (blue) ≈72° from r≈0.96 to 1.0 cap (v20: user 22:51 wants the two scale rows taller / the edge band thicker); below row 2 a short vertical 14-gon side runs down to the dark seam. The side therefore reads as a 14-gon, not a turned cylinder | v18 (user 2026-09-07 18:33): the ≈0.057 R 'vertical side' under the skirt is NOT part of the cap: the cap rim (disc + crown + skirt) OVERHANGS a recessed rotating hub / bearing seat of smaller radius ('黄色的部分，它的圆圈的半径应该是大于内部的这个轴心的转动的承托的…绿色的应该是往内收…上下内凹的这个圆盘要稍微盖住中间的一点点'). The cap underside is a flat lip from the skirt bottom inward to the hub; the hub seat cylinder (radius ≈ cap − 0.03 R provisional, height ≈0.057 R) connects cap and rotor; the dark seam is the shadow gap under the overhang. Top and bottom caps mirror this. | v21 (user 2026-09-08 13:21 '这个不是一体的，叶片是分开转的'): the hub under the cap is NOT part of the rotor. It is a static hub core (bearing housing, r ≈0.41 R provisional) running from cap to cap through a through-bore in the rotor (r ≈0.425 R); the rotor is a separate part that spins around it with a visible radial clearance ring. The rotor ring connecting the three blades under the cap must stay ≥ 0.06 R wide (structural), which fixes the maximum bore; hence the cap overhangs the hub by ≈0.075 R (more than the 0.03 R of v18/v20).",
+      "params": {
+        "facets": 14,
+        "facetsTolerance": 1,
+        "rows": 2,
+        "rowSlopesDegProvisional": [
+          50,
+          72
+        ],
+        "rowRadialToCap": [
+          0.07,
+          0.04
+        ],
+        "rowsDropToR": [
+          0.0405,
+          0.0597
+        ],
+        "sideHeightToR": 0.16,
+        "sideHeightConfidence": "low (f0226 single frame, ±20%); v20 0.16 = +14 % on the 0.14 read, inside that band, to give the taller skirt rows room without thinning the hub seat below ≈0.045 R",
+        "verticalSideToR": 0.0456,
+        "evidence": "f0200/f0208 near side: ≈7 scales over ≈180°; f0128-f0140 8x: bright row -> textured mid row -> dark steep row above the seam",
+        "capOverhangToR": 0.075,
+        "hubSeatRadiusToR": 0.41,
+        "hubSeatHeightToR": 0.0456,
+        "verticalSideNote": "v21: the dark ring under the cap lip is the STATIC hub core (r 0.41 R) that runs between the two caps through the rotor's bore (r 0.425 R); hubSeatHeightToR = visible hub wall between cap lip and rotor face; bearing gap 0.015 R is the radial clearance ring around the hub at the rotor face",
+        "userStated": true,
+        "hubCoreRadiusToR": 0.41,
+        "hubCoreStatic": true,
+        "hubCoreThroughRotorBore": true,
+        "rotorBoreRadiusToR": 0.425,
+        "bearingGapToR": 0.015,
+        "rotorRingMinWidthToR": 0.06,
+        "kinematicNote": "Fixed group = Cap_Top + Cap_Bottom + Hub_Core (held by the fingers). Rotating group = Rotor_Body only (three blades + connecting ring under the cap, min ring width cap − bore = 0.06 R ≈ 2.5 mm at the notch bisectors). Rotor spins about Z around the hub; clearances: radial 0.015 R (0.64 mm), vertical cap-lip-to-rotor-face = hubSeatHeightToR"
+      },
+      "sourceFrames": [
+        2,
+        5,
+        128,
+        132,
+        136,
+        140,
+        148,
+        176,
+        200,
+        208,
+        226
+      ],
+      "confidence": "medium / overhang + recessed hub: user 18:33 (amount provisional)",
+      "gate06Check": "two planar 14-facet rows below the crown; mean slope row1 30-60°, row2 60-88°; combined crown+rows drop ≤ side height; vertical 14-gon remainder to the seam; cap rim radius > hub seat radius (overhang ≈0.02-0.04 R), cap underside flat lip, recessed hub cylinder between cap and rotor on both faces; v21: rotor has a through-bore r 0.425 R (all rotor vertices r ≥ bore − 1e-4 R), hub core r 0.41 R spans both cap lips, radial clearance ≥ 0.015 R, rotor ring width at notch bisectors ≥ 0.05 R, no rotor vertex above the cap lip inside the cap footprint, rotor centroid on axis, Z principal axis",
+      "supersedes": [
+        {
+          "previous": {
+            "name": "faceted skirt = cap-edge tiers 2 and 3 (盖裙两排鳞 · 三层过渡第 2/3 层)",
+            "geometry": "below the crown, two rows of 14 planar 'dragon-scale' facets each, phase-aligned with the crown wedges, each row steeper than the one above: row 1 (red) ≈45° from r≈0.92 to ≈0.98 cap, row 2 (blue) ≈75° from r≈0.98 to 1.0 cap; below row 2 a short vertical 14-gon side runs down to the dark seam. The side therefore reads as a 14-gon, not a turned cylinder",
+            "params": {
+              "facets": 14,
+              "facetsTolerance": 1,
+              "rows": 2,
+              "rowSlopesDegProvisional": [
+                45,
+                75
+              ],
+              "rowRadialToCap": [
+                0.06,
+                0.02
+              ],
+              "rowsDropToR": [
+                0.0291,
+                0.0362
+              ],
+              "sideHeightToR": 0.14,
+              "sideHeightConfidence": "low (f0226 single frame, ±20%)",
+              "verticalSideToR": 0.057,
+              "evidence": "f0200/f0208 near side: ≈7 scales over ≈180°; f0128-f0140 8x: bright row -> textured mid row -> dark steep row above the seam"
+            },
+            "gate06Check": "two planar 14-facet rows below the crown; mean slope row1 30-60°, row2 60-88°; combined crown+rows drop ≤ side height; vertical 14-gon remainder to the seam",
+            "confidence": "medium"
+          },
+          "reason": "user 2026-09-07 18:33 mark-up on blockout r006: cap rim radius > hub; ring goes inward; discs slightly cover the middle"
+        },
+        {
+          "previous": {
+            "rowSlopesDegProvisional": [
+              45,
+              75
+            ],
+            "rowRadialToCap": [
+              0.06,
+              0.02
+            ],
+            "rowsDropToR": [
+              0.0291,
+              0.0362
+            ],
+            "sideHeightToR": 0.14,
+            "verticalSideToR": 0.057,
+            "hubSeatHeightToR": 0.057
+          },
+          "reason": "user 2026-09-07 22:51: '就这个 bevel 可以再厚一点。就是这两片龙鳞的这个高度可以再高，然后中间的那个内凹的效果感觉还是不够明显。'"
+        },
+        {
+          "previous": {
+            "capOverhangToR": 0.03,
+            "hubSeatRadiusToR": 0.455,
+            "hubSeatHeightToR": 0.0456,
+            "verticalSideNote": "verticalSideToR = hubSeatHeightToR = sideHeight − tiers drop = height of the recessed hub seat ring below the cap lip, not a cap wall"
+          },
+          "reason": "user 2026-09-08 13:21: '这个不是一体的，叶片是分开转的' (after 07:13 'OK…这个陀螺的三个页面是可以转的，你确保在结构上是正确的') — hub seat sitting on a solid rotor read as one piece; replaced by static hub core + rotor bore"
+        }
+      ]
+    },
+    {
+      "id": "UTS-D04",
+      "name": "blade top: a few large hard-cut planar facets, convex lower envelope (叶顶大平面硬切)",
+      "part": "RotorBody_OnePiece",
+      "mustBeGeometry": true,
+      "geometry": "the blade top is the LOWER ENVELOPE of a few large planes (the body is what remains after each plane cuts away material), not a mesa with skirts (v15) and not a tent of crest lines (v9-v14). User 2026-09-07 13:27 drew the facets on f0132 (2.4x crop, NCC 0.92 at frame (287,396)): green = the stem crease above the pocket apex continuing as the pocket's right rim; blue quad = one large tip facet from the stem to the edge band; red = straight creases between planes, meeting at a junction K outside the pocket corner; second blue = the root-corner facet at the edge. Per half-blade three planes: T (tip facet: contains the stem crease along the axis, falls toward the tip and outward), F (pocket-flank facet: its upper edge IS the pocket rim, horizontal at the crest height, falls outward), C (root-corner facet: from the pocket corner and K down to the root edge). Creases: T∩T' = stem (on the axis, from the pocket apex to the tip, falling), T∩F from the pocket apex to K, F∩C from the pocket corner to K, T∩C from K to the edge band; all straight, hard. The surface is convex (min of planes) so it has no valley anywhere (user 11:47). Heights provisional.",
+      "params": {
+        "crestForm": "lower envelope of planes T/F/C (+ mirror T'/F'/C'); creases = plane intersections",
+        "junctionX": 0.72,
+        "armEndPolarDeg": 38,
+        "crestRiseToR": "≈0.025 provisional at the pocket apex / rim (highest points)",
+        "facetPlanes": {
+          "T": {
+            "through": [
+              "pocketApex (0.70, 0) at crest",
+              "stemEnd",
+              "K"
+            ],
+            "note": "contains the stem crease; falls toward the tip and outward (≈15° combined, provisional)"
+          },
+          "F": {
+            "through": [
+              "pocketApex at crest",
+              "pocketRootCorner (0.466, 0.135) at crest",
+              "K"
+            ],
+            "note": "upper edge = pocket rim (horizontal, highest line); falls outward"
+          },
+          "C": {
+            "through": [
+              "pocketRootCorner at crest",
+              "K",
+              "rootCornerLevelPoint at top-face level"
+            ],
+            "note": "root-corner facet"
+          },
+          "creaseJunctionK": {
+            "xy": [
+              0.536,
+              0.205
+            ],
+            "dropToR": 0.015,
+            "note": "user's red junction; ≈0.07 R tipward and 0.07 R outward of the pocket corner; drop below the crest provisional"
+          },
+          "stemEnd": {
+            "x": 0.93,
+            "dropToR": 0.025,
+            "note": "stem crease reaches the tip fillet ≈ at the top-face level (provisional)"
+          },
+          "rootCornerLevelPoint": {
+            "xy": [
+              0.42,
+              0.23
+            ],
+            "zAboveTopToR": 0.003,
+            "note": "C passes just above top-face level at the root edge of the top facets (provisional); the tiers hang below"
+          },
+          "mirror": "T'/F'/C' = y -> -y"
+        },
+        "userStated": true,
+        "sourceOfCreases": "user drawing 2026-09-07 13:27 on f0132; f0132 5x shows the light flank facet right of the pocket wall and the darker root-corner facet beyond a straight crease",
+        "v15Defect": "mesa+skirts had curved skirt/crest boundaries and no straight creases; rejected by the user's 13:27 facet drawing",
+        "armMidpoint": [
+          0.583,
+          0.16
+        ],
+        "armMidpointNote": "legacy v9 Y-arm midpoint kept for v9-v14 drawings; v16 arms = pocket rim (F upper edge)",
+        "armBulge": "legacy v9; v16: the arm is the straight pocket rim"
+      },
+      "sourceFrames": [
+        77,
+        108,
+        124,
+        132,
+        148,
+        152,
+        156
+      ],
+      "confidence": "medium (facet layout: user drawing 13:27 on f0132 + f0132 5x shading) / low (K position, drops, C extent)",
+      "gate06Check": "per blade top: exactly 6 large planar faces (T, F, C and mirrors) + the stem crease on the axis; every crease a straight line; F's upper edge coincides with the pocket rim; the top is convex (no local minimum, no valley between facets); no fillets on the creases (≤0.2 mm); no single planar face > 40% of the footprint",
+      "supersedes": {
+        "previous": {
+          "name": "blade top: Y-shaped raised mesa (Y 形平顶隆起)",
+          "geometry": "the blade top is a raised MESA, not a tent of three sharp crest lines: a flat crest region sits at the top and falls to the top-face edge (D05 band) and to the D08 pocket rim through straight-sloped skirts of ≈0.09 R width (provisional). Because the pocket sits inside the fork, the flat crest region is Y-shaped in plan (stem along the blade axis narrowing to a ridge near the tip where the top is narrower than 2×0.09 R; two arms between the pocket flanks and the edges). Between the stem and each arm the surface stays HIGH — there is no valley/saddle (user 2026-09-07 11:47 circled the two spots beside the Y junction on relief v14: '这两个地方凹下去了'). Slopes read as large soft facets. User 08:39 red Y drawing: '有一个这样的凸起的弧度，中间红色的部分就是它的隆起'",
+          "params": {
+            "crestShape": "Y (stem + 2 arms)",
+            "junctionX": 0.72,
+            "armEndPolarDeg": 38,
+            "armMidpoint": [
+              0.583,
+              0.16
+            ],
+            "armBulge": "convex, away from the pocket",
+            "crestRiseToR": "≈0.025 provisional (unmeasured); rise of the crest above the plateau/scale-band edge",
+            "crestSoftness": "crest edge = hard-ish crease between the flat top and the skirt; skirt planar; curvature unknown",
+            "userStated": true,
+            "crestForm": "mesa: flat crest region + straight skirts (no valleys between stem and arms)",
+            "skirtWidthToR": "≈0.09 provisional (unmeasured)",
+            "v14Defect": "v9-v14 modelled z = crest·d_low/(d_low+d_crest): the three crest lines had valleys between them near the junction — rejected by the user 11:47"
+          },
+          "gate06Check": "per blade the highest surface is a flat Y-shaped region (stem on the axis, arms flanking the pocket to the cap at polar 38±6°) bounded by skirts that fall monotonically to the scale band and to the pocket rim; no local minimum (valley/saddle) anywhere on the top between the stem and the arms; no single planar top face larger than 25% of the footprint",
+          "confidence": "medium (Y layout: user drawing + f0108/f0132 highlight along the spine and both flanks; no valleys: user 11:47) / unknown (rise, skirt width)"
+        },
+        "reason": "user 2026-09-07 13:27 facet drawing on f0132: straight creases between large planes, tip facet as one plane, pocket rim = flank facet edge",
+        "earlier": {
+          "previous": {
+            "name": "blade top: Y-shaped raised ridge (Y 形隆起顶面)",
+            "geometry": "the blade top is NOT a flat plateau: it is crowned along a Y-shaped crest (the highest line of the blade). Stem: along the blade axis from the tip fillet to a junction at x≈0.72 R (just outside the pocket apex, 0.70 R). Arms: two convex (outward-bulging) curves from the junction along the pocket flanks (the '叉臂') to the root corners on the cap at polar ≈±38°. From the crest the top surface falls outward into the D05 scale band and, inside the fork, into the D08 pocket rim; slopes read as large soft facets. User 2026-09-07 08:39 red Y drawing: '有一个这样的凸起的弧度，中间红色的部分就是它的隆起'",
+            "params": {
+              "crestShape": "Y (stem + 2 arms)",
+              "junctionX": 0.72,
+              "armEndPolarDeg": 38,
+              "armMidpoint": [
+                0.583,
+                0.16
+              ],
+              "armBulge": "convex, away from the pocket",
+              "crestRiseToR": "≈0.025 provisional (unmeasured); rise of the crest above the plateau/scale-band edge",
+              "crestSoftness": "soft ridge (planar slopes meeting at a softened crest); curvature unknown",
+              "userStated": true
+            },
+            "gate06Check": "per blade the highest z lies on a Y crest polyline (stem on the axis to x≈0.72 R, arms flanking the pocket to the cap at polar 38±6°); no single planar top face larger than 25% of the footprint; surfaces fall monotonically from the crest to the scale band and to the pocket rim",
+            "confidence": "medium (Y layout: user drawing + f0108/f0132 highlight along the spine and both flanks) / unknown (rise)"
+          },
+          "reason": "user 2026-09-07 11:47: the two spots beside the Y junction must not be recessed ('这两个地方凹下去了'); tent-of-crest-lines model replaced by a mesa",
+          "earlier": {
+            "previous": {
+              "name": "blade plateau (叶片平台)",
+              "geometry": "flat top face per blade, offset inward from the outline by the bevel band; extends from the pocket flanks to the tip ridge",
+              "params": {},
+              "gate06Check": "one planar face per blade top with area > 25% of the blade footprint"
+            },
+            "reason": "user 2026-09-07 08:39 (Y ridge drawing); the 'flat plateau' reading of f0148 was the lit stem facet only"
+          }
+        }
+      }
+    },
+    {
+      "id": "UTS-D05",
+      "name": "blade edge: wide multi-gradient transition — large top tier + interlocking kite / Λ side facets (叶边多梯度过渡)",
+      "part": "RotorBody_OnePiece",
+      "mustBeGeometry": true,
+      "geometry": "the transition from the blade-top facets to the vertical side is WIDE and made of several gradients, not a thin carved band (user 2026-09-07 14:01 yellow outline on relief v16: '本身是用不同的梯度来进行平面和垂直面的过渡…你现在只是轻轻地在上面做了一层雕刻'; f0116/f0124 3x show large staggered facets covering most of the blade top between the stem and the edge). Provisional layout from the crest to the mid-plane: top facets T/F/C (≈15°) -> tier A: large staggered planar quads ≈0.07 R wide at ≈22° (≈0.25 R long, offset half a facet from the kites) -> kite facets (≈38°, light) interlocking with Λ facets (≈53°, dark) reaching the mid-plane, one deep zigzag between them (v15 reading of f0148/f0150/f0152 at 10x kept). Total radial width of the transition ≈0.14 R, so near the tip (x > 0.85 R) the whole top is transition facets. Every facet a single plane, hard creases; mirrored below the mid-plane (D10).",
+      "params": {
+        "rows": "1 interlocking band per half (previous '2 rows' were the kite and Λ families seen as rows)",
+        "rowsNote": "f0148/f0150/f0152 at 10×: light kites with V tips reaching near the mid-plane silhouette; dark Λ tips reaching near the top-face edge",
+        "tiers": [
+          {
+            "tier": 1,
+            "name": "A",
+            "widthToR": 0.07,
+            "slopeDeg": 22,
+            "facetLengthToR": 0.25,
+            "note": "large staggered planar quads on the top surface (≈0.25 R long, 3 per edge); user 14:01 yellow terraces; f0116/f0124"
+          },
+          {
+            "tier": 2,
+            "name": "kite",
+            "widthToR": 0.0385,
+            "slopeDeg": 38,
+            "note": "kite plane (mean boundary 0.55 W); boundary zigzags 0.25-0.85 W"
+          },
+          {
+            "tier": 3,
+            "name": "lambda",
+            "widthToR": 0.0315,
+            "slopeDeg": 53,
+            "note": "Λ plane; ends on the mid-plane; mirrored below"
+          }
+        ],
+        "bandWidthToR": 0.07,
+        "totalDropToR": 0.1,
+        "dropTarget": "≈ half thickness 0.085 R (rows reach the mid-plane)",
+        "facetsPerRowPerEdge": 4,
+        "facetsPerEdge": 4,
+        "facetsTolerance": 1,
+        "scaleLengthToR": 0.18,
+        "rowOffset": "half a scale between rows; zigzag boundary",
+        "alternatingTiltDegEstimate": "5-10 (unmeasured)",
+        "widthsAndSlopes": "provisional; tier A 22° over 0.07 + kite 38° over 0.55 W + Λ 53° over 0.45 W ≈ 0.100 R ≈ half thickness + T/F/C height at the tier-A start",
+        "facetStyle": {
+          "planar": true,
+          "hardCreases": true,
+          "description": "every kite / Λ facet is its own plane; hard creases; no fillets, no smooth blending. User 2026-09-07 11:10 '硬朗一点'"
+        },
+        "facetFamilies": {
+          "kite": {
+            "reads": "light",
+            "baseOn": "top-face edge",
+            "tipAtBandFraction": 0.85,
+            "slopeDeg": 38,
+            "shape": "pentagon (wide top edge, two short vertical flanks, V tip)"
+          },
+          "lambda": {
+            "reads": "dark",
+            "baseOn": "mid-plane",
+            "tipAtBandFraction": 0.25,
+            "slopeDeg": 53,
+            "shape": "pentagon (wide base on the mid-plane, Λ tip)"
+          },
+          "note": "slopes and tip depths provisional; kite shallower than Λ by ≥10° so they alternate light/dark; alternate twist ±3° provisional"
+        },
+        "zigzagBoundary": "one deep zigzag from 25% to 85% of the band width (provisional), V tips between consecutive Λ tips; NOT the ±0.005 R shallow zigzag of v14",
+        "transitionWidthToR": 0.14,
+        "topTierWidthToR": 0.07,
+        "gradients": "T/F/C ≈15° -> tier A ≈22° -> kite ≈38° -> Λ ≈53° (all provisional); drops 0.028 + 0.030 + 0.042 ≈ 0.100 R from the tier-A start (≈TOP+0.010) to the mid-plane"
+      },
+      "sourceFrames": [
+        77,
+        116,
+        124,
+        128,
+        132,
+        136,
+        140,
+        148,
+        150,
+        152,
+        154
+      ],
+      "confidence": "medium (wide multi-gradient transition, kite/Λ interlock: user 14:01 + f0116/f0124/f0148/f0150/f0152) / low (tier widths, slopes, facet lengths)",
+      "gate06Check": "per blade edge, from the top facets to the mid-plane: (1) tier A — large planar quads ≥0.2 R long, ≈0.06-0.09 R wide, slope 15-28°, staggered half a facet against the kites; (2) interlocking kite (base on the tier-A edge, V tip at 0.75-0.90 of the band) and Λ (base on the mid-plane, tip at 0.15-0.35) planar pentagons, kites shallower than Λ by ≥10°, 4-5 kites per edge; total transition width 0.12-0.16 R; hard creases (≤0.2 mm), no cylindrical wall band > 0.1 × thickness, no smooth blending; mirrored below",
+      "note": "v10: three-row hypothesis for blade edges withdrawn — the user's blue/red/green quads (09:36) template-match f0132 at (336,524)+181x168 (NCC 0.92) and lie on the CAP edge, not the blade edge; blade edge stays one band until evidence",
+      "supersedes": {
+        "previous": {
+          "name": "blade edge: interlocking kite / Λ dragon-scale facets, top face -> mid-plane (叶边龙鳞：鸢形与 Λ 形咬合)",
+          "geometry": "the blade side between the top face and the mid-plane is ONE band of interlocking planar pentagon facets, read from f0148/f0150/f0152 at 10×: light 'kites' hang from the top-face edge (wide top edge on the top face, two slanted sides, V tip pointing down to ≈85% of the band width) and dark 'Λ' facets rise from the mid-plane (wide base on the mid-plane, tip pointing up to ≈25% of the band width). Kite and Λ alternate along the edge and share slanted creases, so the boundary is one deep zigzag that spans most of the side height — NOT two stacked rows with a shallow zigzag (v13/v14). Kites are the shallower planes (≈42° provisional) and read light under top light; Λ facets are steeper (≈56° provisional) and read dark. 4-5 kites (and 4-5 Λ) per edge, kite pitch ≈0.18 R; each facet is a single plane, hard creases, small ridges where the zigzag leaves the plane intersection; lower half mirrored (D10). Radial extent of the band ≈0.07 R (f0077). User 11:10 '硬朗一点', 11:47 '鳞片的细节还是不对，你再仔细对照图片看一下'.",
+          "params": {
+            "rows": "1 interlocking band per half (previous '2 rows' were the kite and Λ families seen as rows)",
+            "rowsNote": "f0148/f0150/f0152 at 10×: light kites with V tips reaching near the mid-plane silhouette; dark Λ tips reaching near the top-face edge",
+            "tiers": [
+              {
+                "tier": 1,
+                "widthToR": 0.0385,
+                "slopeDeg": 42,
+                "note": "kite plane; width = mean boundary position (0.55 W); actual boundary zigzags 0.25-0.85 W"
+              },
+              {
+                "tier": 2,
+                "widthToR": 0.0315,
+                "slopeDeg": 56,
+                "note": "Λ plane; ends on the mid-plane; mirrored below"
+              }
+            ],
+            "bandWidthToR": 0.07,
+            "totalDropToR": 0.081,
+            "dropTarget": "≈ half thickness 0.085 R (rows reach the mid-plane)",
+            "facetsPerRowPerEdge": 4,
+            "facetsPerEdge": 4,
+            "facetsTolerance": 1,
+            "scaleLengthToR": 0.18,
+            "rowOffset": "half a scale between rows; zigzag boundary",
+            "alternatingTiltDegEstimate": "5-10 (unmeasured)",
+            "widthsAndSlopes": "provisional; kite 42° over 0.55 W + Λ 56° over 0.45 W ≈ 0.081 R ≈ half thickness 0.085 R (residual = ridge at the crease)",
+            "facetStyle": {
+              "planar": true,
+              "hardCreases": true,
+              "description": "every kite / Λ facet is its own plane; hard creases; no fillets, no smooth blending. User 2026-09-07 11:10 '硬朗一点'"
+            },
+            "facetFamilies": {
+              "kite": {
+                "reads": "light",
+                "baseOn": "top-face edge",
+                "tipAtBandFraction": 0.85,
+                "slopeDeg": 42,
+                "shape": "pentagon (wide top edge, two short vertical flanks, V tip)"
+              },
+              "lambda": {
+                "reads": "dark",
+                "baseOn": "mid-plane",
+                "tipAtBandFraction": 0.25,
+                "slopeDeg": 56,
+                "shape": "pentagon (wide base on the mid-plane, Λ tip)"
+              },
+              "note": "slopes and tip depths provisional; kite shallower than Λ by ≥10° so they alternate light/dark; alternate twist ±3° provisional"
+            },
+            "zigzagBoundary": "one deep zigzag from 25% to 85% of the band width (provisional), V tips between consecutive Λ tips; NOT the ±0.005 R shallow zigzag of v14"
+          },
+          "gate06Check": "per blade edge: two interlocking families of planar pentagon facets between the top face and the mid-plane — kites with their base on the top-face edge and V tips at 0.75-0.90 of the band width, Λ facets with their base on the mid-plane and tips at 0.15-0.35; 4-5 kites per edge (pitch ≈0.18 R); kites shallower than Λ facets by ≥10°; one deep zigzag crease between the families, hard creases (≤0.2 mm), no cylindrical wall band > 0.1 × thickness, no smooth/subdivided blending; mirrored below the mid-plane",
+          "confidence": "medium (kite/Λ interlock, 4-5 per edge, no wall: f0148/f0150/f0152 10× + user) / low (slopes, tip depths, twist)"
+        },
+        "reason": "user 2026-09-07 14:01: the transition uses several gradients over a wide region; the 0.07 R kite/Λ band alone was 'a light carving'",
+        "earlier": {
+          "previous": {
+            "name": "blade edge: multi-row dragon-scale transition, top face -> vertical wall (叶边多层龙鳞过渡)",
+            "geometry": "the blade side from the top face to the mid-plane is TWO rows of LARGE planar dragon-scale facets (f0148/f0150/f0154, blade held in the fingers and viewed from above: the widest point of the side is the silhouette, so exactly the upper half is visible and it shows two rows). Row 1 leaves the top face at a moderate slope; row 2 is steep and reaches the mid-plane; the row boundary is a zigzag (scale tips alternate up/down), rows are offset by half a scale; 4-5 scales along an edge, each ≈0.18 R long; the bottom half mirrors the top (D10). Radial extent of both rows ≈0.07 R, consistent with the f0077 top-view band. No separate cylindrical wall is needed: the steep row 2 is the 'vertical face'. User 10:40 '多层龙鳞纹过渡', 10:55 '每一片面积要大一些'.",
+            "params": {
+              "rows": 2,
+              "rowsNote": "2 rows per half (top face -> mid-plane), mirrored below; f0148/f0150/f0154",
+              "tiers": [
+                {
+                  "tier": 1,
+                  "widthToR": 0.04,
+                  "slopeDeg": 35,
+                  "note": "upper row: top face edge -> zigzag boundary; large scales"
+                },
+                {
+                  "tier": 2,
+                  "widthToR": 0.03,
+                  "slopeDeg": 62,
+                  "note": "lower row: steep, ends on the mid-plane (widest silhouette); mirrored below"
+                }
+              ],
+              "bandWidthToR": 0.07,
+              "totalDropToR": 0.084,
+              "dropTarget": "≈ half thickness 0.085 R (rows reach the mid-plane)",
+              "facetsPerRowPerEdge": 4,
+              "facetsPerEdge": 4,
+              "facetsTolerance": 1,
+              "scaleLengthToR": 0.18,
+              "rowOffset": "half a scale between rows; zigzag boundary",
+              "alternatingTiltDegEstimate": "5-10 (unmeasured)",
+              "widthsAndSlopes": "radial widths and slopes provisional; constrained so both rows sum to ≈0.07 R radially and ≈0.085 R vertically",
+              "facetStyle": {
+                "planar": true,
+                "hardCreases": true,
+                "description": "every scale is its own plane; neighbours in a row alternate across-row slope (±5° provisional) and twist (±3° provisional); the row boundary is a V zigzag (±0.005 R radial provisional); no fillets, no smooth blending between scales. User 2026-09-07 11:10: '每片鳞片的过渡太平滑了，应该硬朗一点'"
+              }
+            },
+            "gate06Check": "per blade edge: 2 rows of large planar faces from the top face to the mid-plane (row 1 ≈25-45°, row 2 ≈55-75°), zigzag boundary, 3-5 faces per row per edge each ≥0.15 R long, half-scale offset, mirrored below; no single-plane chamfer; no cylindrical wall band > 0.1 × thickness; every scale a single planar face with sharp (unbevelled or ≤0.2 mm) creases to its neighbours; no smooth/subdivided blending",
+            "confidence": "medium (2 rows per half, 4-5 large scales per edge, no cylinder wall: f0148/f0150/f0154 + user) / low (row widths, slopes)"
+          },
+          "reason": "user 2026-09-07 11:47 ('鳞片的细节还是不对'): f0148/f0150/f0152 at 10× show one deep zigzag of interlocking kite / Λ facets, not two stacked rows",
+          "earlier": {
+            "previous": {
+              "geometry": "the transition from the blade top face to the vertical side wall is made of rows of LARGE planar 'dragon-scale' quads, each row steeper than the one above, the same construction as the cap edge (D02/D03). f0148/f0154 (blade held in the fingers) show two rows of big scales between the top face and the mid-plane, 4-5 scales along an edge (each ≈0.18 R long), rows offset by half a scale; the rows wrap around the tip and follow the root blend to the cap. User 2026-09-07 10:40 '多层龙鳞纹过渡'; user 10:55 '原图的龙鳞纹要比你做的每一片面积要大一些' -> fewer, larger scales (2 rows × 4-5 instead of 3 rows × 6).",
+              "params": {
+                "rows": 2,
+                "rowsNote": "2 rows visible on f0148/f0154 above the mid-plane (mirrored below); user says multi-row",
+                "tiers": [
+                  {
+                    "tier": 1,
+                    "widthToR": 0.04,
+                    "slopeDeg": 22,
+                    "note": "adjacent to the blade top face; large scales"
+                  },
+                  {
+                    "tier": 2,
+                    "widthToR": 0.03,
+                    "slopeDeg": 55,
+                    "note": "steep row adjacent to the vertical wall"
+                  }
+                ],
+                "bandWidthToR": 0.07,
+                "totalDropToR": 0.059,
+                "facetsPerRowPerEdge": 4,
+                "facetsPerEdge": 4,
+                "facetsTolerance": 1,
+                "scaleLengthToR": 0.18,
+                "rowOffset": "half a scale between rows (brick layout)",
+                "alternatingTiltDegEstimate": "5-10 (unmeasured)",
+                "widthsAndSlopes": "provisional split of the ≈0.07 R band; row count and scale count from f0148/f0154, sizes provisional"
+              },
+              "confidence": "medium (2 rows, 4-5 large scales per edge: f0148/f0154 + user) / low (row widths, slopes)"
+            },
+            "reason": "f0148/f0150/f0154 re-read after user 10:55: the two rows fill the visible upper half to the mid-plane; slopes 35°/62° so the drops sum to the half thickness; no separate wall"
+          }
+        }
+      }
+    },
+    {
+      "id": "UTS-D06",
+      "name": "side wall (竖壁) — superseded by the steep lower scale row",
+      "part": "RotorBody_OnePiece",
+      "mustBeGeometry": true,
+      "geometry": "no separate near-vertical cylinder band is visible on f0148/f0150/f0154: the steep Λ facets (D05, ≈56° provisional) runs to the mid-plane and reads as the 'vertical face'. Keep at most a hairline (≤0.1 × thickness) if the builder needs a mirror seam.",
+      "params": {
+        "wallToThickness": 0.0,
+        "wallToThicknessRange": [
+          0.0,
+          0.1
+        ],
+        "previousReading": "0.45 (f0226 edge-on, low confidence) then 0.30/0.31 provisional"
+      },
+      "sourceFrames": [
+        226,
+        164,
+        160
+      ],
+      "confidence": "medium (absence of a distinct wall on 3 frames) / low (f0226 edge-on reading unexplained; may have been the steep rows)",
+      "gate06Check": "cylindrical/vertical band height ≤ 0.1 × thickness; the side consists of the D05 scale rows",
+      "supersedes": {
+        "previous": {
+          "geometry": "near-vertical band between the top and bottom scale rows along the whole outline; ≈0.31 × body thickness provisional (two scale rows take ≈0.059 R per side)",
+          "params": {
+            "wallToThickness": 0.31,
+            "wallToThicknessRange": [
+              0.25,
+              0.45
+            ]
+          },
+          "confidence": "low"
+        },
+        "reason": "f0148/f0150/f0154: rows reach the mid-plane"
+      }
+    },
+    {
+      "id": "UTS-D07",
+      "name": "convex side arcs + sharp tip (凸弧叶边 + 尖叶尖)",
+      "part": "RotorBody_OnePiece",
+      "mustBeGeometry": true,
+      "geometry": "each blade side is a convex circular arc of radius ≈1.37 R whose centre lies on the blade's perpendicular through the cap centre, 0.92 R from it; from x≈0.40 R inward the edge blends with a tighter arc (R≈0.15 R) and ends on the cap circle at polar ≈52°; the two arcs of a blade meet at the tip with a ≈90° included angle softened by a ≈0.03 R fillet; there is no straight segment and no shoulder",
+      "params": {
+        "sideArcRadiusToR": 1.367,
+        "sideArcCentreOffsetToR": 0.92,
+        "tipFilletRadiusToR": 0.03,
+        "tipIncludedAngleDeg": 90,
+        "previousEstimates": {
+          "tipCornerRadiusToR": [
+            0.045,
+            0.085,
+            0.212
+          ],
+          "sideAngleToAxisDeg": 30.0
+        },
+        "rootBlendRadiusToR": 0.15,
+        "rootBlendStartX": 0.4,
+        "edgeEndsOnCapAtPolarDeg": 52.0
+      },
+      "sourceFrames": [
+        77,
+        78
+      ],
+      "confidence": "high (arc fit rms 0.0006-0.0010 R on 4 clean sides vs 0.011-0.015 R for a straight line)",
+      "gate06Check": "blade side edges lie on a circle of radius 1.30-1.45 R (in plan) for x≥0.40 R within 0.01 R; root blend ends on the cap circle at polar 50-54°; tip fillet 0.02-0.05 R; no straight side segment longer than 0.1 R",
+      "supersedes": {
+        "geometry": "120°-span corner arc of radius 0.21 R tangent to straight sides at 30°",
+        "reason": "blade-root-traces.png + side envelope arc fits (2026-09-06 20:46 round)"
+      }
+    },
+    {
+      "id": "UTS-D08",
+      "name": "root pocket: sloped funnel mouth + deeper stepped floor, rounded corners (叶根凹坑：斜面漏斗 + 深台阶 + 圆角)",
+      "part": "RotorBody_OnePiece",
+      "mustBeGeometry": true,
+      "geometry": "per blade root a triangular recess open toward the cap seam, apex toward the tip. It is NOT a vertical-walled pocket with a tight rim: the walls are a SLOPED funnel (斜面过渡) whose mouth on the top surface is wider than the traced outline (mouth = traced outline offset ≈0.03 R outward) and whose floor is narrower (≈0.03 R inward); the floor is a deeper flat step (≈0.38 × thickness per side, provisional; was 0.25). All corners are TRUE circular fillets (tangent arcs), in plan (mouth R≈0.05, floor R≈0.03) and in section (mouth edge convex R≈0.03, floor edge concave R≈0.03); no straight corner cuts. f0116/f0120/f0124/f0128 at 6x: rounded apex, lit sloped right wall with a lighter rim band, dark deep cavity, the mouth opening into the seam. User 2026-09-07 14:01: '红色部分要用圆角过渡…内凹的那个部分的台阶要更深一些…蓝色部分，它是有一个斜面过渡的…应该向外扩展，它的深度也要更深'.",
+      "params": {
+        "apexRadiusToR": 0.7,
+        "baseHalfWidthToR": 0.135,
+        "cornerRadiusToR": 0.05,
+        "floor": "flat, deeper step",
+        "depth": "unknown; 0.38 × t per side provisional",
+        "throughHole": "unknown (no light seen through in any frame)",
+        "traced": "top-view outline (f0077): apex 0.70 R, base half-width 0.135 R at the cap circle",
+        "mouthOffsetToR": 0.03,
+        "floorOffsetToR": 0.03,
+        "depthFractionOfThicknessPerSide": 0.38,
+        "wallSlopeDeg": "≈47 (depth 0.065 R over 0.06 R run; provisional)",
+        "floorCornerRadiusToR": 0.03,
+        "rimChamferToR": "small (≈0.008), provisional",
+        "edgeFilletTopToR": 0.03,
+        "edgeFilletFloorToR": 0.03,
+        "fillets": "TRUE circular fillets everywhere: plan-view corners of the mouth (R0.05) and floor (R0.03) are tangent arcs; in section the mouth edge is a convex fillet R0.03 (top facet -> wall) and the floor edge a concave fillet R0.03 (wall -> floor); no chamfer-style corner cuts. User 2026-09-07 14:25 '你是不会用圆角吗'"
+      },
+      "sourceFrames": [
+        36,
+        38,
+        77,
+        116,
+        120,
+        124,
+        126,
+        128,
+        134,
+        164
+      ],
+      "confidence": "medium (funnel, step, rounded corners: f0116/f0120/f0124/f0128 6x + user 14:01) / low (offsets, depth, slope)",
+      "gate06Check": "boolean recess per blade root: sloped funnel walls (mouth wider than floor by ≈0.06 R total run), flat floor ≥0.3 × thickness deep per side, all mouth/floor corners and the mouth/floor edges are tangent circular fillets (no sharp corners, no chamfer-style cuts), mouth wider than the traced top-view outline, open toward the seam; mirrored below (D10); depth tagged user-authorized-provisional until measured",
+      "supersedes": {
+        "previous": {
+          "name": "root pocket (叶根三角凹坑)",
+          "geometry": "per blade root a milled triangular recess with a flat floor, steep walls and rounded corners (≈0.025 R), rim chamfered; open toward the cap seam; apex toward the tip at r≈0.70 R; base at the cap spans ≈±0.135 R (≈45% of the root width); two plateau flanks hug the cap on either side",
+          "params": {
+            "apexRadiusToR": 0.7,
+            "baseHalfWidthToR": 0.135,
+            "cornerRadiusToR": 0.025,
+            "floor": "flat",
+            "depth": "unknown",
+            "throughHole": "unknown (no light seen through in any frame)"
+          },
+          "gate06Check": "boolean recess present per blade; open toward the seam; depth parameter tagged user-authorized-provisional until measured",
+          "confidence": "medium"
+        },
+        "reason": "user 2026-09-07 14:01 (rounded corners, deeper step, sloped walls flaring outward) + f0116-f0128 6x"
+      }
+    },
+    {
+      "id": "UTS-D09",
+      "name": "seam and notch exposure (暗缝与缺口露盖)",
+      "part": "assembly",
+      "mustBeGeometry": true,
+      "geometry": "dark gap between cap skirt and blade root; each blade edge ends on the cap circle at polar ≈52° from its axis, so between two blades the cap crown and skirt are exposed over ≈16° (polar 52°→68° of the notch); the blades do NOT connect across the notch (user 2026-09-07). No bright bearing ring anywhere | v18: seam = undercut below the overhanging cap rim (user 18:33). | v21: the rotor is a separate part from cap + hub core; the seam is a real clearance, not a decorative groove.",
+      "params": {
+        "edgeEndsOnCapAtPolarDeg": 52.0,
+        "exposedCapArcPerNotchDeg": 16,
+        "exposedCapArcRange": [
+          14,
+          18
+        ],
+        "edgeToCapTangentAngleDeg": 61.0,
+        "seamWidth": "unknown",
+        "seamForm": "dark gap under the cap overhang: STATIC hub core r 0.41 R (cap − 0.075 R) × hubSeatHeightToR tall between cap lip and rotor face, plus the 0.015 R radial clearance ring where the rotor's bore (r 0.425 R) surrounds the hub — the rotor spins around the hub (v21, user 2026-09-08 13:21); not a flat dark band at cap radius"
+      },
+      "sourceFrames": [
+        77,
+        78,
+        148,
+        134
+      ],
+      "confidence": "medium-high",
+      "gate06Check": "no body material outside the cap circle within the exposed 16°±2 arc at each bisector; body edge reaches the cap circle at polar 50-54°; no radial notch walls; adjacent blades not joined outside the cap",
+      "supersedes": [
+        {
+          "params": {
+            "notchApexRadiusToR": 0.4905,
+            "exposedCapArcPerNotchDeg": "0-10"
+          },
+          "reason": "user 2026-09-07 07:53 + root traces (edges reach the cap at 51-53°, silhouette follows the cap to ≥62°)"
+        },
+        {
+          "previous": {
+            "seamForm": "shadow gap under the cap overhang: recessed hub seat (cap − 0.03 R provisional) × ≈0.0456 R tall (v20; was 0.057); not a flat dark band at cap radius"
+          },
+          "reason": "user 2026-09-08 13:21: '这个不是一体的，叶片是分开转的' (after 07:13 'OK…这个陀螺的三个页面是可以转的，你确保在结构上是正确的')"
+        }
+      ]
+    },
+    {
+      "id": "UTS-D10",
+      "name": "underside mirror (底面镜像)",
+      "part": "RotorBody_OnePiece + FingerCap_Bottom",
+      "mustBeGeometry": true,
+      "geometry": "bottom is a mirror of the top: plateau, scale bands, pocket, and an identical bottom cap",
+      "params": {},
+      "sourceFrames": [
+        164,
+        168,
+        148,
+        154
+      ],
+      "confidence": "high",
+      "gate06Check": "mesh symmetric about z=0 within 0.02 mm; bottom cap identical to top cap"
+    }
+  ],
+  "outlineForContract": {
+    "capToTip": {
+      "video": 0.485,
+      "photo": 0.536,
+      "decisionPending": true
+    },
+    "bladeRootHalfSpanAtCapDeg": 52,
+    "note": "Outline = planformProfile.parametric (v7: arcs + root blend ending on the cap, 16° exposed cap per notch). v6 V-apex and older triangle claims are superseded."
+  },
+  "openConflictsForUser": [
+    "cap side height ≈0.8× body thickness (video) vs 'cap 1.5 mm above blade face' (earlier instruction)",
+    "root pocket present (video) vs 'solid' (earlier instruction)",
+    "cap/tip 0.485 (video) vs 0.536 (photo)",
+    "cap top: disc concave thumb dish inside a crest ring that slopes outward-down (adopted, user 2026-09-06 20:46 + f0077 foreshortening) vs whole top dished with the 14-wedge ring sloping inward (alternative reading of '中间这个圆被切分成14片有内凹效果') — decide in CAD v6 Detail E",
+    "table/cap 0.82 (0.80-0.85, video) vs 0.70 (earlier instruction)"
+  ],
+  "planformProfile": {
+    "source": "frame-zooms/blade-root-traces.png + side-envelope arc fits (f0077/f0078, blade@80° both sides, blade@207° lower side; 6 sides, 4 clean)",
+    "units": "x along the blade axis / R -> half-width / R",
+    "halfWidth": {
+      "0.50": 0.39901152439126597,
+      "0.55": 0.38136898914838385,
+      "0.60": 0.37169403606875695,
+      "0.65": 0.3332976605012238,
+      "0.70": 0.30515236576888616,
+      "0.75": 0.26983391264924095,
+      "0.80": 0.2307248698796982,
+      "0.85": 0.1902864184733108,
+      "0.90": 0.14602443738111925,
+      "0.95": 0.07899435498387634,
+      "1.00": 0.031157131092112537
+    },
+    "rootAtCap": {
+      "capRadiusToR": 0.485,
+      "edgeMeetsCapAtPolarDeg": 52,
+      "edgeMeetsCapAtPolarRange": [
+        51,
+        53
+      ],
+      "notchSides": "the convex side arcs with a short inward root blend; no radial notch, no shoulder; adjacent blades do not touch",
+      "exposedCapArcPerNotchDeg": 16
+    },
+    "tipCornerRadiusToR": 0.03,
+    "confidence": "high (form) / medium (absolute ±0.02 R)",
+    "parametric": {
+      "model": "three blades; each side is a convex circular arc; near the root the arc blends inward (R≈0.15 R) and ENDS on the cap circle at polar ≈52°; adjacent blades do not touch — the cap is exposed over ≈16° per notch; small tip fillet",
+      "sideArcRadiusToR": 1.367,
+      "sideArcCentreToR": [
+        0.0,
+        -0.92
+      ],
+      "tipFilletRadiusToR": 0.03,
+      "tipFilletCentreToR": [
+        0.97,
+        0.0
+      ],
+      "tipIncludedAngleDeg": 90,
+      "fitVsCleanSides": {
+        "0.50": [
+          0.352,
+          0.35
+        ],
+        "0.70": [
+          0.254,
+          0.251
+        ],
+        "0.90": [
+          0.109,
+          0.108
+        ],
+        "note": "[model, mean of 4 clean sides]"
+      },
+      "confidence": "high for the arc form; ±0.02 R absolute because the rectified tips spread 0.93-1.08 R between blades",
+      "superseded": {
+        "v4v5": {
+          "model": "equilateral triangle plate with rounded corners and three radial notch sectors",
+          "virtualVertexRadiusToR": 1.212,
+          "sideDistanceFromCentreToR": 0.606,
+          "sideAngleToBladeAxisDeg": 30.0,
+          "cornerArcRadiusToR": 0.212,
+          "cornerArcSpanDeg": 120.0,
+          "cornerApexOnTipCircle": true,
+          "notchSides": "radial, at polar ±39° from each blade axis (sector 42° centred on each bisector)",
+          "notchBottom": "cap circle r=0.485 R (crown + skirt exposed)",
+          "shoulderRadiusToR": 0.64,
+          "fitResiduals": {
+            "0.50": 0.012,
+            "0.55": 0.001,
+            "0.60": -0.018,
+            "0.65": -0.009,
+            "0.70": -0.009,
+            "0.75": -0.003,
+            "0.80": 0.007,
+            "0.85": 0.019
+          },
+          "note": "Fitted on x=0.50-0.85 of the measured half-width profile; the x≥0.90 points read narrower than the arc because the dark tip bevels fall below the silhouette threshold. User 2026-09-06 08:10: tips are broad arcs (~circle curvature) and the two lower blades' bottom edges are nearly collinear/parallel — both properties of this model.",
+          "confidence": "medium",
+          "shoulderFilletRadiusToR": 0.09,
+          "shoulderFilletNote": "User 2026-09-06 20:41 (screenshot of CAD v4 shoulder): the corner where the radial notch side meets the straight side is not that prominent; filleted with ≈0.09 R (visual estimate from f0038/f0077, low-medium confidence)."
+        },
+        "reason": "User 2026-09-06 20:46 (screenshot of CAD v5 + f0148/f0134 red circles): the transition must hug the centre circle with an acute corner; the slanted edge is an arc, not a straight line with a corner. Traces confirm convex arcs reaching the cap.",
+        "v6": {
+          "model": "three blades; each side is a convex circular arc; adjacent blades' arcs meet on the bisector just outside the cap circle; small tip fillet",
+          "arcMeetsCapAtPolarDeg": 62.0,
+          "arcToCapCrossingAngleDeg": 18.4,
+          "notchApexOnBisectorR": 0.4905,
+          "notchVInteriorAngleDeg": 140.6,
+          "reason": "User 2026-09-07 07:53 (red arrow on CAD v6 notch): the two blades are separated by a gap, they must not connect. Root traces: edges end on the cap circle at polar 51–53°, cap exposed ≈16°."
+        }
+      },
+      "rootBlend": {
+        "startX": 0.4,
+        "startPolarDeg": 44.1,
+        "radiusToR": 0.15,
+        "centreToR": [
+          0.356,
+          0.244
+        ],
+        "meetsCapAtPolarDeg": 52.0,
+        "meetsCapAtPolarRange": [
+          51,
+          53
+        ],
+        "angleToCapTangentDeg": 61.0,
+        "exposedCapArcPerNotchDeg": 16.0,
+        "evidence": "all 4 clean sides reach r=1.00 cap at x≈0.31 (polar 51–53°) and then follow the cap circle to ≥62° (frame-zooms/blade-root-traces.png, root table 2026-09-07); user 2026-09-07 07:53 '这个部分是有些间隔的，不需要连接在一起'"
+      },
+      "rootHalfWidthAtCapToR": 0.382,
+      "widestHalfWidthToR": {
+        "x": 0.4,
+        "halfWidth": 0.387
+      }
+    },
+    "tipCornerRadiusToR_previous": 0.085,
+    "sideEnvelope": {
+      "units": "x along blade axis / that blade's tip radius -> outer half-width (max of boundary in ±0.01 bin)",
+      "sides": [
+        "f77 b80 upper",
+        "f77 b80 lower",
+        "f77 b207 lower",
+        "f78 b80 upper",
+        "f78 b80 lower",
+        "f78 b207 lower"
+      ],
+      "x": [
+        0.35,
+        0.4,
+        0.45,
+        0.5,
+        0.55,
+        0.6,
+        0.65,
+        0.7,
+        0.75,
+        0.8,
+        0.85,
+        0.9,
+        0.95,
+        0.99
+      ],
+      "mean": [
+        0.395,
+        0.383,
+        0.39,
+        0.371,
+        0.348,
+        0.324,
+        0.298,
+        0.267,
+        0.234,
+        0.198,
+        0.159,
+        0.117,
+        0.065,
+        0.024
+      ],
+      "std": [
+        0.015,
+        0.015,
+        0.033,
+        0.032,
+        0.029,
+        0.026,
+        0.027,
+        0.024,
+        0.02,
+        0.017,
+        0.016,
+        0.014,
+        0.006,
+        0.002
+      ],
+      "perSide": [
+        [
+          0.409,
+          0.396,
+          0.38,
+          0.361,
+          0.34,
+          0.316,
+          0.289,
+          0.261,
+          0.227,
+          0.192,
+          0.153,
+          0.114,
+          0.064,
+          0.023
+        ],
+        [
+          null,
+          null,
+          0.433,
+          0.412,
+          0.382,
+          0.357,
+          0.331,
+          0.298,
+          0.258,
+          0.221,
+          0.18,
+          0.136,
+          0.072,
+          0.026
+        ],
+        [
+          0.381,
+          0.368,
+          0.355,
+          0.339,
+          0.316,
+          0.297,
+          0.27,
+          0.241,
+          0.213,
+          0.181,
+          0.143,
+          0.106,
+          0.059,
+          0.022
+        ],
+        [
+          0.412,
+          0.399,
+          0.383,
+          0.364,
+          0.34,
+          0.318,
+          0.29,
+          0.259,
+          0.23,
+          0.191,
+          0.152,
+          0.108,
+          0.061,
+          0.02
+        ],
+        [
+          null,
+          null,
+          0.436,
+          0.415,
+          0.39,
+          0.36,
+          0.338,
+          0.301,
+          0.264,
+          0.223,
+          0.182,
+          0.137,
+          0.073,
+          0.027
+        ],
+        [
+          0.379,
+          0.367,
+          0.354,
+          0.336,
+          0.317,
+          0.295,
+          0.272,
+          0.244,
+          0.214,
+          0.181,
+          0.144,
+          0.104,
+          0.06,
+          0.024
+        ]
+      ],
+      "arcFits": [
+        {
+          "frame": 77,
+          "bladeDeg": 80,
+          "side": "upper",
+          "capToTip": 0.518,
+          "arcCentre": [
+            -0.017,
+            -0.913
+          ],
+          "arcRadius": 1.375,
+          "rms": 0.0008
+        },
+        {
+          "frame": 77,
+          "bladeDeg": 80,
+          "side": "lower",
+          "capToTip": 0.518,
+          "arcCentre": [
+            -0.017,
+            -0.76
+          ],
+          "arcRadius": 1.277,
+          "rms": 0.0023
+        },
+        {
+          "frame": 77,
+          "bladeDeg": 207,
+          "side": "lower",
+          "capToTip": 0.49,
+          "arcCentre": [
+            -0.011,
+            -0.993
+          ],
+          "arcRadius": 1.426,
+          "rms": 0.001
+        },
+        {
+          "frame": 78,
+          "bladeDeg": 80,
+          "side": "upper",
+          "capToTip": 0.522,
+          "arcCentre": [
+            -0.026,
+            -0.907
+          ],
+          "arcRadius": 1.374,
+          "rms": 0.0009
+        },
+        {
+          "frame": 78,
+          "bladeDeg": 80,
+          "side": "lower",
+          "capToTip": 0.522,
+          "arcCentre": [
+            -0.004,
+            -0.729
+          ],
+          "arcRadius": 1.248,
+          "rms": 0.0021
+        },
+        {
+          "frame": 78,
+          "bladeDeg": 207,
+          "side": "lower",
+          "capToTip": 0.488,
+          "arcCentre": [
+            0.041,
+            -0.917
+          ],
+          "arcRadius": 1.335,
+          "rms": 0.0006
+        }
+      ]
+    }
+  },
+  "revisionNote": "2026-09-06 08:xx: planform re-measured (blades wider, edges convex, tip corner ≈0.085 R); pocket described as milled flat-floor recess. Supersedes the 67°-straight-edge reading in v1/v2 CAD. | 08:10: planform = rounded equilateral triangle + radial notches (corner arc 0.23 R); v3's 0.085 R corner superseded. | 20:41: shoulder corner filleted 0.09 R (v5). | 20:46 (v6): sides are convex arcs R≈1.37 R meeting on the cap circle (no shoulder, acute crescent ≈18°); tip fillet 0.03 R; crown ring 14 wedges/28 triangles (24 superseded); skirt 14 scales × 2 rows; disc = turned concave thumb dish (user-stated), rim = crest. | 2026-09-07 07:53 (v7): adjacent blades do not connect — each edge blends (R≈0.15 R) into the cap circle at polar 52°, exposed cap ≈16° per notch; v6 V-apex superseded. | 2026-09-07 08:25 (v8): disc = 14 equal planar sectors from the centre (concave 14-gon pyramid, rim 14-gon aligned with crown); dish slope provisional 3° (video bound ≤2°). | 2026-09-07 08:39 (v9): blade top = Y-shaped raised ridge (stem to x 0.72, arms along the pocket flanks to the cap at ±38°), crest rise provisional 0.025 R; flat-plateau D04 superseded. | 2026-09-07 09:36 (v10): cap edge = three tiers plane->vertical (crown green 20°, skirt red 45°, skirt blue 75°, provisional) per user outlines located on f0132; blade-edge D05/D06 unchanged; C-C redrawn legibly with cut lines on the plan. | 2026-09-07 10:40 (v11): D05 = multi-row (3 provisional) dragon-scale transition on every blade edge, same construction as the cap edge; D06 wall 0.30×t provisional; shaded relief rebuilt with explicit planar scale facets (no EDT ripple). | 2026-09-07 10:55 (v12): D05 = 2 rows × 4-5 LARGE scales per edge (≈0.18 R long; 22°/55° provisional) after the user said each scale must be larger; D06 wall recomputed. | 2026-09-07 10:55 (v13): D05 rows 35°/62° so both rows span the half thickness; D06 wall -> ~0 (steep row 2 is the vertical face). | 2026-09-07 11:10 (relief v14): scales are independent planar facets with hard creases and a V zigzag row boundary (user: 硬朗一点). | v15 (2026-09-07 11:47): D04 mesa (no valleys beside the Y junction), D05 kite/Λ interlocking facets with one deep zigzag | v16 (2026-09-07 13:27): D04 = lower envelope of hard-cut planes T/F/C per half (creases from the user's f0132 drawing) | v17 (2026-09-07 14:01): D05 wide multi-gradient transition (tier A 0.09 R 14° + kite/Λ), D08 funnel pocket with deeper stepped floor and rounded corners | v17b (14:25): D08 true circular fillets in plan and section | v18 (2026-09-07 18:33): D03/D09 cap overhangs a recessed hub seat (user) | v19 (2026-09-07 19:42): D01 dish 5° provisional, sector crease highlight + ±0.5° alternate tilt for slice visibility | 2026-09-07 22:51 v20: D01 dish 8° + disc 0.80 cap; D02/D03 skirt rows 0.07@50° / 0.04@72° (taller, wider), crown 0.09@18°, cap side 0.16 R, hub seat 0.0456 R; D09 seam height follows | 2026-09-08 13:21 v21: kinematic split — static hub core r 0.41 R through a rotor bore r 0.425 R (gap 0.015 R), cap overhang 0.075 R; rotor = blades + ≥0.06 R connecting ring; caps + hub static"
+}

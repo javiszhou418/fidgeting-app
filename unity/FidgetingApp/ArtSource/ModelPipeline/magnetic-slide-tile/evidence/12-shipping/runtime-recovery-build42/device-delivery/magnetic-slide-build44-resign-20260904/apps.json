@@ -1,0 +1,93 @@
+{
+  "info" : {
+    "arguments" : [
+      "devicectl",
+      "device",
+      "info",
+      "apps",
+      "--device",
+      "00008130-001A00361EE0001C",
+      "--json-output",
+      "/Users/jiawei.zhou/Documents/Fidgeting app/unity/FidgetingApp/ArtSource/ModelPipeline/magnetic-slide-tile/evidence/12-shipping/runtime-recovery-build42/device-delivery/magnetic-slide-build44-resign-20260904/apps.json"
+    ],
+    "commandType" : "devicectl.device.info.apps",
+    "environment" : {
+      "TERM" : "dumb"
+    },
+    "jsonVersion" : 3,
+    "outcome" : "success",
+    "version" : "518.27"
+  },
+  "result" : {
+    "apps" : [
+      {
+        "appClip" : false,
+        "builtByDeveloper" : true,
+        "bundleIdentifier" : "com.airbnb.app",
+        "bundleVersion" : "204882",
+        "defaultApp" : false,
+        "hidden" : false,
+        "internalApp" : false,
+        "name" : "Airbnb",
+        "removable" : true,
+        "url" : "file:///private/var/containers/Bundle/Application/2F3E4100-CF9B-4A24-AABE-F4381230D85D/Airbnb.app/",
+        "version" : "26.36"
+      },
+      {
+        "appClip" : false,
+        "builtByDeveloper" : true,
+        "bundleIdentifier" : "host.exp.Exponent",
+        "bundleVersion" : "1017871",
+        "defaultApp" : false,
+        "hidden" : false,
+        "internalApp" : false,
+        "name" : "Expo Go",
+        "removable" : true,
+        "url" : "file:///private/var/containers/Bundle/Application/EB51BDA2-490C-43F6-9DA3-135F19220AE3/Expo%20Go.app/",
+        "version" : "57.0.5"
+      },
+      {
+        "appClip" : false,
+        "builtByDeveloper" : true,
+        "bundleIdentifier" : "com.jiaweizhou.fidgetclaude",
+        "defaultApp" : false,
+        "hidden" : false,
+        "internalApp" : false,
+        "name" : "Fidget Claude",
+        "removable" : true,
+        "url" : "file:///private/var/containers/Bundle/Application/C37F85A3-6931-4C16-8852-5C155F805B21/SpinnerTwin.app/"
+      },
+      {
+        "appClip" : false,
+        "builtByDeveloper" : true,
+        "bundleIdentifier" : "com.jiaweizhou.fidgetspinner.codex",
+        "bundleVersion" : "44",
+        "defaultApp" : false,
+        "hidden" : false,
+        "internalApp" : false,
+        "name" : "Fidget Spinner",
+        "removable" : true,
+        "url" : "file:///private/var/containers/Bundle/Application/42BAAC1C-0A8D-4637-9562-547FA9A1F92F/FidgetSpinner.app/",
+        "version" : "0.1.0"
+      },
+      {
+        "appClip" : false,
+        "builtByDeveloper" : true,
+        "bundleIdentifier" : "com.whatnot",
+        "bundleVersion" : "99",
+        "defaultApp" : false,
+        "hidden" : false,
+        "internalApp" : false,
+        "name" : "Whatnot",
+        "removable" : true,
+        "url" : "file:///private/var/containers/Bundle/Application/B2C185A1-25A0-4129-BD93-B6293BDA98CD/Whatnot.app/",
+        "version" : "26.35.0"
+      }
+    ],
+    "defaultAppsIncluded" : false,
+    "deviceIdentifier" : "556E86BF-7295-5622-AA58-02DF84A8E93F",
+    "hiddenAppsIncluded" : false,
+    "internalAppsIncluded" : false,
+    "removableAppsIncluded" : true
+  }
+}

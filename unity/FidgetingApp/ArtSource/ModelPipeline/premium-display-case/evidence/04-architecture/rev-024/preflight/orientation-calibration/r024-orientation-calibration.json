@@ -1,0 +1,74 @@
+{
+    "schema": "premium-display-case-gate04-r024-orientation-calibration.v1",
+    "sourceArtwork": "Assets/Source/Pack/gacha-pack-standard-body.png",
+    "sourceCanvasWidth": 384,
+    "sourceCanvasHeight": 512,
+    "calibrationWidth": 768,
+    "calibrationHeight": 1024,
+    "background": "neutral-unlit-rgb-46-48-52",
+    "minimumIdentityMargin": 0.012500000186264515,
+    "r024": {
+        "id": "R024",
+        "capturePath": "r024-pack-artwork.png",
+        "stateSetFrame": 2,
+        "renderedAfterFrame": 3,
+        "frontFaceCameraFacing": true,
+        "comparedPixels": 410240,
+        "visiblePixels": 409992,
+        "scores": [
+            {
+                "transform": "Identity",
+                "score": 0.9842247366905212
+            },
+            {
+                "transform": "HorizontalFlip",
+                "score": 0.9076537489891052
+            },
+            {
+                "transform": "VerticalFlip",
+                "score": 0.8954966068267822
+            },
+            {
+                "transform": "Rotate180",
+                "score": 0.8575043082237244
+            }
+        ],
+        "winner": "Identity",
+        "winnerMargin": 0.07657098770141602,
+        "identityMargin": 0.07657098770141602,
+        "identityWins": true
+    },
+    "r017Control": {
+        "id": "R017-control",
+        "capturePath": "r017-mirror-control.png",
+        "stateSetFrame": 3,
+        "renderedAfterFrame": 4,
+        "frontFaceCameraFacing": true,
+        "comparedPixels": 410240,
+        "visiblePixels": 409986,
+        "scores": [
+            {
+                "transform": "Identity",
+                "score": 0.9076410531997681
+            },
+            {
+                "transform": "HorizontalFlip",
+                "score": 0.98424232006073
+            },
+            {
+                "transform": "VerticalFlip",
+                "score": 0.8575564622879028
+            },
+            {
+                "transform": "Rotate180",
+                "score": 0.8955271244049072
+            }
+        ],
+        "winner": "HorizontalFlip",
+        "winnerMargin": 0.07660126686096192,
+        "identityMargin": -0.07660126686096192,
+        "identityWins": false
+    },
+    "r017MirrorRegressionObserved": true,
+    "passed": true
+}

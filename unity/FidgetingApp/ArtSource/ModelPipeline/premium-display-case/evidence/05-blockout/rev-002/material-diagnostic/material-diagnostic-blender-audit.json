@@ -1,0 +1,379 @@
+{
+  "schemaVersion": 1,
+  "modelId": "premium-display-case",
+  "gate": "05-blockout",
+  "blockoutRevision": 2,
+  "evidenceClass": "supplementary-material-diagnostic",
+  "status": "pass",
+  "notice": "DIAGNOSTIC MATERIAL PROXY · NOT GATE 07 APPROVAL",
+  "approvalEffect": "none-not-gate07-material-approval",
+  "geometryDigest": "6656ebb6f9003092d2d771a774ec006683347e01c4f12d0c994cc66fc603877f",
+  "boundsMm": {
+    "width": 228.0,
+    "height": 304.0,
+    "depth": 59.0
+  },
+  "labelCenterYmm": 99.0,
+  "maximumCornerCenterDriftMm": 0.0,
+  "openBoundaryEdgeCount": 0,
+  "nonManifoldEdgeCount": 0,
+  "floodFill": {
+    "method": "cyclic-centerline-construction-graph-preflight",
+    "sampleCount": 384,
+    "visitedSamples": 384,
+    "regionsVisited": [
+      "bottom",
+      "bottom-left-bend",
+      "bottom-right-bend",
+      "left",
+      "right",
+      "top",
+      "top-left-bend",
+      "top-right-bend"
+    ],
+    "expectedRegions": [
+      "bottom",
+      "bottom-left-bend",
+      "bottom-right-bend",
+      "left",
+      "right",
+      "top",
+      "top-left-bend",
+      "top-right-bend"
+    ],
+    "pass": true,
+    "gateBoundary": "Construction preflight; exported volumetric flow remains Gate 06."
+  },
+  "materialAssignments": {
+    "RearPolycarbonateShell": "MAT_FrostedPolycarbonate",
+    "FrontPolycarbonateShell": "MAT_FrostedPolycarbonate",
+    "ContinuousTubePerimeter": "MAT_FrostedPolycarbonateEdge",
+    "TactileBackgroundInsert": "MAT_BlackFlocking",
+    "PhysicalLabel": "MAT_LabelPaper"
+  },
+  "materialValues": {
+    "MAT_FrostedPolycarbonate": {
+      "Base Color": [
+        0.6100000143051147,
+        0.6499999761581421,
+        0.6800000071525574,
+        0.10000000149011612
+      ],
+      "Metallic": 0.0,
+      "Roughness": 0.2199999988079071,
+      "Transmission Weight": 0.9200000166893005,
+      "IOR": 1.5850000381469727,
+      "Alpha": 0.10000000149011612,
+      "Emission Strength": 0.0
+    },
+    "MAT_FrostedPolycarbonateEdge": {
+      "Base Color": [
+        0.7200000286102295,
+        0.75,
+        0.7699999809265137,
+        0.20999999344348907
+      ],
+      "Metallic": 0.0,
+      "Roughness": 0.18000000715255737,
+      "Transmission Weight": 0.7799999713897705,
+      "IOR": 1.5850000381469727,
+      "Alpha": 0.20999999344348907,
+      "Emission Strength": 0.0
+    },
+    "MAT_BlackFlocking": {
+      "Base Color": [
+        0.008999999612569809,
+        0.010999999940395355,
+        0.014000000432133675,
+        1.0
+      ],
+      "Metallic": 0.0,
+      "Roughness": 0.9100000262260437,
+      "Transmission Weight": 0.0,
+      "Emission Strength": 0.0
+    },
+    "MAT_RarityFoilSilver": {
+      "Base Color": [
+        0.5799999833106995,
+        0.6200000047683716,
+        0.6600000262260437,
+        1.0
+      ],
+      "Metallic": 0.9599999785423279,
+      "Roughness": 0.30000001192092896,
+      "Transmission Weight": 0.0,
+      "Emission Strength": 0.0
+    },
+    "MAT_LabelPaper": {
+      "Base Color": [
+        0.7400000095367432,
+        0.7200000286102295,
+        0.6800000071525574,
+        1.0
+      ],
+      "Metallic": 0.0,
+      "Roughness": 0.7300000190734863,
+      "Transmission Weight": 0.0,
+      "Emission Strength": 0.0
+    },
+    "MAT_LabelGraphite": {
+      "Base Color": [
+        0.054999999701976776,
+        0.05999999865889549,
+        0.06599999964237213,
+        1.0
+      ],
+      "Metallic": 0.2199999988079071,
+      "Roughness": 0.5199999809265137,
+      "Transmission Weight": 0.0,
+      "Emission Strength": 0.0
+    }
+  },
+  "materialImageTextureNodes": {
+    "MAT_FrostedPolycarbonate": [],
+    "MAT_FrostedPolycarbonateEdge": [],
+    "MAT_BlackFlocking": [],
+    "MAT_RarityFoilSilver": [],
+    "MAT_LabelPaper": [],
+    "MAT_LabelGraphite": []
+  },
+  "transparentOrdering": {
+    "labelZmm": [
+      22.5,
+      25.5
+    ],
+    "foilZmm": [
+      26.200000762939453,
+      26.200000762939453
+    ],
+    "printZmm": [
+      26.360000610351562,
+      26.360000610351562
+    ],
+    "coverZmm": [
+      26.6200008392334,
+      26.6200008392334
+    ],
+    "pass": true
+  },
+  "proxyObjects": [
+    {
+      "name": "DIAGNOSTIC_NarrowFoilProxy",
+      "type": "MESH",
+      "kind": "zero-thickness-existing-narrow-foil-material-zone",
+      "gate05SubjectGeometry": false,
+      "gate07ApprovalEligible": false
+    },
+    {
+      "name": "DIAGNOSTIC_IdentityPlaceholder",
+      "type": "MESH",
+      "kind": "neutral-identity-placeholder-area",
+      "gate05SubjectGeometry": false,
+      "gate07ApprovalEligible": false
+    },
+    {
+      "name": "DIAGNOSTIC_AchievementPlaceholder",
+      "type": "MESH",
+      "kind": "neutral-achievement-placeholder-area",
+      "gate05SubjectGeometry": false,
+      "gate07ApprovalEligible": false
+    },
+    {
+      "name": "DIAGNOSTIC_LabelPrimary",
+      "type": "FONT",
+      "kind": "neutral-label-print-placeholder",
+      "gate05SubjectGeometry": false,
+      "gate07ApprovalEligible": false
+    },
+    {
+      "name": "DIAGNOSTIC_LabelSecondary",
+      "type": "FONT",
+      "kind": "neutral-label-print-placeholder",
+      "gate05SubjectGeometry": false,
+      "gate07ApprovalEligible": false
+    },
+    {
+      "name": "DIAGNOSTIC_NeutralPrintBarPrimary",
+      "type": "MESH",
+      "kind": "neutral-label-print-bar",
+      "gate05SubjectGeometry": false,
+      "gate07ApprovalEligible": false
+    },
+    {
+      "name": "DIAGNOSTIC_NeutralPrintBarSecondary",
+      "type": "MESH",
+      "kind": "neutral-label-print-bar",
+      "gate05SubjectGeometry": false,
+      "gate07ApprovalEligible": false
+    },
+    {
+      "name": "DIAGNOSTIC_NeutralPrintBarMetadata",
+      "type": "MESH",
+      "kind": "neutral-label-print-bar",
+      "gate05SubjectGeometry": false,
+      "gate07ApprovalEligible": false
+    },
+    {
+      "name": "DIAGNOSTIC_IdentityAreaText",
+      "type": "FONT",
+      "kind": "neutral-label-print-placeholder",
+      "gate05SubjectGeometry": false,
+      "gate07ApprovalEligible": false
+    },
+    {
+      "name": "DIAGNOSTIC_AchievementAreaText",
+      "type": "FONT",
+      "kind": "neutral-label-print-placeholder",
+      "gate05SubjectGeometry": false,
+      "gate07ApprovalEligible": false
+    },
+    {
+      "name": "DIAGNOSTIC_TransparentCoverProxy",
+      "type": "MESH",
+      "kind": "zero-thickness-existing-transparent-cover-contour",
+      "gate05SubjectGeometry": false,
+      "gate07ApprovalEligible": false
+    }
+  ],
+  "proxyMeshCount": 7,
+  "lights": {
+    "key": {
+      "name": "DIAGNOSTIC_Key_5000K",
+      "energy": 1800000.0,
+      "color": [
+        1.0,
+        0.9649999737739563,
+        0.9300000071525574
+      ],
+      "chroma": 0.06999999284744263,
+      "rarityLight": false
+    },
+    "fill": {
+      "name": "DIAGNOSTIC_Fill_6200K",
+      "energy": 850000.0,
+      "color": [
+        0.9449999928474426,
+        0.9649999737739563,
+        1.0
+      ],
+      "chroma": 0.05500000715255737,
+      "rarityLight": false
+    },
+    "rim": {
+      "name": "DIAGNOSTIC_Rim_5600K",
+      "energy": 550000.0,
+      "color": [
+        0.9649999737739563,
+        0.9800000190734863,
+        1.0
+      ],
+      "chroma": 0.0350000262260437,
+      "rarityLight": false
+    }
+  },
+  "world": {
+    "backgroundContract": "continuous-low-saturation-fine-matte-world-no-local-mask-no-image-texture",
+    "nodeTypes": [
+      "ShaderNodeBackground",
+      "ShaderNodeOutputWorld",
+      "ShaderNodeTexCoord",
+      "ShaderNodeTexNoise",
+      "ShaderNodeValToRGB"
+    ],
+    "imageTextureNodes": [],
+    "emissionNodes": []
+  },
+  "forbiddenIdentityHits": [],
+  "sourceFiles": {
+    "gate05Rev2Blockout": {
+      "path": "unity/FidgetingApp/ArtSource/ModelPipeline/premium-display-case/evidence/05-blockout/rev-002/premium-display-case-blockout.blend",
+      "sha256Before": "3f0411e43900e9ff67a8f52ee4af9d630147acb46251985baf8b2a1a06936e31",
+      "sha256After": "3f0411e43900e9ff67a8f52ee4af9d630147acb46251985baf8b2a1a06936e31"
+    },
+    "formalMaterialBlend": {
+      "path": "unity/FidgetingApp/ArtSource/DisplayCase/PremiumDisplayCase.blend",
+      "sha256Before": "e165f6ae0e5da0329a561608752ae6913957ff028ca55ad4ec3f2796de6e6539",
+      "sha256After": "e165f6ae0e5da0329a561608752ae6913957ff028ca55ad4ec3f2796de6e6539"
+    },
+    "formalMaterialRecipe": {
+      "path": "unity/FidgetingApp/ArtSource/DisplayCase/build_premium_display_case.py",
+      "sha256Before": "36addb0c29b0ee0475c820a4f1febc2f6f8acc15080107849f3668b80b87570c",
+      "sha256After": "36addb0c29b0ee0475c820a4f1febc2f6f8acc15080107849f3668b80b87570c"
+    }
+  },
+  "rawViews": {
+    "hero": {
+      "path": "/Users/jiawei.zhou/Documents/Fidgeting app/unity/FidgetingApp/ArtSource/ModelPipeline/premium-display-case/evidence/05-blockout/rev-002/material-diagnostic/raw/hero.png",
+      "sha256": "ba224526f75438752d3ab098bc8ca889f92b635e61615458c81004927ea34592",
+      "sizeBytes": 1165071
+    },
+    "left-oblique": {
+      "path": "/Users/jiawei.zhou/Documents/Fidgeting app/unity/FidgetingApp/ArtSource/ModelPipeline/premium-display-case/evidence/05-blockout/rev-002/material-diagnostic/raw/left-oblique.png",
+      "sha256": "62365f26659e9a78f13502f9b595acb421c86455b6d7f6febe7516c4738b3464",
+      "sizeBytes": 1029172
+    },
+    "right-oblique": {
+      "path": "/Users/jiawei.zhou/Documents/Fidgeting app/unity/FidgetingApp/ArtSource/ModelPipeline/premium-display-case/evidence/05-blockout/rev-002/material-diagnostic/raw/right-oblique.png",
+      "sha256": "f1d837f3dce4d8241d0c8b3a2a95e2e4a46dd5efb5949a3f538d9755d25303be",
+      "sizeBytes": 1035752
+    },
+    "low": {
+      "path": "/Users/jiawei.zhou/Documents/Fidgeting app/unity/FidgetingApp/ArtSource/ModelPipeline/premium-display-case/evidence/05-blockout/rev-002/material-diagnostic/raw/low.png",
+      "sha256": "c32ef7aa163b56ebfa33a006260ea2f01d920d71f7115684983380b265851b0c",
+      "sizeBytes": 1059615
+    },
+    "side": {
+      "path": "/Users/jiawei.zhou/Documents/Fidgeting app/unity/FidgetingApp/ArtSource/ModelPipeline/premium-display-case/evidence/05-blockout/rev-002/material-diagnostic/raw/side.png",
+      "sha256": "8f91c4281458df17e6e2deb017a93bb2d2295ed517d5cb2bca842c955c18a457",
+      "sizeBytes": 1007472
+    },
+    "label-closeup": {
+      "path": "/Users/jiawei.zhou/Documents/Fidgeting app/unity/FidgetingApp/ArtSource/ModelPipeline/premium-display-case/evidence/05-blockout/rev-002/material-diagnostic/raw/label-closeup.png",
+      "sha256": "e750690f105fb71d24abcaf0e0fe077c8eec7715efe282971db8da6c11939834",
+      "sizeBytes": 1179851
+    },
+    "concentric-closeup": {
+      "path": "/Users/jiawei.zhou/Documents/Fidgeting app/unity/FidgetingApp/ArtSource/ModelPipeline/premium-display-case/evidence/05-blockout/rev-002/material-diagnostic/raw/concentric-closeup.png",
+      "sha256": "b9fcdfe4fb140e3285161c1a83be89156d7b21bf31684dc41b96bdcdcf5a8cde",
+      "sizeBytes": 1046507
+    },
+    "clay-hero-same-camera": {
+      "path": "/Users/jiawei.zhou/Documents/Fidgeting app/unity/FidgetingApp/ArtSource/ModelPipeline/premium-display-case/evidence/05-blockout/rev-002/material-diagnostic/raw/clay-hero-same-camera.png",
+      "sha256": "0469244afd0c4d87bb7588bb564f42eba913eb876a05b66145efea8fdb66609b",
+      "sizeBytes": 1154802
+    }
+  },
+  "checks": {
+    "buildReportPassed": true,
+    "diagnosticNoticeExact": true,
+    "geometryDigestUnchanged": true,
+    "boundsUnchanged": true,
+    "labelCenterYUnchanged": true,
+    "concentricErrorUnchanged": true,
+    "allSubjectSurfacesManifold": true,
+    "tubeManifold": true,
+    "tubeFloodFill": true,
+    "formalMaterialAssignmentsExact": true,
+    "formalPbrValuesExact": true,
+    "formalMaterialsNoEmission": true,
+    "formalMaterialsContainNoImageTextures": true,
+    "transparentLayerOrdering": true,
+    "transparentCoverSourceNodeStillEmpty": true,
+    "proxySurfacesExcludedFromGate05Digest": true,
+    "zeroThicknessCoverAndFoil": true,
+    "neutralKeyFillRimOnly": true,
+    "keyFillRimRatiosInContract": true,
+    "continuousMatteWorldNoLocalMasks": true,
+    "noForbiddenReferenceIdentity": true,
+    "neutralIdentityPlaceholdersOnly": true,
+    "sourceFilesUnchanged": true,
+    "rawViewsPresent": true,
+    "gate05StatusPreserved": true,
+    "gate06And07RemainBlocked": true,
+    "shippingUnityUnchanged": true,
+    "noBuildInstallPhonePush": true
+  },
+  "blender": "5.2.0 LTS",
+  "sourceBlend": "/Users/jiawei.zhou/Documents/Fidgeting app/unity/FidgetingApp/ArtSource/ModelPipeline/premium-display-case/evidence/05-blockout/rev-002/material-diagnostic/premium-display-case-gate05-r2-material-diagnostic.blend",
+  "sourceBlendSha256": "d9ad7b4b94ee4ea05ff31a4d310797c71faafb1c91a81e165b77c3b98e679852"
+}

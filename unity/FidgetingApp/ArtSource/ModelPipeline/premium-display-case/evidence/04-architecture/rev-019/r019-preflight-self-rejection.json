@@ -1,0 +1,77 @@
+{
+  "schema": "premium-display-case-gate04-r019-preflight-self-rejection.v1",
+  "outcome": "self-rejected",
+  "reviewedAt": "2026-08-31T09:25:46.108Z",
+  "failedCondition": {
+    "id": "formed-mouth-liner-and-cavity-separate",
+    "evidence": "At t=0.700, the full-resolution material-ID capture has visibleCavityPixels=0; the required minimum is 128.",
+    "report": {
+      "path": "unity/FidgetingApp/ArtSource/ModelPipeline/premium-display-case/evidence/04-architecture/rev-019/r019-preflight-report.json",
+      "sha256": "138413385db74f94357236a28ea79091bc81bba6ba53ec6ea97e6ce612a500b6",
+      "sizeBytes": 18320
+    },
+    "result": {
+      "path": "unity/FidgetingApp/ArtSource/ModelPipeline/premium-display-case/evidence/04-architecture/rev-019/r019-preflight-results.xml",
+      "sha256": "f4d44a4066fe7932b8a3a0389e30aba52928d02de8cfeb5499ddc07d35f887d6",
+      "sizeBytes": 1170
+    },
+    "screenshot": {
+      "path": "unity/FidgetingApp/ArtSource/ModelPipeline/premium-display-case/evidence/04-architecture/rev-019/diagnostics/mouth-material-id-070.png",
+      "sha256": "e2ed95f95d636df1da535ff3c360f6af41de4619f3b84cc853b0d4d413a6d4cf",
+      "sizeBytes": 834665
+    }
+  },
+  "passedPhysicalConditions": {
+    "artworkIdentityMargin": 0.07657098770141602,
+    "crimpBottomViewportY": 0.7764211893081665,
+    "archiveTitleTopViewportY": 0.737504780292511,
+    "stripRootViewportX": 0.626983642578125,
+    "frontOcclusionPixels": 4054,
+    "contiguousFrontOcclusionPixels": 4054
+  },
+  "fullSizeBeautyInspection": {
+    "mode": "native-size 1206x2622 Unity frame inspection without resampling",
+    "verdict": "Rejected. The formed-mouth frame does not show a distinct recessed dark cavity behind the silver liner. The contained-case beauty frame does not plainly read as a dark display case held in the upper mouth.",
+    "formedMouth070": {
+      "path": "unity/FidgetingApp/ArtSource/ModelPipeline/premium-display-case/evidence/04-architecture/rev-019/preflight/formed-mouth-070.png",
+      "sha256": "8d29075ba13d9f3820f232487d76610a7f9697cb402aedc2438c78b6f0d1e381",
+      "sizeBytes": 1951338
+    },
+    "containedCase090": {
+      "path": "unity/FidgetingApp/ArtSource/ModelPipeline/premium-display-case/evidence/04-architecture/rev-019/preflight/case-contained-090.png",
+      "sha256": "3b1662a23b3f47cb72b24c2c52b3d6b60cc9d641d789f2750b7106602733ecc6",
+      "sizeBytes": 1947231
+    },
+    "caseVisibleId090": {
+      "path": "unity/FidgetingApp/ArtSource/ModelPipeline/premium-display-case/evidence/04-architecture/rev-019/diagnostics/case-visible-id-090.png",
+      "sha256": "01d45d2be56e02adf5dd33c0a83624bc3cfc08741b450c4b664946ef530d7b31",
+      "sizeBytes": 1897926
+    }
+  },
+  "preservedRejectedEvidence": [
+    {
+      "revision": "R015",
+      "path": "unity/FidgetingApp/ArtSource/ModelPipeline/premium-display-case/evidence/04-architecture/rev-015/self-rejection.json",
+      "sha256": "374739f96ee0966f359e3feff2321958499a8d1aac8e69ff5985ba2d72020841"
+    },
+    {
+      "revision": "R016",
+      "path": "unity/FidgetingApp/ArtSource/ModelPipeline/premium-display-case/evidence/04-architecture/rev-016/self-rejection.json",
+      "sha256": "2d7f69263f38c406e1b4085fecd89e076099e9462c899c19af411a9f535dc299"
+    },
+    {
+      "revision": "R017",
+      "path": "unity/FidgetingApp/ArtSource/ModelPipeline/premium-display-case/evidence/04-architecture/rev-017/r017-scrub-visual-self-rejection.json",
+      "sha256": "4cb87135652baf98d0b08ea5d4f52fa91eec8c442d869099bcf9701ba4dc2fbc"
+    },
+    {
+      "revision": "R018",
+      "path": "unity/FidgetingApp/ArtSource/ModelPipeline/premium-display-case/evidence/04-architecture/rev-018/r018-preflight-self-rejection.json",
+      "sha256": "3e1fa94329ab3ccb50359228aa5ee875a2b2bf08e295ff675952ac61e0e1b630"
+    }
+  ],
+  "stopCondition": "Preflight failed. No scrub, full proof, effect tuning, candidate registration, FDB or implementation-status update, canonical asset change, build, install, or device work ran.",
+  "shippingReady": false,
+  "physicalPhoneInstalled": false,
+  "statusText": "视觉批准待确认，未推送手机"
+}

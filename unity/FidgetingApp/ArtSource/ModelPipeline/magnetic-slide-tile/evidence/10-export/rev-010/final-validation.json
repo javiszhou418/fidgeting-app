@@ -1,0 +1,80 @@
+{
+  "schemaVersion": 1,
+  "gate": "10-export",
+  "revision": 10,
+  "timestamp": "2026-08-31T03:11:38.704Z",
+  "status": "ready_for_review",
+  "pass": true,
+  "source": {
+    "gate09Revision": 9,
+    "gate09ApprovalExactWording": "继续",
+    "blendSha256": "d4d6a9701281e493b4459d3b1f9a9c67382c3d7b22e21632233184276de8ebf2",
+    "geometryDigest": "2fcf6d2b4344511bc6b86ce940a927576f9cdb4988f4022959a3372f4d3c1952",
+    "materialSourceSha256": "8538b4142c9d6b5c89e30e3f915f99a33dfff8eab158db449278d9cca605b10c",
+    "mechanismContractSha256": "9cd7a08f34d7d8dfc3c6f89f6c80a5c5c2dcae48bc0d5c54ebf455a0727ea571",
+    "portabilityContractSha256": "d172c64ce56f89170b9f072e8efe61c3c7e8277235228bac957229ea319ffd13"
+  },
+  "exports": {
+    "authoritativeBlend": {
+      "path": "/Users/jiawei.zhou/Documents/Fidgeting app/unity/FidgetingApp/ArtSource/ModelPipeline/magnetic-slide-tile/evidence/10-export/rev-010/package/magnetic-slide-tile-authoritative-r010.blend",
+      "sha256": "68a1173faa8bc9023ba51a048f50c4a622898a8af72fc75fae6b087b113af11a",
+      "bytes": 1430724
+    },
+    "fbx": {
+      "path": "/Users/jiawei.zhou/Documents/Fidgeting app/unity/FidgetingApp/ArtSource/ModelPipeline/magnetic-slide-tile/evidence/10-export/rev-010/package/magnetic-slide-tile-render-r010.fbx",
+      "sha256": "816ac0a268e06958331fe3a49d5ce5ef234dcb1ae84660253e70a708c4db1222",
+      "bytes": 8779708
+    },
+    "glb": {
+      "path": "/Users/jiawei.zhou/Documents/Fidgeting app/unity/FidgetingApp/ArtSource/ModelPipeline/magnetic-slide-tile/evidence/10-export/rev-010/package/magnetic-slide-tile-render-r010.glb",
+      "sha256": "ca174b340c87e58a6b76aa367baf910650546bc69c5f2794c52aff3268da1100",
+      "bytes": 12200332
+    },
+    "collision": {
+      "path": "/Users/jiawei.zhou/Documents/Fidgeting app/unity/FidgetingApp/ArtSource/ModelPipeline/magnetic-slide-tile/evidence/10-export/rev-010/package/magnetic-slide-tile-collision-r010.fbx",
+      "sha256": "893ccfda54f7b15a3648e5997291340ec1bb027ed0492d5f136eb140ee674813",
+      "bytes": 27292
+    },
+    "exportManifestSha256": "30e41e0d883beee892823f9d2a616d54ed676a9b913ecb65dd31391c522047c4",
+    "glbCounts": {
+      "nodes": 20,
+      "meshes": 8,
+      "materials": 7,
+      "textures": 4,
+      "images": 4,
+      "animations": 0
+    }
+  },
+  "validation": {
+    "blenderBuildAndSourceImmutability": true,
+    "authoritativeBlendAudit": true,
+    "independentFbxGlbCollisionReimport": true,
+    "hierarchyPivotGroovesRaisedBossFlatBottom": true,
+    "materialPartitionsSideAndUndersideArtworkZero": true,
+    "normalsTangentsUvAndClampTransport": true,
+    "texturePixelAndMaskIdentity": true,
+    "environmentAndDisplayPortability": true,
+    "endpointInterlockAndClosedZeroMotion": true,
+    "noAnimationProxyCavityOrStaleOverlapMesh": true,
+    "unityImportAstcPlanOnly": true,
+    "focusedNode": "6/6 pass",
+    "fullNode": "225/226 pass; one unrelated Premium Display Case Gate 04 draft assertion",
+    "browserDesktopMobileGlbModalReloadDeepLink": true,
+    "browserRuntimeExceptions": 0,
+    "browserLoadingFailures": 0,
+    "approvedGate09VideoDecode": "H.264 High yuv420p 1600x600 30 fps 5.0 s; full decode pass",
+    "syntax": "Python compile and Node syntax pass",
+    "xml": "focused and full JUnit XML well formed",
+    "focusedDiff": "pass; unrelated Fan Card whitespace excluded",
+    "pipelineValidators": "single model and all manifests pass"
+  },
+  "scope": {
+    "simulatorUsed": false,
+    "unityImportApplied": false,
+    "unitySceneModified": false,
+    "shippingSceneModified": false,
+    "buildInstallPhone": false,
+    "gate11Advanced": false,
+    "gate12Advanced": false
+  }
+}

@@ -1,0 +1,59 @@
+{
+  "schemaVersion": 1,
+  "gate": "07-material",
+  "materialRevision": 4,
+  "geometryDigest": "85bd7dd237c6822c72e575c9a23085eec9a2f28d7afea3a5bf0f13fdc4ebd90f",
+  "slots": {
+    "Artwork_Upper": {
+      "mask": "artwork-upper-mask.png",
+      "sourceAssetIds": [
+        "slider-intake-obs-frame-01",
+        "slider-intake-haloo-official-03"
+      ],
+      "sourceQuadPixels": [
+        289,
+        530,
+        429,
+        546,
+        466,
+        901,
+        256,
+        873
+      ],
+      "coverage": "full-visible-face",
+      "occludedOrReconstructed": false,
+      "maskSha256": "18776e873271ca757c6d6cf7da5dbcfd390f4de0353cec794d34421f4b318b97"
+    },
+    "Artwork_Lower": {
+      "mask": "artwork-lower-mask.png",
+      "unknownMask": "artwork-lower-occluded-unknown.png",
+      "sourceAssetIds": [
+        "slider-intake-obs-frame-10"
+      ],
+      "sourceQuadPixels": [
+        272,
+        716,
+        439,
+        733,
+        438,
+        884,
+        274,
+        871
+      ],
+      "coverage": "source-visible-open-end-only",
+      "occludedOrReconstructed": true,
+      "policy": "The source-visible exposed end is traced. The region hidden under the upper shell remains explicitly unknown and receives no invented motif.",
+      "maskSha256": "7862f2106e57660113ebe86b44124adf5686eb5e7a95efb742411ff67cdb2236",
+      "unknownMaskSha256": "c7d632dcb3061f86e7ef4a2462a445c8158e3c40e0f4bbea9fca97468128457d"
+    }
+  },
+  "editableControls": [
+    "maskPath",
+    "darkFillColor",
+    "mixFactor",
+    "etchBumpStrength",
+    "etchDepthIllusionMm",
+    "roughnessDelta"
+  ],
+  "swapContract": "Each slot points to an external repository-relative mask and can be replaced without changing mesh data."
+}

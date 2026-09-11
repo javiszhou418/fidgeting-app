@@ -1,0 +1,798 @@
+{
+  "schemaVersion": 1,
+  "gate": "10-export",
+  "revision": 11,
+  "pass": true,
+  "sourceRejectedGlb": {
+    "path": "/Users/jiawei.zhou/Documents/Fidgeting app/unity/FidgetingApp/ArtSource/ModelPipeline/magnetic-slide-tile/evidence/10-export/rev-010/package/magnetic-slide-tile-render-r010.glb",
+    "sha256": "ca174b340c87e58a6b76aa367baf910650546bc69c5f2794c52aff3268da1100"
+  },
+  "rootCauseInputs": {
+    "rev10SpecularColorFactor": [
+      1.159999966621399,
+      1.159999966621399,
+      1.159999966621399
+    ],
+    "rev10TransmissionFactor": 0.07999999821186066,
+    "rev10ClearcoatFactor": 0.47999998927116394,
+    "rev10BlenderReimportPreviewLights": {
+      "keyWatts": 75,
+      "fillWatts": 42,
+      "distanceMetersApprox": 0.1
+    },
+    "rev10Viewer": {
+      "hemisphere": 2.2,
+      "key": 3.2,
+      "fill": 1.1,
+      "rim": 1.4,
+      "persistedExposureRange": [
+        0.5,
+        2.0
+      ],
+      "realHdrLoaded": false
+    }
+  },
+  "diagnosis": {
+    "baseColorTexture": "Deep blood-red and black source pixels are correct.",
+    "metallicRoughness": "Roughness is correctly packed in glTF G and treated as linear data.",
+    "emission": "Zero; not a washout source.",
+    "alpha": "Source is opaque; rev 11 makes OPAQUE explicit.",
+    "proceduralConversion": "Blender procedural bump/film cannot transfer exactly; rev 11 uses explicit baked baseColor and tangent normal.",
+    "glbMaterialFactors": "Rev 10 exported specularColorFactor 1.16 and transmission 0.08. Rev 11 bounds specular and removes transmission.",
+    "blenderReimportPreview": "Rev 10 evidence used 75 W + 42 W area lights about 0.10 m from a meter-scale import, causing the attached white board.",
+    "threeViewer": "Rev 10 used additive high-intensity lights and inherited exposure up to 2.0 without loading the approved HDR. Rev 11 requires neutral HDR and asset-specific exposure.",
+    "rootCause": "Both preview calibration and unbounded/unsupported portable material extensions; geometry, UVs, partitions, deep-red pixels, and emission were not the cause."
+  },
+  "beforeMaterials": {
+    "M07R13_BallCandidateUnknownMaterial": {
+      "pbrMetallicRoughness": {
+        "baseColorFactor": [
+          0.3,
+          0.31,
+          0.32,
+          1.0
+        ],
+        "metallicFactor": 0.1,
+        "roughnessFactor": 0.3
+      },
+      "extensions": {
+        "KHR_materials_clearcoat": {
+          "clearcoatFactor": 0.15000000596046448,
+          "clearcoatRoughnessFactor": 0.054999999701976776
+        }
+      },
+      "emissiveFactor": [
+        0,
+        0,
+        0
+      ],
+      "alphaMode": "OPAQUE",
+      "doubleSided": true
+    },
+    "M07R13_NeutralUnderside": {
+      "pbrMetallicRoughness": {
+        "baseColorFactor": [
+          0.14,
+          0.16,
+          0.18,
+          1.0
+        ],
+        "metallicFactor": 0.35,
+        "roughnessFactor": 0.34
+      },
+      "extensions": {
+        "KHR_materials_clearcoat": {
+          "clearcoatFactor": 0.10000000149011612,
+          "clearcoatRoughnessFactor": 0.0625
+        }
+      },
+      "emissiveFactor": [
+        0,
+        0,
+        0
+      ],
+      "alphaMode": "OPAQUE",
+      "doubleSided": true
+    },
+    "M07R13_InternalSilverReference": {
+      "pbrMetallicRoughness": {
+        "baseColorFactor": [
+          0.48,
+          0.5,
+          0.52,
+          1.0
+        ],
+        "metallicFactor": 0.82,
+        "roughnessFactor": 0.2
+      },
+      "extensions": {
+        "KHR_materials_clearcoat": {
+          "clearcoatFactor": 0.11999999731779099,
+          "clearcoatRoughnessFactor": 0.032499998807907104
+        }
+      },
+      "emissiveFactor": [
+        0,
+        0,
+        0
+      ],
+      "alphaMode": "OPAQUE",
+      "doubleSided": true
+    },
+    "M07R13_PolishedBrightSilverRim": {
+      "pbrMetallicRoughness": {
+        "baseColorFactor": [
+          0.68,
+          0.66,
+          0.62,
+          1.0
+        ],
+        "roughnessFactor": 0.16,
+        "metallicFactor": 1.0
+      },
+      "extensions": {
+        "KHR_materials_clearcoat": {
+          "clearcoatFactor": 0.05,
+          "clearcoatRoughnessFactor": 0.08
+        }
+      },
+      "emissiveFactor": [
+        0,
+        0,
+        0
+      ],
+      "alphaMode": "OPAQUE",
+      "doubleSided": true
+    },
+    "M07R13_LowerTopArtwork": {
+      "pbrMetallicRoughness": {
+        "baseColorTexture": {
+          "index": 0,
+          "texCoord": 1
+        },
+        "metallicFactor": 0.08,
+        "metallicRoughnessTexture": {
+          "index": 1,
+          "texCoord": 1
+        },
+        "baseColorFactor": [
+          1.0,
+          1.0,
+          1.0,
+          1.0
+        ],
+        "roughnessFactor": 1.0
+      },
+      "extensions": {
+        "KHR_materials_clearcoat": {
+          "clearcoatFactor": 0.32,
+          "clearcoatRoughnessFactor": 0.1
+        },
+        "KHR_materials_specular": {
+          "specularFactor": 0.55,
+          "specularColorFactor": [
+            1.0,
+            1.0,
+            1.0
+          ]
+        },
+        "KHR_materials_ior": {
+          "ior": 1.5199999809265137
+        }
+      },
+      "emissiveFactor": [
+        0,
+        0,
+        0
+      ],
+      "alphaMode": "OPAQUE",
+      "doubleSided": true
+    },
+    "M07R13_SolidDarkSide": {
+      "pbrMetallicRoughness": {
+        "baseColorFactor": [
+          0.014,
+          0.016,
+          0.02,
+          1.0
+        ],
+        "metallicFactor": 0.2,
+        "roughnessFactor": 0.3
+      },
+      "extensions": {
+        "KHR_materials_clearcoat": {
+          "clearcoatFactor": 0.22,
+          "clearcoatRoughnessFactor": 0.12
+        }
+      },
+      "emissiveFactor": [
+        0,
+        0,
+        0
+      ],
+      "alphaMode": "OPAQUE",
+      "doubleSided": true
+    },
+    "M07R13_UpperTopArtwork": {
+      "pbrMetallicRoughness": {
+        "baseColorTexture": {
+          "index": 2,
+          "texCoord": 1
+        },
+        "metallicFactor": 0.08,
+        "metallicRoughnessTexture": {
+          "index": 3,
+          "texCoord": 1
+        },
+        "baseColorFactor": [
+          1.0,
+          1.0,
+          1.0,
+          1.0
+        ],
+        "roughnessFactor": 1.0
+      },
+      "extensions": {
+        "KHR_materials_clearcoat": {
+          "clearcoatFactor": 0.32,
+          "clearcoatRoughnessFactor": 0.1
+        },
+        "KHR_materials_specular": {
+          "specularFactor": 0.55,
+          "specularColorFactor": [
+            1.0,
+            1.0,
+            1.0
+          ]
+        },
+        "KHR_materials_ior": {
+          "ior": 1.5199999809265137
+        }
+      },
+      "emissiveFactor": [
+        0,
+        0,
+        0
+      ],
+      "alphaMode": "OPAQUE",
+      "doubleSided": true
+    }
+  },
+  "afterMaterials": {
+    "M07R13_BallCandidateUnknownMaterial": {
+      "pbrMetallicRoughness": {
+        "baseColorFactor": [
+          0.3,
+          0.31,
+          0.32,
+          1.0
+        ],
+        "metallicFactor": 0.1,
+        "roughnessFactor": 0.3
+      },
+      "extensions": {
+        "KHR_materials_clearcoat": {
+          "clearcoatFactor": 0.15000000596046448,
+          "clearcoatRoughnessFactor": 0.054999999701976776
+        }
+      },
+      "emissiveFactor": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "alphaMode": "OPAQUE",
+      "doubleSided": true
+    },
+    "M07R13_NeutralUnderside": {
+      "pbrMetallicRoughness": {
+        "baseColorFactor": [
+          0.14,
+          0.16,
+          0.18,
+          1.0
+        ],
+        "metallicFactor": 0.35,
+        "roughnessFactor": 0.34
+      },
+      "extensions": {
+        "KHR_materials_clearcoat": {
+          "clearcoatFactor": 0.10000000149011612,
+          "clearcoatRoughnessFactor": 0.0625
+        }
+      },
+      "emissiveFactor": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "alphaMode": "OPAQUE",
+      "doubleSided": true
+    },
+    "M07R13_InternalSilverReference": {
+      "pbrMetallicRoughness": {
+        "baseColorFactor": [
+          0.48,
+          0.5,
+          0.52,
+          1.0
+        ],
+        "metallicFactor": 0.82,
+        "roughnessFactor": 0.2
+      },
+      "extensions": {
+        "KHR_materials_clearcoat": {
+          "clearcoatFactor": 0.11999999731779099,
+          "clearcoatRoughnessFactor": 0.032499998807907104
+        }
+      },
+      "emissiveFactor": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "alphaMode": "OPAQUE",
+      "doubleSided": true
+    },
+    "M07R13_PolishedBrightSilverRim": {
+      "pbrMetallicRoughness": {
+        "baseColorFactor": [
+          0.68,
+          0.66,
+          0.62,
+          1.0
+        ],
+        "roughnessFactor": 0.16,
+        "metallicFactor": 1.0
+      },
+      "extensions": {
+        "KHR_materials_clearcoat": {
+          "clearcoatFactor": 0.05,
+          "clearcoatRoughnessFactor": 0.08
+        }
+      },
+      "emissiveFactor": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "alphaMode": "OPAQUE",
+      "doubleSided": true
+    },
+    "M07R13_LowerTopArtwork": {
+      "pbrMetallicRoughness": {
+        "baseColorTexture": {
+          "index": 0,
+          "texCoord": 1
+        },
+        "metallicFactor": 0.08,
+        "metallicRoughnessTexture": {
+          "index": 1,
+          "texCoord": 1
+        },
+        "baseColorFactor": [
+          1.0,
+          1.0,
+          1.0,
+          1.0
+        ],
+        "roughnessFactor": 1.0
+      },
+      "extensions": {
+        "KHR_materials_clearcoat": {
+          "clearcoatFactor": 0.32,
+          "clearcoatRoughnessFactor": 0.1
+        },
+        "KHR_materials_specular": {
+          "specularFactor": 0.55,
+          "specularColorFactor": [
+            1.0,
+            1.0,
+            1.0
+          ]
+        },
+        "KHR_materials_ior": {
+          "ior": 1.5199999809265137
+        }
+      },
+      "emissiveFactor": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "alphaMode": "OPAQUE",
+      "doubleSided": true
+    },
+    "M07R13_SolidDarkSide": {
+      "pbrMetallicRoughness": {
+        "baseColorFactor": [
+          0.014,
+          0.016,
+          0.02,
+          1.0
+        ],
+        "metallicFactor": 0.2,
+        "roughnessFactor": 0.3
+      },
+      "extensions": {
+        "KHR_materials_clearcoat": {
+          "clearcoatFactor": 0.22,
+          "clearcoatRoughnessFactor": 0.12
+        }
+      },
+      "emissiveFactor": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "alphaMode": "OPAQUE",
+      "doubleSided": true
+    },
+    "M07R13_UpperTopArtwork": {
+      "pbrMetallicRoughness": {
+        "baseColorTexture": {
+          "index": 2,
+          "texCoord": 1
+        },
+        "metallicFactor": 0.08,
+        "metallicRoughnessTexture": {
+          "index": 3,
+          "texCoord": 1
+        },
+        "baseColorFactor": [
+          1.0,
+          1.0,
+          1.0,
+          1.0
+        ],
+        "roughnessFactor": 1.0
+      },
+      "extensions": {
+        "KHR_materials_clearcoat": {
+          "clearcoatFactor": 0.32,
+          "clearcoatRoughnessFactor": 0.1
+        },
+        "KHR_materials_specular": {
+          "specularFactor": 0.55,
+          "specularColorFactor": [
+            1.0,
+            1.0,
+            1.0
+          ]
+        },
+        "KHR_materials_ior": {
+          "ior": 1.5199999809265137
+        }
+      },
+      "emissiveFactor": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "alphaMode": "OPAQUE",
+      "doubleSided": true
+    }
+  },
+  "transportValues": {
+    "M07R13_BallCandidateUnknownMaterial": {
+      "pbrMetallicRoughness": {
+        "baseColorFactor": [
+          0.3,
+          0.31,
+          0.32,
+          1.0
+        ],
+        "metallicFactor": 0.1,
+        "roughnessFactor": 0.3
+      },
+      "extensions": {
+        "KHR_materials_clearcoat": {
+          "clearcoatFactor": 0.15000000596046448,
+          "clearcoatRoughnessFactor": 0.054999999701976776
+        }
+      },
+      "emissiveFactor": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "alphaMode": "OPAQUE"
+    },
+    "M07R13_NeutralUnderside": {
+      "pbrMetallicRoughness": {
+        "baseColorFactor": [
+          0.14,
+          0.16,
+          0.18,
+          1.0
+        ],
+        "metallicFactor": 0.35,
+        "roughnessFactor": 0.34
+      },
+      "extensions": {
+        "KHR_materials_clearcoat": {
+          "clearcoatFactor": 0.10000000149011612,
+          "clearcoatRoughnessFactor": 0.0625
+        }
+      },
+      "emissiveFactor": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "alphaMode": "OPAQUE"
+    },
+    "M07R13_InternalSilverReference": {
+      "pbrMetallicRoughness": {
+        "baseColorFactor": [
+          0.48,
+          0.5,
+          0.52,
+          1.0
+        ],
+        "metallicFactor": 0.82,
+        "roughnessFactor": 0.2
+      },
+      "extensions": {
+        "KHR_materials_clearcoat": {
+          "clearcoatFactor": 0.11999999731779099,
+          "clearcoatRoughnessFactor": 0.032499998807907104
+        }
+      },
+      "emissiveFactor": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "alphaMode": "OPAQUE"
+    },
+    "M07R13_PolishedBrightSilverRim": {
+      "pbrMetallicRoughness": {
+        "baseColorFactor": [
+          0.68,
+          0.66,
+          0.62,
+          1.0
+        ],
+        "roughnessFactor": 0.16,
+        "metallicFactor": 1.0
+      },
+      "extensions": {
+        "KHR_materials_clearcoat": {
+          "clearcoatFactor": 0.05,
+          "clearcoatRoughnessFactor": 0.08
+        }
+      },
+      "emissiveFactor": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "alphaMode": "OPAQUE"
+    },
+    "M07R13_LowerTopArtwork": {
+      "pbrMetallicRoughness": {
+        "baseColorTexture": {
+          "index": 0,
+          "texCoord": 1
+        },
+        "metallicFactor": 0.08,
+        "metallicRoughnessTexture": {
+          "index": 1,
+          "texCoord": 1
+        },
+        "baseColorFactor": [
+          1.0,
+          1.0,
+          1.0,
+          1.0
+        ],
+        "roughnessFactor": 1.0
+      },
+      "extensions": {
+        "KHR_materials_clearcoat": {
+          "clearcoatFactor": 0.32,
+          "clearcoatRoughnessFactor": 0.1
+        },
+        "KHR_materials_specular": {
+          "specularFactor": 0.55,
+          "specularColorFactor": [
+            1.0,
+            1.0,
+            1.0
+          ]
+        },
+        "KHR_materials_ior": {
+          "ior": 1.5199999809265137
+        }
+      },
+      "emissiveFactor": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "alphaMode": "OPAQUE"
+    },
+    "M07R13_SolidDarkSide": {
+      "pbrMetallicRoughness": {
+        "baseColorFactor": [
+          0.014,
+          0.016,
+          0.02,
+          1.0
+        ],
+        "metallicFactor": 0.2,
+        "roughnessFactor": 0.3
+      },
+      "extensions": {
+        "KHR_materials_clearcoat": {
+          "clearcoatFactor": 0.22,
+          "clearcoatRoughnessFactor": 0.12
+        }
+      },
+      "emissiveFactor": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "alphaMode": "OPAQUE"
+    },
+    "M07R13_UpperTopArtwork": {
+      "pbrMetallicRoughness": {
+        "baseColorTexture": {
+          "index": 2,
+          "texCoord": 1
+        },
+        "metallicFactor": 0.08,
+        "metallicRoughnessTexture": {
+          "index": 3,
+          "texCoord": 1
+        },
+        "baseColorFactor": [
+          1.0,
+          1.0,
+          1.0,
+          1.0
+        ],
+        "roughnessFactor": 1.0
+      },
+      "extensions": {
+        "KHR_materials_clearcoat": {
+          "clearcoatFactor": 0.32,
+          "clearcoatRoughnessFactor": 0.1
+        },
+        "KHR_materials_specular": {
+          "specularFactor": 0.55,
+          "specularColorFactor": [
+            1.0,
+            1.0,
+            1.0
+          ]
+        },
+        "KHR_materials_ior": {
+          "ior": 1.5199999809265137
+        }
+      },
+      "emissiveFactor": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "alphaMode": "OPAQUE"
+    }
+  },
+  "textures": {
+    "upperBaseColor": {
+      "sha256": "c0e9305d475cd2c591efc8a833a0aafb1aef4ccc437d84a3417674e6d1b453a5",
+      "colorSpace": "sRGB",
+      "metrics": {
+        "dimensions": [
+          620,
+          1000
+        ],
+        "luminanceP05P50P95": [
+          0.008960000239312649,
+          0.008960000239312649,
+          0.0982360765337944
+        ],
+        "redFraction": 0.4177274193548387,
+        "darkFraction": 0.8721693548387097,
+        "whiteFraction": 0.0,
+        "alpha": "opaque"
+      }
+    },
+    "lowerBaseColor": {
+      "sha256": "968c1e87ca2d5ea7c8fc57106e42bcd09dc95395fac7dd3be569e580ea8850eb",
+      "colorSpace": "sRGB",
+      "metrics": {
+        "dimensions": [
+          620,
+          1000
+        ],
+        "luminanceP05P50P95": [
+          0.008960000239312649,
+          0.008960000239312649,
+          0.09906980395317078
+        ],
+        "redFraction": 0.44742258064516127,
+        "darkFraction": 0.8579758064516129,
+        "whiteFraction": 0.0,
+        "alpha": "opaque"
+      }
+    },
+    "upperNormal": {
+      "path": "package/textures/upper-transport-normal-r011.png",
+      "sha256": "72db9aeac0f012cb931add1bb5fb7d0a4db029f193d2deee34468ae9ebe155ad",
+      "dimensions": [
+        620,
+        1000
+      ],
+      "colorSpace": "linear-data",
+      "semantic": "tangent-space normal",
+      "scale": 0.35
+    },
+    "lowerNormal": {
+      "path": "package/textures/lower-transport-normal-r011.png",
+      "sha256": "20385e93bb43b1b843ae990474380943be2c00a42277d27958854c04ebfd9d46",
+      "dimensions": [
+        620,
+        1000
+      ],
+      "colorSpace": "linear-data",
+      "semantic": "tangent-space normal",
+      "scale": 0.35
+    },
+    "metallicRoughness": "embedded PNG; linear; R scaled by metallicFactor, G exact source roughness"
+  },
+  "outputs": {
+    "blend": {
+      "path": "/Users/jiawei.zhou/Documents/Fidgeting app/unity/FidgetingApp/ArtSource/ModelPipeline/magnetic-slide-tile/evidence/10-export/rev-011/package/magnetic-slide-tile-authoritative-r011.blend",
+      "sha256": "68a1173faa8bc9023ba51a048f50c4a622898a8af72fc75fae6b087b113af11a"
+    },
+    "fbx": {
+      "path": "/Users/jiawei.zhou/Documents/Fidgeting app/unity/FidgetingApp/ArtSource/ModelPipeline/magnetic-slide-tile/evidence/10-export/rev-011/package/magnetic-slide-tile-render-r011.fbx",
+      "sha256": "816ac0a268e06958331fe3a49d5ce5ef234dcb1ae84660253e70a708c4db1222"
+    },
+    "glb": {
+      "path": "/Users/jiawei.zhou/Documents/Fidgeting app/unity/FidgetingApp/ArtSource/ModelPipeline/magnetic-slide-tile/evidence/10-export/rev-011/package/magnetic-slide-tile-render-r011.glb",
+      "sha256": "e9f90e9e77756b33857726f95a01194996469f16101dbad91fdb7024b679c2ca"
+    },
+    "collision": {
+      "path": "/Users/jiawei.zhou/Documents/Fidgeting app/unity/FidgetingApp/ArtSource/ModelPipeline/magnetic-slide-tile/evidence/10-export/rev-011/package/magnetic-slide-tile-collision-r011.fbx",
+      "sha256": "893ccfda54f7b15a3648e5997291340ec1bb027ed0492d5f136eb140ee674813"
+    },
+    "hierarchyMotion": {
+      "path": "/Users/jiawei.zhou/Documents/Fidgeting app/unity/FidgetingApp/ArtSource/ModelPipeline/magnetic-slide-tile/evidence/10-export/rev-011/package/hierarchy-motion-metadata-r011.json",
+      "sha256": "f968443f921727b73efb0ff5954f3b4cade2d1bc2342f34a2f070a096bf18059"
+    },
+    "unityImportContract": {
+      "path": "/Users/jiawei.zhou/Documents/Fidgeting app/unity/FidgetingApp/ArtSource/ModelPipeline/magnetic-slide-tile/evidence/10-export/rev-011/package/unity-import-contract-r011.json",
+      "sha256": "7bc4602766321b41b0297b781ac30db7dc63c8e68cf4f65d7c664d7fd91b38be"
+    }
+  },
+  "preserved": {
+    "geometryDigest": "2fcf6d2b4344511bc6b86ce940a927576f9cdb4988f4022959a3372f4d3c1952",
+    "materialStateDigest": "c876a0c4186ac2ce8364a309508c74c8a93a53bf57f993e36256cab2eaed2905",
+    "uvDigest": "c1c00c094735dfd28750f8b894b9f14c8e4bdfea9d3510791d95c1bb6908d9df",
+    "hierarchy": true,
+    "endpointInterlock": true
+  },
+  "checks": {
+    "sourceRev10Immutable": true,
+    "authoritativeBlendExact": true,
+    "fbxExact": true,
+    "collisionExact": true,
+    "deepRedBaseColor": true,
+    "blackMotifAndPerimeter": true,
+    "nativeNpot": true,
+    "normalMapsLinearTagged": true,
+    "allOpaque": true,
+    "zeroEmission": true,
+    "noTransmission": true,
+    "specularBounded": true,
+    "normalTextures": true,
+    "geometryMetadata": true,
+    "noAnimations": true,
+    "unityNotApplied": true
+  }
+}

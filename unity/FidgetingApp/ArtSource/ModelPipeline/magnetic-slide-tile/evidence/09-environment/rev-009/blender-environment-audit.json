@@ -1,0 +1,179 @@
+{
+  "schemaVersion": 1,
+  "gate": "09-environment",
+  "revision": 9,
+  "sourceBlendSha256": "d4d6a9701281e493b4459d3b1f9a9c67382c3d7b22e21632233184276de8ebf2",
+  "targetEnvironmentSha256": "2fe029beb803d7f9a26d229a1969914f210a7b5c4f311bfe9878cb52c7d73d13",
+  "targetSpec": {
+    "resolution": [
+      2048,
+      1024
+    ],
+    "channels": 4
+  },
+  "cubemapFaces": {
+    "positive-x": {
+      "sha256": "59edaf2b250d962e196f91a2df6aa36f40a7f4273f588748459648574b7f73c5",
+      "hashExact": true,
+      "resolution": [
+        512,
+        512
+      ],
+      "nonzeroRgbFraction": 1.0
+    },
+    "negative-x": {
+      "sha256": "77354b794e7dba2fb7149766ef2962a09d8ca8486a3a60404421344f72809882",
+      "hashExact": true,
+      "resolution": [
+        512,
+        512
+      ],
+      "nonzeroRgbFraction": 1.0
+    },
+    "positive-y": {
+      "sha256": "a826165174802c8573f80bc57654858820a7184a520bc53713e556c8ba292cc9",
+      "hashExact": true,
+      "resolution": [
+        512,
+        512
+      ],
+      "nonzeroRgbFraction": 1.0
+    },
+    "negative-y": {
+      "sha256": "eeb99a271ea2e70a102395f314fb80a4c20d7980decb6426a94eb9574145615d",
+      "hashExact": true,
+      "resolution": [
+        512,
+        512
+      ],
+      "nonzeroRgbFraction": 1.0
+    },
+    "positive-z": {
+      "sha256": "8ba2447c400ae53111b3089dd35d892d71416ca99e6f8612d6ddaf31f8f9c572",
+      "hashExact": true,
+      "resolution": [
+        512,
+        512
+      ],
+      "nonzeroRgbFraction": 1.0
+    },
+    "negative-z": {
+      "sha256": "a805391a7161d718f55e4b13fc8b053eca3f9eb5c97ab290ae1208429a634875",
+      "hashExact": true,
+      "resolution": [
+        512,
+        512
+      ],
+      "nonzeroRgbFraction": 1.0
+    }
+  },
+  "glb": {
+    "sha256": "a7c96f0a5f74b07c23ffdb11d5ce4068465db99edeca5d8a509e2b031a04e3fb",
+    "samplers": [
+      {
+        "magFilter": 9729,
+        "minFilter": 9987,
+        "wrapS": 33071,
+        "wrapT": 33071
+      }
+    ],
+    "importedObjects": {
+      "BottomExterior": {
+        "materialSlots": [
+          "M07R13_LowerTopArtwork.001",
+          "M07R13_SolidDarkSide.001",
+          "M07R13_PolishedBrightSilverRim.001",
+          "M07R13_NeutralUnderside.001"
+        ],
+        "zoneTriangleCounts": {
+          "topArtwork": 511,
+          "solidDarkSide": 6156,
+          "polishedSilverRim": 4104,
+          "neutralUnderside": 7693,
+          "other": 0
+        },
+        "sideArtworkTriangles": 0,
+        "undersideArtworkTriangles": 0,
+        "artworkUvMin": [
+          0.014516184106469154,
+          0.009000182151794434
+        ],
+        "artworkUvMax": [
+          0.9854838252067566,
+          0.9909998178482056
+        ],
+        "checks": {
+          "triangleCountsExact": true,
+          "noUnknownMaterial": true,
+          "sideArtworkZero": true,
+          "undersideArtworkZero": true,
+          "capArtworkPresent": true,
+          "silverRimPresent": true,
+          "capUvsWithinZeroOne": true
+        },
+        "pass": true
+      },
+      "MovingTopBody": {
+        "materialSlots": [
+          "M07R13_UpperTopArtwork.001",
+          "M07R13_SolidDarkSide.001",
+          "M07R13_PolishedBrightSilverRim.001",
+          "M07R13_NeutralUnderside.001"
+        ],
+        "zoneTriangleCounts": {
+          "topArtwork": 511,
+          "solidDarkSide": 10268,
+          "polishedSilverRim": 4104,
+          "neutralUnderside": 11805,
+          "other": 0
+        },
+        "sideArtworkTriangles": 0,
+        "undersideArtworkTriangles": 0,
+        "artworkUvMin": [
+          0.014516184106469154,
+          0.009000182151794434
+        ],
+        "artworkUvMax": [
+          0.9854838252067566,
+          0.9909998178482056
+        ],
+        "checks": {
+          "triangleCountsExact": true,
+          "noUnknownMaterial": true,
+          "sideArtworkZero": true,
+          "undersideArtworkZero": true,
+          "capArtworkPresent": true,
+          "silverRimPresent": true,
+          "capUvsWithinZeroOne": true
+        },
+        "pass": true
+      }
+    }
+  },
+  "checks": {
+    "buildPassed": true,
+    "turntablePassed": true,
+    "sourceBlendHash": true,
+    "sourceSnapshotLocked": true,
+    "sourcePartitions": true,
+    "worldEnvironmentOnly": true,
+    "worldUsesTarget": true,
+    "worldStrength": true,
+    "targetResolution": true,
+    "targetRgbNonzero": true,
+    "targetSeam": true,
+    "cubemapSixFaces": true,
+    "cubemapFaceHashes": true,
+    "cubemapFaceResolution": true,
+    "cubemapRgbNonzero": true,
+    "cubemapOrientation": true,
+    "allImportedObjects": true,
+    "glbPartitions": true,
+    "glbClampNoWrap": true,
+    "glbNoAnimations": true,
+    "glbNoLights": true,
+    "noEmission": true,
+    "shippingUnityUnchanged": true
+  },
+  "pass": true
+}

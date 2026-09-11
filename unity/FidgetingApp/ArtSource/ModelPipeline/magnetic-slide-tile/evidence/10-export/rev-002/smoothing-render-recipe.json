@@ -1,0 +1,109 @@
+{
+  "schemaVersion": 1,
+  "modelId": "magnetic-slide-tile",
+  "gate": "10-export",
+  "exportRevision": 2,
+  "renderer": "Blender EEVEE",
+  "purpose": "same-camera high-contrast polished-silver normal and highlight continuity comparison",
+  "records": [
+    {
+      "label": "authoritative source base mesh",
+      "path": "arc-closeup-source-2560.png",
+      "resolution": [
+        2560,
+        1440
+      ],
+      "cameraLocationMeters": [
+        0.052000001072883606,
+        -0.057999998331069946,
+        0.01899999938905239
+      ],
+      "cameraTargetMeters": [
+        0.0,
+        -0.010999999940395355,
+        0.0005000000237487257
+      ],
+      "lensMm": 92.0
+    },
+    {
+      "label": "rejected rev 1 FBX; smoothing metadata OFF",
+      "path": "arc-closeup-rev1-fbx-2560.png",
+      "resolution": [
+        2560,
+        1440
+      ],
+      "cameraLocationMeters": [
+        0.052000001072883606,
+        -0.057999998331069946,
+        0.01899999938905239
+      ],
+      "cameraTargetMeters": [
+        0.0,
+        -0.010999999940395355,
+        0.0005000000237487257
+      ],
+      "lensMm": 92.0
+    },
+    {
+      "label": "corrected rev 2 FBX; smoothing FACE",
+      "path": "arc-closeup-rev2-fbx-2560.png",
+      "resolution": [
+        2560,
+        1440
+      ],
+      "cameraLocationMeters": [
+        0.052000001072883606,
+        -0.057999998331069946,
+        0.01899999938905239
+      ],
+      "cameraTargetMeters": [
+        0.0,
+        -0.010999999940395355,
+        0.0005000000237487257
+      ],
+      "lensMm": 92.0
+    },
+    {
+      "label": "corrected rev 2 GLB; explicit normals+tangents",
+      "path": "arc-closeup-rev2-glb-2560.png",
+      "resolution": [
+        2560,
+        1440
+      ],
+      "cameraLocationMeters": [
+        0.052000001072883606,
+        -0.057999998331069946,
+        0.01899999938905239
+      ],
+      "cameraTargetMeters": [
+        0.0,
+        -0.010999999940395355,
+        0.0005000000237487257
+      ],
+      "lensMm": 92.0
+    }
+  ],
+  "lighting": {
+    "world": {
+      "colorLinear": [
+        0.012,
+        0.014,
+        0.018
+      ],
+      "strength": 0.22
+    },
+    "silver": {
+      "baseColorLinear": [
+        0.97,
+        0.965,
+        0.94
+      ],
+      "metallic": 1.0,
+      "roughness": 0.055,
+      "emission": 0.0
+    },
+    "exposure": -0.25,
+    "look": "AgX - Medium High Contrast"
+  },
+  "pass": true
+}

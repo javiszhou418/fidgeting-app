@@ -1,0 +1,131 @@
+{
+  "schemaVersion": 1,
+  "gate": "11-unity-parity",
+  "revision": 9,
+  "hashes": {
+    "renderFbx": {
+      "path": "unity/FidgetingApp/Assets/_EDC/Candidates/MagneticSlideTileGate11R009/Imported/magnetic-slide-tile-render-r009.fbx",
+      "expected": "d15e5c944e10ac61d466668309a2ae3f1069870d3c690b67bfd5595af5e32179",
+      "actual": "d15e5c944e10ac61d466668309a2ae3f1069870d3c690b67bfd5595af5e32179",
+      "pass": true
+    },
+    "collisionFbx": {
+      "path": "unity/FidgetingApp/Assets/_EDC/Candidates/MagneticSlideTileGate11R009/Imported/magnetic-slide-tile-collision-r009.fbx",
+      "expected": "b14ea11d8d08d6ff6d5583ccee0a29c6a219247ed7f7bc16182b1f7e0970851b",
+      "actual": "b14ea11d8d08d6ff6d5583ccee0a29c6a219247ed7f7bc16182b1f7e0970851b",
+      "pass": true
+    },
+    "environmentExr": {
+      "path": "unity/FidgetingApp/Assets/_EDC/Candidates/MagneticSlideTileGate11R009/Imported/Environment/magnetic-slide-tile-shipping-studio-r008.exr",
+      "expected": "7f1c9fded84c453efbc5300a6a71fe2948534055d3f4ae5052696909f30be6ab",
+      "actual": "7f1c9fded84c453efbc5300a6a71fe2948534055d3f4ae5052696909f30be6ab",
+      "pass": true
+    },
+    "upperArtworkMask": {
+      "path": "unity/FidgetingApp/Assets/_EDC/Candidates/MagneticSlideTileGate11R009/Imported/Textures/upperArtworkMask.png",
+      "expected": "8250df70d2286849db353862283b0d3db9c66e1ac92bed3795bcb5377a431c36",
+      "actual": "8250df70d2286849db353862283b0d3db9c66e1ac92bed3795bcb5377a431c36",
+      "pass": true
+    },
+    "lowerArtworkMask": {
+      "path": "unity/FidgetingApp/Assets/_EDC/Candidates/MagneticSlideTileGate11R009/Imported/Textures/lowerArtworkMask.png",
+      "expected": "7bf5921f469a217b850ff2ea94dc5ae6c251091b8de60bd81c1b88ec42dfa7c2",
+      "actual": "7bf5921f469a217b850ff2ea94dc5ae6c251091b8de60bd81c1b88ec42dfa7c2",
+      "pass": true
+    },
+    "perimeterMask": {
+      "path": "unity/FidgetingApp/Assets/_EDC/Candidates/MagneticSlideTileGate11R009/Imported/Textures/perimeterMask.png",
+      "expected": "2179bf26210994c8b3d279337bf6ad0f4beaee3c7285ae97d1cd888db2bd64fc",
+      "actual": "2179bf26210994c8b3d279337bf6ad0f4beaee3c7285ae97d1cd888db2bd64fc",
+      "pass": true
+    }
+  },
+  "textureDimensions": {
+    "lower-maskmap-r009.png": [
+      620,
+      1000
+    ],
+    "lower-normal-r009.png": [
+      620,
+      1000
+    ],
+    "lowerArtworkMask.png": [
+      620,
+      1000
+    ],
+    "lowerBaseColor.png": [
+      620,
+      1000
+    ],
+    "lowerRoughness.png": [
+      620,
+      1000
+    ],
+    "perimeterMask.png": [
+      620,
+      1000
+    ],
+    "upper-maskmap-r009.png": [
+      620,
+      1000
+    ],
+    "upper-normal-r009.png": [
+      620,
+      1000
+    ],
+    "upperArtworkMask.png": [
+      620,
+      1000
+    ],
+    "upperBaseColor.png": [
+      620,
+      1000
+    ],
+    "upperRoughness.png": [
+      620,
+      1000
+    ]
+  },
+  "video": {
+    "programs": [],
+    "stream_groups": [],
+    "streams": [
+      {
+        "width": 960,
+        "height": 720,
+        "nb_frames": "72"
+      }
+    ],
+    "format": {
+      "duration": "6.000000",
+      "size": "873192"
+    }
+  },
+  "tests": {
+    "exists": true,
+    "total": 6,
+    "passed": 6,
+    "failed": 0
+  },
+  "checks": {
+    "unityImportReport": true,
+    "bounds": true,
+    "renderCounts": true,
+    "renderHierarchy": true,
+    "collision": true,
+    "mechanismNames": true,
+    "motionMetadata": true,
+    "provisionalDimensions": true,
+    "shippingSceneUnchanged": true,
+    "sourceHashes": true,
+    "npotPreserved": true,
+    "crystalShader": true,
+    "silverShader": true,
+    "materials": true,
+    "parity": true,
+    "interactiveRecording": true,
+    "focusedTests": true,
+    "noBuildInstallDevice": true
+  },
+  "pass": true
+}

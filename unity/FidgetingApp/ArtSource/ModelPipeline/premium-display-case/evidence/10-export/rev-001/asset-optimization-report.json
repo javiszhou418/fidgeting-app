@@ -1,0 +1,36 @@
+{
+  "schemaVersion": 1,
+  "modelId": "premium-display-case",
+  "gate": "10-export",
+  "exportRevision": 1,
+  "status": "pass-with-gate11-profile-required",
+  "objectCount": 12,
+  "meshCount": 5,
+  "triangleCount": 100016,
+  "usedMaterialCount": 4,
+  "uv": {
+    "PhysicalLabel": {
+      "layers": [
+        "LabelUV"
+      ],
+      "coordinateCount": 576,
+      "minimum": [
+        0.0,
+        0.0
+      ],
+      "maximum": [
+        1.0,
+        1.0
+      ]
+    }
+  },
+  "topology": {
+    "degenerateTriangles": 0,
+    "positiveSignedMaterialVolumes": true,
+    "fbxGlbTriangleCountIdentity": true,
+    "fbxGlbWindingDigestIdentity": true
+  },
+  "decision": "Preserve the approved geometry without decimation or new LODs. Gate 11 Unity profiling must validate the 60 FPS target.",
+  "nonBlockingRisk": "100,016 triangles exceed a generic mobile-prop guideline, but Gate 10 must not alter approved geometry.",
+  "shippingClaim": false
+}

@@ -1,0 +1,102 @@
+{
+  "schema": "premium-display-case-gate04-animation-quality.v2",
+  "modelId": "premium-display-case",
+  "gate": "04-architecture",
+  "architectureRevision": 1,
+  "evidenceRevision": 3,
+  "status": "pass",
+  "reviewState": "ready_for_review",
+  "approvalEffect": "none",
+  "gate05Status": "blocked",
+  "truth": {
+    "artifactClass": "whole-case-motion-envelope-preview",
+    "newGeometry": false,
+    "blenderRender": false,
+    "unityCapture": false,
+    "shippingAnimation": false,
+    "appReveal": false,
+    "wholeCaseOnly": true,
+    "explode": false
+  },
+  "metrics": {
+    "frameCount": 217,
+    "fps": 60,
+    "mp4DurationMilliseconds": 3616.667,
+    "gifEncodedFrameCount": 21,
+    "gifDurationMilliseconds": 3620,
+    "maximumAdjacentMeanRgbDifference": 6.3072,
+    "meanAdjacentMeanRgbDifference": 0.5225,
+    "settledHoldDifference": 0.0,
+    "minimumProjectedPrizeWidthPixels": 22,
+    "highlightCount": 1,
+    "partSeparationCount": 0,
+    "objectIdentityCount": 1
+  },
+  "checks": [
+    {
+      "id": "whole-case-only",
+      "status": "pass",
+      "evidence": "Every frame renders one object identity and zero child-layer offsets."
+    },
+    {
+      "id": "no-explode-or-reassembly",
+      "status": "pass",
+      "evidence": "Part separation count is 0; no layer translation or object replacement exists."
+    },
+    {
+      "id": "prize-visible",
+      "status": "pass",
+      "evidence": "The same prize proxy remains rendered in all 217 frames; minimum projected width is 22px."
+    },
+    {
+      "id": "portrait-stability",
+      "status": "pass",
+      "evidence": "The 3:4 contract, center, height, pivot, and frame remain fixed through the full turn."
+    },
+    {
+      "id": "single-full-turn",
+      "status": "pass",
+      "evidence": "The unwrapped +Y preview angle is monotonic 0→360 and samples 0/90/180/270/360."
+    },
+    {
+      "id": "single-highlight",
+      "status": "pass",
+      "evidence": "Exactly one upper-left to lower-right highlight interval is authored."
+    },
+    {
+      "id": "flicker",
+      "status": "pass",
+      "evidence": "Settled subject frames are byte-stable after downsampling; hold difference 0.0000. Intended max adjacent mean RGB difference is 6.3072."
+    },
+    {
+      "id": "duration",
+      "status": "pass",
+      "evidence": "MP4 is 3616.667ms versus the selected 3617ms main-app measurement; delta -0.333ms."
+    },
+    {
+      "id": "gif-and-mp4-truth",
+      "status": "pass",
+      "evidence": "GIF has 21 encoded frames and 3620ms; MP4 carries the 60fps timing authority."
+    },
+    {
+      "id": "authored-unknowns-explicit",
+      "status": "pass",
+      "evidence": "Exact Rive keyframes, easing, highlight curve, and Y sign remain unknown; the preview does not claim authored parity."
+    },
+    {
+      "id": "reference-identity-excluded",
+      "status": "pass",
+      "evidence": "No WHATNOT copy, yellow field, smiley, barcode, sample serial, or circular coin window is rendered."
+    },
+    {
+      "id": "contact-sheet-coverage",
+      "status": "pass",
+      "evidence": "The contact sheet includes start, highlight, 0, 90, 180, 270, 360, and settled."
+    },
+    {
+      "id": "gate-boundary",
+      "status": "pass",
+      "evidence": "Evidence-only Gate 04 preview; Gate 05, Blender, Unity, build, install, and phone push remain blocked."
+    }
+  ]
+}

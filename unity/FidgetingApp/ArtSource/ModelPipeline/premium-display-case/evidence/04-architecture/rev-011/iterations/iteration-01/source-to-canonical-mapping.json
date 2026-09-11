@@ -1,0 +1,203 @@
+{
+  "schema": "make-it-shine-cc0-source-mapping.v1",
+  "sourceCommit": "88842be0063b5b0b75e82ed6572752a37a13c82b",
+  "license": "CC0-1.0",
+  "entries": [
+    {
+      "source": "Assets/Animation/Timelines/Booster to Card Timeline.playable",
+      "sourceSha256": "baec0abcf084db64a2b353947a9e67408e6b41ec27d5c645621d8f93aec9b086",
+      "destination": "ArtSource/ModelPipeline/premium-display-case/evidence/04-architecture/rev-011/source-raw/Booster to Card Timeline.playable",
+      "destinationSha256": "baec0abcf084db64a2b353947a9e67408e6b41ec27d5c645621d8f93aec9b086",
+      "decision": "direct-copy",
+      "reason": "Exact source structure retained outside Assets because its VFX Control tracks require the banned VFX Graph package."
+    },
+    {
+      "source": "Assets/Art/Environment/Shaders/SG_BoosterPack.shadergraph",
+      "sourceSha256": "e1de0669f3f7c8ade21f656ab17c5e14e6d45cd5e689c79ddb983f27e61f6c34",
+      "destination": "ArtSource/ModelPipeline/premium-display-case/evidence/04-architecture/rev-011/source-raw/SG_BoosterPack.shadergraph",
+      "destinationSha256": "e1de0669f3f7c8ade21f656ab17c5e14e6d45cd5e689c79ddb983f27e61f6c34",
+      "decision": "direct-copy",
+      "reason": "Exact authored graph retained for audit; source mesh vertex-color and UV bindings prevent direct runtime use."
+    },
+    {
+      "source": "Assets/Art/Booster/SG_LightingStrike.shadergraph",
+      "sourceSha256": "a4eb3922e72a3dadb436902d2c4a57c3fbd6768e4b137104abeed6167e1f4f7d",
+      "destination": "ArtSource/ModelPipeline/premium-display-case/evidence/04-architecture/rev-011/source-raw/SG_LightingStrike.shadergraph",
+      "destinationSha256": "a4eb3922e72a3dadb436902d2c4a57c3fbd6768e4b137104abeed6167e1f4f7d",
+      "decision": "direct-copy",
+      "reason": "Exact VFX-targeted authored graph retained before the Shuriken compatibility port."
+    },
+    {
+      "source": "Assets/Art/Kyle/Materials/SG_Title_Kyle.shadergraph",
+      "sourceSha256": "6a7718d6ae1eba360c03a1ea16b207ada5ae80f1a4dc2df0d004453bf94e2067",
+      "destination": "ArtSource/ModelPipeline/premium-display-case/evidence/04-architecture/rev-011/source-raw/SG_Title_Kyle.shadergraph",
+      "destinationSha256": "6a7718d6ae1eba360c03a1ea16b207ada5ae80f1a4dc2df0d004453bf94e2067",
+      "decision": "direct-copy",
+      "reason": "Exact Sphere Mask graph retained; sample title texture remains rejected."
+    },
+    {
+      "source": "Assets/Art/Booster/VFX_BoosterActivation.vfx",
+      "sourceSha256": "c56ed7a46cc1276b16e5e6e47879e4c7a665425df9d8e2e6693ac8ef1924ff67",
+      "destination": "ArtSource/ModelPipeline/premium-display-case/evidence/04-architecture/rev-011/source-raw/VFX_BoosterActivation.vfx",
+      "destinationSha256": "c56ed7a46cc1276b16e5e6e47879e4c7a665425df9d8e2e6693ac8ef1924ff67",
+      "decision": "direct-copy",
+      "reason": "Exact VFX Graph retained outside Assets because the product bans the package."
+    },
+    {
+      "source": "Assets/Art/Booster/VFXG_LightingStrike.vfx",
+      "sourceSha256": "4f4da1d0038cee4e4599467b754a429263286073233bb8ac0f259e908635d7b5",
+      "destination": "ArtSource/ModelPipeline/premium-display-case/evidence/04-architecture/rev-011/source-raw/VFXG_LightingStrike.vfx",
+      "destinationSha256": "4f4da1d0038cee4e4599467b754a429263286073233bb8ac0f259e908635d7b5",
+      "decision": "direct-copy",
+      "reason": "Exact 25-strip and 512-spark source graph retained outside Assets."
+    },
+    {
+      "source": "Assets/Art/Booster/VFX_BoosterExplosion.vfx",
+      "sourceSha256": "d6af66e7b91e7097d50fbef376bf7b33b63dd9e6738a4c99084cb46460aaac2f",
+      "destination": "ArtSource/ModelPipeline/premium-display-case/evidence/04-architecture/rev-011/source-raw/VFX_BoosterExplosion.vfx",
+      "destinationSha256": "d6af66e7b91e7097d50fbef376bf7b33b63dd9e6738a4c99084cb46460aaac2f",
+      "decision": "direct-copy",
+      "reason": "Exact 512-quad and 16-flare source graph retained outside Assets."
+    },
+    {
+      "source": "Assets/Animation/Timelines/Booster to Card Timeline.playable",
+      "sourceSha256": "baec0abcf084db64a2b353947a9e67408e6b41ec27d5c645621d8f93aec9b086",
+      "destination": "Assets/_DisplayCase/Candidates/PackOpeningGate04R011/Timelines/MakeItShineRetargetedR011.playable",
+      "destinationSha256": "7b8bbca7d854155af4d011d054fc682c6473de51f72a3c11bcba2bbbefd30526",
+      "decision": "adapted",
+      "reason": "Retargeted bindings keep source effect ordering and matched timestamps while the Pack and one pre-instantiated case remain the only product objects."
+    },
+    {
+      "source": "Assets/Animation/Clips/Booster/Booster_Discarded.anim",
+      "sourceSha256": "be661fe81b095f7f1ad08fb2a1c003b15f8690ee08d43f9f705dc849924fb2c6",
+      "destination": "Assets/_DisplayCase/Candidates/PackOpeningGate04R011/ImportedSource/Animation/Booster_Discarded.anim",
+      "destinationSha256": "be661fe81b095f7f1ad08fb2a1c003b15f8690ee08d43f9f705dc849924fb2c6",
+      "decision": "direct-copy",
+      "reason": "Exact normalized dissolve curve and tangents imported."
+    },
+    {
+      "source": "Assets/Art/Environment/Shaders/SG_SelectedBooster.shadergraph",
+      "sourceSha256": "75eb59c320c80b693d24d61df3c9238a8670cef64f73247727558e6db512308b",
+      "destination": "Assets/_DisplayCase/Candidates/PackOpeningGate04R011/ImportedSource/ShaderGraphs/SG_SelectedBooster.shadergraph",
+      "destinationSha256": "75eb59c320c80b693d24d61df3c9238a8670cef64f73247727558e6db512308b",
+      "decision": "direct-copy",
+      "reason": "Compatible authored selected-emission graph imported unchanged."
+    },
+    {
+      "source": "Assets/Art/Common/Graphs/CardMask.shadergraph",
+      "sourceSha256": "20bf26a2efe854ee561cbdca77697c63651124ca3c095185837885984f19234c",
+      "destination": "Assets/_DisplayCase/Candidates/PackOpeningGate04R011/ImportedSource/ShaderGraphs/CardMask.shadergraph",
+      "destinationSha256": "20bf26a2efe854ee561cbdca77697c63651124ca3c095185837885984f19234c",
+      "decision": "direct-copy",
+      "reason": "Compatible mask graph imported unchanged for audit; runtime rejects it as a Pack-mouth mask."
+    },
+    {
+      "source": "Assets/Art/Booster/TX_Flare_2x2_M.png",
+      "sourceSha256": "bbf7c86f5435ec3097717ef092e531214916e9cbb7db2b71f059e3d12f90ffa3",
+      "destination": "Assets/_DisplayCase/Candidates/PackOpeningGate04R011/ImportedSource/Textures/TX_Flare_2x2_M.png",
+      "destinationSha256": "bbf7c86f5435ec3097717ef092e531214916e9cbb7db2b71f059e3d12f90ffa3",
+      "decision": "direct-copy",
+      "reason": "Exact source 2x2 flare texture drives the Shuriken port."
+    },
+    {
+      "source": "Assets/Art/Common/Textures/TX_Noise_M.tga",
+      "sourceSha256": "2303e1fb3c86af9e9b6a4ccd4ecb615b9cdd172253eea8988c7a6ac4a165e886",
+      "destination": "Assets/_DisplayCase/Candidates/PackOpeningGate04R011/ImportedSource/Textures/TX_Noise_M.tga",
+      "destinationSha256": "2303e1fb3c86af9e9b6a4ccd4ecb615b9cdd172253eea8988c7a6ac4a165e886",
+      "decision": "direct-copy",
+      "reason": "Exact source mask drives the source discard dissolve with bilinear mobile import."
+    },
+    {
+      "source": "Assets/Art/Booster/SG_LightingStrike.shadergraph",
+      "sourceSha256": "a4eb3922e72a3dadb436902d2c4a57c3fbd6768e4b137104abeed6167e1f4f7d",
+      "destination": "Assets/_DisplayCase/Candidates/PackOpeningGate04R011/Shaders/MakeItShineCc0PortR011.shader",
+      "destinationSha256": "43e62f3527472416ef187c3e421939dbdfc6fd2c30fb746f754966d80e59022a",
+      "decision": "adapted",
+      "reason": "VFX-targeted Shader Graph cannot bind to Shuriken directly; preserve its Reveal/Erode/Speed contract and source flare texture in a URP additive port."
+    },
+    {
+      "source": "Assets/Art/Environment/Shaders/SG_BoosterPack.shadergraph",
+      "sourceSha256": "e1de0669f3f7c8ade21f656ab17c5e14e6d45cd5e689c79ddb983f27e61f6c34",
+      "destination": "Assets/_DisplayCase/Candidates/PackOpeningGate04R011/Shaders/MakeItShineCc0PackR011.shader",
+      "destinationSha256": "dd775f83bcbdf13ef43f148c0ee0a860f5ccd2f8f6e80ba056965063855e2831",
+      "decision": "adapted",
+      "reason": "Source graph depends on source mesh vertex colors and UVs; preserve its dissolve/emissive edge contract on the real 384x512 Pack."
+    },
+    {
+      "source": "Assets/Art/Booster/VFX_BoosterActivation.vfx",
+      "sourceSha256": "c56ed7a46cc1276b16e5e6e47879e4c7a665425df9d8e2e6693ac8ef1924ff67",
+      "destination": "Assets/_DisplayCase/Candidates/PackOpeningGate04R011/Runtime/PackOpeningGate04R011Controller.cs",
+      "destinationSha256": "fba219d4b7efbe984cda9393fe47730d3b6692d139f85c6d758178bc9f0359d4",
+      "decision": "adapted",
+      "reason": "VFX Graph is banned; port the source 3-particle activation envelope to deterministic Shuriken."
+    },
+    {
+      "source": "Assets/Art/Booster/VFXG_LightingStrike.vfx",
+      "sourceSha256": "4f4da1d0038cee4e4599467b754a429263286073233bb8ac0f259e908635d7b5",
+      "destination": "Assets/_DisplayCase/Candidates/PackOpeningGate04R011/Editor/PackOpeningGate04R011Builder.cs",
+      "destinationSha256": "20e8115339d2fea7b9c29613f7343444cde49d9cf5c9f41606c85622fad62a59",
+      "decision": "adapted",
+      "reason": "VFX Graph is banned; port 25 strips and 512 sparks to Shuriken trails and sparks."
+    },
+    {
+      "source": "Assets/Art/Booster/VFX_BoosterExplosion.vfx",
+      "sourceSha256": "d6af66e7b91e7097d50fbef376bf7b33b63dd9e6738a4c99084cb46460aaac2f",
+      "destination": "Assets/_DisplayCase/Candidates/PackOpeningGate04R011/Editor/PackOpeningGate04R011Builder.cs",
+      "destinationSha256": "20e8115339d2fea7b9c29613f7343444cde49d9cf5c9f41606c85622fad62a59",
+      "decision": "adapted",
+      "reason": "VFX Graph is banned; port the 512-quad and 16-flare systems with source curves, gradient family, and texture."
+    },
+    {
+      "source": "Assets/Prefabs/Cinematic/Opening_Booster.prefab",
+      "sourceSha256": "b155b76ffe54ac737651adbbfa177e284b22175733096e279e056316bf5aa978",
+      "destination": null,
+      "destinationSha256": null,
+      "decision": "rejected",
+      "reason": "Contains sample Booster, fracture model, and object-swap ownership."
+    },
+    {
+      "source": "Assets/Art/Booster/BoosterFractured_B.fbx",
+      "sourceSha256": "fd78b007802a1966a1dfb1a1c6b8c7c36cec2f3622dcbaf480fe039967ded602",
+      "destination": null,
+      "destinationSha256": null,
+      "decision": "rejected",
+      "reason": "Sample geometry and fracture swap are forbidden."
+    },
+    {
+      "source": "Assets/Animation/Timelines/Spawn Cards Timeline.playable",
+      "sourceSha256": "8d1cf67b8fdd982cd0cb6827afbdba96270f95cd5e24f99a30e53b30b60b6e28",
+      "destination": null,
+      "destinationSha256": null,
+      "decision": "rejected",
+      "reason": "Three-card proxy handoff is replaced by the same real assembled case."
+    },
+    {
+      "source": "Assets/Art/Environment/Shaders/M_BoosterPack.mat",
+      "sourceSha256": "bfa2402ca04c1234a46b5eae70106765e8463af0aa7660a826c1c64487efe385",
+      "destination": null,
+      "destinationSha256": null,
+      "decision": "rejected",
+      "reason": "Source material binds sample textures and source mesh data; the adapted material binds real Pack artwork."
+    },
+    {
+      "source": "Assets/Art/Environment/Shaders/MV_Pack_A.mat",
+      "sourceSha256": "509561d9751a7cf69db654129b3994c0d9da58a3a8d1ebb7cfdb8a3fdd87bf96",
+      "destination": null,
+      "destinationSha256": null,
+      "decision": "rejected",
+      "reason": "Source material variant carries sample art and is not imported or displayed."
+    },
+    {
+      "source": "Assets/Art/Kyle/TXT/TX_Title_Kyle.png",
+      "sourceSha256": "6bc151e0aa4163961f2b95a54fac7c89208af5d7bdc60d0b0e297f4f668594c1",
+      "destination": null,
+      "destinationSha256": null,
+      "decision": "rejected",
+      "reason": "Sample title artwork is not imported or displayed."
+    }
+  ],
+  "vfxGraphDependency": false,
+  "sampleModelsImported": false,
+  "sampleArtworkImported": false,
+  "shippingReady": false
+}

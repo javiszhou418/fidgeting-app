@@ -1,0 +1,628 @@
+Unity Editor version:    6000.5.6f1 (0e0577a1a2ac)
+Branch:                  6000.5/staging
+Build type:              Release
+Batch mode:              YES
+macOS version:           Version 26.6 (Build 25G72)
+Darwin version:          25.6.0
+Architecture:            arm64
+Running under Rosetta:   NO
+Available memory:        65536 MB
+Date:                    2026-08-27T18:07:58Z
+[Licensing::Module] Trying to connect to existing licensing client channel...
+[Licensing::IpcConnector] Channel LicenseClient-jiawei.zhou@whatnot.com doesn't exist
+Launching external process: /Applications/Unity/Hub/Editor/6000.5.6f1/Unity.app/Contents/Helpers/UnityLicensingClient.app/Contents/MacOS/Unity.Licensing.Client
+[Licensing::Module] Successfully launched the LicensingClient (PId: 41479)
+Launching external process: /Applications/Unity/Hub/Editor/6000.5.6f1/Unity.app/Contents/Helpers/PackageManager/Server/UnityPackageManager
+
+COMMAND LINE ARGUMENTS:
+/Applications/Unity/Hub/Editor/6000.5.6f1/Unity.app/Contents/MacOS/Unity
+-batchmode
+-quit
+-projectPath
+/Users/jiawei.zhou/Documents/Fidgeting app/unity/FidgetingApp
+-executeMethod
+FidgetingApp.EDC.Editor.MagneticSlideTileNeutralParityBuilder.BuildAndCapture
+-logFile
+/Users/jiawei.zhou/Documents/Fidgeting app/unity/FidgetingApp/ArtSource/ModelPipeline/magnetic-slide-tile/evidence/08-lighting/rev-004/unity-builder.log
+Successfully changed project path to: /Users/jiawei.zhou/Documents/Fidgeting app/unity/FidgetingApp
+/Users/jiawei.zhou/Documents/Fidgeting app/unity/FidgetingApp
+[UnityMemory] Configuration Parameters - Can be set up in boot.config
+    "memorysetup-temp-allocator-size-gi-baking-worker=262144"
+    "memorysetup-temp-allocator-size-gi-baking-worker=262144"
+    "memorysetup-temp-allocator-size-gi-baking-worker=262144"
+    "memorysetup-temp-allocator-size-gi-baking-worker=262144"
+    "memorysetup-temp-allocator-size-gi-baking-worker=262144"
+    "memorysetup-temp-allocator-size-nav-mesh-worker=65536"
+    "memorysetup-temp-allocator-size-audio-worker=65536"
+    "memorysetup-temp-allocator-size-cloud-worker=32768"
+    "memorysetup-allocator-temp-initial-block-size-main=262144"
+    "memorysetup-allocator-temp-initial-block-size-worker=262144"
+    "memorysetup-temp-allocator-size-preload-manager=33554432"
+    "memorysetup-temp-allocator-size-gfx=262144"
+    "memorysetup-temp-allocator-size-background-worker=32768"
+    "memorysetup-temp-allocator-size-job-worker=262144"
+    "memorysetup-bucket-allocator-granularity=16"
+    "memorysetup-bucket-allocator-bucket-count=8"
+    "memorysetup-bucket-allocator-block-size=33554432"
+    "memorysetup-bucket-allocator-block-count=8"
+    "memorysetup-main-allocator-block-size=16777216"
+    "memorysetup-thread-allocator-block-size=16777216"
+    "memorysetup-main-allocator-mimalloc-enabled=0"
+    "memorysetup-gfx-main-allocator-block-size=16777216"
+    "memorysetup-gfx-thread-allocator-block-size=16777216"
+    "memorysetup-cache-allocator-block-size=4194304"
+    "memorysetup-typetree-allocator-block-size=2097152"
+    "memorysetup-profiler-bucket-allocator-granularity=16"
+    "memorysetup-profiler-bucket-allocator-bucket-count=8"
+    "memorysetup-profiler-bucket-allocator-block-size=33554432"
+    "memorysetup-profiler-bucket-allocator-block-count=8"
+    "memorysetup-profiler-allocator-block-size=16777216"
+    "memorysetup-profiler-editor-allocator-block-size=1048576"
+    "memorysetup-temp-allocator-size-main=16777216"
+    "memorysetup-job-temp-allocator-block-size=2097152"
+    "memorysetup-job-temp-allocator-block-size-background=1048576"
+    "memorysetup-job-temp-allocator-reduction-small-platforms=262144"
+Logging is directed to a specific file, skipping project log.Player connection [8516968832]  Target information:
+
+Player connection [8516968832]  * "[IP] 172.30.215.248 [Port] 55504 [Flags] 2 [Guid] 2478474303 [EditorId] 2478474303 [Version] 1048832 [Id] OSXEditor(0,WhatnotMacBook-Pro-16-inch-2024-KDX49F6RHV) [Debug] 1 [PackageName] OSXEditor [ProjectName] Editor" 
+
+Player connection [8516968832]  * "[IP] 192.168.31.143 [Port] 55504 [Flags] 2 [Guid] 2478474303 [EditorId] 2478474303 [Version] 1048832 [Id] OSXEditor(0,WhatnotMacBook-Pro-16-inch-2024-KDX49F6RHV) [Debug] 1 [PackageName] OSXEditor [ProjectName] Editor" 
+
+Player connection [8516968832]  * "[IP] 7.8.30.210 [Port] 55504 [Flags] 2 [Guid] 2478474303 [EditorId] 2478474303 [Version] 1048832 [Id] OSXEditor(0,WhatnotMacBook-Pro-16-inch-2024-KDX49F6RHV) [Debug] 1 [PackageName] OSXEditor [ProjectName] Editor" 
+
+Player connection [8516968832] Host joined multi-casting on [225.0.0.222:54997]...
+Player connection [8516968832] Host joined alternative multi-casting on [225.0.0.222:34997]...
+Input System module state changed to: Initialized.
+[Physics::Module] Initialized fallback backend.
+[Physics::Module] Id: 0xdecafbad
+[Licensing::IpcConnector] Successfully connected to: "LicenseClient-jiawei.zhou@whatnot.com" at "2026-08-27T18:07:58.239032Z"
+[Package Manager] Connected to IPC stream "Upm-41477" after 0.1 seconds.
+[Licensing::Module] Licensing is not yet initialized.
+[Licensing::Client] Handshaking with LicensingClient:
+  Version:                 1.18.1+9fbee8e
+  Session Id:              ab584da5f95145968c4f43093e8bf762
+  Correlation Id:          515763ac13e17d2473abf82690909967
+  External correlation Id: 9157553912648141042
+  Machine Id:              /KH2BGG6vZf7t7D/yU/ppmcrnfI=
+[Licensing::Module] Successfully connected to LicensingClient on channel: "LicenseClient-jiawei.zhou@whatnot.com" (connect: 0.11s, validation: 0.02s, handshake: 0.20s)
+[Licensing::IpcConnector] Successfully connected to: "LicenseClient-jiawei.zhou@whatnot.com-notifications" at "2026-08-27T18:07:58.449866Z"
+[Licensing::Module] Connected to LicensingClient (PId: 41479, launch time: 0.00, total connection time: 0.32s)
+[Licensing::Module] Error: Access token is unavailable; failed to update
+[Licensing::Client] Successfully resolved entitlement details
+[Licensing::Module] License group:
+  Id: 18968260060310-UnityPersXXXX
+  Product: Unity Personal
+  Type: Assigned
+  Expiration: Unlimited
+[Licensing::Client] Successfully updated license, isAsync: True, time: 0.00
+[Licensing::Client] Successfully resolved entitlement details
+[Licensing::Module] Licensing Background thread has ended after 0.33s
+[Licensing::Module] Licensing is initialized (took 0.15s).
+[Licensing::Client] Successfully resolved entitlement details
+Library Redirect Path: Library/
+[Physics::Module] Selected backend.
+[Physics::Module] Name: PhysX
+[Physics::Module] Id: 0xf2b8ea05
+[Physics::Module] SDK Version: 4.1.2
+[Physics::Module] Integration Version: 1.0.0
+[Physics::Module] Threading Mode: Multi-Threaded
+Artifact Garbage Collection - Removed 1 unused hashed content files
+[Licensing::Client] Successfully resolved entitlement details
+Initialize engine version: 6000.5.6f1 (0e0577a1a2ac)
+[Subsystems] Discovering subsystems at path /Applications/Unity/Hub/Editor/6000.5.6f1/Unity.app/Contents/Resources/UnitySubsystems
+[Subsystems] Discovering subsystems at path /Users/jiawei.zhou/Documents/Fidgeting app/unity/FidgetingApp/Assets
+GfxDevice: creating device client; kGfxThreadingModeNonThreaded
+ preferred device: Apple M4 Max (high power)
+Metal devices available: 1
+0: Apple M4 Max (high power)
+Using device Apple M4 Max (high power)
+Initializing Metal device caps: Apple M4 Max
+Mac GPU Family: 2
+Apple GPU Family: 9
+MSL Version: 3.0
+Has Float MSAA: 1
+Has Float Filtering: 1
+ReadWrite Texture Tier: 2
+Initialize mono
+Mono path[0] = '/Applications/Unity/Hub/Editor/6000.5.6f1/Unity.app/Contents/Resources/Scripting/Managed'
+Mono path[1] = '/Applications/Unity/Hub/Editor/6000.5.6f1/Unity.app/Contents/Resources/Scripting/BCLExtensions/runtime/netstandard2.1'
+Mono path[2] = '/Applications/Unity/Hub/Editor/6000.5.6f1/Unity.app/Contents/Resources/Scripting/MonoBleedingEdge/lib/mono/unityjit-macos'
+Mono config path = '/Applications/Unity/Hub/Editor/6000.5.6f1/Unity.app/Contents/Resources/Scripting/MonoBleedingEdge/etc'
+Using monoOptions --debugger-agent=transport=dt_socket,embedding=1,server=y,suspend=n,address=127.0.0.1:56477
+CodeReloadManager initialized
+ImportWorker Server TCP listen port: 0
+AcceleratorClientConnectionCallback - disconnected - :0
+Begin MonoManager ReloadAssembly
+Registering precompiled unity dll's ...
+Trying to register platform support module: /Applications/Unity/Hub/Editor/6000.5.6f1/PlaybackEngines/WebGLSupport/UnityEditor.WebGL.Extensions.dll (that doesn't exist). Retrying without overrides.
+Platform support module is not available: /Applications/Unity/Hub/Editor/6000.5.6f1/PlaybackEngines/WebGLSupport/UnityEditor.WebGL.Extensions.dll
+Register platform support module: /Applications/Unity/Hub/Editor/6000.5.6f1/PlaybackEngines/MacStandaloneSupport/UnityEditor.OSXStandalone.Extensions.dll
+Register platform support module: /Applications/Unity/Hub/Editor/6000.5.6f1/PlaybackEngines/iOSSupport/UnityEditor.iOS.Extensions.dll
+Registered in 0.000354 seconds.
+[usbmuxd] Start listen thread
+[usbmuxd] Listen thread started
+[usbmuxd] Send listen message
+Native extension for iOS target not found
+Native extension for OSXStandalone target not found
+Package Manager log level set to [2]
+ScheduleIndexationOnStartup MainProcess:False IndexOnStartup:True
+Mono: successfully reloaded assembly
+- Finished resetting the current domain, in  0.215 seconds
+Domain Reload Profiling: 450ms
+	BeginReloadAssembly (60ms)
+		CreateAndSetChildDomain (21ms)
+	RebuildNativeTypeToScriptingClass (9ms)
+	initialDomainReloadingComplete (25ms)
+	LoadAllAssembliesAndSetupDomain (139ms)
+		LoadAssemblies (38ms)
+		AnalyzeDomain (104ms)
+			TypeCache.Refresh (104ms)
+				TypeCache.ScanAssembly (95ms)
+	FinalizeReload (215ms)
+		SetupLoadedEditorAssemblies (0ms)
+			InitializePlatformSupportModulesInManaged (31ms)
+			BeforeProcessingInitializeOnLoad (41ms)
+			ProcessInitializeOnLoadAttributes (44ms)
+			ProcessInitializeOnLoadMethodAttributes (64ms)
+[Licensing::Client] Successfully resolved entitlement details
+[Licensing::Client] Successfully resolved entitlement details
+Application.AssetDatabase Initial Refresh Start
+[Package Manager] Restoring resolved packages state from cache
+[Licensing::Client] Successfully resolved entitlement details
+[Package Manager] Registered 62 packages:
+  Packages from [https://packages.unity.com]:
+    com.unity.ai.navigation@2.0.14 (location: /Users/jiawei.zhou/Documents/Fidgeting app/unity/FidgetingApp/Library/PackageCache/com.unity.ai.navigation@134dd6a3b97b)
+    com.unity.collab-proxy@2.13.3 (location: /Users/jiawei.zhou/Documents/Fidgeting app/unity/FidgetingApp/Library/PackageCache/com.unity.collab-proxy@4f3be89e8675)
+    com.unity.ide.rider@3.0.38 (location: /Users/jiawei.zhou/Documents/Fidgeting app/unity/FidgetingApp/Library/PackageCache/com.unity.ide.rider@1f60b3138684)
+    com.unity.ide.visualstudio@2.0.26 (location: /Users/jiawei.zhou/Documents/Fidgeting app/unity/FidgetingApp/Library/PackageCache/com.unity.ide.visualstudio@a99d56dec63f)
+    com.unity.inputsystem@1.20.0 (location: /Users/jiawei.zhou/Documents/Fidgeting app/unity/FidgetingApp/Library/PackageCache/com.unity.inputsystem@7a4e1a2a8194)
+    com.unity.timeline@1.8.12 (location: /Users/jiawei.zhou/Documents/Fidgeting app/unity/FidgetingApp/Library/PackageCache/com.unity.timeline@8cd8509afae5)
+    com.unity.visualscripting@1.9.11 (location: /Users/jiawei.zhou/Documents/Fidgeting app/unity/FidgetingApp/Library/PackageCache/com.unity.visualscripting@8bed5ad90189)
+    com.unity.ai.assistant@2.17.0-pre.1 (location: /Users/jiawei.zhou/Documents/Fidgeting app/unity/FidgetingApp/Library/PackageCache/com.unity.ai.assistant@284c75a8d208)
+    com.unity.ai.inference@2.6.1 (location: /Users/jiawei.zhou/Documents/Fidgeting app/unity/FidgetingApp/Library/PackageCache/com.unity.ai.inference@9a123aee5df7)
+    com.unity.burst@1.8.29 (location: /Users/jiawei.zhou/Documents/Fidgeting app/unity/FidgetingApp/Library/PackageCache/com.unity.burst@6bb9aca3ef38)
+    com.unity.dt.app-ui@2.1.7 (location: /Users/jiawei.zhou/Documents/Fidgeting app/unity/FidgetingApp/Library/PackageCache/com.unity.dt.app-ui@b097002a00c2)
+    com.unity.nuget.newtonsoft-json@3.2.2 (location: /Users/jiawei.zhou/Documents/Fidgeting app/unity/FidgetingApp/Library/PackageCache/com.unity.nuget.newtonsoft-json@4dfd81071c64)
+    com.unity.nuget.mono-cecil@1.11.6 (location: /Users/jiawei.zhou/Documents/Fidgeting app/unity/FidgetingApp/Library/PackageCache/com.unity.nuget.mono-cecil@ecb9724e46ff)
+    com.unity.test-framework.performance@3.5.0 (location: /Users/jiawei.zhou/Documents/Fidgeting app/unity/FidgetingApp/Library/PackageCache/com.unity.test-framework.performance@8b56083ec0f0)
+    com.unity.searcher@4.9.4 (location: /Users/jiawei.zhou/Documents/Fidgeting app/unity/FidgetingApp/Library/PackageCache/com.unity.searcher@d45a78918735)
+  Built-in packages:
+    com.unity.multiplayer.center@1.0.1 (location: /Users/jiawei.zhou/Documents/Fidgeting app/unity/FidgetingApp/Library/PackageCache/com.unity.multiplayer.center@b860850997d0)
+    com.unity.render-pipelines.universal@17.5.0 (location: /Users/jiawei.zhou/Documents/Fidgeting app/unity/FidgetingApp/Library/PackageCache/com.unity.render-pipelines.universal@73b4c4ff130e)
+    com.unity.test-framework@1.7.0 (location: /Users/jiawei.zhou/Documents/Fidgeting app/unity/FidgetingApp/Library/PackageCache/com.unity.test-framework@1405238725ab)
+    com.unity.ugui@2.5.0 (location: /Users/jiawei.zhou/Documents/Fidgeting app/unity/FidgetingApp/Library/PackageCache/com.unity.ugui@67707a67a4ab)
+    com.unity.modules.accessibility@1.0.0 (location: /Users/jiawei.zhou/Documents/Fidgeting app/unity/FidgetingApp/Library/PackageCache/com.unity.modules.accessibility)
+    com.unity.modules.adaptiveperformance@1.0.0 (location: /Users/jiawei.zhou/Documents/Fidgeting app/unity/FidgetingApp/Library/PackageCache/com.unity.modules.adaptiveperformance)
+    com.unity.modules.ai@1.0.0 (location: /Users/jiawei.zhou/Documents/Fidgeting app/unity/FidgetingApp/Library/PackageCache/com.unity.modules.ai)
+    com.unity.modules.androidjni@1.0.0 (location: /Users/jiawei.zhou/Documents/Fidgeting app/unity/FidgetingApp/Library/PackageCache/com.unity.modules.androidjni)
+    com.unity.modules.animation@1.0.0 (location: /Users/jiawei.zhou/Documents/Fidgeting app/unity/FidgetingApp/Library/PackageCache/com.unity.modules.animation)
+    com.unity.modules.assetbundle@1.0.0 (location: /Users/jiawei.zhou/Documents/Fidgeting app/unity/FidgetingApp/Library/PackageCache/com.unity.modules.assetbundle)
+    com.unity.modules.audio@1.0.0 (location: /Users/jiawei.zhou/Documents/Fidgeting app/unity/FidgetingApp/Library/PackageCache/com.unity.modules.audio)
+    com.unity.modules.cloth@1.0.0 (location: /Users/jiawei.zhou/Documents/Fidgeting app/unity/FidgetingApp/Library/PackageCache/com.unity.modules.cloth)
+    com.unity.modules.director@1.0.0 (location: /Users/jiawei.zhou/Documents/Fidgeting app/unity/FidgetingApp/Library/PackageCache/com.unity.modules.director)
+    com.unity.modules.imageconversion@1.0.0 (location: /Users/jiawei.zhou/Documents/Fidgeting app/unity/FidgetingApp/Library/PackageCache/com.unity.modules.imageconversion)
+    com.unity.modules.imgui@1.0.0 (location: /Users/jiawei.zhou/Documents/Fidgeting app/unity/FidgetingApp/Library/PackageCache/com.unity.modules.imgui)
+    com.unity.modules.jsonserialize@1.0.0 (location: /Users/jiawei.zhou/Documents/Fidgeting app/unity/FidgetingApp/Library/PackageCache/com.unity.modules.jsonserialize)
+    com.unity.modules.particlesystem@1.0.0 (location: /Users/jiawei.zhou/Documents/Fidgeting app/unity/FidgetingApp/Library/PackageCache/com.unity.modules.particlesystem)
+    com.unity.modules.physics@1.0.0 (location: /Users/jiawei.zhou/Documents/Fidgeting app/unity/FidgetingApp/Library/PackageCache/com.unity.modules.physics)
+    com.unity.modules.physics2d@1.0.0 (location: /Users/jiawei.zhou/Documents/Fidgeting app/unity/FidgetingApp/Library/PackageCache/com.unity.modules.physics2d)
+    com.unity.modules.physicscore2d@1.0.0 (location: /Users/jiawei.zhou/Documents/Fidgeting app/unity/FidgetingApp/Library/PackageCache/com.unity.modules.physicscore2d)
+    com.unity.modules.screencapture@1.0.0 (location: /Users/jiawei.zhou/Documents/Fidgeting app/unity/FidgetingApp/Library/PackageCache/com.unity.modules.screencapture)
+    com.unity.modules.terrain@1.0.0 (location: /Users/jiawei.zhou/Documents/Fidgeting app/unity/FidgetingApp/Library/PackageCache/com.unity.modules.terrain)
+    com.unity.modules.terrainphysics@1.0.0 (location: /Users/jiawei.zhou/Documents/Fidgeting app/unity/FidgetingApp/Library/PackageCache/com.unity.modules.terrainphysics)
+    com.unity.modules.tilemap@1.0.0 (location: /Users/jiawei.zhou/Documents/Fidgeting app/unity/FidgetingApp/Library/PackageCache/com.unity.modules.tilemap)
+    com.unity.modules.ui@1.0.0 (location: /Users/jiawei.zhou/Documents/Fidgeting app/unity/FidgetingApp/Library/PackageCache/com.unity.modules.ui)
+    com.unity.modules.uielements@1.0.0 (location: /Users/jiawei.zhou/Documents/Fidgeting app/unity/FidgetingApp/Library/PackageCache/com.unity.modules.uielements)
+    com.unity.modules.umbra@1.0.0 (location: /Users/jiawei.zhou/Documents/Fidgeting app/unity/FidgetingApp/Library/PackageCache/com.unity.modules.umbra)
+    com.unity.modules.unityanalytics@1.0.0 (location: /Users/jiawei.zhou/Documents/Fidgeting app/unity/FidgetingApp/Library/PackageCache/com.unity.modules.unityanalytics)
+    com.unity.modules.unitywebrequest@1.0.0 (location: /Users/jiawei.zhou/Documents/Fidgeting app/unity/FidgetingApp/Library/PackageCache/com.unity.modules.unitywebrequest)
+    com.unity.modules.unitywebrequestassetbundle@1.0.0 (location: /Users/jiawei.zhou/Documents/Fidgeting app/unity/FidgetingApp/Library/PackageCache/com.unity.modules.unitywebrequestassetbundle)
+    com.unity.modules.unitywebrequestaudio@1.0.0 (location: /Users/jiawei.zhou/Documents/Fidgeting app/unity/FidgetingApp/Library/PackageCache/com.unity.modules.unitywebrequestaudio)
+    com.unity.modules.unitywebrequesttexture@1.0.0 (location: /Users/jiawei.zhou/Documents/Fidgeting app/unity/FidgetingApp/Library/PackageCache/com.unity.modules.unitywebrequesttexture)
+    com.unity.modules.unitywebrequestwww@1.0.0 (location: /Users/jiawei.zhou/Documents/Fidgeting app/unity/FidgetingApp/Library/PackageCache/com.unity.modules.unitywebrequestwww)
+    com.unity.modules.vectorgraphics@1.0.0 (location: /Users/jiawei.zhou/Documents/Fidgeting app/unity/FidgetingApp/Library/PackageCache/com.unity.modules.vectorgraphics)
+    com.unity.modules.vehicles@1.0.0 (location: /Users/jiawei.zhou/Documents/Fidgeting app/unity/FidgetingApp/Library/PackageCache/com.unity.modules.vehicles)
+    com.unity.modules.video@1.0.0 (location: /Users/jiawei.zhou/Documents/Fidgeting app/unity/FidgetingApp/Library/PackageCache/com.unity.modules.video)
+    com.unity.modules.wind@1.0.0 (location: /Users/jiawei.zhou/Documents/Fidgeting app/unity/FidgetingApp/Library/PackageCache/com.unity.modules.wind)
+    com.unity.modules.xr@1.0.0 (location: /Users/jiawei.zhou/Documents/Fidgeting app/unity/FidgetingApp/Library/PackageCache/com.unity.modules.xr)
+    com.unity.collections@6.5.0 (location: /Users/jiawei.zhou/Documents/Fidgeting app/unity/FidgetingApp/Library/PackageCache/com.unity.collections@a43cabe808ca)
+    com.unity.2d.sprite@1.0.0 (location: /Users/jiawei.zhou/Documents/Fidgeting app/unity/FidgetingApp/Library/PackageCache/com.unity.2d.sprite@053a968eab56)
+    com.unity.mathematics@1.4.0 (location: /Users/jiawei.zhou/Documents/Fidgeting app/unity/FidgetingApp/Library/PackageCache/com.unity.mathematics@981956d94fb6)
+    com.unity.modules.subsystems@1.0.0 (location: /Users/jiawei.zhou/Documents/Fidgeting app/unity/FidgetingApp/Library/PackageCache/com.unity.modules.subsystems)
+    com.unity.modules.hierarchycore@1.0.0 (location: /Users/jiawei.zhou/Documents/Fidgeting app/unity/FidgetingApp/Library/PackageCache/com.unity.modules.hierarchycore)
+    com.unity.ext.nunit@2.1.0 (location: /Users/jiawei.zhou/Documents/Fidgeting app/unity/FidgetingApp/Library/PackageCache/com.unity.ext.nunit@44f7d31723bd)
+    com.unity.render-pipelines.core@17.5.0 (location: /Users/jiawei.zhou/Documents/Fidgeting app/unity/FidgetingApp/Library/PackageCache/com.unity.render-pipelines.core@645717f21c5f)
+    com.unity.shadergraph@17.5.0 (location: /Users/jiawei.zhou/Documents/Fidgeting app/unity/FidgetingApp/Library/PackageCache/com.unity.shadergraph@8d7376ec43ee)
+    com.unity.render-pipelines.universal-config@17.5.0 (location: /Users/jiawei.zhou/Documents/Fidgeting app/unity/FidgetingApp/Library/PackageCache/com.unity.render-pipelines.universal-config@fdda01c80fe3)
+[Subsystems] No new subsystems found in resolved package list.
+[Package Manager] Done registering packages in 0.01 seconds
+[ScriptCompilation] Requested script compilation because: AssetDatabase observed changes in script compilation related files
+info: Microsoft.Hosting.Lifetime[14]
+      Now listening on: http://unix:/tmp/ilpp.sock-82459902276d5e08e7b0a2b4f2bc76a1
+info: Microsoft.Hosting.Lifetime[0]
+      Application started. Press Ctrl+C to shut down.
+info: Microsoft.Hosting.Lifetime[0]
+      Hosting environment: Production
+info: Microsoft.Hosting.Lifetime[0]
+      Content root path: /Users/jiawei.zhou/Documents/Fidgeting app/unity/FidgetingApp
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/2 POST http://ilpp/UnityILPP.PostProcessing/Ping - application/grpc -
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[0]
+      Executing endpoint 'gRPC - /UnityILPP.PostProcessing/Ping'
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[1]
+      Executed endpoint 'gRPC - /UnityILPP.PostProcessing/Ping'
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/2 POST http://ilpp/UnityILPP.PostProcessing/Ping - 200 - application/grpc 13.1710ms
+Starting: /Applications/Unity/Hub/Editor/6000.5.6f1/Unity.app/Contents/Resources/BuildPipeline/bee_backend --ipc --defer-dag-verification --dagfile="Library/Bee/900b0aE.dag" --continue-on-failure --profile="Library/Bee/backend1.traceevents" ScriptAssemblies
+WorkingDir: /Users/jiawei.zhou/Documents/Fidgeting app/unity/FidgetingApp
+DisplayProgressbar: Compiling Scripts
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/2 POST http://ilpp/UnityILPP.PostProcessing/ConfigurePostProcessors - application/grpc -
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[0]
+      Executing endpoint 'gRPC - /UnityILPP.PostProcessing/ConfigurePostProcessors'
+warn: Unity.ILPP.Runner.PostProcessingAssemblyLoadContext[0]
+      Assembly unityeditor.ios.extensions.xcode has duplicate hint path. Ignoring "/Applications/Unity/Hub/Editor/6000.5.6f1/PlaybackEngines/iOSSupport/UnityEditor.iOS.Extensions.Xcode.dll" in favor of "/Applications/Unity/Hub/Editor/6000.5.6f1/PlaybackEngines/MacStandaloneSupport/UnityEditor.iOS.Extensions.Xcode.dll"
+warn: Unity.ILPP.Runner.PostProcessingAssemblyLoadContext[0]
+      Assembly system.runtime.interopservices.windowsruntime has duplicate hint path. Ignoring "/Applications/Unity/Hub/Editor/6000.5.6f1/Unity.app/Contents/Resources/Scripting/UnityReferenceAssemblies/unity-4.8-api/Facades/System.Runtime.InteropServices.WindowsRuntime.dll" in favor of "/Applications/Unity/Hub/Editor/6000.5.6f1/Unity.app/Contents/Resources/Scripting/NetStandard/Extensions/2.0.0/System.Runtime.InteropServices.WindowsRuntime.dll"
+warn: Unity.ILPP.Runner.PostProcessingAssemblyLoadContext[0]
+      Assembly system.componentmodel.composition has duplicate hint path. Ignoring "/Applications/Unity/Hub/Editor/6000.5.6f1/Unity.app/Contents/Resources/Scripting/UnityReferenceAssemblies/unity-4.8-api/System.ComponentModel.Composition.dll" in favor of "/Applications/Unity/Hub/Editor/6000.5.6f1/Unity.app/Contents/Resources/Scripting/NetStandard/compat/2.1.0/shims/netfx/System.ComponentModel.Composition.dll"
+info: Unity.ILPP.Runner.PostProcessingAssemblyLoadContext[0]
+      Resolved Unity.Burst.Cecil, Version=0.11.6.0, Culture=neutral, PublicKeyToken=50cebf1cceb9d05e with Library/PackageCache/com.unity.burst@6bb9aca3ef38/Unity.Burst.CodeGen/Unity.Burst.Cecil.dll
+info: Unity.ILPP.Runner.PostProcessingAssemblyLoadContext[0]
+      Resolved Mono.Cecil, Version=0.11.5.0, Culture=neutral, PublicKeyToken=50cebf1cceb9d05e with Library/PackageCache/com.unity.nuget.mono-cecil@ecb9724e46ff/Mono.Cecil.dll
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[1]
+      Executed endpoint 'gRPC - /UnityILPP.PostProcessing/ConfigurePostProcessors'
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/2 POST http://ilpp/UnityILPP.PostProcessing/ConfigurePostProcessors - 200 - application/grpc 12.3610ms
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/2 POST http://ilpp/UnityILPP.PostProcessing/PostProcessAssembly - application/grpc -
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[0]
+      Executing endpoint 'gRPC - /UnityILPP.PostProcessing/PostProcessAssembly'
+info: Unity.ILPP.Runner.PostProcessingPipeline[0]
+      Processing assembly Library/Bee/artifacts/900b0aE.dag/Assembly-CSharp-Editor.dll, with 144 defines and 395 references
+info: Unity.ILPP.Runner.PostProcessingPipeline[0]
+      processors: Unity.Jobs.CodeGen.JobsILPostProcessor, zzzUnity.Burst.CodeGen.BurstILPostProcessor
+info: Unity.ILPP.Runner.PostProcessingPipeline[0]
+      running Unity.Jobs.CodeGen.JobsILPostProcessor
+info: Unity.ILPP.Runner.PostProcessingAssemblyLoadContext[0]
+      Resolved Unity.Collections, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null with Library/Bee/artifacts/900b0aE.dag/Unity.Collections.dll
+info: Unity.ILPP.Runner.PostProcessingAssemblyLoadContext[0]
+      Resolved UnityEditor.CoreModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null with /Applications/Unity/Hub/Editor/6000.5.6f1/Unity.app/Contents/Resources/Scripting/Managed/UnityEngine/UnityEditor.CoreModule.dll
+info: Unity.ILPP.Runner.PostProcessingAssemblyLoadContext[0]
+      Resolved UnityEngine.CoreModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null with /Applications/Unity/Hub/Editor/6000.5.6f1/Unity.app/Contents/Resources/Scripting/Managed/UnityEngine/UnityEngine.CoreModule.dll
+info: Unity.ILPP.Runner.PostProcessingAssemblyLoadContext[0]
+      Resolved Unity.Scripting, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null with /Applications/Unity/Hub/Editor/6000.5.6f1/Unity.app/Contents/Resources/Scripting/Managed/UnityEngine/Unity.Scripting.dll
+info: Unity.ILPP.Runner.PostProcessingPipeline[0]
+      running zzzUnity.Burst.CodeGen.BurstILPostProcessor
+info: Unity.ILPP.Runner.PostProcessingAssemblyLoadContext[0]
+      Resolved Unity.Burst.Cecil.Rocks, Version=0.11.6.0, Culture=neutral, PublicKeyToken=50cebf1cceb9d05e with Library/PackageCache/com.unity.burst@6bb9aca3ef38/Unity.Burst.CodeGen/Unity.Burst.Cecil.Rocks.dll
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[1]
+      Executed endpoint 'gRPC - /UnityILPP.PostProcessing/PostProcessAssembly'
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/2 POST http://ilpp/UnityILPP.PostProcessing/PostProcessAssembly - 200 - application/grpc 237.4509ms
+ExitCode: 0 Duration: 2s679ms
+[1078/1452  0s] ILPP-Configuration Library/ilpp-configuration.nevergeneratedoutput
+[1448/1452  2s] Csc Library/Bee/artifacts/900b0aE.dag/Assembly-CSharp-Editor.dll (+2 others)
+Assets/_TwoLobeBar/Editor/TwoLobeBarSceneBuilder.cs(636,13): warning CS0618: 'RenderSettings.customReflection' is obsolete: 'RenderSettings.customReflection has been deprecated in favor of RenderSettings.customReflectionTexture.'
+Assets/_EDC/Candidates/MagneticSlideTileGate11R010/Editor/MagneticSlideTileGate11R010Builder.cs(387,13): warning CS0618: 'RenderSettings.customReflection' is obsolete: 'RenderSettings.customReflection has been deprecated in favor of RenderSettings.customReflectionTexture.'
+Assets/_EDC/Candidates/MagneticSlideTileGate08R003PortableValidation/Editor/MagneticSlideTilePortableLightingBuilder.cs(326,13): warning CS0618: 'RenderSettings.customReflection' is obsolete: 'RenderSettings.customReflection has been deprecated in favor of RenderSettings.customReflectionTexture.'
+Assets/_Fidgeting/Editor/ThreeBladeStaticAuditReporter.cs(46,21): warning CS0618: 'FindObjectsSortMode' is obsolete: 'FindObjectsSortMode has been deprecated. Use the FindObjectsByType overloads that do not take a FindObjectsSortMode parameter.'
+Assets/_Fidgeting/Editor/ThreeBladeStaticAuditReporter.cs(43,40): warning CS0618: 'Object.FindObjectsByType<T>(FindObjectsInactive, FindObjectsSortMode)' is obsolete: 'FindObjectsByType with FindObjectsSortMode parameter has been deprecated. Use FindObjectsByType<T>() or FindObjectsByType<T>(FindObjectsInactive) instead. InstanceID will be replaced in the future with EntityId and previous sort order cannot be maintained.'
+Assets/_Fidgeting/Editor/ThreeBladeStaticAuditReporter.cs(82,17): warning CS0618: 'FindObjectsSortMode' is obsolete: 'FindObjectsSortMode has been deprecated. Use the FindObjectsByType overloads that do not take a FindObjectsSortMode parameter.'
+Assets/_Fidgeting/Editor/ThreeBladeStaticAuditReporter.cs(80,40): warning CS0618: 'Object.FindObjectsByType<T>(FindObjectsInactive, FindObjectsSortMode)' is obsolete: 'FindObjectsByType with FindObjectsSortMode parameter has been deprecated. Use FindObjectsByType<T>() or FindObjectsByType<T>(FindObjectsInactive) instead. InstanceID will be replaced in the future with EntityId and previous sort order cannot be maintained.'
+Assets/_EDC/Candidates/MagneticSlideTileGate08R004NeutralParity/Editor/MagneticSlideTileNeutralParityBuilder.cs(285,13): warning CS0618: 'RenderSettings.customReflection' is obsolete: 'RenderSettings.customReflection has been deprecated in favor of RenderSettings.customReflectionTexture.'
+Assets/_EDC/Candidates/MagneticSlideTileGate11R009/Editor/MagneticSlideTileGate11Builder.cs(637,13): warning CS0618: 'RenderSettings.customReflection' is obsolete: 'RenderSettings.customReflection has been deprecated in favor of RenderSettings.customReflectionTexture.'
+Assets/Tests/Editor/ProductArchitectureTests.cs(135,25): warning CS0618: 'FindObjectsSortMode' is obsolete: 'FindObjectsSortMode has been deprecated. Use the FindObjectsByType overloads that do not take a FindObjectsSortMode parameter.'
+Assets/Tests/Editor/ProductArchitectureTests.cs(133,17): warning CS0618: 'Object.FindObjectsByType<T>(FindObjectsInactive, FindObjectsSortMode)' is obsolete: 'FindObjectsByType with FindObjectsSortMode parameter has been deprecated. Use FindObjectsByType<T>() or FindObjectsByType<T>(FindObjectsInactive) instead. InstanceID will be replaced in the future with EntityId and previous sort order cannot be maintained.'
+Assets/Tests/Editor/ProductArchitectureTests.cs(144,21): warning CS0618: 'FindObjectsSortMode' is obsolete: 'FindObjectsSortMode has been deprecated. Use the FindObjectsByType overloads that do not take a FindObjectsSortMode parameter.'
+Assets/Tests/Editor/ProductArchitectureTests.cs(142,40): warning CS0618: 'Object.FindObjectsByType<T>(FindObjectsInactive, FindObjectsSortMode)' is obsolete: 'FindObjectsByType with FindObjectsSortMode parameter has been deprecated. Use FindObjectsByType<T>() or FindObjectsByType<T>(FindObjectsInactive) instead. InstanceID will be replaced in the future with EntityId and previous sort order cannot be maintained.'
+Assets/Tests/Editor/SpinnerEnvironmentTests.cs(620,29): warning CS0618: 'FindObjectsSortMode' is obsolete: 'FindObjectsSortMode has been deprecated. Use the FindObjectsByType overloads that do not take a FindObjectsSortMode parameter.'
+Assets/Tests/Editor/SpinnerEnvironmentTests.cs(617,48): warning CS0618: 'Object.FindObjectsByType<T>(FindObjectsInactive, FindObjectsSortMode)' is obsolete: 'FindObjectsByType with FindObjectsSortMode parameter has been deprecated. Use FindObjectsByType<T>() or FindObjectsByType<T>(FindObjectsInactive) instead. InstanceID will be replaced in the future with EntityId and previous sort order cannot be maintained.'
+Assets/Tests/Editor/ProductArchitectureTests.cs(1498,21): warning CS0618: 'FindObjectsSortMode' is obsolete: 'FindObjectsSortMode has been deprecated. Use the FindObjectsByType overloads that do not take a FindObjectsSortMode parameter.'
+Assets/Tests/Editor/ProductArchitectureTests.cs(1496,48): warning CS0618: 'Object.FindObjectsByType<T>(FindObjectsInactive, FindObjectsSortMode)' is obsolete: 'FindObjectsByType with FindObjectsSortMode parameter has been deprecated. Use FindObjectsByType<T>() or FindObjectsByType<T>(FindObjectsInactive) instead. InstanceID will be replaced in the future with EntityId and previous sort order cannot be maintained.'
+Assets/Tests/Editor/ProductArchitectureTests.cs(1914,21): warning CS0618: 'FindObjectsSortMode' is obsolete: 'FindObjectsSortMode has been deprecated. Use the FindObjectsByType overloads that do not take a FindObjectsSortMode parameter.'
+Assets/Tests/Editor/ProductArchitectureTests.cs(1912,33): warning CS0618: 'Object.FindObjectsByType<T>(FindObjectsInactive, FindObjectsSortMode)' is obsolete: 'FindObjectsByType with FindObjectsSortMode parameter has been deprecated. Use FindObjectsByType<T>() or FindObjectsByType<T>(FindObjectsInactive) instead. InstanceID will be replaced in the future with EntityId and previous sort order cannot be maintained.'
+[1449/1452  0s] ILPostProcess Library/Bee/artifacts/900b0aE.dag/post-processed/Assembly-CSharp-Editor.dll (+pdb)
+Processing assembly Library/Bee/artifacts/900b0aE.dag/Assembly-CSharp-Editor.dll, with 144 defines and 395 references
+processors: Unity.Jobs.CodeGen.JobsILPostProcessor, zzzUnity.Burst.CodeGen.BurstILPostProcessor
+running Unity.Jobs.CodeGen.JobsILPostProcessor
+running zzzUnity.Burst.CodeGen.BurstILPostProcessor
+[1450/1452  0s] CopyFiles Library/ScriptAssemblies/Assembly-CSharp-Editor.pdb
+[1451/1452  0s] CopyFiles Library/ScriptAssemblies/Assembly-CSharp-Editor.dll
+*** Tundra build success (2.66 seconds), 5 items updated, 1452 evaluated
+Assets/_TwoLobeBar/Editor/TwoLobeBarSceneBuilder.cs(636,13): warning CS0618: 'RenderSettings.customReflection' is obsolete: 'RenderSettings.customReflection has been deprecated in favor of RenderSettings.customReflectionTexture.'
+Assets/_EDC/Candidates/MagneticSlideTileGate11R010/Editor/MagneticSlideTileGate11R010Builder.cs(387,13): warning CS0618: 'RenderSettings.customReflection' is obsolete: 'RenderSettings.customReflection has been deprecated in favor of RenderSettings.customReflectionTexture.'
+Assets/_EDC/Candidates/MagneticSlideTileGate08R003PortableValidation/Editor/MagneticSlideTilePortableLightingBuilder.cs(326,13): warning CS0618: 'RenderSettings.customReflection' is obsolete: 'RenderSettings.customReflection has been deprecated in favor of RenderSettings.customReflectionTexture.'
+Assets/_Fidgeting/Editor/ThreeBladeStaticAuditReporter.cs(46,21): warning CS0618: 'FindObjectsSortMode' is obsolete: 'FindObjectsSortMode has been deprecated. Use the FindObjectsByType overloads that do not take a FindObjectsSortMode parameter.'
+Assets/_Fidgeting/Editor/ThreeBladeStaticAuditReporter.cs(43,40): warning CS0618: 'Object.FindObjectsByType<T>(FindObjectsInactive, FindObjectsSortMode)' is obsolete: 'FindObjectsByType with FindObjectsSortMode parameter has been deprecated. Use FindObjectsByType<T>() or FindObjectsByType<T>(FindObjectsInactive) instead. InstanceID will be replaced in the future with EntityId and previous sort order cannot be maintained.'
+Assets/_Fidgeting/Editor/ThreeBladeStaticAuditReporter.cs(82,17): warning CS0618: 'FindObjectsSortMode' is obsolete: 'FindObjectsSortMode has been deprecated. Use the FindObjectsByType overloads that do not take a FindObjectsSortMode parameter.'
+Assets/_Fidgeting/Editor/ThreeBladeStaticAuditReporter.cs(80,40): warning CS0618: 'Object.FindObjectsByType<T>(FindObjectsInactive, FindObjectsSortMode)' is obsolete: 'FindObjectsByType with FindObjectsSortMode parameter has been deprecated. Use FindObjectsByType<T>() or FindObjectsByType<T>(FindObjectsInactive) instead. InstanceID will be replaced in the future with EntityId and previous sort order cannot be maintained.'
+Assets/_EDC/Candidates/MagneticSlideTileGate08R004NeutralParity/Editor/MagneticSlideTileNeutralParityBuilder.cs(285,13): warning CS0618: 'RenderSettings.customReflection' is obsolete: 'RenderSettings.customReflection has been deprecated in favor of RenderSettings.customReflectionTexture.'
+Assets/_EDC/Candidates/MagneticSlideTileGate11R009/Editor/MagneticSlideTileGate11Builder.cs(637,13): warning CS0618: 'RenderSettings.customReflection' is obsolete: 'RenderSettings.customReflection has been deprecated in favor of RenderSettings.customReflectionTexture.'
+Assets/Tests/Editor/ProductArchitectureTests.cs(135,25): warning CS0618: 'FindObjectsSortMode' is obsolete: 'FindObjectsSortMode has been deprecated. Use the FindObjectsByType overloads that do not take a FindObjectsSortMode parameter.'
+Assets/Tests/Editor/ProductArchitectureTests.cs(133,17): warning CS0618: 'Object.FindObjectsByType<T>(FindObjectsInactive, FindObjectsSortMode)' is obsolete: 'FindObjectsByType with FindObjectsSortMode parameter has been deprecated. Use FindObjectsByType<T>() or FindObjectsByType<T>(FindObjectsInactive) instead. InstanceID will be replaced in the future with EntityId and previous sort order cannot be maintained.'
+Assets/Tests/Editor/ProductArchitectureTests.cs(144,21): warning CS0618: 'FindObjectsSortMode' is obsolete: 'FindObjectsSortMode has been deprecated. Use the FindObjectsByType overloads that do not take a FindObjectsSortMode parameter.'
+Assets/Tests/Editor/ProductArchitectureTests.cs(142,40): warning CS0618: 'Object.FindObjectsByType<T>(FindObjectsInactive, FindObjectsSortMode)' is obsolete: 'FindObjectsByType with FindObjectsSortMode parameter has been deprecated. Use FindObjectsByType<T>() or FindObjectsByType<T>(FindObjectsInactive) instead. InstanceID will be replaced in the future with EntityId and previous sort order cannot be maintained.'
+Assets/Tests/Editor/SpinnerEnvironmentTests.cs(620,29): warning CS0618: 'FindObjectsSortMode' is obsolete: 'FindObjectsSortMode has been deprecated. Use the FindObjectsByType overloads that do not take a FindObjectsSortMode parameter.'
+Assets/Tests/Editor/SpinnerEnvironmentTests.cs(617,48): warning CS0618: 'Object.FindObjectsByType<T>(FindObjectsInactive, FindObjectsSortMode)' is obsolete: 'FindObjectsByType with FindObjectsSortMode parameter has been deprecated. Use FindObjectsByType<T>() or FindObjectsByType<T>(FindObjectsInactive) instead. InstanceID will be replaced in the future with EntityId and previous sort order cannot be maintained.'
+Assets/Tests/Editor/ProductArchitectureTests.cs(1498,21): warning CS0618: 'FindObjectsSortMode' is obsolete: 'FindObjectsSortMode has been deprecated. Use the FindObjectsByType overloads that do not take a FindObjectsSortMode parameter.'
+Assets/Tests/Editor/ProductArchitectureTests.cs(1496,48): warning CS0618: 'Object.FindObjectsByType<T>(FindObjectsInactive, FindObjectsSortMode)' is obsolete: 'FindObjectsByType with FindObjectsSortMode parameter has been deprecated. Use FindObjectsByType<T>() or FindObjectsByType<T>(FindObjectsInactive) instead. InstanceID will be replaced in the future with EntityId and previous sort order cannot be maintained.'
+Assets/Tests/Editor/ProductArchitectureTests.cs(1914,21): warning CS0618: 'FindObjectsSortMode' is obsolete: 'FindObjectsSortMode has been deprecated. Use the FindObjectsByType overloads that do not take a FindObjectsSortMode parameter.'
+Assets/Tests/Editor/ProductArchitectureTests.cs(1912,33): warning CS0618: 'Object.FindObjectsByType<T>(FindObjectsInactive, FindObjectsSortMode)' is obsolete: 'FindObjectsByType with FindObjectsSortMode parameter has been deprecated. Use FindObjectsByType<T>() or FindObjectsByType<T>(FindObjectsInactive) instead. InstanceID will be replaced in the future with EntityId and previous sort order cannot be maintained.'
+AssetDatabase: script compilation time: 2.980350s
+Total cache size 267348784
+Total cache size after purge 267348784, took 00:00:00.1533124
+Begin MonoManager ReloadAssembly
+Symbol file LoadedFromMemory is not a mono symbol file
+Symbol file LoadedFromMemory is not a mono symbol file
+Native extension for iOS target not found
+Native extension for OSXStandalone target not found
+[Licensing::Client] Error: Code 404 while processing request (status: Found 0 entitlement groups and 0 free entitlements matching requested entitlement ids)
+[Licensing::Client] Error: Code 404 while processing request (status: Found 0 entitlement groups and 0 free entitlements matching requested entitlement ids)
+[Licensing::Client] Error: Code 404 while processing request (status: Found 0 entitlement groups and 0 free entitlements matching requested entitlement ids)
+ScheduleIndexationOnStartup MainProcess:True IndexOnStartup:True
+Mono: successfully reloaded assembly
+- Finished resetting the current domain, in  2.821 seconds
+Domain Reload Profiling: 3370ms
+	BeginReloadAssembly (81ms)
+		DisableScriptedObjects (11ms)
+		CreateAndSetChildDomain (16ms)
+	RebuildCommonClasses (4ms)
+	RebuildNativeTypeToScriptingClass (8ms)
+	initialDomainReloadingComplete (36ms)
+	LoadAllAssembliesAndSetupDomain (419ms)
+		LoadAssemblies (144ms)
+		AnalyzeDomain (242ms)
+			TypeCache.Refresh (195ms)
+				TypeCache.ScanAssembly (182ms)
+			BuildScriptInfoCaches (43ms)
+			ResolveRequiredComponents (4ms)
+	FinalizeReload (2822ms)
+		SetupLoadedEditorAssemblies (0ms)
+			InitializePlatformSupportModulesInManaged (6ms)
+			BeforeProcessingInitializeOnLoad (67ms)
+			ProcessInitializeOnLoadAttributes (2297ms)
+			ProcessInitializeOnLoadMethodAttributes (253ms)
+		AwakeInstancesAfterBackupRestoration (9ms)
+Starting new worker id: 0 with log in /Users/jiawei.zhou/Documents/Fidgeting app/unity/FidgetingApp/Logs/AssetImportWorkerHW0.log
+Refreshing native plugins compatible for Editor in 2.12 ms, found 3 plugins.
+
+Asset Pipeline Refresh (id=ef3c1d59c6c054de2945a5402d9aee88): Total: 7.648 seconds - Initiated by InitialRefreshV2(ForceSynchronousImport)
+	(Values over 0.05ms)
+	Summary:
+		Imports: total=0 (actual=0, local cache=0, cache server=0)
+		Asset DB Process Time: managed=0 ms, native=3731 ms
+		Asset DB Callback time: managed=302 ms, native=18 ms
+		Scripting: domain reloads=1, domain reload time=573 ms, compile time=2981 ms, other=40 ms
+		Project Asset Count: scripts=2311, non-scripts=5843
+		Asset File Changes: new=0, changed=1, moved=0, deleted=0
+		Scan Filter Count: 1
+	InvokePackagesCallback: 10.530ms
+	ApplyChangesToAssetFolders: 0.193ms
+	Scan: 598.054ms
+	Collect global state as custom dependencies: 8.261ms
+	OnSourceAssetsModified: 0.262ms
+	CategorizeScriptCompilationAssets: 34.664ms
+	ProcessAssetsWithTransientArtifactChanges: 55.233ms
+	CategorizeAssets: 69.100ms
+	CompileScripts: 2980.974ms
+	ImportOutOfDateAssets: 2895.041ms (2839.949ms without children)
+		UnloadImportedAssets: 1.154ms
+		EnsureUptoDateAssetsAreRegisteredWithGuidPM: 0.692ms
+		ImportSchedulerStart: 53.211ms
+	PostProcessAllAssets: 302.927ms
+		VCAutoAddAssetPostprocess 0.574ms
+		XRBuildSystem.XRAssetImported 0.165ms
+		MonoPostProcessAllAssets: 302.005ms
+			AssetPostprocessor.OnPostprocessAllAssets 120.015ms
+			UniversalRenderPipelineGlobalSettingsPostprocessor.OnPostprocessAllAssets 22.933ms
+			StyleCatalogPostProcessor.OnPostprocessAllAssets 15.646ms
+			AssetReferenceReimportMonitor.OnPostprocessAllAssets 12.493ms
+			BuilderAssetPostprocessor.OnPostprocessAllAssets 3.932ms
+			GraphRefreshPostprocessor.OnPostprocessAllAssets 1.089ms
+			SpriteSlicePostprocessor.OnPostprocessAllAssets 1.039ms
+			SpeedTree9Postprocessor.OnPostprocessAllAssets 0.812ms
+			WindowAssetPostprocessingWatcher.OnPostprocessAllAssets 0.803ms
+			ShaderGraphAssetPostProcessor.OnPostprocessAllAssets 0.670ms
+			RetainedModeAssetPostprocessor.OnPostprocessAllAssets 0.648ms
+			AssetChangedListener.OnPostprocessAllAssets 0.628ms
+			AssetChangeDetector.OnPostprocessAllAssets 0.461ms
+			EditModeScopePostprocessor.OnPostprocessAllAssets 0.448ms
+			RenderPipelineGlobalSettingsPostprocessor.OnPostprocessAllAssets 0.374ms
+			MaterialPostprocessor.OnPostprocessAllAssets 0.351ms
+			ArtifactBrowserPostProcessor.OnPostprocessAllAssets 0.247ms
+			SpriteEditorTexturePostprocessor.OnPostprocessAllAssets 0.238ms
+			SkillsProjectAssetPostprocessor.OnPostprocessAllAssets 0.195ms
+			ReferencedClipsPostProcessor.OnPostprocessAllAssets 0.187ms
+			InputActionAssetPostprocessor.OnPostprocessAllAssets 0.165ms
+			SampleDependencyImporterPostProcessor.OnPostprocessAllAssets 0.155ms
+			UVCSAssetPostprocessor.OnPostprocessAllAssets 0.147ms
+			ShaderReflectionAssetPostProcessor.OnPostprocessAllAssets 0.146ms
+			ModelAssetProcessor.OnPostprocessAllAssets 0.145ms
+			TMPro_TexturePostProcessor.OnPostprocessAllAssets 0.141ms
+			TextAssetPostProcessor.OnPostprocessAllAssets 0.141ms
+			AudioMixerPostprocessor.OnPostprocessAllAssets 0.138ms
+			AssetEvents.OnPostprocessAllAssets 0.120ms
+			PostProcessor.OnPostprocessAllAssets 0.117ms
+			InputActionJsonNameModifierAssetProcessor.OnPostprocessAllAssets 0.114ms
+			ProjectSettingsPostprocessor.OnPostprocessAllAssets 0.092ms
+			TerrainToolbarOverlayPostProcessor.OnPostprocessAllAssets 0.086ms
+			AssetDatabaseCallbacks.OnPostprocessAllAssets 0.065ms
+			SpeedTreePostProcessor.OnPostprocessAllAssets 0.063ms
+			ConfigAssetsTracker.OnPostprocessAllAssets 0.061ms
+	PostAssetChangesProfiler: 7.629ms
+	UnloadStreamsBegin: 0.796ms
+	PersistCurrentRevisions: 0.166ms
+	GenerateScriptTypeHashes: 1.167ms
+	GenerateScriptTypeSerializationHashes: 1.942ms
+	Untracked: 682.467ms
+
+Application.AssetDatabase Initial Refresh End
+Shader Hidden/ChartRasterizerHardware is not supported: GPU does not support conservative rasterization
+Launching external process: /Applications/Unity/Hub/Editor/6000.5.6f1/Unity.app/Contents/Helpers/UnityShaderCompiler
+Launched and connected shader compiler UnityShaderCompiler after 0.03 seconds
+Shader Hidden/ChartRasterizerHardware is not supported: GPU does not support conservative rasterization
+Scanning for USB devices : 0.148ms
+Initializing Unity extensions:
+[MODES] ModeService[none].Initialize
+[MODES] ModeService[none].LoadModes
+[MODES] Loading mode Default (0) for mode-current-id-Fidget Spinner
+2026-08-28 02:08:07.239 Unity[41477:15174113] NSEventModifierFlagFunction specified to -setKeyEquivalentModifierMask: for item <NSMenuItem: 0xb3873da40 SDF, ke='Command-F12'>, but is only supported for system-provided menu items; will not be used
+Unloading 199 Unused Serialized files (Serialized files now loaded: 0)
+Unloading 10576 unused Assets / (34.2 MB). Loaded Objects now: 11254.
+Memory consumption went from 375.0 MB to 340.7 MB.
+Total: 22.449041 ms (FindLiveObjects: 0.417834 ms CreateObjectMapping: 2.185667 ms MarkObjects: 13.134291 ms  DeleteObjects: 6.710834 ms)
+
+2026-08-28 02:08:07.305 Unity[41477:15174113] NSEventModifierFlagFunction specified to -setKeyEquivalentModifierMask: for item <NSMenuItem: 0xb3873e940 SDF, ke='Command-F12'>, but is only supported for system-provided menu items; will not be used
+Importing 'GUID: 24a8b33d63cc54de5b58e80b60fb92ca - Path: Assets/_EDC/Candidates/MagneticSlideTileGate08R004NeutralParity/Environment/neutral-parity-studio-r004.exr' with importer (TextureImporter)
+Imported 'GUID: 24a8b33d63cc54de5b58e80b60fb92ca' -> (Import Result ID: '98eeed8ef84c8401e4986b0e8997328f') in 0.138 seconds [static and dynamic dependencies]. Details - ImportResultOutputID=d4817a62ed09788c44e2093413aca0f3 DependenciesID=3d57f17641413d4a7d11167d040a3dab StaticDependenciesID=a3b495060b5a4310b26747914dd084af 
+Worker ready: AssetImportWorkerHW0 0
+Preloading 1 native plugins for Editor in 4.34 ms.
+
+Asset Pipeline Refresh (id=293c1f712ed794371bb278a031b8cd83): Total: 0.358 seconds - Initiated by StopAssetImportingV2(NoUpdateAssetOptions)
+	(Values over 0.05ms)
+	Summary:
+		Imports: total=1 (actual=1, local cache=0, cache server=0)
+		Asset DB Process Time: managed=5 ms, native=245 ms
+		Asset DB Callback time: managed=98 ms, native=8 ms
+		Scripting: domain reloads=0, domain reload time=0 ms, compile time=0 ms, other=0 ms
+		Project Asset Count: scripts=2311, non-scripts=5843
+		Asset File Changes: new=0, changed=0, moved=0, deleted=0
+		Scan Filter Count: 6
+	ApplyChangesToAssetFolders: 0.086ms
+	Scan: 5.969ms
+	Collect global state as custom dependencies: 0.145ms
+	CategorizeAssets: 45.050ms
+	ImportOutOfDateAssets: 193.788ms (9.752ms without children)
+		ImportManagerImport: 139.240ms (0.996ms without children)
+		UnloadImportedAssets: 0.070ms
+		EnsureUptoDateAssetsAreRegisteredWithGuidPM: 0.523ms
+		ImportSchedulerStart: 44.168ms
+	PostProcessAllAssets: 101.165ms
+		XRBuildSystem.XRAssetImported 2.473ms
+		MonoPostProcessAllAssets: 98.628ms
+			TMPro_TexturePostProcessor.OnPostprocessAllAssets 77.910ms
+			AssetPostprocessor.OnPostprocessAllAssets 12.584ms
+			SpriteSlicePostprocessor.OnPostprocessAllAssets 6.476ms
+			TextAssetPostProcessor.OnPostprocessAllAssets 0.451ms
+			ShaderGraphAssetPostProcessor.OnPostprocessAllAssets 0.107ms
+			InputActionAssetPostprocessor.OnPostprocessAllAssets 0.055ms
+	PostAssetChangesProfiler: 6.049ms
+	GatherAllCurrentPrimaryImportResultRevisions: 0.130ms
+	UnloadStreamsBegin: 0.053ms
+	PersistCurrentRevisions: 0.165ms
+	Untracked: 4.325ms
+
+Importing 'GUID: 24a8b33d63cc54de5b58e80b60fb92ca - Path: Assets/_EDC/Candidates/MagneticSlideTileGate08R004NeutralParity/Environment/neutral-parity-studio-r004.exr' with importer (TextureImporter)
+Imported 'GUID: 24a8b33d63cc54de5b58e80b60fb92ca' -> (Import Result ID: '98eeed8ef84c8401e4986b0e8997328f') in 0.126 seconds [static and dynamic dependencies]. Details - ImportResultOutputID=d4817a62ed09788c44e2093413aca0f3 DependenciesID=3d57f17641413d4a7d11167d040a3dab StaticDependenciesID=a3b495060b5a4310b26747914dd084af 
+Asset Pipeline Refresh (id=59aea47586ae64b58a7bc53bb71d1a00): Total: 0.196 seconds - Initiated by StopAssetImportingV2(NoUpdateAssetOptions)
+Opening scene 'Assets/_EDC/Candidates/MagneticSlideTileGate08R003PortableValidation/Scenes/MagneticSlideTilePortableLightingR003.unity'
+Unloading 0 Unused Serialized files (Serialized files now loaded: 0)
+Loaded scene 'Assets/_EDC/Candidates/MagneticSlideTileGate08R003PortableValidation/Scenes/MagneticSlideTilePortableLightingR003.unity'
+	Deserialize:            2.592 ms
+	Integration:            200.771 ms
+	Integration of assets:  0.002 ms
+	Thread Wait Time:       0.010 ms
+	Total Operation Time:   203.376 ms
+Unloading 37 unused Assets / (4.9 KB). Loaded Objects now: 11426.
+Memory consumption went from 277.7 MB to 277.7 MB.
+Total: 13.096292 ms (FindLiveObjects: 0.261791 ms CreateObjectMapping: 1.046709 ms MarkObjects: 11.756458 ms  DeleteObjects: 0.031125 ms)
+
+Asset Pipeline Refresh (id=43d87f72164924d588a81e866d7524ff): Total: 0.092 seconds - Initiated by StopAssetImportingV2(NoUpdateAssetOptions)
+Importing 'GUID: 7d764d487cdca493dbd06d351ae90cc0 - Path: Assets/_EDC/Candidates/MagneticSlideTileGate08R004NeutralParity/Materials/M_G11R004_DarkExterior.mat' with importer (NativeFormatImporter)
+Imported 'GUID: 7d764d487cdca493dbd06d351ae90cc0' -> (Import Result ID: 'a322fc1a114ef96e5bb5a53026e6451e') in 0.002 seconds [static dependencies only]. Details - ImportResultOutputID=d7b3f18c706caf360fa107f5d16ec742 DependenciesID=20044ebaca8223c977f93231f1a3363e StaticDependenciesID=d422641c7b9452954596ae2d1d840839 
+Asset Pipeline Refresh (id=3a5775c57c0c449709d94a54b7207072): Total: 0.091 seconds - Initiated by StopAssetImportingV2(NoUpdateAssetOptions)
+Asset Pipeline Refresh (id=e12e8fa264b23446faf05c2d22b370b2): Total: 0.088 seconds - Initiated by StopAssetImportingV2(NoUpdateAssetOptions)
+Importing 'GUID: 19b14826dcdd2430982a5d2c366eb87d - Path: Assets/_EDC/Candidates/MagneticSlideTileGate08R004NeutralParity/Materials/M_G11R004_Technical.mat' with importer (NativeFormatImporter)
+Imported 'GUID: 19b14826dcdd2430982a5d2c366eb87d' -> (Import Result ID: '59e7e9223721b1872545903672d6da5f') in 0.001 seconds [static dependencies only]. Details - ImportResultOutputID=566d1449bee7fef80bbc467fb1fed939 DependenciesID=29fad2447aa999509a874cdcf3671e99 StaticDependenciesID=32c177e0d99d71fcd2037ec94777866f 
+Asset Pipeline Refresh (id=79dccb26f1c164e4ca634cecf5271a14): Total: 0.090 seconds - Initiated by StopAssetImportingV2(NoUpdateAssetOptions)
+Asset Pipeline Refresh (id=31484a7747bfa42d09802c4ce32bb828): Total: 0.084 seconds - Initiated by StopAssetImportingV2(NoUpdateAssetOptions)
+Importing 'GUID: 9fa35710f31d942cb8ac91db71f5e389 - Path: Assets/_EDC/Candidates/MagneticSlideTileGate08R004NeutralParity/Materials/M_G11R004_PolishedSilver.mat' with importer (NativeFormatImporter)
+Imported 'GUID: 9fa35710f31d942cb8ac91db71f5e389' -> (Import Result ID: '2b2967df97863c41fc01a602c6d157b2') in 0.001 seconds [static dependencies only]. Details - ImportResultOutputID=f067fbb01325c1e96e8af1184c445844 DependenciesID=9c9b5d2b1cd7a9300a23e289f0230bb3 StaticDependenciesID=1ffd4f3db1e71a54059cac20c0a6dbc2 
+Asset Pipeline Refresh (id=c883c83dfe97145038653f9bda2a5d1d): Total: 0.103 seconds - Initiated by StopAssetImportingV2(NoUpdateAssetOptions)
+Asset Pipeline Refresh (id=b7f1deb2c1ab94b12891850f9aefecd1): Total: 0.084 seconds - Initiated by StopAssetImportingV2(NoUpdateAssetOptions)
+Importing 'GUID: 187e45ad2c1014f32b7a741ed1bd128b - Path: Assets/_EDC/Candidates/MagneticSlideTileGate08R004NeutralParity/Materials/M_G08R004_PortableCrystalLower.mat' with importer (NativeFormatImporter)
+Imported 'GUID: 187e45ad2c1014f32b7a741ed1bd128b' -> (Import Result ID: 'cf0d6df735725a6c6879698625f41a9a') in 0.001 seconds [static dependencies only]. Details - ImportResultOutputID=1a56dd4f0a447e35fd076287e9648510 DependenciesID=26fafb0635c31535dd72510e3fafd893 StaticDependenciesID=3593c845262aab93867d5ab4d85ad472 
+Refreshing native plugins compatible for Editor in 3.41 ms, found 3 plugins.
+Asset Pipeline Refresh (id=f2899d661dcb1499b94f61afa2a1f6ca): Total: 0.097 seconds - Initiated by StopAssetImportingV2(NoUpdateAssetOptions)
+Asset Pipeline Refresh (id=f8a81118112624b5bab299118d6573e7): Total: 0.086 seconds - Initiated by StopAssetImportingV2(NoUpdateAssetOptions)
+Importing 'GUID: f719dbccfd58042d68c56e64c323f929 - Path: Assets/_EDC/Candidates/MagneticSlideTileGate08R004NeutralParity/Materials/M_G11R004_BallUnknown.mat' with importer (NativeFormatImporter)
+Imported 'GUID: f719dbccfd58042d68c56e64c323f929' -> (Import Result ID: '82bffaf202cee013c657f8cce2fee38a') in 0.001 seconds [static dependencies only]. Details - ImportResultOutputID=b977ceeabc9370635577203616e1cf8f DependenciesID=cb1d7fa2b3ac1eefb47965ac943dd404 StaticDependenciesID=86b6eccc1d410bff702bb63bb24b1594 
+Asset Pipeline Refresh (id=bfaa1eaba3daf4723a9934cde20ded93): Total: 0.087 seconds - Initiated by StopAssetImportingV2(NoUpdateAssetOptions)
+Asset Pipeline Refresh (id=7fb82f3b3cbc34b4d8dfe487deb64558): Total: 0.080 seconds - Initiated by StopAssetImportingV2(NoUpdateAssetOptions)
+Importing 'GUID: 9c7b64a3a618649c7b60951a5b082b5d - Path: Assets/_EDC/Candidates/MagneticSlideTileGate08R004NeutralParity/Materials/M_G11R004_InternalSilver.mat' with importer (NativeFormatImporter)
+Imported 'GUID: 9c7b64a3a618649c7b60951a5b082b5d' -> (Import Result ID: '7e8fe8a3e878aecb462330ed0564a418') in 0.001 seconds [static dependencies only]. Details - ImportResultOutputID=767d3baa7ea311b7258e7a8ceed4857a DependenciesID=20371b884fbe812789d23b3b67807c7b StaticDependenciesID=098329b6b596e0f66e803b636c624da6 
+Asset Pipeline Refresh (id=1a12034725f034666bf91f16fced85d2): Total: 0.087 seconds - Initiated by StopAssetImportingV2(NoUpdateAssetOptions)
+Asset Pipeline Refresh (id=920da796698f5480b99d926ec5d9e1cb): Total: 0.084 seconds - Initiated by StopAssetImportingV2(NoUpdateAssetOptions)
+Importing 'GUID: dc2fbf0d1c1914ef2a1a14722db7c853 - Path: Assets/_EDC/Candidates/MagneticSlideTileGate08R004NeutralParity/Materials/M_G08R004_PortableCrystalUpper.mat' with importer (NativeFormatImporter)
+Imported 'GUID: dc2fbf0d1c1914ef2a1a14722db7c853' -> (Import Result ID: '784800c90168109f66219a0aeaecd030') in 0.001 seconds [static dependencies only]. Details - ImportResultOutputID=c24f106f22b360e3db0d904a4cf381ff DependenciesID=1ab7a7ce9d09ff58f5bf880e418c7448 StaticDependenciesID=799c543477490c8969d3cc56b8a15460 
+Asset Pipeline Refresh (id=2c59d9141909e4ee8a31fddd79f41f15): Total: 0.084 seconds - Initiated by StopAssetImportingV2(NoUpdateAssetOptions)
+Asset Pipeline Refresh (id=c42d9cdb4a07d4bf3bca73699ce2872d): Total: 0.080 seconds - Initiated by StopAssetImportingV2(NoUpdateAssetOptions)
+Asset Pipeline Refresh (id=2002cfe7af690445896f154d0851c690): Total: 0.086 seconds - Initiated by StopAssetImportingV2(NoUpdateAssetOptions)
+G08R4_ENV_STATS sourceFormat=R16G16B16A16_SFloat sourceMax=5.664063 cubemapMax=4.816406
+UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+UnityEngine.StackTraceUtility:ExtractStackTrace () (at /Users/bokken/build/output/unity/unity/Runtime/Export/Scripting/StackTrace.cs:35)
+UnityEngine.DebugLogHandler:Internal_Log (UnityEngine.LogType,UnityEngine.LogOption,string,UnityEngine.Object)
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
+UnityEngine.Logger:Log (UnityEngine.LogType,object)
+UnityEngine.Debug:Log (object)
+FidgetingApp.EDC.Editor.MagneticSlideTileNeutralParityBuilder:BuildAndCapture () (at Assets/_EDC/Candidates/MagneticSlideTileGate08R004NeutralParity/Editor/MagneticSlideTileNeutralParityBuilder.cs:58)
+
+(Filename: Assets/_EDC/Candidates/MagneticSlideTileGate08R004NeutralParity/Editor/MagneticSlideTileNeutralParityBuilder.cs Line: 58)
+
+Importing 'GUID: 0000000000000000b000000000000000 - Path: ProjectSettings/EditorBuildSettings.asset' with importer (LibraryAssetImporter)
+Imported 'GUID: 0000000000000000b000000000000000' -> (Import Result ID: '091f01172f8655a8627d93ccb227d598') in 0.001 seconds [static dependencies only]. Details - ImportResultOutputID=4647dd083cfc32cebcd7526e8846440c DependenciesID=7800f3c207c2d8ad17557fb06a234284 StaticDependenciesID=c42002aae32c8b947165ca2571755f3a 
+Importing 'GUID: f719dbccfd58042d68c56e64c323f929 - Path: Assets/_EDC/Candidates/MagneticSlideTileGate08R004NeutralParity/Materials/M_G11R004_BallUnknown.mat' with importer (NativeFormatImporter)
+Imported 'GUID: f719dbccfd58042d68c56e64c323f929' -> (Import Result ID: 'd66fedbd1cc8a2047c602c726fdcca32') in 0.001 seconds [static dependencies only]. Details - ImportResultOutputID=b977ceeabc9370635577203616e1cf8f DependenciesID=3319b41ec7d0fee9715fe604a6f6168b StaticDependenciesID=d4f1f17bd2fb97b61808f06d6f3dbc42 
+Importing 'GUID: 187e45ad2c1014f32b7a741ed1bd128b - Path: Assets/_EDC/Candidates/MagneticSlideTileGate08R004NeutralParity/Materials/M_G08R004_PortableCrystalLower.mat' with importer (NativeFormatImporter)
+Imported 'GUID: 187e45ad2c1014f32b7a741ed1bd128b' -> (Import Result ID: '90945ad6be3a587b362731b135af6f83') in 0.000 seconds [static dependencies only]. Details - ImportResultOutputID=1a56dd4f0a447e35fd076287e9648510 DependenciesID=4af47a8c4256561b63078ea879235ea6 StaticDependenciesID=b6edeec90320f58be493713f34627dba 
+Importing 'GUID: 19b14826dcdd2430982a5d2c366eb87d - Path: Assets/_EDC/Candidates/MagneticSlideTileGate08R004NeutralParity/Materials/M_G11R004_Technical.mat' with importer (NativeFormatImporter)
+Imported 'GUID: 19b14826dcdd2430982a5d2c366eb87d' -> (Import Result ID: '3d5fa54e439e6955526a55cfd3582f90') in 0.000 seconds [static dependencies only]. Details - ImportResultOutputID=566d1449bee7fef80bbc467fb1fed939 DependenciesID=6a22ecd31af8be190aa0d7b7f5e33bbd StaticDependenciesID=53dcc34c4d4fb4b210c4d9a4af261630 
+Importing 'GUID: 9c7b64a3a618649c7b60951a5b082b5d - Path: Assets/_EDC/Candidates/MagneticSlideTileGate08R004NeutralParity/Materials/M_G11R004_InternalSilver.mat' with importer (NativeFormatImporter)
+Imported 'GUID: 9c7b64a3a618649c7b60951a5b082b5d' -> (Import Result ID: 'f6d802fcf84d0da7e66dcbf349163270') in 0.000 seconds [static dependencies only]. Details - ImportResultOutputID=767d3baa7ea311b7258e7a8ceed4857a DependenciesID=d39d2c312b64a4f3e4f957d496eace0f StaticDependenciesID=019d599d2a0e892f874342b6af7dc119 
+Importing 'GUID: dc2fbf0d1c1914ef2a1a14722db7c853 - Path: Assets/_EDC/Candidates/MagneticSlideTileGate08R004NeutralParity/Materials/M_G08R004_PortableCrystalUpper.mat' with importer (NativeFormatImporter)
+Imported 'GUID: dc2fbf0d1c1914ef2a1a14722db7c853' -> (Import Result ID: 'da7f3d87665d7befb58f0cf040c256ac') in 0.000 seconds [static dependencies only]. Details - ImportResultOutputID=c24f106f22b360e3db0d904a4cf381ff DependenciesID=c4d84f06d8d2ff3043a1331c3b63c612 StaticDependenciesID=765915cb1db2c9a7a0c8684e8ba3ce8a 
+Importing 'GUID: 7d764d487cdca493dbd06d351ae90cc0 - Path: Assets/_EDC/Candidates/MagneticSlideTileGate08R004NeutralParity/Materials/M_G11R004_DarkExterior.mat' with importer (NativeFormatImporter)
+Imported 'GUID: 7d764d487cdca493dbd06d351ae90cc0' -> (Import Result ID: '99bf87694874910000e940e5ffae61da') in 0.000 seconds [static dependencies only]. Details - ImportResultOutputID=d7b3f18c706caf360fa107f5d16ec742 DependenciesID=efced161ed3d3bdba37a15d8be617d8e StaticDependenciesID=686c8dc9403c6c833e69ea5d660ef48a 
+Importing 'GUID: 9fa35710f31d942cb8ac91db71f5e389 - Path: Assets/_EDC/Candidates/MagneticSlideTileGate08R004NeutralParity/Materials/M_G11R004_PolishedSilver.mat' with importer (NativeFormatImporter)
+Imported 'GUID: 9fa35710f31d942cb8ac91db71f5e389' -> (Import Result ID: '43604dd189e53c357091759d18fe8361') in 0.000 seconds [static dependencies only]. Details - ImportResultOutputID=f067fbb01325c1e96e8af1184c445844 DependenciesID=243322f3d7218cca4cc117f87c00a651 StaticDependenciesID=1927c365b64c87811fc4dbf621708007 
+Asset Pipeline Refresh (id=ed8c87464cc0b435aa0cbf99e660a020): Total: 0.088 seconds - Initiated by StopAssetImportingV2(NoUpdateAssetOptions)
+Importing 'GUID: 87e172160aca1467ebe28a2133360bf3 - Path: Assets/_EDC/Candidates/MagneticSlideTileGate08R004NeutralParity/Scenes/MagneticSlideTileNeutralParityR004.unity' with importer (DefaultImporter)
+Imported 'GUID: 87e172160aca1467ebe28a2133360bf3' -> (Import Result ID: '6749be3127a5aa4896e20b00799f32d6') in 0.001 seconds [static dependencies only]. Details - ImportResultOutputID=3bd7665840fd6eed37ec49040c65432a DependenciesID=e19657da753458a5f44c016cd90bf36c StaticDependenciesID=9d265aa699c93d48389a443c0f7e9abf 
+Asset Pipeline Refresh (id=9a08b3f87fe364de9821bcb3f7382902): Total: 0.075 seconds - Initiated by StopAssetImportingV2(NoUpdateAssetOptions)
+Importing 'GUID: 87e172160aca1467ebe28a2133360bf3 - Path: Assets/_EDC/Candidates/MagneticSlideTileGate08R004NeutralParity/Scenes/MagneticSlideTileNeutralParityR004.unity' with importer (DefaultImporter)
+Imported 'GUID: 87e172160aca1467ebe28a2133360bf3' -> (Import Result ID: '6749be3127a5aa4896e20b00799f32d6') in 0.000 seconds [static dependencies only]. Details - ImportResultOutputID=3bd7665840fd6eed37ec49040c65432a DependenciesID=e19657da753458a5f44c016cd90bf36c StaticDependenciesID=9d265aa699c93d48389a443c0f7e9abf 
+Asset Pipeline Refresh (id=99fa84e464be84d02bfc97e74e81dab8): Total: 0.059 seconds - Initiated by StopAssetImportingV2(NoUpdateAssetOptions)
+Asset Pipeline Refresh (id=6b7512e09a994434bb5fb1841645c405): Total: 0.122 seconds - Initiated by RefreshV2(NoUpdateAssetOptions)
+Batchmode quit successfully invoked - shutting down!
+Thread 0x30e567000 may have been prematurely finalized
+Shutting down MSBuild server...
+Shutting down VB/C# compiler server...
+VB/C# compiler server shut down successfully.
+Input System module state changed to: ShutdownInProgress.
+Input Polling Thread exited.
+Input System module state changed to: Shutdown.
+MSBuild server shut down successfully.
+[Physics::Module] Cleanup current backend.
+[Physics::Module] Id: 0xf2b8ea05
+[Licensing::IpcConnector] LicenseClient-jiawei.zhou@whatnot.com-notifications channel disconnected successfully.
+[Licensing::IpcConnector] LicenseClient-jiawei.zhou@whatnot.com channel disconnected successfully.
+Thread 0x16c6bb000 may have been prematurely finalized
+Thread 0x16c85f000 may have been prematurely finalized
+Thread 0x16c8eb000 may have been prematurely finalized
+Thread 0x16c7d3000 may have been prematurely finalized
+Thread 0x16c747000 may have been prematurely finalized
+AcceleratorClientConnectionCallback - disconnected - :0
+Thread 0x30938b000 may have been prematurely finalized
+info: Microsoft.Hosting.Lifetime[0]
+      Application is shutting down...
+Cleanup mono
+CodeReloadManager destroyed
+info: Unity.ILPP.Runner.PostProcessingAssemblyLoadContext[0]
+      ALC ILPP context 1 is unloading
+debugger-agent: Unable to listen on 45
+[usbmuxd] Stop listen thread
+[usbmuxd] Error: 
+[usbmuxd] Listen thread exiting
+Exiting batchmode successfully now!
+[Package Manager] Server process was shutdown

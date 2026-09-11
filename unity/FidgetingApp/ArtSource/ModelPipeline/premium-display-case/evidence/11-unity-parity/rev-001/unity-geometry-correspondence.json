@@ -1,0 +1,93 @@
+{
+  "schemaVersion": 1,
+  "modelId": "premium-display-case",
+  "gate": "11-unity-parity",
+  "parityRevision": 1,
+  "status": "pass",
+  "sourceFbxPath": "/Users/jiawei.zhou/Documents/Fidgeting app/unity/FidgetingApp/ArtSource/ModelPipeline/premium-display-case/evidence/10-export/rev-001/premium-display-case-product-r001.fbx",
+  "sourceFbxSha256": "21c9db68723f0006d7c6bfec5280cafe55c16cf5392ff97c365c966e91f847ae",
+  "unitySnapshotPath": "/Users/jiawei.zhou/Documents/Fidgeting app/unity/FidgetingApp/ArtSource/ModelPipeline/premium-display-case/evidence/11-unity-parity/rev-001/unity-vertex-snapshot.csv",
+  "unitySnapshotSha256": "9d916c5dbf8ef383057c895feab1bcc16d284d24314be11ef0d713a23184559a",
+  "mapping": "canonical=(X*1,Z*1,Y*-1)*1000",
+  "mappingAnchorErrorMm": 2.8662e-05,
+  "fbxBounds": {
+    "minimumMm": [
+      -114.000008,
+      -152.000015,
+      -29.500036
+    ],
+    "maximumMm": [
+      114.000008,
+      152.000015,
+      29.500038
+    ],
+    "sizeMm": [
+      228.000015,
+      304.000031,
+      59.000074
+    ]
+  },
+  "unityBounds": {
+    "minimumMm": [
+      -114.000008,
+      -151.999939,
+      -29.500023
+    ],
+    "maximumMm": [
+      114.000008,
+      151.999954,
+      29.500023
+    ],
+    "sizeMm": [
+      228.000016,
+      303.999893,
+      59.000046
+    ]
+  },
+  "allObjectsBijective": true,
+  "maximumErrorMm": 9.6222e-05,
+  "fbxAuthorityDigest": "4cffa449d4ed129cedd4575a9a33ec0e2ab76790d73807d9688522fc796d1e58",
+  "unityMatchedAuthorityDigest": "4cffa449d4ed129cedd4575a9a33ec0e2ab76790d73807d9688522fc796d1e58",
+  "perObject": {
+    "RearPolycarbonateShell": {
+      "fbxUniquePositionCount": 192,
+      "unityUniquePositionCount": 192,
+      "bijective": true,
+      "maximumErrorMm": 8.1482e-05
+    },
+    "TactileBackgroundInsert": {
+      "fbxUniquePositionCount": 288,
+      "unityUniquePositionCount": 288,
+      "bijective": true,
+      "maximumErrorMm": 6.2677e-05
+    },
+    "FrontPolycarbonateShell": {
+      "fbxUniquePositionCount": 192,
+      "unityUniquePositionCount": 192,
+      "bijective": true,
+      "maximumErrorMm": 7.9493e-05
+    },
+    "ContinuousTubePerimeter": {
+      "fbxUniquePositionCount": 49152,
+      "unityUniquePositionCount": 49152,
+      "bijective": true,
+      "maximumErrorMm": 9.6222e-05
+    },
+    "PhysicalLabel": {
+      "fbxUniquePositionCount": 192,
+      "unityUniquePositionCount": 192,
+      "bijective": true,
+      "maximumErrorMm": 6.1776e-05
+    }
+  },
+  "checks": {
+    "approvedFbxHashExact": true,
+    "gate10FbxPassed": true,
+    "mappingAnchorWithinPoint001Mm": true,
+    "allObjectsBijective": true,
+    "maximumErrorWithinPoint001Mm": true,
+    "authorityDigestIdentity": true,
+    "boundsWithinPoint001Mm": true,
+    "expectedObjectCounts": true
+  }
+}

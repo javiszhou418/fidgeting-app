@@ -1,0 +1,111 @@
+{
+  "status": "gate05-06-rev-003-draft-visual-approval-pending",
+  "provisional": true,
+  "source": "unity/FidgetingApp/ArtSource/UnifiedTriSpinner/UnifiedTriSpinner.blend",
+  "fbx": "unity/FidgetingApp/ArtSource/UnifiedTriSpinner/UnifiedTriSpinner.fbx",
+  "glb": "unity/FidgetingApp/ArtSource/UnifiedTriSpinner/UnifiedTriSpinner.glb",
+  "collisionFbx": "unity/FidgetingApp/ArtSource/UnifiedTriSpinner/UnifiedTriSpinner_Collision.fbx",
+  "contract": {
+    "widthMm": 65.0,
+    "bodyThicknessMm": 10.0,
+    "capRatio": 0.536,
+    "tableRatio": 0.7,
+    "tableAboveBladeFaceMm": 1.5000000000000004,
+    "wedgeRingSlopeDeg": 24.7,
+    "wedges": 24,
+    "wedgeEdgeLiftMm": 0.22,
+    "seamWidthMm": 0.9799999999999982,
+    "lipWidthMm": 0.400000000000001,
+    "bladeBevelMm": 0.5,
+    "bladeBevelSegments": 2,
+    "bearing": "R188 12.7x6.35x4.76 hidden"
+  },
+  "measured": {
+    "tipCircleDiameterMm": 65.00000436739992,
+    "boundingWidthMm": 64.01658803224564,
+    "assembledDepthMm": 13.000000268220901,
+    "capDiameterMm": 34.83999893069267,
+    "capRatioActual": 0.5359999475348698,
+    "capTopAboveBladeFaceMm": 1.5000001341104507,
+    "triangleCount": 5432,
+    "rotorAudit": {
+      "vertices": 1254,
+      "faces": 1203,
+      "boundaryEdges": 0,
+      "nonManifoldEdges": 0,
+      "zeroAreaFaces": 0
+    },
+    "capAudit": {
+      "vertices": 146,
+      "faces": 192,
+      "boundaryEdges": 0,
+      "nonManifoldEdges": 0,
+      "zeroAreaFaces": 0
+    },
+    "wedgeRing": {
+      "wedgeHalfFaces": 48,
+      "wedges": 24,
+      "adjacentNormalAngleMinDeg": 18.69,
+      "adjacentNormalAngleMaxDeg": 24.95,
+      "tableMaxTiltDeg": 0.0
+    },
+    "bladeLargeTopPlanes": 21,
+    "bladeAudits": {
+      "Blade_01_hull": {
+        "vertices": 130,
+        "faces": 157,
+        "boundaryEdges": 0,
+        "nonManifoldEdges": 0,
+        "zeroAreaFaces": 0
+      },
+      "Blade_01_cut": {
+        "vertices": 162,
+        "faces": 145,
+        "boundaryEdges": 0,
+        "nonManifoldEdges": 0,
+        "zeroAreaFaces": 0
+      },
+      "Blade_01_topPlanes": 21,
+      "Blade_02_hull": {
+        "vertices": 130,
+        "faces": 157,
+        "boundaryEdges": 0,
+        "nonManifoldEdges": 0,
+        "zeroAreaFaces": 0
+      },
+      "Blade_02_cut": {
+        "vertices": 162,
+        "faces": 145,
+        "boundaryEdges": 0,
+        "nonManifoldEdges": 0,
+        "zeroAreaFaces": 0
+      },
+      "Blade_02_topPlanes": 21,
+      "Blade_03_hull": {
+        "vertices": 130,
+        "faces": 157,
+        "boundaryEdges": 0,
+        "nonManifoldEdges": 0,
+        "zeroAreaFaces": 0
+      },
+      "Blade_03_cut": {
+        "vertices": 162,
+        "faces": 145,
+        "boundaryEdges": 0,
+        "nonManifoldEdges": 0,
+        "zeroAreaFaces": 0
+      },
+      "Blade_03_topPlanes": 21
+    }
+  },
+  "forbidden": {
+    "brightAnnulusBetweenCapAndBody": false,
+    "materialFakedFacets": false,
+    "smoothByAngleOnFacets": false,
+    "subdivision": false,
+    "randomScales": false,
+    "bladePockets": false,
+    "anisotropyOnWedges": false
+  },
+  "initialAngularVelocity": 0.0
+}

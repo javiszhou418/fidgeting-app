@@ -1,0 +1,62 @@
+{
+  "schema": "premium-display-case-gate04-r012-self-review.v1",
+  "gateId": "04-architecture",
+  "evidenceRevision": 12,
+  "decision": "self-rejected",
+  "decidedBy": "agent-full-size-frame-inspection",
+  "decidedAt": "2026-08-30T02:14:00.000Z",
+  "reviewedAtFullSize": [
+    "primary-contact-sheet.png",
+    "frames/frame-0000.png",
+    "frames/frame-0043.png",
+    "frames/frame-0050.png",
+    "frames/frame-0055.png",
+    "frames/frame-0062.png",
+    "frames/frame-0071.png",
+    "frames/frame-0082.png",
+    "frames/frame-0096.png",
+    "frames/frame-0103.png",
+    "frames/frame-0122.png",
+    "frames/frame-0152.png",
+    "frames/frame-0186.png",
+    "normal-speed-sequence.mp4",
+    "tear-quarter-speed-closeup.mp4",
+    "impact-reveal-quarter-speed.mp4",
+    "source-target-side-by-side.png"
+  ],
+  "blockingVisibleReasons": [
+    {
+      "criterion": "formed foil mouth",
+      "evidence": "frames/frame-0055.png through frames/frame-0103.png",
+      "reason": "The rear wall and side walls read as a rigid rectangular lid or box flap. The opening does not read as a thin foil Pack mouth."
+    },
+    {
+      "criterion": "same case visibly inside aperture",
+      "evidence": "frames/frame-0062.png, frames/frame-0071.png, frames/frame-0082.png and frames/frame-0096.png",
+      "reason": "The dark rear wall dominates the aperture. The case is not unmistakably readable inside the mouth before it crosses the foreground."
+    },
+    {
+      "criterion": "freed strip reads as narrow curled foil",
+      "evidence": "frames/frame-0050.png through frames/frame-0103.png and tear-quarter-speed-closeup.mp4",
+      "reason": "The released strip reads as a long planar beige band across the Pack top. Its underside, curl and small creases do not read at shipping scale."
+    },
+    {
+      "criterion": "recognizable source optical language",
+      "evidence": "primary-contact-sheet.png and source-target-side-by-side.png",
+      "reason": "The source flare and sweep remain visually subordinate to the dark rectangular cavity. The target does not show a recognizable restrained source flare/sweep at matching impact beats."
+    }
+  ],
+  "technicalPassesNotSufficient": [
+    "Actual Unity PlayMode capture is 1206x2622 at 60 fps.",
+    "The report records one case ID, constant case scale, continuous projected bounds, a 128-segment tear mesh, no black frame and no blank white frame.",
+    "Direct CC0 source files and source-to-target mapping are present."
+  ],
+  "approvalRequestAllowed": false,
+  "userVisualApprovalObtained": false,
+  "shippingRuntimeWired": false,
+  "shippingReady": false,
+  "physicalPhoneInstalled": false,
+  "deviceAccepted": false,
+  "nextStep": "Hold Gate 04 at draft. A new architecture direction must solve aperture occupancy before any further candidate.",
+  "statusText": "视觉批准待确认，未推送手机"
+}

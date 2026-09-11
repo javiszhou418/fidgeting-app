@@ -1,0 +1,69 @@
+{
+  "schemaVersion": 1,
+  "gate": "09-environment",
+  "revision": 9,
+  "status": "ready_for_review",
+  "gate08ApprovalExactWording": "你开始吧",
+  "sourceHashes": {
+    "lightingBlend": "897484bd6e740454ee23c6a891eb8faa2fdf48af543792f08c3f4b78ff8780fe",
+    "materialBlend": "8538b4142c9d6b5c89e30e3f915f99a33dfff8eab158db449278d9cca605b10c",
+    "geometryDigest": "2fcf6d2b4344511bc6b86ce940a927576f9cdb4988f4022959a3372f4d3c1952",
+    "mechanismContract": "9cd7a08f34d7d8dfc3c6f89f6c80a5c5c2dcae48bc0d5c54ebf455a0727ea571"
+  },
+  "outputHashes": {
+    "environmentBlend": "d4d6a9701281e493b4459d3b1f9a9c67382c3d7b22e21632233184276de8ebf2",
+    "lookdevGlb": "a7c96f0a5f74b07c23ffdb11d5ce4068465db99edeca5d8a509e2b031a04e3fb",
+    "neutralHdr": "a5b310c8c7fc17bda4110adb80e68913f1b5d623ffe01d935574813b80d1a872",
+    "targetHdr": "2fe029beb803d7f9a26d229a1969914f210a7b5c4f311bfe9878cb52c7d73d13",
+    "portabilityContract": "d172c64ce56f89170b9f072e8efe61c3c7e8277235228bac957229ea319ffd13",
+    "comparisonTurntable": "3a8e8aecc4e615e538239a041c68d254415e6be514341d5a65fc9c68675c6369"
+  },
+  "validation": {
+    "blenderEnvironmentBuild": true,
+    "blenderHdrCubemapGlbAudit": true,
+    "imageColorReflectionClipping": true,
+    "endpointMotionComparison": true,
+    "unityPortabilityContract": true,
+    "focusedNode": "15/15 pass",
+    "fullNode": "219/220; one unrelated Premium Display Case current-stage assertion",
+    "browserDesktopMobileGlbVideoModalDeepLink": true,
+    "browserRuntimeExceptions": 0,
+    "browserLoadingFailures": 0,
+    "video": "H.264 High yuv420p 1600x600 30 fps 150 frames 5.0 s",
+    "syntax": "Python compile and Node syntax pass",
+    "xml": "focused JUnit XML well formed"
+  },
+  "currentEnvironment": {
+    "targetSha256": "2fe029beb803d7f9a26d229a1969914f210a7b5c4f311bfe9878cb52c7d73d13",
+    "resolution": [
+      2048,
+      1024
+    ],
+    "nonzeroRgbFraction": 1,
+    "seamMaximumLinearDelta": 0,
+    "dynamicRangeStopsP01P99": 5.765967845916748,
+    "cubemapFaceCount": 6,
+    "cubemapOrientationErrorDegrees": 0.06250933211021503
+  },
+  "materialAndMotion": {
+    "sideArtworkTriangles": {
+      "BottomExterior": 0,
+      "MovingTopBody": 0
+    },
+    "undersideArtworkTriangles": {
+      "BottomExterior": 0,
+      "MovingTopBody": 0
+    },
+    "fixedAxisVarianceMm": 0,
+    "pitchRollRadians": 0,
+    "endpointInterlock": true
+  },
+  "scope": {
+    "simulator": false,
+    "gate10": false,
+    "unity": false,
+    "shippingScene": false,
+    "buildInstallPhone": false
+  },
+  "pass": true
+}

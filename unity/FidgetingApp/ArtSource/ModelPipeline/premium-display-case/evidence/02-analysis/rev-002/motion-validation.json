@@ -1,0 +1,52 @@
+{
+  "schemaVersion": 1,
+  "kind": "conceptual-motion-quality-gate",
+  "preview": {
+    "path": "portrait-y-turn-preview.gif",
+    "width": 720,
+    "height": 900,
+    "frameCount": 72,
+    "frameDurationMs": 30,
+    "totalDurationMs": 2160
+  },
+  "contactSheet": {
+    "path": "portrait-y-turn-contact-sheet.png",
+    "width": 900,
+    "height": 846,
+    "samples": [
+      "0-front",
+      "90-edge",
+      "180-back",
+      "270-edge",
+      "360-front",
+      "single-highlight"
+    ]
+  },
+  "checks": [
+    {
+      "id": "portrait-silhouette",
+      "status": "pass",
+      "evidence": "Front and back use the same 3:4 analysis envelope; landscape is not shown as a candidate."
+    },
+    {
+      "id": "full-turn-order",
+      "status": "pass",
+      "evidence": "Contact sheet preserves 0, 90, 180, 270, 360, then highlight order."
+    },
+    {
+      "id": "edge-readability",
+      "status": "pass",
+      "evidence": "Both 90-degree edge samples remain visible instead of collapsing to zero width."
+    },
+    {
+      "id": "no-morph-or-texture-swap",
+      "status": "pass",
+      "evidence": "Only presentation rotation and the final highlight change; the silhouette does not morph."
+    },
+    {
+      "id": "export-boundary",
+      "status": "pass",
+      "evidence": "This is an analysis silhouette, not shipping Blender or Unity animation. Final timing and easing remain Gate 03 decisions."
+    }
+  ]
+}

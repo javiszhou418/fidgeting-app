@@ -1,0 +1,78 @@
+{
+  "schema": "premium-display-case-gate04-r025-projection-forensic-diagnosis.v1",
+  "scope": "R025 isolates technical projection and measurement repair only",
+  "r024PhysicalInput": {
+    "fbxPath": "unity/FidgetingApp/ArtSource/ModelPipeline/premium-display-case/evidence/04-architecture/rev-024/source/PackOpeningGate04R024PackOnlyRig.fbx",
+    "fbxSha256": "a7a8c6ae76a89355cb2f74978f896bdcedba062b8fa02624ffae07803f4f8810",
+    "changed": false
+  },
+  "verifiedR024RuntimeGeometry": {
+    "afterActualUnityFrameUpdate": true,
+    "localTransforms": "identity",
+    "armature": false,
+    "bones": false,
+    "bindposes": false,
+    "shapeWeights": "correct",
+    "localSegmentCount": 48,
+    "maximumTriangleSpanMeters": 0.0053125
+  },
+  "verifiedLogicalSegmentsAfterUnityHorizontalReflection": {
+    "0.50": {
+      "sealed": [7, 47],
+      "opened": [0, 6]
+    },
+    "0.70": {
+      "sealed": [19, 47],
+      "opened": [0, 33]
+    },
+    "0.90": {
+      "sealed": [34, 47],
+      "opened": [0, 44]
+    }
+  },
+  "rootCause": {
+    "oldCameraAspect": 1.3333333,
+    "renderTarget": [1206, 2622],
+    "targetAspect": 0.4599542,
+    "horizontalProjectionFactor": 2.89884,
+    "failure": "WorldToViewportPoint and static diagnostic calculations used 4:3 while the RenderTexture used portrait target dimensions."
+  },
+  "verifiedTargetSpaceMeasurements": {
+    "targetAspectBakedBoundsToExactColorIdMaskMaximumDelta": 0.0011,
+    "at070": {
+      "linerPixels": 2912,
+      "cavityPixels": 21791
+    },
+    "at090": {
+      "linerPixels": 3051,
+      "cavityPixels": 35001
+    },
+    "fullLiveCaseMaskBoundaryContrast": 0.174388,
+    "staleCentralCropBoundaryContrast": 0.013369,
+    "existingContrastThreshold": 0.04
+  },
+  "R025Correction": {
+    "projectionGuard": "RenderSession binds target texture and Width/Height aspect before every capture or WorldToViewportPoint measurement, then restores the prior state.",
+    "segmentDiagnostics": "Non-degenerate baked triangles and uniquely labeled per-segment masks replace aggregate union-rectangle bridge checks.",
+    "caseContrast": "Uses queue-consistent live-case ID materials and the actual target-space mouth region.",
+    "forbiddenChanges": [
+      "Blender rig",
+      "R024 FBX",
+      "Pack geometry",
+      "UVs",
+      "48-segment topology",
+      "Pack artwork",
+      "case prefab/contentSlot/toy",
+      "timing",
+      "CC0 mapping",
+      "effects",
+      "canonical project",
+      "FanCard",
+      "packages",
+      "user assets"
+    ]
+  },
+  "shippingReady": false,
+  "physicalPhoneInstalled": false,
+  "statusText": "视觉批准待确认，未推送手机"
+}

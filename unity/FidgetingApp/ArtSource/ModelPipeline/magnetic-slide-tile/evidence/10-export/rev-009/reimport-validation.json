@@ -1,0 +1,330 @@
+{
+  "schemaVersion": 1,
+  "gate": "10-export",
+  "revision": 9,
+  "results": {
+    "fbx": {
+      "format": "fbx",
+      "boundsMeters": {
+        "min": [
+          -0.015500000678002834,
+          -0.02500000037252903,
+          -4.073017478845031e-09
+        ],
+        "max": [
+          0.015500000678002834,
+          0.02500000223517418,
+          0.012000004760921001
+        ],
+        "size": [
+          0.03100000135600567,
+          0.05000000260770321,
+          0.01200000883393848
+        ]
+      },
+      "hierarchy": {
+        "CarrierFollowerLeft": "RotatingCarrier",
+        "UnknownSprings": "RotatingCarrier",
+        "TopInnerGrooveRight": "MovingTopBody",
+        "FixedAxisBoss": "BottomExterior",
+        "RotatingCarrier": "FixedAxisBoss",
+        "RotatingCarrierBody": "RotatingCarrier",
+        "BallCandidateRight": "RotatingCarrier",
+        "MovingTopBody": "TopLocalSlide",
+        "MinimumOverlapDisk": "BottomExterior",
+        "BottomExterior": "MagneticSlideTile_G05_R006",
+        "MovingTop": "MagneticSlideTile_G05_R006",
+        "UnknownPreload": "RotatingCarrier",
+        "MagneticSlideTile_G05_R006": null,
+        "TopOuterGrooveRight": "MovingTopBody",
+        "FixedAxis": "FixedAxisBoss",
+        "CarrierFollowerRight": "RotatingCarrier",
+        "TopInnerGrooveLeft": "MovingTopBody",
+        "BallCandidateLeft": "RotatingCarrier",
+        "TopOuterGrooveLeft": "MovingTopBody",
+        "TopLocalSlide": "MovingTop"
+      },
+      "meshes": {
+        "BottomExterior": {
+          "vertices": 9234,
+          "polygons": 18464,
+          "materials": [
+            "M07R11_Crystal_LowerDistinct",
+            "M07R11_DarkExteriorSide",
+            "M07R11_PolishedSilver",
+            "M07R11_NeutralTechnical"
+          ],
+          "uvLayers": 1,
+          "normalLengthsValid": true
+        },
+        "FixedAxisBoss": {
+          "vertices": 256,
+          "polygons": 508,
+          "materials": [
+            "M07R11_PolishedSilver"
+          ],
+          "uvLayers": 1,
+          "normalLengthsValid": true
+        },
+        "RotatingCarrierBody": {
+          "vertices": 252,
+          "polygons": 500,
+          "materials": [
+            "M07R11_InternalSilverReference"
+          ],
+          "uvLayers": 1,
+          "normalLengthsValid": true
+        },
+        "CarrierFollowerLeft": {
+          "vertices": 5130,
+          "polygons": 10256,
+          "materials": [
+            "M07R11_NeutralTechnical"
+          ],
+          "uvLayers": 1,
+          "normalLengthsValid": true
+        },
+        "CarrierFollowerRight": {
+          "vertices": 5130,
+          "polygons": 10256,
+          "materials": [
+            "M07R11_NeutralTechnical"
+          ],
+          "uvLayers": 1,
+          "normalLengthsValid": true
+        },
+        "BallCandidateLeft": {
+          "vertices": 1986,
+          "polygons": 3968,
+          "materials": [
+            "M07R11_BallCandidate_UnknownMaterial"
+          ],
+          "uvLayers": 1,
+          "normalLengthsValid": true
+        },
+        "BallCandidateRight": {
+          "vertices": 1986,
+          "polygons": 3968,
+          "materials": [
+            "M07R11_BallCandidate_UnknownMaterial"
+          ],
+          "uvLayers": 1,
+          "normalLengthsValid": true
+        },
+        "MovingTopBody": {
+          "vertices": 25682,
+          "polygons": 51360,
+          "materials": [
+            "M07R11_Crystal_Upper",
+            "M07R11_DarkExteriorSide",
+            "M07R11_PolishedSilver",
+            "M07R11_NeutralTechnical"
+          ],
+          "uvLayers": 1,
+          "normalLengthsValid": true
+        }
+      },
+      "checks": {
+        "coreMeshes": true,
+        "fourGrooves": true,
+        "hierarchy": true,
+        "boundsMeters": true,
+        "normals": true,
+        "uvs": true,
+        "materialSlots": true,
+        "metadata": true,
+        "closedZeroMotion": true,
+        "noAnimations": true
+      },
+      "pass": true
+    },
+    "glb": {
+      "format": "glb",
+      "boundsMeters": {
+        "min": [
+          -0.015500000678002834,
+          -0.02500000037252903,
+          0.0
+        ],
+        "max": [
+          0.015500000678002834,
+          0.02500000037252903,
+          0.012000001035630703
+        ],
+        "size": [
+          0.03100000135600567,
+          0.05000000074505806,
+          0.012000001035630703
+        ]
+      },
+      "hierarchy": {
+        "CarrierFollowerLeft": "RotatingCarrier",
+        "UnknownSprings": "RotatingCarrier",
+        "TopInnerGrooveRight": "MovingTopBody",
+        "FixedAxisBoss": "BottomExterior",
+        "RotatingCarrier": "FixedAxisBoss",
+        "RotatingCarrierBody": "RotatingCarrier",
+        "BallCandidateRight": "RotatingCarrier",
+        "MovingTopBody": "TopLocalSlide",
+        "MinimumOverlapDisk": "BottomExterior",
+        "BottomExterior": "MagneticSlideTile_G05_R006",
+        "MovingTop": "MagneticSlideTile_G05_R006",
+        "UnknownPreload": "RotatingCarrier",
+        "MagneticSlideTile_G05_R006": null,
+        "TopOuterGrooveRight": "MovingTopBody",
+        "FixedAxis": "FixedAxisBoss",
+        "CarrierFollowerRight": "RotatingCarrier",
+        "TopInnerGrooveLeft": "MovingTopBody",
+        "BallCandidateLeft": "RotatingCarrier",
+        "TopOuterGrooveLeft": "MovingTopBody",
+        "TopLocalSlide": "MovingTop"
+      },
+      "meshes": {
+        "BottomExterior": {
+          "vertices": 13092,
+          "polygons": 18464,
+          "materials": [
+            "M07R11_Crystal_LowerDistinct.001",
+            "M07R11_DarkExteriorSide.001",
+            "M07R11_PolishedSilver.001",
+            "M07R11_NeutralTechnical.001"
+          ],
+          "uvLayers": 1,
+          "normalLengthsValid": true
+        },
+        "FixedAxisBoss": {
+          "vertices": 514,
+          "polygons": 508,
+          "materials": [
+            "M07R11_PolishedSilver.001"
+          ],
+          "uvLayers": 1,
+          "normalLengthsValid": true
+        },
+        "RotatingCarrierBody": {
+          "vertices": 522,
+          "polygons": 500,
+          "materials": [
+            "M07R11_InternalSilverReference.001"
+          ],
+          "uvLayers": 1,
+          "normalLengthsValid": true
+        },
+        "CarrierFollowerLeft": {
+          "vertices": 17432,
+          "polygons": 10256,
+          "materials": [
+            "M07R11_NeutralTechnical.001"
+          ],
+          "uvLayers": 1,
+          "normalLengthsValid": true
+        },
+        "CarrierFollowerRight": {
+          "vertices": 17432,
+          "polygons": 10256,
+          "materials": [
+            "M07R11_NeutralTechnical.001"
+          ],
+          "uvLayers": 1,
+          "normalLengthsValid": true
+        },
+        "BallCandidateLeft": {
+          "vertices": 2143,
+          "polygons": 3968,
+          "materials": [
+            "M07R11_BallCandidate_UnknownMaterial.001"
+          ],
+          "uvLayers": 1,
+          "normalLengthsValid": true
+        },
+        "BallCandidateRight": {
+          "vertices": 2143,
+          "polygons": 3968,
+          "materials": [
+            "M07R11_BallCandidate_UnknownMaterial.001"
+          ],
+          "uvLayers": 1,
+          "normalLengthsValid": true
+        },
+        "MovingTopBody": {
+          "vertices": 82669,
+          "polygons": 51360,
+          "materials": [
+            "M07R11_Crystal_Upper.001",
+            "M07R11_DarkExteriorSide.001",
+            "M07R11_PolishedSilver.001",
+            "M07R11_NeutralTechnical.001"
+          ],
+          "uvLayers": 1,
+          "normalLengthsValid": true
+        }
+      },
+      "checks": {
+        "coreMeshes": true,
+        "fourGrooves": true,
+        "hierarchy": true,
+        "boundsMeters": true,
+        "normals": true,
+        "uvs": true,
+        "materialSlots": true,
+        "metadata": true,
+        "closedZeroMotion": true,
+        "noAnimations": true
+      },
+      "pass": true
+    },
+    "glbStructure": {
+      "counts": {
+        "nodes": 20,
+        "meshes": 8,
+        "materials": 7,
+        "textures": 4,
+        "images": 4,
+        "animations": 0
+      },
+      "checks": {
+        "header": true,
+        "eightMeshes": true,
+        "hierarchyNodes": true,
+        "materials": true,
+        "embeddedImages": true,
+        "normals": true,
+        "tangents": true,
+        "uvs": true,
+        "noAnimations": true
+      },
+      "pass": true
+    },
+    "collision": {
+      "names": [
+        "COL_BottomExterior",
+        "COL_MovingTop"
+      ],
+      "bounds": {
+        "min": [
+          -0.015200000256299973,
+          -0.024700002744793892,
+          9.99960393528454e-05
+        ],
+        "max": [
+          0.015200000256299973,
+          0.024700002744793892,
+          0.011800005100667477
+        ],
+        "size": [
+          0.030400000512599945,
+          0.049400005489587784,
+          0.011700009061314631
+        ]
+      },
+      "checks": {
+        "separateTwoMeshes": true,
+        "nonRenderingMetadata": true,
+        "noMaterials": true,
+        "noAnimations": true
+      },
+      "pass": true
+    }
+  },
+  "pass": true
+}

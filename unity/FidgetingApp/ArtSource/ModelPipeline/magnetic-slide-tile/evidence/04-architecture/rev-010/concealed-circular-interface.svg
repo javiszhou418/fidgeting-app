@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1400" height="980" viewBox="0 0 1400 980">
+  <defs><marker id="arrow" markerWidth="11" markerHeight="11" refX="9" refY="5.5" orient="auto"><path d="M0 0L11 5.5L0 11Z" fill="#ffb454"/></marker><style>
+      .title{font:800 36px -apple-system,"PingFang SC",sans-serif;fill:#f5f7f8}.sub{font:500 18px -apple-system,"PingFang SC",sans-serif;fill:#aab2b8}
+      .panel{fill:#0a0d10;stroke:#303840;stroke-width:2}.head{font:800 21px -apple-system,"PingFang SC",sans-serif;fill:#f5f7f8}
+      .note{font:550 16px -apple-system,"PingFang SC",sans-serif;fill:#c5ccd1}.badge{font:800 16px -apple-system,"PingFang SC",sans-serif;fill:#f5f7f8}
+      .hidden{fill:#62d9ff18;stroke:#62d9ff;stroke-width:7;stroke-dasharray:14 12}.internal{fill:#62d9ff}.unknown{fill:none;stroke:#a6afb6;stroke-width:5;stroke-dasharray:10 9}
+    .pivot{fill:none;stroke:#ffe06c;stroke-width:7}.moving{fill:none;stroke:#ffb454;stroke-width:8;stroke-linejoin:round}.arrow{fill:none;stroke:#ffb454;stroke-width:8;stroke-linecap:round}.movingText{fill:#ffb454}.pivotText{fill:#ffe06c}</style></defs>
+  <rect width="1400" height="980" fill="#080a0c"/><text x="38" y="54" class="title">隐藏圆形接口：同一上件在这里平移并旋转</text><text x="38" y="86" class="sub">只确认 enclosure 的位置与运动关系；内部路径、零件和耦合全部保持 unknown。</text>
+  <g transform="translate(28 120)"><rect width="654" height="758" rx="16" class="panel"/><text x="22" y="38" class="head">① 同款拆开图：圆端内部证据</text>
+    <svg x="22" y="60" width="610" height="516" viewBox="0 0 760 643"><image href="source-crops/official-concealed-interface.png" width="760" height="643"/><ellipse class="hidden" cx="420" cy="286" rx="224" ry="235"/><circle class="pivot" cx="399" cy="309" r="76"/></svg>
+    <rect x="22" y="596" width="610" height="136" rx="12" fill="#0b1419" stroke="#62d9ff" stroke-width="2"/><text x="42" y="632" class="badge internal">蓝色虚线 · 圆形重叠／封闭区</text><text x="42" y="665" class="note">同款拆开图可证明中心接口与内部接触件位于圆端。</text><text x="42" y="694" class="note">这些零件在正常外观中被上下件封闭，不作为可见白模几何。</text><text x="42" y="721" class="badge pivotText">黄色 · 仅为中央旋转轴心候选范围</text>
+  </g>
+  <g transform="translate(706 120)"><rect width="666" height="758" rx="16" class="panel"/><text x="22" y="38" class="head">② 用户视频：上件相对下层转动</text>
+    <svg x="92" y="60" width="480" height="612" viewBox="0 0 760 1097"><image href="source-crops/upper-rotates-over-lower.png" width="760" height="1097"/><path class="moving" d="M142 4 Q375 -48 621 42 L681 430 Q654 540 536 600 L247 583 Q131 523 117 408 Z"/><ellipse class="hidden" cx="385" cy="477" rx="205" ry="118"/><circle class="pivot" cx="385" cy="477" r="58"/></svg>
+    <path d="M555 190 Q630 260 560 330" class="arrow" marker-end="url(#arrow)"/><rect x="22" y="690" width="622" height="42" rx="10" fill="#16120c"/><text x="42" y="717" class="badge movingText">橙色上件通过隐藏接口运动；下层外露面仍保持干净。</text>
+  </g>
+  <rect x="28" y="900" width="1344" height="58" rx="10" fill="#111519"/><text x="50" y="925" class="note">下一版 Gate 05 新增门禁：</text><text x="246" y="925" class="badge">胶囊外轮廓必须用高分辨率曲线／圆角 profile 生成，并在真实渲染中无锯齿、无分面、圆度连续。</text><text x="50" y="949" class="note">未批准前不得重建白模；不得把虚线 envelope 细化成隐藏轨道、孔、球簧、紧固件或耦合。</text>
+</svg>

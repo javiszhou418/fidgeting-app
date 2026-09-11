@@ -1,0 +1,20 @@
+{
+  "schema": "premium-display-case-gate04-r011-self-rejection.v1",
+  "iteration": 4,
+  "status": "visual-self-rejected-before-registration",
+  "registeredForApproval": false,
+  "source": "actual Unity 6000.5.6f1 PlayMode frames at 1206x2622 and 60 fps",
+  "reasons": [
+    "The exact source atlas appeared, but soft dust still dominated the recognizable flare shapes.",
+    "The 25 lightning trails did not retain enough of the authored source graph identity.",
+    "The Pack wrapper still crossed the case as one large front panel late in the handoff."
+  ],
+  "corrections": [
+    "Bind the exact SG_LightingStrike Shader Graph directly to the Shuriken trail system.",
+    "Reduce source dust size and let the source atlas flare and lightning shapes dominate.",
+    "Move the coherent Pack wrapper farther left and down during the source discard interval."
+  ],
+  "shippingRuntimeWired": false,
+  "shippingReady": false,
+  "physicalPhoneInstalled": false
+}

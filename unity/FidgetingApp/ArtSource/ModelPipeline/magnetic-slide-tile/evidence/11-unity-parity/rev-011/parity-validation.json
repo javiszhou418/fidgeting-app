@@ -1,0 +1,173 @@
+{
+  "schemaVersion": 1,
+  "gate": "11-unity-parity",
+  "revision": 11,
+  "sameCamera": {
+    "name": "M08R6_Hero",
+    "resolution": [
+      1000,
+      620
+    ],
+    "lensMillimeters": 76.0,
+    "sensorWidthMillimeters": 36.0,
+    "independentCropping": false,
+    "postAlignment": false
+  },
+  "displayMapping": {
+    "name": "neutral-display-v1",
+    "formula": "max(rgb,0)/(1+0.18*rgb), then IEC 61966-2-1 sRGB"
+  },
+  "geometry": {
+    "blenderGlbSilhouetteIou": 1.0,
+    "blenderUnitySilhouetteIou": 0.9999242225230869,
+    "glbUnitySilhouetteIou": 0.9999242225230869,
+    "blenderBbox": [
+      209,
+      97,
+      794,
+      529
+    ],
+    "glbBbox": [
+      209,
+      97,
+      794,
+      529
+    ],
+    "unityBbox": [
+      209,
+      97,
+      794,
+      529
+    ],
+    "blenderCentroid": [
+      498.47342363051246,
+      309.2252865781882
+    ],
+    "glbCentroid": [
+      498.47342363051246,
+      309.2252865781882
+    ],
+    "unityCentroid": [
+      498.467586464722,
+      309.21742732719684
+    ]
+  },
+  "fullFrame": {
+    "blenderGlbSsim": 0.9871800543371873,
+    "glbUnitySsim": 0.9441989368433417,
+    "glbUnityObjectSsim": 0.9262758537669061,
+    "perceptualProxy": {
+      "method": "224x139 Lab RMSE plus Laplacian proxy",
+      "colorRmse": 0.00898897834122181,
+      "gradientRmse": 0.018045711951951187,
+      "combined": 0.011705998424440622
+    },
+    "heatmapAreaFractionOver24": 0.016546774193548386,
+    "backgroundMeanAbsoluteError": 0.004220649134367704
+  },
+  "regionalDeltaE76": {
+    "wholeObject": {
+      "pixels": 197933,
+      "median": 5.385164737701416,
+      "mean": 7.115719795227051,
+      "p95": 18.248287200927734
+    },
+    "bloodRed": {
+      "pixels": 44359,
+      "median": 8.062257766723633,
+      "mean": 9.380620002746582,
+      "p95": 19.72308349609375
+    },
+    "silver": {
+      "pixels": 4052,
+      "median": 7.211102485656738,
+      "mean": 13.057122230529785,
+      "p95": 56.46371841430664
+    }
+  },
+  "hotspot": {
+    "glb": {
+      "pixels": 949,
+      "centroid": [
+        647.0358271865122,
+        325.21707060063227
+      ],
+      "bbox": [
+        313,
+        210,
+        777,
+        448
+      ]
+    },
+    "unity": {
+      "pixels": 926,
+      "centroid": [
+        637.8563714902808,
+        327.43088552915765
+      ],
+      "bbox": [
+        309,
+        208,
+        779,
+        449
+      ]
+    },
+    "centroidErrorPixels": 9.442636465354148,
+    "relativeAreaError": 0.02423603793466807
+  },
+  "clipping": {
+    "glbWhiteFraction": 3.536443045584751e-05,
+    "unityWhiteFraction": 0.0005809782663608532
+  },
+  "materialPartitions": {
+    "topArtworkOnly": true,
+    "sideArtworkTriangles": 0,
+    "undersideArtworkTriangles": 0,
+    "upperLowerMasksIndependent": true
+  },
+  "controlledDiagnostics": {
+    "isolatedSilverObjectSsim": 0.980490442186094,
+    "isolatedSilverDeltaE76": {
+      "pixels": 197933,
+      "median": 5.099019527435303,
+      "mean": 5.118363380432129,
+      "p95": 8.062257766723633
+    },
+    "isolatedBloodRedObjectSsim": 0.8078968042465967,
+    "isolatedBloodRedDeltaE76": {
+      "pixels": 197933,
+      "median": 5.656854152679443,
+      "mean": 7.481048107147217,
+      "p95": 18.055469512939453
+    },
+    "environmentImport": {
+      "source": "six approved Unity-oriented EXR faces",
+      "packedLayout": "horizontal +X,-X,+Y,-Y,+Z,-Z",
+      "format": "RGBAHalf",
+      "sRGB": false,
+      "mipFilter": "Unity specular cubemap convolution",
+      "environmentIntensity": 0.85,
+      "extraAxisTransformInShader": false
+    }
+  },
+  "checks": {
+    "sameFullFrame": true,
+    "blenderGlbGeometry": true,
+    "unityGeometry": true,
+    "fullFrameSsim": true,
+    "objectSsim": true,
+    "heatmap": true,
+    "backgroundIdentity": true,
+    "bloodRed": true,
+    "silver": true,
+    "hotspot": true,
+    "clipping": true,
+    "partitions": true
+  },
+  "humanInspection": {
+    "status": "complete",
+    "required": true,
+    "note": "Full-resolution board inspected. Unity preserves the GLB blood-red face, dark side, silver response, reflection placement, and unclipped silhouette."
+  },
+  "pass": true
+}

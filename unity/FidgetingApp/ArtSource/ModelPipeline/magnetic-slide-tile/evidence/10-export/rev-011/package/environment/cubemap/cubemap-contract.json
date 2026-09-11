@@ -1,0 +1,67 @@
+{
+  "schemaVersion": 1,
+  "sourceEquirectangular": {
+    "path": "target-shipping-studio-r009.exr",
+    "sha256": "2fe029beb803d7f9a26d229a1969914f210a7b5c4f311bfe9878cb52c7d73d13"
+  },
+  "faceConvention": "Unity cubemap; raster top-left; +X=(1,-b,-a), -X=(-1,-b,a), +Y=(a,1,b), -Y=(a,-1,-b), +Z=(a,-b,1), -Z=(-a,-b,-1)",
+  "coordinateMapping": "Blender(X,Y,Z) -> Unity(X,Z,-Y)",
+  "faces": {
+    "positive-x": {
+      "path": "cubemap-r009/positive-x.exr",
+      "sha256": "59edaf2b250d962e196f91a2df6aa36f40a7f4273f588748459648574b7f73c5",
+      "resolution": [
+        512,
+        512
+      ]
+    },
+    "negative-x": {
+      "path": "cubemap-r009/negative-x.exr",
+      "sha256": "77354b794e7dba2fb7149766ef2962a09d8ca8486a3a60404421344f72809882",
+      "resolution": [
+        512,
+        512
+      ]
+    },
+    "positive-y": {
+      "path": "cubemap-r009/positive-y.exr",
+      "sha256": "a826165174802c8573f80bc57654858820a7184a520bc53713e556c8ba292cc9",
+      "resolution": [
+        512,
+        512
+      ]
+    },
+    "negative-y": {
+      "path": "cubemap-r009/negative-y.exr",
+      "sha256": "eeb99a271ea2e70a102395f314fb80a4c20d7980decb6426a94eb9574145615d",
+      "resolution": [
+        512,
+        512
+      ]
+    },
+    "positive-z": {
+      "path": "cubemap-r009/positive-z.exr",
+      "sha256": "8ba2447c400ae53111b3089dd35d892d71416ca99e6f8612d6ddaf31f8f9c572",
+      "resolution": [
+        512,
+        512
+      ]
+    },
+    "negative-z": {
+      "path": "cubemap-r009/negative-z.exr",
+      "sha256": "a805391a7161d718f55e4b13fc8b053eca3f9eb5c97ab290ae1208429a634875",
+      "resolution": [
+        512,
+        512
+      ]
+    }
+  },
+  "brightestDirectionUnity": [
+    0.5446992516517639,
+    0.4686315059661865,
+    0.6954763531684875
+  ],
+  "brightestDirectionAngularErrorDegrees": 0.06250933211021503,
+  "nonzeroRgb": true,
+  "colorSpace": "scene-linear Rec.709/D65"
+}

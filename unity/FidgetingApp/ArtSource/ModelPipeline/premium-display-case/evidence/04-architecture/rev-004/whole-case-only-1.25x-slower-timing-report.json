@@ -1,0 +1,172 @@
+{
+  "schema": "premium-display-case-whole-case-slowdown-timing.v2",
+  "modelId": "premium-display-case",
+  "gate": "04-architecture",
+  "architectureRevision": 1,
+  "evidenceRevision": 4,
+  "sourceTaskId": "504719bf-a4a3-44c2-b1f3-a3bd342e5ae3",
+  "sourceAsset": {
+    "path": "unity/FidgetingApp/Assets/Plugins/iOS/Rive/gacha-single-draw-jumbotron.riv",
+    "bytes": 357120,
+    "sha256": "da5ba78f63c09ea538d214f7bcdd520a852fc77232bf47ef31606106136c7717",
+    "runtimeVersion": "6.23.1",
+    "animationType": "T2_SPORTS_CARD_JUMBOTRON",
+    "splitArtboards": [
+      "background/mint-slab",
+      "foreground/mint-slab"
+    ],
+    "bindableArtboards": [
+      "Slab-rotate-v01",
+      "Coin_Slab_v09-sm"
+    ]
+  },
+  "runtimeMeasurements": [
+    {
+      "kind": "shipping-main-app-simulator",
+      "logPath": "unity/FidgetingApp/Artifacts/GachaPackRiveUnityContinuousPreview/gacha-pack-rive-unity-continuous-combined.log",
+      "purchaseTrigger": "2026-08-18 16:12:15.778",
+      "firstInState": "2026-08-18 16:12:15.793",
+      "completed": "2026-08-18 16:12:19.395",
+      "triggerToCompleteMilliseconds": 3617,
+      "activeStateToCompleteMilliseconds": 3602,
+      "completionReason": "animationSignal",
+      "watchdogObserved": false
+    },
+    {
+      "kind": "shipping-source-standalone-simulator",
+      "logPath": "unity/FidgetingApp/Artifacts/GachaRiveShippingPreview/gacha-rive-shipping-flow.log",
+      "purchaseTrigger": "2026-08-18 19:02:28.859",
+      "firstInState": "2026-08-18 19:02:28.864",
+      "completed": "2026-08-18 19:02:32.664",
+      "triggerToCompleteMilliseconds": 3805,
+      "activeStateToCompleteMilliseconds": 3800,
+      "completionReason": "animationSignal",
+      "watchdogObserved": false
+    }
+  ],
+  "selectedEnvelope": {
+    "baselineDurationMilliseconds": 3617,
+    "timeScale": 1.25,
+    "targetDurationMilliseconds": 4521.25,
+    "basis": "Canonical 3617 ms main-app envelope multiplied by the user-requested 1.25 time scale.",
+    "notClaimedAsAuthoredTimelineDuration": true,
+    "noNewPause": true,
+    "noSecondHighlight": true
+  },
+  "authoredParameters": {
+    "exactTimelineDuration": "unknown",
+    "exactRotationEasing": "unknown",
+    "exactHighlightEasing": "unknown",
+    "riveYAxisSign": "unknown",
+    "reason": "The checked runtime logs expose trigger, state changes, and completion, but not authored keyframes, cubic handles, or a 3D yaw-axis sign."
+  },
+  "videoObservation": {
+    "path": "unity/FidgetingApp/Artifacts/GachaRiveShippingPreview/gacha-rive-shipping-flow.mp4",
+    "sampleRateFps": 20,
+    "captureClockSynchronizedToRuntimeLog": false,
+    "fullTurnVideoRangeSecondsApprox": [
+      8.65,
+      8.95
+    ],
+    "highlightVideoRangeSecondsApprox": [
+      8.95,
+      9.25
+    ],
+    "timingUncertaintyMilliseconds": 50,
+    "order": [
+      "front",
+      "oblique",
+      "edge",
+      "reverse face",
+      "front",
+      "single broad diagonal highlight",
+      "hold"
+    ],
+    "highlightDirection": "upper-left to lower-right",
+    "boundaryObservation": "The broad highlight begins on the sampled final-turn boundary; strict non-overlap is not supported by the source video."
+  },
+  "targetMapping": {
+    "objectCount": 1,
+    "objectIdentity": "premium-display-case-whole-case-r004",
+    "portraitAspectWidthToHeight": 0.75,
+    "rotation": {
+      "axis": "Y",
+      "previewDirection": "+Y",
+      "degrees": 360,
+      "startMilliseconds": 225.0,
+      "endMilliseconds": 650.0,
+      "previewEasing": "smootherstep approximation"
+    },
+    "highlight": {
+      "count": 1,
+      "startMilliseconds": 625.0,
+      "endMilliseconds": 1050.0,
+      "direction": "upper-left to lower-right"
+    },
+    "settledHold": {
+      "startMilliseconds": 1050.0,
+      "endMilliseconds": 4521.25,
+      "reason": "The rev 3 hold is time-scaled with every other sample. No new pause, exit, hide, sticker peel, sparkle, or identity-only linger was added."
+    },
+    "excluded": [
+      "part separation",
+      "reassembly",
+      "object replacement",
+      "prize hiding",
+      "sticker peel",
+      "sparkles",
+      "exit spin",
+      "WHATNOT identity",
+      "yellow palette",
+      "smiley",
+      "barcode",
+      "sample serial",
+      "circular coin window"
+    ]
+  },
+  "outputs": {
+    "mp4": {
+      "path": "whole-case-only-1.25x-slower.mp4",
+      "durationMilliseconds": 4520.833,
+      "targetDeltaMilliseconds": -0.417,
+      "targetDeltaPercent": -0.009223,
+      "fps": 48,
+      "frameCount": 217,
+      "durationProbe": "ffprobe format.duration"
+    },
+    "gif": {
+      "path": "whole-case-only-1.25x-slower.gif",
+      "durationMilliseconds": 4520,
+      "targetDeltaMilliseconds": -1.25,
+      "targetDeltaPercent": -0.027647,
+      "durationProbe": "Pillow GIF frame metadata"
+    },
+    "contactSheet": "whole-case-only-1.25x-slower-contact-sheet.png",
+    "qualityReport": "animation-quality-report.json"
+  },
+  "truthLabel": "WHOLE CASE ONLY · 1.25× SLOWER · NO EXPLODE",
+  "userFeedback": {
+    "rejectedEvidenceRevision": 3,
+    "quote": "速度有点太快了",
+    "scope": "speed-only",
+    "preserved": [
+      "one whole assembled case",
+      "portrait framing",
+      "one unwrapped Y-axis 360-degree turn",
+      "one upper-left to lower-right highlight",
+      "same frame order",
+      "no part separation",
+      "no object replacement"
+    ]
+  },
+  "frameSequence": {
+    "sourceEvidenceRevision": 3,
+    "frameCount": 217,
+    "sourceSamplingFps": 60,
+    "playbackFps": 48,
+    "framesAdded": 0,
+    "framesRemoved": 0,
+    "framesReordered": 0,
+    "motionSequenceSha256": "61b39eb28012cdd7e5804e8a56d5e0b2f6647d81519f0235a958b088b4842058"
+  }
+}

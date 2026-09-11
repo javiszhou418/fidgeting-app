@@ -1,0 +1,146 @@
+{
+  "contract_sha256": "e5f1cf1fc2d103a6152ce15263f120ba856c0c42857622b54060bc8cbd964ed5",
+  "engine": "CYCLES",
+  "samples": 96,
+  "calibration": {
+    "target_p97_display": 0.86,
+    "passes": [
+      {
+        "p97": 0.2667,
+        "factor": 13.145
+      },
+      {
+        "p97": 0.7837,
+        "factor": 1.227
+      }
+    ],
+    "energies_w": {
+      "LGT_PDC_SOFT_KEY": 1.0981,
+      "LGT_PDC_RIGHT_STRIP": 0.0759,
+      "LGT_PDC_TOP_RAIL": 0.0152,
+      "LGT_PDC_COOL_RIM": 0.0042,
+      "LGT_PDC_LILAC_RIM": 0.0022,
+      "LGT_PDC_FRONT_FILL": 0.1473,
+      "LGT_PDC_REVIEW_TOP_FILL": 7.0346
+    },
+    "review_bright": {
+      "enabled": true,
+      "world_strength": 0.05,
+      "top_fill_relative_power": 0.45,
+      "note": "review aid; contract beauty rig unchanged; not Gate 08 lighting"
+    }
+  },
+  "materials_by_zone": {
+    "1": "MAT_PDC_CLEAR_CRYSTAL",
+    "2": "MAT_PDC_SMOKE_LINER",
+    "3": "MAT_PDC_MICROBLAST",
+    "4": "MAT_PDC_GRAPHITE",
+    "5": "MAT_PDC_STEEL_SATIN",
+    "6": "MAT_PDC_SMOKED_MIRROR",
+    "7": "MAT_PDC_CHAMPAGNE_GOLD",
+    "0": "MAT_PDC_REVIEW_SPINNER_TITANIUM",
+    "floor": "MAT_PDC_PREVIEW_FLOOR"
+  },
+  "lights": [
+    {
+      "name": "LGT_PDC_SOFT_KEY",
+      "energy_w": 1.1,
+      "size_m": [
+        0.1701,
+        0.0801
+      ],
+      "location_m": [
+        -0.0722,
+        -0.1767,
+        0.1721
+      ]
+    },
+    {
+      "name": "LGT_PDC_RIGHT_STRIP",
+      "energy_w": 0.08,
+      "size_m": [
+        0.011,
+        0.1901
+      ],
+      "location_m": [
+        0.1367,
+        0.0479,
+        0.1118
+      ]
+    },
+    {
+      "name": "LGT_PDC_TOP_RAIL",
+      "energy_w": 0.02,
+      "size_m": [
+        0.1161,
+        0.009
+      ],
+      "location_m": [
+        0.064,
+        -0.1609,
+        0.0453
+      ]
+    },
+    {
+      "name": "LGT_PDC_COOL_RIM",
+      "energy_w": 0.0,
+      "size_m": [
+        0.009,
+        0.1161
+      ],
+      "location_m": [
+        -0.0787,
+        -0.068,
+        -0.094
+      ]
+    },
+    {
+      "name": "LGT_PDC_LILAC_RIM",
+      "energy_w": 0.0,
+      "size_m": [
+        0.009,
+        0.1001
+      ],
+      "location_m": [
+        0.0892,
+        0.036,
+        -0.104
+      ]
+    },
+    {
+      "name": "LGT_PDC_FRONT_FILL",
+      "energy_w": 0.15,
+      "size_m": [
+        0.1901,
+        0.1201
+      ],
+      "location_m": [
+        -0.0313,
+        0.0672,
+        0.2045
+      ]
+    },
+    {
+      "name": "LGT_PDC_REVIEW_TOP_FILL",
+      "energy_w": 7.03,
+      "size_m": [
+        0.4403,
+        0.4403
+      ],
+      "location_m": [
+        0.0337,
+        -0.0723,
+        0.3272
+      ]
+    }
+  ],
+  "stills": [
+    "cmf-preview-hero.png",
+    "cmf-preview-front.png",
+    "cmf-preview-low-oblique.png",
+    "cmf-preview-corner-macro.png",
+    "cmf-preview-pocket-rim-macro.png"
+  ],
+  "turntable_frames": 72,
+  "status": "supplementary CMF preview; not Gate 07 lookdev"
+}

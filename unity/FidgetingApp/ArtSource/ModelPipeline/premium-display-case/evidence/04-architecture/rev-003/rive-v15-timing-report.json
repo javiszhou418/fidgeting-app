@@ -1,0 +1,144 @@
+{
+  "schema": "premium-display-case-rive-v15-timing.v1",
+  "modelId": "premium-display-case",
+  "gate": "04-architecture",
+  "architectureRevision": 1,
+  "evidenceRevision": 3,
+  "sourceTaskId": "504719bf-a4a3-44c2-b1f3-a3bd342e5ae3",
+  "sourceAsset": {
+    "path": "unity/FidgetingApp/Assets/Plugins/iOS/Rive/gacha-single-draw-jumbotron.riv",
+    "bytes": 357120,
+    "sha256": "da5ba78f63c09ea538d214f7bcdd520a852fc77232bf47ef31606106136c7717",
+    "runtimeVersion": "6.23.1",
+    "animationType": "T2_SPORTS_CARD_JUMBOTRON",
+    "splitArtboards": [
+      "background/mint-slab",
+      "foreground/mint-slab"
+    ],
+    "bindableArtboards": [
+      "Slab-rotate-v01",
+      "Coin_Slab_v09-sm"
+    ]
+  },
+  "runtimeMeasurements": [
+    {
+      "kind": "shipping-main-app-simulator",
+      "logPath": "unity/FidgetingApp/Artifacts/GachaPackRiveUnityContinuousPreview/gacha-pack-rive-unity-continuous-combined.log",
+      "purchaseTrigger": "2026-08-18 16:12:15.778",
+      "firstInState": "2026-08-18 16:12:15.793",
+      "completed": "2026-08-18 16:12:19.395",
+      "triggerToCompleteMilliseconds": 3617,
+      "activeStateToCompleteMilliseconds": 3602,
+      "completionReason": "animationSignal",
+      "watchdogObserved": false
+    },
+    {
+      "kind": "shipping-source-standalone-simulator",
+      "logPath": "unity/FidgetingApp/Artifacts/GachaRiveShippingPreview/gacha-rive-shipping-flow.log",
+      "purchaseTrigger": "2026-08-18 19:02:28.859",
+      "firstInState": "2026-08-18 19:02:28.864",
+      "completed": "2026-08-18 19:02:32.664",
+      "triggerToCompleteMilliseconds": 3805,
+      "activeStateToCompleteMilliseconds": 3800,
+      "completionReason": "animationSignal",
+      "watchdogObserved": false
+    }
+  ],
+  "selectedEnvelope": {
+    "durationMilliseconds": 3617,
+    "basis": "Canonical main-app trigger-to-animationSignal measurement.",
+    "notClaimedAsAuthoredTimelineDuration": true,
+    "observedRuntimeRangeMilliseconds": [
+      3617,
+      3805
+    ]
+  },
+  "authoredParameters": {
+    "exactTimelineDuration": "unknown",
+    "exactRotationEasing": "unknown",
+    "exactHighlightEasing": "unknown",
+    "riveYAxisSign": "unknown",
+    "reason": "The checked runtime logs expose trigger, state changes, and completion, but not authored keyframes, cubic handles, or a 3D yaw-axis sign."
+  },
+  "videoObservation": {
+    "path": "unity/FidgetingApp/Artifacts/GachaRiveShippingPreview/gacha-rive-shipping-flow.mp4",
+    "sampleRateFps": 20,
+    "captureClockSynchronizedToRuntimeLog": false,
+    "fullTurnVideoRangeSecondsApprox": [
+      8.65,
+      8.95
+    ],
+    "highlightVideoRangeSecondsApprox": [
+      8.95,
+      9.25
+    ],
+    "timingUncertaintyMilliseconds": 50,
+    "order": [
+      "front",
+      "oblique",
+      "edge",
+      "reverse face",
+      "front",
+      "single broad diagonal highlight",
+      "hold"
+    ],
+    "highlightDirection": "upper-left to lower-right",
+    "boundaryObservation": "The broad highlight begins on the sampled final-turn boundary; strict non-overlap is not supported by the source video."
+  },
+  "targetMapping": {
+    "objectCount": 1,
+    "objectIdentity": "premium-display-case-whole-case-r003",
+    "portraitAspectWidthToHeight": 0.75,
+    "rotation": {
+      "axis": "Y",
+      "previewDirection": "+Y",
+      "degrees": 360,
+      "startMilliseconds": 180,
+      "endMilliseconds": 520,
+      "previewEasing": "smootherstep approximation"
+    },
+    "highlight": {
+      "count": 1,
+      "startMilliseconds": 500,
+      "endMilliseconds": 840,
+      "direction": "upper-left to lower-right"
+    },
+    "settledHold": {
+      "startMilliseconds": 840,
+      "endMilliseconds": 3617,
+      "reason": "Rive exit, object hide, sticker peel, sparkles, and identity-only linger are excluded; the same assembled case stays visible for the measured envelope."
+    },
+    "excluded": [
+      "part separation",
+      "reassembly",
+      "object replacement",
+      "prize hiding",
+      "sticker peel",
+      "sparkles",
+      "exit spin",
+      "WHATNOT identity",
+      "yellow palette",
+      "smiley",
+      "barcode",
+      "sample serial",
+      "circular coin window"
+    ]
+  },
+  "outputs": {
+    "mp4": {
+      "path": "whole-case-only-rive-v15-envelope.mp4",
+      "durationMilliseconds": 3616.667,
+      "targetDeltaMilliseconds": -0.333,
+      "fps": 60,
+      "frameCount": 217
+    },
+    "gif": {
+      "path": "whole-case-only-rive-v15-envelope.gif",
+      "durationMilliseconds": 3620,
+      "targetDeltaMilliseconds": 3
+    },
+    "contactSheet": "whole-case-only-contact-sheet.png",
+    "qualityReport": "animation-quality-report.json"
+  },
+  "truthLabel": "WHOLE CASE ONLY · NO EXPLODE"
+}

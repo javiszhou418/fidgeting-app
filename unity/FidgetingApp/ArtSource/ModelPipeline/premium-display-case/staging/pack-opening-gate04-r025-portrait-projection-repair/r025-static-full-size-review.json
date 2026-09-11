@@ -1,0 +1,60 @@
+{
+  "schema": "premium-display-case-gate04-r025-static-full-size-review.v1",
+  "reviewedAt": "2026-09-01T03:42:17.192Z",
+  "candidateScope": "R025 isolated portrait-projection diagnostic repair; no physical asset change",
+  "source": "actual isolated Unity 6000.5.6f1 URP 17.5 frames",
+  "nativeSize": [
+    1206,
+    2622
+  ],
+  "reviewMode": "native-size Unity PNG inspection without resampling",
+  "technicalPreflight": {
+    "path": "preflight/r025-preflight-report.json",
+    "sha256": "a56488f816de0b68b998ad1c47f17d71ba9ea324764e9a11049f1d09e878b20e",
+    "sizeBytes": 489785
+  },
+  "staticFrames": [
+    {
+      "path": "preflight/tear-front-050.png",
+      "sha256": "1be8eab5e2df8679bc4f0b686c521a8ba90cbbd85b9f9732a6375bb604134222",
+      "sizeBytes": 1923513
+    },
+    {
+      "path": "preflight/formed-mouth-070.png",
+      "sha256": "6513a91c7b1a1e8a4e0b44dcdd97e2c4cb9c0d6500d08533a6e79f70b5fa88e1",
+      "sizeBytes": 1965230
+    },
+    {
+      "path": "preflight/case-contained-090.png",
+      "sha256": "d81ac7bd627843ab0b9641fc94401804aa05bebfac3cbb087f8b6ed2484774f1",
+      "sizeBytes": 1960823
+    }
+  ],
+  "checklist": [
+    {
+      "id": "upright-pack",
+      "passed": true,
+      "evidence": "The printed Pack remains upright in the .50/.70/.90 Unity frames."
+    },
+    {
+      "id": "compact-right-side-peeled-seal",
+      "passed": true,
+      "evidence": "The released seal remains a compact top-right physical strip."
+    },
+    {
+      "id": "upper-physical-mouth-with-dark-cavity-and-liner",
+      "passed": true,
+      "evidence": "The target-space liner and cavity masks pass at .70 and .90."
+    },
+    {
+      "id": "one-live-case-behind-front-lip",
+      "passed": true,
+      "evidence": "The .90 target-space case mask is fully within the physical mouth region and front-lip occlusion passes."
+    }
+  ],
+  "verdict": "pass-for-scrub",
+  "nextGate": "run actual Unity .70–1.20 scrub",
+  "shippingReady": false,
+  "physicalPhoneInstalled": false,
+  "statusText": "视觉批准待确认，未推送手机"
+}

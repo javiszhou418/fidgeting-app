@@ -1,0 +1,472 @@
+{
+  "status": "pass",
+  "source": "canonical unity/FidgetingApp shipping source",
+  "scene": "Assets/_DisplayCase/Scenes/PremiumDisplayCaseGate12R004.unity",
+  "prefab": "Assets/Resources/Gacha/PremiumDisplayCaseGate12R004/PresentationRoot.prefab",
+  "profile": "Assets/Resources/Gacha/PremiumDisplayCaseGate12R004Profile.asset",
+  "rejectedRevision": 3,
+  "rejectionSelections": {
+    "packTear": "撕包仍然有问题",
+    "light": "仍然太弱",
+    "gachaEnergy": "仍需加强蓄力与冲击"
+  },
+  "rootCauses": {
+    "status": "rejected-source-diagnosis",
+    "rejectedShippingRevision": 3,
+    "pipelineRejectionEventId": "580beed5-ae76-41e0-b800-601cf505bb93",
+    "sourceVideo": "unity/FidgetingApp/ArtSource/ModelPipeline/premium-display-case/evidence/12-shipping/rev-003/app-simulator-pack-to-case-r3.mp4",
+    "sourceVideoSha256": "1153f2d42188f7bdab1ba365037602e0a12bf3931c70c4bfbb42f0840d3239c3",
+    "video": {
+      "width": 1206,
+      "height": 2622,
+      "fps": 60,
+      "frames": 504,
+      "durationSeconds": 8.4
+    },
+    "packTear": {
+      "sealedComponentAt1_50s": {
+        "x": 290,
+        "y": 960,
+        "width": 626,
+        "height": 786,
+        "thresholdedPixels": 474208
+      },
+      "partialAt2_02s": {
+        "body": {
+          "x": 290,
+          "y": 1047,
+          "width": 626,
+          "height": 699,
+          "thresholdedPixels": 416433
+        },
+        "flap": {
+          "x": 293,
+          "y": 901,
+          "width": 627,
+          "height": 113,
+          "thresholdedPixels": 66182
+        }
+      },
+      "maximumVerticalFlapTravelPixels": 133,
+      "measuredHorizontalFlapTravelPixelsThroughCommit": 14,
+      "commitAt3_02s": {
+        "flapVisibleWidthPixels": 400,
+        "flapVisibleHeightPixels": 14,
+        "flapThresholdedPixels": 2915,
+        "retainedAreaVersusPartialFraction": 0.044
+      },
+      "firstSubstantiveFrameChangeSeconds": 1.983,
+      "contactSheetPartialLabelSeconds": 1.78,
+      "diagnosis": [
+        "The whole authored seal detaches at once and moves vertically, so it reads as a rigid lid instead of a tear front following the top seam.",
+        "The source flap is anchored from its top-leading corner, although the authored cut line is at the flap bottom near source y=97/512.",
+        "The synthetic opening is full-width from the first readable movement. It does not expose progressively along the gesture path.",
+        "Opacity decay plus view clipping retains only 4.4% of the thresholded flap area at commit, creating the user-visible sliver.",
+        "The automatic evidence labels partial follow at 1.78 s, but the first substantial Pack change is at 1.983 s."
+      ]
+    },
+    "light": {
+      "seamCandidateStripe": {
+        "screenAreaFraction": 0.001297,
+        "peakMeanLumaDeltaVersusAdjacentAt2_28s": 78.77,
+        "commitMeanLumaDeltaVersusAdjacentAt3_02s": -48.4,
+        "interpretation": "The stripe can be seen only in an enlarged crop. It occupies 0.13% of the frame and disappears at commit."
+      },
+      "releasePulse": {
+        "implemented": false,
+        "visiblePeaks": 0
+      },
+      "arrivalRim": {
+        "borderMinusInteriorMeanLumaAt3_38s": -7.21,
+        "borderMinusInteriorMeanLumaAt3_58s": -10.88,
+        "interpretation": "The effect produces a broad transparent wash, not a brighter separating object rim."
+      },
+      "rotationRim": {
+        "borderMinusInteriorMeanLumaAt3_80s": -28.54,
+        "borderMinusInteriorMeanLumaAt4_22s": -24.29,
+        "interpretation": "The shader uses one fixed virtual normal response. It does not author one traveling mesh-local pass for each circle."
+      },
+      "finalSheenVersusHold": {
+        "caseRoiMeanSignedLumaDelta": 3.85,
+        "caseRoiMeanAbsoluteLumaDelta": 7.84,
+        "caseRoiP95AbsoluteLumaDelta": 27,
+        "caseRoiFractionPositiveDeltaAbove10": 0.2281,
+        "interpretation": "A broad low-frequency change exists, but the normal-scale frame lacks a clear crossing edge and reads as ordinary material variation."
+      },
+      "rootCauses": [
+        "Rev 3 tests gated only changed pixels and one maximum pixel. They did not gate changed area, average contrast, p95 contrast, or the normal-scale recording.",
+        "Arrival uses a diagonal transparent wash instead of a dedicated object rim.",
+        "Rotation uses a static virtual-light response instead of two traveling mesh-local passes.",
+        "The final sheen is too narrow and too attenuated by transparent alpha to read as a single crossing event.",
+        "No separate commit release pulse exists."
+      ]
+    },
+    "workingPackComparison": {
+      "sourceCommit": "8f16791",
+      "sourcePath": "unity/FidgetingApp/Assets/Plugins/iOS/FidgetGachaStorefront.swift",
+      "authoredAspect": "384:512",
+      "gestureAxis": "horizontal",
+      "flapOffsetAtCommitCandidatePoints": {
+        "x": 132,
+        "y": -34
+      },
+      "anchor": "topTrailing",
+      "opacityAtFullProgress": 0.88,
+      "boundary": "Use the prior physical path as implementation evidence only. Do not restore its holder, branded art, entity, colors, or obsolete transition."
+    },
+    "benchmarkApplication": {
+      "borrow": [
+        "Pokemon-style same-frame seam-following causality",
+        "Arknights-style container-clipped seam light",
+        "CC0 Make It Shine timing curves and object-local mask math"
+      ],
+      "exclude": [
+        "game IP and art",
+        "external entities",
+        "three-card composition",
+        "explosion",
+        "particles",
+        "full-screen flash",
+        "rarity-color leak"
+      ]
+    }
+  },
+  "profileValuesLocked": false,
+  "pendingVisualTuning": true,
+  "shippingReady": false,
+  "wholeAssembledCaseOnly": true,
+  "sameInstanceThroughAcknowledgement": true,
+  "toyCallerOwned": true,
+  "toyIndependentAngularVelocity": 0,
+  "eventCounts": {
+    "seam": 1,
+    "releasePulse": 1,
+    "arrivalRim": 1,
+    "rotationRimPasses": 2,
+    "finalSheen": 1,
+    "persistentLight": 0
+  },
+  "pointLightCount": 0,
+  "particlesEnabled": false,
+  "physicalPhoneInstalled": false,
+  "deviceAccepted": false,
+  "timing": {
+    "handoffDurationSeconds": 0.14,
+    "entryDurationSeconds": 0.56,
+    "firstSpinDurationSeconds": 0.5,
+    "secondSpinDurationSeconds": 1.1,
+    "entryRotationOverlapSeconds": 0.18,
+    "arrivalRimDurationSeconds": 0.28,
+    "sheenDurationSeconds": 0.34,
+    "holdDurationSeconds": 0.62,
+    "entryYOffsetMeters": -0.18,
+    "entryCameraDepthZMeters": 0.11,
+    "firstSpinDegrees": 360.0,
+    "secondSpinDegrees": 360.0,
+    "lightRevealWidth": 0.18,
+    "lightRevealIntensity": 1.0,
+    "firstRotationRimIntensity": 0.92,
+    "secondRotationRimIntensity": 0.74,
+    "sheenWidth": 0.16,
+    "sheenIntensity": 1.0,
+    "sheenFalloff": 0.3,
+    "rotationStartSeconds": 0.38000000000000006,
+    "profileDurationSeconds": 2.9400000000000004,
+    "totalRotationDegrees": 720.0,
+    "firstSpinAverageDegreesPerSecond": 720.0,
+    "secondSpinAverageDegreesPerSecond": 327.27272727272725,
+    "firstToSecondAverageSpeedRatio": 2.2,
+    "profileValuesLocked": false,
+    "pendingVisualTuning": true
+  },
+  "visualRegression": {
+    "status": "pass",
+    "sampleTimesVideoSeconds": {
+      "sealed": 1.4,
+      "partial": 1.7,
+      "rebound": 2.0,
+      "committedOpenBeforeCase": 2.55,
+      "releasePulse": 2.6,
+      "caseFirstVisible": 2.583,
+      "finalSheen": 4.75,
+      "hold": 5.3
+    },
+    "pack": {
+      "authoredAspect": "384:512",
+      "flapAnchor": "topTrailing",
+      "flapWidthVersusBodyFraction": 0.9361370716510904,
+      "flapHorizontalTravelPixels": 146.7473419594313,
+      "partialOpeningGapPixels": 13,
+      "committedOpeningGapPixels": 105,
+      "reboundMeanAbsoluteDelta": 0.9477479614529281,
+      "seamP95MinusMedianLuma255": 166.0,
+      "seamFractionAbove40": 0.33431983385254416,
+      "releaseMeanLumaDelta255": 105.32394859813084,
+      "releaseP95LumaDelta255": 123.0,
+      "maximumCaseFractionBeforeOpening": 0.0,
+      "caseFractionFirstVisible": 0.5164136363636364,
+      "minimumTransitionForegroundFraction": 0.3852812241521919
+    },
+    "caseCuesIsolatedGpu": {
+      "arrival": {
+        "changedPixels": 18668,
+        "changedFraction": 0.4292,
+        "meanLumaDelta": 0.0319,
+        "meanLumaDelta255": 8.1345,
+        "p95LumaDelta": 0.0787,
+        "p95LumaDelta255": 20.0685,
+        "maximumLumaDelta": 0.7737,
+        "maximumLumaDelta255": 197.29350000000002,
+        "externalPixels": 0
+      },
+      "first-rotation-rim": {
+        "changedPixels": 23042,
+        "changedFraction": 0.5251,
+        "meanLumaDelta": 0.0525,
+        "meanLumaDelta255": 13.3875,
+        "p95LumaDelta": 0.1442,
+        "p95LumaDelta255": 36.771,
+        "maximumLumaDelta": 0.7448,
+        "maximumLumaDelta255": 189.924,
+        "externalPixels": 0
+      },
+      "second-rotation-rim": {
+        "changedPixels": 22745,
+        "changedFraction": 0.5183,
+        "meanLumaDelta": 0.0362,
+        "meanLumaDelta255": 9.231000000000002,
+        "p95LumaDelta": 0.0994,
+        "p95LumaDelta255": 25.347,
+        "maximumLumaDelta": 0.6235,
+        "maximumLumaDelta255": 158.9925,
+        "externalPixels": 0
+      },
+      "final-sheen": {
+        "changedPixels": 6586,
+        "changedFraction": 0.1255,
+        "meanLumaDelta": 0.0712,
+        "meanLumaDelta255": 18.156,
+        "p95LumaDelta": 0.6821,
+        "p95LumaDelta255": 173.93550000000002,
+        "maximumLumaDelta": 0.902,
+        "maximumLumaDelta255": 230.01000000000002,
+        "externalPixels": 0
+      }
+    },
+    "finalSheenVersusHold": {
+      "meanSignedLumaDelta255": 36.03968048095703,
+      "meanAbsoluteLumaDelta255": 39.92144012451172,
+      "p95AbsoluteLumaDelta255": 161.0,
+      "fractionPositiveDeltaAbove10": 0.32978122843340235
+    },
+    "persistentLightAfterSheen": {
+      "meanAbsoluteLumaDelta255": 1.171877145767212,
+      "p95AbsoluteLumaDelta255": 5.0
+    },
+    "checks": {
+      "fullWidthAuthoredFlap": true,
+      "flapMotionNotTooSmall": true,
+      "partialTearOpeningVisible": true,
+      "committedTearOpeningVisible": true,
+      "belowThresholdReboundsToSealed": true,
+      "caseDoesNotAppearBeforeOpening": true,
+      "caseAppearsAfterOpening": true,
+      "transitionNeverEmpty": true,
+      "seamContrastReadable": true,
+      "releasePulseContrastReadable": true,
+      "everyCaseCueHasMeasuredContrast": true,
+      "finalSheenCrossingVisible": true,
+      "allCaseLightStaysMeshClipped": true,
+      "noPersistentLight": true
+    }
+  },
+  "video": {
+    "codecContainer": "H.264 MP4",
+    "width": 1206,
+    "height": 2622,
+    "fps": 60.0,
+    "frameCount": 339,
+    "durationSeconds": 5.65,
+    "minimumCentralVisibleFraction": 0.21055683151228588,
+    "noEmptyFrame": true
+  },
+  "unityTests": {
+    "total": 53,
+    "passed": 53,
+    "failed": 0
+  },
+  "native": {
+    "status": "pass",
+    "swiftGateHarness": {
+      "passed": 42,
+      "failed": 0
+    },
+    "swiftWarningsAsErrors": {
+      "result": "pass",
+      "files": [
+        "FidgetProductUIComponents.swift",
+        "FidgetStoreKit.swift",
+        "FidgetGachaPackPresentation.swift",
+        "FidgetGachaRiveGateRules.swift",
+        "FidgetGachaStore.swift",
+        "FidgetGachaShippingStorefront.swift"
+      ]
+    },
+    "handoffTimingAuthority": "Unity ScriptableObject via native bridge",
+    "handoffDurationSeconds": 0.14,
+    "physicalPhoneInstalled": false,
+    "deviceAccepted": false
+  },
+  "sourceExtraction": {
+    "status": "pass",
+    "repository": "https://github.com/remi-chapelain/Unite2025-MakeItShine-Release",
+    "expectedCommit": "88842be0063b5b0b75e82ed6572752a37a13c82b",
+    "actualCommit": "88842be0063b5b0b75e82ed6572752a37a13c82b",
+    "sourceWorkingTreeClean": true,
+    "license": "CC0-1.0",
+    "files": [
+      {
+        "path": "Assets/Animation/Clips/Booster/Booster_Discarded.anim",
+        "expectedSha256": "be661fe81b095f7f1ad08fb2a1c003b15f8690ee08d43f9f705dc849924fb2c6",
+        "actualSha256": "be661fe81b095f7f1ad08fb2a1c003b15f8690ee08d43f9f705dc849924fb2c6",
+        "matches": true
+      },
+      {
+        "path": "Assets/Art/Kyle/Materials/SG_Title_Kyle.shadergraph",
+        "expectedSha256": "6a7718d6ae1eba360c03a1ea16b207ada5ae80f1a4dc2df0d004453bf94e2067",
+        "actualSha256": "6a7718d6ae1eba360c03a1ea16b207ada5ae80f1a4dc2df0d004453bf94e2067",
+        "matches": true
+      },
+      {
+        "path": "Assets/Art/Booster/SG_LightingStrike.shadergraph",
+        "expectedSha256": "a4eb3922e72a3dadb436902d2c4a57c3fbd6768e4b137104abeed6167e1f4f7d",
+        "actualSha256": "a4eb3922e72a3dadb436902d2c4a57c3fbd6768e4b137104abeed6167e1f4f7d",
+        "matches": true
+      }
+    ],
+    "moduleFiles": [
+      "SOURCE_CONTRACT.json",
+      "CC0-NOTICE.md",
+      "MakeItShineCc0Masks.hlsl",
+      "MakeItShineCc0EffectCurves.cs"
+    ],
+    "moduleHashes": {
+      "SOURCE_CONTRACT.json": "34c3c34f5f9a58ed168847c805a9756b5a160563bafda64b69def274eb34ca79",
+      "CC0-NOTICE.md": "9898fed53c7547f3aac41540a1278bba6539cdacef3954d037d92945dbd36b4b",
+      "MakeItShineCc0Masks.hlsl": "b97707d266aecbcfadb583967d7186a508126066ce348e104281fe6f4ab78b7d",
+      "MakeItShineCc0EffectCurves.cs": "d611185f98b453263c80d93d7467d77945b537804210cd55501eb19368ad86b3"
+    },
+    "forbiddenImports": [],
+    "excludedAssets": [
+      "Assets/Animation/Timelines/Booster to Card Timeline.playable",
+      "Assets/Animation/Timelines/Spawn Cards Timeline.playable",
+      "Assets/Prefabs/Cinematic/Opening_Booster.prefab",
+      "Assets/Art/Booster/BoosterFractured_B.fbx",
+      "Assets/Art/Booster/VFX_BoosterExplosion.vfx",
+      "Assets/Art/Booster/VFX_BoosterActivation.vfx",
+      "Assets/Art/Booster/VFXG_LightingStrike.vfx",
+      "Assets/Art/Common/Graphs/CardMask_Camera.shadergraph",
+      "Assets/Art/Common/RenderTextures/CardMaskLarge.asset",
+      "all Booster, Card and proxy FBX files",
+      "all three-card layouts and card prefabs",
+      "all branded artwork and sample materials"
+    ],
+    "shippingBoundaries": {
+      "externalModelsImported": false,
+      "externalPrefabsImported": false,
+      "externalTimelinesImported": false,
+      "externalMaterialsImported": false,
+      "externalArtworkImported": false,
+      "particlesImported": false,
+      "particlesEnabled": false,
+      "vfxGraphDependency": false,
+      "cinemachineDependency": false,
+      "extraMaskCamera": false,
+      "renderTextureMask": false,
+      "screenSpaceEffect": false,
+      "objectLocalMeshClipping": true
+    }
+  },
+  "assetHashes": {
+    "profile": "37655ea01814dd1214a06937b75896eac33edd85558aef5fcad30b016f08acad",
+    "prefab": "7a96aae6245b5a1d5463dabc3cb4518af8693ba8f8328ad9f2fe4ee6c6a67e2c",
+    "shader": "1b1945449e840dbc1d61a5dd32026ec017ddaa7c655c26dab9450a920f5642e5",
+    "gate11Fbx": "21c9db68723f0006d7c6bfec5280cafe55c16cf5392ff97c365c966e91f847ae",
+    "packAssets": {
+      "gacha-pack-chase-body.png": "bc9b02c277149c29943e767cf97c24104f71d7d10022c5d0c5b4a52cdeeea93b",
+      "gacha-pack-chase-flap.png": "0d08edd76cc9bfb68a3508eddac8818a442760cda20c1e57d49fad8a16e5d906",
+      "gacha-pack-grail-body.png": "52a3bd3c49ad6950fabfd6d4a3e091a6523b72cf2c323b1ca36ceb144f6fed48",
+      "gacha-pack-grail-flap.png": "d33efc93625623d5cbe084954a0d9b95e0b673b1a7ab99fa45286155c3f67332",
+      "gacha-pack-one-of-one-body.png": "d75c464cea3d4c14ac4e0d962644dec6b22e7e4bbc0bbd5bd97a72b484d2a57d",
+      "gacha-pack-one-of-one-flap.png": "bea52c056d15bc2295b158653a89014b0f62aa607239f461987e8f9d0ac63bce",
+      "gacha-pack-refined-body.png": "9be287c1fb6501cf2134d931905b44157a7926c6627dd00b093e69a2dec6bfa7",
+      "gacha-pack-refined-flap.png": "9ca43bcb6b3dd6892c024e209068f031c993f7ffdf9778b0384b3f6a4931190b",
+      "gacha-pack-signature-body.png": "b53d6b211c4fcb0a9a56a6f104f5d1f4e30e2354ec788219a15cad62ea218639",
+      "gacha-pack-signature-flap.png": "3f9173a88445bf0750bbaa18cbfdb52d070840f3fe98e81365b30414a43d73a4",
+      "gacha-pack-standard-body.png": "ebc17bb238ebbcb82d36134bb2781838df610f8a3d1750c27b8ade10fc4681d6",
+      "gacha-pack-standard-flap.png": "b031fc5c57d194e9603e9b32e1cd603285aa564490f599f29bb0cd67dab33d49"
+    }
+  },
+  "checks": {
+    "allEvidenceExists": true,
+    "rev3RejectionPersistedExactly": true,
+    "visualRegressionPasses": true,
+    "profileIsExactly720Degrees": true,
+    "firstSpinIsClearlyFaster": true,
+    "spinBoundaryHasNoStop": true,
+    "eventCountsAreExact": true,
+    "effectModuleActuallyWired": true,
+    "sameInstanceToyAndLabelsPreserved": true,
+    "staleInterruptionAndReduceMotionCovered": true,
+    "focusedUnityTestsPass": true,
+    "swiftWarningsAsErrorsPass": true,
+    "pinnedCc0SourceAndExclusionsPass": true,
+    "releaseSimulatorBuildPasses": true,
+    "videoIsPortrait60Fps": true,
+    "videoHasNoEmptyFrame": true,
+    "canonicalBundleIdentity": true,
+    "rev4PrefabAndProfileBundled": true,
+    "approvedGate10FbxPreserved": true,
+    "physicalPhoneUntouched": true
+  },
+  "missing": [],
+  "artifacts": {
+    "ArtSource/ModelPipeline/premium-display-case/evidence/12-shipping/rev-004/hero.png": "ff1baa67c2e8bb73bfcbb164001a2b7535087448ba80f98075c336e7198350c7",
+    "ArtSource/ModelPipeline/premium-display-case/evidence/12-shipping/rev-004/top.png": "cff89ec697c2ef135b994f21232dbbfbe06629c8d61666ce339c69681480d85c",
+    "ArtSource/ModelPipeline/premium-display-case/evidence/12-shipping/rev-004/left-oblique.png": "2230e6f44cf22f022d17b197083f3349585a0431d485dc6fc43ba288485131b5",
+    "ArtSource/ModelPipeline/premium-display-case/evidence/12-shipping/rev-004/right-oblique.png": "0490398503627e4d2066229be56201e7b53139e4a5aa18b1b2e050d36da36145",
+    "ArtSource/ModelPipeline/premium-display-case/evidence/12-shipping/rev-004/low.png": "2a46436a39541f155f1c8e24c295fb027f66d30b5ab990a447672141811a29a9",
+    "ArtSource/ModelPipeline/premium-display-case/evidence/12-shipping/rev-004/library.png": "6e6d20502638136b5d92aa5faa0f926e63bccb2d26fea732b2861940e3258ca2",
+    "ArtSource/ModelPipeline/premium-display-case/evidence/12-shipping/rev-004/simulator-final.png": "6e6d20502638136b5d92aa5faa0f926e63bccb2d26fea732b2861940e3258ca2",
+    "ArtSource/ModelPipeline/premium-display-case/evidence/12-shipping/rev-004/app-simulator-pack-to-case-r4.mp4": "74ea5e46d1c980dd402ac38ace4e8e7287bafb66e08eec105a674ccacd2228f1",
+    "ArtSource/ModelPipeline/premium-display-case/evidence/12-shipping/rev-004/app-simulator-pack-to-case-r4-raw.mp4": "3931aca0301e5a62be22ae5d65a979306fb533b6150b989e387cee3c8bd40f58",
+    "ArtSource/ModelPipeline/premium-display-case/evidence/12-shipping/rev-004/app-simulator-contact-sheet.png": "c96a56c7c0ad212fef9506ecab530e10d94ab2164642e53b68f5db8972701d0d",
+    "ArtSource/ModelPipeline/premium-display-case/evidence/12-shipping/rev-004/pack-tear-rebound-contact-sheet.png": "54221098649b6b8862582988a917a2013cb172be1de36463aadeb0e7035bb33b",
+    "ArtSource/ModelPipeline/premium-display-case/evidence/12-shipping/rev-004/pack-seam-release-contact-sheet.png": "a2c9c705616025397ac0770d473af14933adc9d61c7ce0fd8f61c06d197bcb1e",
+    "ArtSource/ModelPipeline/premium-display-case/evidence/12-shipping/rev-004/case-cue-contact-sheet.png": "2fc964430056d77f13f82e1ab794fffcb88498cfd811b541558dac9df2fe76ff",
+    "ArtSource/ModelPipeline/premium-display-case/evidence/12-shipping/rev-004/standard-views-contact-sheet.png": "96de38041378f196b68e5374e0d6155428488522a258448792e0ffb62f1bf7b8",
+    "ArtSource/ModelPipeline/premium-display-case/evidence/12-shipping/rev-004/shipping-capture-report.json": "0d3609c8c4b5d22fa345a7524f53952e3635f4868fd3a38c192951d9914b5b48",
+    "ArtSource/ModelPipeline/premium-display-case/evidence/12-shipping/rev-004/timing-candidate-report.json": "12e4427083c65998aa8d82dd37cbb8e872471ea477f074c8e12089759d9ef2ee",
+    "ArtSource/ModelPipeline/premium-display-case/evidence/12-shipping/rev-004/visual-regression-report.json": "043023732e109c4f1e0d9172ad9f1bb5d8bbbd71b69ed1cd7494d2421cb7d036",
+    "ArtSource/ModelPipeline/premium-display-case/evidence/12-shipping/rev-004/source-extraction-report.json": "786fa27f8b2d0157fc9a060daadfd556c171b07c4c1b3d4900ce2fe840011d8f",
+    "ArtSource/ModelPipeline/premium-display-case/evidence/12-shipping/rev-004/asset-hash-manifest.json": "a2a30db0cd8a97bc24fb8dba900019594f6b3182c1173335522f5b3fb5776d48",
+    "ArtSource/ModelPipeline/premium-display-case/evidence/12-shipping/rev-004/native-validation-report.json": "61b09135010030ebe50844e7f373a4d9694ce9b277403fd4bd7832b436114390",
+    "ArtSource/ModelPipeline/premium-display-case/evidence/12-shipping/rev-004/simulator-build-manifest.json": "46b322fa7dbfaa0c520ea99729d6ea37a4a749e4f8b44dfcc814e5349252e02c",
+    "ArtSource/ModelPipeline/premium-display-case/evidence/12-shipping/rev-004/xcode-build-summary.json": "b7043666a7f71c9062c351fe6bcf1d5ff28912ab15f8298b089ef130b7cb8b62",
+    "ArtSource/ModelPipeline/premium-display-case/evidence/12-shipping/rev-004/unity-focused-results.xml": "95125c71c93fde31ccbbde42298322c78645232760c8a3d8bf5dc38bc2bc0b8c",
+    "ArtSource/ModelPipeline/premium-display-case/evidence/12-shipping/rev-004/diagnosis/rev3-frame-diagnosis.json": "ae47ba72760c0d6923d723c97a14c28a97aef452087c3f3d15133921a35c59c5",
+    "ArtSource/ModelPipeline/premium-display-case/evidence/12-shipping/rev-004/user-rejection.md": "942d7d55ae3927267024c76020438e3ba473eff95db625b4c3efedd04f7c1a2f",
+    "ArtSource/ModelPipeline/premium-display-case/evidence/12-shipping/rev-004/build_rev4_evidence.py": "beeaf70a4e2c3791b4e3acad9b78f3f4008b3a07ba06fb2b07c72b0e4963facd",
+    "Assets/_DisplayCase/Editor/PremiumDisplayCaseGate12Builder.cs": "6b8a0131879afaf1563c1aa9c2e71574fa8836ded8b4cf71946ea4db0c5fd162",
+    "Assets/_DisplayCase/Runtime/PremiumDisplayCaseRevealProfile.cs": "783ad1e734581859667257f934cd9c92bbecbacc59f84ed3ddc4d7e03c1a03d6",
+    "Assets/_DisplayCase/Runtime/PremiumDisplayCaseShippingPresentation.cs": "19b53ef917a74916073ba741065d2d753d2e80624182bea0d97b6463511eb6b8",
+    "Assets/_DisplayCase/Runtime/PremiumDisplayCaseShippingFactory.cs": "345192f3f639b1ecf28e33f7355683b3fc86f6a7ee367ca1c774f6ad1351c2b5",
+    "Assets/Scripts/Product/Gacha/GachaShippingRevealDirector.cs": "02252b6812be9e7b74ef2eae6939926944362c99aa3957760222b9bdd086527a",
+    "Assets/Scripts/Product/FidgetAppCoordinator.cs": "21ef835e56f6f9f4175390a2a66a7496a26d363b40a06f8442d8862cc5171216",
+    "Assets/Plugins/iOS/FidgetGachaPackPresentation.swift": "7226db1660a69befab371e1c400feee3215997720f31b23796ec9e8f0353223b",
+    "Assets/Plugins/iOS/FidgetProductUIComponents.swift": "c63562058936939355b15edb6c7da0262a80b25610f430695217ea4f1972789f",
+    "Assets/Plugins/iOS/FidgetGachaShippingStorefront.swift": "34fa3bb176e5de48ca1228307aa184ca05b28091d3e8482a626b41cf3a675a75",
+    "Assets/_DisplayCase/Shaders/PremiumDisplayCaseGate12R004Frosted.shader": "1b1945449e840dbc1d61a5dd32026ec017ddaa7c655c26dab9450a920f5642e5"
+  },
+  "statusText": "视觉批准待确认，未推送手机"
+}

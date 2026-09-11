@@ -1,0 +1,102 @@
+{
+  "schema": "premium-display-case-gate04-r024-preview-mapping-isolated-source.v1",
+  "isolatedUnityCandidate": true,
+  "canonicalIntegration": false,
+  "sourceProject": "/tmp/FidgetingApp-PackOpening-R023-PreviewMapping-20260901-r01",
+  "isolatedProject": "/tmp/FidgetingApp-PackOpening-R024-LocalSegmentAnchors-20260901-r01",
+  "r024Rig": {
+    "source": "unity/FidgetingApp/ArtSource/ModelPipeline/premium-display-case/staging/pack-opening-gate04-r024-local-segment-anchor/PackOpeningGate04R024PackOnlyRig.fbx",
+    "destination": "Assets/Source/R024/PackOpeningGate04R024PackOnlyRig.fbx",
+    "sha256": "a7a8c6ae76a89355cb2f74978f896bdcedba062b8fa02624ffae07803f4f8810"
+  },
+  "r018LeftStripControl": {
+    "source": "unity/FidgetingApp/ArtSource/ModelPipeline/premium-display-case/staging/pack-opening-gate04-r018-coordinate-orientation/PackOpeningGate04R018PackOnlyRig.fbx",
+    "destination": "Assets/Source/R018Control/PackOpeningGate04R018LeftStripControl.fbx",
+    "sha256": "affe0a519712596660800dffb7d6b33126886defcaee9a33a658e97a79ca2f46",
+    "expectedR018Hash": "affe0a519712596660800dffb7d6b33126886defcaee9a33a658e97a79ca2f46"
+  },
+  "r017MirrorControl": {
+    "source": "inherited from immutable isolated R018 source project",
+    "destination": "Assets/Source/R017Control/PackOpeningGate04R017MirrorControl.fbx",
+    "sha256": "1a9c8f5b066cc2a24cf629c0a0ffa9eaaec05279af0e0171ab2f341731dabe66",
+    "expectedR017Hash": "1a9c8f5b066cc2a24cf629c0a0ffa9eaaec05279af0e0171ab2f341731dabe66"
+  },
+  "sourceFiles": [
+    {
+      "path": "Assets/IsolatedProofR024/Editor/IsolatedR024ProofBuilder.cs",
+      "sha256": "752ba678edbdaf5973165cd150c98901bd1131de0a13e274ac91110eba856af6"
+    },
+    {
+      "path": "Assets/IsolatedProofR024/Editor/IsolatedR024ProofRunner.cs",
+      "sha256": "cbbf5dc24b4c1e12bf3623714c7cbd8f9ed2e10031a4bbbf38a8e9837a1e2abb"
+    },
+    {
+      "path": "Assets/IsolatedProofR024/Runtime/IsolatedR024OrientationCalibration.cs",
+      "sha256": "1963d7475aa89e469c533a10a72a8ece9641d585dd6414c7e97db873405c45cf"
+    },
+    {
+      "path": "Assets/IsolatedProofR024/Runtime/IsolatedR024Preflight.cs",
+      "sha256": "68d46307e8a0b3d26f52d24ecfbd4a3d68b5cd496410bbc8fac7b3123e1a7baa"
+    },
+    {
+      "path": "Assets/IsolatedProofR024/Runtime/IsolatedR024Profile.cs",
+      "sha256": "5e7a9a020ead44cf7245e65779ac61911b3decb97a62eaed9eb758492412ea97"
+    },
+    {
+      "path": "Assets/IsolatedProofR024/Runtime/IsolatedR024ProofCapture.cs",
+      "sha256": "bf0de10bf4bc81913f6ddc8fdbed12acfc8c06ce43d8279b02627895861d732d"
+    },
+    {
+      "path": "Assets/IsolatedProofR024/Runtime/IsolatedR024ProofRuntimeDriver.cs",
+      "sha256": "a42d90fca110e4591a07ffee00874ddfec4777aa5179b1e6b5873e3f7d03cfde"
+    },
+    {
+      "path": "Assets/IsolatedProofR024/Runtime/IsolatedR024ProofSequence.cs",
+      "sha256": "582abbe83ae6148a45cb5d05c6c3fcb9512cfd56a32d38d13628a5751c3c3b45"
+    },
+    {
+      "path": "Assets/IsolatedProofR024/Shaders/MakeItShineCc0ContourSweepR024.shader",
+      "sha256": "772653498240fff38fe39f3b8ab5272afaae39553ba9dc6952e0011c33f5337f"
+    },
+    {
+      "path": "Assets/IsolatedProofR024/Shaders/MakeItShineCc0PackR024.shader",
+      "sha256": "e255dc39f6b3d663ebad080724f25338938632862b8bf69e6d8074475bb7951d"
+    },
+    {
+      "path": "Assets/IsolatedProofR024/Shaders/OrientationCalibrationUnlitR024.shader",
+      "sha256": "7bf05c3a6f89049245141f82cca5dd4741269f5f908c117563b7679d2f5c8e18"
+    },
+    {
+      "path": "Assets/IsolatedProofR024/Shaders/RenderedBandMaskUnlitR024.shader",
+      "sha256": "55b9cd743f7c8c1ffd9031b8fee3617058c9918fe1f923cb28c63eeb1153a71d"
+    },
+    {
+      "path": "Assets/IsolatedProofR024/Tests/Editor/IsolatedR024ProofTests.cs",
+      "sha256": "a6a95770c9bb2d6dc506499fee8858063e326ac8a2bdb9d1d489eee94ba20310"
+    }
+  ],
+  "sourceBoundary": {
+    "casePrefabChanged": false,
+    "contentSlotChanged": false,
+    "canonicalScenesChanged": false,
+    "shippingAssetsChanged": false,
+    "sourceCc0EffectsChanged": false,
+    "camerasChanged": false,
+    "candidateCaseRelationChanged": false,
+    "candidateMouthBounceLightChanged": false,
+    "topSealUvClipRemoved": true,
+    "mouthGeometryChanged": "per-segment stable local collapse anchors for the existing 48-segment mouth",
+    "cavityBackWallSegmented": true,
+    "linerDepthMeters": 0.0055,
+    "topSealUsesGeometryOnly": true,
+    "blenderPreviewMappingOnly": false,
+    "r022ArtUvAndTimingUnchanged": true,
+    "inheritedR022CandidateRemoved": true,
+    "unityMaterialMappingChanged": false,
+    "particleSettingsChanged": false,
+    "timingChanged": false,
+    "visualEffectsIntensityDuringPreflight": 0
+  },
+  "shippingReady": false,
+  "physicalDeviceInstalled": false
+}

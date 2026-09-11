@@ -1,0 +1,248 @@
+{
+  "schemaVersion": 1,
+  "modelId": "magnetic-slide-tile",
+  "gate": "09-environment",
+  "environmentRevision": 2,
+  "blender": "5.2.0 LTS",
+  "triangles": {
+    "LowerBody_Fixed_CleanPlane": 2048,
+    "UpperCapsule_Moving": 2048
+  },
+  "pose": {
+    "upperTranslationMm": [
+      0.0,
+      21.0,
+      0.0
+    ],
+    "upperRotationRadians": [
+      0.0,
+      0.0,
+      0.0
+    ],
+    "upperWorldMatrix": [
+      [
+        1.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        1.0,
+        0.0,
+        21.0
+      ],
+      [
+        0.0,
+        0.0,
+        1.0,
+        3.0
+      ],
+      [
+        0.0,
+        0.0,
+        0.0,
+        1.0
+      ]
+    ],
+    "lowerWorldMatrix": [
+      [
+        1.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        1.0,
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.0,
+        1.0,
+        -3.0
+      ],
+      [
+        0.0,
+        0.0,
+        0.0,
+        1.0
+      ]
+    ],
+    "pointAxisClosedLocalMm": [
+      0.0,
+      -9.5,
+      0.0
+    ],
+    "pointAxisOpenWorldMm": [
+      0.0,
+      11.5,
+      0.0
+    ]
+  },
+  "cameras": {
+    "M09R2_OpenHeroCamera": {
+      "matrixWorld": [
+        [
+          0.872777283,
+          -0.178387344,
+          0.454354197,
+          92.0
+        ],
+        [
+          0.488118619,
+          0.318964243,
+          -0.812405109,
+          -154.0
+        ],
+        [
+          3.7e-08,
+          0.930827439,
+          0.365458935,
+          76.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "lensMm": 78.0
+    },
+    "M09R2_OpenObliqueCamera": {
+      "matrixWorld": [
+        [
+          0.786222696,
+          0.21143876,
+          -0.580644071,
+          -112.0
+        ],
+        [
+          -0.617943287,
+          0.269018143,
+          -0.738766074,
+          -132.0
+        ],
+        [
+          5e-09,
+          0.939639747,
+          0.342165321,
+          68.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "lensMm": 76.0
+    },
+    "M09R2_OpenTopCamera": {
+      "matrixWorld": [
+        [
+          0.738028765,
+          -0.63390708,
+          0.2312475,
+          48.0
+        ],
+        [
+          0.674769282,
+          0.693335712,
+          -0.252926856,
+          -42.0
+        ],
+        [
+          -3.3e-08,
+          0.342705995,
+          0.939442694,
+          195.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "lensMm": 76.0
+    },
+    "M09R2_OpenLayerCamera": {
+      "matrixWorld": [
+        [
+          0.812595904,
+          -0.136539325,
+          0.56660825,
+          104.0
+        ],
+        [
+          0.582827508,
+          0.190367267,
+          -0.789982557,
+          -138.0
+        ],
+        [
+          2.3e-08,
+          0.972171426,
+          0.234270528,
+          43.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "lensMm": 86.0
+    }
+  },
+  "controlledLights": [
+    "M08R1_FaceReveal",
+    "M08R1_Fill_Neutral",
+    "M08R1_Key_D65_Softbox",
+    "M08R1_Rim_SilverStrip"
+  ],
+  "artwork": {
+    "Artwork_Upper": {
+      "externalMaskNode": "Artwork_Upper_ExternalMask",
+      "imagePath": "/Users/jiawei.zhou/Documents/Fidgeting app/unity/FidgetingApp/ArtSource/ModelPipeline/magnetic-slide-tile/evidence/07-material/rev-007/artwork-upper-mask.png"
+    },
+    "Artwork_Lower": {
+      "externalMaskNode": "Artwork_Lower_ExternalMask",
+      "imagePath": "/Users/jiawei.zhou/Documents/Fidgeting app/unity/FidgetingApp/ArtSource/ModelPipeline/magnetic-slide-tile/evidence/07-material/rev-007/artwork-lower-mask.png"
+    }
+  },
+  "shippingMaterialEmissionStrengths": {
+    "M07R7_DaylightNeutralPolishedSilver": 0.0,
+    "M07R7_BloodRedCrystal_WideBorder_Upper": 0.0,
+    "M07R7_BloodRedCrystal_WideBorder_Lower": 0.0
+  },
+  "lodObjects": [],
+  "decimateModifiers": [],
+  "visibleInternalMechanismMeshes": [],
+  "checks": {
+    "gateAndRevision": true,
+    "rev1RecordedIncomplete": true,
+    "exact21MmPositiveY": true,
+    "zeroSpin": true,
+    "fixedLowerMatrix": true,
+    "upperWorldTranslation": true,
+    "single4096TriangleModel": true,
+    "noLodsOrDecimate": true,
+    "geometryUnchanged": true,
+    "materialsUnchanged": true,
+    "approvedLightingUnchanged": true,
+    "approvedEnvironmentUnchanged": true,
+    "camerasRealAndRecorded": true,
+    "artworkSlotsIndependent": true,
+    "mechanismConcealed": true,
+    "shippingEmissionZero": true,
+    "imageValidationPasses": true,
+    "gate09Only": true
+  },
+  "pass": true
+}

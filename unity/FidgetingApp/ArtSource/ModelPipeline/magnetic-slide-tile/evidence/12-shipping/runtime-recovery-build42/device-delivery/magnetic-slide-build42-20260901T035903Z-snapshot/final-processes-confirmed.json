@@ -1,0 +1,35 @@
+{
+  "error" : {
+    "code" : 1011,
+    "domain" : "com.apple.dt.CoreDeviceError",
+    "userInfo" : {
+      "DeviceIdentifier" : {
+        "string" : "ecid_7318581840707612"
+      },
+      "NSLocalizedDescription" : {
+        "string" : "CoreDeviceService was unable to locate a device matching the requested device identifier. (DeviceIdentifier: ecid_7318581840707612)"
+      }
+    }
+  },
+  "info" : {
+    "arguments" : [
+      "devicectl",
+      "device",
+      "info",
+      "processes",
+      "--device",
+      "00008130-001A00361EE0001C",
+      "--timeout",
+      "30",
+      "--json-output",
+      "unity/FidgetingApp/ArtSource/ModelPipeline/magnetic-slide-tile/evidence/12-shipping/runtime-recovery-build42/device-delivery/magnetic-slide-build42-20260901T035903Z-snapshot/final-processes-confirmed.json"
+    ],
+    "commandType" : "devicectl.device.info.processes",
+    "environment" : {
+      "TERM" : "dumb"
+    },
+    "jsonVersion" : 3,
+    "outcome" : "failed",
+    "version" : "518.27"
+  }
+}

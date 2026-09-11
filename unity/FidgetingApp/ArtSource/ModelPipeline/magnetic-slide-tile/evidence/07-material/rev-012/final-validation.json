@@ -1,0 +1,72 @@
+{
+  "schemaVersion": 1,
+  "modelId": "magnetic-slide-tile",
+  "gate": "07-material",
+  "revision": 12,
+  "pass": true,
+  "contractSha256": "9cd7a08f34d7d8dfc3c6f89f6c80a5c5c2dcae48bc0d5c54ebf455a0727ea571",
+  "gate06SourceSha256": "a2aaf83a8e46b013f0ba2e2d859732f20f29bd8cc1dd032e155269cb19ce0ef4",
+  "geometryDigest": "2fcf6d2b4344511bc6b86ce940a927576f9cdb4988f4022959a3372f4d3c1952",
+  "appearanceChanged": false,
+  "verification": {
+    "blenderBuilder": "pass",
+    "independentBlenderMaterialAudit": "pass",
+    "imageAndSourceComparisonAudit": "pass",
+    "endpointMotionAudit": {
+      "pass": true,
+      "denseSamples": 4359,
+      "blockedRotationAttempts": 4000,
+      "blockedSlideAttempts": 359,
+      "maximumSurfaceIntersectionCount": 0
+    },
+    "focusedNode": {
+      "pass": 6,
+      "total": 6
+    },
+    "fullNode": {
+      "pass": 192,
+      "total": 194,
+      "unrelatedFailures": [
+        "Premium Display Case rebuildRequested expectation",
+        "Premium Display Case Gate 12 historical status expectation"
+      ]
+    },
+    "modelPipeline": {
+      "errors": 0,
+      "missingFiles": 0,
+      "unhashed": 0
+    },
+    "browser": {
+      "desktop": "pass",
+      "mobile390x844": "pass",
+      "glbOrbitZoomEnvironmentExposure": "pass",
+      "turntablePlayback": "pass",
+      "modal": "pass",
+      "historyPersistence": "pass",
+      "runtimeExceptions": 0,
+      "loadingFailures": 0
+    },
+    "glb": {
+      "materials": 7,
+      "meshes": 8,
+      "embeddedImages": 4
+    },
+    "turntable": {
+      "codec": "h264",
+      "dimensions": [960, 720],
+      "frames": 24,
+      "durationSeconds": 2
+    },
+    "syntaxAndDiff": "pass",
+    "xml": "no Gate 07 XML generated"
+  },
+  "scope": {
+    "simulator": false,
+    "finalUnity": false,
+    "build": false,
+    "install": false,
+    "phone": false
+  },
+  "status": "ready_for_review",
+  "visualApprovalPending": true
+}

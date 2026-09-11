@@ -1,0 +1,27 @@
+{
+  "schemaVersion": 1,
+  "modelId": "magnetic-slide-tile",
+  "gate": "02-analysis",
+  "revision": 17,
+  "authority": "latest-explicit-user-chat",
+  "exactUserWording": "上片只有在推到顶部的时候，才可以进行360度旋转",
+  "decisionState": "locked-supersedes-all-slide-position-rotation",
+  "rules": {
+    "belowMaximum": "0 <= s < sMax requires theta=0 degrees",
+    "atMaximum": "s=sMax unlocks full 0-360 degree rotation through 30 detents at 12 degrees",
+    "nonAlignedRotation": "theta mod 360 != 0 locks s=sMax",
+    "alignedReturn": "theta within alignment tolerance of 0/360 permits slide return",
+    "simultaneousMotion": false,
+    "transitionException": "discrete state transition at sMax and theta alignment only"
+  },
+  "preserves": [
+    "geometry",
+    "BottomExterior",
+    "FixedAxis",
+    "MinimumOverlapDisk",
+    "top-above-bottom",
+    "finite-grooves",
+    "hidden-component-containment"
+  ],
+  "forbiddenInference": "Do not invent hidden latch geometry. Represent only endpoint alignment and kinematic interlock."
+}

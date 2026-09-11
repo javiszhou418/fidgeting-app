@@ -1,0 +1,151 @@
+{
+  "schema": "premium-display-case-gate04-r009-quality-contract.v1",
+  "modelId": "premium-display-case",
+  "gate": "04-architecture",
+  "architectureRevision": 5,
+  "evidenceRevision": 9,
+  "sourceThread": "2e7782a0-9389-4652-be92-7193ec0d5425",
+  "sourceTask": "11c5cd69-58c1-46b7-9d17-cead4ab73705",
+  "rejectedEvidenceRevision": 8,
+  "rejectionEventId": "f32ea87c-9bc2-4911-b796-dfe6e72e4fee",
+  "exactUserRejections": [
+    "纯纯垃圾。",
+    "纯纯垃圾。"
+  ],
+  "engine": {
+    "unity": "6000.5.6f1",
+    "urp": "17.5.0",
+    "vfxGraph": false,
+    "particles": "Shuriken"
+  },
+  "scope": {
+    "signatureInteractionOnly": true,
+    "sequence": [
+      "physical-pack-tear",
+      "escalation",
+      "180ms-opening-impact",
+      "one-settling-case-reveal"
+    ],
+    "fullTimelineSeconds": 3.1,
+    "ctaWork": false,
+    "allRarityTierWork": false
+  },
+  "sourceTruth": {
+    "packCanvas": [
+      384,
+      512
+    ],
+    "packBodySha256": "ebc17bb238ebbcb82d36134bb2781838df610f8a3d1750c27b8ade10fc4681d6",
+    "packFlapSha256": "b031fc5c57d194e9603e9b32e1cd603285aa564490f599f29bb0cd67dab33d49",
+    "assembledCasePrefab": "unity/FidgetingApp/Assets/Resources/Gacha/PremiumDisplayCaseGate12R004/PresentationRoot.prefab",
+    "assembledCaseSha256": "7a96aae6245b5a1d5463dabc3cb4518af8693ba8f8328ad9f2fe4ee6c6a67e2c",
+    "callerOwnedContent": "unity/FidgetingApp/Assets/Resources/Gacha/ThreeBladeDisplayPrize.prefab",
+    "toyEditsAllowed": false
+  },
+  "tear": {
+    "contactPoint": "top-trailing pull point",
+    "direction": "right-to-left across sealed edge",
+    "snapMilliseconds": 50,
+    "aheadOfFrontRemainsAttached": true,
+    "freedFoil": [
+      "segment-bend",
+      "curl",
+      "narrow-fold-highlight"
+    ],
+    "opening": [
+      "irregular-torn-contour",
+      "visible-foil-thickness",
+      "dark-environment-depth"
+    ],
+    "rigidBar": false,
+    "noiseDissolve": false
+  },
+  "impact": {
+    "windowMilliseconds": [
+      1750,
+      1930
+    ],
+    "origin": "inside-pack-opening",
+    "nearWhiteCapturedFrames": 1,
+    "shockwaveCount": 1,
+    "shockwavePlacement": "behind-product",
+    "shockwaveForm": "thin-fast-ring",
+    "authoredParticles": [
+      "foil-shards",
+      "warm-glints",
+      "directional-violet-streaks"
+    ],
+    "fullScreenLavenderFill": false,
+    "genericConcentricRings": false
+  },
+  "continuity": {
+    "environmentPreloaded": true,
+    "openingRevealsDepthFirst": true,
+    "caseEntryStartsBeforePackRetreat": true,
+    "packRetreat": "coherent-torn-edge-chunks-and-edge-burn",
+    "opacityCrossfade": false,
+    "blackFrame": false,
+    "blankWhiteFrame": false,
+    "hardCasePop": false
+  },
+  "reveal": {
+    "rotationDegrees": [
+      -25,
+      0
+    ],
+    "settleCount": 1,
+    "caseSweepCount": 1,
+    "caseSweepTiming": "immediately-after-impact",
+    "repeatedBackView": false,
+    "wholeAssembledCaseOnly": true
+  },
+  "camera": {
+    "anticipationPush": "restrained",
+    "impactKick": "brief",
+    "recovery": "immediate",
+    "sustainedShake": false,
+    "chromaticSmear": false,
+    "lensDistortion": false,
+    "caseBending": false
+  },
+  "accessibility": {
+    "reduceMotion": true,
+    "sameCausalOrder": true,
+    "disabled": [
+      "camera-kick",
+      "shockwave",
+      "directional-streaks"
+    ],
+    "reduced": [
+      "localized-flash",
+      "case-rotation"
+    ]
+  },
+  "transaction": {
+    "receiptReadinessPreserved": true,
+    "exactOnceCommitAckPreserved": true,
+    "staleRequestRejectionPreserved": true,
+    "interruptionRestorePreserved": true,
+    "skipPreserved": true,
+    "shippingRuntimeModified": false,
+    "nativeBusinessUiModified": false
+  },
+  "requiredReviewArtifacts": [
+    "normal-speed-full-signature-video",
+    "quarter-speed-tear-closeup",
+    "quarter-speed-1700-1950ms-impact-reveal",
+    "tear-silhouette-contact-sheet",
+    "impact-continuity-contact-sheet"
+  ],
+  "automaticSelfRejectIf": [
+    "noisy-square",
+    "lavender-wash",
+    "generic-ring-stack",
+    "missing-hero-after-first-flash",
+    "hard-case-pop",
+    "black-or-blank-white-frame"
+  ],
+  "measurementsAreVisualGoal": false,
+  "shippingReady": false,
+  "physicalPhoneInstalled": false
+}

@@ -1,0 +1,1158 @@
+{
+  "schemaVersion": 1,
+  "gate": "08-lighting",
+  "revision": 2,
+  "pass": true,
+  "sourceGate07": {
+    "materialRevision": 11,
+    "blendSha256": "fdf6e96206b6d048aa88fbd049a8af1a4d7a391d65ed74791c3acaca2767d274",
+    "approvalWording": "\u7ee7\u7eed"
+  },
+  "contractSha256": "5aee71817c2c033ed92b770126ba0ecb6d79c2f032d786743b214b79078a47ea",
+  "geometry": {
+    "before": "e2a838c22b743c7b0a05a20df060817f4e324bad5c84c11592c673c25ee002fe",
+    "after": "e2a838c22b743c7b0a05a20df060817f4e324bad5c84c11592c673c25ee002fe",
+    "expected": "e2a838c22b743c7b0a05a20df060817f4e324bad5c84c11592c673c25ee002fe"
+  },
+  "materials": {
+    "before": "366b788bfb329d806ffbffaa3ff9c4789deab3967943fa43dc7f42c9b6609aa8",
+    "after": "366b788bfb329d806ffbffaa3ff9c4789deab3967943fa43dc7f42c9b6609aa8",
+    "approvedEmission": {
+      "M07R11_Crystal_Upper": 0.0,
+      "M07R11_Crystal_LowerDistinct": 0.0,
+      "M07R11_PolishedSilver": 0.0,
+      "M07R11_InternalSilverReference": 0.0,
+      "M07R11_DarkExteriorSide": 0.0,
+      "M07R11_NeutralTechnical": 0.0,
+      "M07R11_BallCandidate_UnknownMaterial": 0.0
+    }
+  },
+  "matrices": {
+    "before": {
+      "BottomExterior": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          2.9375
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "FixedAxisBoss": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          -9.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          5.074999809
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "RotatingCarrierBody": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          -9.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          5.394999981
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "CarrierFollowerLeft": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          -6.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          -9.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          5.465000153
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "CarrierFollowerRight": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          6.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          -9.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          5.465000153
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "BallCandidateLeft": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          -11.75
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          -9.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          4.574999809
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "BallCandidateRight": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          11.75
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          -9.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          4.574999809
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "MovingTopBody": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          9.0625
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "RotatingCarrier": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          -9.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          5.394999981
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "MovingTop": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          -9.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "TopLocalSlide": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          -9.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "FixedAxis": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          -9.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          5.074999809
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ]
+    },
+    "after": {
+      "BottomExterior": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          2.9375
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "FixedAxisBoss": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          -9.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          5.074999809
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "RotatingCarrierBody": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          -9.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          5.394999981
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "CarrierFollowerLeft": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          -6.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          -9.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          5.465000153
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "CarrierFollowerRight": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          6.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          -9.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          5.465000153
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "BallCandidateLeft": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          -11.75
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          -9.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          4.574999809
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "BallCandidateRight": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          11.75
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          -9.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          4.574999809
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "MovingTopBody": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          9.0625
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "RotatingCarrier": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          -9.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          5.394999981
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "MovingTop": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          -9.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "TopLocalSlide": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          -9.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "FixedAxis": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          -9.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          5.074999809
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ]
+    }
+  },
+  "lightingRecipe": {
+    "classification": "controlled Gate 08 lighting; no Gate 09 environment composition",
+    "modes": {
+      "neutral": {
+        "world": {
+          "linearRgb": [
+            0.1,
+            0.1,
+            0.1
+          ],
+          "strength": 0.35,
+          "hdri": null
+        },
+        "lights": {
+          "key": {
+            "powerW": 42000,
+            "linearRgb": [
+              1.0,
+              0.98,
+              0.94
+            ],
+            "cctK": 6504
+          },
+          "fill": {
+            "powerW": 24000,
+            "linearRgb": [
+              0.96,
+              0.98,
+              1.0
+            ],
+            "cctK": 6504
+          },
+          "rim": {
+            "powerW": 42000,
+            "linearRgb": [
+              1.0,
+              1.0,
+              1.0
+            ],
+            "cctK": 6504
+          },
+          "under": {
+            "powerW": 16000,
+            "linearRgb": [
+              1.0,
+              0.91,
+              0.82
+            ],
+            "cctK": 5600
+          }
+        }
+      },
+      "studio": {
+        "world": {
+          "linearRgb": [
+            0.055,
+            0.055,
+            0.055
+          ],
+          "strength": 0.18,
+          "hdri": null
+        },
+        "lights": {
+          "key": {
+            "powerW": 48000,
+            "linearRgb": [
+              1.0,
+              0.91,
+              0.82
+            ],
+            "cctK": 5600
+          },
+          "fill": {
+            "powerW": 26000,
+            "linearRgb": [
+              0.9,
+              0.95,
+              1.0
+            ],
+            "cctK": 7000
+          },
+          "rim": {
+            "powerW": 50000,
+            "linearRgb": [
+              1.0,
+              1.0,
+              1.0
+            ],
+            "cctK": 6504
+          },
+          "under": {
+            "powerW": 22000,
+            "linearRgb": [
+              1.0,
+              0.87,
+              0.75
+            ],
+            "cctK": 5200
+          }
+        }
+      },
+      "daylight": {
+        "world": {
+          "linearRgb": [
+            0.24,
+            0.24,
+            0.24
+          ],
+          "strength": 0.65,
+          "hdri": null
+        },
+        "lights": {
+          "key": {
+            "powerW": 44000,
+            "linearRgb": [
+              1.0,
+              0.99,
+              0.97
+            ],
+            "cctK": 6504
+          },
+          "fill": {
+            "powerW": 34000,
+            "linearRgb": [
+              0.88,
+              0.94,
+              1.0
+            ],
+            "cctK": 7500
+          },
+          "rim": {
+            "powerW": 39000,
+            "linearRgb": [
+              1.0,
+              1.0,
+              1.0
+            ],
+            "cctK": 6504
+          },
+          "under": {
+            "powerW": 20000,
+            "linearRgb": [
+              1.0,
+              0.98,
+              0.94
+            ],
+            "cctK": 6504
+          }
+        }
+      }
+    },
+    "fixtures": {
+      "key": {
+        "name": "M08R2_KeySoftbox",
+        "type": "AREA",
+        "locationMm": [
+          58.0,
+          -72.0,
+          96.0
+        ],
+        "sizeMm": 20.0,
+        "targetMm": [
+          0,
+          -3,
+          5
+        ]
+      },
+      "fill": {
+        "name": "M08R2_FillSoftbox",
+        "type": "AREA",
+        "locationMm": [
+          -54.0,
+          -12.0,
+          58.0
+        ],
+        "sizeMm": 32.0,
+        "targetMm": [
+          0,
+          -2,
+          4
+        ]
+      },
+      "rim": {
+        "name": "M08R2_SilverRimStrip",
+        "type": "AREA",
+        "locationMm": [
+          44.0,
+          70.0,
+          62.0
+        ],
+        "sizeMm": 18.0,
+        "targetMm": [
+          0,
+          2,
+          5
+        ]
+      },
+      "under": {
+        "name": "M08R2_MechanismReveal",
+        "type": "AREA",
+        "locationMm": [
+          -26.0,
+          20.0,
+          28.0
+        ],
+        "sizeMm": 18.0,
+        "targetMm": [
+          0,
+          -7,
+          5
+        ]
+      }
+    },
+    "reflectionCards": [
+      {
+        "name": "M08R2_WhiteCard_Left",
+        "cameraVisible": false,
+        "locationMm": [
+          -58.0,
+          4.0,
+          42.0
+        ],
+        "scale": [
+          8.0,
+          22.0,
+          1.0
+        ]
+      },
+      {
+        "name": "M08R2_WhiteCard_Right",
+        "cameraVisible": false,
+        "locationMm": [
+          58.0,
+          2.0,
+          38.0
+        ],
+        "scale": [
+          8.0,
+          22.0,
+          1.0
+        ]
+      },
+      {
+        "name": "M08R2_WhiteCard_Top",
+        "cameraVisible": false,
+        "locationMm": [
+          0.0,
+          18.0,
+          94.0
+        ],
+        "scale": [
+          16.0,
+          10.0,
+          1.0
+        ]
+      },
+      {
+        "name": "M08R2_BlackCard_Back",
+        "cameraVisible": false,
+        "locationMm": [
+          0.0,
+          68.0,
+          32.0
+        ],
+        "scale": [
+          56.0,
+          30.0,
+          1.0
+        ]
+      }
+    ],
+    "cameras": {
+      "hero": {
+        "name": "M08R2_Hero",
+        "locationMm": [
+          74.0,
+          -116.0,
+          72.0
+        ],
+        "rotationEulerRad": [
+          1.112790942,
+          0.0,
+          0.575758278
+        ],
+        "targetMm": [
+          0,
+          -2,
+          5
+        ],
+        "lensMm": 76.0,
+        "sensorWidthMm": 36.0
+      },
+      "left-oblique": {
+        "name": "M08R2_LeftOblique",
+        "locationMm": [
+          -76.0,
+          -112.0,
+          68.0
+        ],
+        "rotationEulerRad": [
+          1.130452871,
+          -3e-09,
+          -0.604598582
+        ],
+        "targetMm": [
+          0,
+          -2,
+          5
+        ],
+        "lensMm": 78.0,
+        "sensorWidthMm": 36.0
+      },
+      "right-oblique": {
+        "name": "M08R2_RightOblique",
+        "locationMm": [
+          80.0,
+          -108.0,
+          63.0
+        ],
+        "rotationEulerRad": [
+          1.159019828,
+          -5.9e-08,
+          0.646513224
+        ],
+        "targetMm": [
+          0,
+          -2,
+          5
+        ],
+        "lensMm": 80.0,
+        "sensorWidthMm": 36.0
+      },
+      "low": {
+        "name": "M08R2_Low",
+        "locationMm": [
+          84.0,
+          -120.0,
+          29.0
+        ],
+        "rotationEulerRad": [
+          1.406593561,
+          -2e-09,
+          0.618644357
+        ],
+        "targetMm": [
+          0,
+          -2,
+          5
+        ],
+        "lensMm": 102.0,
+        "sensorWidthMm": 36.0
+      },
+      "top-reveal": {
+        "name": "M08R2_TopReveal",
+        "locationMm": [
+          8.0,
+          -76.0,
+          138.0
+        ],
+        "rotationEulerRad": [
+          0.478239208,
+          5e-09,
+          0.115426682
+        ],
+        "targetMm": [
+          0,
+          -7,
+          4
+        ],
+        "lensMm": 92.0,
+        "sensorWidthMm": 36.0
+      },
+      "underside": {
+        "name": "M08R2_Underside",
+        "locationMm": [
+          0.0,
+          0.0,
+          155.0
+        ],
+        "rotationEulerRad": [
+          0.0,
+          -0.0,
+          0.0
+        ],
+        "targetMm": [
+          0,
+          0,
+          10
+        ],
+        "lensMm": 78.0,
+        "sensorWidthMm": 36.0
+      },
+      "mechanism": {
+        "name": "M08R2_Mechanism",
+        "locationMm": [
+          58.0,
+          -94.0,
+          48.0
+        ],
+        "rotationEulerRad": [
+          1.197105289,
+          -2.9e-08,
+          0.588002563
+        ],
+        "targetMm": [
+          0,
+          -7,
+          7
+        ],
+        "lensMm": 92.0,
+        "sensorWidthMm": 36.0
+      }
+    },
+    "colorManagement": {
+      "viewTransform": "AgX",
+      "look": "AgX - Medium High Contrast",
+      "exposureEv": -0.3499999940395355,
+      "gamma": 1.0,
+      "whiteBalanceKelvin": 6504,
+      "whiteBalanceTint": 10
+    },
+    "renderEngine": "BLENDER_EEVEE",
+    "hdri": null
+  },
+  "passCameraMatrix": [
+    [
+      0.838779688,
+      -0.24074325,
+      0.488355726,
+      74.0
+    ],
+    [
+      0.544470966,
+      0.370874792,
+      -0.752331853,
+      -116.0
+    ],
+    [
+      -0.0,
+      0.896936238,
+      0.442159951,
+      72.0
+    ],
+    [
+      0.0,
+      0.0,
+      0.0,
+      1.0
+    ]
+  ],
+  "passCameraName": "M08R2_Hero",
+  "passes": [
+    "pass-beauty.png",
+    "pass-clay.png",
+    "pass-normal.png",
+    "pass-depth.png",
+    "pass-roughness.png"
+  ],
+  "views": [
+    "hero.png",
+    "left-oblique.png",
+    "right-oblique.png",
+    "low-angle.png"
+  ],
+  "states": [
+    "state-closed.png",
+    "state-max-open.png",
+    "state-detent-12.png",
+    "state-detent-36.png",
+    "flat-plane-raised-axis-lit.png",
+    "underside-grooves-lit.png",
+    "carrier-clearance-lit.png"
+  ],
+  "lightingModes": [
+    "lighting-neutral.png",
+    "lighting-studio.png",
+    "lighting-daylight.png"
+  ],
+  "animatedObjects": [],
+  "checks": {
+    "sourceHash": true,
+    "contractHash": true,
+    "geometryUnchanged": true,
+    "materialsUnchanged": true,
+    "matricesRestored": true,
+    "approvedEmissionZero": true,
+    "requiredViews": true,
+    "requiredPasses": true,
+    "mechanicalViews": true,
+    "modeComparisons": true,
+    "passCameraConsistent": true,
+    "noHdri": true,
+    "zeroSelfMotion": true,
+    "oldShippingUntouched": true,
+    "glbWritten": true,
+    "turntableFrames": true,
+    "blendWritten": true
+  }
+}

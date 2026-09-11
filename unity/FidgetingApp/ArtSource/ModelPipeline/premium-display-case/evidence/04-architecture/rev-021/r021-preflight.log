@@ -1,0 +1,473 @@
+Unity Editor version:    6000.5.6f1 (0e0577a1a2ac)
+Branch:                  6000.5/staging
+Build type:              Release
+Batch mode:              YES
+macOS version:           Version 26.6 (Build 25G72)
+Darwin version:          25.6.0
+Architecture:            arm64
+Running under Rosetta:   NO
+Available memory:        65536 MB
+Date:                    2026-09-01T00:09:19Z
+[Licensing::Module] Trying to connect to existing licensing client channel...
+[Licensing::IpcConnector] Successfully connected to: "LicenseClient-jiawei.zhou" at "2026-09-01T00:09:19.773984Z"
+Launching external process: /Applications/Unity/Hub/Editor/6000.5.6f1/Unity.app/Contents/Helpers/PackageManager/Server/UnityPackageManager
+
+COMMAND LINE ARGUMENTS:
+/Applications/Unity/Hub/Editor/6000.5.6f1/Unity.app/Contents/MacOS/Unity
+-batchmode
+-disableBurstCompilation
+-projectPath
+/tmp/FidgetingApp-PackOpening-R021-OpenMouth-20260901-r02
+-executeMethod
+FidgetingApp.DisplayCase.IsolatedCandidate.R021.Editor.IsolatedR021ProofRunner.RunPreflight
+-logFile
+/tmp/FidgetingApp-PackOpening-R021-OpenMouth-20260901-r02/r021-preflight.log
+Successfully changed project path to: /tmp/FidgetingApp-PackOpening-R021-OpenMouth-20260901-r02
+/private/tmp/FidgetingApp-PackOpening-R021-OpenMouth-20260901-r02
+[UnityMemory] Configuration Parameters - Can be set up in boot.config
+    "memorysetup-temp-allocator-size-gi-baking-worker=262144"
+    "memorysetup-temp-allocator-size-gi-baking-worker=262144"
+    "memorysetup-temp-allocator-size-gi-baking-worker=262144"
+    "memorysetup-temp-allocator-size-gi-baking-worker=262144"
+    "memorysetup-temp-allocator-size-gi-baking-worker=262144"
+    "memorysetup-temp-allocator-size-nav-mesh-worker=65536"
+    "memorysetup-temp-allocator-size-audio-worker=65536"
+    "memorysetup-temp-allocator-size-cloud-worker=32768"
+    "memorysetup-allocator-temp-initial-block-size-main=262144"
+    "memorysetup-allocator-temp-initial-block-size-worker=262144"
+    "memorysetup-temp-allocator-size-preload-manager=33554432"
+    "memorysetup-temp-allocator-size-gfx=262144"
+    "memorysetup-temp-allocator-size-background-worker=32768"
+    "memorysetup-temp-allocator-size-job-worker=262144"
+    "memorysetup-bucket-allocator-granularity=16"
+    "memorysetup-bucket-allocator-bucket-count=8"
+    "memorysetup-bucket-allocator-block-size=33554432"
+    "memorysetup-bucket-allocator-block-count=8"
+    "memorysetup-main-allocator-block-size=16777216"
+    "memorysetup-thread-allocator-block-size=16777216"
+    "memorysetup-main-allocator-mimalloc-enabled=0"
+    "memorysetup-gfx-main-allocator-block-size=16777216"
+    "memorysetup-gfx-thread-allocator-block-size=16777216"
+    "memorysetup-cache-allocator-block-size=4194304"
+    "memorysetup-typetree-allocator-block-size=2097152"
+    "memorysetup-profiler-bucket-allocator-granularity=16"
+    "memorysetup-profiler-bucket-allocator-bucket-count=8"
+    "memorysetup-profiler-bucket-allocator-block-size=33554432"
+    "memorysetup-profiler-bucket-allocator-block-count=8"
+    "memorysetup-profiler-allocator-block-size=16777216"
+    "memorysetup-profiler-editor-allocator-block-size=1048576"
+    "memorysetup-temp-allocator-size-main=16777216"
+    "memorysetup-job-temp-allocator-block-size=2097152"
+    "memorysetup-job-temp-allocator-block-size-background=1048576"
+    "memorysetup-job-temp-allocator-reduction-small-platforms=262144"
+Logging is directed to a specific file, skipping project log.Player connection [8516968832]  Target information:
+
+Player connection [8516968832]  * "[IP] 172.30.215.248 [Port] 55504 [Flags] 2 [Guid] 963960135 [EditorId] 963960135 [Version] 1048832 [Id] OSXEditor(0,WhatnotMacBook-Pro-16-inch-2024-KDX49F6RHV) [Debug] 1 [PackageName] OSXEditor [ProjectName] Editor" 
+
+Player connection [8516968832]  * "[IP] 172.20.1.235 [Port] 55504 [Flags] 2 [Guid] 963960135 [EditorId] 963960135 [Version] 1048832 [Id] OSXEditor(0,WhatnotMacBook-Pro-16-inch-2024-KDX49F6RHV) [Debug] 1 [PackageName] OSXEditor [ProjectName] Editor" 
+
+Player connection [8516968832]  * "[IP] 7.8.30.36 [Port] 55504 [Flags] 2 [Guid] 963960135 [EditorId] 963960135 [Version] 1048832 [Id] OSXEditor(0,WhatnotMacBook-Pro-16-inch-2024-KDX49F6RHV) [Debug] 1 [PackageName] OSXEditor [ProjectName] Editor" 
+
+Player connection [8516968832] Host joined multi-casting on [225.0.0.222:54997]...
+Player connection [8516968832] Host joined alternative multi-casting on [225.0.0.222:34997]...
+Input System module state changed to: Initialized.
+[Physics::Module] Initialized fallback backend.
+[Physics::Module] Id: 0xdecafbad
+[Licensing::Client] Error: HandshakeResponse reported an error:
+	ResponseCode: 505
+	ResponseStatus: Unsupported protocol version '1.18.1'.
+[Licensing::Module] Error: Failed to handshake to channel: "LicenseClient-jiawei.zhou"
+[Licensing::IpcConnector] LicenseClient-jiawei.zhou channel disconnected successfully.
+[Licensing::IpcConnector] Channel LicenseClient-jiawei.zhou-6000.5.6 doesn't exist
+Launching external process: /Applications/Unity/Hub/Editor/6000.5.6f1/Unity.app/Contents/Helpers/UnityLicensingClient.app/Contents/MacOS/Unity.Licensing.Client
+[Licensing::Module] Successfully launched the LicensingClient (PId: 89905)
+[Package Manager] Connected to IPC stream "Upm-89897" after 0.1 seconds.
+[Licensing::Module] Licensing is not yet initialized.
+[Licensing::IpcConnector] Successfully connected to: "LicenseClient-jiawei.zhou-6000.5.6" at "2026-09-01T00:09:20.145905Z"
+[Licensing::Client] Handshaking with LicensingClient:
+  Version:                 1.18.1+9fbee8e
+  Session Id:              7abfa8d6304740ecb64cb129f8ff34b6
+  Correlation Id:          10f9cd983a4b9336938675afaf8fd66f
+  External correlation Id: 231622320980474693
+  Machine Id:              /KH2BGG6vZf7t7D/yU/ppmcrnfI=
+[Licensing::Module] Successfully connected to LicensingClient on channel: "LicenseClient-jiawei.zhou-6000.5.6" (connect: 0.16s, validation: 0.01s, handshake: 0.20s)
+[Licensing::IpcConnector] Successfully connected to: "LicenseClient-jiawei.zhou-6000.5.6-notifications" at "2026-09-01T00:09:20.361358Z"
+[Licensing::Module] Connected to LicensingClient (PId: 89905, launch time: 0.00, total connection time: 0.38s)
+[Licensing::Module] Error: Access token is unavailable; failed to update
+[Licensing::Client] Successfully resolved entitlement details
+[Licensing::Module] License group:
+  Id: 18968260060310-UnityPersXXXX
+  Product: Unity Personal
+  Type: Assigned
+  Expiration: Unlimited
+[Licensing::Client] Successfully updated license, isAsync: True, time: 0.00
+[Licensing::Client] Successfully resolved entitlement details
+[Licensing::Module] Licensing Background thread has ended after 0.60s
+[Licensing::Module] Licensing is initialized (took 0.38s).
+[Licensing::Client] Successfully resolved entitlement details
+Library Redirect Path: Library/
+[Physics::Module] Selected backend.
+[Physics::Module] Name: PhysX
+[Physics::Module] Id: 0xf2b8ea05
+[Physics::Module] SDK Version: 4.1.2
+[Physics::Module] Integration Version: 1.0.0
+[Physics::Module] Threading Mode: Multi-Threaded
+Artifact Garbage Collection - Removed 1 unused hashed content files
+Initialize engine version: 6000.5.6f1 (0e0577a1a2ac)
+[Subsystems] Discovering subsystems at path /Applications/Unity/Hub/Editor/6000.5.6f1/Unity.app/Contents/Resources/UnitySubsystems
+[Subsystems] Discovering subsystems at path /private/tmp/FidgetingApp-PackOpening-R021-OpenMouth-20260901-r02/Assets
+GfxDevice: creating device client; kGfxThreadingModeNonThreaded
+ preferred device: Apple M4 Max (high power)
+Metal devices available: 1
+0: Apple M4 Max (high power)
+Using device Apple M4 Max (high power)
+Initializing Metal device caps: Apple M4 Max
+Mac GPU Family: 2
+Apple GPU Family: 9
+MSL Version: 3.0
+Has Float MSAA: 1
+Has Float Filtering: 1
+ReadWrite Texture Tier: 2
+Initialize mono
+Mono path[0] = '/Applications/Unity/Hub/Editor/6000.5.6f1/Unity.app/Contents/Resources/Scripting/Managed'
+Mono path[1] = '/Applications/Unity/Hub/Editor/6000.5.6f1/Unity.app/Contents/Resources/Scripting/BCLExtensions/runtime/netstandard2.1'
+Mono path[2] = '/Applications/Unity/Hub/Editor/6000.5.6f1/Unity.app/Contents/Resources/Scripting/MonoBleedingEdge/lib/mono/unityjit-macos'
+Mono config path = '/Applications/Unity/Hub/Editor/6000.5.6f1/Unity.app/Contents/Resources/Scripting/MonoBleedingEdge/etc'
+Using monoOptions --debugger-agent=transport=dt_socket,embedding=1,server=y,suspend=n,address=127.0.0.1:56897
+CodeReloadManager initialized
+ImportWorker Server TCP listen port: 0
+AcceleratorClientConnectionCallback - disconnected - :0
+Begin MonoManager ReloadAssembly
+Registering precompiled unity dll's ...
+Trying to register platform support module: /Applications/Unity/Hub/Editor/6000.5.6f1/PlaybackEngines/WebGLSupport/UnityEditor.WebGL.Extensions.dll (that doesn't exist). Retrying without overrides.
+Platform support module is not available: /Applications/Unity/Hub/Editor/6000.5.6f1/PlaybackEngines/WebGLSupport/UnityEditor.WebGL.Extensions.dll
+Register platform support module: /Applications/Unity/Hub/Editor/6000.5.6f1/PlaybackEngines/MacStandaloneSupport/UnityEditor.OSXStandalone.Extensions.dll
+[Licensing::Client] Successfully resolved entitlement details
+Register platform support module: /Applications/Unity/Hub/Editor/6000.5.6f1/PlaybackEngines/iOSSupport/UnityEditor.iOS.Extensions.dll
+Registered in 0.001708 seconds.
+[usbmuxd] Start listen thread
+[usbmuxd] Listen thread started
+[usbmuxd] Send listen message
+Native extension for iOS target not found
+Native extension for OSXStandalone target not found
+Package Manager log level set to [2]
+ScheduleIndexationOnStartup MainProcess:False IndexOnStartup:True
+Mono: successfully reloaded assembly
+- Finished resetting the current domain, in  0.252 seconds
+Domain Reload Profiling: 506ms
+	BeginReloadAssembly (53ms)
+		CreateAndSetChildDomain (10ms)
+	RebuildCommonClasses (3ms)
+	RebuildNativeTypeToScriptingClass (10ms)
+	initialDomainReloadingComplete (31ms)
+	LoadAllAssembliesAndSetupDomain (157ms)
+		LoadAssemblies (43ms)
+		AnalyzeDomain (118ms)
+			TypeCache.Refresh (118ms)
+				TypeCache.ScanAssembly (110ms)
+	FinalizeReload (252ms)
+		SetupLoadedEditorAssemblies (0ms)
+			InitializePlatformSupportModulesInManaged (40ms)
+			BeforeProcessingInitializeOnLoad (50ms)
+			ProcessInitializeOnLoadAttributes (53ms)
+			ProcessInitializeOnLoadMethodAttributes (68ms)
+[Licensing::Client] Successfully resolved entitlement details
+Application.AssetDatabase Initial Refresh Start
+[Package Manager] Restoring resolved packages state from cache
+[Licensing::Client] Successfully resolved entitlement details
+[Package Manager] Registered 21 packages:
+  Packages from [https://packages.unity.com]:
+    com.unity.searcher@4.9.4 (location: /private/tmp/FidgetingApp-PackOpening-R021-OpenMouth-20260901-r02/Library/PackageCache/com.unity.searcher@d45a78918735)
+    com.unity.burst@1.8.29 (location: /private/tmp/FidgetingApp-PackOpening-R021-OpenMouth-20260901-r02/Library/PackageCache/com.unity.burst@6bb9aca3ef38)
+    com.unity.nuget.mono-cecil@1.11.6 (location: /private/tmp/FidgetingApp-PackOpening-R021-OpenMouth-20260901-r02/Library/PackageCache/com.unity.nuget.mono-cecil@ecb9724e46ff)
+    com.unity.test-framework.performance@3.5.0 (location: /private/tmp/FidgetingApp-PackOpening-R021-OpenMouth-20260901-r02/Library/PackageCache/com.unity.test-framework.performance@8b56083ec0f0)
+  Built-in packages:
+    com.unity.render-pipelines.universal@17.5.0 (location: /private/tmp/FidgetingApp-PackOpening-R021-OpenMouth-20260901-r02/Library/PackageCache/com.unity.render-pipelines.universal@73b4c4ff130e)
+    com.unity.test-framework@1.7.0 (location: /private/tmp/FidgetingApp-PackOpening-R021-OpenMouth-20260901-r02/Library/PackageCache/com.unity.test-framework@1405238725ab)
+    com.unity.modules.imageconversion@1.0.0 (location: /private/tmp/FidgetingApp-PackOpening-R021-OpenMouth-20260901-r02/Library/PackageCache/com.unity.modules.imageconversion)
+    com.unity.modules.jsonserialize@1.0.0 (location: /private/tmp/FidgetingApp-PackOpening-R021-OpenMouth-20260901-r02/Library/PackageCache/com.unity.modules.jsonserialize)
+    com.unity.modules.physics@1.0.0 (location: /private/tmp/FidgetingApp-PackOpening-R021-OpenMouth-20260901-r02/Library/PackageCache/com.unity.modules.physics)
+    com.unity.modules.ui@1.0.0 (location: /private/tmp/FidgetingApp-PackOpening-R021-OpenMouth-20260901-r02/Library/PackageCache/com.unity.modules.ui)
+    com.unity.modules.uielements@1.0.0 (location: /private/tmp/FidgetingApp-PackOpening-R021-OpenMouth-20260901-r02/Library/PackageCache/com.unity.modules.uielements)
+    com.unity.modules.imgui@1.0.0 (location: /private/tmp/FidgetingApp-PackOpening-R021-OpenMouth-20260901-r02/Library/PackageCache/com.unity.modules.imgui)
+    com.unity.modules.hierarchycore@1.0.0 (location: /private/tmp/FidgetingApp-PackOpening-R021-OpenMouth-20260901-r02/Library/PackageCache/com.unity.modules.hierarchycore)
+    com.unity.modules.animation@1.0.0 (location: /private/tmp/FidgetingApp-PackOpening-R021-OpenMouth-20260901-r02/Library/PackageCache/com.unity.modules.animation)
+    com.unity.ext.nunit@2.1.0 (location: /private/tmp/FidgetingApp-PackOpening-R021-OpenMouth-20260901-r02/Library/PackageCache/com.unity.ext.nunit@44f7d31723bd)
+    com.unity.render-pipelines.core@17.5.0 (location: /private/tmp/FidgetingApp-PackOpening-R021-OpenMouth-20260901-r02/Library/PackageCache/com.unity.render-pipelines.core@645717f21c5f)
+    com.unity.shadergraph@17.5.0 (location: /private/tmp/FidgetingApp-PackOpening-R021-OpenMouth-20260901-r02/Library/PackageCache/com.unity.shadergraph@8d7376ec43ee)
+    com.unity.render-pipelines.universal-config@17.5.0 (location: /private/tmp/FidgetingApp-PackOpening-R021-OpenMouth-20260901-r02/Library/PackageCache/com.unity.render-pipelines.universal-config@fdda01c80fe3)
+    com.unity.collections@6.5.0 (location: /private/tmp/FidgetingApp-PackOpening-R021-OpenMouth-20260901-r02/Library/PackageCache/com.unity.collections@a43cabe808ca)
+    com.unity.modules.terrain@1.0.0 (location: /private/tmp/FidgetingApp-PackOpening-R021-OpenMouth-20260901-r02/Library/PackageCache/com.unity.modules.terrain)
+    com.unity.mathematics@1.4.0 (location: /private/tmp/FidgetingApp-PackOpening-R021-OpenMouth-20260901-r02/Library/PackageCache/com.unity.mathematics@981956d94fb6)
+[Subsystems] No new subsystems found in resolved package list.
+[Package Manager] Done registering packages in 0.01 seconds
+info: Microsoft.Hosting.Lifetime[14]
+      Now listening on: http://unix:/tmp/ilpp.sock-8b08618df39609a08791f56be94e14be
+info: Microsoft.Hosting.Lifetime[0]
+      Application started. Press Ctrl+C to shut down.
+info: Microsoft.Hosting.Lifetime[0]
+      Hosting environment: Production
+info: Microsoft.Hosting.Lifetime[0]
+      Content root path: /private/tmp/FidgetingApp-PackOpening-R021-OpenMouth-20260901-r02
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/2 POST http://ilpp/UnityILPP.PostProcessing/Ping - application/grpc -
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[0]
+      Executing endpoint 'gRPC - /UnityILPP.PostProcessing/Ping'
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[1]
+      Executed endpoint 'gRPC - /UnityILPP.PostProcessing/Ping'
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/2 POST http://ilpp/UnityILPP.PostProcessing/Ping - 200 - application/grpc 15.6715ms
+Starting: /Applications/Unity/Hub/Editor/6000.5.6f1/Unity.app/Contents/Resources/BuildPipeline/bee_backend --ipc --defer-dag-verification --dagfile="Library/Bee/200b0aE.dag" --continue-on-failure --profile="Library/Bee/backend1.traceevents" ScriptAssemblies
+WorkingDir: /private/tmp/FidgetingApp-PackOpening-R021-OpenMouth-20260901-r02
+DisplayProgressbar: Compiling Scripts
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/2 POST http://ilpp/UnityILPP.PostProcessing/ConfigurePostProcessors - application/grpc -
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[0]
+      Executing endpoint 'gRPC - /UnityILPP.PostProcessing/ConfigurePostProcessors'
+warn: Unity.ILPP.Runner.PostProcessingAssemblyLoadContext[0]
+      Assembly unityeditor.ios.extensions.xcode has duplicate hint path. Ignoring "/Applications/Unity/Hub/Editor/6000.5.6f1/PlaybackEngines/iOSSupport/UnityEditor.iOS.Extensions.Xcode.dll" in favor of "/Applications/Unity/Hub/Editor/6000.5.6f1/PlaybackEngines/MacStandaloneSupport/UnityEditor.iOS.Extensions.Xcode.dll"
+warn: Unity.ILPP.Runner.PostProcessingAssemblyLoadContext[0]
+      Assembly system.runtime.interopservices.windowsruntime has duplicate hint path. Ignoring "/Applications/Unity/Hub/Editor/6000.5.6f1/Unity.app/Contents/Resources/Scripting/UnityReferenceAssemblies/unity-4.8-api/Facades/System.Runtime.InteropServices.WindowsRuntime.dll" in favor of "/Applications/Unity/Hub/Editor/6000.5.6f1/Unity.app/Contents/Resources/Scripting/NetStandard/Extensions/2.0.0/System.Runtime.InteropServices.WindowsRuntime.dll"
+warn: Unity.ILPP.Runner.PostProcessingAssemblyLoadContext[0]
+      Assembly system.componentmodel.composition has duplicate hint path. Ignoring "/Applications/Unity/Hub/Editor/6000.5.6f1/Unity.app/Contents/Resources/Scripting/UnityReferenceAssemblies/unity-4.8-api/System.ComponentModel.Composition.dll" in favor of "/Applications/Unity/Hub/Editor/6000.5.6f1/Unity.app/Contents/Resources/Scripting/NetStandard/compat/2.1.0/shims/netfx/System.ComponentModel.Composition.dll"
+info: Unity.ILPP.Runner.PostProcessingAssemblyLoadContext[0]
+      Resolved Unity.Burst.Cecil, Version=0.11.6.0, Culture=neutral, PublicKeyToken=50cebf1cceb9d05e with Library/PackageCache/com.unity.burst@6bb9aca3ef38/Unity.Burst.CodeGen/Unity.Burst.Cecil.dll
+info: Unity.ILPP.Runner.PostProcessingAssemblyLoadContext[0]
+      Resolved Mono.Cecil, Version=0.11.5.0, Culture=neutral, PublicKeyToken=50cebf1cceb9d05e with Library/PackageCache/com.unity.nuget.mono-cecil@ecb9724e46ff/Mono.Cecil.dll
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[1]
+      Executed endpoint 'gRPC - /UnityILPP.PostProcessing/ConfigurePostProcessors'
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/2 POST http://ilpp/UnityILPP.PostProcessing/ConfigurePostProcessors - 200 - application/grpc 15.4652ms
+ExitCode: 0 Duration: 0s293ms
+[432/535    0s] ILPP-Configuration Library/ilpp-configuration.nevergeneratedoutput
+*** Tundra build success (0.27 seconds), 1 items updated, 535 evaluated
+AssetDatabase: script compilation time: 0.627867s
+Begin MonoManager ReloadAssembly
+Total cache size 267909600
+Total cache size after purge 267909600, took 00:00:00.0884695
+Native extension for iOS target not found
+Native extension for OSXStandalone target not found
+ScheduleIndexationOnStartup MainProcess:True IndexOnStartup:True
+Mono: successfully reloaded assembly
+- Finished resetting the current domain, in  1.293 seconds
+Domain Reload Profiling: 1589ms
+	BeginReloadAssembly (103ms)
+		DisableScriptedObjects (11ms)
+		CreateAndSetChildDomain (27ms)
+	RebuildCommonClasses (5ms)
+	RebuildNativeTypeToScriptingClass (9ms)
+	initialDomainReloadingComplete (21ms)
+	LoadAllAssembliesAndSetupDomain (159ms)
+		LoadAssemblies (95ms)
+		AnalyzeDomain (56ms)
+			TypeCache.Refresh (41ms)
+				TypeCache.ScanAssembly (36ms)
+			BuildScriptInfoCaches (11ms)
+	FinalizeReload (1293ms)
+		SetupLoadedEditorAssemblies (0ms)
+			InitializePlatformSupportModulesInManaged (8ms)
+			BeforeProcessingInitializeOnLoad (46ms)
+			ProcessInitializeOnLoadAttributes (918ms)
+			ProcessInitializeOnLoadMethodAttributes (201ms)
+		AwakeInstancesAfterBackupRestoration (9ms)
+Starting new worker id: 0 with log in /private/tmp/FidgetingApp-PackOpening-R021-OpenMouth-20260901-r02/Logs/AssetImportWorkerHW0.log
+
+Asset Pipeline Refresh (id=4611a021722984cd48e5d0b8ce108269): Total: 2.621 seconds - Initiated by InitialRefreshV2(ForceSynchronousImport)
+	(Values over 0.05ms)
+	Summary:
+		Imports: total=0 (actual=0, local cache=0, cache server=0)
+		Asset DB Process Time: managed=0 ms, native=1643 ms
+		Asset DB Callback time: managed=13 ms, native=8 ms
+		Scripting: domain reloads=1, domain reload time=310 ms, compile time=631 ms, other=14 ms
+		Project Asset Count: scripts=689, non-scripts=1389
+		Asset File Changes: new=0, changed=0, moved=0, deleted=0
+		Scan Filter Count: 1
+	InvokePackagesCallback: 8.871ms
+	ApplyChangesToAssetFolders: 0.102ms
+	Scan: 185.556ms
+	Collect global state as custom dependencies: 56.387ms
+	CategorizeScriptCompilationAssets: 7.277ms
+	ProcessAssetsWithTransientArtifactChanges: 15.656ms
+	CategorizeAssets: 23.852ms
+	CompileScripts: 630.990ms
+	ImportOutOfDateAssets: 1322.531ms (1300.749ms without children)
+		UnloadImportedAssets: 0.672ms
+		EnsureUptoDateAssetsAreRegisteredWithGuidPM: 0.195ms
+		ImportSchedulerStart: 20.887ms
+	PostProcessAllAssets: 14.004ms
+		MonoPostProcessAllAssets: 13.979ms
+			UniversalRenderPipelineGlobalSettingsPostprocessor.OnPostprocessAllAssets 5.629ms
+			SpeedTree9Postprocessor.OnPostprocessAllAssets 0.968ms
+			WindowAssetPostprocessingWatcher.OnPostprocessAllAssets 0.891ms
+			SyncVS.PostprocessSyncProject 0.477ms
+			EditModeScopePostprocessor.OnPostprocessAllAssets 0.455ms
+			RenderPipelineGlobalSettingsPostprocessor.OnPostprocessAllAssets 0.308ms
+			ShaderReflectionAssetPostProcessor.OnPostprocessAllAssets 0.161ms
+			ReferencedClipsPostProcessor.OnPostprocessAllAssets 0.129ms
+			TerrainToolbarOverlayPostProcessor.OnPostprocessAllAssets 0.081ms
+			AssetDatabaseCallbacks.OnPostprocessAllAssets 0.066ms
+	UnloadStreamsBegin: 0.614ms
+	GenerateScriptTypeHashes: 2.029ms
+	GenerateScriptTypeSerializationHashes: 3.901ms
+	Untracked: 353.607ms
+
+Application.AssetDatabase Initial Refresh End
+Shader Hidden/ChartRasterizerHardware is not supported: GPU does not support conservative rasterization
+Launching external process: /Applications/Unity/Hub/Editor/6000.5.6f1/Unity.app/Contents/Helpers/UnityShaderCompiler
+Launched and connected shader compiler UnityShaderCompiler after 0.06 seconds
+Shader Hidden/ChartRasterizerHardware is not supported: GPU does not support conservative rasterization
+Scanning for USB devices : 0.030ms
+Initializing Unity extensions:
+[MODES] ModeService[none].Initialize
+[MODES] ModeService[none].LoadModes
+[MODES] Loading mode Default (0) for mode-current-id-FidgetingApp-PackOpening-R014-Isolated-20260831
+Unloading 81 Unused Serialized files (Serialized files now loaded: 0)
+Unloading 2872 unused Assets / (10.8 MB). Loaded Objects now: 3671.
+Memory consumption went from 222.8 MB to 211.9 MB.
+Total: 8.426292 ms (FindLiveObjects: 0.139667 ms CreateObjectMapping: 0.389250 ms MarkObjects: 4.285541 ms  DeleteObjects: 3.611083 ms)
+
+Unloading 3 Unused Serialized files (Serialized files now loaded: 0)
+Unloading 2 unused Assets / (8.5 KB). Loaded Objects now: 3673.
+Memory consumption went from 187.9 MB to 187.9 MB.
+Total: 4.170792 ms (FindLiveObjects: 0.074375 ms CreateObjectMapping: 0.147959 ms MarkObjects: 3.932958 ms  DeleteObjects: 0.014917 ms)
+
+Importing 'GUID: 00000000000000006100000000000000 - Path: ProjectSettings/GraphicsSettings.asset' with importer (LibraryAssetImporter)
+Imported 'GUID: 00000000000000006100000000000000' -> (Import Result ID: '4787024ee73fa58306346bec2c3af913') in 0.003 seconds [static dependencies only]. Details - ImportResultOutputID=f9600466f06a676b7a4f639f6629ea48 DependenciesID=2ed5ce1286c319310b08155006ddd94f StaticDependenciesID=a9b48db2457849959ad7d42423869093 
+Asset Pipeline Refresh (id=543b8996525824128abc111310a3d879): Total: 0.082 seconds - Initiated by StopAssetImportingV2(NoUpdateAssetOptions)
+Importing 'GUID: e335a31b67248411eb835cfff60daf06 - Path: Assets/IsolatedProofR021/Generated/PackOpeningGate04R021Isolated.unity' with importer (DefaultImporter)
+Imported 'GUID: e335a31b67248411eb835cfff60daf06' -> (Import Result ID: '5afd2bbbe25f18692459a692f0894fed') in 0.001 seconds [static dependencies only]. Details - ImportResultOutputID=363d316dab6b73f40d742c8e28c6eb28 DependenciesID=dae45f859d378e256e7fc7aaa1120c1b StaticDependenciesID=8fdce25fe4afa0ab35d19f79558903ea 
+Asset Pipeline Refresh (id=cd85a3c13d161425ab5fc5cc383c84c6): Total: 0.039 seconds - Initiated by StopAssetImportingV2(NoUpdateAssetOptions)
+Importing 'GUID: e335a31b67248411eb835cfff60daf06 - Path: Assets/IsolatedProofR021/Generated/PackOpeningGate04R021Isolated.unity' with importer (DefaultImporter)
+Imported 'GUID: e335a31b67248411eb835cfff60daf06' -> (Import Result ID: '1dda4b627fef139b29aa41b0daf7622b') in 0.005 seconds [static dependencies only]. Details - ImportResultOutputID=363d316dab6b73f40d742c8e28c6eb28 DependenciesID=c16f3482ba29b987e01258771914561b StaticDependenciesID=b25c047d38c8faddce35b83518e5acad 
+Asset Pipeline Refresh (id=5623c259c033e4261a31b3932c64203e): Total: 0.041 seconds - Initiated by StopAssetImportingV2(NoUpdateAssetOptions)
+[Project] Loading completed in 4.645 seconds
+	Project init time: 				4.097 seconds
+		Template init time: 		0.000 seconds
+		Package Manager init time: 		0.501 seconds
+		Asset Database init time: 		0.126 seconds
+		Global illumination init time: 	0.000 seconds
+		Assemblies load time: 			0.521 seconds
+		Unity extensions init time: 	0.009 seconds
+		Asset Database refresh time: 	2.621 seconds
+	Scene opening time: 			0.471 seconds
+##utp:{"type":"ProjectInfo","version":2,"phase":"Immediate","time":1788221364415,"processId":89897,"projectLoad":4.644508667,"projectInit":4.0969815,"templateInit":0.0,"packageManagerInit":0.500554667,"assetDatabaseInit":0.125634125,"globalIlluminationInit":0.000480792,"assembliesLoad":0.521434959,"unityExtensionsInit":0.008890583,"assetDatabaseRefresh":2.621124958,"sceneOpening":0.47109925}
+##utp:{"type":"EditorInfo","version":2,"phase":"Immediate","time":1788221364415,"processId":89897,"editorVersion":"6000.5.6f1 (0e0577a1a2ac)","branch":"6000.5/staging","buildType":"Release","platform":"OSX"}
+Subscribe to USB device events
+[Licensing::Client] Successfully resolved entitlement details
+Start Indexing on Editor startup
+[Indexing] Starting Initial Indexing for Assets
+Thread 0x32b807000 may have been prematurely finalized
+Reloading assemblies for play mode.
+Reloading assemblies after forced synchronous recompile.
+Begin MonoManager ReloadAssembly
+Worker ready: AssetImportWorkerHW0 0
+Native extension for iOS target not found
+Native extension for OSXStandalone target not found
+ScheduleIndexationOnStartup MainProcess:True IndexOnStartup:True
+Mono: successfully reloaded assembly
+- Finished resetting the current domain, in  0.335 seconds
+Domain Reload Profiling: 791ms
+	BeginReloadAssembly (356ms)
+		DisableScriptedObjects (11ms)
+		CreateAndSetChildDomain (122ms)
+	RebuildCommonClasses (5ms)
+	RebuildNativeTypeToScriptingClass (9ms)
+	initialDomainReloadingComplete (20ms)
+	LoadAllAssembliesAndSetupDomain (65ms)
+		LoadAssemblies (39ms)
+		AnalyzeDomain (17ms)
+			TypeCache.Refresh (4ms)
+			ResolveRequiredComponents (12ms)
+	FinalizeReload (336ms)
+		SetupLoadedEditorAssemblies (0ms)
+			InitializePlatformSupportModulesInManaged (7ms)
+			BeforeProcessingInitializeOnLoad (42ms)
+			ProcessInitializeOnLoadAttributes (60ms)
+			ProcessInitializeOnLoadMethodAttributes (56ms)
+		AwakeInstancesAfterBackupRestoration (20ms)
+No restricted APIs configured; Validation skipped.
+Checking 11 assemblies for restricted APIs found 0 usage(s) in 1 ms
+
+Asset Pipeline Refresh (id=6111e1ad25ab848668a7304c40b4d5b2): Total: 1.068 seconds - Initiated by StopAssetImportingV2(ForceSynchronousImport | ForceDomainReload)
+	(Values over 0.05ms)
+	Summary:
+		Imports: total=0 (actual=0, local cache=0, cache server=0)
+		Asset DB Process Time: managed=0 ms, native=435 ms
+		Asset DB Callback time: managed=123 ms, native=39 ms
+		Scripting: domain reloads=1, domain reload time=468 ms, compile time=1 ms, other=0 ms
+		Project Asset Count: scripts=689, non-scripts=1389
+		Asset File Changes: new=0, changed=0, moved=0, deleted=0
+		Scan Filter Count: 0
+	InvokePackagesCallback: 0.855ms
+	ApplyChangesToAssetFolders: 0.072ms
+	Collect global state as custom dependencies: 1.241ms
+	ProcessAssetsWithTransientArtifactChanges: 35.515ms
+	CategorizeAssets: 24.590ms
+	CompileScripts: 1.043ms
+	ImportOutOfDateAssets: 357.512ms (339.662ms without children)
+		CollectScriptTypesHashes: 0.918ms
+		ReloadNativeAssets: 0.633ms
+		UnloadImportedAssets: 0.119ms
+		EnsureUptoDateAssetsAreRegisteredWithGuidPM: 0.174ms
+		ImportSchedulerStart: 16.913ms
+	PostProcessAllAssets: 162.010ms
+		PostProcessCallbackCreateDeferredMaterials 9.468ms
+		ShaderAssetModifiedCallback 3.676ms
+		AssemblyValidation.PostprocessAllAssets 3.208ms
+		RaytracingShaderImportPostprocess 2.465ms
+		SpeedTreeImporter.PostprocessAllAssets 1.964ms
+		ComputeShaderImportPostprocess 1.957ms
+		BlockShaderImporter.PostprocessAllAssets 1.199ms
+		LocalizationDatabase.AssetDatabasePostprocessCallback 0.949ms
+		MonoPostProcessAllAssets: 122.994ms
+			ShaderGraphAssetPostProcessor.OnPostprocessAllAssets 42.843ms
+			AssetPostprocessor.OnPostprocessAllAssets 15.188ms
+			PostProcessor.OnPostprocessAllAssets 11.432ms
+			MaterialPostprocessor.OnPostprocessAllAssets 8.380ms
+			StyleCatalogPostProcessor.OnPostprocessAllAssets 6.934ms
+			UniversalRenderPipelineGlobalSettingsPostprocessor.OnPostprocessAllAssets 5.228ms
+			TextAssetPostProcessor.OnPostprocessAllAssets 4.828ms
+			AssetChangedListener.OnPostprocessAllAssets 4.087ms
+			BuilderAssetPostprocessor.OnPostprocessAllAssets 3.516ms
+			SpeedTree9Postprocessor.OnPostprocessAllAssets 1.413ms
+			RenderPipelineGlobalSettingsPostprocessor.OnPostprocessAllAssets 1.339ms
+			RetainedModeAssetPostprocessor.OnPostprocessAllAssets 0.853ms
+			WindowAssetPostprocessingWatcher.OnPostprocessAllAssets 0.814ms
+			SyncVS.PostprocessSyncProject 0.644ms
+			ArtifactBrowserPostProcessor.OnPostprocessAllAssets 0.255ms
+			ShaderReflectionAssetPostProcessor.OnPostprocessAllAssets 0.242ms
+			SampleDependencyImporterPostProcessor.OnPostprocessAllAssets 0.150ms
+			SpeedTreePostProcessor.OnPostprocessAllAssets 0.145ms
+			AudioMixerPostprocessor.OnPostprocessAllAssets 0.132ms
+			EditModeScopePostprocessor.OnPostprocessAllAssets 0.129ms
+			ReferencedClipsPostProcessor.OnPostprocessAllAssets 0.126ms
+			AssetEvents.OnPostprocessAllAssets 0.123ms
+			TerrainToolbarOverlayPostProcessor.OnPostprocessAllAssets 0.098ms
+			AssetDatabaseCallbacks.OnPostprocessAllAssets 0.056ms
+	PostAssetChangesProfiler: 0.626ms
+	UnloadStreamsBegin: 0.679ms
+	GenerateScriptTypeHashes: 1.859ms
+	GenerateScriptTypeSerializationHashes: 2.915ms
+	Untracked: 481.965ms
+
+Loaded scene 'Temp/__Backupscenes/0.backup'
+	Deserialize:            3.691 ms
+	Integration:            109.279 ms
+	Integration of assets:  0.102 ms
+	Thread Wait Time:       0.003 ms
+	Total Operation Time:   113.075 ms
+Created GICache directory at /Users/jiawei.zhou/Library/Caches/com.unity3d.UnityEditor/GiCache. Took: 0.001s, timestamps: [4.702 - 4.703]
+[MODES] ModeService[none].Initialize
+[MODES] ModeService[none].LoadModes
+[Licensing::Client] Successfully resolved entitlement details
+InvalidOperationException: R021 preflight failed. See emitted result XML.
+  at FidgetingApp.DisplayCase.IsolatedCandidate.R021.IsolatedR021Preflight+<Run>d__23.MoveNext () [0x00cf2] in /private/tmp/FidgetingApp-PackOpening-R021-OpenMouth-20260901-r02/Assets/IsolatedProofR021/Runtime/IsolatedR021Preflight.cs:301 
+  at UnityEngine.SetupCoroutine.InvokeMoveNext (System.Collections.IEnumerator enumerator, System.IntPtr returnValueAddress) [0x0001d] in /Users/bokken/build/output/unity/unity/Runtime/Export/Scripting/Coroutines.cs:17 
+
+(Filename: Assets/IsolatedProofR021/Runtime/IsolatedR021Preflight.cs Line: 301)
+
+TrimDiskCacheJob: Current cache size 0mb
+info: Microsoft.Hosting.Lifetime[0]
+      Application is shutting down...
+info: Unity.ILPP.Runner.PostProcessingAssemblyLoadContext[0]
+      ALC ILPP context 1 is unloading

@@ -1,0 +1,157 @@
+{
+  "schema": "make-it-shine-cc0-source-mapping.v3",
+  "sourceCommit": "88842be0063b5b0b75e82ed6572752a37a13c82b",
+  "license": "CC0-1.0",
+  "entries": [
+    {
+      "source": "Assets/Animation/Timelines/Booster to Card Timeline.playable",
+      "sourceSha256": "baec0abcf084db64a2b353947a9e67408e6b41ec27d5c645621d8f93aec9b086",
+      "destination": "ArtSource/ModelPipeline/premium-display-case/evidence/04-architecture/rev-013/source-raw/Booster to Card Timeline.playable",
+      "destinationSha256": "baec0abcf084db64a2b353947a9e67408e6b41ec27d5c645621d8f93aec9b086",
+      "decision": "direct-copy",
+      "reason": "Immutable CC0 Timeline audit source; its proxies are not a runtime dependency."
+    },
+    {
+      "source": "Assets/Animation/Clips/Booster/Booster_Discarded.anim",
+      "sourceSha256": "be661fe81b095f7f1ad08fb2a1c003b15f8690ee08d43f9f705dc849924fb2c6",
+      "destination": "Assets/_DisplayCase/Candidates/PackOpeningGate04R013/ImportedSource/Animation/Booster_Discarded.anim",
+      "destinationSha256": "be661fe81b095f7f1ad08fb2a1c003b15f8690ee08d43f9f705dc849924fb2c6",
+      "decision": "direct-copy",
+      "reason": "Exact source discard curve copied before R013 evaluates its normalized keys."
+    },
+    {
+      "source": "Assets/Art/Environment/Shaders/SG_BoosterPack.shadergraph",
+      "sourceSha256": "e1de0669f3f7c8ade21f656ab17c5e14e6d45cd5e689c79ddb983f27e61f6c34",
+      "destination": "ArtSource/ModelPipeline/premium-display-case/evidence/04-architecture/rev-013/source-raw/SG_BoosterPack.shadergraph",
+      "destinationSha256": "e1de0669f3f7c8ade21f656ab17c5e14e6d45cd5e689c79ddb983f27e61f6c34",
+      "decision": "direct-copy",
+      "reason": "Exact source dissolve graph retained before the Pack-only adapter."
+    },
+    {
+      "source": "Assets/Art/Kyle/Materials/SG_Title_Kyle.shadergraph",
+      "sourceSha256": "6a7718d6ae1eba360c03a1ea16b207ada5ae80f1a4dc2df0d004453bf94e2067",
+      "destination": "ArtSource/ModelPipeline/premium-display-case/evidence/04-architecture/rev-013/source-raw/SG_Title_Kyle.shadergraph",
+      "destinationSha256": "6a7718d6ae1eba360c03a1ea16b207ada5ae80f1a4dc2df0d004453bf94e2067",
+      "decision": "direct-copy",
+      "reason": "Exact source sphere-mask graph retained before the contour sweep adapter."
+    },
+    {
+      "source": "Assets/Art/Booster/SG_LightingStrike.shadergraph",
+      "sourceSha256": "a4eb3922e72a3dadb436902d2c4a57c3fbd6768e4b137104abeed6167e1f4f7d",
+      "destination": "ArtSource/ModelPipeline/premium-display-case/evidence/04-architecture/rev-013/source-raw/SG_LightingStrike.shadergraph",
+      "destinationSha256": "a4eb3922e72a3dadb436902d2c4a57c3fbd6768e4b137104abeed6167e1f4f7d",
+      "decision": "direct-copy",
+      "reason": "Exact source reveal and erode graph retained before the Shuriken adapter."
+    },
+    {
+      "source": "Assets/Art/Booster/TX_Flare_2x2_M.png",
+      "sourceSha256": "bbf7c86f5435ec3097717ef092e531214916e9cbb7db2b71f059e3d12f90ffa3",
+      "destination": "Assets/_DisplayCase/Candidates/PackOpeningGate04R013/ImportedSource/Textures/TX_Flare_2x2_M.png",
+      "destinationSha256": "bbf7c86f5435ec3097717ef092e531214916e9cbb7db2b71f059e3d12f90ffa3",
+      "decision": "direct-copy",
+      "reason": "Exact atlas is sampled as luminance only, so source RGB fringes cannot leak."
+    },
+    {
+      "source": "Assets/Art/Common/Textures/TX_Noise_M.tga",
+      "sourceSha256": "2303e1fb3c86af9e9b6a4ccd4ecb615b9cdd172253eea8988c7a6ac4a165e886",
+      "destination": "Assets/_DisplayCase/Candidates/PackOpeningGate04R013/ImportedSource/Textures/TX_Noise_M.tga",
+      "destinationSha256": "2303e1fb3c86af9e9b6a4ccd4ecb615b9cdd172253eea8988c7a6ac4a165e886",
+      "decision": "direct-copy",
+      "reason": "Exact source noise remains audit-only; it cannot create a pixel-noise dissolve."
+    },
+    {
+      "source": "Assets/Animation/Clips/Booster/Booster_Discarded.anim",
+      "sourceSha256": "be661fe81b095f7f1ad08fb2a1c003b15f8690ee08d43f9f705dc849924fb2c6",
+      "destination": "Assets/_DisplayCase/Candidates/PackOpeningGate04R013/Runtime/PackOpeningGate04R013Profile.cs",
+      "destinationSha256": "657293da6152d98dc62fcab92e63dd1089bb29b8eebd1f6fe0da4859903597dc",
+      "decision": "adapted",
+      "reason": "The exact normalized curve drives late Pack discard after the case has entered the mouth."
+    },
+    {
+      "source": "Assets/Art/Environment/Shaders/SG_BoosterPack.shadergraph",
+      "sourceSha256": "e1de0669f3f7c8ade21f656ab17c5e14e6d45cd5e689c79ddb983f27e61f6c34",
+      "destination": "Assets/_DisplayCase/Candidates/PackOpeningGate04R013/Shaders/MakeItShineCc0PackR013.shader",
+      "destinationSha256": "18cc7c139eccf1cf02891986ff4173721edd25ae9b368d3f09c3893e521d4fb0",
+      "decision": "adapted",
+      "reason": "Source discard and emissive edge are constrained to the physical Pack after the tear."
+    },
+    {
+      "source": "Assets/Art/Kyle/Materials/SG_Title_Kyle.shadergraph",
+      "sourceSha256": "6a7718d6ae1eba360c03a1ea16b207ada5ae80f1a4dc2df0d004453bf94e2067",
+      "destination": "Assets/_DisplayCase/Candidates/PackOpeningGate04R013/Shaders/MakeItShineCc0ContourRimR013.shader",
+      "destinationSha256": "02e9f3d402fea0daf7922a46fe54abeb78c4606ee4b8b05be97a8d25a24bcf05",
+      "decision": "adapted",
+      "reason": "Source sphere-mask timing sweeps a narrow Blender-authored torn contour."
+    },
+    {
+      "source": "Assets/Art/Booster/SG_LightingStrike.shadergraph",
+      "sourceSha256": "a4eb3922e72a3dadb436902d2c4a57c3fbd6768e4b137104abeed6167e1f4f7d",
+      "destination": "Assets/_DisplayCase/Candidates/PackOpeningGate04R013/Shaders/MakeItShineCc0PortR013.shader",
+      "destinationSha256": "dd3c3eb05a6c73598ba2ae3f0d660140dee3fb6d185de52290c086056824b6ef",
+      "decision": "adapted",
+      "reason": "Source reveal and erode math drives a small warm-neutral Shuriken accent."
+    },
+    {
+      "source": "Assets/Art/Booster/VFX_BoosterActivation.vfx",
+      "sourceSha256": "c56ed7a46cc1276b16e5e6e47879e4c7a665425df9d8e2e6693ac8ef1924ff67",
+      "destination": "Assets/_DisplayCase/Candidates/PackOpeningGate04R013/Editor/PackOpeningGate04R013Builder.cs",
+      "destinationSha256": "fa26c26aeda9357999d2165414401c29b51f00c5d1b008f93741259abea5246d",
+      "decision": "adapted",
+      "reason": "Only bounded timing and source-material presentation are ported to Shuriken."
+    },
+    {
+      "source": "Assets/Plugins/iOS/GachaPacks/gacha-pack-standard-body.png",
+      "sourceSha256": "ebc17bb238ebbcb82d36134bb2781838df610f8a3d1750c27b8ade10fc4681d6",
+      "destination": "Assets/_DisplayCase/Candidates/PackOpeningGate04R013/Imported/PackOpeningGate04R013PackOnlyRig.fbx",
+      "destinationSha256": "17e3f48ef9378862f7ab9e1c763b2c098cbf726af2e2fb463c08f7df6c23281c",
+      "decision": "adapted",
+      "reason": "Blender Pack-only blend-shape rig preserves the actual 384x512 artwork; FBX SHA-256 17e3f48ef9378862f7ab9e1c763b2c098cbf726af2e2fb463c08f7df6c23281c."
+    },
+    {
+      "source": "Assets/Plugins/iOS/GachaPacks/gacha-pack-standard-flap.png",
+      "sourceSha256": "b031fc5c57d194e9603e9b32e1cd603285aa564490f599f29bb0cd67dab33d49",
+      "destination": "ArtSource/ModelPipeline/premium-display-case/evidence/04-architecture/rev-013/pack-opening-gate04-r013.blend",
+      "destinationSha256": "7090c697474575e9c5d321a77df6cf9e99821044108a8a3d1171bf55498980ee",
+      "decision": "adapted",
+      "reason": "Blender top crimp and pull tab use the actual flap artwork; Blend SHA-256 7090c697474575e9c5d321a77df6cf9e99821044108a8a3d1171bf55498980ee."
+    },
+    {
+      "source": "Assets/Prefabs/Cinematic/Opening_Booster.prefab",
+      "sourceSha256": "b155b76ffe54ac737651adbbfa177e284b22175733096e279e056316bf5aa978",
+      "destination": null,
+      "destinationSha256": null,
+      "decision": "rejected",
+      "reason": "Sample surrogate Pack and object swaps are forbidden."
+    },
+    {
+      "source": "Assets/Art/Booster/BoosterFractured_B.fbx",
+      "sourceSha256": "fd78b007802a1966a1dfb1a1c6b8c7c36cec2f3622dcbaf480fe039967ded602",
+      "destination": null,
+      "destinationSha256": null,
+      "decision": "rejected",
+      "reason": "The sample has no continuous Pack mouth and cannot replace the physical Blender rig."
+    },
+    {
+      "source": "Assets/Art/Booster/VFXG_LightingStrike.vfx",
+      "sourceSha256": "4f4da1d0038cee4e4599467b754a429263286073233bb8ac0f259e908635d7b5",
+      "destination": null,
+      "destinationSha256": null,
+      "decision": "rejected",
+      "reason": "512-spark source behavior is forbidden; no VFX Graph is imported or executed."
+    },
+    {
+      "source": "Assets/Art/Booster/VFX_BoosterExplosion.vfx",
+      "sourceSha256": "d6af66e7b91e7097d50fbef376bf7b33b63dd9e6738a4c99084cb46460aaac2f",
+      "destination": null,
+      "destinationSha256": null,
+      "decision": "rejected",
+      "reason": "Explosion burst is forbidden; no generic particulate effect is ported."
+    }
+  ],
+  "vfxGraphDependency": false,
+  "shurikenAdapter": true,
+  "sampleModelsImported": false,
+  "sampleArtworkImported": false,
+  "packOnlyBlenderRig": true,
+  "shippingReady": false
+}

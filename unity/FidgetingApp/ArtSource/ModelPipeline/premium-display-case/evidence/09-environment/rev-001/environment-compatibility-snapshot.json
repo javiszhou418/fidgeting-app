@@ -1,0 +1,92 @@
+{
+  "schemaVersion": 1,
+  "modelId": "premium-display-case",
+  "gate": "09-environment",
+  "environmentRevision": 1,
+  "status": "ready_for_review",
+  "sourceLightingRevision": 2,
+  "sourceLightingApprovalQuote": "灯光方向正确，批准并继续（推荐）",
+  "geometryDigest": "a3d1e9fe3c6d26c957c7ad1584cc489b9091a1a79e435a660aa89bcf6acc3951",
+  "materialDigest": "8358cfdb12e49f87adbbafd96f33f2beb3415f9b920cb62732c73173c7799210",
+  "cameraDigest": "fbe50b0b20b056af5c3c12529af5a59449ee43316d9c4e0a5fc8bde661ac777b",
+  "lightingDigest": "baa21c3cd8ba49c344db28f8c2e00488b57b5b49edd8007b09719f1b001b4395",
+  "wholeAssembledCaseOnly": true,
+  "reviewExplodedPartCount": 0,
+  "neutralAndShippingMatchedCamera": true,
+  "backgroundStatic": true,
+  "cameraMotion": false,
+  "backgroundMotion": false,
+  "toyPrizeOwnership": "caller-owned-static",
+  "labelContentApproved": false,
+  "labelContentState": "placeholder-not-approved",
+  "meshClippedSheen": {
+    "classification": "inside-case-material-runtime-cue",
+    "outsideSubjectPixels": 0,
+    "detachedLightEffect": false
+  },
+  "environmentReflection": "surface-shaping-only",
+  "minimumSubjectMargin": 0.14457208,
+  "maximumShippingHighlightClipFraction": 0.0,
+  "maximumShippingBackgroundP95AbsoluteChromaNormalized": 0.02745098,
+  "maximumAbsoluteShippingBackgroundMeanGreenExcess": 0.31852496,
+  "externalHaloMetrics": {
+    "outsideExpandedSubjectP95PositiveDelta": 0.9278,
+    "outsideExpandedSubjectP99PositiveDelta": 1.000001,
+    "outsideExpandedSubjectAbove16Fraction": 0.0
+  },
+  "localBrightBlobMetrics": {
+    "grid": [
+      16,
+      18
+    ],
+    "minimumTileLuma": 4.647,
+    "maximumTileLuma": 13.5066,
+    "maximumRowResidual": 3.787399,
+    "p95RowResidual": 2.787399,
+    "centerTileLuma": 10.506599,
+    "globalMedianTileLuma": 10.506599
+  },
+  "approvalChecklist": [
+    "watch-full-environment-comparison-recording",
+    "inspect-matched-neutral-shipping-hero",
+    "inspect-shipping-left-right-low",
+    "inspect-label-black-panel-readability",
+    "confirm-background-and-cameras-static",
+    "confirm-no-green-rarity-halo-bloom-particles-streaks-noise-patch-bright-blob",
+    "confirm-mesh-clipped-sheen-inside-case",
+    "confirm-geometry-material-light-camera-digests-unchanged",
+    "confirm-placeholder-label-not-approved",
+    "confirm-unity-values-remain-tunable"
+  ],
+  "interaction": {
+    "type": "real-render-static-matched-camera-comparison-recording",
+    "artifactPath": "/Users/jiawei.zhou/Documents/Fidgeting app/unity/FidgetingApp/ArtSource/ModelPipeline/premium-display-case/evidence/09-environment/rev-001/environment-comparison.mp4",
+    "artifactSha256": "074a9ce97f0ffb8adcd1729efe9d0e5c7d334a2d324a6deddea5d8112b797f0d",
+    "frameCount": 72,
+    "durationSeconds": 6.0,
+    "approvalRequiresCompletedChecklist": true
+  },
+  "candidateBoundary": {
+    "blenderEnvironmentValuesAreUnityRuntimeConstants": false,
+    "unityEnvironmentTunable": true,
+    "unityIblIntensityTunable": true,
+    "unityExposureTunable": true,
+    "unityCameraTunable": true,
+    "tunableUntil": "gate11-unity-parity-and-gate12-shipping-preview"
+  },
+  "forbiddenEffects": {
+    "fixedGreenCast": false,
+    "rarityColor": false,
+    "externalHalo": false,
+    "fullScreenBloom": false,
+    "particles": false,
+    "streaks": false,
+    "noisePatch": false,
+    "localBrightBlob": false,
+    "persistentEmission": false
+  },
+  "gate09Approved": false,
+  "gate10Entered": false,
+  "shippingUnityChanged": false,
+  "buildInstallPhonePush": false
+}

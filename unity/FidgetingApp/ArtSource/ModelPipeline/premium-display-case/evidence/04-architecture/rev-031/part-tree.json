@@ -1,0 +1,945 @@
+{
+  "schema": "premium-display-case.gate04.part-tree/7",
+  "modelId": "premium-display-case",
+  "variant_id": "tri-spinner-slab-v3-cmf",
+  "contract_sha256": "22c31ce550c52884525b0513b18787eb5d7d1cfb87bbc5e9b1ea49fae8994a4a",
+  "coordinate_system": {
+    "right": "+X",
+    "up": "+Y",
+    "front": "+Z",
+    "origin": "assembled_outer_envelope_center"
+  },
+  "controls": [
+    {
+      "name": "PIVOT_PDC_TURNTABLE",
+      "unity_name": "(review only, not exported)",
+      "export_role": "review-turntable-pivot",
+      "location_canonical_mm": [
+        0.0,
+        0.0,
+        8.525
+      ]
+    },
+    {
+      "name": "ROOT_PDC_PRESENTATION",
+      "unity_name": "PresentationRoot",
+      "export_role": "motion-owner",
+      "location_canonical_mm": [
+        0.0,
+        0.0,
+        8.525
+      ]
+    },
+    {
+      "name": "ROOT_PDC_CASE_ASSEMBLY",
+      "unity_name": "CaseAssembly",
+      "export_role": "case-owner",
+      "location_canonical_mm": [
+        0.0,
+        0.0,
+        8.525
+      ]
+    },
+    {
+      "name": "PIVOT_PDC_CONTENT_SLOT",
+      "unity_name": "ContentSlot",
+      "export_role": "content-anchor-empty",
+      "location_canonical_mm": [
+        0.0,
+        -20.69,
+        9.8
+      ]
+    }
+  ],
+  "content_slot": {
+    "name": "PIVOT_PDC_CONTENT_SLOT",
+    "location_canonical_mm": [
+      0.0,
+      -20.69,
+      9.8
+    ],
+    "owner": "caller",
+    "rule": "content_owner=caller; case_export_contains_spinner_mesh=false; ContentSlot is an empty at the spinner pivot",
+    "review_input": {
+      "source": "unity/FidgetingApp/ArtSource/UnifiedTriSpinner/UnifiedTriSpinner.glb",
+      "sha256": "a1e76cc5adf0fe516a57ed542190770a7f12452f00d03881a95c879468d38a6e",
+      "collection": "COL_PDC_REFERENCE_LOCKED",
+      "exported": false,
+      "pose": "spin axis = canonical +Z, one tip up (+Y), pivot at ContentSlot"
+    }
+  },
+  "parts": [
+    {
+      "blender_name": "GEO_PDC_COMPARTMENT_SEAM",
+      "unity_path": "PresentationRoot/CaseAssembly/CompartmentSeam",
+      "owner": "case",
+      "parent_part": null,
+      "export_role": "case-geometry",
+      "collection": "COL_PDC_GEOMETRY_STATIC",
+      "z_range_construction_mm": [
+        2.42,
+        5.56
+      ],
+      "z_range_canonical_mm": [
+        -6.105,
+        -2.965
+      ],
+      "cmf_zone_id": 2,
+      "cmf_zone": "case-smoke-lilac-liner",
+      "material_slot": "case-smoke-lilac-liner"
+    },
+    {
+      "blender_name": "GEO_PDC_FRAME_BOLT_00",
+      "unity_path": "PresentationRoot/CaseAssembly/Hardware/FrameBolt00",
+      "owner": "case",
+      "parent_part": null,
+      "export_role": "case-geometry",
+      "collection": "COL_PDC_GEOMETRY_STATIC",
+      "z_range_construction_mm": [
+        9.98,
+        10.71
+      ],
+      "z_range_canonical_mm": [
+        1.455,
+        2.185
+      ],
+      "cmf_zone_id": 5,
+      "cmf_zone": "steel-satin",
+      "material_slot": "steel-satin"
+    },
+    {
+      "blender_name": "GEO_PDC_FRAME_BOLT_00_SOCKET_FLOOR",
+      "unity_path": "PresentationRoot/CaseAssembly/Hardware/FrameBolt00/SocketFloor",
+      "owner": "case",
+      "parent_part": "GEO_PDC_FRAME_BOLT_00",
+      "export_role": "case-geometry",
+      "collection": "COL_PDC_GEOMETRY_STATIC",
+      "z_range_construction_mm": [
+        9.98,
+        10.11
+      ],
+      "z_range_canonical_mm": [
+        1.455,
+        1.585
+      ],
+      "cmf_zone_id": 5,
+      "cmf_zone": "steel-satin",
+      "material_slot": "steel-satin"
+    },
+    {
+      "blender_name": "GEO_PDC_FRAME_BOLT_01",
+      "unity_path": "PresentationRoot/CaseAssembly/Hardware/FrameBolt01",
+      "owner": "case",
+      "parent_part": null,
+      "export_role": "case-geometry",
+      "collection": "COL_PDC_GEOMETRY_STATIC",
+      "z_range_construction_mm": [
+        9.98,
+        10.71
+      ],
+      "z_range_canonical_mm": [
+        1.455,
+        2.185
+      ],
+      "cmf_zone_id": 5,
+      "cmf_zone": "steel-satin",
+      "material_slot": "steel-satin"
+    },
+    {
+      "blender_name": "GEO_PDC_FRAME_BOLT_01_SOCKET_FLOOR",
+      "unity_path": "PresentationRoot/CaseAssembly/Hardware/FrameBolt01/SocketFloor",
+      "owner": "case",
+      "parent_part": "GEO_PDC_FRAME_BOLT_01",
+      "export_role": "case-geometry",
+      "collection": "COL_PDC_GEOMETRY_STATIC",
+      "z_range_construction_mm": [
+        9.98,
+        10.11
+      ],
+      "z_range_canonical_mm": [
+        1.455,
+        1.585
+      ],
+      "cmf_zone_id": 5,
+      "cmf_zone": "steel-satin",
+      "material_slot": "steel-satin"
+    },
+    {
+      "blender_name": "GEO_PDC_FRAME_BOLT_02",
+      "unity_path": "PresentationRoot/CaseAssembly/Hardware/FrameBolt02",
+      "owner": "case",
+      "parent_part": null,
+      "export_role": "case-geometry",
+      "collection": "COL_PDC_GEOMETRY_STATIC",
+      "z_range_construction_mm": [
+        9.98,
+        10.71
+      ],
+      "z_range_canonical_mm": [
+        1.455,
+        2.185
+      ],
+      "cmf_zone_id": 5,
+      "cmf_zone": "steel-satin",
+      "material_slot": "steel-satin"
+    },
+    {
+      "blender_name": "GEO_PDC_FRAME_BOLT_02_SOCKET_FLOOR",
+      "unity_path": "PresentationRoot/CaseAssembly/Hardware/FrameBolt02/SocketFloor",
+      "owner": "case",
+      "parent_part": "GEO_PDC_FRAME_BOLT_02",
+      "export_role": "case-geometry",
+      "collection": "COL_PDC_GEOMETRY_STATIC",
+      "z_range_construction_mm": [
+        9.98,
+        10.11
+      ],
+      "z_range_canonical_mm": [
+        1.455,
+        1.585
+      ],
+      "cmf_zone_id": 5,
+      "cmf_zone": "steel-satin",
+      "material_slot": "steel-satin"
+    },
+    {
+      "blender_name": "GEO_PDC_FRAME_BOLT_03",
+      "unity_path": "PresentationRoot/CaseAssembly/Hardware/FrameBolt03",
+      "owner": "case",
+      "parent_part": null,
+      "export_role": "case-geometry",
+      "collection": "COL_PDC_GEOMETRY_STATIC",
+      "z_range_construction_mm": [
+        9.98,
+        10.71
+      ],
+      "z_range_canonical_mm": [
+        1.455,
+        2.185
+      ],
+      "cmf_zone_id": 5,
+      "cmf_zone": "steel-satin",
+      "material_slot": "steel-satin"
+    },
+    {
+      "blender_name": "GEO_PDC_FRAME_BOLT_03_SOCKET_FLOOR",
+      "unity_path": "PresentationRoot/CaseAssembly/Hardware/FrameBolt03/SocketFloor",
+      "owner": "case",
+      "parent_part": "GEO_PDC_FRAME_BOLT_03",
+      "export_role": "case-geometry",
+      "collection": "COL_PDC_GEOMETRY_STATIC",
+      "z_range_construction_mm": [
+        9.98,
+        10.11
+      ],
+      "z_range_canonical_mm": [
+        1.455,
+        1.585
+      ],
+      "cmf_zone_id": 5,
+      "cmf_zone": "steel-satin",
+      "material_slot": "steel-satin"
+    },
+    {
+      "blender_name": "GEO_PDC_FRAME_BOLT_04",
+      "unity_path": "PresentationRoot/CaseAssembly/Hardware/FrameBolt04",
+      "owner": "case",
+      "parent_part": null,
+      "export_role": "case-geometry",
+      "collection": "COL_PDC_GEOMETRY_STATIC",
+      "z_range_construction_mm": [
+        9.98,
+        10.71
+      ],
+      "z_range_canonical_mm": [
+        1.455,
+        2.185
+      ],
+      "cmf_zone_id": 5,
+      "cmf_zone": "steel-satin",
+      "material_slot": "steel-satin"
+    },
+    {
+      "blender_name": "GEO_PDC_FRAME_BOLT_04_SOCKET_FLOOR",
+      "unity_path": "PresentationRoot/CaseAssembly/Hardware/FrameBolt04/SocketFloor",
+      "owner": "case",
+      "parent_part": "GEO_PDC_FRAME_BOLT_04",
+      "export_role": "case-geometry",
+      "collection": "COL_PDC_GEOMETRY_STATIC",
+      "z_range_construction_mm": [
+        9.98,
+        10.11
+      ],
+      "z_range_canonical_mm": [
+        1.455,
+        1.585
+      ],
+      "cmf_zone_id": 5,
+      "cmf_zone": "steel-satin",
+      "material_slot": "steel-satin"
+    },
+    {
+      "blender_name": "GEO_PDC_FRAME_BOLT_05",
+      "unity_path": "PresentationRoot/CaseAssembly/Hardware/FrameBolt05",
+      "owner": "case",
+      "parent_part": null,
+      "export_role": "case-geometry",
+      "collection": "COL_PDC_GEOMETRY_STATIC",
+      "z_range_construction_mm": [
+        9.98,
+        10.71
+      ],
+      "z_range_canonical_mm": [
+        1.455,
+        2.185
+      ],
+      "cmf_zone_id": 5,
+      "cmf_zone": "steel-satin",
+      "material_slot": "steel-satin"
+    },
+    {
+      "blender_name": "GEO_PDC_FRAME_BOLT_05_SOCKET_FLOOR",
+      "unity_path": "PresentationRoot/CaseAssembly/Hardware/FrameBolt05/SocketFloor",
+      "owner": "case",
+      "parent_part": "GEO_PDC_FRAME_BOLT_05",
+      "export_role": "case-geometry",
+      "collection": "COL_PDC_GEOMETRY_STATIC",
+      "z_range_construction_mm": [
+        9.98,
+        10.11
+      ],
+      "z_range_canonical_mm": [
+        1.455,
+        1.585
+      ],
+      "cmf_zone_id": 5,
+      "cmf_zone": "steel-satin",
+      "material_slot": "steel-satin"
+    },
+    {
+      "blender_name": "GEO_PDC_HEADER_DIVIDER_LINE",
+      "unity_path": "PresentationRoot/CaseAssembly/HeaderCompartment/HeaderDividerLine",
+      "owner": "case",
+      "parent_part": null,
+      "export_role": "case-geometry",
+      "collection": "COL_PDC_GEOMETRY_STATIC",
+      "z_range_construction_mm": [
+        6.46,
+        6.86
+      ],
+      "z_range_canonical_mm": [
+        -2.065,
+        -1.665
+      ],
+      "cmf_zone_id": 6,
+      "cmf_zone": "case-smoked-mirror-silver",
+      "material_slot": "case-smoked-mirror-silver"
+    },
+    {
+      "blender_name": "GEO_PDC_HEADER_GOLD_INLAY_L",
+      "unity_path": "PresentationRoot/CaseAssembly/HeaderCompartment/HeaderGoldInlayL",
+      "owner": "case",
+      "parent_part": null,
+      "export_role": "case-geometry",
+      "collection": "COL_PDC_GEOMETRY_STATIC",
+      "z_range_construction_mm": [
+        7.66,
+        8.06
+      ],
+      "z_range_canonical_mm": [
+        -0.865,
+        -0.465
+      ],
+      "cmf_zone_id": 7,
+      "cmf_zone": "case-champagne-gold-inlay",
+      "material_slot": "case-champagne-gold-inlay"
+    },
+    {
+      "blender_name": "GEO_PDC_HEADER_GOLD_INLAY_R",
+      "unity_path": "PresentationRoot/CaseAssembly/HeaderCompartment/HeaderGoldInlayR",
+      "owner": "case",
+      "parent_part": null,
+      "export_role": "case-geometry",
+      "collection": "COL_PDC_GEOMETRY_STATIC",
+      "z_range_construction_mm": [
+        7.66,
+        8.06
+      ],
+      "z_range_canonical_mm": [
+        -0.865,
+        -0.465
+      ],
+      "cmf_zone_id": 7,
+      "cmf_zone": "case-champagne-gold-inlay",
+      "material_slot": "case-champagne-gold-inlay"
+    },
+    {
+      "blender_name": "GEO_PDC_HEADER_GRAPHITE_PLANE",
+      "unity_path": "PresentationRoot/CaseAssembly/HeaderCompartment/HeaderGraphitePlane",
+      "owner": "case",
+      "parent_part": null,
+      "export_role": "case-geometry",
+      "collection": "COL_PDC_GEOMETRY_STATIC",
+      "z_range_construction_mm": [
+        2.42,
+        6.76
+      ],
+      "z_range_canonical_mm": [
+        -6.105,
+        -1.765
+      ],
+      "cmf_zone_id": 4,
+      "cmf_zone": "case-header-graphite",
+      "material_slot": "case-header-graphite"
+    },
+    {
+      "blender_name": "GEO_PDC_HEADER_MIRROR_BEVEL",
+      "unity_path": "PresentationRoot/CaseAssembly/HeaderCompartment/HeaderMirrorBevel",
+      "owner": "case",
+      "parent_part": null,
+      "export_role": "case-geometry",
+      "collection": "COL_PDC_GEOMETRY_STATIC",
+      "z_range_construction_mm": [
+        2.42,
+        6.16
+      ],
+      "z_range_canonical_mm": [
+        -6.105,
+        -2.365
+      ],
+      "cmf_zone_id": 6,
+      "cmf_zone": "case-smoked-mirror-silver",
+      "material_slot": "case-smoked-mirror-silver"
+    },
+    {
+      "blender_name": "GEO_PDC_HEADER_SATIN_SHELF",
+      "unity_path": "PresentationRoot/CaseAssembly/HeaderCompartment/HeaderSatinShelf",
+      "owner": "case",
+      "parent_part": null,
+      "export_role": "case-geometry",
+      "collection": "COL_PDC_GEOMETRY_STATIC",
+      "z_range_construction_mm": [
+        2.42,
+        7.96
+      ],
+      "z_range_canonical_mm": [
+        -6.105,
+        -0.565
+      ],
+      "cmf_zone_id": 5,
+      "cmf_zone": "steel-satin",
+      "material_slot": "steel-satin"
+    },
+    {
+      "blender_name": "GEO_PDC_MAIN_GOLD_CHAMFER_BL",
+      "unity_path": "PresentationRoot/CaseAssembly/MainCompartment/Gold/ChamferBL",
+      "owner": "case",
+      "parent_part": null,
+      "export_role": "case-geometry",
+      "collection": "COL_PDC_GEOMETRY_STATIC",
+      "z_range_construction_mm": [
+        6.06,
+        6.46
+      ],
+      "z_range_canonical_mm": [
+        -2.465,
+        -2.065
+      ],
+      "cmf_zone_id": 7,
+      "cmf_zone": "case-champagne-gold-inlay",
+      "material_slot": "case-champagne-gold-inlay"
+    },
+    {
+      "blender_name": "GEO_PDC_MAIN_GOLD_CHAMFER_BR",
+      "unity_path": "PresentationRoot/CaseAssembly/MainCompartment/Gold/ChamferBR",
+      "owner": "case",
+      "parent_part": null,
+      "export_role": "case-geometry",
+      "collection": "COL_PDC_GEOMETRY_STATIC",
+      "z_range_construction_mm": [
+        6.06,
+        6.46
+      ],
+      "z_range_canonical_mm": [
+        -2.465,
+        -2.065
+      ],
+      "cmf_zone_id": 7,
+      "cmf_zone": "case-champagne-gold-inlay",
+      "material_slot": "case-champagne-gold-inlay"
+    },
+    {
+      "blender_name": "GEO_PDC_MAIN_GOLD_CHAMFER_TL",
+      "unity_path": "PresentationRoot/CaseAssembly/MainCompartment/Gold/ChamferTL",
+      "owner": "case",
+      "parent_part": null,
+      "export_role": "case-geometry",
+      "collection": "COL_PDC_GEOMETRY_STATIC",
+      "z_range_construction_mm": [
+        6.06,
+        6.46
+      ],
+      "z_range_canonical_mm": [
+        -2.465,
+        -2.065
+      ],
+      "cmf_zone_id": 7,
+      "cmf_zone": "case-champagne-gold-inlay",
+      "material_slot": "case-champagne-gold-inlay"
+    },
+    {
+      "blender_name": "GEO_PDC_MAIN_GOLD_CHAMFER_TR",
+      "unity_path": "PresentationRoot/CaseAssembly/MainCompartment/Gold/ChamferTR",
+      "owner": "case",
+      "parent_part": null,
+      "export_role": "case-geometry",
+      "collection": "COL_PDC_GEOMETRY_STATIC",
+      "z_range_construction_mm": [
+        6.06,
+        6.46
+      ],
+      "z_range_canonical_mm": [
+        -2.465,
+        -2.065
+      ],
+      "cmf_zone_id": 7,
+      "cmf_zone": "case-champagne-gold-inlay",
+      "material_slot": "case-champagne-gold-inlay"
+    },
+    {
+      "blender_name": "GEO_PDC_MAIN_GOLD_INDEX_TAB_L",
+      "unity_path": "PresentationRoot/CaseAssembly/MainCompartment/Gold/IndexTabL",
+      "owner": "case",
+      "parent_part": null,
+      "export_role": "case-geometry",
+      "collection": "COL_PDC_GEOMETRY_STATIC",
+      "z_range_construction_mm": [
+        6.06,
+        6.46
+      ],
+      "z_range_canonical_mm": [
+        -2.465,
+        -2.065
+      ],
+      "cmf_zone_id": 7,
+      "cmf_zone": "case-champagne-gold-inlay",
+      "material_slot": "case-champagne-gold-inlay"
+    },
+    {
+      "blender_name": "GEO_PDC_MAIN_GOLD_INDEX_TAB_R",
+      "unity_path": "PresentationRoot/CaseAssembly/MainCompartment/Gold/IndexTabR",
+      "owner": "case",
+      "parent_part": null,
+      "export_role": "case-geometry",
+      "collection": "COL_PDC_GEOMETRY_STATIC",
+      "z_range_construction_mm": [
+        6.06,
+        6.46
+      ],
+      "z_range_canonical_mm": [
+        -2.465,
+        -2.065
+      ],
+      "cmf_zone_id": 7,
+      "cmf_zone": "case-champagne-gold-inlay",
+      "material_slot": "case-champagne-gold-inlay"
+    },
+    {
+      "blender_name": "GEO_PDC_MAIN_GOLD_RAIL_L",
+      "unity_path": "PresentationRoot/CaseAssembly/MainCompartment/Gold/RailL",
+      "owner": "case",
+      "parent_part": null,
+      "export_role": "case-geometry",
+      "collection": "COL_PDC_GEOMETRY_STATIC",
+      "z_range_construction_mm": [
+        6.06,
+        6.46
+      ],
+      "z_range_canonical_mm": [
+        -2.465,
+        -2.065
+      ],
+      "cmf_zone_id": 7,
+      "cmf_zone": "case-champagne-gold-inlay",
+      "material_slot": "case-champagne-gold-inlay"
+    },
+    {
+      "blender_name": "GEO_PDC_MAIN_GOLD_RAIL_R",
+      "unity_path": "PresentationRoot/CaseAssembly/MainCompartment/Gold/RailR",
+      "owner": "case",
+      "parent_part": null,
+      "export_role": "case-geometry",
+      "collection": "COL_PDC_GEOMETRY_STATIC",
+      "z_range_construction_mm": [
+        6.06,
+        6.46
+      ],
+      "z_range_canonical_mm": [
+        -2.465,
+        -2.065
+      ],
+      "cmf_zone_id": 7,
+      "cmf_zone": "case-champagne-gold-inlay",
+      "material_slot": "case-champagne-gold-inlay"
+    },
+    {
+      "blender_name": "GEO_PDC_MAIN_MICROBLAST_FIELD",
+      "unity_path": "PresentationRoot/CaseAssembly/MainCompartment/MainMicroblastField",
+      "owner": "case",
+      "parent_part": null,
+      "export_role": "case-geometry",
+      "collection": "COL_PDC_GEOMETRY_STATIC",
+      "z_range_construction_mm": [
+        2.42,
+        6.36
+      ],
+      "z_range_canonical_mm": [
+        -6.105,
+        -2.165
+      ],
+      "cmf_zone_id": 3,
+      "cmf_zone": "case-backplate-microblast",
+      "material_slot": "case-backplate-microblast"
+    },
+    {
+      "blender_name": "GEO_PDC_MAIN_MIRROR_SEAM",
+      "unity_path": "PresentationRoot/CaseAssembly/MainCompartment/MainMirrorSeam",
+      "owner": "case",
+      "parent_part": null,
+      "export_role": "case-geometry",
+      "collection": "COL_PDC_GEOMETRY_STATIC",
+      "z_range_construction_mm": [
+        2.42,
+        5.96
+      ],
+      "z_range_canonical_mm": [
+        -6.105,
+        -2.565
+      ],
+      "cmf_zone_id": 6,
+      "cmf_zone": "case-smoked-mirror-silver",
+      "material_slot": "case-smoked-mirror-silver"
+    },
+    {
+      "blender_name": "GEO_PDC_MAIN_SATIN_SHELF",
+      "unity_path": "PresentationRoot/CaseAssembly/MainCompartment/MainSatinShelf",
+      "owner": "case",
+      "parent_part": null,
+      "export_role": "case-geometry",
+      "collection": "COL_PDC_GEOMETRY_STATIC",
+      "z_range_construction_mm": [
+        2.42,
+        7.96
+      ],
+      "z_range_canonical_mm": [
+        -6.105,
+        -0.565
+      ],
+      "cmf_zone_id": 5,
+      "cmf_zone": "steel-satin",
+      "material_slot": "steel-satin"
+    },
+    {
+      "blender_name": "GEO_PDC_MAIN_TRAIT_PLAQUE",
+      "unity_path": "PresentationRoot/CaseAssembly/MainCompartment/TraitPlaque",
+      "owner": "case",
+      "parent_part": null,
+      "export_role": "case-geometry",
+      "collection": "COL_PDC_GEOMETRY_STATIC",
+      "z_range_construction_mm": [
+        6.06,
+        6.96
+      ],
+      "z_range_canonical_mm": [
+        -2.465,
+        -1.565
+      ],
+      "cmf_zone_id": 4,
+      "cmf_zone": "case-header-graphite",
+      "material_slot": "case-header-graphite"
+    },
+    {
+      "blender_name": "GEO_PDC_OUTER_CRYSTAL_FRAME",
+      "unity_path": "PresentationRoot/CaseAssembly/OuterCrystalFrame",
+      "owner": "case",
+      "parent_part": null,
+      "export_role": "case-geometry",
+      "collection": "COL_PDC_GEOMETRY_STATIC",
+      "z_range_construction_mm": [
+        0.0,
+        10.96
+      ],
+      "z_range_canonical_mm": [
+        -8.525,
+        2.435
+      ],
+      "cmf_zone_id": 1,
+      "cmf_zone": "case-clear-crystal",
+      "material_slot": "case-clear-crystal"
+    },
+    {
+      "blender_name": "GEO_PDC_POCKET_CLIP_00",
+      "unity_path": "PresentationRoot/CaseAssembly/MainCompartment/Pocket/PocketClip00",
+      "owner": "case",
+      "parent_part": null,
+      "export_role": "case-geometry",
+      "collection": "COL_PDC_GEOMETRY_STATIC",
+      "z_range_construction_mm": [
+        6.41,
+        8.81
+      ],
+      "z_range_canonical_mm": [
+        -2.115,
+        0.285
+      ],
+      "cmf_zone_id": 1,
+      "cmf_zone": "case-clear-crystal",
+      "material_slot": "case-clear-crystal"
+    },
+    {
+      "blender_name": "GEO_PDC_POCKET_CLIP_01",
+      "unity_path": "PresentationRoot/CaseAssembly/MainCompartment/Pocket/PocketClip01",
+      "owner": "case",
+      "parent_part": null,
+      "export_role": "case-geometry",
+      "collection": "COL_PDC_GEOMETRY_STATIC",
+      "z_range_construction_mm": [
+        6.41,
+        8.81
+      ],
+      "z_range_canonical_mm": [
+        -2.115,
+        0.285
+      ],
+      "cmf_zone_id": 1,
+      "cmf_zone": "case-clear-crystal",
+      "material_slot": "case-clear-crystal"
+    },
+    {
+      "blender_name": "GEO_PDC_POCKET_CLIP_02",
+      "unity_path": "PresentationRoot/CaseAssembly/MainCompartment/Pocket/PocketClip02",
+      "owner": "case",
+      "parent_part": null,
+      "export_role": "case-geometry",
+      "collection": "COL_PDC_GEOMETRY_STATIC",
+      "z_range_construction_mm": [
+        6.41,
+        8.81
+      ],
+      "z_range_canonical_mm": [
+        -2.115,
+        0.285
+      ],
+      "cmf_zone_id": 1,
+      "cmf_zone": "case-clear-crystal",
+      "material_slot": "case-clear-crystal"
+    },
+    {
+      "blender_name": "GEO_PDC_POCKET_GRAPHITE_FLOOR",
+      "unity_path": "PresentationRoot/CaseAssembly/MainCompartment/Pocket/PocketGraphiteFloor",
+      "owner": "case",
+      "parent_part": null,
+      "export_role": "case-geometry",
+      "collection": "COL_PDC_GEOMETRY_STATIC",
+      "z_range_construction_mm": [
+        2.42,
+        2.7
+      ],
+      "z_range_canonical_mm": [
+        -6.105,
+        -5.825
+      ],
+      "cmf_zone_id": 4,
+      "cmf_zone": "case-header-graphite",
+      "material_slot": "case-header-graphite"
+    },
+    {
+      "blender_name": "GEO_PDC_POCKET_POLISHED_LIP",
+      "unity_path": "PresentationRoot/CaseAssembly/MainCompartment/Pocket/PocketPolishedLip",
+      "owner": "case",
+      "parent_part": null,
+      "export_role": "case-geometry",
+      "collection": "COL_PDC_GEOMETRY_STATIC",
+      "z_range_construction_mm": [
+        2.42,
+        6.96
+      ],
+      "z_range_canonical_mm": [
+        -6.105,
+        -1.565
+      ],
+      "cmf_zone_id": 6,
+      "cmf_zone": "case-smoked-mirror-silver",
+      "material_slot": "case-smoked-mirror-silver"
+    },
+    {
+      "blender_name": "GEO_PDC_POCKET_SMOKE_WALL",
+      "unity_path": "PresentationRoot/CaseAssembly/MainCompartment/Pocket/PocketSmokeWall",
+      "owner": "case",
+      "parent_part": null,
+      "export_role": "case-geometry",
+      "collection": "COL_PDC_GEOMETRY_STATIC",
+      "z_range_construction_mm": [
+        2.42,
+        5.16
+      ],
+      "z_range_canonical_mm": [
+        -6.105,
+        -3.365
+      ],
+      "cmf_zone_id": 2,
+      "cmf_zone": "case-smoke-lilac-liner",
+      "material_slot": "case-smoke-lilac-liner"
+    },
+    {
+      "blender_name": "GEO_PDC_REAR_PLATE",
+      "unity_path": "PresentationRoot/CaseAssembly/RearPlate",
+      "owner": "case",
+      "parent_part": null,
+      "export_role": "case-geometry",
+      "collection": "COL_PDC_GEOMETRY_STATIC",
+      "z_range_construction_mm": [
+        0.0,
+        2.4
+      ],
+      "z_range_canonical_mm": [
+        -8.525,
+        -6.125
+      ],
+      "cmf_zone_id": 3,
+      "cmf_zone": "case-backplate-microblast",
+      "material_slot": "case-backplate-microblast"
+    },
+    {
+      "blender_name": "GEO_PDC_SMOKE_INNER_LINER",
+      "unity_path": "PresentationRoot/CaseAssembly/SmokeInnerLiner",
+      "owner": "case",
+      "parent_part": null,
+      "export_role": "case-geometry",
+      "collection": "COL_PDC_GEOMETRY_STATIC",
+      "z_range_construction_mm": [
+        2.42,
+        9.76
+      ],
+      "z_range_canonical_mm": [
+        -6.105,
+        1.235
+      ],
+      "cmf_zone_id": 2,
+      "cmf_zone": "case-smoke-lilac-liner",
+      "material_slot": "case-smoke-lilac-liner"
+    },
+    {
+      "blender_name": "GEO_PDC_TRAIT_FILL_00",
+      "unity_path": "PresentationRoot/CaseAssembly/MainCompartment/TraitPlaque/TraitFillSpin",
+      "owner": "runtime-trait-block",
+      "parent_part": "GEO_PDC_MAIN_TRAIT_PLAQUE",
+      "export_role": "runtime-dynamic-fill",
+      "collection": "COL_PDC_GEOMETRY_STATIC",
+      "z_range_construction_mm": [
+        6.63,
+        6.86
+      ],
+      "z_range_canonical_mm": [
+        -1.895,
+        -1.665
+      ],
+      "cmf_zone_id": 7,
+      "cmf_zone": "case-champagne-gold-inlay",
+      "material_slot": "case-champagne-gold-inlay"
+    },
+    {
+      "blender_name": "GEO_PDC_TRAIT_FILL_01",
+      "unity_path": "PresentationRoot/CaseAssembly/MainCompartment/TraitPlaque/TraitFillFeel",
+      "owner": "runtime-trait-block",
+      "parent_part": "GEO_PDC_MAIN_TRAIT_PLAQUE",
+      "export_role": "runtime-dynamic-fill",
+      "collection": "COL_PDC_GEOMETRY_STATIC",
+      "z_range_construction_mm": [
+        6.63,
+        6.86
+      ],
+      "z_range_canonical_mm": [
+        -1.895,
+        -1.665
+      ],
+      "cmf_zone_id": 7,
+      "cmf_zone": "case-champagne-gold-inlay",
+      "material_slot": "case-champagne-gold-inlay"
+    },
+    {
+      "blender_name": "GEO_PDC_TRAIT_FILL_02",
+      "unity_path": "PresentationRoot/CaseAssembly/MainCompartment/TraitPlaque/TraitFillCraft",
+      "owner": "runtime-trait-block",
+      "parent_part": "GEO_PDC_MAIN_TRAIT_PLAQUE",
+      "export_role": "runtime-dynamic-fill",
+      "collection": "COL_PDC_GEOMETRY_STATIC",
+      "z_range_construction_mm": [
+        6.63,
+        6.86
+      ],
+      "z_range_canonical_mm": [
+        -1.895,
+        -1.665
+      ],
+      "cmf_zone_id": 7,
+      "cmf_zone": "case-champagne-gold-inlay",
+      "material_slot": "case-champagne-gold-inlay"
+    }
+  ],
+  "part_count": 43,
+  "core_part_count": 34,
+  "core_object_list_matches_contract": true,
+  "sub_parts": [
+    "GEO_PDC_FRAME_BOLT_00_SOCKET_FLOOR",
+    "GEO_PDC_FRAME_BOLT_01_SOCKET_FLOOR",
+    "GEO_PDC_FRAME_BOLT_02_SOCKET_FLOOR",
+    "GEO_PDC_FRAME_BOLT_03_SOCKET_FLOOR",
+    "GEO_PDC_FRAME_BOLT_04_SOCKET_FLOOR",
+    "GEO_PDC_FRAME_BOLT_05_SOCKET_FLOOR",
+    "GEO_PDC_TRAIT_FILL_00",
+    "GEO_PDC_TRAIT_FILL_01",
+    "GEO_PDC_TRAIT_FILL_02"
+  ],
+  "ownership_rules": [
+    "The case export contains only GEO_PDC_* case parts plus ROOT_PDC_CASE_ASSEMBLY and PIVOT_PDC_CONTENT_SLOT.",
+    "PIVOT_PDC_CONTENT_SLOT is an empty. The spinner mesh, its materials, pivot, physics and haptics stay caller-owned.",
+    "ROOT_PDC_PRESENTATION owns turntable/idle motion; ROOT_PDC_CASE_ASSEMBLY never animates.",
+    "No explode, assembly or layer-separation state exists in exported controls.",
+    "The pocket is a generic circular well (rim / smoke wall / graphite floor) sized from content.design_toy_diameter_mm + fit clearance; it is not shaped to any one spinner silhouette.",
+    "Frame bolts are case hardware (zone 5 steel); each SocketFloor is a sub-part of its bolt head.",
+    "Every nested outline is a concentric inward offset of its parent (nested_offset_rule); no independent corner radii except interior.bezel_corner_radius_mm.",
+    "Header and main compartments are separate steel islands; CompartmentSeam is the dark smoke floor between them (no bridging rail).",
+    "Pocket clips are visual case parts in the clear-crystal zone; retention.mechanism remains null and no mechanical claim is made.",
+    "Engraved grooves are cut into MainMicroblastField and are not separate parts.",
+    "TraitPlaque hosts the FDB-DSP-053 TRAIT PROFILE: three troughs SPIN / FEEL / CRAFT top-down with quartile ticks. TraitFill* are exported at full length and shortened at runtime from ToyTalentCatalog.cs; label/value text are decals, not geometry.",
+    "Uniform-offset rule: main bezel -> field -> groove are exact offsets of one chamfered outline; band widths equal everywhere.",
+    "rev-031: no wings (retired GEO_PDC_MAIN_WING_{TL,TR,BL,BR}); the field around the pocket is plain; gold accents mirrored L/R and T/B.",
+    "CMF scheme A zones: lip/bevels/divider 6 (mirror), trait plaque 4 (piano black), field 3 (dark sandblast), shelves 5 (brushed).",
+    "Rarity CMF (FDB-DSP-059, contract cmf.rarity_tier_map): zones 5/6/7 + liner tint follow the tier; 1/3/4 constant. Gate 07 sets values."
+  ],
+  "depth_stack_mm": {
+    "z_rear_outer": 0.0,
+    "z_backplate_front": 2.4,
+    "z_spinner_back": 2.55,
+    "z_pocket_floor": 2.7,
+    "z_field": 6.36,
+    "z_pocket_lip_top": 6.96,
+    "z_groove_floor": 6.06,
+    "z_header_plane": 6.76,
+    "z_frame_ledge": 10.16,
+    "z_shelf_top": 7.96,
+    "z_frame_front": 10.96,
+    "pocket_well_depth": 3.66,
+    "z_spinner_front": 17.05,
+    "spinner_protrusion": 6.09,
+    "assembled_envelope_depth": 17.05,
+    "root_recentering_z": -8.525
+  },
+  "inputs": {
+    "contract": "ArtSource/ModelPipeline/premium-display-case/evidence/03-contract/rev-009/modeling-contract.json",
+    "contract_sha256_file": "4ba8e2d91a1f01e613d2ab498b9fb7e44bc6bc884f360541c0b470bb0b6d7899",
+    "scene_hierarchy": "ArtSource/ModelPipeline/premium-display-case/evidence/05-blockout/rev-009/scene-hierarchy.json",
+    "scene_hierarchy_sha256": "578a84124b51aa0d7eac8175c090aebe2ead30252c73c8b0397880bd9cbc56b9"
+  }
+}

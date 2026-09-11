@@ -1,0 +1,159 @@
+{
+  "schema": "premium-display-case-pack-opening-gate04-architecture.v1",
+  "modelId": "premium-display-case",
+  "gate": "04-architecture",
+  "architectureRevision": 3,
+  "evidenceRevision": 8,
+  "status": "ready_for_review",
+  "engine": {
+    "unity": "6000.5.6f1",
+    "urp": "17.5.0",
+    "timeline": "1.8.12"
+  },
+  "profile": "epic",
+  "packDisplayTier": "standard",
+  "resultRarityLeakBeforeReceipt": false,
+  "phases": [
+    {
+      "id": "handoff",
+      "startMs": 0,
+      "endMs": 350
+    },
+    {
+      "id": "anticipation",
+      "startMs": 350,
+      "endMs": 650
+    },
+    {
+      "id": "resistance",
+      "startMs": 650,
+      "endMs": 950
+    },
+    {
+      "id": "snap",
+      "startMs": 950,
+      "endMs": 1000
+    },
+    {
+      "id": "escalating-tear",
+      "startMs": 1000,
+      "endMs": 1750
+    },
+    {
+      "id": "epic-fake-out",
+      "startMs": 1550,
+      "endMs": 1610
+    },
+    {
+      "id": "impact",
+      "startMs": 1750,
+      "endMs": 1930
+    },
+    {
+      "id": "single-settling-reveal",
+      "startMs": 1930,
+      "endMs": 2530
+    },
+    {
+      "id": "native-settle-cta",
+      "startMs": 2530,
+      "endMs": 3100
+    }
+  ],
+  "ownership": {
+    "native": [
+      "Pack gesture",
+      "business metadata",
+      "staged CTA",
+      "exact-once ACK"
+    ],
+    "unity": [
+      "assembled case",
+      "preloaded environment",
+      "effect content",
+      "phase events"
+    ],
+    "transaction": [
+      "authoritative receipt",
+      "award",
+      "stale request rejection",
+      "interruption restore"
+    ],
+    "haptics": "semantic event -> recipe -> iOS renderer"
+  },
+  "invariants": {
+    "wholeAssembledCaseOnly": true,
+    "callerOwnedContentSlot": true,
+    "toyChanged": false,
+    "toyIndependentSpin": false,
+    "caseRevealRotation": "-25deg-to-0deg-once",
+    "repeated720Turntable": false,
+    "crossfadeReveal": false,
+    "rigidStripTranslation": false,
+    "emptyIdleTail": false,
+    "singleFrameCtaPop": false,
+    "vfxGraph": false,
+    "preloadedEnvironment": true,
+    "packDissolve": "binary deterministic threshold; not opacity fade",
+    "skipLandingMs": 200
+  },
+  "effectStack": [
+    "full-screen flash",
+    "shockwave",
+    "Shuriken-compatible burst",
+    "radial lines",
+    "camera impulse/FOV kick",
+    "bloom/CA/distortion punch",
+    "reveal sheen"
+  ],
+  "reduceMotion": {
+    "sameCausalSequence": true,
+    "disabled": [
+      "camera shake",
+      "chromatic aberration",
+      "lens distortion",
+      "speed lines",
+      "hitstop"
+    ],
+    "reduced": [
+      "flash",
+      "bloom"
+    ]
+  },
+  "rarityProfiles": [
+    "common",
+    "rare",
+    "epic",
+    "legendary"
+  ],
+  "packDisplayAssets": [
+    "standard",
+    "refined",
+    "signature",
+    "chase",
+    "grail",
+    "one-of-one"
+  ],
+  "textureManifest": "unity/FidgetingApp/ArtSource/ModelPipeline/premium-display-case/evidence/04-architecture/rev-008/candidate-texture-manifest.json",
+  "sourceHashes": {
+    "actualAssembledCaseUnityRender": "ff1baa67c2e8bb73bfcbb164001a2b7535087448ba80f98075c336e7198350c7",
+    "actualStandardPackBody": "ebc17bb238ebbcb82d36134bb2781838df610f8a3d1750c27b8ade10fc4681d6",
+    "actualStandardPackFlap": "b031fc5c57d194e9603e9b32e1cd603285aa564490f599f29bb0cd67dab33d49",
+    "unity65TimingProfileSource": "745ce61e1c041be56f7da81ab14087aa4bb32bd2797fa9d0b7c1023134d14d8e"
+  },
+  "orchestration": {
+    "runtime": "ScriptableObject + AnimationCurve + native phase state",
+    "timeline": "editor preview/scrub only",
+    "tweenPackageAdded": false,
+    "hitstopClock": "unscaled-time candidate"
+  },
+  "evidence": {
+    "normalSpeedVideo": "epic-profile-timing-impact-prototype.mp4",
+    "impactGif": "epic-impact-1700-1950ms.gif",
+    "impactContactSheet": "epic-impact-1700-1950ms-contact-sheet.png",
+    "signalstats": "signalstats-report.json",
+    "interactiveMode": "complete-recording-fallback",
+    "shippingRuntime": false,
+    "visualApproval": "pending"
+  }
+}

@@ -1,0 +1,523 @@
+Unity Editor version:    6000.5.6f1 (0e0577a1a2ac)
+Branch:                  6000.5/staging
+Build type:              Release
+Batch mode:              YES
+macOS version:           Version 26.6 (Build 25G72)
+Darwin version:          25.6.0
+Architecture:            arm64
+Running under Rosetta:   NO
+Available memory:        65536 MB
+Date:                    2026-09-01T00:08:52Z
+[Licensing::Module] Trying to connect to existing licensing client channel...
+[Licensing::IpcConnector] Successfully connected to: "LicenseClient-jiawei.zhou" at "2026-09-01T00:08:52.266783Z"
+Launching external process: /Applications/Unity/Hub/Editor/6000.5.6f1/Unity.app/Contents/Helpers/PackageManager/Server/UnityPackageManager
+
+COMMAND LINE ARGUMENTS:
+/Applications/Unity/Hub/Editor/6000.5.6f1/Unity.app/Contents/MacOS/Unity
+-batchmode
+-disableBurstCompilation
+-projectPath
+/tmp/FidgetingApp-PackOpening-R021-OpenMouth-20260901-r02
+-runTests
+-testPlatform
+EditMode
+-testFilter
+FidgetingApp.DisplayCase.IsolatedCandidate.R021.Tests.IsolatedR021ProofTests
+-testResults
+/tmp/FidgetingApp-PackOpening-R021-OpenMouth-20260901-r02/r021-editmode-results-actual.xml
+-logFile
+/tmp/FidgetingApp-PackOpening-R021-OpenMouth-20260901-r02/r021-editmode-tests-actual.log
+Successfully changed project path to: /tmp/FidgetingApp-PackOpening-R021-OpenMouth-20260901-r02
+/private/tmp/FidgetingApp-PackOpening-R021-OpenMouth-20260901-r02
+[UnityMemory] Configuration Parameters - Can be set up in boot.config
+    "memorysetup-temp-allocator-size-gi-baking-worker=262144"
+    "memorysetup-temp-allocator-size-gi-baking-worker=262144"
+    "memorysetup-temp-allocator-size-gi-baking-worker=262144"
+    "memorysetup-temp-allocator-size-gi-baking-worker=262144"
+    "memorysetup-temp-allocator-size-gi-baking-worker=262144"
+    "memorysetup-temp-allocator-size-nav-mesh-worker=65536"
+    "memorysetup-temp-allocator-size-audio-worker=65536"
+    "memorysetup-temp-allocator-size-cloud-worker=32768"
+    "memorysetup-allocator-temp-initial-block-size-main=262144"
+    "memorysetup-allocator-temp-initial-block-size-worker=262144"
+    "memorysetup-temp-allocator-size-preload-manager=33554432"
+    "memorysetup-temp-allocator-size-gfx=262144"
+    "memorysetup-temp-allocator-size-background-worker=32768"
+    "memorysetup-temp-allocator-size-job-worker=262144"
+    "memorysetup-bucket-allocator-granularity=16"
+    "memorysetup-bucket-allocator-bucket-count=8"
+    "memorysetup-bucket-allocator-block-size=33554432"
+    "memorysetup-bucket-allocator-block-count=8"
+    "memorysetup-main-allocator-block-size=16777216"
+    "memorysetup-thread-allocator-block-size=16777216"
+    "memorysetup-main-allocator-mimalloc-enabled=0"
+    "memorysetup-gfx-main-allocator-block-size=16777216"
+    "memorysetup-gfx-thread-allocator-block-size=16777216"
+    "memorysetup-cache-allocator-block-size=4194304"
+    "memorysetup-typetree-allocator-block-size=2097152"
+    "memorysetup-profiler-bucket-allocator-granularity=16"
+    "memorysetup-profiler-bucket-allocator-bucket-count=8"
+    "memorysetup-profiler-bucket-allocator-block-size=33554432"
+    "memorysetup-profiler-bucket-allocator-block-count=8"
+    "memorysetup-profiler-allocator-block-size=16777216"
+    "memorysetup-profiler-editor-allocator-block-size=1048576"
+    "memorysetup-temp-allocator-size-main=16777216"
+    "memorysetup-job-temp-allocator-block-size=2097152"
+    "memorysetup-job-temp-allocator-block-size-background=1048576"
+    "memorysetup-job-temp-allocator-reduction-small-platforms=262144"
+Logging is directed to a specific file, skipping project log.Player connection [8516968832]  Target information:
+
+Player connection [8516968832]  * "[IP] 172.30.215.248 [Port] 55504 [Flags] 2 [Guid] 3324848045 [EditorId] 3324848045 [Version] 1048832 [Id] OSXEditor(0,WhatnotMacBook-Pro-16-inch-2024-KDX49F6RHV) [Debug] 1 [PackageName] OSXEditor [ProjectName] Editor" 
+
+Player connection [8516968832]  * "[IP] 172.20.1.235 [Port] 55504 [Flags] 2 [Guid] 3324848045 [EditorId] 3324848045 [Version] 1048832 [Id] OSXEditor(0,WhatnotMacBook-Pro-16-inch-2024-KDX49F6RHV) [Debug] 1 [PackageName] OSXEditor [ProjectName] Editor" 
+
+Player connection [8516968832]  * "[IP] 7.8.30.36 [Port] 55504 [Flags] 2 [Guid] 3324848045 [EditorId] 3324848045 [Version] 1048832 [Id] OSXEditor(0,WhatnotMacBook-Pro-16-inch-2024-KDX49F6RHV) [Debug] 1 [PackageName] OSXEditor [ProjectName] Editor" 
+
+Player connection [8516968832] Host joined multi-casting on [225.0.0.222:54997]...
+Player connection [8516968832] Host joined alternative multi-casting on [225.0.0.222:34997]...
+Input System module state changed to: Initialized.
+[Physics::Module] Initialized fallback backend.
+[Physics::Module] Id: 0xdecafbad
+[Licensing::Client] Error: HandshakeResponse reported an error:
+	ResponseCode: 505
+	ResponseStatus: Unsupported protocol version '1.18.1'.
+[Licensing::Module] Error: Failed to handshake to channel: "LicenseClient-jiawei.zhou"
+[Licensing::IpcConnector] LicenseClient-jiawei.zhou channel disconnected successfully.
+[Licensing::IpcConnector] Channel LicenseClient-jiawei.zhou-6000.5.6 doesn't exist
+Launching external process: /Applications/Unity/Hub/Editor/6000.5.6f1/Unity.app/Contents/Helpers/UnityLicensingClient.app/Contents/MacOS/Unity.Licensing.Client
+[Licensing::Module] Successfully launched the LicensingClient (PId: 89443)
+[Package Manager] Connected to IPC stream "Upm-89437" after 0.1 seconds.
+[Licensing::Module] Licensing is not yet initialized.
+[Licensing::IpcConnector] Successfully connected to: "LicenseClient-jiawei.zhou-6000.5.6" at "2026-09-01T00:08:52.636511Z"
+[Licensing::Client] Handshaking with LicensingClient:
+  Version:                 1.18.1+9fbee8e
+  Session Id:              996b1cce84b74ca5808eaee3b7d189d0
+  Correlation Id:          fbba6a30bdc9550f8e25ddf0b54711fa
+  External correlation Id: 3640179061842648587
+  Machine Id:              /KH2BGG6vZf7t7D/yU/ppmcrnfI=
+[Licensing::Module] Successfully connected to LicensingClient on channel: "LicenseClient-jiawei.zhou-6000.5.6" (connect: 0.17s, validation: 0.02s, handshake: 0.19s)
+[Licensing::IpcConnector] Successfully connected to: "LicenseClient-jiawei.zhou-6000.5.6-notifications" at "2026-09-01T00:08:52.846501Z"
+[Licensing::Module] Connected to LicensingClient (PId: 89443, launch time: 0.00, total connection time: 0.38s)
+[Licensing::Module] Error: Access token is unavailable; failed to update
+[Licensing::Client] Successfully resolved entitlement details
+[Licensing::Module] License group:
+  Id: 18968260060310-UnityPersXXXX
+  Product: Unity Personal
+  Type: Assigned
+  Expiration: Unlimited
+[Licensing::Client] Successfully updated license, isAsync: True, time: 0.00
+[Licensing::Module] Licensing Background thread has ended after 0.59s
+[Licensing::Module] Licensing is initialized (took 0.37s).
+[Licensing::Client] Successfully resolved entitlement details
+Library Redirect Path: Library/
+[Physics::Module] Selected backend.
+[Physics::Module] Name: PhysX
+[Physics::Module] Id: 0xf2b8ea05
+[Physics::Module] SDK Version: 4.1.2
+[Physics::Module] Integration Version: 1.0.0
+[Physics::Module] Threading Mode: Multi-Threaded
+Initialize engine version: 6000.5.6f1 (0e0577a1a2ac)
+[Subsystems] Discovering subsystems at path /Applications/Unity/Hub/Editor/6000.5.6f1/Unity.app/Contents/Resources/UnitySubsystems
+[Subsystems] Discovering subsystems at path /private/tmp/FidgetingApp-PackOpening-R021-OpenMouth-20260901-r02/Assets
+GfxDevice: creating device client; kGfxThreadingModeNonThreaded
+ preferred device: Apple M4 Max (high power)
+Metal devices available: 1
+0: Apple M4 Max (high power)
+Using device Apple M4 Max (high power)
+Initializing Metal device caps: Apple M4 Max
+Mac GPU Family: 2
+Apple GPU Family: 9
+MSL Version: 3.0
+Has Float MSAA: 1
+Has Float Filtering: 1
+ReadWrite Texture Tier: 2
+Initialize mono
+Mono path[0] = '/Applications/Unity/Hub/Editor/6000.5.6f1/Unity.app/Contents/Resources/Scripting/Managed'
+Mono path[1] = '/Applications/Unity/Hub/Editor/6000.5.6f1/Unity.app/Contents/Resources/Scripting/BCLExtensions/runtime/netstandard2.1'
+Mono path[2] = '/Applications/Unity/Hub/Editor/6000.5.6f1/Unity.app/Contents/Resources/Scripting/MonoBleedingEdge/lib/mono/unityjit-macos'
+Mono config path = '/Applications/Unity/Hub/Editor/6000.5.6f1/Unity.app/Contents/Resources/Scripting/MonoBleedingEdge/etc'
+Using monoOptions --debugger-agent=transport=dt_socket,embedding=1,server=y,suspend=n,address=127.0.0.1:56437
+CodeReloadManager initialized
+ImportWorker Server TCP listen port: 0
+AcceleratorClientConnectionCallback - disconnected - :0
+Begin MonoManager ReloadAssembly
+Registering precompiled unity dll's ...
+Trying to register platform support module: /Applications/Unity/Hub/Editor/6000.5.6f1/PlaybackEngines/WebGLSupport/UnityEditor.WebGL.Extensions.dll (that doesn't exist). Retrying without overrides.
+Platform support module is not available: /Applications/Unity/Hub/Editor/6000.5.6f1/PlaybackEngines/WebGLSupport/UnityEditor.WebGL.Extensions.dll
+Register platform support module: /Applications/Unity/Hub/Editor/6000.5.6f1/PlaybackEngines/MacStandaloneSupport/UnityEditor.OSXStandalone.Extensions.dll
+[Licensing::Client] Successfully resolved entitlement details
+Register platform support module: /Applications/Unity/Hub/Editor/6000.5.6f1/PlaybackEngines/iOSSupport/UnityEditor.iOS.Extensions.dll
+Registered in 0.002138 seconds.
+[usbmuxd] Start listen thread
+[usbmuxd] Listen thread started
+[usbmuxd] Send listen message
+Native extension for iOS target not found
+Native extension for OSXStandalone target not found
+Package Manager log level set to [2]
+ScheduleIndexationOnStartup MainProcess:False IndexOnStartup:True
+Mono: successfully reloaded assembly
+- Finished resetting the current domain, in  0.266 seconds
+Domain Reload Profiling: 548ms
+	BeginReloadAssembly (79ms)
+		CreateAndSetChildDomain (18ms)
+	RebuildCommonClasses (3ms)
+	RebuildNativeTypeToScriptingClass (9ms)
+	initialDomainReloadingComplete (30ms)
+	LoadAllAssembliesAndSetupDomain (160ms)
+		LoadAssemblies (62ms)
+		AnalyzeDomain (122ms)
+			TypeCache.Refresh (121ms)
+				TypeCache.ScanAssembly (113ms)
+	FinalizeReload (267ms)
+		SetupLoadedEditorAssemblies (0ms)
+			InitializePlatformSupportModulesInManaged (41ms)
+			BeforeProcessingInitializeOnLoad (47ms)
+			ProcessInitializeOnLoadAttributes (54ms)
+			ProcessInitializeOnLoadMethodAttributes (84ms)
+[Licensing::Client] Successfully resolved entitlement details
+Application.AssetDatabase Initial Refresh Start
+[Package Manager] Restoring resolved packages state from cache
+[Licensing::Client] Successfully resolved entitlement details
+[Package Manager] Registered 21 packages:
+  Packages from [https://packages.unity.com]:
+    com.unity.searcher@4.9.4 (location: /private/tmp/FidgetingApp-PackOpening-R021-OpenMouth-20260901-r02/Library/PackageCache/com.unity.searcher@d45a78918735)
+    com.unity.burst@1.8.29 (location: /private/tmp/FidgetingApp-PackOpening-R021-OpenMouth-20260901-r02/Library/PackageCache/com.unity.burst@6bb9aca3ef38)
+    com.unity.nuget.mono-cecil@1.11.6 (location: /private/tmp/FidgetingApp-PackOpening-R021-OpenMouth-20260901-r02/Library/PackageCache/com.unity.nuget.mono-cecil@ecb9724e46ff)
+    com.unity.test-framework.performance@3.5.0 (location: /private/tmp/FidgetingApp-PackOpening-R021-OpenMouth-20260901-r02/Library/PackageCache/com.unity.test-framework.performance@8b56083ec0f0)
+  Built-in packages:
+    com.unity.render-pipelines.universal@17.5.0 (location: /private/tmp/FidgetingApp-PackOpening-R021-OpenMouth-20260901-r02/Library/PackageCache/com.unity.render-pipelines.universal@73b4c4ff130e)
+    com.unity.test-framework@1.7.0 (location: /private/tmp/FidgetingApp-PackOpening-R021-OpenMouth-20260901-r02/Library/PackageCache/com.unity.test-framework@1405238725ab)
+    com.unity.modules.imageconversion@1.0.0 (location: /private/tmp/FidgetingApp-PackOpening-R021-OpenMouth-20260901-r02/Library/PackageCache/com.unity.modules.imageconversion)
+    com.unity.modules.jsonserialize@1.0.0 (location: /private/tmp/FidgetingApp-PackOpening-R021-OpenMouth-20260901-r02/Library/PackageCache/com.unity.modules.jsonserialize)
+    com.unity.modules.physics@1.0.0 (location: /private/tmp/FidgetingApp-PackOpening-R021-OpenMouth-20260901-r02/Library/PackageCache/com.unity.modules.physics)
+    com.unity.modules.ui@1.0.0 (location: /private/tmp/FidgetingApp-PackOpening-R021-OpenMouth-20260901-r02/Library/PackageCache/com.unity.modules.ui)
+    com.unity.modules.uielements@1.0.0 (location: /private/tmp/FidgetingApp-PackOpening-R021-OpenMouth-20260901-r02/Library/PackageCache/com.unity.modules.uielements)
+    com.unity.modules.imgui@1.0.0 (location: /private/tmp/FidgetingApp-PackOpening-R021-OpenMouth-20260901-r02/Library/PackageCache/com.unity.modules.imgui)
+    com.unity.modules.hierarchycore@1.0.0 (location: /private/tmp/FidgetingApp-PackOpening-R021-OpenMouth-20260901-r02/Library/PackageCache/com.unity.modules.hierarchycore)
+    com.unity.modules.animation@1.0.0 (location: /private/tmp/FidgetingApp-PackOpening-R021-OpenMouth-20260901-r02/Library/PackageCache/com.unity.modules.animation)
+    com.unity.ext.nunit@2.1.0 (location: /private/tmp/FidgetingApp-PackOpening-R021-OpenMouth-20260901-r02/Library/PackageCache/com.unity.ext.nunit@44f7d31723bd)
+    com.unity.render-pipelines.core@17.5.0 (location: /private/tmp/FidgetingApp-PackOpening-R021-OpenMouth-20260901-r02/Library/PackageCache/com.unity.render-pipelines.core@645717f21c5f)
+    com.unity.shadergraph@17.5.0 (location: /private/tmp/FidgetingApp-PackOpening-R021-OpenMouth-20260901-r02/Library/PackageCache/com.unity.shadergraph@8d7376ec43ee)
+    com.unity.render-pipelines.universal-config@17.5.0 (location: /private/tmp/FidgetingApp-PackOpening-R021-OpenMouth-20260901-r02/Library/PackageCache/com.unity.render-pipelines.universal-config@fdda01c80fe3)
+    com.unity.collections@6.5.0 (location: /private/tmp/FidgetingApp-PackOpening-R021-OpenMouth-20260901-r02/Library/PackageCache/com.unity.collections@a43cabe808ca)
+    com.unity.modules.terrain@1.0.0 (location: /private/tmp/FidgetingApp-PackOpening-R021-OpenMouth-20260901-r02/Library/PackageCache/com.unity.modules.terrain)
+    com.unity.mathematics@1.4.0 (location: /private/tmp/FidgetingApp-PackOpening-R021-OpenMouth-20260901-r02/Library/PackageCache/com.unity.mathematics@981956d94fb6)
+[Subsystems] No new subsystems found in resolved package list.
+[Package Manager] Done registering packages in 0.01 seconds
+info: Microsoft.Hosting.Lifetime[14]
+      Now listening on: http://unix:/tmp/ilpp.sock-8b08618df39609a08791f56be94e14be
+info: Microsoft.Hosting.Lifetime[0]
+      Application started. Press Ctrl+C to shut down.
+info: Microsoft.Hosting.Lifetime[0]
+      Hosting environment: Production
+info: Microsoft.Hosting.Lifetime[0]
+      Content root path: /private/tmp/FidgetingApp-PackOpening-R021-OpenMouth-20260901-r02
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/2 POST http://ilpp/UnityILPP.PostProcessing/Ping - application/grpc -
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[0]
+      Executing endpoint 'gRPC - /UnityILPP.PostProcessing/Ping'
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[1]
+      Executed endpoint 'gRPC - /UnityILPP.PostProcessing/Ping'
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/2 POST http://ilpp/UnityILPP.PostProcessing/Ping - 200 - application/grpc 22.8839ms
+Starting: /Applications/Unity/Hub/Editor/6000.5.6f1/Unity.app/Contents/Resources/BuildPipeline/bee_backend --ipc --defer-dag-verification --dagfile="Library/Bee/200b0aE.dag" --continue-on-failure --profile="Library/Bee/backend1.traceevents" ScriptAssemblies
+WorkingDir: /private/tmp/FidgetingApp-PackOpening-R021-OpenMouth-20260901-r02
+DisplayProgressbar: Compiling Scripts
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/2 POST http://ilpp/UnityILPP.PostProcessing/ConfigurePostProcessors - application/grpc -
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[0]
+      Executing endpoint 'gRPC - /UnityILPP.PostProcessing/ConfigurePostProcessors'
+warn: Unity.ILPP.Runner.PostProcessingAssemblyLoadContext[0]
+      Assembly unityeditor.ios.extensions.xcode has duplicate hint path. Ignoring "/Applications/Unity/Hub/Editor/6000.5.6f1/PlaybackEngines/iOSSupport/UnityEditor.iOS.Extensions.Xcode.dll" in favor of "/Applications/Unity/Hub/Editor/6000.5.6f1/PlaybackEngines/MacStandaloneSupport/UnityEditor.iOS.Extensions.Xcode.dll"
+warn: Unity.ILPP.Runner.PostProcessingAssemblyLoadContext[0]
+      Assembly system.runtime.interopservices.windowsruntime has duplicate hint path. Ignoring "/Applications/Unity/Hub/Editor/6000.5.6f1/Unity.app/Contents/Resources/Scripting/UnityReferenceAssemblies/unity-4.8-api/Facades/System.Runtime.InteropServices.WindowsRuntime.dll" in favor of "/Applications/Unity/Hub/Editor/6000.5.6f1/Unity.app/Contents/Resources/Scripting/NetStandard/Extensions/2.0.0/System.Runtime.InteropServices.WindowsRuntime.dll"
+warn: Unity.ILPP.Runner.PostProcessingAssemblyLoadContext[0]
+      Assembly system.componentmodel.composition has duplicate hint path. Ignoring "/Applications/Unity/Hub/Editor/6000.5.6f1/Unity.app/Contents/Resources/Scripting/UnityReferenceAssemblies/unity-4.8-api/System.ComponentModel.Composition.dll" in favor of "/Applications/Unity/Hub/Editor/6000.5.6f1/Unity.app/Contents/Resources/Scripting/NetStandard/compat/2.1.0/shims/netfx/System.ComponentModel.Composition.dll"
+info: Unity.ILPP.Runner.PostProcessingAssemblyLoadContext[0]
+      Resolved Unity.Burst.Cecil, Version=0.11.6.0, Culture=neutral, PublicKeyToken=50cebf1cceb9d05e with Library/PackageCache/com.unity.burst@6bb9aca3ef38/Unity.Burst.CodeGen/Unity.Burst.Cecil.dll
+info: Unity.ILPP.Runner.PostProcessingAssemblyLoadContext[0]
+      Resolved Mono.Cecil, Version=0.11.5.0, Culture=neutral, PublicKeyToken=50cebf1cceb9d05e with Library/PackageCache/com.unity.nuget.mono-cecil@ecb9724e46ff/Mono.Cecil.dll
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[1]
+      Executed endpoint 'gRPC - /UnityILPP.PostProcessing/ConfigurePostProcessors'
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/2 POST http://ilpp/UnityILPP.PostProcessing/ConfigurePostProcessors - 200 - application/grpc 15.5100ms
+ExitCode: 0 Duration: 0s301ms
+[432/535    0s] ILPP-Configuration Library/ilpp-configuration.nevergeneratedoutput
+*** Tundra build success (0.28 seconds), 1 items updated, 535 evaluated
+AssetDatabase: script compilation time: 0.760047s
+Begin MonoManager ReloadAssembly
+Total cache size 267909600
+Total cache size after purge 267909600, took 00:00:00.0884461
+Native extension for iOS target not found
+Native extension for OSXStandalone target not found
+ScheduleIndexationOnStartup MainProcess:True IndexOnStartup:True
+Mono: successfully reloaded assembly
+- Finished resetting the current domain, in  1.496 seconds
+Domain Reload Profiling: 1813ms
+	BeginReloadAssembly (112ms)
+		DisableScriptedObjects (10ms)
+		CreateAndSetChildDomain (37ms)
+	RebuildCommonClasses (5ms)
+	RebuildNativeTypeToScriptingClass (9ms)
+	initialDomainReloadingComplete (21ms)
+	LoadAllAssembliesAndSetupDomain (171ms)
+		LoadAssemblies (107ms)
+		AnalyzeDomain (56ms)
+			TypeCache.Refresh (41ms)
+				TypeCache.ScanAssembly (36ms)
+			BuildScriptInfoCaches (11ms)
+	FinalizeReload (1496ms)
+		SetupLoadedEditorAssemblies (0ms)
+			InitializePlatformSupportModulesInManaged (8ms)
+			BeforeProcessingInitializeOnLoad (45ms)
+			ProcessInitializeOnLoadAttributes (1127ms)
+			ProcessInitializeOnLoadMethodAttributes (200ms)
+		AwakeInstancesAfterBackupRestoration (9ms)
+Starting new worker id: 0 with log in /private/tmp/FidgetingApp-PackOpening-R021-OpenMouth-20260901-r02/Logs/AssetImportWorkerHW0.log
+
+Asset Pipeline Refresh (id=3dba804e9c28745fcb52bb578c573de2): Total: 3.055 seconds - Initiated by InitialRefreshV2(ForceSynchronousImport)
+	(Values over 0.05ms)
+	Summary:
+		Imports: total=0 (actual=0, local cache=0, cache server=0)
+		Asset DB Process Time: managed=0 ms, native=1812 ms
+		Asset DB Callback time: managed=124 ms, native=8 ms
+		Scripting: domain reloads=1, domain reload time=331 ms, compile time=765 ms, other=13 ms
+		Project Asset Count: scripts=689, non-scripts=1389
+		Asset File Changes: new=0, changed=0, moved=0, deleted=0
+		Scan Filter Count: 1
+	InvokePackagesCallback: 9.017ms
+	ApplyChangesToAssetFolders: 0.099ms
+	Scan: 185.265ms
+	Collect global state as custom dependencies: 13.284ms
+	CategorizeScriptCompilationAssets: 9.708ms
+	ProcessAssetsWithTransientArtifactChanges: 15.764ms
+	CategorizeAssets: 22.201ms
+	CompileScripts: 764.729ms
+	ImportOutOfDateAssets: 1521.944ms (1500.950ms without children)
+		UnloadImportedAssets: 1.208ms
+		EnsureUptoDateAssetsAreRegisteredWithGuidPM: 0.215ms
+		ImportSchedulerStart: 19.541ms
+	PostProcessAllAssets: 124.395ms
+		MonoPostProcessAllAssets: 124.371ms
+			UniversalRenderPipelineGlobalSettingsPostprocessor.OnPostprocessAllAssets 49.461ms
+			TerrainToolbarOverlayPostProcessor.OnPostprocessAllAssets 13.979ms
+			SpeedTree9Postprocessor.OnPostprocessAllAssets 3.334ms
+			WindowAssetPostprocessingWatcher.OnPostprocessAllAssets 0.911ms
+			EditModeScopePostprocessor.OnPostprocessAllAssets 0.730ms
+			SyncVS.PostprocessSyncProject 0.655ms
+			RenderPipelineGlobalSettingsPostprocessor.OnPostprocessAllAssets 0.304ms
+			ShaderReflectionAssetPostProcessor.OnPostprocessAllAssets 0.166ms
+			ReferencedClipsPostProcessor.OnPostprocessAllAssets 0.125ms
+			AssetDatabaseCallbacks.OnPostprocessAllAssets 0.062ms
+	UnloadStreamsBegin: 0.678ms
+	GenerateScriptTypeHashes: 0.664ms
+	GenerateScriptTypeSerializationHashes: 1.182ms
+	Untracked: 386.247ms
+
+Application.AssetDatabase Initial Refresh End
+Shader Hidden/ChartRasterizerHardware is not supported: GPU does not support conservative rasterization
+Launching external process: /Applications/Unity/Hub/Editor/6000.5.6f1/Unity.app/Contents/Helpers/UnityShaderCompiler
+Launched and connected shader compiler UnityShaderCompiler after 0.06 seconds
+Shader Hidden/ChartRasterizerHardware is not supported: GPU does not support conservative rasterization
+Scanning for USB devices : 0.033ms
+Initializing Unity extensions:
+[MODES] ModeService[none].Initialize
+[MODES] ModeService[none].LoadModes
+[MODES] Loading mode Default (0) for mode-current-id-FidgetingApp-PackOpening-R014-Isolated-20260831
+Unloading 81 Unused Serialized files (Serialized files now loaded: 0)
+Unloading 2872 unused Assets / (10.8 MB). Loaded Objects now: 3671.
+Memory consumption went from 215.4 MB to 204.7 MB.
+Total: 7.579208 ms (FindLiveObjects: 0.154458 ms CreateObjectMapping: 0.402208 ms MarkObjects: 4.144792 ms  DeleteObjects: 2.877292 ms)
+
+[Project] Loading completed in 4.832 seconds
+	Project init time: 				4.598 seconds
+		Template init time: 		0.000 seconds
+		Package Manager init time: 		0.492 seconds
+		Asset Database init time: 		0.129 seconds
+		Global illumination init time: 	0.001 seconds
+		Assemblies load time: 			0.590 seconds
+		Unity extensions init time: 	0.008 seconds
+		Asset Database refresh time: 	3.055 seconds
+	Scene opening time: 			0.157 seconds
+##utp:{"type":"ProjectInfo","version":2,"phase":"Immediate","time":1788221337096,"processId":89437,"projectLoad":4.832429708,"projectInit":4.59836425,"templateInit":0.0,"packageManagerInit":0.49237875,"assetDatabaseInit":0.128634583,"globalIlluminationInit":0.000563833,"assembliesLoad":0.589919,"unityExtensionsInit":0.00794275,"assetDatabaseRefresh":3.055187125,"sceneOpening":0.1567755}
+##utp:{"type":"EditorInfo","version":2,"phase":"Immediate","time":1788221337096,"processId":89437,"editorVersion":"6000.5.6f1 (0e0577a1a2ac)","branch":"6000.5/staging","buildType":"Release","platform":"OSX"}
+Subscribe to USB device events
+[Licensing::Client] Successfully resolved entitlement details
+Running tests for ExecutionSettings with details:
+targetPlatform = 
+playerHeartbeatTimeout = 600
+filters[0] = 
+   Filter with settings:
+   testMode = EditMode
+   targetPlatform = 
+   testNames = null
+   groupNames = FidgetingApp.DisplayCase.IsolatedCandidate.R021.Tests.IsolatedR021ProofTests
+   categoryNames = null
+   assemblyNames = null
+ignoreTests = {}
+featureFlags = null
+
+UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+UnityEngine.StackTraceUtility:ExtractStackTrace () (at /Users/bokken/build/output/unity/unity/Runtime/Export/Scripting/StackTrace.cs:35)
+UnityEngine.DebugLogHandler:Internal_Log (UnityEngine.LogType,UnityEngine.LogOption,string,UnityEngine.Object)
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
+UnityEngine.Logger:Log (UnityEngine.LogType,object)
+UnityEngine.Debug:Log (object)
+UnityEditor.TestTools.TestRunner.CommandLineTest.Executer:InitializeAndExecuteRun (string[]) (at ./Library/PackageCache/com.unity.test-framework@1405238725ab/UnityEditor.TestRunner/CommandLineTest/Executer.cs:53)
+UnityEditor.TestTools.TestRunner.CommandLineTest.TestStarter:InitializeAndExecuteRun () (at ./Library/PackageCache/com.unity.test-framework@1405238725ab/UnityEditor.TestRunner/CommandLineTest/TestStarter.cs:64)
+UnityEditor.EditorApplication:Internal_CallUpdateFunctions () (at /Users/bokken/build/output/unity/unity/Editor/Mono/EditorApplication.cs:403)
+
+(Filename: ./Library/PackageCache/com.unity.test-framework@1405238725ab/UnityEditor.TestRunner/CommandLineTest/Executer.cs Line: 53)
+
+Start Indexing on Editor startup
+[Indexing] Starting Initial Indexing for Assets
+[UnityConnectServicesConfig] config is NOT valid, switching to default
+Created GICache directory at /Users/jiawei.zhou/Library/Caches/com.unity3d.UnityEditor/GiCache. Took: 0.003s, timestamps: [4.835 - 4.838]
+Starting new worker id: 1 with log in /private/tmp/FidgetingApp-PackOpening-R021-OpenMouth-20260901-r02/Logs/AssetImportWorkerHW1.log
+Unloading 2 Unused Serialized files (Serialized files now loaded: 0)
+Unloading 0 unused Assets / (59.1 KB). Loaded Objects now: 3696.
+Memory consumption went from 186.4 MB to 186.3 MB.
+Total: 5.191042 ms (FindLiveObjects: 0.099875 ms CreateObjectMapping: 0.159250 ms MarkObjects: 4.925583 ms  DeleteObjects: 0.006042 ms)
+
+Executing IPrebuildSetup for: Unity.PerformanceTesting.Editor.TestRunBuilder.
+UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+UnityEngine.StackTraceUtility:ExtractStackTrace () (at /Users/bokken/build/output/unity/unity/Runtime/Export/Scripting/StackTrace.cs:35)
+UnityEngine.DebugLogHandler:Internal_Log (UnityEngine.LogType,UnityEngine.LogOption,string,UnityEngine.Object)
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
+UnityEngine.Logger:Log (UnityEngine.LogType,object)
+UnityEngine.Debug:Log (object)
+UnityEditor.TestTools.TestRunner.TestRun.Tasks.BuildActionTaskBase`1/<ExecuteMethods>d__8<UnityEngine.TestTools.IPrebuildSetup>:MoveNext () (at ./Library/PackageCache/com.unity.test-framework@1405238725ab/UnityEditor.TestRunner/TestRun/Tasks/BuildActionTaskBase.cs:48)
+UnityEditor.TestTools.TestRunner.TestRun.Tasks.BuildActionTaskBase`1/<Execute>d__7<UnityEngine.TestTools.IPrebuildSetup>:MoveNext () (at ./Library/PackageCache/com.unity.test-framework@1405238725ab/UnityEditor.TestRunner/TestRun/Tasks/BuildActionTaskBase.cs:34)
+UnityEditor.TestTools.TestRunner.TestRun.TestJobRunner:ExecuteStep () (at ./Library/PackageCache/com.unity.test-framework@1405238725ab/UnityEditor.TestRunner/TestRun/TestJobRunner.cs:194)
+UnityEditor.TestTools.TestRunner.TestRun.TestJobRunner:ExecuteCallback () (at ./Library/PackageCache/com.unity.test-framework@1405238725ab/UnityEditor.TestRunner/TestRun/TestJobRunner.cs:129)
+UnityEditor.EditorApplication:Internal_CallUpdateFunctions () (at /Users/bokken/build/output/unity/unity/Editor/Mono/EditorApplication.cs:403)
+
+(Filename: ./Library/PackageCache/com.unity.test-framework@1405238725ab/UnityEditor.TestRunner/TestRun/Tasks/BuildActionTaskBase.cs Line: 48)
+
+Unloading 5 Unused Serialized files (Serialized files now loaded: 0)
+Worker ready: AssetImportWorkerHW0 0
+Unloading 99 unused Assets / (Unknown). Loaded Objects now: 3690.
+Memory consumption went from 184.8 MB to 184.9 MB.
+Total: 5.387584 ms (FindLiveObjects: 0.065667 ms CreateObjectMapping: 0.163500 ms MarkObjects: 4.992708 ms  DeleteObjects: 0.165292 ms)
+
+Importing 'GUID: 00000000000000006100000000000000 - Path: ProjectSettings/GraphicsSettings.asset' with importer (LibraryAssetImporter)
+Imported 'GUID: 00000000000000006100000000000000' -> (Import Result ID: '4787024ee73fa58306346bec2c3af913') in 0.002 seconds [static dependencies only]. Details - ImportResultOutputID=f9600466f06a676b7a4f639f6629ea48 DependenciesID=2ed5ce1286c319310b08155006ddd94f StaticDependenciesID=a9b48db2457849959ad7d42423869093 
+Asset Pipeline Refresh (id=d96b910df6fb94a2b9e7212360595d78): Total: 0.076 seconds - Initiated by StopAssetImportingV2(NoUpdateAssetOptions)
+Importing 'GUID: e335a31b67248411eb835cfff60daf06 - Path: Assets/IsolatedProofR021/Generated/PackOpeningGate04R021Isolated.unity' with importer (DefaultImporter)
+Imported 'GUID: e335a31b67248411eb835cfff60daf06' -> (Import Result ID: '37612c2455467b6982835d002c994a18') in 0.001 seconds [static dependencies only]. Details - ImportResultOutputID=363d316dab6b73f40d742c8e28c6eb28 DependenciesID=ce7063667d51fd41fb6040fa1884fb45 StaticDependenciesID=28a1fafacf7a933285ef30960f229ce6 
+Asset Pipeline Refresh (id=c209e67788790446e9e3b6cb80e75ece): Total: 0.040 seconds - Initiated by StopAssetImportingV2(NoUpdateAssetOptions)
+Unloading 26 Unused Serialized files (Serialized files now loaded: 0)
+Unloading 290 unused Assets / (0.5 MB). Loaded Objects now: 3700.
+Memory consumption went from 197.8 MB to 197.3 MB.
+Total: 5.485041 ms (FindLiveObjects: 0.081750 ms CreateObjectMapping: 0.178667 ms MarkObjects: 4.845458 ms  DeleteObjects: 0.378958 ms)
+
+Importing 'GUID: 00000000000000006100000000000000 - Path: ProjectSettings/GraphicsSettings.asset' with importer (LibraryAssetImporter)
+Imported 'GUID: 00000000000000006100000000000000' -> (Import Result ID: '4787024ee73fa58306346bec2c3af913') in 0.001 seconds [static dependencies only]. Details - ImportResultOutputID=f9600466f06a676b7a4f639f6629ea48 DependenciesID=2ed5ce1286c319310b08155006ddd94f StaticDependenciesID=a9b48db2457849959ad7d42423869093 
+Asset Pipeline Refresh (id=a5e9bdbb9fb54481aa67cbbedaed90aa): Total: 0.026 seconds - Initiated by StopAssetImportingV2(NoUpdateAssetOptions)
+Importing 'GUID: e335a31b67248411eb835cfff60daf06 - Path: Assets/IsolatedProofR021/Generated/PackOpeningGate04R021Isolated.unity' with importer (DefaultImporter)
+Imported 'GUID: e335a31b67248411eb835cfff60daf06' -> (Import Result ID: '37612c2455467b6982835d002c994a18') in 0.001 seconds [static dependencies only]. Details - ImportResultOutputID=363d316dab6b73f40d742c8e28c6eb28 DependenciesID=ce7063667d51fd41fb6040fa1884fb45 StaticDependenciesID=28a1fafacf7a933285ef30960f229ce6 
+Asset Pipeline Refresh (id=fac8349bda44042e9b15cca20be3bb81): Total: 0.025 seconds - Initiated by StopAssetImportingV2(NoUpdateAssetOptions)
+Unloading 24 Unused Serialized files (Serialized files now loaded: 0)
+Unloading 290 unused Assets / (0.5 MB). Loaded Objects now: 3700.
+Memory consumption went from 189.5 MB to 189.0 MB.
+Total: 5.382417 ms (FindLiveObjects: 0.063959 ms CreateObjectMapping: 0.165959 ms MarkObjects: 4.764083 ms  DeleteObjects: 0.387917 ms)
+
+Importing 'GUID: 00000000000000006100000000000000 - Path: ProjectSettings/GraphicsSettings.asset' with importer (LibraryAssetImporter)
+Imported 'GUID: 00000000000000006100000000000000' -> (Import Result ID: '4787024ee73fa58306346bec2c3af913') in 0.001 seconds [static dependencies only]. Details - ImportResultOutputID=f9600466f06a676b7a4f639f6629ea48 DependenciesID=2ed5ce1286c319310b08155006ddd94f StaticDependenciesID=a9b48db2457849959ad7d42423869093 
+Asset Pipeline Refresh (id=9481abb645144406d9e6ba9bfaf3beca): Total: 0.025 seconds - Initiated by StopAssetImportingV2(NoUpdateAssetOptions)
+Importing 'GUID: e335a31b67248411eb835cfff60daf06 - Path: Assets/IsolatedProofR021/Generated/PackOpeningGate04R021Isolated.unity' with importer (DefaultImporter)
+Imported 'GUID: e335a31b67248411eb835cfff60daf06' -> (Import Result ID: '37612c2455467b6982835d002c994a18') in 0.001 seconds [static dependencies only]. Details - ImportResultOutputID=363d316dab6b73f40d742c8e28c6eb28 DependenciesID=ce7063667d51fd41fb6040fa1884fb45 StaticDependenciesID=28a1fafacf7a933285ef30960f229ce6 
+Asset Pipeline Refresh (id=8be87f161dd4749759d9af5e5d373bf7): Total: 0.024 seconds - Initiated by StopAssetImportingV2(NoUpdateAssetOptions)
+Unloading 24 Unused Serialized files (Serialized files now loaded: 0)
+Unloading 290 unused Assets / (0.5 MB). Loaded Objects now: 3700.
+Memory consumption went from 189.3 MB to 188.8 MB.
+Total: 5.440667 ms (FindLiveObjects: 0.073250 ms CreateObjectMapping: 0.173834 ms MarkObjects: 4.867334 ms  DeleteObjects: 0.325583 ms)
+
+Importing 'GUID: 00000000000000006100000000000000 - Path: ProjectSettings/GraphicsSettings.asset' with importer (LibraryAssetImporter)
+Imported 'GUID: 00000000000000006100000000000000' -> (Import Result ID: '4787024ee73fa58306346bec2c3af913') in 0.001 seconds [static dependencies only]. Details - ImportResultOutputID=f9600466f06a676b7a4f639f6629ea48 DependenciesID=2ed5ce1286c319310b08155006ddd94f StaticDependenciesID=a9b48db2457849959ad7d42423869093 
+Asset Pipeline Refresh (id=7dba9835960634853846990ffeadff6c): Total: 0.026 seconds - Initiated by StopAssetImportingV2(NoUpdateAssetOptions)
+Importing 'GUID: e335a31b67248411eb835cfff60daf06 - Path: Assets/IsolatedProofR021/Generated/PackOpeningGate04R021Isolated.unity' with importer (DefaultImporter)
+Imported 'GUID: e335a31b67248411eb835cfff60daf06' -> (Import Result ID: '9c7fc17ed637651ba3f25cc0648fb9f1') in 0.001 seconds [static dependencies only]. Details - ImportResultOutputID=363d316dab6b73f40d742c8e28c6eb28 DependenciesID=645d4d7bce129e6a75fe5fa424206a6f StaticDependenciesID=d8730d1505c73ba3bd38248c8b7c674f 
+Asset Pipeline Refresh (id=b410ae127864a4da78762a3b545de575): Total: 0.036 seconds - Initiated by StopAssetImportingV2(NoUpdateAssetOptions)
+Unloading 24 Unused Serialized files (Serialized files now loaded: 0)
+Unloading 290 unused Assets / (0.5 MB). Loaded Objects now: 3700.
+Memory consumption went from 189.5 MB to 188.9 MB.
+Total: 5.214709 ms (FindLiveObjects: 0.063750 ms CreateObjectMapping: 0.165667 ms MarkObjects: 4.602833 ms  DeleteObjects: 0.382292 ms)
+
+Importing 'GUID: 00000000000000006100000000000000 - Path: ProjectSettings/GraphicsSettings.asset' with importer (LibraryAssetImporter)
+Imported 'GUID: 00000000000000006100000000000000' -> (Import Result ID: '4787024ee73fa58306346bec2c3af913') in 0.001 seconds [static dependencies only]. Details - ImportResultOutputID=f9600466f06a676b7a4f639f6629ea48 DependenciesID=2ed5ce1286c319310b08155006ddd94f StaticDependenciesID=a9b48db2457849959ad7d42423869093 
+Asset Pipeline Refresh (id=45bb373e7a09c4b6e9efe0236feb88b6): Total: 0.025 seconds - Initiated by StopAssetImportingV2(NoUpdateAssetOptions)
+Importing 'GUID: e335a31b67248411eb835cfff60daf06 - Path: Assets/IsolatedProofR021/Generated/PackOpeningGate04R021Isolated.unity' with importer (DefaultImporter)
+Imported 'GUID: e335a31b67248411eb835cfff60daf06' -> (Import Result ID: '9c7fc17ed637651ba3f25cc0648fb9f1') in 0.001 seconds [static dependencies only]. Details - ImportResultOutputID=363d316dab6b73f40d742c8e28c6eb28 DependenciesID=645d4d7bce129e6a75fe5fa424206a6f StaticDependenciesID=d8730d1505c73ba3bd38248c8b7c674f 
+Asset Pipeline Refresh (id=c38f4c13c5dd44ebbbcb1184c92e778b): Total: 0.024 seconds - Initiated by StopAssetImportingV2(NoUpdateAssetOptions)
+Saving results to: /Users/jiawei.zhou/Library/Application Support/DefaultCompany/FidgetingApp-PackOpening-R014-Isolated-20260831/TestResults.xml
+Saving results to: /tmp/FidgetingApp-PackOpening-R021-OpenMouth-20260901-r02/r021-editmode-results-actual.xml
+Executing IPostBuildCleanup for: Unity.PerformanceTesting.Editor.TestRunBuilder.
+UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+UnityEngine.StackTraceUtility:ExtractStackTrace () (at /Users/bokken/build/output/unity/unity/Runtime/Export/Scripting/StackTrace.cs:35)
+UnityEngine.DebugLogHandler:Internal_Log (UnityEngine.LogType,UnityEngine.LogOption,string,UnityEngine.Object)
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
+UnityEngine.Logger:Log (UnityEngine.LogType,object)
+UnityEngine.Debug:Log (object)
+UnityEditor.TestTools.TestRunner.TestRun.Tasks.BuildActionTaskBase`1/<ExecuteMethods>d__8<UnityEngine.TestTools.IPostBuildCleanup>:MoveNext () (at ./Library/PackageCache/com.unity.test-framework@1405238725ab/UnityEditor.TestRunner/TestRun/Tasks/BuildActionTaskBase.cs:48)
+UnityEditor.TestTools.TestRunner.TestRun.Tasks.BuildActionTaskBase`1/<Execute>d__7<UnityEngine.TestTools.IPostBuildCleanup>:MoveNext () (at ./Library/PackageCache/com.unity.test-framework@1405238725ab/UnityEditor.TestRunner/TestRun/Tasks/BuildActionTaskBase.cs:34)
+UnityEditor.TestTools.TestRunner.TestRun.TestJobRunner:ExecuteStep () (at ./Library/PackageCache/com.unity.test-framework@1405238725ab/UnityEditor.TestRunner/TestRun/TestJobRunner.cs:194)
+UnityEditor.TestTools.TestRunner.TestRun.TestJobRunner:ExecuteCallback () (at ./Library/PackageCache/com.unity.test-framework@1405238725ab/UnityEditor.TestRunner/TestRun/TestJobRunner.cs:129)
+UnityEditor.EditorApplication:Internal_CallUpdateFunctions () (at /Users/bokken/build/output/unity/unity/Editor/Mono/EditorApplication.cs:403)
+
+(Filename: ./Library/PackageCache/com.unity.test-framework@1405238725ab/UnityEditor.TestRunner/TestRun/Tasks/BuildActionTaskBase.cs Line: 48)
+
+Unloading 22 Unused Serialized files (Serialized files now loaded: 0)
+Unloading 297 unused Assets / (0.5 MB). Loaded Objects now: 3697.
+Memory consumption went from 189.8 MB to 189.3 MB.
+Total: 5.723709 ms (FindLiveObjects: 0.070084 ms CreateObjectMapping: 0.187750 ms MarkObjects: 4.831334 ms  DeleteObjects: 0.634167 ms)
+
+DisplayProgressbar: Undo
+Test run completed. Exiting with code 0 (Ok). Run completed.
+UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+UnityEngine.StackTraceUtility:ExtractStackTrace () (at /Users/bokken/build/output/unity/unity/Runtime/Export/Scripting/StackTrace.cs:35)
+UnityEngine.DebugLogHandler:Internal_Log (UnityEngine.LogType,UnityEngine.LogOption,string,UnityEngine.Object)
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
+UnityEngine.Logger:Log (UnityEngine.LogType,object)
+UnityEngine.Debug:Log (object)
+UnityEditor.TestTools.TestRunner.CommandLineTest.Executer:ExitApplication (UnityEditor.TestTools.TestRunner.CommandLineTest.Executer/ReturnCodes,string) (at ./Library/PackageCache/com.unity.test-framework@1405238725ab/UnityEditor.TestRunner/CommandLineTest/Executer.cs:81)
+UnityEditor.TestTools.TestRunner.CommandLineTest.Executer:ExitIfRunIsCompleted () (at ./Library/PackageCache/com.unity.test-framework@1405238725ab/UnityEditor.TestRunner/CommandLineTest/Executer.cs:74)
+UnityEditor.EditorApplication:Internal_CallUpdateFunctions () (at /Users/bokken/build/output/unity/unity/Editor/Mono/EditorApplication.cs:403)
+
+(Filename: ./Library/PackageCache/com.unity.test-framework@1405238725ab/UnityEditor.TestRunner/CommandLineTest/Executer.cs Line: 81)
+
+MonoPathRemapper: Attempts to remap: 32969; Successful remaps: 13258
+Serialized file version minimum: 22, current 23
+Thread 0x3316c7000 may have been prematurely finalized
+Input System module state changed to: ShutdownInProgress.
+Input Polling Thread exited.
+Input System module state changed to: Shutdown.
+Worker ready: AssetImportWorkerHW1 1
+Shutting down MSBuild server...
+Shutting down VB/C# compiler server...
+[Physics::Module] Cleanup current backend.
+[Physics::Module] Id: 0xf2b8ea05
+[Licensing::IpcConnector] LicenseClient-jiawei.zhou-6000.5.6-notifications channel disconnected successfully.
+[Licensing::IpcConnector] LicenseClient-jiawei.zhou-6000.5.6 channel disconnected successfully.
+Thread 0x16c783000 may have been prematurely finalized
+Thread 0x16c80f000 may have been prematurely finalized
+Thread 0x16c89b000 may have been prematurely finalized
+Thread 0x16c9b3000 may have been prematurely finalized
+Thread 0x16ca3f000 may have been prematurely finalized
+Thread 0x16c927000 may have been prematurely finalized
+Thread 0x16cacb000 may have been prematurely finalized
+Thread 0x16cb57000 may have been prematurely finalized
+VB/C# compiler server shut down successfully.
+MSBuild server shut down successfully.
+AcceleratorClientConnectionCallback - disconnected - :0
+Thread 0x17673f000 may have been prematurely finalized
+Cleanup mono
+CodeReloadManager destroyed
+info: Microsoft.Hosting.Lifetime[0]
+      Application is shutting down...
+info: Unity.ILPP.Runner.PostProcessingAssemblyLoadContext[0]
+      ALC ILPP context 1 is unloading
+debugger-agent: Unable to listen on 34
+[usbmuxd] Stop listen thread
+[usbmuxd] Error: 
+[usbmuxd] Listen thread exiting

@@ -1,0 +1,117 @@
+{
+  "status": "gate05-06-rev-004-draft-visual-approval-pending",
+  "provisional": true,
+  "renderEngine": "CYCLES/METAL 96spp denoised; blockout=WORKBENCH",
+  "source": "unity/FidgetingApp/ArtSource/UnifiedTriSpinner/UnifiedTriSpinner.blend",
+  "fbx": "unity/FidgetingApp/ArtSource/UnifiedTriSpinner/UnifiedTriSpinner.fbx",
+  "glb": "unity/FidgetingApp/ArtSource/UnifiedTriSpinner/UnifiedTriSpinner.glb",
+  "collisionFbx": "unity/FidgetingApp/ArtSource/UnifiedTriSpinner/UnifiedTriSpinner_Collision.fbx",
+  "contract": {
+    "widthMm": 65.0,
+    "bladeThicknessMm": 11.5,
+    "capRatio": 0.536,
+    "tableRatio": 0.7,
+    "tableAboveBladeFaceMm": 1.5,
+    "wedgeRingSlopeDeg": 25.0,
+    "wedges": 24,
+    "rimZigzagMm": 0.55,
+    "rimMeanBelowBladeFaceMm": 0.94,
+    "seamWidthMm": 0.8,
+    "counterboreRadiusMm": 18.22,
+    "notchVDeg": 60.0,
+    "tipArcRadiusMm": 12.0,
+    "bladeMaxHalfWidthMm": 16.43,
+    "roofSlopeDeg": 10.2,
+    "endPlaneSlopeDeg": 32.0,
+    "sideWallHeightAtWidestMm": 5.59,
+    "bladeBevelMm": 0.5,
+    "bladeBevelSegments": 2,
+    "bearing": "R188 12.7x6.35x4.76 hidden"
+  },
+  "measured": {
+    "tipCircleDiameterMm": 64.99999830976105,
+    "boundingWidthMm": 59.50704216957092,
+    "assembledDepthMm": 14.499999582767487,
+    "bladeTopZMm": 5.750000011175871,
+    "capDiameterMm": 34.541938453912735,
+    "capRatioActual": 0.5314144515712329,
+    "capTopAboveBladeFaceMm": 1.4999997802078724,
+    "notchApexRadiusMm": 18.22,
+    "hubVisibleInTopView": false,
+    "triangleCount": 5864,
+    "bodyAudit": {
+      "vertices": 1614,
+      "faces": 1263,
+      "boundaryEdges": 0,
+      "nonManifoldEdges": 0,
+      "zeroAreaFaces": 0
+    },
+    "bodyStepAudits": {
+      "Blade_01-counterbored": {
+        "vertices": 410,
+        "faces": 293,
+        "boundaryEdges": 0,
+        "nonManifoldEdges": 0,
+        "zeroAreaFaces": 0
+      },
+      "Blade_02-counterbored": {
+        "vertices": 410,
+        "faces": 293,
+        "boundaryEdges": 0,
+        "nonManifoldEdges": 0,
+        "zeroAreaFaces": 0
+      },
+      "Blade_03-counterbored": {
+        "vertices": 410,
+        "faces": 293,
+        "boundaryEdges": 0,
+        "nonManifoldEdges": 0,
+        "zeroAreaFaces": 0
+      }
+    },
+    "petalHullAudit": {
+      "vertices": 290,
+      "faces": 253,
+      "boundaryEdges": 0,
+      "nonManifoldEdges": 0,
+      "zeroAreaFaces": 0
+    },
+    "petalLargeTopPlanesBeforeUnion": 3,
+    "bodyLargeTopPlanesPerBlade": {
+      "blade@90": 4,
+      "blade@210": 4,
+      "blade@330": 4
+    },
+    "capAudit": {
+      "vertices": 74,
+      "faces": 144,
+      "boundaryEdges": 0,
+      "nonManifoldEdges": 0,
+      "zeroAreaFaces": 0
+    },
+    "wedgeRing": {
+      "wedgeTriangles": 48,
+      "wedges": 24,
+      "tipsPointingOutward": 24,
+      "tipsPointingInward": 24,
+      "adjacentNormalAngleMinDeg": 9.28,
+      "adjacentNormalAngleMaxDeg": 16.07,
+      "faceSlopeMinDeg": 19.5,
+      "faceSlopeMaxDeg": 29.3,
+      "tableMaxTiltDeg": 0.0,
+      "tableIsHighestPoint": true
+    }
+  },
+  "forbidden": {
+    "brightAnnulusBetweenCapAndBody": false,
+    "materialFakedFacets": false,
+    "smoothByAngleOnFacets": false,
+    "smoothShadedCurvedSideWallsOnly": true,
+    "subdivision": false,
+    "randomScales": false,
+    "bladePockets": false,
+    "anisotropyOnWedges": false,
+    "hubCollarOutsideSeam": false
+  },
+  "initialAngularVelocity": 0.0
+}

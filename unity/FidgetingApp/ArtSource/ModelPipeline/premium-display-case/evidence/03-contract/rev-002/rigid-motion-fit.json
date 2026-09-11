@@ -1,0 +1,1156 @@
+{
+  "schema": "premium-display-case-gate03-rigid-motion-fit.v1",
+  "modelId": "premium-display-case",
+  "gate": "03-contract",
+  "contractRevision": 2,
+  "status": "pass-with-measured-residuals",
+  "sourceTaskId": "504719bf-a4a3-44c2-b1f3-a3bd342e5ae3",
+  "sourceFiles": [
+    {
+      "path": "unity/FidgetingApp/ArtSource/ModelPipeline/premium-display-case/evidence/02-analysis/rev-003/real-rive-motion-measurements.json",
+      "sha256": "4ff85560b85e609f79007228150ac7249872cbf3833ef381b536c7f3bbdd3f67"
+    },
+    {
+      "path": "unity/FidgetingApp/ArtSource/ModelPipeline/premium-display-case/evidence/02-analysis/rev-003/rive-authored-motion-extract.json",
+      "sha256": "9329778cd36d3cfdebd6e5cc51763ea185f3cd5684949c2e1f49601be0ea28b0"
+    },
+    {
+      "path": "unity/FidgetingApp/ArtSource/ModelPipeline/premium-display-case/evidence/02-analysis/rev-003/reference_manifest.json",
+      "sha256": "2df201c54431452b6163cc3fdbf1ca9a0d89cc982238c3bcf4de58665ac5a8ff"
+    },
+    {
+      "path": "unity/FidgetingApp/ArtSource/ModelPipeline/premium-display-case/evidence/02-analysis/rev-003/user-measured-motion-approval.md",
+      "sha256": "c39b84b237507056ea59afaf1c8f120b3c1a79c75178731b02c23af0897764cc"
+    }
+  ],
+  "box": {
+    "dimensionsMm": {
+      "width": 228.0,
+      "height": 304.0,
+      "depth": 59.0
+    },
+    "portraitWidthHeightRatio": 0.75,
+    "rigid": true,
+    "uniformScaleOnly": true,
+    "deformationChannels": 0,
+    "motionOwner": "PresentationRoot"
+  },
+  "cameraAssumptions": {
+    "purpose": "diagnostic Rive-quad fit only; not a shipping camera",
+    "model": "fixed pinhole",
+    "imageSizePixels": [
+      968,
+      660
+    ],
+    "principalPointPixels": [
+      484.0,
+      330.0
+    ],
+    "squarePixels": true,
+    "skew": 0.0,
+    "distortionCoefficients": [
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0
+    ],
+    "verticalFovDegrees": 71.75,
+    "focalLengthPixels": 456.296151,
+    "selection": "0.25-degree grid search from 20 to 85 degrees minimizing all-sample corner squared error",
+    "shippingCameraRangePreservedForLaterValidationDegrees": [
+      27.0,
+      31.0
+    ]
+  },
+  "method": {
+    "solver": "OpenCV SOLVEPNP_IPPE per visible cuboid face, then solvePnPRefineLM",
+    "cameraOptimization": "global least-squares vertical-FOV search",
+    "faceEvidence": {
+      "front": "START through FRONT → EDGE, plus END / FRONT",
+      "right-side": "EDGE",
+      "back": "REVERSE FACE"
+    },
+    "quaternionPolicy": "relative to settled END / FRONT, normalized WXYZ, adjacent sign continuity",
+    "translationPolicy": "same rigid cuboid origin in fixed diagnostic camera coordinates",
+    "scalePolicy": "physical scale remains 1.0; depth supplies camera framing",
+    "exactFitClaimed": false,
+    "residualPolicy": "report every corner; clipped source quads remain labeled and are not hidden"
+  },
+  "timeline": {
+    "source": {
+      "rootFrames": 210,
+      "fps": 60,
+      "durationMilliseconds": 3500.0,
+      "entryFrames": [
+        0,
+        29
+      ],
+      "visibleFlipFrames": [
+        29,
+        42
+      ],
+      "childTimelineFrames": [
+        0,
+        60
+      ]
+    },
+    "contract": {
+      "durationMilliseconds": 4520.833,
+      "durationSeconds": 4.520833,
+      "uniformTimeScale": 1.291666571429,
+      "policy": "time-scale measured path only",
+      "segments": [
+        {
+          "id": "entry",
+          "sourceFrames": [
+            0,
+            29
+          ],
+          "sourceMilliseconds": [
+            0.0,
+            483.333333
+          ],
+          "contractMilliseconds": [
+            0.0,
+            624.305509
+          ],
+          "sourceBasis": "root transform convergence"
+        },
+        {
+          "id": "front-to-edge",
+          "sourceFrames": [
+            29,
+            36
+          ],
+          "sourceMilliseconds": [
+            483.333333,
+            600.0
+          ],
+          "contractMilliseconds": [
+            624.305509,
+            774.999943
+          ],
+          "sourceBasis": "verified Rive frame landmarks"
+        },
+        {
+          "id": "edge-to-reverse",
+          "sourceFrames": [
+            36,
+            39
+          ],
+          "sourceMilliseconds": [
+            600.0,
+            650.0
+          ],
+          "contractMilliseconds": [
+            774.999943,
+            839.583271
+          ],
+          "sourceBasis": "verified Rive frame landmarks"
+        },
+        {
+          "id": "reverse-to-front",
+          "sourceFrames": [
+            39,
+            42
+          ],
+          "sourceMilliseconds": [
+            650.0,
+            700.0
+          ],
+          "contractMilliseconds": [
+            839.583271,
+            904.1666
+          ],
+          "sourceBasis": "verified Rive frame landmarks"
+        },
+        {
+          "id": "single-highlight-window",
+          "sourceFrames": [
+            42,
+            60
+          ],
+          "sourceMilliseconds": [
+            700.0,
+            1000.0
+          ],
+          "contractMilliseconds": [
+            904.1666,
+            1291.666571
+          ],
+          "sourceBasis": "remaining canonical one-shot child timeline",
+          "implementationState": "deferred-downstream-validation"
+        },
+        {
+          "id": "settled-hold",
+          "sourceFrames": [
+            60,
+            210
+          ],
+          "sourceMilliseconds": [
+            1000.0,
+            3500.0
+          ],
+          "contractMilliseconds": [
+            1291.666571,
+            4520.833
+          ],
+          "sourceBasis": "root timeline remainder"
+        }
+      ]
+    },
+    "hover": {
+      "implementationState": "deferred-downstream-validation",
+      "insideLockedDuration": false,
+      "startsOnlyAfterPresentationCompletion": true,
+      "independentPrizeAngularVelocity": 0.0
+    }
+  },
+  "samples": [
+    {
+      "label": "START",
+      "phase": "entry-convergence",
+      "sourceMilliseconds": 0.0,
+      "contractMilliseconds": 0.0,
+      "visibleFaceEvidence": "front",
+      "sourceCornersPixels": [
+        [
+          734.0,
+          122.0
+        ],
+        [
+          748.0,
+          168.0
+        ],
+        [
+          737.0,
+          183.0
+        ],
+        [
+          713.0,
+          169.0
+        ]
+      ],
+      "fittedCornersPixels": [
+        [
+          731.030922,
+          128.919761
+        ],
+        [
+          751.058155,
+          161.562254
+        ],
+        [
+          733.73191,
+          190.727819
+        ],
+        [
+          716.156058,
+          160.741998
+        ]
+      ],
+      "sourceCenterPixels": [
+        733.0,
+        160.5
+      ],
+      "fittedCenterPixels": [
+        732.994261,
+        160.487958
+      ],
+      "centerResidualPixels": 0.01334,
+      "sourceScreenRollDegrees": 73.072487,
+      "fittedScreenRollDegrees": 58.469527,
+      "presentationQuaternionWxyz": [
+        0.605499473,
+        0.527316922,
+        0.52044135,
+        0.290599472
+      ],
+      "diagnosticObjectToCameraQuaternionWxyz": [
+        0.598139452,
+        0.549364336,
+        0.506923884,
+        0.288887863
+      ],
+      "diagnosticTranslationCameraMm": [
+        1469.010546,
+        -990.778372,
+        2644.548015
+      ],
+      "translationRelativeToSettledCameraMm": [
+        1463.379928,
+        -719.405758,
+        1980.996973
+      ],
+      "presentationEulerDecompositionDegrees": {
+        "pitchX": 95.935875,
+        "yawY": 18.89155,
+        "rollZ": 72.190011
+      },
+      "uniformScale": 1.0,
+      "cameraFramingScaleRelativeToSettled": 0.250912836,
+      "measuredAreaScaleRelativeToSettled": 0.171376036,
+      "sourceClipped": false,
+      "reprojectionResidualPixels": {
+        "perCorner": [
+          7.529842,
+          7.127194,
+          8.390446,
+          8.840549
+        ],
+        "mean": 7.972008,
+        "rmse": 8.000786,
+        "maximum": 8.840549
+      }
+    },
+    {
+      "label": "QUARTER",
+      "phase": "entry-convergence",
+      "sourceMilliseconds": 175.0,
+      "contractMilliseconds": 226.04165,
+      "visibleFaceEvidence": "front",
+      "sourceCornersPixels": [
+        [
+          334.0,
+          0.0
+        ],
+        [
+          622.0,
+          60.0
+        ],
+        [
+          580.0,
+          207.0
+        ],
+        [
+          389.0,
+          260.0
+        ]
+      ],
+      "fittedCornersPixels": [
+        [
+          333.721372,
+          20.473346
+        ],
+        [
+          630.900863,
+          38.954832
+        ],
+        [
+          558.069953,
+          238.453108
+        ],
+        [
+          395.200737,
+          229.391634
+        ]
+      ],
+      "sourceCenterPixels": [
+        481.25,
+        131.75
+      ],
+      "fittedCenterPixels": [
+        479.473231,
+        131.81823
+      ],
+      "centerResidualPixels": 1.778078,
+      "sourceScreenRollDegrees": 11.768289,
+      "fittedScreenRollDegrees": 3.558621,
+      "presentationQuaternionWxyz": [
+        0.821891821,
+        0.567867199,
+        0.017788514,
+        0.041282528
+      ],
+      "diagnosticObjectToCameraQuaternionWxyz": [
+        0.810753775,
+        0.5847526,
+        0.009436527,
+        0.025566887
+      ],
+      "diagnosticTranslationCameraMm": [
+        -4.042414,
+        -210.124048,
+        503.092655
+      ],
+      "translationRelativeToSettledCameraMm": [
+        -9.673033,
+        61.248565,
+        -160.458387
+      ],
+      "presentationEulerDecompositionDegrees": {
+        "pitchX": 69.238666,
+        "yawY": -1.011066,
+        "rollZ": 5.052947
+      },
+      "uniformScale": 1.0,
+      "cameraFramingScaleRelativeToSettled": 1.318944006,
+      "measuredAreaScaleRelativeToSettled": 1.156897338,
+      "sourceClipped": true,
+      "reprojectionResidualPixels": {
+        "perCorner": [
+          20.475241,
+          22.850043,
+          38.343513,
+          31.230133
+        ],
+        "mean": 28.224733,
+        "rmse": 29.098566,
+        "maximum": 38.343513
+      }
+    },
+    {
+      "label": "USER-SCREENSHOT NEAREST",
+      "phase": "entry-convergence",
+      "sourceMilliseconds": 200.0,
+      "contractMilliseconds": 258.333314,
+      "visibleFaceEvidence": "front",
+      "sourceCornersPixels": [
+        [
+          341.0,
+          0.0
+        ],
+        [
+          611.0,
+          57.0
+        ],
+        [
+          536.0,
+          245.0
+        ],
+        [
+          391.0,
+          259.0
+        ]
+      ],
+      "fittedCornersPixels": [
+        [
+          344.283237,
+          11.836365
+        ],
+        [
+          612.942693,
+          45.967451
+        ],
+        [
+          538.725365,
+          257.992487
+        ],
+        [
+          379.565055,
+          244.112621
+        ]
+      ],
+      "sourceCenterPixels": [
+        469.75,
+        140.25
+      ],
+      "fittedCenterPixels": [
+        468.879087,
+        139.977231
+      ],
+      "centerResidualPixels": 0.912629,
+      "sourceScreenRollDegrees": 11.920739,
+      "fittedScreenRollDegrees": 7.240196,
+      "presentationQuaternionWxyz": [
+        0.864660463,
+        0.497524997,
+        -0.008240887,
+        0.069016292
+      ],
+      "diagnosticObjectToCameraQuaternionWxyz": [
+        0.855494859,
+        0.514929215,
+        -0.015788165,
+        0.052222442
+      ],
+      "diagnosticTranslationCameraMm": [
+        -17.100664,
+        -209.382015,
+        532.812102
+      ],
+      "translationRelativeToSettledCameraMm": [
+        -22.731282,
+        61.990599,
+        -130.738939
+      ],
+      "presentationEulerDecompositionDegrees": {
+        "pitchX": 59.565926,
+        "yawY": -4.756761,
+        "rollZ": 6.403831
+      },
+      "uniformScale": 1.0,
+      "cameraFramingScaleRelativeToSettled": 1.245375319,
+      "measuredAreaScaleRelativeToSettled": 1.132045254,
+      "sourceClipped": true,
+      "reprojectionResidualPixels": {
+        "perCorner": [
+          12.283289,
+          11.202285,
+          13.275253,
+          18.772108
+        ],
+        "mean": 13.883234,
+        "rmse": 14.186215,
+        "maximum": 18.772108
+      }
+    },
+    {
+      "label": "HALF",
+      "phase": "entry-convergence",
+      "sourceMilliseconds": 350.0,
+      "contractMilliseconds": 452.0833,
+      "visibleFaceEvidence": "front",
+      "sourceCornersPixels": [
+        [
+          373.0,
+          0.0
+        ],
+        [
+          559.0,
+          0.0
+        ],
+        [
+          576.0,
+          245.0
+        ],
+        [
+          406.0,
+          267.0
+        ]
+      ],
+      "fittedCornersPixels": [
+        [
+          372.072389,
+          0.112006
+        ],
+        [
+          558.832222,
+          -0.170792
+        ],
+        [
+          576.059449,
+          246.908222
+        ],
+        [
+          407.13295,
+          265.27263
+        ]
+      ],
+      "sourceCenterPixels": [
+        478.5,
+        128.0
+      ],
+      "fittedCenterPixels": [
+        478.524253,
+        128.030516
+      ],
+      "centerResidualPixels": 0.03898,
+      "sourceScreenRollDegrees": 0.0,
+      "fittedScreenRollDegrees": -0.086759,
+      "presentationQuaternionWxyz": [
+        0.992172068,
+        0.060737613,
+        -0.101118446,
+        -0.040995009
+      ],
+      "diagnosticObjectToCameraQuaternionWxyz": [
+        0.990162328,
+        0.078934334,
+        -0.098381721,
+        -0.060572049
+      ],
+      "diagnosticTranslationCameraMm": [
+        -8.04474,
+        -250.460226,
+        600.511986
+      ],
+      "translationRelativeToSettledCameraMm": [
+        -13.675358,
+        20.912388,
+        -63.039056
+      ],
+      "presentationEulerDecompositionDegrees": {
+        "pitchX": 7.547855,
+        "yawY": -11.284095,
+        "rollZ": -5.47879
+      },
+      "uniformScale": 1.0,
+      "cameraFramingScaleRelativeToSettled": 1.104975516,
+      "measuredAreaScaleRelativeToSettled": 1.122271037,
+      "sourceClipped": true,
+      "reprojectionResidualPixels": {
+        "perCorner": [
+          0.934348,
+          0.239415,
+          1.909148,
+          2.065764
+        ],
+        "mean": 1.287169,
+        "rmse": 1.486821,
+        "maximum": 2.065764
+      }
+    },
+    {
+      "label": "THREE-QUARTER",
+      "phase": "front-to-edge",
+      "sourceMilliseconds": 525.0,
+      "contractMilliseconds": 678.12495,
+      "visibleFaceEvidence": "front",
+      "sourceCornersPixels": [
+        [
+          407.0,
+          31.0
+        ],
+        [
+          558.0,
+          22.0
+        ],
+        [
+          567.0,
+          239.0
+        ],
+        [
+          415.0,
+          246.0
+        ]
+      ],
+      "fittedCornersPixels": [
+        [
+          403.553315,
+          32.285832
+        ],
+        [
+          561.483221,
+          22.872074
+        ],
+        [
+          566.360492,
+          237.991693
+        ],
+        [
+          415.567875,
+          244.748035
+        ]
+      ],
+      "sourceCenterPixels": [
+        486.75,
+        134.5
+      ],
+      "fittedCenterPixels": [
+        486.741226,
+        134.474409
+      ],
+      "centerResidualPixels": 0.027054,
+      "sourceScreenRollDegrees": -3.410945,
+      "fittedScreenRollDegrees": -3.411204,
+      "presentationQuaternionWxyz": [
+        0.999414783,
+        0.031807456,
+        0.012270242,
+        -0.002796089
+      ],
+      "diagnosticObjectToCameraQuaternionWxyz": [
+        0.998322171,
+        0.052258653,
+        0.01471927,
+        -0.02013007
+      ],
+      "diagnosticTranslationCameraMm": [
+        4.390453,
+        -288.02301,
+        702.954222
+      ],
+      "translationRelativeToSettledCameraMm": [
+        -1.240166,
+        -16.650396,
+        39.40318
+      ],
+      "presentationEulerDecompositionDegrees": {
+        "pitchX": 3.642365,
+        "yawY": 1.415579,
+        "rollZ": -0.275583
+      },
+      "uniformScale": 1.0,
+      "cameraFramingScaleRelativeToSettled": 0.943946307,
+      "measuredAreaScaleRelativeToSettled": 0.949172599,
+      "sourceClipped": false,
+      "reprojectionResidualPixels": {
+        "perCorner": [
+          3.678723,
+          3.59073,
+          1.194007,
+          1.374735
+        ],
+        "mean": 2.459549,
+        "rmse": 2.726806,
+        "maximum": 3.678723
+      }
+    },
+    {
+      "label": "FRONT → EDGE",
+      "phase": "front-to-edge",
+      "sourceMilliseconds": 550.0,
+      "contractMilliseconds": 710.416614,
+      "visibleFaceEvidence": "front",
+      "sourceCornersPixels": [
+        [
+          405.0,
+          31.0
+        ],
+        [
+          561.0,
+          22.0
+        ],
+        [
+          569.0,
+          239.0
+        ],
+        [
+          415.0,
+          248.0
+        ]
+      ],
+      "fittedCornersPixels": [
+        [
+          402.923512,
+          31.787681
+        ],
+        [
+          562.647656,
+          22.374065
+        ],
+        [
+          568.896009,
+          239.183998
+        ],
+        [
+          415.538087,
+          246.601223
+        ]
+      ],
+      "sourceCenterPixels": [
+        487.5,
+        135.0
+      ],
+      "fittedCenterPixels": [
+        487.501316,
+        134.986742
+      ],
+      "centerResidualPixels": 0.013323,
+      "sourceScreenRollDegrees": -3.301866,
+      "fittedScreenRollDegrees": -3.372923,
+      "presentationQuaternionWxyz": [
+        0.999649935,
+        0.024848364,
+        0.007512494,
+        -0.005111686
+      ],
+      "diagnosticObjectToCameraQuaternionWxyz": [
+        0.998671822,
+        0.04521675,
+        0.010132661,
+        -0.022524807
+      ],
+      "diagnosticTranslationCameraMm": [
+        5.338906,
+        -283.279365,
+        693.54326
+      ],
+      "translationRelativeToSettledCameraMm": [
+        -0.291713,
+        -11.906751,
+        29.992218
+      ],
+      "presentationEulerDecompositionDegrees": {
+        "pitchX": 2.843514,
+        "yawY": 0.875156,
+        "rollZ": -0.564235
+      },
+      "uniformScale": 1.0,
+      "cameraFramingScaleRelativeToSettled": 0.956755087,
+      "measuredAreaScaleRelativeToSettled": 0.962452405,
+      "sourceClipped": false,
+      "reprojectionResidualPixels": {
+        "perCorner": [
+          2.220865,
+          1.689585,
+          0.211351,
+          1.498704
+        ],
+        "mean": 1.405126,
+        "rmse": 1.587271,
+        "maximum": 2.220865
+      }
+    },
+    {
+      "label": "EDGE",
+      "phase": "edge-to-reverse",
+      "sourceMilliseconds": 600.0,
+      "contractMilliseconds": 774.999943,
+      "visibleFaceEvidence": "right-side",
+      "sourceCornersPixels": [
+        [
+          461.0,
+          23.0
+        ],
+        [
+          512.0,
+          35.0
+        ],
+        [
+          507.0,
+          246.0
+        ],
+        [
+          453.0,
+          234.0
+        ]
+      ],
+      "fittedCornersPixels": [
+        [
+          463.74632,
+          22.417431
+        ],
+        [
+          509.371019,
+          35.401513
+        ],
+        [
+          508.215055,
+          244.826333
+        ],
+        [
+          451.674769,
+          235.292269
+        ]
+      ],
+      "sourceCenterPixels": [
+        483.25,
+        134.5
+      ],
+      "fittedCenterPixels": [
+        483.251791,
+        134.484386
+      ],
+      "centerResidualPixels": 0.015716,
+      "sourceScreenRollDegrees": 13.24052,
+      "fittedScreenRollDegrees": 15.885532,
+      "presentationQuaternionWxyz": [
+        0.781157584,
+        -0.17666061,
+        0.590564603,
+        -0.099082328
+      ],
+      "diagnosticObjectToCameraQuaternionWxyz": [
+        0.780975488,
+        -0.150721843,
+        0.597758471,
+        -0.100224866
+      ],
+      "diagnosticTranslationCameraMm": [
+        -30.297114,
+        -194.242117,
+        616.955073
+      ],
+      "translationRelativeToSettledCameraMm": [
+        -35.927732,
+        77.130497,
+        -46.595969
+      ],
+      "presentationEulerDecompositionDegrees": {
+        "pitchX": -58.584784,
+        "yawY": 62.578191,
+        "rollZ": -52.110911
+      },
+      "uniformScale": 1.0,
+      "cameraFramingScaleRelativeToSettled": 1.075525708,
+      "measuredAreaScaleRelativeToSettled": 0.553612337,
+      "sourceClipped": false,
+      "reprojectionResidualPixels": {
+        "perCorner": [
+          2.80743,
+          2.659465,
+          1.689335,
+          1.850999
+        ],
+        "mean": 2.251807,
+        "rmse": 2.304043,
+        "maximum": 2.80743
+      }
+    },
+    {
+      "label": "REVERSE FACE",
+      "phase": "reverse-to-front",
+      "sourceMilliseconds": 650.0,
+      "contractMilliseconds": 839.583271,
+      "visibleFaceEvidence": "back",
+      "sourceCornersPixels": [
+        [
+          404.0,
+          26.0
+        ],
+        [
+          563.0,
+          19.0
+        ],
+        [
+          573.0,
+          240.0
+        ],
+        [
+          415.0,
+          252.0
+        ]
+      ],
+      "fittedCornersPixels": [
+        [
+          400.844024,
+          27.012094
+        ],
+        [
+          565.059516,
+          19.577063
+        ],
+        [
+          573.076929,
+          240.941953
+        ],
+        [
+          416.083766,
+          249.405861
+        ]
+      ],
+      "sourceCenterPixels": [
+        488.75,
+        134.25
+      ],
+      "fittedCenterPixels": [
+        488.766059,
+        134.234243
+      ],
+      "centerResidualPixels": 0.022498,
+      "sourceScreenRollDegrees": -2.520828,
+      "fittedScreenRollDegrees": -2.592357,
+      "presentationQuaternionWxyz": [
+        0.012872389,
+        0.010275732,
+        0.999495503,
+        0.027156028
+      ],
+      "diagnosticObjectToCameraQuaternionWxyz": [
+        0.010180998,
+        0.028104259,
+        0.998440545,
+        0.047148452
+      ],
+      "diagnosticTranslationCameraMm": [
+        6.616366,
+        -276.784987,
+        676.184595
+      ],
+      "translationRelativeToSettledCameraMm": [
+        0.985747,
+        -5.412373,
+        12.633554
+      ],
+      "presentationEulerDecompositionDegrees": {
+        "pitchX": 176.872017,
+        "yawY": 1.442499,
+        "rollZ": 178.782547
+      },
+      "uniformScale": 1.0,
+      "cameraFramingScaleRelativeToSettled": 0.981316413,
+      "measuredAreaScaleRelativeToSettled": 0.987927846,
+      "sourceClipped": false,
+      "reprojectionResidualPixels": {
+        "perCorner": [
+          3.31429,
+          2.138834,
+          0.945089,
+          2.811424
+        ],
+        "mean": 2.302409,
+        "rmse": 2.467612,
+        "maximum": 3.31429
+      }
+    },
+    {
+      "label": "END / FRONT",
+      "phase": "front-settle",
+      "sourceMilliseconds": 700.0,
+      "contractMilliseconds": 904.1666,
+      "visibleFaceEvidence": "front",
+      "sourceCornersPixels": [
+        [
+          403.0,
+          26.0
+        ],
+        [
+          566.0,
+          20.0
+        ],
+        [
+          573.0,
+          242.0
+        ],
+        [
+          410.0,
+          250.0
+        ]
+      ],
+      "fittedCornersPixels": [
+        [
+          401.414094,
+          26.632229
+        ],
+        [
+          566.989744,
+          20.118656
+        ],
+        [
+          573.010595,
+          242.683863
+        ],
+        [
+          410.594766,
+          248.548672
+        ]
+      ],
+      "sourceCenterPixels": [
+        488.0,
+        134.5
+      ],
+      "fittedCenterPixels": [
+        488.0023,
+        134.495855
+      ],
+      "centerResidualPixels": 0.00474,
+      "sourceScreenRollDegrees": -2.108095,
+      "fittedScreenRollDegrees": -2.252795,
+      "presentationQuaternionWxyz": [
+        1.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "diagnosticObjectToCameraQuaternionWxyz": [
+        0.999637045,
+        0.020268137,
+        0.002955168,
+        -0.017499935
+      ],
+      "diagnosticTranslationCameraMm": [
+        5.630619,
+        -271.372614,
+        663.551042
+      ],
+      "translationRelativeToSettledCameraMm": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "presentationEulerDecompositionDegrees": {
+        "pitchX": -0.0,
+        "yawY": 0.0,
+        "rollZ": 0.0
+      },
+      "uniformScale": 1.0,
+      "cameraFramingScaleRelativeToSettled": 1.0,
+      "measuredAreaScaleRelativeToSettled": 1.0,
+      "sourceClipped": false,
+      "reprojectionResidualPixels": {
+        "perCorner": [
+          1.707282,
+          0.996831,
+          0.683945,
+          1.56847
+        ],
+        "mean": 1.239132,
+        "rmse": 1.307322,
+        "maximum": 1.707282
+      }
+    }
+  ],
+  "residualSummaryPixels": {
+    "sampleCount": 9,
+    "cornerCount": 36,
+    "mean": 6.780574,
+    "rmse": 11.241096,
+    "maximum": 38.343513,
+    "maximumSampleLabel": "QUARTER",
+    "clippedSampleLabels": [
+      "QUARTER",
+      "USER-SCREENSHOT NEAREST",
+      "HALF"
+    ],
+    "unclippedMean": 2.938339,
+    "unclippedRmse": 3.809512,
+    "unclippedMaximum": 8.840549,
+    "exact": false
+  },
+  "userScreenshotReferenceFit": {
+    "role": "separate rejection screenshot; not a path keyframe",
+    "sourceCornersPixels": [
+      [
+        374.0,
+        152.0
+      ],
+      [
+        737.0,
+        283.0
+      ],
+      [
+        492.0,
+        576.0
+      ],
+      [
+        219.0,
+        473.0
+      ]
+    ],
+    "fittedCornersPixels": [
+      [
+        373.233617,
+        123.62021
+      ],
+      [
+        720.274824,
+        306.954268
+      ],
+      [
+        492.615974,
+        570.781382
+      ],
+      [
+        241.339419,
+        491.384498
+      ]
+    ],
+    "visibleFaceEvidence": "front",
+    "reprojectionResidualPixels": {
+      "perCorner": [
+        28.390136,
+        29.215381,
+        5.254845,
+        28.931633
+      ],
+      "mean": 22.947999,
+      "rmse": 25.120664,
+      "maximum": 29.215381
+    },
+    "exact": false
+  },
+  "sourceBoundaries": {
+    "riveMeshDeformationPresentInSource": true,
+    "riveMeshDeformationUsedAsTarget": false,
+    "physicalAxisClaim": null,
+    "pureYAxisClaim": false,
+    "pureXAxisClaim": false,
+    "singleAxisClaim": false,
+    "wholeCaseOnly": true,
+    "explode": false,
+    "referenceManifestWholeCaseCount": 1
+  }
+}

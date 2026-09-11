@@ -1,0 +1,291 @@
+<?xml version="1.0" encoding="utf-8"?>
+<test-run id="2" testcasecount="38" result="Failed(Child)" total="38" passed="32" failed="6" inconclusive="0" skipped="0" asserts="0" engine-version="3.5.0.0" clr-version="4.0.30319.42000" start-time="2026-09-01 02:06:21Z" end-time="2026-09-01 02:06:23Z" duration="2.4887929">
+  <test-suite type="TestSuite" id="1000" name="Fidget Spinner" fullname="Fidget Spinner" runstate="Runnable" testcasecount="506" result="Failed" site="Child" start-time="2026-09-01 02:06:21Z" end-time="2026-09-01 02:06:23Z" duration="2.488793" total="38" passed="32" failed="6" inconclusive="0" skipped="0" asserts="0">
+    <properties>
+      <property name="platform" value="EditMode" />
+    </properties>
+    <failure>
+      <message><![CDATA[One or more child tests had errors]]></message>
+    </failure>
+    <test-suite type="Assembly" id="1564" name="Assembly-CSharp-Editor.dll" fullname="/Users/jiawei.zhou/Documents/Fidgeting app/unity/FidgetingApp/Library/ScriptAssemblies/Assembly-CSharp-Editor.dll" runstate="Runnable" testcasecount="506" result="Failed" site="Child" start-time="2026-09-01 02:06:21Z" end-time="2026-09-01 02:06:23Z" duration="2.420752" total="38" passed="32" failed="6" inconclusive="0" skipped="0" asserts="0">
+      <properties>
+        <property name="_PID" value="71559" />
+        <property name="_APPDOMAIN" value="Unity Child Domain" />
+        <property name="platform" value="EditMode" />
+        <property name="EditorOnly" value="True" />
+      </properties>
+      <failure>
+        <message><![CDATA[One or more child tests had errors]]></message>
+      </failure>
+      <test-suite type="TestSuite" id="1568" name="FidgetingApp" fullname="FidgetingApp" runstate="Runnable" testcasecount="427" result="Failed" site="Child" start-time="2026-09-01 02:06:21Z" end-time="2026-09-01 02:06:23Z" duration="2.417985" total="38" passed="32" failed="6" inconclusive="0" skipped="0" asserts="0">
+        <properties />
+        <failure>
+          <message><![CDATA[One or more child tests had errors]]></message>
+        </failure>
+        <test-suite type="TestSuite" id="1572" name="EDC" fullname="FidgetingApp.EDC" runstate="Runnable" testcasecount="38" result="Failed" site="Child" start-time="2026-09-01 02:06:21Z" end-time="2026-09-01 02:06:23Z" duration="2.414101" total="38" passed="32" failed="6" inconclusive="0" skipped="0" asserts="0">
+          <properties />
+          <failure>
+            <message><![CDATA[One or more child tests had errors]]></message>
+          </failure>
+          <test-suite type="TestSuite" id="1573" name="Tests" fullname="FidgetingApp.EDC.Tests" runstate="Runnable" testcasecount="38" result="Failed" site="Child" start-time="2026-09-01 02:06:21Z" end-time="2026-09-01 02:06:23Z" duration="2.413453" total="38" passed="32" failed="6" inconclusive="0" skipped="0" asserts="0">
+            <properties />
+            <failure>
+              <message><![CDATA[One or more child tests had errors]]></message>
+            </failure>
+            <test-suite type="TestSuite" id="1574" name="Editor" fullname="FidgetingApp.EDC.Tests.Editor" runstate="Runnable" testcasecount="25" result="Failed" site="Child" start-time="2026-09-01 02:06:12Z" end-time="2026-09-01 02:06:15Z" duration="2.987222" total="25" passed="23" failed="2" inconclusive="0" skipped="0" asserts="0">
+              <properties />
+              <failure>
+                <message><![CDATA[One or more child tests had errors]]></message>
+              </failure>
+              <test-suite type="TestFixture" id="1113" name="EdcSliderAcceptanceTests" fullname="FidgetingApp.EDC.Tests.Editor.EdcSliderAcceptanceTests" classname="FidgetingApp.EDC.Tests.Editor.EdcSliderAcceptanceTests" runstate="Runnable" testcasecount="9" result="Failed" site="Child" start-time="2026-09-01 02:06:12Z" end-time="2026-09-01 02:06:15Z" duration="2.974245" total="9" passed="7" failed="2" inconclusive="0" skipped="0" asserts="0">
+                <properties />
+                <failure>
+                  <message><![CDATA[One or more child tests had errors]]></message>
+                </failure>
+                <test-case id="1116" name="AlloyClick766HzAudio_HasOneTransientAndNoSecondClick" fullname="FidgetingApp.EDC.Tests.Editor.EdcSliderAcceptanceTests.AlloyClick766HzAudio_HasOneTransientAndNoSecondClick" methodname="AlloyClick766HzAudio_HasOneTransientAndNoSecondClick" classname="FidgetingApp.EDC.Tests.Editor.EdcSliderAcceptanceTests" runstate="Runnable" seed="1990562675" result="Passed" start-time="2026-09-01 02:06:12Z" end-time="2026-09-01 02:06:13Z" duration="0.368784" asserts="0">
+                  <properties />
+                </test-case>
+                <test-case id="1115" name="AlloyClick766HzAudio_RendersOnlyAuthorizedMechanismSemantics" fullname="FidgetingApp.EDC.Tests.Editor.EdcSliderAcceptanceTests.AlloyClick766HzAudio_RendersOnlyAuthorizedMechanismSemantics" methodname="AlloyClick766HzAudio_RendersOnlyAuthorizedMechanismSemantics" classname="FidgetingApp.EDC.Tests.Editor.EdcSliderAcceptanceTests" runstate="Runnable" seed="881397861" result="Passed" start-time="2026-09-01 02:06:13Z" end-time="2026-09-01 02:06:13Z" duration="0.337176" asserts="0">
+                  <properties />
+                </test-case>
+                <test-case id="1119" name="Controller_MovesOnlySliderGroupAlongLocalXAndExposesToggleContract" fullname="FidgetingApp.EDC.Tests.Editor.EdcSliderAcceptanceTests.Controller_MovesOnlySliderGroupAlongLocalXAndExposesToggleContract" methodname="Controller_MovesOnlySliderGroupAlongLocalXAndExposesToggleContract" classname="FidgetingApp.EDC.Tests.Editor.EdcSliderAcceptanceTests" runstate="Runnable" seed="1946097897" result="Passed" start-time="2026-09-01 02:06:13Z" end-time="2026-09-01 02:06:13Z" duration="0.317765" asserts="0">
+                  <properties />
+                </test-case>
+                <test-case id="1118" name="CutLayers_PreserveCenteredPivotsUvsAndExplicitUrpMaterials" fullname="FidgetingApp.EDC.Tests.Editor.EdcSliderAcceptanceTests.CutLayers_PreserveCenteredPivotsUvsAndExplicitUrpMaterials" methodname="CutLayers_PreserveCenteredPivotsUvsAndExplicitUrpMaterials" classname="FidgetingApp.EDC.Tests.Editor.EdcSliderAcceptanceTests" runstate="Runnable" seed="1255921346" result="Passed" start-time="2026-09-01 02:06:13Z" end-time="2026-09-01 02:06:14Z" duration="0.346242" asserts="0">
+                  <properties />
+                </test-case>
+                <test-case id="1120" name="DetailCamera_UsesFrontTopProductScaleAndExpandedTouchSurface" fullname="FidgetingApp.EDC.Tests.Editor.EdcSliderAcceptanceTests.DetailCamera_UsesFrontTopProductScaleAndExpandedTouchSurface" methodname="DetailCamera_UsesFrontTopProductScaleAndExpandedTouchSurface" classname="FidgetingApp.EDC.Tests.Editor.EdcSliderAcceptanceTests" runstate="Runnable" seed="2109260186" result="Failed" label="Error" start-time="2026-09-01 02:06:14Z" end-time="2026-09-01 02:06:14Z" duration="0.350761" asserts="0">
+                  <properties />
+                  <failure>
+                    <message><![CDATA[System.InvalidOperationException : Sequence contains more than one element]]></message>
+                    <stack-trace><![CDATA[  at System.Linq.Enumerable.Single[TSource] (System.Collections.Generic.IEnumerable`1[T] source) [0x00070] in <cb951819652d428c85bd75cb224d8506>:0 
+  at FidgetingApp.EDC.Tests.Editor.EdcSliderAcceptanceTests.DetailCamera_UsesFrontTopProductScaleAndExpandedTouchSurface () [0x00000] in /Users/jiawei.zhou/Documents/Fidgeting app/unity/FidgetingApp/Assets/_EDC/Tests/Editor/EdcSliderAcceptanceTests.cs:382 
+  at (wrapper managed-to-native) System.Reflection.RuntimeMethodInfo.InternalInvoke(System.Reflection.RuntimeMethodInfo,object,object[],System.Exception&)
+  at System.Reflection.RuntimeMethodInfo.Invoke (System.Object obj, System.Reflection.BindingFlags invokeAttr, System.Reflection.Binder binder, System.Object[] parameters, System.Globalization.CultureInfo culture) [0x0006a] in <299d5c9ae27b4d27af003e5f456f4b13>:0 ]]></stack-trace>
+                  </failure>
+                </test-case>
+                <test-case id="1121" name="LibraryPreview_UsesReducedMagneticSlideOccupancy" fullname="FidgetingApp.EDC.Tests.Editor.EdcSliderAcceptanceTests.LibraryPreview_UsesReducedMagneticSlideOccupancy" methodname="LibraryPreview_UsesReducedMagneticSlideOccupancy" classname="FidgetingApp.EDC.Tests.Editor.EdcSliderAcceptanceTests" runstate="Runnable" seed="626428546" result="Failed" label="Error" start-time="2026-09-01 02:06:14Z" end-time="2026-09-01 02:06:14Z" duration="0.301701" asserts="0">
+                  <properties />
+                  <failure>
+                    <message><![CDATA[System.InvalidOperationException : Sequence contains more than one element]]></message>
+                    <stack-trace><![CDATA[  at System.Linq.Enumerable.Single[TSource] (System.Collections.Generic.IEnumerable`1[T] source) [0x00070] in <cb951819652d428c85bd75cb224d8506>:0 
+  at FidgetingApp.EDC.Tests.Editor.EdcSliderAcceptanceTests.LibraryPreview_UsesReducedMagneticSlideOccupancy () [0x00000] in /Users/jiawei.zhou/Documents/Fidgeting app/unity/FidgetingApp/Assets/_EDC/Tests/Editor/EdcSliderAcceptanceTests.cs:457 
+  at (wrapper managed-to-native) System.Reflection.RuntimeMethodInfo.InternalInvoke(System.Reflection.RuntimeMethodInfo,object,object[],System.Exception&)
+  at System.Reflection.RuntimeMethodInfo.Invoke (System.Object obj, System.Reflection.BindingFlags invokeAttr, System.Reflection.Binder binder, System.Object[] parameters, System.Globalization.CultureInfo culture) [0x0006a] in <299d5c9ae27b4d27af003e5f456f4b13>:0 ]]></stack-trace>
+                  </failure>
+                </test-case>
+                <test-case id="1114" name="MagneticProfile_DefinesSixHeavyDetentsAnd68MillimeterTravel" fullname="FidgetingApp.EDC.Tests.Editor.EdcSliderAcceptanceTests.MagneticProfile_DefinesSixHeavyDetentsAnd68MillimeterTravel" methodname="MagneticProfile_DefinesSixHeavyDetentsAnd68MillimeterTravel" classname="FidgetingApp.EDC.Tests.Editor.EdcSliderAcceptanceTests" runstate="Runnable" seed="1836076602" result="Passed" start-time="2026-09-01 02:06:14Z" end-time="2026-09-01 02:06:15Z" duration="0.305533" asserts="0">
+                  <properties />
+                </test-case>
+                <test-case id="1117" name="SceneHierarchy_ContainsSevenLayersSixMagnetsAndFourScrews" fullname="FidgetingApp.EDC.Tests.Editor.EdcSliderAcceptanceTests.SceneHierarchy_ContainsSevenLayersSixMagnetsAndFourScrews" methodname="SceneHierarchy_ContainsSevenLayersSixMagnetsAndFourScrews" classname="FidgetingApp.EDC.Tests.Editor.EdcSliderAcceptanceTests" runstate="Runnable" seed="284048839" result="Passed" start-time="2026-09-01 02:06:15Z" end-time="2026-09-01 02:06:15Z" duration="0.303515" asserts="0">
+                  <properties />
+                </test-case>
+                <test-case id="1122" name="SceneTriangleCount_IsSourceFaithfulAndExplicitlyNotMobileOptimized" fullname="FidgetingApp.EDC.Tests.Editor.EdcSliderAcceptanceTests.SceneTriangleCount_IsSourceFaithfulAndExplicitlyNotMobileOptimized" methodname="SceneTriangleCount_IsSourceFaithfulAndExplicitlyNotMobileOptimized" classname="FidgetingApp.EDC.Tests.Editor.EdcSliderAcceptanceTests" runstate="Runnable" seed="1489930639" result="Passed" start-time="2026-09-01 02:06:15Z" end-time="2026-09-01 02:06:15Z" duration="0.306174" asserts="0">
+                  <properties />
+                </test-case>
+              </test-suite>
+              <test-suite type="TestFixture" id="1123" name="MagneticDetentTrack1DTests" fullname="FidgetingApp.EDC.Tests.Editor.MagneticDetentTrack1DTests" classname="FidgetingApp.EDC.Tests.Editor.MagneticDetentTrack1DTests" runstate="Runnable" testcasecount="16" result="Passed" start-time="2026-09-01 02:06:15Z" end-time="2026-09-01 02:06:15Z" duration="0.012133" total="16" passed="16" failed="0" inconclusive="0" skipped="0" asserts="0">
+                <properties />
+                <test-case id="1126" name="BelowBreakaway_LoadsVisuallyButCannotLeaveCapturedDetent" fullname="FidgetingApp.EDC.Tests.Editor.MagneticDetentTrack1DTests.BelowBreakaway_LoadsVisuallyButCannotLeaveCapturedDetent" methodname="BelowBreakaway_LoadsVisuallyButCannotLeaveCapturedDetent" classname="FidgetingApp.EDC.Tests.Editor.MagneticDetentTrack1DTests" runstate="Runnable" seed="2069475678" result="Passed" start-time="2026-09-01 02:06:15Z" end-time="2026-09-01 02:06:15Z" duration="0.001028" asserts="0">
+                  <properties />
+                </test-case>
+                <test-case id="1127" name="BreakawayThreshold_FiresExactlyOnceUntilAnotherCapture" fullname="FidgetingApp.EDC.Tests.Editor.MagneticDetentTrack1DTests.BreakawayThreshold_FiresExactlyOnceUntilAnotherCapture" methodname="BreakawayThreshold_FiresExactlyOnceUntilAnotherCapture" classname="FidgetingApp.EDC.Tests.Editor.MagneticDetentTrack1DTests" runstate="Runnable" seed="232868474" result="Passed" start-time="2026-09-01 02:06:15Z" end-time="2026-09-01 02:06:15Z" duration="0.000560" asserts="0">
+                  <properties />
+                </test-case>
+                <test-case id="1133" name="BreakawayTiming_RemainsWithinOneThirtyHertzFrameAcrossFrameRates" fullname="FidgetingApp.EDC.Tests.Editor.MagneticDetentTrack1DTests.BreakawayTiming_RemainsWithinOneThirtyHertzFrameAcrossFrameRates" methodname="BreakawayTiming_RemainsWithinOneThirtyHertzFrameAcrossFrameRates" classname="FidgetingApp.EDC.Tests.Editor.MagneticDetentTrack1DTests" runstate="Runnable" seed="1862942727" result="Passed" start-time="2026-09-01 02:06:15Z" end-time="2026-09-01 02:06:15Z" duration="0.000316" asserts="0">
+                  <properties />
+                </test-case>
+                <test-case id="1140" name="EndpointPressure_DoesNotChatterOrCreateBoundaryCrossings" fullname="FidgetingApp.EDC.Tests.Editor.MagneticDetentTrack1DTests.EndpointPressure_DoesNotChatterOrCreateBoundaryCrossings" methodname="EndpointPressure_DoesNotChatterOrCreateBoundaryCrossings" classname="FidgetingApp.EDC.Tests.Editor.MagneticDetentTrack1DTests" runstate="Runnable" seed="1876967395" result="Passed" start-time="2026-09-01 02:06:15Z" end-time="2026-09-01 02:06:15Z" duration="0.000282" asserts="0">
+                  <properties />
+                </test-case>
+                <test-case id="1132" name="FastTraversal_CanReportMultipleBarrierCrossingsInOneFrame" fullname="FidgetingApp.EDC.Tests.Editor.MagneticDetentTrack1DTests.FastTraversal_CanReportMultipleBarrierCrossingsInOneFrame" methodname="FastTraversal_CanReportMultipleBarrierCrossingsInOneFrame" classname="FidgetingApp.EDC.Tests.Editor.MagneticDetentTrack1DTests" runstate="Runnable" seed="455362344" result="Passed" start-time="2026-09-01 02:06:15Z" end-time="2026-09-01 02:06:15Z" duration="0.000544" asserts="0">
+                  <properties />
+                </test-case>
+                <test-case id="1134" name="ForwardAndReverseTracks_AreSymmetric" fullname="FidgetingApp.EDC.Tests.Editor.MagneticDetentTrack1DTests.ForwardAndReverseTracks_AreSymmetric" methodname="ForwardAndReverseTracks_AreSymmetric" classname="FidgetingApp.EDC.Tests.Editor.MagneticDetentTrack1DTests" runstate="Runnable" seed="601140433" result="Passed" start-time="2026-09-01 02:06:15Z" end-time="2026-09-01 02:06:15Z" duration="0.000525" asserts="0">
+                  <properties />
+                </test-case>
+                <test-suite type="ParameterizedMethod" id="1139" name="FrameRateVariants_ReachSameFinalDetentWithinPointTwoMillimeters" fullname="FidgetingApp.EDC.Tests.Editor.MagneticDetentTrack1DTests.FrameRateVariants_ReachSameFinalDetentWithinPointTwoMillimeters" classname="FidgetingApp.EDC.Tests.Editor.MagneticDetentTrack1DTests" runstate="Runnable" testcasecount="3" result="Passed" start-time="2026-09-01 02:06:15Z" end-time="2026-09-01 02:06:15Z" duration="0.001139" total="3" passed="3" failed="0" inconclusive="0" skipped="0" asserts="0">
+                  <properties />
+                  <test-case id="1136" name="FrameRateVariants_ReachSameFinalDetentWithinPointTwoMillimeters(30)" fullname="FidgetingApp.EDC.Tests.Editor.MagneticDetentTrack1DTests.FrameRateVariants_ReachSameFinalDetentWithinPointTwoMillimeters(30)" methodname="FrameRateVariants_ReachSameFinalDetentWithinPointTwoMillimeters" classname="FidgetingApp.EDC.Tests.Editor.MagneticDetentTrack1DTests" runstate="Runnable" seed="376267002" result="Passed" start-time="2026-09-01 02:06:15Z" end-time="2026-09-01 02:06:15Z" duration="0.000387" asserts="0">
+                    <properties />
+                  </test-case>
+                  <test-case id="1137" name="FrameRateVariants_ReachSameFinalDetentWithinPointTwoMillimeters(60)" fullname="FidgetingApp.EDC.Tests.Editor.MagneticDetentTrack1DTests.FrameRateVariants_ReachSameFinalDetentWithinPointTwoMillimeters(60)" methodname="FrameRateVariants_ReachSameFinalDetentWithinPointTwoMillimeters" classname="FidgetingApp.EDC.Tests.Editor.MagneticDetentTrack1DTests" runstate="Runnable" seed="774489392" result="Passed" start-time="2026-09-01 02:06:15Z" end-time="2026-09-01 02:06:15Z" duration="0.000133" asserts="0">
+                    <properties />
+                  </test-case>
+                  <test-case id="1138" name="FrameRateVariants_ReachSameFinalDetentWithinPointTwoMillimeters(120)" fullname="FidgetingApp.EDC.Tests.Editor.MagneticDetentTrack1DTests.FrameRateVariants_ReachSameFinalDetentWithinPointTwoMillimeters(120)" methodname="FrameRateVariants_ReachSameFinalDetentWithinPointTwoMillimeters" classname="FidgetingApp.EDC.Tests.Editor.MagneticDetentTrack1DTests" runstate="Runnable" seed="500325996" result="Passed" start-time="2026-09-01 02:06:15Z" end-time="2026-09-01 02:06:15Z" duration="0.000110" asserts="0">
+                    <properties />
+                  </test-case>
+                </test-suite>
+                <test-case id="1124" name="HeavyProfile_IsTheSingleSixDetent68MillimeterSource" fullname="FidgetingApp.EDC.Tests.Editor.MagneticDetentTrack1DTests.HeavyProfile_IsTheSingleSixDetent68MillimeterSource" methodname="HeavyProfile_IsTheSingleSixDetent68MillimeterSource" classname="FidgetingApp.EDC.Tests.Editor.MagneticDetentTrack1DTests" runstate="Runnable" seed="520097004" result="Passed" start-time="2026-09-01 02:06:15Z" end-time="2026-09-01 02:06:15Z" duration="0.000696" asserts="0">
+                  <properties />
+                </test-case>
+                <test-case id="1125" name="InteriorDefaultDetent_CanBreakAwayImmediatelyInBothDirections" fullname="FidgetingApp.EDC.Tests.Editor.MagneticDetentTrack1DTests.InteriorDefaultDetent_CanBreakAwayImmediatelyInBothDirections" methodname="InteriorDefaultDetent_CanBreakAwayImmediatelyInBothDirections" classname="FidgetingApp.EDC.Tests.Editor.MagneticDetentTrack1DTests" runstate="Runnable" seed="380123155" result="Passed" start-time="2026-09-01 02:06:15Z" end-time="2026-09-01 02:06:15Z" duration="0.000249" asserts="0">
+                  <properties />
+                </test-case>
+                <test-case id="1129" name="ManualPullPastCapturingDetent_ImmediatelyReturnsControlToFinger" fullname="FidgetingApp.EDC.Tests.Editor.MagneticDetentTrack1DTests.ManualPullPastCapturingDetent_ImmediatelyReturnsControlToFinger" methodname="ManualPullPastCapturingDetent_ImmediatelyReturnsControlToFinger" classname="FidgetingApp.EDC.Tests.Editor.MagneticDetentTrack1DTests" runstate="Runnable" seed="702131425" result="Passed" start-time="2026-09-01 02:06:15Z" end-time="2026-09-01 02:06:15Z" duration="0.000439" asserts="0">
+                  <properties />
+                </test-case>
+                <test-case id="1131" name="PoweredTraversal_ReportsEveryBarrierAndEndsExactlyAtRest" fullname="FidgetingApp.EDC.Tests.Editor.MagneticDetentTrack1DTests.PoweredTraversal_ReportsEveryBarrierAndEndsExactlyAtRest" methodname="PoweredTraversal_ReportsEveryBarrierAndEndsExactlyAtRest" classname="FidgetingApp.EDC.Tests.Editor.MagneticDetentTrack1DTests" runstate="Runnable" seed="1442215902" result="Passed" start-time="2026-09-01 02:06:15Z" end-time="2026-09-01 02:06:15Z" duration="0.000230" asserts="0">
+                  <properties />
+                </test-case>
+                <test-case id="1135" name="Release_UsesPositionAndVelocityPredictionThenCapturesNearestDetent" fullname="FidgetingApp.EDC.Tests.Editor.MagneticDetentTrack1DTests.Release_UsesPositionAndVelocityPredictionThenCapturesNearestDetent" methodname="Release_UsesPositionAndVelocityPredictionThenCapturesNearestDetent" classname="FidgetingApp.EDC.Tests.Editor.MagneticDetentTrack1DTests" runstate="Runnable" seed="1797179324" result="Passed" start-time="2026-09-01 02:06:15Z" end-time="2026-09-01 02:06:15Z" duration="0.000355" asserts="0">
+                  <properties />
+                </test-case>
+                <test-case id="1128" name="SlowManualSearch_DeceleratesNearBarrierAndStillCrossesIt" fullname="FidgetingApp.EDC.Tests.Editor.MagneticDetentTrack1DTests.SlowManualSearch_DeceleratesNearBarrierAndStillCrossesIt" methodname="SlowManualSearch_DeceleratesNearBarrierAndStillCrossesIt" classname="FidgetingApp.EDC.Tests.Editor.MagneticDetentTrack1DTests" runstate="Runnable" seed="974268059" result="Passed" start-time="2026-09-01 02:06:15Z" end-time="2026-09-01 02:06:15Z" duration="0.000288" asserts="0">
+                  <properties />
+                </test-case>
+                <test-case id="1130" name="SpatialEdgeCues_DoNotRepeatWhileFingerHoldsStill" fullname="FidgetingApp.EDC.Tests.Editor.MagneticDetentTrack1DTests.SpatialEdgeCues_DoNotRepeatWhileFingerHoldsStill" methodname="SpatialEdgeCues_DoNotRepeatWhileFingerHoldsStill" classname="FidgetingApp.EDC.Tests.Editor.MagneticDetentTrack1DTests" runstate="Runnable" seed="1168012515" result="Passed" start-time="2026-09-01 02:06:15Z" end-time="2026-09-01 02:06:15Z" duration="0.000884" asserts="0">
+                  <properties />
+                </test-case>
+              </test-suite>
+            </test-suite>
+            <test-suite type="TestFixture" id="1098" name="MagneticSlideTileGate12R002Tests" fullname="FidgetingApp.EDC.Tests.MagneticSlideTileGate12R002Tests" classname="FidgetingApp.EDC.Tests.MagneticSlideTileGate12R002Tests" runstate="Runnable" testcasecount="8" result="Passed" start-time="2026-09-01 02:06:21Z" end-time="2026-09-01 02:06:22Z" duration="1.095081" total="8" passed="8" failed="0" inconclusive="0" skipped="0" asserts="0">
+              <properties />
+              <test-case id="1103" name="ApprovedGeometryAndMaterialsRemainExact" fullname="FidgetingApp.EDC.Tests.MagneticSlideTileGate12R002Tests.ApprovedGeometryAndMaterialsRemainExact" methodname="ApprovedGeometryAndMaterialsRemainExact" classname="FidgetingApp.EDC.Tests.MagneticSlideTileGate12R002Tests" runstate="Runnable" seed="1857191593" result="Passed" start-time="2026-09-01 02:06:15Z" end-time="2026-09-01 02:06:15Z" duration="0.006976" asserts="0">
+                <properties />
+              </test-case>
+              <test-case id="1104" name="EndpointInterlockStopsAllUnauthorizedMotion" fullname="FidgetingApp.EDC.Tests.MagneticSlideTileGate12R002Tests.EndpointInterlockStopsAllUnauthorizedMotion" methodname="EndpointInterlockStopsAllUnauthorizedMotion" classname="FidgetingApp.EDC.Tests.MagneticSlideTileGate12R002Tests" runstate="Runnable" seed="2129223995" result="Passed" start-time="2026-09-01 02:06:15Z" end-time="2026-09-01 02:06:15Z" duration="0.043024" asserts="0">
+                <properties />
+                <output><![CDATA[[MagneticSlideRuntime] angle-update unwrapped=36.0 angle=36.0 detent=03
+[MagneticSlideRuntime] angle-update unwrapped=360.0 angle=0.0 detent=00
+]]></output>
+              </test-case>
+              <test-case id="1105" name="FullMotionKeepsOneConnectedInPlaneStack" fullname="FidgetingApp.EDC.Tests.MagneticSlideTileGate12R002Tests.FullMotionKeepsOneConnectedInPlaneStack" methodname="FullMotionKeepsOneConnectedInPlaneStack" classname="FidgetingApp.EDC.Tests.MagneticSlideTileGate12R002Tests" runstate="Runnable" seed="1965928694" result="Passed" start-time="2026-09-01 02:06:15Z" end-time="2026-09-01 02:06:15Z" duration="0.041053" asserts="0">
+                <properties />
+                <output><![CDATA[[MagneticSlideRuntime] angle-update unwrapped=12.0 angle=12.0 detent=01
+[MagneticSlideRuntime] angle-update unwrapped=24.0 angle=24.0 detent=02
+[MagneticSlideRuntime] angle-update unwrapped=36.0 angle=36.0 detent=03
+[MagneticSlideRuntime] angle-update unwrapped=48.0 angle=48.0 detent=04
+[MagneticSlideRuntime] angle-update unwrapped=60.0 angle=60.0 detent=05
+[MagneticSlideRuntime] angle-update unwrapped=72.0 angle=72.0 detent=06
+[MagneticSlideRuntime] angle-update unwrapped=84.0 angle=84.0 detent=07
+[MagneticSlideRuntime] angle-update unwrapped=96.0 angle=96.0 detent=08
+[MagneticSlideRuntime] angle-update unwrapped=108.0 angle=108.0 detent=09
+[MagneticSlideRuntime] angle-update unwrapped=120.0 angle=120.0 detent=10
+[MagneticSlideRuntime] angle-update unwrapped=132.0 angle=132.0 detent=11
+[MagneticSlideRuntime] angle-update unwrapped=144.0 angle=144.0 detent=12
+[MagneticSlideRuntime] angle-update unwrapped=156.0 angle=156.0 detent=13
+[MagneticSlideRuntime] angle-update unwrapped=168.0 angle=168.0 detent=14
+[MagneticSlideRuntime] angle-update unwrapped=180.0 angle=180.0 detent=15
+[MagneticSlideRuntime] angle-update unwrapped=192.0 angle=192.0 detent=16
+[MagneticSlideRuntime] angle-update unwrapped=204.0 angle=204.0 detent=17
+[MagneticSlideRuntime] angle-update unwrapped=216.0 angle=216.0 detent=18
+[MagneticSlideRuntime] angle-update unwrapped=228.0 angle=228.0 detent=19
+[MagneticSlideRuntime] angle-update unwrapped=240.0 angle=240.0 detent=20
+[MagneticSlideRuntime] angle-update unwrapped=252.0 angle=252.0 detent=21
+[MagneticSlideRuntime] angle-update unwrapped=264.0 angle=264.0 detent=22
+[MagneticSlideRuntime] angle-update unwrapped=276.0 angle=276.0 detent=23
+[MagneticSlideRuntime] angle-update unwrapped=288.0 angle=288.0 detent=24
+[MagneticSlideRuntime] angle-update unwrapped=300.0 angle=300.0 detent=25
+[MagneticSlideRuntime] angle-update unwrapped=312.0 angle=312.0 detent=26
+[MagneticSlideRuntime] angle-update unwrapped=324.0 angle=324.0 detent=27
+[MagneticSlideRuntime] angle-update unwrapped=336.0 angle=336.0 detent=28
+[MagneticSlideRuntime] angle-update unwrapped=348.0 angle=348.0 detent=29
+[MagneticSlideRuntime] angle-update unwrapped=360.0 angle=0.0 detent=00
+]]></output>
+              </test-case>
+              <test-case id="1106" name="HapticsOnlyConsumeSemanticMechanismEvents" fullname="FidgetingApp.EDC.Tests.MagneticSlideTileGate12R002Tests.HapticsOnlyConsumeSemanticMechanismEvents" methodname="HapticsOnlyConsumeSemanticMechanismEvents" classname="FidgetingApp.EDC.Tests.MagneticSlideTileGate12R002Tests" runstate="Runnable" seed="924944464" result="Passed" start-time="2026-09-01 02:06:15Z" end-time="2026-09-01 02:06:15Z" duration="0.022314" asserts="0">
+                <properties />
+              </test-case>
+              <test-case id="1099" name="SharedSettingsOwnAllEndpointAndDetentValues" fullname="FidgetingApp.EDC.Tests.MagneticSlideTileGate12R002Tests.SharedSettingsOwnAllEndpointAndDetentValues" methodname="SharedSettingsOwnAllEndpointAndDetentValues" classname="FidgetingApp.EDC.Tests.MagneticSlideTileGate12R002Tests" runstate="Runnable" seed="1180514803" result="Passed" start-time="2026-09-01 02:06:15Z" end-time="2026-09-01 02:06:15Z" duration="0.001471" asserts="0">
+                <properties />
+              </test-case>
+              <test-case id="1102" name="ShippingScenePlayModeUsesApprovedAttachedMotion" fullname="FidgetingApp.EDC.Tests.MagneticSlideTileGate12R002Tests.ShippingScenePlayModeUsesApprovedAttachedMotion" methodname="ShippingScenePlayModeUsesApprovedAttachedMotion" classname="FidgetingApp.EDC.Tests.MagneticSlideTileGate12R002Tests" runstate="Runnable" seed="684210271" result="Passed" start-time="2026-09-01 02:06:15Z" end-time="2026-09-01 02:06:21Z" duration="5.722056" asserts="0">
+                <properties>
+                  <property name="_JOINTYPE" value="UnityCombinatorial" />
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+                <output><![CDATA[[MagneticSlideRuntime] angle-update unwrapped=12.0 angle=12.0 detent=01
+]]></output>
+              </test-case>
+              <test-case id="1100" name="ShippingScenePromotesApprovedCandidateByDefault" fullname="FidgetingApp.EDC.Tests.MagneticSlideTileGate12R002Tests.ShippingScenePromotesApprovedCandidateByDefault" methodname="ShippingScenePromotesApprovedCandidateByDefault" classname="FidgetingApp.EDC.Tests.MagneticSlideTileGate12R002Tests" runstate="Runnable" seed="1718802318" result="Passed" start-time="2026-09-01 02:06:21Z" end-time="2026-09-01 02:06:21Z" duration="0.249878" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1101" name="ShippingSceneWiresPointerInputToApprovedCandidate" fullname="FidgetingApp.EDC.Tests.MagneticSlideTileGate12R002Tests.ShippingSceneWiresPointerInputToApprovedCandidate" methodname="ShippingSceneWiresPointerInputToApprovedCandidate" classname="FidgetingApp.EDC.Tests.MagneticSlideTileGate12R002Tests" runstate="Runnable" seed="957519469" result="Passed" start-time="2026-09-01 02:06:21Z" end-time="2026-09-01 02:06:22Z" duration="0.537949" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+            </test-suite>
+            <test-suite type="TestFixture" id="1107" name="MagneticSlideTileRuntimeInputTests" fullname="FidgetingApp.EDC.Tests.MagneticSlideTileRuntimeInputTests" classname="FidgetingApp.EDC.Tests.MagneticSlideTileRuntimeInputTests" runstate="Runnable" testcasecount="5" result="Failed" site="Child" start-time="2026-09-01 02:06:22Z" end-time="2026-09-01 02:06:23Z" duration="1.308897" total="5" passed="1" failed="4" inconclusive="0" skipped="0" asserts="0">
+              <properties />
+              <failure>
+                <message><![CDATA[One or more child tests had errors]]></message>
+              </failure>
+              <test-case id="1112" name="SceneReloadStartsAtRestWithDefaultWiring" fullname="FidgetingApp.EDC.Tests.MagneticSlideTileRuntimeInputTests.SceneReloadStartsAtRestWithDefaultWiring" methodname="SceneReloadStartsAtRestWithDefaultWiring" classname="FidgetingApp.EDC.Tests.MagneticSlideTileRuntimeInputTests" runstate="Runnable" seed="1279421018" result="Failed" label="Error" start-time="2026-09-01 02:06:22Z" end-time="2026-09-01 02:06:22Z" duration="0.256381" asserts="0">
+                <properties>
+                  <property name="_JOINTYPE" value="UnityCombinatorial" />
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+                <failure>
+                  <message><![CDATA[System.NullReferenceException : Object reference not set to an instance of an object]]></message>
+                  <stack-trace><![CDATA[  at FidgetingApp.EDC.Tests.MagneticSlideTileRuntimeInputTests+<SceneReloadStartsAtRestWithDefaultWiring>d__7.MoveNext () [0x00054] in /Users/jiawei.zhou/Documents/Fidgeting app/unity/FidgetingApp/Assets/_EDC/Candidates/MagneticSlideTileGate12R002/Tests/Editor/MagneticSlideTileRuntimeInputTests.cs:389 
+  at UnityEngine.TestTools.TestEnumerator+<Execute>d__7.MoveNext () [0x0003a] in ./Library/PackageCache/com.unity.test-framework@1405238725ab/UnityEngine.TestRunner/NUnitExtensions/Attributes/TestEnumerator.cs:44 ]]></stack-trace>
+                </failure>
+              </test-case>
+              <test-case id="1108" name="ShippingSceneUsesProductionInputCameraAudioAndRegistry" fullname="FidgetingApp.EDC.Tests.MagneticSlideTileRuntimeInputTests.ShippingSceneUsesProductionInputCameraAudioAndRegistry" methodname="ShippingSceneUsesProductionInputCameraAudioAndRegistry" classname="FidgetingApp.EDC.Tests.MagneticSlideTileRuntimeInputTests" runstate="Runnable" seed="195973248" result="Passed" start-time="2026-09-01 02:06:22Z" end-time="2026-09-01 02:06:22Z" duration="0.252265" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1110" name="TouchInputCompletesThirtyDetentsWithAudioAndHaptics" fullname="FidgetingApp.EDC.Tests.MagneticSlideTileRuntimeInputTests.TouchInputCompletesThirtyDetentsWithAudioAndHaptics" methodname="TouchInputCompletesThirtyDetentsWithAudioAndHaptics" classname="FidgetingApp.EDC.Tests.MagneticSlideTileRuntimeInputTests" runstate="Runnable" seed="525254133" result="Failed" start-time="2026-09-01 02:06:22Z" end-time="2026-09-01 02:06:23Z" duration="0.297416" asserts="0">
+                <properties>
+                  <property name="_JOINTYPE" value="UnityCombinatorial" />
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+                <failure>
+                  <message><![CDATA[  Expected: True
+  But was:  False
+]]></message>
+                  <stack-trace><![CDATA[at FidgetingApp.EDC.Tests.MagneticSlideTileRuntimeInputTests+<TouchInputCompletesThirtyDetentsWithAudioAndHaptics>d__5.MoveNext () [0x00103] in /Users/jiawei.zhou/Documents/Fidgeting app/unity/FidgetingApp/Assets/_EDC/Candidates/MagneticSlideTileGate12R002/Tests/Editor/MagneticSlideTileRuntimeInputTests.cs:199
+at UnityEngine.TestTools.TestEnumerator+<Execute>d__7.MoveNext () [0x0003a] in ./Library/PackageCache/com.unity.test-framework@1405238725ab/UnityEngine.TestRunner/NUnitExtensions/Attributes/TestEnumerator.cs:44
+]]></stack-trace>
+                </failure>
+              </test-case>
+              <test-case id="1109" name="TouchInputEnforcesEndpointInterlockAndAlignedClose" fullname="FidgetingApp.EDC.Tests.MagneticSlideTileRuntimeInputTests.TouchInputEnforcesEndpointInterlockAndAlignedClose" methodname="TouchInputEnforcesEndpointInterlockAndAlignedClose" classname="FidgetingApp.EDC.Tests.MagneticSlideTileRuntimeInputTests" runstate="Runnable" seed="1253051825" result="Failed" start-time="2026-09-01 02:06:23Z" end-time="2026-09-01 02:06:23Z" duration="0.251860" asserts="0">
+                <properties>
+                  <property name="_JOINTYPE" value="UnityCombinatorial" />
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+                <failure>
+                  <message><![CDATA[  Expected: True
+  But was:  False
+]]></message>
+                  <stack-trace><![CDATA[at FidgetingApp.EDC.Tests.MagneticSlideTileRuntimeInputTests+<TouchInputEnforcesEndpointInterlockAndAlignedClose>d__4.MoveNext () [0x0014a] in /Users/jiawei.zhou/Documents/Fidgeting app/unity/FidgetingApp/Assets/_EDC/Candidates/MagneticSlideTileGate12R002/Tests/Editor/MagneticSlideTileRuntimeInputTests.cs:134
+at UnityEngine.TestTools.TestEnumerator+<Execute>d__7.MoveNext () [0x0003a] in ./Library/PackageCache/com.unity.test-framework@1405238725ab/UnityEngine.TestRunner/NUnitExtensions/Attributes/TestEnumerator.cs:44
+]]></stack-trace>
+                </failure>
+              </test-case>
+              <test-case id="1111" name="TouchInputRoutesOrbitPinchAndToyWithoutGestureTheft" fullname="FidgetingApp.EDC.Tests.MagneticSlideTileRuntimeInputTests.TouchInputRoutesOrbitPinchAndToyWithoutGestureTheft" methodname="TouchInputRoutesOrbitPinchAndToyWithoutGestureTheft" classname="FidgetingApp.EDC.Tests.MagneticSlideTileRuntimeInputTests" runstate="Runnable" seed="929875754" result="Failed" start-time="2026-09-01 02:06:23Z" end-time="2026-09-01 02:06:23Z" duration="0.248586" asserts="0">
+                <properties>
+                  <property name="_JOINTYPE" value="UnityCombinatorial" />
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+                <failure>
+                  <message><![CDATA[  Expected: not equal to 0.0f
+  But was:  0.0f
+]]></message>
+                  <stack-trace><![CDATA[at FidgetingApp.EDC.Tests.MagneticSlideTileRuntimeInputTests+<TouchInputRoutesOrbitPinchAndToyWithoutGestureTheft>d__6.MoveNext () [0x00123] in /Users/jiawei.zhou/Documents/Fidgeting app/unity/FidgetingApp/Assets/_EDC/Candidates/MagneticSlideTileGate12R002/Tests/Editor/MagneticSlideTileRuntimeInputTests.cs:289
+at UnityEngine.TestTools.TestEnumerator+<Execute>d__7.MoveNext () [0x0003a] in ./Library/PackageCache/com.unity.test-framework@1405238725ab/UnityEngine.TestRunner/NUnitExtensions/Attributes/TestEnumerator.cs:44
+]]></stack-trace>
+                </failure>
+                <output><![CDATA[Saving results to: /Users/jiawei.zhou/Library/Application Support/DefaultCompany/Fidget Spinner/TestResults.xml
+]]></output>
+              </test-case>
+            </test-suite>
+          </test-suite>
+        </test-suite>
+      </test-suite>
+    </test-suite>
+  </test-suite>
+</test-run>

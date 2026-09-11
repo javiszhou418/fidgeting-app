@@ -1,0 +1,67 @@
+{
+  "schemaVersion": 1,
+  "gate": "09-environment",
+  "revision": 8,
+  "blenderVersion": "5.2.0 LTS",
+  "pass": true,
+  "checks": {
+    "savedBlend": true,
+    "sceneGate": true,
+    "sourceHashLocked": true,
+    "contractHashLocked": true,
+    "geometryDigestLocked": true,
+    "materialDigestLocked": true,
+    "lightDigestLocked": true,
+    "cameraDigestLocked": true,
+    "portableWorldOnly": true,
+    "portableProjection": true,
+    "portableHdriExternal": true,
+    "portableHdriHash": true,
+    "portableHdriResolution": true,
+    "portableHdriSeam": true,
+    "portableHdriLinearInterpretation": true,
+    "worldStrength": true,
+    "groundMaterial": true,
+    "groundValues": true,
+    "fixedAxisObjectMatrix": true,
+    "hierarchy": true,
+    "noAnimation": true,
+    "zeroEmission": true,
+    "glbMeshes": true,
+    "glbMaterials": true,
+    "glbTexturesEmbedded": true,
+    "glbNoAnimations": true,
+    "portabilityContractHash": true,
+    "unityUntouched": true
+  },
+  "worldNodeTypes": [
+    "OUTPUT_WORLD",
+    "BACKGROUND",
+    "TEX_ENVIRONMENT"
+  ],
+  "proceduralWorldNodes": [],
+  "hdri": {
+    "path": "/Users/jiawei.zhou/Documents/Fidgeting app/unity/FidgetingApp/ArtSource/ModelPipeline/magnetic-slide-tile/evidence/09-environment/rev-008/magnetic-slide-tile-shipping-studio-r008.exr",
+    "sha256": "7f1c9fded84c453efbc5300a6a71fe2948534055d3f4ae5052696909f30be6ab",
+    "resolutionPx": [
+      2048,
+      1024
+    ],
+    "seamMaxAbsoluteLinearDelta": 0.0,
+    "colorspace": "Non-Color"
+  },
+  "glb": {
+    "meshCount": 8,
+    "materialNames": [
+      "M07R11_BallCandidate_UnknownMaterial",
+      "M07R11_Crystal_LowerDistinct",
+      "M07R11_Crystal_Upper",
+      "M07R11_DarkExteriorSide",
+      "M07R11_InternalSilverReference",
+      "M07R11_NeutralTechnical",
+      "M07R11_PolishedSilver"
+    ],
+    "imageCount": 4,
+    "animationCount": 0
+  }
+}

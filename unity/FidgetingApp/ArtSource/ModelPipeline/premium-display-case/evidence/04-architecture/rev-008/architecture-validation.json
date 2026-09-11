@@ -1,0 +1,44 @@
+{
+  "schema": "premium-display-case-pack-opening-gate04-validation.v1",
+  "status": "pass",
+  "checks": {
+    "actualCaseAndPackSources": true,
+    "exact3100msTimeline": true,
+    "epicFakeOutWindow": true,
+    "impactWindow180ms": true,
+    "oneSettlingReveal": true,
+    "wholeCaseContentSlotBoundary": true,
+    "forbiddenMotionAbsent": true,
+    "reduceMotionMapped": true,
+    "textureCountExact": true,
+    "recordingAndImpactEvidencePresent": true
+  },
+  "metrics": {
+    "frames": 186,
+    "fps": 60,
+    "durationSeconds": 3.1,
+    "maxSimultaneousMovingLayers": 9,
+    "offlineCompositorMeanGenerationMsPerFrame": 39.585,
+    "drawCalls": null,
+    "drawCallEvidence": "not measured; offline Gate 04 recording is not Unity Editor/Simulator performance proof",
+    "deviceFrameTime": null,
+    "devicePerformanceStatus": "physical iPhone and Android pending"
+  },
+  "artifactHashes": {
+    "video": "8fdaa4e47f242fa1add5aa8a7adc5b3b65fc27263071b3c438b0ff0c4e20698a",
+    "impactGif": "2598a80f125c7d8ad1c9aee105c78ede8c77f9d6547c9417e0eb68a4105ea172",
+    "impactContactSheet": "05f65bae1d5c88487676d373a01f7e402e6eae4ca29172602521d4d92f2ac735",
+    "textureManifest": "6442ca32c1eb21054c7cb0a76f6552447083f29059d7e083ea886bd2840f0bf1",
+    "architecture": "37f5c69b4a9412d46cc1ec2dd7e346ca0ec5075f68facbff76a2bd2be4012dfc",
+    "signalstats": "f3cb435881c4f87b1cf3e6d9ae80437125debc7f19e2c5d18e726cb5337f0910"
+  },
+  "truth": {
+    "candidateEvidenceOnly": true,
+    "actualShippingCasePixels": true,
+    "actualPackPixels": true,
+    "unityRuntimeWired": false,
+    "nativeUiWired": false,
+    "finalMaterialsDelivered": false,
+    "physicalPhoneInstalled": false
+  }
+}

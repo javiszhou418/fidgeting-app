@@ -1,0 +1,59 @@
+{
+    "schemaVersion": 1,
+    "modelId": "premium-display-case",
+    "gate": "11-unity-parity",
+    "parityRevision": 1,
+    "status": "pass",
+    "unityVersion": "6000.5.6f1",
+    "renderPipeline": "URP",
+    "width": 820,
+    "height": 1000,
+    "neutralPath": "unity/FidgetingApp/ArtSource/ModelPipeline/premium-display-case/evidence/11-unity-parity/rev-001/unity-neutral.png",
+    "neutralSha256": "8e48782810430dcc4b97a2c0a4fb032b88eaeb5f2e7c5038c0cc40d83cf8014b",
+    "orbitFramesDirectory": "unity/FidgetingApp/ArtSource/ModelPipeline/premium-display-case/evidence/11-unity-parity/rev-001/orbit-frames",
+    "orbitFrameCount": 48,
+    "inspectionOrbitDegrees": 360.0,
+    "inspectionFramesPerSecond": 12,
+    "camera": {
+        "blenderPositionMm": {
+            "x": 330.0,
+            "y": 185.0,
+            "z": 690.0
+        },
+        "unityPositionMeters": {
+            "x": 0.33000001311302187,
+            "y": 0.1850000023841858,
+            "z": -0.6899999976158142
+        },
+        "blenderLookAtMm": {
+            "x": 0.0,
+            "y": 8.0,
+            "z": 0.0
+        },
+        "unityLookAtMeters": {
+            "x": 0.0,
+            "y": 0.00800000037997961,
+            "z": 0.0
+        },
+        "focalLengthMm": 62.0,
+        "sensorWidthMm": 36.0,
+        "sensorHeightMm": 32.0,
+        "gateFit": "Vertical",
+        "mirroredAxis": "z",
+        "unityUp": {
+            "x": -0.7745293378829956,
+            "y": -0.4154292941093445,
+            "z": -0.47699373960494997
+        }
+    },
+    "checks": {
+        "unityNeutralExists": true,
+        "orbitFramesComplete": true,
+        "cameraPositionMatched": true,
+        "cameraLookTargetMatched": true,
+        "focalLengthMatched": true,
+        "sensorMatched": true,
+        "staticCamera": true,
+        "inspectionOnlyNotShippingAnimation": true
+    }
+}

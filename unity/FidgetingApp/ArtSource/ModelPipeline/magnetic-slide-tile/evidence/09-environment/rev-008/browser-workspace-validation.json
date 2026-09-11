@@ -1,0 +1,64 @@
+{
+  "pass": true,
+  "desktop": {
+    "activeModel": "magnetic-slide-tile",
+    "tabs": [
+      "参考原图",
+      "分析（截图/视频）",
+      "尺寸",
+      "交互 CAD",
+      "白模",
+      "贴图与材质",
+      "Unity 灯光与成品"
+    ],
+    "tab": "materials",
+    "tabStatus": "current",
+    "roadmap": 12,
+    "stage": "09-environment",
+    "currentGate": "9",
+    "approvedCount": "8",
+    "text": "\n    \n      \n        Gate 09 rev 8 · 可移植 Shipping 环境\n        目标环境是否只改变环境响应，并能无隐性依赖地复现到 Unity URP？\n        先操作环境 GLB：拖动旋转、滚轮缩放，并切换中性／Shipping。再看同机位闭合、最大打开、反射近照和真实 Blender 双环境转台。\n        \n          本轮只确认\n          2048×1024 线性 EXR 无缝环境灯光／机位／曝光不变\n          平底／凸轴／四槽／载体可读Unity 可移植合同与量化容差\n        \n        \n          “无可避免损失”边界\n          几何／层级／轴心／UV／图案 mask 必须精确\n          Blender 程序材质到 URP 以测量视觉一致为准\n          AgX 与 Unity ACES 不假定等价iPhone 验收在 Gate 12 视觉批准之后\n        \n        \n          本轮没有 Unity 导入\n          旧 shipping 模型仍是默认。没有 Simulator、Build、安装或手机运行。\n        \n      \n    \n    \n    \n      \n        素材11 项\n        \n    \n      GLB\n      \n        interactive-environment-lookdev\n        magnetic-slide-tile-environment-lookdev-r008\n      \n    \n  \n    \n      MP4\n      \n        environment-comparison-turntable\n        magnetic-slide-tile-environment-turntable-r008\n      \n    \n  \n    \n      \n      \n        environment-comparison-board\n        magnetic-slide-tile-environment-comparison-board-r008\n      \n    \n  \n    \n      \n      \n        shipping-environment-views\n        magnetic-slide-tile-environment-shipping-views-r008\n      \n    \n  \n    \n      \n      \n        reflection-comparison-board\n        magnetic-slide-tile-environment-reflection-board-r008\n      \n    \n  \n    \n      \n      \n        mechanical-readability-board\n        magnetic-slide-tile-environment-mechanical-board-r008\n      \n    \n  \n    \n      \n      \n        portable-environment-board\n        magnetic-slide-tile-environment-portable-board-r008\n      \n    \n  \n    \n      \n      \n        shipping-environment\n        magnetic-slide-tile-environment-shipping-closed-r008\n      \n    \n  \n    \n      \n      \n        shipping-environment\n        magnetic-slide-tile-environment-shipping-open-r008\n      \n    \n  \n    \n      \n      \n        shipping-detent\n        magnetic-slide-tile-environment-shipping-detent12-r008\n      \n    \n  \n    \n      \n      \n        shipping-detent\n        magnetic-slide-tile-environment-shipping-detent36-r008\n      \n    \n  \n      \n    \n    \n      \n        历史／过期／被退回证据 · 26 项\n        这些文件保留用于追溯，不代表当前方案。当前 revision 的素材在上方。\n        \n    \n      \n      \n        neutral-environment未直接承接 08-lighting\n        magnetic-slide-tile-neutral-environment-r001\n      \n    \n  \n    \n      \n      \n        shipping-environment未直接承接 08-lighting\n        magnetic-slide-tile-shipping-environment-r001\n      \n    \n  \n    \n      \n      \n        environment-diagnostic未直接承接 08-lighting\n        magnetic-slide-tile-neutral-side-reflection-r001\n      \n    \n  \n    \n      \n      \n        environment-diagnostic未直接承接 08-lighting\n        magnetic-slide-tile-shipping-side-reflection-r001\n      \n    \n  \n    \n      \n      \n        environment-review-board未直接承接 08-lighting\n        magnetic-slide-tile-environment-comparison-board-r001\n      \n    \n  \n    \n      \n      \n        environment-review-board未直接承接 08-lighting\n        magnetic-slide-tile-reflection-closeup-comparison-r001\n      \n    \n  \n    \n      \n      \n        environment-diagnostic未直接承接 08-lighting\n        magnetic-slide-tile-environment-difference-map-r001\n      \n    \n  \n    \n      \n      \n        environment-review-board未直接承接 08-lighting\n        magnetic-slide-tile-environment-workbench-r001\n      \n    \n  \n    \n      \n      \n        environment-review-board未直接承接 08-lighting\n        magnetic-slide-tile-browser-environment-workbench-r001\n      \n    \n  \n    \n      \n      \n        neutral-environment未直接承接 08-lighting\n        magnetic-slide-tile-open-neutral-hero-r002\n      \n    \n  \n    \n      \n      \n        shipping-environment未直接承接 08-lighting\n        magnetic-slide-tile-open-shipping-hero-r002\n      \n    \n  \n    \n      \n      \n        environment-diagnostic未直接承接 08-lighting\n        magnetic-slide-tile-open-shipping-oblique-r002\n      \n    \n  \n    \n      \n      \n        environment-diagnostic未直接承接 08-lighting\n        magnetic-slide-tile-open-shipping-top-r002\n      \n    \n  \n    \n      \n      \n        environment-diagnostic未直接承接 08-lighting\n        magnetic-slide-tile-open-neutral-layer-closeup-r002\n      \n    \n  \n    \n      \n      \n        environment-diagnostic未直接承接 08-lighting\n        magnetic-slide-tile-open-shipping-layer-closeup-r002\n      \n    \n  \n    \n      \n      \n        environment-sequence未直接承接 08-lighting\n        magnetic-slide-tile-open-sequence-00-r002\n      \n    \n  \n    \n      \n      \n        environment-sequence未直接承接 08-lighting\n        magnetic-slide-tile-open-sequence-07-r002\n      \n    \n  \n    \n      \n      \n        environment-sequence未直接承接 08-lighting\n        magnetic-slide-tile-open-sequence-14-r002\n      \n    \n  \n    \n      \n      \n        environment-sequence未直接承接 08-lighting\n        magnetic-slide-tile-open-sequence-21-r002\n      \n    \n  \n    \n      \n      \n        environment-review-board未直接承接 08-lighting\n        magnetic-slide-tile-open-environment-comparison-board-r002\n      \n    \n  \n    \n      \n      \n        environment-review-board未直接承接 08-lighting\n        magnetic-slide-tile-open-style-review-board-r002\n      \n    \n  \n    \n      \n      \n        environment-review-board未直接承接 08-lighting\n        magnetic-slide-tile-closed-open-sequence-board-r002\n      \n    \n  \n    \n      \n      \n        environment-review-board未直接承接 08-lighting\n        magnetic-slide-tile-lower-artwork-visibility-board-r002\n      \n    \n  \n    \n      \n      \n        environment-review-board未直接承接 08-lighting\n        magnetic-slide-tile-open-reflection-closeup-board-r002\n      \n    \n  \n    \n      \n      \n        environment-review-board未直接承接 08-lighting\n        magnetic-slide-tile-open-workbench-r002\n      \n    \n  \n    \n      \n      \n        environment-review-board未直接承接 08-lighting\n        magnetic-slide-tile-browser-open-environment-workbench-r002\n      \n    \n  \n      \n    \n    \n    \n    \n      需要修改的地方\n      有错误，退回修改\n      确认，继续\n    \n  \n  ",
+    "glb": true,
+    "turntable": true,
+    "comparison": true,
+    "reflection": true,
+    "portable": true,
+    "overflow": 0
+  },
+  "viewer": {
+    "width": 1118,
+    "environmentModes": [
+      "neutral",
+      "shipping"
+    ],
+    "persistedEnvironmentMode": "shipping",
+    "persistedEnvironment": true,
+    "persistedExposure": 1.3
+  },
+  "turntable": {
+    "duration": 3,
+    "width": 1440,
+    "height": 590
+  },
+  "reload": {
+    "stage": "09-environment",
+    "tab": "materials",
+    "memoryStage": "09-environment",
+    "viewerMode": "shipping"
+  },
+  "mobile": {
+    "tabs": 7,
+    "roadmap": 12,
+    "stage": "09-environment",
+    "glb": true,
+    "overflow": 0,
+    "tabScroller": true
+  },
+  "comparisonModalClose": true,
+  "runtimeExceptionCount": 0,
+  "runtimeExceptions": [],
+  "loadingFailureCount": 0,
+  "loadingFailures": [],
+  "screenshotPath": "/Users/jiawei.zhou/Documents/Fidgeting app/Artifacts/ModelProvenanceExplorer/magnetic-slide-gate09-rev8-persistent-workbench.png",
+  "focusedScreenshotPath": "/Users/jiawei.zhou/Documents/Fidgeting app/Artifacts/ModelProvenanceExplorer/magnetic-slide-gate09-rev8-workbench-focused.png"
+}

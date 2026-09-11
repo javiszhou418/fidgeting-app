@@ -1,0 +1,4634 @@
+{
+    "schema": "premium-display-case-gate04-r025-isolated-unity-capture.v1",
+    "status": "structural-pass-awaiting-full-size-visual-inspection",
+    "source": "actual isolated Unity 6000.5.6f1 URP Play Mode camera output",
+    "scene": "Assets/IsolatedProofR025/Generated/PackOpeningGate04R025Isolated.unity",
+    "width": 1206,
+    "height": 2622,
+    "targetAspect": 0.45995423197746279,
+    "targetProjectionApplied": true,
+    "fps": 60,
+    "frames": 96,
+    "durationSeconds": 1.600000023841858,
+    "normalSpeedFrames": "normal/frames/frame-%04d.png",
+    "normalSpeedVideo": "normal/normal-speed-proof.mp4",
+    "tearQuarterSpeedFrames": "tear-quarter-speed/frames/frame-%04d.png",
+    "tearQuarterSpeedVideo": "tear-quarter-speed/tear-quarter-speed-closeup.mp4",
+    "sevenPoseContactSheet": "normal/seven-pose-contact-sheet.png",
+    "effectsOffContactSheet": "physical-core-effects-off/seven-pose-effects-off-contact-sheet.png",
+    "technicalDiagnostics": "technical-id-bounds-mouth-occlusion.svg",
+    "maximumWhiteFraction": 0.0,
+    "minimumVisibleFraction": 0.7864279747009277,
+    "maximumProjectedCenterStep": 0.011992037296295166,
+    "maximumProjectedHeightStep": 0.00047135353088378906,
+    "maximumRootPositionStepMeters": 0.006485864520072937,
+    "frameBarrierCaptureCount": 277,
+    "frameBarrierAdvancedCount": 277,
+    "representation": "Pack-only Blender FBX with seven authored foil-pouch blend-shape poses; one live unchanged assembled case",
+    "caseGeometryBaked": false,
+    "caseInstances": 1,
+    "particles": false,
+    "vfxGraph": false,
+    "visualEffectsIntensity": 0.0,
+    "shippingRuntimeWired": false,
+    "shippingReady": false,
+    "physicalPhoneInstalled": false,
+    "checks": [
+        {
+            "id": "actual-unity-camera-render",
+            "passed": true,
+            "evidence": ""
+        },
+        {
+            "id": "unity-portrait-1206x2622",
+            "passed": true,
+            "evidence": "1206x2622"
+        },
+        {
+            "id": "unity-portrait-target-aspect-is-exact",
+            "passed": true,
+            "evidence": "0.4599542"
+        },
+        {
+            "id": "exact-60-fps",
+            "passed": true,
+            "evidence": "60"
+        },
+        {
+            "id": "proof-duration-within-12-to-18-seconds",
+            "passed": true,
+            "evidence": "1.60"
+        },
+        {
+            "id": "seven-authored-poses",
+            "passed": true,
+            "evidence": "7"
+        },
+        {
+            "id": "same-case-identity-every-frame",
+            "passed": true,
+            "evidence": "568105589213756006"
+        },
+        {
+            "id": "same-case-scale-every-frame",
+            "passed": true,
+            "evidence": "0.800000,0.800000,0.800000"
+        },
+        {
+            "id": "case-contained-before-crossing",
+            "passed": true,
+            "evidence": ""
+        },
+        {
+            "id": "case-crosses-physical-mouth",
+            "passed": true,
+            "evidence": ""
+        },
+        {
+            "id": "no-early-case-travel",
+            "passed": true,
+            "evidence": ""
+        },
+        {
+            "id": "pack-discard-starts-after-containment",
+            "passed": true,
+            "evidence": ""
+        },
+        {
+            "id": "pack-gone-after-cc0-discard",
+            "passed": true,
+            "evidence": ""
+        },
+        {
+            "id": "effects-off-physical-core-captured",
+            "passed": true,
+            "evidence": "7"
+        },
+        {
+            "id": "all-proof-frames-use-zero-effects",
+            "passed": true,
+            "evidence": "0"
+        },
+        {
+            "id": "source-discard-curve-exact",
+            "passed": true,
+            "evidence": ""
+        },
+        {
+            "id": "no-particles-or-vfx-graph",
+            "passed": true,
+            "evidence": ""
+        },
+        {
+            "id": "case-projected-center-continuous",
+            "passed": true,
+            "evidence": "0.011992"
+        },
+        {
+            "id": "case-projected-scale-continuous",
+            "passed": true,
+            "evidence": "0.000471"
+        },
+        {
+            "id": "case-root-continuous",
+            "passed": true,
+            "evidence": "0.006486"
+        },
+        {
+            "id": "no-blank-white-frame",
+            "passed": true,
+            "evidence": "0.000000"
+        },
+        {
+            "id": "no-black-frame",
+            "passed": true,
+            "evidence": "0.786428"
+        },
+        {
+            "id": "below-commit-rebound-exact",
+            "passed": true,
+            "evidence": ""
+        },
+        {
+            "id": "technical-live-case-id-at-090",
+            "passed": true,
+            "evidence": "case=225045, lip=13122, behindLip=225045, pack=True, dissolve=0.000000"
+        },
+        {
+            "id": "actual-unity-frame-advanced-before-every-render",
+            "passed": true,
+            "evidence": "captures=277, advanced=277"
+        },
+        {
+            "id": "shipping-ready-false",
+            "passed": true,
+            "evidence": ""
+        },
+        {
+            "id": "physical-phone-installed-false",
+            "passed": true,
+            "evidence": ""
+        }
+    ],
+    "technicalLiveCaseId": {
+        "stateSetFrame": 280,
+        "renderedAfterFrame": 282,
+        "width": 1206,
+        "height": 2622,
+        "packVisible": true,
+        "packDissolve": 0.0,
+        "mouthContactOcclusion": true,
+        "caseContainedInMouth": true,
+        "caseIdPixels": 225045,
+        "lipIdPixels": 13122,
+        "casePixelsBehindLip": 225045,
+        "caseIdBounds": {
+            "x": 0.1344398409128189,
+            "y": 0.6386875510215759,
+            "width": 0.7311203479766846,
+            "height": 0.15566575527191163
+        },
+        "lipIdBounds": {
+            "x": 0.05726141110062599,
+            "y": 0.6199923753738403,
+            "width": 0.9427385926246643,
+            "height": 0.13162916898727418
+        },
+        "packBounds": {
+            "x": -0.06460922956466675,
+            "y": 0.2303340584039688,
+            "width": 1.1341044902801514,
+            "height": 0.5997070074081421
+        },
+        "mouthBounds": {
+            "x": -0.0427665114402771,
+            "y": 0.5956798791885376,
+            "width": 1.0855331420898438,
+            "height": 0.17707252502441407
+        },
+        "physicalMouthRegion": {
+            "x": -0.06776650995016098,
+            "y": 0.22033405303955079,
+            "width": 1.135533094406128,
+            "height": 0.5974183678627014
+        }
+    },
+    "frameMetrics": [
+        {
+            "frame": 0,
+            "timeSeconds": 0.0,
+            "phase": "Sealed",
+            "occlusion": "Sealed",
+            "tearProgress": 0.0,
+            "packDissolve": 0.0,
+            "caseTravel": 0.0,
+            "mouthContactOcclusion": false,
+            "caseRootId": "568105589213756006",
+            "caseRendererIds": [
+                "568105589213755988",
+                "568105589213755980",
+                "568105589213755972",
+                "568105589213755948",
+                "568105589213755936"
+            ],
+            "caseRootPosition": {
+                "x": 0.0,
+                "y": 0.02800000086426735,
+                "z": 0.07000000029802323
+            },
+            "caseRootScale": {
+                "x": 0.800000011920929,
+                "y": 0.800000011920929,
+                "z": 0.800000011920929
+            },
+            "caseBounds": {
+                "x": 0.1333903968334198,
+                "y": 0.3454284071922302,
+                "width": 0.7332191467285156,
+                "height": 0.44966286420822146
+            },
+            "packBounds": {
+                "x": -0.04288297891616821,
+                "y": 0.23913556337356568,
+                "width": 1.0857658386230469,
+                "height": 0.5489512085914612
+            },
+            "packVisible": true,
+            "effectsEnabled": false,
+            "visibleFraction": 0.7891405820846558,
+            "whiteFraction": 0.0,
+            "stateSetFrame": 11,
+            "renderedAfterFrame": 12
+        },
+        {
+            "frame": 1,
+            "timeSeconds": 0.01666666753590107,
+            "phase": "Sealed",
+            "occlusion": "Sealed",
+            "tearProgress": 0.0,
+            "packDissolve": 0.0,
+            "caseTravel": 0.0,
+            "mouthContactOcclusion": false,
+            "caseRootId": "568105589213756006",
+            "caseRendererIds": [
+                "568105589213755988",
+                "568105589213755980",
+                "568105589213755972",
+                "568105589213755948",
+                "568105589213755936"
+            ],
+            "caseRootPosition": {
+                "x": 0.0,
+                "y": 0.02800000086426735,
+                "z": 0.07000000029802323
+            },
+            "caseRootScale": {
+                "x": 0.800000011920929,
+                "y": 0.800000011920929,
+                "z": 0.800000011920929
+            },
+            "caseBounds": {
+                "x": 0.1333903968334198,
+                "y": 0.3454284071922302,
+                "width": 0.7332191467285156,
+                "height": 0.44966286420822146
+            },
+            "packBounds": {
+                "x": -0.04288297891616821,
+                "y": 0.23913556337356568,
+                "width": 1.0857658386230469,
+                "height": 0.5489512085914612
+            },
+            "packVisible": true,
+            "effectsEnabled": false,
+            "visibleFraction": 0.7891405820846558,
+            "whiteFraction": 0.0,
+            "stateSetFrame": 12,
+            "renderedAfterFrame": 13
+        },
+        {
+            "frame": 2,
+            "timeSeconds": 0.03333333507180214,
+            "phase": "Sealed",
+            "occlusion": "Sealed",
+            "tearProgress": 0.0,
+            "packDissolve": 0.0,
+            "caseTravel": 0.0,
+            "mouthContactOcclusion": false,
+            "caseRootId": "568105589213756006",
+            "caseRendererIds": [
+                "568105589213755988",
+                "568105589213755980",
+                "568105589213755972",
+                "568105589213755948",
+                "568105589213755936"
+            ],
+            "caseRootPosition": {
+                "x": 0.0,
+                "y": 0.02800000086426735,
+                "z": 0.07000000029802323
+            },
+            "caseRootScale": {
+                "x": 0.800000011920929,
+                "y": 0.800000011920929,
+                "z": 0.800000011920929
+            },
+            "caseBounds": {
+                "x": 0.1333903968334198,
+                "y": 0.3454284071922302,
+                "width": 0.7332191467285156,
+                "height": 0.44966286420822146
+            },
+            "packBounds": {
+                "x": -0.04288297891616821,
+                "y": 0.23913556337356568,
+                "width": 1.0857658386230469,
+                "height": 0.5489512085914612
+            },
+            "packVisible": true,
+            "effectsEnabled": false,
+            "visibleFraction": 0.7891405820846558,
+            "whiteFraction": 0.0,
+            "stateSetFrame": 13,
+            "renderedAfterFrame": 14
+        },
+        {
+            "frame": 3,
+            "timeSeconds": 0.05000000074505806,
+            "phase": "Sealed",
+            "occlusion": "Sealed",
+            "tearProgress": 0.0,
+            "packDissolve": 0.0,
+            "caseTravel": 0.0,
+            "mouthContactOcclusion": false,
+            "caseRootId": "568105589213756006",
+            "caseRendererIds": [
+                "568105589213755988",
+                "568105589213755980",
+                "568105589213755972",
+                "568105589213755948",
+                "568105589213755936"
+            ],
+            "caseRootPosition": {
+                "x": 0.0,
+                "y": 0.02800000086426735,
+                "z": 0.07000000029802323
+            },
+            "caseRootScale": {
+                "x": 0.800000011920929,
+                "y": 0.800000011920929,
+                "z": 0.800000011920929
+            },
+            "caseBounds": {
+                "x": 0.1333903968334198,
+                "y": 0.3454284071922302,
+                "width": 0.7332191467285156,
+                "height": 0.44966286420822146
+            },
+            "packBounds": {
+                "x": -0.04288297891616821,
+                "y": 0.23913556337356568,
+                "width": 1.0857658386230469,
+                "height": 0.5489512085914612
+            },
+            "packVisible": true,
+            "effectsEnabled": false,
+            "visibleFraction": 0.7891405820846558,
+            "whiteFraction": 0.0,
+            "stateSetFrame": 14,
+            "renderedAfterFrame": 15
+        },
+        {
+            "frame": 4,
+            "timeSeconds": 0.06666667014360428,
+            "phase": "Sealed",
+            "occlusion": "Sealed",
+            "tearProgress": 0.0,
+            "packDissolve": 0.0,
+            "caseTravel": 0.0,
+            "mouthContactOcclusion": false,
+            "caseRootId": "568105589213756006",
+            "caseRendererIds": [
+                "568105589213755988",
+                "568105589213755980",
+                "568105589213755972",
+                "568105589213755948",
+                "568105589213755936"
+            ],
+            "caseRootPosition": {
+                "x": 0.0,
+                "y": 0.02800000086426735,
+                "z": 0.07000000029802323
+            },
+            "caseRootScale": {
+                "x": 0.800000011920929,
+                "y": 0.800000011920929,
+                "z": 0.800000011920929
+            },
+            "caseBounds": {
+                "x": 0.1333903968334198,
+                "y": 0.3454284071922302,
+                "width": 0.7332191467285156,
+                "height": 0.44966286420822146
+            },
+            "packBounds": {
+                "x": -0.04288297891616821,
+                "y": 0.23913556337356568,
+                "width": 1.0857658386230469,
+                "height": 0.5489512085914612
+            },
+            "packVisible": true,
+            "effectsEnabled": false,
+            "visibleFraction": 0.7891405820846558,
+            "whiteFraction": 0.0,
+            "stateSetFrame": 15,
+            "renderedAfterFrame": 16
+        },
+        {
+            "frame": 5,
+            "timeSeconds": 0.0833333358168602,
+            "phase": "Sealed",
+            "occlusion": "Sealed",
+            "tearProgress": 0.0,
+            "packDissolve": 0.0,
+            "caseTravel": 0.0,
+            "mouthContactOcclusion": false,
+            "caseRootId": "568105589213756006",
+            "caseRendererIds": [
+                "568105589213755988",
+                "568105589213755980",
+                "568105589213755972",
+                "568105589213755948",
+                "568105589213755936"
+            ],
+            "caseRootPosition": {
+                "x": 0.0,
+                "y": 0.02800000086426735,
+                "z": 0.07000000029802323
+            },
+            "caseRootScale": {
+                "x": 0.800000011920929,
+                "y": 0.800000011920929,
+                "z": 0.800000011920929
+            },
+            "caseBounds": {
+                "x": 0.1333903968334198,
+                "y": 0.3454284071922302,
+                "width": 0.7332191467285156,
+                "height": 0.44966286420822146
+            },
+            "packBounds": {
+                "x": -0.04288297891616821,
+                "y": 0.23913556337356568,
+                "width": 1.0857658386230469,
+                "height": 0.5489512085914612
+            },
+            "packVisible": true,
+            "effectsEnabled": false,
+            "visibleFraction": 0.7891405820846558,
+            "whiteFraction": 0.0,
+            "stateSetFrame": 16,
+            "renderedAfterFrame": 17
+        },
+        {
+            "frame": 6,
+            "timeSeconds": 0.10000000149011612,
+            "phase": "Sealed",
+            "occlusion": "Sealed",
+            "tearProgress": 0.0,
+            "packDissolve": 0.0,
+            "caseTravel": 0.0,
+            "mouthContactOcclusion": false,
+            "caseRootId": "568105589213756006",
+            "caseRendererIds": [
+                "568105589213755988",
+                "568105589213755980",
+                "568105589213755972",
+                "568105589213755948",
+                "568105589213755936"
+            ],
+            "caseRootPosition": {
+                "x": 0.0,
+                "y": 0.02800000086426735,
+                "z": 0.07000000029802323
+            },
+            "caseRootScale": {
+                "x": 0.800000011920929,
+                "y": 0.800000011920929,
+                "z": 0.800000011920929
+            },
+            "caseBounds": {
+                "x": 0.1333903968334198,
+                "y": 0.3454284071922302,
+                "width": 0.7332191467285156,
+                "height": 0.44966286420822146
+            },
+            "packBounds": {
+                "x": -0.04288297891616821,
+                "y": 0.23913556337356568,
+                "width": 1.0857658386230469,
+                "height": 0.5489512085914612
+            },
+            "packVisible": true,
+            "effectsEnabled": false,
+            "visibleFraction": 0.7891405820846558,
+            "whiteFraction": 0.0,
+            "stateSetFrame": 17,
+            "renderedAfterFrame": 18
+        },
+        {
+            "frame": 7,
+            "timeSeconds": 0.11666666716337204,
+            "phase": "Sealed",
+            "occlusion": "Sealed",
+            "tearProgress": 0.0,
+            "packDissolve": 0.0,
+            "caseTravel": 0.0,
+            "mouthContactOcclusion": false,
+            "caseRootId": "568105589213756006",
+            "caseRendererIds": [
+                "568105589213755988",
+                "568105589213755980",
+                "568105589213755972",
+                "568105589213755948",
+                "568105589213755936"
+            ],
+            "caseRootPosition": {
+                "x": 0.0,
+                "y": 0.02800000086426735,
+                "z": 0.07000000029802323
+            },
+            "caseRootScale": {
+                "x": 0.800000011920929,
+                "y": 0.800000011920929,
+                "z": 0.800000011920929
+            },
+            "caseBounds": {
+                "x": 0.1333903968334198,
+                "y": 0.3454284071922302,
+                "width": 0.7332191467285156,
+                "height": 0.44966286420822146
+            },
+            "packBounds": {
+                "x": -0.04288297891616821,
+                "y": 0.23913556337356568,
+                "width": 1.0857658386230469,
+                "height": 0.5489512085914612
+            },
+            "packVisible": true,
+            "effectsEnabled": false,
+            "visibleFraction": 0.7891405820846558,
+            "whiteFraction": 0.0,
+            "stateSetFrame": 18,
+            "renderedAfterFrame": 19
+        },
+        {
+            "frame": 8,
+            "timeSeconds": 0.13333334028720857,
+            "phase": "Sealed",
+            "occlusion": "Sealed",
+            "tearProgress": 0.0,
+            "packDissolve": 0.0,
+            "caseTravel": 0.0,
+            "mouthContactOcclusion": false,
+            "caseRootId": "568105589213756006",
+            "caseRendererIds": [
+                "568105589213755988",
+                "568105589213755980",
+                "568105589213755972",
+                "568105589213755948",
+                "568105589213755936"
+            ],
+            "caseRootPosition": {
+                "x": 0.0,
+                "y": 0.02800000086426735,
+                "z": 0.07000000029802323
+            },
+            "caseRootScale": {
+                "x": 0.800000011920929,
+                "y": 0.800000011920929,
+                "z": 0.800000011920929
+            },
+            "caseBounds": {
+                "x": 0.1333903968334198,
+                "y": 0.3454284071922302,
+                "width": 0.7332191467285156,
+                "height": 0.44966286420822146
+            },
+            "packBounds": {
+                "x": -0.04288297891616821,
+                "y": 0.23913556337356568,
+                "width": 1.0857658386230469,
+                "height": 0.5489512085914612
+            },
+            "packVisible": true,
+            "effectsEnabled": false,
+            "visibleFraction": 0.7891405820846558,
+            "whiteFraction": 0.0,
+            "stateSetFrame": 19,
+            "renderedAfterFrame": 20
+        },
+        {
+            "frame": 9,
+            "timeSeconds": 0.15000000596046449,
+            "phase": "TabCatch",
+            "occlusion": "Sealed",
+            "tearProgress": 0.0009807967580854893,
+            "packDissolve": 0.0,
+            "caseTravel": 0.0,
+            "mouthContactOcclusion": false,
+            "caseRootId": "568105589213756006",
+            "caseRendererIds": [
+                "568105589213755988",
+                "568105589213755980",
+                "568105589213755972",
+                "568105589213755948",
+                "568105589213755936"
+            ],
+            "caseRootPosition": {
+                "x": 0.0,
+                "y": 0.02800000086426735,
+                "z": 0.07000000029802323
+            },
+            "caseRootScale": {
+                "x": 0.800000011920929,
+                "y": 0.800000011920929,
+                "z": 0.800000011920929
+            },
+            "caseBounds": {
+                "x": 0.1333903968334198,
+                "y": 0.3454284071922302,
+                "width": 0.7332191467285156,
+                "height": 0.44966286420822146
+            },
+            "packBounds": {
+                "x": -0.04288297891616821,
+                "y": 0.23913556337356568,
+                "width": 1.0857658386230469,
+                "height": 0.5489512085914612
+            },
+            "packVisible": true,
+            "effectsEnabled": false,
+            "visibleFraction": 0.7891405820846558,
+            "whiteFraction": 0.0,
+            "stateSetFrame": 20,
+            "renderedAfterFrame": 21
+        },
+        {
+            "frame": 10,
+            "timeSeconds": 0.1666666716337204,
+            "phase": "TabCatch",
+            "occlusion": "MouthOpening",
+            "tearProgress": 0.006527462508529425,
+            "packDissolve": 0.0,
+            "caseTravel": 0.0,
+            "mouthContactOcclusion": false,
+            "caseRootId": "568105589213756006",
+            "caseRendererIds": [
+                "568105589213755988",
+                "568105589213755980",
+                "568105589213755972",
+                "568105589213755948",
+                "568105589213755936"
+            ],
+            "caseRootPosition": {
+                "x": 0.0,
+                "y": 0.02800000086426735,
+                "z": 0.07000000029802323
+            },
+            "caseRootScale": {
+                "x": 0.800000011920929,
+                "y": 0.800000011920929,
+                "z": 0.800000011920929
+            },
+            "caseBounds": {
+                "x": 0.1333903968334198,
+                "y": 0.3454284071922302,
+                "width": 0.7332191467285156,
+                "height": 0.44966286420822146
+            },
+            "packBounds": {
+                "x": -0.050892770290374759,
+                "y": 0.23528672754764558,
+                "width": 1.101785659790039,
+                "height": 0.5886929035186768
+            },
+            "packVisible": true,
+            "effectsEnabled": false,
+            "visibleFraction": 0.7891405820846558,
+            "whiteFraction": 0.0,
+            "stateSetFrame": 21,
+            "renderedAfterFrame": 22
+        },
+        {
+            "frame": 11,
+            "timeSeconds": 0.18333333730697633,
+            "phase": "TabCatch",
+            "occlusion": "MouthOpening",
+            "tearProgress": 0.016055991873145105,
+            "packDissolve": 0.0,
+            "caseTravel": 0.0,
+            "mouthContactOcclusion": false,
+            "caseRootId": "568105589213756006",
+            "caseRendererIds": [
+                "568105589213755988",
+                "568105589213755980",
+                "568105589213755972",
+                "568105589213755948",
+                "568105589213755936"
+            ],
+            "caseRootPosition": {
+                "x": 0.0,
+                "y": 0.02800000086426735,
+                "z": 0.07000000029802323
+            },
+            "caseRootScale": {
+                "x": 0.800000011920929,
+                "y": 0.800000011920929,
+                "z": 0.800000011920929
+            },
+            "caseBounds": {
+                "x": 0.1333903968334198,
+                "y": 0.3454284071922302,
+                "width": 0.7332191467285156,
+                "height": 0.44966286420822146
+            },
+            "packBounds": {
+                "x": -0.050892770290374759,
+                "y": 0.23528672754764558,
+                "width": 1.101785659790039,
+                "height": 0.5886929035186768
+            },
+            "packVisible": true,
+            "effectsEnabled": false,
+            "visibleFraction": 0.7891405820846558,
+            "whiteFraction": 0.0,
+            "stateSetFrame": 22,
+            "renderedAfterFrame": 23
+        },
+        {
+            "frame": 12,
+            "timeSeconds": 0.20000000298023225,
+            "phase": "TabCatch",
+            "occlusion": "MouthOpening",
+            "tearProgress": 0.028518524020910264,
+            "packDissolve": 0.0,
+            "caseTravel": 0.0,
+            "mouthContactOcclusion": false,
+            "caseRootId": "568105589213756006",
+            "caseRendererIds": [
+                "568105589213755988",
+                "568105589213755980",
+                "568105589213755972",
+                "568105589213755948",
+                "568105589213755936"
+            ],
+            "caseRootPosition": {
+                "x": 0.0,
+                "y": 0.02800000086426735,
+                "z": 0.07000000029802323
+            },
+            "caseRootScale": {
+                "x": 0.800000011920929,
+                "y": 0.800000011920929,
+                "z": 0.800000011920929
+            },
+            "caseBounds": {
+                "x": 0.1333903968334198,
+                "y": 0.3454284071922302,
+                "width": 0.7332191467285156,
+                "height": 0.44966286420822146
+            },
+            "packBounds": {
+                "x": -0.050892770290374759,
+                "y": 0.23528672754764558,
+                "width": 1.101785659790039,
+                "height": 0.5886929035186768
+            },
+            "packVisible": true,
+            "effectsEnabled": false,
+            "visibleFraction": 0.7891405820846558,
+            "whiteFraction": 0.0,
+            "stateSetFrame": 23,
+            "renderedAfterFrame": 24
+        },
+        {
+            "frame": 13,
+            "timeSeconds": 0.21666666865348817,
+            "phase": "TabCatch",
+            "occlusion": "MouthOpening",
+            "tearProgress": 0.04286719486117363,
+            "packDissolve": 0.0,
+            "caseTravel": 0.0,
+            "mouthContactOcclusion": false,
+            "caseRootId": "568105589213756006",
+            "caseRendererIds": [
+                "568105589213755988",
+                "568105589213755980",
+                "568105589213755972",
+                "568105589213755948",
+                "568105589213755936"
+            ],
+            "caseRootPosition": {
+                "x": 0.0,
+                "y": 0.02800000086426735,
+                "z": 0.07000000029802323
+            },
+            "caseRootScale": {
+                "x": 0.800000011920929,
+                "y": 0.800000011920929,
+                "z": 0.800000011920929
+            },
+            "caseBounds": {
+                "x": 0.1333903968334198,
+                "y": 0.3454284071922302,
+                "width": 0.7332191467285156,
+                "height": 0.44966286420822146
+            },
+            "packBounds": {
+                "x": -0.050892770290374759,
+                "y": 0.23528672754764558,
+                "width": 1.101785659790039,
+                "height": 0.5886929035186768
+            },
+            "packVisible": true,
+            "effectsEnabled": false,
+            "visibleFraction": 0.7891405820846558,
+            "whiteFraction": 0.0,
+            "stateSetFrame": 24,
+            "renderedAfterFrame": 25
+        },
+        {
+            "frame": 14,
+            "timeSeconds": 0.23333333432674409,
+            "phase": "TabCatch",
+            "occlusion": "MouthOpening",
+            "tearProgress": 0.05805416777729988,
+            "packDissolve": 0.0,
+            "caseTravel": 0.0,
+            "mouthContactOcclusion": false,
+            "caseRootId": "568105589213756006",
+            "caseRendererIds": [
+                "568105589213755988",
+                "568105589213755980",
+                "568105589213755972",
+                "568105589213755948",
+                "568105589213755936"
+            ],
+            "caseRootPosition": {
+                "x": 0.0,
+                "y": 0.02800000086426735,
+                "z": 0.07000000029802323
+            },
+            "caseRootScale": {
+                "x": 0.800000011920929,
+                "y": 0.800000011920929,
+                "z": 0.800000011920929
+            },
+            "caseBounds": {
+                "x": 0.1333903968334198,
+                "y": 0.3454284071922302,
+                "width": 0.7332191467285156,
+                "height": 0.44966286420822146
+            },
+            "packBounds": {
+                "x": -0.050892770290374759,
+                "y": 0.23528672754764558,
+                "width": 1.101785659790039,
+                "height": 0.5886929035186768
+            },
+            "packVisible": true,
+            "effectsEnabled": false,
+            "visibleFraction": 0.7891405820846558,
+            "whiteFraction": 0.0,
+            "stateSetFrame": 25,
+            "renderedAfterFrame": 26
+        },
+        {
+            "frame": 15,
+            "timeSeconds": 0.25,
+            "phase": "TabCatch",
+            "occlusion": "MouthOpening",
+            "tearProgress": 0.07303154468536377,
+            "packDissolve": 0.0,
+            "caseTravel": 0.0,
+            "mouthContactOcclusion": false,
+            "caseRootId": "568105589213756006",
+            "caseRendererIds": [
+                "568105589213755988",
+                "568105589213755980",
+                "568105589213755972",
+                "568105589213755948",
+                "568105589213755936"
+            ],
+            "caseRootPosition": {
+                "x": 0.0,
+                "y": 0.02800000086426735,
+                "z": 0.07000000029802323
+            },
+            "caseRootScale": {
+                "x": 0.800000011920929,
+                "y": 0.800000011920929,
+                "z": 0.800000011920929
+            },
+            "caseBounds": {
+                "x": 0.1333903968334198,
+                "y": 0.3454284071922302,
+                "width": 0.7332191467285156,
+                "height": 0.44966286420822146
+            },
+            "packBounds": {
+                "x": -0.050892770290374759,
+                "y": 0.23528672754764558,
+                "width": 1.101785659790039,
+                "height": 0.5886929035186768
+            },
+            "packVisible": true,
+            "effectsEnabled": false,
+            "visibleFraction": 0.7891405820846558,
+            "whiteFraction": 0.0,
+            "stateSetFrame": 26,
+            "renderedAfterFrame": 27
+        },
+        {
+            "frame": 16,
+            "timeSeconds": 0.2666666805744171,
+            "phase": "TabCatch",
+            "occlusion": "MouthOpening",
+            "tearProgress": 0.0867515280842781,
+            "packDissolve": 0.0,
+            "caseTravel": 0.0,
+            "mouthContactOcclusion": false,
+            "caseRootId": "568105589213756006",
+            "caseRendererIds": [
+                "568105589213755988",
+                "568105589213755980",
+                "568105589213755972",
+                "568105589213755948",
+                "568105589213755936"
+            ],
+            "caseRootPosition": {
+                "x": 0.0,
+                "y": 0.02800000086426735,
+                "z": 0.07000000029802323
+            },
+            "caseRootScale": {
+                "x": 0.800000011920929,
+                "y": 0.800000011920929,
+                "z": 0.800000011920929
+            },
+            "caseBounds": {
+                "x": 0.1333903968334198,
+                "y": 0.3454284071922302,
+                "width": 0.7332191467285156,
+                "height": 0.44966286420822146
+            },
+            "packBounds": {
+                "x": -0.050892770290374759,
+                "y": 0.23528672754764558,
+                "width": 1.1099286079406739,
+                "height": 0.5886929035186768
+            },
+            "packVisible": true,
+            "effectsEnabled": false,
+            "visibleFraction": 0.7891405820846558,
+            "whiteFraction": 0.0,
+            "stateSetFrame": 27,
+            "renderedAfterFrame": 28
+        },
+        {
+            "frame": 17,
+            "timeSeconds": 0.28333333134651186,
+            "phase": "TabCatch",
+            "occlusion": "MouthOpening",
+            "tearProgress": 0.09816618263721466,
+            "packDissolve": 0.0,
+            "caseTravel": 0.0,
+            "mouthContactOcclusion": false,
+            "caseRootId": "568105589213756006",
+            "caseRendererIds": [
+                "568105589213755988",
+                "568105589213755980",
+                "568105589213755972",
+                "568105589213755948",
+                "568105589213755936"
+            ],
+            "caseRootPosition": {
+                "x": 0.0,
+                "y": 0.02800000086426735,
+                "z": 0.07000000029802323
+            },
+            "caseRootScale": {
+                "x": 0.800000011920929,
+                "y": 0.800000011920929,
+                "z": 0.800000011920929
+            },
+            "caseBounds": {
+                "x": 0.1333903968334198,
+                "y": 0.3454284071922302,
+                "width": 0.7332191467285156,
+                "height": 0.44966286420822146
+            },
+            "packBounds": {
+                "x": -0.050892770290374759,
+                "y": 0.23528672754764558,
+                "width": 1.1099286079406739,
+                "height": 0.5886929035186768
+            },
+            "packVisible": true,
+            "effectsEnabled": false,
+            "visibleFraction": 0.7891405820846558,
+            "whiteFraction": 0.0,
+            "stateSetFrame": 28,
+            "renderedAfterFrame": 29
+        },
+        {
+            "frame": 18,
+            "timeSeconds": 0.30000001192092898,
+            "phase": "TabCatch",
+            "occlusion": "MouthOpening",
+            "tearProgress": 0.10622771829366684,
+            "packDissolve": 0.0,
+            "caseTravel": 0.0,
+            "mouthContactOcclusion": false,
+            "caseRootId": "568105589213756006",
+            "caseRendererIds": [
+                "568105589213755988",
+                "568105589213755980",
+                "568105589213755972",
+                "568105589213755948",
+                "568105589213755936"
+            ],
+            "caseRootPosition": {
+                "x": 0.0,
+                "y": 0.02800000086426735,
+                "z": 0.07000000029802323
+            },
+            "caseRootScale": {
+                "x": 0.800000011920929,
+                "y": 0.800000011920929,
+                "z": 0.800000011920929
+            },
+            "caseBounds": {
+                "x": 0.1333903968334198,
+                "y": 0.3454284071922302,
+                "width": 0.7332191467285156,
+                "height": 0.44966286420822146
+            },
+            "packBounds": {
+                "x": -0.050892770290374759,
+                "y": 0.23528672754764558,
+                "width": 1.1099286079406739,
+                "height": 0.5886929035186768
+            },
+            "packVisible": true,
+            "effectsEnabled": false,
+            "visibleFraction": 0.7891405820846558,
+            "whiteFraction": 0.0,
+            "stateSetFrame": 29,
+            "renderedAfterFrame": 30
+        },
+        {
+            "frame": 19,
+            "timeSeconds": 0.3166666626930237,
+            "phase": "TabCatch",
+            "occlusion": "MouthOpening",
+            "tearProgress": 0.1098882332444191,
+            "packDissolve": 0.0,
+            "caseTravel": 0.0,
+            "mouthContactOcclusion": false,
+            "caseRootId": "568105589213756006",
+            "caseRendererIds": [
+                "568105589213755988",
+                "568105589213755980",
+                "568105589213755972",
+                "568105589213755948",
+                "568105589213755936"
+            ],
+            "caseRootPosition": {
+                "x": 0.0,
+                "y": 0.02800000086426735,
+                "z": 0.07000000029802323
+            },
+            "caseRootScale": {
+                "x": 0.800000011920929,
+                "y": 0.800000011920929,
+                "z": 0.800000011920929
+            },
+            "caseBounds": {
+                "x": 0.1333903968334198,
+                "y": 0.3454284071922302,
+                "width": 0.7332191467285156,
+                "height": 0.44966286420822146
+            },
+            "packBounds": {
+                "x": -0.050892770290374759,
+                "y": 0.23528672754764558,
+                "width": 1.1099286079406739,
+                "height": 0.5886929035186768
+            },
+            "packVisible": true,
+            "effectsEnabled": false,
+            "visibleFraction": 0.7891405820846558,
+            "whiteFraction": 0.0,
+            "stateSetFrame": 30,
+            "renderedAfterFrame": 31
+        },
+        {
+            "frame": 20,
+            "timeSeconds": 0.3333333432674408,
+            "phase": "Resistance",
+            "occlusion": "MouthOpening",
+            "tearProgress": 0.11266016960144043,
+            "packDissolve": 0.0,
+            "caseTravel": 0.0,
+            "mouthContactOcclusion": false,
+            "caseRootId": "568105589213756006",
+            "caseRendererIds": [
+                "568105589213755988",
+                "568105589213755980",
+                "568105589213755972",
+                "568105589213755948",
+                "568105589213755936"
+            ],
+            "caseRootPosition": {
+                "x": 0.0,
+                "y": 0.02800000086426735,
+                "z": 0.07000000029802323
+            },
+            "caseRootScale": {
+                "x": 0.800000011920929,
+                "y": 0.800000011920929,
+                "z": 0.800000011920929
+            },
+            "caseBounds": {
+                "x": 0.1333903968334198,
+                "y": 0.3454284071922302,
+                "width": 0.7332191467285156,
+                "height": 0.44966286420822146
+            },
+            "packBounds": {
+                "x": -0.06119966134428978,
+                "y": 0.2303340584039688,
+                "width": 1.13069486618042,
+                "height": 0.5997070074081421
+            },
+            "packVisible": true,
+            "effectsEnabled": false,
+            "visibleFraction": 0.7890953421592712,
+            "whiteFraction": 0.0,
+            "stateSetFrame": 31,
+            "renderedAfterFrame": 32
+        },
+        {
+            "frame": 21,
+            "timeSeconds": 0.3499999940395355,
+            "phase": "Resistance",
+            "occlusion": "MouthOpening",
+            "tearProgress": 0.12259259074926377,
+            "packDissolve": 0.0,
+            "caseTravel": 0.0,
+            "mouthContactOcclusion": false,
+            "caseRootId": "568105589213756006",
+            "caseRendererIds": [
+                "568105589213755988",
+                "568105589213755980",
+                "568105589213755972",
+                "568105589213755948",
+                "568105589213755936"
+            ],
+            "caseRootPosition": {
+                "x": 0.0,
+                "y": 0.02800000086426735,
+                "z": 0.07000000029802323
+            },
+            "caseRootScale": {
+                "x": 0.800000011920929,
+                "y": 0.800000011920929,
+                "z": 0.800000011920929
+            },
+            "caseBounds": {
+                "x": 0.1333903968334198,
+                "y": 0.3454284071922302,
+                "width": 0.7332191467285156,
+                "height": 0.44966286420822146
+            },
+            "packBounds": {
+                "x": -0.06119966134428978,
+                "y": 0.2303340584039688,
+                "width": 1.13069486618042,
+                "height": 0.5997070074081421
+            },
+            "packVisible": true,
+            "effectsEnabled": false,
+            "visibleFraction": 0.7891405820846558,
+            "whiteFraction": 0.0,
+            "stateSetFrame": 32,
+            "renderedAfterFrame": 33
+        },
+        {
+            "frame": 22,
+            "timeSeconds": 0.36666667461395266,
+            "phase": "Resistance",
+            "occlusion": "MouthOpening",
+            "tearProgress": 0.13835494220256806,
+            "packDissolve": 0.0,
+            "caseTravel": 0.0,
+            "mouthContactOcclusion": false,
+            "caseRootId": "568105589213756006",
+            "caseRendererIds": [
+                "568105589213755988",
+                "568105589213755980",
+                "568105589213755972",
+                "568105589213755948",
+                "568105589213755936"
+            ],
+            "caseRootPosition": {
+                "x": 0.0,
+                "y": 0.02800000086426735,
+                "z": 0.07000000029802323
+            },
+            "caseRootScale": {
+                "x": 0.800000011920929,
+                "y": 0.800000011920929,
+                "z": 0.800000011920929
+            },
+            "caseBounds": {
+                "x": 0.1333903968334198,
+                "y": 0.3454284071922302,
+                "width": 0.7332191467285156,
+                "height": 0.44966286420822146
+            },
+            "packBounds": {
+                "x": -0.06119966134428978,
+                "y": 0.2303340584039688,
+                "width": 1.13069486618042,
+                "height": 0.5997070074081421
+            },
+            "packVisible": true,
+            "effectsEnabled": false,
+            "visibleFraction": 0.7890501618385315,
+            "whiteFraction": 0.0,
+            "stateSetFrame": 33,
+            "renderedAfterFrame": 34
+        },
+        {
+            "frame": 23,
+            "timeSeconds": 0.38333332538604739,
+            "phase": "Resistance",
+            "occlusion": "MouthOpening",
+            "tearProgress": 0.15832774341106416,
+            "packDissolve": 0.0,
+            "caseTravel": 0.0,
+            "mouthContactOcclusion": false,
+            "caseRootId": "568105589213756006",
+            "caseRendererIds": [
+                "568105589213755988",
+                "568105589213755980",
+                "568105589213755972",
+                "568105589213755948",
+                "568105589213755936"
+            ],
+            "caseRootPosition": {
+                "x": 0.0,
+                "y": 0.02800000086426735,
+                "z": 0.07000000029802323
+            },
+            "caseRootScale": {
+                "x": 0.800000011920929,
+                "y": 0.800000011920929,
+                "z": 0.800000011920929
+            },
+            "caseBounds": {
+                "x": 0.1333903968334198,
+                "y": 0.3454284071922302,
+                "width": 0.7332191467285156,
+                "height": 0.44966286420822146
+            },
+            "packBounds": {
+                "x": -0.06119966134428978,
+                "y": 0.2303340584039688,
+                "width": 1.13069486618042,
+                "height": 0.5997070074081421
+            },
+            "packVisible": true,
+            "effectsEnabled": false,
+            "visibleFraction": 0.7890953421592712,
+            "whiteFraction": 0.0,
+            "stateSetFrame": 34,
+            "renderedAfterFrame": 35
+        },
+        {
+            "frame": 24,
+            "timeSeconds": 0.4000000059604645,
+            "phase": "Resistance",
+            "occlusion": "MouthOpening",
+            "tearProgress": 0.18089164793491364,
+            "packDissolve": 0.0,
+            "caseTravel": 0.0,
+            "mouthContactOcclusion": false,
+            "caseRootId": "568105589213756006",
+            "caseRendererIds": [
+                "568105589213755988",
+                "568105589213755980",
+                "568105589213755972",
+                "568105589213755948",
+                "568105589213755936"
+            ],
+            "caseRootPosition": {
+                "x": 0.0,
+                "y": 0.02800000086426735,
+                "z": 0.07000000029802323
+            },
+            "caseRootScale": {
+                "x": 0.800000011920929,
+                "y": 0.800000011920929,
+                "z": 0.800000011920929
+            },
+            "caseBounds": {
+                "x": 0.1333903968334198,
+                "y": 0.3454284071922302,
+                "width": 0.7332191467285156,
+                "height": 0.44966286420822146
+            },
+            "packBounds": {
+                "x": -0.06460922956466675,
+                "y": 0.2303340584039688,
+                "width": 1.1341044902801514,
+                "height": 0.5997070074081421
+            },
+            "packVisible": true,
+            "effectsEnabled": false,
+            "visibleFraction": 0.7891405820846558,
+            "whiteFraction": 0.0,
+            "stateSetFrame": 35,
+            "renderedAfterFrame": 36
+        },
+        {
+            "frame": 25,
+            "timeSeconds": 0.4166666567325592,
+            "phase": "Resistance",
+            "occlusion": "MouthOpening",
+            "tearProgress": 0.20442716777324677,
+            "packDissolve": 0.0,
+            "caseTravel": 0.0,
+            "mouthContactOcclusion": false,
+            "caseRootId": "568105589213756006",
+            "caseRendererIds": [
+                "568105589213755988",
+                "568105589213755980",
+                "568105589213755972",
+                "568105589213755948",
+                "568105589213755936"
+            ],
+            "caseRootPosition": {
+                "x": 0.0,
+                "y": 0.02800000086426735,
+                "z": 0.07000000029802323
+            },
+            "caseRootScale": {
+                "x": 0.800000011920929,
+                "y": 0.800000011920929,
+                "z": 0.800000011920929
+            },
+            "caseBounds": {
+                "x": 0.1333903968334198,
+                "y": 0.3454284071922302,
+                "width": 0.7332191467285156,
+                "height": 0.44966286420822146
+            },
+            "packBounds": {
+                "x": -0.06460922956466675,
+                "y": 0.2303340584039688,
+                "width": 1.1341044902801514,
+                "height": 0.5997070074081421
+            },
+            "packVisible": true,
+            "effectsEnabled": false,
+            "visibleFraction": 0.7890953421592712,
+            "whiteFraction": 0.0,
+            "stateSetFrame": 36,
+            "renderedAfterFrame": 37
+        },
+        {
+            "frame": 26,
+            "timeSeconds": 0.4333333373069763,
+            "phase": "Resistance",
+            "occlusion": "MouthOpening",
+            "tearProgress": 0.22731494903564454,
+            "packDissolve": 0.0,
+            "caseTravel": 0.0,
+            "mouthContactOcclusion": false,
+            "caseRootId": "568105589213756006",
+            "caseRendererIds": [
+                "568105589213755988",
+                "568105589213755980",
+                "568105589213755972",
+                "568105589213755948",
+                "568105589213755936"
+            ],
+            "caseRootPosition": {
+                "x": 0.0,
+                "y": 0.02800000086426735,
+                "z": 0.07000000029802323
+            },
+            "caseRootScale": {
+                "x": 0.800000011920929,
+                "y": 0.800000011920929,
+                "z": 0.800000011920929
+            },
+            "caseBounds": {
+                "x": 0.1333903968334198,
+                "y": 0.3454284071922302,
+                "width": 0.7332191467285156,
+                "height": 0.44966286420822146
+            },
+            "packBounds": {
+                "x": -0.06460922956466675,
+                "y": 0.2303340584039688,
+                "width": 1.1341044902801514,
+                "height": 0.5997070074081421
+            },
+            "packVisible": true,
+            "effectsEnabled": false,
+            "visibleFraction": 0.7891405820846558,
+            "whiteFraction": 0.0,
+            "stateSetFrame": 37,
+            "renderedAfterFrame": 38
+        },
+        {
+            "frame": 27,
+            "timeSeconds": 0.44999998807907107,
+            "phase": "Resistance",
+            "occlusion": "MouthOpening",
+            "tearProgress": 0.24793551862239839,
+            "packDissolve": 0.0,
+            "caseTravel": 0.0,
+            "mouthContactOcclusion": false,
+            "caseRootId": "568105589213756006",
+            "caseRendererIds": [
+                "568105589213755988",
+                "568105589213755980",
+                "568105589213755972",
+                "568105589213755948",
+                "568105589213755936"
+            ],
+            "caseRootPosition": {
+                "x": 0.0,
+                "y": 0.02800000086426735,
+                "z": 0.07000000029802323
+            },
+            "caseRootScale": {
+                "x": 0.800000011920929,
+                "y": 0.800000011920929,
+                "z": 0.800000011920929
+            },
+            "caseBounds": {
+                "x": 0.1333903968334198,
+                "y": 0.3454284071922302,
+                "width": 0.7332191467285156,
+                "height": 0.44966286420822146
+            },
+            "packBounds": {
+                "x": -0.06460922956466675,
+                "y": 0.2303340584039688,
+                "width": 1.1341044902801514,
+                "height": 0.5997070074081421
+            },
+            "packVisible": true,
+            "effectsEnabled": false,
+            "visibleFraction": 0.7891405820846558,
+            "whiteFraction": 0.0,
+            "stateSetFrame": 38,
+            "renderedAfterFrame": 39
+        },
+        {
+            "frame": 28,
+            "timeSeconds": 0.46666666865348818,
+            "phase": "Resistance",
+            "occlusion": "MouthOpening",
+            "tearProgress": 0.2646695077419281,
+            "packDissolve": 0.0,
+            "caseTravel": 0.0,
+            "mouthContactOcclusion": false,
+            "caseRootId": "568105589213756006",
+            "caseRendererIds": [
+                "568105589213755988",
+                "568105589213755980",
+                "568105589213755972",
+                "568105589213755948",
+                "568105589213755936"
+            ],
+            "caseRootPosition": {
+                "x": 0.0,
+                "y": 0.02800000086426735,
+                "z": 0.07000000029802323
+            },
+            "caseRootScale": {
+                "x": 0.800000011920929,
+                "y": 0.800000011920929,
+                "z": 0.800000011920929
+            },
+            "caseBounds": {
+                "x": 0.1333903968334198,
+                "y": 0.3454284071922302,
+                "width": 0.7332191467285156,
+                "height": 0.44966286420822146
+            },
+            "packBounds": {
+                "x": -0.06460922956466675,
+                "y": 0.2303340584039688,
+                "width": 1.1341044902801514,
+                "height": 0.5997070074081421
+            },
+            "packVisible": true,
+            "effectsEnabled": false,
+            "visibleFraction": 0.7891405820846558,
+            "whiteFraction": 0.0,
+            "stateSetFrame": 39,
+            "renderedAfterFrame": 40
+        },
+        {
+            "frame": 29,
+            "timeSeconds": 0.4833333194255829,
+            "phase": "Resistance",
+            "occlusion": "MouthOpening",
+            "tearProgress": 0.27589747309684756,
+            "packDissolve": 0.0,
+            "caseTravel": 0.0,
+            "mouthContactOcclusion": false,
+            "caseRootId": "568105589213756006",
+            "caseRendererIds": [
+                "568105589213755988",
+                "568105589213755980",
+                "568105589213755972",
+                "568105589213755948",
+                "568105589213755936"
+            ],
+            "caseRootPosition": {
+                "x": 0.0,
+                "y": 0.02800000086426735,
+                "z": 0.07000000029802323
+            },
+            "caseRootScale": {
+                "x": 0.800000011920929,
+                "y": 0.800000011920929,
+                "z": 0.800000011920929
+            },
+            "caseBounds": {
+                "x": 0.1333903968334198,
+                "y": 0.3454284071922302,
+                "width": 0.7332191467285156,
+                "height": 0.44966286420822146
+            },
+            "packBounds": {
+                "x": -0.06460922956466675,
+                "y": 0.2303340584039688,
+                "width": 1.1341044902801514,
+                "height": 0.5997070074081421
+            },
+            "packVisible": true,
+            "effectsEnabled": false,
+            "visibleFraction": 0.7891405820846558,
+            "whiteFraction": 0.0,
+            "stateSetFrame": 40,
+            "renderedAfterFrame": 41
+        },
+        {
+            "frame": 30,
+            "timeSeconds": 0.5,
+            "phase": "TearPropagation",
+            "occlusion": "MouthOpening",
+            "tearProgress": 0.2800000011920929,
+            "packDissolve": 0.0,
+            "caseTravel": 0.0,
+            "mouthContactOcclusion": false,
+            "caseRootId": "568105589213756006",
+            "caseRendererIds": [
+                "568105589213755988",
+                "568105589213755980",
+                "568105589213755972",
+                "568105589213755948",
+                "568105589213755936"
+            ],
+            "caseRootPosition": {
+                "x": 0.0,
+                "y": 0.02800000086426735,
+                "z": 0.07000000029802323
+            },
+            "caseRootScale": {
+                "x": 0.800000011920929,
+                "y": 0.800000011920929,
+                "z": 0.800000011920929
+            },
+            "caseBounds": {
+                "x": 0.1333903968334198,
+                "y": 0.3454284071922302,
+                "width": 0.7332191467285156,
+                "height": 0.44966286420822146
+            },
+            "packBounds": {
+                "x": -0.06460922956466675,
+                "y": 0.2303340584039688,
+                "width": 1.1341044902801514,
+                "height": 0.5997070074081421
+            },
+            "packVisible": true,
+            "effectsEnabled": false,
+            "visibleFraction": 0.7890953421592712,
+            "whiteFraction": 0.0,
+            "stateSetFrame": 41,
+            "renderedAfterFrame": 42
+        },
+        {
+            "frame": 31,
+            "timeSeconds": 0.5166666507720947,
+            "phase": "TearPropagation",
+            "occlusion": "MouthOpening",
+            "tearProgress": 0.2849562466144562,
+            "packDissolve": 0.0,
+            "caseTravel": 0.0,
+            "mouthContactOcclusion": false,
+            "caseRootId": "568105589213756006",
+            "caseRendererIds": [
+                "568105589213755988",
+                "568105589213755980",
+                "568105589213755972",
+                "568105589213755948",
+                "568105589213755936"
+            ],
+            "caseRootPosition": {
+                "x": 0.0,
+                "y": 0.02800000086426735,
+                "z": 0.07000000029802323
+            },
+            "caseRootScale": {
+                "x": 0.800000011920929,
+                "y": 0.800000011920929,
+                "z": 0.800000011920929
+            },
+            "caseBounds": {
+                "x": 0.1333903968334198,
+                "y": 0.3454284071922302,
+                "width": 0.7332191467285156,
+                "height": 0.44966286420822146
+            },
+            "packBounds": {
+                "x": -0.06460922956466675,
+                "y": 0.2303340584039688,
+                "width": 1.1341044902801514,
+                "height": 0.5997070074081421
+            },
+            "packVisible": true,
+            "effectsEnabled": false,
+            "visibleFraction": 0.7892761826515198,
+            "whiteFraction": 0.0,
+            "stateSetFrame": 42,
+            "renderedAfterFrame": 43
+        },
+        {
+            "frame": 32,
+            "timeSeconds": 0.5333333611488342,
+            "phase": "TearPropagation",
+            "occlusion": "MouthOpening",
+            "tearProgress": 0.2989400029182434,
+            "packDissolve": 0.0,
+            "caseTravel": 0.0,
+            "mouthContactOcclusion": false,
+            "caseRootId": "568105589213756006",
+            "caseRendererIds": [
+                "568105589213755988",
+                "568105589213755980",
+                "568105589213755972",
+                "568105589213755948",
+                "568105589213755936"
+            ],
+            "caseRootPosition": {
+                "x": 0.0,
+                "y": 0.02800000086426735,
+                "z": 0.07000000029802323
+            },
+            "caseRootScale": {
+                "x": 0.800000011920929,
+                "y": 0.800000011920929,
+                "z": 0.800000011920929
+            },
+            "caseBounds": {
+                "x": 0.1333903968334198,
+                "y": 0.3454284071922302,
+                "width": 0.7332191467285156,
+                "height": 0.44966286420822146
+            },
+            "packBounds": {
+                "x": -0.06460922956466675,
+                "y": 0.2303340584039688,
+                "width": 1.1341044902801514,
+                "height": 0.5997070074081421
+            },
+            "packVisible": true,
+            "effectsEnabled": false,
+            "visibleFraction": 0.789366602897644,
+            "whiteFraction": 0.0,
+            "stateSetFrame": 43,
+            "renderedAfterFrame": 44
+        },
+        {
+            "frame": 33,
+            "timeSeconds": 0.550000011920929,
+            "phase": "TearPropagation",
+            "occlusion": "MouthOpening",
+            "tearProgress": 0.32062360644340517,
+            "packDissolve": 0.0,
+            "caseTravel": 0.0,
+            "mouthContactOcclusion": false,
+            "caseRootId": "568105589213756006",
+            "caseRendererIds": [
+                "568105589213755988",
+                "568105589213755980",
+                "568105589213755972",
+                "568105589213755948",
+                "568105589213755936"
+            ],
+            "caseRootPosition": {
+                "x": 0.0,
+                "y": 0.02800000086426735,
+                "z": 0.07000000029802323
+            },
+            "caseRootScale": {
+                "x": 0.800000011920929,
+                "y": 0.800000011920929,
+                "z": 0.800000011920929
+            },
+            "caseBounds": {
+                "x": 0.1333903968334198,
+                "y": 0.3454284071922302,
+                "width": 0.7332191467285156,
+                "height": 0.44966286420822146
+            },
+            "packBounds": {
+                "x": -0.06460922956466675,
+                "y": 0.2303340584039688,
+                "width": 1.1341044902801514,
+                "height": 0.5997070074081421
+            },
+            "packVisible": true,
+            "effectsEnabled": false,
+            "visibleFraction": 0.7884624004364014,
+            "whiteFraction": 0.0,
+            "stateSetFrame": 44,
+            "renderedAfterFrame": 45
+        },
+        {
+            "frame": 34,
+            "timeSeconds": 0.5666666626930237,
+            "phase": "TearPropagation",
+            "occlusion": "MouthOpening",
+            "tearProgress": 0.3486795127391815,
+            "packDissolve": 0.0,
+            "caseTravel": 0.0,
+            "mouthContactOcclusion": false,
+            "caseRootId": "568105589213756006",
+            "caseRendererIds": [
+                "568105589213755988",
+                "568105589213755980",
+                "568105589213755972",
+                "568105589213755948",
+                "568105589213755936"
+            ],
+            "caseRootPosition": {
+                "x": 0.0,
+                "y": 0.02800000086426735,
+                "z": 0.07000000029802323
+            },
+            "caseRootScale": {
+                "x": 0.800000011920929,
+                "y": 0.800000011920929,
+                "z": 0.800000011920929
+            },
+            "caseBounds": {
+                "x": 0.1333903968334198,
+                "y": 0.3454284071922302,
+                "width": 0.7332191467285156,
+                "height": 0.44966286420822146
+            },
+            "packBounds": {
+                "x": -0.06460922956466675,
+                "y": 0.2303340584039688,
+                "width": 1.1341044902801514,
+                "height": 0.5997070074081421
+            },
+            "packVisible": true,
+            "effectsEnabled": false,
+            "visibleFraction": 0.7889145016670227,
+            "whiteFraction": 0.0,
+            "stateSetFrame": 45,
+            "renderedAfterFrame": 46
+        },
+        {
+            "frame": 35,
+            "timeSeconds": 0.5833333134651184,
+            "phase": "TearPropagation",
+            "occlusion": "MouthOpening",
+            "tearProgress": 0.3817801773548126,
+            "packDissolve": 0.0,
+            "caseTravel": 0.0,
+            "mouthContactOcclusion": false,
+            "caseRootId": "568105589213756006",
+            "caseRendererIds": [
+                "568105589213755988",
+                "568105589213755980",
+                "568105589213755972",
+                "568105589213755948",
+                "568105589213755936"
+            ],
+            "caseRootPosition": {
+                "x": 0.0,
+                "y": 0.02800000086426735,
+                "z": 0.07000000029802323
+            },
+            "caseRootScale": {
+                "x": 0.800000011920929,
+                "y": 0.800000011920929,
+                "z": 0.800000011920929
+            },
+            "caseBounds": {
+                "x": 0.1333903968334198,
+                "y": 0.3454284071922302,
+                "width": 0.7332191467285156,
+                "height": 0.44966286420822146
+            },
+            "packBounds": {
+                "x": -0.06460922956466675,
+                "y": 0.2303340584039688,
+                "width": 1.1341044902801514,
+                "height": 0.5997070074081421
+            },
+            "packVisible": true,
+            "effectsEnabled": false,
+            "visibleFraction": 0.789004921913147,
+            "whiteFraction": 0.0,
+            "stateSetFrame": 46,
+            "renderedAfterFrame": 47
+        },
+        {
+            "frame": 36,
+            "timeSeconds": 0.6000000238418579,
+            "phase": "TearPropagation",
+            "occlusion": "MouthOpening",
+            "tearProgress": 0.41859814524650576,
+            "packDissolve": 0.0,
+            "caseTravel": 0.0,
+            "mouthContactOcclusion": false,
+            "caseRootId": "568105589213756006",
+            "caseRendererIds": [
+                "568105589213755988",
+                "568105589213755980",
+                "568105589213755972",
+                "568105589213755948",
+                "568105589213755936"
+            ],
+            "caseRootPosition": {
+                "x": 0.0,
+                "y": 0.02800000086426735,
+                "z": 0.07000000029802323
+            },
+            "caseRootScale": {
+                "x": 0.800000011920929,
+                "y": 0.800000011920929,
+                "z": 0.800000011920929
+            },
+            "caseBounds": {
+                "x": 0.1333903968334198,
+                "y": 0.3454284071922302,
+                "width": 0.7332191467285156,
+                "height": 0.44966286420822146
+            },
+            "packBounds": {
+                "x": -0.06460922956466675,
+                "y": 0.2303340584039688,
+                "width": 1.1341044902801514,
+                "height": 0.5997070074081421
+            },
+            "packVisible": true,
+            "effectsEnabled": false,
+            "visibleFraction": 0.7889597415924072,
+            "whiteFraction": 0.0,
+            "stateSetFrame": 47,
+            "renderedAfterFrame": 48
+        },
+        {
+            "frame": 37,
+            "timeSeconds": 0.6166666746139526,
+            "phase": "TearPropagation",
+            "occlusion": "MouthOpening",
+            "tearProgress": 0.4578056037425995,
+            "packDissolve": 0.0,
+            "caseTravel": 0.0,
+            "mouthContactOcclusion": false,
+            "caseRootId": "568105589213756006",
+            "caseRendererIds": [
+                "568105589213755988",
+                "568105589213755980",
+                "568105589213755972",
+                "568105589213755948",
+                "568105589213755936"
+            ],
+            "caseRootPosition": {
+                "x": 0.0,
+                "y": 0.02800000086426735,
+                "z": 0.07000000029802323
+            },
+            "caseRootScale": {
+                "x": 0.800000011920929,
+                "y": 0.800000011920929,
+                "z": 0.800000011920929
+            },
+            "caseBounds": {
+                "x": 0.1333903968334198,
+                "y": 0.3454284071922302,
+                "width": 0.7332191467285156,
+                "height": 0.44966286420822146
+            },
+            "packBounds": {
+                "x": -0.06460922956466675,
+                "y": 0.2303340584039688,
+                "width": 1.1341044902801514,
+                "height": 0.5997070074081421
+            },
+            "packVisible": true,
+            "effectsEnabled": false,
+            "visibleFraction": 0.7887336611747742,
+            "whiteFraction": 0.0,
+            "stateSetFrame": 48,
+            "renderedAfterFrame": 49
+        },
+        {
+            "frame": 38,
+            "timeSeconds": 0.6333333253860474,
+            "phase": "TearPropagation",
+            "occlusion": "MouthOpening",
+            "tearProgress": 0.49807512760162356,
+            "packDissolve": 0.0,
+            "caseTravel": 0.0,
+            "mouthContactOcclusion": false,
+            "caseRootId": "568105589213756006",
+            "caseRendererIds": [
+                "568105589213755988",
+                "568105589213755980",
+                "568105589213755972",
+                "568105589213755948",
+                "568105589213755936"
+            ],
+            "caseRootPosition": {
+                "x": 0.0,
+                "y": 0.02800000086426735,
+                "z": 0.07000000029802323
+            },
+            "caseRootScale": {
+                "x": 0.800000011920929,
+                "y": 0.800000011920929,
+                "z": 0.800000011920929
+            },
+            "caseBounds": {
+                "x": 0.1333903968334198,
+                "y": 0.3454284071922302,
+                "width": 0.7332191467285156,
+                "height": 0.44966286420822146
+            },
+            "packBounds": {
+                "x": -0.06460922956466675,
+                "y": 0.2303340584039688,
+                "width": 1.1341044902801514,
+                "height": 0.5997070074081421
+            },
+            "packVisible": true,
+            "effectsEnabled": false,
+            "visibleFraction": 0.7890501618385315,
+            "whiteFraction": 0.0,
+            "stateSetFrame": 49,
+            "renderedAfterFrame": 50
+        },
+        {
+            "frame": 39,
+            "timeSeconds": 0.6499999761581421,
+            "phase": "TearPropagation",
+            "occlusion": "MouthOpening",
+            "tearProgress": 0.5380791425704956,
+            "packDissolve": 0.0,
+            "caseTravel": 0.0,
+            "mouthContactOcclusion": true,
+            "caseRootId": "568105589213756006",
+            "caseRendererIds": [
+                "568105589213755988",
+                "568105589213755980",
+                "568105589213755972",
+                "568105589213755948",
+                "568105589213755936"
+            ],
+            "caseRootPosition": {
+                "x": 0.0,
+                "y": 0.02800000086426735,
+                "z": 0.07000000029802323
+            },
+            "caseRootScale": {
+                "x": 0.800000011920929,
+                "y": 0.800000011920929,
+                "z": 0.800000011920929
+            },
+            "caseBounds": {
+                "x": 0.1333903968334198,
+                "y": 0.3454284071922302,
+                "width": 0.7332191467285156,
+                "height": 0.44966286420822146
+            },
+            "packBounds": {
+                "x": -0.06460922956466675,
+                "y": 0.2303340584039688,
+                "width": 1.1341044902801514,
+                "height": 0.5997070074081421
+            },
+            "packVisible": true,
+            "effectsEnabled": false,
+            "visibleFraction": 0.7899091243743897,
+            "whiteFraction": 0.0,
+            "stateSetFrame": 50,
+            "renderedAfterFrame": 51
+        },
+        {
+            "frame": 40,
+            "timeSeconds": 0.6666666865348816,
+            "phase": "TearPropagation",
+            "occlusion": "MouthOpening",
+            "tearProgress": 0.5764902234077454,
+            "packDissolve": 0.0,
+            "caseTravel": 0.0,
+            "mouthContactOcclusion": true,
+            "caseRootId": "568105589213756006",
+            "caseRendererIds": [
+                "568105589213755988",
+                "568105589213755980",
+                "568105589213755972",
+                "568105589213755948",
+                "568105589213755936"
+            ],
+            "caseRootPosition": {
+                "x": 0.0,
+                "y": 0.02800000086426735,
+                "z": 0.07000000029802323
+            },
+            "caseRootScale": {
+                "x": 0.800000011920929,
+                "y": 0.800000011920929,
+                "z": 0.800000011920929
+            },
+            "caseBounds": {
+                "x": 0.1333903968334198,
+                "y": 0.3454284071922302,
+                "width": 0.7332191467285156,
+                "height": 0.44966286420822146
+            },
+            "packBounds": {
+                "x": -0.06460922956466675,
+                "y": 0.2303340584039688,
+                "width": 1.1341044902801514,
+                "height": 0.5997070074081421
+            },
+            "packVisible": true,
+            "effectsEnabled": false,
+            "visibleFraction": 0.7905420660972595,
+            "whiteFraction": 0.0,
+            "stateSetFrame": 51,
+            "renderedAfterFrame": 52
+        },
+        {
+            "frame": 41,
+            "timeSeconds": 0.6833333373069763,
+            "phase": "TearPropagation",
+            "occlusion": "MouthOpening",
+            "tearProgress": 0.6119804978370667,
+            "packDissolve": 0.0,
+            "caseTravel": 0.0,
+            "mouthContactOcclusion": true,
+            "caseRootId": "568105589213756006",
+            "caseRendererIds": [
+                "568105589213755988",
+                "568105589213755980",
+                "568105589213755972",
+                "568105589213755948",
+                "568105589213755936"
+            ],
+            "caseRootPosition": {
+                "x": 0.0,
+                "y": 0.02800000086426735,
+                "z": 0.07000000029802323
+            },
+            "caseRootScale": {
+                "x": 0.800000011920929,
+                "y": 0.800000011920929,
+                "z": 0.800000011920929
+            },
+            "caseBounds": {
+                "x": 0.1333903968334198,
+                "y": 0.3454284071922302,
+                "width": 0.7332191467285156,
+                "height": 0.44966286420822146
+            },
+            "packBounds": {
+                "x": -0.06460922956466675,
+                "y": 0.2303340584039688,
+                "width": 1.1341044902801514,
+                "height": 0.5997070074081421
+            },
+            "packVisible": true,
+            "effectsEnabled": false,
+            "visibleFraction": 0.7904516458511353,
+            "whiteFraction": 0.0,
+            "stateSetFrame": 52,
+            "renderedAfterFrame": 53
+        },
+        {
+            "frame": 42,
+            "timeSeconds": 0.699999988079071,
+            "phase": "TearPropagation",
+            "occlusion": "MouthOpening",
+            "tearProgress": 0.6432225108146668,
+            "packDissolve": 0.0,
+            "caseTravel": 0.0,
+            "mouthContactOcclusion": true,
+            "caseRootId": "568105589213756006",
+            "caseRendererIds": [
+                "568105589213755988",
+                "568105589213755980",
+                "568105589213755972",
+                "568105589213755948",
+                "568105589213755936"
+            ],
+            "caseRootPosition": {
+                "x": 0.0,
+                "y": 0.02800000086426735,
+                "z": 0.07000000029802323
+            },
+            "caseRootScale": {
+                "x": 0.800000011920929,
+                "y": 0.800000011920929,
+                "z": 0.800000011920929
+            },
+            "caseBounds": {
+                "x": 0.1333903968334198,
+                "y": 0.3454284071922302,
+                "width": 0.7332191467285156,
+                "height": 0.44966286420822146
+            },
+            "packBounds": {
+                "x": -0.06460922956466675,
+                "y": 0.2303340584039688,
+                "width": 1.1341044902801514,
+                "height": 0.5997070074081421
+            },
+            "packVisible": true,
+            "effectsEnabled": false,
+            "visibleFraction": 0.7900899648666382,
+            "whiteFraction": 0.0,
+            "stateSetFrame": 53,
+            "renderedAfterFrame": 54
+        },
+        {
+            "frame": 43,
+            "timeSeconds": 0.7166666388511658,
+            "phase": "TearPropagation",
+            "occlusion": "MouthOpening",
+            "tearProgress": 0.6688888669013977,
+            "packDissolve": 0.0,
+            "caseTravel": 0.0,
+            "mouthContactOcclusion": true,
+            "caseRootId": "568105589213756006",
+            "caseRendererIds": [
+                "568105589213755988",
+                "568105589213755980",
+                "568105589213755972",
+                "568105589213755948",
+                "568105589213755936"
+            ],
+            "caseRootPosition": {
+                "x": 0.0,
+                "y": 0.02800000086426735,
+                "z": 0.07000000029802323
+            },
+            "caseRootScale": {
+                "x": 0.800000011920929,
+                "y": 0.800000011920929,
+                "z": 0.800000011920929
+            },
+            "caseBounds": {
+                "x": 0.1333903968334198,
+                "y": 0.3454284071922302,
+                "width": 0.7332191467285156,
+                "height": 0.44966286420822146
+            },
+            "packBounds": {
+                "x": -0.06460922956466675,
+                "y": 0.2303340584039688,
+                "width": 1.1341044902801514,
+                "height": 0.5997070074081421
+            },
+            "packVisible": true,
+            "effectsEnabled": false,
+            "visibleFraction": 0.7899091243743897,
+            "whiteFraction": 0.0,
+            "stateSetFrame": 54,
+            "renderedAfterFrame": 55
+        },
+        {
+            "frame": 44,
+            "timeSeconds": 0.7333333492279053,
+            "phase": "TearPropagation",
+            "occlusion": "MouthOpening",
+            "tearProgress": 0.6876518130302429,
+            "packDissolve": 0.0,
+            "caseTravel": 0.0,
+            "mouthContactOcclusion": true,
+            "caseRootId": "568105589213756006",
+            "caseRendererIds": [
+                "568105589213755988",
+                "568105589213755980",
+                "568105589213755972",
+                "568105589213755948",
+                "568105589213755936"
+            ],
+            "caseRootPosition": {
+                "x": 0.0,
+                "y": 0.02800000086426735,
+                "z": 0.07000000029802323
+            },
+            "caseRootScale": {
+                "x": 0.800000011920929,
+                "y": 0.800000011920929,
+                "z": 0.800000011920929
+            },
+            "caseBounds": {
+                "x": 0.1333903968334198,
+                "y": 0.3454284071922302,
+                "width": 0.7332191467285156,
+                "height": 0.44966286420822146
+            },
+            "packBounds": {
+                "x": -0.06460922956466675,
+                "y": 0.2303340584039688,
+                "width": 1.1341044902801514,
+                "height": 0.5997070074081421
+            },
+            "packVisible": true,
+            "effectsEnabled": false,
+            "visibleFraction": 0.7898639440536499,
+            "whiteFraction": 0.0,
+            "stateSetFrame": 55,
+            "renderedAfterFrame": 56
+        },
+        {
+            "frame": 45,
+            "timeSeconds": 0.75,
+            "phase": "TearPropagation",
+            "occlusion": "MouthOpening",
+            "tearProgress": 0.6981838941574097,
+            "packDissolve": 0.0,
+            "caseTravel": 0.0,
+            "mouthContactOcclusion": true,
+            "caseRootId": "568105589213756006",
+            "caseRendererIds": [
+                "568105589213755988",
+                "568105589213755980",
+                "568105589213755972",
+                "568105589213755948",
+                "568105589213755936"
+            ],
+            "caseRootPosition": {
+                "x": 0.0,
+                "y": 0.02800000086426735,
+                "z": 0.07000000029802323
+            },
+            "caseRootScale": {
+                "x": 0.800000011920929,
+                "y": 0.800000011920929,
+                "z": 0.800000011920929
+            },
+            "caseBounds": {
+                "x": 0.1333903968334198,
+                "y": 0.3454284071922302,
+                "width": 0.7332191467285156,
+                "height": 0.44966286420822146
+            },
+            "packBounds": {
+                "x": -0.06460922956466675,
+                "y": 0.2303340584039688,
+                "width": 1.1341044902801514,
+                "height": 0.5997070074081421
+            },
+            "packVisible": true,
+            "effectsEnabled": false,
+            "visibleFraction": 0.7898639440536499,
+            "whiteFraction": 0.0,
+            "stateSetFrame": 56,
+            "renderedAfterFrame": 57
+        },
+        {
+            "frame": 46,
+            "timeSeconds": 0.7666666507720947,
+            "phase": "FormedMouth",
+            "occlusion": "CaseContained",
+            "tearProgress": 0.7002878189086914,
+            "packDissolve": 0.0,
+            "caseTravel": 0.0,
+            "mouthContactOcclusion": true,
+            "caseRootId": "568105589213756006",
+            "caseRendererIds": [
+                "568105589213755988",
+                "568105589213755980",
+                "568105589213755972",
+                "568105589213755948",
+                "568105589213755936"
+            ],
+            "caseRootPosition": {
+                "x": 0.0,
+                "y": 0.02800000086426735,
+                "z": 0.07000000029802323
+            },
+            "caseRootScale": {
+                "x": 0.800000011920929,
+                "y": 0.800000011920929,
+                "z": 0.800000011920929
+            },
+            "caseBounds": {
+                "x": 0.1333903968334198,
+                "y": 0.3454284071922302,
+                "width": 0.7332191467285156,
+                "height": 0.44966286420822146
+            },
+            "packBounds": {
+                "x": -0.06460922956466675,
+                "y": 0.2303340584039688,
+                "width": 1.1341044902801514,
+                "height": 0.5997070074081421
+            },
+            "packVisible": true,
+            "effectsEnabled": false,
+            "visibleFraction": 0.7899091243743897,
+            "whiteFraction": 0.0,
+            "stateSetFrame": 57,
+            "renderedAfterFrame": 58
+        },
+        {
+            "frame": 47,
+            "timeSeconds": 0.7833333611488342,
+            "phase": "FormedMouth",
+            "occlusion": "CaseContained",
+            "tearProgress": 0.7033782601356506,
+            "packDissolve": 0.0,
+            "caseTravel": 0.0,
+            "mouthContactOcclusion": true,
+            "caseRootId": "568105589213756006",
+            "caseRendererIds": [
+                "568105589213755988",
+                "568105589213755980",
+                "568105589213755972",
+                "568105589213755948",
+                "568105589213755936"
+            ],
+            "caseRootPosition": {
+                "x": 0.0,
+                "y": 0.02800000086426735,
+                "z": 0.07000000029802323
+            },
+            "caseRootScale": {
+                "x": 0.800000011920929,
+                "y": 0.800000011920929,
+                "z": 0.800000011920929
+            },
+            "caseBounds": {
+                "x": 0.1333903968334198,
+                "y": 0.3454284071922302,
+                "width": 0.7332191467285156,
+                "height": 0.44966286420822146
+            },
+            "packBounds": {
+                "x": -0.06460922956466675,
+                "y": 0.2303340584039688,
+                "width": 1.1341044902801514,
+                "height": 0.5997070074081421
+            },
+            "packVisible": true,
+            "effectsEnabled": false,
+            "visibleFraction": 0.7899995446205139,
+            "whiteFraction": 0.0,
+            "stateSetFrame": 58,
+            "renderedAfterFrame": 59
+        },
+        {
+            "frame": 48,
+            "timeSeconds": 0.800000011920929,
+            "phase": "FormedMouth",
+            "occlusion": "CaseContained",
+            "tearProgress": 0.7094944715499878,
+            "packDissolve": 0.0,
+            "caseTravel": 0.0,
+            "mouthContactOcclusion": true,
+            "caseRootId": "568105589213756006",
+            "caseRendererIds": [
+                "568105589213755988",
+                "568105589213755980",
+                "568105589213755972",
+                "568105589213755948",
+                "568105589213755936"
+            ],
+            "caseRootPosition": {
+                "x": 0.0,
+                "y": 0.02800000086426735,
+                "z": 0.07000000029802323
+            },
+            "caseRootScale": {
+                "x": 0.800000011920929,
+                "y": 0.800000011920929,
+                "z": 0.800000011920929
+            },
+            "caseBounds": {
+                "x": 0.1333903968334198,
+                "y": 0.3454284071922302,
+                "width": 0.7332191467285156,
+                "height": 0.44966286420822146
+            },
+            "packBounds": {
+                "x": -0.06460922956466675,
+                "y": 0.2303340584039688,
+                "width": 1.1341044902801514,
+                "height": 0.5997070074081421
+            },
+            "packVisible": true,
+            "effectsEnabled": false,
+            "visibleFraction": 0.7897735238075256,
+            "whiteFraction": 0.0,
+            "stateSetFrame": 59,
+            "renderedAfterFrame": 60
+        },
+        {
+            "frame": 49,
+            "timeSeconds": 0.8166666626930237,
+            "phase": "FormedMouth",
+            "occlusion": "CaseContained",
+            "tearProgress": 0.7181848287582398,
+            "packDissolve": 0.0,
+            "caseTravel": 0.0,
+            "mouthContactOcclusion": true,
+            "caseRootId": "568105589213756006",
+            "caseRendererIds": [
+                "568105589213755988",
+                "568105589213755980",
+                "568105589213755972",
+                "568105589213755948",
+                "568105589213755936"
+            ],
+            "caseRootPosition": {
+                "x": 0.0,
+                "y": 0.02800000086426735,
+                "z": 0.07000000029802323
+            },
+            "caseRootScale": {
+                "x": 0.800000011920929,
+                "y": 0.800000011920929,
+                "z": 0.800000011920929
+            },
+            "caseBounds": {
+                "x": 0.1333903968334198,
+                "y": 0.3454284071922302,
+                "width": 0.7332191467285156,
+                "height": 0.44966286420822146
+            },
+            "packBounds": {
+                "x": -0.06460922956466675,
+                "y": 0.2303340584039688,
+                "width": 1.1341044902801514,
+                "height": 0.5997070074081421
+            },
+            "packVisible": true,
+            "effectsEnabled": false,
+            "visibleFraction": 0.7898187041282654,
+            "whiteFraction": 0.0,
+            "stateSetFrame": 60,
+            "renderedAfterFrame": 61
+        },
+        {
+            "frame": 50,
+            "timeSeconds": 0.8333333134651184,
+            "phase": "FormedMouth",
+            "occlusion": "CaseContained",
+            "tearProgress": 0.7289977073669434,
+            "packDissolve": 0.0,
+            "caseTravel": 0.0,
+            "mouthContactOcclusion": true,
+            "caseRootId": "568105589213756006",
+            "caseRendererIds": [
+                "568105589213755988",
+                "568105589213755980",
+                "568105589213755972",
+                "568105589213755948",
+                "568105589213755936"
+            ],
+            "caseRootPosition": {
+                "x": 0.0,
+                "y": 0.02800000086426735,
+                "z": 0.07000000029802323
+            },
+            "caseRootScale": {
+                "x": 0.800000011920929,
+                "y": 0.800000011920929,
+                "z": 0.800000011920929
+            },
+            "caseBounds": {
+                "x": 0.1333903968334198,
+                "y": 0.3454284071922302,
+                "width": 0.7332191467285156,
+                "height": 0.44966286420822146
+            },
+            "packBounds": {
+                "x": -0.06460922956466675,
+                "y": 0.2303340584039688,
+                "width": 1.1341044902801514,
+                "height": 0.5997070074081421
+            },
+            "packVisible": true,
+            "effectsEnabled": false,
+            "visibleFraction": 0.7894118428230286,
+            "whiteFraction": 0.0,
+            "stateSetFrame": 61,
+            "renderedAfterFrame": 62
+        },
+        {
+            "frame": 51,
+            "timeSeconds": 0.8500000238418579,
+            "phase": "FormedMouth",
+            "occlusion": "CaseContained",
+            "tearProgress": 0.7414814829826355,
+            "packDissolve": 0.0,
+            "caseTravel": 0.0,
+            "mouthContactOcclusion": true,
+            "caseRootId": "568105589213756006",
+            "caseRendererIds": [
+                "568105589213755988",
+                "568105589213755980",
+                "568105589213755972",
+                "568105589213755948",
+                "568105589213755936"
+            ],
+            "caseRootPosition": {
+                "x": 0.0,
+                "y": 0.02800000086426735,
+                "z": 0.07000000029802323
+            },
+            "caseRootScale": {
+                "x": 0.800000011920929,
+                "y": 0.800000011920929,
+                "z": 0.800000011920929
+            },
+            "caseBounds": {
+                "x": 0.1333903968334198,
+                "y": 0.3454284071922302,
+                "width": 0.7332191467285156,
+                "height": 0.44966286420822146
+            },
+            "packBounds": {
+                "x": -0.06460922956466675,
+                "y": 0.2303340584039688,
+                "width": 1.1341044902801514,
+                "height": 0.5997070074081421
+            },
+            "packVisible": true,
+            "effectsEnabled": false,
+            "visibleFraction": 0.7889145016670227,
+            "whiteFraction": 0.0,
+            "stateSetFrame": 62,
+            "renderedAfterFrame": 63
+        },
+        {
+            "frame": 52,
+            "timeSeconds": 0.8666666746139526,
+            "phase": "FormedMouth",
+            "occlusion": "CaseContained",
+            "tearProgress": 0.7551845908164978,
+            "packDissolve": 0.0,
+            "caseTravel": 0.0,
+            "mouthContactOcclusion": true,
+            "caseRootId": "568105589213756006",
+            "caseRendererIds": [
+                "568105589213755988",
+                "568105589213755980",
+                "568105589213755972",
+                "568105589213755948",
+                "568105589213755936"
+            ],
+            "caseRootPosition": {
+                "x": 0.0,
+                "y": 0.02800000086426735,
+                "z": 0.07000000029802323
+            },
+            "caseRootScale": {
+                "x": 0.800000011920929,
+                "y": 0.800000011920929,
+                "z": 0.800000011920929
+            },
+            "caseBounds": {
+                "x": 0.1333903968334198,
+                "y": 0.3454284071922302,
+                "width": 0.7332191467285156,
+                "height": 0.44966286420822146
+            },
+            "packBounds": {
+                "x": -0.06460922956466675,
+                "y": 0.2303340584039688,
+                "width": 1.1341044902801514,
+                "height": 0.5997070074081421
+            },
+            "packVisible": true,
+            "effectsEnabled": false,
+            "visibleFraction": 0.7889597415924072,
+            "whiteFraction": 0.0,
+            "stateSetFrame": 63,
+            "renderedAfterFrame": 64
+        },
+        {
+            "frame": 53,
+            "timeSeconds": 0.8833333253860474,
+            "phase": "FormedMouth",
+            "occlusion": "CaseContained",
+            "tearProgress": 0.7696554660797119,
+            "packDissolve": 0.0,
+            "caseTravel": 0.0,
+            "mouthContactOcclusion": true,
+            "caseRootId": "568105589213756006",
+            "caseRendererIds": [
+                "568105589213755988",
+                "568105589213755980",
+                "568105589213755972",
+                "568105589213755948",
+                "568105589213755936"
+            ],
+            "caseRootPosition": {
+                "x": 0.0,
+                "y": 0.02800000086426735,
+                "z": 0.07000000029802323
+            },
+            "caseRootScale": {
+                "x": 0.800000011920929,
+                "y": 0.800000011920929,
+                "z": 0.800000011920929
+            },
+            "caseBounds": {
+                "x": 0.1333903968334198,
+                "y": 0.3454284071922302,
+                "width": 0.7332191467285156,
+                "height": 0.44966286420822146
+            },
+            "packBounds": {
+                "x": -0.06460922956466675,
+                "y": 0.2303340584039688,
+                "width": 1.1341044902801514,
+                "height": 0.5997070074081421
+            },
+            "packVisible": true,
+            "effectsEnabled": false,
+            "visibleFraction": 0.7882363796234131,
+            "whiteFraction": 0.0,
+            "stateSetFrame": 64,
+            "renderedAfterFrame": 65
+        },
+        {
+            "frame": 54,
+            "timeSeconds": 0.8999999761581421,
+            "phase": "CaseContained",
+            "occlusion": "CaseContained",
+            "tearProgress": 0.7844424247741699,
+            "packDissolve": 0.0,
+            "caseTravel": 0.0,
+            "mouthContactOcclusion": true,
+            "caseRootId": "568105589213756006",
+            "caseRendererIds": [
+                "568105589213755988",
+                "568105589213755980",
+                "568105589213755972",
+                "568105589213755948",
+                "568105589213755936"
+            ],
+            "caseRootPosition": {
+                "x": 0.0,
+                "y": 0.02800000086426735,
+                "z": 0.07000000029802323
+            },
+            "caseRootScale": {
+                "x": 0.800000011920929,
+                "y": 0.800000011920929,
+                "z": 0.800000011920929
+            },
+            "caseBounds": {
+                "x": 0.1333903968334198,
+                "y": 0.3454284071922302,
+                "width": 0.7332191467285156,
+                "height": 0.44966286420822146
+            },
+            "packBounds": {
+                "x": -0.06460922956466675,
+                "y": 0.2303340584039688,
+                "width": 1.1341044902801514,
+                "height": 0.5997070074081421
+            },
+            "packVisible": true,
+            "effectsEnabled": false,
+            "visibleFraction": 0.78801029920578,
+            "whiteFraction": 0.0,
+            "stateSetFrame": 65,
+            "renderedAfterFrame": 66
+        },
+        {
+            "frame": 55,
+            "timeSeconds": 0.9166666865348816,
+            "phase": "CaseContained",
+            "occlusion": "CaseContained",
+            "tearProgress": 0.7990939021110535,
+            "packDissolve": 0.0,
+            "caseTravel": 0.0,
+            "mouthContactOcclusion": true,
+            "caseRootId": "568105589213756006",
+            "caseRendererIds": [
+                "568105589213755988",
+                "568105589213755980",
+                "568105589213755972",
+                "568105589213755948",
+                "568105589213755936"
+            ],
+            "caseRootPosition": {
+                "x": 0.0,
+                "y": 0.02800000086426735,
+                "z": 0.07000000029802323
+            },
+            "caseRootScale": {
+                "x": 0.800000011920929,
+                "y": 0.800000011920929,
+                "z": 0.800000011920929
+            },
+            "caseBounds": {
+                "x": 0.1333903968334198,
+                "y": 0.3454284071922302,
+                "width": 0.7332191467285156,
+                "height": 0.44966286420822146
+            },
+            "packBounds": {
+                "x": -0.06460922956466675,
+                "y": 0.2303340584039688,
+                "width": 1.1341044902801514,
+                "height": 0.5997070074081421
+            },
+            "packVisible": true,
+            "effectsEnabled": false,
+            "visibleFraction": 0.7874677777290344,
+            "whiteFraction": 0.0,
+            "stateSetFrame": 66,
+            "renderedAfterFrame": 67
+        },
+        {
+            "frame": 56,
+            "timeSeconds": 0.9333333373069763,
+            "phase": "CaseContained",
+            "occlusion": "CaseContained",
+            "tearProgress": 0.8131583333015442,
+            "packDissolve": 0.0,
+            "caseTravel": 0.0,
+            "mouthContactOcclusion": true,
+            "caseRootId": "568105589213756006",
+            "caseRendererIds": [
+                "568105589213755988",
+                "568105589213755980",
+                "568105589213755972",
+                "568105589213755948",
+                "568105589213755936"
+            ],
+            "caseRootPosition": {
+                "x": 0.0,
+                "y": 0.02800000086426735,
+                "z": 0.07000000029802323
+            },
+            "caseRootScale": {
+                "x": 0.800000011920929,
+                "y": 0.800000011920929,
+                "z": 0.800000011920929
+            },
+            "caseBounds": {
+                "x": 0.1333903968334198,
+                "y": 0.3454284071922302,
+                "width": 0.7332191467285156,
+                "height": 0.44966286420822146
+            },
+            "packBounds": {
+                "x": -0.06460922956466675,
+                "y": 0.2303340584039688,
+                "width": 1.1341044902801514,
+                "height": 0.5997070074081421
+            },
+            "packVisible": true,
+            "effectsEnabled": false,
+            "visibleFraction": 0.7875581979751587,
+            "whiteFraction": 0.0,
+            "stateSetFrame": 67,
+            "renderedAfterFrame": 68
+        },
+        {
+            "frame": 57,
+            "timeSeconds": 0.949999988079071,
+            "phase": "CaseContained",
+            "occlusion": "CaseContained",
+            "tearProgress": 0.8261840343475342,
+            "packDissolve": 0.0,
+            "caseTravel": 0.0,
+            "mouthContactOcclusion": true,
+            "caseRootId": "568105589213756006",
+            "caseRendererIds": [
+                "568105589213755988",
+                "568105589213755980",
+                "568105589213755972",
+                "568105589213755948",
+                "568105589213755936"
+            ],
+            "caseRootPosition": {
+                "x": 0.0,
+                "y": 0.02800000086426735,
+                "z": 0.07000000029802323
+            },
+            "caseRootScale": {
+                "x": 0.800000011920929,
+                "y": 0.800000011920929,
+                "z": 0.800000011920929
+            },
+            "caseBounds": {
+                "x": 0.1333903968334198,
+                "y": 0.3454284071922302,
+                "width": 0.7332191467285156,
+                "height": 0.44966286420822146
+            },
+            "packBounds": {
+                "x": -0.06460922956466675,
+                "y": 0.2303340584039688,
+                "width": 1.1341044902801514,
+                "height": 0.5997070074081421
+            },
+            "packVisible": true,
+            "effectsEnabled": false,
+            "visibleFraction": 0.7871965169906616,
+            "whiteFraction": 0.0,
+            "stateSetFrame": 68,
+            "renderedAfterFrame": 69
+        },
+        {
+            "frame": 58,
+            "timeSeconds": 0.9666666388511658,
+            "phase": "CaseContained",
+            "occlusion": "CaseContained",
+            "tearProgress": 0.8377194404602051,
+            "packDissolve": 0.0,
+            "caseTravel": 0.0,
+            "mouthContactOcclusion": true,
+            "caseRootId": "568105589213756006",
+            "caseRendererIds": [
+                "568105589213755988",
+                "568105589213755980",
+                "568105589213755972",
+                "568105589213755948",
+                "568105589213755936"
+            ],
+            "caseRootPosition": {
+                "x": 0.0,
+                "y": 0.02800000086426735,
+                "z": 0.07000000029802323
+            },
+            "caseRootScale": {
+                "x": 0.800000011920929,
+                "y": 0.800000011920929,
+                "z": 0.800000011920929
+            },
+            "caseBounds": {
+                "x": 0.1333903968334198,
+                "y": 0.3454284071922302,
+                "width": 0.7332191467285156,
+                "height": 0.44966286420822146
+            },
+            "packBounds": {
+                "x": -0.06460922956466675,
+                "y": 0.2303340584039688,
+                "width": 1.1341044902801514,
+                "height": 0.5997070074081421
+            },
+            "packVisible": true,
+            "effectsEnabled": false,
+            "visibleFraction": 0.7870609164237976,
+            "whiteFraction": 0.0,
+            "stateSetFrame": 69,
+            "renderedAfterFrame": 70
+        },
+        {
+            "frame": 59,
+            "timeSeconds": 0.9833333492279053,
+            "phase": "CaseContained",
+            "occlusion": "CaseContained",
+            "tearProgress": 0.8473129868507385,
+            "packDissolve": 0.0,
+            "caseTravel": 0.0,
+            "mouthContactOcclusion": true,
+            "caseRootId": "568105589213756006",
+            "caseRendererIds": [
+                "568105589213755988",
+                "568105589213755980",
+                "568105589213755972",
+                "568105589213755948",
+                "568105589213755936"
+            ],
+            "caseRootPosition": {
+                "x": 0.0,
+                "y": 0.02800000086426735,
+                "z": 0.07000000029802323
+            },
+            "caseRootScale": {
+                "x": 0.800000011920929,
+                "y": 0.800000011920929,
+                "z": 0.800000011920929
+            },
+            "caseBounds": {
+                "x": 0.1333903968334198,
+                "y": 0.3454284071922302,
+                "width": 0.7332191467285156,
+                "height": 0.44966286420822146
+            },
+            "packBounds": {
+                "x": -0.06460922956466675,
+                "y": 0.2303340584039688,
+                "width": 1.1341044902801514,
+                "height": 0.5997070074081421
+            },
+            "packVisible": true,
+            "effectsEnabled": false,
+            "visibleFraction": 0.786653995513916,
+            "whiteFraction": 0.0,
+            "stateSetFrame": 70,
+            "renderedAfterFrame": 71
+        },
+        {
+            "frame": 60,
+            "timeSeconds": 1.0,
+            "phase": "CaseContained",
+            "occlusion": "CaseContained",
+            "tearProgress": 0.8545130491256714,
+            "packDissolve": 0.0,
+            "caseTravel": 0.0,
+            "mouthContactOcclusion": true,
+            "caseRootId": "568105589213756006",
+            "caseRendererIds": [
+                "568105589213755988",
+                "568105589213755980",
+                "568105589213755972",
+                "568105589213755948",
+                "568105589213755936"
+            ],
+            "caseRootPosition": {
+                "x": 0.0,
+                "y": 0.02800000086426735,
+                "z": 0.07000000029802323
+            },
+            "caseRootScale": {
+                "x": 0.800000011920929,
+                "y": 0.800000011920929,
+                "z": 0.800000011920929
+            },
+            "caseBounds": {
+                "x": 0.1333903968334198,
+                "y": 0.3454284071922302,
+                "width": 0.7332191467285156,
+                "height": 0.44966286420822146
+            },
+            "packBounds": {
+                "x": -0.06460922956466675,
+                "y": 0.2303340584039688,
+                "width": 1.1341044902801514,
+                "height": 0.5997070074081421
+            },
+            "packVisible": true,
+            "effectsEnabled": false,
+            "visibleFraction": 0.7866088151931763,
+            "whiteFraction": 0.0,
+            "stateSetFrame": 71,
+            "renderedAfterFrame": 72
+        },
+        {
+            "frame": 61,
+            "timeSeconds": 1.0166666507720948,
+            "phase": "CaseContained",
+            "occlusion": "CaseContained",
+            "tearProgress": 0.8588680028915405,
+            "packDissolve": 0.0,
+            "caseTravel": 0.0,
+            "mouthContactOcclusion": true,
+            "caseRootId": "568105589213756006",
+            "caseRendererIds": [
+                "568105589213755988",
+                "568105589213755980",
+                "568105589213755972",
+                "568105589213755948",
+                "568105589213755936"
+            ],
+            "caseRootPosition": {
+                "x": 0.0,
+                "y": 0.02800000086426735,
+                "z": 0.07000000029802323
+            },
+            "caseRootScale": {
+                "x": 0.800000011920929,
+                "y": 0.800000011920929,
+                "z": 0.800000011920929
+            },
+            "caseBounds": {
+                "x": 0.1333903968334198,
+                "y": 0.3454284071922302,
+                "width": 0.7332191467285156,
+                "height": 0.44966286420822146
+            },
+            "packBounds": {
+                "x": -0.06460922956466675,
+                "y": 0.2303340584039688,
+                "width": 1.1341044902801514,
+                "height": 0.5997070074081421
+            },
+            "packVisible": true,
+            "effectsEnabled": false,
+            "visibleFraction": 0.7865635752677918,
+            "whiteFraction": 0.0,
+            "stateSetFrame": 72,
+            "renderedAfterFrame": 73
+        },
+        {
+            "frame": 62,
+            "timeSeconds": 1.0333333015441895,
+            "phase": "ContinuousRise",
+            "occlusion": "CaseContained",
+            "tearProgress": 0.8600740432739258,
+            "packDissolve": 0.0,
+            "caseTravel": 0.0001021954813040793,
+            "mouthContactOcclusion": true,
+            "caseRootId": "568105589213756006",
+            "caseRendererIds": [
+                "568105589213755988",
+                "568105589213755980",
+                "568105589213755972",
+                "568105589213755948",
+                "568105589213755936"
+            ],
+            "caseRootPosition": {
+                "x": 0.0,
+                "y": 0.028015125542879106,
+                "z": 0.07000000029802323
+            },
+            "caseRootScale": {
+                "x": 0.800000011920929,
+                "y": 0.800000011920929,
+                "z": 0.800000011920929
+            },
+            "caseBounds": {
+                "x": 0.1333903968334198,
+                "y": 0.3454563617706299,
+                "width": 0.7332191467285156,
+                "height": 0.44966280460357668
+            },
+            "packBounds": {
+                "x": -0.06460922956466675,
+                "y": 0.2303340584039688,
+                "width": 1.1341044902801514,
+                "height": 0.5997070074081421
+            },
+            "packVisible": true,
+            "effectsEnabled": false,
+            "visibleFraction": 0.786518394947052,
+            "whiteFraction": 0.0,
+            "stateSetFrame": 73,
+            "renderedAfterFrame": 74
+        },
+        {
+            "frame": 63,
+            "timeSeconds": 1.0499999523162842,
+            "phase": "ContinuousRise",
+            "occlusion": "CaseContained",
+            "tearProgress": 0.8625446557998657,
+            "packDissolve": 0.0,
+            "caseTravel": 0.0036070402711629869,
+            "mouthContactOcclusion": true,
+            "caseRootId": "568105589213756006",
+            "caseRendererIds": [
+                "568105589213755988",
+                "568105589213755980",
+                "568105589213755972",
+                "568105589213755948",
+                "568105589213755936"
+            ],
+            "caseRootPosition": {
+                "x": 0.0,
+                "y": 0.02853384241461754,
+                "z": 0.07000000029802323
+            },
+            "caseRootScale": {
+                "x": 0.800000011920929,
+                "y": 0.800000011920929,
+                "z": 0.800000011920929
+            },
+            "caseBounds": {
+                "x": 0.1333903968334198,
+                "y": 0.3464154601097107,
+                "width": 0.7332191467285156,
+                "height": 0.44966286420822146
+            },
+            "packBounds": {
+                "x": -0.06460922956466675,
+                "y": 0.2303340584039688,
+                "width": 1.1341044902801514,
+                "height": 0.5997070074081421
+            },
+            "packVisible": true,
+            "effectsEnabled": false,
+            "visibleFraction": 0.7864279747009277,
+            "whiteFraction": 0.0,
+            "stateSetFrame": 74,
+            "renderedAfterFrame": 75
+        },
+        {
+            "frame": 64,
+            "timeSeconds": 1.0666667222976685,
+            "phase": "ContinuousRise",
+            "occlusion": "CaseCrossingMouth",
+            "tearProgress": 0.8681513071060181,
+            "packDissolve": 0.0,
+            "caseTravel": 0.011881750077009201,
+            "mouthContactOcclusion": true,
+            "caseRootId": "568105589213756006",
+            "caseRendererIds": [
+                "568105589213755988",
+                "568105589213755980",
+                "568105589213755972",
+                "568105589213755948",
+                "568105589213755936"
+            ],
+            "caseRootPosition": {
+                "x": 0.0,
+                "y": 0.029758499935269357,
+                "z": 0.07000000029802323
+            },
+            "caseRootScale": {
+                "x": 0.800000011920929,
+                "y": 0.800000011920929,
+                "z": 0.800000011920929
+            },
+            "caseBounds": {
+                "x": 0.1333903968334198,
+                "y": 0.348679780960083,
+                "width": 0.7332191467285156,
+                "height": 0.44966286420822146
+            },
+            "packBounds": {
+                "x": -0.06460922956466675,
+                "y": 0.2303340584039688,
+                "width": 1.1341044902801514,
+                "height": 0.5997070074081421
+            },
+            "packVisible": true,
+            "effectsEnabled": false,
+            "visibleFraction": 0.7876034379005432,
+            "whiteFraction": 0.0,
+            "stateSetFrame": 75,
+            "renderedAfterFrame": 76
+        },
+        {
+            "frame": 65,
+            "timeSeconds": 1.0833333730697632,
+            "phase": "ContinuousRise",
+            "occlusion": "CaseCrossingMouth",
+            "tearProgress": 0.8763961791992188,
+            "packDissolve": 0.0,
+            "caseTravel": 0.024626217782497407,
+            "mouthContactOcclusion": true,
+            "caseRootId": "568105589213756006",
+            "caseRendererIds": [
+                "568105589213755988",
+                "568105589213755980",
+                "568105589213755972",
+                "568105589213755948",
+                "568105589213755936"
+            ],
+            "caseRootPosition": {
+                "x": 0.0,
+                "y": 0.031644679605960849,
+                "z": 0.07000000029802323
+            },
+            "caseRootScale": {
+                "x": 0.800000011920929,
+                "y": 0.800000011920929,
+                "z": 0.800000011920929
+            },
+            "caseBounds": {
+                "x": 0.1333903968334198,
+                "y": 0.3521672487258911,
+                "width": 0.7332191467285156,
+                "height": 0.44966280460357668
+            },
+            "packBounds": {
+                "x": -0.06460922956466675,
+                "y": 0.2303340584039688,
+                "width": 1.1341044902801514,
+                "height": 0.5997070074081421
+            },
+            "packVisible": true,
+            "effectsEnabled": false,
+            "visibleFraction": 0.7881911396980286,
+            "whiteFraction": 0.0,
+            "stateSetFrame": 76,
+            "renderedAfterFrame": 77
+        },
+        {
+            "frame": 66,
+            "timeSeconds": 1.100000023841858,
+            "phase": "ContinuousRise",
+            "occlusion": "CaseCrossingMouth",
+            "tearProgress": 0.8867815136909485,
+            "packDissolve": 0.0,
+            "caseTravel": 0.04154049977660179,
+            "mouthContactOcclusion": true,
+            "caseRootId": "568105589213756006",
+            "caseRendererIds": [
+                "568105589213755988",
+                "568105589213755980",
+                "568105589213755972",
+                "568105589213755948",
+                "568105589213755936"
+            ],
+            "caseRootPosition": {
+                "x": 0.0,
+                "y": 0.034147996455430987,
+                "z": 0.07000000029802323
+            },
+            "caseRootScale": {
+                "x": 0.800000011920929,
+                "y": 0.800000011920929,
+                "z": 0.800000011920929
+            },
+            "caseBounds": {
+                "x": 0.1333903968334198,
+                "y": 0.3567957282066345,
+                "width": 0.7332191467285156,
+                "height": 0.44966286420822146
+            },
+            "packBounds": {
+                "x": -0.06460922956466675,
+                "y": 0.2303340584039688,
+                "width": 1.1341044902801514,
+                "height": 0.5997070074081421
+            },
+            "packVisible": true,
+            "effectsEnabled": false,
+            "visibleFraction": 0.7882815599441528,
+            "whiteFraction": 0.0,
+            "stateSetFrame": 77,
+            "renderedAfterFrame": 78
+        },
+        {
+            "frame": 67,
+            "timeSeconds": 1.1166666746139527,
+            "phase": "ContinuousRise",
+            "occlusion": "CaseCrossingMouth",
+            "tearProgress": 0.8988094329833984,
+            "packDissolve": 0.0,
+            "caseTravel": 0.062324605882167819,
+            "mouthContactOcclusion": true,
+            "caseRootId": "568105589213756006",
+            "caseRendererIds": [
+                "568105589213755988",
+                "568105589213755980",
+                "568105589213755972",
+                "568105589213755948",
+                "568105589213755936"
+            ],
+            "caseRootPosition": {
+                "x": 0.0,
+                "y": 0.037224043160676959,
+                "z": 0.07000000029802323
+            },
+            "caseRootScale": {
+                "x": 0.800000011920929,
+                "y": 0.800000011920929,
+                "z": 0.800000011920929
+            },
+            "caseBounds": {
+                "x": 0.1333903968334198,
+                "y": 0.3624831438064575,
+                "width": 0.7332191467285156,
+                "height": 0.44966286420822146
+            },
+            "packBounds": {
+                "x": -0.06460922956466675,
+                "y": 0.2303340584039688,
+                "width": 1.1341044902801514,
+                "height": 0.5997070074081421
+            },
+            "packVisible": true,
+            "effectsEnabled": false,
+            "visibleFraction": 0.7895022630691528,
+            "whiteFraction": 0.0,
+            "stateSetFrame": 78,
+            "renderedAfterFrame": 79
+        },
+        {
+            "frame": 68,
+            "timeSeconds": 1.1333333253860474,
+            "phase": "ContinuousRise",
+            "occlusion": "CaseCrossingMouth",
+            "tearProgress": 0.9119822978973389,
+            "packDissolve": 0.0,
+            "caseTravel": 0.08667856454849243,
+            "mouthContactOcclusion": true,
+            "caseRootId": "568105589213756006",
+            "caseRendererIds": [
+                "568105589213755988",
+                "568105589213755980",
+                "568105589213755972",
+                "568105589213755948",
+                "568105589213755936"
+            ],
+            "caseRootPosition": {
+                "x": 0.0,
+                "y": 0.04082842916250229,
+                "z": 0.07000000029802323
+            },
+            "caseRootScale": {
+                "x": 0.800000011920929,
+                "y": 0.800000011920929,
+                "z": 0.800000011920929
+            },
+            "caseBounds": {
+                "x": 0.1333903968334198,
+                "y": 0.3691474497318268,
+                "width": 0.7332191467285156,
+                "height": 0.4496628940105438
+            },
+            "packBounds": {
+                "x": -0.06460922956466675,
+                "y": 0.2303340584039688,
+                "width": 1.1341044902801514,
+                "height": 0.5997070074081421
+            },
+            "packVisible": true,
+            "effectsEnabled": false,
+            "visibleFraction": 0.7895474433898926,
+            "whiteFraction": 0.0,
+            "stateSetFrame": 79,
+            "renderedAfterFrame": 80
+        },
+        {
+            "frame": 69,
+            "timeSeconds": 1.149999976158142,
+            "phase": "ContinuousRise",
+            "occlusion": "CaseCrossingMouth",
+            "tearProgress": 0.9258022308349609,
+            "packDissolve": 0.0,
+            "caseTravel": 0.11430235952138901,
+            "mouthContactOcclusion": true,
+            "caseRootId": "568105589213756006",
+            "caseRendererIds": [
+                "568105589213755988",
+                "568105589213755980",
+                "568105589213755972",
+                "568105589213755948",
+                "568105589213755936"
+            ],
+            "caseRootPosition": {
+                "x": 0.0,
+                "y": 0.044916749000549319,
+                "z": 0.07000000029802323
+            },
+            "caseRootScale": {
+                "x": 0.800000011920929,
+                "y": 0.800000011920929,
+                "z": 0.800000011920929
+            },
+            "caseBounds": {
+                "x": 0.1333903968334198,
+                "y": 0.3767065107822418,
+                "width": 0.7332191467285156,
+                "height": 0.44966283440589907
+            },
+            "packBounds": {
+                "x": -0.06460922956466675,
+                "y": 0.2303340584039688,
+                "width": 1.1341044902801514,
+                "height": 0.5997070074081421
+            },
+            "packVisible": true,
+            "effectsEnabled": false,
+            "visibleFraction": 0.7923052310943604,
+            "whiteFraction": 0.0,
+            "stateSetFrame": 80,
+            "renderedAfterFrame": 81
+        },
+        {
+            "frame": 70,
+            "timeSeconds": 1.1666666269302369,
+            "phase": "ContinuousRise",
+            "occlusion": "CaseCrossingMouth",
+            "tearProgress": 0.9397715330123901,
+            "packDissolve": 0.0,
+            "caseTravel": 0.14489604532718659,
+            "mouthContactOcclusion": true,
+            "caseRootId": "568105589213756006",
+            "caseRendererIds": [
+                "568105589213755988",
+                "568105589213755980",
+                "568105589213755972",
+                "568105589213755948",
+                "568105589213755936"
+            ],
+            "caseRootPosition": {
+                "x": 0.0,
+                "y": 0.049444615840911868,
+                "z": 0.07000000029802323
+            },
+            "caseRootScale": {
+                "x": 0.800000011920929,
+                "y": 0.800000011920929,
+                "z": 0.800000011920929
+            },
+            "caseBounds": {
+                "x": 0.1333903968334198,
+                "y": 0.3850782811641693,
+                "width": 0.7332191467285156,
+                "height": 0.44966283440589907
+            },
+            "packBounds": {
+                "x": -0.06460922956466675,
+                "y": 0.2303340584039688,
+                "width": 1.1341044902801514,
+                "height": 0.5997070074081421
+            },
+            "packVisible": true,
+            "effectsEnabled": false,
+            "visibleFraction": 0.7942492961883545,
+            "whiteFraction": 0.0,
+            "stateSetFrame": 81,
+            "renderedAfterFrame": 82
+        },
+        {
+            "frame": 71,
+            "timeSeconds": 1.1833332777023316,
+            "phase": "ContinuousRise",
+            "occlusion": "CaseCrossingMouth",
+            "tearProgress": 0.9533923864364624,
+            "packDissolve": 0.0,
+            "caseTravel": 0.17815959453582765,
+            "mouthContactOcclusion": true,
+            "caseRootId": "568105589213756006",
+            "caseRendererIds": [
+                "568105589213755988",
+                "568105589213755980",
+                "568105589213755972",
+                "568105589213755948",
+                "568105589213755936"
+            ],
+            "caseRootPosition": {
+                "x": 0.0,
+                "y": 0.05436762049794197,
+                "z": 0.07000000029802323
+            },
+            "caseRootScale": {
+                "x": 0.800000011920929,
+                "y": 0.800000011920929,
+                "z": 0.800000011920929
+            },
+            "caseBounds": {
+                "x": 0.1333903968334198,
+                "y": 0.39418062567710879,
+                "width": 0.7332191467285156,
+                "height": 0.44966283440589907
+            },
+            "packBounds": {
+                "x": -0.06460922956466675,
+                "y": 0.2303340584039688,
+                "width": 1.1341044902801514,
+                "height": 0.5997070074081421
+            },
+            "packVisible": true,
+            "effectsEnabled": false,
+            "visibleFraction": 0.7963741421699524,
+            "whiteFraction": 0.0,
+            "stateSetFrame": 82,
+            "renderedAfterFrame": 83
+        },
+        {
+            "frame": 72,
+            "timeSeconds": 1.2000000476837159,
+            "phase": "ContinuousRise",
+            "occlusion": "CaseCrossingMouth",
+            "tearProgress": 0.9661670923233032,
+            "packDissolve": 0.0,
+            "caseTravel": 0.2137933224439621,
+            "mouthContactOcclusion": true,
+            "caseRootId": "568105589213756006",
+            "caseRendererIds": [
+                "568105589213755988",
+                "568105589213755980",
+                "568105589213755972",
+                "568105589213755948",
+                "568105589213755936"
+            ],
+            "caseRootPosition": {
+                "x": 0.0,
+                "y": 0.059641413390636447,
+                "z": 0.07000000029802323
+            },
+            "caseRootScale": {
+                "x": 0.800000011920929,
+                "y": 0.800000011920929,
+                "z": 0.800000011920929
+            },
+            "caseBounds": {
+                "x": 0.1333903968334198,
+                "y": 0.403931587934494,
+                "width": 0.7332191467285156,
+                "height": 0.44966283440589907
+            },
+            "packBounds": {
+                "x": -0.06460922956466675,
+                "y": 0.2303340584039688,
+                "width": 1.1341044902801514,
+                "height": 0.5997070074081421
+            },
+            "packVisible": true,
+            "effectsEnabled": false,
+            "visibleFraction": 0.7988154888153076,
+            "whiteFraction": 0.0,
+            "stateSetFrame": 83,
+            "renderedAfterFrame": 84
+        },
+        {
+            "frame": 73,
+            "timeSeconds": 1.2166666984558106,
+            "phase": "ContinuousRise",
+            "occlusion": "CaseCrossingMouth",
+            "tearProgress": 0.977597713470459,
+            "packDissolve": 0.0,
+            "caseTravel": 0.25149667263031008,
+            "mouthContactOcclusion": true,
+            "caseRootId": "568105589213756006",
+            "caseRendererIds": [
+                "568105589213755988",
+                "568105589213755980",
+                "568105589213755972",
+                "568105589213755948",
+                "568105589213755936"
+            ],
+            "caseRootPosition": {
+                "x": 0.0,
+                "y": 0.06522150337696076,
+                "z": 0.07000000029802323
+            },
+            "caseRootScale": {
+                "x": 0.800000011920929,
+                "y": 0.800000011920929,
+                "z": 0.800000011920929
+            },
+            "caseBounds": {
+                "x": 0.1333903968334198,
+                "y": 0.41424885392189028,
+                "width": 0.7332191467285156,
+                "height": 0.44966283440589907
+            },
+            "packBounds": {
+                "x": -0.06460922956466675,
+                "y": 0.2303340584039688,
+                "width": 1.1341044902801514,
+                "height": 0.5997070074081421
+            },
+            "packVisible": true,
+            "effectsEnabled": false,
+            "visibleFraction": 0.7999457716941834,
+            "whiteFraction": 0.0,
+            "stateSetFrame": 84,
+            "renderedAfterFrame": 85
+        },
+        {
+            "frame": 74,
+            "timeSeconds": 1.2333333492279053,
+            "phase": "ContinuousRise",
+            "occlusion": "CaseCrossingMouth",
+            "tearProgress": 0.9871865510940552,
+            "packDissolve": 0.0,
+            "caseTravel": 0.29096996784210207,
+            "mouthContactOcclusion": true,
+            "caseRootId": "568105589213756006",
+            "caseRendererIds": [
+                "568105589213755988",
+                "568105589213755980",
+                "568105589213755972",
+                "568105589213755948",
+                "568105589213755936"
+            ],
+            "caseRootPosition": {
+                "x": 0.0,
+                "y": 0.0710635557770729,
+                "z": 0.07000000029802323
+            },
+            "caseRootScale": {
+                "x": 0.800000011920929,
+                "y": 0.800000011920929,
+                "z": 0.800000011920929
+            },
+            "caseBounds": {
+                "x": 0.1333903968334198,
+                "y": 0.4250504970550537,
+                "width": 0.7332191467285156,
+                "height": 0.4496629238128662
+            },
+            "packBounds": {
+                "x": -0.06460922956466675,
+                "y": 0.2303340584039688,
+                "width": 1.1341044902801514,
+                "height": 0.5997070074081421
+            },
+            "packVisible": true,
+            "effectsEnabled": false,
+            "visibleFraction": 0.802341878414154,
+            "whiteFraction": 0.0,
+            "stateSetFrame": 85,
+            "renderedAfterFrame": 86
+        },
+        {
+            "frame": 75,
+            "timeSeconds": 1.25,
+            "phase": "ContinuousRise",
+            "occlusion": "CaseCrossingMouth",
+            "tearProgress": 0.9944358468055725,
+            "packDissolve": 0.0,
+            "caseTravel": 0.3319132328033447,
+            "mouthContactOcclusion": true,
+            "caseRootId": "568105589213756006",
+            "caseRendererIds": [
+                "568105589213755988",
+                "568105589213755980",
+                "568105589213755972",
+                "568105589213755948",
+                "568105589213755936"
+            ],
+            "caseRootPosition": {
+                "x": 0.0,
+                "y": 0.07712316513061524,
+                "z": 0.07000000029802323
+            },
+            "caseRootScale": {
+                "x": 0.800000011920929,
+                "y": 0.800000011920929,
+                "z": 0.800000011920929
+            },
+            "caseBounds": {
+                "x": 0.1333903968334198,
+                "y": 0.4362543523311615,
+                "width": 0.7332191467285156,
+                "height": 0.4496627748012543
+            },
+            "packBounds": {
+                "x": -0.06460922956466675,
+                "y": 0.2303340584039688,
+                "width": 1.1341044902801514,
+                "height": 0.5997070074081421
+            },
+            "packVisible": true,
+            "effectsEnabled": false,
+            "visibleFraction": 0.8059586882591248,
+            "whiteFraction": 0.0,
+            "stateSetFrame": 86,
+            "renderedAfterFrame": 87
+        },
+        {
+            "frame": 76,
+            "timeSeconds": 1.2666666507720948,
+            "phase": "ContinuousRise",
+            "occlusion": "CaseCrossingMouth",
+            "tearProgress": 0.9988478422164917,
+            "packDissolve": 0.0,
+            "caseTravel": 0.37402641773223879,
+            "mouthContactOcclusion": true,
+            "caseRootId": "568105589213756006",
+            "caseRendererIds": [
+                "568105589213755988",
+                "568105589213755980",
+                "568105589213755972",
+                "568105589213755948",
+                "568105589213755936"
+            ],
+            "caseRootPosition": {
+                "x": 0.0,
+                "y": 0.08335591107606888,
+                "z": 0.07000000029802323
+            },
+            "caseRootScale": {
+                "x": 0.800000011920929,
+                "y": 0.800000011920929,
+                "z": 0.800000011920929
+            },
+            "caseBounds": {
+                "x": 0.1333903968334198,
+                "y": 0.4477783441543579,
+                "width": 0.7332191467285156,
+                "height": 0.4496629238128662
+            },
+            "packBounds": {
+                "x": -0.06460922956466675,
+                "y": 0.2303340584039688,
+                "width": 1.1341044902801514,
+                "height": 0.5997070074081421
+            },
+            "packVisible": true,
+            "effectsEnabled": false,
+            "visibleFraction": 0.8077218532562256,
+            "whiteFraction": 0.0,
+            "stateSetFrame": 87,
+            "renderedAfterFrame": 88
+        },
+        {
+            "frame": 77,
+            "timeSeconds": 1.2833333015441895,
+            "phase": "ContinuousRise",
+            "occlusion": "CaseCrossingMouth",
+            "tearProgress": 1.0,
+            "packDissolve": 0.0,
+            "caseTravel": 0.41700953245162966,
+            "mouthContactOcclusion": true,
+            "caseRootId": "568105589213756006",
+            "caseRendererIds": [
+                "568105589213755988",
+                "568105589213755980",
+                "568105589213755972",
+                "568105589213755948",
+                "568105589213755936"
+            ],
+            "caseRootPosition": {
+                "x": 0.0,
+                "y": 0.08971741795539856,
+                "z": 0.07000000029802323
+            },
+            "caseRootScale": {
+                "x": 0.800000011920929,
+                "y": 0.800000011920929,
+                "z": 0.800000011920929
+            },
+            "caseBounds": {
+                "x": 0.1333903968334198,
+                "y": 0.459540456533432,
+                "width": 0.7332191467285156,
+                "height": 0.4496627748012543
+            },
+            "packBounds": {
+                "x": -0.06460922956466675,
+                "y": 0.2303340584039688,
+                "width": 1.1341044902801514,
+                "height": 0.5997070074081421
+            },
+            "packVisible": true,
+            "effectsEnabled": false,
+            "visibleFraction": 0.8101180195808411,
+            "whiteFraction": 0.0,
+            "stateSetFrame": 88,
+            "renderedAfterFrame": 89
+        },
+        {
+            "frame": 78,
+            "timeSeconds": 1.2999999523162842,
+            "phase": "ContinuousRise",
+            "occlusion": "CaseCrossingMouth",
+            "tearProgress": 1.0,
+            "packDissolve": 0.0,
+            "caseTravel": 0.46056264638900759,
+            "mouthContactOcclusion": true,
+            "caseRootId": "568105589213756006",
+            "caseRendererIds": [
+                "568105589213755988",
+                "568105589213755980",
+                "568105589213755972",
+                "568105589213755948",
+                "568105589213755936"
+            ],
+            "caseRootPosition": {
+                "x": 0.0,
+                "y": 0.09616327285766602,
+                "z": 0.07000000029802323
+            },
+            "caseRootScale": {
+                "x": 0.800000011920929,
+                "y": 0.800000011920929,
+                "z": 0.800000011920929
+            },
+            "caseBounds": {
+                "x": 0.1333903968334198,
+                "y": 0.47145846486091616,
+                "width": 0.7332191467285156,
+                "height": 0.4496627748012543
+            },
+            "packBounds": {
+                "x": -0.06460922956466675,
+                "y": 0.2303340584039688,
+                "width": 1.1341044902801514,
+                "height": 0.5997070074081421
+            },
+            "packVisible": true,
+            "effectsEnabled": false,
+            "visibleFraction": 0.8158596754074097,
+            "whiteFraction": 0.0,
+            "stateSetFrame": 89,
+            "renderedAfterFrame": 90
+        },
+        {
+            "frame": 79,
+            "timeSeconds": 1.3166667222976685,
+            "phase": "ContinuousRise",
+            "occlusion": "CaseCrossingMouth",
+            "tearProgress": 1.0,
+            "packDissolve": 0.0020630434155464174,
+            "caseTravel": 0.5043860673904419,
+            "mouthContactOcclusion": true,
+            "caseRootId": "568105589213756006",
+            "caseRendererIds": [
+                "568105589213755988",
+                "568105589213755980",
+                "568105589213755972",
+                "568105589213755948",
+                "568105589213755936"
+            ],
+            "caseRootPosition": {
+                "x": 0.0,
+                "y": 0.10264913737773895,
+                "z": 0.07000000029802323
+            },
+            "caseRootScale": {
+                "x": 0.800000011920929,
+                "y": 0.800000011920929,
+                "z": 0.800000011920929
+            },
+            "caseBounds": {
+                "x": 0.1333903968334198,
+                "y": 0.48345044255256655,
+                "width": 0.7332191467285156,
+                "height": 0.44966283440589907
+            },
+            "packBounds": {
+                "x": -0.06460690498352051,
+                "y": 0.23028503358364106,
+                "width": 1.1340997219085694,
+                "height": 0.5997046232223511
+            },
+            "packVisible": true,
+            "effectsEnabled": false,
+            "visibleFraction": 0.8164926171302795,
+            "whiteFraction": 0.0,
+            "stateSetFrame": 90,
+            "renderedAfterFrame": 91
+        },
+        {
+            "frame": 80,
+            "timeSeconds": 1.3333333730697632,
+            "phase": "ContinuousRise",
+            "occlusion": "CaseCrossingMouth",
+            "tearProgress": 1.0,
+            "packDissolve": 0.008844898082315922,
+            "caseTravel": 0.5481791496276856,
+            "mouthContactOcclusion": true,
+            "caseRootId": "568105589213756006",
+            "caseRendererIds": [
+                "568105589213755988",
+                "568105589213755980",
+                "568105589213755972",
+                "568105589213755948",
+                "568105589213755936"
+            ],
+            "caseRootPosition": {
+                "x": 0.0,
+                "y": 0.10913051664829254,
+                "z": 0.07000000029802323
+            },
+            "caseRootScale": {
+                "x": 0.800000011920929,
+                "y": 0.800000011920929,
+                "z": 0.800000011920929
+            },
+            "caseBounds": {
+                "x": 0.1333903968334198,
+                "y": 0.49543413519859316,
+                "width": 0.7332191467285156,
+                "height": 0.44966283440589907
+            },
+            "packBounds": {
+                "x": -0.06459945440292359,
+                "y": 0.230123832821846,
+                "width": 1.134084701538086,
+                "height": 0.5996966361999512
+            },
+            "packVisible": true,
+            "effectsEnabled": false,
+            "visibleFraction": 0.8235453963279724,
+            "whiteFraction": 0.0,
+            "stateSetFrame": 91,
+            "renderedAfterFrame": 92
+        },
+        {
+            "frame": 81,
+            "timeSeconds": 1.350000023841858,
+            "phase": "ContinuousRise",
+            "occlusion": "PackRetreating",
+            "tearProgress": 1.0,
+            "packDissolve": 0.021234732121229173,
+            "caseTravel": 0.5916423201560974,
+            "mouthContactOcclusion": true,
+            "caseRootId": "568105589213756006",
+            "caseRendererIds": [
+                "568105589213755988",
+                "568105589213755980",
+                "568105589213755972",
+                "568105589213755948",
+                "568105589213755936"
+            ],
+            "caseRootPosition": {
+                "x": 0.0,
+                "y": 0.11556306481361389,
+                "z": 0.07000000029802323
+            },
+            "caseRootScale": {
+                "x": 0.800000011920929,
+                "y": 0.800000011920929,
+                "z": 0.800000011920929
+            },
+            "caseBounds": {
+                "x": 0.1333903968334198,
+                "y": 0.5070328712463379,
+                "width": 0.7332191467285156,
+                "height": 0.44995760917663576
+            },
+            "packBounds": {
+                "x": -0.0645858645439148,
+                "y": 0.22982940077781678,
+                "width": 1.1340575218200684,
+                "height": 0.5996822118759155
+            },
+            "packVisible": true,
+            "effectsEnabled": false,
+            "visibleFraction": 0.8249920606613159,
+            "whiteFraction": 0.0,
+            "stateSetFrame": 92,
+            "renderedAfterFrame": 93
+        },
+        {
+            "frame": 82,
+            "timeSeconds": 1.3666666746139527,
+            "phase": "ContinuousRise",
+            "occlusion": "PackRetreating",
+            "tearProgress": 1.0,
+            "packDissolve": 0.040121715515851977,
+            "caseTravel": 0.6344754695892334,
+            "mouthContactOcclusion": true,
+            "caseRootId": "568105589213756006",
+            "caseRendererIds": [
+                "568105589213755988",
+                "568105589213755980",
+                "568105589213755972",
+                "568105589213755948",
+                "568105589213755936"
+            ],
+            "caseRootPosition": {
+                "x": 0.0,
+                "y": 0.12190237641334534,
+                "z": 0.07000000029802323
+            },
+            "caseRootScale": {
+                "x": 0.800000011920929,
+                "y": 0.800000011920929,
+                "z": 0.800000011920929
+            },
+            "caseBounds": {
+                "x": 0.1333903968334198,
+                "y": 0.5182824730873108,
+                "width": 0.7332191467285156,
+                "height": 0.45042896270751955
+            },
+            "packBounds": {
+                "x": -0.06456512212753296,
+                "y": 0.2293805032968521,
+                "width": 1.1340157985687256,
+                "height": 0.5996601581573486
+            },
+            "packVisible": true,
+            "effectsEnabled": false,
+            "visibleFraction": 0.8314571380615234,
+            "whiteFraction": 0.0,
+            "stateSetFrame": 93,
+            "renderedAfterFrame": 94
+        },
+        {
+            "frame": 83,
+            "timeSeconds": 1.3833333253860474,
+            "phase": "ContinuousRise",
+            "occlusion": "PackRetreating",
+            "tearProgress": 1.0,
+            "packDissolve": 0.06639502197504044,
+            "caseTravel": 0.676378607749939,
+            "mouthContactOcclusion": true,
+            "caseRootId": "568105589213756006",
+            "caseRendererIds": [
+                "568105589213755988",
+                "568105589213755980",
+                "568105589213755972",
+                "568105589213755948",
+                "568105589213755936"
+            ],
+            "caseRootPosition": {
+                "x": 0.0,
+                "y": 0.12810403108596803,
+                "z": 0.07000000029802323
+            },
+            "caseRootScale": {
+                "x": 0.800000011920929,
+                "y": 0.800000011920929,
+                "z": 0.800000011920929
+            },
+            "caseBounds": {
+                "x": 0.1333903968334198,
+                "y": 0.5292878150939941,
+                "width": 0.7332191467285156,
+                "height": 0.45089012384414675
+            },
+            "packBounds": {
+                "x": -0.06453633308410645,
+                "y": 0.22875607013702393,
+                "width": 1.1339579820632935,
+                "height": 0.5996296405792236
+            },
+            "packVisible": true,
+            "effectsEnabled": false,
+            "visibleFraction": 0.8333107233047485,
+            "whiteFraction": 0.0,
+            "stateSetFrame": 94,
+            "renderedAfterFrame": 95
+        },
+        {
+            "frame": 84,
+            "timeSeconds": 1.399999976158142,
+            "phase": "ContinuousRise",
+            "occlusion": "PackRetreating",
+            "tearProgress": 1.0,
+            "packDissolve": 0.10094380378723145,
+            "caseTravel": 0.7170519232749939,
+            "mouthContactOcclusion": true,
+            "caseRootId": "568105589213756006",
+            "caseRendererIds": [
+                "568105589213755988",
+                "568105589213755980",
+                "568105589213755972",
+                "568105589213755948",
+                "568105589213755936"
+            ],
+            "caseRootPosition": {
+                "x": 0.0,
+                "y": 0.13412368297576905,
+                "z": 0.07000000029802323
+            },
+            "caseRootScale": {
+                "x": 0.800000011920929,
+                "y": 0.800000011920929,
+                "z": 0.800000011920929
+            },
+            "caseBounds": {
+                "x": 0.1333903968334198,
+                "y": 0.5399701595306397,
+                "width": 0.7332191467285156,
+                "height": 0.45133787393569949
+            },
+            "packBounds": {
+                "x": -0.0644984245300293,
+                "y": 0.22793512046337129,
+                "width": 1.1338818073272706,
+                "height": 0.5995892882347107
+            },
+            "packVisible": true,
+            "effectsEnabled": false,
+            "visibleFraction": 0.8407703638076782,
+            "whiteFraction": 0.0,
+            "stateSetFrame": 95,
+            "renderedAfterFrame": 96
+        },
+        {
+            "frame": 85,
+            "timeSeconds": 1.4166666269302369,
+            "phase": "ContinuousRise",
+            "occlusion": "PackRetreating",
+            "tearProgress": 1.0,
+            "packDissolve": 0.14465725421905518,
+            "caseTravel": 0.7561951875686646,
+            "mouthContactOcclusion": true,
+            "caseRootId": "568105589213756006",
+            "caseRendererIds": [
+                "568105589213755988",
+                "568105589213755980",
+                "568105589213755972",
+                "568105589213755948",
+                "568105589213755936"
+            ],
+            "caseRootPosition": {
+                "x": 0.0,
+                "y": 0.13991689682006837,
+                "z": 0.07000000029802323
+            },
+            "caseRootScale": {
+                "x": 0.800000011920929,
+                "y": 0.800000011920929,
+                "z": 0.800000011920929
+            },
+            "caseBounds": {
+                "x": 0.1333903968334198,
+                "y": 0.5502507090568543,
+                "width": 0.7332191467285156,
+                "height": 0.451768696308136
+            },
+            "packBounds": {
+                "x": -0.06445044279098511,
+                "y": 0.22689658403396607,
+                "width": 1.1337854862213135,
+                "height": 0.5995384454727173
+            },
+            "packVisible": true,
+            "effectsEnabled": false,
+            "visibleFraction": 0.8414937257766724,
+            "whiteFraction": 0.0,
+            "stateSetFrame": 96,
+            "renderedAfterFrame": 97
+        },
+        {
+            "frame": 86,
+            "timeSeconds": 1.4333332777023316,
+            "phase": "ContinuousRise",
+            "occlusion": "PackRetreating",
+            "tearProgress": 1.0,
+            "packDissolve": 0.19842451810836793,
+            "caseTravel": 0.7935085296630859,
+            "mouthContactOcclusion": true,
+            "caseRootId": "568105589213756006",
+            "caseRendererIds": [
+                "568105589213755988",
+                "568105589213755980",
+                "568105589213755972",
+                "568105589213755948",
+                "568105589213755936"
+            ],
+            "caseRootPosition": {
+                "x": 0.0,
+                "y": 0.1454392671585083,
+                "z": 0.07000000029802323
+            },
+            "caseRootScale": {
+                "x": 0.800000011920929,
+                "y": 0.800000011920929,
+                "z": 0.800000011920929
+            },
+            "caseBounds": {
+                "x": 0.1333903968334198,
+                "y": 0.5600506067276001,
+                "width": 0.7332191467285156,
+                "height": 0.45217931270599368
+            },
+            "packBounds": {
+                "x": -0.06439149379730225,
+                "y": 0.22561931610107423,
+                "width": 1.1336671113967896,
+                "height": 0.5994757413864136
+            },
+            "packVisible": true,
+            "effectsEnabled": false,
+            "visibleFraction": 0.8418554067611694,
+            "whiteFraction": 0.0,
+            "stateSetFrame": 97,
+            "renderedAfterFrame": 98
+        },
+        {
+            "frame": 87,
+            "timeSeconds": 1.4500000476837159,
+            "phase": "ContinuousRise",
+            "occlusion": "PackRetreating",
+            "tearProgress": 1.0,
+            "packDissolve": 0.26313525438308718,
+            "caseTravel": 0.8286923170089722,
+            "mouthContactOcclusion": true,
+            "caseRootId": "568105589213756006",
+            "caseRendererIds": [
+                "568105589213755988",
+                "568105589213755980",
+                "568105589213755972",
+                "568105589213755948",
+                "568105589213755936"
+            ],
+            "caseRootPosition": {
+                "x": 0.0,
+                "y": 0.15064646303653718,
+                "z": 0.07000000029802323
+            },
+            "caseRootScale": {
+                "x": 0.800000011920929,
+                "y": 0.800000011920929,
+                "z": 0.800000011920929
+            },
+            "caseBounds": {
+                "x": 0.1333903968334198,
+                "y": 0.5692912340164185,
+                "width": 0.7332191467285156,
+                "height": 0.4525665044784546
+            },
+            "packBounds": {
+                "x": -0.06432050466537476,
+                "y": 0.2240825742483139,
+                "width": 1.1335244178771973,
+                "height": 0.5994002819061279
+            },
+            "packVisible": true,
+            "effectsEnabled": false,
+            "visibleFraction": 0.8435282111167908,
+            "whiteFraction": 0.0,
+            "stateSetFrame": 98,
+            "renderedAfterFrame": 99
+        },
+        {
+            "frame": 88,
+            "timeSeconds": 1.4666666984558106,
+            "phase": "ContinuousRise",
+            "occlusion": "PackRetreating",
+            "tearProgress": 1.0,
+            "packDissolve": 0.3396778106689453,
+            "caseTravel": 0.8614459037780762,
+            "mouthContactOcclusion": true,
+            "caseRootId": "568105589213756006",
+            "caseRendererIds": [
+                "568105589213755988",
+                "568105589213755980",
+                "568105589213755972",
+                "568105589213755948",
+                "568105589213755936"
+            ],
+            "caseRootPosition": {
+                "x": 0.0,
+                "y": 0.15549398958683015,
+                "z": 0.07000000029802323
+            },
+            "caseRootScale": {
+                "x": 0.800000011920929,
+                "y": 0.800000011920929,
+                "z": 0.800000011920929
+            },
+            "caseBounds": {
+                "x": 0.1333903968334198,
+                "y": 0.5778935551643372,
+                "width": 0.7332191467285156,
+                "height": 0.4529268145561218
+            },
+            "packBounds": {
+                "x": -0.064236581325531,
+                "y": 0.22226524353027345,
+                "width": 1.1333558559417725,
+                "height": 0.5993112325668335
+            },
+            "packVisible": true,
+            "effectsEnabled": false,
+            "visibleFraction": 0.8466928601264954,
+            "whiteFraction": 0.0,
+            "stateSetFrame": 99,
+            "renderedAfterFrame": 100
+        },
+        {
+            "frame": 89,
+            "timeSeconds": 1.4833333492279053,
+            "phase": "ContinuousRise",
+            "occlusion": "PackRetreating",
+            "tearProgress": 1.0,
+            "packDissolve": 0.43265455961227419,
+            "caseTravel": 0.8914695978164673,
+            "mouthContactOcclusion": true,
+            "caseRootId": "568105589213756006",
+            "caseRendererIds": [
+                "568105589213755988",
+                "568105589213755980",
+                "568105589213755972",
+                "568105589213755948",
+                "568105589213755936"
+            ],
+            "caseRootPosition": {
+                "x": 0.0,
+                "y": 0.15993750095367433,
+                "z": 0.07000000029802323
+            },
+            "caseRootScale": {
+                "x": 0.800000011920929,
+                "y": 0.800000011920929,
+                "z": 0.800000011920929
+            },
+            "caseBounds": {
+                "x": 0.1333903968334198,
+                "y": 0.5857788920402527,
+                "width": 0.7332191467285156,
+                "height": 0.45325738191604617
+            },
+            "packBounds": {
+                "x": -0.06413465738296509,
+                "y": 0.22005856037139893,
+                "width": 1.1331510543823243,
+                "height": 0.5992029905319214
+            },
+            "packVisible": true,
+            "effectsEnabled": false,
+            "visibleFraction": 0.8489081859588623,
+            "whiteFraction": 0.0,
+            "stateSetFrame": 100,
+            "renderedAfterFrame": 101
+        },
+        {
+            "frame": 90,
+            "timeSeconds": 1.5,
+            "phase": "ContinuousRise",
+            "occlusion": "PackRetreating",
+            "tearProgress": 1.0,
+            "packDissolve": 0.5492751002311707,
+            "caseTravel": 0.918463408946991,
+            "mouthContactOcclusion": true,
+            "caseRootId": "568105589213756006",
+            "caseRendererIds": [
+                "568105589213755988",
+                "568105589213755980",
+                "568105589213755972",
+                "568105589213755948",
+                "568105589213755936"
+            ],
+            "caseRootPosition": {
+                "x": 0.0,
+                "y": 0.16393257677555085,
+                "z": 0.07000000029802323
+            },
+            "caseRootScale": {
+                "x": 0.800000011920929,
+                "y": 0.800000011920929,
+                "z": 0.800000011920929
+            },
+            "caseBounds": {
+                "x": 0.1333903968334198,
+                "y": 0.5928685069084168,
+                "width": 0.7332191467285156,
+                "height": 0.4535544514656067
+            },
+            "packBounds": {
+                "x": -0.06400686502456665,
+                "y": 0.21729177236557008,
+                "width": 1.132894515991211,
+                "height": 0.5990671515464783
+            },
+            "packVisible": true,
+            "effectsEnabled": false,
+            "visibleFraction": 0.8488629460334778,
+            "whiteFraction": 0.0,
+            "stateSetFrame": 101,
+            "renderedAfterFrame": 102
+        },
+        {
+            "frame": 91,
+            "timeSeconds": 1.5166666507720948,
+            "phase": "ContinuousRise",
+            "occlusion": "PackRetreating",
+            "tearProgress": 1.0,
+            "packDissolve": 0.6764947772026062,
+            "caseTravel": 0.9421274065971375,
+            "mouthContactOcclusion": true,
+            "caseRootId": "568105589213756006",
+            "caseRendererIds": [
+                "568105589213755988",
+                "568105589213755980",
+                "568105589213755972",
+                "568105589213755948",
+                "568105589213755936"
+            ],
+            "caseRootPosition": {
+                "x": 0.0,
+                "y": 0.16743485629558564,
+                "z": 0.07000000029802323
+            },
+            "caseRootScale": {
+                "x": 0.800000011920929,
+                "y": 0.800000011920929,
+                "z": 0.800000011920929
+            },
+            "caseBounds": {
+                "x": 0.1333903968334198,
+                "y": 0.5990836024284363,
+                "width": 0.7332191467285156,
+                "height": 0.4538148045539856
+            },
+            "packBounds": {
+                "x": -0.06386756896972656,
+                "y": 0.21427494287490846,
+                "width": 1.1326146125793458,
+                "height": 0.5989193320274353
+            },
+            "packVisible": true,
+            "effectsEnabled": false,
+            "visibleFraction": 0.8487273454666138,
+            "whiteFraction": 0.0,
+            "stateSetFrame": 102,
+            "renderedAfterFrame": 103
+        },
+        {
+            "frame": 92,
+            "timeSeconds": 1.5333333015441895,
+            "phase": "ContinuousRise",
+            "occlusion": "PackRetreating",
+            "tearProgress": 1.0,
+            "packDissolve": 0.7997609376907349,
+            "caseTravel": 0.9621615409851074,
+            "mouthContactOcclusion": true,
+            "caseRootId": "568105589213756006",
+            "caseRendererIds": [
+                "568105589213755988",
+                "568105589213755980",
+                "568105589213755972",
+                "568105589213755948",
+                "568105589213755936"
+            ],
+            "caseRootPosition": {
+                "x": 0.0,
+                "y": 0.17039990425109864,
+                "z": 0.07000000029802323
+            },
+            "caseRootScale": {
+                "x": 0.800000011920929,
+                "y": 0.800000011920929,
+                "z": 0.800000011920929
+            },
+            "caseBounds": {
+                "x": 0.1333903968334198,
+                "y": 0.6043453216552734,
+                "width": 0.7332191467285156,
+                "height": 0.45403528213500979
+            },
+            "packBounds": {
+                "x": -0.06373268365859986,
+                "y": 0.21135328710079194,
+                "width": 1.1323437690734864,
+                "height": 0.5987759828567505
+            },
+            "packVisible": true,
+            "effectsEnabled": false,
+            "visibleFraction": 0.8479135632514954,
+            "whiteFraction": 0.0,
+            "stateSetFrame": 103,
+            "renderedAfterFrame": 104
+        },
+        {
+            "frame": 93,
+            "timeSeconds": 1.5499999523162842,
+            "phase": "ContinuousRise",
+            "occlusion": "PackRetreating",
+            "tearProgress": 1.0,
+            "packDissolve": 0.9045207500457764,
+            "caseTravel": 0.9782658219337463,
+            "mouthContactOcclusion": true,
+            "caseRootId": "568105589213756006",
+            "caseRendererIds": [
+                "568105589213755988",
+                "568105589213755980",
+                "568105589213755972",
+                "568105589213755948",
+                "568105589213755936"
+            ],
+            "caseRootPosition": {
+                "x": 0.0,
+                "y": 0.17278334498405457,
+                "z": 0.07000000029802323
+            },
+            "caseRootScale": {
+                "x": 0.800000011920929,
+                "y": 0.800000011920929,
+                "z": 0.800000011920929
+            },
+            "caseBounds": {
+                "x": 0.1333903968334198,
+                "y": 0.6085749864578247,
+                "width": 0.7332191467285156,
+                "height": 0.4542125463485718
+            },
+            "packBounds": {
+                "x": -0.063618004322052,
+                "y": 0.20887142419815064,
+                "width": 1.1321134567260743,
+                "height": 0.5986542105674744
+            },
+            "packVisible": true,
+            "effectsEnabled": false,
+            "visibleFraction": 0.8474162220954895,
+            "whiteFraction": 0.0,
+            "stateSetFrame": 104,
+            "renderedAfterFrame": 105
+        },
+        {
+            "frame": 94,
+            "timeSeconds": 1.5666667222976685,
+            "phase": "ContinuousRise",
+            "occlusion": "PackRetreating",
+            "tearProgress": 1.0,
+            "packDissolve": 0.9762217998504639,
+            "caseTravel": 0.990140438079834,
+            "mouthContactOcclusion": true,
+            "caseRootId": "568105589213756006",
+            "caseRendererIds": [
+                "568105589213755988",
+                "568105589213755980",
+                "568105589213755972",
+                "568105589213755948",
+                "568105589213755936"
+            ],
+            "caseRootPosition": {
+                "x": 0.0,
+                "y": 0.17454078793525697,
+                "z": 0.07000000029802323
+            },
+            "caseRootScale": {
+                "x": 0.800000011920929,
+                "y": 0.800000011920929,
+                "z": 0.800000011920929
+            },
+            "caseBounds": {
+                "x": 0.1333903968334198,
+                "y": 0.6116936802864075,
+                "width": 0.7332191467285156,
+                "height": 0.4543432593345642
+            },
+            "packBounds": {
+                "x": -0.06353962421417237,
+                "y": 0.20717331767082215,
+                "width": 1.1319559812545777,
+                "height": 0.5985708236694336
+            },
+            "packVisible": true,
+            "effectsEnabled": false,
+            "visibleFraction": 0.8499028086662293,
+            "whiteFraction": 0.0,
+            "stateSetFrame": 105,
+            "renderedAfterFrame": 106
+        },
+        {
+            "frame": 95,
+            "timeSeconds": 1.5833333730697632,
+            "phase": "Complete",
+            "occlusion": "PackGone",
+            "tearProgress": 1.0,
+            "packDissolve": 1.0,
+            "caseTravel": 0.9974851012229919,
+            "mouthContactOcclusion": false,
+            "caseRootId": "568105589213756006",
+            "caseRendererIds": [
+                "568105589213755988",
+                "568105589213755980",
+                "568105589213755972",
+                "568105589213755948",
+                "568105589213755936"
+            ],
+            "caseRootPosition": {
+                "x": 0.0,
+                "y": 0.17562779784202577,
+                "z": 0.07000000029802323
+            },
+            "caseRootScale": {
+                "x": 0.800000011920929,
+                "y": 0.800000011920929,
+                "z": 0.800000011920929
+            },
+            "caseBounds": {
+                "x": 0.1333903968334198,
+                "y": 0.6136226654052734,
+                "width": 0.7332191467285156,
+                "height": 0.45442402362823489
+            },
+            "packBounds": {
+                "x": 0.0,
+                "y": 0.0,
+                "width": 0.0,
+                "height": 0.0
+            },
+            "packVisible": false,
+            "effectsEnabled": false,
+            "visibleFraction": 0.8485465049743652,
+            "whiteFraction": 0.0,
+            "stateSetFrame": 106,
+            "renderedAfterFrame": 107
+        }
+    ]
+}
