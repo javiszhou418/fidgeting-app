@@ -27,8 +27,14 @@
 # Unity crash and profiling artifacts
 sysinfo.txt
 *.stacktrace
-mono_crash.*.json
+mono_crash.*
 .codex-quarantine/
+
+# Finder/Dropbox in-progress copy fragments (e.g. raw.mp4.sb-26686d1f-PXCuaW)
+*.sb-*
+
+# Dependency caches; restore with `npm ci` from the committed package-lock.json
+node_modules/
 
 # Build outputs and platform artifacts
 *.apk
@@ -43,3 +49,4 @@ mono_crash.*.json
 __pycache__/
 *.pyc
 *.blend1
+.cursor/runtime/
