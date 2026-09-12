@@ -42,6 +42,12 @@ node_modules/
 *.unitypackage
 *.app
 
+# Xcode DerivedData that simulator-delivery scripts copy under Artifacts/ (5 GB per revision)
+DerivedData/
+DerivedData-*/
+*.pcm
+*.dSYM/
+
 # macOS metadata
 .DS_Store
 
