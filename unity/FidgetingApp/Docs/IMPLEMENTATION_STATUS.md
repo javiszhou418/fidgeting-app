@@ -11,15 +11,16 @@
 - `仅规格`：只有设计规格，不能对外称为已实现。
 - `待真机验收`：自动化能验证结构，但触感仍必须在 iPhone 上确认。
 
-## 2026-09-11 GitHub 私有镜像（仓库备份，非产品交付）
+## 2026-09-12 GitHub 私有镜像（仓库备份，非产品交付）
 
-> **状态：用户授权「推」后已完成首次上传。产品视觉/真机仍按各 feature 条目的「视觉批准待确认，未推送手机」；本段只记录 git/LFS 镜像证据。**
+> **状态：用户授权「推」后已完成首次上传；09-12 按用户要求把仓库从工作账号 transfer 到个人账号，并修正 LFS 范围后 force-push 重写历史。产品视觉/真机仍按各 feature 条目的「视觉批准待确认，未推送手机」；本段只记录 git/LFS 镜像证据。**
 
-- 远程：**私有** [jiaweizhou0418/fidgeting-app](https://github.com/jiaweizhou0418/fidgeting-app)，默认分支 `main`，`main` tip `e1bcd782f`（含本段镜像记录）。
-- LFS：`git lfs push origin --all` 上传 **18030** 对象、约 **12 GB**（日志 `/tmp/fidget-github-push-20260911.log`）；GitHub 曾提示 GH010 抽样校验 10000/18030，属大推送常见警告。
-- 分支：**15** 条 `refs/heads/*`（`main`、`codex/gacha-build42`、`recovery/*`、`wip/stash-*`）。`refs/stash` 未推送（仍含历史 Builds 大 blob，仅本地）。
-- 设备 IPA：**不进 git**；Release [device-ipas-20260911](https://github.com/jiaweizhou0418/fidgeting-app/releases/tag/device-ipas-20260911) 含 build **44×2、45、46、47** 五个 `.ipa`（源备份 `~/Documents/FidgetingApp-git-backup-20260911/ipa/`）。
-- 本地 APFS 备份：`.git` 快照 `~/Documents/FidgetingApp-git-backup-20260911/dot-git-before-lfs-migrate/`（迁移前 `62d8bcd` 时代）。
+- 远程：**私有** [javiszhou418/fidgeting-app](https://github.com/javiszhou418/fidgeting-app)（原 `jiaweizhou0418/fidgeting-app`，2026-09-12 transfer，旧地址自动跳转）。默认分支 `main`；`jiaweizhou0418` 保留 write 协作者权限供本机 `gh` 推送。
+- LFS 范围修正：首次上传时 `git lfs migrate import --everything` 未带 `--include`，把 `.cs/.md/.json/.py/.unity/.prefab` 等文本也转成了 LFS 指针（HEAD 17982/17990 文件为指针）。09-12 用 `git lfs migrate export` 对 47 类文本扩展名重写全部 refs，再恢复精选 `.gitattributes`（二进制类型 + `*.blend1`、`*.pgm`；`.xcresult` 内 `*.plist` 明确不走 LFS）。修正后 HEAD 12397 个指针，全部为 png/jpg/mp4/blend/exr/fbx/audio/glb 等二进制；历史无 ≥100 MB 普通 blob。
+- LFS 对象：重写后 15 条分支共引用 **10466** 个对象（约 11 GB），批量接口逐个核对远端全部存在。首次上传的约 7.5k 个文本 LFS 对象（约 475 MB）已不再被引用，但 GitHub 不会自动删除，仍计入存储。
+- 分支：**15** 条 `refs/heads/*`（`main`、`codex/gacha-build42`、`recovery/*`、`wip/stash-*`）全部 force-push 到重写后的 SHA。`refs/stash` 未推送（仍含历史 Builds 大 blob，仅本地）。
+- 设备 IPA：**不进 git**；Release [device-ipas-20260911](https://github.com/javiszhou418/fidgeting-app/releases/tag/device-ipas-20260911) 含 build **44×2、45、46、47** 五个 `.ipa`（源备份 `~/Documents/FidgetingApp-git-backup-20260911/ipa/`）；tag 已随重写移到新 SHA。
+- 本地备份：`~/Documents/FidgetingApp-git-backup-20260911/dot-git-before-lfs-migrate/`（迁移前 `62d8bcd` 时代 `.git`）、`mirror-before-lfs-export.git`（全量 LFS 版本历史的裸镜像）。
 
 ## 2026-09-11 22:5x Premium Display Case · tri-spinner-slab-v3-cmf R009 退回 → R010 内容 fit + rarity CMF 候选
 
