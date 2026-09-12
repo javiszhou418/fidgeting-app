@@ -32,13 +32,13 @@ namespace FidgetingApp.DisplayCase.Tests
         }
 
         [Test]
-        public void ShippingDisplayCaseAssetsAreUntouched()
+        public void Gate11SourceAssetsStayUntouchedAfterR010Promotion()
         {
             Assert.DoesNotThrow(TriSpinnerSlabGate11ParityBuilder.AssertSourceAndShippingHashes);
             Assert.AreEqual(
-                "Gacha/PremiumDisplayCaseGate12R004/PresentationRoot",
+                PremiumDisplayCaseGate12R010ReviewBuilder.ResourcesPath,
                 PremiumDisplayCaseShippingFactory.ResourcesPath,
-                "Shipping factory must keep pointing at the approved R004 case until Gate 12 is approved.");
+                "The user approved R010 and authorized the phone delivery on 2026-09-12.");
         }
 
         [Test]

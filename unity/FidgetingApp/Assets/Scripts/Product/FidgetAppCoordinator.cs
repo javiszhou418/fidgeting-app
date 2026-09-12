@@ -327,6 +327,7 @@ namespace FidgetingApp.Product
         private Quaternion displayCaseCameraRotation;
         private float displayCaseCameraFieldOfView;
         private GameObject activeGachaRevealHost;
+        private PremiumDisplayCaseGachaLightingScope activeGachaLightingScope;
         private GameObject gachaStageHost;
         private Gacha.GachaRevealStageFX gachaStageFX;
         private readonly System.Collections.Generic.List<Renderer>
@@ -2625,7 +2626,7 @@ namespace FidgetingApp.Product
                     ThreeBladeDisplayPrizeFactory.Instantiate();
                 activeGachaRevealHost = new GameObject(
                     "GachaShippingRevealHost");
-                CreateGachaRevealLighting(
+                activeGachaLightingScope = CreateGachaRevealLighting(
                     activeGachaRevealHost.transform);
                 activeGachaRevealDirector =
                     activeGachaRevealHost.AddComponent<
@@ -2740,6 +2741,8 @@ namespace FidgetingApp.Product
             }
             catch (System.Exception exception)
             {
+                Debug.LogError(
+                    "PDC_GACHA_PRESENT_FAILED " + exception);
                 DismissActiveGachaReveal(false);
                 Gacha.GachaPresentationNativeBridge.PublishSetup(
                     requestId,
@@ -3522,43 +3525,10 @@ namespace FidgetingApp.Product
             displayCaseCamera.fieldOfView = 27f;
         }
 
-        private static void CreateGachaRevealLighting(Transform parent)
+        private static PremiumDisplayCaseGachaLightingScope
+            CreateGachaRevealLighting(Transform parent)
         {
-            CreateGachaDirectionalLight(
-                parent,
-                "GachaCaseKey",
-                Quaternion.Euler(42f, -34f, 0f),
-                new Color(0.96f, 0.97f, 1f),
-                2.10f);
-            CreateGachaDirectionalLight(
-                parent,
-                "GachaCaseFill",
-                Quaternion.Euler(58f, 132f, 0f),
-                new Color(0.72f, 0.80f, 0.90f),
-                0.92f);
-            CreateGachaDirectionalLight(
-                parent,
-                "GachaCaseRim",
-                Quaternion.Euler(18f, 204f, 0f),
-                new Color(0.92f, 0.95f, 1f),
-                1.24f);
-        }
-
-        private static void CreateGachaDirectionalLight(
-            Transform parent,
-            string name,
-            Quaternion rotation,
-            Color color,
-            float intensity)
-        {
-            var lightObject = new GameObject(name);
-            lightObject.transform.SetParent(parent, false);
-            lightObject.transform.rotation = rotation;
-            Light light = lightObject.AddComponent<Light>();
-            light.type = LightType.Directional;
-            light.color = color;
-            light.intensity = intensity;
-            light.shadows = LightShadows.Soft;
+            return PremiumDisplayCaseGachaLightingInstaller.Install(parent);
         }
 
         private void DismissActiveGachaReveal(bool destroyPrize)
@@ -3583,6 +3553,8 @@ namespace FidgetingApp.Product
                     HandleGachaShippingFrontRevealed;
                 activeGachaRevealDirector.Dismiss();
             }
+            activeGachaLightingScope?.Restore();
+            activeGachaLightingScope = null;
             if (activeGachaRevealHost != null)
             {
                 Destroy(activeGachaRevealHost);

@@ -58,9 +58,11 @@ namespace CodexUnityLabEditor
         private const string MobileRenderPipelineAssetPath =
             "Assets/Settings/Mobile_RPAsset.asset";
         private const string Gate12DisplayCasePrefabPath =
-            "Assets/Resources/Gacha/PremiumDisplayCaseGate12R004/PresentationRoot.prefab";
+            "Assets/Resources/Gacha/PremiumDisplayCaseGate12R010/PresentationRoot.prefab";
         private const string Gate12DisplayCaseProfilePath =
             "Assets/Resources/Gacha/PremiumDisplayCaseGate12R004Profile.asset";
+        private const string Gate12DisplayCaseLightingProfilePath =
+            "Assets/Resources/Gacha/PremiumDisplayCaseGate12R011Lighting.asset";
         private const string Gate11DisplayCaseFbxPath =
             "Assets/_DisplayCase/Candidates/PremiumDisplayCaseGate11R001/Models/PremiumDisplayCaseGate11R001.fbx";
         private const int SimulatorMsaaSampleCount = 4;
@@ -241,6 +243,56 @@ namespace CodexUnityLabEditor
                 BuildIosProject(
                     iOSSdkVersion.SimulatorSDK,
                     RelativeGate12SimulatorBuildPath,
+                    configureSigning: false,
+                    development: false);
+            }
+            finally
+            {
+                PlayerSettings.SetScriptingDefineSymbols(
+                    target,
+                    previousDefines);
+            }
+        }
+
+        [MenuItem(
+            "Tools/Codex/Build Premium Display Case Gate 12 R011 Unique Simulator")]
+        public static void BuildPremiumDisplayCaseGate12R011SimulatorProject()
+        {
+            string relativeBuildPath = Environment.GetEnvironmentVariable(
+                UniqueExportPathEnvironmentKey);
+            if (string.IsNullOrWhiteSpace(relativeBuildPath)
+                || Path.IsPathRooted(relativeBuildPath)
+                || !relativeBuildPath.StartsWith(
+                    "Builds/iOS/SimulatorJobs/",
+                    StringComparison.Ordinal))
+            {
+                throw new BuildFailedException(
+                    $"{UniqueExportPathEnvironmentKey} must be a unique "
+                    + "Builds/iOS/SimulatorJobs/<job>/Export path.");
+            }
+            string projectRoot = Path.GetFullPath(Path.Combine(
+                Application.dataPath,
+                ".."));
+            if (Directory.Exists(Path.Combine(projectRoot, relativeBuildPath)))
+            {
+                throw new BuildFailedException(
+                    "The requested Simulator export already exists.");
+            }
+
+            NamedBuildTarget target = NamedBuildTarget.iOS;
+            string previousDefines =
+                PlayerSettings.GetScriptingDefineSymbols(target);
+            string previewDefines = string.IsNullOrWhiteSpace(previousDefines)
+                ? "FIDGET_GATE12_SIMULATOR_PREVIEW"
+                : previousDefines + ";FIDGET_GATE12_SIMULATOR_PREVIEW";
+            try
+            {
+                PlayerSettings.SetScriptingDefineSymbols(
+                    target,
+                    previewDefines);
+                BuildIosProject(
+                    iOSSdkVersion.SimulatorSDK,
+                    relativeBuildPath,
                     configureSigning: false,
                     development: false);
             }
@@ -652,6 +704,8 @@ namespace CodexUnityLabEditor
             public string gate12DisplayCasePrefab;
             public string gate12DisplayCasePrefabSha256;
             public string gate12DisplayCaseProfileSha256;
+            public string gate12DisplayCaseLightingProfile;
+            public string gate12DisplayCaseLightingProfileSha256;
             public string gate11DisplayCaseFbxSha256;
             public bool physicalPhoneInstallAuthorized;
         }
@@ -692,6 +746,11 @@ namespace CodexUnityLabEditor
                 gate12DisplayCaseProfileSha256 = Sha256File(Path.Combine(
                     projectRoot,
                     Gate12DisplayCaseProfilePath)),
+                gate12DisplayCaseLightingProfile =
+                    Gate12DisplayCaseLightingProfilePath,
+                gate12DisplayCaseLightingProfileSha256 = Sha256File(Path.Combine(
+                    projectRoot,
+                    Gate12DisplayCaseLightingProfilePath)),
                 gate11DisplayCaseFbxSha256 = Sha256File(Path.Combine(
                     projectRoot,
                     Gate11DisplayCaseFbxPath)),

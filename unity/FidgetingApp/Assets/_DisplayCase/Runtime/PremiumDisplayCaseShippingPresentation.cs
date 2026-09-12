@@ -282,11 +282,31 @@ namespace FidgetingApp.DisplayCase
             {
                 plate.Apply(data);
             }
+            PremiumDisplayCaseV3RarityCmf rarityCmf =
+                GetComponentInChildren<PremiumDisplayCaseV3RarityCmf>(true);
+            if (rarityCmf != null)
+            {
+                rarityCmf.Apply(data.RarityLevel);
+            }
         }
 
         public const bool ShowsCollectibleIdOnPlate = false;
 
         public void AttachContent(Transform content, Vector3 initialEulerAngles)
+        {
+            PrepareContent(content, initialEulerAngles);
+            FitContent(content);
+        }
+
+        public PremiumDisplayCasePocketFitResult AttachContentToCircularPocket(
+            Transform content,
+            PremiumDisplayCasePocketContentProfile profile)
+        {
+            PrepareContent(content, profile.InitialEulerAngles);
+            return FitContentToCircularPocket(content, profile);
+        }
+
+        private void PrepareContent(Transform content, Vector3 initialEulerAngles)
         {
             if (content == null)
             {
@@ -313,7 +333,6 @@ namespace FidgetingApp.DisplayCase
             content.localRotation = Quaternion.Euler(initialEulerAngles);
             content.localScale = Vector3.one;
             content.gameObject.SetActive(true);
-            FitContent(content);
         }
 
         /// <summary>
@@ -639,6 +658,137 @@ namespace FidgetingApp.DisplayCase
                     + Vector3.back * contentFitDepthOffsetMeters
                     - scaledBounds.center;
             }
+        }
+
+        private PremiumDisplayCasePocketFitResult FitContentToCircularPocket(
+            Transform content,
+            PremiumDisplayCasePocketContentProfile profile)
+        {
+            if (!TryMeasureSlotLocalGeometry(content, out List<Vector3> points))
+            {
+                throw new MissingReferenceException(
+                    $"No visible mesh geometry was available for {profile.ModelId}.");
+            }
+
+            MeasureSlotLocal(points, out Vector3 minimum, out Vector3 maximum);
+            Vector3 boundsCenter = (minimum + maximum) * 0.5f;
+            Vector3 planarCenter = profile.Anchor == PremiumDisplayCasePocketAnchor.MechanicalPivot
+                ? contentSlot.InverseTransformPoint(content.position)
+                : boundsCenter;
+            float radialExtent = MeasureRadialExtent(points, planarCenter);
+            float depth = maximum.z - minimum.z;
+            float radialScale =
+                profile.FitDiameterMeters * 0.5f
+                / Mathf.Max(radialExtent, 0.0001f);
+            float depthScale = profile.ConstrainScaleByDepth
+                ? profile.ReferenceDepthMeters / Mathf.Max(depth, 0.0001f)
+                : 1f;
+            float uniformScale = Mathf.Min(1f, Mathf.Min(radialScale, depthScale));
+            contentFitRoot.localScale = Vector3.one * uniformScale;
+
+            if (!TryMeasureSlotLocalGeometry(content, out points))
+            {
+                throw new MissingReferenceException(
+                    $"Scaled geometry disappeared for {profile.ModelId}.");
+            }
+
+            MeasureSlotLocal(points, out minimum, out maximum);
+            boundsCenter = (minimum + maximum) * 0.5f;
+            Vector3 anchorCenter = profile.Anchor == PremiumDisplayCasePocketAnchor.MechanicalPivot
+                ? new Vector3(
+                    contentSlot.InverseTransformPoint(content.position).x,
+                    contentSlot.InverseTransformPoint(content.position).y,
+                    boundsCenter.z)
+                : boundsCenter;
+            depth = maximum.z - minimum.z;
+            float frontShift = Mathf.Max(
+                0f,
+                depth - profile.ReferenceDepthMeters) * 0.5f;
+            Vector3 targetCenter = new Vector3(
+                0f,
+                0f,
+                -contentFitDepthOffsetMeters - frontShift);
+            contentFitRoot.position +=
+                contentSlot.TransformPoint(targetCenter)
+                - contentSlot.TransformPoint(anchorCenter);
+
+            if (!TryMeasureSlotLocalGeometry(content, out points))
+            {
+                throw new MissingReferenceException(
+                    $"Fitted geometry disappeared for {profile.ModelId}.");
+            }
+
+            MeasureSlotLocal(points, out minimum, out maximum);
+            boundsCenter = (minimum + maximum) * 0.5f;
+            Vector3 finalCenter = profile.Anchor == PremiumDisplayCasePocketAnchor.MechanicalPivot
+                ? new Vector3(
+                    contentSlot.InverseTransformPoint(content.position).x,
+                    contentSlot.InverseTransformPoint(content.position).y,
+                    boundsCenter.z)
+                : boundsCenter;
+            return new PremiumDisplayCasePocketFitResult(
+                uniformScale,
+                MeasureRadialExtent(points, finalCenter),
+                maximum.z - minimum.z,
+                finalCenter - targetCenter);
+        }
+
+        private bool TryMeasureSlotLocalGeometry(
+            Transform content,
+            out List<Vector3> points)
+        {
+            points = new List<Vector3>();
+            MeshFilter[] filters = content.GetComponentsInChildren<MeshFilter>(true);
+            for (int filterIndex = 0; filterIndex < filters.Length; filterIndex++)
+            {
+                MeshFilter filter = filters[filterIndex];
+                Renderer renderer = filter.GetComponent<Renderer>();
+                if (filter.sharedMesh == null
+                    || renderer == null
+                    || !renderer.enabled
+                    || !renderer.gameObject.activeInHierarchy)
+                {
+                    continue;
+                }
+
+                Vector3[] vertices = filter.sharedMesh.vertices;
+                for (int vertexIndex = 0; vertexIndex < vertices.Length; vertexIndex++)
+                {
+                    Vector3 world = filter.transform.TransformPoint(vertices[vertexIndex]);
+                    points.Add(contentSlot.InverseTransformPoint(world));
+                }
+            }
+
+            return points.Count > 0;
+        }
+
+        private static void MeasureSlotLocal(
+            List<Vector3> points,
+            out Vector3 minimum,
+            out Vector3 maximum)
+        {
+            minimum = points[0];
+            maximum = points[0];
+            for (int index = 1; index < points.Count; index++)
+            {
+                minimum = Vector3.Min(minimum, points[index]);
+                maximum = Vector3.Max(maximum, points[index]);
+            }
+        }
+
+        private static float MeasureRadialExtent(
+            List<Vector3> points,
+            Vector3 planarCenter)
+        {
+            float maximum = 0f;
+            for (int index = 0; index < points.Count; index++)
+            {
+                Vector2 delta = new Vector2(
+                    points[index].x - planarCenter.x,
+                    points[index].y - planarCenter.y);
+                maximum = Mathf.Max(maximum, delta.magnitude);
+            }
+            return maximum;
         }
 
         private static bool TryMeasureWorldBounds(

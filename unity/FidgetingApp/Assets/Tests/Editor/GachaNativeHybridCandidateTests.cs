@@ -183,7 +183,9 @@ namespace FidgetingApp.Tests.Editor
                     Is.True);
                 Assert.That(
                     director.NativeHybridCaseRootName,
-                    Is.EqualTo("PremiumDisplayCaseGate12R004"));
+                    Is.EqualTo(
+                        PremiumDisplayCaseShippingFactory
+                            .NativeHybridPresentationInstanceName));
                 Assert.That(
                     director.NativeHybridCaseTypeName,
                     Is.EqualTo(typeof(
@@ -937,7 +939,8 @@ namespace FidgetingApp.Tests.Editor
                         "f6217a76-b92d-43fd-8d25-17f9e707c1af",
                         "f6217a76-b92d-43fd-8d25-17f9e707c1af",
                         42,
-                        "PremiumDisplayCaseGate12R004",
+                        PremiumDisplayCaseShippingFactory
+                            .NativeHybridPresentationInstanceName,
                         typeof(PremiumDisplayCaseShippingPresentation)
                             .FullName,
                         "42",
@@ -965,7 +968,9 @@ namespace FidgetingApp.Tests.Editor
             Assert.That(observed.UnityFrameCount, Is.EqualTo(42));
             Assert.That(
                 observed.CaseRootName,
-                Is.EqualTo("PremiumDisplayCaseGate12R004"));
+                Is.EqualTo(
+                    PremiumDisplayCaseShippingFactory
+                        .NativeHybridPresentationInstanceName));
             Assert.That(observed.CaseStableFrame, Is.True);
             Assert.That(observed.CameraStableFrame, Is.True);
             Assert.That(observed.SetupSucceeded, Is.True);
@@ -995,7 +1000,8 @@ namespace FidgetingApp.Tests.Editor
                         42,
                         117,
                         "Main Camera",
-                        "PremiumDisplayCaseGate12R004",
+                        PremiumDisplayCaseShippingFactory
+                            .NativeHybridPresentationInstanceName,
                         typeof(PremiumDisplayCaseShippingPresentation)
                             .FullName,
                         "42",
@@ -1028,7 +1034,9 @@ namespace FidgetingApp.Tests.Editor
             Assert.That(observed.CameraName, Is.EqualTo("Main Camera"));
             Assert.That(
                 observed.CaseRootName,
-                Is.EqualTo("PremiumDisplayCaseGate12R004"));
+                Is.EqualTo(
+                    PremiumDisplayCaseShippingFactory
+                        .NativeHybridPresentationInstanceName));
             Assert.That(observed.IsolationActive, Is.True);
             Assert.That(observed.UsesCavityClearBackdrop, Is.True);
             Assert.That(observed.PublishSetupPublished, Is.True);

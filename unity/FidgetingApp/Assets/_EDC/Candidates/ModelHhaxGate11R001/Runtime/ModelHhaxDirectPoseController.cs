@@ -1,5 +1,4 @@
 using System;
-using System.IO;
 using UnityEngine;
 
 namespace FidgetingApp.EDC.Candidates.ModelHhax
@@ -54,14 +53,16 @@ namespace FidgetingApp.EDC.Candidates.ModelHhax
         {
             EnsureConfigured();
             TravelMm = Mathf.Clamp(travelMm, 0f, MaximumTravelMm);
-            movingUpper.localPosition = upperClosedLocalPosition + slideAxisLocal * (TravelMm * 0.001f);
+            movingUpper.localPosition = upperClosedLocalPosition
+                + slideAxisLocal * (TravelMm * 0.001f);
         }
 
         public void SetRotorAngleDegrees(float angleDegrees)
         {
             EnsureConfigured();
             RotorAngleDegrees = Mathf.Repeat(angleDegrees, 360f);
-            rearRotor.localRotation = rotorClosedLocalRotation * Quaternion.AngleAxis(RotorAngleDegrees, rotorAxisLocal);
+            rearRotor.localRotation = rotorClosedLocalRotation
+                * Quaternion.AngleAxis(RotorAngleDegrees, rotorAxisLocal);
         }
 
         public void ResetPose()
@@ -75,159 +76,46 @@ namespace FidgetingApp.EDC.Candidates.ModelHhax
 
         private void EnsureConfigured()
         {
-            if (!configured)
-            {
-                if (movingUpper == null || rearRotor == null)
-                    throw new InvalidOperationException("model-hhax direct-pose controller is not configured.");
-                CaptureClosedPose();
-            }
+            if (configured) return;
+            if (movingUpper == null || rearRotor == null)
+                throw new InvalidOperationException(
+                    "model-hhax direct-pose controller is not configured.");
+            CaptureClosedPose();
         }
     }
 
     /// <summary>
-    /// Evidence-only PlayMode recorder. It drives the direct-pose API explicitly
-    /// and is never stored on the candidate prefab or used as shipping behaviour.
+    /// Applies the documented charged-dark material response without changing
+    /// the imported material assets. Clearing the property blocks restores the
+    /// approved daylight material state.
     /// </summary>
-    public sealed class ModelHhaxRuntimeEvidenceCapture : MonoBehaviour
+    public static class ModelHhaxArtworkEmission
     {
-        [SerializeField] private ModelHhaxDirectPoseController controller;
-        [SerializeField] private Camera reviewCamera;
-        [SerializeField] private Light[] reviewLights;
-        [SerializeField] private Renderer floorRenderer;
-        [SerializeField] private string outputDirectory;
-        [SerializeField] private int width = 900;
-        [SerializeField] private int height = 900;
-        [SerializeField] private int frameCount = 180;
-
-        private int frame;
-        private Vector3 closedUpperPosition;
-        private Quaternion closedRotorRotation;
-        private Color ambientColor;
-
-        public void Configure(
-            ModelHhaxDirectPoseController directController,
-            Camera camera,
-            Light[] lights,
-            Renderer floor,
-            string output,
-            int captureWidth,
-            int captureHeight,
-            int frames)
+        public static void Set(GameObject candidate, float strength)
         {
-            controller = directController;
-            reviewCamera = camera;
-            reviewLights = lights;
-            floorRenderer = floor;
-            outputDirectory = output;
-            width = captureWidth;
-            height = captureHeight;
-            frameCount = frames;
-        }
-
-        private void Start()
-        {
-            if (controller == null || reviewCamera == null || string.IsNullOrWhiteSpace(outputDirectory))
-                throw new InvalidOperationException("model-hhax runtime capture is not configured.");
-            Directory.CreateDirectory(outputDirectory);
-            controller.ResetPose();
-            closedUpperPosition = controller.MovingUpper.localPosition;
-            closedRotorRotation = controller.RearRotor.localRotation;
-            ambientColor = RenderSettings.ambientLight;
-            Time.captureFramerate = 30;
-        }
-
-        private void LateUpdate()
-        {
-            ApplyEvidencePose(frame);
-            CaptureFrame(frame);
-            frame += 1;
-            if (frame >= frameCount)
-                Finish();
-        }
-
-        private void ApplyEvidencePose(int index)
-        {
-            // 0–29: closed idle. 30–69: explicit straight slide.
-            // 70–99: open hold. 100–129: independent rear rotation.
-            // 130–149: rotated hold. 150–179: closed dark material proof.
-            if (index < 30)
+            foreach (Renderer renderer in candidate.GetComponentsInChildren<Renderer>(true))
             {
-                controller.ResetPose();
-            }
-            else if (index < 70)
-            {
-                controller.SetTravelMm(Mathf.Lerp(0f, ModelHhaxDirectPoseController.MaximumTravelMm,
-                    (index - 30) / 39f));
-                controller.SetRotorAngleDegrees(0f);
-            }
-            else if (index < 100)
-            {
-                controller.SetTravelMm(ModelHhaxDirectPoseController.MaximumTravelMm);
-                controller.SetRotorAngleDegrees(0f);
-            }
-            else if (index < 130)
-            {
-                controller.SetTravelMm(ModelHhaxDirectPoseController.MaximumTravelMm);
-                controller.SetRotorAngleDegrees(Mathf.Lerp(0f, 135f, (index - 100) / 29f));
-            }
-            else if (index < 150)
-            {
-                controller.SetTravelMm(ModelHhaxDirectPoseController.MaximumTravelMm);
-                controller.SetRotorAngleDegrees(135f);
-            }
-            else
-            {
-                controller.ResetPose();
-                if (reviewLights != null)
-                    foreach (Light light in reviewLights)
-                        if (light != null) light.enabled = false;
-                if (floorRenderer != null) floorRenderer.enabled = false;
-                RenderSettings.ambientLight = Color.black;
+                if (!UsesArtworkMaterial(renderer)) continue;
+                MaterialPropertyBlock block = new MaterialPropertyBlock();
+                renderer.GetPropertyBlock(block);
+                block.SetColor("_EmissionColor", Color.white * strength);
+                renderer.SetPropertyBlock(block);
             }
         }
 
-        private void CaptureFrame(int index)
+        public static void Clear(GameObject candidate)
         {
-            RenderTexture target = new RenderTexture(width, height, 24, RenderTextureFormat.ARGB32);
-            target.Create();
-            RenderTexture previous = RenderTexture.active;
-            reviewCamera.targetTexture = target;
-            reviewCamera.Render();
-            RenderTexture.active = target;
-            Texture2D image = new Texture2D(width, height, TextureFormat.RGB24, false, false);
-            image.ReadPixels(new Rect(0f, 0f, width, height), 0, 0);
-            image.Apply(false, false);
-            File.WriteAllBytes(Path.Combine(outputDirectory, $"frame-{index:D5}.png"), image.EncodeToPNG());
-            Destroy(image);
-            reviewCamera.targetTexture = null;
-            RenderTexture.active = previous;
-            target.Release();
-            Destroy(target);
+            foreach (Renderer renderer in candidate.GetComponentsInChildren<Renderer>(true))
+                if (UsesArtworkMaterial(renderer)) renderer.SetPropertyBlock(null);
         }
 
-        private void Finish()
+        private static bool UsesArtworkMaterial(Renderer renderer)
         {
-            controller.ResetPose();
-            bool finalClosedPoseMatch = closedUpperPosition == controller.MovingUpper.localPosition
-                && closedRotorRotation == controller.RearRotor.localRotation;
-            string report = "{\n"
-                + "  \"schemaVersion\": 1,\n"
-                + "  \"engine\": \"Unity 6000.5.6f1 PlayMode\",\n"
-                + "  \"frameRate\": 30,\n"
-                + $"  \"frameCount\": {frameCount},\n"
-                + "  \"captureHarnessOnly\": true,\n"
-                + "  \"productionAutomaticMotion\": false,\n"
-                + "  \"productionUpdateLoop\": false,\n"
-                + "  \"directPoseCallsOnly\": true,\n"
-                + $"  \"initialAndFinalClosedPoseMatch\": {finalClosedPoseMatch.ToString().ToLowerInvariant()},\n"
-                + "  \"states\": [\"closed-idle\", \"straight-slide\", \"open-hold\", \"independent-rear-rotation\", \"rotated-hold\", \"dark-material\"]\n"
-                + "}\n";
-            File.WriteAllText(Path.Combine(outputDirectory, "runtime-capture-report.json"), report);
-            Time.captureFramerate = 0;
-            RenderSettings.ambientLight = ambientColor;
-#if UNITY_EDITOR
-            UnityEditor.EditorApplication.Exit(finalClosedPoseMatch ? 0 : 2);
-#endif
+            foreach (Material material in renderer.sharedMaterials)
+                if (material != null
+                    && (material.name == "MAT_FrontMOP" || material.name == "MAT_BackMOP"))
+                    return true;
+            return false;
         }
     }
 }

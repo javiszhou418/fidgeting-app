@@ -1,13 +1,13 @@
 {
   "schemaVersion": 1,
-  "revision": 138,
+  "revision": 140,
   "createdAt": "2026-08-24T08:23:38.421Z",
-  "updatedAt": "2026-09-11T09:53:40.785406+00:00",
+  "updatedAt": "2026-09-11T15:04:57.240137+00:00",
   "model": {
     "id": "premium-display-case",
     "name": "Premium Display Case",
     "mechanism": "display-case",
-    "status": "v3-tri-spinner-slab-gate-11-rev004-approved-batch-gate-12-draft",
+    "status": "v3-tri-spinner-slab-gate12-r009-rejected-r010-draft",
     "scenePath": "unity/FidgetingApp/Assets/_DisplayCase/Scenes/PremiumDisplayCase.unity",
     "activeVariantId": "tri-spinner-slab-v3-cmf"
   },
@@ -19,9 +19,9 @@
   "currentState": {
     "rebuildRequested": true,
     "shippingAssetUnchanged": true,
-    "visualApproval": "gates-01-08 approved (lookdev level); Gate 09 draft; shipping preview not yet produced; device push requested by the user, pending Gate 12 preview",
+    "visualApproval": "Gate 12 R009 rejected; R010 static content/rarity preview awaits direction feedback; complete recording and soft-focus still pending",
     "deviceStatus": "not-built-not-installed-not-device-tested",
-    "diagnosis": "2026-09-11 09:20 用户在 Gate 06 rev-010 尺寸图上框出两岛之间的抛光条：「这个地方没有这个条，是透底的」。rev-013：退役 GEO_PDC_COMPARTMENT_SEAM，2.4 mm 缝直通后板（zone 3）；其余与 rev-012 相同（边框 2.8 mm，切角 3.5 mm，外壳 101.28 × 171.78 mm）。10:11 Mac 重启打断了首次渲染（/tmp 帧与日志丢失），转台帧目录改到 ~/Library/Caches/fidgeting-renders 后重跑。已批准的 rev-012 留在历史；Gate 03–05 rev-013 与 Gate 06 rev-011 ready_for_review。未推送手机。 Gate 06 rev 11：从 Gate 05 rev-013 出静态几何，16/16 检查通过，91 008 三角，38 件；与 Gate 03–05 rev-013 一起 ready_for_review。未构建、未推送手机。 09-11 14:45 用户「批准」（回应「认可就说“批准 03–06”」）：Gate 03–05 rev-013 与 Gate 06 rev-011 批准；Gate 07 材质开为 draft。未构建、未推送手机。 Gate 07 rev 6：在批准的 Gate 06 rev-011 几何上做七区材质（拉丝各向异性 + 细纹、喷砂微凸、整片薄膜、钢琴黑清漆、金饰各向异性）+ Oxanium 占位标签 decal；NEUTRAL 灯组 18% 灰卡校准；材质板 + 分区图 + 四档 + 中性转台；ready_for_review。材质库未写入。未推送手机。 09-11 15:26 用户「确认」：Gate 07 rev-003 批准；9 条材质写入 MaterialLibrary（approved-gate07）；Gate 08 开为 draft。未推送手机。 Gate 08 rev 5：合约 beauty 灯组（含彩色边光、sparkle、rim 30/26%）打在批准的 Gate 07 材质上，p97 校准 0.86；hero clean+soft、左右斜、低角、clay/normal/depth/roughness、144 帧转台、四档；ready_for_review。未推送手机。 09-11 16:14 用户「可以」批准 Gate 08，并提出两条未来变更（header 背景色随稀有度、凹槽内容可替换）与两条轨道（A 推手机预览；B 落实两项变更）。Gate 09 开为 draft。未推送手机。 Gate 09 rev 4：同机位 neutral / review / shipping 三环境 + 差异指标；Unity parity 目标 = shipping 集；ready_for_review。 16:3x 用户批准 Gate 09 并授权 10–11 校验通过自动继续、Gate 12 Unity 预览处停下审批。Gate 10 开为 draft。未推送手机。 Gate 10 rev 4：产品包（blend/FBX/GLB/标签 decal/manifest/collision policy）往返校验通过，按用户批量授权记为 approved；Gate 11 Unity parity 开为 draft。未推送手机。 Gate 10 rev 5：FBX 改为原生 Z-up + FBX_SCALE_UNITS（几何/材质/GLB 不变），Unity 导入全节点 identity。Gate 11 rev 4：Unity 6000.5.6f1 URP 真实导入，7 区材质 + 标签贴花，Blender 相机/灯组表复刻，逐件包围盒 0.000 mm，正面剪影 IoU 0.998，EditMode 7/7；按 16:3x 批量授权自动通过。Gate 12 已开 draft：真实 Unity 出货预览待用户明确批准，未构建、未推送手机。",
+    "diagnosis": "2026-09-11 09:20 用户在 Gate 06 rev-010 尺寸图上框出两岛之间的抛光条：「这个地方没有这个条，是透底的」。rev-013：退役 GEO_PDC_COMPARTMENT_SEAM，2.4 mm 缝直通后板（zone 3）；其余与 rev-012 相同（边框 2.8 mm，切角 3.5 mm，外壳 101.28 × 171.78 mm）。10:11 Mac 重启打断了首次渲染（/tmp 帧与日志丢失），转台帧目录改到 ~/Library/Caches/fidgeting-renders 后重跑。已批准的 rev-012 留在历史；Gate 03–05 rev-013 与 Gate 06 rev-011 ready_for_review。未推送手机。 Gate 06 rev 11：从 Gate 05 rev-013 出静态几何，16/16 检查通过，91 008 三角，38 件；与 Gate 03–05 rev-013 一起 ready_for_review。未构建、未推送手机。 09-11 14:45 用户「批准」（回应「认可就说“批准 03–06”」）：Gate 03–05 rev-013 与 Gate 06 rev-011 批准；Gate 07 材质开为 draft。未构建、未推送手机。 Gate 07 rev 6：在批准的 Gate 06 rev-011 几何上做七区材质（拉丝各向异性 + 细纹、喷砂微凸、整片薄膜、钢琴黑清漆、金饰各向异性）+ Oxanium 占位标签 decal；NEUTRAL 灯组 18% 灰卡校准；材质板 + 分区图 + 四档 + 中性转台；ready_for_review。材质库未写入。未推送手机。 09-11 15:26 用户「确认」：Gate 07 rev-003 批准；9 条材质写入 MaterialLibrary（approved-gate07）；Gate 08 开为 draft。未推送手机。 Gate 08 rev 5：合约 beauty 灯组（含彩色边光、sparkle、rim 30/26%）打在批准的 Gate 07 材质上，p97 校准 0.86；hero clean+soft、左右斜、低角、clay/normal/depth/roughness、144 帧转台、四档；ready_for_review。未推送手机。 09-11 16:14 用户「可以」批准 Gate 08，并提出两条未来变更（header 背景色随稀有度、凹槽内容可替换）与两条轨道（A 推手机预览；B 落实两项变更）。Gate 09 开为 draft。未推送手机。 Gate 09 rev 4：同机位 neutral / review / shipping 三环境 + 差异指标；Unity parity 目标 = shipping 集；ready_for_review。 16:3x 用户批准 Gate 09 并授权 10–11 校验通过自动继续、Gate 12 Unity 预览处停下审批。Gate 10 开为 draft。未推送手机。 Gate 10 rev 4：产品包（blend/FBX/GLB/标签 decal/manifest/collision policy）往返校验通过，按用户批量授权记为 approved；Gate 11 Unity parity 开为 draft。未推送手机。 Gate 10 rev 5：FBX 改为原生 Z-up + FBX_SCALE_UNITS（几何/材质/GLB 不变），Unity 导入全节点 identity。Gate 11 rev 4：Unity 6000.5.6f1 URP 真实导入，7 区材质 + 标签贴花，Blender 相机/灯组表复刻，逐件包围盒 0.000 mm，正面剪影 IoU 0.998，EditMode 7/7；按 16:3x 批量授权自动通过。Gate 12 已开 draft：真实 Unity 出货预览待用户明确批准，未构建、未推送手机。 22:25 用户退回 Gate 12 R009：三叶斜视宏观图视觉偏心，四产品矩阵因重复 ±90°、来源场景未关闭和单一厚度缩放出现小点、侧躺与穿画面；R009 已保留为 rejected history。R010 关闭来源场景后再抓 renderer，使用 V3 专属朝向、机械轴心/可见中心和真实 mesh 顶点圆井 fit；四款中心与完整帧门禁通过，75/75 测试与 Fan Card 7.590 mm 门禁通过。R010 静态预览待反馈；soft-focus 与完整 runtime recording 未完成，未推送手机。",
     "motionCorrection": {
       "earliestGate": "04-architecture",
       "gate04Status": "r025-technically-visually-rejected-repair-required",
@@ -187,7 +187,7 @@
     },
     "activeStageId": "12-shipping",
     "activeStageStatus": "draft",
-    "activeIteration": "no-active-candidate-r025-technically-visually-rejected",
+    "activeIteration": "v3-gate12-r010-static-preview-audited",
     "summary": "R025 is technically visually rejected after direct full-size review. Its implementation checks passed but do not qualify it for approval, shipping, or device testing; a new Gate 04 candidate is required.",
     "statusText": "R025 技术视觉否决已记录；不得请求审批，未推送手机",
     "r025TechnicalVisualRejection": {
@@ -285,12 +285,14 @@
         {
           "id": "header-plate-rarity-colour",
           "wording": "顶上那个 TriSpinner 的背景色，现在用的是黑色。未来我将会用这一块来表示这个陀螺的稀有程度，所以它的颜色可能会有对应的变化。",
-          "scope": "zone 4 header plate base colour per GachaRarity tier (material-level; geometry unchanged); requires a contract rev with cmf.header_plate_rarity_map + Gate 07 revalidation"
+          "scope": "zone 4 header plate base colour per GachaRarity tier (material-level; geometry unchanged); requires a contract rev with cmf.header_plate_rarity_map + Gate 07 revalidation",
+          "status": "r010-static-candidate-visual-pending"
         },
         {
           "id": "swappable-pocket-content",
           "wording": "中间这个陀螺，它不是总是这一款…它是一个 slide 加指尖陀螺模型的组合，它可以分开，然后可以根据程序的要求去做适配。",
-          "scope": "content is already caller-owned at PIVOT_PDC_CONTENT_SLOT (never merged into the case mesh or its normal maps); needs a per-toy content-fit table (graphite-two-lobe, magnetic-slide-tile, magnetic-fan-card, edc-slide) and Unity slot wiring; generic Ø71.5 mm well sized for the 65 mm three-blade"
+          "scope": "content is already caller-owned at PIVOT_PDC_CONTENT_SLOT (never merged into the case mesh or its normal maps); needs a per-toy content-fit table (graphite-two-lobe, magnetic-slide-tile, magnetic-fan-card, edc-slide) and Unity slot wiring; generic Ø71.5 mm well sized for the 65 mm three-blade",
+          "status": "r010-static-candidate-visual-pending"
         }
       ],
       "trackA": "push the approved rev-013 / Gate 07 r003 / Gate 08 r005 slab to the phone: Gate 09 -> 10 export -> 11 Unity parity -> 12 shipping preview -> explicit approval -> build/install"
@@ -316,6 +318,22 @@
       "evidenceRevision": "rev-004",
       "userApprovalQuote": "批准 09，并授权 10–11 校验通过就自动继续，到 Gate 12 Unity 预览再停下来给我看（推荐）",
       "approvedAt": "2026-09-11T16:3x:00+08:00"
+    },
+    "gate12R010": {
+      "status": "draft-static-preview-audited",
+      "candidatePrefab": "unity/FidgetingApp/Assets/Resources/Gacha/PremiumDisplayCaseGate12R010/PresentationRoot.prefab",
+      "evidenceRoot": "unity/FidgetingApp/ArtSource/ModelPipeline/premium-display-case/evidence/12-shipping/v3-rev-010",
+      "previewArtifactIds": [
+        "pdc-v3-g12-r010-content-phone-matrix",
+        "pdc-v3-g12-r010-content-center-proof",
+        "pdc-v3-g12-r010-content-quarter-matrix",
+        "pdc-v3-g12-r010-rarity-cmf-matrix"
+      ],
+      "tests": "75/75",
+      "fanCardGuardrails": "pass-7.590-mm",
+      "factoryStillPointsAt": "Gacha/PremiumDisplayCaseGate12R004/PresentationRoot",
+      "visualApproved": false,
+      "phoneInstalled": false
     }
   },
   "assets": [
@@ -58716,6 +58734,1299 @@
       "toyPrizeBundled": false,
       "shippingEligible": false,
       "provisionalMarker": "PROVISIONAL_DIMENSIONS"
+    },
+    {
+      "id": "pdc-v3-g12-r009-rejection-record",
+      "stageId": "12-shipping",
+      "slot": "rejection-record",
+      "path": "unity/FidgetingApp/ArtSource/ModelPipeline/premium-display-case/evidence/12-shipping/v3-rev-009/rejected-20260911T222500+0800/user-rejection.md",
+      "sha256": "52d2c7af2689da11335689d3211e272212fe758451ab3fa0b06e18befcdc37c0",
+      "role": "validation",
+      "producer": {
+        "name": "register_tri_spinner_slab_v3_gate12_rev010.py",
+        "version": "2026-09-11",
+        "variant": "tri-spinner-slab-v3-cmf"
+      },
+      "provenance": {
+        "origin": "repository-generated",
+        "contentClass": "explicit-user-rejection",
+        "assertedBy": "repository",
+        "note": "R009 visual evidence is forbidden for approval."
+      },
+      "sourceAssetIds": [
+        "pdc-v3-g11-candidate-prefab"
+      ],
+      "exists": true,
+      "sizeBytes": 2497,
+      "variantId": "tri-spinner-slab-v3-cmf",
+      "wholeAssembledCaseOnly": true,
+      "explodeEligible": false,
+      "toyPrizeBundled": false,
+      "shippingEligible": false,
+      "visualApproved": false
+    },
+    {
+      "id": "pdc-v3-g12-r009-center-annotation",
+      "stageId": "12-shipping",
+      "slot": "rejected-user-annotation",
+      "path": "unity/FidgetingApp/ArtSource/ModelPipeline/premium-display-case/evidence/12-shipping/v3-rev-009/rejected-20260911T222500+0800/user-annotation-spinner-center.png",
+      "sha256": "4c585b430808d68fbe7e19766cc0a04d7b8a41b4932954da885bffbca1952920",
+      "role": "shipping-render",
+      "producer": {
+        "name": "register_tri_spinner_slab_v3_gate12_rev010.py",
+        "version": "2026-09-11",
+        "variant": "tri-spinner-slab-v3-cmf"
+      },
+      "provenance": {
+        "origin": "repository-generated",
+        "contentClass": "rejected-spinner-centering-annotation",
+        "assertedBy": "repository",
+        "note": ""
+      },
+      "sourceAssetIds": [
+        "pdc-v3-g12-r009-rejection-record"
+      ],
+      "exists": true,
+      "sizeBytes": 227428,
+      "variantId": "tri-spinner-slab-v3-cmf",
+      "wholeAssembledCaseOnly": true,
+      "explodeEligible": false,
+      "toyPrizeBundled": false,
+      "shippingEligible": false,
+      "visualApproved": false
+    },
+    {
+      "id": "pdc-v3-g12-r009-matrix-annotation",
+      "stageId": "12-shipping",
+      "slot": "rejected-user-annotation",
+      "path": "unity/FidgetingApp/ArtSource/ModelPipeline/premium-display-case/evidence/12-shipping/v3-rev-009/rejected-20260911T222500+0800/user-annotation-content-matrix-defects.png",
+      "sha256": "e379f4acca745a811a7c2fd4461e12ad8cc637cb97062ba93aad62e9b8df7edb",
+      "role": "shipping-render",
+      "producer": {
+        "name": "register_tri_spinner_slab_v3_gate12_rev010.py",
+        "version": "2026-09-11",
+        "variant": "tri-spinner-slab-v3-cmf"
+      },
+      "provenance": {
+        "origin": "repository-generated",
+        "contentClass": "rejected-content-matrix-annotation",
+        "assertedBy": "repository",
+        "note": ""
+      },
+      "sourceAssetIds": [
+        "pdc-v3-g12-r009-rejection-record"
+      ],
+      "exists": true,
+      "sizeBytes": 316163,
+      "variantId": "tri-spinner-slab-v3-cmf",
+      "wholeAssembledCaseOnly": true,
+      "explodeEligible": false,
+      "toyPrizeBundled": false,
+      "shippingEligible": false,
+      "visualApproved": false
+    },
+    {
+      "id": "pdc-v3-g12-r009-rejected-center-preview",
+      "stageId": "12-shipping",
+      "slot": "rejected-preview",
+      "path": "Artifacts/TriSpinnerSlab/gate12-r009/gate12-r009-pocket-macro-centered-20260911T140200Z.png",
+      "sha256": "be8954f0fe4679903f8ccd5b5b8b6c73cc05e471dbd28911b1cb1ae0ac7d4a23",
+      "role": "shipping-render",
+      "producer": {
+        "name": "register_tri_spinner_slab_v3_gate12_rev010.py",
+        "version": "2026-09-11",
+        "variant": "tri-spinner-slab-v3-cmf"
+      },
+      "provenance": {
+        "origin": "repository-generated",
+        "contentClass": "rejected-oblique-pocket-preview",
+        "assertedBy": "repository",
+        "note": ""
+      },
+      "sourceAssetIds": [
+        "pdc-v3-g11-candidate-prefab"
+      ],
+      "exists": true,
+      "sizeBytes": 824080,
+      "variantId": "tri-spinner-slab-v3-cmf",
+      "wholeAssembledCaseOnly": true,
+      "explodeEligible": false,
+      "toyPrizeBundled": false,
+      "shippingEligible": false,
+      "visualApproved": false
+    },
+    {
+      "id": "pdc-v3-g12-r009-rejected-content-matrix",
+      "stageId": "12-shipping",
+      "slot": "rejected-preview",
+      "path": "Artifacts/TriSpinnerSlab/gate12-r009/gate12-r009-content-matrix-pocket-20260911T140800Z.png",
+      "sha256": "7390ba503becee83dd475a3e8012ffa715e334a00142826bcd677a78cdc9faf4",
+      "role": "shipping-render",
+      "producer": {
+        "name": "register_tri_spinner_slab_v3_gate12_rev010.py",
+        "version": "2026-09-11",
+        "variant": "tri-spinner-slab-v3-cmf"
+      },
+      "provenance": {
+        "origin": "repository-generated",
+        "contentClass": "rejected-contaminated-content-matrix",
+        "assertedBy": "repository",
+        "note": ""
+      },
+      "sourceAssetIds": [
+        "pdc-v3-g11-candidate-prefab"
+      ],
+      "exists": true,
+      "sizeBytes": 670412,
+      "variantId": "tri-spinner-slab-v3-cmf",
+      "wholeAssembledCaseOnly": true,
+      "explodeEligible": false,
+      "toyPrizeBundled": false,
+      "shippingEligible": false,
+      "visualApproved": false
+    },
+    {
+      "id": "pdc-v3-g12-r010-candidate-prefab",
+      "stageId": "12-shipping",
+      "slot": "shipping-candidate-prefab",
+      "path": "unity/FidgetingApp/Assets/Resources/Gacha/PremiumDisplayCaseGate12R010/PresentationRoot.prefab",
+      "sha256": "4314ac6e9887e32e2a367a0e4ae7b2faaf3f616c2d4de3650763c83f6d84b1d1",
+      "role": "validation",
+      "producer": {
+        "name": "register_tri_spinner_slab_v3_gate12_rev010.py",
+        "version": "2026-09-11",
+        "variant": "tri-spinner-slab-v3-cmf"
+      },
+      "provenance": {
+        "origin": "repository-generated",
+        "contentClass": "unity-resources-prefab-candidate",
+        "assertedBy": "repository",
+        "note": "Candidate only; PremiumDisplayCaseShippingFactory remains R004."
+      },
+      "sourceAssetIds": [
+        "pdc-v3-g11-candidate-prefab"
+      ],
+      "exists": true,
+      "sizeBytes": 136654,
+      "variantId": "tri-spinner-slab-v3-cmf",
+      "wholeAssembledCaseOnly": true,
+      "explodeEligible": false,
+      "toyPrizeBundled": false,
+      "shippingEligible": false,
+      "visualApproved": false
+    },
+    {
+      "id": "pdc-v3-g12-r010-review-scene",
+      "stageId": "12-shipping",
+      "slot": "shipping-candidate-scene",
+      "path": "unity/FidgetingApp/Assets/_DisplayCase/Scenes/PremiumDisplayCaseGate12R010.unity",
+      "sha256": "00cf7deef38af0ca75dd2c43fdc7c25fe0c141a001452807c857a29c07dfed3d",
+      "role": "validation",
+      "producer": {
+        "name": "register_tri_spinner_slab_v3_gate12_rev010.py",
+        "version": "2026-09-11",
+        "variant": "tri-spinner-slab-v3-cmf"
+      },
+      "provenance": {
+        "origin": "repository-generated",
+        "contentClass": "unity-review-scene",
+        "assertedBy": "repository",
+        "note": ""
+      },
+      "sourceAssetIds": [
+        "pdc-v3-g12-r010-candidate-prefab"
+      ],
+      "exists": true,
+      "sizeBytes": 37969,
+      "variantId": "tri-spinner-slab-v3-cmf",
+      "wholeAssembledCaseOnly": true,
+      "explodeEligible": false,
+      "toyPrizeBundled": false,
+      "shippingEligible": false,
+      "visualApproved": false
+    },
+    {
+      "id": "pdc-v3-g12-r010-builder",
+      "stageId": "12-shipping",
+      "slot": "builder",
+      "path": "unity/FidgetingApp/ArtSource/ModelPipeline/premium-display-case/evidence/12-shipping/v3-rev-010/PremiumDisplayCaseGate12R010ReviewBuilder.r010.cs",
+      "sha256": "fab53f244df64329807e70309703238c9525ce82c0fa205fadb18b34e52c5e56",
+      "role": "process",
+      "producer": {
+        "name": "register_tri_spinner_slab_v3_gate12_rev010.py",
+        "version": "2026-09-11",
+        "variant": "tri-spinner-slab-v3-cmf"
+      },
+      "provenance": {
+        "origin": "repository-generated",
+        "contentClass": "r010-builder-snapshot",
+        "assertedBy": "repository",
+        "note": ""
+      },
+      "sourceAssetIds": [
+        "pdc-v3-g12-r010-candidate-prefab"
+      ],
+      "exists": true,
+      "sizeBytes": 31834,
+      "variantId": "tri-spinner-slab-v3-cmf",
+      "wholeAssembledCaseOnly": true,
+      "explodeEligible": false,
+      "toyPrizeBundled": false,
+      "shippingEligible": false,
+      "visualApproved": false
+    },
+    {
+      "id": "pdc-v3-g12-r010-tests",
+      "stageId": "12-shipping",
+      "slot": "tests",
+      "path": "unity/FidgetingApp/ArtSource/ModelPipeline/premium-display-case/evidence/12-shipping/v3-rev-010/PremiumDisplayCaseGate12R010Tests.r010.cs",
+      "sha256": "ab3fe6f5067d45e3c91bcc3a2e2b6f950dc8ca9d272eee8aa139390966d91b4a",
+      "role": "process",
+      "producer": {
+        "name": "register_tri_spinner_slab_v3_gate12_rev010.py",
+        "version": "2026-09-11",
+        "variant": "tri-spinner-slab-v3-cmf"
+      },
+      "provenance": {
+        "origin": "repository-generated",
+        "contentClass": "r010-tests-snapshot",
+        "assertedBy": "repository",
+        "note": ""
+      },
+      "sourceAssetIds": [
+        "pdc-v3-g12-r010-candidate-prefab"
+      ],
+      "exists": true,
+      "sizeBytes": 8303,
+      "variantId": "tri-spinner-slab-v3-cmf",
+      "wholeAssembledCaseOnly": true,
+      "explodeEligible": false,
+      "toyPrizeBundled": false,
+      "shippingEligible": false,
+      "visualApproved": false
+    },
+    {
+      "id": "pdc-v3-g12-r010-pocket-profiles",
+      "stageId": "12-shipping",
+      "slot": "pocket-profiles",
+      "path": "unity/FidgetingApp/ArtSource/ModelPipeline/premium-display-case/evidence/12-shipping/v3-rev-010/PremiumDisplayCaseV3PocketProfiles.r010.cs",
+      "sha256": "702b51cced6b00797688b62c631b62e260012375936f5e75bdc6670248dd5364",
+      "role": "process",
+      "producer": {
+        "name": "register_tri_spinner_slab_v3_gate12_rev010.py",
+        "version": "2026-09-11",
+        "variant": "tri-spinner-slab-v3-cmf"
+      },
+      "provenance": {
+        "origin": "repository-generated",
+        "contentClass": "r010-pocket-profiles-snapshot",
+        "assertedBy": "repository",
+        "note": ""
+      },
+      "sourceAssetIds": [
+        "pdc-v3-g12-r010-candidate-prefab"
+      ],
+      "exists": true,
+      "sizeBytes": 4795,
+      "variantId": "tri-spinner-slab-v3-cmf",
+      "wholeAssembledCaseOnly": true,
+      "explodeEligible": false,
+      "toyPrizeBundled": false,
+      "shippingEligible": false,
+      "visualApproved": false
+    },
+    {
+      "id": "pdc-v3-g12-r010-rarity-cmf",
+      "stageId": "12-shipping",
+      "slot": "rarity-cmf",
+      "path": "unity/FidgetingApp/ArtSource/ModelPipeline/premium-display-case/evidence/12-shipping/v3-rev-010/PremiumDisplayCaseV3RarityCmf.r010.cs",
+      "sha256": "e40469a4be97187e774ef6d5558d62c9d333efe3e695706b049d77ae21bc7477",
+      "role": "process",
+      "producer": {
+        "name": "register_tri_spinner_slab_v3_gate12_rev010.py",
+        "version": "2026-09-11",
+        "variant": "tri-spinner-slab-v3-cmf"
+      },
+      "provenance": {
+        "origin": "repository-generated",
+        "contentClass": "r010-rarity-cmf-snapshot",
+        "assertedBy": "repository",
+        "note": ""
+      },
+      "sourceAssetIds": [
+        "pdc-v3-g12-r010-candidate-prefab"
+      ],
+      "exists": true,
+      "sizeBytes": 7459,
+      "variantId": "tri-spinner-slab-v3-cmf",
+      "wholeAssembledCaseOnly": true,
+      "explodeEligible": false,
+      "toyPrizeBundled": false,
+      "shippingEligible": false,
+      "visualApproved": false
+    },
+    {
+      "id": "pdc-v3-g12-r010-presentation",
+      "stageId": "12-shipping",
+      "slot": "presentation",
+      "path": "unity/FidgetingApp/ArtSource/ModelPipeline/premium-display-case/evidence/12-shipping/v3-rev-010/PremiumDisplayCaseShippingPresentation.r010.cs",
+      "sha256": "1a280ba0e9c952e07daee48e3fb4c700e56286d0fcae197e4a296af45f3c1a93",
+      "role": "process",
+      "producer": {
+        "name": "register_tri_spinner_slab_v3_gate12_rev010.py",
+        "version": "2026-09-11",
+        "variant": "tri-spinner-slab-v3-cmf"
+      },
+      "provenance": {
+        "origin": "repository-generated",
+        "contentClass": "r010-presentation-snapshot",
+        "assertedBy": "repository",
+        "note": ""
+      },
+      "sourceAssetIds": [
+        "pdc-v3-g12-r010-candidate-prefab"
+      ],
+      "exists": true,
+      "sizeBytes": 36249,
+      "variantId": "tri-spinner-slab-v3-cmf",
+      "wholeAssembledCaseOnly": true,
+      "explodeEligible": false,
+      "toyPrizeBundled": false,
+      "shippingEligible": false,
+      "visualApproved": false
+    },
+    {
+      "id": "pdc-v3-g12-r010-composer",
+      "stageId": "12-shipping",
+      "slot": "composer",
+      "path": "unity/FidgetingApp/ArtSource/ModelPipeline/premium-display-case/evidence/12-shipping/v3-rev-010/compose_tri_spinner_slab_gate12_r010.py",
+      "sha256": "ffd99d9866a83abdef057319a649c4dd94e47ccca8ab1376429c8bf795b90c8d",
+      "role": "process",
+      "producer": {
+        "name": "register_tri_spinner_slab_v3_gate12_rev010.py",
+        "version": "2026-09-11",
+        "variant": "tri-spinner-slab-v3-cmf"
+      },
+      "provenance": {
+        "origin": "repository-generated",
+        "contentClass": "r010-composer-snapshot",
+        "assertedBy": "repository",
+        "note": ""
+      },
+      "sourceAssetIds": [
+        "pdc-v3-g12-r010-candidate-prefab"
+      ],
+      "exists": true,
+      "sizeBytes": 8869,
+      "variantId": "tri-spinner-slab-v3-cmf",
+      "wholeAssembledCaseOnly": true,
+      "explodeEligible": false,
+      "toyPrizeBundled": false,
+      "shippingEligible": false,
+      "visualApproved": false
+    },
+    {
+      "id": "pdc-v3-g12-r010-test-results",
+      "stageId": "12-shipping",
+      "slot": "test-results",
+      "path": "unity/FidgetingApp/ArtSource/ModelPipeline/premium-display-case/evidence/12-shipping/v3-rev-010/unity-editmode-results.xml",
+      "sha256": "e81ad73c7e616c60d3cb70c86a5455373cb2a8af97db3eee63dd942e2ef6abef",
+      "role": "validation",
+      "producer": {
+        "name": "register_tri_spinner_slab_v3_gate12_rev010.py",
+        "version": "2026-09-11",
+        "variant": "tri-spinner-slab-v3-cmf"
+      },
+      "provenance": {
+        "origin": "repository-generated",
+        "contentClass": "r010-test-results-snapshot",
+        "assertedBy": "repository",
+        "note": ""
+      },
+      "sourceAssetIds": [
+        "pdc-v3-g12-r010-candidate-prefab"
+      ],
+      "exists": true,
+      "sizeBytes": 61086,
+      "variantId": "tri-spinner-slab-v3-cmf",
+      "wholeAssembledCaseOnly": true,
+      "explodeEligible": false,
+      "toyPrizeBundled": false,
+      "shippingEligible": false,
+      "visualApproved": false
+    },
+    {
+      "id": "pdc-v3-g12-r010-report",
+      "stageId": "12-shipping",
+      "slot": "unity-report",
+      "path": "unity/FidgetingApp/ArtSource/ModelPipeline/premium-display-case/evidence/12-shipping/v3-rev-010/gate12-r010-review-report.json",
+      "sha256": "9955d6c5b4e8d1a0a23abc5186643e9a5ba926fe81497b2c1ce952713bb8f8a9",
+      "role": "validation",
+      "producer": {
+        "name": "register_tri_spinner_slab_v3_gate12_rev010.py",
+        "version": "2026-09-11",
+        "variant": "tri-spinner-slab-v3-cmf"
+      },
+      "provenance": {
+        "origin": "repository-generated",
+        "contentClass": "content-fit-rarity-cmf-report",
+        "assertedBy": "repository",
+        "note": ""
+      },
+      "sourceAssetIds": [
+        "pdc-v3-g12-r010-candidate-prefab"
+      ],
+      "exists": true,
+      "sizeBytes": 7393,
+      "variantId": "tri-spinner-slab-v3-cmf",
+      "wholeAssembledCaseOnly": true,
+      "explodeEligible": false,
+      "toyPrizeBundled": false,
+      "shippingEligible": false,
+      "visualApproved": false
+    },
+    {
+      "id": "pdc-v3-g12-r010-metal-three-blade-pocket-front",
+      "stageId": "12-shipping",
+      "slot": "content-pocket-front",
+      "path": "unity/FidgetingApp/ArtSource/ModelPipeline/premium-display-case/evidence/12-shipping/v3-rev-010/content/metal-three-blade-pocket-front.png",
+      "sha256": "0702d8d23f973ce01421e2fd9768e897f2f69d1d7d43f78179415215c265d05e",
+      "role": "unity-render",
+      "producer": {
+        "name": "register_tri_spinner_slab_v3_gate12_rev010.py",
+        "version": "2026-09-11",
+        "variant": "tri-spinner-slab-v3-cmf"
+      },
+      "provenance": {
+        "origin": "repository-generated",
+        "contentClass": "straight-on-centering-proof",
+        "assertedBy": "repository",
+        "note": "Real shipping renderer snapshot; center 0.00000 mm; occupancy 0.902."
+      },
+      "sourceAssetIds": [
+        "pdc-v3-g12-r010-candidate-prefab"
+      ],
+      "exists": true,
+      "sizeBytes": 917469,
+      "variantId": "tri-spinner-slab-v3-cmf",
+      "wholeAssembledCaseOnly": true,
+      "explodeEligible": false,
+      "toyPrizeBundled": false,
+      "shippingEligible": false,
+      "visualApproved": false
+    },
+    {
+      "id": "pdc-v3-g12-r010-metal-three-blade-phone-front",
+      "stageId": "12-shipping",
+      "slot": "content-phone-front",
+      "path": "unity/FidgetingApp/ArtSource/ModelPipeline/premium-display-case/evidence/12-shipping/v3-rev-010/content/metal-three-blade-phone-front.png",
+      "sha256": "b8c0e2cbb35df72f74b32e769608a2ead94a74bcb0f021423c6c2edc18ab3d60",
+      "role": "unity-render",
+      "producer": {
+        "name": "register_tri_spinner_slab_v3_gate12_rev010.py",
+        "version": "2026-09-11",
+        "variant": "tri-spinner-slab-v3-cmf"
+      },
+      "provenance": {
+        "origin": "repository-generated",
+        "contentClass": "whole-case-phone-front",
+        "assertedBy": "repository",
+        "note": "Real shipping renderer snapshot; center 0.00000 mm; occupancy 0.902."
+      },
+      "sourceAssetIds": [
+        "pdc-v3-g12-r010-candidate-prefab"
+      ],
+      "exists": true,
+      "sizeBytes": 422372,
+      "variantId": "tri-spinner-slab-v3-cmf",
+      "wholeAssembledCaseOnly": true,
+      "explodeEligible": false,
+      "toyPrizeBundled": false,
+      "shippingEligible": false,
+      "visualApproved": false
+    },
+    {
+      "id": "pdc-v3-g12-r010-metal-three-blade-phone-quarter",
+      "stageId": "12-shipping",
+      "slot": "content-phone-quarter",
+      "path": "unity/FidgetingApp/ArtSource/ModelPipeline/premium-display-case/evidence/12-shipping/v3-rev-010/content/metal-three-blade-phone-quarter.png",
+      "sha256": "997ccf86d9125932c4add60bd1eca59acb6aedcd4904baaad10b9e87df5d1566",
+      "role": "unity-render",
+      "producer": {
+        "name": "register_tri_spinner_slab_v3_gate12_rev010.py",
+        "version": "2026-09-11",
+        "variant": "tri-spinner-slab-v3-cmf"
+      },
+      "provenance": {
+        "origin": "repository-generated",
+        "contentClass": "whole-case-phone-quarter",
+        "assertedBy": "repository",
+        "note": "Real shipping renderer snapshot; center 0.00000 mm; occupancy 0.902."
+      },
+      "sourceAssetIds": [
+        "pdc-v3-g12-r010-candidate-prefab"
+      ],
+      "exists": true,
+      "sizeBytes": 585389,
+      "variantId": "tri-spinner-slab-v3-cmf",
+      "wholeAssembledCaseOnly": true,
+      "explodeEligible": false,
+      "toyPrizeBundled": false,
+      "shippingEligible": false,
+      "visualApproved": false
+    },
+    {
+      "id": "pdc-v3-g12-r010-graphite-two-lobe-pocket-front",
+      "stageId": "12-shipping",
+      "slot": "content-pocket-front",
+      "path": "unity/FidgetingApp/ArtSource/ModelPipeline/premium-display-case/evidence/12-shipping/v3-rev-010/content/graphite-two-lobe-pocket-front.png",
+      "sha256": "e3a9e7e797ddcc6f950a0d7c0d760defa5716d1949233b0bd0ca0ee902748710",
+      "role": "unity-render",
+      "producer": {
+        "name": "register_tri_spinner_slab_v3_gate12_rev010.py",
+        "version": "2026-09-11",
+        "variant": "tri-spinner-slab-v3-cmf"
+      },
+      "provenance": {
+        "origin": "repository-generated",
+        "contentClass": "straight-on-centering-proof",
+        "assertedBy": "repository",
+        "note": "Real shipping renderer snapshot; center 0.00000 mm; occupancy 0.793."
+      },
+      "sourceAssetIds": [
+        "pdc-v3-g12-r010-candidate-prefab"
+      ],
+      "exists": true,
+      "sizeBytes": 1078330,
+      "variantId": "tri-spinner-slab-v3-cmf",
+      "wholeAssembledCaseOnly": true,
+      "explodeEligible": false,
+      "toyPrizeBundled": false,
+      "shippingEligible": false,
+      "visualApproved": false
+    },
+    {
+      "id": "pdc-v3-g12-r010-graphite-two-lobe-phone-front",
+      "stageId": "12-shipping",
+      "slot": "content-phone-front",
+      "path": "unity/FidgetingApp/ArtSource/ModelPipeline/premium-display-case/evidence/12-shipping/v3-rev-010/content/graphite-two-lobe-phone-front.png",
+      "sha256": "9e97179208a6ecd000c57acc63d84627616405d47fd22e1ede26a38cc3951494",
+      "role": "unity-render",
+      "producer": {
+        "name": "register_tri_spinner_slab_v3_gate12_rev010.py",
+        "version": "2026-09-11",
+        "variant": "tri-spinner-slab-v3-cmf"
+      },
+      "provenance": {
+        "origin": "repository-generated",
+        "contentClass": "whole-case-phone-front",
+        "assertedBy": "repository",
+        "note": "Real shipping renderer snapshot; center 0.00000 mm; occupancy 0.793."
+      },
+      "sourceAssetIds": [
+        "pdc-v3-g12-r010-candidate-prefab"
+      ],
+      "exists": true,
+      "sizeBytes": 439972,
+      "variantId": "tri-spinner-slab-v3-cmf",
+      "wholeAssembledCaseOnly": true,
+      "explodeEligible": false,
+      "toyPrizeBundled": false,
+      "shippingEligible": false,
+      "visualApproved": false
+    },
+    {
+      "id": "pdc-v3-g12-r010-graphite-two-lobe-phone-quarter",
+      "stageId": "12-shipping",
+      "slot": "content-phone-quarter",
+      "path": "unity/FidgetingApp/ArtSource/ModelPipeline/premium-display-case/evidence/12-shipping/v3-rev-010/content/graphite-two-lobe-phone-quarter.png",
+      "sha256": "88a7ee275aefafeab29eb8de622a3ac0861f5fdd4089bde087f097568e731942",
+      "role": "unity-render",
+      "producer": {
+        "name": "register_tri_spinner_slab_v3_gate12_rev010.py",
+        "version": "2026-09-11",
+        "variant": "tri-spinner-slab-v3-cmf"
+      },
+      "provenance": {
+        "origin": "repository-generated",
+        "contentClass": "whole-case-phone-quarter",
+        "assertedBy": "repository",
+        "note": "Real shipping renderer snapshot; center 0.00000 mm; occupancy 0.793."
+      },
+      "sourceAssetIds": [
+        "pdc-v3-g12-r010-candidate-prefab"
+      ],
+      "exists": true,
+      "sizeBytes": 609937,
+      "variantId": "tri-spinner-slab-v3-cmf",
+      "wholeAssembledCaseOnly": true,
+      "explodeEligible": false,
+      "toyPrizeBundled": false,
+      "shippingEligible": false,
+      "visualApproved": false
+    },
+    {
+      "id": "pdc-v3-g12-r010-magnetic-slide-tile-pocket-front",
+      "stageId": "12-shipping",
+      "slot": "content-pocket-front",
+      "path": "unity/FidgetingApp/ArtSource/ModelPipeline/premium-display-case/evidence/12-shipping/v3-rev-010/content/magnetic-slide-tile-pocket-front.png",
+      "sha256": "865b33004e3efa5266a3853e6d9889dbd7cb243b127d86153dcaa2fd51b97b86",
+      "role": "unity-render",
+      "producer": {
+        "name": "register_tri_spinner_slab_v3_gate12_rev010.py",
+        "version": "2026-09-11",
+        "variant": "tri-spinner-slab-v3-cmf"
+      },
+      "provenance": {
+        "origin": "repository-generated",
+        "contentClass": "straight-on-centering-proof",
+        "assertedBy": "repository",
+        "note": "Real shipping renderer snapshot; center 0.00000 mm; occupancy 1.000."
+      },
+      "sourceAssetIds": [
+        "pdc-v3-g12-r010-candidate-prefab"
+      ],
+      "exists": true,
+      "sizeBytes": 1819266,
+      "variantId": "tri-spinner-slab-v3-cmf",
+      "wholeAssembledCaseOnly": true,
+      "explodeEligible": false,
+      "toyPrizeBundled": false,
+      "shippingEligible": false,
+      "visualApproved": false
+    },
+    {
+      "id": "pdc-v3-g12-r010-magnetic-slide-tile-phone-front",
+      "stageId": "12-shipping",
+      "slot": "content-phone-front",
+      "path": "unity/FidgetingApp/ArtSource/ModelPipeline/premium-display-case/evidence/12-shipping/v3-rev-010/content/magnetic-slide-tile-phone-front.png",
+      "sha256": "d8416bbc24db1b4f08c6a6b7bfbe9df5c8c0d9812358d061a684efcad14cb653",
+      "role": "unity-render",
+      "producer": {
+        "name": "register_tri_spinner_slab_v3_gate12_rev010.py",
+        "version": "2026-09-11",
+        "variant": "tri-spinner-slab-v3-cmf"
+      },
+      "provenance": {
+        "origin": "repository-generated",
+        "contentClass": "whole-case-phone-front",
+        "assertedBy": "repository",
+        "note": "Real shipping renderer snapshot; center 0.00000 mm; occupancy 1.000."
+      },
+      "sourceAssetIds": [
+        "pdc-v3-g12-r010-candidate-prefab"
+      ],
+      "exists": true,
+      "sizeBytes": 595972,
+      "variantId": "tri-spinner-slab-v3-cmf",
+      "wholeAssembledCaseOnly": true,
+      "explodeEligible": false,
+      "toyPrizeBundled": false,
+      "shippingEligible": false,
+      "visualApproved": false
+    },
+    {
+      "id": "pdc-v3-g12-r010-magnetic-slide-tile-phone-quarter",
+      "stageId": "12-shipping",
+      "slot": "content-phone-quarter",
+      "path": "unity/FidgetingApp/ArtSource/ModelPipeline/premium-display-case/evidence/12-shipping/v3-rev-010/content/magnetic-slide-tile-phone-quarter.png",
+      "sha256": "9f02780795efd720b255dd5d7e3069b39a91ed969f54ca97e8dc35e67b0709bf",
+      "role": "unity-render",
+      "producer": {
+        "name": "register_tri_spinner_slab_v3_gate12_rev010.py",
+        "version": "2026-09-11",
+        "variant": "tri-spinner-slab-v3-cmf"
+      },
+      "provenance": {
+        "origin": "repository-generated",
+        "contentClass": "whole-case-phone-quarter",
+        "assertedBy": "repository",
+        "note": "Real shipping renderer snapshot; center 0.00000 mm; occupancy 1.000."
+      },
+      "sourceAssetIds": [
+        "pdc-v3-g12-r010-candidate-prefab"
+      ],
+      "exists": true,
+      "sizeBytes": 717353,
+      "variantId": "tri-spinner-slab-v3-cmf",
+      "wholeAssembledCaseOnly": true,
+      "explodeEligible": false,
+      "toyPrizeBundled": false,
+      "shippingEligible": false,
+      "visualApproved": false
+    },
+    {
+      "id": "pdc-v3-g12-r010-magnetic-fan-card-pocket-front",
+      "stageId": "12-shipping",
+      "slot": "content-pocket-front",
+      "path": "unity/FidgetingApp/ArtSource/ModelPipeline/premium-display-case/evidence/12-shipping/v3-rev-010/content/magnetic-fan-card-pocket-front.png",
+      "sha256": "86b34b9dace041e3e77d99e9fff2d8931eaea4dbd7046d4d769444be9ec4d7fd",
+      "role": "unity-render",
+      "producer": {
+        "name": "register_tri_spinner_slab_v3_gate12_rev010.py",
+        "version": "2026-09-11",
+        "variant": "tri-spinner-slab-v3-cmf"
+      },
+      "provenance": {
+        "origin": "repository-generated",
+        "contentClass": "straight-on-centering-proof",
+        "assertedBy": "repository",
+        "note": "Real shipping renderer snapshot; center 0.00001 mm; occupancy 1.000."
+      },
+      "sourceAssetIds": [
+        "pdc-v3-g12-r010-candidate-prefab"
+      ],
+      "exists": true,
+      "sizeBytes": 912399,
+      "variantId": "tri-spinner-slab-v3-cmf",
+      "wholeAssembledCaseOnly": true,
+      "explodeEligible": false,
+      "toyPrizeBundled": false,
+      "shippingEligible": false,
+      "visualApproved": false
+    },
+    {
+      "id": "pdc-v3-g12-r010-magnetic-fan-card-phone-front",
+      "stageId": "12-shipping",
+      "slot": "content-phone-front",
+      "path": "unity/FidgetingApp/ArtSource/ModelPipeline/premium-display-case/evidence/12-shipping/v3-rev-010/content/magnetic-fan-card-phone-front.png",
+      "sha256": "6fadba7d25f1287a5100471bc61f7bc664a0792e3d8645329dfbad1f12586e98",
+      "role": "unity-render",
+      "producer": {
+        "name": "register_tri_spinner_slab_v3_gate12_rev010.py",
+        "version": "2026-09-11",
+        "variant": "tri-spinner-slab-v3-cmf"
+      },
+      "provenance": {
+        "origin": "repository-generated",
+        "contentClass": "whole-case-phone-front",
+        "assertedBy": "repository",
+        "note": "Real shipping renderer snapshot; center 0.00001 mm; occupancy 1.000."
+      },
+      "sourceAssetIds": [
+        "pdc-v3-g12-r010-candidate-prefab"
+      ],
+      "exists": true,
+      "sizeBytes": 413992,
+      "variantId": "tri-spinner-slab-v3-cmf",
+      "wholeAssembledCaseOnly": true,
+      "explodeEligible": false,
+      "toyPrizeBundled": false,
+      "shippingEligible": false,
+      "visualApproved": false
+    },
+    {
+      "id": "pdc-v3-g12-r010-magnetic-fan-card-phone-quarter",
+      "stageId": "12-shipping",
+      "slot": "content-phone-quarter",
+      "path": "unity/FidgetingApp/ArtSource/ModelPipeline/premium-display-case/evidence/12-shipping/v3-rev-010/content/magnetic-fan-card-phone-quarter.png",
+      "sha256": "2141ba8bd0fc203499d5e6da45362a18203b728200a37ba097e001a00f8aaf90",
+      "role": "unity-render",
+      "producer": {
+        "name": "register_tri_spinner_slab_v3_gate12_rev010.py",
+        "version": "2026-09-11",
+        "variant": "tri-spinner-slab-v3-cmf"
+      },
+      "provenance": {
+        "origin": "repository-generated",
+        "contentClass": "whole-case-phone-quarter",
+        "assertedBy": "repository",
+        "note": "Real shipping renderer snapshot; center 0.00001 mm; occupancy 1.000."
+      },
+      "sourceAssetIds": [
+        "pdc-v3-g12-r010-candidate-prefab"
+      ],
+      "exists": true,
+      "sizeBytes": 600982,
+      "variantId": "tri-spinner-slab-v3-cmf",
+      "wholeAssembledCaseOnly": true,
+      "explodeEligible": false,
+      "toyPrizeBundled": false,
+      "shippingEligible": false,
+      "visualApproved": false
+    },
+    {
+      "id": "pdc-v3-g12-r010-rarity-steel-phone-front",
+      "stageId": "12-shipping",
+      "slot": "rarity-phone-front",
+      "path": "unity/FidgetingApp/ArtSource/ModelPipeline/premium-display-case/evidence/12-shipping/v3-rev-010/rarity/steel-phone-front.png",
+      "sha256": "e4b29323d85929fb3e8941a63a52f9028c93eb28acc4cec6cbd84c84ca7dfdc8",
+      "role": "unity-render",
+      "producer": {
+        "name": "register_tri_spinner_slab_v3_gate12_rev010.py",
+        "version": "2026-09-11",
+        "variant": "tri-spinner-slab-v3-cmf"
+      },
+      "provenance": {
+        "origin": "repository-generated",
+        "contentClass": "whole-case-rarity-cmf",
+        "assertedBy": "repository",
+        "note": "STANDARD using locked muted accent/liner plus proposed near-black header."
+      },
+      "sourceAssetIds": [
+        "pdc-v3-g12-r010-candidate-prefab"
+      ],
+      "exists": true,
+      "sizeBytes": 422522,
+      "variantId": "tri-spinner-slab-v3-cmf",
+      "wholeAssembledCaseOnly": true,
+      "explodeEligible": false,
+      "toyPrizeBundled": false,
+      "shippingEligible": false,
+      "visualApproved": false
+    },
+    {
+      "id": "pdc-v3-g12-r010-rarity-steel-header-front",
+      "stageId": "12-shipping",
+      "slot": "rarity-header-front",
+      "path": "unity/FidgetingApp/ArtSource/ModelPipeline/premium-display-case/evidence/12-shipping/v3-rev-010/rarity/steel-header-front.png",
+      "sha256": "e45cef3d67de76aa705cdcb1613b869767231b933874687a7012a867aa0e1a2f",
+      "role": "unity-render",
+      "producer": {
+        "name": "register_tri_spinner_slab_v3_gate12_rev010.py",
+        "version": "2026-09-11",
+        "variant": "tri-spinner-slab-v3-cmf"
+      },
+      "provenance": {
+        "origin": "repository-generated",
+        "contentClass": "header-rarity-cmf-macro",
+        "assertedBy": "repository",
+        "note": "STANDARD using locked muted accent/liner plus proposed near-black header."
+      },
+      "sourceAssetIds": [
+        "pdc-v3-g12-r010-candidate-prefab"
+      ],
+      "exists": true,
+      "sizeBytes": 229493,
+      "variantId": "tri-spinner-slab-v3-cmf",
+      "wholeAssembledCaseOnly": true,
+      "explodeEligible": false,
+      "toyPrizeBundled": false,
+      "shippingEligible": false,
+      "visualApproved": false
+    },
+    {
+      "id": "pdc-v3-g12-r010-rarity-copper-phone-front",
+      "stageId": "12-shipping",
+      "slot": "rarity-phone-front",
+      "path": "unity/FidgetingApp/ArtSource/ModelPipeline/premium-display-case/evidence/12-shipping/v3-rev-010/rarity/copper-phone-front.png",
+      "sha256": "ad5e6c1138affc20b6ba821ef9032f219ba1eaa5d41db67b007a811d4ffc746b",
+      "role": "unity-render",
+      "producer": {
+        "name": "register_tri_spinner_slab_v3_gate12_rev010.py",
+        "version": "2026-09-11",
+        "variant": "tri-spinner-slab-v3-cmf"
+      },
+      "provenance": {
+        "origin": "repository-generated",
+        "contentClass": "whole-case-rarity-cmf",
+        "assertedBy": "repository",
+        "note": "REFINED using locked muted accent/liner plus proposed near-black header."
+      },
+      "sourceAssetIds": [
+        "pdc-v3-g12-r010-candidate-prefab"
+      ],
+      "exists": true,
+      "sizeBytes": 420851,
+      "variantId": "tri-spinner-slab-v3-cmf",
+      "wholeAssembledCaseOnly": true,
+      "explodeEligible": false,
+      "toyPrizeBundled": false,
+      "shippingEligible": false,
+      "visualApproved": false
+    },
+    {
+      "id": "pdc-v3-g12-r010-rarity-copper-header-front",
+      "stageId": "12-shipping",
+      "slot": "rarity-header-front",
+      "path": "unity/FidgetingApp/ArtSource/ModelPipeline/premium-display-case/evidence/12-shipping/v3-rev-010/rarity/copper-header-front.png",
+      "sha256": "d7fd1461e2fc1992045785eadd9b19b2fc8928193252ff212344a2b6ce39526d",
+      "role": "unity-render",
+      "producer": {
+        "name": "register_tri_spinner_slab_v3_gate12_rev010.py",
+        "version": "2026-09-11",
+        "variant": "tri-spinner-slab-v3-cmf"
+      },
+      "provenance": {
+        "origin": "repository-generated",
+        "contentClass": "header-rarity-cmf-macro",
+        "assertedBy": "repository",
+        "note": "REFINED using locked muted accent/liner plus proposed near-black header."
+      },
+      "sourceAssetIds": [
+        "pdc-v3-g12-r010-candidate-prefab"
+      ],
+      "exists": true,
+      "sizeBytes": 219150,
+      "variantId": "tri-spinner-slab-v3-cmf",
+      "wholeAssembledCaseOnly": true,
+      "explodeEligible": false,
+      "toyPrizeBundled": false,
+      "shippingEligible": false,
+      "visualApproved": false
+    },
+    {
+      "id": "pdc-v3-g12-r010-rarity-silver-phone-front",
+      "stageId": "12-shipping",
+      "slot": "rarity-phone-front",
+      "path": "unity/FidgetingApp/ArtSource/ModelPipeline/premium-display-case/evidence/12-shipping/v3-rev-010/rarity/silver-phone-front.png",
+      "sha256": "516ea6cca38973d63652b0e400c920739b3f201ee47199abf0b29535b6388197",
+      "role": "unity-render",
+      "producer": {
+        "name": "register_tri_spinner_slab_v3_gate12_rev010.py",
+        "version": "2026-09-11",
+        "variant": "tri-spinner-slab-v3-cmf"
+      },
+      "provenance": {
+        "origin": "repository-generated",
+        "contentClass": "whole-case-rarity-cmf",
+        "assertedBy": "repository",
+        "note": "SIGNATURE using locked muted accent/liner plus proposed near-black header."
+      },
+      "sourceAssetIds": [
+        "pdc-v3-g12-r010-candidate-prefab"
+      ],
+      "exists": true,
+      "sizeBytes": 423048,
+      "variantId": "tri-spinner-slab-v3-cmf",
+      "wholeAssembledCaseOnly": true,
+      "explodeEligible": false,
+      "toyPrizeBundled": false,
+      "shippingEligible": false,
+      "visualApproved": false
+    },
+    {
+      "id": "pdc-v3-g12-r010-rarity-silver-header-front",
+      "stageId": "12-shipping",
+      "slot": "rarity-header-front",
+      "path": "unity/FidgetingApp/ArtSource/ModelPipeline/premium-display-case/evidence/12-shipping/v3-rev-010/rarity/silver-header-front.png",
+      "sha256": "37d098e8b6a39457e51793571d559cd82be5d66c24d66134b1af39c0715a07e9",
+      "role": "unity-render",
+      "producer": {
+        "name": "register_tri_spinner_slab_v3_gate12_rev010.py",
+        "version": "2026-09-11",
+        "variant": "tri-spinner-slab-v3-cmf"
+      },
+      "provenance": {
+        "origin": "repository-generated",
+        "contentClass": "header-rarity-cmf-macro",
+        "assertedBy": "repository",
+        "note": "SIGNATURE using locked muted accent/liner plus proposed near-black header."
+      },
+      "sourceAssetIds": [
+        "pdc-v3-g12-r010-candidate-prefab"
+      ],
+      "exists": true,
+      "sizeBytes": 226557,
+      "variantId": "tri-spinner-slab-v3-cmf",
+      "wholeAssembledCaseOnly": true,
+      "explodeEligible": false,
+      "toyPrizeBundled": false,
+      "shippingEligible": false,
+      "visualApproved": false
+    },
+    {
+      "id": "pdc-v3-g12-r010-rarity-gold-phone-front",
+      "stageId": "12-shipping",
+      "slot": "rarity-phone-front",
+      "path": "unity/FidgetingApp/ArtSource/ModelPipeline/premium-display-case/evidence/12-shipping/v3-rev-010/rarity/gold-phone-front.png",
+      "sha256": "20c573b4c34c94c47d9f3b53b03f6742cfa8e62e24210a4dac29289930d6fa47",
+      "role": "unity-render",
+      "producer": {
+        "name": "register_tri_spinner_slab_v3_gate12_rev010.py",
+        "version": "2026-09-11",
+        "variant": "tri-spinner-slab-v3-cmf"
+      },
+      "provenance": {
+        "origin": "repository-generated",
+        "contentClass": "whole-case-rarity-cmf",
+        "assertedBy": "repository",
+        "note": "HEIRLOOM using locked muted accent/liner plus proposed near-black header."
+      },
+      "sourceAssetIds": [
+        "pdc-v3-g12-r010-candidate-prefab"
+      ],
+      "exists": true,
+      "sizeBytes": 430314,
+      "variantId": "tri-spinner-slab-v3-cmf",
+      "wholeAssembledCaseOnly": true,
+      "explodeEligible": false,
+      "toyPrizeBundled": false,
+      "shippingEligible": false,
+      "visualApproved": false
+    },
+    {
+      "id": "pdc-v3-g12-r010-rarity-gold-header-front",
+      "stageId": "12-shipping",
+      "slot": "rarity-header-front",
+      "path": "unity/FidgetingApp/ArtSource/ModelPipeline/premium-display-case/evidence/12-shipping/v3-rev-010/rarity/gold-header-front.png",
+      "sha256": "bd4bbd8466e19eb7cbce7b14aa5669ab507b2e6d63c5743b7219d73db8cb67a9",
+      "role": "unity-render",
+      "producer": {
+        "name": "register_tri_spinner_slab_v3_gate12_rev010.py",
+        "version": "2026-09-11",
+        "variant": "tri-spinner-slab-v3-cmf"
+      },
+      "provenance": {
+        "origin": "repository-generated",
+        "contentClass": "header-rarity-cmf-macro",
+        "assertedBy": "repository",
+        "note": "HEIRLOOM using locked muted accent/liner plus proposed near-black header."
+      },
+      "sourceAssetIds": [
+        "pdc-v3-g12-r010-candidate-prefab"
+      ],
+      "exists": true,
+      "sizeBytes": 230714,
+      "variantId": "tri-spinner-slab-v3-cmf",
+      "wholeAssembledCaseOnly": true,
+      "explodeEligible": false,
+      "toyPrizeBundled": false,
+      "shippingEligible": false,
+      "visualApproved": false
+    },
+    {
+      "id": "pdc-v3-g12-r010-content-phone-matrix",
+      "stageId": "12-shipping",
+      "slot": "review-sheet",
+      "path": "Artifacts/TriSpinnerSlab/gate12-r010/gate12-r010-content-phone-matrix-20260911T145551Z.png",
+      "sha256": "70810bf436b961d86a29ada3d7b9b96efb4bd7fe212c86a37b0cf262806bba94",
+      "role": "shipping-render",
+      "producer": {
+        "name": "register_tri_spinner_slab_v3_gate12_rev010.py",
+        "version": "2026-09-11",
+        "variant": "tri-spinner-slab-v3-cmf"
+      },
+      "provenance": {
+        "origin": "repository-generated",
+        "contentClass": "whole-case-content-matrix",
+        "assertedBy": "repository",
+        "note": ""
+      },
+      "sourceAssetIds": [
+        "pdc-v3-g12-r010-report"
+      ],
+      "exists": true,
+      "sizeBytes": 746081,
+      "variantId": "tri-spinner-slab-v3-cmf",
+      "wholeAssembledCaseOnly": true,
+      "explodeEligible": false,
+      "toyPrizeBundled": false,
+      "shippingEligible": false,
+      "visualApproved": false
+    },
+    {
+      "id": "pdc-v3-g12-r010-content-center-proof",
+      "stageId": "12-shipping",
+      "slot": "review-sheet",
+      "path": "Artifacts/TriSpinnerSlab/gate12-r010/gate12-r010-content-center-proof-20260911T145551Z.png",
+      "sha256": "89f7877eacc8cd4250559e60cbc4a310c669ac49ac9233a689f2a3273d28d0b6",
+      "role": "shipping-render",
+      "producer": {
+        "name": "register_tri_spinner_slab_v3_gate12_rev010.py",
+        "version": "2026-09-11",
+        "variant": "tri-spinner-slab-v3-cmf"
+      },
+      "provenance": {
+        "origin": "repository-generated",
+        "contentClass": "annotated-content-centering-proof",
+        "assertedBy": "repository",
+        "note": ""
+      },
+      "sourceAssetIds": [
+        "pdc-v3-g12-r010-report"
+      ],
+      "exists": true,
+      "sizeBytes": 932645,
+      "variantId": "tri-spinner-slab-v3-cmf",
+      "wholeAssembledCaseOnly": true,
+      "explodeEligible": false,
+      "toyPrizeBundled": false,
+      "shippingEligible": false,
+      "visualApproved": false
+    },
+    {
+      "id": "pdc-v3-g12-r010-content-quarter-matrix",
+      "stageId": "12-shipping",
+      "slot": "review-sheet",
+      "path": "Artifacts/TriSpinnerSlab/gate12-r010/gate12-r010-content-quarter-matrix-20260911T145551Z.png",
+      "sha256": "f4ae3010a195b97491a2ec41c0130567a34154cf78549fe359f602025b21b287",
+      "role": "shipping-render",
+      "producer": {
+        "name": "register_tri_spinner_slab_v3_gate12_rev010.py",
+        "version": "2026-09-11",
+        "variant": "tri-spinner-slab-v3-cmf"
+      },
+      "provenance": {
+        "origin": "repository-generated",
+        "contentClass": "whole-case-quarter-matrix",
+        "assertedBy": "repository",
+        "note": ""
+      },
+      "sourceAssetIds": [
+        "pdc-v3-g12-r010-report"
+      ],
+      "exists": true,
+      "sizeBytes": 811246,
+      "variantId": "tri-spinner-slab-v3-cmf",
+      "wholeAssembledCaseOnly": true,
+      "explodeEligible": false,
+      "toyPrizeBundled": false,
+      "shippingEligible": false,
+      "visualApproved": false
+    },
+    {
+      "id": "pdc-v3-g12-r010-rarity-cmf-matrix",
+      "stageId": "12-shipping",
+      "slot": "review-sheet",
+      "path": "Artifacts/TriSpinnerSlab/gate12-r010/gate12-r010-rarity-cmf-matrix-20260911T145551Z.png",
+      "sha256": "bef8f3e07f9f5a427e249b681e2b9b9a3949af27072c9c3dbc3288926c957573",
+      "role": "shipping-render",
+      "producer": {
+        "name": "register_tri_spinner_slab_v3_gate12_rev010.py",
+        "version": "2026-09-11",
+        "variant": "tri-spinner-slab-v3-cmf"
+      },
+      "provenance": {
+        "origin": "repository-generated",
+        "contentClass": "whole-case-and-header-rarity-matrix",
+        "assertedBy": "repository",
+        "note": ""
+      },
+      "sourceAssetIds": [
+        "pdc-v3-g12-r010-report"
+      ],
+      "exists": true,
+      "sizeBytes": 551500,
+      "variantId": "tri-spinner-slab-v3-cmf",
+      "wholeAssembledCaseOnly": true,
+      "explodeEligible": false,
+      "toyPrizeBundled": false,
+      "shippingEligible": false,
+      "visualApproved": false
+    },
+    {
+      "id": "pdc-v3-g12-r010-image-audit",
+      "stageId": "12-shipping",
+      "slot": "image-audit",
+      "path": "Artifacts/TriSpinnerSlab/gate12-r010/gate12-r010-review-audit-20260911T145551Z.json",
+      "sha256": "b78f198d675c77f625393d43f0bdb918a3e427b6be29e71744704ad2dc04fc82",
+      "role": "validation",
+      "producer": {
+        "name": "register_tri_spinner_slab_v3_gate12_rev010.py",
+        "version": "2026-09-11",
+        "variant": "tri-spinner-slab-v3-cmf"
+      },
+      "provenance": {
+        "origin": "repository-generated",
+        "contentClass": "deterministic-review-image-audit",
+        "assertedBy": "repository",
+        "note": ""
+      },
+      "sourceAssetIds": [
+        "pdc-v3-g12-r010-content-phone-matrix",
+        "pdc-v3-g12-r010-content-center-proof",
+        "pdc-v3-g12-r010-content-quarter-matrix",
+        "pdc-v3-g12-r010-rarity-cmf-matrix"
+      ],
+      "exists": true,
+      "sizeBytes": 2027,
+      "variantId": "tri-spinner-slab-v3-cmf",
+      "wholeAssembledCaseOnly": true,
+      "explodeEligible": false,
+      "toyPrizeBundled": false,
+      "shippingEligible": false,
+      "visualApproved": false
+    },
+    {
+      "id": "pdc-v3-g12-r010-fan-guardrails",
+      "stageId": "12-shipping",
+      "slot": "fan-card-guardrails",
+      "path": "unity/FidgetingApp/ArtSource/ModelPipeline/premium-display-case/evidence/12-shipping/v3-rev-010/fan-card-guardrails-full.txt",
+      "sha256": "117ec94b38a5551e0037bfc53241f442e5de2bb3cfd6846cad1d0c36c5bebc9b",
+      "role": "validation",
+      "producer": {
+        "name": "register_tri_spinner_slab_v3_gate12_rev010_fan_validation.py",
+        "version": "2026-09-11",
+        "variant": "tri-spinner-slab-v3-cmf"
+      },
+      "provenance": {
+        "origin": "repository-generated",
+        "contentClass": "fan-card-full-guardrails-pass",
+        "assertedBy": "repository",
+        "note": "Fan-card geometry was not changed by the slab preview."
+      },
+      "sourceAssetIds": [
+        "pdc-v3-g12-r010-magnetic-fan-card-pocket-front"
+      ],
+      "exists": true,
+      "sizeBytes": 2790,
+      "variantId": "tri-spinner-slab-v3-cmf",
+      "wholeAssembledCaseOnly": true,
+      "explodeEligible": false,
+      "toyPrizeBundled": false,
+      "shippingEligible": false,
+      "visualApproved": false
+    },
+    {
+      "id": "pdc-v3-g12-r010-fan-geometry",
+      "stageId": "12-shipping",
+      "slot": "fan-card-geometry-validation",
+      "path": "unity/FidgetingApp/ArtSource/ModelPipeline/premium-display-case/evidence/12-shipping/v3-rev-010/fan-card-geometry-validation.log",
+      "sha256": "6788fafbe6745224b1196d9324e8b165ee8a9d4ea49cd65ee293b74db1866dfc",
+      "role": "validation",
+      "producer": {
+        "name": "register_tri_spinner_slab_v3_gate12_rev010_fan_validation.py",
+        "version": "2026-09-11",
+        "variant": "tri-spinner-slab-v3-cmf"
+      },
+      "provenance": {
+        "origin": "repository-generated",
+        "contentClass": "fan-card-unity-geometry-pass",
+        "assertedBy": "repository",
+        "note": "Fan-card geometry was not changed by the slab preview."
+      },
+      "sourceAssetIds": [
+        "pdc-v3-g12-r010-magnetic-fan-card-pocket-front"
+      ],
+      "exists": true,
+      "sizeBytes": 5298,
+      "variantId": "tri-spinner-slab-v3-cmf",
+      "wholeAssembledCaseOnly": true,
+      "explodeEligible": false,
+      "toyPrizeBundled": false,
+      "shippingEligible": false,
+      "visualApproved": false
+    },
+    {
+      "id": "pdc-v3-g12-r010-fan-tests",
+      "stageId": "12-shipping",
+      "slot": "fan-card-test-results",
+      "path": "unity/FidgetingApp/ArtSource/ModelPipeline/premium-display-case/evidence/12-shipping/v3-rev-010/fan-card-acceptance-results.xml",
+      "sha256": "49db354b27f3d8936cac212fbc198ea0758aad9b9720ab4e6139d1f0a3a5a5c7",
+      "role": "validation",
+      "producer": {
+        "name": "register_tri_spinner_slab_v3_gate12_rev010_fan_validation.py",
+        "version": "2026-09-11",
+        "variant": "tri-spinner-slab-v3-cmf"
+      },
+      "provenance": {
+        "origin": "repository-generated",
+        "contentClass": "fan-card-editmode-23-of-23",
+        "assertedBy": "repository",
+        "note": "Fan-card geometry was not changed by the slab preview."
+      },
+      "sourceAssetIds": [
+        "pdc-v3-g12-r010-magnetic-fan-card-pocket-front"
+      ],
+      "exists": true,
+      "sizeBytes": 26344,
+      "variantId": "tri-spinner-slab-v3-cmf",
+      "wholeAssembledCaseOnly": true,
+      "explodeEligible": false,
+      "toyPrizeBundled": false,
+      "shippingEligible": false,
+      "visualApproved": false
     }
   ],
   "claims": [
@@ -74019,307 +75330,312 @@
     },
     {
       "id": "12-shipping",
-      "revision": 9,
+      "revision": 10,
       "status": "draft",
-      "artifactIds": [],
+      "artifactIds": [
+        "pdc-v3-g12-r010-candidate-prefab",
+        "pdc-v3-g12-r010-review-scene",
+        "pdc-v3-g12-r010-builder",
+        "pdc-v3-g12-r010-tests",
+        "pdc-v3-g12-r010-pocket-profiles",
+        "pdc-v3-g12-r010-rarity-cmf",
+        "pdc-v3-g12-r010-presentation",
+        "pdc-v3-g12-r010-composer",
+        "pdc-v3-g12-r010-test-results",
+        "pdc-v3-g12-r010-report",
+        "pdc-v3-g12-r010-metal-three-blade-pocket-front",
+        "pdc-v3-g12-r010-metal-three-blade-phone-front",
+        "pdc-v3-g12-r010-metal-three-blade-phone-quarter",
+        "pdc-v3-g12-r010-graphite-two-lobe-pocket-front",
+        "pdc-v3-g12-r010-graphite-two-lobe-phone-front",
+        "pdc-v3-g12-r010-graphite-two-lobe-phone-quarter",
+        "pdc-v3-g12-r010-magnetic-slide-tile-pocket-front",
+        "pdc-v3-g12-r010-magnetic-slide-tile-phone-front",
+        "pdc-v3-g12-r010-magnetic-slide-tile-phone-quarter",
+        "pdc-v3-g12-r010-magnetic-fan-card-pocket-front",
+        "pdc-v3-g12-r010-magnetic-fan-card-phone-front",
+        "pdc-v3-g12-r010-magnetic-fan-card-phone-quarter",
+        "pdc-v3-g12-r010-rarity-steel-phone-front",
+        "pdc-v3-g12-r010-rarity-steel-header-front",
+        "pdc-v3-g12-r010-rarity-copper-phone-front",
+        "pdc-v3-g12-r010-rarity-copper-header-front",
+        "pdc-v3-g12-r010-rarity-silver-phone-front",
+        "pdc-v3-g12-r010-rarity-silver-header-front",
+        "pdc-v3-g12-r010-rarity-gold-phone-front",
+        "pdc-v3-g12-r010-rarity-gold-header-front",
+        "pdc-v3-g12-r010-content-phone-matrix",
+        "pdc-v3-g12-r010-content-center-proof",
+        "pdc-v3-g12-r010-content-quarter-matrix",
+        "pdc-v3-g12-r010-rarity-cmf-matrix",
+        "pdc-v3-g12-r010-image-audit",
+        "pdc-v3-g12-r010-fan-guardrails",
+        "pdc-v3-g12-r010-fan-geometry",
+        "pdc-v3-g12-r010-fan-tests"
+      ],
       "inputDigest": "b4a33df5846179b82c491202171b5814272e86659e79786008a7d84b17e0ab68",
-      "outputDigest": "260f41ec15c1199d1449f2271129b9d7a36d743d5be6c1516377bd8592b5901d",
-      "validations": [],
+      "outputDigest": "3f9955cd7ff0b4452c376150577b2a50a2bb5101907b2a0096dc24fa5300d987",
+      "validations": [
+        {
+          "id": "r009-user-rejection-preserved",
+          "status": "pass",
+          "evidence": "unity/FidgetingApp/ArtSource/ModelPipeline/premium-display-case/evidence/12-shipping/v3-rev-009/rejected-20260911T222500+0800/user-rejection.md"
+        },
+        {
+          "id": "real-shipping-renderers",
+          "status": "pass",
+          "evidence": "4/4 snapshots captured; source scenes closed before rendering."
+        },
+        {
+          "id": "center-error",
+          "status": "pass",
+          "evidence": "max world-plane error <=0.00002 mm; max screen error <=0.0003 px."
+        },
+        {
+          "id": "exact-circular-fit",
+          "status": "pass",
+          "evidence": "mesh-vertex occupancy 0.793-1.000; three-blade 0.902; no radial overflow."
+        },
+        {
+          "id": "orientation-and-complete-frame",
+          "status": "pass",
+          "evidence": "4 front + 4 quarter whole-case frames; fan-card A artwork faces camera."
+        },
+        {
+          "id": "rarity-contract",
+          "status": "pass",
+          "evidence": "FDB-DSP-059/061 muted zone 2/5/6/7 values; proposed near-black header values recorded."
+        },
+        {
+          "id": "editmode-tests",
+          "status": "pass",
+          "evidence": "75/75 focused DisplayCase, parity and Gacha tests."
+        },
+        {
+          "id": "fan-card-guardrails",
+          "status": "pass",
+          "evidence": "full validator pass; track clearance 7.590 mm; fan geometry unchanged."
+        },
+        {
+          "id": "shipping-factory-unchanged",
+          "status": "pass",
+          "evidence": "Gacha/PremiumDisplayCaseGate12R004/PresentationRoot"
+        }
+      ],
       "decision": null,
       "reviewArtifactIds": [],
       "shippingSpec": {
-        "revision": 4,
-        "previousRejectedRevision": 3,
-        "previousRevisionDisposition": "rejected-history-preserved",
-        "exactRejectionQuote": "Pack tear: “撕包仍然有问题”\nLight: “仍然太弱”\nGacha energy: “仍需加强蓄力与冲击”",
-        "rejectionSelections": {
-          "packTear": "撕包仍然有问题",
-          "light": "仍然太弱",
-          "gachaEnergy": "仍需加强蓄力与冲击"
-        },
-        "finalAuthority": "latest-explicit-chat-instruction",
-        "earliestAffectedGate": "12-shipping-implementation-and-tuning-revision",
-        "upstreamApprovedGatesUnchanged": [
-          "01-intake",
-          "02-analysis",
-          "03-contract",
-          "04-architecture",
-          "05-blockout",
-          "06-geometry",
-          "07-material",
-          "08-lighting",
-          "09-environment",
-          "10-export",
-          "11-unity-parity"
-        ],
-        "sourceGate11ApprovalEventId": "c14b967f-6399-4cff-8baa-78a0eb6169dc",
-        "sourceFbxArtifactId": "premium-display-case-product-fbx-r001",
-        "sourceFbxSha256": "21c9db68723f0006d7c6bfec5280cafe55c16cf5392ff97c365c966e91f847ae",
-        "governingContractId": "premium-display-case-modeling-contract-r003",
-        "governingContractSha256": "1aea4db5fb45e61b936c5145d83d39a2e2a4abfe000dddb46cfdb200f76023f3",
-        "shippingPrefabPath": "unity/FidgetingApp/Assets/Resources/Gacha/PremiumDisplayCaseGate12R004/PresentationRoot.prefab",
-        "shippingScenePath": "unity/FidgetingApp/Assets/_DisplayCase/Scenes/PremiumDisplayCaseGate12R004.unity",
-        "profilePath": "unity/FidgetingApp/Assets/Resources/Gacha/PremiumDisplayCaseGate12R004Profile.asset",
-        "parameterSnapshot": {
-          "handoffDurationSeconds": 0.14,
-          "entryDurationSeconds": 0.56,
-          "firstSpinDurationSeconds": 0.5,
-          "secondSpinDurationSeconds": 1.1,
-          "entryRotationOverlapSeconds": 0.18,
-          "arrivalRimDurationSeconds": 0.28,
-          "sheenDurationSeconds": 0.34,
-          "holdDurationSeconds": 0.62,
-          "entryYOffsetMeters": -0.18,
-          "entryCameraDepthZMeters": 0.11,
-          "firstSpinDegrees": 360,
-          "secondSpinDegrees": 360,
-          "lightRevealWidth": 0.18,
-          "lightRevealIntensity": 1,
-          "firstRotationRimIntensity": 0.92,
-          "secondRotationRimIntensity": 0.74,
-          "sheenWidth": 0.16,
-          "sheenIntensity": 1,
-          "sheenFalloff": 0.3,
-          "rotationStartSeconds": 0.38000000000000006,
-          "profileDurationSeconds": 2.9400000000000004,
-          "totalRotationDegrees": 720,
-          "firstSpinAverageDegreesPerSecond": 720,
-          "secondSpinAverageDegreesPerSecond": 327.27272727272725,
-          "firstToSecondAverageSpeedRatio": 2.2,
-          "profileValuesLocked": false,
-          "pendingVisualTuning": true
-        },
-        "timingChangedFromRev3": true,
-        "profileValuesLocked": false,
-        "pendingVisualTuning": true,
-        "packTear": {
-          "realBodyAndFlapAssets": true,
-          "authoredCanvas": [
-            384,
-            512
-          ],
-          "authoredAnchor": "topTrailing",
-          "tearCommitProgress": 0.62,
-          "belowThresholdBehavior": "visible-follow-deformation-then-rebound",
-          "commitBehavior": "same-request-exact-once",
-          "committedOpeningVisibleBeforeCase": true,
-          "seamCueCount": 1,
-          "releasePulseCount": 1,
-          "foregroundUntilAuthoritativeReceiptAndTwoFrameReady": true,
-          "noEmptyFrame": true,
-          "measuredVisuals": {
-            "authoredAspect": "384:512",
-            "flapAnchor": "topTrailing",
-            "flapWidthVersusBodyFraction": 0.9361370716510904,
-            "flapHorizontalTravelPixels": 146.7473419594313,
-            "partialOpeningGapPixels": 13,
-            "committedOpeningGapPixels": 105,
-            "reboundMeanAbsoluteDelta": 0.9477479614529281,
-            "seamP95MinusMedianLuma255": 166,
-            "seamFractionAbove40": 0.33431983385254416,
-            "releaseMeanLumaDelta255": 105.32394859813084,
-            "releaseP95LumaDelta255": 123,
-            "maximumCaseFractionBeforeOpening": 0,
-            "caseFractionFirstVisible": 0.5164136363636364,
-            "minimumTransitionForegroundFraction": 0.3852812241521919
-          }
-        },
-        "phaseOrder": [
-          "sealed-pack",
-          "partial-tear-seam-and-rebound",
-          "committed-opening",
-          "one-opening-confined-release-pulse",
-          "same-request-receipt-and-two-frame-ready",
-          "pack-case-overlap",
-          "entry-arrival-rim-first-spin-overlap",
-          "fast-first-local-y-360-with-rim",
-          "continuous-spin-boundary",
-          "slower-second-local-y-360-with-rim",
-          "one-finite-crossing-mesh-clipped-sheen",
-          "static-hold-no-persistent-light"
-        ],
-        "localYRotationDegrees": 720,
-        "firstSpinDegrees": 360,
-        "secondSpinDegrees": 360,
-        "noStopBetweenSpins": true,
-        "eventCounts": {
-          "seam": 1,
-          "releasePulse": 1,
-          "arrivalRim": 1,
-          "rotationRimPasses": 2,
-          "finalSheen": 1,
-          "persistentLight": 0
-        },
-        "effectRendererCount": 3,
-        "outsideMeshEffectPixels": 0,
-        "pointLightCount": 0,
-        "particleEmitterCount": 0,
-        "bloomDependency": false,
-        "vfxGraphDependency": false,
-        "screenShake": false,
-        "persistentLightLoop": false,
+        "modelId": "premium-display-case",
+        "variantId": "tri-spinner-slab-v3-cmf",
+        "revision": 10,
+        "recordedAt": "2026-09-11T15:01:11.137971+00:00",
+        "governingContractSha256": "e9a6f14a61e823274c716f3b3c26ee63e0bbc8e5879145e7b98c65aa9ea88294",
+        "previousRejectedRevision": 9,
+        "previousRevisionDisposition": "user-rejected-history-preserved",
+        "rejectionSourceId": "src.user_gate12_r009_content_matrix_rejection_20260911",
         "wholeAssembledCaseOnly": true,
-        "sameInstanceThroughAcknowledgement": true,
-        "externalEntityCount": 0,
-        "externalModelCount": 0,
-        "externalPrefabCount": 0,
         "toyPrizeOwnership": "caller-owned",
-        "toyIndependentAngularVelocity": 0,
-        "visualContrast": {
-          "pack": {
-            "authoredAspect": "384:512",
-            "flapAnchor": "topTrailing",
-            "flapWidthVersusBodyFraction": 0.9361370716510904,
-            "flapHorizontalTravelPixels": 146.7473419594313,
-            "partialOpeningGapPixels": 13,
-            "committedOpeningGapPixels": 105,
-            "reboundMeanAbsoluteDelta": 0.9477479614529281,
-            "seamP95MinusMedianLuma255": 166,
-            "seamFractionAbove40": 0.33431983385254416,
-            "releaseMeanLumaDelta255": 105.32394859813084,
-            "releaseP95LumaDelta255": 123,
-            "maximumCaseFractionBeforeOpening": 0,
-            "caseFractionFirstVisible": 0.5164136363636364,
-            "minimumTransitionForegroundFraction": 0.3852812241521919
-          },
-          "caseCues": {
-            "arrival": {
-              "changedPixels": 18668,
-              "changedFraction": 0.4292,
-              "meanLumaDelta": 0.0319,
-              "meanLumaDelta255": 8.1345,
-              "p95LumaDelta": 0.0787,
-              "p95LumaDelta255": 20.0685,
-              "maximumLumaDelta": 0.7737,
-              "maximumLumaDelta255": 197.29350000000002,
-              "externalPixels": 0
+        "contentFit": {
+          "fitDiameterMm": 65.4,
+          "referenceDepthMm": 14.5,
+          "profiles": [
+            {
+              "modelId": "metal-three-blade",
+              "initialEuler": [
+                0.0,
+                -18.0,
+                0.0
+              ],
+              "anchor": "MechanicalPivot",
+              "uniformScale": 0.694143533706665,
+              "radialExtentMm": 29.50187873840332,
+              "depthMm": 14.500000953674316,
+              "centerOffsetMm": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "occupancy": 0.9021981954574585
             },
-            "first-rotation-rim": {
-              "changedPixels": 23042,
-              "changedFraction": 0.5251,
-              "meanLumaDelta": 0.0525,
-              "meanLumaDelta255": 13.3875,
-              "p95LumaDelta": 0.1442,
-              "p95LumaDelta255": 36.771,
-              "maximumLumaDelta": 0.7448,
-              "maximumLumaDelta255": 189.924,
-              "externalPixels": 0
+            {
+              "modelId": "graphite-two-lobe",
+              "initialEuler": [
+                0.0,
+                -8.0,
+                0.0
+              ],
+              "anchor": "VisualBoundsCenter",
+              "uniformScale": 1.0,
+              "radialExtentMm": 25.937061309814453,
+              "depthMm": 18.68000602722168,
+              "centerOffsetMm": [
+                -4.6566128730773926e-07,
+                9.313225746154785e-07,
+                -4.6566128730773926e-07
+              ],
+              "occupancy": 0.793182373046875
             },
-            "second-rotation-rim": {
-              "changedPixels": 22745,
-              "changedFraction": 0.5183,
-              "meanLumaDelta": 0.0362,
-              "meanLumaDelta255": 9.231000000000002,
-              "p95LumaDelta": 0.0994,
-              "p95LumaDelta255": 25.347,
-              "maximumLumaDelta": 0.6235,
-              "maximumLumaDelta255": 158.9925,
-              "externalPixels": 0
+            {
+              "modelId": "magnetic-slide-tile",
+              "initialEuler": [
+                0.0,
+                -8.0,
+                0.0
+              ],
+              "anchor": "VisualBoundsCenter",
+              "uniformScale": 0.7501681447029114,
+              "radialExtentMm": 32.70000076293945,
+              "depthMm": 12.647838592529297,
+              "centerOffsetMm": [
+                1.862645149230957e-06,
+                -9.313225746154785e-07,
+                4.6566128730773926e-07
+              ],
+              "occupancy": 1.0000001192092896
             },
-            "final-sheen": {
-              "changedPixels": 6586,
-              "changedFraction": 0.1255,
-              "meanLumaDelta": 0.0712,
-              "meanLumaDelta255": 18.156,
-              "p95LumaDelta": 0.6821,
-              "p95LumaDelta255": 173.93550000000002,
-              "maximumLumaDelta": 0.902,
-              "maximumLumaDelta255": 230.01000000000002,
-              "externalPixels": 0
+            {
+              "modelId": "magnetic-fan-card",
+              "initialEuler": [
+                0.0,
+                -8.0,
+                0.0
+              ],
+              "anchor": "VisualBoundsCenter",
+              "uniformScale": 0.6420391201972961,
+              "radialExtentMm": 32.69999694824219,
+              "depthMm": 8.490973472595215,
+              "centerOffsetMm": [
+                9.313225746154785e-07,
+                1.210719347000122e-05,
+                1.3969838619232178e-06
+              ],
+              "occupancy": 1.0
             }
-          },
-          "finalSheenVersusHold": {
-            "meanSignedLumaDelta255": 36.03968048095703,
-            "meanAbsoluteLumaDelta255": 39.92144012451172,
-            "p95AbsoluteLumaDelta255": 161,
-            "fractionPositiveDeltaAbove10": 0.32978122843340235
-          },
-          "persistentLightAfterSheen": {
-            "meanAbsoluteLumaDelta255": 1.171877145767212,
-            "p95AbsoluteLumaDelta255": 5
-          }
-        },
-        "sourceExtraction": {
-          "repository": "https://github.com/remi-chapelain/Unite2025-MakeItShine-Release",
-          "commit": "88842be0063b5b0b75e82ed6572752a37a13c82b",
-          "license": "CC0-1.0",
-          "moduleFiles": [
-            "SOURCE_CONTRACT.json",
-            "CC0-NOTICE.md",
-            "MakeItShineCc0Masks.hlsl",
-            "MakeItShineCc0EffectCurves.cs"
-          ],
-          "moduleHashes": {
-            "SOURCE_CONTRACT.json": "34c3c34f5f9a58ed168847c805a9756b5a160563bafda64b69def274eb34ca79",
-            "CC0-NOTICE.md": "9898fed53c7547f3aac41540a1278bba6539cdacef3954d037d92945dbd36b4b",
-            "MakeItShineCc0Masks.hlsl": "b97707d266aecbcfadb583967d7186a508126066ce348e104281fe6f4ab78b7d",
-            "MakeItShineCc0EffectCurves.cs": "d611185f98b453263c80d93d7467d77945b537804210cd55501eb19368ad86b3"
-          },
-          "excludedAssets": [
-            "Assets/Animation/Timelines/Booster to Card Timeline.playable",
-            "Assets/Animation/Timelines/Spawn Cards Timeline.playable",
-            "Assets/Prefabs/Cinematic/Opening_Booster.prefab",
-            "Assets/Art/Booster/BoosterFractured_B.fbx",
-            "Assets/Art/Booster/VFX_BoosterExplosion.vfx",
-            "Assets/Art/Booster/VFX_BoosterActivation.vfx",
-            "Assets/Art/Booster/VFXG_LightingStrike.vfx",
-            "Assets/Art/Common/Graphs/CardMask_Camera.shadergraph",
-            "Assets/Art/Common/RenderTextures/CardMaskLarge.asset",
-            "all Booster, Card and proxy FBX files",
-            "all three-card layouts and card prefabs",
-            "all branded artwork and sample materials"
           ]
         },
-        "assetHashes": {
-          "profile": "37655ea01814dd1214a06937b75896eac33edd85558aef5fcad30b016f08acad",
-          "prefab": "7a96aae6245b5a1d5463dabc3cb4518af8693ba8f8328ad9f2fe4ee6c6a67e2c",
-          "shader": "1b1945449e840dbc1d61a5dd32026ec017ddaa7c655c26dab9450a920f5642e5",
-          "gate11Fbx": "21c9db68723f0006d7c6bfec5280cafe55c16cf5392ff97c365c966e91f847ae",
-          "packAssets": {
-            "gacha-pack-chase-body.png": "bc9b02c277149c29943e767cf97c24104f71d7d10022c5d0c5b4a52cdeeea93b",
-            "gacha-pack-chase-flap.png": "0d08edd76cc9bfb68a3508eddac8818a442760cda20c1e57d49fad8a16e5d906",
-            "gacha-pack-grail-body.png": "52a3bd3c49ad6950fabfd6d4a3e091a6523b72cf2c323b1ca36ceb144f6fed48",
-            "gacha-pack-grail-flap.png": "d33efc93625623d5cbe084954a0d9b95e0b673b1a7ab99fa45286155c3f67332",
-            "gacha-pack-one-of-one-body.png": "d75c464cea3d4c14ac4e0d962644dec6b22e7e4bbc0bbd5bd97a72b484d2a57d",
-            "gacha-pack-one-of-one-flap.png": "bea52c056d15bc2295b158653a89014b0f62aa607239f461987e8f9d0ac63bce",
-            "gacha-pack-refined-body.png": "9be287c1fb6501cf2134d931905b44157a7926c6627dd00b093e69a2dec6bfa7",
-            "gacha-pack-refined-flap.png": "9ca43bcb6b3dd6892c024e209068f031c993f7ffdf9778b0384b3f6a4931190b",
-            "gacha-pack-signature-body.png": "b53d6b211c4fcb0a9a56a6f104f5d1f4e30e2354ec788219a15cad62ea218639",
-            "gacha-pack-signature-flap.png": "3f9173a88445bf0750bbaa18cbfdb52d070840f3fe98e81365b30414a43d73a4",
-            "gacha-pack-standard-body.png": "ebc17bb238ebbcb82d36134bb2781838df610f8a3d1750c27b8ade10fc4681d6",
-            "gacha-pack-standard-flap.png": "b031fc5c57d194e9603e9b32e1cd603285aa564490f599f29bb0cd67dab33d49"
-          }
+        "rarityCmf": {
+          "wideApertureZones": [
+            2,
+            5,
+            6,
+            7
+          ],
+          "constantZones": [
+            1,
+            3,
+            4
+          ],
+          "lockedAccentAndLiner": "FDB-DSP-059/061",
+          "headerProposal": "near-black same-hue base tint per tier; visual approval pending",
+          "tiers": [
+            {
+              "rarityWord": "STANDARD",
+              "tier": "Steel",
+              "accentSrgb": [
+                0.6200000047683716,
+                0.6499999761581421,
+                0.6899999976158142,
+                1.0
+              ],
+              "linerSrgb": [
+                0.8600000143051147,
+                0.8799999952316284,
+                0.9200000166893005,
+                1.0
+              ],
+              "headerSrgb": [
+                0.03799999877810478,
+                0.04500000178813934,
+                0.057999998331069946,
+                1.0
+              ],
+              "phoneFrontFile": "rarity/steel-phone-front.png",
+              "headerFrontFile": "rarity/steel-header-front.png"
+            },
+            {
+              "rarityWord": "REFINED",
+              "tier": "Copper",
+              "accentSrgb": [
+                0.699999988079071,
+                0.5799999833106995,
+                0.5199999809265137,
+                1.0
+              ],
+              "linerSrgb": [
+                0.8999999761581421,
+                0.8600000143051147,
+                0.8399999737739563,
+                1.0
+              ],
+              "headerSrgb": [
+                0.08500000089406967,
+                0.052000001072883606,
+                0.0430000014603138,
+                1.0
+              ],
+              "phoneFrontFile": "rarity/copper-phone-front.png",
+              "headerFrontFile": "rarity/copper-header-front.png"
+            },
+            {
+              "rarityWord": "SIGNATURE",
+              "tier": "Silver",
+              "accentSrgb": [
+                0.5799999833106995,
+                0.6299999952316284,
+                0.699999988079071,
+                1.0
+              ],
+              "linerSrgb": [
+                0.8600000143051147,
+                0.8799999952316284,
+                0.9300000071525574,
+                1.0
+              ],
+              "headerSrgb": [
+                0.0430000014603138,
+                0.054999999701976776,
+                0.07800000160932541,
+                1.0
+              ],
+              "phoneFrontFile": "rarity/silver-phone-front.png",
+              "headerFrontFile": "rarity/silver-header-front.png"
+            },
+            {
+              "rarityWord": "HEIRLOOM",
+              "tier": "Gold",
+              "accentSrgb": [
+                0.800000011920929,
+                0.7300000190734863,
+                0.6000000238418579,
+                1.0
+              ],
+              "linerSrgb": [
+                0.8999999761581421,
+                0.8799999952316284,
+                0.8999999761581421,
+                1.0
+              ],
+              "headerSrgb": [
+                0.0820000022649765,
+                0.06800000369548798,
+                0.04399999976158142,
+                1.0
+              ],
+              "phoneFrontFile": "rarity/gold-phone-front.png",
+              "headerFrontFile": "rarity/gold-header-front.png"
+            }
+          ]
         },
-        "simulatorBundleIdentifier": "com.jiaweizhou.fidgetspinner.codex",
-        "simulatorInstalledLaunched": true,
-        "physicalPhoneInstalled": false,
-        "deviceAccepted": false,
-        "visualApproved": false,
-        "shippingReady": false,
-        "completeRecordingArtifactId": "premium-display-case-shipping-video-r004",
-        "approvalChecklist": [
-          "watch-complete-canonical-app-simulator-recording",
-          "confirm-full-width-flap-follows-and-below-062-rebounds",
-          "confirm-open-state-is-visible-before-case-and-commit-is-exact-once",
-          "confirm-seam-ramp-and-one-opening-confined-release-pulse",
-          "confirm-pack-remains-foreground-through-same-request-two-frame-readiness",
-          "confirm-one-arrival-rim-two-rotation-rims-and-one-crossing-sheen",
-          "confirm-every-case-cue-is-visible-and-zero-pixels-leave-case-fragments",
-          "confirm-first-360-is-fast-second-360-is-slower-and-boundary-never-stops",
-          "confirm-one-assembled-case-approved-card-label-static-camera-and-zero-toy-spin",
-          "confirm-no-halo-rarity-bloom-particle-vfx-shake-loop-explode-or-second-case",
-          "confirm-static-hold-no-persistent-light-and-no-physical-phone-install"
+        "knownLimitations": [
+          "The approved Gate 08 visible soft-focus renderer feature is not implemented in Unity yet; R010 uses the existing Bloom/Neutral/Vignette profile only.",
+          "The fan-card snapshot shows the shipping scene's zero-input closed stack; no mechanism pose or fan geometry was changed.",
+          "Graphite two-lobe keeps physical scale 1.0 and depth 18.68 mm; its back plane is aligned and the extra depth protrudes forward.",
+          "Static captures are supplementary. A complete real Unity runtime recording is still required before Gate 12 can become ready_for_review."
         ],
-        "interactionMode": "complete-canonical-app-simulator-recording-plus-labeled-tear-and-light-contact-sheets",
-        "gate12Status": "ready_for_review",
-        "rejection": {
-          "rejectedRevision": 4,
-          "reason": "Pack Opening 动效重构 supersedes the two-loop 720-degree showcase, prior Pack handoff, neutral-only rarity treatment, and static camera assumptions.",
-          "finalAuthority": "chat",
-          "userEngineChoice": "使用现有 Unity 6.5 工程实施（推荐）",
-          "sourceTask": "43ca0cec-1fb6-43dc-b651-2418c0df3ddf"
-        },
-        "currentDirection": "superseded-by-pack-opening-gate04-r008"
+        "factoryResourcesPath": "Gacha/PremiumDisplayCaseGate12R004/PresentationRoot",
+        "candidateResourcesPath": "Gacha/PremiumDisplayCaseGate12R010/PresentationRoot",
+        "completeRecording": null,
+        "visualApproved": false,
+        "shippingReady": false
       },
       "historicalDecisions": [
         {
@@ -75909,11 +77225,373 @@
             },
             "currentDirection": "superseded-by-pack-opening-gate04-r008"
           }
+        },
+        {
+          "revision": 9,
+          "status": "rejected",
+          "variantId": "tri-spinner-slab-v3-cmf",
+          "artifactIds": [
+            "pdc-v3-g12-r009-rejection-record",
+            "pdc-v3-g12-r009-center-annotation",
+            "pdc-v3-g12-r009-matrix-annotation",
+            "pdc-v3-g12-r009-rejected-center-preview",
+            "pdc-v3-g12-r009-rejected-content-matrix"
+          ],
+          "reviewArtifactIds": [],
+          "decision": {
+            "state": "rejected",
+            "action": "reject",
+            "decidedBy": "user",
+            "decidedAt": "2026-09-11T22:25:00+08:00",
+            "channel": "chat",
+            "wording": "首先，第一个陀螺的中心点还是不对，没有居中。然后，后面四张图搞得他妈什么乱七八糟的？你自己看这个他妈什么东西吗？你自己有没有一套审查的流程啊？大小尺寸比例全都不对。你搞了什么乱七八糟的？你搞这种垃圾东西，我把你炸了",
+            "sourceId": "src.user_gate12_r009_content_matrix_rejection_20260911",
+            "recordedAt": "2026-09-11T15:01:11.137971+00:00",
+            "governingContractSha256": "e9a6f14a61e823274c716f3b3c26ee63e0bbc8e5879145e7b98c65aa9ea88294",
+            "scope": "R009 off-centre pocket macro and four-product content matrix; no shipping resource or phone installation was approved",
+            "reviewedArtifacts": [
+              {
+                "id": "pdc-v3-g12-r009-rejection-record",
+                "path": "unity/FidgetingApp/ArtSource/ModelPipeline/premium-display-case/evidence/12-shipping/v3-rev-009/rejected-20260911T222500+0800/user-rejection.md",
+                "sha256": "52d2c7af2689da11335689d3211e272212fe758451ab3fa0b06e18befcdc37c0"
+              },
+              {
+                "id": "pdc-v3-g12-r009-center-annotation",
+                "path": "unity/FidgetingApp/ArtSource/ModelPipeline/premium-display-case/evidence/12-shipping/v3-rev-009/rejected-20260911T222500+0800/user-annotation-spinner-center.png",
+                "sha256": "4c585b430808d68fbe7e19766cc0a04d7b8a41b4932954da885bffbca1952920"
+              },
+              {
+                "id": "pdc-v3-g12-r009-matrix-annotation",
+                "path": "unity/FidgetingApp/ArtSource/ModelPipeline/premium-display-case/evidence/12-shipping/v3-rev-009/rejected-20260911T222500+0800/user-annotation-content-matrix-defects.png",
+                "sha256": "e379f4acca745a811a7c2fd4461e12ad8cc637cb97062ba93aad62e9b8df7edb"
+              },
+              {
+                "id": "pdc-v3-g12-r009-rejected-center-preview",
+                "path": "Artifacts/TriSpinnerSlab/gate12-r009/gate12-r009-pocket-macro-centered-20260911T140200Z.png",
+                "sha256": "be8954f0fe4679903f8ccd5b5b8b6c73cc05e471dbd28911b1cb1ae0ac7d4a23"
+              },
+              {
+                "id": "pdc-v3-g12-r009-rejected-content-matrix",
+                "path": "Artifacts/TriSpinnerSlab/gate12-r009/gate12-r009-content-matrix-pocket-20260911T140800Z.png",
+                "sha256": "7390ba503becee83dd475a3e8012ffa715e334a00142826bcd677a78cdc9faf4"
+              }
+            ]
+          },
+          "validations": [
+            {
+              "id": "direct-user-visual-review",
+              "status": "fail",
+              "evidence": "Off-centre spinner; duplicate rotations; source-scene contamination; invalid scale and clipping."
+            }
+          ],
+          "shippingSpec": {
+            "revision": 4,
+            "previousRejectedRevision": 3,
+            "previousRevisionDisposition": "rejected-history-preserved",
+            "exactRejectionQuote": "Pack tear: “撕包仍然有问题”\nLight: “仍然太弱”\nGacha energy: “仍需加强蓄力与冲击”",
+            "rejectionSelections": {
+              "packTear": "撕包仍然有问题",
+              "light": "仍然太弱",
+              "gachaEnergy": "仍需加强蓄力与冲击"
+            },
+            "finalAuthority": "latest-explicit-chat-instruction",
+            "earliestAffectedGate": "12-shipping-implementation-and-tuning-revision",
+            "upstreamApprovedGatesUnchanged": [
+              "01-intake",
+              "02-analysis",
+              "03-contract",
+              "04-architecture",
+              "05-blockout",
+              "06-geometry",
+              "07-material",
+              "08-lighting",
+              "09-environment",
+              "10-export",
+              "11-unity-parity"
+            ],
+            "sourceGate11ApprovalEventId": "c14b967f-6399-4cff-8baa-78a0eb6169dc",
+            "sourceFbxArtifactId": "premium-display-case-product-fbx-r001",
+            "sourceFbxSha256": "21c9db68723f0006d7c6bfec5280cafe55c16cf5392ff97c365c966e91f847ae",
+            "governingContractId": "premium-display-case-modeling-contract-r003",
+            "governingContractSha256": "1aea4db5fb45e61b936c5145d83d39a2e2a4abfe000dddb46cfdb200f76023f3",
+            "shippingPrefabPath": "unity/FidgetingApp/Assets/Resources/Gacha/PremiumDisplayCaseGate12R004/PresentationRoot.prefab",
+            "shippingScenePath": "unity/FidgetingApp/Assets/_DisplayCase/Scenes/PremiumDisplayCaseGate12R004.unity",
+            "profilePath": "unity/FidgetingApp/Assets/Resources/Gacha/PremiumDisplayCaseGate12R004Profile.asset",
+            "parameterSnapshot": {
+              "handoffDurationSeconds": 0.14,
+              "entryDurationSeconds": 0.56,
+              "firstSpinDurationSeconds": 0.5,
+              "secondSpinDurationSeconds": 1.1,
+              "entryRotationOverlapSeconds": 0.18,
+              "arrivalRimDurationSeconds": 0.28,
+              "sheenDurationSeconds": 0.34,
+              "holdDurationSeconds": 0.62,
+              "entryYOffsetMeters": -0.18,
+              "entryCameraDepthZMeters": 0.11,
+              "firstSpinDegrees": 360,
+              "secondSpinDegrees": 360,
+              "lightRevealWidth": 0.18,
+              "lightRevealIntensity": 1,
+              "firstRotationRimIntensity": 0.92,
+              "secondRotationRimIntensity": 0.74,
+              "sheenWidth": 0.16,
+              "sheenIntensity": 1,
+              "sheenFalloff": 0.3,
+              "rotationStartSeconds": 0.38000000000000006,
+              "profileDurationSeconds": 2.9400000000000004,
+              "totalRotationDegrees": 720,
+              "firstSpinAverageDegreesPerSecond": 720,
+              "secondSpinAverageDegreesPerSecond": 327.27272727272725,
+              "firstToSecondAverageSpeedRatio": 2.2,
+              "profileValuesLocked": false,
+              "pendingVisualTuning": true
+            },
+            "timingChangedFromRev3": true,
+            "profileValuesLocked": false,
+            "pendingVisualTuning": true,
+            "packTear": {
+              "realBodyAndFlapAssets": true,
+              "authoredCanvas": [
+                384,
+                512
+              ],
+              "authoredAnchor": "topTrailing",
+              "tearCommitProgress": 0.62,
+              "belowThresholdBehavior": "visible-follow-deformation-then-rebound",
+              "commitBehavior": "same-request-exact-once",
+              "committedOpeningVisibleBeforeCase": true,
+              "seamCueCount": 1,
+              "releasePulseCount": 1,
+              "foregroundUntilAuthoritativeReceiptAndTwoFrameReady": true,
+              "noEmptyFrame": true,
+              "measuredVisuals": {
+                "authoredAspect": "384:512",
+                "flapAnchor": "topTrailing",
+                "flapWidthVersusBodyFraction": 0.9361370716510904,
+                "flapHorizontalTravelPixels": 146.7473419594313,
+                "partialOpeningGapPixels": 13,
+                "committedOpeningGapPixels": 105,
+                "reboundMeanAbsoluteDelta": 0.9477479614529281,
+                "seamP95MinusMedianLuma255": 166,
+                "seamFractionAbove40": 0.33431983385254416,
+                "releaseMeanLumaDelta255": 105.32394859813084,
+                "releaseP95LumaDelta255": 123,
+                "maximumCaseFractionBeforeOpening": 0,
+                "caseFractionFirstVisible": 0.5164136363636364,
+                "minimumTransitionForegroundFraction": 0.3852812241521919
+              }
+            },
+            "phaseOrder": [
+              "sealed-pack",
+              "partial-tear-seam-and-rebound",
+              "committed-opening",
+              "one-opening-confined-release-pulse",
+              "same-request-receipt-and-two-frame-ready",
+              "pack-case-overlap",
+              "entry-arrival-rim-first-spin-overlap",
+              "fast-first-local-y-360-with-rim",
+              "continuous-spin-boundary",
+              "slower-second-local-y-360-with-rim",
+              "one-finite-crossing-mesh-clipped-sheen",
+              "static-hold-no-persistent-light"
+            ],
+            "localYRotationDegrees": 720,
+            "firstSpinDegrees": 360,
+            "secondSpinDegrees": 360,
+            "noStopBetweenSpins": true,
+            "eventCounts": {
+              "seam": 1,
+              "releasePulse": 1,
+              "arrivalRim": 1,
+              "rotationRimPasses": 2,
+              "finalSheen": 1,
+              "persistentLight": 0
+            },
+            "effectRendererCount": 3,
+            "outsideMeshEffectPixels": 0,
+            "pointLightCount": 0,
+            "particleEmitterCount": 0,
+            "bloomDependency": false,
+            "vfxGraphDependency": false,
+            "screenShake": false,
+            "persistentLightLoop": false,
+            "wholeAssembledCaseOnly": true,
+            "sameInstanceThroughAcknowledgement": true,
+            "externalEntityCount": 0,
+            "externalModelCount": 0,
+            "externalPrefabCount": 0,
+            "toyPrizeOwnership": "caller-owned",
+            "toyIndependentAngularVelocity": 0,
+            "visualContrast": {
+              "pack": {
+                "authoredAspect": "384:512",
+                "flapAnchor": "topTrailing",
+                "flapWidthVersusBodyFraction": 0.9361370716510904,
+                "flapHorizontalTravelPixels": 146.7473419594313,
+                "partialOpeningGapPixels": 13,
+                "committedOpeningGapPixels": 105,
+                "reboundMeanAbsoluteDelta": 0.9477479614529281,
+                "seamP95MinusMedianLuma255": 166,
+                "seamFractionAbove40": 0.33431983385254416,
+                "releaseMeanLumaDelta255": 105.32394859813084,
+                "releaseP95LumaDelta255": 123,
+                "maximumCaseFractionBeforeOpening": 0,
+                "caseFractionFirstVisible": 0.5164136363636364,
+                "minimumTransitionForegroundFraction": 0.3852812241521919
+              },
+              "caseCues": {
+                "arrival": {
+                  "changedPixels": 18668,
+                  "changedFraction": 0.4292,
+                  "meanLumaDelta": 0.0319,
+                  "meanLumaDelta255": 8.1345,
+                  "p95LumaDelta": 0.0787,
+                  "p95LumaDelta255": 20.0685,
+                  "maximumLumaDelta": 0.7737,
+                  "maximumLumaDelta255": 197.29350000000002,
+                  "externalPixels": 0
+                },
+                "first-rotation-rim": {
+                  "changedPixels": 23042,
+                  "changedFraction": 0.5251,
+                  "meanLumaDelta": 0.0525,
+                  "meanLumaDelta255": 13.3875,
+                  "p95LumaDelta": 0.1442,
+                  "p95LumaDelta255": 36.771,
+                  "maximumLumaDelta": 0.7448,
+                  "maximumLumaDelta255": 189.924,
+                  "externalPixels": 0
+                },
+                "second-rotation-rim": {
+                  "changedPixels": 22745,
+                  "changedFraction": 0.5183,
+                  "meanLumaDelta": 0.0362,
+                  "meanLumaDelta255": 9.231000000000002,
+                  "p95LumaDelta": 0.0994,
+                  "p95LumaDelta255": 25.347,
+                  "maximumLumaDelta": 0.6235,
+                  "maximumLumaDelta255": 158.9925,
+                  "externalPixels": 0
+                },
+                "final-sheen": {
+                  "changedPixels": 6586,
+                  "changedFraction": 0.1255,
+                  "meanLumaDelta": 0.0712,
+                  "meanLumaDelta255": 18.156,
+                  "p95LumaDelta": 0.6821,
+                  "p95LumaDelta255": 173.93550000000002,
+                  "maximumLumaDelta": 0.902,
+                  "maximumLumaDelta255": 230.01000000000002,
+                  "externalPixels": 0
+                }
+              },
+              "finalSheenVersusHold": {
+                "meanSignedLumaDelta255": 36.03968048095703,
+                "meanAbsoluteLumaDelta255": 39.92144012451172,
+                "p95AbsoluteLumaDelta255": 161,
+                "fractionPositiveDeltaAbove10": 0.32978122843340235
+              },
+              "persistentLightAfterSheen": {
+                "meanAbsoluteLumaDelta255": 1.171877145767212,
+                "p95AbsoluteLumaDelta255": 5
+              }
+            },
+            "sourceExtraction": {
+              "repository": "https://github.com/remi-chapelain/Unite2025-MakeItShine-Release",
+              "commit": "88842be0063b5b0b75e82ed6572752a37a13c82b",
+              "license": "CC0-1.0",
+              "moduleFiles": [
+                "SOURCE_CONTRACT.json",
+                "CC0-NOTICE.md",
+                "MakeItShineCc0Masks.hlsl",
+                "MakeItShineCc0EffectCurves.cs"
+              ],
+              "moduleHashes": {
+                "SOURCE_CONTRACT.json": "34c3c34f5f9a58ed168847c805a9756b5a160563bafda64b69def274eb34ca79",
+                "CC0-NOTICE.md": "9898fed53c7547f3aac41540a1278bba6539cdacef3954d037d92945dbd36b4b",
+                "MakeItShineCc0Masks.hlsl": "b97707d266aecbcfadb583967d7186a508126066ce348e104281fe6f4ab78b7d",
+                "MakeItShineCc0EffectCurves.cs": "d611185f98b453263c80d93d7467d77945b537804210cd55501eb19368ad86b3"
+              },
+              "excludedAssets": [
+                "Assets/Animation/Timelines/Booster to Card Timeline.playable",
+                "Assets/Animation/Timelines/Spawn Cards Timeline.playable",
+                "Assets/Prefabs/Cinematic/Opening_Booster.prefab",
+                "Assets/Art/Booster/BoosterFractured_B.fbx",
+                "Assets/Art/Booster/VFX_BoosterExplosion.vfx",
+                "Assets/Art/Booster/VFX_BoosterActivation.vfx",
+                "Assets/Art/Booster/VFXG_LightingStrike.vfx",
+                "Assets/Art/Common/Graphs/CardMask_Camera.shadergraph",
+                "Assets/Art/Common/RenderTextures/CardMaskLarge.asset",
+                "all Booster, Card and proxy FBX files",
+                "all three-card layouts and card prefabs",
+                "all branded artwork and sample materials"
+              ]
+            },
+            "assetHashes": {
+              "profile": "37655ea01814dd1214a06937b75896eac33edd85558aef5fcad30b016f08acad",
+              "prefab": "7a96aae6245b5a1d5463dabc3cb4518af8693ba8f8328ad9f2fe4ee6c6a67e2c",
+              "shader": "1b1945449e840dbc1d61a5dd32026ec017ddaa7c655c26dab9450a920f5642e5",
+              "gate11Fbx": "21c9db68723f0006d7c6bfec5280cafe55c16cf5392ff97c365c966e91f847ae",
+              "packAssets": {
+                "gacha-pack-chase-body.png": "bc9b02c277149c29943e767cf97c24104f71d7d10022c5d0c5b4a52cdeeea93b",
+                "gacha-pack-chase-flap.png": "0d08edd76cc9bfb68a3508eddac8818a442760cda20c1e57d49fad8a16e5d906",
+                "gacha-pack-grail-body.png": "52a3bd3c49ad6950fabfd6d4a3e091a6523b72cf2c323b1ca36ceb144f6fed48",
+                "gacha-pack-grail-flap.png": "d33efc93625623d5cbe084954a0d9b95e0b673b1a7ab99fa45286155c3f67332",
+                "gacha-pack-one-of-one-body.png": "d75c464cea3d4c14ac4e0d962644dec6b22e7e4bbc0bbd5bd97a72b484d2a57d",
+                "gacha-pack-one-of-one-flap.png": "bea52c056d15bc2295b158653a89014b0f62aa607239f461987e8f9d0ac63bce",
+                "gacha-pack-refined-body.png": "9be287c1fb6501cf2134d931905b44157a7926c6627dd00b093e69a2dec6bfa7",
+                "gacha-pack-refined-flap.png": "9ca43bcb6b3dd6892c024e209068f031c993f7ffdf9778b0384b3f6a4931190b",
+                "gacha-pack-signature-body.png": "b53d6b211c4fcb0a9a56a6f104f5d1f4e30e2354ec788219a15cad62ea218639",
+                "gacha-pack-signature-flap.png": "3f9173a88445bf0750bbaa18cbfdb52d070840f3fe98e81365b30414a43d73a4",
+                "gacha-pack-standard-body.png": "ebc17bb238ebbcb82d36134bb2781838df610f8a3d1750c27b8ade10fc4681d6",
+                "gacha-pack-standard-flap.png": "b031fc5c57d194e9603e9b32e1cd603285aa564490f599f29bb0cd67dab33d49"
+              }
+            },
+            "simulatorBundleIdentifier": "com.jiaweizhou.fidgetspinner.codex",
+            "simulatorInstalledLaunched": true,
+            "physicalPhoneInstalled": false,
+            "deviceAccepted": false,
+            "visualApproved": false,
+            "shippingReady": false,
+            "completeRecordingArtifactId": "premium-display-case-shipping-video-r004",
+            "approvalChecklist": [
+              "watch-complete-canonical-app-simulator-recording",
+              "confirm-full-width-flap-follows-and-below-062-rebounds",
+              "confirm-open-state-is-visible-before-case-and-commit-is-exact-once",
+              "confirm-seam-ramp-and-one-opening-confined-release-pulse",
+              "confirm-pack-remains-foreground-through-same-request-two-frame-readiness",
+              "confirm-one-arrival-rim-two-rotation-rims-and-one-crossing-sheen",
+              "confirm-every-case-cue-is-visible-and-zero-pixels-leave-case-fragments",
+              "confirm-first-360-is-fast-second-360-is-slower-and-boundary-never-stops",
+              "confirm-one-assembled-case-approved-card-label-static-camera-and-zero-toy-spin",
+              "confirm-no-halo-rarity-bloom-particle-vfx-shake-loop-explode-or-second-case",
+              "confirm-static-hold-no-persistent-light-and-no-physical-phone-install"
+            ],
+            "interactionMode": "complete-canonical-app-simulator-recording-plus-labeled-tear-and-light-contact-sheets",
+            "gate12Status": "ready_for_review",
+            "rejection": {
+              "rejectedRevision": 4,
+              "reason": "Pack Opening 动效重构 supersedes the two-loop 720-degree showcase, prior Pack handoff, neutral-only rarity treatment, and static camera assumptions.",
+              "finalAuthority": "chat",
+              "userEngineChoice": "使用现有 Unity 6.5 工程实施（推荐）",
+              "sourceTask": "43ca0cec-1fb6-43dc-b651-2418c0df3ddf"
+            },
+            "currentDirection": "superseded-by-pack-opening-gate04-r008"
+          },
+          "supersededAt": "2026-09-11T15:01:11.137971+00:00",
+          "reason": "User rejected the R009 centering proof and content matrix. R010 replaces capture isolation, rotations, fit and review gates."
         }
       ],
       "variantId": "tri-spinner-slab-v3-cmf",
       "shippingReady": false,
-      "nextStep": "Build the Gate 12 candidate (shipping presentation wrapper + real shipping-scene preview: hero, top, obliques, low, phone aspect) and STOP for the user's explicit visual approval. No build, no install before approval."
+      "nextStep": "Show only the audited R010 static preview sheets for direction feedback. Then implement the approved visible soft-focus and produce a complete real Unity runtime recording before requesting Gate 12 approval. Do not build or install on a phone.",
+      "previewArtifactIds": [
+        "pdc-v3-g12-r010-content-phone-matrix",
+        "pdc-v3-g12-r010-content-center-proof",
+        "pdc-v3-g12-r010-content-quarter-matrix",
+        "pdc-v3-g12-r010-rarity-cmf-matrix"
+      ],
+      "visualApproved": false
     }
   ],
   "issues": [

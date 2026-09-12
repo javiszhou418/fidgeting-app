@@ -1,0 +1,478 @@
+using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+using FidgetingApp.DisplayCase;
+using FidgetingApp.Product;
+using UnityEditor;
+using UnityEditor.SceneManagement;
+using UnityEngine;
+using UnityEngine.Rendering;
+using UnityEngine.Rendering.Universal;
+using UnityEngine.SceneManagement;
+
+namespace FidgetingApp.DisplayCase.Editor
+{
+    /// <summary>
+    /// Research previews: four shipping toys in the V3 pocket, plus rarity CMF
+    /// (header plate + brushed/accent metal) without mutating approved materials.
+    /// </summary>
+    public static class PremiumDisplayCaseGate12R009ContentMatrixCapture
+    {
+        private const string EvidenceSubfolder = "content-matrix";
+        private static readonly string[] AccentMaterialNames =
+        {
+            "M_PDC_BrushedSteel",
+            "M_PDC_AccentMetal"
+        };
+
+        [MenuItem("Fidgeting/Display Case/Gate 12/Tri-Spinner Slab R009 Content Matrix Capture")]
+        public static void CaptureAll()
+        {
+            TriSpinnerSlabGate11ParityBuilder.AssertSourceAndShippingHashes();
+            string evidence = Path.Combine(PremiumDisplayCaseGate12R009Builder.EvidenceRoot, EvidenceSubfolder);
+            Directory.CreateDirectory(evidence);
+            var report = new MatrixReport();
+            try
+            {
+                CaptureProductMatrix(evidence, report);
+                CaptureRarityCmfSheet(evidence, report);
+            }
+            finally
+            {
+                EditorSceneManager.NewScene(NewSceneSetup.EmptyScene, NewSceneMode.Single);
+            }
+
+            report.status = report.failures.Count == 0 ? "pass" : "fail";
+            TriSpinnerSlabGate11ParityBuilder.WriteJson(
+                Path.Combine(evidence, "content-matrix-report.json"),
+                report);
+            if (report.status != "pass")
+            {
+                throw new InvalidOperationException(
+                    "Content matrix failed: " + string.Join("; ", report.failures));
+            }
+
+            Debug.Log("Gate 12 R009 content matrix captures written to " + evidence);
+        }
+
+        private static void CaptureProductMatrix(string evidence, MatrixReport report)
+        {
+            Scene matrixScene = EditorSceneManager.NewScene(NewSceneSetup.EmptyScene, NewSceneMode.Single);
+            ShippingRig rig = CreateShippingRig(matrixScene);
+            PremiumDisplayCaseShippingPresentation presentation = SpawnPresentation(matrixScene);
+            presentation.SetLabel(PremiumDisplayCaseGate12R005Builder.BuildAuthoritativeReviewLabel());
+            presentation.SetTimeForPreview(presentation.RevealProfile.TotalDurationSeconds);
+
+            foreach (ProductCatalogEntry entry in ProductCatalog.ShippingEntries)
+            {
+                string modelId = entry.ModelId;
+                PremiumDisplayCaseProductProfile profile =
+                    PremiumDisplayCaseProductProfiles.Resolve(modelId);
+                string pocketFile = $"content-{modelId}-pocket.png";
+                string phoneFile = $"content-{modelId}-phone-front.png";
+                var row = new MatrixProductRow { modelId = modelId, scenePath = entry.ScenePath };
+
+                Scene productScene = default;
+                GameObject snapshot = null;
+                try
+                {
+                    productScene = EditorSceneManager.OpenScene(
+                        entry.ScenePath,
+                        OpenSceneMode.Additive);
+                    EditorSceneManager.SetActiveScene(productScene);
+                    Transform root = FindRoot(productScene, profile.SceneRootName);
+                    if (root == null)
+                    {
+                        row.error = "missing root " + profile.SceneRootName;
+                        report.failures.Add(row.error + " (" + modelId + ")");
+                        report.products.Add(row);
+                        continue;
+                    }
+
+                    Vector3 attachEuler = profile.ContentOptions.InitialEulerAngles;
+                    if (modelId == ProductCatalog.MetalThreeBladeModelId)
+                    {
+                        snapshot = ThreeBladeDisplayPrizeFactory.Instantiate();
+                        attachEuler = PremiumDisplayCaseShippingFactory.ThreeBladeContentEuler;
+                    }
+                    else
+                    {
+                        snapshot = TryCaptureProduct(modelId, root);
+                    }
+
+                    SceneManager.MoveGameObjectToScene(snapshot, matrixScene);
+                    snapshot.SetActive(true);
+                    presentation.AttachContent(snapshot.transform, attachEuler);
+                    MeasureRow(presentation, snapshot.transform, row);
+                    row.pocketFile = pocketFile;
+                    row.phoneFile = phoneFile;
+                    CapturePocketMacro(rig.Camera, evidence, pocketFile);
+                    CapturePhoneFront(rig.Camera, presentation.transform, evidence, phoneFile);
+                    report.products.Add(row);
+                }
+                catch (Exception ex)
+                {
+                    row.error = ex.Message;
+                    report.failures.Add(modelId + ": " + ex.Message);
+                    report.products.Add(row);
+                }
+                finally
+                {
+                    presentation.DetachContent();
+                    if (snapshot != null)
+                    {
+                        UnityEngine.Object.DestroyImmediate(snapshot);
+                    }
+
+                    if (productScene.IsValid() && productScene.isLoaded)
+                    {
+                        EditorSceneManager.CloseScene(productScene, true);
+                    }
+                }
+            }
+
+            UnityEngine.Object.DestroyImmediate(rig.Environment.gameObject);
+            UnityEngine.Object.DestroyImmediate(presentation.gameObject);
+        }
+
+        private static void CaptureRarityCmfSheet(string evidence, MatrixReport report)
+        {
+            Scene matrixScene = EditorSceneManager.NewScene(NewSceneSetup.EmptyScene, NewSceneMode.Single);
+            ShippingRig rig = CreateShippingRig(matrixScene);
+            PremiumDisplayCaseShippingPresentation presentation = SpawnPresentation(matrixScene);
+            presentation.SetTimeForPreview(presentation.RevealProfile.TotalDurationSeconds);
+
+            GameObject prize = ThreeBladeDisplayPrizeFactory.Instantiate();
+            SceneManager.MoveGameObjectToScene(prize, matrixScene);
+            presentation.AttachContent(
+                prize.transform,
+                PremiumDisplayCaseShippingFactory.ThreeBladeContentEuler);
+
+            var restoreBlocks = new List<(Renderer renderer, MaterialPropertyBlock block)>();
+            (PremiumDisplayCaseFoilTier tier, string rarity, Color header, Color accent)[] samples =
+            {
+                (PremiumDisplayCaseFoilTier.Steel, "COMMON",
+                    new Color(0.07f, 0.08f, 0.10f), new Color(0.55f, 0.58f, 0.62f)),
+                (PremiumDisplayCaseFoilTier.Copper, "REFINED",
+                    new Color(0.14f, 0.08f, 0.05f), new Color(0.72f, 0.42f, 0.22f)),
+                (PremiumDisplayCaseFoilTier.Silver, "SIGNATURE",
+                    new Color(0.15f, 0.16f, 0.18f), new Color(0.78f, 0.80f, 0.84f)),
+                (PremiumDisplayCaseFoilTier.Gold, "HEIRLOOM",
+                    new Color(0.16f, 0.12f, 0.04f), new Color(0.82f, 0.66f, 0.28f))
+            };
+
+            foreach ((PremiumDisplayCaseFoilTier tier, string rarity, Color header, Color accent) sample in samples)
+            {
+                RestoreTintBlocks(restoreBlocks);
+                restoreBlocks.Clear();
+                ApplyRarityCmfPreview(presentation, sample.header, sample.accent, restoreBlocks);
+                presentation.SetLabel(new PremiumDisplayCaseLabelData(
+                    "GEEONE TRI-SPINNER",
+                    "SATIN STEEL · DRAGON SCALE",
+                    "2026-09-09",
+                    sample.rarity,
+                    "PREVIEW-0001"));
+                string file = $"rarity-cmf-{sample.tier.ToString().ToLowerInvariant()}-phone-front.png";
+                CapturePhoneFront(rig.Camera, presentation.transform, evidence, file);
+                report.rarityCmf.Add(new MatrixRarityRow
+                {
+                    tier = sample.tier.ToString(),
+                    rarityWord = sample.rarity,
+                    file = file
+                });
+            }
+
+            RestoreTintBlocks(restoreBlocks);
+            UnityEngine.Object.DestroyImmediate(prize);
+            UnityEngine.Object.DestroyImmediate(rig.Environment.gameObject);
+            UnityEngine.Object.DestroyImmediate(presentation.gameObject);
+        }
+
+        private static void ApplyRarityCmfPreview(
+            PremiumDisplayCaseShippingPresentation presentation,
+            Color headerPlateTint,
+            Color accentMetalTint,
+            List<(Renderer, MaterialPropertyBlock)> restoreBlocks)
+        {
+            var block = new MaterialPropertyBlock();
+            foreach (Renderer renderer in presentation.GetComponentsInChildren<Renderer>(true))
+            {
+                if (renderer == null || renderer.sharedMaterial == null)
+                {
+                    continue;
+                }
+
+                string matName = renderer.sharedMaterial.name;
+                if (renderer.gameObject.name == PremiumDisplayCaseGate12R009Builder.HeaderPlaneName)
+                {
+                    renderer.GetPropertyBlock(block);
+                    var saved = new MaterialPropertyBlock();
+                    renderer.GetPropertyBlock(saved);
+                    restoreBlocks.Add((renderer, saved));
+                    block.SetColor("_BaseColor", headerPlateTint);
+                    renderer.SetPropertyBlock(block);
+                    continue;
+                }
+
+                if (!AccentMaterialNames.Any(n => matName.StartsWith(n, StringComparison.Ordinal)))
+                {
+                    continue;
+                }
+
+                renderer.GetPropertyBlock(block);
+                var savedAccent = new MaterialPropertyBlock();
+                renderer.GetPropertyBlock(savedAccent);
+                restoreBlocks.Add((renderer, savedAccent));
+                block.SetColor("_BaseColor", accentMetalTint);
+                renderer.SetPropertyBlock(block);
+            }
+        }
+
+        private static void RestoreTintBlocks(List<(Renderer renderer, MaterialPropertyBlock block)> blocks)
+        {
+            for (int index = 0; index < blocks.Count; index++)
+            {
+                (Renderer renderer, MaterialPropertyBlock block) = blocks[index];
+                if (renderer == null)
+                {
+                    continue;
+                }
+
+                renderer.SetPropertyBlock(block);
+            }
+        }
+
+        private static PremiumDisplayCaseShippingPresentation SpawnPresentation(Scene scene)
+        {
+            GameObject prefab = AssetDatabase.LoadAssetAtPath<GameObject>(
+                PremiumDisplayCaseGate12R009Builder.PrefabPath);
+            if (prefab == null)
+            {
+                throw new InvalidOperationException("R009 prefab missing.");
+            }
+
+            var presentation = ((GameObject)PrefabUtility.InstantiatePrefab(prefab, scene))
+                .GetComponent<PremiumDisplayCaseShippingPresentation>();
+            presentation.transform.SetPositionAndRotation(Vector3.zero, Quaternion.identity);
+            return presentation;
+        }
+
+        private static ShippingRig CreateShippingRig(Scene scene)
+        {
+            TriSpinnerSlabGate11ParityBuilder.ParityReference reference =
+                TriSpinnerSlabGate11ParityBuilder.LoadReference();
+            var cubemap = AssetDatabase.LoadAssetAtPath<Cubemap>(
+                TriSpinnerSlabGate11ParityBuilder.ShippingCubemapPath);
+            if (cubemap == null)
+            {
+                throw new InvalidOperationException("Gate 11 shipping cubemap missing.");
+            }
+
+            var environment = new GameObject("ContentMatrixEnvironment").transform;
+            SceneManager.MoveGameObjectToScene(environment.gameObject, scene);
+            Camera camera = TriSpinnerSlabGate11ParityBuilder.CreateCamera(environment);
+            TriSpinnerSlabGate11ParityBuilder.ApplyRig(
+                environment,
+                camera,
+                reference.shippingLights,
+                reference.shippingWorld,
+                cubemap,
+                "ContentMatrix");
+            UniversalAdditionalCameraData additional = camera.GetUniversalAdditionalCameraData();
+            additional.renderPostProcessing = true;
+            var volumeObject = new GameObject("ContentMatrixBeautyVolume");
+            SceneManager.MoveGameObjectToScene(volumeObject, scene);
+            Volume volume = volumeObject.AddComponent<Volume>();
+            volume.isGlobal = true;
+            volume.sharedProfile = AssetDatabase.LoadAssetAtPath<VolumeProfile>(
+                PremiumDisplayCaseGate12R009Builder.VolumeProfilePath);
+            TriSpinnerSlabGate11ParityBuilder.SetView(camera, reference, "CAM_PDC_HERO");
+            return new ShippingRig(environment, camera);
+        }
+
+        private static GameObject TryCaptureProduct(string modelId, Transform root)
+        {
+            try
+            {
+                return PremiumDisplayCaseProductSnapshot.Capture(modelId, root);
+            }
+            catch (MissingReferenceException) when (
+                modelId == ProductCatalog.MagneticSlideTileModelId)
+            {
+                // The EDC scene keeps the shipping prefab inactive until the
+                // scene builder runs; fall back to the authored prefab mesh.
+                const string prefabPath = "Assets/_EDC/Prefabs/EDC_Root.prefab";
+                GameObject prefab = AssetDatabase.LoadAssetAtPath<GameObject>(prefabPath);
+                if (prefab == null)
+                {
+                    throw new InvalidOperationException("EDC_Root prefab missing.");
+                }
+
+                GameObject instance = (GameObject)PrefabUtility.InstantiatePrefab(prefab);
+                instance.SetActive(true);
+                return PremiumDisplayCaseProductSnapshot.Capture(modelId, instance.transform);
+            }
+        }
+
+        private static Transform FindRoot(Scene scene, string sceneRootName)
+        {
+            foreach (GameObject candidate in scene.GetRootGameObjects())
+            {
+                if (candidate.name == sceneRootName)
+                {
+                    return candidate.transform;
+                }
+
+                Transform[] all = candidate.GetComponentsInChildren<Transform>(true);
+                for (int index = 0; index < all.Length; index++)
+                {
+                    if (all[index].name == sceneRootName)
+                    {
+                        return all[index];
+                    }
+                }
+            }
+
+            return null;
+        }
+
+        private static void MeasureRow(
+            PremiumDisplayCaseShippingPresentation presentation,
+            Transform content,
+            MatrixProductRow row)
+        {
+            Bounds bounds = RendererBounds(content);
+            Vector3 slot = presentation.ContentSlot.position;
+            row.boundsMm = ToMm(bounds.size);
+            row.centerOffsetFromSlotMm = ToMm(bounds.center - slot);
+            row.fitScale = presentation.transform
+                .GetComponentsInChildren<Transform>(true)
+                .First(t => t.name == "ContentFit")
+                .localScale.x;
+            float radial = Mathf.Max(bounds.size.x, bounds.size.y);
+            row.insidePocketWell =
+                radial <= PremiumDisplayCaseGate12R009Builder.PocketWellDiameterMeters + 0.001f
+                && Mathf.Abs(row.centerOffsetFromSlotMm[0]) < 0.5f
+                && Mathf.Abs(row.centerOffsetFromSlotMm[1]) < 0.5f;
+        }
+
+        private static Bounds RendererBounds(Transform root)
+        {
+            Renderer[] renderers = root.GetComponentsInChildren<Renderer>(false);
+            if (renderers.Length == 0)
+            {
+                return new Bounds(root.position, Vector3.zero);
+            }
+
+            Bounds bounds = renderers[0].bounds;
+            for (int index = 1; index < renderers.Length; index++)
+            {
+                bounds.Encapsulate(renderers[index].bounds);
+            }
+
+            return bounds;
+        }
+
+        private static float[] ToMm(Vector3 value)
+        {
+            return new[] { value.x * 1000f, value.y * 1000f, value.z * 1000f };
+        }
+
+        private static void CapturePocketMacro(Camera camera, string evidence, string file)
+        {
+            Vector3 target = new Vector3(0f, -0.0207f, -0.004f);
+            Vector3 from = new Vector3(0.22f, 0.10f, -1f);
+            SetupMacroCamera(camera, target, from, 0.30f);
+            TriSpinnerSlabGate11ParityBuilder.Capture(
+                camera,
+                Path.Combine(evidence, file),
+                2048,
+                1365);
+        }
+
+        private static void CapturePhoneFront(Camera camera, Transform root, string evidence, string file)
+        {
+            root.rotation = Quaternion.identity;
+            camera.orthographic = false;
+            camera.usePhysicalProperties = true;
+            camera.focalLength = 50f;
+            camera.sensorSize = new Vector2(36f, 24f);
+            camera.gateFit = Camera.GateFitMode.Horizontal;
+            camera.nearClipPlane = 0.02f;
+            camera.farClipPlane = 8f;
+            float halfHorizontalFov = Mathf.Atan(18f / 50f);
+            float caseWidth = 0.10128f;
+            float distance = caseWidth / (2f * 0.60f * Mathf.Tan(halfHorizontalFov));
+            camera.transform.position = new Vector3(0f, 0f, -distance);
+            camera.transform.rotation = Quaternion.identity;
+            TriSpinnerSlabGate11ParityBuilder.Capture(
+                camera,
+                Path.Combine(evidence, file),
+                1179,
+                2556);
+        }
+
+        private static void SetupMacroCamera(
+            Camera camera,
+            Vector3 target,
+            Vector3 from,
+            float distance)
+        {
+            camera.orthographic = false;
+            camera.usePhysicalProperties = true;
+            camera.focalLength = 85f;
+            camera.sensorSize = new Vector2(36f, 24f);
+            camera.gateFit = Camera.GateFitMode.Horizontal;
+            camera.nearClipPlane = 0.02f;
+            camera.farClipPlane = 8f;
+            camera.transform.position = target + from.normalized * distance;
+            camera.transform.rotation = Quaternion.LookRotation(
+                target - camera.transform.position,
+                Vector3.up);
+        }
+
+        private readonly struct ShippingRig
+        {
+            public ShippingRig(Transform environment, Camera camera)
+            {
+                Environment = environment;
+                Camera = camera;
+            }
+
+            public Transform Environment { get; }
+            public Camera Camera { get; }
+        }
+
+        [Serializable]
+        public class MatrixReport
+        {
+            public string status;
+            public List<MatrixProductRow> products = new List<MatrixProductRow>();
+            public List<MatrixRarityRow> rarityCmf = new List<MatrixRarityRow>();
+            public List<string> failures = new List<string>();
+        }
+
+        [Serializable]
+        public class MatrixProductRow
+        {
+            public string modelId;
+            public string scenePath;
+            public float[] boundsMm;
+            public float[] centerOffsetFromSlotMm;
+            public float fitScale;
+            public bool insidePocketWell;
+            public string pocketFile;
+            public string phoneFile;
+            public string error;
+        }
+
+        [Serializable]
+        public class MatrixRarityRow
+        {
+            public string tier;
+            public string rarityWord;
+            public string file;
+        }
+    }
+}

@@ -1,0 +1,59 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 49d1f8c024e774344afba61f1b627d73, type: 3}
+  m_Name: PremiumDisplayCaseGate12R011Lighting
+  m_EditorClassIdentifier: Assembly-CSharp::FidgetingApp.DisplayCase.PremiumDisplayCaseGachaLightingProfile
+  ambientLinear: {r: 0, g: 0.00016693985, b: 0.00050081953, a: 1}
+  reflectionIntensity: 1
+  reflectionCubemap: {fileID: 8900000, guid: 4ccf7fdf21d6349b491349b370b600d3, type: 2}
+  beautyVolume: {fileID: 11400000, guid: e5373752890294e99906b4315b830a7b, type: 2}
+  lights:
+  - name: LGT_PDC_SOFT_KEY
+    type: 1
+    position: {x: -0.07226928, y: 0.17165092, z: -0.17335063}
+    forward: {x: 0.28173003, y: -0.6691533, z: 0.68764967}
+    colorLinear: {r: 1, g: 0.9383741, b: 0.8834899, a: 1}
+    intensity: 1.868047
+    range: 0
+    spotAngle: 0
+    innerSpotAngle: 0
+    shadows: 2
+  - name: LGT_PDC_FRONT_FILL
+    type: 1
+    position: {x: -0.03118106, y: 0.20404692, z: 0.07013907}
+    forward: {x: 0.14366117, y: -0.9401085, z: -0.30912372}
+    colorLinear: {r: 1, g: 0.96528697, b: 0.92878336, a: 1}
+    intensity: 0.34126285
+    range: 0
+    spotAngle: 0
+    innerSpotAngle: 0
+    shadows: 0
+  - name: LGT_PDC_EDGE_L_CYAN
+    type: 0
+    position: {x: -0.1458685, y: 0.01608011, z: -0.01475774}
+    forward: {x: 0.9867446, y: -0.10877568, z: 0.12042856}
+    colorLinear: {r: 0.07818742, g: 0.6444797, b: 1, a: 1}
+    intensity: 0.01664598
+    range: 0.8
+    spotAngle: 120
+    innerSpotAngle: 60
+    shadows: 0
+  - name: LGT_PDC_EDGE_R_MAGENTA
+    type: 0
+    position: {x: 0.10871321, y: -0.01575272, z: 0.10088272}
+    forward: {x: -0.7390341, y: 0.10708719, z: -0.6651022}
+    colorLinear: {r: 1, g: 0.11443537, b: 0.67244315, a: 1}
+    intensity: 0.01536552
+    range: 0.8
+    spotAngle: 120
+    innerSpotAngle: 60
+    shadows: 0

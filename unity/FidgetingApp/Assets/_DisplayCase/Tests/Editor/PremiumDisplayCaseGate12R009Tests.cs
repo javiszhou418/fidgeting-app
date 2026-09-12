@@ -169,12 +169,14 @@ namespace FidgetingApp.DisplayCase.Tests
         }
 
         [Test]
-        public void ShippingFactoryStillPointsAtR004UntilTheUserApprovesThePreview()
+        public void R009StaysHistoricalAfterTheUserApprovesR010()
         {
             Assert.That(PremiumDisplayCaseShippingFactory.ResourcesPath,
-                Is.EqualTo("Gacha/PremiumDisplayCaseGate12R004/PresentationRoot"));
+                Is.EqualTo(PremiumDisplayCaseGate12R010ReviewBuilder.ResourcesPath));
             Assert.That(Resources.Load<GameObject>(PremiumDisplayCaseGate12R009Builder.ResourcesPath), Is.Not.Null,
-                "candidate must be loadable from Resources so the flip is a one-line change after approval");
+                "the rejected R009 candidate remains preserved as history");
+            Assert.That(Resources.Load<GameObject>(PremiumDisplayCaseGate12R010ReviewBuilder.ResourcesPath), Is.Not.Null,
+                "the user-approved R010 candidate must be the factory resource");
             Assert.DoesNotThrow(TriSpinnerSlabGate11ParityBuilder.AssertSourceAndShippingHashes,
                 "shipping prefab / scene / FBX must be byte-identical to the Gate 11 baseline");
         }

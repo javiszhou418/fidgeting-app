@@ -826,7 +826,9 @@ namespace FidgetingApp.Tests.Editor
             StringAssert.Contains(
                 "displayCaseCamera != cameraReference",
                 coordinator);
-            StringAssert.Contains("CreateGachaDirectionalLight", coordinator);
+            StringAssert.Contains(
+                "PremiumDisplayCaseGachaLightingInstaller.Install",
+                coordinator);
             StringAssert.DoesNotContain("LightType.Point", coordinator);
 
             string storefront = File.ReadAllText(Path.Combine(

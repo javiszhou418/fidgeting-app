@@ -146,7 +146,9 @@ namespace FidgetingApp.Product.Gacha
         public bool HasCanonicalNativeHybridCase =>
             nativeHybridCandidate
             && activeCase != null
-            && activeCase.gameObject.name == "PremiumDisplayCaseGate12R004"
+            && activeCase.gameObject.name
+                == PremiumDisplayCaseShippingFactory
+                    .NativeHybridPresentationInstanceName
             && activeCase.CaseAssembly != null
             && prize != null
             && prize.IsChildOf(activeCase.ContentSlot)
@@ -215,15 +217,36 @@ namespace FidgetingApp.Product.Gacha
             Dismiss();
             stageFX = adoptedStageFX;
             nativeHybridCandidate = useNativeHybridCandidate;
-            activeCase = PremiumDisplayCaseShippingFactory.Instantiate(transform);
-            activeCase.name = "PremiumDisplayCaseGate12R004";
+            activeCase = nativeHybridCandidate
+                ? PremiumDisplayCaseShippingFactory
+                    .InstantiateNativeHybridBaseline(transform)
+                : PremiumDisplayCaseShippingFactory.Instantiate(transform);
+            activeCase.name = nativeHybridCandidate
+                ? PremiumDisplayCaseShippingFactory
+                    .NativeHybridPresentationInstanceName
+                : PremiumDisplayCaseShippingFactory.PresentationInstanceName;
             activeCase.SetLabel(GachaShippingLabelAuthority.Create(
                 prizeDefinition,
                 receiptRow,
                 productLevel));
-            activeCase.AttachContent(
-                prizeNode,
-                PremiumDisplayCaseShippingFactory.ThreeBladeContentEuler);
+            if (nativeHybridCandidate)
+            {
+                activeCase.AttachContent(
+                    prizeNode,
+                    PremiumDisplayCaseShippingFactory.ThreeBladeContentEuler);
+            }
+            else
+            {
+                activeCase.AttachContentToCircularPocket(
+                    prizeNode,
+                    PremiumDisplayCaseV3PocketProfiles.Resolve(
+                        ProductCatalog.MetalThreeBladeModelId));
+            }
+            Debug.Log(
+                "PDC_GACHA_BEGIN "
+                + $"case={activeCase.name} "
+                + $"renderers={activeCase.GetComponentsInChildren<Renderer>(true).Length} "
+                + $"screen={Screen.width}x{Screen.height}");
             activeCase.revealCompleted += HandleRevealComplete;
             prize = prizeNode;
             IsComplete = false;
@@ -402,6 +425,11 @@ namespace FidgetingApp.Product.Gacha
                 return;
             }
             completionForwarded = true;
+            Debug.Log(
+                "PDC_GACHA_COMPLETE "
+                + $"t={shippingElapsedSeconds:F3} "
+                + $"scale={(activeCase != null ? activeCase.transform.localScale : Vector3.zero):F4} "
+                + $"position={(activeCase != null ? activeCase.transform.localPosition : Vector3.zero):F4}");
             revealCompleted?.Invoke();
         }
 
@@ -443,6 +471,12 @@ namespace FidgetingApp.Product.Gacha
             PrepareBladeEmissive();
             ApplyShippingChoreography(0f);
             ShrinkStartUntilInsidePack();
+            Debug.Log(
+                "PDC_GACHA_PREP "
+                + $"scale={activeCase.transform.localScale:F4} "
+                + $"position={activeCase.transform.localPosition:F4} "
+                + $"inside={shippingInsidePackOffset:F4} "
+                + $"rest={shippingRestOffset:F4}");
 
             Camera camera = Camera.main;
             if (stageFX == null)
@@ -516,12 +550,22 @@ namespace FidgetingApp.Product.Gacha
                 && GachaShippingRevealChoreography.HasCrossedPackLip(seconds))
             {
                 shippingCrossedPackLip = true;
+                Debug.Log(
+                    "PDC_GACHA_PACK_LIP "
+                    + $"t={seconds:F3} "
+                    + $"scale={activeCase.transform.localScale:F4} "
+                    + $"position={activeCase.transform.localPosition:F4}");
                 caseCrossedPackLip?.Invoke();
             }
             if (!shippingFrontRevealed
                 && seconds >= GachaShippingRevealChoreography.RevealSeconds)
             {
                 shippingFrontRevealed = true;
+                Debug.Log(
+                    "PDC_GACHA_FRONT "
+                    + $"t={seconds:F3} "
+                    + $"scale={activeCase.transform.localScale:F4} "
+                    + $"position={activeCase.transform.localPosition:F4}");
                 EmitRevealBurst();
                 frontRevealed?.Invoke();
             }

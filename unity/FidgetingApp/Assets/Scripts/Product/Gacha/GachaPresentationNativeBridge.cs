@@ -1,4 +1,5 @@
 using System;
+using UnityEngine;
 #if UNITY_IOS && !UNITY_EDITOR
 using System.Runtime.InteropServices;
 #endif
@@ -230,6 +231,10 @@ namespace FidgetingApp.Product.Gacha
             float duration = succeeded
                 ? Math.Max(0f, handoffDurationSeconds)
                 : 0f;
+            Debug.Log(
+                "PDC_GACHA_SETUP "
+                + $"request={id} succeeded={succeeded} "
+                + $"reason={reason} handoff={duration:F3}");
             setupPublished?.Invoke(id, succeeded, reason, duration);
 #if UNITY_IOS && !UNITY_EDITOR
             CodexGachaRevealReceiveSetup(
@@ -244,6 +249,8 @@ namespace FidgetingApp.Product.Gacha
         {
             string id = requestId ?? string.Empty;
             string token = phase ?? string.Empty;
+            Debug.Log(
+                $"PDC_GACHA_PHASE request={id} phase={token}");
             phasePublished?.Invoke(id, token);
 #if UNITY_IOS && !UNITY_EDITOR
             CodexGachaRevealReceivePhase(id, token);

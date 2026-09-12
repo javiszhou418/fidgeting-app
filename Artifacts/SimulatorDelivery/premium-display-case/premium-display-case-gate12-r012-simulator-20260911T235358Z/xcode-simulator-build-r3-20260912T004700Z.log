@@ -1,0 +1,17 @@
+Command line invocation:
+    /Applications/Xcode.app/Contents/Developer/usr/bin/xcodebuild -project /tmp/fidgeting-gate12-runtime-final-20260911T235015Z/Builds/iOS/SimulatorJobs/premium-display-case-gate12-r012-simulator-20260911T235358Z/Export/Unity-iPhone.xcodeproj -scheme Unity-iPhone -configuration Release -sdk iphonesimulator -destination "platform=iOS Simulator,id=5BF378DF-5EAB-4885-87E1-2838F6DA6E46" -derivedDataPath "/Users/jiawei.zhou/Documents/Fidgeting app/Artifacts/SimulatorDelivery/premium-display-case/premium-display-case-gate12-r012-simulator-20260911T235358Z/DerivedData-r3-20260912T004700Z" COMPILER_INDEX_STORE_ENABLE=NO -jobs 4 build
+
+Build settings from command line:
+    COMPILER_INDEX_STORE_ENABLE = NO
+    SDKROOT = iphonesimulator26.4
+
+Build Preparation
+Build task concurrency set to 4 via user default IDEBuildOperationMaxNumberOfConcurrentCompileTasks
+
+error: The Xcode build system has terminated due to an error. Build again to continue.
+** BUILD FAILED **
+
+
+The following build commands failed:
+	Building project Unity-iPhone with scheme Unity-iPhone and configuration Release
+(1 failure)

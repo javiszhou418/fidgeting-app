@@ -50,12 +50,12 @@ namespace FidgetingApp.Tests.Editor
         }
 
         [Test]
-        public void LookdevCameraStaysPulledBackAndFactoryStaysOnR004()
+        public void LookdevCameraStaysPulledBackAndR008DoesNotOwnTheFactory()
         {
             Assert.That(PremiumDisplayCaseGate12R008Builder.PrefabPath,
                 Is.Not.EqualTo(PremiumDisplayCaseGate12Builder.ShippingPrefabPath));
             Assert.That(PremiumDisplayCaseShippingFactory.ResourcesPath,
-                Is.EqualTo("Gacha/PremiumDisplayCaseGate12R004/PresentationRoot"));
+                Is.EqualTo(PremiumDisplayCaseGate12R010ReviewBuilder.ResourcesPath));
 
             string scene = System.IO.File.ReadAllText(PremiumDisplayCaseGate12R008Builder.ScenePath);
             Assert.That(scene, Does.Contain("z: -1.22"));

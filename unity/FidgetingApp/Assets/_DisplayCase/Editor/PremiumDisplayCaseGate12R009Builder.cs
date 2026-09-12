@@ -91,6 +91,17 @@ namespace FidgetingApp.DisplayCase.Editor
         [MenuItem("Fidgeting/Display Case/Gate 12/Tri-Spinner Slab R009 Build Candidate And Capture")]
         public static void BuildAndCapture()
         {
+            string rejectionRecord = Path.GetFullPath(Path.Combine(
+                Application.dataPath,
+                "..",
+                EvidenceRelativeRoot,
+                "rejected-20260911T222500+0800",
+                "user-rejection.md"));
+            if (File.Exists(rejectionRecord))
+            {
+                throw new InvalidOperationException(
+                    "Gate 12 R009 was rejected. Preserve its evidence and use R010 or later.");
+            }
             TriSpinnerSlabGate11ParityBuilder.AssertSourceAndShippingHashes();
             EnsureDirectories();
             labelTextMaterial = null;
@@ -670,16 +681,17 @@ namespace FidgetingApp.DisplayCase.Editor
             {
                 bounds.Encapsulate(renderer.bounds);
             }
-            Vector3 slot = presentation.ContentSlot.position;
+            Transform slot = presentation.ContentSlot;
             report.contentFitAvailableMm = Scale(presentation.ContentFitAvailableSize);
             report.prizeBoundsMm = Scale(bounds.size);
-            report.prizeCenterOffsetFromSlotMm = Scale(bounds.center - slot);
+            Vector3 localCenter = slot.InverseTransformPoint(bounds.center);
+            report.prizeCenterOffsetFromSlotMm = Scale(localCenter);
             report.prizeFitScale = presentation.transform.GetComponentsInChildren<Transform>(true)
                 .First(t => t.name == ContentFitName).localScale.x;
             float radialExtent = Mathf.Max(bounds.size.x, bounds.size.y);
             report.prizeInsidePocketWell = radialExtent <= PocketWellDiameterMeters
-                && Mathf.Abs(bounds.center.x - slot.x) < 0.0005f
-                && Mathf.Abs(bounds.center.y - slot.y) < 0.0005f;
+                && Mathf.Abs(localCenter.x) < 0.0005f
+                && Mathf.Abs(localCenter.y) < 0.0005f;
             report.prizeFrontProtrusionMm = (-0.002435f - bounds.min.z) * 1000f; // beyond the frame front (z -2.435 mm)
             if (!report.prizeInsidePocketWell)
             {

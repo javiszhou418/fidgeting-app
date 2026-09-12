@@ -1,0 +1,90 @@
+=== FAN CARD GEOMETRY VALIDATION ===
+Scene: Assets/_FanCard/Scenes/MagneticFanCard.unity
+Frozen thresholds: thickness=3.500 mm, air-gap>=1.000 mm, shaft-clearance>=0.100 mm
+[PASS] Shipping root exists
+[PASS] No cloth/soft-body components
+[PASS] No deforming skinned meshes
+[PASS] BottomCard: root exists
+[PASS] BottomCard: GunmetalFrame exists
+[PASS] BottomCard: body mesh is assigned
+[PASS] BottomCard: body renderer exists
+[PASS] BottomCard: solid width: 63.500 mm (expected 63.500 mm)
+[PASS] BottomCard: solid height: 88.900 mm (expected 88.900 mm)
+[PASS] BottomCard: solid thickness: 3.500 mm (expected 3.500 mm)
+[PASS] BottomCard: sufficient rounded/bevel/hole topology (3944 vertices)
+[PASS] BottomCard: triangle surface exists
+[PASS] BottomCard: vertices are finite and confined to a rigid slab
+[PASS] BottomCard: watertight two-sided solid (open/nonmanifold=0, degenerate=0)
+[PASS] BottomCard: body has no non-uniform scale
+[PASS] BottomCard: WarmSilverFace exists
+[PASS] BottomCard: WarmSilverFace mesh is assigned
+[PASS] BottomCard: WarmSilverFace is a flat projection
+[PASS] BottomCard: WarmSilverFace has no folded/inverted triangles (inverted=0, degenerate=0)
+[PASS] BottomCard: WarmSilverFace stays inside its rounded panel (0 outside vertices)
+[PASS] BottomCard: WarmSilverBackFace exists
+[PASS] BottomCard: WarmSilverBackFace mesh is assigned
+[PASS] BottomCard: WarmSilverBackFace is a flat projection
+[PASS] BottomCard: WarmSilverBackFace has no folded/inverted triangles (inverted=0, degenerate=0)
+[PASS] BottomCard: WarmSilverBackFace stays inside its rounded panel (0 outside vertices)
+[PASS] MiddleCard: root exists
+[PASS] MiddleCard: GunmetalFrame exists
+[PASS] MiddleCard: body mesh is assigned
+[PASS] MiddleCard: body renderer exists
+[PASS] MiddleCard: solid width: 63.500 mm (expected 63.500 mm)
+[PASS] MiddleCard: solid height: 88.900 mm (expected 88.900 mm)
+[PASS] MiddleCard: solid thickness: 3.500 mm (expected 3.500 mm)
+[PASS] MiddleCard: sufficient rounded/bevel/hole topology (3944 vertices)
+[PASS] MiddleCard: triangle surface exists
+[PASS] MiddleCard: vertices are finite and confined to a rigid slab
+[PASS] MiddleCard: watertight two-sided solid (open/nonmanifold=0, degenerate=0)
+[PASS] MiddleCard: body has no non-uniform scale
+[PASS] MiddleCard: WarmSilverFace exists
+[PASS] MiddleCard: WarmSilverFace mesh is assigned
+[PASS] MiddleCard: WarmSilverFace is a flat projection
+[PASS] MiddleCard: WarmSilverFace has no folded/inverted triangles (inverted=0, degenerate=0)
+[PASS] MiddleCard: WarmSilverFace stays inside its rounded panel (0 outside vertices)
+[PASS] MiddleCard: WarmSilverBackFace exists
+[PASS] MiddleCard: WarmSilverBackFace mesh is assigned
+[PASS] MiddleCard: WarmSilverBackFace is a flat projection
+[PASS] MiddleCard: WarmSilverBackFace has no folded/inverted triangles (inverted=0, degenerate=0)
+[PASS] MiddleCard: WarmSilverBackFace stays inside its rounded panel (0 outside vertices)
+[PASS] TopCard: root exists
+[PASS] TopCard: GunmetalFrame exists
+[PASS] TopCard: body mesh is assigned
+[PASS] TopCard: body renderer exists
+[PASS] TopCard: solid width: 63.500 mm (expected 63.500 mm)
+[PASS] TopCard: solid height: 88.900 mm (expected 88.900 mm)
+[PASS] TopCard: solid thickness: 3.500 mm (expected 3.500 mm)
+[PASS] TopCard: sufficient rounded/bevel/hole topology (3944 vertices)
+[PASS] TopCard: triangle surface exists
+[PASS] TopCard: vertices are finite and confined to a rigid slab
+[PASS] TopCard: watertight two-sided solid (open/nonmanifold=0, degenerate=0)
+[PASS] TopCard: body has no non-uniform scale
+[PASS] TopCard: WarmSilverFace exists
+[PASS] TopCard: WarmSilverFace mesh is assigned
+[PASS] TopCard: WarmSilverFace is a flat projection
+[PASS] TopCard: WarmSilverFace has no folded/inverted triangles (inverted=0, degenerate=0)
+[PASS] TopCard: WarmSilverFace stays inside its rounded panel (0 outside vertices)
+[PASS] TopCard: WarmSilverBackFace exists
+[PASS] TopCard: WarmSilverBackFace mesh is assigned
+[PASS] TopCard: WarmSilverBackFace is a flat projection
+[PASS] TopCard: WarmSilverBackFace has no folded/inverted triangles (inverted=0, degenerate=0)
+[PASS] TopCard: WarmSilverBackFace stays inside its rounded panel (0 outside vertices)
+[PASS] BottomCard->MiddleCard: spindle-axis air gap 1.000 mm >= 1.000 mm
+[PASS] MiddleCard->TopCard: spindle-axis air gap 1.000 mm >= 1.000 mm
+[PASS] Three card centres use a uniform spindle-axis pitch (4.500 mm / 4.500 mm)
+[PASS] Common spindle exists
+[PASS] BottomCard: through-hole clears spindle by 0.209 mm
+[PASS] BottomCard: top cap contains a real spindle opening
+[PASS] BottomCard: bottom cap contains a real spindle opening
+[PASS] MiddleCard: through-hole clears spindle by 0.209 mm
+[PASS] MiddleCard: top cap contains a real spindle opening
+[PASS] MiddleCard: bottom cap contains a real spindle opening
+[PASS] TopCard: through-hole clears spindle by 0.209 mm
+[PASS] TopCard: top cap contains a real spindle opening
+[PASS] TopCard: bottom cap contains a real spindle opening
+[PASS] Only the recessed matte spindle renders at the common axis
+[PASS] No common-axis cap, ring, washer, seat, cover disc, or chrome ball
+[PASS] The sole visible spindle is matte with no specular or environment reflection
+[PASS] The structural axis marker remains non-rendered
+=== VALIDATION: ALL PASS ===
