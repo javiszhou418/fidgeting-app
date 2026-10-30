@@ -18,6 +18,7 @@ import {
   validateMeasurementContract
 } from "./measurement-contract-core.mjs";
 import { publicPreview, readObsidianNote } from "./obsidian-intake.mjs";
+import { markRemovedReviewImages, readReviewImageRetention } from "./review-image-retention.mjs";
 
 export const toolDir = path.dirname(fileURLToPath(import.meta.url));
 export const repoRoot = path.resolve(toolDir, "../..");
@@ -71,7 +72,7 @@ export function readHistory(modelId) {
     .split(/\r?\n/)
     .filter(Boolean)
     .map((line, index) => {
-      try { return JSON.parse(line); }
+      try { return markRemovedReviewImages(JSON.parse(line), readReviewImageRetention(repoRoot)); }
       catch { throw new PipelineError(`Invalid history event at line ${index + 1}.`, 500); }
     })
     .reverse();
@@ -108,6 +109,7 @@ export function loadManifest(modelId) {
   const file = pipelineFile(modelId);
   if (!fs.existsSync(file)) throw new PipelineError(`Unknown model: ${modelId}`, 404);
   const manifest = JSON.parse(fs.readFileSync(file, "utf8"));
+  markRemovedReviewImages(manifest, readReviewImageRetention(repoRoot));
   const errors = validateManifest(manifest);
   if (errors.length) throw new PipelineError(`Invalid manifest for ${modelId}.`, 500, errors);
   return manifest;
@@ -15553,7 +15555,14 @@ export function refreshManifest(modelId, expectedRevision = null) {
   const referencedAssetIds = new Set(manifest.stages.flatMap((stage) => stage.artifactIds || []));
   const changedStages = new Set();
   const changedAssets = [];
+  const removedReviewImages = readReviewImageRetention(repoRoot);
   for (const asset of manifest.assets) {
+    if (removedReviewImages.has(asset.path)) {
+      // Removal is storage maintenance, not a different historical approval.
+      // Preserve the reviewed hash and stage digest rather than hashing a placeholder.
+      markRemovedReviewImages(asset, removedReviewImages);
+      continue;
+    }
     const absolute = resolveRepoPath(asset.path);
     const exists = fs.existsSync(absolute) && fs.statSync(absolute).isFile();
     const oldHash = asset.sha256 || null;

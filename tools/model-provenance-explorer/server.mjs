@@ -61,6 +61,7 @@ import {
 import { STAGES } from "./pipeline-contract.mjs";
 import { agentLoginState, checkAgentAuth, startAgentLogin, startStageRun, stageWorkStatus, stopStageRun } from "./agent-runner.mjs";
 import { deriveMaterialLibrary, loadMaterialLibrary, validateMaterialLibrary } from "./material-library-core.mjs";
+import { readReviewImageRetention, removedReviewImageSvg } from "./review-image-retention.mjs";
 
 const serverFile = fileURLToPath(import.meta.url);
 const port = Number.parseInt(process.env.FIDGET_MODEL_PIPELINE_PORT || "8891", 10);
@@ -96,6 +97,17 @@ function sendJson(response, statusCode, payload) {
 
 function sendFile(request, response, absolutePath) {
   if (!fs.existsSync(absolutePath) || !fs.statSync(absolutePath).isFile()) {
+    const relative = path.relative(repoRoot, absolutePath).split(path.sep).join("/");
+    const removed = readReviewImageRetention(repoRoot).get(relative);
+    if (removed) {
+      response.writeHead(200, {
+        "content-type": "image/svg+xml; charset=utf-8",
+        "cache-control": "no-store",
+        "x-fidget-review-image-status": "removed-older-review-batch"
+      });
+      response.end(removedReviewImageSvg(removed));
+      return;
+    }
     sendJson(response, 404, { error: "Not found" });
     return;
   }
